@@ -1,0 +1,67 @@
+# Development files
+src/
+.storybook/
+storybook-static/
+docs/
+examples/
+
+# Configuration files
+*.config.js
+*.config.ts
+.env*
+.eslintrc*
+.prettierrc*
+.lintstagedrc
+.husky/
+
+# Testing
+**/*.test.*
+**/*.spec.*
+coverage/
+test-results/
+playwright-report/
+
+# Build tools
+tsconfig.json
+vitest.config.ts
+postcss.config.js
+
+# Version control
+.git/
+.gitignore
+.github/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+
+# Build artifacts (keep only dist/)
+build/
+out/
+
+# Temporary files
+.tmp/
+.cache/
+
+# Documentation source (keep compiled docs only)
+docs-source/
+README-dev.md
+
+# Development only files
+glass-ui-build-errors.log 
