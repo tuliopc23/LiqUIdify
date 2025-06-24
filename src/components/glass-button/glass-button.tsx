@@ -1,5 +1,6 @@
 import { forwardRef, useState, useRef, useEffect } from "react";
-import { cn, focusRing, getGlassClass, microInteraction } from "@/lib/glass-utils";
+import { cn } from "@/lib/glass-utils";
+import { GlassContainer } from "@/components/glass-foundation";
 import { useMagneticHover, createGlassRipple } from "@/lib/glass-physics";
 import { useLiquidGlass } from "@/hooks/use-liquid-glass";
 import { useGlassEffectPerformance } from "@/hooks/use-performance-monitor";
@@ -59,39 +60,45 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       endMeasure();
     };
 
-    const baseClasses = cn(
-      "liquid-glass liquid-glass-interactive font-medium rounded-xl relative overflow-hidden",
-      "focus:outline-none liquid-glass-focus liquid-glass-ripple", // Ensure liquid-glass-focus provides a visible focus ring
-      microInteraction.smooth,
-      "disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none",
-      specularHighlights && "liquid-glass-specular liquid-glass-shimmer",
-      magneticHover && "liquid-glass-magnetic"
-    );
+    // Map button variants to glass foundation variants
+    const getGlassVariant = (variant: string) => {
+      switch (variant) {
+        case "primary":
+        case "destructive":
+          return "elevated";
+        case "secondary":
+          return "default";
+        case "tertiary":
+        case "ghost":
+          return "default";
+        default:
+          return "default";
+      }
+    };
 
     const variantClasses = {
       primary: cn(
         "text-white font-semibold",
-        "bg-gradient-to-b from-[var(--glass-primary)] to-[var(--glass-primary-active)]",
-        "hover:from-[var(--glass-primary-hover)] hover:to-[var(--glass-primary)]",
-        "active:from-[var(--glass-primary-active)] active:to-[var(--glass-primary-active)]",
+        "bg-gradient-to-b from-blue-500 to-blue-600",
+        "hover:from-blue-400 hover:to-blue-500",
+        "active:from-blue-600 active:to-blue-600",
         "shadow-lg shadow-blue-500/25",
         "border border-blue-400/30"
       ),
       secondary: cn(
-        getGlassClass("default"),
-        "text-[var(--text-primary)] border-[var(--glass-border)]",
-        "hover:bg-[var(--glass-bg-elevated)] hover:border-[var(--glass-border-focus)]",
-        "active:bg-[var(--glass-bg-pressed)]"
+        "text-foreground",
+        "hover:bg-white/10",
+        "active:bg-white/5"
       ),
       tertiary: cn(
-        "text-[var(--text-primary)] bg-transparent",
-        "hover:bg-[var(--glass-bg)] hover:backdrop-blur-sm",
-        "active:bg-[var(--glass-bg-pressed)]"
+        "text-foreground bg-transparent",
+        "hover:bg-white/5",
+        "active:bg-white/10"
       ),
       ghost: cn(
-        "text-[var(--text-secondary)] bg-transparent",
-        "hover:text-[var(--text-primary)] hover:bg-[var(--glass-bg)]",
-        "active:bg-[var(--glass-bg-pressed)]"
+        "text-muted-foreground bg-transparent",
+        "hover:text-foreground hover:bg-white/5",
+        "active:bg-white/10"
       ),
       destructive: cn(
         "text-white font-semibold",
@@ -120,35 +127,44 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     };
 
     return (
-      <Comp
+      <GlassContainer
+        asChild
+        variant={getGlassVariant(variant) as any}
+        interactive={true}
         className={cn(
-          baseClasses,
+          "font-medium rounded-xl relative overflow-hidden",
+          "focus:outline-none transition-all duration-300 ease-out",
+          "disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none",
           variantClasses[variant],
           sizeClasses[size],
+          specularHighlights && "liquid-glass-specular liquid-glass-shimmer",
+          magneticHover && "liquid-glass-magnetic",
           className
         )}
-        ref={(node: HTMLButtonElement) => {
-          // Assign to internal ref
-          (internalButtonRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
-          // Assign to forwarded ref
-          if (typeof ref === 'function') {
-            ref(node);
-          } else if (ref && typeof ref === 'object') {
-            (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
-          }
-        }}
-        style={{
-          transform: magneticHover ? transform : undefined,
-          ...props.style
-        }}
-        disabled={disabled || loading}
-        aria-busy={loading ? true : undefined} // Added aria-busy for loading state
-        onMouseDown={() => setIsPressed(true)}
-        onMouseUp={() => setIsPressed(false)}
-        onMouseLeave={() => setIsPressed(false)}
-        onClick={handleClick}
-        {...props}
       >
+        <Comp
+          ref={(node: HTMLButtonElement) => {
+            // Assign to internal ref
+            (internalButtonRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+            // Assign to forwarded ref
+            if (typeof ref === 'function') {
+              ref(node);
+            } else if (ref && typeof ref === 'object') {
+              (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+            }
+          }}
+          style={{
+            transform: magneticHover ? transform : undefined,
+            ...props.style
+          }}
+          disabled={disabled || loading}
+          aria-busy={loading ? true : undefined}
+          onMouseDown={() => setIsPressed(true)}
+          onMouseUp={() => setIsPressed(false)}
+          onMouseLeave={() => setIsPressed(false)}
+          onClick={handleClick}
+          {...props}
+        >
         {/* Loading state overlay */}
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-current/10 rounded-xl" aria-hidden="true">
@@ -169,7 +185,8 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
             </span>
           )}
         </div>
-      </Comp>
+        </Comp>
+      </GlassContainer>
     );
   }
 );

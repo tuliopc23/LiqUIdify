@@ -38,7 +38,11 @@ export * from './hooks/use-performance-monitor'
 export * from './hooks/use-theme'
 export * from './hooks/use-toast'
 
+// Foundation Components
+export * from './components/glass-foundation'
+
 // Utilities
+export * from './lib/glass-core'
 export * from './lib/glass-physics'
 export * from './lib/glass-utils'
 export * from './lib/liquid-glass-tokens'

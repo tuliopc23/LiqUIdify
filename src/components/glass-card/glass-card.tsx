@@ -1,51 +1,46 @@
 import { forwardRef } from "react";
-import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
+import { cn } from "@/lib/glass-utils";
+import { GlassSurface, type GlassSurfaceProps } from "@/components/glass-foundation";
 
-export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface GlassCardProps extends Omit<GlassSurfaceProps, 'variant'> {
   variant?: "default" | "elevated" | "outlined" | "pressed";
   hover?: boolean;
-  bordered?: boolean;
-  padding?: "none" | "sm" | "md" | "lg" | "xl";
+  hoverable?: boolean;
 }
 
 const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
   ({ 
     className, 
     variant = "default", 
-    hover = true, 
-    bordered = true,
+    hover = true,
+    elevation,
     padding = "md",
     ...props 
   }, ref) => {
-    const variantClasses = {
-      default: getGlassClass("default"),
-      elevated: getGlassClass("elevated"),
-      outlined: "bg-transparent border-2 border-[var(--glass-border)]",
-      pressed: cn(getGlassClass("pressed"), "shadow-inner")
+    // Map card variants to foundation variants and elevations
+    const variantMap = {
+      default: { elevation: "low" as const, glassVariant: "default" as const },
+      elevated: { elevation: "medium" as const, glassVariant: "elevated" as const },
+      outlined: { elevation: "flat" as const, glassVariant: "default" as const, border: true },
+      pressed: { elevation: "flat" as const, glassVariant: "pressed" as const }
     };
 
-    const paddingClasses = {
-      none: "",
-      sm: "p-3",
-      md: "p-6", 
-      lg: "p-8",
-      xl: "p-12"
-    };
-
-    const baseClasses = cn(
-      "rounded-xl",
-      variantClasses[variant],
-      paddingClasses[padding],
-      bordered && variant !== "outlined" && "border border-[var(--glass-border)]",
-      hover && "glass-hover cursor-pointer",
-      microInteraction.smooth,
-      "will-change-transform"
-    );
-
+    const config = variantMap[variant];
+    
     return (
-      <div
+      <GlassSurface
         ref={ref}
-        className={cn(baseClasses, className)}
+        variant={config.glassVariant}
+        elevation={elevation || config.elevation}
+        padding={padding}
+        interactive={hover}
+        hoverable={hover}
+        className={cn(
+          variant === "outlined" && "bg-transparent border-2",
+          variant === "pressed" && "shadow-inner",
+          hover && "cursor-pointer",
+          className
+        )}
         {...props}
       />
     );
