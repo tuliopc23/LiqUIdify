@@ -1,245 +1,339 @@
-# Glass UI
+# Glass UI - Advanced Glassmorphism Library
 
 <div align="center">
-
-![Glass UI Logo](https://glass-ui.dev/logo.png)
-
-**A comprehensive React component library with Apple-inspired liquid glass aesthetics**
-
-[![npm version](https://badge.fury.io/js/%40tuliopc23%2Fglass-ui.svg)](https://www.npmjs.com/package/@tuliopc23/glass-ui)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
-[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://glass-ui.dev)
-[![Build Status](https://github.com/tuliopc23/glass-ui/workflows/CI/badge.svg)](https://github.com/tuliopc23/glass-ui/actions)
-[![Coverage](https://codecov.io/gh/tuliopc23/glass-ui/branch/main/graph/badge.svg)](https://codecov.io/gh/tuliopc23/glass-ui)
-
-[**Documentation**](https://glass-ui.dev) • [**Storybook**](https://storybook.glass-ui.dev) • [**Examples**](https://examples.glass-ui.dev)
-
+  <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1200&h=400&fit=crop" alt="Glass UI Banner" />
+  
+  <p align="center">
+    <strong>A cutting-edge glassmorphism library with physics-based animations, WebGL shaders, and haptic feedback</strong>
+  </p>
+  
+  <p align="center">
+    <a href="#features">Features</a> •
+    <a href="#installation">Installation</a> •
+    <a href="#usage">Usage</a> •
+    <a href="#components">Components</a> •
+    <a href="#api">API</a> •
+    <a href="#examples">Examples</a>
+  </p>
 </div>
 
 ## ✨ Features
 
-- 🎨 **Liquid Glass Design** - Apple-inspired glassmorphism effects with backdrop blur
-- 🌓 **Light/Dark Mode** - Seamless theme switching with smooth transitions  
-- ⚡ **Modern Stack** - Built with React 18, TypeScript, and Tailwind CSS
-- 🧩 **70+ Components** - Comprehensive set of UI primitives and composed components
-- 📱 **Responsive Design** - Mobile-first approach with adaptive layouts
-- ♿ **Accessibility First** - WCAG 2.1 AA compliant with comprehensive keyboard navigation
-- 🎭 **Micro-interactions** - SwiftUI-inspired hover effects and animations
-- 🔧 **Developer Experience** - Full TypeScript support with intelligent autocomplete
-- 📦 **Tree Shakeable** - Optimized bundle size with ES modules
-- 🧪 **Battle Tested** - Comprehensive test suite with 95%+ coverage
+### 🎨 Advanced Visual Effects
+- **30+ Glass Variants** - From basic frosted glass to holographic and iridescent effects
+- **WebGL Shaders** - GPU-accelerated visual effects for stunning performance
+- **Dynamic Lighting** - Real-time lighting calculations and reflections
+- **Depth Layers** - Multi-layered glass effects with customizable depth
+
+### 🎯 Interactive Components
+- **Gesture Recognition** - Multi-touch support with custom gesture creation
+- **Haptic Feedback** - Vibration patterns with audio and visual coordination
+- **Physics Engine** - Spring dynamics, fluid simulation, and particle systems
+- **Magnetic Interactions** - Elements that respond to cursor proximity
+
+### 🚀 Performance Optimized
+- **Virtual Scrolling** - Efficiently render large lists
+- **Lazy Loading** - Load components only when needed
+- **GPU Acceleration** - Leverage WebGL for smooth animations
+- **Memory Management** - Automatic cleanup and optimization
+
+### 📱 Cross-Platform
+- **Responsive Design** - Works seamlessly across all devices
+- **Touch Support** - Optimized for mobile interactions
+- **Accessibility** - WCAG compliant with screen reader support
+- **Progressive Enhancement** - Graceful degradation for older browsers
+
+## 📦 Installation
+
+### NPM
+```bash
+npm install glass-ui
+```
+
+### Yarn
+```bash
+yarn add glass-ui
+```
+
+### CDN
+```html
+<!-- CSS -->
+<link rel="stylesheet" href="https://unpkg.com/glass-ui/dist/glass.min.css">
+
+<!-- JavaScript -->
+<script src="https://unpkg.com/glass-ui/dist/glass.min.js"></script>
+```
 
 ## 🚀 Quick Start
 
-### Installation
+### Basic Setup
 
-```bash
-# npm
-npm install @tuliopc23/glass-ui
-
-# yarn
-yarn add @tuliopc23/glass-ui
-
-# pnpm
-pnpm add @tuliopc23/glass-ui
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="path/to/glass.css">
+</head>
+<body>
+  <!-- Basic glass panel -->
+  <div class="liquid-glass p-6 rounded-xl">
+    <h2>Welcome to Glass UI</h2>
+    <p>Beautiful glassmorphism effects made easy</p>
+  </div>
+</body>
+</html>
 ```
 
-### Setup
+### React Usage
 
-Add the CSS to your app:
-
-```tsx
-// Import the styles in your app root
-import '@tuliopc23/glass-ui/styles'
-
-// Or in your CSS file
-@import '@tuliopc23/glass-ui/styles';
-```
-
-Wrap your app with the theme provider:
-
-```tsx
-import { ThemeProvider } from '@tuliopc23/glass-ui'
+```jsx
+import { GlassProvider, GlassPanel, useGlassEffect } from 'glass-ui';
+import 'glass-ui/dist/glass.css';
 
 function App() {
   return (
-    <ThemeProvider>
-      {/* Your app components */}
-    </ThemeProvider>
-  )
+    <GlassProvider>
+      <GlassPanel variant="holographic" depth={3}>
+        <h1>Glass UI React</h1>
+      </GlassPanel>
+    </GlassProvider>
+  );
 }
 ```
 
-### Basic Usage
+## 🎨 Glass Variants
 
-```tsx
-import { GlassButton, GlassCard, GlassInput } from '@tuliopc23/glass-ui'
+### Basic Variants
+- `liquid-glass` - Standard glassmorphism
+- `liquid-glass-light` - Light frosted effect
+- `liquid-glass-heavy` - Heavy blur effect
+- `liquid-glass-ultra` - Maximum blur
 
-function MyComponent() {
-  return (
-    <GlassCard variant="elevated" className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Welcome to Glass UI</h2>
-      <GlassInput 
-        placeholder="Enter your email..." 
-        variant="search"
-        className="mb-4"
-      />
-      <GlassButton variant="primary" size="lg">
-        Get Started
-      </GlassButton>
-    </GlassCard>
-  )
+### Special Effects
+- `liquid-glass-holographic` - Animated rainbow effect
+- `liquid-glass-iridescent` - Color-shifting surface
+- `liquid-glass-aurora` - Northern lights animation
+- `liquid-glass-plasma` - Flowing plasma effect
+- `liquid-glass-crystal` - Crystalline reflections
+- `liquid-glass-metal` - Liquid metal surface
+
+### Neon Variants
+- `liquid-glass-neon-blue`
+- `liquid-glass-neon-pink`
+- `liquid-glass-neon-green`
+- `liquid-glass-neon-purple`
+
+## 🧩 Components
+
+### Buttons
+```html
+<button class="liquid-glass-button">
+  Click Me
+</button>
+
+<button class="liquid-glass-button liquid-glass-magnetic">
+  Magnetic Button
+</button>
+
+<button class="liquid-glass-button liquid-glass-ripple">
+  Ripple Effect
+</button>
+```
+
+### Forms
+```html
+<!-- Input -->
+<input type="text" class="liquid-glass-input" placeholder="Enter text">
+
+<!-- Select -->
+<select class="liquid-glass-select">
+  <option>Option 1</option>
+  <option>Option 2</option>
+</select>
+
+<!-- Checkbox -->
+<input type="checkbox" class="liquid-glass-checkbox">
+
+<!-- Toggle -->
+<label class="liquid-glass-toggle">
+  <input type="checkbox">
+  <span class="slider"></span>
+</label>
+```
+
+### Cards
+```html
+<div class="liquid-glass-card">
+  <div class="liquid-glass-card-header">
+    <h3>Card Title</h3>
+  </div>
+  <div class="liquid-glass-card-body">
+    <p>Card content goes here</p>
+  </div>
+</div>
+```
+
+### Progress Bars
+```html
+<div class="liquid-glass-progress">
+  <div class="liquid-glass-progress-bar" style="width: 70%"></div>
+</div>
+```
+
+## 🔧 Advanced Features
+
+### WebGL Shaders
+
+```javascript
+import { GlassShader, ShaderType } from 'glass-ui';
+
+// Create custom shader
+const customShader = new GlassShader({
+  type: ShaderType.REFRACTION,
+  uniforms: {
+    refractionRatio: 0.98,
+    dispersion: 0.05
+  }
+});
+
+// Apply to element
+customShader.apply(document.querySelector('.my-glass-element'));
+```
+
+### Gesture Recognition
+
+```javascript
+import { GestureRecognizer } from 'glass-ui';
+
+const element = document.querySelector('.gesture-area');
+const recognizer = new GestureRecognizer(element);
+
+recognizer.on('swipe', (event) => {
+  console.log(`Swiped ${event.direction}`);
+});
+
+recognizer.on('pinch', (event) => {
+  console.log(`Scale: ${event.scale}`);
+});
+
+recognizer.on('rotate', (event) => {
+  console.log(`Rotation: ${event.angle}°`);
+});
+```
+
+### Physics Engine
+
+```javascript
+import { SpringPhysics, SPRING_PRESETS } from 'glass-ui';
+
+// Create spring animation
+const spring = new SpringPhysics(SPRING_PRESETS.wobbly);
+
+// Animate element
+function animate() {
+  const position = spring.update(targetPosition, deltaTime);
+  element.style.transform = `translateX(${position}px)`;
+  requestAnimationFrame(animate);
 }
 ```
 
-## 📚 Components
+### Haptic Feedback
 
-<details>
-<summary><strong>Form Components</strong></summary>
+```javascript
+import { useHapticFeedback } from 'glass-ui';
 
-- **GlassButton** - Primary, secondary, ghost, and destructive variants
-- **GlassInput** - Text, search, password inputs with glass effects  
-- **GlassTextarea** - Multi-line text input with glassmorphism
-- **GlassSelect** - Dropdown selection with glass styling
-- **GlassCheckbox** - Custom styled checkboxes
-- **GlassSwitch** - iOS-style toggle switches
-- **GlassSlider** - Range input with glass track
-- **GlassRadioGroup** - Radio button groups
+const haptic = useHapticFeedback({
+  vibration: true,
+  audio: { enabled: true, volume: 0.5 },
+  visual: { enabled: true, duration: 200 }
+});
 
-</details>
-
-<details>
-<summary><strong>Layout Components</strong></summary>
-
-- **GlassCard** - Content containers with liquid glass effects
-- **GlassModal** - Overlay dialogs with glassmorphism backdrop
-- **GlassSheet** - Sliding panels and drawers
-- **GlassTabs** - Tab navigation with smooth transitions
-- **GlassAccordion** - Collapsible content sections
-- **GlassSeparator** - Visual dividers with glass styling
-
-</details>
-
-<details>
-<summary><strong>Navigation Components</strong></summary>
-
-- **GlassNavbar** - Top navigation with glass morphism
-- **GlassSidebar** - Collapsible navigation sidebar
-- **GlassBreadcrumb** - Navigation breadcrumbs
-- **GlassPagination** - Page navigation controls
-- **GlassDropdownMenu** - Context menus and dropdowns
-
-</details>
-
-<details>
-<summary><strong>Data Display</strong></summary>
-
-- **GlassTable** - Interactive tables with glass styling
-- **GlassAvatar** - User profile images with glass frames
-- **GlassBadge** - Status indicators and labels
-- **GlassProgress** - Progress bars and loading indicators
-- **GlassChart** - Data visualization components
-- **GlassTooltip** - Contextual information overlays
-
-</details>
-
-<details>
-<summary><strong>Feedback Components</strong></summary>
-
-- **GlassToast** - Notification messages
-- **GlassAlert** - Important announcements
-- **GlassNotification** - System notifications
-- **GlassLoading** - Loading states and spinners
-
-</details>
-
-## 🎨 Theming & Customization
-
-Glass UI uses CSS custom properties for theming:
-
-```css
-:root {
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-primary: #007AFF;
-  --glass-radius: 12px;
-  /* ... more variables */
-}
+// Trigger feedback
+button.addEventListener('click', () => {
+  haptic.trigger('success');
+});
 ```
 
-### Dark Mode
+## 📊 Performance Optimization
 
-```tsx
-import { useTheme } from '@tuliopc23/glass-ui'
+### Virtual Scrolling
 
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
-  
-  return (
-    <GlassButton
-      variant="ghost"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-    >
-      {theme === 'dark' ? '☀️' : '🌙'}
-    </GlassButton>
-  )
-}
+```javascript
+import { useVirtualScroll } from 'glass-ui';
+
+const { visibleItems, totalHeight, scrollTop } = useVirtualScroll({
+  items: largeDataArray,
+  itemHeight: 50,
+  containerHeight: 600,
+  overscan: 3
+});
 ```
 
-## 📖 Documentation
+### Lazy Loading
 
-- [**Getting Started**](https://glass-ui.dev/docs/getting-started) - Installation and setup guide
-- [**Components**](https://glass-ui.dev/docs/components) - Complete component reference
-- [**Theming**](https://glass-ui.dev/docs/theming) - Customization and styling guide
-- [**Examples**](https://glass-ui.dev/examples) - Real-world usage examples
-- [**Migration Guide**](https://glass-ui.dev/docs/migration) - Upgrading between versions
+```javascript
+import { LazyGlass } from 'glass-ui';
 
-## 🧪 Testing
-
-Glass UI includes comprehensive testing utilities:
-
-```tsx
-import { render } from '@testing-library/react'
-import { expectAccessible } from '@tuliopc23/glass-ui/testing'
-
-test('button is accessible', async () => {
-  const { container } = render(<GlassButton>Click me</GlassButton>)
-  await expectAccessible(container)
-})
+// Lazy load glass components
+<LazyGlass
+  variant="holographic"
+  placeholder={<div>Loading...</div>}
+  onLoad={() => console.log('Loaded!')}
+>
+  <ExpensiveComponent />
+</LazyGlass>
 ```
+
+## 🎯 Best Practices
+
+1. **Performance**
+   - Use `will-change` sparingly
+   - Prefer `transform` over `top/left`
+   - Batch DOM updates
+   - Use virtual scrolling for long lists
+
+2. **Accessibility**
+   - Ensure sufficient contrast
+   - Provide focus indicators
+   - Add ARIA labels
+   - Test with screen readers
+
+3. **Mobile Optimization**
+   - Use touch-friendly tap targets
+   - Optimize for 60fps
+   - Reduce blur on low-end devices
+   - Test on real devices
 
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-### Development Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/tuliopc23/glass-ui.git
-cd glass-ui
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Run tests
-npm test
-```
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-MIT © [Tulio Pinheiro Cunha](https://tulio.dev)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Inspired by Apple's design philosophy
+- WebGL shaders based on Three.js
+- Physics engine inspired by Matter.js
+- Gesture recognition adapted from Hammer.js
+
+## 📞 Support
+
+- 📧 Email: support@glass-ui.dev
+- 💬 Discord: [Join our community](https://discord.gg/glass-ui)
+- 🐦 Twitter: [@GlassUI](https://twitter.com/glassui)
+- 📚 Documentation: [docs.glass-ui.dev](https://docs.glass-ui.dev)
 
 ---
 
 <div align="center">
-
-**[Website](https://glass-ui.dev)** • **[Documentation](https://glass-ui.dev/docs)** • **[Examples](https://examples.glass-ui.dev)** • **[Brand Guidelines](https://brand.tulio.dev)**
-
-Made with ❤️ by [Tulio Pinheiro Cunha](https://tulio.dev)
-
+  Made with ❤️ by the Glass UI Team
 </div>

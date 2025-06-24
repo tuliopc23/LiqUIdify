@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass UI - Advanced Glassmorphism Library Demo</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Glass UI CSS -->
+    <link rel="stylesheet" href="../src/styles/glass.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Animated gradient background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(125deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #667eea 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            z-index: -2;
+        }
+        
+        /* Floating orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.7;
+            animation: float 20s infinite ease-in-out;
+            z-index: -1;
+        }
+        
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #ff006e, transparent);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #00d4ff, transparent);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -5s;
+        }
+        
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #b300ff, transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(100px, -100px) scale(1.1);
+            }
+            66% {
+                transform: translate(-100px, 100px) scale(0.9);
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Demo section styling */
+        .demo-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Code block styling */
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background elements -->
+    <div class="gradient-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 p-4">
+        <div class="liquid-glass liquid-glass-heavy rounded-full px-8 py-4 mx-auto max-w-6xl flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-layer-group text-2xl text-blue-400"></i>
+                <h1 class="text-xl font-semibold">Glass UI</h1>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#features" class="hover:text-blue-400 transition-colors">Features</a>
+                <a href="#components" class="hover:text-blue-400 transition-colors">Components</a>
+                <a href="#effects" class="hover:text-blue-400 transition-colors">Effects</a>
+                <a href="#physics" class="hover:text-blue-400 transition-colors">Physics</a>
+                <a href="https://github.com" class="liquid-glass-button px-4 py-2 rounded-lg">
+                    <i class="fab fa-github mr-2"></i>GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="demo-section">
+        <div class="text-center max-w-4xl">
+            <h1 class="section-title text-6xl mb-6">Glass UI</h1>
+            <p class="text-xl text-gray-300 mb-8">
+                Advanced glassmorphism library with physics-based animations, WebGL shaders, and haptic feedback
+            </p>
+            <div class="flex items-center justify-center space-x-4">
+                <button class="liquid-glass liquid-glass-interactive liquid-glass-neon liquid-glass-neon-blue px-8 py-4 rounded-xl text-lg font-semibold">
+                    <i class="fas fa-rocket mr-2"></i>Get Started
+                </button>
+                <button class="liquid-glass liquid-glass-interactive px-8 py-4 rounded-xl text-lg font-semibold">
+                    <i class="fas fa-book mr-2"></i>Documentation
+                </button>
+            </div>
+            
+            <!-- Floating demo cards -->
+            <div class="mt-16 grid grid-cols-3 gap-6">
+                <div class="liquid-glass liquid-glass-holographic p-6 rounded-xl transform hover:scale-105 transition-transform">
+                    <i class="fas fa-magic text-4xl mb-4 text-purple-400"></i>
+                    <h3 class="text-lg font-semibold mb-2">WebGL Shaders</h3>
+                    <p class="text-sm text-gray-300">Advanced visual effects with GPU acceleration</p>
+                </div>
+                <div class="liquid-glass liquid-glass-iridescent p-6 rounded-xl transform hover:scale-105 transition-transform">
+                    <i class="fas fa-hand-pointer text-4xl mb-4 text-blue-400"></i>
+                    <h3 class="text-lg font-semibold mb-2">Gesture Recognition</h3>
+                    <p class="text-sm text-gray-300">Multi-touch and custom gesture support</p>
+                </div>
+                <div class="liquid-glass liquid-glass-crystal p-6 rounded-xl transform hover:scale-105 transition-transform">
+                    <i class="fas fa-atom text-4xl mb-4 text-green-400"></i>
+                    <h3 class="text-lg font-semibold mb-2">Physics Engine</h3>
+                    <p class="text-sm text-gray-300">Realistic motion with spring dynamics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Glass Variants Section -->
+    <section id="components" class="demo-section">
+        <div class="max-w-6xl w-full">
+            <h2 class="section-title text-center mb-12">Glass Variants</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Basic Glass -->
+                <div class="liquid-glass p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Basic Glass</h3>
+                    <p class="text-gray-300 mb-4">Standard glassmorphism effect</p>
+                    <code class="code-block">.liquid-glass</code>
+                </div>
+                
+                <!-- Frosted Glass -->
+                <div class="liquid-glass liquid-glass-frost-heavy p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Frosted Glass</h3>
+                    <p class="text-gray-300 mb-4">Heavy blur with frost effect</p>
+                    <code class="code-block">.liquid-glass-frost-heavy</code>
+                </div>
+                
+                <!-- Holographic -->
+                <div class="liquid-glass liquid-glass-holographic p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Holographic</h3>
+                    <p class="text-gray-300 mb-4">Animated rainbow effect</p>
+                    <code class="code-block">.liquid-glass-holographic</code>
+                </div>
+                
+                <!-- Iridescent -->
+                <div class="liquid-glass liquid-glass-iridescent p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Iridescent</h3>
+                    <p class="text-gray-300 mb-4">Color-shifting surface</p>
+                    <code class="code-block">.liquid-glass-iridescent</code>
+                </div>
+                
+                <!-- Neon -->
+                <div class="liquid-glass liquid-glass-neon liquid-glass-neon-pink p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Neon Glow</h3>
+                    <p class="text-gray-300 mb-4">Vibrant neon lighting</p>
+                    <code class="code-block">.liquid-glass-neon</code>
+                </div>
+                
+                <!-- Crystal -->
+                <div class="liquid-glass liquid-glass-crystal p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Crystal</h3>
+                    <p class="text-gray-300 mb-4">Crystalline reflections</p>
+                    <code class="code-block">.liquid-glass-crystal</code>
+                </div>
+                
+                <!-- Plasma -->
+                <div class="liquid-glass liquid-glass-plasma p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Plasma</h3>
+                    <p class="text-gray-300 mb-4">Flowing plasma effect</p>
+                    <code class="code-block">.liquid-glass-plasma</code>
+                </div>
+                
+                <!-- Aurora -->
+                <div class="liquid-glass liquid-glass-aurora p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Aurora</h3>
+                    <p class="text-gray-300 mb-4">Northern lights effect</p>
+                    <code class="code-block">.liquid-glass-aurora</code>
+                </div>
+                
+                <!-- Liquid Metal -->
+                <div class="liquid-glass liquid-glass-metal p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-2">Liquid Metal</h3>
+                    <p class="text-gray-300 mb-4">Metallic surface finish</p>
+                    <code class="code-block">.liquid-glass-metal</code>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interactive Components -->
+    <section id="features" class="demo-section">
+        <div class="max-w-6xl w-full">
+            <h2 class="section-title text-center mb-12">Interactive Components</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Magnetic Button -->
+                <div class="liquid-glass p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">Magnetic Interaction</h3>
+                    <p class="text-gray-300 mb-6">Hover to see magnetic effect</p>
+                    <button class="liquid-glass liquid-glass-magnetic px-6 py-3 rounded-lg">
+                        <i class="fas fa-magnet mr-2"></i>Magnetic Button
+                    </button>
+                </div>
+                
+                <!-- Ripple Effect -->
+                <div class="liquid-glass p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">Ripple Effect</h3>
+                    <p class="text-gray-300 mb-6">Click to create ripples</p>
+                    <button class="liquid-glass liquid-glass-ripple px-6 py-3 rounded-lg">
+                        <i class="fas fa-water mr-2"></i>Ripple Button
+                    </button>
+                </div>
+                
+                <!-- Morph Animation -->
+                <div class="liquid-glass p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">Liquid Morph</h3>
+                    <p class="text-gray-300 mb-6">Animated shape morphing</p>
+                    <div class="liquid-glass liquid-glass-morph w-32 h-32 mx-auto flex items-center justify-center">
+                        <i class="fas fa-shapes text-4xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Shimmer Effect -->
+                <div class="liquid-glass p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4">Shimmer Loading</h3>
+                    <p class="text-gray-300 mb-6">Elegant loading animation</p>
+                    <div class="liquid-glass liquid-glass-shimmer h-4 rounded-full mb-3"></div>
+                    <div class="liquid-glass liquid-glass-shimmer h-4 rounded-full w-3/4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Form Components -->
+    <section class="demo-section">
+        <div class="max-w-4xl w-full">
+            <h2 class="section-title text-center mb-12">Form Components</h2>
+            
+            <div class="liquid-glass p-8 rounded-xl">
+                <form class="space-y-6">
+                    <!-- Input Field -->
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email Address</label>
+                        <input type="email" class="liquid-glass-input w-full px-4 py-3 rounded-lg" placeholder="Enter your email">
+                    </div>
+                    
+                    <!-- Select Dropdown -->
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Select Option</label>
+                        <select class="liquid-glass-select w-full px-4 py-3 rounded-lg">
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Checkbox -->
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="checkbox" class="liquid-glass-checkbox">
+                        <label for="checkbox" class="text-sm">I agree to the terms and conditions</label>
+                    </div>
+                    
+                    <!-- Radio Buttons -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-medium mb-2">Choose an option</label>
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" id="radio1" name="radio" class="liquid-glass-radio">
+                            <label for="radio1" class="text-sm">Option A</label>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" id="radio2" name="radio" class="liquid-glass-radio">
+                            <label for="radio2" class="text-sm">Option B</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Toggle Switch -->
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium">Enable notifications</span>
+                        <label class="liquid-glass-toggle">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="liquid-glass liquid-glass-interactive liquid-glass-gradient-shift w-full py-3 rounded-lg font-semibold">
+                        Submit Form
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Card Layouts -->
+    <section class="demo-section">
+        <div class="max-w-6xl w-full">
+            <h2 class="section-title text-center mb-12">Card Layouts</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Profile Card -->
+                <div class="liquid-glass liquid-glass-depth-3 rounded-xl overflow-hidden">
+                    <div class="h-32 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                    <div class="p-6 -mt-12">
+                        <div class="liquid-glass liquid-glass-crystal w-24 h-24 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <i class="fas fa-user text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-2">John Doe</h3>
+                        <p class="text-gray-300 text-center text-sm mb-4">UI/UX Designer</p>
+                        <div class="flex justify-center space-x-4">
+                            <i class="fab fa-twitter text-gray-400 hover:text-blue-400 transition-colors cursor-pointer"></i>
+                            <i class="fab fa-linkedin text-gray-400 hover:text-blue-400 transition-colors cursor-pointer"></i>
+                            <i class="fab fa-github text-gray-400 hover:text-blue-400 transition-colors cursor-pointer"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Card -->
+                <div class="liquid-glass liquid-glass-depth-3 p-6 rounded-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold">Statistics</h3>
+                        <i class="fas fa-chart-line text-green-400"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Progress</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="liquid-glass-progress">
+                                <div class="liquid-glass-progress-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Performance</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="liquid-glass-progress">
+                                <div class="liquid-glass-progress-bar liquid-glass-neon-green" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Feature Card -->
+                <div class="liquid-glass liquid-glass-depth-3 p-6 rounded-xl">
+                    <div class="liquid-glass liquid-glass-holographic w-16 h-16 rounded-lg mb-4 flex items-center justify-center">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Lightning Fast</h3>
+                    <p class="text-gray-300 text-sm mb-4">Optimized for performance with GPU acceleration</p>
+                    <a href="#" class="text-blue-400 text-sm font-medium hover:text-blue-300 transition-colors">
+                        Learn more <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Physics Demo -->
+    <section id="physics" class="demo-section">
+        <div class="max-w-6xl w-full">
+            <h2 class="section-title text-center mb-12">Physics Engine</h2>
+            
+            <div class="liquid-glass p-8 rounded-xl">
+                <p class="text-center text-gray-300 mb-8">
+                    Interactive physics simulation - Click and drag to interact
+                </p>
+                <div id="physics-canvas" class="liquid-glass liquid-glass-depth-2 rounded-lg" style="height: 400px; position: relative; overflow: hidden;">
+                    <!-- Physics simulation will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 px-4">
+        <div class="liquid-glass rounded-xl p-8 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="font-semibold mb-4">Glass UI</h4>
+                    <p class="text-sm text-gray-300">Advanced glassmorphism library for modern web applications</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Examples</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">API Reference</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Community</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">GitHub</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Discord</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Twitter</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors">License</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-white/10 text-center text-sm text-gray-400">
+                <p>&copy; 2024 Glass UI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Simple physics demo
+        const physicsCanvas = document.getElementById('physics-canvas');
+        const particles = [];
+        
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.radius = Math.random() * 20 + 10;
+                this.element = document.createElement('div');
+                this.element.className = 'absolute liquid-glass liquid-glass-crystal rounded-full';
+                this.element.style.width = this.radius * 2 + 'px';
+                this.element.style.height = this.radius * 2 + 'px';
+                physicsCanvas.appendChild(this.element);
+            }
+            
+            update() {
+                // Apply gravity
+                this.vy += 0.2;
+                
+                // Update position
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Bounce off walls
+                const rect = physicsCanvas.getBoundingClientRect();
+                if (this.x - this.radius < 0 || this.x + this.radius > rect.width) {
+                    this.vx *= -0.8;
+                    this.x = Math.max(this.radius, Math.min(rect.width - this.radius, this.x));
+                }
+                if (this.y + this.radius > rect.height) {
+                    this.vy *= -0.8;
+                    this.y = rect.height - this.radius;
+                }
+                
+                // Apply friction
+                this.vx *= 0.99;
+                this.vy *= 0.99;
+                
+                // Update element position
+                this.element.style.transform = `translate(${this.x - this.radius}px, ${this.y - this.radius}px)`;
+            }
+        }
+        
+        // Create initial particles
+        for (let i = 0; i < 10; i++) {
+            particles.push(new Particle(
+                Math.random() * physicsCanvas.offsetWidth,
+                Math.random() * physicsCanvas.offsetHeight / 2
+            ));
+        }
+        
+        // Animation loop
+        function animate() {
+            particles.forEach(particle => particle.update());
+            requestAnimationFrame(animate);
+        }
+        animate();
+        
+        // Add particles on click
+        physicsCanvas.addEventListener('click', (e) => {
+            const rect = physicsCanvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            particles.push(new Particle(x, y));
+        });
+    </script>
+</body>
+</html>

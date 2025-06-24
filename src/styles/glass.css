@@ -598,3 +598,438 @@
     box-shadow: none;
   }
 }
+
+/* Advanced Visual Effects */
+
+/* Holographic Effect */
+.liquid-glass-holographic {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  overflow: hidden;
+}
+
+.liquid-glass-holographic::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 0, 255, 0.1) 35%,
+    rgba(0, 255, 255, 0.1) 40%,
+    rgba(255, 255, 0, 0.1) 45%,
+    transparent 50%
+  );
+  animation: holographicShift 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes holographicShift {
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+  }
+  100% {
+    transform: translateX(0%) translateY(0%);
+  }
+}
+
+/* Iridescent Effect */
+.liquid-glass-iridescent {
+  position: relative;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.05)
+  );
+}
+
+.liquid-glass-iridescent::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 0, 150, 0.1) 45%,
+    rgba(150, 0, 255, 0.1) 50%,
+    rgba(0, 150, 255, 0.1) 55%,
+    transparent 60%
+  );
+  background-size: 150% 150%;
+  animation: iridescentShine 4s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes iridescentShine {
+  0%, 100% {
+    background-position: 50% 50%;
+  }
+  25% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+}
+
+/* Neon Glow Effect */
+.liquid-glass-neon {
+  position: relative;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid currentColor;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.1),
+    0 0 20px currentColor,
+    0 0 40px currentColor,
+    0 0 60px currentColor;
+  animation: neonPulse 2s ease-in-out infinite alternate;
+}
+
+.liquid-glass-neon-blue {
+  color: #00d4ff;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.liquid-glass-neon-pink {
+  color: #ff006e;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.liquid-glass-neon-green {
+  color: #00ff88;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.liquid-glass-neon-purple {
+  color: #b300ff;
+  text-shadow: 0 0 10px currentColor;
+}
+
+@keyframes neonPulse {
+  from {
+    box-shadow: 
+      inset 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 20px currentColor,
+      0 0 40px currentColor,
+      0 0 60px currentColor;
+  }
+  to {
+    box-shadow: 
+      inset 0 0 25px rgba(255, 255, 255, 0.15),
+      0 0 25px currentColor,
+      0 0 50px currentColor,
+      0 0 80px currentColor;
+  }
+}
+
+/* Dynamic Gradient Effect */
+.liquid-glass-gradient-shift {
+  background: linear-gradient(
+    -45deg,
+    rgba(238, 119, 82, 0.1),
+    rgba(231, 60, 126, 0.1),
+    rgba(35, 166, 213, 0.1),
+    rgba(35, 213, 171, 0.1)
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Frosted Glass Variations */
+.liquid-glass-frost-light {
+  backdrop-filter: blur(4px) saturate(120%);
+  -webkit-backdrop-filter: blur(4px) saturate(120%);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.liquid-glass-frost-heavy {
+  backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.liquid-glass-frost-colored {
+  backdrop-filter: blur(16px) saturate(200%) hue-rotate(20deg);
+  -webkit-backdrop-filter: blur(16px) saturate(200%) hue-rotate(20deg);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Liquid Morph Effect */
+.liquid-glass-morph {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: liquidMorph 8s ease-in-out infinite;
+}
+
+@keyframes liquidMorph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 70% 70% 30% / 30% 70% 30% 70%;
+  }
+  50% {
+    border-radius: 70% 30% 30% 70% / 70% 30% 70% 30%;
+  }
+  75% {
+    border-radius: 40% 60% 70% 30% / 40% 70% 30% 60%;
+  }
+}
+
+/* Crystal Effect */
+.liquid-glass-crystal {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 75%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.5),
+    inset 0 0 40px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass-crystal::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 55%
+  );
+  animation: crystalShine 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes crystalShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Plasma Effect */
+.liquid-glass-plasma {
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.liquid-glass-plasma::before,
+.liquid-glass-plasma::after {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  border-radius: 50%;
+  opacity: 0.4;
+  filter: blur(40px);
+  animation: plasmaFloat 10s ease-in-out infinite;
+}
+
+.liquid-glass-plasma::before {
+  background: radial-gradient(circle, #ff006e, transparent);
+  top: -50%;
+  left: -50%;
+}
+
+.liquid-glass-plasma::after {
+  background: radial-gradient(circle, #00d4ff, transparent);
+  bottom: -50%;
+  right: -50%;
+  animation-delay: -5s;
+}
+
+@keyframes plasmaFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30%, -30%) scale(1.1);
+  }
+  66% {
+    transform: translate(-20%, 20%) scale(0.9);
+  }
+}
+
+/* Glitch Glass Effect */
+.liquid-glass-glitch {
+  position: relative;
+  animation: glitchBase 2s steps(1) infinite;
+}
+
+.liquid-glass-glitch::before,
+.liquid-glass-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border: inherit;
+  border-radius: inherit;
+}
+
+.liquid-glass-glitch::before {
+  animation: glitchTop 0.3s ease-in-out infinite alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  opacity: 0.8;
+}
+
+.liquid-glass-glitch::after {
+  animation: glitchBottom 0.4s ease-in-out infinite alternate-reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  opacity: 0.8;
+}
+
+@keyframes glitchBase {
+  0%, 90% {
+    filter: none;
+  }
+  91%, 92% {
+    filter: hue-rotate(90deg) saturate(2);
+  }
+  93%, 94% {
+    filter: hue-rotate(-90deg) saturate(2);
+  }
+  95%, 100% {
+    filter: none;
+  }
+}
+
+@keyframes glitchTop {
+  0%, 90% {
+    transform: translateX(0);
+  }
+  91%, 94% {
+    transform: translateX(-2px);
+  }
+  95%, 100% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes glitchBottom {
+  0%, 90% {
+    transform: translateX(0);
+  }
+  91%, 94% {
+    transform: translateX(2px);
+  }
+  95%, 100% {
+    transform: translateX(-2px);
+  }
+}
+
+/* Aurora Effect */
+.liquid-glass-aurora {
+  position: relative;
+  background: rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.liquid-glass-aurora::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    0deg,
+    transparent,
+    rgba(0, 255, 170, 0.2),
+    rgba(0, 170, 255, 0.2),
+    rgba(170, 0, 255, 0.2),
+    transparent
+  );
+  animation: auroraWave 15s linear infinite;
+  filter: blur(60px);
+  opacity: 0.6;
+}
+
+@keyframes auroraWave {
+  0% {
+    transform: translateY(100%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100%) rotate(360deg);
+  }
+}
+
+/* Liquid Metal Effect */
+.liquid-glass-metal {
+  background: linear-gradient(
+    135deg,
+    rgba(192, 192, 192, 0.1),
+    rgba(128, 128, 128, 0.2),
+    rgba(192, 192, 192, 0.1)
+  );
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.liquid-glass-metal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 45%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.2) 55%,
+    transparent 100%
+  );
+  animation: metalSheen 3s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes metalSheen {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
