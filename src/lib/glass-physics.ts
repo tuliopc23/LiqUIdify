@@ -223,8 +223,6 @@ export const createFluidMorph = (
 
   const deltaX = toRect.left - fromRect.left;
   const deltaY = toRect.top - fromRect.top;
-  const deltaWidth = toRect.width - fromRect.width;
-  const deltaHeight = toRect.height - fromRect.height;
 
   return {
     initial: {

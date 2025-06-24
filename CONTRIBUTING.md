@@ -241,12 +241,181 @@ npx changeset version
 npx changeset publish
 ```
 
+## Performance Guidelines
+
+### Bundle Size Optimization
+- Use tree-shakeable exports
+- Avoid large dependencies
+- Implement lazy loading where appropriate
+- Monitor bundle impact with `npm run build`
+
+### Runtime Performance
+- Use `React.memo` for expensive components
+- Implement proper key props for lists
+- Avoid inline object/function creation in render
+- Use CSS transforms for animations
+
+### Accessibility Requirements
+
+All components must meet these standards:
+
+1. **Keyboard Navigation**
+   - All interactive elements must be keyboard accessible
+   - Proper tab order and focus management
+   - Support for arrow key navigation where appropriate
+
+2. **Screen Reader Support**
+   - Proper ARIA labels and descriptions
+   - Semantic HTML structure
+   - Live region announcements for dynamic content
+
+3. **Color Contrast**
+   - Minimum 4.5:1 contrast ratio for normal text
+   - Minimum 3:1 contrast ratio for large text
+   - Support for high contrast mode
+
+4. **Focus Management**
+   - Visible focus indicators
+   - Proper focus trapping in modals
+   - Focus restoration after interactions
+
+### Component API Design
+
+Follow these patterns for consistent APIs:
+
+```tsx
+// ✅ Good: Consistent prop naming
+interface GlassComponentProps {
+  variant?: 'primary' | 'secondary' | 'tertiary'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  disabled?: boolean
+  loading?: boolean
+  children?: React.ReactNode
+  className?: string
+}
+
+// ❌ Avoid: Inconsistent naming
+interface BadComponentProps {
+  type?: string  // Use 'variant' instead
+  big?: boolean  // Use 'size' instead
+  isDisabled?: boolean  // Use 'disabled' instead
+}
+```
+
+## Documentation Standards
+
+### Component Documentation
+Each component should include:
+
+1. **Overview**: Brief description and use cases
+2. **API Reference**: Complete prop documentation
+3. **Examples**: Common usage patterns
+4. **Accessibility**: ARIA patterns and keyboard shortcuts
+5. **Styling**: Customization options
+
+### Code Comments
+```tsx
+/**
+ * GlassButton - A button component with liquid glass aesthetics
+ * 
+ * Features:
+ * - Multiple variants (primary, secondary, tertiary, ghost, destructive)
+ * - Magnetic hover effects with spring physics
+ * - Built-in loading states
+ * - Full accessibility support
+ * 
+ * @example
+ * <GlassButton variant="primary" size="lg" onClick={handleClick}>
+ *   Click me
+ * </GlassButton>
+ */
+```
+
+## Testing Strategy
+
+### Unit Tests
+- Test component rendering
+- Test prop variations
+- Test user interactions
+- Test error states
+
+### Integration Tests
+- Test component composition
+- Test theme switching
+- Test responsive behavior
+
+### Accessibility Tests
+```tsx
+// Required accessibility tests
+describe('Accessibility', () => {
+  it('should have no accessibility violations', async () => {
+    const { container } = render(<Component />)
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
+  })
+
+  it('should be keyboard navigable', () => {
+    render(<Component />)
+    const element = screen.getByRole('button')
+    element.focus()
+    expect(element).toHaveFocus()
+  })
+
+  it('should have proper ARIA attributes', () => {
+    render(<Component aria-label="Test button" />)
+    expect(screen.getByLabelText('Test button')).toBeInTheDocument()
+  })
+})
+```
+
+### Visual Regression Tests
+- Storybook visual tests
+- Cross-browser compatibility
+- Theme variations
+- Responsive breakpoints
+
 ## Getting Help
 
 - 📖 [Documentation](https://glass-ui.dev/docs)
 - 💬 [Discussions](https://github.com/tuliopc23/glass-ui/discussions)
 - 🐛 [Issues](https://github.com/tuliopc23/glass-ui/issues)
 - 📧 Email: tulio@example.com
+- 🎨 [Figma Design System](https://figma.com/glass-ui)
+- 📱 [Component Playground](https://glass-ui.dev/playground)
+
+## Community
+
+### Discord Server
+Join our Discord for real-time discussions:
+- General help and questions
+- Component design discussions
+- Feature requests and feedback
+- Community showcase
+
+### Office Hours
+Weekly community office hours:
+- **When**: Fridays 2-3 PM EST
+- **Where**: Discord voice channel
+- **What**: Q&A, design reviews, roadmap discussions
+
+## Recognition
+
+### Contributors
+We recognize contributors in multiple ways:
+- GitHub contributor graph
+- Monthly contributor highlights
+- Annual contributor awards
+- Conference speaking opportunities
+
+### Contribution Types
+We value all types of contributions:
+- 🐛 Bug reports and fixes
+- ✨ New features and components
+- 📝 Documentation improvements
+- 🎨 Design and UX enhancements
+- 🧪 Testing and quality assurance
+- 🌍 Translations and internationalization
+- 💬 Community support and mentoring
 
 ## Code of Conduct
 

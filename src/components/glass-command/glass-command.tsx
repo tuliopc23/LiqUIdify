@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Search, Command, ArrowRight, Hash, User, Settings, FileText, Zap } from "lucide-react";
-import { cn, getGlassClass, microInteraction, focusRing } from "@/lib/glass-utils";
+import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
 
 export interface CommandItem {
   id: string;
@@ -221,7 +221,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 </div>
                 
                 {/* Category Items */}
-                {categoryItems.map((item, categoryIndex) => {
+                {categoryItems.map((item) => {
                   const globalIndex = allFilteredItems.indexOf(item);
                   const isSelected = globalIndex === selectedIndex;
                   

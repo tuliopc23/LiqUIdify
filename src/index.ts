@@ -27,7 +27,7 @@ export * from './components/glass-toast'
 export * from './components/glass-tooltip'
 export * from './components/navbar'
 export * from './components/sidebar'
-export * from './components/theme-provider'
+export { ThemeProvider } from './components/theme-provider'
 export * from './components/theme-toggle'
 export * from './components/component-showcase'
 
@@ -35,8 +35,8 @@ export * from './components/component-showcase'
 export * from './hooks/use-liquid-glass'
 export * from './hooks/use-mobile'
 export * from './hooks/use-performance-monitor'
-export * from './hooks/use-theme'
-export * from './hooks/use-toast'
+export { useTheme } from './hooks/use-theme'
+export { useToast, toast } from './hooks/use-toast'
 
 // Utilities
 export * from './lib/glass-physics'
@@ -51,9 +51,7 @@ export type {
   GlassButtonProps,
   GlassCardProps,
   GlassInputProps,
-  GlassModalProps,
   GlassTabsProps,
-  ThemeProviderProps,
   AccessibilityCheckResult,
   AccessibilityIssue
 } from './types'
