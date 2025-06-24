@@ -296,10 +296,9 @@ interface GlassComponentProps {
 
 // ❌ Avoid: Inconsistent naming
 interface BadComponentProps {
-  type?: string  // Use 'variant' instead
+variant?: string  // Use 'variant' instead
   big?: boolean  // Use 'size' instead
   isDisabled?: boolean  // Use 'disabled' instead
-}
 ```
 
 ## Documentation Standards
