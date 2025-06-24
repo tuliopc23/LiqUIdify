@@ -10,7 +10,7 @@ import { GlassTooltip } from "../glass-tooltip";
 import { GlassPopover } from "../glass-popover";
 import { GlassDropdown } from "../glass-dropdown";
 import { GlassAvatar } from "../glass-avatar";
-import { useToast, ToastProvider } from "../glass-toast";
+import { useToast } from "../glass-toast";
 import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardDescription, GlassCardContent, GlassCardFooter } from "../glass-card";
 import { GlassCheckbox } from "../glass-checkbox";
 import { GlassSwitch } from "../glass-switch";
@@ -18,7 +18,7 @@ import { GlassTabs } from "../glass-tabs";
 import { GlassBadge } from "../glass-badge";
 import { GlassModal } from "../glass-modal";
 import { GlassTable } from "../glass-table";
-import { Download, Github, Heart, MousePointer, Keyboard, Layers, Users, TrendingUp, Settings, Bell, ChevronDown, Search, Mail, Phone, MapPin, User, Edit, Trash, Share } from "lucide-react";
+import { Download, Github, Heart, MousePointer, Keyboard, Layers, Users, TrendingUp, Settings, ChevronDown, Mail, Phone, MapPin, User, Edit, Trash, Share } from "lucide-react";
 
 interface ComponentShowcaseProps {
   activeSection: string;
