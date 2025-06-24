@@ -45,7 +45,7 @@ export class GlassStyleGenerator {
     const blurValue = liquidGlassTokens.blur[blur];
 
     let styles = [
-      `background: ${colors[variant] || colors.primary}`,
+      `background: ${colors[variant as keyof typeof colors] || colors.primary}`,
       `backdrop-filter: blur(${blurValue}) saturate(${liquidGlassTokens.saturation.enhanced})`,
       `-webkit-backdrop-filter: blur(${blurValue}) saturate(${liquidGlassTokens.saturation.enhanced})`,
       `box-shadow: ${shadows[shadow]}`,
@@ -58,7 +58,7 @@ export class GlassStyleGenerator {
     return styles.join("; ");
   }
 
-  generateHoverStyle(config: GlassConfig = {}): string {
+  generateHoverStyle(_config: GlassConfig = {}): string {
     const colors = liquidGlassTokens.colors.glass[this.theme];
     const borders = liquidGlassTokens.colors.border[this.theme];
 
@@ -150,16 +150,18 @@ export class GlassClassGenerator {
 export const glassUtils = {
   // Generate CSS custom properties for glass effects
   generateCSSProperties(config: GlassConfig = {}): Record<string, string> {
-    const generator = new GlassStyleGenerator();
     const {
       variant = "default",
       blur = "medium",
       shadow = "light"
     } = config;
 
+    const lightColors = liquidGlassTokens.colors.glass.light;
+    const darkColors = liquidGlassTokens.colors.glass.dark;
+
     return {
-      "--glass-bg": liquidGlassTokens.colors.glass.light[variant] || liquidGlassTokens.colors.glass.light.primary,
-      "--glass-bg-dark": liquidGlassTokens.colors.glass.dark[variant] || liquidGlassTokens.colors.glass.dark.primary,
+      "--glass-bg": lightColors[variant as keyof typeof lightColors] || lightColors.primary,
+      "--glass-bg-dark": darkColors[variant as keyof typeof darkColors] || darkColors.primary,
       "--glass-blur": liquidGlassTokens.blur[blur],
       "--glass-shadow": liquidGlassTokens.shadows.glass[shadow],
       "--glass-border": liquidGlassTokens.colors.border.light.light,
