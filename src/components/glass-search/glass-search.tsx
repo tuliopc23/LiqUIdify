@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
 import { Search, Clock, TrendingUp, X, ArrowRight } from "lucide-react";
 import { cn, getGlassClass, microInteraction, focusRing } from "@/lib/glass-utils";
 
@@ -29,7 +28,6 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
   onSearch,
   onSuggestionClick,
   className,
-  showTrending = true,
   maxSuggestions = 8
 }) => {
   const [query, setQuery] = useState("");
@@ -181,7 +179,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
               <div className="px-3 py-2 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
                 Recent
               </div>
-              {recentSearches.slice(0, 5).map((recent, index) => (
+              {recentSearches.slice(0, 5).map((recent) => (
                 <button
                   key={recent}
                   onClick={() => handleSelect({ id: recent, text: recent, type: "recent" })}
@@ -221,13 +219,13 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <span className="truncate">{result.text}</span>
-                      {result.count && (
+                      {'count' in result && result.count && (
                         <span className="text-xs text-[var(--text-tertiary)] ml-2">
                           {result.count.toLocaleString()}
                         </span>
                       )}
                     </div>
-                    {result.category && (
+                    {'category' in result && typeof result.category === 'string' && (
                       <div className="text-xs text-[var(--text-tertiary)] mt-0.5">
                         in {result.category}
                       </div>

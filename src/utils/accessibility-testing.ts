@@ -50,7 +50,6 @@ export class AccessibilityChecker {
     const role = element.getAttribute('role');
     const ariaLabel = element.getAttribute('aria-label');
     const ariaLabelledBy = element.getAttribute('aria-labelledby');
-    const ariaDescribedBy = element.getAttribute('aria-describedby');
 
     // Check for interactive elements without accessible names
     const interactiveElements = ['button', 'link', 'input', 'select', 'textarea'];
@@ -121,8 +120,6 @@ export class AccessibilityChecker {
 
   private checkColorContrast(element: HTMLElement): void {
     const style = window.getComputedStyle(element);
-    const backgroundColor = style.backgroundColor;
-    const color = style.color;
 
     // Basic check - warn if using very low opacity
     if (style.opacity && parseFloat(style.opacity) < 0.6) {

@@ -237,6 +237,168 @@ function animate() {
 }
 ```
 
+### Advanced Examples
+
+#### Form with Glass Components
+```tsx
+import { 
+  GlassCard, 
+  GlassInput, 
+  GlassButton, 
+  GlassSelect,
+  GlassCheckbox,
+  GlassTextarea 
+} from '@tuliopc23/glass-ui'
+
+function ContactForm() {
+  return (
+    <GlassCard variant="elevated" className="max-w-md mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
+      
+      <div className="space-y-4">
+        <GlassInput
+          placeholder="Your name"
+          variant="default"
+        />
+        
+        <GlassInput
+          type="email"
+          placeholder="your@email.com"
+          variant="search"
+        />
+        
+        <GlassSelect>
+          <option>Select a topic</option>
+          <option>General Inquiry</option>
+          <option>Support</option>
+          <option>Partnership</option>
+        </GlassSelect>
+        
+        <GlassTextarea
+          placeholder="Your message..."
+          rows={4}
+        />
+        
+        <GlassCheckbox>
+          I agree to the terms and conditions
+        </GlassCheckbox>
+        
+        <GlassButton variant="primary" className="w-full">
+          Send Message
+        </GlassButton>
+      </div>
+    </GlassCard>
+  )
+}
+```
+
+#### Dashboard with Navigation
+```tsx
+import { 
+  GlassNavbar, 
+  GlassSidebar, 
+  GlassCard,
+  GlassChart,
+  GlassBadge,
+  GlassProgress 
+} from '@tuliopc23/glass-ui'
+
+function Dashboard() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <GlassNavbar>
+        <div className="flex items-center justify-between">
+          <h1 className="text-xl font-bold">Dashboard</h1>
+          <GlassBadge variant="success">Online</GlassBadge>
+        </div>
+      </GlassNavbar>
+      
+      <div className="flex">
+        <GlassSidebar className="w-64">
+          {/* Sidebar content */}
+        </GlassSidebar>
+        
+        <main className="flex-1 p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <GlassCard className="p-6">
+              <h3 className="text-lg font-semibold mb-2">Revenue</h3>
+              <p className="text-3xl font-bold text-green-600">$12,345</p>
+              <GlassProgress value={75} className="mt-4" />
+            </GlassCard>
+            
+            <GlassCard className="p-6">
+              <h3 className="text-lg font-semibold mb-4">Analytics</h3>
+              <GlassChart type="line" data={chartData} />
+            </GlassCard>
+          </div>
+        </main>
+      </div>
+    </div>
+  )
+}
+```
+
+#### Interactive Modal Example
+```tsx
+import { 
+  GlassButton, 
+  GlassModal, 
+  GlassInput,
+  useToast 
+} from '@tuliopc23/glass-ui'
+import { useState } from 'react'
+
+function ModalExample() {
+  const [isOpen, setIsOpen] = useState(false)
+  const { toast } = useToast()
+  
+  const handleSubmit = () => {
+    toast({
+      title: "Success!",
+      description: "Your data has been saved.",
+      variant: "success"
+    })
+    setIsOpen(false)
+  }
+  
+  return (
+    <>
+      <GlassButton onClick={() => setIsOpen(true)}>
+        Open Modal
+      </GlassButton>
+      
+      <GlassModal 
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)}
+        title="Edit Profile"
+      >
+        <div className="space-y-4">
+          <GlassInput placeholder="Full name" />
+          <GlassInput placeholder="Email address" type="email" />
+          
+          <div className="flex gap-3 pt-4">
+            <GlassButton 
+              variant="ghost" 
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
+            </GlassButton>
+            <GlassButton 
+              variant="primary" 
+              onClick={handleSubmit}
+            >
+              Save Changes
+            </GlassButton>
+          </div>
+        </div>
+      </GlassModal>
+    </>
+  )
+}
+```
+
+## 📚 Components
+
 ### Haptic Feedback
 
 ```javascript
@@ -329,4 +491,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  Made with ❤️ by Tulio Cunha
+**[Website](https://glass-ui.dev)** • **[Documentation](https://glass-ui.dev/docs)** • **[Examples](https://examples.glass-ui.dev)** • **[Brand Guidelines](https://brand.tulio.dev)**
+
+Made with ❤️ by Tulio Cunha
+
+</div>

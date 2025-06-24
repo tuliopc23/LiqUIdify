@@ -1,5 +1,5 @@
 import { forwardRef, useState, useRef, useEffect } from "react";
-import { cn, focusRing, getGlassClass, microInteraction } from "@/lib/glass-utils";
+import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
 import { useMagneticHover, createGlassRipple } from "@/lib/glass-physics";
 import { useLiquidGlass } from "@/hooks/use-liquid-glass";
 import { useGlassEffectPerformance } from "@/hooks/use-performance-monitor";
@@ -65,7 +65,8 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       microInteraction.smooth,
       "disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none",
       specularHighlights && "liquid-glass-specular liquid-glass-shimmer",
-      magneticHover && "liquid-glass-magnetic"
+      magneticHover && "liquid-glass-magnetic",
+      isPressed && "scale-[0.98] brightness-95"
     );
 
     const variantClasses = {

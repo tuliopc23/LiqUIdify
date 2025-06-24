@@ -50,7 +50,7 @@ export const GlassSelect = React.forwardRef<HTMLDivElement, GlassSelectProps>(
     const selectedOption = options.find(opt => opt.value === selectedValue);
 
     return (
-      <div ref={selectRef} className={cn("relative", className)} {...props}>
+      <div ref={ref || selectRef} className={cn("relative", className)} {...props}>
         <button
           type="button"
           onClick={() => !disabled && setIsOpen(!isOpen)}
