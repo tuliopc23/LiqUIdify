@@ -225,7 +225,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
                         </span>
                       )}
                     </div>
-                    {'category' in result && result.category && (
+                    {'category' in result && typeof result.category === 'string' && (
                       <div className="text-xs text-[var(--text-tertiary)] mt-0.5">
                         in {result.category}
                       </div>
