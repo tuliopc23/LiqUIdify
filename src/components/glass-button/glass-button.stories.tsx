@@ -7,22 +7,59 @@ const meta: Meta<typeof GlassButton> = {
   component: GlassButton,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: 'A premium glass-effect button component with advanced visual effects including glass morphism, magnetic hover, and haptic feedback.',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'select' },
       options: ['primary', 'secondary', 'tertiary', 'ghost', 'destructive'],
+      description: 'Visual style variant of the button',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'primary' },
+      },
     },
     size: {
       control: { type: 'select' },
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Size of the button',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'md' },
+      },
     },
     loading: {
       control: 'boolean',
+      description: 'Show loading spinner',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     disabled: {
       control: 'boolean',
+      description: 'Disable the button',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    leftIcon: {
+      description: 'Icon to display on the left side',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
+    },
+    rightIcon: {
+      description: 'Icon to display on the right side',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
   },
 };

@@ -1,425 +1,192 @@
 # Contributing to Glass UI
 
-We love your input! We want to make contributing to Glass UI as easy and transparent as possible, whether it's:
-
-- Reporting a bug
-- Discussing the current state of the code
-- Submitting a fix
-- Proposing new features
-- Becoming a maintainer
-
-## Development Process
-
-We use GitHub to host code, track issues and feature requests, and accept pull requests.
-
-### Pull Request Process
-
-1. Fork the repo and create your branch from `main`
-2. If you've added code that should be tested, add tests
-3. If you've changed APIs, update the documentation
-4. Ensure the test suite passes
-5. Make sure your code lints
-6. Issue that pull request!
+Thank you for your interest in contributing to Glass UI! 🎉
 
 ## Development Setup
 
 ### Prerequisites
+- Node.js 16+ 
+- npm/yarn/pnpm
 
-- Node.js 18+ 
-- npm 9+
-
-### Getting Started
-
+### Quick Start
 ```bash
-# Clone your fork
-git clone https://github.com/yourusername/glass-ui.git
+# 1. Fork and clone the repo
+git clone https://github.com/your-username/glass-ui.git
 cd glass-ui
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Start development server
+# 3. Start development
 npm run dev
-
-# Run tests
-npm test
+npm run storybook  # In another terminal
 ```
 
-### Project Structure
+## Development Workflow
+
+### Making Changes
+1. **Create a branch** from `main`
+   ```bash
+   git checkout -b feature/awesome-glass-effect
+   ```
+
+2. **Make your changes**
+   - Follow existing code patterns
+   - Add proper TypeScript types
+   - Include accessibility attributes
+   - Test on multiple devices
+
+3. **Test your changes**
+   ```bash
+   npm run test
+   npm run lint
+   npm run type-check
+   ```
+
+4. **Update documentation**
+   - Add/update component stories
+   - Update JSDoc comments
+   - Add examples if needed
+
+5. **Submit a pull request**
+
+### Code Style
+- **TypeScript-first** - All components must have proper types
+- **Accessibility-first** - WCAG 2.1 AA compliance required
+- **Performance-focused** - Consider bundle size and runtime performance
+- **Mobile-optimized** - Test on touch devices
+
+### Component Guidelines
+
+#### Creating New Components
+```tsx
+// 1. Use forwardRef for DOM components
+export const GlassAwesome = forwardRef<HTMLDivElement, GlassAwesomeProps>(
+  ({ className, variant = "default", ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(getGlassClass(variant), className)}
+        {...props}
+      />
+    )
+  }
+)
+
+// 2. Add proper display name
+GlassAwesome.displayName = "GlassAwesome"
+
+// 3. Export from index
+export { GlassAwesome } from './glass-awesome'
+```
+
+#### Writing Stories
+```tsx
+// Every component needs comprehensive stories
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      {variants.map(variant => (
+        <GlassAwesome key={variant} variant={variant}>
+          {variant}
+        </GlassAwesome>
+      ))}
+    </div>
+  )
+}
+```
+
+#### Testing Requirements
+```tsx
+// Accessibility testing is mandatory
+test('should be accessible', async () => {
+  render(<GlassAwesome>Test</GlassAwesome>)
+  const results = await axe(container)
+  expect(results).toHaveNoViolations()
+})
+
+// Responsive testing encouraged
+test('should work on mobile', () => {
+  // Touch interaction tests
+})
+```
+
+## Project Structure
 
 ```
 src/
-├── components/          # All Glass UI components
-│   ├── glass-button/   
+├── components/           # React components
+│   ├── glass-button/    # Component folder
 │   │   ├── glass-button.tsx
 │   │   ├── glass-button.stories.tsx
 │   │   ├── glass-button.test.tsx
 │   │   └── index.ts
-├── hooks/              # React hooks
-├── lib/                # Utility functions
-├── utils/              # Testing utilities
-└── styles/             # CSS styles
+├── hooks/               # Custom hooks
+├── lib/                 # Utilities and physics
+├── styles/              # CSS and design tokens
+└── tokens/              # Design system tokens
 ```
-
-## Code Style
-
-We use ESLint and Prettier to maintain code quality:
-
-```bash
-# Check linting
-npm run lint
-
-# Fix linting issues
-npm run lint:fix
-
-# Check formatting
-npm run format:check
-
-# Fix formatting
-npm run format
-```
-
-## Testing
-
-We use Vitest for testing and jest-axe for accessibility testing:
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run accessibility tests
-npm run test:a11y
-
-# Generate coverage report
-npm run test:coverage
-```
-
-### Test Requirements
-
-- All new components must have unit tests
-- Accessibility tests are required
-- Test coverage should be above 90%
-
-## Component Guidelines
-
-### Creating a New Component
-
-1. **Component Structure**
-   ```tsx
-   // glass-example.tsx
-   import { forwardRef } from 'react'
-   import { cn } from '@/lib/glass-utils'
-   
-   export interface GlassExampleProps extends React.HTMLAttributes<HTMLDivElement> {
-     variant?: 'primary' | 'secondary'
-     size?: 'sm' | 'md' | 'lg'
-   }
-   
-   const GlassExample = forwardRef<HTMLDivElement, GlassExampleProps>(
-     ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
-       return (
-         <div
-           ref={ref}
-           className={cn(
-             'glass-component-base',
-             variantClasses[variant],
-             sizeClasses[size],
-             className
-           )}
-           {...props}
-         />
-       )
-     }
-   )
-   
-   GlassExample.displayName = 'GlassExample'
-   
-   export { GlassExample }
-   ```
-
-2. **Stories (Storybook)**
-   ```tsx
-   // glass-example.stories.tsx
-   import type { Meta, StoryObj } from '@storybook/react'
-   import { GlassExample } from './glass-example'
-   
-   const meta: Meta<typeof GlassExample> = {
-     title: 'Components/GlassExample',
-     component: GlassExample,
-     parameters: {
-       layout: 'centered',
-     },
-     tags: ['autodocs'],
-   }
-   
-   export default meta
-   type Story = StoryObj<typeof meta>
-   
-   export const Primary: Story = {
-     args: {
-       variant: 'primary',
-     },
-   }
-   ```
-
-3. **Tests**
-   ```tsx
-   // glass-example.test.tsx
-   import { render, screen } from '@testing-library/react'
-   import { axe, toHaveNoViolations } from 'jest-axe'
-   import { GlassExample } from './glass-example'
-   
-   expect.extend(toHaveNoViolations)
-   
-   describe('GlassExample', () => {
-     it('renders correctly', () => {
-       render(<GlassExample>Test</GlassExample>)
-       expect(screen.getByText('Test')).toBeInTheDocument()
-     })
-   
-     it('should be accessible', async () => {
-       const { container } = render(<GlassExample>Test</GlassExample>)
-       const results = await axe(container)
-       expect(results).toHaveNoViolations()
-     })
-   })
-   ```
-
-### Design Principles
-
-1. **Accessibility First**: All components must be WCAG 2.1 AA compliant
-2. **TypeScript**: Full type safety with proper interfaces
-3. **Composability**: Components should be composable and flexible
-4. **Performance**: Optimize for bundle size and runtime performance
-5. **Consistency**: Follow established patterns and naming conventions
-
-### Glass UI Design System
-
-- **Colors**: Use CSS custom properties for theming
-- **Spacing**: Follow 8pt grid system
-- **Typography**: SF Pro Display/Mono with fallbacks
-- **Border Radius**: 6px, 12px, 16px, 20px, 24px
-- **Animations**: 300ms cubic-bezier(0.2, 0, 0, 1)
 
 ## Commit Guidelines
 
-We follow [Conventional Commits](https://conventionalcommits.org/):
-
-```
-feat: add new glass-button component
-fix: resolve focus ring issue in glass-input
-docs: update installation guide
-test: add accessibility tests for glass-card
-refactor: optimize glass-utils performance
-```
-
-### Commit Types
-
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes
-- `refactor`: Code refactoring
-- `test`: Test changes
-- `chore`: Build/tool changes
-
-## Release Process
-
-We use [Changesets](https://github.com/changesets/changesets) for version management:
+Use [Conventional Commits](https://conventionalcommits.org/):
 
 ```bash
-# Add a changeset
-npx changeset
-
-# Version packages
-npx changeset version
-
-# Publish (maintainers only)
-npx changeset publish
+feat: add holographic glass effect
+fix: resolve mobile touch issues  
+docs: update component examples
+style: improve glass blur performance
+test: add accessibility tests
+refactor: simplify physics calculations
 ```
 
-## Performance Guidelines
+## What We're Looking For
 
-### Bundle Size Optimization
-- Use tree-shakeable exports
-- Avoid large dependencies
-- Implement lazy loading where appropriate
-- Monitor bundle impact with `npm run build`
+### High Priority
+- **New glass effects** - Creative visual variants
+- **Performance improvements** - Faster animations, smaller bundles
+- **Accessibility enhancements** - Better screen reader support
+- **Mobile optimizations** - Touch-friendly interactions
+- **Framework adapters** - Vue, Svelte, Angular support
 
-### Runtime Performance
-- Use `React.memo` for expensive components
-- Implement proper key props for lists
-- Avoid inline object/function creation in render
-- Use CSS transforms for animations
+### Medium Priority  
+- **Documentation improvements** - Better examples, guides
+- **Testing enhancements** - More comprehensive test coverage
+- **Developer experience** - Better error messages, debugging
+- **Advanced animations** - Physics-based interactions
 
-### Accessibility Requirements
+### Examples of Good Contributions
+- Adding new glass variants with proper physics
+- Improving component accessibility
+- Adding comprehensive tests
+- Creating framework adapters
+- Performance optimizations
+- Better error handling
 
-All components must meet these standards:
+## Pull Request Process
 
-1. **Keyboard Navigation**
-   - All interactive elements must be keyboard accessible
-   - Proper tab order and focus management
-   - Support for arrow key navigation where appropriate
+1. **Fill out the PR template** completely
+2. **Add/update tests** for your changes
+3. **Update documentation** if needed
+4. **Ensure CI passes** - tests, linting, type checking
+5. **Get review approval** from maintainers
+6. **Squash and merge** when approved
 
-2. **Screen Reader Support**
-   - Proper ARIA labels and descriptions
-   - Semantic HTML structure
-   - Live region announcements for dynamic content
+## Need Help?
 
-3. **Color Contrast**
-   - Minimum 4.5:1 contrast ratio for normal text
-   - Minimum 3:1 contrast ratio for large text
-   - Support for high contrast mode
-
-4. **Focus Management**
-   - Visible focus indicators
-   - Proper focus trapping in modals
-   - Focus restoration after interactions
-
-### Component API Design
-
-Follow these patterns for consistent APIs:
-
-```tsx
-// ✅ Good: Consistent prop naming
-interface GlassComponentProps {
-  variant?: 'primary' | 'secondary' | 'tertiary'
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  disabled?: boolean
-  loading?: boolean
-  children?: React.ReactNode
-  className?: string
-}
-
-// ❌ Avoid: Inconsistent naming
-interface BadComponentProps {
-variant?: string  // Use 'variant' instead
-  big?: boolean  // Use 'size' instead
-  isDisabled?: boolean  // Use 'disabled' instead
-```
-
-## Documentation Standards
-
-### Component Documentation
-Each component should include:
-
-1. **Overview**: Brief description and use cases
-2. **API Reference**: Complete prop documentation
-3. **Examples**: Common usage patterns
-4. **Accessibility**: ARIA patterns and keyboard shortcuts
-5. **Styling**: Customization options
-
-### Code Comments
-```tsx
-/**
- * GlassButton - A button component with liquid glass aesthetics
- * 
- * Features:
- * - Multiple variants (primary, secondary, tertiary, ghost, destructive)
- * - Magnetic hover effects with spring physics
- * - Built-in loading states
- * - Full accessibility support
- * 
- * @example
- * <GlassButton variant="primary" size="lg" onClick={handleClick}>
- *   Click me
- * </GlassButton>
- */
-```
-
-## Testing Strategy
-
-### Unit Tests
-- Test component rendering
-- Test prop variations
-- Test user interactions
-- Test error states
-
-### Integration Tests
-- Test component composition
-- Test theme switching
-- Test responsive behavior
-
-### Accessibility Tests
-```tsx
-// Required accessibility tests
-describe('Accessibility', () => {
-  it('should have no accessibility violations', async () => {
-    const { container } = render(<Component />)
-    const results = await axe(container)
-    expect(results).toHaveNoViolations()
-  })
-
-  it('should be keyboard navigable', () => {
-    render(<Component />)
-    const element = screen.getByRole('button')
-    element.focus()
-    expect(element).toHaveFocus()
-  })
-
-  it('should have proper ARIA attributes', () => {
-    render(<Component aria-label="Test button" />)
-    expect(screen.getByLabelText('Test button')).toBeInTheDocument()
-  })
-})
-```
-
-### Visual Regression Tests
-- Storybook visual tests
-- Cross-browser compatibility
-- Theme variations
-- Responsive breakpoints
-
-## Getting Help
-
-- 📖 [Documentation](https://glass-ui.dev/docs)
-- 💬 [Discussions](https://github.com/tuliopc23/glass-ui/discussions)
-- 🐛 [Issues](https://github.com/tuliopc23/glass-ui/issues)
-- 📧 Email: tulio@example.com
-- 🎨 [Figma Design System](https://figma.com/glass-ui)
-- 📱 [Component Playground](https://glass-ui.dev/playground)
-
-## Community
-
-### Discord Server
-Join our Discord for real-time discussions:
-- General help and questions
-- Component design discussions
-- Feature requests and feedback
-- Community showcase
-
-### Office Hours
-Weekly community office hours:
-- **When**: Fridays 2-3 PM EST
-- **Where**: Discord voice channel
-- **What**: Q&A, design reviews, roadmap discussions
+- 📖 **Documentation**: [glass-ui.dev](https://glass-ui.dev)
+- 💬 **Discussions**: GitHub Discussions
+- 🐛 **Bug Reports**: GitHub Issues
+- 💡 **Feature Requests**: GitHub Issues with `enhancement` label
 
 ## Recognition
 
-### Contributors
-We recognize contributors in multiple ways:
-- GitHub contributor graph
-- Monthly contributor highlights
-- Annual contributor awards
-- Conference speaking opportunities
+Contributors get:
+- 🏆 **Credit in releases** and documentation
+- 🎯 **Contributor badge** on GitHub
+- 🚀 **Early access** to new features
+- 🤝 **Mentorship opportunities** for significant contributions
 
-### Contribution Types
-We value all types of contributions:
-- 🐛 Bug reports and fixes
-- ✨ New features and components
-- 📝 Documentation improvements
-- 🎨 Design and UX enhancements
-- 🧪 Testing and quality assurance
-- 🌍 Translations and internationalization
-- 💬 Community support and mentoring
+---
 
-## Code of Conduct
-
-This project and everyone participating in it is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
-
-## License
-
-By contributing to Glass UI, you agree that your contributions will be licensed under the MIT License.
+**Happy contributing!** 🚀 Every contribution, no matter how small, helps make Glass UI better for everyone.

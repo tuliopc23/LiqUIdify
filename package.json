@@ -1,8 +1,8 @@
 {
-  "name": "glass-ui",
-  "version": "1.0.0",
+  "name": "@tuliopc23/glass-ui",
+  "version": "0.9.0-beta.1",
   "type": "module",
-  "description": "Advanced glassmorphism library with physics-based animations, WebGL shaders, and haptic feedback",
+  "description": "🚀 Physics-based glassmorphism library with content-aware adaptation, magnetic interactions, and 30+ glass effects. TypeScript-first, accessibility-ready.",
   "main": "dist/glass-ui.umd.js",
   "module": "dist/glass-ui.es.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,8 @@
       "require": "./dist/glass-ui.umd.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./dist/glass.css"
+    "./styles": "./dist/glass.css",
+    "./css": "./dist/glass.css"
   },
   "scripts": {
     "build": "npm run clean && npm run build:css && vite build",
@@ -22,36 +23,59 @@
     "clean": "rm -rf dist",
     "dev": "vite",
     "test": "vitest",
+    "test:ci": "vitest run --coverage",
     "lint": "eslint src/**/*.{ts,tsx}",
+    "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
     "format": "prettier --write src/**/*.{ts,tsx,css}",
+    "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "docs:prepare": "rm -rf docs-site/public/storybook && cp -R storybook-static docs-site/public/storybook",
+    "docs:build": "npm run docs:prepare && cd docs-site && npm run build",
+    "prepublishOnly": "npm run build",
+    "size": "npm run build && bundlesize"
   },
   "keywords": [
     "glassmorphism",
     "glass-ui",
     "ui-library",
-    "css",
-    "webgl",
     "physics",
-    "animations",
-    "react",
+    "content-aware",
+    "magnetic-hover",
+    "spring-animations",
+    "accessibility",
     "typescript",
-    "design-system"
+    "react",
+    "webgl",
+    "design-system",
+    "components",
+    "tailwind"
   ],
-  "author": "Glass UI Team",
+  "author": {
+    "name": "Tulio Pinheiro Cunha",
+    "email": "tulio@example.com",
+    "url": "https://tulio.dev"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/glass-ui/glass-ui.git"
+    "url": "https://github.com/tuliopc23/glass-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/glass-ui/glass-ui/issues"
+    "url": "https://github.com/tuliopc23/glass-ui/issues"
   },
   "homepage": "https://glass-ui.dev",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/tuliopc23"
+  },
   "files": [
     "dist",
-    "src"
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css"
   ],
   "peerDependencies": {
     "react": ">=16.8.0",
@@ -69,6 +93,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "clsx": "^2.0.0",
     "framer-motion": "^12.19.1",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.522.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7"

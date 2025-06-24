@@ -30,6 +30,12 @@ const config: StorybookConfig = {
       css: {
         postcss: './postcss.config.js',
       },
+      build: {
+        target: 'es2020'
+      },
+      esbuild: {
+        target: 'es2020'
+      }
     })
   },
   docs: {

@@ -1,21 +1,48 @@
-# Glass UI - Advanced Glassmorphism Library
+# Glass UI - The Future of Glassmorphism
 
 <div align="center">
   <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1200&h=400&fit=crop" alt="Glass UI Banner" />
   
+  <h3>🚀 Physics-based glassmorphism with content-aware adaptation</h3>
+  <p><strong>The only library that automatically adapts glass effects to your content</strong></p>
+  
   <p align="center">
-    <strong>A cutting-edge glassmorphism library with physics-based animations, WebGL shaders, and haptic feedback</strong>
+    <a href="https://glass-ui.dev"><img src="https://img.shields.io/badge/Demo-Live-brightgreen" alt="Demo"></a>
+    <a href="#"><img src="https://img.shields.io/npm/v/@tuliopc23/glass-ui?color=blue" alt="NPM Version"></a>
+    <a href="#"><img src="https://img.shields.io/npm/dm/@tuliopc23/glass-ui" alt="Downloads"></a>
+    <a href="#"><img src="https://img.shields.io/github/stars/tuliopc23/glass-ui" alt="GitHub Stars"></a>
+    <a href="#"><img src="https://img.shields.io/badge/TypeScript-Ready-blue" alt="TypeScript"></a>
   </p>
   
   <p align="center">
-    <a href="#features">Features</a> •
-    <a href="#installation">Installation</a> •
-    <a href="#usage">Usage</a> •
-    <a href="#components">Components</a> •
-    <a href="#api">API</a> •
-    <a href="#examples">Examples</a>
+    <a href="#-quick-start">Quick Start</a> •
+    <a href="#-features">Features</a> •
+    <a href="#-examples">Examples</a> •
+    <a href="#-documentation">Docs</a> •
+    <a href="https://storybook-static-or3ttelxf-tulio-pinheiro-cunha-s-projects.vercel.app">Storybook</a>
   </p>
 </div>
+
+## 🎯 Why Glass UI?
+
+```tsx
+// Other libraries: Static glass effects
+<div className="backdrop-blur-md bg-white/10">Static</div>
+
+// Glass UI: Content-aware adaptation + physics
+<GlassCard>
+  Content automatically adapts glass opacity, blur, and color
+  Plus magnetic hover with realistic spring physics
+</GlassCard>
+```
+
+**What makes Glass UI unique:**
+- 🧠 **Content-aware adaptation** - Automatically analyzes background and adjusts glass effects
+- ⚡ **Physics engine** - Realistic spring animations and magnetic interactions  
+- 🎨 **30+ glass variants** - From basic frost to holographic and aurora effects
+- 🔧 **TypeScript-first** - Complete type safety with excellent IntelliSense
+- ♿ **Accessibility-first** - WCAG compliant with comprehensive testing
+- 📱 **Mobile-optimized** - Touch-friendly with haptic feedback support
 
 ## ✨ Features
 
@@ -43,28 +70,60 @@
 - **Accessibility** - WCAG compliant with screen reader support
 - **Progressive Enhancement** - Graceful degradation for older browsers
 
-## 📦 Installation
-
-### NPM
-```bash
-npm install glass-ui
-```
-
-### Yarn
-```bash
-yarn add glass-ui
-```
-
-### CDN
-```html
-<!-- CSS -->
-<link rel="stylesheet" href="https://unpkg.com/glass-ui/dist/glass.min.css">
-
-<!-- JavaScript -->
-<script src="https://unpkg.com/glass-ui/dist/glass.min.js"></script>
-```
-
 ## 🚀 Quick Start
+
+### Installation
+
+```bash
+# npm
+npm install @tuliopc23/glass-ui
+
+# yarn  
+yarn add @tuliopc23/glass-ui
+
+# pnpm
+pnpm add @tuliopc23/glass-ui
+```
+
+### Basic React Setup (2 minutes)
+
+```tsx
+// 1. Install and import
+import { LiquidGlassProvider, GlassButton } from '@tuliopc23/glass-ui'
+import '@tuliopc23/glass-ui/dist/glass.css'
+
+// 2. Wrap your app
+function App() {
+  return (
+    <LiquidGlassProvider>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+        <GlassButton variant="primary" size="lg">
+          Beautiful glass button with physics! 
+        </GlassButton>
+      </div>
+    </LiquidGlassProvider>
+  )
+}
+```
+
+### CSS-Only Usage
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/@tuliopc23/glass-ui/dist/glass.css">
+</head>
+<body style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+  <div class="liquid-glass p-6 rounded-xl">
+    <h2>Pure CSS Glass Effect</h2>
+    <p>No JavaScript required!</p>
+  </div>
+</body>
+</html>
+```
+
+> **💡 Pro tip:** Place glass components over colorful backgrounds for the best visual effect!
 
 ### Basic Setup
 
@@ -651,7 +710,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-**[Website](https://glass-ui.dev)** • **[Documentation](https://glass-ui.dev/docs)** • **[Examples](https://examples.glass-ui.dev)** • **[Brand Guidelines](https://brand.tulio.dev)**
+**[Documentation](https://docs-site-hch63l7kd-tulio-pinheiro-cunha-s-projects.vercel.app)** • **[Storybook](https://storybook-static-or3ttelxf-tulio-pinheiro-cunha-s-projects.vercel.app)** • **[Examples](https://github.com/tuliopc23/glass-ui/tree/main/examples)** • **[NPM Package](https://www.npmjs.com/package/@tuliopc23/glass-ui)**
 
 Made with ❤️ by Tulio Cunha
 

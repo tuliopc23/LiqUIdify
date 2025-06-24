@@ -84,7 +84,7 @@ export function LiquidGlassProvider({
 
       // Adapt color based on dominant hue
       const hue = analysis.dominantHue;
-      const adaptedColor = `hsl(${hue}, 20%, ${analysis.brightness > 0.5 ? 95 : 15})`;
+      const adaptedColor = `hsl(${hue}, 20%, ${analysis.brightness > 0.5 ? 95 : 15}%)`;
       root.style.setProperty('--glass-color-adaptive', adaptedColor);
     },
     [merged]
@@ -94,7 +94,7 @@ export function LiquidGlassProvider({
     const root = document.documentElement;
 
     // Set base properties
-    root.style.setProperty('--glass-color', merged.color);
+    root.style.setProperty('--glass-color', `rgb(${merged.color})`);
     root.style.setProperty('--glass-blur', `${merged.blur}px`);
     root.style.setProperty('--glass-saturation', `${merged.saturation}%`);
     root.style.setProperty('--glass-opacity', String(merged.opacity));

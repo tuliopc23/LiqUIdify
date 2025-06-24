@@ -5,16 +5,45 @@ import { useLiquidGlass } from "@/hooks/use-liquid-glass";
 import { useGlassEffectPerformance } from "@/hooks/use-performance-monitor";
 import { Slot } from "@radix-ui/react-slot";
 
+/**
+ * Props for the GlassButton component
+ */
 export interface GlassButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Button variant style */
   variant?: "primary" | "secondary" | "tertiary" | "ghost" | "destructive";
+  /** Button size */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
+  /** Render as child component */
   asChild?: boolean;
+  /** Icon to display on the left side */
   leftIcon?: React.ReactNode;
+  /** Icon to display on the right side */
   rightIcon?: React.ReactNode;
+  /** Show loading state */
   loading?: boolean;
 }
 
+/**
+ * A premium glass-effect button component with advanced visual effects.
+ * 
+ * Features:
+ * - Multiple variants (primary, secondary, tertiary, ghost, destructive)
+ * - 5 size options (xs, sm, md, lg, xl)
+ * - Loading states with spinner
+ * - Left and right icons
+ * - Glass morphism effects with backdrop blur
+ * - Magnetic hover interactions
+ * - Haptic feedback support
+ * - Accessibility compliant
+ * 
+ * @example
+ * ```tsx
+ * <GlassButton variant="primary" size="md" leftIcon={<PlayIcon />}>
+ *   Play Video
+ * </GlassButton>
+ * ```
+ */
 const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
   (
     {

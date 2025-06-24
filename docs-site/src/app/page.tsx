@@ -48,16 +48,20 @@ function App() {
   );
 }`;
 
+import GsapAnimator from './components/GsapAnimator';
+
 export default function Home() {
   return (
-    <div className="space-y-16">
-      {/* Hero Section */}
+    <>
+      <GsapAnimator />
+      <div className="space-y-16">
+        {/* Hero Section */}
       <section className="text-center space-y-8">
         <div className="space-y-4">
-          <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="gsap-hero-title text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
             Glass UI
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="gsap-hero-subtitle text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Advanced glassmorphism React component library with physics-based animations,
             WebGL shaders, and haptic feedback
           </p>
@@ -100,7 +104,7 @@ export default function Home() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-colors"
+              className="gsap-feature-card p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 transition-colors"
             >
               <div className="text-3xl mb-4">{feature.icon}</div>
               <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
@@ -164,5 +168,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }
