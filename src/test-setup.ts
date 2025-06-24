@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
-import { vi } from 'vitest';
+import { vi, afterEach } from 'vitest';
 
 afterEach(() => {
   cleanup();

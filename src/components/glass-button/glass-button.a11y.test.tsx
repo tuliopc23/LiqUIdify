@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { GlassButton } from './glass-button';
@@ -43,7 +43,7 @@ describe('GlassButton Accessibility', () => {
   });
 
   it('should support keyboard navigation', () => {
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<GlassButton onClick={handleClick}>Keyboard test</GlassButton>);
     const button = screen.getByRole('button');
     
