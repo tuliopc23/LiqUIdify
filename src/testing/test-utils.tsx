@@ -3,8 +3,12 @@
  * Common utilities for testing Glass UI components
  */
 
-import { render, type RenderOptions, type RenderResult } from '@testing-library/react';
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
+import {
+  render,
+  type RenderOptions,
+  type RenderResult,
+} from '@testing-library/react';
 import { ThemeProvider } from 'next-themes';
 
 // Custom render function with theme provider
@@ -43,13 +47,13 @@ export function mockIntersectionObserver() {
     unobserve: () => null,
     disconnect: () => null,
   });
-  
+
   Object.defineProperty(window, 'IntersectionObserver', {
     writable: true,
     configurable: true,
     value: mockIntersectionObserver,
   });
-  
+
   Object.defineProperty(global, 'IntersectionObserver', {
     writable: true,
     configurable: true,
@@ -65,13 +69,13 @@ export function mockResizeObserver() {
     unobserve: () => null,
     disconnect: () => null,
   });
-  
+
   Object.defineProperty(window, 'ResizeObserver', {
     writable: true,
     configurable: true,
     value: mockResizeObserver,
   });
-  
+
   Object.defineProperty(global, 'ResizeObserver', {
     writable: true,
     configurable: true,
@@ -101,11 +105,11 @@ export function setupTestEnvironment() {
   mockIntersectionObserver();
   mockResizeObserver();
   mockMatchMedia();
-  
+
   // Mock requestAnimationFrame
   global.requestAnimationFrame = jest.fn(cb => setTimeout(cb, 0));
   global.cancelAnimationFrame = jest.fn();
-  
+
   // Mock getComputedStyle
   Object.defineProperty(window, 'getComputedStyle', {
     value: () => ({
@@ -127,11 +131,12 @@ export function cleanupTestEnvironment() {
 export const customMatchers = {
   toHaveGlassEffect(received: HTMLElement) {
     const style = window.getComputedStyle(received);
-    const hasBackdropFilter = style.backdropFilter && style.backdropFilter !== 'none';
+    const hasBackdropFilter =
+      style.backdropFilter && style.backdropFilter !== 'none';
     const hasBackground = style.background && style.background.includes('rgba');
-    
+
     const pass = hasBackdropFilter && hasBackground;
-    
+
     return {
       message: () =>
         pass
@@ -140,16 +145,20 @@ export const customMatchers = {
       pass,
     };
   },
-  
+
   toBeAccessible(received: HTMLElement) {
     // This would integrate with accessibility testing
     // For now, basic checks
     const hasAriaLabel = received.hasAttribute('aria-label');
     const hasRole = received.hasAttribute('role');
     const hasTabIndex = received.hasAttribute('tabindex');
-    
-    const pass = hasAriaLabel || hasRole || hasTabIndex || received.tagName.toLowerCase() === 'button';
-    
+
+    const pass =
+      hasAriaLabel ||
+      hasRole ||
+      hasTabIndex ||
+      received.tagName.toLowerCase() === 'button';
+
     return {
       message: () =>
         pass
@@ -158,15 +167,15 @@ export const customMatchers = {
       pass,
     };
   },
-  
+
   toHaveFocusRing(received: HTMLElement) {
     received.focus();
     const style = window.getComputedStyle(received, ':focus-visible');
     const hasOutline = style.outline && style.outline !== 'none';
     const hasBoxShadow = style.boxShadow && style.boxShadow !== 'none';
-    
+
     const pass = hasOutline || hasBoxShadow;
-    
+
     return {
       message: () =>
         pass
@@ -186,7 +195,7 @@ export const testData = {
     'data-testid': 'test-component',
     ...overrides,
   }),
-  
+
   // Generate accessibility props
   generateA11yProps: (overrides: Record<string, any> = {}) => ({
     'aria-label': 'Test component',
@@ -194,7 +203,7 @@ export const testData = {
     tabIndex: 0,
     ...overrides,
   }),
-  
+
   // Generate theme props
   generateThemeProps: (theme: 'light' | 'dark' = 'light') => ({
     'data-theme': theme,
@@ -205,20 +214,17 @@ export const testData = {
 // Component testing utilities
 export class ComponentTester {
   private component: HTMLElement;
-  
+
   constructor(component: HTMLElement) {
     this.component = component;
   }
-  
+
   // Test if component has proper glass styling
   hasGlassEffect(): boolean {
     const style = window.getComputedStyle(this.component);
-    return (
-      style.backdropFilter !== 'none' &&
-      style.background.includes('rgba')
-    );
+    return style.backdropFilter !== 'none' && style.background.includes('rgba');
   }
-  
+
   // Test if component is accessible
   isAccessible(): boolean {
     return (
@@ -230,13 +236,13 @@ export class ComponentTester {
       )
     );
   }
-  
+
   // Test if component has focus management
   hasFocusManagement(): boolean {
     this.component.focus();
     return document.activeElement === this.component;
   }
-  
+
   // Test if component is responsive
   isResponsive(): boolean {
     const style = window.getComputedStyle(this.component);
@@ -246,7 +252,7 @@ export class ComponentTester {
       this.component.classList.toString().includes('responsive')
     );
   }
-  
+
   // Run all tests
   runAllTests(): {
     glassEffect: boolean;

@@ -1,8 +1,8 @@
-import { forwardRef, useRef } from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/glass-utils";
-import { useLiquidGlass, useContentAwareGlass } from "@/hooks/use-liquid-glass";
-import { useMagneticHover } from "@/lib/glass-physics";
+import { forwardRef, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/glass-utils';
+import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
+import { useMagneticHover } from '@/lib/glass-physics';
 
 export interface FeatureItem {
   icon: React.ReactNode;
@@ -17,19 +17,23 @@ export interface FeatureItem {
   badge?: string;
 }
 
-export interface GlassFeatureShowcaseProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface GlassFeatureShowcaseProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   subtitle?: string;
   description?: string;
   features: FeatureItem[];
-  layout?: "grid" | "masonry" | "carousel" | "stacked";
+  layout?: 'grid' | 'masonry' | 'carousel' | 'stacked';
   columns?: 1 | 2 | 3 | 4;
-  variant?: "default" | "minimal" | "cards" | "floating";
+  variant?: 'default' | 'minimal' | 'cards' | 'floating';
   enableMagnetic?: boolean;
   enableParallax?: boolean;
 }
 
-const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProps>(
+const GlassFeatureShowcase = forwardRef<
+  HTMLDivElement,
+  GlassFeatureShowcaseProps
+>(
   (
     {
       className,
@@ -37,9 +41,9 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
       subtitle,
       description,
       features,
-      layout = "grid",
+      layout = 'grid',
       columns = 3,
-      variant = "default",
+      variant = 'default',
       enableMagnetic = false,
       enableParallax = true,
       children,
@@ -52,10 +56,10 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
     const contentAnalysis = useContentAwareGlass(contentRef);
 
     const gridClasses = {
-      1: "grid-cols-1",
-      2: "grid-cols-1 md:grid-cols-2",
-      3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-      4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+      1: 'grid-cols-1',
+      2: 'grid-cols-1 md:grid-cols-2',
+      3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+      4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
     };
 
     const containerVariants = {
@@ -64,9 +68,9 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
         opacity: 1,
         transition: {
           duration: 0.6,
-          staggerChildren: 0.1
-        }
-      }
+          staggerChildren: 0.1,
+        },
+      },
     };
 
     const itemVariants = {
@@ -76,18 +80,27 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
         y: 0,
         transition: {
           duration: 0.5,
-          ease: [0.4, 0, 0.2, 1]
-        }
-      }
+          ease: [0.4, 0, 0.2, 1],
+        },
+      },
     };
 
-    const FeatureCard = ({ feature, index }: { feature: FeatureItem; index: number }) => {
+    const FeatureCard = ({
+      feature,
+      index,
+    }: {
+      feature: FeatureItem;
+      index: number;
+    }) => {
       const cardRef = useRef<HTMLDivElement>(null);
-      const { elementRef: magneticRef, transform } = useMagneticHover(0.15, 100);
+      const { elementRef: magneticRef, transform } = useMagneticHover(
+        0.15,
+        100
+      );
 
       return (
         <motion.div
-          ref={(node) => {
+          ref={node => {
             cardRef.current = node;
             if (enableMagnetic && magneticRef) {
               magneticRef.current = node;
@@ -95,18 +108,23 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
           }}
           variants={itemVariants}
           className={cn(
-            "group relative",
-            variant === "cards" && "liquid-glass liquid-glass-interactive liquid-glass-depth-2 p-6 rounded-2xl",
-            variant === "floating" && "liquid-glass liquid-glass-interactive liquid-glass-depth-3 p-8 rounded-3xl liquid-glass-glow",
-            variant === "minimal" && "p-6",
-            variant === "default" && "liquid-glass liquid-glass-interactive p-6 rounded-xl",
-            specularHighlights && "liquid-glass-specular liquid-glass-shimmer",
-            enableMagnetic && "liquid-glass-magnetic"
+            'group relative',
+            variant === 'cards' &&
+              'liquid-glass liquid-glass-interactive liquid-glass-depth-2 p-6 rounded-2xl',
+            variant === 'floating' &&
+              'liquid-glass liquid-glass-interactive liquid-glass-depth-3 p-8 rounded-3xl liquid-glass-glow',
+            variant === 'minimal' && 'p-6',
+            variant === 'default' &&
+              'liquid-glass liquid-glass-interactive p-6 rounded-xl',
+            specularHighlights && 'liquid-glass-specular liquid-glass-shimmer',
+            enableMagnetic && 'liquid-glass-magnetic'
           )}
           style={{
-            transform: enableMagnetic ? transform : undefined
+            transform: enableMagnetic ? transform : undefined,
           }}
-          whileHover={variant === "floating" ? { y: -8, scale: 1.02 } : { y: -4 }}
+          whileHover={
+            variant === 'floating' ? { y: -8, scale: 1.02 } : { y: -4 }
+          }
           transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
         >
           {/* Feature Image */}
@@ -126,23 +144,27 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
           )}
 
           {/* Icon */}
-          <div className={cn(
-            "flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110",
-            variant === "floating" ? "w-16 h-16" : "w-12 h-12",
-            "liquid-glass liquid-glass-specular rounded-2xl"
-          )}>
+          <div
+            className={cn(
+              'flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110',
+              variant === 'floating' ? 'w-16 h-16' : 'w-12 h-12',
+              'liquid-glass liquid-glass-specular rounded-2xl'
+            )}
+          >
             {feature.icon}
           </div>
 
           {/* Content */}
           <div className="space-y-3">
-            <h3 className={cn(
-              "font-semibold text-[var(--text-primary)] transition-colors duration-300",
-              variant === "floating" ? "text-xl" : "text-lg"
-            )}>
+            <h3
+              className={cn(
+                'font-semibold text-[var(--text-primary)] transition-colors duration-300',
+                variant === 'floating' ? 'text-xl' : 'text-lg'
+              )}
+            >
               {feature.title}
             </h3>
-            
+
             <p className="text-[var(--text-secondary)] leading-relaxed">
               {feature.description}
             </p>
@@ -155,8 +177,18 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
                     className="inline-flex items-center text-sm font-medium text-[var(--glass-primary)] hover:text-[var(--glass-primary-hover)] transition-colors duration-200"
                   >
                     {feature.link.label}
-                    <svg className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </a>
                 ) : (
@@ -165,8 +197,18 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
                     className="inline-flex items-center text-sm font-medium text-[var(--glass-primary)] hover:text-[var(--glass-primary-hover)] transition-colors duration-200"
                   >
                     {feature.link.label}
-                    <svg className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </button>
                 )}
@@ -182,7 +224,7 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
 
     return (
       <div
-        ref={(node) => {
+        ref={node => {
           contentRef.current = node;
           if (typeof ref === 'function') {
             ref(node);
@@ -190,10 +232,7 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
             ref.current = node;
           }
         }}
-        className={cn(
-          "relative py-16 px-6 md:py-24 md:px-8",
-          className
-        )}
+        className={cn('relative py-16 px-6 md:py-24 md:px-8', className)}
         {...props}
       >
         {/* Background Elements */}
@@ -202,18 +241,19 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
             <motion.div
               className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full"
               style={{
-                background: "radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)",
-                filter: "blur(20px)"
+                background:
+                  'radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)',
+                filter: 'blur(20px)',
               }}
               animate={{
                 x: [0, 50, 0],
                 y: [0, -30, 0],
-                scale: [1, 1.1, 1]
+                scale: [1, 1.1, 1],
               }}
               transition={{
                 duration: 6,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: 'easeInOut',
               }}
             />
           </div>
@@ -227,7 +267,7 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
             >
               {subtitle && (
                 <motion.div
@@ -237,7 +277,7 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
                   {subtitle}
                 </motion.div>
               )}
-              
+
               {title && (
                 <motion.h2
                   variants={itemVariants}
@@ -246,7 +286,7 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
                   {title}
                 </motion.h2>
               )}
-              
+
               {description && (
                 <motion.p
                   variants={itemVariants}
@@ -261,15 +301,16 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
           {/* Features Grid */}
           <motion.div
             className={cn(
-              "grid gap-8",
-              layout === "grid" && gridClasses[columns],
-              layout === "masonry" && "columns-1 md:columns-2 lg:columns-3 space-y-8",
-              layout === "stacked" && "space-y-8"
+              'grid gap-8',
+              layout === 'grid' && gridClasses[columns],
+              layout === 'masonry' &&
+                'columns-1 md:columns-2 lg:columns-3 space-y-8',
+              layout === 'stacked' && 'space-y-8'
             )}
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: '-50px' }}
           >
             {features.map((feature, index) => (
               <FeatureCard key={index} feature={feature} index={index} />
@@ -296,25 +337,25 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
             className="absolute top-1/3 left-8 w-2 h-2 liquid-glass rounded-full"
             animate={{
               y: [0, -15, 0],
-              opacity: [0.2, 0.6, 0.2]
+              opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           />
           <motion.div
             className="absolute bottom-1/4 right-12 w-3 h-3 liquid-glass rounded-full"
             animate={{
               y: [0, 10, 0],
-              opacity: [0.3, 0.7, 0.3]
+              opacity: [0.3, 0.7, 0.3],
             }}
             transition={{
               duration: 4,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1
+              ease: 'easeInOut',
+              delay: 1,
             }}
           />
         </div>
@@ -323,6 +364,6 @@ const GlassFeatureShowcase = forwardRef<HTMLDivElement, GlassFeatureShowcaseProp
   }
 );
 
-GlassFeatureShowcase.displayName = "GlassFeatureShowcase";
+GlassFeatureShowcase.displayName = 'GlassFeatureShowcase';
 
 export { GlassFeatureShowcase };

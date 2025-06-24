@@ -1,4 +1,4 @@
-import { cn } from "@/lib/glass-utils";
+import { cn } from '@/lib/glass-utils';
 
 export interface GlassFooterLink {
   label: string;
@@ -13,7 +13,7 @@ export function GlassFooter({ links, className, ...props }: GlassFooterProps) {
   return (
     <footer
       className={cn(
-        "glass-effect border-t border-[var(--glass-border)] mt-12",
+        'glass-effect border-t border-[var(--glass-border)] mt-12',
         className
       )}
       {...props}
@@ -22,7 +22,7 @@ export function GlassFooter({ links, className, ...props }: GlassFooterProps) {
         <span>&copy; {new Date().getFullYear()} Liquid Glass UI</span>
         {links && (
           <nav className="flex flex-wrap gap-4">
-            {links.map((link) => (
+            {links.map(link => (
               <a
                 key={link.href}
                 href={link.href}

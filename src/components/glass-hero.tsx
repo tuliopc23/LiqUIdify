@@ -1,9 +1,9 @@
-import { forwardRef, useRef } from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/glass-utils";
-import { useLiquidGlass, useContentAwareGlass } from "@/hooks/use-liquid-glass";
-import { useMagneticHover } from "@/lib/glass-physics";
-import { GlassButton } from "./glass-button";
+import { forwardRef, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/glass-utils';
+import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
+import { useMagneticHover } from '@/lib/glass-physics';
+import { GlassButton } from './glass-button';
 
 export interface GlassHeroProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -21,8 +21,8 @@ export interface GlassHeroProps extends React.HTMLAttributes<HTMLDivElement> {
   };
   backgroundImage?: string;
   backgroundVideo?: string;
-  variant?: "default" | "centered" | "split" | "minimal";
-  size?: "sm" | "md" | "lg" | "xl";
+  variant?: 'default' | 'centered' | 'split' | 'minimal';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   enableParallax?: boolean;
   enableMagnetic?: boolean;
 }
@@ -38,8 +38,8 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
       secondaryAction,
       backgroundImage,
       backgroundVideo,
-      variant = "default",
-      size = "lg",
+      variant = 'default',
+      size = 'lg',
       enableParallax = true,
       enableMagnetic = false,
       children,
@@ -53,24 +53,24 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
     const { elementRef: magneticRef, transform } = useMagneticHover(0.2, 200);
 
     const sizeClasses = {
-      sm: "min-h-[60vh] py-16 px-6",
-      md: "min-h-[70vh] py-20 px-8", 
-      lg: "min-h-[80vh] py-24 px-8",
-      xl: "min-h-[90vh] py-32 px-12"
+      sm: 'min-h-[60vh] py-16 px-6',
+      md: 'min-h-[70vh] py-20 px-8',
+      lg: 'min-h-[80vh] py-24 px-8',
+      xl: 'min-h-[90vh] py-32 px-12',
     };
 
     const variantClasses = {
-      default: "text-center",
-      centered: "text-center items-center justify-center",
-      split: "text-left lg:text-left items-center",
-      minimal: "text-center items-center justify-center py-16"
+      default: 'text-center',
+      centered: 'text-center items-center justify-center',
+      split: 'text-left lg:text-left items-center',
+      minimal: 'text-center items-center justify-center py-16',
     };
 
     const titleSizes = {
-      sm: "text-4xl md:text-5xl",
-      md: "text-5xl md:text-6xl",
-      lg: "text-6xl md:text-7xl lg:text-8xl",
-      xl: "text-7xl md:text-8xl lg:text-9xl"
+      sm: 'text-4xl md:text-5xl',
+      md: 'text-5xl md:text-6xl',
+      lg: 'text-6xl md:text-7xl lg:text-8xl',
+      xl: 'text-7xl md:text-8xl lg:text-9xl',
     };
 
     const containerVariants = {
@@ -79,9 +79,9 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         opacity: 1,
         transition: {
           duration: 0.8,
-          staggerChildren: 0.2
-        }
-      }
+          staggerChildren: 0.2,
+        },
+      },
     };
 
     const itemVariants = {
@@ -91,25 +91,27 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         y: 0,
         transition: {
           duration: 0.6,
-          ease: [0.4, 0, 0.2, 1]
-        }
-      }
+          ease: [0.4, 0, 0.2, 1],
+        },
+      },
     };
 
-    const parallaxVariants = enableParallax ? {
-      initial: { y: 0 },
-      animate: { y: -20 },
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        repeatType: "reverse" as const,
-        ease: "easeInOut"
-      }
-    } : {};
+    const parallaxVariants = enableParallax
+      ? {
+          initial: { y: 0 },
+          animate: { y: -20 },
+          transition: {
+            duration: 2,
+            repeat: Infinity,
+            repeatType: 'reverse' as const,
+            ease: 'easeInOut',
+          },
+        }
+      : {};
 
     return (
       <div
-        ref={(node) => {
+        ref={node => {
           contentRef.current = node;
           if (enableMagnetic && magneticRef) {
             magneticRef.current = node;
@@ -121,20 +123,23 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           }
         }}
         className={cn(
-          "relative overflow-hidden",
-          "liquid-glass-adaptive liquid-glass-depth-2",
-          specularHighlights && "liquid-glass-specular",
+          'relative overflow-hidden',
+          'liquid-glass-adaptive liquid-glass-depth-2',
+          specularHighlights && 'liquid-glass-specular',
           sizeClasses[size],
           className
         )}
         style={{
           transform: enableMagnetic ? transform : undefined,
-          backgroundImage: backgroundImage ? `url(${backgroundImage})` : 
-            "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 20%, #4a4a4a 40%, #6b7280 60%, #9ca3af 80%, #e5e7eb 100%)",
-          backgroundSize: backgroundImage ? "cover" : "400% 400%",
-          backgroundPosition: "center",
-          backgroundAttachment: enableParallax ? "fixed" : "scroll",
-          animation: !backgroundImage ? "gradientShift 15s ease infinite" : undefined
+          backgroundImage: backgroundImage
+            ? `url(${backgroundImage})`
+            : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 20%, #4a4a4a 40%, #6b7280 60%, #9ca3af 80%, #e5e7eb 100%)',
+          backgroundSize: backgroundImage ? 'cover' : '400% 400%',
+          backgroundPosition: 'center',
+          backgroundAttachment: enableParallax ? 'fixed' : 'scroll',
+          animation: !backgroundImage
+            ? 'gradientShift 15s ease infinite'
+            : undefined,
         }}
         {...props}
       >
@@ -159,54 +164,57 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           <motion.div
             className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
             style={{
-              background: "radial-gradient(circle, rgba(156, 163, 175, 0.08) 0%, transparent 70%)",
-              filter: "blur(60px)"
+              background:
+                'radial-gradient(circle, rgba(156, 163, 175, 0.08) 0%, transparent 70%)',
+              filter: 'blur(60px)',
             }}
             animate={{
               x: [0, 80, 0],
               y: [0, -40, 0],
-              scale: [1, 1.1, 1]
+              scale: [1, 1.1, 1],
             }}
             transition={{
               duration: 12,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           />
           <motion.div
             className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full"
             style={{
-              background: "radial-gradient(circle, rgba(107, 114, 128, 0.06) 0%, transparent 70%)",
-              filter: "blur(50px)"
+              background:
+                'radial-gradient(circle, rgba(107, 114, 128, 0.06) 0%, transparent 70%)',
+              filter: 'blur(50px)',
             }}
             animate={{
               x: [0, -60, 0],
               y: [0, 40, 0],
-              scale: [1, 0.9, 1]
+              scale: [1, 0.9, 1],
             }}
             transition={{
               duration: 14,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: 3
+              ease: 'easeInOut',
+              delay: 3,
             }}
           />
           <motion.div
             className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full"
             style={{
-              background: "radial-gradient(circle, rgba(229, 231, 235, 0.04) 0%, transparent 70%)",
-              filter: "blur(40px)"
+              background:
+                'radial-gradient(circle, rgba(229, 231, 235, 0.04) 0%, transparent 70%)',
+              filter: 'blur(40px)',
             }}
             animate={{
               x: [0, 50, 0],
               y: [0, -30, 0],
-              scale: [1, 1.15, 1]
+              scale: [1, 1.15, 1],
             }}
             transition={{
               duration: 16,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: 5
+              ease: 'easeInOut',
+              delay: 5,
             }}
           />
         </div>
@@ -214,7 +222,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         {/* Content Container */}
         <motion.div
           className={cn(
-            "relative z-10 flex flex-col h-full max-w-7xl mx-auto",
+            'relative z-10 flex flex-col h-full max-w-7xl mx-auto',
             variantClasses[variant]
           )}
           variants={containerVariants}
@@ -222,7 +230,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           animate="visible"
           {...parallaxVariants}
         >
-          {variant === "split" ? (
+          {variant === 'split' ? (
             <div className="grid lg:grid-cols-2 gap-12 items-center h-full">
               <div className="space-y-8">
                 {subtitle && (
@@ -233,11 +241,11 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                     {subtitle}
                   </motion.div>
                 )}
-                
+
                 <motion.h1
                   variants={itemVariants}
                   className={cn(
-                    "font-bold tracking-tight text-[var(--text-primary)]",
+                    'font-bold tracking-tight text-[var(--text-primary)]',
                     titleSizes[size]
                   )}
                 >
@@ -283,10 +291,8 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                   </motion.div>
                 )}
               </div>
-              
-              <div className="relative">
-                {children}
-              </div>
+
+              <div className="relative">{children}</div>
             </div>
           ) : (
             <div className="flex flex-col justify-center items-center h-full space-y-8 text-center">
@@ -298,11 +304,11 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                   {subtitle}
                 </motion.div>
               )}
-              
+
               <motion.h1
                 variants={itemVariants}
                 className={cn(
-                  "font-bold tracking-tight text-[var(--text-primary)] max-w-5xl",
+                  'font-bold tracking-tight text-[var(--text-primary)] max-w-5xl',
                   titleSizes[size]
                 )}
               >
@@ -349,10 +355,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               )}
 
               {children && (
-                <motion.div
-                  variants={itemVariants}
-                  className="pt-8"
-                >
+                <motion.div variants={itemVariants} className="pt-8">
                   {children}
                 </motion.div>
               )}
@@ -366,25 +369,25 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
             className="absolute top-20 right-20 w-4 h-4 liquid-glass rounded-full"
             animate={{
               y: [0, -20, 0],
-              opacity: [0.3, 0.7, 0.3]
+              opacity: [0.3, 0.7, 0.3],
             }}
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           />
           <motion.div
             className="absolute bottom-32 left-16 w-6 h-6 liquid-glass rounded-full"
             animate={{
               y: [0, 15, 0],
-              opacity: [0.2, 0.5, 0.2]
+              opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
               duration: 4,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1.5
+              ease: 'easeInOut',
+              delay: 1.5,
             }}
           />
           <motion.div
@@ -392,13 +395,13 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
             animate={{
               y: [0, -10, 0],
               x: [0, 5, 0],
-              opacity: [0.4, 0.8, 0.4]
+              opacity: [0.4, 0.8, 0.4],
             }}
             transition={{
               duration: 2.5,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.8
+              ease: 'easeInOut',
+              delay: 0.8,
             }}
           />
         </div>
@@ -407,6 +410,6 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
   }
 );
 
-GlassHero.displayName = "GlassHero";
+GlassHero.displayName = 'GlassHero';
 
 export { GlassHero };

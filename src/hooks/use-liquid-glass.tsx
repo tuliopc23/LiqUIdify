@@ -1,5 +1,12 @@
-import { createContext, useContext, useEffect, useRef, useState, useCallback } from "react";
-import { liquidGlassTokens } from "../lib/liquid-glass-tokens";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
+import { liquidGlassTokens } from '../lib/liquid-glass-tokens';
 
 export interface LiquidGlassConfig {
   color?: string; // rgb string e.g. "255,255,255"
@@ -19,7 +26,7 @@ export interface ContentAnalysis {
 }
 
 const defaultConfig: Required<LiquidGlassConfig> = {
-  color: "255,255,255",
+  color: '255,255,255',
   blur: 24,
   saturation: 180,
   opacity: 0.75,
@@ -28,10 +35,12 @@ const defaultConfig: Required<LiquidGlassConfig> = {
   magneticHover: false,
 };
 
-const LiquidGlassContext = createContext<LiquidGlassConfig & {
-  contentAnalysis?: ContentAnalysis;
-  updateGlassStyle: (analysis: ContentAnalysis) => void;
-}>(defaultConfig as any);
+const LiquidGlassContext = createContext<
+  LiquidGlassConfig & {
+    contentAnalysis?: ContentAnalysis;
+    updateGlassStyle: (analysis: ContentAnalysis) => void;
+  }
+>(defaultConfig as any);
 
 export function LiquidGlassProvider({
   children,
@@ -43,61 +52,81 @@ export function LiquidGlassProvider({
   const merged = { ...defaultConfig, ...config };
   const [contentAnalysis, setContentAnalysis] = useState<ContentAnalysis>();
 
-  const updateGlassStyle = useCallback((analysis: ContentAnalysis) => {
-    setContentAnalysis(analysis);
-    
-    if (!merged.adaptToContent) return;
+  const updateGlassStyle = useCallback(
+    (analysis: ContentAnalysis) => {
+      setContentAnalysis(analysis);
 
-    const root = document.documentElement;
-    
-    // Adapt glass properties based on content analysis
-    const adaptedOpacity = merged.opacity * (1 + (analysis.contrast - 0.5) * 0.3);
-    const adaptedBlur = merged.blur * (1 + (1 - analysis.brightness) * 0.2);
-    const adaptedSaturation = merged.saturation * (1 + analysis.brightness * 0.1);
+      if (!merged.adaptToContent) return;
 
-    // Set adaptive properties
-    root.style.setProperty("--glass-opacity-adaptive", String(Math.max(0.1, Math.min(0.9, adaptedOpacity))));
-    root.style.setProperty("--glass-blur-adaptive", `${Math.max(8, Math.min(48, adaptedBlur))}px`);
-    root.style.setProperty("--glass-saturation-adaptive", `${Math.max(120, Math.min(250, adaptedSaturation))}%`);
-    
-    // Adapt color based on dominant hue
-    const hue = analysis.dominantHue;
-    const adaptedColor = `hsl(${hue}, 20%, ${analysis.brightness > 0.5 ? 95 : 15})`;
-    root.style.setProperty("--glass-color-adaptive", adaptedColor);
-  }, [merged]);
+      const root = document.documentElement;
+
+      // Adapt glass properties based on content analysis
+      const adaptedOpacity =
+        merged.opacity * (1 + (analysis.contrast - 0.5) * 0.3);
+      const adaptedBlur = merged.blur * (1 + (1 - analysis.brightness) * 0.2);
+      const adaptedSaturation =
+        merged.saturation * (1 + analysis.brightness * 0.1);
+
+      // Set adaptive properties
+      root.style.setProperty(
+        '--glass-opacity-adaptive',
+        String(Math.max(0.1, Math.min(0.9, adaptedOpacity)))
+      );
+      root.style.setProperty(
+        '--glass-blur-adaptive',
+        `${Math.max(8, Math.min(48, adaptedBlur))}px`
+      );
+      root.style.setProperty(
+        '--glass-saturation-adaptive',
+        `${Math.max(120, Math.min(250, adaptedSaturation))}%`
+      );
+
+      // Adapt color based on dominant hue
+      const hue = analysis.dominantHue;
+      const adaptedColor = `hsl(${hue}, 20%, ${analysis.brightness > 0.5 ? 95 : 15})`;
+      root.style.setProperty('--glass-color-adaptive', adaptedColor);
+    },
+    [merged]
+  );
 
   useEffect(() => {
     const root = document.documentElement;
-    
+
     // Set base properties
-    root.style.setProperty("--glass-color", merged.color);
-    root.style.setProperty("--glass-blur", `${merged.blur}px`);
-    root.style.setProperty("--glass-saturation", `${merged.saturation}%`);
-    root.style.setProperty("--glass-opacity", String(merged.opacity));
-    
+    root.style.setProperty('--glass-color', merged.color);
+    root.style.setProperty('--glass-blur', `${merged.blur}px`);
+    root.style.setProperty('--glass-saturation', `${merged.saturation}%`);
+    root.style.setProperty('--glass-opacity', String(merged.opacity));
+
     // Set liquid glass tokens
-    Object.entries(liquidGlassTokens.colors.glass.white).forEach(([key, value]) => {
-      root.style.setProperty(`--liquid-glass-${key}`, value as string);
-    });
-    
+    Object.entries(liquidGlassTokens.colors.glass.white).forEach(
+      ([key, value]) => {
+        root.style.setProperty(`--liquid-glass-${key}`, value as string);
+      }
+    );
+
     // Set shadow tokens
     Object.entries(liquidGlassTokens.shadows.glass).forEach(([key, value]) => {
       root.style.setProperty(`--liquid-shadow-${key}`, value as string);
     });
-    
+
     // Set timing tokens
-    Object.entries(liquidGlassTokens.animation.duration).forEach(([key, value]) => {
-      root.style.setProperty(`--liquid-timing-${key}`, value as string);
-    });
+    Object.entries(liquidGlassTokens.animation.duration).forEach(
+      ([key, value]) => {
+        root.style.setProperty(`--liquid-timing-${key}`, value as string);
+      }
+    );
 
     // Enable specular highlights if configured
     if (merged.specularHighlights) {
-      root.style.setProperty("--specular-enabled", "1");
+      root.style.setProperty('--specular-enabled', '1');
     }
   }, [merged]);
 
   return (
-    <LiquidGlassContext.Provider value={{ ...merged, contentAnalysis, updateGlassStyle }}>
+    <LiquidGlassContext.Provider
+      value={{ ...merged, contentAnalysis, updateGlassStyle }}
+    >
       {children}
     </LiquidGlassContext.Provider>
   );
@@ -106,7 +135,9 @@ export function LiquidGlassProvider({
 export const useLiquidGlass = () => useContext(LiquidGlassContext);
 
 // Content-aware glass hook
-export const useContentAwareGlass = (contentRef: React.RefObject<HTMLElement>) => {
+export const useContentAwareGlass = (
+  contentRef: React.RefObject<HTMLElement>
+) => {
   const { updateGlassStyle, adaptToContent } = useLiquidGlass();
   const analysisRef = useRef<ContentAnalysis>();
 
@@ -117,7 +148,7 @@ export const useContentAwareGlass = (contentRef: React.RefObject<HTMLElement>) =
       const element = contentRef.current;
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      
+
       if (!ctx) return;
 
       // Create a temporary canvas to analyze the content
@@ -128,11 +159,14 @@ export const useContentAwareGlass = (contentRef: React.RefObject<HTMLElement>) =
       // Capture element as image data (simplified approach)
       const computedStyle = getComputedStyle(element);
       const bgColor = computedStyle.backgroundColor;
-      
+
       // Parse background color and analyze
       const analysis = analyzeColor(bgColor);
-      
-      if (analysis && JSON.stringify(analysis) !== JSON.stringify(analysisRef.current)) {
+
+      if (
+        analysis &&
+        JSON.stringify(analysis) !== JSON.stringify(analysisRef.current)
+      ) {
         analysisRef.current = analysis;
         updateGlassStyle(analysis);
       }
@@ -152,7 +186,7 @@ export const useContentAwareGlass = (contentRef: React.RefObject<HTMLElement>) =
         attributes: true,
         childList: true,
         subtree: true,
-        attributeFilter: ['style', 'class']
+        attributeFilter: ['style', 'class'],
       });
       resizeObserver.observe(contentRef.current);
     }
@@ -194,7 +228,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
     averageColor: `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`,
     brightness,
     contrast,
-    dominantHue: hue
+    dominantHue: hue,
   };
 }
 
@@ -217,4 +251,3 @@ function rgbToHue(r: number, g: number, b: number): number {
 
   return Math.round(hue * 60);
 }
-

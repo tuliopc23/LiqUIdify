@@ -7,7 +7,12 @@ export interface Guide {
   id: string;
   title: string;
   description: string;
-  category: 'getting-started' | 'customization' | 'advanced' | 'best-practices' | 'migration';
+  category:
+    | 'getting-started'
+    | 'customization'
+    | 'advanced'
+    | 'best-practices'
+    | 'migration';
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   estimatedTime: string;
   prerequisites: string[];
@@ -39,11 +44,16 @@ export const guides: Guide[] = [
   {
     id: 'installation-setup',
     title: 'Installation and Setup',
-    description: 'Complete guide to installing and setting up Glass UI in your project',
+    description:
+      'Complete guide to installing and setting up Glass UI in your project',
     category: 'getting-started',
     difficulty: 'beginner',
     estimatedTime: '15 minutes',
-    prerequisites: ['Basic React knowledge', 'Node.js installed', 'Package manager (npm/yarn/pnpm)'],
+    prerequisites: [
+      'Basic React knowledge',
+      'Node.js installed',
+      'Package manager (npm/yarn/pnpm)',
+    ],
     lastUpdated: '2024-01-15',
     relatedGuides: ['first-component', 'theming-guide'],
     sections: [
@@ -78,7 +88,7 @@ npx tailwindcss init -p`,
           },
         ],
       },
-      
+
       {
         id: 'tailwind-config',
         title: 'Tailwind CSS Configuration',
@@ -172,7 +182,7 @@ module.exports = {
           'Dark mode is configured using the "class" strategy for better control',
         ],
       },
-      
+
       {
         id: 'css-setup',
         title: 'CSS Setup',
@@ -277,7 +287,7 @@ module.exports = {
           'Dark mode variants are automatically applied when the dark class is present',
         ],
       },
-      
+
       {
         id: 'provider-setup',
         title: 'Provider Setup',
@@ -360,11 +370,12 @@ export default function RootLayout({
       },
     ],
   },
-  
+
   {
     id: 'first-component',
     title: 'Creating Your First Component',
-    description: 'Learn how to create and customize your first Glass UI component',
+    description:
+      'Learn how to create and customize your first Glass UI component',
     category: 'getting-started',
     difficulty: 'beginner',
     estimatedTime: '10 minutes',
@@ -414,7 +425,7 @@ export function ButtonWithIcon() {
           'Add custom classes with the className prop for additional styling',
         ],
       },
-      
+
       {
         id: 'glass-card',
         title: 'Glass Card Component',
@@ -474,15 +485,19 @@ export function InteractiveCard() {
       },
     ],
   },
-  
+
   {
     id: 'theming-guide',
     title: 'Theming and Customization',
-    description: 'Complete guide to customizing Glass UI themes and creating your own design system',
+    description:
+      'Complete guide to customizing Glass UI themes and creating your own design system',
     category: 'customization',
     difficulty: 'intermediate',
     estimatedTime: '30 minutes',
-    prerequisites: ['Basic CSS knowledge', 'Understanding of CSS custom properties'],
+    prerequisites: [
+      'Basic CSS knowledge',
+      'Understanding of CSS custom properties',
+    ],
     lastUpdated: '2024-01-15',
     relatedGuides: ['design-tokens', 'component-variants'],
     sections: [
@@ -534,7 +549,7 @@ export const customTheme = createTheme({
           },
         ],
       },
-      
+
       {
         id: 'applying-themes',
         title: 'Applying Custom Themes',
@@ -595,15 +610,19 @@ function App() {
       },
     ],
   },
-  
+
   {
     id: 'accessibility-guide',
     title: 'Accessibility Best Practices',
-    description: 'Comprehensive guide to building accessible interfaces with Glass UI',
+    description:
+      'Comprehensive guide to building accessible interfaces with Glass UI',
     category: 'best-practices',
     difficulty: 'intermediate',
     estimatedTime: '45 minutes',
-    prerequisites: ['Basic understanding of web accessibility', 'WCAG guidelines knowledge'],
+    prerequisites: [
+      'Basic understanding of web accessibility',
+      'WCAG guidelines knowledge',
+    ],
     lastUpdated: '2024-01-15',
     relatedGuides: ['testing-guide', 'component-patterns'],
     sections: [
@@ -643,7 +662,7 @@ export function AccessibleGlassCard() {
           'Consider providing a high contrast mode for users who need it',
         ],
       },
-      
+
       {
         id: 'keyboard-navigation',
         title: 'Keyboard Navigation',
@@ -709,41 +728,47 @@ export function AccessibleButtonGroup() {
 // Guide utilities
 export class GuideManager {
   private guides = new Map<string, Guide>();
-  
+
   constructor() {
     guides.forEach(guide => {
       this.guides.set(guide.id, guide);
     });
   }
-  
+
   getGuide(id: string): Guide | undefined {
     return this.guides.get(id);
   }
-  
+
   getGuidesByCategory(category: Guide['category']): Guide[] {
-    return Array.from(this.guides.values()).filter(guide => guide.category === category);
-  }
-  
-  getGuidesByDifficulty(difficulty: Guide['difficulty']): Guide[] {
-    return Array.from(this.guides.values()).filter(guide => guide.difficulty === difficulty);
-  }
-  
-  searchGuides(query: string): Guide[] {
-    const lowercaseQuery = query.toLowerCase();
-    return Array.from(this.guides.values()).filter(guide =>
-      guide.title.toLowerCase().includes(lowercaseQuery) ||
-      guide.description.toLowerCase().includes(lowercaseQuery) ||
-      guide.sections.some(section => 
-        section.title.toLowerCase().includes(lowercaseQuery) ||
-        section.content.toLowerCase().includes(lowercaseQuery)
-      )
+    return Array.from(this.guides.values()).filter(
+      guide => guide.category === category
     );
   }
-  
+
+  getGuidesByDifficulty(difficulty: Guide['difficulty']): Guide[] {
+    return Array.from(this.guides.values()).filter(
+      guide => guide.difficulty === difficulty
+    );
+  }
+
+  searchGuides(query: string): Guide[] {
+    const lowercaseQuery = query.toLowerCase();
+    return Array.from(this.guides.values()).filter(
+      guide =>
+        guide.title.toLowerCase().includes(lowercaseQuery) ||
+        guide.description.toLowerCase().includes(lowercaseQuery) ||
+        guide.sections.some(
+          section =>
+            section.title.toLowerCase().includes(lowercaseQuery) ||
+            section.content.toLowerCase().includes(lowercaseQuery)
+        )
+    );
+  }
+
   getRelatedGuides(guideId: string): Guide[] {
     const guide = this.getGuide(guideId);
     if (!guide) return [];
-    
+
     return guide.relatedGuides
       .map(id => this.getGuide(id))
       .filter(Boolean) as Guide[];
@@ -757,6 +782,12 @@ export const guideManager = new GuideManager();
 export const guideUtils = {
   manager: guideManager,
   guides,
-  categories: ['getting-started', 'customization', 'advanced', 'best-practices', 'migration'] as const,
+  categories: [
+    'getting-started',
+    'customization',
+    'advanced',
+    'best-practices',
+    'migration',
+  ] as const,
   difficulties: ['beginner', 'intermediate', 'advanced'] as const,
 };

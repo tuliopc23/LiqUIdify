@@ -1,4 +1,4 @@
-import { cn } from "@/lib/glass-utils";
+import { cn } from '@/lib/glass-utils';
 
 export interface GlassHeaderProps {
   title: React.ReactNode;
@@ -11,12 +11,12 @@ export function GlassHeader({
   title,
   subtitle,
   actions,
-  className
+  className,
 }: GlassHeaderProps) {
   return (
     <header
       className={cn(
-        "glass-effect-elevated border-b border-[var(--glass-border)] py-6 backdrop-blur-lg",
+        'glass-effect-elevated border-b border-[var(--glass-border)] py-6 backdrop-blur-lg',
         className
       )}
     >
@@ -25,7 +25,9 @@ export function GlassHeader({
           <h1 className="text-2xl font-semibold text-primary">{title}</h1>
           {subtitle && <p className="text-secondary mt-1">{subtitle}</p>}
         </div>
-        {actions && <div className="mt-4 md:mt-0 flex items-center gap-2">{actions}</div>}
+        {actions && (
+          <div className="mt-4 md:mt-0 flex items-center gap-2">{actions}</div>
+        )}
       </div>
     </header>
   );

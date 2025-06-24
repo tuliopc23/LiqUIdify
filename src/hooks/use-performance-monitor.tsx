@@ -17,7 +17,7 @@ export function usePerformanceMonitor({
   componentName,
   trackMemory = false,
   threshold = 16, // 60fps = 16.67ms per frame
-  onSlowRender
+  onSlowRender,
 }: PerformanceMonitorOptions) {
   const renderStartTime = useRef<number>(0);
   const frameCount = useRef<number>(0);
@@ -25,7 +25,7 @@ export function usePerformanceMonitor({
 
   const startMonitoring = useCallback(() => {
     if (isMonitoring.current) return;
-    
+
     renderStartTime.current = performance.now();
     frameCount.current = 0;
     isMonitoring.current = true;
@@ -42,16 +42,19 @@ export function usePerformanceMonitor({
 
   const stopMonitoring = useCallback(() => {
     if (!isMonitoring.current) return;
-    
+
     const renderTime = performance.now() - renderStartTime.current;
     isMonitoring.current = false;
 
     const metrics: PerformanceMetrics = {
       renderTime,
       animationFrames: frameCount.current,
-      ...(trackMemory && 'memory' in performance ? {
-        memoryUsage: (performance as any).memory.usedJSHeapSize / 1024 / 1024 // MB
-      } : {})
+      ...(trackMemory && 'memory' in performance
+        ? {
+            memoryUsage:
+              (performance as any).memory.usedJSHeapSize / 1024 / 1024, // MB
+          }
+        : {}),
     };
 
     // Log performance data
@@ -59,8 +62,12 @@ export function usePerformanceMonitor({
       console.log(`🎭 Glass Performance [${componentName}]:`, {
         renderTime: `${renderTime.toFixed(2)}ms`,
         frames: frameCount.current,
-        ...(metrics.memoryUsage ? { memory: `${metrics.memoryUsage.toFixed(2)}MB` } : {}),
-        ...(renderTime > threshold ? { warning: '⚠️ Slow render detected!' } : {})
+        ...(metrics.memoryUsage
+          ? { memory: `${metrics.memoryUsage.toFixed(2)}MB` }
+          : {}),
+        ...(renderTime > threshold
+          ? { warning: '⚠️ Slow render detected!' }
+          : {}),
       });
     }
 
@@ -89,22 +96,27 @@ export function useGlassEffectPerformance(componentName: string) {
     componentName: `Glass-${componentName}`,
     trackMemory: true,
     threshold: 32, // More lenient for glass effects
-    onSlowRender: (metrics) => {
+    onSlowRender: metrics => {
       // Log warning but don't break functionality
       console.warn(`🐌 Slow glass effect in ${componentName}:`, metrics);
-    }
+    },
   });
 
-  const measureGlassInteraction = useCallback((interactionType: string) => {
-    const start = performance.now();
-    
-    return () => {
-      const duration = performance.now() - start;
-      if (process.env.NODE_ENV === 'development') {
-        console.log(`✨ Glass ${interactionType} [${componentName}]: ${duration.toFixed(2)}ms`);
-      }
-    };
-  }, [componentName]);
+  const measureGlassInteraction = useCallback(
+    (interactionType: string) => {
+      const start = performance.now();
+
+      return () => {
+        const duration = performance.now() - start;
+        if (process.env.NODE_ENV === 'development') {
+          console.log(
+            `✨ Glass ${interactionType} [${componentName}]: ${duration.toFixed(2)}ms`
+          );
+        }
+      };
+    },
+    [componentName]
+  );
 
   return { startMonitoring, stopMonitoring, measureGlassInteraction };
 }

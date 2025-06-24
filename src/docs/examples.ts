@@ -9,7 +9,13 @@ export interface InteractiveExample {
   id: string;
   title: string;
   description: string;
-  category: 'basic' | 'advanced' | 'patterns' | 'layouts' | 'forms' | 'navigation';
+  category:
+    | 'basic'
+    | 'advanced'
+    | 'patterns'
+    | 'layouts'
+    | 'forms'
+    | 'navigation';
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   tags: string[];
   code: {
@@ -57,7 +63,11 @@ export function BasicGlassButton() {
   );
 }`,
         },
-        preview: React.createElement('div', { className: 'p-4' }, 'Button Preview'),
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Button Preview'
+        ),
         designTokens: [
           'colors.glass.light.primary',
           'borderRadius.md',
@@ -77,7 +87,7 @@ export function BasicGlassButton() {
           ],
         },
       },
-      
+
       {
         id: 'glass-card',
         title: 'Glass Card Component',
@@ -101,7 +111,11 @@ export function GlassCard() {
   );
 }`,
         },
-        preview: React.createElement('div', { className: 'p-4' }, 'Card Preview'),
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Card Preview'
+        ),
         designTokens: [
           'colors.glass.light.primary',
           'borderRadius.lg',
@@ -110,7 +124,7 @@ export function GlassCard() {
         ],
         relatedExamples: ['elevated-card', 'interactive-card'],
       },
-      
+
       {
         id: 'glass-input',
         title: 'Glass Input Field',
@@ -136,7 +150,11 @@ export function GlassInput() {
   );
 }`,
         },
-        preview: React.createElement('div', { className: 'p-4' }, 'Input Preview'),
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Input Preview'
+        ),
         designTokens: [
           'colors.glass.light.primary',
           'borderRadius.base',
@@ -158,7 +176,7 @@ export function GlassInput() {
       },
     ],
   },
-  
+
   {
     name: 'Advanced Components',
     description: 'Complex components showcasing advanced Glass UI features',
@@ -195,7 +213,11 @@ export function GlassModal() {
   );
 }`,
         },
-        preview: React.createElement('div', { className: 'p-4' }, 'Modal Preview'),
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Modal Preview'
+        ),
         designTokens: [
           'colors.glass.light.elevated',
           'backdropBlur.heavy',
@@ -217,11 +239,12 @@ export function GlassModal() {
           ],
         },
       },
-      
+
       {
         id: 'navigation-menu',
         title: 'Glass Navigation Menu',
-        description: 'A responsive navigation with glass effects and animations',
+        description:
+          'A responsive navigation with glass effects and animations',
         category: 'navigation',
         difficulty: 'advanced',
         tags: ['navigation', 'menu', 'responsive', 'animation'],
@@ -253,7 +276,11 @@ export function GlassNavigation() {
   );
 }`,
         },
-        preview: React.createElement('div', { className: 'p-4' }, 'Navigation Preview'),
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Navigation Preview'
+        ),
         designTokens: [
           'colors.glass.light.primary',
           'colors.glass.light.elevated',
@@ -264,7 +291,7 @@ export function GlassNavigation() {
       },
     ],
   },
-  
+
   {
     name: 'Layout Patterns',
     description: 'Common layout patterns using Glass UI components',
@@ -344,7 +371,11 @@ export function GlassDashboard() {
   );
 }`,
         },
-        preview: React.createElement('div', { className: 'p-4' }, 'Dashboard Preview'),
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Dashboard Preview'
+        ),
         designTokens: [
           'colors.glass.light.primary',
           'colors.glass.light.elevated',
@@ -361,7 +392,7 @@ export function GlassDashboard() {
       },
     ],
   },
-  
+
   {
     name: 'Form Patterns',
     description: 'Form layouts and validation patterns with Glass UI',
@@ -369,7 +400,8 @@ export function GlassDashboard() {
       {
         id: 'contact-form',
         title: 'Glass Contact Form',
-        description: 'A complete contact form with validation and glass styling',
+        description:
+          'A complete contact form with validation and glass styling',
         category: 'forms',
         difficulty: 'intermediate',
         tags: ['form', 'validation', 'contact', 'glass'],
@@ -444,7 +476,11 @@ export function GlassContactForm() {
   );
 }`,
         },
-        preview: React.createElement('div', { className: 'p-4' }, 'Contact Form Preview'),
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Contact Form Preview'
+        ),
         designTokens: [
           'colors.glass.light.primary',
           'borderRadius.lg',
@@ -474,7 +510,7 @@ export function GlassContactForm() {
 // Example utilities
 export class ExampleManager {
   private examples = new Map<string, InteractiveExample>();
-  
+
   constructor() {
     // Register all examples
     exampleCollections.forEach(collection => {
@@ -483,38 +519,47 @@ export class ExampleManager {
       });
     });
   }
-  
+
   getExample(id: string): InteractiveExample | undefined {
     return this.examples.get(id);
   }
-  
-  getExamplesByCategory(category: InteractiveExample['category']): InteractiveExample[] {
-    return Array.from(this.examples.values()).filter(example => example.category === category);
+
+  getExamplesByCategory(
+    category: InteractiveExample['category']
+  ): InteractiveExample[] {
+    return Array.from(this.examples.values()).filter(
+      example => example.category === category
+    );
   }
-  
-  getExamplesByDifficulty(difficulty: InteractiveExample['difficulty']): InteractiveExample[] {
-    return Array.from(this.examples.values()).filter(example => example.difficulty === difficulty);
+
+  getExamplesByDifficulty(
+    difficulty: InteractiveExample['difficulty']
+  ): InteractiveExample[] {
+    return Array.from(this.examples.values()).filter(
+      example => example.difficulty === difficulty
+    );
   }
-  
+
   getExamplesByTag(tag: string): InteractiveExample[] {
-    return Array.from(this.examples.values()).filter(example => 
+    return Array.from(this.examples.values()).filter(example =>
       example.tags.includes(tag)
     );
   }
-  
+
   searchExamples(query: string): InteractiveExample[] {
     const lowercaseQuery = query.toLowerCase();
-    return Array.from(this.examples.values()).filter(example =>
-      example.title.toLowerCase().includes(lowercaseQuery) ||
-      example.description.toLowerCase().includes(lowercaseQuery) ||
-      example.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
+    return Array.from(this.examples.values()).filter(
+      example =>
+        example.title.toLowerCase().includes(lowercaseQuery) ||
+        example.description.toLowerCase().includes(lowercaseQuery) ||
+        example.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
     );
   }
-  
+
   getRelatedExamples(exampleId: string): InteractiveExample[] {
     const example = this.getExample(exampleId);
     if (!example) return [];
-    
+
     return example.relatedExamples
       .map(id => this.getExample(id))
       .filter(Boolean) as InteractiveExample[];
@@ -527,21 +572,21 @@ export const exampleManager = new ExampleManager();
 // Example code generators
 export function generateExampleCode(example: InteractiveExample): string {
   let code = example.code.tsx;
-  
+
   if (example.code.css) {
     code += `
 
 /* CSS */
 ${example.code.css}`;
   }
-  
+
   if (example.code.config) {
     code += `
 
 /* Configuration */
 ${example.code.config}`;
   }
-  
+
   return code;
 }
 
@@ -562,32 +607,35 @@ ${example.code.tsx}
 
 ## Design Tokens Used
 
-${example.designTokens.map(token => `- \`${token}\``).join('
-')}
+${example.designTokens.map(token => `- \`${token}\``).join('\n')}
 
-${example.accessibility ? `
+${
+  example.accessibility
+    ? `
 ## Accessibility Features
 
-${example.accessibility.features.map(feature => `- ${feature}`).join('
-')}
+${example.accessibility.features.map(feature => `- ${feature}`).join('\n')}
 
 ## Testing Checklist
 
-${example.accessibility.testing.map(test => `- [ ] ${test}`).join('
-')}
-` : ''}
+${example.accessibility.testing.map(test => `- [ ] ${test}`).join('\n')}
+`
+    : ''
+}
 
-${example.notes ? `
+${
+  example.notes
+    ? `
 ## Notes
 
-${example.notes.map(note => `- ${note}`).join('
-')}
-` : ''}
+${example.notes.map(note => `- ${note}`).join('\n')}
+`
+    : ''
+}
 
 ## Related Examples
 
-${example.relatedExamples.map(id => `- [${id}](#${id})`).join('
-')}
+${example.relatedExamples.map(id => `- [${id}](#${id})`).join('\n')}
 `;
 }
 

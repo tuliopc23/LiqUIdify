@@ -38,7 +38,7 @@ export async function testAccessibility(
 
   // Configure axe rules based on WCAG level
   const rules = getWCAGRules(level);
-  
+
   const axeConfig: RunOptions = {
     ...axeOptions,
     rules: {
@@ -50,21 +50,26 @@ export async function testAccessibility(
   try {
     const results = await Promise.race([
       axe(element, axeConfig),
-      new Promise<never>((_, reject) => 
-        setTimeout(() => reject(new Error('Accessibility test timeout')), timeout)
+      new Promise<never>((_, reject) =>
+        setTimeout(
+          () => reject(new Error('Accessibility test timeout')),
+          timeout
+        )
       ),
     ]);
 
     const violationCount = results.violations.length;
     const incompleteCount = includeWarnings ? results.incomplete.length : 0;
     const passCount = results.passes.length;
-    
+
     // Calculate accessibility score (0-100)
     const totalChecks = violationCount + incompleteCount + passCount;
-    const score = totalChecks > 0 ? Math.round((passCount / totalChecks) * 100) : 100;
+    const score =
+      totalChecks > 0 ? Math.round((passCount / totalChecks) * 100) : 100;
 
     return {
-      passed: violationCount === 0 && (!includeWarnings || incompleteCount === 0),
+      passed:
+        violationCount === 0 && (!includeWarnings || incompleteCount === 0),
       violations: results.violations,
       incomplete: includeWarnings ? results.incomplete : [],
       passes: results.passes,
@@ -76,7 +81,9 @@ export async function testAccessibility(
       },
     };
   } catch (error) {
-    throw new Error(`Accessibility test failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    throw new Error(
+      `Accessibility test failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
   }
 }
 
@@ -93,7 +100,7 @@ function getWCAGRules(level: 'A' | 'AA' | 'AAA') {
     'aria-valid-attr-value': { enabled: true },
     'aria-valid-attr': { enabled: true },
     'button-name': { enabled: true },
-    'bypass': { enabled: true },
+    bypass: { enabled: true },
     'color-contrast': { enabled: false }, // Will be enabled for AA/AAA
     'document-title': { enabled: true },
     'duplicate-id': { enabled: true },
@@ -104,11 +111,11 @@ function getWCAGRules(level: 'A' | 'AA' | 'AAA') {
     'image-alt': { enabled: true },
     'input-button-name': { enabled: true },
     'input-image-alt': { enabled: true },
-    'label': { enabled: true },
+    label: { enabled: true },
     'link-name': { enabled: true },
-    'list': { enabled: true },
-    'listitem': { enabled: true },
-    'marquee': { enabled: true },
+    list: { enabled: true },
+    listitem: { enabled: true },
+    marquee: { enabled: true },
     'meta-refresh': { enabled: true },
     'object-alt': { enabled: true },
     'role-img-alt': { enabled: true },
@@ -136,7 +143,7 @@ function getWCAGRules(level: 'A' | 'AA' | 'AAA') {
       'landmark-one-main': { enabled: true },
       'link-in-text-block': { enabled: true },
       'page-has-heading-one': { enabled: true },
-      'region': { enabled: true },
+      region: { enabled: true },
       'scope-attr-valid': { enabled: true },
       'skip-link': { enabled: true },
     });
@@ -194,7 +201,7 @@ export async function testKeyboardNavigation(
 
     // Test if element has visible focus indicator
     const computedStyle = window.getComputedStyle(element, ':focus-visible');
-    const hasVisibleFocus = 
+    const hasVisibleFocus =
       computedStyle.outline !== 'none' ||
       computedStyle.boxShadow !== 'none' ||
       computedStyle.border !== computedStyle.getPropertyValue('border'); // Check if border changes
@@ -225,7 +232,10 @@ export async function testKeyboardNavigation(
 }
 
 // Get all focusable elements
-function getFocusableElements(container: Element, includeHidden: boolean): Element[] {
+function getFocusableElements(
+  container: Element,
+  includeHidden: boolean
+): Element[] {
   const focusableSelectors = [
     'a[href]',
     'button:not([disabled])',
@@ -266,7 +276,9 @@ export interface ScreenReaderTestResult {
   }>;
 }
 
-export function testScreenReaderCompatibility(container: Element): ScreenReaderTestResult {
+export function testScreenReaderCompatibility(
+  container: Element
+): ScreenReaderTestResult {
   const issues: ScreenReaderTestResult['issues'] = [];
 
   // Test for proper heading structure
@@ -275,7 +287,7 @@ export function testScreenReaderCompatibility(container: Element): ScreenReaderT
 
   headings.forEach(heading => {
     const level = parseInt(heading.tagName.charAt(1));
-    
+
     if (level > previousLevel + 1) {
       issues.push({
         element: heading,
@@ -283,7 +295,7 @@ export function testScreenReaderCompatibility(container: Element): ScreenReaderT
         suggestion: `Use heading level ${previousLevel + 1} instead`,
       });
     }
-    
+
     previousLevel = level;
   });
 
@@ -305,14 +317,15 @@ export function testScreenReaderCompatibility(container: Element): ScreenReaderT
     const id = input.getAttribute('id');
     const ariaLabel = input.getAttribute('aria-label');
     const ariaLabelledby = input.getAttribute('aria-labelledby');
-    
+
     if (id) {
       const label = container.querySelector(`label[for="${id}"]`);
       if (!label && !ariaLabel && !ariaLabelledby) {
         issues.push({
           element: input,
           issue: 'Form control missing accessible label',
-          suggestion: 'Add a <label> element, aria-label, or aria-labelledby attribute',
+          suggestion:
+            'Add a <label> element, aria-label, or aria-labelledby attribute',
         });
       }
     }
@@ -324,12 +337,13 @@ export function testScreenReaderCompatibility(container: Element): ScreenReaderT
     const text = button.textContent?.trim();
     const ariaLabel = button.getAttribute('aria-label');
     const ariaLabelledby = button.getAttribute('aria-labelledby');
-    
+
     if (!text && !ariaLabel && !ariaLabelledby) {
       issues.push({
         element: button,
         issue: 'Button missing accessible text',
-        suggestion: 'Add text content, aria-label, or aria-labelledby attribute',
+        suggestion:
+          'Add text content, aria-label, or aria-labelledby attribute',
       });
     }
   });
@@ -356,14 +370,14 @@ export function testColorContrast(
   const style = window.getComputedStyle(element);
   const foreground = style.color;
   const background = style.backgroundColor;
-  
+
   // This is a simplified implementation
   // In a real implementation, you'd use a proper color contrast calculation
   const ratio = calculateContrastRatio(foreground, background);
-  
+
   const aaThreshold = 4.5;
   const aaaThreshold = 7;
-  
+
   let level: 'AA' | 'AAA' | 'fail';
   if (ratio >= aaaThreshold) {
     level = 'AAA';
@@ -372,9 +386,10 @@ export function testColorContrast(
   } else {
     level = 'fail';
   }
-  
-  const passed = requiredLevel === 'AA' ? ratio >= aaThreshold : ratio >= aaaThreshold;
-  
+
+  const passed =
+    requiredLevel === 'AA' ? ratio >= aaThreshold : ratio >= aaaThreshold;
+
   return {
     passed,
     ratio,
@@ -385,7 +400,10 @@ export function testColorContrast(
 }
 
 // Simplified contrast ratio calculation (would need proper implementation)
-function calculateContrastRatio(foreground: string, background: string): number {
+function calculateContrastRatio(
+  foreground: string,
+  background: string
+): number {
   // This is a placeholder - real implementation would parse colors and calculate luminance
   return 4.5; // Mock value
 }
@@ -406,12 +424,13 @@ export async function runAccessibilityTestSuite(
     Promise.resolve(testScreenReaderCompatibility(element)),
   ]);
 
-  const allPassed = axeResult.passed && keyboardResult.passed && screenReaderResult.passed;
-  const averageScore = (
-    axeResult.summary.score +
-    (keyboardResult.passed ? 100 : 50) +
-    (screenReaderResult.passed ? 100 : 50)
-  ) / 3;
+  const allPassed =
+    axeResult.passed && keyboardResult.passed && screenReaderResult.passed;
+  const averageScore =
+    (axeResult.summary.score +
+      (keyboardResult.passed ? 100 : 50) +
+      (screenReaderResult.passed ? 100 : 50)) /
+    3;
 
   return {
     overall: {
@@ -430,12 +449,15 @@ export async function expectAccessible(
   options?: AccessibilityTestOptions
 ): Promise<void> {
   const result = await testAccessibility(element, options);
-  
+
   if (!result.passed) {
-    const violationMessages = result.violations.map(violation => 
-      `${violation.id}: ${violation.description}\n  ${violation.nodes.map(node => node.failureSummary).join('\n  ')}`
-    ).join('\n\n');
-    
+    const violationMessages = result.violations
+      .map(
+        violation =>
+          `${violation.id}: ${violation.description}\n  ${violation.nodes.map(node => node.failureSummary).join('\n  ')}`
+      )
+      .join('\n\n');
+
     throw new Error(`Accessibility violations found:\n\n${violationMessages}`);
   }
 }

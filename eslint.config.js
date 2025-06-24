@@ -3,7 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import react from 'eslint-plugin-react'
-import storybook from 'eslint-plugin-storybook'
+// import storybook from 'eslint-plugin-storybook'
 import tseslint from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 
@@ -15,7 +15,12 @@ export default [
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        console: 'readonly',
+        process: 'readonly'
+      },
       parser: tsParser,
       parserOptions: {
         ecmaFeatures: {
@@ -28,7 +33,7 @@ export default [
       'react': react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      'storybook': storybook
+      // 'storybook': storybook
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -50,10 +55,10 @@ export default [
       }
     }
   },
-  {
-    files: ['**/*.stories.@(js|jsx|ts|tsx)'],
-    rules: {
-      ...storybook.configs.recommended.rules
-    }
-  }
+  // {
+  //   files: ['**/*.stories.@(js|jsx|ts|tsx)'],
+  //   rules: {
+  //     ...storybook.configs.recommended.rules
+  //   }
+  // }
 ]

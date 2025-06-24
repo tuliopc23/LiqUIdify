@@ -6,7 +6,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 // Haptic feedback types
-export type HapticType = 
+export type HapticType =
   | 'light'
   | 'medium'
   | 'heavy'
@@ -27,7 +27,7 @@ export const HAPTIC_PATTERNS = {
   error: [50, 100, 50],
   selection: [5],
   impact: [15, 10, 15],
-  notification: [25, 50, 25, 50, 25, 50]
+  notification: [25, 50, 25, 50, 25, 50],
 };
 
 // Audio feedback configuration
@@ -66,7 +66,7 @@ const DEFAULT_CONFIG: HapticFeedbackConfig = {
   audio: {
     enabled: false,
     volume: 0.5,
-    sounds: {}
+    sounds: {},
   },
   visual: {
     enabled: true,
@@ -74,10 +74,10 @@ const DEFAULT_CONFIG: HapticFeedbackConfig = {
     scale: 0.95,
     opacity: 0.8,
     blur: 0,
-    color: 'rgba(255, 255, 255, 0.2)'
+    color: 'rgba(255, 255, 255, 0.2)',
   },
   intensity: 1,
-  customPatterns: {}
+  customPatterns: {},
 };
 
 // Audio context for sound generation
@@ -85,7 +85,11 @@ let audioContext: AudioContext | null = null;
 
 // Initialize audio context
 function initAudioContext() {
-  if (!audioContext && typeof window !== 'undefined' && 'AudioContext' in window) {
+  if (
+    !audioContext &&
+    typeof window !== 'undefined' &&
+    'AudioContext' in window
+  ) {
     audioContext = new AudioContext();
   }
   return audioContext;
@@ -124,7 +128,10 @@ function generateSound(type: HapticType, volume: number): void {
       oscillator.type = 'sine';
       gainNode.gain.value = volume * 0.2;
       // Frequency sweep up
-      oscillator.frequency.exponentialRampToValueAtTime(1760, ctx.currentTime + 0.1);
+      oscillator.frequency.exponentialRampToValueAtTime(
+        1760,
+        ctx.currentTime + 0.1
+      );
       break;
     case 'warning':
       oscillator.frequency.value = 440;
@@ -197,7 +204,7 @@ function applyVisualFeedback(
   // Apply transformations
   element.style.transition = `transform ${config.duration}ms ease-out, filter ${config.duration}ms ease-out`;
   element.style.transform = `${originalTransform} scale(${config.scale})`;
-  
+
   if (config.blur && config.blur > 0) {
     element.style.filter = `${originalFilter} blur(${config.blur}px)`;
   }
@@ -205,7 +212,7 @@ function applyVisualFeedback(
   // Trigger overlay animation
   requestAnimationFrame(() => {
     overlay.style.opacity = config.opacity?.toString() || '1';
-    
+
     setTimeout(() => {
       overlay.style.opacity = '0';
     }, config.duration! / 2);
@@ -215,7 +222,7 @@ function applyVisualFeedback(
   const cleanup = setTimeout(() => {
     element.style.transform = originalTransform;
     element.style.filter = originalFilter;
-    
+
     setTimeout(() => {
       element.style.transition = originalTransition;
       overlay.remove();
@@ -233,7 +240,10 @@ function applyVisualFeedback(
 
 // Haptic feedback hook
 export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
-  const configRef = useRef<HapticFeedbackConfig>({ ...DEFAULT_CONFIG, ...config });
+  const configRef = useRef<HapticFeedbackConfig>({
+    ...DEFAULT_CONFIG,
+    ...config,
+  });
   const audioCache = useRef<Map<string, AudioBuffer>>(new Map());
   const cleanupRef = useRef<(() => void) | null>(null);
 
@@ -244,7 +254,8 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
   // Load audio files
   useEffect(() => {
-    if (!configRef.current.audio?.enabled || !configRef.current.audio.sounds) return;
+    if (!configRef.current.audio?.enabled || !configRef.current.audio.sounds)
+      return;
 
     const loadAudio = async (url: string): Promise<AudioBuffer | null> => {
       try {
@@ -261,21 +272,23 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
     };
 
     // Load all audio files
-    Object.entries(configRef.current.audio.sounds).forEach(async ([type, url]) => {
-      if (url && !audioCache.current.has(url)) {
-        const buffer = await loadAudio(url);
-        if (buffer) {
-          audioCache.current.set(url, buffer);
+    Object.entries(configRef.current.audio.sounds).forEach(
+      async ([type, url]) => {
+        if (url && !audioCache.current.has(url)) {
+          const buffer = await loadAudio(url);
+          if (buffer) {
+            audioCache.current.set(url, buffer);
+          }
         }
       }
-    });
+    );
   }, []);
 
   // Trigger vibration
   const vibrate = useCallback((pattern: number[]) => {
     if (!configRef.current.vibration || !('vibrate' in navigator)) return;
 
-    const scaledPattern = pattern.map(duration => 
+    const scaledPattern = pattern.map(duration =>
       Math.round(duration * (configRef.current.intensity || 1))
     );
 
@@ -310,53 +323,60 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
   }, []);
 
   // Apply visual feedback
-  const applyVisual = useCallback((element: HTMLElement | null, type: HapticType) => {
-    if (!element || !configRef.current.visual?.enabled) return;
+  const applyVisual = useCallback(
+    (element: HTMLElement | null, type: HapticType) => {
+      if (!element || !configRef.current.visual?.enabled) return;
 
-    // Clean up previous visual feedback
-    if (cleanupRef.current) {
-      cleanupRef.current();
-    }
+      // Clean up previous visual feedback
+      if (cleanupRef.current) {
+        cleanupRef.current();
+      }
 
-    // Customize visual feedback based on type
-    const visualConfig = { ...configRef.current.visual };
-    
-    switch (type) {
-      case 'success':
-        visualConfig.color = 'rgba(34, 197, 94, 0.2)';
-        visualConfig.scale = 1.05;
-        break;
-      case 'warning':
-        visualConfig.color = 'rgba(251, 191, 36, 0.2)';
-        visualConfig.scale = 0.98;
-        break;
-      case 'error':
-        visualConfig.color = 'rgba(239, 68, 68, 0.2)';
-        visualConfig.scale = 0.95;
-        visualConfig.blur = 2;
-        break;
-      case 'impact':
-        visualConfig.scale = 0.9;
-        visualConfig.duration = 150;
-        break;
-    }
+      // Customize visual feedback based on type
+      const visualConfig = { ...configRef.current.visual };
 
-    cleanupRef.current = applyVisualFeedback(element, visualConfig);
-  }, []);
+      switch (type) {
+        case 'success':
+          visualConfig.color = 'rgba(34, 197, 94, 0.2)';
+          visualConfig.scale = 1.05;
+          break;
+        case 'warning':
+          visualConfig.color = 'rgba(251, 191, 36, 0.2)';
+          visualConfig.scale = 0.98;
+          break;
+        case 'error':
+          visualConfig.color = 'rgba(239, 68, 68, 0.2)';
+          visualConfig.scale = 0.95;
+          visualConfig.blur = 2;
+          break;
+        case 'impact':
+          visualConfig.scale = 0.9;
+          visualConfig.duration = 150;
+          break;
+      }
+
+      cleanupRef.current = applyVisualFeedback(element, visualConfig);
+    },
+    []
+  );
 
   // Main trigger function
-  const trigger = useCallback((type: HapticType, element?: HTMLElement | null) => {
-    // Get pattern
-    const pattern = configRef.current.customPatterns?.[type] || HAPTIC_PATTERNS[type];
+  const trigger = useCallback(
+    (type: HapticType, element?: HTMLElement | null) => {
+      // Get pattern
+      const pattern =
+        configRef.current.customPatterns?.[type] || HAPTIC_PATTERNS[type];
 
-    // Trigger all feedback types
-    vibrate(pattern);
-    playAudio(type);
-    
-    if (element) {
-      applyVisual(element, type);
-    }
-  }, [vibrate, playAudio, applyVisual]);
+      // Trigger all feedback types
+      vibrate(pattern);
+      playAudio(type);
+
+      if (element) {
+        applyVisual(element, type);
+      }
+    },
+    [vibrate, playAudio, applyVisual]
+  );
 
   // Create custom pattern
   const createPattern = useCallback((name: string, pattern: number[]) => {
@@ -381,7 +401,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
     playAudio,
     applyVisual,
     createPattern,
-    patterns: HAPTIC_PATTERNS
+    patterns: HAPTIC_PATTERNS,
   };
 }
 
@@ -395,11 +415,11 @@ interface HapticContextValue {
 
 const HapticContext = createContext<HapticContextValue | null>(null);
 
-export function HapticProvider({ 
-  children, 
-  config = {} 
-}: { 
-  children: ReactNode; 
+export function HapticProvider({
+  children,
+  config = {},
+}: {
+  children: ReactNode;
   config?: HapticFeedbackConfig;
 }) {
   const haptic = useHapticFeedback(config);
@@ -436,7 +456,9 @@ export function withHapticFeedback<T extends HTMLElement = HTMLElement>(
     };
 
     element.addEventListener('click', handleInteraction);
-    element.addEventListener('touchstart', handleInteraction, { passive: true });
+    element.addEventListener('touchstart', handleInteraction, {
+      passive: true,
+    });
 
     return () => {
       element.removeEventListener('click', handleInteraction);

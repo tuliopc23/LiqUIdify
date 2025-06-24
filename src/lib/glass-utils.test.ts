@@ -42,9 +42,15 @@ describe('glass-utils', () => {
 
   describe('glassVariants', () => {
     it('contains all expected variants', () => {
-      const expectedVariants = ['default', 'hover', 'elevated', 'surface', 'pressed'];
+      const expectedVariants = [
+        'default',
+        'hover',
+        'elevated',
+        'surface',
+        'pressed',
+      ];
       const actualVariants = Object.keys(glassVariants);
-      
+
       expectedVariants.forEach(variant => {
         expect(actualVariants).toContain(variant);
       });

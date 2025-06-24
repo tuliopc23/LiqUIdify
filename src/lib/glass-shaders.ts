@@ -66,7 +66,7 @@ export const GLASS_SHADERS = {
       gl_FragColor = texture2D(u_texture, uv);
     }
   `,
-  
+
   // Chromatic aberration effect
   chromaticAberration: `
     precision mediump float;
@@ -91,7 +91,7 @@ export const GLASS_SHADERS = {
       gl_FragColor = vec4(r, g, b, a);
     }
   `,
-  
+
   // Refraction effect
   refraction: `
     precision mediump float;
@@ -117,7 +117,7 @@ export const GLASS_SHADERS = {
       gl_FragColor = color;
     }
   `,
-  
+
   // Holographic effect
   holographic: `
     precision mediump float;
@@ -150,7 +150,7 @@ export const GLASS_SHADERS = {
       gl_FragColor = color;
     }
   `,
-  
+
   // Frosted glass effect
   frostedGlass: `
     precision mediump float;
@@ -192,7 +192,7 @@ export const GLASS_SHADERS = {
       gl_FragColor = color;
     }
   `,
-  
+
   // Iridescent effect
   iridescent: `
     precision mediump float;
@@ -228,7 +228,7 @@ export const GLASS_SHADERS = {
       gl_FragColor = color;
     }
   `,
-  
+
   // Parallax depth effect
   parallaxDepth: `
     precision mediump float;
@@ -256,7 +256,7 @@ export const GLASS_SHADERS = {
       
       gl_FragColor = color;
     }
-  `
+  `,
 };
 
 // WebGL shader effect class
@@ -270,120 +270,128 @@ export class GlassShaderEffect {
   private renderTexture: WebGLTexture | null = null;
   private startTime: number;
   private animationId: number | null = null;
-  
-  constructor(private canvas: HTMLCanvasElement, private shaderType: keyof typeof GLASS_SHADERS) {
+
+  constructor(
+    private canvas: HTMLCanvasElement,
+    private shaderType: keyof typeof GLASS_SHADERS
+  ) {
     const gl = canvas.getContext('webgl', {
       alpha: true,
       premultipliedAlpha: true,
-      preserveDrawingBuffer: true
+      preserveDrawingBuffer: true,
     });
-    
+
     if (!gl) {
       throw new Error('WebGL not supported');
     }
-    
+
     this.gl = gl;
     this.startTime = Date.now();
     this.init();
   }
-  
+
   private init() {
     // Create shader program
-    const vertexShader = this.createShader(this.gl.VERTEX_SHADER, VERTEX_SHADER);
-    const fragmentShader = this.createShader(this.gl.FRAGMENT_SHADER, GLASS_SHADERS[this.shaderType]);
-    
+    const vertexShader = this.createShader(
+      this.gl.VERTEX_SHADER,
+      VERTEX_SHADER
+    );
+    const fragmentShader = this.createShader(
+      this.gl.FRAGMENT_SHADER,
+      GLASS_SHADERS[this.shaderType]
+    );
+
     if (!vertexShader || !fragmentShader) {
       throw new Error('Failed to create shaders');
     }
-    
+
     this.program = this.createProgram(vertexShader, fragmentShader);
     if (!this.program) {
       throw new Error('Failed to create shader program');
     }
-    
+
     // Set up geometry
     this.setupGeometry();
-    
+
     // Get uniform locations
     this.setupUniforms();
-    
+
     // Set up framebuffer for post-processing
     this.setupFramebuffer();
   }
-  
+
   private createShader(type: number, source: string): WebGLShader | null {
     const shader = this.gl.createShader(type);
     if (!shader) return null;
-    
+
     this.gl.shaderSource(shader, source);
     this.gl.compileShader(shader);
-    
+
     if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
-      console.error('Shader compilation error:', this.gl.getShaderInfoLog(shader));
+      console.error(
+        'Shader compilation error:',
+        this.gl.getShaderInfoLog(shader)
+      );
       this.gl.deleteShader(shader);
       return null;
     }
-    
+
     return shader;
   }
-  
-  private createProgram(vertexShader: WebGLShader, fragmentShader: WebGLShader): WebGLProgram | null {
+
+  private createProgram(
+    vertexShader: WebGLShader,
+    fragmentShader: WebGLShader
+  ): WebGLProgram | null {
     const program = this.gl.createProgram();
     if (!program) return null;
-    
+
     this.gl.attachShader(program, vertexShader);
     this.gl.attachShader(program, fragmentShader);
     this.gl.linkProgram(program);
-    
+
     if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
-      console.error('Program linking error:', this.gl.getProgramInfoLog(program));
+      console.error(
+        'Program linking error:',
+        this.gl.getProgramInfoLog(program)
+      );
       this.gl.deleteProgram(program);
       return null;
     }
-    
+
     return program;
   }
-  
+
   private setupGeometry() {
     if (!this.program) return;
-    
+
     // Create a quad that covers the entire canvas
-    const positions = new Float32Array([
-      -1, -1,
-       1, -1,
-      -1,  1,
-       1,  1
-    ]);
-    
-    const texCoords = new Float32Array([
-      0, 1,
-      1, 1,
-      0, 0,
-      1, 0
-    ]);
-    
+    const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+
+    const texCoords = new Float32Array([0, 1, 1, 1, 0, 0, 1, 0]);
+
     // Position buffer
     const positionBuffer = this.gl.createBuffer();
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
     this.gl.bufferData(this.gl.ARRAY_BUFFER, positions, this.gl.STATIC_DRAW);
-    
+
     const positionLoc = this.gl.getAttribLocation(this.program, 'a_position');
     this.gl.enableVertexAttribArray(positionLoc);
     this.gl.vertexAttribPointer(positionLoc, 2, this.gl.FLOAT, false, 0, 0);
-    
+
     // Texture coordinate buffer
     const texCoordBuffer = this.gl.createBuffer();
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texCoordBuffer);
     this.gl.bufferData(this.gl.ARRAY_BUFFER, texCoords, this.gl.STATIC_DRAW);
-    
+
     const texCoordLoc = this.gl.getAttribLocation(this.program, 'a_texCoord');
     this.gl.enableVertexAttribArray(texCoordLoc);
     this.gl.vertexAttribPointer(texCoordLoc, 2, this.gl.FLOAT, false, 0, 0);
   }
-  
+
   private setupUniforms() {
     if (!this.program) return;
-    
+
     const uniformNames = [
       'u_texture',
       'u_normalMap',
@@ -395,9 +403,9 @@ export class GlassShaderEffect {
       'u_chromaticAberration',
       'u_refraction',
       'u_noiseScale',
-      'u_liquidness'
+      'u_liquidness',
     ];
-    
+
     uniformNames.forEach(name => {
       const location = this.gl.getUniformLocation(this.program!, name);
       if (location) {
@@ -405,12 +413,12 @@ export class GlassShaderEffect {
       }
     });
   }
-  
+
   private setupFramebuffer() {
     // Create framebuffer for rendering
     this.frameBuffer = this.gl.createFramebuffer();
     this.renderTexture = this.gl.createTexture();
-    
+
     this.gl.bindTexture(this.gl.TEXTURE_2D, this.renderTexture);
     this.gl.texImage2D(
       this.gl.TEXTURE_2D,
@@ -423,12 +431,28 @@ export class GlassShaderEffect {
       this.gl.UNSIGNED_BYTE,
       null
     );
-    
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-    
+
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_MIN_FILTER,
+      this.gl.LINEAR
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_MAG_FILTER,
+      this.gl.LINEAR
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_WRAP_S,
+      this.gl.CLAMP_TO_EDGE
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_WRAP_T,
+      this.gl.CLAMP_TO_EDGE
+    );
+
     this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this.frameBuffer);
     this.gl.framebufferTexture2D(
       this.gl.FRAMEBUFFER,
@@ -438,33 +462,59 @@ export class GlassShaderEffect {
       0
     );
   }
-  
+
   // Load texture from image or canvas
-  loadTexture(name: string, source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement): void {
+  loadTexture(
+    name: string,
+    source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement
+  ): void {
     const texture = this.gl.createTexture();
     if (!texture) return;
-    
+
     this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
-    this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, source);
-    
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
-    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-    
+    this.gl.texImage2D(
+      this.gl.TEXTURE_2D,
+      0,
+      this.gl.RGBA,
+      this.gl.RGBA,
+      this.gl.UNSIGNED_BYTE,
+      source
+    );
+
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_MIN_FILTER,
+      this.gl.LINEAR
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_MAG_FILTER,
+      this.gl.LINEAR
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_WRAP_S,
+      this.gl.CLAMP_TO_EDGE
+    );
+    this.gl.texParameteri(
+      this.gl.TEXTURE_2D,
+      this.gl.TEXTURE_WRAP_T,
+      this.gl.CLAMP_TO_EDGE
+    );
+
     this.textures.set(name, texture);
   }
-  
+
   // Update uniforms
   setUniforms(uniforms: Partial<ShaderUniforms>): void {
     if (!this.program) return;
-    
+
     this.gl.useProgram(this.program);
-    
+
     Object.entries(uniforms).forEach(([key, value]) => {
       const location = this.uniforms.get(`u_${key}`);
       if (!location) return;
-      
+
       if (typeof value === 'number') {
         this.gl.uniform1f(location, value);
       } else if (Array.isArray(value) && value.length === 2) {
@@ -472,21 +522,21 @@ export class GlassShaderEffect {
       }
     });
   }
-  
+
   // Render the effect
   render(uniforms?: Partial<ShaderUniforms>): void {
     if (!this.program) return;
-    
+
     this.gl.useProgram(this.program);
-    
+
     // Update time uniform
     const time = (Date.now() - this.startTime) / 1000;
     this.setUniforms({
       time,
       resolution: [this.canvas.width, this.canvas.height],
-      ...uniforms
+      ...uniforms,
     });
-    
+
     // Bind textures
     let textureUnit = 0;
     this.textures.forEach((texture, name) => {
@@ -498,13 +548,13 @@ export class GlassShaderEffect {
         textureUnit++;
       }
     });
-    
+
     // Clear and draw
     this.gl.clearColor(0, 0, 0, 0);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT);
     this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
   }
-  
+
   // Start animation loop
   animate(uniforms?: Partial<ShaderUniforms>): void {
     const loop = () => {
@@ -513,7 +563,7 @@ export class GlassShaderEffect {
     };
     loop();
   }
-  
+
   // Stop animation
   stop(): void {
     if (this.animationId) {
@@ -521,23 +571,23 @@ export class GlassShaderEffect {
       this.animationId = null;
     }
   }
-  
+
   // Clean up resources
   destroy(): void {
     this.stop();
-    
+
     if (this.program) {
       this.gl.deleteProgram(this.program);
     }
-    
+
     this.textures.forEach(texture => {
       this.gl.deleteTexture(texture);
     });
-    
+
     if (this.frameBuffer) {
       this.gl.deleteFramebuffer(this.frameBuffer);
     }
-    
+
     if (this.renderTexture) {
       this.gl.deleteTexture(this.renderTexture);
     }
@@ -553,7 +603,7 @@ export function applyGlassShader(
   // Create canvas overlay
   const canvas = document.createElement('canvas');
   const rect = element.getBoundingClientRect();
-  
+
   canvas.width = rect.width * (window.devicePixelRatio || 1);
   canvas.height = rect.height * (window.devicePixelRatio || 1);
   canvas.style.position = 'absolute';
@@ -563,26 +613,26 @@ export function applyGlassShader(
   canvas.style.height = '100%';
   canvas.style.pointerEvents = 'none';
   canvas.style.zIndex = '1';
-  
+
   element.style.position = 'relative';
   element.appendChild(canvas);
-  
+
   try {
     const shader = new GlassShaderEffect(canvas, shaderType);
-    
+
     // Capture element as texture
     const elementCanvas = document.createElement('canvas');
     elementCanvas.width = canvas.width;
     elementCanvas.height = canvas.height;
     const ctx = elementCanvas.getContext('2d');
-    
+
     if (ctx) {
       // This is a simplified version - in production, you'd use html2canvas or similar
       ctx.fillStyle = getComputedStyle(element).backgroundColor || 'white';
       ctx.fillRect(0, 0, elementCanvas.width, elementCanvas.height);
       shader.loadTexture('texture', elementCanvas);
     }
-    
+
     shader.animate(config);
     return shader;
   } catch (error) {
@@ -599,27 +649,27 @@ export const SHADER_PRESETS = {
     chromaticAberration: 0.005,
     refraction: 0.01,
     noiseScale: 5,
-    liquidness: 0.3
+    liquidness: 0.3,
   },
   medium: {
     distortion: 0.05,
     chromaticAberration: 0.01,
     refraction: 0.02,
     noiseScale: 10,
-    liquidness: 0.5
+    liquidness: 0.5,
   },
   intense: {
     distortion: 0.1,
     chromaticAberration: 0.02,
     refraction: 0.04,
     noiseScale: 20,
-    liquidness: 0.8
+    liquidness: 0.8,
   },
   extreme: {
     distortion: 0.2,
     chromaticAberration: 0.04,
     refraction: 0.08,
     noiseScale: 40,
-    liquidness: 1.0
-  }
+    liquidness: 1.0,
+  },
 };

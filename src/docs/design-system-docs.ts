@@ -14,7 +14,13 @@ export interface DesignSystemSection {
 }
 
 export interface DesignSystemContent {
-  type: 'text' | 'code' | 'table' | 'color-palette' | 'typography-scale' | 'spacing-scale';
+  type:
+    | 'text'
+    | 'code'
+    | 'table'
+    | 'color-palette'
+    | 'typography-scale'
+    | 'spacing-scale';
   title?: string;
   content: any;
   description?: string;
@@ -72,45 +78,57 @@ class DesignSystemDocGenerator {
       {
         name: 'Primary Colors',
         description: 'Main brand colors used throughout the interface',
-        colors: Object.entries(designTokens.colors.primary).map(([name, value]) => ({
-          name: `primary-${name}`,
-          value,
-          usage: this.getColorUsage('primary', name),
-          contrast: this.calculateContrast(value),
-        })),
+        colors: Object.entries(designTokens.colors.primary).map(
+          ([name, value]) => ({
+            name: `primary-${name}`,
+            value,
+            usage: this.getColorUsage('primary', name),
+            contrast: this.calculateContrast(value),
+          })
+        ),
       },
       {
         name: 'Glass Colors - Light Theme',
-        description: 'Translucent colors for glass morphism effects in light theme',
-        colors: Object.entries(designTokens.colors.glass.light).map(([name, value]) => ({
-          name: `glass-light-${name}`,
-          value,
-          usage: this.getGlassColorUsage('light', name),
-        })),
+        description:
+          'Translucent colors for glass morphism effects in light theme',
+        colors: Object.entries(designTokens.colors.glass.light).map(
+          ([name, value]) => ({
+            name: `glass-light-${name}`,
+            value,
+            usage: this.getGlassColorUsage('light', name),
+          })
+        ),
       },
       {
         name: 'Glass Colors - Dark Theme',
-        description: 'Translucent colors for glass morphism effects in dark theme',
-        colors: Object.entries(designTokens.colors.glass.dark).map(([name, value]) => ({
-          name: `glass-dark-${name}`,
-          value,
-          usage: this.getGlassColorUsage('dark', name),
-        })),
+        description:
+          'Translucent colors for glass morphism effects in dark theme',
+        colors: Object.entries(designTokens.colors.glass.dark).map(
+          ([name, value]) => ({
+            name: `glass-dark-${name}`,
+            value,
+            usage: this.getGlassColorUsage('dark', name),
+          })
+        ),
       },
       {
         name: 'Border Colors',
         description: 'Subtle border colors for glass components',
         colors: [
-          ...Object.entries(designTokens.colors.border.light).map(([name, value]) => ({
-            name: `border-light-${name}`,
-            value,
-            usage: this.getBorderColorUsage('light', name),
-          })),
-          ...Object.entries(designTokens.colors.border.dark).map(([name, value]) => ({
-            name: `border-dark-${name}`,
-            value,
-            usage: this.getBorderColorUsage('dark', name),
-          })),
+          ...Object.entries(designTokens.colors.border.light).map(
+            ([name, value]) => ({
+              name: `border-light-${name}`,
+              value,
+              usage: this.getBorderColorUsage('light', name),
+            })
+          ),
+          ...Object.entries(designTokens.colors.border.dark).map(
+            ([name, value]) => ({
+              name: `border-dark-${name}`,
+              value,
+              usage: this.getBorderColorUsage('dark', name),
+            })
+          ),
         ],
       },
     ];
@@ -119,14 +137,18 @@ class DesignSystemDocGenerator {
   generateTypographyScale(): TypographyDoc {
     return {
       name: 'Typography Scale',
-      description: 'Harmonious type scale with optimized line heights and letter spacing',
-      scales: Object.entries(designTokens.typography.fontSize).map(([name, [size, config]]) => ({
-        name,
-        size,
-        lineHeight: typeof config === 'object' ? config.lineHeight : '1.5',
-        letterSpacing: typeof config === 'object' ? config.letterSpacing : '0',
-        usage: this.getTypographyUsage(name),
-      })),
+      description:
+        'Harmonious type scale with optimized line heights and letter spacing',
+      scales: Object.entries(designTokens.typography.fontSize).map(
+        ([name, [size, config]]) => ({
+          name,
+          size,
+          lineHeight: typeof config === 'object' ? config.lineHeight : '1.5',
+          letterSpacing:
+            typeof config === 'object' ? config.letterSpacing : '0',
+          usage: this.getTypographyUsage(name),
+        })
+      ),
     };
   }
 
@@ -266,11 +288,12 @@ export const designSystemSections: DesignSystemSection[] = [
       },
     ],
   },
-  
+
   {
     id: 'colors',
     title: 'Color System',
-    description: 'Comprehensive color palette with semantic meanings and usage guidelines',
+    description:
+      'Comprehensive color palette with semantic meanings and usage guidelines',
     content: [
       {
         type: 'text',
@@ -286,7 +309,7 @@ export const designSystemSections: DesignSystemSection[] = [
       },
     ],
   },
-  
+
   {
     id: 'typography',
     title: 'Typography',
@@ -306,7 +329,7 @@ export const designSystemSections: DesignSystemSection[] = [
       },
     ],
   },
-  
+
   {
     id: 'spacing',
     title: 'Spacing System',
@@ -326,7 +349,7 @@ export const designSystemSections: DesignSystemSection[] = [
       },
     ],
   },
-  
+
   {
     id: 'shadows',
     title: 'Shadow System',
@@ -344,16 +367,18 @@ export const designSystemSections: DesignSystemSection[] = [
         title: 'Shadow Tokens',
         content: {
           headers: ['Token', 'Value', 'Usage'],
-          rows: Object.entries(designTokens.shadows.glass).map(([name, value]) => [
-            `shadows.glass.${name}`,
-            value,
-            this.getShadowUsage(name),
-          ]),
+          rows: Object.entries(designTokens.shadows.glass).map(
+            ([name, value]) => [
+              `shadows.glass.${name}`,
+              value,
+              this.getShadowUsage(name),
+            ]
+          ),
         },
       },
     ],
   },
-  
+
   {
     id: 'animation',
     title: 'Animation System',
@@ -371,11 +396,13 @@ export const designSystemSections: DesignSystemSection[] = [
         title: 'Duration Tokens',
         content: {
           headers: ['Token', 'Value', 'Usage'],
-          rows: Object.entries(designTokens.animation.duration).map(([name, value]) => [
-            `animation.duration.${name}`,
-            value,
-            this.getDurationUsage(name),
-          ]),
+          rows: Object.entries(designTokens.animation.duration).map(
+            ([name, value]) => [
+              `animation.duration.${name}`,
+              value,
+              this.getDurationUsage(name),
+            ]
+          ),
         },
       },
       {
@@ -383,11 +410,13 @@ export const designSystemSections: DesignSystemSection[] = [
         title: 'Easing Tokens',
         content: {
           headers: ['Token', 'Value', 'Usage'],
-          rows: Object.entries(designTokens.animation.easing).map(([name, value]) => [
-            `animation.easing.${name}`,
-            value,
-            this.getEasingUsage(name),
-          ]),
+          rows: Object.entries(designTokens.animation.easing).map(
+            ([name, value]) => [
+              `animation.easing.${name}`,
+              value,
+              this.getEasingUsage(name),
+            ]
+          ),
         },
       },
     ],

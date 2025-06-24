@@ -8,7 +8,13 @@ import { ReactElement, ComponentType } from 'react';
 export interface ComponentDocumentation {
   name: string;
   description: string;
-  category: 'layout' | 'input' | 'feedback' | 'navigation' | 'data-display' | 'overlay';
+  category:
+    | 'layout'
+    | 'input'
+    | 'feedback'
+    | 'navigation'
+    | 'data-display'
+    | 'overlay';
   props: PropDocumentation[];
   examples: ComponentExample[];
   accessibility: AccessibilityInfo;
@@ -35,7 +41,12 @@ export interface ComponentExample {
   code: string;
   component: ReactElement;
   props?: Record<string, any>;
-  category: 'basic' | 'advanced' | 'interactive' | 'responsive' | 'accessibility';
+  category:
+    | 'basic'
+    | 'advanced'
+    | 'interactive'
+    | 'responsive'
+    | 'accessibility';
 }
 
 export interface AccessibilityInfo {
@@ -50,32 +61,36 @@ export interface AccessibilityInfo {
 // Component documentation registry
 class ComponentDocRegistry {
   private docs = new Map<string, ComponentDocumentation>();
-  
+
   register(componentName: string, documentation: ComponentDocumentation): void {
     this.docs.set(componentName, documentation);
   }
-  
+
   get(componentName: string): ComponentDocumentation | undefined {
     return this.docs.get(componentName);
   }
-  
+
   getAll(): ComponentDocumentation[] {
     return Array.from(this.docs.values());
   }
-  
-  getByCategory(category: ComponentDocumentation['category']): ComponentDocumentation[] {
+
+  getByCategory(
+    category: ComponentDocumentation['category']
+  ): ComponentDocumentation[] {
     return this.getAll().filter(doc => doc.category === category);
   }
-  
+
   search(query: string): ComponentDocumentation[] {
     const lowercaseQuery = query.toLowerCase();
-    return this.getAll().filter(doc => 
-      doc.name.toLowerCase().includes(lowercaseQuery) ||
-      doc.description.toLowerCase().includes(lowercaseQuery) ||
-      doc.props.some(prop => 
-        prop.name.toLowerCase().includes(lowercaseQuery) ||
-        prop.description.toLowerCase().includes(lowercaseQuery)
-      )
+    return this.getAll().filter(
+      doc =>
+        doc.name.toLowerCase().includes(lowercaseQuery) ||
+        doc.description.toLowerCase().includes(lowercaseQuery) ||
+        doc.props.some(
+          prop =>
+            prop.name.toLowerCase().includes(lowercaseQuery) ||
+            prop.description.toLowerCase().includes(lowercaseQuery)
+        )
     );
   }
 }
@@ -105,7 +120,7 @@ export function generatePropDocs(
       defaultValue: undefined,
     },
   ];
-  
+
   // Merge with custom documentation
   if (customDocs) {
     Object.entries(customDocs).forEach(([propName, propDoc]) => {
@@ -117,7 +132,7 @@ export function generatePropDocs(
       }
     });
   }
-  
+
   return defaultProps;
 }
 
@@ -235,14 +250,14 @@ export const documentationTemplates = {
       'animation.duration.normal',
     ],
   },
-  
+
   card: {
     category: 'layout' as const,
     description: 'A flexible container component with glass morphism styling',
     accessibility: generateAccessibilityDocs(
       [],
       [
-        'role - Defines the card's semantic role',
+        "role - Defines the card's semantic role",
         'aria-labelledby - References the card title',
       ]
     ),
@@ -253,7 +268,7 @@ export const documentationTemplates = {
       'spacing.6',
     ],
   },
-  
+
   input: {
     category: 'input' as const,
     description: 'A form input component with glass styling and validation',
@@ -275,10 +290,11 @@ export const documentationTemplates = {
       'typography.fontSize.sm',
     ],
   },
-  
+
   modal: {
     category: 'overlay' as const,
-    description: 'A modal dialog component with glass backdrop and focus management',
+    description:
+      'A modal dialog component with glass backdrop and focus management',
     accessibility: generateAccessibilityDocs(
       [
         'Escape - Close the modal',
@@ -291,7 +307,8 @@ export const documentationTemplates = {
         'aria-describedby - References the modal description',
       ],
       {
-        focusManagement: 'Focus is trapped within the modal and restored when closed',
+        focusManagement:
+          'Focus is trapped within the modal and restored when closed',
       }
     ),
     designTokens: [
@@ -309,14 +326,14 @@ export function withDocumentation<P extends object>(
   documentation: Omit<ComponentDocumentation, 'name' | 'version'>
 ) {
   const componentName = Component.displayName || Component.name || 'Component';
-  
+
   // Register the component documentation
   componentRegistry.register(componentName, {
     name: componentName,
     version: '1.0.0', // This would come from package.json
     ...documentation,
   });
-  
+
   // Return the component with enhanced display name
   Component.displayName = componentName;
   return Component;
@@ -330,43 +347,45 @@ export function validateDocumentation(doc: ComponentDocumentation): {
 } {
   const errors: string[] = [];
   const warnings: string[] = [];
-  
+
   // Required fields
   if (!doc.name) errors.push('Component name is required');
   if (!doc.description) errors.push('Component description is required');
   if (!doc.category) errors.push('Component category is required');
-  
+
   // Props validation
   if (doc.props.length === 0) {
     warnings.push('No props documented');
   }
-  
+
   doc.props.forEach((prop, index) => {
     if (!prop.name) errors.push(`Prop at index ${index} missing name`);
     if (!prop.type) errors.push(`Prop "${prop.name}" missing type`);
-    if (!prop.description) warnings.push(`Prop "${prop.name}" missing description`);
+    if (!prop.description)
+      warnings.push(`Prop "${prop.name}" missing description`);
   });
-  
+
   // Examples validation
   if (doc.examples.length === 0) {
     warnings.push('No examples provided');
   }
-  
+
   doc.examples.forEach((example, index) => {
     if (!example.name) errors.push(`Example at index ${index} missing name`);
     if (!example.code) errors.push(`Example "${example.name}" missing code`);
-    if (!example.component) errors.push(`Example "${example.name}" missing component`);
+    if (!example.component)
+      errors.push(`Example "${example.name}" missing component`);
   });
-  
+
   // Accessibility validation
   if (doc.accessibility.keyboardSupport.length === 0) {
     warnings.push('No keyboard support documented');
   }
-  
+
   if (doc.accessibility.ariaAttributes.length === 0) {
     warnings.push('No ARIA attributes documented');
   }
-  
+
   return {
     valid: errors.length === 0,
     errors,

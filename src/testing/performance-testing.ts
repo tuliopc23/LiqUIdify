@@ -43,11 +43,11 @@ export class PerformanceMonitor {
     if (!startTime) {
       throw new Error(`No measurement started for "${name}"`);
     }
-    
+
     const endTime = performance.now();
     const duration = endTime - startTime;
     this.measurements.delete(name);
-    
+
     return duration;
   }
 
@@ -55,15 +55,17 @@ export class PerformanceMonitor {
     const startTime = performance.now();
     const result = fn();
     const renderTime = performance.now() - startTime;
-    
+
     return { result, renderTime };
   }
 
-  async measureAsyncRenderTime<T>(fn: () => Promise<T>): Promise<{ result: T; renderTime: number }> {
+  async measureAsyncRenderTime<T>(
+    fn: () => Promise<T>
+  ): Promise<{ result: T; renderTime: number }> {
     const startTime = performance.now();
     const result = await fn();
     const renderTime = performance.now() - startTime;
-    
+
     return { result, renderTime };
   }
 
@@ -75,15 +77,17 @@ export class PerformanceMonitor {
   }
 
   observeWebVitals(): Promise<PerformanceMetrics> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const metrics: Partial<PerformanceMetrics> = {};
       let observersCompleted = 0;
       const totalObservers = 2;
 
       // First Contentful Paint
-      const fcpObserver = new PerformanceObserver((list) => {
+      const fcpObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
-        const fcpEntry = entries.find(entry => entry.name === 'first-contentful-paint');
+        const fcpEntry = entries.find(
+          entry => entry.name === 'first-contentful-paint'
+        );
         if (fcpEntry) {
           metrics.firstContentfulPaint = fcpEntry.startTime;
           fcpObserver.disconnect();
@@ -95,7 +99,7 @@ export class PerformanceMonitor {
       });
 
       // Largest Contentful Paint
-      const lcpObserver = new PerformanceObserver((list) => {
+      const lcpObserver = new PerformanceObserver(list => {
         const entries = list.getEntries();
         const lcpEntry = entries[entries.length - 1];
         if (lcpEntry) {
@@ -137,31 +141,31 @@ export function createPerformanceTest(
 ): () => Promise<PerformanceBenchmark> {
   return async () => {
     const monitor = new PerformanceMonitor();
-    
+
     try {
       // Measure render time
       monitor.startMeasurement('render');
       await renderFn();
       const renderTime = monitor.endMeasurement('render');
-      
+
       // Get memory usage
       const memoryUsage = monitor.getMemoryUsage();
-      
+
       // Get web vitals (if available)
       const webVitals = await monitor.observeWebVitals();
-      
+
       const metrics: PerformanceMetrics = {
         renderTime,
         memoryUsage,
         ...webVitals,
       };
-      
+
       // Check if metrics pass thresholds
       const passed = Object.entries(thresholds).every(([key, threshold]) => {
         const metric = metrics[key as keyof PerformanceMetrics];
         return metric === undefined || metric <= threshold;
       });
-      
+
       return {
         name,
         metrics,
@@ -200,13 +204,13 @@ export function analyzeBundleSize(bundleStats: any): BundleAnalysis {
 // Performance regression detection
 export class PerformanceRegression {
   private baseline: Map<string, PerformanceMetrics> = new Map();
-  
+
   setBaseline(testName: string, metrics: PerformanceMetrics): void {
     this.baseline.set(testName, metrics);
   }
-  
+
   checkRegression(
-    testName: string, 
+    testName: string,
     currentMetrics: PerformanceMetrics,
     tolerancePercent: number = 10
   ): {
@@ -222,21 +226,22 @@ export class PerformanceRegression {
     if (!baselineMetrics) {
       throw new Error(`No baseline found for test "${testName}"`);
     }
-    
+
     const regressions: Array<{
       metric: keyof PerformanceMetrics;
       baseline: number;
       current: number;
       percentageIncrease: number;
     }> = [];
-    
+
     Object.entries(currentMetrics).forEach(([key, value]) => {
       const metric = key as keyof PerformanceMetrics;
       const baselineValue = baselineMetrics[metric];
-      
+
       if (typeof value === 'number' && typeof baselineValue === 'number') {
-        const percentageIncrease = ((value - baselineValue) / baselineValue) * 100;
-        
+        const percentageIncrease =
+          ((value - baselineValue) / baselineValue) * 100;
+
         if (percentageIncrease > tolerancePercent) {
           regressions.push({
             metric,
@@ -247,7 +252,7 @@ export class PerformanceRegression {
         }
       }
     });
-    
+
     return {
       hasRegression: regressions.length > 0,
       regressions,
@@ -278,11 +283,11 @@ export function measureComponentRender<P extends object>(
 export function measureInteractionTime(
   interactionFn: () => void | Promise<void>
 ): Promise<number> {
-  return new Promise(async (resolve) => {
+  return new Promise(async resolve => {
     const startTime = performance.now();
-    
+
     await interactionFn();
-    
+
     // Use requestIdleCallback if available, otherwise setTimeout
     if (typeof requestIdleCallback !== 'undefined') {
       requestIdleCallback(() => {
@@ -305,19 +310,19 @@ export const performancePresets = {
     renderTime: 16,
     memoryUsage: 512 * 1024, // 512KB
   },
-  
+
   // Standard component (should render in < 33ms for 30fps)
   standard: {
     renderTime: 33,
     memoryUsage: 1024 * 1024, // 1MB
   },
-  
+
   // Complex component (should render in < 100ms)
   complex: {
     renderTime: 100,
     memoryUsage: 2 * 1024 * 1024, // 2MB
   },
-  
+
   // Interaction should complete in < 100ms
   interaction: {
     interactionTime: 100,

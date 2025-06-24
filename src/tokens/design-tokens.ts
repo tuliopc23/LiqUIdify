@@ -29,7 +29,15 @@ export const designTokens = {
   // Typography Scale
   typography: {
     fontFamily: {
-      sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      sans: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        'Segoe UI',
+        'Roboto',
+        'Helvetica Neue',
+        'Arial',
+        'sans-serif',
+      ],
       mono: ['SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'monospace'],
     },
     fontSize: {
@@ -76,7 +84,7 @@ export const designTokens = {
       900: 'hsl(224, 64%, 33%)',
       950: 'hsl(226, 55%, 21%)',
     },
-    
+
     // Glass-specific colors
     glass: {
       // Light theme glass backgrounds
@@ -144,7 +152,8 @@ export const designTokens = {
       light: '0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06)',
       medium: '0 4px 16px rgba(0, 0, 0, 0.12), 0 16px 40px rgba(0, 0, 0, 0.08)',
       heavy: '0 8px 32px rgba(0, 0, 0, 0.16), 0 24px 64px rgba(0, 0, 0, 0.12)',
-      intense: '0 16px 48px rgba(0, 0, 0, 0.20), 0 32px 80px rgba(0, 0, 0, 0.15)',
+      intense:
+        '0 16px 48px rgba(0, 0, 0, 0.20), 0 32px 80px rgba(0, 0, 0, 0.15)',
     },
     focus: {
       subtle: '0 0 0 2px rgba(59, 130, 246, 0.08)',
@@ -220,7 +229,8 @@ export type ColorToken = keyof typeof designTokens.colors;
 export type TypographyToken = keyof typeof designTokens.typography.fontSize;
 export type BorderRadiusToken = keyof typeof designTokens.borderRadius;
 export type ShadowToken = keyof typeof designTokens.shadows.glass;
-export type AnimationDurationToken = keyof typeof designTokens.animation.duration;
+export type AnimationDurationToken =
+  keyof typeof designTokens.animation.duration;
 export type AnimationEasingToken = keyof typeof designTokens.animation.easing;
 export type BreakpointToken = keyof typeof designTokens.breakpoints;
 export type ZIndexToken = keyof typeof designTokens.zIndex;
