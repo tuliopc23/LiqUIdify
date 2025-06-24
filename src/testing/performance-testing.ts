@@ -21,6 +21,14 @@ export interface PerformanceBenchmark {
   passed: boolean;
 }
 
+export interface PerformanceTestOptions {
+  iterations?: number;
+  warmupRuns?: number;
+  timeout?: number;
+  memoryThreshold?: number;
+  renderTimeThreshold?: number;
+}
+
 // Performance measurement utilities
 export class PerformanceMonitor {
   private measurements: Map<string, number> = new Map();

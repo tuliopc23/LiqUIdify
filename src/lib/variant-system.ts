@@ -7,6 +7,9 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { designTokens } from "@/tokens/design-tokens";
 
+// Class variance authority (cva) alias
+export { createVariants as cva };
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
