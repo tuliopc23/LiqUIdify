@@ -120,7 +120,7 @@ export class MemoryMonitor {
     }
 }
 // Virtual scrolling hook
-export function useVirtualScroll({ items, itemHeight, containerHeight, overscan = 3, getScrollElement }) {
+export function useVirtualScroll({ items, itemHeight, containerHeight, overscan = 3, getScrollElement, }) {
     const [scrollTop, setScrollTop] = useState(0);
     const [isScrolling, setIsScrolling] = useState(false);
     const scrollTimeoutRef = useRef();
@@ -200,7 +200,7 @@ export function useVirtualScroll({ items, itemHeight, containerHeight, overscan 
         startIndex,
         endIndex,
         getItemOffset,
-        isScrolling
+        isScrolling,
     };
 }
 // Intersection Observer for lazy rendering
@@ -208,7 +208,7 @@ export function useLazyRender(threshold = 0.1, rootMargin = '50px') {
     const [visibleElements, setVisibleElements] = useState(new Set());
     const observerRef = useRef();
     useEffect(() => {
-        observerRef.current = new IntersectionObserver((entries) => {
+        observerRef.current = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     setVisibleElements(prev => new Set(prev).add(entry.target));
@@ -356,7 +356,7 @@ export class MemoryPool {
         return {
             poolSize: this.pool.length,
             inUseSize: this.inUse.size,
-            totalSize: this.pool.length + this.inUse.size
+            totalSize: this.pool.length + this.inUse.size,
         };
     }
 }
@@ -509,7 +509,7 @@ export class PerformanceBudget {
             metrics[metric] = {
                 average,
                 budget,
-                exceeded: budget !== undefined && average > budget
+                exceeded: budget !== undefined && average > budget,
             };
         });
         return metrics;
@@ -537,7 +537,7 @@ export function usePerformanceMetrics() {
         paintTime: 0,
         scriptTime: 0,
         layoutTime: 0,
-        idleTime: 0
+        idleTime: 0,
     });
     const fpsMonitor = useRef(new FPSMonitor());
     const memoryMonitor = useRef(new MemoryMonitor());
@@ -553,7 +553,7 @@ export function usePerformanceMetrics() {
             setMetrics(prev => ({ ...prev, memory }));
         });
         // Monitor performance entries
-        const observer = new PerformanceObserver((list) => {
+        const observer = new PerformanceObserver(list => {
             const entries = list.getEntries();
             entries.forEach(entry => {
                 if (entry.entryType === 'measure') {

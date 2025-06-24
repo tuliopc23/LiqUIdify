@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GlassBadge } from './glass-badge';
 
 const meta: Meta<typeof GlassBadge> = {
@@ -8,40 +8,69 @@ const meta: Meta<typeof GlassBadge> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: { type: 'select' },
+      options: ['default', 'success', 'warning', 'error'],
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    children: 'GlassBadge Component',
+    children: 'Default Badge',
   },
 };
 
-export const Secondary: Story = {
+export const Success: Story = {
   args: {
-    variant: 'secondary',
-    children: 'Secondary GlassBadge',
+    variant: 'success',
+    children: 'Success Badge',
   },
 };
 
-export const Sizes: Story = {
+export const Warning: Story = {
+  args: {
+    variant: 'warning',
+    children: 'Warning Badge',
+  },
+};
+
+export const Error: Story = {
+  args: {
+    variant: 'error',
+    children: 'Error Badge',
+  },
+};
+
+export const AllVariants: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <GlassBadge size="sm">Small</GlassBadge>
-      <GlassBadge size="md">Medium</GlassBadge>
-      <GlassBadge size="lg">Large</GlassBadge>
+      <GlassBadge variant="default">Default</GlassBadge>
+      <GlassBadge variant="success">Success</GlassBadge>
+      <GlassBadge variant="warning">Warning</GlassBadge>
+      <GlassBadge variant="error">Error</GlassBadge>
     </div>
   ),
 };
 
-export const States: Story = {
+export const Examples: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
-        <GlassBadge>Normal</GlassBadge>
-        <GlassBadge disabled>Disabled</GlassBadge>
+        <GlassBadge>New</GlassBadge>
+        <GlassBadge variant="success">Available</GlassBadge>
+        <GlassBadge variant="warning">Pending</GlassBadge>
+        <GlassBadge variant="error">Sold Out</GlassBadge>
+      </div>
+      <div className="flex items-center gap-4">
+        <GlassBadge>Draft</GlassBadge>
+        <GlassBadge variant="success">Published</GlassBadge>
+        <GlassBadge variant="warning">Review</GlassBadge>
+        <GlassBadge variant="error">Rejected</GlassBadge>
       </div>
     </div>
   ),

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GlassAvatar } from './glass-avatar';
 
 const meta: Meta<typeof GlassAvatar> = {
@@ -11,11 +11,18 @@ const meta: Meta<typeof GlassAvatar> = {
   argTypes: {
     size: {
       control: { type: 'select' },
-      options: ['sm', 'md', 'lg', 'xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
     },
     variant: {
       control: { type: 'select' },
-      options: ['default', 'outline'],
+      options: ['circular', 'rounded', 'square'],
+    },
+    showBorder: {
+      control: 'boolean',
+    },
+    status: {
+      control: { type: 'select' },
+      options: ['online', 'offline', 'away', 'busy'],
     },
   },
 };
@@ -71,13 +78,62 @@ export const Variants: Story = {
     <div className="flex items-center gap-4">
       <GlassAvatar 
         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-        alt="Default Avatar"
-        variant="default"
+        alt="Circular Avatar"
+        variant="circular"
       />
       <GlassAvatar 
         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-        alt="Outline Avatar"
-        variant="outline"
+        alt="Rounded Avatar"
+        variant="rounded"
+      />
+      <GlassAvatar 
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+        alt="Square Avatar"
+        variant="square"
+      />
+    </div>
+  ),
+};
+
+export const WithBorder: Story = {
+  render: () => (
+    <div className="flex items-center gap-4">
+      <GlassAvatar 
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+        alt="Avatar without border"
+        showBorder={false}
+      />
+      <GlassAvatar 
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+        alt="Avatar with border"
+        showBorder={true}
+      />
+    </div>
+  ),
+};
+
+export const WithStatus: Story = {
+  render: () => (
+    <div className="flex items-center gap-4">
+      <GlassAvatar 
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+        alt="Online"
+        status="online"
+      />
+      <GlassAvatar 
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+        alt="Away"
+        status="away"
+      />
+      <GlassAvatar 
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+        alt="Busy"
+        status="busy"
+      />
+      <GlassAvatar 
+        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+        alt="Offline"
+        status="offline"
       />
     </div>
   ),

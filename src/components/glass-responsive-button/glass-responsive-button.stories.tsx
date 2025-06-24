@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GlassResponsiveButton } from './glass-responsive-button';
 
 const meta: Meta<typeof GlassResponsiveButton> = {

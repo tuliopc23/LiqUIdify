@@ -1,9 +1,24 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { GlassChart } from './glass-chart';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { LineChart, BarChart, DonutChart } from './glass-chart';
 
-const meta: Meta<typeof GlassChart> = {
-  title: 'Glass/GlassChart',
-  component: GlassChart,
+const sampleData = [
+  { label: 'Jan', value: 120 },
+  { label: 'Feb', value: 200 },
+  { label: 'Mar', value: 150 },
+  { label: 'Apr', value: 280 },
+  { label: 'May', value: 240 },
+  { label: 'Jun', value: 320 },
+];
+
+const donutData = [
+  { label: 'Desktop', value: 45, color: '#3b82f6' },
+  { label: 'Mobile', value: 35, color: '#10b981' },
+  { label: 'Tablet', value: 20, color: '#f59e0b' },
+];
+
+const meta: Meta<typeof LineChart> = {
+  title: 'Glass/Charts',
+  component: LineChart,
   parameters: {
     layout: 'centered',
   },
@@ -13,35 +28,56 @@ const meta: Meta<typeof GlassChart> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Line: Story = {
   args: {
-    children: 'GlassChart Component',
+    data: sampleData,
+    width: 500,
+    height: 300,
   },
 };
 
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-    children: 'Secondary GlassChart',
-  },
-};
-
-export const Sizes: Story = {
+export const Bar: Story = {
   render: () => (
-    <div className="flex items-center gap-4">
-      <GlassChart size="sm">Small</GlassChart>
-      <GlassChart size="md">Medium</GlassChart>
-      <GlassChart size="lg">Large</GlassChart>
-    </div>
+    <BarChart 
+      data={sampleData}
+      width={500}
+      height={300}
+    />
   ),
 };
 
-export const States: Story = {
+export const Donut: Story = {
   render: () => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-4">
-        <GlassChart>Normal</GlassChart>
-        <GlassChart disabled>Disabled</GlassChart>
+    <DonutChart 
+      data={donutData}
+      width={300}
+      height={300}
+      centerContent={
+        <div className="text-center">
+          <div className="text-lg font-bold">100%</div>
+          <div className="text-sm text-gray-600">Coverage</div>
+        </div>
+      }
+    />
+  ),
+};
+
+export const AllCharts: Story = {
+  render: () => (
+    <div className="flex flex-col gap-8 p-8">
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">Line Chart</h3>
+        <LineChart data={sampleData} width={400} height={250} />
+      </div>
+      
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">Bar Chart</h3>
+        <BarChart data={sampleData} width={400} height={250} />
+      </div>
+      
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">Donut Chart</h3>
+        <DonutChart data={donutData} width={250} height={250} />
       </div>
     </div>
   ),

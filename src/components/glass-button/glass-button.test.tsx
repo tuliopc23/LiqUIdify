@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from '@jest/globals';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { GlassButton } from './glass-button';
 
@@ -23,7 +23,7 @@ describe('GlassButton', () => {
   });
 
   it('handles click events', () => {
-    const handleClick = vi.fn();
+    const handleClick = jest.fn();
     render(<GlassButton onClick={handleClick}>Click me</GlassButton>);
     
     const button = screen.getByRole('button');

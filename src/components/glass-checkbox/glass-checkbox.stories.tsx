@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GlassCheckbox } from './glass-checkbox';
 
 const meta: Meta<typeof GlassCheckbox> = {
@@ -8,41 +8,59 @@ const meta: Meta<typeof GlassCheckbox> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    disabled: {
+      control: 'boolean',
+    },
+    checked: {
+      control: 'boolean',
+    },
+    defaultChecked: {
+      control: 'boolean',
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    children: 'GlassCheckbox Component',
+    label: 'Accept terms and conditions',
   },
 };
 
-export const Secondary: Story = {
+export const Checked: Story = {
   args: {
-    variant: 'secondary',
-    children: 'Secondary GlassCheckbox',
+    label: 'Pre-checked checkbox',
+    defaultChecked: true,
   },
 };
 
-export const Sizes: Story = {
-  render: () => (
-    <div className="flex items-center gap-4">
-      <GlassCheckbox size="sm">Small</GlassCheckbox>
-      <GlassCheckbox size="md">Medium</GlassCheckbox>
-      <GlassCheckbox size="lg">Large</GlassCheckbox>
-    </div>
-  ),
+export const WithoutLabel: Story = {
+  args: {},
 };
 
 export const States: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-4">
-        <GlassCheckbox>Normal</GlassCheckbox>
-        <GlassCheckbox disabled>Disabled</GlassCheckbox>
-      </div>
+      <GlassCheckbox label="Normal checkbox" />
+      <GlassCheckbox label="Checked checkbox" defaultChecked={true} />
+      <GlassCheckbox label="Disabled checkbox" disabled />
+      <GlassCheckbox label="Disabled checked checkbox" disabled defaultChecked={true} />
+    </div>
+  ),
+};
+
+export const MultipleOptions: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3">
+      <h3 className="text-lg font-medium">Select your preferences:</h3>
+      <GlassCheckbox label="Email notifications" />
+      <GlassCheckbox label="SMS notifications" />
+      <GlassCheckbox label="Push notifications" defaultChecked={true} />
+      <GlassCheckbox label="Marketing emails" />
+      <GlassCheckbox label="Security updates" defaultChecked={true} disabled />
     </div>
   ),
 };

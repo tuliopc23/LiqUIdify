@@ -20,7 +20,7 @@ export const GLASS_EASINGS = {
     glassOut: 'cubic-bezier(0.33, 1, 0.68, 1)',
     glassInOut: 'cubic-bezier(0.65, 0, 0.35, 1)',
     liquidFlow: 'cubic-bezier(0.36, 0.66, 0.04, 1)',
-    crystalShatter: 'cubic-bezier(0.89, 0.03, 0.69, 0.22)'
+    crystalShatter: 'cubic-bezier(0.89, 0.03, 0.69, 0.22)',
 };
 // GPU-accelerated animation class
 export class GlassAnimation {
@@ -58,7 +58,7 @@ export class GlassAnimation {
         this.element.style.willChange = 'transform, opacity, filter';
         this.animation = this.element.animate(keyframes, {
             ...options,
-            composite: 'accumulate'
+            composite: 'accumulate',
         });
         this.animation.onfinish = () => {
             this.element.style.willChange = 'auto';
@@ -68,13 +68,10 @@ export class GlassAnimation {
     // Morph between shapes
     morphTo(targetPath, duration = 1000) {
         const currentPath = this.element.getAttribute('d') || '';
-        return this.animate([
-            { d: currentPath },
-            { d: targetPath }
-        ], {
+        return this.animate([{ d: currentPath }, { d: targetPath }], {
             duration,
             easing: GLASS_EASINGS.liquidFlow,
-            fill: 'forwards'
+            fill: 'forwards',
         });
     }
     // Liquid animation
@@ -86,13 +83,13 @@ export class GlassAnimation {
             const offset = Math.sin(progress * Math.PI * frequency) * amplitude;
             keyframes.push({
                 transform: `translateY(${offset}px) scaleX(${1 + Math.abs(offset) / 100})`,
-                offset: progress
+                offset: progress,
             });
         }
         return this.animate(keyframes, {
             duration,
             easing: 'linear',
-            iterations: Infinity
+            iterations: Infinity,
         });
     }
     // Shatter effect
@@ -119,16 +116,16 @@ export class GlassAnimation {
             fragment.animate([
                 {
                     transform: 'translate(0, 0) rotate(0deg) scale(1)',
-                    opacity: 1
+                    opacity: 1,
                 },
                 {
                     transform: `translate(${x}px, ${y}px) rotate(${rotation}deg) scale(0)`,
-                    opacity: 0
-                }
+                    opacity: 0,
+                },
             ], {
                 duration,
                 easing: GLASS_EASINGS.gravity,
-                fill: 'forwards'
+                fill: 'forwards',
             }).onfinish = () => fragment.remove();
         });
     }
@@ -150,11 +147,11 @@ export class GlassAnimation {
         this.element.appendChild(ripple);
         ripple.animate([
             { transform: 'scale(0)', opacity: 1 },
-            { transform: 'scale(1)', opacity: 0 }
+            { transform: 'scale(1)', opacity: 0 },
         ], {
             duration,
             easing: GLASS_EASINGS.smoothOut,
-            fill: 'forwards'
+            fill: 'forwards',
         }).onfinish = () => ripple.remove();
     }
     // Wave animation
@@ -163,11 +160,11 @@ export class GlassAnimation {
             { transform: 'translateX(0) rotate(0deg)' },
             { transform: `translateX(${amplitude}px) rotate(1deg)` },
             { transform: `translateX(-${amplitude}px) rotate(-1deg)` },
-            { transform: 'translateX(0) rotate(0deg)' }
+            { transform: 'translateX(0) rotate(0deg)' },
         ], {
             duration,
             easing: GLASS_EASINGS.smoothInOut,
-            iterations: Infinity
+            iterations: Infinity,
         });
     }
     // Parallax scroll effect
@@ -196,18 +193,18 @@ export class GlassAnimation {
             keyframes.push({
                 transform: `translate(${x}px, ${y}px)`,
                 filter: `hue-rotate(${hue}deg)`,
-                offset: i / steps
+                offset: i / steps,
             });
         }
         keyframes.push({
             transform: 'translate(0, 0)',
             filter: 'hue-rotate(0deg)',
-            offset: 1
+            offset: 1,
         });
         return this.animate(keyframes, {
             duration,
             easing: 'steps(10)',
-            iterations: 3
+            iterations: 3,
         });
     }
     // Dissolve effect
@@ -215,20 +212,20 @@ export class GlassAnimation {
         return this.animate([
             {
                 opacity: 1,
-                filter: 'blur(0px) saturate(100%)'
+                filter: 'blur(0px) saturate(100%)',
             },
             {
                 opacity: 0.5,
-                filter: 'blur(10px) saturate(200%)'
+                filter: 'blur(10px) saturate(200%)',
             },
             {
                 opacity: 0,
-                filter: 'blur(20px) saturate(0%)'
-            }
+                filter: 'blur(20px) saturate(0%)',
+            },
         ], {
             duration,
             easing: GLASS_EASINGS.smoothOut,
-            fill: 'forwards'
+            fill: 'forwards',
         });
     }
     // Helper to generate random clip paths for shatter
@@ -286,7 +283,7 @@ export class GlassChoreographer {
             const animation = this.add(element);
             animation.animate(keyframes, {
                 ...options,
-                delay: (options.delay || 0) + index * staggerDelay
+                delay: (options.delay || 0) + index * staggerDelay,
             });
         });
     }
@@ -298,78 +295,75 @@ export class GlassChoreographer {
     // Get predefined keyframes for animation type
     getKeyframesForType(type) {
         const keyframeMap = {
-            fade: [
-                { opacity: 0 },
-                { opacity: 1 }
-            ],
+            fade: [{ opacity: 0 }, { opacity: 1 }],
             slide: [
                 { transform: 'translateY(20px)', opacity: 0 },
-                { transform: 'translateY(0)', opacity: 1 }
+                { transform: 'translateY(0)', opacity: 1 },
             ],
             scale: [
                 { transform: 'scale(0.8)', opacity: 0 },
-                { transform: 'scale(1)', opacity: 1 }
+                { transform: 'scale(1)', opacity: 1 },
             ],
             rotate: [
                 { transform: 'rotate(-180deg)', opacity: 0 },
-                { transform: 'rotate(0deg)', opacity: 1 }
+                { transform: 'rotate(0deg)', opacity: 1 },
             ],
             flip: [
                 { transform: 'rotateY(180deg)', opacity: 0 },
-                { transform: 'rotateY(0deg)', opacity: 1 }
+                { transform: 'rotateY(0deg)', opacity: 1 },
             ],
             morph: [
                 { borderRadius: '0%', transform: 'scale(0.8)' },
                 { borderRadius: '50%', transform: 'scale(1.1)' },
-                { borderRadius: '25%', transform: 'scale(1)' }
+                { borderRadius: '25%', transform: 'scale(1)' },
             ],
             ripple: [
                 { transform: 'scale(0)', opacity: 1 },
-                { transform: 'scale(1)', opacity: 0 }
+                { transform: 'scale(1)', opacity: 0 },
             ],
             wave: [
                 { transform: 'translateX(-10px)' },
                 { transform: 'translateX(10px)' },
-                { transform: 'translateX(0)' }
+                { transform: 'translateX(0)' },
             ],
             dissolve: [
                 { opacity: 1, filter: 'blur(0)' },
-                { opacity: 0, filter: 'blur(10px)' }
+                { opacity: 0, filter: 'blur(10px)' },
             ],
             shatter: [
                 { transform: 'scale(1) rotate(0)', opacity: 1 },
-                { transform: 'scale(0) rotate(360deg)', opacity: 0 }
+                { transform: 'scale(0) rotate(360deg)', opacity: 0 },
             ],
             liquid: [
                 { transform: 'scaleY(1)' },
                 { transform: 'scaleY(1.2) scaleX(0.9)' },
                 { transform: 'scaleY(0.9) scaleX(1.1)' },
-                { transform: 'scaleY(1)' }
+                { transform: 'scaleY(1)' },
             ],
             bounce: [
                 { transform: 'translateY(0)' },
                 { transform: 'translateY(-20px)' },
                 { transform: 'translateY(0)' },
                 { transform: 'translateY(-10px)' },
-                { transform: 'translateY(0)' }
+                { transform: 'translateY(0)' },
             ],
             elastic: [
                 { transform: 'scaleX(1)' },
                 { transform: 'scaleX(1.25)' },
                 { transform: 'scaleX(0.75)' },
                 { transform: 'scaleX(1.15)' },
-                { transform: 'scaleX(1)' }
+                { transform: 'scaleX(1)' },
             ],
             glitch: [
                 { transform: 'translate(0)', filter: 'hue-rotate(0)' },
                 { transform: 'translate(2px, -2px)', filter: 'hue-rotate(90deg)' },
                 { transform: 'translate(-2px, 2px)', filter: 'hue-rotate(180deg)' },
-                { transform: 'translate(0)', filter: 'hue-rotate(0)' }
+                { transform: 'translate(0)', filter: 'hue-rotate(0)' },
             ],
             parallax: [
                 { transform: 'translateZ(0)' },
-                { transform: 'translateZ(50px)' }
-            ]
+                { transform: 'translateZ(50px)' },
+            ],
         };
         return keyframeMap[type] || keyframeMap.fade;
     }
@@ -479,7 +473,7 @@ export class GlassGestureAnimator {
             iterations: config.iterations || 1,
             direction: config.direction || 'normal',
             fill: config.fill || 'forwards',
-            playbackRate: config.playbackRate || 1
+            playbackRate: config.playbackRate || 1,
         });
     }
     // Clean up

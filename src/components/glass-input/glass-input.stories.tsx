@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GlassInput } from './glass-input';
-import { Search, Mail, Lock } from 'lucide-react';
+import { Search as SearchIcon, Mail, Lock } from 'lucide-react';
 
 const meta: Meta<typeof GlassInput> = {
   title: 'Glass/GlassInput',
@@ -60,7 +60,7 @@ export const Email: Story = {
 export const WithIcons: Story = {
   render: () => (
     <div className="flex flex-col gap-4 w-80">
-      <GlassInput placeholder="With left icon" leftIcon={<Search className="h-4 w-4" />} />
+      <GlassInput placeholder="With left icon" leftIcon={<SearchIcon className="h-4 w-4" />} />
       <GlassInput placeholder="With right icon" rightIcon={<Lock className="h-4 w-4" />} />
       <GlassInput 
         placeholder="With both icons" 

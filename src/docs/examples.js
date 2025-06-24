@@ -515,7 +515,8 @@ ${example.code.tsx}
 
 ${example.designTokens.map(token => `- \`${token}\``).join('\n')}
 
-${example.accessibility ? `
+${example.accessibility
+        ? `
 ## Accessibility Features
 
 ${example.accessibility.features.map(feature => `- ${feature}`).join('\n')}
@@ -523,13 +524,16 @@ ${example.accessibility.features.map(feature => `- ${feature}`).join('\n')}
 ## Testing Checklist
 
 ${example.accessibility.testing.map(test => `- [ ] ${test}`).join('\n')}
-` : ''}
+`
+        : ''}
 
-${example.notes ? `
+${example.notes
+        ? `
 ## Notes
 
 ${example.notes.map(note => `- ${note}`).join('\n')}
-` : ''}
+`
+        : ''}
 
 ## Related Examples
 

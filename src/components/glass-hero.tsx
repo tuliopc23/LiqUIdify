@@ -1,9 +1,17 @@
-import { forwardRef, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { forwardRef, useRef, useCallback } from 'react';
+import { motion, Variants } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
 import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
 import { GlassButton } from './glass-button';
+import {
+  easeOutExpo,
+  easeInOut,
+  smoothTransition,
+  fastStaggeredContainer,
+  fadeInUpLarge,
+  containerFadeInFast,
+} from '@/lib/framer-motion-constants';
 
 export interface GlassHeroProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -47,10 +55,23 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
     },
     ref
   ) => {
-    const contentRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement | null>(null);
     const { specularHighlights } = useLiquidGlass();
     const contentAnalysis = useContentAwareGlass(contentRef);
     const { elementRef: magneticRef, transform } = useMagneticHover(0.2, 200);
+
+    // Callback ref to handle both content and magnetic refs
+const setRefs = useCallback((node: HTMLDivElement | null) => {
+      (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      if (enableMagnetic && magneticRef) {
+        (magneticRef as React.MutableRefObject<HTMLElement | null>).current = node;
+      }
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+    }, [enableMagnetic, magneticRef, ref]);
 
     const sizeClasses = {
       sm: 'min-h-[60vh] py-16 px-6',
@@ -73,28 +94,9 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
       xl: 'text-7xl md:text-8xl lg:text-9xl',
     };
 
-    const containerVariants = {
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: {
-          duration: 0.8,
-          staggerChildren: 0.2,
-        },
-      },
-    };
+    const containerVariants: Variants = containerFadeInFast;
 
-    const itemVariants = {
-      hidden: { opacity: 0, y: 30 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          duration: 0.6,
-          ease: [0.4, 0, 0.2, 1],
-        },
-      },
-    };
+    const itemVariants: Variants = fadeInUpLarge;
 
     const parallaxVariants = enableParallax
       ? {
@@ -104,24 +106,14 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
             duration: 2,
             repeat: Infinity,
             repeatType: 'reverse' as const,
-            ease: 'easeInOut',
+            ease: 'easeInOut' as const,
           },
         }
       : {};
 
     return (
       <div
-        ref={node => {
-          contentRef.current = node;
-          if (enableMagnetic && magneticRef) {
-            magneticRef.current = node;
-          }
-          if (typeof ref === 'function') {
-            ref(node);
-          } else if (ref) {
-            ref.current = node;
-          }
-        }}
+        ref={setRefs}
         className={cn(
           'relative overflow-hidden',
           'liquid-glass-adaptive liquid-glass-depth-2',

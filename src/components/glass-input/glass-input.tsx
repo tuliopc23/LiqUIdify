@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect, useId } from "react";
+import { forwardRef, useState, useRef, useEffect, useId, useCallback } from "react";
 import { cn, focusRing, getGlassClass, microInteraction } from "@/lib/glass-utils";
 import { Search, Eye, EyeOff, X } from "lucide-react";
 
@@ -29,8 +29,18 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
     const [showPassword, setShowPassword] = useState(false);
     // const [isFocused, setIsFocused] = useState(false); // isFocused is not used
     const [currentValue, setCurrentValue] = useState(value || props.defaultValue || "");
-    const internalInputRef = useRef<HTMLInputElement>(null);
+    const internalInputRef = useRef<HTMLInputElement | null>(null);
     const helperTextId = useId();
+
+    // Callback ref to handle both internal and forwarded refs
+const setRefs = useCallback((node: HTMLInputElement | null) => {
+      (internalInputRef as React.MutableRefObject<HTMLInputElement | null>).current = node;
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+      }
+    }, [ref]);
 
     useEffect(() => {
       if (value !== undefined) {
@@ -98,14 +108,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
           <input
             type={inputType}
             className={cn(baseClasses, getIconPadding(), className)}
-            ref={(node) => {
-              (internalInputRef as React.MutableRefObject<HTMLInputElement | null>).current = node;
-              if (typeof ref === 'function') {
-                ref(node);
-              } else if (ref && typeof ref === 'object') {
-                (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
-              }
-            }}
+            ref={setRefs}
             value={currentValue}
             onChange={handleInputChange}
             aria-invalid={error ? true : undefined}

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GlassPopover } from './glass-popover';
 
 const meta: Meta<typeof GlassPopover> = {

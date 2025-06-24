@@ -11,7 +11,11 @@ export const guides = [
         category: 'getting-started',
         difficulty: 'beginner',
         estimatedTime: '15 minutes',
-        prerequisites: ['Basic React knowledge', 'Node.js installed', 'Package manager (npm/yarn/pnpm)'],
+        prerequisites: [
+            'Basic React knowledge',
+            'Node.js installed',
+            'Package manager (npm/yarn/pnpm)',
+        ],
         lastUpdated: '2024-01-15',
         relatedGuides: ['first-component', 'theming-guide'],
         sections: [
@@ -444,7 +448,10 @@ export function InteractiveCard() {
         category: 'customization',
         difficulty: 'intermediate',
         estimatedTime: '30 minutes',
-        prerequisites: ['Basic CSS knowledge', 'Understanding of CSS custom properties'],
+        prerequisites: [
+            'Basic CSS knowledge',
+            'Understanding of CSS custom properties',
+        ],
         lastUpdated: '2024-01-15',
         relatedGuides: ['design-tokens', 'component-variants'],
         sections: [
@@ -563,7 +570,10 @@ function App() {
         category: 'best-practices',
         difficulty: 'intermediate',
         estimatedTime: '45 minutes',
-        prerequisites: ['Basic understanding of web accessibility', 'WCAG guidelines knowledge'],
+        prerequisites: [
+            'Basic understanding of web accessibility',
+            'WCAG guidelines knowledge',
+        ],
         lastUpdated: '2024-01-15',
         relatedGuides: ['testing-guide', 'component-patterns'],
         sections: [
@@ -708,6 +718,12 @@ export const guideManager = new GuideManager();
 export const guideUtils = {
     manager: guideManager,
     guides,
-    categories: ['getting-started', 'customization', 'advanced', 'best-practices', 'migration'],
+    categories: [
+        'getting-started',
+        'customization',
+        'advanced',
+        'best-practices',
+        'migration',
+    ],
     difficulties: ['beginner', 'intermediate', 'advanced'],
 };

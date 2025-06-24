@@ -14,7 +14,7 @@ export const HAPTIC_PATTERNS = {
     error: [50, 100, 50],
     selection: [5],
     impact: [15, 10, 15],
-    notification: [25, 50, 25, 50, 25, 50]
+    notification: [25, 50, 25, 50, 25, 50],
 };
 // Default configuration
 const DEFAULT_CONFIG = {
@@ -22,7 +22,7 @@ const DEFAULT_CONFIG = {
     audio: {
         enabled: false,
         volume: 0.5,
-        sounds: {}
+        sounds: {},
     },
     visual: {
         enabled: true,
@@ -30,16 +30,18 @@ const DEFAULT_CONFIG = {
         scale: 0.95,
         opacity: 0.8,
         blur: 0,
-        color: 'rgba(255, 255, 255, 0.2)'
+        color: 'rgba(255, 255, 255, 0.2)',
     },
     intensity: 1,
-    customPatterns: {}
+    customPatterns: {},
 };
 // Audio context for sound generation
 let audioContext = null;
 // Initialize audio context
 function initAudioContext() {
-    if (!audioContext && typeof window !== 'undefined' && 'AudioContext' in window) {
+    if (!audioContext &&
+        typeof window !== 'undefined' &&
+        'AudioContext' in window) {
         audioContext = new AudioContext();
     }
     return audioContext;
@@ -168,7 +170,10 @@ function applyVisualFeedback(element, config) {
 }
 // Haptic feedback hook
 export function useHapticFeedback(config = {}) {
-    const configRef = useRef({ ...DEFAULT_CONFIG, ...config });
+    const configRef = useRef({
+        ...DEFAULT_CONFIG,
+        ...config,
+    });
     const audioCache = useRef(new Map());
     const cleanupRef = useRef(null);
     // Update config
@@ -297,13 +302,13 @@ export function useHapticFeedback(config = {}) {
         playAudio,
         applyVisual,
         createPattern,
-        patterns: HAPTIC_PATTERNS
+        patterns: HAPTIC_PATTERNS,
     };
 }
 // Haptic feedback provider for global configuration
 import { createContext, useContext } from 'react';
 const HapticContext = createContext(null);
-export function HapticProvider({ children, config = {} }) {
+export function HapticProvider({ children, config = {}, }) {
     const haptic = useHapticFeedback(config);
     return (_jsx(HapticContext.Provider, { value: { config, trigger: haptic.trigger }, children: children }));
 }
@@ -325,7 +330,9 @@ export function withHapticFeedback(ref, type = 'light', config) {
             haptic.trigger(type, element);
         };
         element.addEventListener('click', handleInteraction);
-        element.addEventListener('touchstart', handleInteraction, { passive: true });
+        element.addEventListener('touchstart', handleInteraction, {
+            passive: true,
+        });
         return () => {
             element.removeEventListener('click', handleInteraction);
             element.removeEventListener('touchstart', handleInteraction);

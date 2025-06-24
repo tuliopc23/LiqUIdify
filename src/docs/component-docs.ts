@@ -4,8 +4,10 @@
  */
 
 import { ReactElement, ComponentType } from 'react';
+import type { GlassFeatureShowcaseProps } from '@/components/glass-feature-showcase';
 
 export interface ComponentDocumentation {
+  showcaseProps?: Partial<GlassFeatureShowcaseProps>;
   name: string;
   description: string;
   category:
@@ -125,10 +127,18 @@ export function generatePropDocs(
   if (customDocs) {
     Object.entries(customDocs).forEach(([propName, propDoc]) => {
       const existingIndex = defaultProps.findIndex(p => p.name === propName);
+      const mergedProp: PropDocumentation = { 
+        name: propName, 
+        type: propDoc?.type || 'unknown',
+        description: propDoc?.description || 'No description provided',
+        required: propDoc?.required || false,
+        ...propDoc
+      };
+      
       if (existingIndex >= 0) {
-        defaultProps[existingIndex] = { name: propName, ...propDoc };
+        defaultProps[existingIndex] = mergedProp;
       } else {
-        defaultProps.push({ name: propName, ...propDoc });
+        defaultProps.push(mergedProp);
       }
     });
   }

@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { forwardRef, useState, useRef, useEffect, useId } from "react";
+import { forwardRef, useState, useRef, useEffect, useId, useCallback } from "react";
 import { cn, focusRing, getGlassClass, microInteraction } from "@/lib/glass-utils";
 import { Search, Eye, EyeOff, X } from "lucide-react";
 const GlassInput = forwardRef(({ className, variant = "default", leftIcon, rightIcon, clearable = false, error = false, helperText, type, value, onChange, ...props }, ref) => {
@@ -8,6 +8,16 @@ const GlassInput = forwardRef(({ className, variant = "default", leftIcon, right
     const [currentValue, setCurrentValue] = useState(value || props.defaultValue || "");
     const internalInputRef = useRef(null);
     const helperTextId = useId();
+    // Callback ref to handle both internal and forwarded refs
+    const setRefs = useCallback((node) => {
+        internalInputRef.current = node;
+        if (typeof ref === 'function') {
+            ref(node);
+        }
+        else if (ref) {
+            ref.current = node;
+        }
+    }, [ref]);
     useEffect(() => {
         if (value !== undefined) {
             setCurrentValue(value);
@@ -44,15 +54,7 @@ const GlassInput = forwardRef(({ className, variant = "default", leftIcon, right
         return `pl-4 ${pr}`;
     };
     const inputType = variant === "password" ? (showPassword ? "text" : "password") : type;
-    return (_jsxs("div", { className: "relative w-full", children: [_jsxs("div", { className: "relative flex items-center w-full", children: [variant === "search" && !leftIcon && (_jsx(Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary pointer-events-none" })), leftIcon && (_jsx("div", { className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary pointer-events-none", children: leftIcon })), _jsx("input", { type: inputType, className: cn(baseClasses, getIconPadding(), className), ref: (node) => {
-                            internalInputRef.current = node;
-                            if (typeof ref === 'function') {
-                                ref(node);
-                            }
-                            else if (ref && typeof ref === 'object') {
-                                ref.current = node;
-                            }
-                        }, value: currentValue, onChange: handleInputChange, "aria-invalid": error ? true : undefined, "aria-describedby": error && helperText ? helperTextId : undefined, ...props }), _jsxs("div", { className: "absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2", children: [clearable && hasValue && (_jsx("button", { type: "button", onClick: handleClearInput, "aria-label": "Clear input", className: "text-secondary hover:text-primary p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded", children: _jsx(X, { className: "h-4 w-4" }) })), variant === "password" && (_jsx("button", { type: "button", onClick: () => setShowPassword(!showPassword), "aria-label": showPassword ? "Hide password" : "Show password", "aria-pressed": showPassword, className: "text-secondary hover:text-primary p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded", children: showPassword ? _jsx(EyeOff, { className: "h-4 w-4" }) : _jsx(Eye, { className: "h-4 w-4" }) })), rightIcon && variant !== "password" && !clearable && (_jsx("div", { className: "text-secondary pointer-events-none", children: rightIcon }))] })] }), helperText && (_jsx("p", { id: helperTextId, className: cn("text-xs mt-1.5", error ? "text-red-500" : "text-[var(--text-muted)]"), children: helperText }))] }));
+    return (_jsxs("div", { className: "relative w-full", children: [_jsxs("div", { className: "relative flex items-center w-full", children: [variant === "search" && !leftIcon && (_jsx(Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary pointer-events-none" })), leftIcon && (_jsx("div", { className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary pointer-events-none", children: leftIcon })), _jsx("input", { type: inputType, className: cn(baseClasses, getIconPadding(), className), ref: setRefs, value: currentValue, onChange: handleInputChange, "aria-invalid": error ? true : undefined, "aria-describedby": error && helperText ? helperTextId : undefined, ...props }), _jsxs("div", { className: "absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2", children: [clearable && hasValue && (_jsx("button", { type: "button", onClick: handleClearInput, "aria-label": "Clear input", className: "text-secondary hover:text-primary p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded", children: _jsx(X, { className: "h-4 w-4" }) })), variant === "password" && (_jsx("button", { type: "button", onClick: () => setShowPassword(!showPassword), "aria-label": showPassword ? "Hide password" : "Show password", "aria-pressed": showPassword, className: "text-secondary hover:text-primary p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded", children: showPassword ? _jsx(EyeOff, { className: "h-4 w-4" }) : _jsx(Eye, { className: "h-4 w-4" }) })), rightIcon && variant !== "password" && !clearable && (_jsx("div", { className: "text-secondary pointer-events-none", children: rightIcon }))] })] }), helperText && (_jsx("p", { id: helperTextId, className: cn("text-xs mt-1.5", error ? "text-red-500" : "text-[var(--text-muted)]"), children: helperText }))] }));
 });
 GlassInput.displayName = "GlassInput";
 export { GlassInput };

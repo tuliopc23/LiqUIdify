@@ -154,10 +154,11 @@ export function createPerformanceTest(
       // Get web vitals (if available)
       const webVitals = await monitor.observeWebVitals();
 
+      const { renderTime: webVitalsRenderTime, memoryUsage: webVitalsMemoryUsage, ...otherWebVitals } = webVitals;
       const metrics: PerformanceMetrics = {
         renderTime,
         memoryUsage,
-        ...webVitals,
+        ...otherWebVitals,
       };
 
       // Check if metrics pass thresholds
@@ -329,11 +330,25 @@ export const performancePresets = {
   },
 } as const;
 
+// Enhanced performance testing with configurable options
+export function createEnhancedPerformanceTest(
+  name: string,
+  renderFn: () => void | Promise<void>,
+  opts: PerformanceTestOptions = {}
+): () => Promise<PerformanceBenchmark> {
+  const thresholds: Partial<PerformanceMetrics> = {
+    renderTime: opts.renderTimeThreshold,
+    memoryUsage: opts.memoryThreshold,
+  };
+  return createPerformanceTest(name, renderFn, thresholds);
+}
+
 // Export utilities for easy testing
 export const perf = {
   monitor: new PerformanceMonitor(),
   regression: new PerformanceRegression(),
   createTest: createPerformanceTest,
+  createEnhancedTest: createEnhancedPerformanceTest,
   measureComponent: measureComponentRender,
   measureInteraction: measureInteractionTime,
   presets: performancePresets,

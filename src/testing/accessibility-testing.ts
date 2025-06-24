@@ -3,7 +3,8 @@
  * Comprehensive a11y testing tools for Glass UI components
  */
 
-import { axe, type AxeResults, type RunOptions } from 'jest-axe';
+import { axe } from 'jest-axe';
+import type { AxeResults, RunOptions } from 'axe-core';
 
 export interface AccessibilityTestResult {
   passed: boolean;
@@ -39,7 +40,7 @@ export async function testAccessibility(
   // Configure axe rules based on WCAG level
   const rules = getWCAGRules(level);
 
-  const axeConfig: RunOptions = {
+  const axeConfig = {
     ...axeOptions,
     rules: {
       ...rules,
@@ -49,7 +50,7 @@ export async function testAccessibility(
 
   try {
     const results = await Promise.race([
-      axe(element, axeConfig),
+      axe(element as Element, axeConfig as any),
       new Promise<never>((_, reject) =>
         setTimeout(
           () => reject(new Error('Accessibility test timeout')),
@@ -453,8 +454,8 @@ export async function expectAccessible(
   if (!result.passed) {
     const violationMessages = result.violations
       .map(
-        violation =>
-          `${violation.id}: ${violation.description}\n  ${violation.nodes.map(node => node.failureSummary).join('\n  ')}`
+        (violation: any) =>
+          `${violation.id}: ${violation.description}\n  ${violation.nodes.map((node: any) => node.failureSummary).join('\n  ')}`
       )
       .join('\n\n');
 

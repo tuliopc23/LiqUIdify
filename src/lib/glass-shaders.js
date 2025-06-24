@@ -231,7 +231,7 @@ export const GLASS_SHADERS = {
       
       gl_FragColor = color;
     }
-  `
+  `,
 };
 // WebGL shader effect class
 export class GlassShaderEffect {
@@ -305,7 +305,7 @@ export class GlassShaderEffect {
         const gl = canvas.getContext('webgl', {
             alpha: true,
             premultipliedAlpha: true,
-            preserveDrawingBuffer: true
+            preserveDrawingBuffer: true,
         });
         if (!gl) {
             throw new Error('WebGL not supported');
@@ -363,18 +363,8 @@ export class GlassShaderEffect {
         if (!this.program)
             return;
         // Create a quad that covers the entire canvas
-        const positions = new Float32Array([
-            -1, -1,
-            1, -1,
-            -1, 1,
-            1, 1
-        ]);
-        const texCoords = new Float32Array([
-            0, 1,
-            1, 1,
-            0, 0,
-            1, 0
-        ]);
+        const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+        const texCoords = new Float32Array([0, 1, 1, 1, 0, 0, 1, 0]);
         // Position buffer
         const positionBuffer = this.gl.createBuffer();
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
@@ -404,7 +394,7 @@ export class GlassShaderEffect {
             'u_chromaticAberration',
             'u_refraction',
             'u_noiseScale',
-            'u_liquidness'
+            'u_liquidness',
         ];
         uniformNames.forEach(name => {
             const location = this.gl.getUniformLocation(this.program, name);
@@ -466,7 +456,7 @@ export class GlassShaderEffect {
         this.setUniforms({
             time,
             resolution: [this.canvas.width, this.canvas.height],
-            ...uniforms
+            ...uniforms,
         });
         // Bind textures
         let textureUnit = 0;
@@ -561,27 +551,27 @@ export const SHADER_PRESETS = {
         chromaticAberration: 0.005,
         refraction: 0.01,
         noiseScale: 5,
-        liquidness: 0.3
+        liquidness: 0.3,
     },
     medium: {
         distortion: 0.05,
         chromaticAberration: 0.01,
         refraction: 0.02,
         noiseScale: 10,
-        liquidness: 0.5
+        liquidness: 0.5,
     },
     intense: {
         distortion: 0.1,
         chromaticAberration: 0.02,
         refraction: 0.04,
         noiseScale: 20,
-        liquidness: 0.8
+        liquidness: 0.8,
     },
     extreme: {
         distortion: 0.2,
         chromaticAberration: 0.04,
         refraction: 0.08,
         noiseScale: 40,
-        liquidness: 1.0
-    }
+        liquidness: 1.0,
+    },
 };

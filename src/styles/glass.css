@@ -3,6 +3,10 @@
  * Professional design system with comprehensive glass effects
  */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* CSS Custom Properties for Liquid Glass Design System */
 :root {
   /* Core Glass Properties */
@@ -90,6 +94,19 @@
   --glass-specular-intense: rgba(255, 255, 255, 0.6);
   --glass-specular-brilliant: rgba(255, 255, 255, 0.8);
 
+  /* Primary Color System */
+  --glass-primary: rgba(59, 130, 246, 0.8);
+  --glass-primary-hover: rgba(59, 130, 246, 0.9);
+  --glass-primary-active: rgba(59, 130, 246, 0.7);
+  
+  /* Text Colors */
+  --text-primary: rgba(0, 0, 0, 0.9);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  
+  /* Shorthand Properties */
+  --glass-bg: var(--glass-bg-primary);
+  --glass-border: var(--glass-border-light);
+
   /* Animation Timing */
   --glass-timing-instant: 0.05s;
   --glass-timing-fast: 0.15s;
@@ -135,6 +152,10 @@
   --glass-border-light: rgba(255, 255, 255, 0.1);
   --glass-border-medium: rgba(255, 255, 255, 0.18);
   --glass-border-strong: rgba(255, 255, 255, 0.25);
+
+  /* Dark Theme Text Colors */
+  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-secondary: rgba(255, 255, 255, 0.6);
 
   --glass-accent: rgba(64, 156, 255, 0.12);
   --glass-success: rgba(48, 209, 88, 0.12);

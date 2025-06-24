@@ -5,7 +5,7 @@
 
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { designTokens } from '@/tokens/design-tokens';
+import { designTokens } from '../tokens/design-tokens';
 
 // Class variance authority (cva) alias
 export { createVariants as cva };
@@ -39,6 +39,9 @@ export type VariantProps<T extends VariantConfig<any>> = {
   class?: string;
   className?: string;
 };
+
+// Extract config type from variant function
+export type InferVariantProps<T> = T extends (props?: infer P) => any ? P : never;
 
 // Enhanced variant creator with better TypeScript support
 export function createVariants<
@@ -299,10 +302,10 @@ export const inputVariants = createVariants({
 });
 
 // Export all variant types for TypeScript support
-export type GlassVariantProps = VariantProps<typeof glassVariants>;
-export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
-export type CardVariantProps = VariantProps<typeof cardVariants>;
-export type InputVariantProps = VariantProps<typeof inputVariants>;
+export type GlassVariantProps = InferVariantProps<typeof glassVariants>;
+export type ButtonVariantProps = InferVariantProps<typeof buttonVariants>;
+export type CardVariantProps = InferVariantProps<typeof cardVariants>;
+export type InputVariantProps = InferVariantProps<typeof inputVariants>;
 
 // Utility functions for responsive variants
 export function responsiveVariant(

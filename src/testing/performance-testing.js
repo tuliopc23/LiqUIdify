@@ -51,12 +51,12 @@ export class PerformanceMonitor {
         return 0;
     }
     observeWebVitals() {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             const metrics = {};
             let observersCompleted = 0;
             const totalObservers = 2;
             // First Contentful Paint
-            const fcpObserver = new PerformanceObserver((list) => {
+            const fcpObserver = new PerformanceObserver(list => {
                 const entries = list.getEntries();
                 const fcpEntry = entries.find(entry => entry.name === 'first-contentful-paint');
                 if (fcpEntry) {
@@ -69,7 +69,7 @@ export class PerformanceMonitor {
                 }
             });
             // Largest Contentful Paint
-            const lcpObserver = new PerformanceObserver((list) => {
+            const lcpObserver = new PerformanceObserver(list => {
                 const entries = list.getEntries();
                 const lcpEntry = entries[entries.length - 1];
                 if (lcpEntry) {
@@ -239,11 +239,23 @@ export const performancePresets = {
         interactionTime: 100,
     },
 };
+// Enhanced performance testing with configurable options
+export function createEnhancedPerformanceTest(name, renderFn, opts = {}, custom) {
+    // FIXED: Removed duplicate timeout keys by computing conditionally
+    // Previously had: { ...opts, timeout: 5000, timeout: custom }
+    // This caused noDuplicateObjectKeys ESLint rule violation
+    const config = {
+        ...opts,
+        timeout: custom !== undefined ? custom : (opts.timeout || 5000)
+    };
+    return createPerformanceTest(name, renderFn, config);
+}
 // Export utilities for easy testing
 export const perf = {
     monitor: new PerformanceMonitor(),
     regression: new PerformanceRegression(),
     createTest: createPerformanceTest,
+    createEnhancedTest: createEnhancedPerformanceTest,
     measureComponent: measureComponentRender,
     measureInteraction: measureInteractionTime,
     presets: performancePresets,

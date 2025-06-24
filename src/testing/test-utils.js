@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { render } from '@testing-library/react';
+import { render, } from '@testing-library/react';
 import { ThemeProvider } from 'next-themes';
 export function renderWithTheme(ui, options = {}) {
     const { theme = 'light', initialProps = {}, ...renderOptions } = options;
@@ -105,7 +105,10 @@ export const customMatchers = {
         const hasAriaLabel = received.hasAttribute('aria-label');
         const hasRole = received.hasAttribute('role');
         const hasTabIndex = received.hasAttribute('tabindex');
-        const pass = hasAriaLabel || hasRole || hasTabIndex || received.tagName.toLowerCase() === 'button';
+        const pass = hasAriaLabel ||
+            hasRole ||
+            hasTabIndex ||
+            received.tagName.toLowerCase() === 'button';
         return {
             message: () => pass
                 ? `Expected element not to be accessible`
@@ -163,8 +166,7 @@ export class ComponentTester {
     // Test if component has proper glass styling
     hasGlassEffect() {
         const style = window.getComputedStyle(this.component);
-        return (style.backdropFilter !== 'none' &&
-            style.background.includes('rgba'));
+        return style.backdropFilter !== 'none' && style.background.includes('rgba');
     }
     // Test if component is accessible
     isAccessible() {

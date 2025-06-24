@@ -371,7 +371,7 @@ export const designSystemSections: DesignSystemSection[] = [
             ([name, value]) => [
               `shadows.glass.${name}`,
               value,
-              this.getShadowUsage(name),
+              getShadowUsage(name),
             ]
           ),
         },
@@ -400,7 +400,7 @@ export const designSystemSections: DesignSystemSection[] = [
             ([name, value]) => [
               `animation.duration.${name}`,
               value,
-              this.getDurationUsage(name),
+              getDurationUsage(name),
             ]
           ),
         },
@@ -414,7 +414,7 @@ export const designSystemSections: DesignSystemSection[] = [
             ([name, value]) => [
               `animation.easing.${name}`,
               value,
-              this.getEasingUsage(name),
+              getEasingUsage(name),
             ]
           ),
         },

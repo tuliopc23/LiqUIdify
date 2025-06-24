@@ -1,8 +1,15 @@
 import { forwardRef, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
 import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
+import {
+  easeOutExpo,
+  easeInOut,
+  staggeredContainer,
+  fadeInUp,
+  containerFadeIn,
+} from '@/lib/framer-motion-constants';
 
 export interface FeatureItem {
   icon: React.ReactNode;
@@ -51,7 +58,7 @@ const GlassFeatureShowcase = forwardRef<
     },
     ref
   ) => {
-    const contentRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement | null>(null);
     const { specularHighlights } = useLiquidGlass();
     const contentAnalysis = useContentAwareGlass(contentRef);
 
@@ -62,28 +69,9 @@ const GlassFeatureShowcase = forwardRef<
       4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
     };
 
-    const containerVariants = {
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: {
-          duration: 0.6,
-          staggerChildren: 0.1,
-        },
-      },
-    };
+    const containerVariants: Variants = containerFadeIn;
 
-    const itemVariants = {
-      hidden: { opacity: 0, y: 20 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          duration: 0.5,
-          ease: [0.4, 0, 0.2, 1],
-        },
-      },
-    };
+    const itemVariants: Variants = fadeInUp;
 
     const FeatureCard = ({
       feature,
@@ -92,7 +80,7 @@ const GlassFeatureShowcase = forwardRef<
       feature: FeatureItem;
       index: number;
     }) => {
-      const cardRef = useRef<HTMLDivElement>(null);
+      const cardRef = useRef<HTMLDivElement | null>(null);
       const { elementRef: magneticRef, transform } = useMagneticHover(
         0.15,
         100
@@ -101,9 +89,9 @@ const GlassFeatureShowcase = forwardRef<
       return (
         <motion.div
           ref={node => {
-            cardRef.current = node;
+            (cardRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
             if (enableMagnetic && magneticRef) {
-              magneticRef.current = node;
+              (magneticRef as React.MutableRefObject<HTMLElement | null>).current = node;
             }
           }}
           variants={itemVariants}
@@ -125,7 +113,7 @@ const GlassFeatureShowcase = forwardRef<
           whileHover={
             variant === 'floating' ? { y: -8, scale: 1.02 } : { y: -4 }
           }
-          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          transition={easeInOut}
         >
           {/* Feature Image */}
           {feature.image && (
@@ -225,11 +213,11 @@ const GlassFeatureShowcase = forwardRef<
     return (
       <div
         ref={node => {
-          contentRef.current = node;
+          (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
           if (typeof ref === 'function') {
             ref(node);
           } else if (ref) {
-            ref.current = node;
+            (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
           }
         }}
         className={cn('relative py-16 px-6 md:py-24 md:px-8', className)}

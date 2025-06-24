@@ -459,7 +459,7 @@ export class GlassChoreographer {
 export class GlassGestureAnimator {
   private element: HTMLElement;
   private animation: GlassAnimation;
-  private gestureHandlers: Map<string, (e: TouchEvent | MouseEvent) => void> =
+  private gestureHandlers: Map<string, (e: TouchEvent) => void> =
     new Map();
 
   constructor(element: HTMLElement) {
@@ -549,7 +549,7 @@ export class GlassGestureAnimator {
     this.element.addEventListener('touchstart', handleStart, { passive: true });
     this.element.addEventListener('touchmove', handleMove, { passive: true });
 
-    this.gestureHandlers.set('pinch', handleMove);
+    this.gestureHandlers.set('pinch', handleMove as (e: TouchEvent) => void);
   }
 
   // Play animation based on config

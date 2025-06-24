@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState } from 'react';
+import { forwardRef, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
@@ -50,9 +50,17 @@ const GlassFloatingAction = forwardRef<
   ) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
-    const buttonRef = useRef<HTMLButtonElement>(null);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
     const { specularHighlights } = useLiquidGlass();
     const { elementRef: magneticRef, transform } = useMagneticHover(0.4, 80);
+
+    // Callback ref to handle both button and magnetic refs
+    const setRefs = useCallback((node: HTMLButtonElement | null) => {
+      (buttonRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+      if (enableMagnetic && magneticRef) {
+        (magneticRef as React.MutableRefObject<HTMLElement | null>).current = node;
+      }
+    }, [enableMagnetic, magneticRef]);
 
     const positionClasses = {
       'bottom-right': 'fixed bottom-6 right-6 z-50',
@@ -226,12 +234,7 @@ const GlassFloatingAction = forwardRef<
 
         {/* Main Button */}
         <motion.button
-          ref={node => {
-            buttonRef.current = node;
-            if (enableMagnetic && magneticRef) {
-              magneticRef.current = node;
-            }
-          }}
+          ref={setRefs}
           className={cn(
             'relative group flex items-center justify-center rounded-full shadow-xl',
             'liquid-glass liquid-glass-interactive liquid-glass-ripple',

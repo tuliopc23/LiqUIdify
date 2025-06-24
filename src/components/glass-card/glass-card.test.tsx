@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from '@jest/globals';
 import { render, screen } from '@testing-library/react';
 import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardContent } from './glass-card';
 

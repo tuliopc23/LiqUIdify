@@ -16,7 +16,7 @@ const DEFAULT_CONFIG = {
     forceThreshold: 0.5,
     edgeThreshold: 20,
     preventDefault: false,
-    stopPropagation: false
+    stopPropagation: false,
 };
 // Gesture recognizer class
 export class GestureRecognizer {
@@ -99,7 +99,7 @@ export class GestureRecognizer {
                         currentX: touch.clientX,
                         currentY: touch.clientY,
                         startTime: Date.now(),
-                        force: touch.force || 0
+                        force: touch.force || 0,
                     });
                 });
                 this.detectGestureStart();
@@ -168,7 +168,7 @@ export class GestureRecognizer {
                     startY: e.clientY,
                     currentX: e.clientX,
                     currentY: e.clientY,
-                    startTime: Date.now()
+                    startTime: Date.now(),
                 });
                 this.detectGestureStart();
             }
@@ -222,7 +222,7 @@ export class GestureRecognizer {
                     currentX: e.clientX,
                     currentY: e.clientY,
                     startTime: Date.now(),
-                    force: e.pressure
+                    force: e.pressure,
                 });
                 this.detectGestureStart();
             }
@@ -268,21 +268,45 @@ export class GestureRecognizer {
     }
     init() {
         // Touch events
-        this.element.addEventListener('touchstart', this.handleTouchStart, { passive: false });
-        this.element.addEventListener('touchmove', this.handleTouchMove, { passive: false });
-        this.element.addEventListener('touchend', this.handleTouchEnd, { passive: false });
-        this.element.addEventListener('touchcancel', this.handleTouchCancel, { passive: false });
+        this.element.addEventListener('touchstart', this.handleTouchStart, {
+            passive: false,
+        });
+        this.element.addEventListener('touchmove', this.handleTouchMove, {
+            passive: false,
+        });
+        this.element.addEventListener('touchend', this.handleTouchEnd, {
+            passive: false,
+        });
+        this.element.addEventListener('touchcancel', this.handleTouchCancel, {
+            passive: false,
+        });
         // Mouse events (for desktop)
-        this.element.addEventListener('mousedown', this.handleMouseDown, { passive: false });
-        this.element.addEventListener('mousemove', this.handleMouseMove, { passive: false });
-        this.element.addEventListener('mouseup', this.handleMouseUp, { passive: false });
-        this.element.addEventListener('mouseleave', this.handleMouseLeave, { passive: false });
+        this.element.addEventListener('mousedown', this.handleMouseDown, {
+            passive: false,
+        });
+        this.element.addEventListener('mousemove', this.handleMouseMove, {
+            passive: false,
+        });
+        this.element.addEventListener('mouseup', this.handleMouseUp, {
+            passive: false,
+        });
+        this.element.addEventListener('mouseleave', this.handleMouseLeave, {
+            passive: false,
+        });
         // Pointer events (for better cross-platform support)
         if ('PointerEvent' in window) {
-            this.element.addEventListener('pointerdown', this.handlePointerDown, { passive: false });
-            this.element.addEventListener('pointermove', this.handlePointerMove, { passive: false });
-            this.element.addEventListener('pointerup', this.handlePointerUp, { passive: false });
-            this.element.addEventListener('pointercancel', this.handlePointerCancel, { passive: false });
+            this.element.addEventListener('pointerdown', this.handlePointerDown, {
+                passive: false,
+            });
+            this.element.addEventListener('pointermove', this.handlePointerMove, {
+                passive: false,
+            });
+            this.element.addEventListener('pointerup', this.handlePointerUp, {
+                passive: false,
+            });
+            this.element.addEventListener('pointercancel', this.handlePointerCancel, {
+                passive: false,
+            });
         }
     }
     // Gesture detection
@@ -302,7 +326,7 @@ export class GestureRecognizer {
                         timestamp: Date.now(),
                         target: this.element,
                         preventDefault: () => { },
-                        stopPropagation: () => { }
+                        stopPropagation: () => { },
                     });
                 }
             }, this.config.longPressDelay);
@@ -346,7 +370,7 @@ export class GestureRecognizer {
                     timestamp: Date.now(),
                     target: this.element,
                     preventDefault: () => { },
-                    stopPropagation: () => { }
+                    stopPropagation: () => { },
                 });
             }
             // Detect force touch
@@ -359,7 +383,7 @@ export class GestureRecognizer {
                     timestamp: Date.now(),
                     target: this.element,
                     preventDefault: () => { },
-                    stopPropagation: () => { }
+                    stopPropagation: () => { },
                 });
             }
         }
@@ -378,7 +402,9 @@ export class GestureRecognizer {
         const velocity = distance / duration;
         // Cancel timers
         this.cancelLongPress();
-        if (!this.isPanning && !this.isLongPressing && distance < this.config.tapThreshold) {
+        if (!this.isPanning &&
+            !this.isLongPressing &&
+            distance < this.config.tapThreshold) {
             // Detect tap or double tap
             const now = Date.now();
             if (now - this.lastTapTime < this.config.doubleTapDelay) {
@@ -402,7 +428,7 @@ export class GestureRecognizer {
                         timestamp: Date.now(),
                         target: this.element,
                         preventDefault: () => { },
-                        stopPropagation: () => { }
+                        stopPropagation: () => { },
                     });
                 }
                 else if (this.tapCount === 2) {
@@ -413,7 +439,7 @@ export class GestureRecognizer {
                         timestamp: Date.now(),
                         target: this.element,
                         preventDefault: () => { },
-                        stopPropagation: () => { }
+                        stopPropagation: () => { },
                     });
                 }
                 else {
@@ -425,13 +451,14 @@ export class GestureRecognizer {
                         timestamp: Date.now(),
                         target: this.element,
                         preventDefault: () => { },
-                        stopPropagation: () => { }
+                        stopPropagation: () => { },
                     });
                 }
                 this.tapCount = 0;
             }, this.config.doubleTapDelay);
         }
-        else if (distance > this.config.swipeThreshold && velocity > this.config.swipeVelocityThreshold) {
+        else if (distance > this.config.swipeThreshold &&
+            velocity > this.config.swipeVelocityThreshold) {
             // Detect swipe
             const direction = this.getSwipeDirection(deltaX, deltaY);
             this.emit('swipe', {
@@ -446,7 +473,7 @@ export class GestureRecognizer {
                 timestamp: Date.now(),
                 target: this.element,
                 preventDefault: () => { },
-                stopPropagation: () => { }
+                stopPropagation: () => { },
             });
         }
         // Reset state
@@ -461,7 +488,8 @@ export class GestureRecognizer {
         const scale = currentDistance / startDistance;
         const centerX = (point1.currentX + point2.currentX) / 2;
         const centerY = (point1.currentY + point2.currentY) / 2;
-        const velocity = Math.abs(scale - 1) / (Date.now() - Math.max(point1.startTime, point2.startTime));
+        const velocity = Math.abs(scale - 1) /
+            (Date.now() - Math.max(point1.startTime, point2.startTime));
         if (Math.abs(scale - 1) > this.config.pinchThreshold) {
             this.emit('pinch', {
                 type: 'pinch',
@@ -472,7 +500,7 @@ export class GestureRecognizer {
                 timestamp: Date.now(),
                 target: this.element,
                 preventDefault: () => { },
-                stopPropagation: () => { }
+                stopPropagation: () => { },
             });
         }
     }
@@ -487,7 +515,8 @@ export class GestureRecognizer {
             angle += 360;
         const centerX = (point1.currentX + point2.currentX) / 2;
         const centerY = (point1.currentY + point2.currentY) / 2;
-        const velocity = Math.abs(angle) / (Date.now() - Math.max(point1.startTime, point2.startTime));
+        const velocity = Math.abs(angle) /
+            (Date.now() - Math.max(point1.startTime, point2.startTime));
         if (Math.abs(angle) > this.config.rotateThreshold) {
             this.emit('rotate', {
                 type: 'rotate',
@@ -498,7 +527,7 @@ export class GestureRecognizer {
                 timestamp: Date.now(),
                 target: this.element,
                 preventDefault: () => { },
-                stopPropagation: () => { }
+                stopPropagation: () => { },
             });
         }
     }
@@ -523,7 +552,7 @@ export class GestureRecognizer {
                 timestamp: Date.now(),
                 target: this.element,
                 preventDefault: () => { },
-                stopPropagation: () => { }
+                stopPropagation: () => { },
             });
         }
     }
@@ -535,7 +564,7 @@ export class GestureRecognizer {
                 timestamp: Date.now(),
                 target: this.element,
                 preventDefault: () => { },
-                stopPropagation: () => { }
+                stopPropagation: () => { },
             });
         }
     }
@@ -618,12 +647,22 @@ export function useGestures(ref, config) {
         recognizerRef.current = recognizer;
         // Add listeners for all gesture types
         const gestureTypes = [
-            'tap', 'doubleTap', 'longPress', 'swipe', 'pan',
-            'pinch', 'rotate', 'force', 'edge', 'multiTap',
-            'twoFingerTap', 'threeFingerTap', 'fourFingerTap'
+            'tap',
+            'doubleTap',
+            'longPress',
+            'swipe',
+            'pan',
+            'pinch',
+            'rotate',
+            'force',
+            'edge',
+            'multiTap',
+            'twoFingerTap',
+            'threeFingerTap',
+            'fourFingerTap',
         ];
         gestureTypes.forEach(type => {
-            recognizer.on(type, (event) => {
+            recognizer.on(type, event => {
                 setGestures(prev => [...prev.slice(-9), event]);
             });
         });
@@ -752,5 +791,5 @@ export const GESTURE_PATTERNS = {
     appSwitcher: ['fourFingerTap'],
     // Force touch patterns
     preview: ['force'],
-    quickAction: ['force', 'swipe:up']
+    quickAction: ['force', 'swipe:up'],
 };

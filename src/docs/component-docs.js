@@ -57,11 +57,18 @@ export function generatePropDocs(component, customDocs) {
     if (customDocs) {
         Object.entries(customDocs).forEach(([propName, propDoc]) => {
             const existingIndex = defaultProps.findIndex(p => p.name === propName);
+            const mergedProp = {
+                name: propName,
+                type: propDoc.type || 'unknown',
+                description: propDoc.description || 'No description provided',
+                required: propDoc.required || false,
+                ...propDoc
+            };
             if (existingIndex >= 0) {
-                defaultProps[existingIndex] = { name: propName, ...propDoc };
+                defaultProps[existingIndex] = mergedProp;
             }
             else {
-                defaultProps.push({ name: propName, ...propDoc });
+                defaultProps.push(mergedProp);
             }
         });
     }
@@ -152,7 +159,7 @@ export const documentationTemplates = {
         category: 'layout',
         description: 'A flexible container component with glass morphism styling',
         accessibility: generateAccessibilityDocs([], [
-            'role - Defines the card\'s semantic role',
+            "role - Defines the card's semantic role",
             'aria-labelledby - References the card title',
         ]),
         designTokens: [

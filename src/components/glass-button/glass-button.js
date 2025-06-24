@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { forwardRef, useState, useRef, useEffect } from "react";
+import { forwardRef, useState, useRef, useCallback } from "react";
 import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
 import { useMagneticHover, createGlassRipple } from "@/lib/glass-physics";
 import { useLiquidGlass } from "@/hooks/use-liquid-glass";
@@ -7,17 +7,29 @@ import { useGlassEffectPerformance } from "@/hooks/use-performance-monitor";
 import { Slot } from "@radix-ui/react-slot";
 const GlassButton = forwardRef(({ className, variant = "primary", size = "md", asChild = false, leftIcon, rightIcon, loading = false, disabled, children, ...props }, ref) => {
     const [isPressed, setIsPressed] = useState(false);
-    const internalButtonRef = useRef(null); // Renamed for clarity
+    const internalButtonRef = useRef(null);
     const { magneticHover, specularHighlights } = useLiquidGlass();
     const { elementRef: magneticRef, transform } = useMagneticHover(0.3, 120);
     const { measureGlassInteraction } = useGlassEffectPerformance('Button');
     const Comp = asChild ? Slot : "button";
-    // Effect to assign internalButtonRef to magneticRef if magneticHover is enabled
-    useEffect(() => {
-        if (magneticHover && magneticRef && typeof magneticRef === 'object') {
-            magneticRef.current = internalButtonRef.current;
+    // Callback ref to handle both internal and external refs, including magnetic ref
+    const setRefs = useCallback((node) => {
+        // Set internal ref
+        if (internalButtonRef.current !== node) {
+            internalButtonRef.current = node;
         }
-    }, [magneticHover, magneticRef, internalButtonRef]);
+        // Assign to magnetic ref if enabled
+        if (magneticHover && magneticRef && 'current' in magneticRef) {
+            magneticRef.current = node;
+        }
+        // Assign to forwarded ref
+        if (typeof ref === 'function') {
+            ref(node);
+        }
+        else if (ref && 'current' in ref) {
+            ref.current = node;
+        }
+    }, [magneticHover, magneticRef, ref]);
     const handleClick = (e) => {
         const endMeasure = measureGlassInteraction('click');
         if (internalButtonRef.current && !disabled && !loading) {
@@ -52,17 +64,7 @@ const GlassButton = forwardRef(({ className, variant = "primary", size = "md", a
         lg: "w-5 h-5",
         xl: "w-6 h-6",
     };
-    return (_jsxs(Comp, { className: cn(baseClasses, variantClasses[variant], sizeClasses[size], className), ref: (node) => {
-            // Assign to internal ref
-            internalButtonRef.current = node;
-            // Assign to forwarded ref
-            if (typeof ref === 'function') {
-                ref(node);
-            }
-            else if (ref && typeof ref === 'object') {
-                ref.current = node;
-            }
-        }, style: {
+    return (_jsxs(Comp, { className: cn(baseClasses, variantClasses[variant], sizeClasses[size], className), ref: setRefs, style: {
             transform: magneticHover ? transform : undefined,
             ...props.style
         }, disabled: disabled || loading, "aria-busy": loading ? true : undefined, onMouseDown: () => setIsPressed(true), onMouseUp: () => setIsPressed(false), onMouseLeave: () => setIsPressed(false), onClick: handleClick, ...props, children: [loading && (_jsx("div", { className: "absolute inset-0 flex items-center justify-center bg-current/10 rounded-xl", "aria-hidden": "true", children: _jsx("div", { className: cn("animate-spin rounded-full border-2 border-current border-t-transparent", iconSizeClasses[size]) }) })), _jsxs("div", { className: cn("flex items-center justify-center gap-2", loading && "opacity-0"), "aria-hidden": loading ? true : undefined, children: [leftIcon && (_jsx("span", { className: cn("flex-shrink-0", iconSizeClasses[size]), "aria-hidden": "true", children: leftIcon })), _jsx("span", { className: "truncate", children: children }), rightIcon && (_jsx("span", { className: cn("flex-shrink-0", iconSizeClasses[size]), "aria-hidden": "true", children: rightIcon }))] })] }));

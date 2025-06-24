@@ -23,11 +23,11 @@ export class AccessibilityChecker {
         // Calculate score
         const errorCount = this.issues.filter(i => i.type === 'error').length;
         const warningCount = this.issues.filter(i => i.type === 'warning').length;
-        const score = Math.max(0, 100 - (errorCount * 15) - (warningCount * 5));
+        const score = Math.max(0, 100 - errorCount * 15 - warningCount * 5);
         return {
             element: componentName,
             issues: [...this.issues],
-            score
+            score,
         };
     }
     checkAriaAttributes(element) {
@@ -35,7 +35,13 @@ export class AccessibilityChecker {
         const ariaLabel = element.getAttribute('aria-label');
         const ariaLabelledBy = element.getAttribute('aria-labelledby');
         // Check for interactive elements without accessible names
-        const interactiveElements = ['button', 'link', 'input', 'select', 'textarea'];
+        const interactiveElements = [
+            'button',
+            'link',
+            'input',
+            'select',
+            'textarea',
+        ];
         const tagName = element.tagName.toLowerCase();
         if (interactiveElements.includes(tagName) || role) {
             if (!ariaLabel && !ariaLabelledBy && !element.textContent?.trim()) {
@@ -43,26 +49,28 @@ export class AccessibilityChecker {
                     type: 'error',
                     rule: 'accessible-name',
                     message: 'Interactive element must have an accessible name',
-                    element: tagName
+                    element: tagName,
                 });
             }
         }
         // Check for disabled elements
-        if (element.hasAttribute('disabled') && !element.hasAttribute('aria-disabled')) {
+        if (element.hasAttribute('disabled') &&
+            !element.hasAttribute('aria-disabled')) {
             this.issues.push({
                 type: 'warning',
                 rule: 'aria-disabled',
                 message: 'Consider using aria-disabled alongside disabled attribute',
-                element: tagName
+                element: tagName,
             });
         }
         // Check for loading states
-        if (element.querySelector('[class*="loading"]') && !element.hasAttribute('aria-busy')) {
+        if (element.querySelector('[class*="loading"]') &&
+            !element.hasAttribute('aria-busy')) {
             this.issues.push({
                 type: 'warning',
                 rule: 'aria-busy',
                 message: 'Loading states should include aria-busy attribute',
-                element: tagName
+                element: tagName,
             });
         }
     }
@@ -76,7 +84,7 @@ export class AccessibilityChecker {
                     type: 'error',
                     rule: 'keyboard-access',
                     message: 'Interactive element should be focusable',
-                    element: element.tagName.toLowerCase()
+                    element: element.tagName.toLowerCase(),
                 });
             }
             // Check focus indicator
@@ -88,7 +96,7 @@ export class AccessibilityChecker {
                     type: 'warning',
                     rule: 'focus-indicator',
                     message: 'Interactive element should have visible focus indicator',
-                    element: element.tagName.toLowerCase()
+                    element: element.tagName.toLowerCase(),
                 });
             }
         }
@@ -101,7 +109,7 @@ export class AccessibilityChecker {
                 type: 'warning',
                 rule: 'color-contrast',
                 message: 'Low opacity may cause contrast issues',
-                element: element.tagName.toLowerCase()
+                element: element.tagName.toLowerCase(),
             });
         }
         // Check for glass effects that might reduce contrast
@@ -110,20 +118,21 @@ export class AccessibilityChecker {
                 type: 'info',
                 rule: 'glass-contrast',
                 message: 'Verify text contrast with glass background effects',
-                element: element.tagName.toLowerCase()
+                element: element.tagName.toLowerCase(),
             });
         }
     }
     checkFocusManagement(element) {
         // Check for modal/dialog focus trapping
-        if (element.getAttribute('role') === 'dialog' || element.hasAttribute('data-modal')) {
+        if (element.getAttribute('role') === 'dialog' ||
+            element.hasAttribute('data-modal')) {
             const focusableElements = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
             if (focusableElements.length === 0) {
                 this.issues.push({
                     type: 'error',
                     rule: 'focus-management',
                     message: 'Modal should contain at least one focusable element',
-                    element: 'dialog'
+                    element: 'dialog',
                 });
             }
         }
@@ -136,7 +145,7 @@ export class AccessibilityChecker {
                 type: 'warning',
                 rule: 'semantic-markup',
                 message: 'Consider using semantic HTML instead of div for interactive elements',
-                element: 'div'
+                element: 'div',
             });
         }
         // Check for proper heading hierarchy
@@ -152,7 +161,7 @@ export class AccessibilityChecker {
                         type: 'warning',
                         rule: 'heading-hierarchy',
                         message: 'Heading levels should not skip levels',
-                        element: tagName
+                        element: tagName,
                     });
                 }
             }
@@ -160,8 +169,19 @@ export class AccessibilityChecker {
     }
     isInteractiveElement(element) {
         const interactiveRoles = [
-            'button', 'link', 'menuitem', 'tab', 'checkbox', 'radio', 'slider',
-            'spinbutton', 'textbox', 'combobox', 'grid', 'listbox', 'tree'
+            'button',
+            'link',
+            'menuitem',
+            'tab',
+            'checkbox',
+            'radio',
+            'slider',
+            'spinbutton',
+            'textbox',
+            'combobox',
+            'grid',
+            'listbox',
+            'tree',
         ];
         const tagName = element.tagName.toLowerCase();
         const role = element.getAttribute('role');
@@ -183,6 +203,8 @@ export function expectAccessible(element, componentName, minScore = 80) {
     const result = runAccessibilityCheck(element, componentName);
     if (result.score < minScore) {
         const errors = result.issues.filter(i => i.type === 'error');
-        throw new Error(`Accessibility score ${result.score} below minimum ${minScore}. Errors: ${errors.map(e => e.message).join(', ')}`);
+        throw new Error(`Accessibility score ${result.score} below minimum ${minScore}. Errors: ${errors
+            .map(e => e.message)
+            .join(', ')}`);
     }
 }

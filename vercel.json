@@ -1,9 +1,13 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build-storybook",
+  "devCommand": "npm run storybook",
   "outputDirectory": "storybook-static",
   "installCommand": "npm ci",
   "framework": null,
-  "regions": ["iad1"],
+  "regions": [
+    "iad1"
+  ],
   "functions": {},
   "headers": [
     {

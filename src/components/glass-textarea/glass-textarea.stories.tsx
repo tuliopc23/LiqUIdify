@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GlassTextarea } from './glass-textarea';
 
 const meta: Meta<typeof GlassTextarea> = {
@@ -8,40 +8,112 @@ const meta: Meta<typeof GlassTextarea> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: { type: 'select' },
+      options: ['default', 'minimal'],
+    },
+    resize: {
+      control: { type: 'select' },
+      options: ['none', 'vertical', 'horizontal', 'both'],
+    },
+    disabled: {
+      control: 'boolean',
+    },
+    placeholder: {
+      control: 'text',
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    children: 'GlassTextarea Component',
+    placeholder: 'Enter your message...',
   },
 };
 
-export const Secondary: Story = {
+export const Minimal: Story = {
   args: {
-    variant: 'secondary',
-    children: 'Secondary GlassTextarea',
+    variant: 'minimal',
+    placeholder: 'Minimal textarea',
   },
 };
 
-export const Sizes: Story = {
+export const WithValue: Story = {
+  args: {
+    defaultValue: 'This is some sample text in the textarea.',
+    placeholder: 'Enter your message...',
+  },
+};
+
+export const ResizeOptions: Story = {
   render: () => (
-    <div className="flex items-center gap-4">
-      <GlassTextarea size="sm">Small</GlassTextarea>
-      <GlassTextarea size="md">Medium</GlassTextarea>
-      <GlassTextarea size="lg">Large</GlassTextarea>
+    <div className="space-y-4 w-full max-w-md">
+      <div>
+        <label className="block text-sm font-medium mb-2">No Resize</label>
+        <GlassTextarea resize="none" placeholder="Cannot be resized" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Vertical Resize</label>
+        <GlassTextarea resize="vertical" placeholder="Can be resized vertically" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Horizontal Resize</label>
+        <GlassTextarea resize="horizontal" placeholder="Can be resized horizontally" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Both Directions</label>
+        <GlassTextarea resize="both" placeholder="Can be resized in both directions" />
+      </div>
     </div>
   ),
 };
 
 export const States: Story = {
   render: () => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-4">
-        <GlassTextarea>Normal</GlassTextarea>
-        <GlassTextarea disabled>Disabled</GlassTextarea>
+    <div className="space-y-4 w-full max-w-md">
+      <div>
+        <label className="block text-sm font-medium mb-2">Normal</label>
+        <GlassTextarea placeholder="Normal textarea" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">Disabled</label>
+        <GlassTextarea disabled placeholder="Disabled textarea" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-2">With Value</label>
+        <GlassTextarea defaultValue="This textarea has some initial content that demonstrates how text appears in the component." />
+      </div>
+    </div>
+  ),
+};
+
+export const FormExample: Story = {
+  render: () => (
+    <div className="w-full max-w-md space-y-4">
+      <div>
+        <label htmlFor="message" className="block text-sm font-medium mb-2">
+          Message
+        </label>
+        <GlassTextarea
+          id="message"
+          placeholder="Write your message here..."
+          rows={4}
+        />
+      </div>
+      <div>
+        <label htmlFor="feedback" className="block text-sm font-medium mb-2">
+          Feedback (Minimal)
+        </label>
+        <GlassTextarea
+          id="feedback"
+          variant="minimal"
+          placeholder="Your feedback..."
+          rows={3}
+        />
       </div>
     </div>
   ),

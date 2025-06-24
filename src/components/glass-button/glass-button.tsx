@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect } from "react";
+import { forwardRef, useState, useRef, useEffect, useCallback } from "react";
 import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
 import { useMagneticHover, createGlassRipple } from "@/lib/glass-physics";
 import { useLiquidGlass } from "@/hooks/use-liquid-glass";
@@ -32,18 +32,29 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     ref
   ) => {
     const [isPressed, setIsPressed] = useState(false);
-    const internalButtonRef = useRef<HTMLButtonElement>(null); // Renamed for clarity
+    const internalButtonRef = useRef<HTMLButtonElement | null>(null);
     const { magneticHover, specularHighlights } = useLiquidGlass();
     const { elementRef: magneticRef, transform } = useMagneticHover(0.3, 120);
     const { measureGlassInteraction } = useGlassEffectPerformance('Button');
     const Comp = asChild ? Slot : "button";
 
-    // Effect to assign internalButtonRef to magneticRef if magneticHover is enabled
-    useEffect(() => {
-      if (magneticHover && magneticRef && typeof magneticRef === 'object') {
-        (magneticRef as React.MutableRefObject<HTMLElement | null>).current = internalButtonRef.current;
+    // Callback ref to handle both internal and external refs, including magnetic ref
+    const setRefs = useCallback((node: HTMLButtonElement | null) => {
+      // Set internal ref
+      if (internalButtonRef.current !== node) {
+        (internalButtonRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
       }
-    }, [magneticHover, magneticRef, internalButtonRef]);
+      // Assign to magnetic ref if enabled
+      if (magneticHover && magneticRef && 'current' in magneticRef) {
+        (magneticRef as React.MutableRefObject<HTMLElement | null>).current = node;
+      }
+      // Assign to forwarded ref
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref && 'current' in ref) {
+        (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+      }
+    }, [magneticHover, magneticRef, ref]);
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       const endMeasure = measureGlassInteraction('click');
@@ -128,16 +139,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           sizeClasses[size],
           className
         )}
-        ref={(node: HTMLButtonElement) => {
-          // Assign to internal ref
-          (internalButtonRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
-          // Assign to forwarded ref
-          if (typeof ref === 'function') {
-            ref(node);
-          } else if (ref && typeof ref === 'object') {
-            (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
-          }
-        }}
+        ref={setRefs}
         style={{
           transform: magneticHover ? transform : undefined,
           ...props.style

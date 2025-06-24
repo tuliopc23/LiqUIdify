@@ -1,8 +1,8 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { createContext, useContext, useEffect, useRef, useState, useCallback } from "react";
-import { liquidGlassTokens } from "../lib/liquid-glass-tokens";
+import { createContext, useContext, useEffect, useRef, useState, useCallback, } from 'react';
+import { liquidGlassTokens } from '../lib/liquid-glass-tokens';
 const defaultConfig = {
-    color: "255,255,255",
+    color: '255,255,255',
     blur: 24,
     saturation: 180,
     opacity: 0.75,
@@ -24,21 +24,21 @@ export function LiquidGlassProvider({ children, config, }) {
         const adaptedBlur = merged.blur * (1 + (1 - analysis.brightness) * 0.2);
         const adaptedSaturation = merged.saturation * (1 + analysis.brightness * 0.1);
         // Set adaptive properties
-        root.style.setProperty("--glass-opacity-adaptive", String(Math.max(0.1, Math.min(0.9, adaptedOpacity))));
-        root.style.setProperty("--glass-blur-adaptive", `${Math.max(8, Math.min(48, adaptedBlur))}px`);
-        root.style.setProperty("--glass-saturation-adaptive", `${Math.max(120, Math.min(250, adaptedSaturation))}%`);
+        root.style.setProperty('--glass-opacity-adaptive', String(Math.max(0.1, Math.min(0.9, adaptedOpacity))));
+        root.style.setProperty('--glass-blur-adaptive', `${Math.max(8, Math.min(48, adaptedBlur))}px`);
+        root.style.setProperty('--glass-saturation-adaptive', `${Math.max(120, Math.min(250, adaptedSaturation))}%`);
         // Adapt color based on dominant hue
         const hue = analysis.dominantHue;
         const adaptedColor = `hsl(${hue}, 20%, ${analysis.brightness > 0.5 ? 95 : 15})`;
-        root.style.setProperty("--glass-color-adaptive", adaptedColor);
+        root.style.setProperty('--glass-color-adaptive', adaptedColor);
     }, [merged]);
     useEffect(() => {
         const root = document.documentElement;
         // Set base properties
-        root.style.setProperty("--glass-color", merged.color);
-        root.style.setProperty("--glass-blur", `${merged.blur}px`);
-        root.style.setProperty("--glass-saturation", `${merged.saturation}%`);
-        root.style.setProperty("--glass-opacity", String(merged.opacity));
+        root.style.setProperty('--glass-color', merged.color);
+        root.style.setProperty('--glass-blur', `${merged.blur}px`);
+        root.style.setProperty('--glass-saturation', `${merged.saturation}%`);
+        root.style.setProperty('--glass-opacity', String(merged.opacity));
         // Set liquid glass tokens
         Object.entries(liquidGlassTokens.colors.glass.white).forEach(([key, value]) => {
             root.style.setProperty(`--liquid-glass-${key}`, value);
@@ -53,7 +53,7 @@ export function LiquidGlassProvider({ children, config, }) {
         });
         // Enable specular highlights if configured
         if (merged.specularHighlights) {
-            root.style.setProperty("--specular-enabled", "1");
+            root.style.setProperty('--specular-enabled', '1');
         }
     }, [merged]);
     return (_jsx(LiquidGlassContext.Provider, { value: { ...merged, contentAnalysis, updateGlassStyle }, children: children }));
@@ -81,7 +81,8 @@ export const useContentAwareGlass = (contentRef) => {
             const bgColor = computedStyle.backgroundColor;
             // Parse background color and analyze
             const analysis = analyzeColor(bgColor);
-            if (analysis && JSON.stringify(analysis) !== JSON.stringify(analysisRef.current)) {
+            if (analysis &&
+                JSON.stringify(analysis) !== JSON.stringify(analysisRef.current)) {
                 analysisRef.current = analysis;
                 updateGlassStyle(analysis);
             }
@@ -100,7 +101,7 @@ export const useContentAwareGlass = (contentRef) => {
                 attributes: true,
                 childList: true,
                 subtree: true,
-                attributeFilter: ['style', 'class']
+                attributeFilter: ['style', 'class'],
             });
             resizeObserver.observe(contentRef.current);
         }
@@ -134,7 +135,7 @@ function analyzeColor(colorString) {
         averageColor: `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`,
         brightness,
         contrast,
-        dominantHue: hue
+        dominantHue: hue,
     };
 }
 // Helper function to convert RGB to HSL hue

@@ -56,7 +56,7 @@ function getWCAGRules(level) {
         'aria-valid-attr-value': { enabled: true },
         'aria-valid-attr': { enabled: true },
         'button-name': { enabled: true },
-        'bypass': { enabled: true },
+        bypass: { enabled: true },
         'color-contrast': { enabled: false }, // Will be enabled for AA/AAA
         'document-title': { enabled: true },
         'duplicate-id': { enabled: true },
@@ -67,11 +67,11 @@ function getWCAGRules(level) {
         'image-alt': { enabled: true },
         'input-button-name': { enabled: true },
         'input-image-alt': { enabled: true },
-        'label': { enabled: true },
+        label: { enabled: true },
         'link-name': { enabled: true },
-        'list': { enabled: true },
-        'listitem': { enabled: true },
-        'marquee': { enabled: true },
+        list: { enabled: true },
+        listitem: { enabled: true },
+        marquee: { enabled: true },
         'meta-refresh': { enabled: true },
         'object-alt': { enabled: true },
         'role-img-alt': { enabled: true },
@@ -98,7 +98,7 @@ function getWCAGRules(level) {
             'landmark-one-main': { enabled: true },
             'link-in-text-block': { enabled: true },
             'page-has-heading-one': { enabled: true },
-            'region': { enabled: true },
+            region: { enabled: true },
             'scope-attr-valid': { enabled: true },
             'skip-link': { enabled: true },
         });
@@ -295,7 +295,8 @@ export async function runAccessibilityTestSuite(element, options = {}) {
     const allPassed = axeResult.passed && keyboardResult.passed && screenReaderResult.passed;
     const averageScore = (axeResult.summary.score +
         (keyboardResult.passed ? 100 : 50) +
-        (screenReaderResult.passed ? 100 : 50)) / 3;
+        (screenReaderResult.passed ? 100 : 50)) /
+        3;
     return {
         overall: {
             passed: allPassed,
@@ -310,7 +311,9 @@ export async function runAccessibilityTestSuite(element, options = {}) {
 export async function expectAccessible(element, options) {
     const result = await testAccessibility(element, options);
     if (!result.passed) {
-        const violationMessages = result.violations.map(violation => `${violation.id}: ${violation.description}\n  ${violation.nodes.map(node => node.failureSummary).join('\n  ')}`).join('\n\n');
+        const violationMessages = result.violations
+            .map(violation => `${violation.id}: ${violation.description}\n  ${violation.nodes.map(node => node.failureSummary).join('\n  ')}`)
+            .join('\n\n');
         throw new Error(`Accessibility violations found:\n\n${violationMessages}`);
     }
 }

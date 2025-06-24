@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { UthemeUtoggle } from './theme-toggle.tsx';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ThemeToggle } from './theme-toggle';
 
-const meta: Meta<typeof UthemeUtoggle> = {
-  title: 'Glass/UthemeUtoggle',
-  component: UthemeUtoggle,
+const meta: Meta<typeof ThemeToggle> = {
+  title: 'Utilities/ThemeToggle',
+  component: ThemeToggle,
   parameters: {
     layout: 'centered',
   },
@@ -13,35 +13,41 @@ const meta: Meta<typeof UthemeUtoggle> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    children: 'UthemeUtoggle Component',
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-    children: 'Secondary UthemeUtoggle',
-  },
-};
-
-export const Sizes: Story = {
+export const Default: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <UthemeUtoggle size="sm">Small</UthemeUtoggle>
-      <UthemeUtoggle size="md">Medium</UthemeUtoggle>
-      <UthemeUtoggle size="lg">Large</UthemeUtoggle>
+      <ThemeToggle />
+      <span className="text-sm text-gray-600 dark:text-gray-300">
+        Click to toggle between light and dark themes
+      </span>
     </div>
   ),
 };
 
-export const States: Story = {
+export const InNavBar: Story = {
   render: () => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-4">
-        <UthemeUtoggle>Normal</UthemeUtoggle>
-        <UthemeUtoggle disabled>Disabled</UthemeUtoggle>
+    <div className="w-full max-w-md">
+      <nav className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+        <h1 className="text-lg font-semibold">App Title</h1>
+        <ThemeToggle />
+      </nav>
+    </div>
+  ),
+};
+
+export const WithGlassEffect: Story = {
+  render: () => (
+    <div className="p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-xl">
+      <div className="glass-effect p-6 rounded-xl border border-white/20 dark:border-white/10">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-semibold mb-1">Settings</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Customize your theme preference
+            </p>
+          </div>
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   ),

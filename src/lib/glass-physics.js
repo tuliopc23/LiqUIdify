@@ -10,7 +10,7 @@ export const PHYSICS_CONSTANTS = {
     MAGNETIC_STRENGTH: 0.15,
     MAGNETIC_RADIUS: 150,
     REPULSION_DISTANCE: 100,
-    FLUID_TENSION: 0.2
+    FLUID_TENSION: 0.2,
 };
 // Vector 2D class for physics calculations
 export class Vector2D {
@@ -34,7 +34,9 @@ export class Vector2D {
     }
     static normalize(vector) {
         const magnitude = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
-        return magnitude > 0 ? new Vector2D(vector.x / magnitude, vector.y / magnitude) : new Vector2D(0, 0);
+        return magnitude > 0
+            ? new Vector2D(vector.x / magnitude, vector.y / magnitude)
+            : new Vector2D(0, 0);
     }
     static multiply(vector, scalar) {
         return new Vector2D(vector.x * scalar, vector.y * scalar);
@@ -142,7 +144,7 @@ export const SPRING_PRESETS = {
     wobbly: { tension: 180, friction: 12 },
     stiff: { tension: 210, friction: 20 },
     slow: { tension: 280, friction: 60 },
-    molasses: { tension: 280, friction: 120 }
+    molasses: { tension: 280, friction: 120 },
 };
 // Enhanced spring physics class
 export class SpringPhysics {
@@ -325,7 +327,8 @@ export const useRepulsionEffect = (elements, repulsionStrength = 50) => {
                     const otherRect = otherElement.getBoundingClientRect();
                     const otherCenterX = otherRect.left + otherRect.width / 2;
                     const otherCenterY = otherRect.top + otherRect.height / 2;
-                    const distance = Math.sqrt(Math.pow(centerX - otherCenterX, 2) + Math.pow(centerY - otherCenterY, 2));
+                    const distance = Math.sqrt(Math.pow(centerX - otherCenterX, 2) +
+                        Math.pow(centerY - otherCenterY, 2));
                     if (distance < PHYSICS_CONSTANTS.REPULSION_DISTANCE && distance > 0) {
                         const force = repulsionStrength / (distance * distance);
                         const directionX = (centerX - otherCenterX) / distance;
@@ -355,19 +358,24 @@ export const createFluidMorph = (fromElement, toElement, duration = 500) => {
             y: 0,
             width: fromRect.width,
             height: fromRect.height,
-            borderRadius: getComputedStyle(fromElement).borderRadius
+            borderRadius: getComputedStyle(fromElement).borderRadius,
         },
         animate: {
             x: deltaX,
             y: deltaY,
             width: toRect.width,
             height: toRect.height,
-            borderRadius: getComputedStyle(toElement).borderRadius
+            borderRadius: getComputedStyle(toElement).borderRadius,
         },
         transition: {
             duration: duration / 1000,
-            ease: [PHYSICS_CONSTANTS.FLUID_TENSION, 0, 1 - PHYSICS_CONSTANTS.FLUID_TENSION, 1]
-        }
+            ease: [
+                PHYSICS_CONSTANTS.FLUID_TENSION,
+                0,
+                1 - PHYSICS_CONSTANTS.FLUID_TENSION,
+                1,
+            ],
+        },
     };
 };
 // Glass ripple effect
@@ -385,7 +393,8 @@ export const createGlassRipple = (element, x, y, color = 'rgba(255, 255, 255, 0.
     ripple.style.left = `${x - rect.left}px`;
     ripple.style.top = `${y - rect.top}px`;
     ripple.style.opacity = '1';
-    ripple.style.transition = 'width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out';
+    ripple.style.transition =
+        'width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out';
     ripple.style.transform = 'translate(-50%, -50%)';
     // Add to element
     element.style.position = 'relative';
@@ -517,7 +526,8 @@ export class FluidSimulation {
                     particle.density += influence;
                 }
             });
-            particle.pressure = this.pressureConstant * (particle.density - this.restDensity);
+            particle.pressure =
+                this.pressureConstant * (particle.density - this.restDensity);
         });
     }
     calculatePressureForces(forces) {
@@ -532,8 +542,8 @@ export class FluidSimulation {
                     const pressure = (particle.pressure + neighbor.pressure) / 2;
                     const direction = delta.normalize();
                     const gradient = this.smoothingKernelGradient(distance);
-                    force.x += direction.x * pressure * gradient / neighbor.density;
-                    force.y += direction.y * pressure * gradient / neighbor.density;
+                    force.x += (direction.x * pressure * gradient) / neighbor.density;
+                    force.y += (direction.y * pressure * gradient) / neighbor.density;
                 }
             });
             forces[i] = forces[i].add(force);
@@ -550,8 +560,10 @@ export class FluidSimulation {
                 if (distance < this.smoothingRadius) {
                     const velocityDiff = neighbor.velocity.subtract(particle.velocity);
                     const laplacian = this.smoothingKernelLaplacian(distance);
-                    force.x += viscosity * velocityDiff.x * laplacian / neighbor.density;
-                    force.y += viscosity * velocityDiff.y * laplacian / neighbor.density;
+                    force.x +=
+                        (viscosity * velocityDiff.x * laplacian) / neighbor.density;
+                    force.y +=
+                        (viscosity * velocityDiff.y * laplacian) / neighbor.density;
                 }
             });
             forces[i] = forces[i].add(force);
@@ -567,13 +579,13 @@ export class FluidSimulation {
         if (distance >= this.smoothingRadius)
             return 0;
         const x = 1 - distance / this.smoothingRadius;
-        return -3 * x * x / this.smoothingRadius;
+        return (-3 * x * x) / this.smoothingRadius;
     }
     smoothingKernelLaplacian(distance) {
         if (distance >= this.smoothingRadius)
             return 0;
         const x = 1 - distance / this.smoothingRadius;
-        return 6 * x / (this.smoothingRadius * this.smoothingRadius);
+        return (6 * x) / (this.smoothingRadius * this.smoothingRadius);
     }
     applyBoundaries(particle) {
         const damping = 0.8;
@@ -735,7 +747,7 @@ export class ParticleEmitter {
         const particle = new Particle({
             ...this.config.particleConfig,
             position: this.config.position.clone(),
-            velocity
+            velocity,
         });
         this.particles.push(particle);
     }
