@@ -281,7 +281,7 @@ export function testColorContrast(element, requiredLevel = 'AA') {
     };
 }
 // Simplified contrast ratio calculation (would need proper implementation)
-function calculateContrastRatio(foreground, background) {
+function calculateContrastRatio(_foreground, _background) {
     // This is a placeholder - real implementation would parse colors and calculate luminance
     return 4.5; // Mock value
 }

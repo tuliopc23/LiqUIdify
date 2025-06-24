@@ -6,6 +6,9 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "strict": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
     "noEmit": false,
     
     /* Bundler mode */

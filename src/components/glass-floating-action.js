@@ -60,13 +60,14 @@ const GlassFloatingAction = forwardRef(({ className, mainIcon, actions = [], pos
                 return { x: -(distance * (index + 1)), y: 0 };
             case 'right':
                 return { x: distance * (index + 1), y: 0 };
-            case 'radial':
+            case 'radial': {
                 const angle = (index * 360) / actionCount;
                 const radian = (angle * Math.PI) / 180;
                 return {
                     x: Math.cos(radian) * distance,
                     y: Math.sin(radian) * distance,
                 };
+            }
             default:
                 return { x: 0, y: -(distance * (index + 1)) };
         }

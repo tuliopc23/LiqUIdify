@@ -199,7 +199,7 @@ export function useHapticFeedback(config = {}) {
             }
         };
         // Load all audio files
-        Object.entries(configRef.current.audio.sounds).forEach(async ([type, url]) => {
+        Object.entries(configRef.current.audio.sounds).forEach(async ([_type, url]) => {
             if (url && !audioCache.current.has(url)) {
                 const buffer = await loadAudio(url);
                 if (buffer) {
@@ -320,7 +320,7 @@ export function useHaptic() {
     return context;
 }
 // Haptic feedback directive (for easy integration)
-export function withHapticFeedback(ref, type = 'light', config) {
+export function useHapticFeedbackIntegration(ref, type = 'light', config) {
     const haptic = useHapticFeedback(config);
     useEffect(() => {
         const element = ref.current;

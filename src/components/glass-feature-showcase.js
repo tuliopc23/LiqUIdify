@@ -8,7 +8,7 @@ import { easeInOut, fadeInUp, containerFadeIn, } from '@/lib/framer-motion-const
 const GlassFeatureShowcase = forwardRef(({ className, title, subtitle, description, features, layout = 'grid', columns = 3, variant = 'default', enableMagnetic = false, enableParallax = true, children, ...props }, ref) => {
     const contentRef = useRef(null);
     const { specularHighlights } = useLiquidGlass();
-    const contentAnalysis = useContentAwareGlass(contentRef);
+    useContentAwareGlass(contentRef);
     const gridClasses = {
         1: 'grid-cols-1',
         2: 'grid-cols-1 md:grid-cols-2',
@@ -17,7 +17,7 @@ const GlassFeatureShowcase = forwardRef(({ className, title, subtitle, descripti
     };
     const containerVariants = containerFadeIn;
     const itemVariants = fadeInUp;
-    const FeatureCard = ({ feature, index, }) => {
+    const FeatureCard = ({ feature, }) => {
         const cardRef = useRef(null);
         const { elementRef: magneticRef, transform } = useMagneticHover(0.15, 100);
         return (_jsxs(motion.div, { ref: node => {

@@ -9,7 +9,7 @@ import { fadeInUpLarge, containerFadeInFast, } from '@/lib/framer-motion-constan
 const GlassHero = forwardRef(({ className, title, subtitle, description, primaryAction, secondaryAction, backgroundImage, backgroundVideo, variant = 'default', size = 'lg', enableParallax = true, enableMagnetic = false, children, ...props }, ref) => {
     const contentRef = useRef(null);
     const { specularHighlights } = useLiquidGlass();
-    const contentAnalysis = useContentAwareGlass(contentRef);
+    useContentAwareGlass(contentRef);
     const { elementRef: magneticRef, transform } = useMagneticHover(0.2, 200);
     // Callback ref to handle both content and magnetic refs
     const setRefs = useCallback((node) => {

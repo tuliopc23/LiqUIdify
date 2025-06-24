@@ -214,7 +214,7 @@ export function setupVisualTesting() {
             // Mock implementation
             console.log(`Taking screenshot: ${name}`);
         },
-        compareScreenshots: async (baseline, current) => {
+        compareScreenshots: async (_baseline, _current) => {
             // Mock implementation
             return { passed: true, diff: null };
         },

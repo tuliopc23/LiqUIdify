@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { createContext, useContext, useEffect, useRef, useState, useCallback, } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, useCallback, useMemo, } from 'react';
 import { liquidGlassTokens } from '../lib/liquid-glass-tokens';
 const defaultConfig = {
     color: '255,255,255',
@@ -12,7 +12,7 @@ const defaultConfig = {
 };
 const LiquidGlassContext = createContext(defaultConfig);
 export function LiquidGlassProvider({ children, config, }) {
-    const merged = { ...defaultConfig, ...config };
+    const merged = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
     const [contentAnalysis, setContentAnalysis] = useState();
     const updateGlassStyle = useCallback((analysis) => {
         setContentAnalysis(analysis);
