@@ -35,8 +35,8 @@ export * from './components/component-showcase'
 export * from './hooks/use-liquid-glass'
 export * from './hooks/use-mobile'
 export * from './hooks/use-performance-monitor'
-export { useTheme, ThemeProvider as HookThemeProvider } from './hooks/use-theme'
-export { useToast as hookUseToast } from './hooks/use-toast'
+export { useTheme as useHookTheme, ThemeProvider as HookThemeProvider } from './hooks/use-theme'
+export { useToast as useHookToast } from './hooks/use-toast'
 
 // Foundation Components
 export * from './components/glass-foundation'
