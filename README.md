@@ -325,15 +325,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Physics engine inspired by Matter.js
 - Gesture recognition adapted from Hammer.js
 
-## 📞 Support
-
-- 📧 Email: support@glass-ui.dev
-- 💬 Discord: [Join our community](https://discord.gg/glass-ui)
-- 🐦 Twitter: [@GlassUI](https://twitter.com/glassui)
-- 📚 Documentation: [docs.glass-ui.dev](https://docs.glass-ui.dev)
 
 ---
 
 <div align="center">
-  Made with ❤️ by the Glass UI Team
-</div>
+  Made with ❤️ by Tulio Cunha
