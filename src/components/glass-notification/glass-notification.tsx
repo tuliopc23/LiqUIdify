@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
+import React, { useState } from "react";
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle, Bell } from "lucide-react";
 import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
 

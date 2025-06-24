@@ -1,5 +1,5 @@
 import React from "react";
-import { cn, getGlassClass } from "@/lib/glass-utils";
+import { cn } from "@/lib/glass-utils";
 
 export interface GlassLoadingProps {
   size?: "sm" | "md" | "lg" | "xl";

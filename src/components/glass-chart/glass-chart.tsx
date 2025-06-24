@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
+import { cn, getGlassClass } from "@/lib/glass-utils";
 
 export interface ChartDataPoint {
   label: string;

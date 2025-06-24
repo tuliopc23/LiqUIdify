@@ -76,18 +76,18 @@ export function LiquidGlassProvider({
     root.style.setProperty("--glass-opacity", String(merged.opacity));
     
     // Set liquid glass tokens
-    Object.entries(liquidGlassTokens.colors.glass.light).forEach(([key, value]) => {
-      root.style.setProperty(`--liquid-glass-${key}`, value);
+    Object.entries(liquidGlassTokens.colors.glass.white).forEach(([key, value]) => {
+      root.style.setProperty(`--liquid-glass-${key}`, value as string);
     });
     
     // Set shadow tokens
     Object.entries(liquidGlassTokens.shadows.glass).forEach(([key, value]) => {
-      root.style.setProperty(`--liquid-shadow-${key}`, value);
+      root.style.setProperty(`--liquid-shadow-${key}`, value as string);
     });
     
     // Set timing tokens
-    Object.entries(liquidGlassTokens.timing).forEach(([key, value]) => {
-      root.style.setProperty(`--liquid-timing-${key}`, value);
+    Object.entries(liquidGlassTokens.animation.duration).forEach(([key, value]) => {
+      root.style.setProperty(`--liquid-timing-${key}`, value as string);
     });
 
     // Enable specular highlights if configured
