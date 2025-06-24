@@ -1,6 +1,7 @@
 {
   "name": "glass-ui",
   "version": "1.0.0",
+  "type": "module",
   "description": "Advanced glassmorphism library with physics-based animations, WebGL shaders, and haptic feedback",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

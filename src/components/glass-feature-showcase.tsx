@@ -1,12 +1,10 @@
-import { forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
 import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
 import {
-  easeOutExpo,
   easeInOut,
-  staggeredContainer,
   fadeInUp,
   containerFadeIn,
 } from '@/lib/framer-motion-constants';
@@ -60,7 +58,7 @@ const GlassFeatureShowcase = forwardRef<
   ) => {
     const contentRef = useRef<HTMLDivElement | null>(null);
     const { specularHighlights } = useLiquidGlass();
-    const contentAnalysis = useContentAwareGlass(contentRef);
+    useContentAwareGlass(contentRef);
 
     const gridClasses = {
       1: 'grid-cols-1',
@@ -75,7 +73,6 @@ const GlassFeatureShowcase = forwardRef<
 
     const FeatureCard = ({
       feature,
-      index,
     }: {
       feature: FeatureItem;
       index: number;

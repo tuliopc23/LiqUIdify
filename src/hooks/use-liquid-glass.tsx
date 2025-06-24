@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   useCallback,
+  useMemo,
 } from 'react';
 import { liquidGlassTokens } from '../lib/liquid-glass-tokens';
 
@@ -38,7 +39,7 @@ const defaultConfig: Required<LiquidGlassConfig> = {
 const LiquidGlassContext = createContext<
   LiquidGlassConfig & {
     contentAnalysis?: ContentAnalysis;
-    updateGlassStyle: (analysis: ContentAnalysis) => void;
+    updateGlassStyle: (_analysis: ContentAnalysis) => void;
   }
 >(defaultConfig as any);
 
@@ -49,7 +50,7 @@ export function LiquidGlassProvider({
   children: React.ReactNode;
   config?: LiquidGlassConfig;
 }) {
-  const merged = { ...defaultConfig, ...config };
+  const merged = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
   const [contentAnalysis, setContentAnalysis] = useState<ContentAnalysis>();
 
   const updateGlassStyle = useCallback(

@@ -114,10 +114,11 @@ export function createPerformanceTest(name, renderFn, thresholds = {}) {
             const memoryUsage = monitor.getMemoryUsage();
             // Get web vitals (if available)
             const webVitals = await monitor.observeWebVitals();
+            const { renderTime: webVitalsRenderTime, memoryUsage: webVitalsMemoryUsage, ...otherWebVitals } = webVitals;
             const metrics = {
                 renderTime,
                 memoryUsage,
-                ...webVitals,
+                ...otherWebVitals,
             };
             // Check if metrics pass thresholds
             const passed = Object.entries(thresholds).every(([key, threshold]) => {
@@ -240,15 +241,12 @@ export const performancePresets = {
     },
 };
 // Enhanced performance testing with configurable options
-export function createEnhancedPerformanceTest(name, renderFn, opts = {}, custom) {
-    // FIXED: Removed duplicate timeout keys by computing conditionally
-    // Previously had: { ...opts, timeout: 5000, timeout: custom }
-    // This caused noDuplicateObjectKeys ESLint rule violation
-    const config = {
-        ...opts,
-        timeout: custom !== undefined ? custom : (opts.timeout || 5000)
+export function createEnhancedPerformanceTest(name, renderFn, opts = {}) {
+    const thresholds = {
+        renderTime: opts.renderTimeThreshold,
+        memoryUsage: opts.memoryThreshold,
     };
-    return createPerformanceTest(name, renderFn, config);
+    return createPerformanceTest(name, renderFn, thresholds);
 }
 // Export utilities for easy testing
 export const perf = {

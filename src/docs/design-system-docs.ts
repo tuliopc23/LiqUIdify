@@ -254,7 +254,7 @@ class DesignSystemDocGenerator {
     return usageMap[scale] || 'General spacing';
   }
 
-  private calculateContrast(color: string): { white: number; black: number } {
+  private calculateContrast(_color: string): { white: number; black: number } {
     // Simplified contrast calculation - would need proper implementation
     return { white: 4.5, black: 4.5 };
   }

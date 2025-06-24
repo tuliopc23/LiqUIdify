@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState, useCallback } from 'react';
+import React, { forwardRef, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
@@ -111,13 +111,14 @@ const GlassFloatingAction = forwardRef<
           return { x: -(distance * (index + 1)), y: 0 };
         case 'right':
           return { x: distance * (index + 1), y: 0 };
-        case 'radial':
+        case 'radial': {
           const angle = (index * 360) / actionCount;
           const radian = (angle * Math.PI) / 180;
           return {
             x: Math.cos(radian) * distance,
             y: Math.sin(radian) * distance,
           };
+        }
         default:
           return { x: 0, y: -(distance * (index + 1)) };
       }

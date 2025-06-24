@@ -402,8 +402,8 @@ export function testColorContrast(
 
 // Simplified contrast ratio calculation (would need proper implementation)
 function calculateContrastRatio(
-  foreground: string,
-  background: string
+  _foreground: string,
+  _background: string
 ): number {
   // This is a placeholder - real implementation would parse colors and calculate luminance
   return 4.5; // Mock value

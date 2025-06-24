@@ -35,7 +35,7 @@ export interface AudioFeedbackConfig {
   enabled?: boolean;
   volume?: number;
   sounds?: {
-    [key in HapticType]?: string;
+    [_key in HapticType]?: string;
   };
 }
 
@@ -273,7 +273,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
     // Load all audio files
     Object.entries(configRef.current.audio.sounds).forEach(
-      async ([type, url]) => {
+      async ([_type, url]) => {
         if (url && !audioCache.current.has(url)) {
           const buffer = await loadAudio(url);
           if (buffer) {
@@ -410,7 +410,7 @@ import React, { createContext, useContext, ReactNode } from 'react';
 
 interface HapticContextValue {
   config: HapticFeedbackConfig;
-  trigger: (type: HapticType, element?: HTMLElement | null) => void;
+  trigger: (_type: HapticType, _element?: HTMLElement | null) => void;
 }
 
 const HapticContext = createContext<HapticContextValue | null>(null);
@@ -440,7 +440,7 @@ export function useHaptic() {
 }
 
 // Haptic feedback directive (for easy integration)
-export function withHapticFeedback<T extends HTMLElement = HTMLElement>(
+export function useHapticFeedbackIntegration<T extends HTMLElement = HTMLElement>(
   ref: React.RefObject<T>,
   type: HapticType = 'light',
   config?: HapticFeedbackConfig

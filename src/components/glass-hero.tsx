@@ -1,14 +1,10 @@
-import { forwardRef, useRef, useCallback } from 'react';
+import React, { forwardRef, useRef, useCallback } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
 import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
 import { GlassButton } from './glass-button';
 import {
-  easeOutExpo,
-  easeInOut,
-  smoothTransition,
-  fastStaggeredContainer,
   fadeInUpLarge,
   containerFadeInFast,
 } from '@/lib/framer-motion-constants';
@@ -57,7 +53,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
   ) => {
     const contentRef = useRef<HTMLDivElement | null>(null);
     const { specularHighlights } = useLiquidGlass();
-    const contentAnalysis = useContentAwareGlass(contentRef);
+    useContentAwareGlass(contentRef);
     const { elementRef: magneticRef, transform } = useMagneticHover(0.2, 200);
 
     // Callback ref to handle both content and magnetic refs

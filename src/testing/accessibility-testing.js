@@ -312,7 +312,7 @@ export async function expectAccessible(element, options) {
     const result = await testAccessibility(element, options);
     if (!result.passed) {
         const violationMessages = result.violations
-            .map(violation => `${violation.id}: ${violation.description}\n  ${violation.nodes.map(node => node.failureSummary).join('\n  ')}`)
+            .map((violation) => `${violation.id}: ${violation.description}\n  ${violation.nodes.map((node) => node.failureSummary).join('\n  ')}`)
             .join('\n\n');
         throw new Error(`Accessibility violations found:\n\n${violationMessages}`);
     }

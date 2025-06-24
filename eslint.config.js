@@ -16,10 +16,23 @@ export default [
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
-        window: 'readonly',
-        document: 'readonly',
-        console: 'readonly',
-        process: 'readonly'
+        ...Object.fromEntries(
+          Object.entries(globals.browser).filter(([key]) => key.trim() === key)
+        ),
+        ...globals.node,
+        ...globals.es2020,
+        React: 'readonly',
+        HTMLElement: 'readonly',
+        HTMLDivElement: 'readonly',
+        HTMLButtonElement: 'readonly',
+        HTMLInputElement: 'readonly',
+        setTimeout: 'readonly',
+        performance: 'readonly',
+        requestIdleCallback: 'readonly',
+        expect: 'readonly',
+        jest: 'readonly',
+        global: 'readonly',
+        AudioWorkletGlobalScope: 'readonly'
       },
       parser: tsParser,
       parserOptions: {

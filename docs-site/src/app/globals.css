@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Glass UI Core Styles */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.liquid-glass-interactive {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.liquid-glass-interactive:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.liquid-glass-focus:focus-visible {
+  outline: 2px solid rgb(59, 130, 246);
+  outline-offset: 2px;
+}
+
+/* Documentation specific styles */
+.prose {
+  max-width: none;
+  color: #e2e8f0;
+}
+
+.prose h1 {
+  @apply text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent;
+}
+
+.prose h2 {
+  @apply text-2xl font-semibold mt-8 mb-4 text-white border-b border-white/10 pb-2;
+}
+
+.prose h3 {
+  @apply text-xl font-medium mt-6 mb-3 text-gray-200;
+}
+
+.prose p {
+  @apply mb-4 text-gray-300 leading-relaxed;
+}
+
+.prose ul {
+  @apply mb-4 pl-6 space-y-2;
+}
+
+.prose li {
+  @apply text-gray-300;
+}
+
+.prose code {
+  @apply bg-black/30 px-2 py-1 rounded text-blue-300 text-sm border border-white/10;
+}
+
+.prose pre {
+  @apply bg-black/30 border border-white/10 rounded-lg p-4 overflow-x-auto mb-6 backdrop-blur-sm;
+}
+
+.prose pre code {
+  @apply bg-transparent border-none px-0 py-0 text-gray-200;
+}
+
+/* Component preview styles */
+.component-preview {
+  @apply liquid-glass rounded-lg p-6 mb-6 border border-white/10;
+}
+
+.code-block {
+  @apply bg-black/30 rounded-lg border border-white/10 overflow-hidden mb-6;
+}
+
+.code-block-header {
+  @apply flex items-center justify-between px-4 py-2 border-b border-white/10 bg-white/5;
+}
+
+.code-block-title {
+  @apply text-sm font-medium text-gray-300;
+}
+
+.copy-button {
+  @apply text-xs px-2 py-1 rounded bg-white/10 hover:bg-white/20 transition-colors;
+}
+
+/* Syntax highlighting */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6b7280;
+}
+
+.token.punctuation {
+  color: #9ca3af;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f87171;
+}
+
+.token.boolean,
+.token.number {
+  color: #fbbf24;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #34d399;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #60a5fa;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: #a78bfa;
+}
+
+.token.keyword {
+  color: #f472b6;
+}
+
+.token.regex,
+.token.important {
+  color: #fb7185;
+}
+
+/* API documentation styles */
+.api-section {
+  @apply liquid-glass rounded-lg p-6 mb-6 border border-white/10;
+}
+
+.prop-table {
+  @apply w-full text-sm;
+}
+
+.prop-table th {
+  @apply text-left py-3 px-4 font-medium text-gray-300 border-b border-white/10;
+}
+
+.prop-table td {
+  @apply py-3 px-4 text-gray-400 border-b border-white/10;
+}
+
+.prop-name {
+  @apply font-mono text-blue-300;
+}
+
+.prop-type {
+  @apply font-mono text-purple-300 text-xs;
+}
+
+.prop-required {
+  @apply text-red-400 text-xs;
+}
+
+/* Navigation styles */
+.nav-link {
+  @apply block px-3 py-2 text-sm rounded-lg transition-colors;
+}
+
+.nav-link:hover {
+  @apply bg-white/5 text-blue-400;
+}
+
+.nav-link.active {
+  @apply bg-blue-500/10 text-blue-400 border border-blue-500/20;
+}
+
+/* Responsive utilities */
+@media (max-width: 1024px) {
+  .mobile-nav {
+    @apply block;
+  }
+
+  .desktop-nav {
+    @apply hidden;
+  }
+}
+
+/* Animation utilities */
+@keyframes glass-shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.glass-shimmer {
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  background-size: 200% 100%;
+  animation: glass-shimmer 2s infinite;
+}
+
+/* Scroll styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}

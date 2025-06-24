@@ -59,9 +59,9 @@ export function generatePropDocs(component, customDocs) {
             const existingIndex = defaultProps.findIndex(p => p.name === propName);
             const mergedProp = {
                 name: propName,
-                type: propDoc.type || 'unknown',
-                description: propDoc.description || 'No description provided',
-                required: propDoc.required || false,
+                type: propDoc?.type || 'unknown',
+                description: propDoc?.description || 'No description provided',
+                required: propDoc?.required || false,
                 ...propDoc
             };
             if (existingIndex >= 0) {
