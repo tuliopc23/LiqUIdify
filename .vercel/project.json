@@ -1,1 +1,5 @@
-{"projectId":"prj_DzbCJog8kvWyFv1NrNZwuwv4EHqx","orgId":"team_6bo8ADYuzBceYQPcjTSK2IKb"}
+{
+  "orgId": "team_6bo8ADYuzBceYQPcjTSK2IKb",
+  "projectId": "prj_DzbCJog8kvWyFv1NrNZwuwv4EHqx",
+  "settings": { "rootDirectory": "docs-site" }
+}

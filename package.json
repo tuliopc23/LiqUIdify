@@ -30,8 +30,6 @@
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "docs:prepare": "rm -rf docs-site/public/storybook && cp -R storybook-static docs-site/public/storybook",
-    "docs:build": "npm run docs:prepare && cd docs-site && npm run build",
     "prepublishOnly": "npm run build",
     "size": "npm run build && bundlesize"
   },
