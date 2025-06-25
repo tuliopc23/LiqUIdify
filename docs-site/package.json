@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "cd ..; and npm run build-storybook; and npm run docs:prepare",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
