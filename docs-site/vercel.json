@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd .. && npm run docs:prepare && cd docs-site && npm run build",
+  "buildCommand": "cd .. && npm run build-storybook && rm -rf docs-site/public/storybook && cp -R storybook-static docs-site/public/storybook && cd docs-site && npm run build",
   "devCommand": "npm run dev",
   "outputDirectory": "out",
   "installCommand": "cd .. && npm ci && cd docs-site && npm ci",
