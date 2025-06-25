@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react-vite'
+import type { Preview } from '@storybook/react'
 import { LiquidGlassProvider } from '../src/hooks/use-liquid-glass'
 import { ThemeProvider } from '../src/hooks/use-theme'
 import React from 'react'

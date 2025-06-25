@@ -65,7 +65,6 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     const { magneticHover, specularHighlights } = useLiquidGlass();
     const { elementRef: magneticRef, transform } = useMagneticHover(0.3, 120);
     const { measureGlassInteraction } = useGlassEffectPerformance('Button');
-    const Comp = asChild ? Slot : "button";
 
     // Callback ref to handle both internal and external refs, including magnetic ref
     const setRefs = useCallback((node: HTMLButtonElement | null) => {
@@ -160,8 +159,35 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       xl: "w-6 h-6",
     };
 
+    if (asChild) {
+      return (
+        <Slot
+          className={cn(
+            baseClasses,
+            variantClasses[variant],
+            sizeClasses[size],
+            className
+          )}
+          ref={setRefs}
+          style={{
+            transform: magneticHover ? transform : undefined,
+            ...props.style
+          }}
+          disabled={disabled || loading}
+          aria-busy={loading ? true : undefined}
+          onMouseDown={() => setIsPressed(true)}
+          onMouseUp={() => setIsPressed(false)}
+          onMouseLeave={() => setIsPressed(false)}
+          onClick={handleClick}
+          {...props}
+        >
+          {children}
+        </Slot>
+      );
+    }
+
     return (
-      <Comp
+      <button
         className={cn(
           baseClasses,
           variantClasses[variant],
@@ -174,7 +200,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           ...props.style
         }}
         disabled={disabled || loading}
-        aria-busy={loading ? true : undefined} // Added aria-busy for loading state
+        aria-busy={loading ? true : undefined}
         onMouseDown={() => setIsPressed(true)}
         onMouseUp={() => setIsPressed(false)}
         onMouseLeave={() => setIsPressed(false)}
@@ -188,7 +214,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           </div>
         )}
         
-        <div className={cn("flex items-center justify-center gap-2", loading && "opacity-0")} aria-hidden={loading ? true : undefined }>
+        <div className={cn("flex items-center justify-center gap-2", loading && "opacity-0")}>
           {leftIcon && (
             <span className={cn("flex-shrink-0", iconSizeClasses[size])} aria-hidden="true">
               {leftIcon}
@@ -201,7 +227,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
             </span>
           )}
         </div>
-      </Comp>
+      </button>
     );
   }
 );

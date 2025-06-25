@@ -38,7 +38,7 @@ describe('GlassButton', () => {
     
     expect(button).toBeDisabled();
     expect(button).toHaveAttribute('aria-busy', 'true');
-    expect(screen.getByText('Loading')).toHaveClass('opacity-0');
+    expect(screen.getByText('Loading').parentElement).toHaveClass('opacity-0');
   });
 
   it('is disabled when disabled prop is true', () => {

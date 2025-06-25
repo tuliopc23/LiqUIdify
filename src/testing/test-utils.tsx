@@ -10,6 +10,7 @@ import {
   type RenderResult,
 } from '@testing-library/react';
 import { ThemeProvider } from 'next-themes';
+import { vi, expect } from 'vitest';
 
 // Custom render function with theme provider
 interface CustomRenderOptions extends Omit<RenderOptions, 'wrapper'> {
@@ -41,7 +42,7 @@ export function renderWithTheme(
 
 // Mock intersection observer for testing
 export function mockIntersectionObserver() {
-  const mockIntersectionObserver = jest.fn();
+  const mockIntersectionObserver = vi.fn();
   mockIntersectionObserver.mockReturnValue({
     observe: () => null,
     unobserve: () => null,
@@ -63,7 +64,7 @@ export function mockIntersectionObserver() {
 
 // Mock resize observer for testing
 export function mockResizeObserver() {
-  const mockResizeObserver = jest.fn();
+  const mockResizeObserver = vi.fn();
   mockResizeObserver.mockReturnValue({
     observe: () => null,
     unobserve: () => null,
@@ -87,15 +88,15 @@ export function mockResizeObserver() {
 export function mockMatchMedia(matches: boolean = false) {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation(query => ({
+    value: vi.fn().mockImplementation(query => ({
       matches,
       media: query,
       onchange: null,
-      addListener: jest.fn(), // deprecated
-      removeListener: jest.fn(), // deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(), // deprecated
+      removeListener: vi.fn(), // deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     })),
   });
 }
@@ -107,8 +108,11 @@ export function setupTestEnvironment() {
   mockMatchMedia();
 
   // Mock requestAnimationFrame
-  global.requestAnimationFrame = jest.fn(cb => setTimeout(cb, 0));
-  global.cancelAnimationFrame = jest.fn();
+  global.requestAnimationFrame = vi.fn((cb: FrameRequestCallback) => {
+    setTimeout(cb, 0);
+    return 1;
+  }) as any;
+  global.cancelAnimationFrame = vi.fn();
 
   // Mock getComputedStyle
   Object.defineProperty(window, 'getComputedStyle', {
@@ -123,8 +127,8 @@ export function setupTestEnvironment() {
 
 // Cleanup function
 export function cleanupTestEnvironment() {
-  jest.restoreAllMocks();
-  jest.clearAllTimers();
+  vi.restoreAllMocks();
+  vi.clearAllTimers();
 }
 
 // Custom matchers for Glass UI components

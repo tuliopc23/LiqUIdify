@@ -1,10 +1,26 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'vitest-axe';
 import { GlassButton } from './glass-button';
 import { runAccessibilityCheck, expectAccessible } from '@/utils/accessibility-testing';
 
-expect.extend(toHaveNoViolations);
+// Custom matcher for accessibility violations
+expect.extend({
+  toHaveNoViolations(received) {
+    const pass = received.violations.length === 0;
+    if (pass) {
+      return {
+        message: () => `Expected accessibility violations, but none were found`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () => `Expected no accessibility violations, but found ${received.violations.length}:\n${received.violations.map((v: any) => `- ${v.description}`).join('\n')}`,
+        pass: false,
+      };
+    }
+  },
+});
 
 describe('GlassButton Accessibility', () => {
   it('should be accessible with default props', async () => {
@@ -112,7 +128,7 @@ describe('GlassButton Accessibility', () => {
     const { container } = render(
       <GlassButton 
         className="custom-glass-button"
-        style={{ opacity: 0.8 }}
+        style={{ opacity: 0.5 }}
       >
         Custom styled
       </GlassButton>
@@ -121,7 +137,7 @@ describe('GlassButton Accessibility', () => {
     const button = screen.getByRole('button');
     const checkResult = runAccessibilityCheck(button, 'CustomGlassButton');
     
-    // Should warn about potential contrast issues due to opacity
+    // Should warn about potential contrast issues due to low opacity
     const contrastWarnings = checkResult.issues.filter(
       issue => issue.rule === 'color-contrast'
     );

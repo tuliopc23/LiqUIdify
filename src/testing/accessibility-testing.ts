@@ -3,7 +3,7 @@
  * Comprehensive a11y testing tools for Glass UI components
  */
 
-import { axe } from 'jest-axe';
+import { axe } from 'vitest-axe';
 import type { AxeResults, RunOptions } from 'axe-core';
 
 export interface AccessibilityTestResult {

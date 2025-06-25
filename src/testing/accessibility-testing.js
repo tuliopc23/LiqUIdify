@@ -2,7 +2,7 @@
  * Accessibility Testing Utilities
  * Comprehensive a11y testing tools for Glass UI components
  */
-import { axe } from 'jest-axe';
+import { axe } from 'vitest-axe';
 // Main accessibility testing function
 export async function testAccessibility(element, options = {}) {
     const { level = 'AA', includeWarnings = true, timeout = 5000, ...axeOptions } = options;
