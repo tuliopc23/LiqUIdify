@@ -30,26 +30,27 @@ body {
 @tailwind utilities;
 
 /* Glass UI Core Styles */
-.liquid-glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
+@layer utilities {
+  .liquid-glass {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.20);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  }
 
-.liquid-glass-interactive {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+  .liquid-glass-interactive {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .liquid-glass-interactive:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.30);
+    transform: translateY(-1px);
+  }
 
-.liquid-glass-interactive:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
-}
-
-.liquid-glass-focus:focus-visible {
-  outline: 2px solid rgb(59, 130, 246);
-  outline-offset: 2px;
+  .liquid-glass-focus:focus-visible {
+    outline: 2px solid rgb(59,130,246);
+    outline-offset: 2px;
+  }
 }
 
 /* Documentation specific styles */
