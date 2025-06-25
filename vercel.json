@@ -1,10 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build-storybook",
-  "devCommand": "npm run storybook",
-  "outputDirectory": "storybook-static",
-  "installCommand": "npm ci",
-  "framework": null,
+  "buildCommand": "npm run docs:build",
+  "devCommand": "cd docs-site && npm run dev",
+  "outputDirectory": "docs-site/out",
+  "installCommand": "npm ci && cd docs-site && npm ci",
+  "framework": "nextjs",
   "regions": [
     "iad1"
   ],
