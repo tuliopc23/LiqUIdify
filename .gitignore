@@ -40,3 +40,7 @@ Thumbs.db
 # Temporary
 .tmp/
 .temp/
+
+# Vercel
+.vercel/
+.vercel

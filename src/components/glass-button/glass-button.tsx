@@ -162,18 +162,18 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     if (asChild) {
       return (
         <Slot
+          ref={setRefs}
           className={cn(
             baseClasses,
             variantClasses[variant],
             sizeClasses[size],
             className
           )}
-          ref={setRefs}
           style={{
             transform: magneticHover ? transform : undefined,
             ...props.style
           }}
-          disabled={disabled || loading}
+          data-disabled={disabled || loading}
           aria-busy={loading ? true : undefined}
           onMouseDown={() => setIsPressed(true)}
           onMouseUp={() => setIsPressed(false)}
