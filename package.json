@@ -1,24 +1,24 @@
 {
-  "name": "glass-ui-tulio",
+  "name": "liquidui-tulio",
   "version": "1.0.1",
   "type": "module",
-  "description": "🚀 Physics-based glassmorphism library with content-aware adaptation, magnetic interactions, and 30+ glass effects. TypeScript-first, accessibility-ready.",
-  "main": "dist/glass-ui.umd.js",
-  "module": "dist/glass-ui.es.js",
+  "description": "🚀 Physics-based liquid UI library with content-aware adaptation, magnetic interactions, and 30+ dynamic effects. TypeScript-first, accessibility-ready.",
+  "main": "dist/liquidui.umd.js",
+  "module": "dist/liquidui.es.js",
   "types": "dist/index.d.ts",
-  "style": "dist/glass.css",
+  "style": "dist/liquidui.css",
   "exports": {
     ".": {
-      "import": "./dist/glass-ui.es.js",
-      "require": "./dist/glass-ui.umd.js",
+      "import": "./dist/liquidui.es.js",
+      "require": "./dist/liquidui.umd.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./dist/glass.css",
-    "./css": "./dist/glass.css"
+    "./styles": "./dist/liquidui.css",
+    "./css": "./dist/liquidui.css"
   },
   "scripts": {
     "build": "npm run clean && npm run build:css && vite build",
-    "build:css": "postcss src/styles/glass.css -o dist/glass.css",
+    "build:css": "postcss src/styles/liquidui.css -o dist/liquidui.css",
     "build:watch": "vite build --watch",
     "clean": "rm -rf dist",
     "dev": "vite",
@@ -35,7 +35,7 @@
   },
   "keywords": [
     "glassmorphism",
-    "glass-ui",
+    "liquidui",
     "ui-library",
     "physics",
     "content-aware",
@@ -57,12 +57,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tuliopc23/glass-ui.git"
+    "url": "https://github.com/tuliopc23/liquidui.git"
   },
   "bugs": {
-    "url": "https://github.com/tuliopc23/glass-ui/issues"
+    "url": "https://github.com/tuliopc23/liquidui/issues"
   },
-  "homepage": "https://glass-ui.dev",
+  "homepage": "https://liquidui.dev",
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/tuliopc23"
@@ -113,6 +113,7 @@
     "@vitejs/plugin-react": "^4.6.0",
     "@vitest/coverage-v8": "^3.2.4",
     "autoprefixer": "^10.0.0",
+    "canvas": "^3.1.2",
     "cssnano": "^6.0.0",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",

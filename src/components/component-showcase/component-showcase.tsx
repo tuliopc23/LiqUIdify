@@ -215,11 +215,11 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2 text-primary">Search Input</label>
-                    <GlassInput variant="search" placeholder="Search..." />
+                    <GlassInput inputVariant="search" placeholder="Search..." />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2 text-primary">Password Input</label>
-                    <GlassInput variant="password" placeholder="Enter password..." />
+                    <GlassInput inputVariant="password" placeholder="Enter password..." />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2 text-primary">Textarea</label>

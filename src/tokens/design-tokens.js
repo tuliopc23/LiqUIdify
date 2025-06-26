@@ -1,5 +1,5 @@
 /**
- * Glass UI Design Tokens
+ * LiquidiUI Design Tokens
  * Comprehensive design system tokens for consistent theming
  */
 export const designTokens = {

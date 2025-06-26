@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { ComponentShowcase } from './component-showcase';
 
 const meta: Meta<typeof ComponentShowcase> = {

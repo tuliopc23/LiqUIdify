@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GlassButton } from './glass-button';
 import { PlayIcon, PlusIcon, TrashIcon } from 'lucide-react';
 

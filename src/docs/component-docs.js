@@ -1,6 +1,6 @@
 /**
  * Component Documentation System
- * Automatic documentation generation for Glass UI components
+ * Automatic documentation generation for LiquidiUI components
  */
 // Component documentation registry
 class ComponentDocRegistry {

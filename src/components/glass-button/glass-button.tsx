@@ -1,27 +1,37 @@
-import { forwardRef, useState, useRef, useEffect, useCallback } from "react";
+import { forwardRef, useState, useRef, useCallback } from "react";
 import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
 import { useMagneticHover, createGlassRipple } from "@/lib/glass-physics";
 import { useLiquidGlass } from "@/hooks/use-liquid-glass";
 import { useGlassEffectPerformance } from "@/hooks/use-performance-monitor";
+import { useMicroInteraction, useGlassMorph } from "@/lib/animation-system";
+import { useResponsiveComponentSize, useResponsiveDensity, useResponsiveVisibility, ResponsiveProps } from "@/lib/responsive-system";
 import { Slot } from "@radix-ui/react-slot";
+import {
+  ProfessionalButtonProps,
+  validateComponentProps,
+  getIconSizeClasses,
+  getPaddingClasses,
+  getMinHeightClasses,
+  getFocusRingClasses,
+  getLoadingStateClasses,
+  AccessibilityProps,
+} from "@/lib/component-standards";
 
 /**
- * Props for the GlassButton component
+ * Enhanced Glass Button Props following professional standards
  */
 export interface GlassButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Button variant style */
-  variant?: "primary" | "secondary" | "tertiary" | "ghost" | "destructive";
-  /** Button size */
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
-  /** Render as child component */
-  asChild?: boolean;
-  /** Icon to display on the left side */
-  leftIcon?: React.ReactNode;
-  /** Icon to display on the right side */
-  rightIcon?: React.ReactNode;
-  /** Show loading state */
-  loading?: boolean;
+  extends ProfessionalButtonProps, ResponsiveProps {
+  /** Button variant style with extended options */
+  variant?: "primary" | "secondary" | "tertiary" | "ghost" | "destructive" | "success" | "warning";
+  /** Text to show during loading state */
+  loadingText?: string;
+  /** Full width button */
+  fullWidth?: boolean;
+  /** Button shape variant */
+  shape?: "default" | "round" | "circle";
+  /** Enable haptic feedback on supported devices */
+  hapticFeedback?: boolean;
 }
 
 /**
@@ -54,15 +64,48 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       leftIcon,
       rightIcon,
       loading = false,
+      loadingText,
       disabled,
+      fullWidth = false,
+      shape = "default",
+      hapticFeedback = true,
+      magneticHover,
+      ripple = true,
+      specularHighlights,
+      responsive = true,
+      adaptiveSize = true,
+      fluidSpacing = false,
+      hideOn,
+      showOn,
       children,
       ...props
     },
     ref
   ) => {
+    // Validate props in development
+    validateComponentProps({ variant, size, disabled, loading }, 'GlassButton');
     const [isPressed, setIsPressed] = useState(false);
     const internalButtonRef = useRef<HTMLButtonElement | null>(null);
-    const { magneticHover, specularHighlights } = useLiquidGlass();
+    const { magneticHover: globalMagneticHover, specularHighlights: globalSpecularHighlights } = useLiquidGlass();
+    
+    // Responsive capabilities
+    const responsiveSize = useResponsiveComponentSize(size, adaptiveSize && responsive);
+    const { isTouchOptimized, spacing } = useResponsiveDensity();
+    const { isVisible, className: visibilityClassName } = useResponsiveVisibility({ hideOn, showOn });
+    
+    // Professional micro-interactions
+    const microAnimation = useMicroInteraction('glassButton');
+    const glassMorphStyle = useGlassMorph(microAnimation.state === 'hover' || microAnimation.state === 'active');
+    
+    // Early return if not visible on current breakpoint
+    if (!isVisible) {
+      return null;
+    }
+    
+    // Use prop overrides if provided, otherwise use global settings
+    const finalMagneticHover = magneticHover ?? globalMagneticHover;
+    const finalSpecularHighlights = specularHighlights ?? globalSpecularHighlights;
+    
     const { elementRef: magneticRef, transform } = useMagneticHover(0.3, 120);
     const { measureGlassInteraction } = useGlassEffectPerformance('Button');
 
@@ -73,7 +116,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         (internalButtonRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
       }
       // Assign to magnetic ref if enabled
-      if (magneticHover && magneticRef && 'current' in magneticRef) {
+      if (finalMagneticHover && magneticRef && 'current' in magneticRef) {
         (magneticRef as React.MutableRefObject<HTMLElement | null>).current = node;
       }
       // Assign to forwarded ref
@@ -82,16 +125,22 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       } else if (ref && 'current' in ref) {
         (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
       }
-    }, [magneticHover, magneticRef, ref]);
+    }, [finalMagneticHover, magneticRef, ref]);
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       const endMeasure = measureGlassInteraction('click');
       
-      if (internalButtonRef.current && !disabled && !loading) {
+      // Create ripple effect if enabled
+      if (ripple && internalButtonRef.current && !disabled && !loading) {
         const rect = internalButtonRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        createGlassRipple(internalButtonRef.current, x, y, 'rgba(255, 255, 255, 0.3)');
+        createGlassRipple(internalButtonRef.current, x, y, 'var(--glass-ripple, rgba(255, 255, 255, 0.3))');
+      }
+      
+      // Haptic feedback for supported devices
+      if (hapticFeedback && 'vibrate' in navigator && !disabled && !loading) {
+        navigator.vibrate(1);
       }
       
       props.onClick?.(e);
@@ -99,12 +148,35 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     };
 
     const baseClasses = cn(
-      "liquid-glass liquid-glass-interactive font-medium rounded-xl relative overflow-hidden",
-      "focus:outline-none liquid-glass-focus liquid-glass-ripple", // Ensure liquid-glass-focus provides a visible focus ring
+      // Base styles
+      "liquid-glass liquid-glass-interactive font-medium relative overflow-hidden",
+      "inline-flex items-center justify-center gap-2 transition-all duration-200",
+      
+      // Shape variants
+      shape === "circle" ? "rounded-full aspect-square" : 
+      shape === "round" ? "rounded-full" : "rounded-xl",
+      
+      // Full width
+      fullWidth && "w-full",
+      
+      // Responsive and touch optimization
+      isTouchOptimized && "touch-optimized",
+      responsive && fluidSpacing && "spacing-fluid-sm",
+      visibilityClassName,
+      
+      // Focus and interaction states
+      getFocusRingClasses(),
       microInteraction.smooth,
+      
+      // Disabled states
       "disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none",
-      specularHighlights && "liquid-glass-specular liquid-glass-shimmer",
-      magneticHover && "liquid-glass-magnetic",
+      getLoadingStateClasses(loading),
+      
+      // Glass effects
+      finalSpecularHighlights && "liquid-glass-specular liquid-glass-shimmer",
+      finalMagneticHover && "liquid-glass-magnetic",
+      
+      // Press state
       isPressed && "scale-[0.98] brightness-95"
     );
 
@@ -141,23 +213,36 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         "shadow-lg shadow-red-500/25",
         "border border-red-400/30"
       ),
+      success: cn(
+        "text-white font-semibold",
+        "bg-gradient-to-b from-green-500 to-green-600",
+        "hover:from-green-400 hover:to-green-500",
+        "active:from-green-600 active:to-green-600",
+        "shadow-lg shadow-green-500/25",
+        "border border-green-400/30"
+      ),
+      warning: cn(
+        "text-white font-semibold",
+        "bg-gradient-to-b from-yellow-500 to-yellow-600",
+        "hover:from-yellow-400 hover:to-yellow-500",
+        "active:from-yellow-600 active:to-yellow-600",
+        "shadow-lg shadow-yellow-500/25",
+        "border border-yellow-400/30"
+      ),
     };
 
+    // Use responsive size classes with adaptive sizing
+    const actualSize = responsive ? responsiveSize : size;
     const sizeClasses = {
-      xs: "px-2.5 py-1.5 text-xs min-h-[28px]",
-      sm: "px-3 py-2 text-sm min-h-[32px]",
-      md: "px-4 py-2.5 text-sm min-h-[40px]",
-      lg: "px-6 py-3 text-base min-h-[44px]",
-      xl: "px-8 py-4 text-lg min-h-[52px]",
+      xs: cn(getPaddingClasses('xs'), getMinHeightClasses('xs'), "text-xs"),
+      sm: cn(getPaddingClasses('sm'), getMinHeightClasses('sm'), "text-sm"),
+      md: cn(getPaddingClasses('md'), getMinHeightClasses('md'), "text-sm"),
+      lg: cn(getPaddingClasses('lg'), getMinHeightClasses('lg'), "text-base"),
+      xl: cn(getPaddingClasses('xl'), getMinHeightClasses('xl'), "text-lg"),
     };
 
-    const iconSizeClasses = {
-      xs: "w-3 h-3",
-      sm: "w-3.5 h-3.5", 
-      md: "w-4 h-4",
-      lg: "w-5 h-5",
-      xl: "w-6 h-6",
-    };
+    // Use standardized icon size classes based on actual size
+    const iconClasses = getIconSizeClasses(actualSize);
 
     if (asChild) {
       return (
@@ -166,18 +251,19 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           className={cn(
             baseClasses,
             variantClasses[variant],
-            sizeClasses[size],
+            sizeClasses[actualSize],
             className
           )}
           style={{
-            transform: magneticHover ? transform : undefined,
+            ...microAnimation.style,
+            ...glassMorphStyle,
+            transform: finalMagneticHover ? transform : microAnimation.style.transform,
             ...props.style
           }}
           data-disabled={disabled || loading}
           aria-busy={loading ? true : undefined}
-          onMouseDown={() => setIsPressed(true)}
-          onMouseUp={() => setIsPressed(false)}
-          onMouseLeave={() => setIsPressed(false)}
+          
+          {...microAnimation.bind}
           onClick={handleClick}
           {...props}
         >
@@ -191,38 +277,45 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         className={cn(
           baseClasses,
           variantClasses[variant],
-          sizeClasses[size],
+          sizeClasses[actualSize],
           className
         )}
         ref={setRefs}
         style={{
-          transform: magneticHover ? transform : undefined,
+          ...microAnimation.style,
+          ...glassMorphStyle,
+          transform: finalMagneticHover ? transform : microAnimation.style.transform,
           ...props.style
         }}
         disabled={disabled || loading}
         aria-busy={loading ? true : undefined}
-        onMouseDown={() => setIsPressed(true)}
-        onMouseUp={() => setIsPressed(false)}
-        onMouseLeave={() => setIsPressed(false)}
+        aria-label={loading && loadingText ? loadingText : children?.toString()}
+        aria-label={loading && loadingText ? loadingText : children?.toString()}
+        {...microAnimation.bind}
         onClick={handleClick}
         {...props}
       >
         {/* Loading state overlay */}
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-current/10 rounded-xl" aria-hidden="true">
-            <div className={cn("animate-spin rounded-full border-2 border-current border-t-transparent", iconSizeClasses[size])} />
+            <div className={cn("animate-spin rounded-full border-2 border-current border-t-transparent", iconClasses)} />
           </div>
         )}
         
-        <div className={cn("flex items-center justify-center gap-2", loading && "opacity-0")}>
+        <div className={cn("flex items-center justify-center", loading && "opacity-0")}>
           {leftIcon && (
-            <span className={cn("flex-shrink-0", iconSizeClasses[size])} aria-hidden="true">
+            <span className={cn("flex-shrink-0", iconClasses)} aria-hidden="true">
               {leftIcon}
             </span>
           )}
-          <span className="truncate">{children}</span>
+          
+          {/* Content with proper spacing */}
+          <span className="truncate">
+            {loading && loadingText ? loadingText : children}
+          </span>
+          
           {rightIcon && (
-            <span className={cn("flex-shrink-0", iconSizeClasses[size])} aria-hidden="true">
+            <span className={cn("flex-shrink-0", iconClasses)} aria-hidden="true">
               {rightIcon}
             </span>
           )}

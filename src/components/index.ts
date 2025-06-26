@@ -64,7 +64,8 @@ export { LiquidGlassProvider, useLiquidGlass } from '@/hooks/use-liquid-glass';
 export { useTheme } from '@/hooks/use-theme';
 
 // Showcase
-export { ComponentShowcase } from './component-showcase/index';
+export * from './component-showcase';
+export * from './documentation-showcase';
 
 // Website Building Components
 export { GlassHero, type GlassHeroProps } from './glass-hero';

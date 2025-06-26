@@ -1,6 +1,6 @@
 /**
  * Liquid Glass Design Tokens
- * Comprehensive design system tokens for Glass UI components
+ * Comprehensive design system tokens for LiquidiUI components
  * Based on Apple's Human Interface Guidelines and modern design principles
  */
 

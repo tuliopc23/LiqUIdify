@@ -1,6 +1,6 @@
 /**
  * Accessibility Testing Utilities
- * Comprehensive a11y testing tools for Glass UI components
+ * Comprehensive a11y testing tools for LiquidiUI components
  */
 import { axe } from 'vitest-axe';
 // Main accessibility testing function

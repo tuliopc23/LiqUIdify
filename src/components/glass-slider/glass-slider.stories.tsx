@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GlassSlider } from './glass-slider';
 
 const meta: Meta<typeof GlassSlider> = {

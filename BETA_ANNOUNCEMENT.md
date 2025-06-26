@@ -1,8 +1,8 @@
-# 🎉 Glass UI Beta Launch - The Future of Glassmorphism is Here!
+# 🎉 LiquidiUI Beta Launch - The Future of Glassmorphism is Here!
 
-## 🚀 What is Glass UI?
+## 🚀 What is LiquidiUI?
 
-Glass UI is the **first physics-based glassmorphism React component library** that automatically adapts glass effects to your content. Built by a solo developer, it rivals enterprise-level libraries with unique features you won't find anywhere else.
+LiquidiUI is the **first physics-based glassmorphism React component library** that automatically adapts glass effects to your content. Built by a solo developer, it rivals enterprise-level libraries with unique features you won't find anywhere else.
 
 ## ✨ What Makes It Special?
 
@@ -41,12 +41,12 @@ From basic frosted glass to:
 ## 🚀 Quick Start (2 Minutes)
 
 ```bash
-npm install @tuliopc23/glass-ui@beta
+npm install @tuliopc23/liquidui@beta
 ```
 
 ```tsx
-import { LiquidGlassProvider, GlassButton } from '@tuliopc23/glass-ui'
-import '@tuliopc23/glass-ui/dist/glass.css'
+import { LiquidGlassProvider, GlassButton } from '@tuliopc23/liquidui'
+import '@tuliopc23/liquidui/dist/liquidui.css'
 
 function App() {
   return (
@@ -94,9 +94,9 @@ This library represents **months of solo development** achieving what typically 
 This is a **beta release** - I'd love your feedback!
 
 ### 📧 **Get Involved**
-- **GitHub Issues**: [Report bugs & request features](https://github.com/tuliopc23/glass-ui/issues)
+- **GitHub Issues**: [Report bugs & request features](https://github.com/tuliopc23/liquidui/issues)
 - **Discussions**: Share your implementations and ask questions
-- **Contributing**: Check out [CONTRIBUTING.md](https://github.com/tuliopc23/glass-ui/blob/main/CONTRIBUTING.md)
+- **Contributing**: Check out [CONTRIBUTING.md](https://github.com/tuliopc23/liquidui/blob/main/CONTRIBUTING.md)
 
 ### 🎯 **Perfect For**
 - **Design system builders** looking for unique glass effects
@@ -122,16 +122,16 @@ This is a **beta release** - I'd love your feedback!
 
 ## 🙏 **A Personal Note**
 
-Building Glass UI solo has been an incredible journey. Every line of code, every component, every animation was crafted with care to create something truly unique in the React ecosystem.
+Building LiquidiUI solo has been an incredible journey. Every line of code, every component, every animation was crafted with care to create something truly unique in the React ecosystem.
 
-This beta launch is the culmination of that work, and I'm excited to share it with the community. Whether you're building the next big design system or just want beautiful glass effects in your app, Glass UI is ready to help you create something amazing.
+This beta launch is the culmination of that work, and I'm excited to share it with the community. Whether you're building the next big design system or just want beautiful glass effects in your app, LiquidiUI is ready to help you create something amazing.
 
 **Made with ❤️ by Tulio Cunha**
 
 ---
 
 ## 📦 **Package Info**
-- **Package**: `@tuliopc23/glass-ui@0.9.0-beta.1`
+- **Package**: `@tuliopc23/liquidui@0.9.0-beta.1`
 - **Bundle Size**: ~45KB (gzipped: ~13KB)
 - **Dependencies**: React 16.8+, TypeScript optional but recommended
 - **License**: MIT
@@ -139,8 +139,8 @@ This beta launch is the culmination of that work, and I'm excited to share it wi
 ## 🔗 **Links**
 - 📚 [Documentation](https://docs-site-hch63l7kd-tulio-pinheiro-cunha-s-projects.vercel.app)
 - 🎨 [Storybook](https://storybook-static-or3ttelxf-tulio-pinheiro-cunha-s-projects.vercel.app)
-- 📦 [NPM Package](https://www.npmjs.com/package/@tuliopc23/glass-ui)
-- 💻 [GitHub Repository](https://github.com/tuliopc23/glass-ui)
-- 🐛 [Report Issues](https://github.com/tuliopc23/glass-ui/issues)
+- 📦 [NPM Package](https://www.npmjs.com/package/@tuliopc23/liquidui)
+- 💻 [GitHub Repository](https://github.com/tuliopc23/liquidui)
+- 🐛 [Report Issues](https://github.com/tuliopc23/liquidui/issues)
 
 **Let's build the future of web interfaces together! 🚀**

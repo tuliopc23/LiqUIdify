@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { NotificationCenter } from './glass-notification';
 
 const meta: Meta<typeof NotificationCenter> = {

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GlassTable } from './glass-table';
 
 const meta: Meta<typeof GlassTable> = {

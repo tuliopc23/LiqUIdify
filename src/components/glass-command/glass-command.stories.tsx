@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { CommandPalette } from './glass-command';
 import { Home, Settings, User, FileText, Search, Bookmark, Mail, Calendar } from 'lucide-react';
 

@@ -36,8 +36,8 @@ describe('GlassButton Accessibility', () => {
   });
 
   it('should be accessible in loading state', async () => {
-    const { container } = render(<GlassButton loading>Loading...</GlassButton>);
-    const button = screen.getByRole('button');
+    const { container } = render(<GlassButton loading aria-label="Loading button">Loading...</GlassButton>);
+    const button = screen.getByRole('button', { name: /loading button/i });
     
     expect(button).toHaveAttribute('aria-busy', 'true');
     expect(button).toBeDisabled();
@@ -48,7 +48,7 @@ describe('GlassButton Accessibility', () => {
 
   it('should have proper focus management', () => {
     render(<GlassButton>Focus test</GlassButton>);
-    const button = screen.getByRole('button');
+    const button = screen.getByRole('button', { name: /focus test/i });
     
     // Should be focusable
     expect(button.tabIndex).not.toBe(-1);
@@ -61,7 +61,7 @@ describe('GlassButton Accessibility', () => {
   it('should support keyboard navigation', () => {
     const handleClick = vi.fn();
     render(<GlassButton onClick={handleClick}>Keyboard test</GlassButton>);
-    const button = screen.getByRole('button');
+    const button = screen.getByRole('button', { name: /keyboard test/i });
     
     button.focus();
     // Simulate Enter key
@@ -103,6 +103,9 @@ describe('GlassButton Accessibility', () => {
       </GlassButton>
     );
     
+    const linkButton = screen.getByRole('link', { name: /navigate to test page/i });
+    expect(linkButton).toBeInTheDocument();
+
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

@@ -1,4 +1,4 @@
-// Components - Glass UI Library
+// Components - LiquidiUI Library
 export * from './components/glass-avatar';
 export * from './components/glass-badge';
 export * from './components/glass-button';

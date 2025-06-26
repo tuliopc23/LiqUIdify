@@ -5,7 +5,7 @@ const initialState = {
     setTheme: () => null,
 };
 const ThemeProviderContext = createContext(initialState);
-export function ThemeProvider({ children, defaultTheme = 'light', storageKey = 'glass-ui-theme', ...props }) {
+export function ThemeProvider({ children, defaultTheme = 'light', storageKey = 'liquidui-theme', ...props }) {
     const [theme, setTheme] = useState(() => localStorage.getItem(storageKey) || defaultTheme);
     useEffect(() => {
         const root = window.document.documentElement;

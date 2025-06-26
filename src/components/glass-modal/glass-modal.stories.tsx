@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GlassModal } from './glass-modal';
 import { GlassButton } from '../glass-button/glass-button';
 import { useState } from 'react';

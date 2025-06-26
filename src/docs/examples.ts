@@ -1,5 +1,5 @@
 /**
- * Interactive Examples for Glass UI Components
+ * Interactive Examples for LiquidiUI Components
  * Comprehensive examples with code snippets and live previews
  */
 
@@ -43,7 +43,7 @@ export interface ExampleCollection {
 export const exampleCollections: ExampleCollection[] = [
   {
     name: 'Getting Started',
-    description: 'Basic examples to get you started with Glass UI',
+    description: 'Basic examples to get you started with LiquidiUI',
     examples: [
       {
         id: 'basic-button',
@@ -179,7 +179,7 @@ export function GlassInput() {
 
   {
     name: 'Advanced Components',
-    description: 'Complex components showcasing advanced Glass UI features',
+    description: 'Complex components showcasing advanced LiquidiUI features',
     examples: [
       {
         id: 'modal-dialog',
@@ -294,7 +294,7 @@ export function GlassNavigation() {
 
   {
     name: 'Layout Patterns',
-    description: 'Common layout patterns using Glass UI components',
+    description: 'Common layout patterns using LiquidiUI components',
     examples: [
       {
         id: 'dashboard-layout',
@@ -395,7 +395,7 @@ export function GlassDashboard() {
 
   {
     name: 'Form Patterns',
-    description: 'Form layouts and validation patterns with Glass UI',
+    description: 'Form layouts and validation patterns with LiquidiUI',
     examples: [
       {
         id: 'contact-form',

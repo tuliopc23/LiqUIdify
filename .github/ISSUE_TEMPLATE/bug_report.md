@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve Glass UI
+about: Create a report to help us improve LiquidiUI
 title: '[BUG] '
 labels: bug
 assignees: ''
@@ -23,7 +23,7 @@ A clear and concise description of what you expected to happen.
 What actually happened instead.
 
 ## Environment
-- **Glass UI version**: [e.g. 1.0.0]
+- **LiquidiUI version**: [e.g. 1.0.0]
 - **React version**: [e.g. 18.2.0]
 - **Browser**: [e.g. Chrome 120]
 - **OS**: [e.g. macOS, Windows, iOS]
@@ -32,7 +32,7 @@ What actually happened instead.
 ## Code Example
 ```tsx
 // Minimal reproducible example
-import { GlassButton } from '@tuliopc23/glass-ui'
+import { GlassButton } from '@tuliopc23/liquidui'
 
 function App() {
   return (

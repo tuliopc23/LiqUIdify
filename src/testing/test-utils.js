@@ -85,7 +85,7 @@ export function cleanupTestEnvironment() {
     jest.restoreAllMocks();
     jest.clearAllTimers();
 }
-// Custom matchers for Glass UI components
+// Custom matchers for LiquidiUI components
 export const customMatchers = {
     toHaveGlassEffect(received) {
         const style = window.getComputedStyle(received);

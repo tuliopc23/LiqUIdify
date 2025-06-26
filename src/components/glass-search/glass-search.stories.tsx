@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GlassSearch } from './glass-search';
 
 const meta: Meta<typeof GlassSearch> = {

@@ -1,5 +1,5 @@
 /**
- * Comprehensive Guides for Glass UI
+ * Comprehensive Guides for LiquidiUI
  * Step-by-step guides for implementation, customization, and best practices
  */
 // Comprehensive guides collection
@@ -7,7 +7,7 @@ export const guides = [
     {
         id: 'installation-setup',
         title: 'Installation and Setup',
-        description: 'Complete guide to installing and setting up Glass UI in your project',
+        description: 'Complete guide to installing and setting up LiquidiUI in your project',
         category: 'getting-started',
         difficulty: 'beginner',
         estimatedTime: '15 minutes',
@@ -22,29 +22,29 @@ export const guides = [
             {
                 id: 'installation',
                 title: 'Installation',
-                content: `Glass UI can be installed using your preferred package manager. We recommend using npm, yarn, or pnpm for the best experience.`,
+                content: `LiquidiUI can be installed using your preferred package manager. We recommend using npm, yarn, or pnpm for the best experience.`,
                 codeExamples: [
                     {
                         title: 'Install with npm',
-                        description: 'Install Glass UI and its dependencies using npm',
+                        description: 'Install LiquidiUI and its dependencies using npm',
                         language: 'bash',
-                        code: `npm install @glass-ui/react @glass-ui/tokens
+                        code: `npm install @liquidui/react @liquidui/tokens
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p`,
                     },
                     {
                         title: 'Install with yarn',
-                        description: 'Install Glass UI and its dependencies using yarn',
+                        description: 'Install LiquidiUI and its dependencies using yarn',
                         language: 'bash',
-                        code: `yarn add @glass-ui/react @glass-ui/tokens
+                        code: `yarn add @liquidui/react @liquidui/tokens
 yarn add -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p`,
                     },
                     {
                         title: 'Install with pnpm',
-                        description: 'Install Glass UI and its dependencies using pnpm',
+                        description: 'Install LiquidiUI and its dependencies using pnpm',
                         language: 'bash',
-                        code: `pnpm add @glass-ui/react @glass-ui/tokens
+                        code: `pnpm add @liquidui/react @liquidui/tokens
 pnpm add -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p`,
                     },
@@ -53,11 +53,11 @@ npx tailwindcss init -p`,
             {
                 id: 'tailwind-config',
                 title: 'Tailwind CSS Configuration',
-                content: `Configure Tailwind CSS to work with Glass UI components and design tokens. This step is crucial for proper styling and theme support.`,
+                content: `Configure Tailwind CSS to work with LiquidiUI components and design tokens. This step is crucial for proper styling and theme support.`,
                 codeExamples: [
                     {
                         title: 'tailwind.config.js',
-                        description: 'Configure Tailwind CSS with Glass UI preset',
+                        description: 'Configure Tailwind CSS with LiquidiUI preset',
                         language: 'json',
                         filename: 'tailwind.config.js',
                         code: `/** @type {import('tailwindcss').Config} */
@@ -68,12 +68,12 @@ module.exports = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-    './node_modules/@glass-ui/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@liquidui/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
       colors: {
-        // Glass UI color tokens
+        // LiquidiUI color tokens
         glass: {
           light: {
             primary: 'rgba(255, 255, 255, 0.25)',
@@ -132,25 +132,25 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    require("@glass-ui/tailwind-plugin"),
+    require("@liquidui/tailwind-plugin"),
   ],
 }`,
                     },
                 ],
                 tips: [
-                    'Make sure to include the Glass UI plugin for additional utilities',
-                    'The content array should include paths to all files using Glass UI components',
+                    'Make sure to include the LiquidiUI plugin for additional utilities',
+                    'The content array should include paths to all files using LiquidiUI components',
                     'Dark mode is configured using the "class" strategy for better control',
                 ],
             },
             {
                 id: 'css-setup',
                 title: 'CSS Setup',
-                content: `Add the necessary CSS imports and custom styles to enable Glass UI components and effects.`,
+                content: `Add the necessary CSS imports and custom styles to enable LiquidiUI components and effects.`,
                 codeExamples: [
                     {
                         title: 'globals.css',
-                        description: 'Add Glass UI styles to your global CSS file',
+                        description: 'Add LiquidiUI styles to your global CSS file',
                         language: 'css',
                         filename: 'src/styles/globals.css',
                         code: `@tailwind base;
@@ -250,7 +250,7 @@ module.exports = {
             {
                 id: 'provider-setup',
                 title: 'Provider Setup',
-                content: `Wrap your application with the necessary providers to enable theming and Glass UI functionality.`,
+                content: `Wrap your application with the necessary providers to enable theming and LiquidiUI functionality.`,
                 codeExamples: [
                     {
                         title: 'App.tsx',
@@ -259,7 +259,7 @@ module.exports = {
                         filename: 'src/App.tsx',
                         code: `import React from 'react';
 import { ThemeProvider } from 'next-themes';
-import { GlassUIProvider } from '@glass-ui/react';
+import { GlassUIProvider } from '@liquidui/react';
 import './styles/globals.css';
 
 function App() {
@@ -275,7 +275,7 @@ function App() {
           {/* Your app content */}
           <main>
             <h1 className="text-4xl font-bold text-center py-8">
-              Welcome to Glass UI
+              Welcome to LiquidiUI
             </h1>
           </main>
         </div>
@@ -293,7 +293,7 @@ export default App;`,
                         filename: 'src/app/layout.tsx',
                         code: `import { Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
-import { GlassUIProvider } from '@glass-ui/react';
+import { GlassUIProvider } from '@liquidui/react';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -323,7 +323,7 @@ export default function RootLayout({
                     },
                 ],
                 warnings: [
-                    'Make sure to import the CSS file before using any Glass UI components',
+                    'Make sure to import the CSS file before using any LiquidiUI components',
                     'The suppressHydrationWarning prop is needed for Next.js to prevent hydration warnings with theme switching',
                 ],
             },
@@ -332,24 +332,24 @@ export default function RootLayout({
     {
         id: 'first-component',
         title: 'Creating Your First Component',
-        description: 'Learn how to create and customize your first Glass UI component',
+        description: 'Learn how to create and customize your first LiquidiUI component',
         category: 'getting-started',
         difficulty: 'beginner',
         estimatedTime: '10 minutes',
-        prerequisites: ['Glass UI installed and configured'],
+        prerequisites: ['LiquidiUI installed and configured'],
         lastUpdated: '2024-01-15',
         relatedGuides: ['installation-setup', 'component-variants'],
         sections: [
             {
                 id: 'basic-button',
                 title: 'Basic Button Component',
-                content: `Let's start by creating a simple button component using Glass UI. This will demonstrate the basic usage and styling capabilities.`,
+                content: `Let's start by creating a simple button component using LiquidiUI. This will demonstrate the basic usage and styling capabilities.`,
                 codeExamples: [
                     {
                         title: 'Basic Button',
                         description: 'Create a simple glass button',
                         language: 'tsx',
-                        code: `import { Button } from '@glass-ui/react';
+                        code: `import { Button } from '@liquidui/react';
 
 export function MyFirstButton() {
   return (
@@ -363,7 +363,7 @@ export function MyFirstButton() {
                         title: 'Button with Icon',
                         description: 'Add an icon to your button',
                         language: 'tsx',
-                        code: `import { Button } from '@glass-ui/react';
+                        code: `import { Button } from '@liquidui/react';
 import { PlusIcon } from '@heroicons/react/24/outline';
 
 export function ButtonWithIcon() {
@@ -391,7 +391,7 @@ export function ButtonWithIcon() {
                         title: 'Simple Card',
                         description: 'Create a basic glass card',
                         language: 'tsx',
-                        code: `import { Card, CardContent, CardHeader, CardTitle } from '@glass-ui/react';
+                        code: `import { Card, CardContent, CardHeader, CardTitle } from '@liquidui/react';
 
 export function MyFirstCard() {
   return (
@@ -410,8 +410,8 @@ export function MyFirstCard() {
                         title: 'Interactive Card',
                         description: 'Add hover effects and interactions',
                         language: 'tsx',
-                        code: `import { Card, CardContent, CardHeader, CardTitle } from '@glass-ui/react';
-import { Button } from '@glass-ui/react';
+                        code: `import { Card, CardContent, CardHeader, CardTitle } from '@liquidui/react';
+import { Button } from '@liquidui/react';
 
 export function InteractiveCard() {
   return (
@@ -444,7 +444,7 @@ export function InteractiveCard() {
     {
         id: 'theming-guide',
         title: 'Theming and Customization',
-        description: 'Complete guide to customizing Glass UI themes and creating your own design system',
+        description: 'Complete guide to customizing LiquidiUI themes and creating your own design system',
         category: 'customization',
         difficulty: 'intermediate',
         estimatedTime: '30 minutes',
@@ -458,13 +458,13 @@ export function InteractiveCard() {
             {
                 id: 'theme-structure',
                 title: 'Understanding Theme Structure',
-                content: `Glass UI themes are built using CSS custom properties and design tokens. This allows for easy customization and theme switching.`,
+                content: `LiquidiUI themes are built using CSS custom properties and design tokens. This allows for easy customization and theme switching.`,
                 codeExamples: [
                     {
                         title: 'Custom Theme Configuration',
                         description: 'Create a custom theme configuration',
                         language: 'tsx',
-                        code: `import { createTheme } from '@glass-ui/react';
+                        code: `import { createTheme } from '@liquidui/react';
 
 export const customTheme = createTheme({
   colors: {
@@ -512,7 +512,7 @@ export const customTheme = createTheme({
                         title: 'Theme Provider Setup',
                         description: 'Apply your custom theme using the theme provider',
                         language: 'tsx',
-                        code: `import { GlassUIProvider } from '@glass-ui/react';
+                        code: `import { GlassUIProvider } from '@liquidui/react';
 import { customTheme } from './theme';
 
 function App() {
@@ -528,7 +528,7 @@ function App() {
                         description: 'Implement dynamic theme switching',
                         language: 'tsx',
                         code: `import { useState } from 'react';
-import { GlassUIProvider, Button } from '@glass-ui/react';
+import { GlassUIProvider, Button } from '@liquidui/react';
 import { lightTheme, darkTheme, customTheme } from './themes';
 
 function App() {
@@ -566,7 +566,7 @@ function App() {
     {
         id: 'accessibility-guide',
         title: 'Accessibility Best Practices',
-        description: 'Comprehensive guide to building accessible interfaces with Glass UI',
+        description: 'Comprehensive guide to building accessible interfaces with LiquidiUI',
         category: 'best-practices',
         difficulty: 'intermediate',
         estimatedTime: '45 minutes',
@@ -586,7 +586,7 @@ function App() {
                         title: 'High Contrast Text',
                         description: 'Ensure text remains readable on glass backgrounds',
                         language: 'tsx',
-                        code: `import { Card, CardContent } from '@glass-ui/react';
+                        code: `import { Card, CardContent } from '@liquidui/react';
 
 export function AccessibleGlassCard() {
   return (
@@ -622,7 +622,7 @@ export function AccessibleGlassCard() {
                         title: 'Accessible Button Group',
                         description: 'Create keyboard-navigable button groups',
                         language: 'tsx',
-                        code: `import { Button } from '@glass-ui/react';
+                        code: `import { Button } from '@liquidui/react';
 import { useRef, KeyboardEvent } from 'react';
 
 export function AccessibleButtonGroup() {

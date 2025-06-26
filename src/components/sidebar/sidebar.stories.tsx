@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Sidebar } from './sidebar';
 import { useState } from 'react';
 
@@ -30,7 +30,7 @@ const SidebarWrapper = ({
   return (
     <div className="h-screen bg-gray-50 dark:bg-gray-900">
       <div className="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center px-6">
-        <h1 className="text-xl font-semibold">Glass UI Documentation</h1>
+        <h1 className="text-xl font-semibold">LiquidiUI Documentation</h1>
       </div>
       <Sidebar 
         activeSection={activeSection} 

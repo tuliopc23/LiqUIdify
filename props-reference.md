@@ -1,0 +1,109 @@
+### Glass Feature Showcase
+- **title**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: The main title of the feature showcase.
+- **subtitle**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: An optional subtitle for the showcase.
+- **description**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: A brief description of the features.
+- **features**: `FeatureItem[]`
+  - **Default**: N/A
+  - **Meaning**: Array of feature items to display.
+- **layout**: `'grid' | 'masonry' | 'carousel' | 'stacked'`
+  - **Default**: `'grid'`
+  - **Meaning**: Layout style for the features.
+- **columns**: `1 | 2 | 3 | 4`
+  - **Default**: `3`
+  - **Meaning**: Number of columns in the grid layout.
+- **variant**: `'default' | 'minimal' | 'cards' | 'floating'`
+  - **Default**: `'default'`
+  - **Meaning**: Visual variant styling.
+- **enableMagnetic**: `boolean`
+  - **Default**: `false`
+  - **Meaning**: Enable magnetic effect on hover.
+- **enableParallax**: `boolean`
+  - **Default**: `true`
+  - **Meaning**: Enable parallax background effect.
+
+### Glass Floating Action
+- **mainIcon**: `React.ReactNode`
+  - **Default**: N/A
+  - **Meaning**: Icon for the main action button.
+- **actions**: `FloatingAction[] | undefined`
+  - **Default**: `[]`
+  - **Meaning**: Array of actions to display upon expansion.
+- **position**: `'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'center'`
+  - **Default**: `'bottom-right'`
+  - **Meaning**: Position of the floating action button.
+- **size**: `'sm' | 'md' | 'lg'`
+  - **Default**: `'md'`
+  - **Meaning**: Size of the action button.
+- **variant**: `'default' | 'minimal' | 'glow'`
+  - **Default**: `'default'`
+  - **Meaning**: Visual variant styling.
+- **enableMagnetic**: `boolean`
+  - **Default**: `true`
+  - **Meaning**: Enable magnetic effect on hover.
+- **expandDirection**: `'up' | 'down' | 'left' | 'right' | 'radial'`
+  - **Default**: `'up'`
+  - **Meaning**: Direction in which actions expand.
+- **tooltip**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: Tooltip text for the main action.
+
+### Glass Footer
+- **links**: `GlassFooterLink[] | undefined`
+  - **Default**: N/A
+  - **Meaning**: Array of footer links to display.
+
+### Glass Header
+- **title**: `React.ReactNode`
+  - **Default**: N/A
+  - **Meaning**: Title of the header.
+- **subtitle**: `React.ReactNode | undefined`
+  - **Default**: N/A
+  - **Meaning**: Subtitle of the header if any.
+- **actions**: `React.ReactNode | undefined`
+  - **Default**: N/A
+  - **Meaning**: Actions to include in the header if any.
+- **className**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: Custom class names for styling.
+
+### Glass Hero
+- **title**: `string`
+  - **Default**: N/A
+  - **Meaning**: Main title of the hero section.
+- **subtitle**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: Subtitle for the hero section.
+- **description**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: Description for the hero section.
+- **primaryAction**: `object | undefined`
+  - **Default**: N/A
+  - **Meaning**: Primary action button configuration.
+- **secondaryAction**: `object | undefined`
+  - **Default**: N/A
+  - **Meaning**: Secondary action button configuration.
+- **backgroundImage**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: URL for a background image.
+- **backgroundVideo**: `string | undefined`
+  - **Default**: N/A
+  - **Meaning**: URL for a background video.
+- **variant**: `'default' | 'centered' | 'split' | 'minimal'`
+  - **Default**: `'default'`
+  - **Meaning**: Visual variant styling.
+- **size**: `'sm' | 'md' | 'lg' | 'xl'`
+  - **Default**: `'lg'`
+  - **Meaning**: Size specification for the hero section.
+- **enableParallax**: `boolean`
+  - **Default**: `true`
+  - **Meaning**: Enable parallax scrolling effect.
+- **enableMagnetic**: `boolean`
+  - **Default**: `false`
+  - **Meaning**: Enable magnetic effect on hover.
+

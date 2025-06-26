@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GlassProgress } from './glass-progress';
 
 const meta: Meta<typeof GlassProgress> = {

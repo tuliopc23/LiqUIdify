@@ -1,16 +1,16 @@
-# Glass UI - The Future of Glassmorphism
+# LiquidiUI - The Future of Glassmorphism
 
 <div align="center">
-  <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1200&h=400&fit=crop" alt="Glass UI Banner" />
+  <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1200&h=400&fit=crop" alt="LiquidiUI Banner" />
   
   <h3>🚀 Physics-based glassmorphism with content-aware adaptation</h3>
   <p><strong>The only library that automatically adapts glass effects to your content</strong></p>
   
   <p align="center">
-    <a href="https://glass-ui.dev"><img src="https://img.shields.io/badge/Demo-Live-brightgreen" alt="Demo"></a>
-    <a href="#"><img src="https://img.shields.io/npm/v/@tuliopc23/glass-ui?color=blue" alt="NPM Version"></a>
-    <a href="#"><img src="https://img.shields.io/npm/dm/@tuliopc23/glass-ui" alt="Downloads"></a>
-    <a href="#"><img src="https://img.shields.io/github/stars/tuliopc23/glass-ui" alt="GitHub Stars"></a>
+    <a href="https://liquidui.dev"><img src="https://img.shields.io/badge/Demo-Live-brightgreen" alt="Demo"></a>
+    <a href="#"><img src="https://img.shields.io/npm/v/@tuliopc23/liquidui?color=blue" alt="NPM Version"></a>
+    <a href="#"><img src="https://img.shields.io/npm/dm/@tuliopc23/liquidui" alt="Downloads"></a>
+    <a href="#"><img src="https://img.shields.io/github/stars/tuliopc23/liquidui" alt="GitHub Stars"></a>
     <a href="#"><img src="https://img.shields.io/badge/TypeScript-Ready-blue" alt="TypeScript"></a>
   </p>
   
@@ -23,20 +23,20 @@
   </p>
 </div>
 
-## 🎯 Why Glass UI?
+## 🎯 Why LiquidiUI?
 
 ```tsx
 // Other libraries: Static glass effects
 <div className="backdrop-blur-md bg-white/10">Static</div>
 
-// Glass UI: Content-aware adaptation + physics
+// LiquidiUI: Content-aware adaptation + physics
 <GlassCard>
   Content automatically adapts glass opacity, blur, and color
   Plus magnetic hover with realistic spring physics
 </GlassCard>
 ```
 
-**What makes Glass UI unique:**
+**What makes LiquidiUI unique:**
 - 🧠 **Content-aware adaptation** - Automatically analyzes background and adjusts glass effects
 - ⚡ **Physics engine** - Realistic spring animations and magnetic interactions  
 - 🎨 **30+ glass variants** - From basic frost to holographic and aurora effects
@@ -76,21 +76,21 @@
 
 ```bash
 # npm
-npm install @tuliopc23/glass-ui
+npm install @tuliopc23/liquidui
 
 # yarn  
-yarn add @tuliopc23/glass-ui
+yarn add @tuliopc23/liquidui
 
 # pnpm
-pnpm add @tuliopc23/glass-ui
+pnpm add @tuliopc23/liquidui
 ```
 
 ### Basic React Setup (2 minutes)
 
 ```tsx
 // 1. Install and import
-import { LiquidGlassProvider, GlassButton } from '@tuliopc23/glass-ui'
-import '@tuliopc23/glass-ui/dist/glass.css'
+import { LiquidGlassProvider, GlassButton } from '@tuliopc23/liquidui'
+import '@tuliopc23/liquidui/dist/liquidui.css'
 
 // 2. Wrap your app
 function App() {
@@ -112,7 +112,7 @@ function App() {
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://unpkg.com/@tuliopc23/glass-ui/dist/glass.css">
+  <link rel="stylesheet" href="https://unpkg.com/@tuliopc23/liquidui/dist/liquidui.css">
 </head>
 <body style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
   <div class="liquid-glass p-6 rounded-xl">
@@ -131,12 +131,12 @@ function App() {
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="path/to/glass.css">
+  <link rel="stylesheet" href="path/to/liquidui.css">
 </head>
 <body>
   <!-- Basic glass panel -->
   <div class="liquid-glass p-6 rounded-xl">
-    <h2>Welcome to Glass UI</h2>
+    <h2>Welcome to LiquidiUI</h2>
     <p>Beautiful glassmorphism effects made easy</p>
   </div>
 </body>
@@ -146,16 +146,16 @@ function App() {
 ### React Usage
 
 ```jsx
-import { GlassProvider, GlassPanel, useGlassEffect } from 'glass-ui';
-import 'glass-ui/dist/glass.css';
+import { LiquidGlassProvider, GlassPanel, useGlassEffect } from '@tuliopc23/liquidui';
+import '@tuliopc23/liquidui/dist/liquidui.css';
 
 function App() {
   return (
-    <GlassProvider>
+    <LiquidGlassProvider>
       <GlassPanel variant="holographic" depth={3}>
-        <h1>Glass UI React</h1>
+        <h1>LiquidiUI React</h1>
       </GlassPanel>
-    </GlassProvider>
+    </LiquidGlassProvider>
   );
 }
 ```
@@ -244,7 +244,7 @@ function App() {
 ### WebGL Shaders
 
 ```javascript
-import { GlassShader, ShaderType } from 'glass-ui';
+import { GlassShader, ShaderType } from '@tuliopc23/liquidui';
 
 // Create custom shader
 const customShader = new GlassShader({
@@ -262,7 +262,7 @@ customShader.apply(document.querySelector('.my-glass-element'));
 ### Gesture Recognition
 
 ```javascript
-import { GestureRecognizer } from 'glass-ui';
+import { GestureRecognizer } from '@tuliopc23/liquidui';
 
 const element = document.querySelector('.gesture-area');
 const recognizer = new GestureRecognizer(element);
@@ -283,7 +283,7 @@ recognizer.on('rotate', (event) => {
 ### Physics Engine
 
 ```javascript
-import { SpringPhysics, SPRING_PRESETS } from 'glass-ui';
+import { SpringPhysics, SPRING_PRESETS } from '@tuliopc23/liquidui';
 
 // Create spring animation
 const spring = new SpringPhysics(SPRING_PRESETS.wobbly);
@@ -307,7 +307,7 @@ import {
   GlassSelect,
   GlassCheckbox,
   GlassTextarea 
-} from '@tuliopc23/glass-ui'
+} from '@tuliopc23/liquidui'
 
 function ContactForm() {
   return (
@@ -360,7 +360,7 @@ import {
   GlassChart,
   GlassBadge,
   GlassProgress 
-} from '@tuliopc23/glass-ui'
+} from '@tuliopc23/liquidui'
 
 function Dashboard() {
   return (
@@ -404,7 +404,7 @@ import {
   GlassModal, 
   GlassInput,
   useToast 
-} from '@tuliopc23/glass-ui'
+} from '@tuliopc23/liquidui'
 import { useState } from 'react'
 
 function ModalExample() {
@@ -456,172 +456,13 @@ function ModalExample() {
 }
 ```
 
-### Advanced Examples
-
-#### Form with Glass Components
-```tsx
-import { 
-  GlassCard, 
-  GlassInput, 
-  GlassButton, 
-  GlassSelect,
-  GlassCheckbox,
-  GlassTextarea 
-} from '@tuliopc23/glass-ui'
-
-function ContactForm() {
-  return (
-    <GlassCard variant="elevated" className="max-w-md mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
-      
-      <div className="space-y-4">
-        <GlassInput
-          placeholder="Your name"
-          variant="default"
-        />
-        
-        <GlassInput
-          type="email"
-          placeholder="your@email.com"
-          variant="search"
-        />
-        
-        <GlassSelect>
-          <option>Select a topic</option>
-          <option>General Inquiry</option>
-          <option>Support</option>
-          <option>Partnership</option>
-        </GlassSelect>
-        
-        <GlassTextarea
-          placeholder="Your message..."
-          rows={4}
-        />
-        
-        <GlassCheckbox>
-          I agree to the terms and conditions
-        </GlassCheckbox>
-        
-        <GlassButton variant="primary" className="w-full">
-          Send Message
-        </GlassButton>
-      </div>
-    </GlassCard>
-  )
-}
-```
-
-#### Dashboard with Navigation
-```tsx
-import { 
-  GlassNavbar, 
-  GlassSidebar, 
-  GlassCard,
-  GlassChart,
-  GlassBadge,
-  GlassProgress 
-} from '@tuliopc23/glass-ui'
-
-function Dashboard() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <GlassNavbar>
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold">Dashboard</h1>
-          <GlassBadge variant="success">Online</GlassBadge>
-        </div>
-      </GlassNavbar>
-      
-      <div className="flex">
-        <GlassSidebar className="w-64">
-          {/* Sidebar content */}
-        </GlassSidebar>
-        
-        <main className="flex-1 p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <GlassCard className="p-6">
-              <h3 className="text-lg font-semibold mb-2">Revenue</h3>
-              <p className="text-3xl font-bold text-green-600">$12,345</p>
-              <GlassProgress value={75} className="mt-4" />
-            </GlassCard>
-            
-            <GlassCard className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Analytics</h3>
-              <GlassChart type="line" data={chartData} />
-            </GlassCard>
-          </div>
-        </main>
-      </div>
-    </div>
-  )
-}
-```
-
-#### Interactive Modal Example
-```tsx
-import { 
-  GlassButton, 
-  GlassModal, 
-  GlassInput,
-  useToast 
-} from '@tuliopc23/glass-ui'
-import { useState } from 'react'
-
-function ModalExample() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { toast } = useToast()
-  
-  const handleSubmit = () => {
-    toast({
-      title: "Success!",
-      description: "Your data has been saved.",
-      variant: "success"
-    })
-    setIsOpen(false)
-  }
-  
-  return (
-    <>
-      <GlassButton onClick={() => setIsOpen(true)}>
-        Open Modal
-      </GlassButton>
-      
-      <GlassModal 
-        isOpen={isOpen} 
-        onClose={() => setIsOpen(false)}
-        title="Edit Profile"
-      >
-        <div className="space-y-4">
-          <GlassInput placeholder="Full name" />
-          <GlassInput placeholder="Email address" type="email" />
-          
-          <div className="flex gap-3 pt-4">
-            <GlassButton 
-              variant="ghost" 
-              onClick={() => setIsOpen(false)}
-            >
-              Cancel
-            </GlassButton>
-            <GlassButton 
-              variant="primary" 
-              onClick={handleSubmit}
-            >
-              Save Changes
-            </GlassButton>
-          </div>
-        </div>
-      </GlassModal>
-    </>
-  )
-}
-```
 
 ## 📚 Components
 
 ### Haptic Feedback
 
 ```javascript
-import { useHapticFeedback } from 'glass-ui';
+import { useHapticFeedback } from '@tuliopc23/liquidui';
 
 const haptic = useHapticFeedback({
   vibration: true,
@@ -640,7 +481,7 @@ button.addEventListener('click', () => {
 ### Virtual Scrolling
 
 ```javascript
-import { useVirtualScroll } from 'glass-ui';
+import { useVirtualScroll } from '@tuliopc23/liquidui';
 
 const { visibleItems, totalHeight, scrollTop } = useVirtualScroll({
   items: largeDataArray,
@@ -653,7 +494,7 @@ const { visibleItems, totalHeight, scrollTop } = useVirtualScroll({
 ### Lazy Loading
 
 ```javascript
-import { LazyGlass } from 'glass-ui';
+import { LazyGlass } from '@tuliopc23/liquidui';
 
 // Lazy load glass components
 <LazyGlass
@@ -710,7 +551,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-**[Documentation](https://docs-site-hch63l7kd-tulio-pinheiro-cunha-s-projects.vercel.app)** • **[Storybook](https://storybook-static-or3ttelxf-tulio-pinheiro-cunha-s-projects.vercel.app)** • **[Examples](https://github.com/tuliopc23/glass-ui/tree/main/examples)** • **[NPM Package](https://www.npmjs.com/package/@tuliopc23/glass-ui)**
+**[Documentation](https://docs-site-hch63l7kd-tulio-pinheiro-cunha-s-projects.vercel.app)** • **[Storybook](https://storybook-static-or3ttelxf-tulio-pinheiro-cunha-s-projects.vercel.app)** • **[Examples](https://github.com/tuliopc23/liquidui/tree/main/examples)** • **[NPM Package](https://www.npmjs.com/package/@tuliopc23/liquidui)**
 
 Made with ❤️ by Tulio Cunha
 

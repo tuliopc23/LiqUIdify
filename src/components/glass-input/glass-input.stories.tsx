@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GlassInput } from './glass-input';
 import { Search as SearchIcon, Mail, Lock } from 'lucide-react';
 

@@ -6,7 +6,7 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   return (
-    <BaseThemeProvider defaultTheme="light" storageKey="glass-ui-theme">
+    <BaseThemeProvider defaultTheme="light" storageKey="liquidui-theme">
       {children}
     </BaseThemeProvider>
   );

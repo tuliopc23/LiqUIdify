@@ -19,7 +19,7 @@ export function GlassFooter({ links, className, ...props }: GlassFooterProps) {
       {...props}
     >
       <div className="max-w-7xl mx-auto px-4 py-8 text-sm text-secondary flex flex-col md:flex-row items-center justify-between gap-4">
-        <span>&copy; {new Date().getFullYear()} Liquid Glass UI</span>
+        <span>&copy; {new Date().getFullYear()} Liquid LiquidiUI</span>
         {links && (
           <nav className="flex flex-wrap gap-4">
             {links.map(link => (

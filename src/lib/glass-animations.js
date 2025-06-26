@@ -1,5 +1,5 @@
 /**
- * Glass Animations - Advanced animation engine for Glass UI
+ * Glass Animations - Advanced animation engine for LiquidiUI
  * GPU-accelerated animations with physics-based motion
  */
 // Animation timing functions

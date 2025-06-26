@@ -2,7 +2,7 @@ import type { Preview } from '@storybook/react'
 import { LiquidGlassProvider } from '../src/hooks/use-liquid-glass'
 import { ThemeProvider } from '../src/hooks/use-theme'
 import React from 'react'
-import '../src/styles/glass.css'
+import '../src/styles/liquidui.css'
 
 // Initialize CSS custom properties for glass components
 if (typeof document !== 'undefined') {
@@ -74,8 +74,8 @@ const preview: Preview = {
     },
     docs: {
       theme: {
-        brandTitle: 'Glass UI',
-        brandUrl: 'https://glass-ui.dev',
+        brandTitle: 'LiquidiUI',
+        brandUrl: 'https://liquidui.dev',
         colorPrimary: '#007AFF',
         colorSecondary: '#5856D6'
       }
@@ -117,7 +117,7 @@ const preview: Preview = {
         ThemeProvider,
         { 
           defaultTheme: theme,
-          storageKey: 'storybook-glass-ui-theme'
+          storageKey: 'storybook-liquidui-theme'
         },
         React.createElement(
           LiquidGlassProvider,

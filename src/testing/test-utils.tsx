@@ -1,6 +1,6 @@
 /**
  * Testing Utilities
- * Common utilities for testing Glass UI components
+ * Common utilities for testing LiquidiUI components
  */
 
 import React, { ReactElement } from 'react';
@@ -131,7 +131,7 @@ export function cleanupTestEnvironment() {
   vi.clearAllTimers();
 }
 
-// Custom matchers for Glass UI components
+// Custom matchers for LiquidiUI components
 export const customMatchers = {
   toHaveGlassEffect(received: HTMLElement) {
     const style = window.getComputedStyle(received);

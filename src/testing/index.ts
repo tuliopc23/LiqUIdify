@@ -1,5 +1,5 @@
 /**
- * Glass UI Testing Utilities
+ * LiquidiUI Testing Utilities
  * Comprehensive testing utilities for accessibility, performance, and visual regression
  */
 

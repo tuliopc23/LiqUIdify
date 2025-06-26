@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-We actively support the following versions of Glass UI with security updates:
+We actively support the following versions of LiquidiUI with security updates:
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -11,13 +11,13 @@ We actively support the following versions of Glass UI with security updates:
 
 ## Reporting a Vulnerability
 
-The Glass UI team takes security vulnerabilities seriously. We appreciate your efforts to responsibly disclose your findings.
+The LiquidiUI team takes security vulnerabilities seriously. We appreciate your efforts to responsibly disclose your findings.
 
 ### How to Report a Security Vulnerability
 
 **Please do not report security vulnerabilities through public GitHub issues.**
 
-Instead, please report them by emailing: **security@glass-ui.dev**
+Instead, please report them by emailing: **security@liquidui.dev**
 
 Include the following information in your report:
 - A detailed description of the vulnerability
@@ -41,9 +41,9 @@ Include the following information in your report:
 
 ### Security Best Practices for Users
 
-To help ensure the security of your applications when using Glass UI:
+To help ensure the security of your applications when using LiquidiUI:
 
-1. **Keep Updated**: Always use the latest version of Glass UI
+1. **Keep Updated**: Always use the latest version of LiquidiUI
 2. **Dependency Auditing**: Regularly audit your dependencies using `npm audit`
 3. **Content Security Policy**: Implement proper CSP headers in your applications
 4. **Input Validation**: Always validate and sanitize user inputs in your applications
@@ -52,7 +52,7 @@ To help ensure the security of your applications when using Glass UI:
 ### Known Security Considerations
 
 #### Client-Side Rendering
-Glass UI is designed for client-side rendering. Be aware of:
+LiquidiUI is designed for client-side rendering. Be aware of:
 - XSS vulnerabilities when rendering user-generated content
 - Proper sanitization of dynamic content
 
@@ -73,14 +73,14 @@ When we receive a security report:
 
 ### Bug Bounty Program
 
-We currently do not have a formal bug bounty program, but we deeply appreciate security researchers who help us keep Glass UI secure.
+We currently do not have a formal bug bounty program, but we deeply appreciate security researchers who help us keep LiquidiUI secure.
 
 ### Contact
 
 For any security-related questions or concerns, please contact:
-- **Email**: security@glass-ui.dev
+- **Email**: security@liquidui.dev
 - **PGP Key**: Available upon request
 
 ---
 
-Thank you for helping keep Glass UI and our users safe! 
+Thank you for helping keep LiquidiUI and our users safe! 

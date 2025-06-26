@@ -1,5 +1,5 @@
 /**
- * Glass Shaders - WebGL shader effects for Glass UI
+ * Glass Shaders - WebGL shader effects for LiquidiUI
  * Advanced visual effects including refraction, chromatic aberration, and liquid distortion
  */
 // Vertex shader for all effects

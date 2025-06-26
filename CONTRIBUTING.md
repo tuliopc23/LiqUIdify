@@ -1,6 +1,6 @@
-# Contributing to Glass UI
+# Contributing to LiquidiUI
 
-Thank you for your interest in contributing to Glass UI! 🎉
+Thank you for your interest in contributing to LiquidiUI! 🎉
 
 ## Development Setup
 
@@ -11,8 +11,8 @@ Thank you for your interest in contributing to Glass UI! 🎉
 ### Quick Start
 ```bash
 # 1. Fork and clone the repo
-git clone https://github.com/your-username/glass-ui.git
-cd glass-ui
+git clone https://github.com/your-username/liquidui.git
+cd liquidui
 
 # 2. Install dependencies
 npm install
@@ -174,7 +174,7 @@ refactor: simplify physics calculations
 
 ## Need Help?
 
-- 📖 **Documentation**: [glass-ui.dev](https://glass-ui.dev)
+- 📖 **Documentation**: [liquidui.dev](https://liquidui.dev)
 - 💬 **Discussions**: GitHub Discussions
 - 🐛 **Bug Reports**: GitHub Issues
 - 💡 **Feature Requests**: GitHub Issues with `enhancement` label
@@ -189,4 +189,4 @@ Contributors get:
 
 ---
 
-**Happy contributing!** 🚀 Every contribution, no matter how small, helps make Glass UI better for everyone.
+**Happy contributing!** 🚀 Every contribution, no matter how small, helps make LiquidiUI better for everyone.

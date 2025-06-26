@@ -1,10 +1,10 @@
-# Glass UI Launch Strategy
+# LiquidiUI Launch Strategy
 
 ## Pre-Launch Checklist (Ready to Ship! ✅)
 
 ### ✅ Core Essentials Complete
 - [x] **Hero README** with clear value proposition
-- [x] **Package.json** optimized for npm (`@tuliopc23/glass-ui`)
+- [x] **Package.json** optimized for npm (`@tuliopc23/liquidui`)
 - [x] **Contributing guide** with clear development workflow
 - [x] **MIT License** for maximum adoption
 - [x] **GitHub templates** for issues and features
@@ -23,7 +23,7 @@
 
 ```bash
 # 1. Publish beta version
-npm publish @tuliopc23/glass-ui@0.9.0-beta.1
+npm publish @tuliopc23/liquidui@0.9.0-beta.1
 
 # 2. Share with early adopters (10-20 people)
 # - Design Twitter community
@@ -42,7 +42,7 @@ npm publish @tuliopc23/glass-ui@0.9.0-beta.1
 
 ```bash
 # 1. Publish stable version
-npm publish @tuliopc23/glass-ui@1.0.0
+npm publish @tuliopc23/liquidui@1.0.0
 
 # 2. Major announcements
 ```
@@ -58,7 +58,7 @@ npm publish @tuliopc23/glass-ui@1.0.0
 
 ### 1. Twitter Thread Template
 ```
-🧵 Introducing Glass UI - the first physics-based glassmorphism library
+🧵 Introducing LiquidiUI - the first physics-based glassmorphism library
 
 🎯 What makes it special:
 • Content-aware adaptation (analyzes background automatically)
@@ -74,7 +74,7 @@ Built solo over [X months] with:
 • Custom physics engine
 • Comprehensive a11y testing
 
-npm install @tuliopc23/glass-ui
+npm install @tuliopc23/liquidui
 
 What do you think? 👇
 
@@ -95,7 +95,7 @@ What do you think? 👇
 **Tagline**: "Physics-based glassmorphism with content-aware adaptation"
 
 **Description**: 
-"Glass UI is the first component library that automatically adapts glass effects to your content. Built with TypeScript, featuring 30+ glass variants, realistic spring physics, and comprehensive accessibility support."
+"LiquidiUI is the first component library that automatically adapts glass effects to your content. Built with TypeScript, featuring 30+ glass variants, realistic spring physics, and comprehensive accessibility support."
 
 ## Launch Targets
 

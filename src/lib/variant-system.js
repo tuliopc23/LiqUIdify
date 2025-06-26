@@ -1,5 +1,5 @@
 /**
- * Advanced Variant System for Glass UI
+ * Advanced Variant System for LiquidiUI
  * Type-safe component variants with better composition
  */
 import { clsx } from 'clsx';

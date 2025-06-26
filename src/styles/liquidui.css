@@ -7,6 +7,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import responsive system styles */
+@import './responsive.css';
+
 /* CSS Custom Properties for Liquid Glass Design System */
 :root {
   /* Core Glass Properties */
@@ -168,9 +171,14 @@
   --glass-luxury: rgba(244, 114, 182, 0.12);
 }
 
-/* Core Liquid Glass Classes */
+/* Core LiquidiUI Classes */
 
-/* Base liquid glass effect */
+/* Base liquidui effect */
+.liquidui {
+  @apply liquid-glass;
+}
+
+/* Main liquid glass base effect */
 .liquid-glass {
   background: var(--glass-bg-primary);
   backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-enhanced)
@@ -1129,3 +1137,287 @@
     transform: translateX(100%);
   }
 }
+
+/* ================================================
+   NEW LIQUIDUI CLASS NAMES
+   ================================================ */
+
+/* Main LiquidiUI Classes - New Naming */
+.liquidui-whisper {
+  @apply liquid-glass-whisper;
+}
+
+.liquidui-subtle {
+  @apply liquid-glass-subtle;
+}
+
+.liquidui-light {
+  @apply liquid-glass-light;
+}
+
+.liquidui-heavy {
+  @apply liquid-glass-heavy;
+}
+
+.liquidui-intense {
+  @apply liquid-glass-intense;
+}
+
+.liquidui-elevated {
+  @apply liquid-glass-elevated;
+}
+
+.liquidui-floating {
+  @apply liquid-glass-floating;
+}
+
+.liquidui-overlay {
+  @apply liquid-glass-overlay;
+}
+
+/* Interactive States */
+.liquidui-interactive {
+  @apply liquid-glass-interactive;
+}
+
+/* Effects */
+.liquidui-specular {
+  @apply liquid-glass-specular;
+}
+
+.liquidui-specular-subtle {
+  @apply liquid-glass-specular-subtle;
+}
+
+.liquidui-specular-light {
+  @apply liquid-glass-specular-light;
+}
+
+.liquidui-specular-intense {
+  @apply liquid-glass-specular-intense;
+}
+
+.liquidui-specular-brilliant {
+  @apply liquid-glass-specular-brilliant;
+}
+
+.liquidui-shimmer {
+  @apply liquid-glass-shimmer;
+}
+
+.liquidui-magnetic {
+  @apply liquid-glass-magnetic;
+}
+
+.liquidui-ripple {
+  @apply liquid-glass-ripple;
+}
+
+.liquidui-focus {
+  @apply liquid-glass-focus;
+}
+
+/* Glow Effects */
+.liquidui-glow {
+  @apply liquid-glass-glow;
+}
+
+.liquidui-glow-subtle {
+  @apply liquid-glass-glow-subtle;
+}
+
+.liquidui-glow-intense {
+  @apply liquid-glass-glow-intense;
+}
+
+/* Depth Layers */
+.liquidui-depth-1 {
+  @apply liquid-glass-depth-1;
+}
+
+.liquidui-depth-2 {
+  @apply liquid-glass-depth-2;
+}
+
+.liquidui-depth-3 {
+  @apply liquid-glass-depth-3;
+}
+
+.liquidui-depth-4 {
+  @apply liquid-glass-depth-4;
+}
+
+.liquidui-depth-5 {
+  @apply liquid-glass-depth-5;
+}
+
+/* Semantic Variants */
+.liquidui-accent {
+  @apply liquid-glass-accent;
+}
+
+.liquidui-success {
+  @apply liquid-glass-success;
+}
+
+.liquidui-warning {
+  @apply liquid-glass-warning;
+}
+
+.liquidui-error {
+  @apply liquid-glass-error;
+}
+
+.liquidui-info {
+  @apply liquid-glass-info;
+}
+
+/* Brand Variants */
+.liquidui-brand {
+  @apply liquid-glass-brand;
+}
+
+.liquidui-premium {
+  @apply liquid-glass-premium;
+}
+
+.liquidui-luxury {
+  @apply liquid-glass-luxury;
+}
+
+/* Adaptive Effects */
+.liquidui-adaptive-text {
+  @apply liquid-glass-adaptive-text;
+}
+
+.liquidui-adaptive-image {
+  @apply liquid-glass-adaptive-image;
+}
+
+.liquidui-adaptive-video {
+  @apply liquid-glass-adaptive-video;
+}
+
+.liquidui-adaptive-interactive {
+  @apply liquid-glass-adaptive-interactive;
+}
+
+/* Rounded Utilities */
+.liquidui-rounded-sm {
+  @apply liquid-glass-rounded-sm;
+}
+
+.liquidui-rounded {
+  @apply liquid-glass-rounded;
+}
+
+.liquidui-rounded-lg {
+  @apply liquid-glass-rounded-lg;
+}
+
+.liquidui-rounded-xl {
+  @apply liquid-glass-rounded-xl;
+}
+
+.liquidui-rounded-2xl {
+  @apply liquid-glass-rounded-2xl;
+}
+
+.liquidui-rounded-3xl {
+  @apply liquid-glass-rounded-3xl;
+}
+
+.liquidui-rounded-full {
+  @apply liquid-glass-rounded-full;
+}
+
+/* Animation Classes */
+.liquidui-animate-in {
+  @apply liquid-glass-animate-in;
+}
+
+.liquidui-animate-out {
+  @apply liquid-glass-animate-out;
+}
+
+.liquidui-animate-scale-in {
+  @apply liquid-glass-animate-scale-in;
+}
+
+.liquidui-animate-fade-in {
+  @apply liquid-glass-animate-fade-in;
+}
+
+/* Advanced Effects */
+.liquidui-holographic {
+  @apply liquid-glass-holographic;
+}
+
+.liquidui-iridescent {
+  @apply liquid-glass-iridescent;
+}
+
+.liquidui-neon {
+  @apply liquid-glass-neon;
+}
+
+.liquidui-neon-blue {
+  @apply liquid-glass-neon-blue;
+}
+
+.liquidui-neon-pink {
+  @apply liquid-glass-neon-pink;
+}
+
+.liquidui-neon-green {
+  @apply liquid-glass-neon-green;
+}
+
+.liquidui-neon-purple {
+  @apply liquid-glass-neon-purple;
+}
+
+.liquidui-gradient-shift {
+  @apply liquid-glass-gradient-shift;
+}
+
+.liquidui-frost-light {
+  @apply liquid-glass-frost-light;
+}
+
+.liquidui-frost-heavy {
+  @apply liquid-glass-frost-heavy;
+}
+
+.liquidui-frost-colored {
+  @apply liquid-glass-frost-colored;
+}
+
+.liquidui-morph {
+  @apply liquid-glass-morph;
+}
+
+.liquidui-crystal {
+  @apply liquid-glass-crystal;
+}
+
+.liquidui-plasma {
+  @apply liquid-glass-plasma;
+}
+
+.liquidui-glitch {
+  @apply liquid-glass-glitch;
+}
+
+.liquidui-aurora {
+  @apply liquid-glass-aurora;
+}
+
+.liquidui-metal {
+  @apply liquid-glass-metal;
+}
+
+/* ================================================
+   BACKWARD COMPATIBILITY ALIASES
+   Old liquid-glass-* classes are preserved above
+   ================================================ */

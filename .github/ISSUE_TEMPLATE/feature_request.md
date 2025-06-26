@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for Glass UI
+about: Suggest an idea for LiquidiUI
 title: '[FEATURE] '
 labels: enhancement
 assignees: ''

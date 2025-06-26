@@ -1,6 +1,6 @@
 # Performance Guide
 
-Glass UI is built for performance, but here's how to get the best results:
+LiquidiUI is built for performance, but here's how to get the best results:
 
 ## Bundle Size
 
@@ -11,10 +11,10 @@ Glass UI is built for performance, but here's how to get the best results:
 
 ```tsx
 // ❌ Imports everything
-import * from '@tuliopc23/glass-ui'
+import * from '@tuliopc23/liquidui'
 
 // ✅ Tree-shakeable imports
-import { GlassButton, GlassCard } from '@tuliopc23/glass-ui'
+import { GlassButton, GlassCard } from '@tuliopc23/liquidui'
 ```
 
 ### CSS
@@ -24,10 +24,10 @@ import { GlassButton, GlassCard } from '@tuliopc23/glass-ui'
 
 ```tsx
 // ❌ Full CSS bundle
-import '@tuliopc23/glass-ui/dist/glass.css'
+import '@tuliopc23/liquidui/dist/liquidui.css'
 
 // ✅ Core effects only
-import '@tuliopc23/glass-ui/dist/glass-core.css'
+import '@tuliopc23/liquidui/dist/glass-core.css'
 ```
 
 ## Runtime Performance
@@ -163,7 +163,7 @@ const handleClick = () => {
 ```tsx
 // Automatic cleanup - no action needed
 useEffect(() => {
-  // Glass UI automatically cleans up:
+  // LiquidiUI automatically cleans up:
   // - Animation frames
   // - Event listeners  
   // - Performance observers
@@ -174,11 +174,11 @@ useEffect(() => {
 ### 3. Bundle Size Optimization
 ```tsx
 // Use dynamic imports for heavy components
-const GlassChart = lazy(() => import('@tuliopc23/glass-ui/chart'))
+const GlassChart = lazy(() => import('@tuliopc23/liquidui/chart'))
 
 // Conditional loading of effects
 const advancedEffects = useMemo(() => 
-  shouldLoadAdvancedEffects ? import('@tuliopc23/glass-ui/advanced') : null
+  shouldLoadAdvancedEffects ? import('@tuliopc23/liquidui/advanced') : null
 , [shouldLoadAdvancedEffects])
 ```
 
@@ -201,4 +201,4 @@ const advancedEffects = useMemo(() =>
 
 ---
 
-**Need help optimizing?** Check our [performance examples](https://github.com/tuliopc23/glass-ui/tree/main/examples/performance) or open an issue!
+**Need help optimizing?** Check our [performance examples](https://github.com/tuliopc23/liquidui/tree/main/examples/performance) or open an issue!

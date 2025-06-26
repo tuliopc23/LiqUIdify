@@ -1,5 +1,5 @@
 /**
- * Glass UI - Simple Export Index
+ * LiquidiUI - Simple Export Index
  * Essential exports for the build
  */
 

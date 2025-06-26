@@ -167,12 +167,12 @@ export const designSystemSections = [
     {
         id: 'overview',
         title: 'Design System Overview',
-        description: 'Introduction to Glass UI design principles and philosophy',
+        description: 'Introduction to LiquidiUI design principles and philosophy',
         content: [
             {
                 type: 'text',
                 title: 'Philosophy',
-                content: `Glass UI is built on the principles of clarity, depth, and accessibility. 
+                content: `LiquidiUI is built on the principles of clarity, depth, and accessibility. 
         Our design system emphasizes translucency and layering to create interfaces that feel 
         both modern and intuitive. Every component is designed with accessibility in mind, 
         ensuring that beautiful interfaces are also inclusive interfaces.`,
@@ -217,7 +217,7 @@ export const designSystemSections = [
             {
                 type: 'text',
                 title: 'Typography Philosophy',
-                content: `Typography in Glass UI prioritizes readability and hierarchy. 
+                content: `Typography in LiquidiUI prioritizes readability and hierarchy. 
         We use a modular scale to ensure consistent proportions and optimal 
         line heights for comfortable reading across all device sizes.`,
             },
@@ -255,7 +255,7 @@ export const designSystemSections = [
             {
                 type: 'text',
                 title: 'Shadow Philosophy',
-                content: `Shadows in Glass UI create depth and hierarchy while maintaining 
+                content: `Shadows in LiquidiUI create depth and hierarchy while maintaining 
         the translucent aesthetic. We use subtle, realistic shadows that enhance 
         the glass morphism effect without overwhelming the content.`,
             },
@@ -281,7 +281,7 @@ export const designSystemSections = [
             {
                 type: 'text',
                 title: 'Animation Philosophy',
-                content: `Animations in Glass UI are subtle and purposeful, enhancing 
+                content: `Animations in LiquidiUI are subtle and purposeful, enhancing 
         the user experience without being distracting. We use easing curves 
         that feel natural and durations that respect user preferences.`,
             },

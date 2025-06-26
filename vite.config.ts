@@ -11,7 +11,7 @@ export default defineConfig({
       exclude: [
         '**/*.test.*',
         '**/*.stories.*',
-        'src/components/glass-*', // Exclude problematic components for now
+        'src/components/glass-*', // Exclude problematic components for now (to be renamed to liquidui)
         'src/testing/**/*',
         'src/docs/**/*'
       ]
@@ -25,9 +25,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index-simple.ts'),
-      name: 'GlassUI',
+      name: 'LiquidUI',
       formats: ['es', 'umd'],
-      fileName: (format) => `glass-ui.${format}.js`
+      fileName: (format) => `liquidui.${format}.js`
     },
     rollupOptions: {
       external: [
@@ -48,6 +48,13 @@ export default defineConfig({
           '@radix-ui/react-slot': 'RadixSlot',
           'clsx': 'clsx',
           'tailwind-merge': 'tailwindMerge'
+        },
+        // Configure CSS asset file naming
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'liquidui.css';
+          }
+          return assetInfo.name || 'asset';
         },
         // Preserve module structure for better tree-shaking
         preserveModules: false,
