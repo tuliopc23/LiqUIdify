@@ -1,0 +1,68 @@
+# Footer
+
+This document serves to showcase the **Footer** component.
+
+```jsx
+import { GlassFooter } from "glass-ui-tulio";
+```
+
+<ComponentShowcase>
+  ```jsx
+  // Basic Footer with Navigation Links
+  const basicLinks = [
+    { label: "About", href: "/about" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Contact", href: "/contact" }
+  ];
+
+  <GlassFooter links={basicLinks} />
+  ```
+
+  ```jsx
+  // Footer with Product Links
+  const productLinks = [
+    { label: "Documentation", href: "/docs" },
+    { label: "API Reference", href: "/api" },
+    { label: "GitHub", href: "https://github.com/glass-ui" },
+    { label: "NPM Package", href: "https://npmjs.com/package/glass-ui-tulio" },
+    { label: "Changelog", href: "/changelog" },
+    { label: "Support", href: "/support" }
+  ];
+
+  <GlassFooter 
+    links={productLinks}
+    className="border-t-2 border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5"
+  />
+  ```
+
+  ```jsx
+  // Minimal Footer without Links
+  <GlassFooter className="py-4 text-center" />
+  ```
+
+  ```jsx
+  // Footer with Social Media Links
+  const socialLinks = [
+    { label: "Twitter", href: "https://twitter.com/glassui" },
+    { label: "Discord", href: "https://discord.gg/glassui" },
+    { label: "YouTube", href: "https://youtube.com/@glassui" },
+    { label: "Blog", href: "/blog" }
+  ];
+
+  <GlassFooter 
+    links={socialLinks}
+    className="glass-effect-elevated backdrop-blur-xl"
+  />
+  ```
+</ComponentShowcase>
+
+## Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| links | `GlassFooterLink[]` | — | Optional array of footer navigation links |
+| className | `string` | — | Additional CSS classes to apply |
+| ...props | `React.HTMLAttributes<HTMLElement>` | — | Standard HTML footer element attributes |
+
+## Examples

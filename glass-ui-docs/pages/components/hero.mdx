@@ -1,0 +1,29 @@
+# Hero
+
+This document serves to showcase the **Hero** component.
+
+```jsx
+import { GlassHero } from "glass-ui-tulio";
+```
+
+<ComponentShowcase>
+  
+</ComponentShowcase>
+
+## Props
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| title | `string` | — | Main hero title text |
+| subtitle | `string` | — | Optional subtitle displayed above the title |
+| description | `string` | — | Optional description text below the title |
+| primaryAction | `{ label: string; onClick: () => void; icon?: React.ReactNode }` | — | Primary call-to-action button configuration |
+| secondaryAction | `{ label: string; onClick: () => void; icon?: React.ReactNode }` | — | Secondary action button configuration |
+| backgroundImage | `string` | — | Optional background image URL |
+| backgroundVideo | `string` | — | Optional background video URL |
+| variant | `'default' \| 'centered' \| 'split' \| 'minimal'` | `'default'` | Layout variant for the hero section |
+| size | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'lg'` | Overall size and spacing of the hero |
+| enableParallax | `boolean` | `true` | Enable parallax background effects |
+| enableMagnetic | `boolean` | `false` | Enable magnetic hover interactions |
+
+## Examples

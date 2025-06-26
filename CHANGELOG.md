@@ -8,24 +8,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Enhanced documentation with comprehensive API references
-- Advanced component showcase with interactive examples
-- Performance optimization improvements
-- Extended accessibility testing utilities
-- Additional component variants and customization options
+- TBD
 
 ### Changed
+- TBD
+
+### Fixed
+- TBD
+
+## [1.0.1] - 2024-12-19
+
+### Added
+- Enhanced Storybook documentation with comprehensive API references
+- Advanced component showcase with interactive examples
+- Extended accessibility testing utilities with vitest-axe integration
+
+### Changed
+- **BREAKING**: Migrated from Jest to Vitest for better ESM compatibility
 - Improved TypeScript definitions for better developer experience
+- Enhanced Storybook main config renamed to .cjs for ES module compatibility
+- Optimized Vercel deployment configuration for docs site
 - Enhanced CSS custom properties for easier theming
 - Optimized bundle size through better tree-shaking
 
 ### Fixed
 - Resolved 38 TypeScript errors across component library
-- Added proper jest-axe type definitions for accessibility testing
+- Fixed Storybook main config ES module compatibility issues
+- Improved Vercel deployment settings for docs site with embedded Storybook
+- Fixed shell syntax compatibility in build commands
+- Moved liquid-glass styles into @layer utilities to silence Tailwind v4 warnings
 - Refactored motion variants for better type safety and consistency
 - Minor accessibility improvements in focus management
 - Enhanced keyboard navigation consistency
 - Improved screen reader announcements
+
+### Development
+- Complete migration from Jest to Vitest testing framework
+- Updated all test configurations and dependencies
+- Improved build pipeline with better ES module support
+- Enhanced Storybook deployment integration
 
 ## [1.0.0] - 2024-12-19
 
