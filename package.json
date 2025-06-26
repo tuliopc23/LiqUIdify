@@ -1,6 +1,6 @@
 {
   "name": "glass-ui-tulio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "🚀 Physics-based glassmorphism library with content-aware adaptation, magnetic interactions, and 30+ glass effects. TypeScript-first, accessibility-ready.",
   "main": "dist/glass-ui.umd.js",
