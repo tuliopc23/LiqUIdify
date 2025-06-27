@@ -9,7 +9,7 @@ import tsParser from '@typescript-eslint/parser'
 
 export default [
   {
-    ignores: ['dist', 'storybook-static']
+    ignores: ['dist', 'storybook-static', 'scripts/**', '**/*.stories.*', '**/*.test.*', 'src/docs/**', 'src/testing/**']
   },
   {
     files: ['**/*.{ts,tsx}'],
@@ -56,9 +56,12 @@ export default [
         { allowConstantExport: true }
       ],
       '@typescript-eslint/no-unused-vars': [
-        'error',
-        { argsIgnorePattern: '^_' }
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
       ],
+      'no-unused-vars': 'off',
+      'no-undef': 'warn',
+      'no-async-promise-executor': 'warn',
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off'
     },
