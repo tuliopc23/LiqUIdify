@@ -25,9 +25,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index-simple.ts'),
-      name: 'GlassUI',
+      name: 'LiquidUI',
       formats: ['es', 'umd'],
-      fileName: (format) => `glass-ui.${format}.js`
+      fileName: (format) => `liquidui.${format}.js`
     },
     rollupOptions: {
       external: [
