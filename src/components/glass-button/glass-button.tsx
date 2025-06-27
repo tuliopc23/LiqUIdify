@@ -288,9 +288,8 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           ...props.style
         }}
         disabled={disabled || loading}
-        aria-busy={loading ? true : undefined}
-        aria-label={loading && loadingText ? loadingText : children?.toString()}
-        aria-label={loading && loadingText ? loadingText : children?.toString()}
+          aria-busy={loading ? true : undefined}
+          aria-label={loading && loadingText ? loadingText : children?.toString()}
         {...microAnimation.bind}
         onClick={handleClick}
         {...props}

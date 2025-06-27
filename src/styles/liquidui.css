@@ -3,12 +3,12 @@
  * Professional design system with comprehensive glass effects
  */
 
+/* Import responsive system styles */
+@import './responsive.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import responsive system styles */
-@import './responsive.css';
 
 /* CSS Custom Properties for Liquid Glass Design System */
 :root {

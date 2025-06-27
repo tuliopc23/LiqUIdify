@@ -8,9 +8,10 @@
   
   <p align="center">
     <a href="https://liquidui.dev"><img src="https://img.shields.io/badge/Demo-Live-brightgreen" alt="Demo"></a>
-    <a href="#"><img src="https://img.shields.io/npm/v/@tuliopc23/liquidui?color=blue" alt="NPM Version"></a>
-    <a href="#"><img src="https://img.shields.io/npm/dm/@tuliopc23/liquidui" alt="Downloads"></a>
-    <a href="#"><img src="https://img.shields.io/github/stars/tuliopc23/liquidui" alt="GitHub Stars"></a>
+    <a href="https://www.npmjs.com/package/@tuliopc23/liquidui"><img src="https://img.shields.io/npm/v/@tuliopc23/liquidui?color=blue" alt="NPM Version"></a>
+    <a href="https://www.npmjs.com/package/@tuliopc23/liquidui"><img src="https://img.shields.io/npm/dm/@tuliopc23/liquidui" alt="Downloads"></a>
+    <a href="https://github.com/tuliopc23/liquidui"><img src="https://img.shields.io/github/stars/tuliopc23/liquidui" alt="GitHub Stars"></a>
+    <a href="https://github.com/tuliopc23/liquidui/actions"><img src="https://img.shields.io/github/actions/workflow/status/tuliopc23/liquidui/ci.yml?branch=main" alt="CI Status"></a>
     <a href="#"><img src="https://img.shields.io/badge/TypeScript-Ready-blue" alt="TypeScript"></a>
   </p>
   

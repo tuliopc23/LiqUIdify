@@ -1,5 +1,5 @@
 name: Bug Report
-description: Create a report to help us improve Glass UI
+description: Create a report to help us improve LiquidiUI
 title: "[Bug]: "
 labels: ["bug", "needs-triage"]
 body:
@@ -11,8 +11,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: Glass UI Version
-      description: What version of Glass UI are you using?
+      label: LiquidiUI Version
+      description: What version of LiquidiUI are you using?
       placeholder: e.g., 1.0.0
     validations:
       required: true

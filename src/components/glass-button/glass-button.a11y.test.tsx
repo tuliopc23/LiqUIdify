@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { axe } from 'vitest-axe';
 import { GlassButton } from './glass-button';
-import { runAccessibilityCheck, expectAccessible } from '@/utils/accessibility-testing';
+import { runAccessibilityCheck, expectAccessible } from '../../utils/accessibility-testing';
 
 // Custom matcher for accessibility violations
 expect.extend({

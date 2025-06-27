@@ -9,6 +9,10 @@ const config = {
     '@storybook/addon-a11y',
     '@storybook/addon-themes'
   ],
+  managerHead: (head) => `
+    ${head}
+    <title>LiquidiUI - Storybook</title>
+  `,
   framework: {
     name: '@storybook/react-vite',
     options: {}

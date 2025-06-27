@@ -64,4 +64,4 @@ docs-source/
 README-dev.md
 
 # Development only files
-glass-ui-build-errors.log 
+liquidui-build-errors.log

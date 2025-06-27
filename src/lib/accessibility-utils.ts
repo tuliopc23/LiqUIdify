@@ -282,7 +282,7 @@ export function useLiveRegion() {
 /**
  * Screen reader only text component
  */
-export function ScreenReaderOnly({ children, ...props }: { children: React.ReactNode; [key: string]: any }): JSX.Element {
+export function ScreenReaderOnly({ children, ...props }: { children: React.ReactNode; [key: string]: any }): React.ReactElement {
   const React = require('react');
   
   return React.createElement(

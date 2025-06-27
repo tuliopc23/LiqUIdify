@@ -1,6 +1,6 @@
 {
   "name": "@tuliopc23/liquidui",
-  "version": "0.9.0-beta.1",
+  "version": "1.0.0",
   "type": "module",
   "description": "🚀 Physics-based liquid UI library with content-aware adaptation, magnetic interactions, and 30+ dynamic effects. TypeScript-first, accessibility-ready.",
   "main": "dist/liquidui.umd.js",

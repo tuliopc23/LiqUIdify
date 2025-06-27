@@ -13,13 +13,18 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: ['./src/test-setup.ts'],
+    setupFiles: ['./vitest.setup.ts'],
+    exclude: [
+      '**/node_modules/**',
+      '**/glass-ui/**',  // Exclude subdirectory with conflicting React instance
+      '**/*.config.*'
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       exclude: [
         'node_modules/',
-        'src/test-setup.ts',
+        'vitest.setup.ts',
         '**/*.stories.*',
         '**/*.config.*',
         'dist/'
