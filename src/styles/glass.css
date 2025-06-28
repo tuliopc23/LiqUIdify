@@ -137,7 +137,7 @@
 /* Dark Theme Overrides */
 [data-theme='dark'],
 .dark {
-  --glass-bg-primary: rgba(28, 28, 30, 0.15);
+  --glass-bg-primary: rgba(18, 18, 18, 0.25);
   --glass-bg-secondary: rgba(44, 44, 46, 0.18);
   --glass-bg-tertiary: rgba(58, 58, 60, 0.22);
   --glass-bg-elevated: rgba(88, 88, 90, 0.28);
@@ -150,12 +150,15 @@
 
   --glass-border-subtle: rgba(255, 255, 255, 0.05);
   --glass-border-light: rgba(255, 255, 255, 0.1);
-  --glass-border-medium: rgba(255, 255, 255, 0.18);
+  --glass-border-medium: rgba(255, 255, 255, 0.3);
   --glass-border-strong: rgba(255, 255, 255, 0.25);
 
   /* Dark Theme Text Colors */
-  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-primary: rgba(255, 255, 255, 0.95);
   --text-secondary: rgba(255, 255, 255, 0.6);
+  
+  /* Contrast Enhancement */
+  --contrast-offset: 0.15;
 
   --glass-accent: rgba(64, 156, 255, 0.12);
   --glass-success: rgba(48, 209, 88, 0.12);
@@ -668,6 +671,50 @@
   .dark .liquid-glass {
     background: rgba(0, 0, 0, 0.9);
     border-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Enhanced Contrast Support */
+@media (prefers-contrast: more) {
+  :root {
+    --glass-border-medium: rgba(0, 0, 0, 0.4);
+    --glass-bg-primary: rgba(255, 255, 255, 0.3);
+    --text-primary: rgba(0, 0, 0, 1);
+  }
+
+  [data-theme='dark'],
+  .dark {
+    --glass-border-medium: rgba(255, 255, 255, 0.5);
+    --glass-bg-primary: rgba(18, 18, 18, 0.4);
+    --text-primary: rgba(255, 255, 255, 1);
+    --contrast-offset: calc(var(--contrast-offset, 0.15) + 0.1);
+  }
+
+  .liquid-glass {
+    border-width: 1.5px;
+    backdrop-filter: var(--glass-blur-light) var(--glass-saturation-enhanced) contrast(calc(100% + (var(--contrast-offset, 0) * 100%)));
+    -webkit-backdrop-filter: var(--glass-blur-light) var(--glass-saturation-enhanced) contrast(calc(100% + (var(--contrast-offset, 0) * 100%)));
+  }
+}
+
+@media (prefers-contrast: less) {
+  :root {
+    --glass-border-medium: rgba(0, 0, 0, 0.15);
+    --glass-bg-primary: rgba(255, 255, 255, 0.08);
+    --text-primary: rgba(0, 0, 0, 0.75);
+  }
+
+  [data-theme='dark'],
+  .dark {
+    --glass-border-medium: rgba(255, 255, 255, 0.2);
+    --glass-bg-primary: rgba(18, 18, 18, 0.15);
+    --text-primary: rgba(255, 255, 255, 0.8);
+    --contrast-offset: calc(var(--contrast-offset, 0.15) - 0.05);
+  }
+
+  .liquid-glass {
+    backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-muted) contrast(calc(100% - (var(--contrast-offset, 0) * 50%)));
+    -webkit-backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-muted) contrast(calc(100% - (var(--contrast-offset, 0) * 50%)));
   }
 }
 

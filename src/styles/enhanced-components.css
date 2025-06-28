@@ -1,0 +1,235 @@
+/* Enhanced Typography System */
+.liquid-component {
+  /* Apple-inspired font stack */
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 
+    'Helvetica Neue', 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+}
+
+/* Typography Scale with Optimized Line Heights */
+.liquid-text-xs { 
+  font-size: 0.75rem; 
+  line-height: 1rem; 
+  letter-spacing: 0.025em; 
+  font-weight: 500;
+}
+
+.liquid-text-sm { 
+  font-size: 0.875rem; 
+  line-height: 1.25rem; 
+  letter-spacing: 0.016em; 
+  font-weight: 400;
+}
+
+.liquid-text-base { 
+  font-size: 1rem; 
+  line-height: 1.5rem; 
+  letter-spacing: 0; 
+  font-weight: 400;
+}
+
+.liquid-text-lg { 
+  font-size: 1.125rem; 
+  line-height: 1.75rem; 
+  letter-spacing: -0.011em; 
+  font-weight: 400;
+}
+
+.liquid-text-xl { 
+  font-size: 1.25rem; 
+  line-height: 1.75rem; 
+  letter-spacing: -0.017em; 
+  font-weight: 500;
+}
+
+.liquid-text-2xl { 
+  font-size: 1.5rem; 
+  line-height: 2rem; 
+  letter-spacing: -0.025em; 
+  font-weight: 600;
+}
+
+.liquid-text-3xl { 
+  font-size: 1.875rem; 
+  line-height: 2.25rem; 
+  letter-spacing: -0.025em; 
+  font-weight: 700;
+}
+
+/* Enhanced Glass Effects */
+.liquid-glass-enhanced {
+  /* Advanced backdrop filtering */
+  backdrop-filter: blur(20px) saturate(180%) contrast(105%) brightness(103%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) contrast(105%) brightness(103%);
+  
+  /* Sophisticated shadow system */
+  box-shadow: 
+    /* Primary shadow */
+    0 8px 32px rgba(31, 38, 135, 0.12),
+    /* Inner light reflection */
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    /* Inner dark edge */
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05),
+    /* Subtle glow */
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  
+  /* Smooth transitions */
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Border enhancement */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.liquid-glass-enhanced:hover {
+  backdrop-filter: blur(24px) saturate(200%) contrast(108%) brightness(105%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%) contrast(108%) brightness(105%);
+  
+  transform: translateY(-2px) scale(1.005);
+  
+  box-shadow: 
+    0 16px 40px rgba(31, 38, 135, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.liquid-glass-enhanced:active {
+  transform: translateY(0) scale(0.998);
+  transition-duration: 0.1s;
+}
+
+/* Focus States for Accessibility */
+.liquid-glass-enhanced:focus-visible {
+  outline: none;
+  box-shadow: 
+    0 8px 32px rgba(31, 38, 135, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05),
+    0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+/* Component Specific Enhancements */
+.liquid-button-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-button-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.liquid-button-enhanced:hover::before {
+  left: 100%;
+}
+
+/* Card Enhancement */
+.liquid-card-enhanced {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.liquid-card-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.5), 
+    transparent
+  );
+}
+
+/* Input Enhancement */
+.liquid-input-enhanced {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.liquid-input-enhanced:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Dark Mode Adaptations */
+[data-theme='dark'] .liquid-glass-enhanced {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .liquid-glass-enhanced:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Animation Utilities */
+@keyframes liquid-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes liquid-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes liquid-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.liquid-animate-float {
+  animation: liquid-float 3s ease-in-out infinite;
+}
+
+.liquid-animate-pulse {
+  animation: liquid-pulse 2s ease-in-out infinite;
+}
+
+.liquid-animate-shimmer {
+  animation: liquid-shimmer 2s ease-in-out infinite;
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+  .liquid-text-3xl { font-size: 1.5rem; line-height: 2rem; }
+  .liquid-text-2xl { font-size: 1.25rem; line-height: 1.75rem; }
+  .liquid-text-xl { font-size: 1.125rem; line-height: 1.5rem; }
+}
+
+/* High DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .liquid-glass-enhanced {
+    border-width: 0.5px;
+  }
+}

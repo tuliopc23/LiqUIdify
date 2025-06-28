@@ -26,9 +26,16 @@ export function ThemeProvider({
   storageKey = 'glass-ui-theme',
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        return (localStorage.getItem(storageKey) as Theme) || defaultTheme
+      }
+    } catch (error) {
+      console.warn('LocalStorage not available, using default theme:', defaultTheme)
+    }
+    return defaultTheme
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -40,8 +47,14 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+      try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          localStorage.setItem(storageKey, theme)
+        }
+      } catch (error) {
+        console.warn('Could not save theme to localStorage:', error)
+      }
+      setTheme(theme)
     },
   };
 
