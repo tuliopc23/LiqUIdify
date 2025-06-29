@@ -1,6 +1,4 @@
 import type { Preview } from '@storybook/react'
-import { LiquidGlassProvider } from '../src/hooks/use-liquid-glass'
-import { ThemeProvider } from '../src/hooks/use-theme'
 import React from 'react'
 import '../src/styles/glass.css'
 import '../src/styles/enhanced-components.css'
@@ -36,54 +34,8 @@ if (typeof document !== 'undefined') {
   document.head.appendChild(style)
 }
 
-// Color contrast checker utility for docs - enhanced with error handling
-function checkColorContrast(color1: string, color2: string): number {
-  const getLuminance = (color: string): number => {
-    try {
-      // Parse rgba/rgb color string with improved regex
-      const rgbaMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d\.]+))?\)/) || 
-                       color.match(/#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/i)
-      
-      if (!rgbaMatch) {
-        console.warn(`Failed to parse color: ${color}. Using fallback luminance.`)
-        return 0.5 // Fallback luminance
-      }
-      
-      let [, r, g, b] = rgbaMatch
-      
-      // Handle hex colors
-      if (color.startsWith('#')) {
-        r = parseInt(r, 16).toString()
-        g = parseInt(g, 16).toString()
-        b = parseInt(b, 16).toString()
-      }
-      
-      const [rNum, gNum, bNum] = [r, g, b].map(Number)
-      
-      const toLinear = (val: number) => {
-        const normalized = val / 255
-        return normalized <= 0.03928 ? normalized / 12.92 : Math.pow((normalized + 0.055) / 1.055, 2.4)
-      }
-      
-      return 0.2126 * toLinear(rNum) + 0.7152 * toLinear(gNum) + 0.0722 * toLinear(bNum)
-    } catch (error) {
-      console.warn(`Error calculating luminance for ${color}:`, error)
-      return 0.5 // Fallback luminance
-    }
-  }
-  
-  try {
-    const lum1 = getLuminance(color1)
-    const lum2 = getLuminance(color2)
-    const brightest = Math.max(lum1, lum2)
-    const darkest = Math.min(lum1, lum2)
-    
-    return (brightest + 0.05) / (darkest + 0.05)
-  } catch (error) {
-    console.warn('Error calculating contrast ratio:', error)
-    return 4.5 // Fallback to WCAG AA minimum
-  }
-}
+// Remove the problematic color contrast checker function
+// This was causing issues in autodocs mode with invalid color arguments
 // This function is no longer needed as theme provider handles CSS properties
 // Keep for backward compatibility but make it a no-op
 function setupCssProperties(theme: 'light' | 'dark' = 'light'): void {
@@ -107,10 +59,11 @@ const preview: Preview = {
     },
     controls: {
       matchers: {
-        color: /(background|color)$/i,
+        color: /^(backgroundColor|textColor|borderColor|fillColor|strokeColor)$/i,
         date: /Date$/
       },
-      expanded: true
+      expanded: true,
+      exclude: ['color'] // Exclude generic 'color' prop from automatic color control
     },
     docs: {
       theme: {
@@ -151,6 +104,10 @@ const preview: Preview = {
       },
       autodocs: true,
       defaultName: 'Docs',
+      story: {
+        inline: true,
+        iframeHeight: '200px',
+      },
     },
     viewport: {
       viewports: {
@@ -185,9 +142,9 @@ const preview: Preview = {
     (Story, context) => {
       const theme = context.globals.theme || 'light'
       
-      // Force theme update when global changes
+      // Apply theme to document root
       React.useEffect(() => {
-        if (typeof window !== 'undefined') {
+        if (typeof document !== 'undefined') {
           const root = document.documentElement;
           root.setAttribute('data-theme', theme);
           root.classList.remove('light', 'dark');
@@ -196,38 +153,20 @@ const preview: Preview = {
       }, [theme])
 
       return React.createElement(
-        ThemeProvider,
-        { 
-          defaultTheme: theme,
-          storageKey: 'storybook-liquidui-theme'
+        'div',
+        {
+          className: `storybook-wrapper ${theme}`,
+          'data-theme': theme,
+          style: {
+            minHeight: '300px',
+            padding: '2rem',
+            background: theme === 'dark' 
+              ? 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
+              : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
+            borderRadius: '8px'
+          }
         },
-        React.createElement(
-          LiquidGlassProvider,
-          {
-            config: {
-              adaptToContent: true,
-              specularHighlights: true,
-              magneticHover: false
-            }
-          },
-          React.createElement(
-            'div',
-            {
-              className: `liquid-glass-container ${theme}`,
-              'data-theme': theme,
-              style: {
-                minHeight: '400px',
-                padding: '2rem',
-                background: theme === 'dark' 
-                  ? 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
-                  : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
-                transition: 'all 0.3s ease',
-                borderRadius: '12px'
-              }
-            },
-            React.createElement(Story)
-          )
-        )
+        React.createElement(Story)
       )
     }
   ]

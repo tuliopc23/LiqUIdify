@@ -9,23 +9,23 @@
 
 /* CSS Custom Properties for Liquid Glass Design System */
 :root {
-  /* Core Glass Properties - with fallbacks */
-  --glass-bg-primary: rgba(255, 255, 255, 0.12);
-  --glass-bg-secondary: rgba(248, 250, 252, 0.15);
-  --glass-bg-tertiary: rgba(241, 245, 249, 0.18);
-  --glass-bg-elevated: rgba(255, 255, 255, 0.25);
-  --glass-bg-floating: rgba(255, 255, 255, 0.2);
-  --glass-bg-overlay: rgba(255, 255, 255, 0.3);
+  /* Core Glass Properties - with fallbacks - Fixed for light mode visibility */
+  --glass-bg-primary: rgba(255, 255, 255, 0.25);
+  --glass-bg-secondary: rgba(248, 250, 252, 0.35);
+  --glass-bg-tertiary: rgba(241, 245, 249, 0.45);
+  --glass-bg-elevated: rgba(255, 255, 255, 0.45);
+  --glass-bg-floating: rgba(255, 255, 255, 0.35);
+  --glass-bg-overlay: rgba(255, 255, 255, 0.55);
   
   /* Ensure all variables have valid color values */
   --glass-bg: var(--glass-bg-primary, rgba(255, 255, 255, 0.12));
   --glass-border: var(--glass-border-light, rgba(255, 255, 255, 0.15));
 
-  /* Interactive States */
-  --glass-bg-hover: rgba(255, 255, 255, 0.18);
-  --glass-bg-active: rgba(255, 255, 255, 0.08);
-  --glass-bg-focus: rgba(255, 255, 255, 0.22);
-  --glass-bg-pressed: rgba(255, 255, 255, 0.06);
+  /* Interactive States - Fixed for light mode visibility */
+  --glass-bg-hover: rgba(255, 255, 255, 0.4);
+  --glass-bg-active: rgba(255, 255, 255, 0.2);
+  --glass-bg-focus: rgba(255, 255, 255, 0.45);
+  --glass-bg-pressed: rgba(255, 255, 255, 0.15);
 
   /* Border System */
   --glass-border-subtle: rgba(255, 255, 255, 0.08);
@@ -192,6 +192,50 @@
   border: 1px solid var(--glass-border-light);
   box-shadow: var(--glass-shadow-medium);
   transition: all var(--glass-timing-normal) var(--glass-ease-glass);
+}
+
+/* Missing Glass Effect Classes for Component Compatibility */
+.glass-effect {
+  background: var(--glass-bg-primary);
+  backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-enhanced)
+    var(--glass-brightness-normal);
+  -webkit-backdrop-filter: var(--glass-blur-medium)
+    var(--glass-saturation-enhanced) var(--glass-brightness-normal);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow-medium);
+  transition: all var(--glass-timing-normal) var(--glass-ease-glass);
+}
+
+.glass-effect-elevated {
+  background: var(--glass-bg-elevated);
+  backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-enhanced)
+    var(--glass-brightness-bright);
+  -webkit-backdrop-filter: var(--glass-blur-medium)
+    var(--glass-saturation-enhanced) var(--glass-brightness-bright);
+  border: 1px solid var(--glass-border-medium);
+  box-shadow: var(--glass-shadow-heavy);
+  transition: all var(--glass-timing-normal) var(--glass-ease-glass);
+}
+
+.glass-hover {
+  cursor: pointer;
+  transition: all var(--glass-timing-normal) var(--glass-ease-glass);
+}
+
+.glass-hover:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-heavy);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.focus-ring {
+  outline: none;
+  transition: box-shadow var(--glass-timing-fast) var(--glass-ease-glass);
+}
+
+.focus-ring:focus-visible {
+  box-shadow: var(--glass-shadow-medium), var(--glass-focus-medium);
 }
 
 /* Glass Variants */
@@ -1184,4 +1228,27 @@
   100% {
     transform: translateX(100%);
   }
+}
+
+/* Tailwind-compatible Utility Classes for glass-utils.ts */
+.bg-glass {
+  background: var(--glass-bg-primary);
+}
+
+.border-glass {
+  border-color: var(--glass-border-light);
+}
+
+.backdrop-blur-glass {
+  backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-enhanced);
+  -webkit-backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-enhanced);
+}
+
+/* Text color utilities for light/dark mode compatibility */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
 }

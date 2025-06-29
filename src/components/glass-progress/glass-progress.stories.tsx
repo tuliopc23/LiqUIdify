@@ -26,6 +26,11 @@ const meta: Meta<typeof GlassProgress> = {
     color: {
       control: { type: 'select' },
       options: ['blue', 'green', 'purple', 'red', 'yellow'],
+      description: 'Color theme for the progress bar',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'blue' },
+      },
     },
     showValue: {
       control: 'boolean',
