@@ -1,6 +1,6 @@
 {
   "name": "@tuliocunha23/liquidui",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "type": "module",
   "description": "🚀 Physics-based liquid glass library with content-aware adaptation, magnetic interactions, and 30+ glass effects. TypeScript-first, accessibility-ready.",
   "main": "dist/liquidui.umd.js",
