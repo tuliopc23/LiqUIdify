@@ -1,10 +1,36 @@
-import type { Config } from 'tailwindcss'
-import { designTokens } from './src/tokens/design-tokens'
+import type { Config } from 'tailwindcss';
+import { designTokens } from './src/tokens/design-tokens';
 
 const config: Config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    './.storybook/**/*.{js,ts,jsx,tsx,mdx}'
+    './.storybook/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  safelist: [
+    // Documentation utilities that must always be generated
+    'text-text-primary',
+    'text-text-secondary',
+    'bg-glass-bg-primary',
+    'bg-glass-bg-secondary',
+    'bg-glass-bg-tertiary',
+    'bg-glass-bg-elevated',
+    'bg-glass-bg-floating',
+    'bg-glass-bg-overlay',
+    'bg-glass-bg-hover',
+    'bg-glass-bg-active',
+    'bg-glass-bg-focus',
+    'bg-glass-bg-pressed',
+    'border-glass-border-subtle',
+    'border-glass-border-light',
+    'border-glass-border-medium',
+    'border-glass-border-strong',
+    'border-glass-border-focus',
+    'border-glass-border-hover',
+    // Responsive variants
+    {
+      pattern: /^(text-text-|bg-glass-bg-|border-glass-border-)/,
+      variants: ['hover', 'focus', 'active', 'dark'],
+    },
   ],
   darkMode: ['class'],
   theme: {
@@ -34,29 +60,29 @@ const config: Config = {
         },
         secondary: {
           DEFAULT: 'var(--secondary)',
-          foreground: 'var(--secondary-foreground)'
+          foreground: 'var(--secondary-foreground)',
         },
         destructive: {
           DEFAULT: 'var(--destructive)',
-          foreground: 'var(--destructive-foreground)'
+          foreground: 'var(--destructive-foreground)',
         },
         muted: {
           DEFAULT: 'var(--muted)',
-          foreground: 'var(--muted-foreground)'
+          foreground: 'var(--muted-foreground)',
         },
         accent: {
           DEFAULT: 'var(--accent)',
-          foreground: 'var(--accent-foreground)'
+          foreground: 'var(--accent-foreground)',
         },
         popover: {
           DEFAULT: 'var(--popover)',
-          foreground: 'var(--popover-foreground)'
+          foreground: 'var(--popover-foreground)',
         },
         card: {
           DEFAULT: 'var(--card)',
-          foreground: 'var(--card-foreground)'
+          foreground: 'var(--card-foreground)',
         },
-        
+
         // Glass-specific colors
         glass: {
           light: {
@@ -80,9 +106,9 @@ const config: Config = {
             active: designTokens.colors.glass.states.active,
             focus: designTokens.colors.glass.states.focus,
             pressed: designTokens.colors.glass.states.pressed,
-          }
+          },
         },
-        
+
         // Border colors
         'border-glass': {
           light: {
@@ -96,24 +122,56 @@ const config: Config = {
             light: designTokens.colors.border.dark.light,
             medium: designTokens.colors.border.dark.medium,
             strong: designTokens.colors.border.dark.strong,
-          }
-        }
+          },
+        },
+
+        // Text colors
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        text: {
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+        },
+
+        // Glass background colors for utilities
+        'glass-bg': {
+          primary: 'var(--glass-bg-primary)',
+          secondary: 'var(--glass-bg-secondary)',
+          tertiary: 'var(--glass-bg-tertiary)',
+          elevated: 'var(--glass-bg-elevated)',
+          floating: 'var(--glass-bg-floating)',
+          overlay: 'var(--glass-bg-overlay)',
+          hover: 'var(--glass-bg-hover)',
+          active: 'var(--glass-bg-active)',
+          focus: 'var(--glass-bg-focus)',
+          pressed: 'var(--glass-bg-pressed)',
+        },
+
+        // Glass border colors for utilities
+        'glass-border': {
+          subtle: 'var(--glass-border-subtle)',
+          light: 'var(--glass-border-light)',
+          medium: 'var(--glass-border-medium)',
+          strong: 'var(--glass-border-strong)',
+          focus: 'var(--glass-border-focus)',
+          hover: 'var(--glass-border-hover)',
+        },
       },
 
       // Typography from design tokens
-      fontFamily: designTokens.typography.fontFamily,
-      fontSize: designTokens.typography.fontSize,
-      fontWeight: designTokens.typography.fontWeight,
+      fontFamily: designTokens.typography.fontFamily as any,
+      fontSize: designTokens.typography.fontSize as any,
+      fontWeight: designTokens.typography.fontWeight as any,
 
       // Spacing from design tokens
-      spacing: designTokens.spacing,
+      spacing: designTokens.spacing as any,
 
       // Border radius from design tokens
       borderRadius: {
         ...designTokens.borderRadius,
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        sm: 'calc(var(--radius) - 4px)',
       },
 
       // Enhanced backdrop blur
@@ -140,7 +198,7 @@ const config: Config = {
       },
 
       // Z-index from design tokens
-      zIndex: designTokens.zIndex,
+      zIndex: designTokens.zIndex as any,
 
       // Enhanced animations
       animation: {
@@ -149,7 +207,8 @@ const config: Config = {
         'glass-pulse': 'glass-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'glass-slide-in': 'glass-slide-in 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
         'glass-slide-out': 'glass-slide-out 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-        'glass-scale-in': 'glass-scale-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'glass-scale-in':
+          'glass-scale-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
         'glass-fade-in': 'glass-fade-in 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
         'glass-magnetic': 'glass-magnetic 0.25s cubic-bezier(0.2, 0, 0, 1.2)',
       },
@@ -158,37 +217,37 @@ const config: Config = {
       keyframes: {
         'glass-shimmer': {
           '0%, 100%': { transform: 'translateX(-100%)' },
-          '50%': { transform: 'translateX(100%)' }
+          '50%': { transform: 'translateX(100%)' },
         },
         'glass-float': {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' }
+          '50%': { transform: 'translateY(-10px)' },
         },
         'glass-pulse': {
           '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.5' }
+          '50%': { opacity: '0.5' },
         },
         'glass-slide-in': {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' }
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'glass-slide-out': {
           '0%': { opacity: '1', transform: 'translateY(0)' },
-          '100%': { opacity: '0', transform: 'translateY(-20px)' }
+          '100%': { opacity: '0', transform: 'translateY(-20px)' },
         },
         'glass-scale-in': {
           '0%': { opacity: '0', transform: 'scale(0.9)' },
-          '100%': { opacity: '1', transform: 'scale(1)' }
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
         'glass-fade-in': {
           '0%': { opacity: '0' },
-          '100%': { opacity: '1' }
+          '100%': { opacity: '1' },
         },
         'glass-magnetic': {
           '0%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.05)' },
-          '100%': { transform: 'scale(1)' }
-        }
+          '100%': { transform: 'scale(1)' },
+        },
       },
 
       // Transition timing functions from design tokens
@@ -197,47 +256,50 @@ const config: Config = {
 
       // Breakpoints from design tokens
       screens: designTokens.breakpoints,
-    }
+    },
   },
   plugins: [
     require('tailwindcss-animate'),
     // Custom plugin for glass utilities
-    function({ addUtilities, theme }: any) {
+    function ({ addUtilities, theme }: any) {
       const glassUtilities = {
         '.glass-effect': {
           'backdrop-filter': 'blur(16px) saturate(150%)',
           '-webkit-backdrop-filter': 'blur(16px) saturate(150%)',
-          'background': 'var(--glass-bg-primary, rgba(255, 255, 255, 0.12))',
-          'border': '1px solid var(--glass-border-light, rgba(255, 255, 255, 0.15))',
+          background: 'var(--glass-bg-primary, rgba(255, 255, 255, 0.12))',
+          border:
+            '1px solid var(--glass-border-light, rgba(255, 255, 255, 0.15))',
           'box-shadow': theme('boxShadow.subtle'),
         },
         '.glass-effect-elevated': {
           'backdrop-filter': 'blur(24px) saturate(180%)',
           '-webkit-backdrop-filter': 'blur(24px) saturate(180%)',
-          'background': 'var(--glass-bg-elevated, rgba(255, 255, 255, 0.25))',
-          'border': '1px solid var(--glass-border-medium, rgba(255, 255, 255, 0.25))',
+          background: 'var(--glass-bg-elevated, rgba(255, 255, 255, 0.25))',
+          border:
+            '1px solid var(--glass-border-medium, rgba(255, 255, 255, 0.25))',
           'box-shadow': theme('boxShadow.medium'),
         },
         '.glass-hover': {
-          'transition': 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
-            'background': 'var(--glass-bg-hover, rgba(255, 255, 255, 0.18))',
-            'border-color': 'var(--glass-border-hover, rgba(255, 255, 255, 0.30))',
-            'transform': 'translateY(-2px)',
+            background: 'var(--glass-bg-hover, rgba(255, 255, 255, 0.18))',
+            'border-color':
+              'var(--glass-border-hover, rgba(255, 255, 255, 0.30))',
+            transform: 'translateY(-2px)',
             'box-shadow': theme('boxShadow.heavy'),
-          }
+          },
         },
         '.focus-ring': {
           '&:focus-visible': {
-            'outline': 'none',
+            outline: 'none',
             'box-shadow': theme('boxShadow.focus-medium'),
-          }
-        }
+          },
+        },
       };
-      
-      addUtilities(glassUtilities);
-    }
-  ]
-}
 
-export default config
+      addUtilities(glassUtilities);
+    },
+  ],
+};
+
+export default config;

@@ -3,7 +3,19 @@
  * GPU-accelerated animations with physics-based motion
  */
 
-import { SpringPhysics, Vector2D } from './glass-physics';
+import '../types/web-animations';
+
+// Import types for physics and animation
+export interface SpringPhysics {
+  mass: number;
+  tension: number;
+  friction: number;
+}
+
+export interface Vector2D {
+  x: number;
+  y: number;
+}
 
 // Animation timing functions
 export const GLASS_EASINGS = {
@@ -78,7 +90,10 @@ export class GlassAnimation {
   }
 
   // Animate with Web Animations API
-  animate(keyframes: Keyframe[], options: KeyframeAnimationOptions): Animation {
+  animate(
+    keyframes: globalThis.Keyframe[],
+    options: globalThis.KeyframeAnimationOptions
+  ): globalThis.Animation {
     // Force GPU acceleration
     this.element.style.willChange = 'transform, opacity, filter';
 
@@ -107,7 +122,7 @@ export class GlassAnimation {
 
   // Liquid animation
   liquid(amplitude = 20, frequency = 2, duration = 2000) {
-    const keyframes: Keyframe[] = [];
+    const keyframes: globalThis.Keyframe[] = [];
     const steps = 60;
 
     for (let i = 0; i <= steps; i++) {
@@ -129,7 +144,7 @@ export class GlassAnimation {
 
   // Shatter effect
   shatter(pieces = 12, duration = 800) {
-    const bounds = this.element.getBoundingClientRect();
+    // const bounds = element.getBoundingClientRect();
     const fragments: HTMLElement[] = [];
 
     // Create fragments
@@ -245,7 +260,7 @@ export class GlassAnimation {
 
   // Glitch effect
   glitch(intensity = 5, duration = 200) {
-    const keyframes: Keyframe[] = [];
+    const keyframes: globalThis.Keyframe[] = [];
     const steps = 10;
 
     for (let i = 0; i < steps; i++) {
@@ -347,8 +362,8 @@ export class GlassChoreographer {
   // Stagger animations
   stagger(
     elements: HTMLElement[],
-    keyframes: Keyframe[],
-    options: KeyframeAnimationOptions,
+    keyframes: globalThis.Keyframe[],
+    options: globalThis.KeyframeAnimationOptions,
     staggerDelay = 50
   ) {
     elements.forEach((element, index) => {
@@ -372,8 +387,8 @@ export class GlassChoreographer {
   }
 
   // Get predefined keyframes for animation type
-  private getKeyframesForType(type: AnimationType): Keyframe[] {
-    const keyframeMap: Record<AnimationType, Keyframe[]> = {
+  private getKeyframesForType(type: AnimationType): globalThis.Keyframe[] {
+    const keyframeMap: Record<AnimationType, globalThis.Keyframe[]> = {
       fade: [{ opacity: 0 }, { opacity: 1 }],
       slide: [
         { transform: 'translateY(20px)', opacity: 0 },
@@ -459,8 +474,7 @@ export class GlassChoreographer {
 export class GlassGestureAnimator {
   private element: HTMLElement;
   private animation: GlassAnimation;
-  private gestureHandlers: Map<string, (e: TouchEvent) => void> =
-    new Map();
+  private gestureHandlers: Map<string, (e: TouchEvent) => void> = new Map();
 
   constructor(element: HTMLElement) {
     this.element = element;

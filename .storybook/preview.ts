@@ -1,15 +1,15 @@
-import type { Preview } from '@storybook/react'
-import React from 'react'
-import '../src/styles/glass.css'
-import '../src/styles/enhanced-components.css'
+import type { Preview } from '@storybook/react';
+import React from 'react';
+import '../src/styles/glass.css';
+import '../src/styles/enhanced-components.css';
 
 // Add a flag to ensure single initialization
-let isInitialized = false
+let isInitialized = false;
 
 // Initialize CSS immediately for docs mode
 if (typeof document !== 'undefined') {
   // Add CSS for docs rendering
-  const style = document.createElement('style')
+  const style = document.createElement('style');
   style.innerHTML = `
     .docs-story {
       background: transparent !important;
@@ -30,8 +30,8 @@ if (typeof document !== 'undefined') {
     [data-theme="dark"] .sb-show-main {
       background: var(--glass-bg-canvas, #0a0a0a) !important;
     }
-  `
-  document.head.appendChild(style)
+  `;
+  document.head.appendChild(style);
 }
 
 // Remove the problematic color contrast checker function
@@ -50,47 +50,124 @@ const preview: Preview = {
       values: [
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#0a0a0a' },
-        { name: 'glass-light', value: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' },
-        { name: 'glass-dark', value: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)' }
-      ]
+        {
+          name: 'glass-light',
+          value: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+        },
+        {
+          name: 'glass-dark',
+          value: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
+        },
+      ],
     },
-    actions: { 
-      argTypesRegex: '^on[A-Z].*' 
+    actions: {
+      argTypesRegex: '^on[A-Z].*',
     },
     controls: {
       matchers: {
-        color: /^(backgroundColor|textColor|borderColor|fillColor|strokeColor)$/i,
-        date: /Date$/
+        color:
+          /^(backgroundColor|textColor|borderColor|fillColor|strokeColor)$/i,
+        date: /Date$/,
       },
       expanded: true,
-      exclude: ['color'] // Exclude generic 'color' prop from automatic color control
+      exclude: ['color'], // Exclude generic 'color' prop from automatic color control
     },
     docs: {
       theme: {
         brandTitle: 'Liquid Glass UI',
         brandUrl: 'https://liquidui.dev',
         brandImage: undefined,
+
+        // Light theme configuration
+        base: 'light',
         colorPrimary: '#007AFF',
         colorSecondary: '#5856D6',
-        
+
         // Typography
         fontBase: '"Inter", "SF Pro Display", system-ui, sans-serif',
-        fontCode: '"SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace',
-        
-        // Text colors
+        fontCode:
+          '"SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace',
+
+        // Light theme colors - ensure good contrast
         textColor: '#1a1a1a',
         textInverseColor: '#ffffff',
-        
-        // Toolbar default and active colors
-        barTextColor: '#999999',
+        textMutedColor: '#666666',
+
+        // App backgrounds - light theme
+        appBg: '#f8fafc',
+        appContentBg: '#ffffff',
+        appBorderColor: '#e2e8f0',
+        appBorderRadius: 8,
+
+        // Toolbar colors - light theme
+        barTextColor: '#475569',
         barSelectedColor: '#007AFF',
         barBg: '#ffffff',
-        
-        // Form colors
+        barHoverColor: '#f1f5f9',
+
+        // Form colors - light theme
         inputBg: '#ffffff',
-        inputBorder: '#e1e5e9',
-        inputTextColor: '#1a1a1a',
+        inputBorder: '#e2e8f0',
+        inputTextColor: '#1e293b',
         inputBorderRadius: 8,
+
+        // Button colors
+        buttonBg: '#ffffff',
+        buttonBorder: '#e2e8f0',
+        booleanBg: '#e2e8f0',
+        booleanSelectedBg: '#007AFF',
+
+        // Grid and layout
+        gridCellSize: 8,
+      },
+      darkMode: {
+        dark: {
+          brandTitle: 'Liquid Glass UI',
+          brandUrl: 'https://liquidui.dev',
+          brandImage: undefined,
+
+          // Dark theme configuration
+          base: 'dark',
+          colorPrimary: '#0A84FF',
+          colorSecondary: '#5E5CE6',
+
+          // Typography - same as light
+          fontBase: '"Inter", "SF Pro Display", system-ui, sans-serif',
+          fontCode:
+            '"SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace',
+
+          // Dark theme colors - ensure good contrast
+          textColor: '#f1f5f9',
+          textInverseColor: '#1e293b',
+          textMutedColor: '#94a3b8',
+
+          // App backgrounds - dark glass theme with tinted effect
+          appBg: 'rgba(15, 23, 42, 0.85)',
+          appContentBg: 'rgba(30, 41, 59, 0.75)',
+          appBorderColor: 'rgba(51, 65, 85, 0.6)',
+          appBorderRadius: 8,
+
+          // Toolbar colors - dark theme with glass effect
+          barTextColor: '#cbd5e1',
+          barSelectedColor: '#0A84FF',
+          barBg: 'rgba(30, 41, 59, 0.8)',
+          barHoverColor: 'rgba(51, 65, 85, 0.6)',
+
+          // Form colors - dark theme with glass effect
+          inputBg: 'rgba(51, 65, 85, 0.7)',
+          inputBorder: 'rgba(71, 85, 105, 0.5)',
+          inputTextColor: '#f1f5f9',
+          inputBorderRadius: 8,
+
+          // Button colors - dark theme with glass effect
+          buttonBg: 'rgba(51, 65, 85, 0.7)',
+          buttonBorder: 'rgba(71, 85, 105, 0.5)',
+          booleanBg: 'rgba(71, 85, 105, 0.6)',
+          booleanSelectedBg: '#0A84FF',
+
+          // Grid and layout
+          gridCellSize: 8,
+        },
       },
       toc: {
         contentsSelector: '.sbdocs-content',
@@ -111,20 +188,20 @@ const preview: Preview = {
     },
     viewport: {
       viewports: {
-        mobile: { 
-          name: 'Mobile', 
-          styles: { width: '375px', height: '667px' } 
+        mobile: {
+          name: 'Mobile',
+          styles: { width: '375px', height: '667px' },
         },
-        tablet: { 
-          name: 'Tablet', 
-          styles: { width: '768px', height: '1024px' } 
+        tablet: {
+          name: 'Tablet',
+          styles: { width: '768px', height: '1024px' },
         },
-        desktop: { 
-          name: 'Desktop', 
-          styles: { width: '1440px', height: '900px' } 
-        }
-      }
-    }
+        desktop: {
+          name: 'Desktop',
+          styles: { width: '1440px', height: '900px' },
+        },
+      },
+    },
   },
   globalTypes: {
     theme: {
@@ -134,14 +211,14 @@ const preview: Preview = {
         title: 'Theme',
         icon: 'paintbrush',
         items: ['light', 'dark'],
-        dynamicTitle: true
-      }
-    }
+        dynamicTitle: true,
+      },
+    },
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme || 'light'
-      
+      const theme = context.globals.theme || 'light';
+
       // Apply theme to document root
       React.useEffect(() => {
         if (typeof document !== 'undefined') {
@@ -149,27 +226,69 @@ const preview: Preview = {
           root.setAttribute('data-theme', theme);
           root.classList.remove('light', 'dark');
           root.classList.add(theme);
-        }
-      }, [theme])
 
+          // Apply theme-specific background with glass aesthetics
+          const storybook = document.querySelector(
+            '.sb-show-main'
+          ) as HTMLElement;
+          if (storybook) {
+            if (theme === 'dark') {
+              storybook.style.background =
+                'radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0.9) 35%, rgba(30, 41, 59, 0.95) 100%)';
+              storybook.style.backdropFilter = 'blur(20px) saturate(180%)';
+              storybook.style.color = '#f1f5f9';
+            } else {
+              storybook.style.background =
+                'radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, rgba(248, 250, 252, 0.95) 35%, rgba(226, 232, 240, 0.98) 100%)';
+              storybook.style.backdropFilter = 'blur(20px) saturate(120%)';
+              storybook.style.color = '#1e293b';
+            }
+          }
+
+          // Apply theme to docs container with glass effect
+          const docsContainer = document.querySelector(
+            '.sbdocs'
+          ) as HTMLElement;
+          if (docsContainer) {
+            if (theme === 'dark') {
+              docsContainer.style.background = 'rgba(15, 23, 42, 0.9)';
+              docsContainer.style.backdropFilter = 'blur(10px) saturate(150%)';
+              docsContainer.style.color = '#f1f5f9';
+            } else {
+              docsContainer.style.background = 'rgba(255, 255, 255, 0.95)';
+              docsContainer.style.backdropFilter = 'blur(10px) saturate(120%)';
+              docsContainer.style.color = '#1e293b';
+            }
+          }
+        }
+      }, [theme]);
+
+      // Enhanced wrapper with proper theme styling
       return React.createElement(
         'div',
         {
-          className: `storybook-wrapper ${theme}`,
           'data-theme': theme,
+          className: `storybook-wrapper ${theme}`,
           style: {
-            minHeight: '300px',
-            padding: '2rem',
-            background: theme === 'dark' 
-              ? 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
-              : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
-            borderRadius: '8px'
-          }
+            minHeight: '200px',
+            padding: '1rem',
+            background:
+              theme === 'dark'
+                ? 'rgba(30, 41, 59, 0.3)'
+                : 'rgba(255, 255, 255, 0.4)',
+            backdropFilter: 'blur(8px) saturate(140%)',
+            color: theme === 'dark' ? '#f1f5f9' : '#1e293b',
+            borderRadius: '8px',
+            border:
+              theme === 'dark'
+                ? '1px solid rgba(255, 255, 255, 0.1)'
+                : '1px solid rgba(0, 0, 0, 0.05)',
+          },
         },
         React.createElement(Story)
-      )
-    }
-  ]
-}
+      );
+    },
+  ],
+};
 
-export default preview
+export default preview;

@@ -5,7 +5,7 @@
 
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { designTokens } from '../tokens/design-tokens';
+// Design tokens can be imported when needed
 
 // Class variance authority (cva) alias
 export { createVariants as cva };
@@ -41,7 +41,9 @@ export type VariantProps<T extends VariantConfig<any>> = {
 };
 
 // Extract config type from variant function
-export type InferVariantProps<T> = T extends (props?: infer P) => any ? P : never;
+export type InferVariantProps<T> = T extends (props?: infer P) => any
+  ? P
+  : never;
 
 // Enhanced variant creator with better TypeScript support
 export function createVariants<

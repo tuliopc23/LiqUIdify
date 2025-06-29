@@ -1,48 +1,101 @@
-# Glass UI - The Future of Glassmorphism
+# LiquidUI - The Future of Glassmorphism 💧
 
 <div align="center">
-  <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1200&h=400&fit=crop" alt="Glass UI Banner" />
+  <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1200&h=400&fit=crop" alt="LiquidUI Banner" />
   
-  <h3>🚀 Physics-based glassmorphism with content-aware adaptation</h3>
-  <p><strong>The only library that automatically adapts glass effects to your content</strong></p>
+  <h3>🚀 Physics-based liquid glass library with content-aware adaptation</h3>
+  <p><strong>30+ glass effects with magnetic interactions and accessibility-first design</strong></p>
   
   <p align="center">
-    <a href="https://glass-ui.dev"><img src="https://img.shields.io/badge/Demo-Live-brightgreen" alt="Demo"></a>
-    <a href="#"><img src="https://img.shields.io/npm/v/@tuliopc23/glass-ui?color=blue" alt="NPM Version"></a>
-    <a href="#"><img src="https://img.shields.io/npm/dm/@tuliopc23/glass-ui" alt="Downloads"></a>
-    <a href="#"><img src="https://img.shields.io/github/stars/tuliopc23/glass-ui" alt="GitHub Stars"></a>
+    <a href="https://liquidui.dev"><img src="https://img.shields.io/badge/Demo-Live-brightgreen" alt="Demo"></a>
+    <a href="https://www.npmjs.com/package/@tuliocunha23/liquidui"><img src="https://img.shields.io/npm/v/@tuliocunha23/liquidui?color=blue" alt="NPM Version"></a>
+    <a href="https://www.npmjs.com/package/@tuliocunha23/liquidui"><img src="https://img.shields.io/npm/dm/@tuliocunha23/liquidui" alt="Downloads"></a>
+    <a href="https://github.com/tuliopc23/LiquidiUI"><img src="https://img.shields.io/github/stars/tuliopc23/LiquidiUI" alt="GitHub Stars"></a>
     <a href="#"><img src="https://img.shields.io/badge/TypeScript-Ready-blue" alt="TypeScript"></a>
+    <a href="#"><img src="https://img.shields.io/badge/Tests-Passing-green" alt="Tests"></a>
   </p>
   
   <p align="center">
+    <a href="#-installation">Installation</a> •
     <a href="#-quick-start">Quick Start</a> •
     <a href="#-features">Features</a> •
-    <a href="#-examples">Examples</a> •
-    <a href="#-documentation">Docs</a> •
-    <a href="https://storybook-static-or3ttelxf-tulio-pinheiro-cunha-s-projects.vercel.app">Storybook</a>
+    <a href="#-components">Components</a> •
+    <a href="https://liquidui-storybook.vercel.app">Storybook</a>
   </p>
 </div>
 
-## 🎯 Why Glass UI?
+## 🎯 Why LiquidUI?
 
 ```tsx
 // Other libraries: Static glass effects
 <div className="backdrop-blur-md bg-white/10">Static</div>
 
-// Glass UI: Content-aware adaptation + physics
+// LiquidUI: Content-aware adaptation + physics
 <GlassCard>
   Content automatically adapts glass opacity, blur, and color
   Plus magnetic hover with realistic spring physics
 </GlassCard>
 ```
 
-**What makes Glass UI unique:**
+**What makes LiquidUI unique:**
 - 🧠 **Content-aware adaptation** - Automatically analyzes background and adjusts glass effects
 - ⚡ **Physics engine** - Realistic spring animations and magnetic interactions  
 - 🎨 **30+ glass variants** - From basic frost to holographic and aurora effects
 - 🔧 **TypeScript-first** - Complete type safety with excellent IntelliSense
 - ♿ **Accessibility-first** - WCAG compliant with comprehensive testing
 - 📱 **Mobile-optimized** - Touch-friendly with haptic feedback support
+
+## 📦 Installation
+
+```bash
+# npm
+npm install @tuliocunha23/liquidui
+
+# yarn
+yarn add @tuliocunha23/liquidui
+
+# pnpm
+pnpm add @tuliocunha23/liquidui
+```
+
+### Setup
+
+Import the styles in your main CSS file or component:
+
+```css
+/* In your main CSS file */
+@import '@tuliocunha23/liquidui/css';
+```
+
+Or import in your JavaScript/TypeScript entry file:
+
+```tsx
+// In your main.tsx or App.tsx
+import '@tuliocunha23/liquidui/css';
+```
+
+## 🚀 Quick Start
+
+```tsx
+import { GlassButton, GlassCard } from '@tuliocunha23/liquidui';
+import '@tuliocunha23/liquidui/css';
+
+function App() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <GlassCard className="max-w-md mx-auto p-6">
+        <h1 className="text-2xl font-bold mb-4">Welcome to LiquidUI</h1>
+        <p className="text-gray-600 mb-6">
+          Experience the future of glassmorphism with physics-based interactions.
+        </p>
+        <GlassButton variant="primary" size="lg">
+          Get Started
+        </GlassButton>
+      </GlassCard>
+    </div>
+  );
+}
+```
 
 ## ✨ Features
 

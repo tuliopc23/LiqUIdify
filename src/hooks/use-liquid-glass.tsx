@@ -199,7 +199,7 @@ export const useContentAwareGlass = (
       observer.disconnect();
       resizeObserver.disconnect();
     };
-  }, [analyzeContent, adaptToContent]);
+  }, [analyzeContent, adaptToContent, contentRef]);
 
   return analysisRef.current;
 };
@@ -213,8 +213,10 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 
   try {
     // Parse RGB values from color string with better error handling
-    const rgbMatch = colorString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
-    
+    const rgbMatch = colorString.match(
+      /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/
+    );
+
     if (!rgbMatch) {
       console.warn('analyzeColor: Could not parse color string:', colorString);
       // Return a default analysis for unrecognized colors
@@ -229,7 +231,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
     const r = parseInt(rgbMatch[1], 10) / 255;
     const g = parseInt(rgbMatch[2], 10) / 255;
     const b = parseInt(rgbMatch[3], 10) / 255;
-    
+
     // Validate parsed values
     if (isNaN(r) || isNaN(g) || isNaN(b)) {
       console.warn('analyzeColor: Invalid RGB values:', { r, g, b });

@@ -1,64 +1,28 @@
-import type { StorybookConfig } from '@storybook/react-vite'
-import { mergeConfig } from 'vite'
-import path from 'path'
+import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: [
-    '@storybook/addon-docs',
-    '@storybook/addon-a11y', 
-    '@storybook/addon-themes'
-  ],
+  addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
   framework: {
     name: '@storybook/react-vite',
-    options: {}
+    options: {},
   },
-  features: {
-    buildStoriesJson: true
+  docs: {
+    defaultName: 'Documentation',
   },
   typescript: {
     check: false,
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      shouldExtractValuesFromUnion: true,
-      shouldRemoveUndefinedFromOptional: true,
-      propFilter: (prop) => {
+      propFilter: prop => {
         if (prop.parent) {
-          return !/node_modules/.test(prop.parent.fileName)
+          return !/node_modules/.test(prop.parent.fileName);
         }
-        return true
+        return true;
       },
     },
   },
-  viteFinal: async (config) => {
-    return mergeConfig(config, {
-      resolve: {
-        alias: {
-          '@': path.resolve(__dirname, '..', 'src')
-        }
-      },
-      css: {
-        postcss: './postcss.config.js',
-      },
-      build: {
-        target: 'es2020',
-        rollupOptions: {
-          external: [],
-        }
-      },
-      esbuild: {
-        target: 'es2020'
-      },
-      define: {
-        global: 'globalThis',
-      }
-    })
-  },
-  docs: {
-    autodocs: true,
-    defaultName: 'Documentation'
-  }
-}
+};
 
-export default config
+export default config;

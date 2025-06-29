@@ -289,7 +289,7 @@ export class GestureRecognizer {
     }
   };
 
-  private handleMouseUp = (e: MouseEvent) => {
+  private handleMouseUp = (_e: MouseEvent) => {
     const point = this.touches.get(-1);
     if (point) {
       this.detectGestureEnd(point);
@@ -297,7 +297,7 @@ export class GestureRecognizer {
     }
   };
 
-  private handleMouseLeave = (e: MouseEvent) => {
+  private handleMouseLeave = (_e: MouseEvent) => {
     this.touches.delete(-1);
     this.resetGestureState();
   };
