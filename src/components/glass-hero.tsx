@@ -51,9 +51,9 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
     },
     ref
   ) => {
-    const contentRef = useRef<HTMLDivElement | null>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
     const { specularHighlights } = useLiquidGlass();
-    useContentAwareGlass(contentRef);
+    useContentAwareGlass(contentRef as React.RefObject<HTMLElement>);
     const { elementRef: magneticRef, transform } = useMagneticHover(0.2, 200);
 
     // Callback ref to handle both content and magnetic refs

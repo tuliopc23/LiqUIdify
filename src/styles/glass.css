@@ -136,11 +136,16 @@
   --glass-brand: rgba(99, 102, 241, 0.1);
   --glass-premium: rgba(147, 51, 234, 0.08);
   --glass-luxury: rgba(236, 72, 153, 0.08);
+  
+  /* Canvas Background for Storybook */
+  --glass-bg-canvas: #ffffff;
+  --glass-bg-dark-canvas: #0a0a0a;
 }
 
 /* Dark Theme Overrides */
 [data-theme='dark'],
 .dark {
+  --glass-bg-canvas: #0a0a0a;
   --glass-bg-primary: rgba(18, 18, 18, 0.25);
   --glass-bg-secondary: rgba(44, 44, 46, 0.18);
   --glass-bg-tertiary: rgba(58, 58, 60, 0.22);

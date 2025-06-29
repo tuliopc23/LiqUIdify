@@ -133,7 +133,7 @@ export function useVirtualScroll<T>({
 }) {
   const [scrollTop, setScrollTop] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
-  const scrollTimeoutRef = useRef<number>();
+  const scrollTimeoutRef = useRef<number | null>(null);
 
   // Calculate item heights
   const getItemHeight = useCallback(
@@ -240,7 +240,7 @@ export function useLazyRender(threshold = 0.1, rootMargin = '50px') {
   const [visibleElements, setVisibleElements] = useState<Set<Element>>(
     new Set()
   );
-  const observerRef = useRef<IntersectionObserver>();
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(

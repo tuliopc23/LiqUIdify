@@ -256,7 +256,7 @@ export const useMagneticHover = (
     'translate3d(0px, 0px, 0px) scale(1)'
   );
   const springRef = useRef(new LegacySpringPhysics());
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
 
   const animate = useCallback(() => {
     const position = springRef.current.update();

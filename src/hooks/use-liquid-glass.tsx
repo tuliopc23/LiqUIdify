@@ -140,7 +140,7 @@ export const useContentAwareGlass = (
   contentRef: React.RefObject<HTMLElement>
 ) => {
   const { updateGlassStyle, adaptToContent } = useLiquidGlass();
-  const analysisRef = useRef<ContentAnalysis>();
+  const analysisRef = useRef<ContentAnalysis | null>(null);
 
   const analyzeContent = useCallback(async () => {
     if (!contentRef.current || !adaptToContent) return;
@@ -213,7 +213,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 
   try {
     // Parse RGB values from color string with better error handling
-    const rgbMatch = colorString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d\.]+))?\)/);
+    const rgbMatch = colorString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
     
     if (!rgbMatch) {
       console.warn('analyzeColor: Could not parse color string:', colorString);

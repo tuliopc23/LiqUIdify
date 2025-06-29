@@ -56,9 +56,9 @@ const GlassFeatureShowcase = forwardRef<
     },
     ref
   ) => {
-    const contentRef = useRef<HTMLDivElement | null>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
     const { specularHighlights } = useLiquidGlass();
-    useContentAwareGlass(contentRef);
+    useContentAwareGlass(contentRef as React.RefObject<HTMLElement>);
 
     const gridClasses = {
       1: 'grid-cols-1',

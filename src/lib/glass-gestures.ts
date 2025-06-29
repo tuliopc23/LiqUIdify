@@ -729,7 +729,7 @@ export function useGestures(
   config?: GestureConfig
 ) {
   const [gestures, setGestures] = useState<GestureEvent[]>([]);
-  const recognizerRef = useRef<GestureRecognizer>();
+  const recognizerRef = useRef<GestureRecognizer | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;

@@ -7,6 +7,43 @@ const meta: Meta<typeof GlassInput> = {
   component: GlassInput,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: `
+# Glass Input
+
+A beautiful input component with glass morphism effects and comprehensive functionality.
+
+## Features
+
+- ✨ **Glass Morphism**: Beautiful backdrop blur and transparency effects
+- 🎯 **Multiple Variants**: Default, search, password, and email types
+- 🎨 **Icon Support**: Left and right icon placement
+- ♿ **Accessible**: Full ARIA support and keyboard navigation
+- 🧹 **Clearable**: Optional clear functionality
+- 🎭 **States**: Normal, disabled, error, and focused states
+- 🌙 **Dark Mode**: Automatic theme adaptation
+
+## Usage
+
+\`\`\`tsx
+import { GlassInput } from '@liquidui/react'
+import { Search } from 'lucide-react'
+
+function App() {
+  return (
+    <GlassInput 
+      variant="search"
+      placeholder="Search..."
+      leftIcon={<Search className="h-4 w-4" />}
+      clearable
+    />
+  )
+}
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {

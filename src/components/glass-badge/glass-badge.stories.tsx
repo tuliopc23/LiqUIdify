@@ -6,6 +6,37 @@ const meta: Meta<typeof GlassBadge> = {
   component: GlassBadge,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: `
+# Glass Badge
+
+The GlassBadge component is used to display statuses or labels in your application. It comes in multiple variants to fit different contexts.
+
+## Features
+
+- **Variants**: Default, Success, Warning, Error
+- **Flexible usage**: Can be used in various parts of your application to indicate status.
+
+## Usage
+
+\`\`\`tsx
+import { GlassBadge } from '@liquidui/react'
+
+function App() {
+  return (
+    <div className="flex items-center gap-4">
+      <GlassBadge variant="default">Default</GlassBadge>
+      <GlassBadge variant="success">Success</GlassBadge>
+      <GlassBadge variant="warning">Warning</GlassBadge>
+      <GlassBadge variant="error">Error</GlassBadge>
+    </div>
+  )
+}
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {

@@ -18,12 +18,19 @@ if (typeof document !== 'undefined') {
       padding: 1rem;
     }
     .sbdocs-preview {
-      background: var(--glass-bg-canvas, #f5f5f5) !important;
+      background: var(--glass-bg-canvas, #ffffff) !important;
       border-radius: 8px;
       overflow: hidden;
     }
     [data-theme="dark"] .sbdocs-preview {
-      background: var(--glass-bg-canvas, #1a1a1a) !important;
+      background: var(--glass-bg-canvas, #0a0a0a) !important;
+    }
+    /* Ensure canvas backgrounds for story frames */
+    .sb-show-main {
+      background: var(--glass-bg-canvas, #ffffff) !important;
+    }
+    [data-theme="dark"] .sb-show-main {
+      background: var(--glass-bg-canvas, #0a0a0a) !important;
     }
   `
   document.head.appendChild(style)
