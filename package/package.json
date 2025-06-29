@@ -9,9 +9,9 @@
   "style": "dist/glass.css",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/glass-ui.es.js",
-      "require": "./dist/glass-ui.umd.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/glass-ui.umd.js"
     },
     "./styles": "./dist/glass.css",
     "./css": "./dist/glass.css"
