@@ -206,31 +206,63 @@ export const useContentAwareGlass = (
 
 // Helper function to analyze color
 function analyzeColor(colorString: string): ContentAnalysis | null {
-  // Parse RGB values from color string
-  const rgbMatch = colorString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-  if (!rgbMatch) return null;
+  if (!colorString || typeof colorString !== 'string') {
+    console.warn('analyzeColor: Invalid color string provided:', colorString);
+    return null;
+  }
 
-  const r = parseInt(rgbMatch[1]) / 255;
-  const g = parseInt(rgbMatch[2]) / 255;
-  const b = parseInt(rgbMatch[3]) / 255;
+  try {
+    // Parse RGB values from color string with better error handling
+    const rgbMatch = colorString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d\.]+))?\)/);
+    
+    if (!rgbMatch) {
+      console.warn('analyzeColor: Could not parse color string:', colorString);
+      // Return a default analysis for unrecognized colors
+      return {
+        averageColor: 'rgb(128, 128, 128)',
+        brightness: 0.5,
+        contrast: 0.5,
+        dominantHue: 0,
+      };
+    }
 
-  // Calculate brightness (luminance)
-  const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+    const r = parseInt(rgbMatch[1], 10) / 255;
+    const g = parseInt(rgbMatch[2], 10) / 255;
+    const b = parseInt(rgbMatch[3], 10) / 255;
+    
+    // Validate parsed values
+    if (isNaN(r) || isNaN(g) || isNaN(b)) {
+      console.warn('analyzeColor: Invalid RGB values:', { r, g, b });
+      return null;
+    }
 
-  // Calculate contrast (simplified)
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  const contrast = (max - min) / (max + min + 0.001);
+    // Calculate brightness (luminance)
+    const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
-  // Calculate dominant hue
-  const hue = rgbToHue(r, g, b);
+    // Calculate contrast (simplified)
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const contrast = (max - min) / (max + min + 0.001);
 
-  return {
-    averageColor: `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`,
-    brightness,
-    contrast,
-    dominantHue: hue,
-  };
+    // Calculate dominant hue
+    const hue = rgbToHue(r, g, b);
+
+    return {
+      averageColor: `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`,
+      brightness,
+      contrast,
+      dominantHue: hue,
+    };
+  } catch (error) {
+    console.warn('analyzeColor: Error processing color:', error);
+    // Return a safe default
+    return {
+      averageColor: 'rgb(128, 128, 128)',
+      brightness: 0.5,
+      contrast: 0.5,
+      dominantHue: 0,
+    };
+  }
 }
 
 // Helper function to convert RGB to HSL hue

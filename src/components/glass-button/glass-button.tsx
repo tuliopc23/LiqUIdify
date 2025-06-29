@@ -111,27 +111,29 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     const variantClasses = {
       primary: cn(
         "text-white font-semibold",
-        "bg-gradient-to-b from-[var(--glass-primary)] to-[var(--glass-primary-active)]",
-        "hover:from-[var(--glass-primary-hover)] hover:to-[var(--glass-primary)]",
-        "active:from-[var(--glass-primary-active)] active:to-[var(--glass-primary-active)]",
+        "bg-gradient-to-b",
+        "from-blue-500 to-blue-600", // Fallback colors
+        "hover:from-blue-400 hover:to-blue-500",
+        "active:from-blue-600 active:to-blue-600",
         "shadow-lg shadow-blue-500/25",
         "border border-blue-400/30"
       ),
       secondary: cn(
         getGlassClass("default"),
-        "text-[var(--text-primary)] border-[var(--glass-border)]",
-        "hover:bg-[var(--glass-bg-elevated)] hover:border-[var(--glass-border-focus)]",
-        "active:bg-[var(--glass-bg-pressed)]"
+        "text-gray-900 dark:text-white", // Fallback text colors
+        "border-gray-200 dark:border-gray-700", // Fallback border
+        "hover:bg-gray-50 dark:hover:bg-gray-800",
+        "active:bg-gray-100 dark:active:bg-gray-700"
       ),
       tertiary: cn(
-        "text-[var(--text-primary)] bg-transparent",
-        "hover:bg-[var(--glass-bg)] hover:backdrop-blur-sm",
-        "active:bg-[var(--glass-bg-pressed)]"
+        "text-gray-900 dark:text-white bg-transparent",
+        "hover:bg-gray-50 dark:hover:bg-gray-800 hover:backdrop-blur-sm",
+        "active:bg-gray-100 dark:active:bg-gray-700"
       ),
       ghost: cn(
-        "text-[var(--text-secondary)] bg-transparent",
-        "hover:text-[var(--text-primary)] hover:bg-[var(--glass-bg)]",
-        "active:bg-[var(--glass-bg-pressed)]"
+        "text-gray-600 dark:text-gray-400 bg-transparent",
+        "hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800",
+        "active:bg-gray-100 dark:active:bg-gray-700"
       ),
       destructive: cn(
         "text-white font-semibold",

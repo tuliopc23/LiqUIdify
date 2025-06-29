@@ -9,7 +9,36 @@ const meta: Meta<typeof GlassButton> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A premium glass-effect button component with advanced visual effects including glass morphism, magnetic hover, and haptic feedback.',
+        component: `
+# Glass Button
+
+A premium glass-effect button component with advanced visual effects including glass morphism, magnetic hover, and haptic feedback.
+
+## Features
+
+- ✨ **Glass Morphism**: Advanced backdrop blur and saturation effects
+- 🧲 **Magnetic Hover**: Interactive magnetic attraction on hover
+- 🎨 **Multiple Variants**: Primary, secondary, tertiary, ghost, and destructive styles
+- 📱 **Responsive**: Five size options from extra small to extra large
+- ♿ **Accessible**: Full WCAG compliance with focus states and ARIA attributes
+- 🎭 **Loading States**: Built-in spinner with smooth transitions
+- 🔧 **Flexible**: Support for left and right icons
+- 🌙 **Dark Mode**: Automatic theme adaptation
+
+## Usage
+
+\`\`\`tsx
+import { GlassButton } from '@liquidui/react'
+
+function App() {
+  return (
+    <GlassButton variant="primary" size="md">
+      Click me
+    </GlassButton>
+  )
+}
+\`\`\`
+        `,
       },
     },
   },

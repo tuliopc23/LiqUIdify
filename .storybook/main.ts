@@ -1,12 +1,12 @@
-const { mergeConfig } = require('vite')
-const path = require('path')
+import type { StorybookConfig } from '@storybook/react-vite'
+import { mergeConfig } from 'vite'
+import path from 'path'
 
-/** @type { import('@storybook/react-vite').StorybookConfig } */
-const config = {
+const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-docs',
-    '@storybook/addon-a11y',
+    '@storybook/addon-a11y', 
     '@storybook/addon-themes'
   ],
   framework: {
@@ -21,7 +21,14 @@ const config = {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+      shouldExtractValuesFromUnion: true,
+      shouldRemoveUndefinedFromOptional: true,
+      propFilter: (prop) => {
+        if (prop.parent) {
+          return !/node_modules/.test(prop.parent.fileName)
+        }
+        return true
+      },
     },
   },
   viteFinal: async (config) => {
@@ -49,8 +56,9 @@ const config = {
     })
   },
   docs: {
+    autodocs: true,
     defaultName: 'Documentation'
   }
 }
 
-module.exports = config
+export default config

@@ -9,13 +9,17 @@
 
 /* CSS Custom Properties for Liquid Glass Design System */
 :root {
-  /* Core Glass Properties */
+  /* Core Glass Properties - with fallbacks */
   --glass-bg-primary: rgba(255, 255, 255, 0.12);
   --glass-bg-secondary: rgba(248, 250, 252, 0.15);
   --glass-bg-tertiary: rgba(241, 245, 249, 0.18);
   --glass-bg-elevated: rgba(255, 255, 255, 0.25);
   --glass-bg-floating: rgba(255, 255, 255, 0.2);
   --glass-bg-overlay: rgba(255, 255, 255, 0.3);
+  
+  /* Ensure all variables have valid color values */
+  --glass-bg: var(--glass-bg-primary, rgba(255, 255, 255, 0.12));
+  --glass-border: var(--glass-border-light, rgba(255, 255, 255, 0.15));
 
   /* Interactive States */
   --glass-bg-hover: rgba(255, 255, 255, 0.18);
@@ -158,7 +162,7 @@
   --text-secondary: rgba(255, 255, 255, 0.6);
   
   /* Contrast Enhancement */
-  --contrast-offset: 0.15;
+  --contrast-offset: 0.25; /* Increased for better contrast */
 
   --glass-accent: rgba(64, 156, 255, 0.12);
   --glass-success: rgba(48, 209, 88, 0.12);

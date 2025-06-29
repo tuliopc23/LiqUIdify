@@ -57,7 +57,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tuliopc23/LiquidiUI.git"
+    "url": "git+https://github.com/tuliopc23/LiquidiUI.git"
   },
   "bugs": {
     "url": "https://github.com/tuliopc23/LiquidiUI/issues"
