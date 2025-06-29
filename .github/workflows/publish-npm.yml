@@ -1,0 +1,76 @@
+name: Publish to NPM
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history for proper versioning
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:ci
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Build package
+        run: npm run build
+
+      - name: Check if version changed
+        id: version-check
+        run: |
+          # Get the current version from package.json
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          
+          # Check if this version exists on npm
+          if npm view $(node -p "require('./package.json').name")@$CURRENT_VERSION version 2>/dev/null; then
+            echo "version_exists=true" >> $GITHUB_OUTPUT
+            echo "Version $CURRENT_VERSION already exists on npm"
+          else
+            echo "version_exists=false" >> $GITHUB_OUTPUT
+            echo "Version $CURRENT_VERSION is new, will publish"
+          fi
+
+      - name: Publish to npm
+        if: steps.version-check.outputs.version_exists == 'false'
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        if: steps.version-check.outputs.version_exists == 'false'
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          gh release create "v$CURRENT_VERSION" \
+            --title "Release v$CURRENT_VERSION" \
+            --notes "Auto-generated release for version $CURRENT_VERSION" \
+            --latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Skip publishing
+        if: steps.version-check.outputs.version_exists == 'true'
+        run: |
+          echo "Skipping publish - version ${{ steps.version-check.outputs.current_version }} already exists on npm"
+          echo "To publish a new version, update the version in package.json"
