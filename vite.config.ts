@@ -11,7 +11,6 @@ export default defineConfig({
       exclude: [
         '**/*.test.*',
         '**/*.stories.*',
-        'src/components/glass-*', // Exclude problematic components for now
         'src/testing/**/*',
         'src/docs/**/*'
       ]
@@ -24,7 +23,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index-simple.ts'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'LiquidUI',
       formats: ['es', 'umd'],
       fileName: (format) => `liquidui.${format}.js`
