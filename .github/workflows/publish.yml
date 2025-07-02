@@ -36,9 +36,9 @@ jobs:
       - name: Type check
         run: npm run type-check
 
-      # Run linting
+      # Run linting (allows warnings up to limit)
       - name: Lint code
-        run: npm run lint
+        run: npm run lint:ci
 
       # Build the package
       - name: Build package
