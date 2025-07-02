@@ -1,6 +1,6 @@
 {
   "name": "liquidify",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "type": "module",
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "main": "./dist/cjs/index.cjs",
@@ -70,7 +70,7 @@
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "npx storybook build",
-    "size": "npm run build \u0026\u0026 bundlesize --config=bundlesize.config.json",
+    "size": "npm run build && bundlesize --config=bundlesize.config.json",
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "metrics": "node scripts/track-metrics.js",
