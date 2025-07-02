@@ -320,13 +320,3 @@ export {
   GlassDrawerBody,
   GlassDrawerFooter,
 };
-
-export type {
-  GlassDrawerProps,
-  GlassDrawerContentProps,
-  GlassDrawerHeaderProps,
-  GlassDrawerTitleProps,
-  GlassDrawerDescriptionProps,
-  GlassDrawerBodyProps,
-  GlassDrawerFooterProps,
-};

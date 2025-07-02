@@ -96,6 +96,35 @@ export const AllVariants: Story = {
 }
 ```
 
+### Component Standards
+
+When developing components for Glass UI, please adhere to the following standards:
+
+- **Accessibility & Keyboard Navigation**:  
+  Utilize **Radix UI primitives** to ensure your components are accessible and support comprehensive keyboard navigation.
+
+- **Styling**:  
+  Use **Tailwind CSS** along with the `getGlassClass()` utility for maintaining consistent glass variants across components.
+
+- **Props and Patterns**:  
+  - Follow consistent **props naming conventions**.
+  - Implement both **controlled and uncontrolled** component patterns where applicable.
+
+- **Unit Testing**:  
+  Write unit tests using **Vitest**, **Testing Library**, and **axe** for accessibility checks. Ensure tests cover all scenarios, especially edge cases.
+
+- **Storybook**:  
+  Create **Storybook stories** for each component. Include stories for ARIA usage and mobile scenarios to demonstrate accessibility and responsiveness.
+
+- **Compatibility Considerations**:  
+  Ensure your component:
+  - Is **responsive** and works well on various screen sizes.
+  - Supports **dark mode**.
+  - Is compatible with **RTL layouts**.
+  - Works with **Server-Side Rendering (SSR)** frameworks.
+
+This section will help maintain consistency and quality across all components in the Glass UI library.
+
 #### Testing Requirements
 ```tsx
 // Accessibility testing is mandatory

@@ -1,0 +1,54 @@
+{
+  "files": [
+    {
+      "path": "./dist/index.mjs",
+      "maxSize": "50 kB",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/cjs/index.cjs",
+      "maxSize": "55 kB",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/liquidui.css",
+      "maxSize": "20 kB",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/components/button.mjs",
+      "maxSize": "8 kB",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/components/card.mjs",
+      "maxSize": "6 kB",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/components/input.mjs",
+      "maxSize": "8 kB",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/components/modal.mjs",
+      "maxSize": "10 kB",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/components/tooltip.mjs",
+      "maxSize": "5 kB",
+      "compression": "gzip"
+    },
+    {
+      "path": "./dist/components/tabs.mjs",
+      "maxSize": "7 kB",
+      "compression": "gzip"
+    }
+  ],
+  "ci": {
+    "trackBranches": ["main", "develop"],
+    "repoBranchBase": "main",
+    "githubAccessToken": "${BUNDLESIZE_GITHUB_TOKEN}"
+  }
+}

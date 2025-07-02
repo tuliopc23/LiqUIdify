@@ -195,4 +195,3 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
 GlassBreadcrumbs.displayName = 'GlassBreadcrumbs';
 
 export { GlassBreadcrumbs };
-export type { GlassBreadcrumbsProps, BreadcrumbItem };

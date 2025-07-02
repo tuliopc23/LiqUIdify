@@ -253,4 +253,3 @@ export const WaveSpinner: React.FC<{
 GlassSpinner.displayName = 'GlassSpinner';
 
 export { GlassSpinner };
-export type { GlassSpinnerProps };

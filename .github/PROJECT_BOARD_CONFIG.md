@@ -1,6 +1,6 @@
 # GitHub Projects Board Configuration
 
-## Project Board: LiquidiUI Development Roadmap
+## Project Board: Liquidify Development Roadmap
 
 ### Board Structure
 
@@ -68,7 +68,7 @@
 ### Manual Setup Steps:
 1. Go to Repository → Projects → New Project
 2. Choose "Board" template
-3. Name: "LiquidiUI Development Roadmap"
+3. Name: "Liquidify Development Roadmap"
 4. Add columns as specified above
 5. Configure custom fields
 6. Set up automation rules
@@ -77,7 +77,7 @@
 ### CLI Commands (if GitHub CLI is configured):
 ```bash
 # Create project
-gh project create --title "LiquidiUI Development Roadmap" --body "3-phase development roadmap for component library"
+gh project create --title "Liquidify Development Roadmap" --body "3-phase development roadmap for component library"
 
 # Add fields and configure board
 # (This requires manual configuration in GitHub UI)

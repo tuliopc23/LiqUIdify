@@ -10,7 +10,7 @@
     <a href="https://liquidui.dev"><img src="https://img.shields.io/badge/Demo-Live-brightgreen" alt="Demo"></a>
     <a href="https://www.npmjs.com/package/@tuliocunha23/liquidui"><img src="https://img.shields.io/npm/v/@tuliocunha23/liquidui?color=blue" alt="NPM Version"></a>
     <a href="https://www.npmjs.com/package/@tuliocunha23/liquidui"><img src="https://img.shields.io/npm/dm/@tuliocunha23/liquidui" alt="Downloads"></a>
-    <a href="https://github.com/tuliopc23/LiquidiUI"><img src="https://img.shields.io/github/stars/tuliopc23/LiquidiUI" alt="GitHub Stars"></a>
+    <a href="https://github.com/tuliopc23/Liquidify"><img src="https://img.shields.io/github/stars/tuliopc23/Liquidify" alt="GitHub Stars"></a>
     <a href="#"><img src="https://img.shields.io/badge/TypeScript-Ready-blue" alt="TypeScript"></a>
     <a href="#"><img src="https://img.shields.io/badge/Tests-Passing-green" alt="Tests"></a>
   </p>
@@ -747,6 +747,21 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+## 💖 Support LiquidUI
+
+Help sustain the development of LiquidUI by sponsoring the project:
+
+- 💝 **[GitHub Sponsors](https://github.com/sponsors/tuliopc23)** - Direct support for the creator
+- 🏛️ **[Open Collective](https://opencollective.com/liquidui)** - Transparent community funding *(coming soon)*
+- ⭐ **Star the repository** - Show your support and help others discover LiquidUI
+- 🐦 **Share on social media** - Help spread the word about the project
+
+Your support helps us:
+- 🚀 Add new features and components
+- 🐛 Fix bugs and improve stability
+- 📚 Create better documentation
+- 🌍 Build a stronger community
 
 ## 📄 License
 

@@ -200,4 +200,3 @@ export const SkeletonTable: React.FC<{
 );
 
 export { GlassSkeleton };
-export type { GlassSkeletonProps };
