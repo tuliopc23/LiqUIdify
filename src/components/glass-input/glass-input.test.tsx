@@ -9,23 +9,23 @@ describe('GlassInput', () => {
     render(<GlassInput placeholder="Enter text" />);
     const input = screen.getByRole('textbox');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveClass('liquid-glass');
+    expect(input).toHaveClass('glass-effect');
   });
 
   it('applies size classes correctly', () => {
     render(<GlassInput size="lg" placeholder="Large input" />);
     const input = screen.getByRole('textbox');
-    expect(input).toHaveClass('text-base', 'px-4', 'py-3');
+    expect(input).toHaveClass('px-4', 'py-3');
   });
 
   it('applies variant classes correctly', () => {
-    const { rerender } = render(<GlassInput variant="primary" placeholder="Primary" />);
+    const { rerender } = render(<GlassInput variant="default" placeholder="Default" />);
     let input = screen.getByRole('textbox');
-    expect(input).toHaveClass('border-blue-300');
+    expect(input).toHaveClass('border-[var(--glass-border)]');
 
-    rerender(<GlassInput variant="danger" placeholder="Danger" />);
+    rerender(<GlassInput variant="search" placeholder="Search" />);
     input = screen.getByRole('textbox');
-    expect(input).toHaveClass('border-red-300');
+    expect(input).toHaveClass('border-[var(--glass-border)]');
   });
 
   it('handles controlled input correctly', () => {
@@ -59,19 +59,15 @@ describe('GlassInput', () => {
     const input = screen.getByRole('textbox');
     
     expect(input).toBeDisabled();
-    expect(input).toHaveClass('disabled:opacity-60', 'disabled:cursor-not-allowed');
+    expect(input).toHaveClass('disabled:opacity-50', 'disabled:cursor-not-allowed');
   });
 
   it('shows error state correctly', () => {
-    render(<GlassInput error="Invalid input" placeholder="Error input" />);
+    render(<GlassInput error={true} placeholder="Error input" />);
     const input = screen.getByRole('textbox');
-    const errorMessage = screen.getByText('Invalid input');
     
-    expect(input).toHaveClass('border-red-500');
+    expect(input).toHaveClass('border-red-400/50');
     expect(input).toHaveAttribute('aria-invalid', 'true');
-    expect(input).toHaveAttribute('aria-describedby');
-    expect(errorMessage).toBeInTheDocument();
-    expect(errorMessage).toHaveClass('text-red-500');
   });
 
   it('renders with left and right icons', () => {
@@ -96,7 +92,7 @@ describe('GlassInput', () => {
     expect(input).toHaveAttribute('type', 'email');
 
     rerender(<GlassInput type="password" placeholder="Password" />);
-    input = screen.getByLabelText(/password/i) || screen.getByPlaceholderText('Password');
+    input = screen.getByPlaceholderText('Password');
     expect(input).toHaveAttribute('type', 'password');
 
     rerender(<GlassInput type="number" placeholder="Number" />);

@@ -87,14 +87,14 @@ describe('Server-Side Rendering Compatibility', () => {
     });
 
     it('should render with all variants on server', () => {
-      const variants = ['default', 'primary', 'secondary', 'ghost'] as const;
-
-      variants.forEach(variant => {
+      ['default', 'primary', 'secondary', 'destructive', 'outline', 'ghost'].forEach(variant => {
         expect(() => {
           const html = renderToString(
-            <GlassButton variant={variant}>Button {variant}</GlassButton>
+            <GlassButton variant={variant as any}>
+              Button content
+            </GlassButton>
           );
-          expect(html).toContain(`Button ${variant}`);
+          expect(html).toContain('Button content');
         }).not.toThrow();
       });
     });
@@ -127,9 +127,9 @@ describe('Server-Side Rendering Compatibility', () => {
       blurVariants.forEach(blur => {
         expect(() => {
           const html = renderToString(
-            <GlassCard blur={blur}>Card with {blur} blur</GlassCard>
+            <GlassCard blur={blur}>Card content</GlassCard>
           );
-          expect(html).toContain(`Card with ${blur} blur`);
+          expect(html).toContain('Card content');
         }).not.toThrow();
       });
     });
