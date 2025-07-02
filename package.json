@@ -100,10 +100,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tuliopc23/Liquidify.git"
+    "url": "git+https://github.com/tuliopc23/LiqUIdify.git"
   },
   "bugs": {
-    "url": "https://github.com/tuliopc23/Liquidify/issues"
+    "url": "https://github.com/tuliopc23/LiqUIdify/issues"
   },
   "homepage": "https://liquidui.dev",
   "funding": {
