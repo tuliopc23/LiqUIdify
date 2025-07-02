@@ -1,0 +1,89 @@
+name: Auto Version Bump and Publish to NPM
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout with full history for version bumping
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      # Setup Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Run tests to ensure quality
+      - name: Run tests
+        run: npm test
+
+      # Run type checking
+      - name: Type check
+        run: npm run type-check
+
+      # Run linting
+      - name: Lint code
+        run: npm run lint
+
+      # Build the package
+      - name: Build package
+        run: npm run build
+
+      # Automated version bump based on commit messages
+      - name: Automated Version Bump
+        uses: phips28/gh-action-bump-version@master
+        with:
+          major-wording: 'BREAKING CHANGE,major'
+          minor-wording: 'feat,feature,minor'
+          patch-wording: 'fix,patch,bugfix,chore,docs,style,refactor,perf,test'
+          tag-prefix: 'v'
+          commit-message: 'CI: bumps version to {{version}} [skip ci]'
+          skip-tag: 'true'  # We'll handle tagging after successful publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Publish to npm
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Create git tag after successful publish
+      - name: Create git tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Create GitHub release
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version.outputs.new_tag }}
+          release_name: Release v${{ steps.version.outputs.new_tag }}
+          body: |
+            Automated release v${{ steps.version.outputs.new_tag }}
+            
+            Changes in this version:
+            - Check the [changelog](CHANGELOG.md) for details
+          draft: false
+          prerelease: false
