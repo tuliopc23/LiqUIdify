@@ -65,6 +65,7 @@
     "test:a11y": "playwright test --grep \"accessibility\"",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
+    "lint:ci": "eslint src/**/*.{ts,tsx} --max-warnings 100",
     "format": "prettier --write src/**/*.{ts,tsx,css}",
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
