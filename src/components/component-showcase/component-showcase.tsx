@@ -637,7 +637,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
           </section>
         );
 
-      case "toast":
+      case "toast": {
         const ToastDemo = () => {
           const { addToast } = useToast();
           
@@ -698,6 +698,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
         };
 
         return <ToastDemo />;
+      }
 
       case "form-examples":
         return (
