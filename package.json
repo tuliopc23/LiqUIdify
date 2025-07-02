@@ -1,8 +1,8 @@
 {
-  "name": "@tuliocunha23/liquidui",
-  "version": "1.0.17",
+  "name": "liquidify",
+  "version": "1.0.18",
   "type": "module",
-  "description": "🚀 Physics-based liquid glass library with content-aware adaptation, magnetic interactions, and 30+ glass effects. TypeScript-first, accessibility-ready.",
+  "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/types/index.d.ts",
@@ -105,7 +105,7 @@
   "bugs": {
     "url": "https://github.com/tuliopc23/LiqUIdify/issues"
   },
-  "homepage": "https://liquidui.dev",
+  "homepage": "https://liquidify-fw9pi7oj6-tulio-pinheiro-cunha-s-projects.vercel.app",
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/tuliopc23"
