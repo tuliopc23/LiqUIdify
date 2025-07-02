@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect, useCallback } from 'react';
+import { forwardRef, useState, useRef, useCallback } from 'react';
 import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
 import { useMagneticHover, createGlassRipple } from '@/lib/glass-physics';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';

@@ -60,7 +60,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
       spacing = 8,
       animated = true,
       style,
-      ...props
+      ..._props
     },
     ref
   ) => {

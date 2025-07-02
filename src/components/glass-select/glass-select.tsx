@@ -19,7 +19,7 @@ export interface GlassSelectProps {
 }
 
 export const GlassSelect = React.forwardRef<HTMLDivElement, GlassSelectProps>(
-  ({ options, value, onChange, placeholder = "Select an option", disabled, className, variant = "default", ...props }, ref) => {
+  ({ options, value, onChange, placeholder = "Select an option", disabled, className, variant: _variant = "default", ...props }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState(value || "");
     const selectRef = useRef<HTMLDivElement>(null);

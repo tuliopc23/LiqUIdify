@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { cn, getGlassClass } from "@/lib/glass-utils";
 
 export interface GlassSliderProps {
@@ -37,23 +37,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
 
     const percentage = ((currentValue - min) / (max - min)) * 100;
 
-    const handleMouseDown = (e: React.MouseEvent) => {
-      if (disabled) return;
-      
-      setIsDragging(true);
-      updateValue(e.clientX);
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging || disabled) return;
-      updateValue(e.clientX);
-    };
-
-    const handleMouseUp = () => {
-      setIsDragging(false);
-    };
-
-    const updateValue = (clientX: number) => {
+    const updateValue = useCallback((clientX: number) => {
       if (!sliderRef.current) return;
 
       const rect = sliderRef.current.getBoundingClientRect();
@@ -64,6 +48,22 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
 
       setCurrentValue(clampedValue);
       onChange?.(clampedValue);
+    }, [min, max, step, onChange]);
+
+    const handleMouseMove = useCallback((e: MouseEvent) => {
+      if (!isDragging || disabled) return;
+      updateValue(e.clientX);
+    }, [isDragging, disabled, updateValue]);
+
+    const handleMouseUp = useCallback(() => {
+      setIsDragging(false);
+    }, []);
+
+    const handleMouseDown = (e: React.MouseEvent) => {
+      if (disabled) return;
+      
+      setIsDragging(true);
+      updateValue(e.clientX);
     };
 
     useEffect(() => {
@@ -75,7 +75,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
           document.removeEventListener('mouseup', handleMouseUp);
         };
       }
-    }, [isDragging]);
+    }, [isDragging, handleMouseMove, handleMouseUp]);
 
     return (
       <div 
