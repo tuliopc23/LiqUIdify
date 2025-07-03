@@ -46,6 +46,7 @@ jobs:
 
       # Automated version bump based on commit messages
       - name: Automated Version Bump
+        id: version-bump
         uses: phips28/gh-action-bump-version@master
         with:
           major-wording: 'BREAKING CHANGE,major'
@@ -53,7 +54,7 @@ jobs:
           patch-wording: 'fix,patch,bugfix,chore,docs,style,refactor,perf,test'
           tag-prefix: 'v'
           commit-message: 'CI: bumps version to {{version}} [skip ci]'
-          skip-tag: 'true'  # We'll handle tagging after successful publish
+          skip-tag: 'true'  # We'll handle tagging and release creation together
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -63,27 +64,23 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # Create git tag after successful publish
-      - name: Create git tag
+      # Create git tag and GitHub release after successful publish
+      - name: Create git tag and GitHub release
         run: |
           VERSION=$(node -p "require('./package.json').version")
+          echo "Creating release for version $VERSION"
+          
+          # Create and push tag
           git tag "v$VERSION"
           git push origin "v$VERSION"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Create GitHub release
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ steps.version.outputs.new_tag }}
-          release_name: Release v${{ steps.version.outputs.new_tag }}
-          body: |
-            Automated release v${{ steps.version.outputs.new_tag }}
+          
+          # Create GitHub release using gh CLI
+          gh release create "v$VERSION" \
+            --title "Release v$VERSION" \
+            --notes "Automated release v$VERSION
             
             Changes in this version:
-            - Check the [changelog](CHANGELOG.md) for details
-          draft: false
-          prerelease: false
+            - Check the commit history for details
+            - Published to npm as liquidify@$VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
