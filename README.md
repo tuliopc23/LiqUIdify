@@ -1,4 +1,4 @@
-# LiquidUI - The Future of Glassmorphism 💧
+# Liquidify - The Future of Glassmorphism 💧
 
 <div align="center">
   <img src="https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1200&h=400&fit=crop" alt="LiquidUI Banner" />
