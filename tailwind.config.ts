@@ -159,12 +159,12 @@ const config: Config = {
       },
 
       // Typography from design tokens
-      fontFamily: designTokens.typography.fontFamily as any,
-      fontSize: designTokens.typography.fontSize as any,
-      fontWeight: designTokens.typography.fontWeight as any,
+      fontFamily: designTokens.typography.fontFamily,
+      fontSize: designTokens.typography.fontSize,
+      fontWeight: designTokens.typography.fontWeight,
 
       // Spacing from design tokens
-      spacing: designTokens.spacing as any,
+      spacing: designTokens.spacing,
 
       // Border radius from design tokens
       borderRadius: {
@@ -198,7 +198,7 @@ const config: Config = {
       },
 
       // Z-index from design tokens
-      zIndex: designTokens.zIndex as any,
+      zIndex: designTokens.zIndex,
 
       // Enhanced animations
       animation: {
@@ -261,7 +261,7 @@ const config: Config = {
   plugins: [
     require('tailwindcss-animate'),
     // Custom plugin for glass utilities
-    function ({ addUtilities, theme }: any) {
+    function ({ addUtilities, theme }: { addUtilities: any; theme: any }) {
       const glassUtilities = {
         '.glass-effect': {
           'backdrop-filter': 'blur(16px) saturate(150%)',
