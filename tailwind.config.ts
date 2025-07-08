@@ -6,32 +6,6 @@ const config: Config = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './.storybook/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  safelist: [
-    // Documentation utilities that must always be generated
-    'text-text-primary',
-    'text-text-secondary',
-    'bg-glass-bg-primary',
-    'bg-glass-bg-secondary',
-    'bg-glass-bg-tertiary',
-    'bg-glass-bg-elevated',
-    'bg-glass-bg-floating',
-    'bg-glass-bg-overlay',
-    'bg-glass-bg-hover',
-    'bg-glass-bg-active',
-    'bg-glass-bg-focus',
-    'bg-glass-bg-pressed',
-    'border-glass-border-subtle',
-    'border-glass-border-light',
-    'border-glass-border-medium',
-    'border-glass-border-strong',
-    'border-glass-border-focus',
-    'border-glass-border-hover',
-    // Responsive variants
-    {
-      pattern: /^(text-text-|bg-glass-bg-|border-glass-border-)/,
-      variants: ['hover', 'focus', 'active', 'dark'],
-    },
-  ],
   darkMode: ['class'],
   theme: {
     extend: {
@@ -260,45 +234,6 @@ const config: Config = {
   },
   plugins: [
     require('tailwindcss-animate'),
-    // Custom plugin for glass utilities
-    function ({ addUtilities, theme }: { addUtilities: any; theme: any }) {
-      const glassUtilities = {
-        '.glass-effect': {
-          'backdrop-filter': 'blur(16px) saturate(150%)',
-          '-webkit-backdrop-filter': 'blur(16px) saturate(150%)',
-          background: 'var(--glass-bg-primary, rgba(255, 255, 255, 0.12))',
-          border:
-            '1px solid var(--glass-border-light, rgba(255, 255, 255, 0.15))',
-          'box-shadow': theme('boxShadow.subtle'),
-        },
-        '.glass-effect-elevated': {
-          'backdrop-filter': 'blur(24px) saturate(180%)',
-          '-webkit-backdrop-filter': 'blur(24px) saturate(180%)',
-          background: 'var(--glass-bg-elevated, rgba(255, 255, 255, 0.25))',
-          border:
-            '1px solid var(--glass-border-medium, rgba(255, 255, 255, 0.25))',
-          'box-shadow': theme('boxShadow.medium'),
-        },
-        '.glass-hover': {
-          transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-          '&:hover': {
-            background: 'var(--glass-bg-hover, rgba(255, 255, 255, 0.18))',
-            'border-color':
-              'var(--glass-border-hover, rgba(255, 255, 255, 0.30))',
-            transform: 'translateY(-2px)',
-            'box-shadow': theme('boxShadow.heavy'),
-          },
-        },
-        '.focus-ring': {
-          '&:focus-visible': {
-            outline: 'none',
-            'box-shadow': theme('boxShadow.focus-medium'),
-          },
-        },
-      };
-
-      addUtilities(glassUtilities);
-    },
   ],
 };
 

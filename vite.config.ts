@@ -34,6 +34,15 @@ export default defineConfig({
       "@": resolve(__dirname, "src")
     }
   },
+  css: {
+    postcss: './postcss.config.js',
+    // Enable CSS modules and processing
+    preprocessorOptions: {
+      css: {
+        charset: false
+      }
+    }
+  },
   build: {
     lib: {
       entry: {

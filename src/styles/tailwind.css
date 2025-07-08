@@ -1,0 +1,464 @@
+/* Apple Liquid Glass Design System - Tailwind v4 Compatible */
+@import "tailwindcss";
+@import "./glass.css";
+
+/* Safelist Classes - Tailwind v4 Approach */
+@layer utilities {
+  /* Documentation utilities that must always be generated */
+  .text-text-primary,
+  .text-text-secondary,
+  .bg-glass-bg-primary,
+  .bg-glass-bg-secondary,
+  .bg-glass-bg-tertiary,
+  .bg-glass-bg-elevated,
+  .bg-glass-bg-floating,
+  .bg-glass-bg-overlay,
+  .bg-glass-bg-hover,
+  .bg-glass-bg-active,
+  .bg-glass-bg-focus,
+  .bg-glass-bg-pressed,
+  .border-glass-border-subtle,
+  .border-glass-border-light,
+  .border-glass-border-medium,
+  .border-glass-border-strong,
+  .border-glass-border-focus,
+  .border-glass-border-hover {
+    /* Classes will be generated automatically */
+  }
+  
+  /* Responsive variants for glass components */
+  .hover\:text-text-primary,
+  .hover\:bg-glass-bg-primary,
+  .hover\:border-glass-border-light,
+  .focus\:text-text-primary,
+  .focus\:bg-glass-bg-primary,
+  .focus\:border-glass-border-light,
+  .active\:text-text-primary,
+  .active\:bg-glass-bg-primary,
+  .active\:border-glass-border-light,
+  .dark\:text-text-primary,
+  .dark\:bg-glass-bg-primary,
+  .dark\:border-glass-border-light {
+    /* Responsive variants will be generated automatically */
+  }
+}
+
+/* Apple-inspired Liquid Glass Design Tokens (Post-WWDC 2025) */
+:root {
+  /* Apple System Colors */
+  --system-blue: hsl(211, 100%, 50%);
+  --system-blue-light: hsl(211, 100%, 60%);
+  --system-blue-dark: hsl(211, 100%, 40%);
+  --system-gray: hsl(240, 6%, 90%);
+  --system-gray-light: hsl(240, 6%, 95%);
+  --system-gray-dark: hsl(240, 6%, 20%);
+  
+  /* Liquid Glass Material Properties */
+  --liquid-glass-primary: rgba(255, 255, 255, 0.08);
+  --liquid-glass-secondary: rgba(255, 255, 255, 0.05);
+  --liquid-glass-tertiary: rgba(255, 255, 255, 0.03);
+  --liquid-glass-elevated: rgba(255, 255, 255, 0.12);
+  --liquid-glass-floating: rgba(255, 255, 255, 0.15);
+  --liquid-glass-overlay: rgba(255, 255, 255, 0.18);
+  
+  /* Adaptive Material States */
+  --liquid-hover: rgba(255, 255, 255, 0.1);
+  --liquid-pressed: rgba(255, 255, 255, 0.06);
+  --liquid-focused: rgba(0, 122, 255, 0.08);
+  --liquid-selected: rgba(0, 122, 255, 0.12);
+  --liquid-disabled: rgba(255, 255, 255, 0.02);
+  
+  /* Liquid Glass Borders */
+  --liquid-border-thin: rgba(255, 255, 255, 0.06);
+  --liquid-border-medium: rgba(255, 255, 255, 0.12);
+  --liquid-border-thick: rgba(255, 255, 255, 0.18);
+  --liquid-border-focus: rgba(0, 122, 255, 0.25);
+  
+  /* Advanced Backdrop Filtering */
+  --liquid-blur-ultra-thin: blur(1px) saturate(180%);
+  --liquid-blur-thin: blur(4px) saturate(180%);
+  --liquid-blur-regular: blur(12px) saturate(180%);
+  --liquid-blur-thick: blur(20px) saturate(200%);
+  --liquid-blur-ultra-thick: blur(40px) saturate(220%);
+  
+  /* Vibrancy Effects */
+  --vibrancy-primary: brightness(110%) contrast(105%) saturate(150%);
+  --vibrancy-secondary: brightness(105%) contrast(102%) saturate(130%);
+  --vibrancy-tertiary: brightness(102%) contrast(100%) saturate(120%);
+  
+  /* Typography Scale (Apple SF Pro) */
+  --text-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+  --text-system-mono: "SF Mono", Monaco, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+  --text-system-serif: "New York", "Times New Roman", Times, serif;
+  
+  /* Dynamic Type Scale */
+  --text-caption2: 11px;
+  --text-caption1: 12px;
+  --text-footnote: 13px;
+  --text-subheadline: 15px;
+  --text-callout: 16px;
+  --text-body: 17px;
+  --text-headline: 17px;
+  --text-title3: 20px;
+  --text-title2: 22px;
+  --text-title1: 28px;
+  --text-large-title: 34px;
+  
+  /* Spacing System (Apple 8pt Grid) */
+  --space-1: 2px;  /* 0.25 × 8pt */
+  --space-2: 4px;  /* 0.5 × 8pt */
+  --space-3: 8px;  /* 1 × 8pt */
+  --space-4: 12px; /* 1.5 × 8pt */
+  --space-5: 16px; /* 2 × 8pt */
+  --space-6: 20px; /* 2.5 × 8pt */
+  --space-7: 24px; /* 3 × 8pt */
+  --space-8: 32px; /* 4 × 8pt */
+  --space-9: 40px; /* 5 × 8pt */
+  --space-10: 48px; /* 6 × 8pt */
+  --space-12: 64px; /* 8 × 8pt */
+  
+  /* Apple Corner Radius System */
+  --radius-system-small: 6px;
+  --radius-system-medium: 10px;
+  --radius-system-large: 14px;
+  --radius-system-extra-large: 20px;
+  --radius-system-continuous: 16px; /* Apple's continuous corner radius */
+  
+  /* Material Elevation Shadows */
+  --shadow-level-1: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-level-2: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-level-3: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-level-4: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-level-5: 0 25px 50px rgba(0, 0, 0, 0.15), 0 12px 20px rgba(0, 0, 0, 0.08);
+  
+  /* Motion & Timing */
+  --timing-instant: 0ms;
+  --timing-immediate: 100ms;
+  --timing-quick: 200ms;
+  --timing-moderate: 400ms;
+  --timing-deliberate: 600ms;
+  --timing-slow: 1000ms;
+  
+  /* Apple Spring Curves */
+  --spring-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --spring-moderate: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  --spring-snappy: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --spring-bouncy: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Content Adaptation */
+  --content-light: rgba(0, 0, 0, 0.85);
+  --content-medium: rgba(0, 0, 0, 0.6);
+  --content-tertiary: rgba(0, 0, 0, 0.3);
+  --content-quaternary: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Adaptations (Apple Style) */
+[data-theme="dark"], .dark {
+  /* System Colors - Dark */
+  --system-blue: hsl(211, 100%, 64%);
+  --system-blue-light: hsl(211, 100%, 74%);
+  --system-blue-dark: hsl(211, 100%, 54%);
+  --system-gray: hsl(240, 6%, 25%);
+  --system-gray-light: hsl(240, 6%, 35%);
+  --system-gray-dark: hsl(240, 6%, 15%);
+  
+  /* Dark Liquid Glass Materials */
+  --liquid-glass-primary: rgba(255, 255, 255, 0.04);
+  --liquid-glass-secondary: rgba(255, 255, 255, 0.02);
+  --liquid-glass-tertiary: rgba(255, 255, 255, 0.01);
+  --liquid-glass-elevated: rgba(255, 255, 255, 0.08);
+  --liquid-glass-floating: rgba(255, 255, 255, 0.12);
+  --liquid-glass-overlay: rgba(255, 255, 255, 0.16);
+  
+  /* Dark Material States */
+  --liquid-hover: rgba(255, 255, 255, 0.06);
+  --liquid-pressed: rgba(255, 255, 255, 0.03);
+  --liquid-focused: rgba(64, 156, 255, 0.12);
+  --liquid-selected: rgba(64, 156, 255, 0.16);
+  --liquid-disabled: rgba(255, 255, 255, 0.01);
+  
+  /* Dark Borders */
+  --liquid-border-thin: rgba(255, 255, 255, 0.04);
+  --liquid-border-medium: rgba(255, 255, 255, 0.08);
+  --liquid-border-thick: rgba(255, 255, 255, 0.12);
+  --liquid-border-focus: rgba(64, 156, 255, 0.3);
+  
+  /* Enhanced Dark Vibrancy */
+  --vibrancy-primary: brightness(120%) contrast(110%) saturate(160%);
+  --vibrancy-secondary: brightness(115%) contrast(105%) saturate(140%);
+  --vibrancy-tertiary: brightness(110%) contrast(102%) saturate(130%);
+  
+  /* Dark Content Colors */
+  --content-light: rgba(255, 255, 255, 0.95);
+  --content-medium: rgba(255, 255, 255, 0.7);
+  --content-tertiary: rgba(255, 255, 255, 0.4);
+  --content-quaternary: rgba(255, 255, 255, 0.2);
+}
+
+/* Apple Liquid Glass Utilities - Tailwind v4 Compatible with GSAP */
+
+/* Core Liquid Glass Materials */
+@utility liquid-glass {
+  background: var(--liquid-glass-primary);
+  backdrop-filter: var(--liquid-blur-regular) var(--vibrancy-primary);
+  -webkit-backdrop-filter: var(--liquid-blur-regular) var(--vibrancy-primary);
+  border: 1px solid var(--liquid-border-thin);
+  border-radius: var(--radius-system-medium);
+  box-shadow: var(--shadow-level-1);
+  /* GSAP-friendly properties */
+  will-change: transform, opacity, backdrop-filter;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+@utility liquid-glass-elevated {
+  background: var(--liquid-glass-elevated);
+  backdrop-filter: var(--liquid-blur-thick) var(--vibrancy-secondary);
+  -webkit-backdrop-filter: var(--liquid-blur-thick) var(--vibrancy-secondary);
+  border: 1px solid var(--liquid-border-medium);
+  border-radius: var(--radius-system-large);
+  box-shadow: var(--shadow-level-3);
+  will-change: transform, opacity, backdrop-filter;
+  transform: translateZ(0);
+}
+
+@utility liquid-glass-floating {
+  background: var(--liquid-glass-floating);
+  backdrop-filter: var(--liquid-blur-ultra-thick) var(--vibrancy-primary);
+  -webkit-backdrop-filter: var(--liquid-blur-ultra-thick) var(--vibrancy-primary);
+  border: 1px solid var(--liquid-border-thick);
+  border-radius: var(--radius-system-extra-large);
+  box-shadow: var(--shadow-level-4);
+  will-change: transform, opacity, backdrop-filter;
+  transform: translateZ(0);
+}
+
+/* Interactive States - GSAP Optimized */
+@utility liquid-interactive {
+  cursor: pointer;
+  transition: none; /* Let GSAP handle transitions */
+  will-change: transform, opacity, background-color, border-color;
+  transform: translateZ(0);
+  
+  &:hover {
+    /* Initial hover state - GSAP will animate from here */
+    background: var(--liquid-hover);
+    border-color: var(--liquid-border-medium);
+  }
+  
+  &:active {
+    /* Active state for immediate feedback */
+    background: var(--liquid-pressed);
+  }
+  
+  &:focus-visible {
+    outline: none;
+    background: var(--liquid-focused);
+    border-color: var(--liquid-border-focus);
+    box-shadow: 0 0 0 3px var(--liquid-border-focus);
+  }
+}
+
+/* Apple-style Magnetic Hover (GSAP Enhanced) */
+@utility liquid-magnetic {
+  cursor: pointer;
+  will-change: transform;
+  transform: translateZ(0);
+  /* GSAP will handle the magnetic effect via JavaScript */
+}
+
+/* Content-Aware Vibrancy */
+@utility liquid-vibrancy-light {
+  backdrop-filter: var(--liquid-blur-regular) var(--vibrancy-tertiary);
+  -webkit-backdrop-filter: var(--liquid-blur-regular) var(--vibrancy-tertiary);
+}
+
+@utility liquid-vibrancy-medium {
+  backdrop-filter: var(--liquid-blur-thick) var(--vibrancy-secondary);
+  -webkit-backdrop-filter: var(--liquid-blur-thick) var(--vibrancy-secondary);
+}
+
+@utility liquid-vibrancy-strong {
+  backdrop-filter: var(--liquid-blur-ultra-thick) var(--vibrancy-primary);
+  -webkit-backdrop-filter: var(--liquid-blur-ultra-thick) var(--vibrancy-primary);
+}
+
+/* Apple Typography Utilities */
+@utility text-system {
+  font-family: var(--text-system);
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@utility text-system-mono {
+  font-family: var(--text-system-mono);
+  font-feature-settings: 'kern' 1, 'liga' 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dynamic Type Scale */
+@utility text-caption2 { font-size: var(--text-caption2); line-height: 1.3; }
+@utility text-caption1 { font-size: var(--text-caption1); line-height: 1.3; }
+@utility text-footnote { font-size: var(--text-footnote); line-height: 1.4; }
+@utility text-subheadline { font-size: var(--text-subheadline); line-height: 1.4; }
+@utility text-callout { font-size: var(--text-callout); line-height: 1.4; }
+@utility text-body { font-size: var(--text-body); line-height: 1.5; }
+@utility text-headline { font-size: var(--text-headline); line-height: 1.3; font-weight: 600; }
+@utility text-title3 { font-size: var(--text-title3); line-height: 1.25; font-weight: 600; }
+@utility text-title2 { font-size: var(--text-title2); line-height: 1.25; font-weight: 700; }
+@utility text-title1 { font-size: var(--text-title1); line-height: 1.2; font-weight: 700; }
+@utility text-large-title { font-size: var(--text-large-title); line-height: 1.1; font-weight: 800; }
+
+/* Content Hierarchy */
+@utility content-primary { color: var(--content-light); }
+@utility content-secondary { color: var(--content-medium); }
+@utility content-tertiary { color: var(--content-tertiary); }
+@utility content-quaternary { color: var(--content-quaternary); }
+
+/* Apple-style Button Components */
+@utility btn-system-primary {
+  background: var(--system-blue);
+  color: white;
+  font-family: var(--text-system);
+  font-size: var(--text-body);
+  font-weight: 600;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-system-medium);
+  border: none;
+  box-shadow: var(--shadow-level-1);
+  /* GSAP optimization */
+  will-change: transform, background-color, box-shadow;
+  transform: translateZ(0);
+  transition: none; /* Let GSAP handle transitions */
+  
+  &:hover {
+    background: var(--system-blue-light);
+  }
+  
+  &:active {
+    background: var(--system-blue-dark);
+    transform: scale(0.98);
+  }
+}
+
+@utility btn-system-secondary {
+  background: var(--liquid-glass-primary);
+  color: var(--content-light);
+  font-family: var(--text-system);
+  font-size: var(--text-body);
+  font-weight: 500;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-system-medium);
+  border: 1px solid var(--liquid-border-medium);
+  backdrop-filter: var(--liquid-blur-regular) var(--vibrancy-secondary);
+  -webkit-backdrop-filter: var(--liquid-blur-regular) var(--vibrancy-secondary);
+  box-shadow: var(--shadow-level-1);
+  will-change: transform, background-color, backdrop-filter;
+  transform: translateZ(0);
+  transition: none;
+  
+  &:hover {
+    background: var(--liquid-hover);
+    border-color: var(--liquid-border-thick);
+  }
+  
+  &:active {
+    background: var(--liquid-pressed);
+    transform: scale(0.98);
+  }
+}
+
+@utility btn-system-tertiary {
+  background: transparent;
+  color: var(--system-blue);
+  font-family: var(--text-system);
+  font-size: var(--text-body);
+  font-weight: 500;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-system-medium);
+  border: none;
+  will-change: transform, background-color;
+  transform: translateZ(0);
+  transition: none;
+  
+  &:hover {
+    background: var(--liquid-glass-secondary);
+  }
+  
+  &:active {
+    background: var(--liquid-glass-primary);
+    transform: scale(0.98);
+  }
+}
+
+/* GSAP-Optimized Animation Utilities */
+@utility gsap-ready {
+  /* Prepare element for GSAP animations */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@utility gsap-magnetic {
+  /* Magnetic hover effect base - GSAP handles the animation */
+  cursor: pointer;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@utility gsap-morph {
+  /* Morphing animations - GSAP handles the transitions */
+  will-change: transform, border-radius, width, height;
+  transform: translateZ(0);
+}
+
+/* Apple-style System Spacing Utilities */
+@utility space-system-1 { padding: var(--space-1); }
+@utility space-system-2 { padding: var(--space-2); }
+@utility space-system-3 { padding: var(--space-3); }
+@utility space-system-4 { padding: var(--space-4); }
+@utility space-system-5 { padding: var(--space-5); }
+@utility space-system-6 { padding: var(--space-6); }
+@utility space-system-7 { padding: var(--space-7); }
+@utility space-system-8 { padding: var(--space-8); }
+
+/* Apple Corner Radius Utilities */
+@utility rounded-system-small { border-radius: var(--radius-system-small); }
+@utility rounded-system-medium { border-radius: var(--radius-system-medium); }
+@utility rounded-system-large { border-radius: var(--radius-system-large); }
+@utility rounded-system-xl { border-radius: var(--radius-system-extra-large); }
+@utility rounded-system-continuous { border-radius: var(--radius-system-continuous); }
+
+/* Material Elevation Utilities */
+@utility shadow-system-1 { box-shadow: var(--shadow-level-1); }
+@utility shadow-system-2 { box-shadow: var(--shadow-level-2); }
+@utility shadow-system-3 { box-shadow: var(--shadow-level-3); }
+@utility shadow-system-4 { box-shadow: var(--shadow-level-4); }
+@utility shadow-system-5 { box-shadow: var(--shadow-level-5); }
+
+/* Apple Spring Animation Classes (for GSAP) */
+.spring-gentle {
+  /* GSAP will use: ease: "power2.out", duration: 0.6 */
+}
+
+.spring-moderate {
+  /* GSAP will use: ease: "power2.inOut", duration: 0.4 */
+}
+
+.spring-snappy {
+  /* GSAP will use: ease: "back.out(1.7)", duration: 0.3 */
+}
+
+.spring-bouncy {
+  /* GSAP will use: ease: "elastic.out(1, 0.3)", duration: 0.8 */
+}
+
+/* Apple Timing Classes (for GSAP reference) */
+.timing-instant { /* 0ms - immediate */ }
+.timing-immediate { /* 100ms - quick feedback */ }
+.timing-quick { /* 200ms - button presses */ }
+.timing-moderate { /* 400ms - state changes */ }
+.timing-deliberate { /* 600ms - significant changes */ }
+.timing-slow { /* 1000ms - major transitions */ }
