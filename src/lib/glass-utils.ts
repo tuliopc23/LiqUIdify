@@ -6,11 +6,22 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const glassVariants = {
-  default: 'glass-effect',
-  hover: 'glass-effect glass-hover',
-  elevated: 'glass-effect-elevated',
-  surface: 'bg-glass border-glass backdrop-blur-glass',
-  pressed: 'glass-effect',
+  default: 'apple-glass apple-glass--depth-2 apple-glass--magnetic',
+  hover: 'apple-glass apple-glass--depth-2 apple-glass--magnetic apple-glass--shimmer',
+  elevated: 'apple-glass apple-glass--depth-3 apple-glass--magnetic apple-glass--glow',
+  surface: 'apple-glass apple-glass--depth-1',
+  pressed: 'apple-glass apple-glass--depth-2 apple-glass--ripple',
+  apple: 'apple-glass',
+  'apple-subtle': 'apple-glass apple-glass--depth-1',
+  'apple-medium': 'apple-glass apple-glass--depth-2',
+  'apple-strong': 'apple-glass apple-glass--depth-3',
+  'apple-interactive': 'apple-glass apple-glass--depth-2 apple-glass--magnetic',
+  'apple-shimmer': 'apple-glass apple-glass--depth-2 apple-glass--shimmer',
+  'apple-ripple': 'apple-glass apple-glass--depth-2 apple-glass--ripple',
+  'apple-glow': 'apple-glass apple-glass--depth-2 apple-glass--glow',
+  // Legacy variants for backward compatibility
+  'legacy-glass': 'liquid-glass',
+  'legacy-elevated': 'liquid-glass-elevated liquid-interactive',
 };
 
 export function getGlassClass(variant: keyof typeof glassVariants = 'default') {

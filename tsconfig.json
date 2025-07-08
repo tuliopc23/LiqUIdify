@@ -29,16 +29,20 @@
     /* Path mapping */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/tokens": ["./src/tokens/index"],
+      "@/design-tokens": ["./src/tokens/design-tokens"]
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "src/types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",
     "dist",
     "**/*.stories.*",
-    "**/*.test.*"
+    "**/*.test.*",
+    "src/docs/guides.ts"
   ]
 }

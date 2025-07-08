@@ -1,11 +1,12 @@
-/* Advanced Liquid Glass Design System CSS
+/* Apple Liquid Glass Design System CSS
  * Apple WWDC 2025+ Liquid Glass Implementation
  * Professional design system with comprehensive glass effects
+ * Based on Apple's authentic liquid glass materials
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Legacy Tailwind directives removed for v4 compatibility
+ * Tailwind v4 uses @import "tailwindcss" in the main CSS file
+ */
 
 /* CSS Custom Properties for Liquid Glass Design System */
 :root {
@@ -370,6 +371,8 @@
   border-color: var(--apple-border-focus);
   box-shadow: 0 0 0 3px var(--apple-border-focus);
 }
+
+/* Apple Liquid Glass styles moved to apple-liquid-glass.css to prevent conflicts */
 
 /* Apple Button Components */
 .apple-btn-primary {
@@ -1508,3 +1511,4 @@
 .text-secondary {
   color: var(--text-secondary);
 }
+/* Test CSS compilation */

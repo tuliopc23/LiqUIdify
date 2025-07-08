@@ -3,6 +3,7 @@ import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
 import { useMagneticHover, createGlassRipple } from '@/lib/glass-physics';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { useGlassEffectPerformance } from '@/hooks/use-performance-monitor';
+import { useAppleLiquidGlass, getAppleLiquidGlassClass, createGlassLayers } from '@/lib/apple-liquid-glass';
 import { Slot } from '@radix-ui/react-slot';
 
 /**
@@ -11,7 +12,7 @@ import { Slot } from '@radix-ui/react-slot';
 export interface GlassButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Button variant style */
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'destructive';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'destructive' | 'apple';
   /** Button size */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Render as child component */
@@ -22,6 +23,14 @@ export interface GlassButtonProps
   rightIcon?: React.ReactNode;
   /** Show loading state */
   loading?: boolean;
+  /** Apple liquid glass intensity (only for apple variant) */
+  intensity?: 'subtle' | 'medium' | 'strong';
+  /** Enable magnetic hover effect (only for apple variant) */
+  magnetic?: boolean;
+  /** Enable multi-layer structure (only for apple variant) */
+  multiLayer?: boolean;
+  /** Enable animated effects (only for apple variant) */
+  animated?: boolean;
 }
 
 /**
@@ -56,6 +65,10 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       loading = false,
       disabled,
       children,
+      intensity = 'medium',
+      magnetic = false,
+      multiLayer = true,
+      animated = false,
       ...props
     },
     ref
@@ -65,6 +78,17 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     const { magneticHover, specularHighlights } = useLiquidGlass();
     const { elementRef: magneticRef, transform } = useMagneticHover(0.3, 120);
     const { measureGlassInteraction } = useGlassEffectPerformance('Button');
+    
+    // Apple liquid glass hook for apple variant
+    const appleLiquidGlass = useAppleLiquidGlass({
+      intensity,
+      magneticStrength: magnetic ? 0.3 : 0,
+      liquidFlow: true,
+      enableHaptics: false,
+      multiLayer,
+      animated,
+      distortionEffect: true,
+    });
 
     // Callback ref to handle both internal and external refs, including magnetic ref
     const setRefs = useCallback(
@@ -75,9 +99,14 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
             internalButtonRef as React.MutableRefObject<HTMLButtonElement | null>
           ).current = node;
         }
-        // Assign to magnetic ref if enabled
+        // Assign to magnetic ref if enabled (legacy)
         if (magneticHover && magneticRef && 'current' in magneticRef) {
           (magneticRef as React.MutableRefObject<HTMLElement | null>).current =
+            node;
+        }
+        // Assign to Apple liquid glass ref if apple variant
+        if (variant === 'apple' && appleLiquidGlass.ref && 'current' in appleLiquidGlass.ref) {
+          (appleLiquidGlass.ref as React.MutableRefObject<HTMLElement | null>).current =
             node;
         }
         // Assign to forwarded ref
@@ -88,7 +117,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
             node;
         }
       },
-      [magneticHover, magneticRef, ref]
+      [magneticHover, magneticRef, ref, variant, appleLiquidGlass.ref]
     );
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -111,12 +140,12 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     };
 
     const baseClasses = cn(
-      'liquid-glass liquid-glass-interactive font-medium rounded-xl relative overflow-hidden',
-      'focus:outline-none liquid-glass-focus liquid-glass-ripple', // Ensure liquid-glass-focus provides a visible focus ring
-      microInteraction.smooth,
+      variant === 'apple' ? '' : 'liquid-glass liquid-interactive font-medium rounded-xl relative overflow-hidden',
+      variant === 'apple' ? '' : 'focus:outline-none liquid-glass-focus liquid-glass-ripple', // Ensure liquid-glass-focus provides a visible focus ring
+      variant !== 'apple' && microInteraction.smooth,
       'disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none',
-      specularHighlights && 'liquid-glass-specular liquid-glass-shimmer',
-      magneticHover && 'liquid-glass-magnetic',
+      variant !== 'apple' && specularHighlights && 'liquid-glass-specular liquid-glass-shimmer',
+      variant !== 'apple' && magneticHover && 'liquid-magnetic',
       isPressed && 'scale-[0.98] brightness-95'
     );
 
@@ -135,7 +164,6 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         'light:border-gray-300/50 light:shadow-gray-500/20'
       ),
       secondary: cn(
-        getGlassClass('default'),
         'text-gray-900 dark:text-white', // Fallback text colors
         'border-gray-200 dark:border-gray-700', // Fallback border
         'hover:bg-gray-50 dark:hover:bg-gray-800',
@@ -159,6 +187,12 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         'shadow-lg shadow-red-500/25',
         'border border-red-400/30'
       ),
+      apple: getAppleLiquidGlassClass(intensity, {
+        interactive: true,
+        magnetic,
+        animated,
+        multiLayer,
+      }),
     };
 
     const sizeClasses = {
@@ -204,27 +238,8 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       );
     }
 
-    return (
-      <button
-        className={cn(
-          baseClasses,
-          variantClasses[variant],
-          sizeClasses[size],
-          className
-        )}
-        ref={setRefs}
-        style={{
-          transform: magneticHover ? transform : undefined,
-          ...props.style,
-        }}
-        disabled={disabled || loading}
-        aria-busy={loading ? true : undefined}
-        onMouseDown={() => setIsPressed(true)}
-        onMouseUp={() => setIsPressed(false)}
-        onMouseLeave={() => setIsPressed(false)}
-        onClick={handleClick}
-        {...props}
-      >
+    const buttonContent = (
+      <>
         {/* Loading state overlay */}
         {loading && (
           <div
@@ -264,6 +279,58 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
             </span>
           )}
         </div>
+      </>
+    );
+
+    // Apple variant with multi-layer structure
+    if (variant === 'apple' && multiLayer) {
+      return (
+        <button
+          className={cn(
+            baseClasses,
+            variantClasses[variant],
+            className
+          )}
+          ref={setRefs}
+          style={{
+            transform: magnetic ? transform : undefined,
+            ...props.style,
+          }}
+          disabled={disabled || loading}
+          aria-busy={loading ? true : undefined}
+          onMouseDown={() => setIsPressed(true)}
+          onMouseUp={() => setIsPressed(false)}
+          onMouseLeave={() => setIsPressed(false)}
+          onClick={handleClick}
+          {...props}
+        >
+          {createGlassLayers(buttonContent, cn('flex items-center justify-center gap-2', sizeClasses[size]))}
+        </button>
+      );
+    }
+
+    return (
+      <button
+        className={cn(
+          baseClasses,
+          variantClasses[variant],
+          sizeClasses[size],
+          className
+        )}
+        ref={setRefs}
+        style={{
+          transform: magneticHover ? transform : undefined,
+          ...props.style,
+        }}
+        disabled={disabled || loading}
+        aria-busy={loading ? true : undefined}
+        onMouseDown={() => setIsPressed(true)}
+        onMouseUp={() => setIsPressed(false)}
+        onMouseLeave={() => setIsPressed(false)}
+        onClick={handleClick}
+        {...props}
+      >
+        {buttonContent}
       </button>
     );
   }

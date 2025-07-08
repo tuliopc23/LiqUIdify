@@ -314,15 +314,49 @@ export const designTokens = {
   },
 } as const;
 
-// Type exports for TypeScript support
+// Type exports for TypeScript support - Enhanced for Tailwind v4
 export type DesignTokens = typeof designTokens;
 export type SpacingToken = keyof typeof designTokens.spacing;
 export type ColorToken = keyof typeof designTokens.colors;
 export type TypographyToken = keyof typeof designTokens.typography.fontSize;
 export type BorderRadiusToken = keyof typeof designTokens.borderRadius;
 export type ShadowToken = keyof typeof designTokens.shadows.glass;
-export type AnimationDurationToken =
-  keyof typeof designTokens.animation.duration;
+export type AnimationDurationToken = keyof typeof designTokens.animation.duration;
 export type AnimationEasingToken = keyof typeof designTokens.animation.easing;
 export type BreakpointToken = keyof typeof designTokens.breakpoints;
 export type ZIndexToken = keyof typeof designTokens.zIndex;
+
+// Tailwind v4 specific types
+export type GlassColorToken = keyof typeof designTokens.colors.glass;
+export type BorderColorToken = keyof typeof designTokens.colors.border;
+export type FocusShadowToken = keyof typeof designTokens.shadows.focus;
+export type FontFamilyToken = keyof typeof designTokens.typography.fontFamily;
+export type FontWeightToken = keyof typeof designTokens.typography.fontWeight;
+
+// CSS Custom Property generators for type safety
+export const createCSSVar = (property: string): string => `var(--${property})`;
+export const createGlassVar = (type: 'bg' | 'border', variant: string): string => 
+  `var(--glass-${type}-${variant})`;
+
+// Helper to get design token values with TypeScript safety
+export const getDesignToken = {
+  spacing: (token: SpacingToken) => designTokens.spacing[token],
+  color: (category: keyof typeof designTokens.colors, token: string) => 
+    (designTokens.colors[category] as any)?.[token],
+  typography: {
+    fontSize: (token: TypographyToken) => designTokens.typography.fontSize[token],
+    fontWeight: (token: FontWeightToken) => designTokens.typography.fontWeight[token],
+    fontFamily: (token: FontFamilyToken) => designTokens.typography.fontFamily[token],
+  },
+  borderRadius: (token: BorderRadiusToken) => designTokens.borderRadius[token],
+  shadow: {
+    glass: (token: ShadowToken) => designTokens.shadows.glass[token],
+    focus: (token: FocusShadowToken) => designTokens.shadows.focus[token],
+  },
+  animation: {
+    duration: (token: AnimationDurationToken) => designTokens.animation.duration[token],
+    easing: (token: AnimationEasingToken) => designTokens.animation.easing[token],
+  },
+  breakpoint: (token: BreakpointToken) => designTokens.breakpoints[token],
+  zIndex: (token: ZIndexToken) => designTokens.zIndex[token],
+} as const;

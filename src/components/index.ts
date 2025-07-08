@@ -1,6 +1,16 @@
 // Glass Components Library - Main Export File
 // Import and re-export all glass components for easy use in projects
 
+// Apple Liquid Glass Components - Enhanced with multi-layer structure
+export { 
+  AppleLiquidGlass, 
+  AppleLiquidGlassCard, 
+  AppleLiquidGlassButton, 
+  AppleLiquidGlassNav,
+  type AppleLiquidGlassComponentProps 
+} from './apple-liquid-glass';
+export { LiquidGlassSvgFilters, type LiquidGlassSvgFiltersProps } from './liquid-glass-svg-filters';
+
 // Form Components
 export { GlassButton, type GlassButtonProps } from './glass-button/index';
 export { GlassInput, type GlassInputProps } from './glass-input/index';

@@ -1,11 +1,16 @@
 import { forwardRef } from "react";
 import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
+import { useAppleLiquidGlass, getAppleLiquidGlassClass, createGlassLayers } from "@/lib/apple-liquid-glass";
 
 export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "elevated" | "outlined" | "pressed";
+  variant?: "default" | "elevated" | "outlined" | "pressed" | "apple";
   hover?: boolean;
   bordered?: boolean;
   padding?: "none" | "sm" | "md" | "lg" | "xl";
+  magnetic?: boolean;
+  intensity?: "subtle" | "medium" | "strong";
+  multiLayer?: boolean;
+  animated?: boolean;
 }
 
 const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
@@ -15,13 +20,34 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     hover = true, 
     bordered = true,
     padding = "md",
+    magnetic = false,
+    intensity = "medium",
+    multiLayer = true,
+    animated = false,
+    children,
     ...props 
   }, ref) => {
+    const appleLiquidGlass = useAppleLiquidGlass({
+      intensity,
+      magneticStrength: magnetic ? 0.3 : 0,
+      liquidFlow: true,
+      enableHaptics: false,
+      multiLayer,
+      animated,
+      distortionEffect: true,
+    });
+
     const variantClasses = {
       default: getGlassClass("default"),
       elevated: getGlassClass("elevated"),
       outlined: "bg-transparent border-2 border-[var(--glass-border)]",
-      pressed: cn(getGlassClass("pressed"), "shadow-inner")
+      pressed: cn(getGlassClass("pressed"), "shadow-inner"),
+      apple: getAppleLiquidGlassClass(intensity, {
+        interactive: hover,
+        magnetic,
+        animated,
+        multiLayer,
+      })
     };
 
     const paddingClasses = {
@@ -33,21 +59,39 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     };
 
     const baseClasses = cn(
-      "rounded-xl",
+      variant === "apple" ? "" : "rounded-xl",
       variantClasses[variant],
-      paddingClasses[padding],
-      bordered && variant !== "outlined" && "border border-[var(--glass-border)]",
-      hover && "glass-hover cursor-pointer",
-      microInteraction.smooth,
+      variant !== "apple" && paddingClasses[padding],
+      bordered && variant !== "outlined" && variant !== "apple" && "border border-[var(--glass-border)]",
+      hover && variant !== "apple" && "glass-hover cursor-pointer",
+      variant !== "apple" && microInteraction.smooth,
       "will-change-transform"
     );
 
+    // Use Apple liquid glass ref for apple variant
+    const finalRef = variant === "apple" ? appleLiquidGlass.ref : ref;
+
+    // For Apple variant with multi-layer, use the new structure
+    if (variant === "apple" && multiLayer) {
+      return (
+        <div
+          ref={finalRef as any}
+          className={cn(baseClasses, className)}
+          {...props}
+        >
+          {createGlassLayers(children, paddingClasses[padding])}
+        </div>
+      );
+    }
+
     return (
       <div
-        ref={ref}
+        ref={finalRef as any}
         className={cn(baseClasses, className)}
         {...props}
-      />
+      >
+        {children}
+      </div>
     );
   }
 );

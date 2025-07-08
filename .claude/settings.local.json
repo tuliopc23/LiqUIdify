@@ -7,7 +7,18 @@
       "Bash(npm run storybook:*)",
       "Bash(mv:*)",
       "Bash(claude config edit:*)",
-      "Bash(claude mcp:*)"
+      "Bash(claude mcp:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(sed:*)",
+      "Bash(open:*)",
+      "Bash(timeout 30s npm run storybook)",
+      "Bash(node:*)",
+      "Bash(rm:*)",
+      "Bash(diff:*)",
+      "mcp__github__search_code",
+      "Bash(gh gist view:*)"
     ],
     "deny": []
   }

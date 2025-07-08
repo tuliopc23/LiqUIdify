@@ -1,5 +1,8 @@
 import React from 'react';
 import { cn } from '@/lib/glass-utils';
+import { AppleLiquidGlassCard } from '@/components/apple-liquid-glass';
+import { LiquidGlassSvgFilters } from '@/components/liquid-glass-svg-filters';
+import { GlassCard } from '@/components/glass-card/glass-card';
 
 // Enhanced Props Table Component
 export const PropsTable = ({
@@ -16,24 +19,31 @@ export const PropsTable = ({
   title?: string;
 }) => {
   return (
-    <div className="liquid-glass rounded-xl p-6 my-6 border border-white/15">
-      <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-        {title}
-      </h3>
+    <>
+      <LiquidGlassSvgFilters />
+      <AppleLiquidGlassCard 
+        intensity="medium" 
+        magnetic={true} 
+        animated={true}
+        className="my-6"
+      >
+        <h3 className="text-lg font-semibold mb-4 text-white">
+          {title}
+        </h3>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-white/15">
-              <th className="text-left py-2 px-3 font-medium text-gray-900 dark:text-white">
+              <th className="text-left py-2 px-3 font-medium text-white">
                 Name
               </th>
-              <th className="text-left py-2 px-3 font-medium text-gray-900 dark:text-white">
+              <th className="text-left py-2 px-3 font-medium text-white">
                 Type
               </th>
-              <th className="text-left py-2 px-3 font-medium text-gray-900 dark:text-white">
+              <th className="text-left py-2 px-3 font-medium text-white">
                 Default
               </th>
-              <th className="text-left py-2 px-3 font-medium text-gray-900 dark:text-white">
+              <th className="text-left py-2 px-3 font-medium text-white">
                 Description
               </th>
             </tr>
@@ -45,7 +55,7 @@ export const PropsTable = ({
                 className="border-b border-white/8 last:border-b-0"
               >
                 <td className="py-3 px-3">
-                  <code className="text-sm bg-white/25 px-2 py-1 rounded font-mono text-gray-900 dark:text-white">
+                  <code className="text-sm bg-white/25 px-2 py-1 rounded font-mono text-white">
                     {prop.name}
                     {prop.required && (
                       <span className="text-red-500 ml-1">*</span>
@@ -53,20 +63,20 @@ export const PropsTable = ({
                   </code>
                 </td>
                 <td className="py-3 px-3">
-                  <code className="text-sm text-blue-600 dark:text-blue-400 font-mono">
+                  <code className="text-sm text-blue-300 font-mono">
                     {prop.type}
                   </code>
                 </td>
                 <td className="py-3 px-3">
                   {prop.default ? (
-                    <code className="text-sm bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded font-mono">
+                    <code className="text-sm bg-white/20 px-2 py-1 rounded font-mono text-white">
                       {prop.default}
                     </code>
                   ) : (
-                    <span className="text-gray-400">—</span>
+                    <span className="text-white/60">—</span>
                   )}
                 </td>
-                <td className="py-3 px-3 text-gray-600 dark:text-gray-300">
+                <td className="py-3 px-3 text-white/80">
                   {prop.description}
                 </td>
               </tr>
@@ -74,7 +84,8 @@ export const PropsTable = ({
           </tbody>
         </table>
       </div>
-    </div>
+      </AppleLiquidGlassCard>
+    </>
   );
 };
 
@@ -93,25 +104,30 @@ export const CodeBlock = ({
   };
 
   return (
-    <div className="liquid-glass rounded-xl overflow-hidden my-6 border border-white/15">
+    <AppleLiquidGlassCard 
+      intensity="strong" 
+      magnetic={true} 
+      animated={false}
+      className="overflow-hidden my-6"
+    >
       {title && (
-        <div className="px-4 py-2 bg-white/25 border-b border-white/15">
-          <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+        <div className="px-4 py-2 bg-white/25 border-b border-white/15 mb-4">
+          <h4 className="text-sm font-medium text-white">
             {title}
           </h4>
         </div>
       )}
       <div className="relative">
-        <pre className="p-4 overflow-x-auto text-sm bg-gray-50 dark:bg-gray-900">
+        <pre className="p-4 overflow-x-auto text-sm bg-black/20 rounded-lg">
           <code
-            className={`language-${language} text-gray-900 dark:text-white`}
+            className={`language-${language} text-white`}
           >
             {code}
           </code>
         </pre>
         <button
           onClick={copyToClipboard}
-          className="absolute top-2 right-2 p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors rounded-md hover:bg-white/18"
+          className="absolute top-2 right-2 p-2 text-white/70 hover:text-white transition-colors rounded-md hover:bg-white/18"
           title="Copy code"
         >
           <svg
@@ -127,7 +143,7 @@ export const CodeBlock = ({
           </svg>
         </button>
       </div>
-    </div>
+    </AppleLiquidGlassCard>
   );
 };
 
@@ -145,19 +161,24 @@ export const UsageExample = ({
 }) => {
   return (
     <div className="my-8">
-      <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+      <h3 className="text-lg font-semibold mb-2 text-white">
         {title}
       </h3>
       {description && (
-        <p className="text-gray-600 dark:text-gray-300 mb-4">{description}</p>
+        <p className="text-white/70 mb-4">{description}</p>
       )}
 
       {/* Live Example */}
-      <div className="liquid-glass rounded-xl p-6 mb-4 border border-white/15">
+      <AppleLiquidGlassCard 
+        intensity="subtle" 
+        magnetic={true} 
+        animated={true}
+        className="mb-4"
+      >
         <div className="flex items-center justify-center min-h-[120px]">
           {example}
         </div>
-      </div>
+      </AppleLiquidGlassCard>
 
       {/* Code */}
       <CodeBlock code={code} title="Code" />

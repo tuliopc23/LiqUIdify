@@ -1,0 +1,129 @@
+/* Tailwind v4 Configuration */
+@import "tailwindcss";
+
+/* Custom Theme Configuration */
+@theme {
+  /* Apple Liquid Glass Color Palette */
+  --color-apple-liquid-subtle: rgba(255, 255, 255, 0.08);
+  --color-apple-liquid-medium: rgba(255, 255, 255, 0.15);
+  --color-apple-liquid-strong: rgba(255, 255, 255, 0.25);
+  
+  --color-apple-border-subtle: rgba(255, 255, 255, 0.6);
+  --color-apple-border-medium: rgba(255, 255, 255, 0.8);
+  --color-apple-border-strong: rgba(255, 255, 255, 0.9);
+  
+  /* Apple Liquid Glass Spacing */
+  --spacing-apple-liquid-xs: 12px;
+  --spacing-apple-liquid-sm: 16px;
+  --spacing-apple-liquid-md: 24px;
+  --spacing-apple-liquid-lg: 32px;
+  --spacing-apple-liquid-xl: 40px;
+  
+  /* Apple Liquid Glass Border Radius */
+  --radius-apple-liquid-subtle: 24px;
+  --radius-apple-liquid-medium: 32px;
+  --radius-apple-liquid-strong: 40px;
+  
+  /* Apple Liquid Glass Shadows */
+  --shadow-apple-liquid-subtle: 0 4px 16px rgba(31, 38, 135, 0.1), inset 0 2px 10px rgba(255, 255, 255, 0.2);
+  --shadow-apple-liquid-medium: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
+  --shadow-apple-liquid-strong: 0 16px 48px rgba(31, 38, 135, 0.3), inset 0 8px 32px rgba(255, 255, 255, 0.4);
+  
+  /* Apple Liquid Glass Blur Effects */
+  --blur-apple-liquid-subtle: blur(12px) saturate(150%);
+  --blur-apple-liquid-medium: blur(20px) saturate(180%);
+  --blur-apple-liquid-strong: blur(32px) saturate(200%);
+  
+  /* Apple Liquid Glass Transitions */
+  --transition-apple-liquid: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-apple-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Dark Theme Overrides */
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-apple-liquid-subtle: rgba(255, 255, 255, 0.03);
+    --color-apple-liquid-medium: rgba(255, 255, 255, 0.06);
+    --color-apple-liquid-strong: rgba(255, 255, 255, 0.12);
+    
+    --color-apple-border-subtle: rgba(255, 255, 255, 0.1);
+    --color-apple-border-medium: rgba(255, 255, 255, 0.15);
+    --color-apple-border-strong: rgba(255, 255, 255, 0.2);
+    
+    --shadow-apple-liquid-subtle: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 2px 10px rgba(255, 255, 255, 0.05);
+    --shadow-apple-liquid-medium: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 4px 20px rgba(255, 255, 255, 0.08);
+    --shadow-apple-liquid-strong: 0 16px 48px rgba(0, 0, 0, 0.5), inset 0 8px 32px rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Tailwind v4 Utilities for Apple Liquid Glass */
+@utility apple-liquid-bg-subtle {
+  background-color: var(--color-apple-liquid-subtle);
+}
+
+@utility apple-liquid-bg-medium {
+  background-color: var(--color-apple-liquid-medium);
+}
+
+@utility apple-liquid-bg-strong {
+  background-color: var(--color-apple-liquid-strong);
+}
+
+@utility apple-liquid-blur-subtle {
+  backdrop-filter: var(--blur-apple-liquid-subtle);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-subtle);
+}
+
+@utility apple-liquid-blur-medium {
+  backdrop-filter: var(--blur-apple-liquid-medium);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-medium);
+}
+
+@utility apple-liquid-blur-strong {
+  backdrop-filter: var(--blur-apple-liquid-strong);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-strong);
+}
+
+@utility apple-liquid-border-subtle {
+  border: 1px solid var(--color-apple-border-subtle);
+}
+
+@utility apple-liquid-border-medium {
+  border: 1px solid var(--color-apple-border-medium);
+}
+
+@utility apple-liquid-border-strong {
+  border: 1px solid var(--color-apple-border-strong);
+}
+
+@utility apple-liquid-shadow-subtle {
+  box-shadow: var(--shadow-apple-liquid-subtle);
+}
+
+@utility apple-liquid-shadow-medium {
+  box-shadow: var(--shadow-apple-liquid-medium);
+}
+
+@utility apple-liquid-shadow-strong {
+  box-shadow: var(--shadow-apple-liquid-strong);
+}
+
+@utility apple-liquid-radius-subtle {
+  border-radius: var(--radius-apple-liquid-subtle);
+}
+
+@utility apple-liquid-radius-medium {
+  border-radius: var(--radius-apple-liquid-medium);
+}
+
+@utility apple-liquid-radius-strong {
+  border-radius: var(--radius-apple-liquid-strong);
+}
+
+@utility apple-liquid-transition {
+  transition: var(--transition-apple-liquid);
+}
+
+@utility apple-liquid-spring {
+  transition: var(--transition-apple-spring);
+}

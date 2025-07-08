@@ -233,7 +233,8 @@ const config: Config = {
     },
   },
   plugins: [
-    require('tailwindcss-animate'),
+    // Tailwind v4: Animation utilities are built-in
+    // No need for external plugins - animations are defined in theme.animation
   ],
 };
 

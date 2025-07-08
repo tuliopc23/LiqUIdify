@@ -1,7 +1,6 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
-import '../src/styles/glass.css';
-import '../src/styles/enhanced-components.css';
+import '../src/styles/tailwind.css';
 
 // Add a flag to ensure single initialization
 let isInitialized = false;
@@ -25,10 +24,10 @@ if (typeof document !== 'undefined') {
     }
     /* Ensure canvas backgrounds for story frames */
     .sb-show-main {
-      background: var(--glass-bg-canvas, #ffffff) !important;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     }
     [data-theme="dark"] .sb-show-main {
-      background: var(--glass-bg-canvas, #0a0a0a) !important;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
     }
   `;
   document.head.appendChild(style);
@@ -46,8 +45,24 @@ function setupCssProperties(theme: 'light' | 'dark' = 'light'): void {
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: 'light',
+      default: 'liquid-gradient',
       values: [
+        {
+          name: 'liquid-gradient',
+          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        },
+        {
+          name: 'apple-gradient', 
+          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+        },
+        {
+          name: 'cosmic',
+          value: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
+        },
+        {
+          name: 'image-bg',
+          value: 'url("https://images.unsplash.com/photo-1539635278303-d4002c07eae3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDk1Njc4NTB8&ixlib=rb-4.1.0&q=85") center/cover',
+        },
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#0a0a0a' },
         {
