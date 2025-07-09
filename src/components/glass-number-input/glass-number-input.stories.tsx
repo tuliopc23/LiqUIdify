@@ -8,7 +8,8 @@ const meta: Meta<typeof GlassNumberInput> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A sophisticated number input component with increment/decrement buttons, formatting, and liquid glass styling.',
+        component:
+          'A sophisticated number input component with increment/decrement buttons, formatting, and liquid glass styling.',
       },
     },
   },
@@ -211,8 +212,8 @@ export const CurrencyFormat: Story = {
     value: 1234.56,
     precision: 2,
     allowDecimal: true,
-    formatValue: (value) => `$${value.toFixed(2)}`,
-    parseValue: (value) => parseFloat(value.replace('$', '')) || 0,
+    formatValue: value => `$${value.toFixed(2)}`,
+    parseValue: value => parseFloat(value.replace('$', '')) || 0,
   },
 };
 
@@ -222,15 +223,15 @@ export const PercentageFormat: Story = {
     value: 75,
     min: 0,
     max: 100,
-    formatValue: (value) => `${value}%`,
-    parseValue: (value) => parseFloat(value.replace('%', '')) || 0,
+    formatValue: value => `${value}%`,
+    parseValue: value => parseFloat(value.replace('%', '')) || 0,
   },
 };
 
 export const Interactive: Story = {
   args: {
     ...Default.args,
-    onValueChange: (value) => {
+    onValueChange: value => {
       console.log('Value changed:', value);
     },
     onBlur: () => {
@@ -246,11 +247,7 @@ export const AllSizes: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="text-sm text-gray-600">Small</div>
-      <GlassNumberInput
-        placeholder="Small number input"
-        size="sm"
-        value={10}
-      />
+      <GlassNumberInput placeholder="Small number input" size="sm" value={10} />
       <div className="text-sm text-gray-600">Medium (default)</div>
       <GlassNumberInput
         placeholder="Medium number input"
@@ -296,28 +293,13 @@ export const AllStates: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="text-sm text-gray-600">Normal</div>
-      <GlassNumberInput
-        placeholder="Normal state"
-        value={42}
-      />
+      <GlassNumberInput placeholder="Normal state" value={42} />
       <div className="text-sm text-gray-600">Error</div>
-      <GlassNumberInput
-        placeholder="Error state"
-        value={999}
-        error
-      />
+      <GlassNumberInput placeholder="Error state" value={999} error />
       <div className="text-sm text-gray-600">Success</div>
-      <GlassNumberInput
-        placeholder="Success state"
-        value={42}
-        success
-      />
+      <GlassNumberInput placeholder="Success state" value={42} success />
       <div className="text-sm text-gray-600">Disabled</div>
-      <GlassNumberInput
-        placeholder="Disabled state"
-        value={42}
-        disabled
-      />
+      <GlassNumberInput placeholder="Disabled state" value={42} disabled />
     </div>
   ),
 };
@@ -333,11 +315,11 @@ export const UseCases: Story = {
           precision={2}
           allowDecimal={true}
           allowNegative={false}
-          formatValue={(value) => `$${value.toFixed(2)}`}
-          parseValue={(value) => parseFloat(value.replace('$', '')) || 0}
+          formatValue={value => `$${value.toFixed(2)}`}
+          parseValue={value => parseFloat(value.replace('$', '')) || 0}
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Quantity Input</div>
         <GlassNumberInput
@@ -350,7 +332,7 @@ export const UseCases: Story = {
           allowNegative={false}
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Percentage Input</div>
         <GlassNumberInput
@@ -361,11 +343,11 @@ export const UseCases: Story = {
           step={5}
           allowDecimal={false}
           allowNegative={false}
-          formatValue={(value) => `${value}%`}
-          parseValue={(value) => parseFloat(value.replace('%', '')) || 0}
+          formatValue={value => `${value}%`}
+          parseValue={value => parseFloat(value.replace('%', '')) || 0}
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Temperature Input</div>
         <GlassNumberInput
@@ -374,8 +356,8 @@ export const UseCases: Story = {
           precision={1}
           allowDecimal={true}
           allowNegative={true}
-          formatValue={(value) => `${value}°C`}
-          parseValue={(value) => parseFloat(value.replace('°C', '')) || 0}
+          formatValue={value => `${value}°C`}
+          parseValue={value => parseFloat(value.replace('°C', '')) || 0}
         />
       </div>
     </div>

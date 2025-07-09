@@ -154,7 +154,11 @@ export function createPerformanceTest(
       // Get web vitals (if available)
       const webVitals = await monitor.observeWebVitals();
 
-      const { renderTime: webVitalsRenderTime, memoryUsage: webVitalsMemoryUsage, ...otherWebVitals } = webVitals;
+      const {
+        renderTime: webVitalsRenderTime,
+        memoryUsage: webVitalsMemoryUsage,
+        ...otherWebVitals
+      } = webVitals;
       const metrics: PerformanceMetrics = {
         renderTime,
         memoryUsage,

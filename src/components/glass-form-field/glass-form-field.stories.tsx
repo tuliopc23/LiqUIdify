@@ -13,7 +13,8 @@ const meta: Meta<typeof GlassFormField> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A form field wrapper that provides labels, validation states, helper text, and accessibility features.',
+        component:
+          'A form field wrapper that provides labels, validation states, helper text, and accessibility features.',
       },
     },
   },
@@ -84,7 +85,9 @@ export const Required: Story = {
     label: 'Email',
     htmlFor: 'email',
     required: true,
-    children: <GlassInput id="email" type="email" placeholder="Enter your email" />,
+    children: (
+      <GlassInput id="email" type="email" placeholder="Enter your email" />
+    ),
   },
 };
 
@@ -93,7 +96,9 @@ export const Optional: Story = {
     label: 'Phone Number',
     htmlFor: 'phone',
     optional: true,
-    children: <GlassInput id="phone" type="tel" placeholder="Enter your phone number" />,
+    children: (
+      <GlassInput id="phone" type="tel" placeholder="Enter your phone number" />
+    ),
   },
 };
 
@@ -101,8 +106,15 @@ export const WithHelper: Story = {
   args: {
     label: 'Password',
     htmlFor: 'password',
-    helperText: 'Must be at least 8 characters with uppercase, lowercase, and numbers',
-    children: <GlassInput id="password" type="password" placeholder="Enter your password" />,
+    helperText:
+      'Must be at least 8 characters with uppercase, lowercase, and numbers',
+    children: (
+      <GlassInput
+        id="password"
+        type="password"
+        placeholder="Enter your password"
+      />
+    ),
   },
 };
 
@@ -111,7 +123,14 @@ export const ErrorState: Story = {
     label: 'Email',
     htmlFor: 'email-error',
     error: 'Please enter a valid email address',
-    children: <GlassInput id="email-error" type="email" placeholder="Enter your email" error />,
+    children: (
+      <GlassInput
+        id="email-error"
+        type="email"
+        placeholder="Enter your email"
+        error
+      />
+    ),
   },
 };
 
@@ -120,7 +139,13 @@ export const SuccessState: Story = {
     label: 'Username',
     htmlFor: 'username-success',
     success: 'Username is available',
-    children: <GlassInput id="username-success" placeholder="Enter your username" success />,
+    children: (
+      <GlassInput
+        id="username-success"
+        placeholder="Enter your username"
+        success
+      />
+    ),
   },
 };
 
@@ -129,7 +154,13 @@ export const WarningState: Story = {
     label: 'Password',
     htmlFor: 'password-warning',
     warning: 'Password strength is weak',
-    children: <GlassInput id="password-warning" type="password" placeholder="Enter your password" />,
+    children: (
+      <GlassInput
+        id="password-warning"
+        type="password"
+        placeholder="Enter your password"
+      />
+    ),
   },
 };
 
@@ -138,7 +169,13 @@ export const Disabled: Story = {
     label: 'Username',
     htmlFor: 'username-disabled',
     disabled: true,
-    children: <GlassInput id="username-disabled" placeholder="Enter your username" disabled />,
+    children: (
+      <GlassInput
+        id="username-disabled"
+        placeholder="Enter your username"
+        disabled
+      />
+    ),
   },
 };
 
@@ -147,7 +184,9 @@ export const WithTextarea: Story = {
     label: 'Message',
     htmlFor: 'message',
     helperText: 'Maximum 500 characters',
-    children: <GlassTextarea id="message" placeholder="Enter your message" rows={4} />,
+    children: (
+      <GlassTextarea id="message" placeholder="Enter your message" rows={4} />
+    ),
   },
 };
 
@@ -216,7 +255,13 @@ export const SecondaryVariant: Story = {
     label: 'Description',
     htmlFor: 'description-secondary',
     variant: 'secondary',
-    children: <GlassInput id="description-secondary" placeholder="Enter description" variant="secondary" />,
+    children: (
+      <GlassInput
+        id="description-secondary"
+        placeholder="Enter description"
+        variant="secondary"
+      />
+    ),
   },
 };
 
@@ -225,18 +270,20 @@ export const OutlineVariant: Story = {
     label: 'Notes',
     htmlFor: 'notes-outline',
     variant: 'outline',
-    children: <GlassInput id="notes-outline" placeholder="Enter notes" variant="outline" />,
+    children: (
+      <GlassInput
+        id="notes-outline"
+        placeholder="Enter notes"
+        variant="outline"
+      />
+    ),
   },
 };
 
 export const ComplexForm: Story = {
   render: () => (
     <div className="space-y-6 w-96">
-      <GlassFormField
-        label="Full Name"
-        htmlFor="fullname"
-        required
-      >
+      <GlassFormField label="Full Name" htmlFor="fullname" required>
         <GlassInput id="fullname" placeholder="Enter your full name" />
       </GlassFormField>
 
@@ -246,7 +293,11 @@ export const ComplexForm: Story = {
         required
         helperText="We'll never share your email with anyone else"
       >
-        <GlassInput id="email-complex" type="email" placeholder="Enter your email" />
+        <GlassInput
+          id="email-complex"
+          type="email"
+          placeholder="Enter your email"
+        />
       </GlassFormField>
 
       <GlassFormField
@@ -255,7 +306,11 @@ export const ComplexForm: Story = {
         optional
         helperText="Include country code"
       >
-        <GlassInput id="phone-complex" type="tel" placeholder="+1 (555) 123-4567" />
+        <GlassInput
+          id="phone-complex"
+          type="tel"
+          placeholder="+1 (555) 123-4567"
+        />
       </GlassFormField>
 
       <GlassFormField
@@ -264,13 +319,18 @@ export const ComplexForm: Story = {
         required
         helperText="Tell us how we can help you"
       >
-        <GlassTextarea id="message-complex" placeholder="Enter your message" rows={4} />
+        <GlassTextarea
+          id="message-complex"
+          placeholder="Enter your message"
+          rows={4}
+        />
       </GlassFormField>
 
-      <GlassFormField
-        label="Newsletter Subscription"
-      >
-        <GlassCheckbox id="newsletter-complex" label="Subscribe to our newsletter" />
+      <GlassFormField label="Newsletter Subscription">
+        <GlassCheckbox
+          id="newsletter-complex"
+          label="Subscribe to our newsletter"
+        />
       </GlassFormField>
     </div>
   ),
@@ -284,7 +344,12 @@ export const ValidationStates: Story = {
         htmlFor="valid-email"
         success="Email is valid"
       >
-        <GlassInput id="valid-email" type="email" value="user@example.com" success />
+        <GlassInput
+          id="valid-email"
+          type="email"
+          value="user@example.com"
+          success
+        />
       </GlassFormField>
 
       <GlassFormField
@@ -292,7 +357,12 @@ export const ValidationStates: Story = {
         htmlFor="invalid-email"
         error="Please enter a valid email address"
       >
-        <GlassInput id="invalid-email" type="email" value="invalid-email" error />
+        <GlassInput
+          id="invalid-email"
+          type="email"
+          value="invalid-email"
+          error
+        />
       </GlassFormField>
 
       <GlassFormField
@@ -309,7 +379,12 @@ export const ValidationStates: Story = {
         htmlFor="strong-password"
         success="Password is strong"
       >
-        <GlassInput id="strong-password" type="password" value="MyStr0ngP@ssw0rd!" success />
+        <GlassInput
+          id="strong-password"
+          type="password"
+          value="MyStr0ngP@ssw0rd!"
+          success
+        />
       </GlassFormField>
     </div>
   ),
@@ -357,7 +432,11 @@ export const AllVariants: Story = {
         variant="default"
         helperText="Default form field styling"
       >
-        <GlassInput id="default-variant" placeholder="Default input" variant="default" />
+        <GlassInput
+          id="default-variant"
+          placeholder="Default input"
+          variant="default"
+        />
       </GlassFormField>
 
       <GlassFormField
@@ -366,7 +445,11 @@ export const AllVariants: Story = {
         variant="secondary"
         helperText="Secondary form field styling"
       >
-        <GlassInput id="secondary-variant" placeholder="Secondary input" variant="secondary" />
+        <GlassInput
+          id="secondary-variant"
+          placeholder="Secondary input"
+          variant="secondary"
+        />
       </GlassFormField>
 
       <GlassFormField
@@ -375,7 +458,11 @@ export const AllVariants: Story = {
         variant="outline"
         helperText="Outline form field styling"
       >
-        <GlassInput id="outline-variant" placeholder="Outline input" variant="outline" />
+        <GlassInput
+          id="outline-variant"
+          placeholder="Outline input"
+          variant="outline"
+        />
       </GlassFormField>
     </div>
   ),

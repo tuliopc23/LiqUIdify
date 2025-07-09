@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { Menu, X, ChevronRight } from "lucide-react";
-import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { Menu, X, ChevronRight } from 'lucide-react';
+import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
 
 interface NavItem {
   id: string;
@@ -21,7 +21,7 @@ interface GlassMobileNavProps {
 export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   items,
   className,
-  onItemClick
+  onItemClick,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -54,12 +54,12 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
     <button
       onClick={() => setIsOpen(!isOpen)}
       className={cn(
-        "p-3 rounded-xl",
-        getGlassClass("default"),
-        "hover:bg-[var(--glass-bg-elevated)]",
+        'p-3 rounded-xl',
+        getGlassClass('default'),
+        'hover:bg-[var(--glass-bg-elevated)]',
         microInteraction.interactive,
-        "focus:outline-none focus:ring-2 focus:ring-blue-500/30",
-        "md:hidden", // Only show on mobile
+        'focus:outline-none focus:ring-2 focus:ring-blue-500/30',
+        'md:hidden', // Only show on mobile
         className
       )}
       aria-label="Toggle navigation menu"
@@ -77,10 +77,10 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
       <button
         onClick={() => handleItemClick(item)}
         className={cn(
-          "w-full flex items-center justify-between p-4 text-left",
-          "hover:bg-[var(--glass-bg)] active:bg-[var(--glass-bg-pressed)]",
+          'w-full flex items-center justify-between p-4 text-left',
+          'hover:bg-[var(--glass-bg)] active:bg-[var(--glass-bg-pressed)]',
           microInteraction.gentle,
-          level > 0 && "pl-8 border-l-2 border-[var(--glass-border)]"
+          level > 0 && 'pl-8 border-l-2 border-[var(--glass-border)]'
         )}
       >
         <div className="flex items-center gap-3">
@@ -94,15 +94,15 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
           </span>
         </div>
         {item.children?.length && (
-          <ChevronRight 
+          <ChevronRight
             className={cn(
-              "w-4 h-4 text-[var(--text-secondary)] transition-transform duration-200",
-              activeSubmenu === item.id && "rotate-90"
-            )} 
+              'w-4 h-4 text-[var(--text-secondary)] transition-transform duration-200',
+              activeSubmenu === item.id && 'rotate-90'
+            )}
           />
         )}
       </button>
-      
+
       {/* Submenu */}
       {item.children?.length && activeSubmenu === item.id && (
         <div className="border-t border-[var(--glass-border)]">
@@ -122,18 +122,18 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
       {createPortal(
         <div className="fixed inset-0 z-50 md:hidden">
           {/* Backdrop */}
-          <div 
+          <div
             className="absolute inset-0 bg-black/20 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
-          
+
           {/* Navigation Panel */}
           <div
             className={cn(
-              "absolute right-0 top-0 h-full w-80 max-w-[85vw]",
-              getGlassClass("elevated"),
-              "border-l border-[var(--glass-border)]",
-              "animate-in slide-in-from-right duration-300"
+              'absolute right-0 top-0 h-full w-80 max-w-[85vw]',
+              getGlassClass('elevated'),
+              'border-l border-[var(--glass-border)]',
+              'animate-in slide-in-from-right duration-300'
             )}
           >
             {/* Header */}

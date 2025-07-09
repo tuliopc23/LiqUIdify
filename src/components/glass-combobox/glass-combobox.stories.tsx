@@ -8,7 +8,8 @@ const meta: Meta<typeof GlassCombobox> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A sophisticated combobox component with search, keyboard navigation, and liquid glass styling.',
+        component:
+          'A sophisticated combobox component with search, keyboard navigation, and liquid glass styling.',
       },
     },
   },
@@ -158,7 +159,7 @@ export const OutlineVariant: Story = {
 export const CustomFilter: Story = {
   args: {
     ...Default.args,
-    filterFn: (option, searchValue) => 
+    filterFn: (option, searchValue) =>
       option.label.toLowerCase().includes(searchValue.toLowerCase()) ||
       option.value.toLowerCase().includes(searchValue.toLowerCase()),
   },
@@ -175,10 +176,10 @@ export const EmptyState: Story = {
 export const Interactive: Story = {
   args: {
     ...Default.args,
-    onValueChange: (value) => {
+    onValueChange: value => {
       console.log('Selected:', value);
     },
-    onSearchChange: (search) => {
+    onSearchChange: search => {
       console.log('Search:', search);
     },
   },
@@ -238,10 +239,7 @@ export const AllStates: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="text-sm text-gray-600">Normal</div>
-      <GlassCombobox
-        options={sampleOptions}
-        placeholder="Normal state"
-      />
+      <GlassCombobox options={sampleOptions} placeholder="Normal state" />
       <div className="text-sm text-gray-600">Loading</div>
       <GlassCombobox
         options={sampleOptions}
@@ -249,11 +247,7 @@ export const AllStates: Story = {
         loading
       />
       <div className="text-sm text-gray-600">Error</div>
-      <GlassCombobox
-        options={sampleOptions}
-        placeholder="Error state"
-        error
-      />
+      <GlassCombobox options={sampleOptions} placeholder="Error state" error />
       <div className="text-sm text-gray-600">Success</div>
       <GlassCombobox
         options={sampleOptions}

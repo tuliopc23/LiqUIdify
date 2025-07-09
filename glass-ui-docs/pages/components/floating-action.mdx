@@ -3,7 +3,7 @@
 This document serves to showcase the **Floating Action** component.
 
 ```jsx
-import { GlassFloatingAction } from "glass-ui-tulio";
+import { GlassFloatingAction } from 'glass-ui-tulio';
 ```
 
 <ComponentShowcase>
@@ -30,119 +30,120 @@ import { GlassFloatingAction } from "glass-ui-tulio";
     }
   ];
 
-  <GlassFloatingAction
-    mainIcon={<Menu className="w-6 h-6" />}
-    actions={defaultActions}
-    position="bottom-right"
-    size="md"
-    variant="default"
-    expandDirection="up"
-    tooltip="Quick Actions"
-    enableMagnetic={true}
-  />
-  ```
+<GlassFloatingAction
+  mainIcon={<Menu className="w-6 h-6" />}
+  actions={defaultActions}
+  position="bottom-right"
+  size="md"
+  variant="default"
+  expandDirection="up"
+  tooltip="Quick Actions"
+  enableMagnetic={true}
+/>
+```
 
-  ```jsx
-  // Radial Expansion with Different Colors
-  const radialActions = [
-    {
-      icon: <Heart className="w-5 h-5" />,
-      label: "Like",
-      onClick: () => console.log('Liked'),
-      color: "error"
-    },
-    {
-      icon: <Share2 className="w-5 h-5" />,
-      label: "Share",
-      onClick: () => console.log('Shared'),
-      color: "primary"
-    },
-    {
-      icon: <Bookmark className="w-5 h-5" />,
-      label: "Save",
-      onClick: () => console.log('Saved'),
-      color: "warning"
-    },
-    {
-      icon: <MessageCircle className="w-5 h-5" />,
-      label: "Comment",
-      onClick: () => console.log('Comment'),
-      color: "success"
-    }
-  ];
+```jsx
+// Radial Expansion with Different Colors
+const radialActions = [
+  {
+    icon: <Heart className="w-5 h-5" />,
+    label: 'Like',
+    onClick: () => console.log('Liked'),
+    color: 'error',
+  },
+  {
+    icon: <Share2 className="w-5 h-5" />,
+    label: 'Share',
+    onClick: () => console.log('Shared'),
+    color: 'primary',
+  },
+  {
+    icon: <Bookmark className="w-5 h-5" />,
+    label: 'Save',
+    onClick: () => console.log('Saved'),
+    color: 'warning',
+  },
+  {
+    icon: <MessageCircle className="w-5 h-5" />,
+    label: 'Comment',
+    onClick: () => console.log('Comment'),
+    color: 'success',
+  },
+];
 
-  <GlassFloatingAction
-    mainIcon={<MoreHorizontal className="w-6 h-6" />}
-    actions={radialActions}
-    position="bottom-left"
-    size="lg"
-    variant="glow"
-    expandDirection="radial"
-    tooltip="Social Actions"
-    enableMagnetic={false}
-  />
-  ```
+<GlassFloatingAction
+  mainIcon={<MoreHorizontal className="w-6 h-6" />}
+  actions={radialActions}
+  position="bottom-left"
+  size="lg"
+  variant="glow"
+  expandDirection="radial"
+  tooltip="Social Actions"
+  enableMagnetic={false}
+/>;
+```
 
-  ```jsx
-  // Minimal Variant with Left Expansion
-  const leftActions = [
-    {
-      icon: <Settings className="w-5 h-5" />,
-      label: "Settings",
-      onClick: () => console.log('Open settings'),
-      color: "secondary"
-    },
-    {
-      icon: <User className="w-5 h-5" />,
-      label: "Profile",
-      onClick: () => console.log('View profile'),
-      color: "secondary"
-    },
-    {
-      icon: <LogOut className="w-5 h-5" />,
-      label: "Logout",
-      onClick: () => console.log('Logout'),
-      color: "error"
-    }
-  ];
+```jsx
+// Minimal Variant with Left Expansion
+const leftActions = [
+  {
+    icon: <Settings className="w-5 h-5" />,
+    label: 'Settings',
+    onClick: () => console.log('Open settings'),
+    color: 'secondary',
+  },
+  {
+    icon: <User className="w-5 h-5" />,
+    label: 'Profile',
+    onClick: () => console.log('View profile'),
+    color: 'secondary',
+  },
+  {
+    icon: <LogOut className="w-5 h-5" />,
+    label: 'Logout',
+    onClick: () => console.log('Logout'),
+    color: 'error',
+  },
+];
 
-  <GlassFloatingAction
-    mainIcon={<User2 className="w-5 h-5" />}
-    actions={leftActions}
-    position="top-right"
-    size="sm"
-    variant="minimal"
-    expandDirection="left"
-    tooltip="User Menu"
-    enableMagnetic={true}
-  />
-  ```
+<GlassFloatingAction
+  mainIcon={<User2 className="w-5 h-5" />}
+  actions={leftActions}
+  position="top-right"
+  size="sm"
+  variant="minimal"
+  expandDirection="left"
+  tooltip="User Menu"
+  enableMagnetic={true}
+/>;
+```
 
-  ```jsx
-  // Simple Button without Actions
-  <GlassFloatingAction
-    mainIcon={<Zap className="w-6 h-6" />}
-    position="center"
-    size="lg"
-    variant="glow"
-    tooltip="Lightning Mode"
-    onClick={() => console.log('Lightning activated!')}
-    enableMagnetic={true}
-  />
-  ```
+```jsx
+// Simple Button without Actions
+<GlassFloatingAction
+  mainIcon={<Zap className="w-6 h-6" />}
+  position="center"
+  size="lg"
+  variant="glow"
+  tooltip="Lightning Mode"
+  onClick={() => console.log('Lightning activated!')}
+  enableMagnetic={true}
+/>
+```
+
 </ComponentShowcase>
 
 ## Props
 
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| mainIcon | `React.ReactNode` | — | Main floating action button icon |
-| actions | `FloatingAction[]` | `[]` | Array of secondary action items |
-| position | `'bottom-right' \| 'bottom-left' \| 'top-right' \| 'top-left' \| 'center'` | `'bottom-right'` | Screen position of the floating action button |
-| size | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the floating action button |
-| variant | `'default' \| 'minimal' \| 'glow'` | `'default'` | Visual style variant |
-| enableMagnetic | `boolean` | `true` | Enable magnetic hover effects |
-| expandDirection | `'up' \| 'down' \| 'left' \| 'right' \| 'radial'` | `'up'` | Direction to expand secondary actions |
-| tooltip | `string` | — | Optional tooltip text for the main button |
+| Name            | Type                                                                       | Default          | Description                                   |
+| --------------- | -------------------------------------------------------------------------- | ---------------- | --------------------------------------------- |
+| mainIcon        | `React.ReactNode`                                                          | —                | Main floating action button icon              |
+| actions         | `FloatingAction[]`                                                         | `[]`             | Array of secondary action items               |
+| position        | `'bottom-right' \| 'bottom-left' \| 'top-right' \| 'top-left' \| 'center'` | `'bottom-right'` | Screen position of the floating action button |
+| size            | `'sm' \| 'md' \| 'lg'`                                                     | `'md'`           | Size of the floating action button            |
+| variant         | `'default' \| 'minimal' \| 'glow'`                                         | `'default'`      | Visual style variant                          |
+| enableMagnetic  | `boolean`                                                                  | `true`           | Enable magnetic hover effects                 |
+| expandDirection | `'up' \| 'down' \| 'left' \| 'right' \| 'radial'`                          | `'up'`           | Direction to expand secondary actions         |
+| tooltip         | `string`                                                                   | —                | Optional tooltip text for the main button     |
 
 ## Examples

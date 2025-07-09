@@ -97,12 +97,18 @@ export const Email: Story = {
 export const WithIcons: Story = {
   render: () => (
     <div className="flex flex-col gap-4 w-80">
-      <GlassInput placeholder="With left icon" leftIcon={<SearchIcon className="h-4 w-4" />} />
-      <GlassInput placeholder="With right icon" rightIcon={<Lock className="h-4 w-4" />} />
-      <GlassInput 
-        placeholder="With both icons" 
-        leftIcon={<Mail className="h-4 w-4" />} 
-        rightIcon={<Lock className="h-4 w-4" />} 
+      <GlassInput
+        placeholder="With left icon"
+        leftIcon={<SearchIcon className="h-4 w-4" />}
+      />
+      <GlassInput
+        placeholder="With right icon"
+        rightIcon={<Lock className="h-4 w-4" />}
+      />
+      <GlassInput
+        placeholder="With both icons"
+        leftIcon={<Mail className="h-4 w-4" />}
+        rightIcon={<Lock className="h-4 w-4" />}
       />
     </div>
   ),

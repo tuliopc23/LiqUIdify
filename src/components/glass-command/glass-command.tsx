@@ -1,7 +1,16 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { createPortal } from "react-dom";
-import { Search, Command, ArrowRight, Hash, User, Settings, FileText, Zap } from "lucide-react";
-import { cn, getGlassClass, microInteraction } from "@/lib/glass-utils";
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
+import {
+  Search,
+  Command,
+  ArrowRight,
+  Hash,
+  User,
+  Settings,
+  FileText,
+  Zap,
+} from 'lucide-react';
+import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
 
 export interface CommandItem {
   id: string;
@@ -23,29 +32,33 @@ interface CommandPaletteProps {
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({
   items,
-  placeholder = "Type a command or search...",
-  shortcut = ["cmd", "k"],
-  className
+  placeholder = 'Type a command or search...',
+  shortcut = ['cmd', 'k'],
+  className,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Filter and categorize items
   const filteredItems = items.filter(item => {
-    const searchTerms = query.toLowerCase().split(" ");
-    const itemText = `${item.label} ${item.description || ""} ${item.keywords?.join(" ") || ""}`.toLowerCase();
+    const searchTerms = query.toLowerCase().split(' ');
+    const itemText =
+      `${item.label} ${item.description || ''} ${item.keywords?.join(' ') || ''}`.toLowerCase();
     return searchTerms.every(term => itemText.includes(term));
   });
 
-  const categorizedItems = filteredItems.reduce((acc, item) => {
-    const category = item.category || "General";
-    if (!acc[category]) acc[category] = [];
-    acc[category].push(item);
-    return acc;
-  }, {} as Record<string, CommandItem[]>);
+  const categorizedItems = filteredItems.reduce(
+    (acc, item) => {
+      const category = item.category || 'General';
+      if (!acc[category]) acc[category] = [];
+      acc[category].push(item);
+      return acc;
+    },
+    {} as Record<string, CommandItem[]>
+  );
 
   const allFilteredItems = Object.values(categorizedItems).flat();
 
@@ -53,7 +66,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Open command palette
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setIsOpen(true);
         return;
@@ -62,30 +75,32 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       if (!isOpen) return;
 
       switch (e.key) {
-        case "ArrowDown":
+        case 'ArrowDown':
           e.preventDefault();
-          setSelectedIndex(prev => Math.min(prev + 1, allFilteredItems.length - 1));
+          setSelectedIndex(prev =>
+            Math.min(prev + 1, allFilteredItems.length - 1)
+          );
           break;
-        case "ArrowUp":
+        case 'ArrowUp':
           e.preventDefault();
           setSelectedIndex(prev => Math.max(prev - 1, 0));
           break;
-        case "Enter":
+        case 'Enter':
           e.preventDefault();
           if (allFilteredItems[selectedIndex]) {
             allFilteredItems[selectedIndex].action();
             handleClose();
           }
           break;
-        case "Escape":
+        case 'Escape':
           e.preventDefault();
           handleClose();
           break;
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, selectedIndex, allFilteredItems]);
 
   // Focus input when opened
@@ -102,38 +117,57 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-    setQuery("");
+    setQuery('');
     setSelectedIndex(0);
   }, []);
 
   const formatShortcut = (keys: string[]) => {
-    return keys.map(key => {
-      switch (key.toLowerCase()) {
-        case "cmd":
-        case "command": return "⌘";
-        case "ctrl": return "^";
-        case "shift": return "⇧";
-        case "alt":
-        case "option": return "⌥";
-        case "enter": return "↵";
-        case "escape": return "⎋";
-        case "backspace": return "⌫";
-        case "delete": return "⌦";
-        case "tab": return "⇥";
-        case "space": return "␣";
-        default: return key.toUpperCase();
-      }
-    }).join("");
+    return keys
+      .map(key => {
+        switch (key.toLowerCase()) {
+          case 'cmd':
+          case 'command':
+            return '⌘';
+          case 'ctrl':
+            return '^';
+          case 'shift':
+            return '⇧';
+          case 'alt':
+          case 'option':
+            return '⌥';
+          case 'enter':
+            return '↵';
+          case 'escape':
+            return '⎋';
+          case 'backspace':
+            return '⌫';
+          case 'delete':
+            return '⌦';
+          case 'tab':
+            return '⇥';
+          case 'space':
+            return '␣';
+          default:
+            return key.toUpperCase();
+        }
+      })
+      .join('');
   };
 
   const getCategoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
-      case "navigation": return <ArrowRight className="w-4 h-4" />;
-      case "user": return <User className="w-4 h-4" />;
-      case "settings": return <Settings className="w-4 h-4" />;
-      case "content": return <FileText className="w-4 h-4" />;
-      case "actions": return <Zap className="w-4 h-4" />;
-      default: return <Hash className="w-4 h-4" />;
+      case 'navigation':
+        return <ArrowRight className="w-4 h-4" />;
+      case 'user':
+        return <User className="w-4 h-4" />;
+      case 'settings':
+        return <Settings className="w-4 h-4" />;
+      case 'content':
+        return <FileText className="w-4 h-4" />;
+      case 'actions':
+        return <Zap className="w-4 h-4" />;
+      default:
+        return <Hash className="w-4 h-4" />;
     }
   };
 
@@ -142,10 +176,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       <button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "flex items-center gap-2 px-3 py-2 rounded-lg",
-          getGlassClass("default"),
-          "hover:bg-[var(--glass-bg-elevated)]",
-          "text-[var(--text-secondary)] text-sm",
+          'flex items-center gap-2 px-3 py-2 rounded-lg',
+          getGlassClass('default'),
+          'hover:bg-[var(--glass-bg-elevated)]',
+          'text-[var(--text-secondary)] text-sm',
           microInteraction.gentle,
           className
         )}
@@ -154,7 +188,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         <span>Search...</span>
         <div className="ml-auto flex items-center gap-1">
           {shortcut.map((key, index) => (
-            <kbd key={index} className="px-1.5 py-0.5 text-xs rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]">
+            <kbd
+              key={index}
+              className="px-1.5 py-0.5 text-xs rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]"
+            >
               {formatShortcut([key])}
             </kbd>
           ))}
@@ -166,19 +203,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh]">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/20 backdrop-blur-sm"
         onClick={handleClose}
       />
-      
+
       {/* Command Palette */}
       <div
         ref={containerRef}
         className={cn(
-          "relative w-full max-w-2xl mx-4 rounded-2xl border overflow-hidden",
-          getGlassClass("elevated"),
-          "border-[var(--glass-border)]",
-          "animate-in fade-in-0 zoom-in-95 duration-200"
+          'relative w-full max-w-2xl mx-4 rounded-2xl border overflow-hidden',
+          getGlassClass('elevated'),
+          'border-[var(--glass-border)]',
+          'animate-in fade-in-0 zoom-in-95 duration-200'
         )}
       >
         {/* Search Input */}
@@ -188,12 +225,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             ref={inputRef}
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={e => setQuery(e.target.value)}
             placeholder={placeholder}
             className={cn(
-              "flex-1 bg-transparent border-none outline-none",
-              "text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
-              "text-lg"
+              'flex-1 bg-transparent border-none outline-none',
+              'text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]',
+              'text-lg'
             )}
           />
           <kbd className="px-2 py-1 text-xs rounded bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-tertiary)]">
@@ -212,70 +249,75 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               </p>
             </div>
           ) : (
-            Object.entries(categorizedItems).map(([category, categoryItems]) => (
-              <div key={category} className="py-2">
-                {/* Category Header */}
-                <div className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
-                  {getCategoryIcon(category)}
-                  {category}
-                </div>
-                
-                {/* Category Items */}
-                {categoryItems.map((item) => {
-                  const globalIndex = allFilteredItems.indexOf(item);
-                  const isSelected = globalIndex === selectedIndex;
-                  
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        item.action();
-                        handleClose();
-                      }}
-                      className={cn(
-                        "w-full flex items-center gap-3 px-4 py-3 text-left",
-                        "hover:bg-[var(--glass-bg)]",
-                        isSelected && "bg-[var(--glass-bg)]",
-                        microInteraction.gentle
-                      )}
-                    >
-                      {/* Icon */}
-                      {item.icon && (
-                        <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-[var(--glass-bg)] text-[var(--text-secondary)]">
-                          {item.icon}
-                        </div>
-                      )}
-                      
-                      {/* Content */}
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium text-[var(--text-primary)] truncate">
-                          {item.label}
-                        </div>
-                        {item.description && (
-                          <div className="text-sm text-[var(--text-secondary)] truncate">
-                            {item.description}
+            Object.entries(categorizedItems).map(
+              ([category, categoryItems]) => (
+                <div key={category} className="py-2">
+                  {/* Category Header */}
+                  <div className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
+                    {getCategoryIcon(category)}
+                    {category}
+                  </div>
+
+                  {/* Category Items */}
+                  {categoryItems.map(item => {
+                    const globalIndex = allFilteredItems.indexOf(item);
+                    const isSelected = globalIndex === selectedIndex;
+
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => {
+                          item.action();
+                          handleClose();
+                        }}
+                        className={cn(
+                          'w-full flex items-center gap-3 px-4 py-3 text-left',
+                          'hover:bg-[var(--glass-bg)]',
+                          isSelected && 'bg-[var(--glass-bg)]',
+                          microInteraction.gentle
+                        )}
+                      >
+                        {/* Icon */}
+                        {item.icon && (
+                          <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-[var(--glass-bg)] text-[var(--text-secondary)]">
+                            {item.icon}
                           </div>
                         )}
-                      </div>
-                      
-                      {/* Shortcut */}
-                      {item.shortcut && (
-                        <div className="flex items-center gap-1">
-                          {item.shortcut.map((key, index) => (
-                            <kbd key={index} className="px-1.5 py-0.5 text-xs rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]">
-                              {formatShortcut([key])}
-                            </kbd>
-                          ))}
+
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-[var(--text-primary)] truncate">
+                            {item.label}
+                          </div>
+                          {item.description && (
+                            <div className="text-sm text-[var(--text-secondary)] truncate">
+                              {item.description}
+                            </div>
+                          )}
                         </div>
-                      )}
-                      
-                      {/* Arrow */}
-                      <ArrowRight className="w-4 h-4 text-[var(--text-tertiary)]" />
-                    </button>
-                  );
-                })}
-              </div>
-            ))
+
+                        {/* Shortcut */}
+                        {item.shortcut && (
+                          <div className="flex items-center gap-1">
+                            {item.shortcut.map((key, index) => (
+                              <kbd
+                                key={index}
+                                className="px-1.5 py-0.5 text-xs rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]"
+                              >
+                                {formatShortcut([key])}
+                              </kbd>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Arrow */}
+                        <ArrowRight className="w-4 h-4 text-[var(--text-tertiary)]" />
+                      </button>
+                    );
+                  })}
+                </div>
+              )
+            )
           )}
         </div>
 

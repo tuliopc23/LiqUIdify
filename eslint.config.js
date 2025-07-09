@@ -1,15 +1,23 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import react from 'eslint-plugin-react'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import react from 'eslint-plugin-react';
 // import storybook from 'eslint-plugin-storybook'
-import tseslint from '@typescript-eslint/eslint-plugin'
-import tsParser from '@typescript-eslint/parser'
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 
 export default [
   {
-    ignores: ['dist', 'storybook-static', 'scripts/**', '**/*.stories.*', '**/*.test.*', 'src/docs/**', 'src/testing/**']
+    ignores: [
+      'dist',
+      'storybook-static',
+      'scripts/**',
+      '**/*.stories.*',
+      '**/*.test.*',
+      'src/docs/**',
+      'src/testing/**',
+    ],
   },
   {
     files: ['**/*.{ts,tsx}'],
@@ -32,18 +40,18 @@ export default [
         expect: 'readonly',
         jest: 'readonly',
         global: 'readonly',
-        AudioWorkletGlobalScope: 'readonly'
+        AudioWorkletGlobalScope: 'readonly',
       },
       parser: tsParser,
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
-        }
-      }
+          jsx: true,
+        },
+      },
     },
     plugins: {
       '@typescript-eslint': tseslint,
-      'react': react,
+      react: react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       // 'storybook': storybook
@@ -53,23 +61,23 @@ export default [
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true }
+        { allowConstantExport: true },
       ],
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
       'no-unused-vars': 'off',
       'no-undef': 'warn',
       'no-async-promise-executor': 'warn',
       'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off'
+      'react/prop-types': 'off',
     },
     settings: {
       react: {
-        version: 'detect'
-      }
-    }
+        version: 'detect',
+      },
+    },
   },
   // {
   //   files: ['**/*.stories.@(js|jsx|ts|tsx)'],
@@ -77,4 +85,4 @@ export default [
   //     ...storybook.configs.recommended.rules
   //   }
   // }
-]
+];

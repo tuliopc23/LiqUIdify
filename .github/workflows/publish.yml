@@ -54,7 +54,7 @@ jobs:
           patch-wording: 'fix,patch,bugfix,chore,docs,style,refactor,perf,test'
           tag-prefix: 'v'
           commit-message: 'CI: bumps version to {{version}} [skip ci]'
-          skip-tag: 'true'  # We'll handle tagging and release creation together
+          skip-tag: 'true' # We'll handle tagging and release creation together
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -69,11 +69,11 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "Creating release for version $VERSION"
-          
+
           # Create and push tag
           git tag "v$VERSION"
           git push origin "v$VERSION"
-          
+
           # Create GitHub release using gh CLI
           gh release create "v$VERSION" \
             --title "Release v$VERSION" \

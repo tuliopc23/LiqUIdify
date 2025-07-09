@@ -4,10 +4,7 @@ import { cn } from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const spinnerVariants = cva(
-  [
-    'inline-block rounded-full',
-    'border-2 border-solid',
-  ],
+  ['inline-block rounded-full', 'border-2 border-solid'],
   {
     variants: {
       variant: {
@@ -41,20 +38,17 @@ const spinnerVariants = cva(
   }
 );
 
-const containerVariants = cva(
-  'flex items-center justify-center',
-  {
-    variants: {
-      orientation: {
-        horizontal: 'flex-row space-x-2',
-        vertical: 'flex-col space-y-2',
-      },
+const containerVariants = cva('flex items-center justify-center', {
+  variants: {
+    orientation: {
+      horizontal: 'flex-row space-x-2',
+      vertical: 'flex-col space-y-2',
     },
-    defaultVariants: {
-      orientation: 'horizontal',
-    },
-  }
-);
+  },
+  defaultVariants: {
+    orientation: 'horizontal',
+  },
+});
 
 export interface GlassSpinnerProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -106,9 +100,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
       >
         <SpinnerElement />
         {showLabel && (
-          <span className="text-sm text-white/70 select-none">
-            {label}
-          </span>
+          <span className="text-sm text-white/70 select-none">{label}</span>
         )}
       </div>
     );
@@ -131,14 +123,10 @@ export const PulseSpinner: React.FC<{
 
   return (
     <div className={cn('flex space-x-1', className)}>
-      {[0, 1, 2].map((i) => (
+      {[0, 1, 2].map(i => (
         <motion.div
           key={i}
-          className={cn(
-            'rounded-full',
-            sizeClasses[size],
-            `bg-${color}/50`
-          )}
+          className={cn('rounded-full', sizeClasses[size], `bg-${color}/50`)}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.5, 1, 0.5],
@@ -172,10 +160,7 @@ export const DotsSpinner: React.FC<{
       {Array.from({ length: count }).map((_, i) => (
         <motion.div
           key={i}
-          className={cn(
-            'rounded-full bg-white/60',
-            sizeClasses[size]
-          )}
+          className={cn('rounded-full bg-white/60', sizeClasses[size])}
           animate={{
             y: [0, -8, 0],
           }}

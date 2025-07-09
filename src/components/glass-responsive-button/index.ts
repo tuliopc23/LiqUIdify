@@ -1,1 +1,4 @@
-export { GlassResponsiveButton, type GlassResponsiveButtonProps } from './glass-responsive-button';
+export {
+  GlassResponsiveButton,
+  type GlassResponsiveButtonProps,
+} from './glass-responsive-button';

@@ -440,7 +440,9 @@ export function useHaptic() {
 }
 
 // Haptic feedback directive (for easy integration)
-export function useHapticFeedbackIntegration<T extends HTMLElement = HTMLElement>(
+export function useHapticFeedbackIntegration<
+  T extends HTMLElement = HTMLElement,
+>(
   ref: React.RefObject<T>,
   type: HapticType = 'light',
   config?: HapticFeedbackConfig

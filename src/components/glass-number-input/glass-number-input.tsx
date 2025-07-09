@@ -1,25 +1,31 @@
-import React, { forwardRef, useState, useRef, useEffect, useCallback } from 'react';
-import { cn, getGlassClass, microInteraction, focusRing } from '../../lib/glass-utils';
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react';
+import {
+  cn,
+  getGlassClass,
+  microInteraction,
+  focusRing,
+} from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Plus, Minus } from 'lucide-react';
 
-const numberInputVariants = cva(
-  [
-    'relative w-full',
-  ],
-  {
-    variants: {
-      size: {
-        sm: 'text-sm',
-        md: 'text-base',
-        lg: 'text-lg',
-      },
+const numberInputVariants = cva(['relative w-full'], {
+  variants: {
+    size: {
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg',
     },
-    defaultVariants: {
-      size: 'md',
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
 
 const inputVariants = cva(
   [
@@ -75,7 +81,10 @@ const buttonVariants = cva(
 );
 
 export interface GlassNumberInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange'>,
+  extends Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      'size' | 'onChange'
+    >,
     VariantProps<typeof numberInputVariants> {
   value?: number;
   defaultValue?: number;
@@ -123,42 +132,49 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     );
     const [displayValue, setDisplayValue] = useState('');
     const [isFocused, setIsFocused] = useState(false);
-    
+
     const inputRef = useRef<HTMLInputElement>(null);
     const incrementRef = useRef<HTMLButtonElement>(null);
     const decrementRef = useRef<HTMLButtonElement>(null);
 
     // Format number for display
-    const formatNumber = useCallback((num: number | undefined): string => {
-      if (num === undefined || isNaN(num)) return '';
-      
-      if (formatOptions) {
-        return new Intl.NumberFormat(locale, formatOptions).format(num);
-      }
-      
-      return num.toFixed(precision);
-    }, [formatOptions, locale, precision]);
+    const formatNumber = useCallback(
+      (num: number | undefined): string => {
+        if (num === undefined || isNaN(num)) return '';
+
+        if (formatOptions) {
+          return new Intl.NumberFormat(locale, formatOptions).format(num);
+        }
+
+        return num.toFixed(precision);
+      },
+      [formatOptions, locale, precision]
+    );
 
     // Parse display value to number
-    const parseNumber = useCallback((str: string): number | undefined => {
-      if (!str.trim()) return undefined;
-      
-      // Remove formatting characters but keep decimal point and negative sign
-      const cleaned = str.replace(/[^\d.-]/g, '');
-      const num = parseFloat(cleaned);
-      
-      if (isNaN(num)) return undefined;
-      
-      // Apply precision
-      const rounded = Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision);
-      
-      // Apply constraints
-      let constrained = rounded;
-      if (min !== undefined) constrained = Math.max(constrained, min);
-      if (max !== undefined) constrained = Math.min(constrained, max);
-      
-      return constrained;
-    }, [precision, min, max]);
+    const parseNumber = useCallback(
+      (str: string): number | undefined => {
+        if (!str.trim()) return undefined;
+
+        // Remove formatting characters but keep decimal point and negative sign
+        const cleaned = str.replace(/[^\d.-]/g, '');
+        const num = parseFloat(cleaned);
+
+        if (isNaN(num)) return undefined;
+
+        // Apply precision
+        const rounded =
+          Math.round(num * Math.pow(10, precision)) / Math.pow(10, precision);
+
+        // Apply constraints
+        let constrained = rounded;
+        if (min !== undefined) constrained = Math.max(constrained, min);
+        if (max !== undefined) constrained = Math.min(constrained, max);
+
+        return constrained;
+      },
+      [precision, min, max]
+    );
 
     // Update display value when internal value changes
     useEffect(() => {
@@ -178,7 +194,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = e.target.value;
       setDisplayValue(inputValue);
-      
+
       // Only parse and update if not focused (to avoid formatting while typing)
       if (!isFocused) {
         const parsed = parseNumber(inputValue);
@@ -209,22 +225,24 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     // Handle increment/decrement
     const handleIncrement = () => {
       if (disabled) return;
-      
+
       const current = internalValue || 0;
       const newValue = current + step;
-      const constrained = max !== undefined ? Math.min(newValue, max) : newValue;
-      
+      const constrained =
+        max !== undefined ? Math.min(newValue, max) : newValue;
+
       setInternalValue(constrained);
       onChange?.(constrained);
     };
 
     const handleDecrement = () => {
       if (disabled) return;
-      
+
       const current = internalValue || 0;
       const newValue = current - step;
-      const constrained = min !== undefined ? Math.max(newValue, min) : newValue;
-      
+      const constrained =
+        min !== undefined ? Math.max(newValue, min) : newValue;
+
       setInternalValue(constrained);
       onChange?.(constrained);
     };
@@ -247,33 +265,37 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
           inputRef.current?.blur();
           break;
       }
-      
+
       // Allow only numeric characters, decimal point, and negative sign
       if (e.key.length === 1) {
         const char = e.key;
         const isNumeric = /\d/.test(char);
         const isDecimal = char === '.' && allowDecimals;
-        const isNegative = char === '-' && allowNegative && e.currentTarget.selectionStart === 0;
-        
+        const isNegative =
+          char === '-' && allowNegative && e.currentTarget.selectionStart === 0;
+
         if (!isNumeric && !isDecimal && !isNegative) {
           e.preventDefault();
         }
       }
-      
+
       props.onKeyDown?.(e);
     };
 
     // Combine refs
-    const combinedRef = useCallback((node: HTMLInputElement | null) => {
-      if (inputRef.current) {
-        inputRef.current = node;
-      }
-      if (typeof ref === 'function') {
-        ref(node);
-      } else if (ref) {
-        ref.current = node;
-      }
-    }, [ref]);
+    const combinedRef = useCallback(
+      (node: HTMLInputElement | null) => {
+        if (inputRef.current) {
+          inputRef.current = node;
+        }
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      },
+      [ref]
+    );
 
     return (
       <div className={cn(numberInputVariants({ size }), className)}>
@@ -296,25 +318,35 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
             )}
             {...props}
           />
-          
+
           {showButtons && (
             <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex flex-col gap-1">
               <button
                 ref={incrementRef}
                 type="button"
                 onClick={handleIncrement}
-                disabled={disabled || (max !== undefined && internalValue !== undefined && internalValue >= max)}
+                disabled={
+                  disabled ||
+                  (max !== undefined &&
+                    internalValue !== undefined &&
+                    internalValue >= max)
+                }
                 className={cn(buttonVariants({ size }))}
                 aria-label="Increment"
               >
                 <Plus className="w-3 h-3" />
               </button>
-              
+
               <button
                 ref={decrementRef}
                 type="button"
                 onClick={handleDecrement}
-                disabled={disabled || (min !== undefined && internalValue !== undefined && internalValue <= min)}
+                disabled={
+                  disabled ||
+                  (min !== undefined &&
+                    internalValue !== undefined &&
+                    internalValue <= min)
+                }
                 className={cn(buttonVariants({ size }))}
                 aria-label="Decrement"
               >

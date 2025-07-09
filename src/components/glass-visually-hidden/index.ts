@@ -1,1 +1,4 @@
-export { GlassVisuallyHidden, type GlassVisuallyHiddenProps } from './glass-visually-hidden';
+export {
+  GlassVisuallyHidden,
+  type GlassVisuallyHiddenProps,
+} from './glass-visually-hidden';

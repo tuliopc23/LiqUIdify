@@ -87,13 +87,14 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
     ref
   ) => {
     // Truncate items if maxItems is specified
-    const displayItems = maxItems && items.length > maxItems
-      ? [
-          ...items.slice(0, 1),
-          { label: '...', href: undefined, onClick: undefined },
-          ...items.slice(-(maxItems - 2))
-        ]
-      : items;
+    const displayItems =
+      maxItems && items.length > maxItems
+        ? [
+            ...items.slice(0, 1),
+            { label: '...', href: undefined, onClick: undefined },
+            ...items.slice(-(maxItems - 2)),
+          ]
+        : items;
 
     const handleItemClick = (item: BreadcrumbItem, index: number) => {
       if (item.onClick) {
@@ -120,7 +121,10 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
                   whileTap={{ scale: 0.95 }}
                   onClick={onHomeClick}
                   className={cn(
-                    breadcrumbItemVariants({ isActive: false, isClickable: true })
+                    breadcrumbItemVariants({
+                      isActive: false,
+                      isClickable: true,
+                    })
                   )}
                   aria-label="Home"
                 >
@@ -128,16 +132,15 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
                 </motion.button>
               </li>
               {displayItems.length > 0 && (
-                <li className="flex items-center">
-                  {separator}
-                </li>
+                <li className="flex items-center">{separator}</li>
               )}
             </>
           )}
 
           {displayItems.map((item, index) => {
             const isLast = index === displayItems.length - 1;
-            const isClickable = !isLast && (item.href || item.onClick) && item.label !== '...';
+            const isClickable =
+              !isLast && (item.href || item.onClick) && item.label !== '...';
 
             return (
               <React.Fragment key={index}>
@@ -155,9 +158,7 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
                       )}
                       aria-current={isLast ? 'page' : undefined}
                     >
-                      {item.icon && (
-                        <span className="mr-1.5">{item.icon}</span>
-                      )}
+                      {item.icon && <span className="mr-1.5">{item.icon}</span>}
                       {item.label}
                     </motion.button>
                   ) : (
@@ -170,19 +171,13 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
                       )}
                       aria-current={isLast ? 'page' : undefined}
                     >
-                      {item.icon && (
-                        <span className="mr-1.5">{item.icon}</span>
-                      )}
+                      {item.icon && <span className="mr-1.5">{item.icon}</span>}
                       {item.label}
                     </span>
                   )}
                 </li>
 
-                {!isLast && (
-                  <li className="flex items-center">
-                    {separator}
-                  </li>
-                )}
+                {!isLast && <li className="flex items-center">{separator}</li>}
               </React.Fragment>
             );
           })}

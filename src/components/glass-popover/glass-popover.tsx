@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { cn, getGlassClass } from "@/lib/glass-utils";
+import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { cn, getGlassClass } from '@/lib/glass-utils';
 
 export interface GlassPopoverProps {
   trigger: React.ReactNode;
   content: React.ReactNode;
-  position?: "top" | "bottom" | "left" | "right";
-  align?: "start" | "center" | "end";
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  align?: 'start' | 'center' | 'end';
   className?: string;
   contentClassName?: string;
   open?: boolean;
@@ -18,14 +18,14 @@ export interface GlassPopoverProps {
 export const GlassPopover: React.FC<GlassPopoverProps> = ({
   trigger,
   content,
-  position = "bottom",
-  align = "center",
+  position = 'bottom',
+  align = 'center',
   className,
   contentClassName,
   open: controlledOpen,
   onOpenChange,
   closeOnClickOutside = true,
-  closeOnEscape = true
+  closeOnEscape = true,
 }) => {
   const [internalOpen, setInternalOpen] = useState(false);
   const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({});
@@ -33,7 +33,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
   const popoverRef = useRef<HTMLDivElement>(null);
 
   const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
-  
+
   const setOpen = (open: boolean) => {
     if (onOpenChange) {
       onOpenChange(open);
@@ -50,64 +50,68 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     if (isOpen && triggerRef.current && popoverRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const popoverRect = popoverRef.current.getBoundingClientRect();
-      
+
       let top = 0;
       let left = 0;
 
       // Calculate position
       switch (position) {
-        case "top":
+        case 'top':
           top = triggerRect.top - popoverRect.height - 8;
           switch (align) {
-            case "start":
+            case 'start':
               left = triggerRect.left;
               break;
-            case "center":
-              left = triggerRect.left + (triggerRect.width - popoverRect.width) / 2;
+            case 'center':
+              left =
+                triggerRect.left + (triggerRect.width - popoverRect.width) / 2;
               break;
-            case "end":
+            case 'end':
               left = triggerRect.right - popoverRect.width;
               break;
           }
           break;
-        case "bottom":
+        case 'bottom':
           top = triggerRect.bottom + 8;
           switch (align) {
-            case "start":
+            case 'start':
               left = triggerRect.left;
               break;
-            case "center":
-              left = triggerRect.left + (triggerRect.width - popoverRect.width) / 2;
+            case 'center':
+              left =
+                triggerRect.left + (triggerRect.width - popoverRect.width) / 2;
               break;
-            case "end":
+            case 'end':
               left = triggerRect.right - popoverRect.width;
               break;
           }
           break;
-        case "left":
+        case 'left':
           left = triggerRect.left - popoverRect.width - 8;
           switch (align) {
-            case "start":
+            case 'start':
               top = triggerRect.top;
               break;
-            case "center":
-              top = triggerRect.top + (triggerRect.height - popoverRect.height) / 2;
+            case 'center':
+              top =
+                triggerRect.top + (triggerRect.height - popoverRect.height) / 2;
               break;
-            case "end":
+            case 'end':
               top = triggerRect.bottom - popoverRect.height;
               break;
           }
           break;
-        case "right":
+        case 'right':
           left = triggerRect.right + 8;
           switch (align) {
-            case "start":
+            case 'start':
               top = triggerRect.top;
               break;
-            case "center":
-              top = triggerRect.top + (triggerRect.height - popoverRect.height) / 2;
+            case 'center':
+              top =
+                triggerRect.top + (triggerRect.height - popoverRect.height) / 2;
               break;
-            case "end":
+            case 'end':
               top = triggerRect.bottom - popoverRect.height;
               break;
           }
@@ -117,7 +121,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
       // Keep popover within viewport
       const viewport = {
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
       };
 
       if (left < 8) left = 8;
@@ -130,10 +134,10 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
       }
 
       setPopoverStyle({
-        position: "fixed",
+        position: 'fixed',
         top: `${top}px`,
         left: `${left}px`,
-        zIndex: 9999
+        zIndex: 9999,
       });
     }
   }, [isOpen, position, align]);
@@ -153,18 +157,18 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     };
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (closeOnEscape && isOpen && event.key === "Escape") {
+      if (closeOnEscape && isOpen && event.key === 'Escape') {
         setOpen(false);
       }
     };
 
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("keydown", handleEscape);
-      
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscape);
+
       return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-        document.removeEventListener("keydown", handleEscape);
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('keydown', handleEscape);
       };
     }
   }, [isOpen, closeOnClickOutside, closeOnEscape]);
@@ -174,12 +178,12 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
       ref={popoverRef}
       style={popoverStyle}
       className={cn(
-        getGlassClass("elevated"),
-        "p-4 rounded-xl",
-        "border border-white/20 dark:border-white/10",
-        "shadow-lg shadow-black/10 dark:shadow-black/30",
-        "animate-in fade-in-0 zoom-in-95 duration-200",
-        "max-w-sm",
+        getGlassClass('elevated'),
+        'p-4 rounded-xl',
+        'border border-white/20 dark:border-white/10',
+        'shadow-lg shadow-black/10 dark:shadow-black/30',
+        'animate-in fade-in-0 zoom-in-95 duration-200',
+        'max-w-sm',
         contentClassName
       )}
     >
@@ -192,14 +196,14 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
       <div
         ref={triggerRef}
         onClick={toggleOpen}
-        className={cn("inline-block cursor-pointer", className)}
+        className={cn('inline-block cursor-pointer', className)}
       >
         {trigger}
       </div>
-      
+
       {popover && createPortal(popover, document.body)}
     </>
   );
 };
 
-GlassPopover.displayName = "GlassPopover";
+GlassPopover.displayName = 'GlassPopover';

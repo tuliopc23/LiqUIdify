@@ -1,1 +1,4 @@
-export { default as CheckboxGroup, type CheckboxGroupProps } from './glass-checkbox-group';
+export {
+  default as CheckboxGroup,
+  type CheckboxGroupProps,
+} from './glass-checkbox-group';

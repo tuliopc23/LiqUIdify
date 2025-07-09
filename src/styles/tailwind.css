@@ -1,9 +1,9 @@
 /* Apple Liquid Glass Design System - Tailwind v4 Compatible */
-@import "tailwindcss";
-@import "./tailwind-v4-config.css";
-@import "./apple-liquid-authentic.css";
-@import "./apple-liquid-glass.css";
-@import "./glass.css";
+@import 'tailwindcss';
+@import './tailwind-v4-config.css';
+@import './apple-liquid-authentic.css';
+@import './apple-liquid-glass.css';
+@import './glass.css';
 
 /* Apple-inspired Liquid Glass Design Tokens (Post-WWDC 2025) */
 :root {
@@ -14,45 +14,49 @@
   --system-gray: hsl(240, 6%, 90%);
   --system-gray-light: hsl(240, 6%, 95%);
   --system-gray-dark: hsl(240, 6%, 20%);
-  
+
   /* Liquid Glass Material Properties */
   --liquid-glass-primary: rgba(255, 255, 255, 0.15);
   --liquid-glass-secondary: rgba(255, 255, 255, 0.12);
-  --liquid-glass-tertiary: rgba(255, 255, 255, 0.10);
-  --liquid-glass-elevated: rgba(255, 255, 255, 0.20);
+  --liquid-glass-tertiary: rgba(255, 255, 255, 0.1);
+  --liquid-glass-elevated: rgba(255, 255, 255, 0.2);
   --liquid-glass-floating: rgba(255, 255, 255, 0.25);
-  --liquid-glass-overlay: rgba(255, 255, 255, 0.30);
-  
+  --liquid-glass-overlay: rgba(255, 255, 255, 0.3);
+
   /* Adaptive Material States */
   --liquid-hover: rgba(255, 255, 255, 0.1);
   --liquid-pressed: rgba(255, 255, 255, 0.06);
   --liquid-focused: rgba(0, 122, 255, 0.08);
   --liquid-selected: rgba(0, 122, 255, 0.12);
   --liquid-disabled: rgba(255, 255, 255, 0.02);
-  
+
   /* Liquid Glass Borders */
   --liquid-border-thin: rgba(255, 255, 255, 0.06);
   --liquid-border-medium: rgba(255, 255, 255, 0.12);
   --liquid-border-thick: rgba(255, 255, 255, 0.18);
   --liquid-border-focus: rgba(0, 122, 255, 0.25);
-  
+
   /* Advanced Backdrop Filtering */
   --liquid-blur-ultra-thin: blur(1px) saturate(180%);
   --liquid-blur-thin: blur(4px) saturate(180%);
   --liquid-blur-regular: blur(12px) saturate(180%);
   --liquid-blur-thick: blur(20px) saturate(200%);
   --liquid-blur-ultra-thick: blur(40px) saturate(220%);
-  
+
   /* Vibrancy Effects */
   --vibrancy-primary: brightness(110%) contrast(105%) saturate(150%);
   --vibrancy-secondary: brightness(105%) contrast(102%) saturate(130%);
   --vibrancy-tertiary: brightness(102%) contrast(100%) saturate(120%);
-  
+
   /* Typography Scale (Apple SF Pro) */
-  --text-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
-  --text-system-mono: "SF Mono", Monaco, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
-  --text-system-serif: "New York", "Times New Roman", Times, serif;
-  
+  --text-system:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    system-ui, sans-serif;
+  --text-system-mono:
+    'SF Mono', Monaco, Menlo, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  --text-system-serif: 'New York', 'Times New Roman', Times, serif;
+
   /* Dynamic Type Scale */
   --text-caption2: 11px;
   --text-caption1: 12px;
@@ -65,11 +69,11 @@
   --text-title2: 22px;
   --text-title1: 28px;
   --text-large-title: 34px;
-  
+
   /* Spacing System (Apple 8pt Grid) */
-  --space-1: 2px;  /* 0.25 × 8pt */
-  --space-2: 4px;  /* 0.5 × 8pt */
-  --space-3: 8px;  /* 1 × 8pt */
+  --space-1: 2px; /* 0.25 × 8pt */
+  --space-2: 4px; /* 0.5 × 8pt */
+  --space-3: 8px; /* 1 × 8pt */
   --space-4: 12px; /* 1.5 × 8pt */
   --space-5: 16px; /* 2 × 8pt */
   --space-6: 20px; /* 2.5 × 8pt */
@@ -78,21 +82,24 @@
   --space-9: 40px; /* 5 × 8pt */
   --space-10: 48px; /* 6 × 8pt */
   --space-12: 64px; /* 8 × 8pt */
-  
+
   /* Apple Corner Radius System */
   --radius-system-small: 6px;
   --radius-system-medium: 10px;
   --radius-system-large: 14px;
   --radius-system-extra-large: 20px;
   --radius-system-continuous: 16px; /* Apple's continuous corner radius */
-  
+
   /* Material Elevation Shadows */
   --shadow-level-1: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
   --shadow-level-2: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-  --shadow-level-3: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-level-4: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-  --shadow-level-5: 0 25px 50px rgba(0, 0, 0, 0.15), 0 12px 20px rgba(0, 0, 0, 0.08);
-  
+  --shadow-level-3:
+    0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-level-4:
+    0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-level-5:
+    0 25px 50px rgba(0, 0, 0, 0.15), 0 12px 20px rgba(0, 0, 0, 0.08);
+
   /* Motion & Timing */
   --timing-instant: 0ms;
   --timing-immediate: 100ms;
@@ -100,13 +107,13 @@
   --timing-moderate: 400ms;
   --timing-deliberate: 600ms;
   --timing-slow: 1000ms;
-  
+
   /* Apple Spring Curves */
   --spring-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --spring-moderate: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  --spring-moderate: cubic-bezier(0.4, 0, 0.2, 1);
   --spring-snappy: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --spring-bouncy: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  
+
   /* Content Adaptation */
   --content-light: rgba(0, 0, 0, 0.85);
   --content-medium: rgba(0, 0, 0, 0.6);
@@ -115,7 +122,8 @@
 }
 
 /* Dark Mode Adaptations (Apple Style) */
-[data-theme="dark"], .dark {
+[data-theme='dark'],
+.dark {
   /* System Colors - Dark */
   --system-blue: hsl(211, 100%, 64%);
   --system-blue-light: hsl(211, 100%, 74%);
@@ -123,7 +131,7 @@
   --system-gray: hsl(240, 6%, 25%);
   --system-gray-light: hsl(240, 6%, 35%);
   --system-gray-dark: hsl(240, 6%, 15%);
-  
+
   /* Dark Liquid Glass Materials */
   --liquid-glass-primary: rgba(255, 255, 255, 0.04);
   --liquid-glass-secondary: rgba(255, 255, 255, 0.02);
@@ -131,25 +139,25 @@
   --liquid-glass-elevated: rgba(255, 255, 255, 0.08);
   --liquid-glass-floating: rgba(255, 255, 255, 0.12);
   --liquid-glass-overlay: rgba(255, 255, 255, 0.16);
-  
+
   /* Dark Material States */
   --liquid-hover: rgba(255, 255, 255, 0.06);
   --liquid-pressed: rgba(255, 255, 255, 0.03);
   --liquid-focused: rgba(64, 156, 255, 0.12);
   --liquid-selected: rgba(64, 156, 255, 0.16);
   --liquid-disabled: rgba(255, 255, 255, 0.01);
-  
+
   /* Dark Borders */
   --liquid-border-thin: rgba(255, 255, 255, 0.04);
   --liquid-border-medium: rgba(255, 255, 255, 0.08);
   --liquid-border-thick: rgba(255, 255, 255, 0.12);
   --liquid-border-focus: rgba(64, 156, 255, 0.3);
-  
+
   /* Enhanced Dark Vibrancy */
   --vibrancy-primary: brightness(120%) contrast(110%) saturate(160%);
   --vibrancy-secondary: brightness(115%) contrast(105%) saturate(140%);
   --vibrancy-tertiary: brightness(110%) contrast(102%) saturate(130%);
-  
+
   /* Dark Content Colors */
   --content-light: rgba(255, 255, 255, 0.95);
   --content-medium: rgba(255, 255, 255, 0.7);
@@ -187,7 +195,8 @@
 .liquid-glass-floating {
   background: var(--liquid-glass-floating);
   backdrop-filter: var(--liquid-blur-ultra-thick) var(--vibrancy-primary);
-  -webkit-backdrop-filter: var(--liquid-blur-ultra-thick) var(--vibrancy-primary);
+  -webkit-backdrop-filter: var(--liquid-blur-ultra-thick)
+    var(--vibrancy-primary);
   border: 1px solid var(--liquid-border-thick);
   border-radius: var(--radius-system-extra-large);
   box-shadow: var(--shadow-level-4);
@@ -244,42 +253,94 @@
 
 .liquid-vibrancy-strong {
   backdrop-filter: var(--liquid-blur-ultra-thick) var(--vibrancy-primary);
-  -webkit-backdrop-filter: var(--liquid-blur-ultra-thick) var(--vibrancy-primary);
+  -webkit-backdrop-filter: var(--liquid-blur-ultra-thick)
+    var(--vibrancy-primary);
 }
 
 /* Apple Typography Utilities */
 .text-system {
   font-family: var(--text-system);
-  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  font-feature-settings:
+    'kern' 1,
+    'liga' 1,
+    'calt' 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .text-system-mono {
   font-family: var(--text-system-mono);
-  font-feature-settings: 'kern' 1, 'liga' 0;
+  font-feature-settings:
+    'kern' 1,
+    'liga' 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Dynamic Type Scale */
-.text-caption2 { font-size: var(--text-caption2); line-height: 1.3; }
-.text-caption1 { font-size: var(--text-caption1); line-height: 1.3; }
-.text-footnote { font-size: var(--text-footnote); line-height: 1.4; }
-.text-subheadline { font-size: var(--text-subheadline); line-height: 1.4; }
-.text-callout { font-size: var(--text-callout); line-height: 1.4; }
-.text-body { font-size: var(--text-body); line-height: 1.5; }
-.text-headline { font-size: var(--text-headline); line-height: 1.3; font-weight: 600; }
-.text-title3 { font-size: var(--text-title3); line-height: 1.25; font-weight: 600; }
-.text-title2 { font-size: var(--text-title2); line-height: 1.25; font-weight: 700; }
-.text-title1 { font-size: var(--text-title1); line-height: 1.2; font-weight: 700; }
-.text-large-title { font-size: var(--text-large-title); line-height: 1.1; font-weight: 800; }
+.text-caption2 {
+  font-size: var(--text-caption2);
+  line-height: 1.3;
+}
+.text-caption1 {
+  font-size: var(--text-caption1);
+  line-height: 1.3;
+}
+.text-footnote {
+  font-size: var(--text-footnote);
+  line-height: 1.4;
+}
+.text-subheadline {
+  font-size: var(--text-subheadline);
+  line-height: 1.4;
+}
+.text-callout {
+  font-size: var(--text-callout);
+  line-height: 1.4;
+}
+.text-body {
+  font-size: var(--text-body);
+  line-height: 1.5;
+}
+.text-headline {
+  font-size: var(--text-headline);
+  line-height: 1.3;
+  font-weight: 600;
+}
+.text-title3 {
+  font-size: var(--text-title3);
+  line-height: 1.25;
+  font-weight: 600;
+}
+.text-title2 {
+  font-size: var(--text-title2);
+  line-height: 1.25;
+  font-weight: 700;
+}
+.text-title1 {
+  font-size: var(--text-title1);
+  line-height: 1.2;
+  font-weight: 700;
+}
+.text-large-title {
+  font-size: var(--text-large-title);
+  line-height: 1.1;
+  font-weight: 800;
+}
 
 /* Content Hierarchy */
-.content-primary { color: var(--content-light); }
-.content-secondary { color: var(--content-medium); }
-.content-tertiary { color: var(--content-tertiary); }
-.content-quaternary { color: var(--content-quaternary); }
+.content-primary {
+  color: var(--content-light);
+}
+.content-secondary {
+  color: var(--content-medium);
+}
+.content-tertiary {
+  color: var(--content-tertiary);
+}
+.content-quaternary {
+  color: var(--content-quaternary);
+}
 
 /* Apple-style Button Components */
 .btn-system-primary {
@@ -380,28 +441,64 @@
 }
 
 /* Apple-style System Spacing Utilities */
-.space-system-1 { padding: var(--space-1); }
-.space-system-2 { padding: var(--space-2); }
-.space-system-3 { padding: var(--space-3); }
-.space-system-4 { padding: var(--space-4); }
-.space-system-5 { padding: var(--space-5); }
-.space-system-6 { padding: var(--space-6); }
-.space-system-7 { padding: var(--space-7); }
-.space-system-8 { padding: var(--space-8); }
+.space-system-1 {
+  padding: var(--space-1);
+}
+.space-system-2 {
+  padding: var(--space-2);
+}
+.space-system-3 {
+  padding: var(--space-3);
+}
+.space-system-4 {
+  padding: var(--space-4);
+}
+.space-system-5 {
+  padding: var(--space-5);
+}
+.space-system-6 {
+  padding: var(--space-6);
+}
+.space-system-7 {
+  padding: var(--space-7);
+}
+.space-system-8 {
+  padding: var(--space-8);
+}
 
 /* Apple Corner Radius Utilities */
-.rounded-system-small { border-radius: var(--radius-system-small); }
-.rounded-system-medium { border-radius: var(--radius-system-medium); }
-.rounded-system-large { border-radius: var(--radius-system-large); }
-.rounded-system-xl { border-radius: var(--radius-system-extra-large); }
-.rounded-system-continuous { border-radius: var(--radius-system-continuous); }
+.rounded-system-small {
+  border-radius: var(--radius-system-small);
+}
+.rounded-system-medium {
+  border-radius: var(--radius-system-medium);
+}
+.rounded-system-large {
+  border-radius: var(--radius-system-large);
+}
+.rounded-system-xl {
+  border-radius: var(--radius-system-extra-large);
+}
+.rounded-system-continuous {
+  border-radius: var(--radius-system-continuous);
+}
 
 /* Material Elevation Utilities */
-.shadow-system-1 { box-shadow: var(--shadow-level-1); }
-.shadow-system-2 { box-shadow: var(--shadow-level-2); }
-.shadow-system-3 { box-shadow: var(--shadow-level-3); }
-.shadow-system-4 { box-shadow: var(--shadow-level-4); }
-.shadow-system-5 { box-shadow: var(--shadow-level-5); }
+.shadow-system-1 {
+  box-shadow: var(--shadow-level-1);
+}
+.shadow-system-2 {
+  box-shadow: var(--shadow-level-2);
+}
+.shadow-system-3 {
+  box-shadow: var(--shadow-level-3);
+}
+.shadow-system-4 {
+  box-shadow: var(--shadow-level-4);
+}
+.shadow-system-5 {
+  box-shadow: var(--shadow-level-5);
+}
 
 /* Apple Spring Animation Classes (for GSAP) */
 .spring-gentle {
@@ -421,12 +518,24 @@
 }
 
 /* Apple Timing Classes (for GSAP reference) */
-.timing-instant { /* 0ms - immediate */ }
-.timing-immediate { /* 100ms - quick feedback */ }
-.timing-quick { /* 200ms - button presses */ }
-.timing-moderate { /* 400ms - state changes */ }
-.timing-deliberate { /* 600ms - significant changes */ }
-.timing-slow { /* 1000ms - major transitions */ }
+.timing-instant {
+  /* 0ms - immediate */
+}
+.timing-immediate {
+  /* 100ms - quick feedback */
+}
+.timing-quick {
+  /* 200ms - button presses */
+}
+.timing-moderate {
+  /* 400ms - state changes */
+}
+.timing-deliberate {
+  /* 600ms - significant changes */
+}
+.timing-slow {
+  /* 1000ms - major transitions */
+}
 
 /* Apple Liquid Glass Utilities - Enhanced */
 .bg-apple-liquid-subtle {
@@ -465,19 +574,25 @@
 }
 
 .border-apple-liquid-strong {
-  border: 1px solid rgba(255, 255, 255, 1.0);
+  border: 1px solid rgba(255, 255, 255, 1);
 }
 
 .shadow-apple-liquid-subtle {
-  box-shadow: 0 10px 30px rgba(31, 38, 135, 0.2), inset 0 5px 20px rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 10px 30px rgba(31, 38, 135, 0.2),
+    inset 0 5px 20px rgba(255, 255, 255, 0.35);
 }
 
 .shadow-apple-liquid-medium {
-  box-shadow: 0 15px 50px rgba(31, 38, 135, 0.3), inset 0 8px 30px rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 15px 50px rgba(31, 38, 135, 0.3),
+    inset 0 8px 30px rgba(255, 255, 255, 0.45);
 }
 
 .shadow-apple-liquid-strong {
-  box-shadow: 0 25px 70px rgba(31, 38, 135, 0.4), inset 0 12px 50px rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 25px 70px rgba(31, 38, 135, 0.4),
+    inset 0 12px 50px rgba(255, 255, 255, 0.55);
 }
 
 .rounded-apple-liquid-subtle {
@@ -506,34 +621,42 @@
 }
 
 .bg-apple-liquid-gradient {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.15));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.15)
+  );
 }
 
 .bg-apple-liquid-gradient-strong {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.25));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.25)
+  );
 }
 
 /* Enhanced Depth Utilities */
 .shadow-apple-liquid-depth-1 {
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(31, 38, 135, 0.15),
     inset 0 2px 8px rgba(255, 255, 255, 0.25);
 }
 
 .shadow-apple-liquid-depth-2 {
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(31, 38, 135, 0.2),
     inset 0 4px 16px rgba(255, 255, 255, 0.35);
 }
 
 .shadow-apple-liquid-depth-3 {
-  box-shadow: 
+  box-shadow:
     0 16px 48px rgba(31, 38, 135, 0.25),
     inset 0 8px 32px rgba(255, 255, 255, 0.45);
 }
 
 .shadow-apple-liquid-depth-4 {
-  box-shadow: 
+  box-shadow:
     0 24px 72px rgba(31, 38, 135, 0.3),
     inset 0 12px 48px rgba(255, 255, 255, 0.55);
 }
@@ -545,7 +668,9 @@
   -webkit-backdrop-filter: blur(15px) saturate(165%);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(31, 38, 135, 0.2), inset 0 5px 20px rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 10px 30px rgba(31, 38, 135, 0.2),
+    inset 0 5px 20px rgba(255, 255, 255, 0.35);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -555,7 +680,9 @@
   -webkit-backdrop-filter: blur(25px) saturate(195%);
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 32px;
-  box-shadow: 0 15px 50px rgba(31, 38, 135, 0.3), inset 0 8px 30px rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 15px 50px rgba(31, 38, 135, 0.3),
+    inset 0 8px 30px rgba(255, 255, 255, 0.45);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -563,30 +690,32 @@
   background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(35px) saturate(230%);
   -webkit-backdrop-filter: blur(35px) saturate(230%);
-  border: 1px solid rgba(255, 255, 255, 1.0);
+  border: 1px solid rgba(255, 255, 255, 1);
   border-radius: 40px;
-  box-shadow: 0 25px 70px rgba(31, 38, 135, 0.4), inset 0 12px 50px rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 25px 70px rgba(31, 38, 135, 0.4),
+    inset 0 12px 50px rgba(255, 255, 255, 0.55);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Interactive State Utilities */
 .glass-apple-liquid-hover:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 
-    0 16px 50px rgba(31, 38, 135, 0.35), 
+  box-shadow:
+    0 16px 50px rgba(31, 38, 135, 0.35),
     0 0 80px rgba(255, 255, 255, 0.12);
 }
 
 .glass-apple-liquid-active:active {
   transform: translateY(0px) scale(0.98);
-  box-shadow: 
-    0 6px 20px rgba(31, 38, 135, 0.2), 
+  box-shadow:
+    0 6px 20px rgba(31, 38, 135, 0.2),
     0 0 30px rgba(255, 255, 255, 0.08);
 }
 
 .glass-apple-liquid-focus:focus-visible {
   outline: none;
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.25),
     0 0 40px rgba(255, 255, 255, 0.1),
     0 0 0 3px rgba(0, 122, 255, 0.4);
@@ -613,96 +742,108 @@
 }
 
 /* Dark Mode Adaptations */
-[data-theme="dark"] .bg-apple-liquid-subtle,
+[data-theme='dark'] .bg-apple-liquid-subtle,
 .dark .bg-apple-liquid-subtle {
   background-color: rgba(255, 255, 255, 0.03);
 }
 
-[data-theme="dark"] .bg-apple-liquid-medium,
+[data-theme='dark'] .bg-apple-liquid-medium,
 .dark .bg-apple-liquid-medium {
   background-color: rgba(255, 255, 255, 0.06);
 }
 
-[data-theme="dark"] .bg-apple-liquid-strong,
+[data-theme='dark'] .bg-apple-liquid-strong,
 .dark .bg-apple-liquid-strong {
   background-color: rgba(255, 255, 255, 0.12);
 }
 
-[data-theme="dark"] .border-apple-liquid-subtle,
+[data-theme='dark'] .border-apple-liquid-subtle,
 .dark .border-apple-liquid-subtle {
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-[data-theme="dark"] .border-apple-liquid-medium,
+[data-theme='dark'] .border-apple-liquid-medium,
 .dark .border-apple-liquid-medium {
   border-color: rgba(255, 255, 255, 0.15);
 }
 
-[data-theme="dark"] .border-apple-liquid-strong,
+[data-theme='dark'] .border-apple-liquid-strong,
 .dark .border-apple-liquid-strong {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-[data-theme="dark"] .shadow-apple-liquid-subtle,
+[data-theme='dark'] .shadow-apple-liquid-subtle,
 .dark .shadow-apple-liquid-subtle {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 3px 15px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 3px 15px rgba(255, 255, 255, 0.08);
 }
 
-[data-theme="dark"] .shadow-apple-liquid-medium,
+[data-theme='dark'] .shadow-apple-liquid-medium,
 .dark .shadow-apple-liquid-medium {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 6px 25px rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 6px 25px rgba(255, 255, 255, 0.12);
 }
 
-[data-theme="dark"] .shadow-apple-liquid-strong,
+[data-theme='dark'] .shadow-apple-liquid-strong,
 .dark .shadow-apple-liquid-strong {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 10px 40px rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 10px 40px rgba(255, 255, 255, 0.18);
 }
 
-[data-theme="dark"] .shadow-apple-liquid-depth-1,
+[data-theme='dark'] .shadow-apple-liquid-depth-1,
 .dark .shadow-apple-liquid-depth-1 {
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.35),
     inset 0 2px 8px rgba(255, 255, 255, 0.06);
 }
 
-[data-theme="dark"] .shadow-apple-liquid-depth-2,
+[data-theme='dark'] .shadow-apple-liquid-depth-2,
 .dark .shadow-apple-liquid-depth-2 {
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.4),
     inset 0 4px 16px rgba(255, 255, 255, 0.08);
 }
 
-[data-theme="dark"] .shadow-apple-liquid-depth-3,
+[data-theme='dark'] .shadow-apple-liquid-depth-3,
 .dark .shadow-apple-liquid-depth-3 {
-  box-shadow: 
+  box-shadow:
     0 16px 48px rgba(0, 0, 0, 0.5),
     inset 0 8px 32px rgba(255, 255, 255, 0.12);
 }
 
-[data-theme="dark"] .shadow-apple-liquid-depth-4,
+[data-theme='dark'] .shadow-apple-liquid-depth-4,
 .dark .shadow-apple-liquid-depth-4 {
-  box-shadow: 
+  box-shadow:
     0 24px 72px rgba(0, 0, 0, 0.6),
     inset 0 12px 48px rgba(255, 255, 255, 0.18);
 }
 
-[data-theme="dark"] .glass-apple-liquid-subtle,
+[data-theme='dark'] .glass-apple-liquid-subtle,
 .dark .glass-apple-liquid-subtle {
   background-color: rgba(255, 255, 255, 0.03);
   border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 3px 15px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    inset 0 3px 15px rgba(255, 255, 255, 0.08);
 }
 
-[data-theme="dark"] .glass-apple-liquid-medium,
+[data-theme='dark'] .glass-apple-liquid-medium,
 .dark .glass-apple-liquid-medium {
   background-color: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 6px 25px rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 6px 25px rgba(255, 255, 255, 0.12);
 }
 
-[data-theme="dark"] .glass-apple-liquid-strong,
+[data-theme='dark'] .glass-apple-liquid-strong,
 .dark .glass-apple-liquid-strong {
   background-color: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 10px 40px rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 10px 40px rgba(255, 255, 255, 0.18);
 }

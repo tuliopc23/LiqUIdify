@@ -99,8 +99,14 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       }
 
       // Calculate start and end of sibling range
-      const siblingStart = Math.max(currentPage - siblingCount, boundaryCount + 1);
-      const siblingEnd = Math.min(currentPage + siblingCount, totalPages - boundaryCount);
+      const siblingStart = Math.max(
+        currentPage - siblingCount,
+        boundaryCount + 1
+      );
+      const siblingEnd = Math.min(
+        currentPage + siblingCount,
+        totalPages - boundaryCount
+      );
 
       // Add ellipsis before siblings if needed
       if (siblingStart > boundaryCount + 1) {
@@ -119,7 +125,11 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       }
 
       // Always include last page(s)
-      for (let i = Math.max(totalPages - boundaryCount + 1, boundaryCount + 1); i <= totalPages; i++) {
+      for (
+        let i = Math.max(totalPages - boundaryCount + 1, boundaryCount + 1);
+        i <= totalPages;
+        i++
+      ) {
         if (!pages.includes(i)) {
           pages.push(i);
         }
@@ -143,7 +153,13 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       disabled?: boolean;
       children: React.ReactNode;
       'aria-label'?: string;
-    }> = ({ page, isActive = false, disabled: buttonDisabled = false, children, 'aria-label': ariaLabel }) => (
+    }> = ({
+      page,
+      isActive = false,
+      disabled: buttonDisabled = false,
+      children,
+      'aria-label': ariaLabel,
+    }) => (
       <motion.button
         whileHover={!buttonDisabled && !disabled ? { scale: 1.05 } : {}}
         whileTap={!buttonDisabled && !disabled ? { scale: 0.95 } : {}}

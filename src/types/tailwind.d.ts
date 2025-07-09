@@ -31,7 +31,7 @@ declare module 'csstype' {
     '--glass-bg-active'?: string;
     '--glass-bg-focus'?: string;
     '--glass-bg-pressed'?: string;
-    
+
     // Glass Border Variables
     '--glass-border-subtle'?: string;
     '--glass-border-light'?: string;
@@ -39,11 +39,11 @@ declare module 'csstype' {
     '--glass-border-strong'?: string;
     '--glass-border-focus'?: string;
     '--glass-border-hover'?: string;
-    
+
     // Text Color Variables
     '--text-primary'?: string;
     '--text-secondary'?: string;
-    
+
     // Semantic Color Variables
     '--primary'?: string;
     '--primary-foreground'?: string;
@@ -55,7 +55,7 @@ declare module 'csstype' {
     '--input'?: string;
     '--ring'?: string;
     '--radius'?: string;
-    
+
     // Apple System Variables
     '--liquid-glass-primary'?: string;
     '--liquid-glass-secondary'?: string;
@@ -63,14 +63,14 @@ declare module 'csstype' {
     '--liquid-glass-elevated'?: string;
     '--liquid-glass-floating'?: string;
     '--liquid-glass-overlay'?: string;
-    
+
     // Animation Variables
     '--glass-timing-instant'?: string;
     '--glass-timing-fast'?: string;
     '--glass-timing-normal'?: string;
     '--glass-timing-smooth'?: string;
     '--glass-timing-slow'?: string;
-    
+
     // Easing Variables
     '--glass-ease-glass'?: string;
     '--glass-ease-liquid'?: string;
@@ -94,19 +94,19 @@ declare global {
       '--glass-blur-intense'?: string;
       '--glass-blur-extreme'?: string;
       '--glass-blur-ultra'?: string;
-      
+
       // Vibrancy effects
       '--glass-saturation-muted'?: string;
       '--glass-saturation-normal'?: string;
       '--glass-saturation-enhanced'?: string;
       '--glass-saturation-vivid'?: string;
       '--glass-saturation-intense'?: string;
-      
+
       '--glass-brightness-dim'?: string;
       '--glass-brightness-normal'?: string;
       '--glass-brightness-bright'?: string;
       '--glass-brightness-brilliant'?: string;
-      
+
       '--glass-contrast-soft'?: string;
       '--glass-contrast-normal'?: string;
       '--glass-contrast-sharp'?: string;
@@ -116,70 +116,56 @@ declare global {
 }
 
 // Type-safe design token access
-export type GlassVariant = 
-  | 'primary' 
-  | 'secondary' 
-  | 'tertiary' 
-  | 'elevated' 
-  | 'floating' 
+export type GlassVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'elevated'
+  | 'floating'
   | 'overlay';
 
-export type GlassState = 
-  | 'hover' 
-  | 'active' 
-  | 'focus' 
-  | 'pressed';
+export type GlassState = 'hover' | 'active' | 'focus' | 'pressed';
 
-export type GlassBorder = 
-  | 'subtle' 
-  | 'light' 
-  | 'medium' 
-  | 'strong' 
-  | 'focus' 
+export type GlassBorder =
+  | 'subtle'
+  | 'light'
+  | 'medium'
+  | 'strong'
+  | 'focus'
   | 'hover';
 
-export type GlassBlur = 
-  | 'whisper' 
-  | 'ghost' 
-  | 'subtle' 
-  | 'light' 
-  | 'medium' 
-  | 'heavy' 
-  | 'intense' 
-  | 'extreme' 
+export type GlassBlur =
+  | 'whisper'
+  | 'ghost'
+  | 'subtle'
+  | 'light'
+  | 'medium'
+  | 'heavy'
+  | 'intense'
+  | 'extreme'
   | 'ultra';
 
-export type GlassTiming = 
-  | 'instant' 
-  | 'fast' 
-  | 'normal' 
-  | 'smooth' 
-  | 'slow';
+export type GlassTiming = 'instant' | 'fast' | 'normal' | 'smooth' | 'slow';
 
-export type GlassEasing = 
-  | 'glass' 
-  | 'liquid' 
-  | 'spring' 
-  | 'magnetic' 
-  | 'hover';
+export type GlassEasing = 'glass' | 'liquid' | 'spring' | 'magnetic' | 'hover';
 
 // Helper functions for type-safe CSS variable usage
 export const getCSSVar = (variable: string): string => `var(--${variable})`;
 
-export const getGlassBg = (variant: GlassVariant): string => 
+export const getGlassBg = (variant: GlassVariant): string =>
   `var(--glass-bg-${variant})`;
 
-export const getGlassBgState = (state: GlassState): string => 
+export const getGlassBgState = (state: GlassState): string =>
   `var(--glass-bg-${state})`;
 
-export const getGlassBorder = (variant: GlassBorder): string => 
+export const getGlassBorder = (variant: GlassBorder): string =>
   `var(--glass-border-${variant})`;
 
-export const getGlassBlur = (level: GlassBlur): string => 
+export const getGlassBlur = (level: GlassBlur): string =>
   `var(--glass-blur-${level})`;
 
-export const getGlassTiming = (speed: GlassTiming): string => 
+export const getGlassTiming = (speed: GlassTiming): string =>
   `var(--glass-timing-${speed})`;
 
-export const getGlassEasing = (type: GlassEasing): string => 
+export const getGlassEasing = (type: GlassEasing): string =>
   `var(--glass-ease-${type})`;

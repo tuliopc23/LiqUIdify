@@ -3,7 +3,11 @@ import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
 import { useMagneticHover, createGlassRipple } from '@/lib/glass-physics';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { useGlassEffectPerformance } from '@/hooks/use-performance-monitor';
-import { useAppleLiquidGlass, getAppleLiquidGlassClass, createGlassLayers } from '@/lib/apple-liquid-glass';
+import {
+  useAppleLiquidGlass,
+  getAppleLiquidGlassClass,
+  createGlassLayers,
+} from '@/lib/apple-liquid-glass';
 import { Slot } from '@radix-ui/react-slot';
 
 /**
@@ -12,7 +16,13 @@ import { Slot } from '@radix-ui/react-slot';
 export interface GlassButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Button variant style */
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'destructive' | 'apple';
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'tertiary'
+    | 'ghost'
+    | 'destructive'
+    | 'apple';
   /** Button size */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** Render as child component */
@@ -78,7 +88,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     const { magneticHover, specularHighlights } = useLiquidGlass();
     const { elementRef: magneticRef, transform } = useMagneticHover(0.3, 120);
     const { measureGlassInteraction } = useGlassEffectPerformance('Button');
-    
+
     // Apple liquid glass hook for apple variant
     const appleLiquidGlass = useAppleLiquidGlass({
       intensity,
@@ -105,9 +115,14 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
             node;
         }
         // Assign to Apple liquid glass ref if apple variant
-        if (variant === 'apple' && appleLiquidGlass.ref && 'current' in appleLiquidGlass.ref) {
-          (appleLiquidGlass.ref as React.MutableRefObject<HTMLElement | null>).current =
-            node;
+        if (
+          variant === 'apple' &&
+          appleLiquidGlass.ref &&
+          'current' in appleLiquidGlass.ref
+        ) {
+          (
+            appleLiquidGlass.ref as React.MutableRefObject<HTMLElement | null>
+          ).current = node;
         }
         // Assign to forwarded ref
         if (typeof ref === 'function') {
@@ -140,11 +155,17 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     };
 
     const baseClasses = cn(
-      variant === 'apple' ? '' : 'liquid-glass liquid-interactive font-medium rounded-xl relative overflow-hidden',
-      variant === 'apple' ? '' : 'focus:outline-none liquid-glass-focus liquid-glass-ripple', // Ensure liquid-glass-focus provides a visible focus ring
+      variant === 'apple'
+        ? ''
+        : 'liquid-glass liquid-interactive font-medium rounded-xl relative overflow-hidden',
+      variant === 'apple'
+        ? ''
+        : 'focus:outline-none liquid-glass-focus liquid-glass-ripple', // Ensure liquid-glass-focus provides a visible focus ring
       variant !== 'apple' && microInteraction.smooth,
       'disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none',
-      variant !== 'apple' && specularHighlights && 'liquid-glass-specular liquid-glass-shimmer',
+      variant !== 'apple' &&
+        specularHighlights &&
+        'liquid-glass-specular liquid-glass-shimmer',
       variant !== 'apple' && magneticHover && 'liquid-magnetic',
       isPressed && 'scale-[0.98] brightness-95',
       'rounded-xl' // Ensure consistent rounded corners
@@ -287,11 +308,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     if (variant === 'apple' && multiLayer) {
       return (
         <button
-          className={cn(
-            baseClasses,
-            variantClasses[variant],
-            className
-          )}
+          className={cn(baseClasses, variantClasses[variant], className)}
           ref={setRefs}
           style={{
             transform: magnetic ? transform : undefined,
@@ -305,7 +322,10 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           onClick={handleClick}
           {...props}
         >
-          {createGlassLayers(buttonContent, cn('flex items-center justify-center gap-2', sizeClasses[size]))}
+          {createGlassLayers(
+            buttonContent,
+            cn('flex items-center justify-center gap-2', sizeClasses[size])
+          )}
         </button>
       );
     }

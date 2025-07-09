@@ -4,26 +4,23 @@ import { motion } from 'framer-motion';
 import { cn } from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const radioGroupVariants = cva(
-  'grid gap-2',
-  {
-    variants: {
-      orientation: {
-        horizontal: 'grid-flow-col',
-        vertical: 'grid-flow-row',
-      },
-      size: {
-        sm: 'gap-1',
-        md: 'gap-2',
-        lg: 'gap-3',
-      },
+const radioGroupVariants = cva('grid gap-2', {
+  variants: {
+    orientation: {
+      horizontal: 'grid-flow-col',
+      vertical: 'grid-flow-row',
     },
-    defaultVariants: {
-      orientation: 'vertical',
-      size: 'md',
+    size: {
+      sm: 'gap-1',
+      md: 'gap-2',
+      lg: 'gap-3',
     },
-  }
-);
+  },
+  defaultVariants: {
+    orientation: 'vertical',
+    size: 'md',
+  },
+});
 
 const radioItemVariants = cva(
   [
@@ -52,18 +49,19 @@ const radioItemVariants = cva(
   }
 );
 
-const radioIndicatorVariants = cva(
-  [
-    'relative w-5 h-5 rounded-full border-2 border-white/20',
-    'group-data-[state=checked]:border-blue-400',
-    'group-data-[state=checked]:bg-gradient-to-br group-data-[state=checked]:from-blue-400/20 group-data-[state=checked]:to-purple-400/20',
-    'transition-all duration-200 backdrop-blur-sm',
-    'group-hover:border-white/40 group-focus:border-blue-400',
-  ]
-);
+const radioIndicatorVariants = cva([
+  'relative w-5 h-5 rounded-full border-2 border-white/20',
+  'group-data-[state=checked]:border-blue-400',
+  'group-data-[state=checked]:bg-gradient-to-br group-data-[state=checked]:from-blue-400/20 group-data-[state=checked]:to-purple-400/20',
+  'transition-all duration-200 backdrop-blur-sm',
+  'group-hover:border-white/40 group-focus:border-blue-400',
+]);
 
 export interface GlassRadioGroupProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>, 'orientation'>,
+  extends Omit<
+      React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
+      'orientation'
+    >,
     VariantProps<typeof radioGroupVariants> {
   children: React.ReactNode;
 }

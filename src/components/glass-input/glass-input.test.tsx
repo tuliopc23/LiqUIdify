@@ -1,5 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, testAccessibility, getGlassComponentTestSuite, testCommonProps, testGlassPerformance } from '@/test-utils';
+import {
+  render,
+  screen,
+  fireEvent,
+  testAccessibility,
+  getGlassComponentTestSuite,
+  testCommonProps,
+  testGlassPerformance,
+} from '@/test-utils';
 import { GlassInput } from './glass-input';
 
 const testSuite = getGlassComponentTestSuite('GlassInput');
@@ -19,7 +27,9 @@ describe('GlassInput', () => {
   });
 
   it('applies variant classes correctly', () => {
-    const { rerender } = render(<GlassInput variant="default" placeholder="Default" />);
+    const { rerender } = render(
+      <GlassInput variant="default" placeholder="Default" />
+    );
     let input = screen.getByRole('textbox');
     expect(input).toHaveClass('border-[var(--glass-border)]');
 
@@ -31,25 +41,35 @@ describe('GlassInput', () => {
   it('handles controlled input correctly', () => {
     const handleChange = vi.fn();
     const { rerender } = render(
-      <GlassInput value="initial" onChange={handleChange} placeholder="Controlled" />
+      <GlassInput
+        value="initial"
+        onChange={handleChange}
+        placeholder="Controlled"
+      />
     );
-    
+
     const input = screen.getByRole('textbox') as HTMLInputElement;
     expect(input.value).toBe('initial');
 
     fireEvent.change(input, { target: { value: 'updated' } });
     expect(handleChange).toHaveBeenCalledTimes(1);
 
-    rerender(<GlassInput value="updated" onChange={handleChange} placeholder="Controlled" />);
+    rerender(
+      <GlassInput
+        value="updated"
+        onChange={handleChange}
+        placeholder="Controlled"
+      />
+    );
     expect(input.value).toBe('updated');
   });
 
   it('handles uncontrolled input correctly', () => {
     render(<GlassInput defaultValue="default" placeholder="Uncontrolled" />);
     const input = screen.getByRole('textbox') as HTMLInputElement;
-    
+
     expect(input.value).toBe('default');
-    
+
     fireEvent.change(input, { target: { value: 'changed' } });
     expect(input.value).toBe('changed');
   });
@@ -57,15 +77,18 @@ describe('GlassInput', () => {
   it(testSuite.shouldHandleDisabled, () => {
     render(<GlassInput disabled placeholder="Disabled input" />);
     const input = screen.getByRole('textbox');
-    
+
     expect(input).toBeDisabled();
-    expect(input).toHaveClass('disabled:opacity-50', 'disabled:cursor-not-allowed');
+    expect(input).toHaveClass(
+      'disabled:opacity-50',
+      'disabled:cursor-not-allowed'
+    );
   });
 
   it('shows error state correctly', () => {
     render(<GlassInput error={true} placeholder="Error input" />);
     const input = screen.getByRole('textbox');
-    
+
     expect(input).toHaveClass('border-red-400/50');
     expect(input).toHaveAttribute('aria-invalid', 'true');
   });
@@ -73,21 +96,23 @@ describe('GlassInput', () => {
   it('renders with left and right icons', () => {
     const LeftIcon = () => <span data-testid="left-icon">L</span>;
     const RightIcon = () => <span data-testid="right-icon">R</span>;
-    
+
     render(
-      <GlassInput 
+      <GlassInput
         leftIcon={<LeftIcon />}
         rightIcon={<RightIcon />}
         placeholder="With icons"
       />
     );
-    
+
     expect(screen.getByTestId('left-icon')).toBeInTheDocument();
     expect(screen.getByTestId('right-icon')).toBeInTheDocument();
   });
 
   it('supports different input types', () => {
-    const { rerender } = render(<GlassInput type="email" placeholder="Email" />);
+    const { rerender } = render(
+      <GlassInput type="email" placeholder="Email" />
+    );
     let input = screen.getByRole('textbox');
     expect(input).toHaveAttribute('type', 'email');
 
@@ -103,27 +128,27 @@ describe('GlassInput', () => {
   it('forwards ref correctly', () => {
     const ref = { current: null };
     render(<GlassInput ref={ref} placeholder="Ref test" />);
-    
+
     expect(ref.current).toBeInstanceOf(HTMLInputElement);
   });
 
   it('handles focus and blur events', () => {
     const handleFocus = vi.fn();
     const handleBlur = vi.fn();
-    
+
     render(
-      <GlassInput 
+      <GlassInput
         onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder="Focus test"
       />
     );
-    
+
     const input = screen.getByRole('textbox');
-    
+
     fireEvent.focus(input);
     expect(handleFocus).toHaveBeenCalledTimes(1);
-    
+
     fireEvent.blur(input);
     expect(handleBlur).toHaveBeenCalledTimes(1);
   });
@@ -150,7 +175,10 @@ describe('GlassInput', () => {
   });
 
   // Performance test
-  it('renders performantly', testGlassPerformance(
-    (props: any) => <GlassInput placeholder="Performance test" {...props} />
-  ));
+  it(
+    'renders performantly',
+    testGlassPerformance((props: any) => (
+      <GlassInput placeholder="Performance test" {...props} />
+    ))
+  );
 });

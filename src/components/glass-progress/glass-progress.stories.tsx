@@ -125,7 +125,9 @@ export const ProgressStates: Story = {
         <GlassProgress value={45} showValue />
       </div>
       <div>
-        <label className="block text-sm font-medium mb-2">Almost Complete</label>
+        <label className="block text-sm font-medium mb-2">
+          Almost Complete
+        </label>
         <GlassProgress value={85} showValue />
       </div>
       <div>

@@ -47,7 +47,11 @@ export const States: Story = {
       <GlassCheckbox label="Normal checkbox" />
       <GlassCheckbox label="Checked checkbox" defaultChecked={true} />
       <GlassCheckbox label="Disabled checkbox" disabled />
-      <GlassCheckbox label="Disabled checked checkbox" disabled defaultChecked={true} />
+      <GlassCheckbox
+        label="Disabled checked checkbox"
+        disabled
+        defaultChecked={true}
+      />
     </div>
   ),
 };

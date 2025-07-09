@@ -37,18 +37,12 @@ export const Line: Story = {
 };
 
 export const Bar: Story = {
-  render: () => (
-    <BarChart 
-      data={sampleData}
-      width={500}
-      height={300}
-    />
-  ),
+  render: () => <BarChart data={sampleData} width={500} height={300} />,
 };
 
 export const Donut: Story = {
   render: () => (
-    <DonutChart 
+    <DonutChart
       data={donutData}
       width={300}
       height={300}
@@ -69,12 +63,12 @@ export const AllCharts: Story = {
         <h3 className="text-lg font-semibold">Line Chart</h3>
         <LineChart data={sampleData} width={400} height={250} />
       </div>
-      
+
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Bar Chart</h3>
         <BarChart data={sampleData} width={400} height={250} />
       </div>
-      
+
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Donut Chart</h3>
         <DonutChart data={donutData} width={250} height={250} />

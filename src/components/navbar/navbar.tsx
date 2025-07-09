@@ -1,13 +1,13 @@
-import { Search, Github, Layers } from "lucide-react";
-import { ThemeToggle } from "../theme-toggle";
-import { AppleLiquidGlassNav } from "@/components/apple-liquid-glass";
-import { LiquidGlassSvgFilters } from "@/components/liquid-glass-svg-filters";
+import { Search, Github, Layers } from 'lucide-react';
+import { ThemeToggle } from '../theme-toggle';
+import { AppleLiquidGlassNav } from '@/components/apple-liquid-glass';
+import { LiquidGlassSvgFilters } from '@/components/liquid-glass-svg-filters';
 
 export function Navbar() {
   return (
     <>
       <LiquidGlassSvgFilters />
-      <AppleLiquidGlassNav 
+      <AppleLiquidGlassNav
         intensity="medium"
         magnetic={true}
         animated={true}
@@ -29,26 +29,26 @@ export function Navbar() {
               </div>
             </div>
 
-          <div className="flex items-center space-x-4">
-            {/* Search Box */}
-            <div className="relative hidden sm:block">
-              <input
-                type="text"
-                placeholder="Search components..."
-                className="w-64 px-4 py-2 pl-10 bg-white/20 rounded-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm text-white placeholder-white/60"
-              />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/70" />
+            <div className="flex items-center space-x-4">
+              {/* Search Box */}
+              <div className="relative hidden sm:block">
+                <input
+                  type="text"
+                  placeholder="Search components..."
+                  className="w-64 px-4 py-2 pl-10 bg-white/20 rounded-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm text-white placeholder-white/60"
+                />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/70" />
+              </div>
+
+              {/* Theme Toggle */}
+              <ThemeToggle />
+
+              {/* GitHub Link */}
+              <button className="bg-white/20 rounded-lg p-2 transition-all duration-200 hover:bg-white/30 hover:scale-105">
+                <Github className="h-5 w-5 text-white" />
+              </button>
             </div>
-
-            {/* Theme Toggle */}
-            <ThemeToggle />
-
-            {/* GitHub Link */}
-            <button className="bg-white/20 rounded-lg p-2 transition-all duration-200 hover:bg-white/30 hover:scale-105">
-              <Github className="h-5 w-5 text-white" />
-            </button>
           </div>
-        </div>
         </div>
       </AppleLiquidGlassNav>
     </>

@@ -19,7 +19,8 @@ export const Default: Story = {
       <div className="p-6 space-y-4">
         <h2 className="text-2xl font-bold">Theme Provider Example</h2>
         <p className="text-gray-600 dark:text-gray-300">
-          This content is wrapped in a ThemeProvider that manages light/dark theme state.
+          This content is wrapped in a ThemeProvider that manages light/dark
+          theme state.
         </p>
         <div className="grid grid-cols-2 gap-4">
           <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border">
@@ -44,11 +45,13 @@ export const WithGlassComponents: Story = {
   render: () => (
     <ThemeProvider>
       <div className="p-6 space-y-4 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-96">
-        <h2 className="text-2xl font-bold">Glass UI Components in Theme Provider</h2>
+        <h2 className="text-2xl font-bold">
+          Glass UI Components in Theme Provider
+        </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
           All Glass UI components work seamlessly with the theme provider.
         </p>
-        
+
         <div className="glass-effect p-4 rounded-xl border border-white/20 dark:border-white/10">
           <h3 className="font-semibold mb-2">Glass Effect Card</h3>
           <p className="text-sm text-gray-600 dark:text-gray-300">

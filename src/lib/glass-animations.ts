@@ -130,7 +130,7 @@ export class GlassAnimation {
         force3D: true,
         onComplete: () => {
           this.element.style.willChange = 'auto';
-        }
+        },
       });
     } else {
       // Fallback to Web Animations API for non-SVG elements
@@ -150,8 +150,8 @@ export class GlassAnimation {
       y: `+=${amplitude * 2}`,
       repeat: -1,
       yoyo: true,
-      ease: "sine.inOut",
-      duration: duration / 1000 / 2
+      ease: 'sine.inOut',
+      duration: duration / 1000 / 2,
     });
   }
 
@@ -371,27 +371,30 @@ export class GlassAnimation {
   }
 
   // Batch processing for multiple animations
-  batchAnimate(animations: Array<{target: string, vars: gsap.TweenVars}>) {
+  batchAnimate(animations: Array<{ target: string; vars: gsap.TweenVars }>) {
     // Use GSAP's batch method for optimal performance
-    gsap.set(this.element, {force3D: true}); // Force GPU acceleration
-    
+    gsap.set(this.element, { force3D: true }); // Force GPU acceleration
+
     const tl = gsap.timeline();
-    animations.forEach(({target, vars}) => {
+    animations.forEach(({ target, vars }) => {
       tl.to(target, vars, 0); // Add all animations to start simultaneously
     });
-    
+
     return tl;
   }
 
   // Physics-based spring animation
-  springTo(target: {x?: number, y?: number, scale?: number}, config: SpringPhysics = {mass: 1, tension: 280, friction: 60}) {
+  springTo(
+    target: { x?: number; y?: number; scale?: number },
+    config: SpringPhysics = { mass: 1, tension: 280, friction: 60 }
+  ) {
     return gsap.to(this.element, {
       x: target.x,
       y: target.y,
       scale: target.scale,
       duration: Math.sqrt(config.mass / config.tension) * 2,
       ease: `power2.out`,
-      force3D: true
+      force3D: true,
     });
   }
 
@@ -401,32 +404,32 @@ export class GlassAnimation {
       const rect = this.element.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      
+
       const deltaX = e.clientX - centerX;
       const deltaY = e.clientY - centerY;
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-      
+
       if (distance < radius) {
         const force = (radius - distance) / radius;
         const moveX = deltaX * force * strength;
         const moveY = deltaY * force * strength;
-        
+
         gsap.to(this.element, {
           x: moveX,
           y: moveY,
           duration: 0.3,
-          ease: 'power2.out'
+          ease: 'power2.out',
         });
       } else {
         gsap.to(this.element, {
           x: 0,
           y: 0,
           duration: 0.5,
-          ease: 'elastic.out(1, 0.3)'
+          ease: 'elastic.out(1, 0.3)',
         });
       }
     };
-    
+
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
   }
@@ -486,30 +489,38 @@ export class GlassChoreographer {
   // Batch animate multiple elements with GSAP for optimal performance
   batchAnimate(elements: HTMLElement[], vars: gsap.TweenVars, stagger = 0.1) {
     // Use GSAP's batch method for GPU acceleration
-    gsap.set(elements, {force3D: true});
-    
+    gsap.set(elements, { force3D: true });
+
     return gsap.to(elements, {
       ...vars,
       stagger: stagger,
-      ease: vars.ease || 'power2.out'
+      ease: vars.ease || 'power2.out',
     });
   }
 
   // Physics-based cascade with spring effects
-  springCascade(elements: HTMLElement[], target: {x?: number, y?: number, scale?: number}, staggerDelay = 0.1) {
+  springCascade(
+    elements: HTMLElement[],
+    target: { x?: number; y?: number; scale?: number },
+    staggerDelay = 0.1
+  ) {
     this.masterTimeline.clear();
-    
+
     elements.forEach((element, index) => {
-      this.masterTimeline.to(element, {
-        x: target.x,
-        y: target.y,
-        scale: target.scale,
-        duration: 0.6,
-        ease: 'elastic.out(1, 0.3)',
-        force3D: true
-      }, index * staggerDelay);
+      this.masterTimeline.to(
+        element,
+        {
+          x: target.x,
+          y: target.y,
+          scale: target.scale,
+          duration: 0.6,
+          ease: 'elastic.out(1, 0.3)',
+          force3D: true,
+        },
+        index * staggerDelay
+      );
     });
-    
+
     return this.masterTimeline;
   }
 
@@ -749,46 +760,54 @@ export const GlassUtils = {
   enableGPUAcceleration(elements: HTMLElement[]) {
     gsap.set(elements, {
       force3D: true,
-      willChange: 'transform'
+      willChange: 'transform',
     });
   },
 
   // Batch animate with optimal performance
   batchAnimate(elements: HTMLElement[], animations: gsap.TweenVars[]) {
     const tl = gsap.timeline();
-    
+
     elements.forEach((element, index) => {
       const animation = animations[index] || animations[0];
-      tl.to(element, {
-        ...animation,
-        force3D: true
-      }, 0);
+      tl.to(
+        element,
+        {
+          ...animation,
+          force3D: true,
+        },
+        0
+      );
     });
-    
+
     return tl;
   },
 
   // Physics-based spring animation for multiple elements
-  springAnimation(elements: HTMLElement[], target: gsap.TweenVars, stagger = 0.1) {
+  springAnimation(
+    elements: HTMLElement[],
+    target: gsap.TweenVars,
+    stagger = 0.1
+  ) {
     return gsap.to(elements, {
       ...target,
       duration: 0.8,
       ease: 'elastic.out(1, 0.3)',
       stagger: stagger,
-      force3D: true
+      force3D: true,
     });
   },
 
   // Magnetic effect for multiple elements
   createMagneticField(elements: HTMLElement[], radius = 100, strength = 0.3) {
     const cleanupFunctions: (() => void)[] = [];
-    
+
     elements.forEach(element => {
       const animation = new GlassAnimation(element);
       const cleanup = animation.magneticField(radius, strength);
       cleanupFunctions.push(cleanup);
     });
-    
+
     return () => cleanupFunctions.forEach(cleanup => cleanup());
-  }
+  },
 };

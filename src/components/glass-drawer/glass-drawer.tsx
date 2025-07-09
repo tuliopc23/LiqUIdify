@@ -16,9 +16,11 @@ const drawerVariants = cva(
     variants: {
       side: {
         top: 'inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
-        bottom: 'inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
+        bottom:
+          'inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
         left: 'inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',
-        right: 'inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm',
+        right:
+          'inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm',
       },
       size: {
         sm: '',
@@ -87,28 +89,19 @@ const drawerVariants = cva(
   }
 );
 
-const drawerHeaderVariants = cva(
-  [
-    'flex items-center justify-between',
-    'p-4 border-b border-white/10',
-    'bg-white/5',
-  ]
-);
+const drawerHeaderVariants = cva([
+  'flex items-center justify-between',
+  'p-4 border-b border-white/10',
+  'bg-white/5',
+]);
 
-const drawerContentVariants = cva(
-  [
-    'flex-1 p-4 overflow-y-auto',
-    'text-white',
-  ]
-);
+const drawerContentVariants = cva(['flex-1 p-4 overflow-y-auto', 'text-white']);
 
-const drawerFooterVariants = cva(
-  [
-    'flex items-center justify-end gap-2',
-    'p-4 border-t border-white/10',
-    'bg-white/5',
-  ]
-);
+const drawerFooterVariants = cva([
+  'flex items-center justify-end gap-2',
+  'p-4 border-t border-white/10',
+  'bg-white/5',
+]);
 
 export interface GlassDrawerProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root> {
@@ -149,11 +142,7 @@ export interface GlassDrawerFooterProps
 }
 
 const GlassDrawer: React.FC<GlassDrawerProps> = ({ children, ...props }) => {
-  return (
-    <DialogPrimitive.Root {...props}>
-      {children}
-    </DialogPrimitive.Root>
-  );
+  return <DialogPrimitive.Root {...props}>{children}</DialogPrimitive.Root>;
 };
 
 const GlassDrawerTrigger = DialogPrimitive.Trigger;
@@ -221,17 +210,14 @@ const GlassDrawerContent = React.forwardRef<
   )
 );
 
-const GlassDrawerHeader = React.forwardRef<HTMLDivElement, GlassDrawerHeaderProps>(
-  ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(drawerHeaderVariants(), className)}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-);
+const GlassDrawerHeader = React.forwardRef<
+  HTMLDivElement,
+  GlassDrawerHeaderProps
+>(({ className, children, ...props }, ref) => (
+  <div ref={ref} className={cn(drawerHeaderVariants(), className)} {...props}>
+    {children}
+  </div>
+));
 
 const GlassDrawerTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
@@ -271,17 +257,14 @@ const GlassDrawerBody = React.forwardRef<HTMLDivElement, GlassDrawerBodyProps>(
   )
 );
 
-const GlassDrawerFooter = React.forwardRef<HTMLDivElement, GlassDrawerFooterProps>(
-  ({ className, children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(drawerFooterVariants(), className)}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-);
+const GlassDrawerFooter = React.forwardRef<
+  HTMLDivElement,
+  GlassDrawerFooterProps
+>(({ className, children, ...props }, ref) => (
+  <div ref={ref} className={cn(drawerFooterVariants(), className)} {...props}>
+    {children}
+  </div>
+));
 
 GlassDrawer.displayName = 'GlassDrawer';
 GlassDrawerOverlay.displayName = 'GlassDrawerOverlay';

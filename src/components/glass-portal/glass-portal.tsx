@@ -7,18 +7,20 @@ export interface GlassPortalProps {
   key?: string;
 }
 
-const GlassPortal: React.FC<GlassPortalProps> = ({ 
-  children, 
+const GlassPortal: React.FC<GlassPortalProps> = ({
+  children,
   container,
-  key 
+  key,
 }) => {
-  const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(null);
+  const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(
+    null
+  );
 
   useEffect(() => {
     // Use provided container or create default
     const node = container || document.body;
     setMountNode(node);
-    
+
     return () => {
       setMountNode(null);
     };

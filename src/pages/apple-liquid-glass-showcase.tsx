@@ -5,16 +5,18 @@
  */
 
 import { useState } from 'react';
-import { 
-  AppleLiquidGlass, 
-  AppleLiquidGlassCard, 
-  AppleLiquidGlassButton, 
-  AppleLiquidGlassNav 
+import {
+  AppleLiquidGlass,
+  AppleLiquidGlassCard,
+  AppleLiquidGlassButton,
+  AppleLiquidGlassNav,
 } from '../components/apple-liquid-glass';
 import LiquidGlassSvgFilters from '../components/liquid-glass-svg-filters';
 
 export default function AppleLiquidGlassShowcase() {
-  const [selectedIntensity, setSelectedIntensity] = useState<'subtle' | 'medium' | 'strong'>('medium');
+  const [selectedIntensity, setSelectedIntensity] = useState<
+    'subtle' | 'medium' | 'strong'
+  >('medium');
   const [enabledEffects, setEnabledEffects] = useState({
     magnetic: true,
     animated: false,
@@ -25,9 +27,9 @@ export default function AppleLiquidGlassShowcase() {
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 p-8">
       {/* Include SVG filters */}
       <LiquidGlassSvgFilters />
-      
+
       {/* Background pattern */}
-      <div 
+      <div
         className="fixed inset-0 pointer-events-none"
         style={{
           backgroundImage: `
@@ -40,7 +42,7 @@ export default function AppleLiquidGlassShowcase() {
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
-        <AppleLiquidGlassCard 
+        <AppleLiquidGlassCard
           className="mb-8 text-center"
           intensity="subtle"
           animated={true}
@@ -58,7 +60,7 @@ export default function AppleLiquidGlassShowcase() {
           <h2 className="text-2xl font-semibold text-white mb-4">
             Effect Controls
           </h2>
-          
+
           <div className="space-y-4">
             {/* Intensity Control */}
             <div>
@@ -66,13 +68,19 @@ export default function AppleLiquidGlassShowcase() {
                 Intensity
               </label>
               <div className="flex gap-2">
-                {(['subtle', 'medium', 'strong'] as const).map((intensity) => (
+                {(['subtle', 'medium', 'strong'] as const).map(intensity => (
                   <AppleLiquidGlassButton
                     key={intensity}
                     size="sm"
-                    intensity={selectedIntensity === intensity ? 'strong' : 'subtle'}
+                    intensity={
+                      selectedIntensity === intensity ? 'strong' : 'subtle'
+                    }
                     onClick={() => setSelectedIntensity(intensity)}
-                    className={selectedIntensity === intensity ? 'ring-2 ring-white/50' : ''}
+                    className={
+                      selectedIntensity === intensity
+                        ? 'ring-2 ring-white/50'
+                        : ''
+                    }
                   >
                     {intensity.charAt(0).toUpperCase() + intensity.slice(1)}
                   </AppleLiquidGlassButton>
@@ -91,10 +99,12 @@ export default function AppleLiquidGlassShowcase() {
                     key={effect}
                     size="sm"
                     intensity={enabled ? 'strong' : 'subtle'}
-                    onClick={() => setEnabledEffects(prev => ({
-                      ...prev,
-                      [effect]: !prev[effect as keyof typeof prev]
-                    }))}
+                    onClick={() =>
+                      setEnabledEffects(prev => ({
+                        ...prev,
+                        [effect]: !prev[effect as keyof typeof prev],
+                      }))
+                    }
                     className={enabled ? 'ring-2 ring-white/50' : ''}
                   >
                     {effect.charAt(0).toUpperCase() + effect.slice(1)}
@@ -178,7 +188,7 @@ export default function AppleLiquidGlassShowcase() {
             >
               Small Button
             </AppleLiquidGlassButton>
-            
+
             <AppleLiquidGlassButton
               intensity={selectedIntensity}
               magnetic={enabledEffects.magnetic}
@@ -188,7 +198,7 @@ export default function AppleLiquidGlassShowcase() {
             >
               Medium Button
             </AppleLiquidGlassButton>
-            
+
             <AppleLiquidGlassButton
               intensity={selectedIntensity}
               magnetic={enabledEffects.magnetic}
@@ -206,7 +216,7 @@ export default function AppleLiquidGlassShowcase() {
           <h2 className="text-2xl font-semibold text-white mb-4">
             Navigation Components
           </h2>
-          <AppleLiquidGlassNav 
+          <AppleLiquidGlassNav
             className="p-4 rounded-2xl"
             intensity={selectedIntensity}
             magnetic={enabledEffects.magnetic}
@@ -280,17 +290,17 @@ export default function AppleLiquidGlassShowcase() {
         </AppleLiquidGlassCard>
 
         {/* Technical Details */}
-        <AppleLiquidGlassCard
-          intensity="subtle"
-          animated={true}
-        >
+        <AppleLiquidGlassCard intensity="subtle" animated={true}>
           <h2 className="text-2xl font-semibold text-white mb-4">
             Technical Implementation
           </h2>
           <div className="space-y-3 text-white/80">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-              <span>Multi-layer glass structure with filter, overlay, and specular layers</span>
+              <span>
+                Multi-layer glass structure with filter, overlay, and specular
+                layers
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
@@ -298,7 +308,9 @@ export default function AppleLiquidGlassShowcase() {
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
-              <span>React 19 patterns with startTransition and enhanced hooks</span>
+              <span>
+                React 19 patterns with startTransition and enhanced hooks
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
@@ -306,7 +318,9 @@ export default function AppleLiquidGlassShowcase() {
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-pink-400 rounded-full"></span>
-              <span>Magnetic hover effects with physics-based interactions</span>
+              <span>
+                Magnetic hover effects with physics-based interactions
+              </span>
             </div>
           </div>
         </AppleLiquidGlassCard>

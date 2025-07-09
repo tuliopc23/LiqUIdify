@@ -1,6 +1,6 @@
-import { useEffect, useRef, useId } from "react";
-import { X } from "lucide-react";
-import { cn } from "@/lib/glass-utils";
+import { useEffect, useRef, useId } from 'react';
+import { X } from 'lucide-react';
+import { cn } from '@/lib/glass-utils';
 
 interface GlassModalProps {
   isOpen: boolean;
@@ -27,26 +27,26 @@ export function GlassModal({
 
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.body.style.overflow = "hidden";
-      document.addEventListener("keydown", handleEsc);
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('keydown', handleEsc);
       // TODO: Implement focus trapping. When modal opens, focus should be moved inside.
       // Tab navigation should be contained within the modal.
       // modalRef.current?.focus(); // Example: focus the modal container or first focusable element
     } else {
-      document.body.style.overflow = "unset";
-      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleEsc);
       // TODO: Restore focus to the element that opened the modal when it closes.
     }
 
     return () => {
-      document.body.style.overflow = "unset";
-      document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleEsc);
     };
   }, [isOpen, onClose]);
 
@@ -57,8 +57,8 @@ export function GlassModal({
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       // TODO: Move these styles to a dedicated CSS class e.g., .glass-modal-backdrop
       style={{
-        background: "rgba(0, 0, 0, 0.5)", // Example: --glass-modal-backdrop-bg or similar token
-        backdropFilter: "blur(10px)",    // Example: --glass-modal-backdrop-blur or similar token
+        background: 'rgba(0, 0, 0, 0.5)', // Example: --glass-modal-backdrop-bg or similar token
+        backdropFilter: 'blur(10px)', // Example: --glass-modal-backdrop-blur or similar token
       }}
       onClick={onClose} // Close on backdrop click
     >
@@ -69,16 +69,22 @@ export function GlassModal({
         aria-labelledby={title ? titleId : undefined}
         // aria-describedby={contentId} // If you have a specific content block to describe the modal
         className={cn(
-          "glass-effect rounded-2xl p-8 max-w-md w-full animate-scale", // Base styles
-          "outline-none", // Ensure focus styles are managed if modal itself is focused
+          'glass-effect rounded-2xl p-8 max-w-md w-full animate-scale', // Base styles
+          'outline-none', // Ensure focus styles are managed if modal itself is focused
           className // Custom class for the modal dialog
         )}
-        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal content
+        onClick={e => e.stopPropagation()} // Prevent closing when clicking inside modal content
         tabIndex={-1} // Allows the modal dialog to be programmatically focused if needed
       >
         {title && (
           <div className="flex items-center justify-between mb-4">
-            <h3 id={titleId} className={cn("text-lg font-semibold text-primary", titleClassName)}>
+            <h3
+              id={titleId}
+              className={cn(
+                'text-lg font-semibold text-primary',
+                titleClassName
+              )}
+            >
               {title}
             </h3>
             <button
@@ -90,8 +96,11 @@ export function GlassModal({
             </button>
           </div>
         )}
-        <div className={cn(contentClassName)}> {/* Optional class for content area */}
-          {/* <div id={contentId}> */} {/* If using aria-describedby for a specific content block */}
+        <div className={cn(contentClassName)}>
+          {' '}
+          {/* Optional class for content area */}
+          {/* <div id={contentId}> */}{' '}
+          {/* If using aria-describedby for a specific content block */}
           {children}
           {/* </div> */}
         </div>

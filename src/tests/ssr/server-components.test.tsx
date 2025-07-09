@@ -87,12 +87,17 @@ describe('Server-Side Rendering Compatibility', () => {
     });
 
     it('should render with all variants on server', () => {
-      ['default', 'primary', 'secondary', 'destructive', 'outline', 'ghost'].forEach(variant => {
+      [
+        'default',
+        'primary',
+        'secondary',
+        'destructive',
+        'outline',
+        'ghost',
+      ].forEach(variant => {
         expect(() => {
           const html = renderToString(
-            <GlassButton variant={variant as any}>
-              Button content
-            </GlassButton>
+            <GlassButton variant={variant as any}>Button content</GlassButton>
           );
           expect(html).toContain('Button content');
         }).not.toThrow();
@@ -138,9 +143,7 @@ describe('Server-Side Rendering Compatibility', () => {
   describe('GlassInput SSR', () => {
     it('should render without errors on server', () => {
       expect(() => {
-        const html = renderToString(
-          <GlassInput placeholder="Test input" />
-        );
+        const html = renderToString(<GlassInput placeholder="Test input" />);
         expect(html).toContain('placeholder="Test input"');
       }).not.toThrow();
     });
@@ -158,8 +161,12 @@ describe('Server-Side Rendering Compatibility', () => {
   describe('Hydration Safety', () => {
     it('should not use browser-only APIs during SSR', () => {
       // Test that components don't call browser APIs during SSR
-      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleWarnSpy = vi
+        .spyOn(console, 'warn')
+        .mockImplementation(() => {});
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
 
       renderToString(
         <div>
@@ -195,10 +202,12 @@ describe('Server-Side Rendering Compatibility', () => {
     it('should work with CSS variables in SSR environment', () => {
       expect(() => {
         const html = renderToString(
-          <div style={{ 
-            backgroundColor: 'var(--liquid-glass-primary)',
-            borderRadius: 'var(--liquid-radius-md)'
-          }}>
+          <div
+            style={{
+              backgroundColor: 'var(--liquid-glass-primary)',
+              borderRadius: 'var(--liquid-radius-md)',
+            }}
+          >
             CSS Variables Test
           </div>
         );
@@ -232,9 +241,7 @@ describe('Next.js App Router Compatibility', () => {
 
   it('should support static rendering', () => {
     const StaticComponent = () => (
-      <GlassButton variant="primary">
-        Static Button
-      </GlassButton>
+      <GlassButton variant="primary">Static Button</GlassButton>
     );
 
     const html = renderToString(<StaticComponent />);
@@ -245,9 +252,7 @@ describe('Next.js App Router Compatibility', () => {
 
 describe('Progressive Enhancement', () => {
   it('should provide fallback for JavaScript-disabled environments', () => {
-    const html = renderToString(
-      <GlassButton>Works without JS</GlassButton>
-    );
+    const html = renderToString(<GlassButton>Works without JS</GlassButton>);
 
     // Should render as a basic button that works without JavaScript
     expect(html).toContain('Works without JS');
@@ -256,9 +261,7 @@ describe('Progressive Enhancement', () => {
 
   it('should maintain accessibility without JavaScript', () => {
     const html = renderToString(
-      <GlassButton aria-label="Accessible button">
-        Accessible
-      </GlassButton>
+      <GlassButton aria-label="Accessible button">Accessible</GlassButton>
     );
 
     expect(html).toContain('aria-label="Accessible button"');

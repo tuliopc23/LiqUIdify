@@ -9,18 +9,18 @@
     --apple-glass-border: rgba(255, 255, 255, 0.2);
     --apple-glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
     --apple-glass-inner-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1);
-    
+
     /* Liquid Glass Depth Layers */
     --liquid-depth-1: rgba(255, 255, 255, 0.05);
     --liquid-depth-2: rgba(255, 255, 255, 0.08);
     --liquid-depth-3: rgba(255, 255, 255, 0.12);
     --liquid-depth-4: rgba(255, 255, 255, 0.15);
-    
+
     /* Liquid Glass Blur Effects */
     --liquid-blur-light: blur(10px) saturate(180%);
     --liquid-blur-medium: blur(16px) saturate(200%);
     --liquid-blur-heavy: blur(24px) saturate(220%);
-    
+
     /* Liquid Glass Animations */
     --liquid-transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --liquid-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -28,13 +28,13 @@
   }
 
   /* Dark mode adjustments */
-  :root[data-theme="dark"],
+  :root[data-theme='dark'],
   .dark {
     --apple-glass-bg: rgba(255, 255, 255, 0.03);
     --apple-glass-border: rgba(255, 255, 255, 0.08);
     --apple-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
     --apple-glass-inner-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05);
-    
+
     --liquid-depth-1: rgba(255, 255, 255, 0.02);
     --liquid-depth-2: rgba(255, 255, 255, 0.04);
     --liquid-depth-3: rgba(255, 255, 255, 0.06);
@@ -53,7 +53,7 @@
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 24px;
-    box-shadow: 
+    box-shadow:
       0 8px 32px rgba(31, 38, 135, 0.37),
       inset 0 2px 4px rgba(255, 255, 255, 0.1);
     overflow: hidden;
@@ -103,7 +103,7 @@
   /* Interactive States with Liquid Animations */
   .apple-glass:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 
+    box-shadow:
       0 16px 48px rgba(31, 38, 135, 0.4),
       inset 0 4px 8px rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(200%);
@@ -123,7 +123,7 @@
 
   .apple-glass:active {
     transform: translateY(0px) scale(0.98);
-    box-shadow: 
+    box-shadow:
       0 4px 16px rgba(31, 38, 135, 0.3),
       inset 0 2px 4px rgba(255, 255, 255, 0.08);
     transition: var(--liquid-bounce);
@@ -134,7 +134,7 @@
     background: var(--liquid-depth-1);
     backdrop-filter: var(--liquid-blur-light);
     -webkit-backdrop-filter: var(--liquid-blur-light);
-    box-shadow: 
+    box-shadow:
       0 4px 16px rgba(31, 38, 135, 0.2),
       inset 0 1px 2px rgba(255, 255, 255, 0.08);
   }
@@ -143,7 +143,7 @@
     background: var(--liquid-depth-2);
     backdrop-filter: var(--liquid-blur-medium);
     -webkit-backdrop-filter: var(--liquid-blur-medium);
-    box-shadow: 
+    box-shadow:
       0 8px 24px rgba(31, 38, 135, 0.3),
       inset 0 2px 4px rgba(255, 255, 255, 0.1);
   }
@@ -152,7 +152,7 @@
     background: var(--liquid-depth-3);
     backdrop-filter: var(--liquid-blur-heavy);
     -webkit-backdrop-filter: var(--liquid-blur-heavy);
-    box-shadow: 
+    box-shadow:
       0 12px 32px rgba(31, 38, 135, 0.4),
       inset 0 3px 6px rgba(255, 255, 255, 0.12);
   }
@@ -161,7 +161,7 @@
     background: var(--liquid-depth-4);
     backdrop-filter: blur(32px) saturate(240%);
     -webkit-backdrop-filter: blur(32px) saturate(240%);
-    box-shadow: 
+    box-shadow:
       0 16px 48px rgba(31, 38, 135, 0.5),
       inset 0 4px 8px rgba(255, 255, 255, 0.15);
   }
@@ -174,7 +174,7 @@
 
   .apple-glass--magnetic:hover {
     transform: translateY(-4px) scale(1.05);
-    box-shadow: 
+    box-shadow:
       0 20px 60px rgba(31, 38, 135, 0.5),
       inset 0 6px 12px rgba(255, 255, 255, 0.2);
   }
@@ -199,7 +199,9 @@
       transparent 70%
     );
     transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
+    transition:
+      width 0.6s ease,
+      height 0.6s ease;
     pointer-events: none;
     z-index: 3;
   }

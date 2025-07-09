@@ -78,44 +78,46 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
       ...style,
     };
 
-    const SkeletonItem = React.forwardRef<HTMLDivElement, { index: number }>(({ index }, itemRef) => (
-      <motion.div
-        ref={itemRef}
-        className={cn(skeletonVariants({ variant, size, shape }), className)}
-        style={skeletonStyle}
-        initial={animated ? { opacity: 0.4 } : undefined}
-        animate={
-          animated
-            ? variant === 'pulse'
-              ? pulseAnimation
-              : { opacity: [0.4, 0.8, 0.4] }
-            : undefined
-        }
-        transition={
-          animated
-            ? {
+    const SkeletonItem = React.forwardRef<HTMLDivElement, { index: number }>(
+      ({ index }, itemRef) => (
+        <motion.div
+          ref={itemRef}
+          className={cn(skeletonVariants({ variant, size, shape }), className)}
+          style={skeletonStyle}
+          initial={animated ? { opacity: 0.4 } : undefined}
+          animate={
+            animated
+              ? variant === 'pulse'
+                ? pulseAnimation
+                : { opacity: [0.4, 0.8, 0.4] }
+              : undefined
+          }
+          transition={
+            animated
+              ? {
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: index * 0.1,
+                }
+              : undefined
+          }
+        >
+          {variant === 'shimmer' && animated && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+              animate={shimmerAnimation}
+              transition={{
                 duration: 1.5,
                 repeat: Infinity,
-                ease: 'easeInOut',
-                delay: index * 0.1,
-              }
-            : undefined
-        }
-      >
-        {variant === 'shimmer' && animated && (
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-            animate={shimmerAnimation}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: 'linear',
-              delay: index * 0.2,
-            }}
-          />
-        )}
-      </motion.div>
-    ));
+                ease: 'linear',
+                delay: index * 0.2,
+              }}
+            />
+          )}
+        </motion.div>
+      )
+    );
 
     if (count === 1) {
       return <SkeletonItem index={0} ref={ref} />;
@@ -158,7 +160,12 @@ export const SkeletonCard: React.FC<{
   <div className={cn('space-y-3 p-4', className)}>
     {showAvatar && (
       <div className="flex items-center space-x-3">
-        <GlassSkeleton shape="circle" width={40} height={40} variant="shimmer" />
+        <GlassSkeleton
+          shape="circle"
+          width={40}
+          height={40}
+          variant="shimmer"
+        />
         <div className="space-y-2 flex-1">
           <GlassSkeleton width="40%" height={16} variant="shimmer" />
           <GlassSkeleton width="60%" height={12} variant="shimmer" />
@@ -179,7 +186,10 @@ export const SkeletonTable: React.FC<{
 }> = ({ rows = 5, columns = 4, className }) => (
   <div className={cn('space-y-3', className)}>
     {/* Header */}
-    <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+    <div
+      className="grid gap-3"
+      style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
+    >
       {Array.from({ length: columns }, (_, index) => (
         <GlassSkeleton key={index} height={24} variant="shimmer" />
       ))}

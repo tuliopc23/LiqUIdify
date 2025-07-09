@@ -55,12 +55,18 @@ const GlassFloatingAction = forwardRef<
     const { elementRef: magneticRef, transform } = useMagneticHover(0.4, 80);
 
     // Callback ref to handle both button and magnetic refs
-    const setRefs = useCallback((node: HTMLButtonElement | null) => {
-      (buttonRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
-      if (enableMagnetic && magneticRef) {
-        (magneticRef as React.MutableRefObject<HTMLElement | null>).current = node;
-      }
-    }, [enableMagnetic, magneticRef]);
+    const setRefs = useCallback(
+      (node: HTMLButtonElement | null) => {
+        (
+          buttonRef as React.MutableRefObject<HTMLButtonElement | null>
+        ).current = node;
+        if (enableMagnetic && magneticRef) {
+          (magneticRef as React.MutableRefObject<HTMLElement | null>).current =
+            node;
+        }
+      },
+      [enableMagnetic, magneticRef]
+    );
 
     const positionClasses = {
       'bottom-right': 'fixed bottom-6 right-6 z-50',

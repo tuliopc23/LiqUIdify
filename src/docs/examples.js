@@ -5,19 +5,19 @@
 import React from 'react';
 // Example collections
 export const exampleCollections = [
-    {
-        name: 'Getting Started',
-        description: 'Basic examples to get you started with Glass UI',
-        examples: [
-            {
-                id: 'basic-button',
-                title: 'Basic Glass Button',
-                description: 'A simple button with glass morphism effects',
-                category: 'basic',
-                difficulty: 'beginner',
-                tags: ['button', 'glass', 'interactive'],
-                code: {
-                    tsx: `import { Button } from '@/components/ui/button';
+  {
+    name: 'Getting Started',
+    description: 'Basic examples to get you started with Glass UI',
+    examples: [
+      {
+        id: 'basic-button',
+        title: 'Basic Glass Button',
+        description: 'A simple button with glass morphism effects',
+        category: 'basic',
+        difficulty: 'beginner',
+        tags: ['button', 'glass', 'interactive'],
+        code: {
+          tsx: `import { Button } from '@/components/ui/button';
 
 export function BasicGlassButton() {
   return (
@@ -26,36 +26,40 @@ export function BasicGlassButton() {
     </Button>
   );
 }`,
-                },
-                preview: React.createElement('div', { className: 'p-4' }, 'Button Preview'),
-                designTokens: [
-                    'colors.glass.light.primary',
-                    'borderRadius.md',
-                    'shadows.glass.subtle',
-                ],
-                relatedExamples: ['interactive-button', 'button-variants'],
-                accessibility: {
-                    features: [
-                        'Keyboard navigation support',
-                        'Focus visible indicators',
-                        'Screen reader compatible',
-                    ],
-                    testing: [
-                        'Test with keyboard navigation',
-                        'Verify focus indicators',
-                        'Check with screen reader',
-                    ],
-                },
-            },
-            {
-                id: 'glass-card',
-                title: 'Glass Card Component',
-                description: 'A translucent card with subtle shadows and borders',
-                category: 'basic',
-                difficulty: 'beginner',
-                tags: ['card', 'container', 'glass'],
-                code: {
-                    tsx: `import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+        },
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Button Preview'
+        ),
+        designTokens: [
+          'colors.glass.light.primary',
+          'borderRadius.md',
+          'shadows.glass.subtle',
+        ],
+        relatedExamples: ['interactive-button', 'button-variants'],
+        accessibility: {
+          features: [
+            'Keyboard navigation support',
+            'Focus visible indicators',
+            'Screen reader compatible',
+          ],
+          testing: [
+            'Test with keyboard navigation',
+            'Verify focus indicators',
+            'Check with screen reader',
+          ],
+        },
+      },
+      {
+        id: 'glass-card',
+        title: 'Glass Card Component',
+        description: 'A translucent card with subtle shadows and borders',
+        category: 'basic',
+        difficulty: 'beginner',
+        tags: ['card', 'container', 'glass'],
+        code: {
+          tsx: `import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export function GlassCard() {
   return (
@@ -69,25 +73,29 @@ export function GlassCard() {
     </Card>
   );
 }`,
-                },
-                preview: React.createElement('div', { className: 'p-4' }, 'Card Preview'),
-                designTokens: [
-                    'colors.glass.light.primary',
-                    'borderRadius.lg',
-                    'shadows.glass.light',
-                    'spacing.6',
-                ],
-                relatedExamples: ['elevated-card', 'interactive-card'],
-            },
-            {
-                id: 'glass-input',
-                title: 'Glass Input Field',
-                description: 'A form input with glass styling and focus states',
-                category: 'forms',
-                difficulty: 'beginner',
-                tags: ['input', 'form', 'glass'],
-                code: {
-                    tsx: `import { Input } from '@/components/ui/input';
+        },
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Card Preview'
+        ),
+        designTokens: [
+          'colors.glass.light.primary',
+          'borderRadius.lg',
+          'shadows.glass.light',
+          'spacing.6',
+        ],
+        relatedExamples: ['elevated-card', 'interactive-card'],
+      },
+      {
+        id: 'glass-input',
+        title: 'Glass Input Field',
+        description: 'A form input with glass styling and focus states',
+        category: 'forms',
+        difficulty: 'beginner',
+        tags: ['input', 'form', 'glass'],
+        code: {
+          tsx: `import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 export function GlassInput() {
@@ -103,42 +111,46 @@ export function GlassInput() {
     </div>
   );
 }`,
-                },
-                preview: React.createElement('div', { className: 'p-4' }, 'Input Preview'),
-                designTokens: [
-                    'colors.glass.light.primary',
-                    'borderRadius.base',
-                    'shadows.focus.medium',
-                ],
-                relatedExamples: ['form-validation', 'input-variants'],
-                accessibility: {
-                    features: [
-                        'Proper label association',
-                        'Focus management',
-                        'Error state indication',
-                    ],
-                    testing: [
-                        'Test label-input association',
-                        'Verify focus behavior',
-                        'Check error states',
-                    ],
-                },
-            },
+        },
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Input Preview'
+        ),
+        designTokens: [
+          'colors.glass.light.primary',
+          'borderRadius.base',
+          'shadows.focus.medium',
         ],
-    },
-    {
-        name: 'Advanced Components',
-        description: 'Complex components showcasing advanced Glass UI features',
-        examples: [
-            {
-                id: 'modal-dialog',
-                title: 'Glass Modal Dialog',
-                description: 'A modal with glass backdrop and focus management',
-                category: 'advanced',
-                difficulty: 'intermediate',
-                tags: ['modal', 'dialog', 'overlay', 'focus-trap'],
-                code: {
-                    tsx: `import { useState } from 'react';
+        relatedExamples: ['form-validation', 'input-variants'],
+        accessibility: {
+          features: [
+            'Proper label association',
+            'Focus management',
+            'Error state indication',
+          ],
+          testing: [
+            'Test label-input association',
+            'Verify focus behavior',
+            'Check error states',
+          ],
+        },
+      },
+    ],
+  },
+  {
+    name: 'Advanced Components',
+    description: 'Complex components showcasing advanced Glass UI features',
+    examples: [
+      {
+        id: 'modal-dialog',
+        title: 'Glass Modal Dialog',
+        description: 'A modal with glass backdrop and focus management',
+        category: 'advanced',
+        difficulty: 'intermediate',
+        tags: ['modal', 'dialog', 'overlay', 'focus-trap'],
+        code: {
+          tsx: `import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
@@ -161,38 +173,43 @@ export function GlassModal() {
     </Dialog>
   );
 }`,
-                },
-                preview: React.createElement('div', { className: 'p-4' }, 'Modal Preview'),
-                designTokens: [
-                    'colors.glass.light.elevated',
-                    'backdropBlur.heavy',
-                    'zIndex.modal',
-                    'animation.duration.smooth',
-                ],
-                relatedExamples: ['drawer-component', 'popover-menu'],
-                accessibility: {
-                    features: [
-                        'Focus trap within modal',
-                        'Escape key to close',
-                        'Backdrop click to close',
-                        'Proper ARIA attributes',
-                    ],
-                    testing: [
-                        'Test focus trapping',
-                        'Verify keyboard navigation',
-                        'Check ARIA implementation',
-                    ],
-                },
-            },
-            {
-                id: 'navigation-menu',
-                title: 'Glass Navigation Menu',
-                description: 'A responsive navigation with glass effects and animations',
-                category: 'navigation',
-                difficulty: 'advanced',
-                tags: ['navigation', 'menu', 'responsive', 'animation'],
-                code: {
-                    tsx: `import { useState } from 'react';
+        },
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Modal Preview'
+        ),
+        designTokens: [
+          'colors.glass.light.elevated',
+          'backdropBlur.heavy',
+          'zIndex.modal',
+          'animation.duration.smooth',
+        ],
+        relatedExamples: ['drawer-component', 'popover-menu'],
+        accessibility: {
+          features: [
+            'Focus trap within modal',
+            'Escape key to close',
+            'Backdrop click to close',
+            'Proper ARIA attributes',
+          ],
+          testing: [
+            'Test focus trapping',
+            'Verify keyboard navigation',
+            'Check ARIA implementation',
+          ],
+        },
+      },
+      {
+        id: 'navigation-menu',
+        title: 'Glass Navigation Menu',
+        description:
+          'A responsive navigation with glass effects and animations',
+        category: 'navigation',
+        difficulty: 'advanced',
+        tags: ['navigation', 'menu', 'responsive', 'animation'],
+        code: {
+          tsx: `import { useState } from 'react';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from '@/components/ui/navigation-menu';
 
 export function GlassNavigation() {
@@ -218,31 +235,35 @@ export function GlassNavigation() {
     </NavigationMenu>
   );
 }`,
-                },
-                preview: React.createElement('div', { className: 'p-4' }, 'Navigation Preview'),
-                designTokens: [
-                    'colors.glass.light.primary',
-                    'colors.glass.light.elevated',
-                    'animation.duration.normal',
-                    'shadows.glass.medium',
-                ],
-                relatedExamples: ['dropdown-menu', 'sidebar-navigation'],
-            },
+        },
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Navigation Preview'
+        ),
+        designTokens: [
+          'colors.glass.light.primary',
+          'colors.glass.light.elevated',
+          'animation.duration.normal',
+          'shadows.glass.medium',
         ],
-    },
-    {
-        name: 'Layout Patterns',
-        description: 'Common layout patterns using Glass UI components',
-        examples: [
-            {
-                id: 'dashboard-layout',
-                title: 'Glass Dashboard Layout',
-                description: 'A complete dashboard layout with glass components',
-                category: 'layouts',
-                difficulty: 'advanced',
-                tags: ['dashboard', 'layout', 'sidebar', 'header'],
-                code: {
-                    tsx: `import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+        relatedExamples: ['dropdown-menu', 'sidebar-navigation'],
+      },
+    ],
+  },
+  {
+    name: 'Layout Patterns',
+    description: 'Common layout patterns using Glass UI components',
+    examples: [
+      {
+        id: 'dashboard-layout',
+        title: 'Glass Dashboard Layout',
+        description: 'A complete dashboard layout with glass components',
+        category: 'layouts',
+        difficulty: 'advanced',
+        tags: ['dashboard', 'layout', 'sidebar', 'header'],
+        code: {
+          tsx: `import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 export function GlassDashboard() {
@@ -308,37 +329,42 @@ export function GlassDashboard() {
     </div>
   );
 }`,
-                },
-                preview: React.createElement('div', { className: 'p-4' }, 'Dashboard Preview'),
-                designTokens: [
-                    'colors.glass.light.primary',
-                    'colors.glass.light.elevated',
-                    'borderRadius.lg',
-                    'spacing.4',
-                    'shadows.glass.light',
-                ],
-                relatedExamples: ['admin-panel', 'analytics-dashboard'],
-                notes: [
-                    'Uses CSS Grid for responsive layout',
-                    'Implements proper semantic HTML structure',
-                    'Includes hover and focus states for interactive elements',
-                ],
-            },
+        },
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Dashboard Preview'
+        ),
+        designTokens: [
+          'colors.glass.light.primary',
+          'colors.glass.light.elevated',
+          'borderRadius.lg',
+          'spacing.4',
+          'shadows.glass.light',
         ],
-    },
-    {
-        name: 'Form Patterns',
-        description: 'Form layouts and validation patterns with Glass UI',
-        examples: [
-            {
-                id: 'contact-form',
-                title: 'Glass Contact Form',
-                description: 'A complete contact form with validation and glass styling',
-                category: 'forms',
-                difficulty: 'intermediate',
-                tags: ['form', 'validation', 'contact', 'glass'],
-                code: {
-                    tsx: `import { useState } from 'react';
+        relatedExamples: ['admin-panel', 'analytics-dashboard'],
+        notes: [
+          'Uses CSS Grid for responsive layout',
+          'Implements proper semantic HTML structure',
+          'Includes hover and focus states for interactive elements',
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Form Patterns',
+    description: 'Form layouts and validation patterns with Glass UI',
+    examples: [
+      {
+        id: 'contact-form',
+        title: 'Glass Contact Form',
+        description:
+          'A complete contact form with validation and glass styling',
+        category: 'forms',
+        difficulty: 'intermediate',
+        tags: ['form', 'validation', 'contact', 'glass'],
+        code: {
+          tsx: `import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -407,97 +433,109 @@ export function GlassContactForm() {
     </Card>
   );
 }`,
-                },
-                preview: React.createElement('div', { className: 'p-4' }, 'Contact Form Preview'),
-                designTokens: [
-                    'colors.glass.light.primary',
-                    'borderRadius.lg',
-                    'spacing.4',
-                    'shadows.focus.medium',
-                ],
-                relatedExamples: ['login-form', 'registration-form'],
-                accessibility: {
-                    features: [
-                        'Proper form labeling',
-                        'Required field indication',
-                        'Error message association',
-                        'Keyboard navigation',
-                    ],
-                    testing: [
-                        'Test form submission',
-                        'Verify validation messages',
-                        'Check keyboard navigation',
-                        'Test with screen reader',
-                    ],
-                },
-            },
+        },
+        preview: React.createElement(
+          'div',
+          { className: 'p-4' },
+          'Contact Form Preview'
+        ),
+        designTokens: [
+          'colors.glass.light.primary',
+          'borderRadius.lg',
+          'spacing.4',
+          'shadows.focus.medium',
         ],
-    },
+        relatedExamples: ['login-form', 'registration-form'],
+        accessibility: {
+          features: [
+            'Proper form labeling',
+            'Required field indication',
+            'Error message association',
+            'Keyboard navigation',
+          ],
+          testing: [
+            'Test form submission',
+            'Verify validation messages',
+            'Check keyboard navigation',
+            'Test with screen reader',
+          ],
+        },
+      },
+    ],
+  },
 ];
 // Example utilities
 export class ExampleManager {
-    constructor() {
-        Object.defineProperty(this, "examples", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: new Map()
-        });
-        // Register all examples
-        exampleCollections.forEach(collection => {
-            collection.examples.forEach(example => {
-                this.examples.set(example.id, example);
-            });
-        });
-    }
-    getExample(id) {
-        return this.examples.get(id);
-    }
-    getExamplesByCategory(category) {
-        return Array.from(this.examples.values()).filter(example => example.category === category);
-    }
-    getExamplesByDifficulty(difficulty) {
-        return Array.from(this.examples.values()).filter(example => example.difficulty === difficulty);
-    }
-    getExamplesByTag(tag) {
-        return Array.from(this.examples.values()).filter(example => example.tags.includes(tag));
-    }
-    searchExamples(query) {
-        const lowercaseQuery = query.toLowerCase();
-        return Array.from(this.examples.values()).filter(example => example.title.toLowerCase().includes(lowercaseQuery) ||
-            example.description.toLowerCase().includes(lowercaseQuery) ||
-            example.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery)));
-    }
-    getRelatedExamples(exampleId) {
-        const example = this.getExample(exampleId);
-        if (!example)
-            return [];
-        return example.relatedExamples
-            .map(id => this.getExample(id))
-            .filter(Boolean);
-    }
+  constructor() {
+    Object.defineProperty(this, 'examples', {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: new Map(),
+    });
+    // Register all examples
+    exampleCollections.forEach(collection => {
+      collection.examples.forEach(example => {
+        this.examples.set(example.id, example);
+      });
+    });
+  }
+  getExample(id) {
+    return this.examples.get(id);
+  }
+  getExamplesByCategory(category) {
+    return Array.from(this.examples.values()).filter(
+      example => example.category === category
+    );
+  }
+  getExamplesByDifficulty(difficulty) {
+    return Array.from(this.examples.values()).filter(
+      example => example.difficulty === difficulty
+    );
+  }
+  getExamplesByTag(tag) {
+    return Array.from(this.examples.values()).filter(example =>
+      example.tags.includes(tag)
+    );
+  }
+  searchExamples(query) {
+    const lowercaseQuery = query.toLowerCase();
+    return Array.from(this.examples.values()).filter(
+      example =>
+        example.title.toLowerCase().includes(lowercaseQuery) ||
+        example.description.toLowerCase().includes(lowercaseQuery) ||
+        example.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
+    );
+  }
+  getRelatedExamples(exampleId) {
+    const example = this.getExample(exampleId);
+    if (!example) return [];
+    return example.relatedExamples
+      .map(id => this.getExample(id))
+      .filter(Boolean);
+  }
 }
 // Export the example manager instance
 export const exampleManager = new ExampleManager();
 // Example code generators
 export function generateExampleCode(example) {
-    let code = example.code.tsx;
-    if (example.code.css) {
-        code += `
+  let code = example.code.tsx;
+  if (example.code.css) {
+    code += `
 
 /* CSS */
 ${example.code.css}`;
-    }
-    if (example.code.config) {
-        code += `
+  }
+  if (example.code.config) {
+    code += `
 
 /* Configuration */
 ${example.code.config}`;
-    }
-    return code;
+  }
+  return code;
 }
 export function generateExampleMarkdown(example) {
-    return `# ${example.title}
+  return `# ${example.title}
 
 ${example.description}
 
@@ -515,8 +553,9 @@ ${example.code.tsx}
 
 ${example.designTokens.map(token => `- \`${token}\``).join('\n')}
 
-${example.accessibility
-        ? `
+${
+  example.accessibility
+    ? `
 ## Accessibility Features
 
 ${example.accessibility.features.map(feature => `- ${feature}`).join('\n')}
@@ -525,15 +564,18 @@ ${example.accessibility.features.map(feature => `- ${feature}`).join('\n')}
 
 ${example.accessibility.testing.map(test => `- [ ] ${test}`).join('\n')}
 `
-        : ''}
+    : ''
+}
 
-${example.notes
-        ? `
+${
+  example.notes
+    ? `
 ## Notes
 
 ${example.notes.map(note => `- ${note}`).join('\n')}
 `
-        : ''}
+    : ''
+}
 
 ## Related Examples
 
@@ -542,8 +584,8 @@ ${example.relatedExamples.map(id => `- [${id}](#${id})`).join('\n')}
 }
 // Export utilities
 export const exampleUtils = {
-    manager: exampleManager,
-    collections: exampleCollections,
-    generateCode: generateExampleCode,
-    generateMarkdown: generateExampleMarkdown,
+  manager: exampleManager,
+  collections: exampleCollections,
+  generateCode: generateExampleCode,
+  generateMarkdown: generateExampleMarkdown,
 };

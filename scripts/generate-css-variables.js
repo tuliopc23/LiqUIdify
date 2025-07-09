@@ -17,9 +17,9 @@ const __dirname = dirname(__filename);
 try {
   const css = generateThemeCSS();
   const outputPath = join(__dirname, '..', 'dist', 'liquidui-variables.css');
-  
+
   writeFileSync(outputPath, css, 'utf-8');
-  
+
   console.log('✅ CSS variables generated successfully at:', outputPath);
 } catch (error) {
   console.error('❌ Error generating CSS variables:', error);

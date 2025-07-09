@@ -188,22 +188,24 @@ export const AllVariants: Story = {
 export const AllPermutations: Story = {
   render: () => (
     <div className="space-y-6">
-      {['primary', 'secondary', 'tertiary', 'ghost', 'destructive'].map((variant) => (
-        <div key={variant} className="space-y-2">
-          <h3 className="text-sm font-medium capitalize">{variant}</h3>
-          <div className="flex items-center gap-4 flex-wrap">
-            {['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
-              <GlassButton
-                key={`${variant}-${size}`}
-                variant={variant as any}
-                size={size as any}
-              >
-                {variant} {size}
-              </GlassButton>
-            ))}
+      {['primary', 'secondary', 'tertiary', 'ghost', 'destructive'].map(
+        variant => (
+          <div key={variant} className="space-y-2">
+            <h3 className="text-sm font-medium capitalize">{variant}</h3>
+            <div className="flex items-center gap-4 flex-wrap">
+              {['xs', 'sm', 'md', 'lg', 'xl'].map(size => (
+                <GlassButton
+                  key={`${variant}-${size}`}
+                  variant={variant as any}
+                  size={size as any}
+                >
+                  {variant} {size}
+                </GlassButton>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      )}
     </div>
   ),
 };
@@ -211,13 +213,16 @@ export const AllPermutations: Story = {
 // Theme comparison with decorators
 export const ThemeComparison: Story = {
   decorators: [
-    (Story) => (
+    Story => (
       <div className="grid grid-cols-2 gap-8">
         <div data-theme="light" className="p-6 bg-white rounded-lg border">
           <h3 className="mb-4 text-sm font-medium">Light Theme</h3>
           <Story />
         </div>
-        <div data-theme="dark" className="p-6 bg-gray-900 rounded-lg border border-gray-700">
+        <div
+          data-theme="dark"
+          className="p-6 bg-gray-900 rounded-lg border border-gray-700"
+        >
           <h3 className="mb-4 text-sm font-medium text-white">Dark Theme</h3>
           <Story />
         </div>
@@ -232,9 +237,15 @@ export const ThemeComparison: Story = {
         <GlassButton variant="tertiary">Tertiary</GlassButton>
       </div>
       <div className="flex items-center gap-4">
-        <GlassButton variant="primary" leftIcon={<PlayIcon />}>With Icon</GlassButton>
-        <GlassButton variant="secondary" loading>Loading</GlassButton>
-        <GlassButton variant="tertiary" disabled>Disabled</GlassButton>
+        <GlassButton variant="primary" leftIcon={<PlayIcon />}>
+          With Icon
+        </GlassButton>
+        <GlassButton variant="secondary" loading>
+          Loading
+        </GlassButton>
+        <GlassButton variant="tertiary" disabled>
+          Disabled
+        </GlassButton>
       </div>
     </div>
   ),
@@ -242,7 +253,7 @@ export const ThemeComparison: Story = {
 
 // Interactive playground
 export const Playground: Story = {
-  render: (args) => <GlassButton {...args} />,
+  render: args => <GlassButton {...args} />,
   args: {
     children: 'Interactive Button',
     variant: 'primary',

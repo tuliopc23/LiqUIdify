@@ -1,7 +1,16 @@
 import React, { forwardRef, useState, useRef, useCallback } from 'react';
 import { cn, getGlassClass, microInteraction } from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { Upload, X, File, Image, FileText, Music, Video, Archive } from 'lucide-react';
+import {
+  Upload,
+  X,
+  File,
+  Image,
+  FileText,
+  Music,
+  Video,
+  Archive,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const fileUploadVariants = cva(
@@ -100,21 +109,23 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
   ) => {
     const [files, setFiles] = useState<FileUploadItem[]>([]);
     const [isDragOver, setIsDragOver] = useState(false);
-    const [uploadState, setUploadState] = useState<'idle' | 'uploading' | 'error'>('idle');
-    
+    const [uploadState, setUploadState] = useState<
+      'idle' | 'uploading' | 'error'
+    >('idle');
+
     const fileInputRef = useRef<HTMLInputElement>(null);
     const dragCountRef = useRef(0);
 
     // Get file icon based on type
     const getFileIcon = (file: File) => {
       const type = file.type.toLowerCase();
-      
+
       if (type.startsWith('image/')) return Image;
       if (type.startsWith('video/')) return Video;
       if (type.startsWith('audio/')) return Music;
       if (type.includes('pdf') || type.includes('document')) return FileText;
       if (type.includes('zip') || type.includes('rar')) return Archive;
-      
+
       return File;
     };
 
@@ -132,20 +143,20 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
       if (maxFileSize && file.size > maxFileSize) {
         return `File size exceeds ${formatFileSize(maxFileSize)}`;
       }
-      
+
       if (allowedTypes.length > 0 && !allowedTypes.includes(file.type)) {
         return 'File type not allowed';
       }
-      
+
       return null;
     };
 
     // Create file preview
     const createPreview = (file: File): Promise<string | null> => {
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         if (file.type.startsWith('image/')) {
           const reader = new FileReader();
-          reader.onload = (e) => resolve(e.target?.result as string);
+          reader.onload = e => resolve(e.target?.result as string);
           reader.onerror = () => resolve(null);
           reader.readAsDataURL(file);
         } else {
@@ -155,38 +166,50 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     };
 
     // Process files
-    const processFiles = useCallback(async (fileList: File[]) => {
-      if (disabled) return;
-      
-      const newFiles: FileUploadItem[] = [];
-      
-      for (const file of fileList) {
-        const error = validateFile(file);
-        const preview = showPreview ? await createPreview(file) : null;
-        
-        const fileItem: FileUploadItem = {
-          id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-          file,
-          status: error ? 'error' : 'pending',
-          error: error || undefined,
-          preview: preview || undefined,
-        };
-        
-        newFiles.push(fileItem);
-      }
-      
-      const updatedFiles = [...files, ...newFiles].slice(0, maxFiles);
-      setFiles(updatedFiles);
-      onFilesChange?.(updatedFiles);
-      
-      // Auto-upload if onUpload is provided
-      if (onUpload) {
-        const validFiles = newFiles.filter(f => f.status === 'pending');
-        if (validFiles.length > 0) {
-          await handleUpload(validFiles);
+    const processFiles = useCallback(
+      async (fileList: File[]) => {
+        if (disabled) return;
+
+        const newFiles: FileUploadItem[] = [];
+
+        for (const file of fileList) {
+          const error = validateFile(file);
+          const preview = showPreview ? await createPreview(file) : null;
+
+          const fileItem: FileUploadItem = {
+            id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+            file,
+            status: error ? 'error' : 'pending',
+            error: error || undefined,
+            preview: preview || undefined,
+          };
+
+          newFiles.push(fileItem);
         }
-      }
-    }, [files, disabled, maxFiles, maxFileSize, allowedTypes, onFilesChange, onUpload, showPreview]);
+
+        const updatedFiles = [...files, ...newFiles].slice(0, maxFiles);
+        setFiles(updatedFiles);
+        onFilesChange?.(updatedFiles);
+
+        // Auto-upload if onUpload is provided
+        if (onUpload) {
+          const validFiles = newFiles.filter(f => f.status === 'pending');
+          if (validFiles.length > 0) {
+            await handleUpload(validFiles);
+          }
+        }
+      },
+      [
+        files,
+        disabled,
+        maxFiles,
+        maxFileSize,
+        allowedTypes,
+        onFilesChange,
+        onUpload,
+        showPreview,
+      ]
+    );
 
     // Handle file input change
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -223,10 +246,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     const handleDrop = (e: React.DragEvent) => {
       e.preventDefault();
       e.stopPropagation();
-      
+
       setIsDragOver(false);
       dragCountRef.current = 0;
-      
+
       const fileList = Array.from(e.dataTransfer.files);
       if (fileList.length > 0) {
         processFiles(fileList);
@@ -236,9 +259,9 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     // Handle upload
     const handleUpload = async (filesToUpload: FileUploadItem[]) => {
       if (!onUpload) return;
-      
+
       setUploadState('uploading');
-      
+
       try {
         // Update files to uploading state
         const updatedFiles = files.map(f => {
@@ -248,10 +271,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
           return f;
         });
         setFiles(updatedFiles);
-        
+
         // Upload files
         await onUpload(filesToUpload.map(f => f.file));
-        
+
         // Update files to success state
         const successFiles = files.map(f => {
           if (filesToUpload.find(u => u.id === f.id)) {
@@ -261,15 +284,14 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         });
         setFiles(successFiles);
         setUploadState('idle');
-        
       } catch (error) {
         // Update files to error state
         const errorFiles = files.map(f => {
           if (filesToUpload.find(u => u.id === f.id)) {
-            return { 
-              ...f, 
-              status: 'error' as const, 
-              error: error instanceof Error ? error.message : 'Upload failed' 
+            return {
+              ...f,
+              status: 'error' as const,
+              error: error instanceof Error ? error.message : 'Upload failed',
             };
           }
           return f;
@@ -298,7 +320,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     return (
       <div
         ref={ref}
-        className={cn(fileUploadVariants({ size, state: currentState }), className)}
+        className={cn(
+          fileUploadVariants({ size, state: currentState }),
+          className
+        )}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
@@ -318,16 +343,16 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         {/* Upload Area */}
         <div className="text-center">
           <div className="flex justify-center mb-4">
-            <Upload className={cn(
-              'w-12 h-12 transition-colors duration-200',
-              isDragOver ? 'text-blue-400' : 'text-white/60'
-            )} />
+            <Upload
+              className={cn(
+                'w-12 h-12 transition-colors duration-200',
+                isDragOver ? 'text-blue-400' : 'text-white/60'
+              )}
+            />
           </div>
-          
-          <p className="text-white/80 mb-2">
-            {dropzoneText}
-          </p>
-          
+
+          <p className="text-white/80 mb-2">{dropzoneText}</p>
+
           <button
             type="button"
             onClick={openFileDialog}
@@ -352,16 +377,18 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
               exit={{ opacity: 0, y: -10 }}
               className="mt-6 space-y-2"
             >
-              {files.map((fileItem) => {
+              {files.map(fileItem => {
                 const Icon = getFileIcon(fileItem.file);
-                
+
                 return (
                   <motion.div
                     key={fileItem.id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
-                    className={cn(fileItemVariants({ status: fileItem.status }))}
+                    className={cn(
+                      fileItemVariants({ status: fileItem.status })
+                    )}
                   >
                     {/* File Preview/Icon */}
                     <div className="flex-shrink-0">
@@ -384,7 +411,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                       <p className="text-white/60 text-sm">
                         {formatFileSize(fileItem.file.size)}
                       </p>
-                      
+
                       {/* Progress Bar */}
                       {showProgress && fileItem.status === 'uploading' && (
                         <div className="w-full bg-white/10 rounded-full h-1.5 mt-1">
@@ -394,7 +421,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                           />
                         </div>
                       )}
-                      
+
                       {/* Error Message */}
                       {fileItem.error && (
                         <p className="text-red-400 text-xs mt-1">

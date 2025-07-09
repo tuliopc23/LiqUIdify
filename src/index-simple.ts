@@ -16,9 +16,9 @@ export { GlassBadge } from './components/glass-badge';
 export { designTokens } from './tokens/design-tokens';
 
 // Types
-export type { 
+export type {
   GlassVariantProps,
   ButtonVariantProps,
   CardVariantProps,
-  InputVariantProps 
+  InputVariantProps,
 } from './lib/variant-system';

@@ -79,11 +79,7 @@ const accordionTriggerVariants = cva(
 );
 
 const accordionContentVariants = cva(
-  [
-    'overflow-hidden text-white/80',
-    'border-t border-white/10',
-    'bg-white/5',
-  ],
+  ['overflow-hidden text-white/80', 'border-t border-white/10', 'bg-white/5'],
   {
     variants: {
       size: {
@@ -100,7 +96,10 @@ const accordionContentVariants = cva(
 
 // Single accordion props
 export interface GlassAccordionSingleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>, 'type'>,
+  extends Omit<
+      React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>,
+      'type'
+    >,
     VariantProps<typeof accordionVariants> {
   children: React.ReactNode;
   type: 'single';
@@ -112,7 +111,10 @@ export interface GlassAccordionSingleProps
 
 // Multiple accordion props
 export interface GlassAccordionMultipleProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>, 'type'>,
+  extends Omit<
+      React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>,
+      'type'
+    >,
     VariantProps<typeof accordionVariants> {
   children: React.ReactNode;
   type: 'multiple';
@@ -122,7 +124,9 @@ export interface GlassAccordionMultipleProps
 }
 
 // Union type for all accordion props
-export type GlassAccordionProps = GlassAccordionSingleProps | GlassAccordionMultipleProps;
+export type GlassAccordionProps =
+  | GlassAccordionSingleProps
+  | GlassAccordionMultipleProps;
 
 export interface GlassAccordionItemProps
   extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>,
@@ -237,4 +241,3 @@ export {
   GlassAccordionTrigger,
   GlassAccordionContent,
 };
-

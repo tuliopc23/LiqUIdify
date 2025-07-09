@@ -17,7 +17,7 @@
   --glass-bg-elevated: rgba(255, 255, 255, 0.45);
   --glass-bg-floating: rgba(255, 255, 255, 0.35);
   --glass-bg-overlay: rgba(255, 255, 255, 0.55);
-  
+
   /* Ensure all variables have valid color values */
   --glass-bg: var(--glass-bg-primary, rgba(255, 255, 255, 0.12));
   --glass-border: var(--glass-border-light, rgba(255, 255, 255, 0.15));
@@ -103,11 +103,11 @@
   --glass-primary: rgba(59, 130, 246, 0.8);
   --glass-primary-hover: rgba(59, 130, 246, 0.9);
   --glass-primary-active: rgba(59, 130, 246, 0.7);
-  
+
   /* Text Colors */
   --text-primary: rgba(0, 0, 0, 0.9);
   --text-secondary: rgba(0, 0, 0, 0.6);
-  
+
   /* Shorthand Properties */
   --glass-bg: var(--glass-bg-primary);
   --glass-border: var(--glass-border-light);
@@ -137,7 +137,7 @@
   --glass-brand: rgba(99, 102, 241, 0.1);
   --glass-premium: rgba(147, 51, 234, 0.08);
   --glass-luxury: rgba(236, 72, 153, 0.08);
-  
+
   /* Canvas Background for Storybook */
   --glass-bg-canvas: #ffffff;
   --glass-bg-dark-canvas: #0a0a0a;
@@ -166,7 +166,7 @@
   /* Dark Theme Text Colors */
   --text-primary: rgba(255, 255, 255, 0.95);
   --text-secondary: rgba(255, 255, 255, 0.6);
-  
+
   /* Contrast Enhancement */
   --contrast-offset: 0.25; /* Increased for better contrast */
 
@@ -186,46 +186,48 @@
 /* Apple System Color Tokens */
 :root {
   /* Apple System Colors */
-  --apple-system-blue: #007AFF;
-  --apple-system-blue-light: #5AC8FA;
-  --apple-system-blue-dark: #0051D5;
-  --apple-system-gray: #8E8E93;
-  --apple-system-gray2: #AEAEB2;
-  --apple-system-gray3: #C7C7CC;
-  --apple-system-gray4: #D1D1D6;
-  --apple-system-gray5: #E5E5EA;
-  --apple-system-gray6: #F2F2F7;
-  
+  --apple-system-blue: #007aff;
+  --apple-system-blue-light: #5ac8fa;
+  --apple-system-blue-dark: #0051d5;
+  --apple-system-gray: #8e8e93;
+  --apple-system-gray2: #aeaeb2;
+  --apple-system-gray3: #c7c7cc;
+  --apple-system-gray4: #d1d1d6;
+  --apple-system-gray5: #e5e5ea;
+  --apple-system-gray6: #f2f2f7;
+
   /* Apple Liquid Glass Materials */
   --apple-liquid-primary: rgba(255, 255, 255, 0.07);
   --apple-liquid-secondary: rgba(255, 255, 255, 0.04);
   --apple-liquid-tertiary: rgba(255, 255, 255, 0.02);
   --apple-liquid-elevated: rgba(255, 255, 255, 0.12);
   --apple-liquid-floating: rgba(255, 255, 255, 0.16);
-  --apple-liquid-overlay: rgba(255, 255, 255, 0.20);
-  
+  --apple-liquid-overlay: rgba(255, 255, 255, 0.2);
+
   /* Apple Material States */
   --apple-hover: rgba(255, 255, 255, 0.1);
   --apple-pressed: rgba(255, 255, 255, 0.05);
   --apple-focused: rgba(0, 122, 255, 0.08);
   --apple-selected: rgba(0, 122, 255, 0.12);
-  
+
   /* Apple Borders */
   --apple-border-thin: rgba(255, 255, 255, 0.05);
   --apple-border-medium: rgba(255, 255, 255, 0.1);
   --apple-border-thick: rgba(255, 255, 255, 0.15);
   --apple-border-focus: rgba(0, 122, 255, 0.3);
-  
+
   /* Apple Backdrop Filters */
   --apple-blur-thin: blur(4px) saturate(180%) brightness(105%);
   --apple-blur-regular: blur(12px) saturate(180%) brightness(105%);
   --apple-blur-thick: blur(20px) saturate(200%) brightness(110%);
   --apple-blur-ultra: blur(40px) saturate(220%) brightness(115%);
-  
+
   /* Apple Typography */
-  --apple-font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+  --apple-font-system:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    system-ui, sans-serif;
   --apple-font-mono: 'SF Mono', Monaco, Menlo, Consolas, monospace;
-  
+
   /* Apple Spacing (8pt grid) */
   --apple-space-xs: 2px;
   --apple-space-sm: 4px;
@@ -235,60 +237,62 @@
   --apple-space-2xl: 24px;
   --apple-space-3xl: 32px;
   --apple-space-4xl: 48px;
-  
+
   /* Apple Corner Radius */
   --apple-radius-sm: 6px;
   --apple-radius-md: 10px;
   --apple-radius-lg: 14px;
   --apple-radius-xl: 20px;
   --apple-radius-continuous: 16px;
-  
+
   /* Apple Shadows */
   --apple-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
   --apple-shadow-2: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
-  --apple-shadow-3: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-  --apple-shadow-4: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
-  
+  --apple-shadow-3:
+    0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --apple-shadow-4:
+    0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
   /* Apple Motion */
   --apple-timing-instant: 100ms;
   --apple-timing-quick: 200ms;
   --apple-timing-moderate: 400ms;
   --apple-timing-deliberate: 600ms;
-  
+
   /* Apple Spring Curves */
   --apple-spring-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --apple-spring-moderate: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  --apple-spring-moderate: cubic-bezier(0.4, 0, 0.2, 1);
   --apple-spring-snappy: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --apple-spring-bouncy: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* Dark Mode Apple Tokens */
 [data-theme='dark'] {
-  --apple-system-blue: #409CFF;
+  --apple-system-blue: #409cff;
   --apple-system-gray: #636366;
-  --apple-system-gray2: #48484A;
-  --apple-system-gray3: #3A3A3C;
-  --apple-system-gray4: #2C2C2E;
-  --apple-system-gray5: #1C1C1E;
+  --apple-system-gray2: #48484a;
+  --apple-system-gray3: #3a3a3c;
+  --apple-system-gray4: #2c2c2e;
+  --apple-system-gray5: #1c1c1e;
   --apple-system-gray6: #000000;
-  
+
   --apple-liquid-primary: rgba(255, 255, 255, 0.03);
   --apple-liquid-secondary: rgba(255, 255, 255, 0.02);
   --apple-liquid-tertiary: rgba(255, 255, 255, 0.01);
   --apple-liquid-elevated: rgba(255, 255, 255, 0.06);
   --apple-liquid-floating: rgba(255, 255, 255, 0.09);
   --apple-liquid-overlay: rgba(255, 255, 255, 0.12);
-  
+
   --apple-hover: rgba(255, 255, 255, 0.05);
   --apple-pressed: rgba(255, 255, 255, 0.02);
   --apple-focused: rgba(64, 156, 255, 0.12);
   --apple-selected: rgba(64, 156, 255, 0.16);
-  
+
   --apple-border-thin: rgba(255, 255, 255, 0.03);
   --apple-border-medium: rgba(255, 255, 255, 0.06);
   --apple-border-thick: rgba(255, 255, 255, 0.09);
   --apple-border-focus: rgba(64, 156, 255, 0.4);
-  
+
   --apple-blur-thin: blur(4px) saturate(180%) brightness(120%);
   --apple-blur-regular: blur(12px) saturate(180%) brightness(120%);
   --apple-blur-thick: blur(20px) saturate(200%) brightness(125%);
@@ -1004,8 +1008,11 @@
 
   .liquid-glass {
     border-width: 1.5px;
-    backdrop-filter: var(--glass-blur-light) var(--glass-saturation-enhanced) contrast(calc(100% + (var(--contrast-offset, 0) * 100%)));
-    -webkit-backdrop-filter: var(--glass-blur-light) var(--glass-saturation-enhanced) contrast(calc(100% + (var(--contrast-offset, 0) * 100%)));
+    backdrop-filter: var(--glass-blur-light) var(--glass-saturation-enhanced)
+      contrast(calc(100% + (var(--contrast-offset, 0) * 100%)));
+    -webkit-backdrop-filter: var(--glass-blur-light)
+      var(--glass-saturation-enhanced)
+      contrast(calc(100% + (var(--contrast-offset, 0) * 100%)));
   }
 }
 
@@ -1025,8 +1032,11 @@
   }
 
   .liquid-glass {
-    backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-muted) contrast(calc(100% - (var(--contrast-offset, 0) * 50%)));
-    -webkit-backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-muted) contrast(calc(100% - (var(--contrast-offset, 0) * 50%)));
+    backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-muted)
+      contrast(calc(100% - (var(--contrast-offset, 0) * 50%)));
+    -webkit-backdrop-filter: var(--glass-blur-medium)
+      var(--glass-saturation-muted)
+      contrast(calc(100% - (var(--contrast-offset, 0) * 50%)));
   }
 }
 
@@ -1500,7 +1510,8 @@
 
 .backdrop-blur-glass {
   backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-enhanced);
-  -webkit-backdrop-filter: var(--glass-blur-medium) var(--glass-saturation-enhanced);
+  -webkit-backdrop-filter: var(--glass-blur-medium)
+    var(--glass-saturation-enhanced);
 }
 
 /* Text color utilities for light/dark mode compatibility */

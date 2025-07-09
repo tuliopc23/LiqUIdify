@@ -21,13 +21,13 @@ class CommunityMetricsTracker {
     this.milestones = {
       npm: {
         downloads: [100, 500, 1000, 5000, 10000, 25000, 50000, 100000],
-        weeklyDownloads: [10, 50, 100, 500, 1000, 2500, 5000, 10000]
+        weeklyDownloads: [10, 50, 100, 500, 1000, 2500, 5000, 10000],
       },
       github: {
         stars: [10, 25, 50, 100, 250, 500, 1000, 2500, 5000],
         forks: [5, 10, 25, 50, 100, 250, 500],
-        contributors: [2, 5, 10, 25, 50, 100]
-      }
+        contributors: [2, 5, 10, 25, 50, 100],
+      },
     };
   }
 
@@ -35,29 +35,33 @@ class CommunityMetricsTracker {
     return new Promise((resolve, reject) => {
       const options = {
         headers: {
-          'User-Agent': 'LiquidUI-Metrics-Tracker/1.0'
-        }
+          'User-Agent': 'LiquidUI-Metrics-Tracker/1.0',
+        },
       };
 
-      https.get(url, options, (res) => {
-        let data = '';
-        res.on('data', chunk => data += chunk);
-        res.on('end', () => {
-          try {
-            resolve(JSON.parse(data));
-          } catch (e) {
-            reject(e);
-          }
-        });
-      }).on('error', reject);
+      https
+        .get(url, options, res => {
+          let data = '';
+          res.on('data', chunk => (data += chunk));
+          res.on('end', () => {
+            try {
+              resolve(JSON.parse(data));
+            } catch (e) {
+              reject(e);
+            }
+          });
+        })
+        .on('error', reject);
     });
   }
 
   async getNpmMetrics() {
     try {
       // Get package info
-      const packageInfo = await this.fetchJson(`https://registry.npmjs.org/${this.packageName}`);
-      
+      const packageInfo = await this.fetchJson(
+        `https://registry.npmjs.org/${this.packageName}`
+      );
+
       // Get download stats (last 7 days)
       const downloadStats = await this.fetchJson(
         `https://api.npmjs.org/downloads/point/last-week/${this.packageName}`
@@ -73,9 +77,11 @@ class CommunityMetricsTracker {
         weeklyDownloads: downloadStats.downloads || 0,
         monthlyDownloads: monthlyStats.downloads || 0,
         // Rough estimate of total downloads
-        totalDownloads: (monthlyStats.downloads || 0) * this.estimateMonthsSincePublish(packageInfo),
+        totalDownloads:
+          (monthlyStats.downloads || 0) *
+          this.estimateMonthsSincePublish(packageInfo),
         publishDate: packageInfo.time.created,
-        lastUpdate: packageInfo.time.modified
+        lastUpdate: packageInfo.time.modified,
       };
     } catch (error) {
       console.warn('Failed to fetch npm metrics:', error.message);
@@ -93,8 +99,10 @@ class CommunityMetricsTracker {
 
   async getGitHubMetrics() {
     try {
-      const repoInfo = await this.fetchJson(`https://api.github.com/repos/${this.githubRepo}`);
-      
+      const repoInfo = await this.fetchJson(
+        `https://api.github.com/repos/${this.githubRepo}`
+      );
+
       // Get contributors count
       const contributors = await this.fetchJson(
         `https://api.github.com/repos/${this.githubRepo}/contributors`
@@ -109,7 +117,7 @@ class CommunityMetricsTracker {
         language: repoInfo.language,
         size: repoInfo.size,
         createdAt: repoInfo.created_at,
-        updatedAt: repoInfo.updated_at
+        updatedAt: repoInfo.updated_at,
       };
     } catch (error) {
       console.warn('Failed to fetch GitHub metrics:', error.message);
@@ -139,26 +147,30 @@ class CommunityMetricsTracker {
     if (current.npm) {
       // Total downloads milestones
       for (const milestone of this.milestones.npm.downloads) {
-        if (current.npm.totalDownloads >= milestone && 
-            (!previous.npm || previous.npm.totalDownloads < milestone)) {
+        if (
+          current.npm.totalDownloads >= milestone &&
+          (!previous.npm || previous.npm.totalDownloads < milestone)
+        ) {
           achievements.push({
             type: 'npm',
             metric: 'downloads',
             milestone,
-            message: `🎉 Milestone: ${milestone.toLocaleString()} total npm downloads!`
+            message: `🎉 Milestone: ${milestone.toLocaleString()} total npm downloads!`,
           });
         }
       }
 
       // Weekly downloads milestones
       for (const milestone of this.milestones.npm.weeklyDownloads) {
-        if (current.npm.weeklyDownloads >= milestone && 
-            (!previous.npm || previous.npm.weeklyDownloads < milestone)) {
+        if (
+          current.npm.weeklyDownloads >= milestone &&
+          (!previous.npm || previous.npm.weeklyDownloads < milestone)
+        ) {
           achievements.push({
             type: 'npm',
             metric: 'weeklyDownloads',
             milestone,
-            message: `🚀 Milestone: ${milestone.toLocaleString()} weekly npm downloads!`
+            message: `🚀 Milestone: ${milestone.toLocaleString()} weekly npm downloads!`,
           });
         }
       }
@@ -168,39 +180,45 @@ class CommunityMetricsTracker {
     if (current.github) {
       // Stars milestones
       for (const milestone of this.milestones.github.stars) {
-        if (current.github.stars >= milestone && 
-            (!previous.github || previous.github.stars < milestone)) {
+        if (
+          current.github.stars >= milestone &&
+          (!previous.github || previous.github.stars < milestone)
+        ) {
           achievements.push({
             type: 'github',
             metric: 'stars',
             milestone,
-            message: `⭐ Milestone: ${milestone.toLocaleString()} GitHub stars!`
+            message: `⭐ Milestone: ${milestone.toLocaleString()} GitHub stars!`,
           });
         }
       }
 
       // Forks milestones
       for (const milestone of this.milestones.github.forks) {
-        if (current.github.forks >= milestone && 
-            (!previous.github || previous.github.forks < milestone)) {
+        if (
+          current.github.forks >= milestone &&
+          (!previous.github || previous.github.forks < milestone)
+        ) {
           achievements.push({
             type: 'github',
             metric: 'forks',
             milestone,
-            message: `🍴 Milestone: ${milestone.toLocaleString()} GitHub forks!`
+            message: `🍴 Milestone: ${milestone.toLocaleString()} GitHub forks!`,
           });
         }
       }
 
       // Contributors milestones
       for (const milestone of this.milestones.github.contributors) {
-        if (current.github.contributors >= milestone && 
-            (!previous.github || previous.github.contributors < milestone)) {
+        if (
+          current.github.contributors >= milestone &&
+          (!previous.github || previous.github.contributors < milestone)
+        ) {
           achievements.push({
             type: 'github',
             metric: 'contributors',
             milestone,
-            message: `👥 Milestone: ${milestone.toLocaleString()} contributors!`
+            message: `👥 Milestone: ${milestone.toLocaleString()} contributors!`,
           });
         }
       }
@@ -211,7 +229,7 @@ class CommunityMetricsTracker {
 
   generateReport(current, achievements) {
     const report = [];
-    
+
     report.push('# 📊 LiquidUI Community Metrics Report');
     report.push('');
     report.push(`**Generated:** ${new Date().toISOString()}`);
@@ -220,9 +238,15 @@ class CommunityMetricsTracker {
     if (current.npm) {
       report.push('## 📦 NPM Metrics');
       report.push(`- **Version:** ${current.npm.version}`);
-      report.push(`- **Weekly Downloads:** ${current.npm.weeklyDownloads.toLocaleString()}`);
-      report.push(`- **Monthly Downloads:** ${current.npm.monthlyDownloads.toLocaleString()}`);
-      report.push(`- **Total Downloads (est.):** ${current.npm.totalDownloads.toLocaleString()}`);
+      report.push(
+        `- **Weekly Downloads:** ${current.npm.weeklyDownloads.toLocaleString()}`
+      );
+      report.push(
+        `- **Monthly Downloads:** ${current.npm.monthlyDownloads.toLocaleString()}`
+      );
+      report.push(
+        `- **Total Downloads (est.):** ${current.npm.totalDownloads.toLocaleString()}`
+      );
       report.push('');
     }
 
@@ -230,9 +254,15 @@ class CommunityMetricsTracker {
       report.push('## ⭐ GitHub Metrics');
       report.push(`- **Stars:** ${current.github.stars.toLocaleString()}`);
       report.push(`- **Forks:** ${current.github.forks.toLocaleString()}`);
-      report.push(`- **Watchers:** ${current.github.watchers.toLocaleString()}`);
-      report.push(`- **Contributors:** ${current.github.contributors.toLocaleString()}`);
-      report.push(`- **Open Issues:** ${current.github.openIssues.toLocaleString()}`);
+      report.push(
+        `- **Watchers:** ${current.github.watchers.toLocaleString()}`
+      );
+      report.push(
+        `- **Contributors:** ${current.github.contributors.toLocaleString()}`
+      );
+      report.push(
+        `- **Open Issues:** ${current.github.openIssues.toLocaleString()}`
+      );
       report.push('');
     }
 
@@ -259,30 +289,35 @@ class CommunityMetricsTracker {
     try {
       // Load previous metrics
       const previousData = await this.loadPreviousMetrics();
-      const previousMetrics = previousData.history.length > 0 ? 
-        previousData.history[previousData.history.length - 1] : null;
+      const previousMetrics =
+        previousData.history.length > 0
+          ? previousData.history[previousData.history.length - 1]
+          : null;
 
       // Fetch current metrics
       const [npmMetrics, githubMetrics] = await Promise.all([
         this.getNpmMetrics(),
-        this.getGitHubMetrics()
+        this.getGitHubMetrics(),
       ]);
 
       const currentMetrics = {
         timestamp: new Date().toISOString(),
         npm: npmMetrics,
-        github: githubMetrics
+        github: githubMetrics,
       };
 
       // Check for milestones
-      const achievements = this.checkMilestones(currentMetrics, previousMetrics);
+      const achievements = this.checkMilestones(
+        currentMetrics,
+        previousMetrics
+      );
 
       // Save metrics
       const newData = {
         lastCheck: currentMetrics.timestamp,
-        history: [...previousData.history, currentMetrics].slice(-50) // Keep last 50 entries
+        history: [...previousData.history, currentMetrics].slice(-50), // Keep last 50 entries
       };
-      
+
       await this.saveMetrics(newData);
 
       // Generate report
@@ -294,7 +329,9 @@ class CommunityMetricsTracker {
       await fs.writeFile(reportFile, report);
 
       if (achievements.length > 0) {
-        console.log('\n🎊 NEW MILESTONES ACHIEVED! Consider sharing the good news:');
+        console.log(
+          '\n🎊 NEW MILESTONES ACHIEVED! Consider sharing the good news:'
+        );
         achievements.forEach(achievement => {
           console.log(`   ${achievement.message}`);
         });
@@ -307,7 +344,6 @@ class CommunityMetricsTracker {
 
       console.log('\n✅ Metrics tracking complete!');
       console.log(`📄 Report saved to: ${reportFile}`);
-
     } catch (error) {
       console.error('❌ Failed to track metrics:', error.message);
       process.exit(1);

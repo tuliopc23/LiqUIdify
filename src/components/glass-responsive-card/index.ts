@@ -1,1 +1,4 @@
-export { GlassResponsiveCard, type GlassResponsiveCardProps } from './glass-responsive-card';
+export {
+  GlassResponsiveCard,
+  type GlassResponsiveCardProps,
+} from './glass-responsive-card';

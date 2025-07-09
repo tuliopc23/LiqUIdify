@@ -1,6 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CommandPalette } from './glass-command';
-import { Home, Settings, User, FileText, Search, Bookmark, Mail, Calendar } from 'lucide-react';
+import {
+  Home,
+  Settings,
+  User,
+  FileText,
+  Search,
+  Bookmark,
+  Mail,
+  Calendar,
+} from 'lucide-react';
 
 const meta: Meta<typeof CommandPalette> = {
   title: 'Glass/CommandPalette',

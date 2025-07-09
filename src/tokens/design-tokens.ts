@@ -50,7 +50,7 @@ export const designTokens = {
         'Roboto Mono',
         'Fira Code',
         'consolas',
-        'monospace'
+        'monospace',
       ],
       display: [
         'SF Pro Display',
@@ -58,7 +58,7 @@ export const designTokens = {
         '-apple-system',
         'BlinkMacSystemFont',
         'system-ui',
-        'sans-serif'
+        'sans-serif',
       ],
       body: [
         'SF Pro Text',
@@ -66,38 +66,107 @@ export const designTokens = {
         '-apple-system',
         'BlinkMacSystemFont',
         'system-ui',
-        'sans-serif'
+        'sans-serif',
       ],
     },
     fontSize: {
       // Text sizes
-      xs: ['12px', { lineHeight: '16px', letterSpacing: '0.025em', fontWeight: '400' }],
-      sm: ['14px', { lineHeight: '20px', letterSpacing: '0.025em', fontWeight: '400' }],
-      base: ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }],
-      lg: ['18px', { lineHeight: '28px', letterSpacing: '-0.010em', fontWeight: '400' }],
-      xl: ['20px', { lineHeight: '30px', letterSpacing: '-0.015em', fontWeight: '400' }],
-      
+      xs: [
+        '12px',
+        { lineHeight: '16px', letterSpacing: '0.025em', fontWeight: '400' },
+      ],
+      sm: [
+        '14px',
+        { lineHeight: '20px', letterSpacing: '0.025em', fontWeight: '400' },
+      ],
+      base: [
+        '16px',
+        { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' },
+      ],
+      lg: [
+        '18px',
+        { lineHeight: '28px', letterSpacing: '-0.010em', fontWeight: '400' },
+      ],
+      xl: [
+        '20px',
+        { lineHeight: '30px', letterSpacing: '-0.015em', fontWeight: '400' },
+      ],
+
       // Display sizes
-      '2xl': ['24px', { lineHeight: '32px', letterSpacing: '-0.020em', fontWeight: '600' }],
-      '3xl': ['30px', { lineHeight: '38px', letterSpacing: '-0.025em', fontWeight: '600' }],
-      '4xl': ['36px', { lineHeight: '44px', letterSpacing: '-0.030em', fontWeight: '700' }],
-      '5xl': ['48px', { lineHeight: '54px', letterSpacing: '-0.035em', fontWeight: '700' }],
-      '6xl': ['60px', { lineHeight: '66px', letterSpacing: '-0.040em', fontWeight: '700' }],
-      '7xl': ['72px', { lineHeight: '78px', letterSpacing: '-0.045em', fontWeight: '800' }],
-      '8xl': ['96px', { lineHeight: '102px', letterSpacing: '-0.050em', fontWeight: '800' }],
-      '9xl': ['128px', { lineHeight: '134px', letterSpacing: '-0.055em', fontWeight: '900' }],
-      
+      '2xl': [
+        '24px',
+        { lineHeight: '32px', letterSpacing: '-0.020em', fontWeight: '600' },
+      ],
+      '3xl': [
+        '30px',
+        { lineHeight: '38px', letterSpacing: '-0.025em', fontWeight: '600' },
+      ],
+      '4xl': [
+        '36px',
+        { lineHeight: '44px', letterSpacing: '-0.030em', fontWeight: '700' },
+      ],
+      '5xl': [
+        '48px',
+        { lineHeight: '54px', letterSpacing: '-0.035em', fontWeight: '700' },
+      ],
+      '6xl': [
+        '60px',
+        { lineHeight: '66px', letterSpacing: '-0.040em', fontWeight: '700' },
+      ],
+      '7xl': [
+        '72px',
+        { lineHeight: '78px', letterSpacing: '-0.045em', fontWeight: '800' },
+      ],
+      '8xl': [
+        '96px',
+        { lineHeight: '102px', letterSpacing: '-0.050em', fontWeight: '800' },
+      ],
+      '9xl': [
+        '128px',
+        { lineHeight: '134px', letterSpacing: '-0.055em', fontWeight: '900' },
+      ],
+
       // Semantic sizes
-      'caption': ['12px', { lineHeight: '16px', letterSpacing: '0.040em', fontWeight: '500' }],
-      'footnote': ['13px', { lineHeight: '18px', letterSpacing: '0.030em', fontWeight: '400' }],
-      'subheadline': ['15px', { lineHeight: '22px', letterSpacing: '0.020em', fontWeight: '500' }],
-      'headline': ['17px', { lineHeight: '25px', letterSpacing: '-0.005em', fontWeight: '600' }],
-      'body': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' }],
-      'callout': ['16px', { lineHeight: '24px', letterSpacing: '0em', fontWeight: '500' }],
-      'title1': ['28px', { lineHeight: '34px', letterSpacing: '-0.020em', fontWeight: '700' }],
-      'title2': ['22px', { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '700' }],
-      'title3': ['20px', { lineHeight: '26px', letterSpacing: '-0.010em', fontWeight: '600' }],
-      'largeTitle': ['34px', { lineHeight: '40px', letterSpacing: '-0.025em', fontWeight: '700' }],
+      caption: [
+        '12px',
+        { lineHeight: '16px', letterSpacing: '0.040em', fontWeight: '500' },
+      ],
+      footnote: [
+        '13px',
+        { lineHeight: '18px', letterSpacing: '0.030em', fontWeight: '400' },
+      ],
+      subheadline: [
+        '15px',
+        { lineHeight: '22px', letterSpacing: '0.020em', fontWeight: '500' },
+      ],
+      headline: [
+        '17px',
+        { lineHeight: '25px', letterSpacing: '-0.005em', fontWeight: '600' },
+      ],
+      body: [
+        '16px',
+        { lineHeight: '24px', letterSpacing: '0em', fontWeight: '400' },
+      ],
+      callout: [
+        '16px',
+        { lineHeight: '24px', letterSpacing: '0em', fontWeight: '500' },
+      ],
+      title1: [
+        '28px',
+        { lineHeight: '34px', letterSpacing: '-0.020em', fontWeight: '700' },
+      ],
+      title2: [
+        '22px',
+        { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '700' },
+      ],
+      title3: [
+        '20px',
+        { lineHeight: '26px', letterSpacing: '-0.010em', fontWeight: '600' },
+      ],
+      largeTitle: [
+        '34px',
+        { lineHeight: '40px', letterSpacing: '-0.025em', fontWeight: '700' },
+      ],
     },
     fontWeight: {
       thin: '100',
@@ -321,7 +390,8 @@ export type ColorToken = keyof typeof designTokens.colors;
 export type TypographyToken = keyof typeof designTokens.typography.fontSize;
 export type BorderRadiusToken = keyof typeof designTokens.borderRadius;
 export type ShadowToken = keyof typeof designTokens.shadows.glass;
-export type AnimationDurationToken = keyof typeof designTokens.animation.duration;
+export type AnimationDurationToken =
+  keyof typeof designTokens.animation.duration;
 export type AnimationEasingToken = keyof typeof designTokens.animation.easing;
 export type BreakpointToken = keyof typeof designTokens.breakpoints;
 export type ZIndexToken = keyof typeof designTokens.zIndex;
@@ -335,18 +405,23 @@ export type FontWeightToken = keyof typeof designTokens.typography.fontWeight;
 
 // CSS Custom Property generators for type safety
 export const createCSSVar = (property: string): string => `var(--${property})`;
-export const createGlassVar = (type: 'bg' | 'border', variant: string): string => 
-  `var(--glass-${type}-${variant})`;
+export const createGlassVar = (
+  type: 'bg' | 'border',
+  variant: string
+): string => `var(--glass-${type}-${variant})`;
 
 // Helper to get design token values with TypeScript safety
 export const getDesignToken = {
   spacing: (token: SpacingToken) => designTokens.spacing[token],
-  color: (category: keyof typeof designTokens.colors, token: string) => 
+  color: (category: keyof typeof designTokens.colors, token: string) =>
     (designTokens.colors[category] as any)?.[token],
   typography: {
-    fontSize: (token: TypographyToken) => designTokens.typography.fontSize[token],
-    fontWeight: (token: FontWeightToken) => designTokens.typography.fontWeight[token],
-    fontFamily: (token: FontFamilyToken) => designTokens.typography.fontFamily[token],
+    fontSize: (token: TypographyToken) =>
+      designTokens.typography.fontSize[token],
+    fontWeight: (token: FontWeightToken) =>
+      designTokens.typography.fontWeight[token],
+    fontFamily: (token: FontFamilyToken) =>
+      designTokens.typography.fontFamily[token],
   },
   borderRadius: (token: BorderRadiusToken) => designTokens.borderRadius[token],
   shadow: {
@@ -354,8 +429,10 @@ export const getDesignToken = {
     focus: (token: FocusShadowToken) => designTokens.shadows.focus[token],
   },
   animation: {
-    duration: (token: AnimationDurationToken) => designTokens.animation.duration[token],
-    easing: (token: AnimationEasingToken) => designTokens.animation.easing[token],
+    duration: (token: AnimationDurationToken) =>
+      designTokens.animation.duration[token],
+    easing: (token: AnimationEasingToken) =>
+      designTokens.animation.easing[token],
   },
   breakpoint: (token: BreakpointToken) => designTokens.breakpoints[token],
   zIndex: (token: ZIndexToken) => designTokens.zIndex[token],

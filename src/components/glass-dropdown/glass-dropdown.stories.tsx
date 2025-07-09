@@ -26,7 +26,11 @@ type Story = StoryObj<typeof meta>;
 
 const sampleItems = [
   { label: 'Profile', value: 'profile', icon: <User className="w-4 h-4" /> },
-  { label: 'Settings', value: 'settings', icon: <Settings className="w-4 h-4" /> },
+  {
+    label: 'Settings',
+    value: 'settings',
+    icon: <Settings className="w-4 h-4" />,
+  },
   { label: 'Help', value: 'help', icon: <HelpCircle className="w-4 h-4" /> },
   { label: 'Separator', value: 'sep', separator: true },
   { label: 'Sign out', value: 'signout', icon: <LogOut className="w-4 h-4" /> },
@@ -36,20 +40,39 @@ export const Default: Story = {
   args: {
     trigger: <GlassButton variant="secondary">Open Menu</GlassButton>,
     items: sampleItems,
-    onSelect: (value) => console.log('Selected:', value),
+    onSelect: value => console.log('Selected:', value),
   },
 };
 
 export const WithDisabledItems: Story = {
   args: {
-    trigger: <GlassButton variant="secondary">Menu with Disabled Items</GlassButton>,
+    trigger: (
+      <GlassButton variant="secondary">Menu with Disabled Items</GlassButton>
+    ),
     items: [
-      { label: 'Profile', value: 'profile', icon: <User className="w-4 h-4" /> },
-      { label: 'Settings', value: 'settings', icon: <Settings className="w-4 h-4" />, disabled: true },
-      { label: 'Help', value: 'help', icon: <HelpCircle className="w-4 h-4" /> },
-      { label: 'Sign out', value: 'signout', icon: <LogOut className="w-4 h-4" /> },
+      {
+        label: 'Profile',
+        value: 'profile',
+        icon: <User className="w-4 h-4" />,
+      },
+      {
+        label: 'Settings',
+        value: 'settings',
+        icon: <Settings className="w-4 h-4" />,
+        disabled: true,
+      },
+      {
+        label: 'Help',
+        value: 'help',
+        icon: <HelpCircle className="w-4 h-4" />,
+      },
+      {
+        label: 'Sign out',
+        value: 'signout',
+        icon: <LogOut className="w-4 h-4" />,
+      },
     ],
-    onSelect: (value) => console.log('Selected:', value),
+    onSelect: value => console.log('Selected:', value),
   },
 };
 
@@ -60,19 +83,19 @@ export const Alignment: Story = {
         trigger={<GlassButton variant="secondary">Start Align</GlassButton>}
         items={sampleItems}
         align="start"
-        onSelect={(value) => console.log('Selected:', value)}
+        onSelect={value => console.log('Selected:', value)}
       />
       <GlassDropdown
         trigger={<GlassButton variant="secondary">Center Align</GlassButton>}
         items={sampleItems}
         align="center"
-        onSelect={(value) => console.log('Selected:', value)}
+        onSelect={value => console.log('Selected:', value)}
       />
       <GlassDropdown
         trigger={<GlassButton variant="secondary">End Align</GlassButton>}
         items={sampleItems}
         align="end"
-        onSelect={(value) => console.log('Selected:', value)}
+        onSelect={value => console.log('Selected:', value)}
       />
     </div>
   ),
@@ -86,6 +109,6 @@ export const CustomTrigger: Story = {
       </div>
     ),
     items: sampleItems,
-    onSelect: (value) => console.log('Selected:', value),
+    onSelect: value => console.log('Selected:', value),
   },
 };

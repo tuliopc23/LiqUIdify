@@ -1,8 +1,8 @@
-import { forwardRef, useState } from "react";
-import { cn } from "@/lib/glass-utils";
+import { forwardRef, useState } from 'react';
+import { cn } from '@/lib/glass-utils';
 
 export interface GlassSwitchProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label?: string;
   onChange?: (checked: boolean) => void;
 }
@@ -19,7 +19,10 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
     };
 
     return (
-      <label className="flex items-center space-x-3 cursor-pointer" htmlFor={switchId}>
+      <label
+        className="flex items-center space-x-3 cursor-pointer"
+        htmlFor={switchId}
+      >
         <div className="relative">
           <input
             type="checkbox"
@@ -32,15 +35,15 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
           />
           <div
             className={cn(
-              "w-11 h-6 rounded-full shadow-inner transition-colors duration-200",
-              isChecked ? "bg-primary" : "glass-effect",
+              'w-11 h-6 rounded-full shadow-inner transition-colors duration-200',
+              isChecked ? 'bg-primary' : 'glass-effect',
               className
             )}
           />
           <div
             className={cn(
-              "absolute inset-y-0 w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-200 translate-y-0.5",
-              isChecked ? "translate-x-6" : "translate-x-0.5"
+              'absolute inset-y-0 w-5 h-5 bg-white rounded-full shadow transform transition-transform duration-200 translate-y-0.5',
+              isChecked ? 'translate-x-6' : 'translate-x-0.5'
             )}
           />
         </div>
@@ -50,6 +53,6 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
   }
 );
 
-GlassSwitch.displayName = "GlassSwitch";
+GlassSwitch.displayName = 'GlassSwitch';
 
 export { GlassSwitch };

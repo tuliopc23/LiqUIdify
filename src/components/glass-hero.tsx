@@ -57,17 +57,22 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
     const { elementRef: magneticRef, transform } = useMagneticHover(0.2, 200);
 
     // Callback ref to handle both content and magnetic refs
-const setRefs = useCallback((node: HTMLDivElement | null) => {
-      (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
-      if (enableMagnetic && magneticRef) {
-        (magneticRef as React.MutableRefObject<HTMLElement | null>).current = node;
-      }
-      if (typeof ref === 'function') {
-        ref(node);
-      } else if (ref) {
-        (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
-      }
-    }, [enableMagnetic, magneticRef, ref]);
+    const setRefs = useCallback(
+      (node: HTMLDivElement | null) => {
+        (contentRef as React.MutableRefObject<HTMLDivElement | null>).current =
+          node;
+        if (enableMagnetic && magneticRef) {
+          (magneticRef as React.MutableRefObject<HTMLElement | null>).current =
+            node;
+        }
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        }
+      },
+      [enableMagnetic, magneticRef, ref]
+    );
 
     const sizeClasses = {
       sm: 'min-h-[60vh] py-16 px-6',

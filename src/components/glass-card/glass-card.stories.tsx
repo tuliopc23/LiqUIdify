@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardContent } from './glass-card';
+import {
+  GlassCard,
+  GlassCardHeader,
+  GlassCardTitle,
+  GlassCardContent,
+} from './glass-card';
 
 const meta: Meta<typeof GlassCard> = {
   title: 'Components/GlassCard',
@@ -45,14 +50,17 @@ export const Default: Story = {
     bordered: true,
     padding: 'md',
   },
-  render: (args) => (
+  render: args => (
     <GlassCard {...args} className="w-80">
       <GlassCardHeader>
-        <GlassCardTitle className="text-white">Default Glass Card</GlassCardTitle>
+        <GlassCardTitle className="text-white">
+          Default Glass Card
+        </GlassCardTitle>
       </GlassCardHeader>
       <GlassCardContent>
         <p className="text-white/80">
-          This is the default glass card with standard backdrop blur and transparency effects.
+          This is the default glass card with standard backdrop blur and
+          transparency effects.
         </p>
       </GlassCardContent>
     </GlassCard>
@@ -66,14 +74,17 @@ export const AppleLiquidGlass: Story = {
     magnetic: true,
     padding: 'md',
   },
-  render: (args) => (
+  render: args => (
     <GlassCard {...args} className="w-80">
       <GlassCardHeader>
-        <GlassCardTitle className="text-white">Apple Liquid Glass</GlassCardTitle>
+        <GlassCardTitle className="text-white">
+          Apple Liquid Glass
+        </GlassCardTitle>
       </GlassCardHeader>
       <GlassCardContent>
         <p className="text-white/80">
-          Authentic Apple liquid glass effect with the signature after-element and magnetic hover interactions.
+          Authentic Apple liquid glass effect with the signature after-element
+          and magnetic hover interactions.
         </p>
       </GlassCardContent>
     </GlassCard>
@@ -87,14 +98,17 @@ export const AppleLiquidSubtle: Story = {
     magnetic: false,
     padding: 'md',
   },
-  render: (args) => (
+  render: args => (
     <GlassCard {...args} className="w-80">
       <GlassCardHeader>
-        <GlassCardTitle className="text-white">Apple Liquid - Subtle</GlassCardTitle>
+        <GlassCardTitle className="text-white">
+          Apple Liquid - Subtle
+        </GlassCardTitle>
       </GlassCardHeader>
       <GlassCardContent>
         <p className="text-white/80">
-          Subtle intensity with lighter blur effects and reduced opacity for minimal designs.
+          Subtle intensity with lighter blur effects and reduced opacity for
+          minimal designs.
         </p>
       </GlassCardContent>
     </GlassCard>
@@ -108,14 +122,17 @@ export const AppleLiquidStrong: Story = {
     magnetic: true,
     padding: 'lg',
   },
-  render: (args) => (
+  render: args => (
     <GlassCard {...args} className="w-80">
       <GlassCardHeader>
-        <GlassCardTitle className="text-white">Apple Liquid - Strong</GlassCardTitle>
+        <GlassCardTitle className="text-white">
+          Apple Liquid - Strong
+        </GlassCardTitle>
       </GlassCardHeader>
       <GlassCardContent>
         <p className="text-white/80">
-          Strong intensity with enhanced blur, increased opacity, and pronounced liquid effects.
+          Strong intensity with enhanced blur, increased opacity, and pronounced
+          liquid effects.
         </p>
       </GlassCardContent>
     </GlassCard>
@@ -127,7 +144,9 @@ export const Comparison: Story = {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
       <GlassCard variant="default" className="w-64 p-6">
         <GlassCardHeader>
-          <GlassCardTitle className="text-white text-sm">Legacy Glass</GlassCardTitle>
+          <GlassCardTitle className="text-white text-sm">
+            Legacy Glass
+          </GlassCardTitle>
         </GlassCardHeader>
         <GlassCardContent>
           <p className="text-white/70 text-xs">
@@ -138,7 +157,9 @@ export const Comparison: Story = {
 
       <GlassCard variant="apple" intensity="subtle" className="w-64 p-6">
         <GlassCardHeader>
-          <GlassCardTitle className="text-white text-sm">Apple Subtle</GlassCardTitle>
+          <GlassCardTitle className="text-white text-sm">
+            Apple Subtle
+          </GlassCardTitle>
         </GlassCardHeader>
         <GlassCardContent>
           <p className="text-white/70 text-xs">
@@ -147,9 +168,16 @@ export const Comparison: Story = {
         </GlassCardContent>
       </GlassCard>
 
-      <GlassCard variant="apple" intensity="medium" magnetic={true} className="w-64 p-6">
+      <GlassCard
+        variant="apple"
+        intensity="medium"
+        magnetic={true}
+        className="w-64 p-6"
+      >
         <GlassCardHeader>
-          <GlassCardTitle className="text-white text-sm">Apple Medium</GlassCardTitle>
+          <GlassCardTitle className="text-white text-sm">
+            Apple Medium
+          </GlassCardTitle>
         </GlassCardHeader>
         <GlassCardContent>
           <p className="text-white/70 text-xs">
@@ -158,9 +186,16 @@ export const Comparison: Story = {
         </GlassCardContent>
       </GlassCard>
 
-      <GlassCard variant="apple" intensity="strong" magnetic={true} className="w-64 p-6">
+      <GlassCard
+        variant="apple"
+        intensity="strong"
+        magnetic={true}
+        className="w-64 p-6"
+      >
         <GlassCardHeader>
-          <GlassCardTitle className="text-white text-sm">Apple Strong</GlassCardTitle>
+          <GlassCardTitle className="text-white text-sm">
+            Apple Strong
+          </GlassCardTitle>
         </GlassCardHeader>
         <GlassCardContent>
           <p className="text-white/70 text-xs">

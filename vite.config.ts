@@ -13,7 +13,7 @@ export default defineConfig({
       // Enable development features only in development
       include: /\.(tsx|ts|jsx|js)$/,
     }),
-    dts({ 
+    dts({
       insertTypesEntry: true,
       outDir: 'dist/types',
       rollupTypes: true,
@@ -25,23 +25,23 @@ export default defineConfig({
         'src/docs/**/*',
         'src/test-utils/**/*',
         'src/tests/**/*',
-        '**/*.spec.*'
-      ]
-    })
+        '**/*.spec.*',
+      ],
+    }),
   ],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src")
-    }
+      '@': resolve(__dirname, 'src'),
+    },
   },
   css: {
     postcss: './postcss.config.js',
     // Enable CSS modules and processing
     preprocessorOptions: {
       css: {
-        charset: false
-      }
-    }
+        charset: false,
+      },
+    },
   },
   build: {
     lib: {
@@ -49,28 +49,46 @@ export default defineConfig({
         // Main entry point
         index: resolve(__dirname, 'src/index.ts'),
         // Individual component entries for per-component imports
-        'components/button': resolve(__dirname, 'src/components/glass-button/index.ts'),
-        'components/card': resolve(__dirname, 'src/components/glass-card/index.ts'),
-        'components/input': resolve(__dirname, 'src/components/glass-input/index.ts'),
-        'components/modal': resolve(__dirname, 'src/components/glass-modal/index.ts'),
-        'components/tooltip': resolve(__dirname, 'src/components/glass-tooltip/index.ts'),
-        'components/tabs': resolve(__dirname, 'src/components/glass-tabs/index.ts'),
-        'tokens': resolve(__dirname, 'src/tokens/index.ts'),
+        'components/button': resolve(
+          __dirname,
+          'src/components/glass-button/index.ts'
+        ),
+        'components/card': resolve(
+          __dirname,
+          'src/components/glass-card/index.ts'
+        ),
+        'components/input': resolve(
+          __dirname,
+          'src/components/glass-input/index.ts'
+        ),
+        'components/modal': resolve(
+          __dirname,
+          'src/components/glass-modal/index.ts'
+        ),
+        'components/tooltip': resolve(
+          __dirname,
+          'src/components/glass-tooltip/index.ts'
+        ),
+        'components/tabs': resolve(
+          __dirname,
+          'src/components/glass-tabs/index.ts'
+        ),
+        tokens: resolve(__dirname, 'src/tokens/index.ts'),
       },
       name: 'LiquidUI',
       formats: ['es', 'cjs'],
       fileName: (format, entryName) => {
         const extension = format === 'es' ? 'mjs' : 'cjs';
         return `${entryName}.${extension}`;
-      }
+      },
     },
     rollupOptions: {
       // More comprehensive external dependencies
       external: [
-        'react', 
-        'react-dom', 
+        'react',
+        'react-dom',
         'react/jsx-runtime',
-        'framer-motion', 
+        'framer-motion',
         'lucide-react',
         '@radix-ui/react-slot',
         '@radix-ui/react-accordion',
@@ -99,7 +117,7 @@ export default defineConfig({
           // Improved tree-shaking with side effects handling
           generatedCode: {
             preset: 'es2015',
-            constBindings: true
+            constBindings: true,
           },
         },
         // CommonJS output for backward compatibility
@@ -111,7 +129,7 @@ export default defineConfig({
           exports: 'named',
           interop: 'auto',
           generatedCode: {
-            preset: 'es2015'
+            preset: 'es2015',
           },
           globals: {
             react: 'React',
@@ -120,24 +138,24 @@ export default defineConfig({
             'framer-motion': 'FramerMotion',
             'lucide-react': 'LucideReact',
             '@radix-ui/react-slot': 'RadixSlot',
-            'clsx': 'clsx',
+            clsx: 'clsx',
             'tailwind-merge': 'tailwindMerge',
-            'gsap': 'gsap'
-          }
-        }
+            gsap: 'gsap',
+          },
+        },
       ],
       // Tree-shaking optimization
       treeshake: {
         preset: 'recommended',
-        moduleSideEffects: (id) => {
+        moduleSideEffects: id => {
           // CSS files have side effects
           return id.includes('.css') || id.includes('styles/');
         },
         // Aggressive pure annotation
         annotations: true,
         propertyReadSideEffects: false,
-        unknownGlobalSideEffects: false
-      }
+        unknownGlobalSideEffects: false,
+      },
     },
     // Enable source maps for debugging
     sourcemap: true,
@@ -152,16 +170,16 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log'],
-        passes: 2
+        passes: 2,
       },
       mangle: {
         properties: {
-          regex: /^_/
-        }
+          regex: /^_/,
+        },
       },
       format: {
-        comments: false
-      }
-    }
-  }
+        comments: false,
+      },
+    },
+  },
 });

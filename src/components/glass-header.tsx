@@ -30,7 +30,9 @@ export function GlassHeader({
             {subtitle && <p className="text-white/70 mt-1">{subtitle}</p>}
           </div>
           {actions && (
-            <div className="mt-4 md:mt-0 flex items-center gap-2">{actions}</div>
+            <div className="mt-4 md:mt-0 flex items-center gap-2">
+              {actions}
+            </div>
           )}
         </div>
       </AppleLiquidGlassNav>

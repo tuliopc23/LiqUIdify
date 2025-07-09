@@ -10,22 +10,22 @@
     "declarationMap": true,
     "outDir": "dist",
     "noEmit": false,
-    
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmitOnError": false,
-    
+
     /* Linting */
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    
+
     /* React */
     "jsx": "react-jsx",
-    
+
     /* Path mapping */
     "baseUrl": ".",
     "paths": {
@@ -34,10 +34,7 @@
       "@/design-tokens": ["./src/tokens/design-tokens"]
     }
   },
-  "include": [
-    "src/**/*",
-    "src/types/**/*.d.ts"
-  ],
+  "include": ["src/**/*", "src/types/**/*.d.ts"],
   "exclude": [
     "node_modules",
     "dist",

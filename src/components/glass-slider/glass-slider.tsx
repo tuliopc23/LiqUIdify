@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { cn, getGlassClass } from "@/lib/glass-utils";
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { cn, getGlassClass } from '@/lib/glass-utils';
 
 export interface GlassSliderProps {
   min?: number;
@@ -10,22 +10,25 @@ export interface GlassSliderProps {
   disabled?: boolean;
   className?: string;
   showValue?: boolean;
-  variant?: "default" | "minimal";
+  variant?: 'default' | 'minimal';
 }
 
 export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
-  ({ 
-    min = 0, 
-    max = 100, 
-    step = 1, 
-    value = 0, 
-    onChange, 
-    disabled, 
-    className, 
-    showValue = true,
-    variant = "default",
-    ...props 
-  }, ref) => {
+  (
+    {
+      min = 0,
+      max = 100,
+      step = 1,
+      value = 0,
+      onChange,
+      disabled,
+      className,
+      showValue = true,
+      variant = 'default',
+      ...props
+    },
+    ref
+  ) => {
     const [currentValue, setCurrentValue] = useState(value);
     const [isDragging, setIsDragging] = useState(false);
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -37,23 +40,32 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
 
     const percentage = ((currentValue - min) / (max - min)) * 100;
 
-    const updateValue = useCallback((clientX: number) => {
-      if (!sliderRef.current) return;
+    const updateValue = useCallback(
+      (clientX: number) => {
+        if (!sliderRef.current) return;
 
-      const rect = sliderRef.current.getBoundingClientRect();
-      const percentage = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-      const newValue = min + percentage * (max - min);
-      const steppedValue = Math.round(newValue / step) * step;
-      const clampedValue = Math.max(min, Math.min(max, steppedValue));
+        const rect = sliderRef.current.getBoundingClientRect();
+        const percentage = Math.max(
+          0,
+          Math.min(1, (clientX - rect.left) / rect.width)
+        );
+        const newValue = min + percentage * (max - min);
+        const steppedValue = Math.round(newValue / step) * step;
+        const clampedValue = Math.max(min, Math.min(max, steppedValue));
 
-      setCurrentValue(clampedValue);
-      onChange?.(clampedValue);
-    }, [min, max, step, onChange]);
+        setCurrentValue(clampedValue);
+        onChange?.(clampedValue);
+      },
+      [min, max, step, onChange]
+    );
 
-    const handleMouseMove = useCallback((e: MouseEvent) => {
-      if (!isDragging || disabled) return;
-      updateValue(e.clientX);
-    }, [isDragging, disabled, updateValue]);
+    const handleMouseMove = useCallback(
+      (e: MouseEvent) => {
+        if (!isDragging || disabled) return;
+        updateValue(e.clientX);
+      },
+      [isDragging, disabled, updateValue]
+    );
 
     const handleMouseUp = useCallback(() => {
       setIsDragging(false);
@@ -61,7 +73,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
 
     const handleMouseDown = (e: React.MouseEvent) => {
       if (disabled) return;
-      
+
       setIsDragging(true);
       updateValue(e.clientX);
     };
@@ -78,27 +90,25 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
     }, [isDragging, handleMouseMove, handleMouseUp]);
 
     return (
-      <div 
-        ref={ref}
-        className={cn("relative w-full", className)} 
-        {...props}
-      >
+      <div ref={ref} className={cn('relative w-full', className)} {...props}>
         {showValue && (
           <div className="flex justify-between items-center mb-3">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Value</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              Value
+            </span>
             <span className="text-sm font-medium text-gray-900 dark:text-white">
               {currentValue}
             </span>
           </div>
         )}
-        
+
         <div
           ref={sliderRef}
           className={cn(
-            "relative h-2 rounded-full cursor-pointer",
-            variant === "default" && getGlassClass("default"),
-            variant === "minimal" && "bg-gray-200 dark:bg-gray-700",
-            disabled && "cursor-not-allowed opacity-50"
+            'relative h-2 rounded-full cursor-pointer',
+            variant === 'default' && getGlassClass('default'),
+            variant === 'minimal' && 'bg-gray-200 dark:bg-gray-700',
+            disabled && 'cursor-not-allowed opacity-50'
           )}
           onMouseDown={handleMouseDown}
         >
@@ -107,23 +117,23 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
             className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-200"
             style={{ width: `${percentage}%` }}
           />
-          
+
           {/* Thumb */}
           <div
             ref={thumbRef}
             className={cn(
-              "absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2",
-              "w-5 h-5 rounded-full transition-all duration-200",
-              getGlassClass("elevated"),
-              "border-2 border-white/30 dark:border-white/20",
-              "hover:scale-110 active:scale-95",
-              isDragging && "scale-110 ring-4 ring-blue-500/30",
-              disabled && "cursor-not-allowed"
+              'absolute top-1/2 transform -translate-y-1/2 -translate-x-1/2',
+              'w-5 h-5 rounded-full transition-all duration-200',
+              getGlassClass('elevated'),
+              'border-2 border-white/30 dark:border-white/20',
+              'hover:scale-110 active:scale-95',
+              isDragging && 'scale-110 ring-4 ring-blue-500/30',
+              disabled && 'cursor-not-allowed'
             )}
             style={{ left: `${percentage}%` }}
           />
         </div>
-        
+
         <div className="flex justify-between items-center mt-2 text-xs text-gray-500 dark:text-gray-400">
           <span>{min}</span>
           <span>{max}</span>
@@ -133,4 +143,4 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
   }
 );
 
-GlassSlider.displayName = "GlassSlider";
+GlassSlider.displayName = 'GlassSlider';

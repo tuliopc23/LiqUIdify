@@ -8,7 +8,8 @@ const meta: Meta<typeof GlassDatePicker> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A comprehensive date picker component with optional time selection, navigation, and liquid glass styling.',
+        component:
+          'A comprehensive date picker component with optional time selection, navigation, and liquid glass styling.',
       },
     },
   },
@@ -197,10 +198,10 @@ export const OutlineVariant: Story = {
 export const Interactive: Story = {
   args: {
     ...Default.args,
-    onDateChange: (date) => {
+    onDateChange: date => {
       console.log('Date changed:', date);
     },
-    onTimeChange: (time) => {
+    onTimeChange: time => {
       console.log('Time changed:', time);
     },
   },
@@ -210,20 +211,11 @@ export const AllSizes: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="text-sm text-gray-600">Small</div>
-      <GlassDatePicker
-        placeholder="Small date picker"
-        size="sm"
-      />
+      <GlassDatePicker placeholder="Small date picker" size="sm" />
       <div className="text-sm text-gray-600">Medium (default)</div>
-      <GlassDatePicker
-        placeholder="Medium date picker"
-        size="md"
-      />
+      <GlassDatePicker placeholder="Medium date picker" size="md" />
       <div className="text-sm text-gray-600">Large</div>
-      <GlassDatePicker
-        placeholder="Large date picker"
-        size="lg"
-      />
+      <GlassDatePicker placeholder="Large date picker" size="lg" />
     </div>
   ),
 };
@@ -232,20 +224,11 @@ export const AllVariants: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="text-sm text-gray-600">Default</div>
-      <GlassDatePicker
-        placeholder="Default variant"
-        variant="default"
-      />
+      <GlassDatePicker placeholder="Default variant" variant="default" />
       <div className="text-sm text-gray-600">Secondary</div>
-      <GlassDatePicker
-        placeholder="Secondary variant"
-        variant="secondary"
-      />
+      <GlassDatePicker placeholder="Secondary variant" variant="secondary" />
       <div className="text-sm text-gray-600">Outline</div>
-      <GlassDatePicker
-        placeholder="Outline variant"
-        variant="outline"
-      />
+      <GlassDatePicker placeholder="Outline variant" variant="outline" />
     </div>
   ),
 };
@@ -254,29 +237,15 @@ export const AllStates: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="text-sm text-gray-600">Normal</div>
-      <GlassDatePicker
-        placeholder="Normal state"
-      />
+      <GlassDatePicker placeholder="Normal state" />
       <div className="text-sm text-gray-600">With Value</div>
-      <GlassDatePicker
-        placeholder="With value"
-        value={new Date()}
-      />
+      <GlassDatePicker placeholder="With value" value={new Date()} />
       <div className="text-sm text-gray-600">Error</div>
-      <GlassDatePicker
-        placeholder="Error state"
-        error
-      />
+      <GlassDatePicker placeholder="Error state" error />
       <div className="text-sm text-gray-600">Success</div>
-      <GlassDatePicker
-        placeholder="Success state"
-        success
-      />
+      <GlassDatePicker placeholder="Success state" success />
       <div className="text-sm text-gray-600">Disabled</div>
-      <GlassDatePicker
-        placeholder="Disabled state"
-        disabled
-      />
+      <GlassDatePicker placeholder="Disabled state" disabled />
     </div>
   ),
 };
@@ -292,7 +261,7 @@ export const UseCases: Story = {
           dateFormat="MMMM d, yyyy"
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Appointment Scheduler</div>
         <GlassDatePicker
@@ -302,7 +271,7 @@ export const UseCases: Story = {
           maxDate={new Date(Date.now() + 60 * 24 * 60 * 60 * 1000)} // 60 days from now
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Event Date</div>
         <GlassDatePicker
@@ -311,7 +280,7 @@ export const UseCases: Story = {
           dateFormat="EEE, MMM d, yyyy"
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Deadline Picker</div>
         <GlassDatePicker
@@ -330,7 +299,7 @@ export const WithDisabledDates: Story = {
   args: {
     ...Default.args,
     placeholder: 'Select date (weekends disabled)',
-    disabledDates: (date) => {
+    disabledDates: date => {
       const day = date.getDay();
       return day === 0 || day === 6; // Disable weekends
     },
@@ -354,14 +323,8 @@ export const DateRange: Story = {
     <div className="space-y-4">
       <div className="text-sm text-gray-600">Date Range Selection</div>
       <div className="flex gap-4">
-        <GlassDatePicker
-          placeholder="Start date"
-          variant="outline"
-        />
-        <GlassDatePicker
-          placeholder="End date"
-          variant="outline"
-        />
+        <GlassDatePicker placeholder="Start date" variant="outline" />
+        <GlassDatePicker placeholder="End date" variant="outline" />
       </div>
     </div>
   ),
@@ -376,20 +339,17 @@ export const MultipleFormats: Story = {
         dateFormat="MM/dd/yyyy"
         locale="en-US"
       />
-      
+
       <div className="text-sm text-gray-600">European Format (dd/MM/yyyy)</div>
       <GlassDatePicker
         placeholder="dd/MM/yyyy"
         dateFormat="dd/MM/yyyy"
         locale="en-GB"
       />
-      
+
       <div className="text-sm text-gray-600">ISO Format (yyyy-MM-dd)</div>
-      <GlassDatePicker
-        placeholder="yyyy-MM-dd"
-        dateFormat="yyyy-MM-dd"
-      />
-      
+      <GlassDatePicker placeholder="yyyy-MM-dd" dateFormat="yyyy-MM-dd" />
+
       <div className="text-sm text-gray-600">Long Format</div>
       <GlassDatePicker
         placeholder="Long format"

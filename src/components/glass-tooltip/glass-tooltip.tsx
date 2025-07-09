@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { cn, getGlassClass } from "@/lib/glass-utils";
+import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { cn, getGlassClass } from '@/lib/glass-utils';
 
 export interface GlassTooltipProps {
   content: React.ReactNode;
   children: React.ReactNode;
-  position?: "top" | "bottom" | "left" | "right";
+  position?: 'top' | 'bottom' | 'left' | 'right';
   delay?: number;
   className?: string;
   disabled?: boolean;
@@ -14,10 +14,10 @@ export interface GlassTooltipProps {
 export const GlassTooltip: React.FC<GlassTooltipProps> = ({
   content,
   children,
-  position = "top",
+  position = 'top',
   delay = 500,
   className,
-  disabled = false
+  disabled = false,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
@@ -27,11 +27,11 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
 
   const showTooltip = () => {
     if (disabled) return;
-    
+
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    
+
     timeoutRef.current = setTimeout(() => {
       setIsVisible(true);
     }, delay);
@@ -48,24 +48,24 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
     if (isVisible && triggerRef.current && tooltipRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const tooltipRect = tooltipRef.current.getBoundingClientRect();
-      
+
       let top = 0;
       let left = 0;
 
       switch (position) {
-        case "top":
+        case 'top':
           top = triggerRect.top - tooltipRect.height - 8;
           left = triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
           break;
-        case "bottom":
+        case 'bottom':
           top = triggerRect.bottom + 8;
           left = triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
           break;
-        case "left":
+        case 'left':
           top = triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
           left = triggerRect.left - tooltipRect.width - 8;
           break;
-        case "right":
+        case 'right':
           top = triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
           left = triggerRect.right + 8;
           break;
@@ -74,7 +74,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
       // Keep tooltip within viewport
       const viewport = {
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
       };
 
       if (left < 8) left = 8;
@@ -87,10 +87,10 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
       }
 
       setTooltipStyle({
-        position: "fixed",
+        position: 'fixed',
         top: `${top}px`,
         left: `${left}px`,
-        zIndex: 9999
+        zIndex: 9999,
       });
     }
   }, [isVisible, position]);
@@ -100,28 +100,32 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
       ref={tooltipRef}
       style={tooltipStyle}
       className={cn(
-        getGlassClass("elevated"),
-        "px-3 py-2 text-sm rounded-lg",
-        "border border-white/20 dark:border-white/10",
-        "text-gray-900 dark:text-white",
-        "max-w-xs break-words",
-        "animate-in fade-in-0 zoom-in-95 duration-200",
-        "shadow-lg shadow-black/10 dark:shadow-black/30",
+        getGlassClass('elevated'),
+        'px-3 py-2 text-sm rounded-lg',
+        'border border-white/20 dark:border-white/10',
+        'text-gray-900 dark:text-white',
+        'max-w-xs break-words',
+        'animate-in fade-in-0 zoom-in-95 duration-200',
+        'shadow-lg shadow-black/10 dark:shadow-black/30',
         className
       )}
     >
       {content}
-      
+
       {/* Arrow */}
       <div
         className={cn(
-          "absolute w-2 h-2 rotate-45",
-          getGlassClass("elevated"),
-          "border border-white/20 dark:border-white/10",
-          position === "top" && "bottom-[-5px] left-1/2 transform -translate-x-1/2 border-t-0 border-l-0",
-          position === "bottom" && "top-[-5px] left-1/2 transform -translate-x-1/2 border-b-0 border-r-0",
-          position === "left" && "right-[-5px] top-1/2 transform -translate-y-1/2 border-l-0 border-b-0",
-          position === "right" && "left-[-5px] top-1/2 transform -translate-y-1/2 border-r-0 border-t-0"
+          'absolute w-2 h-2 rotate-45',
+          getGlassClass('elevated'),
+          'border border-white/20 dark:border-white/10',
+          position === 'top' &&
+            'bottom-[-5px] left-1/2 transform -translate-x-1/2 border-t-0 border-l-0',
+          position === 'bottom' &&
+            'top-[-5px] left-1/2 transform -translate-x-1/2 border-b-0 border-r-0',
+          position === 'left' &&
+            'right-[-5px] top-1/2 transform -translate-y-1/2 border-l-0 border-b-0',
+          position === 'right' &&
+            'left-[-5px] top-1/2 transform -translate-y-1/2 border-r-0 border-t-0'
         )}
       />
     </div>
@@ -137,10 +141,10 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
       >
         {children}
       </div>
-      
+
       {tooltip && createPortal(tooltip, document.body)}
     </>
   );
 };
 
-GlassTooltip.displayName = "GlassTooltip";
+GlassTooltip.displayName = 'GlassTooltip';

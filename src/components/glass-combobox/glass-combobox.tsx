@@ -1,26 +1,26 @@
 import React, { forwardRef, useState, useRef, useEffect, useId } from 'react';
-import { cn, getGlassClass, microInteraction, focusRing } from '../../lib/glass-utils';
+import {
+  cn,
+  getGlassClass,
+  microInteraction,
+  focusRing,
+} from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Check, ChevronDown, Search, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const comboboxVariants = cva(
-  [
-    'relative w-full',
-  ],
-  {
-    variants: {
-      size: {
-        sm: 'text-sm',
-        md: 'text-base',
-        lg: 'text-lg',
-      },
+const comboboxVariants = cva(['relative w-full'], {
+  variants: {
+    size: {
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg',
     },
-    defaultVariants: {
-      size: 'md',
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
 
 const triggerVariants = cva(
   [
@@ -49,13 +49,11 @@ const triggerVariants = cva(
   }
 );
 
-const listboxVariants = cva(
-  [
-    'absolute z-50 w-full mt-1 max-h-60 overflow-auto',
-    'bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl',
-    'shadow-xl shadow-black/20',
-  ]
-);
+const listboxVariants = cva([
+  'absolute z-50 w-full mt-1 max-h-60 overflow-auto',
+  'bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl',
+  'shadow-xl shadow-black/20',
+]);
 
 const optionVariants = cva(
   [
@@ -129,31 +127,37 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
   ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedValue, setSelectedValue] = useState(value || defaultValue || '');
+    const [selectedValue, setSelectedValue] = useState(
+      value || defaultValue || ''
+    );
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
-    
+
     const triggerRef = useRef<HTMLButtonElement>(null);
     const listboxRef = useRef<HTMLDivElement>(null);
     const searchRef = useRef<HTMLInputElement>(null);
     const optionsRef = useRef<HTMLDivElement[]>([]);
-    
+
     const comboboxId = useId();
     const listboxId = `${comboboxId}-listbox`;
     const searchId = `${comboboxId}-search`;
 
     // Filter options based on search query
-    const filteredOptions = options.filter(option => {
-      if (!searchQuery) return true;
-      return option.label.toLowerCase().includes(searchQuery.toLowerCase());
-    }).slice(0, maxOptions);
+    const filteredOptions = options
+      .filter(option => {
+        if (!searchQuery) return true;
+        return option.label.toLowerCase().includes(searchQuery.toLowerCase());
+      })
+      .slice(0, maxOptions);
 
     // Find selected option
-    const selectedOption = options.find(option => option.value === selectedValue);
+    const selectedOption = options.find(
+      option => option.value === selectedValue
+    );
 
     // Handle option selection
     const handleSelect = (option: ComboboxOption) => {
       if (option.disabled) return;
-      
+
       setSelectedValue(option.value);
       onChange?.(option.value);
       setIsOpen(false);
@@ -179,7 +183,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
           if (!isOpen) {
             setIsOpen(true);
           } else {
-            setHighlightedIndex(prev => 
+            setHighlightedIndex(prev =>
               prev < filteredOptions.length - 1 ? prev + 1 : prev
             );
           }
@@ -187,7 +191,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
         case 'ArrowUp':
           e.preventDefault();
           if (isOpen) {
-            setHighlightedIndex(prev => prev > 0 ? prev - 1 : prev);
+            setHighlightedIndex(prev => (prev > 0 ? prev - 1 : prev));
           }
           break;
         case 'Enter':
@@ -234,7 +238,8 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
       };
 
       document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      return () =>
+        document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
     // Scroll highlighted option into view
@@ -271,21 +276,20 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
         >
           <div className="flex items-center gap-2 flex-1 min-w-0">
             {selectedOption?.icon}
-            <span className={cn(
-              'truncate',
-              !selectedOption && 'text-white/60'
-            )}>
+            <span
+              className={cn('truncate', !selectedOption && 'text-white/60')}
+            >
               {selectedOption?.label || placeholder}
             </span>
           </div>
-          
+
           <div className="flex items-center gap-1">
             {clearable && selectedValue && (
               <div
                 role="button"
                 tabIndex={0}
                 onClick={handleClear}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     handleClear(e as any);
@@ -297,10 +301,12 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
                 <X className="w-4 h-4 text-white/60" />
               </div>
             )}
-            <ChevronDown className={cn(
-              'w-4 h-4 text-white/60 transition-transform duration-200',
-              isOpen && 'rotate-180'
-            )} />
+            <ChevronDown
+              className={cn(
+                'w-4 h-4 text-white/60 transition-transform duration-200',
+                isOpen && 'rotate-180'
+              )}
+            />
           </div>
         </button>
 

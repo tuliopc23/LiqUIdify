@@ -61,8 +61,9 @@ const preview: Preview = {
           value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         },
         {
-          name: 'apple-gradient', 
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+          name: 'apple-gradient',
+          value:
+            'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
         },
         {
           name: 'cosmic',
@@ -70,7 +71,8 @@ const preview: Preview = {
         },
         {
           name: 'image-bg',
-          value: 'url("https://images.unsplash.com/photo-1539635278303-d4002c07eae3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDk1Njc4NTB8&ixlib=rb-4.1.0&q=85") center/cover',
+          value:
+            'url("https://images.unsplash.com/photo-1539635278303-d4002c07eae3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDk1Njc4NTB8&ixlib=rb-4.1.0&q=85") center/cover',
         },
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#0a0a0a' },

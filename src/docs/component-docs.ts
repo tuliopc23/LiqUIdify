@@ -127,14 +127,14 @@ export function generatePropDocs(
   if (customDocs) {
     Object.entries(customDocs).forEach(([propName, propDoc]) => {
       const existingIndex = defaultProps.findIndex(p => p.name === propName);
-      const mergedProp: PropDocumentation = { 
-        name: propName, 
+      const mergedProp: PropDocumentation = {
+        name: propName,
         type: propDoc?.type || 'unknown',
         description: propDoc?.description || 'No description provided',
         required: propDoc?.required || false,
-        ...propDoc
+        ...propDoc,
       };
-      
+
       if (existingIndex >= 0) {
         defaultProps[existingIndex] = mergedProp;
       } else {

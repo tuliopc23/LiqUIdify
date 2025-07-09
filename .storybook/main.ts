@@ -47,7 +47,7 @@ const config: StorybookConfig = {
       skipChildrenPropWithoutDoc: false,
     },
   },
-  viteFinal: async (config) => {
+  viteFinal: async config => {
     // Enhance path resolution for better import handling
     config.resolve = config.resolve || {};
     config.resolve.alias = {
@@ -56,7 +56,7 @@ const config: StorybookConfig = {
       '@/tokens': resolve(__dirname, '../src/tokens/index'),
       '@/design-tokens': resolve(__dirname, '../src/tokens/design-tokens'),
     };
-    
+
     // Optimize build performance
     config.build = config.build || {};
     config.build.rollupOptions = config.build.rollupOptions || {};
@@ -66,7 +66,7 @@ const config: StorybookConfig = {
       'react-dom',
       'react/jsx-runtime',
     ];
-    
+
     return config;
   },
 };

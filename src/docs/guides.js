@@ -4,63 +4,64 @@
  */
 // Comprehensive guides collection
 export const guides = [
-    {
-        id: 'installation-setup',
-        title: 'Installation and Setup',
-        description: 'Complete guide to installing and setting up Glass UI in your project',
-        category: 'getting-started',
-        difficulty: 'beginner',
-        estimatedTime: '15 minutes',
-        prerequisites: [
-            'Basic React knowledge',
-            'Node.js installed',
-            'Package manager (npm/yarn/pnpm)',
-        ],
-        lastUpdated: '2024-01-15',
-        relatedGuides: ['first-component', 'theming-guide'],
-        sections: [
-            {
-                id: 'installation',
-                title: 'Installation',
-                content: `Glass UI can be installed using your preferred package manager. We recommend using npm, yarn, or pnpm for the best experience.`,
-                codeExamples: [
-                    {
-                        title: 'Install with npm',
-                        description: 'Install Glass UI and its dependencies using npm',
-                        language: 'bash',
-                        code: `npm install @glass-ui/react @glass-ui/tokens
+  {
+    id: 'installation-setup',
+    title: 'Installation and Setup',
+    description:
+      'Complete guide to installing and setting up Glass UI in your project',
+    category: 'getting-started',
+    difficulty: 'beginner',
+    estimatedTime: '15 minutes',
+    prerequisites: [
+      'Basic React knowledge',
+      'Node.js installed',
+      'Package manager (npm/yarn/pnpm)',
+    ],
+    lastUpdated: '2024-01-15',
+    relatedGuides: ['first-component', 'theming-guide'],
+    sections: [
+      {
+        id: 'installation',
+        title: 'Installation',
+        content: `Glass UI can be installed using your preferred package manager. We recommend using npm, yarn, or pnpm for the best experience.`,
+        codeExamples: [
+          {
+            title: 'Install with npm',
+            description: 'Install Glass UI and its dependencies using npm',
+            language: 'bash',
+            code: `npm install @glass-ui/react @glass-ui/tokens
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p`,
-                    },
-                    {
-                        title: 'Install with yarn',
-                        description: 'Install Glass UI and its dependencies using yarn',
-                        language: 'bash',
-                        code: `yarn add @glass-ui/react @glass-ui/tokens
+          },
+          {
+            title: 'Install with yarn',
+            description: 'Install Glass UI and its dependencies using yarn',
+            language: 'bash',
+            code: `yarn add @glass-ui/react @glass-ui/tokens
 yarn add -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p`,
-                    },
-                    {
-                        title: 'Install with pnpm',
-                        description: 'Install Glass UI and its dependencies using pnpm',
-                        language: 'bash',
-                        code: `pnpm add @glass-ui/react @glass-ui/tokens
+          },
+          {
+            title: 'Install with pnpm',
+            description: 'Install Glass UI and its dependencies using pnpm',
+            language: 'bash',
+            code: `pnpm add @glass-ui/react @glass-ui/tokens
 pnpm add -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p`,
-                    },
-                ],
-            },
-            {
-                id: 'tailwind-config',
-                title: 'Tailwind CSS Configuration',
-                content: `Configure Tailwind CSS to work with Glass UI components and design tokens. This step is crucial for proper styling and theme support.`,
-                codeExamples: [
-                    {
-                        title: 'tailwind.config.js',
-                        description: 'Configure Tailwind CSS with Glass UI preset',
-                        language: 'json',
-                        filename: 'tailwind.config.js',
-                        code: `/** @type {import('tailwindcss').Config} */
+          },
+        ],
+      },
+      {
+        id: 'tailwind-config',
+        title: 'Tailwind CSS Configuration',
+        content: `Configure Tailwind CSS to work with Glass UI components and design tokens. This step is crucial for proper styling and theme support.`,
+        codeExamples: [
+          {
+            title: 'tailwind.config.js',
+            description: 'Configure Tailwind CSS with Glass UI preset',
+            language: 'json',
+            filename: 'tailwind.config.js',
+            code: `/** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -135,25 +136,25 @@ module.exports = {
     require("@glass-ui/tailwind-plugin"),
   ],
 }`,
-                    },
-                ],
-                tips: [
-                    'Make sure to include the Glass UI plugin for additional utilities',
-                    'The content array should include paths to all files using Glass UI components',
-                    'Dark mode is configured using the "class" strategy for better control',
-                ],
-            },
-            {
-                id: 'css-setup',
-                title: 'CSS Setup',
-                content: `Add the necessary CSS imports and custom styles to enable Glass UI components and effects.`,
-                codeExamples: [
-                    {
-                        title: 'globals.css',
-                        description: 'Add Glass UI styles to your global CSS file',
-                        language: 'css',
-                        filename: 'src/styles/globals.css',
-                        code: `@tailwind base;
+          },
+        ],
+        tips: [
+          'Make sure to include the Glass UI plugin for additional utilities',
+          'The content array should include paths to all files using Glass UI components',
+          'Dark mode is configured using the "class" strategy for better control',
+        ],
+      },
+      {
+        id: 'css-setup',
+        title: 'CSS Setup',
+        content: `Add the necessary CSS imports and custom styles to enable Glass UI components and effects.`,
+        codeExamples: [
+          {
+            title: 'globals.css',
+            description: 'Add Glass UI styles to your global CSS file',
+            language: 'css',
+            filename: 'src/styles/globals.css',
+            code: `@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -239,25 +240,25 @@ module.exports = {
     @apply bg-background text-foreground;
   }
 }`,
-                    },
-                ],
-                tips: [
-                    'The CSS custom properties enable theme switching',
-                    'Glass effect utilities provide consistent styling across components',
-                    'Dark mode variants are automatically applied when the dark class is present',
-                ],
-            },
-            {
-                id: 'provider-setup',
-                title: 'Provider Setup',
-                content: `Wrap your application with the necessary providers to enable theming and Glass UI functionality.`,
-                codeExamples: [
-                    {
-                        title: 'App.tsx',
-                        description: 'Set up providers in your main App component',
-                        language: 'tsx',
-                        filename: 'src/App.tsx',
-                        code: `import React from 'react';
+          },
+        ],
+        tips: [
+          'The CSS custom properties enable theme switching',
+          'Glass effect utilities provide consistent styling across components',
+          'Dark mode variants are automatically applied when the dark class is present',
+        ],
+      },
+      {
+        id: 'provider-setup',
+        title: 'Provider Setup',
+        content: `Wrap your application with the necessary providers to enable theming and Glass UI functionality.`,
+        codeExamples: [
+          {
+            title: 'App.tsx',
+            description: 'Set up providers in your main App component',
+            language: 'tsx',
+            filename: 'src/App.tsx',
+            code: `import React from 'react';
 import { ThemeProvider } from 'next-themes';
 import { GlassUIProvider } from '@glass-ui/react';
 import './styles/globals.css';
@@ -285,13 +286,13 @@ function App() {
 }
 
 export default App;`,
-                    },
-                    {
-                        title: 'Next.js App Router',
-                        description: 'Set up providers in Next.js 13+ App Router',
-                        language: 'tsx',
-                        filename: 'src/app/layout.tsx',
-                        code: `import { Inter } from 'next/font/google';
+          },
+          {
+            title: 'Next.js App Router',
+            description: 'Set up providers in Next.js 13+ App Router',
+            language: 'tsx',
+            filename: 'src/app/layout.tsx',
+            code: `import { Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { GlassUIProvider } from '@glass-ui/react';
 import './globals.css';
@@ -320,36 +321,37 @@ export default function RootLayout({
     </html>
   );
 }`,
-                    },
-                ],
-                warnings: [
-                    'Make sure to import the CSS file before using any Glass UI components',
-                    'The suppressHydrationWarning prop is needed for Next.js to prevent hydration warnings with theme switching',
-                ],
-            },
+          },
         ],
-    },
-    {
-        id: 'first-component',
-        title: 'Creating Your First Component',
-        description: 'Learn how to create and customize your first Glass UI component',
-        category: 'getting-started',
-        difficulty: 'beginner',
-        estimatedTime: '10 minutes',
-        prerequisites: ['Glass UI installed and configured'],
-        lastUpdated: '2024-01-15',
-        relatedGuides: ['installation-setup', 'component-variants'],
-        sections: [
-            {
-                id: 'basic-button',
-                title: 'Basic Button Component',
-                content: `Let's start by creating a simple button component using Glass UI. This will demonstrate the basic usage and styling capabilities.`,
-                codeExamples: [
-                    {
-                        title: 'Basic Button',
-                        description: 'Create a simple glass button',
-                        language: 'tsx',
-                        code: `import { Button } from '@glass-ui/react';
+        warnings: [
+          'Make sure to import the CSS file before using any Glass UI components',
+          'The suppressHydrationWarning prop is needed for Next.js to prevent hydration warnings with theme switching',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'first-component',
+    title: 'Creating Your First Component',
+    description:
+      'Learn how to create and customize your first Glass UI component',
+    category: 'getting-started',
+    difficulty: 'beginner',
+    estimatedTime: '10 minutes',
+    prerequisites: ['Glass UI installed and configured'],
+    lastUpdated: '2024-01-15',
+    relatedGuides: ['installation-setup', 'component-variants'],
+    sections: [
+      {
+        id: 'basic-button',
+        title: 'Basic Button Component',
+        content: `Let's start by creating a simple button component using Glass UI. This will demonstrate the basic usage and styling capabilities.`,
+        codeExamples: [
+          {
+            title: 'Basic Button',
+            description: 'Create a simple glass button',
+            language: 'tsx',
+            code: `import { Button } from '@glass-ui/react';
 
 export function MyFirstButton() {
   return (
@@ -358,12 +360,12 @@ export function MyFirstButton() {
     </Button>
   );
 }`,
-                    },
-                    {
-                        title: 'Button with Icon',
-                        description: 'Add an icon to your button',
-                        language: 'tsx',
-                        code: `import { Button } from '@glass-ui/react';
+          },
+          {
+            title: 'Button with Icon',
+            description: 'Add an icon to your button',
+            language: 'tsx',
+            code: `import { Button } from '@glass-ui/react';
 import { PlusIcon } from '@heroicons/react/24/outline';
 
 export function ButtonWithIcon() {
@@ -374,24 +376,24 @@ export function ButtonWithIcon() {
     </Button>
   );
 }`,
-                    },
-                ],
-                tips: [
-                    'Use the variant prop to change the button style',
-                    'The size prop controls the button dimensions',
-                    'Add custom classes with the className prop for additional styling',
-                ],
-            },
-            {
-                id: 'glass-card',
-                title: 'Glass Card Component',
-                content: `Cards are perfect for showcasing the glass morphism effect. Let's create a beautiful card component.`,
-                codeExamples: [
-                    {
-                        title: 'Simple Card',
-                        description: 'Create a basic glass card',
-                        language: 'tsx',
-                        code: `import { Card, CardContent, CardHeader, CardTitle } from '@glass-ui/react';
+          },
+        ],
+        tips: [
+          'Use the variant prop to change the button style',
+          'The size prop controls the button dimensions',
+          'Add custom classes with the className prop for additional styling',
+        ],
+      },
+      {
+        id: 'glass-card',
+        title: 'Glass Card Component',
+        content: `Cards are perfect for showcasing the glass morphism effect. Let's create a beautiful card component.`,
+        codeExamples: [
+          {
+            title: 'Simple Card',
+            description: 'Create a basic glass card',
+            language: 'tsx',
+            code: `import { Card, CardContent, CardHeader, CardTitle } from '@glass-ui/react';
 
 export function MyFirstCard() {
   return (
@@ -405,12 +407,12 @@ export function MyFirstCard() {
     </Card>
   );
 }`,
-                    },
-                    {
-                        title: 'Interactive Card',
-                        description: 'Add hover effects and interactions',
-                        language: 'tsx',
-                        code: `import { Card, CardContent, CardHeader, CardTitle } from '@glass-ui/react';
+          },
+          {
+            title: 'Interactive Card',
+            description: 'Add hover effects and interactions',
+            language: 'tsx',
+            code: `import { Card, CardContent, CardHeader, CardTitle } from '@glass-ui/react';
 import { Button } from '@glass-ui/react';
 
 export function InteractiveCard() {
@@ -431,40 +433,41 @@ export function InteractiveCard() {
     </Card>
   );
 }`,
-                    },
-                ],
-                tips: [
-                    'Use hover: utilities for interactive effects',
-                    'Combine multiple cards in a grid for dashboard layouts',
-                    'Consider accessibility when adding hover effects',
-                ],
-            },
+          },
         ],
-    },
-    {
-        id: 'theming-guide',
-        title: 'Theming and Customization',
-        description: 'Complete guide to customizing Glass UI themes and creating your own design system',
-        category: 'customization',
-        difficulty: 'intermediate',
-        estimatedTime: '30 minutes',
-        prerequisites: [
-            'Basic CSS knowledge',
-            'Understanding of CSS custom properties',
+        tips: [
+          'Use hover: utilities for interactive effects',
+          'Combine multiple cards in a grid for dashboard layouts',
+          'Consider accessibility when adding hover effects',
         ],
-        lastUpdated: '2024-01-15',
-        relatedGuides: ['design-tokens', 'component-variants'],
-        sections: [
-            {
-                id: 'theme-structure',
-                title: 'Understanding Theme Structure',
-                content: `Glass UI themes are built using CSS custom properties and design tokens. This allows for easy customization and theme switching.`,
-                codeExamples: [
-                    {
-                        title: 'Custom Theme Configuration',
-                        description: 'Create a custom theme configuration',
-                        language: 'tsx',
-                        code: `import { createTheme } from '@glass-ui/react';
+      },
+    ],
+  },
+  {
+    id: 'theming-guide',
+    title: 'Theming and Customization',
+    description:
+      'Complete guide to customizing Glass UI themes and creating your own design system',
+    category: 'customization',
+    difficulty: 'intermediate',
+    estimatedTime: '30 minutes',
+    prerequisites: [
+      'Basic CSS knowledge',
+      'Understanding of CSS custom properties',
+    ],
+    lastUpdated: '2024-01-15',
+    relatedGuides: ['design-tokens', 'component-variants'],
+    sections: [
+      {
+        id: 'theme-structure',
+        title: 'Understanding Theme Structure',
+        content: `Glass UI themes are built using CSS custom properties and design tokens. This allows for easy customization and theme switching.`,
+        codeExamples: [
+          {
+            title: 'Custom Theme Configuration',
+            description: 'Create a custom theme configuration',
+            language: 'tsx',
+            code: `import { createTheme } from '@glass-ui/react';
 
 export const customTheme = createTheme({
   colors: {
@@ -500,19 +503,19 @@ export const customTheme = createTheme({
     },
   },
 });`,
-                    },
-                ],
-            },
-            {
-                id: 'applying-themes',
-                title: 'Applying Custom Themes',
-                content: `Learn how to apply your custom theme to your application and switch between different themes.`,
-                codeExamples: [
-                    {
-                        title: 'Theme Provider Setup',
-                        description: 'Apply your custom theme using the theme provider',
-                        language: 'tsx',
-                        code: `import { GlassUIProvider } from '@glass-ui/react';
+          },
+        ],
+      },
+      {
+        id: 'applying-themes',
+        title: 'Applying Custom Themes',
+        content: `Learn how to apply your custom theme to your application and switch between different themes.`,
+        codeExamples: [
+          {
+            title: 'Theme Provider Setup',
+            description: 'Apply your custom theme using the theme provider',
+            language: 'tsx',
+            code: `import { GlassUIProvider } from '@glass-ui/react';
 import { customTheme } from './theme';
 
 function App() {
@@ -522,12 +525,12 @@ function App() {
     </GlassUIProvider>
   );
 }`,
-                    },
-                    {
-                        title: 'Dynamic Theme Switching',
-                        description: 'Implement dynamic theme switching',
-                        language: 'tsx',
-                        code: `import { useState } from 'react';
+          },
+          {
+            title: 'Dynamic Theme Switching',
+            description: 'Implement dynamic theme switching',
+            language: 'tsx',
+            code: `import { useState } from 'react';
 import { GlassUIProvider, Button } from '@glass-ui/react';
 import { lightTheme, darkTheme, customTheme } from './themes';
 
@@ -558,35 +561,36 @@ function App() {
     </GlassUIProvider>
   );
 }`,
-                    },
-                ],
-            },
+          },
         ],
-    },
-    {
-        id: 'accessibility-guide',
-        title: 'Accessibility Best Practices',
-        description: 'Comprehensive guide to building accessible interfaces with Glass UI',
-        category: 'best-practices',
-        difficulty: 'intermediate',
-        estimatedTime: '45 minutes',
-        prerequisites: [
-            'Basic understanding of web accessibility',
-            'WCAG guidelines knowledge',
-        ],
-        lastUpdated: '2024-01-15',
-        relatedGuides: ['testing-guide', 'component-patterns'],
-        sections: [
-            {
-                id: 'color-contrast',
-                title: 'Color Contrast and Visibility',
-                content: `Glass morphism effects can impact text readability. Learn how to maintain proper contrast ratios while preserving the aesthetic.`,
-                codeExamples: [
-                    {
-                        title: 'High Contrast Text',
-                        description: 'Ensure text remains readable on glass backgrounds',
-                        language: 'tsx',
-                        code: `import { Card, CardContent } from '@glass-ui/react';
+      },
+    ],
+  },
+  {
+    id: 'accessibility-guide',
+    title: 'Accessibility Best Practices',
+    description:
+      'Comprehensive guide to building accessible interfaces with Glass UI',
+    category: 'best-practices',
+    difficulty: 'intermediate',
+    estimatedTime: '45 minutes',
+    prerequisites: [
+      'Basic understanding of web accessibility',
+      'WCAG guidelines knowledge',
+    ],
+    lastUpdated: '2024-01-15',
+    relatedGuides: ['testing-guide', 'component-patterns'],
+    sections: [
+      {
+        id: 'color-contrast',
+        title: 'Color Contrast and Visibility',
+        content: `Glass morphism effects can impact text readability. Learn how to maintain proper contrast ratios while preserving the aesthetic.`,
+        codeExamples: [
+          {
+            title: 'High Contrast Text',
+            description: 'Ensure text remains readable on glass backgrounds',
+            language: 'tsx',
+            code: `import { Card, CardContent } from '@glass-ui/react';
 
 export function AccessibleGlassCard() {
   return (
@@ -605,24 +609,24 @@ export function AccessibleGlassCard() {
     </Card>
   );
 }`,
-                    },
-                ],
-                tips: [
-                    'Always test contrast ratios with tools like WebAIM Contrast Checker',
-                    'Use background overlays to improve text readability on glass surfaces',
-                    'Consider providing a high contrast mode for users who need it',
-                ],
-            },
-            {
-                id: 'keyboard-navigation',
-                title: 'Keyboard Navigation',
-                content: `Ensure all interactive elements are accessible via keyboard navigation with proper focus management.`,
-                codeExamples: [
-                    {
-                        title: 'Accessible Button Group',
-                        description: 'Create keyboard-navigable button groups',
-                        language: 'tsx',
-                        code: `import { Button } from '@glass-ui/react';
+          },
+        ],
+        tips: [
+          'Always test contrast ratios with tools like WebAIM Contrast Checker',
+          'Use background overlays to improve text readability on glass surfaces',
+          'Consider providing a high contrast mode for users who need it',
+        ],
+      },
+      {
+        id: 'keyboard-navigation',
+        title: 'Keyboard Navigation',
+        content: `Ensure all interactive elements are accessible via keyboard navigation with proper focus management.`,
+        codeExamples: [
+          {
+            title: 'Accessible Button Group',
+            description: 'Create keyboard-navigable button groups',
+            language: 'tsx',
+            code: `import { Button } from '@glass-ui/react';
 import { useRef, KeyboardEvent } from 'react';
 
 export function AccessibleButtonGroup() {
@@ -663,67 +667,74 @@ export function AccessibleButtonGroup() {
     </div>
   );
 }`,
-                    },
-                ],
-                tips: [
-                    'Use arrow keys for navigation within component groups',
-                    'Provide clear focus indicators that work with glass effects',
-                    'Test keyboard navigation with screen readers',
-                ],
-            },
+          },
         ],
-    },
+        tips: [
+          'Use arrow keys for navigation within component groups',
+          'Provide clear focus indicators that work with glass effects',
+          'Test keyboard navigation with screen readers',
+        ],
+      },
+    ],
+  },
 ];
 // Guide utilities
 export class GuideManager {
-    constructor() {
-        Object.defineProperty(this, "guides", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: new Map()
-        });
-        guides.forEach(guide => {
-            this.guides.set(guide.id, guide);
-        });
-    }
-    getGuide(id) {
-        return this.guides.get(id);
-    }
-    getGuidesByCategory(category) {
-        return Array.from(this.guides.values()).filter(guide => guide.category === category);
-    }
-    getGuidesByDifficulty(difficulty) {
-        return Array.from(this.guides.values()).filter(guide => guide.difficulty === difficulty);
-    }
-    searchGuides(query) {
-        const lowercaseQuery = query.toLowerCase();
-        return Array.from(this.guides.values()).filter(guide => guide.title.toLowerCase().includes(lowercaseQuery) ||
-            guide.description.toLowerCase().includes(lowercaseQuery) ||
-            guide.sections.some(section => section.title.toLowerCase().includes(lowercaseQuery) ||
-                section.content.toLowerCase().includes(lowercaseQuery)));
-    }
-    getRelatedGuides(guideId) {
-        const guide = this.getGuide(guideId);
-        if (!guide)
-            return [];
-        return guide.relatedGuides
-            .map(id => this.getGuide(id))
-            .filter(Boolean);
-    }
+  constructor() {
+    Object.defineProperty(this, 'guides', {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value: new Map(),
+    });
+    guides.forEach(guide => {
+      this.guides.set(guide.id, guide);
+    });
+  }
+  getGuide(id) {
+    return this.guides.get(id);
+  }
+  getGuidesByCategory(category) {
+    return Array.from(this.guides.values()).filter(
+      guide => guide.category === category
+    );
+  }
+  getGuidesByDifficulty(difficulty) {
+    return Array.from(this.guides.values()).filter(
+      guide => guide.difficulty === difficulty
+    );
+  }
+  searchGuides(query) {
+    const lowercaseQuery = query.toLowerCase();
+    return Array.from(this.guides.values()).filter(
+      guide =>
+        guide.title.toLowerCase().includes(lowercaseQuery) ||
+        guide.description.toLowerCase().includes(lowercaseQuery) ||
+        guide.sections.some(
+          section =>
+            section.title.toLowerCase().includes(lowercaseQuery) ||
+            section.content.toLowerCase().includes(lowercaseQuery)
+        )
+    );
+  }
+  getRelatedGuides(guideId) {
+    const guide = this.getGuide(guideId);
+    if (!guide) return [];
+    return guide.relatedGuides.map(id => this.getGuide(id)).filter(Boolean);
+  }
 }
 // Export the guide manager instance
 export const guideManager = new GuideManager();
 // Guide utilities
 export const guideUtils = {
-    manager: guideManager,
-    guides,
-    categories: [
-        'getting-started',
-        'customization',
-        'advanced',
-        'best-practices',
-        'migration',
-    ],
-    difficulties: ['beginner', 'intermediate', 'advanced'],
+  manager: guideManager,
+  guides,
+  categories: [
+    'getting-started',
+    'customization',
+    'advanced',
+    'best-practices',
+    'migration',
+  ],
+  difficulties: ['beginner', 'intermediate', 'advanced'],
 };

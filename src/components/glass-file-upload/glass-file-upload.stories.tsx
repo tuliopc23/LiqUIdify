@@ -8,7 +8,8 @@ const meta: Meta<typeof GlassFileUpload> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A comprehensive file upload component with drag-and-drop, file validation, previews, and liquid glass styling.',
+        component:
+          'A comprehensive file upload component with drag-and-drop, file validation, previews, and liquid glass styling.',
       },
     },
   },
@@ -68,10 +69,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    onFilesChange: (files) => {
+    onFilesChange: files => {
       console.log('Files changed:', files);
     },
-    onUpload: (files) => {
+    onUpload: files => {
       console.log('Upload files:', files);
     },
   },
@@ -181,20 +182,20 @@ export const AllSizes: Story = {
       <div className="text-sm text-gray-600">Small</div>
       <GlassFileUpload
         size="sm"
-        onFilesChange={(files) => console.log('Small files:', files)}
-        onUpload={(files) => console.log('Small upload:', files)}
+        onFilesChange={files => console.log('Small files:', files)}
+        onUpload={files => console.log('Small upload:', files)}
       />
       <div className="text-sm text-gray-600">Medium (default)</div>
       <GlassFileUpload
         size="md"
-        onFilesChange={(files) => console.log('Medium files:', files)}
-        onUpload={(files) => console.log('Medium upload:', files)}
+        onFilesChange={files => console.log('Medium files:', files)}
+        onUpload={files => console.log('Medium upload:', files)}
       />
       <div className="text-sm text-gray-600">Large</div>
       <GlassFileUpload
         size="lg"
-        onFilesChange={(files) => console.log('Large files:', files)}
-        onUpload={(files) => console.log('Large upload:', files)}
+        onFilesChange={files => console.log('Large files:', files)}
+        onUpload={files => console.log('Large upload:', files)}
       />
     </div>
   ),
@@ -206,20 +207,20 @@ export const AllVariants: Story = {
       <div className="text-sm text-gray-600">Default</div>
       <GlassFileUpload
         variant="default"
-        onFilesChange={(files) => console.log('Default files:', files)}
-        onUpload={(files) => console.log('Default upload:', files)}
+        onFilesChange={files => console.log('Default files:', files)}
+        onUpload={files => console.log('Default upload:', files)}
       />
       <div className="text-sm text-gray-600">Secondary</div>
       <GlassFileUpload
         variant="secondary"
-        onFilesChange={(files) => console.log('Secondary files:', files)}
-        onUpload={(files) => console.log('Secondary upload:', files)}
+        onFilesChange={files => console.log('Secondary files:', files)}
+        onUpload={files => console.log('Secondary upload:', files)}
       />
       <div className="text-sm text-gray-600">Outline</div>
       <GlassFileUpload
         variant="outline"
-        onFilesChange={(files) => console.log('Outline files:', files)}
-        onUpload={(files) => console.log('Outline upload:', files)}
+        onFilesChange={files => console.log('Outline files:', files)}
+        onUpload={files => console.log('Outline upload:', files)}
       />
     </div>
   ),
@@ -230,26 +231,26 @@ export const AllStates: Story = {
     <div className="space-y-6">
       <div className="text-sm text-gray-600">Normal</div>
       <GlassFileUpload
-        onFilesChange={(files) => console.log('Normal files:', files)}
-        onUpload={(files) => console.log('Normal upload:', files)}
+        onFilesChange={files => console.log('Normal files:', files)}
+        onUpload={files => console.log('Normal upload:', files)}
       />
       <div className="text-sm text-gray-600">Error</div>
       <GlassFileUpload
         error
-        onFilesChange={(files) => console.log('Error files:', files)}
-        onUpload={(files) => console.log('Error upload:', files)}
+        onFilesChange={files => console.log('Error files:', files)}
+        onUpload={files => console.log('Error upload:', files)}
       />
       <div className="text-sm text-gray-600">Success</div>
       <GlassFileUpload
         success
-        onFilesChange={(files) => console.log('Success files:', files)}
-        onUpload={(files) => console.log('Success upload:', files)}
+        onFilesChange={files => console.log('Success files:', files)}
+        onUpload={files => console.log('Success upload:', files)}
       />
       <div className="text-sm text-gray-600">Disabled</div>
       <GlassFileUpload
         disabled
-        onFilesChange={(files) => console.log('Disabled files:', files)}
-        onUpload={(files) => console.log('Disabled upload:', files)}
+        onFilesChange={files => console.log('Disabled files:', files)}
+        onUpload={files => console.log('Disabled upload:', files)}
       />
     </div>
   ),
@@ -264,11 +265,11 @@ export const UseCases: Story = {
           accept="image/*"
           maxSize={1024 * 1024} // 1MB
           showPreview
-          onFilesChange={(files) => console.log('Profile picture:', files)}
-          onUpload={(files) => console.log('Upload profile picture:', files)}
+          onFilesChange={files => console.log('Profile picture:', files)}
+          onUpload={files => console.log('Upload profile picture:', files)}
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Document Upload</div>
         <GlassFileUpload
@@ -277,11 +278,11 @@ export const UseCases: Story = {
           maxFiles={3}
           maxSize={5 * 1024 * 1024} // 5MB
           variant="outline"
-          onFilesChange={(files) => console.log('Documents:', files)}
-          onUpload={(files) => console.log('Upload documents:', files)}
+          onFilesChange={files => console.log('Documents:', files)}
+          onUpload={files => console.log('Upload documents:', files)}
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Media Gallery Upload</div>
         <GlassFileUpload
@@ -291,19 +292,19 @@ export const UseCases: Story = {
           showPreview
           showProgress
           size="lg"
-          onFilesChange={(files) => console.log('Media files:', files)}
-          onUpload={(files) => console.log('Upload media:', files)}
+          onFilesChange={files => console.log('Media files:', files)}
+          onUpload={files => console.log('Upload media:', files)}
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Resume Upload</div>
         <GlassFileUpload
           accept=".pdf,.doc,.docx"
           maxSize={2 * 1024 * 1024} // 2MB
           variant="secondary"
-          onFilesChange={(files) => console.log('Resume:', files)}
-          onUpload={(files) => console.log('Upload resume:', files)}
+          onFilesChange={files => console.log('Resume:', files)}
+          onUpload={files => console.log('Upload resume:', files)}
         />
       </div>
     </div>
@@ -314,7 +315,7 @@ export const WithCustomValidation: Story = {
   args: {
     ...Default.args,
     multiple: true,
-    validateFile: (file) => {
+    validateFile: file => {
       if (file.name.length > 50) {
         return 'Filename too long (max 50 characters)';
       }
@@ -331,15 +332,15 @@ export const WithUploadProgress: Story = {
     ...Default.args,
     multiple: true,
     showProgress: true,
-    onUpload: async (files) => {
+    onUpload: async files => {
       console.log('Starting upload for files:', files);
-      
+
       // Simulate upload progress
       for (let i = 0; i <= 100; i += 10) {
         await new Promise(resolve => setTimeout(resolve, 100));
         console.log('Upload progress:', i + '%');
       }
-      
+
       console.log('Upload completed');
     },
   },
@@ -353,28 +354,28 @@ export const RestrictedFileTypes: Story = {
         <GlassFileUpload
           accept="image/jpeg,image/png,image/gif"
           showPreview
-          onFilesChange={(files) => console.log('Images:', files)}
-          onUpload={(files) => console.log('Upload images:', files)}
+          onFilesChange={files => console.log('Images:', files)}
+          onUpload={files => console.log('Upload images:', files)}
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">PDFs Only</div>
         <GlassFileUpload
           accept=".pdf"
           multiple
-          onFilesChange={(files) => console.log('PDFs:', files)}
-          onUpload={(files) => console.log('Upload PDFs:', files)}
+          onFilesChange={files => console.log('PDFs:', files)}
+          onUpload={files => console.log('Upload PDFs:', files)}
         />
       </div>
-      
+
       <div>
         <div className="text-sm text-gray-600 mb-2">Text Files Only</div>
         <GlassFileUpload
           accept=".txt,.csv,.json"
           multiple
-          onFilesChange={(files) => console.log('Text files:', files)}
-          onUpload={(files) => console.log('Upload text files:', files)}
+          onFilesChange={files => console.log('Text files:', files)}
+          onUpload={files => console.log('Upload text files:', files)}
         />
       </div>
     </div>
@@ -387,13 +388,19 @@ export const Interactive: Story = {
     multiple: true,
     showPreview: true,
     showProgress: true,
-    onFilesChange: (files) => {
-      console.log('Files changed:', files.map(f => f.name));
+    onFilesChange: files => {
+      console.log(
+        'Files changed:',
+        files.map(f => f.name)
+      );
     },
-    onUpload: (files) => {
-      console.log('Upload started for:', files.map(f => f.name));
+    onUpload: files => {
+      console.log(
+        'Upload started for:',
+        files.map(f => f.name)
+      );
     },
-    onFileRemove: (file) => {
+    onFileRemove: file => {
       console.log('File removed:', file.name);
     },
     onDragEnter: () => {
@@ -402,8 +409,11 @@ export const Interactive: Story = {
     onDragLeave: () => {
       console.log('Drag left');
     },
-    onDrop: (files) => {
-      console.log('Files dropped:', files.map(f => f.name));
+    onDrop: files => {
+      console.log(
+        'Files dropped:',
+        files.map(f => f.name)
+      );
     },
   },
 };

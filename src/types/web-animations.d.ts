@@ -25,7 +25,11 @@ declare global {
     iterationComposite?: IterationCompositeOperation;
   }
 
-  type PlaybackDirection = 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
+  type PlaybackDirection =
+    | 'normal'
+    | 'reverse'
+    | 'alternate'
+    | 'alternate-reverse';
   type FillMode = 'none' | 'forwards' | 'backwards' | 'both' | 'auto';
   type CompositeOperation = 'replace' | 'add' | 'accumulate';
   type IterationCompositeOperation = 'replace' | 'accumulate';
@@ -110,7 +114,13 @@ declare global {
   }
 
   interface PropertyIndexedKeyframes {
-    [property: string]: string | string[] | number | number[] | null | (string | number | null)[];
+    [property: string]:
+      | string
+      | string[]
+      | number
+      | number[]
+      | null
+      | (string | number | null)[];
     offset?: number | (number | null)[];
     easing?: string | string[];
     composite?: CompositeOperation | CompositeOperation[];

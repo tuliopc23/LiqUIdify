@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { cn, getGlassClass } from "@/lib/glass-utils";
+import React, { useState, useRef, useEffect } from 'react';
+import { cn, getGlassClass } from '@/lib/glass-utils';
 
 export interface DropdownItem {
   label: string;
@@ -15,21 +15,27 @@ export interface GlassDropdownProps {
   onSelect?: (value: string) => void;
   className?: string;
   contentClassName?: string;
-  align?: "start" | "center" | "end";
+  align?: 'start' | 'center' | 'end';
   sideOffset?: number;
 }
 
-export const GlassDropdown = React.forwardRef<HTMLDivElement, GlassDropdownProps>(
-  ({ 
-    trigger, 
-    items, 
-    onSelect, 
-    className, 
-    contentClassName,
-    align = "start",
-    sideOffset = 4,
-    ...props 
-  }, ref) => {
+export const GlassDropdown = React.forwardRef<
+  HTMLDivElement,
+  GlassDropdownProps
+>(
+  (
+    {
+      trigger,
+      items,
+      onSelect,
+      className,
+      contentClassName,
+      align = 'start',
+      sideOffset = 4,
+      ...props
+    },
+    ref
+  ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
     const triggerRef = useRef<HTMLDivElement>(null);
@@ -49,18 +55,18 @@ export const GlassDropdown = React.forwardRef<HTMLDivElement, GlassDropdownProps
       };
 
       const handleEscape = (event: KeyboardEvent) => {
-        if (isOpen && event.key === "Escape") {
+        if (isOpen && event.key === 'Escape') {
           setIsOpen(false);
         }
       };
 
       if (isOpen) {
-        document.addEventListener("mousedown", handleClickOutside);
-        document.addEventListener("keydown", handleEscape);
-        
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('keydown', handleEscape);
+
         return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-          document.removeEventListener("keydown", handleEscape);
+          document.removeEventListener('mousedown', handleClickOutside);
+          document.removeEventListener('keydown', handleEscape);
         };
       }
     }, [isOpen]);
@@ -69,16 +75,17 @@ export const GlassDropdown = React.forwardRef<HTMLDivElement, GlassDropdownProps
       if (isOpen && triggerRef.current && dropdownRef.current) {
         const triggerRect = triggerRef.current.getBoundingClientRect();
         const dropdownRect = dropdownRef.current.getBoundingClientRect();
-        
+
         let top = triggerRect.bottom + sideOffset;
         let left = triggerRect.left;
 
         // Align dropdown
         switch (align) {
-          case "center":
-            left = triggerRect.left + (triggerRect.width - dropdownRect.width) / 2;
+          case 'center':
+            left =
+              triggerRect.left + (triggerRect.width - dropdownRect.width) / 2;
             break;
-          case "end":
+          case 'end':
             left = triggerRect.right - dropdownRect.width;
             break;
         }
@@ -86,7 +93,7 @@ export const GlassDropdown = React.forwardRef<HTMLDivElement, GlassDropdownProps
         // Keep dropdown within viewport
         const viewport = {
           width: window.innerWidth,
-          height: window.innerHeight
+          height: window.innerHeight,
         };
 
         if (left < 8) left = 8;
@@ -98,23 +105,27 @@ export const GlassDropdown = React.forwardRef<HTMLDivElement, GlassDropdownProps
         }
 
         setDropdownStyle({
-          position: "fixed",
+          position: 'fixed',
           top: `${top}px`,
           left: `${left}px`,
-          zIndex: 9999
+          zIndex: 9999,
         });
       }
     }, [isOpen, align, sideOffset]);
 
     const handleSelect = (item: DropdownItem) => {
       if (item.disabled || item.separator) return;
-      
+
       onSelect?.(item.value);
       setIsOpen(false);
     };
 
     return (
-      <div ref={ref} className={cn("relative inline-block", className)} {...props}>
+      <div
+        ref={ref}
+        className={cn('relative inline-block', className)}
+        {...props}
+      >
         <div
           ref={triggerRef}
           onClick={() => setIsOpen(!isOpen)}
@@ -128,10 +139,10 @@ export const GlassDropdown = React.forwardRef<HTMLDivElement, GlassDropdownProps
             ref={dropdownRef}
             style={dropdownStyle}
             className={cn(
-              getGlassClass("elevated"),
-              "py-1 rounded-xl border border-white/20 dark:border-white/10",
-              "min-w-[160px] max-w-[300px]",
-              "animate-in fade-in-0 zoom-in-95 duration-200",
+              getGlassClass('elevated'),
+              'py-1 rounded-xl border border-white/20 dark:border-white/10',
+              'min-w-[160px] max-w-[300px]',
+              'animate-in fade-in-0 zoom-in-95 duration-200',
               contentClassName
             )}
           >
@@ -151,18 +162,16 @@ export const GlassDropdown = React.forwardRef<HTMLDivElement, GlassDropdownProps
                   onClick={() => handleSelect(item)}
                   disabled={item.disabled}
                   className={cn(
-                    "w-full px-3 py-2 text-left transition-colors duration-200",
-                    "hover:bg-white/10 dark:hover:bg-white/5",
-                    "focus:outline-none focus:bg-white/10 dark:focus:bg-white/5",
-                    "flex items-center space-x-2",
-                    "text-gray-900 dark:text-white text-sm",
-                    item.disabled && "opacity-50 cursor-not-allowed"
+                    'w-full px-3 py-2 text-left transition-colors duration-200',
+                    'hover:bg-white/10 dark:hover:bg-white/5',
+                    'focus:outline-none focus:bg-white/10 dark:focus:bg-white/5',
+                    'flex items-center space-x-2',
+                    'text-gray-900 dark:text-white text-sm',
+                    item.disabled && 'opacity-50 cursor-not-allowed'
                   )}
                 >
                   {item.icon && (
-                    <span className="flex-shrink-0 w-4 h-4">
-                      {item.icon}
-                    </span>
+                    <span className="flex-shrink-0 w-4 h-4">{item.icon}</span>
                   )}
                   <span className="truncate">{item.label}</span>
                 </button>
@@ -175,4 +184,4 @@ export const GlassDropdown = React.forwardRef<HTMLDivElement, GlassDropdownProps
   }
 );
 
-GlassDropdown.displayName = "GlassDropdown";
+GlassDropdown.displayName = 'GlassDropdown';

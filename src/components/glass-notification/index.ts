@@ -1,1 +1,4 @@
-export { NotificationCenter, type NotificationItem } from './glass-notification';
+export {
+  NotificationCenter,
+  type NotificationItem,
+} from './glass-notification';

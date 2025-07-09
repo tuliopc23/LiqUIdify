@@ -48,23 +48,32 @@ export const APPLE_LIQUID_VARIANTS = {
 } as const;
 
 export const APPLE_LIQUID_SHADOWS = {
-  subtle: '0 4px 16px rgba(31, 38, 135, 0.1), inset 0 2px 10px rgba(255, 255, 255, 0.2)',
-  medium: '0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3)',
-  strong: '0 16px 48px rgba(31, 38, 135, 0.3), inset 0 8px 32px rgba(255, 255, 255, 0.4)',
+  subtle:
+    '0 4px 16px rgba(31, 38, 135, 0.1), inset 0 2px 10px rgba(255, 255, 255, 0.2)',
+  medium:
+    '0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3)',
+  strong:
+    '0 16px 48px rgba(31, 38, 135, 0.3), inset 0 8px 32px rgba(255, 255, 255, 0.4)',
 } as const;
 
 export const APPLE_LIQUID_AFTER_EFFECTS = {
   subtle: {
-    boxShadow: 'inset -6px -4px 0px -7px rgba(255, 255, 255, 0.8), inset 0px -5px 0px -4px rgba(255, 255, 255, 0.8)',
-    filter: 'blur(0.5px) drop-shadow(6px 2px 4px rgba(0, 0, 0, 0.2)) brightness(110%)',
+    boxShadow:
+      'inset -6px -4px 0px -7px rgba(255, 255, 255, 0.8), inset 0px -5px 0px -4px rgba(255, 255, 255, 0.8)',
+    filter:
+      'blur(0.5px) drop-shadow(6px 2px 4px rgba(0, 0, 0, 0.2)) brightness(110%)',
   },
   medium: {
-    boxShadow: 'inset -10px -8px 0px -11px rgba(255, 255, 255, 1), inset 0px -9px 0px -8px rgba(255, 255, 255, 1)',
-    filter: 'blur(1px) drop-shadow(10px 4px 6px rgba(0, 0, 0, 0.3)) brightness(115%)',
+    boxShadow:
+      'inset -10px -8px 0px -11px rgba(255, 255, 255, 1), inset 0px -9px 0px -8px rgba(255, 255, 255, 1)',
+    filter:
+      'blur(1px) drop-shadow(10px 4px 6px rgba(0, 0, 0, 0.3)) brightness(115%)',
   },
   strong: {
-    boxShadow: 'inset -14px -12px 0px -15px rgba(255, 255, 255, 1), inset 0px -13px 0px -12px rgba(255, 255, 255, 1)',
-    filter: 'blur(1.5px) drop-shadow(14px 6px 8px rgba(0, 0, 0, 0.4)) brightness(120%)',
+    boxShadow:
+      'inset -14px -12px 0px -15px rgba(255, 255, 255, 1), inset 0px -13px 0px -12px rgba(255, 255, 255, 1)',
+    filter:
+      'blur(1.5px) drop-shadow(14px 6px 8px rgba(0, 0, 0, 0.4)) brightness(120%)',
   },
 } as const;
 
@@ -84,66 +93,84 @@ export function useAppleLiquidGlass(options: AppleLiquidGlassOptions = {}) {
     distortionEffect = false,
   } = options;
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!elementRef.current) return;
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!elementRef.current) return;
 
-    // Use startTransition for smooth animations
-    startTransition(() => {
-      const rect = elementRef.current!.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      const deltaX = (e.clientX - centerX) * magneticStrength;
-      const deltaY = (e.clientY - centerY) * magneticStrength;
+      // Use startTransition for smooth animations
+      startTransition(() => {
+        const rect = elementRef.current!.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
 
-      elementRef.current!.style.transform = `translate(${deltaX}px, ${deltaY}px) translateZ(0)`;
-      
-      if (liquidFlow && multiLayer) {
-        // Enhanced liquid flow for multi-layer structure
-        const glassFilter = elementRef.current!.querySelector('.glass-filter') as HTMLElement;
-        const glassOverlay = elementRef.current!.querySelector('.glass-overlay') as HTMLElement;
-        
-        if (glassFilter) {
-          glassFilter.style.transform = `translate(${-deltaX * 0.2}px, ${-deltaY * 0.2}px)`;
+        const deltaX = (e.clientX - centerX) * magneticStrength;
+        const deltaY = (e.clientY - centerY) * magneticStrength;
+
+        elementRef.current!.style.transform = `translate(${deltaX}px, ${deltaY}px) translateZ(0)`;
+
+        if (liquidFlow && multiLayer) {
+          // Enhanced liquid flow for multi-layer structure
+          const glassFilter = elementRef.current!.querySelector(
+            '.glass-filter'
+          ) as HTMLElement;
+          const glassOverlay = elementRef.current!.querySelector(
+            '.glass-overlay'
+          ) as HTMLElement;
+
+          if (glassFilter) {
+            glassFilter.style.transform = `translate(${-deltaX * 0.2}px, ${-deltaY * 0.2}px)`;
+          }
+
+          if (glassOverlay) {
+            glassOverlay.style.transform = `translate(${-deltaX * 0.1}px, ${-deltaY * 0.1}px)`;
+          }
         }
-        
-        if (glassOverlay) {
-          glassOverlay.style.transform = `translate(${-deltaX * 0.1}px, ${-deltaY * 0.1}px)`;
-        }
-      }
-    });
-  }, [magneticStrength, liquidFlow, multiLayer]);
+      });
+    },
+    [magneticStrength, liquidFlow, multiLayer]
+  );
 
   const handleMouseLeave = useCallback(() => {
     if (!elementRef.current) return;
-    
+
     startTransition(() => {
       elementRef.current!.style.transform = 'translate(0px, 0px) translateZ(0)';
-      elementRef.current!.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      
+      elementRef.current!.style.transition =
+        'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
       if (multiLayer) {
-        const glassFilter = elementRef.current!.querySelector('.glass-filter') as HTMLElement;
-        const glassOverlay = elementRef.current!.querySelector('.glass-overlay') as HTMLElement;
-        
+        const glassFilter = elementRef.current!.querySelector(
+          '.glass-filter'
+        ) as HTMLElement;
+        const glassOverlay = elementRef.current!.querySelector(
+          '.glass-overlay'
+        ) as HTMLElement;
+
         if (glassFilter) {
           glassFilter.style.transform = 'translate(0px, 0px)';
-          glassFilter.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          glassFilter.style.transition =
+            'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
         }
-        
+
         if (glassOverlay) {
           glassOverlay.style.transform = 'translate(0px, 0px)';
-          glassOverlay.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          glassOverlay.style.transition =
+            'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
         }
       }
-      
+
       setTimeout(() => {
         if (elementRef.current) {
           elementRef.current.style.transition = '';
-          
+
           if (multiLayer) {
-            const glassFilter = elementRef.current.querySelector('.glass-filter') as HTMLElement;
-            const glassOverlay = elementRef.current.querySelector('.glass-overlay') as HTMLElement;
-            
+            const glassFilter = elementRef.current.querySelector(
+              '.glass-filter'
+            ) as HTMLElement;
+            const glassOverlay = elementRef.current.querySelector(
+              '.glass-overlay'
+            ) as HTMLElement;
+
             if (glassFilter) glassFilter.style.transition = '';
             if (glassOverlay) glassOverlay.style.transition = '';
           }
@@ -201,29 +228,50 @@ export function getAppleLiquidGlassClass(
     multiLayer?: boolean;
   } = {}
 ): string {
-  const { interactive = true, magnetic = false, animated = false, multiLayer = false } = options;
-  
+  const {
+    interactive = true,
+    magnetic = false,
+    animated = false,
+    multiLayer = false,
+  } = options;
+
   const baseClass = 'apple-liquid-glass';
-  const intensityClass = intensity !== 'medium' ? `apple-liquid-glass--${intensity}` : '';
+  const intensityClass =
+    intensity !== 'medium' ? `apple-liquid-glass--${intensity}` : '';
   const interactiveClass = interactive ? 'apple-liquid-glass--interactive' : '';
   const magneticClass = magnetic ? 'apple-liquid-glass--magnetic' : '';
   const animatedClass = animated ? 'apple-liquid-glass--animated' : '';
-  
-  return [baseClass, intensityClass, interactiveClass, magneticClass, animatedClass].filter(Boolean).join(' ');
+
+  return [
+    baseClass,
+    intensityClass,
+    interactiveClass,
+    magneticClass,
+    animatedClass,
+  ]
+    .filter(Boolean)
+    .join(' ');
 }
 
 /**
  * Generate multi-layer glass structure JSX
  * For use with the new multi-layer glass components
  */
-export function createGlassLayers(content: React.ReactNode, className?: string): React.ReactNode {
+export function createGlassLayers(
+  content: React.ReactNode,
+  className?: string
+): React.ReactNode {
   return React.createElement(
     React.Fragment,
     null,
     React.createElement('div', { className: 'glass-filter' }),
     React.createElement('div', { className: 'glass-overlay' }),
     React.createElement('div', { className: 'glass-specular' }),
-    React.createElement('div', { className: `glass-content ${className || ''}` }, content)
+    React.createElement(
+      'div',
+      { className: `glass-content ${className || ''}` },
+      content
+    )
   );
 }
 

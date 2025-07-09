@@ -24,13 +24,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Helper component for interactive stories
-const ModalWrapper = ({ 
-  title, 
-  children, 
+const ModalWrapper = ({
+  title,
+  children,
   className,
   titleClassName,
-  contentClassName 
-}: { 
+  contentClassName,
+}: {
   title?: string;
   children: React.ReactNode;
   className?: string;
@@ -38,12 +38,10 @@ const ModalWrapper = ({
   contentClassName?: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
     <>
-      <GlassButton onClick={() => setIsOpen(true)}>
-        Open Modal
-      </GlassButton>
+      <GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
       <GlassModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
@@ -97,7 +95,10 @@ export const Form: Story = {
     <ModalWrapper title="Create New Item">
       <form className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Name
           </label>
           <input
@@ -108,7 +109,10 @@ export const Form: Story = {
           />
         </div>
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             Description
           </label>
           <textarea
@@ -136,16 +140,27 @@ export const LongContent: Story = {
     <ModalWrapper title="Terms and Conditions" className="max-w-2xl">
       <div className="max-h-96 overflow-y-auto pr-2 space-y-4">
         <p className="text-gray-600 dark:text-gray-300">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
         </p>
         <p className="text-gray-600 dark:text-gray-300">
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum.
         </p>
         <p className="text-gray-600 dark:text-gray-300">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+          ab illo inventore veritatis et quasi architecto beatae vitae dicta
+          sunt explicabo.
         </p>
         <p className="text-gray-600 dark:text-gray-300">
-          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+          fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem
+          sequi nesciunt.
         </p>
       </div>
       <div className="flex gap-3 justify-end pt-4 border-t border-gray-200 dark:border-gray-700">

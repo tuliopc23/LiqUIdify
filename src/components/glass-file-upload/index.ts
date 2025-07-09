@@ -1,1 +1,5 @@
-export { GlassFileUpload, type GlassFileUploadProps, type FileUploadItem } from './glass-file-upload';
+export {
+  GlassFileUpload,
+  type GlassFileUploadProps,
+  type FileUploadItem,
+} from './glass-file-upload';

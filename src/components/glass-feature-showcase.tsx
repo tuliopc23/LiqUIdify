@@ -86,9 +86,12 @@ const GlassFeatureShowcase = forwardRef<
       return (
         <motion.div
           ref={node => {
-            (cardRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+            (cardRef as React.MutableRefObject<HTMLDivElement | null>).current =
+              node;
             if (enableMagnetic && magneticRef) {
-              (magneticRef as React.MutableRefObject<HTMLElement | null>).current = node;
+              (
+                magneticRef as React.MutableRefObject<HTMLElement | null>
+              ).current = node;
             }
           }}
           variants={itemVariants}
@@ -210,11 +213,14 @@ const GlassFeatureShowcase = forwardRef<
     return (
       <div
         ref={node => {
-          (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+          (
+            contentRef as React.MutableRefObject<HTMLDivElement | null>
+          ).current = node;
           if (typeof ref === 'function') {
             ref(node);
           } else if (ref) {
-            (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+            (ref as React.MutableRefObject<HTMLDivElement | null>).current =
+              node;
           }
         }}
         className={cn('relative py-16 px-6 md:py-24 md:px-8', className)}

@@ -57,16 +57,31 @@ export const ResizeOptions: Story = {
         <GlassTextarea resize="none" placeholder="Cannot be resized" />
       </div>
       <div>
-        <label className="block text-sm font-medium mb-2">Vertical Resize</label>
-        <GlassTextarea resize="vertical" placeholder="Can be resized vertically" />
+        <label className="block text-sm font-medium mb-2">
+          Vertical Resize
+        </label>
+        <GlassTextarea
+          resize="vertical"
+          placeholder="Can be resized vertically"
+        />
       </div>
       <div>
-        <label className="block text-sm font-medium mb-2">Horizontal Resize</label>
-        <GlassTextarea resize="horizontal" placeholder="Can be resized horizontally" />
+        <label className="block text-sm font-medium mb-2">
+          Horizontal Resize
+        </label>
+        <GlassTextarea
+          resize="horizontal"
+          placeholder="Can be resized horizontally"
+        />
       </div>
       <div>
-        <label className="block text-sm font-medium mb-2">Both Directions</label>
-        <GlassTextarea resize="both" placeholder="Can be resized in both directions" />
+        <label className="block text-sm font-medium mb-2">
+          Both Directions
+        </label>
+        <GlassTextarea
+          resize="both"
+          placeholder="Can be resized in both directions"
+        />
       </div>
     </div>
   ),

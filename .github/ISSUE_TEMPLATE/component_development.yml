@@ -1,8 +1,8 @@
 name: 🧩 Component Development
 description: Create a new component for LiquidiUI
-title: "[Component] Add [Component Name]"
-labels: ["component", "phase-1"]
-projects: ["tuliopc23/1"]
+title: '[Component] Add [Component Name]'
+labels: ['component', 'phase-1']
+projects: ['tuliopc23/1']
 assignees: []
 body:
   - type: markdown
@@ -151,5 +151,5 @@ body:
     attributes:
       value: |
         ---
-        
+
         **Note:** This issue will be automatically assigned to the appropriate milestone based on the selected phase. Please ensure all requirements are clearly defined before starting implementation.
