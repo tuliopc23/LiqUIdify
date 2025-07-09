@@ -127,3 +127,193 @@
 @utility apple-liquid-spring {
   transition: var(--transition-apple-spring);
 }
+
+/* Enhanced Apple Liquid Glass Utilities */
+@utility bg-apple-liquid-subtle {
+  background-color: var(--color-apple-liquid-subtle);
+}
+
+@utility bg-apple-liquid-medium {
+  background-color: var(--color-apple-liquid-medium);
+}
+
+@utility bg-apple-liquid-strong {
+  background-color: var(--color-apple-liquid-strong);
+}
+
+@utility backdrop-blur-apple-liquid-subtle {
+  backdrop-filter: var(--blur-apple-liquid-subtle);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-subtle);
+}
+
+@utility backdrop-blur-apple-liquid-medium {
+  backdrop-filter: var(--blur-apple-liquid-medium);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-medium);
+}
+
+@utility backdrop-blur-apple-liquid-strong {
+  backdrop-filter: var(--blur-apple-liquid-strong);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-strong);
+}
+
+@utility border-apple-liquid-subtle {
+  border: 1px solid var(--color-apple-border-subtle);
+}
+
+@utility border-apple-liquid-medium {
+  border: 1px solid var(--color-apple-border-medium);
+}
+
+@utility border-apple-liquid-strong {
+  border: 1px solid var(--color-apple-border-strong);
+}
+
+@utility shadow-apple-liquid-subtle {
+  box-shadow: var(--shadow-apple-liquid-subtle);
+}
+
+@utility shadow-apple-liquid-medium {
+  box-shadow: var(--shadow-apple-liquid-medium);
+}
+
+@utility shadow-apple-liquid-strong {
+  box-shadow: var(--shadow-apple-liquid-strong);
+}
+
+@utility rounded-apple-liquid-subtle {
+  border-radius: var(--radius-apple-liquid-subtle);
+}
+
+@utility rounded-apple-liquid-medium {
+  border-radius: var(--radius-apple-liquid-medium);
+}
+
+@utility rounded-apple-liquid-strong {
+  border-radius: var(--radius-apple-liquid-strong);
+}
+
+@utility transition-apple-liquid {
+  transition: var(--transition-apple-liquid);
+}
+
+@utility transition-apple-liquid-spring {
+  transition: var(--transition-apple-spring);
+}
+
+@utility text-apple-liquid {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+@utility bg-apple-liquid-gradient {
+  background: linear-gradient(135deg, var(--color-apple-liquid-subtle), var(--color-apple-liquid-medium));
+}
+
+@utility bg-apple-liquid-gradient-strong {
+  background: linear-gradient(135deg, var(--color-apple-liquid-medium), var(--color-apple-liquid-strong));
+}
+
+/* Enhanced Depth Utilities */
+@utility shadow-apple-liquid-depth-1 {
+  box-shadow: 
+    0 4px 12px rgba(31, 38, 135, 0.15),
+    inset 0 2px 8px rgba(255, 255, 255, 0.25);
+}
+
+@utility shadow-apple-liquid-depth-2 {
+  box-shadow: 
+    0 8px 24px rgba(31, 38, 135, 0.2),
+    inset 0 4px 16px rgba(255, 255, 255, 0.35);
+}
+
+@utility shadow-apple-liquid-depth-3 {
+  box-shadow: 
+    0 16px 48px rgba(31, 38, 135, 0.25),
+    inset 0 8px 32px rgba(255, 255, 255, 0.45);
+}
+
+@utility shadow-apple-liquid-depth-4 {
+  box-shadow: 
+    0 24px 72px rgba(31, 38, 135, 0.3),
+    inset 0 12px 48px rgba(255, 255, 255, 0.55);
+}
+
+/* Glassmorphism Compound Utilities */
+@utility glass-apple-liquid-subtle {
+  background-color: var(--color-apple-liquid-subtle);
+  backdrop-filter: var(--blur-apple-liquid-subtle);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-subtle);
+  border: 1px solid var(--color-apple-border-subtle);
+  border-radius: var(--radius-apple-liquid-subtle);
+  box-shadow: var(--shadow-apple-liquid-subtle);
+  transition: var(--transition-apple-liquid);
+}
+
+@utility glass-apple-liquid-medium {
+  background-color: var(--color-apple-liquid-medium);
+  backdrop-filter: var(--blur-apple-liquid-medium);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-medium);
+  border: 1px solid var(--color-apple-border-medium);
+  border-radius: var(--radius-apple-liquid-medium);
+  box-shadow: var(--shadow-apple-liquid-medium);
+  transition: var(--transition-apple-liquid);
+}
+
+@utility glass-apple-liquid-strong {
+  background-color: var(--color-apple-liquid-strong);
+  backdrop-filter: var(--blur-apple-liquid-strong);
+  -webkit-backdrop-filter: var(--blur-apple-liquid-strong);
+  border: 1px solid var(--color-apple-border-strong);
+  border-radius: var(--radius-apple-liquid-strong);
+  box-shadow: var(--shadow-apple-liquid-strong);
+  transition: var(--transition-apple-liquid);
+}
+
+/* Interactive State Utilities */
+@utility glass-apple-liquid-hover {
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+      0 16px 50px rgba(31, 38, 135, 0.35), 
+      0 0 80px rgba(255, 255, 255, 0.12);
+  }
+}
+
+@utility glass-apple-liquid-active {
+  &:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 
+      0 6px 20px rgba(31, 38, 135, 0.2), 
+      0 0 30px rgba(255, 255, 255, 0.08);
+  }
+}
+
+@utility glass-apple-liquid-focus {
+  &:focus-visible {
+    outline: none;
+    box-shadow: 
+      0 8px 24px rgba(0, 0, 0, 0.25),
+      0 0 40px rgba(255, 255, 255, 0.1),
+      0 0 0 3px rgba(0, 122, 255, 0.4);
+  }
+}
+
+@utility glass-apple-liquid-magnetic {
+  transition: var(--transition-apple-spring);
+}
+
+@utility glass-apple-liquid-animate {
+  animation: apple-liquid-flow 5s ease-in-out infinite alternate;
+}
+
+@keyframes apple-liquid-flow {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0.5px, -0.5px);
+  }
+  100% {
+    transform: translate(-0.5px, 0.5px);
+  }
+}

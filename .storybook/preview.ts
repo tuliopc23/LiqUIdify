@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
+import { ThemeProvider } from '../src/components/theme-provider/theme-provider';
 import '../src/styles/tailwind.css';
 
 // Add a flag to ensure single initialization
@@ -28,6 +29,14 @@ if (typeof document !== 'undefined') {
     }
     [data-theme="dark"] .sb-show-main {
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
+    }
+    /* Fix for story canvas rendering */
+    .sb-show-main .sb-story {
+      background: transparent;
+    }
+    /* Ensure theme variables are available */
+    :root {
+      --storybook-theme-transition: all 0.3s ease;
     }
   `;
   document.head.appendChild(style);
@@ -278,29 +287,33 @@ const preview: Preview = {
         }
       }, [theme]);
 
-      // Enhanced wrapper with proper theme styling
+      // Wrap story in ThemeProvider for proper theme context
       return React.createElement(
-        'div',
-        {
-          'data-theme': theme,
-          className: `storybook-wrapper ${theme}`,
-          style: {
-            minHeight: '200px',
-            padding: '1rem',
-            background:
-              theme === 'dark'
-                ? 'rgba(30, 41, 59, 0.3)'
-                : 'rgba(255, 255, 255, 0.4)',
-            backdropFilter: 'blur(8px) saturate(140%)',
-            color: theme === 'dark' ? '#f1f5f9' : '#1e293b',
-            borderRadius: '8px',
-            border:
-              theme === 'dark'
-                ? '1px solid rgba(255, 255, 255, 0.1)'
-                : '1px solid rgba(0, 0, 0, 0.05)',
+        ThemeProvider,
+        {},
+        React.createElement(
+          'div',
+          {
+            'data-theme': theme,
+            className: `storybook-wrapper ${theme}`,
+            style: {
+              minHeight: '200px',
+              padding: '1rem',
+              background:
+                theme === 'dark'
+                  ? 'rgba(30, 41, 59, 0.3)'
+                  : 'rgba(255, 255, 255, 0.4)',
+              backdropFilter: 'blur(8px) saturate(140%)',
+              color: theme === 'dark' ? '#f1f5f9' : '#1e293b',
+              borderRadius: '8px',
+              border:
+                theme === 'dark'
+                  ? '1px solid rgba(255, 255, 255, 0.1)'
+                  : '1px solid rgba(0, 0, 0, 0.05)',
+            },
           },
-        },
-        React.createElement(Story)
+          React.createElement(Story)
+        )
       );
     },
   ],
