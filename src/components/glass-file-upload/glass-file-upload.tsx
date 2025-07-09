@@ -168,7 +168,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
           id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           file,
           status: error ? 'error' : 'pending',
-          error,
+          error: error || undefined,
           preview: preview || undefined,
         };
         

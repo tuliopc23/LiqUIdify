@@ -25,9 +25,10 @@ const GlassVisuallyHidden = forwardRef<HTMLSpanElement, GlassVisuallyHiddenProps
         <>
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
+              const childProps = child.props as any;
               return React.cloneElement(child, {
-                className: cn(visuallyHiddenStyles, child.props.className),
-                ...child.props,
+                className: cn(visuallyHiddenStyles, childProps?.className),
+                ...(typeof childProps === 'object' && childProps !== null ? childProps : {}),
               });
             }
             return child;

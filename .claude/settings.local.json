@@ -20,7 +20,8 @@
       "mcp__github__search_code",
       "Bash(gh gist view:*)",
       "Bash(npm test:*)",
-      "Bash(gh gist:*)"
+      "Bash(gh gist:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }

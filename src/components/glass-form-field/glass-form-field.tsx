@@ -128,13 +128,13 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
     // Clone children to add proper IDs and aria attributes
     const enhancedChildren = React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
-        return React.cloneElement(child, {
+        return React.cloneElement(child as any, {
           id: finalId,
           'aria-describedby': message ? `${finalId}-message` : undefined,
           'aria-invalid': error ? true : undefined,
           'aria-required': required,
           disabled,
-          ...child.props,
+          ...(typeof child.props === 'object' && child.props !== null ? child.props : {}),
         });
       }
       return child;
