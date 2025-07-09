@@ -146,7 +146,8 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       'disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none',
       variant !== 'apple' && specularHighlights && 'liquid-glass-specular liquid-glass-shimmer',
       variant !== 'apple' && magneticHover && 'liquid-magnetic',
-      isPressed && 'scale-[0.98] brightness-95'
+      isPressed && 'scale-[0.98] brightness-95',
+      'rounded-xl' // Ensure consistent rounded corners
     );
 
     const variantClasses = {

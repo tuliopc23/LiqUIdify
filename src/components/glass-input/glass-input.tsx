@@ -28,7 +28,9 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
   }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     // const [isFocused, setIsFocused] = useState(false); // isFocused is not used
-    const [currentValue, setCurrentValue] = useState(value || props.defaultValue || "");
+    const [currentValue, setCurrentValue] = useState(
+      value !== undefined ? value : (props.defaultValue || "")
+    );
     const internalInputRef = useRef<HTMLInputElement | null>(null);
     const helperTextId = useId();
 
@@ -109,7 +111,7 @@ const setRefs = useCallback((node: HTMLInputElement | null) => {
             type={inputType}
             className={cn(baseClasses, getIconPadding(), className)}
             ref={setRefs}
-            value={currentValue}
+            {...(value !== undefined ? { value: currentValue } : { defaultValue: props.defaultValue })}
             onChange={handleInputChange}
             aria-invalid={error ? true : undefined}
             aria-describedby={error && helperText ? helperTextId : undefined}

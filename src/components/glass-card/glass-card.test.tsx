@@ -14,7 +14,7 @@ describe('GlassCard', () => {
   it('applies variant classes correctly', () => {
     render(<GlassCard variant="elevated" data-testid="elevated-card">Elevated</GlassCard>);
     const card = screen.getByTestId('elevated-card');
-    expect(card).toHaveClass('glass-effect-elevated');
+    expect(card).toHaveClass('apple-glass');
   });
 
   it('applies padding classes correctly', () => {

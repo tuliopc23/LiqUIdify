@@ -9,7 +9,7 @@ describe('GlassInput', () => {
     render(<GlassInput placeholder="Enter text" />);
     const input = screen.getByRole('textbox');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveClass('glass-effect');
+    expect(input).toHaveClass('apple-glass');
   });
 
   it('applies size classes correctly', () => {

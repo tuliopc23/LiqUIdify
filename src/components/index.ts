@@ -14,7 +14,9 @@ export { LiquidGlassSvgFilters, type LiquidGlassSvgFiltersProps } from './liquid
 // Form Components
 export { GlassButton, type GlassButtonProps } from './glass-button/index';
 export { GlassInput, type GlassInputProps } from './glass-input/index';
+export { GlassNumberInput, type GlassNumberInputProps } from './glass-number-input/index';
 export { GlassTextarea, type GlassTextareaProps } from './glass-textarea/index';
+export { GlassFileUpload, type GlassFileUploadProps } from './glass-file-upload/index';
 export {
   GlassSelect,
   type GlassSelectProps,
@@ -23,11 +25,14 @@ export {
 export { GlassCheckbox, type GlassCheckboxProps } from './glass-checkbox/index';
 export { GlassSwitch, type GlassSwitchProps } from './glass-switch/index';
 export { GlassSlider, type GlassSliderProps } from './glass-slider/index';
+export { GlassFormField, type GlassFormFieldProps } from './glass-form-field/index';
 export { GlassRadioGroup, GlassRadioItem, type GlassRadioGroupProps, type GlassRadioItemProps } from './glass-radio-group/index';
 export { CheckboxGroup, type CheckboxGroupProps } from './glass-checkbox-group/index';
 export { GlassBreadcrumbs, type GlassBreadcrumbsProps, type BreadcrumbItem } from './glass-breadcrumbs/index';
 export { GlassPagination, type GlassPaginationProps } from './glass-pagination/index';
+export { GlassDatePicker, type GlassDatePickerProps } from './glass-date-picker/index';
 export { Accordion, GlassAccordion, GlassAccordionItem, GlassAccordionTrigger, GlassAccordionContent, type GlassAccordionProps, type GlassAccordionItemProps, type GlassAccordionTriggerProps, type GlassAccordionContentProps } from './glass-accordion/index';
+export { GlassCombobox, type GlassComboboxProps } from './glass-combobox/index';
 export { GlassSkeleton, SkeletonText, SkeletonCard, SkeletonTable, type GlassSkeletonProps } from './glass-skeleton/index';
 export { GlassSpinner, PulseSpinner, DotsSpinner, RingSpinner, WaveSpinner, type GlassSpinnerProps } from './glass-spinner/index';
 export { Drawer, GlassDrawer, GlassDrawerTrigger, GlassDrawerClose, GlassDrawerPortal, GlassDrawerOverlay, GlassDrawerContent, GlassDrawerHeader, GlassDrawerTitle, GlassDrawerDescription, GlassDrawerBody, GlassDrawerFooter, type GlassDrawerProps, type GlassDrawerContentProps, type GlassDrawerHeaderProps, type GlassDrawerTitleProps, type GlassDrawerDescriptionProps, type GlassDrawerBodyProps, type GlassDrawerFooterProps } from './glass-drawer/index';
@@ -39,6 +44,8 @@ export { GlassTabs } from './glass-tabs/index';
 export { GlassTable } from './glass-table/index';
 export { GlassHeader, type GlassHeaderProps } from './glass-header';
 export { GlassFooter, type GlassFooterProps } from './glass-footer';
+export { GlassPortal, type GlassPortalProps } from './glass-portal/index';
+export { GlassVisuallyHidden, type GlassVisuallyHiddenProps } from './glass-visually-hidden/index';
 
 // Feedback Components
 export { GlassBadge, type GlassBadgeProps } from './glass-badge/index';

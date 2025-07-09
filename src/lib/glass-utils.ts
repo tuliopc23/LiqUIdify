@@ -6,22 +6,22 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const glassVariants = {
-  default: 'apple-glass apple-glass--depth-2 apple-glass--magnetic',
-  hover: 'apple-glass apple-glass--depth-2 apple-glass--magnetic apple-glass--shimmer',
-  elevated: 'apple-glass apple-glass--depth-3 apple-glass--magnetic apple-glass--glow',
-  surface: 'apple-glass apple-glass--depth-1',
-  pressed: 'apple-glass apple-glass--depth-2 apple-glass--ripple',
-  apple: 'apple-glass',
-  'apple-subtle': 'apple-glass apple-glass--depth-1',
-  'apple-medium': 'apple-glass apple-glass--depth-2',
-  'apple-strong': 'apple-glass apple-glass--depth-3',
-  'apple-interactive': 'apple-glass apple-glass--depth-2 apple-glass--magnetic',
-  'apple-shimmer': 'apple-glass apple-glass--depth-2 apple-glass--shimmer',
-  'apple-ripple': 'apple-glass apple-glass--depth-2 apple-glass--ripple',
-  'apple-glow': 'apple-glass apple-glass--depth-2 apple-glass--glow',
+  default: 'apple-glass apple-glass--depth-2 apple-glass--magnetic rounded-xl',
+  hover: 'apple-glass apple-glass--depth-2 apple-glass--magnetic apple-glass--shimmer rounded-xl',
+  elevated: 'apple-glass apple-glass--depth-3 apple-glass--magnetic apple-glass--glow rounded-xl',
+  surface: 'apple-glass apple-glass--depth-1 rounded-lg',
+  pressed: 'apple-glass apple-glass--depth-2 apple-glass--ripple rounded-xl',
+  apple: 'apple-glass rounded-xl',
+  'apple-subtle': 'apple-glass apple-glass--depth-1 rounded-lg',
+  'apple-medium': 'apple-glass apple-glass--depth-2 rounded-xl',
+  'apple-strong': 'apple-glass apple-glass--depth-3 rounded-2xl',
+  'apple-interactive': 'apple-glass apple-glass--depth-2 apple-glass--magnetic rounded-xl',
+  'apple-shimmer': 'apple-glass apple-glass--depth-2 apple-glass--shimmer rounded-xl',
+  'apple-ripple': 'apple-glass apple-glass--depth-2 apple-glass--ripple rounded-xl',
+  'apple-glow': 'apple-glass apple-glass--depth-2 apple-glass--glow rounded-xl',
   // Legacy variants for backward compatibility
-  'legacy-glass': 'liquid-glass',
-  'legacy-elevated': 'liquid-glass-elevated liquid-interactive',
+  'legacy-glass': 'liquid-glass rounded-xl',
+  'legacy-elevated': 'liquid-glass-elevated liquid-interactive rounded-xl',
 };
 
 export function getGlassClass(variant: keyof typeof glassVariants = 'default') {

@@ -18,7 +18,9 @@
       "Bash(rm:*)",
       "Bash(diff:*)",
       "mcp__github__search_code",
-      "Bash(gh gist view:*)"
+      "Bash(gh gist view:*)",
+      "Bash(npm test:*)",
+      "Bash(gh gist:*)"
     ],
     "deny": []
   }
