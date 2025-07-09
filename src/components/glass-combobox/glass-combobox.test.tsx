@@ -123,7 +123,7 @@ describe('GlassCombobox', () => {
       />
     );
     
-    const clearButton = screen.getByRole('button', { name: /clear/i });
+    const clearButton = screen.getByLabelText(/clear/i);
     expect(clearButton).toBeInTheDocument();
   });
 
@@ -140,7 +140,7 @@ describe('GlassCombobox', () => {
       />
     );
     
-    const clearButton = screen.getByRole('button', { name: /clear/i });
+    const clearButton = screen.getByLabelText(/clear/i);
     fireEvent.click(clearButton);
     
     expect(mockOnChange).toHaveBeenCalledWith('');
