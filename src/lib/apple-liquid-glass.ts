@@ -232,7 +232,7 @@ export function getAppleLiquidGlassClass(
     interactive = true,
     magnetic = false,
     animated = false,
-    multiLayer = false,
+    multiLayer: _multiLayer = false,
   } = options;
 
   const baseClass = 'apple-liquid-glass';

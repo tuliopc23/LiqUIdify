@@ -52,7 +52,7 @@ export const getGlassComponentTestSuite = (componentName: string) => ({
 // Common component prop tests
 export const testCommonProps = (
   Component: ComponentType<any>,
-  componentName: string
+  _componentName: string
 ) => {
   return {
     className: (testFn: (container: Element) => void) => {

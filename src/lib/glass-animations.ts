@@ -144,7 +144,7 @@ export class GlassAnimation {
   }
 
   // Enhanced liquid animation with GSAP
-  liquid(amplitude = 20, frequency = 2, duration = 2000) {
+  liquid(amplitude = 20, _frequency = 2, duration = 2000) {
     this.gsapTimeline.clear();
     this.gsapTimeline.to(this.element, {
       y: `+=${amplitude * 2}`,
@@ -165,7 +165,7 @@ export class GlassAnimation {
   }
 
   // Add magnetic hover effect with GSAP
-  magneticHover(strength = 50, duration = 0.5) {
+  magneticHover(_strength = 50, duration = 0.5) {
     this.element.addEventListener('mouseenter', () => {
       gsap.to(this.element, {
         duration: duration,

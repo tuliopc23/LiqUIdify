@@ -3,7 +3,7 @@
 // Dynamic variant generators with type safety
 type VariantGenerator = (variant: string) => string;
 
-const createVariantGenerator = (baseClass: string): VariantGenerator => {
+const _createVariantGenerator = (baseClass: string): VariantGenerator => {
   return (variant: string) => `${baseClass}--${variant}`;
 };
 
@@ -20,7 +20,7 @@ const defaultSpringConfig: SpringConfig = {
   mass: 1,
 };
 
-const createSpringAnimation = (config: SpringConfig = defaultSpringConfig) => {
+const _createSpringAnimation = (config: SpringConfig = defaultSpringConfig) => {
   return {
     type: 'spring',
     stiffness: config.stiffness,
@@ -30,13 +30,13 @@ const createSpringAnimation = (config: SpringConfig = defaultSpringConfig) => {
 };
 
 // Dark mode toggle class generator
-const createDarkModeClass = (isDarkMode: boolean): string => {
+const _createDarkModeClass = (isDarkMode: boolean): string => {
   return isDarkMode ? 'dark-mode' : 'light-mode';
 };
 
 // Accessibility focus visibility states
 const focusVisibleClass = 'focus-visible';
-const createFocusVisibilityClass = (isVisible: boolean): string => {
+const _createFocusVisibilityClass = (isVisible: boolean): string => {
   return isVisible ? focusVisibleClass : '';
 };
 
@@ -48,7 +48,7 @@ interface ResponsiveClassConfig {
   breakpoint?: Breakpoint;
 }
 
-const createResponsiveClass = ({
+const _createResponsiveClass = ({
   baseClass,
   breakpoint,
 }: ResponsiveClassConfig): string => {
