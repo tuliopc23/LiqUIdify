@@ -119,6 +119,9 @@ export {
 // Testing utilities
 export * from './utils/accessibility-testing';
 
+// Context Providers
+export * from './providers';
+
 // Types
 export type {
   GlassButtonProps,
