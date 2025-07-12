@@ -1,4 +1,4 @@
-import React, { createContext, type ReactNode } from 'react';
+import React, { createContext, useContext, type ReactNode } from 'react';
 
 export interface GlobalConfig {
   defaultVariant?: 'default' | 'glass' | 'frosted' | 'liquid';
@@ -38,5 +38,15 @@ export function GlobalConfigProvider({
       {children}
     </GlobalConfigContext.Provider>
   );
+}
+
+export function useGlobalConfig() {
+  const context = useContext(GlobalConfigContext);
+  if (!context) {
+    throw new Error(
+      'useGlobalConfig must be used within a GlobalConfigProvider'
+    );
+  }
+  return context;
 }
 

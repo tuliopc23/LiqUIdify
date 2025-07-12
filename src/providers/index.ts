@@ -4,7 +4,21 @@ export {
 } from './glass-ui-provider';
 export {
   GlobalConfigProvider,
+  GlobalConfigContext,
+  useGlobalConfig,
   type GlobalConfig,
   type GlobalConfigProviderProps,
 } from './global-config-provider';
-export { useGlobalConfig } from './use-global-config';
+export {
+  ConfigProvider,
+  LiquidifyProvider,
+  type ConfigProviderProps,
+} from './config-provider';
+export {
+  SSRConfigProvider,
+  useIsClient,
+  withSSRSafety,
+} from './ssr-config-provider';
+export {
+  useConfig,
+} from './use-config';
