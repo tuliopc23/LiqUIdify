@@ -629,14 +629,11 @@ export function usePerformanceMetrics() {
     observer.observe({ entryTypes: ['measure', 'navigation'] });
 
     return () => {
-      const currentFpsMonitor = fpsMonitor.current;
-      const currentMemoryMonitor = memoryMonitor.current;
-
-      if (currentFpsMonitor) {
-        currentFpsMonitor.stop();
+      if (fpsMonitor.current) {
+        fpsMonitor.current.stop();
       }
-      if (currentMemoryMonitor) {
-        currentMemoryMonitor.stop();
+      if (memoryMonitor.current) {
+        memoryMonitor.current.stop();
       }
 
       unsubscribeFPS();

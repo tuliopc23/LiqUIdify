@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
-import { ThemeProvider } from '../src/components/theme-provider/theme-provider';
+import { GlassUIProvider } from '../src/providers/glass-ui-provider';
 import '../src/styles/tailwind.css';
 
 // Add a flag to ensure single initialization
@@ -289,10 +289,10 @@ const preview: Preview = {
         }
       }, [theme]);
 
-      // Wrap story in ThemeProvider for proper theme context
+      // Wrap story in GlassUIProvider for all necessary context providers
       return React.createElement(
-        ThemeProvider,
-        {},
+        GlassUIProvider,
+        { theme },
         React.createElement(
           'div',
           {

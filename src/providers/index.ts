@@ -4,7 +4,7 @@ export {
 } from './glass-ui-provider';
 export {
   GlobalConfigProvider,
-  useGlobalConfig,
   type GlobalConfig,
   type GlobalConfigProviderProps,
 } from './global-config-provider';
+export { useGlobalConfig } from './use-global-config';
