@@ -1,6 +1,6 @@
 {
   "name": "liquidify",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "type": "module",
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "main": "./dist/cjs/index.cjs",
