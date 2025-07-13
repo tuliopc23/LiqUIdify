@@ -178,13 +178,21 @@ export function useAppleLiquidGlass(options: AppleLiquidGlassOptions = {}) {
       }, 500);
     });
 
-    if (enableHaptics && 'vibrate' in navigator) {
+    if (
+      enableHaptics &&
+      typeof navigator !== 'undefined' &&
+      'vibrate' in navigator
+    ) {
       navigator.vibrate(10);
     }
   }, [enableHaptics, multiLayer]);
 
   const handleMouseEnter = useCallback(() => {
-    if (enableHaptics && 'vibrate' in navigator) {
+    if (
+      enableHaptics &&
+      typeof navigator !== 'undefined' &&
+      'vibrate' in navigator
+    ) {
       navigator.vibrate(5);
     }
   }, [enableHaptics]);

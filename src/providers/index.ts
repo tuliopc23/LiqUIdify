@@ -19,6 +19,4 @@ export {
   useIsClient,
   withSSRSafety,
 } from './ssr-config-provider';
-export {
-  useConfig,
-} from './use-config';
+export { useConfig } from './use-config';

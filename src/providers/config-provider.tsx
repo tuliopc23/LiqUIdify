@@ -1,6 +1,12 @@
 import React, { type ReactNode } from 'react';
-import { GlassUIProvider, type GlassUIProviderProps } from './glass-ui-provider';
-import { GlobalConfigProvider, type GlobalConfigProviderProps } from './global-config-provider';
+import {
+  GlassUIProvider,
+  type GlassUIProviderProps,
+} from './glass-ui-provider';
+import {
+  GlobalConfigProvider,
+  type GlobalConfigProviderProps,
+} from './global-config-provider';
 
 export interface ConfigProviderProps {
   children: ReactNode;

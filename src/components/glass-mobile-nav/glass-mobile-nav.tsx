@@ -119,7 +119,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   return (
     <>
       <MenuTrigger />
-      {createPortal(
+      {typeof window !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-50 md:hidden">
           {/* Backdrop */}
           <div

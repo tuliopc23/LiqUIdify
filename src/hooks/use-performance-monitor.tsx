@@ -24,6 +24,7 @@ export function usePerformanceMonitor({
   const isMonitoring = useRef<boolean>(false);
 
   const startMonitoring = useCallback(() => {
+    if (typeof window === 'undefined') return;
     if (isMonitoring.current) return;
 
     renderStartTime.current = performance.now();
@@ -41,6 +42,7 @@ export function usePerformanceMonitor({
   }, []);
 
   const stopMonitoring = useCallback(() => {
+    if (typeof window === 'undefined') return;
     if (!isMonitoring.current) return;
 
     const renderTime = performance.now() - renderStartTime.current;

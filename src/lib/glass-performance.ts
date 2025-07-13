@@ -243,6 +243,10 @@ export function useLazyRender(threshold = 0.1, rootMargin = '50px') {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      return;
+    }
+
     observerRef.current = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {

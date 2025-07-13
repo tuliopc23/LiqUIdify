@@ -45,6 +45,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
   };
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     if (isVisible && triggerRef.current && tooltipRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const tooltipRect = tooltipRef.current.getBoundingClientRect();
@@ -142,7 +143,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
         {children}
       </div>
 
-      {tooltip && createPortal(tooltip, document.body)}
+      {tooltip && typeof window !== 'undefined' && createPortal(tooltip, document.body)}
     </>
   );
 };

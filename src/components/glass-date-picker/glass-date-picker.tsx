@@ -218,9 +218,14 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
         }
       };
 
-      document.addEventListener('mousedown', handleClickOutside);
-      return () =>
-        document.removeEventListener('mousedown', handleClickOutside);
+      if (typeof document !== 'undefined') {
+        document.addEventListener('mousedown', handleClickOutside);
+      }
+      return () => {
+        if (typeof document !== 'undefined') {
+          document.removeEventListener('mousedown', handleClickOutside);
+        }
+      };
     }, []);
 
     const days = getDaysInMonth(viewDate);

@@ -37,7 +37,9 @@ export const cssVar = {
    * @param value - The value to set
    */
   set: (element: HTMLElement, property: string, value: string): void => {
-    element.style.setProperty(`--${property}`, value);
+    if (typeof window !== 'undefined') {
+      element.style.setProperty(`--${property}`, value);
+    }
   },
 
   /**
@@ -46,7 +48,9 @@ export const cssVar = {
    * @param property - The property name (without -- prefix)
    */
   remove: (element: HTMLElement, property: string): void => {
-    element.style.removeProperty(`--${property}`);
+    if (typeof window !== 'undefined') {
+      element.style.removeProperty(`--${property}`);
+    }
   },
 
   /**
@@ -56,7 +60,10 @@ export const cssVar = {
    * @returns The computed value as a string
    */
   getValue: (element: HTMLElement, property: string): string => {
-    return getComputedStyle(element).getPropertyValue(`--${property}`).trim();
+    if (typeof window !== 'undefined') {
+      return getComputedStyle(element).getPropertyValue(`--${property}`).trim();
+    }
+    return '';
   },
 };
 

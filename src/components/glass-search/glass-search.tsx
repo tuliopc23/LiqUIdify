@@ -93,12 +93,16 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleKeyDown);
+    if (typeof document !== 'undefined') {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('keydown', handleKeyDown);
+      }
     };
   }, [isOpen, selectedIndex, allResults, query]);
 

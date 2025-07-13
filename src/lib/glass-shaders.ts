@@ -275,6 +275,11 @@ export class GlassShaderEffect {
     private canvas: HTMLCanvasElement,
     private shaderType: keyof typeof GLASS_SHADERS
   ) {
+    // SSR safety check
+    if (typeof window === 'undefined') {
+      throw new Error('GlassShaderEffect cannot be used during SSR');
+    }
+
     const gl = canvas.getContext('webgl', {
       alpha: true,
       premultipliedAlpha: true,
@@ -600,6 +605,11 @@ export function applyGlassShader(
   shaderType: keyof typeof GLASS_SHADERS,
   config?: Partial<ShaderUniforms>
 ): GlassShaderEffect | null {
+  // SSR safety check
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return null;
+  }
+
   // Create canvas overlay
   const canvas = document.createElement('canvas');
   const rect = element.getBoundingClientRect();

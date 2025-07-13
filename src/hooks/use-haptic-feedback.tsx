@@ -286,6 +286,8 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
   // Trigger vibration
   const vibrate = useCallback((pattern: number[]) => {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined')
+      return;
     if (!configRef.current.vibration || !('vibrate' in navigator)) return;
 
     const scaledPattern = pattern.map(duration =>

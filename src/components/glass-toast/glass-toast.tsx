@@ -74,7 +74,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
-      {createPortal(
+      {typeof window !== 'undefined' && createPortal(
         <div
           className={cn(
             'fixed z-50 flex flex-col space-y-2',

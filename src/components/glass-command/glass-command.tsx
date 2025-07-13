@@ -99,8 +99,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    if (typeof document !== 'undefined') {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.removeEventListener('keydown', handleKeyDown);
+      }
+    };
   }, [isOpen, selectedIndex, allFilteredItems]);
 
   // Focus input when opened
@@ -198,6 +204,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         </div>
       </button>
     );
+  }
+
+  // SSR safety check
+  if (typeof window === 'undefined') {
+    return null;
   }
 
   return createPortal(

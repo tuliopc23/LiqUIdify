@@ -42,6 +42,8 @@ export function ThemeProvider({
   });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const root = window.document.documentElement;
 
     // Remove old theme classes
@@ -183,8 +185,10 @@ export function ThemeProvider({
     });
 
     // Update body class for additional styling
-    document.body.className =
-      document.body.className.replace(/\b(light|dark)\b/g, '') + ` ${theme}`;
+    if (document.body) {
+      document.body.className =
+        document.body.className.replace(/\b(light|dark)\b/g, '') + ` ${theme}`;
+    }
 
     console.log(`🎨 Theme applied: ${theme}`, {
       properties: Object.keys(themeProperties).length,

@@ -178,6 +178,13 @@ export const useContentAwareGlass = (
 
   useEffect(() => {
     if (!adaptToContent) return;
+    if (
+      typeof window === 'undefined' ||
+      !('MutationObserver' in window) ||
+      !('ResizeObserver' in window)
+    ) {
+      return;
+    }
 
     const observer = new MutationObserver(analyzeContent);
     const resizeObserver = new ResizeObserver(analyzeContent);

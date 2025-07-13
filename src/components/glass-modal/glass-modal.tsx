@@ -26,6 +26,8 @@ export function GlassModal({
   // const contentId = useId(); // If using aria-describedby for a specific content block
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
