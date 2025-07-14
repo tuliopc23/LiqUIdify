@@ -1,6 +1,6 @@
 {
   "name": "liquidify",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "type": "module",
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "main": "./dist/cjs/index.cjs",
@@ -193,6 +193,7 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-storybook": "^9.0.13",
     "jsdom": "^26.1.0",
+    "lint-staged": "^16.1.2",
     "next-themes": "^0.4.6",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
