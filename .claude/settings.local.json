@@ -30,7 +30,9 @@
       "Bash(git pull:*)",
       "Bash(npm view:*)",
       "Bash(gh run list:*)",
-      "Bash(gh run view:*)"
+      "Bash(gh run view:*)",
+      "Bash(npm update:*)",
+      "Bash(npm install:*)"
     ],
     "deny": []
   }
