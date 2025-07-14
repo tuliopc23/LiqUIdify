@@ -17,31 +17,45 @@ export default [
       '**/*.test.*',
       'src/docs/**',
       'src/testing/**',
+      'src/lib/glass-utils.test.ts',
     ],
   },
   {
     files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: {
-        ...Object.fromEntries(
-          Object.entries(globals.browser).filter(([key]) => key.trim() === key)
-        ),
-        ...globals.node,
-        ...globals.es2020,
-        React: 'readonly',
-        HTMLElement: 'readonly',
-        HTMLDivElement: 'readonly',
-        HTMLButtonElement: 'readonly',
-        HTMLInputElement: 'readonly',
-        setTimeout: 'readonly',
-        performance: 'readonly',
-        requestIdleCallback: 'readonly',
-        expect: 'readonly',
-        jest: 'readonly',
-        global: 'readonly',
-        AudioWorkletGlobalScope: 'readonly',
-      },
+      languageOptions: {
+        ecmaVersion: 2020,
+        globals: {
+          ...Object.fromEntries(
+            Object.entries(globals.browser).filter(([key]) => key.trim() === key)
+          ),
+          ...globals.node,
+          ...globals.es2020,
+          React: 'readonly',
+          HTMLElement: 'readonly',
+          HTMLDivElement: 'readonly',
+          HTMLButtonElement: 'readonly',
+          HTMLInputElement: 'readonly',
+          setTimeout: 'readonly',
+          performance: 'readonly',
+          requestIdleCallback: 'readonly',
+          expect: 'readonly',
+          jest: 'readonly',
+          global: 'readonly',
+          AudioWorkletGlobalScope: 'readonly',
+          // Browser API types
+          EventListener: 'readonly',
+          AddEventListenerOptions: 'readonly',
+          IntersectionObserverCallback: 'readonly',
+          IntersectionObserverInit: 'readonly',
+          ResizeObserverCallback: 'readonly',
+          MutationCallback: 'readonly',
+          MutationObserverInit: 'readonly',
+          FrameRequestCallback: 'readonly',
+          DOMHighResTimeStamp: 'readonly',
+          HTMLElementTagNameMap: 'readonly',
+          NodeListOf: 'readonly',
+          NodeJS: 'readonly',
+        },
       parser: tsParser,
       parserOptions: {
         ecmaFeatures: {

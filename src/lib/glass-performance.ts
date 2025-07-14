@@ -633,11 +633,16 @@ export function usePerformanceMetrics() {
     observer.observe({ entryTypes: ['measure', 'navigation'] });
 
     return () => {
-      if (fpsMonitor.current) {
-        fpsMonitor.current.stop();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      const currentFpsMonitor = fpsMonitor.current;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      const currentMemoryMonitor = memoryMonitor.current;
+      
+      if (currentFpsMonitor) {
+        currentFpsMonitor.stop();
       }
-      if (memoryMonitor.current) {
-        memoryMonitor.current.stop();
+      if (currentMemoryMonitor) {
+        currentMemoryMonitor.stop();
       }
 
       unsubscribeFPS();

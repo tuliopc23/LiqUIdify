@@ -15,7 +15,7 @@ import {
   safeDynamicImport,
   safeResizeObserver,
   safeIntersectionObserver,
-  safeMutationObserver
+  safeMutationObserver,
 } from '../utils/ssr-utils';
 
 /**
@@ -53,7 +53,9 @@ export const useScrollPosition = () => {
       setPosition(getScrollPosition());
     };
 
-    const cleanup = safeAddEventListener('scroll', handleScroll, { passive: true });
+    const cleanup = safeAddEventListener('scroll', handleScroll, {
+      passive: true,
+    });
     return cleanup;
   }, []);
 
@@ -96,24 +98,29 @@ export const useMediaQuery = (query: string): boolean => {
   return matches;
 };
 
+type UseLocalStorageReturnType<T> = [T, (value: T) => void, () => void];
+
 /**
  * Hook for SSR-safe localStorage
  * @param {string} key - storage key
  * @param {T} initialValue - initial value
  * @returns {[T, (value: T) => void, () => void]} [value, setValue, remove]
  */
-export const useLocalStorage = <T>(
+export const useLocalStorage = <T,>(
   key: string,
   initialValue: T
-): [T, (value: T) => void, () => void] => {
+): UseLocalStorageReturnType<T> => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     return getLocalStorageItem(key, initialValue);
   });
 
-  const setValue = useCallback((value: T) => {
-    setStoredValue(value);
-    setLocalStorageItem(key, value);
-  }, [key]);
+  const setValue = useCallback(
+    (value: T) => {
+      setStoredValue(value);
+      setLocalStorageItem(key, value);
+    },
+    [key]
+  );
 
   const removeValue = useCallback(() => {
     setStoredValue(initialValue);
@@ -137,7 +144,10 @@ export const useLocalStorage = <T>(
       }
     };
 
-    const cleanup = safeAddEventListener('storage', handleStorageChange as EventListener);
+    const cleanup = safeAddEventListener(
+      'storage',
+      handleStorageChange as any
+    );
     return cleanup;
   }, [key]);
 
@@ -150,16 +160,16 @@ export const useLocalStorage = <T>(
  * @param {T} initialValue - initial value
  * @returns {[T, (value: T) => void, () => void]} [value, setValue, remove]
  */
-export const useSessionStorage = <T>(
+export const useSessionStorage = <T,>(
   key: string,
   initialValue: T
 ): [T, (value: T) => void, () => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (!isBrowser()) return initialValue;
-    
+
     const storage = safeSessionStorage();
     if (!storage) return initialValue;
-    
+
     try {
       const item = storage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -168,17 +178,20 @@ export const useSessionStorage = <T>(
     }
   });
 
-  const setValue = useCallback((value: T) => {
-    setStoredValue(value);
-    const storage = safeSessionStorage();
-    if (storage) {
-      try {
-        storage.setItem(key, JSON.stringify(value));
-      } catch {
-        // Storage full or other error
+  const setValue = useCallback(
+    (value: T) => {
+      setStoredValue(value);
+      const storage = safeSessionStorage();
+      if (storage) {
+        try {
+          storage.setItem(key, JSON.stringify(value));
+        } catch {
+          // Storage full or other error
+        }
       }
-    }
-  }, [key]);
+    },
+    [key]
+  );
 
   const removeValue = useCallback(() => {
     setStoredValue(initialValue);
@@ -197,9 +210,9 @@ export const useSessionStorage = <T>(
  * @param {any[]} deps - dependencies
  * @returns {{ module: T | null, loading: boolean, error: Error | null }}
  */
-export const useDynamicImport = <T>(
+export const useDynamicImport = <T,>(
   importFn: () => Promise<T>,
-  deps: any[] = []
+  deps: React.DependencyList = []
 ): { module: T | null; loading: boolean; error: Error | null } => {
   const [module, setModule] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
@@ -235,7 +248,8 @@ export const useDynamicImport = <T>(
     return () => {
       cancelled = true;
     };
-  }, deps);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [importFn, ...deps]);
 
   return { module, loading, error };
 };
@@ -247,7 +261,7 @@ export const useDynamicImport = <T>(
 export const useUserPreferences = () => {
   const [preferences, setPreferences] = useState({
     prefersReducedMotion: false,
-    prefersDarkScheme: false
+    prefersDarkScheme: false,
   });
 
   useEffect(() => {
@@ -255,7 +269,7 @@ export const useUserPreferences = () => {
 
     setPreferences({
       prefersReducedMotion: prefersReducedMotion(),
-      prefersDarkScheme: prefersDarkScheme()
+      prefersDarkScheme: prefersDarkScheme(),
     });
 
     const win = safeWindow();
@@ -349,7 +363,9 @@ export const useResizeObserver = (callback: ResizeObserverCallback) => {
     const element = elementRef.current;
     if (!element) return;
 
-    const observer = safeResizeObserver((...args) => callbackRef.current(...args));
+    const observer = safeResizeObserver((...args) =>
+      callbackRef.current(...args)
+    );
 
     if (observer) {
       observer.observe(element);
@@ -382,7 +398,9 @@ export const useMutationObserver = (
     const element = elementRef.current;
     if (!element) return;
 
-    const observer = safeMutationObserver((...args) => callbackRef.current(...args));
+    const observer = safeMutationObserver((...args) =>
+      callbackRef.current(...args)
+    );
 
     if (observer) {
       observer.observe(element, options);
@@ -412,7 +430,10 @@ export const useDocumentVisibility = (): boolean => {
 
     setIsVisible(!doc.hidden);
 
-    const cleanup = safeAddEventListener('visibilitychange', handleVisibilityChange);
+    const cleanup = safeAddEventListener(
+      'visibilitychange',
+      handleVisibilityChange
+    );
     return cleanup;
   }, []);
 

@@ -123,5 +123,6 @@ export const testKeyboardNavigation = (
 };
 
 // Export everything from testing-library for convenience
+/* eslint-disable react-refresh/only-export-components */
 export * from '@testing-library/react';
 export { customRender as render };

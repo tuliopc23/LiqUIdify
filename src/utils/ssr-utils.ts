@@ -1,6 +1,6 @@
 /**
  * SSR-safe utility functions for browser API checks and fallbacks
- * These utilities ensure that browser-specific APIs are only accessed 
+ * These utilities ensure that browser-specific APIs are only accessed
  * in client-side environments, preventing SSR errors.
  */
 
@@ -79,7 +79,7 @@ export const safeSessionStorage = (): Storage | null => {
 export const getLocalStorageItem = <T>(key: string, fallback: T): T => {
   const storage = safeLocalStorage();
   if (!storage) return fallback;
-  
+
   try {
     const item = storage.getItem(key);
     return item ? JSON.parse(item) : fallback;
@@ -97,7 +97,7 @@ export const getLocalStorageItem = <T>(key: string, fallback: T): T => {
 export const setLocalStorageItem = <T>(key: string, value: T): boolean => {
   const storage = safeLocalStorage();
   if (!storage) return false;
-  
+
   try {
     storage.setItem(key, JSON.stringify(value));
     return true;
@@ -115,7 +115,7 @@ export const setLocalStorageItem = <T>(key: string, value: T): boolean => {
 export const getSessionStorageItem = <T>(key: string, fallback: T): T => {
   const storage = safeSessionStorage();
   if (!storage) return fallback;
-  
+
   try {
     const item = storage.getItem(key);
     return item ? JSON.parse(item) : fallback;
@@ -133,7 +133,7 @@ export const getSessionStorageItem = <T>(key: string, fallback: T): T => {
 export const setSessionStorageItem = <T>(key: string, value: T): boolean => {
   const storage = safeSessionStorage();
   if (!storage) return false;
-  
+
   try {
     storage.setItem(key, JSON.stringify(value));
     return true;
@@ -157,9 +157,13 @@ export const safeMatchMedia = (query: string): MediaQueryList | null => {
  * @param {FrameRequestCallback} callback - animation frame callback
  * @returns {number | null} request ID or null
  */
-export const safeRequestAnimationFrame = (callback: FrameRequestCallback): number | null => {
+export const safeRequestAnimationFrame = (
+  callback: FrameRequestCallback
+): number | null => {
   const win = safeWindow();
-  return win?.requestAnimationFrame ? win.requestAnimationFrame(callback) : null;
+  return win?.requestAnimationFrame
+    ? win.requestAnimationFrame(callback)
+    : null;
 };
 
 /**
@@ -179,7 +183,10 @@ export const safeCancelAnimationFrame = (id: number | null): void => {
  * @param {number} delay - delay in milliseconds
  * @returns {NodeJS.Timeout | number | null} timeout ID or null
  */
-export const safeSetTimeout = (callback: () => void, delay: number): NodeJS.Timeout | number | null => {
+export const safeSetTimeout = (
+  callback: () => void,
+  delay: number
+): NodeJS.Timeout | number | null => {
   if (typeof setTimeout !== 'undefined') {
     return setTimeout(callback, delay);
   }
@@ -202,7 +209,10 @@ export const safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
  * @param {number} delay - delay in milliseconds
  * @returns {NodeJS.Timeout | number | null} interval ID or null
  */
-export const safeSetInterval = (callback: () => void, delay: number): NodeJS.Timeout | number | null => {
+export const safeSetInterval = (
+  callback: () => void,
+  delay: number
+): NodeJS.Timeout | number | null => {
   if (typeof setInterval !== 'undefined') {
     return setInterval(callback, delay);
   }
@@ -227,7 +237,7 @@ export const getWindowDimensions = (): { width: number; height: number } => {
   const win = safeWindow();
   return {
     width: win?.innerWidth || 0,
-    height: win?.innerHeight || 0
+    height: win?.innerHeight || 0,
   };
 };
 
@@ -238,10 +248,10 @@ export const getWindowDimensions = (): { width: number; height: number } => {
 export const getScrollPosition = (): { x: number; y: number } => {
   const win = safeWindow();
   const doc = safeDocument();
-  
+
   return {
     x: win?.pageXOffset || doc?.documentElement?.scrollLeft || 0,
-    y: win?.pageYOffset || doc?.documentElement?.scrollTop || 0
+    y: win?.pageYOffset || doc?.documentElement?.scrollTop || 0,
   };
 };
 
@@ -258,12 +268,12 @@ export const safeAddEventListener = (
   options?: AddEventListenerOptions
 ): (() => void) => {
   const win = safeWindow();
-  
+
   if (win?.addEventListener) {
     win.addEventListener(event, handler, options);
     return () => win.removeEventListener(event, handler, options);
   }
-  
+
   return () => {}; // noop cleanup function
 };
 
@@ -301,12 +311,8 @@ export const getUserAgent = (): string => {
 export const isTouchDevice = (): boolean => {
   const win = safeWindow();
   const nav = safeNavigator();
-  
-  return !!(
-    win &&
-    ('ontouchstart' in win ||
-      (nav && nav.maxTouchPoints > 0))
-  );
+
+  return !!(win && ('ontouchstart' in win || (nav && nav.maxTouchPoints > 0)));
 };
 
 /**
@@ -321,7 +327,7 @@ export const safeDynamicImport = async <T>(
   if (!isBrowser()) {
     return null;
   }
-  
+
   try {
     return await importFn();
   } catch (error) {
@@ -349,11 +355,11 @@ export const safeIntersectionObserver = (
   options?: IntersectionObserverInit
 ): IntersectionObserver | null => {
   const win = safeWindow();
-  
+
   if (win && 'IntersectionObserver' in win) {
     return new IntersectionObserver(callback, options);
   }
-  
+
   return null;
 };
 
@@ -366,11 +372,11 @@ export const safeResizeObserver = (
   callback: ResizeObserverCallback
 ): ResizeObserver | null => {
   const win = safeWindow();
-  
+
   if (win && 'ResizeObserver' in win) {
     return new ResizeObserver(callback);
   }
-  
+
   return null;
 };
 
@@ -383,11 +389,11 @@ export const safeMutationObserver = (
   callback: MutationCallback
 ): MutationObserver | null => {
   const win = safeWindow();
-  
+
   if (win && 'MutationObserver' in win) {
     return new MutationObserver(callback);
   }
-  
+
   return null;
 };
 
@@ -396,7 +402,7 @@ export const safeMutationObserver = (
  * @param {Function} callback - function to execute
  * @param {any[]} deps - dependencies for the callback
  */
-export const clientOnly = (callback: () => void, deps: any[] = []): void => {
+export const clientOnly = (callback: () => void, _deps: any[] = []): void => {
   if (isBrowser()) {
     callback();
   }
@@ -407,7 +413,9 @@ export const clientOnly = (callback: () => void, deps: any[] = []): void => {
  * @param {Element} element - target element
  * @returns {CSSStyleDeclaration | null} computed style or null
  */
-export const safeGetComputedStyle = (element: Element): CSSStyleDeclaration | null => {
+export const safeGetComputedStyle = (
+  element: Element
+): CSSStyleDeclaration | null => {
   const win = safeWindow();
   return win?.getComputedStyle ? win.getComputedStyle(element) : null;
 };
@@ -439,7 +447,9 @@ export const safeQuerySelector = (selector: string): Element | null => {
  * @param {string} selector - CSS selector
  * @returns {NodeListOf<Element> | []} matched elements or empty array
  */
-export const safeQuerySelectorAll = (selector: string): NodeListOf<Element> | [] => {
+export const safeQuerySelectorAll = (
+  selector: string
+): NodeListOf<Element> | [] => {
   const doc = safeDocument();
   return doc?.querySelectorAll ? doc.querySelectorAll(selector) : [];
 };
