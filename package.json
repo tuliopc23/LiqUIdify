@@ -74,7 +74,10 @@
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "metrics": "node scripts/track-metrics.js",
-    "metrics:watch": "node scripts/track-metrics.js --watch"
+    "metrics:watch": "node scripts/track-metrics.js --watch",
+    "export:static": "tsx scripts/export-components-static.ts",
+    "export:advanced": "tsx scripts/export-components-advanced.ts",
+    "export:storybook": "storybook build --output-dir static-export/storybook"
   },
   "keywords": [
     "glassmorphism",
@@ -194,6 +197,7 @@
     "tailwindcss-animate": "^1.0.7",
     "terser": "^5.43.1",
     "tslib": "^2.0.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.0.0",
     "vite": "^7.0.0",
     "vite-plugin-dts": "^4.5.4",

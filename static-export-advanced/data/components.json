@@ -1,0 +1,239 @@
+{
+  "metadata": {
+    "generated": "2025-07-14T03:01:50.456Z",
+    "version": "1.2.0",
+    "totalComponents": 3
+  },
+  "components": {
+    "glass-button": {
+      "title": "Glass Button",
+      "description": "Interactive buttons with glass morphism effects and physics-based animations",
+      "category": "Form Controls",
+      "complexity": "Basic",
+      "props": [
+        {
+          "name": "variant",
+          "type": "string",
+          "default": "primary",
+          "description": "Button style variant"
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "default": "md",
+          "description": "Button size"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Disable button interaction"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "default": "false",
+          "description": "Show loading state"
+        },
+        {
+          "name": "leftIcon",
+          "type": "ReactNode",
+          "default": "undefined",
+          "description": "Icon on the left side"
+        },
+        {
+          "name": "rightIcon",
+          "type": "ReactNode",
+          "default": "undefined",
+          "description": "Icon on the right side"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Usage",
+          "code": "import { GlassButton } from '@tuliocunha23/liquidui';\n\nfunction App() {\n  return (\n    <GlassButton>\n      Click me\n    </GlassButton>\n  );\n}"
+        },
+        {
+          "title": "With Icons",
+          "code": "import { GlassButton } from '@tuliocunha23/liquidui';\nimport { Download, Star } from 'lucide-react';\n\nfunction App() {\n  return (\n    <div className=\"flex gap-4\">\n      <GlassButton leftIcon={<Download />}>\n        Download\n      </GlassButton>\n      <GlassButton rightIcon={<Star />}>\n        Favorite\n      </GlassButton>\n    </div>\n  );\n}"
+        },
+        {
+          "title": "Variants",
+          "code": "import { GlassButton } from '@tuliocunha23/liquidui';\n\nfunction App() {\n  return (\n    <div className=\"flex gap-4\">\n      <GlassButton variant=\"primary\">Primary</GlassButton>\n      <GlassButton variant=\"secondary\">Secondary</GlassButton>\n      <GlassButton variant=\"tertiary\">Tertiary</GlassButton>\n      <GlassButton variant=\"ghost\">Ghost</GlassButton>\n    </div>\n  );\n}"
+        }
+      ],
+      "accessibility": {
+        "features": [
+          "Keyboard navigation",
+          "Screen reader support",
+          "Focus management",
+          "ARIA attributes"
+        ],
+        "keyboardShortcuts": [
+          "Enter: Activate button",
+          "Space: Activate button"
+        ],
+        "ariaLabels": [
+          "aria-label",
+          "aria-describedby",
+          "aria-pressed (for toggle buttons)"
+        ]
+      },
+      "performance": {
+        "bundleSize": "2.4kB gzipped",
+        "renderTime": "< 1ms",
+        "dependencies": [
+          "framer-motion",
+          "class-variance-authority"
+        ]
+      }
+    },
+    "glass-input": {
+      "title": "Glass Input",
+      "description": "Text input fields with liquid glass styling and validation",
+      "category": "Form Controls",
+      "complexity": "Basic",
+      "props": [
+        {
+          "name": "type",
+          "type": "string",
+          "default": "text",
+          "description": "HTML input type"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "default": "undefined",
+          "description": "Placeholder text"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "default": "undefined",
+          "description": "Controlled value"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false",
+          "description": "Disable input"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "default": "undefined",
+          "description": "Error message"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "undefined",
+          "description": "Input label"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Input",
+          "code": "import { GlassInput } from '@tuliocunha23/liquidui';\n\nfunction App() {\n  return (\n    <GlassInput \n      label=\"Email\"\n      type=\"email\"\n      placeholder=\"Enter your email\"\n    />\n  );\n}"
+        },
+        {
+          "title": "With Validation",
+          "code": "import { GlassInput } from '@tuliocunha23/liquidui';\nimport { useState } from 'react';\n\nfunction App() {\n  const [email, setEmail] = useState('');\n  const [error, setError] = useState('');\n\n  const validateEmail = (value: string) => {\n    if (!value.includes('@')) {\n      setError('Please enter a valid email');\n    } else {\n      setError('');\n    }\n  };\n\n  return (\n    <GlassInput\n      label=\"Email\"\n      type=\"email\"\n      value={email}\n      onChange={(e) => {\n        setEmail(e.target.value);\n        validateEmail(e.target.value);\n      }}\n      error={error}\n      placeholder=\"Enter your email\"\n    />\n  );\n}"
+        }
+      ],
+      "accessibility": {
+        "features": [
+          "Label association",
+          "Error announcement",
+          "Keyboard navigation",
+          "Screen reader support"
+        ],
+        "keyboardShortcuts": [
+          "Tab: Navigate to next input",
+          "Shift+Tab: Navigate to previous input"
+        ],
+        "ariaLabels": [
+          "aria-label",
+          "aria-describedby",
+          "aria-invalid",
+          "aria-required"
+        ]
+      },
+      "performance": {
+        "bundleSize": "1.7kB gzipped",
+        "renderTime": "< 1ms",
+        "dependencies": [
+          "framer-motion",
+          "class-variance-authority"
+        ]
+      }
+    },
+    "glass-card": {
+      "title": "Glass Card",
+      "description": "Container components with glass effects and flexible layouts",
+      "category": "Layout",
+      "complexity": "Basic",
+      "props": [
+        {
+          "name": "variant",
+          "type": "string",
+          "default": "default",
+          "description": "Card style variant"
+        },
+        {
+          "name": "padding",
+          "type": "string",
+          "default": "md",
+          "description": "Internal padding"
+        },
+        {
+          "name": "hover",
+          "type": "boolean",
+          "default": "false",
+          "description": "Enable hover effects"
+        },
+        {
+          "name": "clickable",
+          "type": "boolean",
+          "default": "false",
+          "description": "Make card clickable"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Card",
+          "code": "import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardContent } from '@tuliocunha23/liquidui';\n\nfunction App() {\n  return (\n    <GlassCard>\n      <GlassCardHeader>\n        <GlassCardTitle>Card Title</GlassCardTitle>\n      </GlassCardHeader>\n      <GlassCardContent>\n        <p>This is the card content with glass morphism effects.</p>\n      </GlassCardContent>\n    </GlassCard>\n  );\n}"
+        },
+        {
+          "title": "Interactive Card",
+          "code": "import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardContent } from '@tuliocunha23/liquidui';\n\nfunction App() {\n  return (\n    <GlassCard hover clickable onClick={() => alert('Card clicked!')}>\n      <GlassCardHeader>\n        <GlassCardTitle>Interactive Card</GlassCardTitle>\n      </GlassCardHeader>\n      <GlassCardContent>\n        <p>This card responds to hover and click events.</p>\n      </GlassCardContent>\n    </GlassCard>\n  );\n}"
+        }
+      ],
+      "accessibility": {
+        "features": [
+          "Semantic HTML",
+          "Keyboard navigation",
+          "Screen reader support",
+          "Focus management"
+        ],
+        "keyboardShortcuts": [
+          "Enter: Activate clickable card",
+          "Space: Activate clickable card"
+        ],
+        "ariaLabels": [
+          "aria-label",
+          "role",
+          "tabindex (for clickable cards)"
+        ]
+      },
+      "performance": {
+        "bundleSize": "1.1kB gzipped",
+        "renderTime": "< 1ms",
+        "dependencies": [
+          "framer-motion",
+          "class-variance-authority"
+        ]
+      }
+    }
+  }
+}
