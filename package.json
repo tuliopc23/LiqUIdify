@@ -48,6 +48,16 @@
       "import": "./dist/tokens.mjs",
       "require": "./dist/cjs/tokens.cjs"
     },
+    "./context": {
+      "types": "./dist/types/providers/index.d.ts",
+      "import": "./dist/providers/index.mjs",
+      "require": "./dist/cjs/providers/index.cjs"
+    },
+    "./documentation": {
+      "types": "./dist/types/documentation/index.d.ts",
+      "import": "./dist/documentation/index.mjs",
+      "require": "./dist/cjs/documentation/index.cjs"
+    },
     "./styles": "./dist/liquidui.css",
     "./css": "./dist/liquidui.css",
     "./package.json": "./package.json"
@@ -123,8 +133,8 @@
     "**/*.css"
   ],
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "peerDependenciesMeta": {
     "react": {

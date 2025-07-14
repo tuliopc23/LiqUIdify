@@ -74,6 +74,10 @@ export default defineConfig({
           'src/components/glass-tabs/index.ts'
         ),
         tokens: resolve(__dirname, 'src/tokens/index.ts'),
+        // Context provider entry
+        providers: resolve(__dirname, 'src/providers/index.ts'),
+        // Documentation wrapper components
+        documentation: resolve(__dirname, 'src/documentation/index.tsx'),
       },
       name: 'LiquidUI',
       formats: ['es', 'cjs'],
@@ -83,11 +87,12 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      // More comprehensive external dependencies
+      // More comprehensive external dependencies for React 19 compatibility
       external: [
         'react',
         'react-dom',
-        'react/jsx-runtime',
+        'react/jsx-runtime', // Critical for React 19
+        'react-dom/client',
         'framer-motion',
         'lucide-react',
         '@radix-ui/react-slot',
@@ -135,6 +140,7 @@ export default defineConfig({
             react: 'React',
             'react-dom': 'ReactDOM',
             'react/jsx-runtime': 'jsxRuntime',
+            'react-dom/client': 'ReactDOMClient',
             'framer-motion': 'FramerMotion',
             'lucide-react': 'LucideReact',
             '@radix-ui/react-slot': 'RadixSlot',

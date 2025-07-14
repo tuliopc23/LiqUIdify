@@ -122,6 +122,16 @@ export * from './utils/accessibility-testing';
 // Context Providers
 export * from './providers';
 
+// Pre-wrapped components for documentation (with context included)
+export {
+  DocumentationButton,
+  DocumentationInput,
+  DocumentationCard,
+  DocumentationModal,
+  DocumentationTooltip,
+  DocumentationTabs,
+} from './documentation';
+
 // Types
 export type {
   GlassButtonProps,

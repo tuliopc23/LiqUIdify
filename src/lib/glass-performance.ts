@@ -637,7 +637,7 @@ export function usePerformanceMetrics() {
       const currentFpsMonitor = fpsMonitor.current;
       // eslint-disable-next-line react-hooks/exhaustive-deps
       const currentMemoryMonitor = memoryMonitor.current;
-      
+
       if (currentFpsMonitor) {
         currentFpsMonitor.stop();
       }
