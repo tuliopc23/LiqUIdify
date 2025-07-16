@@ -1,0 +1,107 @@
+import { lazy, Suspense, ComponentType } from 'react';
+import { GlassSpinner } from '../glass-spinner';
+
+// Default loading component
+const DefaultLoadingComponent = () => (
+  <div className="glass-lazy-loading flex items-center justify-center p-8">
+    <GlassSpinner size="md" />
+  </div>
+);
+
+// Lazy load wrapper with built-in suspense
+export function createLazyComponent<T extends ComponentType<any>>(
+  importFn: () => Promise<{ default: T }>,
+  LoadingComponent: ComponentType = DefaultLoadingComponent
+) {
+  const LazyComponent = lazy(importFn);
+  
+  return (props: React.ComponentProps<T>) => (
+    <Suspense fallback={<LoadingComponent />}>
+      <LazyComponent {...props} />
+    </Suspense>
+  );
+}
+
+// Pre-configured lazy components for heavy components
+export const LazyGlassChart = createLazyComponent(
+  () => import('../glass-chart').then(m => ({ default: m.GlassChart }))
+);
+
+export const LazyGlassDatePicker = createLazyComponent(
+  () => import('../glass-date-picker').then(m => ({ default: m.GlassDatePicker }))
+);
+
+export const LazyGlassFileUpload = createLazyComponent(
+  () => import('../glass-file-upload').then(m => ({ default: m.GlassFileUpload }))
+);
+
+export const LazyGlassCommand = createLazyComponent(
+  () => import('../glass-command').then(m => ({ default: m.GlassCommand }))
+);
+
+export const LazyGlassCombobox = createLazyComponent(
+  () => import('../glass-combobox').then(m => ({ default: m.GlassCombobox }))
+);
+
+export const LazyComponentShowcase = createLazyComponent(
+  () => import('../component-showcase').then(m => ({ default: m.ComponentShowcase }))
+);
+
+// Lazy load with preload capability
+export function createPreloadableComponent<T extends ComponentType<any>>(
+  importFn: () => Promise<{ default: T }>
+) {
+  let preloadPromise: Promise<{ default: T }> | null = null;
+  
+  const preload = () => {
+    if (!preloadPromise) {
+      preloadPromise = importFn();
+    }
+    return preloadPromise;
+  };
+  
+  const LazyComponent = lazy(() => preload());
+  
+  const Component = (props: React.ComponentProps<T>) => (
+    <Suspense fallback={<DefaultLoadingComponent />}>
+      <LazyComponent {...props} />
+    </Suspense>
+  );
+  
+  Component.preload = preload;
+  
+  return Component;
+}
+
+// Intersection Observer based lazy loading
+export function useLazyLoad(
+  ref: React.RefObject<HTMLElement>,
+  onIntersect: () => void,
+  options?: IntersectionObserverInit
+) {
+  React.useEffect(() => {
+    if (!ref.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            onIntersect();
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        rootMargin: '50px',
+        ...options,
+      }
+    );
+    
+    observer.observe(ref.current);
+    
+    return () => observer.disconnect();
+  }, [ref, onIntersect, options]);
+}
+
+// React import for hooks
+import React from 'react';

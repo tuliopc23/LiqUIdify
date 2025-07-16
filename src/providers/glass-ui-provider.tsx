@@ -3,6 +3,8 @@ import { ThemeProvider } from '../hooks/use-theme';
 import { LiquidGlassProvider } from '../hooks/use-liquid-glass';
 import { HapticProvider } from '../hooks/use-haptic-feedback';
 import { ToastProvider } from '../components/glass-toast/glass-toast';
+import { GlassLiveRegionProvider } from '../components/glass-live-region';
+import { GlassErrorBoundary } from '../components/glass-error-boundary';
 
 export interface GlassUIProviderProps {
   children: ReactNode;
@@ -28,12 +30,16 @@ export function GlassUIProvider({
   hapticConfig,
 }: GlassUIProviderProps) {
   return (
-    <ThemeProvider defaultTheme={theme} storageKey="glass-ui-theme">
-      <LiquidGlassProvider {...glassConfig}>
-        <HapticProvider {...hapticConfig}>
-          <ToastProvider>{children}</ToastProvider>
-        </HapticProvider>
-      </LiquidGlassProvider>
-    </ThemeProvider>
+    <GlassErrorBoundary level="page">
+      <ThemeProvider defaultTheme={theme} storageKey="glass-ui-theme">
+        <LiquidGlassProvider {...glassConfig}>
+          <HapticProvider {...hapticConfig}>
+            <GlassLiveRegionProvider>
+              <ToastProvider>{children}</ToastProvider>
+            </GlassLiveRegionProvider>
+          </HapticProvider>
+        </LiquidGlassProvider>
+      </ThemeProvider>
+    </GlassErrorBoundary>
   );
 }

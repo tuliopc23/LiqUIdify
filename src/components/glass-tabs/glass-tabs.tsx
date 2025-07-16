@@ -37,8 +37,6 @@ export function GlassTabs({
   );
   const baseId = useId();
 
-  // TODO: Implement keyboard navigation for tabs (ArrowLeft/Right or ArrowUp/Down based on orientation)
-  // This would typically involve managing focus manually within the tablist.
 
   return (
     <div className={cn('w-full', className)}>

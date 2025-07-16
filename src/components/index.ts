@@ -138,7 +138,7 @@ export {
   type DropdownItem,
 } from './glass-dropdown/index';
 export { GlassAvatar, type GlassAvatarProps } from './glass-avatar/index';
-export { GlassSearch, type SearchSuggestion } from './glass-search/index';
+export { GlassSearch, type SearchSuggestion, type GlassSearchProps } from './glass-search/index';
 export { GlassMobileNav } from './glass-mobile-nav/index';
 export { Navbar as GlassNavbar } from './navbar/index';
 export { Sidebar } from './sidebar/index';

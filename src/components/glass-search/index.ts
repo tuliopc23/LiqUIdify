@@ -1,1 +1,1 @@
-export { GlassSearch, type SearchSuggestion } from './glass-search';
+export { GlassSearch, type SearchSuggestion, type GlassSearchProps } from './glass-search';

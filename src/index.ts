@@ -39,6 +39,11 @@ export * from './components/glass-visually-hidden';
 export * from './components/glass-responsive-button';
 export * from './components/glass-responsive-card';
 
+// Accessibility Components
+export * from './components/glass-focus-trap';
+export * from './components/glass-live-region';
+export * from './components/glass-error-boundary';
+
 // Navigation Components
 export * from './components/glass-dropdown';
 export * from './components/glass-breadcrumbs';
@@ -97,6 +102,21 @@ export * from './hooks/use-performance-monitor';
 export * from './hooks/use-haptic-feedback';
 export { useTheme } from './hooks/use-theme';
 export { useToast, toast } from './hooks/use-toast';
+export { 
+  useIsClient,
+  useSSRSafeWindow,
+  useLocalStorage,
+  useSessionStorage,
+  useMediaQuery,
+  useViewport,
+  useAnimationFrame,
+  isServer,
+  isClient,
+  safeWindow,
+  safeDocument,
+  safeRequestAnimationFrame,
+  safeCancelAnimationFrame
+} from './hooks/use-ssr-safe';
 
 // Utilities
 export * from './lib/glass-physics';
@@ -116,8 +136,9 @@ export {
   type AppleLiquidGlassProps,
 } from './lib/apple-liquid-glass';
 
-// Testing utilities
-export * from './utils/accessibility-testing';
+// Testing utilities (disabled in production builds)
+// export * from './testing/accessibility-testing';
+export * from './utils/contrast-checker';
 
 // Context Providers
 export * from './providers';

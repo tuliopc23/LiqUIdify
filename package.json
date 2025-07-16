@@ -64,7 +64,13 @@
   },
   "scripts": {
     "build": "npm run clean && vite build && npm run build:css",
+    "build:optimized": "npm run clean && vite build -c vite.config.optimized.ts && npm run build:css:split",
     "build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
+    "build:css:split": "npm run build:css:core && npm run build:css:animations && npm run build:css:utilities",
+    "build:css:core": "postcss src/styles/glass-core.css -o dist/glass-core.css",
+    "build:css:animations": "postcss src/styles/glass-animations.css -o dist/glass-animations.css",
+    "build:css:utilities": "postcss src/styles/glass-utilities.css -o dist/glass-utilities.css",
+    "build:lite": "npm run clean && vite build -c vite.config.lite.ts",
     "build:watch": "vite build --watch",
     "clean": "rm -rf dist",
     "dev": "vite",
@@ -79,8 +85,15 @@
     "format": "prettier --write src/**/*.{ts,tsx,css}",
     "type-check": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "npx storybook build",
+    "build-storybook": "npm run build:css && npx storybook build && npm run post-storybook",
+    "post-storybook": "cp dist/liquidui.css storybook-static/liquidui.css",
     "size": "npm run build && bundlesize --config=bundlesize.config.json",
+    "size:analyze": "npm run build && npx source-map-explorer dist/**/*.js",
+    "bundle:analyze": "npm run build && npx webpack-bundle-analyzer dist/stats.json",
+    "optimize:deps": "node scripts/optimize-dependencies.js",
+    "optimize:css": "node scripts/extract-critical-css.js",
+    "optimize:all": "npm run optimize:deps && npm run build:optimized && npm run optimize:css",
+    "perf:test": "npm run build && node scripts/performance-test.js",
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "metrics": "node scripts/track-metrics.js",
@@ -130,7 +143,10 @@
     "LICENSE"
   ],
   "sideEffects": [
-    "**/*.css"
+    "**/*.css",
+    "**/styles/**",
+    "**/*.scss",
+    "**/*.less"
   ],
   "peerDependencies": {
     "react": ">=18.0.0",

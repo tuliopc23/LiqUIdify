@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="/liquidui.css">
+<style>
+  /* Fallback styles for component rendering */
+  .glass-ui {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-text: rgba(0, 0, 0, 0.8);
+    --glass-blur: 10px;
+    --glass-saturation: 180%;
+  }
+  
+  [data-theme="dark"] .glass-ui {
+    --glass-bg: rgba(0, 0, 0, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-text: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Ensure Tailwind utilities are available */
+  @import 'tailwindcss/base';
+  @import 'tailwindcss/components';
+  @import 'tailwindcss/utilities';
+</style>

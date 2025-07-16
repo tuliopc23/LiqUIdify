@@ -196,13 +196,19 @@ afterEach(() => {
 
 // Setup globals for accessibility testing
 beforeEach(() => {
-  // Reset DOM
-  document.body.innerHTML = '';
+  // Reset DOM only if it exists
+  if (typeof document !== 'undefined' && document.body) {
+    document.body.innerHTML = '';
+  }
 
   // Reset any global state
   if (typeof window !== 'undefined') {
-    window.localStorage.clear();
-    window.sessionStorage.clear();
+    try {
+      window.localStorage.clear();
+      window.sessionStorage.clear();
+    } catch (e) {
+      // Ignore errors in test environment
+    }
   }
 });
 

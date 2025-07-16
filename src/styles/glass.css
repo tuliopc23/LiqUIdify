@@ -1522,4 +1522,64 @@
 .text-secondary {
   color: var(--text-secondary);
 }
+
+/* Glass Modal Styles */
+.glass-modal-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: var(--glass-blur-medium);
+  -webkit-backdrop-filter: var(--glass-blur-medium);
+}
+
+.glass-modal {
+  background: var(--glass-bg-elevated);
+  backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
+  border: 1px solid var(--glass-border-light);
+  box-shadow: var(--glass-shadow-elevated);
+}
+
+.glass-modal-header {
+  border-bottom: 1px solid var(--glass-border-subtle);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.glass-modal-close:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+}
+
+.glass-modal-close:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--glass-border-focus);
+}
+
+/* Focus Trap Styles */
+.glass-focus-trap[data-focus-trap-active="true"] {
+  position: relative;
+}
+
+/* Screen Reader Only Styles */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Live Region Styles */
+.glass-live-region-visible {
+  padding: 0.5rem 1rem;
+  background: var(--glass-bg-overlay);
+  backdrop-filter: var(--glass-backdrop-blur);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+}
+
 /* Test CSS compilation */

@@ -1,6 +1,9 @@
-import { useEffect, useRef, useId } from 'react';
+import { useEffect, useRef, useId, useCallback } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/glass-utils';
+import { GlassFocusTrap } from '@/components/glass-focus-trap';
+import { GlassPortal } from '@/components/glass-portal';
+import { announcer } from '@/components/glass-live-region';
 
 interface GlassModalProps {
   isOpen: boolean;
@@ -8,8 +11,12 @@ interface GlassModalProps {
   title?: string;
   children: React.ReactNode;
   className?: string;
-  titleClassName?: string; // Optional class for title
-  contentClassName?: string; // Optional class for content area
+  titleClassName?: string;
+  contentClassName?: string;
+  closeOnBackdropClick?: boolean;
+  closeOnEscape?: boolean;
+  initialFocus?: React.RefObject<HTMLElement>;
+  portalTarget?: HTMLElement;
 }
 
 export function GlassModal({
@@ -20,93 +27,117 @@ export function GlassModal({
   className,
   titleClassName,
   contentClassName,
+  closeOnBackdropClick = true,
+  closeOnEscape = true,
+  initialFocus,
+  portalTarget,
 }: GlassModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
-  // const contentId = useId(); // If using aria-describedby for a specific content block
+  const descriptionId = useId();
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+  // Handle escape key through focus trap
+  const handleEscape = useCallback(() => {
+    if (closeOnEscape) {
+      onClose();
+    }
+  }, [closeOnEscape, onClose]);
+
+  // Handle backdrop click
+  const handleBackdropClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      if (closeOnBackdropClick && event.target === event.currentTarget) {
         onClose();
       }
-    };
+    },
+    [closeOnBackdropClick, onClose]
+  );
+
+  // Manage body scroll lock
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
 
     if (isOpen) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = 'hidden';
-      document.addEventListener('keydown', handleEsc);
-      // TODO: Implement focus trapping. When modal opens, focus should be moved inside.
-      // Tab navigation should be contained within the modal.
-      // modalRef.current?.focus(); // Example: focus the modal container or first focusable element
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      
+      // Announce modal opened
+      announcer.announce(`${title || 'Dialog'} opened`, 'polite');
     } else {
-      document.body.style.overflow = 'unset';
-      document.removeEventListener('keydown', handleEsc);
-      // TODO: Restore focus to the element that opened the modal when it closes.
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
-      document.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, title]);
 
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      // TODO: Move these styles to a dedicated CSS class e.g., .glass-modal-backdrop
-      style={{
-        background: 'rgba(0, 0, 0, 0.5)', // Example: --glass-modal-backdrop-bg or similar token
-        backdropFilter: 'blur(10px)', // Example: --glass-modal-backdrop-blur or similar token
-      }}
-      onClick={onClose} // Close on backdrop click
+      className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
+      onClick={handleBackdropClick}
     >
-      <div
-        ref={modalRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={title ? titleId : undefined}
-        // aria-describedby={contentId} // If you have a specific content block to describe the modal
-        className={cn(
-          'glass-effect rounded-2xl p-8 max-w-md w-full animate-scale', // Base styles
-          'outline-none', // Ensure focus styles are managed if modal itself is focused
-          className // Custom class for the modal dialog
-        )}
-        onClick={e => e.stopPropagation()} // Prevent closing when clicking inside modal content
-        tabIndex={-1} // Allows the modal dialog to be programmatically focused if needed
+      <GlassFocusTrap
+        active={isOpen}
+        onEscape={handleEscape}
+        initialFocus={initialFocus || (closeButtonRef as React.RefObject<HTMLElement>)}
+        className="glass-modal-focus-trap w-full max-w-md"
       >
-        {title && (
-          <div className="flex items-center justify-between mb-4">
-            <h3
-              id={titleId}
-              className={cn(
-                'text-lg font-semibold text-primary',
-                titleClassName
-              )}
-            >
-              {title}
-            </h3>
-            <button
-              onClick={onClose}
-              aria-label="Close modal"
-              className="p-2 rounded-lg glass-effect btn-scale focus:outline-none focus:ring-2 focus:ring-blue-500" // Added focus styles
-            >
-              <X className="h-4 w-4 text-secondary" />
-            </button>
+        <div
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={title ? titleId : undefined}
+          aria-describedby={descriptionId}
+          className={cn(
+            'glass-modal',
+            'glass-effect rounded-2xl p-8 w-full animate-scale',
+            'outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+            className
+          )}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {title && (
+            <div className="glass-modal-header flex items-center justify-between mb-4">
+              <h3
+                id={titleId}
+                className={cn(
+                  'glass-modal-title text-lg font-semibold text-primary',
+                  titleClassName
+                )}
+              >
+                {title}
+              </h3>
+              <button
+                ref={closeButtonRef}
+                onClick={onClose}
+                aria-label="Close modal"
+                className="glass-modal-close p-2 rounded-lg glass-effect btn-scale focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <X className="h-4 w-4 text-secondary" />
+              </button>
+            </div>
+          )}
+          <div 
+            id={descriptionId}
+            className={cn('glass-modal-content', contentClassName)}
+          >
+            {children}
           </div>
-        )}
-        <div className={cn(contentClassName)}>
-          {' '}
-          {/* Optional class for content area */}
-          {/* <div id={contentId}> */}{' '}
-          {/* If using aria-describedby for a specific content block */}
-          {children}
-          {/* </div> */}
         </div>
-      </div>
+      </GlassFocusTrap>
     </div>
+  );
+
+  return portalTarget ? (
+    <GlassPortal container={portalTarget}>{modalContent}</GlassPortal>
+  ) : (
+    <GlassPortal>{modalContent}</GlassPortal>
   );
 }

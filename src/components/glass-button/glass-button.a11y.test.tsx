@@ -1,30 +1,14 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
 import { axe } from 'vitest-axe';
 import { GlassButton } from './glass-button';
 import {
-  runAccessibilityCheck,
+  renderWithProviders as render,
+  screen,
+  fireEvent,
+  testA11y,
   expectAccessible,
-} from '@/utils/accessibility-testing';
-
-// Custom matcher for accessibility violations
-expect.extend({
-  toHaveNoViolations(received) {
-    const pass = received.violations.length === 0;
-    if (pass) {
-      return {
-        message: () => `Expected accessibility violations, but none were found`,
-        pass: true,
-      };
-    } else {
-      return {
-        message: () =>
-          `Expected no accessibility violations, but found ${received.violations.length}:\n${received.violations.map((v: any) => `- ${v.description}`).join('\n')}`,
-        pass: false,
-      };
-    }
-  },
-});
+  runAccessibilityCheck,
+} from '@/test/utils';
 
 describe('GlassButton Accessibility', () => {
   it('should be accessible with default props', async () => {

@@ -1,184 +1,343 @@
 import { describe, it, expect, vi } from 'vitest';
-import {
-  render,
-  screen,
-  fireEvent,
-  testAccessibility,
-  getGlassComponentTestSuite,
-  testCommonProps,
-  testGlassPerformance,
-} from '@/test-utils';
 import { GlassInput } from './glass-input';
-
-const testSuite = getGlassComponentTestSuite('GlassInput');
+import { 
+  renderWithProviders, 
+  screen, 
+  fireEvent, 
+  waitFor,
+  testA11y,
+  createMockProps 
+} from '@/test/utils';
+import { Search, Mail } from 'lucide-react';
 
 describe('GlassInput', () => {
-  it(testSuite.shouldRender, () => {
-    render(<GlassInput placeholder="Enter text" />);
-    const input = screen.getByRole('textbox');
+  it('renders with default props', () => {
+    renderWithProviders(<GlassInput placeholder="Enter text" />);
+    const input = screen.getByPlaceholderText('Enter text');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveClass('apple-glass');
+    expect(input).toHaveAttribute('type', 'text');
   });
 
-  it('applies size classes correctly', () => {
-    render(<GlassInput size="lg" placeholder="Large input" />);
-    const input = screen.getByRole('textbox');
-    expect(input).toHaveClass('px-4', 'py-3');
-  });
-
-  it('applies variant classes correctly', () => {
-    const { rerender } = render(
-      <GlassInput variant="default" placeholder="Default" />
+  it('renders with different variants', () => {
+    const { rerender } = renderWithProviders(
+      <GlassInput variant="search" placeholder="Search" />
     );
-    let input = screen.getByRole('textbox');
-    expect(input).toHaveClass('border-[var(--glass-border)]');
-
-    rerender(<GlassInput variant="search" placeholder="Search" />);
-    input = screen.getByRole('textbox');
-    expect(input).toHaveClass('border-[var(--glass-border)]');
+    
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    const searchIcon = document.querySelector('svg');
+    expect(searchIcon).toBeInTheDocument();
+    
+    rerender(<GlassInput variant="password" placeholder="Password" />);
+    expect(screen.getByPlaceholderText('Password')).toHaveAttribute('type', 'password');
+    
+    rerender(<GlassInput variant="email" placeholder="Email" />);
+    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
   });
 
-  it('handles controlled input correctly', () => {
-    const handleChange = vi.fn();
-    const { rerender } = render(
-      <GlassInput
-        value="initial"
-        onChange={handleChange}
-        placeholder="Controlled"
-      />
+  it('handles controlled input', () => {
+    const onChange = vi.fn();
+    const { rerender } = renderWithProviders(
+      <GlassInput value="initial" onChange={onChange} />
     );
-
+    
     const input = screen.getByRole('textbox') as HTMLInputElement;
     expect(input.value).toBe('initial');
-
+    
     fireEvent.change(input, { target: { value: 'updated' } });
-    expect(handleChange).toHaveBeenCalledTimes(1);
-
-    rerender(
-      <GlassInput
-        value="updated"
-        onChange={handleChange}
-        placeholder="Controlled"
-      />
-    );
+    expect(onChange).toHaveBeenCalledTimes(1);
+    
+    rerender(<GlassInput value="updated" onChange={onChange} />);
     expect(input.value).toBe('updated');
   });
 
-  it('handles uncontrolled input correctly', () => {
-    render(<GlassInput defaultValue="default" placeholder="Uncontrolled" />);
+  it('handles uncontrolled input', () => {
+    renderWithProviders(<GlassInput defaultValue="default" />);
     const input = screen.getByRole('textbox') as HTMLInputElement;
-
+    
     expect(input.value).toBe('default');
-
+    
     fireEvent.change(input, { target: { value: 'changed' } });
     expect(input.value).toBe('changed');
   });
 
-  it(testSuite.shouldHandleDisabled, () => {
-    render(<GlassInput disabled placeholder="Disabled input" />);
-    const input = screen.getByRole('textbox');
+  it('shows password toggle for password variant', () => {
+    renderWithProviders(
+      <GlassInput variant="password" placeholder="Password" />
+    );
+    
+    const input = screen.getByPlaceholderText('Password');
+    const toggleButton = screen.getByLabelText('Show password');
+    
+    expect(input).toHaveAttribute('type', 'password');
+    
+    fireEvent.click(toggleButton);
+    expect(input).toHaveAttribute('type', 'text');
+    expect(screen.getByLabelText('Hide password')).toBeInTheDocument();
+    
+    fireEvent.click(screen.getByLabelText('Hide password'));
+    expect(input).toHaveAttribute('type', 'password');
+  });
 
-    expect(input).toBeDisabled();
-    expect(input).toHaveClass(
-      'disabled:opacity-50',
-      'disabled:cursor-not-allowed'
+  it('shows clear button when clearable and has value', () => {
+    const onChange = vi.fn();
+    renderWithProviders(
+      <GlassInput 
+        clearable 
+        value="test value" 
+        onChange={onChange}
+      />
+    );
+    
+    const clearButton = screen.getByLabelText('Clear input');
+    expect(clearButton).toBeInTheDocument();
+    
+    fireEvent.click(clearButton);
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({ value: '' })
+      })
     );
   });
 
-  it('shows error state correctly', () => {
-    render(<GlassInput error={true} placeholder="Error input" />);
-    const input = screen.getByRole('textbox');
+  it('does not show clear button when empty', () => {
+    renderWithProviders(<GlassInput clearable value="" />);
+    expect(screen.queryByLabelText('Clear input')).not.toBeInTheDocument();
+  });
 
-    expect(input).toHaveClass('border-red-400/50');
-    expect(input).toHaveAttribute('aria-invalid', 'true');
+  it('focuses input after clearing', () => {
+    renderWithProviders(
+      <GlassInput clearable value="test" onChange={vi.fn()} />
+    );
+    
+    const input = screen.getByRole('textbox');
+    const clearButton = screen.getByLabelText('Clear input');
+    
+    fireEvent.click(clearButton);
+    expect(document.activeElement).toBe(input);
   });
 
   it('renders with left and right icons', () => {
-    const LeftIcon = () => <span data-testid="left-icon">L</span>;
-    const RightIcon = () => <span data-testid="right-icon">R</span>;
-
-    render(
+    renderWithProviders(
       <GlassInput
-        leftIcon={<LeftIcon />}
-        rightIcon={<RightIcon />}
+        leftIcon={<Mail data-testid="left-icon" />}
+        rightIcon={<Search data-testid="right-icon" />}
         placeholder="With icons"
       />
     );
-
+    
     expect(screen.getByTestId('left-icon')).toBeInTheDocument();
     expect(screen.getByTestId('right-icon')).toBeInTheDocument();
   });
 
-  it('supports different input types', () => {
-    const { rerender } = render(
-      <GlassInput type="email" placeholder="Email" />
+  it('shows error state', () => {
+    renderWithProviders(
+      <GlassInput 
+        error 
+        helperText="This field is required"
+        placeholder="Error input"
+      />
     );
-    let input = screen.getByRole('textbox');
-    expect(input).toHaveAttribute('type', 'email');
+    
+    const input = screen.getByPlaceholderText('Error input');
+    const helperText = screen.getByText('This field is required');
+    
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).toHaveAttribute('aria-describedby');
+    expect(helperText).toHaveClass('text-red-500');
+  });
 
-    rerender(<GlassInput type="password" placeholder="Password" />);
-    input = screen.getByPlaceholderText('Password');
-    expect(input).toHaveAttribute('type', 'password');
+  it('shows helper text without error', () => {
+    renderWithProviders(
+      <GlassInput 
+        helperText="Enter your email address"
+        placeholder="Email"
+      />
+    );
+    
+    const helperText = screen.getByText('Enter your email address');
+    expect(helperText).not.toHaveClass('text-red-500');
+  });
 
-    rerender(<GlassInput type="number" placeholder="Number" />);
-    input = screen.getByRole('spinbutton');
-    expect(input).toHaveAttribute('type', 'number');
+  it('handles disabled state', () => {
+    renderWithProviders(
+      <GlassInput disabled placeholder="Disabled input" />
+    );
+    
+    const input = screen.getByPlaceholderText('Disabled input');
+    expect(input).toBeDisabled();
+    expect(input).toHaveClass('disabled:opacity-50');
   });
 
   it('forwards ref correctly', () => {
-    const ref = { current: null };
-    render(<GlassInput ref={ref} placeholder="Ref test" />);
+    const ref = vi.fn();
+    renderWithProviders(<GlassInput ref={ref} />);
+    
+    expect(ref).toHaveBeenCalledWith(expect.any(HTMLInputElement));
+  });
 
-    expect(ref.current).toBeInstanceOf(HTMLInputElement);
+  it('supports different input types', () => {
+    const { rerender } = renderWithProviders(
+      <GlassInput type="email" placeholder="Email" />
+    );
+    
+    let input = screen.getByPlaceholderText('Email');
+    expect(input).toHaveAttribute('type', 'email');
+    
+    rerender(<GlassInput type="number" placeholder="Number" />);
+    input = screen.getByPlaceholderText('Number');
+    expect(input).toHaveAttribute('type', 'number');
+    
+    rerender(<GlassInput type="tel" placeholder="Phone" />);
+    input = screen.getByPlaceholderText('Phone');
+    expect(input).toHaveAttribute('type', 'tel');
   });
 
   it('handles focus and blur events', () => {
-    const handleFocus = vi.fn();
-    const handleBlur = vi.fn();
-
-    render(
+    const onFocus = vi.fn();
+    const onBlur = vi.fn();
+    
+    renderWithProviders(
       <GlassInput
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        onFocus={onFocus}
+        onBlur={onBlur}
         placeholder="Focus test"
       />
     );
-
-    const input = screen.getByRole('textbox');
-
+    
+    const input = screen.getByPlaceholderText('Focus test');
+    
     fireEvent.focus(input);
-    expect(handleFocus).toHaveBeenCalledTimes(1);
-
+    expect(onFocus).toHaveBeenCalledTimes(1);
+    
     fireEvent.blur(input);
-    expect(handleBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledTimes(1);
   });
 
-  // Common prop tests
-  describe('Common Props', () => {
-    it('applies custom className', () => {
-      render(<GlassInput className="custom-class" placeholder="Test" />);
-      const input = screen.getByRole('textbox');
-      expect(input).toHaveClass('custom-class');
-    });
-
-    it('applies custom style', () => {
-      render(<GlassInput style={{ opacity: 0.5 }} placeholder="Test" />);
-      const input = screen.getByRole('textbox');
-      expect(input).toHaveStyle({ opacity: '0.5' });
-    });
-
-    it('supports data-testid', () => {
-      render(<GlassInput data-testid="test-input" placeholder="Test" />);
-      const input = screen.getByTestId('test-input');
-      expect(input).toBeInTheDocument();
-    });
+  it('applies custom className', () => {
+    renderWithProviders(
+      <GlassInput className="custom-input" placeholder="Custom" />
+    );
+    
+    const input = screen.getByPlaceholderText('Custom');
+    expect(input).toHaveClass('custom-input');
   });
 
-  // Performance test
-  it(
-    'renders performantly',
-    testGlassPerformance((props: any) => (
-      <GlassInput placeholder="Performance test" {...props} />
-    ))
-  );
+  it('handles keyboard events', () => {
+    const onKeyDown = vi.fn();
+    const onKeyUp = vi.fn();
+    const onKeyPress = vi.fn();
+    
+    renderWithProviders(
+      <GlassInput
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
+        onKeyPress={onKeyPress}
+        placeholder="Keyboard test"
+      />
+    );
+    
+    const input = screen.getByPlaceholderText('Keyboard test');
+    
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(onKeyDown).toHaveBeenCalledTimes(1);
+    
+    fireEvent.keyUp(input, { key: 'Enter' });
+    expect(onKeyUp).toHaveBeenCalledTimes(1);
+    
+    fireEvent.keyPress(input, { key: 'a' });
+    expect(onKeyPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('meets accessibility standards', async () => {
+    const { container } = renderWithProviders(
+      <GlassInput 
+        placeholder="Accessible input"
+        aria-label="Test input"
+      />
+    );
+    
+    await testA11y(container);
+  });
+
+  it('has proper ARIA attributes when error', () => {
+    renderWithProviders(
+      <GlassInput 
+        error 
+        helperText="Error message"
+        placeholder="Error field"
+      />
+    );
+    
+    const input = screen.getByPlaceholderText('Error field');
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(input).toHaveAttribute('aria-describedby');
+    
+    const describedById = input.getAttribute('aria-describedby');
+    const helperText = document.getElementById(describedById!);
+    expect(helperText).toHaveTextContent('Error message');
+  });
+
+  it('handles complex icon arrangements', () => {
+    renderWithProviders(
+      <GlassInput
+        variant="password"
+        clearable
+        rightIcon={<Mail />}
+        value="test"
+        onChange={vi.fn()}
+      />
+    );
+    
+    // Should show password toggle and clear button, but not the right icon for password variant
+    expect(screen.getByLabelText('Show password')).toBeInTheDocument();
+    expect(screen.getByLabelText('Clear input')).toBeInTheDocument();
+  });
+
+  it('maintains focus ring styles', () => {
+    renderWithProviders(<GlassInput placeholder="Focus ring test" />);
+    const input = screen.getByPlaceholderText('Focus ring test');
+    
+    fireEvent.focus(input);
+    // The component uses focusRing utility which should add focus styles
+    expect(input.className).toMatch(/focus:/);
+  });
+
+  it('handles maxLength attribute', () => {
+    renderWithProviders(
+      <GlassInput maxLength={10} placeholder="Max length" />
+    );
+    
+    const input = screen.getByPlaceholderText('Max length');
+    expect(input).toHaveAttribute('maxLength', '10');
+  });
+
+  it('handles required attribute', () => {
+    renderWithProviders(
+      <GlassInput required placeholder="Required field" />
+    );
+    
+    const input = screen.getByPlaceholderText('Required field');
+    expect(input).toHaveAttribute('required');
+  });
+
+  it('handles autoComplete attribute', () => {
+    renderWithProviders(
+      <GlassInput autoComplete="email" placeholder="Email" />
+    );
+    
+    const input = screen.getByPlaceholderText('Email');
+    expect(input).toHaveAttribute('autoComplete', 'email');
+  });
+
+  it('handles pattern attribute', () => {
+    renderWithProviders(
+      <GlassInput 
+        pattern="[0-9]*" 
+        placeholder="Numbers only"
+      />
+    );
+    
+    const input = screen.getByPlaceholderText('Numbers only');
+    expect(input).toHaveAttribute('pattern', '[0-9]*');
+  });
 });

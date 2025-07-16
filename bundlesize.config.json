@@ -1,54 +1,77 @@
 {
   "files": [
     {
+      "name": "Core Bundle (Optimized)",
+      "path": "./dist/core/index.mjs",
+      "maxSize": "15 kB",
+      "compression": "gzip",
+      "optional": true
+    },
+    {
+      "name": "Full Bundle",
       "path": "./dist/index.mjs",
       "maxSize": "50 kB",
       "compression": "gzip"
     },
     {
-      "path": "./dist/cjs/index.cjs",
-      "maxSize": "55 kB",
-      "compression": "gzip"
-    },
-    {
-      "path": "./dist/liquidui.css",
-      "maxSize": "20 kB",
-      "compression": "gzip"
-    },
-    {
+      "name": "Button Component",
       "path": "./dist/components/button.mjs",
-      "maxSize": "8 kB",
-      "compression": "gzip"
-    },
-    {
-      "path": "./dist/components/card.mjs",
-      "maxSize": "6 kB",
-      "compression": "gzip"
-    },
-    {
-      "path": "./dist/components/input.mjs",
-      "maxSize": "8 kB",
-      "compression": "gzip"
-    },
-    {
-      "path": "./dist/components/modal.mjs",
-      "maxSize": "10 kB",
-      "compression": "gzip"
-    },
-    {
-      "path": "./dist/components/tooltip.mjs",
       "maxSize": "5 kB",
       "compression": "gzip"
     },
     {
-      "path": "./dist/components/tabs.mjs",
-      "maxSize": "7 kB",
+      "name": "Card Component",
+      "path": "./dist/components/card.mjs",
+      "maxSize": "3 kB",
+      "compression": "gzip"
+    },
+    {
+      "name": "Modal Component",
+      "path": "./dist/components/modal.mjs",
+      "maxSize": "6 kB",
+      "compression": "gzip"
+    },
+    {
+      "name": "Physics Engine",
+      "path": "./dist/features/physics.mjs",
+      "maxSize": "10 kB",
+      "compression": "gzip"
+    },
+    {
+      "name": "Core CSS",
+      "path": "./dist/glass-core.css",
+      "maxSize": "5 kB",
+      "compression": "gzip"
+    },
+    {
+      "name": "Animation CSS",
+      "path": "./dist/glass-animations.css",
+      "maxSize": "8 kB",
+      "compression": "gzip"
+    },
+    {
+      "name": "Full CSS",
+      "path": "./dist/liquidui.css",
+      "maxSize": "30 kB",
+      "compression": "gzip"
+    },
+    {
+      "name": "Lite Button",
+      "path": "./dist/lite/button.mjs",
+      "maxSize": "3 kB",
+      "compression": "gzip"
+    },
+    {
+      "name": "Lite Card",
+      "path": "./dist/lite/card.mjs",
+      "maxSize": "2 kB",
+      "compression": "gzip"
+    },
+    {
+      "name": "Lite Modal",
+      "path": "./dist/lite/modal.mjs",
+      "maxSize": "4 kB",
       "compression": "gzip"
     }
-  ],
-  "ci": {
-    "trackBranches": ["main", "develop"],
-    "repoBranchBase": "main",
-    "githubAccessToken": "${BUNDLESIZE_GITHUB_TOKEN}"
-  }
+  ]
 }

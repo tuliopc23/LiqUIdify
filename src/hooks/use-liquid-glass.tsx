@@ -173,7 +173,10 @@ export const useContentAwareGlass = (
         updateGlassStyle(analysis);
       }
     } catch (error) {
-      console.warn('Content analysis failed:', error);
+      // Silently fail in production, log in development
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Content analysis failed:', error);
+      }
     }
   }, [contentRef, updateGlassStyle, adaptToContent]);
 
@@ -215,7 +218,9 @@ export const useContentAwareGlass = (
 // Helper function to analyze color
 function analyzeColor(colorString: string): ContentAnalysis | null {
   if (!colorString || typeof colorString !== 'string') {
-    console.warn('analyzeColor: Invalid color string provided:', colorString);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('analyzeColor: Invalid color string provided:', colorString);
+    }
     return null;
   }
 
@@ -226,7 +231,9 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
     );
 
     if (!rgbMatch) {
-      console.warn('analyzeColor: Could not parse color string:', colorString);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('analyzeColor: Could not parse color string:', colorString);
+      }
       // Return a default analysis for unrecognized colors
       return {
         averageColor: 'rgb(128, 128, 128)',
@@ -242,7 +249,9 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 
     // Validate parsed values
     if (isNaN(r) || isNaN(g) || isNaN(b)) {
-      console.warn('analyzeColor: Invalid RGB values:', { r, g, b });
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('analyzeColor: Invalid RGB values:', { r, g, b });
+      }
       return null;
     }
 
@@ -264,7 +273,9 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
       dominantHue: hue,
     };
   } catch (error) {
-    console.warn('analyzeColor: Error processing color:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('analyzeColor: Error processing color:', error);
+    }
     // Return a safe default
     return {
       averageColor: 'rgb(128, 128, 128)',

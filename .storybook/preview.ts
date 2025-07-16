@@ -3,6 +3,15 @@ import React from 'react';
 import { GlassUIProvider } from '../src/providers/glass-ui-provider';
 import '../src/styles/tailwind.css';
 
+// Import the built CSS file if available (for production builds)
+if (typeof window !== 'undefined') {
+  // Try to load the built CSS file
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = '/liquidui.css';
+  document.head.appendChild(link);
+}
+
 // Add a flag to ensure single initialization
 let isInitialized = false;
 

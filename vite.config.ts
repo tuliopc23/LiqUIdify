@@ -87,6 +87,17 @@ export default defineConfig({
       },
     },
     rollupOptions: {
+      manualChunks(id) {
+        if (id.includes('node_modules')) {
+          return 'vendor';
+        }
+        if (id.includes('components')) {
+          return 'components';
+        }
+        if (id.includes('utils')) {
+          return 'utils';
+        }
+      },
       // More comprehensive external dependencies for React 19 compatibility
       external: [
         'react',

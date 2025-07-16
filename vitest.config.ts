@@ -20,10 +20,19 @@ export default defineConfig({
       exclude: [
         'node_modules/',
         'src/test-setup.ts',
+        'vitest.setup.ts',
         '**/*.stories.*',
         '**/*.config.*',
         'dist/',
       ],
+      thresholds: {
+        global: {
+          branches: 90,
+          functions: 90,
+          lines: 90,
+          statements: 90,
+        },
+      },
     },
   },
 });

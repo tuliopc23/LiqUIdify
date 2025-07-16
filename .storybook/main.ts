@@ -57,6 +57,13 @@ const config: StorybookConfig = {
       '@/design-tokens': resolve(__dirname, '../src/tokens/design-tokens'),
     };
 
+    // Ensure CSS is properly handled
+    config.css = config.css || {};
+    config.css.postcss = resolve(__dirname, '../postcss.config.js');
+
+    // Add public dir for serving static assets
+    config.publicDir = resolve(__dirname, '../public');
+
     // Optimize build performance
     config.build = config.build || {};
     config.build.rollupOptions = config.build.rollupOptions || {};

@@ -8,4 +8,4 @@ export type { GlassTabsProps } from './components/glass-tabs/glass-tabs';
 export type {
   AccessibilityCheckResult,
   AccessibilityIssue,
-} from './utils/accessibility-testing';
+} from './testing/accessibility-testing';
