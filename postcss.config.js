@@ -22,17 +22,86 @@ export default {
     // CSSnano for production optimization (conditionally applied)
     ...(process.env.NODE_ENV === 'production'
       ? {
-          cssnano: {
-            preset: [
-              'default',
-              {
-                discardComments: {
-                  removeAll: true,
-                },
-              },
+        cssnano: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true },
+              normalizeWhitespace: true,
+              mergeLonghand: true,
+              mergeRules: true,
+              minifySelectors: true,
+              reduceIdents: false, // Keep CSS custom properties
+              zindex: false, // Don't optimize z-index values
+              colormin: true,
+              convertValues: true,
+              discardDuplicates: true,
+              discardEmpty: true,
+              discardOverridden: true,
+              normalizeCharset: true,
+              normalizeDisplayValues: true,
+              normalizePositions: true,
+              normalizeRepeatStyle: true,
+              normalizeString: true,
+              normalizeTimingFunctions: true,
+              normalizeUnicode: true,
+              normalizeUrl: true,
+              orderedValues: true,
+              reduceInitial: true,
+              reduceTransforms: true,
+              svgo: true,
+              uniqueSelectors: true,
+            },
+          ],
+        },
+        '@fullhuman/postcss-purgecss': {
+          content: [
+            './src/**/*.{js,jsx,ts,tsx}',
+            './public/index.html',
+            './dist/**/*.html',
+          ],
+          defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+          safelist: {
+            standard: [
+              /^glass-/,
+              /^liquid-/,
+              /^apple-/,
+              /^animate-/,
+              /^transition-/,
+              /^duration-/,
+              /^ease-/,
+              /^backdrop-/,
+              /^bg-gradient-/,
+              /^from-/,
+              /^to-/,
+              /^via-/,
+              /^focus:/,
+              /^hover:/,
+              /^active:/,
+              /^disabled:/,
+              /^group-/,
+              /^peer-/,
+            ],
+            deep: [
+              /glass$/,
+              /liquid$/,
+              /apple$/,
+              /error-/,
+              /loading-/,
+              /success-/,
+            ],
+            greedy: [
+              /data-/,
+              /aria-/,
+              /role-/,
+              /\[data-/,
+              /\[aria-/,
             ],
           },
-        }
+          variables: true,
+          keyframes: true,
+        },
+      }
       : {}),
   },
 };

@@ -1,10 +1,14 @@
 /**
- * Navigation Components Bundle
- * Navigation and menu components
+ * Navigation Bundle
+ * Navigation and routing components
  */
 
 export * from '../components/glass-dropdown';
+export * from '../components/glass-breadcrumbs';
+export * from '../components/glass-pagination';
 export * from '../components/glass-mobile-nav';
 export * from '../components/navbar';
 export * from '../components/sidebar';
-export * from '../components/glass-command';
+
+// Tree-shaking marker
+export const NAVIGATION_BUNDLE_MARKER = 'liquidui-navigation' as const;

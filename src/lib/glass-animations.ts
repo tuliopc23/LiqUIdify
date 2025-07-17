@@ -168,7 +168,7 @@ export class GlassAnimation {
   magneticHover(_strength = 50, duration = 0.5) {
     this.element.addEventListener('mouseenter', () => {
       gsap.to(this.element, {
-        duration: duration,
+        duration: duration / 1.5,
         scale: 1.1,
         ease: 'power3.out',
       });
@@ -417,14 +417,14 @@ export class GlassAnimation {
         gsap.to(this.element, {
           x: moveX,
           y: moveY,
-          duration: 0.3,
+      duration: 0.2,
           ease: 'power2.out',
         });
       } else {
         gsap.to(this.element, {
           x: 0,
           y: 0,
-          duration: 0.5,
+        duration: 0.3,
           ease: 'elastic.out(1, 0.3)',
         });
       }
@@ -762,6 +762,43 @@ export const GlassUtils = {
       force3D: true,
       willChange: 'transform',
     });
+  },
+
+  // Enhanced reduced motion support with graceful animation scaling
+  enableReducedMotion(elements: HTMLElement[]) {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (prefersReducedMotion) {
+      elements.forEach((element) => {
+        gsap.to(element, {
+          clearProps: 'all', // Remove animations
+          opacity: 1, // Ensure visibility
+        });
+      });
+    }
+  },
+
+  // Frame rate tracking for animations
+  trackFrameRate() {
+    const fps = 60;
+    const start = Date.now();
+    let frame = 0;
+
+    function checkFrameRate() {
+      frame++;
+      const now = Date.now();
+      const duration = now - start;
+      const actualFPS = (frame / duration) * 1000;
+      console.log(`Current FPS: ${actualFPS}`);
+
+      if (duration < 1000) {
+        requestAnimationFrame(checkFrameRate);
+      }
+    }
+
+    requestAnimationFrame(checkFrameRate);
   },
 
   // Batch animate with optimal performance

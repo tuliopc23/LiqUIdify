@@ -1,3 +1,6 @@
+
+
+
 // Components - Glass UI Library
 
 // Apple HIG-compliant Components
@@ -98,11 +101,11 @@ export {
 // Hooks
 export * from './hooks/use-liquid-glass';
 export * from './hooks/use-mobile';
-export * from './hooks/use-performance-monitor';
+export * from './hooks/use-performance-monitoring';
 export * from './hooks/use-haptic-feedback';
 export { useTheme } from './hooks/use-theme';
 export { useToast, toast } from './hooks/use-toast';
-export { 
+export {
   useIsClient,
   useSSRSafeWindow,
   useLocalStorage,
@@ -135,6 +138,21 @@ export {
   type AppleLiquidGlassOptions,
   type AppleLiquidGlassProps,
 } from './lib/apple-liquid-glass';
+
+// Enhanced Apple Liquid Glass System
+export {
+  useEnhancedAppleLiquidGlass,
+  getEnhancedGlassClass,
+  createEnhancedGlassLayers,
+  ENHANCED_GLASS_VARIANTS,
+  ENHANCED_GLASS_LAYERS,
+  PIXEL_PERFECT_CONFIG,
+  APPLE_HIG_COMPLIANCE,
+  type EnhancedGlassOptions,
+  type EnhancedGlassLayer,
+  type PixelPerfectConfig,
+  type AppleHIGCompliance,
+} from './lib/enhanced-apple-liquid-glass';
 
 // Testing utilities (disabled in production builds)
 // export * from './testing/accessibility-testing';

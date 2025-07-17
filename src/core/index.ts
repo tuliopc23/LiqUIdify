@@ -11,12 +11,99 @@ export * from './base-component';
 
 // Glass effects system
 export * from './glass-effects';
+export * from './glass/GlassEffectSystem';
 
 // Compound component utilities
 export * from './compound-component';
 
 // Business logic separation
 export * from './business-logic';
+
+// Accessibility management
+export { AccessibilityManager, accessibilityManager } from './accessibility-manager';
+export type {
+  AccessibilityReport,
+  ContrastResult,
+  FocusOptions,
+  ARIAValidation,
+  Violation,
+  Warning,
+  Suggestion
+} from './accessibility-manager';
+
+// Focus management
+export {
+  useRovingTabindex,
+  RovingTabindexGroup,
+  useGridRovingTabindex
+} from './roving-tabindex';
+export type {
+  RovingTabindexOptions,
+  RovingTabindexReturn,
+  RovingTabindexGroupProps,
+  GridRovingTabindexOptions
+} from './roving-tabindex';
+
+// Performance monitoring
+export { performanceMonitor } from './performance-monitor';
+export type {
+  MetricName,
+  PerformanceRating,
+  PerformanceMetric,
+  ComponentMetric,
+  PerformanceReport
+} from './performance-monitor';
+
+// CSS Optimization
+export { cssOptimization } from './css-optimization';
+export type {
+  CriticalCSSOptions,
+  CSSUsageStats
+} from './css-optimization';
+
+// Error Recovery System
+export { errorRecovery } from './error-recovery';
+export type {
+  ErrorBoundaryProps,
+  ErrorBoundaryState,
+  ErrorContext,
+  CircuitBreakerOptions,
+  HydrationMismatchOptions,
+  RetryStrategy
+} from './error-recovery';
+
+// SSR Safety
+export {
+  ssrSafety,
+  SSRSafe,
+  ClientOnly,
+  ProgressiveEnhancement,
+  useHydrationSafe,
+  useSSRSafeLocalStorage,
+  useNetworkStatus
+} from './ssr-safety';
+export type {
+  SSRSafetyOptions,
+  HydrationMismatch,
+  ProgressiveEnhancementOptions
+} from './ssr-safety';
+
+// Graceful Degradation
+export { gracefulDegradation } from './graceful-degradation';
+export type {
+  DegradationStrategy,
+  AnimationFallbackOptions,
+  NetworkFallbackOptions
+} from './graceful-degradation';
+
+// Animation Choreography
+export { animations, animationChoreographer } from './animation-choreographer';
+export type {
+  AnimationSequenceOptions,
+  AnimationStep,
+  SpringOptions,
+  MagneticOptions
+} from './animation-choreographer';
 
 // Animation hooks
 export * from '../hooks/use-glass-animations';
@@ -71,6 +158,13 @@ export {
   GLASS_ANIMATION_PRESETS,
 } from '../hooks/use-glass-animations';
 
+export {
+  usePerformanceMonitoring,
+  withPerformanceMonitoring,
+  useWebVitals,
+  useRealtimePerformance
+} from '../hooks/use-performance-monitoring';
+
 // Business logic utilities
 export {
   createBusinessLogicHook,
@@ -81,6 +175,25 @@ export {
   createAsyncDataBusinessLogic,
   createEventHandlers,
 } from './business-logic';
+
+// Enhanced TypeScript types
+export * from '../types/enhanced-types';
+
+// Visual Regression Testing
+export { visualTesting } from '../testing/visual-regression';
+export type {
+  VisualTestOptions,
+  VisualTestResult,
+  AnimationFrameTestOptions,
+  AnimationFrameTestResult
+} from '../testing/visual-regression';
+
+// Quality Assurance
+export { sTierValidator } from '../quality-assurance/s-tier-validation';
+export type {
+  ValidationChecklist,
+  ValidationResult
+} from '../quality-assurance/s-tier-validation';
 
 // Component constants
 export const COMPONENT_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
@@ -171,17 +284,17 @@ export type {
   KeyHandler,
   FocusHandler,
   ChangeHandler,
-  
+
   // Glass effects types
   GlassEffectType,
   GlassEffectState,
   GlassEffectAnimation,
   GlassEffectOptions,
-  
+
   // Animation types
   AnimationState,
   AnimationConfig,
-  
+
   // Business logic types
   BusinessLogicHook,
   StateManager,
@@ -196,7 +309,7 @@ export type {
   ModalActions,
   AsyncDataState,
   AsyncDataActions,
-  
+
   // Compound component types
   CompoundComponentContext,
   CompoundComponentOptions,

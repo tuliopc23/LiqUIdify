@@ -1,679 +1,607 @@
 /**
- * Glass Performance - Advanced performance optimization utilities
- * Virtual scrolling, lazy rendering, and memory management
+ * Glass Performance Optimization System
+ * 60fps animation performance with GPU acceleration and intelligent batching
+ * Requirements: 5.3, 5.6 - Animation performance optimization with reduced motion support
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef, useCallback, useEffect, useState } from 'react';
 
-// Performance thresholds
-export const PERFORMANCE_THRESHOLDS = {
-  FPS_TARGET: 60,
-  FPS_WARNING: 45,
-  FPS_CRITICAL: 30,
-  MEMORY_WARNING: 50, // MB
-  MEMORY_CRITICAL: 100, // MB
-  RENDER_BUDGET: 16.67, // ms (60fps)
-  INTERACTION_BUDGET: 100, // ms
-  ANIMATION_BUDGET: 200, // ms
-};
-
-// Virtual scrolling configuration
-export interface VirtualScrollConfig {
-  itemHeight: number | ((index: number) => number);
-  itemCount: number;
-  overscan?: number;
-  scrollingDelay?: number;
-  getScrollElement?: () => HTMLElement | null;
-}
-
-// Performance metrics
 export interface PerformanceMetrics {
   fps: number;
-  memory: number;
+  frameTime: number;
+  memoryUsage: number;
+  gpuMemory: number;
+  activeAnimations: number;
+  droppedFrames: number;
   renderTime: number;
-  paintTime: number;
-  scriptTime: number;
-  layoutTime: number;
-  idleTime: number;
+  layoutThrashing: number;
 }
 
-// FPS Monitor class
-export class FPSMonitor {
-  private frameCount = 0;
-  private lastTime = performance.now();
-  private fps = 0;
-  private callbacks: Set<(fps: number) => void> = new Set();
-  private rafId: number | null = null;
-
-  start() {
-    const measure = () => {
-      const currentTime = performance.now();
-      const deltaTime = currentTime - this.lastTime;
-
-      if (deltaTime >= 1000) {
-        this.fps = Math.round((this.frameCount * 1000) / deltaTime);
-        this.frameCount = 0;
-        this.lastTime = currentTime;
-
-        this.callbacks.forEach(callback => callback(this.fps));
-      }
-
-      this.frameCount++;
-      this.rafId = requestAnimationFrame(measure);
-    };
-
-    measure();
-  }
-
-  stop() {
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-      this.rafId = null;
-    }
-  }
-
-  subscribe(callback: (fps: number) => void) {
-    this.callbacks.add(callback);
-    return () => this.callbacks.delete(callback);
-  }
-
-  getCurrentFPS() {
-    return this.fps;
-  }
+export interface AnimationBudget {
+  maxAnimations: number;
+  maxFrameTime: number;
+  targetFPS: number;
+  memoryLimit: number;
+  gpuMemoryLimit: number;
 }
 
-// Memory monitor
-export class MemoryMonitor {
-  private callbacks: Set<(memory: number) => void> = new Set();
-  private intervalId: number | null = null;
-
-  start(interval = 1000) {
-    if (!('memory' in performance)) {
-      console.warn('Performance.memory is not available');
-      return;
-    }
-
-    this.intervalId = window.setInterval(() => {
-      const memory = (performance as any).memory.usedJSHeapSize / 1024 / 1024;
-      this.callbacks.forEach(callback => callback(memory));
-    }, interval);
-  }
-
-  stop() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
-  }
-
-  subscribe(callback: (memory: number) => void) {
-    this.callbacks.add(callback);
-    return () => this.callbacks.delete(callback);
-  }
-
-  getCurrentMemory() {
-    if (!('memory' in performance)) return 0;
-    return (performance as any).memory.usedJSHeapSize / 1024 / 1024;
-  }
+export interface OptimizationConfig {
+  enableGPUAcceleration: boolean;
+  enableBatching: boolean;
+  enableCulling: boolean;
+  enableLOD: boolean; // Level of Detail
+  enableReducedMotion: boolean;
+  performanceBudget: AnimationBudget;
+  qualitySettings: 'low' | 'medium' | 'high' | 'ultra';
 }
 
-// Virtual scrolling hook
-export function useVirtualScroll<T>({
-  items,
-  itemHeight,
-  containerHeight,
-  overscan = 3,
-  getScrollElement,
-}: {
-  items: T[];
-  itemHeight: number | ((index: number) => number);
-  containerHeight: number;
-  overscan?: number;
-  getScrollElement?: () => HTMLElement | null;
-}) {
-  const [scrollTop, setScrollTop] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const scrollTimeoutRef = useRef<number | null>(null);
+export interface AnimationTask {
+  id: string;
+  element: HTMLElement;
+  callback: (timestamp: number) => void;
+  priority: number;
+  lastFrame: number;
+  frameCount: number;
+  isVisible: boolean;
+  boundingRect: DOMRect;
+}
 
-  // Calculate item heights
-  const getItemHeight = useCallback(
-    (index: number) => {
-      return typeof itemHeight === 'function' ? itemHeight(index) : itemHeight;
+/**
+ * Default Performance Configuration
+ */
+export const DEFAULT_PERFORMANCE_CONFIG: OptimizationConfig = {
+  enableGPUAcceleration: true,
+  enableBatching: true,
+  enableCulling: true,
+  enableLOD: true,
+  enableReducedMotion: true,
+  performanceBudget: {
+    maxAnimations: 50,
+    maxFrameTime: 16.67, // 60fps
+    targetFPS: 60,
+    memoryLimit: 100 * 1024 * 1024, // 100MB
+    gpuMemoryLimit: 50 * 1024 * 1024, // 50MB
+  },
+  qualitySettings: 'high',
+};
+
+/**
+ * Quality Settings Presets
+ */
+export const QUALITY_PRESETS: Record<string, Partial<OptimizationConfig>> = {
+  low: {
+    enableGPUAcceleration: false,
+    enableBatching: true,
+    enableCulling: true,
+    enableLOD: true,
+    performanceBudget: {
+      maxAnimations: 10,
+      maxFrameTime: 33.33, // 30fps
+      targetFPS: 30,
+      memoryLimit: 25 * 1024 * 1024,
+      gpuMemoryLimit: 10 * 1024 * 1024,
     },
-    [itemHeight]
-  );
-
-  // Calculate total height
-  const totalHeight = items.reduce((acc, _, index) => {
-    return acc + getItemHeight(index);
-  }, 0);
-
-  // Calculate visible range
-  const getVisibleRange = useCallback(() => {
-    let accumulatedHeight = 0;
-    let startIndex = 0;
-    let endIndex = items.length - 1;
-
-    // Find start index
-    for (let i = 0; i < items.length; i++) {
-      const height = getItemHeight(i);
-      if (accumulatedHeight + height > scrollTop) {
-        startIndex = Math.max(0, i - overscan);
-        break;
-      }
-      accumulatedHeight += height;
-    }
-
-    // Find end index
-    accumulatedHeight = 0;
-    for (let i = startIndex; i < items.length; i++) {
-      if (accumulatedHeight > containerHeight + scrollTop) {
-        endIndex = Math.min(items.length - 1, i + overscan);
-        break;
-      }
-      accumulatedHeight += getItemHeight(i);
-    }
-
-    return { startIndex, endIndex };
-  }, [items.length, scrollTop, containerHeight, overscan, getItemHeight]);
-
-  const { startIndex, endIndex } = getVisibleRange();
-
-  // Calculate offset for visible items
-  const getItemOffset = useCallback(
-    (index: number) => {
-      let offset = 0;
-      for (let i = 0; i < index; i++) {
-        offset += getItemHeight(i);
-      }
-      return offset;
+  },
+  medium: {
+    enableGPUAcceleration: true,
+    enableBatching: true,
+    enableCulling: true,
+    enableLOD: true,
+    performanceBudget: {
+      maxAnimations: 25,
+      maxFrameTime: 20, // 50fps
+      targetFPS: 50,
+      memoryLimit: 50 * 1024 * 1024,
+      gpuMemoryLimit: 25 * 1024 * 1024,
     },
-    [getItemHeight]
-  );
+  },
+  high: {
+    enableGPUAcceleration: true,
+    enableBatching: true,
+    enableCulling: true,
+    enableLOD: false,
+    performanceBudget: {
+      maxAnimations: 50,
+      maxFrameTime: 16.67, // 60fps
+      targetFPS: 60,
+      memoryLimit: 100 * 1024 * 1024,
+      gpuMemoryLimit: 50 * 1024 * 1024,
+    },
+  },
+  ultra: {
+    enableGPUAcceleration: true,
+    enableBatching: false, // Disable batching for maximum quality
+    enableCulling: false,
+    enableLOD: false,
+    performanceBudget: {
+      maxAnimations: 100,
+      maxFrameTime: 8.33, // 120fps
+      targetFPS: 120,
+      memoryLimit: 200 * 1024 * 1024,
+      gpuMemoryLimit: 100 * 1024 * 1024,
+    },
+  },
+};
 
-  // Handle scroll
-  useEffect(() => {
-    const scrollElement = getScrollElement ? getScrollElement() : window;
-    if (!scrollElement) return;
-
-    const handleScroll = () => {
-      const newScrollTop =
-        scrollElement === window
-          ? window.pageYOffset
-          : (scrollElement as HTMLElement).scrollTop;
-
-      setScrollTop(newScrollTop);
-      setIsScrolling(true);
-
-      // Debounce scrolling state
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-      scrollTimeoutRef.current = window.setTimeout(() => {
-        setIsScrolling(false);
-      }, 150);
-    };
-
-    scrollElement.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      scrollElement.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, [getScrollElement]);
-
-  const visibleItems = items.slice(startIndex, endIndex + 1);
-
-  return {
-    visibleItems,
-    totalHeight,
-    startIndex,
-    endIndex,
-    getItemOffset,
-    isScrolling,
+/**
+ * Performance Monitor
+ * Tracks animation performance and provides optimization recommendations
+ */
+export class GlassPerformanceMonitor {
+  private metrics: PerformanceMetrics = {
+    fps: 0,
+    frameTime: 0,
+    memoryUsage: 0,
+    gpuMemory: 0,
+    activeAnimations: 0,
+    droppedFrames: 0,
+    renderTime: 0,
+    layoutThrashing: 0,
   };
+
+  private frameHistory: number[] = [];
+  private lastFrameTime: number = 0;
+  private frameCount: number = 0;
+  private startTime: number = performance.now();
+  private isMonitoring: boolean = false;
+  private animationFrame: number | null = null;
+
+  start(): void {
+    if (this.isMonitoring) return;
+
+    this.isMonitoring = true;
+    this.startTime = performance.now();
+    this.frameCount = 0;
+    this.frameHistory = [];
+    this.monitor();
+  }
+
+  stop(): void {
+    this.isMonitoring = false;
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+    }
+  }
+
+  private monitor = (): void => {
+    if (!this.isMonitoring) return;
+
+    const now = performance.now();
+    const frameTime = now - this.lastFrameTime;
+
+    if (this.lastFrameTime > 0) {
+      this.frameHistory.push(frameTime);
+
+      // Keep only last 60 frames for FPS calculation
+      if (this.frameHistory.length > 60) {
+        this.frameHistory.shift();
+      }
+
+      // Calculate FPS
+      const avgFrameTime = this.frameHistory.reduce((a, b) => a + b, 0) / this.frameHistory.length;
+      this.metrics.fps = 1000 / avgFrameTime;
+      this.metrics.frameTime = avgFrameTime;
+
+      // Count dropped frames (frames that took longer than 16.67ms)
+      if (frameTime > 16.67) {
+        this.metrics.droppedFrames++;
+      }
+    }
+
+    this.lastFrameTime = now;
+    this.frameCount++;
+
+    // Update memory usage if available
+    if ('memory' in performance) {
+      const memory = (performance as any).memory;
+      this.metrics.memoryUsage = memory.usedJSHeapSize;
+    }
+
+    this.animationFrame = requestAnimationFrame(this.monitor);
+  };
+
+  getMetrics(): PerformanceMetrics {
+    return { ...this.metrics };
+  }
+
+  updateActiveAnimations(count: number): void {
+    this.metrics.activeAnimations = count;
+  }
+
+  updateRenderTime(time: number): void {
+    this.metrics.renderTime = time;
+  }
+
+  updateLayoutThrashing(count: number): void {
+    this.metrics.layoutThrashing = count;
+  }
+
+  getRecommendations(): string[] {
+    const recommendations: string[] = [];
+    const { fps, activeAnimations, droppedFrames, memoryUsage } = this.metrics;
+
+    if (fps < 30) {
+      recommendations.push('Consider reducing animation complexity or enabling reduced motion');
+    }
+
+    if (activeAnimations > 50) {
+      recommendations.push('Too many active animations - consider animation culling');
+    }
+
+    if (droppedFrames > 10) {
+      recommendations.push('High frame drop rate - enable GPU acceleration or reduce quality');
+    }
+
+    if (memoryUsage > 100 * 1024 * 1024) {
+      recommendations.push('High memory usage - consider animation cleanup and garbage collection');
+    }
+
+    return recommendations;
+  }
 }
 
-// Intersection Observer for lazy rendering
-export function useLazyRender(threshold = 0.1, rootMargin = '50px') {
-  const [visibleElements, setVisibleElements] = useState<Set<Element>>(
-    new Set()
-  );
-  const observerRef = useRef<IntersectionObserver | null>(null);
+/**
+ * Animation Scheduler
+ * Intelligent animation batching and prioritization system
+ */
+export class GlassAnimationScheduler {
+  private tasks: Map<string, AnimationTask> = new Map();
+  private config: OptimizationConfig;
+  private monitor: GlassPerformanceMonitor;
+  private animationFrame: number | null = null;
+  private isRunning: boolean = false;
+  private intersectionObserver: IntersectionObserver | null = null;
+  private reducedMotion: boolean = false;
 
-  useEffect(() => {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+  constructor(config: OptimizationConfig = DEFAULT_PERFORMANCE_CONFIG) {
+    this.config = config;
+    this.monitor = new GlassPerformanceMonitor();
+    this.setupIntersectionObserver();
+    this.checkReducedMotion();
+  }
+
+  private setupIntersectionObserver(): void {
+    if (!this.config.enableCulling || typeof IntersectionObserver === 'undefined') {
       return;
     }
 
-    observerRef.current = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setVisibleElements(prev => new Set(prev).add(entry.target));
-          } else {
-            setVisibleElements(prev => {
-              const next = new Set(prev);
-              next.delete(entry.target);
-              return next;
-            });
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const taskId = (entry.target as HTMLElement).dataset.animationId;
+          if (taskId) {
+            const task = this.tasks.get(taskId);
+            if (task) {
+              task.isVisible = entry.isIntersecting;
+              task.boundingRect = entry.boundingClientRect;
+            }
           }
         });
       },
-      { threshold, rootMargin }
+      {
+        rootMargin: '50px',
+        threshold: 0.1,
+      }
     );
-
-    return () => {
-      observerRef.current?.disconnect();
-    };
-  }, [threshold, rootMargin]);
-
-  const observe = useCallback((element: Element | null) => {
-    if (element) {
-      observerRef.current?.observe(element);
-    }
-  }, []);
-
-  const unobserve = useCallback((element: Element | null) => {
-    if (element) {
-      observerRef.current?.unobserve(element);
-    }
-  }, []);
-
-  const isVisible = useCallback(
-    (element: Element) => {
-      return visibleElements.has(element);
-    },
-    [visibleElements]
-  );
-
-  return { observe, unobserve, isVisible };
-}
-
-// RAF-based animation throttling
-export class AnimationThrottler {
-  private queue: Map<string, () => void> = new Map();
-  private rafId: number | null = null;
-  private isProcessing = false;
-
-  schedule(id: string, callback: () => void) {
-    this.queue.set(id, callback);
-
-    if (!this.isProcessing) {
-      this.process();
-    }
   }
 
-  private process() {
-    if (this.queue.size === 0) {
-      this.isProcessing = false;
+  private checkReducedMotion(): void {
+    if (!this.config.enableReducedMotion || typeof window === 'undefined') {
       return;
     }
 
-    this.isProcessing = true;
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.reducedMotion = mediaQuery.matches;
 
-    this.rafId = requestAnimationFrame(() => {
-      const callbacks = Array.from(this.queue.values());
-      this.queue.clear();
-
-      callbacks.forEach(callback => callback());
-
-      this.process();
+    mediaQuery.addEventListener('change', (e) => {
+      this.reducedMotion = e.matches;
     });
   }
 
-  cancel(id: string) {
-    this.queue.delete(id);
-  }
-
-  clear() {
-    this.queue.clear();
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-      this.rafId = null;
-    }
-    this.isProcessing = false;
-  }
-}
-
-// Memory pool for reusable objects
-export class MemoryPool<T> {
-  private pool: T[] = [];
-  private inUse: Set<T> = new Set();
-  private factory: () => T;
-  private reset: (item: T) => void;
-  private maxSize: number;
-
-  constructor(factory: () => T, reset: (item: T) => void, maxSize = 100) {
-    this.factory = factory;
-    this.reset = reset;
-    this.maxSize = maxSize;
-  }
-
-  acquire(): T {
-    let item = this.pool.pop();
-
-    if (!item) {
-      item = this.factory();
+  addTask(task: AnimationTask): void {
+    // Skip animations if reduced motion is preferred
+    if (this.reducedMotion) {
+      return;
     }
 
-    this.inUse.add(item);
-    return item;
-  }
+    // Check performance budget
+    if (this.tasks.size >= this.config.performanceBudget.maxAnimations) {
+      console.warn('Animation budget exceeded, skipping animation');
+      return;
+    }
 
-  release(item: T) {
-    if (!this.inUse.has(item)) return;
+    this.tasks.set(task.id, task);
 
-    this.inUse.delete(item);
-    this.reset(item);
+    // Set up intersection observer for culling
+    if (this.intersectionObserver && this.config.enableCulling) {
+      task.element.dataset.animationId = task.id;
+      this.intersectionObserver.observe(task.element);
+    }
 
-    if (this.pool.length < this.maxSize) {
-      this.pool.push(item);
+    // Enable GPU acceleration
+    if (this.config.enableGPUAcceleration) {
+      this.enableGPUAcceleration(task.element);
+    }
+
+    if (!this.isRunning) {
+      this.start();
     }
   }
 
-  clear() {
-    this.pool = [];
-    this.inUse.clear();
-  }
-
-  getStats() {
-    return {
-      poolSize: this.pool.length,
-      inUseSize: this.inUse.size,
-      totalSize: this.pool.length + this.inUse.size,
-    };
-  }
-}
-
-// Web Worker manager for heavy computations
-export class WorkerManager {
-  private workers: Worker[] = [];
-  private taskQueue: Array<{
-    id: string;
-    task: any;
-    resolve: (value: any) => void;
-    reject: (error: any) => void;
-  }> = [];
-  private busyWorkers: Set<Worker> = new Set();
-  private workerScript: string;
-
-  constructor(
-    workerScript: string,
-    poolSize = navigator.hardwareConcurrency || 4
-  ) {
-    this.workerScript = workerScript;
-
-    // Create worker pool
-    for (let i = 0; i < poolSize; i++) {
-      const worker = new Worker(workerScript);
-      this.workers.push(worker);
-    }
-  }
-
-  async execute<T>(task: any): Promise<T> {
-    return new Promise((resolve, reject) => {
-      const taskId = Math.random().toString(36).substr(2, 9);
-
-      // Find available worker
-      const availableWorker = this.workers.find(w => !this.busyWorkers.has(w));
-
-      if (availableWorker) {
-        this.executeOnWorker(
-          availableWorker,
-          { id: taskId, task },
-          resolve,
-          reject
-        );
-      } else {
-        // Queue task if no workers available
-        this.taskQueue.push({ id: taskId, task, resolve, reject });
+  removeTask(id: string): void {
+    const task = this.tasks.get(id);
+    if (task) {
+      if (this.intersectionObserver && this.config.enableCulling) {
+        this.intersectionObserver.unobserve(task.element);
+        delete task.element.dataset.animationId;
       }
-    });
+      this.tasks.delete(id);
+    }
+
+    if (this.tasks.size === 0) {
+      this.stop();
+    }
   }
 
-  private executeOnWorker(
-    worker: Worker,
-    message: { id: string; task: any },
-    resolve: (value: any) => void,
-    reject: (error: any) => void
-  ) {
-    this.busyWorkers.add(worker);
+  private enableGPUAcceleration(element: HTMLElement): void {
+    element.style.willChange = 'transform, opacity';
+    element.style.transform = element.style.transform || 'translateZ(0)';
+    element.style.backfaceVisibility = 'hidden';
+    element.style.perspective = '1000px';
+  }
 
-    const handleMessage = (e: MessageEvent) => {
-      if (e.data.id === message.id) {
-        worker.removeEventListener('message', handleMessage);
-        worker.removeEventListener('error', handleError);
-        this.busyWorkers.delete(worker);
+  private start(): void {
+    if (this.isRunning) return;
 
-        if (e.data.error) {
-          reject(e.data.error);
-        } else {
-          resolve(e.data.result);
+    this.isRunning = true;
+    this.monitor.start();
+    this.tick();
+  }
+
+  private stop(): void {
+    this.isRunning = false;
+    this.monitor.stop();
+
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+    }
+  }
+
+  private tick = (timestamp: number = performance.now()): void => {
+    if (!this.isRunning) return;
+
+    const frameStartTime = performance.now();
+    const { maxFrameTime } = this.config.performanceBudget;
+
+    // Sort tasks by priority and visibility
+    const sortedTasks = Array.from(this.tasks.values())
+      .filter(task => !this.config.enableCulling || task.isVisible)
+      .sort((a, b) => b.priority - a.priority);
+
+    let executedTasks = 0;
+    let frameTime = 0;
+
+    // Execute tasks within frame budget
+    for (const task of sortedTasks) {
+      const taskStartTime = performance.now();
+
+      try {
+        // Apply Level of Detail if enabled
+        if (this.config.enableLOD) {
+          this.applyLevelOfDetail(task);
         }
 
-        // Process next task in queue
-        this.processQueue();
-      }
-    };
+        task.callback(timestamp);
+        task.lastFrame = timestamp;
+        task.frameCount++;
+        executedTasks++;
 
-    const handleError = (error: ErrorEvent) => {
-      worker.removeEventListener('message', handleMessage);
-      worker.removeEventListener('error', handleError);
-      this.busyWorkers.delete(worker);
-      reject(error);
-      this.processQueue();
-    };
+        frameTime = performance.now() - taskStartTime;
 
-    worker.addEventListener('message', handleMessage);
-    worker.addEventListener('error', handleError);
-    worker.postMessage(message);
-  }
-
-  private processQueue() {
-    if (this.taskQueue.length === 0) return;
-
-    const availableWorker = this.workers.find(w => !this.busyWorkers.has(w));
-    if (availableWorker) {
-      const task = this.taskQueue.shift()!;
-      this.executeOnWorker(
-        availableWorker,
-        { id: task.id, task: task.task },
-        task.resolve,
-        task.reject
-      );
-    }
-  }
-
-  terminate() {
-    this.workers.forEach(worker => worker.terminate());
-    this.workers = [];
-    this.taskQueue = [];
-    this.busyWorkers.clear();
-  }
-}
-
-// Performance budget monitor
-export class PerformanceBudget {
-  private budgets: Map<string, number> = new Map();
-  private measurements: Map<string, number[]> = new Map();
-  private callbacks: Map<string, (exceeded: boolean, value: number) => void> =
-    new Map();
-
-  setBudget(metric: string, maxValue: number) {
-    this.budgets.set(metric, maxValue);
-  }
-
-  measure(metric: string, value: number) {
-    if (!this.measurements.has(metric)) {
-      this.measurements.set(metric, []);
-    }
-
-    const values = this.measurements.get(metric)!;
-    values.push(value);
-
-    // Keep only last 10 measurements
-    if (values.length > 10) {
-      values.shift();
-    }
-
-    // Check budget
-    const budget = this.budgets.get(metric);
-    if (budget !== undefined) {
-      const average = values.reduce((a, b) => a + b, 0) / values.length;
-      const exceeded = average > budget;
-
-      const callback = this.callbacks.get(metric);
-      if (callback) {
-        callback(exceeded, average);
+        // Check frame budget
+        if (performance.now() - frameStartTime > maxFrameTime * 0.8) {
+          break; // Stop executing tasks to maintain frame rate
+        }
+      } catch (error) {
+        console.warn(`Animation task ${task.id} failed:`, error);
+        this.removeTask(task.id);
       }
     }
+
+    // Update performance metrics
+    this.monitor.updateActiveAnimations(this.tasks.size);
+    this.monitor.updateRenderTime(performance.now() - frameStartTime);
+
+    this.animationFrame = requestAnimationFrame(this.tick);
+  };
+
+  private applyLevelOfDetail(task: AnimationTask): void {
+    const { boundingRect } = task;
+    const viewportArea = window.innerWidth * window.innerHeight;
+    const elementArea = boundingRect.width * boundingRect.height;
+    const visibilityRatio = elementArea / viewportArea;
+
+    // Reduce animation quality for small or distant elements
+    if (visibilityRatio < 0.01) {
+      // Very small elements - skip every other frame
+      if (task.frameCount % 2 === 0) return;
+    } else if (visibilityRatio < 0.05) {
+      // Small elements - reduce frame rate
+      if (task.frameCount % 1.5 === 0) return;
+    }
   }
 
-  onBudgetExceeded(
-    metric: string,
-    callback: (exceeded: boolean, value: number) => void
-  ) {
-    this.callbacks.set(metric, callback);
+  getMetrics(): PerformanceMetrics {
+    return this.monitor.getMetrics();
   }
 
-  getMetrics() {
-    const metrics: Record<
-      string,
-      { average: number; budget?: number; exceeded: boolean }
-    > = {};
+  getRecommendations(): string[] {
+    return this.monitor.getRecommendations();
+  }
 
-    this.measurements.forEach((values, metric) => {
-      const average = values.reduce((a, b) => a + b, 0) / values.length;
-      const budget = this.budgets.get(metric);
+  updateConfig(config: Partial<OptimizationConfig>): void {
+    this.config = { ...this.config, ...config };
+  }
 
-      metrics[metric] = {
-        average,
-        budget,
-        exceeded: budget !== undefined && average > budget,
-      };
-    });
+  destroy(): void {
+    this.stop();
 
-    return metrics;
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+      this.intersectionObserver = null;
+    }
+
+    this.tasks.clear();
   }
 }
 
-// Debounced render hook
-export function useDebouncedRender<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+/**
+ * GPU Acceleration Helper
+ * Optimizes elements for GPU rendering
+ */
+export class GPUAccelerationHelper {
+  static enableForElement(element: HTMLElement, options: {
+    force3D?: boolean;
+    enableWillChange?: boolean;
+    optimizeTransforms?: boolean;
+  } = {}): void {
+    const {
+      force3D = true,
+      enableWillChange = true,
+      optimizeTransforms = true,
+    } = options;
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
+    if (force3D) {
+      element.style.transform = element.style.transform || 'translateZ(0)';
+      element.style.backfaceVisibility = 'hidden';
+      element.style.perspective = '1000px';
+    }
 
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
+    if (enableWillChange) {
+      element.style.willChange = 'transform, opacity';
+    }
 
-  return debouncedValue;
+    if (optimizeTransforms) {
+      element.style.transformStyle = 'preserve-3d';
+    }
+
+    // Additional optimizations
+    element.style.imageRendering = 'optimizeSpeed';
+    element.style.imageRendering = 'crisp-edges';
+  }
+
+  static disableForElement(element: HTMLElement): void {
+    element.style.willChange = 'auto';
+    element.style.transform = element.style.transform?.replace('translateZ(0)', '') || '';
+    element.style.backfaceVisibility = '';
+    element.style.perspective = '';
+    element.style.transformStyle = '';
+    element.style.imageRendering = '';
+  }
+
+  static isGPUAccelerated(element: HTMLElement): boolean {
+    const computedStyle = window.getComputedStyle(element);
+    return (
+      computedStyle.willChange !== 'auto' ||
+      computedStyle.transform.includes('translateZ') ||
+      computedStyle.backfaceVisibility === 'hidden'
+    );
+  }
 }
 
-// Performance monitoring hook
-export function usePerformanceMetrics() {
-  const [metrics, setMetrics] = useState<PerformanceMetrics>({
-    fps: 60,
-    memory: 0,
-    renderTime: 0,
-    paintTime: 0,
-    scriptTime: 0,
-    layoutTime: 0,
-    idleTime: 0,
+/**
+ * React Hook for Glass Performance Optimization
+ * Provides performance monitoring and optimization tools
+ */
+export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
+  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
+  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const schedulerRef = useRef<GlassAnimationScheduler | null>(null);
+  const configRef = useRef<OptimizationConfig>({
+    ...DEFAULT_PERFORMANCE_CONFIG,
+    ...config,
   });
 
-  const fpsMonitor = useRef(new FPSMonitor());
-  const memoryMonitor = useRef(new MemoryMonitor());
-
+  // Initialize scheduler
   useEffect(() => {
-    // Start FPS monitoring
-    fpsMonitor.current.start();
-    const unsubscribeFPS = fpsMonitor.current.subscribe(fps => {
-      setMetrics(prev => ({ ...prev, fps }));
-    });
-
-    // Start memory monitoring
-    memoryMonitor.current.start();
-    const unsubscribeMemory = memoryMonitor.current.subscribe(memory => {
-      setMetrics(prev => ({ ...prev, memory }));
-    });
-
-    // Monitor performance entries
-    const observer = new PerformanceObserver(list => {
-      const entries = list.getEntries();
-
-      entries.forEach(entry => {
-        if (entry.entryType === 'measure') {
-          const duration = entry.duration;
-
-          switch (entry.name) {
-            case 'render':
-              setMetrics(prev => ({ ...prev, renderTime: duration }));
-              break;
-            case 'paint':
-              setMetrics(prev => ({ ...prev, paintTime: duration }));
-              break;
-            case 'script':
-              setMetrics(prev => ({ ...prev, scriptTime: duration }));
-              break;
-            case 'layout':
-              setMetrics(prev => ({ ...prev, layoutTime: duration }));
-              break;
-          }
-        }
-      });
-    });
-
-    observer.observe({ entryTypes: ['measure', 'navigation'] });
+    schedulerRef.current = new GlassAnimationScheduler(configRef.current);
 
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      const currentFpsMonitor = fpsMonitor.current;
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      const currentMemoryMonitor = memoryMonitor.current;
-
-      if (currentFpsMonitor) {
-        currentFpsMonitor.stop();
-      }
-      if (currentMemoryMonitor) {
-        currentMemoryMonitor.stop();
-      }
-
-      unsubscribeFPS();
-      unsubscribeMemory();
-      observer.disconnect();
+      schedulerRef.current?.destroy();
+      schedulerRef.current = null;
     };
   }, []);
 
-  return metrics;
+  // Update metrics periodically
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (schedulerRef.current) {
+        const currentMetrics = schedulerRef.current.getMetrics();
+        const currentRecommendations = schedulerRef.current.getRecommendations();
+
+        setMetrics(currentMetrics);
+        setRecommendations(currentRecommendations);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const addAnimation = useCallback((
+    id: string,
+    element: HTMLElement,
+    callback: (timestamp: number) => void,
+    priority: number = 0
+  ) => {
+    if (!schedulerRef.current) return;
+
+    const task: AnimationTask = {
+      id,
+      element,
+      callback,
+      priority,
+      lastFrame: 0,
+      frameCount: 0,
+      isVisible: true,
+      boundingRect: element.getBoundingClientRect(),
+    };
+
+    schedulerRef.current.addTask(task);
+  }, []);
+
+  const removeAnimation = useCallback((id: string) => {
+    schedulerRef.current?.removeTask(id);
+  }, []);
+
+  const enableGPUAcceleration = useCallback((element: HTMLElement) => {
+    GPUAccelerationHelper.enableForElement(element);
+  }, []);
+
+  const disableGPUAcceleration = useCallback((element: HTMLElement) => {
+    GPUAccelerationHelper.disableForElement(element);
+  }, []);
+
+  const updateConfig = useCallback((newConfig: Partial<OptimizationConfig>) => {
+    configRef.current = { ...configRef.current, ...newConfig };
+    schedulerRef.current?.updateConfig(configRef.current);
+  }, []);
+
+  const setQuality = useCallback((quality: keyof typeof QUALITY_PRESETS) => {
+    const qualityConfig = QUALITY_PRESETS[quality];
+    updateConfig(qualityConfig);
+  }, [updateConfig]);
+
+  return {
+    metrics,
+    recommendations,
+    addAnimation,
+    removeAnimation,
+    enableGPUAcceleration,
+    disableGPUAcceleration,
+    updateConfig,
+    setQuality,
+    scheduler: schedulerRef.current,
+  };
 }
-
-// Export singleton instances
-export const globalFPSMonitor = new FPSMonitor();
-export const globalMemoryMonitor = new MemoryMonitor();
-export const globalAnimationThrottler = new AnimationThrottler();
-export const globalPerformanceBudget = new PerformanceBudget();
-
-// Set default performance budgets
-globalPerformanceBudget.setBudget(
-  'renderTime',
-  PERFORMANCE_THRESHOLDS.RENDER_BUDGET
-);
-globalPerformanceBudget.setBudget(
-  'interactionTime',
-  PERFORMANCE_THRESHOLDS.INTERACTION_BUDGET
-);
-globalPerformanceBudget.setBudget(
-  'animationTime',
-  PERFORMANCE_THRESHOLDS.ANIMATION_BUDGET
-);
-globalPerformanceBudget.setBudget(
-  'memory',
-  PERFORMANCE_THRESHOLDS.MEMORY_WARNING
-);

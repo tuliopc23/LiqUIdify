@@ -7,5 +7,7 @@ export {
 export type { 
   GlassLiveRegionProps, 
   AriaLivePriority, 
-  AriaRelevant 
+  AriaRelevant,
+  AnnouncementPriority,
+  AnnouncementContext
 } from './glass-live-region';

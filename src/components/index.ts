@@ -14,6 +14,17 @@ export {
   type LiquidGlassSvgFiltersProps,
 } from './liquid-glass-svg-filters';
 
+// Enhanced Apple Liquid Glass Components - Pixel-Perfect Multi-Layer System
+export {
+  EnhancedAppleLiquidGlass,
+  EnhancedAppleLiquidGlassCard,
+  EnhancedAppleLiquidGlassButton,
+  EnhancedAppleLiquidGlassNav,
+  EnhancedAppleLiquidGlassModal,
+  EnhancedAppleLiquidGlassShowcase,
+  type EnhancedAppleLiquidGlassProps,
+} from './enhanced-apple-liquid-glass';
+
 // Form Components
 export { GlassButton, type GlassButtonProps } from './glass-button/index';
 export { GlassInput, type GlassInputProps } from './glass-input/index';
@@ -130,6 +141,32 @@ export { GlassLoading, type GlassLoadingProps } from './glass-loading/index';
 export { GlassTooltip, type GlassTooltipProps } from './glass-tooltip/index';
 export { GlassPopover, type GlassPopoverProps } from './glass-popover/index';
 export { ToastProvider, useToast, type Toast } from './glass-toast/index';
+
+// Accessibility Components
+export {
+  GlassLiveRegion,
+  GlassLiveRegionProvider,
+  useAnnouncement,
+  announcer,
+  type GlassLiveRegionProps,
+  type AriaLivePriority,
+  type AriaRelevant,
+  type AnnouncementPriority,
+  type AnnouncementContext
+} from './glass-live-region/index';
+export { GlassFocusTrap, type GlassFocusTrapProps } from './glass-focus-trap/index';
+export {
+  GlassSkipNavigation,
+  useSkipNavigation,
+  type GlassSkipNavigationProps,
+  type SkipLink
+} from './glass-skip-navigation/index';
+
+// Performance Monitoring
+export {
+  GlassPerformanceDashboard,
+  type GlassPerformanceDashboardProps
+} from './glass-performance-dashboard/index';
 
 // Navigation Components
 export {

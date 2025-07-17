@@ -13,6 +13,56 @@
       "import": "./dist/index.mjs",
       "require": "./dist/cjs/index.cjs"
     },
+    "./core": {
+      "types": "./dist/types/bundles/core.d.ts",
+      "import": "./dist/core.mjs",
+      "require": "./dist/cjs/core.cjs"
+    },
+    "./animations": {
+      "types": "./dist/types/bundles/animations.d.ts",
+      "import": "./dist/animations.mjs",
+      "require": "./dist/cjs/animations.cjs"
+    },
+    "./advanced": {
+      "types": "./dist/types/bundles/advanced.d.ts",
+      "import": "./dist/advanced.mjs",
+      "require": "./dist/cjs/advanced.cjs"
+    },
+    "./forms": {
+      "types": "./dist/types/bundles/forms.d.ts",
+      "import": "./dist/forms.mjs",
+      "require": "./dist/cjs/forms.cjs"
+    },
+    "./layout": {
+      "types": "./dist/types/bundles/layout.d.ts",
+      "import": "./dist/layout.mjs",
+      "require": "./dist/cjs/layout.cjs"
+    },
+    "./accessibility": {
+      "types": "./dist/types/bundles/accessibility.d.ts",
+      "import": "./dist/accessibility.mjs",
+      "require": "./dist/cjs/accessibility.cjs"
+    },
+    "./feedback": {
+      "types": "./dist/types/bundles/feedback.d.ts",
+      "import": "./dist/feedback.mjs",
+      "require": "./dist/cjs/feedback.cjs"
+    },
+    "./navigation": {
+      "types": "./dist/types/bundles/navigation.d.ts",
+      "import": "./dist/navigation.mjs",
+      "require": "./dist/cjs/navigation.cjs"
+    },
+    "./physics": {
+      "types": "./dist/types/bundles/physics.d.ts",
+      "import": "./dist/physics.mjs",
+      "require": "./dist/cjs/physics.cjs"
+    },
+    "./ssr": {
+      "types": "./dist/types/bundles/ssr.d.ts",
+      "import": "./dist/ssr.mjs",
+      "require": "./dist/cjs/ssr.cjs"
+    },
     "./button": {
       "types": "./dist/types/components/glass-button/index.d.ts",
       "import": "./dist/components/button.mjs",
@@ -33,16 +83,6 @@
       "import": "./dist/components/modal.mjs",
       "require": "./dist/cjs/components/modal.cjs"
     },
-    "./tooltip": {
-      "types": "./dist/types/components/glass-tooltip/index.d.ts",
-      "import": "./dist/components/tooltip.mjs",
-      "require": "./dist/cjs/components/tooltip.cjs"
-    },
-    "./tabs": {
-      "types": "./dist/types/components/glass-tabs/index.d.ts",
-      "import": "./dist/components/tabs.mjs",
-      "require": "./dist/cjs/components/tabs.cjs"
-    },
     "./tokens": {
       "types": "./dist/types/tokens/index.d.ts",
       "import": "./dist/tokens.mjs",
@@ -50,13 +90,8 @@
     },
     "./context": {
       "types": "./dist/types/providers/index.d.ts",
-      "import": "./dist/providers/index.mjs",
-      "require": "./dist/cjs/providers/index.cjs"
-    },
-    "./documentation": {
-      "types": "./dist/types/documentation/index.d.ts",
-      "import": "./dist/documentation/index.mjs",
-      "require": "./dist/cjs/documentation/index.cjs"
+      "import": "./dist/providers.mjs",
+      "require": "./dist/cjs/providers.cjs"
     },
     "./styles": "./dist/liquidui.css",
     "./css": "./dist/liquidui.css",
@@ -65,11 +100,18 @@
   "scripts": {
     "build": "npm run clean && vite build && npm run build:css",
     "build:optimized": "npm run clean && vite build -c vite.config.optimized.ts && npm run build:css:split",
+    "build:modular": "npm run clean && vite build -c vite.config.modular.ts && npm run build:css:split",
+    "analyze:bundles": "node scripts/analyze-bundles.js",
+    "build:analyze": "npm run build:modular && npm run analyze:bundles",
     "build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
-    "build:css:split": "npm run build:css:core && npm run build:css:animations && npm run build:css:utilities",
-    "build:css:core": "postcss src/styles/glass-core.css -o dist/glass-core.css",
-    "build:css:animations": "postcss src/styles/glass-animations.css -o dist/glass-animations.css",
-    "build:css:utilities": "postcss src/styles/glass-utilities.css -o dist/glass-utilities.css",
+    "build:css:split": "npm run build:css:core && npm run build:css:animations && npm run build:css:utilities && npm run build:css:themes && npm run build:css:critical",
+    "build:css:core": "postcss src/styles/glass-core.css -o dist/css/glass-core.css -c postcss.config.optimized.js",
+    "build:css:animations": "postcss src/styles/glass-animations.css -o dist/css/glass-animations.css -c postcss.config.optimized.js",
+    "build:css:utilities": "postcss src/styles/glass-utilities.css -o dist/css/glass-utilities.css -c postcss.config.optimized.js",
+    "build:css:themes": "postcss src/styles/glass-themes.css -o dist/css/glass-themes.css -c postcss.config.optimized.js",
+    "build:css:critical": "postcss src/styles/glass-critical.css -o dist/css/glass-critical.css -c postcss.config.optimized.js",
+    "extract:critical": "node scripts/extract-critical-css.js",
+    "build:css:optimized": "npm run build:css:split && npm run extract:critical",
     "build:lite": "npm run clean && vite build -c vite.config.lite.ts",
     "build:watch": "vite build --watch",
     "clean": "rm -rf dist",
@@ -79,6 +121,9 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:a11y": "playwright test --grep \"accessibility\"",
+    "test:visual": "playwright test tests/visual/**/*.visual.spec.ts",
+    "test:visual:ci": "npm run test:visual",
+    "test:visual:update": "npm run test:visual -- --update-snapshots",
     "lint": "eslint src/**/*.{ts,tsx} --no-warn-ignored",
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix --no-warn-ignored",
     "lint:ci": "eslint src/**/*.{ts,tsx} --max-warnings 0 --no-warn-ignored",
@@ -91,7 +136,7 @@
     "size:analyze": "npm run build && npx source-map-explorer dist/**/*.js",
     "bundle:analyze": "npm run build && npx webpack-bundle-analyzer dist/stats.json",
     "optimize:deps": "node scripts/optimize-dependencies.js",
-    "optimize:css": "node scripts/extract-critical-css.js",
+    "optimize:css": "npm run build:css:optimized",
     "optimize:all": "npm run optimize:deps && npm run build:optimized && npm run optimize:css",
     "perf:test": "npm run build && node scripts/performance-test.js",
     "release": "semantic-release",
@@ -175,6 +220,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
+    "@percy/playwright": "^1.28.9",
     "@playwright/test": "^1.53.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",

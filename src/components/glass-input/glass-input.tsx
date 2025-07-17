@@ -14,9 +14,12 @@ import {
 } from '@/lib/glass-utils';
 import { Search, Eye, EyeOff, X } from 'lucide-react';
 
+// Type definitions for enhanced TypeScript support
+type ComponentVariant = 'default' | 'search' | 'password' | 'email';
+
 export interface GlassInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  variant?: 'default' | 'search' | 'password' | 'email';
+  variant?: ComponentVariant;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   clearable?: boolean;

@@ -2,13 +2,18 @@ import { forwardRef, useState, useRef, useCallback } from 'react';
 import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
 import { useMagneticHover, createGlassRipple } from '@/lib/glass-physics';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
-import { useGlassEffectPerformance } from '@/hooks/use-performance-monitor';
+import { usePerformanceMonitoring } from '@/hooks/use-performance-monitoring';
 import {
   useAppleLiquidGlass,
   getAppleLiquidGlassClass,
   createGlassLayers,
 } from '@/lib/apple-liquid-glass';
 import { Slot } from '@radix-ui/react-slot';
+import { ComponentSize } from '@/types/branded';
+
+// Type definitions for enhanced TypeScript support
+type GlassIntensity = 'subtle' | 'medium' | 'strong';
+type ComponentVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'destructive' | 'apple';
 
 /**
  * Props for the GlassButton component
@@ -17,14 +22,14 @@ export interface GlassButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Button variant style */
   variant?:
-    | 'primary'
-    | 'secondary'
-    | 'tertiary'
-    | 'ghost'
-    | 'destructive'
-    | 'apple';
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'ghost'
+  | 'destructive'
+  | 'apple';
   /** Button size */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: ComponentSize;
   /** Render as child component */
   asChild?: boolean;
   /** Icon to display on the left side */
@@ -34,7 +39,7 @@ export interface GlassButtonProps
   /** Show loading state */
   loading?: boolean;
   /** Apple liquid glass intensity (only for apple variant) */
-  intensity?: 'subtle' | 'medium' | 'strong';
+  intensity?: GlassIntensity;
   /** Enable magnetic hover effect (only for apple variant) */
   magnetic?: boolean;
   /** Enable multi-layer structure (only for apple variant) */
@@ -87,7 +92,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     const internalButtonRef = useRef<HTMLButtonElement | null>(null);
     const { magneticHover, specularHighlights } = useLiquidGlass();
     const { elementRef: magneticRef, transform } = useMagneticHover(0.3, 120);
-    const { measureGlassInteraction } = useGlassEffectPerformance('Button');
+    const { startTiming, endTiming } = usePerformanceMonitoring('GlassButton');
 
     // Apple liquid glass hook for apple variant
     const appleLiquidGlass = useAppleLiquidGlass({
@@ -136,7 +141,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     );
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      const endMeasure = measureGlassInteraction('click');
+      startTiming('click');
 
       if (internalButtonRef.current && !disabled && !loading) {
         const rect = internalButtonRef.current.getBoundingClientRect();
@@ -151,7 +156,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       }
 
       props.onClick?.(e);
-      endMeasure();
+      endTiming('click');
     };
 
     const baseClasses = cn(
@@ -164,8 +169,8 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       variant !== 'apple' && microInteraction.smooth,
       'disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none',
       variant !== 'apple' &&
-        specularHighlights &&
-        'liquid-glass-specular liquid-glass-shimmer',
+      specularHighlights &&
+      'liquid-glass-specular liquid-glass-shimmer',
       variant !== 'apple' && magneticHover && 'liquid-magnetic',
       isPressed && 'scale-[0.98] brightness-95',
       'rounded-xl' // Ensure consistent rounded corners
@@ -240,7 +245,6 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           className={cn(
             baseClasses,
             variantClasses[variant],
-            sizeClasses[size],
             className
           )}
           style={{

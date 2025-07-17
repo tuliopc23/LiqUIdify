@@ -5,14 +5,19 @@ import {
   getAppleLiquidGlassClass,
   createGlassLayers,
 } from '@/lib/apple-liquid-glass';
+import { ComponentSize } from '@/types/branded';
+
+// Type definitions for enhanced TypeScript support
+type ComponentVariant = 'default' | 'elevated' | 'outlined' | 'pressed' | 'apple';
+type GlassIntensity = 'subtle' | 'medium' | 'strong';
 
 export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'elevated' | 'outlined' | 'pressed' | 'apple';
+  variant?: ComponentVariant;
   hover?: boolean;
   bordered?: boolean;
-  padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  padding?: ComponentSize;
   magnetic?: boolean;
-  intensity?: 'subtle' | 'medium' | 'strong';
+  intensity?: GlassIntensity;
   multiLayer?: boolean;
   animated?: boolean;
 }
@@ -58,7 +63,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     };
 
     const paddingClasses = {
-      none: '',
+      xs: 'p-2',
       sm: 'p-3',
       md: 'p-6',
       lg: 'p-8',

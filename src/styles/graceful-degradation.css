@@ -1,0 +1,401 @@
+/**
+ * Graceful Degradation CSS Fallbacks
+ * Provides CSS-only fallbacks for when JavaScript features fail
+ */
+
+/* Base fallback styles */
+.graceful-fallback {
+  /* Ensure basic functionality without JavaScript */
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Animation fallbacks */
+.graceful-fallback--reduced-motion,
+.graceful-fallback--feature-fallback.animations,
+.graceful-fallback--network-fallback.animations {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* WebGL/Canvas fallbacks */
+.graceful-fallback--webgl-fallback {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.graceful-fallback--webgl-fallback::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+}
+
+/* High contrast mode */
+.graceful-fallback--high-contrast {
+  --primary-color: #000;
+  --secondary-color: #fff;
+  --border-color: #000;
+  --text-color: #000;
+  --background-color: #fff;
+}
+
+.graceful-fallback--high-contrast * {
+  color: var(--text-color) !important;
+  background-color: var(--background-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Reduced data mode */
+.graceful-fallback--reduced-data {
+  --image-quality: 0.5;
+  --animation-duration: 0s;
+  --transition-duration: 0s;
+}
+
+.graceful-fallback--reduced-data img {
+  filter: grayscale(0.5) blur(0.5px);
+}
+
+/* Network fallback indicators */
+.graceful-fallback--network-fallback {
+  position: relative;
+}
+
+.graceful-fallback--network-fallback::after {
+  content: '⚠️ Offline Mode';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 193, 7, 0.9);
+  color: #000;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  z-index: 1000;
+}
+
+/* Static fallback for interactive components */
+.graceful-static-fallback {
+  display: block;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #f5f5f5;
+  text-align: center;
+  color: #666;
+}
+
+.graceful-static-fallback::before {
+  content: '⚡ Static Mode: ';
+  font-weight: bold;
+}
+
+/* Progressive enhancement fallbacks */
+.progressive-enhancement {
+  /* Base styles for all browsers */
+  display: block;
+  padding: 1rem;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+}
+
+/* Enhanced styles for modern browsers */
+@supports (display: grid) {
+  .progressive-enhancement {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@supports (backdrop-filter: blur(10px)) {
+  .progressive-enhancement {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* CSS-only hover effects for when JS fails */
+.css-hover-fallback:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* CSS-only accordion for when JS fails */
+.css-accordion-fallback {
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.css-accordion-fallback input[type="checkbox"] {
+  display: none;
+}
+
+.css-accordion-fallback label {
+  display: block;
+  padding: 1rem;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.css-accordion-fallback .content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 1rem;
+}
+
+.css-accordion-fallback input[type="checkbox"]:checked + label + .content {
+  max-height: 1000px;
+  padding: 1rem;
+}
+
+/* CSS-only tabs for when JS fails */
+.css-tabs-fallback {
+  display: flex;
+  flex-direction: column;
+}
+
+.css-tabs-fallback .tab-list {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+
+.css-tabs-fallback .tab-trigger {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.css-tabs-fallback .tab-trigger:hover {
+  background: #f5f5f5;
+}
+
+.css-tabs-fallback .tab-content {
+  display: none;
+  padding: 1rem;
+}
+
+.css-tabs-fallback .tab-content:target {
+  display: block;
+}
+
+/* CSS-only modal for when JS fails */
+.css-modal-fallback {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.css-modal-fallback:target {
+  display: flex;
+}
+
+.css-modal-fallback .modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* CSS-only carousel for when JS fails */
+.css-carousel-fallback {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.css-carousel-fallback .slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  padding: 1rem;
+}
+
+/* CSS-only dropdown for when JS fails */
+.css-dropdown-fallback {
+  position: relative;
+  display: inline-block;
+}
+
+.css-dropdown-fallback .dropdown-trigger {
+  padding: 0.5rem 1rem;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.css-dropdown-fallback .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  min-width: 160px;
+  z-index: 1000;
+}
+
+.css-dropdown-fallback:hover .dropdown-content {
+  display: block;
+}
+
+/* CSS-only tooltip for when JS fails */
+.css-tooltip-fallback {
+  position: relative;
+  cursor: help;
+}
+
+.css-tooltip-fallback::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.css-tooltip-fallback:hover::after {
+  opacity: 1;
+}
+
+/* CSS-only loading states */
+.css-loading-fallback {
+  position: relative;
+  overflow: hidden;
+}
+
+.css-loading-fallback::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* CSS-only skeleton screens */
+.css-skeleton-fallback {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 0.25rem;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Print styles for graceful degradation */
+@media print {
+  .graceful-fallback {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .graceful-fallback--network-fallback::after {
+    display: none;
+  }
+}
+
+/* Reduced motion media query */
+@media (prefers-reduced-motion: reduce) {
+  .graceful-fallback,
+  .css-loading-fallback::before,
+  .css-skeleton-fallback {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .graceful-fallback {
+    border: 2px solid currentColor !important;
+  }
+  
+  .graceful-static-fallback {
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .graceful-static-fallback {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #e0e0e0;
+  }
+  
+  .css-loading-fallback::before {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+  }
+  
+  .css-skeleton-fallback {
+    background: linear-gradient(
+      90deg,
+      #2a2a2a 25%,
+      #3a3a3a 50%,
+      #2a2a2a 75%
+    );
+  }
+}
