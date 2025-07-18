@@ -122,10 +122,8 @@ export function withPerformanceMonitoring<P extends object>(
     useEffect(() => {
       if (!monitor) return;
 
-      const startTime = performance.now();
 
       return () => {
-        const endTime = performance.now();
         monitor.measureComponentRender(displayName, () => { });
       };
     });

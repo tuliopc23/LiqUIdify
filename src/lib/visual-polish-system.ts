@@ -342,7 +342,7 @@ export class VisualPolishManager {
                 break;
             case 'active':
                 element.addEventListener('mousedown', handleInteraction);
-                element.addEventListener('mouseup', (e) => {
+                element.addEventListener('mouseup', () => {
                     const animation = (element as any)._polishAnimation;
                     if (animation) {
                         animation.reverse();

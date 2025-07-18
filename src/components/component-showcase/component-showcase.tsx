@@ -11,6 +11,7 @@ import { GlassPopover } from '../glass-popover';
 import { GlassDropdown } from '../glass-dropdown';
 import { GlassAvatar } from '../glass-avatar';
 import { useToast } from '../glass-toast';
+import { ComponentSize } from '@/types/branded';
 import {
   GlassCard,
   GlassCardHeader,
@@ -228,13 +229,13 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
               </h3>
               <div className="component-preview rounded-lg p-6 mb-4">
                 <div className="flex flex-wrap gap-4 items-center">
-                  <GlassButton variant="primary" size="sm">
+                  <GlassButton variant="primary" size={ComponentSize('sm')}>
                     Small
                   </GlassButton>
-                  <GlassButton variant="primary" size="md">
+                  <GlassButton variant="primary" size={ComponentSize('md')}>
                     Medium
                   </GlassButton>
-                  <GlassButton variant="primary" size="lg">
+                  <GlassButton variant="primary" size={ComponentSize('lg')}>
                     Large
                   </GlassButton>
                 </div>
@@ -346,7 +347,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                       </GlassCardDescription>
                     </GlassCardHeader>
                     <GlassCardFooter>
-                      <GlassButton size="sm">Learn More</GlassButton>
+                      <GlassButton size={ComponentSize('sm')}>Learn More</GlassButton>
                     </GlassCardFooter>
                   </GlassCard>
 
@@ -797,10 +798,10 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <GlassButton size="sm" variant="primary">
+                          <GlassButton size={ComponentSize('sm')} variant="primary">
                             Follow
                           </GlassButton>
-                          <GlassButton size="sm" variant="secondary">
+                          <GlassButton size={ComponentSize('sm')} variant="secondary">
                             Message
                           </GlassButton>
                         </div>
@@ -985,10 +986,10 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                   </div>
 
                   <div className="flex gap-4">
-                    <GlassButton variant="primary" size="lg">
+                    <GlassButton variant="primary" size={ComponentSize('lg')}>
                       Create Account
                     </GlassButton>
-                    <GlassButton variant="secondary" size="lg">
+                    <GlassButton variant="secondary" size={ComponentSize('lg')}>
                       Cancel
                     </GlassButton>
                   </div>

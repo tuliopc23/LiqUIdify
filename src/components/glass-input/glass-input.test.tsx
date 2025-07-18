@@ -273,7 +273,7 @@ describe('GlassInput', () => {
     expect(input).toHaveAttribute('aria-describedby');
     
     const describedById = input.getAttribute('aria-describedby');
-    const helperText = document.getElementById(describedById!);
+    const helperText = describedById ? document.getElementById(describedById) : null;
     expect(helperText).toHaveTextContent('Error message');
   });
 

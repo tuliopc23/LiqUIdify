@@ -1,8 +1,13 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+/**
+ * SSR-Safe Hooks for Glass UI
+ * Provides hooks for safely handling client-side functionality in SSR environments
+ */
+
+import { useState, useEffect, useRef } from 'react';
+import { ssrSafetyManager } from '@/core/error-recovery';
 
 /**
- * Hook that returns true when running on the client (browser)
- * and false during SSR/SSG
+ * Hook to safely check if code is running on client side
  */
 export function useIsClient(): boolean {
   const [isClient, setIsClient] = useState(false);
@@ -15,137 +20,200 @@ export function useIsClient(): boolean {
 }
 
 /**
- * SSR-safe window object access
+ * Hook to safely access window object in SSR environments
  */
-export function useSSRSafeWindow() {
+export function useSSRSafeWindow<T = Window>(
+  selector: (window: Window) => T,
+  fallback: T
+): T {
   const isClient = useIsClient();
-  
-  return {
-    window: isClient ? window : undefined,
-    document: isClient ? document : undefined,
-    navigator: isClient ? navigator : undefined,
-    location: isClient ? location : undefined,
-  };
-}
+  const [value, setValue] = useState<T>(fallback);
 
-/**
- * Hook for SSR-safe localStorage access
- */
-export function useLocalStorage<T>(
-  key: string,
-  initialValue: T,
-  options?: {
-    serialize?: (value: T) => string;
-    deserialize?: (value: string) => T;
-  }
-): [T, (value: T | ((prev: T) => T)) => void, () => void] {
-  const isClient = useIsClient();
-  
-  const serialize = options?.serialize || JSON.stringify;
-  const deserialize = options?.deserialize || JSON.parse;
-
-  // State to store our value
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    if (!isClient) return initialValue;
-    
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? deserialize(item) : initialValue;
-    } catch (error) {
-      console.error(`Error reading localStorage key "${key}":`, error);
-      return initialValue;
-    }
-  });
-
-  // Return a wrapped version of useState's setter function that persists the new value to localStorage
-  const setValue = useCallback(
-    (value: T | ((prev: T) => T)) => {
+  useEffect(() => {
+    if (isClient && typeof window !== 'undefined') {
       try {
-        // Allow value to be a function so we have the same API as useState
-        const valueToStore = value instanceof Function ? value(storedValue) : value;
-        
-        setStoredValue(valueToStore);
-        
-        if (isClient) {
-          window.localStorage.setItem(key, serialize(valueToStore));
-        }
+        setValue(selector(window));
       } catch (error) {
-        console.error(`Error setting localStorage key "${key}":`, error);
+        console.warn('Error accessing window property:', error);
       }
-    },
-    [isClient, key, serialize, storedValue]
-  );
-
-  // Remove value from localStorage
-  const removeValue = useCallback(() => {
-    try {
-      setStoredValue(initialValue);
-      if (isClient) {
-        window.localStorage.removeItem(key);
-      }
-    } catch (error) {
-      console.error(`Error removing localStorage key "${key}":`, error);
     }
-  }, [isClient, key, initialValue]);
+  }, [isClient, selector]);
 
-  return [storedValue, setValue, removeValue];
+  return value;
 }
 
 /**
- * Hook for SSR-safe sessionStorage access
+ * Hook to safely access document object in SSR environments
  */
-export function useSessionStorage<T>(
+export function useSSRSafeDocument<T = Document>(
+  selector: (document: Document) => T,
+  fallback: T
+): T {
+  const isClient = useIsClient();
+  const [value, setValue] = useState<T>(fallback);
+
+  useEffect(() => {
+    if (isClient && typeof document !== 'undefined') {
+      try {
+        setValue(selector(document));
+      } catch (error) {
+        console.warn('Error accessing document property:', error);
+      }
+    }
+  }, [isClient, selector]);
+
+  return value;
+}
+
+/**
+ * Hook to safely access navigator object in SSR environments
+ */
+export function useSSRSafeNavigator<T = Navigator>(
+  selector: (navigator: Navigator) => T,
+  fallback: T
+): T {
+  const isClient = useIsClient();
+  const [value, setValue] = useState<T>(fallback);
+
+  useEffect(() => {
+    if (isClient && typeof navigator !== 'undefined') {
+      try {
+        setValue(selector(navigator));
+      } catch (error) {
+        console.warn('Error accessing navigator property:', error);
+      }
+    }
+  }, [isClient, selector]);
+
+  return value;
+}
+
+/**
+ * Hook to safely use localStorage in SSR environments
+ */
+export function useSSRSafeLocalStorage<T>(
   key: string,
   initialValue: T
-): [T, (value: T | ((prev: T) => T)) => void, () => void] {
+): [T, (value: T) => void] {
   const isClient = useIsClient();
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
 
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    if (!isClient) return initialValue;
-    
-    try {
-      const item = window.sessionStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.error(`Error reading sessionStorage key "${key}":`, error);
-      return initialValue;
-    }
-  });
-
-  const setValue = useCallback(
-    (value: T | ((prev: T) => T)) => {
+  // Initialize from localStorage if available
+  useEffect(() => {
+    if (isClient && typeof window !== 'undefined') {
       try {
-        const valueToStore = value instanceof Function ? value(storedValue) : value;
-        setStoredValue(valueToStore);
-        
-        if (isClient) {
-          window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
+        const item = localStorage.getItem(key);
+        if (item) {
+          setStoredValue(JSON.parse(item));
         }
       } catch (error) {
-        console.error(`Error setting sessionStorage key "${key}":`, error);
+        console.warn(`Error reading localStorage key "${key}":`, error);
       }
-    },
-    [isClient, key, storedValue]
-  );
+    }
+  }, [isClient, key]);
 
-  const removeValue = useCallback(() => {
+  // Return a wrapped version of useState's setter function that persists the new value to localStorage
+  const setValue = (value: T) => {
     try {
-      setStoredValue(initialValue);
-      if (isClient) {
-        window.sessionStorage.removeItem(key);
+      // Save state
+      setStoredValue(value);
+
+      // Save to localStorage if client-side
+      if (isClient && typeof window !== 'undefined') {
+        localStorage.setItem(key, JSON.stringify(value));
       }
     } catch (error) {
-      console.error(`Error removing sessionStorage key "${key}":`, error);
+      console.warn(`Error setting localStorage key "${key}":`, error);
     }
-  }, [isClient, key, initialValue]);
+  };
 
-  return [storedValue, setValue, removeValue];
+  return [storedValue, setValue];
 }
 
 /**
- * Hook for SSR-safe media query matching
+ * Hook to safely use sessionStorage in SSR environments
  */
-export function useMediaQuery(query: string): boolean {
+export function useSSRSafeSessionStorage<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T) => void] {
+  const isClient = useIsClient();
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
+
+  // Initialize from sessionStorage if available
+  useEffect(() => {
+    if (isClient && typeof window !== 'undefined') {
+      try {
+        const item = sessionStorage.getItem(key);
+        if (item) {
+          setStoredValue(JSON.parse(item));
+        }
+      } catch (error) {
+        console.warn(`Error reading sessionStorage key "${key}":`, error);
+      }
+    }
+  }, [isClient, key]);
+
+  // Return a wrapped version of useState's setter function that persists the new value to sessionStorage
+  const setValue = (value: T) => {
+    try {
+      // Save state
+      setStoredValue(value);
+
+      // Save to sessionStorage if client-side
+      if (isClient && typeof window !== 'undefined') {
+        sessionStorage.setItem(key, JSON.stringify(value));
+      }
+    } catch (error) {
+      console.warn(`Error setting sessionStorage key "${key}":`, error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
+
+/**
+ * Hook to safely handle hydration mismatches
+ */
+export function useHydrationSafe<T>(
+  clientValue: T,
+  serverValue: T,
+  options: { delay?: number; onMismatch?: (client: T, server: T) => void } = {}
+): T {
+  const { delay = 0, onMismatch } = options;
+  const [value, setValue] = useState<T>(serverValue);
+  const isClient = useIsClient();
+  const componentName = useRef(`hydration-${Math.random().toString(36).substring(2, 9)}`).current;
+
+  useEffect(() => {
+    if (isClient) {
+      // Check for hydration mismatch
+      const mismatch = ssrSafetyManager.detectHydrationMismatch(
+        componentName,
+        serverValue,
+        clientValue
+      );
+
+      if (mismatch && onMismatch) {
+        onMismatch(clientValue, serverValue);
+      }
+
+      // Switch to client value after delay
+      const timer = setTimeout(() => {
+        setValue(clientValue);
+      }, delay);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isClient, clientValue, serverValue, delay, onMismatch, componentName]);
+
+  return value;
+}
+
+/**
+ * Hook to safely handle media queries in SSR environments
+ */
+export function useSSRSafeMediaQuery(query: string): boolean {
   const isClient = useIsClient();
   const [matches, setMatches] = useState(false);
 
@@ -155,112 +223,268 @@ export function useMediaQuery(query: string): boolean {
     const mediaQuery = window.matchMedia(query);
     setMatches(mediaQuery.matches);
 
-    const handleChange = (event: MediaQueryListEvent) => {
+    const handler = (event: MediaQueryListEvent) => {
       setMatches(event.matches);
     };
 
-    // Use addEventListener for modern browsers
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
-    } else {
-      // Fallback for older browsers
-      mediaQuery.addListener(handleChange);
-      return () => mediaQuery.removeListener(handleChange);
-    }
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
   }, [isClient, query]);
 
   return matches;
 }
 
 /**
- * Hook for SSR-safe viewport dimensions
+ * Hook to safely handle network status in SSR environments
  */
-export function useViewport() {
+export function useNetworkStatus(): {
+  online: boolean;
+  effectiveType?: 'slow-2g' | '2g' | '3g' | '4g';
+  saveData?: boolean;
+} {
   const isClient = useIsClient();
-  const [viewport, setViewport] = useState({
-    width: 0,
-    height: 0,
-  });
+  const [online, setOnline] = useState(true);
+  const [effectiveType, setEffectiveType] = useState<'slow-2g' | '2g' | '3g' | '4g' | undefined>(undefined);
+  const [saveData, setSaveData] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     if (!isClient) return;
 
-    const handleResize = () => {
-      setViewport({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
+    // Update online status
+    setOnline(navigator.onLine);
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const handleOnline = () => setOnline(true);
+    const handleOffline = () => setOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Update connection info if available
+    if ('connection' in navigator) {
+      const connection = (navigator as any).connection;
+
+      if (connection) {
+        setEffectiveType(connection.effectiveType);
+        setSaveData(connection.saveData);
+
+        const handleConnectionChange = () => {
+          setEffectiveType(connection.effectiveType);
+          setSaveData(connection.saveData);
+        };
+
+        connection.addEventListener('change', handleConnectionChange);
+        return () => {
+          connection.removeEventListener('change', handleConnectionChange);
+          window.removeEventListener('online', handleOnline);
+          window.removeEventListener('offline', handleOffline);
+        };
+      }
+    }
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
   }, [isClient]);
 
-  return viewport;
+  return { online, effectiveType, saveData };
 }
 
 /**
- * Hook for SSR-safe animation frame
+ * Hook to safely handle animations in SSR environments
  */
-export function useAnimationFrame(callback: (deltaTime: number) => void) {
-  const requestRef = useRef<number | undefined>(undefined);
-  const previousTimeRef = useRef<number | undefined>(undefined);
+export function useSSRSafeAnimation(
+  animationFn: () => void,
+  options: { delay?: number; disabled?: boolean } = {}
+): void {
+  const { delay = 0, disabled = false } = options;
   const isClient = useIsClient();
 
-  const animate = useCallback(
-    (time: number) => {
-      if (previousTimeRef.current !== undefined) {
-        const deltaTime = time - previousTimeRef.current;
-        callback(deltaTime);
+  useEffect(() => {
+    if (!isClient || disabled) return;
+
+    let animationFrame: number;
+    const timer = setTimeout(() => {
+      animationFrame = requestAnimationFrame(() => {
+        animationFn();
+      });
+    }, delay);
+
+    return () => {
+      clearTimeout(timer);
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
       }
-      previousTimeRef.current = time;
-      requestRef.current = requestAnimationFrame(animate);
-    },
-    [callback]
-  );
+    };
+  }, [isClient, animationFn, delay, disabled]);
+}
+
+/**
+ * Hook to safely handle intersection observer in SSR environments
+ */
+export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
+  options: IntersectionObserverInit = {},
+  callback?: (entry: IntersectionObserverEntry) => void
+): [(node: T | null) => void, boolean, IntersectionObserverEntry | null] {
+  const isClient = useIsClient();
+  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const ref = useRef<T | null>(null);
+
+  const setRef = (node: T | null) => {
+    if (ref.current) {
+      observer.current?.unobserve(ref.current);
+    }
+
+    ref.current = node;
+
+    if (node && observer.current) {
+      observer.current.observe(node);
+    }
+  };
 
   useEffect(() => {
     if (!isClient) return;
-    
-    requestRef.current = requestAnimationFrame(animate);
+
+    observer.current = new IntersectionObserver(([entry]) => {
+      if (entry) {
+        setEntry(entry);
+        setIsIntersecting(entry.isIntersecting);
+        if (callback) callback(entry);
+      }
+    }, options);
+
+    if (ref.current) {
+      observer.current.observe(ref.current);
+    }
+
     return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
+      if (observer.current) {
+        observer.current.disconnect();
       }
     };
-  }, [animate, isClient]);
+  }, [isClient, callback, options.root, options.rootMargin, options.threshold]);
+
+  return [setRef, isIntersecting, entry];
 }
 
 /**
- * Utility to check if code is running on server
+ * Hook to safely handle resize observer in SSR environments
  */
-export const isServer = typeof window === 'undefined';
+export function useSSRSafeResizeObserver<T extends HTMLElement>(
+  callback?: (entry: ResizeObserverEntry) => void
+): [(node: T | null) => void, DOMRectReadOnly | undefined] {
+  const isClient = useIsClient();
+  const [size, setSize] = useState<DOMRectReadOnly>();
+  const observer = useRef<ResizeObserver | null>(null);
+  const ref = useRef<T | null>(null);
+
+  const setRef = (node: T | null) => {
+    if (ref.current) {
+      observer.current?.unobserve(ref.current);
+    }
+
+    ref.current = node;
+
+    if (node && observer.current) {
+      observer.current.observe(node);
+    }
+  };
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    observer.current = new ResizeObserver(([entry]) => {
+      if (entry) {
+        setSize(entry.contentRect);
+        if (callback) callback(entry);
+      }
+    });
+
+    if (ref.current) {
+      observer.current.observe(ref.current);
+    }
+
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, [isClient, callback]);
+
+  return [setRef, size];
+}
 
 /**
- * Utility to check if code is running on client
+ * Hook to safely handle document visibility in SSR environments
  */
-export const isClient = !isServer;
+export function useSSRSafeDocumentVisibility(): 'visible' | 'hidden' | 'prerender' {
+  const isClient = useIsClient();
+  const [visibility, setVisibility] = useState<'visible' | 'hidden' | 'prerender'>('visible');
+
+  useEffect(() => {
+    if (!isClient) return;
+
+    const handleVisibilityChange = () => {
+      setVisibility(document.visibilityState as 'visible' | 'hidden' | 'prerender');
+    };
+
+    handleVisibilityChange();
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [isClient]);
+
+  return visibility;
+}
 
 /**
- * Safe window access utility
+ * Hook to safely handle browser features detection in SSR environments
  */
-export const safeWindow = isClient ? window : undefined;
+export function useSSRSafeFeatureDetection(feature: string): boolean {
+  const isClient = useIsClient();
+  const [supported, setSupported] = useState(false);
 
-/**
- * Safe document access utility
- */
-export const safeDocument = isClient ? document : undefined;
+  useEffect(() => {
+    if (!isClient) return;
 
-/**
- * SSR-safe requestAnimationFrame
- */
-export const safeRequestAnimationFrame = 
-  safeWindow?.requestAnimationFrame || ((cb: FrameRequestCallback) => setTimeout(cb, 16));
+    // Check for feature support
+    let isSupported = false;
 
-/**
- * SSR-safe cancelAnimationFrame
- */
-export const safeCancelAnimationFrame = 
-  safeWindow?.cancelAnimationFrame || clearTimeout;
+    switch (feature) {
+      case 'css-backdrop-filter':
+        isSupported = CSS.supports('backdrop-filter', 'blur(1px)');
+        break;
+      case 'css-grid':
+        isSupported = CSS.supports('display', 'grid');
+        break;
+      case 'intersection-observer':
+        isSupported = 'IntersectionObserver' in window;
+        break;
+      case 'resize-observer':
+        isSupported = 'ResizeObserver' in window;
+        break;
+      case 'web-animations':
+        isSupported = 'animate' in document.createElement('div');
+        break;
+      case 'local-storage':
+        try {
+          localStorage.setItem('test', 'test');
+          localStorage.removeItem('test');
+          isSupported = true;
+        } catch {
+          isSupported = false;
+        }
+        break;
+      default:
+        isSupported = false;
+    }
+
+    setSupported(isSupported);
+  }, [isClient, feature]);
+
+  return supported;
+}

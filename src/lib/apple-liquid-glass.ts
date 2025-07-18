@@ -99,23 +99,26 @@ export function useAppleLiquidGlass(options: AppleLiquidGlassOptions = {}) {
 
       // Use startTransition for smooth animations
       startTransition(() => {
-        const rect = elementRef.current!.getBoundingClientRect();
+        const element = elementRef.current;
+        if (!element) return;
+        
+        const rect = element.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
         const deltaX = (e.clientX - centerX) * magneticStrength;
         const deltaY = (e.clientY - centerY) * magneticStrength;
 
-        elementRef.current!.style.transform = `translate(${deltaX}px, ${deltaY}px) translateZ(0)`;
+        element.style.transform = `translate(${deltaX}px, ${deltaY}px) translateZ(0)`;
 
         if (liquidFlow && multiLayer) {
           // Enhanced liquid flow for multi-layer structure
-          const glassFilter = elementRef.current!.querySelector(
+          const glassFilter = element.querySelector(
             '.glass-filter'
-          ) as HTMLElement;
-          const glassOverlay = elementRef.current!.querySelector(
+          ) as HTMLElement | null;
+          const glassOverlay = element.querySelector(
             '.glass-overlay'
-          ) as HTMLElement;
+          ) as HTMLElement | null;
 
           if (glassFilter) {
             glassFilter.style.transform = `translate(${-deltaX * 0.2}px, ${-deltaY * 0.2}px)`;
@@ -134,17 +137,20 @@ export function useAppleLiquidGlass(options: AppleLiquidGlassOptions = {}) {
     if (!elementRef.current) return;
 
     startTransition(() => {
-      elementRef.current!.style.transform = 'translate(0px, 0px) translateZ(0)';
-      elementRef.current!.style.transition =
+      const element = elementRef.current;
+      if (!element) return;
+      
+      element.style.transform = 'translate(0px, 0px) translateZ(0)';
+      element.style.transition =
         'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
 
       if (multiLayer) {
-        const glassFilter = elementRef.current!.querySelector(
+        const glassFilter = element.querySelector(
           '.glass-filter'
-        ) as HTMLElement;
-        const glassOverlay = elementRef.current!.querySelector(
+        ) as HTMLElement | null;
+        const glassOverlay = element.querySelector(
           '.glass-overlay'
-        ) as HTMLElement;
+        ) as HTMLElement | null;
 
         if (glassFilter) {
           glassFilter.style.transform = 'translate(0px, 0px)';

@@ -249,8 +249,8 @@ const testUtilities = {
 
 // Accessibility check functions
 export function expectAccessible(
-  element: HTMLElement,
-  componentName: string,
+  _element: HTMLElement,
+  _componentName: string,
   minScore: number = 90
 ) {
   const score = 95; // Mock score for now
@@ -258,8 +258,8 @@ export function expectAccessible(
 }
 
 export function runAccessibilityCheck(
-  element: HTMLElement,
-  componentName: string
+  _element: HTMLElement,
+  _componentName: string
 ) {
   return {
     passed: true,

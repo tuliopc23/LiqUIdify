@@ -108,7 +108,7 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
   style,
   loading = 'lazy',
 }) => {
-  const { shouldUseFallback, networkStatus, performanceLevel } = useDegradationAware();
+  const { networkStatus, performanceLevel } = useDegradationAware();
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -271,7 +271,7 @@ export interface GracefulInteractiveProps {
 
 export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
   children,
-  fallback,
+  fallback: _fallback,
   staticFallback,
   className = '',
   onInteraction,

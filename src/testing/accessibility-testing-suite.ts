@@ -363,7 +363,7 @@ export class AccessibilityTestingSuite {
    */
   private calculateAccessibilityScore(
     violations: AccessibilityTestResult[],
-    passes: AccessibilityTestResult[]
+    _passes: AccessibilityTestResult[]
   ): number {
     const baseScore = 100;
     let deductions = 0;
@@ -470,7 +470,6 @@ export class AccessibilityTestingSuite {
     components?: string[];
     onViolation?: (violation: AccessibilityTestResult) => void;
   } = {}): () => void {
-    const interval = options.interval || 30000; // 30 seconds
     
     // In a real implementation, this would use setInterval
     // For now, return a no-op cleanup function

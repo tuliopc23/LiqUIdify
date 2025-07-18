@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, type ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 
 export interface GlobalConfig {
   defaultVariant?: 'default' | 'glass' | 'frosted' | 'liquid';

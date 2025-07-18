@@ -23,8 +23,17 @@ export function createLazyComponent<T extends ComponentType<any>>(
 }
 
 // Pre-configured lazy components for heavy components
-export const LazyGlassChart = createLazyComponent(
-  () => import('../glass-chart').then(m => ({ default: m.GlassChart }))
+// Note: GlassChart exports multiple chart components, not a single GlassChart
+export const LazyLineChart = createLazyComponent(
+  () => import('../glass-chart').then(m => ({ default: m.LineChart }))
+);
+
+export const LazyBarChart = createLazyComponent(
+  () => import('../glass-chart').then(m => ({ default: m.BarChart }))
+);
+
+export const LazyDonutChart = createLazyComponent(
+  () => import('../glass-chart').then(m => ({ default: m.DonutChart }))
 );
 
 export const LazyGlassDatePicker = createLazyComponent(
@@ -35,8 +44,8 @@ export const LazyGlassFileUpload = createLazyComponent(
   () => import('../glass-file-upload').then(m => ({ default: m.GlassFileUpload }))
 );
 
-export const LazyGlassCommand = createLazyComponent(
-  () => import('../glass-command').then(m => ({ default: m.GlassCommand }))
+export const LazyCommandPalette = createLazyComponent(
+  () => import('../glass-command').then(m => ({ default: m.CommandPalette }))
 );
 
 export const LazyGlassCombobox = createLazyComponent(

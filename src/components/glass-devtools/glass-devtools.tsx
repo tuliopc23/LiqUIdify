@@ -3,12 +3,11 @@
  * Provides runtime debugging, accessibility validation, and performance monitoring
  */
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { cn } from '@/lib/glass-utils';
 import { accessibilityManager, type AccessibilityReport } from '@/core/accessibility-manager';
 import { performanceMonitor, type PerformanceReport } from '@/core/performance-monitor';
 import { cssBundleAnalyzer } from '@/core/css-optimization';
-import { ssrSafetyManager } from '@/core/error-recovery';
 
 // DevTools interfaces
 export interface ComponentInspection {
@@ -188,7 +187,7 @@ export function GlassDevTools({
     position = 'bottom',
     theme = 'auto'
 }: GlassDevToolsProps) {
-    const { state, setState, addLog, inspectElement } = useGlassDevTools();
+    const { state, setState, inspectElement } = useGlassDevTools();
     const [performanceReport, setPerformanceReport] = useState<PerformanceReport | null>(null);
     const [cssReport, setCssReport] = useState<any>(null);
     const overlayRef = useRef<HTMLDivElement>(null);

@@ -1,5 +1,3 @@
-import React from 'react';
-import { cn } from '../../lib/glass-utils';
 
 export function GlassShowcase() {
   return (

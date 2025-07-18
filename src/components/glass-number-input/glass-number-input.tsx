@@ -7,8 +7,6 @@ import React, {
 } from 'react';
 import {
   cn,
-  getGlassClass,
-  microInteraction,
   focusRing,
 } from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';

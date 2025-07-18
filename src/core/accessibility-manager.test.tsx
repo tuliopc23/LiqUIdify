@@ -27,6 +27,7 @@ describe('AccessibilityManager', () => {
         <button aria-label="Test button">Click me</button>
       );
       const element = container.firstChild as HTMLElement;
+      expect(element).toBeTruthy();
 
       const report = await manager.validateComponent(element);
 
@@ -42,6 +43,7 @@ describe('AccessibilityManager', () => {
     it('should cache validation results', async () => {
       const { container } = render(<div role="main">Content</div>);
       const element = container.firstChild as HTMLElement;
+      expect(element).toBeTruthy();
 
       const report1 = await manager.validateComponent(element);
       const report2 = await manager.validateComponent(element);
@@ -85,6 +87,7 @@ describe('AccessibilityManager', () => {
         </button>
       );
       const element = container.firstChild as HTMLElement;
+      expect(element).toBeTruthy();
 
       const validation = manager.validateARIA(element);
 
@@ -99,6 +102,7 @@ describe('AccessibilityManager', () => {
         </button>
       );
       const element = container.firstChild as HTMLElement;
+      expect(element).toBeTruthy();
 
       const validation = manager.validateARIA(element);
 
@@ -111,6 +115,7 @@ describe('AccessibilityManager', () => {
         <button aria-expanded="yes">Toggle</button>
       );
       const element = container.firstChild as HTMLElement;
+      expect(element).toBeTruthy();
 
       manager.validateARIA(element, true);
 
@@ -122,6 +127,7 @@ describe('AccessibilityManager', () => {
         <div role="combobox">Dropdown</div>
       );
       const element = container.firstChild as HTMLElement;
+      expect(element).toBeTruthy();
 
       const validation = manager.validateARIA(element);
 

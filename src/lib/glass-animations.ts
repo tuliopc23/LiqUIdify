@@ -89,13 +89,11 @@ export interface GestureAnimation {
 export class GlassAnimation {
   private element: HTMLElement;
   private animation: Animation | null = null;
-  private timeline: AnimationTimeline;
   private gsapTimeline: gsap.core.Timeline;
   private rafId: number | null = null;
 
   constructor(element: HTMLElement) {
     this.element = element;
-    this.timeline = document.timeline;
     this.gsapTimeline = gsap.timeline();
   }
 
@@ -455,11 +453,9 @@ export class GlassAnimation {
 // Enhanced with GSAP timeline for better performance
 export class GlassChoreographer {
   private animations: Map<HTMLElement, GlassAnimation> = new Map();
-  private timeline: AnimationTimeline;
   private masterTimeline: gsap.core.Timeline;
 
   constructor() {
-    this.timeline = document.timeline;
     this.masterTimeline = gsap.timeline();
   }
 
@@ -782,7 +778,6 @@ export const GlassUtils = {
 
   // Frame rate tracking for animations
   trackFrameRate() {
-    const fps = 60;
     const start = Date.now();
     let frame = 0;
 

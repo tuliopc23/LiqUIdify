@@ -460,7 +460,6 @@ export class GestureRecognizer {
     private element: HTMLElement;
     private config: GestureConfig;
     private isTracking = false;
-    private startPosition = { x: 0, y: 0 };
     private currentPosition = { x: 0, y: 0 };
     private velocity = { x: 0, y: 0 };
     private lastTime = 0;
@@ -496,7 +495,6 @@ export class GestureRecognizer {
 
     private handleStart = (e: MouseEvent): void => {
         this.isTracking = true;
-        this.startPosition = { x: e.clientX, y: e.clientY };
         this.currentPosition = { x: e.clientX, y: e.clientY };
         this.lastTime = performance.now();
 
@@ -716,8 +714,9 @@ export function useAdvancedPhysics(options: {
     const animateToPosition = useCallback((x: number, y: number) => {
         if (!springRef.current || !elementRef.current) return;
 
-        springRef.current.setTarget(x, y);
-        springRef.current.onUpdate((state) => {
+        const spring = springRef.current;
+        spring.setTarget(x, y);
+        spring.onUpdate((state: PhysicsState) => {
             if (elementRef.current) {
                 elementRef.current.style.transform = `translate3d(${state.position.x}px, ${state.position.y}px, 0)`;
             }
@@ -743,7 +742,7 @@ export function useAdvancedPhysics(options: {
         if (!choreographerRef.current) return;
 
         animations.forEach(({ id, element, keyframes, options }) => {
-            choreographerRef.current!.addAnimation(id, element, keyframes, options);
+            choreographerRef.current?.addAnimation(id, element, keyframes, options);
         });
 
         choreographerRef.current.play();

@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Agent Auto-Retry",
+  "description": "Automatically retries agent operations when they fail due to disconnection or high demand",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.tsx",
+      "src/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "I noticed that an agent operation failed. I'll automatically retry the operation for you. The error appears to be due to either a disconnection or high demand on the service. I'll continue attempting to execute your request until it succeeds. No action is needed from you at this time."
+  }
+}

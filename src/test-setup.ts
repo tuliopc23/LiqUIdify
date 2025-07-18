@@ -55,7 +55,7 @@ global.cancelAnimationFrame = vi.fn();
 
 // Mock window.getComputedStyle properly
 Object.defineProperty(window, 'getComputedStyle', {
-  value: vi.fn().mockImplementation((element: Element) => {
+  value: vi.fn().mockImplementation((_element: Element) => {
     const style = {
       display: 'block',
       visibility: 'visible',
@@ -75,7 +75,7 @@ Object.defineProperty(window, 'getComputedStyle', {
       outline: 'none',
       boxShadow: 'none',
       getPropertyValue: vi.fn((prop: string) => {
-        const normalizedProp = prop.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+        const normalizedProp = prop.replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase());
         return style[normalizedProp as keyof typeof style] || '';
       }),
     };

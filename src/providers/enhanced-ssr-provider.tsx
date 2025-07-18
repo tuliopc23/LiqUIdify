@@ -27,7 +27,7 @@ export function EnhancedSSRProvider({
   loading = <div>Loading...</div>,
   onHydrationComplete,
   onHydrationError,
-  enableProgressiveEnhancement = true,
+  enableProgressiveEnhancement: _enableProgressiveEnhancement = true,
   enableHydrationRecovery = true,
   maxHydrationRetries = 3,
 }: EnhancedSSRProviderProps) {
@@ -37,7 +37,6 @@ export function EnhancedSSRProvider({
   const [retryCount, setRetryCount] = useState(0);
   
   const enhancements = useProgressiveEnhancement();
-  const hydrationManager = enableHydrationRecovery ? HydrationManager.getInstance() : null;
 
   // Handle client-side detection
   useEffect(() => {
@@ -58,19 +57,6 @@ export function EnhancedSSRProvider({
     return () => clearTimeout(timeout);
   }, [isClient, onHydrationComplete]);
 
-  // Handle hydration errors
-  const handleHydrationError = useCallback((error: Error) => {
-    console.error('Hydration error:', error);
-    setHasError(true);
-    onHydrationError?.(error);
-
-    if (enableHydrationRecovery && retryCount < maxHydrationRetries) {
-      setTimeout(() => {
-        setRetryCount(prev => prev + 1);
-        setHasError(false);
-      }, 1000 * Math.pow(2, retryCount));
-    }
-  }, [enableHydrationRecovery, retryCount, maxHydrationRetries, onHydrationError]);
 
   // Server-side rendering
   if (!isClient) {

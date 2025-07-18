@@ -1,5 +1,4 @@
 import { onCLS, onFCP, onFID, onLCP, onTTFB, onINP, Metric } from 'web-vitals';
-import type { ReactElement } from 'react';
 
 /**
  * Performance Monitor for Glass UI

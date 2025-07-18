@@ -3,7 +3,7 @@
  * Detects and handles hydration mismatches with automatic recovery
  */
 
-import React, { useEffect, useState, ReactNode } from 'react';
+import { useEffect, useState, ReactNode } from 'react';
 import { HydrationManager, HydrationMismatch } from '../../utils/hydration-utils';
 import { isBrowser } from '../../utils/ssr-utils';
 

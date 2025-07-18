@@ -213,9 +213,11 @@ export class GlassGestureRecognizer {
 
     if (e.touches.length === 1) {
       const touch = e.touches[0];
-      this.touches.set(touch.identifier, touch);
-      this.startGesture(touch.clientX, touch.clientY, e.target as HTMLElement);
-      this.triggerHaptic('light');
+      if (touch) {
+        this.touches.set(touch.identifier, touch);
+        this.startGesture(touch.clientX, touch.clientY, e.target as HTMLElement);
+        this.triggerHaptic('light');
+      }
     } else if (e.touches.length === 2) {
       // Handle multi-touch gestures
       this.handleMultiTouch(e.touches);
@@ -436,9 +438,11 @@ export class GlassGestureRecognizer {
       const touch1 = touches[0];
       const touch2 = touches[1];
 
-      // Store initial touch positions for pinch/rotate detection
-      this.touches.set(touch1.identifier, touch1);
-      this.touches.set(touch2.identifier, touch2);
+      if (touch1 && touch2) {
+        // Store initial touch positions for pinch/rotate detection
+        this.touches.set(touch1.identifier, touch1);
+        this.touches.set(touch2.identifier, touch2);
+      }
     }
   }
 

@@ -264,7 +264,6 @@ export class GlassShaderEffect {
   private gl: WebGLRenderingContext;
   private program: WebGLProgram | null = null;
   private uniforms: Map<string, WebGLUniformLocation> = new Map();
-  private attributes: Map<string, number> = new Map();
   private textures: Map<string, WebGLTexture> = new Map();
   private frameBuffer: WebGLFramebuffer | null = null;
   private renderTexture: WebGLTexture | null = null;

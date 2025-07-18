@@ -15,7 +15,6 @@ import { Slot } from '@radix-ui/react-slot';
 import {
   ComponentPropsBuilder,
   InteractiveGlassProps,
-  ButtonProps,
   cn,
   generateGlassClasses,
   generateGlassVariables,
@@ -28,36 +27,44 @@ import {
   microInteraction,
 } from '@/core';
 
+// Button state type
+interface ButtonState {
+  isPressed: boolean;
+  isHovered: boolean;
+  isFocused: boolean;
+  rippleCount: number;
+}
+
 // Business logic for button interactions
-const useButtonBusinessLogic = createBusinessLogicHook(
+const useButtonBusinessLogic = createBusinessLogicHook<ButtonState, GlassButtonProps, any>(
   // Initial state factory
-  (props: GlassButtonProps) => ({
+  (_props: GlassButtonProps) => ({
     isPressed: false,
     isHovered: false,
     isFocused: false,
     rippleCount: 0,
   }),
   // Actions factory
-  (state, setState, props) => ({
+  (_state: ButtonState, setState: React.Dispatch<React.SetStateAction<ButtonState>>, props: GlassButtonProps) => ({
     handlePress: () => {
       if (props.disabled || props.loading) return;
-      setState(prev => ({ ...prev, isPressed: true }));
-      setTimeout(() => setState(prev => ({ ...prev, isPressed: false })), 150);
+      setState((prev: ButtonState) => ({ ...prev, isPressed: true }));
+      setTimeout(() => setState((prev: ButtonState) => ({ ...prev, isPressed: false })), 150);
     },
     
     handleHover: (isHovered: boolean) => {
       if (props.disabled) return;
-      setState(prev => ({ ...prev, isHovered }));
+      setState((prev: ButtonState) => ({ ...prev, isHovered }));
     },
     
     handleFocus: (isFocused: boolean) => {
       if (props.disabled) return;
-      setState(prev => ({ ...prev, isFocused }));
+      setState((prev: ButtonState) => ({ ...prev, isFocused }));
     },
     
     handleRipple: () => {
       if (props.disabled || props.loading) return;
-      setState(prev => ({ ...prev, rippleCount: prev.rippleCount + 1 }));
+      setState((prev: ButtonState) => ({ ...prev, rippleCount: prev.rippleCount + 1 }));
     },
   })
 );
@@ -186,7 +193,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     ref
   ) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const { state, actions } = useButtonBusinessLogic({ 
+    const { actions } = useButtonBusinessLogic({ 
       disabled, 
       loading, 
       magnetic, 
@@ -200,7 +207,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     
     // Animation hooks
     const { transitionTo, currentState } = useGlassStateTransitions(animation, glassEffect?.intensity);
-    const { elementRef: magneticRef, isHovering } = useMagneticHover(
+    const { elementRef: magneticRef } = useMagneticHover(
       magnetic ? 0.3 : 0, 
       120, 
       'fast'
@@ -396,5 +403,4 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
 GlassButton.displayName = 'GlassButton';
 
 // Export the component and types
-export type { GlassButtonProps };
 export default GlassButton;

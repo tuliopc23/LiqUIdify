@@ -123,7 +123,7 @@ export class VisualTestSuite {
   private async runSingleVisualTest(
     testId: string,
     testName: string,
-    element: HTMLElement,
+    _element: HTMLElement,
     browser: string,
     viewport: string,
     threshold: number
@@ -284,7 +284,7 @@ export class VisualTestSuite {
    * Test pixel-perfect positioning
    */
   testPixelPerfectPositioning(
-    testId: string,
+    _testId: string,
     elements: HTMLElement[],
     expectedPositions: { x: number; y: number }[]
   ): boolean {
@@ -306,11 +306,11 @@ export class VisualTestSuite {
       const actualX = Math.round(rect.left);
       const actualY = Math.round(rect.top);
       
-      if (actualX !== expected.x || actualY !== expected.y) {
+      if (expected && (actualX !== expected.x || actualY !== expected.y)) {
         allPerfect = false;
         console.warn(
           `Pixel-perfect test failed for element ${i}: ` +
-          `expected (${expected.x}, ${expected.y}), ` +
+          `expected (${expected?.x}, ${expected?.y}), ` +
           `actual (${actualX}, ${actualY})`
         );
       }
@@ -526,9 +526,7 @@ export const visualTestUtils = {
    * Clean up test element
    */
   cleanupTestElement(element: HTMLElement): void {
-    if (element.parentNode) {
-      element.parentNode.removeChild(element);
-    }
+    element.remove();
   },
 
   /**

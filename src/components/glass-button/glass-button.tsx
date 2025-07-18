@@ -1,5 +1,5 @@
 import { forwardRef, useState, useRef, useCallback } from 'react';
-import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
+import { cn, microInteraction } from '@/lib/glass-utils';
 import { useMagneticHover, createGlassRipple } from '@/lib/glass-physics';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { usePerformanceMonitoring } from '@/hooks/use-performance-monitoring';
@@ -13,7 +13,6 @@ import { ComponentSize } from '@/types/branded';
 
 // Type definitions for enhanced TypeScript support
 type GlassIntensity = 'subtle' | 'medium' | 'strong';
-type ComponentVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'destructive' | 'apple';
 
 /**
  * Props for the GlassButton component
@@ -176,7 +175,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       'rounded-xl' // Ensure consistent rounded corners
     );
 
-    const variantClasses = {
+    const variantClasses: Record<GlassButtonProps['variant'] & string, string> = {
       primary: cn(
         'text-white dark:text-white font-semibold',
         'bg-gradient-to-b',
@@ -222,7 +221,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       }),
     };
 
-    const sizeClasses = {
+    const sizeClasses: Record<string, string> = {
       xs: 'px-2.5 py-1.5 text-xs min-h-[28px]',
       sm: 'px-3 py-2 text-sm min-h-[32px]',
       md: 'px-4 py-2.5 text-sm min-h-[40px]',
@@ -230,7 +229,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       xl: 'px-8 py-4 text-lg min-h-[52px]',
     };
 
-    const iconSizeClasses = {
+    const iconSizeClasses: Record<string, string> = {
       xs: 'w-3 h-3',
       sm: 'w-3.5 h-3.5',
       md: 'w-4 h-4',
@@ -244,7 +243,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           ref={setRefs}
           className={cn(
             baseClasses,
-            variantClasses[variant],
+            variantClasses[variant || 'primary'],
             className
           )}
           style={{
@@ -275,7 +274,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
             <div
               className={cn(
                 'animate-spin rounded-full border-2 border-current border-t-transparent',
-                iconSizeClasses[size]
+                iconSizeClasses[(size as string) || 'md']
               )}
             />
           </div>
@@ -289,7 +288,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         >
           {leftIcon && (
             <span
-              className={cn('flex-shrink-0', iconSizeClasses[size])}
+              className={cn('flex-shrink-0', iconSizeClasses[(size as string) || 'md'])}
               aria-hidden="true"
             >
               {leftIcon}
@@ -298,7 +297,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           <span className="truncate">{children}</span>
           {rightIcon && (
             <span
-              className={cn('flex-shrink-0', iconSizeClasses[size])}
+              className={cn('flex-shrink-0', iconSizeClasses[(size as string) || 'md'])}
               aria-hidden="true"
             >
               {rightIcon}
@@ -328,7 +327,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         >
           {createGlassLayers(
             buttonContent,
-            cn('flex items-center justify-center gap-2', sizeClasses[size])
+            cn('flex items-center justify-center gap-2', sizeClasses[(size as string) || 'md'])
           )}
         </button>
       );
@@ -339,7 +338,7 @@ const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         className={cn(
           baseClasses,
           variantClasses[variant],
-          sizeClasses[size],
+          sizeClasses[(size as string) || 'md'],
           className
         )}
         ref={setRefs}

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { accessibilityManager } from './accessibility-manager';
 
 export interface RovingTabindexOptions {
   items: HTMLElement[];
@@ -38,7 +37,7 @@ export function useRovingTabindex(options: RovingTabindexOptions): RovingTabinde
   const {
     items,
     orientation = 'vertical',
-    loop = true,
+    loop: _loop = true,
     preventScroll = false,
     onActiveChange,
     typeaheadTimeout = 500,
@@ -191,7 +190,7 @@ export function useRovingTabindex(options: RovingTabindexOptions): RovingTabinde
         if (pageKeys) {
           // Move up by 10 items or to start
           const jumpUp = Math.max(0, currentIndex - 10);
-          newIndex = findNextEnabledIndex(jumpUp, jumpUp < currentIndex ? 0 : -1);
+          newIndex = findNextEnabledIndex(jumpUp, jumpUp < currentIndex ? 1 : -1);
           handled = true;
         }
         break;
@@ -200,7 +199,7 @@ export function useRovingTabindex(options: RovingTabindexOptions): RovingTabinde
         if (pageKeys) {
           // Move down by 10 items or to end
           const jumpDown = Math.min(items.length - 1, currentIndex + 10);
-          newIndex = findNextEnabledIndex(jumpDown, jumpDown > currentIndex ? 0 : 1);
+          newIndex = findNextEnabledIndex(jumpDown, jumpDown > currentIndex ? -1 : 1);
           handled = true;
         }
         break;
@@ -356,10 +355,10 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
   const {
     items,
     wrap = true,
-    loop = true,
+    loop: _loop2 = true,
     preventScroll = false,
     onCellChange,
-    typeaheadTimeout = 500,
+    typeaheadTimeout: _typeaheadTimeout = 500,
     homeEndKeys = true,
   } = options;
 

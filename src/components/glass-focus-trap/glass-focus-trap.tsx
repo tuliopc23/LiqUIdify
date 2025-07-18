@@ -124,7 +124,9 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
     const history = focusHistory.current;
     
     for (let i = history.length - 1; i >= 0; i--) {
-      const { element, scrollPosition } = history[i];
+      const historyItem = history[i];
+      if (!historyItem) continue;
+      const { element, scrollPosition } = historyItem;
       
       if (document.body.contains(element) && !element.hasAttribute('disabled')) {
         try {
@@ -168,8 +170,10 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       const focusableElements = getFocusableElements();
       if (focusableElements.length === 0) return;
 
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
+      const firstElement = focusableElements[0] as HTMLElement | undefined;
+      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement | undefined;
+      
+      if (!firstElement || !lastElement) return;
       const activeElement = document.activeElement as HTMLElement;
 
       // Handle edge case: focus is outside the trap
@@ -212,12 +216,12 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       const target = event.target as HTMLElement;
       
       // If focus moved outside the trap, bring it back
-      if (!containerRef.current.contains(target)) {
+      if (!containerRef.current?.contains(target)) {
         event.preventDefault();
         event.stopPropagation();
 
         // Try to focus the last focused element within the trap
-        if (lastFocusedElement.current && containerRef.current.contains(lastFocusedElement.current)) {
+        if (lastFocusedElement.current && containerRef.current?.contains(lastFocusedElement.current)) {
           lastFocusedElement.current.focus(focusOptions);
         } else {
           // Fall back to first focusable element
@@ -243,12 +247,12 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
       const target = event.target as HTMLElement;
       
-      if (!containerRef.current.contains(target)) {
+      if (!containerRef.current?.contains(target)) {
         event.preventDefault();
         event.stopPropagation();
         
         // Focus last element in trap
-        if (lastFocusedElement.current && containerRef.current.contains(lastFocusedElement.current)) {
+        if (lastFocusedElement.current && containerRef.current?.contains(lastFocusedElement.current)) {
           lastFocusedElement.current.focus(focusOptions);
         }
       }

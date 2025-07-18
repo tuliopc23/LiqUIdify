@@ -222,7 +222,7 @@ export const brandedUtils = {
   /**
    * Calculate and validate contrast ratio
    */
-  calculateContrast: (fg: GlassColor, bg: GlassColor): AccessibleContrast | null => {
+  calculateContrast: (_fg: GlassColor, _bg: GlassColor): AccessibleContrast | null => {
     // This would integrate with the contrast checker utility
     // For now, return a mock implementation
     const mockRatio = 4.5;

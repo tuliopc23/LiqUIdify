@@ -96,7 +96,7 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
           ]
         : items;
 
-    const handleItemClick = (item: BreadcrumbItem, index: number) => {
+    const handleItemClick = (item: BreadcrumbItem, _index: number) => {
       if (item.onClick) {
         item.onClick();
       } else if (item.href) {

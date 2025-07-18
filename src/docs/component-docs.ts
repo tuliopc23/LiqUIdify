@@ -101,7 +101,7 @@ export const componentRegistry = new ComponentDocRegistry();
 
 // Documentation generator utilities
 export function generatePropDocs(
-  component: ComponentType<any>,
+  _component: ComponentType<any>,
   customDocs?: Partial<Record<string, Omit<PropDocumentation, 'name'>>>
 ): PropDocumentation[] {
   // This would integrate with TypeScript compiler API or react-docgen

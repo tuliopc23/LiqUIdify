@@ -60,7 +60,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
       spacing = 8,
       animated = true,
       style,
-      ..._props
+      ...props
     },
     ref
   ) => {
@@ -124,7 +124,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
     }
 
     return (
-      <div ref={ref} className="space-y-2" style={{ gap: spacing }}>
+      <div ref={ref} className="space-y-2" style={{ gap: spacing }} {...props}>
         {Array.from({ length: count }, (_, index) => (
           <SkeletonItem key={index} index={index} />
         ))}

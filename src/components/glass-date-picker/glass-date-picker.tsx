@@ -1,8 +1,6 @@
 import React, { forwardRef, useState, useRef, useEffect } from 'react';
 import {
   cn,
-  getGlassClass,
-  microInteraction,
   focusRing,
 } from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';

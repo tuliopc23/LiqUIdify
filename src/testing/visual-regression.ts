@@ -157,8 +157,8 @@ export class VisualRegressionTester {
               component,
               state,
               browserType,
-              viewport.name,
-              theme
+              viewport.name || '',
+              theme || 'light' || 'light'
             );
             
             await page.locator(selector).screenshot({ path: screenshotPath });
@@ -168,8 +168,8 @@ export class VisualRegressionTester {
               component,
               state,
               browserType,
-              viewport.name,
-              theme,
+              viewport.name || '',
+              theme || 'light' || 'light',
               screenshotPath
             );
             
@@ -201,7 +201,7 @@ export class VisualRegressionTester {
     const {
       frames = 10,
       duration = 1000,
-      ...testOptions
+      ..._testOptions
     } = options;
     
     const results: AnimationFrameTestResult[] = [];
@@ -247,8 +247,8 @@ export class VisualRegressionTester {
         animationState,
         frameNumber,
         browserType,
-        viewport.name,
-        theme
+        viewport.name || '',
+        theme || 'light'
       );
       
       await page.locator(selector).screenshot({ path: screenshotPath });
@@ -258,8 +258,8 @@ export class VisualRegressionTester {
         component,
         `${animationState}-frame-${frameNumber}`,
         browserType,
-        viewport.name,
-        theme,
+        viewport.name || '',
+        theme || 'light',
         screenshotPath
       );
       
@@ -312,7 +312,7 @@ export class VisualRegressionTester {
         screenshotPath,
         browser,
         viewport,
-        theme,
+        theme: theme || 'light',
         component,
         state
       };
@@ -349,7 +349,7 @@ export class VisualRegressionTester {
         state,
         browser,
         viewport,
-        theme
+        theme || 'light'
       );
       
       fs.writeFileSync(diffPath, PNG.sync.write(diff));

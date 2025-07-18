@@ -13,42 +13,47 @@ import { forwardRef, createContext, useContext } from 'react';
 import {
   ComponentPropsBuilder,
   LayoutGlassProps,
-  DivProps,
   HeadingProps,
   ParagraphProps,
   cn,
   generateGlassClasses,
   generateGlassVariables,
   useGlassStateTransitions,
-  createCompoundComponentWithContext,
   createBusinessLogicHook,
   microInteraction,
 } from '@/core';
 
+// Card state type
+interface CardState {
+  isHovered: boolean;
+  isPressed: boolean;
+  isSelected: boolean;
+}
+
 // Business logic for card interactions
-const useCardBusinessLogic = createBusinessLogicHook(
+const useCardBusinessLogic = createBusinessLogicHook<CardState, GlassCardProps, any>(
   // Initial state factory
-  (props: GlassCardProps) => ({
+  (_props: GlassCardProps) => ({
     isHovered: false,
     isPressed: false,
     isSelected: false,
   }),
   // Actions factory
-  (state, setState, props) => ({
+  (_state: CardState, setState: React.Dispatch<React.SetStateAction<CardState>>, props: GlassCardProps) => ({
     handleHover: (isHovered: boolean) => {
       if (!props.hover) return;
-      setState(prev => ({ ...prev, isHovered }));
+      setState((prev: CardState) => ({ ...prev, isHovered }));
     },
     
     handlePress: () => {
       if (!props.interactive) return;
-      setState(prev => ({ ...prev, isPressed: true }));
-      setTimeout(() => setState(prev => ({ ...prev, isPressed: false })), 150);
+      setState((prev: CardState) => ({ ...prev, isPressed: true }));
+      setTimeout(() => setState((prev: CardState) => ({ ...prev, isPressed: false })), 150);
     },
     
     handleSelect: (isSelected: boolean) => {
       if (!props.selectable) return;
-      setState(prev => ({ ...prev, isSelected }));
+      setState((prev: CardState) => ({ ...prev, isSelected }));
     },
   })
 );
@@ -181,7 +186,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     });
     
     // Animation hooks
-    const { transitionTo, currentState } = useGlassStateTransitions(animation, glassEffect?.intensity);
+    const { currentState } = useGlassStateTransitions(animation, glassEffect?.intensity);
     
     // Event handlers with business logic
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {

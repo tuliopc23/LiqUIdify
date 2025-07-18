@@ -481,9 +481,7 @@ export const createGlassRipple = (
 
   // Clean up
   setTimeout(() => {
-    if (ripple.parentNode) {
-      ripple.parentNode.removeChild(ripple);
-    }
+    ripple.remove();
   }, 600);
 
   return ripple;

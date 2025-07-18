@@ -257,7 +257,7 @@ export class CSSBundleAnalyzer {
     return css.split('}').filter(rule => rule.trim()).map(rule => rule.trim() + '}');
   }
 
-  private isCriticalRule(rule: string, html: string): boolean {
+  private isCriticalRule(rule: string, _html: string): boolean {
     // Determine if a CSS rule is critical for above-the-fold content
     // This is a simplified version - in production, use proper critical CSS detection
 

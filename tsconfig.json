@@ -20,9 +20,18 @@
     "noEmitOnError": false,
 
     /* Linting */
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
 
     /* React */
     "jsx": "react-jsx",
@@ -35,7 +44,7 @@
       "@/design-tokens": ["./src/tokens/design-tokens"]
     }
   },
-  "include": ["src/**/*", "src/types/**/*.d.ts"],
+  "include": ["src/**/*", "src/types/**/*.d.ts", "src/types/jsx.d.ts", "src/types/vitest.d.ts"],
   "exclude": [
     "node_modules",
     "dist",

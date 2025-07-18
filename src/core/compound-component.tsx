@@ -8,7 +8,7 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { 
-  ComponentRef, 
+ 
   CompoundComponentProps, 
   UnifiedGlassProps,
   ComponentPropsBuilder 
@@ -122,7 +122,9 @@ export function createCompoundComponent<
         );
       };
 
-  Component.displayName = displayName;
+  if ('displayName' in Component) {
+    Component.displayName = displayName;
+  }
 
   return Component;
 }
@@ -238,7 +240,6 @@ export function createCompoundComponentCollection<
   components: T,
   rootComponent: React.ComponentType<any>
 ) {
-  const collection = { ...components };
   
   // Attach sub-components to root component
   Object.entries(components).forEach(([key, component]) => {

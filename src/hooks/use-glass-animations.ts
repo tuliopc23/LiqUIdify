@@ -302,9 +302,7 @@ export function useRippleEffect(
 
       // Remove ripple after animation
       setTimeout(() => {
-        if (ripple.parentNode) {
-          ripple.parentNode.removeChild(ripple);
-        }
+        ripple.remove();
       }, TIMING_PRESETS[timing].duration);
     },
     [animate, color, timing]

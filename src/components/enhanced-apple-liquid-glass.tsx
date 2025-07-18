@@ -15,7 +15,7 @@ import {
 import { LiquidGlassSvgFilters } from './liquid-glass-svg-filters';
 
 export interface EnhancedAppleLiquidGlassProps
-    extends Omit<HTMLAttributes<HTMLDivElement>, 'className'>,
+    extends HTMLAttributes<HTMLDivElement>,
     EnhancedGlassOptions {
     as?: keyof React.JSX.IntrinsicElements;
     contentClassName?: string;
@@ -53,8 +53,6 @@ export const EnhancedAppleLiquidGlass = forwardRef<
     const {
         containerRef,
         variant,
-        isRetina,
-        pixelRatio,
     } = useEnhancedAppleLiquidGlass({
         intensity,
         enablePhysics,

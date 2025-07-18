@@ -5,7 +5,7 @@ import { useDegradationAware } from '../../utils/graceful-degradation';
 export const GracefulDegradationTest: React.FC = () => {
     const [testResults, setTestResults] = useState<Record<string, boolean>>({});
     const [isTesting, setIsTesting] = useState(false);
-    const { featureSupport, networkStatus, performanceLevel, prefersReducedMotion } = useDegradationAware();
+    const { networkStatus, performanceLevel, prefersReducedMotion } = useDegradationAware();
 
     const runFeatureTests = async () => {
         setIsTesting(true);

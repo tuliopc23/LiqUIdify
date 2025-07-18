@@ -165,19 +165,19 @@ export function useCSSChunk(
   options: CSSChunkOptions = {}
 ): boolean {
   const url = cssChunks[name];
-  return useCSS(url, options);
+  return useCSS(url || '', options);
 }
 
 /**
  * Higher-order component for loading a CSS chunk
  */
-export function withCSSChunk<P>(
+export function withCSSChunk<P extends {}>(
   Component: React.ComponentType<P>,
   chunkName: string
 ): React.ComponentType<P> {
   return (props: P) => {
     useCSSChunk(chunkName);
-    return React.createElement(Component, props);
+    return React.createElement(Component, props as any);
   };
 }
 

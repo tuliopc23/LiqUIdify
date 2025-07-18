@@ -1,5 +1,5 @@
 import React, { forwardRef, useState, useRef, useCallback } from 'react';
-import { cn, getGlassClass, microInteraction } from '../../lib/glass-utils';
+import { cn } from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
   Upload,

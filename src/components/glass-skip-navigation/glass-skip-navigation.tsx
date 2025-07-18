@@ -98,9 +98,11 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
           form.id = `form-${index}`;
         }
 
+        const labelledById = form.getAttribute('aria-labelledby');
+        const labelElement = labelledById ? document.getElementById(labelledById) : null;
         const formName = 
           form.getAttribute('aria-label') ||
-          document.getElementById(form.getAttribute('aria-labelledby') || '')?.textContent ||
+          labelElement?.textContent ||
           `Form ${index + 1}`;
 
         generatedLinks.push({
@@ -208,7 +210,10 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
       case 'Enter':
       case ' ':
-        handleSkipTo(links[index], event);
+        const link = links[index];
+        if (link) {
+          handleSkipTo(link, event);
+        }
         handled = true;
         break;
     }
@@ -304,14 +309,6 @@ export function useSkipNavigation() {
     const link = skipLinks.find(l => l.id === id);
     if (!link) return;
 
-    const event = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true,
-    });
-
-    const syntheticEvent = {
-      preventDefault: () => {},
-    } as React.MouseEvent;
 
     // Use the same logic as handleSkipTo
     let targetElement: HTMLElement | null = null;

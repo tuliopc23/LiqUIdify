@@ -3,7 +3,7 @@
  * Enables type-safe component polymorphism with 'as' prop
  */
 
-import { ComponentPropsWithRef, ComponentPropsWithoutRef, ElementType, ReactElement } from 'react';
+import { ComponentPropsWithoutRef, ElementType, ReactElement } from 'react';
 
 /**
  * Utility type to extract ref type from element

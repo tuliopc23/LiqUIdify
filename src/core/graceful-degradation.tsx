@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { SSRSafe, ClientOnly } from './ssr-safety';
 
 // Types and Interfaces
@@ -30,7 +30,7 @@ export function withAnimationFallback(
 ) {
     const {
         respectReducedMotion = true,
-        fallbackDuration = 0,
+        fallbackDuration: _fallbackDuration = 0,
         staticFallback = null,
     } = options;
 
@@ -88,21 +88,14 @@ export function withAnimationFallback(
         // Use static fallback if animations should be disabled
         if (prefersReducedMotion || !shouldAnimate) {
             return (
-                <div 
-          className= "animation-fallback"
-            style = {{
-                transition: fallbackDuration > 0 ? `all ${fallbackDuration}ms ease` : 'none'
-            }
+                <div className="animation-fallback">
+                    {staticFallback || animatedComponent}
+                </div>
+            );
         }
-        >
-            { staticFallback || animatedComponent
-    }
-        </div>
-      );
-}
 
-return <>{ animatedComponent } </>;
-  };
+        return <>{animatedComponent}</>;
+    };
 }
 
 /**
@@ -114,7 +107,7 @@ export function withNetworkFallback(
 ) {
     const {
         offlineMessage = <div>You're offline. Some features may not work.</div>,
-    slowConnectionFallback = null,
+        slowConnectionFallback = null,
         retryButton = true,
     } = options;
 
@@ -165,31 +158,28 @@ export function withNetworkFallback(
         // Offline fallback
         if (!isOnline) {
             return (
-                <div className= "network-fallback network-fallback--offline" >
-                { offlineMessage }
-            {
-                retryButton && (
-                    <button onClick={ handleRetry } className = "retry-button" >
-                        Retry({ retryCount })
+                <div className="network-fallback network-fallback--offline">
+                    {offlineMessage}
+                    {retryButton && (
+                        <button onClick={handleRetry} className="retry-button">
+                            Retry({retryCount})
                         </button>
-          )
-            }
-            </div>
-      );
+                    )}
+                </div>
+            );
         }
 
         // Slow connection fallback
         if (connectionSpeed === 'slow-2g' || connectionSpeed === '2g') {
             return (
-                <div className= "network-fallback network-fallback--slow" >
-                { slowConnectionFallback || component
+                <div className="network-fallback network-fallback--slow">
+                    {slowConnectionFallback || component}
+                </div>
+            );
         }
-        </div>
-      );
-    }
 
-    return <>{ component } </>;
-};
+        return <>{component}</>;
+    };
 }
 
 /**
@@ -250,7 +240,7 @@ export function withFeatureDetection(
             }
         }, [feature]);
 
-        return hasFeature ? <>{ enhancedComponent } < /> : <>{fallbackComponent}</ >;
+        return hasFeature ? <>{enhancedComponent}</> : <>{fallbackComponent}</>;
     };
 }
 
@@ -264,12 +254,12 @@ export function withCSSFallback(
 ) {
     return function CSSFallbackWrapper() {
         return (
-            <SSRSafe fallback= { cssComponent } delay = { delay } >
-                <ClientOnly fallback={ cssComponent }>
-                    { jsComponent }
-                    </ClientOnly>
-                    </SSRSafe>
-    );
+            <SSRSafe fallback={cssComponent} delay={delay}>
+                <ClientOnly fallback={cssComponent}>
+                    {jsComponent}
+                </ClientOnly>
+            </SSRSafe>
+        );
     };
 }
 
@@ -298,7 +288,7 @@ export function withProgressiveEnhancement(
             }
         }, []);
 
-        return <>{ levels[currentLevel]?.component || levels[0]?.component } </>;
+        return <>{levels[currentLevel]?.component || levels[0]?.component}</>;
     };
 }
 
@@ -335,11 +325,11 @@ export function withDeviceFallback(
 
         switch (deviceType) {
             case 'mobile':
-                return <>{ mobileComponent } </>;
+                return <>{mobileComponent}</>;
             case 'tablet':
-                return <>{ tabletComponent } </>;
+                return <>{tabletComponent}</>;
             default:
-                return <>{ desktopComponent } </>;
+                return <>{desktopComponent}</>;
         }
     };
 }
@@ -393,7 +383,7 @@ export function withPerformanceFallback(
             checkPerformance();
         }, []);
 
-        return isHighPerformance ? <>{ highPerformanceComponent } < /> : <>{lowPerformanceComponent}</ >;
+        return isHighPerformance ? <>{highPerformanceComponent}</> : <>{lowPerformanceComponent}</>;
     };
 }
 
@@ -427,7 +417,7 @@ export function withAccessibilityFallback(
             checkAccessibilityPreferences();
         }, []);
 
-        return useAccessibleVersion ? <>{ accessibleComponent } < /> : <>{enhancedComponent}</ >;
+        return useAccessibleVersion ? <>{accessibleComponent}</> : <>{enhancedComponent}</>;
     };
 }
 

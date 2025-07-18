@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { performanceMonitor } from '../../core/performance-monitor';
-import { useWebVitals, useRealtimePerformance } from '../../hooks/use-performance-monitoring';
+import { useRealtimePerformance } from '../../hooks/use-performance-monitoring';
 import { cn } from '../../utils/cn';
 import { GlassCard } from '../glass-card';
 
@@ -43,7 +43,6 @@ export function GlassPerformanceDashboard({
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   const [metrics, setMetrics] = useState<Map<string, any>>(new Map());
   const [componentMetrics, setComponentMetrics] = useState<any[]>([]);
-  const webVitals = useWebVitals();
   const { fps, memory } = useRealtimePerformance();
 
   useEffect(() => {

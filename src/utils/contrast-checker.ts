@@ -31,9 +31,9 @@ export function hexToRgb(hex: string): RGB | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
+        r: parseInt(result[1] || '0', 16),
+        g: parseInt(result[2] || '0', 16),
+        b: parseInt(result[3] || '0', 16),
       }
     : null;
 }
@@ -60,9 +60,9 @@ export function parseColor(color: string): RGB | null {
   const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
   if (rgbMatch) {
     return {
-      r: parseInt(rgbMatch[1], 10),
-      g: parseInt(rgbMatch[2], 10),
-      b: parseInt(rgbMatch[3], 10),
+      r: parseInt(rgbMatch[1] || '0', 10),
+      g: parseInt(rgbMatch[2] || '0', 10),
+      b: parseInt(rgbMatch[3] || '0', 10),
     };
   }
 
@@ -76,8 +76,9 @@ export function parseColor(color: string): RGB | null {
     // Add more as needed
   };
 
-  if (namedColors[color.toLowerCase()]) {
-    return hexToRgb(namedColors[color.toLowerCase()]);
+  const lowerColor = color.toLowerCase();
+  if (namedColors[lowerColor]) {
+    return hexToRgb(namedColors[lowerColor] || '');
   }
 
   return null;

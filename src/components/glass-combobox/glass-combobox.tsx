@@ -1,8 +1,6 @@
 import React, { forwardRef, useState, useRef, useEffect, useId } from 'react';
 import {
   cn,
-  getGlassClass,
-  microInteraction,
   focusRing,
 } from '../../lib/glass-utils';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -139,7 +137,6 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
     const comboboxId = useId();
     const listboxId = `${comboboxId}-listbox`;
-    const searchId = `${comboboxId}-search`;
 
     // Filter options based on search query
     const filteredOptions = options
@@ -197,7 +194,10 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
         case 'Enter':
           e.preventDefault();
           if (isOpen && highlightedIndex >= 0) {
-            handleSelect(filteredOptions[highlightedIndex]);
+            const option = filteredOptions[highlightedIndex];
+            if (option) {
+              handleSelect(option);
+            }
           } else if (!isOpen) {
             setIsOpen(true);
           }

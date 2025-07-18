@@ -3,7 +3,6 @@ import {
   GracefulComponent,
   GracefulImage,
   GracefulAnimation,
-  GracefulVideo,
   GracefulInteractive,
   CSSAccordion,
   CSSTabs,

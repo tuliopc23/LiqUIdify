@@ -3,7 +3,6 @@
  * Demonstrates all SSR safety and hydration features
  */
 
-import React, { useState, useEffect } from 'react';
 import { 
   HydrationDetector, 
   HydrationBoundary, 

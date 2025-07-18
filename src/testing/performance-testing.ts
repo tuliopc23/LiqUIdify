@@ -195,7 +195,7 @@ export interface BundleAnalysis {
   treeshakeable: boolean;
 }
 
-export function analyzeBundleSize(bundleStats: any): BundleAnalysis {
+export function analyzeBundleSize(_bundleStats: any): BundleAnalysis {
   // This would integrate with webpack-bundle-analyzer or similar
   // For now, return a mock structure
   return {
@@ -268,7 +268,7 @@ export class PerformanceRegression {
 // React component performance testing utilities
 export function measureComponentRender<P extends object>(
   Component: React.ComponentType<P>,
-  props: P
+  _props: P
 ): Promise<PerformanceBenchmark> {
   return createPerformanceTest(
     Component.displayName || Component.name || 'Component',

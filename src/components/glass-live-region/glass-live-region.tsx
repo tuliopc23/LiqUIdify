@@ -242,7 +242,7 @@ export function useAnnouncement() {
   ) => {
     const {
       priority = 'medium',
-      context = 'general',
+      context: _context = 'general',
       delay = PRIORITY_DELAYS[priority],
       clearDelay = 5000,
       dedupKey,

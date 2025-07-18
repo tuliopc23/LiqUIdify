@@ -2,13 +2,11 @@
  * Factory for creating type-safe polymorphic Glass UI components
  */
 
-import { forwardRef, ElementType, ComponentPropsWithRef } from 'react';
+import { forwardRef, ElementType } from 'react';
 import { 
   PolymorphicComponent, 
   PolymorphicComponentPropsWithRef,
-  ValidHTMLAttributes,
-  isInteractiveElement,
-  isSemanticElement
+  isInteractiveElement
 } from '../types/polymorphic';
 import { cn } from '../lib/glass-utils';
 
@@ -115,7 +113,7 @@ export function createPolymorphicComponent<
 
     // Validate props
     if (process.env.NODE_ENV !== 'production') {
-      validateProps?.(mergedProps);
+      validateProps?.(mergedProps as Props & { as?: ElementType });
       
       // Additional built-in validations
       if (isInteractiveElement(Element) && restProps.disabled && !restProps['aria-disabled']) {

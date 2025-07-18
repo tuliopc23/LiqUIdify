@@ -56,10 +56,8 @@ export interface ValidationResult {
 
 export class STierValidator {
   private static instance: STierValidator;
-  private checklist: ValidationChecklist;
 
   private constructor() {
-    this.checklist = this.createDefaultChecklist();
   }
 
   public static getInstance(): STierValidator {

@@ -7,8 +7,7 @@ export type { GlassTooltipProps } from './components/glass-tooltip/glass-tooltip
 
 // Re-export utility types
 export type {
-  AccessibilityCheckResult,
-  AccessibilityIssue,
+  AccessibilityTestResult,
 } from './testing/accessibility-testing';
 
 // Re-export branded types

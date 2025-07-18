@@ -83,8 +83,10 @@ const componentMap = {
   GlassDropdown: () => import('./components/glass-dropdown').then(m => m.GlassDropdown),
   GlassAccordion: () => import('./components/glass-accordion').then(m => m.GlassAccordion),
   GlassTabs: () => import('./components/glass-tabs').then(m => m.GlassTabs),
-  GlassChart: () => import('./components/glass-chart').then(m => m.GlassChart),
-  GlassCommand: () => import('./components/glass-command').then(m => m.GlassCommand),
+  LineChart: () => import('./components/glass-chart').then(m => m.LineChart),
+  BarChart: () => import('./components/glass-chart').then(m => m.BarChart),
+  DonutChart: () => import('./components/glass-chart').then(m => m.DonutChart),
+  CommandPalette: () => import('./components/glass-command').then(m => m.CommandPalette),
 } as const;
 
 // Bundle size helpers

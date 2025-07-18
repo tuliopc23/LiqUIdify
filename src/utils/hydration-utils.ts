@@ -131,8 +131,8 @@ export function useHydrationSafety(
   options: HydrationOptions = {}
 ): HydrationContext {
   const {
-    maxRetries = 3,
-    retryDelay = 1000,
+    maxRetries: _maxRetries = 3,
+    retryDelay: _retryDelay = 1000,
     onMismatch,
     onRecovery,
     onError,
@@ -140,7 +140,6 @@ export function useHydrationSafety(
 
   const manager = HydrationManager.getInstance();
   const [context, setContext] = useState<HydrationContext>(manager.getContext());
-  const componentRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     manager.addRecoveryCallback(() => {
@@ -327,7 +326,7 @@ export class HydrationErrorBoundary extends React.Component<
 > {
   state = { hasError: false };
 
-  static getDerivedStateFromError(error: Error) {
+  static getDerivedStateFromError(_error: Error) {
     return { hasError: true };
   }
 

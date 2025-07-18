@@ -243,9 +243,9 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
       };
     }
 
-    const r = parseInt(rgbMatch[1], 10) / 255;
-    const g = parseInt(rgbMatch[2], 10) / 255;
-    const b = parseInt(rgbMatch[3], 10) / 255;
+    const r = parseInt(rgbMatch[1] || '0', 10) / 255;
+    const g = parseInt(rgbMatch[2] || '0', 10) / 255;
+    const b = parseInt(rgbMatch[3] || '0', 10) / 255;
 
     // Validate parsed values
     if (isNaN(r) || isNaN(g) || isNaN(b)) {

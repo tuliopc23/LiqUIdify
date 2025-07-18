@@ -437,7 +437,7 @@ export class PerformanceTestingInfrastructure {
   /**
    * Start continuous performance monitoring
    */
-  public startContinuousMonitoring(options: {
+  public startContinuousMonitoring(_options: {
     interval?: number;
     metrics?: Array<keyof PerformanceMetrics>;
     thresholds?: Record<string, number>;

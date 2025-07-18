@@ -18,8 +18,8 @@ export * from '../providers/glass-ui-provider';
 export * from '../providers/config-provider';
 
 // Core utilities (tree-shakeable)
-export { cn, glassMorphismVariants } from '../lib/glass-utils';
-export { contrastChecker } from '../utils/contrast-checker';
+export { cn, glassVariants } from '../lib/glass-utils';
+export { useContrastChecker } from '../utils/contrast-checker';
 
 // Core types
 export type {
@@ -32,8 +32,12 @@ export type {
 export {
     useIsClient,
     useSSRSafeWindow,
-    isServer,
-    isClient,
-    safeWindow,
-    safeDocument,
+    useSSRSafeDocument,
+    useSSRSafeNavigator,
+    useSSRSafeLocalStorage,
+    useSSRSafeSessionStorage,
+    useHydrationSafe,
+    useSSRSafeMediaQuery,
+    useNetworkStatus,
+    useSSRSafeAnimation
 } from '../hooks/use-ssr-safe';

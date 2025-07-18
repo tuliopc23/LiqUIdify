@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { announcer } from '@/components/glass-live-region';
 
 // Types and Interfaces
@@ -114,7 +114,7 @@ export class SSRSafetyManager {
     /**
      * Handle hydration errors
      */
-    private handleHydrationError(event: ErrorEvent) {
+    private handleHydrationError(_event: ErrorEvent) {
         const mismatch: HydrationMismatch = {
             element: document.body,
             expectedHTML: 'SSR HTML',
@@ -136,7 +136,7 @@ export class SSRSafetyManager {
         // Announce to screen readers
         announcer.announce(
             'Content updated due to loading differences.',
-            'polite'
+            { priority: 'polite' as const }
         );
     }
 
@@ -445,8 +445,8 @@ export const gracefulDegradation = {
             <SSRSafe fallback= { cssComponent } >
             { jsComponent }
             </SSRSafe>
-    );
-  },
+        );
+    },
 };
 
 // Export singleton instance

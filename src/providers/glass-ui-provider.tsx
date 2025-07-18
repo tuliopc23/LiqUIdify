@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { ThemeProvider } from '../hooks/use-theme';
 import { LiquidGlassProvider } from '../hooks/use-liquid-glass';
 import { HapticProvider } from '../hooks/use-haptic-feedback';

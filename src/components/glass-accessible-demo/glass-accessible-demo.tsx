@@ -229,7 +229,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({ classNam
             <div className="p-3 bg-red-500/10 rounded">
               <button
                 role="button"
-                aria-expanded="maybe"
+                aria-expanded="false"
                 className="px-4 py-2 bg-red-500/20 rounded"
               >
                 ✗ Bad ARIA (auto-corrected)

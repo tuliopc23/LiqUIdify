@@ -161,11 +161,11 @@ export class AnimationSequence {
 
         // Add event listeners
         if (step.onStart) {
-          animation.onstart = step.onStart;
+          animation.addEventListener('start', step.onStart);
         }
 
         if (step.onFinish) {
-          animation.onfinish = step.onFinish;
+          animation.addEventListener('finish', step.onFinish);
         }
 
         this.animations.push(animation);

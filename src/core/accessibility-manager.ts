@@ -447,7 +447,7 @@ export class AccessibilityManager {
       }
 
       // Validate attribute value
-      if (attrRule.type === 'boolean' && !attrRule.values?.includes(attrValue)) {
+      if (attrRule.type === 'boolean' && 'values' in attrRule && !attrRule.values?.includes(attrValue)) {
         errors.push({
           attribute: attrName,
           value: attrValue,
@@ -502,7 +502,7 @@ export class AccessibilityManager {
       });
 
       // Apply implicit props if missing
-      if (roleRule.implicitProps && autoCorrect) {
+      if ('implicitProps' in roleRule && roleRule.implicitProps && autoCorrect) {
         Object.entries(roleRule.implicitProps).forEach(([prop, value]) => {
           if (!element.hasAttribute(prop)) {
             element.setAttribute(prop, value);
@@ -686,7 +686,7 @@ export class AccessibilityManager {
     return 'A';
   }
 
-  private applyAutoFixes(element: HTMLElement, suggestions: Suggestion[]): void {
+  private applyAutoFixes(_element: HTMLElement, suggestions: Suggestion[]): void {
     suggestions.forEach(suggestion => {
       if (suggestion.autoFixAvailable && suggestion.fix) {
         try {
@@ -805,7 +805,6 @@ class FocusTrap {
   private container: HTMLElement;
   private options: FocusOptions & { onDeactivate?: () => void };
   private active: boolean = false;
-  private previouslyFocused: HTMLElement | null = null;
   private firstFocusableElement: HTMLElement | null = null;
   private lastFocusableElement: HTMLElement | null = null;
 
@@ -819,7 +818,6 @@ class FocusTrap {
     if (this.active) return;
 
     this.active = true;
-    this.previouslyFocused = document.activeElement as HTMLElement;
 
     // Set initial focus
     if (this.options.initialFocus) {

@@ -25,7 +25,7 @@ export {
     type EnhancedGlassLayer,
     type PixelPerfectConfig,
     type AppleHIGCompliance,
-} from '../lib/enhanced-apple-liquid-glass';
+} from '../../lib/enhanced-apple-liquid-glass';
 
 export {
     LiquidGlassSvgFilters,

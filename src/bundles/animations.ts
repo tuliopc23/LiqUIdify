@@ -11,11 +11,34 @@ export const loadFramerMotion = () => import('framer-motion');
 // Animation hooks (tree-shakeable)
 export * from '../hooks/use-liquid-glass';
 export * from '../hooks/use-haptic-feedback';
-export * from '../hooks/use-glass-animations';
+export { 
+  useGlassAnimation,
+  useMagneticHover as useMagneticHoverHook,
+  useRippleEffect,
+  useSpringAnimation,
+  useGlassStateTransitions,
+  useLiquidFlow,
+  TIMING_PRESETS,
+  GLASS_ANIMATION_PRESETS,
+  type AnimationState,
+  type AnimationConfig as HookAnimationConfig
+} from '../hooks/use-glass-animations';
 
 // Animation utilities
 export * from '../lib/framer-motion-constants';
-export * from '../lib/glass-animations';
+export {
+  type SpringPhysics,
+  type Vector2D,
+  type AnimationConfig as LibAnimationConfig,
+  GLASS_EASINGS,
+  GlassAnimation,
+  GlassChoreographer,
+  GlassGestureAnimator,
+  createGlassAnimation,
+  createChoreographer,
+  createGestureAnimator,
+  GlassUtils
+} from '../lib/glass-animations';
 export * from '../lib/glass-physics';
 
 // Advanced visual components

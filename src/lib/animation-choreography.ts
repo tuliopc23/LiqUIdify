@@ -9,7 +9,6 @@
 
 import { gsap } from 'gsap';
 import { GlassAnimation, GLASS_EASINGS, AnimationType } from './glass-animations';
-import { AnimationDuration } from '@/types/branded';
 
 /**
  * Animation sequence configuration
@@ -138,7 +137,7 @@ export class ChoreographyTiming {
   /**
    * Calculate optimal stagger delay based on element count
    */
-  static calculateStagger(elementCount: number, baseDuration: number): number {
+  static calculateStagger(elementCount: number, _baseDuration: number): number {
     // Apple's design guidelines suggest shorter delays for more elements
     const baseStagger = 0.1;
     const factor = Math.min(1, 8 / elementCount);
@@ -151,7 +150,7 @@ export class ChoreographyTiming {
   static createContextualEasing(context: 'entrance' | 'exit' | 'hover' | 'focus'): string {
     const easingMap = {
       entrance: GLASS_EASINGS.smoothOut,
-      exit: GLASS_EASINGS.smoothIn || 'power2.in',
+      exit: 'power2.in', // smoothIn easing for exit animations
       hover: GLASS_EASINGS.magnetic,
       focus: GLASS_EASINGS.elastic,
     };

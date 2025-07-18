@@ -294,7 +294,7 @@ export class QualityGateSystem {
     return recommendations;
   }
 
-  private generateNextSteps(issues: QualityIssue[], passed: boolean): string[] {
+  private generateNextSteps(_issues: QualityIssue[], passed: boolean): string[] {
     const nextSteps: string[] = [];
     
     if (!passed) {

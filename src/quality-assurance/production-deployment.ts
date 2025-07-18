@@ -46,10 +46,8 @@ export interface DeploymentReport {
 
 export class ProductionDeploymentOptimizer {
   private static instance: ProductionDeploymentOptimizer;
-  private config: ProductionConfig;
 
   private constructor() {
-    this.config = this.getDefaultConfig();
   }
 
   public static getInstance(): ProductionDeploymentOptimizer {

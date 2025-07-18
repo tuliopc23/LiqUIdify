@@ -66,11 +66,12 @@ export function useSpringAnimation(config: PhysicsConfig = {}) {
       const duration = getSpringDuration();
       const easing = getSpringEasing();
       
-      element.style.transition = `all ${duration}ms ${easing}`;
-      Object.assign(element.style, properties);
+      const htmlElement = element as HTMLElement;
+      htmlElement.style.transition = `all ${duration}ms ${easing}`;
+      Object.assign(htmlElement.style, properties);
       
       setTimeout(() => {
-        element.style.transition = '';
+        htmlElement.style.transition = '';
         setIsAnimating(false);
       }, duration);
     }

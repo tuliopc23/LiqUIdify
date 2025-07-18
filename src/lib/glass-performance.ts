@@ -142,7 +142,7 @@ export class GlassPerformanceMonitor {
   private frameHistory: number[] = [];
   private lastFrameTime: number = 0;
   private frameCount: number = 0;
-  private startTime: number = performance.now();
+  private startTime: number = 0;
   private isMonitoring: boolean = false;
   private animationFrame: number | null = null;
 
@@ -381,7 +381,6 @@ export class GlassAnimationScheduler {
       .sort((a, b) => b.priority - a.priority);
 
     let executedTasks = 0;
-    let frameTime = 0;
 
     // Execute tasks within frame budget
     for (const task of sortedTasks) {
@@ -590,7 +589,9 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
 
   const setQuality = useCallback((quality: keyof typeof QUALITY_PRESETS) => {
     const qualityConfig = QUALITY_PRESETS[quality];
-    updateConfig(qualityConfig);
+    if (qualityConfig) {
+      updateConfig(qualityConfig);
+    }
   }, [updateConfig]);
 
   return {

@@ -284,7 +284,6 @@ export const CHOREOGRAPHY_PATTERNS: Record<string, ChoreographyPattern> = {
 export class GlassAnimationChoreographer {
     private sequences: Map<string, AnimationSequence> = new Map();
     private activeAnimations: Map<string, Animation> = new Map();
-    private timeline: number = 0;
     private isPlaying: boolean = false;
 
     /**
