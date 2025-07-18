@@ -1,17 +1,28 @@
 /**
  * Base Component System - Unified interfaces and types for all Glass UI components
- * 
+ *
  * This module provides the foundational interfaces and types that all Glass UI components
  * share to ensure consistency and proper composition.
  */
 
-import { ComponentPropsWithoutRef, ElementRef, ForwardRefExoticComponent, HTMLAttributes, RefAttributes } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  ForwardRefExoticComponent,
+  HTMLAttributes,
+  RefAttributes,
+} from 'react';
 
 // Core component size variants
 export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 // Core component variants
-export type ComponentVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'destructive' | 'apple';
+export type ComponentVariant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'ghost'
+  | 'destructive'
+  | 'apple';
 
 // Glass effect intensity levels
 export type GlassIntensity = 'subtle' | 'medium' | 'strong';
@@ -118,7 +129,8 @@ export interface FormGlassProps extends InteractiveGlassProps {
 }
 
 // Generic component reference type
-export type ComponentRef<T extends HTMLElement = HTMLElement> = ElementRef<T>;
+export type ComponentRef<T extends HTMLElement = HTMLElement> =
+  React.RefObject<T>;
 
 // Component prop types for different HTML elements
 export type ButtonProps = ComponentPropsWithoutRef<'button'>;
@@ -137,17 +149,22 @@ export type PolymorphicProps<T extends React.ElementType> = {
 } & ComponentPropsWithoutRef<T>;
 
 // Component factory types
-export type GlassComponent<T extends HTMLElement, P = {}> = ForwardRefExoticComponent<
-  P & RefAttributes<T>
->;
+export type GlassComponent<
+  T extends HTMLElement,
+  P = {},
+> = ForwardRefExoticComponent<P & RefAttributes<T>>;
 
 // Compound component factory
-export type CompoundGlassComponent<T extends HTMLElement, P = {}> = GlassComponent<T, P & CompoundComponentProps>;
+export type CompoundGlassComponent<
+  T extends HTMLElement,
+  P = {},
+> = GlassComponent<T, P & CompoundComponentProps>;
 
 // Event handler types
-export type GlassEventHandler<T extends HTMLElement, E extends Event = Event> = (
-  event: E & { currentTarget: T }
-) => void;
+export type GlassEventHandler<
+  T extends HTMLElement,
+  E extends Event = Event,
+> = (event: E & { currentTarget: T }) => void;
 
 // Common event handlers
 export type ClickHandler = GlassEventHandler<HTMLElement, MouseEvent>;
@@ -200,12 +217,12 @@ export interface PerformanceProps {
 }
 
 // Combined base props for all components
-export interface UnifiedGlassProps extends 
-  BaseGlassProps,
-  CompoundComponentProps,
-  AccessibilityProps,
-  StyleConfig,
-  PerformanceProps {
+export interface UnifiedGlassProps
+  extends BaseGlassProps,
+    CompoundComponentProps,
+    AccessibilityProps,
+    StyleConfig,
+    PerformanceProps {
   /** Unique component identifier */
   id?: string;
   /** Component key for React */
@@ -221,5 +238,5 @@ export type PartialGlassProps<T> = Partial<T>;
 // Generic component props builder
 export type ComponentPropsBuilder<
   T extends HTMLElement,
-  P extends Record<string, any> = {}
+  P extends Record<string, any> = {},
 > = UnifiedGlassProps & HTMLAttributes<T> & P;

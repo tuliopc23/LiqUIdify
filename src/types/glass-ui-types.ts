@@ -1,19 +1,20 @@
 /**
  * @file Glass UI Type Utilities
  * @module glass-ui/types
- * 
+ *
  * Advanced TypeScript utilities and types for Glass UI components
  * providing type safety, developer experience, and runtime validation.
  */
 
 import { CSSProperties } from 'react';
-import { 
-  GlassColor, 
- 
-  GlassOpacity, 
+import {
+  GlassColor,
+  GlassOpacity,
   GlassBlur,
   AnimationDuration,
-  ThemeName
+  ThemeName,
+  createGlassOpacity,
+  createGlassBlur,
 } from './branded';
 
 /**
@@ -66,7 +67,8 @@ export type StringLiterals<T> = T extends string ? T : never;
  * ```
  */
 export type RequireAtLeastOne<T> = {
-  [K in keyof T]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<keyof T, K>>>
+  [K in keyof T]-?: Required<Pick<T, K>> &
+    Partial<Pick<T, Exclude<keyof T, K>>>;
 }[keyof T];
 
 /**
@@ -82,7 +84,8 @@ export type RequireAtLeastOne<T> = {
  * ```
  */
 export type RequireExactlyOne<T> = {
-  [K in keyof T]-?: Required<Pick<T, K>> & Partial<Record<Exclude<keyof T, K>, never>>
+  [K in keyof T]-?: Required<Pick<T, K>> &
+    Partial<Record<Exclude<keyof T, K>, never>>;
 }[keyof T];
 
 /**
@@ -92,25 +95,25 @@ export type RequireExactlyOne<T> = {
 export interface GlassUIBaseProps {
   /** Additional CSS class names */
   className?: string;
-  
+
   /** Inline styles */
   style?: CSSProperties;
-  
+
   /** Glass effect intensity */
   glassIntensity?: 'weak' | 'medium' | 'strong';
-  
+
   /** Disable glass effects */
   disableGlass?: boolean;
-  
+
   /** Theme override */
   theme?: ThemeName;
-  
+
   /** Test ID for testing */
   testId?: string;
-  
+
   /** Accessibility label */
   'aria-label'?: string;
-  
+
   /** Accessibility description */
   'aria-describedby'?: string;
 }
@@ -122,16 +125,16 @@ export interface GlassUIBaseProps {
 export interface GlassUIInteractiveProps extends GlassUIBaseProps {
   /** Disabled state */
   disabled?: boolean;
-  
+
   /** Loading state */
   loading?: boolean;
-  
+
   /** Loading text */
   loadingText?: string;
-  
+
   /** Focus visible state */
   focusVisible?: boolean;
-  
+
   /** Keyboard navigation */
   tabIndex?: number;
 }
@@ -143,28 +146,28 @@ export interface GlassUIInteractiveProps extends GlassUIBaseProps {
 export interface GlassUIFormProps<T = string> extends GlassUIInteractiveProps {
   /** Field name */
   name?: string;
-  
+
   /** Field value */
   value?: T;
-  
+
   /** Default value */
   defaultValue?: T;
-  
+
   /** Change handler */
   onChange?: (value: T) => void;
-  
+
   /** Blur handler */
   onBlur?: () => void;
-  
+
   /** Focus handler */
   onFocus?: () => void;
-  
+
   /** Validation error */
   error?: string | boolean;
-  
+
   /** Required field */
   required?: boolean;
-  
+
   /** Read-only field */
   readOnly?: boolean;
 }
@@ -176,20 +179,20 @@ export interface GlassUIFormProps<T = string> extends GlassUIInteractiveProps {
 export interface GlassEffectConfig {
   /** Background opacity */
   opacity: GlassOpacity;
-  
+
   /** Blur amount */
   blur: GlassBlur;
-  
+
   /** Saturation level */
   saturation?: number;
-  
+
   /** Border configuration */
   border?: {
     color: GlassColor;
     width?: number;
     glow?: boolean;
   };
-  
+
   /** Shadow configuration */
   shadow?: {
     color: GlassColor;
@@ -198,7 +201,7 @@ export interface GlassEffectConfig {
     x?: number;
     y?: number;
   };
-  
+
   /** Animation configuration */
   animation?: {
     duration: AnimationDuration;
@@ -211,7 +214,7 @@ export interface GlassEffectConfig {
  * Component style variants
  * Consistent style variant definitions
  */
-export type ComponentVariant = 
+export type ComponentVariant =
   | 'primary'
   | 'secondary'
   | 'tertiary'
@@ -226,22 +229,13 @@ export type ComponentVariant =
  * Component sizes
  * Consistent size definitions
  */
-export type ComponentSize = 
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl';
+export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Animation states
  * Common animation state types
  */
-export type AnimationState =
-  | 'entering'
-  | 'entered'
-  | 'exiting'
-  | 'exited';
+export type AnimationState = 'entering' | 'entered' | 'exiting' | 'exited';
 
 /**
  * Layout direction
@@ -256,7 +250,13 @@ export type Alignment = 'start' | 'center' | 'end' | 'stretch';
 /**
  * Justification options
  */
-export type Justification = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
+export type Justification =
+  | 'start'
+  | 'center'
+  | 'end'
+  | 'between'
+  | 'around'
+  | 'evenly';
 
 /**
  * Responsive prop utility
@@ -266,12 +266,14 @@ export type Justification = 'start' | 'center' | 'end' | 'between' | 'around' | 
  * // ComponentSize | { sm?: ComponentSize; md?: ComponentSize; lg?: ComponentSize; xl?: ComponentSize }
  * ```
  */
-export type Responsive<T> = T | {
-  sm?: T;
-  md?: T;
-  lg?: T;
-  xl?: T;
-};
+export type Responsive<T> =
+  | T
+  | {
+      sm?: T;
+      md?: T;
+      lg?: T;
+      xl?: T;
+    };
 
 /**
  * CSS variable generator for Glass UI
@@ -296,10 +298,19 @@ export const typeGuards = {
    */
   isComponentVariant: (value: unknown): value is ComponentVariant => {
     const variants: ComponentVariant[] = [
-      'primary', 'secondary', 'tertiary', 'ghost', 
-      'outline', 'destructive', 'success', 'warning', 'info'
+      'primary',
+      'secondary',
+      'tertiary',
+      'ghost',
+      'outline',
+      'destructive',
+      'success',
+      'warning',
+      'info',
     ];
-    return typeof value === 'string' && variants.includes(value as ComponentVariant);
+    return (
+      typeof value === 'string' && variants.includes(value as ComponentVariant)
+    );
   },
 
   /**
@@ -325,11 +336,15 @@ export const typeGuards = {
   /**
    * Check if value has glass effect config
    */
-  hasGlassEffect: (value: unknown): value is { glassEffect: GlassEffectConfig } => {
-    return typeof value === 'object' && 
-           value !== null && 
-           'glassEffect' in value &&
-           typeof (value as any).glassEffect === 'object';
+  hasGlassEffect: (
+    value: unknown
+  ): value is { glassEffect: GlassEffectConfig } => {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      'glassEffect' in value &&
+      typeof (value as any).glassEffect === 'object'
+    );
   },
 };
 
@@ -342,23 +357,23 @@ export const propValidators = {
    */
   validateGlassEffect: (config: Partial<GlassEffectConfig>): string[] => {
     const errors: string[] = [];
-    
+
     if (config.opacity !== undefined) {
       try {
-        GlassOpacity(config.opacity as number);
+        createGlassOpacity(config.opacity as number);
       } catch (e) {
         errors.push(`Invalid opacity: ${config.opacity}`);
       }
     }
-    
+
     if (config.blur !== undefined) {
       try {
-        GlassBlur(config.blur as number);
+        createGlassBlur(config.blur as number);
       } catch (e) {
         errors.push(`Invalid blur: ${config.blur}`);
       }
     }
-    
+
     return errors;
   },
 
@@ -370,8 +385,8 @@ export const propValidators = {
     validator: (value: T) => boolean
   ): boolean => {
     if (typeof prop === 'object' && prop !== null) {
-      return Object.values(prop).every(value => 
-        value === undefined || validator(value as T)
+      return Object.values(prop).every(
+        value => value === undefined || validator(value as T)
       );
     }
     return validator(prop as T);
@@ -385,21 +400,23 @@ export const styleGenerators = {
   /**
    * Generate CSS variables for glass effect
    */
-  generateGlassVariables: (config: Partial<GlassEffectConfig>): Partial<GlassCSSVariables> => {
+  generateGlassVariables: (
+    config: Partial<GlassEffectConfig>
+  ): Partial<GlassCSSVariables> => {
     const vars: Partial<GlassCSSVariables> = {};
-    
+
     if (config.opacity) {
       vars['--glass-opacity'] = config.opacity as number;
     }
-    
+
     if (config.blur) {
       vars['--glass-blur'] = `blur(${config.blur}px)`;
     }
-    
+
     if (config.saturation) {
       vars['--glass-saturation'] = `saturate(${config.saturation}%)`;
     }
-    
+
     return vars;
   },
 
@@ -435,7 +452,7 @@ export type ResponsiveProps<T> = {
  *   size: ComponentSize;
  *   variant: ComponentVariant;
  * }
- * 
+ *
  * type ResponsiveButtonProps = MakeResponsive<ButtonProps, 'size'>;
  * // { size: ComponentSize | Responsive<ComponentSize>; variant: ComponentVariant; }
  * ```

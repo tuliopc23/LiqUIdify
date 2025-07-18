@@ -1,22 +1,25 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { GracefulDegradationManager, DegradationConfig } from '../utils/graceful-degradation';
+import {
+  GracefulDegradationManager,
+  DegradationConfig,
+} from '../utils/graceful-degradation';
 
 interface GracefulDegradationContextType {
   manager: GracefulDegradationManager;
   config: DegradationConfig;
 }
 
-const GracefulDegradationContext = createContext<GracefulDegradationContextType | null>(null);
+const GracefulDegradationContext =
+  createContext<GracefulDegradationContextType | null>(null);
 
 interface GracefulDegradationProviderProps {
   children: ReactNode;
   config?: Partial<DegradationConfig>;
 }
 
-export const GracefulDegradationProvider: React.FC<GracefulDegradationProviderProps> = ({
-  children,
-  config = {},
-}) => {
+export const GracefulDegradationProvider: React.FC<
+  GracefulDegradationProviderProps
+> = ({ children, config = {} }) => {
   const manager = GracefulDegradationManager.getInstance();
   const defaultConfig: DegradationConfig = {
     enableFallbacks: true,
@@ -29,7 +32,9 @@ export const GracefulDegradationProvider: React.FC<GracefulDegradationProviderPr
   };
 
   return (
-    <GracefulDegradationContext.Provider value={{ manager, config: defaultConfig }}>
+    <GracefulDegradationContext.Provider
+      value={{ manager, config: defaultConfig }}
+    >
       {children}
     </GracefulDegradationContext.Provider>
   );
@@ -38,7 +43,9 @@ export const GracefulDegradationProvider: React.FC<GracefulDegradationProviderPr
 export const useGracefulDegradation = () => {
   const context = useContext(GracefulDegradationContext);
   if (!context) {
-    throw new Error('useGracefulDegradation must be used within GracefulDegradationProvider');
+    throw new Error(
+      'useGracefulDegradation must be used within GracefulDegradationProvider'
+    );
   }
   return context;
 };

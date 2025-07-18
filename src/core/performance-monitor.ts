@@ -1,4 +1,4 @@
-import { onCLS, onFCP, onFID, onLCP, onTTFB, onINP, Metric } from 'web-vitals';
+import { onCLS, onFCP, onLCP, onTTFB, onINP, Metric } from 'web-vitals';
 
 /**
  * Performance Monitor for Glass UI
@@ -8,11 +8,11 @@ import { onCLS, onFCP, onFID, onLCP, onTTFB, onINP, Metric } from 'web-vitals';
 // Core Web Vitals thresholds
 const THRESHOLDS = {
   LCP: { good: 2500, poor: 4000 }, // Largest Contentful Paint
-  FID: { good: 100, poor: 300 },   // First Input Delay
-  CLS: { good: 0.1, poor: 0.25 },  // Cumulative Layout Shift
+  // FID: { good: 100, poor: 300 },   // First Input Delay (deprecated)
+  CLS: { good: 0.1, poor: 0.25 }, // Cumulative Layout Shift
   FCP: { good: 1800, poor: 3000 }, // First Contentful Paint
   TTFB: { good: 800, poor: 1800 }, // Time to First Byte
-  INP: { good: 200, poor: 500 },   // Interaction to Next Paint
+  INP: { good: 200, poor: 500 }, // Interaction to Next Paint
   TTI: { good: 3800, poor: 7300 }, // Time to Interactive
 } as const;
 
@@ -77,25 +77,28 @@ class PerformanceMonitor {
   /**
    * Initialize Core Web Vitals monitoring
    */
-  init(options: { 
-    reportCallback?: ReportCallback;
-    immediate?: boolean;
-    sampleRate?: number;
-  } = {}): void {
+  init(
+    options: {
+      reportCallback?: ReportCallback;
+      immediate?: boolean;
+      sampleRate?: number;
+    } = {}
+  ): void {
     if (this.isInitialized) return;
-    
+
     const { reportCallback, immediate = false, sampleRate = 1 } = options;
-    
+
     // Sample rate for performance monitoring (0-1)
     if (Math.random() > sampleRate) return;
-    
+
     if (reportCallback) {
       this.reportCallbacks.push(reportCallback);
     }
 
     // Core Web Vitals
     onLCP(metric => this.handleMetric(metric, 'LCP'));
-    onFID(metric => this.handleMetric(metric, 'FID'));
+    // FID has been deprecated in favor of INP
+    // onFID(metric => this.handleMetric(metric, 'FID'));
     onCLS(metric => this.handleMetric(metric, 'CLS'));
     onFCP(metric => this.handleMetric(metric, 'FCP'));
     onTTFB(metric => this.handleMetric(metric, 'TTFB'));
@@ -126,7 +129,7 @@ class PerformanceMonitor {
    */
   private handleMetric(metric: Metric, name: MetricName): void {
     const rating = this.getRating(name, metric.value);
-    
+
     const performanceMetric: PerformanceMetric = {
       name,
       value: metric.value,
@@ -141,7 +144,9 @@ class PerformanceMonitor {
 
     // Log to console in development
     if (process.env.NODE_ENV === 'development') {
-      console.log(`[Performance] ${name}: ${metric.value.toFixed(2)}ms (${rating})`);
+      console.log(
+        `[Performance] ${name}: ${metric.value.toFixed(2)}ms (${rating})`
+      );
     }
   }
 
@@ -164,13 +169,15 @@ class PerformanceMonitor {
     let tti = 0;
     const observer = new PerformanceObserver(list => {
       const entries = list.getEntries();
-      
+
       // Find the last long task before 5 seconds of quiet time
       const longTasks = entries.filter(entry => entry.duration > 50);
-      
+
       if (longTasks.length > 0) {
         const lastLongTask = longTasks[longTasks.length - 1];
-        tti = lastLongTask.startTime + lastLongTask.duration;
+        if (lastLongTask) {
+          tti = lastLongTask.startTime + lastLongTask.duration;
+        }
       }
     });
 
@@ -182,14 +189,20 @@ class PerformanceMonitor {
         if (tti === 0) {
           tti = performance.now();
         }
-        
-        this.handleMetric({
-          name: 'TTI',
-          value: tti,
-          id: 'tti-' + Date.now(),
-          navigationType: 'navigate',
-        } as Metric, 'TTI' as MetricName);
-        
+
+        this.handleMetric(
+          {
+            name: 'TTI',
+            value: tti,
+            id: 'tti-' + Date.now(),
+            navigationType: 'navigate',
+            rating: 'good',
+            delta: tti,
+            entries: [],
+          } as unknown as Metric,
+          'TTI' as MetricName
+        );
+
         observer.disconnect();
       }, 5000);
     });
@@ -203,14 +216,17 @@ class PerformanceMonitor {
 
     this.performanceObserver = new PerformanceObserver(list => {
       for (const entry of list.getEntries()) {
-        if (entry.entryType === 'measure' && entry.name.startsWith('glass-ui-')) {
+        if (
+          entry.entryType === 'measure' &&
+          entry.name.startsWith('glass-ui-')
+        ) {
           this.customMetrics.set(entry.name, entry.duration);
         }
       }
     });
 
-    this.performanceObserver.observe({ 
-      entryTypes: ['measure', 'navigation', 'resource'] 
+    this.performanceObserver.observe({
+      entryTypes: ['measure', 'navigation', 'resource'],
     });
   }
 
@@ -233,7 +249,10 @@ class PerformanceMonitor {
   /**
    * Track component performance
    */
-  trackComponent(componentName: string, metrics: Partial<ComponentMetric>): void {
+  trackComponent(
+    componentName: string,
+    metrics: Partial<ComponentMetric>
+  ): void {
     const existing = this.componentMetrics.get(componentName) || {
       componentName,
       renderTime: 0,
@@ -253,7 +272,7 @@ class PerformanceMonitor {
    */
   trackCustomMetric(name: string, value: number): void {
     this.customMetrics.set(name, value);
-    
+
     // Also create a performance mark
     if ('performance' in window) {
       performance.mark(`glass-ui-${name}-end`);
@@ -285,10 +304,13 @@ class PerformanceMonitor {
         `glass-ui-${name}-start`,
         `glass-ui-${name}-end`
       );
-      
-      const entries = performance.getEntriesByName(`glass-ui-${name}`, 'measure');
+
+      const entries = performance.getEntriesByName(
+        `glass-ui-${name}`,
+        'measure'
+      );
       if (entries.length > 0) {
-        const duration = entries[entries.length - 1].duration;
+        const duration = entries[entries.length - 1]?.duration || 0;
         this.trackCustomMetric(name, duration);
         return duration;
       }
@@ -307,7 +329,13 @@ class PerformanceMonitor {
       componentMetrics: Array.from(this.componentMetrics.values()),
       customMetrics: Object.fromEntries(this.customMetrics),
       userAgent: navigator.userAgent,
-      connection: this.captureNetworkInfo(),
+      connection: this.captureNetworkInfo() as
+        | {
+            effectiveType: string;
+            downlink: number;
+            rtt: number;
+          }
+        | undefined,
     };
   }
 
@@ -316,7 +344,7 @@ class PerformanceMonitor {
    */
   private sendReport(): void {
     const report = this.getReport();
-    
+
     // Notify all report callbacks
     this.reportCallbacks.forEach(callback => {
       try {

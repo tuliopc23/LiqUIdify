@@ -51,6 +51,7 @@ export interface AnimationSequenceOptions {
 export interface AnimationStep {
   target: string | HTMLElement | HTMLElement[];
   keyframes: Keyframe[];
+  duration?: number;
   options?: KeyframeAnimationOptions;
   onStart?: () => void;
   onFinish?: () => void;
@@ -138,10 +139,12 @@ export class AnimationSequence {
 
     for (let i = 0; i < this.steps.length; i++) {
       const step = this.steps[i];
+      if (!step) continue;
       const targets = this.getTargetElements(step.target);
 
       for (let j = 0; j < targets.length; j++) {
         const target = targets[j];
+        if (!target) continue;
         const staggerDelay = j * (this.options.stagger || 0);
 
         // Apply reduced motion if needed
@@ -150,11 +153,22 @@ export class AnimationSequence {
           : step.keyframes;
 
         // Create animation
+        const directionMapping: Record<string, PlaybackDirection> = {
+          forward: 'normal',
+          reverse: 'reverse',
+          alternate: 'alternate',
+        };
+
+        const direction =
+          this.options.direction && directionMapping[this.options.direction]
+            ? directionMapping[this.options.direction]
+            : 'normal';
+
         const animation = target.animate(keyframes, {
           duration: this.options.duration,
           easing: this.options.easing,
           delay: delay + staggerDelay,
-          direction: this.options.direction,
+          direction,
           iterations: this.options.iterations,
           ...step.options,
         });
@@ -171,7 +185,8 @@ export class AnimationSequence {
         this.animations.push(animation);
       }
 
-      // Increase delay for next step
+      // Update delay for next step
+      delay += step.duration || this.options.duration || 0;
       delay +=
         (this.options.duration || 0) +
         (this.options.stagger || 0) * targets.length;

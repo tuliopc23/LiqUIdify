@@ -1,7 +1,7 @@
 /**
  * Advanced Bundle - Complex components and features
  * Target size: <8KB gzipped
- * 
+ *
  * Includes advanced components, physics, and premium features
  * Loaded on-demand for enhanced functionality
  */

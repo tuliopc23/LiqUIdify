@@ -77,7 +77,7 @@ export function GlassModalLite({
             sizeClasses[size],
             className
           )}
-          onClick={(e) => e.stopPropagation()}
+          onClick={e => e.stopPropagation()}
           role="dialog"
           aria-modal="true"
           aria-labelledby={title ? 'modal-title' : undefined}

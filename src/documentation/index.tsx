@@ -6,7 +6,10 @@ import { GlassButton } from '../components/glass-button';
 import { GlassInput } from '../components/glass-input';
 import { GlassCard } from '../components/glass-card';
 import { GlassModal } from '../components/glass-modal';
-import { GlassTooltip, type GlassTooltipProps } from '../components/glass-tooltip';
+import {
+  GlassTooltip,
+  type GlassTooltipProps,
+} from '../components/glass-tooltip';
 import { GlassTabs } from '../components/glass-tabs';
 import type {
   GlassButtonProps,

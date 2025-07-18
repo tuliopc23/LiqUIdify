@@ -1,6 +1,6 @@
 /**
  * Refactored Glass Card Component
- * 
+ *
  * This component demonstrates the compound component architecture with:
  * - Compound components pattern with Card.Header, Card.Content, etc.
  * - Unified base component system
@@ -30,27 +30,58 @@ interface CardState {
   isSelected: boolean;
 }
 
+// Card-specific props (moved here to be used by business logic hook)
+export interface GlassCardRefactoredProps
+  extends LayoutGlassProps,
+    ComponentPropsBuilder<HTMLDivElement> {
+  /** Card hover effects */
+  hover?: boolean;
+  /** Card borders */
+  bordered?: boolean;
+  /** Interactive card (clickable) */
+  interactive?: boolean;
+  /** Selectable card */
+  selectable?: boolean;
+  /** Selected state */
+  selected?: boolean;
+  /** Card elevation */
+  elevation?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  /** Card orientation */
+  orientation?: 'vertical' | 'horizontal';
+  /** Card click handler */
+  onCardClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  /** Card selection handler */
+  onCardSelect?: (selected: boolean) => void;
+}
+
 // Business logic for card interactions
-const useCardBusinessLogic = createBusinessLogicHook<CardState, GlassCardProps, any>(
+const useCardBusinessLogic = createBusinessLogicHook<CardState>(
   // Initial state factory
-  (_props: GlassCardProps) => ({
+  (_props: GlassCardRefactoredProps) => ({
     isHovered: false,
     isPressed: false,
     isSelected: false,
   }),
   // Actions factory
-  (_state: CardState, setState: React.Dispatch<React.SetStateAction<CardState>>, props: GlassCardProps) => ({
+  (
+    _state: CardState,
+    setState: React.Dispatch<React.SetStateAction<CardState>>,
+    props: GlassCardRefactoredProps
+  ) => ({
     handleHover: (isHovered: boolean) => {
       if (!props.hover) return;
       setState((prev: CardState) => ({ ...prev, isHovered }));
     },
-    
+
     handlePress: () => {
       if (!props.interactive) return;
       setState((prev: CardState) => ({ ...prev, isPressed: true }));
-      setTimeout(() => setState((prev: CardState) => ({ ...prev, isPressed: false })), 150);
+      setTimeout(
+        () => setState((prev: CardState) => ({ ...prev, isPressed: false })),
+        150
+      );
     },
-    
+
     handleSelect: (isSelected: boolean) => {
       if (!props.selectable) return;
       setState((prev: CardState) => ({ ...prev, isSelected }));
@@ -72,43 +103,25 @@ const CardContext = createContext<CardContextValue | null>(null);
 const useCardContext = () => {
   const context = useContext(CardContext);
   if (!context) {
-    throw new Error('Card compound components must be used within a Card component');
+    throw new Error(
+      'Card compound components must be used within a Card component'
+    );
   }
   return context;
 };
 
-// Card-specific props
-export interface GlassCardProps extends 
-  LayoutGlassProps,
-  ComponentPropsBuilder<HTMLDivElement> {
-  /** Card hover effects */
-  hover?: boolean;
-  /** Card borders */
-  bordered?: boolean;
-  /** Interactive card (clickable) */
-  interactive?: boolean;
-  /** Selectable card */
-  selectable?: boolean;
-  /** Selected state */
-  selected?: boolean;
-  /** Card elevation */
-  elevation?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  /** Card orientation */
-  orientation?: 'vertical' | 'horizontal';
-  /** Card click handler */
-  onCardClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
-  /** Card selection handler */
-  onCardSelect?: (selected: boolean) => void;
-}
-
 // Variant class mappings
 const VARIANT_CLASSES = {
-  primary: 'bg-white/90 dark:bg-gray-800/90 border-gray-200/50 dark:border-gray-700/50',
-  secondary: 'bg-gray-50/90 dark:bg-gray-900/90 border-gray-300/50 dark:border-gray-600/50',
+  primary:
+    'bg-white/90 dark:bg-gray-800/90 border-gray-200/50 dark:border-gray-700/50',
+  secondary:
+    'bg-gray-50/90 dark:bg-gray-900/90 border-gray-300/50 dark:border-gray-600/50',
   tertiary: 'bg-transparent border-gray-200/30 dark:border-gray-700/30',
   ghost: 'bg-transparent border-transparent',
-  destructive: 'bg-red-50/90 dark:bg-red-900/10 border-red-200/50 dark:border-red-800/50',
-  apple: 'bg-white/80 dark:bg-gray-800/80 border-gray-200/30 dark:border-gray-700/30',
+  destructive:
+    'bg-red-50/90 dark:bg-red-900/10 border-red-200/50 dark:border-red-800/50',
+  apple:
+    'bg-white/80 dark:bg-gray-800/80 border-gray-200/30 dark:border-gray-700/30',
 };
 
 // Elevation mappings
@@ -133,7 +146,7 @@ const PADDING_CLASSES = {
 /**
  * Main Glass Card Component
  */
-export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
+export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
   (
     {
       // Base props
@@ -141,11 +154,11 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       variant = 'primary',
       className,
       children,
-      
+
       // Layout props
       padding = 'md',
       radius = 'md',
-      
+
       // Card-specific props
       hover = true,
       bordered = true,
@@ -154,21 +167,21 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       selected = false,
       elevation = 'md',
       orientation = 'vertical',
-      
+
       // Glass effect props
       glassEffect = { intensity: 'medium', blur: true, backdrop: true },
-      
+
       // Animation props
       animation = 'normal',
       disableAnimations = false,
-      
+
       // Event handlers
       onClick,
       onMouseEnter,
       onMouseLeave,
       onCardClick,
       onCardSelect,
-      
+
       ...props
     },
     ref
@@ -184,42 +197,40 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       animation,
       disableAnimations,
     });
-    
+
     // Animation hooks
-    const { currentState } = useGlassStateTransitions(animation, glassEffect?.intensity);
-    
+    const { currentState } = useGlassStateTransitions();
+
     // Event handlers with business logic
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
       if (interactive) {
-        actions.handlePress();
+        actions.handlePress?.();
         onCardClick?.(event);
       }
-      
+
       if (selectable) {
         const newSelected = !state.isSelected;
-        actions.handleSelect(newSelected);
+        actions.handleSelect?.(newSelected);
         onCardSelect?.(newSelected);
       }
-      
+
       onClick?.(event);
     };
-    
+
     const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
       if (hover) {
-        actions.handleHover(true);
-        // Trigger transition animation here if needed
+        actions.handleHover?.(true);
+        onMouseEnter?.(event);
       }
-      onMouseEnter?.(event);
     };
-    
+
     const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
       if (hover) {
-        actions.handleHover(false);
-        // Trigger transition animation here if needed
+        actions.handleHover?.(false);
+        onMouseLeave?.(event);
       }
-      onMouseLeave?.(event);
     };
-    
+
     // Generate glass classes and variables
     const glassClasses = generateGlassClasses(
       variant,
@@ -227,52 +238,49 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       currentState,
       glassEffect
     );
-    
-    const glassVariables = generateGlassVariables(
-      glassEffect?.intensity,
-      { 
-        animation: { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
-        ...glassEffect 
-      }
-    );
-    
+
+    const glassVariables = generateGlassVariables(glassEffect?.intensity, {
+      animation: { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
+      ...glassEffect,
+    });
+
     // Build component classes
     const componentClasses = cn(
       // Base classes
       'relative overflow-hidden',
       'rounded-xl',
       'will-change-transform',
-      
+
       // Glass effect classes
       glassClasses,
-      
+
       // Variant classes
       VARIANT_CLASSES[variant],
-      
+
       // Layout classes
       PADDING_CLASSES[padding],
-      
+
       // State classes
       {
-        'border': bordered,
+        border: bordered,
         'cursor-pointer': interactive || selectable,
         'ring-2 ring-blue-500/20': state.isSelected,
         'hover:shadow-lg': hover && !disableAnimations,
         'active:scale-[0.98]': interactive && !disableAnimations,
-        'flex': orientation === 'horizontal',
+        flex: orientation === 'horizontal',
         'flex-col': orientation === 'vertical',
       },
-      
+
       // Elevation classes
       ELEVATION_CLASSES[elevation],
-      
+
       // Animation classes
-      !disableAnimations && microInteraction.smooth,
-      
+      !disableAnimations && microInteraction(),
+
       // Custom classes
       className
     );
-    
+
     // Context value for compound components
     const contextValue: CardContextValue = {
       variant,
@@ -281,7 +289,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       interactive,
       selectable,
     };
-    
+
     return (
       <CardContext.Provider value={contextValue}>
         <div
@@ -307,25 +315,26 @@ GlassCard.displayName = 'GlassCard';
 /**
  * Card Header Component
  */
-export const CardHeader = forwardRef<HTMLDivElement, ComponentPropsBuilder<HTMLDivElement>>(
-  ({ className, children, ...props }, ref) => {
-    const { variant } = useCardContext();
-    
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'flex flex-col space-y-1.5 p-6',
-          variant === 'apple' && 'pb-4',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+export const CardHeader = forwardRef<
+  HTMLDivElement,
+  ComponentPropsBuilder<HTMLDivElement>
+>(({ className, children, ...props }, ref) => {
+  const { variant } = useCardContext();
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'flex flex-col space-y-1.5 p-6',
+        variant === 'apple' && 'pb-4',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 
 CardHeader.displayName = 'CardHeader';
 
@@ -335,7 +344,7 @@ CardHeader.displayName = 'CardHeader';
 export const CardTitle = forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ className, children, ...props }, ref) => {
     const { variant } = useCardContext();
-    
+
     return (
       <h3
         ref={ref}
@@ -361,7 +370,7 @@ CardTitle.displayName = 'CardTitle';
 export const CardDescription = forwardRef<HTMLParagraphElement, ParagraphProps>(
   ({ className, children, ...props }, ref) => {
     const { variant } = useCardContext();
-    
+
     return (
       <p
         ref={ref}
@@ -383,72 +392,68 @@ CardDescription.displayName = 'CardDescription';
 /**
  * Card Content Component
  */
-export const CardContent = forwardRef<HTMLDivElement, ComponentPropsBuilder<HTMLDivElement>>(
-  ({ className, children, ...props }, ref) => {
-    const { padding } = useCardContext();
-    
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'flex-1',
-          padding !== 'none' && 'p-6 pt-0',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+export const CardContent = forwardRef<
+  HTMLDivElement,
+  ComponentPropsBuilder<HTMLDivElement>
+>(({ className, children, ...props }, ref) => {
+  const { padding } = useCardContext();
+
+  return (
+    <div
+      ref={ref}
+      className={cn('flex-1', padding !== 'none' && 'p-6 pt-0', className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 
 CardContent.displayName = 'CardContent';
 
 /**
  * Card Footer Component
  */
-export const CardFooter = forwardRef<HTMLDivElement, ComponentPropsBuilder<HTMLDivElement>>(
-  ({ className, children, ...props }, ref) => {
-    const { variant } = useCardContext();
-    
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'flex items-center p-6 pt-0',
-          variant === 'apple' && 'pt-4',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+export const CardFooter = forwardRef<
+  HTMLDivElement,
+  ComponentPropsBuilder<HTMLDivElement>
+>(({ className, children, ...props }, ref) => {
+  const { variant } = useCardContext();
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'flex items-center p-6 pt-0',
+        variant === 'apple' && 'pt-4',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 
 CardFooter.displayName = 'CardFooter';
 
 /**
  * Card Actions Component
  */
-export const CardActions = forwardRef<HTMLDivElement, ComponentPropsBuilder<HTMLDivElement>>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'flex items-center gap-2 p-6 pt-0',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+export const CardActions = forwardRef<
+  HTMLDivElement,
+  ComponentPropsBuilder<HTMLDivElement>
+>(({ className, children, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      className={cn('flex items-center gap-2 p-6 pt-0', className)}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+});
 
 CardActions.displayName = 'CardActions';
 
@@ -463,4 +468,4 @@ const CompoundCard = Object.assign(GlassCard, {
 });
 
 export { CompoundCard as Card };
-export type { GlassCardProps };
+export type { GlassCardRefactoredProps as GlassCardProps };

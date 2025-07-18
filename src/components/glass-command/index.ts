@@ -1,1 +1,5 @@
-export { CommandPalette, type CommandItem } from './glass-command';
+export {
+  CommandPalette,
+  type CommandItem,
+  type CommandPaletteProps,
+} from './glass-command';

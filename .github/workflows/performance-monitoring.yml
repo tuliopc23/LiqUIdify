@@ -1,0 +1,448 @@
+name: Performance Monitoring
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    # Run performance tests daily at 3 AM UTC
+    - cron: '0 3 * * *'
+
+jobs:
+  performance-benchmarks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]
+        browser: [chrome, firefox]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build:production
+
+      - name: Setup Chrome for performance testing
+        if: matrix.browser == 'chrome'
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
+
+      - name: Setup Firefox for performance testing
+        if: matrix.browser == 'firefox'
+        uses: browser-actions/setup-firefox@latest
+        with:
+          firefox-version: latest
+
+      - name: Run component performance benchmarks
+        run: |
+          npm run perf:benchmark -- --ci --browser=${{ matrix.browser }}
+        env:
+          NODE_ENV: production
+          PERFORMANCE_BUDGET_ENFORCE: true
+
+      - name: Run memory leak detection
+        run: |
+          npm run perf:memory-leak -- --ci --browser=${{ matrix.browser }}
+
+      - name: Run real-world performance simulation
+        run: |
+          npm run perf:real-world -- --ci --browser=${{ matrix.browser }}
+
+      - name: Upload performance reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-reports-node${{ matrix.node-version }}-${{ matrix.browser }}
+          path: |
+            performance-reports/
+            dist/performance-*.json
+          retention-days: 30
+
+      - name: Comment PR with performance results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Read performance results
+            const reportPath = 'performance-reports/benchmark-results.json';
+            if (!fs.existsSync(reportPath)) {
+              console.log('No performance report found');
+              return;
+            }
+
+            const results = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+
+            // Generate performance comment
+            const comment = `## 🚀 Performance Report - Node ${{ matrix.node-version }} (${{ matrix.browser }})
+
+            | Component | Render Time | Memory Leak | Frame Rate | Status |
+            |-----------|-------------|-------------|------------|--------|
+            ${results.results.map(result =>
+              `| ${result.name} | ${result.renderTime.average.toFixed(2)}ms | ${(result.memoryUsage.leaked / 1024).toFixed(2)}KB | ${result.frameRate.average.toFixed(1)}fps | ${result.passed ? '✅' : '❌'} |`
+            ).join('\n')}
+
+            ### S-Tier Performance Targets
+            - **Render Time**: <16ms (60fps)
+            - **Memory Leak**: <1MB
+            - **Frame Rate**: >55fps
+            - **Bundle Size**: <30KB
+
+            ### Summary
+            - **Total Tests**: ${results.summary.total}
+            - **Passed**: ${results.summary.passed}
+            - **Pass Rate**: ${results.summary.passRate}%
+
+            ${results.summary.passed === results.summary.total
+              ? '🎉 All performance targets met!'
+              : '⚠️ Some performance targets not met. Please review and optimize.'}
+
+            [View detailed performance report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  bundle-size-performance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and analyze bundle performance
+        run: |
+          npm run build:production
+          npm run bundle:budget:enforce
+
+      - name: Run tree-shaking verification
+        run: |
+          npm run bundle:tree-shake:verify
+
+      - name: Analyze bundle size impact
+        id: bundle-analysis
+        run: |
+          # Run bundle analysis and capture metrics
+          CORE_SIZE=$(stat -c%s dist/core.mjs 2>/dev/null || echo "0")
+          ANIMATIONS_SIZE=$(stat -c%s dist/animations.mjs 2>/dev/null || echo "0")
+          ADVANCED_SIZE=$(stat -c%s dist/advanced.mjs 2>/dev/null || echo "0")
+          TOTAL_SIZE=$((CORE_SIZE + ANIMATIONS_SIZE + ADVANCED_SIZE))
+
+          # Convert to KB
+          CORE_KB=$((CORE_SIZE / 1024))
+          ANIMATIONS_KB=$((ANIMATIONS_SIZE / 1024))
+          ADVANCED_KB=$((ADVANCED_SIZE / 1024))
+          TOTAL_KB=$((TOTAL_SIZE / 1024))
+
+          echo "core_size_kb=$CORE_KB" >> $GITHUB_OUTPUT
+          echo "animations_size_kb=$ANIMATIONS_KB" >> $GITHUB_OUTPUT
+          echo "advanced_size_kb=$ADVANCED_KB" >> $GITHUB_OUTPUT
+          echo "total_size_kb=$TOTAL_KB" >> $GITHUB_OUTPUT
+
+          # Check S-Tier bundle requirements
+          if [ $CORE_KB -gt 15 ]; then
+            echo "❌ Core bundle exceeds 15KB: ${CORE_KB}KB"
+            exit 1
+          fi
+
+          if [ $ANIMATIONS_KB -gt 10 ]; then
+            echo "❌ Animations bundle exceeds 10KB: ${ANIMATIONS_KB}KB"
+            exit 1
+          fi
+
+          if [ $ADVANCED_KB -gt 8 ]; then
+            echo "❌ Advanced bundle exceeds 8KB: ${ADVANCED_KB}KB"
+            exit 1
+          fi
+
+          if [ $TOTAL_KB -gt 30 ]; then
+            echo "❌ Total bundle exceeds 30KB: ${TOTAL_KB}KB"
+            exit 1
+          fi
+
+          echo "✅ All bundles within S-Tier limits"
+
+      - name: Upload bundle analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-analysis
+          path: |
+            dist/bundle-*.json
+            dist/BUNDLE_BUDGET_REPORT.md
+          retention-days: 30
+
+  memory-leak-detection:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for testing
+        run: npm run build
+
+      - name: Setup Chrome with memory flags
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
+
+      - name: Run comprehensive memory leak detection
+        run: |
+          # Run with garbage collection exposed for accurate memory measurement
+          npm run perf:memory-leak:comprehensive -- \
+            --cycles=20 \
+            --components=all \
+            --timeout=300000 \
+            --gc-exposed
+        env:
+          NODE_OPTIONS: "--expose-gc --max-old-space-size=4096"
+
+      - name: Analyze memory growth patterns
+        run: |
+          node scripts/analyze-memory-patterns.js performance-reports/memory-leak-results.json
+
+      - name: Check memory leak thresholds
+        run: |
+          # Fail if any component has memory leak > 1MB
+          node -e "
+            const results = require('./performance-reports/memory-leak-results.json');
+            const failures = results.components.filter(c => c.leakRate > 1024 * 1024);
+            if (failures.length > 0) {
+              console.log('❌ Memory leak detected in:', failures.map(f => f.name).join(', '));
+              process.exit(1);
+            }
+            console.log('✅ No significant memory leaks detected');
+          "
+
+      - name: Upload memory analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: memory-leak-analysis
+          path: |
+            performance-reports/memory-*.json
+            performance-reports/memory-patterns.html
+          retention-days: 30
+
+  performance-regression-detection:
+    runs-on: ubuntu-latest
+    needs: [performance-benchmarks]
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout main branch for comparison
+        run: |
+          git fetch origin main
+          git checkout main
+          npm ci
+          npm run build:production
+          npm run perf:benchmark -- --ci --output=main-baseline.json
+
+      - name: Checkout PR branch
+        run: |
+          git checkout ${{ github.head_ref }}
+          npm ci
+          npm run build:production
+          npm run perf:benchmark -- --ci --output=pr-results.json
+
+      - name: Compare performance metrics
+        id: compare
+        run: |
+          node scripts/compare-performance.js main-baseline.json pr-results.json > performance-comparison.md
+
+      - name: Check for performance regressions
+        run: |
+          # Check if any component has >10% performance regression
+          node -e "
+            const fs = require('fs');
+            const comparison = JSON.parse(fs.readFileSync('performance-comparison.json'));
+
+            const regressions = comparison.regressions.filter(r => r.degradation > 10);
+            if (regressions.length > 0) {
+              console.log('❌ Performance regressions detected:');
+              regressions.forEach(r => {
+                console.log(\`  \${r.component}: \${r.metric} degraded by \${r.degradation}%\`);
+              });
+              process.exit(1);
+            }
+            console.log('✅ No significant performance regressions');
+          "
+
+      - name: Comment PR with regression analysis
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const comparison = fs.readFileSync('performance-comparison.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comparison
+            });
+
+  real-world-performance-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build:production
+
+      - name: Setup Playwright for real-world testing
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Run real-world performance scenarios
+        run: |
+          npm run perf:real-world -- \
+            --scenarios=mobile-3g,mobile-4g,desktop,tablet \
+            --users=1,5,10 \
+            --duration=60 \
+            --output=real-world-results.json
+
+      - name: Validate Core Web Vitals
+        run: |
+          node scripts/validate-core-web-vitals.js real-world-results.json
+
+      - name: Test with slow devices simulation
+        run: |
+          npm run perf:slow-devices -- \
+            --cpu-throttling=4 \
+            --memory-limit=512mb \
+            --network=slow-3g
+
+      - name: Generate performance score
+        id: score
+        run: |
+          SCORE=$(node scripts/calculate-performance-score.js real-world-results.json)
+          echo "performance_score=$SCORE" >> $GITHUB_OUTPUT
+
+          if [ $SCORE -lt 85 ]; then
+            echo "❌ Performance score $SCORE below S-tier threshold (85)"
+            exit 1
+          fi
+
+          echo "✅ Performance score: $SCORE (S-tier achieved)"
+
+      - name: Upload real-world test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: real-world-performance
+          path: |
+            real-world-results.json
+            performance-score-report.html
+            core-web-vitals-report.json
+          retention-days: 30
+
+  performance-monitoring-summary:
+    runs-on: ubuntu-latest
+    needs: [performance-benchmarks, bundle-size-performance, memory-leak-detection, real-world-performance-validation]
+    if: always()
+    steps:
+      - name: Download all performance artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: performance-artifacts
+
+      - name: Generate comprehensive performance report
+        run: |
+          node scripts/generate-performance-summary.js performance-artifacts/ > PERFORMANCE_SUMMARY.md
+
+      - name: Upload performance summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-summary
+          path: PERFORMANCE_SUMMARY.md
+          retention-days: 90
+
+      - name: Update performance badge
+        if: github.ref == 'refs/heads/main'
+        run: |
+          # Update performance badge in README
+          node scripts/update-performance-badge.js
+
+      - name: Send performance alert if needed
+        if: failure() && github.ref == 'refs/heads/main'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚨 Performance Monitoring Alert - S-Tier Standards Not Met',
+              body: `## Performance Monitoring Alert
+
+              **Date**: ${new Date().toISOString()}
+              **Commit**: ${context.sha}
+              **Build**: [${context.runId}](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+
+              ⚠️ The automated performance monitoring detected that one or more performance targets have not been met.
+
+              ### Performance Requirements (S-Tier):
+              - Render time: <16ms (60fps)
+              - Memory leak: <1MB
+              - Frame rate: >55fps
+              - Bundle size: <30KB total
+              - Performance score: >85
+
+              ### Required Actions:
+              1. Review the detailed performance reports in the workflow artifacts
+              2. Identify and fix performance regressions
+              3. Run local performance tests to verify fixes
+              4. Ensure all S-tier performance targets are met
+
+              ### Resources:
+              - [Performance Optimization Guide](./docs/performance.md)
+              - [Bundle Size Guidelines](./docs/bundle-optimization.md)
+              - [Memory Leak Prevention](./docs/memory-management.md)
+
+              This issue will be automatically closed when performance scores return to S-tier levels.`,
+              labels: ['performance', 'priority-high', 's-tier', 'automated']
+            };
+
+            github.rest.issues.create(issue);

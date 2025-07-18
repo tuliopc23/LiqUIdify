@@ -232,7 +232,10 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 
     if (!rgbMatch) {
       if (process.env.NODE_ENV === 'development') {
-        console.warn('analyzeColor: Could not parse color string:', colorString);
+        console.warn(
+          'analyzeColor: Could not parse color string:',
+          colorString
+        );
       }
       // Return a default analysis for unrecognized colors
       return {

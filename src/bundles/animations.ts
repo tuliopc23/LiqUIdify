@@ -6,12 +6,14 @@
 
 // Dynamic imports for heavy animation libraries
 export const loadGSAP = () => import('gsap').then(gsap => gsap.default || gsap);
-export const loadFramerMotion = () => import('framer-motion');
+import type * as FramerMotion from 'framer-motion';
+export const loadFramerMotion = (): Promise<typeof FramerMotion> =>
+  import('framer-motion');
 
 // Animation hooks (tree-shakeable)
 export * from '../hooks/use-liquid-glass';
 export * from '../hooks/use-haptic-feedback';
-export { 
+export {
   useGlassAnimation,
   useMagneticHover as useMagneticHoverHook,
   useRippleEffect,
@@ -21,7 +23,7 @@ export {
   TIMING_PRESETS,
   GLASS_ANIMATION_PRESETS,
   type AnimationState,
-  type AnimationConfig as HookAnimationConfig
+  type AnimationConfig as HookAnimationConfig,
 } from '../hooks/use-glass-animations';
 
 // Animation utilities
@@ -37,7 +39,7 @@ export {
   createGlassAnimation,
   createChoreographer,
   createGestureAnimator,
-  GlassUtils
+  GlassUtils,
 } from '../lib/glass-animations';
 export * from '../lib/glass-physics';
 

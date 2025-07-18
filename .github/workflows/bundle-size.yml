@@ -1,0 +1,128 @@
+name: Bundle Size Check
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  bundle-size:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build bundles
+        run: |
+          npm run build:standard
+          npm run build:optimized
+          npm run build:modular
+
+      - name: Analyze bundle sizes
+        id: analyze
+        run: |
+          # Core bundle check (<15KB)
+          CORE_SIZE=$(stat -f%z dist/core.min.js 2>/dev/null || stat -c%s dist/core.min.js)
+          CORE_SIZE_KB=$((CORE_SIZE / 1024))
+          echo "core_size=$CORE_SIZE_KB" >> $GITHUB_OUTPUT
+          
+          # Animation bundle check (<10KB)
+          ANIM_SIZE=$(stat -f%z dist/animations.min.js 2>/dev/null || stat -c%s dist/animations.min.js)
+          ANIM_SIZE_KB=$((ANIM_SIZE / 1024))
+          echo "anim_size=$ANIM_SIZE_KB" >> $GITHUB_OUTPUT
+          
+          # Advanced bundle check (<8KB)
+          ADV_SIZE=$(stat -f%z dist/advanced.min.js 2>/dev/null || stat -c%s dist/advanced.min.js)
+          ADV_SIZE_KB=$((ADV_SIZE / 1024))
+          echo "adv_size=$ADV_SIZE_KB" >> $GITHUB_OUTPUT
+          
+          # Total bundle check (<30KB)
+          TOTAL_SIZE=$((CORE_SIZE + ANIM_SIZE + ADV_SIZE))
+          TOTAL_SIZE_KB=$((TOTAL_SIZE / 1024))
+          echo "total_size=$TOTAL_SIZE_KB" >> $GITHUB_OUTPUT
+          
+          # Check if sizes meet S-tier requirements
+          if [ $CORE_SIZE_KB -gt 15 ]; then
+            echo "❌ Core bundle exceeds 15KB limit: ${CORE_SIZE_KB}KB" >> bundle-report.txt
+            echo "core_status=failed" >> $GITHUB_OUTPUT
+          else
+            echo "✅ Core bundle: ${CORE_SIZE_KB}KB (limit: 15KB)" >> bundle-report.txt
+            echo "core_status=passed" >> $GITHUB_OUTPUT
+          fi
+          
+          if [ $ANIM_SIZE_KB -gt 10 ]; then
+            echo "❌ Animation bundle exceeds 10KB limit: ${ANIM_SIZE_KB}KB" >> bundle-report.txt
+            echo "anim_status=failed" >> $GITHUB_OUTPUT
+          else
+            echo "✅ Animation bundle: ${ANIM_SIZE_KB}KB (limit: 10KB)" >> bundle-report.txt
+            echo "anim_status=passed" >> $GITHUB_OUTPUT
+          fi
+          
+          if [ $ADV_SIZE_KB -gt 8 ]; then
+            echo "❌ Advanced bundle exceeds 8KB limit: ${ADV_SIZE_KB}KB" >> bundle-report.txt
+            echo "adv_status=failed" >> $GITHUB_OUTPUT
+          else
+            echo "✅ Advanced bundle: ${ADV_SIZE_KB}KB (limit: 8KB)" >> bundle-report.txt
+            echo "adv_status=passed" >> $GITHUB_OUTPUT
+          fi
+          
+          if [ $TOTAL_SIZE_KB -gt 30 ]; then
+            echo "❌ Total bundle size exceeds 30KB limit: ${TOTAL_SIZE_KB}KB" >> bundle-report.txt
+            echo "total_status=failed" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            echo "✅ Total bundle size: ${TOTAL_SIZE_KB}KB (limit: 30KB)" >> bundle-report.txt
+            echo "total_status=passed" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate detailed bundle report
+        run: |
+          npm install -g webpack-bundle-analyzer
+          npm run build:analyze
+          
+      - name: Upload bundle analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-analysis
+          path: |
+            dist/bundle-stats.html
+            bundle-report.txt
+          retention-days: 7
+
+      - name: Comment PR with bundle sizes
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('bundle-report.txt', 'utf8');
+            
+            const comment = `## 📦 Bundle Size Report
+            
+            ${report}
+            
+            ### S-Tier Bundle Requirements:
+            - Core: <15KB
+            - Animations: <10KB  
+            - Advanced: <8KB
+            - **Total: <30KB**
+            
+            [View detailed analysis](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

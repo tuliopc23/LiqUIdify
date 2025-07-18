@@ -17,18 +17,18 @@ interface BaseChartProps {
   showTooltip?: boolean;
 }
 
-interface LineChartProps extends BaseChartProps {
+export interface LineChartProps extends BaseChartProps {
   strokeWidth?: number;
   showDots?: boolean;
   gradient?: boolean;
 }
 
-interface BarChartProps extends BaseChartProps {
+export interface BarChartProps extends BaseChartProps {
   orientation?: 'vertical' | 'horizontal';
   showValues?: boolean;
 }
 
-interface DonutChartProps extends BaseChartProps {
+export interface DonutChartProps extends BaseChartProps {
   innerRadius?: number;
   showLabels?: boolean;
   centerContent?: React.ReactNode;
@@ -121,9 +121,9 @@ export const LineChart: React.FC<LineChartProps> = ({
         </g>
 
         {/* Gradient area */}
-        {gradient && (
+        {gradient && points.length > 0 && (
           <path
-            d={`${pathData} L ${points[points.length - 1].x} ${height - padding} L ${padding} ${height - padding} Z`}
+            d={`${pathData} L ${points[points.length - 1]?.x} ${height - padding} L ${padding} ${height - padding} Z`}
             fill={`url(#${gradientId})`}
             className={cn(animated && 'transition-all duration-1000 ease-out')}
             style={{
@@ -173,7 +173,7 @@ export const LineChart: React.FC<LineChartProps> = ({
       </svg>
 
       {/* Tooltip */}
-      {showTooltip && hoveredPoint !== null && (
+      {showTooltip && hoveredPoint !== null && points[hoveredPoint] && (
         <div
           className={cn(
             'absolute z-10 px-3 py-2 rounded-lg text-sm pointer-events-none',
@@ -181,16 +181,16 @@ export const LineChart: React.FC<LineChartProps> = ({
             'border border-[var(--glass-border)]'
           )}
           style={{
-            left: points[hoveredPoint].x - 40,
-            top: points[hoveredPoint].y - 60,
+            left: points[hoveredPoint]?.x - 40,
+            top: points[hoveredPoint]?.y - 60,
             transform: 'translateX(-50%)',
           }}
         >
           <div className="font-medium text-[var(--text-primary)]">
-            {points[hoveredPoint].data.label}
+            {points[hoveredPoint]?.data.label}
           </div>
           <div className="text-[var(--text-secondary)]">
-            {points[hoveredPoint].data.value.toLocaleString()}
+            {points[hoveredPoint]?.data.value.toLocaleString()}
           </div>
         </div>
       )}

@@ -23,7 +23,7 @@ export interface CommandItem {
   keywords?: string[];
 }
 
-interface CommandPaletteProps {
+export interface CommandPaletteProps {
   items: CommandItem[];
   placeholder?: string;
   shortcut?: string[];

@@ -47,12 +47,12 @@ export interface DeploymentReport {
 export class ProductionDeploymentOptimizer {
   private static instance: ProductionDeploymentOptimizer;
 
-  private constructor() {
-  }
+  private constructor() {}
 
   public static getInstance(): ProductionDeploymentOptimizer {
     if (!ProductionDeploymentOptimizer.instance) {
-      ProductionDeploymentOptimizer.instance = new ProductionDeploymentOptimizer();
+      ProductionDeploymentOptimizer.instance =
+        new ProductionDeploymentOptimizer();
     }
     return ProductionDeploymentOptimizer.instance;
   }
@@ -63,23 +63,23 @@ export class ProductionDeploymentOptimizer {
         minification: true,
         compression: 'both',
         treeShaking: true,
-        codeSplitting: true
+        codeSplitting: true,
       },
       assets: {
         cdnUrl: 'https://cdn.example.com',
         cacheStrategy: 'immutable',
-        assetPrefix: '/assets'
+        assetPrefix: '/assets',
       },
       monitoring: {
         errorTracking: true,
         performanceMonitoring: true,
-        userAnalytics: true
+        userAnalytics: true,
       },
       security: {
         cspEnabled: true,
         httpsOnly: true,
-        subresourceIntegrity: true
-      }
+        subresourceIntegrity: true,
+      },
     };
   }
 
@@ -96,7 +96,7 @@ export class ProductionDeploymentOptimizer {
       brotliSize: 134 * 1024, // 134KB
       buildTime: Date.now() - startTime,
       assetCount: 23,
-      chunkCount: 8
+      chunkCount: 8,
     };
 
     return metrics;
@@ -110,25 +110,22 @@ export class ProductionDeploymentOptimizer {
       mode: 'production',
       optimization: {
         minimize: true,
-        minimizer: [
-          'terser-webpack-plugin',
-          'css-minimizer-webpack-plugin'
-        ],
+        minimizer: ['terser-webpack-plugin', 'css-minimizer-webpack-plugin'],
         splitChunks: {
           chunks: 'all',
           cacheGroups: {
             vendor: {
               test: /[\\/]node_modules[\\/]/,
               name: 'vendors',
-              chunks: 'all'
+              chunks: 'all',
             },
             common: {
               name: 'common',
               minChunks: 2,
-              chunks: 'all'
-            }
-          }
-        }
+              chunks: 'all',
+            },
+          },
+        },
       },
       plugins: [
         {
@@ -136,21 +133,21 @@ export class ProductionDeploymentOptimizer {
           algorithm: 'gzip',
           test: /\.(js|css|html|svg)$/,
           threshold: 8192,
-          minRatio: 0.8
+          minRatio: 0.8,
         },
         {
           name: 'CompressionPlugin',
           algorithm: 'brotliCompress',
           test: /\.(js|css|html|svg)$/,
           threshold: 8192,
-          minRatio: 0.8
-        }
+          minRatio: 0.8,
+        },
       ],
       output: {
         filename: '[name].[contenthash:8].js',
         chunkFilename: '[name].[contenthash:8].chunk.js',
-        assetModuleFilename: 'assets/[name].[contenthash:8][ext]'
-      }
+        assetModuleFilename: 'assets/[name].[contenthash:8][ext]',
+      },
     };
   }
 
@@ -164,17 +161,17 @@ export class ProductionDeploymentOptimizer {
         'Access-Control-Allow-Origin': '*',
         'X-Content-Type-Options': 'nosniff',
         'X-Frame-Options': 'DENY',
-        'X-XSS-Protection': '1; mode=block'
+        'X-XSS-Protection': '1; mode=block',
       },
       compression: {
         gzip: true,
-        brotli: true
+        brotli: true,
       },
       cdn: {
         provider: 'cloudflare',
         regions: ['us-east-1', 'us-west-2', 'eu-west-1', 'ap-southeast-1'],
-        fallback: true
-      }
+        fallback: true,
+      },
     };
   }
 
@@ -189,14 +186,15 @@ export class ProductionDeploymentOptimizer {
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https:",
-        "connect-src 'self' https://api.example.com"
+        "connect-src 'self' https://api.example.com",
       ].join('; '),
-      'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+      'Strict-Transport-Security':
+        'max-age=31536000; includeSubDomains; preload',
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'DENY',
       'X-XSS-Protection': '1; mode=block',
       'Referrer-Policy': 'strict-origin-when-cross-origin',
-      'Permissions-Policy': 'geolocation=(), microphone=(), camera=()'
+      'Permissions-Policy': 'geolocation=(), microphone=(), camera=()',
     };
   }
 
@@ -211,7 +209,7 @@ export class ProductionDeploymentOptimizer {
         environment: 'production',
         release: process.env.npm_package_version,
         tracesSampleRate: 0.1,
-        integrations: ['browserTracing', 'replay']
+        integrations: ['browserTracingIntegration', 'replayIntegration'],
       },
       performance: {
         provider: 'web-vitals',
@@ -219,14 +217,14 @@ export class ProductionDeploymentOptimizer {
         thresholds: {
           LCP: 2500,
           FID: 100,
-          CLS: 0.1
-        }
+          CLS: 0.1,
+        },
       },
       analytics: {
         provider: 'google-analytics',
         trackingId: 'GA_MEASUREMENT_ID',
-        customDimensions: ['component_version', 'theme']
-      }
+        customDimensions: ['component_version', 'theme'],
+      },
     };
   }
 
@@ -308,7 +306,7 @@ echo "Rollback completed successfully!"
    */
   public async generateDeploymentReport(): Promise<DeploymentReport> {
     const buildMetrics = await this.createOptimizedBuild();
-    
+
     return {
       buildMetrics,
       optimizationApplied: [
@@ -317,11 +315,11 @@ echo "Rollback completed successfully!"
         'Brotli compression enabled',
         'Tree-shaking enabled',
         'Code splitting enabled',
-        'Asset optimization enabled'
+        'Asset optimization enabled',
       ],
       securityHeaders: this.createSecurityHeaders(),
       cdnConfiguration: this.createCDNConfiguration(),
-      monitoringSetup: this.createMonitoringConfiguration()
+      monitoringSetup: this.createMonitoringConfiguration(),
     };
   }
 
@@ -338,29 +336,31 @@ echo "Rollback completed successfully!"
 
     // Mock validation
     const buildMetrics = await this.createOptimizedBuild();
-    
+
     if (buildMetrics.bundleSize > 500 * 1024) {
       issues.push('Bundle size exceeds 500KB limit');
     }
-    
+
     if (buildMetrics.gzippedSize > 200 * 1024) {
       warnings.push('Gzipped bundle size is close to 200KB limit');
     }
-    
-    if (buildMetrics.buildTime > 300000) { // 5 minutes
+
+    if (buildMetrics.buildTime > 300000) {
+      // 5 minutes
       warnings.push('Build time is longer than expected');
     }
 
     return {
       ready: issues.length === 0,
       issues,
-      warnings
+      warnings,
     };
   }
 }
 
 // Export singleton instance
-export const productionDeploymentOptimizer = ProductionDeploymentOptimizer.getInstance();
+export const productionDeploymentOptimizer =
+  ProductionDeploymentOptimizer.getInstance();
 
 // Convenience functions
 export const createOptimizedBuild = async () => {

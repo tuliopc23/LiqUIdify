@@ -1,11 +1,34 @@
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from 'react';
 import { cn } from '@/lib/glass-utils';
 
 export type AriaLivePriority = 'polite' | 'assertive' | 'off';
-export type AriaRelevant = 'additions' | 'removals' | 'text' | 'all' | 'additions removals' | 'additions text' | 'removals additions' | 'removals text' | 'text additions' | 'text removals';
+export type AriaRelevant =
+  | 'additions'
+  | 'removals'
+  | 'text'
+  | 'all'
+  | 'additions removals'
+  | 'additions text'
+  | 'removals additions'
+  | 'removals text'
+  | 'text additions'
+  | 'text removals';
 
 export type AnnouncementPriority = 'low' | 'medium' | 'high' | 'critical';
-export type AnnouncementContext = 'navigation' | 'form' | 'notification' | 'error' | 'success' | 'loading' | 'general';
+export type AnnouncementContext =
+  | 'navigation'
+  | 'form'
+  | 'notification'
+  | 'error'
+  | 'success'
+  | 'loading'
+  | 'general';
 
 interface QueuedAnnouncement {
   id: string;
@@ -77,8 +100,12 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
   maxQueueSize = 10,
   contextualPrefix = true,
 }) => {
-  const [currentMessage, setCurrentMessage] = useState<string | undefined>(message);
-  const [announcementQueue, setAnnouncementQueue] = useState<QueuedAnnouncement[]>([]);
+  const [currentMessage, setCurrentMessage] = useState<string | undefined>(
+    message
+  );
+  const [announcementQueue, setAnnouncementQueue] = useState<
+    QueuedAnnouncement[]
+  >([]);
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const processingRef = useRef<boolean>(false);
   const dedupMapRef = useRef<Map<string, number>>(new Map());
@@ -86,83 +113,89 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
   // Process queue
   const processQueue = useCallback(() => {
     if (processingRef.current || announcementQueue.length === 0) return;
-    
+
     processingRef.current = true;
     const announcement = announcementQueue[0];
-    
+
+    if (!announcement) {
+      processingRef.current = false;
+      return;
+    }
+
     // Apply contextual prefix if enabled
-    const messageToAnnounce = contextualPrefix && announcement.context !== 'general'
-      ? `${CONTEXT_PREFIXES[announcement.context]}${announcement.message}`
-      : announcement.message;
-    
+    const messageToAnnounce =
+      contextualPrefix && announcement.context !== 'general'
+        ? `${CONTEXT_PREFIXES[announcement.context]}${announcement.message}`
+        : announcement.message;
+
     setCurrentMessage(messageToAnnounce);
-    
+
     // Remove from queue
     setAnnouncementQueue(prev => prev.slice(1));
-    
+
     // Schedule clear
     const clearTime = announcement.clearDelay || clearDelay || 5000;
     timeoutRef.current = setTimeout(() => {
       setCurrentMessage(undefined);
       processingRef.current = false;
-      
+
       // Process next in queue after a brief pause
       setTimeout(processQueue, 100);
     }, clearTime);
   }, [announcementQueue, clearDelay, contextualPrefix]);
 
   // Queue announcement
-  const queueAnnouncement = useCallback((
-    msg: string,
-    options: AnnouncementOptions = {}
-  ) => {
-    const {
-      priority: announcementPriority = 'medium',
-      context = 'general',
-      delay = PRIORITY_DELAYS[announcementPriority || 'medium'],
-      clearDelay: announcementClearDelay,
-      dedupKey,
-    } = options;
+  const queueAnnouncement = useCallback(
+    (msg: string, options: AnnouncementOptions = {}) => {
+      const {
+        priority: announcementPriority = 'medium',
+        context = 'general',
+        delay = PRIORITY_DELAYS[announcementPriority || 'medium'],
+        clearDelay: announcementClearDelay,
+        dedupKey,
+      } = options;
 
-    // Deduplication check
-    if (dedupKey) {
-      const lastTime = dedupMapRef.current.get(dedupKey);
-      const now = Date.now();
-      if (lastTime && now - lastTime < 1000) {
-        return; // Skip duplicate within 1 second
+      // Deduplication check
+      if (dedupKey) {
+        const lastTime = dedupMapRef.current.get(dedupKey);
+        const now = Date.now();
+        if (lastTime && now - lastTime < 1000) {
+          return; // Skip duplicate within 1 second
+        }
+        dedupMapRef.current.set(dedupKey, now);
       }
-      dedupMapRef.current.set(dedupKey, now);
-    }
 
-    const announcement: QueuedAnnouncement = {
-      id: `announcement-${Date.now()}-${Math.random()}`,
-      message: msg,
-      priority: announcementPriority,
-      context,
-      timestamp: Date.now(),
-      delay,
-      clearDelay: announcementClearDelay,
-      dedupKey,
-    };
+      const announcement: QueuedAnnouncement = {
+        id: `announcement-${Date.now()}-${Math.random()}`,
+        message: msg,
+        priority: announcementPriority,
+        context,
+        timestamp: Date.now(),
+        delay,
+        clearDelay: announcementClearDelay,
+        dedupKey,
+      };
 
-    setAnnouncementQueue(prev => {
-      // Add to queue
-      let newQueue = [...prev, announcement];
-      
-      // Sort by priority (critical first)
-      newQueue.sort((a, b) => {
-        const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
-        return priorityOrder[a.priority] - priorityOrder[b.priority];
+      setAnnouncementQueue(prev => {
+        // Add to queue
+        let newQueue = [...prev, announcement];
+
+        // Sort by priority (critical first)
+        newQueue.sort((a, b) => {
+          const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
+          return priorityOrder[a.priority] - priorityOrder[b.priority];
+        });
+
+        // Trim queue if needed
+        if (newQueue.length > maxQueueSize) {
+          newQueue = newQueue.slice(0, maxQueueSize);
+        }
+
+        return newQueue;
       });
-      
-      // Trim queue if needed
-      if (newQueue.length > maxQueueSize) {
-        newQueue = newQueue.slice(0, maxQueueSize);
-      }
-      
-      return newQueue;
-    });
-  }, [maxQueueSize]);
+    },
+    [maxQueueSize]
+  );
 
   // Handle direct message updates
   useEffect(() => {
@@ -187,7 +220,11 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 
   // Process queue when it changes
   useEffect(() => {
-    if (queueingEnabled && announcementQueue.length > 0 && !processingRef.current) {
+    if (
+      queueingEnabled &&
+      announcementQueue.length > 0 &&
+      !processingRef.current
+    ) {
       processQueue();
     }
   }, [announcementQueue, queueingEnabled, processQueue]);
@@ -197,7 +234,8 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
     const cleanupInterval = setInterval(() => {
       const now = Date.now();
       dedupMapRef.current.forEach((time, key) => {
-        if (now - time > 60000) { // Remove entries older than 1 minute
+        if (now - time > 60000) {
+          // Remove entries older than 1 minute
           dedupMapRef.current.delete(key);
         }
       });
@@ -206,7 +244,9 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
     return () => clearInterval(cleanupInterval);
   }, []);
 
-  const relevantString = Array.isArray(relevant) ? relevant.join(' ') : relevant;
+  const relevantString = Array.isArray(relevant)
+    ? relevant.join(' ')
+    : relevant;
 
   return (
     <div
@@ -231,51 +271,52 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 // Enhanced hook for managing live region announcements
 export function useAnnouncement() {
   const [announcement, setAnnouncement] = useState<string>('');
-  const [announcementOptions, setAnnouncementOptions] = useState<AnnouncementOptions>({});
+  const [announcementOptions, setAnnouncementOptions] =
+    useState<AnnouncementOptions>({});
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const queueRef = useRef<QueuedAnnouncement[]>([]);
   const dedupMapRef = useRef<Map<string, number>>(new Map());
 
-  const announce = useCallback((
-    message: string,
-    options: AnnouncementOptions = {}
-  ) => {
-    const {
-      priority = 'medium',
-      context: _context = 'general',
-      delay = PRIORITY_DELAYS[priority],
-      clearDelay = 5000,
-      dedupKey,
-    } = options;
+  const announce = useCallback(
+    (message: string, options: AnnouncementOptions = {}) => {
+      const {
+        priority = 'medium',
+        context: _context = 'general',
+        delay = PRIORITY_DELAYS[priority],
+        clearDelay = 5000,
+        dedupKey,
+      } = options;
 
-    // Deduplication check
-    if (dedupKey) {
-      const lastTime = dedupMapRef.current.get(dedupKey);
-      const now = Date.now();
-      if (lastTime && now - lastTime < 1000) {
-        return; // Skip duplicate
+      // Deduplication check
+      if (dedupKey) {
+        const lastTime = dedupMapRef.current.get(dedupKey);
+        const now = Date.now();
+        if (lastTime && now - lastTime < 1000) {
+          return; // Skip duplicate
+        }
+        dedupMapRef.current.set(dedupKey, now);
       }
-      dedupMapRef.current.set(dedupKey, now);
-    }
 
-    // Clear any existing timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    // Apply delay based on priority
-    setTimeout(() => {
-      setAnnouncement(message);
-      setAnnouncementOptions(options);
-
-      // Clear after delay if specified
-      if (clearDelay > 0) {
-        timeoutRef.current = setTimeout(() => {
-          setAnnouncement('');
-        }, clearDelay);
+      // Clear any existing timeout
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
-    }, delay);
-  }, []);
+
+      // Apply delay based on priority
+      setTimeout(() => {
+        setAnnouncement(message);
+        setAnnouncementOptions(options);
+
+        // Clear after delay if specified
+        if (clearDelay > 0) {
+          timeoutRef.current = setTimeout(() => {
+            setAnnouncement('');
+          }, clearDelay);
+        }
+      }, delay);
+    },
+    []
+  );
 
   const clear = useCallback(() => {
     if (timeoutRef.current) {
@@ -286,21 +327,49 @@ export function useAnnouncement() {
   }, []);
 
   // Context-aware announce helpers
-  const announceError = useCallback((message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
-    announce(message, { ...options, context: 'error', priority: options?.priority || 'high' });
-  }, [announce]);
+  const announceError = useCallback(
+    (message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
+      announce(message, {
+        ...options,
+        context: 'error',
+        priority: options?.priority || 'high',
+      });
+    },
+    [announce]
+  );
 
-  const announceSuccess = useCallback((message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
-    announce(message, { ...options, context: 'success', priority: options?.priority || 'medium' });
-  }, [announce]);
+  const announceSuccess = useCallback(
+    (message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
+      announce(message, {
+        ...options,
+        context: 'success',
+        priority: options?.priority || 'medium',
+      });
+    },
+    [announce]
+  );
 
-  const announceNavigation = useCallback((message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
-    announce(message, { ...options, context: 'navigation', priority: options?.priority || 'low' });
-  }, [announce]);
+  const announceNavigation = useCallback(
+    (message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
+      announce(message, {
+        ...options,
+        context: 'navigation',
+        priority: options?.priority || 'low',
+      });
+    },
+    [announce]
+  );
 
-  const announceLoading = useCallback((message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
-    announce(message, { ...options, context: 'loading', priority: options?.priority || 'low' });
-  }, [announce]);
+  const announceLoading = useCallback(
+    (message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
+      announce(message, {
+        ...options,
+        context: 'loading',
+        priority: options?.priority || 'low',
+      });
+    },
+    [announce]
+  );
 
   useEffect(() => {
     return () => {
@@ -324,7 +393,9 @@ export function useAnnouncement() {
 
 // Enhanced global announcer with queue management
 class AnnouncementManager {
-  private listeners: Set<(message: string, options: AnnouncementOptions) => void> = new Set();
+  private listeners: Set<
+    (message: string, options: AnnouncementOptions) => void
+  > = new Set();
   private queue: QueuedAnnouncement[] = [];
   private processing: boolean = false;
   private dedupMap: Map<string, number> = new Map();
@@ -378,11 +449,13 @@ class AnnouncementManager {
     }
 
     // Notify listeners
-    this.listeners.forEach((listener) => listener(announcement.message, {
-      priority: announcement.priority,
-      context: announcement.context,
-      clearDelay: announcement.clearDelay,
-    }));
+    this.listeners.forEach(listener =>
+      listener(announcement.message, {
+        priority: announcement.priority,
+        context: announcement.context,
+        clearDelay: announcement.clearDelay,
+      })
+    );
 
     // Continue processing
     setTimeout(() => {
@@ -398,26 +471,44 @@ class AnnouncementManager {
 
   // Context-aware methods
   error(message: string, options?: Omit<AnnouncementOptions, 'context'>) {
-    this.announce(message, { ...options, context: 'error', priority: options?.priority || 'high' });
+    this.announce(message, {
+      ...options,
+      context: 'error',
+      priority: options?.priority || 'high',
+    });
   }
 
   success(message: string, options?: Omit<AnnouncementOptions, 'context'>) {
-    this.announce(message, { ...options, context: 'success', priority: options?.priority || 'medium' });
+    this.announce(message, {
+      ...options,
+      context: 'success',
+      priority: options?.priority || 'medium',
+    });
   }
 
   navigation(message: string, options?: Omit<AnnouncementOptions, 'context'>) {
-    this.announce(message, { ...options, context: 'navigation', priority: options?.priority || 'low' });
+    this.announce(message, {
+      ...options,
+      context: 'navigation',
+      priority: options?.priority || 'low',
+    });
   }
 
   loading(message: string, options?: Omit<AnnouncementOptions, 'context'>) {
-    this.announce(message, { ...options, context: 'loading', priority: options?.priority || 'low' });
+    this.announce(message, {
+      ...options,
+      context: 'loading',
+      priority: options?.priority || 'low',
+    });
   }
 }
 
 export const announcer = new AnnouncementManager();
 
 // Enhanced global live region provider
-export const GlassLiveRegionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const GlassLiveRegionProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const [announcements, setAnnouncements] = useState<
     Array<{ id: string; message: string; options: AnnouncementOptions }>
   >([]);
@@ -425,12 +516,12 @@ export const GlassLiveRegionProvider: React.FC<{ children: React.ReactNode }> = 
   useEffect(() => {
     const unsubscribe = announcer.subscribe((message, options) => {
       const id = `announcement-${Date.now()}-${Math.random()}`;
-      setAnnouncements((prev) => [...prev, { id, message, options }]);
+      setAnnouncements(prev => [...prev, { id, message, options }]);
 
       // Remove announcement after specified time
       const clearTime = options.clearDelay || 5000;
       setTimeout(() => {
-        setAnnouncements((prev) => prev.filter((a) => a.id !== id));
+        setAnnouncements(prev => prev.filter(a => a.id !== id));
       }, clearTime);
     });
 
@@ -440,16 +531,20 @@ export const GlassLiveRegionProvider: React.FC<{ children: React.ReactNode }> = 
   }, []);
 
   // Group announcements by aria-live priority
-  const politeAnnouncements = useMemo(() => 
-    announcements.filter(a => 
-      PRIORITY_MAP[a.options.priority || 'medium'] === 'polite'
-    ), [announcements]
+  const politeAnnouncements = useMemo(
+    () =>
+      announcements.filter(
+        a => PRIORITY_MAP[a.options.priority || 'medium'] === 'polite'
+      ),
+    [announcements]
   );
 
-  const assertiveAnnouncements = useMemo(() => 
-    announcements.filter(a => 
-      PRIORITY_MAP[a.options.priority || 'medium'] === 'assertive'
-    ), [announcements]
+  const assertiveAnnouncements = useMemo(
+    () =>
+      announcements.filter(
+        a => PRIORITY_MAP[a.options.priority || 'medium'] === 'assertive'
+      ),
+    [announcements]
   );
 
   return (
@@ -458,7 +553,7 @@ export const GlassLiveRegionProvider: React.FC<{ children: React.ReactNode }> = 
       <div className="glass-live-regions" aria-hidden="true">
         {/* Polite announcements with queue support */}
         <GlassLiveRegion
-          message={politeAnnouncements.map((a) => a.message).join('. ')}
+          message={politeAnnouncements.map(a => a.message).join('. ')}
           priority="polite"
           role="status"
           queueingEnabled
@@ -466,7 +561,7 @@ export const GlassLiveRegionProvider: React.FC<{ children: React.ReactNode }> = 
         />
         {/* Assertive announcements with queue support */}
         <GlassLiveRegion
-          message={assertiveAnnouncements.map((a) => a.message).join('. ')}
+          message={assertiveAnnouncements.map(a => a.message).join('. ')}
           priority="assertive"
           role="alert"
           queueingEnabled

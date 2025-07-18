@@ -1,6 +1,6 @@
 /**
  * Physics Bundle - Physics-based interactions and effects
- * 
+ *
  * Contains all physics-related utilities and effects that can be
  * optionally imported for enhanced interactions.
  */

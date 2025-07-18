@@ -1,17 +1,16 @@
 /**
  * Compound Component Factory
- * 
+ *
  * This module provides utilities for creating compound components with consistent
  * patterns and proper forwardRef usage throughout the Glass UI library.
  */
 
 import React, { forwardRef, useMemo } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { 
- 
-  CompoundComponentProps, 
+import {
+  CompoundComponentProps,
   UnifiedGlassProps,
-  ComponentPropsBuilder 
+  ComponentPropsBuilder,
 } from './base-component';
 import { cn } from '@/lib/glass-utils';
 
@@ -30,19 +29,21 @@ export function createCompoundContext<T extends CompoundComponentContext>(
   defaultValue?: T
 ) {
   const Context = React.createContext<T | undefined>(defaultValue);
-  
+
   Context.displayName = `${displayName}Context`;
-  
+
   const Provider = Context.Provider;
-  
+
   const useContext = () => {
     const context = React.useContext(Context);
     if (!context) {
-      throw new Error(`use${displayName} must be used within a ${displayName}Provider`);
+      throw new Error(
+        `use${displayName} must be used within a ${displayName}Provider`
+      );
     }
     return context;
   };
-  
+
   return { Provider, useContext, Context };
 }
 
@@ -67,10 +68,8 @@ export interface CompoundComponentOptions<T extends HTMLElement> {
  */
 export function createCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
-  P extends Record<string, any> = {}
->(
-  options: CompoundComponentOptions<T>
-) {
+  P extends Record<string, any> = {},
+>(options: CompoundComponentOptions<T>) {
   const {
     displayName,
     defaultElement = 'div',
@@ -85,8 +84,8 @@ export function createCompoundComponent<
   const Component = shouldForwardRef
     ? forwardRef<T, ComponentProps>(
         ({ className, asChild: asChildProp, children, ...props }, ref) => {
-          const Comp = asChildProp && asChild ? Slot : defaultElement;
-          
+          const Comp = (asChildProp && asChild ? Slot : defaultElement) as any;
+
           const mergedProps = useMemo(
             () => ({
               ...defaultProps,
@@ -103,9 +102,14 @@ export function createCompoundComponent<
           );
         }
       )
-    : ({ className, asChild: asChildProp, children, ...props }: ComponentProps) => {
-        const Comp = asChildProp && asChild ? Slot : defaultElement;
-        
+    : ({
+        className,
+        asChild: asChildProp,
+        children,
+        ...props
+      }: ComponentProps) => {
+        const Comp = (asChildProp && asChild ? Slot : defaultElement) as any;
+
         const mergedProps = useMemo(
           () => ({
             ...defaultProps,
@@ -115,11 +119,7 @@ export function createCompoundComponent<
           [props, className]
         );
 
-        return (
-          <Comp {...mergedProps}>
-            {children}
-          </Comp>
-        );
+        return <Comp {...mergedProps}>{children}</Comp>;
       };
 
   if ('displayName' in Component) {
@@ -135,14 +135,14 @@ export function createCompoundComponent<
 export function createCompoundComponentWithContext<
   T extends HTMLElement = HTMLDivElement,
   P extends Record<string, any> = {},
-  C extends CompoundComponentContext = CompoundComponentContext
+  C extends CompoundComponentContext = CompoundComponentContext,
 >(
   options: CompoundComponentOptions<T> & {
     contextDefaultValue?: C;
   }
 ) {
   const { contextDefaultValue, ...componentOptions } = options;
-  
+
   const { Provider, useContext, Context } = createCompoundContext<C>(
     options.displayName,
     contextDefaultValue
@@ -163,21 +163,21 @@ export function createCompoundComponentWithContext<
  */
 export function withGlassEffects<
   T extends HTMLElement,
-  P extends Record<string, any>
->(
-  Component: React.ComponentType<P>,
-  defaultGlassConfig?: UnifiedGlassProps
-) {
+  P extends Record<string, any>,
+>(Component: React.ComponentType<P>, defaultGlassConfig?: UnifiedGlassProps) {
   const WrappedComponent = forwardRef<T, P & UnifiedGlassProps>(
     ({ glassEffect, variant, size, ...props }, ref) => {
-      const glassProps = useMemo(() => ({
-        ...defaultGlassConfig,
-        glassEffect,
-        variant,
-        size,
-      }), [glassEffect, variant, size]);
+      const glassProps = useMemo(
+        () => ({
+          ...defaultGlassConfig,
+          glassEffect,
+          variant,
+          size,
+        }),
+        [glassEffect, variant, size]
+      );
 
-      return <Component ref={ref} {...glassProps} {...(props as P)} />;
+      return <Component ref={ref} {...glassProps} {...(props as any)} />;
     }
   );
 
@@ -191,7 +191,7 @@ export function withGlassEffects<
  */
 export function createPolymorphicCompoundComponent<
   T extends React.ElementType = 'div',
-  P extends Record<string, any> = {}
+  P extends Record<string, any> = {},
 >(
   options: CompoundComponentOptions<HTMLElement> & {
     /** Default element type */
@@ -202,29 +202,29 @@ export function createPolymorphicCompoundComponent<
 
   type PolymorphicProps<As extends React.ElementType> = {
     as?: As;
-  } & React.ComponentPropsWithoutRef<As> & P;
+  } & React.ComponentPropsWithoutRef<As> &
+    P;
 
-  const Component = forwardRef<
-    React.ElementRef<T>,
-    PolymorphicProps<T>
-  >(({ as, className, children, ...props }, ref) => {
-    const Comp = as || defaultAs;
-    
-    const mergedProps = useMemo(
-      () => ({
-        ...componentOptions.defaultProps,
-        ...props,
-        className: cn(componentOptions.defaultClassName, className),
-      }),
-      [props, className]
-    );
+  const Component = forwardRef<any, PolymorphicProps<T>>(
+    ({ as, className, children, ...props }, ref) => {
+      const Comp = as || defaultAs;
 
-    return (
-      <Comp ref={ref} {...mergedProps}>
-        {children}
-      </Comp>
-    );
-  });
+      const mergedProps = useMemo(
+        () => ({
+          ...componentOptions.defaultProps,
+          ...props,
+          className: cn(componentOptions.defaultClassName, className),
+        }),
+        [props, className]
+      );
+
+      return (
+        <Comp ref={ref} {...mergedProps}>
+          {children}
+        </Comp>
+      );
+    }
+  );
 
   Component.displayName = options.displayName;
 
@@ -235,12 +235,8 @@ export function createPolymorphicCompoundComponent<
  * Utility for creating compound component collections
  */
 export function createCompoundComponentCollection<
-  T extends Record<string, any>
->(
-  components: T,
-  rootComponent: React.ComponentType<any>
-) {
-  
+  T extends Record<string, any>,
+>(components: T, rootComponent: React.ComponentType<any>) {
   // Attach sub-components to root component
   Object.entries(components).forEach(([key, component]) => {
     (rootComponent as any)[key] = component;
@@ -254,17 +250,23 @@ export function createCompoundComponentCollection<
  */
 export function useCompoundComponentState<T extends Record<string, any>>(
   initialState: T,
-  context?: React.Context<T>
+  context?: React.Context<T | undefined>
 ) {
   const [state, setState] = React.useState<T>(initialState);
-  
-  const contextValue = context ? React.useContext(context) : undefined;
-  
-  const mergedState = useMemo(() => ({
-    ...initialState,
-    ...contextValue,
-    ...state,
-  }), [initialState, contextValue, state]);
+
+  // Always call useContext, but use a default context if none provided
+  const defaultContext = React.createContext<T | undefined>(undefined);
+  const contextToUse = context || defaultContext;
+  const contextValue = React.useContext(contextToUse);
+
+  const mergedState = useMemo(
+    () => ({
+      ...initialState,
+      ...(contextValue || {}),
+      ...state,
+    }),
+    [initialState, contextValue, state]
+  );
 
   const updateState = React.useCallback((updates: Partial<T>) => {
     setState(prev => ({ ...prev, ...updates }));
@@ -278,7 +280,7 @@ export function useCompoundComponentState<T extends Record<string, any>>(
  */
 export function createAccessibleCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
-  P extends Record<string, any> = {}
+  P extends Record<string, any> = {},
 >(
   options: CompoundComponentOptions<T> & {
     /** Default ARIA role */
@@ -306,7 +308,7 @@ export function createAccessibleCompoundComponent<
  */
 export function createResponsiveCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
-  P extends Record<string, any> = {}
+  P extends Record<string, any> = {},
 >(
   options: CompoundComponentOptions<T> & {
     /** Responsive breakpoints */
@@ -328,9 +330,5 @@ export function createResponsiveCompoundComponent<
   return Component;
 }
 
-// Export types for external use
-export type {
-  CompoundComponentContext,
-  CompoundComponentOptions,
-  ComponentPropsBuilder,
-};
+// Export main compound component for compatibility
+export const CompoundComponent = createCompoundComponent;

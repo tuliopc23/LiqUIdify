@@ -172,6 +172,8 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
         document.removeEventListener('keydown', handleEscape);
       };
     }
+
+    return undefined;
   }, [isOpen, closeOnClickOutside, closeOnEscape]);
 
   const popover = isOpen ? (
@@ -202,7 +204,9 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
         {trigger}
       </div>
 
-      {popover && typeof window !== 'undefined' && createPortal(popover, document.body)}
+      {popover &&
+        typeof window !== 'undefined' &&
+        createPortal(popover, document.body)}
     </>
   );
 };

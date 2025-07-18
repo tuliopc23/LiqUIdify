@@ -1,6 +1,6 @@
 /**
  * Glass Effects Utility Module
- * 
+ *
  * Provides utilities for generating glass effect classes and CSS variables
  * for consistent glassmorphism effects across components.
  */
@@ -16,25 +16,27 @@ export type UtilityIntensity = 'none' | 'low' | 'medium' | 'high';
 /**
  * Converts component intensity to utility intensity
  */
-export function mapIntensity(intensity?: ComponentIntensity | UtilityIntensity): UtilityIntensity {
+export function mapIntensity(
+  intensity?: ComponentIntensity | UtilityIntensity
+): UtilityIntensity {
   if (!intensity) return 'medium';
-  
+
   const intensityMap: Record<string, UtilityIntensity> = {
-    'subtle': 'low',
-    'medium': 'medium',
-    'strong': 'high',
+    subtle: 'low',
+    medium: 'medium',
+    strong: 'high',
     // Pass through utility intensities
-    'none': 'none',
-    'low': 'low',
-    'high': 'high',
+    none: 'none',
+    low: 'low',
+    high: 'high',
   };
-  
+
   return intensityMap[intensity] || 'medium';
 }
 
 /**
  * Generates glass effect CSS classes based on configuration
- * 
+ *
  * @param variant - Component variant (primary, secondary, etc.)
  * @param intensity - Glass effect intensity (none, low, medium, high)
  * @param state - Current interaction state
@@ -79,7 +81,7 @@ export function generateGlassClasses(
 
 /**
  * Generates CSS variables for glass effects
- * 
+ *
  * @param intensity - Glass effect intensity
  * @param config - Glass effect configuration
  * @returns CSS variables object
@@ -104,17 +106,20 @@ export function generateGlassVariables(
     '--glass-border-opacity': config?.borderOpacity || '0.2',
     '--glass-backdrop-blur': config?.backdropBlur || current.blur,
     '--glass-transition-duration': config?.animation?.duration || '300ms',
-    '--glass-transition-easing': config?.animation?.easing || 'cubic-bezier(0.4, 0, 0.2, 1)',
+    '--glass-transition-easing':
+      config?.animation?.easing || 'cubic-bezier(0.4, 0, 0.2, 1)',
   };
 }
 
 /**
  * Creates a glass effect configuration preset
- * 
+ *
  * @param preset - Preset name
  * @returns Glass effect configuration
  */
-export function createGlassPreset(preset: 'subtle' | 'medium' | 'strong' | 'intense'): GlassEffectConfig {
+export function createGlassPreset(
+  preset: 'subtle' | 'medium' | 'strong' | 'intense'
+): GlassEffectConfig {
   const presets = {
     subtle: {
       intensity: 'low' as const,

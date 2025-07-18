@@ -164,7 +164,9 @@ export const SPRING_PRESETS = {
  * Haptic feedback simulation for animations
  * Provides tactile feedback when animations are triggered
  */
-export function hapticFeedback(intensity: 'light' | 'medium' | 'heavy' = 'medium') {
+export function hapticFeedback(
+  intensity: 'light' | 'medium' | 'heavy' = 'medium'
+) {
   // Try to use native vibration API if available
   if (typeof navigator !== 'undefined' && navigator.vibrate) {
     const patterns = {
@@ -172,7 +174,7 @@ export function hapticFeedback(intensity: 'light' | 'medium' | 'heavy' = 'medium
       medium: [20],
       heavy: [50],
     };
-    
+
     navigator.vibrate(patterns[intensity]);
   } else {
     // Fallback for non-mobile or non-supporting browsers

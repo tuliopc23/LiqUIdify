@@ -87,6 +87,8 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
           document.removeEventListener('mouseup', handleMouseUp);
         };
       }
+
+      return undefined;
     }, [isDragging, handleMouseMove, handleMouseUp]);
 
     return (

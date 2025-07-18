@@ -8,11 +8,11 @@ import { vi } from 'vitest';
 import { testUtils, renderWithTheme } from '../testing/test-utils';
 import { GlassLiveRegionProvider } from '../components/glass-live-region';
 // Import vitest-axe and extend matchers
-import { toHaveNoViolations } from 'vitest-axe';
+import * as matchers from 'vitest-axe';
 
 // Extend vitest matchers
-if (toHaveNoViolations) {
-  expect.extend(toHaveNoViolations);
+if (matchers) {
+  expect.extend(matchers);
 }
 
 // Re-export testing library functions
@@ -30,15 +30,11 @@ export function renderWithProviders(
   }
 ) {
   const { theme = 'light', initialProps = {} } = options || {};
-  
+
   function AllProviders({ children }: { children: React.ReactNode }) {
-    return (
-      <GlassLiveRegionProvider>
-        {children}
-      </GlassLiveRegionProvider>
-    );
+    return <GlassLiveRegionProvider>{children}</GlassLiveRegionProvider>;
   }
-  
+
   return render(ui, { wrapper: AllProviders });
 }
 
@@ -58,17 +54,17 @@ export function createMockProps(overrides: Record<string, any> = {}) {
  */
 export async function testA11y(container: HTMLElement) {
   const { default: axe } = await import('axe-core');
-  
+
   const results = await axe.run(container, {
     rules: {
       // Configure axe rules for Glass UI components
       'color-contrast': { enabled: true },
       'focus-order-semantics': { enabled: true },
-      'label': { enabled: true },
+      label: { enabled: true },
       'button-name': { enabled: true },
     },
   });
-  
+
   expect(results).toHaveNoViolations();
 }
 
@@ -96,39 +92,45 @@ export function getGlassComponentTestSuite(componentName: string) {
     testBasicAccessibility: async (container: HTMLElement) => {
       await testA11y(container);
     },
-    
+
     testKeyboardNavigation: (element: HTMLElement) => {
       // Test tab navigation
       element.focus();
       expect(document.activeElement).toBe(element);
-      
+
       // Test enter key activation
       fireEvent.keyDown(element, { key: 'Enter' });
       fireEvent.keyDown(element, { key: ' ' });
     },
-    
+
     testAriaAttributes: (element: HTMLElement) => {
       // Check common ARIA attributes
       const hasAriaLabel = element.getAttribute('aria-label');
       const hasAriaLabelledBy = element.getAttribute('aria-labelledby');
       const hasRole = element.getAttribute('role');
-      
-      expect(
-        hasAriaLabel || hasAriaLabelledBy || hasRole
-      ).toBeTruthy();
+
+      expect(hasAriaLabel || hasAriaLabelledBy || hasRole).toBeTruthy();
     },
-    
+
     testGlassEffects: (element: HTMLElement) => {
       const computedStyle = window.getComputedStyle(element);
-      
+
       // Check for glass effect properties
+      const testElement = document.createElement('div');
+      testElement.style.backdropFilter = 'blur(10px)';
+  
+      // Check webkit prefix as fallback
+      if (!testElement.style.backdropFilter) {
+        (testElement.style as any).webkitBackdropFilter = 'blur(10px)';
+      }
+  
       expect(
         computedStyle.backdropFilter !== 'none' ||
-        computedStyle.webkitBackdropFilter !== 'none' ||
+        (computedStyle as any).webkitBackdropFilter !== 'none' ||
         computedStyle.background.includes('rgba')
       ).toBeTruthy();
     },
-    
+
     componentName,
   };
 }
@@ -149,10 +151,11 @@ export function mockGetComputedStyle(overrides: Record<string, string> = {}) {
     height: '100px',
     ...overrides,
   };
-  
+
   vi.spyOn(window, 'getComputedStyle').mockReturnValue({
     ...defaultStyle,
-    getPropertyValue: (prop: string) => defaultStyle[prop as keyof typeof defaultStyle] || '',
+    getPropertyValue: (prop: string) =>
+      defaultStyle[prop as keyof typeof defaultStyle] || '',
   } as any);
 }
 
@@ -163,23 +166,23 @@ export const keyboardEvents = {
   pressEnter: (element: HTMLElement) => {
     fireEvent.keyDown(element, { key: 'Enter', code: 'Enter' });
   },
-  
+
   pressSpace: (element: HTMLElement) => {
     fireEvent.keyDown(element, { key: ' ', code: 'Space' });
   },
-  
+
   pressEscape: (element: HTMLElement) => {
     fireEvent.keyDown(element, { key: 'Escape', code: 'Escape' });
   },
-  
+
   pressTab: (element: HTMLElement) => {
     fireEvent.keyDown(element, { key: 'Tab', code: 'Tab' });
   },
-  
+
   pressArrowDown: (element: HTMLElement) => {
     fireEvent.keyDown(element, { key: 'ArrowDown', code: 'ArrowDown' });
   },
-  
+
   pressArrowUp: (element: HTMLElement) => {
     fireEvent.keyDown(element, { key: 'ArrowUp', code: 'ArrowUp' });
   },
@@ -193,16 +196,16 @@ export const mouseEvents = {
     fireEvent.mouseEnter(element);
     fireEvent.mouseOver(element);
   },
-  
+
   unhover: (element: HTMLElement) => {
     fireEvent.mouseLeave(element);
     fireEvent.mouseOut(element);
   },
-  
+
   click: (element: HTMLElement) => {
     fireEvent.click(element);
   },
-  
+
   doubleClick: (element: HTMLElement) => {
     fireEvent.doubleClick(element);
   },
@@ -214,7 +217,7 @@ export const mouseEvents = {
 export function setupTestEnvironment() {
   // Mock window.getComputedStyle
   mockGetComputedStyle();
-  
+
   // Setup other common mocks
   testUtils.setup();
 }
@@ -269,4 +272,3 @@ export function runAccessibilityCheck(
 }
 
 export default testUtilities;
-

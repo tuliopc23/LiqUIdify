@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
-import { ssrSafetyManager } from '@/core/error-recovery';
+import { ssrSafety } from '@/core/ssr-safety';
 
 /**
  * Hook to safely check if code is running on client side
@@ -24,7 +24,7 @@ export function useIsClient(): boolean {
  */
 export function useSSRSafeWindow<T = Window>(
   selector: (window: Window) => T,
-  fallback: T
+  fallback: T,
 ): T {
   const isClient = useIsClient();
   const [value, setValue] = useState<T>(fallback);
@@ -47,7 +47,7 @@ export function useSSRSafeWindow<T = Window>(
  */
 export function useSSRSafeDocument<T = Document>(
   selector: (document: Document) => T,
-  fallback: T
+  fallback: T,
 ): T {
   const isClient = useIsClient();
   const [value, setValue] = useState<T>(fallback);
@@ -70,7 +70,7 @@ export function useSSRSafeDocument<T = Document>(
  */
 export function useSSRSafeNavigator<T = Navigator>(
   selector: (navigator: Navigator) => T,
-  fallback: T
+  fallback: T,
 ): T {
   const isClient = useIsClient();
   const [value, setValue] = useState<T>(fallback);
@@ -93,7 +93,7 @@ export function useSSRSafeNavigator<T = Navigator>(
  */
 export function useSSRSafeLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T) => void] {
   const isClient = useIsClient();
   const [storedValue, setStoredValue] = useState<T>(initialValue);
@@ -135,7 +135,7 @@ export function useSSRSafeLocalStorage<T>(
  */
 export function useSSRSafeSessionStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T) => void] {
   const isClient = useIsClient();
   const [storedValue, setStoredValue] = useState<T>(initialValue);
@@ -178,20 +178,22 @@ export function useSSRSafeSessionStorage<T>(
 export function useHydrationSafe<T>(
   clientValue: T,
   serverValue: T,
-  options: { delay?: number; onMismatch?: (client: T, server: T) => void } = {}
+  options: { delay?: number; onMismatch?: (client: T, server: T) => void } = {},
 ): T {
   const { delay = 0, onMismatch } = options;
   const [value, setValue] = useState<T>(serverValue);
   const isClient = useIsClient();
-  const componentName = useRef(`hydration-${Math.random().toString(36).substring(2, 9)}`).current;
+  const componentName = useRef(
+    `hydration-${Math.random().toString(36).substring(2, 9)}`,
+  ).current;
 
   useEffect(() => {
     if (isClient) {
       // Check for hydration mismatch
-      const mismatch = ssrSafetyManager.detectHydrationMismatch(
+      const mismatch = ssrSafety.detectHydrationMismatch(
         componentName,
         serverValue,
-        clientValue
+        clientValue,
       );
 
       if (mismatch && onMismatch) {
@@ -244,7 +246,9 @@ export function useNetworkStatus(): {
 } {
   const isClient = useIsClient();
   const [online, setOnline] = useState(true);
-  const [effectiveType, setEffectiveType] = useState<'slow-2g' | '2g' | '3g' | '4g' | undefined>(undefined);
+  const [effectiveType, setEffectiveType] = useState<
+    'slow-2g' | '2g' | '3g' | '4g' | undefined
+  >(undefined);
   const [saveData, setSaveData] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
@@ -295,7 +299,7 @@ export function useNetworkStatus(): {
  */
 export function useSSRSafeAnimation(
   animationFn: () => void,
-  options: { delay?: number; disabled?: boolean } = {}
+  options: { delay?: number; disabled?: boolean } = {},
 ): void {
   const { delay = 0, disabled = false } = options;
   const isClient = useIsClient();
@@ -324,7 +328,7 @@ export function useSSRSafeAnimation(
  */
 export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
   options: IntersectionObserverInit = {},
-  callback?: (entry: IntersectionObserverEntry) => void
+  callback?: (entry: IntersectionObserverEntry) => void,
 ): [(node: T | null) => void, boolean, IntersectionObserverEntry | null] {
   const isClient = useIsClient();
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -373,7 +377,7 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
  * Hook to safely handle resize observer in SSR environments
  */
 export function useSSRSafeResizeObserver<T extends HTMLElement>(
-  callback?: (entry: ResizeObserverEntry) => void
+  callback?: (entry: ResizeObserverEntry) => void,
 ): [(node: T | null) => void, DOMRectReadOnly | undefined] {
   const isClient = useIsClient();
   const [size, setSize] = useState<DOMRectReadOnly>();
@@ -419,15 +423,22 @@ export function useSSRSafeResizeObserver<T extends HTMLElement>(
 /**
  * Hook to safely handle document visibility in SSR environments
  */
-export function useSSRSafeDocumentVisibility(): 'visible' | 'hidden' | 'prerender' {
+export function useSSRSafeDocumentVisibility():
+  | 'visible'
+  | 'hidden'
+  | 'prerender' {
   const isClient = useIsClient();
-  const [visibility, setVisibility] = useState<'visible' | 'hidden' | 'prerender'>('visible');
+  const [visibility, setVisibility] = useState<
+    'visible' | 'hidden' | 'prerender'
+  >('visible');
 
   useEffect(() => {
     if (!isClient) return;
 
     const handleVisibilityChange = () => {
-      setVisibility(document.visibilityState as 'visible' | 'hidden' | 'prerender');
+      setVisibility(
+        document.visibilityState as 'visible' | 'hidden' | 'prerender',
+      );
     };
 
     handleVisibilityChange();

@@ -61,25 +61,30 @@ export class CodebaseModernizer {
           'Remove deprecated findDOMNode usage',
           'Update Suspense behavior changes',
           'Handle new hydration mismatch warnings',
-          'Update Strict Mode double effects'
+          'Update Strict Mode double effects',
         ],
         migrationSteps: [
           'Update package.json dependencies',
           'Run React codemods for breaking changes',
           'Update testing utilities',
           'Fix hydration issues',
-          'Update documentation'
+          'Update documentation',
         ],
         estimatedEffort: 'large',
         priority: 'high',
-        dependencies: ['react', 'react-dom', '@types/react', '@types/react-dom'],
+        dependencies: [
+          'react',
+          'react-dom',
+          '@types/react',
+          '@types/react-dom',
+        ],
         testingRequirements: [
           'Unit tests for all components',
           'Integration tests for user flows',
           'Performance regression tests',
           'Accessibility tests',
-          'Cross-browser testing'
-        ]
+          'Cross-browser testing',
+        ],
       },
       {
         id: 'typescript-strict',
@@ -90,24 +95,28 @@ export class CodebaseModernizer {
           'Enable strictNullChecks',
           'Enable noImplicitAny',
           'Enable strictFunctionTypes',
-          'Fix strictPropertyInitialization'
+          'Fix strictPropertyInitialization',
         ],
         migrationSteps: [
           'Update tsconfig.json',
           'Fix strict mode violations',
           'Add proper type annotations',
           'Update build scripts',
-          'Update CI configuration'
+          'Update CI configuration',
         ],
         estimatedEffort: 'medium',
         priority: 'high',
-        dependencies: ['typescript', '@typescript-eslint/eslint-plugin', '@typescript-eslint/parser'],
+        dependencies: [
+          'typescript',
+          '@typescript-eslint/eslint-plugin',
+          '@typescript-eslint/parser',
+        ],
         testingRequirements: [
           'Type checking passes',
           'Build succeeds',
           'All tests pass',
-          'No runtime errors'
-        ]
+          'No runtime errors',
+        ],
       },
       {
         id: 'eslint-prettier',
@@ -118,24 +127,29 @@ export class CodebaseModernizer {
           'Update ESLint configuration format',
           'Migrate to flat config',
           'Update Prettier rules',
-          'Fix new linting errors'
+          'Fix new linting errors',
         ],
         migrationSteps: [
           'Update ESLint to v9',
           'Migrate to flat config',
           'Update Prettier',
           'Fix all linting errors',
-          'Update pre-commit hooks'
+          'Update pre-commit hooks',
         ],
         estimatedEffort: 'small',
         priority: 'medium',
-        dependencies: ['eslint', 'prettier', '@eslint/js', 'eslint-config-prettier'],
+        dependencies: [
+          'eslint',
+          'prettier',
+          '@eslint/js',
+          'eslint-config-prettier',
+        ],
         testingRequirements: [
           'Linting passes',
           'Formatting is consistent',
           'Pre-commit hooks work',
-          'CI passes'
-        ]
+          'CI passes',
+        ],
       },
       {
         id: 'webpack-vite',
@@ -146,14 +160,14 @@ export class CodebaseModernizer {
           'Replace webpack.config.js with vite.config.ts',
           'Update environment variable handling',
           'Update asset imports',
-          'Update dev server configuration'
+          'Update dev server configuration',
         ],
         migrationSteps: [
           'Install Vite and plugins',
           'Create vite.config.ts',
           'Migrate webpack config',
           'Update package.json scripts',
-          'Test build and dev server'
+          'Test build and dev server',
         ],
         estimatedEffort: 'medium',
         priority: 'medium',
@@ -163,8 +177,8 @@ export class CodebaseModernizer {
           'Build succeeds',
           'All assets load correctly',
           'Environment variables work',
-          'HMR works'
-        ]
+          'HMR works',
+        ],
       },
       {
         id: 'testing-modernization',
@@ -175,25 +189,29 @@ export class CodebaseModernizer {
           'Update test configuration',
           'Replace Jest globals',
           'Update mock syntax',
-          'Update snapshot format'
+          'Update snapshot format',
         ],
         migrationSteps: [
           'Install Vitest',
           'Update test config',
           'Migrate test files',
           'Update CI configuration',
-          'Update documentation'
+          'Update documentation',
         ],
         estimatedEffort: 'medium',
         priority: 'medium',
-        dependencies: ['vitest', '@testing-library/react', '@testing-library/jest-dom'],
+        dependencies: [
+          'vitest',
+          '@testing-library/react',
+          '@testing-library/jest-dom',
+        ],
         testingRequirements: [
           'All tests pass',
           'Coverage maintained',
           'CI passes',
-          'Performance acceptable'
-        ]
-      }
+          'Performance acceptable',
+        ],
+      },
     ];
   }
 
@@ -210,7 +228,7 @@ export class CodebaseModernizer {
       ...criticalTargets,
       ...highTargets,
       ...mediumTargets,
-      ...lowTargets
+      ...lowTargets,
     ]);
 
     const riskLevel = this.assessRisk(this.targets);
@@ -222,10 +240,10 @@ export class CodebaseModernizer {
       timeline,
       riskAssessment: {
         level: riskLevel.level,
-        factors: riskLevel.factors
+        factors: riskLevel.factors,
       },
       rollbackPlan,
-      successCriteria
+      successCriteria,
     };
   }
 
@@ -238,7 +256,7 @@ export class CodebaseModernizer {
       'Phase 2: High priority (ESLint, Prettier)',
       'Phase 3: Build tools (Vite migration)',
       'Phase 4: Testing framework (Vitest)',
-      'Phase 5: Final polish and validation'
+      'Phase 5: Final polish and validation',
     ];
 
     return phases.join('\n');
@@ -255,7 +273,9 @@ export class CodebaseModernizer {
     let riskLevel: 'low' | 'medium' | 'high' | 'critical' = 'low';
 
     const breakingChanges = targets.flatMap(t => t.breakingChanges);
-    const largeEfforts = targets.filter(t => t.estimatedEffort === 'large' || t.estimatedEffort === 'extra-large');
+    const largeEfforts = targets.filter(
+      t => t.estimatedEffort === 'large' || t.estimatedEffort === 'extra-large'
+    );
 
     if (breakingChanges.length > 10) {
       factors.push('High number of breaking changes');
@@ -274,7 +294,7 @@ export class CodebaseModernizer {
 
     return {
       level: riskLevel,
-      factors
+      factors,
     };
   }
 
@@ -289,7 +309,7 @@ export class CodebaseModernizer {
       'Restore webpack configuration',
       'Rollback CI configuration',
       'Notify team of rollback',
-      'Document rollback reasons'
+      'Document rollback reasons',
     ];
   }
 
@@ -306,7 +326,7 @@ export class CodebaseModernizer {
       'Accessibility score maintained',
       'Cross-browser compatibility verified',
       'Team training completed',
-      'Documentation updated'
+      'Documentation updated',
     ];
   }
 
@@ -328,7 +348,7 @@ npm test
 npm run build
         `,
         testCommand: 'npm test && npm run build',
-        rollbackCommand: 'git checkout HEAD~1 && npm install'
+        rollbackCommand: 'git checkout HEAD~1 && npm install',
       },
       {
         name: 'typescript-strict-migration',
@@ -341,7 +361,7 @@ npm run type-check
 npm test
         `,
         testCommand: 'npm run type-check && npm test',
-        rollbackCommand: 'git checkout tsconfig.json'
+        rollbackCommand: 'git checkout tsconfig.json',
       },
       {
         name: 'eslint-prettier-migration',
@@ -354,7 +374,7 @@ npm run lint -- --fix
 npm run format
         `,
         testCommand: 'npm run lint && npm run format',
-        rollbackCommand: 'git checkout .eslintrc.js .prettierrc'
+        rollbackCommand: 'git checkout .eslintrc.js .prettierrc',
       },
       {
         name: 'vite-migration',
@@ -368,7 +388,7 @@ npm run dev
 npm run build
         `,
         testCommand: 'npm run dev & npm run build',
-        rollbackCommand: 'git checkout webpack.config.js'
+        rollbackCommand: 'git checkout webpack.config.js',
       },
       {
         name: 'vitest-migration',
@@ -381,8 +401,8 @@ cp vitest.config.ts.backup vitest.config.ts
 npm run test
         `,
         testCommand: 'npm run test',
-        rollbackCommand: 'git checkout jest.config.js'
-      }
+        rollbackCommand: 'git checkout jest.config.js',
+      },
     ];
   }
 
@@ -399,21 +419,21 @@ npm run test
       return {
         success: false,
         issues: [`Target ${targetId} not found`],
-        nextSteps: []
+        nextSteps: [],
       };
     }
 
     // Mock execution - in real scenario, run actual migration
     const success = Math.random() > 0.2; // 80% success rate
     const issues = success ? [] : [`Migration failed for ${target.name}`];
-    const nextSteps = success 
+    const nextSteps = success
       ? [`Proceed to next target`, `Update documentation`]
       : [`Investigate failure`, `Apply fixes`, `Retry migration`];
 
     return {
       success,
       issues,
-      nextSteps
+      nextSteps,
     };
   }
 
@@ -449,7 +469,7 @@ npm run test
     return {
       isValid: issues.length === 0,
       issues,
-      metrics
+      metrics,
     };
   }
 }

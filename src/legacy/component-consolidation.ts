@@ -60,18 +60,23 @@ export class ComponentConsolidator {
         bundleSize: 2.5,
         usageCount: 45,
         lastUpdated: new Date('2024-01-15'),
-        dependencies: ['react', 'clsx']
+        dependencies: ['react', 'clsx'],
       },
       {
         id: 'glass-button-v2',
         name: 'GlassButtonEnhanced',
         filePath: 'src/components/glass-button/glass-button-enhanced.tsx',
         implementation: 'SVG filter glass effect',
-        features: ['advanced-glass', 'animations', 'accessibility', 'responsive'],
+        features: [
+          'advanced-glass',
+          'animations',
+          'accessibility',
+          'responsive',
+        ],
         bundleSize: 4.2,
         usageCount: 12,
         lastUpdated: new Date('2024-03-20'),
-        dependencies: ['react', 'framer-motion', 'clsx']
+        dependencies: ['react', 'framer-motion', 'clsx'],
       },
       {
         id: 'glass-button-v3',
@@ -82,8 +87,8 @@ export class ComponentConsolidator {
         bundleSize: 1.8,
         usageCount: 8,
         lastUpdated: new Date('2023-12-01'),
-        dependencies: ['react']
-      }
+        dependencies: ['react'],
+      },
     ];
 
     const glassCardVariants: ComponentVariant[] = [
@@ -96,19 +101,29 @@ export class ComponentConsolidator {
         bundleSize: 3.1,
         usageCount: 32,
         lastUpdated: new Date('2024-02-10'),
-        dependencies: ['react', 'clsx']
+        dependencies: ['react', 'clsx'],
       },
       {
         id: 'glass-card-v2',
         name: 'GlassCardAdvanced',
         filePath: 'src/components/glass-card/glass-card-advanced.tsx',
         implementation: 'Multi-layer glass system',
-        features: ['advanced-glass', 'animations', 'responsive', 'accessibility'],
+        features: [
+          'advanced-glass',
+          'animations',
+          'responsive',
+          'accessibility',
+        ],
         bundleSize: 5.8,
         usageCount: 18,
         lastUpdated: new Date('2024-03-15'),
-        dependencies: ['react', 'framer-motion', 'clsx', 'react-intersection-observer']
-      }
+        dependencies: [
+          'react',
+          'framer-motion',
+          'clsx',
+          'react-intersection-observer',
+        ],
+      },
     ];
 
     this.components.set('glass-button', glassButtonVariants);
@@ -126,7 +141,7 @@ export class ComponentConsolidator {
       if (variants.length > 1) {
         const plan = this.createConsolidationPlan(componentName, variants);
         consolidationPlans.push(plan);
-        
+
         // Calculate bundle reduction
         const originalSize = variants.reduce((sum, v) => sum + v.bundleSize, 0);
         const consolidatedSize = Math.max(...variants.map(v => v.bundleSize));
@@ -143,7 +158,7 @@ export class ComponentConsolidator {
       consolidationPlans,
       estimatedBundleReduction: Math.round(totalBundleReduction * 100) / 100,
       breakingChanges,
-      migrationTimeline: this.generateMigrationTimeline(consolidationPlans)
+      migrationTimeline: this.generateMigrationTimeline(consolidationPlans),
     };
   }
 
@@ -157,8 +172,11 @@ export class ComponentConsolidator {
     // Find the most recent and feature-rich variant
     const targetVariant = variants.reduce((best, current) => {
       if (current.features.length > best.features.length) return current;
-      if (current.features.length === best.features.length && 
-          current.lastUpdated > best.lastUpdated) return current;
+      if (
+        current.features.length === best.features.length &&
+        current.lastUpdated > best.lastUpdated
+      )
+        return current;
       return best;
     });
 
@@ -174,7 +192,7 @@ export class ComponentConsolidator {
       `Test all affected components`,
       `Update documentation and examples`,
       `Remove deprecated component files`,
-      `Update bundle configuration`
+      `Update bundle configuration`,
     ];
 
     const testingRequirements = [
@@ -183,7 +201,7 @@ export class ComponentConsolidator {
       'Visual regression tests',
       'Accessibility tests',
       'Performance tests',
-      'Cross-browser testing'
+      'Cross-browser testing',
     ];
 
     return {
@@ -193,21 +211,27 @@ export class ComponentConsolidator {
       breakingChanges,
       migrationSteps,
       estimatedEffort: this.estimateConsolidationEffort(variants),
-      testingRequirements
+      testingRequirements,
     };
   }
 
   /**
    * Estimate consolidation effort
    */
-  private estimateConsolidationEffort(variants: ComponentVariant[]): 'small' | 'medium' | 'large' | 'extra-large' {
+  private estimateConsolidationEffort(
+    variants: ComponentVariant[]
+  ): 'small' | 'medium' | 'large' | 'extra-large' {
     const totalUsage = variants.reduce((sum, v) => sum + v.usageCount, 0);
-    const totalFeatures = [...new Set(variants.flatMap(v => v.features))].length;
+    const totalFeatures = [...new Set(variants.flatMap(v => v.features))]
+      .length;
     const maxBundleSize = Math.max(...variants.map(v => v.bundleSize));
 
-    if (totalUsage < 20 && totalFeatures < 5 && maxBundleSize < 3) return 'small';
-    if (totalUsage < 100 && totalFeatures < 10 && maxBundleSize < 6) return 'medium';
-    if (totalUsage < 200 && totalFeatures < 15 && maxBundleSize < 10) return 'large';
+    if (totalUsage < 20 && totalFeatures < 5 && maxBundleSize < 3)
+      return 'small';
+    if (totalUsage < 100 && totalFeatures < 10 && maxBundleSize < 6)
+      return 'medium';
+    if (totalUsage < 200 && totalFeatures < 15 && maxBundleSize < 10)
+      return 'large';
     return 'extra-large';
   }
 
@@ -217,10 +241,10 @@ export class ComponentConsolidator {
   private generateMigrationTimeline(plans: ConsolidationPlan[]): string {
     const totalEffort = plans.reduce((sum, plan) => {
       const effortMap = {
-        'small': 1,
-        'medium': 3,
-        'large': 8,
-        'extra-large': 20
+        small: 1,
+        medium: 3,
+        large: 8,
+        'extra-large': 20,
       };
       return sum + effortMap[plan.estimatedEffort];
     }, 0);
@@ -254,27 +278,31 @@ export class ComponentConsolidator {
    * Create unified component
    */
   public createUnifiedComponent(plan: ConsolidationPlan): string {
-    const target = plan.sourceComponents.find(c => c.name === plan.targetComponent);
+    const target = plan.sourceComponents.find(
+      c => c.name === plan.targetComponent
+    );
     if (!target) return '';
 
-    const unifiedFeatures = plan.mergedFeatures.map(feature => {
-      switch (feature) {
-        case 'basic-glass':
-          return '  glassEffect: "basic" | "advanced" | "none" = "basic",';
-        case 'advanced-glass':
-          return '  glassEffect: "basic" | "advanced" | "none" = "advanced",';
-        case 'animations':
-          return '  animation?: "none" | "subtle" | "enhanced",';
-        case 'accessibility':
-          return '  accessibility?: boolean,';
-        case 'responsive':
-          return '  responsive?: boolean,';
-        case 'legacy-support':
-          return '  legacySupport?: boolean,';
-        default:
-          return `  ${feature}?: boolean,`;
-      }
-    }).join('\n');
+    const unifiedFeatures = plan.mergedFeatures
+      .map(feature => {
+        switch (feature) {
+          case 'basic-glass':
+            return '  glassEffect: "basic" | "advanced" | "none" = "basic",';
+          case 'advanced-glass':
+            return '  glassEffect: "basic" | "advanced" | "none" = "advanced",';
+          case 'animations':
+            return '  animation?: "none" | "subtle" | "enhanced",';
+          case 'accessibility':
+            return '  accessibility?: boolean,';
+          case 'responsive':
+            return '  responsive?: boolean,';
+          case 'legacy-support':
+            return '  legacySupport?: boolean,';
+          default:
+            return `  ${feature}?: boolean,`;
+        }
+      })
+      .join('\n');
 
     return `
 // Unified ${plan.targetComponent} component
@@ -337,7 +365,9 @@ export const Unified${plan.targetComponent}: React.FC<Unified${plan.targetCompon
 
     // Check for breaking changes
     if (plan.breakingChanges.length > 0) {
-      warnings.push(`Breaking changes detected: ${plan.breakingChanges.length}`);
+      warnings.push(
+        `Breaking changes detected: ${plan.breakingChanges.length}`
+      );
     }
 
     // Check feature compatibility
@@ -350,7 +380,10 @@ export const Unified${plan.targetComponent}: React.FC<Unified${plan.targetCompon
     }
 
     // Check usage impact
-    const totalUsage = plan.sourceComponents.reduce((sum, c) => sum + c.usageCount, 0);
+    const totalUsage = plan.sourceComponents.reduce(
+      (sum, c) => sum + c.usageCount,
+      0
+    );
     if (totalUsage > 100) {
       warnings.push(`High usage impact: ${totalUsage} usages need migration`);
     }
@@ -358,7 +391,7 @@ export const Unified${plan.targetComponent}: React.FC<Unified${plan.targetCompon
     return {
       isValid: issues.length === 0,
       issues,
-      warnings
+      warnings,
     };
   }
 }
@@ -371,7 +404,10 @@ export const analyzeDuplicates = () => {
   return componentConsolidator.analyzeDuplicates();
 };
 
-export const createConsolidationPlan = (componentName: string, variants: ComponentVariant[]) => {
+export const createConsolidationPlan = (
+  componentName: string,
+  variants: ComponentVariant[]
+) => {
   return componentConsolidator.createConsolidationPlan(componentName, variants);
 };
 

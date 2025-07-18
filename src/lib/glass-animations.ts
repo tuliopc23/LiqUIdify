@@ -415,14 +415,14 @@ export class GlassAnimation {
         gsap.to(this.element, {
           x: moveX,
           y: moveY,
-      duration: 0.2,
+          duration: 0.2,
           ease: 'power2.out',
         });
       } else {
         gsap.to(this.element, {
           x: 0,
           y: 0,
-        duration: 0.3,
+          duration: 0.3,
           ease: 'elastic.out(1, 0.3)',
         });
       }
@@ -638,12 +638,16 @@ export class GlassGestureAnimator {
 
     const handleStart = (e: TouchEvent | MouseEvent) => {
       const touch = 'touches' in e ? e.touches[0] : e;
-      startX = touch.clientX;
-      startY = touch.clientY;
+      if (touch) {
+        startX = touch.clientX;
+        startY = touch.clientY;
+      }
     };
 
     const handleEnd = (e: TouchEvent | MouseEvent) => {
       const touch = 'changedTouches' in e ? e.changedTouches[0] : e;
+      if (!touch) return;
+
       const deltaX = touch.clientX - startX;
       const deltaY = touch.clientY - startY;
       const threshold = 50;
@@ -767,7 +771,7 @@ export const GlassUtils = {
     ).matches;
 
     if (prefersReducedMotion) {
-      elements.forEach((element) => {
+      elements.forEach(element => {
         gsap.to(element, {
           clearProps: 'all', // Remove animations
           opacity: 1, // Ensure visibility

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createComponentSize } from '@/types/branded';
 import { GlassButton } from '../glass-button';
 import { GlassInput } from '../glass-input';
 import { GlassTextarea } from '../glass-textarea';
@@ -11,14 +12,13 @@ import { GlassPopover } from '../glass-popover';
 import { GlassDropdown } from '../glass-dropdown';
 import { GlassAvatar } from '../glass-avatar';
 import { useToast } from '../glass-toast';
-import { ComponentSize } from '@/types/branded';
 import {
   GlassCard,
+  GlassCardContent,
+  GlassCardDescription,
+  GlassCardFooter,
   GlassCardHeader,
   GlassCardTitle,
-  GlassCardDescription,
-  GlassCardContent,
-  GlassCardFooter,
 } from '../glass-card';
 import { GlassCheckbox } from '../glass-checkbox';
 import { GlassSwitch } from '../glass-switch';
@@ -27,26 +27,26 @@ import { GlassBadge } from '../glass-badge';
 import { GlassModal } from '../glass-modal';
 import { GlassTable } from '../glass-table';
 import {
+  ChevronDown,
   Download,
+  Edit,
   Github,
   Heart,
-  MousePointer,
   Keyboard,
   Layers,
-  Users,
-  TrendingUp,
-  Settings,
-  ChevronDown,
   Mail,
-  Phone,
   MapPin,
-  User,
-  Edit,
-  Trash,
+  MousePointer,
+  Phone,
+  Settings,
   Share,
+  Trash,
+  TrendingUp,
+  User,
+  Users,
 } from 'lucide-react';
 
-interface ComponentShowcaseProps {
+export interface ComponentShowcaseProps {
   activeSection: string;
 }
 
@@ -229,13 +229,13 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
               </h3>
               <div className="component-preview rounded-lg p-6 mb-4">
                 <div className="flex flex-wrap gap-4 items-center">
-                  <GlassButton variant="primary" size={ComponentSize('sm')}>
+                  <GlassButton variant="primary" size={createComponentSize('sm')}>
                     Small
                   </GlassButton>
-                  <GlassButton variant="primary" size={ComponentSize('md')}>
+                  <GlassButton variant="primary" size={createComponentSize('md')}>
                     Medium
                   </GlassButton>
-                  <GlassButton variant="primary" size={ComponentSize('lg')}>
+                  <GlassButton variant="primary" size={createComponentSize('lg')}>
                     Large
                   </GlassButton>
                 </div>
@@ -347,14 +347,16 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                       </GlassCardDescription>
                     </GlassCardHeader>
                     <GlassCardFooter>
-                      <GlassButton size={ComponentSize('sm')}>Learn More</GlassButton>
+                      <GlassButton size={createComponentSize('sm')}>
+                        Learn More
+                      </GlassButton>
                     </GlassCardFooter>
                   </GlassCard>
 
                   <GlassCard>
                     <GlassCardHeader>
                       <img
-                        src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=200&fit=crop"
+                        src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=200&fit=crop&crop=face"
                         alt="Card image"
                         className="w-full h-32 object-cover rounded-lg mb-4 -mt-6 -mx-6"
                       />
@@ -798,10 +800,16 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                           </div>
                         </div>
                         <div className="flex gap-2">
-                          <GlassButton size={ComponentSize('sm')} variant="primary">
+                          <GlassButton
+                            size={createComponentSize('sm')}
+                            variant="primary"
+                          >
                             Follow
                           </GlassButton>
-                          <GlassButton size={ComponentSize('sm')} variant="secondary">
+                          <GlassButton
+                            size={createComponentSize('sm')}
+                            variant="secondary"
+                          >
                             Message
                           </GlassButton>
                         </div>
@@ -901,7 +909,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                         addToast({
                           type: 'info',
                           description:
-                            "Here's some helpful information for you.",
+                            'Here\'s some helpful information for you.',
                         })
                       }
                     >
@@ -986,10 +994,16 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                   </div>
 
                   <div className="flex gap-4">
-                    <GlassButton variant="primary" size={ComponentSize('lg')}>
+                    <GlassButton
+                      variant="primary"
+                      size={createComponentSize('lg')}
+                    >
                       Create Account
                     </GlassButton>
-                    <GlassButton variant="secondary" size={ComponentSize('lg')}>
+                    <GlassButton
+                      variant="secondary"
+                      size={createComponentSize('lg')}
+                    >
                       Cancel
                     </GlassButton>
                   </div>

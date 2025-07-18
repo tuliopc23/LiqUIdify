@@ -1,5 +1,29 @@
-import { lazy, Suspense, ComponentType } from 'react';
+import React, { lazy, Suspense, ComponentType } from 'react';
 import { GlassSpinner } from '../glass-spinner';
+
+// Import types for lazy components' props
+import type {
+  LineChartProps,
+  BarChartProps,
+  DonutChartProps,
+} from '../glass-chart';
+import type { CommandPaletteProps } from '../glass-command';
+import type { ComponentShowcaseProps } from '../component-showcase';
+import type { GlassDatePickerProps } from '../glass-date-picker';
+import type { GlassFileUploadProps } from '../glass-file-upload';
+import type { GlassComboboxProps } from '../glass-combobox';
+
+// Export these types so they can be named by TypeScript
+export type {
+  LineChartProps,
+  BarChartProps,
+  DonutChartProps,
+  CommandPaletteProps,
+  ComponentShowcaseProps,
+  GlassDatePickerProps,
+  GlassFileUploadProps,
+  GlassComboboxProps,
+};
 
 // Default loading component
 const DefaultLoadingComponent = () => (
@@ -14,7 +38,7 @@ export function createLazyComponent<T extends ComponentType<any>>(
   LoadingComponent: ComponentType = DefaultLoadingComponent
 ) {
   const LazyComponent = lazy(importFn);
-  
+
   return (props: React.ComponentProps<T>) => (
     <Suspense fallback={<LoadingComponent />}>
       <LazyComponent {...props} />
@@ -24,36 +48,36 @@ export function createLazyComponent<T extends ComponentType<any>>(
 
 // Pre-configured lazy components for heavy components
 // Note: GlassChart exports multiple chart components, not a single GlassChart
-export const LazyLineChart = createLazyComponent(
-  () => import('../glass-chart').then(m => ({ default: m.LineChart }))
+export const LazyLineChart = createLazyComponent(() =>
+  import('../glass-chart').then(m => ({ default: m.LineChart }))
 );
 
-export const LazyBarChart = createLazyComponent(
-  () => import('../glass-chart').then(m => ({ default: m.BarChart }))
+export const LazyBarChart = createLazyComponent(() =>
+  import('../glass-chart').then(m => ({ default: m.BarChart }))
 );
 
-export const LazyDonutChart = createLazyComponent(
-  () => import('../glass-chart').then(m => ({ default: m.DonutChart }))
+export const LazyDonutChart = createLazyComponent(() =>
+  import('../glass-chart').then(m => ({ default: m.DonutChart }))
 );
 
-export const LazyGlassDatePicker = createLazyComponent(
-  () => import('../glass-date-picker').then(m => ({ default: m.GlassDatePicker }))
+export const LazyGlassDatePicker = createLazyComponent(() =>
+  import('../glass-date-picker').then(m => ({ default: m.GlassDatePicker }))
 );
 
-export const LazyGlassFileUpload = createLazyComponent(
-  () => import('../glass-file-upload').then(m => ({ default: m.GlassFileUpload }))
+export const LazyGlassFileUpload = createLazyComponent(() =>
+  import('../glass-file-upload').then(m => ({ default: m.GlassFileUpload }))
 );
 
-export const LazyCommandPalette = createLazyComponent(
-  () => import('../glass-command').then(m => ({ default: m.CommandPalette }))
+export const LazyCommandPalette = createLazyComponent(() =>
+  import('../glass-command').then(m => ({ default: m.CommandPalette }))
 );
 
-export const LazyGlassCombobox = createLazyComponent(
-  () => import('../glass-combobox').then(m => ({ default: m.GlassCombobox }))
+export const LazyGlassCombobox = createLazyComponent(() =>
+  import('../glass-combobox').then(m => ({ default: m.GlassCombobox }))
 );
 
-export const LazyComponentShowcase = createLazyComponent(
-  () => import('../component-showcase').then(m => ({ default: m.ComponentShowcase }))
+export const LazyComponentShowcase = createLazyComponent(() =>
+  import('../component-showcase').then(m => ({ default: m.ComponentShowcase }))
 );
 
 // Lazy load with preload capability
@@ -61,24 +85,24 @@ export function createPreloadableComponent<T extends ComponentType<any>>(
   importFn: () => Promise<{ default: T }>
 ) {
   let preloadPromise: Promise<{ default: T }> | null = null;
-  
+
   const preload = () => {
     if (!preloadPromise) {
       preloadPromise = importFn();
     }
     return preloadPromise;
   };
-  
+
   const LazyComponent = lazy(() => preload());
-  
+
   const Component = (props: React.ComponentProps<T>) => (
     <Suspense fallback={<DefaultLoadingComponent />}>
       <LazyComponent {...props} />
     </Suspense>
   );
-  
+
   Component.preload = preload;
-  
+
   return Component;
 }
 
@@ -90,10 +114,10 @@ export function useLazyLoad(
 ) {
   React.useEffect(() => {
     if (!ref.current) return;
-    
+
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             onIntersect();
             observer.disconnect();
@@ -105,12 +129,10 @@ export function useLazyLoad(
         ...options,
       }
     );
-    
+
     observer.observe(ref.current);
-    
+
     return () => observer.disconnect();
   }, [ref, onIntersect, options]);
 }
 
-// React import for hooks
-import React from 'react';

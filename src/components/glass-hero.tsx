@@ -4,6 +4,7 @@ import { cn } from '@/lib/glass-utils';
 import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
 import { GlassButton } from './glass-button';
+import { createComponentSize } from '@/types/branded';
 import {
   fadeInUpLarge,
   containerFadeInFast,
@@ -49,7 +50,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const { specularHighlights } = useLiquidGlass();
@@ -71,7 +72,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }
       },
-      [enableMagnetic, magneticRef, ref]
+      [enableMagnetic, magneticRef, ref],
     );
 
     const sizeClasses = {
@@ -101,15 +102,15 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
 
     const parallaxVariants = enableParallax
       ? {
-          initial: { y: 0 },
-          animate: { y: -20 },
-          transition: {
-            duration: 2,
-            repeat: Infinity,
-            repeatType: 'reverse' as const,
-            ease: 'easeInOut' as const,
-          },
-        }
+        initial: { y: 0 },
+        animate: { y: -20 },
+        transition: {
+          duration: 2,
+          repeat: Infinity,
+          repeatType: 'reverse' as const,
+          ease: 'easeInOut' as const,
+        },
+      }
       : {};
 
     return (
@@ -120,7 +121,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           'liquid-glass-adaptive liquid-glass-depth-2',
           specularHighlights && 'liquid-glass-specular',
           sizeClasses[size],
-          className
+          className,
         )}
         style={{
           transform: enableMagnetic ? transform : undefined,
@@ -150,7 +151,8 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         )}
 
         {/* Background Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-black/5 dark:from-black/20 dark:via-transparent dark:to-black/40 -z-5" />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-black/5 dark:from-black/20 dark:via-transparent dark:to-black/40 -z-5" />
 
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden -z-10">
@@ -216,7 +218,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         <motion.div
           className={cn(
             'relative z-10 flex flex-col h-full max-w-7xl mx-auto',
-            variantClasses[variant]
+            variantClasses[variant],
           )}
           variants={containerVariants}
           initial="hidden"
@@ -239,7 +241,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                   variants={itemVariants}
                   className={cn(
                     'font-bold tracking-tight text-[var(--text-primary)]',
-                    titleSizes[size]
+                    titleSizes[size],
                   )}
                 >
                   {title}
@@ -262,7 +264,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                     {primaryAction && (
                       <GlassButton
                         variant="primary"
-                        size="lg"
+                        size={createComponentSize('lg')}
                         onClick={primaryAction.onClick}
                         leftIcon={primaryAction.icon}
                         className="min-w-[200px]"
@@ -273,7 +275,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                     {secondaryAction && (
                       <GlassButton
                         variant="secondary"
-                        size="lg"
+                        size={createComponentSize('lg')}
                         onClick={secondaryAction.onClick}
                         leftIcon={secondaryAction.icon}
                         className="min-w-[200px]"
@@ -302,7 +304,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                 variants={itemVariants}
                 className={cn(
                   'font-bold tracking-tight text-[var(--text-primary)] max-w-5xl',
-                  titleSizes[size]
+                  titleSizes[size],
                 )}
               >
                 {title}
@@ -325,7 +327,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                   {primaryAction && (
                     <GlassButton
                       variant="primary"
-                      size="xl"
+                      size={createComponentSize('xl')}
                       onClick={primaryAction.onClick}
                       leftIcon={primaryAction.icon}
                       className="min-w-[220px]"
@@ -336,7 +338,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                   {secondaryAction && (
                     <GlassButton
                       variant="secondary"
-                      size="xl"
+                      size={createComponentSize('xl')}
                       onClick={secondaryAction.onClick}
                       leftIcon={secondaryAction.icon}
                       className="min-w-[220px]"
@@ -400,7 +402,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 GlassHero.displayName = 'GlassHero';

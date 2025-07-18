@@ -115,7 +115,8 @@ export class GracefulDegradationManager {
     support.webRTC = 'RTCPeerConnection' in window;
 
     // Web Audio
-    support.webAudio = 'AudioContext' in window || 'webkitAudioContext' in window;
+    support.webAudio =
+      'AudioContext' in window || 'webkitAudioContext' in window;
 
     // Canvas
     support.canvas = this.checkCanvasSupport();
@@ -144,7 +145,8 @@ export class GracefulDegradationManager {
 
     // Speech APIs
     support.speechSynthesis = 'speechSynthesis' in window;
-    support.speechRecognition = 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window;
+    support.speechRecognition =
+      'SpeechRecognition' in window || 'webkitSpeechRecognition' in window;
 
     // Payment APIs
     support.paymentRequest = 'PaymentRequest' in window;
@@ -177,10 +179,11 @@ export class GracefulDegradationManager {
 
   private checkCSSFeature(property: string): boolean {
     if (typeof window === 'undefined') return false;
-    
+
     const element = document.createElement('div');
-    const capitalizedProperty = property.charAt(0).toUpperCase() + property.slice(1);
-    
+    const capitalizedProperty =
+      property.charAt(0).toUpperCase() + property.slice(1);
+
     return (
       property in element.style ||
       `webkit${capitalizedProperty}` in element.style ||
@@ -191,10 +194,11 @@ export class GracefulDegradationManager {
 
   private checkWebGLSupport(): boolean {
     if (typeof window === 'undefined') return false;
-    
+
     try {
       const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      const gl =
+        canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
       return !!gl;
     } catch {
       return false;
@@ -203,7 +207,7 @@ export class GracefulDegradationManager {
 
   private checkWebGL2Support(): boolean {
     if (typeof window === 'undefined') return false;
-    
+
     try {
       const canvas = document.createElement('canvas');
       const gl = canvas.getContext('webgl2');
@@ -215,7 +219,7 @@ export class GracefulDegradationManager {
 
   private checkCanvasSupport(): boolean {
     if (typeof window === 'undefined') return false;
-    
+
     try {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
@@ -251,16 +255,18 @@ export class GracefulDegradationManager {
   public shouldUseFallback(feature: keyof FeatureSupport): boolean {
     if (!this.config.enableFallbacks) return false;
     if (!this.featureSupport) return true;
-    
+
     return !this.featureSupport[feature];
   }
 
   public getFallbackClass(feature: string, baseClass: string = ''): string {
     if (!this.config.enableCSSFallbacks) return baseClass;
-    
-    const shouldFallback = this.shouldUseFallback(feature as keyof FeatureSupport);
+
+    const shouldFallback = this.shouldUseFallback(
+      feature as keyof FeatureSupport
+    );
     const fallbackClass = shouldFallback ? `${baseClass}--fallback` : baseClass;
-    
+
     return fallbackClass.trim();
   }
 
@@ -275,7 +281,7 @@ export class GracefulDegradationManager {
     }
 
     const online = navigator.onLine;
-    
+
     if ('connection' in navigator) {
       const connection = (navigator as any).connection;
       return {
@@ -305,7 +311,7 @@ export class GracefulDegradationManager {
     if ('connection' in navigator) {
       const connection = (navigator as any).connection;
       const effectiveType = connection.effectiveType;
-      
+
       if (effectiveType === '4g') return 'high';
       if (effectiveType === '3g') return 'medium';
       return 'low';
@@ -318,7 +324,9 @@ export class GracefulDegradationManager {
 // React hook for graceful degradation
 export function useGracefulDegradation() {
   const [manager] = useState(() => GracefulDegradationManager.getInstance());
-  const [featureSupport, setFeatureSupport] = useState<FeatureSupport | null>(null);
+  const [featureSupport, setFeatureSupport] = useState<FeatureSupport | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -335,13 +343,19 @@ export function useGracefulDegradation() {
     return unsubscribe;
   }, [manager]);
 
-  const shouldUseFallback = useCallback((feature: keyof FeatureSupport) => {
-    return manager.shouldUseFallback(feature);
-  }, [manager]);
+  const shouldUseFallback = useCallback(
+    (feature: keyof FeatureSupport) => {
+      return manager.shouldUseFallback(feature);
+    },
+    [manager]
+  );
 
-  const getFallbackClass = useCallback((feature: string, baseClass: string = '') => {
-    return manager.getFallbackClass(feature, baseClass);
-  }, [manager]);
+  const getFallbackClass = useCallback(
+    (feature: string, baseClass: string = '') => {
+      return manager.getFallbackClass(feature, baseClass);
+    },
+    [manager]
+  );
 
   const checkNetworkStatus = useCallback(async () => {
     return manager.checkNetworkStatus();
@@ -367,7 +381,9 @@ export function useGracefulDegradation() {
 export function useNetworkAwareFallback() {
   const { checkNetworkStatus, getPerformanceLevel } = useGracefulDegradation();
   const [networkStatus, setNetworkStatus] = useState({ online: true });
-  const [performanceLevel, setPerformanceLevel] = useState<'high' | 'medium' | 'low'>('high');
+  const [performanceLevel, setPerformanceLevel] = useState<
+    'high' | 'medium' | 'low'
+  >('high');
 
   useEffect(() => {
     const updateStatus = async () => {
@@ -375,7 +391,7 @@ export function useNetworkAwareFallback() {
         checkNetworkStatus(),
         Promise.resolve(getPerformanceLevel()),
       ]);
-      
+
       setNetworkStatus(status);
       setPerformanceLevel(level);
     };
@@ -399,7 +415,8 @@ export function useNetworkAwareFallback() {
     performanceLevel,
     shouldReduceMotion: performanceLevel === 'low',
     shouldReduceQuality: performanceLevel === 'low' || !networkStatus.online,
-    shouldUseStaticFallbacks: performanceLevel === 'low' || !networkStatus.online,
+    shouldUseStaticFallbacks:
+      performanceLevel === 'low' || !networkStatus.online,
   };
 }
 
@@ -412,13 +429,18 @@ export function useAccessibilityFallback() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const mediaQueryMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQueryMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
     const mediaQueryData = window.matchMedia('(prefers-reduced-data: reduce)');
     const mediaQueryContrast = window.matchMedia('(prefers-contrast: high)');
 
-    const updateMotion = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    const updateData = (e: MediaQueryListEvent) => setPrefersReducedData(e.matches);
-    const updateContrast = (e: MediaQueryListEvent) => setHighContrast(e.matches);
+    const updateMotion = (e: MediaQueryListEvent) =>
+      setPrefersReducedMotion(e.matches);
+    const updateData = (e: MediaQueryListEvent) =>
+      setPrefersReducedData(e.matches);
+    const updateContrast = (e: MediaQueryListEvent) =>
+      setHighContrast(e.matches);
 
     setPrefersReducedMotion(mediaQueryMotion.matches);
     setPrefersReducedData(mediaQueryData.matches);
@@ -464,27 +486,27 @@ export function useDegradationAware() {
     },
     getDegradationClass: (feature: string, baseClass: string = '') => {
       const classes = [baseClass];
-      
+
       if (graceful.shouldUseFallback(feature as keyof FeatureSupport)) {
         classes.push(`${baseClass}--feature-fallback`);
       }
-      
+
       if (network.shouldUseStaticFallbacks) {
         classes.push(`${baseClass}--network-fallback`);
       }
-      
+
       if (accessibility.shouldUseStaticFallbacks) {
         classes.push(`${baseClass}--accessibility-fallback`);
       }
-      
+
       if (accessibility.prefersReducedMotion) {
         classes.push(`${baseClass}--reduced-motion`);
       }
-      
+
       if (accessibility.highContrast) {
         classes.push(`${baseClass}--high-contrast`);
       }
-      
+
       return classes.filter(Boolean).join(' ');
     },
   };

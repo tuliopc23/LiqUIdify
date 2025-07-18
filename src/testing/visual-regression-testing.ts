@@ -144,7 +144,9 @@ export class VisualTestSuite {
         viewport,
         timestamp: Date.now(),
         screenshotPath: `screenshots/${testId}-${browser}-${viewport}.png`,
-        diffImagePath: passed ? undefined : `diffs/${testId}-${browser}-${viewport}-diff.png`,
+        diffImagePath: passed
+          ? undefined
+          : `diffs/${testId}-${browser}-${viewport}-diff.png`,
       };
     } catch (error) {
       return {
@@ -173,7 +175,7 @@ export class VisualTestSuite {
       throw new Error('Animation testing is disabled');
     }
 
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       let frameCount = 0;
       let droppedFrames = 0;
       let lastFrameTime = performance.now();
@@ -183,13 +185,13 @@ export class VisualTestSuite {
       const measureFrame = () => {
         const currentTime = performance.now();
         const frameTime = currentTime - lastFrameTime;
-        
+
         frameCount++;
-        
+
         if (frameTime > targetFrameTime * 1.5) {
           droppedFrames++;
         }
-        
+
         lastFrameTime = currentTime;
 
         if (currentTime - startTime < animationDuration) {
@@ -197,7 +199,7 @@ export class VisualTestSuite {
         } else {
           const totalTime = currentTime - startTime;
           const actualFrameRate = (frameCount / totalTime) * 1000;
-          const smoothnessScore = Math.max(0, 1 - (droppedFrames / frameCount));
+          const smoothnessScore = Math.max(0, 1 - droppedFrames / frameCount);
           const passed = smoothnessScore >= 0.9 && actualFrameRate >= 55; // Allow 5fps tolerance
 
           const result: AnimationTestResult = {
@@ -222,7 +224,7 @@ export class VisualTestSuite {
       // Start animation and measurement
       element.style.transition = `transform ${animationDuration}ms ease-in-out`;
       element.style.transform = 'translateX(100px) rotate(360deg) scale(1.2)';
-      
+
       requestAnimationFrame(measureFrame);
     });
   }
@@ -244,7 +246,7 @@ export class VisualTestSuite {
     for (const property of properties) {
       const computedStyle = window.getComputedStyle(element);
       const actualValue = computedStyle.getPropertyValue(property);
-      
+
       // Simulate different browser values
       const browserValues: Record<string, string> = {
         chrome: actualValue,
@@ -254,7 +256,8 @@ export class VisualTestSuite {
       };
 
       // Simulate some inconsistencies
-      if (Math.random() < 0.1) { // 10% chance of inconsistency
+      if (Math.random() < 0.1) {
+        // 10% chance of inconsistency
         browserValues.firefox = 'different-value';
       }
 
@@ -293,7 +296,9 @@ export class VisualTestSuite {
     }
 
     if (elements.length !== expectedPositions.length) {
-      throw new Error('Elements and expected positions arrays must have the same length');
+      throw new Error(
+        'Elements and expected positions arrays must have the same length'
+      );
     }
 
     let allPerfect = true;
@@ -302,16 +307,16 @@ export class VisualTestSuite {
       const element = elements[i];
       const expected = expectedPositions[i];
       const rect = element.getBoundingClientRect();
-      
+
       const actualX = Math.round(rect.left);
       const actualY = Math.round(rect.top);
-      
+
       if (expected && (actualX !== expected.x || actualY !== expected.y)) {
         allPerfect = false;
         console.warn(
           `Pixel-perfect test failed for element ${i}: ` +
-          `expected (${expected?.x}, ${expected?.y}), ` +
-          `actual (${actualX}, ${actualY})`
+            `expected (${expected?.x}, ${expected?.y}), ` +
+            `actual (${actualX}, ${actualY})`
         );
       }
     }
@@ -444,10 +449,15 @@ export class VisualTestSuite {
     const allAnimationTests = Array.from(this.animationResults.values()).flat();
     const allCrossBrowserTests = Array.from(this.crossBrowserResults.values());
 
-    const totalTests = allVisualTests.length + allAnimationTests.length + allCrossBrowserTests.length;
+    const totalTests =
+      allVisualTests.length +
+      allAnimationTests.length +
+      allCrossBrowserTests.length;
     const passedVisual = allVisualTests.filter(t => t.passed).length;
     const passedAnimation = allAnimationTests.filter(t => t.passed).length;
-    const passedCrossBrowser = allCrossBrowserTests.filter(t => t.isConsistent).length;
+    const passedCrossBrowser = allCrossBrowserTests.filter(
+      t => t.isConsistent
+    ).length;
     const passedTests = passedVisual + passedAnimation + passedCrossBrowser;
 
     const passRate = totalTests > 0 ? passedTests / totalTests : 1;
@@ -455,22 +465,32 @@ export class VisualTestSuite {
     const recommendations: string[] = [];
 
     if (passRate < 0.9) {
-      recommendations.push('Overall test pass rate is below 90% - review failed tests');
+      recommendations.push(
+        'Overall test pass rate is below 90% - review failed tests'
+      );
     }
 
     const failedVisualTests = allVisualTests.filter(t => !t.passed);
     if (failedVisualTests.length > 0) {
-      recommendations.push(`${failedVisualTests.length} visual tests failed - check for layout issues`);
+      recommendations.push(
+        `${failedVisualTests.length} visual tests failed - check for layout issues`
+      );
     }
 
     const failedAnimationTests = allAnimationTests.filter(t => !t.passed);
     if (failedAnimationTests.length > 0) {
-      recommendations.push(`${failedAnimationTests.length} animation tests failed - optimize performance`);
+      recommendations.push(
+        `${failedAnimationTests.length} animation tests failed - optimize performance`
+      );
     }
 
-    const inconsistentCrossBrowserTests = allCrossBrowserTests.filter(t => !t.isConsistent);
+    const inconsistentCrossBrowserTests = allCrossBrowserTests.filter(
+      t => !t.isConsistent
+    );
     if (inconsistentCrossBrowserTests.length > 0) {
-      recommendations.push(`${inconsistentCrossBrowserTests.length} cross-browser inconsistencies found`);
+      recommendations.push(
+        `${inconsistentCrossBrowserTests.length} cross-browser inconsistencies found`
+      );
     }
 
     return {
@@ -511,7 +531,9 @@ export const visualTestUtils = {
   /**
    * Create test element with glass styling
    */
-  createTestElement(className: string = 'enhanced-apple-liquid-glass'): HTMLElement {
+  createTestElement(
+    className: string = 'enhanced-apple-liquid-glass'
+  ): HTMLElement {
     const element = document.createElement('div');
     element.className = className;
     element.style.width = '200px';
@@ -532,10 +554,13 @@ export const visualTestUtils = {
   /**
    * Wait for animations to complete
    */
-  waitForAnimations(element: HTMLElement, timeout: number = 5000): Promise<void> {
+  waitForAnimations(
+    element: HTMLElement,
+    timeout: number = 5000
+  ): Promise<void> {
     return new Promise((resolve, reject) => {
       const animations = element.getAnimations();
-      
+
       if (animations.length === 0) {
         resolve();
         return;
@@ -550,7 +575,7 @@ export const visualTestUtils = {
           clearTimeout(timeoutId);
           resolve();
         })
-        .catch((error) => {
+        .catch(error => {
           clearTimeout(timeoutId);
           reject(error);
         });
@@ -589,15 +614,17 @@ export const exampleVisualTests = {
    * Test enhanced glass component visual appearance
    */
   testEnhancedGlassVisual: async (testSuite: VisualTestSuite) => {
-    const element = visualTestUtils.createTestElement('enhanced-apple-liquid-glass enhanced-apple-liquid-glass--medium');
-    
+    const element = visualTestUtils.createTestElement(
+      'enhanced-apple-liquid-glass enhanced-apple-liquid-glass--medium'
+    );
+
     try {
       const results = await testSuite.testComponentVisual(
         'enhanced-glass-visual',
         'Enhanced Glass Visual Test',
         element
       );
-      
+
       return results.every(result => result.passed);
     } finally {
       visualTestUtils.cleanupTestElement(element);
@@ -608,8 +635,10 @@ export const exampleVisualTests = {
    * Test glass animation performance
    */
   testGlassAnimationPerformance: async (testSuite: VisualTestSuite) => {
-    const element = visualTestUtils.createTestElement('enhanced-apple-liquid-glass enhanced-apple-liquid-glass--animated');
-    
+    const element = visualTestUtils.createTestElement(
+      'enhanced-apple-liquid-glass enhanced-apple-liquid-glass--animated'
+    );
+
     try {
       const result = await testSuite.testAnimationPerformance(
         'glass-animation-perf',
@@ -617,7 +646,7 @@ export const exampleVisualTests = {
         element,
         2000
       );
-      
+
       return result.passed;
     } finally {
       visualTestUtils.cleanupTestElement(element);
@@ -628,15 +657,17 @@ export const exampleVisualTests = {
    * Test cross-browser consistency
    */
   testCrossBrowserConsistency: (testSuite: VisualTestSuite) => {
-    const element = visualTestUtils.createTestElement('enhanced-apple-liquid-glass');
-    
+    const element = visualTestUtils.createTestElement(
+      'enhanced-apple-liquid-glass'
+    );
+
     try {
       const results = testSuite.testCrossBrowserConsistency(
         'cross-browser-consistency',
         element,
         ['backdrop-filter', 'border-radius', 'box-shadow', 'transform']
       );
-      
+
       return results.every(result => result.isConsistent);
     } finally {
       visualTestUtils.cleanupTestElement(element);

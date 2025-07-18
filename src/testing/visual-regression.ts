@@ -1,6 +1,6 @@
 /**
  * Visual Regression Testing System
- * 
+ *
  * Comprehensive visual testing infrastructure:
  * - Component screenshot capture
  * - Pixel-perfect comparison
@@ -59,34 +59,37 @@ export interface AnimationFrameTestResult extends VisualTestResult {
 export class VisualRegressionTester {
   private options: VisualTestOptions;
   private browsers: Browser[] = [];
-  
+
   constructor(options: VisualTestOptions = {}) {
     this.options = {
       threshold: 0.1, // 0.1% threshold for differences
       diffDir: path.join(process.cwd(), 'visual-test-results/diffs'),
       baselineDir: path.join(process.cwd(), 'visual-test-results/baseline'),
-      screenshotDir: path.join(process.cwd(), 'visual-test-results/screenshots'),
+      screenshotDir: path.join(
+        process.cwd(),
+        'visual-test-results/screenshots'
+      ),
       updateBaseline: false,
       browsers: ['chromium'],
       viewports: [{ width: 1280, height: 720, name: 'desktop' }],
       themes: ['light'],
-      ...options
+      ...options,
     };
-    
+
     // Create directories if they don't exist
     this.createDirectories();
   }
-  
+
   /**
    * Initialize browsers for testing
    */
   async initialize(): Promise<void> {
     performanceMonitor.startTiming('visual-regression-init');
-    
+
     // Launch browsers
     for (const browserType of this.options.browsers!) {
       let browser: Browser;
-      
+
       switch (browserType) {
         case 'chromium':
           browser = await chromium.launch();
@@ -100,13 +103,13 @@ export class VisualRegressionTester {
         default:
           throw new Error(`Unsupported browser type: ${browserType}`);
       }
-      
+
       this.browsers.push(browser);
     }
-    
+
     performanceMonitor.endTiming('visual-regression-init');
   }
-  
+
   /**
    * Capture screenshots of a component in different states
    */
@@ -117,75 +120,75 @@ export class VisualRegressionTester {
     selector: string
   ): Promise<VisualTestResult[]> {
     performanceMonitor.startTiming(`visual-regression-capture-${component}`);
-    
+
     const results: VisualTestResult[] = [];
-    
+
     // Iterate through browsers
     for (let i = 0; i < this.browsers.length; i++) {
       const browser = this.browsers[i];
       const browserType = this.options.browsers![i];
-      
+
       // Create context and page
-      const context = await browser.newContext();
+      const context = await browser!.newContext();
       const page = await context.newPage();
-      
+
       // Iterate through viewports
       for (const viewport of this.options.viewports!) {
         await page.setViewportSize({
           width: viewport.width,
-          height: viewport.height
+          height: viewport.height,
         });
-        
+
         // Iterate through themes
         for (const theme of this.options.themes!) {
           // Navigate to URL with theme parameter
           await page.goto(`${url}?theme=${theme}`);
-          
+
           // Wait for component to be ready
           await page.waitForSelector(selector);
-          
+
           // Iterate through states
           for (const state of states) {
             // Set component state
             await this.setComponentState(page, selector, state);
-            
+
             // Wait for animations to complete
             await page.waitForTimeout(500);
-            
+
             // Capture screenshot
             const screenshotPath = this.getScreenshotPath(
               component,
               state,
-              browserType,
+              browserType || 'chromium',
               viewport.name || '',
-              theme || 'light' || 'light'
+              theme || 'light'
             );
-            
+
             await page.locator(selector).screenshot({ path: screenshotPath });
-            
+
             // Compare with baseline
             const result = await this.compareWithBaseline(
               component,
               state,
-              browserType,
+              browserType || 'chromium',
               viewport.name || '',
-              theme || 'light' || 'light',
+              theme || 'light',
               screenshotPath
             );
-            
+
             results.push(result);
           }
         }
       }
-      
+
       // Close context
       await context.close();
     }
-    
+
     performanceMonitor.endTiming(`visual-regression-capture-${component}`);
     return results;
   }
-  
+
   /**
    * Capture animation frames for testing
    */
@@ -197,89 +200,85 @@ export class VisualRegressionTester {
     options: AnimationFrameTestOptions = {}
   ): Promise<AnimationFrameTestResult[]> {
     performanceMonitor.startTiming(`visual-regression-animation-${component}`);
-    
-    const {
-      frames = 10,
-      duration = 1000,
-      ..._testOptions
-    } = options;
-    
+
+    const { frames = 10, duration = 1000, ...testOptions } = options;
+
     const results: AnimationFrameTestResult[] = [];
     const frameInterval = duration / frames;
-    
+
     // Use first browser for animation testing
     const browser = this.browsers[0];
     const browserType = this.options.browsers![0];
-    
+
     // Create context and page
-    const context = await browser.newContext();
+    const context = await browser!.newContext();
     const page = await context.newPage();
-    
+
     // Use first viewport and theme for animation testing
     const viewport = this.options.viewports![0];
     const theme = this.options.themes![0];
-    
+
     await page.setViewportSize({
-      width: viewport.width,
-      height: viewport.height
+      width: viewport!.width,
+      height: viewport!.height,
     });
-    
+
     // Navigate to URL with theme parameter
     await page.goto(`${url}?theme=${theme}`);
-    
+
     // Wait for component to be ready
     await page.waitForSelector(selector);
-    
+
     // Trigger animation
     await this.setComponentState(page, selector, animationState);
-    
+
     // Capture frames
     for (let i = 0; i < frames; i++) {
       const timestamp = i * frameInterval;
       const frameNumber = i + 1;
-      
+
       // Wait for frame time
       await page.waitForTimeout(frameInterval);
-      
+
       // Capture screenshot
       const screenshotPath = this.getAnimationFramePath(
         component,
         animationState,
         frameNumber,
-        browserType,
-        viewport.name || '',
+        browserType || 'chromium',
+        viewport?.name || '',
         theme || 'light'
       );
-      
+
       await page.locator(selector).screenshot({ path: screenshotPath });
-      
+
       // Compare with baseline
       const baseResult = await this.compareWithBaseline(
         component,
         `${animationState}-frame-${frameNumber}`,
-        browserType,
-        viewport.name || '',
+        browserType || 'chromium',
+        viewport?.name || '',
         theme || 'light',
         screenshotPath
       );
-      
+
       // Add animation-specific properties
       const result: AnimationFrameTestResult = {
         ...baseResult,
         frameNumber,
-        timestamp
+        timestamp,
       };
-      
+
       results.push(result);
     }
-    
+
     // Close context
     await context.close();
-    
+
     performanceMonitor.endTiming(`visual-regression-animation-${component}`);
     return results;
   }
-  
+
   /**
    * Compare screenshot with baseline
    */
@@ -298,11 +297,11 @@ export class VisualRegressionTester {
       viewport,
       theme
     );
-    
+
     // If baseline doesn't exist or update is requested, use current screenshot as baseline
     if (!fs.existsSync(baselinePath) || this.options.updateBaseline) {
       fs.copyFileSync(screenshotPath, baselinePath);
-      
+
       return {
         passed: true,
         diffPercentage: 0,
@@ -314,20 +313,20 @@ export class VisualRegressionTester {
         viewport,
         theme: theme || 'light',
         component,
-        state
+        state,
       };
     }
-    
+
     // Compare images
     const baseline = PNG.sync.read(fs.readFileSync(baselinePath));
     const screenshot = PNG.sync.read(fs.readFileSync(screenshotPath));
-    
+
     const { width, height } = baseline;
     const totalPixels = width * height;
-    
+
     // Create diff image
     const diff = new PNG({ width, height });
-    
+
     const diffPixels = pixelmatch(
       baseline.data,
       screenshot.data,
@@ -336,13 +335,13 @@ export class VisualRegressionTester {
       height,
       { threshold: 0.1 }
     );
-    
+
     const diffPercentage = (diffPixels / totalPixels) * 100;
     const passed = diffPercentage <= this.options.threshold!;
-    
+
     // Save diff image if there are differences
     let diffPath: string | undefined;
-    
+
     if (diffPixels > 0) {
       diffPath = this.getDiffPath(
         component,
@@ -351,10 +350,10 @@ export class VisualRegressionTester {
         viewport,
         theme || 'light'
       );
-      
+
       fs.writeFileSync(diffPath, PNG.sync.write(diff));
     }
-    
+
     return {
       passed,
       diffPercentage,
@@ -367,10 +366,10 @@ export class VisualRegressionTester {
       viewport,
       theme,
       component,
-      state
+      state,
     };
   }
-  
+
   /**
    * Set component state for testing
    */
@@ -392,7 +391,7 @@ export class VisualRegressionTester {
         await page.mouse.down();
         break;
       case 'disabled':
-        await page.evaluate((sel) => {
+        await page.evaluate(sel => {
           const element = document.querySelector(sel);
           if (element) {
             (element as HTMLElement).setAttribute('disabled', 'true');
@@ -401,33 +400,40 @@ export class VisualRegressionTester {
         break;
       default:
         // For custom states, try to find a data attribute or class
-        await page.evaluate((sel, st) => {
-          const element = document.querySelector(sel);
-          if (element) {
-            // Try to find a button or link that triggers the state
-            const trigger = element.querySelector(`[data-state="${st}"]`) || 
-                            element.querySelector(`[data-trigger="${st}"]`) ||
-                            element.querySelector(`.trigger-${st}`);
-            
-            if (trigger) {
-              (trigger as HTMLElement).click();
-            } else {
-              // Try to set a data attribute
-              (element as HTMLElement).setAttribute('data-state', st);
-              // Dispatch custom event
-              element.dispatchEvent(new CustomEvent('statechange', { 
-                detail: { state: st } 
-              }));
+        await page.evaluate(
+          (sel: string, st: string) => {
+            const element = document.querySelector(sel);
+            if (element) {
+              // Try to find a button or link that triggers the state
+              const trigger =
+                element.querySelector(`[data-state="${st}"]`) ||
+                element.querySelector(`[data-trigger="${st}"]`) ||
+                element.querySelector(`.trigger-${st}`);
+
+              if (trigger) {
+                (trigger as HTMLElement).click();
+              } else {
+                // Try to set a data attribute
+                (element as HTMLElement).setAttribute('data-state', st);
+                // Dispatch custom event
+                element.dispatchEvent(
+                  new CustomEvent('statechange', {
+                    detail: { state: st },
+                  })
+                );
+              }
             }
-          }
-        }, selector, state);
+          },
+          selector,
+          state
+        );
         break;
     }
-    
+
     // Wait for any state changes to apply
     await page.waitForTimeout(100);
   }
-  
+
   /**
    * Get path for screenshot
    */
@@ -443,7 +449,7 @@ export class VisualRegressionTester {
       `${component}-${state}-${browser}-${viewport}-${theme}.png`
     );
   }
-  
+
   /**
    * Get path for baseline image
    */
@@ -459,7 +465,7 @@ export class VisualRegressionTester {
       `${component}-${state}-${browser}-${viewport}-${theme}.png`
     );
   }
-  
+
   /**
    * Get path for diff image
    */
@@ -475,7 +481,7 @@ export class VisualRegressionTester {
       `${component}-${state}-${browser}-${viewport}-${theme}-diff.png`
     );
   }
-  
+
   /**
    * Get path for animation frame
    */
@@ -492,7 +498,7 @@ export class VisualRegressionTester {
       `${component}-${animationState}-frame-${frameNumber}-${browser}-${viewport}-${theme}.png`
     );
   }
-  
+
   /**
    * Create necessary directories
    */
@@ -500,16 +506,16 @@ export class VisualRegressionTester {
     const dirs = [
       this.options.diffDir!,
       this.options.baselineDir!,
-      this.options.screenshotDir!
+      this.options.screenshotDir!,
     ];
-    
+
     dirs.forEach(dir => {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
     });
   }
-  
+
   /**
    * Generate HTML report from test results
    */
@@ -517,7 +523,7 @@ export class VisualRegressionTester {
     const passedTests = results.filter(result => result.passed).length;
     const totalTests = results.length;
     const passRate = (passedTests / totalTests) * 100;
-    
+
     let html = `
       <!DOCTYPE html>
       <html lang="en">
@@ -583,20 +589,23 @@ export class VisualRegressionTester {
             <div class="filter-label">Component</div>
             <div class="filter-options">
               <div class="filter-option active" data-filter="component" data-value="all">All</div>
-              ${[...new Set(results.map(r => r.component))].map(component => 
-                `<div class="filter-option" data-filter="component" data-value="${component}">${component}</div>`
-              ).join('')}
+              ${[...new Set(results.map(r => r.component))]
+                .map(
+                  component =>
+                    `<div class="filter-option" data-filter="component" data-value="${component}">${component}</div>`
+                )
+                .join('')}
             </div>
           </div>
         </div>
         
         <div class="test-grid">
     `;
-    
+
     // Add test cards
     results.forEach(result => {
       const statusClass = result.passed ? 'pass' : 'fail';
-      
+
       html += `
         <div class="test-card" 
              data-status="${result.passed ? 'passed' : 'failed'}"
@@ -621,12 +630,16 @@ export class VisualRegressionTester {
               <img class="test-image" src="${result.screenshotPath?.replace(process.cwd(), '')}" alt="Current">
             </div>
             
-            ${result.diffPath ? `
+            ${
+              result.diffPath
+                ? `
               <div class="test-image-container">
                 <div class="test-image-label">Diff</div>
                 <img class="test-image" src="${result.diffPath.replace(process.cwd(), '')}" alt="Diff">
               </div>
-            ` : ''}
+            `
+                : ''
+            }
           </div>
           
           <div class="test-details">
@@ -638,7 +651,7 @@ export class VisualRegressionTester {
         </div>
       `;
     });
-    
+
     html += `
         </div>
         
@@ -684,14 +697,17 @@ export class VisualRegressionTester {
       </body>
       </html>
     `;
-    
+
     // Write report to file
-    const reportPath = path.join(process.cwd(), 'visual-test-results/report.html');
+    const reportPath = path.join(
+      process.cwd(),
+      'visual-test-results/report.html'
+    );
     fs.writeFileSync(reportPath, html);
-    
+
     return reportPath;
   }
-  
+
   /**
    * Clean up resources
    */
@@ -700,7 +716,7 @@ export class VisualRegressionTester {
     for (const browser of this.browsers) {
       await browser.close();
     }
-    
+
     this.browsers = [];
   }
 }
@@ -716,9 +732,9 @@ export async function runVisualTests(
 ): Promise<VisualTestResult[]> {
   const tester = new VisualRegressionTester(options);
   await tester.initialize();
-  
+
   const results: VisualTestResult[] = [];
-  
+
   for (const component of components) {
     const componentResults = await tester.captureScreenshots(
       url,
@@ -726,13 +742,13 @@ export async function runVisualTests(
       component.states,
       component.selector
     );
-    
+
     results.push(...componentResults);
   }
-  
+
   const reportPath = tester.generateReport(results);
   console.log(`Visual regression test report generated: ${reportPath}`);
-  
+
   await tester.cleanup();
   return results;
 }
@@ -744,9 +760,9 @@ export async function runAnimationTests(
 ): Promise<AnimationFrameTestResult[]> {
   const tester = new VisualRegressionTester(options);
   await tester.initialize();
-  
+
   const results: AnimationFrameTestResult[] = [];
-  
+
   for (const component of components) {
     const componentResults = await tester.captureAnimationFrames(
       url,
@@ -755,13 +771,13 @@ export async function runAnimationTests(
       component.selector,
       options
     );
-    
+
     results.push(...componentResults);
   }
-  
+
   const reportPath = tester.generateReport(results);
   console.log(`Animation test report generated: ${reportPath}`);
-  
+
   await tester.cleanup();
   return results;
 }
@@ -771,5 +787,5 @@ export const visualTesting = {
   VisualRegressionTester,
   runVisualTests,
   runAnimationTests,
-  visualRegressionTester
+  visualRegressionTester,
 };

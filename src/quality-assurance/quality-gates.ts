@@ -73,27 +73,30 @@ export class QualityGateSystem {
         wcagLevel: 'AA',
         threshold: 95,
         includeKeyboard: true,
-        includeScreenReader: true
+        includeScreenReader: true,
       },
       performance: {
         enabled: true,
         bundleSizeLimit: 500 * 1024, // 500KB
         lcpThreshold: 2500,
         fidThreshold: 100,
-        clsThreshold: 0.1
+        clsThreshold: 0.1,
       },
       codeQuality: {
         enabled: true,
         typescriptStrict: true,
-        eslintRules: ['react-hooks/rules-of-hooks', 'react-hooks/exhaustive-deps'],
-        prettierCheck: true
+        eslintRules: [
+          'react-hooks/rules-of-hooks',
+          'react-hooks/exhaustive-deps',
+        ],
+        prettierCheck: true,
       },
       testing: {
         enabled: true,
         coverageThreshold: 85,
         testTimeout: 5000,
-        includeVisual: true
-      }
+        includeVisual: true,
+      },
     };
   }
 
@@ -140,7 +143,7 @@ export class QualityGateSystem {
       score,
       issues,
       recommendations: this.generateRecommendations(issues),
-      nextSteps: this.generateNextSteps(issues, passed)
+      nextSteps: this.generateNextSteps(issues, passed),
     };
   }
 
@@ -159,15 +162,15 @@ export class QualityGateSystem {
         message: 'Missing alt text on glass component images',
         severity: 'high' as const,
         fixable: true,
-        autoFix: 'Add descriptive alt attributes'
+        autoFix: 'Add descriptive alt attributes',
       },
       {
         type: 'warning' as const,
         category: 'accessibility' as const,
         message: 'Color contrast ratio below WCAG AA standards',
         severity: 'medium' as const,
-        fixable: true
-      }
+        fixable: true,
+      },
     ];
 
     issues.push(...mockIssues);
@@ -191,15 +194,15 @@ export class QualityGateSystem {
         message: 'Bundle size exceeds 500KB limit',
         severity: 'medium' as const,
         fixable: true,
-        autoFix: 'Enable tree-shaking and code splitting'
+        autoFix: 'Enable tree-shaking and code splitting',
       },
       {
         type: 'info' as const,
         category: 'performance' as const,
         message: 'Consider implementing lazy loading for heavy components',
         severity: 'low' as const,
-        fixable: false
-      }
+        fixable: false,
+      },
     ];
 
     issues.push(...mockIssues);
@@ -223,15 +226,15 @@ export class QualityGateSystem {
         message: 'TypeScript strict mode violations detected',
         severity: 'high' as const,
         fixable: true,
-        autoFix: 'Enable strict mode and fix type errors'
+        autoFix: 'Enable strict mode and fix type errors',
       },
       {
         type: 'warning' as const,
         category: 'code-quality' as const,
         message: 'ESLint rule violations found',
         severity: 'medium' as const,
-        fixable: true
-      }
+        fixable: true,
+      },
     ];
 
     issues.push(...mockIssues);
@@ -255,15 +258,15 @@ export class QualityGateSystem {
         message: 'Test coverage below 85% threshold',
         severity: 'medium' as const,
         fixable: true,
-        autoFix: 'Add missing test cases'
+        autoFix: 'Add missing test cases',
       },
       {
         type: 'info' as const,
         category: 'testing' as const,
         message: 'Consider adding visual regression tests',
         severity: 'low' as const,
-        fixable: false
-      }
+        fixable: false,
+      },
     ];
 
     issues.push(...mockIssues);
@@ -274,38 +277,47 @@ export class QualityGateSystem {
 
   private generateRecommendations(issues: QualityIssue[]): string[] {
     const recommendations: string[] = [];
-    
+
     const criticalIssues = issues.filter(i => i.severity === 'critical');
     const highIssues = issues.filter(i => i.severity === 'high');
-    
+
     if (criticalIssues.length > 0) {
-      recommendations.push(`Address ${criticalIssues.length} critical issues before deployment`);
+      recommendations.push(
+        `Address ${criticalIssues.length} critical issues before deployment`
+      );
     }
-    
+
     if (highIssues.length > 0) {
-      recommendations.push(`Fix ${highIssues.length} high-priority issues to improve quality score`);
+      recommendations.push(
+        `Fix ${highIssues.length} high-priority issues to improve quality score`
+      );
     }
-    
+
     const fixableIssues = issues.filter(i => i.fixable);
     if (fixableIssues.length > 0) {
-      recommendations.push(`Apply auto-fixes for ${fixableIssues.length} fixable issues`);
+      recommendations.push(
+        `Apply auto-fixes for ${fixableIssues.length} fixable issues`
+      );
     }
-    
+
     return recommendations;
   }
 
-  private generateNextSteps(_issues: QualityIssue[], passed: boolean): string[] {
+  private generateNextSteps(
+    _issues: QualityIssue[],
+    passed: boolean
+  ): string[] {
     const nextSteps: string[] = [];
-    
+
     if (!passed) {
       nextSteps.push('Fix critical and high-severity issues');
       nextSteps.push('Re-run quality gates after fixes');
     }
-    
+
     nextSteps.push('Review and address medium-severity issues');
     nextSteps.push('Update documentation with any changes');
     nextSteps.push('Run final validation tests');
-    
+
     return nextSteps;
   }
 
@@ -348,7 +360,7 @@ echo "Quality gates passed!"
       '✅ Migration guide created',
       '✅ Performance monitoring configured',
       '✅ Error tracking enabled',
-      '✅ CDN deployment ready'
+      '✅ CDN deployment ready',
     ];
   }
 }

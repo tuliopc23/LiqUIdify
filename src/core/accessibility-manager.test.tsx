@@ -63,7 +63,9 @@ describe('AccessibilityManager', () => {
     });
 
     it('should suggest better colors when contrast is insufficient', () => {
-      const result = manager.ensureContrast('#777777', '#888888', { autoFix: true });
+      const result = manager.ensureContrast('#777777', '#888888', {
+        autoFix: true,
+      });
 
       expect(result).toHaveProperty('suggestedForeground');
       expect(result.autoFixed).toBe(true);
@@ -71,7 +73,7 @@ describe('AccessibilityManager', () => {
 
     it('should handle glass effect contrast', () => {
       const result = manager.ensureContrast('#000000', '#ffffff', {
-        glassEffect: { opacity: 0.25, backdropColor: '#cccccc' }
+        glassEffect: { opacity: 0.25, backdropColor: '#cccccc' },
       });
 
       expect(result).toHaveProperty('ratio');
@@ -111,9 +113,7 @@ describe('AccessibilityManager', () => {
     });
 
     it('should auto-correct invalid boolean ARIA values', () => {
-      const { container } = render(
-        <button aria-expanded="yes">Toggle</button>
-      );
+      const { container } = render(<button aria-expanded="yes">Toggle</button>);
       const element = container.firstChild as HTMLElement;
       expect(element).toBeTruthy();
 
@@ -123,16 +123,16 @@ describe('AccessibilityManager', () => {
     });
 
     it('should suggest missing required ARIA attributes', () => {
-      const { container } = render(
-        <div role="combobox">Dropdown</div>
-      );
+      const { container } = render(<div role="combobox">Dropdown</div>);
       const element = container.firstChild as HTMLElement;
       expect(element).toBeTruthy();
 
       const validation = manager.validateARIA(element);
 
       expect(validation.suggestions.length).toBeGreaterThan(0);
-      expect(validation.suggestions.some(s => s.attribute === 'aria-expanded')).toBe(true);
+      expect(
+        validation.suggestions.some(s => s.attribute === 'aria-expanded')
+      ).toBe(true);
     });
   });
 
@@ -154,7 +154,7 @@ describe('AccessibilityManager', () => {
   describe('announce', () => {
     it('should call announcer with correct priority', () => {
       const announceSpy = vi.spyOn(manager, 'announce');
-      
+
       manager.announce('Test message', 'polite');
       expect(announceSpy).toHaveBeenCalledWith('Test message', 'polite');
 
@@ -166,7 +166,7 @@ describe('AccessibilityManager', () => {
   describe('Real-time monitoring', () => {
     it('should enable and disable monitoring', () => {
       const { container } = render(<div>Content</div>);
-      
+
       expect(() => {
         manager.enableRealTimeMonitoring(container as HTMLElement);
       }).not.toThrow();

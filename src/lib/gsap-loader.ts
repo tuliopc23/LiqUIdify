@@ -40,7 +40,9 @@ export async function loadGSAP(plugins: string[] = []): Promise<GSAPModule> {
             gsap.registerPlugin(MorphSVGPlugin);
             gsapModule.MorphSVGPlugin = MorphSVGPlugin;
           } catch (error) {
-            console.warn('MorphSVGPlugin not available. Some animations may be limited.');
+            console.warn(
+              'MorphSVGPlugin not available. Some animations may be limited.'
+            );
           }
         }
 

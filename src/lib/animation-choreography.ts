@@ -1,6 +1,6 @@
 /**
  * Animation Choreography Engine - Advanced staggered animations with Apple-quality motion
- * 
+ *
  * This module provides sophisticated animation choreography capabilities with:
  * - Intelligent timing and easing curves
  * - Sequence and parallel animation coordination
@@ -8,7 +8,11 @@
  */
 
 import { gsap } from 'gsap';
-import { GlassAnimation, GLASS_EASINGS, AnimationType } from './glass-animations';
+import {
+  GlassAnimation,
+  GLASS_EASINGS,
+  AnimationType,
+} from './glass-animations';
 
 /**
  * Animation sequence configuration
@@ -52,7 +56,7 @@ export const APPLE_MOTION_PRESETS = {
     ease: 'power2.out',
     stagger: 0.1,
   },
-  
+
   slideInLeft: {
     from: { opacity: 0, x: -30 },
     to: { opacity: 1, x: 0 },
@@ -60,7 +64,7 @@ export const APPLE_MOTION_PRESETS = {
     ease: 'power2.out',
     stagger: 0.08,
   },
-  
+
   // Elastic scaling
   scaleIn: {
     from: { opacity: 0, scale: 0.8 },
@@ -69,7 +73,7 @@ export const APPLE_MOTION_PRESETS = {
     ease: 'elastic.out(1, 0.3)',
     stagger: 0.05,
   },
-  
+
   // Liquid flow effect
   liquidFlow: {
     from: { opacity: 0, scaleY: 0.3, transformOrigin: 'center bottom' },
@@ -78,7 +82,7 @@ export const APPLE_MOTION_PRESETS = {
     ease: 'power2.out',
     stagger: 0.15,
   },
-  
+
   // Magnetic reveal
   magneticReveal: {
     from: { opacity: 0, scale: 0.9, filter: 'blur(10px)' },
@@ -87,26 +91,26 @@ export const APPLE_MOTION_PRESETS = {
     ease: 'power3.out',
     stagger: 0.12,
   },
-  
+
   // Glass morphism appearance
   glassMorph: {
-    from: { 
-      opacity: 0, 
-      backdropFilter: 'blur(0px)', 
+    from: {
+      opacity: 0,
+      backdropFilter: 'blur(0px)',
       scale: 0.95,
-      background: 'rgba(255, 255, 255, 0)'
+      background: 'rgba(255, 255, 255, 0)',
     },
-    to: { 
-      opacity: 1, 
-      backdropFilter: 'blur(20px)', 
+    to: {
+      opacity: 1,
+      backdropFilter: 'blur(20px)',
       scale: 1,
-      background: 'rgba(255, 255, 255, 0.1)'
+      background: 'rgba(255, 255, 255, 0.1)',
     },
     duration: 1.0,
     ease: 'power2.out',
     stagger: 0.08,
   },
-  
+
   // Floating animation
   float: {
     from: { y: 0 },
@@ -117,7 +121,7 @@ export const APPLE_MOTION_PRESETS = {
     yoyo: true,
     stagger: 0.3,
   },
-  
+
   // Pulse effect
   pulse: {
     from: { scale: 1, opacity: 0.8 },
@@ -143,34 +147,39 @@ export class ChoreographyTiming {
     const factor = Math.min(1, 8 / elementCount);
     return baseStagger * factor;
   }
-  
+
   /**
    * Create dynamic easing based on animation context
    */
-  static createContextualEasing(context: 'entrance' | 'exit' | 'hover' | 'focus'): string {
+  static createContextualEasing(
+    context: 'entrance' | 'exit' | 'hover' | 'focus'
+  ): string {
     const easingMap = {
       entrance: GLASS_EASINGS.smoothOut,
       exit: 'power2.in', // smoothIn easing for exit animations
       hover: GLASS_EASINGS.magnetic,
       focus: GLASS_EASINGS.elastic,
     };
-    
+
     return easingMap[context] || GLASS_EASINGS.smoothOut;
   }
-  
+
   /**
    * Calculate optimal duration based on distance and element size
    */
   static calculateOptimalDuration(
-    distance: number, 
-    elementSize: number, 
+    distance: number,
+    elementSize: number,
     baseSpeed: number = 1000
   ): number {
     // Larger elements and longer distances need more time
     const sizeFactor = Math.log(elementSize / 100 + 1);
     const distanceFactor = Math.sqrt(distance / 100);
-    
-    return Math.max(0.3, Math.min(2.0, (distanceFactor * sizeFactor) / baseSpeed));
+
+    return Math.max(
+      0.3,
+      Math.min(2.0, (distanceFactor * sizeFactor) / baseSpeed)
+    );
   }
 }
 
@@ -181,18 +190,18 @@ export class AdvancedChoreographer {
   private timeline: gsap.core.Timeline;
   private sequences: Map<string, AnimationSequence> = new Map();
   private activeAnimations: Set<string> = new Set();
-  
+
   constructor() {
     this.timeline = gsap.timeline();
   }
-  
+
   /**
    * Create a choreographed sequence
    */
   createSequence(config: AnimationSequence): void {
     this.sequences.set(config.id, config);
   }
-  
+
   /**
    * Execute a choreographed sequence
    */
@@ -201,28 +210,28 @@ export class AdvancedChoreographer {
     if (!sequence) {
       throw new Error(`Sequence ${sequenceId} not found`);
     }
-    
+
     this.activeAnimations.add(sequenceId);
-    
+
     // Clear previous timeline
     this.timeline.clear();
-    
+
     // Configure sequence-level settings
     if (sequence.delay) {
       this.timeline.delay(sequence.delay);
     }
-    
+
     if (sequence.repeat) {
       this.timeline.repeat(sequence.repeat);
     }
-    
+
     if (sequence.yoyo) {
       this.timeline.yoyo(true);
     }
-    
+
     // Add sequence steps
     let currentTime = 0;
-    
+
     for (const step of sequence.animations) {
       if (step.parallel) {
         // Parallel animations start at the same time
@@ -233,64 +242,69 @@ export class AdvancedChoreographer {
         currentTime += step.duration + (step.delay || 0);
       }
     }
-    
+
     // Add callbacks
     if (sequence.onStart) {
       this.timeline.call(sequence.onStart, [], 0);
     }
-    
+
     if (sequence.onUpdate) {
       this.timeline.eventCallback('onUpdate', () => {
         sequence.onUpdate!(this.timeline.progress());
       });
     }
-    
+
     if (sequence.onComplete) {
       this.timeline.call(() => {
         sequence.onComplete!();
         this.activeAnimations.delete(sequenceId);
       });
     }
-    
+
     // Start the sequence
     this.timeline.play();
-    
+
     // Return promise that resolves when sequence completes
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.timeline.eventCallback('onComplete', resolve);
     });
   }
-  
+
   /**
    * Add a step to the timeline
    */
   private addStepToTimeline(step: ChoreographyStep, startTime: number): void {
     const { elements, duration, ease, stagger, from, to } = step;
-    
+
     // Calculate intelligent stagger if not provided
-    const staggerDelay = stagger || ChoreographyTiming.calculateStagger(elements.length, duration);
-    
+    const staggerDelay =
+      stagger || ChoreographyTiming.calculateStagger(elements.length, duration);
+
     // Apply animations with stagger
     elements.forEach((element, index) => {
-      const elementStartTime = startTime + (index * staggerDelay);
-      
+      const elementStartTime = startTime + index * staggerDelay;
+
       // Set initial state
       if (from) {
         this.timeline.set(element, from, elementStartTime);
       }
-      
+
       // Animate to target state
       if (to) {
-        this.timeline.to(element, {
-          ...to,
-          duration,
-          ease: ease || GLASS_EASINGS.smoothOut,
-          force3D: true,
-        }, elementStartTime);
+        this.timeline.to(
+          element,
+          {
+            ...to,
+            duration,
+            ease: ease || GLASS_EASINGS.smoothOut,
+            force3D: true,
+          },
+          elementStartTime
+        );
       }
     });
   }
-  
+
   /**
    * Execute preset animation
    */
@@ -301,25 +315,22 @@ export class AdvancedChoreographer {
   ): gsap.core.Timeline {
     const preset = APPLE_MOTION_PRESETS[presetName];
     const timeline = gsap.timeline();
-    
+
     const staggerDelay = options.stagger || preset.stagger || 0.1;
-    
+
     // Apply preset with stagger
-    timeline.fromTo(elements, 
-      preset.from, 
-      {
-        ...preset.to,
-        duration: options.duration || preset.duration,
-        ease: options.ease || preset.ease,
-        stagger: staggerDelay,
-        force3D: true,
-        ...options.to,
-      }
-    );
-    
+    timeline.fromTo(elements, preset.from, {
+      ...preset.to,
+      duration: options.duration || preset.duration,
+      ease: options.ease || preset.ease,
+      stagger: staggerDelay,
+      force3D: true,
+      ...options.to,
+    });
+
     return timeline;
   }
-  
+
   /**
    * Create staggered entrance animation
    */
@@ -333,10 +344,10 @@ export class AdvancedChoreographer {
       scaleIn: 'scaleIn',
       liquidFlow: 'liquidFlow',
     } as const;
-    
+
     return this.executePreset(presetMap[type], elements);
   }
-  
+
   /**
    * Create coordinated hover effects
    */
@@ -349,10 +360,10 @@ export class AdvancedChoreographer {
     } = {}
   ): void {
     const { strength = 0.05, duration = 0.3, stagger = 0.02 } = options;
-    
+
     elements.forEach((element, index) => {
       const delay = index * stagger;
-      
+
       element.addEventListener('mouseenter', () => {
         gsap.to(element, {
           scale: 1 + strength,
@@ -362,24 +373,24 @@ export class AdvancedChoreographer {
           delay,
           force3D: true,
         });
-        
+
         // Animate surrounding elements with reduced effect
         elements.forEach((otherElement, otherIndex) => {
           if (otherElement !== element) {
             const distance = Math.abs(otherIndex - index);
             const neighborStrength = strength / (distance + 1);
-            
+
             gsap.to(otherElement, {
               scale: 1 + neighborStrength,
               duration: duration * 1.2,
               ease: 'power2.out',
-              delay: delay + (distance * 0.01),
+              delay: delay + distance * 0.01,
               force3D: true,
             });
           }
         });
       });
-      
+
       element.addEventListener('mouseleave', () => {
         gsap.to(element, {
           scale: 1,
@@ -388,9 +399,9 @@ export class AdvancedChoreographer {
           ease: 'power2.out',
           force3D: true,
         });
-        
+
         // Reset surrounding elements
-        elements.forEach((otherElement) => {
+        elements.forEach(otherElement => {
           if (otherElement !== element) {
             gsap.to(otherElement, {
               scale: 1,
@@ -403,7 +414,7 @@ export class AdvancedChoreographer {
       });
     });
   }
-  
+
   /**
    * Create scroll-triggered choreography
    */
@@ -416,17 +427,17 @@ export class AdvancedChoreographer {
     } = {}
   ): void {
     const { threshold = 0.1, once = true, preset = 'fadeInUp' } = options;
-    
+
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             const element = entry.target as HTMLElement;
             const elementIndex = elements.indexOf(element);
-            
+
             if (elementIndex !== -1) {
               this.executePreset(preset, [element]);
-              
+
               if (once) {
                 observer.unobserve(element);
               }
@@ -439,12 +450,12 @@ export class AdvancedChoreographer {
         rootMargin: '50px',
       }
     );
-    
-    elements.forEach((element) => {
+
+    elements.forEach(element => {
       observer.observe(element);
     });
   }
-  
+
   /**
    * Stop all animations
    */
@@ -453,28 +464,28 @@ export class AdvancedChoreographer {
     this.activeAnimations.clear();
     gsap.killTweensOf('*');
   }
-  
+
   /**
    * Pause all animations
    */
   pauseAll(): void {
     this.timeline.pause();
   }
-  
+
   /**
    * Resume all animations
    */
   resumeAll(): void {
     this.timeline.resume();
   }
-  
+
   /**
    * Get active animations
    */
   getActiveAnimations(): string[] {
     return Array.from(this.activeAnimations);
   }
-  
+
   /**
    * Check if sequence is running
    */
@@ -502,7 +513,7 @@ export const ChoreographyUtils = {
   ) => {
     return globalChoreographer.executePreset(preset, elements, options);
   },
-  
+
   /**
    * Create entrance animation
    */
@@ -512,18 +523,28 @@ export const ChoreographyUtils = {
   ) => {
     return globalChoreographer.createStaggeredEntrance(elements, type);
   },
-  
+
   /**
    * Setup hover choreography
    */
-  hover: (elements: HTMLElement[], options?: { strength?: number; duration?: number; stagger?: number }) => {
+  hover: (
+    elements: HTMLElement[],
+    options?: { strength?: number; duration?: number; stagger?: number }
+  ) => {
     return globalChoreographer.createHoverChoreography(elements, options);
   },
-  
+
   /**
    * Setup scroll choreography
    */
-  scroll: (elements: HTMLElement[], options?: { threshold?: number; once?: boolean; preset?: keyof typeof APPLE_MOTION_PRESETS }) => {
+  scroll: (
+    elements: HTMLElement[],
+    options?: {
+      threshold?: number;
+      once?: boolean;
+      preset?: keyof typeof APPLE_MOTION_PRESETS;
+    }
+  ) => {
     return globalChoreographer.createScrollChoreography(elements, options);
   },
 };

@@ -1,9 +1,15 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
 import {
   PerformanceMonitor,
   PerformanceMetrics,
   PerformanceThresholds,
-  initializePerformanceMonitoring
+  initializePerformanceMonitoring,
 } from '../lib/performance-monitor';
 
 interface PerformanceContextValue {
@@ -22,8 +28,14 @@ export interface GlassPerformanceProviderProps {
   thresholds?: Partial<PerformanceThresholds>;
   enableAutoMonitoring?: boolean;
   reportInterval?: number;
-  onMetricUpdate?: (metric: string, value: number, status: 'good' | 'needs-improvement' | 'poor') => void;
-  onPerformanceIssue?: (report: ReturnType<PerformanceMonitor['generateReport']>) => void;
+  onMetricUpdate?: (
+    metric: string,
+    value: number,
+    status: 'good' | 'needs-improvement' | 'poor'
+  ) => void;
+  onPerformanceIssue?: (
+    report: ReturnType<PerformanceMonitor['generateReport']>
+  ) => void;
 }
 
 export function GlassPerformanceProvider({
@@ -40,7 +52,10 @@ export function GlassPerformanceProvider({
 
   // Initialize performance monitor
   useEffect(() => {
-    const performanceMonitor = initializePerformanceMonitoring(thresholds, onMetricUpdate);
+    const performanceMonitor = initializePerformanceMonitoring(
+      thresholds,
+      onMetricUpdate
+    );
     setMonitor(performanceMonitor);
 
     return () => {
@@ -59,7 +74,8 @@ export function GlassPerformanceProvider({
       // Check for performance issues
       if (onPerformanceIssue) {
         const report = monitor.generateReport();
-        if (report.summary.overallScore < 70) { // Threshold for performance issues
+        if (report.summary.overallScore < 70) {
+          // Threshold for performance issues
           onPerformanceIssue(report);
         }
       }
@@ -104,7 +120,9 @@ export function useGlassPerformance(): PerformanceContextValue {
   const context = useContext(PerformanceContext);
 
   if (!context) {
-    throw new Error('useGlassPerformance must be used within a GlassPerformanceProvider');
+    throw new Error(
+      'useGlassPerformance must be used within a GlassPerformanceProvider'
+    );
   }
 
   return context;
@@ -117,14 +135,14 @@ export function withPerformanceMonitoring<P extends object>(
 ) {
   const WrappedComponent = React.forwardRef<any, P>((props, ref) => {
     const { monitor } = useGlassPerformance();
-    const displayName = componentName || Component.displayName || Component.name || 'Component';
+    const displayName =
+      componentName || Component.displayName || Component.name || 'Component';
 
     useEffect(() => {
       if (!monitor) return;
 
-
       return () => {
-        monitor.measureComponentRender(displayName, () => { });
+        monitor.measureComponentRender(displayName, () => {});
       };
     });
 

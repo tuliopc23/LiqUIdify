@@ -101,6 +101,8 @@
     "build": "npm run clean && vite build && npm run build:css",
     "build:optimized": "npm run clean && vite build -c vite.config.optimized.ts && npm run build:css:split",
     "build:modular": "npm run clean && vite build -c vite.config.modular.ts && npm run build:css:split",
+    "build:production": "node scripts/build-production.js",
+    "build:production:ci": "npm run build:production && npm run bundle:budget:enforce",
     "analyze:bundles": "node scripts/analyze-bundles.js",
     "build:analyze": "npm run build:modular && npm run analyze:bundles",
     "build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
@@ -124,6 +126,10 @@
     "test:visual": "playwright test tests/visual/**/*.visual.spec.ts",
     "test:visual:ci": "npm run test:visual",
     "test:visual:update": "npm run test:visual -- --update-snapshots",
+    "test:performance": "vitest run tests/performance/**/*.test.ts",
+    "test:performance:components": "node scripts/performance-component-tests.js",
+    "test:performance:memory": "node scripts/memory-leak-tests.js",
+    "test:memory:extended": "node scripts/extended-memory-tests.js",
     "lint": "eslint src/**/*.{ts,tsx} --no-warn-ignored",
     "lint:fix": "eslint src/**/*.{ts,tsx} --fix --no-warn-ignored",
     "lint:ci": "eslint src/**/*.{ts,tsx} --max-warnings 0 --no-warn-ignored",
@@ -135,17 +141,29 @@
     "size": "npm run build && bundlesize --config=bundlesize.config.json",
     "size:analyze": "npm run build && npx source-map-explorer dist/**/*.js",
     "bundle:analyze": "npm run build && npx webpack-bundle-analyzer dist/stats.json",
+    "bundle:budget:check": "node scripts/analyze-bundle.js",
+    "bundle:budget:enforce": "npm run build && npm run bundle:budget:check",
+    "build:optimize": "node scripts/optimize-build.js",
+    "bundle:budget:report": "npm run bundle:budget:check && echo 'Bundle budget report available at dist/BUNDLE_BUDGET_REPORT.md'",
     "optimize:deps": "node scripts/optimize-dependencies.js",
     "optimize:css": "npm run build:css:optimized",
     "optimize:all": "npm run optimize:deps && npm run build:optimized && npm run optimize:css",
     "perf:test": "npm run build && node scripts/performance-test.js",
+    "perf:benchmark": "node scripts/performance/performance-benchmarks.js",
+    "perf:benchmark:ci": "npm run build && npm run perf:benchmark",
+    "perf:memory": "node scripts/performance/performance-benchmarks.js --memory-only",
+    "perf:animation": "node scripts/performance/performance-benchmarks.js --animation-only",
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "metrics": "node scripts/track-metrics.js",
     "metrics:watch": "node scripts/track-metrics.js --watch",
     "export:static": "tsx scripts/export-components-static.ts",
     "export:advanced": "tsx scripts/export-components-advanced.ts",
-    "export:storybook": "storybook build --output-dir static-export/storybook"
+    "export:storybook": "storybook build --output-dir static-export/storybook",
+    "codegen:component": "node scripts/code-generation-tools.js component",
+    "codegen:migration": "node scripts/code-generation-tools.js migration",
+    "codegen:bundle": "node scripts/code-generation-tools.js bundle",
+    "codegen:batch": "node scripts/code-generation-tools.js batch"
   },
   "keywords": [
     "glassmorphism",
@@ -194,6 +212,7 @@
     "**/*.less"
   ],
   "peerDependencies": {
+    "@sentry/react": ">=9.0.0",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
@@ -202,6 +221,9 @@
       "optional": true
     },
     "react-dom": {
+      "optional": true
+    },
+    "@sentry/react": {
       "optional": true
     }
   },
@@ -216,6 +238,8 @@
     "framer-motion": "^12.19.1",
     "gsap": "^3.13.0",
     "lucide-react": "^0.525.0",
+    "prism-react-renderer": "^2.4.1",
+    "react-live": "^4.1.8",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
@@ -224,6 +248,8 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.3",
+    "@sentry/react": "^9.40.0",
+    "@sentry/types": "^9.40.0",
     "@storybook/addon-a11y": "^9.0.13",
     "@storybook/addon-docs": "^9.0.13",
     "@storybook/addon-themes": "^9.0.13",
@@ -233,6 +259,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^24.0.7",
+    "@types/pngjs": "^6.0.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/web": "^0.0.244",
@@ -277,7 +304,8 @@
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0",
-    "vitest-canvas-mock": "^0.3.3"
+    "vitest-canvas-mock": "^0.3.3",
+    "web-vitals": "^5.0.3"
   },
   "engines": {
     "node": ">=14.0.0"

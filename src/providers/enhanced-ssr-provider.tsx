@@ -3,8 +3,14 @@
  * Provides comprehensive SSR support with automatic recovery mechanisms
  */
 
-import React, { useEffect, useState, useCallback, ReactNode } from 'react';
-import { HydrationManager, useProgressiveEnhancement } from '../utils/hydration-utils';
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  // useCallback,
+} from 'react';
+import { useProgressiveEnhancement } from '../utils/hydration-utils';
 import { isBrowser } from '../utils/ssr-utils';
 
 export interface EnhancedSSRProviderProps {
@@ -12,9 +18,9 @@ export interface EnhancedSSRProviderProps {
   fallback?: ReactNode;
   loading?: ReactNode;
   onHydrationComplete?: () => void;
-  onHydrationError?: (error: Error) => void;
+  // onHydrationError?: (error: Error) => void;
   enableProgressiveEnhancement?: boolean;
-  enableHydrationRecovery?: boolean;
+  // enableHydrationRecovery?: boolean;
   maxHydrationRetries?: number;
 }
 
@@ -26,16 +32,17 @@ export function EnhancedSSRProvider({
   fallback = null,
   loading = <div>Loading...</div>,
   onHydrationComplete,
-  onHydrationError,
+  // onHydrationError,
   enableProgressiveEnhancement: _enableProgressiveEnhancement = true,
-  enableHydrationRecovery = true,
+  // enableHydrationRecovery = true,
   maxHydrationRetries = 3,
 }: EnhancedSSRProviderProps) {
   const [isClient, setIsClient] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [retryCount, setRetryCount] = useState(0);
-  
+  const [_hydrationError, _setHydrationError] = useState<Error | null>(null);
+  const [_hasError, _setHasError] = useState(false);
+  const [_retryCount, _setRetryCount] = useState(0);
+
   const enhancements = useProgressiveEnhancement();
 
   // Handle client-side detection
@@ -57,14 +64,13 @@ export function EnhancedSSRProvider({
     return () => clearTimeout(timeout);
   }, [isClient, onHydrationComplete]);
 
-
   // Server-side rendering
   if (!isClient) {
     return <>{fallback || children}</>;
   }
 
   // Hydration error state
-  if (hasError && retryCount >= maxHydrationRetries) {
+  if (_hasError && _retryCount >= maxHydrationRetries) {
     return <>{fallback || loading}</>;
   }
 
@@ -75,7 +81,10 @@ export function EnhancedSSRProvider({
 
   // Fully hydrated with enhancements
   return (
-    <div data-ssr-hydrated="true" data-enhancements={JSON.stringify(enhancements)}>
+    <div
+      data-ssr-hydrated="true"
+      data-enhancements={JSON.stringify(enhancements)}
+    >
       {children}
     </div>
   );
@@ -173,7 +182,7 @@ export function useHydrationSafeState<T>(
 export function createSSREventHandler<T extends (...args: any[]) => any>(
   handler: T
 ): T | (() => void) {
-  return isBrowser() ? handler : (() => {});
+  return isBrowser() ? handler : () => {};
 }
 
 /**

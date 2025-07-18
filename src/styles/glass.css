@@ -1533,7 +1533,8 @@
 .glass-modal {
   background: var(--glass-bg-elevated);
   backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
-  -webkit-backdrop-filter: var(--glass-backdrop-blur) var(--glass-backdrop-saturate);
+  -webkit-backdrop-filter: var(--glass-backdrop-blur)
+    var(--glass-backdrop-saturate);
   border: 1px solid var(--glass-border-light);
   box-shadow: var(--glass-shadow-elevated);
 }
@@ -1555,7 +1556,7 @@
 }
 
 /* Focus Trap Styles */
-.glass-focus-trap[data-focus-trap-active="true"] {
+.glass-focus-trap[data-focus-trap-active='true'] {
   position: relative;
 }
 

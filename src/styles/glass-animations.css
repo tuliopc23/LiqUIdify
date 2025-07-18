@@ -14,7 +14,8 @@
 
 /* Spring Animations */
 .glass-spring-in {
-  animation: glass-spring-in var(--glass-spring-duration) var(--glass-spring-easing);
+  animation: glass-spring-in var(--glass-spring-duration)
+    var(--glass-spring-easing);
 }
 
 @keyframes glass-spring-in {
@@ -48,7 +49,8 @@
 }
 
 @keyframes glass-magnetic-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -93,7 +95,8 @@
 }
 
 @keyframes glass-morph-shape {
-  0%, 100% {
+  0%,
+  100% {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
   33% {
@@ -224,7 +227,8 @@
 }
 
 @keyframes glass-glow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(-50%, -50%) scale(1);
   }
   50% {
@@ -262,7 +266,7 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .glass-magnetic,
   .glass-spring-in,
   .glass-morph,

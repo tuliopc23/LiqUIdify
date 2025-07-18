@@ -85,7 +85,8 @@ export class PerformanceTestingInfrastructure {
 
   public static getInstance(): PerformanceTestingInfrastructure {
     if (!PerformanceTestingInfrastructure.instance) {
-      PerformanceTestingInfrastructure.instance = new PerformanceTestingInfrastructure();
+      PerformanceTestingInfrastructure.instance =
+        new PerformanceTestingInfrastructure();
     }
     return PerformanceTestingInfrastructure.instance;
   }
@@ -115,18 +116,22 @@ export class PerformanceTestingInfrastructure {
    * Measure Core Web Vitals
    */
   public async measureCoreWebVitals(): Promise<PerformanceMetrics> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const metrics: Partial<PerformanceMetrics> = {
         lcp: 0,
         fid: 0,
         cls: 0,
         tti: 0,
         fcp: 0,
-        tbt: 0
+        tbt: 0,
       };
 
       // Use navigation timing as fallback
-      if (typeof window !== 'undefined' && window.performance && window.performance.timing) {
+      if (
+        typeof window !== 'undefined' &&
+        window.performance &&
+        window.performance.timing
+      ) {
         const timing = window.performance.timing;
         metrics.tti = timing.domInteractive - timing.navigationStart;
         metrics.fcp = timing.responseStart - timing.navigationStart;
@@ -147,7 +152,7 @@ export class PerformanceTestingInfrastructure {
       gzippedSize: 180, // KB
       brotliSize: 150, // KB
       moduleCount: 45,
-      dependencyCount: 12
+      dependencyCount: 12,
     };
   }
 
@@ -160,7 +165,9 @@ export class PerformanceTestingInfrastructure {
     interactionFunction?: () => void
   ): ComponentPerformanceMetrics {
     const startTime = performance.now();
-    const startMemory = performance.memory ? performance.memory.usedJSHeapSize : 0;
+    const startMemory = performance.memory
+      ? performance.memory.usedJSHeapSize
+      : 0;
 
     // Measure render time
     renderFunction();
@@ -180,7 +187,9 @@ export class PerformanceTestingInfrastructure {
     }
 
     // Measure memory usage
-    const endMemory = performance.memory ? performance.memory.usedJSHeapSize : 0;
+    const endMemory = performance.memory
+      ? performance.memory.usedJSHeapSize
+      : 0;
     const memoryUsage = endMemory - startMemory;
 
     return {
@@ -189,7 +198,7 @@ export class PerformanceTestingInfrastructure {
       reRenderTime,
       memoryUsage,
       bundleSize: this.estimateComponentBundleSize(componentName),
-      interactionDelay
+      interactionDelay,
     };
   }
 
@@ -198,14 +207,14 @@ export class PerformanceTestingInfrastructure {
    */
   private estimateComponentBundleSize(componentName: string): number {
     const sizeMap: Record<string, number> = {
-      'GlassButton': 2.5,
-      'GlassCard': 3.2,
-      'GlassModal': 4.1,
-      'GlassInput': 2.8,
-      'GlassMenu': 3.5,
-      'GlassLiveRegion': 1.2,
-      'GlassFocusTrap': 1.8,
-      'GlassErrorBoundary': 2.1
+      GlassButton: 2.5,
+      GlassCard: 3.2,
+      GlassModal: 4.1,
+      GlassInput: 2.8,
+      GlassMenu: 3.5,
+      GlassLiveRegion: 1.2,
+      GlassFocusTrap: 1.8,
+      GlassErrorBoundary: 2.1,
     };
     return sizeMap[componentName] || 1.0;
   }
@@ -225,7 +234,7 @@ export class PerformanceTestingInfrastructure {
       return {
         leaks: 0,
         growthRate: 0,
-        recommendations: ['Memory API not available']
+        recommendations: ['Memory API not available'],
       };
     }
 
@@ -251,16 +260,20 @@ export class PerformanceTestingInfrastructure {
 
     const recommendations: string[] = [];
     if (growthRate > 5) {
-      recommendations.push('Significant memory growth detected - check for event listener leaks');
+      recommendations.push(
+        'Significant memory growth detected - check for event listener leaks'
+      );
     }
     if (growthRate > 10) {
-      recommendations.push('Critical memory leak - investigate component cleanup');
+      recommendations.push(
+        'Critical memory leak - investigate component cleanup'
+      );
     }
 
     return {
       leaks,
       growthRate,
-      recommendations
+      recommendations,
     };
   }
 
@@ -277,32 +290,37 @@ export class PerformanceTestingInfrastructure {
     } = {}
   ): Promise<PerformanceTestResult> {
     const iterations = options.iterations || 10;
-    
+
     // Measure Core Web Vitals
     const metrics = await this.measureCoreWebVitals();
-    
+
     // Measure bundle size
     const bundleSize = await this.measureBundleSize();
-    
+
     // Measure component performance
-    const componentMetrics = [this.measureComponentPerformance('test', testFunction)];
+    const componentMetrics = [
+      this.measureComponentPerformance('test', testFunction),
+    ];
 
     // Measure memory usage
     let memoryUsage = {
       initial: 0,
       peak: 0,
       current: 0,
-      leaks: 0
+      leaks: 0,
     };
 
     if (options.measureMemory && performance.memory) {
       memoryUsage.initial = performance.memory.usedJSHeapSize;
-      
+
       for (let i = 0; i < iterations; i++) {
         testFunction();
-        memoryUsage.peak = Math.max(memoryUsage.peak, performance.memory.usedJSHeapSize);
+        memoryUsage.peak = Math.max(
+          memoryUsage.peak,
+          performance.memory.usedJSHeapSize
+        );
       }
-      
+
       memoryUsage.current = performance.memory.usedJSHeapSize;
       memoryUsage.leaks = memoryUsage.current - memoryUsage.initial;
     }
@@ -311,7 +329,7 @@ export class PerformanceTestingInfrastructure {
     const network = {
       requests: 0,
       transferred: 0,
-      blocked: 0
+      blocked: 0,
     };
 
     const result: PerformanceTestResult = {
@@ -320,7 +338,7 @@ export class PerformanceTestingInfrastructure {
       bundleSize,
       componentMetrics,
       memoryUsage,
-      network
+      network,
     };
 
     this.baselineMetrics.set(testName, result);
@@ -343,7 +361,8 @@ export class PerformanceTestingInfrastructure {
 
     // Check Core Web Vitals
     Object.entries(currentMetrics.metrics).forEach(([metric, value]) => {
-      const baselineValue = baseline.metrics[metric as keyof PerformanceMetrics];
+      const baselineValue =
+        baseline.metrics[metric as keyof PerformanceMetrics];
       const threshold = this.thresholds.get(metric) || 0;
       const change = ((value - baselineValue) / baselineValue) * 100;
 
@@ -354,23 +373,29 @@ export class PerformanceTestingInfrastructure {
           current: value,
           change,
           threshold,
-          exceeded: true
+          exceeded: true,
         });
       }
     });
 
     // Check bundle size
-    const bundleSizeChange = ((currentMetrics.bundleSize.totalSize - baseline.bundleSize.totalSize) / baseline.bundleSize.totalSize) * 100;
+    const bundleSizeChange =
+      ((currentMetrics.bundleSize.totalSize - baseline.bundleSize.totalSize) /
+        baseline.bundleSize.totalSize) *
+      100;
     const bundleThreshold = this.thresholds.get('totalBundleSize') || 1024;
 
-    if (currentMetrics.bundleSize.totalSize > bundleThreshold && bundleSizeChange > 5) {
+    if (
+      currentMetrics.bundleSize.totalSize > bundleThreshold &&
+      bundleSizeChange > 5
+    ) {
       regressions.push({
         metric: 'bundleSize',
         previous: baseline.bundleSize.totalSize,
         current: currentMetrics.bundleSize.totalSize,
         change: bundleSizeChange,
         threshold: bundleThreshold,
-        exceeded: true
+        exceeded: true,
       });
     }
 
@@ -394,9 +419,11 @@ export class PerformanceTestingInfrastructure {
       recommendations: string[];
     };
   } {
-    const regressions = Array.from(this.baselineMetrics.entries()).flatMap(([name, baseline]) => {
-      return this.checkPerformanceRegression(name, baseline);
-    });
+    const regressions = Array.from(this.baselineMetrics.entries()).flatMap(
+      ([name, baseline]) => {
+        return this.checkPerformanceRegression(name, baseline);
+      }
+    );
 
     const recommendations: string[] = [];
 
@@ -419,37 +446,49 @@ export class PerformanceTestingInfrastructure {
         totalTests: this.baselineMetrics.size,
         regressions: regressions.filter(r => r.exceeded).length,
         improvements: 0,
-        warnings: regressions.filter(r => !r.exceeded).length
+        warnings: regressions.filter(r => !r.exceeded).length,
       },
       details: {
         coreWebVitals: latestMetrics?.metrics || {
-          lcp: 0, fid: 0, cls: 0, tti: 0, fcp: 0, tbt: 0
+          lcp: 0,
+          fid: 0,
+          cls: 0,
+          tti: 0,
+          fcp: 0,
+          tbt: 0,
         },
         bundleSize: latestMetrics?.bundleSize || {
-          totalSize: 0, gzippedSize: 0, brotliSize: 0, moduleCount: 0, dependencyCount: 0
+          totalSize: 0,
+          gzippedSize: 0,
+          brotliSize: 0,
+          moduleCount: 0,
+          dependencyCount: 0,
         },
         memoryLeaks: [],
-        recommendations
-      }
+        recommendations,
+      },
     };
   }
 
   /**
    * Start continuous performance monitoring
    */
-  public startContinuousMonitoring(_options: {
-    interval?: number;
-    metrics?: Array<keyof PerformanceMetrics>;
-    thresholds?: Record<string, number>;
-    onViolation?: (regression: PerformanceRegression) => void;
-  } = {}): () => void {
+  public startContinuousMonitoring(
+    _options: {
+      interval?: number;
+      metrics?: Array<keyof PerformanceMetrics>;
+      thresholds?: Record<string, number>;
+      onViolation?: (regression: PerformanceRegression) => void;
+    } = {}
+  ): () => void {
     // Return a no-op cleanup function
     return () => {};
   }
 }
 
 // Export singleton instance
-export const performanceTesting = PerformanceTestingInfrastructure.getInstance();
+export const performanceTesting =
+  PerformanceTestingInfrastructure.getInstance();
 
 // Convenience functions
 export const measurePerformance = async (
@@ -464,13 +503,18 @@ export const checkPerformanceRegression = (
   testName: string,
   currentMetrics: PerformanceTestResult
 ) => {
-  return performanceTesting.checkPerformanceRegression(testName, currentMetrics);
+  return performanceTesting.checkPerformanceRegression(
+    testName,
+    currentMetrics
+  );
 };
 
 export const generatePerformanceReport = () => {
   return performanceTesting.generatePerformanceReport();
 };
 
-export const startPerformanceMonitoring = (options: Parameters<typeof performanceTesting.startContinuousMonitoring>[0]) => {
+export const startPerformanceMonitoring = (
+  options: Parameters<typeof performanceTesting.startContinuousMonitoring>[0]
+) => {
   return performanceTesting.startContinuousMonitoring(options);
 };

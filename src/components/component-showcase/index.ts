@@ -1,1 +1,4 @@
-export { ComponentShowcase } from './component-showcase';
+export {
+  ComponentShowcase,
+  type ComponentShowcaseProps,
+} from './component-showcase';

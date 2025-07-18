@@ -36,6 +36,9 @@ export * from '../components/glass-skeleton';
 export * from '../components/glass-responsive-button';
 export * from '../components/glass-responsive-card';
 
+// Developer tools
+export * from '../components/glass-playground/glass-playground';
+
 // Advanced providers
 export * from '../providers/glass-performance-provider';
 export * from '../providers/ssr-config-provider';

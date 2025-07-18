@@ -2,7 +2,8 @@ import React, { forwardRef, ButtonHTMLAttributes } from 'react';
 import { cn } from '@/lib/glass-utils';
 import { Loader2 } from 'lucide-react';
 
-export interface GlassButtonLiteProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface GlassButtonLiteProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'destructive';
   size?: 'sm' | 'md' | 'lg';
   loading?: boolean;
@@ -15,7 +16,10 @@ export interface GlassButtonLiteProps extends ButtonHTMLAttributes<HTMLButtonEle
  * Uses CSS transitions instead of GSAP/Framer Motion
  * ~3KB vs ~15KB for full version
  */
-export const GlassButtonLite = forwardRef<HTMLButtonElement, GlassButtonLiteProps>(
+export const GlassButtonLite = forwardRef<
+  HTMLButtonElement,
+  GlassButtonLiteProps
+>(
   (
     {
       className,

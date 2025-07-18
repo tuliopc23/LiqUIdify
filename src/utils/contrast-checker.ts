@@ -93,9 +93,12 @@ export function getLuminance(rgb: RGB): number {
   const gsRGB = rgb.g / 255;
   const bsRGB = rgb.b / 255;
 
-  const r = rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
-  const g = gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
-  const b = bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
+  const r =
+    rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
+  const g =
+    gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
+  const b =
+    bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
 
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
@@ -118,8 +121,10 @@ export function checkContrast(
   foreground: string | RGB,
   background: string | RGB
 ): ContrastResult {
-  const fg = typeof foreground === 'string' ? parseColor(foreground) : foreground;
-  const bg = typeof background === 'string' ? parseColor(background) : background;
+  const fg =
+    typeof foreground === 'string' ? parseColor(foreground) : foreground;
+  const bg =
+    typeof background === 'string' ? parseColor(background) : background;
 
   if (!fg || !bg) {
     throw new Error('Invalid color format');
@@ -148,7 +153,8 @@ export function checkContrast(
   } else if (result.passes.aa.normal) {
     result.recommendation = 'Good contrast for normal text';
   } else if (result.passes.aa.large) {
-    result.recommendation = 'Acceptable only for large text (18pt+ or 14pt+ bold)';
+    result.recommendation =
+      'Acceptable only for large text (18pt+ or 14pt+ bold)';
   } else {
     result.recommendation = 'Poor contrast - does not meet WCAG standards';
   }
@@ -164,15 +170,17 @@ export function suggestBetterColor(
   background: string | RGB,
   targetRatio: number = 4.5
 ): RGB {
-  const fg = typeof foreground === 'string' ? parseColor(foreground) : foreground;
-  const bg = typeof background === 'string' ? parseColor(background) : background;
+  const fg =
+    typeof foreground === 'string' ? parseColor(foreground) : foreground;
+  const bg =
+    typeof background === 'string' ? parseColor(background) : background;
 
   if (!fg || !bg) {
     throw new Error('Invalid color format');
   }
 
   const currentRatio = getContrastRatio(fg, bg);
-  
+
   if (currentRatio >= targetRatio) {
     return fg; // Already meets target
   }
@@ -186,15 +194,26 @@ export function suggestBetterColor(
   let iterations = 0;
   const maxIterations = 255;
 
-  while (getContrastRatio(adjustedColor, bg) < targetRatio && iterations < maxIterations) {
+  while (
+    getContrastRatio(adjustedColor, bg) < targetRatio &&
+    iterations < maxIterations
+  ) {
     adjustedColor.r = Math.max(0, Math.min(255, adjustedColor.r + step));
     adjustedColor.g = Math.max(0, Math.min(255, adjustedColor.g + step));
     adjustedColor.b = Math.max(0, Math.min(255, adjustedColor.b + step));
     iterations++;
 
     // If we've maxed out, try the opposite direction
-    if ((shouldLighten && adjustedColor.r === 255 && adjustedColor.g === 255 && adjustedColor.b === 255) ||
-        (!shouldLighten && adjustedColor.r === 0 && adjustedColor.g === 0 && adjustedColor.b === 0)) {
+    if (
+      (shouldLighten &&
+        adjustedColor.r === 255 &&
+        adjustedColor.g === 255 &&
+        adjustedColor.b === 255) ||
+      (!shouldLighten &&
+        adjustedColor.r === 0 &&
+        adjustedColor.g === 0 &&
+        adjustedColor.b === 0)
+    ) {
       step = -step;
       adjustedColor = { ...fg };
     }
@@ -212,9 +231,16 @@ export function checkGlassContrast(
   backdropBackground: string | RGB,
   glassOpacity: number = 0.25
 ): ContrastResult {
-  const fg = typeof foreground === 'string' ? parseColor(foreground) : foreground;
-  const glassBg = typeof glassBackground === 'string' ? parseColor(glassBackground) : glassBackground;
-  const backdropBg = typeof backdropBackground === 'string' ? parseColor(backdropBackground) : backdropBackground;
+  const fg =
+    typeof foreground === 'string' ? parseColor(foreground) : foreground;
+  const glassBg =
+    typeof glassBackground === 'string'
+      ? parseColor(glassBackground)
+      : glassBackground;
+  const backdropBg =
+    typeof backdropBackground === 'string'
+      ? parseColor(backdropBackground)
+      : backdropBackground;
 
   if (!fg || !glassBg || !backdropBg) {
     throw new Error('Invalid color format');
@@ -267,7 +293,7 @@ export function isGlassSafe(
     '#1f2937', // Dark gray
   ];
 
-  return commonBackdrops.every((backdrop) => {
+  return commonBackdrops.every(backdrop => {
     try {
       const result = checkGlassContrast(
         foreground,

@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react';
 import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
+import { createComponentSize, ComponentSize } from '@/types/branded';
 
 export interface GlassResponsiveCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'elevated' | 'outlined' | 'pressed';
   hover?: boolean;
   bordered?: boolean;
-  padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  padding?: ComponentSize | 'none';
   responsive?: boolean;
   stackOnMobile?: boolean;
 }
@@ -21,13 +22,13 @@ const GlassResponsiveCard = forwardRef<
       variant = 'default',
       hover = true,
       bordered = true,
-      padding = 'md',
+      padding = createComponentSize('md'),
       responsive = true,
       stackOnMobile = false,
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const variantClasses = {
       default: getGlassClass('default'),
@@ -38,29 +39,29 @@ const GlassResponsiveCard = forwardRef<
 
     const paddingClasses = responsive
       ? {
-          none: '',
-          xs: 'p-2 sm:p-3',
-          sm: 'p-3 sm:p-4',
-          md: 'p-4 sm:p-6',
-          lg: 'p-6 sm:p-8',
-          xl: 'p-8 sm:p-12',
-        }
+        none: '',
+        xs: 'p-2 sm:p-3',
+        sm: 'p-3 sm:p-4',
+        md: 'p-4 sm:p-6',
+        lg: 'p-6 sm:p-8',
+        xl: 'p-8 sm:p-12',
+      }
       : {
-          none: '',
-          xs: 'p-2',
-          sm: 'p-3',
-          md: 'p-6',
-          lg: 'p-8',
-          xl: 'p-12',
-        };
+        none: '',
+        xs: 'p-2',
+        sm: 'p-3',
+        md: 'p-6',
+        lg: 'p-8',
+        xl: 'p-12',
+      };
 
     const baseClasses = cn(
       'rounded-xl overflow-hidden',
       variantClasses[variant],
-      paddingClasses[padding],
+      padding !== 'none' ? paddingClasses[padding as keyof typeof paddingClasses] : '',
       bordered &&
-        variant !== 'outlined' &&
-        'border border-[var(--glass-border)]',
+      variant !== 'outlined' &&
+      'border border-[var(--glass-border)]',
       hover && 'glass-interactive cursor-pointer',
       microInteraction.smooth,
       'will-change-transform',
@@ -68,7 +69,7 @@ const GlassResponsiveCard = forwardRef<
       responsive && [
         'text-sm sm:text-base', // Responsive text sizing
         stackOnMobile && 'flex flex-col sm:flex-row sm:items-center',
-      ]
+      ],
     );
 
     return (
@@ -76,7 +77,7 @@ const GlassResponsiveCard = forwardRef<
         {children}
       </div>
     );
-  }
+  },
 );
 
 GlassResponsiveCard.displayName = 'GlassResponsiveCard';

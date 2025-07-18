@@ -179,7 +179,8 @@ export class GlassPerformanceMonitor {
       }
 
       // Calculate FPS
-      const avgFrameTime = this.frameHistory.reduce((a, b) => a + b, 0) / this.frameHistory.length;
+      const avgFrameTime =
+        this.frameHistory.reduce((a, b) => a + b, 0) / this.frameHistory.length;
       this.metrics.fps = 1000 / avgFrameTime;
       this.metrics.frameTime = avgFrameTime;
 
@@ -222,19 +223,27 @@ export class GlassPerformanceMonitor {
     const { fps, activeAnimations, droppedFrames, memoryUsage } = this.metrics;
 
     if (fps < 30) {
-      recommendations.push('Consider reducing animation complexity or enabling reduced motion');
+      recommendations.push(
+        'Consider reducing animation complexity or enabling reduced motion'
+      );
     }
 
     if (activeAnimations > 50) {
-      recommendations.push('Too many active animations - consider animation culling');
+      recommendations.push(
+        'Too many active animations - consider animation culling'
+      );
     }
 
     if (droppedFrames > 10) {
-      recommendations.push('High frame drop rate - enable GPU acceleration or reduce quality');
+      recommendations.push(
+        'High frame drop rate - enable GPU acceleration or reduce quality'
+      );
     }
 
     if (memoryUsage > 100 * 1024 * 1024) {
-      recommendations.push('High memory usage - consider animation cleanup and garbage collection');
+      recommendations.push(
+        'High memory usage - consider animation cleanup and garbage collection'
+      );
     }
 
     return recommendations;
@@ -262,13 +271,16 @@ export class GlassAnimationScheduler {
   }
 
   private setupIntersectionObserver(): void {
-    if (!this.config.enableCulling || typeof IntersectionObserver === 'undefined') {
+    if (
+      !this.config.enableCulling ||
+      typeof IntersectionObserver === 'undefined'
+    ) {
       return;
     }
 
     this.intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           const taskId = (entry.target as HTMLElement).dataset.animationId;
           if (taskId) {
             const task = this.tasks.get(taskId);
@@ -294,7 +306,7 @@ export class GlassAnimationScheduler {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     this.reducedMotion = mediaQuery.matches;
 
-    mediaQuery.addEventListener('change', (e) => {
+    mediaQuery.addEventListener('change', e => {
       this.reducedMotion = e.matches;
     });
   }
@@ -461,11 +473,14 @@ export class GlassAnimationScheduler {
  * Optimizes elements for GPU rendering
  */
 export class GPUAccelerationHelper {
-  static enableForElement(element: HTMLElement, options: {
-    force3D?: boolean;
-    enableWillChange?: boolean;
-    optimizeTransforms?: boolean;
-  } = {}): void {
+  static enableForElement(
+    element: HTMLElement,
+    options: {
+      force3D?: boolean;
+      enableWillChange?: boolean;
+      optimizeTransforms?: boolean;
+    } = {}
+  ): void {
     const {
       force3D = true,
       enableWillChange = true,
@@ -493,7 +508,8 @@ export class GPUAccelerationHelper {
 
   static disableForElement(element: HTMLElement): void {
     element.style.willChange = 'auto';
-    element.style.transform = element.style.transform?.replace('translateZ(0)', '') || '';
+    element.style.transform =
+      element.style.transform?.replace('translateZ(0)', '') || '';
     element.style.backfaceVisibility = '';
     element.style.perspective = '';
     element.style.transformStyle = '';
@@ -538,7 +554,8 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
     const interval = setInterval(() => {
       if (schedulerRef.current) {
         const currentMetrics = schedulerRef.current.getMetrics();
-        const currentRecommendations = schedulerRef.current.getRecommendations();
+        const currentRecommendations =
+          schedulerRef.current.getRecommendations();
 
         setMetrics(currentMetrics);
         setRecommendations(currentRecommendations);
@@ -548,27 +565,30 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
     return () => clearInterval(interval);
   }, []);
 
-  const addAnimation = useCallback((
-    id: string,
-    element: HTMLElement,
-    callback: (timestamp: number) => void,
-    priority: number = 0
-  ) => {
-    if (!schedulerRef.current) return;
+  const addAnimation = useCallback(
+    (
+      id: string,
+      element: HTMLElement,
+      callback: (timestamp: number) => void,
+      priority: number = 0
+    ) => {
+      if (!schedulerRef.current) return;
 
-    const task: AnimationTask = {
-      id,
-      element,
-      callback,
-      priority,
-      lastFrame: 0,
-      frameCount: 0,
-      isVisible: true,
-      boundingRect: element.getBoundingClientRect(),
-    };
+      const task: AnimationTask = {
+        id,
+        element,
+        callback,
+        priority,
+        lastFrame: 0,
+        frameCount: 0,
+        isVisible: true,
+        boundingRect: element.getBoundingClientRect(),
+      };
 
-    schedulerRef.current.addTask(task);
-  }, []);
+      schedulerRef.current.addTask(task);
+    },
+    []
+  );
 
   const removeAnimation = useCallback((id: string) => {
     schedulerRef.current?.removeTask(id);
@@ -587,12 +607,15 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
     schedulerRef.current?.updateConfig(configRef.current);
   }, []);
 
-  const setQuality = useCallback((quality: keyof typeof QUALITY_PRESETS) => {
-    const qualityConfig = QUALITY_PRESETS[quality];
-    if (qualityConfig) {
-      updateConfig(qualityConfig);
-    }
-  }, [updateConfig]);
+  const setQuality = useCallback(
+    (quality: keyof typeof QUALITY_PRESETS) => {
+      const qualityConfig = QUALITY_PRESETS[quality];
+      if (qualityConfig) {
+        updateConfig(qualityConfig);
+      }
+    },
+    [updateConfig]
+  );
 
   return {
     metrics,

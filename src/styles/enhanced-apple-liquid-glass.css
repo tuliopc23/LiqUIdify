@@ -2,634 +2,638 @@
 /* Requirements: 6.1, 6.3 - Pixel-perfect rendering with advanced visual effects */
 
 @layer components {
+  /* Enhanced Apple Liquid Glass Design Tokens - Pixel-Perfect Precision */
+  :root {
+    /* Pixel-Perfect Rendering Variables */
+    --pixel-ratio: 1;
+    --subpixel-rendering: optimizeSpeed;
+    --retina-scale: calc(1 / var(--pixel-ratio));
 
-    /* Enhanced Apple Liquid Glass Design Tokens - Pixel-Perfect Precision */
-    :root {
-        /* Pixel-Perfect Rendering Variables */
-        --pixel-ratio: 1;
-        --subpixel-rendering: optimizeSpeed;
-        --retina-scale: calc(1 / var(--pixel-ratio));
+    /* Enhanced Glass Core Variables - Authentic Apple Materials */
+    --enhanced-glass-bg-subtle: rgba(255, 255, 255, 0.06);
+    --enhanced-glass-bg-medium: rgba(255, 255, 255, 0.12);
+    --enhanced-glass-bg-strong: rgba(255, 255, 255, 0.18);
+    --enhanced-glass-bg-extreme: rgba(255, 255, 255, 0.25);
 
-        /* Enhanced Glass Core Variables - Authentic Apple Materials */
-        --enhanced-glass-bg-subtle: rgba(255, 255, 255, 0.06);
-        --enhanced-glass-bg-medium: rgba(255, 255, 255, 0.12);
-        --enhanced-glass-bg-strong: rgba(255, 255, 255, 0.18);
-        --enhanced-glass-bg-extreme: rgba(255, 255, 255, 0.25);
+    --enhanced-glass-border-subtle: rgba(255, 255, 255, 0.7);
+    --enhanced-glass-border-medium: rgba(255, 255, 255, 0.8);
+    --enhanced-glass-border-strong: rgba(255, 255, 255, 0.9);
+    --enhanced-glass-border-extreme: rgba(255, 255, 255, 1);
 
-        --enhanced-glass-border-subtle: rgba(255, 255, 255, 0.7);
-        --enhanced-glass-border-medium: rgba(255, 255, 255, 0.8);
-        --enhanced-glass-border-strong: rgba(255, 255, 255, 0.9);
-        --enhanced-glass-border-extreme: rgba(255, 255, 255, 1);
+    /* Enhanced Multi-Layer Shadows - Depth and Luminosity */
+    --enhanced-glass-shadow-subtle:
+      0 8px 32px rgba(31, 38, 135, 0.15),
+      inset 0 4px 16px rgba(255, 255, 255, 0.25),
+      inset 0 -2px 8px rgba(0, 0, 0, 0.05);
+    --enhanced-glass-shadow-medium:
+      0 12px 48px rgba(31, 38, 135, 0.25),
+      inset 0 6px 24px rgba(255, 255, 255, 0.35),
+      inset 0 -3px 12px rgba(0, 0, 0, 0.08);
+    --enhanced-glass-shadow-strong:
+      0 16px 64px rgba(31, 38, 135, 0.35),
+      inset 0 8px 32px rgba(255, 255, 255, 0.45),
+      inset 0 -4px 16px rgba(0, 0, 0, 0.12);
+    --enhanced-glass-shadow-extreme:
+      0 24px 96px rgba(31, 38, 135, 0.45),
+      inset 0 12px 48px rgba(255, 255, 255, 0.55),
+      inset 0 -6px 24px rgba(0, 0, 0, 0.15);
 
-        /* Enhanced Multi-Layer Shadows - Depth and Luminosity */
-        --enhanced-glass-shadow-subtle:
-            0 8px 32px rgba(31, 38, 135, 0.15),
-            inset 0 4px 16px rgba(255, 255, 255, 0.25),
-            inset 0 -2px 8px rgba(0, 0, 0, 0.05);
-        --enhanced-glass-shadow-medium:
-            0 12px 48px rgba(31, 38, 135, 0.25),
-            inset 0 6px 24px rgba(255, 255, 255, 0.35),
-            inset 0 -3px 12px rgba(0, 0, 0, 0.08);
-        --enhanced-glass-shadow-strong:
-            0 16px 64px rgba(31, 38, 135, 0.35),
-            inset 0 8px 32px rgba(255, 255, 255, 0.45),
-            inset 0 -4px 16px rgba(0, 0, 0, 0.12);
-        --enhanced-glass-shadow-extreme:
-            0 24px 96px rgba(31, 38, 135, 0.45),
-            inset 0 12px 48px rgba(255, 255, 255, 0.55),
-            inset 0 -6px 24px rgba(0, 0, 0, 0.15);
+    /* Enhanced Blur Effects - Pixel-Perfect Clarity */
+    --enhanced-glass-blur-subtle: blur(12px) saturate(150%) brightness(105%);
+    --enhanced-glass-blur-medium: blur(20px) saturate(180%) brightness(110%);
+    --enhanced-glass-blur-strong: blur(32px) saturate(200%) brightness(115%);
+    --enhanced-glass-blur-extreme: blur(48px) saturate(250%) brightness(120%);
 
-        /* Enhanced Blur Effects - Pixel-Perfect Clarity */
-        --enhanced-glass-blur-subtle: blur(12px) saturate(150%) brightness(105%);
-        --enhanced-glass-blur-medium: blur(20px) saturate(180%) brightness(110%);
-        --enhanced-glass-blur-strong: blur(32px) saturate(200%) brightness(115%);
-        --enhanced-glass-blur-extreme: blur(48px) saturate(250%) brightness(120%);
+    /* Enhanced Border Radius - Apple HIG Compliance */
+    --enhanced-glass-radius-subtle: 20px;
+    --enhanced-glass-radius-medium: 28px;
+    --enhanced-glass-radius-strong: 36px;
+    --enhanced-glass-radius-extreme: 44px;
 
-        /* Enhanced Border Radius - Apple HIG Compliance */
-        --enhanced-glass-radius-subtle: 20px;
-        --enhanced-glass-radius-medium: 28px;
-        --enhanced-glass-radius-strong: 36px;
-        --enhanced-glass-radius-extreme: 44px;
+    /* Enhanced Specular Highlights */
+    --enhanced-glass-highlight-subtle: rgba(255, 255, 255, 0.6);
+    --enhanced-glass-highlight-medium: rgba(255, 255, 255, 0.8);
+    --enhanced-glass-highlight-strong: rgba(255, 255, 255, 1);
+    --enhanced-glass-highlight-extreme: rgba(255, 255, 255, 1);
 
-        /* Enhanced Specular Highlights */
-        --enhanced-glass-highlight-subtle: rgba(255, 255, 255, 0.6);
-        --enhanced-glass-highlight-medium: rgba(255, 255, 255, 0.8);
-        --enhanced-glass-highlight-strong: rgba(255, 255, 255, 1);
-        --enhanced-glass-highlight-extreme: rgba(255, 255, 255, 1);
+    --enhanced-glass-reflection-subtle: rgba(255, 255, 255, 0.3);
+    --enhanced-glass-reflection-medium: rgba(255, 255, 255, 0.4);
+    --enhanced-glass-reflection-strong: rgba(255, 255, 255, 0.5);
+    --enhanced-glass-reflection-extreme: rgba(255, 255, 255, 0.7);
 
-        --enhanced-glass-reflection-subtle: rgba(255, 255, 255, 0.3);
-        --enhanced-glass-reflection-medium: rgba(255, 255, 255, 0.4);
-        --enhanced-glass-reflection-strong: rgba(255, 255, 255, 0.5);
-        --enhanced-glass-reflection-extreme: rgba(255, 255, 255, 0.7);
+    /* Enhanced Transitions - Apple-Quality Motion */
+    --enhanced-glass-transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --enhanced-glass-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --enhanced-glass-micro: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
-        /* Enhanced Transitions - Apple-Quality Motion */
-        --enhanced-glass-transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-        --enhanced-glass-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        --enhanced-glass-micro: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Enhanced Typography - Apple HIG Typography Scale */
+    --enhanced-glass-text: rgba(255, 255, 255, 0.95);
+    --enhanced-glass-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --enhanced-glass-font-weight: 600;
+  }
 
-        /* Enhanced Typography - Apple HIG Typography Scale */
-        --enhanced-glass-text: rgba(255, 255, 255, 0.95);
-        --enhanced-glass-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        --enhanced-glass-font-weight: 600;
+  /* Dark Mode Adjustments - Enhanced Contrast */
+  :root[data-theme='dark'],
+  .dark {
+    --enhanced-glass-bg-subtle: rgba(255, 255, 255, 0.02);
+    --enhanced-glass-bg-medium: rgba(255, 255, 255, 0.04);
+    --enhanced-glass-bg-strong: rgba(255, 255, 255, 0.08);
+    --enhanced-glass-bg-extreme: rgba(255, 255, 255, 0.12);
+
+    --enhanced-glass-border-subtle: rgba(255, 255, 255, 0.08);
+    --enhanced-glass-border-medium: rgba(255, 255, 255, 0.12);
+    --enhanced-glass-border-strong: rgba(255, 255, 255, 0.16);
+    --enhanced-glass-border-extreme: rgba(255, 255, 255, 0.2);
+
+    --enhanced-glass-shadow-subtle:
+      0 6px 24px rgba(0, 0, 0, 0.4), inset 0 2px 12px rgba(255, 255, 255, 0.06),
+      inset 0 -1px 4px rgba(255, 255, 255, 0.02);
+    --enhanced-glass-shadow-medium:
+      0 10px 40px rgba(0, 0, 0, 0.5),
+      inset 0 4px 20px rgba(255, 255, 255, 0.08),
+      inset 0 -2px 8px rgba(255, 255, 255, 0.03);
+    --enhanced-glass-shadow-strong:
+      0 16px 64px rgba(0, 0, 0, 0.6),
+      inset 0 6px 32px rgba(255, 255, 255, 0.12),
+      inset 0 -3px 12px rgba(255, 255, 255, 0.04);
+    --enhanced-glass-shadow-extreme:
+      0 24px 96px rgba(0, 0, 0, 0.7),
+      inset 0 8px 48px rgba(255, 255, 255, 0.16),
+      inset 0 -4px 16px rgba(255, 255, 255, 0.06);
+  }
+
+  /* Enhanced Apple Liquid Glass Base Component */
+  .enhanced-apple-liquid-glass {
+    position: relative;
+    display: flex;
+    border-radius: var(--enhanced-glass-radius-medium);
+    overflow: hidden;
+    isolation: isolate;
+    will-change: transform, box-shadow, filter;
+    transition: var(--enhanced-glass-transition);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    /* Pixel-Perfect Rendering Optimizations */
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: var(--subpixel-rendering);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Pixel-Perfect Enhancement */
+  .enhanced-apple-liquid-glass--pixel-perfect {
+    transform: translateZ(0) scale(var(--retina-scale));
+    transform-origin: 0 0;
+  }
+
+  /* Enhanced Backdrop Layer - Blur and Saturation Effects */
+  .enhanced-glass-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    backdrop-filter: var(--enhanced-glass-blur-medium);
+    -webkit-backdrop-filter: var(--enhanced-glass-blur-medium);
+    isolation: isolate;
+    will-change: transform, filter;
+    transform: translateZ(0);
+
+    /* Pixel-Perfect Backdrop Rendering */
+    backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+
+  /* Enhanced Overlay Layer - Background Tinting */
+  .enhanced-glass-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--enhanced-glass-bg-medium);
+    border: 1px solid var(--enhanced-glass-border-medium);
+    border-radius: var(--enhanced-glass-radius-medium);
+    box-shadow: var(--enhanced-glass-shadow-medium);
+    will-change: transform, background, border-color;
+    transform: translateZ(1px);
+
+    /* Enhanced Overlay Effects */
+    background-blend-mode: multiply;
+    mix-blend-mode: normal;
+  }
+
+  /* Enhanced Specular Layer - Highlight Reflections */
+  .enhanced-glass-specular {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: var(--enhanced-glass-radius-medium);
+    box-shadow:
+      inset 1px 1px 0 var(--enhanced-glass-highlight-medium),
+      inset 0 0 8px var(--enhanced-glass-reflection-medium),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    will-change: transform, box-shadow;
+    transform: translateZ(2px);
+
+    /* Enhanced Specular Effects */
+    background: linear-gradient(
+      135deg,
+      var(--enhanced-glass-highlight-medium) 0%,
+      transparent 50%,
+      var(--enhanced-glass-reflection-medium) 100%
+    );
+    opacity: 0.7;
+    mix-blend-mode: screen;
+  }
+
+  /* Enhanced Content Layer - Actual Component Content */
+  .enhanced-glass-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    color: var(--enhanced-glass-text);
+    text-shadow: var(--enhanced-glass-text-shadow);
+    font-weight: var(--enhanced-glass-font-weight);
+    padding: 1rem 1.5rem;
+    will-change: transform;
+    transform: translateZ(3px);
+
+    /* Enhanced Typography Rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Intensity Variants - Enhanced Multi-Layer Structure */
+  .enhanced-apple-liquid-glass--subtle {
+    border-radius: var(--enhanced-glass-radius-subtle);
+  }
+
+  .enhanced-apple-liquid-glass--subtle .enhanced-glass-backdrop {
+    backdrop-filter: var(--enhanced-glass-blur-subtle);
+    -webkit-backdrop-filter: var(--enhanced-glass-blur-subtle);
+  }
+
+  .enhanced-apple-liquid-glass--subtle .enhanced-glass-overlay {
+    background: var(--enhanced-glass-bg-subtle);
+    border-color: var(--enhanced-glass-border-subtle);
+    border-radius: var(--enhanced-glass-radius-subtle);
+    box-shadow: var(--enhanced-glass-shadow-subtle);
+  }
+
+  .enhanced-apple-liquid-glass--subtle .enhanced-glass-specular {
+    border-radius: var(--enhanced-glass-radius-subtle);
+    box-shadow:
+      inset 1px 1px 0 var(--enhanced-glass-highlight-subtle),
+      inset 0 0 6px var(--enhanced-glass-reflection-subtle);
+    background: linear-gradient(
+      135deg,
+      var(--enhanced-glass-highlight-subtle) 0%,
+      transparent 50%,
+      var(--enhanced-glass-reflection-subtle) 100%
+    );
+  }
+
+  .enhanced-apple-liquid-glass--strong {
+    border-radius: var(--enhanced-glass-radius-strong);
+  }
+
+  .enhanced-apple-liquid-glass--strong .enhanced-glass-backdrop {
+    backdrop-filter: var(--enhanced-glass-blur-strong);
+    -webkit-backdrop-filter: var(--enhanced-glass-blur-strong);
+  }
+
+  .enhanced-apple-liquid-glass--strong .enhanced-glass-overlay {
+    background: var(--enhanced-glass-bg-strong);
+    border-color: var(--enhanced-glass-border-strong);
+    border-radius: var(--enhanced-glass-radius-strong);
+    box-shadow: var(--enhanced-glass-shadow-strong);
+  }
+
+  .enhanced-apple-liquid-glass--strong .enhanced-glass-specular {
+    border-radius: var(--enhanced-glass-radius-strong);
+    box-shadow:
+      inset 1px 1px 0 var(--enhanced-glass-highlight-strong),
+      inset 0 0 10px var(--enhanced-glass-reflection-strong);
+    background: linear-gradient(
+      135deg,
+      var(--enhanced-glass-highlight-strong) 0%,
+      transparent 50%,
+      var(--enhanced-glass-reflection-strong) 100%
+    );
+  }
+
+  .enhanced-apple-liquid-glass--extreme {
+    border-radius: var(--enhanced-glass-radius-extreme);
+  }
+
+  .enhanced-apple-liquid-glass--extreme .enhanced-glass-backdrop {
+    backdrop-filter: var(--enhanced-glass-blur-extreme);
+    -webkit-backdrop-filter: var(--enhanced-glass-blur-extreme);
+  }
+
+  .enhanced-apple-liquid-glass--extreme .enhanced-glass-overlay {
+    background: var(--enhanced-glass-bg-extreme);
+    border-color: var(--enhanced-glass-border-extreme);
+    border-radius: var(--enhanced-glass-radius-extreme);
+    box-shadow: var(--enhanced-glass-shadow-extreme);
+  }
+
+  .enhanced-apple-liquid-glass--extreme .enhanced-glass-specular {
+    border-radius: var(--enhanced-glass-radius-extreme);
+    box-shadow:
+      inset 1px 1px 0 var(--enhanced-glass-highlight-extreme),
+      inset 0 0 12px var(--enhanced-glass-reflection-extreme);
+    background: linear-gradient(
+      135deg,
+      var(--enhanced-glass-highlight-extreme) 0%,
+      transparent 50%,
+      var(--enhanced-glass-reflection-extreme) 100%
+    );
+  }
+
+  /* Enhanced Interactive States - Apple-Quality Micro-Interactions */
+  .enhanced-apple-liquid-glass--interactive {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .enhanced-apple-liquid-glass--interactive:hover {
+    transform: translateY(-3px) scale(1.02) translateZ(0);
+    transition: var(--enhanced-glass-spring);
+  }
+
+  .enhanced-apple-liquid-glass--interactive:hover .enhanced-glass-backdrop {
+    backdrop-filter: blur(24px) saturate(200%) brightness(115%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(115%);
+  }
+
+  .enhanced-apple-liquid-glass--interactive:hover .enhanced-glass-overlay {
+    box-shadow:
+      0 16px 64px rgba(31, 38, 135, 0.35),
+      0 0 80px rgba(255, 255, 255, 0.15),
+      inset 0 8px 32px rgba(255, 255, 255, 0.45);
+  }
+
+  .enhanced-apple-liquid-glass--interactive:hover .enhanced-glass-specular {
+    box-shadow:
+      inset 1px 1px 0 rgba(255, 255, 255, 1),
+      inset 0 0 12px rgba(255, 255, 255, 0.6),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.05);
+    opacity: 0.9;
+  }
+
+  .enhanced-apple-liquid-glass--interactive:active {
+    transform: translateY(-1px) scale(0.98) translateZ(0);
+    transition: var(--enhanced-glass-micro);
+  }
+
+  .enhanced-apple-liquid-glass--interactive:active .enhanced-glass-overlay {
+    box-shadow:
+      0 8px 32px rgba(31, 38, 135, 0.2),
+      0 0 40px rgba(255, 255, 255, 0.08),
+      inset 0 4px 16px rgba(255, 255, 255, 0.25);
+  }
+
+  .enhanced-apple-liquid-glass--interactive:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.4);
+  }
+
+  /* Enhanced Magnetic Hover Effect */
+  .enhanced-apple-liquid-glass--magnetic {
+    transition: var(--enhanced-glass-spring);
+  }
+
+  .enhanced-apple-liquid-glass--magnetic .enhanced-glass-backdrop,
+  .enhanced-apple-liquid-glass--magnetic .enhanced-glass-overlay,
+  .enhanced-apple-liquid-glass--magnetic .enhanced-glass-specular {
+    transition: var(--enhanced-glass-spring);
+  }
+
+  /* Enhanced Liquid Animation Effects */
+  .enhanced-apple-liquid-glass--animated {
+    animation: enhanced-liquid-flow 6s ease-in-out infinite alternate;
+  }
+
+  .enhanced-apple-liquid-glass--animated .enhanced-glass-backdrop {
+    animation: enhanced-backdrop-flow 8s ease-in-out infinite alternate-reverse;
+  }
+
+  .enhanced-apple-liquid-glass--animated .enhanced-glass-specular {
+    animation: enhanced-specular-shimmer 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes enhanced-liquid-flow {
+    0% {
+      transform: translate3d(0, 0, 0);
     }
 
-    /* Dark Mode Adjustments - Enhanced Contrast */
-    :root[data-theme='dark'],
-    .dark {
-        --enhanced-glass-bg-subtle: rgba(255, 255, 255, 0.02);
-        --enhanced-glass-bg-medium: rgba(255, 255, 255, 0.04);
-        --enhanced-glass-bg-strong: rgba(255, 255, 255, 0.08);
-        --enhanced-glass-bg-extreme: rgba(255, 255, 255, 0.12);
-
-        --enhanced-glass-border-subtle: rgba(255, 255, 255, 0.08);
-        --enhanced-glass-border-medium: rgba(255, 255, 255, 0.12);
-        --enhanced-glass-border-strong: rgba(255, 255, 255, 0.16);
-        --enhanced-glass-border-extreme: rgba(255, 255, 255, 0.2);
-
-        --enhanced-glass-shadow-subtle:
-            0 6px 24px rgba(0, 0, 0, 0.4),
-            inset 0 2px 12px rgba(255, 255, 255, 0.06),
-            inset 0 -1px 4px rgba(255, 255, 255, 0.02);
-        --enhanced-glass-shadow-medium:
-            0 10px 40px rgba(0, 0, 0, 0.5),
-            inset 0 4px 20px rgba(255, 255, 255, 0.08),
-            inset 0 -2px 8px rgba(255, 255, 255, 0.03);
-        --enhanced-glass-shadow-strong:
-            0 16px 64px rgba(0, 0, 0, 0.6),
-            inset 0 6px 32px rgba(255, 255, 255, 0.12),
-            inset 0 -3px 12px rgba(255, 255, 255, 0.04);
-        --enhanced-glass-shadow-extreme:
-            0 24px 96px rgba(0, 0, 0, 0.7),
-            inset 0 8px 48px rgba(255, 255, 255, 0.16),
-            inset 0 -4px 16px rgba(255, 255, 255, 0.06);
+    25% {
+      transform: translate3d(0.5px, -0.3px, 0);
     }
 
-    /* Enhanced Apple Liquid Glass Base Component */
-    .enhanced-apple-liquid-glass {
-        position: relative;
-        display: flex;
-        border-radius: var(--enhanced-glass-radius-medium);
-        overflow: hidden;
-        isolation: isolate;
-        will-change: transform, box-shadow, filter;
-        transition: var(--enhanced-glass-transition);
-        transform-style: preserve-3d;
-        perspective: 1000px;
-
-        /* Pixel-Perfect Rendering Optimizations */
-        backface-visibility: hidden;
-        -webkit-font-smoothing: subpixel-antialiased;
-        -moz-osx-font-smoothing: auto;
-        text-rendering: var(--subpixel-rendering);
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
+    50% {
+      transform: translate3d(-0.3px, 0.5px, 0);
     }
 
-    /* Pixel-Perfect Enhancement */
-    .enhanced-apple-liquid-glass--pixel-perfect {
-        transform: translateZ(0) scale(var(--retina-scale));
-        transform-origin: 0 0;
+    75% {
+      transform: translate3d(0.3px, 0.3px, 0);
     }
 
-    /* Enhanced Backdrop Layer - Blur and Saturation Effects */
-    .enhanced-glass-backdrop {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        backdrop-filter: var(--enhanced-glass-blur-medium);
-        -webkit-backdrop-filter: var(--enhanced-glass-blur-medium);
-        isolation: isolate;
-        will-change: transform, filter;
-        transform: translateZ(0);
+    100% {
+      transform: translate3d(-0.5px, -0.5px, 0);
+    }
+  }
 
-        /* Pixel-Perfect Backdrop Rendering */
-        backface-visibility: hidden;
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
+  @keyframes enhanced-backdrop-flow {
+    0% {
+      backdrop-filter: blur(20px) saturate(180%) brightness(110%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(110%);
     }
 
-    /* Enhanced Overlay Layer - Background Tinting */
-    .enhanced-glass-overlay {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        background: var(--enhanced-glass-bg-medium);
-        border: 1px solid var(--enhanced-glass-border-medium);
-        border-radius: var(--enhanced-glass-radius-medium);
-        box-shadow: var(--enhanced-glass-shadow-medium);
-        will-change: transform, background, border-color;
-        transform: translateZ(1px);
-
-        /* Enhanced Overlay Effects */
-        background-blend-mode: multiply;
-        mix-blend-mode: normal;
+    50% {
+      backdrop-filter: blur(22px) saturate(185%) brightness(112%);
+      -webkit-backdrop-filter: blur(22px) saturate(185%) brightness(112%);
     }
 
-    /* Enhanced Specular Layer - Highlight Reflections */
-    .enhanced-glass-specular {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        border-radius: var(--enhanced-glass-radius-medium);
-        box-shadow:
-            inset 1px 1px 0 var(--enhanced-glass-highlight-medium),
-            inset 0 0 8px var(--enhanced-glass-reflection-medium),
-            inset -1px -1px 0 rgba(0, 0, 0, 0.1);
-        pointer-events: none;
-        will-change: transform, box-shadow;
-        transform: translateZ(2px);
+    100% {
+      backdrop-filter: blur(18px) saturate(175%) brightness(108%);
+      -webkit-backdrop-filter: blur(18px) saturate(175%) brightness(108%);
+    }
+  }
 
-        /* Enhanced Specular Effects */
-        background: linear-gradient(135deg,
-                var(--enhanced-glass-highlight-medium) 0%,
-                transparent 50%,
-                var(--enhanced-glass-reflection-medium) 100%);
-        opacity: 0.7;
-        mix-blend-mode: screen;
+  @keyframes enhanced-specular-shimmer {
+    0% {
+      opacity: 0.7;
+      box-shadow:
+        inset 1px 1px 0 var(--enhanced-glass-highlight-medium),
+        inset 0 0 8px var(--enhanced-glass-reflection-medium);
     }
 
-    /* Enhanced Content Layer - Actual Component Content */
-    .enhanced-glass-content {
-        position: relative;
-        z-index: 3;
-        display: flex;
-        align-items: center;
-        color: var(--enhanced-glass-text);
-        text-shadow: var(--enhanced-glass-text-shadow);
-        font-weight: var(--enhanced-glass-font-weight);
-        padding: 1rem 1.5rem;
-        will-change: transform;
-        transform: translateZ(3px);
-
-        /* Enhanced Typography Rendering */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
+    50% {
+      opacity: 0.85;
+      box-shadow:
+        inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 0 12px rgba(255, 255, 255, 0.5);
     }
 
-    /* Intensity Variants - Enhanced Multi-Layer Structure */
-    .enhanced-apple-liquid-glass--subtle {
-        border-radius: var(--enhanced-glass-radius-subtle);
+    100% {
+      opacity: 0.6;
+      box-shadow:
+        inset 1px 1px 0 var(--enhanced-glass-highlight-medium),
+        inset 0 0 6px var(--enhanced-glass-reflection-medium);
     }
+  }
 
-    .enhanced-apple-liquid-glass--subtle .enhanced-glass-backdrop {
-        backdrop-filter: var(--enhanced-glass-blur-subtle);
-        -webkit-backdrop-filter: var(--enhanced-glass-blur-subtle);
-    }
-
-    .enhanced-apple-liquid-glass--subtle .enhanced-glass-overlay {
-        background: var(--enhanced-glass-bg-subtle);
-        border-color: var(--enhanced-glass-border-subtle);
-        border-radius: var(--enhanced-glass-radius-subtle);
-        box-shadow: var(--enhanced-glass-shadow-subtle);
-    }
-
-    .enhanced-apple-liquid-glass--subtle .enhanced-glass-specular {
-        border-radius: var(--enhanced-glass-radius-subtle);
-        box-shadow:
-            inset 1px 1px 0 var(--enhanced-glass-highlight-subtle),
-            inset 0 0 6px var(--enhanced-glass-reflection-subtle);
-        background: linear-gradient(135deg,
-                var(--enhanced-glass-highlight-subtle) 0%,
-                transparent 50%,
-                var(--enhanced-glass-reflection-subtle) 100%);
-    }
-
-    .enhanced-apple-liquid-glass--strong {
-        border-radius: var(--enhanced-glass-radius-strong);
-    }
-
-    .enhanced-apple-liquid-glass--strong .enhanced-glass-backdrop {
-        backdrop-filter: var(--enhanced-glass-blur-strong);
-        -webkit-backdrop-filter: var(--enhanced-glass-blur-strong);
-    }
-
-    .enhanced-apple-liquid-glass--strong .enhanced-glass-overlay {
-        background: var(--enhanced-glass-bg-strong);
-        border-color: var(--enhanced-glass-border-strong);
-        border-radius: var(--enhanced-glass-radius-strong);
-        box-shadow: var(--enhanced-glass-shadow-strong);
-    }
-
-    .enhanced-apple-liquid-glass--strong .enhanced-glass-specular {
-        border-radius: var(--enhanced-glass-radius-strong);
-        box-shadow:
-            inset 1px 1px 0 var(--enhanced-glass-highlight-strong),
-            inset 0 0 10px var(--enhanced-glass-reflection-strong);
-        background: linear-gradient(135deg,
-                var(--enhanced-glass-highlight-strong) 0%,
-                transparent 50%,
-                var(--enhanced-glass-reflection-strong) 100%);
-    }
-
-    .enhanced-apple-liquid-glass--extreme {
-        border-radius: var(--enhanced-glass-radius-extreme);
-    }
-
-    .enhanced-apple-liquid-glass--extreme .enhanced-glass-backdrop {
-        backdrop-filter: var(--enhanced-glass-blur-extreme);
-        -webkit-backdrop-filter: var(--enhanced-glass-blur-extreme);
-    }
-
-    .enhanced-apple-liquid-glass--extreme .enhanced-glass-overlay {
-        background: var(--enhanced-glass-bg-extreme);
-        border-color: var(--enhanced-glass-border-extreme);
-        border-radius: var(--enhanced-glass-radius-extreme);
-        box-shadow: var(--enhanced-glass-shadow-extreme);
-    }
-
-    .enhanced-apple-liquid-glass--extreme .enhanced-glass-specular {
-        border-radius: var(--enhanced-glass-radius-extreme);
-        box-shadow:
-            inset 1px 1px 0 var(--enhanced-glass-highlight-extreme),
-            inset 0 0 12px var(--enhanced-glass-reflection-extreme);
-        background: linear-gradient(135deg,
-                var(--enhanced-glass-highlight-extreme) 0%,
-                transparent 50%,
-                var(--enhanced-glass-reflection-extreme) 100%);
-    }
-
-    /* Enhanced Interactive States - Apple-Quality Micro-Interactions */
-    .enhanced-apple-liquid-glass--interactive {
-        cursor: pointer;
-        user-select: none;
+  /* Reduced Motion Support - Accessibility First */
+  @media (prefers-reduced-motion: reduce) {
+    .enhanced-apple-liquid-glass,
+    .enhanced-apple-liquid-glass *,
+    .enhanced-apple-liquid-glass--animated,
+    .enhanced-apple-liquid-glass--magnetic {
+      animation: none !important;
+      transition: none !important;
     }
 
     .enhanced-apple-liquid-glass--interactive:hover {
-        transform: translateY(-3px) scale(1.02) translateZ(0);
-        transition: var(--enhanced-glass-spring);
-    }
-
-    .enhanced-apple-liquid-glass--interactive:hover .enhanced-glass-backdrop {
-        backdrop-filter: blur(24px) saturate(200%) brightness(115%);
-        -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(115%);
-    }
-
-    .enhanced-apple-liquid-glass--interactive:hover .enhanced-glass-overlay {
-        box-shadow:
-            0 16px 64px rgba(31, 38, 135, 0.35),
-            0 0 80px rgba(255, 255, 255, 0.15),
-            inset 0 8px 32px rgba(255, 255, 255, 0.45);
-    }
-
-    .enhanced-apple-liquid-glass--interactive:hover .enhanced-glass-specular {
-        box-shadow:
-            inset 1px 1px 0 rgba(255, 255, 255, 1),
-            inset 0 0 12px rgba(255, 255, 255, 0.6),
-            inset -1px -1px 0 rgba(0, 0, 0, 0.05);
-        opacity: 0.9;
+      transform: none;
     }
 
     .enhanced-apple-liquid-glass--interactive:active {
-        transform: translateY(-1px) scale(0.98) translateZ(0);
-        transition: var(--enhanced-glass-micro);
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
+    }
+  }
+
+  /* High Contrast Mode Support */
+  @media (prefers-contrast: high) {
+    .enhanced-apple-liquid-glass {
+      border: 2px solid currentColor;
     }
 
-    .enhanced-apple-liquid-glass--interactive:active .enhanced-glass-overlay {
-        box-shadow:
-            0 8px 32px rgba(31, 38, 135, 0.2),
-            0 0 40px rgba(255, 255, 255, 0.08),
-            inset 0 4px 16px rgba(255, 255, 255, 0.25);
+    .enhanced-glass-overlay {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: currentColor;
     }
 
-    .enhanced-apple-liquid-glass--interactive:focus-visible {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.4);
+    .enhanced-glass-content {
+      color: currentColor;
+      text-shadow: none;
+    }
+  }
+
+  /* Print Styles - Graceful Degradation */
+  @media print {
+    .enhanced-apple-liquid-glass {
+      background: white;
+      border: 1px solid #ccc;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
     }
 
-    /* Enhanced Magnetic Hover Effect */
-    .enhanced-apple-liquid-glass--magnetic {
-        transition: var(--enhanced-glass-spring);
+    .enhanced-glass-backdrop,
+    .enhanced-glass-overlay,
+    .enhanced-glass-specular {
+      display: none;
     }
 
-    .enhanced-apple-liquid-glass--magnetic .enhanced-glass-backdrop,
-    .enhanced-apple-liquid-glass--magnetic .enhanced-glass-overlay,
-    .enhanced-apple-liquid-glass--magnetic .enhanced-glass-specular {
-        transition: var(--enhanced-glass-spring);
+    .enhanced-glass-content {
+      color: black;
+      text-shadow: none;
     }
-
-    /* Enhanced Liquid Animation Effects */
-    .enhanced-apple-liquid-glass--animated {
-        animation: enhanced-liquid-flow 6s ease-in-out infinite alternate;
-    }
-
-    .enhanced-apple-liquid-glass--animated .enhanced-glass-backdrop {
-        animation: enhanced-backdrop-flow 8s ease-in-out infinite alternate-reverse;
-    }
-
-    .enhanced-apple-liquid-glass--animated .enhanced-glass-specular {
-        animation: enhanced-specular-shimmer 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes enhanced-liquid-flow {
-        0% {
-            transform: translate3d(0, 0, 0);
-        }
-
-        25% {
-            transform: translate3d(0.5px, -0.3px, 0);
-        }
-
-        50% {
-            transform: translate3d(-0.3px, 0.5px, 0);
-        }
-
-        75% {
-            transform: translate3d(0.3px, 0.3px, 0);
-        }
-
-        100% {
-            transform: translate3d(-0.5px, -0.5px, 0);
-        }
-    }
-
-    @keyframes enhanced-backdrop-flow {
-        0% {
-            backdrop-filter: blur(20px) saturate(180%) brightness(110%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(110%);
-        }
-
-        50% {
-            backdrop-filter: blur(22px) saturate(185%) brightness(112%);
-            -webkit-backdrop-filter: blur(22px) saturate(185%) brightness(112%);
-        }
-
-        100% {
-            backdrop-filter: blur(18px) saturate(175%) brightness(108%);
-            -webkit-backdrop-filter: blur(18px) saturate(175%) brightness(108%);
-        }
-    }
-
-    @keyframes enhanced-specular-shimmer {
-        0% {
-            opacity: 0.7;
-            box-shadow:
-                inset 1px 1px 0 var(--enhanced-glass-highlight-medium),
-                inset 0 0 8px var(--enhanced-glass-reflection-medium);
-        }
-
-        50% {
-            opacity: 0.85;
-            box-shadow:
-                inset 1px 1px 0 rgba(255, 255, 255, 0.9),
-                inset 0 0 12px rgba(255, 255, 255, 0.5);
-        }
-
-        100% {
-            opacity: 0.6;
-            box-shadow:
-                inset 1px 1px 0 var(--enhanced-glass-highlight-medium),
-                inset 0 0 6px var(--enhanced-glass-reflection-medium);
-        }
-    }
-
-    /* Reduced Motion Support - Accessibility First */
-    @media (prefers-reduced-motion: reduce) {
-
-        .enhanced-apple-liquid-glass,
-        .enhanced-apple-liquid-glass *,
-        .enhanced-apple-liquid-glass--animated,
-        .enhanced-apple-liquid-glass--magnetic {
-            animation: none !important;
-            transition: none !important;
-        }
-
-        .enhanced-apple-liquid-glass--interactive:hover {
-            transform: none;
-        }
-
-        .enhanced-apple-liquid-glass--interactive:active {
-            transform: scale(0.98);
-            transition: transform 0.1s ease;
-        }
-    }
-
-    /* High Contrast Mode Support */
-    @media (prefers-contrast: high) {
-        .enhanced-apple-liquid-glass {
-            border: 2px solid currentColor;
-        }
-
-        .enhanced-glass-overlay {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: currentColor;
-        }
-
-        .enhanced-glass-content {
-            color: currentColor;
-            text-shadow: none;
-        }
-    }
-
-    /* Print Styles - Graceful Degradation */
-    @media print {
-        .enhanced-apple-liquid-glass {
-            background: white;
-            border: 1px solid #ccc;
-            box-shadow: none;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-        }
-
-        .enhanced-glass-backdrop,
-        .enhanced-glass-overlay,
-        .enhanced-glass-specular {
-            display: none;
-        }
-
-        .enhanced-glass-content {
-            color: black;
-            text-shadow: none;
-        }
-    }
+  }
 }
 
 /* Enhanced Utility Classes */
 @layer utilities {
+  /* Pixel-Perfect Utilities */
+  .pixel-perfect {
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+    text-rendering: optimizeSpeed;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 
-    /* Pixel-Perfect Utilities */
-    .pixel-perfect {
-        backface-visibility: hidden;
-        -webkit-font-smoothing: subpixel-antialiased;
-        -moz-osx-font-smoothing: auto;
-        text-rendering: optimizeSpeed;
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-    }
+  .retina-optimized {
+    transform: translateZ(0) scale(var(--retina-scale));
+    transform-origin: 0 0;
+  }
 
-    .retina-optimized {
-        transform: translateZ(0) scale(var(--retina-scale));
-        transform-origin: 0 0;
-    }
+  /* Enhanced Glass Background Utilities */
+  .bg-enhanced-glass-subtle {
+    background: var(--enhanced-glass-bg-subtle);
+  }
 
-    /* Enhanced Glass Background Utilities */
-    .bg-enhanced-glass-subtle {
-        background: var(--enhanced-glass-bg-subtle);
-    }
+  .bg-enhanced-glass-medium {
+    background: var(--enhanced-glass-bg-medium);
+  }
 
-    .bg-enhanced-glass-medium {
-        background: var(--enhanced-glass-bg-medium);
-    }
+  .bg-enhanced-glass-strong {
+    background: var(--enhanced-glass-bg-strong);
+  }
 
-    .bg-enhanced-glass-strong {
-        background: var(--enhanced-glass-bg-strong);
-    }
+  .bg-enhanced-glass-extreme {
+    background: var(--enhanced-glass-bg-extreme);
+  }
 
-    .bg-enhanced-glass-extreme {
-        background: var(--enhanced-glass-bg-extreme);
-    }
+  /* Enhanced Backdrop Blur Utilities */
+  .backdrop-blur-enhanced-subtle {
+    backdrop-filter: var(--enhanced-glass-blur-subtle);
+    -webkit-backdrop-filter: var(--enhanced-glass-blur-subtle);
+  }
 
-    /* Enhanced Backdrop Blur Utilities */
-    .backdrop-blur-enhanced-subtle {
-        backdrop-filter: var(--enhanced-glass-blur-subtle);
-        -webkit-backdrop-filter: var(--enhanced-glass-blur-subtle);
-    }
+  .backdrop-blur-enhanced-medium {
+    backdrop-filter: var(--enhanced-glass-blur-medium);
+    -webkit-backdrop-filter: var(--enhanced-glass-blur-medium);
+  }
 
-    .backdrop-blur-enhanced-medium {
-        backdrop-filter: var(--enhanced-glass-blur-medium);
-        -webkit-backdrop-filter: var(--enhanced-glass-blur-medium);
-    }
+  .backdrop-blur-enhanced-strong {
+    backdrop-filter: var(--enhanced-glass-blur-strong);
+    -webkit-backdrop-filter: var(--enhanced-glass-blur-strong);
+  }
 
-    .backdrop-blur-enhanced-strong {
-        backdrop-filter: var(--enhanced-glass-blur-strong);
-        -webkit-backdrop-filter: var(--enhanced-glass-blur-strong);
-    }
+  .backdrop-blur-enhanced-extreme {
+    backdrop-filter: var(--enhanced-glass-blur-extreme);
+    -webkit-backdrop-filter: var(--enhanced-glass-blur-extreme);
+  }
 
-    .backdrop-blur-enhanced-extreme {
-        backdrop-filter: var(--enhanced-glass-blur-extreme);
-        -webkit-backdrop-filter: var(--enhanced-glass-blur-extreme);
-    }
+  /* Enhanced Shadow Utilities */
+  .shadow-enhanced-glass-subtle {
+    box-shadow: var(--enhanced-glass-shadow-subtle);
+  }
 
-    /* Enhanced Shadow Utilities */
-    .shadow-enhanced-glass-subtle {
-        box-shadow: var(--enhanced-glass-shadow-subtle);
-    }
+  .shadow-enhanced-glass-medium {
+    box-shadow: var(--enhanced-glass-shadow-medium);
+  }
 
-    .shadow-enhanced-glass-medium {
-        box-shadow: var(--enhanced-glass-shadow-medium);
-    }
+  .shadow-enhanced-glass-strong {
+    box-shadow: var(--enhanced-glass-shadow-strong);
+  }
 
-    .shadow-enhanced-glass-strong {
-        box-shadow: var(--enhanced-glass-shadow-strong);
-    }
+  .shadow-enhanced-glass-extreme {
+    box-shadow: var(--enhanced-glass-shadow-extreme);
+  }
 
-    .shadow-enhanced-glass-extreme {
-        box-shadow: var(--enhanced-glass-shadow-extreme);
-    }
+  /* Enhanced Border Utilities */
+  .border-enhanced-glass-subtle {
+    border: 1px solid var(--enhanced-glass-border-subtle);
+  }
 
-    /* Enhanced Border Utilities */
-    .border-enhanced-glass-subtle {
-        border: 1px solid var(--enhanced-glass-border-subtle);
-    }
+  .border-enhanced-glass-medium {
+    border: 1px solid var(--enhanced-glass-border-medium);
+  }
 
-    .border-enhanced-glass-medium {
-        border: 1px solid var(--enhanced-glass-border-medium);
-    }
+  .border-enhanced-glass-strong {
+    border: 1px solid var(--enhanced-glass-border-strong);
+  }
 
-    .border-enhanced-glass-strong {
-        border: 1px solid var(--enhanced-glass-border-strong);
-    }
+  .border-enhanced-glass-extreme {
+    border: 1px solid var(--enhanced-glass-border-extreme);
+  }
 
-    .border-enhanced-glass-extreme {
-        border: 1px solid var(--enhanced-glass-border-extreme);
-    }
+  /* Enhanced Radius Utilities */
+  .rounded-enhanced-glass-subtle {
+    border-radius: var(--enhanced-glass-radius-subtle);
+  }
 
-    /* Enhanced Radius Utilities */
-    .rounded-enhanced-glass-subtle {
-        border-radius: var(--enhanced-glass-radius-subtle);
-    }
+  .rounded-enhanced-glass-medium {
+    border-radius: var(--enhanced-glass-radius-medium);
+  }
 
-    .rounded-enhanced-glass-medium {
-        border-radius: var(--enhanced-glass-radius-medium);
-    }
+  .rounded-enhanced-glass-strong {
+    border-radius: var(--enhanced-glass-radius-strong);
+  }
 
-    .rounded-enhanced-glass-strong {
-        border-radius: var(--enhanced-glass-radius-strong);
-    }
+  .rounded-enhanced-glass-extreme {
+    border-radius: var(--enhanced-glass-radius-extreme);
+  }
 
-    .rounded-enhanced-glass-extreme {
-        border-radius: var(--enhanced-glass-radius-extreme);
-    }
+  /* Enhanced Transition Utilities */
+  .transition-enhanced-glass {
+    transition: var(--enhanced-glass-transition);
+  }
 
-    /* Enhanced Transition Utilities */
-    .transition-enhanced-glass {
-        transition: var(--enhanced-glass-transition);
-    }
+  .transition-enhanced-spring {
+    transition: var(--enhanced-glass-spring);
+  }
 
-    .transition-enhanced-spring {
-        transition: var(--enhanced-glass-spring);
-    }
+  .transition-enhanced-micro {
+    transition: var(--enhanced-glass-micro);
+  }
 
-    .transition-enhanced-micro {
-        transition: var(--enhanced-glass-micro);
-    }
+  /* Enhanced Text Utilities */
+  .text-enhanced-glass {
+    color: var(--enhanced-glass-text);
+    text-shadow: var(--enhanced-glass-text-shadow);
+    font-weight: var(--enhanced-glass-font-weight);
+  }
 
-    /* Enhanced Text Utilities */
-    .text-enhanced-glass {
-        color: var(--enhanced-glass-text);
-        text-shadow: var(--enhanced-glass-text-shadow);
-        font-weight: var(--enhanced-glass-font-weight);
-    }
+  /* 3D Transform Utilities */
+  .transform-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
 
-    /* 3D Transform Utilities */
-    .transform-3d {
-        transform-style: preserve-3d;
-        perspective: 1000px;
-    }
+  .translate-z-0 {
+    transform: translateZ(0);
+  }
 
-    .translate-z-0 {
-        transform: translateZ(0);
-    }
+  .translate-z-1 {
+    transform: translateZ(1px);
+  }
 
-    .translate-z-1 {
-        transform: translateZ(1px);
-    }
+  .translate-z-2 {
+    transform: translateZ(2px);
+  }
 
-    .translate-z-2 {
-        transform: translateZ(2px);
-    }
-
-    .translate-z-3 {
-        transform: translateZ(3px);
-    }
+  .translate-z-3 {
+    transform: translateZ(3px);
+  }
 }

@@ -33,7 +33,8 @@
       "Bash(gh run view:*)",
       "Bash(npm update:*)",
       "Bash(npm install:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(chmod:*)"
     ],
     "deny": []
   }

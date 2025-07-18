@@ -9,6 +9,8 @@
  * @returns {boolean} true if running in browser, false if server-side
  */
 export const isBrowser = (): boolean => typeof window !== 'undefined';
+export const isClient = isBrowser;
+export const isServer = (): boolean => !isBrowser();
 
 /**
  * Check if document object is available

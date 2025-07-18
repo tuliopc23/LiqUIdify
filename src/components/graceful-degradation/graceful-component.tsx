@@ -58,9 +58,15 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
   }
 
   if (shouldFallback) {
-    if (staticFallback && (!networkStatus.online || performanceLevel === 'low')) {
+    if (
+      staticFallback &&
+      (!networkStatus.online || performanceLevel === 'low')
+    ) {
       return (
-        <div className={`graceful-component graceful-static-fallback ${degradationClass}`} style={style}>
+        <div
+          className={`graceful-component graceful-static-fallback ${degradationClass}`}
+          style={style}
+        >
           {staticFallback}
         </div>
       );
@@ -68,7 +74,10 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
 
     if (fallback) {
       return (
-        <div className={`graceful-component graceful-fallback ${degradationClass}`} style={style}>
+        <div
+          className={`graceful-component graceful-fallback ${degradationClass}`}
+          style={style}
+        >
           {fallback}
         </div>
       );
@@ -76,7 +85,10 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
 
     // Default fallback
     return (
-      <div className={`graceful-component graceful-static-fallback ${degradationClass}`} style={style}>
+      <div
+        className={`graceful-component graceful-static-fallback ${degradationClass}`}
+        style={style}
+      >
         <p>Feature temporarily unavailable</p>
       </div>
     );
@@ -112,7 +124,8 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const shouldUseLowQuality = !networkStatus.online || performanceLevel === 'low';
+  const shouldUseLowQuality =
+    !networkStatus.online || performanceLevel === 'low';
   const processedSrc = shouldUseLowQuality && fallbackSrc ? fallbackSrc : src;
 
   const handleError = () => {
@@ -138,9 +151,7 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
   return (
     <div className={`graceful-image-container ${className}`} style={style}>
       {!imageLoaded && placeholder && (
-        <div className="graceful-image-placeholder">
-          {placeholder}
-        </div>
+        <div className="graceful-image-placeholder">{placeholder}</div>
       )}
       <img
         src={processedSrc}
@@ -180,18 +191,28 @@ export const GracefulAnimation: React.FC<GracefulAnimationProps> = ({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (!disabled && !prefersReducedMotion && !shouldUseFallback('animations')) {
+    if (
+      !disabled &&
+      !prefersReducedMotion &&
+      !shouldUseFallback('animations')
+    ) {
       const timer = setTimeout(() => setIsVisible(true), delay);
       return () => clearTimeout(timer);
     } else {
       setIsVisible(true);
     }
+
+    return undefined;
   }, [disabled, prefersReducedMotion, shouldUseFallback, delay]);
 
   const animationStyle: React.CSSProperties = {
-    animation: isVisible && !disabled && !prefersReducedMotion && !shouldUseFallback('animations')
-      ? `${animation} ${duration}ms ease-out forwards`
-      : 'none',
+    animation:
+      isVisible &&
+      !disabled &&
+      !prefersReducedMotion &&
+      !shouldUseFallback('animations')
+        ? `${animation} ${duration}ms ease-out forwards`
+        : 'none',
     opacity: isVisible ? 1 : 0,
   };
 
@@ -221,11 +242,13 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
   muted = false,
   loop = false,
 }) => {
-  const { shouldUseFallback, networkStatus, performanceLevel } = useDegradationAware();
+  const { shouldUseFallback, networkStatus, performanceLevel } =
+    useDegradationAware();
   const [videoError, setVideoError] = useState(false);
 
-  const shouldUseStatic = !networkStatus.online || 
-    performanceLevel === 'low' || 
+  const shouldUseStatic =
+    !networkStatus.online ||
+    performanceLevel === 'low' ||
     shouldUseFallback('webGL');
 
   const handleError = () => {
@@ -236,7 +259,11 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
     return (
       <div className={`graceful-video-fallback ${className}`}>
         {fallbackImage ? (
-          <img src={fallbackImage} alt="Video fallback" className="graceful-video-fallback-image" />
+          <img
+            src={fallbackImage}
+            alt="Video fallback"
+            className="graceful-video-fallback-image"
+          />
         ) : (
           <div className="graceful-video-placeholder">
             <p>Video unavailable</p>
@@ -297,7 +324,7 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
   }
 
   return (
-    <div 
+    <div
       className={`graceful-interactive ${className}`}
       onClick={onInteraction}
     >
@@ -338,13 +365,13 @@ export const CSSTabs: React.FC<{
   return (
     <div className={`css-tabs-fallback ${className}`}>
       <div className="tab-list">
-        {tabs.map((tab) => (
+        {tabs.map(tab => (
           <a key={tab.id} href={`#${tab.id}`} className="tab-trigger">
             {tab.label}
           </a>
         ))}
       </div>
-      {tabs.map((tab) => (
+      {tabs.map(tab => (
         <div key={tab.id} id={tab.id} className="tab-content">
           {tab.content}
         </div>
@@ -364,7 +391,9 @@ export const CSSModal: React.FC<{
       <a href={`#${modalId}`}>{trigger}</a>
       <div id={modalId} className="css-modal-fallback">
         <div className="modal-content">
-          <a href="#" style={{ float: 'right' }}>×</a>
+          <a href="#" style={{ float: 'right' }}>
+            ×
+          </a>
           {content}
         </div>
       </div>

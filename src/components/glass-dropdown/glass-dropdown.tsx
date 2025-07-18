@@ -69,6 +69,8 @@ export const GlassDropdown = React.forwardRef<
           document.removeEventListener('keydown', handleEscape);
         };
       }
+
+      return undefined;
     }, [isOpen]);
 
     useEffect(() => {

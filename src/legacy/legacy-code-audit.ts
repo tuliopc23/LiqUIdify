@@ -5,7 +5,12 @@
 
 export interface LegacyCodePattern {
   id: string;
-  type: 'deprecated-api' | 'duplicate-implementation' | 'inconsistent-pattern' | 'performance-issue' | 'accessibility-issue';
+  type:
+    | 'deprecated-api'
+    | 'duplicate-implementation'
+    | 'inconsistent-pattern'
+    | 'performance-issue'
+    | 'accessibility-issue';
   severity: 'critical' | 'high' | 'medium' | 'low';
   description: string;
   filePath: string;
@@ -71,22 +76,25 @@ export class LegacyCodeAuditor {
         id: 'legacy-class-components',
         type: 'deprecated-api',
         severity: 'medium',
-        description: 'Class components should be migrated to functional components with hooks',
+        description:
+          'Class components should be migrated to functional components with hooks',
         filePath: 'src/components/**/*.tsx',
         lineNumber: 0,
         columnNumber: 0,
         currentCode: 'class MyComponent extends React.Component',
-        recommendedFix: 'Convert to functional component with useState, useEffect hooks',
+        recommendedFix:
+          'Convert to functional component with useState, useEffect hooks',
         migrationPath: 'react-codemod/class-to-function',
         effortEstimate: 'medium',
         dependencies: ['@types/react', 'react-codemod'],
-        breakingChanges: false
+        breakingChanges: false,
       },
       {
         id: 'legacy-lifecycle-methods',
         type: 'deprecated-api',
         severity: 'medium',
-        description: 'componentDidMount, componentDidUpdate, componentWillUnmount should use useEffect',
+        description:
+          'componentDidMount, componentDidUpdate, componentWillUnmount should use useEffect',
         filePath: 'src/components/**/*.tsx',
         lineNumber: 0,
         columnNumber: 0,
@@ -95,45 +103,51 @@ export class LegacyCodeAuditor {
         migrationPath: 'react-codemod/lifecycle-to-hooks',
         effortEstimate: 'medium',
         dependencies: ['react-codemod'],
-        breakingChanges: false
+        breakingChanges: false,
       },
       // Duplicate implementations
       {
         id: 'duplicate-glass-effects',
         type: 'duplicate-implementation',
         severity: 'high',
-        description: 'Multiple glass effect implementations found across codebase',
+        description:
+          'Multiple glass effect implementations found across codebase',
         filePath: 'src/styles/glass-*.css',
         lineNumber: 0,
         columnNumber: 0,
-        currentCode: 'Multiple .glass-* classes with similar but inconsistent styles',
-        recommendedFix: 'Consolidate into unified glass system with CSS custom properties',
+        currentCode:
+          'Multiple .glass-* classes with similar but inconsistent styles',
+        recommendedFix:
+          'Consolidate into unified glass system with CSS custom properties',
         migrationPath: 'src/styles/glass-system.css',
         effortEstimate: 'large',
         dependencies: ['postcss', 'cssnano'],
-        breakingChanges: true
+        breakingChanges: true,
       },
       {
         id: 'duplicate-animation-systems',
         type: 'duplicate-implementation',
         severity: 'high',
-        description: 'Multiple animation systems (CSS, JS, GSAP) with overlapping functionality',
+        description:
+          'Multiple animation systems (CSS, JS, GSAP) with overlapping functionality',
         filePath: 'src/animations/**/*.ts',
         lineNumber: 0,
         columnNumber: 0,
         currentCode: 'Multiple animation implementations',
-        recommendedFix: 'Unify under single animation system with plugin architecture',
+        recommendedFix:
+          'Unify under single animation system with plugin architecture',
         migrationPath: 'src/animations/unified-system.ts',
         effortEstimate: 'extra-large',
         dependencies: ['gsap', 'framer-motion'],
-        breakingChanges: true
+        breakingChanges: true,
       },
       // Inconsistent patterns
       {
         id: 'inconsistent-state-management',
         type: 'inconsistent-pattern',
         severity: 'medium',
-        description: 'Mixed state management approaches (useState, useReducer, context)',
+        description:
+          'Mixed state management approaches (useState, useReducer, context)',
         filePath: 'src/components/**/*.tsx',
         lineNumber: 0,
         columnNumber: 0,
@@ -142,7 +156,7 @@ export class LegacyCodeAuditor {
         migrationPath: 'src/state-management/standardized-patterns.ts',
         effortEstimate: 'medium',
         dependencies: ['react', 'zustand'],
-        breakingChanges: false
+        breakingChanges: false,
       },
       {
         id: 'inconsistent-prop-interfaces',
@@ -157,14 +171,15 @@ export class LegacyCodeAuditor {
         migrationPath: 'src/types/component-props.ts',
         effortEstimate: 'medium',
         dependencies: ['typescript'],
-        breakingChanges: false
+        breakingChanges: false,
       },
       // Performance issues
       {
         id: 'unnecessary-re-renders',
         type: 'performance-issue',
         severity: 'high',
-        description: 'Components re-rendering unnecessarily due to missing memoization',
+        description:
+          'Components re-rendering unnecessarily due to missing memoization',
         filePath: 'src/components/**/*.tsx',
         lineNumber: 0,
         columnNumber: 0,
@@ -173,7 +188,7 @@ export class LegacyCodeAuditor {
         migrationPath: 'performance/memoization-guide.md',
         effortEstimate: 'medium',
         dependencies: ['react'],
-        breakingChanges: false
+        breakingChanges: false,
       },
       {
         id: 'large-bundle-imports',
@@ -184,11 +199,12 @@ export class LegacyCodeAuditor {
         lineNumber: 0,
         columnNumber: 0,
         currentCode: 'import * as _ from "lodash"',
-        recommendedFix: 'Use tree-shaking imports: import { debounce } from "lodash"',
+        recommendedFix:
+          'Use tree-shaking imports: import { debounce } from "lodash"',
         migrationPath: 'performance/import-optimization.md',
         effortEstimate: 'small',
         dependencies: ['webpack-bundle-analyzer'],
-        breakingChanges: false
+        breakingChanges: false,
       },
       // Accessibility issues
       {
@@ -204,23 +220,25 @@ export class LegacyCodeAuditor {
         migrationPath: 'accessibility/aria-guide.md',
         effortEstimate: 'medium',
         dependencies: ['axe-core'],
-        breakingChanges: false
+        breakingChanges: false,
       },
       {
         id: 'keyboard-navigation-issues',
         type: 'accessibility-issue',
         severity: 'high',
-        description: 'Components not keyboard navigable or missing focus indicators',
+        description:
+          'Components not keyboard navigable or missing focus indicators',
         filePath: 'src/components/**/*.tsx',
         lineNumber: 0,
         columnNumber: 0,
         currentCode: 'Missing tabindex, focus styles, keyboard handlers',
-        recommendedFix: 'Implement proper keyboard navigation and focus management',
+        recommendedFix:
+          'Implement proper keyboard navigation and focus management',
         migrationPath: 'accessibility/keyboard-navigation.md',
         effortEstimate: 'medium',
         dependencies: ['focus-trap-react'],
-        breakingChanges: false
-      }
+        breakingChanges: false,
+      },
     ];
   }
 
@@ -237,7 +255,7 @@ export class LegacyCodeAuditor {
         foundPatterns.push({
           ...pattern,
           lineNumber: Math.floor(Math.random() * 1000) + 1,
-          columnNumber: Math.floor(Math.random() * 100) + 1
+          columnNumber: Math.floor(Math.random() * 100) + 1,
         });
       }
     });
@@ -254,19 +272,20 @@ export class LegacyCodeAuditor {
     // Calculate summary
     const summary = {
       totalIssues: foundPatterns.length,
-      criticalIssues: foundPatterns.filter(p => p.severity === 'critical').length,
+      criticalIssues: foundPatterns.filter(p => p.severity === 'critical')
+        .length,
       highIssues: foundPatterns.filter(p => p.severity === 'high').length,
       mediumIssues: foundPatterns.filter(p => p.severity === 'medium').length,
       lowIssues: foundPatterns.filter(p => p.severity === 'low').length,
       estimatedEffort: this.calculateEstimatedEffort(foundPatterns),
-      riskLevel: this.calculateRiskLevel(foundPatterns)
+      riskLevel: this.calculateRiskLevel(foundPatterns),
     };
 
     return {
       patterns: foundPatterns,
       summary,
       categories,
-      recommendations: this.generateRecommendations(foundPatterns)
+      recommendations: this.generateRecommendations(foundPatterns),
     };
   }
 
@@ -275,10 +294,10 @@ export class LegacyCodeAuditor {
    */
   private calculateEstimatedEffort(patterns: LegacyCodePattern[]): string {
     const effortMap = {
-      'small': 1,
-      'medium': 3,
-      'large': 8,
-      'extra-large': 20
+      small: 1,
+      medium: 3,
+      large: 8,
+      'extra-large': 20,
     };
 
     const totalEffort = patterns.reduce((sum, pattern) => {
@@ -294,8 +313,12 @@ export class LegacyCodeAuditor {
   /**
    * Calculate risk level
    */
-  private calculateRiskLevel(patterns: LegacyCodePattern[]): 'low' | 'medium' | 'high' | 'critical' {
-    const criticalCount = patterns.filter(p => p.severity === 'critical').length;
+  private calculateRiskLevel(
+    patterns: LegacyCodePattern[]
+  ): 'low' | 'medium' | 'high' | 'critical' {
+    const criticalCount = patterns.filter(
+      p => p.severity === 'critical'
+    ).length;
     const highCount = patterns.filter(p => p.severity === 'high').length;
     const breakingCount = patterns.filter(p => p.breakingChanges).length;
 
@@ -350,51 +373,78 @@ export class LegacyCodeAuditor {
       {
         id: 'react-19-upgrade',
         title: 'Upgrade to React 19 with Concurrent Features',
-        description: 'Migrate to React 19 with concurrent rendering, automatic batching, and new hooks',
+        description:
+          'Migrate to React 19 with concurrent rendering, automatic batching, and new hooks',
         currentImplementation: 'React 18 with manual optimization',
-        proposedImplementation: 'React 19 with useOptimistic, useFormStatus, and concurrent features',
-        benefits: ['Better performance', 'Improved user experience', 'Future-proof codebase'],
-        risks: ['Breaking changes', 'Browser compatibility', 'Testing overhead'],
+        proposedImplementation:
+          'React 19 with useOptimistic, useFormStatus, and concurrent features',
+        benefits: [
+          'Better performance',
+          'Improved user experience',
+          'Future-proof codebase',
+        ],
+        risks: [
+          'Breaking changes',
+          'Browser compatibility',
+          'Testing overhead',
+        ],
         effort: 'large',
         priority: 'high',
-        dependencies: ['react', 'react-dom', 'testing-library']
+        dependencies: ['react', 'react-dom', 'testing-library'],
       },
       {
         id: 'typescript-strict-mode',
         title: 'Enable TypeScript Strict Mode',
-        description: 'Enable strict TypeScript mode for better type safety and developer experience',
+        description:
+          'Enable strict TypeScript mode for better type safety and developer experience',
         currentImplementation: 'TypeScript with lenient configuration',
-        proposedImplementation: 'TypeScript strict mode with branded types and template literal types',
-        benefits: ['Better type safety', 'Improved IDE support', 'Fewer runtime errors'],
+        proposedImplementation:
+          'TypeScript strict mode with branded types and template literal types',
+        benefits: [
+          'Better type safety',
+          'Improved IDE support',
+          'Fewer runtime errors',
+        ],
         risks: ['Compilation errors', 'Migration effort', 'Developer training'],
         effort: 'medium',
         priority: 'high',
-        dependencies: ['typescript', 'eslint', 'prettier']
+        dependencies: ['typescript', 'eslint', 'prettier'],
       },
       {
         id: 'css-custom-properties',
         title: 'Migrate to CSS Custom Properties',
-        description: 'Replace hard-coded values with CSS custom properties for better theming',
+        description:
+          'Replace hard-coded values with CSS custom properties for better theming',
         currentImplementation: 'Hard-coded CSS values and inline styles',
         proposedImplementation: 'CSS custom properties with design tokens',
-        benefits: ['Better theming', 'Reduced bundle size', 'Improved maintainability'],
+        benefits: [
+          'Better theming',
+          'Reduced bundle size',
+          'Improved maintainability',
+        ],
         risks: ['Browser compatibility', 'Migration complexity'],
         effort: 'large',
         priority: 'medium',
-        dependencies: ['postcss', 'autoprefixer']
+        dependencies: ['postcss', 'autoprefixer'],
       },
       {
         id: 'component-library-standardization',
         title: 'Standardize Component Library',
-        description: 'Create consistent component patterns and remove duplicate implementations',
-        currentImplementation: 'Inconsistent component patterns across codebase',
+        description:
+          'Create consistent component patterns and remove duplicate implementations',
+        currentImplementation:
+          'Inconsistent component patterns across codebase',
         proposedImplementation: 'Unified component system with consistent APIs',
-        benefits: ['Better maintainability', 'Reduced bundle size', 'Improved developer experience'],
+        benefits: [
+          'Better maintainability',
+          'Reduced bundle size',
+          'Improved developer experience',
+        ],
         risks: ['Breaking changes', 'Migration effort'],
         effort: 'extra-large',
         priority: 'high',
-        dependencies: ['storybook', 'testing-library']
-      }
+        dependencies: ['storybook', 'testing-library'],
+      },
     ];
   }
 
@@ -414,20 +464,22 @@ export class LegacyCodeAuditor {
       'Phase 2: High-priority modernization opportunities',
       'Phase 3: Component library standardization',
       'Phase 4: Performance optimizations',
-      'Phase 5: Final polish and documentation'
+      'Phase 5: Final polish and documentation',
     ];
 
     return {
       inventory,
       opportunities,
-      roadmap
+      roadmap,
     };
   }
 
   /**
    * Create migration scripts
    */
-  public createMigrationScripts(patterns: LegacyCodePattern[]): Record<string, string> {
+  public createMigrationScripts(
+    patterns: LegacyCodePattern[]
+  ): Record<string, string> {
     const scripts: Record<string, string> = {};
 
     patterns.forEach(pattern => {

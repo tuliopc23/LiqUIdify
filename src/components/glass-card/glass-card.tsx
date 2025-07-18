@@ -1,21 +1,22 @@
 import { forwardRef } from 'react';
 import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
-import {
-  useAppleLiquidGlass,
-  getAppleLiquidGlassClass,
-  createGlassLayers,
-} from '@/lib/apple-liquid-glass';
-import { ComponentSize } from '@/types/branded';
+import { createGlassLayers, getAppleLiquidGlassClass, useAppleLiquidGlass } from '@/lib/apple-liquid-glass';
+import { createComponentSize } from '@/types/branded';
 
 // Type definitions for enhanced TypeScript support
-type ComponentVariant = 'default' | 'elevated' | 'outlined' | 'pressed' | 'apple';
+type ComponentVariant =
+  | 'default'
+  | 'elevated'
+  | 'outlined'
+  | 'pressed'
+  | 'apple';
 type GlassIntensity = 'subtle' | 'medium' | 'strong';
 
 export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: ComponentVariant;
   hover?: boolean;
   bordered?: boolean;
-  padding?: ComponentSize;
+  padding?: string;
   magnetic?: boolean;
   intensity?: GlassIntensity;
   multiLayer?: boolean;
@@ -29,7 +30,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       variant = 'default',
       hover = true,
       bordered = true,
-      padding = 'md',
+      padding = createComponentSize('md'),
       magnetic = false,
       intensity = 'medium',
       multiLayer = true,
@@ -37,7 +38,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const appleLiquidGlass = useAppleLiquidGlass({
       intensity,
@@ -73,14 +74,14 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     const baseClasses = cn(
       variant === 'apple' ? '' : 'rounded-xl',
       variantClasses[variant],
-      variant !== 'apple' && paddingClasses[padding],
+      variant !== 'apple' && paddingClasses[padding as keyof typeof paddingClasses],
       bordered &&
-        variant !== 'outlined' &&
-        variant !== 'apple' &&
-        'border border-[var(--glass-border)]',
+      variant !== 'outlined' &&
+      variant !== 'apple' &&
+      'border border-[var(--glass-border)]',
       hover && variant !== 'apple' && 'glass-hover cursor-pointer',
       variant !== 'apple' && microInteraction.smooth,
-      'will-change-transform'
+      'will-change-transform',
     );
 
     // Use Apple liquid glass ref for apple variant
@@ -94,7 +95,10 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
           className={cn(baseClasses, className)}
           {...props}
         >
-          {createGlassLayers(children, paddingClasses[padding])}
+          {createGlassLayers(
+            children,
+            paddingClasses[padding as keyof typeof paddingClasses],
+          )}
         </div>
       );
     }
@@ -108,7 +112,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 
 GlassCard.displayName = 'GlassCard';

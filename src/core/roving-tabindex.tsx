@@ -33,7 +33,9 @@ export interface RovingTabindexReturn {
  * Implements ARIA roving tabindex pattern for keyboard navigation
  * within composite widgets like menus, toolbars, and grids
  */
-export function useRovingTabindex(options: RovingTabindexOptions): RovingTabindexReturn {
+export function useRovingTabindex(
+  options: RovingTabindexOptions
+): RovingTabindexReturn {
   const {
     items,
     orientation = 'vertical',
@@ -48,7 +50,7 @@ export function useRovingTabindex(options: RovingTabindexOptions): RovingTabinde
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const typeaheadRef = useRef<string>('');
-  const typeaheadTimerRef = useRef<NodeJS.Timeout>();
+  const typeaheadTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Update tabindex attributes
   useEffect(() => {
@@ -66,196 +68,219 @@ export function useRovingTabindex(options: RovingTabindexOptions): RovingTabinde
     }
   }, [currentIndex, items, onActiveChange]);
 
-  const focusItem = useCallback((index: number) => {
-    if (items[index] && !items[index].hasAttribute('disabled')) {
-      items[index].focus({ preventScroll });
-      setCurrentIndex(index);
-    }
-  }, [items, preventScroll]);
-
-  const findNextEnabledIndex = useCallback((
-    startIndex: number,
-    direction: 1 | -1
-  ): number => {
-    const totalItems = items.length;
-    let currentIdx = startIndex;
-    let attempts = 0;
-
-    while (attempts < totalItems) {
-      currentIdx = (currentIdx + direction + totalItems) % totalItems;
-      
-      if (!items[currentIdx]?.hasAttribute('disabled')) {
-        return currentIdx;
+  const focusItem = useCallback(
+    (index: number) => {
+      if (items[index] && !items[index].hasAttribute('disabled')) {
+        items[index].focus({ preventScroll });
+        setCurrentIndex(index);
       }
-      
-      attempts++;
-    }
+    },
+    [items, preventScroll]
+  );
 
-    return startIndex; // All items disabled
-  }, [items]);
+  const findNextEnabledIndex = useCallback(
+    (startIndex: number, direction: 1 | -1): number => {
+      const totalItems = items.length;
+      let currentIdx = startIndex;
+      let attempts = 0;
 
-  const handleTypeahead = useCallback((char: string) => {
-    // Clear existing timer
-    if (typeaheadTimerRef.current) {
-      clearTimeout(typeaheadTimerRef.current);
-    }
+      while (attempts < totalItems) {
+        currentIdx = (currentIdx + direction + totalItems) % totalItems;
 
-    // Add character to typeahead string
-    typeaheadRef.current += char.toLowerCase();
+        if (!items[currentIdx]?.hasAttribute('disabled')) {
+          return currentIdx;
+        }
 
-    // Find matching item
-    const searchString = typeaheadRef.current;
-    let matchIndex = -1;
+        attempts++;
+      }
 
-    // Start search from current index + 1
-    for (let i = 0; i < items.length; i++) {
-      const index = (currentIndex + 1 + i) % items.length;
-      const item = items[index];
-      
-      if (item && !item.hasAttribute('disabled')) {
-        const text = (
-          item.textContent || 
-          item.getAttribute('aria-label') || 
-          ''
-        ).toLowerCase().trim();
-        
-        if (text.startsWith(searchString)) {
-          matchIndex = index;
+      return startIndex; // All items disabled
+    },
+    [items]
+  );
+
+  const handleTypeahead = useCallback(
+    (char: string) => {
+      // Clear existing timer
+      if (typeaheadTimerRef.current) {
+        clearTimeout(typeaheadTimerRef.current);
+      }
+
+      // Add character to typeahead string
+      typeaheadRef.current += char.toLowerCase();
+
+      // Find matching item
+      const searchString = typeaheadRef.current;
+      let matchIndex = -1;
+
+      // Start search from current index + 1
+      for (let i = 0; i < items.length; i++) {
+        const index = (currentIndex + 1 + i) % items.length;
+        const item = items[index];
+
+        if (item && !item.hasAttribute('disabled')) {
+          const text = (
+            item.textContent ||
+            item.getAttribute('aria-label') ||
+            ''
+          )
+            .toLowerCase()
+            .trim();
+
+          if (text.startsWith(searchString)) {
+            matchIndex = index;
+            break;
+          }
+        }
+      }
+
+      if (matchIndex !== -1) {
+        focusItem(matchIndex);
+      }
+
+      // Reset typeahead after timeout
+      typeaheadTimerRef.current = setTimeout(() => {
+        typeaheadRef.current = '';
+      }, typeaheadTimeout);
+    },
+    [items, currentIndex, focusItem, typeaheadTimeout]
+  );
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent | KeyboardEvent) => {
+      const key = event.key;
+      let handled = false;
+      let newIndex = currentIndex;
+
+      switch (key) {
+        case 'ArrowUp':
+          if (orientation === 'vertical' || orientation === 'both') {
+            newIndex = findNextEnabledIndex(currentIndex, -1);
+            handled = true;
+          }
           break;
+
+        case 'ArrowDown':
+          if (orientation === 'vertical' || orientation === 'both') {
+            newIndex = findNextEnabledIndex(currentIndex, 1);
+            handled = true;
+          }
+          break;
+
+        case 'ArrowLeft':
+          if (orientation === 'horizontal' || orientation === 'both') {
+            newIndex = findNextEnabledIndex(currentIndex, -1);
+            handled = true;
+          }
+          break;
+
+        case 'ArrowRight':
+          if (orientation === 'horizontal' || orientation === 'both') {
+            newIndex = findNextEnabledIndex(currentIndex, 1);
+            handled = true;
+          }
+          break;
+
+        case 'Home':
+          if (homeEndKeys) {
+            // Find first enabled item
+            newIndex = findNextEnabledIndex(-1, 1);
+            handled = true;
+          }
+          break;
+
+        case 'End':
+          if (homeEndKeys) {
+            // Find last enabled item
+            newIndex = findNextEnabledIndex(items.length, -1);
+            handled = true;
+          }
+          break;
+
+        case 'PageUp':
+          if (pageKeys) {
+            // Move up by 10 items or to start
+            const jumpUp = Math.max(0, currentIndex - 10);
+            newIndex = findNextEnabledIndex(
+              jumpUp,
+              jumpUp < currentIndex ? 1 : -1
+            );
+            handled = true;
+          }
+          break;
+
+        case 'PageDown':
+          if (pageKeys) {
+            // Move down by 10 items or to end
+            const jumpDown = Math.min(items.length - 1, currentIndex + 10);
+            newIndex = findNextEnabledIndex(
+              jumpDown,
+              jumpDown > currentIndex ? -1 : 1
+            );
+            handled = true;
+          }
+          break;
+
+        default:
+          // Handle typeahead for printable characters
+          if (key.length === 1 && !event.ctrlKey && !event.metaKey) {
+            handleTypeahead(key);
+            handled = true;
+          }
+          break;
+      }
+
+      if (handled) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (newIndex !== currentIndex) {
+          focusItem(newIndex);
         }
       }
-    }
-
-    if (matchIndex !== -1) {
-      focusItem(matchIndex);
-    }
-
-    // Reset typeahead after timeout
-    typeaheadTimerRef.current = setTimeout(() => {
-      typeaheadRef.current = '';
-    }, typeaheadTimeout);
-  }, [items, currentIndex, focusItem, typeaheadTimeout]);
-
-  const handleKeyDown = useCallback((event: React.KeyboardEvent | KeyboardEvent) => {
-    const key = event.key;
-    let handled = false;
-    let newIndex = currentIndex;
-
-    switch (key) {
-      case 'ArrowUp':
-        if (orientation === 'vertical' || orientation === 'both') {
-          newIndex = findNextEnabledIndex(currentIndex, -1);
-          handled = true;
-        }
-        break;
-
-      case 'ArrowDown':
-        if (orientation === 'vertical' || orientation === 'both') {
-          newIndex = findNextEnabledIndex(currentIndex, 1);
-          handled = true;
-        }
-        break;
-
-      case 'ArrowLeft':
-        if (orientation === 'horizontal' || orientation === 'both') {
-          newIndex = findNextEnabledIndex(currentIndex, -1);
-          handled = true;
-        }
-        break;
-
-      case 'ArrowRight':
-        if (orientation === 'horizontal' || orientation === 'both') {
-          newIndex = findNextEnabledIndex(currentIndex, 1);
-          handled = true;
-        }
-        break;
-
-      case 'Home':
-        if (homeEndKeys) {
-          // Find first enabled item
-          newIndex = findNextEnabledIndex(-1, 1);
-          handled = true;
-        }
-        break;
-
-      case 'End':
-        if (homeEndKeys) {
-          // Find last enabled item
-          newIndex = findNextEnabledIndex(items.length, -1);
-          handled = true;
-        }
-        break;
-
-      case 'PageUp':
-        if (pageKeys) {
-          // Move up by 10 items or to start
-          const jumpUp = Math.max(0, currentIndex - 10);
-          newIndex = findNextEnabledIndex(jumpUp, jumpUp < currentIndex ? 1 : -1);
-          handled = true;
-        }
-        break;
-
-      case 'PageDown':
-        if (pageKeys) {
-          // Move down by 10 items or to end
-          const jumpDown = Math.min(items.length - 1, currentIndex + 10);
-          newIndex = findNextEnabledIndex(jumpDown, jumpDown > currentIndex ? -1 : 1);
-          handled = true;
-        }
-        break;
-
-      default:
-        // Handle typeahead for printable characters
-        if (key.length === 1 && !event.ctrlKey && !event.metaKey) {
-          handleTypeahead(key);
-          handled = true;
-        }
-        break;
-    }
-
-    if (handled) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (newIndex !== currentIndex) {
-        focusItem(newIndex);
-      }
-    }
-  }, [
-    currentIndex,
-    orientation,
-    findNextEnabledIndex,
-    homeEndKeys,
-    pageKeys,
-    items.length,
-    handleTypeahead,
-    focusItem,
-  ]);
+    },
+    [
+      currentIndex,
+      orientation,
+      findNextEnabledIndex,
+      homeEndKeys,
+      pageKeys,
+      items.length,
+      handleTypeahead,
+      focusItem,
+    ]
+  );
 
   const handleFocus = useCallback((index: number) => {
     setCurrentIndex(index);
   }, []);
 
-  const handleMouseEnter = useCallback((index: number) => {
-    if (focusOnHover && !items[index]?.hasAttribute('disabled')) {
-      focusItem(index);
-    }
-  }, [focusOnHover, items, focusItem]);
+  const handleMouseEnter = useCallback(
+    (index: number) => {
+      if (focusOnHover && !items[index]?.hasAttribute('disabled')) {
+        focusItem(index);
+      }
+    },
+    [focusOnHover, items, focusItem]
+  );
 
-  const getRovingProps = useCallback((index: number) => {
-    const props: any = {
-      tabIndex: index === currentIndex ? 0 : -1,
-      'data-roving-tabindex-item': true,
-      onKeyDown: handleKeyDown,
-      onFocus: () => handleFocus(index),
-    };
+  const getRovingProps = useCallback(
+    (index: number) => {
+      const props: any = {
+        tabIndex: index === currentIndex ? 0 : -1,
+        'data-roving-tabindex-item': true,
+        onKeyDown: handleKeyDown,
+        onFocus: () => handleFocus(index),
+      };
 
-    if (focusOnHover) {
-      props.onMouseEnter = () => handleMouseEnter(index);
-    }
+      if (focusOnHover) {
+        props.onMouseEnter = () => handleMouseEnter(index);
+      }
 
-    return props;
-  }, [currentIndex, handleKeyDown, handleFocus, handleMouseEnter, focusOnHover]);
+      return props;
+    },
+    [currentIndex, handleKeyDown, handleFocus, handleMouseEnter, focusOnHover]
+  );
 
   return {
     currentIndex,
@@ -298,7 +323,9 @@ export function RovingTabindexGroup({
 
   // Collect item refs
   useEffect(() => {
-    const validItems = itemRefs.current.filter((item): item is HTMLElement => item !== null);
+    const validItems = itemRefs.current.filter(
+      (item): item is HTMLElement => item !== null
+    );
     setItems(validItems);
   }, [children.length]);
 
@@ -345,7 +372,8 @@ export function RovingTabindexGroup({
 /**
  * Grid-based roving tabindex for 2D navigation
  */
-export interface GridRovingTabindexOptions extends Omit<RovingTabindexOptions, 'orientation'> {
+export interface GridRovingTabindexOptions
+  extends Omit<RovingTabindexOptions, 'orientation'> {
   items: HTMLElement[][];
   wrap?: boolean;
   onCellChange?: (element: HTMLElement, row: number, col: number) => void;
@@ -375,7 +403,8 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
     items.forEach((row, rowIndex) => {
       row.forEach((cell, colIndex) => {
         if (cell) {
-          const isCurrent = rowIndex === currentCell.row && colIndex === currentCell.col;
+          const isCurrent =
+            rowIndex === currentCell.row && colIndex === currentCell.col;
           cell.setAttribute('tabindex', isCurrent ? '0' : '-1');
           cell.setAttribute('aria-rowindex', String(rowIndex + 1));
           cell.setAttribute('aria-colindex', String(colIndex + 1));
@@ -392,159 +421,200 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
     }
   }, [currentCell, items, onCellChange]);
 
-  const focusCell = useCallback((row: number, col: number) => {
-    const cell = items[row]?.[col];
-    if (cell && !cell.hasAttribute('disabled')) {
-      cell.focus({ preventScroll });
-      setCurrentCell({ row, col });
-    }
-  }, [items, preventScroll]);
-
-  const findNextEnabledCell = useCallback((
-    startRow: number,
-    startCol: number,
-    rowDelta: number,
-    colDelta: number
-  ): { row: number; col: number } | null => {
-    const numRows = items.length;
-    const numCols = Math.max(...items.map(row => row.length));
-    
-    let row = startRow;
-    let col = startCol;
-    let attempts = 0;
-    const maxAttempts = numRows * numCols;
-
-    while (attempts < maxAttempts) {
-      row += rowDelta;
-      col += colDelta;
-
-      // Handle wrapping
-      if (wrap) {
-        if (row < 0) row = numRows - 1;
-        if (row >= numRows) row = 0;
-        if (col < 0) col = numCols - 1;
-        if (col >= numCols) col = 0;
-      } else {
-        // Clamp to bounds
-        row = Math.max(0, Math.min(numRows - 1, row));
-        col = Math.max(0, Math.min(numCols - 1, col));
-      }
-
+  const focusCell = useCallback(
+    (row: number, col: number) => {
       const cell = items[row]?.[col];
       if (cell && !cell.hasAttribute('disabled')) {
-        return { row, col };
+        cell.focus({ preventScroll });
+        setCurrentCell({ row, col });
+      }
+    },
+    [items, preventScroll]
+  );
+
+  const findNextEnabledCell = useCallback(
+    (
+      startRow: number,
+      startCol: number,
+      rowDelta: number,
+      colDelta: number
+    ): { row: number; col: number } | null => {
+      const numRows = items.length;
+      const numCols = Math.max(...items.map(row => row.length));
+
+      let row = startRow;
+      let col = startCol;
+      let attempts = 0;
+      const maxAttempts = numRows * numCols;
+
+      while (attempts < maxAttempts) {
+        row += rowDelta;
+        col += colDelta;
+
+        // Handle wrapping
+        if (wrap) {
+          if (row < 0) row = numRows - 1;
+          if (row >= numRows) row = 0;
+          if (col < 0) col = numCols - 1;
+          if (col >= numCols) col = 0;
+        } else {
+          // Clamp to bounds
+          row = Math.max(0, Math.min(numRows - 1, row));
+          col = Math.max(0, Math.min(numCols - 1, col));
+        }
+
+        const cell = items[row]?.[col];
+        if (cell && !cell.hasAttribute('disabled')) {
+          return { row, col };
+        }
+
+        attempts++;
       }
 
-      attempts++;
-    }
+      return null;
+    },
+    [items, wrap]
+  );
 
-    return null;
-  }, [items, wrap]);
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent | KeyboardEvent) => {
+      const key = event.key;
+      let handled = false;
+      let newCell = { ...currentCell };
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent | KeyboardEvent) => {
-    const key = event.key;
-    let handled = false;
-    let newCell = { ...currentCell };
-
-    switch (key) {
-      case 'ArrowUp':
-        const upCell = findNextEnabledCell(currentCell.row, currentCell.col, -1, 0);
-        if (upCell) {
-          newCell = upCell;
-          handled = true;
+      switch (key) {
+        case 'ArrowUp': {
+          const upCell = findNextEnabledCell(
+            currentCell.row,
+            currentCell.col,
+            -1,
+            0
+          );
+          if (upCell) {
+            newCell = upCell;
+            handled = true;
+          }
+          break;
         }
-        break;
 
-      case 'ArrowDown':
-        const downCell = findNextEnabledCell(currentCell.row, currentCell.col, 1, 0);
-        if (downCell) {
-          newCell = downCell;
-          handled = true;
+        case 'ArrowDown': {
+          const downCell = findNextEnabledCell(
+            currentCell.row,
+            currentCell.col,
+            1,
+            0
+          );
+          if (downCell) {
+            newCell = downCell;
+            handled = true;
+          }
+          break;
         }
-        break;
 
-      case 'ArrowLeft':
-        const leftCell = findNextEnabledCell(currentCell.row, currentCell.col, 0, -1);
-        if (leftCell) {
-          newCell = leftCell;
-          handled = true;
+        case 'ArrowLeft': {
+          const leftCell = findNextEnabledCell(
+            currentCell.row,
+            currentCell.col,
+            0,
+            -1
+          );
+          if (leftCell) {
+            newCell = leftCell;
+            handled = true;
+          }
+          break;
         }
-        break;
 
-      case 'ArrowRight':
-        const rightCell = findNextEnabledCell(currentCell.row, currentCell.col, 0, 1);
-        if (rightCell) {
-          newCell = rightCell;
-          handled = true;
+        case 'ArrowRight': {
+          const rightCell = findNextEnabledCell(
+            currentCell.row,
+            currentCell.col,
+            0,
+            1
+          );
+          if (rightCell) {
+            newCell = rightCell;
+            handled = true;
+          }
+          break;
         }
-        break;
 
-      case 'Home':
-        if (homeEndKeys) {
-          if (event.ctrlKey) {
-            // Go to first cell
-            const firstCell = findNextEnabledCell(-1, -1, 0, 1);
-            if (firstCell) {
-              newCell = firstCell;
-              handled = true;
-            }
-          } else {
-            // Go to first cell in row
-            const firstInRow = findNextEnabledCell(currentCell.row, -1, 0, 1);
-            if (firstInRow) {
-              newCell = firstInRow;
-              handled = true;
+        case 'Home':
+          if (homeEndKeys) {
+            if (event.ctrlKey) {
+              // Go to first cell
+              const firstCell = findNextEnabledCell(-1, -1, 0, 1);
+              if (firstCell) {
+                newCell = firstCell;
+                handled = true;
+              }
+            } else {
+              // Go to first cell in row
+              const firstInRow = findNextEnabledCell(currentCell.row, -1, 0, 1);
+              if (firstInRow) {
+                newCell = firstInRow;
+                handled = true;
+              }
             }
           }
-        }
-        break;
+          break;
 
-      case 'End':
-        if (homeEndKeys) {
-          if (event.ctrlKey) {
-            // Go to last cell
-            const lastRow = items.length - 1;
-            const lastCol = items[lastRow]?.length - 1 || 0;
-            const lastCell = findNextEnabledCell(lastRow + 1, lastCol + 1, 0, -1);
-            if (lastCell) {
-              newCell = lastCell;
-              handled = true;
-            }
-          } else {
-            // Go to last cell in row
-            const lastInRow = findNextEnabledCell(
-              currentCell.row,
-              items[currentCell.row]?.length || 0,
-              0,
-              -1
-            );
-            if (lastInRow) {
-              newCell = lastInRow;
-              handled = true;
+        case 'End':
+          if (homeEndKeys) {
+            if (event.ctrlKey) {
+              // Go to last cell
+              const lastRow = items.length - 1;
+              const lastCol = items[lastRow]?.length - 1 || 0;
+              const lastCell = findNextEnabledCell(
+                lastRow + 1,
+                lastCol + 1,
+                0,
+                -1
+              );
+              if (lastCell) {
+                newCell = lastCell;
+                handled = true;
+              }
+            } else {
+              // Go to last cell in row
+              const lastInRow = findNextEnabledCell(
+                currentCell.row,
+                items[currentCell.row]?.length || 0,
+                0,
+                -1
+              );
+              if (lastInRow) {
+                newCell = lastInRow;
+                handled = true;
+              }
             }
           }
-        }
-        break;
+          break;
 
-      default:
-        // Handle typeahead
-        if (key.length === 1 && !event.ctrlKey && !event.metaKey) {
-          // Use flat roving for typeahead in grid
-          // Implementation would be similar to linear roving
-          handled = true;
-        }
-        break;
-    }
-
-    if (handled) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (newCell.row !== currentCell.row || newCell.col !== currentCell.col) {
-        focusCell(newCell.row, newCell.col);
+        default:
+          // Handle typeahead
+          if (key.length === 1 && !event.ctrlKey && !event.metaKey) {
+            // Use flat roving for typeahead in grid
+            // Implementation would be similar to linear roving
+            handled = true;
+          }
+          break;
       }
-    }
-  }, [currentCell, findNextEnabledCell, homeEndKeys, focusCell]);
+
+      if (handled) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (
+          newCell.row !== currentCell.row ||
+          newCell.col !== currentCell.col
+        ) {
+          focusCell(newCell.row, newCell.col);
+        }
+      }
+    },
+    [currentCell, findNextEnabledCell, homeEndKeys, focusCell, items]
+  );
 
   return {
     currentCell,

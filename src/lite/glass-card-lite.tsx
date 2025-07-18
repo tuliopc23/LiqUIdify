@@ -1,7 +1,9 @@
 import React, { forwardRef } from 'react';
 import { cn } from '@/lib/glass-utils';
+import { ComponentSize } from '@/types/branded';
 
-export interface GlassCardLiteProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface GlassCardLiteProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'elevated' | 'outline';
   padding?: 'none' | 'sm' | 'md' | 'lg';
   hover?: boolean;
@@ -46,7 +48,7 @@ export const GlassCardLite = forwardRef<HTMLDivElement, GlassCardLiteProps>(
           'backdrop-blur-md',
           'transition-all duration-300 ease-out',
           hover && 'hover:scale-[1.02] hover:shadow-2xl',
-          paddingClasses[padding],
+          paddingClasses[padding as ComponentSize],
           variantClasses[variant],
           className
         )}

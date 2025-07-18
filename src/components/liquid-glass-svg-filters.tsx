@@ -156,7 +156,13 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
         {enableAdvancedFilters && (
           <>
             {/* Enhanced Liquid Lens - Pixel-perfect distortion with depth */}
-            <filter id="enhanced-liquid-lens" x="-100%" y="-100%" width="300%" height="300%">
+            <filter
+              id="enhanced-liquid-lens"
+              x="-100%"
+              y="-100%"
+              width="300%"
+              height="300%"
+            >
               <feImage
                 x="0"
                 y="0"
@@ -171,14 +177,24 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
                 yChannelSelector="G"
                 result="displaced"
               />
-              <feGaussianBlur in="displaced" stdDeviation="0.5" result="softened" />
+              <feGaussianBlur
+                in="displaced"
+                stdDeviation="0.5"
+                result="softened"
+              />
               <feMerge>
                 <feMergeNode in="softened" />
               </feMerge>
             </filter>
 
             {/* Liquid Refraction - Advanced light bending effect */}
-            <filter id="liquid-refraction" x="-50%" y="-50%" width="200%" height="200%">
+            <filter
+              id="liquid-refraction"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
+            >
               <feTurbulence
                 type="fractalNoise"
                 baseFrequency="0.006 0.006"
@@ -194,7 +210,11 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
                 yChannelSelector="G"
                 result="refracted"
               />
-              <feGaussianBlur in="refracted" stdDeviation="0.8" result="blurredRefract" />
+              <feGaussianBlur
+                in="refracted"
+                stdDeviation="0.8"
+                result="blurredRefract"
+              />
               <feColorMatrix
                 in="blurredRefract"
                 type="matrix"
@@ -210,7 +230,13 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
             </filter>
 
             {/* Liquid Caustics - Realistic water caustic patterns */}
-            <filter id="liquid-caustics" x="-50%" y="-50%" width="200%" height="200%">
+            <filter
+              id="liquid-caustics"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
+            >
               <feTurbulence
                 type="turbulence"
                 baseFrequency="0.02 0.02"
@@ -228,7 +254,10 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
                 result="alpha"
               />
               <feComponentTransfer in="alpha" result="causticPattern">
-                <feFuncA type="discrete" tableValues="0 0.2 0.5 0.8 1 0.8 0.5 0.2 0" />
+                <feFuncA
+                  type="discrete"
+                  tableValues="0 0.2 0.5 0.8 1 0.8 0.5 0.2 0"
+                />
               </feComponentTransfer>
               <feComposite
                 in="SourceGraphic"
@@ -240,12 +269,30 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
             </filter>
 
             {/* Liquid Depth - Multi-layer depth perception */}
-            <filter id="liquid-depth" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="layer1" />
+            <filter
+              id="liquid-depth"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
+            >
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="2"
+                result="layer1"
+              />
               <feOffset in="layer1" dx="1" dy="1" result="offset1" />
-              <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="layer2" />
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="4"
+                result="layer2"
+              />
               <feOffset in="layer2" dx="2" dy="2" result="offset2" />
-              <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="layer3" />
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="6"
+                result="layer3"
+              />
               <feOffset in="layer3" dx="3" dy="3" result="offset3" />
               <feMerge>
                 <feMergeNode in="offset3" />
@@ -256,7 +303,13 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
             </filter>
 
             {/* Liquid Prism - Chromatic aberration effect */}
-            <filter id="liquid-prism" x="-50%" y="-50%" width="200%" height="200%">
+            <filter
+              id="liquid-prism"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
+            >
               <feOffset in="SourceGraphic" dx="1" dy="0" result="redShift" />
               <feOffset in="SourceGraphic" dx="-1" dy="0" result="blueShift" />
               <feComponentTransfer in="redShift" result="red">
@@ -285,7 +338,13 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
             </filter>
 
             {/* Liquid Surface - Realistic surface tension effect */}
-            <filter id="liquid-surface" x="-50%" y="-50%" width="200%" height="200%">
+            <filter
+              id="liquid-surface"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
+            >
               <feTurbulence
                 type="fractalNoise"
                 baseFrequency="0.01 0.01"
@@ -318,7 +377,13 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
             </filter>
 
             {/* Extreme Liquid Effect - Maximum distortion for dramatic effect */}
-            <filter id="liquid-extreme" x="-100%" y="-100%" width="300%" height="300%">
+            <filter
+              id="liquid-extreme"
+              x="-100%"
+              y="-100%"
+              width="300%"
+              height="300%"
+            >
               <feTurbulence
                 type="fractalNoise"
                 baseFrequency="0.015 0.015"
@@ -326,7 +391,11 @@ export const LiquidGlassSvgFilters = memo(function LiquidGlassSvgFilters({
                 seed="999"
                 result="extremeNoise"
               />
-              <feGaussianBlur in="extremeNoise" stdDeviation="4" result="extremeBlurred" />
+              <feGaussianBlur
+                in="extremeNoise"
+                stdDeviation="4"
+                result="extremeBlurred"
+              />
               <feDisplacementMap
                 in="SourceGraphic"
                 in2="extremeBlurred"

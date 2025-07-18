@@ -64,7 +64,10 @@ export function GlassModal({
       document.body.style.paddingRight = `${scrollbarWidth}px`;
       
       // Announce modal opened
-      announcer.announce(`${title || 'Dialog'} opened`, 'polite');
+      announcer.announce(`${title || 'Dialog'} opened`, { 
+        priority: 'medium', 
+        context: 'general' 
+      });
     } else {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';

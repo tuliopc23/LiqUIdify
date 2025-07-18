@@ -36,34 +36,29 @@ export const DEFAULT_CSS_CONFIG: CSSBundleConfig = {
     files: [
       'src/styles/glass-core.css',
       'src/styles/glass-critical.css',
-      'src/styles/graceful-degradation.css'
+      'src/styles/graceful-degradation.css',
     ],
     maxSize: 15, // 15KB max for core
-    critical: true
+    critical: true,
   },
   animations: {
     files: [
       'src/styles/glass-animations.css',
-      'src/styles/apple-liquid-glass.css'
+      'src/styles/apple-liquid-glass.css',
     ],
     maxSize: 10, // 10KB max for animations
-    lazyLoad: true
+    lazyLoad: true,
   },
   utilities: {
-    files: [
-      'src/styles/glass-utilities.css',
-      'src/styles/tailwind.css'
-    ],
+    files: ['src/styles/glass-utilities.css', 'src/styles/tailwind.css'],
     maxSize: 8, // 8KB max for utilities
-    treeshake: true
+    treeshake: true,
   },
   themes: {
-    files: [
-      'src/styles/glass-themes.css'
-    ],
+    files: ['src/styles/glass-themes.css'],
     maxSize: 5, // 5KB max for themes
-    dynamic: true
-  }
+    dynamic: true,
+  },
 };
 
 // Critical CSS extraction interface
@@ -90,7 +85,10 @@ export class CSSBundleAnalyzer {
    * Analyze bundle sizes and validate against limits
    */
   async analyzeBundles(): Promise<{
-    bundles: Record<string, { size: number; maxSize: number; status: 'ok' | 'warning' | 'error' }>;
+    bundles: Record<
+      string,
+      { size: number; maxSize: number; status: 'ok' | 'warning' | 'error' }
+    >;
     totalSize: number;
     recommendations: string[];
   }> {
@@ -113,28 +111,38 @@ export class CSSBundleAnalyzer {
       const sizeKB = Math.round((bundleSize * 0.7) / 1024);
       this.bundleSizes.set(bundleName, sizeKB);
 
-      const status = sizeKB <= bundleConfig.maxSize ? 'ok' :
-        sizeKB <= bundleConfig.maxSize * 1.2 ? 'warning' : 'error';
+      const status =
+        sizeKB <= bundleConfig.maxSize
+          ? 'ok'
+          : sizeKB <= bundleConfig.maxSize * 1.2
+            ? 'warning'
+            : 'error';
 
       results.bundles[bundleName] = {
         size: sizeKB,
         maxSize: bundleConfig.maxSize,
-        status
+        status,
       };
 
       results.totalSize += sizeKB;
 
       // Generate recommendations
       if (status === 'warning') {
-        results.recommendations.push(`${bundleName} bundle is approaching size limit (${sizeKB}KB/${bundleConfig.maxSize}KB)`);
+        results.recommendations.push(
+          `${bundleName} bundle is approaching size limit (${sizeKB}KB/${bundleConfig.maxSize}KB)`
+        );
       } else if (status === 'error') {
-        results.recommendations.push(`${bundleName} bundle exceeds size limit (${sizeKB}KB/${bundleConfig.maxSize}KB) - optimization required`);
+        results.recommendations.push(
+          `${bundleName} bundle exceeds size limit (${sizeKB}KB/${bundleConfig.maxSize}KB) - optimization required`
+        );
       }
     }
 
     // Overall bundle size check
     if (results.totalSize > 30) {
-      results.recommendations.push(`Total bundle size (${results.totalSize}KB) exceeds 30KB target - critical optimization needed`);
+      results.recommendations.push(
+        `Total bundle size (${results.totalSize}KB) exceeds 30KB target - critical optimization needed`
+      );
     }
 
     return results;
@@ -169,7 +177,9 @@ export class CSSBundleAnalyzer {
 
     const criticalSize = new Blob([critical]).size;
     const remainingSize = new Blob([remaining]).size;
-    const reduction = Math.round(((remainingSize / (criticalSize + remainingSize)) * 100));
+    const reduction = Math.round(
+      (remainingSize / (criticalSize + remainingSize)) * 100
+    );
 
     return {
       critical,
@@ -177,20 +187,23 @@ export class CSSBundleAnalyzer {
       stats: {
         criticalSize: Math.round(criticalSize / 1024),
         remainingSize: Math.round(remainingSize / 1024),
-        reduction
-      }
+        reduction,
+      },
     };
   }
 
   /**
    * Optimize CSS with PostCSS transformations
    */
-  async optimizeCSS(css: string, options: {
-    removeUnused: boolean;
-    minify: boolean;
-    autoprefixer: boolean;
-    purgeSelectors?: string[];
-  }): Promise<{
+  async optimizeCSS(
+    css: string,
+    options: {
+      removeUnused: boolean;
+      minify: boolean;
+      autoprefixer: boolean;
+      purgeSelectors?: string[];
+    }
+  ): Promise<{
     optimized: string;
     stats: { originalSize: number; optimizedSize: number; reduction: number };
   }> {
@@ -213,15 +226,17 @@ export class CSSBundleAnalyzer {
     }
 
     const optimizedSize = new Blob([optimized]).size;
-    const reduction = Math.round(((originalSize - optimizedSize) / originalSize) * 100);
+    const reduction = Math.round(
+      ((originalSize - optimizedSize) / originalSize) * 100
+    );
 
     return {
       optimized,
       stats: {
         originalSize: Math.round(originalSize / 1024),
         optimizedSize: Math.round(optimizedSize / 1024),
-        reduction
-      }
+        reduction,
+      },
     };
   }
 
@@ -247,14 +262,17 @@ export class CSSBundleAnalyzer {
     return {
       timestamp: new Date(),
       ...analysis,
-      status
+      status,
     };
   }
 
   // Private helper methods
   private parseCSSRules(css: string): string[] {
     // Simple CSS rule parser - in production, use a proper CSS parser
-    return css.split('}').filter(rule => rule.trim()).map(rule => rule.trim() + '}');
+    return css
+      .split('}')
+      .filter(rule => rule.trim())
+      .map(rule => rule.trim() + '}');
   }
 
   private isCriticalRule(rule: string, _html: string): boolean {
@@ -265,7 +283,8 @@ export class CSSBundleAnalyzer {
     const selectorMatch = rule.match(/^([^{]+)\{/);
     if (!selectorMatch) return false;
 
-    const selector = selectorMatch[1].trim();
+    const selector = selectorMatch[1]?.trim();
+    if (!selector) return false;
 
     // Check if selector matches elements in HTML
     // For glass components, prioritize core glass effects
@@ -273,13 +292,14 @@ export class CSSBundleAnalyzer {
       '.liquid-glass',
       '.glass-button',
       '.glass-card',
+      '.glass-modal',
       '.glass-input',
       'body',
       'html',
-      '*'
+      '*',
     ];
 
-    return criticalSelectors.some(critical => selector.includes(critical));
+    return criticalSelectors.some(critical => selector?.includes(critical));
   }
 
   private removeUnusedCSS(css: string, usedSelectors: string[]): string {
@@ -289,8 +309,10 @@ export class CSSBundleAnalyzer {
       const selectorMatch = rule.match(/^([^{]+)\{/);
       if (!selectorMatch) return true;
 
-      const selector = selectorMatch[1].trim();
-      return usedSelectors.some(used => selector.includes(used));
+      const selector = selectorMatch[1]?.trim();
+      return selector
+        ? usedSelectors.some(used => selector?.includes(used))
+        : false;
     });
 
     return usedRules.join('\n');
@@ -313,10 +335,14 @@ export class CSSBundleAnalyzer {
   private addVendorPrefixes(css: string): string {
     // Basic vendor prefix addition for common properties
     const prefixMap: Record<string, string[]> = {
-      'transform': ['-webkit-transform', '-moz-transform', '-ms-transform'],
-      'transition': ['-webkit-transition', '-moz-transition', '-ms-transition'],
+      transform: ['-webkit-transform', '-moz-transform', '-ms-transform'],
+      transition: ['-webkit-transition', '-moz-transition', '-ms-transition'],
       'backdrop-filter': ['-webkit-backdrop-filter'],
-      'user-select': ['-webkit-user-select', '-moz-user-select', '-ms-user-select']
+      'user-select': [
+        '-webkit-user-select',
+        '-moz-user-select',
+        '-ms-user-select',
+      ],
     };
 
     let prefixed = css;
@@ -324,7 +350,9 @@ export class CSSBundleAnalyzer {
     for (const [property, prefixes] of Object.entries(prefixMap)) {
       const regex = new RegExp(`(\\s|^)${property}\\s*:`, 'g');
       prefixed = prefixed.replace(regex, (match, whitespace) => {
-        const prefixedProps = prefixes.map(prefix => `${whitespace}${prefix}:`).join('');
+        const prefixedProps = prefixes
+          .map(prefix => `${whitespace}${prefix}:`)
+          .join('');
         return prefixedProps + match;
       });
     }
@@ -372,7 +400,7 @@ export class CSSBundleManager {
       const optimized = await this.analyzer.optimizeCSS(combinedCSS, {
         removeUnused: bundleConfig.treeshake || false,
         minify: true,
-        autoprefixer: true
+        autoprefixer: true,
       });
 
       bundles[bundleName] = optimized.optimized;
@@ -387,7 +415,7 @@ export class CSSBundleManager {
         originalSize: optimized.stats.originalSize,
         reduction: optimized.stats.reduction,
         lazyLoad: bundleConfig.lazyLoad || false,
-        critical: bundleConfig.critical || false
+        critical: bundleConfig.critical || false,
       };
     }
 

@@ -4,7 +4,7 @@ import { cn } from '@/lib/glass-utils';
 export interface GlassTabItem {
   // Renamed for clarity
   id: string;
-  label: string;
+  label: React.ReactNode;
   content: React.ReactNode;
   disabled?: boolean;
 }

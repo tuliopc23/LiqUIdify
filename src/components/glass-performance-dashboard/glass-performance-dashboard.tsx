@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { performanceMonitor } from '../../core/performance-monitor';
 import { useRealtimePerformance } from '../../hooks/use-performance-monitoring';
-import { cn } from '../../utils/cn';
+import { cn } from '@/lib/glass-utils';
 import { GlassCard } from '../glass-card';
 
 export interface GlassPerformanceDashboardProps {
@@ -47,8 +47,8 @@ export function GlassPerformanceDashboard({
 
   useEffect(() => {
     // Subscribe to metric updates
-    const unsubscribers = Object.keys(METRIC_LABELS).map(metricName => 
-      performanceMonitor.subscribe(metricName as any, (metric) => {
+    const unsubscribers = Object.keys(METRIC_LABELS).map(metricName =>
+      performanceMonitor.subscribe(metricName as any, metric => {
         setMetrics(prev => new Map(prev).set(metricName, metric));
       })
     );
@@ -78,20 +78,20 @@ export function GlassPerformanceDashboard({
 
   if (collapsed) {
     return (
-      <div
-        className={cn(
-          'fixed z-50',
-          positionClasses[position],
-          className
-        )}
-      >
+      <div className={cn('fixed z-50', positionClasses[position], className)}>
         <button
           onClick={() => setCollapsed(false)}
           className="p-2 bg-black/10 backdrop-blur-lg rounded-lg border border-white/10 hover:bg-black/20 transition-colors"
           aria-label="Expand performance dashboard"
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path
+              d="M5 7.5L10 12.5L15 7.5"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </button>
       </div>
@@ -116,7 +116,13 @@ export function GlassPerformanceDashboard({
               aria-label="Collapse dashboard"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M11 6.5L8 3.5L5 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path
+                  d="M11 6.5L8 3.5L5 6.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </button>
             {onClose && (
@@ -126,7 +132,13 @@ export function GlassPerformanceDashboard({
                 aria-label="Close dashboard"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path
+                    d="M12 4L4 12M4 4L12 12"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </button>
             )}
@@ -137,19 +149,23 @@ export function GlassPerformanceDashboard({
         <div className="grid grid-cols-2 gap-2 mb-4">
           <div className="p-2 bg-white/5 rounded">
             <div className="text-xs text-gray-400">FPS</div>
-            <div className={cn(
-              'text-xl font-mono',
-              fps >= 55 ? 'text-green-500' : fps >= 30 ? 'text-yellow-500' : 'text-red-500'
-            )}>
+            <div
+              className={cn(
+                'text-xl font-mono',
+                fps >= 55
+                  ? 'text-green-500'
+                  : fps >= 30
+                    ? 'text-yellow-500'
+                    : 'text-red-500'
+              )}
+            >
               {fps}
             </div>
           </div>
           {memory && (
             <div className="p-2 bg-white/5 rounded">
               <div className="text-xs text-gray-400">Memory</div>
-              <div className="text-xl font-mono">
-                {memory.used}MB
-              </div>
+              <div className="text-xl font-mono">{memory.used}MB</div>
             </div>
           )}
         </div>
@@ -159,10 +175,20 @@ export function GlassPerformanceDashboard({
           <h4 className="text-sm font-medium text-gray-400">Core Web Vitals</h4>
           <div className="space-y-1 max-h-48 overflow-y-auto">
             {Array.from(metrics.entries()).map(([name, metric]) => (
-              <div key={name} className="flex items-center justify-between p-2 bg-white/5 rounded">
+              <div
+                key={name}
+                className="flex items-center justify-between p-2 bg-white/5 rounded"
+              >
                 <div className="flex-1">
-                  <div className="text-xs text-gray-400">{METRIC_LABELS[name as keyof typeof METRIC_LABELS] || name}</div>
-                  <div className={cn('text-sm font-mono', getMetricColor(metric.rating))}>
+                  <div className="text-xs text-gray-400">
+                    {METRIC_LABELS[name as keyof typeof METRIC_LABELS] || name}
+                  </div>
+                  <div
+                    className={cn(
+                      'text-sm font-mono',
+                      getMetricColor(metric.rating)
+                    )}
+                  >
                     {metric.value.toFixed(name === 'CLS' ? 3 : 0)}
                     {name === 'CLS' ? '' : 'ms'}
                   </div>
@@ -178,11 +204,18 @@ export function GlassPerformanceDashboard({
         {/* Component Performance */}
         {componentMetrics.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-sm font-medium text-gray-400">Component Performance</h4>
+            <h4 className="text-sm font-medium text-gray-400">
+              Component Performance
+            </h4>
             <div className="space-y-1 max-h-32 overflow-y-auto">
               {componentMetrics.map((metric, index) => (
-                <div key={`${metric.componentName}-${index}`} className="flex items-center justify-between p-1 text-xs">
-                  <span className="truncate flex-1">{metric.componentName}</span>
+                <div
+                  key={`${metric.componentName}-${index}`}
+                  className="flex items-center justify-between p-1 text-xs"
+                >
+                  <span className="truncate flex-1">
+                    {metric.componentName}
+                  </span>
                   <span className="font-mono text-gray-400">
                     {metric.renderTime?.toFixed(1)}ms
                   </span>

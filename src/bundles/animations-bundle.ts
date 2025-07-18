@@ -1,7 +1,7 @@
 /**
  * Animations Bundle - Animation utilities and components
  * Target size: <10KB gzipped
- * 
+ *
  * Includes animation hooks, utilities, and animated components
  * Loaded on-demand when animations are needed
  */
@@ -48,13 +48,13 @@ export const ANIMATION_PRESETS = {
     exit: { scale: 0.95, opacity: 0 },
   },
   glassReveal: {
-    initial: { 
-      opacity: 0, 
+    initial: {
+      opacity: 0,
       backdropFilter: 'blur(0px)',
       backgroundColor: 'rgba(255, 255, 255, 0)',
     },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       backdropFilter: 'blur(12px)',
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
     },

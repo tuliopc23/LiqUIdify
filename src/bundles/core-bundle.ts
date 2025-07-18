@@ -1,7 +1,7 @@
 /**
  * Core Bundle - Essential components only
  * Target size: <15KB gzipped
- * 
+ *
  * Includes only the most fundamental components and utilities
  * that are required for basic Glass UI functionality
  */

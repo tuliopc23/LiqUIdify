@@ -1,16 +1,20 @@
 /**
  * Centralized Glass Effects System
- * 
+ *
  * This module provides a unified API for all glass effects throughout the Glass UI library.
  * It consolidates glass morphism, backdrop effects, and visual enhancements into a single,
  * consistent interface.
  */
 
-import { GlassIntensity, GlassEffectConfig, ComponentVariant } from './base-component';
+import {
+  GlassIntensity,
+  GlassEffectConfig,
+  ComponentVariant,
+} from './base-component';
 import { cn } from '@/lib/glass-utils';
 
 // Glass effect types
-export type GlassEffectType = 
+export type GlassEffectType =
   | 'blur'
   | 'saturation'
   | 'backdrop'
@@ -24,7 +28,12 @@ export type GlassEffectType =
   | 'apple';
 
 // Glass effect state
-export type GlassEffectState = 'idle' | 'hover' | 'focus' | 'active' | 'disabled';
+export type GlassEffectState =
+  | 'idle'
+  | 'hover'
+  | 'focus'
+  | 'active'
+  | 'disabled';
 
 // Glass effect animation
 export interface GlassEffectAnimation {
@@ -172,7 +181,7 @@ export class GlassEffectsManager {
     const effectId = this.generateEffectId(element);
     this.registerEffect(effectId, options);
     this.activeEffects.add(effectId);
-    
+
     // Apply CSS classes and variables
     this.applyEffectToElement(element, options);
   }
@@ -184,7 +193,7 @@ export class GlassEffectsManager {
     const effectId = this.generateEffectId(element);
     this.effectsRegistry.delete(effectId);
     this.activeEffects.delete(effectId);
-    
+
     // Remove CSS classes and variables
     this.removeEffectFromElement(element);
   }
@@ -193,35 +202,44 @@ export class GlassEffectsManager {
     return `glass-effect-${element.getAttribute('data-glass-id') || Math.random().toString(36).substr(2, 9)}`;
   }
 
-  private applyEffectToElement(element: HTMLElement, options: GlassEffectOptions): void {
+  private applyEffectToElement(
+    element: HTMLElement,
+    options: GlassEffectOptions
+  ): void {
     const { intensity = 'medium', state = 'idle', animation } = options;
     const intensityValues = INTENSITY_VALUES[intensity];
-    
+
     // Apply base glass classes
     element.classList.add('glass-effect');
-    
+
     // Apply state classes
     if (state !== 'idle') {
       element.classList.add(STATE_CLASSES[state]);
     }
-    
+
     // Apply CSS variables
     const style = element.style;
     style.setProperty('--glass-blur', `${intensityValues.blur}px`);
     style.setProperty('--glass-saturation', `${intensityValues.saturation}%`);
     style.setProperty('--glass-opacity', intensityValues.opacity.toString());
-    style.setProperty('--glass-brightness', intensityValues.brightness.toString());
+    style.setProperty(
+      '--glass-brightness',
+      intensityValues.brightness.toString()
+    );
     style.setProperty('--glass-contrast', intensityValues.contrast.toString());
-    
+
     // Apply animation properties
     if (animation) {
-      style.setProperty('--glass-animation-duration', `${animation.duration}ms`);
+      style.setProperty(
+        '--glass-animation-duration',
+        `${animation.duration}ms`
+      );
       style.setProperty('--glass-animation-easing', animation.easing);
       if (animation.delay) {
         style.setProperty('--glass-animation-delay', `${animation.delay}ms`);
       }
     }
-    
+
     // Apply custom CSS variables
     if (options.cssVariables) {
       Object.entries(options.cssVariables).forEach(([key, value]) => {
@@ -236,10 +254,12 @@ export class GlassEffectsManager {
     Object.values(STATE_CLASSES).forEach(className => {
       if (className) element.classList.remove(className);
     });
-    
+
     // Remove CSS variables
     const style = element.style;
-    const glassProperties = Array.from(style).filter(prop => prop.startsWith('--glass-'));
+    const glassProperties = Array.from(style).filter(prop =>
+      prop.startsWith('--glass-')
+    );
     glassProperties.forEach(prop => style.removeProperty(prop));
   }
 }
@@ -255,26 +275,26 @@ export function generateGlassClasses(
 ): string {
   const variantConfig = VARIANT_CONFIGS[variant];
   const baseClasses = ['glass-base'];
-  
+
   // Add variant-specific classes
   if (variantConfig.backdrop) baseClasses.push('glass-backdrop');
   if (variantConfig.borders) baseClasses.push('glass-borders');
   if (variantConfig.shadows) baseClasses.push('glass-shadows');
   if (variantConfig.glow) baseClasses.push('glass-glow');
-  
+
   // Add intensity classes
   baseClasses.push(`glass-intensity-${intensity}`);
-  
+
   // Add state classes
   if (state !== 'idle') {
     baseClasses.push(STATE_CLASSES[state]);
   }
-  
+
   // Add specific effect classes
   if (options.blur) baseClasses.push('glass-blur');
   if (options.saturation) baseClasses.push('glass-saturation');
   if (options.responsive) baseClasses.push('glass-responsive');
-  
+
   return cn(...baseClasses);
 }
 
@@ -293,7 +313,7 @@ export function generateGlassVariables(
     '--glass-brightness': intensityValues.brightness,
     '--glass-contrast': intensityValues.contrast,
   };
-  
+
   // Add animation variables if specified
   if (options.animation) {
     variables['--glass-animation-duration'] = `${options.animation.duration}ms`;
@@ -302,14 +322,14 @@ export function generateGlassVariables(
       variables['--glass-animation-delay'] = `${options.animation.delay}ms`;
     }
   }
-  
+
   // Add custom variables
   if (options.cssVariables) {
     Object.entries(options.cssVariables).forEach(([key, value]) => {
       variables[`--glass-${key}`] = value;
     });
   }
-  
+
   return variables;
 }
 
@@ -322,7 +342,7 @@ export function applyGlassInlineStyles(
   options: GlassEffectOptions = {}
 ): void {
   const variables = generateGlassVariables(intensity, options);
-  
+
   Object.entries(variables).forEach(([property, value]) => {
     element.style.setProperty(property, value.toString());
   });
@@ -337,7 +357,7 @@ export function createGlassConfig(
   overrides: Partial<GlassEffectOptions> = {}
 ): GlassEffectOptions {
   const variantConfig = VARIANT_CONFIGS[variant];
-  
+
   return {
     intensity,
     blur: variantConfig.backdrop,
@@ -357,7 +377,7 @@ export function useGlassEffects(
   options: GlassEffectOptions = {}
 ) {
   const manager = GlassEffectsManager.getInstance();
-  
+
   return {
     applyEffect: (element: HTMLElement) => {
       manager.applyEffect(element, { intensity, ...options });
@@ -365,7 +385,10 @@ export function useGlassEffects(
     removeEffect: (element: HTMLElement) => {
       manager.removeEffect(element);
     },
-    generateClasses: (variant: ComponentVariant, state: GlassEffectState = 'idle') => {
+    generateClasses: (
+      variant: ComponentVariant,
+      state: GlassEffectState = 'idle'
+    ) => {
       return generateGlassClasses(variant, intensity, state, options);
     },
     generateVariables: () => {

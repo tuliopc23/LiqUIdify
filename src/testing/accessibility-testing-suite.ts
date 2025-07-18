@@ -53,28 +53,32 @@ export class AccessibilityTestingSuite {
       id: 'glass-component-roles',
       description: 'Glass components must have appropriate ARIA roles',
       help: 'Glass components should have proper ARIA roles for accessibility',
-      helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html'
+      helpUrl:
+        'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
     });
 
     this.customRules.set('glass-live-regions', {
       id: 'glass-live-regions',
       description: 'Glass live regions must have proper ARIA attributes',
       help: 'Live regions should have aria-live and aria-atomic attributes',
-      helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/status-messages.html'
+      helpUrl:
+        'https://www.w3.org/WAI/WCAG21/Understanding/status-messages.html',
     });
 
     this.customRules.set('glass-focus-indicators', {
       id: 'glass-focus-indicators',
       description: 'Glass components must have visible focus indicators',
       help: 'All interactive elements should have clear focus indicators',
-      helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html'
+      helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html',
     });
 
     this.customRules.set('glass-color-contrast', {
       id: 'glass-color-contrast',
-      description: 'Glass components must meet WCAG color contrast requirements',
+      description:
+        'Glass components must meet WCAG color contrast requirements',
       help: 'Text and interactive elements should have sufficient color contrast',
-      helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html'
+      helpUrl:
+        'https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html',
     });
   }
 
@@ -119,7 +123,7 @@ export class AccessibilityTestingSuite {
       violations,
       passes,
       score: this.calculateAccessibilityScore(violations, passes),
-      recommendations: this.generateRecommendations(violations)
+      recommendations: this.generateRecommendations(violations),
     };
 
     this.storeResults(componentName, report);
@@ -148,7 +152,8 @@ export class AccessibilityTestingSuite {
           html: img.outerHTML,
           failureSummary: 'Image elements must have alt attributes',
           help: 'Add descriptive alt text to images',
-          helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html'
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html',
         });
       } else {
         passes.push({
@@ -159,16 +164,19 @@ export class AccessibilityTestingSuite {
           html: img.outerHTML,
           failureSummary: '',
           help: 'Image has appropriate alt text',
-          helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html'
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html',
         });
       }
     });
 
     // Check for ARIA attributes on glass components
-    const glassComponents = container.querySelectorAll('[data-glass-component]');
+    const glassComponents = container.querySelectorAll(
+      '[data-glass-component]'
+    );
     glassComponents.forEach(component => {
       const componentType = component.getAttribute('data-glass-component');
-      
+
       if (!component.hasAttribute('role')) {
         violations.push({
           ruleId: 'glass-component-roles',
@@ -178,7 +186,8 @@ export class AccessibilityTestingSuite {
           html: component.outerHTML,
           failureSummary: `Glass ${componentType} should have appropriate ARIA role`,
           help: `Add appropriate role attribute to glass ${componentType}`,
-          helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html'
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
         });
       } else {
         passes.push({
@@ -189,7 +198,8 @@ export class AccessibilityTestingSuite {
           html: component.outerHTML,
           failureSummary: '',
           help: `Glass ${componentType} has appropriate ARIA role`,
-          helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html'
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
         });
       }
     });
@@ -220,7 +230,7 @@ export class AccessibilityTestingSuite {
         html: container.outerHTML,
         failureSummary: '',
         help: 'Component has no interactive elements requiring keyboard navigation',
-        helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html'
+        helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html',
       });
       return { violations, passes };
     }
@@ -243,7 +253,7 @@ export class AccessibilityTestingSuite {
         html: container.outerHTML,
         failureSummary: 'Tabindex values should be valid integers >= -1',
         help: 'Use valid tabindex values for keyboard navigation',
-        helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html'
+        helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html',
       });
     } else {
       passes.push({
@@ -254,7 +264,7 @@ export class AccessibilityTestingSuite {
         html: container.outerHTML,
         failureSummary: '',
         help: 'All tabindex values are valid',
-        helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html'
+        helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html',
       });
     }
 
@@ -278,9 +288,11 @@ export class AccessibilityTestingSuite {
     // Check for focus indicators
     focusableElements.forEach(element => {
       const computedStyle = window.getComputedStyle(element);
-      const hasOutline = computedStyle.outline && computedStyle.outline !== 'none';
-      const hasCustomFocus = element.classList.contains('focus-visible') || 
-                           element.classList.contains('glass-focus');
+      const hasOutline =
+        computedStyle.outline && computedStyle.outline !== 'none';
+      const hasCustomFocus =
+        element.classList.contains('focus-visible') ||
+        element.classList.contains('glass-focus');
 
       if (!hasOutline && !hasCustomFocus) {
         violations.push({
@@ -291,7 +303,8 @@ export class AccessibilityTestingSuite {
           html: element.outerHTML,
           failureSummary: 'Element should have visible focus indicator',
           help: 'Add CSS focus styles or use glass-focus class',
-          helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html'
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html',
         });
       } else {
         passes.push({
@@ -302,7 +315,8 @@ export class AccessibilityTestingSuite {
           html: element.outerHTML,
           failureSummary: '',
           help: 'Element has appropriate focus indicator',
-          helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html'
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html',
         });
       }
     });
@@ -325,10 +339,11 @@ export class AccessibilityTestingSuite {
     );
 
     interactiveElements.forEach(element => {
-      const hasLabel = element.hasAttribute('aria-label') || 
-                      element.hasAttribute('aria-labelledby') ||
-                      element.textContent?.trim() ||
-                      (element as HTMLInputElement).placeholder;
+      const hasLabel =
+        element.hasAttribute('aria-label') ||
+        element.hasAttribute('aria-labelledby') ||
+        element.textContent?.trim() ||
+        (element as HTMLInputElement).placeholder;
 
       if (!hasLabel) {
         violations.push({
@@ -337,9 +352,11 @@ export class AccessibilityTestingSuite {
           impact: 'critical',
           target: element.tagName.toLowerCase(),
           html: element.outerHTML,
-          failureSummary: 'Interactive element has no accessible name for screen readers',
+          failureSummary:
+            'Interactive element has no accessible name for screen readers',
           help: 'Add aria-label, aria-labelledby, or text content',
-          helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html'
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
         });
       } else {
         passes.push({
@@ -350,7 +367,8 @@ export class AccessibilityTestingSuite {
           html: element.outerHTML,
           failureSummary: '',
           help: 'Element has appropriate accessible name',
-          helpUrl: 'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html'
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
         });
       }
     });
@@ -373,7 +391,7 @@ export class AccessibilityTestingSuite {
         minor: 1,
         moderate: 3,
         serious: 5,
-        critical: 10
+        critical: 10,
       };
       deductions += impactMultiplier[violation.impact];
     });
@@ -384,16 +402,22 @@ export class AccessibilityTestingSuite {
   /**
    * Generate recommendations
    */
-  private generateRecommendations(violations: AccessibilityTestResult[]): string[] {
-    return violations.map(violation => 
-      `${violation.description}: ${violation.help} (${violation.helpUrl})`
+  private generateRecommendations(
+    violations: AccessibilityTestResult[]
+  ): string[] {
+    return violations.map(
+      violation =>
+        `${violation.description}: ${violation.help} (${violation.helpUrl})`
     );
   }
 
   /**
    * Store test results
    */
-  private storeResults(componentName: string, report: ComponentAccessibilityReport): void {
+  private storeResults(
+    componentName: string,
+    report: ComponentAccessibilityReport
+  ): void {
     if (!this.testResults.has(componentName)) {
       this.testResults.set(componentName, []);
     }
@@ -403,7 +427,9 @@ export class AccessibilityTestingSuite {
   /**
    * Get historical results for a component
    */
-  public getComponentHistory(componentName: string): ComponentAccessibilityReport[] {
+  public getComponentHistory(
+    componentName: string
+  ): ComponentAccessibilityReport[] {
     return this.testResults.get(componentName) || [];
   }
 
@@ -440,7 +466,7 @@ export class AccessibilityTestingSuite {
             currentScore: latest.score,
             newViolations: latest.violations.filter(
               v => !previous.violations.some(pv => pv.ruleId === v.ruleId)
-            )
+            ),
           });
         } else if (latest.score > previous.score) {
           improvements.push({
@@ -449,7 +475,7 @@ export class AccessibilityTestingSuite {
             currentScore: latest.score,
             resolvedViolations: previous.violations.filter(
               pv => !latest.violations.some(lv => lv.ruleId === pv.ruleId)
-            )
+            ),
           });
         }
       }
@@ -458,19 +484,20 @@ export class AccessibilityTestingSuite {
     return {
       components: Array.from(this.testResults.keys()),
       regressions,
-      improvements
+      improvements,
     };
   }
 
   /**
    * Run continuous accessibility monitoring
    */
-  public startContinuousMonitoring(options: {
-    interval?: number;
-    components?: string[];
-    onViolation?: (violation: AccessibilityTestResult) => void;
-  } = {}): () => void {
-    
+  public startContinuousMonitoring(
+    options: {
+      interval?: number;
+      components?: string[];
+      onViolation?: (violation: AccessibilityTestResult) => void;
+    } = {}
+  ): () => void {
     // In a real implementation, this would use setInterval
     // For now, return a no-op cleanup function
     return () => {};
@@ -478,7 +505,8 @@ export class AccessibilityTestingSuite {
 }
 
 // Export singleton instance
-export const accessibilityTestingSuite = AccessibilityTestingSuite.getInstance();
+export const accessibilityTestingSuite =
+  AccessibilityTestingSuite.getInstance();
 
 // Convenience functions
 export const testGlassComponent = async (
@@ -490,7 +518,7 @@ export const testGlassComponent = async (
     includeKeyboardNavigation: true,
     includeFocusManagement: true,
     includeScreenReaderTests: true,
-    ...options
+    ...options,
   });
 };
 
@@ -498,6 +526,10 @@ export const testAccessibilityRegression = () => {
   return accessibilityTestingSuite.generateRegressionReport();
 };
 
-export const startAccessibilityMonitoring = (options: Parameters<typeof accessibilityTestingSuite.startContinuousMonitoring>[0]) => {
+export const startAccessibilityMonitoring = (
+  options: Parameters<
+    typeof accessibilityTestingSuite.startContinuousMonitoring
+  >[0]
+) => {
   return accessibilityTestingSuite.startContinuousMonitoring(options);
 };

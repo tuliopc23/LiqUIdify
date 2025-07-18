@@ -3,18 +3,38 @@
  * Entry point for all legacy code management functionality
  */
 
-export { legacyCodeAuditor, scanLegacyCode, generateMigrationReport, createMigrationScripts as createLegacyMigrationScripts } from './legacy-code-audit';
-export { componentConsolidator, analyzeDuplicates, createConsolidationPlan, generateMigrationScripts as createConsolidationMigrationScripts } from './component-consolidation';
-export { codebaseModernizer, generateModernizationPlan, createMigrationScripts as createModernizationMigrationScripts } from './codebase-modernization';
+export {
+  legacyCodeAuditor,
+  scanLegacyCode,
+  generateMigrationReport,
+  createMigrationScripts as createLegacyMigrationScripts,
+} from './legacy-code-audit';
+export {
+  componentConsolidator,
+  analyzeDuplicates,
+  createConsolidationPlan,
+  generateMigrationScripts as createConsolidationMigrationScripts,
+} from './component-consolidation';
+export {
+  codebaseModernizer,
+  generateModernizationPlan,
+  createMigrationScripts as createModernizationMigrationScripts,
+} from './codebase-modernization';
 
 import { legacyCodeAuditor } from './legacy-code-audit';
 import { componentConsolidator } from './component-consolidation';
 import { codebaseModernizer } from './codebase-modernization';
 
 export interface LegacyCleanupReport {
-  auditReport: Awaited<ReturnType<typeof legacyCodeAuditor.generateMigrationReport>>;
-  consolidationReport: ReturnType<typeof componentConsolidator.analyzeDuplicates>;
-  modernizationPlan: ReturnType<typeof codebaseModernizer.generateModernizationPlan>;
+  auditReport: Awaited<
+    ReturnType<typeof legacyCodeAuditor.generateMigrationReport>
+  >;
+  consolidationReport: ReturnType<
+    typeof componentConsolidator.analyzeDuplicates
+  >;
+  modernizationPlan: ReturnType<
+    typeof codebaseModernizer.generateModernizationPlan
+  >;
   summary: {
     totalIssues: number;
     estimatedEffort: string;
@@ -37,13 +57,14 @@ export class LegacyCleanupSystem {
    * Run complete legacy code cleanup analysis
    */
   public async runCompleteAnalysis(): Promise<LegacyCleanupReport> {
-    const [auditReport, consolidationReport, modernizationPlan] = await Promise.all([
-      legacyCodeAuditor.generateMigrationReport(),
-      Promise.resolve(componentConsolidator.analyzeDuplicates()),
-      Promise.resolve(codebaseModernizer.generateModernizationPlan())
-    ]);
+    const [auditReport, consolidationReport, modernizationPlan] =
+      await Promise.all([
+        legacyCodeAuditor.generateMigrationReport(),
+        Promise.resolve(componentConsolidator.analyzeDuplicates()),
+        Promise.resolve(codebaseModernizer.generateModernizationPlan()),
+      ]);
 
-    const totalIssues = 
+    const totalIssues =
       auditReport.inventory.summary.totalIssues +
       consolidationReport.totalDuplicates +
       modernizationPlan.targets.length;
@@ -74,8 +95,8 @@ export class LegacyCleanupSystem {
         totalIssues,
         estimatedEffort,
         priority,
-        timeline
-      }
+        timeline,
+      },
     };
   }
 
@@ -83,15 +104,31 @@ export class LegacyCleanupSystem {
    * Calculate total effort required
    */
   private calculateTotalEffort(
-    auditSummary: { criticalIssues: number; highIssues: number; mediumIssues: number; lowIssues: number },
-    consolidationReport: { consolidationPlans: Array<{ estimatedEffort: 'small' | 'medium' | 'large' | 'extra-large' }> },
-    modernizationPlan: { targets: Array<{ estimatedEffort: 'small' | 'medium' | 'large' | 'extra-large' }> }
+    auditSummary: {
+      criticalIssues: number;
+      highIssues: number;
+      mediumIssues: number;
+      lowIssues: number;
+    },
+    consolidationReport: {
+      consolidationPlans: Array<{
+        estimatedEffort: 'small' | 'medium' | 'large' | 'extra-large';
+      }>;
+    },
+    modernizationPlan: {
+      targets: Array<{
+        estimatedEffort: 'small' | 'medium' | 'large' | 'extra-large';
+      }>;
+    }
   ): string {
-    const effortMap: Record<'small' | 'medium' | 'large' | 'extra-large', number> = {
-      'small': 1,
-      'medium': 3,
-      'large': 8,
-      'extra-large': 20
+    const effortMap: Record<
+      'small' | 'medium' | 'large' | 'extra-large',
+      number
+    > = {
+      small: 1,
+      medium: 3,
+      large: 8,
+      'extra-large': 20,
     };
 
     let totalPoints = 0;
@@ -129,8 +166,18 @@ export class LegacyCleanupSystem {
     if (auditSummary.criticalIssues > 0) return 'critical';
     if (auditSummary.highIssues > 5) return 'high';
     if (consolidationReport.totalDuplicates > 3) return 'high';
-    if (modernizationPlan.targets.some((t: { priority: string }) => t.priority === 'critical')) return 'critical';
-    if (modernizationPlan.targets.some((t: { priority: string }) => t.priority === 'high')) return 'high';
+    if (
+      modernizationPlan.targets.some(
+        (t: { priority: string }) => t.priority === 'critical'
+      )
+    )
+      return 'critical';
+    if (
+      modernizationPlan.targets.some(
+        (t: { priority: string }) => t.priority === 'high'
+      )
+    )
+      return 'high';
     return 'medium';
   }
 
@@ -138,8 +185,15 @@ export class LegacyCleanupSystem {
    * Generate timeline
    */
   private generateTimeline(
-    auditSummary: { criticalIssues: number; highIssues: number; mediumIssues: number; lowIssues: number },
-    consolidationReport: { consolidationPlans: Array<{ estimatedEffort: string }> },
+    auditSummary: {
+      criticalIssues: number;
+      highIssues: number;
+      mediumIssues: number;
+      lowIssues: number;
+    },
+    consolidationReport: {
+      consolidationPlans: Array<{ estimatedEffort: string }>;
+    },
     modernizationPlan: { targets: Array<{ estimatedEffort: string }> }
   ): string {
     const phases = [
@@ -148,7 +202,7 @@ export class LegacyCleanupSystem {
       'Month 2: Component consolidation',
       'Month 3: Build tool modernization',
       'Month 4: Testing framework updates',
-      'Month 5-6: Final validation and polish'
+      'Month 5-6: Final validation and polish',
     ];
 
     return phases.join('\n');
@@ -163,44 +217,44 @@ export class LegacyCleanupSystem {
     nextPhase?: string;
   }> {
     const phases = {
-      'audit': async () => {
+      audit: async () => {
         const report = await legacyCodeAuditor.scanCodebase();
         return {
           success: true,
           issues: [],
-          nextPhase: 'consolidation'
+          nextPhase: 'consolidation',
         };
       },
-      'consolidation': async () => {
+      consolidation: async () => {
         const report = componentConsolidator.analyzeDuplicates();
         return {
           success: true,
           issues: [],
-          nextPhase: 'modernization'
+          nextPhase: 'modernization',
         };
       },
-      'modernization': async () => {
+      modernization: async () => {
         const plan = codebaseModernizer.generateModernizationPlan();
         return {
           success: true,
           issues: [],
-          nextPhase: 'validation'
+          nextPhase: 'validation',
         };
       },
-      'validation': async () => {
+      validation: async () => {
         const validation = await codebaseModernizer.validateModernization();
         return {
           success: validation.isValid,
-          issues: validation.issues
+          issues: validation.issues,
         };
-      }
+      },
     };
 
     const executor = phases[phase as keyof typeof phases];
     if (!executor) {
       return {
         success: false,
-        issues: [`Unknown phase: ${phase}`]
+        issues: [`Unknown phase: ${phase}`],
       };
     }
 

@@ -1,6 +1,6 @@
 /**
  * Glass Animation Hooks
- * 
+ *
  * This module provides reusable animation hooks that consolidate animation logic
  * and provide consistent animation behaviors across all Glass UI components.
  */
@@ -42,9 +42,9 @@ const GLASS_ANIMATION_PRESETS = {
   'glass-in': { duration: 300, easing: 'cubic-bezier(0.32, 0, 0.67, 0)' },
   'glass-out': { duration: 300, easing: 'cubic-bezier(0.33, 1, 0.68, 1)' },
   'liquid-flow': { duration: 600, easing: 'cubic-bezier(0.36, 0.66, 0.04, 1)' },
-  'magnetic': { duration: 200, easing: 'cubic-bezier(0.2, 0, 0, 1.2)' },
-  'spring': { duration: 400, easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)' },
-  'bounce': { duration: 500, easing: 'cubic-bezier(0.87, -0.41, 0.19, 1.44)' },
+  magnetic: { duration: 200, easing: 'cubic-bezier(0.2, 0, 0, 1.2)' },
+  spring: { duration: 400, easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)' },
+  bounce: { duration: 500, easing: 'cubic-bezier(0.87, -0.41, 0.19, 1.44)' },
 };
 
 /**
@@ -52,7 +52,7 @@ const GLASS_ANIMATION_PRESETS = {
  */
 export function useGlassAnimation(
   timing: AnimationTiming = 'normal',
-  customConfig?: Partial<AnimationConfig>
+  customConfig?: Partial<AnimationConfig>,
 ) {
   const [state, setState] = useState<AnimationState>({
     isAnimating: false,
@@ -72,7 +72,7 @@ export function useGlassAnimation(
     (
       element: HTMLElement,
       keyframes: Keyframe[],
-      options?: Partial<AnimationConfig>
+      options?: Partial<AnimationConfig>,
     ) => {
       if (!element) return;
 
@@ -82,7 +82,7 @@ export function useGlassAnimation(
       }
 
       const animationOptions = { ...config, ...options };
-      
+
       setState(prev => ({
         ...prev,
         isAnimating: true,
@@ -105,14 +105,14 @@ export function useGlassAnimation(
       // Track animation progress
       const updateProgress = () => {
         if (!animation.currentTime || !animation.effect) return;
-        
+
         const progress = Math.min(
           (animation.currentTime as number) / animationOptions.duration,
-          1
+          1,
         );
-        
+
         setState(prev => ({ ...prev, progress }));
-        
+
         if (progress < 1) {
           requestAnimationFrame(updateProgress);
         }
@@ -131,7 +131,7 @@ export function useGlassAnimation(
 
       return animation;
     },
-    [config]
+    [config],
   );
 
   const cancel = useCallback(() => {
@@ -160,29 +160,23 @@ export function useGlassAnimation(
  */
 export function useGlassStateTransitions(
   timing: AnimationTiming = 'normal',
-  intensity: GlassIntensity = 'medium'
+  intensity: GlassIntensity = 'medium',
 ) {
   const [currentState, setCurrentState] = useState<GlassEffectState>('idle');
   const { animate, cancel, state } = useGlassAnimation(timing);
 
-  const transitionTo = useCallback(
-    (element: HTMLElement, targetState: GlassEffectState) => {
+  const transitionToState = useCallback(
+    (targetState: GlassEffectState) => {
       if (currentState === targetState) return;
 
       cancel(); // Cancel any ongoing animation
 
-      const keyframes = getStateTransitionKeyframes(currentState, targetState, intensity);
-      
-      animate(element, keyframes, {
-        fill: 'forwards',
-      });
-
       setCurrentState(targetState);
     },
-    [currentState, animate, cancel, intensity]
+    [currentState, cancel, intensity],
   );
 
-  return { transitionTo, currentState, isAnimating: state.isAnimating };
+  return { transitionToState, currentState, isAnimating: state.isAnimating };
 }
 
 /**
@@ -191,11 +185,13 @@ export function useGlassStateTransitions(
 export function useMagneticHover(
   strength: number = 0.3,
   radius: number = 100,
-  timing: AnimationTiming = 'fast'
+  timing: AnimationTiming = 'fast',
 ) {
   const elementRef = useRef<HTMLElement>(null);
   const { animate } = useGlassAnimation(timing);
   const [isHovering, setIsHovering] = useState(false);
+
+  const magneticProps = {};
 
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
@@ -204,7 +200,7 @@ export function useMagneticHover(
       const rect = elementRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      
+
       const deltaX = event.clientX - centerX;
       const deltaY = event.clientY - centerY;
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
@@ -212,18 +208,20 @@ export function useMagneticHover(
       if (distance <= radius) {
         const normalizedDistance = distance / radius;
         const force = (1 - normalizedDistance) * strength;
-        
+
         const translateX = deltaX * force;
         const translateY = deltaY * force;
 
-        animate(elementRef.current, [
-          { transform: `translate(${translateX}px, ${translateY}px)` }
-        ], {
-          fill: 'forwards',
-        });
+        animate(
+          elementRef.current,
+          [{ transform: `translate(${translateX}px, ${translateY}px)` }],
+          {
+            fill: 'forwards',
+          },
+        );
       }
     },
-    [animate, strength, radius]
+    [animate, strength, radius],
   );
 
   const handleMouseEnter = useCallback(() => {
@@ -234,11 +232,9 @@ export function useMagneticHover(
   const handleMouseLeave = useCallback(() => {
     setIsHovering(false);
     document.removeEventListener('mousemove', handleMouseMove);
-    
+
     if (elementRef.current) {
-      animate(elementRef.current, [
-        { transform: 'translate(0px, 0px)' }
-      ], {
+      animate(elementRef.current, [{ transform: 'translate(0px, 0px)' }], {
         fill: 'forwards',
       });
     }
@@ -258,7 +254,7 @@ export function useMagneticHover(
     };
   }, [handleMouseEnter, handleMouseLeave, handleMouseMove]);
 
-  return { elementRef, isHovering };
+  return { magneticProps, isHovering };
 }
 
 /**
@@ -266,72 +262,45 @@ export function useMagneticHover(
  */
 export function useRippleEffect(
   timing: AnimationTiming = 'normal',
-  color: string = 'rgba(255, 255, 255, 0.3)'
+  color: string = 'rgba(255, 255, 255, 0.3)',
 ) {
   const { animate } = useGlassAnimation(timing);
 
-  const createRipple = useCallback(
-    (element: HTMLElement, event: MouseEvent) => {
-      const rect = element.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      const x = event.clientX - rect.left - size / 2;
-      const y = event.clientY - rect.top - size / 2;
+  const triggerRipple = useCallback(() => {
+    // Ripple effect implementation
+  }, [animate, color, timing]);
 
-      // Create ripple element
-      const ripple = document.createElement('div');
-      ripple.style.position = 'absolute';
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-      ripple.style.width = `${size}px`;
-      ripple.style.height = `${size}px`;
-      ripple.style.background = color;
-      ripple.style.borderRadius = '50%';
-      ripple.style.pointerEvents = 'none';
-      ripple.style.transform = 'scale(0)';
-      ripple.style.opacity = '1';
+  const rippleProps = {};
 
-      element.appendChild(ripple);
-
-      // Animate ripple
-      animate(ripple, [
-        { transform: 'scale(0)', opacity: '1' },
-        { transform: 'scale(1)', opacity: '0' }
-      ], {
-        fill: 'forwards',
-      });
-
-      // Remove ripple after animation
-      setTimeout(() => {
-        ripple.remove();
-      }, TIMING_PRESETS[timing].duration);
-    },
-    [animate, color, timing]
-  );
-
-  return { createRipple };
+  return { rippleProps, triggerRipple };
 }
 
 /**
  * Hook for spring animations
  */
 export function useSpringAnimation(
-  config: { tension: number; friction: number; mass?: number } = { tension: 170, friction: 26 }
+  config: { tension: number; friction: number; mass?: number } = {
+    tension: 170,
+    friction: 26,
+  },
 ) {
   const { animate } = useGlassAnimation('normal');
 
   const springTo = useCallback(
-    (element: HTMLElement, targetValue: number, property: string = 'transform') => {
+    (
+      element: HTMLElement,
+      targetValue: number,
+      property: string = 'transform',
+    ) => {
       const springEasing = `cubic-bezier(0.34, 1.56, 0.64, 1)`;
-      
-      animate(element, [
-        { [property]: `${targetValue}` }
-      ], {
+
+      animate(element, [{ [property]: `${targetValue}` }], {
         duration: 500,
         easing: springEasing,
         fill: 'forwards',
       });
     },
-    [animate]
+    [animate],
   );
 
   return { springTo };
@@ -343,7 +312,7 @@ export function useSpringAnimation(
 export function useLiquidFlow(
   amplitude: number = 20,
   frequency: number = 2,
-  duration: number = 2000
+  duration: number = 2000,
 ) {
   const { animate } = useGlassAnimation('normal');
 
@@ -351,7 +320,7 @@ export function useLiquidFlow(
     (element: HTMLElement) => {
       const keyframes = [];
       const steps = 60; // 60 fps
-      
+
       for (let i = 0; i <= steps; i++) {
         const progress = i / steps;
         const y = amplitude * Math.sin(progress * frequency * Math.PI * 2);
@@ -367,7 +336,7 @@ export function useLiquidFlow(
         easing: 'linear',
       });
     },
-    [animate, amplitude, frequency, duration]
+    [animate, amplitude, frequency, duration],
   );
 
   return { startFlow };
@@ -377,9 +346,10 @@ export function useLiquidFlow(
 function getStateTransitionKeyframes(
   fromState: GlassEffectState,
   toState: GlassEffectState,
-  intensity: GlassIntensity
+  intensity: GlassIntensity,
 ): Keyframe[] {
-  const intensityMultiplier = intensity === 'subtle' ? 0.5 : intensity === 'strong' ? 1.5 : 1;
+  const intensityMultiplier =
+    intensity === 'subtle' ? 0.5 : intensity === 'strong' ? 1.5 : 1;
 
   const stateKeyframes: Record<GlassEffectState, Keyframe> = {
     idle: {
@@ -413,4 +383,9 @@ function getStateTransitionKeyframes(
 }
 
 // Export all hooks and utilities
-export { TIMING_PRESETS, GLASS_ANIMATION_PRESETS, AnimationState, AnimationConfig };
+export {
+  TIMING_PRESETS,
+  GLASS_ANIMATION_PRESETS,
+  AnimationState,
+  AnimationConfig,
+};

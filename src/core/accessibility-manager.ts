@@ -1,9 +1,10 @@
-import { axe, AxeResults } from 'axe-core';
-import { 
-  checkContrast, 
-  suggestBetterColor, 
+import type { AxeResults } from 'axe-core';
+import axe from 'axe-core';
+import {
+  checkContrast,
+  suggestBetterColor,
   checkGlassContrast,
-  type ContrastResult as BaseContrastResult
+  type ContrastResult as BaseContrastResult,
 } from '@/utils/contrast-checker';
 import { announcer } from '@/components/glass-live-region';
 
@@ -102,13 +103,26 @@ const ARIA_RULES = {
   roles: {
     button: {
       requiredProps: [],
-      allowedProps: ['aria-expanded', 'aria-pressed', 'aria-disabled', 'aria-label', 'aria-labelledby', 'aria-describedby'],
+      allowedProps: [
+        'aria-expanded',
+        'aria-pressed',
+        'aria-disabled',
+        'aria-label',
+        'aria-labelledby',
+        'aria-describedby',
+      ],
       implicitProps: { 'aria-pressed': 'false' },
       interactive: true,
     },
     link: {
       requiredProps: [],
-      allowedProps: ['aria-disabled', 'aria-expanded', 'aria-label', 'aria-labelledby', 'aria-describedby'],
+      allowedProps: [
+        'aria-disabled',
+        'aria-expanded',
+        'aria-label',
+        'aria-labelledby',
+        'aria-describedby',
+      ],
       interactive: true,
     },
     img: {
@@ -142,22 +156,40 @@ const ARIA_RULES = {
     },
     combobox: {
       requiredProps: ['aria-expanded', 'aria-controls'],
-      allowedProps: ['aria-autocomplete', 'aria-readonly', 'aria-required', 'aria-activedescendant', 'aria-label', 'aria-labelledby'],
+      allowedProps: [
+        'aria-autocomplete',
+        'aria-readonly',
+        'aria-required',
+        'aria-activedescendant',
+        'aria-label',
+        'aria-labelledby',
+      ],
       interactive: true,
     },
     menu: {
       requiredProps: [],
-      allowedProps: ['aria-label', 'aria-labelledby', 'aria-activedescendant', 'aria-orientation'],
+      allowedProps: [
+        'aria-label',
+        'aria-labelledby',
+        'aria-activedescendant',
+        'aria-orientation',
+      ],
       interactive: true,
     },
     menuitem: {
       requiredProps: [],
-      allowedProps: ['aria-disabled', 'aria-expanded', 'aria-checked', 'aria-label', 'aria-labelledby'],
+      allowedProps: [
+        'aria-disabled',
+        'aria-expanded',
+        'aria-checked',
+        'aria-label',
+        'aria-labelledby',
+      ],
       interactive: true,
       requiresParent: ['menu', 'menubar'],
     },
   },
-  
+
   attributes: {
     'aria-label': {
       type: 'string',
@@ -223,7 +255,7 @@ export class AccessibilityManager {
   private constructor() {
     this.contrastCache = new Map();
     this.validationCache = new Map();
-    
+
     // Configure axe-core options
     this.axeOptions = {
       runOnly: {
@@ -249,7 +281,10 @@ export class AccessibilityManager {
   /**
    * Validate component for WCAG compliance
    */
-  async validateComponent(element: HTMLElement, componentInfo?: ComponentInfo): Promise<AccessibilityReport> {
+  async validateComponent(
+    element: HTMLElement,
+    componentInfo?: ComponentInfo
+  ): Promise<AccessibilityReport> {
     // Check cache first
     const cached = this.validationCache.get(element);
     if (cached && Date.now() - cached.timestamp.getTime() < 5000) {
@@ -258,21 +293,28 @@ export class AccessibilityManager {
 
     try {
       // Run axe-core validation
-      const results: AxeResults = await axe.run(element, this.axeOptions);
-      
+      const results = (await axe.run(
+        element,
+        this.axeOptions
+      )) as unknown as AxeResults;
+
       // Process violations
       const violations = this.processViolations(results.violations);
-      
+
       // Generate warnings and suggestions
       const warnings = this.generateWarnings(element);
-      const suggestions = this.generateSuggestions(element, violations, warnings);
-      
+      const suggestions = this.generateSuggestions(
+        element,
+        violations,
+        warnings
+      );
+
       // Calculate accessibility score
       const score = this.calculateScore(results);
-      
+
       // Determine WCAG level
       const wcagLevel = this.determineWCAGLevel(violations);
-      
+
       const report: AccessibilityReport = {
         score,
         violations,
@@ -282,17 +324,19 @@ export class AccessibilityManager {
         timestamp: new Date(),
         componentInfo,
       };
-      
+
       // Cache the result
       this.validationCache.set(element, report);
-      
+
       // Auto-fix if possible
       this.applyAutoFixes(element, suggestions);
-      
+
       return report;
     } catch (error) {
       console.error('Accessibility validation error:', error);
-      throw new Error(`Failed to validate component: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(
+        `Failed to validate component: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
     }
   }
 
@@ -300,8 +344,8 @@ export class AccessibilityManager {
    * Ensure contrast meets WCAG standards
    */
   ensureContrast(
-    foreground: string, 
-    background: string, 
+    foreground: string,
+    background: string,
     options: {
       level?: 'AA' | 'AAA';
       largeText?: boolean;
@@ -309,15 +353,20 @@ export class AccessibilityManager {
       glassEffect?: { opacity: number; backdropColor?: string };
     } = {}
   ): ContrastResult {
-    const { level = 'AA', largeText = false, autoFix = true, glassEffect } = options;
-    
+    const {
+      level = 'AA',
+      largeText = false,
+      autoFix = true,
+      glassEffect,
+    } = options;
+
     // Check cache
     const cacheKey = `${foreground}-${background}-${level}-${largeText}`;
     const cached = this.contrastCache.get(cacheKey);
     if (cached) return cached;
-    
+
     let result: ContrastResult;
-    
+
     // Check contrast with glass effect if applicable
     if (glassEffect) {
       const baseResult = checkGlassContrast(
@@ -331,33 +380,44 @@ export class AccessibilityManager {
       const baseResult = checkContrast(foreground, background);
       result = { ...baseResult } as ContrastResult;
     }
-    
+
     // Check if it meets the required level
-    const meetsRequirement = level === 'AA' 
-      ? (largeText ? result.passes.aa.large : result.passes.aa.normal)
-      : (largeText ? result.passes.aaa.large : result.passes.aaa.normal);
-    
+    const meetsRequirement =
+      level === 'AA'
+        ? largeText
+          ? result.passes.aa.large
+          : result.passes.aa.normal
+        : largeText
+          ? result.passes.aaa.large
+          : result.passes.aaa.normal;
+
     // Auto-fix if needed and requested
     if (!meetsRequirement && autoFix) {
-      const targetRatio = level === 'AA' 
-        ? (largeText ? 3 : 4.5)
-        : (largeText ? 4.5 : 7);
-      
+      const targetRatio =
+        level === 'AA' ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
+
       try {
-        const suggestedFg = suggestBetterColor(foreground, background, targetRatio);
+        const suggestedFg = suggestBetterColor(
+          foreground,
+          background,
+          targetRatio
+        );
         result.suggestedForeground = `rgb(${suggestedFg.r}, ${suggestedFg.g}, ${suggestedFg.b})`;
         result.autoFixed = true;
-        
+
         // Announce the fix
-        this.announce(`Contrast adjusted for better accessibility. New ratio: ${targetRatio}:1`, 'polite');
+        this.announce(
+          `Contrast adjusted for better accessibility. New ratio: ${targetRatio}:1`,
+          'polite'
+        );
       } catch (error) {
         console.error('Failed to suggest better color:', error);
       }
     }
-    
+
     // Cache the result
     this.contrastCache.set(cacheKey, result);
-    
+
     return result;
   }
 
@@ -408,14 +468,17 @@ export class AccessibilityManager {
   /**
    * Validate ARIA attributes
    */
-  validateARIA(element: HTMLElement, autoCorrect: boolean = true): ARIAValidation {
+  validateARIA(
+    element: HTMLElement,
+    autoCorrect: boolean = true
+  ): ARIAValidation {
     const errors: ARIAError[] = [];
     const suggestions: ARIASuggestion[] = [];
     const autoCorrections: ARIACorrection[] = [];
 
     // Get element's role
     const role = element.getAttribute('role') || this.getImplicitRole(element);
-    
+
     // Check role validity
     if (role && !ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]) {
       errors.push({
@@ -427,14 +490,15 @@ export class AccessibilityManager {
     }
 
     // Validate ARIA attributes
-    const ariaAttributes = Array.from(element.attributes).filter(attr => 
+    const ariaAttributes = Array.from(element.attributes).filter(attr =>
       attr.name.startsWith('aria-')
     );
 
     ariaAttributes.forEach(attr => {
       const attrName = attr.name;
       const attrValue = attr.value;
-      const attrRule = ARIA_RULES.attributes[attrName as keyof typeof ARIA_RULES.attributes];
+      const attrRule =
+        ARIA_RULES.attributes[attrName as keyof typeof ARIA_RULES.attributes];
 
       if (!attrRule) {
         errors.push({
@@ -447,7 +511,11 @@ export class AccessibilityManager {
       }
 
       // Validate attribute value
-      if (attrRule.type === 'boolean' && 'values' in attrRule && !attrRule.values?.includes(attrValue)) {
+      if (
+        attrRule.type === 'boolean' &&
+        'values' in attrRule &&
+        !attrRule.values?.includes(attrValue)
+      ) {
         errors.push({
           attribute: attrName,
           value: attrValue,
@@ -474,7 +542,7 @@ export class AccessibilityManager {
       if (attrRule.type === 'idref') {
         const ids = attrValue.split(' ').filter(id => id.trim());
         const missingIds = ids.filter(id => !document.getElementById(id));
-        
+
         if (missingIds.length > 0) {
           errors.push({
             attribute: attrName,
@@ -489,7 +557,7 @@ export class AccessibilityManager {
     // Check required attributes for role
     if (role && ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]) {
       const roleRule = ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles];
-      
+
       roleRule.requiredProps?.forEach(prop => {
         if (!element.hasAttribute(prop)) {
           suggestions.push({
@@ -502,7 +570,11 @@ export class AccessibilityManager {
       });
 
       // Apply implicit props if missing
-      if ('implicitProps' in roleRule && roleRule.implicitProps && autoCorrect) {
+      if (
+        'implicitProps' in roleRule &&
+        roleRule.implicitProps &&
+        autoCorrect
+      ) {
         Object.entries(roleRule.implicitProps).forEach(([prop, value]) => {
           if (!element.hasAttribute(prop)) {
             element.setAttribute(prop, value);
@@ -589,7 +661,9 @@ export class AccessibilityManager {
 
     // Check for empty headings
     const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    const emptyHeadings = Array.from(headings).filter(h => !h.textContent?.trim());
+    const emptyHeadings = Array.from(headings).filter(
+      h => !h.textContent?.trim()
+    );
     if (emptyHeadings.length > 0) {
       warnings.push({
         id: 'empty-headings',
@@ -600,7 +674,9 @@ export class AccessibilityManager {
     }
 
     // Check for positive tabindex
-    const positiveTabindex = element.querySelectorAll('[tabindex]:not([tabindex="0"]):not([tabindex="-1"])');
+    const positiveTabindex = element.querySelectorAll(
+      '[tabindex]:not([tabindex="0"]):not([tabindex="-1"])'
+    );
     if (positiveTabindex.length > 0) {
       warnings.push({
         id: 'positive-tabindex',
@@ -614,8 +690,8 @@ export class AccessibilityManager {
   }
 
   private generateSuggestions(
-    element: HTMLElement, 
-    violations: Violation[], 
+    element: HTMLElement,
+    violations: Violation[],
     _warnings: Warning[]
   ): Suggestion[] {
     const suggestions: Suggestion[] = [];
@@ -643,7 +719,10 @@ export class AccessibilityManager {
         autoFixAvailable: true,
         fix: () => {
           if (ariaSuggestion.suggestedValue) {
-            element.setAttribute(ariaSuggestion.attribute, ariaSuggestion.suggestedValue);
+            element.setAttribute(
+              ariaSuggestion.attribute,
+              ariaSuggestion.suggestedValue
+            );
           }
         },
       });
@@ -664,7 +743,10 @@ export class AccessibilityManager {
   }
 
   private calculateScore(results: AxeResults): number {
-    const totalChecks = results.violations.length + results.passes.length + results.incomplete.length;
+    const totalChecks =
+      results.violations.length +
+      results.passes.length +
+      results.incomplete.length;
     if (totalChecks === 0) return 100;
 
     const violationWeight = results.violations.reduce((sum, v) => {
@@ -672,27 +754,34 @@ export class AccessibilityManager {
       return sum + (impactWeight[v.impact as keyof typeof impactWeight] || 1);
     }, 0);
 
-    const score = Math.max(0, 100 - (violationWeight * 5));
+    const score = Math.max(0, 100 - violationWeight * 5);
     return Math.round(score);
   }
 
   private determineWCAGLevel(violations: Violation[]): 'A' | 'AA' | 'AAA' {
-    const hasAAViolations = violations.some(v => 
-      v.id.includes('aa') || v.impact === 'serious' || v.impact === 'critical'
+    const hasAAViolations = violations.some(
+      v =>
+        v.id.includes('aa') || v.impact === 'serious' || v.impact === 'critical'
     );
-    
+
     if (!hasAAViolations && violations.length === 0) return 'AAA';
     if (!hasAAViolations) return 'AA';
     return 'A';
   }
 
-  private applyAutoFixes(_element: HTMLElement, suggestions: Suggestion[]): void {
+  private applyAutoFixes(
+    _element: HTMLElement,
+    suggestions: Suggestion[]
+  ): void {
     suggestions.forEach(suggestion => {
       if (suggestion.autoFixAvailable && suggestion.fix) {
         try {
           suggestion.fix();
         } catch (error) {
-          console.error(`Failed to apply auto-fix: ${suggestion.message}`, error);
+          console.error(
+            `Failed to apply auto-fix: ${suggestion.message}`,
+            error
+          );
         }
       }
     });
@@ -713,9 +802,9 @@ export class AccessibilityManager {
 
   private getImplicitRole(element: HTMLElement): string | null {
     const tagName = element.tagName.toLowerCase();
-    const implicitRoles: Record<string, string> = {
+    const implicitRoles: Record<string, string | null> = {
       button: 'button',
-      a: element.hasAttribute('href') ? 'link' : null,
+      a: element.hasAttribute('href') ? 'link' : 'generic',
       nav: 'navigation',
       main: 'main',
       img: 'img',
@@ -724,13 +813,16 @@ export class AccessibilityManager {
       ol: 'list',
       li: 'listitem',
     };
-    
+
     return implicitRoles[tagName] || null;
   }
 
   private isInteractive(element: HTMLElement): boolean {
     const role = element.getAttribute('role') || this.getImplicitRole(element);
-    if (role && ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]?.interactive) {
+    if (
+      role &&
+      ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]?.interactive
+    ) {
       return true;
     }
 
@@ -750,16 +842,19 @@ export class AccessibilityManager {
   private generateAccessibleName(element: HTMLElement): string {
     const type = element.tagName.toLowerCase();
     const role = element.getAttribute('role');
-    
+
     if (element.className) {
       const className = element.className.split(' ')[0];
       return `${role || type} ${className}`;
     }
-    
+
     return `${role || type} element`;
   }
 
-  private getSuggestedARIAValue(attribute: string, element: HTMLElement): string {
+  private getSuggestedARIAValue(
+    attribute: string,
+    element: HTMLElement
+  ): string {
     switch (attribute) {
       case 'aria-label':
         return this.generateAccessibleName(element);
@@ -776,9 +871,11 @@ export class AccessibilityManager {
     const computedStyle = window.getComputedStyle(element);
     const color = computedStyle.color;
     const backgroundColor = computedStyle.backgroundColor;
-    
-    const result = this.ensureContrast(color, backgroundColor, { autoFix: true });
-    
+
+    const result = this.ensureContrast(color, backgroundColor, {
+      autoFix: true,
+    });
+
     if (result.suggestedForeground) {
       element.style.color = result.suggestedForeground;
     }
@@ -786,10 +883,13 @@ export class AccessibilityManager {
 
   private handleMutations(mutations: MutationRecord[]): void {
     mutations.forEach(mutation => {
-      if (mutation.type === 'attributes' && mutation.attributeName?.startsWith('aria-')) {
+      if (
+        mutation.type === 'attributes' &&
+        mutation.attributeName?.startsWith('aria-')
+      ) {
         const element = mutation.target as HTMLElement;
         const validation = this.validateARIA(element, true);
-        
+
         if (!validation.valid) {
           console.warn('ARIA validation errors:', validation.errors);
         }
@@ -808,7 +908,10 @@ class FocusTrap {
   private firstFocusableElement: HTMLElement | null = null;
   private lastFocusableElement: HTMLElement | null = null;
 
-  constructor(container: HTMLElement, options: FocusOptions & { onDeactivate?: () => void }) {
+  constructor(
+    container: HTMLElement,
+    options: FocusOptions & { onDeactivate?: () => void }
+  ) {
     this.container = container;
     this.options = options;
     this.updateFocusableElements();
@@ -821,15 +924,20 @@ class FocusTrap {
 
     // Set initial focus
     if (this.options.initialFocus) {
-      const initialElement = typeof this.options.initialFocus === 'string'
-        ? this.container.querySelector(this.options.initialFocus) as HTMLElement
-        : this.options.initialFocus;
-      
+      const initialElement =
+        typeof this.options.initialFocus === 'string'
+          ? (this.container.querySelector(
+              this.options.initialFocus
+            ) as HTMLElement)
+          : this.options.initialFocus;
+
       if (initialElement) {
         initialElement.focus({ preventScroll: this.options.preventScroll });
       }
     } else if (this.firstFocusableElement) {
-      this.firstFocusableElement.focus({ preventScroll: this.options.preventScroll });
+      this.firstFocusableElement.focus({
+        preventScroll: this.options.preventScroll,
+      });
     }
 
     // Add event listeners
@@ -866,7 +974,8 @@ class FocusTrap {
     ) as HTMLElement[];
 
     this.firstFocusableElement = focusableElements[0] || null;
-    this.lastFocusableElement = focusableElements[focusableElements.length - 1] || null;
+    this.lastFocusableElement =
+      focusableElements[focusableElements.length - 1] || null;
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {
@@ -877,10 +986,16 @@ class FocusTrap {
 
       if (!this.firstFocusableElement || !this.lastFocusableElement) return;
 
-      if (event.shiftKey && document.activeElement === this.firstFocusableElement) {
+      if (
+        event.shiftKey &&
+        document.activeElement === this.firstFocusableElement
+      ) {
         event.preventDefault();
         this.lastFocusableElement.focus();
-      } else if (!event.shiftKey && document.activeElement === this.lastFocusableElement) {
+      } else if (
+        !event.shiftKey &&
+        document.activeElement === this.lastFocusableElement
+      ) {
         event.preventDefault();
         this.firstFocusableElement.focus();
       }

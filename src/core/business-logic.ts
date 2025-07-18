@@ -1,6 +1,6 @@
 /**
  * Business Logic Separation Utilities
- * 
+ *
  * This module provides utilities for separating business logic from presentation
  * components, ensuring clean architecture and better testability.
  */
@@ -29,9 +29,10 @@ export interface Action<T = any> {
 export type Reducer<S, A> = (state: S, action: A) => S;
 
 // Event handler factory
-export type EventHandlerFactory<T extends HTMLElement, E extends Event = Event> = (
-  ...args: any[]
-) => (event: E & { currentTarget: T }) => void;
+export type EventHandlerFactory<
+  T extends HTMLElement,
+  E extends Event = Event,
+> = (...args: any[]) => (event: E & { currentTarget: T }) => void;
 
 /**
  * Create a business logic hook for component state management
@@ -39,7 +40,7 @@ export type EventHandlerFactory<T extends HTMLElement, E extends Event = Event> 
 export function createBusinessLogicHook<
   TState,
   TProps,
-  TActions extends Record<string, (...args: any[]) => any>
+  TActions extends Record<string, (...args: any[]) => any>,
 >(
   initialStateFactory: (props: TProps) => TState,
   actionsFactory: (
@@ -51,7 +52,7 @@ export function createBusinessLogicHook<
   return (props: TProps) => {
     const initialState = useMemo(() => initialStateFactory(props), [props]);
     const [state, setState] = React.useState<TState>(initialState);
-    
+
     const actions = useMemo(
       () => actionsFactory(state, setState, props),
       [state, props]
@@ -67,7 +68,7 @@ export function createBusinessLogicHook<
 export function createReducerBusinessLogic<
   TState,
   TAction extends Action,
-  TProps
+  TProps,
 >(
   initialStateFactory: (props: TProps) => TState,
   reducer: Reducer<TState, TAction>,
@@ -76,7 +77,10 @@ export function createReducerBusinessLogic<
     dispatch: (action: TAction) => void,
     props: TProps
   ) => void
-): BusinessLogicHook<{ state: TState; dispatch: (action: TAction) => void }, TProps> {
+): BusinessLogicHook<
+  { state: TState; dispatch: (action: TAction) => void },
+  TProps
+> {
   return (props: TProps) => {
     const initialState = useMemo(() => initialStateFactory(props), [props]);
     const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -94,16 +98,14 @@ export function createReducerBusinessLogic<
 /**
  * Create event handlers with business logic separation
  */
-export function createEventHandlers<
-  TElement extends HTMLElement,
-  TState,
-  TProps
->(
+export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
   state: TState,
   setState: (newState: TState | ((prevState: TState) => TState)) => void,
   props: TProps
 ) {
-  const handlersRef = useRef<Map<string, EventHandlerFactory<TElement>>>(new Map());
+  const handlersRef = useRef<Map<string, EventHandlerFactory<TElement>>>(
+    new Map()
+  );
 
   const createHandler = useCallback(
     <E extends Event>(
@@ -111,12 +113,17 @@ export function createEventHandlers<
       handler: (
         event: E & { currentTarget: TElement },
         state: TState,
-        setState: typeof setState,
+        setState: (newState: TState | ((prevState: TState) => TState)) => void,
         props: TProps
       ) => void
     ): EventHandlerFactory<TElement, E> => {
-      const factory: EventHandlerFactory<TElement, E> = () => (event) => {
-        handler(event as E & { currentTarget: TElement }, state, setState, props);
+      const factory: EventHandlerFactory<TElement, E> = () => event => {
+        handler(
+          event as E & { currentTarget: TElement },
+          state,
+          setState,
+          props
+        );
       };
 
       handlersRef.current.set(name, factory as EventHandlerFactory<TElement>);
@@ -165,89 +172,95 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
       isDirty: false,
     });
 
-    const actions = useMemo((): FormActions<T> => ({
-      setValue: (name: keyof T, value: T[keyof T]) => {
-        setState(prev => ({
-          ...prev,
-          values: { ...prev.values, [name]: value },
-          isDirty: true,
-        }));
-      },
+    const actions = useMemo(
+      (): FormActions<T> => ({
+        setValue: (name: keyof T, value: T[keyof T]) => {
+          setState(prev => ({
+            ...prev,
+            values: { ...prev.values, [name]: value },
+            isDirty: true,
+          }));
+        },
 
-      setError: (name: keyof T, error: string | null) => {
-        setState(prev => ({
-          ...prev,
-          errors: { ...prev.errors, [name]: error },
-        }));
-      },
-
-      setTouched: (name: keyof T, touched: boolean) => {
-        setState(prev => ({
-          ...prev,
-          touched: { ...prev.touched, [name]: touched },
-        }));
-      },
-
-      validateField: (name: keyof T) => {
-        if (validationRules && validationRules[name]) {
-          const error = validationRules[name](state.values[name]);
+        setError: (name: keyof T, error: string | null) => {
           setState(prev => ({
             ...prev,
             errors: { ...prev.errors, [name]: error },
           }));
-        }
-      },
+        },
 
-      validateForm: () => {
-        if (!validationRules) return true;
+        setTouched: (name: keyof T, touched: boolean) => {
+          setState(prev => ({
+            ...prev,
+            touched: { ...prev.touched, [name]: touched },
+          }));
+        },
 
-        const errors: Record<keyof T, string | null> = {} as Record<keyof T, string | null>;
-        let isValid = true;
-
-        Object.keys(validationRules).forEach(key => {
-          const fieldName = key as keyof T;
-          const error = validationRules[fieldName](state.values[fieldName]);
-          errors[fieldName] = error;
-          if (error) isValid = false;
-        });
-
-        setState(prev => ({
-          ...prev,
-          errors,
-          isValid,
-        }));
-
-        return isValid;
-      },
-
-      resetForm: () => {
-        setState({
-          values: initialValues,
-          errors: {} as Record<keyof T, string | null>,
-          touched: {} as Record<keyof T, boolean>,
-          isValid: true,
-          isSubmitting: false,
-          isDirty: false,
-        });
-      },
-
-      submitForm: async () => {
-        if (!onSubmit) return;
-
-        setState(prev => ({ ...prev, isSubmitting: true }));
-
-        try {
-          const isValid = actions.validateForm();
-          if (isValid) {
-            await onSubmit(state.values);
+        validateField: (name: keyof T) => {
+          if (validationRules && validationRules[name]) {
+            const error = validationRules[name](state.values[name]);
+            setState(prev => ({
+              ...prev,
+              errors: { ...prev.errors, [name]: error },
+            }));
           }
-        } catch (error) {
-          console.error('Form submission error:', error);
-        } finally {
-          setState(prev => ({ ...prev, isSubmitting: false }));
-        }
-      },
-    }), [state]);
+        },
+
+        validateForm: () => {
+          if (!validationRules) return true;
+
+          const errors: Record<keyof T, string | null> = {} as Record<
+            keyof T,
+            string | null
+          >;
+          let isValid = true;
+
+          Object.keys(validationRules).forEach(key => {
+            const fieldName = key as keyof T;
+            const error = validationRules[fieldName](state.values[fieldName]);
+            errors[fieldName] = error;
+            if (error) isValid = false;
+          });
+
+          setState(prev => ({
+            ...prev,
+            errors,
+            isValid,
+          }));
+
+          return isValid;
+        },
+
+        resetForm: () => {
+          setState({
+            values: initialValues,
+            errors: {} as Record<keyof T, string | null>,
+            touched: {} as Record<keyof T, boolean>,
+            isValid: true,
+            isSubmitting: false,
+            isDirty: false,
+          });
+        },
+
+        submitForm: async () => {
+          if (!onSubmit) return;
+
+          setState(prev => ({ ...prev, isSubmitting: true }));
+
+          try {
+            const isValid = actions.validateForm();
+            if (isValid) {
+              await onSubmit(state.values);
+            }
+          } catch (error) {
+            console.error('Form submission error:', error);
+          } finally {
+            setState(prev => ({ ...prev, isSubmitting: false }));
+          }
+        },
+      }),
+      [state]
+    );
 
     return { state, actions };
   };
@@ -296,70 +309,76 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
       isLoading: false,
     });
 
-    const actions = useMemo((): TableActions<T> => ({
-      setItems: (items: T[]) => {
-        setState(prev => ({
-          ...prev,
-          items,
-          totalItems: items.length,
-          currentPage: 1,
-        }));
-      },
+    const actions = useMemo(
+      (): TableActions<T> => ({
+        setItems: (items: T[]) => {
+          setState(prev => ({
+            ...prev,
+            items,
+            totalItems: items.length,
+            currentPage: 1,
+          }));
+        },
 
-      selectItem: (item: T) => {
-        setState(prev => ({
-          ...prev,
-          selectedItems: prev.selectedItems.includes(item)
-            ? prev.selectedItems.filter(i => i !== item)
-            : [...prev.selectedItems, item],
-        }));
-      },
+        selectItem: (item: T) => {
+          setState(prev => ({
+            ...prev,
+            selectedItems: prev.selectedItems.includes(item)
+              ? prev.selectedItems.filter(i => i !== item)
+              : [...prev.selectedItems, item],
+          }));
+        },
 
-      selectAll: () => {
-        setState(prev => ({
-          ...prev,
-          selectedItems: [...prev.items],
-        }));
-      },
+        selectAll: () => {
+          setState(prev => ({
+            ...prev,
+            selectedItems: [...prev.items],
+          }));
+        },
 
-      deselectAll: () => {
-        setState(prev => ({
-          ...prev,
-          selectedItems: [],
-        }));
-      },
+        deselectAll: () => {
+          setState(prev => ({
+            ...prev,
+            selectedItems: [],
+          }));
+        },
 
-      sortBy: (field: string) => {
-        setState(prev => ({
-          ...prev,
-          sortBy: field,
-          sortDirection: prev.sortBy === field && prev.sortDirection === 'asc' ? 'desc' : 'asc',
-        }));
-      },
+        sortBy: (field: string) => {
+          setState(prev => ({
+            ...prev,
+            sortBy: field,
+            sortDirection:
+              prev.sortBy === field && prev.sortDirection === 'asc'
+                ? 'desc'
+                : 'asc',
+          }));
+        },
 
-      filter: (query: string) => {
-        setState(prev => ({
-          ...prev,
-          filterBy: query,
-          currentPage: 1,
-        }));
-      },
+        filter: (query: string) => {
+          setState(prev => ({
+            ...prev,
+            filterBy: query,
+            currentPage: 1,
+          }));
+        },
 
-      paginate: (page: number) => {
-        setState(prev => ({
-          ...prev,
-          currentPage: page,
-        }));
-      },
+        paginate: (page: number) => {
+          setState(prev => ({
+            ...prev,
+            currentPage: page,
+          }));
+        },
 
-      setItemsPerPage: (count: number) => {
-        setState(prev => ({
-          ...prev,
-          itemsPerPage: count,
-          currentPage: 1,
-        }));
-      },
-    }), []);
+        setItemsPerPage: (count: number) => {
+          setState(prev => ({
+            ...prev,
+            itemsPerPage: count,
+            currentPage: 1,
+          }));
+        },
+      }),
+      []
+    );
 
     return { state, actions };
   };
@@ -403,57 +422,60 @@ export function createModalBusinessLogic(
       ...initialState,
     });
 
-    const actions = useMemo((): ModalActions => ({
-      open: (config = {}) => {
-        setState(prev => ({
-          ...prev,
-          ...config,
-          isOpen: true,
-        }));
-      },
+    const actions = useMemo(
+      (): ModalActions => ({
+        open: (config = {}) => {
+          setState(prev => ({
+            ...prev,
+            ...config,
+            isOpen: true,
+          }));
+        },
 
-      close: () => {
-        setState(prev => ({
-          ...prev,
-          isOpen: false,
-        }));
-      },
+        close: () => {
+          setState(prev => ({
+            ...prev,
+            isOpen: false,
+          }));
+        },
 
-      toggle: () => {
-        setState(prev => ({
-          ...prev,
-          isOpen: !prev.isOpen,
-        }));
-      },
+        toggle: () => {
+          setState(prev => ({
+            ...prev,
+            isOpen: !prev.isOpen,
+          }));
+        },
 
-      setTitle: (title: string) => {
-        setState(prev => ({
-          ...prev,
-          title,
-        }));
-      },
+        setTitle: (title: string) => {
+          setState(prev => ({
+            ...prev,
+            title,
+          }));
+        },
 
-      setContent: (content: React.ReactNode) => {
-        setState(prev => ({
-          ...prev,
-          content,
-        }));
-      },
+        setContent: (content: React.ReactNode) => {
+          setState(prev => ({
+            ...prev,
+            content,
+          }));
+        },
 
-      setSize: (size: ComponentSize) => {
-        setState(prev => ({
-          ...prev,
-          size,
-        }));
-      },
+        setSize: (size: ComponentSize) => {
+          setState(prev => ({
+            ...prev,
+            size,
+          }));
+        },
 
-      setVariant: (variant: ComponentVariant) => {
-        setState(prev => ({
-          ...prev,
-          variant,
-        }));
-      },
-    }), []);
+        setVariant: (variant: ComponentVariant) => {
+          setState(prev => ({
+            ...prev,
+            variant,
+          }));
+        },
+      }),
+      []
+    );
 
     return { state, actions };
   };
@@ -481,7 +503,10 @@ export interface AsyncDataActions<T = any> {
 export function createAsyncDataBusinessLogic<T>(
   fetchFunction: () => Promise<T>,
   cacheTimeout: number = 5 * 60 * 1000 // 5 minutes
-): BusinessLogicHook<{ state: AsyncDataState<T>; actions: AsyncDataActions<T> }, {}> {
+): BusinessLogicHook<
+  { state: AsyncDataState<T>; actions: AsyncDataActions<T> },
+  {}
+> {
   return () => {
     const [state, setState] = React.useState<AsyncDataState<T>>({
       data: null,
@@ -490,91 +515,81 @@ export function createAsyncDataBusinessLogic<T>(
       lastFetch: null,
     });
 
-    const actions = useMemo((): AsyncDataActions<T> => ({
-      fetchData: async () => {
-        setState(prev => ({ ...prev, loading: true, error: null }));
-        
-        try {
-          const data = await fetchFunction();
+    const actions = useMemo(
+      (): AsyncDataActions<T> => ({
+        fetchData: async () => {
+          setState(prev => ({ ...prev, loading: true, error: null }));
+
+          try {
+            const data = await fetchFunction();
+            setState(prev => ({
+              ...prev,
+              data,
+              loading: false,
+              lastFetch: Date.now(),
+            }));
+          } catch (error) {
+            setState(prev => ({
+              ...prev,
+              error:
+                error instanceof Error ? error.message : 'An error occurred',
+              loading: false,
+            }));
+          }
+        },
+
+        setData: (data: T) => {
           setState(prev => ({
             ...prev,
             data,
-            loading: false,
             lastFetch: Date.now(),
           }));
-        } catch (error) {
+        },
+
+        setError: (error: string | null) => {
           setState(prev => ({
             ...prev,
-            error: error instanceof Error ? error.message : 'An error occurred',
-            loading: false,
+            error,
           }));
-        }
-      },
+        },
 
-      setData: (data: T) => {
-        setState(prev => ({
-          ...prev,
-          data,
-          lastFetch: Date.now(),
-        }));
-      },
+        setLoading: (loading: boolean) => {
+          setState(prev => ({
+            ...prev,
+            loading,
+          }));
+        },
 
-      setError: (error: string | null) => {
-        setState(prev => ({
-          ...prev,
-          error,
-        }));
-      },
+        refetch: async () => {
+          await actions.fetchData();
+        },
 
-      setLoading: (loading: boolean) => {
-        setState(prev => ({
-          ...prev,
-          loading,
-        }));
-      },
-
-      refetch: async () => {
-        await actions.fetchData();
-      },
-
-      clearData: () => {
-        setState({
-          data: null,
-          loading: false,
-          error: null,
-          lastFetch: null,
-        });
-      },
-    }), []);
+        clearData: () => {
+          setState({
+            data: null,
+            loading: false,
+            error: null,
+            lastFetch: null,
+          });
+        },
+      }),
+      []
+    );
 
     // Auto-fetch if cache is expired
     React.useEffect(() => {
-      const shouldFetch = 
-        !state.data && 
-        !state.loading && 
+      const shouldFetch =
+        !state.data &&
+        !state.loading &&
         (!state.lastFetch || Date.now() - state.lastFetch > cacheTimeout);
 
       if (shouldFetch) {
         actions.fetchData();
       }
-    }, [state.data, state.loading, state.lastFetch, cacheTimeout, actions]);
+    }, [state.data, state.loading, state.lastFetch, actions]);
 
     return { state, actions };
   };
 }
 
-// Export utility types
-export type {
-  StateManager,
-  Action,
-  Reducer,
-  EventHandlerFactory,
-  FormState,
-  FormActions,
-  TableState,
-  TableActions,
-  ModalState,
-  ModalActions,
-  AsyncDataState,
-  AsyncDataActions,
-};
+// All types are already exported above - no need for re-export

@@ -1,6 +1,6 @@
 /**
  * Optimized Core Bundle - Essential Components Only (<15KB)
- * 
+ *
  * This bundle contains only the most fundamental components and utilities
  * required for basic Glass UI functionality, with physics/animations
  * moved to separate bundles.

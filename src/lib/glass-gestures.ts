@@ -129,7 +129,11 @@ export class GlassGestureRecognizer {
     magneticForce: { x: 0, y: 0 },
   };
 
-  constructor(element: HTMLElement, config: GestureConfig, callbacks: GestureCallbacks) {
+  constructor(
+    element: HTMLElement,
+    config: GestureConfig,
+    callbacks: GestureCallbacks
+  ) {
     this.element = element;
     this.config = { ...DEFAULT_GESTURE_CONFIG, ...config };
     this.callbacks = callbacks;
@@ -151,8 +155,12 @@ export class GlassGestureRecognizer {
 
     // Touch events
     if (this.config.enableTouch) {
-      this.element.addEventListener('touchstart', this.handleTouchStart, { passive: false });
-      this.element.addEventListener('touchmove', this.handleTouchMove, { passive: false });
+      this.element.addEventListener('touchstart', this.handleTouchStart, {
+        passive: false,
+      });
+      this.element.addEventListener('touchmove', this.handleTouchMove, {
+        passive: false,
+      });
       this.element.addEventListener('touchend', this.handleTouchEnd);
       this.element.addEventListener('touchcancel', this.handleTouchCancel);
     }
@@ -164,7 +172,7 @@ export class GlassGestureRecognizer {
     }
 
     // Prevent context menu on long press
-    this.element.addEventListener('contextmenu', (e) => e.preventDefault());
+    this.element.addEventListener('contextmenu', e => e.preventDefault());
   }
 
   private handleMouseDown = (e: MouseEvent): void => {
@@ -215,7 +223,11 @@ export class GlassGestureRecognizer {
       const touch = e.touches[0];
       if (touch) {
         this.touches.set(touch.identifier, touch);
-        this.startGesture(touch.clientX, touch.clientY, e.target as HTMLElement);
+        this.startGesture(
+          touch.clientX,
+          touch.clientY,
+          e.target as HTMLElement
+        );
         this.triggerHaptic('light');
       }
     } else if (e.touches.length === 2) {
@@ -229,7 +241,9 @@ export class GlassGestureRecognizer {
 
     if (e.touches.length === 1 && this.isTracking) {
       const touch = e.touches[0];
-      this.updateGesture(touch.clientX, touch.clientY);
+      if (touch) {
+        this.updateGesture(touch.clientX, touch.clientY);
+      }
     } else if (e.touches.length === 2) {
       this.handleMultiTouchMove(e.touches);
     }
@@ -238,8 +252,10 @@ export class GlassGestureRecognizer {
   private handleTouchEnd = (e: TouchEvent): void => {
     if (e.changedTouches.length === 1 && this.isTracking) {
       const touch = e.changedTouches[0];
-      this.touches.delete(touch.identifier);
-      this.endGesture(touch.clientX, touch.clientY);
+      if (touch) {
+        this.touches.delete(touch.identifier);
+        this.endGesture(touch.clientX, touch.clientY);
+      }
     }
   };
 
@@ -334,13 +350,17 @@ export class GlassGestureRecognizer {
     this.lastTime = now;
 
     const distance = Math.sqrt(
-      Math.pow(x - this.startPosition.x, 2) + Math.pow(y - this.startPosition.y, 2)
+      Math.pow(x - this.startPosition.x, 2) +
+        Math.pow(y - this.startPosition.y, 2)
     );
 
-    const direction = distance > 0 ? {
-      x: (x - this.startPosition.x) / distance,
-      y: (y - this.startPosition.y) / distance,
-    } : { x: 0, y: 0 };
+    const direction =
+      distance > 0
+        ? {
+            x: (x - this.startPosition.x) / distance,
+            y: (y - this.startPosition.y) / distance,
+          }
+        : { x: 0, y: 0 };
 
     const gestureEvent: GestureEvent = {
       type: 'move',
@@ -361,13 +381,17 @@ export class GlassGestureRecognizer {
     const now = performance.now();
     const duration = now - this.startTime;
     const distance = Math.sqrt(
-      Math.pow(x - this.startPosition.x, 2) + Math.pow(y - this.startPosition.y, 2)
+      Math.pow(x - this.startPosition.x, 2) +
+        Math.pow(y - this.startPosition.y, 2)
     );
 
-    const direction = distance > 0 ? {
-      x: (x - this.startPosition.x) / distance,
-      y: (y - this.startPosition.y) / distance,
-    } : { x: 0, y: 0 };
+    const direction =
+      distance > 0
+        ? {
+            x: (x - this.startPosition.x) / distance,
+            y: (y - this.startPosition.y) / distance,
+          }
+        : { x: 0, y: 0 };
 
     const gestureEvent: GestureEvent = {
       type: 'end',
@@ -452,34 +476,36 @@ export class GlassGestureRecognizer {
       const touch2 = touches[1];
 
       // Calculate pinch scale
-      const currentDistance = Math.sqrt(
-        Math.pow(touch2.clientX - touch1.clientX, 2) +
-        Math.pow(touch2.clientY - touch1.clientY, 2)
-      );
-
-      const storedTouch1 = this.touches.get(touch1.identifier);
-      const storedTouch2 = this.touches.get(touch2.identifier);
-
-      if (storedTouch1 && storedTouch2) {
-        const initialDistance = Math.sqrt(
-          Math.pow(storedTouch2.clientX - storedTouch1.clientX, 2) +
-          Math.pow(storedTouch2.clientY - storedTouch1.clientY, 2)
+      if (touch1 && touch2) {
+        const currentDistance = Math.sqrt(
+          Math.pow(touch2.clientX - touch1.clientX, 2) +
+            Math.pow(touch2.clientY - touch1.clientY, 2)
         );
 
-        if (initialDistance > 0) {
-          const scale = currentDistance / initialDistance;
-          const center = {
-            x: (touch1.clientX + touch2.clientX) / 2,
-            y: (touch1.clientY + touch2.clientY) / 2,
-          };
+        const storedTouch1 = this.touches.get(touch1.identifier);
+        const storedTouch2 = this.touches.get(touch2.identifier);
 
-          const pinchGesture: PinchGesture = {
-            scale,
-            center,
-            velocity: Math.abs(scale - 1),
-          };
+        if (storedTouch1 && storedTouch2) {
+          const initialDistance = Math.sqrt(
+            Math.pow(storedTouch2.clientX - storedTouch1.clientX, 2) +
+              Math.pow(storedTouch2.clientY - storedTouch1.clientY, 2)
+          );
 
-          this.callbacks.onPinch?.(pinchGesture);
+          if (initialDistance > 0) {
+            const scale = currentDistance / initialDistance;
+            const center = {
+              x: (touch1.clientX + touch2.clientX) / 2,
+              y: (touch1.clientY + touch2.clientY) / 2,
+            };
+
+            const pinchGesture: PinchGesture = {
+              scale,
+              center,
+              velocity: Math.abs(scale - 1),
+            };
+
+            this.callbacks.onPinch?.(pinchGesture);
+          }
         }
       }
     }
@@ -497,11 +523,20 @@ export class GlassGestureRecognizer {
     );
 
     this.hoverState.position = { x, y };
-    this.hoverState.intensity = Math.max(0, 1 - distance / this.config.threshold.magnetic);
+    this.hoverState.intensity = Math.max(
+      0,
+      1 - distance / this.config.threshold.magnetic
+    );
 
     // Calculate magnetic force
     if (this.config.enableMagnetic && distance < this.config.magnetic.range) {
-      const force = this.calculateMagneticForce(x, y, centerX, centerY, distance);
+      const force = this.calculateMagneticForce(
+        x,
+        y,
+        centerX,
+        centerY,
+        distance
+      );
       this.hoverState.magneticForce = force;
       this.callbacks.onMagneticAttraction?.(force);
     } else {
@@ -535,7 +570,11 @@ export class GlassGestureRecognizer {
   }
 
   private triggerHaptic(intensity: 'light' | 'medium' | 'heavy'): void {
-    if (!this.config.enableHaptics || typeof navigator === 'undefined' || !navigator.vibrate) {
+    if (
+      !this.config.enableHaptics ||
+      typeof navigator === 'undefined' ||
+      !navigator.vibrate
+    ) {
       return;
     }
 

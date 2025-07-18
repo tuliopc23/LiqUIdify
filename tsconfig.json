@@ -36,6 +36,10 @@
     /* React */
     "jsx": "react-jsx",
 
+    /* Module interop */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
     /* Path mapping */
     "baseUrl": ".",
     "paths": {
@@ -44,7 +48,12 @@
       "@/design-tokens": ["./src/tokens/design-tokens"]
     }
   },
-  "include": ["src/**/*", "src/types/**/*.d.ts", "src/types/jsx.d.ts", "src/types/vitest.d.ts"],
+  "include": [
+    "src/**/*",
+    "src/types/**/*.d.ts",
+    "src/types/jsx.d.ts",
+    "src/types/vitest.d.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist",

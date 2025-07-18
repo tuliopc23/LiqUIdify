@@ -57,16 +57,18 @@ export function testFocusTrap(container: HTMLElement) {
   const focusableElements = container.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
   );
-  
+
   expect(focusableElements.length).toBeGreaterThan(0);
-  
+
   // Test forward tab
   const firstElement = focusableElements[0] as HTMLElement;
-  const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-  
+  const lastElement = focusableElements[
+    focusableElements.length - 1
+  ] as HTMLElement;
+
   firstElement.focus();
   expect(document.activeElement).toBe(firstElement);
-  
+
   // Tab from last element should go to first
   lastElement.focus();
   lastElement.dispatchEvent(
@@ -87,13 +89,13 @@ export async function testLoadingState(
   loadingTestId: string
 ) {
   trigger();
-  
+
   // Check loading state appears
   expect(getByTestId(loadingTestId)).toBeInTheDocument();
-  
+
   // Wait for loading to complete
   await waitForAnimation();
-  
+
   // Check loading state is gone
   expect(() => getByTestId(loadingTestId)).toThrow();
 }
@@ -104,12 +106,12 @@ export function testThemeChange(
   toggleTheme: () => void
 ) {
   const initialTheme = document.documentElement.getAttribute('data-theme');
-  
+
   toggleTheme();
-  
+
   const newTheme = document.documentElement.getAttribute('data-theme');
   expect(newTheme).not.toBe(initialTheme);
-  
+
   // Check that components respond to theme change
   const themedElements = container.querySelectorAll('[class*="glass-"]');
   expect(themedElements.length).toBeGreaterThan(0);

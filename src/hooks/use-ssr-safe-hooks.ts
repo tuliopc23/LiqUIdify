@@ -82,7 +82,10 @@ export function useIntersectionObserver(
 /**
  * Hook for SSR-safe localStorage
  */
-export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((prev: T) => T)) => void] {
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T | ((prev: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (!isBrowser()) return initialValue;
 
@@ -95,17 +98,21 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
     }
   });
 
-  const setValue = useCallback((value: T | ((prev: T) => T)) => {
-    if (!isBrowser()) return;
+  const setValue = useCallback(
+    (value: T | ((prev: T) => T)) => {
+      if (!isBrowser()) return;
 
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.warn(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key, storedValue]);
+      try {
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      } catch (error) {
+        console.warn(`Error setting localStorage key "${key}":`, error);
+      }
+    },
+    [key, storedValue]
+  );
 
   return [storedValue, setValue];
 }
@@ -113,7 +120,10 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
 /**
  * Hook for SSR-safe sessionStorage
  */
-export function useSessionStorage<T>(key: string, initialValue: T): [T, (value: T | ((prev: T) => T)) => void] {
+export function useSessionStorage<T>(
+  key: string,
+  initialValue: T
+): [T, (value: T | ((prev: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (!isBrowser()) return initialValue;
 
@@ -126,17 +136,21 @@ export function useSessionStorage<T>(key: string, initialValue: T): [T, (value: 
     }
   });
 
-  const setValue = useCallback((value: T | ((prev: T) => T)) => {
-    if (!isBrowser()) return;
+  const setValue = useCallback(
+    (value: T | ((prev: T) => T)) => {
+      if (!isBrowser()) return;
 
-    try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-      window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.warn(`Error setting sessionStorage key "${key}":`, error);
-    }
-  }, [key, storedValue]);
+      try {
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
+      } catch (error) {
+        console.warn(`Error setting sessionStorage key "${key}":`, error);
+      }
+    },
+    [key, storedValue]
+  );
 
   return [storedValue, setValue];
 }
@@ -188,7 +202,11 @@ export function useGeolocation(options?: PositionOptions) {
 
   useEffect(() => {
     if (!isBrowser() || !navigator.geolocation) {
-      setState(prev => ({ ...prev, loading: false, error: 'Geolocation not supported' }));
+      setState(prev => ({
+        ...prev,
+        loading: false,
+        error: 'Geolocation not supported',
+      }));
       return;
     }
 
@@ -206,7 +224,11 @@ export function useGeolocation(options?: PositionOptions) {
       setState(prev => ({ ...prev, loading: false, error: error.message }));
     };
 
-    navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
+    navigator.geolocation.getCurrentPosition(
+      handleSuccess,
+      handleError,
+      options
+    );
   }, [options]);
 
   return state;
@@ -245,14 +267,16 @@ export function useClipboard() {
  */
 export function useTheme() {
   const enhancements = useProgressiveEnhancement();
-  
+
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (!isBrowser()) return 'light';
-    
+
     const saved = localStorage.getItem('theme');
     if (saved) return saved as 'light' | 'dark';
-    
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
     return prefersDark ? 'dark' : 'light';
   });
 
@@ -266,7 +290,7 @@ export function useTheme() {
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
   return { theme, toggleTheme };
@@ -308,7 +332,7 @@ export function useResizeObserver(
   useEffect(() => {
     if (!isBrowser() || !ref.current || !window.ResizeObserver) return;
 
-    const observer = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver(entries => {
       entries.forEach(callback);
     });
 
@@ -323,7 +347,7 @@ export function useResizeObserver(
  * Hook for SSR-safe animation frame
  */
 export function useAnimationFrame(callback: (time: number) => void) {
-  const requestRef = useRef<number | undefined>();
+  const requestRef = useRef<number | undefined>(undefined);
   const callbackRef = useRef(callback);
 
   useEffect(() => {
@@ -374,7 +398,7 @@ export function useNetworkStatus() {
     if (!isBrowser() || !('connection' in navigator)) return;
 
     const conn = (navigator as any).connection;
-    
+
     const updateConnection = () => {
       setConnection({
         effectiveType: conn.effectiveType,
@@ -409,7 +433,8 @@ export function usePageVisibility() {
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+    return () =>
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, []);
 
   return isVisible;
@@ -429,13 +454,16 @@ export function usePerformanceMetrics() {
   useEffect(() => {
     if (!isBrowser() || !window.performance) return;
 
-    const observer = new PerformanceObserver((list) => {
+    const observer = new PerformanceObserver(list => {
       const entries = list.getEntries();
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.name === 'first-paint') {
           setMetrics(prev => ({ ...prev, firstPaint: entry.startTime }));
         } else if (entry.name === 'first-contentful-paint') {
-          setMetrics(prev => ({ ...prev, firstContentfulPaint: entry.startTime }));
+          setMetrics(prev => ({
+            ...prev,
+            firstContentfulPaint: entry.startTime,
+          }));
         }
       });
     });
@@ -445,8 +473,11 @@ export function usePerformanceMetrics() {
     window.addEventListener('load', () => {
       setMetrics(prev => ({
         ...prev,
-        loadTime: performance.timing.loadEventEnd - performance.timing.navigationStart,
-        domContentLoaded: performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart,
+        loadTime:
+          performance.timing.loadEventEnd - performance.timing.navigationStart,
+        domContentLoaded:
+          performance.timing.domContentLoadedEventEnd -
+          performance.timing.navigationStart,
       }));
     });
 

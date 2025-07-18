@@ -2,6 +2,7 @@ import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/glass-utils';
 import { announcer } from '@/components/glass-live-region';
+import { errorTracking } from '@/core/error-tracking';
 
 export interface GlassErrorBoundaryProps {
   children: ReactNode;
@@ -12,6 +13,8 @@ export interface GlassErrorBoundaryProps {
   isolate?: boolean;
   level?: 'page' | 'section' | 'component';
   className?: string;
+  componentName?: string;
+  trackErrors?: boolean;
 }
 
 interface GlassErrorBoundaryState {
@@ -38,7 +41,9 @@ export class GlassErrorBoundary extends Component<
     };
   }
 
-  static getDerivedStateFromError(error: Error): Partial<GlassErrorBoundaryState> {
+  static getDerivedStateFromError(
+    error: Error
+  ): Partial<GlassErrorBoundaryState> {
     return {
       hasError: true,
       error,
@@ -46,13 +51,33 @@ export class GlassErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    const { onError, level = 'component' } = this.props;
-    
+    const {
+      onError,
+      level = 'component',
+      componentName,
+      trackErrors = true,
+    } = this.props;
+
     // Update state with error info
     this.setState(prevState => ({
       errorInfo,
       errorCount: prevState.errorCount + 1,
     }));
+
+    // Track error in production
+    if (trackErrors && process.env.NODE_ENV === 'production') {
+      errorTracking.trackError(error, errorInfo, {
+        component: componentName || 'Unknown',
+        action: 'component-error',
+        tags: {
+          level,
+          errorCount: String(this.state.errorCount + 1),
+        },
+        extra: {
+          componentStack: errorInfo.componentStack,
+        },
+      });
+    }
 
     // Log error to console in development
     if (process.env.NODE_ENV === 'development') {
@@ -67,7 +92,7 @@ export class GlassErrorBoundary extends Component<
     // Announce error to screen readers
     announcer.announce(
       `An error occurred in the ${level}. The content may not display correctly.`,
-      'assertive'
+      { priority: 'high', context: 'error' }
     );
 
     // Auto-recover after multiple errors (circuit breaker pattern)
@@ -79,12 +104,16 @@ export class GlassErrorBoundary extends Component<
   componentDidUpdate(prevProps: GlassErrorBoundaryProps) {
     const { resetKeys, resetOnPropsChange } = this.props;
     const { hasError } = this.state;
-    
+
     // Reset on prop changes if enabled
-    if (hasError && resetOnPropsChange && prevProps.children !== this.props.children) {
+    if (
+      hasError &&
+      resetOnPropsChange &&
+      prevProps.children !== this.props.children
+    ) {
       this.resetErrorBoundary();
     }
-    
+
     // Reset on resetKeys change
     if (
       hasError &&
@@ -93,7 +122,7 @@ export class GlassErrorBoundary extends Component<
     ) {
       this.resetErrorBoundary();
     }
-    
+
     this.previousResetKeys = resetKeys || [];
   }
 
@@ -111,7 +140,7 @@ export class GlassErrorBoundary extends Component<
     if (this.resetTimeoutId) {
       clearTimeout(this.resetTimeoutId);
     }
-    
+
     this.resetTimeoutId = setTimeout(() => {
       this.resetErrorBoundary();
     }, delay);
@@ -122,20 +151,29 @@ export class GlassErrorBoundary extends Component<
       clearTimeout(this.resetTimeoutId);
       this.resetTimeoutId = null;
     }
-    
+
     this.setState({
       hasError: false,
       error: null,
       errorInfo: null,
       errorCount: 0,
     });
-    
-    announcer.announce('Error recovered. Content restored.', 'polite');
+
+    announcer.announce('Error recovered. Content restored.', {
+      priority: 'medium',
+      context: 'success',
+    });
   };
 
   render() {
     const { hasError, error, errorInfo } = this.state;
-    const { children, fallback, isolate = true, level = 'component', className } = this.props;
+    const {
+      children,
+      fallback,
+      isolate = true,
+      level = 'component',
+      className,
+    } = this.props;
 
     if (hasError && error) {
       // Use custom fallback if provided
@@ -161,14 +199,14 @@ export class GlassErrorBoundary extends Component<
         >
           <div className="flex flex-col items-center justify-center text-center space-y-4">
             <AlertTriangle className="h-12 w-12 text-destructive animate-pulse" />
-            
+
             <div className="space-y-2">
               <h3 className="text-lg font-semibold text-primary">
                 {level === 'page' && 'Page Error'}
                 {level === 'section' && 'Section Error'}
                 {level === 'component' && 'Component Error'}
               </h3>
-              
+
               <p className="text-sm text-secondary max-w-md">
                 {process.env.NODE_ENV === 'production'
                   ? 'Something went wrong. Please try refreshing the page.'
@@ -184,7 +222,7 @@ export class GlassErrorBoundary extends Component<
               >
                 Try Again
               </button>
-              
+
               {level === 'page' && (
                 <button
                   onClick={() => window.location.reload()}
@@ -241,9 +279,9 @@ export function useErrorHandler() {
 }
 
 // Async error boundary for handling async errors
-export function GlassAsyncErrorBoundary({ 
-  children, 
-  ...props 
+export function GlassAsyncErrorBoundary({
+  children,
+  ...props
 }: GlassErrorBoundaryProps) {
   const { captureError } = useErrorHandler();
 
@@ -254,15 +292,14 @@ export function GlassAsyncErrorBoundary({
     };
 
     window.addEventListener('unhandledrejection', handleUnhandledRejection);
-    
+
     return () => {
-      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+      window.removeEventListener(
+        'unhandledrejection',
+        handleUnhandledRejection
+      );
     };
   }, [captureError]);
 
-  return (
-    <GlassErrorBoundary {...props}>
-      {children}
-    </GlassErrorBoundary>
-  );
+  return <GlassErrorBoundary {...props}>{children}</GlassErrorBoundary>;
 }

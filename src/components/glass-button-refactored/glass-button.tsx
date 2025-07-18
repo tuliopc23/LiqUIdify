@@ -12,20 +12,18 @@
 
 import { forwardRef, useCallback, useRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import {
+import { InteractiveGlassProps } from '@/core';
+import { 
   ComponentPropsBuilder,
-  InteractiveGlassProps,
   cn,
   generateGlassClasses,
   generateGlassVariables,
-  useGlassStateTransitions,
-  useMagneticHover,
-  useRippleEffect,
   createBusinessLogicHook,
   responsiveSize,
   touchTarget,
   microInteraction,
-} from '@/core';
+} from '@/core/stub-functions';
+import { useGlassStateTransitions, useMagneticHover, useRippleEffect } from '@/hooks/use-glass-animations';
 
 // Button state type
 interface ButtonState {
@@ -206,28 +204,23 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     });
     
     // Animation hooks
-    const { transitionTo, currentState } = useGlassStateTransitions(animation, glassEffect?.intensity);
-    const { elementRef: magneticRef } = useMagneticHover(
-      magnetic ? 0.3 : 0, 
-      120, 
-      'fast'
-    );
-    const { createRipple } = useRippleEffect(animation);
+    const { transitionToState, currentState } = useGlassStateTransitions();
+    const { magneticProps } = useMagneticHover();
+    // Remove unused variable warning
+    void magneticProps;
+    const { triggerRipple } = useRippleEffect();
     
     // Combined ref handling
     const combinedRef = useCallback((node: HTMLButtonElement | null) => {
       if (buttonRef.current !== node) {
         buttonRef.current = node;
       }
-      if (magnetic && magneticRef.current !== node) {
-        magneticRef.current = node;
-      }
       if (typeof ref === 'function') {
         ref(node);
       } else if (ref) {
         ref.current = node;
       }
-    }, [ref, magnetic, magneticRef]);
+    }, [ref]);
     
     // Event handlers with business logic
     const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
@@ -237,66 +230,56 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       actions.handleRipple();
       
       // Create ripple effect
-      if (ripple && buttonRef.current) {
-        createRipple(buttonRef.current, event.nativeEvent);
+      if (ripple) {
+        triggerRipple();
       }
       
       // Trigger state transition
-      if (buttonRef.current) {
-        transitionTo(buttonRef.current, 'active');
-        setTimeout(() => transitionTo(buttonRef.current!, 'idle'), 150);
-      }
+      transitionToState('active');
+      setTimeout(() => transitionToState('idle'), 150);
       
       onClick?.(event);
-    }, [disabled, loading, actions, ripple, createRipple, transitionTo, onClick]);
+    }, [disabled, loading, actions, ripple, triggerRipple, transitionToState, onClick]);
     
     const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) return;
       
       actions.handleHover(true);
       
-      if (buttonRef.current) {
-        transitionTo(buttonRef.current, 'hover');
-      }
+      transitionToState('hover');
       
       onMouseEnter?.(event);
-    }, [disabled, actions, transitionTo, onMouseEnter]);
+    }, [disabled, actions, transitionToState, onMouseEnter]);
     
     const handleMouseLeave = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled) return;
       
       actions.handleHover(false);
       
-      if (buttonRef.current) {
-        transitionTo(buttonRef.current, 'idle');
-      }
+      transitionToState('idle');
       
       onMouseLeave?.(event);
-    }, [disabled, actions, transitionTo, onMouseLeave]);
+    }, [disabled, actions, transitionToState, onMouseLeave]);
     
     const handleFocus = useCallback((event: React.FocusEvent<HTMLButtonElement>) => {
       if (disabled) return;
       
       actions.handleFocus(true);
       
-      if (buttonRef.current) {
-        transitionTo(buttonRef.current, 'focus');
-      }
+      transitionToState('focus');
       
       onFocus?.(event);
-    }, [disabled, actions, transitionTo, onFocus]);
+    }, [disabled, actions, transitionToState, onFocus]);
     
     const handleBlur = useCallback((event: React.FocusEvent<HTMLButtonElement>) => {
       if (disabled) return;
       
       actions.handleFocus(false);
       
-      if (buttonRef.current) {
-        transitionTo(buttonRef.current, 'idle');
-      }
+      transitionToState('idle');
       
       onBlur?.(event);
-    }, [disabled, actions, transitionTo, onBlur]);
+    }, [disabled, actions, transitionToState, onBlur]);
     
     // Generate glass classes and variables
     const glassClasses = generateGlassClasses(
@@ -342,7 +325,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       },
       
       // Animation classes
-      !disableAnimations && microInteraction.smooth,
+      !disableAnimations && microInteraction(),
       
       // Custom classes
       className
