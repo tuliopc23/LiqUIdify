@@ -166,7 +166,7 @@ export class ComponentConsolidator {
    * Create consolidation plan for duplicate components
    */
   public createConsolidationPlan(
-    componentName: string,
+    _componentName: string,
     variants: ComponentVariant[]
   ): ConsolidationPlan {
     // Find the most recent and feature-rich variant

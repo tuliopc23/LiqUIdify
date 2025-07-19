@@ -4,7 +4,7 @@
  * Requirements: 6.5, 6.6 - Visual regression testing with automated issue detection
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+// Removed unused imports
 
 export interface VisualTestConfig {
   threshold: number;
@@ -306,6 +306,7 @@ export class VisualTestSuite {
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
       const expected = expectedPositions[i];
+      if (!element) continue;
       const rect = element.getBoundingClientRect();
 
       const actualX = Math.round(rect.left);

@@ -55,7 +55,6 @@ export interface ModernizationOpportunity {
 export class LegacyCodeAuditor {
   private static instance: LegacyCodeAuditor;
   private patterns: LegacyCodePattern[] = [];
-  private opportunities: ModernizationOpportunity[] = [];
 
   private constructor() {
     this.initializeAuditPatterns();
@@ -266,7 +265,7 @@ export class LegacyCodeAuditor {
       if (!categories[pattern.type]) {
         categories[pattern.type] = [];
       }
-      categories[pattern.type].push(pattern);
+      categories[pattern.type]?.push(pattern);
     });
 
     // Calculate summary

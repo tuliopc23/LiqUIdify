@@ -3,9 +3,8 @@
  * Provides comprehensive server-side rendering compatibility
  */
 
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { isBrowser } from '../utils/ssr-utils';
-import { useProgressiveEnhancement } from '../utils/hydration-utils';
 
 /**
  * Hook for SSR-safe window dimensions
@@ -69,7 +68,9 @@ export function useIntersectionObserver(
     if (!isBrowser() || !ref.current) return;
 
     const observer = new IntersectionObserver(([entry]) => {
-      setIsIntersecting(entry.isIntersecting);
+      if (entry) {
+        setIsIntersecting(entry.isIntersecting);
+      }
     }, options);
 
     observer.observe(ref.current);
@@ -266,8 +267,6 @@ export function useClipboard() {
  * Hook for SSR-safe theme detection
  */
 export function useTheme() {
-  const enhancements = useProgressiveEnhancement();
-
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (!isBrowser()) return 'light';
 

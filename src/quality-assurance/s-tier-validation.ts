@@ -66,47 +66,6 @@ export class STierValidator {
     return STierValidator.instance;
   }
 
-  private createDefaultChecklist(): ValidationChecklist {
-    return {
-      accessibility: {
-        wcagCompliance: false,
-        screenReaderTesting: false,
-        keyboardNavigation: false,
-        colorContrast: false,
-        focusManagement: false,
-        ariaImplementation: false,
-      },
-      performance: {
-        coreWebVitals: false,
-        lighthouseScore: false,
-        bundleSize: false,
-        lazyLoading: false,
-        cachingStrategy: false,
-      },
-      security: {
-        cspHeaders: false,
-        httpsOnly: false,
-        inputValidation: false,
-        xssProtection: false,
-        dataEncryption: false,
-      },
-      usability: {
-        crossBrowser: false,
-        responsiveDesign: false,
-        errorHandling: false,
-        loadingStates: false,
-        offlineSupport: false,
-      },
-      codeQuality: {
-        typeSafety: false,
-        testCoverage: false,
-        documentation: false,
-        errorBoundaries: false,
-        logging: false,
-      },
-    };
-  }
-
   /**
    * Run comprehensive S-tier validation
    */

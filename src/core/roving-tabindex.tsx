@@ -339,8 +339,11 @@ export function RovingTabindexGroup({
 
   // Clone children with roving props
   const enhancedChildren = children.map((child, index) => {
+    if (!React.isValidElement(child)) {
+      return child;
+    }
+    
     return React.cloneElement(child, {
-      ...child.props,
       ...roving.getRovingProps(index),
       ref: (el: HTMLElement | null) => {
         itemRefs.current[index] = el;
@@ -373,7 +376,7 @@ export function RovingTabindexGroup({
  * Grid-based roving tabindex for 2D navigation
  */
 export interface GridRovingTabindexOptions
-  extends Omit<RovingTabindexOptions, 'orientation'> {
+  extends Omit<RovingTabindexOptions, 'orientation' | 'items'> {
   items: HTMLElement[][];
   wrap?: boolean;
   onCellChange?: (element: HTMLElement, row: number, col: number) => void;
@@ -564,7 +567,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
             if (event.ctrlKey) {
               // Go to last cell
               const lastRow = items.length - 1;
-              const lastCol = items[lastRow]?.length - 1 || 0;
+              const lastCol = (items[lastRow]?.length ?? 1) - 1;
               const lastCell = findNextEnabledCell(
                 lastRow + 1,
                 lastCol + 1,

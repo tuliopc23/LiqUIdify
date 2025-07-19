@@ -98,23 +98,23 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "npm run clean && vite build && npm run build:css",
-    "build:optimized": "npm run clean && vite build -c vite.config.optimized.ts && npm run build:css:split",
-    "build:modular": "npm run clean && vite build -c vite.config.modular.ts && npm run build:css:split",
-    "build:production": "node scripts/build-production.js",
-    "build:production:ci": "npm run build:production && npm run bundle:budget:enforce",
-    "analyze:bundles": "node scripts/analyze-bundles.js",
-    "build:analyze": "npm run build:modular && npm run analyze:bundles",
+    "build": "bun run clean && vite build && bun run build:css",
+    "build:optimized": "bun run clean && vite build -c vite.config.optimized.ts && bun run build:css:split",
+    "build:modular": "bun run clean && vite build -c vite.config.modular.ts && bun run build:css:split",
+    "build:production": "bun scripts/build-production.js",
+    "build:production:ci": "bun run build:production && bun run bundle:budget:enforce",
+    "analyze:bundles": "bun scripts/analyze-bundles.js",
+    "build:analyze": "bun run build:modular && bun run analyze:bundles",
     "build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
-    "build:css:split": "npm run build:css:core && npm run build:css:animations && npm run build:css:utilities && npm run build:css:themes && npm run build:css:critical",
+    "build:css:split": "bun run build:css:core && bun run build:css:animations && bun run build:css:utilities && bun run build:css:themes && bun run build:css:critical",
     "build:css:core": "postcss src/styles/glass-core.css -o dist/css/glass-core.css -c postcss.config.optimized.js",
     "build:css:animations": "postcss src/styles/glass-animations.css -o dist/css/glass-animations.css -c postcss.config.optimized.js",
     "build:css:utilities": "postcss src/styles/glass-utilities.css -o dist/css/glass-utilities.css -c postcss.config.optimized.js",
     "build:css:themes": "postcss src/styles/glass-themes.css -o dist/css/glass-themes.css -c postcss.config.optimized.js",
     "build:css:critical": "postcss src/styles/glass-critical.css -o dist/css/glass-critical.css -c postcss.config.optimized.js",
-    "extract:critical": "node scripts/extract-critical-css.js",
-    "build:css:optimized": "npm run build:css:split && npm run extract:critical",
-    "build:lite": "npm run clean && vite build -c vite.config.lite.ts",
+    "extract:critical": "bun scripts/extract-critical-css.js",
+    "build:css:optimized": "bun run build:css:split && bun run extract:critical",
+    "build:lite": "bun run clean && vite build -c vite.config.lite.ts",
     "build:watch": "vite build --watch",
     "clean": "rm -rf dist",
     "dev": "vite",
@@ -238,6 +238,8 @@
     "framer-motion": "^12.19.1",
     "gsap": "^3.13.0",
     "lucide-react": "^0.525.0",
+    "oxc": "^1.0.1",
+    "oxlint": "^1.7.0",
     "prism-react-renderer": "^2.4.1",
     "react-live": "^4.1.8",
     "tailwind-merge": "^3.3.1"
@@ -262,7 +264,6 @@
     "@types/pngjs": "^6.0.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@types/web": "^0.0.244",
     "@typescript-eslint/eslint-plugin": "^8.35.0",
     "@typescript-eslint/parser": "^8.35.0",
     "@vitejs/plugin-react": "^4.6.0",
@@ -308,7 +309,7 @@
     "web-vitals": "^5.0.3"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "bun": ">=1.0.0"
   },
   "browserslist": [
     "> 0.5%",

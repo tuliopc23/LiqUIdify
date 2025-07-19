@@ -3,7 +3,7 @@
  * Provides automatic recovery mechanisms and progressive enhancement
  */
 
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { isBrowser } from './ssr-utils';
 
 export interface HydrationMismatch {

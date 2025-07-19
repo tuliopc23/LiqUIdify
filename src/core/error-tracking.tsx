@@ -204,6 +204,13 @@ class ErrorTrackingSystem {
   }
 
   /**
+   * Get current configuration
+   */
+  getConfig(): ErrorTrackingConfig {
+    return { ...this.__config };
+  }
+
+  /**
    * Create an error boundary component
    */
   createErrorBoundary(_fallback?: ReactNode): any {

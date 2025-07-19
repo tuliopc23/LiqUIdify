@@ -11,7 +11,17 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 // import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, Area, AreaChart } from 'recharts';
-import { Activity, AlertTriangle, Clock, Download, Filter, RefreshCw, Shield, TrendingUp, Users } from 'lucide-react';
+import {
+  Activity,
+  AlertTriangle,
+  Clock,
+  Download,
+  Filter,
+  RefreshCw,
+  Shield,
+  TrendingUp,
+  Users,
+} from 'lucide-react';
 
 // Types for error analytics data
 interface ErrorMetric {
@@ -113,17 +123,17 @@ export interface ErrorAnalyticsDashboardProps {
 export const ErrorAnalyticsDashboard: React.FC<
   ErrorAnalyticsDashboardProps
 > = ({
-       className = '',
-       apiEndpoint,
-       refreshInterval = 300000, // 5 minutes
-       realTimeUpdates = true,
-       showComponentDetails = true,
-       enableExport = true,
-     }) => {
+  className = '',
+  apiEndpoint,
+  refreshInterval = 300000, // 5 minutes
+  realTimeUpdates = true,
+  showComponentDetails = true,
+  enableExport = true,
+}) => {
   const [errorData, setErrorData] = useState<ErrorMetric[]>([]);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'1h' | '24h' | '7d' | '30d'>(
-    '24h',
+    '24h'
   );
   const [selectedComponent, setSelectedComponent] = useState<string>('all');
   const [selectedSeverity, setSelectedSeverity] = useState<string>('all');
@@ -257,9 +267,15 @@ export const ErrorAnalyticsDashboard: React.FC<
     };
 
     filteredErrorData.forEach(error => {
-      if (error.severity && distribution[error.severity] !== undefined) {
-        if (distribution[error.severity] !== undefined) {
-          distribution[error.severity] += error.count;
+      if (
+        error.severity &&
+        error.severity in distribution &&
+        distribution[error.severity as keyof typeof distribution] !== undefined
+      ) {
+        const severityKey = error.severity as keyof typeof distribution;
+        const currentValue = distribution[severityKey];
+        if (currentValue !== undefined) {
+          distribution[severityKey] = currentValue + error.count;
         }
       }
     });
@@ -462,7 +478,7 @@ export const ErrorAnalyticsDashboard: React.FC<
                 <option key={component} value={component}>
                   {component}
                 </option>
-              ),
+              )
             )}
           </select>
 
@@ -541,46 +557,46 @@ export const ErrorAnalyticsDashboard: React.FC<
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Component
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Error Count
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  User Impact
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Avg Resolution Time
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Top Error Types
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Trend
-                </th>
-              </tr>
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Component
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Error Count
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    User Impact
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Avg Resolution Time
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Top Error Types
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Trend
+                  </th>
+                </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-              {componentErrorStats.map(component => (
-                <tr key={component.componentName}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {component.componentName}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {component.errorCount}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {component.userImpact}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {component.avgResolutionTime.toFixed(1)}h
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {component.topErrorTypes.join(', ')}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {componentErrorStats.map(component => (
+                  <tr key={component.componentName}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {component.componentName}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {component.errorCount}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {component.userImpact}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {component.avgResolutionTime.toFixed(1)}h
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {component.topErrorTypes.join(', ')}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           component.trend === 'down'
@@ -591,9 +607,9 @@ export const ErrorAnalyticsDashboard: React.FC<
                         {component.trend === 'down' ? '↓' : '↑'}{' '}
                         {component.trend}
                       </span>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

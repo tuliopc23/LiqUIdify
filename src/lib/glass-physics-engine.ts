@@ -178,7 +178,7 @@ export class SpringPhysics {
   private onComplete?: () => void;
 
   constructor(config?: SpringConfig) {
-    this.config = config || SPRING_PRESETS.default;
+    this.config = config || SPRING_PRESETS.default!;
     this.state = {
       position: { x: 0, y: 0 },
       velocity: { x: 0, y: 0 },
@@ -305,7 +305,7 @@ export class MagneticField {
   > = new Map();
 
   constructor(config?: MagneticConfig) {
-    this.config = config || MAGNETIC_PRESETS.medium;
+    this.config = config || MAGNETIC_PRESETS.medium!;
   }
 
   addElement(id: string, element: HTMLElement): void {
@@ -391,7 +391,7 @@ export class AnimationChoreographer {
   private config: AnimationChoreography;
 
   constructor(config?: AnimationChoreography) {
-    this.config = config || CHOREOGRAPHY_PRESETS.staggered;
+    this.config = config || CHOREOGRAPHY_PRESETS.staggered!;
   }
 
   addAnimation(

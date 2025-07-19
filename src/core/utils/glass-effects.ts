@@ -104,8 +104,8 @@ export function generateGlassVariables(
     '--glass-blur': current.blur,
     '--glass-opacity': current.opacity,
     '--glass-border-opacity': config?.borderOpacity || '0.2',
-    '--glass-backdrop-blur': config?.backdropBlur || current.blur,
-    '--glass-transition-duration': config?.animation?.duration || '300ms',
+    '--glass-backdrop-blur': config?.backdrop ? current.blur : '0px',
+    '--glass-transition-duration': (config?.animation?.duration || 300) + 'ms',
     '--glass-transition-easing':
       config?.animation?.easing || 'cubic-bezier(0.4, 0, 0.2, 1)',
   };
@@ -122,7 +122,7 @@ export function createGlassPreset(
 ): GlassEffectConfig {
   const presets = {
     subtle: {
-      intensity: 'low' as const,
+      intensity: 'subtle' as const,
       blur: true,
       backdrop: true,
       borderOpacity: '0.1',
@@ -136,14 +136,14 @@ export function createGlassPreset(
       animation: { duration: 300, easing: 'ease-in-out' },
     },
     strong: {
-      intensity: 'high' as const,
+      intensity: 'strong' as const,
       blur: true,
       backdrop: true,
       borderOpacity: '0.3',
       animation: { duration: 400, easing: 'ease-in-out' },
     },
     intense: {
-      intensity: 'high' as const,
+      intensity: 'strong' as const,
       blur: true,
       backdrop: true,
       borderOpacity: '0.4',

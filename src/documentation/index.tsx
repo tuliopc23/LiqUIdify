@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { GlassUIProvider } from '../providers';
 import { GlassButton } from '../components/glass-button';
 import { GlassInput } from '../components/glass-input';

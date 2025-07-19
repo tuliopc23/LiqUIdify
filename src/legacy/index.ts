@@ -185,16 +185,16 @@ export class LegacyCleanupSystem {
    * Generate timeline
    */
   private generateTimeline(
-    auditSummary: {
+    _auditSummary: {
       criticalIssues: number;
       highIssues: number;
       mediumIssues: number;
       lowIssues: number;
     },
-    consolidationReport: {
+    _consolidationReport: {
       consolidationPlans: Array<{ estimatedEffort: string }>;
     },
-    modernizationPlan: { targets: Array<{ estimatedEffort: string }> }
+    _modernizationPlan: { targets: Array<{ estimatedEffort: string }> }
   ): string {
     const phases = [
       'Week 1-2: Critical security and bug fixes',
@@ -218,7 +218,7 @@ export class LegacyCleanupSystem {
   }> {
     const phases = {
       audit: async () => {
-        const report = await legacyCodeAuditor.scanCodebase();
+        await legacyCodeAuditor.scanCodebase();
         return {
           success: true,
           issues: [],
@@ -226,7 +226,7 @@ export class LegacyCleanupSystem {
         };
       },
       consolidation: async () => {
-        const report = componentConsolidator.analyzeDuplicates();
+        componentConsolidator.analyzeDuplicates();
         return {
           success: true,
           issues: [],
@@ -234,7 +234,7 @@ export class LegacyCleanupSystem {
         };
       },
       modernization: async () => {
-        const plan = codebaseModernizer.generateModernizationPlan();
+        codebaseModernizer.generateModernizationPlan();
         return {
           success: true,
           issues: [],

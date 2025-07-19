@@ -72,6 +72,8 @@ export function useSpringAnimation(config: PhysicsConfig = {}) {
           htmlElement.style.transition = '';
           setIsAnimating(false);
         }, duration);
+        
+        return undefined;
       }
     },
     [getSpringDuration, getSpringEasing]
@@ -129,6 +131,7 @@ export function useMagneticEffect(
         window.removeEventListener('mouseleave', handleMouseLeave);
       };
     }
+    return undefined;
   }, [isActive, handleMouseMove, handleMouseLeave]);
 
   return {

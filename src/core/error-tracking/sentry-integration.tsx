@@ -174,6 +174,8 @@ class LiqUIdifySentryIntegration {
         replaysOnErrorSampleRate: this.sentryConfig.replaysOnErrorSampleRate,
         beforeSend: (event: any, hint?: any) =>
           this.beforeSendFilter(event, hint),
+        beforeSendTransaction: (event: any) =>
+          this._beforeSendTransactionFilter(event),
         allowUrls:
           this.sentryConfig.allowedUrls.length > 0
             ? this.sentryConfig.allowedUrls

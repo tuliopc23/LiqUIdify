@@ -180,7 +180,7 @@ export const MOTION_PRESETS: Record<string, MotionPreset> = {
     options: {
       duration: 2000,
       easing: 'ease-in-out',
-      iterationCount: Infinity,
+      iterations: Infinity,
     },
     description: 'Breathing pulse animation',
   },
@@ -193,7 +193,7 @@ export const MOTION_PRESETS: Record<string, MotionPreset> = {
     options: {
       duration: 2000,
       easing: 'ease-in-out',
-      iterationCount: Infinity,
+      iterations: Infinity,
     },
     description: 'Shimmer loading effect',
   },
@@ -299,23 +299,25 @@ export class GlassAnimationChoreographer {
   /**
    * Play choreographed animations with pattern
    */
-  play(pattern: ChoreographyPattern = CHOREOGRAPHY_PATTERNS.cascade): void {
+  play(pattern?: ChoreographyPattern): void {
     if (this.isPlaying) return;
 
+    const choreographyPattern: ChoreographyPattern =
+      pattern || CHOREOGRAPHY_PATTERNS.cascade!;
     this.isPlaying = true;
     const sortedSequences = Array.from(this.sequences.values()).sort(
       (a, b) => a.priority - b.priority
     );
 
     sortedSequences.forEach((sequence, index) => {
-      const delay = this.calculateDelay(index, pattern);
-      const duration = pattern.duration * 1000;
+      const delay = this.calculateDelay(index, choreographyPattern);
+      const duration = choreographyPattern.duration * 1000;
 
       const animation = sequence.element.animate(sequence.keyframes, {
         ...sequence.options,
         duration,
         delay,
-        easing: pattern.easing,
+        easing: choreographyPattern.easing,
       });
 
       this.activeAnimations.set(sequence.id, animation);
@@ -558,8 +560,8 @@ export function useAnimationChoreographer(
       const motionPreset =
         typeof preset === 'string' ? MOTION_PRESETS[preset] : preset;
 
-      // Skip animations if reduced motion is preferred
-      if (reducedMotion.current) {
+      // Skip animations if reduced motion is preferred or preset not found
+      if (reducedMotion.current || !motionPreset) {
         return;
       }
 

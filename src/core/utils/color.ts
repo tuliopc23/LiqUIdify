@@ -459,6 +459,10 @@ export function mixColors(
   const rgb1 = parseColor(color1);
   const rgb2 = parseColor(color2);
 
+  if (!rgb1 || !rgb2) {
+    throw new Error('Invalid color format');
+  }
+
   const mixed = {
     r: Math.round(rgb1.r * (1 - ratio) + rgb2.r * ratio),
     g: Math.round(rgb1.g * (1 - ratio) + rgb2.g * ratio),

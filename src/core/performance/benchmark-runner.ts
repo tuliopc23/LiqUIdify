@@ -78,7 +78,6 @@ const DEFAULT_THRESHOLDS: PerformanceThresholds = {
 class LiqUIdifyBenchmarkRunner {
   private thresholds: PerformanceThresholds;
   private results: BenchmarkResult[] = [];
-  private __memoryBaseline: number = 0;
   private frameMetrics: number[] = [];
   private observers: PerformanceObserver[] = [];
 
@@ -107,7 +106,6 @@ class LiqUIdifyBenchmarkRunner {
 
     // Record initial memory
     const initialMemory = this.getMemoryUsage();
-    this.__memoryBaseline = initialMemory;
 
     const renderTimes: number[] = [];
     let peakMemory = initialMemory;

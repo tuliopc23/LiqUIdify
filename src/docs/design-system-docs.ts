@@ -95,7 +95,7 @@ class DesignSystemDocGenerator {
           ([name, value]) => ({
             name: `glass-light-${name}`,
             value,
-            usage: this.getGlassColorUsage('light', name),
+            usage: this.getGlassColorUsage(name),
           })
         ),
       },
@@ -107,7 +107,7 @@ class DesignSystemDocGenerator {
           ([name, value]) => ({
             name: `glass-dark-${name}`,
             value,
-            usage: this.getGlassColorUsage('dark', name),
+            usage: this.getGlassColorUsage(name),
           })
         ),
       },
@@ -119,14 +119,14 @@ class DesignSystemDocGenerator {
             ([name, value]) => ({
               name: `border-light-${name}`,
               value,
-              usage: this.getBorderColorUsage('light', name),
+              usage: this.getBorderColorUsage(name),
             })
           ),
           ...Object.entries(designTokens.colors.border.dark).map(
             ([name, value]) => ({
               name: `border-dark-${name}`,
               value,
-              usage: this.getBorderColorUsage('dark', name),
+              usage: this.getBorderColorUsage(name),
             })
           ),
         ],
@@ -185,7 +185,7 @@ class DesignSystemDocGenerator {
     return usageMap[palette]?.[shade] || 'General purpose color';
   }
 
-  private getGlassColorUsage(theme: string, variant: string): string {
+  private getGlassColorUsage(variant: string): string {
     const usageMap: Record<string, string> = {
       primary: 'Main glass surfaces, cards, panels',
       secondary: 'Secondary surfaces, sidebars',
@@ -198,7 +198,7 @@ class DesignSystemDocGenerator {
     return usageMap[variant] || 'Glass morphism effect';
   }
 
-  private getBorderColorUsage(theme: string, variant: string): string {
+  private getBorderColorUsage(variant: string): string {
     const usageMap: Record<string, string> = {
       subtle: 'Very light borders, dividers',
       light: 'Standard borders, card outlines',

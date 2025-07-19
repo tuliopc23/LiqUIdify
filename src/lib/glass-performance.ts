@@ -142,7 +142,6 @@ export class GlassPerformanceMonitor {
   private frameHistory: number[] = [];
   private lastFrameTime: number = 0;
   private frameCount: number = 0;
-  private startTime: number = 0;
   private isMonitoring: boolean = false;
   private animationFrame: number | null = null;
 
@@ -150,7 +149,6 @@ export class GlassPerformanceMonitor {
     if (this.isMonitoring) return;
 
     this.isMonitoring = true;
-    this.startTime = performance.now();
     this.frameCount = 0;
     this.frameHistory = [];
     this.monitor();
@@ -396,8 +394,6 @@ export class GlassAnimationScheduler {
 
     // Execute tasks within frame budget
     for (const task of sortedTasks) {
-      const taskStartTime = performance.now();
-
       try {
         // Apply Level of Detail if enabled
         if (this.config.enableLOD) {
@@ -408,8 +404,6 @@ export class GlassAnimationScheduler {
         task.lastFrame = timestamp;
         task.frameCount++;
         executedTasks++;
-
-        frameTime = performance.now() - taskStartTime;
 
         // Check frame budget
         if (performance.now() - frameStartTime > maxFrameTime * 0.8) {

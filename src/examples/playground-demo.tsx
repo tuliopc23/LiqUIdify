@@ -3,7 +3,6 @@
  * Showcases the S-tier component playground functionality
  */
 
-import React from 'react';
 import {
   GlassPlayground,
   PlaygroundTemplates,

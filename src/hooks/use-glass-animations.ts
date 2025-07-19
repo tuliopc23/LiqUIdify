@@ -7,7 +7,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimationTiming, GlassIntensity } from '@/core/base-component';
-import { GlassEffectState, GlassEffectAnimation } from '@/core/glass-effects';
+import { GlassEffectState } from '@/core/glass-effects';
 
 // Animation state management
 export interface AnimationState {
@@ -163,7 +163,7 @@ export function useGlassStateTransitions(
   intensity: GlassIntensity = 'medium',
 ) {
   const [currentState, setCurrentState] = useState<GlassEffectState>('idle');
-  const { animate, cancel, state } = useGlassAnimation(timing);
+  const { cancel, state } = useGlassAnimation(timing);
 
   const transitionToState = useCallback(
     (targetState: GlassEffectState) => {
@@ -278,12 +278,7 @@ export function useRippleEffect(
 /**
  * Hook for spring animations
  */
-export function useSpringAnimation(
-  config: { tension: number; friction: number; mass?: number } = {
-    tension: 170,
-    friction: 26,
-  },
-) {
+export function useSpringAnimation() {
   const { animate } = useGlassAnimation('normal');
 
   const springTo = useCallback(
@@ -342,50 +337,9 @@ export function useLiquidFlow(
   return { startFlow };
 }
 
-// Helper function to get keyframes for state transitions
-function getStateTransitionKeyframes(
-  fromState: GlassEffectState,
-  toState: GlassEffectState,
-  intensity: GlassIntensity,
-): Keyframe[] {
-  const intensityMultiplier =
-    intensity === 'subtle' ? 0.5 : intensity === 'strong' ? 1.5 : 1;
-
-  const stateKeyframes: Record<GlassEffectState, Keyframe> = {
-    idle: {
-      transform: 'scale(1)',
-      opacity: 1,
-      filter: 'blur(0px) brightness(1)',
-    },
-    hover: {
-      transform: `scale(${1.02 * intensityMultiplier})`,
-      opacity: 0.9,
-      filter: 'blur(0px) brightness(1.1)',
-    },
-    focus: {
-      transform: 'scale(1)',
-      opacity: 1,
-      filter: 'blur(0px) brightness(1.05)',
-    },
-    active: {
-      transform: `scale(${0.98 * intensityMultiplier})`,
-      opacity: 0.95,
-      filter: 'blur(0px) brightness(0.95)',
-    },
-    disabled: {
-      transform: 'scale(1)',
-      opacity: 0.5,
-      filter: 'blur(1px) brightness(0.8)',
-    },
-  };
-
-  return [stateKeyframes[fromState], stateKeyframes[toState]];
-}
 
 // Export all hooks and utilities
 export {
   TIMING_PRESETS,
   GLASS_ANIMATION_PRESETS,
-  AnimationState,
-  AnimationConfig,
 };

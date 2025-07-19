@@ -50,8 +50,7 @@ export const runFullQualityAssurance = async () => {
   // Run S-tier validation
   const validation = await import('./s-tier-validation');
   const validationResults = await validation.runValidation();
-  const validationReport =
-    validation.generateValidationReport(validationResults);
+  const validationReport = await validation.generateValidationReport();
 
   return {
     qualityGates: gatesResult,

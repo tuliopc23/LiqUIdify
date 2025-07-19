@@ -105,8 +105,6 @@ export interface PerformanceReport {
 
 class PerformanceBenchmarker {
   private results: ComponentBenchmark[] = [];
-  private __observers: Map<string, PerformanceObserver> = new Map();
-  private __memoryBaseline: number = 0;
 
   constructor() {
     this.setupMemoryBaseline();
@@ -468,7 +466,6 @@ class PerformanceBenchmarker {
       props?: any;
     }>
   ): Promise<PerformanceReport> {
-    const __startTime = Date.now();
     const componentResults: ComponentBenchmark[] = [];
     const allViolations: string[] = [];
     const allRecommendations: string[] = [];
@@ -570,7 +567,7 @@ class PerformanceBenchmarker {
 
   // Helper methods
   private setupMemoryBaseline(): void {
-    this.__memoryBaseline = this.getCurrentMemoryUsage();
+    // Memory baseline setup - could be used for future memory tracking
   }
 
   private getCurrentMemoryUsage(): number {
@@ -606,16 +603,6 @@ class PerformanceBenchmarker {
     );
   }
 
-  private estimateDependenciesSize(_componentCode: string): number {
-    // Estimate based on common patterns
-    let size = 0;
-
-    if (/framer-motion/i.test(componentCode)) size += 50 * 1024; // ~50KB
-    if (/gsap/i.test(componentCode)) size += 30 * 1024; // ~30KB
-    if (/@radix-ui/.test(componentCode)) size += 20 * 1024; // ~20KB
-
-    return size;
-  }
 
   private calculateOverallScore(results: ComponentBenchmark[]): number {
     if (results.length === 0) return 0;

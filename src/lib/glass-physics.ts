@@ -563,9 +563,12 @@ export class FluidSimulation {
 
     // Update particles
     this.particles.forEach((particle, i) => {
+      const force = particleForces[i];
+      if (!force) return;
+      
       // Update velocity
       particle.velocity = particle.velocity.add(
-        particleForces[i].multiply(deltaTime / particle.density)
+        force.multiply(deltaTime / particle.density)
       );
 
       // Update position
@@ -616,7 +619,10 @@ export class FluidSimulation {
         }
       });
 
-      forces[i] = forces[i].add(force);
+      const existingForce = forces[i];
+      if (existingForce) {
+        forces[i] = existingForce.add(force);
+      }
     });
   }
 
@@ -642,7 +648,10 @@ export class FluidSimulation {
         }
       });
 
-      forces[i] = forces[i].add(force);
+      const existingForce = forces[i];
+      if (existingForce) {
+        forces[i] = existingForce.add(force);
+      }
     });
   }
 

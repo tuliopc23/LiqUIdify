@@ -2,7 +2,6 @@ import React from 'react';
 import { cn } from '@/lib/glass-utils';
 import { AppleLiquidGlassCard } from '@/components/apple-liquid-glass';
 import { LiquidGlassSvgFilters } from '@/components/liquid-glass-svg-filters';
-import { GlassCard } from '@/components/glass-card/glass-card';
 
 // Enhanced Props Table Component
 export const PropsTable = ({

@@ -459,6 +459,8 @@ export class AccessibilityTestingSuite {
         const latest = reports[reports.length - 1];
         const previous = reports[reports.length - 2];
 
+        if (!latest || !previous) return;
+
         if (latest.score < previous.score) {
           regressions.push({
             component: componentName,
@@ -492,7 +494,7 @@ export class AccessibilityTestingSuite {
    * Run continuous accessibility monitoring
    */
   public startContinuousMonitoring(
-    options: {
+    _options: {
       interval?: number;
       components?: string[];
       onViolation?: (violation: AccessibilityTestResult) => void;

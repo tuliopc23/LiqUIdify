@@ -129,11 +129,11 @@ export function useGlassPerformance(): PerformanceContextValue {
 }
 
 // HOC for automatic performance monitoring of components
-export function withPerformanceMonitoring<P extends object>(
+export function withPerformanceMonitoring<P extends Record<string, any>>(
   Component: React.ComponentType<P>,
   componentName?: string
-) {
-  const WrappedComponent = React.forwardRef<any, P>((props, ref) => {
+): React.ComponentType<P> {
+  const WrappedComponent: React.FC<P> = props => {
     const { monitor } = useGlassPerformance();
     const displayName =
       componentName || Component.displayName || Component.name || 'Component';
@@ -146,8 +146,8 @@ export function withPerformanceMonitoring<P extends object>(
       };
     });
 
-    return <Component {...props} ref={ref} />;
-  });
+    return <Component {...props} />;
+  };
 
   WrappedComponent.displayName = `withPerformanceMonitoring(${componentName || Component.displayName || Component.name})`;
 

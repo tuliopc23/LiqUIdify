@@ -201,7 +201,7 @@ export class VisualRegressionTester {
   ): Promise<AnimationFrameTestResult[]> {
     performanceMonitor.startTiming(`visual-regression-animation-${component}`);
 
-    const { frames = 10, duration = 1000, ...testOptions } = options;
+    const { frames = 10, duration = 1000 } = options;
 
     const results: AnimationFrameTestResult[] = [];
     const frameInterval = duration / frames;
@@ -401,7 +401,7 @@ export class VisualRegressionTester {
       default:
         // For custom states, try to find a data attribute or class
         await page.evaluate(
-          (sel: string, st: string) => {
+          ({ sel, st }: { sel: string; st: string }) => {
             const element = document.querySelector(sel);
             if (element) {
               // Try to find a button or link that triggers the state
@@ -424,8 +424,7 @@ export class VisualRegressionTester {
               }
             }
           },
-          selector,
-          state
+          { sel: selector, st: state }
         );
         break;
     }

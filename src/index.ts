@@ -186,6 +186,4 @@ export type {
   GlassCardProps,
   GlassInputProps,
   GlassTabsProps,
-  AccessibilityCheckResult,
-  AccessibilityIssue,
 } from './types';

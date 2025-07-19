@@ -71,10 +71,11 @@ export { GlassInput } from './components/glass-input';
 export { ThemeProvider } from './components/theme-provider';
 
 // Lazy component factory for code-splitting
-export function lazyGlassComponent<T extends keyof typeof componentMap>(
+export async function lazyGlassComponent<T extends keyof typeof componentMap>(
   componentName: T
-): Promise<typeof componentMap[T]> {
-  return componentMap[componentName]();
+) {
+  const loader = componentMap[componentName];
+  return await loader();
 }
 
 const componentMap = {

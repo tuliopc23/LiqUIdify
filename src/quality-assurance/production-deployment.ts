@@ -57,32 +57,6 @@ export class ProductionDeploymentOptimizer {
     return ProductionDeploymentOptimizer.instance;
   }
 
-  private getDefaultConfig(): ProductionConfig {
-    return {
-      optimization: {
-        minification: true,
-        compression: 'both',
-        treeShaking: true,
-        codeSplitting: true,
-      },
-      assets: {
-        cdnUrl: 'https://cdn.example.com',
-        cacheStrategy: 'immutable',
-        assetPrefix: '/assets',
-      },
-      monitoring: {
-        errorTracking: true,
-        performanceMonitoring: true,
-        userAnalytics: true,
-      },
-      security: {
-        cspEnabled: true,
-        httpsOnly: true,
-        subresourceIntegrity: true,
-      },
-    };
-  }
-
   /**
    * Create optimized production build
    */

@@ -435,5 +435,4 @@ export function createValidator<T>(
   };
 }
 
-// Type exports
-export type { ValidationResult, Validator, PropValidationSchema };
+// Types are already exported above, no need to re-export

@@ -250,7 +250,7 @@ export class CodebaseModernizer {
   /**
    * Generate migration timeline
    */
-  private generateTimeline(targets: ModernizationTarget[]): string {
+  private generateTimeline(_targets: ModernizationTarget[]): string {
     const phases = [
       'Phase 1: Critical updates (React 19, TypeScript)',
       'Phase 2: High priority (ESLint, Prettier)',
@@ -301,7 +301,7 @@ export class CodebaseModernizer {
   /**
    * Generate rollback plan
    */
-  private generateRollbackPlan(targets: ModernizationTarget[]): string[] {
+  private generateRollbackPlan(_targets: ModernizationTarget[]): string[] {
     return [
       'Git revert to previous commit',
       'Restore package.json from backup',
@@ -316,7 +316,7 @@ export class CodebaseModernizer {
   /**
    * Generate success criteria
    */
-  private generateSuccessCriteria(targets: ModernizationTarget[]): string[] {
+  private generateSuccessCriteria(_targets: ModernizationTarget[]): string[] {
     return [
       'All tests pass',
       'Build succeeds',

@@ -9,7 +9,6 @@
 
 import { gsap } from 'gsap';
 import {
-  GlassAnimation,
   GLASS_EASINGS,
   AnimationType,
 } from './glass-animations';

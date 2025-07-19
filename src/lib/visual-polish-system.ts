@@ -271,18 +271,30 @@ export class VisualPolishManager {
   ): void {
     if (!this.config.enableMicroInteractions) return;
 
-    const interaction: MicroInteraction =
-      typeof preset === 'string'
-        ? { 
-            id, 
-            element, 
-            ...MICRO_INTERACTION_PRESETS[preset],
-            trigger: MICRO_INTERACTION_PRESETS[preset].trigger || 'hover'
-          }
-        : { ...preset, trigger: preset.trigger || 'hover' };
-
-    this.microInteractions.set(id, interaction);
-    this.setupMicroInteraction(interaction);
+    if (typeof preset === 'string') {
+      const presetConfig = MICRO_INTERACTION_PRESETS[preset];
+      if (!presetConfig) return;
+      
+      const interaction: MicroInteraction = {
+        id,
+        element,
+        ...presetConfig,
+        trigger: presetConfig.trigger || 'hover'
+      };
+      
+      this.microInteractions.set(id, interaction);
+      this.setupMicroInteraction(interaction);
+    } else {
+      const interaction: MicroInteraction = {
+        ...preset,
+        id,
+        element,
+        trigger: preset.trigger || 'hover'
+      };
+      
+      this.microInteractions.set(id, interaction);
+      this.setupMicroInteraction(interaction);
+    }
   }
 
   /**
