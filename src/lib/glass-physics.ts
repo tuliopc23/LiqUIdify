@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
  * Glass Physics - Physics engine for realistic motion
@@ -29,7 +29,7 @@ export class Vector2D {
 
   static normalize(vector: Vector2D): Vector2D {
     const magnitude = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
-    return magnitude > 0
+    return 0 < magnitude
       ? new Vector2D(vector.x / magnitude, vector.y / magnitude)
       : new Vector2D(0, 0);
   }
@@ -65,7 +65,7 @@ export class Vector2D {
 
   normalize(): Vector2D {
     const mag = this.magnitude();
-    return mag > 0 ? this.divide(mag) : new Vector2D();
+    return 0 < mag ? this.divide(mag) : new Vector2D();
   }
 
   dot(v: Vector2D): number {
@@ -168,7 +168,7 @@ export function hapticFeedback(
   intensity: 'light' | 'medium' | 'heavy' = 'medium'
 ) {
   // Try to use native vibration API if available
-  if (typeof navigator !== 'undefined' && navigator.vibrate) {
+  if ('undefined' !== typeof navigator && navigator.vibrate) {
     const patterns = {
       light: [10],
       medium: [20],
@@ -293,7 +293,9 @@ export const useMagneticHover = (
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!elementRef.current) return;
+      if (!elementRef.current) {
+        return;
+      }
 
       const rect = elementRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -332,7 +334,9 @@ export const useMagneticHover = (
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     element.addEventListener('mousemove', handleMouseMove);
     element.addEventListener('mouseleave', handleMouseLeave);
@@ -357,11 +361,15 @@ export const useRepulsionEffect = (
   const [positions, setPositions] = useState<Vector2D[]>([]);
 
   useEffect(() => {
-    if (elements.length === 0) return;
+    if (0 === elements.length) {
+      return;
+    }
 
     const updatePositions = () => {
       const newPositions = elements.map((element, index) => {
-        if (!element) return new Vector2D(0, 0);
+        if (!element) {
+          return new Vector2D(0, 0);
+        }
 
         const rect = element.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -371,7 +379,9 @@ export const useRepulsionEffect = (
         let totalForceY = 0;
 
         elements.forEach((otherElement, otherIndex) => {
-          if (index === otherIndex || !otherElement) return;
+          if (index === otherIndex || !otherElement) {
+            return;
+          }
 
           const otherRect = otherElement.getBoundingClientRect();
           const otherCenterX = otherRect.left + otherRect.width / 2;
@@ -382,7 +392,7 @@ export const useRepulsionEffect = (
               Math.pow(centerY - otherCenterY, 2)
           );
 
-          if (distance < PHYSICS_CONSTANTS.REPULSION_DISTANCE && distance > 0) {
+          if (distance < PHYSICS_CONSTANTS.REPULSION_DISTANCE && 0 < distance) {
             const force = repulsionStrength / (distance * distance);
             const directionX = (centerX - otherCenterX) / distance;
             const directionY = (centerY - otherCenterY) / distance;
@@ -564,8 +574,10 @@ export class FluidSimulation {
     // Update particles
     this.particles.forEach((particle, i) => {
       const force = particleForces[i];
-      if (!force) return;
-      
+      if (!force) {
+        return;
+      }
+
       // Update velocity
       particle.velocity = particle.velocity.add(
         force.multiply(deltaTime / particle.density)
@@ -604,12 +616,14 @@ export class FluidSimulation {
       const force = new Vector2D();
 
       this.particles.forEach((neighbor, j) => {
-        if (i === j) return;
+        if (i === j) {
+          return;
+        }
 
         const delta = particle.position.subtract(neighbor.position);
         const distance = delta.magnitude();
 
-        if (distance < this.smoothingRadius && distance > 0) {
+        if (distance < this.smoothingRadius && 0 < distance) {
           const pressure = (particle.pressure + neighbor.pressure) / 2;
           const direction = delta.normalize();
           const gradient = this.smoothingKernelGradient(distance);
@@ -633,7 +647,9 @@ export class FluidSimulation {
       const force = new Vector2D();
 
       this.particles.forEach((neighbor, j) => {
-        if (i === j) return;
+        if (i === j) {
+          return;
+        }
 
         const distance = particle.position.distance(neighbor.position);
 
@@ -656,21 +672,27 @@ export class FluidSimulation {
   }
 
   private smoothingKernel(distance: number): number {
-    if (distance >= this.smoothingRadius) return 0;
+    if (distance >= this.smoothingRadius) {
+      return 0;
+    }
 
     const x = 1 - distance / this.smoothingRadius;
     return x * x * x;
   }
 
   private smoothingKernelGradient(distance: number): number {
-    if (distance >= this.smoothingRadius) return 0;
+    if (distance >= this.smoothingRadius) {
+      return 0;
+    }
 
     const x = 1 - distance / this.smoothingRadius;
     return (-3 * x * x) / this.smoothingRadius;
   }
 
   private smoothingKernelLaplacian(distance: number): number {
-    if (distance >= this.smoothingRadius) return 0;
+    if (distance >= this.smoothingRadius) {
+      return 0;
+    }
 
     const x = 1 - distance / this.smoothingRadius;
     return (6 * x) / (this.smoothingRadius * this.smoothingRadius);
@@ -748,7 +770,7 @@ export class Particle {
   }
 
   isDead(): boolean {
-    return this.lifespan <= 0;
+    return 0 >= this.lifespan;
   }
 
   getOpacity(): number {
@@ -782,7 +804,7 @@ export class ParticleEmitter {
     // Emit new particles
     this.emitAccumulator += deltaTime * this.config.rate;
 
-    while (this.emitAccumulator >= 1) {
+    while (1 <= this.emitAccumulator) {
       this.emit();
       this.emitAccumulator -= 1;
     }
@@ -837,7 +859,7 @@ export class ParticleEmitter {
 
   removeForce(force: Vector2D) {
     const index = this.forces.indexOf(force);
-    if (index > -1) {
+    if (-1 < index) {
       this.forces.splice(index, 1);
     }
   }
@@ -862,7 +884,7 @@ export class PhysicsWorld {
   private fluids: Map<string, FluidSimulation> = new Map();
   private lastTime: number = 0;
   private running: boolean = false;
-  private rafId: number | null = null;
+  private rafId: number | null = undefined;
 
   // Global forces
   gravity: Vector2D = new Vector2D(0, 98);
@@ -887,7 +909,9 @@ export class PhysicsWorld {
   }
 
   start() {
-    if (this.running) return;
+    if (this.running) {
+      return;
+    }
 
     this.running = true;
     this.lastTime = performance.now();
@@ -898,12 +922,14 @@ export class PhysicsWorld {
     this.running = false;
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
-      this.rafId = null;
+      this.rafId = undefined;
     }
   }
 
   private update() {
-    if (!this.running) return;
+    if (!this.running) {
+      return;
+    }
 
     const currentTime = performance.now();
     const deltaTime = Math.min((currentTime - this.lastTime) / 1000, 0.1); // Cap at 100ms

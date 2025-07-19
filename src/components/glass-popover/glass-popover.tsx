@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn, getGlassClass } from '@/lib/glass-utils';
 
@@ -47,7 +47,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
   };
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if ('undefined' === typeof window) {return;}
     if (isOpen && triggerRef.current && popoverRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const popoverRect = popoverRef.current.getBoundingClientRect();
@@ -125,11 +125,11 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
         height: window.innerHeight,
       };
 
-      if (left < 8) left = 8;
+      if (8 > left) {left = 8;}
       if (left + popoverRect.width > viewport.width - 8) {
         left = viewport.width - popoverRect.width - 8;
       }
-      if (top < 8) top = 8;
+      if (8 > top) {top = 8;}
       if (top + popoverRect.height > viewport.height - 8) {
         top = viewport.height - popoverRect.height - 8;
       }
@@ -158,7 +158,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     };
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (closeOnEscape && isOpen && event.key === 'Escape') {
+      if (closeOnEscape && isOpen && 'Escape' === event.key) {
         setOpen(false);
       }
     };
@@ -192,7 +192,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     >
       {content}
     </div>
-  ) : null;
+  ) : undefined;
 
   return (
     <>
@@ -205,7 +205,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
       </div>
 
       {popover &&
-        typeof window !== 'undefined' &&
+        'undefined' !== typeof window &&
         createPortal(popover, document.body)}
     </>
   );

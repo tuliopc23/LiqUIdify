@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { GlassFocusTrap } from '../glass-focus-trap';
 import { GlassSkipNavigation } from '../glass-skip-navigation';
 import { RovingTabindexGroup, useRovingTabindex } from '@/core/roving-tabindex';
@@ -35,8 +35,8 @@ export const GlassFocusDemo: React.FC = () => {
     <div className="space-y-8">
       {/* Skip Navigation Demo */}
       <GlassSkipNavigation
-        autoGenerate={true}
-        visibleOnFocus={true}
+        autoGenerate
+        visibleOnFocus
         position="top"
       />
 
@@ -51,7 +51,7 @@ export const GlassFocusDemo: React.FC = () => {
       </header>
 
       {/* Navigation for skip nav target */}
-      <nav role="navigation" aria-label="Demo navigation" className="mb-8">
+      <nav  aria-label="Demo navigation" className="mb-8">
         <div className="flex gap-4">
           <a href="#" className="text-blue-500 hover:underline">Link 1</a>
           <a href="#" className="text-blue-500 hover:underline">Link 2</a>
@@ -83,8 +83,8 @@ export const GlassFocusDemo: React.FC = () => {
                 onEscape={() => setTrapActive(false)}
                 onDeactivate={() => setTrapActive(false)}
                 className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-                preventScroll={true}
-                returnFocus={true}
+                preventScroll
+                returnFocus
               >
                 <GlassCard className="relative max-w-md w-full mx-4 p-6 bg-white dark:bg-gray-900">
                   <h3 className="text-xl font-semibold mb-4">Focus Trapped Dialog</h3>

@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 1000000;
+const TOAST_REMOVE_DELAY = 1_000_000;
 
-type ToasterToast = {
+interface ToasterToast {
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
   action?: React.ReactElement;
   variant?: 'default' | 'destructive';
   onOpenChange?: (open: boolean) => void;
-};
+}
 
 const actionTypes = {
   ADD_TOAST: 'ADD_TOAST',
@@ -128,7 +128,7 @@ export const reducer = (state: State, action: Action): State => {
   }
 };
 
-const listeners: Array<(state: State) => void> = [];
+const listeners: ((state: State) => void)[] = [];
 
 let memoryState: State = { toasts: [] };
 
@@ -158,7 +158,9 @@ function toast({ ...props }: Toast) {
       ...props,
       id,
       onOpenChange: (open: boolean) => {
-        if (!open) dismiss();
+        if (!open) {
+          dismiss();
+        }
       },
     },
   });
@@ -177,7 +179,7 @@ function useToast() {
     listeners.push(setState);
     return () => {
       const index = listeners.indexOf(setState);
-      if (index > -1) {
+      if (-1 < index) {
         listeners.splice(index, 1);
       }
     };

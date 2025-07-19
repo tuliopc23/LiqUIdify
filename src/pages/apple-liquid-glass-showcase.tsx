@@ -6,8 +6,8 @@
 
 import { useState } from 'react';
 import {
-  AppleLiquidGlassCard,
   AppleLiquidGlassButton,
+  AppleLiquidGlassCard,
   AppleLiquidGlassNav,
 } from '../components/apple-liquid-glass';
 import LiquidGlassSvgFilters from '../components/liquid-glass-svg-filters';
@@ -44,7 +44,7 @@ export default function AppleLiquidGlassShowcase() {
         <AppleLiquidGlassCard
           className="mb-8 text-center"
           intensity="subtle"
-          animated={true}
+          animated
         >
           <h1 className="text-4xl font-bold text-white mb-4">
             Apple Liquid Glass Showcase
@@ -140,7 +140,7 @@ export default function AppleLiquidGlassShowcase() {
             magnetic={enabledEffects.magnetic}
             animated={enabledEffects.animated}
             multiLayer={enabledEffects.multiLayer}
-            interactive={true}
+            interactive
           >
             <div className="text-center">
               <div className="text-4xl mb-4">📱</div>
@@ -157,7 +157,7 @@ export default function AppleLiquidGlassShowcase() {
           <AppleLiquidGlassCard
             intensity={selectedIntensity}
             magnetic={enabledEffects.magnetic}
-            animated={true}
+            animated
             multiLayer={enabledEffects.multiLayer}
           >
             <div className="text-center">
@@ -289,34 +289,34 @@ export default function AppleLiquidGlassShowcase() {
         </AppleLiquidGlassCard>
 
         {/* Technical Details */}
-        <AppleLiquidGlassCard intensity="subtle" animated={true}>
+        <AppleLiquidGlassCard intensity="subtle" animated>
           <h2 className="text-2xl font-semibold text-white mb-4">
             Technical Implementation
           </h2>
           <div className="space-y-3 text-white/80">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+              <span className="w-2 h-2 bg-green-400 rounded-full" />
               <span>
                 Multi-layer glass structure with filter, overlay, and specular
                 layers
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+              <span className="w-2 h-2 bg-blue-400 rounded-full" />
               <span>SVG filters for authentic liquid distortion effects</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
+              <span className="w-2 h-2 bg-purple-400 rounded-full" />
               <span>
                 React 19 patterns with startTransition and enhanced hooks
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
+              <span className="w-2 h-2 bg-yellow-400 rounded-full" />
               <span>Tailwind v4 CSS layers and modern utilities</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-pink-400 rounded-full"></span>
+              <span className="w-2 h-2 bg-pink-400 rounded-full" />
               <span>
                 Magnetic hover effects with physics-based interactions
               </span>

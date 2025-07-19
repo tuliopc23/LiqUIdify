@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/glass-utils';
 import { accessibilityManager } from '@/core/accessibility-manager';
 
@@ -43,7 +43,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
   // Auto-generate skip links for landmarks
   useEffect(() => {
-    if (!autoGenerate || providedLinks) return;
+    if (!autoGenerate || providedLinks) {return;}
 
     const generateSkipLinks = () => {
       const generatedLinks: SkipLink[] = [];
@@ -52,7 +52,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
       DEFAULT_LANDMARKS.forEach(({ role, label, id }) => {
         const elements = document.querySelectorAll(`[role="${role}"]`);
         
-        if (elements.length > 0) {
+        if (0 < elements.length) {
           elements.forEach((element, index) => {
             const elementId = element.id || `${id}-${index}`;
             
@@ -99,7 +99,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
         }
 
         const labelledById = form.getAttribute('aria-labelledby');
-        const labelElement = labelledById ? document.getElementById(labelledById) : null;
+        const labelElement = labelledById ? document.getElementById(labelledById) : undefined;
         const formName = 
           form.getAttribute('aria-label') ||
           labelElement?.textContent ||
@@ -116,7 +116,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     };
 
     // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
+    if ('loading' === document.readyState) {
       document.addEventListener('DOMContentLoaded', generateSkipLinks);
     } else {
       generateSkipLinks();
@@ -142,9 +142,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
   const handleSkipTo = (link: SkipLink, event: React.MouseEvent | React.KeyboardEvent) => {
     event.preventDefault();
 
-    let targetElement: HTMLElement | null = null;
+    let targetElement: HTMLElement | null;
 
-    if (typeof link.target === 'string') {
+    if ('string' === typeof link.target) {
       if (link.target.startsWith('#')) {
         targetElement = document.querySelector(link.target);
       } else {
@@ -255,7 +255,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
         <a
           key={link.id}
           ref={(el) => { linkRefs.current[index] = el; }}
-          href={typeof link.target === 'string' ? link.target : `#${link.id}`}
+          href={ 'string' === typeof link.target ? link.target : `#${link.id}`}
           className={cn(
             'glass-skip-link',
             'inline-flex items-center gap-2 px-4 py-2',
@@ -272,7 +272,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
           onKeyDown={(e) => handleKeyDown(e, index)}
           onFocus={() => setFocusedIndex(index)}
           onBlur={() => setFocusedIndex(-1)}
-          tabIndex={index === 0 ? 0 : -1}
+          tabIndex={ 0 === index ? 0 : -1}
           data-skip-link={link.id}
         >
           {link.label}
@@ -296,7 +296,7 @@ export function useSkipNavigation() {
   const addSkipLink = (link: SkipLink) => {
     setSkipLinks(prev => {
       const exists = prev.find(l => l.id === link.id);
-      if (exists) return prev;
+      if (exists) {return prev;}
       return [...prev, link];
     });
   };
@@ -307,13 +307,13 @@ export function useSkipNavigation() {
 
   const skipTo = (id: string) => {
     const link = skipLinks.find(l => l.id === id);
-    if (!link) return;
+    if (!link) {return;}
 
 
     // Use the same logic as handleSkipTo
-    let targetElement: HTMLElement | null = null;
+    let targetElement: HTMLElement | null;
 
-    if (typeof link.target === 'string') {
+    if ('string' === typeof link.target) {
       if (link.target.startsWith('#')) {
         targetElement = document.querySelector(link.target);
       } else {

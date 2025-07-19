@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
-import { createComponentSize, ComponentSize } from '@/types/branded';
+import type { ComponentSize } from '@/types/branded';
+import { createComponentSize } from '@/types/branded';
 
 export interface GlassResponsiveCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -58,9 +59,9 @@ const GlassResponsiveCard = forwardRef<
     const baseClasses = cn(
       'rounded-xl overflow-hidden',
       variantClasses[variant],
-      padding !== 'none' ? paddingClasses[padding as keyof typeof paddingClasses] : '',
+      'none' !== padding ? paddingClasses[padding as keyof typeof paddingClasses] : '',
       bordered &&
-      variant !== 'outlined' &&
+      'outlined' !== variant &&
       'border border-[var(--glass-border)]',
       hover && 'glass-interactive cursor-pointer',
       microInteraction.smooth,

@@ -1,11 +1,11 @@
-import React, { forwardRef, useState, useRef, useEffect, useId } from 'react';
+import React, { forwardRef, useEffect, useId, useRef, useState } from 'react';
 import {
   cn,
   focusRing,
 } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import { Check, ChevronDown, Search, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const comboboxVariants = cva(['relative w-full'], {
   variants: {
@@ -141,7 +141,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
     // Filter options based on search query
     const filteredOptions = options
       .filter(option => {
-        if (!searchQuery) return true;
+        if (!searchQuery) {return true;}
         return option.label.toLowerCase().includes(searchQuery.toLowerCase());
       })
       .slice(0, maxOptions);
@@ -153,7 +153,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
     // Handle option selection
     const handleSelect = (option: ComboboxOption) => {
-      if (option.disabled) return;
+      if (option.disabled) {return;}
 
       setSelectedValue(option.value);
       onChange?.(option.value);
@@ -172,7 +172,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
     // Handle keyboard navigation
     const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (disabled) return;
+      if (disabled) {return;}
 
       switch (e.key) {
         case 'ArrowDown':
@@ -188,12 +188,12 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
         case 'ArrowUp':
           e.preventDefault();
           if (isOpen) {
-            setHighlightedIndex(prev => (prev > 0 ? prev - 1 : prev));
+            setHighlightedIndex(prev => (0 < prev ? prev - 1 : prev));
           }
           break;
         case 'Enter':
           e.preventDefault();
-          if (isOpen && highlightedIndex >= 0) {
+          if (isOpen && 0 <= highlightedIndex) {
             const option = filteredOptions[highlightedIndex];
             if (option) {
               handleSelect(option);
@@ -244,7 +244,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
     // Scroll highlighted option into view
     useEffect(() => {
-      if (highlightedIndex >= 0 && optionsRef.current[highlightedIndex]) {
+      if (0 <= highlightedIndex && optionsRef.current[highlightedIndex]) {
         optionsRef.current[highlightedIndex].scrollIntoView({
           block: 'nearest',
           behavior: 'smooth',
@@ -290,7 +290,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
                 tabIndex={0}
                 onClick={handleClear}
                 onKeyDown={e => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if ('Enter' === e.key || ' ' === e.key) {
                     e.preventDefault();
                     handleClear(e as any);
                   }
@@ -348,7 +348,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
                     <div className="px-4 py-3 text-center text-white/60">
                       Loading...
                     </div>
-                  ) : filteredOptions.length === 0 ? (
+                  ) : (0 === filteredOptions.length ? (
                     <div className="px-4 py-3 text-center text-white/60">
                       {emptyMessage}
                     </div>
@@ -357,7 +357,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
                       <div
                         key={option.value}
                         ref={el => {
-                          if (el) optionsRef.current[index] = el;
+                          if (el) {optionsRef.current[index] = el;}
                         }}
                         role="option"
                         aria-selected={option.value === selectedValue}
@@ -380,7 +380,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
                         )}
                       </div>
                     ))
-                  )}
+                  ))}
                 </div>
               </div>
             </motion.div>

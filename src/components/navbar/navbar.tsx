@@ -1,4 +1,4 @@
-import { Search, Github, Layers } from 'lucide-react';
+import { Github, Layers, Search } from 'lucide-react';
 import { ThemeToggle } from '../theme-toggle';
 import { AppleLiquidGlassNav } from '@/components/apple-liquid-glass';
 import { LiquidGlassSvgFilters } from '@/components/liquid-glass-svg-filters';
@@ -9,8 +9,8 @@ export function Navbar() {
       <LiquidGlassSvgFilters />
       <AppleLiquidGlassNav
         intensity="medium"
-        magnetic={true}
-        animated={true}
+        magnetic
+        animated
         className="fixed top-0 left-0 right-0 z-50 border-b border-white/15"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">

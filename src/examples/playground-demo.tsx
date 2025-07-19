@@ -9,9 +9,9 @@ import {
 } from '@/components/glass-playground';
 import {
   GlassCard,
+  GlassCardDescription,
   GlassCardHeader,
   GlassCardTitle,
-  GlassCardDescription,
 } from '@/components/glass-card';
 
 export function PlaygroundDemo() {

@@ -3,8 +3,8 @@
  * Implements modular CSS chunks, critical CSS extraction, and PostCSS optimizations
  */
 
-import { promises as fs } from 'fs';
-import path from 'path';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
 
 // CSS Bundle Configuration
 export interface CSSBundleConfig {
@@ -102,7 +102,7 @@ export class CSSBundleAnalyzer {
           const filePath = path.resolve(file);
           const stats = await fs.stat(filePath);
           bundleSize += stats.size;
-        } catch (error) {
+        } catch {
           console.warn(`CSS file not found: ${file}`);
         }
       }
@@ -127,11 +127,11 @@ export class CSSBundleAnalyzer {
       results.totalSize += sizeKB;
 
       // Generate recommendations
-      if (status === 'warning') {
+      if ('warning' === status) {
         results.recommendations.push(
           `${bundleName} bundle is approaching size limit (${sizeKB}KB/${bundleConfig.maxSize}KB)`
         );
-      } else if (status === 'error') {
+      } else if ('error' === status) {
         results.recommendations.push(
           `${bundleName} bundle exceeds size limit (${sizeKB}KB/${bundleConfig.maxSize}KB) - optimization required`
         );
@@ -139,7 +139,7 @@ export class CSSBundleAnalyzer {
     }
 
     // Overall bundle size check
-    if (results.totalSize > 30) {
+    if (30 < results.totalSize) {
       results.recommendations.push(
         `Total bundle size (${results.totalSize}KB) exceeds 30KB target - critical optimization needed`
       );
@@ -253,9 +253,9 @@ export class CSSBundleAnalyzer {
     const analysis = await this.analyzeBundles();
 
     let status: 'pass' | 'warning' | 'fail' = 'pass';
-    if (analysis.totalSize > 30) {
+    if (30 < analysis.totalSize) {
       status = 'fail';
-    } else if (analysis.recommendations.length > 0) {
+    } else if (0 < analysis.recommendations.length) {
       status = 'warning';
     }
 
@@ -281,10 +281,14 @@ export class CSSBundleAnalyzer {
 
     // Extract selector from rule
     const selectorMatch = rule.match(/^([^{]+)\{/);
-    if (!selectorMatch) return false;
+    if (!selectorMatch) {
+      return false;
+    }
 
     const selector = selectorMatch[1]?.trim();
-    if (!selector) return false;
+    if (!selector) {
+      return false;
+    }
 
     // Check if selector matches elements in HTML
     // For glass components, prioritize core glass effects
@@ -307,7 +311,9 @@ export class CSSBundleAnalyzer {
     const rules = this.parseCSSRules(css);
     const usedRules = rules.filter(rule => {
       const selectorMatch = rule.match(/^([^{]+)\{/);
-      if (!selectorMatch) return true;
+      if (!selectorMatch) {
+        return true;
+      }
 
       const selector = selectorMatch[1]?.trim();
       return selector
@@ -389,9 +395,9 @@ export class CSSBundleManager {
       for (const file of bundleConfig.files) {
         try {
           const filePath = path.resolve(file);
-          const content = await fs.readFile(filePath, 'utf-8');
+          const content = await fs.readFile(filePath, 'utf8');
           combinedCSS += `\n/* ${file} */\n${content}`;
-        } catch (error) {
+        } catch {
           console.warn(`CSS file not found: ${file}`);
         }
       }
@@ -430,14 +436,14 @@ export class CSSBundleManager {
   async validateBundles(): Promise<boolean> {
     const report = await this.analyzer.generateReport();
 
-    if (report.status === 'fail') {
+    if ('fail' === report.status) {
       console.error('❌ CSS Bundle validation failed:');
       console.error(`Total size: ${report.totalSize}KB (exceeds 30KB limit)`);
       report.recommendations.forEach(rec => console.error(`- ${rec}`));
       return false;
     }
 
-    if (report.status === 'warning') {
+    if ('warning' === report.status) {
       console.warn('⚠️ CSS Bundle validation warnings:');
       report.recommendations.forEach(rec => console.warn(`- ${rec}`));
     }

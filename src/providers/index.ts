@@ -1,22 +1,31 @@
-export {
+import { 
   GlassUIProvider,
   type GlassUIProviderProps,
 } from './glass-ui-provider';
-export {
+import {
   GlobalConfigProvider,
   GlobalConfigContext,
   useGlobalConfig,
   type GlobalConfig,
   type GlobalConfigProviderProps,
 } from './global-config-provider';
-export {
+import {
   ConfigProvider,
   LiquidifyProvider,
   type ConfigProviderProps,
 } from './config-provider';
-export {
+import {
   SSRConfigProvider,
   useIsClient,
   withSSRSafety,
 } from './ssr-config-provider';
-export { useConfig } from './use-config';
+import { useConfig } from './use-config';
+
+export {
+  GlassUIProvider,
+  type GlassUIProviderProps,
+  GlobalConfigProvider,
+  GlobalConfigContext,
+  useGlobalConfig,
+  type GlobalConfig,
+  type GlobalConfigPr...

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { GracefulComponent, GracefulImage, GracefulAnimation } from './graceful-component';
+import React, { useEffect, useState } from 'react';
+import { GracefulAnimation, GracefulComponent, GracefulImage } from './graceful-component';
 import { useDegradationAware } from '../../utils/graceful-degradation';
 
 export const GracefulDegradationTest: React.FC = () => {
@@ -21,7 +21,7 @@ export const GracefulDegradationTest: React.FC = () => {
         }
 
         // Test WebAssembly support
-        results.webAssembly = typeof WebAssembly !== 'undefined';
+        results.webAssembly = 'undefined' !== typeof WebAssembly;
 
         // Test Service Worker support
         results.serviceWorker = 'serviceWorker' in navigator;
@@ -100,7 +100,7 @@ export const GracefulDegradationTest: React.FC = () => {
     const calculateSupportScore = () => {
         const total = Object.keys(testResults).length;
         const supported = Object.values(testResults).filter(Boolean).length;
-        return total > 0 ? Math.round((supported / total) * 100) : 0;
+        return 0 < total ? Math.round((supported / total) * 100) : 0;
     };
 
     const supportScore = calculateSupportScore();
@@ -247,19 +247,19 @@ export const GracefulDegradationTest: React.FC = () => {
                     <div className="p-4 border rounded">
                         <h3 className="font-medium mb-2">Current Performance Level: {performanceLevel}</h3>
 
-                        {performanceLevel === 'low' && (
+                        { 'low' === performanceLevel && (
                             <div className="bg-red-100 p-3 rounded">
                                 <p>Low performance mode activated - using static fallbacks</p>
                             </div>
                         )}
 
-                        {performanceLevel === 'medium' && (
+                        { 'medium' === performanceLevel && (
                             <div className="bg-yellow-100 p-3 rounded">
                                 <p>Medium performance mode - reduced animations and quality</p>
                             </div>
                         )}
 
-                        {performanceLevel === 'high' && (
+                        { 'high' === performanceLevel && (
                             <div className="bg-green-100 p-3 rounded">
                                 <p>High performance mode - full features enabled</p>
                             </div>

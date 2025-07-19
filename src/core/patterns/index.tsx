@@ -134,7 +134,7 @@ export const createSlotComponent = (slots: Record<string, React.ComponentType<an
             <SlotComponent key={slotName}>
               {slotContent}
             </SlotComponent>
-          ) : null;
+          ) : undefined;
         })}
       </>
     );
@@ -188,7 +188,7 @@ export class ComponentEventBus {
     const eventListeners = this.listeners.get(event);
     if (eventListeners) {
       eventListeners.delete(callback);
-      if (eventListeners.size === 0) {
+      if (0 === eventListeners.size) {
         this.listeners.delete(event);
       }
     }

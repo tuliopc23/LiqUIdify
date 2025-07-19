@@ -99,7 +99,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
       key: 'status' as const,
       header: 'Status',
       render: (value: any) => (
-        <GlassBadge variant={value === 'Ready' ? 'success' : 'warning'}>
+        <GlassBadge variant={ 'Ready' === value ? 'success' : 'warning'}>
           {value}
         </GlassBadge>
       ),

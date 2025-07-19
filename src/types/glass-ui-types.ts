@@ -6,16 +6,15 @@
  * providing type safety, developer experience, and runtime validation.
  */
 
-import { CSSProperties } from 'react';
-import {
+import type { CSSProperties } from 'react';
+import type {
+  AnimationDuration,
+  GlassBlur,
   GlassColor,
   GlassOpacity,
-  GlassBlur,
-  AnimationDuration,
   ThemeName,
-  createGlassOpacity,
-  createGlassBlur,
 } from './branded';
+import { createGlassBlur, createGlassOpacity } from './branded';
 
 /**
  * Deep partial utility type
@@ -279,7 +278,7 @@ export type Responsive<T> =
  * CSS variable generator for Glass UI
  * Type-safe CSS custom properties
  */
-export type GlassCSSVariables = {
+export interface GlassCSSVariables {
   '--glass-bg': GlassColor;
   '--glass-border': GlassColor;
   '--glass-blur': string;
@@ -287,7 +286,7 @@ export type GlassCSSVariables = {
   '--glass-saturation': string;
   '--glass-shadow': string;
   '--glass-transition': string;
-};
+}
 
 /**
  * Type guard utilities
@@ -309,7 +308,7 @@ export const typeGuards = {
       'info',
     ];
     return (
-      typeof value === 'string' && variants.includes(value as ComponentVariant)
+      'string' === typeof value && variants.includes(value as ComponentVariant)
     );
   },
 
@@ -318,14 +317,14 @@ export const typeGuards = {
    */
   isComponentSize: (value: unknown): value is ComponentSize => {
     const sizes: ComponentSize[] = ['xs', 'sm', 'md', 'lg', 'xl'];
-    return typeof value === 'string' && sizes.includes(value as ComponentSize);
+    return 'string' === typeof value && sizes.includes(value as ComponentSize);
   },
 
   /**
    * Check if value is a responsive prop
    */
   isResponsiveProp: <T>(value: unknown): value is Responsive<T> => {
-    if (typeof value === 'object' && value !== null) {
+    if ('object' === typeof value && null !== value) {
       const keys = Object.keys(value);
       const validKeys = ['sm', 'md', 'lg', 'xl'];
       return keys.every(key => validKeys.includes(key));
@@ -340,10 +339,10 @@ export const typeGuards = {
     value: unknown
   ): value is { glassEffect: GlassEffectConfig } => {
     return (
-      typeof value === 'object' &&
-      value !== null &&
+      'object' === typeof value &&
+      null !== value &&
       'glassEffect' in value &&
-      typeof (value as any).glassEffect === 'object'
+      'object' === typeof (value as any).glassEffect
     );
   },
 };
@@ -361,7 +360,7 @@ export const propValidators = {
     if (config.opacity !== undefined) {
       try {
         createGlassOpacity(config.opacity as number);
-      } catch (e) {
+      } catch {
         errors.push(`Invalid opacity: ${config.opacity}`);
       }
     }
@@ -369,7 +368,7 @@ export const propValidators = {
     if (config.blur !== undefined) {
       try {
         createGlassBlur(config.blur as number);
-      } catch (e) {
+      } catch {
         errors.push(`Invalid blur: ${config.blur}`);
       }
     }
@@ -384,7 +383,7 @@ export const propValidators = {
     prop: Responsive<T>,
     validator: (value: T) => boolean
   ): boolean => {
-    if (typeof prop === 'object' && prop !== null) {
+    if ('object' === typeof prop && null !== prop) {
       return Object.values(prop).every(
         value => value === undefined || validator(value as T)
       );
@@ -427,7 +426,7 @@ export const styleGenerators = {
     prop: Responsive<T>,
     generator: (value: T) => CSSProperties
   ): CSSProperties => {
-    if (typeof prop === 'object' && prop !== null) {
+    if ('object' === typeof prop && null !== prop) {
       // This would typically integrate with a CSS-in-JS solution
       // For now, return base styles
       const baseValue = (prop as any).sm || (prop as any).md;

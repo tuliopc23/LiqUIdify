@@ -57,7 +57,7 @@ export function loadCSS(
   // Create loading promise
   const promise = new Promise<void>((resolve, reject) => {
     // Skip if no document (SSR)
-    if (typeof document === 'undefined') {
+    if ('undefined' === typeof document) {
       resolve();
       return;
     }
@@ -106,7 +106,9 @@ export function useCSS(url: string, options: CSSLoaderOptions = {}): boolean {
   const [loaded, setLoaded] = useState(loadedCSS.has(url));
 
   useEffect(() => {
-    if (!url || options.disabled) return;
+    if (!url || options.disabled) {
+      return;
+    }
 
     const currentOptions = { ...options };
 

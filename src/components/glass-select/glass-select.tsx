@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Check } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Check, ChevronDown } from 'lucide-react';
 import { cn, getGlassClass } from '@/lib/glass-utils';
 
 export interface GlassSelectOption {

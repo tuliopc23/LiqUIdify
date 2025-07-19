@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import postcss from 'postcss';
 import cssnano from 'cssnano';
 import autoprefixer from 'autoprefixer';
@@ -178,7 +178,7 @@ export class CSSBundler {
       }
     }
 
-    if (combinedCSS.length === 0) {
+    if (0 === combinedCSS.length) {
       throw new Error(`No CSS files found for bundle "${name}"`);
     }
 
@@ -248,11 +248,14 @@ export class CSSBundler {
    * Calculate gzipped size
    */
   private async calculateGzipSize(content: string): Promise<number> {
-    const zlib = require('zlib');
+    const zlib = require('node:zlib');
     return new Promise((resolve, reject) => {
       zlib.gzip(content, (err: any, compressed: Buffer) => {
-        if (err) reject(err);
-        else resolve(compressed.length);
+        if (err) {
+          reject(err);
+        } else {
+          resolve(compressed.length);
+        }
       });
     });
   }
@@ -367,19 +370,19 @@ export class BundleSizeValidator {
    */
   validate(result: BundleResult): {
     passed: boolean;
-    violations: Array<{
+    violations: {
       bundle: string;
       actual: number;
       limit: number;
       severity: 'warning' | 'error';
-    }>;
+    }[];
   } {
-    const violations: Array<{
+    const violations: {
       bundle: string;
       actual: number;
       limit: number;
       severity: 'warning' | 'error';
-    }> = [];
+    }[] = [];
 
     // Check individual bundle sizes
     result.bundles.forEach(bundle => {
@@ -405,7 +408,7 @@ export class BundleSizeValidator {
     }
 
     return {
-      passed: violations.filter(v => v.severity === 'error').length === 0,
+      passed: 0 === violations.filter(v => 'error' === v.severity).length,
       violations,
     };
   }
@@ -441,7 +444,7 @@ export class CSSPerformanceAnalyzer {
 
       // Check for complex selectors
       if (
-        (rule.selector.includes(' ') && rule.selector.split(' ').length > 3) ||
+        (rule.selector.includes(' ') && 3 < rule.selector.split(' ').length) ||
         rule.selector.includes('+') ||
         rule.selector.includes('~') ||
         rule.selector.includes('>')

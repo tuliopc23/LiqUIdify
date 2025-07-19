@@ -23,7 +23,7 @@ export const FEATURES = {
   advanced: false,
   accessibility: false,
   physics: false,
-  ssr: typeof window === 'undefined',
+  ssr: 'undefined' === typeof window,
 } as const;
 
 // Bundle loader utility
@@ -108,13 +108,13 @@ export function getBundleSize(bundleName: keyof typeof BUNDLE_SIZES): string {
 
 // Performance marks for bundle loading
 export function markBundleStart(bundleName: string) {
-  if (typeof window !== 'undefined' && window.performance) {
+  if ('undefined' !== typeof window && window.performance) {
     performance.mark(`glass-ui-${bundleName}-start`);
   }
 }
 
 export function markBundleEnd(bundleName: string) {
-  if (typeof window !== 'undefined' && window.performance) {
+  if ('undefined' !== typeof window && window.performance) {
     performance.mark(`glass-ui-${bundleName}-end`);
     performance.measure(
       `glass-ui-${bundleName}-load`,

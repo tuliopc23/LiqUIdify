@@ -6,8 +6,8 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AnimationTiming, GlassIntensity } from '@/core/base-component';
-import { GlassEffectState } from '@/core/glass-effects';
+import type { AnimationTiming, GlassIntensity } from '@/core/base-component';
+import type { GlassEffectState } from '@/core/glass-effects';
 
 // Animation state management
 export interface AnimationState {
@@ -52,7 +52,7 @@ const GLASS_ANIMATION_PRESETS = {
  */
 export function useGlassAnimation(
   timing: AnimationTiming = 'normal',
-  customConfig?: Partial<AnimationConfig>,
+  customConfig?: Partial<AnimationConfig>
 ) {
   const [state, setState] = useState<AnimationState>({
     isAnimating: false,
@@ -72,9 +72,11 @@ export function useGlassAnimation(
     (
       element: HTMLElement,
       keyframes: Keyframe[],
-      options?: Partial<AnimationConfig>,
+      options?: Partial<AnimationConfig>
     ) => {
-      if (!element) return;
+      if (!element) {
+        return;
+      }
 
       // Cancel any existing animation
       if (animationRef.current) {
@@ -104,16 +106,18 @@ export function useGlassAnimation(
 
       // Track animation progress
       const updateProgress = () => {
-        if (!animation.currentTime || !animation.effect) return;
+        if (!animation.currentTime || !animation.effect) {
+          return;
+        }
 
         const progress = Math.min(
           (animation.currentTime as number) / animationOptions.duration,
-          1,
+          1
         );
 
         setState(prev => ({ ...prev, progress }));
 
-        if (progress < 1) {
+        if (1 > progress) {
           requestAnimationFrame(updateProgress);
         }
       };
@@ -131,17 +135,17 @@ export function useGlassAnimation(
 
       return animation;
     },
-    [config],
+    [config]
   );
 
   const cancel = useCallback(() => {
     if (animationRef.current) {
       animationRef.current.cancel();
-      animationRef.current = null;
+      animationRef.current = undefined;
     }
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
+      timeoutRef.current = undefined;
     }
     setState(prev => ({ ...prev, isAnimating: false }));
   }, []);
@@ -160,20 +164,22 @@ export function useGlassAnimation(
  */
 export function useGlassStateTransitions(
   timing: AnimationTiming = 'normal',
-  intensity: GlassIntensity = 'medium',
+  intensity: GlassIntensity = 'medium'
 ) {
   const [currentState, setCurrentState] = useState<GlassEffectState>('idle');
   const { cancel, state } = useGlassAnimation(timing);
 
   const transitionToState = useCallback(
     (targetState: GlassEffectState) => {
-      if (currentState === targetState) return;
+      if (currentState === targetState) {
+        return;
+      }
 
       cancel(); // Cancel any ongoing animation
 
       setCurrentState(targetState);
     },
-    [currentState, cancel, intensity],
+    [currentState, cancel, intensity]
   );
 
   return { transitionToState, currentState, isAnimating: state.isAnimating };
@@ -185,7 +191,7 @@ export function useGlassStateTransitions(
 export function useMagneticHover(
   strength: number = 0.3,
   radius: number = 100,
-  timing: AnimationTiming = 'fast',
+  timing: AnimationTiming = 'fast'
 ) {
   const elementRef = useRef<HTMLElement>(null);
   const { animate } = useGlassAnimation(timing);
@@ -195,7 +201,9 @@ export function useMagneticHover(
 
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
-      if (!elementRef.current) return;
+      if (!elementRef.current) {
+        return;
+      }
 
       const rect = elementRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -217,11 +225,11 @@ export function useMagneticHover(
           [{ transform: `translate(${translateX}px, ${translateY}px)` }],
           {
             fill: 'forwards',
-          },
+          }
         );
       }
     },
-    [animate, strength, radius],
+    [animate, strength, radius]
   );
 
   const handleMouseEnter = useCallback(() => {
@@ -242,7 +250,9 @@ export function useMagneticHover(
 
   useEffect(() => {
     const element = elementRef.current;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     element.addEventListener('mouseenter', handleMouseEnter);
     element.addEventListener('mouseleave', handleMouseLeave);
@@ -262,7 +272,7 @@ export function useMagneticHover(
  */
 export function useRippleEffect(
   timing: AnimationTiming = 'normal',
-  color: string = 'rgba(255, 255, 255, 0.3)',
+  color: string = 'rgba(255, 255, 255, 0.3)'
 ) {
   const { animate } = useGlassAnimation(timing);
 
@@ -285,7 +295,7 @@ export function useSpringAnimation() {
     (
       element: HTMLElement,
       targetValue: number,
-      property: string = 'transform',
+      property: string = 'transform'
     ) => {
       const springEasing = `cubic-bezier(0.34, 1.56, 0.64, 1)`;
 
@@ -295,7 +305,7 @@ export function useSpringAnimation() {
         fill: 'forwards',
       });
     },
-    [animate],
+    [animate]
   );
 
   return { springTo };
@@ -307,7 +317,7 @@ export function useSpringAnimation() {
 export function useLiquidFlow(
   amplitude: number = 20,
   frequency: number = 2,
-  duration: number = 2000,
+  duration: number = 2000
 ) {
   const { animate } = useGlassAnimation('normal');
 
@@ -331,15 +341,11 @@ export function useLiquidFlow(
         easing: 'linear',
       });
     },
-    [animate, amplitude, frequency, duration],
+    [animate, amplitude, frequency, duration]
   );
 
   return { startFlow };
 }
 
-
 // Export all hooks and utilities
-export {
-  TIMING_PRESETS,
-  GLASS_ANIMATION_PRESETS,
-};
+export { TIMING_PRESETS, GLASS_ANIMATION_PRESETS };

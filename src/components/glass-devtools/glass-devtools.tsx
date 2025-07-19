@@ -3,10 +3,10 @@
  * Provides runtime debugging, accessibility validation, and performance monitoring
  */
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/glass-utils';
-import { accessibilityManager, type AccessibilityReport } from '@/core/accessibility-manager';
-import { performanceMonitor, type PerformanceReport } from '@/core/performance-monitor';
+import { type AccessibilityReport, accessibilityManager } from '@/core/accessibility-manager';
+import { type PerformanceReport, performanceMonitor } from '@/core/performance-monitor';
 import { cssBundleAnalyzer } from '@/core/css-optimization';
 
 // DevTools interfaces
@@ -59,8 +59,8 @@ export function useGlassDevTools() {
     const [state, setState] = useState<DevToolsState>({
         isOpen: false,
         activeTab: 'inspector',
-        selectedElement: null,
-        inspection: null,
+        selectedElement: undefined,
+        inspection: undefined,
         logs: [],
         settings: {
             enableRealTimeValidation: true,
@@ -85,14 +85,14 @@ export function useGlassDevTools() {
         }));
 
         if (state.settings.enableConsoleLogging) {
-            const consoleMethod = log.level === 'error' ? 'error' :
-                log.level === 'warn' ? 'warn' : 'log';
+            const consoleMethod = 'error' === log.level ? 'error' :
+                ('warn' === log.level ? 'warn' : 'log');
             console[consoleMethod](`[Glass DevTools] ${log.message}`, log.data);
         }
     }, [state.settings.enableConsoleLogging]);
 
     const inspectElement = useCallback(async (element: HTMLElement) => {
-        if (!element) return;
+        if (!element) {return;}
 
         addLog({
             level: 'info',
@@ -121,7 +121,7 @@ export function useGlassDevTools() {
 
             // Get computed styles
             const computedStyles = window.getComputedStyle(element);
-            const appliedClasses = Array.from(element.classList);
+            const appliedClasses = [...element.classList];
             const glassEffects = appliedClasses.filter(c =>
                 c.includes('glass') || c.includes('liquid') || c.includes('backdrop')
             );
@@ -182,19 +182,19 @@ export interface GlassDevToolsProps {
 }
 
 export function GlassDevTools({
-    enabled = process.env.NODE_ENV === 'development',
+    enabled = 'development' === process.env.NODE_ENV,
     defaultOpen = false,
     position = 'bottom',
     theme = 'auto'
 }: GlassDevToolsProps) {
     const { state, setState, inspectElement } = useGlassDevTools();
-    const [performanceReport, setPerformanceReport] = useState<PerformanceReport | null>(null);
-    const [cssReport, setCssReport] = useState<any>(null);
+    const [performanceReport, setPerformanceReport] = useState<PerformanceReport | null>(undefined);
+    const [cssReport, setCssReport] = useState<any>(undefined);
     const overlayRef = useRef<HTMLDivElement>(null);
 
     // Initialize DevTools
     useEffect(() => {
-        if (!enabled) return;
+        if (!enabled) {return;}
 
         setState(prev => ({
             ...prev,
@@ -208,7 +208,7 @@ export function GlassDevTools({
 
         // Set up keyboard shortcut (Ctrl/Cmd + Shift + D)
         const handleKeyDown = (e: KeyboardEvent) => {
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && 'D' === e.key) {
                 e.preventDefault();
                 setState(prev => ({ ...prev, isOpen: !prev.isOpen }));
             }
@@ -218,10 +218,10 @@ export function GlassDevTools({
 
         // Set up element inspection on click
         const handleElementClick = (e: MouseEvent) => {
-            if (!state.isOpen) return;
+            if (!state.isOpen) {return;}
 
             // Check if click is inside DevTools
-            if (overlayRef.current?.contains(e.target as Node)) return;
+            if (overlayRef.current?.contains(e.target as Node)) {return;}
 
             e.preventDefault();
             e.stopPropagation();
@@ -242,7 +242,7 @@ export function GlassDevTools({
 
     // Update performance report periodically
     useEffect(() => {
-        if (!enabled || !state.settings.enablePerformanceMonitoring) return;
+        if (!enabled || !state.settings.enablePerformanceMonitoring) {return;}
 
         const interval = setInterval(() => {
             const report = performanceMonitor.getReport();
@@ -254,14 +254,14 @@ export function GlassDevTools({
 
     // Update CSS report
     useEffect(() => {
-        if (!enabled) return;
+        if (!enabled) {return;}
 
         cssBundleAnalyzer.generateReport().then(setCssReport);
     }, [enabled]);
 
     // Real-time accessibility validation
     useEffect(() => {
-        if (!enabled || !state.settings.enableRealTimeValidation) return;
+        if (!enabled || !state.settings.enableRealTimeValidation) {return;}
 
         accessibilityManager.enableRealTimeMonitoring();
 
@@ -271,7 +271,7 @@ export function GlassDevTools({
     }, [enabled, state.settings.enableRealTimeValidation]);
 
     if (!enabled || !state.isOpen) {
-        return null;
+        return ;
     }
 
     const positionClasses = {
@@ -286,13 +286,13 @@ export function GlassDevTools({
             className={cn(
                 'glass-devtools z-[9999] bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-gray-200 dark:border-gray-700',
                 positionClasses[state.settings.position],
-                state.settings.theme === 'dark' && 'dark'
+                'dark' === state.settings.theme && 'dark'
             )}
         >
             {/* Header */}
             <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
                     <h3 className="font-semibold text-sm">Glass UI DevTools</h3>
                 </div>
                 <div className="flex items-center gap-2">
@@ -331,25 +331,25 @@ export function GlassDevTools({
 
             {/* Content */}
             <div className="flex-1 overflow-auto p-3">
-                {state.activeTab === 'inspector' && (
+                { 'inspector' === state.activeTab && (
                     <InspectorTab inspection={state.inspection} />
                 )}
-                {state.activeTab === 'accessibility' && (
+                { 'accessibility' === state.activeTab && (
                     <AccessibilityTab
                         inspection={state.inspection}
                         onValidate={(element) => inspectElement(element)}
                     />
                 )}
-                {state.activeTab === 'performance' && (
+                { 'performance' === state.activeTab && (
                     <PerformanceTab
                         report={performanceReport}
                         cssReport={cssReport}
                     />
                 )}
-                {state.activeTab === 'console' && (
+                { 'console' === state.activeTab && (
                     <ConsoleTab logs={state.logs} />
                 )}
-                {state.activeTab === 'settings' && (
+                { 'settings' === state.activeTab && (
                     <SettingsTab
                         settings={state.settings}
                         onSettingsChange={(settings) =>
@@ -387,7 +387,7 @@ function InspectorTab({ inspection }: { inspection: ComponentInspection | null }
             <div>
                 <h4 className="font-semibold text-sm mb-2">Glass Effects</h4>
                 <div className="bg-gray-50 dark:bg-gray-800 rounded p-3 text-xs">
-                    {inspection.styles.glassEffects.length > 0 ? (
+                    { 0 < inspection.styles.glassEffects.length ? (
                         inspection.styles.glassEffects.map(effect => (
                             <div key={effect} className="mb-1">• {effect}</div>
                         ))
@@ -442,15 +442,15 @@ function AccessibilityTab({
                 <div className="flex items-center gap-2 mb-2">
                     <div className={cn(
                         'w-3 h-3 rounded-full',
-                        accessibility.score >= 95 ? 'bg-green-500' :
-                            accessibility.score >= 80 ? 'bg-yellow-500' : 'bg-red-500'
-                    )}></div>
+                        95 <= accessibility.score ? 'bg-green-500' :
+                            (80 <= accessibility.score ? 'bg-yellow-500' : 'bg-red-500')
+                    )} />
                     <span className="font-semibold">{accessibility.score}/100</span>
                     <span className="text-xs text-gray-500">WCAG {accessibility.wcagLevel}</span>
                 </div>
             </div>
 
-            {accessibility.violations.length > 0 && (
+            { 0 < accessibility.violations.length && (
                 <div>
                     <h5 className="font-semibold text-sm mb-2 text-red-600">Violations</h5>
                     <div className="space-y-2">
@@ -464,7 +464,7 @@ function AccessibilityTab({
                 </div>
             )}
 
-            {accessibility.suggestions.length > 0 && (
+            { 0 < accessibility.suggestions.length && (
                 <div>
                     <h5 className="font-semibold text-sm mb-2 text-blue-600">Suggestions</h5>
                     <div className="space-y-2">
@@ -514,11 +514,11 @@ function PerformanceTab({
                             <div className="font-semibold">{metric.name}</div>
                             <div className={cn(
                                 'text-lg font-bold',
-                                metric.rating === 'good' ? 'text-green-600' :
-                                    metric.rating === 'needs-improvement' ? 'text-yellow-600' : 'text-red-600'
+                                'good' === metric.rating ? 'text-green-600' :
+                                    ('needs-improvement' === metric.rating ? 'text-yellow-600' : 'text-red-600')
                             )}>
                                 {metric.value.toFixed(0)}
-                                {metric.name === 'CLS' ? '' : 'ms'}
+                                { 'CLS' === metric.name ? '' : 'ms'}
                             </div>
                         </div>
                     ))}
@@ -533,15 +533,15 @@ function PerformanceTab({
                             <strong>Total:</strong> {cssReport.totalSize}KB / 30KB
                             <div className={cn(
                                 'w-full bg-gray-200 rounded-full h-2 mt-1',
-                                cssReport.totalSize > 30 ? 'bg-red-200' : 'bg-green-200'
+                                30 < cssReport.totalSize ? 'bg-red-200' : 'bg-green-200'
                             )}>
                                 <div
                                     className={cn(
                                         'h-2 rounded-full transition-all',
-                                        cssReport.totalSize > 30 ? 'bg-red-500' : 'bg-green-500'
+                                        30 < cssReport.totalSize ? 'bg-red-500' : 'bg-green-500'
                                     )}
                                     style={{ width: `${Math.min((cssReport.totalSize / 30) * 100, 100)}%` }}
-                                ></div>
+                                 />
                             </div>
                         </div>
                         {Object.entries(cssReport.bundles).map(([name, bundle]: [string, any]) => (
@@ -573,7 +573,7 @@ function PerformanceTab({
 function ConsoleTab({ logs }: { logs: DevToolsLog[] }) {
     return (
         <div className="space-y-1 max-h-64 overflow-auto">
-            {logs.length === 0 ? (
+            { 0 === logs.length ? (
                 <div className="text-center text-gray-500 py-8">
                     <p>No logs yet</p>
                 </div>
@@ -581,9 +581,9 @@ function ConsoleTab({ logs }: { logs: DevToolsLog[] }) {
                 logs.map(log => (
                     <div key={log.id} className={cn(
                         'text-xs p-2 rounded border-l-2',
-                        log.level === 'error' ? 'bg-red-50 dark:bg-red-900/20 border-red-500' :
-                            log.level === 'warn' ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-500' :
-                                log.level === 'info' ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-500' :
+                        'error' === log.level ? 'bg-red-50 dark:bg-red-900/20 border-red-500' :
+                            'warn' === log.level ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-500' :
+                                'info' === log.level ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-500' :
                                     'bg-gray-50 dark:bg-gray-800 border-gray-500'
                     )}>
                         <div className="flex items-center gap-2 mb-1">
@@ -592,9 +592,9 @@ function ConsoleTab({ logs }: { logs: DevToolsLog[] }) {
                             </span>
                             <span className={cn(
                                 'px-1 rounded text-xs font-semibold',
-                                log.level === 'error' ? 'bg-red-200 text-red-800' :
-                                    log.level === 'warn' ? 'bg-yellow-200 text-yellow-800' :
-                                        log.level === 'info' ? 'bg-blue-200 text-blue-800' :
+                                'error' === log.level ? 'bg-red-200 text-red-800' :
+                                    'warn' === log.level ? 'bg-yellow-200 text-yellow-800' :
+                                        'info' === log.level ? 'bg-blue-200 text-blue-800' :
                                             'bg-gray-200 text-gray-800'
                             )}>
                                 {log.level.toUpperCase()}
@@ -606,7 +606,7 @@ function ConsoleTab({ logs }: { logs: DevToolsLog[] }) {
                             <details className="mt-1">
                                 <summary className="cursor-pointer text-gray-600">Data</summary>
                                 <pre className="mt-1 text-xs bg-gray-100 dark:bg-gray-900 p-1 rounded overflow-auto">
-                                    {JSON.stringify(log.data, null, 2)}
+                                    {JSON.stringify(log.data, undefined, 2)}
                                 </pre>
                             </details>
                         )}

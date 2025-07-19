@@ -4,19 +4,19 @@
  */
 
 import { 
-  HydrationDetector, 
   HydrationBoundary, 
-  HydrationSafe,
-  HydrationMetrics 
+  HydrationDetector, 
+  HydrationMetrics,
+  HydrationSafe 
 } from '../hydration-detector';
 import { 
-  useWindowSize, 
+  useIntersectionObserver, 
   useMediaQuery, 
-  useOnlineStatus, 
-  useIntersectionObserver,
-  useNetworkStatus,
+  useNetworkStatus, 
+  useOnlineStatus,
   usePageVisibility,
-  usePerformanceMetrics
+  usePerformanceMetrics,
+  useWindowSize
 } from '../../hooks/use-ssr-safe-hooks';
 import { EnhancedSSRProvider } from '../../providers/enhanced-ssr-provider';
 import { useProgressiveEnhancement } from '../../utils/hydration-utils';
@@ -46,7 +46,7 @@ export function SSRSafetyDemo({ debug = false }: SSRSafetyDemoProps) {
             <ProgressiveEnhancementDemo />
           </HydrationBoundary>
 
-          {debug && <HydrationMetrics debug={true} />}
+          {debug && <HydrationMetrics debug />}
         </div>
       </HydrationDetector>
     </EnhancedSSRProvider>

@@ -3,7 +3,7 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 
 const accordionVariants = cva(
   [

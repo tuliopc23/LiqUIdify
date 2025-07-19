@@ -1,17 +1,41 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'rolldown-vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
+import { readFileSync } from 'fs';
+
+// Load OXC configuration
+const oxcConfig = JSON.parse(readFileSync('./oxc.config.json', 'utf-8'));
 
 export default defineConfig({
+  // Configure rolldown-vite to use OXC transformer
+  rolldown: {
+    // Enable OXC for TypeScript and JSX transformation
+    transform: oxcConfig.transform,
+    parser: oxcConfig.parser,
+    resolve: {
+      alias: oxcConfig.resolver.alias,
+      mainFields: oxcConfig.resolver.mainFields,
+      conditionNames: oxcConfig.resolver.conditionNames,
+      extensionAlias: oxcConfig.resolver.extensionAlias,
+    },
+    // Enable source maps from OXC
+    sourcemap: oxcConfig.sourcemap.enable,
+    // Optimize for production
+    minify: process.env.NODE_ENV === 'production',
+    target: 'es2020',
+  },
   plugins: [
     react({
-      // Enable automatic JSX runtime for better tree-shaking
+      // Configure React plugin to work with OXC
       jsxRuntime: 'automatic',
-      // Optimize React for production builds
       jsxImportSource: 'react',
-      // Enable development features only in development
       include: /\.(tsx|ts|jsx|js)$/,
+      // Disable Babel to use OXC through rolldown-vite
+      babel: false,
+      // Use OXC's JSX transformation settings
+      jsxPure: oxcConfig.transform.jsx.pure,
+      fastRefresh: process.env.NODE_ENV === 'development',
     }),
     dts({
       insertTypesEntry: true,
@@ -32,7 +56,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      '@/tokens': resolve(__dirname, 'src/tokens/index'),
+      '@/design-tokens': resolve(__dirname, 'src/tokens/design-tokens'),
     },
+    // Enhanced module resolution with OXC compatibility
+    mainFields: ['module', 'main', 'browser'],
+    conditions: ['import', 'module', 'browser', 'default'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs'],
   },
   css: {
     postcss: './postcss.config.js',
@@ -42,6 +72,36 @@ export default defineConfig({
         charset: false,
       },
     },
+  },
+  // OXC-specific optimizations
+  optimizeDeps: {
+    // Force pre-bundling of these dependencies for better performance
+    include: [
+      'react',
+      'react-dom',
+      'react/jsx-runtime',
+      'framer-motion',
+      'gsap',
+      'clsx',
+      'class-variance-authority',
+      'tailwind-merge',
+    ],
+    // Use esbuild for compatibility while OXC integration matures
+    esbuildOptions: {
+      target: 'es2020',
+      jsx: 'automatic',
+      jsxImportSource: 'react',
+    },
+  },
+  esbuild: {
+    // Configure esbuild to work alongside OXC
+    target: 'es2020',
+    jsx: 'automatic',
+    jsxImportSource: 'react',
+    // Enable source maps for better debugging
+    sourcemap: true,
+    // Drop console statements in production
+    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
   },
   build: {
     lib: {
@@ -86,19 +146,9 @@ export default defineConfig({
         return `${entryName}.${extension}`;
       },
     },
+    // Enhanced Rollup options - optimized for potential Rolldown migration
     rollupOptions: {
-      manualChunks(id) {
-        if (id.includes('node_modules')) {
-          return 'vendor';
-        }
-        if (id.includes('components')) {
-          return 'components';
-        }
-        if (id.includes('utils')) {
-          return 'utils';
-        }
-      },
-      // More comprehensive external dependencies for React 19 compatibility
+      // External dependencies - these won't be bundled
       external: [
         'react',
         'react-dom',
@@ -130,11 +180,6 @@ export default defineConfig({
           preserveModules: true,
           preserveModulesRoot: 'src',
           exports: 'named',
-          // Improved tree-shaking with side effects handling
-          generatedCode: {
-            preset: 'es2015',
-            constBindings: true,
-          },
         },
         // CommonJS output for backward compatibility
         {
@@ -144,9 +189,6 @@ export default defineConfig({
           chunkFileNames: 'chunks/[name]-[hash].cjs',
           exports: 'named',
           interop: 'auto',
-          generatedCode: {
-            preset: 'es2015',
-          },
           globals: {
             react: 'React',
             'react-dom': 'ReactDOM',
@@ -161,18 +203,6 @@ export default defineConfig({
           },
         },
       ],
-      // Tree-shaking optimization
-      treeshake: {
-        preset: 'recommended',
-        moduleSideEffects: id => {
-          // CSS files have side effects
-          return id.includes('.css') || id.includes('styles/');
-        },
-        // Aggressive pure annotation
-        annotations: true,
-        propertyReadSideEffects: false,
-        unknownGlobalSideEffects: false,
-      },
     },
     // Enable source maps for debugging
     sourcemap: true,

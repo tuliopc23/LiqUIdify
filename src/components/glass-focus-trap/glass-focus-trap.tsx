@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/glass-utils';
 import { accessibilityManager } from '@/core/accessibility-manager';
 
@@ -73,7 +73,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   }, [isActive]);
 
   const getFocusableElements = useCallback((): HTMLElement[] => {
-    if (!containerRef.current) return [];
+    if (!containerRef.current) {return [];}
 
     const focusableSelectors = [
       'a[href]:not([disabled]):not([tabindex="-1"])',
@@ -89,20 +89,18 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       'iframe:not([disabled])',
     ].join(',');
 
-    return Array.from(
-      containerRef.current.querySelectorAll<HTMLElement>(focusableSelectors)
-    ).filter(el => {
+    return [...containerRef.current.querySelectorAll<HTMLElement>(focusableSelectors)].filter(el => {
       // Check if element is visible and focusable
       const style = window.getComputedStyle(el);
       const rect = el.getBoundingClientRect();
 
       return (
-        style.display !== 'none' &&
-        style.visibility !== 'hidden' &&
-        style.opacity !== '0' &&
-        el.offsetParent !== null &&
-        rect.width > 0 &&
-        rect.height > 0 &&
+        'none' !== style.display &&
+        'hidden' !== style.visibility &&
+        '0' !== style.opacity &&
+        null !== el.offsetParent &&
+        0 < rect.width &&
+        0 < rect.height &&
         !el.hasAttribute('inert') &&
         !el.closest('[inert]')
       );
@@ -122,7 +120,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
     });
 
     // Keep only last 10 focus history items
-    if (focusHistory.current.length > 10) {
+    if (10 < focusHistory.current.length) {
       focusHistory.current.shift();
     }
   }, []);
@@ -130,9 +128,9 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   const restoreFocusFromHistory = useCallback(() => {
     const history = focusHistory.current;
 
-    for (let i = history.length - 1; i >= 0; i--) {
+    for (let i = history.length - 1; 0 <= i; i--) {
       const historyItem = history[i];
-      if (!historyItem) continue;
+      if (!historyItem) {continue;}
       const { element, scrollPosition } = historyItem;
 
       if (
@@ -160,32 +158,32 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (!isActive || paused) return;
+      if (!isActive || paused) {return;}
 
       // Check if this is the active trap in the stack
-      if (trapStack && focusTrapStack.length > 0) {
+      if (trapStack && 0 < focusTrapStack.length) {
         const activeTrap = focusTrapStack[focusTrapStack.length - 1];
-        if (activeTrap !== instanceRef.current) return;
+        if (activeTrap !== instanceRef.current) {return;}
       }
 
-      if (event.key === 'Escape' && onEscape) {
+      if ('Escape' === event.key && onEscape) {
         event.preventDefault();
         event.stopPropagation();
         onEscape();
         return;
       }
 
-      if (event.key !== 'Tab') return;
+      if ('Tab' !== event.key) {return;}
 
       const focusableElements = getFocusableElements();
-      if (focusableElements.length === 0) return;
+      if (0 === focusableElements.length) {return;}
 
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1] as
         | HTMLElement
         | undefined;
 
-      if (!firstElement || !lastElement) return;
+      if (!firstElement || !lastElement) {return;}
       const activeElement = document.activeElement as HTMLElement;
 
       // Handle edge case: focus is outside the trap
@@ -225,12 +223,12 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
   const handleFocusIn = useCallback(
     (event: FocusEvent) => {
-      if (!isActive || paused || !containerRef.current) return;
+      if (!isActive || paused || !containerRef.current) {return;}
 
       // Check if this is the active trap in the stack
-      if (trapStack && focusTrapStack.length > 0) {
+      if (trapStack && 0 < focusTrapStack.length) {
         const activeTrap = focusTrapStack[focusTrapStack.length - 1];
-        if (activeTrap !== instanceRef.current) return;
+        if (activeTrap !== instanceRef.current) {return;}
       }
 
       const target = event.target as HTMLElement;
@@ -249,7 +247,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         } else {
           // Fall back to first focusable element
           const focusableElements = getFocusableElements();
-          if (focusableElements.length > 0 && focusableElements[0]) {
+          if (0 < focusableElements.length && focusableElements[0]) {
             focusableElements[0].focus(focusOptions);
           } else if (fallbackFocus?.current) {
             fallbackFocus.current.focus(focusOptions);
@@ -275,7 +273,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   const handleMouseDown = useCallback(
     (event: MouseEvent) => {
       if (!isActive || paused || allowOutsideClick || !containerRef.current)
-        return;
+        {return;}
 
       const target = event.target as HTMLElement;
 
@@ -315,9 +313,9 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
     // Set initial focus
     const setInitialFocus = () => {
-      if (!autoFocus) return;
+      if (!autoFocus) {return;}
 
-      if (typeof initialFocus === 'string') {
+      if ('string' === typeof initialFocus) {
         const element =
           containerRef.current?.querySelector<HTMLElement>(initialFocus);
         if (element) {
@@ -329,7 +327,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         lastFocusedElement.current = initialFocus.current;
       } else {
         const focusableElements = getFocusableElements();
-        if (focusableElements.length > 0 && focusableElements[0]) {
+        if (0 < focusableElements.length && focusableElements[0]) {
           focusableElements[0].focus(focusOptions);
           lastFocusedElement.current = focusableElements[0];
         } else if (fallbackFocus?.current) {
@@ -366,7 +364,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       // Remove from stack
       if (trapStack && instanceRef.current) {
         const index = focusTrapStack.indexOf(instanceRef.current as any);
-        if (index > -1) {
+        if (-1 < index) {
           focusTrapStack.splice(index, 1);
         }
       }

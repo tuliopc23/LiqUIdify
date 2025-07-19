@@ -1,8 +1,8 @@
-import React, { forwardRef, useRef, useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { forwardRef, useCallback, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
-import { useMagneticHover, createGlassRipple } from '@/lib/glass-physics';
+import { createGlassRipple, useMagneticHover } from '@/lib/glass-physics';
 
 export interface FloatingAction {
   icon: React.ReactNode;
@@ -97,7 +97,7 @@ const GlassFloatingAction = forwardRef<
         createGlassRipple(buttonRef.current, x, y, 'rgba(255, 255, 255, 0.4)');
       }
 
-      if (actions.length > 0) {
+      if (0 < actions.length) {
         setIsExpanded(!isExpanded);
       } else {
         onClick?.(e as any);
@@ -180,7 +180,7 @@ const GlassFloatingAction = forwardRef<
                       'relative group flex items-center justify-center rounded-full shadow-lg',
                       'liquid-glass liquid-glass-interactive liquid-glass-ripple',
                       specularHighlights && 'liquid-glass-specular',
-                      sizeClasses[size === 'lg' ? 'md' : 'sm'],
+                      sizeClasses['lg' === size ? 'md' : 'sm'],
                       getColorClasses(action.color)
                     )}
                     onClick={() => {
@@ -190,7 +190,7 @@ const GlassFloatingAction = forwardRef<
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <span className={iconSizes[size === 'lg' ? 'md' : 'sm']}>
+                    <span className={iconSizes['lg' === size ? 'md' : 'sm']}>
                       {action.icon}
                     </span>
 
@@ -198,32 +198,32 @@ const GlassFloatingAction = forwardRef<
                     <motion.div
                       className="absolute whitespace-nowrap px-3 py-1 liquid-glass liquid-glass-specular rounded-lg text-xs font-medium text-[var(--text-primary)] pointer-events-none"
                       style={{
-                        [expandDirection === 'left' ? 'right' : 'left']:
-                          expandDirection === 'left' ||
-                          expandDirection === 'right'
+                        ['left' === expandDirection ? 'right' : 'left']:
+                          'left' === expandDirection ||
+                          'right' === expandDirection
                             ? '100%'
                             : '50%',
-                        [expandDirection === 'up' ? 'bottom' : 'top']:
-                          expandDirection === 'up' || expandDirection === 'down'
+                        ['up' === expandDirection ? 'bottom' : 'top']:
+                          'up' === expandDirection || 'down' === expandDirection
                             ? '100%'
                             : '50%',
                         transform:
-                          expandDirection === 'radial'
+                          'radial' === expandDirection
                             ? 'translate(-50%, -50%)'
-                            : expandDirection === 'left' ||
-                                expandDirection === 'right'
+                            : 'left' === expandDirection ||
+                                'right' === expandDirection
                               ? 'translateY(-50%)'
                               : 'translateX(-50%)',
                         marginLeft:
-                          expandDirection === 'left'
+                          'left' === expandDirection
                             ? '-8px'
-                            : expandDirection === 'right'
+                            : 'right' === expandDirection
                               ? '8px'
                               : '0',
                         marginTop:
-                          expandDirection === 'up'
+                          'up' === expandDirection
                             ? '-8px'
-                            : expandDirection === 'down'
+                            : 'down' === expandDirection
                               ? '8px'
                               : '0',
                       }}
@@ -245,14 +245,14 @@ const GlassFloatingAction = forwardRef<
           className={cn(
             'relative group flex items-center justify-center rounded-full shadow-xl',
             'liquid-glass liquid-glass-interactive liquid-glass-ripple',
-            variant === 'glow' && 'liquid-glass-glow',
+            'glow' === variant && 'liquid-glass-glow',
             specularHighlights && 'liquid-glass-specular liquid-glass-shimmer',
             enableMagnetic && 'liquid-glass-magnetic',
             sizeClasses[size],
-            variant === 'default' &&
+            'default' === variant &&
               'bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-blue-500/25',
-            variant === 'minimal' && 'liquid-glass text-[var(--text-primary)]',
-            variant === 'glow' &&
+            'minimal' === variant && 'liquid-glass text-[var(--text-primary)]',
+            'glow' === variant &&
               'bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-purple-500/25'
           )}
           style={{

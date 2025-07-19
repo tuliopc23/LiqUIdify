@@ -4,12 +4,12 @@
  */
 
 import type {
-  GlassVariant,
-  GlassState,
-  GlassBorder,
   GlassBlur,
-  GlassTiming,
+  GlassBorder,
   GlassEasing,
+  GlassState,
+  GlassTiming,
+  GlassVariant,
 } from '@/types/tailwind';
 
 // Core CSS variable utilities
@@ -37,7 +37,7 @@ export const cssVar = {
    * @param value - The value to set
    */
   set: (element: HTMLElement, property: string, value: string): void => {
-    if (typeof window !== 'undefined') {
+    if ('undefined' !== typeof window) {
       element.style.setProperty(`--${property}`, value);
     }
   },
@@ -48,7 +48,7 @@ export const cssVar = {
    * @param property - The property name (without -- prefix)
    */
   remove: (element: HTMLElement, property: string): void => {
-    if (typeof window !== 'undefined') {
+    if ('undefined' !== typeof window) {
       element.style.removeProperty(`--${property}`);
     }
   },
@@ -60,7 +60,7 @@ export const cssVar = {
    * @returns The computed value as a string
    */
   getValue: (element: HTMLElement, property: string): string => {
-    if (typeof window !== 'undefined') {
+    if ('undefined' !== typeof window) {
       return getComputedStyle(element).getPropertyValue(`--${property}`).trim();
     }
     return '';
@@ -204,7 +204,7 @@ export const liquidVar = {
 // Utility to check if CSS custom properties are supported
 export const isCSSCustomPropertiesSupported = (): boolean => {
   return (
-    typeof window !== 'undefined' &&
+    'undefined' !== typeof window &&
     window.CSS &&
     window.CSS.supports &&
     window.CSS.supports('color', 'var(--fake-var, red)')

@@ -262,21 +262,21 @@ export const GLASS_SHADERS = {
 // WebGL shader effect class
 export class GlassShaderEffect {
   private gl: WebGLRenderingContext;
-  private program: WebGLProgram | null = null;
+  private program: WebGLProgram | null = undefined;
   private uniforms: Map<string, WebGLUniformLocation> = new Map();
   private textures: Map<string, WebGLTexture> = new Map();
-  private frameBuffer: WebGLFramebuffer | null = null;
-  private renderTexture: WebGLTexture | null = null;
+  private frameBuffer: WebGLFramebuffer | null = undefined;
+  private renderTexture: WebGLTexture | null = undefined;
   private startTime: number;
-  private animationId: number | null = null;
+  private animationId: number | null = undefined;
 
   constructor(
     private canvas: HTMLCanvasElement,
     private shaderType: keyof typeof GLASS_SHADERS
   ) {
     // SSR safety check
-    if (typeof window === 'undefined') {
-      throw new Error('GlassShaderEffect cannot be used during SSR');
+    if ('undefined' === typeof window) {
+      throw new TypeError('GlassShaderEffect cannot be used during SSR');
     }
 
     const gl = canvas.getContext('webgl', {
@@ -326,7 +326,9 @@ export class GlassShaderEffect {
 
   private createShader(type: number, source: string): WebGLShader | null {
     const shader = this.gl.createShader(type);
-    if (!shader) return null;
+    if (!shader) {
+      return;
+    }
 
     this.gl.shaderSource(shader, source);
     this.gl.compileShader(shader);
@@ -337,7 +339,7 @@ export class GlassShaderEffect {
         this.gl.getShaderInfoLog(shader)
       );
       this.gl.deleteShader(shader);
-      return null;
+      return;
     }
 
     return shader;
@@ -348,7 +350,9 @@ export class GlassShaderEffect {
     fragmentShader: WebGLShader
   ): WebGLProgram | null {
     const program = this.gl.createProgram();
-    if (!program) return null;
+    if (!program) {
+      return;
+    }
 
     this.gl.attachShader(program, vertexShader);
     this.gl.attachShader(program, fragmentShader);
@@ -360,14 +364,16 @@ export class GlassShaderEffect {
         this.gl.getProgramInfoLog(program)
       );
       this.gl.deleteProgram(program);
-      return null;
+      return;
     }
 
     return program;
   }
 
   private setupGeometry() {
-    if (!this.program) return;
+    if (!this.program) {
+      return;
+    }
 
     // Create a quad that covers the entire canvas
     const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
@@ -394,7 +400,9 @@ export class GlassShaderEffect {
   }
 
   private setupUniforms() {
-    if (!this.program) return;
+    if (!this.program) {
+      return;
+    }
 
     const uniformNames = [
       'u_texture',
@@ -433,7 +441,7 @@ export class GlassShaderEffect {
       0,
       this.gl.RGBA,
       this.gl.UNSIGNED_BYTE,
-      null
+      undefined
     );
 
     this.gl.texParameteri(
@@ -473,7 +481,9 @@ export class GlassShaderEffect {
     source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement
   ): void {
     const texture = this.gl.createTexture();
-    if (!texture) return;
+    if (!texture) {
+      return;
+    }
 
     this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
     this.gl.texImage2D(
@@ -511,17 +521,21 @@ export class GlassShaderEffect {
 
   // Update uniforms
   setUniforms(uniforms: Partial<ShaderUniforms>): void {
-    if (!this.program) return;
+    if (!this.program) {
+      return;
+    }
 
     this.gl.useProgram(this.program);
 
     Object.entries(uniforms).forEach(([key, value]) => {
       const location = this.uniforms.get(`u_${key}`);
-      if (!location) return;
+      if (!location) {
+        return;
+      }
 
-      if (typeof value === 'number') {
+      if ('number' === typeof value) {
         this.gl.uniform1f(location, value);
-      } else if (Array.isArray(value) && value.length === 2) {
+      } else if (Array.isArray(value) && 2 === value.length) {
         this.gl.uniform2fv(location, value);
       }
     });
@@ -529,7 +543,9 @@ export class GlassShaderEffect {
 
   // Render the effect
   render(uniforms?: Partial<ShaderUniforms>): void {
-    if (!this.program) return;
+    if (!this.program) {
+      return;
+    }
 
     this.gl.useProgram(this.program);
 
@@ -572,7 +588,7 @@ export class GlassShaderEffect {
   stop(): void {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
-      this.animationId = null;
+      this.animationId = undefined;
     }
   }
 
@@ -605,8 +621,8 @@ export function applyGlassShader(
   config?: Partial<ShaderUniforms>
 ): GlassShaderEffect | null {
   // SSR safety check
-  if (typeof window === 'undefined' || typeof document === 'undefined') {
-    return null;
+  if ('undefined' === typeof window || 'undefined' === typeof document) {
+    return;
   }
 
   // Create canvas overlay
@@ -647,7 +663,7 @@ export function applyGlassShader(
   } catch (error) {
     console.error('Failed to create shader effect:', error);
     canvas.remove();
-    return null;
+    return;
   }
 }
 
@@ -679,6 +695,6 @@ export const SHADER_PRESETS = {
     chromaticAberration: 0.04,
     refraction: 0.08,
     noiseScale: 40,
-    liquidness: 1.0,
+    liquidness: 1,
   },
 };

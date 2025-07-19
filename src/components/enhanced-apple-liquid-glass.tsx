@@ -4,13 +4,16 @@
  * Requirements: 6.1, 6.3 - Enhanced multi-layer glass rendering with pixel-perfect precision
  */
 
-import React, { forwardRef, HTMLAttributes } from 'react';
-import {
-  useEnhancedAppleLiquidGlass,
-  getEnhancedGlassClass,
-  createEnhancedGlassLayers,
-  EnhancedGlassOptions,
+import type { HTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
+import type {
   ENHANCED_GLASS_VARIANTS,
+  EnhancedGlassOptions,
+} from '../lib/enhanced-apple-liquid-glass';
+import {
+  createEnhancedGlassLayers,
+  getEnhancedGlassClass,
+  useEnhancedAppleLiquidGlass,
 } from '../lib/enhanced-apple-liquid-glass';
 import { LiquidGlassSvgFilters } from './liquid-glass-svg-filters';
 
@@ -63,7 +66,7 @@ export const EnhancedAppleLiquidGlass = forwardRef<
 
   // Combine refs
   const combinedRef = (element: HTMLDivElement | null) => {
-    if (typeof ref === 'function') {
+    if ('function' === typeof ref) {
       ref(element);
     } else if (ref) {
       ref.current = element;
@@ -76,8 +79,8 @@ export const EnhancedAppleLiquidGlass = forwardRef<
 
   const glassClassName = getEnhancedGlassClass(intensity, {
     interactive: enablePhysics,
-    magnetic: magneticStrength > 0,
-    animated: liquidFlowIntensity > 0,
+    magnetic: 0 < magneticStrength,
+    animated: 0 < liquidFlowIntensity,
     pixelPerfect: enableSubpixel,
   });
 
@@ -285,7 +288,7 @@ export const EnhancedAppleLiquidGlassModal = forwardRef<
 export const EnhancedAppleLiquidGlassShowcase: React.FC<{
   className?: string;
 }> = ({ className = '' }) => {
-  const intensities: Array<keyof typeof ENHANCED_GLASS_VARIANTS> = [
+  const intensities: (keyof typeof ENHANCED_GLASS_VARIANTS)[] = [
     'subtle',
     'medium',
     'strong',

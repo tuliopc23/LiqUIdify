@@ -3,8 +3,9 @@
  * Provides fallback components for browsers without JavaScript or modern features
  */
 
-import { useEffect, useState, ReactNode } from 'react';
-import { useSSRSafeFeatureDetection, useNetworkStatus, useIsClient } from '@/hooks/use-ssr-safe';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import { useIsClient, useNetworkStatus, useSSRSafeFeatureDetection } from '@/hooks/use-ssr-safe';
 
 // Types
 export interface GracefulDegradationProps {
@@ -159,7 +160,7 @@ function useDevicePerformance(threshold: 'low' | 'medium' | 'high' = 'low'): boo
     const isClient = useIsClient();
 
     useEffect(() => {
-        if (!isClient) return;
+        if (!isClient) {return;}
 
         // Check device memory
         const memory = (navigator as any).deviceMemory || 4;
@@ -175,10 +176,10 @@ function useDevicePerformance(threshold: 'low' | 'medium' | 'high' = 'low'): boo
         let score = 0;
 
         // Memory score
-        score += memory >= 8 ? 3 : memory >= 4 ? 2 : 1;
+        score += 8 <= memory ? 3 : (4 <= memory ? 2 : 1);
 
         // CPU score
-        score += cores >= 8 ? 3 : cores >= 4 ? 2 : 1;
+        score += 8 <= cores ? 3 : (4 <= cores ? 2 : 1);
 
         // Save data mode
         if (saveData) {
@@ -212,7 +213,7 @@ export function FeatureDetectionClasses() {
     const isClient = useIsClient();
 
     useEffect(() => {
-        if (!isClient) return;
+        if (!isClient) {return;}
 
         const features = [
             'css-backdrop-filter',
@@ -293,7 +294,7 @@ export function FeatureDetectionClasses() {
         };
     }, [isClient]);
 
-    return null;
+    return ;
 }
 
 /**
@@ -309,7 +310,7 @@ export function ProgressiveEnhancementProvider({
     const isClient = useIsClient();
 
     useEffect(() => {
-        if (!isClient) return;
+        if (!isClient) {return;}
 
         // Remove all experience classes
         document.documentElement.classList.remove(

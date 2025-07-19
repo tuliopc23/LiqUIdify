@@ -15,7 +15,7 @@ export function responsiveSize(
   size: string | number,
   breakpoint?: BreakpointKey
 ): string {
-  if (typeof size === 'number') {
+  if ('number' === typeof size) {
     size = `${size}px`;
   }
 
@@ -23,7 +23,7 @@ export function responsiveSize(
     return size;
   }
 
-  const breakpointPrefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
+  const breakpointPrefix = 'xs' === breakpoint ? '' : `${breakpoint}:`;
   return `${breakpointPrefix}${size}`;
 }
 
@@ -73,7 +73,7 @@ export function microInteraction(
  * Get current breakpoint based on window width
  */
 export function getCurrentBreakpoint(): BreakpointKey {
-  if (typeof window === 'undefined') {
+  if ('undefined' === typeof window) {
     return 'md'; // Default for SSR
   }
 
@@ -89,11 +89,11 @@ export function getCurrentBreakpoint(): BreakpointKey {
     xs: parseInt(BREAKPOINTS.xs),
   };
 
-  if (width >= breakpoints['2xl']) return '2xl';
-  if (width >= breakpoints.xl) return 'xl';
-  if (width >= breakpoints.lg) return 'lg';
-  if (width >= breakpoints.md) return 'md';
-  if (width >= breakpoints.sm) return 'sm';
+  if (width >= breakpoints['2xl']) {return '2xl';}
+  if (width >= breakpoints.xl) {return 'xl';}
+  if (width >= breakpoints.lg) {return 'lg';}
+  if (width >= breakpoints.md) {return 'md';}
+  if (width >= breakpoints.sm) {return 'sm';}
   return 'xs';
 }
 
@@ -104,7 +104,7 @@ export function matchesBreakpoint(
   condition: 'up' | 'down' | 'only',
   breakpoint: BreakpointKey
 ): boolean {
-  if (typeof window === 'undefined') {
+  if ('undefined' === typeof window) {
     return false;
   }
 
@@ -146,7 +146,7 @@ export function createResponsiveClasses(
 
   Object.entries(breakpoints).forEach(([breakpoint, className]) => {
     if (className) {
-      const prefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
+      const prefix = 'xs' === breakpoint ? '' : `${breakpoint}:`;
       classes.push(`${prefix}${className}`);
     }
   });
@@ -176,7 +176,7 @@ export function containerQuery(
  * Aspect ratio utilities
  */
 export function aspectRatio(ratio: string | number): string {
-  if (typeof ratio === 'number') {
+  if ('number' === typeof ratio) {
     return `aspect-[${ratio}]`;
   }
 
@@ -217,7 +217,7 @@ export function responsiveGrid(
 
   Object.entries(columns).forEach(([breakpoint, cols]) => {
     if (cols) {
-      const prefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
+      const prefix = 'xs' === breakpoint ? '' : `${breakpoint}:`;
       classes.push(`${prefix}grid-cols-${cols}`);
     }
   });
@@ -229,7 +229,7 @@ export function responsiveGrid(
  * Media query hook for React components
  */
 export function useMediaQuery(query: string): boolean {
-  if (typeof window === 'undefined') {
+  if ('undefined' === typeof window) {
     return false;
   }
 
@@ -277,7 +277,7 @@ export function responsiveVisibility(
   const classes: string[] = [];
 
   Object.entries(show).forEach(([breakpoint, isVisible]) => {
-    const prefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
+    const prefix = 'xs' === breakpoint ? '' : `${breakpoint}:`;
     const visibility = isVisible ? 'block' : 'hidden';
     classes.push(`${prefix}${visibility}`);
   });

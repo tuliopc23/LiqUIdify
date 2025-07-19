@@ -319,13 +319,13 @@ echo "Rollback completed successfully!"
       warnings.push('Gzipped bundle size is close to 200KB limit');
     }
 
-    if (buildMetrics.buildTime > 300000) {
+    if (300_000 < buildMetrics.buildTime) {
       // 5 minutes
       warnings.push('Build time is longer than expected');
     }
 
     return {
-      ready: issues.length === 0,
+      ready: 0 === issues.length,
       issues,
       warnings,
     };

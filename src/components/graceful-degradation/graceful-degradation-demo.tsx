@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
+  CSSAccordion,
+  CSSModal,
+  CSSTabs,
+  GracefulAnimation,
   GracefulComponent,
   GracefulImage,
-  GracefulAnimation,
   GracefulInteractive,
-  CSSAccordion,
-  CSSTabs,
-  CSSModal,
 } from './graceful-component';
 import { useDegradationAware } from '../../utils/graceful-degradation';
 import '../../styles/graceful-degradation.css';

@@ -3,9 +3,9 @@
  * Provides a consolidated API for testing functionality
  */
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
-import { testUtils, renderWithTheme } from '../testing/test-utils';
+import { renderWithTheme, testUtils } from '../testing/test-utils';
 import { GlassLiveRegionProvider } from '../components/glass-live-region';
 // Import vitest-axe - skip if module not found
 try {
@@ -70,7 +70,7 @@ export async function testA11y(container: HTMLElement) {
     if (vitestAxe.toHaveNoViolations) {
       expect(results).toHaveNoViolations();
     }
-  } catch (error) {
+  } catch {
     console.warn('vitest-axe not available, skipping accessibility tests');
   }
 }
@@ -132,8 +132,8 @@ export function getGlassComponentTestSuite(componentName: string) {
       }
 
       expect(
-        computedStyle.backdropFilter !== 'none' ||
-          (computedStyle as any).webkitBackdropFilter !== 'none' ||
+        'none' !== computedStyle.backdropFilter ||
+          'none' !== (computedStyle as any).webkitBackdropFilter ||
           computedStyle.background.includes('rgba')
       ).toBeTruthy();
     },

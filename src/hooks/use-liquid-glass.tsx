@@ -1,12 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  useCallback,
-  useMemo,
 } from 'react';
 import { liquidGlassTokens } from '../lib/liquid-glass-tokens';
 
@@ -58,7 +58,9 @@ export function LiquidGlassProvider({
     (analysis: ContentAnalysis) => {
       setContentAnalysis(analysis);
 
-      if (!merged.adaptToContent) return;
+      if (!merged.adaptToContent) {
+        return;
+      }
 
       const root = document.documentElement;
 
@@ -85,7 +87,7 @@ export function LiquidGlassProvider({
 
       // Adapt color based on dominant hue
       const hue = analysis.dominantHue;
-      const adaptedColor = `hsl(${hue}, 20%, ${analysis.brightness > 0.5 ? 95 : 15}%)`;
+      const adaptedColor = `hsl(${hue}, 20%, ${0.5 < analysis.brightness ? 95 : 15}%)`;
       root.style.setProperty('--glass-color-adaptive', adaptedColor);
     },
     [merged]
@@ -144,14 +146,18 @@ export const useContentAwareGlass = (
   const analysisRef = useRef<ContentAnalysis | null>(null);
 
   const analyzeContent = useCallback(async () => {
-    if (!contentRef.current || !adaptToContent) return;
+    if (!contentRef.current || !adaptToContent) {
+      return;
+    }
 
     try {
       const element = contentRef.current;
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
 
-      if (!ctx) return;
+      if (!ctx) {
+        return;
+      }
 
       // Create a temporary canvas to analyze the content
       const rect = element.getBoundingClientRect();
@@ -174,16 +180,18 @@ export const useContentAwareGlass = (
       }
     } catch (error) {
       // Silently fail in production, log in development
-      if (process.env.NODE_ENV === 'development') {
+      if ('development' === process.env.NODE_ENV) {
         console.warn('Content analysis failed:', error);
       }
     }
   }, [contentRef, updateGlassStyle, adaptToContent]);
 
   useEffect(() => {
-    if (!adaptToContent) return;
+    if (!adaptToContent) {
+      return;
+    }
     if (
-      typeof window === 'undefined' ||
+      'undefined' === typeof window ||
       !('MutationObserver' in window) ||
       !('ResizeObserver' in window)
     ) {
@@ -217,11 +225,11 @@ export const useContentAwareGlass = (
 
 // Helper function to analyze color
 function analyzeColor(colorString: string): ContentAnalysis | null {
-  if (!colorString || typeof colorString !== 'string') {
-    if (process.env.NODE_ENV === 'development') {
+  if (!colorString || 'string' !== typeof colorString) {
+    if ('development' === process.env.NODE_ENV) {
       console.warn('analyzeColor: Invalid color string provided:', colorString);
     }
-    return null;
+    return;
   }
 
   try {
@@ -231,7 +239,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
     );
 
     if (!rgbMatch) {
-      if (process.env.NODE_ENV === 'development') {
+      if ('development' === process.env.NODE_ENV) {
         console.warn(
           'analyzeColor: Could not parse color string:',
           colorString
@@ -252,10 +260,10 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 
     // Validate parsed values
     if (isNaN(r) || isNaN(g) || isNaN(b)) {
-      if (process.env.NODE_ENV === 'development') {
+      if ('development' === process.env.NODE_ENV) {
         console.warn('analyzeColor: Invalid RGB values:', { r, g, b });
       }
-      return null;
+      return;
     }
 
     // Calculate brightness (luminance)
@@ -276,7 +284,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
       dominantHue: hue,
     };
   } catch (error) {
-    if (process.env.NODE_ENV === 'development') {
+    if ('development' === process.env.NODE_ENV) {
       console.warn('analyzeColor: Error processing color:', error);
     }
     // Return a safe default
@@ -295,7 +303,9 @@ function rgbToHue(r: number, g: number, b: number): number {
   const min = Math.min(r, g, b);
   const delta = max - min;
 
-  if (delta === 0) return 0;
+  if (0 === delta) {
+    return 0;
+  }
 
   let hue = 0;
   if (max === r) {

@@ -35,7 +35,7 @@ export function hexToRgb(hex: string): RGB | null {
         g: parseInt(result[2] || '0', 16),
         b: parseInt(result[3] || '0', 16),
       }
-    : null;
+    : undefined;
 }
 
 /**
@@ -81,7 +81,7 @@ export function parseColor(color: string): RGB | null {
     return hexToRgb(namedColors[lowerColor] || '');
   }
 
-  return null;
+  return;
 }
 
 /**
@@ -94,11 +94,11 @@ export function getLuminance(rgb: RGB): number {
   const bsRGB = rgb.b / 255;
 
   const r =
-    rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
+    0.039_28 >= rsRGB ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
   const g =
-    gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
+    0.039_28 >= gsRGB ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
   const b =
-    bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
+    0.039_28 >= bsRGB ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
 
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
@@ -122,9 +122,9 @@ export function checkContrast(
   background: string | RGB
 ): ContrastResult {
   const fg =
-    typeof foreground === 'string' ? parseColor(foreground) : foreground;
+    'string' === typeof foreground ? parseColor(foreground) : foreground;
   const bg =
-    typeof background === 'string' ? parseColor(background) : background;
+    'string' === typeof background ? parseColor(background) : background;
 
   if (!fg || !bg) {
     throw new Error('Invalid color format');
@@ -136,12 +136,12 @@ export function checkContrast(
     ratio: Math.round(ratio * 100) / 100,
     passes: {
       aa: {
-        normal: ratio >= 4.5,
-        large: ratio >= 3,
+        normal: 4.5 <= ratio,
+        large: 3 <= ratio,
       },
       aaa: {
-        normal: ratio >= 7,
-        large: ratio >= 4.5,
+        normal: 7 <= ratio,
+        large: 4.5 <= ratio,
       },
     },
     recommendation: '',
@@ -171,9 +171,9 @@ export function suggestBetterColor(
   targetRatio: number = 4.5
 ): RGB {
   const fg =
-    typeof foreground === 'string' ? parseColor(foreground) : foreground;
+    'string' === typeof foreground ? parseColor(foreground) : foreground;
   const bg =
-    typeof background === 'string' ? parseColor(background) : background;
+    'string' === typeof background ? parseColor(background) : background;
 
   if (!fg || !bg) {
     throw new Error('Invalid color format');
@@ -187,7 +187,7 @@ export function suggestBetterColor(
 
   // Determine if we should lighten or darken the foreground
   const bgLuminance = getLuminance(bg);
-  const shouldLighten = bgLuminance < 0.5;
+  const shouldLighten = 0.5 > bgLuminance;
 
   let adjustedColor = { ...fg };
   let step = shouldLighten ? 1 : -1;
@@ -206,13 +206,13 @@ export function suggestBetterColor(
     // If we've maxed out, try the opposite direction
     if (
       (shouldLighten &&
-        adjustedColor.r === 255 &&
-        adjustedColor.g === 255 &&
-        adjustedColor.b === 255) ||
+        255 === adjustedColor.r &&
+        255 === adjustedColor.g &&
+        255 === adjustedColor.b) ||
       (!shouldLighten &&
-        adjustedColor.r === 0 &&
-        adjustedColor.g === 0 &&
-        adjustedColor.b === 0)
+        0 === adjustedColor.r &&
+        0 === adjustedColor.g &&
+        0 === adjustedColor.b)
     ) {
       step = -step;
       adjustedColor = { ...fg };
@@ -232,13 +232,13 @@ export function checkGlassContrast(
   glassOpacity: number = 0.25
 ): ContrastResult {
   const fg =
-    typeof foreground === 'string' ? parseColor(foreground) : foreground;
+    'string' === typeof foreground ? parseColor(foreground) : foreground;
   const glassBg =
-    typeof glassBackground === 'string'
+    'string' === typeof glassBackground
       ? parseColor(glassBackground)
       : glassBackground;
   const backdropBg =
-    typeof backdropBackground === 'string'
+    'string' === typeof backdropBackground
       ? parseColor(backdropBackground)
       : backdropBackground;
 
@@ -267,7 +267,7 @@ export function useContrastChecker(
     return checkContrast(foreground, background);
   } catch (error) {
     console.error('Contrast check error:', error);
-    return null;
+    return;
   }
 }
 

@@ -3,8 +3,8 @@
  * Loads GSAP only when needed for advanced animations
  */
 
-let gsapPromise: Promise<any> | null = null;
-let gsapModule: any = null;
+let gsapPromise: Promise<any> | null;
+let gsapModule: any;
 
 export interface GSAPModule {
   gsap: any;
@@ -39,7 +39,7 @@ export async function loadGSAP(plugins: string[] = []): Promise<GSAPModule> {
             const { MorphSVGPlugin } = await import('gsap/MorphSVGPlugin');
             gsap.registerPlugin(MorphSVGPlugin);
             gsapModule.MorphSVGPlugin = MorphSVGPlugin;
-          } catch (error) {
+          } catch {
             console.warn(
               'MorphSVGPlugin not available. Some animations may be limited.'
             );
@@ -61,9 +61,9 @@ export async function loadGSAP(plugins: string[] = []): Promise<GSAPModule> {
  * Hook to use GSAP with automatic loading
  */
 export function useGSAP(plugins: string[] = []) {
-  const [gsap, setGsap] = useState<GSAPModule | null>(null);
+  const [gsap, setGsap] = useState<GSAPModule | null>(undefined);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error | null>(undefined);
 
   useEffect(() => {
     let mounted = true;
@@ -74,11 +74,11 @@ export function useGSAP(plugins: string[] = []) {
         const module = await loadGSAP(plugins);
         if (mounted) {
           setGsap(module);
-          setError(null);
+          setError(undefined);
         }
-      } catch (err) {
+      } catch (error) {
         if (mounted) {
-          setError(err as Error);
+          setError(error as Error);
         }
       } finally {
         if (mounted) {
@@ -101,7 +101,7 @@ export function useGSAP(plugins: string[] = []) {
  * Checks if GSAP is available
  */
 export function isGSAPAvailable(): boolean {
-  return gsapModule !== null;
+  return null !== gsapModule;
 }
 
 /**

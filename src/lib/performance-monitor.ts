@@ -43,7 +43,7 @@ export const DEFAULT_THRESHOLDS: PerformanceThresholds = {
   fid: { good: 100, needsImprovement: 300 },
   cls: { good: 0.1, needsImprovement: 0.25 },
   renderTime: { good: 16, needsImprovement: 33 }, // 60fps = 16ms, 30fps = 33ms
-  bundleSize: { good: 15000, needsImprovement: 25000 }, // 15KB good, 25KB needs improvement
+  bundleSize: { good: 15_000, needsImprovement: 25_000 }, // 15KB good, 25KB needs improvement
 };
 
 export class PerformanceMonitor {
@@ -70,7 +70,9 @@ export class PerformanceMonitor {
   }
 
   private initializeObservers(): void {
-    if (typeof window === 'undefined') return;
+    if ('undefined' === typeof window) {
+      return;
+    }
 
     // Core Web Vitals observers
     this.observeLCP();
@@ -83,7 +85,9 @@ export class PerformanceMonitor {
   }
 
   private observeLCP(): void {
-    if (!('PerformanceObserver' in window)) return;
+    if (!('PerformanceObserver' in window)) {
+      return;
+    }
 
     const observer = new PerformanceObserver(list => {
       const entries = list.getEntries();
@@ -107,7 +111,9 @@ export class PerformanceMonitor {
   }
 
   private observeFID(): void {
-    if (!('PerformanceObserver' in window)) return;
+    if (!('PerformanceObserver' in window)) {
+      return;
+    }
 
     const observer = new PerformanceObserver(list => {
       const entries = list.getEntries();
@@ -133,7 +139,9 @@ export class PerformanceMonitor {
   }
 
   private observeCLS(): void {
-    if (!('PerformanceObserver' in window)) return;
+    if (!('PerformanceObserver' in window)) {
+      return;
+    }
 
     let clsValue = 0;
     let clsEntries: any[] = [];
@@ -147,7 +155,7 @@ export class PerformanceMonitor {
 
           if (
             !firstSessionEntry ||
-            entry.startTime - lastSessionEntry.startTime < 1000
+            1000 > entry.startTime - lastSessionEntry.startTime
           ) {
             clsEntries.push(entry);
             clsValue += entry.value;
@@ -170,12 +178,14 @@ export class PerformanceMonitor {
   }
 
   private observeFCP(): void {
-    if (!('PerformanceObserver' in window)) return;
+    if (!('PerformanceObserver' in window)) {
+      return;
+    }
 
     const observer = new PerformanceObserver(list => {
       const entries = list.getEntries();
       entries.forEach(entry => {
-        if (entry.name === 'first-contentful-paint') {
+        if ('first-contentful-paint' === entry.name) {
           this.updateMetric('fcp', entry.startTime);
         }
       });
@@ -190,7 +200,9 @@ export class PerformanceMonitor {
   }
 
   private observeMemoryUsage(): void {
-    if (typeof window === 'undefined' || !('performance' in window)) return;
+    if ('undefined' === typeof window || !('performance' in window)) {
+      return;
+    }
 
     const checkMemory = () => {
       const memory = (performance as any).memory;
@@ -242,7 +254,7 @@ export class PerformanceMonitor {
         frameCount++;
 
         // Detect dropped frames (>20ms between frames indicates dropped frame)
-        if (frameDelta > 20) {
+        if (20 < frameDelta) {
           droppedFrames++;
         }
 
@@ -267,7 +279,7 @@ export class PerformanceMonitor {
 
   public measureBundleSize(bundleName: string): Promise<number> {
     return new Promise(resolve => {
-      if (typeof window === 'undefined') {
+      if ('undefined' === typeof window) {
         resolve(0);
         return;
       }
@@ -302,7 +314,9 @@ export class PerformanceMonitor {
     metricName: string
   ): 'good' | 'needs-improvement' | 'poor' | 'unknown' {
     const value = this.metrics[metricName];
-    if (value === undefined) return 'unknown';
+    if (value === undefined) {
+      return 'unknown';
+    }
 
     return this.getMetricStatusByValue(metricName, value);
   }
@@ -314,10 +328,16 @@ export class PerformanceMonitor {
     const threshold =
       this.thresholds[metricName as keyof PerformanceThresholds];
 
-    if (!threshold) return 'good';
+    if (!threshold) {
+      return 'good';
+    }
 
-    if (value <= threshold.good) return 'good';
-    if (value <= threshold.needsImprovement) return 'needs-improvement';
+    if (value <= threshold.good) {
+      return 'good';
+    }
+    if (value <= threshold.needsImprovement) {
+      return 'needs-improvement';
+    }
     return 'poor';
   }
 
@@ -345,10 +365,10 @@ export class PerformanceMonitor {
       if (value !== undefined) {
         const status = this.getMetricStatusByValue(metric, value);
         coreWebVitalsScore +=
-          status === 'good' ? 100 : status === 'needs-improvement' ? 50 : 0;
+          'good' === status ? 100 : 'needs-improvement' === status ? 50 : 0;
         coreWebVitalsCount++;
 
-        if (status !== 'good') {
+        if ('good' !== status) {
           recommendations.push(
             `Improve ${metric.toUpperCase()}: Current value ${value}, target: ${this.thresholds[metric as keyof PerformanceThresholds]?.good}`
           );
@@ -357,7 +377,7 @@ export class PerformanceMonitor {
     });
 
     coreWebVitalsScore =
-      coreWebVitalsCount > 0 ? coreWebVitalsScore / coreWebVitalsCount : 0;
+      0 < coreWebVitalsCount ? coreWebVitalsScore / coreWebVitalsCount : 0;
 
     // Calculate overall score including component performance
     let overallScore = coreWebVitalsScore;
@@ -382,7 +402,7 @@ export class PerformanceMonitor {
       overallScore -= 15;
     }
 
-    if (metrics.animationFrameRate && metrics.animationFrameRate < 55) {
+    if (metrics.animationFrameRate && 55 > metrics.animationFrameRate) {
       recommendations.push(
         `Improve animation performance: ${metrics.animationFrameRate.toFixed(1)}fps (target: >55fps)`
       );
@@ -406,7 +426,7 @@ export class PerformanceMonitor {
 }
 
 // Singleton instance for global performance monitoring
-let globalPerformanceMonitor: PerformanceMonitor | null = null;
+let globalPerformanceMonitor: PerformanceMonitor | null;
 
 export function getPerformanceMonitor(): PerformanceMonitor {
   if (!globalPerformanceMonitor) {

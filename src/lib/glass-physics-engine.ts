@@ -4,7 +4,7 @@
  * Requirements: 5.1, 5.2, 5.4 - Advanced animation choreography with Apple-quality motion
  */
 
-import { useRef, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export interface SpringConfig {
   tension: number;
@@ -162,7 +162,7 @@ export const CHOREOGRAPHY_PRESETS: Record<string, AnimationChoreography> = {
     sequence: 0.15,
     parallel: 0.05,
     easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-    duration: 1.0,
+    duration: 1,
   },
 };
 
@@ -173,7 +173,7 @@ export const CHOREOGRAPHY_PRESETS: Record<string, AnimationChoreography> = {
 export class SpringPhysics {
   private config: SpringConfig;
   private state: PhysicsState;
-  private animationFrame: number | null = null;
+  private animationFrame: number | null = undefined;
   private onUpdate?: (state: PhysicsState) => void;
   private onComplete?: () => void;
 
@@ -278,7 +278,7 @@ export class SpringPhysics {
 
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = null;
+      this.animationFrame = undefined;
     }
 
     if (this.onComplete) {
@@ -329,7 +329,9 @@ export class MagneticField {
     targetId: string
   ): { x: number; y: number } {
     const target = this.elements.get(targetId);
-    if (!target) return { x: 0, y: 0 };
+    if (!target) {
+      return { x: 0, y: 0 };
+    }
 
     const { strength, range, decay, threshold } = this.config;
     const { position } = target;
@@ -360,7 +362,9 @@ export class MagneticField {
 
   updateElementPosition(id: string): void {
     const target = this.elements.get(id);
-    if (!target) return;
+    if (!target) {
+      return;
+    }
 
     const rect = target.element.getBoundingClientRect();
     target.position = {
@@ -423,10 +427,10 @@ export class AnimationChoreographer {
   private calculateDelay(index: number): number {
     const { stagger, sequence, parallel } = this.config;
 
-    if (parallel > 0) {
+    if (0 < parallel) {
       // Parallel with slight offset
       return index * parallel * 1000;
-    } else if (sequence > 0) {
+    } else if (0 < sequence) {
       // Sequential with gap
       return index * sequence * 1000;
     } else {
@@ -523,12 +527,14 @@ export class GestureRecognizer {
   };
 
   private handleMove = (e: MouseEvent): void => {
-    if (!this.isTracking) return;
+    if (!this.isTracking) {
+      return;
+    }
 
     const now = performance.now();
     const deltaTime = now - this.lastTime;
 
-    if (deltaTime > 0) {
+    if (0 < deltaTime) {
       const deltaX = e.clientX - this.currentPosition.x;
       const deltaY = e.clientY - this.currentPosition.y;
 
@@ -547,7 +553,9 @@ export class GestureRecognizer {
   };
 
   private handleEnd = (e: MouseEvent): void => {
-    if (!this.isTracking) return;
+    if (!this.isTracking) {
+      return;
+    }
 
     this.isTracking = false;
     this.currentPosition = { x: e.clientX, y: e.clientY };
@@ -558,7 +566,7 @@ export class GestureRecognizer {
   };
 
   private handleTouchStart = (e: TouchEvent): void => {
-    if (e.touches.length === 1) {
+    if (1 === e.touches.length) {
       const touch = e.touches[0];
       if (touch) {
         this.handleStart({
@@ -570,7 +578,7 @@ export class GestureRecognizer {
   };
 
   private handleTouchMove = (e: TouchEvent): void => {
-    if (e.touches.length === 1) {
+    if (1 === e.touches.length) {
       const touch = e.touches[0];
       if (touch) {
         this.handleMove({
@@ -582,7 +590,7 @@ export class GestureRecognizer {
   };
 
   private handleTouchEnd = (e: TouchEvent): void => {
-    if (e.changedTouches.length === 1) {
+    if (1 === e.changedTouches.length) {
       const touch = e.changedTouches[0];
       if (touch) {
         this.handleEnd({
@@ -724,7 +732,7 @@ export function useAdvancedPhysics(
 
     return () => {
       springRef.current?.destroy();
-      magneticRef.current = null;
+      magneticRef.current = undefined;
       choreographerRef.current?.cancel();
       gestureRef.current?.destroy();
     };
@@ -732,7 +740,9 @@ export function useAdvancedPhysics(
 
   // Setup gesture recognition
   useEffect(() => {
-    if (!elementRef.current || !enableGestures) return;
+    if (!elementRef.current || !enableGestures) {
+      return;
+    }
 
     gestureRef.current = new GestureRecognizer(
       elementRef.current,
@@ -749,10 +759,11 @@ export function useAdvancedPhysics(
     (intensity: 'light' | 'medium' | 'heavy' = 'light') => {
       if (
         !enableHaptics ||
-        typeof navigator === 'undefined' ||
+        'undefined' === typeof navigator ||
         !(navigator as any).vibrate
-      )
+      ) {
         return;
+      }
 
       const patterns = {
         light: 10,
@@ -767,7 +778,9 @@ export function useAdvancedPhysics(
 
   // Animation methods
   const animateToPosition = useCallback((x: number, y: number) => {
-    if (!springRef.current || !elementRef.current) return;
+    if (!springRef.current || !elementRef.current) {
+      return;
+    }
 
     const spring = springRef.current;
     spring.setTarget(x, y);
@@ -788,14 +801,16 @@ export function useAdvancedPhysics(
 
   const choreographAnimation = useCallback(
     (
-      animations: Array<{
+      animations: {
         id: string;
         element: HTMLElement;
         keyframes: Keyframe[];
         options?: KeyframeAnimationOptions;
-      }>
+      }[]
     ) => {
-      if (!choreographerRef.current) return;
+      if (!choreographerRef.current) {
+        return;
+      }
 
       animations.forEach(({ id, element, keyframes, options }) => {
         choreographerRef.current?.addAnimation(id, element, keyframes, options);

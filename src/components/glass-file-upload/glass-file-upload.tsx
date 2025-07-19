@@ -1,17 +1,17 @@
-import React, { forwardRef, useState, useRef, useCallback } from 'react';
+import React, { forwardRef, useCallback, useRef, useState } from 'react';
 import { cn } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import {
-  Upload,
-  X,
-  File,
-  Image,
-  FileText,
-  Music,
-  Video,
   Archive,
+  File,
+  FileText,
+  Image,
+  Music,
+  Upload,
+  Video,
+  X,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const fileUploadVariants = cva(
   [
@@ -120,18 +120,18 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     const getFileIcon = (file: File) => {
       const type = file.type.toLowerCase();
 
-      if (type.startsWith('image/')) return Image;
-      if (type.startsWith('video/')) return Video;
-      if (type.startsWith('audio/')) return Music;
-      if (type.includes('pdf') || type.includes('document')) return FileText;
-      if (type.includes('zip') || type.includes('rar')) return Archive;
+      if (type.startsWith('image/')) {return Image;}
+      if (type.startsWith('video/')) {return Video;}
+      if (type.startsWith('audio/')) {return Music;}
+      if (type.includes('pdf') || type.includes('document')) {return FileText;}
+      if (type.includes('zip') || type.includes('rar')) {return Archive;}
 
       return File;
     };
 
     // Format file size
     const formatFileSize = (bytes: number): string => {
-      if (bytes === 0) return '0 Bytes';
+      if (0 === bytes) {return '0 Bytes';}
       const k = 1024;
       const sizes = ['Bytes', 'KB', 'MB', 'GB'];
       const i = Math.floor(Math.log(bytes) / Math.log(k));
@@ -144,11 +144,11 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         return `File size exceeds ${formatFileSize(maxFileSize)}`;
       }
 
-      if (allowedTypes.length > 0 && !allowedTypes.includes(file.type)) {
+      if (0 < allowedTypes.length && !allowedTypes.includes(file.type)) {
         return 'File type not allowed';
       }
 
-      return null;
+      return ;
     };
 
     // Create file preview
@@ -157,10 +157,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         if (file.type.startsWith('image/')) {
           const reader = new FileReader();
           reader.onload = e => resolve(e.target?.result as string);
-          reader.onerror = () => resolve(null);
+          reader.onerror = () => resolve(undefined);
           reader.readAsDataURL(file);
         } else {
-          resolve(null);
+          resolve(undefined);
         }
       });
     };
@@ -168,13 +168,13 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     // Process files
     const processFiles = useCallback(
       async (fileList: File[]) => {
-        if (disabled) return;
+        if (disabled) {return;}
 
         const newFiles: FileUploadItem[] = [];
 
         for (const file of fileList) {
           const error = validateFile(file);
-          const preview = showPreview ? await createPreview(file) : null;
+          const preview = showPreview ? await createPreview(file) : undefined;
 
           const fileItem: FileUploadItem = {
             id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -193,8 +193,8 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 
         // Auto-upload if onUpload is provided
         if (onUpload) {
-          const validFiles = newFiles.filter(f => f.status === 'pending');
-          if (validFiles.length > 0) {
+          const validFiles = newFiles.filter(f => 'pending' === f.status);
+          if (0 < validFiles.length) {
             await handleUpload(validFiles);
           }
         }
@@ -213,8 +213,8 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 
     // Handle file input change
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const fileList = Array.from(e.target.files || []);
-      if (fileList.length > 0) {
+      const fileList = [...e.target.files || []];
+      if (0 < fileList.length) {
         processFiles(fileList);
       }
     };
@@ -224,7 +224,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
       e.preventDefault();
       e.stopPropagation();
       dragCountRef.current++;
-      if (dragCountRef.current === 1) {
+      if (1 === dragCountRef.current) {
         setIsDragOver(true);
       }
     };
@@ -233,7 +233,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
       e.preventDefault();
       e.stopPropagation();
       dragCountRef.current--;
-      if (dragCountRef.current === 0) {
+      if (0 === dragCountRef.current) {
         setIsDragOver(false);
       }
     };
@@ -250,15 +250,15 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
       setIsDragOver(false);
       dragCountRef.current = 0;
 
-      const fileList = Array.from(e.dataTransfer.files);
-      if (fileList.length > 0) {
+      const fileList = [...e.dataTransfer.files];
+      if (0 < fileList.length) {
         processFiles(fileList);
       }
     };
 
     // Handle upload
     const handleUpload = async (filesToUpload: FileUploadItem[]) => {
-      if (!onUpload) return;
+      if (!onUpload) {return;}
 
       setUploadState('uploading');
 
@@ -370,7 +370,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 
         {/* File List */}
         <AnimatePresence>
-          {files.length > 0 && (
+          { 0 < files.length && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -413,7 +413,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                       </p>
 
                       {/* Progress Bar */}
-                      {showProgress && fileItem.status === 'uploading' && (
+                      {showProgress && 'uploading' === fileItem.status && (
                         <div className="w-full bg-white/10 rounded-full h-1.5 mt-1">
                           <div
                             className="bg-blue-400 h-1.5 rounded-full transition-all duration-300"

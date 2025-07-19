@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { cn, getGlassClass } from '@/lib/glass-utils';
 
 export interface ChartDataPoint {
@@ -46,14 +46,14 @@ export const LineChart: React.FC<LineChartProps> = ({
   gradient = true,
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
-  const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
+  const [hoveredPoint, setHoveredPoint] = useState<number | null>(undefined);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!data.length) return null;
+  if (!data.length) {return ;}
 
   const maxValue = Math.max(...data.map(d => d.value));
   const minValue = Math.min(...data.map(d => d.value));
@@ -70,7 +70,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   }));
 
   const pathData = points.reduce((path, point, i) => {
-    const command = i === 0 ? 'M' : 'L';
+    const command = 0 === i ? 'M' : 'L';
     return `${path} ${command} ${point.x} ${point.y}`;
   }, '');
 
@@ -121,7 +121,7 @@ export const LineChart: React.FC<LineChartProps> = ({
         </g>
 
         {/* Gradient area */}
-        {gradient && points.length > 0 && (
+        {gradient && 0 < points.length && (
           <path
             d={`${pathData} L ${points[points.length - 1]?.x} ${height - padding} L ${padding} ${height - padding} Z`}
             fill={`url(#${gradientId})`}
@@ -167,13 +167,13 @@ export const LineChart: React.FC<LineChartProps> = ({
                 animationDelay: animated ? `${i * 100}ms` : '0ms',
               }}
               onMouseEnter={() => setHoveredPoint(i)}
-              onMouseLeave={() => setHoveredPoint(null)}
+              onMouseLeave={() => setHoveredPoint(undefined)}
             />
           ))}
       </svg>
 
       {/* Tooltip */}
-      {showTooltip && hoveredPoint !== null && points[hoveredPoint] && (
+      {showTooltip && null !== hoveredPoint && points[hoveredPoint] && (
         <div
           className={cn(
             'absolute z-10 px-3 py-2 rounded-lg text-sm pointer-events-none',
@@ -213,7 +213,7 @@ export const BarChart: React.FC<BarChartProps> = ({
     setMounted(true);
   }, []);
 
-  if (!data.length) return null;
+  if (!data.length) {return ;}
 
   const maxValue = Math.max(...data.map(d => d.value));
   const padding = 40;
@@ -221,7 +221,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   const chartHeight = height - padding * 2;
 
   const barThickness = Math.min(
-    ((orientation === 'vertical' ? chartWidth : chartHeight) / data.length) *
+    (('vertical' === orientation ? chartWidth : chartHeight) / data.length) *
       0.6,
     40
   );
@@ -232,23 +232,23 @@ export const BarChart: React.FC<BarChartProps> = ({
         {data.map((item, i) => {
           const barLength =
             (item.value / maxValue) *
-            (orientation === 'vertical' ? chartHeight : chartWidth);
+            ('vertical' === orientation ? chartHeight : chartWidth);
           const x =
-            orientation === 'vertical'
+            'vertical' === orientation 
               ? padding +
                 (i / data.length) * chartWidth +
                 (chartWidth / data.length - barThickness) / 2
               : padding;
           const y =
-            orientation === 'vertical'
+            'vertical' === orientation 
               ? height - padding - barLength
               : padding +
                 (i / data.length) * chartHeight +
                 (chartHeight / data.length - barThickness) / 2;
           const barWidth =
-            orientation === 'vertical' ? barThickness : barLength;
+            'vertical' === orientation ? barThickness : barLength;
           const barHeight =
-            orientation === 'vertical' ? barLength : barThickness;
+            'vertical' === orientation ? barLength : barThickness;
 
           return (
             <g key={i}>
@@ -303,7 +303,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
     setMounted(true);
   }, []);
 
-  if (!data.length) return null;
+  if (!data.length) {return ;}
 
   const total = data.reduce((sum, item) => sum + item.value, 0);
   const radius = Math.min(width, height) / 2 - 20;
@@ -318,7 +318,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
     const endAngle =
       (cumulativePercentage + percentage) * 2 * Math.PI - Math.PI / 2;
 
-    const largeArcFlag = percentage > 0.5 ? 1 : 0;
+    const largeArcFlag = 0.5 < percentage ? 1 : 0;
 
     const x1 = centerX + radius * Math.cos(startAngle);
     const y1 = centerY + radius * Math.sin(startAngle);

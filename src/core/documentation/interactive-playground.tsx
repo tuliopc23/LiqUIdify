@@ -11,23 +11,23 @@
  */
 
 import React, {
-  useState,
+  useCallback,
   useEffect,
   useMemo,
-  useCallback,
   useRef,
+  useState,
 } from 'react';
 import {
+  Accessibility,
   Code,
+  Copy,
   Download,
+  Monitor,
+  Palette,
+  RefreshCw,
   Settings,
   Smartphone,
   Tablet,
-  Monitor,
-  Copy,
-  RefreshCw,
-  Accessibility,
-  Palette,
   Zap,
 } from 'lucide-react';
 
@@ -137,7 +137,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
   defaultLayout = 'horizontal',
 }) => {
   const [currentProps, setCurrentProps] = useState(config.defaultProps);
-  const [selectedExample, setSelectedExample] = useState<number | null>(null);
+  const [selectedExample, setSelectedExample] = useState<number | null>(undefined);
   const [viewport, setViewport] = useState(VIEWPORT_SIZES[2]); // Desktop by default
   const [theme, setTheme] = useState(THEMES[0]);
   const [layout, setLayout] = useState(defaultLayout);
@@ -163,11 +163,11 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
     }
 
     const propsString = Object.entries(currentProps)
-      .filter(([_, value]) => value !== undefined && value !== '')
+      .filter(([_, value]) => value !== undefined && '' !== value)
       .map(([key, value]) => {
-        if (typeof value === 'string') {
+        if ('string' === typeof value) {
           return `${key}="${value}"`;
-        } else if (typeof value === 'boolean') {
+        } else if ('boolean' === typeof value) {
           return value ? key : '';
         } else {
           return `${key}={${JSON.stringify(value)}}`;
@@ -187,7 +187,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       ...prev,
       [propName]: value,
     }));
-    setSelectedExample(null);
+    setSelectedExample(undefined);
   }, []);
 
   // Handle example selection
@@ -232,7 +232,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
   // Performance monitoring
   useEffect(() => {
-    if (!enablePerformanceMonitoring) return;
+    if (!enablePerformanceMonitoring) {return;}
 
     renderStartTime.current = performance.now();
     reRenderCount.current += 1;
@@ -279,7 +279,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       timestamp: new Date().toISOString(),
     };
 
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+    const blob = new Blob([JSON.stringify(exportData, undefined, 2)], {
       type: 'application/json',
     });
     const url = URL.createObjectURL(blob);
@@ -299,7 +299,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
   // Reset to defaults
   const resetToDefaults = useCallback(() => {
     setCurrentProps(config.defaultProps);
-    setSelectedExample(null);
+    setSelectedExample(undefined);
     setCustomCode('');
     reRenderCount.current = 0;
   }, [config.defaultProps]);
@@ -451,7 +451,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
             {/* Layout Toggle */}
             <button
               onClick={() =>
-                setLayout(layout === 'horizontal' ? 'vertical' : 'horizontal')
+                setLayout('horizontal' === layout ? 'vertical' : 'horizontal')
               }
               className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
               title="Toggle layout"
@@ -586,11 +586,11 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
       {/* Main Content */}
       <div
-        className={`flex ${layout === 'horizontal' ? 'flex-row' : 'flex-col'} h-[calc(100vh-200px)]`}
+        className={`flex ${ 'horizontal' === layout ? 'flex-row' : 'flex-col'} h-[calc(100vh-200px)]`}
       >
         {/* Preview Panel */}
         <div
-          className={`${layout === 'horizontal' ? 'flex-1' : 'h-1/2'} bg-white`}
+          className={`${ 'horizontal' === layout ? 'flex-1' : 'h-1/2'} bg-white`}
         >
           <div className="h-full flex flex-col">
             {/* Preview Header */}
@@ -621,7 +621,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
             </div>
 
             {/* Accessibility Results */}
-            {enableA11yTesting && Object.keys(a11yResults).length > 0 && (
+            {enableA11yTesting && 0 < Object.keys(a11yResults).length && (
               <div className="border-t border-gray-200 p-4 bg-gray-50">
                 <h4 className="font-medium text-gray-900 mb-2">
                   Accessibility Tests
@@ -634,7 +634,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
                     >
                       <div
                         className={`w-2 h-2 rounded-full ${result.passed ? 'bg-green-500' : 'bg-red-500'}`}
-                      ></div>
+                       />
                       <span className="font-medium">{testName}:</span>
                       <span
                         className={
@@ -653,10 +653,10 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
         {/* Controls Panel */}
         <div
-          className={`${layout === 'horizontal' ? 'w-80 border-l' : 'h-1/2 border-t'} border-gray-200 bg-white overflow-auto`}
+          className={`${ 'horizontal' === layout ? 'w-80 border-l' : 'h-1/2 border-t'} border-gray-200 bg-white overflow-auto`}
         >
           {/* Examples */}
-          {config.examples.length > 0 && (
+          { 0 < config.examples.length && (
             <div className="p-4 border-b border-gray-200">
               <h3 className="font-medium text-gray-900 mb-3">Examples</h3>
               <div className="space-y-2">

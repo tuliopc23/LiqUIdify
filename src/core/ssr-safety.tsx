@@ -1,4 +1,5 @@
-import { ReactNode, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { announcer } from '@/components/glass-live-region';
 
 // Types and Interfaces
@@ -27,7 +28,7 @@ export interface ProgressiveEnhancementOptions {
 const DEFAULT_SSR_OPTIONS: SSRSafetyOptions = {
   detectMismatches: true,
   autoRecover: true,
-  reportMismatches: process.env.NODE_ENV === 'development',
+  reportMismatches: 'development' === process.env.NODE_ENV,
   fallbackDelay: 100,
 };
 
@@ -37,11 +38,11 @@ const DEFAULT_SSR_OPTIONS: SSRSafetyOptions = {
 export class SSRSafetyManager {
   private static instance: SSRSafetyManager;
   private hydrationMismatches: HydrationMismatch[] = [];
-  private observer: MutationObserver | null = null;
+  private observer: MutationObserver | null = undefined;
   private isClient: boolean = false;
 
   private constructor() {
-    this.isClient = typeof window !== 'undefined';
+    this.isClient = 'undefined' !== typeof window;
 
     if (this.isClient) {
       this.setupHydrationDetection();
@@ -81,7 +82,9 @@ export class SSRSafetyManager {
    * Setup hydration mismatch detection
    */
   private setupHydrationDetection() {
-    if (!this.isClient) return;
+    if (!this.isClient) {
+      return;
+    }
 
     // Listen for hydration errors
     window.addEventListener('error', event => {
@@ -93,7 +96,7 @@ export class SSRSafetyManager {
     // Setup mutation observer for DOM changes
     this.observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
-        if (mutation.type === 'childList') {
+        if ('childList' === mutation.type) {
           this.checkForMismatches(mutation.target as HTMLElement);
         }
       });
@@ -216,7 +219,7 @@ export interface SSRSafeProps {
 
 export function SSRSafe({
   children,
-  fallback = null,
+  fallback = undefined,
   delay = 0,
 }: SSRSafeProps) {
   const [isClient, setIsClient] = useState(false);
@@ -244,7 +247,10 @@ export interface ClientOnlyProps {
   fallback?: ReactNode;
 }
 
-export function ClientOnly({ children, fallback = null }: ClientOnlyProps) {
+export function ClientOnly({
+  children,
+  fallback = undefined,
+}: ClientOnlyProps) {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -376,7 +382,9 @@ export function useNetworkStatus() {
   const [connectionType, setConnectionType] = useState<string>('unknown');
 
   useEffect(() => {
-    if (typeof navigator === 'undefined') return;
+    if ('undefined' === typeof navigator) {
+      return;
+    }
 
     const updateOnlineStatus = () => {
       setIsOnline(navigator.onLine);
@@ -423,7 +431,7 @@ export const gracefulDegradation = {
     staticComponent: ReactNode
   ) => {
     const prefersReducedMotion =
-      typeof window !== 'undefined' &&
+      'undefined' !== typeof window &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     return prefersReducedMotion ? staticComponent : animatedComponent;
@@ -435,7 +443,7 @@ export const gracefulDegradation = {
     enhancedComponent: ReactNode,
     fallbackComponent: ReactNode
   ) => {
-    const hasFeature = typeof window !== 'undefined' && feature in window;
+    const hasFeature = 'undefined' !== typeof window && feature in window;
     return hasFeature ? enhancedComponent : fallbackComponent;
   },
 

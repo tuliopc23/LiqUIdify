@@ -34,7 +34,8 @@
       "Bash(npm update:*)",
       "Bash(npm install:*)",
       "Bash(npx tsc:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(bun:*)"
     ],
     "deny": []
   }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { performanceMonitor } from '../../core/performance-monitor';
 import { useRealtimePerformance } from '../../hooks/use-performance-monitoring';
 import { cn } from '@/lib/glass-utils';
@@ -152,11 +152,11 @@ export function GlassPerformanceDashboard({
             <div
               className={cn(
                 'text-xl font-mono',
-                fps >= 55
+                55 <= fps 
                   ? 'text-green-500'
-                  : fps >= 30
+                  : (30 <= fps 
                     ? 'text-yellow-500'
-                    : 'text-red-500'
+                    : 'text-red-500')
               )}
             >
               {fps}
@@ -174,7 +174,7 @@ export function GlassPerformanceDashboard({
         <div className="space-y-2 mb-4">
           <h4 className="text-sm font-medium text-gray-400">Core Web Vitals</h4>
           <div className="space-y-1 max-h-48 overflow-y-auto">
-            {Array.from(metrics.entries()).map(([name, metric]) => (
+            {[...metrics.entries()].map(([name, metric]) => (
               <div
                 key={name}
                 className="flex items-center justify-between p-2 bg-white/5 rounded"
@@ -189,8 +189,8 @@ export function GlassPerformanceDashboard({
                       getMetricColor(metric.rating)
                     )}
                   >
-                    {metric.value.toFixed(name === 'CLS' ? 3 : 0)}
-                    {name === 'CLS' ? '' : 'ms'}
+                    {metric.value.toFixed('CLS' === name ? 3 : 0)}
+                    { 'CLS' === name ? '' : 'ms'}
                   </div>
                 </div>
                 <div className={cn('text-xs', getMetricColor(metric.rating))}>
@@ -202,7 +202,7 @@ export function GlassPerformanceDashboard({
         </div>
 
         {/* Component Performance */}
-        {componentMetrics.length > 0 && (
+        { 0 < componentMetrics.length && (
           <div className="space-y-2">
             <h4 className="text-sm font-medium text-gray-400">
               Component Performance

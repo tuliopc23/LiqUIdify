@@ -45,7 +45,7 @@ export function GlassPlayground({
   const [copied, setCopied] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [activeTab] = useState<'preview' | 'code'>('preview');
-  const window = useSSRSafeWindow(w => w, null);
+  const window = useSSRSafeWindow(w => w, undefined);
 
   // Combine default scope with provided scope
   const playgroundScope = useMemo(
@@ -67,8 +67,8 @@ export function GlassPlayground({
         await navigator.clipboard.writeText(code);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-      } catch (err) {
-        console.error('Failed to copy:', err);
+      } catch (error) {
+        console.error('Failed to copy:', error);
       }
     }
   }, [code, window]);
@@ -94,7 +94,7 @@ export function GlassPlayground({
   }, []);
 
   // Get appropriate theme
-  const editorTheme = theme === 'dark' ? themes.nightOwl : themes.github;
+  const editorTheme = 'dark' === theme ? themes.nightOwl : themes.github;
 
   return (
     <div
@@ -154,7 +154,7 @@ export function GlassPlayground({
       {/* Content */}
       <div
         className="relative"
-        style={{ height: typeof height === 'number' ? `${height}px` : height }}
+        style={{ height: 'number' === typeof height ? `${height}px` : height }}
       >
         <LiveProvider
           code={code}
@@ -315,7 +315,7 @@ const playgroundStyles = `
 `;
 
 // Inject styles
-if (typeof document !== 'undefined') {
+if ('undefined' !== typeof document) {
   const styleId = 'glass-playground-styles';
   if (!document.getElementById(styleId)) {
     const style = document.createElement('style');

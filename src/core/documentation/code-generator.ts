@@ -336,7 +336,7 @@ ${componentName}.displayName = '${componentName}';`;
    * Generate animation logic
    */
   private generateAnimationLogic(): string {
-    if (!this.config.animations) return '';
+    if (!this.config.animations) {return '';}
 
     return `
     // Animation configuration
@@ -375,10 +375,10 @@ ${componentName}.displayName = '${componentName}';`;
    * Generate variant logic
    */
   private generateVariantLogic(): string {
-    if (!this.config.variants) return '';
+    if (!this.config.variants) {return '';}
 
-    const variantProp = this.config.props.find(p => p.name === 'variant');
-    if (!variantProp) return '';
+    const variantProp = this.config.props.find(p => 'variant' === p.name);
+    if (!variantProp) {return '';}
 
     return `
     // Variant configuration
@@ -875,15 +875,15 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
   private getAriaLabelLogic(): string {
     const labelProp = this.config.props.find(
-      p => p.name === 'children' || p.name === 'label'
+      p => 'children' === p.name || 'label' === p.name
     );
     return labelProp ? labelProp.name : 'undefined';
   }
 
   private getElementType(): string {
-    if (this.config.name.toLowerCase().includes('button')) return 'button';
-    if (this.config.name.toLowerCase().includes('input')) return 'input';
-    if (this.config.name.toLowerCase().includes('link')) return 'a';
+    if (this.config.name.toLowerCase().includes('button')) {return 'button';}
+    if (this.config.name.toLowerCase().includes('input')) {return 'input';}
+    if (this.config.name.toLowerCase().includes('link')) {return 'a';}
     return 'div';
   }
 
@@ -911,7 +911,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   }
 
   private generateVariantClassLogic(): string {
-    if (!this.config.variants) return 'variantStyles,';
+    if (!this.config.variants) {return 'variantStyles,';}
     return 'variantStyles,';
   }
 
@@ -921,18 +921,18 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
   private getDependencies(): string[] {
     const deps = ['className', 'glassMorphism'];
-    if (this.config.variants) deps.push('variant', 'variantStyles');
-    if (this.config.animations) deps.push('animation', 'animationConfig');
+    if (this.config.variants) {deps.push('variant', 'variantStyles');}
+    if (this.config.animations) {deps.push('animation', 'animationConfig');}
     return deps;
   }
 
   private generateChildrenLogic(): string {
-    const childrenProp = this.config.props.find(p => p.name === 'children');
+    const childrenProp = this.config.props.find(p => 'children' === p.name);
     return childrenProp ? '{children}' : '';
   }
 
   private generateEnumTypes(): string {
-    const enumProps = this.config.props.filter(p => p.type === 'enum');
+    const enumProps = this.config.props.filter(p => 'enum' === p.type);
     return enumProps
       .map(
         prop =>
@@ -942,7 +942,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   }
 
   private generateAnimationTypes(): string {
-    if (!this.config.animations) return '';
+    if (!this.config.animations) {return '';}
 
     return `export interface AnimationConfig {
   type?: 'spring' | 'tween' | 'gesture' | 'physics';
@@ -964,7 +964,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   }
 
   private generateVariantTypes(): string {
-    if (!this.config.variants) return '';
+    if (!this.config.variants) {return '';}
 
     const variantNames = this.config.variants
       .map(v => `'${v.name}'`)
@@ -975,7 +975,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   private generatePropTests(): string {
     return this.config.props
       .map(prop => {
-        if (prop.type === 'boolean') {
+        if ('boolean' === prop.type) {
           return `
     it('handles ${prop.name} prop', () => {
       const { rerender } = render(<${this.config.name} ${prop.name}={false} />);
@@ -989,7 +989,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   }
 
   private generateAccessibilityTests(): string {
-    if (!this.config.accessibility) return '';
+    if (!this.config.accessibility) {return '';}
 
     return this.config.accessibility.keyboardSupport
       .map(
@@ -1034,7 +1034,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   }
 
   private generateVariantTests(): string {
-    if (!this.config.variants) return '';
+    if (!this.config.variants) {return '';}
 
     return this.config.variants
       .map(
@@ -1085,7 +1085,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   }
 
   private generateExampleStories(): string {
-    if (!this.config.examples) return '';
+    if (!this.config.examples) {return '';}
 
     return this.config.examples
       .map(
@@ -1109,7 +1109,7 @@ export const ${example.name.replace(/\s+/g, '')}: Story = {
   }
 
   private generateDocumentationExamples(): string {
-    if (!this.config.examples) return '';
+    if (!this.config.examples) {return '';}
 
     return this.config.examples
       .map(
@@ -1127,7 +1127,7 @@ ${example.code}
   }
 
   private generateAccessibilityDocs(): string {
-    if (!this.config.accessibility) return '';
+    if (!this.config.accessibility) {return '';}
 
     const {
       roles,
@@ -1151,8 +1151,8 @@ ${example.code}
     // Rough estimation based on component complexity
     let size = 2; // Base size
     size += this.config.props.length * 0.1;
-    if (this.config.animations) size += 1;
-    if (this.config.variants) size += this.config.variants.length * 0.2;
+    if (this.config.animations) {size += 1;}
+    if (this.config.variants) {size += this.config.variants.length * 0.2;}
     return Math.round(size * 10) / 10;
   }
 
@@ -1194,7 +1194,7 @@ ${this.options.includeTypes ? `export * from './${this.config.name}.types';` : '
           'react-dom': '>=18.0.0',
         },
       },
-      null,
+      undefined,
       2
     );
   }

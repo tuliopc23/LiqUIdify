@@ -8,7 +8,7 @@
  * - Strict typing for component props
  */
 
-import type { ElementType, ComponentProps, ReactNode } from 'react';
+import type { ComponentProps, ElementType, ReactNode } from 'react';
 
 // ==============================
 // Branded Types
@@ -41,19 +41,19 @@ export type ThemeId = Brand<string, 'ThemeId'>;
 // Type guards for branded types
 export const isGlassColor = (value: unknown): value is GlassColor => {
   return (
-    typeof value === 'string' && /^(#|rgb|hsl|var\()/.test(value as string)
+    'string' === typeof value && /^(#|rgb|hsl|var\()/.test(value as string)
   );
 };
 
 export const isHexColor = (value: unknown): value is HexColor => {
   return (
-    typeof value === 'string' && /^#([0-9A-F]{3}){1,2}$/i.test(value as string)
+    'string' === typeof value && /^#([0-9A-F]{3}){1,2}$/i.test(value as string)
   );
 };
 
 export const isCSSVariable = (value: unknown): value is CSSVariable => {
   return (
-    typeof value === 'string' &&
+    'string' === typeof value &&
     /^var\(--[a-zA-Z0-9-_]+\)$/.test(value as string)
   );
 };

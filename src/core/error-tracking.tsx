@@ -36,13 +36,12 @@ export interface ErrorTrackingConfig {
 
 class ErrorTrackingSystem {
   private static instance: ErrorTrackingSystem;
-  private sentry: any = null;
+  private sentry: any = undefined;
   private __config: ErrorTrackingConfig = {};
   private errorQueue: ErrorReport[] = [];
   private isInitialized = false;
 
-  private constructor() {
-  }
+  private constructor() {}
 
   static getInstance(): ErrorTrackingSystem {
     if (!ErrorTrackingSystem.instance) {
@@ -59,7 +58,7 @@ class ErrorTrackingSystem {
 
     if (!_config.enabled || !_config.dsn) {
       console.info(
-        '[ErrorTracking] Error tracking disabled or no DSN provided',
+        '[ErrorTracking] Error tracking disabled or no DSN provided'
       );
       return;
     }
@@ -71,14 +70,14 @@ class ErrorTrackingSystem {
       const integrations = [...(_config.integrations || [])];
 
       // Add browser tracing integration if performance monitoring is enabled
-      if (_config.tracesSampleRate && _config.tracesSampleRate > 0) {
+      if (_config.tracesSampleRate && 0 < _config.tracesSampleRate) {
         integrations.push(Sentry.browserTracingIntegration());
       }
 
       Sentry.init({
         dsn: _config.dsn,
         environment: _config.environment || 'production',
-        sampleRate: _config.sampleRate || 1.0,
+        sampleRate: _config.sampleRate || 1,
         tracesSampleRate: _config.tracesSampleRate || 0.1,
 
         integrations,
@@ -87,8 +86,8 @@ class ErrorTrackingSystem {
           _config.beforeSend ||
           ((event, _hint) => {
             // Filter out known non-critical errors
-            if (event.exception?.values?.[0]?.type === 'NetworkError') {
-              return null;
+            if ('NetworkError' === event.exception?.values?.[0]?.type) {
+              return;
             }
 
             // Sanitize sensitive data
@@ -135,7 +134,7 @@ class ErrorTrackingSystem {
   trackError(
     error: Error,
     errorInfo?: ErrorInfo,
-    metadata?: ErrorMetadata,
+    metadata?: ErrorMetadata
   ): string {
     const errorReport: ErrorReport = {
       error,
@@ -157,7 +156,9 @@ class ErrorTrackingSystem {
    * Track a custom event
    */
   trackEvent(eventName: string, data?: Record<string, any>): void {
-    if (!this.isInitialized || !this.sentry) return;
+    if (!this.isInitialized || !this.sentry) {
+      return;
+    }
 
     this.sentry.addBreadcrumb({
       message: eventName,
@@ -172,9 +173,11 @@ class ErrorTrackingSystem {
    * Set user context for error tracking
    */
   setUser(
-    user: { id?: string; email?: string; username?: string } | null,
+    user: { id?: string; email?: string; username?: string } | null
   ): void {
-    if (!this.isInitialized || !this.sentry) return;
+    if (!this.isInitialized || !this.sentry) {
+      return;
+    }
 
     if (user) {
       this.sentry.setUser({
@@ -183,7 +186,7 @@ class ErrorTrackingSystem {
         username: user.username,
       });
     } else {
-      this.sentry.setUser(null);
+      this.sentry.setUser(undefined);
     }
   }
 
@@ -191,7 +194,9 @@ class ErrorTrackingSystem {
    * Set additional context
    */
   setContext(key: string, context: Record<string, any>): void {
-    if (!this.isInitialized || !this.sentry) return;
+    if (!this.isInitialized || !this.sentry) {
+      return;
+    }
     this.sentry.setContext(key, context);
   }
 
@@ -199,7 +204,9 @@ class ErrorTrackingSystem {
    * Set tags for categorization
    */
   setTags(tags: Record<string, string>): void {
-    if (!this.isInitialized || !this.sentry) return;
+    if (!this.isInitialized || !this.sentry) {
+      return;
+    }
     this.sentry.setTags(tags);
   }
 
@@ -223,9 +230,9 @@ class ErrorTrackingSystem {
       ({ children }: { children: ReactNode }) => children,
       {
         fallback: ({
-                     error,
-                     resetError,
-                   }: {
+          error,
+          resetError,
+        }: {
           error: Error;
           resetError: () => void;
         }) => (
@@ -254,7 +261,7 @@ class ErrorTrackingSystem {
           scope.setTag('errorBoundary', true);
           scope.setLevel('error');
         },
-      },
+      }
     );
   }
 
@@ -263,7 +270,7 @@ class ErrorTrackingSystem {
    */
   withErrorTracking<P extends object>(
     Component: React.ComponentType<P>,
-    componentName?: string,
+    componentName?: string
   ): React.ComponentType<P> {
     if (!this.isInitialized || !this.sentry) {
       return Component;
@@ -280,7 +287,7 @@ class ErrorTrackingSystem {
   async getErrorAnalytics(): Promise<{
     totalErrors: number;
     errorRate: number;
-    topErrors: Array<{ message: string; count: number }>;
+    topErrors: { message: string; count: number }[];
     affectedUsers: number;
   }> {
     // This would typically fetch from Sentry API
@@ -297,7 +304,9 @@ class ErrorTrackingSystem {
    * Send error report to Sentry
    */
   private sendToSentry(report: ErrorReport): string {
-    if (!this.sentry) return report.id;
+    if (!this.sentry) {
+      return report.id;
+    }
 
     const { error, errorInfo, metadata } = report;
 
@@ -336,7 +345,7 @@ class ErrorTrackingSystem {
    * Process queued errors after initialization
    */
   private processErrorQueue(): void {
-    while (this.errorQueue.length > 0) {
+    while (0 < this.errorQueue.length) {
       const report = this.errorQueue.shift();
       if (report) {
         this.sendToSentry(report);
@@ -363,7 +372,7 @@ export function useErrorTracking() {
     trackEvent: (eventName: string, data?: Record<string, any>) =>
       errorTracking.trackEvent(eventName, data),
     setUser: (
-      user: { id?: string; email?: string; username?: string } | null,
+      user: { id?: string; email?: string; username?: string } | null
     ) => errorTracking.setUser(user),
     setContext: (key: string, context: Record<string, any>) =>
       errorTracking.setContext(key, context),
@@ -377,11 +386,11 @@ export interface ErrorTrackingProviderProps {
 }
 
 export function ErrorTrackingProvider({
-                                        children,
-                                        config,
-                                      }: ErrorTrackingProviderProps) {
+  children,
+  config,
+}: ErrorTrackingProviderProps) {
   // Initialize on mount
-  if (typeof window !== 'undefined') {
+  if ('undefined' !== typeof window) {
     errorTracking.initialize(config);
   }
 

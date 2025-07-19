@@ -13,7 +13,7 @@ interface SSRConfigProviderProps extends ConfigProviderProps {
  */
 export function SSRConfigProvider({
   children,
-  fallback = null,
+  fallback = undefined,
   ...configProps
 }: SSRConfigProviderProps) {
   const [isClient, setIsClient] = useState(false);
@@ -56,7 +56,7 @@ export function withSSRSafety<P extends object>(
     const isClient = useIsClient();
 
     if (!isClient) {
-      return <>{fallback || null}</>;
+      return <>{fallback || undefined}</>;
     }
 
     return <Component {...props} />;

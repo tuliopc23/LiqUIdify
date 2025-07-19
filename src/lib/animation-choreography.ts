@@ -8,10 +8,8 @@
  */
 
 import { gsap } from 'gsap';
-import {
-  GLASS_EASINGS,
-  AnimationType,
-} from './glass-animations';
+import type { AnimationType } from './glass-animations';
+import { GLASS_EASINGS } from './glass-animations';
 
 /**
  * Animation sequence configuration
@@ -105,7 +103,7 @@ export const APPLE_MOTION_PRESETS = {
       scale: 1,
       background: 'rgba(255, 255, 255, 0.1)',
     },
-    duration: 1.0,
+    duration: 1,
     ease: 'power2.out',
     stagger: 0.08,
   },
@@ -114,7 +112,7 @@ export const APPLE_MOTION_PRESETS = {
   float: {
     from: { y: 0 },
     to: { y: -10 },
-    duration: 2.0,
+    duration: 2,
     ease: 'sine.inOut',
     repeat: -1,
     yoyo: true,
@@ -177,7 +175,7 @@ export class ChoreographyTiming {
 
     return Math.max(
       0.3,
-      Math.min(2.0, (distanceFactor * sizeFactor) / baseSpeed)
+      Math.min(2, (distanceFactor * sizeFactor) / baseSpeed)
     );
   }
 }
@@ -434,7 +432,7 @@ export class AdvancedChoreographer {
             const element = entry.target as HTMLElement;
             const elementIndex = elements.indexOf(element);
 
-            if (elementIndex !== -1) {
+            if (-1 !== elementIndex) {
               this.executePreset(preset, [element]);
 
               if (once) {
@@ -482,7 +480,7 @@ export class AdvancedChoreographer {
    * Get active animations
    */
   getActiveAnimations(): string[] {
-    return Array.from(this.activeAnimations);
+    return [...this.activeAnimations];
   }
 
   /**

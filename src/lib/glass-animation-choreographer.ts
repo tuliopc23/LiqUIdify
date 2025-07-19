@@ -4,7 +4,7 @@
  * Requirements: 5.1, 5.5 - Animation choreography with intelligent timing and easing curves
  */
 
-import { useRef, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export interface AnimationSequence {
   id: string;
@@ -251,7 +251,7 @@ export const CHOREOGRAPHY_PATTERNS: Record<string, ChoreographyPattern> = {
     overlap: 0.5,
     direction: 'alternate',
     easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-    duration: 1.0,
+    duration: 1,
   },
   sequential: {
     name: 'Sequential',
@@ -300,12 +300,14 @@ export class GlassAnimationChoreographer {
    * Play choreographed animations with pattern
    */
   play(pattern?: ChoreographyPattern): void {
-    if (this.isPlaying) return;
+    if (this.isPlaying) {
+      return;
+    }
 
     const choreographyPattern: ChoreographyPattern =
       pattern || CHOREOGRAPHY_PATTERNS.cascade!;
     this.isPlaying = true;
-    const sortedSequences = Array.from(this.sequences.values()).sort(
+    const sortedSequences = [...this.sequences.values()].sort(
       (a, b) => a.priority - b.priority
     );
 
@@ -325,7 +327,7 @@ export class GlassAnimationChoreographer {
       // Handle animation completion
       animation.addEventListener('finish', () => {
         this.activeAnimations.delete(sequence.id);
-        if (this.activeAnimations.size === 0) {
+        if (0 === this.activeAnimations.size) {
           this.isPlaying = false;
         }
       });
@@ -381,12 +383,11 @@ export class GlassAnimationChoreographer {
         const totalSequences = this.sequences.size;
         return (totalSequences - index - 1) * pattern.stagger * 1000;
       }
-      case 'alternate': {
-        return index % 2 === 0 ? baseDelay : baseDelay + pattern.overlap * 1000;
-      }
-      default: {
+      case 'alternate':
+        return 0 === index % 2 ? baseDelay : baseDelay + pattern.overlap * 1000;
+
+      default:
         return baseDelay;
-      }
     }
   }
 
@@ -411,7 +412,7 @@ export class GlassAnimationChoreographer {
  * Ensures 60fps performance with intelligent batching
  */
 export class PerformanceAnimationManager {
-  private animationFrame: number | null = null;
+  private animationFrame: number | null = undefined;
   private animations: Set<() => void> = new Set();
   private isRunning: boolean = false;
 
@@ -430,7 +431,7 @@ export class PerformanceAnimationManager {
    */
   removeAnimation(callback: () => void): void {
     this.animations.delete(callback);
-    if (this.animations.size === 0) {
+    if (0 === this.animations.size) {
       this.stop();
     }
   }
@@ -450,7 +451,7 @@ export class PerformanceAnimationManager {
     this.isRunning = false;
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = null;
+      this.animationFrame = undefined;
     }
   }
 
@@ -458,7 +459,9 @@ export class PerformanceAnimationManager {
    * Animation tick
    */
   private tick = (): void => {
-    if (!this.isRunning) return;
+    if (!this.isRunning) {
+      return;
+    }
 
     // Execute all animations in a single frame
     this.animations.forEach(callback => {
@@ -470,7 +473,7 @@ export class PerformanceAnimationManager {
       }
     });
 
-    if (this.animations.size > 0) {
+    if (0 < this.animations.size) {
       this.animationFrame = requestAnimationFrame(this.tick);
     } else {
       this.stop();
@@ -525,7 +528,7 @@ export function useAnimationChoreographer(
     }
 
     // Check for reduced motion preference
-    if (enableReducedMotion && typeof window !== 'undefined') {
+    if (enableReducedMotion && 'undefined' !== typeof window) {
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       reducedMotion.current = mediaQuery.matches;
 
@@ -542,8 +545,8 @@ export function useAnimationChoreographer(
 
     return () => {
       choreographerRef.current?.cancel();
-      choreographerRef.current = null;
-      performanceManagerRef.current = null;
+      choreographerRef.current = undefined;
+      performanceManagerRef.current = undefined;
     };
   }, [enablePerformanceMode, enableReducedMotion]);
 
@@ -555,10 +558,12 @@ export function useAnimationChoreographer(
       preset: keyof typeof MOTION_PRESETS | MotionPreset,
       priority: number = 0
     ) => {
-      if (!choreographerRef.current) return;
+      if (!choreographerRef.current) {
+        return;
+      }
 
       const motionPreset =
-        typeof preset === 'string' ? MOTION_PRESETS[preset] : preset;
+        'string' === typeof preset ? MOTION_PRESETS[preset] : preset;
 
       // Skip animations if reduced motion is preferred or preset not found
       if (reducedMotion.current || !motionPreset) {
@@ -585,7 +590,9 @@ export function useAnimationChoreographer(
 
   const play = useCallback(
     (customPattern?: ChoreographyPattern) => {
-      if (reducedMotion.current) return;
+      if (reducedMotion.current) {
+        return;
+      }
       choreographerRef.current?.play(customPattern || pattern);
     },
     [pattern]

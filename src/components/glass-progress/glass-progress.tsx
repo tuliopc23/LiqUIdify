@@ -61,20 +61,20 @@ export const GlassProgress = React.forwardRef<
           className={cn(
             'relative w-full rounded-full overflow-hidden',
             sizeClasses[size],
-            variant === 'default' && getGlassClass('default'),
-            variant === 'minimal' && 'bg-gray-200 dark:bg-gray-700',
-            variant === 'gradient' &&
+            'default' === variant && getGlassClass('default'),
+            'minimal' === variant && 'bg-gray-200 dark:bg-gray-700',
+            'gradient' === variant &&
               'bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600'
           )}
         >
           <div
             className={cn(
               'h-full transition-all duration-500 ease-out rounded-full',
-              variant === 'default' &&
+              'default' === variant &&
                 `bg-gradient-to-r ${colorClasses[color]}`,
-              variant === 'gradient' &&
+              'gradient' === variant &&
                 `bg-gradient-to-r ${colorClasses[color]}`,
-              variant === 'minimal' && `bg-${color}-500`
+              'minimal' === variant && `bg-${color}-500`
             )}
             style={{ width: `${percentage}%` }}
           />

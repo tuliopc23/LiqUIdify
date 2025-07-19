@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn, getGlassClass } from '@/lib/glass-utils';
 
@@ -40,7 +40,7 @@ const GlassResponsiveButton = forwardRef<
 
     useEffect(() => {
       const checkMobile = () => {
-        setIsMobile(window.innerWidth < 768 && 'ontouchstart' in window);
+        setIsMobile(768 > window.innerWidth && 'ontouchstart' in window);
       };
 
       checkMobile();

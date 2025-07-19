@@ -56,7 +56,7 @@ export const createAccessibleContrast = (ratio: number): AccessibleContrast => {
 
 export function isValidContrastRatio(ratio: number): boolean {
   // WCAG AA standards: 4.5:1 for normal text, 3:1 for large text
-  return ratio >= 3;
+  return 3 <= ratio;
 }
 
 /**
@@ -68,7 +68,7 @@ export function isValidContrastRatio(ratio: number): boolean {
 export type GlassOpacity = Brand<number, 'GlassOpacity'>;
 
 export const createGlassOpacity = (opacity: number): GlassOpacity => {
-  if (opacity < 0 || opacity > 1) {
+  if (0 > opacity || 1 < opacity) {
     throw new Error(`Opacity must be between 0 and 1, got ${opacity}`);
   }
   return opacity as GlassOpacity;
@@ -83,7 +83,7 @@ export const createGlassOpacity = (opacity: number): GlassOpacity => {
 export type GlassBlur = Brand<number, 'GlassBlur'>;
 
 export const createGlassBlur = (pixels: number): GlassBlur => {
-  if (pixels < 0 || pixels > 100) {
+  if (0 > pixels || 100 < pixels) {
     throw new Error(`Blur must be between 0 and 100 pixels, got ${pixels}`);
   }
   return pixels as GlassBlur;
@@ -108,7 +108,7 @@ export const createCSSUnit = (value: string): CSSUnit => {
 export function isValidCSSUnit(value: string): boolean {
   const pattern =
     /^-?\d*\.?\d+(px|em|rem|%|vh|vw|vmin|vmax|ch|ex|cm|mm|in|pt|pc)$/;
-  return pattern.test(value) || value === '0' || value === 'auto';
+  return pattern.test(value) || '0' === value || 'auto' === value;
 }
 
 /**
@@ -120,7 +120,7 @@ export function isValidCSSUnit(value: string): boolean {
 export type AnimationDuration = Brand<number, 'AnimationDuration'>;
 
 export const createAnimationDuration = (ms: number): AnimationDuration => {
-  if (ms < 0 || ms > 10000) {
+  if (0 > ms || 10_000 < ms) {
     throw new Error(
       `Animation duration must be between 0 and 10000ms, got ${ms}`
     );
@@ -137,7 +137,7 @@ export const createAnimationDuration = (ms: number): AnimationDuration => {
 export type ZIndex = Brand<number, 'ZIndex'>;
 
 export const createZIndex = (value: number): ZIndex => {
-  if (value < -999 || value > 9999) {
+  if (-999 > value || 9999 < value) {
     throw new Error(`Z-index should be between -999 and 9999, got ${value}`);
   }
   return value as ZIndex;
@@ -193,31 +193,31 @@ export const createComponentSize = (size: string): ComponentSize => {
  */
 export const isBrandedType = {
   isGlassColor: (value: unknown): value is GlassColor =>
-    typeof value === 'string' && isValidGlassColor(value),
+    'string' === typeof value && isValidGlassColor(value),
 
   isAccessibleContrast: (value: unknown): value is AccessibleContrast =>
-    typeof value === 'number' && isValidContrastRatio(value),
+    'number' === typeof value && isValidContrastRatio(value),
 
   isGlassOpacity: (value: unknown): value is GlassOpacity =>
-    typeof value === 'number' && value >= 0 && value <= 1,
+    'number' === typeof value && 0 <= value && 1 >= value,
 
   isGlassBlur: (value: unknown): value is GlassBlur =>
-    typeof value === 'number' && value >= 0 && value <= 100,
+    'number' === typeof value && 0 <= value && 100 >= value,
 
   isCSSUnit: (value: unknown): value is CSSUnit =>
-    typeof value === 'string' && isValidCSSUnit(value),
+    'string' === typeof value && isValidCSSUnit(value),
 
   isAnimationDuration: (value: unknown): value is AnimationDuration =>
-    typeof value === 'number' && value >= 0 && value <= 10000,
+    'number' === typeof value && 0 <= value && 10_000 >= value,
 
   isZIndex: (value: unknown): value is ZIndex =>
-    typeof value === 'number' && value >= -999 && value <= 9999,
+    'number' === typeof value && -999 <= value && 9999 >= value,
 
   isThemeName: (value: unknown): value is ThemeName =>
-    typeof value === 'string' && VALID_THEMES.includes(value as any),
+    'string' === typeof value && VALID_THEMES.includes(value as any),
 
   isComponentSize: (value: unknown): value is ComponentSize =>
-    typeof value === 'string' && VALID_SIZES.includes(value as any),
+    'string' === typeof value && VALID_SIZES.includes(value as any),
 };
 
 /**
@@ -231,7 +231,7 @@ export const brandedUtils = {
     try {
       return createGlassColor(color);
     } catch {
-      return null;
+      return;
     }
   },
 
@@ -248,7 +248,7 @@ export const brandedUtils = {
     try {
       return createAccessibleContrast(mockRatio);
     } catch {
-      return null;
+      return;
     }
   },
 

@@ -1,12 +1,13 @@
 import React, { forwardRef, useRef } from 'react';
-import { motion, Variants } from 'framer-motion';
+import type { Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
-import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
+import { useContentAwareGlass, useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
 import {
+  containerFadeIn,
   easeInOut,
   fadeInUp,
-  containerFadeIn,
 } from '@/lib/framer-motion-constants';
 
 export interface FeatureItem {
@@ -97,12 +98,12 @@ const GlassFeatureShowcase = forwardRef<
           variants={itemVariants}
           className={cn(
             'group relative',
-            variant === 'cards' &&
+            'cards' === variant &&
               'liquid-glass liquid-glass-interactive liquid-glass-depth-2 p-6 rounded-2xl',
-            variant === 'floating' &&
+            'floating' === variant &&
               'liquid-glass liquid-glass-interactive liquid-glass-depth-3 p-8 rounded-3xl liquid-glass-glow',
-            variant === 'minimal' && 'p-6',
-            variant === 'default' &&
+            'minimal' === variant && 'p-6',
+            'default' === variant &&
               'liquid-glass liquid-glass-interactive p-6 rounded-xl',
             specularHighlights && 'liquid-glass-specular liquid-glass-shimmer',
             enableMagnetic && 'liquid-glass-magnetic'
@@ -111,7 +112,7 @@ const GlassFeatureShowcase = forwardRef<
             transform: enableMagnetic ? transform : undefined,
           }}
           whileHover={
-            variant === 'floating' ? { y: -8, scale: 1.02 } : { y: -4 }
+            'floating' === variant ? { y: -8, scale: 1.02 } : { y: -4 }
           }
           transition={easeInOut}
         >
@@ -135,7 +136,7 @@ const GlassFeatureShowcase = forwardRef<
           <div
             className={cn(
               'flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110',
-              variant === 'floating' ? 'w-16 h-16' : 'w-12 h-12',
+              'floating' === variant ? 'w-16 h-16' : 'w-12 h-12',
               'liquid-glass liquid-glass-specular rounded-2xl'
             )}
           >
@@ -147,7 +148,7 @@ const GlassFeatureShowcase = forwardRef<
             <h3
               className={cn(
                 'font-semibold text-[var(--text-primary)] transition-colors duration-300',
-                variant === 'floating' ? 'text-xl' : 'text-lg'
+                'floating' === variant ? 'text-xl' : 'text-lg'
               )}
             >
               {feature.title}
@@ -216,7 +217,7 @@ const GlassFeatureShowcase = forwardRef<
           (
             contentRef as React.MutableRefObject<HTMLDivElement | null>
           ).current = node;
-          if (typeof ref === 'function') {
+          if ('function' === typeof ref) {
             ref(node);
           } else if (ref) {
             (ref as React.MutableRefObject<HTMLDivElement | null>).current =
@@ -293,10 +294,10 @@ const GlassFeatureShowcase = forwardRef<
           <motion.div
             className={cn(
               'grid gap-8',
-              layout === 'grid' && gridClasses[columns],
-              layout === 'masonry' &&
+              'grid' === layout && gridClasses[columns],
+              'masonry' === layout &&
                 'columns-1 md:columns-2 lg:columns-3 space-y-8',
-              layout === 'stacked' && 'space-y-8'
+              'stacked' === layout && 'space-y-8'
             )}
             variants={containerVariants}
             initial="hidden"

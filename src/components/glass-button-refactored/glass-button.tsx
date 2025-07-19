@@ -10,18 +10,21 @@
  * - Separated business logic from presentation
  */
 
+// External dependencies
 import { forwardRef, useCallback, useRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { InteractiveGlassProps } from '@/core';
-import { 
-  ComponentPropsBuilder,
+
+// Internal dependencies
+import type { InteractiveGlassProps } from '@/core';
+import type { ComponentPropsBuilder } from '@/core/stub-functions';
+import {
   cn,
+  createBusinessLogicHook,
   generateGlassClasses,
   generateGlassVariables,
-  createBusinessLogicHook,
+  microInteraction,
   responsiveSize,
   touchTarget,
-  microInteraction,
 } from '@/core/stub-functions';
 import { useGlassStateTransitions, useMagneticHover, useRippleEffect } from '@/hooks/use-glass-animations';
 
@@ -45,23 +48,23 @@ const useButtonBusinessLogic = createBusinessLogicHook<ButtonState, GlassButtonP
   // Actions factory
   (_state: ButtonState, setState: React.Dispatch<React.SetStateAction<ButtonState>>, props: GlassButtonProps) => ({
     handlePress: () => {
-      if (props.disabled || props.loading) return;
+      if (props.disabled || props.loading) {return;}
       setState((prev: ButtonState) => ({ ...prev, isPressed: true }));
       setTimeout(() => setState((prev: ButtonState) => ({ ...prev, isPressed: false })), 150);
     },
     
     handleHover: (isHovered: boolean) => {
-      if (props.disabled) return;
+      if (props.disabled) {return;}
       setState((prev: ButtonState) => ({ ...prev, isHovered }));
     },
     
     handleFocus: (isFocused: boolean) => {
-      if (props.disabled) return;
+      if (props.disabled) {return;}
       setState((prev: ButtonState) => ({ ...prev, isFocused }));
     },
     
     handleRipple: () => {
-      if (props.disabled || props.loading) return;
+      if (props.disabled || props.loading) {return;}
       setState((prev: ButtonState) => ({ ...prev, rippleCount: prev.rippleCount + 1 }));
     },
   })
@@ -135,7 +138,7 @@ const VARIANT_CLASSES = {
 
 // Loading spinner component
 const LoadingSpinner = ({ size = 'md' }: { size?: string }) => {
-  const sizeClass = size === 'xs' ? 'w-3 h-3' : size === 'sm' ? 'w-4 h-4' : 'w-5 h-5';
+  const sizeClass = 'xs' === size ? 'w-3 h-3' : ('sm' === size ? 'w-4 h-4' : 'w-5 h-5');
   
   return (
     <div className={cn('animate-spin rounded-full border-2 border-current border-t-transparent', sizeClass)} />
@@ -215,7 +218,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       if (buttonRef.current !== node) {
         buttonRef.current = node;
       }
-      if (typeof ref === 'function') {
+      if ('function' === typeof ref) {
         ref(node);
       } else if (ref) {
         ref.current = node;
@@ -224,7 +227,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     
     // Event handlers with business logic
     const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled || loading) return;
+      if (disabled || loading) {return;}
       
       actions.handlePress();
       actions.handleRipple();
@@ -242,7 +245,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     }, [disabled, loading, actions, ripple, triggerRipple, transitionToState, onClick]);
     
     const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled) return;
+      if (disabled) {return;}
       
       actions.handleHover(true);
       
@@ -252,7 +255,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     }, [disabled, actions, transitionToState, onMouseEnter]);
     
     const handleMouseLeave = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled) return;
+      if (disabled) {return;}
       
       actions.handleHover(false);
       
@@ -262,7 +265,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     }, [disabled, actions, transitionToState, onMouseLeave]);
     
     const handleFocus = useCallback((event: React.FocusEvent<HTMLButtonElement>) => {
-      if (disabled) return;
+      if (disabled) {return;}
       
       actions.handleFocus(true);
       
@@ -272,7 +275,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     }, [disabled, actions, transitionToState, onFocus]);
     
     const handleBlur = useCallback((event: React.FocusEvent<HTMLButtonElement>) => {
-      if (disabled) return;
+      if (disabled) {return;}
       
       actions.handleFocus(false);
       

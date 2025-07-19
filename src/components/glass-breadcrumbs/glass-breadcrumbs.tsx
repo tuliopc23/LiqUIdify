@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Home } from 'lucide-react';
 import { cn } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 
 const breadcrumbsVariants = cva(
   [
@@ -131,7 +131,7 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
                   <Home className="w-4 h-4" />
                 </motion.button>
               </li>
-              {displayItems.length > 0 && (
+              { 0 < displayItems.length && (
                 <li className="flex items-center">{separator}</li>
               )}
             </>
@@ -140,7 +140,7 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
           {displayItems.map((item, index) => {
             const isLast = index === displayItems.length - 1;
             const isClickable =
-              !isLast && (item.href || item.onClick) && item.label !== '...';
+              !isLast && (item.href || item.onClick) && '...' !== item.label;
 
             return (
               <React.Fragment key={index}>

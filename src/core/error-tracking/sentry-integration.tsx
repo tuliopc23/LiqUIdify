@@ -11,12 +11,12 @@
 
 import React from 'react';
 import * as Sentry from '@sentry/react';
-import type { User, Integration, SeverityLevel } from '@sentry/types';
+import type { Integration, SeverityLevel, User } from '@sentry/types';
 
 // Environment detection utilities
-const isProduction = process.env.NODE_ENV === 'production';
-const isDevelopment = process.env.NODE_ENV === 'development';
-const isTest = process.env.NODE_ENV === 'test';
+const isProduction = 'production' === process.env.NODE_ENV;
+const isDevelopment = 'development' === process.env.NODE_ENV;
+const isTest = 'test' === process.env.NODE_ENV;
 
 // Sentry configuration for LiqUIdify
 export interface LiqUIdifySentryConfig {
@@ -41,10 +41,10 @@ const DEFAULT_CONFIG: Required<LiqUIdifySentryConfig> = {
   dsn: '', // Should be set via environment variable
   environment: process.env.NODE_ENV || 'development',
   release: process.env.npm_package_version || '1.0.0',
-  sampleRate: isProduction ? 0.1 : 1.0, // 10% sampling in production
-  tracesSampleRate: isProduction ? 0.1 : 1.0,
+  sampleRate: isProduction ? 0.1 : 1, // 10% sampling in production
+  tracesSampleRate: isProduction ? 0.1 : 1,
   replaysSessionSampleRate: 0.01, // 1% of sessions
-  replaysOnErrorSampleRate: 1.0, // 100% of error sessions
+  replaysOnErrorSampleRate: 1, // 100% of error sessions
   enableUserPrivacy: true,
   enablePerformanceMonitoring: true,
   enableSessionReplay: isProduction,
@@ -100,7 +100,7 @@ export enum LiqUIdifyErrorType {
 class LiqUIdifySentryIntegration {
   private initialized = false;
   private sentryConfig: Required<LiqUIdifySentryConfig>;
-  private errorQueue: Array<{ error: Error; context?: LiqUIdifyErrorContext }> =
+  private errorQueue: { error: Error; context?: LiqUIdifyErrorContext }[] =
     [];
 
   constructor(config: LiqUIdifySentryConfig = {}) {
@@ -147,7 +147,7 @@ class LiqUIdifySentryIntegration {
       // Session replay for debugging using v9 API
       if (
         this.sentryConfig.enableSessionReplay &&
-        typeof window !== 'undefined'
+        'undefined' !== typeof window
       ) {
         integrations.push(
           Sentry.replayIntegration({
@@ -177,7 +177,7 @@ class LiqUIdifySentryIntegration {
         beforeSendTransaction: (event: any) =>
           this._beforeSendTransactionFilter(event),
         allowUrls:
-          this.sentryConfig.allowedUrls.length > 0
+          0 < this.sentryConfig.allowedUrls.length
             ? this.sentryConfig.allowedUrls
             : undefined,
         denyUrls: this.sentryConfig.denyUrls,
@@ -265,14 +265,14 @@ class LiqUIdifySentryIntegration {
         // Add performance tags for filtering
         if (
           context.performanceMetrics.renderTime &&
-          context.performanceMetrics.renderTime > 16
+          16 < context.performanceMetrics.renderTime
         ) {
           scope.setTag('liquidify.slow_render', 'true');
         }
 
         if (
           context.performanceMetrics.bundleSize &&
-          context.performanceMetrics.bundleSize > 30720
+          30_720 < context.performanceMetrics.bundleSize
         ) {
           scope.setTag('liquidify.large_bundle', 'true');
         }
@@ -304,7 +304,7 @@ class LiqUIdifySentryIntegration {
     context: LiqUIdifyErrorContext = {}
   ): void {
     if (!this.initialized || !this.sentryConfig.enablePerformanceMonitoring)
-      return;
+      {return;}
 
     Sentry.withScope(scope => {
       scope.setTag('liquidify.performance_issue', 'true');
@@ -312,8 +312,8 @@ class LiqUIdifySentryIntegration {
 
       // Set severity based on performance impact
       let level: SeverityLevel = 'info';
-      if (metrics.duration > 100) level = 'warning';
-      if (metrics.duration > 500) level = 'error';
+      if (100 < metrics.duration) {level = 'warning';}
+      if (500 < metrics.duration) {level = 'error';}
 
       scope.setLevel(level);
 
@@ -328,7 +328,7 @@ class LiqUIdifySentryIntegration {
           bundleSize: metrics.bundleSize,
           memoryUsage: metrics.memoryUsage,
           componentCount: metrics.componentCount,
-          threshold_exceeded: metrics.duration > 100,
+          threshold_exceeded: 100 < metrics.duration,
         },
       };
 
@@ -345,7 +345,7 @@ class LiqUIdifySentryIntegration {
     level: SeverityLevel = 'info',
     data?: Record<string, any>
   ): void {
-    if (!this.initialized) return;
+    if (!this.initialized) {return;}
 
     Sentry.addBreadcrumb({
       message,
@@ -362,7 +362,7 @@ class LiqUIdifySentryIntegration {
    * Set user context with privacy protection
    */
   public setUserContext(user?: Partial<User>): void {
-    if (!this.initialized) return;
+    if (!this.initialized) {return;}
 
     const userContext: User = {
       id: this.sentryConfig.enableUserPrivacy
@@ -385,12 +385,12 @@ class LiqUIdifySentryIntegration {
   public createErrorBoundary() {
     if (!this.sentryConfig.enableErrorBoundaries) {
       return ({ children }: { children: React.ReactNode }) =>
-        React.createElement(React.Fragment, null, children);
+        React.createElement(React.Fragment, undefined, children);
     }
 
     return Sentry.withErrorBoundary(
       ({ children }: { children: React.ReactNode }) =>
-        React.createElement(React.Fragment, null, children),
+        React.createElement(React.Fragment, undefined, children),
       {
         fallback: ({
           error,
@@ -471,17 +471,17 @@ class LiqUIdifySentryIntegration {
   private beforeSendFilter(event: any, _hint?: any): any {
     // Skip if in development and error is not LiqUIdify related
     if (isDevelopment && !this.isLiqUIdifyError(event)) {
-      return null;
+      return ;
     }
 
     // Filter out common browser extension errors
     if (this.isBrowserExtensionError(event)) {
-      return null;
+      return ;
     }
 
     // Filter out network errors that aren't actionable
     if (this.isNetworkError(event)) {
-      return null;
+      return ;
     }
 
     // Sanitize sensitive data
@@ -494,7 +494,7 @@ class LiqUIdifySentryIntegration {
   private _beforeSendTransactionFilter(event: any): any {
     // Only send performance data for LiqUIdify components
     if (!event.transaction?.includes('liquidify')) {
-      return null;
+      return ;
     }
     return event;
   }
@@ -596,7 +596,7 @@ class LiqUIdifySentryIntegration {
         )
       ) {
         sanitized[key] = '[Filtered]';
-      } else if (typeof value === 'object' && value !== null) {
+      } else if ('object' === typeof value && null !== value) {
         sanitized[key] = this.sanitizeObject(value);
       } else {
         sanitized[key] = value;
@@ -625,7 +625,7 @@ class LiqUIdifySentryIntegration {
    * Generate anonymous user ID
    */
   private generateAnonymousId(): string {
-    if (typeof window !== 'undefined' && window.localStorage) {
+    if ('undefined' !== typeof window && window.localStorage) {
       let id = localStorage.getItem('liquidify_anonymous_id');
       if (!id) {
         id = 'anon_' + Math.random().toString(36).substr(2, 9);
@@ -652,7 +652,7 @@ class LiqUIdifySentryIntegration {
   private setupPerformanceMonitoring(): void {
     if (
       !this.sentryConfig.enablePerformanceMonitoring ||
-      typeof window === 'undefined'
+      'undefined' === typeof window
     ) {
       return;
     }
@@ -662,7 +662,7 @@ class LiqUIdifySentryIntegration {
       import('web-vitals').then(webVitals => {
         const { onCLS, onINP, onLCP } = webVitals;
         onCLS((metric: any) => {
-          if (metric.value > 0.1) {
+          if (0.1 < metric.value) {
             // CLS threshold
             this.capturePerformanceIssue('cumulative-layout-shift', {
               duration: metric.value * 1000,
@@ -671,7 +671,7 @@ class LiqUIdifySentryIntegration {
         });
 
         onINP((metric: any) => {
-          if (metric.value > 100) {
+          if (100 < metric.value) {
             // FID threshold
             this.capturePerformanceIssue('first-input-delay', {
               duration: metric.value,
@@ -680,7 +680,7 @@ class LiqUIdifySentryIntegration {
         });
 
         onLCP((metric: any) => {
-          if (metric.value > 2500) {
+          if (2500 < metric.value) {
             // LCP threshold
             this.capturePerformanceIssue('largest-contentful-paint', {
               duration: metric.value,
@@ -688,7 +688,7 @@ class LiqUIdifySentryIntegration {
           }
         });
       });
-    } catch (error) {
+    } catch {
       // web-vitals not available, skip
     }
   }
@@ -714,7 +714,7 @@ class LiqUIdifySentryIntegration {
 }
 
 // Singleton instance
-let sentryIntegration: LiqUIdifySentryIntegration | null = null;
+let sentryIntegration: LiqUIdifySentryIntegration | null;
 
 /**
  * Initialize LiqUIdify Sentry integration

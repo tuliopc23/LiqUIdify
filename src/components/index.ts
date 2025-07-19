@@ -26,26 +26,27 @@ export {
 } from './enhanced-apple-liquid-glass';
 
 // Form Components
-export { GlassButton, type GlassButtonProps } from './glass-button/index';
-export { GlassInput, type GlassInputProps } from './glass-input/index';
-export {
+import { 
+  GlassButton, type GlassButtonProps } from './glass-button/index';
+import { GlassInput, type GlassInputProps } from './glass-input/index';
+import {
   GlassNumberInput,
   type GlassNumberInputProps,
 } from './glass-number-input/index';
-export { GlassTextarea, type GlassTextareaProps } from './glass-textarea/index';
-export {
+import { GlassTextarea, type GlassTextareaProps } from './glass-textarea/index';
+import {
   GlassFileUpload,
   type GlassFileUploadProps,
 } from './glass-file-upload/index';
-export {
+import {
   GlassSelect,
   type GlassSelectProps,
   type GlassSelectOption,
 } from './glass-select/index';
-export { GlassCheckbox, type GlassCheckboxProps } from './glass-checkbox/index';
-export { GlassSwitch, type GlassSwitchProps } from './glass-switch/index';
-export { GlassSlider, type GlassSliderProps } from './glass-slider/index';
-export {
+import { GlassCheckbox, type GlassCheckboxProps } from './glass-checkbox/index';
+import { GlassSwitch, type GlassSwitchProps } from './glass-switch/index';
+import { GlassSlider, type GlassSliderProps } from './glass-slider/index';
+imp...
   GlassFormField,
   type GlassFormFieldProps,
 } from './glass-form-field/index';

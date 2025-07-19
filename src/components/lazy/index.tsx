@@ -1,11 +1,12 @@
-import React, { lazy, Suspense, ComponentType } from 'react';
+import type { ComponentType } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { GlassSpinner } from '../glass-spinner';
 
 // Import types for lazy components' props
 import type {
-  LineChartProps,
   BarChartProps,
   DonutChartProps,
+  LineChartProps,
 } from '../glass-chart';
 import type { CommandPaletteProps } from '../glass-command';
 import type { ComponentShowcaseProps } from '../component-showcase';
@@ -84,7 +85,7 @@ export const LazyComponentShowcase = createLazyComponent(() =>
 export function createPreloadableComponent<T extends ComponentType<any>>(
   importFn: () => Promise<{ default: T }>
 ) {
-  let preloadPromise: Promise<{ default: T }> | null = null;
+  let preloadPromise: Promise<{ default: T }> | null;
 
   const preload = () => {
     if (!preloadPromise) {
@@ -113,7 +114,7 @@ export function useLazyLoad(
   options?: IntersectionObserverInit
 ) {
   React.useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current) {return;}
 
     const observer = new IntersectionObserver(
       entries => {

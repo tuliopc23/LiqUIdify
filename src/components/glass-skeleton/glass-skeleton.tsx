@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 
 const skeletonVariants = cva(
   [
@@ -74,7 +74,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
 
     const skeletonStyle = {
       width: width,
-      height: height || (shape === 'circle' ? width : undefined),
+      height: height || ('circle' === shape ? width : undefined),
       ...style,
     };
 
@@ -87,9 +87,9 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
           initial={animated ? { opacity: 0.4 } : undefined}
           animate={
             animated
-              ? variant === 'pulse'
+              ? ('pulse' === variant 
                 ? pulseAnimation
-                : { opacity: [0.4, 0.8, 0.4] }
+                : { opacity: [0.4, 0.8, 0.4] })
               : undefined
           }
           transition={
@@ -103,7 +103,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
               : undefined
           }
         >
-          {variant === 'shimmer' && animated && (
+          { 'shimmer' === variant && animated && (
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
               animate={shimmerAnimation}
@@ -119,7 +119,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
       )
     );
 
-    if (count === 1) {
+    if (1 === count) {
       return <SkeletonItem index={0} ref={ref} />;
     }
 

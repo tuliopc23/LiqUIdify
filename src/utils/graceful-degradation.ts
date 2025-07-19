@@ -3,7 +3,7 @@
  * Provides fallbacks when advanced features aren't supported
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export interface FeatureSupport {
   animations: boolean;
@@ -51,7 +51,7 @@ export interface DegradationConfig {
 
 export class GracefulDegradationManager {
   private static instance: GracefulDegradationManager;
-  private featureSupport: FeatureSupport | null = null;
+  private featureSupport: FeatureSupport | null = undefined;
   private config: DegradationConfig;
   private listeners: Set<(support: FeatureSupport) => void> = new Set();
 
@@ -90,7 +90,7 @@ export class GracefulDegradationManager {
     support.serviceWorker = 'serviceWorker' in navigator;
 
     // WebAssembly support
-    support.webAssembly = typeof WebAssembly !== 'undefined';
+    support.webAssembly = 'undefined' !== typeof WebAssembly;
 
     // Observer APIs
     support.intersectionObserver = 'IntersectionObserver' in window;
@@ -178,7 +178,9 @@ export class GracefulDegradationManager {
   }
 
   private checkCSSFeature(property: string): boolean {
-    if (typeof window === 'undefined') return false;
+    if ('undefined' === typeof window) {
+      return false;
+    }
 
     const element = document.createElement('div');
     const capitalizedProperty =
@@ -193,7 +195,9 @@ export class GracefulDegradationManager {
   }
 
   private checkWebGLSupport(): boolean {
-    if (typeof window === 'undefined') return false;
+    if ('undefined' === typeof window) {
+      return false;
+    }
 
     try {
       const canvas = document.createElement('canvas');
@@ -206,7 +210,9 @@ export class GracefulDegradationManager {
   }
 
   private checkWebGL2Support(): boolean {
-    if (typeof window === 'undefined') return false;
+    if ('undefined' === typeof window) {
+      return false;
+    }
 
     try {
       const canvas = document.createElement('canvas');
@@ -218,7 +224,9 @@ export class GracefulDegradationManager {
   }
 
   private checkCanvasSupport(): boolean {
-    if (typeof window === 'undefined') return false;
+    if ('undefined' === typeof window) {
+      return false;
+    }
 
     try {
       const canvas = document.createElement('canvas');
@@ -253,14 +261,20 @@ export class GracefulDegradationManager {
   }
 
   public shouldUseFallback(feature: keyof FeatureSupport): boolean {
-    if (!this.config.enableFallbacks) return false;
-    if (!this.featureSupport) return true;
+    if (!this.config.enableFallbacks) {
+      return false;
+    }
+    if (!this.featureSupport) {
+      return true;
+    }
 
     return !this.featureSupport[feature];
   }
 
   public getFallbackClass(feature: string, baseClass: string = ''): string {
-    if (!this.config.enableCSSFallbacks) return baseClass;
+    if (!this.config.enableCSSFallbacks) {
+      return baseClass;
+    }
 
     const shouldFallback = this.shouldUseFallback(
       feature as keyof FeatureSupport
@@ -276,7 +290,7 @@ export class GracefulDegradationManager {
     downlink?: number;
     rtt?: number;
   }> {
-    if (typeof window === 'undefined') {
+    if ('undefined' === typeof window) {
       return { online: true };
     }
 
@@ -296,14 +310,20 @@ export class GracefulDegradationManager {
   }
 
   public getPerformanceLevel(): 'high' | 'medium' | 'low' {
-    if (typeof window === 'undefined') return 'high';
+    if ('undefined' === typeof window) {
+      return 'high';
+    }
 
     const memory = (navigator as any).deviceMemory;
     const cores = navigator.hardwareConcurrency;
 
     if (memory && cores) {
-      if (memory >= 8 && cores >= 8) return 'high';
-      if (memory >= 4 && cores >= 4) return 'medium';
+      if (8 <= memory && 8 <= cores) {
+        return 'high';
+      }
+      if (4 <= memory && 4 <= cores) {
+        return 'medium';
+      }
       return 'low';
     }
 
@@ -312,8 +332,12 @@ export class GracefulDegradationManager {
       const connection = (navigator as any).connection;
       const effectiveType = connection.effectiveType;
 
-      if (effectiveType === '4g') return 'high';
-      if (effectiveType === '3g') return 'medium';
+      if ('4g' === effectiveType) {
+        return 'high';
+      }
+      if ('3g' === effectiveType) {
+        return 'medium';
+      }
       return 'low';
     }
 
@@ -325,7 +349,7 @@ export class GracefulDegradationManager {
 export function useGracefulDegradation() {
   const [manager] = useState(() => GracefulDegradationManager.getInstance());
   const [featureSupport, setFeatureSupport] = useState<FeatureSupport | null>(
-    null
+    undefined
   );
   const [isLoading, setIsLoading] = useState(true);
 
@@ -413,10 +437,10 @@ export function useNetworkAwareFallback() {
   return {
     networkStatus,
     performanceLevel,
-    shouldReduceMotion: performanceLevel === 'low',
-    shouldReduceQuality: performanceLevel === 'low' || !networkStatus.online,
+    shouldReduceMotion: 'low' === performanceLevel,
+    shouldReduceQuality: 'low' === performanceLevel || !networkStatus.online,
     shouldUseStaticFallbacks:
-      performanceLevel === 'low' || !networkStatus.online,
+      'low' === performanceLevel || !networkStatus.online,
   };
 }
 
@@ -427,7 +451,9 @@ export function useAccessibilityFallback() {
   const [highContrast, setHighContrast] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if ('undefined' === typeof window) {
+      return;
+    }
 
     const mediaQueryMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'

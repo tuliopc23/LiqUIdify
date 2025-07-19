@@ -1,9 +1,9 @@
 import React, {
+  useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  useCallback,
-  useMemo,
 } from 'react';
 import { cn } from '@/lib/glass-utils';
 
@@ -112,7 +112,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 
   // Process queue
   const processQueue = useCallback(() => {
-    if (processingRef.current || announcementQueue.length === 0) return;
+    if (processingRef.current || 0 === announcementQueue.length) {return;}
 
     processingRef.current = true;
     const announcement = announcementQueue[0];
@@ -124,7 +124,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 
     // Apply contextual prefix if enabled
     const messageToAnnounce =
-      contextualPrefix && announcement.context !== 'general'
+      contextualPrefix && 'general' !== announcement.context
         ? `${CONTEXT_PREFIXES[announcement.context]}${announcement.message}`
         : announcement.message;
 
@@ -159,7 +159,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
       if (dedupKey) {
         const lastTime = dedupMapRef.current.get(dedupKey);
         const now = Date.now();
-        if (lastTime && now - lastTime < 1000) {
+        if (lastTime && 1000 > now - lastTime) {
           return; // Skip duplicate within 1 second
         }
         dedupMapRef.current.set(dedupKey, now);
@@ -202,7 +202,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
     if (message && !queueingEnabled) {
       setCurrentMessage(message);
 
-      if (clearDelay > 0) {
+      if (0 < clearDelay) {
         timeoutRef.current = setTimeout(() => {
           setCurrentMessage(undefined);
         }, clearDelay);
@@ -222,7 +222,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
   useEffect(() => {
     if (
       queueingEnabled &&
-      announcementQueue.length > 0 &&
+      0 < announcementQueue.length &&
       !processingRef.current
     ) {
       processQueue();
@@ -234,12 +234,12 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
     const cleanupInterval = setInterval(() => {
       const now = Date.now();
       dedupMapRef.current.forEach((time, key) => {
-        if (now - time > 60000) {
+        if (60_000 < now - time) {
           // Remove entries older than 1 minute
           dedupMapRef.current.delete(key);
         }
       });
-    }, 30000); // Clean every 30 seconds
+    }, 30_000); // Clean every 30 seconds
 
     return () => clearInterval(cleanupInterval);
   }, []);
@@ -291,7 +291,7 @@ export function useAnnouncement() {
       if (dedupKey) {
         const lastTime = dedupMapRef.current.get(dedupKey);
         const now = Date.now();
-        if (lastTime && now - lastTime < 1000) {
+        if (lastTime && 1000 > now - lastTime) {
           return; // Skip duplicate
         }
         dedupMapRef.current.set(dedupKey, now);
@@ -308,7 +308,7 @@ export function useAnnouncement() {
         setAnnouncementOptions(options);
 
         // Clear after delay if specified
-        if (clearDelay > 0) {
+        if (0 < clearDelay) {
           timeoutRef.current = setTimeout(() => {
             setAnnouncement('');
           }, clearDelay);
@@ -412,7 +412,7 @@ class AnnouncementManager {
     if (dedupKey) {
       const lastTime = this.dedupMap.get(dedupKey);
       const now = Date.now();
-      if (lastTime && now - lastTime < 1000) {
+      if (lastTime && 1000 > now - lastTime) {
         return;
       }
       this.dedupMap.set(dedupKey, now);
@@ -438,13 +438,13 @@ class AnnouncementManager {
   }
 
   private async processQueue() {
-    if (this.processing || this.queue.length === 0) return;
+    if (this.processing || 0 === this.queue.length) {return;}
 
     this.processing = true;
     const announcement = this.queue.shift()!;
 
     // Apply delay
-    if (announcement.delay && announcement.delay > 0) {
+    if (announcement.delay && 0 < announcement.delay) {
       await new Promise(resolve => setTimeout(resolve, announcement.delay));
     }
 
@@ -534,7 +534,7 @@ export const GlassLiveRegionProvider: React.FC<{
   const politeAnnouncements = useMemo(
     () =>
       announcements.filter(
-        a => PRIORITY_MAP[a.options.priority || 'medium'] === 'polite'
+        a => 'polite' === PRIORITY_MAP[a.options.priority || 'medium']
       ),
     [announcements]
   );
@@ -542,7 +542,7 @@ export const GlassLiveRegionProvider: React.FC<{
   const assertiveAnnouncements = useMemo(
     () =>
       announcements.filter(
-        a => PRIORITY_MAP[a.options.priority || 'medium'] === 'assertive'
+        a => 'assertive' === PRIORITY_MAP[a.options.priority || 'medium']
       ),
     [announcements]
   );

@@ -44,12 +44,12 @@ export interface ValidationChecklist {
 
 export interface ValidationResult {
   category: string;
-  checks: Array<{
+  checks: {
     name: string;
     passed: boolean;
     details: string;
     severity: 'critical' | 'high' | 'medium' | 'low';
-  }>;
+  }[];
   score: number;
   recommendations: string[];
 }
@@ -332,7 +332,7 @@ export class STierValidator {
         report += `- ${status} **${check.name}**: ${check.details}\n`;
       });
 
-      if (result.recommendations.length > 0) {
+      if (0 < result.recommendations.length) {
         report += `\n**Recommendations:**\n`;
         result.recommendations.forEach(rec => {
           report += `- ${rec}\n`;

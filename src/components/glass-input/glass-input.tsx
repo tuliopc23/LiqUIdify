@@ -1,10 +1,10 @@
 import {
   forwardRef,
-  useState,
-  useRef,
+  useCallback,
   useEffect,
   useId,
-  useCallback,
+  useRef,
+  useState,
 } from 'react';
 import {
   cn,
@@ -12,7 +12,7 @@ import {
   getGlassClass,
   microInteraction,
 } from '@/lib/glass-utils';
-import { Search, Eye, EyeOff, X } from 'lucide-react';
+import { Eye, EyeOff, Search, X } from 'lucide-react';
 
 // Type definitions for enhanced TypeScript support
 type ComponentVariant = 'default' | 'search' | 'password' | 'email';
@@ -58,7 +58,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
         (
           internalInputRef as React.MutableRefObject<HTMLInputElement | null>
         ).current = node;
-        if (typeof ref === 'function') {
+        if ('function' === typeof ref) {
           ref(node);
         } else if (ref) {
           (ref as React.MutableRefObject<HTMLInputElement | null>).current =
@@ -110,28 +110,28 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
     const getIconPadding = () => {
       let pr = 'pr-4'; // Default right padding
-      if (variant === 'password' || (clearable && hasValue) || rightIcon) {
+      if ('password' === variant || (clearable && hasValue) || rightIcon) {
         pr = 'pr-10'; // Space for one icon
       }
       if (
-        (variant === 'password' && clearable && hasValue) ||
-        (variant === 'password' && rightIcon) ||
+        ('password' === variant && clearable && hasValue) ||
+        ('password' === variant && rightIcon) ||
         (clearable && hasValue && rightIcon)
       ) {
         pr = 'pr-20'; // Space for two icons if needed, adjust as per visual design
       }
 
-      if (leftIcon || variant === 'search') return `pl-10 ${pr}`;
+      if (leftIcon || 'search' === variant) {return `pl-10 ${pr}`;}
       return `pl-4 ${pr}`;
     };
 
     const inputType =
-      variant === 'password' ? (showPassword ? 'text' : 'password') : type;
+      'password' === variant ? (showPassword ? 'text' : 'password') : type;
 
     return (
       <div className="relative w-full">
         <div className="relative flex items-center w-full">
-          {variant === 'search' && !leftIcon && (
+          { 'search' === variant && !leftIcon && (
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary pointer-events-none" />
           )}
           {leftIcon && (
@@ -162,7 +162,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 <X className="h-4 w-4" />
               </button>
             )}
-            {variant === 'password' && (
+            { 'password' === variant && (
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -177,7 +177,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 )}
               </button>
             )}
-            {rightIcon && variant !== 'password' && !clearable && (
+            {rightIcon && 'password' !== variant && !clearable && (
               <div className="text-secondary pointer-events-none">
                 {rightIcon}
               </div>

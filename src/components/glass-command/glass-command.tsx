@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
-  Search,
-  Command,
   ArrowRight,
-  Hash,
-  User,
-  Settings,
+  Command,
   FileText,
+  Hash,
+  Search,
+  Settings,
+  User,
   Zap,
 } from 'lucide-react';
 import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
@@ -53,7 +53,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const categorizedItems = filteredItems.reduce(
     (acc, item) => {
       const category = item.category || 'General';
-      if (!acc[category]) acc[category] = [];
+      if (!acc[category]) {acc[category] = [];}
       acc[category].push(item);
       return acc;
     },
@@ -66,13 +66,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Open command palette
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && 'k' === e.key) {
         e.preventDefault();
         setIsOpen(true);
         return;
       }
 
-      if (!isOpen) return;
+      if (!isOpen) {return;}
 
       switch (e.key) {
         case 'ArrowDown':
@@ -99,11 +99,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       }
     };
 
-    if (typeof document !== 'undefined') {
+    if ('undefined' !== typeof document) {
       document.addEventListener('keydown', handleKeyDown);
     }
     return () => {
-      if (typeof document !== 'undefined') {
+      if ('undefined' !== typeof document) {
         document.removeEventListener('keydown', handleKeyDown);
       }
     };
@@ -207,8 +207,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   }
 
   // SSR safety check
-  if (typeof window === 'undefined') {
-    return null;
+  if ('undefined' === typeof window) {
+    return ;
   }
 
   return createPortal(
@@ -251,7 +251,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
         {/* Results */}
         <div className="max-h-96 overflow-y-auto">
-          {Object.entries(categorizedItems).length === 0 ? (
+          { 0 === Object.entries(categorizedItems).length ? (
             <div className="p-8 text-center">
               <Search className="w-8 h-8 text-[var(--text-tertiary)] mx-auto mb-2" />
               <p className="text-[var(--text-secondary)]">No results found</p>

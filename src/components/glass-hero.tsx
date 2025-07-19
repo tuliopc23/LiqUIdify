@@ -1,13 +1,14 @@
-import React, { forwardRef, useRef, useCallback } from 'react';
-import { motion, Variants } from 'framer-motion';
+import React, { forwardRef, useCallback, useRef } from 'react';
+import type { Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/glass-utils';
-import { useLiquidGlass, useContentAwareGlass } from '@/hooks/use-liquid-glass';
+import { useContentAwareGlass, useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
 import { GlassButton } from './glass-button';
 import { createComponentSize } from '@/types/branded';
 import {
-  fadeInUpLarge,
   containerFadeInFast,
+  fadeInUpLarge,
 } from '@/lib/framer-motion-constants';
 
 export interface GlassHeroProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -50,7 +51,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
       children,
       ...props
     },
-    ref,
+    ref
   ) => {
     const contentRef = useRef<HTMLDivElement>(null);
     const { specularHighlights } = useLiquidGlass();
@@ -66,13 +67,13 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           (magneticRef as React.MutableRefObject<HTMLElement | null>).current =
             node;
         }
-        if (typeof ref === 'function') {
+        if ('function' === typeof ref) {
           ref(node);
         } else if (ref) {
           (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }
       },
-      [enableMagnetic, magneticRef, ref],
+      [enableMagnetic, magneticRef, ref]
     );
 
     const sizeClasses = {
@@ -102,15 +103,15 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
 
     const parallaxVariants = enableParallax
       ? {
-        initial: { y: 0 },
-        animate: { y: -20 },
-        transition: {
-          duration: 2,
-          repeat: Infinity,
-          repeatType: 'reverse' as const,
-          ease: 'easeInOut' as const,
-        },
-      }
+          initial: { y: 0 },
+          animate: { y: -20 },
+          transition: {
+            duration: 2,
+            repeat: Infinity,
+            repeatType: 'reverse' as const,
+            ease: 'easeInOut' as const,
+          },
+        }
       : {};
 
     return (
@@ -121,7 +122,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           'liquid-glass-adaptive liquid-glass-depth-2',
           specularHighlights && 'liquid-glass-specular',
           sizeClasses[size],
-          className,
+          className
         )}
         style={{
           transform: enableMagnetic ? transform : undefined,
@@ -151,8 +152,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         )}
 
         {/* Background Overlay */}
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-black/5 dark:from-black/20 dark:via-transparent dark:to-black/40 -z-5" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-black/5 dark:from-black/20 dark:via-transparent dark:to-black/40 -z-5" />
 
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden -z-10">
@@ -218,14 +218,14 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         <motion.div
           className={cn(
             'relative z-10 flex flex-col h-full max-w-7xl mx-auto',
-            variantClasses[variant],
+            variantClasses[variant]
           )}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           {...parallaxVariants}
         >
-          {variant === 'split' ? (
+          {'split' === variant ? (
             <div className="grid lg:grid-cols-2 gap-12 items-center h-full">
               <div className="space-y-8">
                 {subtitle && (
@@ -241,7 +241,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                   variants={itemVariants}
                   className={cn(
                     'font-bold tracking-tight text-[var(--text-primary)]',
-                    titleSizes[size],
+                    titleSizes[size]
                   )}
                 >
                   {title}
@@ -304,7 +304,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                 variants={itemVariants}
                 className={cn(
                   'font-bold tracking-tight text-[var(--text-primary)] max-w-5xl',
-                  titleSizes[size],
+                  titleSizes[size]
                 )}
               >
                 {title}
@@ -402,7 +402,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         </div>
       </div>
     );
-  },
+  }
 );
 
 GlassHero.displayName = 'GlassHero';

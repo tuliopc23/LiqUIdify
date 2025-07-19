@@ -3,7 +3,11 @@
  * Enables type-safe component polymorphism with 'as' prop
  */
 
-import { ComponentPropsWithoutRef, ElementType, ReactElement } from 'react';
+import type {
+  ComponentPropsWithoutRef,
+  ElementType,
+  ReactElement,
+} from 'react';
 
 /**
  * Utility type to extract ref type from element
@@ -180,9 +184,9 @@ export type PolymorphicAriaProps<T extends ElementType> = {
 /**
  * Type-safe data attributes for polymorphic components
  */
-export type PolymorphicDataProps = {
+export interface PolymorphicDataProps {
   [key: `data-${string}`]: string | number | boolean | undefined;
-};
+}
 
 /**
  * Complete polymorphic props with all attributes

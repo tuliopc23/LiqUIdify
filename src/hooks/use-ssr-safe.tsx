@@ -1,21 +1,21 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  isBrowser,
-  safeWindow,
-  safeDocument,
-  getWindowDimensions,
-  getScrollPosition,
-  safeAddEventListener,
-  prefersReducedMotion,
-  prefersDarkScheme,
-  safeLocalStorage,
-  safeSessionStorage,
   getLocalStorageItem,
-  setLocalStorageItem,
+  getScrollPosition,
+  getWindowDimensions,
+  isBrowser,
+  prefersDarkScheme,
+  prefersReducedMotion,
+  safeAddEventListener,
+  safeDocument,
   safeDynamicImport,
-  safeResizeObserver,
   safeIntersectionObserver,
+  safeLocalStorage,
   safeMutationObserver,
+  safeResizeObserver,
+  safeSessionStorage,
+  safeWindow,
+  setLocalStorageItem,
 } from '../utils/ssr-utils';
 
 /**
@@ -26,7 +26,9 @@ export const useWindowDimensions = () => {
   const [dimensions, setDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const handleResize = () => {
       setDimensions(getWindowDimensions());
@@ -47,7 +49,9 @@ export const useScrollPosition = () => {
   const [position, setPosition] = useState(getScrollPosition());
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const handleScroll = () => {
       setPosition(getScrollPosition());
@@ -71,10 +75,14 @@ export const useMediaQuery = (query: string): boolean => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const win = safeWindow();
-    if (!win?.matchMedia) return;
+    if (!win?.matchMedia) {
+      return;
+    }
 
     const mediaQuery = win.matchMedia(query);
     setMatches(mediaQuery.matches);
@@ -132,10 +140,12 @@ export const useLocalStorage = <T,>(
 
   // Sync state when storage changes in other tabs
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === key && e.newValue !== null) {
+      if (e.key === key && null !== e.newValue) {
         try {
           setStoredValue(JSON.parse(e.newValue));
         } catch {
@@ -162,10 +172,14 @@ export const useSessionStorage = <T,>(
   initialValue: T
 ): [T, (value: T) => void, () => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (!isBrowser()) return initialValue;
+    if (!isBrowser()) {
+      return initialValue;
+    }
 
     const storage = safeSessionStorage();
-    if (!storage) return initialValue;
+    if (!storage) {
+      return initialValue;
+    }
 
     try {
       const item = storage.getItem(key);
@@ -211,27 +225,29 @@ export const useDynamicImport = <T,>(
   importFn: () => Promise<T>,
   deps: React.DependencyList = []
 ): { module: T | null; loading: boolean; error: Error | null } => {
-  const [module, setModule] = useState<T | null>(null);
+  const [module, setModule] = useState<T | null>(undefined);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error | null>(undefined);
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     let cancelled = false;
 
     const loadModule = async () => {
       setLoading(true);
-      setError(null);
+      setError(undefined);
 
       try {
         const result = await safeDynamicImport(importFn);
         if (!cancelled) {
           setModule(result);
         }
-      } catch (err) {
+      } catch (error) {
         if (!cancelled) {
-          setError(err instanceof Error ? err : new Error('Import failed'));
+          setError(error instanceof Error ? error : new Error('Import failed'));
         }
       } finally {
         if (!cancelled) {
@@ -262,7 +278,9 @@ export const useUserPreferences = () => {
   });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     setPreferences({
       prefersReducedMotion: prefersReducedMotion(),
@@ -270,7 +288,9 @@ export const useUserPreferences = () => {
     });
 
     const win = safeWindow();
-    if (!win?.matchMedia) return;
+    if (!win?.matchMedia) {
+      return;
+    }
 
     const motionQuery = win.matchMedia('(prefers-reduced-motion: reduce)');
     const darkQuery = win.matchMedia('(prefers-color-scheme: dark)');
@@ -323,10 +343,14 @@ export const useIntersectionObserver = (
   callbackRef.current = callback;
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const element = elementRef.current;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     const observer = safeIntersectionObserver(
       (...args) => callbackRef.current(...args),
@@ -355,10 +379,14 @@ export const useResizeObserver = (callback: ResizeObserverCallback) => {
   callbackRef.current = callback;
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const element = elementRef.current;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     const observer = safeResizeObserver((...args) =>
       callbackRef.current(...args)
@@ -390,10 +418,14 @@ export const useMutationObserver = (
   callbackRef.current = callback;
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const element = elementRef.current;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     const observer = safeMutationObserver((...args) =>
       callbackRef.current(...args)
@@ -416,10 +448,14 @@ export const useDocumentVisibility = (): boolean => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const doc = safeDocument();
-    if (!doc) return;
+    if (!doc) {
+      return;
+    }
 
     const handleVisibilityChange = () => {
       setIsVisible(!doc.hidden);
@@ -445,10 +481,14 @@ export const useOnlineStatus = (): boolean => {
   const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const nav = safeWindow()?.navigator;
-    if (!nav) return;
+    if (!nav) {
+      return;
+    }
 
     setIsOnline(nav.onLine);
 

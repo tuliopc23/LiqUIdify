@@ -135,7 +135,7 @@ export class QualityGateSystem {
       score -= testingResult.deduction;
     }
 
-    const passed = score >= 80 && !issues.some(i => i.severity === 'critical');
+    const passed = 80 <= score && !issues.some(i => 'critical' === i.severity);
     score = Math.max(0, Math.min(100, score));
 
     return {
@@ -278,23 +278,23 @@ export class QualityGateSystem {
   private generateRecommendations(issues: QualityIssue[]): string[] {
     const recommendations: string[] = [];
 
-    const criticalIssues = issues.filter(i => i.severity === 'critical');
-    const highIssues = issues.filter(i => i.severity === 'high');
+    const criticalIssues = issues.filter(i => 'critical' === i.severity);
+    const highIssues = issues.filter(i => 'high' === i.severity);
 
-    if (criticalIssues.length > 0) {
+    if (0 < criticalIssues.length) {
       recommendations.push(
         `Address ${criticalIssues.length} critical issues before deployment`
       );
     }
 
-    if (highIssues.length > 0) {
+    if (0 < highIssues.length) {
       recommendations.push(
         `Fix ${highIssues.length} high-priority issues to improve quality score`
       );
     }
 
     const fixableIssues = issues.filter(i => i.fixable);
-    if (fixableIssues.length > 0) {
+    if (0 < fixableIssues.length) {
       recommendations.push(
         `Apply auto-fixes for ${fixableIssues.length} fixable issues`
       );

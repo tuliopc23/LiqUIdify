@@ -7,10 +7,10 @@
 
 import React, { forwardRef, useMemo } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import {
+import type {
+  ComponentPropsBuilder,
   CompoundComponentProps,
   UnifiedGlassProps,
-  ComponentPropsBuilder,
 } from './base-component';
 import { cn } from '@/lib/glass-utils';
 
@@ -262,7 +262,7 @@ export function useCompoundComponentState<T extends Record<string, any>>(
   const mergedState = useMemo(
     () => ({
       ...initialState,
-      ...(contextValue || {}),
+      ...contextValue,
       ...state,
     }),
     [initialState, contextValue, state]

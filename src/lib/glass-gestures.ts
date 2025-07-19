@@ -4,7 +4,7 @@
  * Requirements: 5.2, 5.4 - Gesture recognition with haptic feedback simulation
  */
 
-import { useRef, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export interface GestureEvent {
   type: 'start' | 'move' | 'end' | 'cancel';
@@ -88,7 +88,7 @@ export const DEFAULT_GESTURE_CONFIG: GestureConfig = {
   enableHover: true,
   enableMagnetic: true,
   enableHaptics: false,
-  sensitivity: 1.0,
+  sensitivity: 1,
   threshold: {
     swipe: 50,
     pinch: 0.1,
@@ -219,7 +219,7 @@ export class GlassGestureRecognizer {
   private handleTouchStart = (e: TouchEvent): void => {
     e.preventDefault();
 
-    if (e.touches.length === 1) {
+    if (1 === e.touches.length) {
       const touch = e.touches[0];
       if (touch) {
         this.touches.set(touch.identifier, touch);
@@ -230,7 +230,7 @@ export class GlassGestureRecognizer {
         );
         this.triggerHaptic('light');
       }
-    } else if (e.touches.length === 2) {
+    } else if (2 === e.touches.length) {
       // Handle multi-touch gestures
       this.handleMultiTouch(e.touches);
     }
@@ -239,18 +239,18 @@ export class GlassGestureRecognizer {
   private handleTouchMove = (e: TouchEvent): void => {
     e.preventDefault();
 
-    if (e.touches.length === 1 && this.isTracking) {
+    if (1 === e.touches.length && this.isTracking) {
       const touch = e.touches[0];
       if (touch) {
         this.updateGesture(touch.clientX, touch.clientY);
       }
-    } else if (e.touches.length === 2) {
+    } else if (2 === e.touches.length) {
       this.handleMultiTouchMove(e.touches);
     }
   };
 
   private handleTouchEnd = (e: TouchEvent): void => {
-    if (e.changedTouches.length === 1 && this.isTracking) {
+    if (1 === e.changedTouches.length && this.isTracking) {
       const touch = e.changedTouches[0];
       if (touch) {
         this.touches.delete(touch.identifier);
@@ -302,7 +302,7 @@ export class GlassGestureRecognizer {
   };
 
   private handleKeyUp = (e: KeyboardEvent): void => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if ('Enter' === e.key || ' ' === e.key) {
       e.preventDefault();
     }
   };
@@ -330,12 +330,14 @@ export class GlassGestureRecognizer {
   }
 
   private updateGesture(x: number, y: number): void {
-    if (!this.isTracking) return;
+    if (!this.isTracking) {
+      return;
+    }
 
     const now = performance.now();
     const deltaTime = now - this.lastTime;
 
-    if (deltaTime > 0) {
+    if (0 < deltaTime) {
       const deltaX = x - this.lastPosition.x;
       const deltaY = y - this.lastPosition.y;
 
@@ -355,7 +357,7 @@ export class GlassGestureRecognizer {
     );
 
     const direction =
-      distance > 0
+      0 < distance
         ? {
             x: (x - this.startPosition.x) / distance,
             y: (y - this.startPosition.y) / distance,
@@ -376,7 +378,9 @@ export class GlassGestureRecognizer {
   }
 
   private endGesture(x: number, y: number): void {
-    if (!this.isTracking) return;
+    if (!this.isTracking) {
+      return;
+    }
 
     const now = performance.now();
     const duration = now - this.startTime;
@@ -386,7 +390,7 @@ export class GlassGestureRecognizer {
     );
 
     const direction =
-      distance > 0
+      0 < distance
         ? {
             x: (x - this.startPosition.x) / distance,
             y: (y - this.startPosition.y) / distance,
@@ -406,7 +410,7 @@ export class GlassGestureRecognizer {
     this.callbacks.onGestureEnd?.(gestureEvent);
 
     // Detect swipe gesture
-    if (distance > this.config.threshold.swipe && duration < 500) {
+    if (distance > this.config.threshold.swipe && 500 > duration) {
       this.detectSwipe(x, y, duration);
     }
 
@@ -415,7 +419,9 @@ export class GlassGestureRecognizer {
   }
 
   private cancelGesture(): void {
-    if (!this.isTracking) return;
+    if (!this.isTracking) {
+      return;
+    }
 
     const gestureEvent: GestureEvent = {
       type: 'cancel',
@@ -440,9 +446,9 @@ export class GlassGestureRecognizer {
     let direction: 'left' | 'right' | 'up' | 'down';
 
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      direction = deltaX > 0 ? 'right' : 'left';
+      direction = 0 < deltaX ? 'right' : 'left';
     } else {
-      direction = deltaY > 0 ? 'down' : 'up';
+      direction = 0 < deltaY ? 'down' : 'up';
     }
 
     const swipeGesture: SwipeGesture = {
@@ -458,7 +464,7 @@ export class GlassGestureRecognizer {
 
   private handleMultiTouch(touches: TouchList): void {
     // Handle pinch and rotate gestures
-    if (touches.length === 2) {
+    if (2 === touches.length) {
       const touch1 = touches[0];
       const touch2 = touches[1];
 
@@ -471,7 +477,7 @@ export class GlassGestureRecognizer {
   }
 
   private handleMultiTouchMove(touches: TouchList): void {
-    if (touches.length === 2) {
+    if (2 === touches.length) {
       const touch1 = touches[0];
       const touch2 = touches[1];
 
@@ -491,7 +497,7 @@ export class GlassGestureRecognizer {
               Math.pow(storedTouch2.clientY - storedTouch1.clientY, 2)
           );
 
-          if (initialDistance > 0) {
+          if (0 < initialDistance) {
             const scale = currentDistance / initialDistance;
             const center = {
               x: (touch1.clientX + touch2.clientX) / 2,
@@ -512,7 +518,9 @@ export class GlassGestureRecognizer {
   }
 
   private updateHoverState(x: number, y: number): void {
-    if (!this.config.enableHover) return;
+    if (!this.config.enableHover) {
+      return;
+    }
 
     const rect = this.element.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -555,7 +563,9 @@ export class GlassGestureRecognizer {
   ): { x: number; y: number } {
     const { strength, range, decay } = this.config.magnetic;
 
-    if (distance >= range) return { x: 0, y: 0 };
+    if (distance >= range) {
+      return { x: 0, y: 0 };
+    }
 
     const normalizedDistance = distance / range;
     const forceMagnitude = strength * Math.pow(1 - normalizedDistance, decay);
@@ -572,7 +582,7 @@ export class GlassGestureRecognizer {
   private triggerHaptic(intensity: 'light' | 'medium' | 'heavy'): void {
     if (
       !this.config.enableHaptics ||
-      typeof navigator === 'undefined' ||
+      'undefined' === typeof navigator ||
       !navigator.vibrate
     ) {
       return;
@@ -629,7 +639,9 @@ export function useGlassGestures(
   const gestureRecognizerRef = useRef<GlassGestureRecognizer | null>(null);
 
   const setupGestureRecognizer = useCallback(() => {
-    if (!elementRef.current) return;
+    if (!elementRef.current) {
+      return;
+    }
 
     // Clean up existing recognizer
     if (gestureRecognizerRef.current) {
@@ -650,7 +662,7 @@ export function useGlassGestures(
     return () => {
       if (gestureRecognizerRef.current) {
         gestureRecognizerRef.current.destroy();
-        gestureRecognizerRef.current = null;
+        gestureRecognizerRef.current = undefined;
       }
     };
   }, [setupGestureRecognizer]);

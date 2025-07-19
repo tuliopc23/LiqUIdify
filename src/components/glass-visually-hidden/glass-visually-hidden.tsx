@@ -31,7 +31,7 @@ const GlassVisuallyHidden = forwardRef<
             const childProps = child.props as any;
             return React.cloneElement(child, {
               className: cn(visuallyHiddenStyles, childProps?.className),
-              ...(typeof childProps === 'object' && childProps !== null
+              ...('object' === typeof childProps && null !== childProps 
                 ? childProps
                 : {}),
             });

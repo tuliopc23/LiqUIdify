@@ -11,8 +11,8 @@
 
 // Note: jscodeshift is an optional dependency for advanced codemods
 // import { transform } from 'jscodeshift';
-import * as fs from 'fs/promises';
-import * as path from 'path';
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
 
 // Migration configuration
 export interface MigrationConfig {
@@ -306,7 +306,7 @@ export class LiqUIdifyMigrationSystem {
   ): string {
     const migrations = this.getAvailableMigrations(fromVersion, toVersion);
 
-    if (migrations.length === 0) {
+    if (0 === migrations.length) {
       return `# Migration Guide: ${fromVersion} → ${toVersion}\n\nNo breaking changes detected. Update your dependencies and you should be good to go!`;
     }
 
@@ -325,7 +325,7 @@ export class LiqUIdifyMigrationSystem {
       guide += `## Migration ${index + 1}: ${migration.fromVersion} → ${migration.toVersion}\n\n`;
       guide += `${migration.description}\n\n`;
 
-      if (migration.breakingChanges.length > 0) {
+      if (0 < migration.breakingChanges.length) {
         guide += `### Breaking Changes\n\n`;
 
         migration.breakingChanges.forEach((change, changeIndex) => {
@@ -353,7 +353,7 @@ export class LiqUIdifyMigrationSystem {
 
       // Manual steps if any
       const manualSteps = this.getManualMigrationSteps(migration);
-      if (manualSteps.length > 0) {
+      if (0 < manualSteps.length) {
         guide += `### Manual Steps Required\n\n`;
         manualSteps.forEach((step, stepIndex) => {
           guide += `${stepIndex + 1}. ${step}\n`;
@@ -531,7 +531,7 @@ export class LiqUIdifyMigrationSystem {
 
       for (const filePath of files) {
         try {
-          const source = await fs.readFile(filePath, 'utf-8');
+          const source = await fs.readFile(filePath, 'utf8');
 
           // Check run condition if specified
           if (codemod.runCondition && !codemod.runCondition(source)) {
@@ -542,7 +542,7 @@ export class LiqUIdifyMigrationSystem {
 
           if (transformed !== source) {
             if (!dryRun) {
-              await fs.writeFile(filePath, transformed, 'utf-8');
+              await fs.writeFile(filePath, transformed, 'utf8');
             }
 
             report.filesModified.push(filePath);
@@ -582,7 +582,7 @@ export class LiqUIdifyMigrationSystem {
 
     for (const filePath of files) {
       try {
-        const source = await fs.readFile(filePath, 'utf-8');
+        const source = await fs.readFile(filePath, 'utf8');
 
         for (const rule of allValidationRules) {
           const result = rule.check(source);
@@ -621,7 +621,7 @@ export class LiqUIdifyMigrationSystem {
         if (
           entry.isDirectory() &&
           !entry.name.startsWith('.') &&
-          entry.name !== 'node_modules'
+          'node_modules' !== entry.name
         ) {
           await scanDir(fullPath);
         } else if (entry.isFile()) {
@@ -629,7 +629,7 @@ export class LiqUIdifyMigrationSystem {
           if (
             patterns.some(pattern => {
               const patternExt = pattern.split('.').pop();
-              return patternExt === '*' || ext === `.${patternExt}`;
+              return '*' === patternExt || ext === `.${patternExt}`;
             })
           ) {
             files.push(fullPath);
@@ -648,7 +648,7 @@ export class LiqUIdifyMigrationSystem {
     // Remove existing backup
     try {
       await fs.rm(backupPath, { recursive: true, force: true });
-    } catch (error) {
+    } catch {
       // Backup doesn't exist, continue
     }
 
@@ -660,7 +660,7 @@ export class LiqUIdifyMigrationSystem {
 
     try {
       await this.copyDirectory(srcPath, backupSrcPath);
-    } catch (error) {
+    } catch {
       // src directory doesn't exist or copy failed
     }
   }
@@ -766,7 +766,7 @@ import { Component } from '${change.newName}';
 
     // Add manual steps based on breaking changes that can't be automated
     migration.breakingChanges.forEach(change => {
-      if (change.severity === 'critical') {
+      if ('critical' === change.severity) {
         steps.push(
           `Review and update ${change.component || 'usage'} for ${change.reason}`
         );
@@ -782,12 +782,12 @@ import { Component } from '${change.newName}';
 
     // Estimate time based on complexity
     let estimatedMinutes = Math.max(1, Math.ceil(fileCount / 10));
-    if (errorCount > 0) {
+    if (0 < errorCount) {
       estimatedMinutes += errorCount * 2; // Add 2 minutes per error for manual fixes
     }
 
     report.summary.estimatedTimeToComplete =
-      estimatedMinutes === 1 ? '1 minute' : `${estimatedMinutes} minutes`;
+      1 === estimatedMinutes ? '1 minute' : `${estimatedMinutes} minutes`;
   }
 
   private isVersionInRange(
@@ -797,8 +797,8 @@ import { Component } from '${change.newName}';
     targetTo: string
   ): boolean {
     return (
-      this.compareVersions(migrationFrom, targetFrom) >= 0 &&
-      this.compareVersions(migrationTo, targetTo) <= 0
+      0 <= this.compareVersions(migrationFrom, targetFrom) &&
+      0 >= this.compareVersions(migrationTo, targetTo)
     );
   }
 

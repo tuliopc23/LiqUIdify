@@ -36,7 +36,7 @@ Object.defineProperty(window, 'matchMedia', {
   value: vi.fn().mockImplementation(query => ({
     matches: false,
     media: query,
-    onchange: null,
+    onchange: undefined,
     addListener: vi.fn(), // deprecated
     removeListener: vi.fn(), // deprecated
     addEventListener: vi.fn(),
@@ -118,7 +118,7 @@ const originalWarn = console.warn;
 console.warn = vi.fn((...args) => {
   const message = args[0];
   if (
-    typeof message === 'string' &&
+    'string' === typeof message &&
     (message.includes('Warning: ReactDOM.render is deprecated') ||
       message.includes('Warning: componentWillReceiveProps') ||
       message.includes('🐌 Slow glass effect'))

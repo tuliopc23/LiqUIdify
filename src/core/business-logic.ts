@@ -6,7 +6,7 @@
  */
 
 import React, { useCallback, useMemo, useRef } from 'react';
-import { ComponentSize, ComponentVariant } from './base-component';
+import type { ComponentSize, ComponentVariant } from './base-component';
 
 // Generic business logic hook type
 export type BusinessLogicHook<T = any, P = any> = (props: P) => T;
@@ -207,7 +207,9 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
         },
 
         validateForm: () => {
-          if (!validationRules) return true;
+          if (!validationRules) {
+            return true;
+          }
 
           const errors: Record<keyof T, string | null> = {} as Record<
             keyof T,
@@ -219,7 +221,9 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
             const fieldName = key as keyof T;
             const error = validationRules[fieldName](state.values[fieldName]);
             errors[fieldName] = error;
-            if (error) isValid = false;
+            if (error) {
+              isValid = false;
+            }
           });
 
           setState(prev => ({
@@ -243,7 +247,9 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
         },
 
         submitForm: async () => {
-          if (!onSubmit) return;
+          if (!onSubmit) {
+            return;
+          }
 
           setState(prev => ({ ...prev, isSubmitting: true }));
 
@@ -300,7 +306,7 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
     const [state, setState] = React.useState<TableState<T>>({
       items: initialItems,
       selectedItems: [],
-      sortBy: null,
+      sortBy: undefined,
       sortDirection: 'asc',
       filterBy: '',
       currentPage: 1,
@@ -348,7 +354,7 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
             ...prev,
             sortBy: field,
             sortDirection:
-              prev.sortBy === field && prev.sortDirection === 'asc'
+              prev.sortBy === field && 'asc' === prev.sortDirection
                 ? 'desc'
                 : 'asc',
           }));
@@ -414,7 +420,7 @@ export function createModalBusinessLogic(
     const [state, setState] = React.useState<ModalState>({
       isOpen: false,
       title: '',
-      content: null,
+      content: undefined,
       size: 'md',
       variant: 'primary',
       closable: true,
@@ -509,16 +515,16 @@ export function createAsyncDataBusinessLogic<T>(
 > {
   return () => {
     const [state, setState] = React.useState<AsyncDataState<T>>({
-      data: null,
+      data: undefined,
       loading: false,
-      error: null,
-      lastFetch: null,
+      error: undefined,
+      lastFetch: undefined,
     });
 
     const actions = useMemo(
       (): AsyncDataActions<T> => ({
         fetchData: async () => {
-          setState(prev => ({ ...prev, loading: true, error: null }));
+          setState(prev => ({ ...prev, loading: true, error: undefined }));
 
           try {
             const data = await fetchFunction();
@@ -566,10 +572,10 @@ export function createAsyncDataBusinessLogic<T>(
 
         clearData: () => {
           setState({
-            data: null,
+            data: undefined,
             loading: false,
-            error: null,
-            lastFetch: null,
+            error: undefined,
+            lastFetch: undefined,
           });
         },
       }),

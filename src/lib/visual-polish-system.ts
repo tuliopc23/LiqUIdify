@@ -4,7 +4,7 @@
  * Requirements: 6.5, 6.6 - Visual polish with industry-leading quality and micro-interactions
  */
 
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export interface VisualQualityMetrics {
   pixelPerfectScore: number;
@@ -269,19 +269,23 @@ export class VisualPolishManager {
     element: HTMLElement,
     preset: keyof typeof MICRO_INTERACTION_PRESETS | MicroInteraction
   ): void {
-    if (!this.config.enableMicroInteractions) return;
+    if (!this.config.enableMicroInteractions) {
+      return;
+    }
 
-    if (typeof preset === 'string') {
+    if ('string' === typeof preset) {
       const presetConfig = MICRO_INTERACTION_PRESETS[preset];
-      if (!presetConfig) return;
-      
+      if (!presetConfig) {
+        return;
+      }
+
       const interaction: MicroInteraction = {
         id,
         element,
         ...presetConfig,
-        trigger: presetConfig.trigger || 'hover'
+        trigger: presetConfig.trigger || 'hover',
       };
-      
+
       this.microInteractions.set(id, interaction);
       this.setupMicroInteraction(interaction);
     } else {
@@ -289,9 +293,9 @@ export class VisualPolishManager {
         ...preset,
         id,
         element,
-        trigger: preset.trigger || 'hover'
+        trigger: preset.trigger || 'hover',
       };
-      
+
       this.microInteractions.set(id, interaction);
       this.setupMicroInteraction(interaction);
     }
@@ -316,7 +320,7 @@ export class VisualPolishManager {
 
     const handleInteraction = (event: Event) => {
       // Prevent default for certain triggers
-      if (trigger === 'click' && event.type === 'click') {
+      if ('click' === trigger && 'click' === event.type) {
         event.preventDefault();
       }
 
@@ -431,15 +435,17 @@ export class VisualPolishManager {
     element: HTMLElement,
     threshold: number = 0.01
   ): void {
-    if (!this.config.enableVisualRegression) return;
+    if (!this.config.enableVisualRegression) {
+      return;
+    }
 
     const test: VisualRegressionTest = {
       id,
       name,
       element,
-      baseline: null,
+      baseline: undefined,
       threshold,
-      lastResult: null,
+      lastResult: undefined,
     };
 
     this.regressionTests.set(id, test);
@@ -453,7 +459,9 @@ export class VisualPolishManager {
     try {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+      if (!ctx) {
+        return;
+      }
 
       const rect = test.element.getBoundingClientRect();
       canvas.width = rect.width;
@@ -463,8 +471,8 @@ export class VisualPolishManager {
       // For now, we'll simulate with a placeholder
       const imageData = ctx.createImageData(canvas.width, canvas.height);
       test.baseline = imageData;
-    } catch (_e) {
-      console.warn(`Failed to capture baseline for test ${test.id}:`, _e);
+    } catch (error) {
+      console.warn(`Failed to capture baseline for test ${test.id}:`, error);
     }
   }
 
@@ -473,7 +481,9 @@ export class VisualPolishManager {
    */
   async runVisualRegressionTest(id: string): Promise<boolean> {
     const test = this.regressionTests.get(id);
-    if (!test || !test.baseline) return false;
+    if (!test || !test.baseline) {
+      return false;
+    }
 
     try {
       // Capture current state and compare with baseline
@@ -488,8 +498,8 @@ export class VisualPolishManager {
       };
 
       return passed;
-    } catch (_e) {
-      console.warn(`Visual regression test ${id} failed:`, _e);
+    } catch (error) {
+      console.warn(`Visual regression test ${id} failed:`, error);
       return false;
     }
   }
@@ -502,7 +512,9 @@ export class VisualPolishManager {
     property: string,
     expectedValue: string
   ): void {
-    if (!this.config.enableCrossBrowserTesting) return;
+    if (!this.config.enableCrossBrowserTesting) {
+      return;
+    }
 
     const test: CrossBrowserTest = {
       id,
@@ -520,7 +532,9 @@ export class VisualPolishManager {
    */
   runCrossBrowserTest(id: string, element: HTMLElement): boolean {
     const test = this.crossBrowserTests.get(id);
-    if (!test) return false;
+    if (!test) {
+      return false;
+    }
 
     const computedStyle = window.getComputedStyle(element);
     const actualValue = computedStyle.getPropertyValue(test.property);
@@ -554,7 +568,9 @@ export class VisualPolishManager {
    */
   private calculateMicroInteractionQuality(): number {
     const totalInteractions = this.microInteractions.size;
-    if (totalInteractions === 0) return 1.0;
+    if (0 === totalInteractions) {
+      return 1;
+    }
 
     // Score based on interaction responsiveness and feedback quality
     return 0.88;
@@ -582,8 +598,10 @@ export class VisualPolishManager {
   }
 
   private calculateCrossBrowserConsistency(): number {
-    const tests = Array.from(this.crossBrowserTests.values());
-    if (tests.length === 0) return 1.0;
+    const tests = [...this.crossBrowserTests.values()];
+    if (0 === tests.length) {
+      return 1;
+    }
 
     const consistentTests = tests.filter(test => test.isConsistent).length;
     return consistentTests / tests.length;
@@ -608,7 +626,7 @@ export class VisualPolishManager {
    * Trigger haptic feedback
    */
   private triggerHapticFeedback(): void {
-    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+    if ('undefined' !== typeof navigator && navigator.vibrate) {
       navigator.vibrate(10);
     }
   }
@@ -635,33 +653,33 @@ export class VisualPolishManager {
     const recommendations: string[] = [];
     const { qualityMetrics } = this;
 
-    if (qualityMetrics.pixelPerfectScore < 0.9) {
+    if (0.9 > qualityMetrics.pixelPerfectScore) {
       recommendations.push(
         'Improve pixel-perfect alignment and spacing consistency'
       );
     }
 
-    if (qualityMetrics.crossBrowserConsistency < 0.95) {
+    if (0.95 > qualityMetrics.crossBrowserConsistency) {
       recommendations.push('Address cross-browser compatibility issues');
     }
 
-    if (qualityMetrics.animationSmoothness < 0.9) {
+    if (0.9 > qualityMetrics.animationSmoothness) {
       recommendations.push(
         'Optimize animations for better performance and smoothness'
       );
     }
 
-    if (qualityMetrics.microInteractionQuality < 0.85) {
+    if (0.85 > qualityMetrics.microInteractionQuality) {
       recommendations.push(
         'Enhance micro-interactions for better user feedback'
       );
     }
 
-    if (qualityMetrics.colorContrast < 0.9) {
+    if (0.9 > qualityMetrics.colorContrast) {
       recommendations.push('Improve color contrast for better accessibility');
     }
 
-    if (qualityMetrics.typographyQuality < 0.9) {
+    if (0.9 > qualityMetrics.typographyQuality) {
       recommendations.push('Enhance typography consistency and hierarchy');
     }
 
@@ -696,7 +714,7 @@ export class VisualPolishManager {
  */
 export function useVisualPolish(config: Partial<PolishConfig> = {}) {
   const [qualityMetrics, setQualityMetrics] =
-    useState<VisualQualityMetrics | null>(null);
+    useState<VisualQualityMetrics | null>(undefined);
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const polishManagerRef = useRef<VisualPolishManager | null>(null);
 
@@ -709,7 +727,7 @@ export function useVisualPolish(config: Partial<PolishConfig> = {}) {
 
     return () => {
       polishManagerRef.current?.destroy();
-      polishManagerRef.current = null;
+      polishManagerRef.current = undefined;
     };
   }, []);
 

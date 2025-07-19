@@ -1,4 +1,4 @@
-import { useEffect, useRef, useId, useCallback } from 'react';
+import { useCallback, useEffect, useId, useRef } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/glass-utils';
 import { GlassFocusTrap } from '@/components/glass-focus-trap';
@@ -56,7 +56,7 @@ export function GlassModal({
 
   // Manage body scroll lock
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if ('undefined' === typeof window) {return;}
 
     if (isOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -79,7 +79,7 @@ export function GlassModal({
     };
   }, [isOpen, title]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {return ;}
 
   const modalContent = (
     <div

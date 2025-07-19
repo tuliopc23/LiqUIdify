@@ -1,4 +1,4 @@
-import { Transition, Variants } from 'framer-motion';
+import type { Transition, Variants } from 'framer-motion';
 
 // Reusable transition constants typed as Transition
 export const springFast: Transition = {

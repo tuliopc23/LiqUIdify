@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 import { cn } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 
 const paginationVariants = cva(
   [
@@ -110,18 +110,18 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
 
       // Add ellipsis before siblings if needed
       if (siblingStart > boundaryCount + 1) {
-        if (showEllipsis) pages.push('ellipsis');
+        if (showEllipsis) {pages.push('ellipsis');}
       }
 
       // Add sibling pages
       for (let i = siblingStart; i <= siblingEnd; i++) {
-        if (i <= boundaryCount || i > totalPages - boundaryCount) continue;
+        if (i <= boundaryCount || i > totalPages - boundaryCount) {continue;}
         pages.push(i);
       }
 
       // Add ellipsis after siblings if needed
       if (siblingEnd < totalPages - boundaryCount) {
-        if (showEllipsis) pages.push('ellipsis');
+        if (showEllipsis) {pages.push('ellipsis');}
       }
 
       // Always include last page(s)
@@ -141,7 +141,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
     const pageNumbers = generatePageNumbers();
 
     const handlePageChange = (page: number) => {
-      if (disabled || page < 1 || page > totalPages || page === currentPage) {
+      if (disabled || 1 > page || page > totalPages || page === currentPage) {
         return;
       }
       onPageChange(page);
@@ -163,8 +163,8 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       <motion.button
         whileHover={!buttonDisabled && !disabled ? { scale: 1.05 } : {}}
         whileTap={!buttonDisabled && !disabled ? { scale: 0.95 } : {}}
-        onClick={() => typeof page === 'number' && handlePageChange(page)}
-        disabled={buttonDisabled || disabled || page === 'ellipsis'}
+        onClick={() => 'number' === typeof page && handlePageChange(page)}
+        disabled={buttonDisabled || disabled || 'ellipsis' === page }
         className={cn(pageButtonVariants({ isActive, size }))}
         aria-label={ariaLabel}
         aria-current={isActive ? 'page' : undefined}
@@ -181,10 +181,10 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         {...props}
       >
         {/* First Page Button */}
-        {showFirstLast && totalPages > 5 && (
+        {showFirstLast && 5 < totalPages && (
           <PaginationButton
             page={1}
-            disabled={currentPage === 1}
+            disabled={ 1 === currentPage }
             aria-label="Go to first page"
           >
             ««
@@ -195,7 +195,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         {showPrevNext && (
           <PaginationButton
             page={currentPage - 1}
-            disabled={currentPage === 1}
+            disabled={ 1 === currentPage }
             aria-label="Go to previous page"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -205,7 +205,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         {/* Page Numbers */}
         {pageNumbers.map((page, index) => (
           <React.Fragment key={index}>
-            {page === 'ellipsis' ? (
+            { 'ellipsis' === page ? (
               <span className="flex items-center justify-center min-w-[32px] h-8 text-white/40">
                 <MoreHorizontal className="w-4 h-4" />
               </span>
@@ -233,7 +233,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         )}
 
         {/* Last Page Button */}
-        {showFirstLast && totalPages > 5 && (
+        {showFirstLast && 5 < totalPages && (
           <PaginationButton
             page={totalPages}
             disabled={currentPage === totalPages}

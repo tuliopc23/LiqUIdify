@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { cn, getGlassClass } from '@/lib/glass-utils';
 
 export interface DropdownItem {
@@ -55,7 +55,7 @@ export const GlassDropdown = React.forwardRef<
       };
 
       const handleEscape = (event: KeyboardEvent) => {
-        if (isOpen && event.key === 'Escape') {
+        if (isOpen && 'Escape' === event.key) {
           setIsOpen(false);
         }
       };
@@ -98,7 +98,7 @@ export const GlassDropdown = React.forwardRef<
           height: window.innerHeight,
         };
 
-        if (left < 8) left = 8;
+        if (8 > left) {left = 8;}
         if (left + dropdownRect.width > viewport.width - 8) {
           left = viewport.width - dropdownRect.width - 8;
         }
@@ -116,7 +116,7 @@ export const GlassDropdown = React.forwardRef<
     }, [isOpen, align, sideOffset]);
 
     const handleSelect = (item: DropdownItem) => {
-      if (item.disabled || item.separator) return;
+      if (item.disabled || item.separator) {return;}
 
       onSelect?.(item.value);
       setIsOpen(false);

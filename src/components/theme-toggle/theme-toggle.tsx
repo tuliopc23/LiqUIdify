@@ -6,10 +6,10 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      onClick={() => setTheme('light' === theme ? 'dark' : 'light')}
       className="glass-effect rounded-lg p-2 btn-scale hover:bg-opacity-80 transition-all duration-200"
     >
-      {theme === 'light' ? (
+      { 'light' === theme ? (
         <Moon className="h-5 w-5 text-primary" />
       ) : (
         <Sun className="h-5 w-5 text-primary" />

@@ -11,11 +11,11 @@ export { gracefulDegradation as GracefulDegradation } from '../graceful-degradat
 // export { CompoundComponent } from '../compound-component';
 
 // Placeholder exports for components that may be implemented later
-export const GlassContainer = () => null;
-export const GlassCard = () => null;
-export const GlassButton = () => null;
-export const GlassInput = () => null;
-export const GlassModal = () => null;
+export const GlassContainer = () => undefined;
+export const GlassCard = () => undefined;
+export const GlassButton = () => undefined;
+export const GlassInput = () => undefined;
+export const GlassModal = () => undefined;
 
 // Base component utilities
 export { createPolymorphicComponent, createGlassPolymorphicComponent } from '../create-polymorphic-component';

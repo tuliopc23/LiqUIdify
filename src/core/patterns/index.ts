@@ -54,9 +54,9 @@ export const createCompoundComponentWithContext = <
   defaultValue: T
 ) => {
   return {
-    Provider: null as any,
+    Provider: undefined as any,
     useContext: () => defaultValue,
-    Context: null as any,
+    Context: undefined as any,
   };
 };
 
@@ -69,7 +69,7 @@ export const createRenderPropComponent = <T extends Record<string, any>>(
   _useLogic: () => T
 ) => {
   // Type-only export for patterns
-  return null as any;
+  return ;
 };
 
 // Higher-order component pattern
@@ -95,7 +95,7 @@ export const createSlotComponent = (
   _slots: Record<string, React.ComponentType<any>>
 ) => {
   // Type-only export for patterns
-  return null as any;
+  return ;
 };
 
 // State reducer pattern
@@ -148,7 +148,7 @@ export class ComponentEventBus {
     const eventListeners = this.listeners.get(event);
     if (eventListeners) {
       eventListeners.delete(callback);
-      if (eventListeners.size === 0) {
+      if (0 === eventListeners.size) {
         this.listeners.delete(event);
       }
     }

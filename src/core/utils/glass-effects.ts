@@ -5,7 +5,7 @@
  * for consistent glassmorphism effects across components.
  */
 
-import { GlassEffectConfig } from '@/core/types';
+import type { GlassEffectConfig } from '@/core/types';
 
 /**
  * Maps component-level intensity names to utility-level intensity names
@@ -19,7 +19,7 @@ export type UtilityIntensity = 'none' | 'low' | 'medium' | 'high';
 export function mapIntensity(
   intensity?: ComponentIntensity | UtilityIntensity
 ): UtilityIntensity {
-  if (!intensity) return 'medium';
+  if (!intensity) {return 'medium';}
 
   const intensityMap: Record<string, UtilityIntensity> = {
     subtle: 'low',

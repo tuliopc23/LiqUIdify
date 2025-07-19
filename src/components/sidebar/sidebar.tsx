@@ -48,9 +48,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
-  const categories = Array.from(
-    new Set(sidebarItems.map(item => item.category))
-  );
+  const categories = [...new Set(sidebarItems.map((item) => item.category))];
 
   return (
     <aside className="fixed left-0 top-16 h-full w-64 glass-effect border-r border-glass overflow-y-auto">

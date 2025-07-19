@@ -3,12 +3,11 @@
  * GPU-accelerated animations with physics-based motion
  */
 
-import '../types/web-animations';
 import { gsap } from 'gsap';
 import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 
 // Registering plugins
-if (typeof window !== 'undefined' && gsap) {
+if ('undefined' !== typeof window && gsap) {
   gsap.registerPlugin(MorphSVGPlugin);
 }
 
@@ -88,9 +87,9 @@ export interface GestureAnimation {
 // Enhanced with GSAP timeline capabilities
 export class GlassAnimation {
   private element: HTMLElement;
-  private animation: Animation | null = null;
+  private animation: Animation | null = undefined;
   private gsapTimeline: gsap.core.Timeline;
-  private rafId: number | null = null;
+  private rafId: number | null = undefined;
 
   constructor(element: HTMLElement) {
     this.element = element;
@@ -120,7 +119,7 @@ export class GlassAnimation {
   // Enhanced morphing between shapes using GSAP MorphSVG
   morphTo(targetPath: string, duration = 1000) {
     // Check if element is SVG path
-    if (this.element.tagName === 'path' || this.element.tagName === 'PATH') {
+    if ('path' === this.element.tagName || 'PATH' === this.element.tagName) {
       return gsap.to(this.element, {
         duration: duration / 1000,
         morphSVG: targetPath,
@@ -286,7 +285,7 @@ export class GlassAnimation {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -speed;
 
-      if (axis === 'y') {
+      if ('y' === axis) {
         this.element.style.transform = `translateY(${rate}px)`;
       } else {
         this.element.style.transform = `translateX(${rate}px)`;
@@ -369,7 +368,7 @@ export class GlassAnimation {
   }
 
   // Batch processing for multiple animations
-  batchAnimate(animations: Array<{ target: string; vars: gsap.TweenVars }>) {
+  batchAnimate(animations: { target: string; vars: gsap.TweenVars }[]) {
     // Use GSAP's batch method for optimal performance
     gsap.set(this.element, { force3D: true }); // Force GPU acceleration
 
@@ -436,11 +435,11 @@ export class GlassAnimation {
   stop() {
     if (this.animation) {
       this.animation.cancel();
-      this.animation = null;
+      this.animation = undefined;
     }
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
-      this.rafId = null;
+      this.rafId = undefined;
     }
     // Kill all GSAP animations on this element
     gsap.killTweensOf(this.element);
@@ -646,7 +645,9 @@ export class GlassGestureAnimator {
 
     const handleEnd = (e: TouchEvent | MouseEvent) => {
       const touch = 'changedTouches' in e ? e.changedTouches[0] : e;
-      if (!touch) return;
+      if (!touch) {
+        return;
+      }
 
       const deltaX = touch.clientX - startX;
       const deltaY = touch.clientY - startY;
@@ -687,29 +688,33 @@ export class GlassGestureAnimator {
     let initialDistance = 0;
 
     const getDistance = (touches: TouchList) => {
-      if (touches.length < 2) return 0;
+      if (2 > touches.length) {
+        return 0;
+      }
       const touch0 = touches[0];
       const touch1 = touches[1];
-      if (!touch0 || !touch1) return 0;
+      if (!touch0 || !touch1) {
+        return 0;
+      }
       const dx = touch0.clientX - touch1.clientX;
       const dy = touch0.clientY - touch1.clientY;
       return Math.sqrt(dx * dx + dy * dy);
     };
 
     const handleStart = (e: TouchEvent) => {
-      if (e.touches.length === 2) {
+      if (2 === e.touches.length) {
         initialDistance = getDistance(e.touches);
       }
     };
 
     const handleMove = (e: TouchEvent) => {
-      if (e.touches.length === 2 && initialDistance > 0) {
+      if (2 === e.touches.length && 0 < initialDistance) {
         const currentDistance = getDistance(e.touches);
         const scale = currentDistance / initialDistance;
 
         this.element.style.transform = `scale(${scale})`;
 
-        if (Math.abs(scale - 1) > 0.2) {
+        if (0.2 < Math.abs(scale - 1)) {
           this.playAnimation(animationConfig);
         }
       }
@@ -796,7 +801,7 @@ export const GlassUtils = {
       const actualFPS = (frame / duration) * 1000;
       console.log(`Current FPS: ${actualFPS}`);
 
-      if (duration < 1000) {
+      if (1000 > duration) {
         requestAnimationFrame(checkFrameRate);
       }
     }

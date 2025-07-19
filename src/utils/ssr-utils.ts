@@ -8,7 +8,7 @@
  * Check if code is running in a browser environment
  * @returns {boolean} true if running in browser, false if server-side
  */
-export const isBrowser = (): boolean => typeof window !== 'undefined';
+export const isBrowser = (): boolean => 'undefined' !== typeof window;
 export const isClient = isBrowser;
 export const isServer = (): boolean => !isBrowser();
 
@@ -16,13 +16,13 @@ export const isServer = (): boolean => !isBrowser();
  * Check if document object is available
  * @returns {boolean} true if document is available
  */
-export const isDocument = (): boolean => typeof document !== 'undefined';
+export const isDocument = (): boolean => 'undefined' !== typeof document;
 
 /**
  * Check if navigator object is available
  * @returns {boolean} true if navigator is available
  */
-export const isNavigator = (): boolean => typeof navigator !== 'undefined';
+export const isNavigator = (): boolean => 'undefined' !== typeof navigator;
 
 /**
  * Safe window object with SSR fallback
@@ -54,9 +54,9 @@ export const safeNavigator = (): Navigator | undefined => {
  */
 export const safeLocalStorage = (): Storage | null => {
   try {
-    return isBrowser() && window.localStorage ? window.localStorage : null;
+    return isBrowser() && window.localStorage ? window.localStorage : undefined;
   } catch {
-    return null;
+    return;
   }
 };
 
@@ -66,9 +66,11 @@ export const safeLocalStorage = (): Storage | null => {
  */
 export const safeSessionStorage = (): Storage | null => {
   try {
-    return isBrowser() && window.sessionStorage ? window.sessionStorage : null;
+    return isBrowser() && window.sessionStorage
+      ? window.sessionStorage
+      : undefined;
   } catch {
-    return null;
+    return;
   }
 };
 
@@ -80,7 +82,9 @@ export const safeSessionStorage = (): Storage | null => {
  */
 export const getLocalStorageItem = <T>(key: string, fallback: T): T => {
   const storage = safeLocalStorage();
-  if (!storage) return fallback;
+  if (!storage) {
+    return fallback;
+  }
 
   try {
     const item = storage.getItem(key);
@@ -98,7 +102,9 @@ export const getLocalStorageItem = <T>(key: string, fallback: T): T => {
  */
 export const setLocalStorageItem = <T>(key: string, value: T): boolean => {
   const storage = safeLocalStorage();
-  if (!storage) return false;
+  if (!storage) {
+    return false;
+  }
 
   try {
     storage.setItem(key, JSON.stringify(value));
@@ -116,7 +122,9 @@ export const setLocalStorageItem = <T>(key: string, value: T): boolean => {
  */
 export const getSessionStorageItem = <T>(key: string, fallback: T): T => {
   const storage = safeSessionStorage();
-  if (!storage) return fallback;
+  if (!storage) {
+    return fallback;
+  }
 
   try {
     const item = storage.getItem(key);
@@ -134,7 +142,9 @@ export const getSessionStorageItem = <T>(key: string, fallback: T): T => {
  */
 export const setSessionStorageItem = <T>(key: string, value: T): boolean => {
   const storage = safeSessionStorage();
-  if (!storage) return false;
+  if (!storage) {
+    return false;
+  }
 
   try {
     storage.setItem(key, JSON.stringify(value));
@@ -151,7 +161,7 @@ export const setSessionStorageItem = <T>(key: string, value: T): boolean => {
  */
 export const safeMatchMedia = (query: string): MediaQueryList | null => {
   const win = safeWindow();
-  return win?.matchMedia ? win.matchMedia(query) : null;
+  return win?.matchMedia ? win.matchMedia(query) : undefined;
 };
 
 /**
@@ -165,7 +175,7 @@ export const safeRequestAnimationFrame = (
   const win = safeWindow();
   return win?.requestAnimationFrame
     ? win.requestAnimationFrame(callback)
-    : null;
+    : undefined;
 };
 
 /**
@@ -174,7 +184,7 @@ export const safeRequestAnimationFrame = (
  */
 export const safeCancelAnimationFrame = (id: number | null): void => {
   const win = safeWindow();
-  if (win?.cancelAnimationFrame && id !== null) {
+  if (win?.cancelAnimationFrame && null !== id) {
     win.cancelAnimationFrame(id);
   }
 };
@@ -189,10 +199,10 @@ export const safeSetTimeout = (
   callback: () => void,
   delay: number
 ): NodeJS.Timeout | number | null => {
-  if (typeof setTimeout !== 'undefined') {
+  if ('undefined' !== typeof setTimeout) {
     return setTimeout(callback, delay);
   }
-  return null;
+  return;
 };
 
 /**
@@ -200,7 +210,7 @@ export const safeSetTimeout = (
  * @param {NodeJS.Timeout | number | null} id - timeout ID to clear
  */
 export const safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
-  if (typeof clearTimeout !== 'undefined' && id !== null) {
+  if ('undefined' !== typeof clearTimeout && null !== id) {
     clearTimeout(id as any);
   }
 };
@@ -215,10 +225,10 @@ export const safeSetInterval = (
   callback: () => void,
   delay: number
 ): NodeJS.Timeout | number | null => {
-  if (typeof setInterval !== 'undefined') {
+  if ('undefined' !== typeof setInterval) {
     return setInterval(callback, delay);
   }
-  return null;
+  return;
 };
 
 /**
@@ -226,7 +236,7 @@ export const safeSetInterval = (
  * @param {NodeJS.Timeout | number | null} id - interval ID to clear
  */
 export const safeClearInterval = (id: NodeJS.Timeout | number | null): void => {
-  if (typeof clearInterval !== 'undefined' && id !== null) {
+  if ('undefined' !== typeof clearInterval && null !== id) {
     clearInterval(id as any);
   }
 };
@@ -314,7 +324,7 @@ export const isTouchDevice = (): boolean => {
   const win = safeWindow();
   const nav = safeNavigator();
 
-  return !!(win && ('ontouchstart' in win || (nav && nav.maxTouchPoints > 0)));
+  return !!(win && ('ontouchstart' in win || (nav && 0 < nav.maxTouchPoints)));
 };
 
 /**
@@ -327,14 +337,14 @@ export const safeDynamicImport = async <T>(
   importFn: () => Promise<T>
 ): Promise<T | null> => {
   if (!isBrowser()) {
-    return null;
+    return;
   }
 
   try {
     return await importFn();
   } catch (error) {
     console.error('Dynamic import failed:', error);
-    return null;
+    return;
   }
 };
 
@@ -362,7 +372,7 @@ export const safeIntersectionObserver = (
     return new IntersectionObserver(callback, options);
   }
 
-  return null;
+  return;
 };
 
 /**
@@ -379,7 +389,7 @@ export const safeResizeObserver = (
     return new ResizeObserver(callback);
   }
 
-  return null;
+  return;
 };
 
 /**
@@ -396,7 +406,7 @@ export const safeMutationObserver = (
     return new MutationObserver(callback);
   }
 
-  return null;
+  return;
 };
 
 /**
@@ -419,7 +429,7 @@ export const safeGetComputedStyle = (
   element: Element
 ): CSSStyleDeclaration | null => {
   const win = safeWindow();
-  return win?.getComputedStyle ? win.getComputedStyle(element) : null;
+  return win?.getComputedStyle ? win.getComputedStyle(element) : undefined;
 };
 
 /**
@@ -431,7 +441,7 @@ export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
   tagName: K
 ): HTMLElementTagNameMap[K] | null => {
   const doc = safeDocument();
-  return doc?.createElement ? doc.createElement(tagName) : null;
+  return doc?.createElement ? doc.createElement(tagName) : undefined;
 };
 
 /**
@@ -441,7 +451,7 @@ export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
  */
 export const safeQuerySelector = (selector: string): Element | null => {
   const doc = safeDocument();
-  return doc?.querySelector ? doc.querySelector(selector) : null;
+  return doc?.querySelector ? doc.querySelector(selector) : undefined;
 };
 
 /**
@@ -463,5 +473,5 @@ export const safeQuerySelectorAll = (
  */
 export const safeGetElementById = (id: string): HTMLElement | null => {
   const doc = safeDocument();
-  return doc?.getElementById ? doc.getElementById(id) : null;
+  return doc?.getElementById ? doc.getElementById(id) : undefined;
 };

@@ -4,7 +4,7 @@
  * Requirements: 6.1, 6.3 - Enhanced multi-layer glass rendering with pixel-perfect precision
  */
 
-import React, { useRef, useEffect, useCallback, startTransition } from 'react';
+import React, { startTransition, useCallback, useEffect, useRef } from 'react';
 
 export interface EnhancedGlassLayer {
   id: string;
@@ -142,7 +142,7 @@ export const APPLE_HIG_COMPLIANCE: AppleHIGCompliance = {
   },
   spacing: [2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96],
   animations: {
-    durations: [0.15, 0.25, 0.35, 0.5, 0.75, 1.0],
+    durations: [0.15, 0.25, 0.35, 0.5, 0.75, 1],
     easings: [
       'cubic-bezier(0.25, 0.1, 0.25, 1)',
       'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -262,9 +262,9 @@ export function useEnhancedAppleLiquidGlass(
 
   // Initialize pixel-perfect rendering
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if ('undefined' !== typeof window) {
       pixelRatio.current = window.devicePixelRatio || 1;
-      isRetina.current = pixelRatio.current > 1;
+      isRetina.current = 1 < pixelRatio.current;
 
       if (enableRetina && isRetina.current) {
         document.documentElement.style.setProperty(
@@ -285,7 +285,9 @@ export function useEnhancedAppleLiquidGlass(
   // Enhanced magnetic hover with physics
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!containerRef.current || !enablePhysics) return;
+      if (!containerRef.current || !enablePhysics) {
+        return;
+      }
 
       const rect = containerRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -316,7 +318,7 @@ export function useEnhancedAppleLiquidGlass(
       // Haptic feedback
       if (enableHaptics && 'vibrate' in navigator) {
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        if (distance > 10) {
+        if (10 < distance) {
           navigator.vibrate(1);
         }
       }
@@ -326,7 +328,9 @@ export function useEnhancedAppleLiquidGlass(
 
   // Enhanced mouse leave with spring physics
   const handleMouseLeave = useCallback(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) {
+      return;
+    }
 
     startTransition(() => {
       if (containerRef.current) {
@@ -365,15 +369,19 @@ export function useEnhancedAppleLiquidGlass(
 
   // Liquid flow animation with requestAnimationFrame
   useEffect(() => {
-    if (!liquidFlowIntensity || liquidFlowIntensity === 0) return;
+    if (!liquidFlowIntensity || 0 === liquidFlowIntensity) {
+      return;
+    }
 
     let startTime = 0;
     const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
+      if (!startTime) {
+        startTime = timestamp;
+      }
       const elapsed = timestamp - startTime;
 
       layersRef.current.forEach((layer, id) => {
-        if (id === 'backdrop' || id === 'overlay') {
+        if ('backdrop' === id || 'overlay' === id) {
           const offset = Math.sin(elapsed * 0.001) * liquidFlowIntensity;
           const currentTransform = layer.style.transform || '';
           const newTransform = currentTransform.includes('translate3d')
@@ -402,7 +410,9 @@ export function useEnhancedAppleLiquidGlass(
   // Event listeners
   useEffect(() => {
     const element = containerRef.current;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     element.addEventListener('mousemove', handleMouseMove);
     element.addEventListener('mouseleave', handleMouseLeave);
@@ -459,7 +469,7 @@ export function createEnhancedGlassLayers(
 
   return React.createElement(
     React.Fragment,
-    null,
+    undefined,
     // Backdrop Layer - Blur and saturation effects
     React.createElement('div', {
       className: 'enhanced-glass-backdrop',

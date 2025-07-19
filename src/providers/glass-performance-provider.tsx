@@ -1,16 +1,11 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from 'react';
-import {
-  PerformanceMonitor,
+import type { ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import type {
   PerformanceMetrics,
+  PerformanceMonitor,
   PerformanceThresholds,
-  initializePerformanceMonitoring,
 } from '../lib/performance-monitor';
+import { initializePerformanceMonitoring } from '../lib/performance-monitor';
 
 interface PerformanceContextValue {
   monitor: PerformanceMonitor | null;
@@ -21,7 +16,9 @@ interface PerformanceContextValue {
   generateReport: () => ReturnType<PerformanceMonitor['generateReport']> | null;
 }
 
-const PerformanceContext = createContext<PerformanceContextValue | null>(null);
+const PerformanceContext = createContext<PerformanceContextValue | null>(
+  undefined
+);
 
 export interface GlassPerformanceProviderProps {
   children: ReactNode;
@@ -42,11 +39,11 @@ export function GlassPerformanceProvider({
   children,
   thresholds,
   enableAutoMonitoring = false,
-  reportInterval = 10000, // 10 seconds
+  reportInterval = 10_000, // 10 seconds
   onMetricUpdate,
   onPerformanceIssue,
 }: GlassPerformanceProviderProps) {
-  const [monitor, setMonitor] = useState<PerformanceMonitor | null>(null);
+  const [monitor, setMonitor] = useState<PerformanceMonitor | null>(undefined);
   const [metrics, setMetrics] = useState<PerformanceMetrics>({});
   const [isMonitoring, setIsMonitoring] = useState(enableAutoMonitoring);
 
@@ -65,7 +62,9 @@ export function GlassPerformanceProvider({
 
   // Update metrics periodically when monitoring is enabled
   useEffect(() => {
-    if (!monitor || !isMonitoring) return;
+    if (!monitor || !isMonitoring) {
+      return;
+    }
 
     const updateMetrics = () => {
       const currentMetrics = monitor.getMetrics();
@@ -74,7 +73,7 @@ export function GlassPerformanceProvider({
       // Check for performance issues
       if (onPerformanceIssue) {
         const report = monitor.generateReport();
-        if (report.summary.overallScore < 70) {
+        if (70 > report.summary.overallScore) {
           // Threshold for performance issues
           onPerformanceIssue(report);
         }
@@ -97,7 +96,7 @@ export function GlassPerformanceProvider({
   };
 
   const generateReport = () => {
-    return monitor ? monitor.generateReport() : null;
+    return monitor ? monitor.generateReport() : undefined;
   };
 
   const contextValue: PerformanceContextValue = {
@@ -139,7 +138,9 @@ export function withPerformanceMonitoring<P extends Record<string, any>>(
       componentName || Component.displayName || Component.name || 'Component';
 
     useEffect(() => {
-      if (!monitor) return;
+      if (!monitor) {
+        return;
+      }
 
       return () => {
         monitor.measureComponentRender(displayName, () => {});

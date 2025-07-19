@@ -16,26 +16,26 @@ export const testSentryV9Migration = async () => {
     const Sentry = await import('@sentry/react');
     
     // Test 1: Check if browserTracingIntegration is available
-    if (typeof Sentry.browserTracingIntegration !== 'function') {
-      throw new Error('browserTracingIntegration is not available');
+    if ('function' !== typeof Sentry.browserTracingIntegration) {
+      throw new TypeError('browserTracingIntegration is not available');
     }
     console.log('✅ browserTracingIntegration is available');
     
     // Test 2: Check if replayIntegration is available
-    if (typeof Sentry.replayIntegration !== 'function') {
-      throw new Error('replayIntegration is not available');
+    if ('function' !== typeof Sentry.replayIntegration) {
+      throw new TypeError('replayIntegration is not available');
     }
     console.log('✅ replayIntegration is available');
     
     // Test 3: Check if withErrorBoundary is available
-    if (typeof Sentry.withErrorBoundary !== 'function') {
-      throw new Error('withErrorBoundary is not available');
+    if ('function' !== typeof Sentry.withErrorBoundary) {
+      throw new TypeError('withErrorBoundary is not available');
     }
     console.log('✅ withErrorBoundary is available');
     
     // Test 4: Check if startSpan is available
-    if (typeof Sentry.startSpan !== 'function') {
-      throw new Error('startSpan is not available');
+    if ('function' !== typeof Sentry.startSpan) {
+      throw new TypeError('startSpan is not available');
     }
     console.log('✅ startSpan is available');
     
@@ -52,7 +52,7 @@ export const testSentryV9Migration = async () => {
     console.log('✅ Integrations initialized successfully');
     
     // Test 6: Test withErrorBoundary
-    const TestComponent = () => null;
+    const TestComponent = () => undefined;
     const WrappedComponent = Sentry.withErrorBoundary(TestComponent, {
       fallback: ({ error }) => {
         const errorMessage = error instanceof Error ? error.message : String(error);
@@ -97,7 +97,7 @@ export const testLiqUIdifySentryIntegration = async () => {
     
     // Test status method
     const status = integration.getStatus();
-    if (!status || typeof status.initialized !== 'boolean') {
+    if (!status || 'boolean' !== typeof status.initialized) {
       throw new Error('Integration status method not working');
     }
     console.log('✅ Integration status method working');

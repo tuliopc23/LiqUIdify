@@ -9,7 +9,8 @@
  * - Performance optimization
  */
 
-import { useEffect, RefObject } from 'react';
+import type { RefObject } from 'react';
+import { useEffect } from 'react';
 import { performanceMonitor } from './performance-monitor';
 
 // Import Web Animation API types or define them if not available
@@ -102,7 +103,7 @@ export class AnimationSequence {
     // Check for reduced motion preference
     this.prefersReducedMotion =
       this.options.reducedMotion ||
-      (typeof window !== 'undefined' &&
+      ('undefined' !== typeof window &&
         window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
   }
 
@@ -139,12 +140,16 @@ export class AnimationSequence {
 
     for (let i = 0; i < this.steps.length; i++) {
       const step = this.steps[i];
-      if (!step) continue;
+      if (!step) {
+        continue;
+      }
       const targets = this.getTargetElements(step.target);
 
       for (let j = 0; j < targets.length; j++) {
         const target = targets[j];
-        if (!target) continue;
+        if (!target) {
+          continue;
+        }
         const staggerDelay = j * (this.options.stagger || 0);
 
         // Apply reduced motion if needed
@@ -240,7 +245,7 @@ export class AnimationSequence {
     // Update reduced motion preference
     this.prefersReducedMotion =
       this.options.reducedMotion ||
-      (typeof window !== 'undefined' &&
+      ('undefined' !== typeof window &&
         window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
 
     return this;
@@ -252,8 +257,8 @@ export class AnimationSequence {
   private getTargetElements(
     target: string | HTMLElement | HTMLElement[]
   ): HTMLElement[] {
-    if (typeof target === 'string') {
-      return Array.from(document.querySelectorAll(target)) as HTMLElement[];
+    if ('string' === typeof target) {
+      return [...document.querySelectorAll(target)] as HTMLElement[];
     } else if (Array.isArray(target)) {
       return target;
     } else {
@@ -267,7 +272,7 @@ export class AnimationSequence {
   private simplifyKeyframes(keyframes: Keyframe[]): Keyframe[] {
     // For reduced motion, we only keep the first and last keyframe
     // and remove transform properties that cause motion
-    if (keyframes.length <= 2) {
+    if (2 >= keyframes.length) {
       return keyframes;
     }
 
@@ -305,9 +310,9 @@ export class SpringAnimation {
   private targetValue: number;
   private velocity: number;
   private options: SpringOptions;
-  private animationFrame: number | null = null;
-  private onUpdateCallback: ((value: number) => void) | null = null;
-  private onCompleteCallback: (() => void) | null = null;
+  private animationFrame: number | null = undefined;
+  private onUpdateCallback: ((value: number) => void) | null = undefined;
+  private onCompleteCallback: (() => void) | null = undefined;
 
   constructor(
     target: HTMLElement,
@@ -345,9 +350,9 @@ export class SpringAnimation {
    * Stop the spring animation
    */
   stop(): this {
-    if (this.animationFrame !== null) {
+    if (null !== this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = null;
+      this.animationFrame = undefined;
     }
     return this;
   }
@@ -357,7 +362,7 @@ export class SpringAnimation {
    */
   setTarget(value: number): this {
     this.targetValue = value;
-    if (this.animationFrame === null) {
+    if (null === this.animationFrame) {
       this.start();
     }
     return this;
@@ -425,7 +430,7 @@ export class SpringAnimation {
    */
   private applyValueToProperty(value: number): void {
     // Handle different property types
-    if (this.property === 'x' || this.property === 'y') {
+    if ('x' === this.property || 'y' === this.property) {
       const transform = this.target.style.transform || '';
       const regex = new RegExp(
         `translate${this.property.toUpperCase()}\\([^)]+\\)`,
@@ -433,17 +438,17 @@ export class SpringAnimation {
       );
       const newTransform = transform.replace(regex, '');
       this.target.style.transform = `${newTransform} translate${this.property.toUpperCase()}(${value}px)`;
-    } else if (this.property === 'rotate') {
+    } else if ('rotate' === this.property) {
       const transform = this.target.style.transform || '';
       const regex = /rotate\([^)]+\)/g;
       const newTransform = transform.replace(regex, '');
       this.target.style.transform = `${newTransform} rotate(${value}deg)`;
-    } else if (this.property === 'scale') {
+    } else if ('scale' === this.property) {
       const transform = this.target.style.transform || '';
       const regex = /scale\([^)]+\)/g;
       const newTransform = transform.replace(regex, '');
       this.target.style.transform = `${newTransform} scale(${value})`;
-    } else if (this.property === 'opacity') {
+    } else if ('opacity' === this.property) {
       this.target.style.opacity = value.toString();
     } else {
       // For other properties, assume pixels
@@ -472,12 +477,14 @@ export function useMagneticEffect(
 
   const prefersReducedMotion =
     respectReducedMotion &&
-    typeof window !== 'undefined' &&
+    'undefined' !== typeof window &&
     window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
     const element = ref.current;
-    if (!element || prefersReducedMotion) return;
+    if (!element || prefersReducedMotion) {
+      return;
+    }
 
     // State variables
     let isHovering = false;
@@ -487,7 +494,7 @@ export function useMagneticEffect(
     let elementY = 0;
     let elementRotateX = 0;
     let elementRotateY = 0;
-    let animationFrame: number | null = null;
+    let animationFrame: number | null;
 
     // Get element dimensions and position
     const updateElementPosition = () => {
@@ -536,15 +543,15 @@ export function useMagneticEffect(
 
         // Stop animation if close to original position
         if (
-          Math.abs(elementX) < 0.1 &&
-          Math.abs(elementY) < 0.1 &&
-          Math.abs(elementRotateX) < 0.1 &&
-          Math.abs(elementRotateY) < 0.1
+          0.1 > Math.abs(elementX) &&
+          0.1 > Math.abs(elementY) &&
+          0.1 > Math.abs(elementRotateX) &&
+          0.1 > Math.abs(elementRotateY)
         ) {
           element.style.transform = '';
           element.style.transition = '';
           cancelAnimationFrame(animationFrame!);
-          animationFrame = null;
+          animationFrame = undefined;
           return;
         }
       } else {
@@ -601,7 +608,7 @@ export function useMagneticEffect(
       window.removeEventListener('resize', updateElementPosition);
       window.removeEventListener('scroll', updateElementPosition);
 
-      if (animationFrame !== null) {
+      if (null !== animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
     };
@@ -627,11 +634,11 @@ export class AnimationChoreographer {
 
   constructor() {
     this.prefersReducedMotion =
-      typeof window !== 'undefined' &&
+      'undefined' !== typeof window &&
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
     // Listen for changes to reduced motion preference
-    if (typeof window !== 'undefined' && window.matchMedia) {
+    if ('undefined' !== typeof window && window.matchMedia) {
       window
         .matchMedia('(prefers-reduced-motion: reduce)')
         .addEventListener('change', this.handleReducedMotionChange);
@@ -728,7 +735,7 @@ export class AnimationChoreographer {
     this.stopAll();
     this.sequences.clear();
 
-    if (typeof window !== 'undefined' && window.matchMedia) {
+    if ('undefined' !== typeof window && window.matchMedia) {
       window
         .matchMedia('(prefers-reduced-motion: reduce)')
         .removeEventListener('change', this.handleReducedMotionChange);

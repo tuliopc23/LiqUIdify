@@ -1,8 +1,7 @@
-import React, { createContext, useContext, ReactNode } from 'react';
-import {
-  GracefulDegradationManager,
-  DegradationConfig,
-} from '../utils/graceful-degradation';
+import type { ReactNode } from 'react';
+import React, { createContext, useContext } from 'react';
+import type { DegradationConfig } from '../utils/graceful-degradation';
+import { GracefulDegradationManager } from '../utils/graceful-degradation';
 
 interface GracefulDegradationContextType {
   manager: GracefulDegradationManager;
@@ -10,7 +9,7 @@ interface GracefulDegradationContextType {
 }
 
 const GracefulDegradationContext =
-  createContext<GracefulDegradationContextType | null>(null);
+  createContext<GracefulDegradationContextType | null>(undefined);
 
 interface GracefulDegradationProviderProps {
   children: ReactNode;

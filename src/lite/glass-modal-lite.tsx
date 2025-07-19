@@ -29,7 +29,9 @@ export function GlassModalLite({
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if ('Escape' === e.key) {
+        onClose();
+      }
     };
 
     if (isOpen) {
@@ -43,7 +45,9 @@ export function GlassModalLite({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return;
+  }
 
   const sizeClasses = {
     sm: 'max-w-sm',

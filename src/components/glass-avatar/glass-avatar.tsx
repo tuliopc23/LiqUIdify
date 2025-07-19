@@ -95,7 +95,7 @@ export const GlassAvatar = React.forwardRef<HTMLDivElement, GlassAvatarProps>(
               (e.target as HTMLImageElement).style.display = 'none';
             }}
           />
-        ) : fallback ? (
+        ) : (fallback ? (
           <span
             className={cn(
               'font-medium text-gray-900 dark:text-white',
@@ -111,7 +111,7 @@ export const GlassAvatar = React.forwardRef<HTMLDivElement, GlassAvatarProps>(
               'bg-gray-200 dark:bg-gray-700 p-1 rounded-full'
             )}
           />
-        )}
+        ))}
 
         {/* Status indicator */}
         {status && (

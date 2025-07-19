@@ -20,8 +20,8 @@ export function GlassHeader({
       <LiquidGlassSvgFilters />
       <AppleLiquidGlassNav
         intensity="subtle"
-        magnetic={true}
-        animated={true}
+        magnetic
+        animated
         className={cn('border-b border-white/15 py-6', className)}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-2 md:flex-row md:items-center md:justify-between w-full">

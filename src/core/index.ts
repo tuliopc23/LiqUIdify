@@ -64,30 +64,39 @@ export type {
 } from './types';
 
 // Export all utilities
-export * from './utils';
-export * from './hooks';
-export * from './components';
-export * from './constants';
-export * from './patterns';
+import * as Utils from './utils';
+import * as Hooks from './hooks';
+import * as Components from './components';
+import * as Constants from './constants';
+import * as Patterns from './patterns';
 
 // Re-export commonly used utilities for convenience
-export { cn } from './utils/classname';
-export {
+import { cn } from './utils/classname';
+import { 
   generateGlassClasses,
   generateGlassVariables,
   mapIntensity,
 } from './utils/glass-effects';
-export {
+import {
   responsiveSize,
   touchTarget,
   microInteraction,
 } from './utils/responsive';
-export {
+import {
   useGlassStateTransitions,
   useMagneticHover,
   useRippleEffect,
 } from './hooks';
-export {
+import {
   createBusinessLogicHook,
   createCompoundComponentWithContext,
 } from './patterns';
+
+export {
+  ...Utils,
+  ...Hooks,
+  ...Components,
+  ...Constants,
+  ...Patterns,
+  cn,
+  generateGl...

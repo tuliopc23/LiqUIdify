@@ -12,7 +12,7 @@
  * - Tree-shakeable exports
  */
 
-import { useState, useRef, useCallback } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 // Types
@@ -146,8 +146,8 @@ export const createGlassEffect = (config: GlassEffectConfig) => ({
 });
 
 // Legacy system compatibility - placeholder exports
-export const AppleLiquidGlass = () => null;
-export const EnhancedAppleLiquidGlass = () => null;
+export const AppleLiquidGlass = () => undefined;
+export const EnhancedAppleLiquidGlass = () => undefined;
 
 // Export for tree-shaking
 export default useUnifiedGlass;

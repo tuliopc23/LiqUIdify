@@ -285,7 +285,7 @@ export const getToken = (path: string) => {
   let current: any = liquidGlassTokens;
 
   for (const key of keys) {
-    if (current && typeof current === 'object' && key in current) {
+    if (current && 'object' === typeof current && key in current) {
       current = current[key];
     } else {
       return undefined;
@@ -300,7 +300,7 @@ export const getThemeToken = (theme: 'light' | 'dark', path: string) => {
   let current: any = glassThemes[theme];
 
   for (const key of keys) {
-    if (current && typeof current === 'object' && key in current) {
+    if (current && 'object' === typeof current && key in current) {
       current = current[key];
     } else {
       return undefined;

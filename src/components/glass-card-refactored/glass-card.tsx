@@ -9,18 +9,19 @@
  * - Separated business logic from presentation
  */
 
-import { forwardRef, createContext, useContext } from 'react';
-import {
+import { createContext, forwardRef, useContext } from 'react';
+import type {
   ComponentPropsBuilder,
-  LayoutGlassProps,
   HeadingProps,
-  ParagraphProps,
+  LayoutGlassProps,
+  ParagraphProps} from '@/core';
+import {
   cn,
+  createBusinessLogicHook,
   generateGlassClasses,
   generateGlassVariables,
-  useGlassStateTransitions,
-  createBusinessLogicHook,
   microInteraction,
+  useGlassStateTransitions,
 } from '@/core';
 
 // Card state type
@@ -69,12 +70,12 @@ const useCardBusinessLogic = createBusinessLogicHook<CardState>(
     props: GlassCardRefactoredProps
   ) => ({
     handleHover: (isHovered: boolean) => {
-      if (!props.hover) return;
+      if (!props.hover) {return;}
       setState((prev: CardState) => ({ ...prev, isHovered }));
     },
 
     handlePress: () => {
-      if (!props.interactive) return;
+      if (!props.interactive) {return;}
       setState((prev: CardState) => ({ ...prev, isPressed: true }));
       setTimeout(
         () => setState((prev: CardState) => ({ ...prev, isPressed: false })),
@@ -83,7 +84,7 @@ const useCardBusinessLogic = createBusinessLogicHook<CardState>(
     },
 
     handleSelect: (isSelected: boolean) => {
-      if (!props.selectable) return;
+      if (!props.selectable) {return;}
       setState((prev: CardState) => ({ ...prev, isSelected }));
     },
   })
@@ -267,8 +268,8 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
         'ring-2 ring-blue-500/20': state.isSelected,
         'hover:shadow-lg': hover && !disableAnimations,
         'active:scale-[0.98]': interactive && !disableAnimations,
-        flex: orientation === 'horizontal',
-        'flex-col': orientation === 'vertical',
+        flex: 'horizontal' === orientation ,
+        'flex-col': 'vertical' === orientation ,
       },
 
       // Elevation classes
@@ -326,7 +327,7 @@ export const CardHeader = forwardRef<
       ref={ref}
       className={cn(
         'flex flex-col space-y-1.5 p-6',
-        variant === 'apple' && 'pb-4',
+        'apple' === variant && 'pb-4',
         className
       )}
       {...props}
@@ -351,7 +352,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HeadingProps>(
         className={cn(
           'text-lg font-semibold leading-none tracking-tight',
           'text-gray-900 dark:text-gray-100',
-          variant === 'apple' && 'text-gray-800 dark:text-gray-200',
+          'apple' === variant && 'text-gray-800 dark:text-gray-200',
           className
         )}
         {...props}
@@ -376,7 +377,7 @@ export const CardDescription = forwardRef<HTMLParagraphElement, ParagraphProps>(
         ref={ref}
         className={cn(
           'text-sm text-gray-600 dark:text-gray-400',
-          variant === 'apple' && 'text-gray-700 dark:text-gray-300',
+          'apple' === variant && 'text-gray-700 dark:text-gray-300',
           className
         )}
         {...props}
@@ -401,7 +402,7 @@ export const CardContent = forwardRef<
   return (
     <div
       ref={ref}
-      className={cn('flex-1', padding !== 'none' && 'p-6 pt-0', className)}
+      className={cn('flex-1', 'none' !== padding && 'p-6 pt-0', className)}
       {...props}
     >
       {children}
@@ -425,7 +426,7 @@ export const CardFooter = forwardRef<
       ref={ref}
       className={cn(
         'flex items-center p-6 pt-0',
-        variant === 'apple' && 'pt-4',
+        'apple' === variant && 'pt-4',
         className
       )}
       {...props}

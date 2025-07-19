@@ -1,10 +1,10 @@
 import type { AxeResults } from 'axe-core';
 import axe from 'axe-core';
 import {
-  checkContrast,
-  suggestBetterColor,
-  checkGlassContrast,
   type ContrastResult as BaseContrastResult,
+  checkContrast,
+  checkGlassContrast,
+  suggestBetterColor,
 } from '@/utils/contrast-checker';
 import { announcer } from '@/components/glass-live-region';
 
@@ -250,7 +250,7 @@ export class AccessibilityManager {
   private axeOptions: any;
   private contrastCache: Map<string, ContrastResult>;
   private validationCache: Map<HTMLElement, AccessibilityReport>;
-  private observer: MutationObserver | null = null;
+  private observer: MutationObserver | null = undefined;
 
   private constructor() {
     this.contrastCache = new Map();
@@ -266,7 +266,7 @@ export class AccessibilityManager {
     };
 
     // Initialize mutation observer for real-time validation
-    if (typeof window !== 'undefined' && window.MutationObserver) {
+    if ('undefined' !== typeof window && window.MutationObserver) {
       this.observer = new MutationObserver(this.handleMutations.bind(this));
     }
   }
@@ -287,7 +287,7 @@ export class AccessibilityManager {
   ): Promise<AccessibilityReport> {
     // Check cache first
     const cached = this.validationCache.get(element);
-    if (cached && Date.now() - cached.timestamp.getTime() < 5000) {
+    if (cached && 5000 > Date.now() - cached.timestamp.getTime()) {
       return cached;
     }
 
@@ -363,7 +363,9 @@ export class AccessibilityManager {
     // Check cache
     const cacheKey = `${foreground}-${background}-${level}-${largeText}`;
     const cached = this.contrastCache.get(cacheKey);
-    if (cached) return cached;
+    if (cached) {
+      return cached;
+    }
 
     let result: ContrastResult;
 
@@ -383,7 +385,7 @@ export class AccessibilityManager {
 
     // Check if it meets the required level
     const meetsRequirement =
-      level === 'AA'
+      'AA' === level
         ? largeText
           ? result.passes.aa.large
           : result.passes.aa.normal
@@ -394,7 +396,7 @@ export class AccessibilityManager {
     // Auto-fix if needed and requested
     if (!meetsRequirement && autoFix) {
       const targetRatio =
-        level === 'AA' ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
+        'AA' === level ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
 
       try {
         const suggestedFg = suggestBetterColor(
@@ -460,7 +462,7 @@ export class AccessibilityManager {
    */
   announce(message: string, priority: 'polite' | 'assertive' = 'polite'): void {
     announcer.announce(message, {
-      priority: priority === 'assertive' ? 'high' : 'medium',
+      priority: 'assertive' === priority ? 'high' : 'medium',
       context: 'general',
     });
   }
@@ -490,7 +492,7 @@ export class AccessibilityManager {
     }
 
     // Validate ARIA attributes
-    const ariaAttributes = Array.from(element.attributes).filter(attr =>
+    const ariaAttributes = [...element.attributes].filter(attr =>
       attr.name.startsWith('aria-')
     );
 
@@ -512,7 +514,7 @@ export class AccessibilityManager {
 
       // Validate attribute value
       if (
-        attrRule.type === 'boolean' &&
+        'boolean' === attrRule.type &&
         'values' in attrRule &&
         !attrRule.values?.includes(attrValue)
       ) {
@@ -539,11 +541,11 @@ export class AccessibilityManager {
       }
 
       // Validate idref attributes
-      if (attrRule.type === 'idref') {
+      if ('idref' === attrRule.type) {
         const ids = attrValue.split(' ').filter(id => id.trim());
         const missingIds = ids.filter(id => !document.getElementById(id));
 
-        if (missingIds.length > 0) {
+        if (0 < missingIds.length) {
           errors.push({
             attribute: attrName,
             value: attrValue,
@@ -562,7 +564,7 @@ export class AccessibilityManager {
         if (!element.hasAttribute(prop)) {
           suggestions.push({
             attribute: prop,
-            currentValue: null,
+            currentValue: undefined,
             suggestedValue: this.getSuggestedARIAValue(prop, element),
             reason: `Required attribute for role="${role}"`,
           });
@@ -580,7 +582,7 @@ export class AccessibilityManager {
             element.setAttribute(prop, value);
             autoCorrections.push({
               attribute: prop,
-              oldValue: null,
+              oldValue: undefined,
               newValue: value,
               applied: true,
             });
@@ -593,14 +595,14 @@ export class AccessibilityManager {
     if (this.isInteractive(element) && !this.hasAccessibleName(element)) {
       suggestions.push({
         attribute: 'aria-label',
-        currentValue: null,
+        currentValue: undefined,
         suggestedValue: this.generateAccessibleName(element),
         reason: 'Interactive element needs accessible name',
       });
     }
 
     return {
-      valid: errors.length === 0,
+      valid: 0 === errors.length,
       errors,
       suggestions,
       autoCorrections,
@@ -611,7 +613,9 @@ export class AccessibilityManager {
    * Enable real-time accessibility monitoring
    */
   enableRealTimeMonitoring(rootElement: HTMLElement = document.body): void {
-    if (!this.observer) return;
+    if (!this.observer) {
+      return;
+    }
 
     this.observer.observe(rootElement, {
       attributes: true,
@@ -661,10 +665,8 @@ export class AccessibilityManager {
 
     // Check for empty headings
     const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    const emptyHeadings = Array.from(headings).filter(
-      h => !h.textContent?.trim()
-    );
-    if (emptyHeadings.length > 0) {
+    const emptyHeadings = [...headings].filter(h => !h.textContent?.trim());
+    if (0 < emptyHeadings.length) {
       warnings.push({
         id: 'empty-headings',
         description: 'Empty heading elements found',
@@ -677,12 +679,12 @@ export class AccessibilityManager {
     const positiveTabindex = element.querySelectorAll(
       '[tabindex]:not([tabindex="0"]):not([tabindex="-1"])'
     );
-    if (positiveTabindex.length > 0) {
+    if (0 < positiveTabindex.length) {
       warnings.push({
         id: 'positive-tabindex',
         description: 'Positive tabindex values can disrupt keyboard navigation',
         suggestion: 'Use tabindex="0" or "-1" instead',
-        elements: Array.from(positiveTabindex) as HTMLElement[],
+        elements: [...positiveTabindex] as HTMLElement[],
       });
     }
 
@@ -698,7 +700,7 @@ export class AccessibilityManager {
 
     // Contrast suggestions
     violations.forEach(violation => {
-      if (violation.id === 'color-contrast') {
+      if ('color-contrast' === violation.id) {
         suggestions.push({
           type: 'contrast',
           message: 'Improve color contrast for better readability',
@@ -747,7 +749,9 @@ export class AccessibilityManager {
       results.violations.length +
       results.passes.length +
       results.incomplete.length;
-    if (totalChecks === 0) return 100;
+    if (0 === totalChecks) {
+      return 100;
+    }
 
     const violationWeight = results.violations.reduce((sum, v) => {
       const impactWeight = { minor: 1, moderate: 2, serious: 3, critical: 4 };
@@ -761,11 +765,15 @@ export class AccessibilityManager {
   private determineWCAGLevel(violations: Violation[]): 'A' | 'AA' | 'AAA' {
     const hasAAViolations = violations.some(
       v =>
-        v.id.includes('aa') || v.impact === 'serious' || v.impact === 'critical'
+        v.id.includes('aa') || 'serious' === v.impact || 'critical' === v.impact
     );
 
-    if (!hasAAViolations && violations.length === 0) return 'AAA';
-    if (!hasAAViolations) return 'AA';
+    if (!hasAAViolations && 0 === violations.length) {
+      return 'AAA';
+    }
+    if (!hasAAViolations) {
+      return 'AA';
+    }
     return 'A';
   }
 
@@ -814,7 +822,7 @@ export class AccessibilityManager {
       li: 'listitem',
     };
 
-    return implicitRoles[tagName] || null;
+    return implicitRoles[tagName] || undefined;
   }
 
   private isInteractive(element: HTMLElement): boolean {
@@ -884,7 +892,7 @@ export class AccessibilityManager {
   private handleMutations(mutations: MutationRecord[]): void {
     mutations.forEach(mutation => {
       if (
-        mutation.type === 'attributes' &&
+        'attributes' === mutation.type &&
         mutation.attributeName?.startsWith('aria-')
       ) {
         const element = mutation.target as HTMLElement;
@@ -905,8 +913,8 @@ class FocusTrap {
   private container: HTMLElement;
   private options: FocusOptions & { onDeactivate?: () => void };
   private active: boolean = false;
-  private firstFocusableElement: HTMLElement | null = null;
-  private lastFocusableElement: HTMLElement | null = null;
+  private firstFocusableElement: HTMLElement | null = undefined;
+  private lastFocusableElement: HTMLElement | null = undefined;
 
   constructor(
     container: HTMLElement,
@@ -918,14 +926,16 @@ class FocusTrap {
   }
 
   activate(): void {
-    if (this.active) return;
+    if (this.active) {
+      return;
+    }
 
     this.active = true;
 
     // Set initial focus
     if (this.options.initialFocus) {
       const initialElement =
-        typeof this.options.initialFocus === 'string'
+        'string' === typeof this.options.initialFocus
           ? (this.container.querySelector(
               this.options.initialFocus
             ) as HTMLElement)
@@ -948,7 +958,9 @@ class FocusTrap {
   }
 
   deactivate(): void {
-    if (!this.active) return;
+    if (!this.active) {
+      return;
+    }
 
     this.active = false;
     document.removeEventListener('keydown', this.handleKeyDown);
@@ -969,22 +981,26 @@ class FocusTrap {
       '[tabindex]:not([tabindex="-1"])',
     ].join(', ');
 
-    const focusableElements = Array.from(
-      this.container.querySelectorAll(focusableSelectors)
-    ) as HTMLElement[];
+    const focusableElements = [
+      ...this.container.querySelectorAll(focusableSelectors),
+    ] as HTMLElement[];
 
-    this.firstFocusableElement = focusableElements[0] || null;
+    this.firstFocusableElement = focusableElements[0] || undefined;
     this.lastFocusableElement =
-      focusableElements[focusableElements.length - 1] || null;
+      focusableElements[focusableElements.length - 1] || undefined;
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {
-    if (!this.active) return;
+    if (!this.active) {
+      return;
+    }
 
-    if (event.key === 'Tab') {
+    if ('Tab' === event.key) {
       this.updateFocusableElements();
 
-      if (!this.firstFocusableElement || !this.lastFocusableElement) return;
+      if (!this.firstFocusableElement || !this.lastFocusableElement) {
+        return;
+      }
 
       if (
         event.shiftKey &&
@@ -999,13 +1015,15 @@ class FocusTrap {
         event.preventDefault();
         this.firstFocusableElement.focus();
       }
-    } else if (event.key === 'Escape' && this.options.escapeDeactivates) {
+    } else if ('Escape' === event.key && this.options.escapeDeactivates) {
       this.deactivate();
     }
   };
 
   private handleClickOutside = (event: MouseEvent): void => {
-    if (!this.active) return;
+    if (!this.active) {
+      return;
+    }
 
     const target = event.target as HTMLElement;
     if (!this.container.contains(target)) {

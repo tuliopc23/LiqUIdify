@@ -38,14 +38,14 @@ export function parseColor(color: string): RGBColor | null {
   // Handle hex colors
   if (color.startsWith('#')) {
     const hex = color.slice(1);
-    if (hex.length === 3) {
+    if (3 === hex.length) {
       return {
         r: parseInt(hex[0]! + hex[0]!, 16),
         g: parseInt(hex[1]! + hex[1]!, 16),
         b: parseInt(hex[2]! + hex[2]!, 16),
       };
     }
-    if (hex.length === 6) {
+    if (6 === hex.length) {
       return {
         r: parseInt(hex.slice(0, 2), 16),
         g: parseInt(hex.slice(2, 4), 16),
@@ -79,7 +79,7 @@ export function parseColor(color: string): RGBColor | null {
     return hslToRgb(h, s, l, a);
   }
 
-  return null;
+  return ;
 }
 
 /**
@@ -88,7 +88,7 @@ export function parseColor(color: string): RGBColor | null {
 export function rgbToHex(r: number, g: number, b: number): string {
   const toHex = (n: number) => {
     const hex = Math.round(Math.max(0, Math.min(255, n))).toString(16);
-    return hex.length === 1 ? '0' + hex : hex;
+    return 1 === hex.length ? '0' + hex : hex;
   };
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
@@ -115,8 +115,8 @@ export function rgbToHsl(
   let h = 0;
   let s = 0;
 
-  if (diff !== 0) {
-    s = l > 0.5 ? diff / (2 - sum) : diff / sum;
+  if (0 !== diff) {
+    s = 0.5 < l ? diff / (2 - sum) : diff / sum;
 
     switch (max) {
       case r:
@@ -151,20 +151,20 @@ export function hslToRgb(
   h /= 360;
 
   const hueToRgb = (p: number, q: number, t: number) => {
-    if (t < 0) t += 1;
-    if (t > 1) t -= 1;
-    if (t < 1 / 6) return p + (q - p) * 6 * t;
-    if (t < 1 / 2) return q;
-    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    if (0 > t) {t += 1;}
+    if (1 < t) {t -= 1;}
+    if (t < 1 / 6) {return p + (q - p) * 6 * t;}
+    if (t < 1 / 2) {return q;}
+    if (t < 2 / 3) {return p + (q - p) * (2 / 3 - t) * 6;}
     return p;
   };
 
   let r, g, b;
 
-  if (s === 0) {
+  if (0 === s) {
     r = g = b = l; // achromatic
   } else {
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const q = 0.5 > l ? l * (1 + s) : l + s - l * s;
     const p = 2 * l - q;
     r = hueToRgb(p, q, h + 1 / 3);
     g = hueToRgb(p, q, h);
@@ -183,14 +183,14 @@ export function hslToRgb(
  * Calculate luminance of a color (for contrast ratio calculations)
  */
 export function getLuminance(color: string | RGBColor): number {
-  const rgb = typeof color === 'string' ? parseColor(color) : color;
-  if (!rgb) return 0;
+  const rgb = 'string' === typeof color ? parseColor(color) : color;
+  if (!rgb) {return 0;}
 
   const { r, g, b } = rgb;
 
   const normalize = (value: number) => {
     const normalized = value / 255;
-    return normalized <= 0.03928
+    return 0.039_28 >= normalized 
       ? normalized / 12.92
       : Math.pow((normalized + 0.055) / 1.055, 2.4);
   };
@@ -225,18 +225,18 @@ export function meetsContrastRequirement(
 ): boolean {
   const ratio = getContrastRatio(foreground, background);
 
-  if (level === 'AAA') {
-    return size === 'large' ? ratio >= 4.5 : ratio >= 7;
+  if ('AAA' === level) {
+    return 'large' === size ? 4.5 <= ratio : 7 <= ratio;
   }
 
-  return size === 'large' ? ratio >= 3 : ratio >= 4.5;
+  return 'large' === size ? 3 <= ratio : 4.5 <= ratio;
 }
 
 /**
  * Determine if a color is light or dark
  */
 export function isLightColor(color: string | RGBColor): boolean {
-  return getLuminance(color) > 0.5;
+  return 0.5 < getLuminance(color);
 }
 
 /**
@@ -244,7 +244,7 @@ export function isLightColor(color: string | RGBColor): boolean {
  */
 export function getComplementaryColor(color: string): string {
   const rgb = parseColor(color);
-  if (!rgb) return color;
+  if (!rgb) {return color;}
 
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
   const complementaryHue = (hsl.h + 180) % 360;
@@ -258,7 +258,7 @@ export function getComplementaryColor(color: string): string {
  */
 export function lighten(color: string, amount: number): string {
   const rgb = parseColor(color);
-  if (!rgb) return color;
+  if (!rgb) {return color;}
 
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
   const newLightness = Math.min(100, hsl.l + amount);
@@ -272,7 +272,7 @@ export function lighten(color: string, amount: number): string {
  */
 export function darken(color: string, amount: number): string {
   const rgb = parseColor(color);
-  if (!rgb) return color;
+  if (!rgb) {return color;}
 
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
   const newLightness = Math.max(0, hsl.l - amount);
@@ -286,7 +286,7 @@ export function darken(color: string, amount: number): string {
  */
 export function setOpacity(color: string, opacity: number): string {
   const rgb = parseColor(color);
-  if (!rgb) return color;
+  if (!rgb) {return color;}
 
   const clampedOpacity = Math.max(0, Math.min(1, opacity));
   return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${clampedOpacity})`;
@@ -305,7 +305,7 @@ export function generatePalette(
   for (let i = 0; i < steps; i++) {
     const lightness = i * stepSize;
     const rgb = parseColor(baseColor);
-    if (!rgb) continue;
+    if (!rgb) {continue;}
 
     const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
     const newRgb = hslToRgb(hsl.h, hsl.s / 100, lightness / 100);
@@ -396,11 +396,11 @@ export const glassColors = {
  */
 export function getColorInfo(color: string): ColorInfo | null {
   const rgb = parseColor(color);
-  if (!rgb) return null;
+  if (!rgb) {return ;}
 
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
   const luminance = getLuminance(rgb);
-  const isDark = luminance < 0.5;
+  const isDark = 0.5 > luminance;
   const isLight = !isDark;
 
   return {
@@ -418,7 +418,7 @@ export function getColorInfo(color: string): ColorInfo | null {
  */
 export function isValidColor(color: string): boolean {
   const rgb = parseColor(color);
-  return rgb !== null;
+  return null !== rgb;
 }
 
 /**
@@ -426,7 +426,7 @@ export function isValidColor(color: string): boolean {
  */
 export function formatColor(color: string, format: ColorFormat): string {
   const rgb = parseColor(color);
-  if (!rgb) return color;
+  if (!rgb) {return color;}
 
   switch (format) {
     case 'hex':

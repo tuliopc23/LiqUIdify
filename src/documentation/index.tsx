@@ -12,8 +12,8 @@ import {
 import { GlassTabs } from '../components/glass-tabs';
 import type {
   GlassButtonProps,
-  GlassInputProps,
   GlassCardProps,
+  GlassInputProps,
   GlassTabsProps,
 } from '../types';
 

@@ -1,6 +1,6 @@
 import React, { forwardRef, useId } from 'react';
 import { cn } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import { AlertCircle, CheckCircle, Info } from 'lucide-react';
 
 const formFieldVariants = cva(['space-y-2', 'transition-all duration-200'], {
@@ -116,7 +116,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         case 'warning':
           return <Info className="w-3 h-3 flex-shrink-0" />;
         default:
-          return null;
+          return ;
       }
     };
 
@@ -129,7 +129,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
           'aria-invalid': error ? true : undefined,
           'aria-required': required,
           disabled,
-          ...(typeof child.props === 'object' && child.props !== null
+          ...('object' === typeof child.props && null !== child.props
             ? child.props
             : {}),
         });
@@ -160,7 +160,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         )}
 
         <div
-          className={cn(variant === 'inline' ? 'flex-1' : 'w-full', 'relative')}
+          className={cn('inline' === variant ? 'flex-1' : 'w-full', 'relative')}
         >
           {enhancedChildren}
         </div>

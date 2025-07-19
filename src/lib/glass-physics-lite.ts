@@ -3,7 +3,7 @@
  * CSS-based animations with Web Animations API fallback
  */
 
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Re-export Vector2D for compatibility
 export { Vector2D } from './glass-physics';
@@ -29,7 +29,7 @@ export function useSpringAnimation(config: PhysicsConfig = {}) {
   const getSpringEasing = useCallback(() => {
     // CSS cubic-bezier approximation of spring physics
     const damping = friction / (2 * Math.sqrt(mass * tension));
-    if (damping < 1) {
+    if (1 > damping) {
       // Underdamped spring
       return `cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
     } else {
@@ -44,7 +44,9 @@ export function useSpringAnimation(config: PhysicsConfig = {}) {
       properties: Record<string, string>,
       options?: KeyframeAnimationOptions
     ) => {
-      if (!element) return;
+      if (!element) {
+        return;
+      }
 
       setIsAnimating(true);
 
@@ -72,7 +74,7 @@ export function useSpringAnimation(config: PhysicsConfig = {}) {
           htmlElement.style.transition = '';
           setIsAnimating(false);
         }, duration);
-        
+
         return undefined;
       }
     },
@@ -92,7 +94,9 @@ export function useMagneticEffect(
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!elementRef.current || !isActive) return;
+      if (!elementRef.current || !isActive) {
+        return;
+      }
 
       const rect = elementRef.current.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -147,7 +151,9 @@ export function useParallaxEffect(speed: number = 0.5) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!elementRef.current) return;
+      if (!elementRef.current) {
+        return;
+      }
 
       const scrolled = window.pageYOffset;
       const rate = scrolled * -speed;
@@ -172,7 +178,9 @@ export function useRippleEffect() {
   const containerRef = useRef<HTMLElement>(null);
 
   const createRipple = useCallback((e: React.MouseEvent) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) {
+      return;
+    }
 
     const container = containerRef.current;
     const rect = container.getBoundingClientRect();
@@ -212,7 +220,7 @@ export function useElasticScroll() {
 
   const scrollTo = useCallback(
     (target: number | HTMLElement, options?: ScrollToOptions) => {
-      if (typeof target === 'number') {
+      if ('number' === typeof target) {
         window.scrollTo({
           top: target,
           behavior: 'smooth',

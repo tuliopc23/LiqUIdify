@@ -1,16 +1,16 @@
 import React, {
   forwardRef,
-  useState,
-  useRef,
-  useEffect,
   useCallback,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
 import {
   cn,
   focusRing,
 } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { Plus, Minus } from 'lucide-react';
+import { type VariantProps, cva } from 'class-variance-authority';
+import { Minus, Plus } from 'lucide-react';
 
 const numberInputVariants = cva(['relative w-full'], {
   variants: {
@@ -138,7 +138,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     // Format number for display
     const formatNumber = useCallback(
       (num: number | undefined): string => {
-        if (num === undefined || isNaN(num)) return '';
+        if (num === undefined || isNaN(num)) {return '';}
 
         if (formatOptions) {
           return new Intl.NumberFormat(locale, formatOptions).format(num);
@@ -152,13 +152,13 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     // Parse display value to number
     const parseNumber = useCallback(
       (str: string): number | undefined => {
-        if (!str.trim()) return undefined;
+        if (!str.trim()) {return undefined;}
 
         // Remove formatting characters but keep decimal point and negative sign
         const cleaned = str.replace(/[^\d.-]/g, '');
         const num = parseFloat(cleaned);
 
-        if (isNaN(num)) return undefined;
+        if (isNaN(num)) {return undefined;}
 
         // Apply precision
         const rounded =
@@ -166,8 +166,8 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 
         // Apply constraints
         let constrained = rounded;
-        if (min !== undefined) constrained = Math.max(constrained, min);
-        if (max !== undefined) constrained = Math.min(constrained, max);
+        if (min !== undefined) {constrained = Math.max(constrained, min);}
+        if (max !== undefined) {constrained = Math.min(constrained, max);}
 
         return constrained;
       },
@@ -222,7 +222,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 
     // Handle increment/decrement
     const handleIncrement = () => {
-      if (disabled) return;
+      if (disabled) {return;}
 
       const current = internalValue || 0;
       const newValue = current + step;
@@ -234,7 +234,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     };
 
     const handleDecrement = () => {
-      if (disabled) return;
+      if (disabled) {return;}
 
       const current = internalValue || 0;
       const newValue = current - step;
@@ -247,7 +247,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 
     // Handle keyboard shortcuts
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (disabled) return;
+      if (disabled) {return;}
 
       switch (e.key) {
         case 'ArrowUp':
@@ -265,12 +265,12 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
       }
 
       // Allow only numeric characters, decimal point, and negative sign
-      if (e.key.length === 1) {
+      if (1 === e.key.length) {
         const char = e.key;
         const isNumeric = /\d/.test(char);
-        const isDecimal = char === '.' && allowDecimals;
+        const isDecimal = '.' === char && allowDecimals;
         const isNegative =
-          char === '-' && allowNegative && e.currentTarget.selectionStart === 0;
+          '-' === char && allowNegative && 0 === e.currentTarget.selectionStart;
 
         if (!isNumeric && !isDecimal && !isNegative) {
           e.preventDefault();
@@ -286,7 +286,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
         if (inputRef.current) {
           inputRef.current = node;
         }
-        if (typeof ref === 'function') {
+        if ('function' === typeof ref) {
           ref(node);
         } else if (ref) {
           ref.current = node;

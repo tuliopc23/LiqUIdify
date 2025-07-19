@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Search, Clock, TrendingUp, X, ArrowRight } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowRight, Clock, Search, TrendingUp, X } from 'lucide-react';
 import {
   cn,
+  focusRing,
   getGlassClass,
   microInteraction,
-  focusRing,
 } from '@/lib/glass-utils';
 
 export interface SearchSuggestion {
@@ -66,7 +66,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (!isOpen) return;
+      if (!isOpen) {return;}
 
       switch (event.key) {
         case 'ArrowDown':
@@ -79,7 +79,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           break;
         case 'Enter':
           event.preventDefault();
-          if (selectedIndex >= 0 && allResults[selectedIndex]) {
+          if (0 <= selectedIndex && allResults[selectedIndex]) {
             handleSelect(allResults[selectedIndex]);
           } else if (query.trim()) {
             handleSearch();
@@ -93,13 +93,13 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       }
     };
 
-    if (typeof document !== 'undefined') {
+    if ('undefined' !== typeof document) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
-      if (typeof document !== 'undefined') {
+      if ('undefined' !== typeof document) {
         document.removeEventListener('mousedown', handleClickOutside);
         document.removeEventListener('keydown', handleKeyDown);
       }
@@ -153,7 +153,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={e => {
-            if (e.key === 'Enter') {
+            if ('Enter' === e.key) {
               e.preventDefault();
               handleSearch();
             }
@@ -183,7 +183,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       </div>
 
       {/* Search Dropdown */}
-      {isOpen && (query || recentSearches.length > 0) && (
+      {isOpen && (query || 0 < recentSearches.length) && (
         <div
           className={cn(
             'absolute top-full left-0 right-0 mt-2 rounded-xl border z-50',
@@ -192,7 +192,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           )}
         >
           {/* Recent Searches */}
-          {!query && recentSearches.length > 0 && (
+          {!query && 0 < recentSearches.length && (
             <div className="p-2">
               <div className="px-3 py-2 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
                 Recent
@@ -217,7 +217,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           )}
 
           {/* Search Results */}
-          {allResults.length > 0 && (
+          { 0 < allResults.length && (
             <div className="p-2">
               {query && (
                 <div className="px-3 py-2 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
@@ -246,7 +246,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
                       )}
                     </div>
                     {'category' in result &&
-                      typeof result.category === 'string' && (
+                      'string' === typeof result.category && (
                         <div className="text-xs text-[var(--text-tertiary)] mt-0.5">
                           in {result.category}
                         </div>
@@ -259,7 +259,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           )}
 
           {/* No Results */}
-          {query && allResults.length === 0 && (
+          {query && 0 === allResults.length && (
             <div className="p-8 text-center">
               <Search className="w-8 h-8 text-[var(--text-tertiary)] mx-auto mb-2" />
               <p className="text-[var(--text-secondary)] text-sm">

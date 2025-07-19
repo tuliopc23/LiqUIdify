@@ -1,0 +1,63 @@
+{
+  "resolver": {
+    "alias": {
+      "@": "./src",
+      "@/tokens": "./src/tokens/index",
+      "@/design-tokens": "./src/tokens/design-tokens",
+      "react": "react",
+      "react-dom": "react-dom"
+    },
+    "tsConfigPath": "./tsconfig.json",
+    "mainFields": ["module", "main", "browser"],
+    "conditionNames": ["import", "module", "browser", "default", "require"],
+    "extensionAlias": {
+      ".js": [".ts", ".tsx", ".js", ".jsx"],
+      ".jsx": [".tsx", ".jsx"],
+      ".mjs": [".mts", ".mjs"],
+      ".cjs": [".cts", ".cjs"]
+    },
+    "extensions": [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".json"],
+    "modules": ["node_modules", "src"],
+    "preferRelative": false,
+    "symlinks": true,
+    "builtin": {
+      "process": true,
+      "buffer": true,
+      "util": true,
+      "events": true,
+      "stream": true,
+      "path": true,
+      "querystring": true,
+      "url": true
+    },
+    "externalDependencies": [
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+      "react-dom/client",
+      "framer-motion",
+      "gsap",
+      "lucide-react",
+      "@radix-ui/react-slot",
+      "@radix-ui/react-accordion",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-radio-group",
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "tailwindcss-animate",
+      "prism-react-renderer",
+      "react-live"
+    ],
+    "packageJsonLookup": true,
+    "realpath": true,
+    "restrictions": [],
+    "fallback": {
+      "react/jsx-runtime": "react/jsx-runtime"
+    },
+    "enforceExtension": false,
+    "importsFields": ["imports"],
+    "descriptionFiles": ["package.json"],
+    "enforceModulesFields": ["module", "main"]
+  }
+}

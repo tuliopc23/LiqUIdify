@@ -3,7 +3,7 @@
  * Provides comprehensive server-side rendering compatibility
  */
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { isBrowser } from '../utils/ssr-utils';
 
 /**
@@ -17,7 +17,9 @@ export function useWindowSize() {
   });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     function handleResize() {
       setWindowSize({
@@ -42,7 +44,9 @@ export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const media = window.matchMedia(query);
     const updateMatches = () => setMatches(media.matches);
@@ -65,7 +69,9 @@ export function useIntersectionObserver(
   const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!isBrowser() || !ref.current) return;
+    if (!isBrowser() || !ref.current) {
+      return;
+    }
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry) {
@@ -88,7 +94,9 @@ export function useLocalStorage<T>(
   initialValue: T
 ): [T, (value: T | ((prev: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (!isBrowser()) return initialValue;
+    if (!isBrowser()) {
+      return initialValue;
+    }
 
     try {
       const item = window.localStorage.getItem(key);
@@ -101,7 +109,9 @@ export function useLocalStorage<T>(
 
   const setValue = useCallback(
     (value: T | ((prev: T) => T)) => {
-      if (!isBrowser()) return;
+      if (!isBrowser()) {
+        return;
+      }
 
       try {
         const valueToStore =
@@ -126,7 +136,9 @@ export function useSessionStorage<T>(
   initialValue: T
 ): [T, (value: T | ((prev: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (!isBrowser()) return initialValue;
+    if (!isBrowser()) {
+      return initialValue;
+    }
 
     try {
       const item = window.sessionStorage.getItem(key);
@@ -139,7 +151,9 @@ export function useSessionStorage<T>(
 
   const setValue = useCallback(
     (value: T | ((prev: T) => T)) => {
-      if (!isBrowser()) return;
+      if (!isBrowser()) {
+        return;
+      }
 
       try {
         const valueToStore =
@@ -161,12 +175,16 @@ export function useSessionStorage<T>(
  */
 export function useOnlineStatus() {
   const [isOnline, setIsOnline] = useState(() => {
-    if (!isBrowser()) return true;
+    if (!isBrowser()) {
+      return true;
+    }
     return navigator.onLine;
   });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
@@ -194,10 +212,10 @@ export function useGeolocation(options?: PositionOptions) {
     error: string | null;
     loading: boolean;
   }>({
-    latitude: null,
-    longitude: null,
-    accuracy: null,
-    error: null,
+    latitude: undefined,
+    longitude: undefined,
+    accuracy: undefined,
+    error: undefined,
     loading: true,
   });
 
@@ -216,7 +234,7 @@ export function useGeolocation(options?: PositionOptions) {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
         accuracy: position.coords.accuracy,
-        error: null,
+        error: undefined,
         loading: false,
       });
     };
@@ -240,7 +258,7 @@ export function useGeolocation(options?: PositionOptions) {
  */
 export function useClipboard() {
   const [isCopied, setIsCopied] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(undefined);
 
   const copy = useCallback(async (text: string) => {
     if (!isBrowser() || !navigator.clipboard) {
@@ -251,10 +269,10 @@ export function useClipboard() {
     try {
       await navigator.clipboard.writeText(text);
       setIsCopied(true);
-      setError(null);
+      setError(undefined);
       setTimeout(() => setIsCopied(false), 2000);
       return true;
-    } catch (err) {
+    } catch {
       setError('Failed to copy to clipboard');
       return false;
     }
@@ -268,10 +286,14 @@ export function useClipboard() {
  */
 export function useTheme() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    if (!isBrowser()) return 'light';
+    if (!isBrowser()) {
+      return 'light';
+    }
 
     const saved = localStorage.getItem('theme');
-    if (saved) return saved as 'light' | 'dark';
+    if (saved) {
+      return saved as 'light' | 'dark';
+    }
 
     const prefersDark = window.matchMedia(
       '(prefers-color-scheme: dark)'
@@ -280,7 +302,9 @@ export function useTheme() {
   });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
@@ -289,7 +313,7 @@ export function useTheme() {
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+    setTheme(prev => ('light' === prev ? 'dark' : 'light'));
   }, []);
 
   return { theme, toggleTheme };
@@ -302,7 +326,9 @@ export function useScrollPosition() {
   const [scrollPosition, setScrollPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const handleScroll = () => {
       setScrollPosition({
@@ -329,7 +355,9 @@ export function useResizeObserver(
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!isBrowser() || !ref.current || !window.ResizeObserver) return;
+    if (!isBrowser() || !ref.current || !window.ResizeObserver) {
+      return;
+    }
 
     const observer = new ResizeObserver(entries => {
       entries.forEach(callback);
@@ -354,7 +382,9 @@ export function useAnimationFrame(callback: (time: number) => void) {
   }, [callback]);
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const animate = (time: number) => {
       callbackRef.current(time);
@@ -375,7 +405,9 @@ export function useAnimationFrame(callback: (time: number) => void) {
  */
 export function useIdleCallback(callback: () => void, timeout?: number) {
   useEffect(() => {
-    if (!isBrowser() || !window.requestIdleCallback) return;
+    if (!isBrowser() || !window.requestIdleCallback) {
+      return;
+    }
 
     const id = window.requestIdleCallback(callback, { timeout });
     return () => window.cancelIdleCallback(id);
@@ -394,7 +426,9 @@ export function useNetworkStatus() {
   }>({});
 
   useEffect(() => {
-    if (!isBrowser() || !('connection' in navigator)) return;
+    if (!isBrowser() || !('connection' in navigator)) {
+      return;
+    }
 
     const conn = (navigator as any).connection;
 
@@ -420,12 +454,16 @@ export function useNetworkStatus() {
  */
 export function usePageVisibility() {
   const [isVisible, setIsVisible] = useState(() => {
-    if (!isBrowser()) return true;
+    if (!isBrowser()) {
+      return true;
+    }
     return !document.hidden;
   });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const handleVisibilityChange = () => {
       setIsVisible(!document.hidden);
@@ -451,14 +489,16 @@ export function usePerformanceMetrics() {
   });
 
   useEffect(() => {
-    if (!isBrowser() || !window.performance) return;
+    if (!isBrowser() || !window.performance) {
+      return;
+    }
 
     const observer = new PerformanceObserver(list => {
       const entries = list.getEntries();
       entries.forEach(entry => {
-        if (entry.name === 'first-paint') {
+        if ('first-paint' === entry.name) {
           setMetrics(prev => ({ ...prev, firstPaint: entry.startTime }));
-        } else if (entry.name === 'first-contentful-paint') {
+        } else if ('first-contentful-paint' === entry.name) {
           setMetrics(prev => ({
             ...prev,
             firstContentfulPaint: entry.startTime,

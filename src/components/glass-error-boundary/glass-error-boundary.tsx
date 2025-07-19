@@ -1,4 +1,5 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import type { ErrorInfo, ReactNode } from 'react';
+import React, { Component } from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/glass-utils';
 import { announcer } from '@/components/glass-live-region';
@@ -8,7 +9,7 @@ export interface GlassErrorBoundaryProps {
   children: ReactNode;
   fallback?: (error: Error, errorInfo: ErrorInfo) => ReactNode;
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
-  resetKeys?: Array<string | number>;
+  resetKeys?: (string | number)[];
   resetOnPropsChange?: boolean;
   isolate?: boolean;
   level?: 'page' | 'section' | 'component';
@@ -28,15 +29,15 @@ export class GlassErrorBoundary extends Component<
   GlassErrorBoundaryProps,
   GlassErrorBoundaryState
 > {
-  private resetTimeoutId: NodeJS.Timeout | null = null;
-  private previousResetKeys: Array<string | number> = [];
+  private resetTimeoutId: NodeJS.Timeout | null = undefined;
+  private previousResetKeys: (string | number)[] = [];
 
   constructor(props: GlassErrorBoundaryProps) {
     super(props);
     this.state = {
       hasError: false,
-      error: null,
-      errorInfo: null,
+      error: undefined,
+      errorInfo: undefined,
       errorCount: 0,
     };
   }
@@ -65,7 +66,7 @@ export class GlassErrorBoundary extends Component<
     }));
 
     // Track error in production
-    if (trackErrors && process.env.NODE_ENV === 'production') {
+    if (trackErrors && 'production' === process.env.NODE_ENV) {
       errorTracking.trackError(error, errorInfo, {
         component: componentName || 'Unknown',
         action: 'component-error',
@@ -80,7 +81,7 @@ export class GlassErrorBoundary extends Component<
     }
 
     // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
+    if ('development' === process.env.NODE_ENV) {
       console.error(`[GlassErrorBoundary - ${level}]:`, error, errorInfo);
     }
 
@@ -96,7 +97,7 @@ export class GlassErrorBoundary extends Component<
     );
 
     // Auto-recover after multiple errors (circuit breaker pattern)
-    if (this.state.errorCount >= 3) {
+    if (3 <= this.state.errorCount) {
       this.scheduleReset(5000);
     }
   }
@@ -132,7 +133,7 @@ export class GlassErrorBoundary extends Component<
     }
   }
 
-  arraysEqual(a: Array<string | number>, b: Array<string | number>): boolean {
+  arraysEqual(a: (string | number)[], b: (string | number)[]): boolean {
     return a.length === b.length && a.every((val, index) => val === b[index]);
   }
 
@@ -149,13 +150,13 @@ export class GlassErrorBoundary extends Component<
   resetErrorBoundary = () => {
     if (this.resetTimeoutId) {
       clearTimeout(this.resetTimeoutId);
-      this.resetTimeoutId = null;
+      this.resetTimeoutId = undefined;
     }
 
     this.setState({
       hasError: false,
-      error: null,
-      errorInfo: null,
+      error: undefined,
+      errorInfo: undefined,
       errorCount: 0,
     });
 
@@ -188,9 +189,9 @@ export class GlassErrorBoundary extends Component<
             'glass-error-boundary',
             'glass-effect rounded-lg p-6',
             {
-              'min-h-screen': level === 'page',
-              'min-h-[400px]': level === 'section',
-              'min-h-[200px]': level === 'component',
+              'min-h-screen': 'page' === level ,
+              'min-h-[400px]': 'section' === level ,
+              'min-h-[200px]': 'component' === level ,
             },
             className
           )}
@@ -202,13 +203,13 @@ export class GlassErrorBoundary extends Component<
 
             <div className="space-y-2">
               <h3 className="text-lg font-semibold text-primary">
-                {level === 'page' && 'Page Error'}
-                {level === 'section' && 'Section Error'}
-                {level === 'component' && 'Component Error'}
+                { 'page' === level && 'Page Error'}
+                { 'section' === level && 'Section Error'}
+                { 'component' === level && 'Component Error'}
               </h3>
 
               <p className="text-sm text-secondary max-w-md">
-                {process.env.NODE_ENV === 'production'
+                { 'production' === process.env.NODE_ENV
                   ? 'Something went wrong. Please try refreshing the page.'
                   : error.message}
               </p>
@@ -223,7 +224,7 @@ export class GlassErrorBoundary extends Component<
                 Try Again
               </button>
 
-              {level === 'page' && (
+              { 'page' === level && (
                 <button
                   onClick={() => window.location.reload()}
                   className="glass-button-secondary px-4 py-2 rounded-lg"
@@ -234,7 +235,7 @@ export class GlassErrorBoundary extends Component<
               )}
             </div>
 
-            {process.env.NODE_ENV === 'development' && errorInfo && (
+            { 'development' === process.env.NODE_ENV && errorInfo && (
               <details className="mt-4 text-left max-w-2xl w-full">
                 <summary className="cursor-pointer text-sm text-secondary hover:text-primary">
                   Error Details
@@ -260,10 +261,10 @@ export class GlassErrorBoundary extends Component<
 
 // Hook for error handling in functional components
 export function useErrorHandler() {
-  const [error, setError] = React.useState<Error | null>(null);
+  const [error, setError] = React.useState<Error | null>(undefined);
 
   const resetError = React.useCallback(() => {
-    setError(null);
+    setError(undefined);
   }, []);
 
   const captureError = React.useCallback((error: Error) => {

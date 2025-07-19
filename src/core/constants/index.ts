@@ -10,7 +10,7 @@ export const GLASS_INTENSITY_VALUES = {
   weak: 0.3,
   medium: 0.6,
   strong: 0.8,
-  extreme: 1.0,
+  extreme: 1,
 } as const;
 
 export const GLASS_BLUR_VALUES = {
@@ -139,10 +139,10 @@ export const ERROR_TYPES = {
 
 // Development constants
 export const DEV_CONSTANTS = {
-  debugMode: process.env.NODE_ENV === 'development',
-  verbose: process.env.VERBOSE === 'true',
-  enablePerformanceMonitoring: process.env.PERF_MONITORING === 'true',
-  enableA11yChecks: process.env.A11Y_CHECKS !== 'false',
+  debugMode: 'development' === process.env.NODE_ENV,
+  verbose: 'true' === process.env.VERBOSE,
+  enablePerformanceMonitoring: 'true' === process.env.PERF_MONITORING,
+  enableA11yChecks: 'false' !== process.env.A11Y_CHECKS,
 } as const;
 
 // CSS class prefixes

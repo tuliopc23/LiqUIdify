@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { accessibilityManager } from '@/core/accessibility-manager';
 import { GlassButton } from '../glass-button';
 import { GlassCard } from '../glass-card';
@@ -9,15 +9,15 @@ interface AccessibilityDemoProps {
 }
 
 export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({ className }) => {
-  const [report, setReport] = useState<any>(null);
-  const [contrastResult, setContrastResult] = useState<any>(null);
+  const [report, setReport] = useState<any>(undefined);
+  const [contrastResult, setContrastResult] = useState<any>(undefined);
   const [validating, setValidating] = useState(false);
   const demoRef = useRef<HTMLDivElement>(null);
   const [fgColor, setFgColor] = useState('#333333');
   const [bgColor, setBgColor] = useState('#f0f0f0');
 
   const validateAccessibility = async () => {
-    if (!demoRef.current) return;
+    if (!demoRef.current) {return;}
     
     setValidating(true);
     try {
@@ -31,7 +31,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({ classNam
       // Announce the result
       accessibilityManager.announce(
         `Accessibility score: ${report.score}. ${report.violations.length} violations found.`,
-        report.violations.length > 0 ? 'assertive' : 'polite'
+        0 < report.violations.length ? 'assertive' : 'polite'
       );
     } catch (error) {
       console.error('Validation error:', error);
@@ -88,8 +88,8 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({ classNam
                     <span 
                       className={cn(
                         'ml-2 font-bold',
-                        report.score >= 95 ? 'text-green-500' : 
-                        report.score >= 80 ? 'text-yellow-500' : 'text-red-500'
+                        95 <= report.score ? 'text-green-500' : 
+                        (80 <= report.score ? 'text-yellow-500' : 'text-red-500')
                       )}
                     >
                       {report.score}/100
@@ -109,7 +109,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({ classNam
                   </div>
                 </div>
                 
-                {report.violations.length > 0 && (
+                { 0 < report.violations.length && (
                   <details className="mt-4">
                     <summary className="cursor-pointer font-medium">
                       View Violations
@@ -215,7 +215,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({ classNam
             {/* Good example */}
             <div className="p-3 bg-green-500/10 rounded">
               <button
-                role="button"
+                
                 aria-label="Good example button"
                 aria-pressed="false"
                 className="px-4 py-2 bg-green-500/20 rounded"
@@ -228,7 +228,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({ classNam
             {/* Bad example - will be auto-corrected */}
             <div className="p-3 bg-red-500/10 rounded">
               <button
-                role="button"
+                
                 aria-expanded="false"
                 className="px-4 py-2 bg-red-500/20 rounded"
               >

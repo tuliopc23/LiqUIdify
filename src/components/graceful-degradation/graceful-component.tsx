@@ -60,7 +60,7 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
   if (shouldFallback) {
     if (
       staticFallback &&
-      (!networkStatus.online || performanceLevel === 'low')
+      (!networkStatus.online || 'low' === performanceLevel)
     ) {
       return (
         <div
@@ -125,7 +125,7 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const shouldUseLowQuality =
-    !networkStatus.online || performanceLevel === 'low';
+    !networkStatus.online || 'low' === performanceLevel;
   const processedSrc = shouldUseLowQuality && fallbackSrc ? fallbackSrc : src;
 
   const handleError = () => {
@@ -248,7 +248,7 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
 
   const shouldUseStatic =
     !networkStatus.online ||
-    performanceLevel === 'low' ||
+    'low' === performanceLevel ||
     shouldUseFallback('webGL');
 
   const handleError = () => {
@@ -307,7 +307,7 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
   const [isInteractive, setIsInteractive] = useState(true);
 
   useEffect(() => {
-    const shouldDisable = !networkStatus.online || performanceLevel === 'low';
+    const shouldDisable = !networkStatus.online || 'low' === performanceLevel;
     setIsInteractive(!shouldDisable);
   }, [networkStatus, performanceLevel]);
 
@@ -335,10 +335,10 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
 
 // CSS-only fallback components
 export const CSSAccordion: React.FC<{
-  items: Array<{
+  items: {
     title: string;
     content: React.ReactNode;
-  }>;
+  }[];
   className?: string;
 }> = ({ items, className = '' }) => {
   return (
@@ -355,11 +355,11 @@ export const CSSAccordion: React.FC<{
 };
 
 export const CSSTabs: React.FC<{
-  tabs: Array<{
+  tabs: {
     label: string;
     content: React.ReactNode;
     id: string;
-  }>;
+  }[];
   className?: string;
 }> = ({ tabs, className = '' }) => {
   return (

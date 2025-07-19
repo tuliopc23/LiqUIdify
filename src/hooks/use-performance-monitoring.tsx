@@ -1,10 +1,5 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  ComponentType,
-  ReactElement,
-} from 'react';
+import type { ComponentType, ReactElement } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { performanceMonitor } from '../core/performance-monitor';
 
 /**
@@ -36,7 +31,7 @@ export function usePerformanceMonitoring(
   useEffect(() => {
     const renderTime = performance.now() - renderStartTime.current;
 
-    if (renderCount === 0) {
+    if (0 === renderCount) {
       // First render is mount
       performanceMonitor.trackComponent(componentName, {
         mountTime: renderTime,
@@ -122,7 +117,7 @@ export function useWebVitals(callback?: (metric: any) => void) {
 export function useRealtimePerformance() {
   const [fps, setFps] = useState(60);
   const [memory, setMemory] = useState<{ used: number; limit: number } | null>(
-    null
+    undefined
   );
   const frameCountRef = useRef(0);
   const lastTimeRef = useRef(performance.now());
@@ -135,7 +130,7 @@ export function useRealtimePerformance() {
       const currentTime = performance.now();
       const elapsed = currentTime - lastTimeRef.current;
 
-      if (elapsed >= 1000) {
+      if (1000 <= elapsed) {
         const currentFps = Math.round((frameCountRef.current * 1000) / elapsed);
         setFps(currentFps);
         frameCountRef.current = 0;
@@ -146,8 +141,8 @@ export function useRealtimePerformance() {
       if ('memory' in performance) {
         const memInfo = (performance as any).memory;
         setMemory({
-          used: Math.round(memInfo.usedJSHeapSize / 1048576), // Convert to MB
-          limit: Math.round(memInfo.jsHeapSizeLimit / 1048576),
+          used: Math.round(memInfo.usedJSHeapSize / 1_048_576), // Convert to MB
+          limit: Math.round(memInfo.jsHeapSizeLimit / 1_048_576),
         });
       }
 

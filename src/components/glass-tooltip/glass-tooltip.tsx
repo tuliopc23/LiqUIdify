@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn, getGlassClass } from '@/lib/glass-utils';
 
@@ -26,7 +26,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const showTooltip = () => {
-    if (disabled) return;
+    if (disabled) {return;}
 
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -45,7 +45,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
   };
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if ('undefined' === typeof window) {return;}
     if (isVisible && triggerRef.current && tooltipRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const tooltipRect = tooltipRef.current.getBoundingClientRect();
@@ -78,11 +78,11 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
         height: window.innerHeight,
       };
 
-      if (left < 8) left = 8;
+      if (8 > left) {left = 8;}
       if (left + tooltipRect.width > viewport.width - 8) {
         left = viewport.width - tooltipRect.width - 8;
       }
-      if (top < 8) top = 8;
+      if (8 > top) {top = 8;}
       if (top + tooltipRect.height > viewport.height - 8) {
         top = viewport.height - tooltipRect.height - 8;
       }
@@ -119,18 +119,18 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
           'absolute w-2 h-2 rotate-45',
           getGlassClass('elevated'),
           'border border-white/20 dark:border-white/10',
-          position === 'top' &&
+          'top' === position &&
             'bottom-[-5px] left-1/2 transform -translate-x-1/2 border-t-0 border-l-0',
-          position === 'bottom' &&
+          'bottom' === position &&
             'top-[-5px] left-1/2 transform -translate-x-1/2 border-b-0 border-r-0',
-          position === 'left' &&
+          'left' === position &&
             'right-[-5px] top-1/2 transform -translate-y-1/2 border-l-0 border-b-0',
-          position === 'right' &&
+          'right' === position &&
             'left-[-5px] top-1/2 transform -translate-y-1/2 border-r-0 border-t-0'
         )}
       />
     </div>
-  ) : null;
+  ) : undefined;
 
   return (
     <>
@@ -143,7 +143,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
         {children}
       </div>
 
-      {tooltip && typeof window !== 'undefined' && createPortal(tooltip, document.body)}
+      {tooltip && 'undefined' !== typeof window && createPortal(tooltip, document.body)}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { cn, getGlassClass } from '@/lib/glass-utils';
 
 export interface GlassSliderProps {
@@ -42,7 +42,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
 
     const updateValue = useCallback(
       (clientX: number) => {
-        if (!sliderRef.current) return;
+        if (!sliderRef.current) {return;}
 
         const rect = sliderRef.current.getBoundingClientRect();
         const percentage = Math.max(
@@ -61,7 +61,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
 
     const handleMouseMove = useCallback(
       (e: MouseEvent) => {
-        if (!isDragging || disabled) return;
+        if (!isDragging || disabled) {return;}
         updateValue(e.clientX);
       },
       [isDragging, disabled, updateValue]
@@ -72,7 +72,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
     }, []);
 
     const handleMouseDown = (e: React.MouseEvent) => {
-      if (disabled) return;
+      if (disabled) {return;}
 
       setIsDragging(true);
       updateValue(e.clientX);
@@ -108,8 +108,8 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
           ref={sliderRef}
           className={cn(
             'relative h-2 rounded-full cursor-pointer',
-            variant === 'default' && getGlassClass('default'),
-            variant === 'minimal' && 'bg-gray-200 dark:bg-gray-700',
+            'default' === variant && getGlassClass('default'),
+            'minimal' === variant && 'bg-gray-200 dark:bg-gray-700',
             disabled && 'cursor-not-allowed opacity-50'
           )}
           onMouseDown={handleMouseDown}

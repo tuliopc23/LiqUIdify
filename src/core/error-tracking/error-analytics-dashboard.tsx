@@ -75,7 +75,7 @@ const generateMockErrorData = (): ErrorMetric[] => {
     'accessibility_error',
     'performance_error',
   ];
-  const severities: Array<'low' | 'medium' | 'high' | 'critical'> = [
+  const severities: ('low' | 'medium' | 'high' | 'critical')[] = [
     'low',
     'medium',
     'high',
@@ -83,7 +83,7 @@ const generateMockErrorData = (): ErrorMetric[] => {
   ];
 
   return Array.from({ length: 100 }, (_, i) => ({
-    timestamp: new Date(Date.now() - i * 3600000).toISOString(),
+    timestamp: new Date(Date.now() - i * 3_600_000).toISOString(),
     count: Math.floor(Math.random() * 50) + 1,
     type:
       errorTypes[Math.floor(Math.random() * errorTypes.length)] ||
@@ -94,7 +94,7 @@ const generateMockErrorData = (): ErrorMetric[] => {
     severity:
       severities[Math.floor(Math.random() * severities.length)] || 'low',
     userImpact: Math.floor(Math.random() * 100),
-    resolved: Math.random() > 0.3,
+    resolved: 0.3 < Math.random(),
   }));
 };
 
@@ -125,7 +125,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 > = ({
   className = '',
   apiEndpoint,
-  refreshInterval = 300000, // 5 minutes
+  refreshInterval = 300_000, // 5 minutes
   realTimeUpdates = true,
   showComponentDetails = true,
   enableExport = true,
@@ -167,7 +167,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 
   // Auto-refresh
   useEffect(() => {
-    if (!realTimeUpdates) return;
+    if (!realTimeUpdates) {return;}
 
     const interval = setInterval(async () => {
       setIsRefreshing(true);
@@ -183,9 +183,9 @@ export const ErrorAnalyticsDashboard: React.FC<
   const filteredErrorData = useMemo(() => {
     return errorData.filter(error => {
       const componentMatch =
-        selectedComponent === 'all' || error.component === selectedComponent;
+        'all' === selectedComponent || error.component === selectedComponent;
       const severityMatch =
-        selectedSeverity === 'all' || error.severity === selectedSeverity;
+        'all' === selectedSeverity || error.severity === selectedSeverity;
       return componentMatch && severityMatch;
     });
   }, [errorData, selectedComponent, selectedSeverity]);
@@ -252,8 +252,8 @@ export const ErrorAnalyticsDashboard: React.FC<
     return Object.values(componentStats).map((stats: any) => ({
       ...stats,
       avgResolutionTime: Math.random() * 5, // Mock data
-      topErrorTypes: Array.from(stats?.errorTypes || []).slice(0, 3),
-      trend: Math.random() > 0.5 ? 'down' : ('up' as 'up' | 'down'),
+      topErrorTypes: [...stats?.errorTypes || []].slice(0, 3),
+      trend: 0.5 < Math.random() ? 'down' : ('up' as 'up' | 'down'),
     }));
   }, [filteredErrorData]);
 
@@ -324,7 +324,7 @@ export const ErrorAnalyticsDashboard: React.FC<
     return (
       <div className={`liquidify-error-dashboard ${className}`}>
         <div className="flex items-center justify-center h-96">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
           <span className="ml-2 text-gray-600">Loading error analytics...</span>
         </div>
       </div>
@@ -473,7 +473,7 @@ export const ErrorAnalyticsDashboard: React.FC<
             className="border border-gray-300 rounded-md px-3 py-1 text-sm"
           >
             <option value="all">All Components</option>
-            {Array.from(new Set(errorData.map(e => e.component))).map(
+            {[...new Set(errorData.map((e) => e.component))].map(
               component => (
                 <option key={component} value={component}>
                   {component}
@@ -517,7 +517,7 @@ export const ErrorAnalyticsDashboard: React.FC<
                     minHeight: '2px',
                     width: '80%',
                   }}
-                ></div>
+                 />
                 <span className="text-xs text-gray-600 mt-1 transform -rotate-45 origin-center">
                   {data.time}
                 </span>
@@ -538,7 +538,7 @@ export const ErrorAnalyticsDashboard: React.FC<
                   <div
                     className="w-4 h-4 rounded"
                     style={{ backgroundColor: item.color }}
-                  ></div>
+                   />
                   <span className="text-sm font-medium">{item.name}</span>
                   <span className="text-sm text-gray-600">{item.value}</span>
                 </div>
@@ -599,12 +599,12 @@ export const ErrorAnalyticsDashboard: React.FC<
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          component.trend === 'down'
+                          'down' === component.trend
                             ? 'bg-green-100 text-green-800'
                             : 'bg-red-100 text-red-800'
                         }`}
                       >
-                        {component.trend === 'down' ? '↓' : '↑'}{' '}
+                        { 'down' === component.trend ? '↓' : '↑'}{' '}
                         {component.trend}
                       </span>
                     </td>
@@ -630,15 +630,15 @@ export const ErrorAnalyticsDashboard: React.FC<
               <div className="flex items-center space-x-4">
                 <div
                   className={`w-3 h-3 rounded-full ${
-                    error.severity === 'critical'
+                    'critical' === error.severity
                       ? 'bg-red-500'
-                      : error.severity === 'high'
+                      : 'high' === error.severity
                         ? 'bg-orange-500'
-                        : error.severity === 'medium'
+                        : 'medium' === error.severity
                           ? 'bg-yellow-500'
                           : 'bg-green-500'
                   }`}
-                ></div>
+                 />
                 <div>
                   <p className="text-sm font-medium text-gray-900">
                     {error.component}

@@ -3,8 +3,10 @@
  * Detects and handles hydration mismatches with automatic recovery
  */
 
-import { useEffect, useState, ReactNode } from 'react';
-import { HydrationManager, HydrationMismatch } from '../../utils/hydration-utils';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import type { HydrationMismatch } from '../../utils/hydration-utils';
+import { HydrationManager } from '../../utils/hydration-utils';
 import { isBrowser } from '../../utils/ssr-utils';
 
 export interface HydrationDetectorProps {
@@ -188,7 +190,7 @@ export function HydrationMetrics({ debug = false }: { debug?: boolean }) {
   });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {return;}
 
     const start = performance.now();
     
@@ -207,7 +209,7 @@ export function HydrationMetrics({ debug = false }: { debug?: boolean }) {
     return () => clearTimeout(timeout);
   }, []);
 
-  if (!debug) return null;
+  if (!debug) {return ;}
 
   return (
     <div style={{ position: 'fixed', top: 0, right: 0, background: 'rgba(0,0,0,0.8)', color: 'white', padding: '10px', fontSize: '12px', zIndex: 9999 }}>
@@ -231,7 +233,7 @@ export function HydrationRecovery({
   const [showRecovery, setShowRecovery] = useState(false);
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {return;}
 
     const handleError = () => {
       setShowRecovery(true);
@@ -241,7 +243,7 @@ export function HydrationRecovery({
     return () => window.removeEventListener('error', handleError);
   }, []);
 
-  if (!showRecovery) return <>{children}</>;
+  if (!showRecovery) {return <>{children}</>;}
 
   return (
     <div>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {
-  X,
-  CheckCircle,
   AlertCircle,
-  Info,
   AlertTriangle,
   Bell,
+  CheckCircle,
+  Info,
+  X,
 } from 'lucide-react';
 import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
 
@@ -60,12 +60,12 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   const formatTime = (timestamp: Date) => {
     const now = new Date();
     const diff = now.getTime() - timestamp.getTime();
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
+    const minutes = Math.floor(diff / 60_000);
+    const hours = Math.floor(diff / 3_600_000);
 
-    if (minutes < 1) return 'Just now';
-    if (minutes < 60) return `${minutes}m ago`;
-    if (hours < 24) return `${hours}h ago`;
+    if (1 > minutes) {return 'Just now';}
+    if (60 > minutes) {return `${minutes}m ago`;}
+    if (24 > hours) {return `${hours}h ago`;}
     return timestamp.toLocaleDateString();
   };
 
@@ -83,9 +83,9 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         )}
       >
         <Bell className="w-5 h-5 text-[var(--text-secondary)]" />
-        {unreadCount > 0 && (
+        { 0 < unreadCount && (
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
-            {unreadCount > 9 ? '9+' : unreadCount}
+            { 9 < unreadCount ? '9+' : unreadCount}
           </span>
         )}
       </button>
@@ -106,7 +106,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 Notifications
               </h3>
               <div className="flex items-center gap-2">
-                {unreadCount > 0 && (
+                { 0 < unreadCount && (
                   <button
                     onClick={onMarkAllAsRead}
                     className="text-xs text-blue-500 hover:text-blue-600 font-medium"
@@ -126,7 +126,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
           {/* Notifications List */}
           <div className="max-h-80 overflow-y-auto">
-            {notifications.length === 0 ? (
+            { 0 === notifications.length ? (
               <div className="p-8 text-center">
                 <Bell className="w-8 h-8 text-[var(--text-tertiary)] mx-auto mb-2" />
                 <p className="text-[var(--text-secondary)] text-sm">

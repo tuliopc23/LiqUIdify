@@ -2,12 +2,13 @@
  * Factory for creating type-safe polymorphic Glass UI components
  */
 
-import { forwardRef, ElementType } from 'react';
-import {
+import type { ElementType } from 'react';
+import { forwardRef } from 'react';
+import type {
   PolymorphicComponent,
   PolymorphicComponentPropsWithRef,
-  isInteractiveElement,
 } from '../types/polymorphic';
+import { isInteractiveElement } from '../types/polymorphic';
 import { cn } from '../lib/glass-utils';
 
 /**
@@ -115,7 +116,7 @@ export function createPolymorphicComponent<
     const ElementComponent = Element as React.ElementType;
 
     // Validate props
-    if (process.env.NODE_ENV !== 'production') {
+    if ('production' !== process.env.NODE_ENV) {
       validateProps?.(mergedProps as Props & { as?: ElementType });
 
       // Additional built-in validations
@@ -129,7 +130,7 @@ export function createPolymorphicComponent<
         );
       }
 
-      if (ElementComponent === 'img' && !restProps.alt) {
+      if ('img' === ElementComponent && !restProps.alt) {
         console.warn(
           `${displayName}: Image elements must have an alt attribute`
         );

@@ -1,11 +1,11 @@
-import React, { forwardRef, useState, useRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import {
   cn,
   focusRing,
 } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { Calendar, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { type VariantProps, cva } from 'class-variance-authority';
+import { Calendar, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const datePickerVariants = cva(['relative w-full'], {
   variants: {
@@ -110,7 +110,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 
     // Format date for display
     const formatDate = (date: Date | undefined): string => {
-      if (!date) return '';
+      if (!date) {return '';}
 
       const formatOptions: Intl.DateTimeFormatOptions = {
         year: 'numeric',
@@ -154,8 +154,8 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 
     // Check if date is disabled
     const isDateDisabled = (date: Date): boolean => {
-      if (minDate && date < minDate) return true;
-      if (maxDate && date > maxDate) return true;
+      if (minDate && date < minDate) {return true;}
+      if (maxDate && date > maxDate) {return true;}
       return disabledDates.some(
         disabledDate => date.toDateString() === disabledDate.toDateString()
       );
@@ -163,7 +163,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 
     // Handle date selection
     const handleDateSelect = (date: Date) => {
-      if (isDateDisabled(date)) return;
+      if (isDateDisabled(date)) {return;}
 
       let newDate = new Date(date);
 
@@ -195,7 +195,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
     // Navigate months
     const navigateMonth = (direction: 'prev' | 'next') => {
       const newDate = new Date(viewDate);
-      if (direction === 'prev') {
+      if ('prev' === direction) {
         newDate.setMonth(newDate.getMonth() - 1);
       } else {
         newDate.setMonth(newDate.getMonth() + 1);
@@ -216,11 +216,11 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
         }
       };
 
-      if (typeof document !== 'undefined') {
+      if ('undefined' !== typeof document) {
         document.addEventListener('mousedown', handleClickOutside);
       }
       return () => {
-        if (typeof document !== 'undefined') {
+        if ('undefined' !== typeof document) {
           document.removeEventListener('mousedown', handleClickOutside);
         }
       };

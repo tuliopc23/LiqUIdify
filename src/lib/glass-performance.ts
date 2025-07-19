@@ -4,7 +4,7 @@
  * Requirements: 5.3, 5.6 - Animation performance optimization with reduced motion support
  */
 
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export interface PerformanceMetrics {
   fps: number;
@@ -143,10 +143,12 @@ export class GlassPerformanceMonitor {
   private lastFrameTime: number = 0;
   private frameCount: number = 0;
   private isMonitoring: boolean = false;
-  private animationFrame: number | null = null;
+  private animationFrame: number | null = undefined;
 
   start(): void {
-    if (this.isMonitoring) return;
+    if (this.isMonitoring) {
+      return;
+    }
 
     this.isMonitoring = true;
     this.frameCount = 0;
@@ -158,21 +160,23 @@ export class GlassPerformanceMonitor {
     this.isMonitoring = false;
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = null;
+      this.animationFrame = undefined;
     }
   }
 
   private monitor = (): void => {
-    if (!this.isMonitoring) return;
+    if (!this.isMonitoring) {
+      return;
+    }
 
     const now = performance.now();
     const frameTime = now - this.lastFrameTime;
 
-    if (this.lastFrameTime > 0) {
+    if (0 < this.lastFrameTime) {
       this.frameHistory.push(frameTime);
 
       // Keep only last 60 frames for FPS calculation
-      if (this.frameHistory.length > 60) {
+      if (60 < this.frameHistory.length) {
         this.frameHistory.shift();
       }
 
@@ -183,7 +187,7 @@ export class GlassPerformanceMonitor {
       this.metrics.frameTime = avgFrameTime;
 
       // Count dropped frames (frames that took longer than 16.67ms)
-      if (frameTime > 16.67) {
+      if (16.67 < frameTime) {
         this.metrics.droppedFrames++;
       }
     }
@@ -220,19 +224,19 @@ export class GlassPerformanceMonitor {
     const recommendations: string[] = [];
     const { fps, activeAnimations, droppedFrames, memoryUsage } = this.metrics;
 
-    if (fps < 30) {
+    if (30 > fps) {
       recommendations.push(
         'Consider reducing animation complexity or enabling reduced motion'
       );
     }
 
-    if (activeAnimations > 50) {
+    if (50 < activeAnimations) {
       recommendations.push(
         'Too many active animations - consider animation culling'
       );
     }
 
-    if (droppedFrames > 10) {
+    if (10 < droppedFrames) {
       recommendations.push(
         'High frame drop rate - enable GPU acceleration or reduce quality'
       );
@@ -256,9 +260,9 @@ export class GlassAnimationScheduler {
   private tasks: Map<string, AnimationTask> = new Map();
   private config: OptimizationConfig;
   private monitor: GlassPerformanceMonitor;
-  private animationFrame: number | null = null;
+  private animationFrame: number | null = undefined;
   private isRunning: boolean = false;
-  private intersectionObserver: IntersectionObserver | null = null;
+  private intersectionObserver: IntersectionObserver | null = undefined;
   private reducedMotion: boolean = false;
 
   constructor(config: OptimizationConfig = DEFAULT_PERFORMANCE_CONFIG) {
@@ -271,7 +275,7 @@ export class GlassAnimationScheduler {
   private setupIntersectionObserver(): void {
     if (
       !this.config.enableCulling ||
-      typeof IntersectionObserver === 'undefined'
+      'undefined' === typeof IntersectionObserver
     ) {
       return;
     }
@@ -297,7 +301,7 @@ export class GlassAnimationScheduler {
   }
 
   private checkReducedMotion(): void {
-    if (!this.config.enableReducedMotion || typeof window === 'undefined') {
+    if (!this.config.enableReducedMotion || 'undefined' === typeof window) {
       return;
     }
 
@@ -349,7 +353,7 @@ export class GlassAnimationScheduler {
       this.tasks.delete(id);
     }
 
-    if (this.tasks.size === 0) {
+    if (0 === this.tasks.size) {
       this.stop();
     }
   }
@@ -362,7 +366,9 @@ export class GlassAnimationScheduler {
   }
 
   private start(): void {
-    if (this.isRunning) return;
+    if (this.isRunning) {
+      return;
+    }
 
     this.isRunning = true;
     this.monitor.start();
@@ -375,18 +381,20 @@ export class GlassAnimationScheduler {
 
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = null;
+      this.animationFrame = undefined;
     }
   }
 
   private tick = (timestamp: number = performance.now()): void => {
-    if (!this.isRunning) return;
+    if (!this.isRunning) {
+      return;
+    }
 
     const frameStartTime = performance.now();
     const { maxFrameTime } = this.config.performanceBudget;
 
     // Sort tasks by priority and visibility
-    const sortedTasks = Array.from(this.tasks.values())
+    const sortedTasks = [...this.tasks.values()]
       .filter(task => !this.config.enableCulling || task.isVisible)
       .sort((a, b) => b.priority - a.priority);
 
@@ -429,12 +437,16 @@ export class GlassAnimationScheduler {
     const visibilityRatio = elementArea / viewportArea;
 
     // Reduce animation quality for small or distant elements
-    if (visibilityRatio < 0.01) {
+    if (0.01 > visibilityRatio) {
       // Very small elements - skip every other frame
-      if (task.frameCount % 2 === 0) return;
-    } else if (visibilityRatio < 0.05) {
+      if (0 === task.frameCount % 2) {
+        return;
+      }
+    } else if (0.05 > visibilityRatio) {
       // Small elements - reduce frame rate
-      if (task.frameCount % 1.5 === 0) return;
+      if (0 === task.frameCount % 1.5) {
+        return;
+      }
     }
   }
 
@@ -455,7 +467,7 @@ export class GlassAnimationScheduler {
 
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
-      this.intersectionObserver = null;
+      this.intersectionObserver = undefined;
     }
 
     this.tasks.clear();
@@ -513,9 +525,9 @@ export class GPUAccelerationHelper {
   static isGPUAccelerated(element: HTMLElement): boolean {
     const computedStyle = window.getComputedStyle(element);
     return (
-      computedStyle.willChange !== 'auto' ||
+      'auto' !== computedStyle.willChange ||
       computedStyle.transform.includes('translateZ') ||
-      computedStyle.backfaceVisibility === 'hidden'
+      'hidden' === computedStyle.backfaceVisibility
     );
   }
 }
@@ -525,7 +537,7 @@ export class GPUAccelerationHelper {
  * Provides performance monitoring and optimization tools
  */
 export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
-  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
+  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(undefined);
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const schedulerRef = useRef<GlassAnimationScheduler | null>(null);
   const configRef = useRef<OptimizationConfig>({
@@ -539,7 +551,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
 
     return () => {
       schedulerRef.current?.destroy();
-      schedulerRef.current = null;
+      schedulerRef.current = undefined;
     };
   }, []);
 
@@ -566,7 +578,9 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
       callback: (timestamp: number) => void,
       priority: number = 0
     ) => {
-      if (!schedulerRef.current) return;
+      if (!schedulerRef.current) {
+        return;
+      }
 
       const task: AnimationTask = {
         id,

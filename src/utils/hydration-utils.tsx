@@ -3,7 +3,7 @@
  * Provides automatic recovery mechanisms and progressive enhancement
  */
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { isBrowser } from './ssr-utils';
 
 export interface HydrationMismatch {
@@ -96,8 +96,8 @@ export class HydrationManager {
 
   getContext(): HydrationContext {
     return {
-      isHydrating: this.mismatches.length > 0,
-      hasMismatch: this.mismatches.length > 0,
+      isHydrating: 0 < this.mismatches.length,
+      hasMismatch: 0 < this.mismatches.length,
       mismatches: [...this.mismatches],
       retryCount: this.retryCount,
       lastRetry: Date.now(),
@@ -223,7 +223,7 @@ export function useHydrationState<T>(
         const newValue = value instanceof Function ? value(prev) : value;
 
         // Log potential hydration mismatches in development
-        if (process.env.NODE_ENV === 'development' && prev !== newValue) {
+        if ('development' === process.env.NODE_ENV && prev !== newValue) {
           console.warn(`[Hydration] State change detected for ${key}:`, {
             prev,
             newValue,
@@ -252,7 +252,9 @@ export function useProgressiveEnhancement() {
   });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const checks = {
       javascript: true,
@@ -336,7 +338,7 @@ export function useHydrationComplete() {
  * Utility for safe client-side only execution
  */
 export function useClientOnly<T>(factory: () => T, deps: any[] = []): T | null {
-  const [value, setValue] = useState<T | null>(null);
+  const [value, setValue] = useState<T | null>(undefined);
   const isHydrated = useHydrationComplete();
 
   useEffect(() => {

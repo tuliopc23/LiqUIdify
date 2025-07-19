@@ -1,4 +1,5 @@
-import React, { forwardRef, ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
+import React, { forwardRef } from 'react';
 import { cn } from '@/lib/glass-utils';
 import { Loader2 } from 'lucide-react';
 

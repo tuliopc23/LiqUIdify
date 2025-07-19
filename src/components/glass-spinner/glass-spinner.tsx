@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/glass-utils';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 
 const spinnerVariants = cva(
   ['inline-block rounded-full', 'border-2 border-solid'],
@@ -79,7 +79,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
         className={cn(spinnerVariants({ variant, size, speed }), className)}
         animate={{ rotate: 360 }}
         transition={{
-          duration: speed === 'slow' ? 2 : speed === 'fast' ? 0.5 : 1,
+          duration: 'slow' === speed ? 2 : ('fast' === speed ? 0.5 : 1),
           repeat: Infinity,
           ease: 'linear',
         }}

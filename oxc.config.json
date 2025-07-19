@@ -1,0 +1,120 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/schemas/oxc.json",
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true,
+    "es2020": true,
+    "es2022": true
+  },
+  "parser": {
+    "sourceType": "module",
+    "allowImportingTsExtensions": false,
+    "allowReturnOutsideFunction": false,
+    "typescript": {
+      "jsx": {
+        "runtime": "automatic",
+        "importSource": "react",
+        "development": false,
+        "throwIfNamespace": false,
+        "pure": true
+      },
+      "allowJs": true,
+      "declaration": true,
+      "onlyRemoveTypeImports": true,
+      "allowNamespaces": true
+    },
+    "sourceFilename": "<stdin>",
+    "allowHashBang": false
+  },
+  "transform": {
+    "jsx": {
+      "runtime": "automatic",
+      "importSource": "react",
+      "development": false,
+      "refresh": false,
+      "pragma": "React.createElement",
+      "pragmaFrag": "React.Fragment",
+      "throwIfNamespace": false,
+      "pure": true
+    },
+    "typescript": {
+      "target": "es2020",
+      "module": "preserve",
+      "experimentalDecorators": false,
+      "emitDecoratorMetadata": false,
+      "isolatedDeclarations": true,
+      "onlyRemoveTypeImports": true,
+      "allowNamespaces": true,
+      "allowDeclareFields": true
+    },
+    "react": {
+      "runtime": "automatic",
+      "importSource": "react",
+      "pragma": "React.createElement",
+      "pragmaFrag": "React.Fragment",
+      "useBuiltIns": false,
+      "useSpread": false,
+      "throwIfNamespace": false,
+      "pure": true
+    },
+    "arrowFunctionsInClass": true,
+    "asyncGeneratorFunctions": true,
+    "asyncToGenerator": false,
+    "exponentOperator": true,
+    "forOfAsArray": false,
+    "objectRestSpread": true,
+    "optionalCatchBinding": true,
+    "shorthandProperties": true,
+    "stickyRegex": true,
+    "templateLiterals": true,
+    "unicodeRegex": true
+  },
+  "sourcemap": {
+    "enable": true,
+    "inline": false,
+    "sourceRoot": ".",
+    "sources": true,
+    "sourcesContent": true,
+    "names": true
+  },
+  "resolver": {
+    "alias": {
+      "@": "./src",
+      "@/tokens": "./src/tokens/index",
+      "@/design-tokens": "./src/tokens/design-tokens"
+    },
+    "tsConfigPath": "./tsconfig.json",
+    "mainFields": ["module", "main"],
+    "conditionNames": ["import", "require", "default"],
+    "extensionAlias": {
+      ".js": [".ts", ".tsx", ".js", ".jsx"],
+      ".jsx": [".tsx", ".jsx"],
+      ".mjs": [".mts", ".mjs"],
+      ".cjs": [".cts", ".cjs"]
+    },
+    "builtin": {
+      "process": true,
+      "buffer": true
+    },
+    "preferRelative": false
+  },
+  "semantic": {
+    "buildJsxAst": true,
+    "checkSyntax": true
+  },
+  "linter": {
+    "rules": {
+      "typescript": {
+        "ban-types": "error",
+        "no-explicit-any": "warn",
+        "no-unused-vars": "warn",
+        "prefer-as-const": "error"
+      },
+      "react": {
+        "jsx-uses-react": "off",
+        "react-in-jsx-scope": "off"
+      }
+    }
+  }
+}

@@ -3,10 +3,10 @@
  * Provides comprehensive SSR support with automatic recovery mechanisms
  */
 
+import type { ReactNode } from 'react';
 import React, {
   useState,
   useEffect,
-  ReactNode,
   // useCallback,
 } from 'react';
 import { useProgressiveEnhancement } from '../utils/hydration-utils';
@@ -28,7 +28,7 @@ export interface EnhancedSSRProviderProps {
  */
 export function EnhancedSSRProvider({
   children,
-  fallback = null,
+  fallback = undefined,
   loading = <div>Loading...</div>,
   onHydrationComplete,
   // onHydrationError,
@@ -38,7 +38,9 @@ export function EnhancedSSRProvider({
 }: EnhancedSSRProviderProps) {
   const [isClient, setIsClient] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [_hydrationError, _setHydrationError] = useState<Error | null>(null);
+  const [_hydrationError, _setHydrationError] = useState<Error | null>(
+    undefined
+  );
   const [_hasError, _setHasError] = useState(false);
   const [_retryCount, _setRetryCount] = useState(0);
 
@@ -51,7 +53,9 @@ export function EnhancedSSRProvider({
 
   // Handle hydration completion
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient) {
+      return;
+    }
 
     const handleHydrationComplete = () => {
       setIsHydrated(true);
@@ -144,7 +148,7 @@ export function useClientOnly<T>(
   factory: () => T,
   deps: any[] = []
 ): { value: T | null; isReady: boolean } {
-  const [value, setValue] = useState<T | null>(null);
+  const [value, setValue] = useState<T | null>(undefined);
   const [isReady, setIsReady] = useState(false);
   const isClient = isBrowser();
 
@@ -196,7 +200,9 @@ export function useHydrationMetrics() {
   });
 
   useEffect(() => {
-    if (!isBrowser()) return;
+    if (!isBrowser()) {
+      return;
+    }
 
     const start = performance.now();
     setMetrics(prev => ({ ...prev, hydrationStart: start }));

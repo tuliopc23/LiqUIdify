@@ -1,5 +1,6 @@
-import { ReactNode, useEffect, useState } from 'react';
-import { SSRSafe, ClientOnly } from './ssr-safety';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import { ClientOnly, SSRSafe } from './ssr-safety';
 
 // Types and Interfaces
 export interface DegradationStrategy {
@@ -31,7 +32,7 @@ export function withAnimationFallback(
   const {
     respectReducedMotion = true,
     fallbackDuration: _fallbackDuration = 0,
-    staticFallback = null,
+    staticFallback = undefined,
   } = options;
 
   return function AnimationFallbackWrapper() {
@@ -39,7 +40,9 @@ export function withAnimationFallback(
     const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
     useEffect(() => {
-      if (!respectReducedMotion) return;
+      if (!respectReducedMotion) {
+        return;
+      }
 
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       setPrefersReducedMotion(mediaQuery.matches);
@@ -66,7 +69,7 @@ export function withAnimationFallback(
         // Check device memory
         if ('deviceMemory' in navigator) {
           const deviceMemory = (navigator as any).deviceMemory;
-          if (deviceMemory && deviceMemory < 4) {
+          if (deviceMemory && 4 > deviceMemory) {
             setShouldAnimate(false);
             return;
           }
@@ -75,7 +78,7 @@ export function withAnimationFallback(
         // Check CPU cores
         if ('hardwareConcurrency' in navigator) {
           const cores = navigator.hardwareConcurrency;
-          if (cores && cores < 4) {
+          if (cores && 4 > cores) {
             setShouldAnimate(false);
             return;
           }
@@ -107,7 +110,7 @@ export function withNetworkFallback(
 ) {
   const {
     offlineMessage = <div>You're offline. Some features may not work.</div>,
-    slowConnectionFallback = null,
+    slowConnectionFallback = undefined,
     retryButton = true,
   } = options;
 
@@ -170,7 +173,7 @@ export function withNetworkFallback(
     }
 
     // Slow connection fallback
-    if (connectionSpeed === 'slow-2g' || connectionSpeed === '2g') {
+    if ('slow-2g' === connectionSpeed || '2g' === connectionSpeed) {
       return (
         <div className="network-fallback network-fallback--slow">
           {slowConnectionFallback || component}
@@ -197,7 +200,9 @@ export function withFeatureDetection(
       const features = Array.isArray(feature) ? feature : [feature];
       const allFeaturesSupported = features.every(f => {
         // Check for API support
-        if (f in window) return true;
+        if (f in window) {
+          return true;
+        }
 
         // Check for CSS support
         if (f.startsWith('css:')) {
@@ -227,7 +232,7 @@ export function withFeatureDetection(
           case 'webp':
             return new Promise<boolean>(resolve => {
               const webP = new Image();
-              webP.onload = webP.onerror = () => resolve(webP.height === 2);
+              webP.onload = webP.onerror = () => resolve(2 === webP.height);
               webP.src =
                 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
             });
@@ -236,7 +241,7 @@ export function withFeatureDetection(
         }
       });
 
-      if (typeof allFeaturesSupported === 'boolean') {
+      if ('boolean' === typeof allFeaturesSupported) {
         setHasFeature(allFeaturesSupported);
       } else {
         // Handle async feature detection (like WebP)
@@ -282,7 +287,7 @@ export function withProgressiveEnhancement(
 
     useEffect(() => {
       // Find the highest level that meets conditions
-      for (let i = levels.length - 1; i >= 0; i--) {
+      for (let i = levels.length - 1; 0 <= i; i--) {
         if (levels[i]?.condition()) {
           setCurrentLevel(i);
           break;
@@ -312,9 +317,9 @@ export function withDeviceFallback(
         const width = window.innerWidth;
         const isTouchDevice = 'ontouchstart' in window;
 
-        if (width < 768) {
+        if (768 > width) {
           setDeviceType('mobile');
-        } else if (width < 1024 || isTouchDevice) {
+        } else if (1024 > width || isTouchDevice) {
           setDeviceType('tablet');
         } else {
           setDeviceType('desktop');
@@ -355,13 +360,13 @@ export function withPerformanceFallback(
         // Check device memory
         if ('deviceMemory' in navigator) {
           const memory = (navigator as any).deviceMemory;
-          score += memory >= 8 ? 3 : memory >= 4 ? 2 : 1;
+          score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
         }
 
         // Check CPU cores
         if ('hardwareConcurrency' in navigator) {
           const cores = navigator.hardwareConcurrency;
-          score += cores >= 8 ? 3 : cores >= 4 ? 2 : 1;
+          score += 8 <= cores ? 3 : 4 <= cores ? 2 : 1;
         }
 
         // Check connection speed
@@ -370,7 +375,7 @@ export function withPerformanceFallback(
           if (connection) {
             const effectiveType = connection.effectiveType;
             score +=
-              effectiveType === '4g' ? 3 : effectiveType === '3g' ? 2 : 1;
+              '4g' === effectiveType ? 3 : '3g' === effectiveType ? 2 : 1;
           }
         }
 
@@ -382,7 +387,7 @@ export function withPerformanceFallback(
           }
         }
 
-        setIsHighPerformance(score >= 6);
+        setIsHighPerformance(6 <= score);
       };
 
       checkPerformance();
@@ -471,7 +476,9 @@ export const gracefulDegradation = {
   // Utility functions
   utils: {
     checkFeatureSupport: (feature: string): boolean => {
-      if (typeof window === 'undefined') return false;
+      if ('undefined' === typeof window) {
+        return false;
+      }
       return feature in window;
     },
 
@@ -484,13 +491,13 @@ export const gracefulDegradation = {
 
     getAccessibilityPreferences: () => ({
       reducedMotion:
-        typeof window !== 'undefined' &&
+        'undefined' !== typeof window &&
         window.matchMedia('(prefers-reduced-motion: reduce)').matches,
       highContrast:
-        typeof window !== 'undefined' &&
+        'undefined' !== typeof window &&
         window.matchMedia('(prefers-contrast: high)').matches,
       reducedData:
-        typeof window !== 'undefined' &&
+        'undefined' !== typeof window &&
         (navigator as any).connection?.saveData,
     }),
   },

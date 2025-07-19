@@ -25,11 +25,11 @@ export const GlassTextarea = React.forwardRef<
         'hover:bg-white/10 dark:hover:bg-white/5',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         'min-h-[100px]',
-        resize === 'none' && 'resize-none',
-        resize === 'vertical' && 'resize-y',
-        resize === 'horizontal' && 'resize-x',
-        resize === 'both' && 'resize',
-        variant === 'minimal' &&
+        'none' === resize && 'resize-none',
+        'vertical' === resize && 'resize-y',
+        'horizontal' === resize && 'resize-x',
+        'both' === resize && 'resize',
+        'minimal' === variant &&
           'border-0 border-b border-white/30 dark:border-white/20 rounded-none bg-transparent focus:border-blue-500/50',
         className
       )}

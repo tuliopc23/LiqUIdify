@@ -3,7 +3,7 @@
  * Provides hooks for safely handling client-side functionality in SSR environments
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Hook to safely check if code is running on client side
@@ -29,7 +29,7 @@ export function useSSRSafeWindow<T = Window>(
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && typeof window !== 'undefined') {
+    if (isClient && 'undefined' !== typeof window) {
       try {
         setValue(selector(window));
       } catch (error) {
@@ -52,7 +52,7 @@ export function useSSRSafeDocument<T = Document>(
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && typeof document !== 'undefined') {
+    if (isClient && 'undefined' !== typeof document) {
       try {
         setValue(selector(document));
       } catch (error) {
@@ -75,7 +75,7 @@ export function useSSRSafeNavigator<T = Navigator>(
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && typeof navigator !== 'undefined') {
+    if (isClient && 'undefined' !== typeof navigator) {
       try {
         setValue(selector(navigator));
       } catch (error) {
@@ -99,7 +99,7 @@ export function useSSRSafeLocalStorage<T>(
 
   // Initialize from localStorage if available
   useEffect(() => {
-    if (isClient && typeof window !== 'undefined') {
+    if (isClient && 'undefined' !== typeof window) {
       try {
         const item = localStorage.getItem(key);
         if (item) {
@@ -118,7 +118,7 @@ export function useSSRSafeLocalStorage<T>(
       setStoredValue(value);
 
       // Save to localStorage if client-side
-      if (isClient && typeof window !== 'undefined') {
+      if (isClient && 'undefined' !== typeof window) {
         localStorage.setItem(key, JSON.stringify(value));
       }
     } catch (error) {
@@ -141,7 +141,7 @@ export function useSSRSafeSessionStorage<T>(
 
   // Initialize from sessionStorage if available
   useEffect(() => {
-    if (isClient && typeof window !== 'undefined') {
+    if (isClient && 'undefined' !== typeof window) {
       try {
         const item = sessionStorage.getItem(key);
         if (item) {
@@ -160,7 +160,7 @@ export function useSSRSafeSessionStorage<T>(
       setStoredValue(value);
 
       // Save to sessionStorage if client-side
-      if (isClient && typeof window !== 'undefined') {
+      if (isClient && 'undefined' !== typeof window) {
         sessionStorage.setItem(key, JSON.stringify(value));
       }
     } catch (error) {
@@ -216,7 +216,9 @@ export function useSSRSafeMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient) {
+      return;
+    }
 
     const mediaQuery = window.matchMedia(query);
     setMatches(mediaQuery.matches);
@@ -248,7 +250,9 @@ export function useNetworkStatus(): {
   const [saveData, setSaveData] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient) {
+      return;
+    }
 
     // Update online status
     setOnline(navigator.onLine);
@@ -301,7 +305,9 @@ export function useSSRSafeAnimation(
   const isClient = useIsClient();
 
   useEffect(() => {
-    if (!isClient || disabled) return;
+    if (!isClient || disabled) {
+      return;
+    }
 
     let animationFrame: number;
     const timer = setTimeout(() => {
@@ -327,7 +333,9 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
   callback?: (entry: IntersectionObserverEntry) => void
 ): [(node: T | null) => void, boolean, IntersectionObserverEntry | null] {
   const isClient = useIsClient();
-  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
+  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(
+    undefined
+  );
   const [isIntersecting, setIsIntersecting] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
   const ref = useRef<T | null>(null);
@@ -345,13 +353,17 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
   };
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient) {
+      return;
+    }
 
     observer.current = new IntersectionObserver(([entry]) => {
       if (entry) {
         setEntry(entry);
         setIsIntersecting(entry.isIntersecting);
-        if (callback) callback(entry);
+        if (callback) {
+          callback(entry);
+        }
       }
     }, options);
 
@@ -393,12 +405,16 @@ export function useSSRSafeResizeObserver<T extends HTMLElement>(
   };
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient) {
+      return;
+    }
 
     observer.current = new ResizeObserver(([entry]) => {
       if (entry) {
         setSize(entry.contentRect);
-        if (callback) callback(entry);
+        if (callback) {
+          callback(entry);
+        }
       }
     });
 
@@ -429,7 +445,9 @@ export function useSSRSafeDocumentVisibility():
   >('visible');
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient) {
+      return;
+    }
 
     const handleVisibilityChange = () => {
       setVisibility(
@@ -456,7 +474,9 @@ export function useSSRSafeFeatureDetection(feature: string): boolean {
   const [supported, setSupported] = useState(false);
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient) {
+      return;
+    }
 
     // Check for feature support
     let isSupported = false;

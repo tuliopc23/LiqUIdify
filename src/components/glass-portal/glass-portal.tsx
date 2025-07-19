@@ -13,7 +13,7 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
   key,
 }) => {
   const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(
-    null
+    undefined
   );
 
   useEffect(() => {
@@ -22,18 +22,18 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
     setMountNode(node);
 
     return () => {
-      setMountNode(null);
+      setMountNode(undefined);
     };
   }, [container]);
 
   // Don't render anything during SSR
-  if (typeof window === 'undefined') {
-    return null;
+  if ('undefined' === typeof window) {
+    return ;
   }
 
   // Don't render until mount node is available
   if (!mountNode) {
-    return null;
+    return ;
   }
 
   return createPortal(children, mountNode, key);

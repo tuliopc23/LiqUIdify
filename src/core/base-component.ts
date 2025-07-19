@@ -5,7 +5,7 @@
  * share to ensure consistency and proper composition.
  */
 
-import {
+import type {
   ComponentPropsWithoutRef,
   ForwardRefExoticComponent,
   HTMLAttributes,

@@ -3,10 +3,10 @@
  * These are temporary stubs to fix TypeScript compilation errors
  */
 
-import {
+import type {
   ComponentVariant,
-  GlassIntensity,
   GlassEffectConfig,
+  GlassIntensity,
 } from './base-component';
 
 // Stub for ComponentPropsBuilder
@@ -38,8 +38,10 @@ export function cn(
   return classes
     .filter(Boolean)
     .map(cls => {
-      if (typeof cls === 'string') return cls;
-      if (typeof cls === 'object' && cls !== null) {
+      if ('string' === typeof cls) {
+        return cls;
+      }
+      if ('object' === typeof cls && null !== cls) {
         return Object.entries(cls)
           .filter(([, value]) => value)
           .map(([key]) => key)

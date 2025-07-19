@@ -1,4 +1,5 @@
-import { onCLS, onFCP, onLCP, onTTFB, onINP, Metric } from 'web-vitals';
+import type { Metric } from 'web-vitals';
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
 
 /**
  * Performance Monitor for Glass UI
@@ -84,12 +85,16 @@ class PerformanceMonitor {
       sampleRate?: number;
     } = {}
   ): void {
-    if (this.isInitialized) return;
+    if (this.isInitialized) {
+      return;
+    }
 
     const { reportCallback, immediate = false, sampleRate = 1 } = options;
 
     // Sample rate for performance monitoring (0-1)
-    if (Math.random() > sampleRate) return;
+    if (Math.random() > sampleRate) {
+      return;
+    }
 
     if (reportCallback) {
       this.reportCallbacks.push(reportCallback);
@@ -143,7 +148,7 @@ class PerformanceMonitor {
     this.notifyObservers(name, performanceMetric);
 
     // Log to console in development
-    if (process.env.NODE_ENV === 'development') {
+    if ('development' === process.env.NODE_ENV) {
       console.log(
         `[Performance] ${name}: ${metric.value.toFixed(2)}ms (${rating})`
       );
@@ -155,8 +160,12 @@ class PerformanceMonitor {
    */
   private getRating(name: MetricName, value: number): PerformanceRating {
     const threshold = THRESHOLDS[name];
-    if (value <= threshold.good) return 'good';
-    if (value <= threshold.poor) return 'needs-improvement';
+    if (value <= threshold.good) {
+      return 'good';
+    }
+    if (value <= threshold.poor) {
+      return 'needs-improvement';
+    }
     return 'poor';
   }
 
@@ -164,16 +173,18 @@ class PerformanceMonitor {
    * Measure Time to Interactive
    */
   private measureTTI(): void {
-    if (!('PerformanceObserver' in window)) return;
+    if (!('PerformanceObserver' in window)) {
+      return;
+    }
 
     let tti = 0;
     const observer = new PerformanceObserver(list => {
       const entries = list.getEntries();
 
       // Find the last long task before 5 seconds of quiet time
-      const longTasks = entries.filter(entry => entry.duration > 50);
+      const longTasks = entries.filter(entry => 50 < entry.duration);
 
-      if (longTasks.length > 0) {
+      if (0 < longTasks.length) {
         const lastLongTask = longTasks[longTasks.length - 1];
         if (lastLongTask) {
           tti = lastLongTask.startTime + lastLongTask.duration;
@@ -186,7 +197,7 @@ class PerformanceMonitor {
     // Estimate TTI after load
     window.addEventListener('load', () => {
       setTimeout(() => {
-        if (tti === 0) {
+        if (0 === tti) {
           tti = performance.now();
         }
 
@@ -212,12 +223,14 @@ class PerformanceMonitor {
    * Set up Performance Observer for additional metrics
    */
   private setupPerformanceObserver(): void {
-    if (!('PerformanceObserver' in window)) return;
+    if (!('PerformanceObserver' in window)) {
+      return;
+    }
 
     this.performanceObserver = new PerformanceObserver(list => {
       for (const entry of list.getEntries()) {
         if (
-          entry.entryType === 'measure' &&
+          'measure' === entry.entryType &&
           entry.name.startsWith('glass-ui-')
         ) {
           this.customMetrics.set(entry.name, entry.duration);
@@ -309,7 +322,7 @@ class PerformanceMonitor {
         `glass-ui-${name}`,
         'measure'
       );
-      if (entries.length > 0) {
+      if (0 < entries.length) {
         const duration = entries[entries.length - 1]?.duration || 0;
         this.trackCustomMetric(name, duration);
         return duration;
@@ -325,8 +338,8 @@ class PerformanceMonitor {
     return {
       url: window.location.href,
       timestamp: Date.now(),
-      webVitals: Array.from(this.metrics.values()),
-      componentMetrics: Array.from(this.componentMetrics.values()),
+      webVitals: [...this.metrics.values()],
+      componentMetrics: [...this.componentMetrics.values()],
       customMetrics: Object.fromEntries(this.customMetrics),
       userAgent: navigator.userAgent,
       connection: this.captureNetworkInfo() as
@@ -361,7 +374,7 @@ class PerformanceMonitor {
   private setupPeriodicReporting(): void {
     // Send report on page visibility change
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') {
+      if ('hidden' === document.visibilityState) {
         this.sendReport();
       }
     });
@@ -373,10 +386,10 @@ class PerformanceMonitor {
 
     // Send report every 30 seconds
     setInterval(() => {
-      if (document.visibilityState === 'visible') {
+      if ('visible' === document.visibilityState) {
         this.sendReport();
       }
-    }, 30000);
+    }, 30_000);
   }
 
   /**
@@ -391,7 +404,7 @@ class PerformanceMonitor {
     return () => {
       const obs = this.observers.get(metricName) || [];
       const index = obs.indexOf(callback);
-      if (index > -1) {
+      if (-1 < index) {
         obs.splice(index, 1);
       }
     };

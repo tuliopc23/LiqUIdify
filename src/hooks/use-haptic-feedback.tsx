@@ -82,13 +82,13 @@ const DEFAULT_CONFIG: HapticFeedbackConfig = {
 };
 
 // Audio context for sound generation
-let audioContext: AudioContext | null = null;
+let audioContext: AudioContext | null;
 
 // Initialize audio context
 function initAudioContext() {
   if (
     !audioContext &&
-    typeof window !== 'undefined' &&
+    'undefined' !== typeof window &&
     'AudioContext' in window
   ) {
     audioContext = new AudioContext();
@@ -99,7 +99,9 @@ function initAudioContext() {
 // Generate synthetic sound
 function generateSound(type: HapticType, volume: number): void {
   const ctx = initAudioContext();
-  if (!ctx) return;
+  if (!ctx) {
+    return;
+  }
 
   const oscillator = ctx.createOscillator();
   const gainNode = ctx.createGain();
@@ -178,7 +180,9 @@ function applyVisualFeedback(
   element: HTMLElement,
   config: VisualFeedbackConfig
 ): () => void {
-  if (!config.enabled) return () => {};
+  if (!config.enabled) {
+    return () => {};
+  }
 
   const originalTransform = element.style.transform;
   const originalTransition = element.style.transition;
@@ -206,7 +210,7 @@ function applyVisualFeedback(
   element.style.transition = `transform ${config.duration}ms ease-out, filter ${config.duration}ms ease-out`;
   element.style.transform = `${originalTransform} scale(${config.scale})`;
 
-  if (config.blur && config.blur > 0) {
+  if (config.blur && 0 < config.blur) {
     element.style.filter = `${originalFilter} blur(${config.blur}px)`;
   }
 
@@ -255,20 +259,23 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
   // Load audio files
   useEffect(() => {
-    if (!configRef.current.audio?.enabled || !configRef.current.audio.sounds)
+    if (!configRef.current.audio?.enabled || !configRef.current.audio.sounds) {
       return;
+    }
 
     const loadAudio = async (url: string): Promise<AudioBuffer | null> => {
       try {
         const ctx = initAudioContext();
-        if (!ctx) return null;
+        if (!ctx) {
+          return;
+        }
 
         const response = await fetch(url);
         const arrayBuffer = await response.arrayBuffer();
         return await ctx.decodeAudioData(arrayBuffer);
       } catch (error) {
         console.error('Failed to load audio:', url, error);
-        return null;
+        return;
       }
     };
 
@@ -287,9 +294,12 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
   // Trigger vibration
   const vibrate = useCallback((pattern: number[]) => {
-    if (typeof window === 'undefined' || typeof navigator === 'undefined')
+    if ('undefined' === typeof window || 'undefined' === typeof navigator) {
       return;
-    if (!configRef.current.vibration || !('vibrate' in navigator)) return;
+    }
+    if (!configRef.current.vibration || !('vibrate' in navigator)) {
+      return;
+    }
 
     const scaledPattern = pattern.map(duration =>
       Math.round(duration * (configRef.current.intensity || 1))
@@ -300,14 +310,18 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
   // Play audio feedback
   const playAudio = useCallback((type: HapticType) => {
-    if (!configRef.current.audio?.enabled) return;
+    if (!configRef.current.audio?.enabled) {
+      return;
+    }
 
     const { sounds, volume = 0.5 } = configRef.current.audio;
     const soundUrl = sounds?.[type];
 
     if (soundUrl && audioCache.current.has(soundUrl)) {
       const ctx = initAudioContext();
-      if (!ctx) return;
+      if (!ctx) {
+        return;
+      }
 
       const buffer = audioCache.current.get(soundUrl)!;
       const source = ctx.createBufferSource();
@@ -328,7 +342,9 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
   // Apply visual feedback
   const applyVisual = useCallback(
     (element: HTMLElement | null, type: HapticType) => {
-      if (!element || !configRef.current.visual?.enabled) return;
+      if (!element || !configRef.current.visual?.enabled) {
+        return;
+      }
 
       // Clean up previous visual feedback
       if (cleanupRef.current) {
@@ -409,14 +425,15 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 }
 
 // Haptic feedback provider for global configuration
-import React, { createContext, useContext, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { createContext, useContext } from 'react';
 
 interface HapticContextValue {
   config: HapticFeedbackConfig;
   trigger: (_type: HapticType, _element?: HTMLElement | null) => void;
 }
 
-const HapticContext = createContext<HapticContextValue | null>(null);
+const HapticContext = createContext<HapticContextValue | null>(undefined);
 
 export function HapticProvider({
   children,
@@ -454,7 +471,9 @@ export function useHapticFeedbackIntegration<
 
   useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     const handleInteraction = () => {
       haptic.trigger(type, element);

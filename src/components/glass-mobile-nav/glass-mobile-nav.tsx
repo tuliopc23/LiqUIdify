@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { ChevronRight, Menu, X } from 'lucide-react';
 import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
 
 interface NavItem {
@@ -24,7 +24,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   onItemClick,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(undefined);
 
   useEffect(() => {
     if (isOpen) {
@@ -40,7 +40,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 
   const handleItemClick = (item: NavItem) => {
     if (item.children?.length) {
-      setActiveSubmenu(activeSubmenu === item.id ? null : item.id);
+      setActiveSubmenu(activeSubmenu === item.id ? undefined : item.id);
     } else {
       if (item.action) {
         item.action();
@@ -80,7 +80,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
           'w-full flex items-center justify-between p-4 text-left',
           'hover:bg-[var(--glass-bg)] active:bg-[var(--glass-bg-pressed)]',
           microInteraction.gentle,
-          level > 0 && 'pl-8 border-l-2 border-[var(--glass-border)]'
+          0 < level && 'pl-8 border-l-2 border-[var(--glass-border)]'
         )}
       >
         <div className="flex items-center gap-3">
@@ -119,7 +119,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   return (
     <>
       <MenuTrigger />
-      {typeof window !== 'undefined' && createPortal(
+      { 'undefined' !== typeof window && createPortal(
         <div className="fixed inset-0 z-50 md:hidden">
           {/* Backdrop */}
           <div

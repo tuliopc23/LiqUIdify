@@ -15,12 +15,12 @@ import type { ComponentType } from 'react';
 
 // Performance API polyfill for Node.js environments
 const performance = (() => {
-  if (typeof globalThis !== 'undefined' && globalThis.performance) {
+  if ('undefined' !== typeof globalThis && globalThis.performance) {
     return globalThis.performance;
   }
   // Fallback for Node.js
   try {
-    const perfHooks = require('perf_hooks');
+    const perfHooks = require('node:perf_hooks');
     return perfHooks.performance;
   } catch {
     // Basic polyfill
@@ -246,7 +246,7 @@ class PerformanceBenchmarker {
 
     // Create multiple instances to measure memory impact
     const instances: any[] = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; 100 > i; i++) {
       instances.push(
         await this.simulateRender(ComponentClass, { ...props, key: i })
       );
@@ -276,7 +276,7 @@ class PerformanceBenchmarker {
       const nameBasedMultiplier = componentName.length / 10;
 
       return Math.round(baseSize * (1 + nameBasedMultiplier));
-    } catch (error) {
+    } catch {
       return 0; // Fallback if estimation fails
     }
   }
@@ -328,7 +328,7 @@ class PerformanceBenchmarker {
           }
         };
 
-        if (typeof requestAnimationFrame !== 'undefined') {
+        if ('undefined' !== typeof requestAnimationFrame) {
           requestAnimationFrame(animationCallback);
         } else {
           // Fallback for non-browser environments
@@ -357,7 +357,7 @@ class PerformanceBenchmarker {
         score: mockScore,
         violations: mockViolations,
       };
-    } catch (error) {
+    } catch {
       return { score: 0, violations: 999 };
     }
   }
@@ -427,7 +427,7 @@ class PerformanceBenchmarker {
         totalScore -= 10;
       }
 
-      if (benchmark.animationPerformance.smoothness < 90) {
+      if (90 > benchmark.animationPerformance.smoothness) {
         violations.push(
           `Animation smoothness (${benchmark.animationPerformance.smoothness.toFixed(1)}%) below acceptable level`
         );
@@ -439,7 +439,7 @@ class PerformanceBenchmarker {
     }
 
     // Check accessibility
-    if (benchmark.accessibility.score < 95) {
+    if (95 > benchmark.accessibility.score) {
       violations.push(
         `Accessibility score (${benchmark.accessibility.score.toFixed(1)}) below S-Tier threshold (95)`
       );
@@ -448,7 +448,7 @@ class PerformanceBenchmarker {
     }
 
     return {
-      passed: violations.length === 0,
+      passed: 0 === violations.length,
       score: Math.max(0, totalScore),
       metrics: benchmark,
       violations,
@@ -460,11 +460,11 @@ class PerformanceBenchmarker {
    * Run comprehensive performance test suite
    */
   public async runPerformanceTestSuite(
-    components: Array<{
+    components: {
       name: string;
       component: ComponentType<any>;
       props?: any;
-    }>
+    }[]
   ): Promise<PerformanceReport> {
     const componentResults: ComponentBenchmark[] = [];
     const allViolations: string[] = [];
@@ -490,7 +490,7 @@ class PerformanceBenchmarker {
 
     const report: PerformanceReport = {
       overall: {
-        passed: allViolations.length === 0,
+        passed: 0 === allViolations.length,
         score: overallScore,
         grade,
       },
@@ -521,7 +521,7 @@ class PerformanceBenchmarker {
       // Create and destroy component instances
       const instances: any[] = [];
 
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; 50 > i; i++) {
         instances.push(
           await this.simulateRender(ComponentClass, { ...props, key: i })
         );
@@ -571,12 +571,12 @@ class PerformanceBenchmarker {
   }
 
   private getCurrentMemoryUsage(): number {
-    if (typeof process !== 'undefined' && process.memoryUsage) {
+    if ('undefined' !== typeof process && process.memoryUsage) {
       return process.memoryUsage().heapUsed;
     }
 
     // Browser environment fallback
-    if (typeof performance !== 'undefined' && (performance as any).memory) {
+    if ('undefined' !== typeof performance && (performance as any).memory) {
       return (performance as any).memory.usedJSHeapSize;
     }
 
@@ -605,23 +605,23 @@ class PerformanceBenchmarker {
 
 
   private calculateOverallScore(results: ComponentBenchmark[]): number {
-    if (results.length === 0) return 0;
+    if (0 === results.length) {return 0;}
 
     const scores = results.map(result => {
       let score = 100;
 
       // Deduct points for performance issues
       if (result.initialRenderTime > PERFORMANCE_THRESHOLDS.INITIAL_RENDER)
-        score -= 20;
-      if (result.reRenderTime > PERFORMANCE_THRESHOLDS.RE_RENDER) score -= 15;
+        {score -= 20;}
+      if (result.reRenderTime > PERFORMANCE_THRESHOLDS.RE_RENDER) {score -= 15;}
       if (
         result.memoryUsage >
         PERFORMANCE_THRESHOLDS.MEMORY_USAGE * 1024 * 1024
       )
-        score -= 15;
+        {score -= 15;}
       if (result.bundleSize > PERFORMANCE_THRESHOLDS.COMPONENT_SIZE)
-        score -= 20;
-      if (result.accessibility.score < 95) score -= 10;
+        {score -= 20;}
+      if (95 > result.accessibility.score) {score -= 10;}
 
       return Math.max(0, score);
     });
@@ -630,11 +630,11 @@ class PerformanceBenchmarker {
   }
 
   private calculateGrade(score: number): 'S' | 'A' | 'B' | 'C' | 'D' | 'F' {
-    if (score >= 95) return 'S';
-    if (score >= 90) return 'A';
-    if (score >= 80) return 'B';
-    if (score >= 70) return 'C';
-    if (score >= 60) return 'D';
+    if (95 <= score) {return 'S';}
+    if (90 <= score) {return 'A';}
+    if (80 <= score) {return 'B';}
+    if (70 <= score) {return 'C';}
+    if (60 <= score) {return 'D';}
     return 'F';
   }
 
