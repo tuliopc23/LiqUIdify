@@ -20,7 +20,7 @@ export { useTheme } from '../hooks/use-theme';
 export { useIsClient, useSSRSafeWindow } from '../hooks/use-ssr-safe';
 
 // Core utilities (minimal)
-export { cn } from '../lib/glass-utils';
+export { cn } from '@/core/utils/classname';
 
 // Base types
 export type {

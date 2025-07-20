@@ -1,9 +1,9 @@
 'use client';
 
 import { GlassUIProvider } from '../providers';
-import { GlassButton } from '../components/glass-button';
+import { GlassButton } from '../components/glass-button-refactored';
 import { GlassInput } from '../components/glass-input';
-import { GlassCard } from '../components/glass-card';
+import { GlassCard } from '../components/glass-card-refactored';
 import { GlassModal } from '../components/glass-modal';
 import {
   GlassTooltip,

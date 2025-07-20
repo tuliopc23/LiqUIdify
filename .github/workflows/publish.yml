@@ -17,32 +17,38 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      # Setup Node.js environment
-      - name: Setup Node.js
+      # Setup Bun environment
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      # Setup Node.js for npm publishing
+      - name: Setup Node.js for npm
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
-      # Install dependencies
+      # Install dependencies with Bun
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       # Run tests to ensure quality
       - name: Run tests
-        run: npm test
+        run: bun run test:ci
 
       # Run type checking
       - name: Type check
-        run: npm run type-check
+        run: bun run type-check
 
-      # Run linting (allows warnings up to limit)
-      - name: Lint code
-        run: npm run lint:ci
+      # Run linting with OXC
+      - name: Lint code with OXC
+        run: bun run lint:ci
 
       # Build the package
       - name: Build package
-        run: npm run build
+        run: bun run build
 
       # Automated version bump based on commit messages
       - name: Automated Version Bump
@@ -58,7 +64,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Publish to npm
+      # Publish to npm (using npm for publishing)
       - name: Publish to npm
         run: npm publish --access public
         env:
@@ -67,7 +73,7 @@ jobs:
       # Create git tag and GitHub release after successful publish
       - name: Create git tag and GitHub release
         run: |
-          VERSION=$(node -p "require('./package.json').version")
+          VERSION=$(bun --print "require('./package.json').version")
           echo "Creating release for version $VERSION"
 
           # Create and push tag

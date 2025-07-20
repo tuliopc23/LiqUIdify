@@ -92,11 +92,25 @@ import {
   createCompoundComponentWithContext,
 } from './patterns';
 
+// Re-export all modules
+export * from './utils';
+export * from './hooks';
+export * from './components';
+export * from './constants';
+export * from './patterns';
+
+// Re-export specific named exports
 export {
-  ...Utils,
-  ...Hooks,
-  ...Components,
-  ...Constants,
-  ...Patterns,
   cn,
-  generateGl...
+  createBusinessLogicHook,
+  createCompoundComponentWithContext,
+  generateGlassClasses,
+  generateGlassVariables,
+  mapIntensity,
+  microInteraction,
+  responsiveSize,
+  touchTarget,
+  useGlassStateTransitions,
+  useMagneticHover,
+  useRippleEffect,
+};

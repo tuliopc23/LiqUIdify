@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react';
-import { cn, getGlassClass } from '@/lib/glass-utils';
+import { cn, getGlassClass } from '@/core/utils/classname';
 
 export interface Toast {
   id: string;
@@ -74,7 +74,10 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
-      { 'undefined' !== typeof window && createPortal(
+      { 'undefined' !== typeof window &&
+       'undefined' !== typeof document &&
+       document.body &&
+       createPortal(
         <div
           className={cn(
             'fixed z-50 flex flex-col space-y-2',

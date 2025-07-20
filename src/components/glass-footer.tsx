@@ -1,4 +1,4 @@
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 export interface GlassFooterLink {
   label: string;

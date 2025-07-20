@@ -5,6 +5,7 @@
  */
 
 import React, { startTransition, useCallback, useEffect, useRef } from 'react';
+import { safeRefAccess, withSafeRef } from '../utils/safe-dom';
 
 export interface EnhancedGlassLayer {
   id: string;
@@ -285,11 +286,12 @@ export function useEnhancedAppleLiquidGlass(
   // Enhanced magnetic hover with physics
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!containerRef.current || !enablePhysics) {
+      const containerElement = safeRefAccess(containerRef);
+      if (!containerElement || !enablePhysics) {
         return;
       }
 
-      const rect = containerRef.current.getBoundingClientRect();
+      const rect = containerElement.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
 
@@ -298,21 +300,21 @@ export function useEnhancedAppleLiquidGlass(
 
       // Apply physics-based transformation with subpixel precision
       startTransition(() => {
-        if (containerRef.current) {
+        withSafeRef(containerRef, (container) => {
           const transform = `translate3d(${deltaX.toFixed(2)}px, ${deltaY.toFixed(2)}px, 0)`;
-          containerRef.current.style.transform = transform;
+          container.style.transform = transform;
 
           // Apply layered transformations for depth effect
           layersRef.current.forEach((layer, id) => {
             const layerConfig = ENHANCED_GLASS_LAYERS[id];
-            if (layerConfig) {
+            if (layerConfig && layer) {
               const layerDeltaX = deltaX * (layerConfig.zIndex * 0.1);
               const layerDeltaY = deltaY * (layerConfig.zIndex * 0.1);
               const layerTransform = `translate3d(${layerDeltaX.toFixed(2)}px, ${layerDeltaY.toFixed(2)}px, ${layerConfig.zIndex}px)`;
               layer.style.transform = layerTransform;
             }
           });
-        }
+        });
       });
 
       // Haptic feedback
@@ -328,20 +330,21 @@ export function useEnhancedAppleLiquidGlass(
 
   // Enhanced mouse leave with spring physics
   const handleMouseLeave = useCallback(() => {
-    if (!containerRef.current) {
+    const containerElement = safeRefAccess(containerRef);
+    if (!containerElement) {
       return;
     }
 
     startTransition(() => {
-      if (containerRef.current) {
-        containerRef.current.style.transform = 'translate3d(0, 0, 0)';
-        containerRef.current.style.transition =
+      withSafeRef(containerRef, (container) => {
+        container.style.transform = 'translate3d(0, 0, 0)';
+        container.style.transition =
           'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
 
         // Reset layer transformations with staggered timing
         layersRef.current.forEach((layer, id) => {
           const layerConfig = ENHANCED_GLASS_LAYERS[id];
-          if (layerConfig) {
+          if (layerConfig && layer) {
             setTimeout(() => {
               layer.style.transform = `translateZ(${layerConfig.zIndex}px)`;
               layer.style.transition =
@@ -352,14 +355,16 @@ export function useEnhancedAppleLiquidGlass(
 
         // Clear transitions after animation
         setTimeout(() => {
-          if (containerRef.current) {
-            containerRef.current.style.transition = '';
+          withSafeRef(containerRef, (container) => {
+            container.style.transition = '';
             layersRef.current.forEach(layer => {
-              layer.style.transition = '';
+              if (layer) {
+                layer.style.transition = '';
+              }
             });
-          }
+          });
         }, 600);
-      }
+      });
     });
 
     if (enableHaptics && 'vibrate' in navigator) {
@@ -380,20 +385,20 @@ export function useEnhancedAppleLiquidGlass(
       }
       const elapsed = timestamp - startTime;
 
-      layersRef.current.forEach((layer, id) => {
-        if ('backdrop' === id || 'overlay' === id) {
-          const offset = Math.sin(elapsed * 0.001) * liquidFlowIntensity;
-          const currentTransform = layer.style.transform || '';
-          const newTransform = currentTransform.includes('translate3d')
-            ? currentTransform.replace(
-                /translate3d\([^)]+\)/,
-                `translate3d(${offset.toFixed(2)}px, ${(-offset * 0.5).toFixed(2)}px, ${ENHANCED_GLASS_LAYERS[id]?.zIndex || 0}px)`
-              )
-            : `${currentTransform} translate3d(${offset.toFixed(2)}px, ${(-offset * 0.5).toFixed(2)}px, ${ENHANCED_GLASS_LAYERS[id]?.zIndex || 0}px)`;
+        layersRef.current.forEach((layer, id) => {
+          if (layer && ('backdrop' === id || 'overlay' === id)) {
+            const offset = Math.sin(elapsed * 0.001) * liquidFlowIntensity;
+            const currentTransform = layer.style.transform || '';
+            const newTransform = currentTransform.includes('translate3d')
+              ? currentTransform.replace(
+                  /translate3d\([^)]+\)/,
+                  `translate3d(${offset.toFixed(2)}px, ${(-offset * 0.5).toFixed(2)}px, ${ENHANCED_GLASS_LAYERS[id]?.zIndex || 0}px)`
+                )
+              : `${currentTransform} translate3d(${offset.toFixed(2)}px, ${(-offset * 0.5).toFixed(2)}px, ${ENHANCED_GLASS_LAYERS[id]?.zIndex || 0}px)`;
 
-          layer.style.transform = newTransform;
-        }
-      });
+            layer.style.transform = newTransform;
+          }
+        });
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
@@ -409,7 +414,7 @@ export function useEnhancedAppleLiquidGlass(
 
   // Event listeners
   useEffect(() => {
-    const element = containerRef.current;
+    const element = safeRefAccess(containerRef);
     if (!element) {
       return;
     }
@@ -563,4 +568,107 @@ export function getEnhancedGlassClass(
   ].filter(Boolean);
 
   return classes.join(' ');
+}
+
+/**
+ * Apple Liquid Glass Legacy Constants
+ * For backward compatibility with existing components
+ */
+export const APPLE_LIQUID_VARIANTS = {
+  subtle: { intensity: 'subtle', blur: 12, opacity: 0.08 },
+  medium: { intensity: 'medium', blur: 20, opacity: 0.15 },
+  strong: { intensity: 'strong', blur: 32, opacity: 0.25 },
+  extreme: { intensity: 'extreme', blur: 48, opacity: 0.35 },
+} as const;
+
+export const APPLE_LIQUID_SHADOWS = {
+  subtle: '0 8px 32px rgba(31, 38, 135, 0.15)',
+  medium: '0 12px 48px rgba(31, 38, 135, 0.25)',
+  strong: '0 16px 64px rgba(31, 38, 135, 0.35)',
+  extreme: '0 24px 96px rgba(31, 38, 135, 0.45)',
+} as const;
+
+export const APPLE_LIQUID_AFTER_EFFECTS = {
+  distortion: 'url(#liquid-lens)',
+  chromatic: 'url(#chromatic-aberration)',
+  ripple: 'url(#liquid-ripple)',
+  flow: 'url(#liquid-flow)',
+} as const;
+
+export const APPLE_LIQUID_ANIMATIONS = {
+  hover: {
+    duration: 0.3,
+    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    transform: 'translateY(-2px) scale(1.02)',
+  },
+  magnetic: {
+    duration: 0.15,
+    easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+    maxDistance: 50,
+    strength: 0.2,
+  },
+  ripple: {
+    duration: 0.6,
+    easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+    scale: 'scale(1.1)',
+  },
+  liquid: {
+    duration: 2,
+    easing: 'ease-in-out',
+    flow: 'translateX(10px) translateY(-5px)',
+  },
+} as const;
+
+/**
+ * Legacy Hook Implementation
+ * For backward compatibility
+ */
+export interface AppleLiquidGlassOptions {
+  intensity?: keyof typeof APPLE_LIQUID_VARIANTS;
+  variant?: string;
+  interactive?: boolean;
+  magnetic?: boolean;
+  animated?: boolean;
+}
+
+export interface AppleLiquidGlassProps {
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+}
+
+export function useAppleLiquidGlass(options: AppleLiquidGlassOptions = {}) {
+  const { intensity = 'medium', interactive = false, magnetic = false } = options;
+  
+  // Delegate to the enhanced system
+  return useEnhancedAppleLiquidGlass({
+    intensity: intensity as keyof typeof ENHANCED_GLASS_VARIANTS,
+    interactive,
+    magnetic,
+  });
+}
+
+export function getAppleLiquidGlassClass(
+  intensity: keyof typeof APPLE_LIQUID_VARIANTS = 'medium',
+  options: {
+    interactive?: boolean;
+    magnetic?: boolean;
+    animated?: boolean;
+  } = {}
+): string {
+  return getEnhancedGlassClass(intensity as keyof typeof ENHANCED_GLASS_VARIANTS, options);
+}
+
+export function createGlassLayers(
+  content: React.ReactNode,
+  options: {
+    intensity?: keyof typeof APPLE_LIQUID_VARIANTS;
+    className?: string;
+  } = {}
+): React.ReactNode {
+  const { intensity = 'medium', className } = options;
+  return createEnhancedGlassLayers(content, {
+    intensity: intensity as keyof typeof ENHANCED_GLASS_VARIANTS,
+    className,
+  });
 }

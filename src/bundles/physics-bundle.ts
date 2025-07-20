@@ -15,7 +15,7 @@ export {
   useAppleLiquidGlass,
   getAppleLiquidGlassClass,
   createGlassLayers,
-} from '../lib/apple-liquid-glass';
+} from '../lib/enhanced-apple-liquid-glass';
 
 // Animation utilities
-export { microInteraction } from '../lib/glass-utils';
+export { microInteraction } from '@/core/utils/classname';

@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 export interface GlassCheckboxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

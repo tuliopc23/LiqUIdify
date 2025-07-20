@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useId, useRef } from 'react';
 import { X } from 'lucide-react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { GlassFocusTrap } from '@/components/glass-focus-trap';
 import { GlassPortal } from '@/components/glass-portal';
 import { announcer } from '@/components/glass-live-region';
+import { useIsClient } from '@/hooks/use-ssr-safe';
 
 interface GlassModalProps {
   isOpen: boolean;
@@ -55,29 +56,51 @@ export function GlassModal({
   );
 
   // Manage body scroll lock
+const isClient = useIsClient();
+
   useEffect(() => {
-    if ('undefined' === typeof window) {return;}
+    if (!isClient) {
+      return;
+    }
 
     if (isOpen) {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-      
-      // Announce modal opened
-      announcer.announce(`${title || 'Dialog'} opened`, { 
-        priority: 'medium', 
-        context: 'general' 
-      });
+      try {
+        if (document.body && document.documentElement) {
+          const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+          document.body.style.overflow = 'hidden';
+          document.body.style.paddingRight = `${scrollbarWidth}px`;
+        }
+        
+        // Announce modal opened
+        announcer.announce(`${title || 'Dialog'} opened`, {
+          priority: 'medium',
+          context: 'general'
+        });
+      } catch (error) {
+        console.warn('[GlassModal] Failed to set body styles:', error);
+      }
     } else {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
+      try {
+        if (document.body) {
+          document.body.style.overflow = '';
+          document.body.style.paddingRight = '';
+        }
+      } catch (error) {
+        console.warn('[GlassModal] Failed to reset body styles:', error);
+      }
     }
 
     return () => {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
+      try {
+        if (document.body) {
+          document.body.style.overflow = '';
+          document.body.style.paddingRight = '';
+        }
+      } catch (error) {
+        console.warn('[GlassModal] Failed to cleanup body styles:', error);
+      }
     };
-  }, [isOpen, title]);
+  }, [isClient, isOpen, title]);
 
   if (!isOpen) {return ;}
 

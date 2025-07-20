@@ -154,7 +154,7 @@
     "builtin": true,
     "browser": true,
     "es2020": true,
-    "node": true
+    "bun": true
   },
   "globals": {
     "React": "readonly",
@@ -180,6 +180,7 @@
     "DOMHighResTimeStamp": "readonly",
     "HTMLElementTagNameMap": "readonly",
     "NodeListOf": "readonly",
+    "Bun": "readonly",
     "NodeJS": "readonly"
   },
   "ignorePatterns": [

@@ -1,457 +1,116 @@
-import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
-import { announcer } from '@/components/glass-live-region';
+/**
+ * SSR Safety Utilities
+ * 
+ * Provides utilities for safe server-side rendering and client-side hydration
+ */
 
-// Types and Interfaces
-export interface SSRSafetyOptions {
-  detectMismatches: boolean;
-  autoRecover: boolean;
-  reportMismatches: boolean;
-  fallbackDelay: number;
-}
-
-export interface HydrationMismatch {
-  element: HTMLElement;
-  expectedHTML: string;
-  actualHTML: string;
-  timestamp: number;
-  componentName?: string;
-}
-
-export interface ProgressiveEnhancementOptions {
-  enableJS: boolean;
-  fallbackCSS: boolean;
-  gracefulDegradation: boolean;
-}
-
-// Default configurations
-const DEFAULT_SSR_OPTIONS: SSRSafetyOptions = {
-  detectMismatches: true,
-  autoRecover: true,
-  reportMismatches: 'development' === process.env.NODE_ENV,
-  fallbackDelay: 100,
-};
+import React, { useEffect, useState } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 
 /**
- * SSR Safety Manager
+ * Hook to safely check if we're on the client side
  */
-export class SSRSafetyManager {
-  private static instance: SSRSafetyManager;
-  private hydrationMismatches: HydrationMismatch[] = [];
-  private observer: MutationObserver | null = undefined;
-  private isClient: boolean = false;
-
-  private constructor() {
-    this.isClient = 'undefined' !== typeof window;
-
-    if (this.isClient) {
-      this.setupHydrationDetection();
-    }
-  }
-
-  static getInstance(): SSRSafetyManager {
-    if (!SSRSafetyManager.instance) {
-      SSRSafetyManager.instance = new SSRSafetyManager();
-    }
-    return SSRSafetyManager.instance;
-  }
-
-  /**
-   * Check if we're running on the client
-   */
-  isClientSide(): boolean {
-    return this.isClient;
-  }
-
-  /**
-   * Safe way to access client-only APIs
-   */
-  safeClientCall<T>(callback: () => T, fallback?: T): T | undefined {
-    if (this.isClient) {
-      try {
-        return callback();
-      } catch (error) {
-        console.warn('Client-only API call failed:', error);
-        return fallback;
-      }
-    }
-    return fallback;
-  }
-
-  /**
-   * Setup hydration mismatch detection
-   */
-  private setupHydrationDetection() {
-    if (!this.isClient) {
-      return;
-    }
-
-    // Listen for hydration errors
-    window.addEventListener('error', event => {
-      if (event.message.includes('hydrat')) {
-        this.handleHydrationError(event);
-      }
-    });
-
-    // Setup mutation observer for DOM changes
-    this.observer = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
-        if ('childList' === mutation.type) {
-          this.checkForMismatches(mutation.target as HTMLElement);
-        }
-      });
-    });
-
-    // Start observing after hydration
-    setTimeout(() => {
-      if (document.body) {
-        this.observer?.observe(document.body, {
-          childList: true,
-          subtree: true,
-          attributes: true,
-        });
-      }
-    }, 1000);
-  }
-
-  /**
-   * Handle hydration errors
-   */
-  private handleHydrationError(_event: ErrorEvent) {
-    const mismatch: HydrationMismatch = {
-      element: document.body,
-      expectedHTML: 'SSR HTML',
-      actualHTML: 'Client HTML',
-      timestamp: Date.now(),
-      componentName: 'Unknown',
-    };
-
-    this.hydrationMismatches.push(mismatch);
-
-    if (DEFAULT_SSR_OPTIONS.reportMismatches) {
-      console.warn('Hydration mismatch detected:', mismatch);
-    }
-
-    if (DEFAULT_SSR_OPTIONS.autoRecover) {
-      this.recoverFromMismatch(mismatch);
-    }
-
-    // Announce to screen readers
-    announcer.announce('Content updated due to loading differences.', {
-      priority: 'medium' as const,
-    });
-  }
-
-  /**
-   * Check for hydration mismatches
-   */
-  private checkForMismatches(element: HTMLElement) {
-    // Simple heuristic: check for common mismatch patterns
-    const suspiciousPatterns = [
-      /hydrat/i,
-      /mismatch/i,
-      /expected.*but.*received/i,
-    ];
-
-    const textContent = element.textContent || '';
-    const hasMismatch = suspiciousPatterns.some(pattern =>
-      pattern.test(textContent)
-    );
-
-    if (hasMismatch) {
-      const mismatch: HydrationMismatch = {
-        element,
-        expectedHTML: element.outerHTML,
-        actualHTML: element.outerHTML,
-        timestamp: Date.now(),
-      };
-
-      this.hydrationMismatches.push(mismatch);
-    }
-  }
-
-  /**
-   * Recover from hydration mismatch
-   */
-  private recoverFromMismatch(mismatch: HydrationMismatch) {
-    try {
-      // Force re-render by triggering a state change
-      const event = new CustomEvent('hydration-recovery', {
-        detail: mismatch,
-      });
-      window.dispatchEvent(event);
-    } catch (error) {
-      console.error('Failed to recover from hydration mismatch:', error);
-    }
-  }
-
-  /**
-   * Get all detected mismatches
-   */
-  getMismatches(): HydrationMismatch[] {
-    return [...this.hydrationMismatches];
-  }
-
-  /**
-   * Clear mismatch history
-   */
-  clearMismatches() {
-    this.hydrationMismatches = [];
-  }
-
-  /**
-   * Cleanup
-   */
-  destroy() {
-    this.observer?.disconnect();
-    this.hydrationMismatches = [];
-  }
-}
-
-/**
- * SSR-Safe Component Wrapper
- */
-export interface SSRSafeProps {
-  children: ReactNode;
-  fallback?: ReactNode;
-  delay?: number;
-}
-
-export function SSRSafe({
-  children,
-  fallback = undefined,
-  delay = 0,
-}: SSRSafeProps) {
+export function useIsClient(): boolean {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsClient(true);
-    }, delay);
+    setIsClient(true);
+  }, []);
 
-    return () => clearTimeout(timer);
-  }, [delay]);
-
-  if (!isClient) {
-    return <>{fallback} </>;
-  }
-
-  return <>{children} </>;
+  return isClient;
 }
 
 /**
- * Client-Only Component Wrapper
+ * Component that only renders its children on the client side
  */
 export interface ClientOnlyProps {
   children: ReactNode;
   fallback?: ReactNode;
 }
 
-export function ClientOnly({
-  children,
-  fallback = undefined,
-}: ClientOnlyProps) {
-  const [hasMounted, setHasMounted] = useState(false);
+export function ClientOnly({ children, fallback = undefined }: ClientOnlyProps) {
+  const isClient = useIsClient();
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return <>{fallback} </>;
+  if (!isClient) {
+    return <>{fallback}</>;
   }
 
-  return <>{children} </>;
+  return <>{children}</>;
 }
 
 /**
- * Progressive Enhancement Component
+ * SSR-safe component wrapper that provides fallback during SSR
  */
-export interface ProgressiveEnhancementProps {
+export interface SSRSafeProps extends ComponentProps<'div'> {
   children: ReactNode;
-  enhanced: ReactNode;
-  fallback: ReactNode;
-  options?: Partial<ProgressiveEnhancementOptions>;
+  fallback?: ReactNode;
+  component?: keyof JSX.IntrinsicElements;
 }
 
-export function ProgressiveEnhancement({
-  children,
-  enhanced,
-  fallback,
-  options = {},
-}: ProgressiveEnhancementProps) {
-  const [isEnhanced, setIsEnhanced] = useState(false);
-  const [jsEnabled, setJsEnabled] = useState(false);
+export function SSRSafe({ 
+  children, 
+  fallback = undefined, 
+  component: Component = 'div',
+  ...props 
+}: SSRSafeProps) {
+  const isClient = useIsClient();
 
-  const finalOptions: ProgressiveEnhancementOptions = {
-    enableJS: true,
-    fallbackCSS: true,
-    gracefulDegradation: true,
-    ...options,
-  };
-
-  useEffect(() => {
-    // Check if JavaScript is enabled
-    setJsEnabled(true);
-
-    // Check for enhanced features
-    const checkEnhancement = () => {
-      const hasModernFeatures =
-        'IntersectionObserver' in window &&
-        'ResizeObserver' in window &&
-        'requestAnimationFrame' in window;
-
-      setIsEnhanced(hasModernFeatures && finalOptions.enableJS);
-    };
-
-    checkEnhancement();
-  }, [finalOptions.enableJS]);
-
-  // No JS fallback
-  if (!jsEnabled) {
-    return <>{fallback} </>;
+  if (!isClient) {
+    return fallback ? <Component {...props}>{fallback}</Component> : undefined;
   }
 
-  // Enhanced experience
-  if (isEnhanced) {
-    return <>{enhanced} </>;
-  }
-
-  // Basic experience
-  return <>{children} </>;
+  return <Component {...props}>{children}</Component>;
 }
 
 /**
- * Hydration-Safe Hook
+ * Hook for SSR-safe access to window and document objects
  */
-export function useHydrationSafe<T>(
-  clientValue: T,
-  serverValue: T,
-  delay: number = 0
-): T {
-  const [value, setValue] = useState(serverValue);
+export function useSSRSafeWindow() {
+  const [windowObj, setWindowObj] = useState<Window | undefined>(undefined);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setValue(clientValue);
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [clientValue, delay]);
-
-  return value;
-}
-
-/**
- * SSR-Safe Local Storage Hook
- */
-export function useSSRSafeLocalStorage<T>(
-  key: string,
-  defaultValue: T
-): [T, (value: T) => void] {
-  const [value, setValue] = useState<T>(defaultValue);
-
-  useEffect(() => {
-    try {
-      const item = localStorage.getItem(key);
-      if (item) {
-        setValue(JSON.parse(item));
-      }
-    } catch (error) {
-      console.warn(`Failed to read localStorage key "${key}":`, error);
+    if ('undefined' !== typeof window) {
+      setWindowObj(window);
     }
-  }, [key]);
-
-  const setStoredValue = (newValue: T) => {
-    try {
-      setValue(newValue);
-      localStorage.setItem(key, JSON.stringify(newValue));
-    } catch (error) {
-      console.warn(`Failed to write localStorage key "${key}":`, error);
-    }
-  };
-
-  return [value, setStoredValue];
-}
-
-/**
- * Network Status Hook with Fallback
- */
-export function useNetworkStatus() {
-  const [isOnline, setIsOnline] = useState(true);
-  const [connectionType, setConnectionType] = useState<string>('unknown');
-
-  useEffect(() => {
-    if ('undefined' === typeof navigator) {
-      return;
-    }
-
-    const updateOnlineStatus = () => {
-      setIsOnline(navigator.onLine);
-    };
-
-    const updateConnectionType = () => {
-      const connection = (navigator as any).connection;
-      if (connection) {
-        setConnectionType(connection.effectiveType || 'unknown');
-      }
-    };
-
-    updateOnlineStatus();
-    updateConnectionType();
-
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
-
-    const connection = (navigator as any).connection;
-    if (connection) {
-      connection.addEventListener('change', updateConnectionType);
-    }
-
-    return () => {
-      window.removeEventListener('online', updateOnlineStatus);
-      window.removeEventListener('offline', updateOnlineStatus);
-
-      if (connection) {
-        connection.removeEventListener('change', updateConnectionType);
-      }
-    };
   }, []);
 
-  return { isOnline, connectionType };
+  return windowObj;
 }
 
 /**
- * Graceful Degradation Strategies
+ * Hook for SSR-safe localStorage access
  */
-export const gracefulDegradation = {
-  // Animation fallbacks
-  withAnimationFallback: (
-    animatedComponent: ReactNode,
-    staticComponent: ReactNode
-  ) => {
-    const prefersReducedMotion =
-      'undefined' !== typeof window &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+export function useSSRSafeLocalStorage() {
+  const [storage, setStorage] = useState<Storage | undefined>(undefined);
 
-    return prefersReducedMotion ? staticComponent : animatedComponent;
-  },
+  useEffect(() => {
+    if ('undefined' !== typeof window && window.localStorage) {
+      setStorage(window.localStorage);
+    }
+  }, []);
 
-  // Feature detection fallbacks
-  withFeatureDetection: (
-    feature: string,
-    enhancedComponent: ReactNode,
-    fallbackComponent: ReactNode
-  ) => {
-    const hasFeature = 'undefined' !== typeof window && feature in window;
-    return hasFeature ? enhancedComponent : fallbackComponent;
-  },
+  return storage;
+}
 
-  // CSS-only fallbacks
-  withCSSFallback: (jsComponent: ReactNode, cssComponent: ReactNode) => {
-    return <SSRSafe fallback={cssComponent}>{jsComponent}</SSRSafe>;
-  },
+/**
+ * Utility function to check if we're in a browser environment
+ */
+export const isBrowser = (): boolean => {
+  return 'undefined' !== typeof window && 'undefined' !== typeof document;
 };
 
-// Export singleton instance
-export const ssrSafety = SSRSafetyManager.getInstance();
+/**
+ * Utility function to safely access browser APIs
+ */
+export function safelyAccessBrowserAPI<T>(fn: () => T, fallback: T): T {
+  if (!isBrowser()) {
+    return fallback;
+  }
+
+  try {
+    return fn();
+  } catch (error) {
+    console.warn('Browser API access failed:', error);
+    return fallback;
+  }
+}

@@ -4,7 +4,7 @@
  */
 
 // Core utilities
-export { cn } from './lib/glass-utils';
+export { cn } from '@/core/utils/classname';
 
 // Basic components
 export { GlassButton } from './components/glass-button';

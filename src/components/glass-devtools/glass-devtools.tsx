@@ -4,7 +4,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { type AccessibilityReport, accessibilityManager } from '@/core/accessibility-manager';
 import { type PerformanceReport, performanceMonitor } from '@/core/performance-monitor';
 import { cssBundleAnalyzer } from '@/core/css-optimization';

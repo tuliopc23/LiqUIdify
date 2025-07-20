@@ -1,4 +1,4 @@
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 interface TableColumn<T> {
   key: keyof T;

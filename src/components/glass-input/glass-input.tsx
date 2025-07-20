@@ -11,7 +11,7 @@ import {
   focusRing,
   getGlassClass,
   microInteraction,
-} from '@/lib/glass-utils';
+} from '@/core/utils/classname';
 import { Eye, EyeOff, Search, X } from 'lucide-react';
 
 // Type definitions for enhanced TypeScript support
@@ -20,7 +20,19 @@ type ComponentVariant = 'default' | 'search' | 'password' | 'email';
 export interface GlassInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: ComponentVariant;
+  /**
+   * Icon to display on the left side of the input.
+   * @security **WARNING:** This prop accepts a `React.ReactNode`. To prevent XSS attacks,
+   * developers must ensure that any user-provided content passed to this prop is properly sanitized.
+   * Do not pass unsanitized user-generated content to this prop.
+   */
   leftIcon?: React.ReactNode;
+  /**
+   * Icon to display on the right side of the input.
+   * @security **WARNING:** This prop accepts a `React.ReactNode`. To prevent XSS attacks,
+   * developers must ensure that any user-provided content passed to this prop is properly sanitized.
+   * Do not pass unsanitized user-generated content to this prop.
+   */
   rightIcon?: React.ReactNode;
   clearable?: boolean;
   error?: boolean;
@@ -121,7 +133,9 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
         pr = 'pr-20'; // Space for two icons if needed, adjust as per visual design
       }
 
-      if (leftIcon || 'search' === variant) {return `pl-10 ${pr}`;}
+      if (leftIcon || 'search' === variant) {
+        return `pl-10 ${pr}`;
+      }
       return `pl-4 ${pr}`;
     };
 
@@ -131,7 +145,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
     return (
       <div className="relative w-full">
         <div className="relative flex items-center w-full">
-          { 'search' === variant && !leftIcon && (
+          {'search' === variant && !leftIcon && (
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary pointer-events-none" />
           )}
           {leftIcon && (
@@ -162,7 +176,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 <X className="h-4 w-4" />
               </button>
             )}
-            { 'password' === variant && (
+            {'password' === variant && (
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}

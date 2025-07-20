@@ -111,11 +111,11 @@ export default defineConfig({
         // Individual component entries for per-component imports
         'components/button': resolve(
           __dirname,
-          'src/components/glass-button/index.ts'
+          'src/components/glass-button-refactored/index.ts'
         ),
         'components/card': resolve(
           __dirname,
-          'src/components/glass-card/index.ts'
+          'src/components/glass-card-refactored/index.ts'
         ),
         'components/input': resolve(
           __dirname,

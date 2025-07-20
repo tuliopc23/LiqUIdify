@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { accessibilityManager } from '@/core/accessibility-manager';
 import { GlassButton } from '../glass-button';
 import { GlassCard } from '../glass-card';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 interface AccessibilityDemoProps {
   className?: string;

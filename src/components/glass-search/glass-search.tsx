@@ -5,7 +5,7 @@ import {
   focusRing,
   getGlassClass,
   microInteraction,
-} from '@/lib/glass-utils';
+} from '@/core/utils/classname';
 
 export interface SearchSuggestion {
   id: string;

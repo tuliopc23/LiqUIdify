@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { performanceMonitor } from '../../core/performance-monitor';
 import { useRealtimePerformance } from '../../hooks/use-performance-monitoring';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { GlassCard } from '../glass-card';
 
 export interface GlassPerformanceDashboardProps {

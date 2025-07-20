@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { cn, getGlassClass } from '@/lib/glass-utils';
+import { cn, getGlassClass } from '@/core/utils/classname';
 
 export interface GlassTooltipProps {
   content: React.ReactNode;

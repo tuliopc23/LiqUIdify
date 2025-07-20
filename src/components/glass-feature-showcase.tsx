@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef } from 'react';
 import type { Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { useContentAwareGlass, useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
 import {

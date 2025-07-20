@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 export interface GlassCardLiteProps
   extends React.HTMLAttributes<HTMLDivElement> {

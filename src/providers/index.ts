@@ -3,16 +3,16 @@ import {
   type GlassUIProviderProps,
 } from './glass-ui-provider';
 import {
-  GlobalConfigProvider,
-  GlobalConfigContext,
-  useGlobalConfig,
   type GlobalConfig,
+  GlobalConfigContext,
+  GlobalConfigProvider,
   type GlobalConfigProviderProps,
+  useGlobalConfig,
 } from './global-config-provider';
 import {
   ConfigProvider,
-  LiquidifyProvider,
   type ConfigProviderProps,
+  LiquidifyProvider,
 } from './config-provider';
 import {
   SSRConfigProvider,
@@ -22,10 +22,18 @@ import {
 import { useConfig } from './use-config';
 
 export {
+  ConfigProvider,
   GlassUIProvider,
   type GlassUIProviderProps,
   GlobalConfigProvider,
   GlobalConfigContext,
   useGlobalConfig,
   type GlobalConfig,
-  type GlobalConfigPr...
+  type GlobalConfigProviderProps,
+  LiquidifyProvider,
+  type ConfigProviderProps,
+  SSRConfigProvider,
+  useIsClient,
+  withSSRSafety,
+  useConfig,
+};

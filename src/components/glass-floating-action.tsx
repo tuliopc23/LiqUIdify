@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { createGlassRipple, useMagneticHover } from '@/lib/glass-physics';
 
@@ -210,22 +210,22 @@ const GlassFloatingAction = forwardRef<
                         transform:
                           'radial' === expandDirection
                             ? 'translate(-50%, -50%)'
-                            : 'left' === expandDirection ||
+                            : ('left' === expandDirection ||
                                 'right' === expandDirection
                               ? 'translateY(-50%)'
-                              : 'translateX(-50%)',
+                              : 'translateX(-50%)'),
                         marginLeft:
                           'left' === expandDirection
                             ? '-8px'
-                            : 'right' === expandDirection
+                            : ('right' === expandDirection
                               ? '8px'
-                              : '0',
+                              : '0'),
                         marginTop:
                           'up' === expandDirection
                             ? '-8px'
-                            : 'down' === expandDirection
+                            : ('down' === expandDirection
                               ? '8px'
-                              : '0',
+                              : '0'),
                       }}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}

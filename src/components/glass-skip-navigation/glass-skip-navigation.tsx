@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { accessibilityManager } from '@/core/accessibility-manager';
+import { useIsClient } from '@/hooks/use-ssr-safe';
 
 export interface SkipLink {
   id: string;
@@ -40,10 +41,13 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const isClient = useIsClient();
 
   // Auto-generate skip links for landmarks
   useEffect(() => {
-    if (!autoGenerate || providedLinks) {return;}
+    if (!autoGenerate || providedLinks || !isClient) {
+      return;
+    }
 
     const generateSkipLinks = () => {
       const generatedLinks: SkipLink[] = [];
@@ -137,10 +141,14 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     return () => {
       observer.disconnect();
     };
-  }, [autoGenerate, providedLinks]);
+  }, [autoGenerate, providedLinks, isClient]);
 
   const handleSkipTo = (link: SkipLink, event: React.MouseEvent | React.KeyboardEvent) => {
     event.preventDefault();
+
+    if (!isClient) {
+      return;
+    }
 
     let targetElement: HTMLElement | null;
 
@@ -306,9 +314,12 @@ export function useSkipNavigation() {
   };
 
   const skipTo = (id: string) => {
+    if ('undefined' === typeof window || 'undefined' === typeof document) {
+      return;
+    }
+
     const link = skipLinks.find(l => l.id === id);
     if (!link) {return;}
-
 
     // Use the same logic as handleSkipTo
     let targetElement: HTMLElement | null;

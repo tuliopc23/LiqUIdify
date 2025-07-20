@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
 /**
  * LiqUIdify Production Build Script
@@ -88,17 +88,17 @@ class ProductionBuilder {
   async validateEnvironment() {
     this.log('🔍 Validating build environment...', 'cyan');
 
-    // Check Node.js version
-    const nodeVersion = process.version;
-    if (!nodeVersion.startsWith('v18') && !nodeVersion.startsWith('v20') && !nodeVersion.startsWith('v22')) {
-      this.warnings.push(`Node.js version ${nodeVersion} may not be optimal. Recommended: v18, v20, or v22`);
+    // Check Bun version
+    const bunVersion = process.versions.bun || 'unknown';
+    if (!bunVersion.startsWith('1.')) {
+      this.warnings.push(`Bun version ${bunVersion} may not be optimal. Recommended: v1.0.0+`);
     }
 
     // Check required dependencies
     const requiredDeps = ['vite', 'typescript', 'postcss', 'tailwindcss'];
     for (const dep of requiredDeps) {
       try {
-        await this.execute(`npm list ${dep}`, { silent: true });
+        await this.execute(`bun pm ls ${dep}`, { silent: true });
       } catch (error) {
         this.errors.push(`Missing required dependency: ${dep}`);
       }
@@ -119,7 +119,7 @@ class ProductionBuilder {
     this.log('🧹 Cleaning build directory...', 'cyan');
 
     try {
-      await this.execute('npm run clean');
+      await this.execute('bun run clean');
 
       // Ensure clean slate
       const distExists = await fs.access('./dist').then(() => true).catch(() => false);
@@ -186,10 +186,10 @@ class ProductionBuilder {
 
     try {
       // Build optimized CSS bundles
-      await this.execute('npm run build:css:split');
+      await this.execute('bun run build:css:split');
 
       // Extract critical CSS
-      await this.execute('npm run extract:critical');
+      await this.execute('bun run extract:critical');
 
       // Optimize with PostCSS and cssnano
       const cssFiles = await fs.readdir('./dist/css');
@@ -198,7 +198,7 @@ class ProductionBuilder {
           const filePath = path.join('./dist/css', file);
           const originalSize = (await fs.stat(filePath)).size;
 
-          await this.execute(`npx postcss ${filePath} --replace --config postcss.config.optimized.js`);
+          await this.execute(`bunx postcss ${filePath} --replace --config postcss.config.optimized.js`);
 
           const optimizedSize = (await fs.stat(filePath)).size;
           const savings = ((originalSize - optimizedSize) / originalSize * 100).toFixed(1);
@@ -218,7 +218,7 @@ class ProductionBuilder {
 
     try {
       // Generate bundle analysis
-      await this.execute('npm run analyze:bundles');
+      await this.execute('bun run analyze:bundles');
 
       const bundleReport = {
         core: 0,
@@ -289,10 +289,10 @@ class ProductionBuilder {
 
     try {
       // Generate detailed bundle analysis
-      await this.execute('npx vite build --mode production --minify terser --sourcemap');
+      await this.execute('bunx vite build --mode production --minify terser --sourcemap');
 
       // Use webpack-bundle-analyzer for detailed analysis
-      await this.execute('npx webpack-bundle-analyzer dist/stats.json --mode json --report dist/treeshaking-report.json', { silent: true });
+      await this.execute('bunx webpack-bundle-analyzer dist/stats.json --mode json --report dist/treeshaking-report.json', { silent: true });
 
       // Analyze dead code elimination
       const sourceMapFiles = await fs.readdir('./dist');
@@ -301,7 +301,7 @@ class ProductionBuilder {
       if (maps.length > 0) {
         // Use source-map-explorer for unused code analysis
         try {
-          await this.execute(`npx source-map-explorer dist/*.js --json > dist/source-analysis.json`, { silent: true });
+          await this.execute(`bunx source-map-explorer dist/*.js --json > dist/source-analysis.json`, { silent: true });
 
           const analysis = JSON.parse(await fs.readFile('./dist/source-analysis.json', 'utf8'));
           const totalSize = Object.values(analysis.files).reduce((sum, size) => sum + size, 0);
@@ -340,7 +340,7 @@ class ProductionBuilder {
           // For SVGs, optimize with SVGO
           if (item.name.endsWith('.svg')) {
             try {
-              await this.execute(`npx svgo ${filePath} --output ${filePath}`);
+              await this.execute(`bunx svgo ${filePath} --output ${filePath}`);
               const optimizedSize = (await fs.stat(filePath)).size;
               const savings = ((originalSize - optimizedSize) / originalSize * 100).toFixed(1);
               this.log(`🖼️ ${item.name}: ${originalSize}B → ${optimizedSize}B (${savings}% savings)`, 'green');
@@ -437,7 +437,7 @@ class ProductionBuilder {
 
       // Validate TypeScript declarations
       try {
-        await this.execute('npx tsc --noEmit --project tsconfig.json');
+        await this.execute('bunx tsc --noEmit --project tsconfig.json');
         this.log('✅ TypeScript validation passed', 'green');
       } catch (error) {
         this.errors.push(`TypeScript validation failed: ${error.message}`);
@@ -469,7 +469,7 @@ class ProductionBuilder {
         `;
 
         await fs.writeFile('./dist/validate-build.js', testScript);
-        await this.execute('node ./dist/validate-build.js');
+        await this.execute('bun ./dist/validate-build.js');
         await fs.unlink('./dist/validate-build.js');
 
       } catch (error) {

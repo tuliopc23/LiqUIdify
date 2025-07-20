@@ -14,6 +14,7 @@ import * as path from 'path';
 import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 import { performanceMonitor } from '../core/performance-monitor';
+import { safeArrayAccess } from '../utils/safe-dom';
 
 // Types
 export interface VisualTestOptions {
@@ -125,22 +126,27 @@ export class VisualRegressionTester {
 
     // Iterate through browsers
     for (let i = 0; i < this.browsers.length; i++) {
-      const browser = this.browsers[i];
-      const browserType = this.options.browsers![i];
+      const browser = safeArrayAccess(this.browsers, i);
+      const browserType = safeArrayAccess(this.options.browsers || [], i);
+      
+      if (!browser || !browserType) {
+        console.warn(`Skipping browser at index ${i}: browser or type not found`);
+        continue;
+      }
 
       // Create context and page
-      const context = await browser!.newContext();
+      const context = await browser.newContext();
       const page = await context.newPage();
 
-      // Iterate through viewports
-      for (const viewport of this.options.viewports!) {
-        await page.setViewportSize({
-          width: viewport.width,
-          height: viewport.height,
-        });
+        // Iterate through viewports
+        for (const viewport of this.options.viewports || []) {
+          await page.setViewportSize({
+            width: viewport.width,
+            height: viewport.height,
+          });
 
-        // Iterate through themes
-        for (const theme of this.options.themes!) {
+          // Iterate through themes
+          for (const theme of this.options.themes || []) {
           // Navigate to URL with theme parameter
           await page.goto(`${url}?theme=${theme}`);
 
@@ -159,9 +165,9 @@ export class VisualRegressionTester {
             const screenshotPath = this.getScreenshotPath(
               component,
               state,
-              browserType || 'chromium',
-              viewport.name || '',
-              theme || 'light'
+              browserType,
+              viewport.name || 'desktop',
+              theme
             );
 
             await page.locator(selector).screenshot({ path: screenshotPath });
@@ -170,9 +176,9 @@ export class VisualRegressionTester {
             const result = await this.compareWithBaseline(
               component,
               state,
-              browserType || 'chromium',
-              viewport.name || '',
-              theme || 'light',
+              browserType,
+              viewport.name || 'desktop',
+              theme,
               screenshotPath
             );
 
@@ -207,20 +213,28 @@ export class VisualRegressionTester {
     const frameInterval = duration / frames;
 
     // Use first browser for animation testing
-    const browser = this.browsers[0];
-    const browserType = this.options.browsers![0];
+    const browser = safeArrayAccess(this.browsers, 0);
+    const browserType = safeArrayAccess(this.options.browsers || [], 0);
+    
+    if (!browser || !browserType) {
+      throw new Error('No browsers available for animation testing');
+    }
 
     // Create context and page
-    const context = await browser!.newContext();
+    const context = await browser.newContext();
     const page = await context.newPage();
 
     // Use first viewport and theme for animation testing
-    const viewport = this.options.viewports![0];
-    const theme = this.options.themes![0];
+    const viewport = safeArrayAccess(this.options.viewports || [], 0);
+    const theme = safeArrayAccess(this.options.themes || [], 0);
+    
+    if (!viewport || !theme) {
+      throw new Error('No viewport or theme configured for animation testing');
+    }
 
     await page.setViewportSize({
-      width: viewport!.width,
-      height: viewport!.height,
+      width: viewport.width,
+      height: viewport.height,
     });
 
     // Navigate to URL with theme parameter
@@ -245,9 +259,9 @@ export class VisualRegressionTester {
         component,
         animationState,
         frameNumber,
-        browserType || 'chromium',
-        viewport?.name || '',
-        theme || 'light'
+        browserType,
+        viewport.name || 'desktop',
+        theme
       );
 
       await page.locator(selector).screenshot({ path: screenshotPath });
@@ -256,9 +270,9 @@ export class VisualRegressionTester {
       const baseResult = await this.compareWithBaseline(
         component,
         `${animationState}-frame-${frameNumber}`,
-        browserType || 'chromium',
-        viewport?.name || '',
-        theme || 'light',
+        browserType,
+        viewport.name || 'desktop',
+        theme,
         screenshotPath
       );
 
@@ -311,7 +325,7 @@ export class VisualRegressionTester {
         screenshotPath,
         browser,
         viewport,
-        theme: theme || 'light',
+        theme,
         component,
         state,
       };
@@ -348,7 +362,7 @@ export class VisualRegressionTester {
         state,
         browser,
         viewport,
-        theme || 'light'
+        theme
       );
 
       fs.writeFileSync(diffPath, PNG.sync.write(diff));
@@ -444,7 +458,7 @@ export class VisualRegressionTester {
     theme: string
   ): string {
     return path.join(
-      this.options.screenshotDir!,
+      this.options.screenshotDir || './screenshots',
       `${component}-${state}-${browser}-${viewport}-${theme}.png`
     );
   }
@@ -460,7 +474,7 @@ export class VisualRegressionTester {
     theme: string
   ): string {
     return path.join(
-      this.options.baselineDir!,
+      this.options.baselineDir || './baseline',
       `${component}-${state}-${browser}-${viewport}-${theme}.png`
     );
   }
@@ -476,7 +490,7 @@ export class VisualRegressionTester {
     theme: string
   ): string {
     return path.join(
-      this.options.diffDir!,
+      this.options.diffDir || './diffs',
       `${component}-${state}-${browser}-${viewport}-${theme}-diff.png`
     );
   }
@@ -493,7 +507,7 @@ export class VisualRegressionTester {
     theme: string
   ): string {
     return path.join(
-      this.options.screenshotDir!,
+      this.options.screenshotDir || './screenshots',
       `${component}-${animationState}-frame-${frameNumber}-${browser}-${viewport}-${theme}.png`
     );
   }
@@ -503,10 +517,10 @@ export class VisualRegressionTester {
    */
   private createDirectories(): void {
     const dirs = [
-      this.options.diffDir!,
-      this.options.baselineDir!,
-      this.options.screenshotDir!,
-    ];
+      this.options.diffDir,
+      this.options.baselineDir,
+      this.options.screenshotDir,
+    ].filter(Boolean) as string[];
 
     dirs.forEach(dir => {
       if (!fs.existsSync(dir)) {
@@ -521,7 +535,7 @@ export class VisualRegressionTester {
   generateReport(results: VisualTestResult[]): string {
     const passedTests = results.filter(result => result.passed).length;
     const totalTests = results.length;
-    const passRate = (passedTests / totalTests) * 100;
+    const passRate = totalTests > 0 ? (passedTests / totalTests) * 100 : 0;
 
     let html = `
       <!DOCTYPE html>

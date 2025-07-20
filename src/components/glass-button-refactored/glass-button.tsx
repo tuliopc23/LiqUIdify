@@ -16,16 +16,10 @@ import { Slot } from '@radix-ui/react-slot';
 
 // Internal dependencies
 import type { InteractiveGlassProps } from '@/core';
-import type { ComponentPropsBuilder } from '@/core/stub-functions';
-import {
-  cn,
-  createBusinessLogicHook,
-  generateGlassClasses,
-  generateGlassVariables,
-  microInteraction,
-  responsiveSize,
-  touchTarget,
-} from '@/core/stub-functions';
+import { cn } from '@/core/utils/classname';
+import { createBusinessLogicHook } from '@/core/business-logic';
+import { generateGlassClasses, generateGlassVariables } from '@/core/glass/unified-glass-system';
+import { microInteraction, responsiveSize, touchTarget } from '@/core/utils/responsive';
 import { useGlassStateTransitions, useMagneticHover, useRippleEffect } from '@/hooks/use-glass-animations';
 
 // Button state type
@@ -71,9 +65,11 @@ const useButtonBusinessLogic = createBusinessLogicHook<ButtonState, GlassButtonP
 );
 
 // Button-specific props extending the base interactive props
-export interface GlassButtonProps extends 
+export interface GlassButtonProps extends
   InteractiveGlassProps,
   ComponentPropsBuilder<HTMLButtonElement> {
+  /** Button content */
+  children?: React.ReactNode;
   /** Button type */
   type?: 'button' | 'submit' | 'reset';
   /** Icon to display on the left side */

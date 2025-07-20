@@ -154,7 +154,10 @@
     "build:oxc": "bun run oxc:check && bun run build",
     "oxc:all": "bun run oxc:lint && bun run type-check",
     "ci:oxc": "bun run oxc:all && bun run build:oxc && bun run test:ci",
-    "qa:oxc": "bun run oxc:all && bun run test && bun run bundle:budget:check"
+    "qa:oxc": "bun run oxc:all && bun run test && bun run bundle:budget:check",
+    "migrate-to-bun": "bun scripts/migrate-to-bun.js",
+    "verify-bun": "bun scripts/verify-bun-oxc-setup.js",
+    "clean:node": "rm -rf node_modules package-lock.json && bun install"
   },
   "keywords": [
     "glassmorphism",

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { GlassPortal } from '@/components/glass-portal';
 
 export interface GlassModalLiteProps {

@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 export interface GlassTabItem {
   // Renamed for clarity

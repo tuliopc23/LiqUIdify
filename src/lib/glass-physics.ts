@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { safeGetBoundingClientRect, safeRefAccess, safeRequestAnimationFrame, withSafeRef } from '../utils/safe-dom';
 
 /**
  * Glass Physics - Physics engine for realistic motion
@@ -167,18 +168,27 @@ export const SPRING_PRESETS = {
 export function hapticFeedback(
   intensity: 'light' | 'medium' | 'heavy' = 'medium'
 ) {
-  // Try to use native vibration API if available
-  if ('undefined' !== typeof navigator && navigator.vibrate) {
-    const patterns = {
-      light: [10],
-      medium: [20],
-      heavy: [50],
-    };
+  try {
+    // Check for SSR environment
+    if ('undefined' === typeof window || 'undefined' === typeof navigator) {
+      return;
+    }
 
-    navigator.vibrate(patterns[intensity]);
-  } else {
-    // Fallback for non-mobile or non-supporting browsers
-    console.log(`Haptic feedback: ${intensity}`);
+    // Try to use native vibration API if available
+    if (navigator.vibrate) {
+      const patterns = {
+        light: [10],
+        medium: [20],
+        heavy: [50],
+      };
+
+      navigator.vibrate(patterns[intensity]);
+    } else {
+      // Fallback for non-mobile or non-supporting browsers
+      console.log(`Haptic feedback: ${intensity}`);
+    }
+  } catch (error) {
+    console.error('Error triggering haptic feedback:', error);
   }
 }
 
@@ -281,59 +291,88 @@ export const useMagneticHover = (
   const animationRef = useRef<number | null>(null);
 
   const animate = useCallback(() => {
-    const position = springRef.current.update();
-    setTransform(
-      `translate3d(${position.x}px, ${position.y}px, 0px) scale(${1 + Math.abs(position.x + position.y) * 0.0001})`
-    );
+    try {
+      const position = springRef.current.update();
+      setTransform(
+        `translate3d(${position.x}px, ${position.y}px, 0px) scale(${1 + Math.abs(position.x + position.y) * 0.0001})`
+      );
 
-    if (!springRef.current.isAtRest()) {
-      animationRef.current = requestAnimationFrame(animate);
+      if (!springRef.current.isAtRest()) {
+        animationRef.current = requestAnimationFrame(animate);
+      }
+    } catch (error) {
+      console.error('Error in magnetic hover animation:', error);
+      // Reset animation state on error
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = undefined;
+      }
     }
   }, []);
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!elementRef.current) {
-        return;
-      }
-
-      const rect = elementRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-
-      const distance = Math.sqrt(
-        Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
-      );
-
-      if (distance < radius) {
-        const force = Math.max(0, 1 - distance / radius);
-        const deltaX = (mouseX - centerX) * strength * force;
-        const deltaY = (mouseY - centerY) * strength * force;
-
-        springRef.current.setTarget(deltaX, deltaY);
-
-        if (animationRef.current) {
-          cancelAnimationFrame(animationRef.current);
+      try {
+        const element = safeRefAccess(elementRef);
+        if (!element) {
+          return;
         }
-        animationRef.current = requestAnimationFrame(animate);
+
+        const rect = safeGetBoundingClientRect(element);
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        const distance = Math.sqrt(
+          Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
+        );
+
+        if (distance < radius) {
+          const force = Math.max(0, 1 - distance / radius);
+          const deltaX = (mouseX - centerX) * strength * force;
+          const deltaY = (mouseY - centerY) * strength * force;
+
+          springRef.current.setTarget(deltaX, deltaY);
+
+          if (animationRef.current) {
+            cancelAnimationFrame(animationRef.current);
+          }
+          const cleanup = safeRequestAnimationFrame(animate);
+          if (cleanup) {
+            animationRef.current = requestAnimationFrame(animate);
+          }
+        }
+      } catch (error) {
+        console.error('Error in magnetic hover mouse move handler:', error);
       }
     },
     [strength, radius, animate]
   );
 
   const handleMouseLeave = useCallback(() => {
-    springRef.current.setTarget(0, 0);
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
+    try {
+      springRef.current.setTarget(0, 0);
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+        const cleanup = safeRequestAnimationFrame(animate);
+        if (cleanup) {
+          animationRef.current = requestAnimationFrame(animate);
+        }
+    } catch (error) {
+      console.error('Error in magnetic hover mouse leave handler:', error);
+      // Ensure cleanup on error
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = undefined;
+      }
     }
-    animationRef.current = requestAnimationFrame(animate);
   }, [animate]);
 
   useEffect(() => {
-    const element = elementRef.current;
+    const element = safeRefAccess(elementRef);
     if (!element) {
       return;
     }
@@ -371,7 +410,7 @@ export const useRepulsionEffect = (
           return new Vector2D(0, 0);
         }
 
-        const rect = element.getBoundingClientRect();
+        const rect = safeGetBoundingClientRect(element);
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
 
@@ -383,7 +422,7 @@ export const useRepulsionEffect = (
             return;
           }
 
-          const otherRect = otherElement.getBoundingClientRect();
+          const otherRect = safeGetBoundingClientRect(otherElement);
           const otherCenterX = otherRect.left + otherRect.width / 2;
           const otherCenterY = otherRect.top + otherRect.height / 2;
 
@@ -421,8 +460,8 @@ export const createFluidMorph = (
   toElement: HTMLElement,
   duration: number = 500
 ) => {
-  const fromRect = fromElement.getBoundingClientRect();
-  const toRect = toElement.getBoundingClientRect();
+  const fromRect = safeGetBoundingClientRect(fromElement);
+  const toRect = safeGetBoundingClientRect(toElement);
 
   const deltaX = toRect.left - fromRect.left;
   const deltaY = toRect.top - fromRect.top;
@@ -461,42 +500,64 @@ export const createGlassRipple = (
   y: number,
   color: string = 'rgba(255, 255, 255, 0.3)'
 ) => {
-  const ripple = document.createElement('div');
-  const rect = element.getBoundingClientRect();
-  const size = Math.max(rect.width, rect.height);
+  try {
+    // Check for SSR environment
+    if ('undefined' === typeof window || 'undefined' === typeof document) {
+      return ;
+    }
 
-  // Set ripple styles
-  ripple.style.position = 'absolute';
-  ripple.style.borderRadius = '50%';
-  ripple.style.background = color;
-  ripple.style.pointerEvents = 'none';
-  ripple.style.width = '0px';
-  ripple.style.height = '0px';
-  ripple.style.left = `${x - rect.left}px`;
-  ripple.style.top = `${y - rect.top}px`;
-  ripple.style.opacity = '1';
-  ripple.style.transition =
-    'width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out';
-  ripple.style.transform = 'translate(-50%, -50%)';
+    const ripple = document.createElement('div');
+    const rect = safeGetBoundingClientRect(element);
+    const size = Math.max(rect.width, rect.height);
 
-  // Add to element
-  element.style.position = 'relative';
-  element.style.overflow = 'hidden';
-  element.appendChild(ripple);
+    // Set ripple styles
+    ripple.style.position = 'absolute';
+    ripple.style.borderRadius = '50%';
+    ripple.style.background = color;
+    ripple.style.pointerEvents = 'none';
+    ripple.style.width = '0px';
+    ripple.style.height = '0px';
+    ripple.style.left = `${x - rect.left}px`;
+    ripple.style.top = `${y - rect.top}px`;
+    ripple.style.opacity = '1';
+    ripple.style.transition =
+      'width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out';
+    ripple.style.transform = 'translate(-50%, -50%)';
 
-  // Animate
-  requestAnimationFrame(() => {
-    ripple.style.width = `${size * 2}px`;
-    ripple.style.height = `${size * 2}px`;
-    ripple.style.opacity = '0';
-  });
+    // Add to element
+    element.style.position = 'relative';
+    element.style.overflow = 'hidden';
+    element.appendChild(ripple);
 
-  // Clean up
-  setTimeout(() => {
-    ripple.remove();
-  }, 600);
+    // Animate
+    const animationFrame = requestAnimationFrame(() => {
+      try {
+        ripple.style.width = `${size * 2}px`;
+        ripple.style.height = `${size * 2}px`;
+        ripple.style.opacity = '0';
+      } catch (error) {
+        console.error('Error animating glass ripple:', error);
+      }
+    });
 
-  return ripple;
+    // Clean up
+    const cleanupTimeout = setTimeout(() => {
+      try {
+        ripple.remove();
+      } catch (error) {
+        console.error('Error removing glass ripple:', error);
+      }
+    }, 600);
+
+    // Store cleanup references for potential early cleanup
+    (ripple as any)._animationFrame = animationFrame;
+    (ripple as any)._cleanupTimeout = cleanupTimeout;
+
+    return ripple;
+  } catch (error) {
+    console.error('Error creating glass ripple:', error);
+    return ;
+  }
 };
 
 // Fluid dynamics configuration
@@ -551,46 +612,50 @@ export class FluidSimulation {
   }
 
   update(deltaTime: number, forces: Vector2D[] = []) {
-    // Calculate densities and pressures
-    this.calculateDensityPressure();
+    try {
+      // Calculate densities and pressures
+      this.calculateDensityPressure();
 
-    // Calculate forces
-    const particleForces = this.particles.map(() => new Vector2D());
+      // Calculate forces
+      const particleForces = this.particles.map(() => new Vector2D());
 
-    // Add pressure forces
-    this.calculatePressureForces(particleForces);
+      // Add pressure forces
+      this.calculatePressureForces(particleForces);
 
-    // Add viscosity forces
-    this.calculateViscosityForces(particleForces);
+      // Add viscosity forces
+      this.calculateViscosityForces(particleForces);
 
-    // Add external forces
-    forces.forEach(force => {
-      particleForces.forEach(pf => {
-        pf.x += force.x;
-        pf.y += force.y;
+      // Add external forces
+      forces.forEach(force => {
+        particleForces.forEach(pf => {
+          pf.x += force.x;
+          pf.y += force.y;
+        });
       });
-    });
 
-    // Update particles
-    this.particles.forEach((particle, i) => {
-      const force = particleForces[i];
-      if (!force) {
-        return;
-      }
+      // Update particles
+      this.particles.forEach((particle, i) => {
+        const force = particleForces[i];
+        if (!force) {
+          return;
+        }
 
-      // Update velocity
-      particle.velocity = particle.velocity.add(
-        force.multiply(deltaTime / particle.density)
-      );
+        // Update velocity
+        particle.velocity = particle.velocity.add(
+          force.multiply(deltaTime / particle.density)
+        );
 
-      // Update position
-      particle.position = particle.position.add(
-        particle.velocity.multiply(deltaTime)
-      );
+        // Update position
+        particle.position = particle.position.add(
+          particle.velocity.multiply(deltaTime)
+        );
 
-      // Apply boundaries
-      this.applyBoundaries(particle);
-    });
+        // Apply boundaries
+        this.applyBoundaries(particle);
+      });
+    } catch (error) {
+      console.error('Error in fluid simulation update:', error);
+    }
   }
 
   private calculateDensityPressure() {
@@ -801,28 +866,38 @@ export class ParticleEmitter {
   }
 
   update(deltaTime: number) {
-    // Emit new particles
-    this.emitAccumulator += deltaTime * this.config.rate;
+    try {
+      // Emit new particles
+      this.emitAccumulator += deltaTime * this.config.rate;
 
-    while (1 <= this.emitAccumulator) {
-      this.emit();
-      this.emitAccumulator -= 1;
+      while (1 <= this.emitAccumulator) {
+        this.emit();
+        this.emitAccumulator -= 1;
+      }
+
+      // Update existing particles
+      this.particles = this.particles.filter(particle => {
+        try {
+          // Reset acceleration
+          particle.acceleration = new Vector2D();
+
+          // Apply forces
+          this.forces.forEach(force => particle.applyForce(force));
+
+          // Update particle
+          particle.update(deltaTime);
+
+          // Remove dead particles
+          return !particle.isDead();
+        } catch (error) {
+          console.error('Error updating particle:', error);
+          // Remove errored particles
+          return false;
+        }
+      });
+    } catch (error) {
+      console.error('Error in particle emitter update:', error);
     }
-
-    // Update existing particles
-    this.particles = this.particles.filter(particle => {
-      // Reset acceleration
-      particle.acceleration = new Vector2D();
-
-      // Apply forces
-      this.forces.forEach(force => particle.applyForce(force));
-
-      // Update particle
-      particle.update(deltaTime);
-
-      // Remove dead particles
-      return !particle.isDead();
-    });
   }
 
   private emit() {
@@ -913,9 +988,14 @@ export class PhysicsWorld {
       return;
     }
 
-    this.running = true;
-    this.lastTime = performance.now();
-    this.update();
+    try {
+      this.running = true;
+      this.lastTime = performance.now();
+      this.update();
+    } catch (error) {
+      console.error('Error starting physics world:', error);
+      this.running = false;
+    }
   }
 
   stop() {
@@ -931,26 +1011,40 @@ export class PhysicsWorld {
       return;
     }
 
-    const currentTime = performance.now();
-    const deltaTime = Math.min((currentTime - this.lastTime) / 1000, 0.1); // Cap at 100ms
-    this.lastTime = currentTime;
+    try {
+      const currentTime = performance.now();
+      const deltaTime = Math.min((currentTime - this.lastTime) / 1000, 0.1); // Cap at 100ms
+      this.lastTime = currentTime;
 
-    // Update all systems
-    this.emitters.forEach(emitter => {
-      emitter.addForce(this.gravity);
-      emitter.addForce(this.wind);
-      emitter.update(deltaTime);
-      emitter.removeForce(this.gravity);
-      emitter.removeForce(this.wind);
-    });
+      // Update all systems with error handling
+      this.emitters.forEach((emitter, id) => {
+        try {
+          emitter.addForce(this.gravity);
+          emitter.addForce(this.wind);
+          emitter.update(deltaTime);
+          emitter.removeForce(this.gravity);
+          emitter.removeForce(this.wind);
+        } catch (error) {
+          console.error(`Error updating particle emitter ${id}:`, error);
+        }
+      });
 
-    this.fluids.forEach(fluid => {
-      fluid.update(deltaTime, [this.gravity, this.wind]);
-    });
+      this.fluids.forEach((fluid, id) => {
+        try {
+          fluid.update(deltaTime, [this.gravity, this.wind]);
+        } catch (error) {
+          console.error(`Error updating fluid simulation ${id}:`, error);
+        }
+      });
 
-    // Springs update themselves based on target
+      // Springs update themselves based on target
 
-    this.rafId = requestAnimationFrame(() => this.update());
+      this.rafId = requestAnimationFrame(() => this.update());
+    } catch (error) {
+      console.error('Critical error in physics world update:', error);
+      // Stop the animation loop on critical error
+      this.stop();
+    }
   }
 
   getSpring(id: string): SpringPhysics | Spring2D | undefined {

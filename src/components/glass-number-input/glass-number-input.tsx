@@ -8,7 +8,7 @@ import React, {
 import {
   cn,
   focusRing,
-} from '../../lib/glass-utils';
+} from '@/core/utils/classname';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { Minus, Plus } from 'lucide-react';
 

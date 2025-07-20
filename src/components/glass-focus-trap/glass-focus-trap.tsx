@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { accessibilityManager } from '@/core/accessibility-manager';
+import { useIsClient } from '@/hooks/use-ssr-safe';
 
 export interface GlassFocusTrapProps {
   children: React.ReactNode;
@@ -62,6 +63,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   const lastFocusedElement = useRef<HTMLElement | null>(null);
   const focusTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const instanceRef = useRef<FocusTrapInstance | null>(null);
+  const isClient = useIsClient();
 
   // Store instance reference for stack management
   useEffect(() => {
@@ -73,7 +75,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   }, [isActive]);
 
   const getFocusableElements = useCallback((): HTMLElement[] => {
-    if (!containerRef.current) {return [];}
+    if (!isClient || !containerRef.current) {return [];}
 
     const focusableSelectors = [
       'a[href]:not([disabled]):not([tabindex="-1"])',
@@ -105,9 +107,13 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         !el.closest('[inert]')
       );
     });
-  }, []);
+  }, [isClient]);
 
   const saveFocusHistory = useCallback((element: HTMLElement) => {
+    if (!isClient) {
+      return;
+    }
+
     const scrollPosition = {
       x: window.scrollX,
       y: window.scrollY,
@@ -123,7 +129,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
     if (10 < focusHistory.current.length) {
       focusHistory.current.shift();
     }
-  }, []);
+  }, [isClient]);
 
   const restoreFocusFromHistory = useCallback(() => {
     const history = focusHistory.current;
@@ -295,7 +301,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
   // Set up focus trap
   useEffect(() => {
-    if (!active) {
+    if (!isClient || !active) {
       setIsActive(false);
       return;
     }
@@ -393,6 +399,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       accessibilityManager.announce('Focus trap deactivated', 'polite');
     };
   }, [
+    isClient,
     active,
     autoFocus,
     delayInitialFocus,

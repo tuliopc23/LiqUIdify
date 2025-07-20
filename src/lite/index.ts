@@ -15,6 +15,6 @@ export type { GlassCardLiteProps } from './glass-card-lite';
 export type { GlassModalLiteProps } from './glass-modal-lite';
 
 // Re-export essential utilities
-export { cn } from '../lib/glass-utils';
+export { cn } from '@/core/utils/classname';
 export { useTheme } from '../hooks/use-theme';
 export { ThemeProvider } from '../components/theme-provider';

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useIsClient } from '@/hooks/use-ssr-safe';
 
 export interface GlassPortalProps {
   children: React.ReactNode;
@@ -15,19 +16,30 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
   const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(
     undefined
   );
+  const isClient = useIsClient();
 
   useEffect(() => {
+    if (!isClient) {
+      return;
+    }
+
     // Use provided container or create default
+    // Check for document.body availability
+    if (!container && (!document.body)) {
+      console.warn('[GlassPortal] document.body is not available, portal cannot be created');
+      return;
+    }
+    
     const node = container || document.body;
     setMountNode(node);
 
     return () => {
       setMountNode(undefined);
     };
-  }, [container]);
+  }, [isClient, container]);
 
   // Don't render anything during SSR
-  if ('undefined' === typeof window) {
+  if (!isClient) {
     return ;
   }
 

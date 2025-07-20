@@ -471,3 +471,91 @@ export function mixColors(
 
   return rgbToHex(mixed.r, mixed.g, mixed.b);
 }
+
+/**
+ * Check contrast for glass morphism effects
+ * @param foreground - Text/foreground color
+ * @param glassBackground - Glass panel background color
+ * @param backdropBackground - Background behind the glass
+ * @param glassOpacity - Opacity of the glass panel (0-1)
+ */
+export function checkGlassContrast(
+  foreground: string | RGBColor,
+  glassBackground: string | RGBColor,
+  backdropBackground: string | RGBColor,
+  glassOpacity: number = 0.25
+): {
+  ratio: number;
+  passes: {
+    aa: { normal: boolean; large: boolean };
+    aaa: { normal: boolean; large: boolean };
+  };
+  recommendation: string;
+} {
+  const fg = 'string' === typeof foreground ? parseColor(foreground) : foreground;
+  const glassBg = 'string' === typeof glassBackground ? parseColor(glassBackground) : glassBackground;
+  const backdropBg = 'string' === typeof backdropBackground ? parseColor(backdropBackground) : backdropBackground;
+
+  if (!fg || !glassBg || !backdropBg) {
+    throw new Error('Invalid color format');
+  }
+
+  // Calculate effective background color (glass + backdrop)
+  const effectiveBg: RGBColor = {
+    r: Math.round(glassBg.r * glassOpacity + backdropBg.r * (1 - glassOpacity)),
+    g: Math.round(glassBg.g * glassOpacity + backdropBg.g * (1 - glassOpacity)),
+    b: Math.round(glassBg.b * glassOpacity + backdropBg.b * (1 - glassOpacity)),
+  };
+
+  const ratio = getContrastRatio(rgbToHex(fg.r, fg.g, fg.b), rgbToHex(effectiveBg.r, effectiveBg.g, effectiveBg.b));
+  
+  const result = {
+    ratio,
+    passes: {
+      aa: {
+        normal: 4.5 <= ratio ,
+        large: 3 <= ratio ,
+      },
+      aaa: {
+        normal: 7 <= ratio ,
+        large: 4.5 <= ratio ,
+      },
+    },
+    recommendation: '',
+  };
+
+  if (3 > ratio) {
+    result.recommendation = 'Very poor contrast. Consider using a different color combination.';
+  } else if (4.5 > ratio) {
+    result.recommendation = 'Acceptable for large text only (18pt+ or 14pt+ bold).';
+  } else if (7 > ratio) {
+    result.recommendation = 'Good contrast. Meets WCAG AA standards.';
+  } else {
+    result.recommendation = 'Excellent contrast. Meets WCAG AAA standards.';
+  }
+
+  return result;
+}
+
+/**
+ * Check if a color combination is safe for glass effects
+ * @param foreground - Text/foreground color
+ * @param glassOpacity - Opacity of the glass effect
+ * @returns Whether the color is safe for glass effects
+ */
+export function isGlassSafe(
+  foreground: string,
+  glassOpacity: number = 0.25
+): boolean {
+  // Test against common backgrounds
+  const testBackgrounds = ['#ffffff', '#000000', '#f0f0f0', '#1a1a1a'];
+  
+  for (const bg of testBackgrounds) {
+    const result = checkGlassContrast(foreground, '#ffffff', bg, glassOpacity);
+    if (!result.passes.aa.normal) {
+      return false;
+    }
+  }
+  
+  return true;
+}

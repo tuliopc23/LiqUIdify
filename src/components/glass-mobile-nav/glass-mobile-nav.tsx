@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ChevronRight, Menu, X } from 'lucide-react';
-import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
+import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
 
 interface NavItem {
   id: string;

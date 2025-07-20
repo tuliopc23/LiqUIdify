@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/schemas/oxc.json",
   "env": {
-    "node": true,
+    "bun": true,
     "browser": true,
     "es6": true,
     "es2020": true,

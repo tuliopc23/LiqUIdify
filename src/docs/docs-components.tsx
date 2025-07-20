@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { AppleLiquidGlassCard } from '@/components/apple-liquid-glass';
 import { LiquidGlassSvgFilters } from '@/components/liquid-glass-svg-filters';
 

@@ -1,7 +1,7 @@
 import type { ErrorInfo, ReactNode } from 'react';
 import React, { Component } from 'react';
 import { AlertTriangle } from 'lucide-react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { announcer } from '@/components/glass-live-region';
 import { errorTracking } from '@/core/error-tracking';
 

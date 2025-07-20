@@ -7,7 +7,7 @@ import {
   Info,
   X,
 } from 'lucide-react';
-import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
+import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
 
 export interface NotificationItem {
   id: string;

@@ -4,7 +4,7 @@ import { GlassSkipNavigation } from '../glass-skip-navigation';
 import { RovingTabindexGroup, useRovingTabindex } from '@/core/roving-tabindex';
 import { GlassButton } from '../glass-button';
 import { GlassCard } from '../glass-card';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 export const GlassFocusDemo: React.FC = () => {
   const [trapActive, setTrapActive] = useState(false);

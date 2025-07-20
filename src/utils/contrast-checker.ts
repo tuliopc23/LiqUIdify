@@ -1,116 +1,62 @@
 /**
- * WCAG 2.1 Contrast Checker Utility
- * Ensures text and background color combinations meet accessibility standards
+ * Contrast Checker Utility
+ * WCAG-compliant color contrast checking for accessibility
  */
 
-export interface RGB {
+export interface ContrastResult {
+  ratio: number;
+  level: 'AAA' | 'AA' | 'A' | 'FAIL';
+  passes: {
+    normalText: boolean;
+    largeText: boolean;
+    uiComponents: boolean;
+  };
+}
+
+export interface ColorRGB {
   r: number;
   g: number;
   b: number;
 }
 
-export interface ContrastResult {
-  ratio: number;
-  passes: {
-    aa: {
-      normal: boolean;
-      large: boolean;
-    };
-    aaa: {
-      normal: boolean;
-      large: boolean;
-    };
-  };
-  recommendation: string;
-}
-
 /**
  * Convert hex color to RGB
  */
-export function hexToRgb(hex: string): RGB | null {
+export function hexToRgb(hex: string): ColorRGB | null {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1] || '0', 16),
-        g: parseInt(result[2] || '0', 16),
-        b: parseInt(result[3] || '0', 16),
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
       }
     : undefined;
 }
 
 /**
- * Convert RGB color to hex
+ * Calculate relative luminance of a color
  */
-export function rgbToHex(rgb: RGB): string {
-  return `#${((1 << 24) + (rgb.r << 16) + (rgb.g << 8) + rgb.b)
-    .toString(16)
-    .slice(1)}`;
-}
-
-/**
- * Parse CSS color string to RGB
- */
-export function parseColor(color: string): RGB | null {
-  // Handle hex colors
-  if (color.startsWith('#')) {
-    return hexToRgb(color);
-  }
-
-  // Handle rgb/rgba colors
-  const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-  if (rgbMatch) {
-    return {
-      r: parseInt(rgbMatch[1] || '0', 10),
-      g: parseInt(rgbMatch[2] || '0', 10),
-      b: parseInt(rgbMatch[3] || '0', 10),
-    };
-  }
-
-  // Handle named colors (simplified - in production, use a full color map)
-  const namedColors: Record<string, string> = {
-    white: '#ffffff',
-    black: '#000000',
-    red: '#ff0000',
-    green: '#008000',
-    blue: '#0000ff',
-    // Add more as needed
-  };
-
-  const lowerColor = color.toLowerCase();
-  if (namedColors[lowerColor]) {
-    return hexToRgb(namedColors[lowerColor] || '');
-  }
-
-  return;
-}
-
-/**
- * Calculate relative luminance
- * Based on WCAG 2.1 formula
- */
-export function getLuminance(rgb: RGB): number {
-  const rsRGB = rgb.r / 255;
-  const gsRGB = rgb.g / 255;
-  const bsRGB = rgb.b / 255;
-
-  const r =
-    0.039_28 >= rsRGB ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
-  const g =
-    0.039_28 >= gsRGB ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
-  const b =
-    0.039_28 >= bsRGB ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
-
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+export function getLuminance(rgb: ColorRGB): number {
+  const { r, g, b } = rgb;
+  
+  const [rs, gs, bs] = [r, g, b].map((c) => {
+    const sRGB = c / 255;
+    return 0.03928 >= sRGB ? sRGB / 12.92 : Math.pow((sRGB + 0.055) / 1.055, 2.4);
+  });
+  
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
 }
 
 /**
  * Calculate contrast ratio between two colors
  */
-export function getContrastRatio(color1: RGB, color2: RGB): number {
+export function getContrastRatio(color1: ColorRGB, color2: ColorRGB): number {
   const lum1 = getLuminance(color1);
   const lum2 = getLuminance(color2);
+  
   const brightest = Math.max(lum1, lum2);
   const darkest = Math.min(lum1, lum2);
+  
   return (brightest + 0.05) / (darkest + 0.05);
 }
 
@@ -118,192 +64,120 @@ export function getContrastRatio(color1: RGB, color2: RGB): number {
  * Check if contrast ratio meets WCAG standards
  */
 export function checkContrast(
-  foreground: string | RGB,
-  background: string | RGB
-): ContrastResult {
-  const fg =
-    'string' === typeof foreground ? parseColor(foreground) : foreground;
-  const bg =
-    'string' === typeof background ? parseColor(background) : background;
-
-  if (!fg || !bg) {
-    throw new Error('Invalid color format');
-  }
-
-  const ratio = getContrastRatio(fg, bg);
-
-  const result: ContrastResult = {
-    ratio: Math.round(ratio * 100) / 100,
-    passes: {
-      aa: {
-        normal: 4.5 <= ratio,
-        large: 3 <= ratio,
-      },
-      aaa: {
-        normal: 7 <= ratio,
-        large: 4.5 <= ratio,
-      },
-    },
-    recommendation: '',
-  };
-
-  // Generate recommendation
-  if (result.passes.aaa.normal) {
-    result.recommendation = 'Excellent contrast for all text sizes';
-  } else if (result.passes.aa.normal) {
-    result.recommendation = 'Good contrast for normal text';
-  } else if (result.passes.aa.large) {
-    result.recommendation =
-      'Acceptable only for large text (18pt+ or 14pt+ bold)';
-  } else {
-    result.recommendation = 'Poor contrast - does not meet WCAG standards';
-  }
-
-  return result;
-}
-
-/**
- * Suggest a better color for improved contrast
- */
-export function suggestBetterColor(
-  foreground: string | RGB,
-  background: string | RGB,
-  targetRatio: number = 4.5
-): RGB {
-  const fg =
-    'string' === typeof foreground ? parseColor(foreground) : foreground;
-  const bg =
-    'string' === typeof background ? parseColor(background) : background;
-
-  if (!fg || !bg) {
-    throw new Error('Invalid color format');
-  }
-
-  const currentRatio = getContrastRatio(fg, bg);
-
-  if (currentRatio >= targetRatio) {
-    return fg; // Already meets target
-  }
-
-  // Determine if we should lighten or darken the foreground
-  const bgLuminance = getLuminance(bg);
-  const shouldLighten = 0.5 > bgLuminance;
-
-  let adjustedColor = { ...fg };
-  let step = shouldLighten ? 1 : -1;
-  let iterations = 0;
-  const maxIterations = 255;
-
-  while (
-    getContrastRatio(adjustedColor, bg) < targetRatio &&
-    iterations < maxIterations
-  ) {
-    adjustedColor.r = Math.max(0, Math.min(255, adjustedColor.r + step));
-    adjustedColor.g = Math.max(0, Math.min(255, adjustedColor.g + step));
-    adjustedColor.b = Math.max(0, Math.min(255, adjustedColor.b + step));
-    iterations++;
-
-    // If we've maxed out, try the opposite direction
-    if (
-      (shouldLighten &&
-        255 === adjustedColor.r &&
-        255 === adjustedColor.g &&
-        255 === adjustedColor.b) ||
-      (!shouldLighten &&
-        0 === adjustedColor.r &&
-        0 === adjustedColor.g &&
-        0 === adjustedColor.b)
-    ) {
-      step = -step;
-      adjustedColor = { ...fg };
-    }
-  }
-
-  return adjustedColor;
-}
-
-/**
- * Check contrast for glass morphism effects
- */
-export function checkGlassContrast(
-  foreground: string | RGB,
-  glassBackground: string | RGB,
-  backdropBackground: string | RGB,
-  glassOpacity: number = 0.25
-): ContrastResult {
-  const fg =
-    'string' === typeof foreground ? parseColor(foreground) : foreground;
-  const glassBg =
-    'string' === typeof glassBackground
-      ? parseColor(glassBackground)
-      : glassBackground;
-  const backdropBg =
-    'string' === typeof backdropBackground
-      ? parseColor(backdropBackground)
-      : backdropBackground;
-
-  if (!fg || !glassBg || !backdropBg) {
-    throw new Error('Invalid color format');
-  }
-
-  // Calculate effective background color after glass effect
-  const effectiveBg: RGB = {
-    r: Math.round(glassBg.r * glassOpacity + backdropBg.r * (1 - glassOpacity)),
-    g: Math.round(glassBg.g * glassOpacity + backdropBg.g * (1 - glassOpacity)),
-    b: Math.round(glassBg.b * glassOpacity + backdropBg.b * (1 - glassOpacity)),
-  };
-
-  return checkContrast(fg, effectiveBg);
-}
-
-/**
- * React hook for checking contrast
- */
-export function useContrastChecker(
   foreground: string,
   background: string
-): ContrastResult | null {
-  try {
-    return checkContrast(foreground, background);
-  } catch (error) {
-    console.error('Contrast check error:', error);
-    return;
+): ContrastResult {
+  const fgRgb = hexToRgb(foreground);
+  const bgRgb = hexToRgb(background);
+  
+  if (!fgRgb || !bgRgb) {
+    throw new Error('Invalid color format. Please use hex colors.');
   }
+  
+  const ratio = getContrastRatio(fgRgb, bgRgb);
+  
+  // WCAG 2.1 standards
+  const passes = {
+    normalText: 4.5 <= ratio ,    // AA standard for normal text
+    largeText: 3.0 <= ratio ,     // AA standard for large text (18pt+ or 14pt+ bold)
+    uiComponents: 3.0 <= ratio ,  // AA standard for UI components
+  };
+  
+  let level: ContrastResult['level'];
+  if (7.0 <= ratio) {
+    level = 'AAA';
+  } else if (4.5 <= ratio) {
+    level = 'AA';
+  } else if (3.0 <= ratio) {
+    level = 'A';
+  } else {
+    level = 'FAIL';
+  }
+  
+  return {
+    ratio: Math.round(ratio * 100) / 100,
+    level,
+    passes,
+  };
 }
 
 /**
- * Get contrast ratio as a formatted string
+ * Get accessible color suggestions
  */
-export function formatContrastRatio(ratio: number): string {
-  return `${ratio.toFixed(2)}:1`;
-}
-
-/**
- * Check if a color combination is safe for glass morphism
- */
-export function isGlassSafe(
-  foreground: string,
-  glassOpacity: number = 0.25
-): boolean {
-  // Check against common backdrop colors
-  const commonBackdrops = [
-    '#ffffff', // White
-    '#000000', // Black
-    '#f3f4f6', // Light gray
-    '#1f2937', // Dark gray
-  ];
-
-  return commonBackdrops.every(backdrop => {
-    try {
-      const result = checkGlassContrast(
-        foreground,
-        '#ffffff',
-        backdrop,
-        glassOpacity
-      );
-      return result.passes.aa.normal;
-    } catch {
-      return false;
+export function getAccessibleColors(
+  baseColor: string,
+  targetRatio: number = 4.5
+): string[] {
+  const baseRgb = hexToRgb(baseColor);
+  if (!baseRgb) {return [];}
+  
+  const suggestions: string[] = [];
+  
+  // Generate lighter and darker variations
+  for (let i = 0; 255 >= i; i += 15) {
+    const lightColor = { r: i, g: i, b: i };
+    const darkColor = { r: 255 - i, g: 255 - i, b: 255 - i };
+    
+    if (getContrastRatio(baseRgb, lightColor) >= targetRatio) {
+      suggestions.push(`#${i.toString(16).padStart(2, '0').repeat(3)}`);
     }
-  });
+    
+    if (getContrastRatio(baseRgb, darkColor) >= targetRatio) {
+      const hex = (255 - i).toString(16).padStart(2, '0');
+      suggestions.push(`#${hex.repeat(3)}`);
+    }
+  }
+  
+  return [...new Set(suggestions)].slice(0, 10);
 }
+
+/**
+ * Check if a color is considered "light" or "dark"
+ */
+export function isLightColor(color: string): boolean {
+  const rgb = hexToRgb(color);
+  if (!rgb) {return false;}
+  
+  const luminance = getLuminance(rgb);
+  return 0.5 < luminance;
+}
+
+/**
+ * Get the best contrasting color (black or white) for a given background
+ */
+export function getBestContrastColor(backgroundColor: string): string {
+  const whiteContrast = checkContrast('#ffffff', backgroundColor);
+  const blackContrast = checkContrast('#000000', backgroundColor);
+  
+  return whiteContrast.ratio > blackContrast.ratio ? '#ffffff' : '#000000';
+}
+
+/**
+ * Validate if a color palette meets accessibility standards
+ */
+export function validateColorPalette(
+  palette: Record<string, string>
+): Record<string, ContrastResult[]> {
+  const results: Record<string, ContrastResult[]> = {};
+  
+  const colors = Object.entries(palette);
+  
+  for (const [name1, color1] of colors) {
+    results[name1] = [];
+    
+    for (const [name2, color2] of colors) {
+      if (name1 !== name2) {
+        results[name1].push({
+          ...checkContrast(color1, color2),
+          // Add color names for reference
+          ...(name2 && { comparedWith: name2 }),
+        } as ContrastResult);
+      }
+    }
+  }
+  
+  return results;
+}
+
+// Export default checker function
+export default checkContrast;

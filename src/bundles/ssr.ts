@@ -35,20 +35,21 @@ export {
 
 // SSR-safe hooks
 export {
-  useWindowSize,
-  useIntersectionObserver,
-  useOnlineStatus,
-  useGeolocation,
-  useClipboard,
-  useTheme,
-  useScrollPosition,
-  useResizeObserver,
-  useAnimationFrame,
-  useIdleCallback,
+  useIsClient,
+  useSSRSafeWindow,
+  useSSRSafeDocument,
+  useSSRSafeNavigator,
+  useSSRSafeLocalStorage,
+  useSSRSafeSessionStorage,
+  useHydrationSafe,
+  useSSRSafeMediaQuery,
   useNetworkStatus,
-  usePageVisibility,
-  usePerformanceMetrics,
-} from '../hooks/use-ssr-safe-hooks';
+  useSSRSafeAnimation,
+  useSSRSafeIntersectionObserver,
+  useSSRSafeResizeObserver,
+  useSSRSafeDocumentVisibility,
+  useSSRSafeFeatureDetection,
+} from '../hooks/use-ssr-safe';
 
 // Legacy exports (for backward compatibility)
 export { SSRConfigProvider } from '../providers/ssr-config-provider';

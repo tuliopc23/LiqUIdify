@@ -21,7 +21,11 @@ export {
   AppleLiquidGlass,
   AppleLiquidGlassCard,
   AppleLiquidGlassButton,
+  AppleLiquidGlassNav,
   type AppleLiquidGlassComponentProps,
+  type AppleLiquidGlassNavProps,
+  type AppleLiquidGlassCardProps,
+  type AppleLiquidGlassButtonProps,
 } from '../components/apple-liquid-glass';
 
 // Advanced utilities

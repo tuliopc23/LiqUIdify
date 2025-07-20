@@ -1,6 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
+// External dependencies
 import { createContext, useContext, useEffect, useState } from 'react';
 
+// Type definitions
 type Theme = 'light' | 'dark';
 
 interface ThemeProviderProps {
@@ -14,6 +16,7 @@ interface ThemeProviderState {
   setTheme: (theme: Theme) => void;
 }
 
+// Initial state
 const initialState: ThemeProviderState = {
   theme: 'light',
   setTheme: () => undefined,

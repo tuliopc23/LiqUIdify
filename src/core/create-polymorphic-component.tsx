@@ -9,7 +9,7 @@ import type {
   PolymorphicComponentPropsWithRef,
 } from '../types/polymorphic';
 import { isInteractiveElement } from '../types/polymorphic';
-import { cn } from '../lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 /**
  * Configuration for creating polymorphic components

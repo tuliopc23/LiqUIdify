@@ -12,7 +12,7 @@
  * - Tree-shakeable exports
  */
 
-import { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 // Types
@@ -145,9 +145,47 @@ export const createGlassEffect = (config: GlassEffectConfig) => ({
   style: useUnifiedGlass(config).glassStyles,
 });
 
-// Legacy system compatibility - placeholder exports
-export const AppleLiquidGlass = () => undefined;
-export const EnhancedAppleLiquidGlass = () => undefined;
+// Legacy system compatibility - backward compatible components
+import type { ComponentProps } from 'react';
+
+export interface AppleLiquidGlassProps extends ComponentProps<'div'> {
+  intensity?: GlassIntensity;
+  variant?: GlassVariant;
+  interactive?: boolean;
+  magnetic?: boolean;
+}
+
+export const AppleLiquidGlass: React.FC<AppleLiquidGlassProps> = ({
+  children,
+  intensity = 'medium',
+  variant = 'default',
+  interactive = false,
+  magnetic = false,
+  ...props
+}) => {
+  const { glassStyles, handlers, ref } = useUnifiedGlass({
+    intensity,
+    variant,
+    interactive,
+    magnetic,
+  });
+
+  return (
+    <div
+      ref={ref}
+      style={glassStyles}
+      {...handlers}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const EnhancedAppleLiquidGlass = AppleLiquidGlass;
+
+// Additional utility exports for backward compatibility
+export { generateGlassClasses, generateGlassVariables } from '../utils/glass-effects';
 
 // Export for tree-shaking
 export default useUnifiedGlass;

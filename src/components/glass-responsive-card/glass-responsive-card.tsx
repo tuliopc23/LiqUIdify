@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { cn, getGlassClass, microInteraction } from '@/lib/glass-utils';
+import { cn, getGlassClass } from '@/core/utils/classname';
+import { microInteraction } from '@/core/utils/responsive';
 import type { ComponentSize } from '@/types/branded';
 import { createComponentSize } from '@/types/branded';
 

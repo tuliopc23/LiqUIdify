@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import {
   cn,
   focusRing,
-} from '../../lib/glass-utils';
+} from '@/core/utils/classname';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { Calendar, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';

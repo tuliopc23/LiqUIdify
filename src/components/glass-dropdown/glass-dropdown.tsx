@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { cn, getGlassClass } from '@/lib/glass-utils';
+import { cn, getGlassClass } from '@/core/utils/classname';
+import { useIsClient } from '@/hooks/use-ssr-safe';
 
 export interface DropdownItem {
   label: string;
@@ -40,8 +41,13 @@ export const GlassDropdown = React.forwardRef<
     const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
     const triggerRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const isClient = useIsClient();
 
     useEffect(() => {
+      if (!isClient) {
+        return;
+      }
+
       const handleClickOutside = (event: MouseEvent) => {
         if (
           isOpen &&
@@ -71,49 +77,51 @@ export const GlassDropdown = React.forwardRef<
       }
 
       return undefined;
-    }, [isOpen]);
+    }, [isClient, isOpen]);
 
     useEffect(() => {
-      if (isOpen && triggerRef.current && dropdownRef.current) {
-        const triggerRect = triggerRef.current.getBoundingClientRect();
-        const dropdownRect = dropdownRef.current.getBoundingClientRect();
-
-        let top = triggerRect.bottom + sideOffset;
-        let left = triggerRect.left;
-
-        // Align dropdown
-        switch (align) {
-          case 'center':
-            left =
-              triggerRect.left + (triggerRect.width - dropdownRect.width) / 2;
-            break;
-          case 'end':
-            left = triggerRect.right - dropdownRect.width;
-            break;
-        }
-
-        // Keep dropdown within viewport
-        const viewport = {
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-
-        if (8 > left) {left = 8;}
-        if (left + dropdownRect.width > viewport.width - 8) {
-          left = viewport.width - dropdownRect.width - 8;
-        }
-        if (top + dropdownRect.height > viewport.height - 8) {
-          top = triggerRect.top - dropdownRect.height - sideOffset;
-        }
-
-        setDropdownStyle({
-          position: 'fixed',
-          top: `${top}px`,
-          left: `${left}px`,
-          zIndex: 9999,
-        });
+      if (!isClient || !isOpen || !triggerRef.current || !dropdownRef.current) {
+        return;
       }
-    }, [isOpen, align, sideOffset]);
+
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      const dropdownRect = dropdownRef.current.getBoundingClientRect();
+
+      let top = triggerRect.bottom + sideOffset;
+      let left = triggerRect.left;
+
+      // Align dropdown
+      switch (align) {
+        case 'center':
+          left =
+            triggerRect.left + (triggerRect.width - dropdownRect.width) / 2;
+          break;
+        case 'end':
+          left = triggerRect.right - dropdownRect.width;
+          break;
+      }
+
+      // Keep dropdown within viewport
+      const viewport = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+
+      if (8 > left) {left = 8;}
+      if (left + dropdownRect.width > viewport.width - 8) {
+        left = viewport.width - dropdownRect.width - 8;
+      }
+      if (top + dropdownRect.height > viewport.height - 8) {
+        top = triggerRect.top - dropdownRect.height - sideOffset;
+      }
+
+      setDropdownStyle({
+        position: 'fixed',
+        top: `${top}px`,
+        left: `${left}px`,
+        zIndex: 9999,
+      });
+    }, [isClient, isOpen, align, sideOffset]);
 
     const handleSelect = (item: DropdownItem) => {
       if (item.disabled || item.separator) {return;}

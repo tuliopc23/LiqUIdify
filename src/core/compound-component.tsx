@@ -12,7 +12,7 @@ import type {
   CompoundComponentProps,
   UnifiedGlassProps,
 } from './base-component';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 // Context for compound components
 export interface CompoundComponentContext {

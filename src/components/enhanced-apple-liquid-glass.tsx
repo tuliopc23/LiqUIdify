@@ -16,6 +16,7 @@ import {
   useEnhancedAppleLiquidGlass,
 } from '../lib/enhanced-apple-liquid-glass';
 import { LiquidGlassSvgFilters } from './liquid-glass-svg-filters';
+import { useIsClient } from '../hooks/use-ssr-safe';
 
 export interface EnhancedAppleLiquidGlassProps
   extends HTMLAttributes<HTMLDivElement>,
@@ -53,6 +54,7 @@ export const EnhancedAppleLiquidGlass = forwardRef<
   },
   ref
 ) {
+  const isClient = useIsClient();
   const { containerRef, variant } = useEnhancedAppleLiquidGlass({
     intensity,
     enablePhysics,
@@ -88,8 +90,8 @@ export const EnhancedAppleLiquidGlass = forwardRef<
 
   return (
     <>
-      {enableSvgFilters && <LiquidGlassSvgFilters enableAdvancedFilters />}
-      {React.createElement(
+      {isClient && enableSvgFilters && <LiquidGlassSvgFilters enableAdvancedFilters />}
+      {isClient ? React.createElement(
         Component,
         {
           ref: combinedRef,
@@ -106,6 +108,18 @@ export const EnhancedAppleLiquidGlass = forwardRef<
           enableDistortion: enableSvgFilters,
           distortionFilter,
         })
+      ) : (
+        <div
+          ref={combinedRef}
+          className={combinedClassName}
+          style={{
+            borderRadius: `${variant.radius}px`,
+            ...props.style,
+          }}
+          {...props}
+        >
+          {children}
+        </div>
       )}
     </>
   );

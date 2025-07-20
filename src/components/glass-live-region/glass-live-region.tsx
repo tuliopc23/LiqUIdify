@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 
 export type AriaLivePriority = 'polite' | 'assertive' | 'off';
 export type AriaRelevant =

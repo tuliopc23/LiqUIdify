@@ -2,7 +2,7 @@ import React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import { cn } from '../../lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { type VariantProps, cva } from 'class-variance-authority';
 
 const drawerVariants = cva(

@@ -3,16 +3,14 @@
  * Type-safe component variants with better composition
  */
 
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
 // Design tokens can be imported when needed
+import { cn } from '@/core/utils/classname';
 
 // Class variance authority (cva) alias
 export { createVariants as cva };
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+// Re-export cn from central location
+export { cn };
 
 // Base variant configuration
 export interface VariantConfig<

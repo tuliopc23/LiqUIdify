@@ -5,6 +5,7 @@
  */
 
 import { useCallback, useEffect, useRef } from 'react';
+import { safeAppendChild, safeCreateAudioContext, safeMapGet, safeRemoveElement } from '../utils/safe-dom';
 
 // Haptic feedback types
 export type HapticType =
@@ -86,12 +87,11 @@ let audioContext: AudioContext | null;
 
 // Initialize audio context
 function initAudioContext() {
-  if (
-    !audioContext &&
-    'undefined' !== typeof window &&
-    'AudioContext' in window
-  ) {
-    audioContext = new AudioContext();
+  if (!audioContext && 'undefined' !== typeof window) {
+    audioContext = safeCreateAudioContext();
+    if (!audioContext) {
+      console.error('[useHapticFeedback] Failed to create AudioContext');
+    }
   }
   return audioContext;
 }
@@ -180,7 +180,7 @@ function applyVisualFeedback(
   element: HTMLElement,
   config: VisualFeedbackConfig
 ): () => void {
-  if (!config.enabled) {
+  if (!config.enabled || 'undefined' === typeof window) {
     return () => {};
   }
 
@@ -204,7 +204,7 @@ function applyVisualFeedback(
   `;
 
   element.style.position = 'relative';
-  element.appendChild(overlay);
+  safeAppendChild(element, overlay);
 
   // Apply transformations
   element.style.transition = `transform ${config.duration}ms ease-out, filter ${config.duration}ms ease-out`;
@@ -230,7 +230,7 @@ function applyVisualFeedback(
 
     setTimeout(() => {
       element.style.transition = originalTransition;
-      overlay.remove();
+      safeRemoveElement(overlay);
     }, config.duration);
   }, 50);
 
@@ -239,7 +239,7 @@ function applyVisualFeedback(
     element.style.transform = originalTransform;
     element.style.transition = originalTransition;
     element.style.filter = originalFilter;
-    overlay.remove();
+    safeRemoveElement(overlay);
   };
 }
 
@@ -267,7 +267,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
       try {
         const ctx = initAudioContext();
         if (!ctx) {
-          return;
+          return ;
         }
 
         const response = await fetch(url);
@@ -280,16 +280,25 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
     };
 
     // Load all audio files
-    Object.entries(configRef.current.audio.sounds).forEach(
+    const loadPromises = Object.entries(configRef.current.audio.sounds).map(
       async ([_type, url]) => {
         if (url && !audioCache.current.has(url)) {
-          const buffer = await loadAudio(url);
-          if (buffer) {
-            audioCache.current.set(url, buffer);
+          try {
+            const buffer = await loadAudio(url);
+            if (buffer) {
+              audioCache.current.set(url, buffer);
+            }
+          } catch (error) {
+            console.error('[useHapticFeedback] Error loading audio file:', url, error);
           }
         }
       }
     );
+
+    // Wait for all audio files to load
+    Promise.all(loadPromises).catch(error => {
+      console.error('[useHapticFeedback] Error loading audio files:', error);
+    });
   }, []);
 
   // Trigger vibration
@@ -323,7 +332,12 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
         return;
       }
 
-      const buffer = audioCache.current.get(soundUrl)!;
+      const buffer = safeMapGet(audioCache.current, soundUrl);
+      if (!buffer) {
+        console.warn(`[useHapticFeedback] Audio buffer not found for ${soundUrl}`);
+        return;
+      }
+      
       const source = ctx.createBufferSource();
       const gainNode = ctx.createGain();
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { cn } from '../../lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import { type VariantProps, cva } from 'class-variance-authority';
 
 const skeletonVariants = cva(

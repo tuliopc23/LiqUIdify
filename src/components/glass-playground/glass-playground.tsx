@@ -8,7 +8,7 @@ import { createComponentSize } from '@/types/branded';
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
 import { themes } from 'prism-react-renderer';
 import { Check, Code, Copy, Download, Eye, Maximize2 } from 'lucide-react';
-import { cn } from '@/lib/glass-utils';
+import { cn } from '@/core/utils/classname';
 import * as LiquidComponents from '@/components';
 import { GlassButton } from '../glass-button';
 import { GlassTabs } from '../glass-tabs';
