@@ -5,7 +5,7 @@
  * and provide consistent animation behaviors across all Glass UI components.
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { AnimationTiming, GlassIntensity } from '@/core/base-component';
 // Define GlassEffectState locally since it's not exported
 interface GlassEffectState {
@@ -69,10 +69,13 @@ export function useGlassAnimation(
   const animationRef = useRef<Animation | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const config = {
-    ...TIMING_PRESETS[timing],
-    ...customConfig,
-  };
+  const config = useMemo(
+    () => ({
+      ...TIMING_PRESETS[timing],
+      ...customConfig,
+    }),
+    [timing, customConfig]
+  );
 
   const animate = useCallback(
     (
@@ -185,7 +188,7 @@ export function useGlassStateTransitions(
 
       setCurrentState(targetState);
     },
-    [currentState, cancel, intensity]
+    [currentState, cancel]
   );
 
   return { transitionToState, currentState, isAnimating: state.isAnimating };
@@ -284,7 +287,7 @@ export function useRippleEffect(
 
   const triggerRipple = useCallback(() => {
     // Ripple effect implementation
-  }, [animate, color, timing]);
+  }, []);
 
   const rippleProps = {};
 
