@@ -631,8 +631,8 @@ export class FluidSimulation {
       this.calculateViscosityForces(particleForces);
 
       // Add external forces
-      forces.forEach(force => {
-        particleForces.forEach(pf => {
+      forces.forEach((force) => {
+        particleForces.forEach((pf) => {
           pf.x += force.x;
           pf.y += force.y;
         });
@@ -664,10 +664,10 @@ export class FluidSimulation {
   }
 
   private calculateDensityPressure() {
-    this.particles.forEach(particle => {
+    this.particles.forEach((particle) => {
       particle.density = 0;
 
-      this.particles.forEach(neighbor => {
+      this.particles.forEach((neighbor) => {
         const distance = particle.position.distance(neighbor.position);
 
         if (distance < this.smoothingRadius) {
@@ -881,13 +881,13 @@ export class ParticleEmitter {
       }
 
       // Update existing particles
-      this.particles = this.particles.filter(particle => {
+      this.particles = this.particles.filter((particle) => {
         try {
           // Reset acceleration
           particle.acceleration = new Vector2D();
 
           // Apply forces
-          this.forces.forEach(force => particle.applyForce(force));
+          this.forces.forEach((force) => particle.applyForce(force));
 
           // Update particle
           particle.update(deltaTime);

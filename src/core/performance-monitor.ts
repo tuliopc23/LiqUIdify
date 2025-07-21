@@ -101,13 +101,13 @@ class PerformanceMonitor {
     }
 
     // Core Web Vitals
-    onLCP(metric => this.handleMetric(metric, 'LCP'));
+    onLCP((metric) => this.handleMetric(metric, 'LCP'));
     // FID has been deprecated in favor of INP
     // onFID(metric => this.handleMetric(metric, 'FID'));
-    onCLS(metric => this.handleMetric(metric, 'CLS'));
-    onFCP(metric => this.handleMetric(metric, 'FCP'));
-    onTTFB(metric => this.handleMetric(metric, 'TTFB'));
-    onINP(metric => this.handleMetric(metric, 'INP'));
+    onCLS((metric) => this.handleMetric(metric, 'CLS'));
+    onFCP((metric) => this.handleMetric(metric, 'FCP'));
+    onTTFB((metric) => this.handleMetric(metric, 'TTFB'));
+    onINP((metric) => this.handleMetric(metric, 'INP'));
 
     // Time to Interactive (custom implementation)
     this.measureTTI();
@@ -178,11 +178,11 @@ class PerformanceMonitor {
     }
 
     let tti = 0;
-    const observer = new PerformanceObserver(list => {
+    const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
 
       // Find the last long task before 5 seconds of quiet time
-      const longTasks = entries.filter(entry => 50 < entry.duration);
+      const longTasks = entries.filter((entry) => 50 < entry.duration);
 
       if (0 < longTasks.length) {
         const lastLongTask = longTasks[longTasks.length - 1];
@@ -227,7 +227,7 @@ class PerformanceMonitor {
       return undefined;
     }
 
-    this.performanceObserver = new PerformanceObserver(list => {
+    this.performanceObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         if (
           'measure' === entry.entryType &&
@@ -359,7 +359,7 @@ class PerformanceMonitor {
     const report = this.getReport();
 
     // Notify all report callbacks
-    this.reportCallbacks.forEach(callback => {
+    this.reportCallbacks.forEach((callback) => {
       try {
         callback(report);
       } catch (error) {
@@ -415,7 +415,7 @@ class PerformanceMonitor {
    */
   private notifyObservers(metricName: string, metric: PerformanceMetric): void {
     const observers = this.observers.get(metricName) || [];
-    observers.forEach(callback => {
+    observers.forEach((callback) => {
       try {
         callback(metric);
       } catch (error) {

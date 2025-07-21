@@ -281,8 +281,8 @@ export class GlassAnimationScheduler {
     }
 
     this.intersectionObserver = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
+      (entries) => {
+        entries.forEach((entry) => {
           const taskId = (entry.target as HTMLElement).dataset.animationId;
           if (taskId) {
             const task = this.tasks.get(taskId);
@@ -308,7 +308,7 @@ export class GlassAnimationScheduler {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     this.reducedMotion = mediaQuery.matches;
 
-    mediaQuery.addEventListener('change', e => {
+    mediaQuery.addEventListener('change', (e) => {
       this.reducedMotion = e.matches;
     });
   }
@@ -395,7 +395,7 @@ export class GlassAnimationScheduler {
 
     // Sort tasks by priority and visibility
     const sortedTasks = [...this.tasks.values()]
-      .filter(task => !this.config.enableCulling || task.isVisible)
+      .filter((task) => !this.config.enableCulling || task.isVisible)
       .sort((a, b) => b.priority - a.priority);
 
     let executedTasks = 0;

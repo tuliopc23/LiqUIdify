@@ -81,7 +81,7 @@ export function loadCSS(
     };
 
     // Handle error event
-    link.onerror = error => {
+    link.onerror = (error) => {
       loadingCSS.delete(url);
       const errorObj = new Error(`Failed to load CSS: ${url}`);
       onError?.(errorObj);

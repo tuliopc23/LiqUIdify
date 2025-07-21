@@ -69,7 +69,7 @@ export function createVariants<
     });
 
     // Add compound variant classes
-    config.compoundVariants?.forEach(compound => {
+    config.compoundVariants?.forEach((compound) => {
       const { class: compoundClass, ...compoundVariants } = compound;
 
       const matches = Object.entries(compoundVariants).every(([key, value]) => {

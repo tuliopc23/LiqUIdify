@@ -142,7 +142,7 @@ export class AccessibilityTestingSuite {
 
     // Check for basic accessibility requirements
     const images = container.querySelectorAll('img');
-    images.forEach(img => {
+    images.forEach((img) => {
       if (!img.hasAttribute('alt')) {
         violations.push({
           ruleId: 'image-alt',
@@ -174,7 +174,7 @@ export class AccessibilityTestingSuite {
     const glassComponents = container.querySelectorAll(
       '[data-glass-component]'
     );
-    glassComponents.forEach(component => {
+    glassComponents.forEach((component) => {
       const componentType = component.getAttribute('data-glass-component');
 
       if (!component.hasAttribute('role')) {
@@ -237,7 +237,7 @@ export class AccessibilityTestingSuite {
 
     // Check for tabindex values
     let hasInvalidTabIndex = false;
-    focusableElements.forEach(element => {
+    focusableElements.forEach((element) => {
       const tabIndex = element.getAttribute('tabindex');
       if (tabIndex && (isNaN(parseInt(tabIndex)) || parseInt(tabIndex) < -1)) {
         hasInvalidTabIndex = true;
@@ -286,7 +286,7 @@ export class AccessibilityTestingSuite {
     );
 
     // Check for focus indicators
-    focusableElements.forEach(element => {
+    focusableElements.forEach((element) => {
       const computedStyle = window.getComputedStyle(element);
       const hasOutline =
         computedStyle.outline && computedStyle.outline !== 'none';
@@ -338,7 +338,7 @@ export class AccessibilityTestingSuite {
       'button, [role="button"], [role="link"], input, select, textarea'
     );
 
-    interactiveElements.forEach(element => {
+    interactiveElements.forEach((element) => {
       const hasLabel =
         element.hasAttribute('aria-label') ||
         element.hasAttribute('aria-labelledby') ||
@@ -386,7 +386,7 @@ export class AccessibilityTestingSuite {
     const baseScore = 100;
     let deductions = 0;
 
-    violations.forEach(violation => {
+    violations.forEach((violation) => {
       const impactMultiplier = {
         minor: 1,
         moderate: 3,
@@ -406,7 +406,7 @@ export class AccessibilityTestingSuite {
     violations: AccessibilityTestResult[]
   ): string[] {
     return violations.map(
-      violation =>
+      (violation) =>
         `${violation.description}: ${violation.help} (${violation.helpUrl})`
     );
   }
@@ -467,7 +467,7 @@ export class AccessibilityTestingSuite {
             previousScore: previous.score,
             currentScore: latest.score,
             newViolations: latest.violations.filter(
-              v => !previous.violations.some(pv => pv.ruleId === v.ruleId)
+              (v) => !previous.violations.some((pv) => pv.ruleId === v.ruleId)
             ),
           });
         } else if (latest.score > previous.score) {
@@ -476,7 +476,7 @@ export class AccessibilityTestingSuite {
             previousScore: previous.score,
             currentScore: latest.score,
             resolvedViolations: previous.violations.filter(
-              pv => !latest.violations.some(lv => lv.ruleId === pv.ruleId)
+              (pv) => !latest.violations.some((lv) => lv.ruleId === pv.ruleId)
             ),
           });
         }

@@ -79,7 +79,7 @@ export function testFocusTrap(container: HTMLElement) {
 
 // Helper to wait for animations
 export function waitForAnimation(duration = 300) {
-  return new Promise(resolve => setTimeout(resolve, duration));
+  return new Promise((resolve) => setTimeout(resolve, duration));
 }
 
 // Helper to test loading states

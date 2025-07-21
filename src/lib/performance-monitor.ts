@@ -89,7 +89,7 @@ export class PerformanceMonitor {
       return undefined;
     }
 
-    const observer = new PerformanceObserver(list => {
+    const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       const lastEntry = entries[entries.length - 1] as PerformanceEntry & {
         renderTime?: number;
@@ -115,9 +115,9 @@ export class PerformanceMonitor {
       return undefined;
     }
 
-    const observer = new PerformanceObserver(list => {
+    const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         const fid = (
           entry as PerformanceEntry & {
             processingStart?: number;
@@ -146,7 +146,7 @@ export class PerformanceMonitor {
     let clsValue = 0;
     let clsEntries: any[] = [];
 
-    const observer = new PerformanceObserver(list => {
+    const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       entries.forEach((entry: any) => {
         if (!entry.hadRecentInput) {
@@ -182,9 +182,9 @@ export class PerformanceMonitor {
       return undefined;
     }
 
-    const observer = new PerformanceObserver(list => {
+    const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if ('first-contentful-paint' === entry.name) {
           this.updateMetric('fcp', entry.startTime);
         }
@@ -240,7 +240,7 @@ export class PerformanceMonitor {
   public measureAnimationPerformance(
     callback: () => void
   ): Promise<{ frameRate: number; droppedFrames: number }> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       let frameCount = 0;
       let droppedFrames = 0;
       let lastFrameTime = performance.now();
@@ -278,7 +278,7 @@ export class PerformanceMonitor {
   }
 
   public measureBundleSize(bundleName: string): Promise<number> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if ('undefined' === typeof window) {
         resolve(0);
         return undefined;
@@ -288,7 +288,7 @@ export class PerformanceMonitor {
       const resources = performance.getEntriesByType(
         'resource'
       ) as PerformanceResourceTiming[];
-      const bundle = resources.find(resource =>
+      const bundle = resources.find((resource) =>
         resource.name.includes(bundleName)
       );
 
@@ -360,12 +360,12 @@ export class PerformanceMonitor {
     let coreWebVitalsScore = 0;
     let coreWebVitalsCount = 0;
 
-    ['lcp', 'fid', 'cls'].forEach(metric => {
+    ['lcp', 'fid', 'cls'].forEach((metric) => {
       const value = metrics[metric as keyof PerformanceMetrics];
       if (value !== undefined) {
         const status = this.getMetricStatusByValue(metric, value);
         coreWebVitalsScore +=
-          'good' === status ? 100 : ('needs-improvement' === status ? 50 : 0);
+          'good' === status ? 100 : 'needs-improvement' === status ? 50 : 0;
         coreWebVitalsCount++;
 
         if ('good' !== status) {
@@ -420,7 +420,7 @@ export class PerformanceMonitor {
   }
 
   public disconnect(): void {
-    this.observers.forEach(observer => observer.disconnect());
+    this.observers.forEach((observer) => observer.disconnect());
     this.observers.clear();
   }
 }

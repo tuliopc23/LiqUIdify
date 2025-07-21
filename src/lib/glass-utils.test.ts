@@ -51,13 +51,13 @@ describe('glass-utils', () => {
       ];
       const actualVariants = Object.keys(glassVariants);
 
-      expectedVariants.forEach(variant => {
+      expectedVariants.forEach((variant) => {
         expect(actualVariants).toContain(variant);
       });
     });
 
     it('all variants return non-empty strings', () => {
-      Object.values(glassVariants).forEach(variant => {
+      Object.values(glassVariants).forEach((variant) => {
         expect(variant).toBeTruthy();
         expect(typeof variant).toBe('string');
       });

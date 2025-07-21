@@ -132,7 +132,7 @@ export function withPerformanceMonitoring<P extends Record<string, any>>(
   Component: React.ComponentType<P>,
   componentName?: string
 ): React.ComponentType<P> {
-  const WrappedComponent: React.FC<P> = props => {
+  const WrappedComponent: React.FC<P> = (props) => {
     const { monitor } = useGlassPerformance();
     const displayName =
       componentName || Component.displayName || Component.name || 'Component';

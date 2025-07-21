@@ -86,7 +86,7 @@ const GlassFeatureShowcase = forwardRef<
 
       return (
         <motion.div
-          ref={node => {
+          ref={(node) => {
             (cardRef as React.MutableRefObject<HTMLDivElement | null>).current =
               node;
             if (enableMagnetic && magneticRef) {
@@ -213,7 +213,7 @@ const GlassFeatureShowcase = forwardRef<
 
     return (
       <div
-        ref={node => {
+        ref={(node) => {
           (
             contentRef as React.MutableRefObject<HTMLDivElement | null>
           ).current = node;

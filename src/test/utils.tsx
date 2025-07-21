@@ -81,7 +81,7 @@ export async function testA11y(container: HTMLElement) {
 export async function waitForGlassEffects() {
   // Wait for animations and transitions
   await waitFor(() => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           resolve(undefined);

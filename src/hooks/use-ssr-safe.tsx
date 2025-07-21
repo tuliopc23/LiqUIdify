@@ -296,11 +296,11 @@ export const useUserPreferences = () => {
     const darkQuery = win.matchMedia('(prefers-color-scheme: dark)');
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
-      setPreferences(prev => ({ ...prev, prefersReducedMotion: e.matches }));
+      setPreferences((prev) => ({ ...prev, prefersReducedMotion: e.matches }));
     };
 
     const handleDarkChange = (e: MediaQueryListEvent) => {
-      setPreferences(prev => ({ ...prev, prefersDarkScheme: e.matches }));
+      setPreferences((prev) => ({ ...prev, prefersDarkScheme: e.matches }));
     };
 
     // Modern browsers

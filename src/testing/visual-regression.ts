@@ -401,7 +401,7 @@ export class VisualRegressionTester {
         await page.mouse.down();
         break;
       case 'disabled':
-        await page.evaluate(sel => {
+        await page.evaluate((sel) => {
           const element = document.querySelector(sel);
           if (element) {
             (element as HTMLElement).setAttribute('disabled', 'true');
@@ -518,7 +518,7 @@ export class VisualRegressionTester {
       this.options.screenshotDir,
     ].filter(Boolean) as string[];
 
-    dirs.forEach(dir => {
+    dirs.forEach((dir) => {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
@@ -529,7 +529,7 @@ export class VisualRegressionTester {
    * Generate HTML report from test results
    */
   generateReport(results: VisualTestResult[]): string {
-    const passedTests = results.filter(result => result.passed).length;
+    const passedTests = results.filter((result) => result.passed).length;
     const totalTests = results.length;
     const passRate = totalTests > 0 ? (passedTests / totalTests) * 100 : 0;
 
@@ -578,9 +578,9 @@ export class VisualRegressionTester {
           
           <div class="summary-card">
             <h3>Test Coverage</h3>
-            <p>Components: ${new Set(results.map(r => r.component)).size}</p>
-            <p>States: ${new Set(results.map(r => r.state)).size}</p>
-            <p>Browsers: ${new Set(results.map(r => r.browser)).size}</p>
+            <p>Components: ${new Set(results.map((r) => r.component)).size}</p>
+            <p>States: ${new Set(results.map((r) => r.state)).size}</p>
+            <p>Browsers: ${new Set(results.map((r) => r.browser)).size}</p>
           </div>
         </div>
         
@@ -598,9 +598,9 @@ export class VisualRegressionTester {
             <div class="filter-label">Component</div>
             <div class="filter-options">
               <div class="filter-option active" data-filter="component" data-value="all">All</div>
-              ${[...new Set(results.map(r => r.component))]
+              ${[...new Set(results.map((r) => r.component))]
                 .map(
-                  component =>
+                  (component) =>
                     `<div class="filter-option" data-filter="component" data-value="${component}">${component}</div>`
                 )
                 .join('')}
@@ -612,7 +612,7 @@ export class VisualRegressionTester {
     `;
 
     // Add test cards
-    results.forEach(result => {
+    results.forEach((result) => {
       const statusClass = result.passed ? 'pass' : 'fail';
 
       html += `

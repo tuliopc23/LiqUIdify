@@ -406,17 +406,17 @@ export class AccessibilityManager {
     // Check if it meets the required level
     const meetsRequirement =
       'AA' === level
-        ? (largeText
+        ? largeText
           ? result.passes.aa.large
-          : result.passes.aa.normal)
-        : (largeText
+          : result.passes.aa.normal
+        : largeText
           ? result.passes.aaa.large
-          : result.passes.aaa.normal);
+          : result.passes.aaa.normal;
 
     // Auto-fix if needed and requested
     if (!meetsRequirement && autoFix) {
       const targetRatio =
-        'AA' === level ? (largeText ? 3 : 4.5) : (largeText ? 4.5 : 7);
+        'AA' === level ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
 
       try {
         // For now, keep the original color if contrast is poor
@@ -509,11 +509,11 @@ export class AccessibilityManager {
     }
 
     // Validate ARIA attributes
-    const ariaAttributes = [...element.attributes].filter(attr =>
+    const ariaAttributes = [...element.attributes].filter((attr) =>
       attr.name.startsWith('aria-')
     );
 
-    ariaAttributes.forEach(attr => {
+    ariaAttributes.forEach((attr) => {
       const attrName = attr.name;
       const attrValue = attr.value;
       const attrRule =
@@ -559,8 +559,8 @@ export class AccessibilityManager {
 
       // Validate idref attributes
       if ('idref' === attrRule.type) {
-        const ids = attrValue.split(' ').filter(id => id.trim());
-        const missingIds = ids.filter(id => !document.getElementById(id));
+        const ids = attrValue.split(' ').filter((id) => id.trim());
+        const missingIds = ids.filter((id) => !document.getElementById(id));
 
         if (0 < missingIds.length) {
           errors.push({
@@ -577,7 +577,7 @@ export class AccessibilityManager {
     if (role && ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]) {
       const roleRule = ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles];
 
-      roleRule.requiredProps?.forEach(prop => {
+      roleRule.requiredProps?.forEach((prop) => {
         if (!element.hasAttribute(prop)) {
           suggestions.push({
             attribute: prop,
@@ -652,7 +652,7 @@ export class AccessibilityManager {
   // Private helper methods
 
   private processViolations(axeViolations: any[]): Violation[] {
-    return axeViolations.map(violation => ({
+    return axeViolations.map((violation) => ({
       id: violation.id,
       impact: violation.impact,
       description: violation.description,
@@ -682,7 +682,7 @@ export class AccessibilityManager {
 
     // Check for empty headings
     const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    const emptyHeadings = [...headings].filter(h => !h.textContent?.trim());
+    const emptyHeadings = [...headings].filter((h) => !h.textContent?.trim());
     if (0 < emptyHeadings.length) {
       warnings.push({
         id: 'empty-headings',
@@ -716,7 +716,7 @@ export class AccessibilityManager {
     const suggestions: Suggestion[] = [];
 
     // Contrast suggestions
-    violations.forEach(violation => {
+    violations.forEach((violation) => {
       if ('color-contrast' === violation.id) {
         suggestions.push({
           type: 'contrast',
@@ -730,7 +730,7 @@ export class AccessibilityManager {
 
     // ARIA suggestions
     const ariaValidation = this.validateARIA(element, false);
-    ariaValidation.suggestions.forEach(ariaSuggestion => {
+    ariaValidation.suggestions.forEach((ariaSuggestion) => {
       suggestions.push({
         type: 'aria',
         message: `Add ${ariaSuggestion.attribute}: ${ariaSuggestion.reason}`,
@@ -781,7 +781,7 @@ export class AccessibilityManager {
 
   private determineWCAGLevel(violations: Violation[]): 'A' | 'AA' | 'AAA' {
     const hasAAViolations = violations.some(
-      v =>
+      (v) =>
         v.id.includes('aa') || 'serious' === v.impact || 'critical' === v.impact
     );
 
@@ -798,7 +798,7 @@ export class AccessibilityManager {
     _element: HTMLElement,
     suggestions: Suggestion[]
   ): void {
-    suggestions.forEach(suggestion => {
+    suggestions.forEach((suggestion) => {
       if (suggestion.autoFixAvailable && suggestion.fix) {
         try {
           suggestion.fix();
@@ -907,7 +907,7 @@ export class AccessibilityManager {
   }
 
   private handleMutations(mutations: MutationRecord[]): void {
-    mutations.forEach(mutation => {
+    mutations.forEach((mutation) => {
       if (
         'attributes' === mutation.type &&
         mutation.attributeName?.startsWith('aria-')

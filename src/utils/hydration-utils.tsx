@@ -86,11 +86,11 @@ export class HydrationManager {
       this.mismatches = [];
 
       // Trigger recovery callbacks
-      this.recoveryCallbacks.forEach(callback => callback());
+      this.recoveryCallbacks.forEach((callback) => callback());
 
       this.notifyListeners();
     } catch (error) {
-      this.errorCallbacks.forEach(callback => callback(error as Error));
+      this.errorCallbacks.forEach((callback) => callback(error as Error));
     }
   }
 
@@ -121,7 +121,7 @@ export class HydrationManager {
 
   private notifyListeners(): void {
     const context = this.getContext();
-    this.listeners.forEach(callback => callback(context));
+    this.listeners.forEach((callback) => callback(context));
   }
 
   reset(): void {
@@ -156,7 +156,7 @@ export function useHydrationSafety(
       onRecovery?.();
     });
 
-    manager.addErrorCallback(error => {
+    manager.addErrorCallback((error) => {
       onError?.(error);
     });
 
@@ -219,7 +219,7 @@ export function useHydrationState<T>(
 
   const setHydrationState = useCallback(
     (value: T | ((prev: T) => T)) => {
-      setState(prev => {
+      setState((prev) => {
         const newValue = value instanceof Function ? value(prev) : value;
 
         // Log potential hydration mismatches in development

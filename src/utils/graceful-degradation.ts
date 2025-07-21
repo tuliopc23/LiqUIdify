@@ -256,7 +256,7 @@ export class GracefulDegradationManager {
 
   private notifyListeners(): void {
     if (this.featureSupport) {
-      this.listeners.forEach(callback => callback(this.featureSupport!));
+      this.listeners.forEach((callback) => callback(this.featureSupport!));
     }
   }
 

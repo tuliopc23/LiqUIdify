@@ -349,7 +349,7 @@ export class VisualPolishManager {
     switch (trigger) {
       case 'hover':
         element.addEventListener('mouseenter', handleInteraction);
-        element.addEventListener('mouseleave', _e => {
+        element.addEventListener('mouseleave', (_e) => {
           const animation = (element as any)._polishAnimation;
           if (animation) {
             animation.reverse();
@@ -358,7 +358,7 @@ export class VisualPolishManager {
         break;
       case 'focus':
         element.addEventListener('focus', handleInteraction);
-        element.addEventListener('blur', _e => {
+        element.addEventListener('blur', (_e) => {
           const animation = (element as any)._polishAnimation;
           if (animation) {
             animation.reverse();
@@ -603,7 +603,7 @@ export class VisualPolishManager {
       return 1;
     }
 
-    const consistentTests = tests.filter(test => test.isConsistent).length;
+    const consistentTests = tests.filter((test) => test.isConsistent).length;
     return consistentTests / tests.length;
   }
 
@@ -698,7 +698,7 @@ export class VisualPolishManager {
    */
   destroy(): void {
     // Cleanup all micro-interactions
-    this.microInteractions.forEach(interaction => {
+    this.microInteractions.forEach((interaction) => {
       this.cleanupMicroInteraction(interaction);
     });
 

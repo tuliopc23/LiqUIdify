@@ -205,7 +205,7 @@ export function useHydrationMetrics() {
     }
 
     const start = performance.now();
-    setMetrics(prev => ({ ...prev, hydrationStart: start }));
+    setMetrics((prev) => ({ ...prev, hydrationStart: start }));
 
     const handleHydrationComplete = () => {
       const end = performance.now();

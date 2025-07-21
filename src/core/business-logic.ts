@@ -117,7 +117,7 @@ export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
         props: TProps
       ) => void
     ): EventHandlerFactory<TElement, E> => {
-      const factory: EventHandlerFactory<TElement, E> = () => event => {
+      const factory: EventHandlerFactory<TElement, E> = () => (event) => {
         handler(
           event as E & { currentTarget: TElement },
           state,
@@ -175,7 +175,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
     const actions = useMemo(
       (): FormActions<T> => ({
         setValue: (name: keyof T, value: T[keyof T]) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             values: { ...prev.values, [name]: value },
             isDirty: true,
@@ -183,14 +183,14 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
         },
 
         setError: (name: keyof T, error: string | null) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             errors: { ...prev.errors, [name]: error },
           }));
         },
 
         setTouched: (name: keyof T, touched: boolean) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             touched: { ...prev.touched, [name]: touched },
           }));
@@ -199,7 +199,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
         validateField: (name: keyof T) => {
           if (validationRules && validationRules[name]) {
             const error = validationRules[name](state.values[name]);
-            setState(prev => ({
+            setState((prev) => ({
               ...prev,
               errors: { ...prev.errors, [name]: error },
             }));
@@ -217,7 +217,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
           >;
           let isValid = true;
 
-          Object.keys(validationRules).forEach(key => {
+          Object.keys(validationRules).forEach((key) => {
             const fieldName = key as keyof T;
             const error = validationRules[fieldName](state.values[fieldName]);
             errors[fieldName] = error;
@@ -226,7 +226,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
             }
           });
 
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             errors,
             isValid,
@@ -251,7 +251,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
             return undefined;
           }
 
-          setState(prev => ({ ...prev, isSubmitting: true }));
+          setState((prev) => ({ ...prev, isSubmitting: true }));
 
           try {
             const isValid = actions.validateForm();
@@ -261,7 +261,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
           } catch (error) {
             console.error('Form submission error:', error);
           } finally {
-            setState(prev => ({ ...prev, isSubmitting: false }));
+            setState((prev) => ({ ...prev, isSubmitting: false }));
           }
         },
       }),
@@ -318,7 +318,7 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
     const actions = useMemo(
       (): TableActions<T> => ({
         setItems: (items: T[]) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             items,
             totalItems: items.length,
@@ -327,30 +327,30 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
         },
 
         selectItem: (item: T) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             selectedItems: prev.selectedItems.includes(item)
-              ? prev.selectedItems.filter(i => i !== item)
+              ? prev.selectedItems.filter((i) => i !== item)
               : [...prev.selectedItems, item],
           }));
         },
 
         selectAll: () => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             selectedItems: [...prev.items],
           }));
         },
 
         deselectAll: () => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             selectedItems: [],
           }));
         },
 
         sortBy: (field: string) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             sortBy: field,
             sortDirection:
@@ -361,7 +361,7 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
         },
 
         filter: (query: string) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             filterBy: query,
             currentPage: 1,
@@ -369,14 +369,14 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
         },
 
         paginate: (page: number) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             currentPage: page,
           }));
         },
 
         setItemsPerPage: (count: number) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             itemsPerPage: count,
             currentPage: 1,
@@ -431,7 +431,7 @@ export function createModalBusinessLogic(
     const actions = useMemo(
       (): ModalActions => ({
         open: (config = {}) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             ...config,
             isOpen: true,
@@ -439,42 +439,42 @@ export function createModalBusinessLogic(
         },
 
         close: () => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             isOpen: false,
           }));
         },
 
         toggle: () => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             isOpen: !prev.isOpen,
           }));
         },
 
         setTitle: (title: string) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             title,
           }));
         },
 
         setContent: (content: React.ReactNode) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             content,
           }));
         },
 
         setSize: (size: ComponentSize) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             size,
           }));
         },
 
         setVariant: (variant: ComponentVariant) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             variant,
           }));
@@ -524,18 +524,18 @@ export function createAsyncDataBusinessLogic<T>(
     const actions = useMemo(
       (): AsyncDataActions<T> => ({
         fetchData: async () => {
-          setState(prev => ({ ...prev, loading: true, error: undefined }));
+          setState((prev) => ({ ...prev, loading: true, error: undefined }));
 
           try {
             const data = await fetchFunction();
-            setState(prev => ({
+            setState((prev) => ({
               ...prev,
               data,
               loading: false,
               lastFetch: Date.now(),
             }));
           } catch (error) {
-            setState(prev => ({
+            setState((prev) => ({
               ...prev,
               error:
                 error instanceof Error ? error.message : 'An error occurred',
@@ -545,7 +545,7 @@ export function createAsyncDataBusinessLogic<T>(
         },
 
         setData: (data: T) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             data,
             lastFetch: Date.now(),
@@ -553,14 +553,14 @@ export function createAsyncDataBusinessLogic<T>(
         },
 
         setError: (error: string | null) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             error,
           }));
         },
 
         setLoading: (loading: boolean) => {
-          setState(prev => ({
+          setState((prev) => ({
             ...prev,
             loading,
           }));

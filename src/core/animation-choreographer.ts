@@ -198,7 +198,7 @@ export class AnimationSequence {
     }
 
     // Wait for all animations to complete
-    await Promise.all(this.animations.map(animation => animation.finished));
+    await Promise.all(this.animations.map((animation) => animation.finished));
 
     this.isPlaying = false;
     performanceMonitor.endTiming('animation-sequence');
@@ -208,7 +208,7 @@ export class AnimationSequence {
    * Stop all animations in the sequence
    */
   stop(): void {
-    this.animations.forEach(animation => {
+    this.animations.forEach((animation) => {
       animation.cancel();
     });
     this.animations = [];
@@ -219,7 +219,7 @@ export class AnimationSequence {
    * Pause all animations in the sequence
    */
   pause(): void {
-    this.animations.forEach(animation => {
+    this.animations.forEach((animation) => {
       animation.pause();
     });
   }
@@ -228,7 +228,7 @@ export class AnimationSequence {
    * Resume all animations in the sequence
    */
   resume(): void {
-    this.animations.forEach(animation => {
+    this.animations.forEach((animation) => {
       animation.play();
     });
   }
@@ -282,10 +282,10 @@ export class AnimationSequence {
     // Remove transform properties that cause motion
     const motionProps = ['translate', 'rotate', 'scale', 'skew'];
 
-    [first, last].forEach(frame => {
+    [first, last].forEach((frame) => {
       if (frame.transform) {
         let transform = frame.transform as string;
-        motionProps.forEach(prop => {
+        motionProps.forEach((prop) => {
           transform = transform.replace(
             new RegExp(`${prop}\\([^)]+\\)`, 'g'),
             ''
@@ -692,7 +692,7 @@ export class AnimationChoreographer {
    * Stop all animation sequences
    */
   stopAll(): void {
-    this.sequences.forEach(sequence => {
+    this.sequences.forEach((sequence) => {
       sequence.stop();
     });
   }
@@ -723,7 +723,7 @@ export class AnimationChoreographer {
     this.prefersReducedMotion = event.matches;
 
     // Update all sequences
-    this.sequences.forEach(sequence => {
+    this.sequences.forEach((sequence) => {
       sequence.updateOptions({ reducedMotion: this.prefersReducedMotion });
     });
   };

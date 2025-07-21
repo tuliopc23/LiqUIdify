@@ -22,7 +22,7 @@ export function GlassFooter({ links, className, ...props }: GlassFooterProps) {
         <span>&copy; {new Date().getFullYear()} Liquid Glass UI</span>
         {links && (
           <nav className="flex flex-wrap gap-4">
-            {links.map(link => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}

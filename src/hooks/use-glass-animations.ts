@@ -91,7 +91,7 @@ export function useGlassAnimation(
 
       const animationOptions = { ...config, ...options };
 
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         isAnimating: true,
         startTime: Date.now(),
@@ -121,7 +121,7 @@ export function useGlassAnimation(
           1
         );
 
-        setState(prev => ({ ...prev, progress }));
+        setState((prev) => ({ ...prev, progress }));
 
         if (1 > progress) {
           requestAnimationFrame(updateProgress);
@@ -132,7 +132,7 @@ export function useGlassAnimation(
 
       // Handle animation completion
       animation.addEventListener('finish', () => {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           isAnimating: false,
           progress: 1,
@@ -153,7 +153,7 @@ export function useGlassAnimation(
       clearTimeout(timeoutRef.current);
       timeoutRef.current = undefined;
     }
-    setState(prev => ({ ...prev, isAnimating: false }));
+    setState((prev) => ({ ...prev, isAnimating: false }));
   }, []);
 
   useEffect(() => {

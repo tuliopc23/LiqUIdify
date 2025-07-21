@@ -47,7 +47,7 @@ export function usePerformanceMonitoring(
       });
     }
 
-    setRenderCount(prev => prev + 1);
+    setRenderCount((prev) => prev + 1);
   });
 
   // Mark render start
@@ -93,9 +93,9 @@ export function useWebVitals(callback?: (metric: any) => void) {
   useEffect(() => {
     // Initialize performance monitor
     performanceMonitor.init({
-      reportCallback: report => {
+      reportCallback: (report) => {
         const vitals: Record<string, number> = {};
-        report.webVitals.forEach(metric => {
+        report.webVitals.forEach((metric) => {
           vitals[metric.name] = metric.value;
         });
         setMetrics(vitals);

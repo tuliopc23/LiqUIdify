@@ -116,7 +116,7 @@ export class PerformanceTestingInfrastructure {
    * Measure Core Web Vitals
    */
   public async measureCoreWebVitals(): Promise<PerformanceMetrics> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const metrics: Partial<PerformanceMetrics> = {
         lcp: 0,
         fid: 0,
@@ -252,7 +252,7 @@ export class PerformanceTestingInfrastructure {
       (window as any).gc();
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const finalMemory = performance.memory.usedJSHeapSize;
     const leaks = finalMemory - initialMemory;
@@ -444,9 +444,9 @@ export class PerformanceTestingInfrastructure {
     return {
       summary: {
         totalTests: this.baselineMetrics.size,
-        regressions: regressions.filter(r => r.exceeded).length,
+        regressions: regressions.filter((r) => r.exceeded).length,
         improvements: 0,
-        warnings: regressions.filter(r => !r.exceeded).length,
+        warnings: regressions.filter((r) => !r.exceeded).length,
       },
       details: {
         coreWebVitals: latestMetrics?.metrics || {

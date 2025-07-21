@@ -333,7 +333,7 @@ export const safeSetBodyStyles = (styles: BodyStyleProps): (() => void) => {
 
   try {
     // Store original values and apply new styles
-    Object.keys(styles).forEach(property => {
+    Object.keys(styles).forEach((property) => {
       const value = styles[property];
       if (value !== undefined) {
         originalStyles[property] = body.style.getPropertyValue(property) || '';
@@ -344,7 +344,7 @@ export const safeSetBodyStyles = (styles: BodyStyleProps): (() => void) => {
     // Return cleanup function that restores original styles
     return () => {
       try {
-        Object.keys(originalStyles).forEach(property => {
+        Object.keys(originalStyles).forEach((property) => {
           const originalValue = originalStyles[property];
           if (originalValue !== undefined) {
             if ('' === originalValue) {

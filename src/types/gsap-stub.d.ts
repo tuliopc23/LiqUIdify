@@ -27,13 +27,13 @@ declare global {
         from(
           target: any,
           vars: TweenVars,
-          position?: string | number,
+          position?: string | number
         ): Timeline;
         fromTo(
           target: any,
           fromVars: TweenVars,
           toVars: TweenVars,
-          position?: string | number,
+          position?: string | number
         ): Timeline;
         set(target: any, vars: TweenVars, position?: string | number): Timeline;
         add(child: any, position?: string | number): Timeline;
@@ -41,11 +41,11 @@ declare global {
           callback: () => void,
           params?: any[],
           scope?: any,
-          position?: string | number,
+          position?: string | number
         ): Timeline;
         eventCallback(
           type: string,
-          callback?: (...args: any[]) => void,
+          callback?: (...args: any[]) => void
         ): Timeline;
         play(): Timeline;
         pause(): Timeline;

@@ -155,7 +155,7 @@ export function withNetworkFallback(
     }, []);
 
     const handleRetry = () => {
-      setRetryCount(prev => prev + 1);
+      setRetryCount((prev) => prev + 1);
       window.location.reload();
     };
 
@@ -199,7 +199,7 @@ export function withFeatureDetection(
 
     useEffect(() => {
       const features = Array.isArray(feature) ? feature : [feature];
-      const allFeaturesSupported = features.every(f => {
+      const allFeaturesSupported = features.every((f) => {
         // Check for API support
         if (f in window) {
           return true;
@@ -231,7 +231,7 @@ export function withFeatureDetection(
               return false;
             }
           case 'webp':
-            return new Promise<boolean>(resolve => {
+            return new Promise<boolean>((resolve) => {
               const webP = new Image();
               webP.onload = webP.onerror = () => resolve(2 === webP.height);
               webP.src =
@@ -361,13 +361,13 @@ export function withPerformanceFallback(
         // Check device memory
         if ('deviceMemory' in navigator) {
           const memory = (navigator as any).deviceMemory;
-          score += 8 <= memory ? 3 : (4 <= memory ? 2 : 1);
+          score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
         }
 
         // Check CPU cores
         if ('hardwareConcurrency' in navigator) {
           const cores = navigator.hardwareConcurrency;
-          score += 8 <= cores ? 3 : (4 <= cores ? 2 : 1);
+          score += 8 <= cores ? 3 : 4 <= cores ? 2 : 1;
         }
 
         // Check connection speed
@@ -376,7 +376,7 @@ export function withPerformanceFallback(
           if (connection) {
             const effectiveType = connection.effectiveType;
             score +=
-              '4g' === effectiveType ? 3 : ('3g' === effectiveType ? 2 : 1);
+              '4g' === effectiveType ? 3 : '3g' === effectiveType ? 2 : 1;
           }
         }
 

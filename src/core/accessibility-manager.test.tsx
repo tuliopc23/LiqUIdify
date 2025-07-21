@@ -131,7 +131,7 @@ describe('AccessibilityManager', () => {
 
       expect(validation.suggestions.length).toBeGreaterThan(0);
       expect(
-        validation.suggestions.some(s => s.attribute === 'aria-expanded')
+        validation.suggestions.some((s) => s.attribute === 'aria-expanded')
       ).toBe(true);
     });
   });

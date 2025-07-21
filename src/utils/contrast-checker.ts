@@ -39,7 +39,7 @@ export function hexToRgb(hex: string): ColorRGB | null {
 export function getLuminance(rgb: ColorRGB): number {
   const { r, g, b } = rgb;
 
-  const [rs, gs, bs] = [r, g, b].map(c => {
+  const [rs, gs, bs] = [r, g, b].map((c) => {
     const sRGB = c / 255;
     return 0.039_28 >= sRGB
       ? sRGB / 12.92

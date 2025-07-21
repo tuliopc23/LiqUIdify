@@ -79,17 +79,17 @@ class ComponentDocRegistry {
   getByCategory(
     category: ComponentDocumentation['category']
   ): ComponentDocumentation[] {
-    return this.getAll().filter(doc => doc.category === category);
+    return this.getAll().filter((doc) => doc.category === category);
   }
 
   search(query: string): ComponentDocumentation[] {
     const lowercaseQuery = query.toLowerCase();
     return this.getAll().filter(
-      doc =>
+      (doc) =>
         doc.name.toLowerCase().includes(lowercaseQuery) ||
         doc.description.toLowerCase().includes(lowercaseQuery) ||
         doc.props.some(
-          prop =>
+          (prop) =>
             prop.name.toLowerCase().includes(lowercaseQuery) ||
             prop.description.toLowerCase().includes(lowercaseQuery)
         )
@@ -126,7 +126,7 @@ export function generatePropDocs(
   // Merge with custom documentation
   if (customDocs) {
     Object.entries(customDocs).forEach(([propName, propDoc]) => {
-      const existingIndex = defaultProps.findIndex(p => p.name === propName);
+      const existingIndex = defaultProps.findIndex((p) => p.name === propName);
       const mergedProp: PropDocumentation = {
         name: propName,
         type: propDoc?.type || 'unknown',

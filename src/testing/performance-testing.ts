@@ -77,16 +77,16 @@ export class PerformanceMonitor {
   }
 
   observeWebVitals(): Promise<PerformanceMetrics> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const metrics: Partial<PerformanceMetrics> = {};
       let observersCompleted = 0;
       const totalObservers = 2;
 
       // First Contentful Paint
-      const fcpObserver = new PerformanceObserver(list => {
+      const fcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const fcpEntry = entries.find(
-          entry => entry.name === 'first-contentful-paint'
+          (entry) => entry.name === 'first-contentful-paint'
         );
         if (fcpEntry) {
           metrics.firstContentfulPaint = fcpEntry.startTime;
@@ -99,7 +99,7 @@ export class PerformanceMonitor {
       });
 
       // Largest Contentful Paint
-      const lcpObserver = new PerformanceObserver(list => {
+      const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lcpEntry = entries[entries.length - 1];
         if (lcpEntry) {
@@ -127,7 +127,7 @@ export class PerformanceMonitor {
   }
 
   cleanup(): void {
-    this.observers.forEach(observer => observer.disconnect());
+    this.observers.forEach((observer) => observer.disconnect());
     this.observers = [];
     this.measurements.clear();
   }
@@ -275,7 +275,7 @@ export function measureComponentRender<P extends object>(
     async () => {
       // This would integrate with React testing utilities
       // For now, simulate a render
-      await new Promise(resolve => setTimeout(resolve, 1));
+      await new Promise((resolve) => setTimeout(resolve, 1));
     },
     {
       renderTime: 16, // 60fps threshold
@@ -288,7 +288,7 @@ export function measureComponentRender<P extends object>(
 export function measureInteractionTime(
   interactionFn: () => void | Promise<void>
 ): Promise<number> {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve) => {
     const startTime = performance.now();
 
     await interactionFn();

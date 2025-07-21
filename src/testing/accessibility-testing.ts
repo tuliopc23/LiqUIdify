@@ -227,7 +227,7 @@ export async function testKeyboardNavigation(
   }
 
   return {
-    passed: issues.filter(issue => issue.severity === 'error').length === 0,
+    passed: issues.filter((issue) => issue.severity === 'error').length === 0,
     issues,
   };
 }
@@ -253,7 +253,7 @@ function getFocusableElements(
   const elements = Array.from(container.querySelectorAll(focusableSelectors));
 
   if (!includeHidden) {
-    return elements.filter(element => {
+    return elements.filter((element) => {
       const style = window.getComputedStyle(element);
       return (
         style.display !== 'none' &&
@@ -286,7 +286,7 @@ export function testScreenReaderCompatibility(
   const headings = container.querySelectorAll('h1, h2, h3, h4, h5, h6');
   let previousLevel = 0;
 
-  headings.forEach(heading => {
+  headings.forEach((heading) => {
     const level = parseInt(heading.tagName.charAt(1));
 
     if (level > previousLevel + 1) {
@@ -302,7 +302,7 @@ export function testScreenReaderCompatibility(
 
   // Test for alt text on images
   const images = container.querySelectorAll('img');
-  images.forEach(img => {
+  images.forEach((img) => {
     if (!img.hasAttribute('alt')) {
       issues.push({
         element: img,
@@ -314,7 +314,7 @@ export function testScreenReaderCompatibility(
 
   // Test for form labels
   const inputs = container.querySelectorAll('input, select, textarea');
-  inputs.forEach(input => {
+  inputs.forEach((input) => {
     const id = input.getAttribute('id');
     const ariaLabel = input.getAttribute('aria-label');
     const ariaLabelledby = input.getAttribute('aria-labelledby');
@@ -334,7 +334,7 @@ export function testScreenReaderCompatibility(
 
   // Test for button text
   const buttons = container.querySelectorAll('button');
-  buttons.forEach(button => {
+  buttons.forEach((button) => {
     const text = button.textContent?.trim();
     const ariaLabel = button.getAttribute('aria-label');
     const ariaLabelledby = button.getAttribute('aria-labelledby');

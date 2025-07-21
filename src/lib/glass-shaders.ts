@@ -418,7 +418,7 @@ export class GlassShaderEffect {
       'u_liquidness',
     ];
 
-    uniformNames.forEach(name => {
+    uniformNames.forEach((name) => {
       const location = this.gl.getUniformLocation(this.program!, name);
       if (location) {
         this.uniforms.set(name, location);
@@ -600,7 +600,7 @@ export class GlassShaderEffect {
       this.gl.deleteProgram(this.program);
     }
 
-    this.textures.forEach(texture => {
+    this.textures.forEach((texture) => {
       this.gl.deleteTexture(texture);
     });
 

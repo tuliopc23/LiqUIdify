@@ -443,7 +443,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
       colDelta: number
     ): { row: number; col: number } | null => {
       const numRows = items.length;
-      const numCols = Math.max(...items.map(row => row.length));
+      const numCols = Math.max(...items.map((row) => row.length));
 
       let row = startRow;
       let col = startCol;

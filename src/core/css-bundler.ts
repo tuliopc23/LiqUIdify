@@ -300,18 +300,18 @@ export class CSSBundler {
     const strategy = this.generateLoadingStrategy();
 
     const critical = strategy.critical
-      .map(bundle => `<link rel="stylesheet" href="/css/${bundle}" />`)
+      .map((bundle) => `<link rel="stylesheet" href="/css/${bundle}" />`)
       .join('\n');
 
     const preload = strategy.preload
       .map(
-        bundle =>
+        (bundle) =>
           `<link rel="preload" href="/css/${bundle}" as="style" onload="this.onload=null;this.rel='stylesheet'" />`
       )
       .join('\n');
 
     const lazy = strategy.lazy
-      .map(bundle => `<link rel="prefetch" href="/css/${bundle}" />`)
+      .map((bundle) => `<link rel="prefetch" href="/css/${bundle}" />`)
       .join('\n');
 
     return { critical, preload, lazy };
@@ -325,7 +325,7 @@ export class CSSBundler {
 
     // Get all files to watch
     const filesToWatch: string[] = [];
-    Object.values(this.config).forEach(config => {
+    Object.values(this.config).forEach((config) => {
       filesToWatch.push(...config.files);
     });
 
@@ -385,7 +385,7 @@ export class BundleSizeValidator {
     }[] = [];
 
     // Check individual bundle sizes
-    result.bundles.forEach(bundle => {
+    result.bundles.forEach((bundle) => {
       const limit = this.thresholds[bundle.name];
       if (limit && bundle.size > limit) {
         violations.push({
@@ -408,7 +408,7 @@ export class BundleSizeValidator {
     }
 
     return {
-      passed: 0 === violations.filter(v => 'error' === v.severity).length,
+      passed: 0 === violations.filter((v) => 'error' === v.severity).length,
       violations,
     };
   }
@@ -439,7 +439,7 @@ export class CSSPerformanceAnalyzer {
     const selectors: string[] = [];
     const complexSelectors: string[] = [];
 
-    ast.walkRules(rule => {
+    ast.walkRules((rule) => {
       selectors.push(rule.selector);
 
       // Check for complex selectors

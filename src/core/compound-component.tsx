@@ -269,7 +269,7 @@ export function useCompoundComponentState<T extends Record<string, any>>(
   );
 
   const updateState = React.useCallback((updates: Partial<T>) => {
-    setState(prev => ({ ...prev, ...updates }));
+    setState((prev) => ({ ...prev, ...updates }));
   }, []);
 
   return { state: mergedState, updateState };

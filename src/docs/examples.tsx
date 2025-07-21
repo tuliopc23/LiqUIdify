@@ -513,8 +513,8 @@ export class ExampleManager {
 
   constructor() {
     // Register all examples
-    exampleCollections.forEach(collection => {
-      collection.examples.forEach(example => {
+    exampleCollections.forEach((collection) => {
+      collection.examples.forEach((example) => {
         this.examples.set(example.id, example);
       });
     });
@@ -528,7 +528,7 @@ export class ExampleManager {
     category: InteractiveExample['category']
   ): InteractiveExample[] {
     return Array.from(this.examples.values()).filter(
-      example => example.category === category
+      (example) => example.category === category
     );
   }
 
@@ -536,12 +536,12 @@ export class ExampleManager {
     difficulty: InteractiveExample['difficulty']
   ): InteractiveExample[] {
     return Array.from(this.examples.values()).filter(
-      example => example.difficulty === difficulty
+      (example) => example.difficulty === difficulty
     );
   }
 
   getExamplesByTag(tag: string): InteractiveExample[] {
-    return Array.from(this.examples.values()).filter(example =>
+    return Array.from(this.examples.values()).filter((example) =>
       example.tags.includes(tag)
     );
   }
@@ -549,10 +549,10 @@ export class ExampleManager {
   searchExamples(query: string): InteractiveExample[] {
     const lowercaseQuery = query.toLowerCase();
     return Array.from(this.examples.values()).filter(
-      example =>
+      (example) =>
         example.title.toLowerCase().includes(lowercaseQuery) ||
         example.description.toLowerCase().includes(lowercaseQuery) ||
-        example.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
+        example.tags.some((tag) => tag.toLowerCase().includes(lowercaseQuery))
     );
   }
 
@@ -561,7 +561,7 @@ export class ExampleManager {
     if (!example) return [];
 
     return example.relatedExamples
-      .map(id => this.getExample(id))
+      .map((id) => this.getExample(id))
       .filter(Boolean) as InteractiveExample[];
   }
 }
@@ -607,18 +607,18 @@ ${example.code.tsx}
 
 ## Design Tokens Used
 
-${example.designTokens.map(token => `- \`${token}\``).join('\n')}
+${example.designTokens.map((token) => `- \`${token}\``).join('\n')}
 
 ${
   example.accessibility
     ? `
 ## Accessibility Features
 
-${example.accessibility.features.map(feature => `- ${feature}`).join('\n')}
+${example.accessibility.features.map((feature) => `- ${feature}`).join('\n')}
 
 ## Testing Checklist
 
-${example.accessibility.testing.map(test => `- [ ] ${test}`).join('\n')}
+${example.accessibility.testing.map((test) => `- [ ] ${test}`).join('\n')}
 `
     : ''
 }
@@ -628,14 +628,14 @@ ${
     ? `
 ## Notes
 
-${example.notes.map(note => `- ${note}`).join('\n')}
+${example.notes.map((note) => `- ${note}`).join('\n')}
 `
     : ''
 }
 
 ## Related Examples
 
-${example.relatedExamples.map(id => `- [${id}](#${id})`).join('\n')}
+${example.relatedExamples.map((id) => `- [${id}](#${id})`).join('\n')}
 `;
 }
 

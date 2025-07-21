@@ -94,7 +94,7 @@ export class VisualTestSuite {
     const {
       threshold = this.config.threshold,
       browsers = this.config.browsers,
-      viewports = this.config.viewports.map(v => v.name),
+      viewports = this.config.viewports.map((v) => v.name),
     } = options;
 
     const results: VisualTestResult[] = [];
@@ -175,7 +175,7 @@ export class VisualTestSuite {
       throw new Error('Animation testing is disabled');
     }
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       let frameCount = 0;
       let droppedFrames = 0;
       let lastFrameTime = performance.now();
@@ -352,7 +352,7 @@ export class VisualTestSuite {
       window.dispatchEvent(new Event('resize'));
 
       // Wait for layout to settle
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const result = await this.runSingleVisualTest(
         `${testId}-responsive`,
@@ -398,7 +398,7 @@ export class VisualTestSuite {
       }
 
       // Wait for state to apply
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const result = await this.runSingleVisualTest(
         `${testId}-${state}`,
@@ -454,10 +454,10 @@ export class VisualTestSuite {
       allVisualTests.length +
       allAnimationTests.length +
       allCrossBrowserTests.length;
-    const passedVisual = allVisualTests.filter(t => t.passed).length;
-    const passedAnimation = allAnimationTests.filter(t => t.passed).length;
+    const passedVisual = allVisualTests.filter((t) => t.passed).length;
+    const passedAnimation = allAnimationTests.filter((t) => t.passed).length;
     const passedCrossBrowser = allCrossBrowserTests.filter(
-      t => t.isConsistent
+      (t) => t.isConsistent
     ).length;
     const passedTests = passedVisual + passedAnimation + passedCrossBrowser;
 
@@ -471,14 +471,14 @@ export class VisualTestSuite {
       );
     }
 
-    const failedVisualTests = allVisualTests.filter(t => !t.passed);
+    const failedVisualTests = allVisualTests.filter((t) => !t.passed);
     if (failedVisualTests.length > 0) {
       recommendations.push(
         `${failedVisualTests.length} visual tests failed - check for layout issues`
       );
     }
 
-    const failedAnimationTests = allAnimationTests.filter(t => !t.passed);
+    const failedAnimationTests = allAnimationTests.filter((t) => !t.passed);
     if (failedAnimationTests.length > 0) {
       recommendations.push(
         `${failedAnimationTests.length} animation tests failed - optimize performance`
@@ -486,7 +486,7 @@ export class VisualTestSuite {
     }
 
     const inconsistentCrossBrowserTests = allCrossBrowserTests.filter(
-      t => !t.isConsistent
+      (t) => !t.isConsistent
     );
     if (inconsistentCrossBrowserTests.length > 0) {
       recommendations.push(
@@ -571,12 +571,12 @@ export const visualTestUtils = {
         reject(new Error('Animation timeout'));
       }, timeout);
 
-      Promise.all(animations.map(animation => animation.finished))
+      Promise.all(animations.map((animation) => animation.finished))
         .then(() => {
           clearTimeout(timeoutId);
           resolve();
         })
-        .catch(error => {
+        .catch((error) => {
           clearTimeout(timeoutId);
           reject(error);
         });
@@ -626,7 +626,7 @@ export const exampleVisualTests = {
         element
       );
 
-      return results.every(result => result.passed);
+      return results.every((result) => result.passed);
     } finally {
       visualTestUtils.cleanupTestElement(element);
     }
@@ -669,7 +669,7 @@ export const exampleVisualTests = {
         ['backdrop-filter', 'border-radius', 'box-shadow', 'transform']
       );
 
-      return results.every(result => result.isConsistent);
+      return results.every((result) => result.isConsistent);
     } finally {
       visualTestUtils.cleanupTestElement(element);
     }

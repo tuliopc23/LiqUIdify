@@ -327,7 +327,7 @@ export const typeGuards = {
     if ('object' === typeof value && null !== value) {
       const keys = Object.keys(value);
       const validKeys = ['sm', 'md', 'lg', 'xl'];
-      return keys.every(key => validKeys.includes(key));
+      return keys.every((key) => validKeys.includes(key));
     }
     return true; // Non-object values are valid (non-responsive)
   },
@@ -385,7 +385,7 @@ export const propValidators = {
   ): boolean => {
     if ('object' === typeof prop && null !== prop) {
       return Object.values(prop).every(
-        value => value === undefined || validator(value as T)
+        (value) => value === undefined || validator(value as T)
       );
     }
     return validator(prop as T);

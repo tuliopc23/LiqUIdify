@@ -67,7 +67,7 @@ export default function AppleLiquidGlassShowcase() {
                 Intensity
               </label>
               <div className="flex gap-2">
-                {(['subtle', 'medium', 'strong'] as const).map(intensity => (
+                {(['subtle', 'medium', 'strong'] as const).map((intensity) => (
                   <AppleLiquidGlassButton
                     key={intensity}
                     size="sm"
@@ -99,7 +99,7 @@ export default function AppleLiquidGlassShowcase() {
                     size="sm"
                     intensity={enabled ? 'strong' : 'subtle'}
                     onClick={() =>
-                      setEnabledEffects(prev => ({
+                      setEnabledEffects((prev) => ({
                         ...prev,
                         [effect]: !prev[effect as keyof typeof prev],
                       }))

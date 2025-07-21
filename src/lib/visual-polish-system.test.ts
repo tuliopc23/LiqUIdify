@@ -190,7 +190,7 @@ describe('Visual Polish System', () => {
         // Simulate interaction
         const handlers = mockElement.addEventListener.mock.calls;
         const mouseEnterHandler = handlers.find(
-          call => call[0] === 'mouseenter'
+          (call) => call[0] === 'mouseenter'
         )?.[1];
 
         if (mouseEnterHandler) {
@@ -332,7 +332,7 @@ describe('Visual Polish System', () => {
         expect(metrics).toHaveProperty('overallScore');
 
         // All scores should be between 0 and 1
-        Object.values(metrics).forEach(score => {
+        Object.values(metrics).forEach((score) => {
           expect(score).toBeGreaterThanOrEqual(0);
           expect(score).toBeLessThanOrEqual(1);
         });
@@ -343,7 +343,7 @@ describe('Visual Polish System', () => {
         const recommendations = polishManager.getQualityRecommendations();
 
         expect(Array.isArray(recommendations)).toBe(true);
-        recommendations.forEach(recommendation => {
+        recommendations.forEach((recommendation) => {
           expect(typeof recommendation).toBe('string');
           expect(recommendation.length).toBeGreaterThan(0);
         });
@@ -568,7 +568,7 @@ describe('Visual Polish System', () => {
         'glowEffect',
       ];
 
-      requiredPresets.forEach(preset => {
+      requiredPresets.forEach((preset) => {
         expect(MICRO_INTERACTION_PRESETS).toHaveProperty(preset);
       });
     });

@@ -114,7 +114,9 @@ describe('Enhanced Apple Liquid Glass System', () => {
 
     it('should have correct z-index ordering', () => {
       const layers = Object.values(ENHANCED_GLASS_LAYERS);
-      const zIndexes = layers.map(layer => layer.zIndex).sort((a, b) => a - b);
+      const zIndexes = layers
+        .map((layer) => layer.zIndex)
+        .sort((a, b) => a - b);
 
       expect(zIndexes).toEqual([0, 1, 2, 3]);
       expect(ENHANCED_GLASS_LAYERS.backdrop.zIndex).toBe(0);

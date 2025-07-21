@@ -172,7 +172,7 @@ export class GlassGestureRecognizer {
     }
 
     // Prevent context menu on long press
-    this.element.addEventListener('contextmenu', e => e.preventDefault());
+    this.element.addEventListener('contextmenu', (e) => e.preventDefault());
   }
 
   private handleMouseDown = (e: MouseEvent): void => {

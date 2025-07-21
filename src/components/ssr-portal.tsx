@@ -17,9 +17,9 @@ export const SSRPortal = ({ children, to = 'body' }: SSRPortalProps) => {
 
     const target =
       'string' === typeof to
-        ? ('undefined' !== typeof document
+        ? 'undefined' !== typeof document
           ? document.querySelector(to)
-          : undefined)
+          : undefined
         : to;
 
     setContainer(target as HTMLElement);

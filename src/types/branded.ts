@@ -34,7 +34,7 @@ export function isValidGlassColor(color: string): boolean {
     /^hsla\(\s*\d+\s*,\s*\d+%?\s*,\s*\d+%?\s*,\s*[\d.]+\s*\)$/,
   ];
 
-  return patterns.some(pattern => pattern.test(color));
+  return patterns.some((pattern) => pattern.test(color));
 }
 
 /**

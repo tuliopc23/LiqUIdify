@@ -88,7 +88,7 @@ export function mockResizeObserver() {
 export function mockMatchMedia(matches: boolean = false) {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: vi.fn().mockImplementation(query => ({
+    value: vi.fn().mockImplementation((query) => ({
       matches,
       media: query,
       onchange: null,

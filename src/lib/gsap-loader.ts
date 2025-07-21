@@ -2,7 +2,9 @@
 // This file is disabled until GSAP is re-added
 
 export const loadGSAP = async () => {
-  console.warn('GSAP has been removed from dependencies. Use Framer Motion instead.');
+  console.warn(
+    'GSAP has been removed from dependencies. Use Framer Motion instead.'
+  );
   return null;
 };
 

@@ -229,7 +229,7 @@ export function createGlassPolymorphicComponent<
       interactive && 'glass-interactive',
       baseClassName
     ),
-    getClassName: props => {
+    getClassName: (props) => {
       const customClassName = getClassName?.(props) || '';
       return cn(customClassName);
     },

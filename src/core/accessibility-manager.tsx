@@ -58,7 +58,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
         navigator.userAgent.includes('JAWS') ||
         window.speechSynthesis?.speaking;
 
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         reducedMotion,
         highContrast: highContrastMedia || highContrast,
@@ -90,12 +90,12 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if ('Tab' === e.key) {
-        setState(prev => ({ ...prev, keyboardNavigation: true }));
+        setState((prev) => ({ ...prev, keyboardNavigation: true }));
       }
     };
 
     const handleMouseDown = () => {
-      setState(prev => ({ ...prev, keyboardNavigation: false }));
+      setState((prev) => ({ ...prev, keyboardNavigation: false }));
     };
 
     window.addEventListener('keydown', handleKeyDown);

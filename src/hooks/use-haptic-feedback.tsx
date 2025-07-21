@@ -305,7 +305,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
     );
 
     // Wait for all audio files to load
-    Promise.all(loadPromises).catch(error => {
+    Promise.all(loadPromises).catch((error) => {
       console.error('[useHapticFeedback] Error loading audio files:', error);
     });
   }, []);
@@ -319,7 +319,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
       return undefined;
     }
 
-    const scaledPattern = pattern.map(duration =>
+    const scaledPattern = pattern.map((duration) =>
       Math.round(duration * (configRef.current.intensity || 1))
     );
 

@@ -46,7 +46,7 @@ export const PropsTable = ({
               </tr>
             </thead>
             <tbody>
-              {data.map(prop => (
+              {data.map((prop) => (
                 <tr
                   key={prop.name}
                   className="border-b border-white/8 last:border-b-0"
@@ -213,7 +213,7 @@ export const ColorPalette = ({
 }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-6">
-      {colors.map(color => (
+      {colors.map((color) => (
         <div
           key={color.name}
           className="liquid-glass rounded-lg p-4 border border-white/15"

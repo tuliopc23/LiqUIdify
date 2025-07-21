@@ -114,9 +114,9 @@ export class CSSBundleAnalyzer {
       const status =
         sizeKB <= bundleConfig.maxSize
           ? 'ok'
-          : (sizeKB <= bundleConfig.maxSize * 1.2
+          : sizeKB <= bundleConfig.maxSize * 1.2
             ? 'warning'
-            : 'error');
+            : 'error';
 
       results.bundles[bundleName] = {
         size: sizeKB,
@@ -271,8 +271,8 @@ export class CSSBundleAnalyzer {
     // Simple CSS rule parser - in production, use a proper CSS parser
     return css
       .split('}')
-      .filter(rule => rule.trim())
-      .map(rule => rule.trim() + '}');
+      .filter((rule) => rule.trim())
+      .map((rule) => rule.trim() + '}');
   }
 
   private isCriticalRule(rule: string, _html: string): boolean {
@@ -303,13 +303,13 @@ export class CSSBundleAnalyzer {
       '*',
     ];
 
-    return criticalSelectors.some(critical => selector?.includes(critical));
+    return criticalSelectors.some((critical) => selector?.includes(critical));
   }
 
   private removeUnusedCSS(css: string, usedSelectors: string[]): string {
     // Remove CSS rules that don't match any used selectors
     const rules = this.parseCSSRules(css);
-    const usedRules = rules.filter(rule => {
+    const usedRules = rules.filter((rule) => {
       const selectorMatch = rule.match(/^([^{]+)\{/);
       if (!selectorMatch) {
         return true;
@@ -317,7 +317,7 @@ export class CSSBundleAnalyzer {
 
       const selector = selectorMatch[1]?.trim();
       return selector
-        ? usedSelectors.some(used => selector?.includes(used))
+        ? usedSelectors.some((used) => selector?.includes(used))
         : false;
     });
 
@@ -357,7 +357,7 @@ export class CSSBundleAnalyzer {
       const regex = new RegExp(`(\\s|^)${property}\\s*:`, 'g');
       prefixed = prefixed.replace(regex, (match, whitespace) => {
         const prefixedProps = prefixes
-          .map(prefix => `${whitespace}${prefix}:`)
+          .map((prefix) => `${whitespace}${prefix}:`)
           .join('');
         return prefixedProps + match;
       });
@@ -439,13 +439,13 @@ export class CSSBundleManager {
     if ('fail' === report.status) {
       console.error('❌ CSS Bundle validation failed:');
       console.error(`Total size: ${report.totalSize}KB (exceeds 30KB limit)`);
-      report.recommendations.forEach(rec => console.error(`- ${rec}`));
+      report.recommendations.forEach((rec) => console.error(`- ${rec}`));
       return false;
     }
 
     if ('warning' === report.status) {
       console.warn('⚠️ CSS Bundle validation warnings:');
-      report.recommendations.forEach(rec => console.warn(`- ${rec}`));
+      report.recommendations.forEach((rec) => console.warn(`- ${rec}`));
     }
 
     console.log('✅ CSS Bundle validation passed');
