@@ -54,7 +54,8 @@ export function usePerformanceMonitoring(
   renderStartTime.current = performance.now();
 
   const startTiming = useCallback(
-    (name: string) => performanceMonitor.startTiming(`${componentName}-${name}`),
+    (name: string) =>
+      performanceMonitor.startTiming(`${componentName}-${name}`),
     [componentName]
   );
 

@@ -63,7 +63,10 @@ export default function AppleLiquidGlassShowcase() {
           <div className="space-y-4">
             {/* Intensity Control */}
             <div>
-              <label htmlFor="intensity-control" className="block text-white text-sm font-medium mb-2">
+              <label
+                htmlFor="intensity-control"
+                className="block text-white text-sm font-medium mb-2"
+              >
                 Intensity
               </label>
               <div className="flex gap-2">
@@ -89,7 +92,10 @@ export default function AppleLiquidGlassShowcase() {
 
             {/* Effect Toggles */}
             <div>
-              <label htmlFor="effects-control" className="block text-white text-sm font-medium mb-2">
+              <label
+                htmlFor="effects-control"
+                className="block text-white text-sm font-medium mb-2"
+              >
                 Effects
               </label>
               <div className="flex flex-wrap gap-2">
