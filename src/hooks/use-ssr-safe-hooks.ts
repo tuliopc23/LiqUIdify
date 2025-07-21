@@ -8,15 +8,16 @@ export const useSSRSafe = (callback: () => void, deps: any[]) => {
     if ('undefined' !== typeof window) {
       callback();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 };
 
 export const isSSR = () => 'undefined' === typeof window;
 
 // Additional SSR-safe hooks for demo component
-export const useIntersectionObserver = (callback?: any) => [
-  { isIntersecting: false },
-];
+export const useIntersectionObserver = (callback?: any) => {
+  return [{ isIntersecting: false }];
+};
 export const useMediaQuery = (query: string) => false;
 export const useNetworkStatus = () => ({
   online: true,
