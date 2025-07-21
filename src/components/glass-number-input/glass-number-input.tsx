@@ -222,7 +222,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 
     // Handle increment/decrement
     const handleIncrement = () => {
-      if (disabled) {return;}
+      if (disabled) {return undefined;}
 
       const current = internalValue || 0;
       const newValue = current + step;
@@ -234,7 +234,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     };
 
     const handleDecrement = () => {
-      if (disabled) {return;}
+      if (disabled) {return undefined;}
 
       const current = internalValue || 0;
       const newValue = current - step;
@@ -247,7 +247,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 
     // Handle keyboard shortcuts
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (disabled) {return;}
+      if (disabled) {return undefined;}
 
       switch (e.key) {
         case 'ArrowUp':

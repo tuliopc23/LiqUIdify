@@ -114,7 +114,7 @@ export function useLazyLoad(
   options?: IntersectionObserverInit
 ) {
   React.useEffect(() => {
-    if (!ref.current) {return;}
+    if (!ref.current) {return undefined;}
 
     const observer = new IntersectionObserver(
       entries => {

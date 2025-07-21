@@ -45,7 +45,7 @@ export const GlassDropdown = React.forwardRef<
 
     useEffect(() => {
       if (!isClient) {
-        return;
+        return undefined;
       }
 
       const handleClickOutside = (event: MouseEvent) => {
@@ -81,7 +81,7 @@ export const GlassDropdown = React.forwardRef<
 
     useEffect(() => {
       if (!isClient || !isOpen || !triggerRef.current || !dropdownRef.current) {
-        return;
+        return undefined;
       }
 
       const triggerRect = triggerRef.current.getBoundingClientRect();
@@ -124,7 +124,7 @@ export const GlassDropdown = React.forwardRef<
     }, [isClient, isOpen, align, sideOffset]);
 
     const handleSelect = (item: DropdownItem) => {
-      if (item.disabled || item.separator) {return;}
+      if (item.disabled || item.separator) {return undefined;}
 
       onSelect?.(item.value);
       setIsOpen(false);

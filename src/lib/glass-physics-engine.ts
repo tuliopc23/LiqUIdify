@@ -363,7 +363,7 @@ export class MagneticField {
   updateElementPosition(id: string): void {
     const target = this.elements.get(id);
     if (!target) {
-      return;
+      return undefined;
     }
 
     const rect = target.element.getBoundingClientRect();
@@ -528,7 +528,7 @@ export class GestureRecognizer {
 
   private handleMove = (e: MouseEvent): void => {
     if (!this.isTracking) {
-      return;
+      return undefined;
     }
 
     const now = performance.now();
@@ -554,7 +554,7 @@ export class GestureRecognizer {
 
   private handleEnd = (e: MouseEvent): void => {
     if (!this.isTracking) {
-      return;
+      return undefined;
     }
 
     this.isTracking = false;
@@ -620,7 +620,7 @@ export class GestureRecognizer {
         deltaY = step;
         break;
       default:
-        return;
+        return undefined;
     }
 
     e.preventDefault();
@@ -741,7 +741,7 @@ export function useAdvancedPhysics(
   // Setup gesture recognition
   useEffect(() => {
     if (!elementRef.current || !enableGestures) {
-      return;
+      return undefined;
     }
 
     gestureRef.current = new GestureRecognizer(
@@ -762,7 +762,7 @@ export function useAdvancedPhysics(
         'undefined' === typeof navigator ||
         !(navigator as any).vibrate
       ) {
-        return;
+        return undefined;
       }
 
       const patterns = {
@@ -779,7 +779,7 @@ export function useAdvancedPhysics(
   // Animation methods
   const animateToPosition = useCallback((x: number, y: number) => {
     if (!springRef.current || !elementRef.current) {
-      return;
+      return undefined;
     }
 
     const spring = springRef.current;
@@ -809,7 +809,7 @@ export function useAdvancedPhysics(
       }[]
     ) => {
       if (!choreographerRef.current) {
-        return;
+        return undefined;
       }
 
       animations.forEach(({ id, element, keyframes, options }) => {

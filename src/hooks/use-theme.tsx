@@ -47,7 +47,7 @@ export function ThemeProvider({
 
   useEffect(() => {
     if ('undefined' === typeof window) {
-      return;
+      return undefined;
     }
 
     const root = window.document.documentElement;

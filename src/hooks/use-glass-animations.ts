@@ -81,7 +81,7 @@ export function useGlassAnimation(
       options?: Partial<AnimationConfig>
     ) => {
       if (!element) {
-        return;
+        return undefined;
       }
 
       // Cancel any existing animation
@@ -113,7 +113,7 @@ export function useGlassAnimation(
       // Track animation progress
       const updateProgress = () => {
         if (!animation.currentTime || !animation.effect) {
-          return;
+          return undefined;
         }
 
         const progress = Math.min(
@@ -178,7 +178,7 @@ export function useGlassStateTransitions(
   const transitionToState = useCallback(
     (targetState: string) => {
       if (currentState === targetState) {
-        return;
+        return undefined;
       }
 
       cancel(); // Cancel any ongoing animation
@@ -208,7 +208,7 @@ export function useMagneticHover(
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
       if (!elementRef.current) {
-        return;
+        return undefined;
       }
 
       const rect = elementRef.current.getBoundingClientRect();
@@ -257,7 +257,7 @@ export function useMagneticHover(
   useEffect(() => {
     const element = elementRef.current;
     if (!element) {
-      return;
+      return undefined;
     }
 
     element.addEventListener('mouseenter', handleMouseEnter);

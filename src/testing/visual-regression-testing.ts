@@ -564,7 +564,7 @@ export const visualTestUtils = {
 
       if (animations.length === 0) {
         resolve();
-        return;
+        return undefined;
       }
 
       const timeoutId = setTimeout(() => {

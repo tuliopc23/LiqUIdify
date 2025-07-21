@@ -60,7 +60,7 @@ beforeAll(() => {
       typeof args[0] === 'string' &&
       args[0].includes('Warning: ReactDOM.render')
     ) {
-      return;
+      return undefined;
     }
     originalError.call(console, ...args);
   };

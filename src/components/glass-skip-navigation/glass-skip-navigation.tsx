@@ -46,7 +46,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
   // Auto-generate skip links for landmarks
   useEffect(() => {
     if (!autoGenerate || providedLinks || !isClient) {
-      return;
+      return undefined;
     }
 
     const generateSkipLinks = () => {
@@ -147,7 +147,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     event.preventDefault();
 
     if (!isClient) {
-      return;
+      return undefined;
     }
 
     let targetElement: HTMLElement | null;
@@ -315,11 +315,11 @@ export function useSkipNavigation() {
 
   const skipTo = (id: string) => {
     if ('undefined' === typeof window || 'undefined' === typeof document) {
-      return;
+      return undefined;
     }
 
     const link = skipLinks.find(l => l.id === id);
-    if (!link) {return;}
+    if (!link) {return undefined;}
 
     // Use the same logic as handleSkipTo
     let targetElement: HTMLElement | null;

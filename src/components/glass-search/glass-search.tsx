@@ -66,7 +66,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (!isOpen) {return;}
+      if (!isOpen) {return undefined;}
 
       switch (event.key) {
         case 'ArrowDown':

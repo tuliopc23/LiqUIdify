@@ -176,7 +176,7 @@ export function hapticFeedback(
   try {
     // Check for SSR environment
     if ('undefined' === typeof window || 'undefined' === typeof navigator) {
-      return;
+      return undefined;
     }
 
     // Try to use native vibration API if available
@@ -320,7 +320,7 @@ export const useMagneticHover = (
       try {
         const element = safeRefAccess(elementRef);
         if (!element) {
-          return;
+          return undefined;
         }
 
         const rect = safeGetBoundingClientRect(element);
@@ -379,7 +379,7 @@ export const useMagneticHover = (
   useEffect(() => {
     const element = safeRefAccess(elementRef);
     if (!element) {
-      return;
+      return undefined;
     }
 
     element.addEventListener('mousemove', handleMouseMove);
@@ -406,7 +406,7 @@ export const useRepulsionEffect = (
 
   useEffect(() => {
     if (0 === elements.length) {
-      return;
+      return undefined;
     }
 
     const updatePositions = () => {
@@ -424,7 +424,7 @@ export const useRepulsionEffect = (
 
         elements.forEach((otherElement, otherIndex) => {
           if (index === otherIndex || !otherElement) {
-            return;
+            return undefined;
           }
 
           const otherRect = safeGetBoundingClientRect(otherElement);
@@ -508,7 +508,7 @@ export const createGlassRipple = (
   try {
     // Check for SSR environment
     if ('undefined' === typeof window || 'undefined' === typeof document) {
-      return;
+      return undefined;
     }
 
     const ripple = document.createElement('div');
@@ -561,7 +561,7 @@ export const createGlassRipple = (
     return ripple;
   } catch (error) {
     console.error('Error creating glass ripple:', error);
-    return;
+    return undefined;
   }
 };
 
@@ -642,7 +642,7 @@ export class FluidSimulation {
       this.particles.forEach((particle, i) => {
         const force = particleForces[i];
         if (!force) {
-          return;
+          return undefined;
         }
 
         // Update velocity
@@ -687,7 +687,7 @@ export class FluidSimulation {
 
       this.particles.forEach((neighbor, j) => {
         if (i === j) {
-          return;
+          return undefined;
         }
 
         const delta = particle.position.subtract(neighbor.position);
@@ -718,7 +718,7 @@ export class FluidSimulation {
 
       this.particles.forEach((neighbor, j) => {
         if (i === j) {
-          return;
+          return undefined;
         }
 
         const distance = particle.position.distance(neighbor.position);
@@ -990,7 +990,7 @@ export class PhysicsWorld {
 
   start() {
     if (this.running) {
-      return;
+      return undefined;
     }
 
     try {
@@ -1013,7 +1013,7 @@ export class PhysicsWorld {
 
   private update() {
     if (!this.running) {
-      return;
+      return undefined;
     }
 
     try {

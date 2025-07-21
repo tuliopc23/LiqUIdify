@@ -147,7 +147,7 @@ export class GlassPerformanceMonitor {
 
   start(): void {
     if (this.isMonitoring) {
-      return;
+      return undefined;
     }
 
     this.isMonitoring = true;
@@ -166,7 +166,7 @@ export class GlassPerformanceMonitor {
 
   private monitor = (): void => {
     if (!this.isMonitoring) {
-      return;
+      return undefined;
     }
 
     const now = performance.now();
@@ -277,7 +277,7 @@ export class GlassAnimationScheduler {
       !this.config.enableCulling ||
       'undefined' === typeof IntersectionObserver
     ) {
-      return;
+      return undefined;
     }
 
     this.intersectionObserver = new IntersectionObserver(
@@ -302,7 +302,7 @@ export class GlassAnimationScheduler {
 
   private checkReducedMotion(): void {
     if (!this.config.enableReducedMotion || 'undefined' === typeof window) {
-      return;
+      return undefined;
     }
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -316,13 +316,13 @@ export class GlassAnimationScheduler {
   addTask(task: AnimationTask): void {
     // Skip animations if reduced motion is preferred
     if (this.reducedMotion) {
-      return;
+      return undefined;
     }
 
     // Check performance budget
     if (this.tasks.size >= this.config.performanceBudget.maxAnimations) {
       console.warn('Animation budget exceeded, skipping animation');
-      return;
+      return undefined;
     }
 
     this.tasks.set(task.id, task);
@@ -367,7 +367,7 @@ export class GlassAnimationScheduler {
 
   private start(): void {
     if (this.isRunning) {
-      return;
+      return undefined;
     }
 
     this.isRunning = true;
@@ -387,7 +387,7 @@ export class GlassAnimationScheduler {
 
   private tick = (timestamp: number = performance.now()): void => {
     if (!this.isRunning) {
-      return;
+      return undefined;
     }
 
     const frameStartTime = performance.now();
@@ -440,12 +440,12 @@ export class GlassAnimationScheduler {
     if (0.01 > visibilityRatio) {
       // Very small elements - skip every other frame
       if (0 === task.frameCount % 2) {
-        return;
+        return undefined;
       }
     } else if (0.05 > visibilityRatio) {
       // Small elements - reduce frame rate
       if (0 === task.frameCount % 1.5) {
-        return;
+        return undefined;
       }
     }
   }
@@ -579,7 +579,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
       priority: number = 0
     ) => {
       if (!schedulerRef.current) {
-        return;
+        return undefined;
       }
 
       const task: AnimationTask = {

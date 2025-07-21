@@ -5,14 +5,15 @@
  */
 
 // Dynamic imports for heavy animation libraries
-export const loadGSAP = () => import('gsap').then(gsap => gsap.default || gsap);
-import type * as FramerMotion from 'framer-motion';
+// GSAP removed from dependencies - using only Framer Motion
+// export const loadGSAP = () => import('gsap').then(gsap => gsap.default || gsap);
+import type * as FramerMotion from "framer-motion";
 export const loadFramerMotion = (): Promise<typeof FramerMotion> =>
-  import('framer-motion');
+  import("framer-motion");
 
 // Animation hooks (tree-shakeable)
-export * from '../hooks/use-liquid-glass';
-export * from '../hooks/use-haptic-feedback';
+export * from "../hooks/use-liquid-glass";
+export * from "../hooks/use-haptic-feedback";
 export {
   useGlassAnimation,
   useMagneticHover as useMagneticHoverHook,
@@ -24,10 +25,10 @@ export {
   GLASS_ANIMATION_PRESETS,
   type AnimationState,
   type AnimationConfig as HookAnimationConfig,
-} from '../hooks/use-glass-animations';
+} from "../hooks/use-glass-animations";
 
 // Animation utilities
-export * from '../lib/framer-motion-constants';
+export * from "../lib/framer-motion-constants";
 export {
   type SpringPhysics,
   type Vector2D,
@@ -40,22 +41,22 @@ export {
   createChoreographer,
   createGestureAnimator,
   GlassUtils,
-} from '../lib/glass-animations';
-export * from '../lib/glass-physics';
+} from "../lib/glass-animations";
+export * from "../lib/glass-physics";
 
 // Advanced visual components
-export * from '../components/glass-feature-showcase';
-export * from '../components/glass-floating-action';
-export * from '../components/liquid-glass-svg-filters';
-export * from '../components/apple-liquid-glass';
+export * from "../components/glass-feature-showcase";
+export * from "../components/glass-floating-action";
+export * from "../components/liquid-glass-svg-filters";
+export * from "../components/apple-liquid-glass";
 
 // Animation-heavy components
-export * from '../components/glass-spinner';
-export * from '../components/glass-loading';
-export * from '../components/glass-progress';
+export * from "../components/glass-spinner";
+export * from "../components/glass-loading";
+export * from "../components/glass-progress";
 
 // Physics-based components
-export * from '../components/glass-slider';
+export * from "../components/glass-slider";
 
 // Tree-shaking markers
-export const ANIMATION_BUNDLE_MARKER = 'liquidui-animations' as const;
+export const ANIMATION_BUNDLE_MARKER = "liquidui-animations" as const;

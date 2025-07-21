@@ -11,7 +11,7 @@
     "declarationMap": true,
     "declarationDir": "./dist/types",
     "outDir": "./dist",
-    "noEmit": true,
+    "noEmit": false,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -20,7 +20,7 @@
     "isolatedModules": true,
     "noEmitOnError": false,
 
-    /* Linting - Relaxed for transition period */
+    /* Linting - Optimized for production */
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
@@ -65,8 +65,12 @@
   "exclude": [
     "node_modules",
     "dist",
+    "storybook-static",
     "**/*.stories.*",
     "**/*.test.*",
-    "src/docs/guides.ts"
+    "**/*.spec.*",
+    "src/docs/guides.ts",
+    "scripts/**/*",
+    "vite.config.*.ts"
   ]
 }

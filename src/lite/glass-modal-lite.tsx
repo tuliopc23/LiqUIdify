@@ -46,7 +46,7 @@ export function GlassModalLite({
   }, [isOpen, onClose]);
 
   if (!isOpen) {
-    return;
+    return undefined;
   }
 
   const sizeClasses = {

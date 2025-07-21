@@ -47,7 +47,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
   };
 
   useEffect(() => {
-    if ('undefined' === typeof window) {return;}
+    if ('undefined' === typeof window) {return undefined;}
     if (isOpen && triggerRef.current && popoverRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const popoverRect = popoverRef.current.getBoundingClientRect();

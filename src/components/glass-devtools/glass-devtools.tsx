@@ -92,7 +92,7 @@ export function useGlassDevTools() {
     }, [state.settings.enableConsoleLogging]);
 
     const inspectElement = useCallback(async (element: HTMLElement) => {
-        if (!element) {return;}
+        if (!element) {return undefined;}
 
         addLog({
             level: 'info',
@@ -194,7 +194,7 @@ export function GlassDevTools({
 
     // Initialize DevTools
     useEffect(() => {
-        if (!enabled) {return;}
+        if (!enabled) {return undefined;}
 
         setState(prev => ({
             ...prev,
@@ -218,10 +218,10 @@ export function GlassDevTools({
 
         // Set up element inspection on click
         const handleElementClick = (e: MouseEvent) => {
-            if (!state.isOpen) {return;}
+            if (!state.isOpen) {return undefined;}
 
             // Check if click is inside DevTools
-            if (overlayRef.current?.contains(e.target as Node)) {return;}
+            if (overlayRef.current?.contains(e.target as Node)) {return undefined;}
 
             e.preventDefault();
             e.stopPropagation();
@@ -242,7 +242,7 @@ export function GlassDevTools({
 
     // Update performance report periodically
     useEffect(() => {
-        if (!enabled || !state.settings.enablePerformanceMonitoring) {return;}
+        if (!enabled || !state.settings.enablePerformanceMonitoring) {return undefined;}
 
         const interval = setInterval(() => {
             const report = performanceMonitor.getReport();
@@ -254,14 +254,14 @@ export function GlassDevTools({
 
     // Update CSS report
     useEffect(() => {
-        if (!enabled) {return;}
+        if (!enabled) {return undefined;}
 
         cssBundleAnalyzer.generateReport().then(setCssReport);
     }, [enabled]);
 
     // Real-time accessibility validation
     useEffect(() => {
-        if (!enabled || !state.settings.enableRealTimeValidation) {return;}
+        if (!enabled || !state.settings.enableRealTimeValidation) {return undefined;}
 
         accessibilityManager.enableRealTimeMonitoring();
 
@@ -271,7 +271,7 @@ export function GlassDevTools({
     }, [enabled, state.settings.enableRealTimeValidation]);
 
     if (!enabled || !state.isOpen) {
-        return ;
+        return undefined;
     }
 
     const positionClasses = {

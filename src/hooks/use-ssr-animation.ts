@@ -9,7 +9,7 @@ export const useSSRAnimation = (
 
   useEffect(() => {
     if (isServer || !elementRef.current || !callback) {
-      return;
+      return undefined;
     }
 
     cleanupRef.current = callback(elementRef.current);

@@ -154,7 +154,7 @@ export function useMatchMedia(query: string): boolean {
 
   useEffect(() => {
     if ('undefined' === typeof window) {
-      return;
+      return undefined;
     }
 
     const mediaQuery = window.matchMedia(query);
@@ -179,7 +179,7 @@ export function useIntersectionObserver(
 
   useEffect(() => {
     if ('undefined' === typeof window || !window.IntersectionObserver) {
-      return;
+      return undefined;
     }
 
     const obs = new IntersectionObserver(() => {}, options);
@@ -200,7 +200,7 @@ export function useResizeObserver(
 
   useEffect(() => {
     if ('undefined' === typeof window || !window.ResizeObserver) {
-      return;
+      return undefined;
     }
 
     const obs = new ResizeObserver(callback);

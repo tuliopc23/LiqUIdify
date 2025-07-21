@@ -452,7 +452,7 @@ export function useAccessibilityFallback() {
 
   useEffect(() => {
     if ('undefined' === typeof window) {
-      return;
+      return undefined;
     }
 
     const mediaQueryMotion = window.matchMedia(

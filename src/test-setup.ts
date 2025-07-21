@@ -123,7 +123,7 @@ console.warn = vi.fn((...args) => {
       message.includes('Warning: componentWillReceiveProps') ||
       message.includes('🐌 Slow glass effect'))
   ) {
-    return;
+    return undefined;
   }
   originalWarn(...args);
 });

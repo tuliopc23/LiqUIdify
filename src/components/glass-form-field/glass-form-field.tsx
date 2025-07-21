@@ -116,7 +116,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         case 'warning':
           return <Info className="w-3 h-3 flex-shrink-0" />;
         default:
-          return ;
+          return undefined;
       }
     };
 

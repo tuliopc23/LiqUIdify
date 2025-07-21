@@ -43,7 +43,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
   // Detect user preferences
   useEffect(() => {
     if (!respectPreferences || 'undefined' === typeof window) {
-      return;
+      return undefined;
     }
 
     const checkPreferences = () => {
@@ -85,7 +85,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
   // Keyboard navigation detection
   useEffect(() => {
     if (!focusManagement) {
-      return;
+      return undefined;
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -111,7 +111,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
   const announce = useCallback(
     (message: string, priority: 'polite' | 'assertive' = 'polite') => {
       if (!autoAnnounce || !announcer.current) {
-        return;
+        return undefined;
       }
 
       announcer.current.setAttribute('aria-live', priority);
@@ -131,7 +131,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
   const focusElement = useCallback(
     (element: HTMLElement | null) => {
       if (!focusManagement || !element) {
-        return;
+        return undefined;
       }
 
       element.focus({ preventScroll: state.reducedMotion });
@@ -155,7 +155,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
       const handleTabKey = (e: KeyboardEvent) => {
         if ('Tab' !== e.key) {
-          return;
+          return undefined;
         }
 
         if (e.shiftKey) {

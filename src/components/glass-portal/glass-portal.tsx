@@ -20,14 +20,14 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
 
   useEffect(() => {
     if (!isClient) {
-      return;
+      return undefined;
     }
 
     // Use provided container or create default
     // Check for document.body availability
     if (!container && (!document.body)) {
       console.warn('[GlassPortal] document.body is not available, portal cannot be created');
-      return;
+      return undefined;
     }
     
     const node = container || document.body;
@@ -40,12 +40,12 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
 
   // Don't render anything during SSR
   if (!isClient) {
-    return ;
+    return undefined;
   }
 
   // Don't render until mount node is available
   if (!mountNode) {
-    return ;
+    return undefined;
   }
 
   return createPortal(children, mountNode, key);

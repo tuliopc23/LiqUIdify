@@ -4,42 +4,36 @@ import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import { readFileSync } from 'fs';
 
-// Load OXC configuration
+// Load OXC configuration for consistency
 const oxcConfig = JSON.parse(readFileSync('./oxc.config.json', 'utf-8'));
 
 export default defineConfig({
   // Configure rolldown-vite to use OXC transformer
   rolldown: {
-    // Enable OXC for TypeScript and JSX transformation
     transform: oxcConfig.transform,
     parser: oxcConfig.parser,
     resolve: {
       alias: oxcConfig.resolver.alias,
       mainFields: oxcConfig.resolver.mainFields,
       conditionNames: oxcConfig.resolver.conditionNames,
-      extensionAlias: oxcConfig.resolver.extensionAlias,
     },
-    // Enable source maps from OXC
     sourcemap: oxcConfig.sourcemap.enable,
-    // Optimize for production
     minify: process.env.NODE_ENV === 'production',
     target: 'es2020',
   },
+
   plugins: [
     react({
-      // Configure React plugin to work with OXC
       jsxRuntime: 'automatic',
       jsxImportSource: 'react',
       include: /\.(tsx|ts|jsx|js)$/,
-      // Disable Babel to use OXC through rolldown-vite
-      babel: false,
-      // Removed jsxPure as per warning
+      babel: false, // Use OXC through rolldown-vite
       fastRefresh: process.env.NODE_ENV === 'development',
     }),
     dts({
       insertTypesEntry: true,
       outDir: 'dist/types',
-      rollupTypes: false, // Disable API extractor to avoid errors
+      rollupTypes: false,
       bundledPackages: [],
       exclude: [
         '**/*.test.*',
@@ -52,35 +46,33 @@ export default defineConfig({
       ],
     }),
   ],
+
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
       '@/tokens': resolve(__dirname, 'src/tokens/index'),
       '@/design-tokens': resolve(__dirname, 'src/tokens/design-tokens'),
     },
-    // Enhanced module resolution with OXC compatibility
     mainFields: ['module', 'main', 'browser'],
     conditions: ['import', 'module', 'browser', 'default'],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs'],
   },
+
   css: {
     postcss: './postcss.config.js',
-    // Enable CSS modules and processing
     preprocessorOptions: {
       css: {
         charset: false,
       },
     },
   },
-  // OXC-specific optimizations
+
   optimizeDeps: {
-    // Force pre-bundling of these dependencies for better performance
     include: [
       'react',
       'react-dom',
       'react/jsx-runtime',
       'framer-motion',
-      'gsap',
       'clsx',
       'class-variance-authority',
       'tailwind-merge',
@@ -90,33 +82,37 @@ export default defineConfig({
       '@radix-ui/react-dialog',
       '@radix-ui/react-radio-group',
     ],
-    // Use rollup options for compatibility
-    rollupOptions: {
-      // Rolldown-specific options
-    },
+    rollupOptions: {},
   },
+
   esbuild: {
-    // Configure esbuild to work alongside OXC
     target: 'es2020',
     jsx: 'automatic',
     jsxImportSource: 'react',
-    // Enable source maps for better debugging
     sourcemap: true,
-    // Drop console statements in production
     drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
   },
+
   build: {
     lib: {
       entry: {
-        // Main entry point - full library
+        // Main entries
         index: resolve(__dirname, 'src/index.ts'),
-        // Modular entry point - tree-shakeable
         'index-modular': resolve(__dirname, 'src/index-modular.ts'),
-        // Bundle-specific entries
-        'bundles/core': resolve(__dirname, 'src/bundles/core-bundle.ts'),
-        'bundles/animations': resolve(__dirname, 'src/bundles/animations-bundle.ts'),
-        'bundles/advanced': resolve(__dirname, 'src/bundles/advanced-bundle.ts'),
-        // Individual component entries for per-component imports
+
+        // Bundle entries
+        core: resolve(__dirname, 'src/bundles/core.ts'),
+        animations: resolve(__dirname, 'src/bundles/animations.ts'),
+        advanced: resolve(__dirname, 'src/bundles/advanced.ts'),
+        forms: resolve(__dirname, 'src/bundles/forms.ts'),
+        layout: resolve(__dirname, 'src/bundles/layout.ts'),
+        accessibility: resolve(__dirname, 'src/bundles/accessibility.ts'),
+        feedback: resolve(__dirname, 'src/bundles/feedback.ts'),
+        navigation: resolve(__dirname, 'src/bundles/navigation.ts'),
+        physics: resolve(__dirname, 'src/bundles/physics.ts'),
+        ssr: resolve(__dirname, 'src/bundles/ssr.ts'),
+
+        // Component entries
         'components/button': resolve(
           __dirname,
           'src/components/glass-button-refactored/index.ts'
@@ -129,10 +125,14 @@ export default defineConfig({
           __dirname,
           'src/components/glass-input/index.ts'
         ),
+        'components/modal': resolve(
+          __dirname,
+          'src/components/glass-modal/index.ts'
+        ),
+
+        // Utility entries
         tokens: resolve(__dirname, 'src/tokens/index.ts'),
-        // Context provider entry
         providers: resolve(__dirname, 'src/providers/index.ts'),
-        // Documentation wrapper components
         documentation: resolve(__dirname, 'src/documentation/index.tsx'),
       },
       name: 'LiquidUI',
@@ -142,13 +142,12 @@ export default defineConfig({
         return `${entryName}.${extension}`;
       },
     },
-    // Enhanced Rollup options - optimized for potential Rolldown migration
+
     rollupOptions: {
-      // External dependencies - these won't be bundled
       external: [
         'react',
         'react-dom',
-        'react/jsx-runtime', // Critical for React 19
+        'react/jsx-runtime',
         'react-dom/client',
         'framer-motion',
         'lucide-react',
@@ -159,32 +158,28 @@ export default defineConfig({
         'class-variance-authority',
         'clsx',
         'tailwind-merge',
-        'gsap',
         'tailwindcss-animate',
-        // Add any other peer dependencies
         /^@radix-ui\//,
         /^react\//,
       ],
       output: [
-        // ESM output with better tree-shaking
+        // ESM output
         {
           format: 'es',
           dir: 'dist',
           entryFileNames: '[name].mjs',
           chunkFileNames: 'chunks/[name]-[hash].mjs',
-          // Preserve modules for optimal tree-shaking
           preserveModules: true,
           preserveModulesRoot: 'src',
           exports: 'named',
         },
-        // CommonJS output for backward compatibility
+        // CommonJS output
         {
           format: 'cjs',
           dir: 'dist/cjs',
           entryFileNames: '[name].cjs',
           chunkFileNames: 'chunks/[name]-[hash].cjs',
           exports: 'named',
-          // interop removed as it's not supported in rolldown
           globals: {
             react: 'React',
             'react-dom': 'ReactDOM',
@@ -195,18 +190,14 @@ export default defineConfig({
             '@radix-ui/react-slot': 'RadixSlot',
             clsx: 'clsx',
             'tailwind-merge': 'tailwindMerge',
-            gsap: 'gsap',
           },
         },
       ],
     },
-    // Enable source maps for debugging
+
     sourcemap: true,
-    // Clean dist folder before build
     emptyOutDir: true,
-    // Target modern ESM for better tree-shaking
     target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
-    // Minification settings
     minify: 'terser',
     terserOptions: {
       compress: {

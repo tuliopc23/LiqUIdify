@@ -148,7 +148,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         return 'File type not allowed';
       }
 
-      return ;
+      return undefined;
     };
 
     // Create file preview
@@ -168,7 +168,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     // Process files
     const processFiles = useCallback(
       async (fileList: File[]) => {
-        if (disabled) {return;}
+        if (disabled) {return undefined;}
 
         const newFiles: FileUploadItem[] = [];
 
@@ -258,7 +258,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 
     // Handle upload
     const handleUpload = async (filesToUpload: FileUploadItem[]) => {
-      if (!onUpload) {return;}
+      if (!onUpload) {return undefined;}
 
       setUploadState('uploading');
 

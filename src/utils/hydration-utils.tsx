@@ -253,7 +253,7 @@ export function useProgressiveEnhancement() {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return;
+      return undefined;
     }
 
     const checks = {

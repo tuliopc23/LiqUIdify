@@ -270,13 +270,13 @@ export class VisualPolishManager {
     preset: keyof typeof MICRO_INTERACTION_PRESETS | MicroInteraction
   ): void {
     if (!this.config.enableMicroInteractions) {
-      return;
+      return undefined;
     }
 
     if ('string' === typeof preset) {
       const presetConfig = MICRO_INTERACTION_PRESETS[preset];
       if (!presetConfig) {
-        return;
+        return undefined;
       }
 
       const interaction: MicroInteraction = {
@@ -436,7 +436,7 @@ export class VisualPolishManager {
     threshold: number = 0.01
   ): void {
     if (!this.config.enableVisualRegression) {
-      return;
+      return undefined;
     }
 
     const test: VisualRegressionTest = {
@@ -460,7 +460,7 @@ export class VisualPolishManager {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       if (!ctx) {
-        return;
+        return undefined;
       }
 
       const rect = test.element.getBoundingClientRect();
@@ -513,7 +513,7 @@ export class VisualPolishManager {
     expectedValue: string
   ): void {
     if (!this.config.enableCrossBrowserTesting) {
-      return;
+      return undefined;
     }
 
     const test: CrossBrowserTest = {

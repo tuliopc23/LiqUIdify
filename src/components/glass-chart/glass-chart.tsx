@@ -53,7 +53,7 @@ export const LineChart: React.FC<LineChartProps> = ({
     setMounted(true);
   }, []);
 
-  if (!data.length) {return ;}
+  if (!data.length) {return undefined;}
 
   const maxValue = Math.max(...data.map(d => d.value));
   const minValue = Math.min(...data.map(d => d.value));
@@ -213,7 +213,7 @@ export const BarChart: React.FC<BarChartProps> = ({
     setMounted(true);
   }, []);
 
-  if (!data.length) {return ;}
+  if (!data.length) {return undefined;}
 
   const maxValue = Math.max(...data.map(d => d.value));
   const padding = 40;
@@ -303,7 +303,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
     setMounted(true);
   }, []);
 
-  if (!data.length) {return ;}
+  if (!data.length) {return undefined;}
 
   const total = data.reduce((sum, item) => sum + item.value, 0);
   const radius = Math.min(width, height) / 2 - 20;

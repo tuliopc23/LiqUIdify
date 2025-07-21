@@ -46,10 +46,10 @@ const createEnhancedGlassLayers = (children: React.ReactNode, options: any) => {
 };
 
 const useEnhancedAppleLiquidGlass = (options: any) => {
-  return { 
-    containerRef: null,
+  return {
+    containerRef: undefined,
     variant: { radius: 12 },
-    isReady: true 
+    isReady: true,
   };
 };
 import { LiquidGlassSvgFilters } from './liquid-glass-svg-filters';
@@ -345,11 +345,7 @@ export const EnhancedAppleLiquidGlassModal = forwardRef<
 export const EnhancedAppleLiquidGlassShowcase: React.FC<{
   className?: string;
 }> = ({ className = '' }) => {
-  const intensities = [
-    'subtle',
-    'medium',
-    'strong',
-  ] as const;
+  const intensities = ['subtle', 'medium', 'strong'] as const;
 
   return (
     <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${className}`}>

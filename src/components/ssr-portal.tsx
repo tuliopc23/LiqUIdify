@@ -26,7 +26,7 @@ export const SSRPortal = ({ children, to = 'body' }: SSRPortalProps) => {
   }, [to]);
 
   if (isServer || !mounted || !container) {
-    return;
+    return undefined;
   }
 
   return createPortal(children, container);

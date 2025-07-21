@@ -153,7 +153,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
     // Handle option selection
     const handleSelect = (option: ComboboxOption) => {
-      if (option.disabled) {return;}
+      if (option.disabled) {return undefined;}
 
       setSelectedValue(option.value);
       onChange?.(option.value);
@@ -172,7 +172,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
     // Handle keyboard navigation
     const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (disabled) {return;}
+      if (disabled) {return undefined;}
 
       switch (e.key) {
         case 'ArrowDown':

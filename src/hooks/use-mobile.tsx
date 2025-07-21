@@ -9,7 +9,7 @@ export function useIsMobile() {
 
   React.useEffect(() => {
     if ('undefined' === typeof window) {
-      return;
+      return undefined;
     }
 
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);

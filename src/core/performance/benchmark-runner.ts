@@ -400,7 +400,7 @@ class LiqUIdifyBenchmarkRunner {
    * Setup performance observers
    */
   private setupPerformanceObservers(): void {
-    if ('undefined' === typeof window) {return;}
+    if ('undefined' === typeof window) {return undefined;}
 
     // Frame timing observer
     const frameObserver = new PerformanceObserver(list => {

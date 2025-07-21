@@ -526,7 +526,7 @@ export class AccessibilityManager {
           reason: `Unknown ARIA attribute: ${attrName}`,
           element,
         });
-        return;
+        return undefined;
       }
 
       // Validate attribute value
@@ -631,7 +631,7 @@ export class AccessibilityManager {
    */
   enableRealTimeMonitoring(rootElement: HTMLElement = document.body): void {
     if (!this.observer) {
-      return;
+      return undefined;
     }
 
     this.observer.observe(rootElement, {
@@ -944,7 +944,7 @@ class FocusTrap {
 
   activate(): void {
     if (this.active) {
-      return;
+      return undefined;
     }
 
     this.active = true;
@@ -976,7 +976,7 @@ class FocusTrap {
 
   deactivate(): void {
     if (!this.active) {
-      return;
+      return undefined;
     }
 
     this.active = false;
@@ -1009,14 +1009,14 @@ class FocusTrap {
 
   private handleKeyDown = (event: KeyboardEvent): void => {
     if (!this.active) {
-      return;
+      return undefined;
     }
 
     if ('Tab' === event.key) {
       this.updateFocusableElements();
 
       if (!this.firstFocusableElement || !this.lastFocusableElement) {
-        return;
+        return undefined;
       }
 
       if (
@@ -1039,7 +1039,7 @@ class FocusTrap {
 
   private handleClickOutside = (event: MouseEvent): void => {
     if (!this.active) {
-      return;
+      return undefined;
     }
 
     const target = event.target as HTMLElement;

@@ -42,7 +42,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
 
     const updateValue = useCallback(
       (clientX: number) => {
-        if (!sliderRef.current) {return;}
+        if (!sliderRef.current) {return undefined;}
 
         const rect = sliderRef.current.getBoundingClientRect();
         const percentage = Math.max(
@@ -61,7 +61,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
 
     const handleMouseMove = useCallback(
       (e: MouseEvent) => {
-        if (!isDragging || disabled) {return;}
+        if (!isDragging || disabled) {return undefined;}
         updateValue(e.clientX);
       },
       [isDragging, disabled, updateValue]
@@ -72,7 +72,7 @@ export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
     }, []);
 
     const handleMouseDown = (e: React.MouseEvent) => {
-      if (disabled) {return;}
+      if (disabled) {return undefined;}
 
       setIsDragging(true);
       updateValue(e.clientX);

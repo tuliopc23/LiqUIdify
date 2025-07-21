@@ -7,9 +7,9 @@
  * - Apple-inspired motion patterns and presets
  */
 
-import { gsap } from 'gsap';
-import type { AnimationType } from './glass-animations';
-import { GLASS_EASINGS } from './glass-animations';
+// import { gsap } from 'gsap';
+import type { AnimationType } from "./glass-animations";
+import { GLASS_EASINGS } from "./glass-animations";
 
 /**
  * Animation sequence configuration
@@ -50,7 +50,7 @@ export const APPLE_MOTION_PRESETS = {
     from: { opacity: 0, y: 20 },
     to: { opacity: 1, y: 0 },
     duration: 0.6,
-    ease: 'power2.out',
+    ease: "power2.out",
     stagger: 0.1,
   },
 
@@ -58,7 +58,7 @@ export const APPLE_MOTION_PRESETS = {
     from: { opacity: 0, x: -30 },
     to: { opacity: 1, x: 0 },
     duration: 0.5,
-    ease: 'power2.out',
+    ease: "power2.out",
     stagger: 0.08,
   },
 
@@ -67,25 +67,25 @@ export const APPLE_MOTION_PRESETS = {
     from: { opacity: 0, scale: 0.8 },
     to: { opacity: 1, scale: 1 },
     duration: 0.8,
-    ease: 'elastic.out(1, 0.3)',
+    ease: "elastic.out(1, 0.3)",
     stagger: 0.05,
   },
 
   // Liquid flow effect
   liquidFlow: {
-    from: { opacity: 0, scaleY: 0.3, transformOrigin: 'center bottom' },
+    from: { opacity: 0, scaleY: 0.3, transformOrigin: "center bottom" },
     to: { opacity: 1, scaleY: 1 },
     duration: 1.2,
-    ease: 'power2.out',
+    ease: "power2.out",
     stagger: 0.15,
   },
 
   // Magnetic reveal
   magneticReveal: {
-    from: { opacity: 0, scale: 0.9, filter: 'blur(10px)' },
-    to: { opacity: 1, scale: 1, filter: 'blur(0px)' },
+    from: { opacity: 0, scale: 0.9, filter: "blur(10px)" },
+    to: { opacity: 1, scale: 1, filter: "blur(0px)" },
     duration: 0.9,
-    ease: 'power3.out',
+    ease: "power3.out",
     stagger: 0.12,
   },
 
@@ -93,18 +93,18 @@ export const APPLE_MOTION_PRESETS = {
   glassMorph: {
     from: {
       opacity: 0,
-      backdropFilter: 'blur(0px)',
+      backdropFilter: "blur(0px)",
       scale: 0.95,
-      background: 'rgba(255, 255, 255, 0)',
+      background: "rgba(255, 255, 255, 0)",
     },
     to: {
       opacity: 1,
-      backdropFilter: 'blur(20px)',
+      backdropFilter: "blur(20px)",
       scale: 1,
-      background: 'rgba(255, 255, 255, 0.1)',
+      background: "rgba(255, 255, 255, 0.1)",
     },
     duration: 1,
-    ease: 'power2.out',
+    ease: "power2.out",
     stagger: 0.08,
   },
 
@@ -113,7 +113,7 @@ export const APPLE_MOTION_PRESETS = {
     from: { y: 0 },
     to: { y: -10 },
     duration: 2,
-    ease: 'sine.inOut',
+    ease: "sine.inOut",
     repeat: -1,
     yoyo: true,
     stagger: 0.3,
@@ -124,7 +124,7 @@ export const APPLE_MOTION_PRESETS = {
     from: { scale: 1, opacity: 0.8 },
     to: { scale: 1.05, opacity: 1 },
     duration: 1.5,
-    ease: 'sine.inOut',
+    ease: "sine.inOut",
     repeat: -1,
     yoyo: true,
     stagger: 0.2,
@@ -149,11 +149,11 @@ export class ChoreographyTiming {
    * Create dynamic easing based on animation context
    */
   static createContextualEasing(
-    context: 'entrance' | 'exit' | 'hover' | 'focus'
+    context: "entrance" | "exit" | "hover" | "focus",
   ): string {
     const easingMap = {
       entrance: GLASS_EASINGS.smoothOut,
-      exit: 'power2.in', // smoothIn easing for exit animations
+      exit: "power2.in", // smoothIn easing for exit animations
       hover: GLASS_EASINGS.magnetic,
       focus: GLASS_EASINGS.elastic,
     };
@@ -167,7 +167,7 @@ export class ChoreographyTiming {
   static calculateOptimalDuration(
     distance: number,
     elementSize: number,
-    baseSpeed: number = 1000
+    baseSpeed: number = 1000,
   ): number {
     // Larger elements and longer distances need more time
     const sizeFactor = Math.log(elementSize / 100 + 1);
@@ -175,7 +175,7 @@ export class ChoreographyTiming {
 
     return Math.max(
       0.3,
-      Math.min(2, (distanceFactor * sizeFactor) / baseSpeed)
+      Math.min(2, (distanceFactor * sizeFactor) / baseSpeed),
     );
   }
 }
@@ -246,7 +246,7 @@ export class AdvancedChoreographer {
     }
 
     if (sequence.onUpdate) {
-      this.timeline.eventCallback('onUpdate', () => {
+      this.timeline.eventCallback("onUpdate", () => {
         sequence.onUpdate!(this.timeline.progress());
       });
     }
@@ -262,8 +262,8 @@ export class AdvancedChoreographer {
     this.timeline.play();
 
     // Return promise that resolves when sequence completes
-    return new Promise(resolve => {
-      this.timeline.eventCallback('onComplete', resolve);
+    return new Promise((resolve) => {
+      this.timeline.eventCallback("onComplete", resolve);
     });
   }
 
@@ -296,7 +296,7 @@ export class AdvancedChoreographer {
             ease: ease || GLASS_EASINGS.smoothOut,
             force3D: true,
           },
-          elementStartTime
+          elementStartTime,
         );
       }
     });
@@ -308,7 +308,7 @@ export class AdvancedChoreographer {
   executePreset(
     presetName: keyof typeof APPLE_MOTION_PRESETS,
     elements: HTMLElement[],
-    options: Partial<ChoreographyStep> = {}
+    options: Partial<ChoreographyStep> = {},
   ): gsap.core.Timeline {
     const preset = APPLE_MOTION_PRESETS[presetName];
     const timeline = gsap.timeline();
@@ -333,13 +333,13 @@ export class AdvancedChoreographer {
    */
   createStaggeredEntrance(
     elements: HTMLElement[],
-    type: 'fadeIn' | 'slideIn' | 'scaleIn' | 'liquidFlow' = 'fadeIn'
+    type: "fadeIn" | "slideIn" | "scaleIn" | "liquidFlow" = "fadeIn",
   ): gsap.core.Timeline {
     const presetMap = {
-      fadeIn: 'fadeInUp',
-      slideIn: 'slideInLeft',
-      scaleIn: 'scaleIn',
-      liquidFlow: 'liquidFlow',
+      fadeIn: "fadeInUp",
+      slideIn: "slideInLeft",
+      scaleIn: "scaleIn",
+      liquidFlow: "liquidFlow",
     } as const;
 
     return this.executePreset(presetMap[type], elements);
@@ -354,19 +354,19 @@ export class AdvancedChoreographer {
       strength?: number;
       duration?: number;
       stagger?: number;
-    } = {}
+    } = {},
   ): void {
     const { strength = 0.05, duration = 0.3, stagger = 0.02 } = options;
 
     elements.forEach((element, index) => {
       const delay = index * stagger;
 
-      element.addEventListener('mouseenter', () => {
+      element.addEventListener("mouseenter", () => {
         gsap.to(element, {
           scale: 1 + strength,
           y: -5,
           duration,
-          ease: 'power2.out',
+          ease: "power2.out",
           delay,
           force3D: true,
         });
@@ -380,7 +380,7 @@ export class AdvancedChoreographer {
             gsap.to(otherElement, {
               scale: 1 + neighborStrength,
               duration: duration * 1.2,
-              ease: 'power2.out',
+              ease: "power2.out",
               delay: delay + distance * 0.01,
               force3D: true,
             });
@@ -388,22 +388,22 @@ export class AdvancedChoreographer {
         });
       });
 
-      element.addEventListener('mouseleave', () => {
+      element.addEventListener("mouseleave", () => {
         gsap.to(element, {
           scale: 1,
           y: 0,
           duration: duration * 1.2,
-          ease: 'power2.out',
+          ease: "power2.out",
           force3D: true,
         });
 
         // Reset surrounding elements
-        elements.forEach(otherElement => {
+        elements.forEach((otherElement) => {
           if (otherElement !== element) {
             gsap.to(otherElement, {
               scale: 1,
               duration: duration * 1.5,
-              ease: 'power2.out',
+              ease: "power2.out",
               force3D: true,
             });
           }
@@ -421,13 +421,13 @@ export class AdvancedChoreographer {
       threshold?: number;
       once?: boolean;
       preset?: keyof typeof APPLE_MOTION_PRESETS;
-    } = {}
+    } = {},
   ): void {
-    const { threshold = 0.1, once = true, preset = 'fadeInUp' } = options;
+    const { threshold = 0.1, once = true, preset = "fadeInUp" } = options;
 
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const element = entry.target as HTMLElement;
             const elementIndex = elements.indexOf(element);
@@ -444,11 +444,11 @@ export class AdvancedChoreographer {
       },
       {
         threshold,
-        rootMargin: '50px',
-      }
+        rootMargin: "50px",
+      },
     );
 
-    elements.forEach(element => {
+    elements.forEach((element) => {
       observer.observe(element);
     });
   }
@@ -459,7 +459,7 @@ export class AdvancedChoreographer {
   stopAll(): void {
     this.timeline.kill();
     this.activeAnimations.clear();
-    gsap.killTweensOf('*');
+    gsap.killTweensOf("*");
   }
 
   /**
@@ -506,7 +506,7 @@ export const ChoreographyUtils = {
   stagger: (
     elements: HTMLElement[],
     preset: keyof typeof APPLE_MOTION_PRESETS,
-    options?: Partial<ChoreographyStep>
+    options?: Partial<ChoreographyStep>,
   ) => {
     return globalChoreographer.executePreset(preset, elements, options);
   },
@@ -516,7 +516,7 @@ export const ChoreographyUtils = {
    */
   entrance: (
     elements: HTMLElement[],
-    type: 'fadeIn' | 'slideIn' | 'scaleIn' | 'liquidFlow' = 'fadeIn'
+    type: "fadeIn" | "slideIn" | "scaleIn" | "liquidFlow" = "fadeIn",
   ) => {
     return globalChoreographer.createStaggeredEntrance(elements, type);
   },
@@ -526,7 +526,7 @@ export const ChoreographyUtils = {
    */
   hover: (
     elements: HTMLElement[],
-    options?: { strength?: number; duration?: number; stagger?: number }
+    options?: { strength?: number; duration?: number; stagger?: number },
   ) => {
     return globalChoreographer.createHoverChoreography(elements, options);
   },
@@ -540,7 +540,7 @@ export const ChoreographyUtils = {
       threshold?: number;
       once?: boolean;
       preset?: keyof typeof APPLE_MOTION_PRESETS;
-    }
+    },
   ) => {
     return globalChoreographer.createScrollChoreography(elements, options);
   },

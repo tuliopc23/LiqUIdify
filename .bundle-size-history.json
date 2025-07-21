@@ -5,7 +5,7 @@
     "gzipped": 113,
     "rawKB": "0.20",
     "gzippedKB": "0.11",
-    "timestamp": "2025-07-21T18:13:41.834Z"
+    "timestamp": "2025-07-21T19:50:42.383Z"
   },
   "index": {
     "file": "index.mjs",
@@ -13,7 +13,7 @@
     "gzipped": 2199,
     "rawKB": "10.31",
     "gzippedKB": "2.15",
-    "timestamp": "2025-07-21T18:13:41.834Z"
+    "timestamp": "2025-07-21T19:50:42.383Z"
   },
   "documentation": {
     "file": "documentation.mjs",
@@ -21,7 +21,7 @@
     "gzipped": 404,
     "rawKB": "1.59",
     "gzippedKB": "0.39",
-    "timestamp": "2025-07-21T18:13:41.834Z"
+    "timestamp": "2025-07-21T19:50:42.383Z"
   },
   "index-modular": {
     "file": "index-modular.mjs",
@@ -29,7 +29,7 @@
     "gzipped": 1156,
     "rawKB": "3.88",
     "gzippedKB": "1.13",
-    "timestamp": "2025-07-21T18:13:41.834Z"
+    "timestamp": "2025-07-21T19:50:42.383Z"
   },
   "providers": {
     "file": "providers.mjs",
@@ -37,6 +37,6 @@
     "gzipped": 202,
     "rawKB": "0.59",
     "gzippedKB": "0.20",
-    "timestamp": "2025-07-21T18:13:41.834Z"
+    "timestamp": "2025-07-21T19:50:42.383Z"
   }
 }

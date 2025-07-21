@@ -56,7 +56,7 @@ export const safeLocalStorage = (): Storage | null => {
   try {
     return isBrowser() && window.localStorage ? window.localStorage : undefined;
   } catch {
-    return;
+    return undefined;
   }
 };
 
@@ -70,7 +70,7 @@ export const safeSessionStorage = (): Storage | null => {
       ? window.sessionStorage
       : undefined;
   } catch {
-    return;
+    return undefined;
   }
 };
 
@@ -202,7 +202,7 @@ export const safeSetTimeout = (
   if ('undefined' !== typeof setTimeout) {
     return setTimeout(callback, delay);
   }
-  return;
+  return undefined;
 };
 
 /**
@@ -228,7 +228,7 @@ export const safeSetInterval = (
   if ('undefined' !== typeof setInterval) {
     return setInterval(callback, delay);
   }
-  return;
+  return undefined;
 };
 
 /**
@@ -337,14 +337,14 @@ export const safeDynamicImport = async <T>(
   importFn: () => Promise<T>
 ): Promise<T | null> => {
   if (!isBrowser()) {
-    return;
+    return undefined;
   }
 
   try {
     return await importFn();
   } catch (error) {
     console.error('Dynamic import failed:', error);
-    return;
+    return undefined;
   }
 };
 
@@ -372,7 +372,7 @@ export const safeIntersectionObserver = (
     return new IntersectionObserver(callback, options);
   }
 
-  return;
+  return undefined;
 };
 
 /**
@@ -389,7 +389,7 @@ export const safeResizeObserver = (
     return new ResizeObserver(callback);
   }
 
-  return;
+  return undefined;
 };
 
 /**
@@ -406,7 +406,7 @@ export const safeMutationObserver = (
     return new MutationObserver(callback);
   }
 
-  return;
+  return undefined;
 };
 
 /**

@@ -167,7 +167,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 
   // Auto-refresh
   useEffect(() => {
-    if (!realTimeUpdates) {return;}
+    if (!realTimeUpdates) {return undefined;}
 
     const interval = setInterval(async () => {
       setIsRefreshing(true);

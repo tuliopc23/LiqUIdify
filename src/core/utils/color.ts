@@ -79,7 +79,7 @@ export function parseColor(color: string): RGBColor | null {
     return hslToRgb(h, s, l, a);
   }
 
-  return ;
+  return undefined;
 }
 
 /**
@@ -396,7 +396,7 @@ export const glassColors = {
  */
 export function getColorInfo(color: string): ColorInfo | null {
   const rgb = parseColor(color);
-  if (!rgb) {return ;}
+  if (!rgb) {return undefined;}
 
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
   const luminance = getLuminance(rgb);

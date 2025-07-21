@@ -60,7 +60,7 @@ class ErrorTrackingSystem {
       console.info(
         '[ErrorTracking] Error tracking disabled or no DSN provided'
       );
-      return;
+      return undefined;
     }
 
     try {
@@ -87,7 +87,7 @@ class ErrorTrackingSystem {
           ((event, _hint) => {
             // Filter out known non-critical errors
             if ('NetworkError' === event.exception?.values?.[0]?.type) {
-              return;
+              return undefined;
             }
 
             // Sanitize sensitive data
@@ -157,7 +157,7 @@ class ErrorTrackingSystem {
    */
   trackEvent(eventName: string, data?: Record<string, any>): void {
     if (!this.isInitialized || !this.sentry) {
-      return;
+      return undefined;
     }
 
     this.sentry.addBreadcrumb({
@@ -176,7 +176,7 @@ class ErrorTrackingSystem {
     user: { id?: string; email?: string; username?: string } | null
   ): void {
     if (!this.isInitialized || !this.sentry) {
-      return;
+      return undefined;
     }
 
     if (user) {
@@ -195,7 +195,7 @@ class ErrorTrackingSystem {
    */
   setContext(key: string, context: Record<string, any>): void {
     if (!this.isInitialized || !this.sentry) {
-      return;
+      return undefined;
     }
     this.sentry.setContext(key, context);
   }
@@ -205,7 +205,7 @@ class ErrorTrackingSystem {
    */
   setTags(tags: Record<string, string>): void {
     if (!this.isInitialized || !this.sentry) {
-      return;
+      return undefined;
     }
     this.sentry.setTags(tags);
   }

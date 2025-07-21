@@ -123,7 +123,7 @@ class LiqUIdifySentryIntegration {
     // Skip initialization in test environment
     if (isTest) {
       console.log('[LiqUIdify] Sentry disabled in test environment');
-      return;
+      return undefined;
     }
 
     // Skip if no DSN provided
@@ -133,7 +133,7 @@ class LiqUIdifySentryIntegration {
           '[LiqUIdify] Sentry DSN not provided - error tracking disabled'
         );
       }
-      return;
+      return undefined;
     }
 
     try {
@@ -304,7 +304,7 @@ class LiqUIdifySentryIntegration {
     context: LiqUIdifyErrorContext = {}
   ): void {
     if (!this.initialized || !this.sentryConfig.enablePerformanceMonitoring)
-      {return;}
+      {return undefined;}
 
     Sentry.withScope(scope => {
       scope.setTag('liquidify.performance_issue', 'true');
@@ -345,7 +345,7 @@ class LiqUIdifySentryIntegration {
     level: SeverityLevel = 'info',
     data?: Record<string, any>
   ): void {
-    if (!this.initialized) {return;}
+    if (!this.initialized) {return undefined;}
 
     Sentry.addBreadcrumb({
       message,
@@ -362,7 +362,7 @@ class LiqUIdifySentryIntegration {
    * Set user context with privacy protection
    */
   public setUserContext(user?: Partial<User>): void {
-    if (!this.initialized) {return;}
+    if (!this.initialized) {return undefined;}
 
     const userContext: User = {
       id: this.sentryConfig.enableUserPrivacy
@@ -471,17 +471,17 @@ class LiqUIdifySentryIntegration {
   private beforeSendFilter(event: any, _hint?: any): any {
     // Skip if in development and error is not LiqUIdify related
     if (isDevelopment && !this.isLiqUIdifyError(event)) {
-      return ;
+      return undefined;
     }
 
     // Filter out common browser extension errors
     if (this.isBrowserExtensionError(event)) {
-      return ;
+      return undefined;
     }
 
     // Filter out network errors that aren't actionable
     if (this.isNetworkError(event)) {
-      return ;
+      return undefined;
     }
 
     // Sanitize sensitive data
@@ -494,7 +494,7 @@ class LiqUIdifySentryIntegration {
   private _beforeSendTransactionFilter(event: any): any {
     // Only send performance data for LiqUIdify components
     if (!event.transaction?.includes('liquidify')) {
-      return ;
+      return undefined;
     }
     return event;
   }
@@ -654,7 +654,7 @@ class LiqUIdifySentryIntegration {
       !this.sentryConfig.enablePerformanceMonitoring ||
       'undefined' === typeof window
     ) {
-      return;
+      return undefined;
     }
 
     // Monitor LCP, FID, CLS for LiqUIdify components

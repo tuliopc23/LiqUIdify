@@ -1,0 +1,764 @@
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a complex expression in the dependency array.
+     ,-[src/utils/hydration-utils.tsx:348:19]
+ 347 |     }
+ 348 |   }, [isHydrated, ...deps]);
+     :                   ^^^^^^^
+ 349 | 
+     `----
+  help: Extract the expression to a separate variable so it can be statically checked.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'factory'
+     ,-[src/utils/hydration-utils.tsx:348:6]
+ 347 |     }
+ 348 |   }, [isHydrated, ...deps]);
+     :      ^^^^^^^^^^^^^^^^^^^^^
+ 349 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a complex expression in the dependency array.
+     ,-[src/providers/enhanced-ssr-provider.tsx:160:17]
+ 159 |     }
+ 160 |   }, [isClient, ...deps]);
+     :                 ^^^^^^^
+ 161 | 
+     `----
+  help: Extract the expression to a separate variable so it can be statically checked.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'factory'
+     ,-[src/providers/enhanced-ssr-provider.tsx:160:6]
+ 159 |     }
+ 160 |   }, [isClient, ...deps]);
+     :      ^^^^^^^^^^^^^^^^^^^
+ 161 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+    ,-[src/pages/apple-liquid-glass-showcase.tsx:66:15]
+ 65 |             <div>
+ 66 |               <label className="block text-white text-sm font-medium mb-2">
+    :               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 67 |                 Intensity
+    `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+    ,-[src/pages/apple-liquid-glass-showcase.tsx:92:15]
+ 91 |             <div>
+ 92 |               <label className="block text-white text-sm font-medium mb-2">
+    :               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 93 |                 Effects
+    `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+    ,-[src/lite/glass-modal-lite.tsx:61:7]
+ 60 |         <GlassPortal>
+ 61 | ,->       <div
+ 62 | |           className={cn(
+ 63 | |             'glass-modal-lite-backdrop',
+ 64 | |             'fixed inset-0 z-50',
+ 65 | |             'flex items-center justify-center p-4',
+ 66 | |             'bg-black/50 backdrop-blur-sm',
+ 67 | |             'transition-opacity duration-200',
+ 68 | |             isOpen ? 'opacity-100' : 'opacity-0'
+ 69 | |           )}
+ 70 | |           onClick={onClose}
+ 71 | `->       >
+ 72 |             <div
+    `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+    ,-[src/lite/glass-modal-lite.tsx:72:9]
+ 71 |           >
+ 72 | ,->         <div
+ 73 | |             ref={modalRef}
+ 74 | |             className={cn(
+ 75 | |               'glass-modal-lite',
+ 76 | |               'glass-effect rounded-2xl p-6',
+ 77 | |               'w-full',
+ 78 | |               'transition-transform duration-200',
+ 79 | |               'transform',
+ 80 | |               isOpen ? 'scale-100' : 'scale-95',
+ 81 | |               sizeClasses[size],
+ 82 | |               className
+ 83 | |             )}
+ 84 | |             onClick={e => e.stopPropagation()}
+ 85 | |             role="dialog"
+ 86 | |             aria-modal="true"
+ 87 | |             aria-labelledby={title ? 'modal-title' : undefined}
+ 88 | `->         >
+ 89 |               {title && (
+    `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-card-refactored/glass-card.tsx:297:9]
+ 296 |           <CardContext.Provider value={contextValue}>
+ 297 | ,->         <div
+ 298 | |             ref={ref}
+ 299 | |             className={componentClasses}
+ 300 | |             style={glassVariables as React.CSSProperties}
+ 301 | |             onClick={handleClick}
+ 302 | |             onMouseEnter={handleMouseEnter}
+ 303 | |             onMouseLeave={handleMouseLeave}
+ 304 | |             role={interactive || selectable ? 'button' : undefined}
+ 305 | |             tabIndex={interactive || selectable ? 0 : undefined}
+ 306 | |             {...props}
+ 307 | `->         >
+ 308 |               {children}
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useCallback has a dependency array that changes every render.
+     ,-[src/hooks/use-glass-animations.ts:144:5]
+ 143 |     },
+ 144 |     [config]
+     :     ^^^^^^^^
+ 145 |   );
+     `----
+  help: Try memoizing this variable with `useRef` or `useCallback`.
+
+  x eslint-plugin-react(exhaustive-deps): React Hook useCallback has unnecessary dependency: intensity
+     ,-[src/hooks/use-glass-animations.ts:188:5]
+ 187 |     },
+ 188 |     [currentState, cancel, intensity]
+     :     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 189 |   );
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react(exhaustive-deps): React Hook useCallback has unnecessary dependency: color
+     ,-[src/hooks/use-glass-animations.ts:287:6]
+ 286 |     // Ripple effect implementation
+ 287 |   }, [animate, color, timing]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^
+ 288 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react(exhaustive-deps): React Hook useCallback has unnecessary dependency: timing
+     ,-[src/hooks/use-glass-animations.ts:287:6]
+ 286 |     // Ripple effect implementation
+ 287 |   }, [animate, color, timing]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^
+ 288 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react(exhaustive-deps): React Hook useCallback has unnecessary dependency: animate
+     ,-[src/hooks/use-glass-animations.ts:287:6]
+ 286 |     // Ripple effect implementation
+ 287 |   }, [animate, color, timing]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^
+ 288 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react(jsx-key): "key" prop must be placed before any `{...spread}`
+     ,-[src/core/create-polymorphic-component.tsx:157:43]
+ 156 |     return (
+ 157 |       <ElementComponent {...elementProps} key={undefined}>
+     :                                           ^^^
+ 158 |         {children}
+     `----
+  help: To avoid conflicting with React's new JSX transform: https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has an unnecessary dependency: respectReducedMotion.
+    ,-[src/core/graceful-degradation.tsx:57:9]
+ 56 |       return () => mediaQuery.removeEventListener('change', handleChange);
+ 57 |     }, [respectReducedMotion]);
+    :         ^^^^^^^^^^^^^^^^^^^^
+ 58 | 
+    `----
+  help: Consider removing it from the dependency array. Outer scope values aren't valid dependencies because mutating them doesn't re-render the component.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has an unnecessary dependency: feature.
+     ,-[src/core/graceful-degradation.tsx:251:9]
+ 250 |       }
+ 251 |     }, [feature]);
+     :         ^^^^^^^
+ 252 | 
+     `----
+  help: Consider removing it from the dependency array. Outer scope values aren't valid dependencies because mutating them doesn't re-render the component.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'options'
+     ,-[src/hooks/use-ssr-safe.ts:379:6]
+ 378 |     };
+ 379 |   }, [isClient, callback, options.root, options.rootMargin, options.threshold]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 380 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'config'
+     ,-[src/lib/visual-polish-system.ts:732:6]
+ 731 |     };
+ 732 |   }, []);
+     :      ^^
+ 733 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect was passed a dependency list that is not an array literal. This means we can't statically verify whether you've passed the correct dependencies.
+    ,-[src/hooks/use-ssr-safe-hooks.ts:11:6]
+ 10 |     }
+ 11 |   }, deps);
+    :      ^^^^
+ 12 | };
+    `----
+  help: Use an array literal as the second argument.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has missing dependencies: 'enableMagnetic', and 'enableSpring'
+     ,-[src/lib/glass-physics-engine.ts:739:6]
+ 738 |     };
+ 739 |   }, [springConfig, magneticConfig, choreographyConfig]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 740 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has missing dependencies: 'componentName', and 'props'
+    ,-[src/hooks/use-performance-monitoring.tsx:28:6]
+ 27 |     };
+ 28 |   }, []);
+    :      ^^
+ 29 | 
+    `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect contains a call to setState. Without a list of dependencies, this can lead to an infinite chain of updates.
+    ,-[src/hooks/use-performance-monitoring.tsx:31:3]
+ 30 |   // Track each render
+ 31 |   useEffect(() => {
+    :   ^^^^^^^^^
+ 32 |     const renderTime = performance.now() - renderStartTime.current;
+    `----
+  help: Consider adding an empty list of dependencies to make it clear which values are intended to be stable.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-modal/glass-modal.tsx:108:5]
+ 107 |       const modalContent = (
+ 108 | ,->     <div
+ 109 | |         className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
+ 110 | |         onClick={handleBackdropClick}
+ 111 | `->     >
+ 112 |           <GlassFocusTrap
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-modal/glass-modal.tsx:118:9]
+ 117 |           >
+ 118 | ,->         <div
+ 119 | |             ref={modalRef}
+ 120 | |             role="dialog"
+ 121 | |             aria-modal="true"
+ 122 | |             aria-labelledby={title ? titleId : undefined}
+ 123 | |             aria-describedby={descriptionId}
+ 124 | |             className={cn(
+ 125 | |               'glass-modal',
+ 126 | |               'glass-effect rounded-2xl p-8 w-full animate-scale',
+ 127 | |               'outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+ 128 | |               className
+ 129 | |             )}
+ 130 | |             onClick={(e) => e.stopPropagation()}
+ 131 | `->         >
+ 132 |               {title && (
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-popover/glass-popover.tsx:199:7]
+ 198 |         <>
+ 199 | ,->       <div
+ 200 | |           ref={triggerRef}
+ 201 | |           onClick={toggleOpen}
+ 202 | |           className={cn('inline-block cursor-pointer', className)}
+ 203 | `->       >
+ 204 |             {trigger}
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'setOpen'
+     ,-[src/components/glass-popover/glass-popover.tsx:177:6]
+ 176 |     return undefined;
+ 177 |   }, [isOpen, closeOnClickOutside, closeOnEscape]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 178 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-command/glass-command.tsx:217:7]
+ 216 |           {/* Backdrop */}
+ 217 | ,->       <div
+ 218 | |           className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+ 219 | |           onClick={handleClose}
+ 220 | `->       />
+ 221 |     
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'handleClose'
+     ,-[src/components/glass-command/glass-command.tsx:110:6]
+ 109 |     };
+ 110 |   }, [isOpen, selectedIndex, allFilteredItems]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 111 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-notification/glass-notification.tsx:138:17]
+ 137 |                   notifications.map(notification => (
+ 138 | ,->                 <div
+ 139 | |                     key={notification.id}
+ 140 | |                     className={cn(
+ 141 | |                       'p-4 border-b border-[var(--glass-border)] last:border-b-0',
+ 142 | |                       'hover:bg-[var(--glass-bg)] cursor-pointer',
+ 143 | |                       microInteraction.gentle,
+ 144 | |                       !notification.read && 'bg-blue-50/50 dark:bg-blue-950/20'
+ 145 | |                     )}
+ 146 | |                     onClick={() => onMarkAsRead?.(notification.id)}
+ 147 | `->                 >
+ 148 |                       <div className="flex items-start gap-3">
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-mobile-nav/glass-mobile-nav.tsx:125:11]
+ 124 |               {/* Backdrop */}
+ 125 | ,->           <div
+ 126 | |               className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+ 127 | |               onClick={() => setIsOpen(false)}
+ 128 | `->           />
+ 129 |     
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-combobox/glass-combobox.tsx:357:23]
+ 356 |                         filteredOptions.map((option, index) => (
+ 357 | ,->                       <div
+ 358 | |                           key={option.value}
+ 359 | |                           ref={el => {
+ 360 | |                             if (el) {optionsRef.current[index] = el;}
+ 361 | |                           }}
+ 362 | |                           role="option"
+ 363 | |                           aria-selected={option.value === selectedValue}
+ 364 | |                           className={cn(
+ 365 | |                             optionVariants({
+ 366 | |                               selected: option.value === selectedValue,
+ 367 | |                               highlighted: index === highlightedIndex,
+ 368 | |                             }),
+ 369 | |                             option.disabled && 'opacity-50 cursor-not-allowed'
+ 370 | |                           )}
+ 371 | |                           onClick={() => handleSelect(option)}
+ 372 | |                           onMouseEnter={() => setHighlightedIndex(index)}
+ 373 | `->                       >
+ 374 |                             <div className="flex items-center gap-2 flex-1 min-w-0">
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-jsx-a11y(prefer-tag-over-role): Prefer `button` over `role` attribute `button`.
+     ,-[src/components/glass-combobox/glass-combobox.tsx:289:17]
+ 288 |               <div
+ 289 |                 role="button"
+     :                 ^^^^^^^^^^^^^
+ 290 |                 tabIndex={0}
+     `----
+  help: Replace HTML elements with `role` attribute `button` to corresponding semantic HTML tag `button`.
+
+  x eslint-plugin-jsx-a11y(role-supports-aria-props): The attribute aria-haspopup is not supported by the role combobox.
+     ,-[src/components/glass-combobox/glass-combobox.tsx:273:11]
+ 272 |           aria-expanded={isOpen}
+ 273 |           aria-haspopup="listbox"
+     :           ^^^^^^^^^^^^^^^^^^^^^^^
+ 274 |           aria-controls={listboxId}
+     `----
+  help: Try to remove invalid attribute aria-haspopup.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useCallback has missing dependencies: 'validateFile', and 'handleUpload'
+     ,-[src/components/glass-file-upload/glass-file-upload.tsx:202:7]
+ 201 |           },
+ 202 | ,->       [
+ 203 | |           files,
+ 204 | |           disabled,
+ 205 | |           maxFiles,
+ 206 | |           maxFileSize,
+ 207 | |           allowedTypes,
+ 208 | |           onFilesChange,
+ 209 | |           onUpload,
+ 210 | |           showPreview,
+ 211 | `->       ]
+ 212 |         );
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react(exhaustive-deps): React Hook useCallback has unnecessary dependency: allowedTypes
+     ,-[src/components/glass-file-upload/glass-file-upload.tsx:202:7]
+ 201 |           },
+ 202 | ,->       [
+ 203 | |           files,
+ 204 | |           disabled,
+ 205 | |           maxFiles,
+ 206 | |           maxFileSize,
+ 207 | |           allowedTypes,
+ 208 | |           onFilesChange,
+ 209 | |           onUpload,
+ 210 | |           showPreview,
+ 211 | `->       ]
+ 212 |         );
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react(exhaustive-deps): React Hook useCallback has unnecessary dependency: maxFileSize
+     ,-[src/components/glass-file-upload/glass-file-upload.tsx:202:7]
+ 201 |           },
+ 202 | ,->       [
+ 203 | |           files,
+ 204 | |           disabled,
+ 205 | |           maxFiles,
+ 206 | |           maxFileSize,
+ 207 | |           allowedTypes,
+ 208 | |           onFilesChange,
+ 209 | |           onUpload,
+ 210 | |           showPreview,
+ 211 | `->       ]
+ 212 |         );
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/glass-dropdown/glass-dropdown.tsx:139:9]
+ 138 |           >
+ 139 | ,->         <div
+ 140 | |             ref={triggerRef}
+ 141 | |             onClick={() => setIsOpen(!isOpen)}
+ 142 | |             className="cursor-pointer"
+ 143 | `->         >
+ 144 |               {trigger}
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has missing dependencies: 'handleSelect', and 'handleSearch'
+     ,-[src/components/glass-search/glass-search.tsx:107:6]
+ 106 |     };
+ 107 |   }, [isOpen, selectedIndex, allResults, query]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 108 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a dependency array that changes every render.
+     ,-[src/components/glass-search/glass-search.tsx:107:6]
+ 106 |     };
+ 107 |   }, [isOpen, selectedIndex, allResults, query]);
+     :      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 108 | 
+     `----
+  help: Try memoizing this variable with `useRef` or `useCallback`.
+
+  x eslint-plugin-jsx-a11y(anchor-is-valid): Use of incorrect `href` for the 'a' element.
+     ,-[src/components/glass-showcase/glass-showcase.tsx:139:16]
+ 138 |             <div className="flex gap-4">
+ 139 |               <a
+     :                ^
+ 140 |                 href="#"
+     `----
+  help: Provide a correct `href` for the `a` element.
+
+  x eslint-plugin-jsx-a11y(anchor-is-valid): Use of incorrect `href` for the 'a' element.
+     ,-[src/components/glass-showcase/glass-showcase.tsx:145:16]
+ 144 |               </a>
+ 145 |               <a
+     :                ^
+ 146 |                 href="#"
+     `----
+  help: Provide a correct `href` for the `a` element.
+
+  x eslint-plugin-jsx-a11y(anchor-is-valid): Use of incorrect `href` for the 'a' element.
+     ,-[src/components/glass-showcase/glass-showcase.tsx:151:16]
+ 150 |               </a>
+ 151 |               <a
+     :                ^
+ 152 |                 href="#"
+     `----
+  help: Provide a correct `href` for the `a` element.
+
+  x eslint-plugin-jsx-a11y(img-redundant-alt): Redundant alt attribute.
+     ,-[src/components/component-showcase/component-showcase.tsx:359:25]
+ 358 |                         src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=200&fit=crop&crop=face"
+ 359 |                         alt="Card image"
+     :                         ^^^
+ 360 |                         className="w-full h-32 object-cover rounded-lg mb-4 -mt-6 -mx-6"
+     `----
+  help: Provide no redundant alt text for image. Screen-readers already announce `img` tags as an image. You don’t need to use the words `image`, `photo,` or `picture` (or any specified custom words) in the alt prop.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:260:21]
+ 259 |                   <div>
+ 260 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 261 |                       Default Input
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:266:21]
+ 265 |                   <div>
+ 266 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 267 |                       Search Input
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:272:21]
+ 271 |                   <div>
+ 272 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 273 |                       Password Input
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:281:21]
+ 280 |                   <div>
+ 281 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 282 |                       Textarea
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:486:21]
+ 485 |                   <div>
+ 486 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 487 |                       Default Textarea
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:492:21]
+ 491 |                   <div>
+ 492 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 493 |                       Minimal Variant
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:519:21]
+ 518 |                   <div>
+ 519 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 520 |                       Choose Framework
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:533:21]
+ 532 |                   <div>
+ 533 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 534 |                       Project Type
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:941:23]
+ 940 |                     <div>
+ 941 |                       <label className="block text-sm font-medium mb-2 text-primary">
+     :                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 942 |                         First Name
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:947:23]
+ 946 |                     <div>
+ 947 |                       <label className="block text-sm font-medium mb-2 text-primary">
+     :                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 948 |                         Last Name
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:955:21]
+ 954 |                   <div>
+ 955 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 956 |                       Email
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:962:21]
+ 961 |                   <div>
+ 962 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 963 |                       Role
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:977:21]
+ 976 |                   <div>
+ 977 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 978 |                       Experience Level
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/component-showcase/component-showcase.tsx:984:21]
+ 983 |                   <div>
+ 984 |                     <label className="block text-sm font-medium mb-2 text-primary">
+     :                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 985 |                       Bio
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(anchor-is-valid): Use of incorrect `href` for the 'a' element.
+     ,-[src/components/graceful-degradation/graceful-component.tsx:394:12]
+ 393 |         <div className="modal-content">
+ 394 |           <a href="#" style={{ float: 'right' }}>
+     :            ^
+ 395 |             ×
+     `----
+  help: Provide a correct `href` for the `a` element.
+
+  x eslint-plugin-jsx-a11y(click-events-have-key-events): Enforce a clickable non-interactive element has at least one keyboard event listener.
+     ,-[src/components/graceful-degradation/graceful-component.tsx:327:5]
+ 326 |       return (
+ 327 | ,->     <div
+ 328 | |         className={`graceful-interactive ${className}`}
+ 329 | |         onClick={onInteraction}
+ 330 | `->     >
+ 331 |           {children}
+     `----
+  help: Visible, non-interactive elements with click handlers must have one of keyup, keydown, or keypress listener.
+
+  x eslint-plugin-jsx-a11y(media-has-caption): Missing <track> element with captions inside <audio> or <video> element
+     ,-[src/components/graceful-degradation/graceful-component.tsx:278:5]
+ 277 |       return (
+ 278 | ,->     <video
+ 279 | |         className={`graceful-video ${className}`}
+ 280 | |         src={src}
+ 281 | |         poster={poster}
+ 282 | |         autoPlay={autoPlay}
+ 283 | |         muted={muted}
+ 284 | |         loop={loop}
+ 285 | |         onError={handleError}
+ 286 | |         controls
+ 287 | `->     />
+ 288 |       );
+     `----
+  help: Media elements such as <audio> and <video> must have a <track> for captions.
+
+  x eslint-plugin-jsx-a11y(media-has-caption): Missing <track> element with captions inside <audio> or <video> element
+     ,-[src/components/graceful-degradation/graceful-component.tsx:278:5]
+ 277 |       return (
+ 278 | ,->     <video
+ 279 | |         className={`graceful-video ${className}`}
+ 280 | |         src={src}
+ 281 | |         poster={poster}
+ 282 | |         autoPlay={autoPlay}
+ 283 | |         muted={muted}
+ 284 | |         loop={loop}
+ 285 | |         onError={handleError}
+ 286 | |         controls
+ 287 | `->     />
+ 288 |       );
+     `----
+  help: Media elements such as <audio> and <video> must have a <track> for captions.
+
+  x eslint(no-alert): `alert`, `confirm` and `prompt` functions are not allowed
+     ,-[src/components/glass-focus-demo/glass-focus-demo.tsx:130:27]
+ 129 |                         onClick={() => {
+ 130 |                           alert('Form submitted!');
+     :                           ^^^^^
+ 131 |                           setTrapActive(false);
+     `----
+  help: Use a custom UI instead
+
+  x eslint(no-alert): `alert`, `confirm` and `prompt` functions are not allowed
+     ,-[src/components/glass-focus-demo/glass-focus-demo.tsx:168:36]
+ 167 |                     tabIndex={roving.getRovingProps(index).tabIndex}
+ 168 |                     onClick={() => alert(option.action)}
+     :                                    ^^^^^
+ 169 |                     onFocus={() => roving.handlers.onFocus(index)}
+     `----
+  help: Use a custom UI instead
+
+  x eslint(no-alert): `alert`, `confirm` and `prompt` functions are not allowed
+     ,-[src/components/glass-focus-demo/glass-focus-demo.tsx:215:36]
+ 214 |                     aria-label={tool.label}
+ 215 |                     onClick={() => alert(`${tool.label} clicked`)}
+     :                                    ^^^^^
+ 216 |                     className={cn(
+     `----
+  help: Use a custom UI instead
+
+  x eslint-plugin-jsx-a11y(anchor-is-valid): Use of incorrect `href` for the 'a' element.
+    ,-[src/components/glass-focus-demo/glass-focus-demo.tsx:56:12]
+ 55 |         <div className="flex gap-4">
+ 56 |           <a href="#" className="text-blue-500 hover:underline">Link 1</a>
+    :            ^
+ 57 |           <a href="#" className="text-blue-500 hover:underline">Link 2</a>
+    `----
+  help: Provide a correct `href` for the `a` element.
+
+  x eslint-plugin-jsx-a11y(anchor-is-valid): Use of incorrect `href` for the 'a' element.
+    ,-[src/components/glass-focus-demo/glass-focus-demo.tsx:57:12]
+ 56 |           <a href="#" className="text-blue-500 hover:underline">Link 1</a>
+ 57 |           <a href="#" className="text-blue-500 hover:underline">Link 2</a>
+    :            ^
+ 58 |           <a href="#" className="text-blue-500 hover:underline">Link 3</a>
+    `----
+  help: Provide a correct `href` for the `a` element.
+
+  x eslint-plugin-jsx-a11y(anchor-is-valid): Use of incorrect `href` for the 'a' element.
+    ,-[src/components/glass-focus-demo/glass-focus-demo.tsx:58:12]
+ 57 |           <a href="#" className="text-blue-500 hover:underline">Link 2</a>
+ 58 |           <a href="#" className="text-blue-500 hover:underline">Link 3</a>
+    :            ^
+ 59 |         </div>
+    `----
+  help: Provide a correct `href` for the `a` element.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/glass-devtools/glass-devtools.tsx:672:25]
+ 671 |                     <div>
+ 672 |                         <label className="block text-xs mb-1">Theme</label>
+     :                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 673 |                         <select
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-jsx-a11y(label-has-associated-control): A form label must be associated with a control.
+     ,-[src/components/glass-devtools/glass-devtools.tsx:684:25]
+ 683 |                     <div>
+ 684 |                         <label className="block text-xs mb-1">Position</label>
+     :                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 685 |                         <select
+     `----
+  help: Either give the label a `htmlFor` attribute with the id of the associated control, or wrap the label around the control.
+
+  x eslint-plugin-react-hooks(exhaustive-deps): React Hook useEffect has a missing dependency: 'setState'
+     ,-[src/components/glass-devtools/glass-devtools.tsx:241:8]
+ 240 |         };
+ 241 |     }, [enabled, defaultOpen, position, theme, state.isOpen, inspectElement]);
+     :        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 242 | 
+     `----
+  help: Either include it or remove the dependency array.
+
+Found 7140 warnings and 71 errors.
+Finished in 121ms on 263 files using 10 threads.

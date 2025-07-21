@@ -60,7 +60,7 @@ const isClient = useIsClient();
 
   useEffect(() => {
     if (!isClient) {
-      return;
+      return undefined;
     }
 
     if (isOpen) {
@@ -102,7 +102,7 @@ const isClient = useIsClient();
     };
   }, [isClient, isOpen, title]);
 
-  if (!isOpen) {return ;}
+  if (!isOpen) {return undefined;}
 
   const modalContent = (
     <div

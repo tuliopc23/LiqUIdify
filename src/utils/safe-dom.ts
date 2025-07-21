@@ -42,7 +42,7 @@ export function safeQuerySelector<T extends Element = Element>(
     return parent.querySelector<T>(selector);
   } catch (error) {
     console.warn('Error in querySelector:', error);
-    return;
+    return undefined;
   }
 }
 
@@ -70,14 +70,14 @@ export function safeGetComputedStyle(
 ): string | CSSStyleDeclaration | null {
   try {
     if ('undefined' === typeof window || !element) {
-      return;
+      return undefined;
     }
 
     const computedStyle = window.getComputedStyle(element);
     return property ? computedStyle.getPropertyValue(property) : computedStyle;
   } catch (error) {
     console.warn('Error getting computed style:', error);
-    return;
+    return undefined;
   }
 }
 
@@ -158,7 +158,7 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
   options?: boolean | AddEventListenerOptions
 ): (() => void) | null {
   if (!element) {
-    return;
+    return undefined;
   }
 
   try {
@@ -173,7 +173,7 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
     };
   } catch (error) {
     console.warn('Error adding event listener:', error);
-    return;
+    return undefined;
   }
 }
 
@@ -184,7 +184,7 @@ export function safeRequestAnimationFrame(
   callback: FrameRequestCallback
 ): (() => void) | null {
   if ('undefined' === typeof window || !window.requestAnimationFrame) {
-    return;
+    return undefined;
   }
 
   try {
@@ -199,7 +199,7 @@ export function safeRequestAnimationFrame(
     };
   } catch (error) {
     console.warn('Error requesting animation frame:', error);
-    return;
+    return undefined;
   }
 }
 
@@ -208,14 +208,14 @@ export function safeRequestAnimationFrame(
  */
 export function safeCreateAudioContext(): AudioContext | null {
   if ('undefined' === typeof window || !('AudioContext' in window)) {
-    return;
+    return undefined;
   }
 
   try {
     return new AudioContext();
   } catch (error) {
     console.warn('Error creating AudioContext:', error);
-    return;
+    return undefined;
   }
 }
 

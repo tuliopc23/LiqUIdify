@@ -483,7 +483,7 @@ export function useMagneticEffect(
   useEffect(() => {
     const element = ref.current;
     if (!element || prefersReducedMotion) {
-      return;
+      return undefined;
     }
 
     // State variables
@@ -552,7 +552,7 @@ export function useMagneticEffect(
           element.style.transition = '';
           cancelAnimationFrame(animationFrame!);
           animationFrame = undefined;
-          return;
+          return undefined;
         }
       } else {
         // Calculate distance from mouse to element center

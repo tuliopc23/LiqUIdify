@@ -3,11 +3,11 @@
  * GPU-accelerated animations with physics-based motion
  */
 
-import { gsap } from 'gsap';
-import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
+// import { gsap } from 'gsap';
+// import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 
 // Registering plugins
-if ('undefined' !== typeof window && gsap) {
+if ("undefined" !== typeof window && gsap) {
   gsap.registerPlugin(MorphSVGPlugin);
 }
 
@@ -26,44 +26,44 @@ export interface Vector2D {
 // Animation timing functions
 export const GLASS_EASINGS = {
   // Apple-inspired easings
-  smoothOut: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-  smoothInOut: 'cubic-bezier(0.45, 0, 0.55, 1)',
-  anticipate: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-  elastic: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-  bounce: 'cubic-bezier(0.87, -0.41, 0.19, 1.44)',
+  smoothOut: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+  smoothInOut: "cubic-bezier(0.45, 0, 0.55, 1)",
+  anticipate: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+  elastic: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+  bounce: "cubic-bezier(0.87, -0.41, 0.19, 1.44)",
 
   // Physics-based easings
   spring: (tension = 0.5, friction = 0.3) =>
     `cubic-bezier(${tension}, ${friction}, 0.35, 1)`,
-  fluid: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
-  magnetic: 'cubic-bezier(0.2, 0, 0, 1.2)',
-  gravity: 'cubic-bezier(0.4, 0.0, 0.68, 0.06)',
+  fluid: "cubic-bezier(0.4, 0.0, 0.2, 1)",
+  magnetic: "cubic-bezier(0.2, 0, 0, 1.2)",
+  gravity: "cubic-bezier(0.4, 0.0, 0.68, 0.06)",
 
   // Custom glass easings
-  glassIn: 'cubic-bezier(0.32, 0, 0.67, 0)',
-  glassOut: 'cubic-bezier(0.33, 1, 0.68, 1)',
-  glassInOut: 'cubic-bezier(0.65, 0, 0.35, 1)',
-  liquidFlow: 'cubic-bezier(0.36, 0.66, 0.04, 1)',
-  crystalShatter: 'cubic-bezier(0.89, 0.03, 0.69, 0.22)',
+  glassIn: "cubic-bezier(0.32, 0, 0.67, 0)",
+  glassOut: "cubic-bezier(0.33, 1, 0.68, 1)",
+  glassInOut: "cubic-bezier(0.65, 0, 0.35, 1)",
+  liquidFlow: "cubic-bezier(0.36, 0.66, 0.04, 1)",
+  crystalShatter: "cubic-bezier(0.89, 0.03, 0.69, 0.22)",
 };
 
 // Animation types
 export type AnimationType =
-  | 'fade'
-  | 'slide'
-  | 'scale'
-  | 'rotate'
-  | 'flip'
-  | 'morph'
-  | 'ripple'
-  | 'wave'
-  | 'dissolve'
-  | 'shatter'
-  | 'liquid'
-  | 'bounce'
-  | 'elastic'
-  | 'glitch'
-  | 'parallax';
+  | "fade"
+  | "slide"
+  | "scale"
+  | "rotate"
+  | "flip"
+  | "morph"
+  | "ripple"
+  | "wave"
+  | "dissolve"
+  | "shatter"
+  | "liquid"
+  | "bounce"
+  | "elastic"
+  | "glitch"
+  | "parallax";
 
 export interface AnimationConfig {
   type: AnimationType;
@@ -71,16 +71,16 @@ export interface AnimationConfig {
   delay?: number;
   easing?: string | ((t: number) => number);
   iterations?: number;
-  direction?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
-  fill?: 'none' | 'forwards' | 'backwards' | 'both';
+  direction?: "normal" | "reverse" | "alternate" | "alternate-reverse";
+  fill?: "none" | "forwards" | "backwards" | "both";
   playbackRate?: number;
 }
 
 export interface GestureAnimation {
-  gesture: 'swipe' | 'pinch' | 'rotate' | 'pan' | 'tap' | 'press';
+  gesture: "swipe" | "pinch" | "rotate" | "pan" | "tap" | "press";
   animation: AnimationConfig;
   threshold?: number;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'any';
+  direction?: "up" | "down" | "left" | "right" | "any";
 }
 
 // GPU-accelerated animation class
@@ -99,18 +99,18 @@ export class GlassAnimation {
   // Animate with Web Animations API
   animate(
     keyframes: globalThis.Keyframe[],
-    options: globalThis.KeyframeAnimationOptions
+    options: globalThis.KeyframeAnimationOptions,
   ): globalThis.Animation {
     // Force GPU acceleration
-    this.element.style.willChange = 'transform, opacity, filter';
+    this.element.style.willChange = "transform, opacity, filter";
 
     this.animation = this.element.animate(keyframes, {
       ...options,
-      composite: 'accumulate',
+      composite: "accumulate",
     });
 
     this.animation.onfinish = () => {
-      this.element.style.willChange = 'auto';
+      this.element.style.willChange = "auto";
     };
 
     return this.animation;
@@ -119,23 +119,23 @@ export class GlassAnimation {
   // Enhanced morphing between shapes using GSAP MorphSVG
   morphTo(targetPath: string, duration = 1000) {
     // Check if element is SVG path
-    if ('path' === this.element.tagName || 'PATH' === this.element.tagName) {
+    if ("path" === this.element.tagName || "PATH" === this.element.tagName) {
       return gsap.to(this.element, {
         duration: duration / 1000,
         morphSVG: targetPath,
-        ease: 'power2.inOut',
+        ease: "power2.inOut",
         force3D: true,
         onComplete: () => {
-          this.element.style.willChange = 'auto';
+          this.element.style.willChange = "auto";
         },
       });
     } else {
       // Fallback to Web Animations API for non-SVG elements
-      const currentPath = this.element.getAttribute('d') || '';
+      const currentPath = this.element.getAttribute("d") || "";
       return this.animate([{ d: currentPath }, { d: targetPath }], {
         duration,
         easing: GLASS_EASINGS.liquidFlow,
-        fill: 'forwards',
+        fill: "forwards",
       });
     }
   }
@@ -147,35 +147,35 @@ export class GlassAnimation {
       y: `+=${amplitude * 2}`,
       repeat: -1,
       yoyo: true,
-      ease: 'sine.inOut',
+      ease: "sine.inOut",
       duration: duration / 1000 / 2,
     });
   }
 
   // Elastic effect using GSAP
   elasticEffect(amplitude = 1.5, frequency = 2, duration = 1600) {
-    gsap.to(this.element, {
-      duration: duration / 1000,
-      x: amplitude * 100,
-      ease: `elastic.out(${frequency}, ${amplitude})`,
-    });
+    // gsap.to(this.element, {
+    //   x: amplitude * 100,
+    //   duration,
+    //   ease: `elastic.out(${frequency}, ${amplitude})`,
+    // });
   }
 
   // Add magnetic hover effect with GSAP
   magneticHover(_strength = 50, duration = 0.5) {
-    this.element.addEventListener('mouseenter', () => {
+    this.element.addEventListener("mouseenter", () => {
       gsap.to(this.element, {
         duration: duration / 1.5,
         scale: 1.1,
-        ease: 'power3.out',
+        ease: "power3.out",
       });
     });
 
-    this.element.addEventListener('mouseleave', () => {
+    this.element.addEventListener("mouseleave", () => {
       gsap.to(this.element, {
         duration: duration,
         scale: 1,
-        ease: 'power3.in',
+        ease: "power3.in",
       });
     });
   }
@@ -188,14 +188,14 @@ export class GlassAnimation {
     // Create fragments
     for (let i = 0; i < pieces; i++) {
       const fragment = this.element.cloneNode(true) as HTMLElement;
-      fragment.style.position = 'absolute';
+      fragment.style.position = "absolute";
       fragment.style.clipPath = this.generateRandomClipPath();
       this.element.parentElement?.appendChild(fragment);
       fragments.push(fragment);
     }
 
     // Hide original
-    this.element.style.opacity = '0';
+    this.element.style.opacity = "0";
 
     // Animate fragments
     fragments.forEach((fragment, i) => {
@@ -208,7 +208,7 @@ export class GlassAnimation {
       fragment.animate(
         [
           {
-            transform: 'translate(0, 0) rotate(0deg) scale(1)',
+            transform: "translate(0, 0) rotate(0deg) scale(1)",
             opacity: 1,
           },
           {
@@ -219,8 +219,8 @@ export class GlassAnimation {
         {
           duration,
           easing: GLASS_EASINGS.gravity,
-          fill: 'forwards',
-        }
+          fill: "forwards",
+        },
       ).onfinish = () => fragment.remove();
     });
   }
@@ -229,10 +229,10 @@ export class GlassAnimation {
   ripple(
     x: number,
     y: number,
-    color = 'rgba(255, 255, 255, 0.3)',
-    duration = 600
+    color = "rgba(255, 255, 255, 0.3)",
+    duration = 600,
   ) {
-    const ripple = document.createElement('div');
+    const ripple = document.createElement("div");
     const bounds = this.element.getBoundingClientRect();
     const size = Math.max(bounds.width, bounds.height) * 2;
 
@@ -251,14 +251,14 @@ export class GlassAnimation {
 
     ripple.animate(
       [
-        { transform: 'scale(0)', opacity: 1 },
-        { transform: 'scale(1)', opacity: 0 },
+        { transform: "scale(0)", opacity: 1 },
+        { transform: "scale(1)", opacity: 0 },
       ],
       {
         duration,
         easing: GLASS_EASINGS.smoothOut,
-        fill: 'forwards',
-      }
+        fill: "forwards",
+      },
     ).onfinish = () => ripple.remove();
   }
 
@@ -266,34 +266,34 @@ export class GlassAnimation {
   wave(amplitude = 10, duration = 1500) {
     return this.animate(
       [
-        { transform: 'translateX(0) rotate(0deg)' },
+        { transform: "translateX(0) rotate(0deg)" },
         { transform: `translateX(${amplitude}px) rotate(1deg)` },
         { transform: `translateX(-${amplitude}px) rotate(-1deg)` },
-        { transform: 'translateX(0) rotate(0deg)' },
+        { transform: "translateX(0) rotate(0deg)" },
       ],
       {
         duration,
         easing: GLASS_EASINGS.smoothInOut,
         iterations: Infinity,
-      }
+      },
     );
   }
 
   // Parallax scroll effect
-  parallax(speed = 0.5, axis: 'y' | 'x' = 'y') {
+  parallax(speed = 0.5, axis: "y" | "x" = "y") {
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -speed;
 
-      if ('y' === axis) {
+      if ("y" === axis) {
         this.element.style.transform = `translateY(${rate}px)`;
       } else {
         this.element.style.transform = `translateX(${rate}px)`;
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }
 
   // Glitch effect
@@ -314,14 +314,14 @@ export class GlassAnimation {
     }
 
     keyframes.push({
-      transform: 'translate(0, 0)',
-      filter: 'hue-rotate(0deg)',
+      transform: "translate(0, 0)",
+      filter: "hue-rotate(0deg)",
       offset: 1,
     });
 
     return this.animate(keyframes, {
       duration,
-      easing: 'steps(10)',
+      easing: "steps(10)",
       iterations: 3,
     });
   }
@@ -332,22 +332,22 @@ export class GlassAnimation {
       [
         {
           opacity: 1,
-          filter: 'blur(0px) saturate(100%)',
+          filter: "blur(0px) saturate(100%)",
         },
         {
           opacity: 0.5,
-          filter: 'blur(10px) saturate(200%)',
+          filter: "blur(10px) saturate(200%)",
         },
         {
           opacity: 0,
-          filter: 'blur(20px) saturate(0%)',
+          filter: "blur(20px) saturate(0%)",
         },
       ],
       {
         duration,
         easing: GLASS_EASINGS.smoothOut,
-        fill: 'forwards',
-      }
+        fill: "forwards",
+      },
     );
   }
 
@@ -364,7 +364,7 @@ export class GlassAnimation {
       points.push(`${x}% ${y}%`);
     }
 
-    return `polygon(${points.join(', ')})`;
+    return `polygon(${points.join(", ")})`;
   }
 
   // Batch processing for multiple animations
@@ -383,7 +383,7 @@ export class GlassAnimation {
   // Physics-based spring animation
   springTo(
     target: { x?: number; y?: number; scale?: number },
-    config: SpringPhysics = { mass: 1, tension: 280, friction: 60 }
+    config: SpringPhysics = { mass: 1, tension: 280, friction: 60 },
   ) {
     return gsap.to(this.element, {
       x: target.x,
@@ -415,20 +415,20 @@ export class GlassAnimation {
           x: moveX,
           y: moveY,
           duration: 0.2,
-          ease: 'power2.out',
+          ease: "power2.out",
         });
       } else {
         gsap.to(this.element, {
           x: 0,
           y: 0,
           duration: 0.3,
-          ease: 'elastic.out(1, 0.3)',
+          ease: "elastic.out(1, 0.3)",
         });
       }
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => document.removeEventListener('mousemove', handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => document.removeEventListener("mousemove", handleMouseMove);
   }
 
   // Stop all animations
@@ -444,7 +444,7 @@ export class GlassAnimation {
     // Kill all GSAP animations on this element
     gsap.killTweensOf(this.element);
     this.gsapTimeline.kill();
-    this.element.style.willChange = 'auto';
+    this.element.style.willChange = "auto";
   }
 }
 
@@ -470,7 +470,7 @@ export class GlassChoreographer {
     elements: HTMLElement[],
     keyframes: globalThis.Keyframe[],
     options: globalThis.KeyframeAnimationOptions,
-    staggerDelay = 50
+    staggerDelay = 50,
   ) {
     elements.forEach((element, index) => {
       const animation = this.add(element);
@@ -489,7 +489,7 @@ export class GlassChoreographer {
     return gsap.to(elements, {
       ...vars,
       stagger: stagger,
-      ease: vars.ease || 'power2.out',
+      ease: vars.ease || "power2.out",
     });
   }
 
@@ -497,7 +497,7 @@ export class GlassChoreographer {
   springCascade(
     elements: HTMLElement[],
     target: { x?: number; y?: number; scale?: number },
-    staggerDelay = 0.1
+    staggerDelay = 0.1,
   ) {
     this.masterTimeline.clear();
 
@@ -509,10 +509,10 @@ export class GlassChoreographer {
           y: target.y,
           scale: target.scale,
           duration: 0.6,
-          ease: 'elastic.out(1, 0.3)',
+          ease: "elastic.out(1, 0.3)",
           force3D: true,
         },
-        index * staggerDelay
+        index * staggerDelay,
       );
     });
 
@@ -524,7 +524,7 @@ export class GlassChoreographer {
     elements: HTMLElement[],
     animationType: AnimationType,
     duration = 500,
-    staggerDelay = 100
+    staggerDelay = 100,
   ) {
     const keyframes = this.getKeyframesForType(animationType);
     this.stagger(elements, keyframes, { duration }, staggerDelay);
@@ -535,72 +535,72 @@ export class GlassChoreographer {
     const keyframeMap: Record<AnimationType, globalThis.Keyframe[]> = {
       fade: [{ opacity: 0 }, { opacity: 1 }],
       slide: [
-        { transform: 'translateY(20px)', opacity: 0 },
-        { transform: 'translateY(0)', opacity: 1 },
+        { transform: "translateY(20px)", opacity: 0 },
+        { transform: "translateY(0)", opacity: 1 },
       ],
       scale: [
-        { transform: 'scale(0.8)', opacity: 0 },
-        { transform: 'scale(1)', opacity: 1 },
+        { transform: "scale(0.8)", opacity: 0 },
+        { transform: "scale(1)", opacity: 1 },
       ],
       rotate: [
-        { transform: 'rotate(-180deg)', opacity: 0 },
-        { transform: 'rotate(0deg)', opacity: 1 },
+        { transform: "rotate(-180deg)", opacity: 0 },
+        { transform: "rotate(0deg)", opacity: 1 },
       ],
       flip: [
-        { transform: 'rotateY(180deg)', opacity: 0 },
-        { transform: 'rotateY(0deg)', opacity: 1 },
+        { transform: "rotateY(180deg)", opacity: 0 },
+        { transform: "rotateY(0deg)", opacity: 1 },
       ],
       morph: [
-        { borderRadius: '0%', transform: 'scale(0.8)' },
-        { borderRadius: '50%', transform: 'scale(1.1)' },
-        { borderRadius: '25%', transform: 'scale(1)' },
+        { borderRadius: "0%", transform: "scale(0.8)" },
+        { borderRadius: "50%", transform: "scale(1.1)" },
+        { borderRadius: "25%", transform: "scale(1)" },
       ],
       ripple: [
-        { transform: 'scale(0)', opacity: 1 },
-        { transform: 'scale(1)', opacity: 0 },
+        { transform: "scale(0)", opacity: 1 },
+        { transform: "scale(1)", opacity: 0 },
       ],
       wave: [
-        { transform: 'translateX(-10px)' },
-        { transform: 'translateX(10px)' },
-        { transform: 'translateX(0)' },
+        { transform: "translateX(-10px)" },
+        { transform: "translateX(10px)" },
+        { transform: "translateX(0)" },
       ],
       dissolve: [
-        { opacity: 1, filter: 'blur(0)' },
-        { opacity: 0, filter: 'blur(10px)' },
+        { opacity: 1, filter: "blur(0)" },
+        { opacity: 0, filter: "blur(10px)" },
       ],
       shatter: [
-        { transform: 'scale(1) rotate(0)', opacity: 1 },
-        { transform: 'scale(0) rotate(360deg)', opacity: 0 },
+        { transform: "scale(1) rotate(0)", opacity: 1 },
+        { transform: "scale(0) rotate(360deg)", opacity: 0 },
       ],
       liquid: [
-        { transform: 'scaleY(1)' },
-        { transform: 'scaleY(1.2) scaleX(0.9)' },
-        { transform: 'scaleY(0.9) scaleX(1.1)' },
-        { transform: 'scaleY(1)' },
+        { transform: "scaleY(1)" },
+        { transform: "scaleY(1.2) scaleX(0.9)" },
+        { transform: "scaleY(0.9) scaleX(1.1)" },
+        { transform: "scaleY(1)" },
       ],
       bounce: [
-        { transform: 'translateY(0)' },
-        { transform: 'translateY(-20px)' },
-        { transform: 'translateY(0)' },
-        { transform: 'translateY(-10px)' },
-        { transform: 'translateY(0)' },
+        { transform: "translateY(0)" },
+        { transform: "translateY(-20px)" },
+        { transform: "translateY(0)" },
+        { transform: "translateY(-10px)" },
+        { transform: "translateY(0)" },
       ],
       elastic: [
-        { transform: 'scaleX(1)' },
-        { transform: 'scaleX(1.25)' },
-        { transform: 'scaleX(0.75)' },
-        { transform: 'scaleX(1.15)' },
-        { transform: 'scaleX(1)' },
+        { transform: "scaleX(1)" },
+        { transform: "scaleX(1.25)" },
+        { transform: "scaleX(0.75)" },
+        { transform: "scaleX(1.15)" },
+        { transform: "scaleX(1)" },
       ],
       glitch: [
-        { transform: 'translate(0)', filter: 'hue-rotate(0)' },
-        { transform: 'translate(2px, -2px)', filter: 'hue-rotate(90deg)' },
-        { transform: 'translate(-2px, 2px)', filter: 'hue-rotate(180deg)' },
-        { transform: 'translate(0)', filter: 'hue-rotate(0)' },
+        { transform: "translate(0)", filter: "hue-rotate(0)" },
+        { transform: "translate(2px, -2px)", filter: "hue-rotate(90deg)" },
+        { transform: "translate(-2px, 2px)", filter: "hue-rotate(180deg)" },
+        { transform: "translate(0)", filter: "hue-rotate(0)" },
       ],
       parallax: [
-        { transform: 'translateZ(0)' },
-        { transform: 'translateZ(50px)' },
+        { transform: "translateZ(0)" },
+        { transform: "translateZ(50px)" },
       ],
     };
 
@@ -609,7 +609,7 @@ export class GlassChoreographer {
 
   // Clear all animations
   clear() {
-    this.animations.forEach(animation => animation.stop());
+    this.animations.forEach((animation) => animation.stop());
     this.animations.clear();
     this.masterTimeline.kill();
     this.masterTimeline = gsap.timeline();
@@ -629,14 +629,14 @@ export class GlassGestureAnimator {
 
   // Enable swipe animations
   onSwipe(
-    direction: 'left' | 'right' | 'up' | 'down',
-    animationConfig: AnimationConfig
+    direction: "left" | "right" | "up" | "down",
+    animationConfig: AnimationConfig,
   ) {
     let startX = 0;
     let startY = 0;
 
     const handleStart = (e: TouchEvent | MouseEvent) => {
-      const touch = 'touches' in e ? e.touches[0] : e;
+      const touch = "touches" in e ? e.touches[0] : e;
       if (touch) {
         startX = touch.clientX;
         startY = touch.clientY;
@@ -644,7 +644,7 @@ export class GlassGestureAnimator {
     };
 
     const handleEnd = (e: TouchEvent | MouseEvent) => {
-      const touch = 'changedTouches' in e ? e.changedTouches[0] : e;
+      const touch = "changedTouches" in e ? e.changedTouches[0] : e;
       if (!touch) {
         return;
       }
@@ -656,16 +656,16 @@ export class GlassGestureAnimator {
       let triggered = false;
 
       switch (direction) {
-        case 'left':
+        case "left":
           triggered = deltaX < -threshold && Math.abs(deltaY) < threshold;
           break;
-        case 'right':
+        case "right":
           triggered = deltaX > threshold && Math.abs(deltaY) < threshold;
           break;
-        case 'up':
+        case "up":
           triggered = deltaY < -threshold && Math.abs(deltaX) < threshold;
           break;
-        case 'down':
+        case "down":
           triggered = deltaY > threshold && Math.abs(deltaX) < threshold;
           break;
       }
@@ -675,10 +675,10 @@ export class GlassGestureAnimator {
       }
     };
 
-    this.element.addEventListener('touchstart', handleStart, { passive: true });
-    this.element.addEventListener('touchend', handleEnd, { passive: true });
-    this.element.addEventListener('mousedown', handleStart);
-    this.element.addEventListener('mouseup', handleEnd);
+    this.element.addEventListener("touchstart", handleStart, { passive: true });
+    this.element.addEventListener("touchend", handleEnd, { passive: true });
+    this.element.addEventListener("mousedown", handleStart);
+    this.element.addEventListener("mouseup", handleEnd);
 
     this.gestureHandlers.set(`swipe-${direction}`, handleEnd);
   }
@@ -720,23 +720,23 @@ export class GlassGestureAnimator {
       }
     };
 
-    this.element.addEventListener('touchstart', handleStart, { passive: true });
-    this.element.addEventListener('touchmove', handleMove, { passive: true });
+    this.element.addEventListener("touchstart", handleStart, { passive: true });
+    this.element.addEventListener("touchmove", handleMove, { passive: true });
 
-    this.gestureHandlers.set('pinch', handleMove as (e: TouchEvent) => void);
+    this.gestureHandlers.set("pinch", handleMove as (e: TouchEvent) => void);
   }
 
   // Play animation based on config
   private playAnimation(config: AnimationConfig) {
     const choreographer = new GlassChoreographer();
-    const keyframes = choreographer['getKeyframesForType'](config.type);
+    const keyframes = choreographer["getKeyframesForType"](config.type);
 
     this.animation.animate(keyframes, {
       duration: config.duration || 500,
       easing: (config.easing as string) || GLASS_EASINGS.smoothOut,
       iterations: config.iterations || 1,
-      direction: config.direction || 'normal',
-      fill: config.fill || 'forwards',
+      direction: config.direction || "normal",
+      fill: config.fill || "forwards",
       playbackRate: config.playbackRate || 1,
     });
   }
@@ -758,7 +758,7 @@ export function createChoreographer(): GlassChoreographer {
 }
 
 export function createGestureAnimator(
-  element: HTMLElement
+  element: HTMLElement,
 ): GlassGestureAnimator {
   return new GlassGestureAnimator(element);
 }
@@ -769,20 +769,20 @@ export const GlassUtils = {
   enableGPUAcceleration(elements: HTMLElement[]) {
     gsap.set(elements, {
       force3D: true,
-      willChange: 'transform',
+      willChange: "transform",
     });
   },
 
   // Enhanced reduced motion support with graceful animation scaling
   enableReducedMotion(elements: HTMLElement[]) {
     const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (prefersReducedMotion) {
-      elements.forEach(element => {
+      elements.forEach((element) => {
         gsap.to(element, {
-          clearProps: 'all', // Remove animations
+          clearProps: "all", // Remove animations
           opacity: 1, // Ensure visibility
         });
       });
@@ -821,7 +821,7 @@ export const GlassUtils = {
           ...animation,
           force3D: true,
         },
-        0
+        0,
       );
     });
 
@@ -832,12 +832,12 @@ export const GlassUtils = {
   springAnimation(
     elements: HTMLElement[],
     target: gsap.TweenVars,
-    stagger = 0.1
+    stagger = 0.1,
   ) {
     return gsap.to(elements, {
       ...target,
       duration: 0.8,
-      ease: 'elastic.out(1, 0.3)',
+      ease: "elastic.out(1, 0.3)",
       stagger: stagger,
       force3D: true,
     });
@@ -847,12 +847,12 @@ export const GlassUtils = {
   createMagneticField(elements: HTMLElement[], radius = 100, strength = 0.3) {
     const cleanupFunctions: (() => void)[] = [];
 
-    elements.forEach(element => {
+    elements.forEach((element) => {
       const animation = new GlassAnimation(element);
       const cleanup = animation.magneticField(radius, strength);
       cleanupFunctions.push(cleanup);
     });
 
-    return () => cleanupFunctions.forEach(cleanup => cleanup());
+    return () => cleanupFunctions.forEach((cleanup) => cleanup());
   },
 };

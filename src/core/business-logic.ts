@@ -248,7 +248,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
 
         submitForm: async () => {
           if (!onSubmit) {
-            return;
+            return undefined;
           }
 
           setState(prev => ({ ...prev, isSubmitting: true }));

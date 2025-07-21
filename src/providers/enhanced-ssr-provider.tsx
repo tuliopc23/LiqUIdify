@@ -54,7 +54,7 @@ export function EnhancedSSRProvider({
   // Handle hydration completion
   useEffect(() => {
     if (!isClient) {
-      return;
+      return undefined;
     }
 
     const handleHydrationComplete = () => {
@@ -201,7 +201,7 @@ export function useHydrationMetrics() {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return;
+      return undefined;
     }
 
     const start = performance.now();

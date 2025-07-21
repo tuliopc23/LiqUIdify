@@ -63,7 +63,7 @@ export function GlassPerformanceProvider({
   // Update metrics periodically when monitoring is enabled
   useEffect(() => {
     if (!monitor || !isMonitoring) {
-      return;
+      return undefined;
     }
 
     const updateMetrics = () => {
@@ -139,7 +139,7 @@ export function withPerformanceMonitoring<P extends Record<string, any>>(
 
     useEffect(() => {
       if (!monitor) {
-        return;
+        return undefined;
       }
 
       return () => {

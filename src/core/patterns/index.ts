@@ -69,7 +69,7 @@ export const createRenderPropComponent = <T extends Record<string, any>>(
   _useLogic: () => T
 ) => {
   // Type-only export for patterns
-  return ;
+  return undefined;
 };
 
 // Higher-order component pattern
@@ -95,7 +95,7 @@ export const createSlotComponent = (
   _slots: Record<string, React.ComponentType<any>>
 ) => {
   // Type-only export for patterns
-  return ;
+  return undefined;
 };
 
 // State reducer pattern
