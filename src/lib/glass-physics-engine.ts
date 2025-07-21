@@ -736,7 +736,7 @@ export function useAdvancedPhysics(
       choreographerRef.current?.cancel();
       gestureRef.current?.destroy();
     };
-  }, [springConfig, magneticConfig, choreographyConfig]);
+  }, [springConfig, magneticConfig, choreographyConfig, enableSpring, enableMagnetic]);
 
   // Setup gesture recognition
   useEffect(() => {
