@@ -233,14 +233,15 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
     };
 
     // Generate glass classes and variables
-    const glassClasses = generateGlassClasses(
+    const glassClasses = generateGlassClasses({
       variant,
-      glassEffect?.intensity,
-      currentState,
+      intensity: glassEffect?.intensity,
+      state: currentState,
       glassEffect
-    );
+    });
 
-    const glassVariables = generateGlassVariables(glassEffect?.intensity, {
+    const glassVariables = generateGlassVariables({
+      intensity: glassEffect?.intensity,
       animation: { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
       ...glassEffect,
     });

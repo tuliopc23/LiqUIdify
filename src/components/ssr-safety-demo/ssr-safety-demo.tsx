@@ -120,7 +120,7 @@ function IntersectionObserverDemo() {
       <div className="demo-section">
         <h3>Intersection Observer</h3>
         <div
-          ref={ref as React.RefObject<HTMLDivElement>}
+          ref={ref as unknown as React.RefObject<HTMLDivElement>}
           style={{
             height: '100px',
             background: isIntersecting ? 'green' : 'red',

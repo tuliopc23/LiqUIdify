@@ -1,12 +1,16 @@
 /**
  * Glass Effects Hooks
- * 
+ *
  * Provides React hooks for glass effects and interactions
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useUnifiedGlass } from './glass/unified-glass-system';
-import type { GlassEffectConfig, GlassIntensity, GlassVariant } from './glass/unified-glass-system';
+import type {
+  GlassEffectConfig,
+  GlassIntensity,
+  GlassVariant,
+} from './glass/unified-glass-system';
 
 export interface UseGlassEffectsOptions {
   intensity?: GlassIntensity;
@@ -69,11 +73,14 @@ export function useGlassEffects(
     }
   }, [disabled, handlers]);
 
-  const handleMouseMove = useCallback((event: React.MouseEvent) => {
-    if (!disabled) {
-      handlers.onMouseMove?.(event as React.MouseEvent<HTMLDivElement>);
-    }
-  }, [disabled, handlers]);
+  const handleMouseMove = useCallback(
+    (event: React.MouseEvent) => {
+      if (!disabled) {
+        handlers.onMouseMove?.(event as React.MouseEvent<HTMLDivElement>);
+      }
+    },
+    [disabled, handlers]
+  );
 
   const glassProps = {
     className: `glass-effect glass-effect--${intensity} glass-effect--${variant}`,
@@ -101,25 +108,35 @@ export function useGlassBackground(intensity: GlassIntensity = 'medium') {
 /**
  * Hook for interactive glass effects with hover states
  */
-export function useInteractiveGlass(options: Omit<UseGlassEffectsOptions, 'interactive'> = {}) {
+export function useInteractiveGlass(
+  options: Omit<UseGlassEffectsOptions, 'interactive'> = {}
+) {
   return useGlassEffects({ ...options, interactive: true });
 }
 
 /**
  * Hook for magnetic glass effects that respond to mouse movement
  */
-export function useMagneticGlass(options: Omit<UseGlassEffectsOptions, 'magnetic'> = {}) {
+export function useMagneticGlass(
+  options: Omit<UseGlassEffectsOptions, 'magnetic'> = {}
+) {
   return useGlassEffects({ ...options, magnetic: true });
 }
 
 /**
  * Hook for glass effects with custom animation timings
  */
-export function useAnimatedGlass(options: UseGlassEffectsOptions & {
-  duration?: number;
-  easing?: string;
-} = {}) {
-  const { duration = 300, easing = 'cubic-bezier(0.4, 0, 0.2, 1)', ...glassOptions } = options;
+export function useAnimatedGlass(
+  options: UseGlassEffectsOptions & {
+    duration?: number;
+    easing?: string;
+  } = {}
+) {
+  const {
+    duration = 300,
+    easing = 'cubic-bezier(0.4, 0, 0.2, 1)',
+    ...glassOptions
+  } = options;
   const result = useGlassEffects(glassOptions);
 
   // Override the transition in the style
@@ -140,11 +157,18 @@ export function useAnimatedGlass(options: UseGlassEffectsOptions & {
 /**
  * Hook for glass effects that adapt based on screen size
  */
-export function useResponsiveGlass(options: UseGlassEffectsOptions & {
-  mobileIntensity?: GlassIntensity;
-  desktopIntensity?: GlassIntensity;
-} = {}) {
-  const { mobileIntensity, desktopIntensity, intensity: defaultIntensity, ...restOptions } = options;
+export function useResponsiveGlass(
+  options: UseGlassEffectsOptions & {
+    mobileIntensity?: GlassIntensity;
+    desktopIntensity?: GlassIntensity;
+  } = {}
+) {
+  const {
+    mobileIntensity,
+    desktopIntensity,
+    intensity: defaultIntensity,
+    ...restOptions
+  } = options;
   const [screenSize, setScreenSize] = useState<'mobile' | 'desktop'>('desktop');
 
   useEffect(() => {
@@ -158,8 +182,8 @@ export function useResponsiveGlass(options: UseGlassEffectsOptions & {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const currentIntensity = 
-    'mobile' === screenSize && mobileIntensity 
+  const currentIntensity =
+    'mobile' === screenSize && mobileIntensity
       ? mobileIntensity
       : 'desktop' === screenSize && desktopIntensity
         ? desktopIntensity

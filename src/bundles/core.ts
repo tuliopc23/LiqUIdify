@@ -45,7 +45,7 @@ import type {
 export {
   cn,
   glassVariants,
-  
+
   // SSR-safe utilities
   useIsClient,
   useSSRSafeWindow,
@@ -60,8 +60,4 @@ export {
 };
 
 // Type exports
-export type {
-  GlassButtonProps,
-  GlassCardProps,
-  GlassInputProps,
-};
+export type { GlassButtonProps, GlassCardProps, GlassInputProps };

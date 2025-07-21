@@ -64,10 +64,13 @@ const useButtonBusinessLogic = createBusinessLogicHook<ButtonState, GlassButtonP
   })
 );
 
+// Import the ComponentPropsBuilder type
+import type { ComponentPropsBuilder } from '@/types/component-props';
+
 // Button-specific props extending the base interactive props
 export interface GlassButtonProps extends
   InteractiveGlassProps,
-  ComponentPropsBuilder<HTMLButtonElement> {
+  Omit<ComponentPropsBuilder<HTMLButtonElement>, 'size' | 'type'> {
   /** Button content */
   children?: React.ReactNode;
   /** Button type */
@@ -281,12 +284,12 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     }, [disabled, actions, transitionToState, onBlur]);
     
     // Generate glass classes and variables
-    const glassClasses = generateGlassClasses(
+    const glassClasses = generateGlassClasses({
       variant,
-      glassEffect?.intensity,
-      currentState,
+      intensity: glassEffect?.intensity,
+      state: currentState,
       glassEffect
-    );
+    });
     
     const glassVariables = generateGlassVariables(
       glassEffect?.intensity,

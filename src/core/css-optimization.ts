@@ -114,9 +114,9 @@ export class CSSBundleAnalyzer {
       const status =
         sizeKB <= bundleConfig.maxSize
           ? 'ok'
-          : (sizeKB <= bundleConfig.maxSize * 1.2
+          : sizeKB <= bundleConfig.maxSize * 1.2
             ? 'warning'
-            : 'error');
+            : 'error';
 
       results.bundles[bundleName] = {
         size: sizeKB,

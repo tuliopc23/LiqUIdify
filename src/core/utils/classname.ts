@@ -98,15 +98,22 @@ export function focusRing(visible: boolean = true): string {
  * Micro-interaction utility
  * Provides subtle interaction feedback
  */
-export function microInteraction(type: 'hover' | 'active' | 'focus' = 'hover'): string {
+function createMicroInteraction(type: 'hover' | 'active' | 'focus' = 'hover'): string {
   const interactions = {
     hover: 'hover:scale-[1.02] hover:shadow-lg transition-all duration-200',
     active: 'active:scale-[0.98] transition-all duration-100',
     focus: 'focus:scale-[1.01] focus:shadow-md transition-all duration-150',
   };
-  
+
   return interactions[type];
 }
+
+// Create microInteraction object with both function and properties
+export const microInteraction = Object.assign(createMicroInteraction, {
+  gentle: createMicroInteraction('hover'),
+  interactive: 'hover:scale-[1.02] hover:shadow-lg transition-all duration-200',
+  smooth: 'hover:scale-[1.01] transition-all duration-150',
+});
 
 /**
  * Animation duration utilities

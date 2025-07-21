@@ -30,6 +30,8 @@ export interface EnhancedGlassOptions {
   pixelPerfect?: Partial<PixelPerfectConfig>;
   distortionStrength?: number;
   liquidFlowIntensity?: number;
+  interactive?: boolean;
+  magnetic?: boolean;
   magneticStrength?: number;
   enablePhysics?: boolean;
   enableHaptics?: boolean;
@@ -300,7 +302,7 @@ export function useEnhancedAppleLiquidGlass(
 
       // Apply physics-based transformation with subpixel precision
       startTransition(() => {
-        withSafeRef(containerRef, (container) => {
+        withSafeRef(containerRef, container => {
           const transform = `translate3d(${deltaX.toFixed(2)}px, ${deltaY.toFixed(2)}px, 0)`;
           container.style.transform = transform;
 
@@ -336,7 +338,7 @@ export function useEnhancedAppleLiquidGlass(
     }
 
     startTransition(() => {
-      withSafeRef(containerRef, (container) => {
+      withSafeRef(containerRef, container => {
         container.style.transform = 'translate3d(0, 0, 0)';
         container.style.transition =
           'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
@@ -355,7 +357,7 @@ export function useEnhancedAppleLiquidGlass(
 
         // Clear transitions after animation
         setTimeout(() => {
-          withSafeRef(containerRef, (container) => {
+          withSafeRef(containerRef, container => {
             container.style.transition = '';
             layersRef.current.forEach(layer => {
               if (layer) {
@@ -385,20 +387,20 @@ export function useEnhancedAppleLiquidGlass(
       }
       const elapsed = timestamp - startTime;
 
-        layersRef.current.forEach((layer, id) => {
-          if (layer && ('backdrop' === id || 'overlay' === id)) {
-            const offset = Math.sin(elapsed * 0.001) * liquidFlowIntensity;
-            const currentTransform = layer.style.transform || '';
-            const newTransform = currentTransform.includes('translate3d')
-              ? currentTransform.replace(
-                  /translate3d\([^)]+\)/,
-                  `translate3d(${offset.toFixed(2)}px, ${(-offset * 0.5).toFixed(2)}px, ${ENHANCED_GLASS_LAYERS[id]?.zIndex || 0}px)`
-                )
-              : `${currentTransform} translate3d(${offset.toFixed(2)}px, ${(-offset * 0.5).toFixed(2)}px, ${ENHANCED_GLASS_LAYERS[id]?.zIndex || 0}px)`;
+      layersRef.current.forEach((layer, id) => {
+        if (layer && ('backdrop' === id || 'overlay' === id)) {
+          const offset = Math.sin(elapsed * 0.001) * liquidFlowIntensity;
+          const currentTransform = layer.style.transform || '';
+          const newTransform = currentTransform.includes('translate3d')
+            ? currentTransform.replace(
+                /translate3d\([^)]+\)/,
+                `translate3d(${offset.toFixed(2)}px, ${(-offset * 0.5).toFixed(2)}px, ${ENHANCED_GLASS_LAYERS[id]?.zIndex || 0}px)`
+              )
+            : `${currentTransform} translate3d(${offset.toFixed(2)}px, ${(-offset * 0.5).toFixed(2)}px, ${ENHANCED_GLASS_LAYERS[id]?.zIndex || 0}px)`;
 
-            layer.style.transform = newTransform;
-          }
-        });
+          layer.style.transform = newTransform;
+        }
+      });
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
@@ -638,8 +640,12 @@ export interface AppleLiquidGlassProps {
 }
 
 export function useAppleLiquidGlass(options: AppleLiquidGlassOptions = {}) {
-  const { intensity = 'medium', interactive = false, magnetic = false } = options;
-  
+  const {
+    intensity = 'medium',
+    interactive = false,
+    magnetic = false,
+  } = options;
+
   // Delegate to the enhanced system
   return useEnhancedAppleLiquidGlass({
     intensity: intensity as keyof typeof ENHANCED_GLASS_VARIANTS,
@@ -656,7 +662,10 @@ export function getAppleLiquidGlassClass(
     animated?: boolean;
   } = {}
 ): string {
-  return getEnhancedGlassClass(intensity as keyof typeof ENHANCED_GLASS_VARIANTS, options);
+  return getEnhancedGlassClass(
+    intensity as keyof typeof ENHANCED_GLASS_VARIANTS,
+    options
+  );
 }
 
 export function createGlassLayers(

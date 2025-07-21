@@ -7,12 +7,18 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { AnimationTiming, GlassIntensity } from '@/core/base-component';
-import type { GlassEffectState } from '@/core/glass-effects';
+// Define GlassEffectState locally since it's not exported
+interface GlassEffectState {
+  intensity: number;
+  blur: number;
+  opacity: number;
+  scale: number;
+}
 
 // Animation state management
 export interface AnimationState {
   isAnimating: boolean;
-  currentState: GlassEffectState;
+  currentState: string;
   progress: number;
   startTime?: number;
   endTime?: number;
@@ -166,11 +172,11 @@ export function useGlassStateTransitions(
   timing: AnimationTiming = 'normal',
   intensity: GlassIntensity = 'medium'
 ) {
-  const [currentState, setCurrentState] = useState<GlassEffectState>('idle');
+  const [currentState, setCurrentState] = useState<string>('idle');
   const { cancel, state } = useGlassAnimation(timing);
 
   const transitionToState = useCallback(
-    (targetState: GlassEffectState) => {
+    (targetState: string) => {
       if (currentState === targetState) {
         return;
       }

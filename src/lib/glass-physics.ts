@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { safeGetBoundingClientRect, safeRefAccess, safeRequestAnimationFrame, withSafeRef } from '../utils/safe-dom';
+import {
+  safeGetBoundingClientRect,
+  safeRefAccess,
+  safeRequestAnimationFrame,
+  withSafeRef,
+} from '../utils/safe-dom';
 
 /**
  * Glass Physics - Physics engine for realistic motion
@@ -354,13 +359,13 @@ export const useMagneticHover = (
   const handleMouseLeave = useCallback(() => {
     try {
       springRef.current.setTarget(0, 0);
-        if (animationRef.current) {
-          cancelAnimationFrame(animationRef.current);
-        }
-        const cleanup = safeRequestAnimationFrame(animate);
-        if (cleanup) {
-          animationRef.current = requestAnimationFrame(animate);
-        }
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+      const cleanup = safeRequestAnimationFrame(animate);
+      if (cleanup) {
+        animationRef.current = requestAnimationFrame(animate);
+      }
     } catch (error) {
       console.error('Error in magnetic hover mouse leave handler:', error);
       // Ensure cleanup on error
@@ -503,7 +508,7 @@ export const createGlassRipple = (
   try {
     // Check for SSR environment
     if ('undefined' === typeof window || 'undefined' === typeof document) {
-      return ;
+      return;
     }
 
     const ripple = document.createElement('div');
@@ -556,7 +561,7 @@ export const createGlassRipple = (
     return ripple;
   } catch (error) {
     console.error('Error creating glass ripple:', error);
-    return ;
+    return;
   }
 };
 

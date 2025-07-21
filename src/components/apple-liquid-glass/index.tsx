@@ -116,6 +116,7 @@ export function AppleLiquidGlass({
 export interface AppleLiquidGlassCardProps extends AppleLiquidGlassComponentProps {
   padding?: 'none' | 'sm' | 'md' | 'lg';
   rounded?: boolean;
+  multiLayer?: boolean;
 }
 
 export function AppleLiquidGlassCard({

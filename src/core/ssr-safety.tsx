@@ -1,6 +1,6 @@
 /**
  * SSR Safety Utilities
- * 
+ *
  * Provides utilities for safe server-side rendering and client-side hydration
  */
 
@@ -28,7 +28,10 @@ export interface ClientOnlyProps {
   fallback?: ReactNode;
 }
 
-export function ClientOnly({ children, fallback = undefined }: ClientOnlyProps) {
+export function ClientOnly({
+  children,
+  fallback = undefined,
+}: ClientOnlyProps) {
   const isClient = useIsClient();
 
   if (!isClient) {
@@ -47,19 +50,21 @@ export interface SSRSafeProps extends ComponentProps<'div'> {
   component?: keyof JSX.IntrinsicElements;
 }
 
-export function SSRSafe({ 
-  children, 
-  fallback = undefined, 
+export function SSRSafe({
+  children,
+  fallback = undefined,
   component: Component = 'div',
-  ...props 
+  ...props
 }: SSRSafeProps) {
   const isClient = useIsClient();
 
   if (!isClient) {
-    return fallback ? <Component {...props}>{fallback}</Component> : undefined;
+    return fallback ? (
+      <Component {...(props as any)}>{fallback}</Component>
+    ) : undefined;
   }
 
-  return <Component {...props}>{children}</Component>;
+  return <Component {...(props as any)}>{children}</Component>;
 }
 
 /**

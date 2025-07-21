@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { ClientOnly, SSRSafe } from './ssr-safety';
+import { ClientOnly } from './ssr-safety';
+import { SSRSafe } from '@/components/ssr-safe-wrapper';
 
 // Types and Interfaces
 export interface DegradationStrategy {
@@ -360,13 +361,13 @@ export function withPerformanceFallback(
         // Check device memory
         if ('deviceMemory' in navigator) {
           const memory = (navigator as any).deviceMemory;
-          score += 8 <= memory ? 3 : (4 <= memory ? 2 : 1);
+          score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
         }
 
         // Check CPU cores
         if ('hardwareConcurrency' in navigator) {
           const cores = navigator.hardwareConcurrency;
-          score += 8 <= cores ? 3 : (4 <= cores ? 2 : 1);
+          score += 8 <= cores ? 3 : 4 <= cores ? 2 : 1;
         }
 
         // Check connection speed
@@ -375,7 +376,7 @@ export function withPerformanceFallback(
           if (connection) {
             const effectiveType = connection.effectiveType;
             score +=
-              '4g' === effectiveType ? 3 : ('3g' === effectiveType ? 2 : 1);
+              '4g' === effectiveType ? 3 : '3g' === effectiveType ? 2 : 1;
           }
         }
 

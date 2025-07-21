@@ -5,7 +5,7 @@ import { cn } from '@/core/utils/classname';
 import { useContentAwareGlass, useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
 import { GlassButton } from './glass-button';
-import { createComponentSize } from '@/types/branded';
+// Removed branded type import - using string literals directly
 import {
   containerFadeInFast,
   fadeInUpLarge,
@@ -264,7 +264,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                     {primaryAction && (
                       <GlassButton
                         variant="primary"
-                        size={createComponentSize('lg')}
+                        size={'lg'}
                         onClick={primaryAction.onClick}
                         leftIcon={primaryAction.icon}
                         className="min-w-[200px]"
@@ -275,7 +275,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                     {secondaryAction && (
                       <GlassButton
                         variant="secondary"
-                        size={createComponentSize('lg')}
+                        size={'lg'}
                         onClick={secondaryAction.onClick}
                         leftIcon={secondaryAction.icon}
                         className="min-w-[200px]"
@@ -327,7 +327,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                   {primaryAction && (
                     <GlassButton
                       variant="primary"
-                      size={createComponentSize('xl')}
+                      size={'xl'}
                       onClick={primaryAction.onClick}
                       leftIcon={primaryAction.icon}
                       className="min-w-[220px]"
@@ -338,7 +338,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                   {secondaryAction && (
                     <GlassButton
                       variant="secondary"
-                      size={createComponentSize('xl')}
+                      size={'xl'}
                       onClick={secondaryAction.onClick}
                       leftIcon={secondaryAction.icon}
                       className="min-w-[220px]"

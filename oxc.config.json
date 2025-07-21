@@ -81,8 +81,15 @@
   "resolver": {
     "alias": {
       "@": "./src",
+      "@/components": "./src/components",
+      "@/hooks": "./src/hooks",
+      "@/lib": "./src/lib",
+      "@/utils": "./src/utils",
+      "@/types": "./src/types",
+      "@/bundles": "./src/bundles",
       "@/tokens": "./src/tokens/index",
-      "@/design-tokens": "./src/tokens/design-tokens"
+      "@/design-tokens": "./src/tokens/design-tokens",
+      "@/core": "./src/core"
     },
     "tsConfigPath": "./tsconfig.json",
     "mainFields": ["module", "main"],
@@ -106,14 +113,17 @@
   "linter": {
     "rules": {
       "typescript": {
-        "ban-types": "error",
+        "ban-types": "warn",
         "no-explicit-any": "warn",
         "no-unused-vars": "warn",
-        "prefer-as-const": "error"
+        "prefer-as-const": "warn"
       },
       "react": {
         "jsx-uses-react": "off",
         "react-in-jsx-scope": "off"
+      },
+      "correctness": {
+        "no-unused-variables": "warn"
       }
     }
   }

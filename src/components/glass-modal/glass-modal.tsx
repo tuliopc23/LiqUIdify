@@ -6,7 +6,7 @@ import { GlassPortal } from '@/components/glass-portal';
 import { announcer } from '@/components/glass-live-region';
 import { useIsClient } from '@/hooks/use-ssr-safe';
 
-interface GlassModalProps {
+export interface GlassModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;

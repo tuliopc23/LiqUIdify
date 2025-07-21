@@ -1,5 +1,15 @@
-// Glass Components Library - Main Export File
-// Import and re-export all glass components for easy use in projects
+/**
+ * Glass Components Library - Main Export File
+ * Clean exports for production-ready components
+ */
+
+// Core Glass Components - Working and tested
+export { GlassButton, type GlassButtonProps } from './glass-button';
+export { GlassCard, type GlassCardProps } from './glass-card';
+export { GlassInput, type GlassInputProps } from './glass-input';
+export { GlassModal, type GlassModalProps } from './glass-modal';
+export { GlassTabs, type GlassTabsProps } from './glass-tabs';
+export { GlassTooltip, type GlassTooltipProps } from './glass-tooltip';
 
 // Apple Liquid Glass Components - Enhanced with multi-layer structure
 export {
@@ -9,6 +19,7 @@ export {
   AppleLiquidGlassNav,
   type AppleLiquidGlassComponentProps,
 } from './apple-liquid-glass';
+
 export {
   LiquidGlassSvgFilters,
   type LiquidGlassSvgFiltersProps,
@@ -25,277 +36,48 @@ export {
   type EnhancedAppleLiquidGlassProps,
 } from './enhanced-apple-liquid-glass';
 
-// All imports sorted alphabetically
-import {
-  Accordion,
-  GlassAccordion,
-  GlassAccordionItem,
-  GlassAccordionTrigger,
-  GlassAccordionContent,
-  type GlassAccordionProps,
-  type GlassAccordionItemProps,
-  type GlassAccordionTriggerProps,
-  type GlassAccordionContentProps,
-} from './glass-accordion/index';
-import { GlassAvatar, type GlassAvatarProps } from './glass-avatar/index';
-import { GlassBadge, type GlassBadgeProps } from './glass-badge/index';
-import {
-  GlassBreadcrumbs,
-  type GlassBreadcrumbsProps,
-  type BreadcrumbItem,
-} from './glass-breadcrumbs/index';
-import { GlassButton, type GlassButtonProps } from './glass-button/index';
-import { GlassCard, type GlassCardProps } from './glass-card/index';
-import {
-  LineChart,
-  BarChart,
-  DonutChart,
-  type ChartDataPoint,
-} from './glass-chart/index';
-import { GlassCheckbox, type GlassCheckboxProps } from './glass-checkbox/index';
-import {
-  CheckboxGroup,
-  type CheckboxGroupProps,
-} from './glass-checkbox-group/index';
-import { GlassCombobox, type GlassComboboxProps } from './glass-combobox/index';
-import { CommandPalette, type CommandItem } from './glass-command/index';
-import {
-  GlassDatePicker,
-  type GlassDatePickerProps,
-} from './glass-date-picker/index';
-import {
-  Drawer,
-  GlassDrawer,
-  GlassDrawerTrigger,
-  GlassDrawerClose,
-  GlassDrawerPortal,
-  GlassDrawerOverlay,
-  GlassDrawerContent,
-  GlassDrawerHeader,
-  GlassDrawerTitle,
-  GlassDrawerDescription,
-  GlassDrawerBody,
-  GlassDrawerFooter,
-  type GlassDrawerProps,
-  type GlassDrawerContentProps,
-  type GlassDrawerHeaderProps,
-  type GlassDrawerTitleProps,
-  type GlassDrawerDescriptionProps,
-  type GlassDrawerBodyProps,
-  type GlassDrawerFooterProps,
-} from './glass-drawer/index';
-import {
-  GlassDropdown,
-  type GlassDropdownProps,
-  type DropdownItem,
-} from './glass-dropdown/index';
-import {
-  GlassFileUpload,
-  type GlassFileUploadProps,
-} from './glass-file-upload/index';
-import {
-  GlassFocusTrap,
-  type GlassFocusTrapProps,
-} from './glass-focus-trap/index';
-import { GlassFooter, type GlassFooterProps } from './glass-footer';
-import {
-  GlassFormField,
-  type GlassFormFieldProps,
-} from './glass-form-field/index';
-// All consolidated exports alphabetically sorted
+// Showcase and Demo Components
+export { ComponentShowcase } from './component-showcase';
+export { GlassHero, type GlassHeroProps } from './glass-hero';
+
+// Utility Components
+export { ClientOnly } from './client-only';
+export { SSRPortal } from './ssr-portal';
+export { SSRSafeWrapper } from './ssr-safe-wrapper';
+
+// Theme and Provider Components
+export { ThemeProvider } from './theme-provider';
+// Core Utilities - Re-export from core
+export { cn } from '@/core/utils/classname';
+export { focusRing } from '@/core/utils/focus';
+export { microInteraction } from '@/core/utils/classname';
+export { responsiveSize, touchTarget } from '@/core/utils/responsive';
+
+// SSR Utilities
 export {
-  // Apple Components
-  AppleLiquidGlass,
-  AppleLiquidGlassCard,
-  AppleLiquidGlassButton,
-  AppleLiquidGlassNav,
-  type AppleLiquidGlassComponentProps,
-  
-  // Enhanced Apple Components  
-  EnhancedAppleLiquidGlass,
-  EnhancedAppleLiquidGlassCard,
-  EnhancedAppleLiquidGlassButton,
-  EnhancedAppleLiquidGlassNav,
-  EnhancedAppleLiquidGlassModal,
-  EnhancedAppleLiquidGlassShowcase,
-  type EnhancedAppleLiquidGlassProps,
-  
-  // Base Components
-  Accordion,
-  BarChart,
-  CheckboxGroup,
-  CommandPalette,
-  ComponentShowcase,
-  DonutChart,
-  Drawer,
-  GlassAccordion,
-  GlassAccordionContent,
-  GlassAccordionItem,
-  GlassAccordionTrigger,
-  GlassAvatar,
-  GlassBadge,
-  GlassBreadcrumbs,
-  GlassButton,
-  GlassCard,
-  GlassChart,
-  GlassCheckbox,
-  GlassCombobox,
-  GlassDatePicker,
-  GlassDrawer,
-  GlassDrawerBody,
-  GlassDrawerClose,
-  GlassDrawerContent,
-  GlassDrawerDescription,
-  GlassDrawerFooter,
-  GlassDrawerHeader,
-  GlassDrawerOverlay,
-  GlassDrawerPortal,
-  GlassDrawerTitle,
-  GlassDrawerTrigger,
-  GlassDropdown,
-  GlassFeatureShowcase,
-  GlassFileUpload,
-  GlassFloatingAction,
-  GlassFocusTrap,
-  GlassFooter,
-  GlassFormField,
-  GlassHeader,
-  GlassHero,
-  GlassInput,
-  GlassLiveRegion,
-  GlassLiveRegionProvider,
-  GlassLoading,
-  GlassMobileNav,
-  GlassModal,
-  GlassNavbar,
-  GlassNumberInput,
-  GlassPagination,
-  GlassPerformanceDashboard,
-  GlassPlayground,
-  GlassPopover,
-  GlassPortal,
-  GlassProgress,
-  GlassRadioGroup,
-  GlassRadioItem,
-  GlassResponsiveButton,
-  GlassResponsiveCard,
-  GlassSearch,
-  GlassSelect,
-  GlassSkeleton,
-  GlassSkipNavigation,
-  GlassSlider,
-  GlassSpinner,
-  GlassSwitch,
-  GlassTable,
-  GlassTabs,
-  GlassTextarea,
-  GlassToast,
-  GlassTooltip,
-  GlassVisuallyHidden,
-  LineChart,
-  LiquidGlassProvider,
-  LiquidGlassSvgFilters,
-  NotificationCenter,
-  PulseSpinner,
-  DotsSpinner,
-  RingSpinner,
-  WaveSpinner,
-  Sidebar,
-  SkeletonText,
-  SkeletonCard,
-  SkeletonTable,
-  ThemeProvider,
-  ThemeToggle,
-  ToastProvider,
-  
-  // Hooks
-  announcer,
-  useAnnouncement,
-  useLiquidGlass,
-  useSkipNavigation,
-  useTheme,
-  useToast,
-  
-  // Utility functions
-  animationState,
-  cn,
-  focusRing,
-  getGlassClass,
-  glassVariants,
-  microInteraction,
-  responsiveGlass,
-  responsiveSize,
-  touchTarget,
-  
-  // Types (alphabetically sorted)
-  type AnnouncementContext,
-  type AnnouncementPriority,
-  type AriaLivePriority,
-  type AriaRelevant,
-  type BreadcrumbItem,
-  type ChartDataPoint,
-  type CheckboxGroupProps,
-  type CommandItem,
-  type DropdownItem,
-  type FeatureItem,
-  type FloatingAction,
-  type GlassAccordionContentProps,
-  type GlassAccordionItemProps,
-  type GlassAccordionProps,
-  type GlassAccordionTriggerProps,
-  type GlassAvatarProps,
-  type GlassBadgeProps,
-  type GlassBreadcrumbsProps,
-  type GlassButtonProps,
-  type GlassCardProps,
-  type GlassCheckboxProps,
-  type GlassComboboxProps,
-  type GlassDatePickerProps,
-  type GlassDrawerBodyProps,
-  type GlassDrawerContentProps,
-  type GlassDrawerDescriptionProps,
-  type GlassDrawerFooterProps,
-  type GlassDrawerHeaderProps,
-  type GlassDrawerProps,
-  type GlassDrawerTitleProps,
-  type GlassDropdownProps,
-  type GlassFeatureShowcaseProps,
-  type GlassFileUploadProps,
-  type GlassFloatingActionProps,
-  type GlassFocusTrapProps,
-  type GlassFooterProps,
-  type GlassFormFieldProps,
-  type GlassHeaderProps,
-  type GlassHeroProps,
-  type GlassInputProps,
-  type GlassLiveRegionProps,
-  type GlassLoadingProps,
-  type GlassNumberInputProps,
-  type GlassPaginationProps,
-  type GlassPerformanceDashboardProps,
-  type GlassPopoverProps,
-  type GlassPortalProps,
-  type GlassProgressProps,
-  type GlassRadioGroupProps,
-  type GlassRadioItemProps,
-  type GlassResponsiveButtonProps,
-  type GlassResponsiveCardProps,
-  type GlassSearchProps,
-  type GlassSelectOption,
-  type GlassSelectProps,
-  type GlassSkeletonProps,
-  type GlassSkipNavigationProps,
-  type GlassSliderProps,
-  type GlassSpinnerProps,
-  type GlassSwitchProps,
-  type GlassTextareaProps,
-  type GlassTooltipProps,
-  type GlassVisuallyHiddenProps,
-  type LiquidGlassSvgFiltersProps,
-  type NotificationItem,
-  type PlaygroundProps,
-  type PlaygroundTemplates,
-  type SearchSuggestion,
-  type SkipLink,
-  type Toast,
-};
+  isClient,
+  isServer,
+  safeWindow,
+  safeDocument,
+} from '@/utils/ssr-utils';
+
+// Type Exports - Essential types for component usage
+export type {
+  GlassVariantProps,
+  ButtonVariantProps,
+  CardVariantProps,
+  InputVariantProps,
+} from '@/lib/variant-system';
+
+export type { ComponentSize } from '@/types/branded';
+
+export type {
+  BaseGlassProps,
+  InteractiveGlassProps,
+  UnifiedGlassProps,
+} from '@/core/base-component';
+// Additional working components (when they exist)
+// Note: Only export components that actually exist and work
+// export { GlassFooter, type GlassFooterProps } from './glass-footer';
+
+// End of exports - Clean and minimal for production readiness

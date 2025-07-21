@@ -128,9 +128,11 @@ export class VisualRegressionTester {
     for (let i = 0; i < this.browsers.length; i++) {
       const browser = safeArrayAccess(this.browsers, i);
       const browserType = safeArrayAccess(this.options.browsers || [], i);
-      
+
       if (!browser || !browserType) {
-        console.warn(`Skipping browser at index ${i}: browser or type not found`);
+        console.warn(
+          `Skipping browser at index ${i}: browser or type not found`
+        );
         continue;
       }
 
@@ -138,15 +140,15 @@ export class VisualRegressionTester {
       const context = await browser.newContext();
       const page = await context.newPage();
 
-        // Iterate through viewports
-        for (const viewport of this.options.viewports || []) {
-          await page.setViewportSize({
-            width: viewport.width,
-            height: viewport.height,
-          });
+      // Iterate through viewports
+      for (const viewport of this.options.viewports || []) {
+        await page.setViewportSize({
+          width: viewport.width,
+          height: viewport.height,
+        });
 
-          // Iterate through themes
-          for (const theme of this.options.themes || []) {
+        // Iterate through themes
+        for (const theme of this.options.themes || []) {
           // Navigate to URL with theme parameter
           await page.goto(`${url}?theme=${theme}`);
 
@@ -215,7 +217,7 @@ export class VisualRegressionTester {
     // Use first browser for animation testing
     const browser = safeArrayAccess(this.browsers, 0);
     const browserType = safeArrayAccess(this.options.browsers || [], 0);
-    
+
     if (!browser || !browserType) {
       throw new Error('No browsers available for animation testing');
     }
@@ -227,7 +229,7 @@ export class VisualRegressionTester {
     // Use first viewport and theme for animation testing
     const viewport = safeArrayAccess(this.options.viewports || [], 0);
     const theme = safeArrayAccess(this.options.themes || [], 0);
-    
+
     if (!viewport || !theme) {
       throw new Error('No viewport or theme configured for animation testing');
     }
@@ -357,13 +359,7 @@ export class VisualRegressionTester {
     let diffPath: string | undefined;
 
     if (diffPixels > 0) {
-      diffPath = this.getDiffPath(
-        component,
-        state,
-        browser,
-        viewport,
-        theme
-      );
+      diffPath = this.getDiffPath(component, state, browser, viewport, theme);
 
       fs.writeFileSync(diffPath, PNG.sync.write(diff));
     }

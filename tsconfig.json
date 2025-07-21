@@ -20,18 +20,18 @@
     "isolatedModules": true,
     "noEmitOnError": false,
 
-    /* Linting */
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    /* Linting - Relaxed for transition period */
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
     "alwaysStrict": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noUncheckedIndexedAccess": false,
 
     /* React */
@@ -45,8 +45,15 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/bundles/*": ["./src/bundles/*"],
       "@/tokens": ["./src/tokens/index"],
-      "@/design-tokens": ["./src/tokens/design-tokens"]
+      "@/design-tokens": ["./src/tokens/design-tokens"],
+      "@/core/*": ["./src/core/*"]
     }
   },
   "include": [

@@ -1,0 +1,10 @@
+src/components/ssr-portal.tsx(18,87): error TS1003: Identifier expected.
+src/components/ssr-portal.tsx(18,110): error TS1005: ',' expected.
+src/components/ssr-portal.tsx(18,117): error TS1005: ',' expected.
+src/components/ssr-portal.tsx(22,5): error TS1005: ',' expected.
+src/utils/ssr-safe.ts(82,96): error TS1003: Identifier expected.
+src/utils/ssr-safe.ts(82,119): error TS1005: ',' expected.
+src/utils/ssr-safe.ts(82,126): error TS1005: ',' expected.
+src/utils/ssr-safe.ts(82,141): error TS1005: ',' expected.
+src/utils/ssr-safe.ts(82,143): error TS1389: 'null' is not allowed as a variable declaration name.
+src/utils/ssr-safe.ts(86,42): error TS1005: ',' expected.

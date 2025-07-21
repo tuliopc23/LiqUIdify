@@ -1,1 +1,1 @@
-export { GlassTabs } from './glass-tabs';
+export { GlassTabs, type GlassTabsProps } from './glass-tabs';

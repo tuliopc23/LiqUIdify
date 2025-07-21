@@ -1,4 +1,4 @@
-import { 
+import {
   GlassUIProvider,
   type GlassUIProviderProps,
 } from './glass-ui-provider';

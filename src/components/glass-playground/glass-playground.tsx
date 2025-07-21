@@ -4,15 +4,32 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { createComponentSize } from '@/types/branded';
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
-import { themes } from 'prism-react-renderer';
+// Removed branded type import - using string literals directly
+// Note: react-live removed for production build - using fallback
+// import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
+// import { themes } from 'prism-react-renderer';
 import { Check, Code, Copy, Download, Eye, Maximize2 } from 'lucide-react';
 import { cn } from '@/core/utils/classname';
 import * as LiquidComponents from '@/components';
 import { GlassButton } from '../glass-button';
 import { GlassTabs } from '../glass-tabs';
 import { useSSRSafeWindow } from '@/hooks/use-ssr-safe';
+
+// Fallback components for react-live (removed for production)
+const LiveProvider = ({ children, code, scope, theme, noInline }: any) => (
+  <div data-playground="fallback">{children}</div>
+);
+const LiveEditor = ({ className }: any) => (
+  <div className={cn("p-4 bg-gray-100 rounded", className)}>
+    <p className="text-sm text-gray-600">Live editor disabled in production build</p>
+  </div>
+);
+const LivePreview = ({ Component, ...props }: any) => (
+  <div className="p-4 bg-white rounded border" {...props}>
+    <p className="text-sm text-gray-600">Live preview disabled in production build</p>
+  </div>
+);
+const LiveError = ({ className, ...props }: any) => undefined;
 
 export interface PlaygroundProps {
   code: string;
@@ -93,8 +110,11 @@ export function GlassPlayground({
     setFullscreen(prev => !prev);
   }, []);
 
-  // Get appropriate theme
-  const editorTheme = 'dark' === theme ? themes.nightOwl : themes.github;
+  // Get appropriate theme (fallback for production)
+  const editorTheme = {
+    plain: { color: '#24292e', backgroundColor: '#ffffff' },
+    styles: []
+  };
 
   return (
     <div
@@ -119,7 +139,7 @@ export function GlassPlayground({
           <div className="flex items-center gap-2">
             <GlassButton
               variant="ghost"
-              size={createComponentSize('sm')}
+              size={"sm"}
               onClick={handleCopy}
               aria-label="Copy code"
             >
@@ -132,7 +152,7 @@ export function GlassPlayground({
 
             <GlassButton
               variant="ghost"
-              size={createComponentSize('sm')}
+              size={"sm"}
               onClick={handleDownload}
               aria-label="Download code"
             >
@@ -141,7 +161,7 @@ export function GlassPlayground({
 
             <GlassButton
               variant="ghost"
-              size={createComponentSize('sm')}
+              size={"sm"}
               onClick={handleFullscreen}
               aria-label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >

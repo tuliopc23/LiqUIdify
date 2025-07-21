@@ -1,6 +1,6 @@
 /**
  * Accessibility Manager
- * 
+ *
  * Provides centralized accessibility management for glass components
  */
 
@@ -47,11 +47,16 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
     }
 
     const checkPreferences = () => {
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const highContrastMedia = window.matchMedia('(prefers-contrast: high)').matches;
-      const screenReader = navigator.userAgent.includes('NVDA') || 
-                          navigator.userAgent.includes('JAWS') ||
-                          window.speechSynthesis?.speaking;
+      const reducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+      const highContrastMedia = window.matchMedia(
+        '(prefers-contrast: high)'
+      ).matches;
+      const screenReader =
+        navigator.userAgent.includes('NVDA') ||
+        navigator.userAgent.includes('JAWS') ||
+        window.speechSynthesis?.speaking;
 
       setState(prev => ({
         ...prev,
@@ -63,7 +68,9 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
     checkPreferences();
 
-    const motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const motionMediaQuery = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
     const contrastMediaQuery = window.matchMedia('(prefers-contrast: high)');
 
     motionMediaQuery.addEventListener('change', checkPreferences);
@@ -77,7 +84,9 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
   // Keyboard navigation detection
   useEffect(() => {
-    if (!focusManagement) {return;}
+    if (!focusManagement) {
+      return;
+    }
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if ('Tab' === e.key) {
@@ -99,58 +108,77 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
   }, [focusManagement]);
 
   // Announce function for screen readers
-  const announce = useCallback((message: string, priority: 'polite' | 'assertive' = 'polite') => {
-    if (!autoAnnounce || !announcer.current) {return;}
-
-    announcer.current.setAttribute('aria-live', priority);
-    announcer.current.textContent = message;
-
-    // Clear after announcement
-    setTimeout(() => {
-      if (announcer.current) {
-        announcer.current.textContent = '';
+  const announce = useCallback(
+    (message: string, priority: 'polite' | 'assertive' = 'polite') => {
+      if (!autoAnnounce || !announcer.current) {
+        return;
       }
-    }, 1000);
-  }, [autoAnnounce]);
+
+      announcer.current.setAttribute('aria-live', priority);
+      announcer.current.textContent = message;
+
+      // Clear after announcement
+      setTimeout(() => {
+        if (announcer.current) {
+          announcer.current.textContent = '';
+        }
+      }, 1000);
+    },
+    [autoAnnounce]
+  );
 
   // Focus management utilities
-  const focusElement = useCallback((element: HTMLElement | null) => {
-    if (!focusManagement || !element) {return;}
-
-    element.focus({ preventScroll: state.reducedMotion });
-  }, [focusManagement, state.reducedMotion]);
-
-  const trapFocus = useCallback((container: HTMLElement) => {
-    if (!focusManagement) {return () => {};}
-
-    const focusableElements = container.querySelectorAll(
-      'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
-    );
-    const firstElement = focusableElements[0] as HTMLElement;
-    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-
-    const handleTabKey = (e: KeyboardEvent) => {
-      if ('Tab' !== e.key) {return;}
-
-      if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
-          lastElement.focus();
-          e.preventDefault();
-        }
-      } else {
-        if (document.activeElement === lastElement) {
-          firstElement.focus();
-          e.preventDefault();
-        }
+  const focusElement = useCallback(
+    (element: HTMLElement | null) => {
+      if (!focusManagement || !element) {
+        return;
       }
-    };
 
-    container.addEventListener('keydown', handleTabKey);
+      element.focus({ preventScroll: state.reducedMotion });
+    },
+    [focusManagement, state.reducedMotion]
+  );
 
-    return () => {
-      container.removeEventListener('keydown', handleTabKey);
-    };
-  }, [focusManagement]);
+  const trapFocus = useCallback(
+    (container: HTMLElement) => {
+      if (!focusManagement) {
+        return () => {};
+      }
+
+      const focusableElements = container.querySelectorAll(
+        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+      );
+      const firstElement = focusableElements[0] as HTMLElement;
+      const lastElement = focusableElements[
+        focusableElements.length - 1
+      ] as HTMLElement;
+
+      const handleTabKey = (e: KeyboardEvent) => {
+        if ('Tab' !== e.key) {
+          return;
+        }
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      };
+
+      container.addEventListener('keydown', handleTabKey);
+
+      return () => {
+        container.removeEventListener('keydown', handleTabKey);
+      };
+    },
+    [focusManagement]
+  );
 
   // Create announcer element
   const AnnouncerElement = autoAnnounce ? (
@@ -171,19 +199,20 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
     // Utility functions
     getGlassClasses: (baseClasses: string) => {
       let classes = baseClasses;
-      
+
       if (state.reducedMotion) {
-        classes += ' motion-reduce:transition-none motion-reduce:transform-none';
+        classes +=
+          ' motion-reduce:transition-none motion-reduce:transform-none';
       }
-      
+
       if (state.highContrast) {
         classes += ' contrast-more:border-2 contrast-more:border-solid';
       }
-      
+
       if (state.keyboardNavigation) {
         classes += ' focus-visible:ring-2 focus-visible:ring-blue-500';
       }
-      
+
       return classes;
     },
   };

@@ -5,7 +5,12 @@
  */
 
 import { useCallback, useEffect, useRef } from 'react';
-import { safeAppendChild, safeCreateAudioContext, safeMapGet, safeRemoveElement } from '../utils/safe-dom';
+import {
+  safeAppendChild,
+  safeCreateAudioContext,
+  safeMapGet,
+  safeRemoveElement,
+} from '../utils/safe-dom';
 
 // Haptic feedback types
 export type HapticType =
@@ -267,7 +272,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
       try {
         const ctx = initAudioContext();
         if (!ctx) {
-          return ;
+          return;
         }
 
         const response = await fetch(url);
@@ -289,7 +294,11 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
               audioCache.current.set(url, buffer);
             }
           } catch (error) {
-            console.error('[useHapticFeedback] Error loading audio file:', url, error);
+            console.error(
+              '[useHapticFeedback] Error loading audio file:',
+              url,
+              error
+            );
           }
         }
       }
@@ -334,10 +343,12 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
       const buffer = safeMapGet(audioCache.current, soundUrl);
       if (!buffer) {
-        console.warn(`[useHapticFeedback] Audio buffer not found for ${soundUrl}`);
+        console.warn(
+          `[useHapticFeedback] Audio buffer not found for ${soundUrl}`
+        );
         return;
       }
-      
+
       const source = ctx.createBufferSource();
       const gainNode = ctx.createGain();
 

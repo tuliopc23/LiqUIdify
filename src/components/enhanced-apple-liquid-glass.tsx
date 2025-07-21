@@ -90,24 +90,28 @@ export const EnhancedAppleLiquidGlass = forwardRef<
 
   return (
     <>
-      {isClient && enableSvgFilters && <LiquidGlassSvgFilters enableAdvancedFilters />}
-      {isClient ? React.createElement(
-        Component,
-        {
-          ref: combinedRef,
-          className: combinedClassName,
-          style: {
-            borderRadius: `${variant.radius}px`,
-            ...props.style,
+      {isClient && enableSvgFilters && (
+        <LiquidGlassSvgFilters enableAdvancedFilters />
+      )}
+      {isClient ? (
+        React.createElement(
+          Component,
+          {
+            ref: combinedRef,
+            className: combinedClassName,
+            style: {
+              borderRadius: `${variant.radius}px`,
+              ...props.style,
+            },
+            ...props,
           },
-          ...props,
-        },
-        createEnhancedGlassLayers(children, {
-          intensity,
-          className: contentClassName,
-          enableDistortion: enableSvgFilters,
-          distortionFilter,
-        })
+          createEnhancedGlassLayers(children, {
+            intensity,
+            className: contentClassName,
+            enableDistortion: enableSvgFilters,
+            distortionFilter,
+          })
+        )
       ) : (
         <div
           ref={combinedRef}

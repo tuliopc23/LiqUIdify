@@ -72,7 +72,7 @@ import * as Patterns from './patterns';
 
 // Re-export commonly used utilities for convenience
 import { cn } from './utils/classname';
-import { 
+import {
   generateGlassClasses,
   generateGlassVariables,
   mapIntensity,
@@ -96,7 +96,6 @@ import {
 export * from './utils';
 export * from './hooks';
 export * from './components';
-export * from './constants';
 export * from './patterns';
 
 // Re-export specific named exports

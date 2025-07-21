@@ -18,22 +18,24 @@ export const safeCreateElement = <T extends HTMLElement>(
   options?: ElementCreationOptions
 ): T | null => {
   if (isSSR()) {
-    console.warn('[SSR] createElement called in SSR environment, returning null');
-    return ;
+    console.warn(
+      '[SSR] createElement called in SSR environment, returning null'
+    );
+    return;
   }
 
   try {
     return document.createElement(tagName, options) as T;
   } catch (error) {
     console.warn('[SSR] Failed to create element:', error);
-    return ;
+    return;
   }
 };
 
 // Safe document.body access
 export const safeGetDocumentBody = (): HTMLElement | null => {
   if (isSSR() || !document.body) {
-    return ;
+    return;
   }
   return document.body;
 };
@@ -44,7 +46,7 @@ export const safeQuerySelector = <T extends Element = Element>(
   container?: Element | Document
 ): T | null => {
   if (isSSR()) {
-    return ;
+    return;
   }
 
   try {
@@ -52,7 +54,7 @@ export const safeQuerySelector = <T extends Element = Element>(
     return root.querySelector<T>(selector);
   } catch (error) {
     console.warn(`[SSR] Failed to query selector "${selector}":`, error);
-    return ;
+    return;
   }
 };
 
@@ -79,14 +81,14 @@ export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
   id: string
 ): T | null => {
   if (isSSR()) {
-    return ;
+    return;
   }
 
   try {
     return document.getElementById(id) as T | null;
   } catch (error) {
     console.warn(`[SSR] Failed to get element by id "${id}":`, error);
-    return ;
+    return;
   }
 };
 
@@ -103,13 +105,16 @@ export const safeAddEventListener = (
 
   try {
     element.addEventListener(type, listener, options);
-    
+
     // Return cleanup function
     return () => {
       try {
         element.removeEventListener(type, listener, options);
       } catch (error) {
-        console.warn(`[SSR] Failed to remove event listener for "${type}":`, error);
+        console.warn(
+          `[SSR] Failed to remove event listener for "${type}":`,
+          error
+        );
       }
     };
   } catch (error) {
@@ -136,7 +141,10 @@ export const safeGetWindowProperty = <T>(
 };
 
 // Safe viewport dimensions
-export const safeGetViewportDimensions = (): { width: number; height: number } => {
+export const safeGetViewportDimensions = (): {
+  width: number;
+  height: number;
+} => {
   if (isSSR()) {
     return { width: 1024, height: 768 }; // Default viewport dimensions
   }
@@ -144,7 +152,8 @@ export const safeGetViewportDimensions = (): { width: number; height: number } =
   try {
     return {
       width: window.innerWidth || document.documentElement.clientWidth || 1024,
-      height: window.innerHeight || document.documentElement.clientHeight || 768,
+      height:
+        window.innerHeight || document.documentElement.clientHeight || 768,
     };
   } catch (error) {
     console.warn('[SSR] Failed to get viewport dimensions:', error);
@@ -170,9 +179,7 @@ export const safeGetScrollPosition = (): { x: number; y: number } => {
 };
 
 // Safe element bounds access
-export const safeGetBoundingClientRect = (
-  element: Element | null
-): DOMRect => {
+export const safeGetBoundingClientRect = (element: Element | null): DOMRect => {
   const fallbackRect = {
     x: 0,
     y: 0,
@@ -218,14 +225,14 @@ export const safeGetComputedStyle = (
 export const safeLocalStorage = {
   getItem: (key: string): string | null => {
     if (isSSR()) {
-      return ;
+      return;
     }
 
     try {
       return localStorage.getItem(key);
     } catch (error) {
       console.warn(`[SSR] Failed to get localStorage item "${key}":`, error);
-      return ;
+      return;
     }
   },
 
@@ -262,14 +269,14 @@ export const safeLocalStorage = {
 export const safeSessionStorage = {
   getItem: (key: string): string | null => {
     if (isSSR()) {
-      return ;
+      return;
     }
 
     try {
       return sessionStorage.getItem(key);
     } catch (error) {
       console.warn(`[SSR] Failed to get sessionStorage item "${key}":`, error);
-      return ;
+      return;
     }
   },
 
@@ -296,7 +303,10 @@ export const safeSessionStorage = {
       sessionStorage.removeItem(key);
       return true;
     } catch (error) {
-      console.warn(`[SSR] Failed to remove sessionStorage item "${key}":`, error);
+      console.warn(
+        `[SSR] Failed to remove sessionStorage item "${key}":`,
+        error
+      );
       return false;
     }
   },
@@ -388,7 +398,7 @@ export const safeIsElementVisible = (element: Element | null): boolean => {
       0 < parseFloat(style.opacity || '1') &&
       0 < rect.width &&
       0 < rect.height &&
-      null !== element.offsetParent
+      null !== (element as HTMLElement).offsetParent
     );
   } catch (error) {
     console.warn('[SSR] Failed to check element visibility:', error);
@@ -397,7 +407,9 @@ export const safeIsElementVisible = (element: Element | null): boolean => {
 };
 
 // Safe media query matching
-export const safeMatchMedia = (query: string): {
+export const safeMatchMedia = (
+  query: string
+): {
   matches: boolean;
   addListener: (listener: (event: MediaQueryListEvent) => void) => () => void;
 } => {
@@ -410,12 +422,12 @@ export const safeMatchMedia = (query: string): {
 
   try {
     const mediaQuery = window.matchMedia(query);
-    
+
     return {
       matches: mediaQuery.matches,
       addListener: (listener: (event: MediaQueryListEvent) => void) => {
         mediaQuery.addEventListener('change', listener);
-        
+
         return () => {
           try {
             mediaQuery.removeEventListener('change', listener);

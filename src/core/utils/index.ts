@@ -8,7 +8,7 @@
 // Export all utility modules
 export * from './classname';
 export * from './glass-effects';
-export * from './responsive';
+export { responsiveSize, touchTarget } from './responsive';
 export * from './validation';
 export * from './color';
 // export * from './animation'; // TODO: Add animation utils when available

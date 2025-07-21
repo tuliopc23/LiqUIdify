@@ -44,10 +44,7 @@
       "@radix-ui/react-radio-group",
       "class-variance-authority",
       "clsx",
-      "tailwind-merge",
-      "tailwindcss-animate",
-      "prism-react-renderer",
-      "react-live"
+      "tailwind-merge"
     ],
     "packageJsonLookup": true,
     "realpath": true,

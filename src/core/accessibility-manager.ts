@@ -388,10 +388,17 @@ export class AccessibilityManager {
       const baseResult = {
         ratio,
         passes: {
-          aa: { normal: 4.5 <= ratio , large: 3 <= ratio },
-          aaa: { normal: 7 <= ratio , large: 4.5 <= ratio }
+          aa: { normal: 4.5 <= ratio, large: 3 <= ratio },
+          aaa: { normal: 7 <= ratio, large: 4.5 <= ratio },
         },
-        recommendation: 7 <= ratio ? 'Excellent' : 4.5 <= ratio ? 'Good' : 3 <= ratio ? 'Fair' : 'Poor'
+        recommendation:
+          7 <= ratio
+            ? 'Excellent'
+            : 4.5 <= ratio
+              ? 'Good'
+              : 3 <= ratio
+                ? 'Fair'
+                : 'Poor',
       };
       result = { ...baseResult } as ContrastResult;
     }
@@ -399,17 +406,17 @@ export class AccessibilityManager {
     // Check if it meets the required level
     const meetsRequirement =
       'AA' === level
-        ? (largeText
+        ? largeText
           ? result.passes.aa.large
-          : result.passes.aa.normal)
-        : (largeText
+          : result.passes.aa.normal
+        : largeText
           ? result.passes.aaa.large
-          : result.passes.aaa.normal);
+          : result.passes.aaa.normal;
 
     // Auto-fix if needed and requested
     if (!meetsRequirement && autoFix) {
       const targetRatio =
-        'AA' === level ? (largeText ? 3 : 4.5) : (largeText ? 4.5 : 7);
+        'AA' === level ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
 
       try {
         // For now, keep the original color if contrast is poor

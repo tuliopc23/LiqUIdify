@@ -30,15 +30,20 @@ export function responsiveSize(
 /**
  * Ensure touch targets meet accessibility standards (minimum 44px)
  */
-export function touchTarget(size: number = 44): string {
+function createTouchTarget(size: number = 44): string {
   const minSize = Math.max(size, 44); // WCAG minimum touch target
   return `min-h-[${minSize}px] min-w-[${minSize}px]`;
 }
 
+// Create touchTarget object with both function and properties
+export const touchTarget = Object.assign(createTouchTarget, {
+  comfortable: createTouchTarget(48), // Comfortable touch target size
+});
+
 /**
  * Generate micro-interaction classes for smooth animations
  */
-export function microInteraction(
+function createMicroInteraction(
   type: 'hover' | 'focus' | 'active' | 'press' = 'hover',
   intensity: 'subtle' | 'medium' | 'strong' = 'medium'
 ): string {
@@ -68,6 +73,13 @@ export function microInteraction(
 
   return `${transitionClass} ${interactionClass}`;
 }
+
+// Create microInteraction object with both function and properties
+export const microInteraction = Object.assign(createMicroInteraction, {
+  gentle: createMicroInteraction('hover', 'subtle'),
+  interactive: createMicroInteraction('hover', 'medium'),
+  smooth: createMicroInteraction('hover', 'subtle'),
+});
 
 /**
  * Get current breakpoint based on window width

@@ -42,7 +42,7 @@ export function safeQuerySelector<T extends Element = Element>(
     return parent.querySelector<T>(selector);
   } catch (error) {
     console.warn('Error in querySelector:', error);
-    return ;
+    return;
   }
 }
 
@@ -70,14 +70,14 @@ export function safeGetComputedStyle(
 ): string | CSSStyleDeclaration | null {
   try {
     if ('undefined' === typeof window || !element) {
-      return ;
+      return;
     }
-    
+
     const computedStyle = window.getComputedStyle(element);
     return property ? computedStyle.getPropertyValue(property) : computedStyle;
   } catch (error) {
     console.warn('Error getting computed style:', error);
-    return ;
+    return;
   }
 }
 
@@ -120,11 +120,11 @@ export function safeArrayAccess<T>(
   if (!Array.isArray(array)) {
     return fallback;
   }
-  
+
   if (0 > index || index >= array.length) {
     return fallback;
   }
-  
+
   return array[index];
 }
 
@@ -139,7 +139,7 @@ export function safeMapGet<K, V>(
   if (!map || !map.has(key)) {
     return fallback;
   }
-  
+
   try {
     return map.get(key);
   } catch (error) {
@@ -158,12 +158,12 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
   options?: boolean | AddEventListenerOptions
 ): (() => void) | null {
   if (!element) {
-    return ;
+    return;
   }
 
   try {
     element.addEventListener(type, listener as EventListener, options);
-    
+
     return () => {
       try {
         element.removeEventListener(type, listener as EventListener, options);
@@ -173,7 +173,7 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
     };
   } catch (error) {
     console.warn('Error adding event listener:', error);
-    return ;
+    return;
   }
 }
 
@@ -184,12 +184,12 @@ export function safeRequestAnimationFrame(
   callback: FrameRequestCallback
 ): (() => void) | null {
   if ('undefined' === typeof window || !window.requestAnimationFrame) {
-    return ;
+    return;
   }
 
   try {
     const id = window.requestAnimationFrame(callback);
-    
+
     return () => {
       try {
         window.cancelAnimationFrame(id);
@@ -199,7 +199,7 @@ export function safeRequestAnimationFrame(
     };
   } catch (error) {
     console.warn('Error requesting animation frame:', error);
-    return ;
+    return;
   }
 }
 
@@ -208,14 +208,14 @@ export function safeRequestAnimationFrame(
  */
 export function safeCreateAudioContext(): AudioContext | null {
   if ('undefined' === typeof window || !('AudioContext' in window)) {
-    return ;
+    return;
   }
 
   try {
     return new AudioContext();
   } catch (error) {
     console.warn('Error creating AudioContext:', error);
-    return ;
+    return;
   }
 }
 
