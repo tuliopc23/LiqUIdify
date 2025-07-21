@@ -157,7 +157,8 @@ export function useClientOnly<T>(
       setValue(factory());
       setIsReady(true);
     }
-  }, [isClient, ...deps]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isClient, factory, ...deps]);
 
   return { value, isReady };
 }
