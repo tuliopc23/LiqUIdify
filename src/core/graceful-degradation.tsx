@@ -54,7 +54,7 @@ export function withAnimationFallback(
 
       mediaQuery.addEventListener('change', handleChange);
       return () => mediaQuery.removeEventListener('change', handleChange);
-    }, [respectReducedMotion]);
+    }, []);
 
     useEffect(() => {
       // Check for performance constraints
@@ -248,7 +248,7 @@ export function withFeatureDetection(
         // Handle async feature detection (like WebP)
         Promise.resolve(allFeaturesSupported).then(setHasFeature);
       }
-    }, [feature]);
+    }, []);
 
     return hasFeature ? <>{enhancedComponent}</> : <>{fallbackComponent}</>;
   };
