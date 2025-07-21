@@ -62,6 +62,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   const allFilteredItems = Object.values(categorizedItems).flat();
 
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+    setQuery('');
+    setSelectedIndex(0);
+  }, []);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -107,7 +113,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         document.removeEventListener('keydown', handleKeyDown);
       }
     };
-  }, [isOpen, selectedIndex, allFilteredItems]);
+  }, [isOpen, selectedIndex, allFilteredItems, handleClose]);
 
   // Focus input when opened
   useEffect(() => {
@@ -120,12 +126,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   useEffect(() => {
     setSelectedIndex(0);
   }, [query]);
-
-  const handleClose = useCallback(() => {
-    setIsOpen(false);
-    setQuery('');
-    setSelectedIndex(0);
-  }, []);
 
   const formatShortcut = (keys: string[]) => {
     return keys
