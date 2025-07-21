@@ -1,50 +1,50 @@
 {
-  "timestamp": "2025-07-21T17:54:40.322Z",
+  "timestamp": "2025-07-21T18:13:41.834Z",
   "bundles": {
     "tokens": {
       "file": "tokens.mjs",
-      "raw": 278,
-      "gzipped": 161,
-      "rawKB": "0.27",
-      "gzippedKB": "0.16",
-      "timestamp": "2025-07-21T17:54:40.322Z"
+      "raw": 200,
+      "gzipped": 113,
+      "rawKB": "0.20",
+      "gzippedKB": "0.11",
+      "timestamp": "2025-07-21T18:13:41.834Z"
     },
     "index": {
       "file": "index.mjs",
-      "raw": 11076,
-      "gzipped": 2543,
-      "rawKB": "10.82",
-      "gzippedKB": "2.48",
-      "timestamp": "2025-07-21T17:54:40.322Z"
+      "raw": 10558,
+      "gzipped": 2199,
+      "rawKB": "10.31",
+      "gzippedKB": "2.15",
+      "timestamp": "2025-07-21T18:13:41.834Z"
     },
     "documentation": {
       "file": "documentation.mjs",
-      "raw": 1572,
-      "gzipped": 375,
-      "rawKB": "1.54",
-      "gzippedKB": "0.37",
-      "timestamp": "2025-07-21T17:54:40.322Z"
+      "raw": 1625,
+      "gzipped": 404,
+      "rawKB": "1.59",
+      "gzippedKB": "0.39",
+      "timestamp": "2025-07-21T18:13:41.834Z"
     },
     "index-modular": {
       "file": "index-modular.mjs",
-      "raw": 4122,
-      "gzipped": 1175,
-      "rawKB": "4.03",
-      "gzippedKB": "1.15",
-      "timestamp": "2025-07-21T17:54:40.322Z"
+      "raw": 3973,
+      "gzipped": 1156,
+      "rawKB": "3.88",
+      "gzippedKB": "1.13",
+      "timestamp": "2025-07-21T18:13:41.834Z"
     },
     "providers": {
       "file": "providers.mjs",
-      "raw": 668,
-      "gzipped": 248,
-      "rawKB": "0.65",
-      "gzippedKB": "0.24",
-      "timestamp": "2025-07-21T17:54:40.322Z"
+      "raw": 609,
+      "gzipped": 202,
+      "rawKB": "0.59",
+      "gzippedKB": "0.20",
+      "timestamp": "2025-07-21T18:13:41.834Z"
     }
   },
   "total": {
-    "gzippedKB": "4.40",
-    "rawKB": "17.31"
+    "gzippedKB": "3.98",
+    "rawKB": "16.57"
   },
   "targets": {
     "core": {
