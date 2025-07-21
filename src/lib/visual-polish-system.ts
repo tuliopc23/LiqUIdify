@@ -729,7 +729,7 @@ export function useVisualPolish(config: Partial<PolishConfig> = {}) {
       polishManagerRef.current?.destroy();
       polishManagerRef.current = undefined;
     };
-  }, []);
+  }, [config]);
 
   // Update metrics periodically
   useEffect(() => {
