@@ -376,7 +376,7 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
         observer.current.disconnect();
       }
     };
-  }, [isClient, callback, options.root, options.rootMargin, options.threshold]);
+  }, [isClient, callback, options]);
 
   return [setRef, isIntersecting, entry];
 }
