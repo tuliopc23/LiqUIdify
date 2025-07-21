@@ -345,7 +345,8 @@ export function useClientOnly<T>(factory: () => T, deps: any[] = []): T | null {
     if (isHydrated) {
       setValue(factory());
     }
-  }, [isHydrated, ...deps]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isHydrated, factory, ...deps]);
 
   return value;
 }
