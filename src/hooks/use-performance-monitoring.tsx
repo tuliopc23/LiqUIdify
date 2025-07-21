@@ -1,5 +1,5 @@
 import type { ComponentType, ReactElement } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { performanceMonitor } from '../core/performance-monitor';
 
 /**
@@ -25,7 +25,7 @@ export function usePerformanceMonitoring(
         props: props || {},
       });
     };
-  }, []);
+  }, [componentName, props]);
 
   // Track each render
   useEffect(() => {
@@ -48,19 +48,32 @@ export function usePerformanceMonitoring(
     }
 
     setRenderCount((prev) => prev + 1);
-  });
+  }, [componentName, props, renderCount]);
 
   // Mark render start
   renderStartTime.current = performance.now();
 
+  const startTiming = useCallback(
+    (name: string) => performanceMonitor.startTiming(`${componentName}-${name}`),
+    [componentName]
+  );
+
+  const endTiming = useCallback(
+    (name: string) => performanceMonitor.endTiming(`${componentName}-${name}`),
+    [componentName]
+  );
+
+  const trackMetric = useCallback(
+    (name: string, value: number) =>
+      performanceMonitor.trackCustomMetric(`${componentName}-${name}`, value),
+    [componentName]
+  );
+
   return {
     renderCount,
-    startTiming: (name: string) =>
-      performanceMonitor.startTiming(`${componentName}-${name}`),
-    endTiming: (name: string) =>
-      performanceMonitor.endTiming(`${componentName}-${name}`),
-    trackMetric: (name: string, value: number) =>
-      performanceMonitor.trackCustomMetric(`${componentName}-${name}`, value),
+    startTiming,
+    endTiming,
+    trackMetric,
   };
 }
 
