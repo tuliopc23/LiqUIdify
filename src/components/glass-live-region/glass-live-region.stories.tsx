@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { GlassLiveRegion, GlassLiveRegionProvider, useAnnouncement, announcer } from './glass-live-region';
-import { GlassButton } from '../glass-button';
+import { GlassButton } from '../glass-button-refactored';
 
 const meta: Meta<typeof GlassLiveRegion> = {
   title: 'Accessibility/GlassLiveRegion',

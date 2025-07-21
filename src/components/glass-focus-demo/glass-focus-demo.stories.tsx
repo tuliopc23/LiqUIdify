@@ -3,7 +3,7 @@ import { GlassFocusDemo } from './glass-focus-demo';
 import { GlassFocusTrap } from '../glass-focus-trap';
 import { GlassSkipNavigation } from '../glass-skip-navigation';
 import { useState } from 'react';
-import { GlassButton } from '../glass-button';
+import { GlassButton } from '../glass-button-refactored';
 
 const meta: Meta<typeof GlassFocusDemo> = {
   title: 'Accessibility/Focus Management',

@@ -12,7 +12,7 @@ import {
   GlassCardDescription,
   GlassCardHeader,
   GlassCardTitle,
-} from '@/components/glass-card';
+} from '@/components/glass-card-refactored';
 
 export function PlaygroundDemo() {
   return (

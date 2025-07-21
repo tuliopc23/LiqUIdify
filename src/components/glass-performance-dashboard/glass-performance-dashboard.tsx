@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { performanceMonitor } from '../../core/performance-monitor';
 import { useRealtimePerformance } from '../../hooks/use-performance-monitoring';
 import { cn } from '@/core/utils/classname';
-import { GlassCard } from '../glass-card';
+import { GlassCard } from '../glass-card-refactored';
 
 export interface GlassPerformanceDashboardProps {
   className?: string;

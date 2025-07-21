@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import { GlassFocusTrap } from '../glass-focus-trap';
 import { GlassSkipNavigation } from '../glass-skip-navigation';
 import { RovingTabindexGroup, useRovingTabindex } from '@/core/roving-tabindex';
-import { GlassButton } from '../glass-button';
-import { GlassCard } from '../glass-card';
+import { GlassButton } from '../glass-button-refactored';
+import { GlassCard } from '../glass-card-refactored';
 import { cn } from '@/core/utils/classname';
 
 export const GlassFocusDemo: React.FC = () => {

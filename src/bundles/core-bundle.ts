@@ -7,8 +7,8 @@
  */
 
 // Essential base components (smallest footprint)
-export { GlassButton } from '../components/glass-button';
-export { GlassCard } from '../components/glass-card';
+export { GlassButton } from '../components/glass-button-refactored';
+export { GlassCard } from '../components/glass-card-refactored';
 export { GlassInput } from '../components/glass-input';
 
 // Core providers
@@ -29,8 +29,8 @@ export { cn } from '@/core/utils/classname';
 // Note: These need to be defined in types.ts
 
 // Re-export specific button and card types
-export type { GlassButtonProps } from '../components/glass-button';
-export type { GlassCardProps } from '../components/glass-card';
+export type { GlassButtonProps } from '../components/glass-button-refactored';
+export type { GlassCardProps } from '../components/glass-card-refactored';
 export type { GlassInputProps } from '../components/glass-input';
 
 // Minimal CSS-in-JS for critical styles

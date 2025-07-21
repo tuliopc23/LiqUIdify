@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GlassButton } from '../glass-button';
+import { GlassButton } from '../glass-button-refactored';
 import { GlassInput } from '../glass-input';
 import { GlassTextarea } from '../glass-textarea';
 import { GlassSelect } from '../glass-select';
@@ -18,7 +18,7 @@ import {
   GlassCardFooter,
   GlassCardHeader,
   GlassCardTitle,
-} from '../glass-card';
+} from '../glass-card-refactored';
 import { GlassCheckbox } from '../glass-checkbox';
 import { GlassSwitch } from '../glass-switch';
 import { GlassTabs } from '../glass-tabs';

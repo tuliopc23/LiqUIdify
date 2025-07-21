@@ -5,7 +5,6 @@
 
 // Physics utilities
 export * from '../lib/glass-physics';
-export * from '../lib/glass-physics-lite';
 
 // Physics-based components
 export * from '../components/glass-slider';

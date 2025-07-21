@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/core/utils/classname';
 import { useContentAwareGlass, useLiquidGlass } from '@/hooks/use-liquid-glass';
 import { useMagneticHover } from '@/lib/glass-physics';
-import { GlassButton } from './glass-button';
+import { GlassButton } from './glass-button-refactored';
 // Removed branded type import - using string literals directly
 import {
   containerFadeInFast,

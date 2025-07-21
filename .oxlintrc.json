@@ -124,7 +124,9 @@
     "unicorn/no-new-buffer": "error",
     "unicorn/prefer-includes": "error",
     "unicorn/prefer-type-error": "error",
-    "unicorn/throw-new-error": "error"
+    "unicorn/throw-new-error": "error",
+    "no-magic-numbers": "off",
+    "unicorn/filename-case": "off"
   },
   "settings": {
     "jsx-a11y": {

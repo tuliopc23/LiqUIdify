@@ -11,11 +11,12 @@ export { useLiquidGlass } from '../hooks/use-liquid-glass';
 export { useContentAwareGlass } from '../hooks/use-liquid-glass';
 
 // Apple liquid glass effects
-export {
-  useAppleLiquidGlass,
-  getAppleLiquidGlassClass,
-  createGlassLayers,
-} from '../lib/enhanced-apple-liquid-glass';
+// TODO: Implement these exports once the lib file is created
+// export {
+//   useAppleLiquidGlass,
+//   getAppleLiquidGlassClass,
+//   createGlassLayers,
+// } from '../lib/enhanced-apple-liquid-glass';
 
 // Animation utilities
 export { microInteraction } from '@/core/utils/classname';

@@ -18,7 +18,7 @@ export const isClient = !isServer;
 export const safeWindow = new Proxy({} as Window, {
   get: (target, prop) => {
     if (isServer) {
-      return null;
+      return ;
     }
     return window[prop as keyof Window];
   },
@@ -30,7 +30,7 @@ export const safeWindow = new Proxy({} as Window, {
 export const safeDocument = new Proxy({} as Document, {
   get: (target, prop) => {
     if (isServer) {
-      return null;
+      return ;
     }
     return document[prop as keyof Document];
   },

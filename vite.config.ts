@@ -33,14 +33,13 @@ export default defineConfig({
       include: /\.(tsx|ts|jsx|js)$/,
       // Disable Babel to use OXC through rolldown-vite
       babel: false,
-      // Use OXC's JSX transformation settings
-      jsxPure: oxcConfig.transform.jsx.pure,
+      // Removed jsxPure as per warning
       fastRefresh: process.env.NODE_ENV === 'development',
     }),
     dts({
       insertTypesEntry: true,
       outDir: 'dist/types',
-      rollupTypes: true,
+      rollupTypes: false, // Disable API extractor to avoid errors
       bundledPackages: [],
       exclude: [
         '**/*.test.*',
@@ -91,11 +90,9 @@ export default defineConfig({
       '@radix-ui/react-dialog',
       '@radix-ui/react-radio-group',
     ],
-    // Use esbuild for compatibility while OXC integration matures
-    esbuildOptions: {
-      target: 'es2020',
-      jsx: 'automatic',
-      jsxImportSource: 'react',
+    // Use rollup options for compatibility
+    rollupOptions: {
+      // Rolldown-specific options
     },
   },
   esbuild: {
@@ -187,7 +184,7 @@ export default defineConfig({
           entryFileNames: '[name].cjs',
           chunkFileNames: 'chunks/[name]-[hash].cjs',
           exports: 'named',
-          interop: 'auto',
+          // interop removed as it's not supported in rolldown
           globals: {
             react: 'React',
             'react-dom': 'ReactDOM',

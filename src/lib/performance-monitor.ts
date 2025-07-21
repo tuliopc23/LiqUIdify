@@ -365,7 +365,7 @@ export class PerformanceMonitor {
       if (value !== undefined) {
         const status = this.getMetricStatusByValue(metric, value);
         coreWebVitalsScore +=
-          'good' === status ? 100 : 'needs-improvement' === status ? 50 : 0;
+          'good' === status ? 100 : ('needs-improvement' === status ? 50 : 0);
         coreWebVitalsCount++;
 
         if ('good' !== status) {

@@ -4,8 +4,8 @@
  */
 
 // Core Glass Components - Working and tested
-export { GlassButton, type GlassButtonProps } from './glass-button';
-export { GlassCard, type GlassCardProps } from './glass-card';
+export { GlassButton, type GlassButtonProps } from './glass-button-refactored';
+export { GlassCard, type GlassCardProps } from './glass-card-refactored';
 export { GlassInput, type GlassInputProps } from './glass-input';
 export { GlassModal, type GlassModalProps } from './glass-modal';
 export { GlassTabs, type GlassTabsProps } from './glass-tabs';

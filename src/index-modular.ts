@@ -65,8 +65,8 @@ export async function autoLoadBundles() {
 }
 
 // Tree-shakeable component imports
-export { GlassButton } from './components/glass-button';
-export { GlassCard } from './components/glass-card';
+export { GlassButton } from './components/glass-button-refactored';
+export { GlassCard } from './components/glass-card-refactored';
 export { GlassInput } from './components/glass-input';
 export { ThemeProvider } from './components/theme-provider';
 

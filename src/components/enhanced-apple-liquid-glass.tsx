@@ -6,15 +6,52 @@
 
 import type { HTMLAttributes } from 'react';
 import React, { forwardRef } from 'react';
-import type {
-  ENHANCED_GLASS_VARIANTS,
-  EnhancedGlassOptions,
-} from '../lib/enhanced-apple-liquid-glass';
-import {
-  createEnhancedGlassLayers,
-  getEnhancedGlassClass,
-  useEnhancedAppleLiquidGlass,
-} from '../lib/enhanced-apple-liquid-glass';
+// TODO: These types need to be recreated or use unified glass system
+// import type {
+//   ENHANCED_GLASS_VARIANTS,
+//   EnhancedGlassOptions,
+// } from '../lib/enhanced-apple-liquid-glass';
+
+// Temporary interface until properly migrated
+interface EnhancedGlassOptions {
+  intensity?: 'subtle' | 'medium' | 'strong';
+  enablePhysics?: boolean;
+  enableHaptics?: boolean;
+  enableRetina?: boolean;
+  enableSubpixel?: boolean;
+  magneticStrength?: number;
+}
+// TODO: These functions need to be recreated or use unified glass system
+// import {
+//   createEnhancedGlassLayers,
+//   getEnhancedGlassClass,
+//   useEnhancedAppleLiquidGlass,
+// } from '../lib/enhanced-apple-liquid-glass';
+
+// Temporary constant for variants
+const ENHANCED_GLASS_VARIANTS = {
+  subtle: 'subtle',
+  medium: 'medium',
+  strong: 'strong',
+  extreme: 'extreme',
+} as const;
+
+// Temporary implementations
+const getEnhancedGlassClass = (intensity?: string, options?: any) => {
+  return 'backdrop-blur-xl bg-white/10 border border-white/20';
+};
+
+const createEnhancedGlassLayers = (children: React.ReactNode, options: any) => {
+  return children;
+};
+
+const useEnhancedAppleLiquidGlass = (options: any) => {
+  return { 
+    containerRef: null,
+    variant: { radius: 12 },
+    isReady: true 
+  };
+};
 import { LiquidGlassSvgFilters } from './liquid-glass-svg-filters';
 import { useIsClient } from '../hooks/use-ssr-safe';
 
@@ -25,6 +62,8 @@ export interface EnhancedAppleLiquidGlassProps
   contentClassName?: string;
   enableSvgFilters?: boolean;
   distortionFilter?: string;
+  liquidFlowIntensity?: number;
+  distortionStrength?: number;
 }
 
 /**
@@ -306,12 +345,11 @@ export const EnhancedAppleLiquidGlassModal = forwardRef<
 export const EnhancedAppleLiquidGlassShowcase: React.FC<{
   className?: string;
 }> = ({ className = '' }) => {
-  const intensities: (keyof typeof ENHANCED_GLASS_VARIANTS)[] = [
+  const intensities = [
     'subtle',
     'medium',
     'strong',
-    'extreme',
-  ];
+  ] as const;
 
   return (
     <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${className}`}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { accessibilityManager } from '@/core/accessibility-manager';
-import { GlassButton } from '../glass-button';
-import { GlassCard } from '../glass-card';
+import { GlassButton } from '../glass-button-refactored';
+import { GlassCard } from '../glass-card-refactored';
 import { cn } from '@/core/utils/classname';
 
 interface AccessibilityDemoProps {

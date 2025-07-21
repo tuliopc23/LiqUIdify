@@ -61,30 +61,31 @@ import {
   useSSRSafeSessionStorage,
   useSSRSafeWindow
 } from './hooks/use-ssr-safe';
-import {
-  APPLE_LIQUID_AFTER_EFFECTS,
-  APPLE_LIQUID_ANIMATIONS,
-  APPLE_LIQUID_SHADOWS,
-  APPLE_LIQUID_VARIANTS,
-  type AppleLiquidGlassOptions,
-  type AppleLiquidGlassProps,
-  createGlassLayers,
-  getAppleLiquidGlassClass,
-  useAppleLiquidGlass,
-} from './lib/enhanced-apple-liquid-glass';
-import {
-  APPLE_HIG_COMPLIANCE,
-  type AppleHIGCompliance,
-  ENHANCED_GLASS_LAYERS,
-  ENHANCED_GLASS_VARIANTS,
-  type EnhancedGlassLayer,
-  type EnhancedGlassOptions,
-  PIXEL_PERFECT_CONFIG,
-  type PixelPerfectConfig,
-  createEnhancedGlassLayers,
-  getEnhancedGlassClass,
-  useEnhancedAppleLiquidGlass,
-} from './lib/enhanced-apple-liquid-glass';
+// TODO: These exports need to be recreated or removed
+// import {
+//   APPLE_LIQUID_AFTER_EFFECTS,
+//   APPLE_LIQUID_ANIMATIONS,
+//   APPLE_LIQUID_SHADOWS,
+//   APPLE_LIQUID_VARIANTS,
+//   type AppleLiquidGlassOptions,
+//   type AppleLiquidGlassProps,
+//   createGlassLayers,
+//   getAppleLiquidGlassClass,
+//   useAppleLiquidGlass,
+// } from './components/enhanced-apple-liquid-glass';
+// import {
+//   APPLE_HIG_COMPLIANCE,
+//   type AppleHIGCompliance,
+//   ENHANCED_GLASS_LAYERS,
+//   ENHANCED_GLASS_VARIANTS,
+//   type EnhancedGlassLayer,
+//   type EnhancedGlassOptions,
+//   PIXEL_PERFECT_CONFIG,
+//   type PixelPerfectConfig,
+//   createEnhancedGlassLayers,
+//   getEnhancedGlassClass,
+//   useEnhancedAppleLiquidGlass,
+// } from './components/enhanced-apple-liquid-glass';
 import {
   isClient,
   isServer,
@@ -140,29 +141,29 @@ export {
   useHydrationSafe,
   useNetworkStatus,
   
-  // Apple HIG utilities
-  useAppleLiquidGlass,
-  getAppleLiquidGlassClass,
-  createGlassLayers,
-  APPLE_LIQUID_VARIANTS,
-  APPLE_LIQUID_SHADOWS,
-  APPLE_LIQUID_AFTER_EFFECTS,
-  APPLE_LIQUID_ANIMATIONS,
-  type AppleLiquidGlassOptions,
-  type AppleLiquidGlassProps,
+  // TODO: Apple HIG utilities - need to be recreated
+  // useAppleLiquidGlass,
+  // getAppleLiquidGlassClass,
+  // createGlassLayers,
+  // APPLE_LIQUID_VARIANTS,
+  // APPLE_LIQUID_SHADOWS,
+  // APPLE_LIQUID_AFTER_EFFECTS,
+  // APPLE_LIQUID_ANIMATIONS,
+  // type AppleLiquidGlassOptions,
+  // type AppleLiquidGlassProps,
   
-  // Enhanced Apple Liquid Glass System
-  useEnhancedAppleLiquidGlass,
-  getEnhancedGlassClass,
-  createEnhancedGlassLayers,
-  ENHANCED_GLASS_VARIANTS,
-  ENHANCED_GLASS_LAYERS,
-  PIXEL_PERFECT_CONFIG,
-  APPLE_HIG_COMPLIANCE,
-  type EnhancedGlassOptions,
-  type EnhancedGlassLayer,
-  type PixelPerfectConfig,
-  type AppleHIGCompliance,
+  // TODO: Enhanced Apple Liquid Glass System - need to be recreated
+  // useEnhancedAppleLiquidGlass,
+  // getEnhancedGlassClass,
+  // createEnhancedGlassLayers,
+  // ENHANCED_GLASS_VARIANTS,
+  // ENHANCED_GLASS_LAYERS,
+  // PIXEL_PERFECT_CONFIG,
+  // APPLE_HIG_COMPLIANCE,
+  // type EnhancedGlassOptions,
+  // type EnhancedGlassLayer,
+  // type PixelPerfectConfig,
+  // type AppleHIGCompliance,
   
   // SSR Utilities
   isServer,

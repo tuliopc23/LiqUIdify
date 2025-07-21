@@ -1,0 +1,42 @@
+{
+  "tokens": {
+    "file": "tokens.mjs",
+    "raw": 278,
+    "gzipped": 161,
+    "rawKB": "0.27",
+    "gzippedKB": "0.16",
+    "timestamp": "2025-07-21T17:54:40.322Z"
+  },
+  "index": {
+    "file": "index.mjs",
+    "raw": 11076,
+    "gzipped": 2543,
+    "rawKB": "10.82",
+    "gzippedKB": "2.48",
+    "timestamp": "2025-07-21T17:54:40.322Z"
+  },
+  "documentation": {
+    "file": "documentation.mjs",
+    "raw": 1572,
+    "gzipped": 375,
+    "rawKB": "1.54",
+    "gzippedKB": "0.37",
+    "timestamp": "2025-07-21T17:54:40.322Z"
+  },
+  "index-modular": {
+    "file": "index-modular.mjs",
+    "raw": 4122,
+    "gzipped": 1175,
+    "rawKB": "4.03",
+    "gzippedKB": "1.15",
+    "timestamp": "2025-07-21T17:54:40.322Z"
+  },
+  "providers": {
+    "file": "providers.mjs",
+    "raw": 668,
+    "gzipped": 248,
+    "rawKB": "0.65",
+    "gzippedKB": "0.24",
+    "timestamp": "2025-07-21T17:54:40.322Z"
+  }
+}

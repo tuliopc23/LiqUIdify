@@ -1,5 +1,5 @@
 import { cn } from '@/core/utils/classname';
-import { AppleLiquidGlassNav } from '@/components/apple-liquid-glass';
+import { EnhancedAppleLiquidGlassNav } from '@/components/enhanced-apple-liquid-glass';
 import { LiquidGlassSvgFilters } from '@/components/liquid-glass-svg-filters';
 
 export interface GlassHeaderProps {
@@ -18,10 +18,9 @@ export function GlassHeader({
   return (
     <>
       <LiquidGlassSvgFilters />
-      <AppleLiquidGlassNav
+      <EnhancedAppleLiquidGlassNav
         intensity="subtle"
-        magnetic
-        animated
+        magneticStrength={0.2}
         className={cn('border-b border-white/15 py-6', className)}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-2 md:flex-row md:items-center md:justify-between w-full">
@@ -35,7 +34,7 @@ export function GlassHeader({
             </div>
           )}
         </div>
-      </AppleLiquidGlassNav>
+      </EnhancedAppleLiquidGlassNav>
     </>
   );
 }

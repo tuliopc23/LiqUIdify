@@ -2,6 +2,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import postcssImport from 'postcss-import';
 import postcssPresetEnv from 'postcss-preset-env';
+import tailwindcssPostcss from '@tailwindcss/postcss';
 
 // Determine if we're in optimization mode
 const isOptimized = process.env.OPTIMIZE_CSS === 'true';
@@ -72,17 +73,18 @@ glassUIOptimizer.postcss = true;
 
 // Base configuration
 const baseConfig = {
-  plugins: {
-    // Tailwind v4 PostCSS plugin
-    '@tailwindcss/postcss': {},
-  }
+  plugins: [
+    postcssImport(),
+    tailwindcssPostcss(),
+    autoprefixer(),
+  ]
 };
 
 // Optimized configuration
 const optimizedConfig = {
   plugins: [
     postcssImport(),
-    require('@tailwindcss/postcss'),
+    tailwindcssPostcss(),
     glassUIOptimizer(),
     postcssPresetEnv({
       stage: 3,

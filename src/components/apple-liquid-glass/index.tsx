@@ -9,13 +9,14 @@ import type { GlassIntensity, UnifiedGlassProps } from '@/core/glass/unified-gla
 import { cn } from '@/core/utils/classname';
 
 // Re-export from enhanced apple liquid glass lib
-export {
-  useAppleLiquidGlass,
-  getAppleLiquidGlassClass,
-  createGlassLayers,
-  type AppleLiquidGlassOptions,
-  type AppleLiquidGlassProps,
-} from '@/lib/enhanced-apple-liquid-glass';
+// TODO: Implement these exports once the lib file is created
+// export {
+//   useAppleLiquidGlass,
+//   getAppleLiquidGlassClass,
+//   createGlassLayers,
+//   type AppleLiquidGlassOptions,
+//   type AppleLiquidGlassProps,
+// } from '@/lib/enhanced-apple-liquid-glass';
 
 export interface AppleLiquidGlassNavProps extends Omit<UnifiedGlassProps, 'config'> {
   intensity?: GlassIntensity;

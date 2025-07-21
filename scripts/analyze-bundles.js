@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, basename } from 'path';
 import { gzipSync } from 'zlib';
 import chalk from 'chalk';
-import glob from 'glob';
+import { glob } from 'glob';
 
 const BUNDLE_TARGETS = {
   'core': { max: 15, warn: 12 },

@@ -11,7 +11,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Check, Code, Copy, Download, Eye, Maximize2 } from 'lucide-react';
 import { cn } from '@/core/utils/classname';
 import * as LiquidComponents from '@/components';
-import { GlassButton } from '../glass-button';
+import { GlassButton } from '../glass-button-refactored';
 import { GlassTabs } from '../glass-tabs';
 import { useSSRSafeWindow } from '@/hooks/use-ssr-safe';
 
