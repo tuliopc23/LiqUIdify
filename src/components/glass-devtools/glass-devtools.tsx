@@ -630,36 +630,40 @@ function SettingsTab({
             <div>
                 <h4 className="font-semibold text-sm mb-2">Monitoring</h4>
                 <div className="space-y-2">
-                    <label className="flex items-center gap-2 text-xs">
-                        <input
-                            type="checkbox"
-                            checked={settings.enableRealTimeValidation}
-                            onChange={(e) => onSettingsChange({ enableRealTimeValidation: e.target.checked })}
-                        />
+                    <input
+                        id="real-time-validation"
+                        type="checkbox"
+                        checked={settings.enableRealTimeValidation}
+                        onChange={(e) => onSettingsChange({ enableRealTimeValidation: e.target.checked })}
+                    />
+                    <label htmlFor="real-time-validation" className="flex items-center gap-2 text-xs">
                         Real-time accessibility validation
                     </label>
-                    <label className="flex items-center gap-2 text-xs">
-                        <input
-                            type="checkbox"
-                            checked={settings.enablePerformanceMonitoring}
-                            onChange={(e) => onSettingsChange({ enablePerformanceMonitoring: e.target.checked })}
-                        />
+                    <input
+                        id="performance-monitoring"
+                        type="checkbox"
+                        checked={settings.enablePerformanceMonitoring}
+                        onChange={(e) => onSettingsChange({ enablePerformanceMonitoring: e.target.checked })}
+                    />
+                    <label htmlFor="performance-monitoring" className="flex items-center gap-2 text-xs">
                         Performance monitoring
                     </label>
-                    <label className="flex items-center gap-2 text-xs">
-                        <input
-                            type="checkbox"
-                            checked={settings.enableAccessibilityHighlights}
-                            onChange={(e) => onSettingsChange({ enableAccessibilityHighlights: e.target.checked })}
-                        />
+                    <input
+                        id="accessibility-highlights"
+                        type="checkbox"
+                        checked={settings.enableAccessibilityHighlights}
+                        onChange={(e) => onSettingsChange({ enableAccessibilityHighlights: e.target.checked })}
+                    />
+                    <label htmlFor="accessibility-highlights" className="flex items-center gap-2 text-xs">
                         Accessibility highlights
                     </label>
-                    <label className="flex items-center gap-2 text-xs">
-                        <input
-                            type="checkbox"
-                            checked={settings.enableConsoleLogging}
-                            onChange={(e) => onSettingsChange({ enableConsoleLogging: e.target.checked })}
-                        />
+                    <input
+                        id="console-logging"
+                        type="checkbox"
+                        checked={settings.enableConsoleLogging}
+                        onChange={(e) => onSettingsChange({ enableConsoleLogging: e.target.checked })}
+                    />
+                    <label htmlFor="console-logging" className="flex items-center gap-2 text-xs">
                         Console logging
                     </label>
                 </div>

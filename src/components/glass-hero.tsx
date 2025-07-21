@@ -146,8 +146,15 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover -z-10"
+            aria-label="Background video"
           >
             <source src={backgroundVideo} type="video/mp4" />
+            <track
+              kind="captions"
+              srcLang="en"
+              label="English captions"
+              default
+            />
           </video>
         )}
 

@@ -136,24 +136,24 @@ export function GlassShowcase() {
               <span className="text-white font-medium">Logo</span>
             </div>
             <div className="flex gap-4">
-              <a
-                href="#"
-                className="apple-glass apple-glass--depth-1 apple-glass--shimmer px-3 py-2 text-white rounded-lg hover:no-underline"
+              <button
+                onClick={() => console.log('Navigate to Home')}
+                className="apple-glass apple-glass--depth-1 apple-glass--shimmer px-3 py-2 text-white rounded-lg hover:no-underline border-none cursor-pointer"
               >
                 Home
-              </a>
-              <a
-                href="#"
-                className="apple-glass apple-glass--depth-1 apple-glass--shimmer px-3 py-2 text-white rounded-lg hover:no-underline"
+              </button>
+              <button
+                onClick={() => console.log('Navigate to About')}
+                className="apple-glass apple-glass--depth-1 apple-glass--shimmer px-3 py-2 text-white rounded-lg hover:no-underline border-none cursor-pointer"
               >
                 About
-              </a>
-              <a
-                href="#"
-                className="apple-glass apple-glass--depth-1 apple-glass--shimmer px-3 py-2 text-white rounded-lg hover:no-underline"
+              </button>
+              <button
+                onClick={() => console.log('Navigate to Contact')}
+                className="apple-glass apple-glass--depth-1 apple-glass--shimmer px-3 py-2 text-white rounded-lg hover:no-underline border-none cursor-pointer"
               >
                 Contact
-              </a>
+              </button>
             </div>
             <button className="apple-glass apple-glass--depth-2 apple-glass--ripple px-4 py-2 text-white rounded-lg">
               Get Started

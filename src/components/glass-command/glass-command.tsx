@@ -217,6 +217,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       <div
         className="absolute inset-0 bg-black/20 backdrop-blur-sm"
         onClick={handleClose}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleClose();
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label="Close command palette"
       />
 
       {/* Command Palette */}

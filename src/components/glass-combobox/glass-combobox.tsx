@@ -285,21 +285,15 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
           <div className="flex items-center gap-1">
             {clearable && selectedValue && (
-              <div
-                role="button"
-                tabIndex={0}
+              <button
+                type="button"
                 onClick={handleClear}
-                onKeyDown={e => {
-                  if ('Enter' === e.key || ' ' === e.key) {
-                    e.preventDefault();
-                    handleClear(e as any);
-                  }
-                }}
                 className="p-1 hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
                 aria-label="Clear selection"
+                aria-haspopup="false"
               >
                 <X className="w-4 h-4 text-white/60" />
-              </div>
+              </button>
             )}
             <ChevronDown
               className={cn(

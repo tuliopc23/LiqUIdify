@@ -53,9 +53,9 @@ export const GlassFocusDemo: React.FC = () => {
       {/* Navigation for skip nav target */}
       <nav  aria-label="Demo navigation" className="mb-8">
         <div className="flex gap-4">
-          <a href="#" className="text-blue-500 hover:underline">Link 1</a>
-          <a href="#" className="text-blue-500 hover:underline">Link 2</a>
-          <a href="#" className="text-blue-500 hover:underline">Link 3</a>
+          <button onClick={() => console.log('Link 1 clicked')} className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer">Link 1</button>
+          <button onClick={() => console.log('Link 2 clicked')} className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer">Link 2</button>
+          <button onClick={() => console.log('Link 3 clicked')} className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer">Link 3</button>
         </div>
       </nav>
 

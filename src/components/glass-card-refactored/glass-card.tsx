@@ -299,10 +299,18 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
           className={componentClasses}
           style={glassVariables as React.CSSProperties}
           onClick={handleClick}
+          onKeyDown={(e) => {
+            if ((interactive || selectable) && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              handleClick(e as any);
+            }
+          }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           role={interactive || selectable ? 'button' : undefined}
           tabIndex={interactive || selectable ? 0 : undefined}
+          aria-pressed={selectable ? state.isSelected : undefined}
+          aria-label={interactive || selectable ? 'Interactive card' : undefined}
           {...props}
         >
           {children}

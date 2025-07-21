@@ -261,13 +261,13 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
         {fallbackImage ? (
           <img
             src={fallbackImage}
-            alt="Video fallback"
+            alt="Video content preview - fallback image"
             className="graceful-video-fallback-image"
           />
         ) : (
           <div className="graceful-video-placeholder">
             <p>Video unavailable</p>
-            {poster && <img src={poster} alt="Video poster" />}
+            {poster && <img src={poster} alt="Video thumbnail preview" />}
           </div>
         )}
       </div>
@@ -284,7 +284,14 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
       loop={loop}
       onError={handleError}
       controls
-    />
+    >
+      <track
+        kind="captions"
+        srcLang="en"
+        label="English captions"
+        default
+      />
+    </video>
   );
 };
 
@@ -391,7 +398,7 @@ export const CSSModal: React.FC<{
       <a href={`#${modalId}`}>{trigger}</a>
       <div id={modalId} className="css-modal-fallback">
         <div className="modal-content">
-          <a href="#" style={{ float: 'right' }}>
+          <a href={`#close-${modalId}`} style={{ float: 'right' }} aria-label="Close modal">
             ×
           </a>
           {content}

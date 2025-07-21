@@ -237,10 +237,10 @@ export const SkipNavigationExample: Story = {
         <nav id="nav" className="p-4 bg-gray-100 dark:bg-gray-800 rounded">
           <h2 className="font-semibold mb-2">Navigation</h2>
           <div className="flex gap-4">
-            <a href="#" className="text-blue-500">Home</a>
-            <a href="#" className="text-blue-500">About</a>
-            <a href="#" className="text-blue-500">Services</a>
-            <a href="#" className="text-blue-500">Contact</a>
+            <button onClick={() => console.log('Navigate to Home')} className="text-blue-500 bg-transparent border-none cursor-pointer hover:underline">Home</button>
+            <button onClick={() => console.log('Navigate to About')} className="text-blue-500 bg-transparent border-none cursor-pointer hover:underline">About</button>
+            <button onClick={() => console.log('Navigate to Services')} className="text-blue-500 bg-transparent border-none cursor-pointer hover:underline">Services</button>
+            <button onClick={() => console.log('Navigate to Contact')} className="text-blue-500 bg-transparent border-none cursor-pointer hover:underline">Contact</button>
           </div>
         </nav>
         

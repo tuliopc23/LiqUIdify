@@ -1,0 +1,134 @@
+name: Code Quality & Linting
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+        
+      - name: Run OxLint
+        run: bun run lint:ci
+        
+      - name: Check TypeScript
+        run: bun run type-check
+        
+      - name: Check formatting
+        run: bunx prettier --check "src/**/*.{ts,tsx,css}"
+        
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+        
+      - name: Run unit tests
+        run: bun run test:ci
+        
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          
+  build:
+    name: Build & Bundle Check
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+        
+      - name: Build library
+        run: bun run build:ci
+        
+      - name: Check bundle size
+        run: bun run bundle:budget:enforce
+        
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          
+  accessibility:
+    name: Accessibility Tests
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+        
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps
+        
+      - name: Run accessibility tests
+        run: bun run test:a11y
+        
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          
+  quality-gate:
+    name: Quality Gate
+    runs-on: ubuntu-latest
+    needs: [lint, test, build, accessibility]
+    
+    steps:
+      - name: Quality Gate Check
+        run: |
+          echo "✅ All quality checks passed!"
+          echo "- Linting: PASSED"
+          echo "- Type checking: PASSED"
+          echo "- Unit tests: PASSED"
+          echo "- Build: PASSED"
+          echo "- Bundle size: PASSED"
+          echo "- Accessibility: PASSED"

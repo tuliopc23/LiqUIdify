@@ -125,6 +125,15 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
           <div
             className="absolute inset-0 bg-black/20 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setIsOpen(false);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label="Close navigation menu"
           />
 
           {/* Navigation Panel */}

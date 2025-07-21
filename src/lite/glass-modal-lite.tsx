@@ -68,6 +68,15 @@ export function GlassModalLite({
           isOpen ? 'opacity-100' : 'opacity-0'
         )}
         onClick={onClose}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onClose();
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label="Close modal backdrop"
       >
         <div
           ref={modalRef}
@@ -82,6 +91,7 @@ export function GlassModalLite({
             className
           )}
           onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
           role="dialog"
           aria-modal="true"
           aria-labelledby={title ? 'modal-title' : undefined}

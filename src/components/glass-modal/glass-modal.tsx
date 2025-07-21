@@ -108,6 +108,15 @@ const isClient = useIsClient();
     <div
       className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleBackdropClick(e as any);
+        }
+      }}
+      role="button"
+      tabIndex={-1}
+      aria-label="Modal backdrop"
     >
       <GlassFocusTrap
         active={isOpen}
@@ -128,6 +137,7 @@ const isClient = useIsClient();
             className
           )}
           onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
         >
           {title && (
             <div className="glass-modal-header flex items-center justify-between mb-4">

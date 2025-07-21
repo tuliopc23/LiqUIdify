@@ -144,6 +144,16 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     !notification.read && 'bg-blue-50/50 dark:bg-blue-950/20'
                   )}
                   onClick={() => onMarkAsRead?.(notification.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onMarkAsRead?.(notification.id);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Notification: ${notification.title}`}
+                  aria-describedby={`notification-${notification.id}-desc`}
                 >
                   <div className="flex items-start gap-3">
                     {getIcon(notification.type)}
@@ -163,7 +173,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                           <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" />
                         )}
                       </div>
-                      <p className="text-xs text-[var(--text-secondary)] mt-1 line-clamp-2">
+                      <p id={`notification-${notification.id}-desc`} className="text-xs text-[var(--text-secondary)] mt-1 line-clamp-2">
                         {notification.message}
                       </p>
                       <div className="flex items-center justify-between mt-2">

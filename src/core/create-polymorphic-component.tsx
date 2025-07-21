@@ -109,6 +109,7 @@ export function createPolymorphicComponent<
       as: Element = defaultElement,
       className,
       children,
+      key,
       ...restProps
     } = mergedProps;
 
@@ -154,7 +155,7 @@ export function createPolymorphicComponent<
     } as any;
 
     return (
-      <ElementComponent {...elementProps} key={undefined}>
+      <ElementComponent key={key} {...elementProps}>
         {children}
       </ElementComponent>
     ) as React.ReactElement;

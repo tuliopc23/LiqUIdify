@@ -257,31 +257,33 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
               <div className="component-preview rounded-lg p-6 mb-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="default-input" className="block text-sm font-medium mb-2 text-primary">
                       Default Input
                     </label>
-                    <GlassInput placeholder="Enter text..." />
+                    <GlassInput id="default-input" placeholder="Enter text..." />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="search-input" className="block text-sm font-medium mb-2 text-primary">
                       Search Input
                     </label>
-                    <GlassInput variant="search" placeholder="Search..." />
+                    <GlassInput id="search-input" variant="search" placeholder="Search..." />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="password-input" className="block text-sm font-medium mb-2 text-primary">
                       Password Input
                     </label>
                     <GlassInput
+                      id="password-input"
                       variant="password"
                       placeholder="Enter password..."
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="textarea" className="block text-sm font-medium mb-2 text-primary">
                       Textarea
                     </label>
                     <textarea
+                      id="textarea"
                       placeholder="Enter message..."
                       rows={3}
                       className="w-full px-4 py-3 glass-effect rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-primary resize-none text-primary bg-glass placeholder:text-secondary"
@@ -483,16 +485,17 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
               <div className="component-preview rounded-lg p-6 mb-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="default-textarea" className="block text-sm font-medium mb-2 text-primary">
                       Default Textarea
                     </label>
-                    <GlassTextarea placeholder="Enter your message..." />
+                    <GlassTextarea id="default-textarea" placeholder="Enter your message..." />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="minimal-variant" className="block text-sm font-medium mb-2 text-primary">
                       Minimal Variant
                     </label>
                     <GlassTextarea
+                      id="minimal-variant"
                       variant="minimal"
                       placeholder="Minimal style..."
                     />
@@ -516,7 +519,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
               <div className="component-preview rounded-lg p-6 mb-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="choose-framework" className="block text-sm font-medium mb-2 text-primary">
                       Choose Framework
                     </label>
                     <GlassSelect
@@ -530,7 +533,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="project-type" className="block text-sm font-medium mb-2 text-primary">
                       Project Type
                     </label>
                     <GlassSelect
@@ -938,28 +941,28 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                 <form className="space-y-6 max-w-2xl">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium mb-2 text-primary">
+                      <label htmlFor="first-name" className="block text-sm font-medium mb-2 text-primary">
                         First Name
                       </label>
-                      <GlassInput placeholder="Enter first name..." />
+                      <GlassInput id="first-name" placeholder="Enter first name..." />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2 text-primary">
+                      <label htmlFor="last-name" className="block text-sm font-medium mb-2 text-primary">
                         Last Name
                       </label>
-                      <GlassInput placeholder="Enter last name..." />
+                      <GlassInput id="last-name" placeholder="Enter last name..." />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-primary">
                       Email
                     </label>
-                    <GlassInput type="email" placeholder="your@email.com" />
+                    <GlassInput id="email" type="email" placeholder="your@email.com" />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="role" className="block text-sm font-medium mb-2 text-primary">
                       Role
                     </label>
                     <GlassSelect
@@ -974,17 +977,17 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="experience-level" className="block text-sm font-medium mb-2 text-primary">
                       Experience Level
                     </label>
                     <GlassSlider min={0} max={10} value={5} showValue />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2 text-primary">
+                    <label htmlFor="bio" className="block text-sm font-medium mb-2 text-primary">
                       Bio
                     </label>
-                    <GlassTextarea placeholder="Tell us about yourself..." />
+                    <GlassTextarea id="bio" placeholder="Tell us about yourself..." />
                   </div>
 
                   <div className="flex items-center space-x-6">

@@ -85,7 +85,7 @@ export const GlassAvatar = React.forwardRef<HTMLDivElement, GlassAvatarProps>(
         {src ? (
           <img
             src={src}
-            alt={alt || 'Avatar'}
+            alt={alt || (fallback ? `Avatar for ${fallback}` : 'User avatar')}
             className={cn(
               'w-full h-full object-cover',
               variantClasses[variant]
