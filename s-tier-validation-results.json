@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-07-22T17:16:50.316Z",
+  "requirements": {
+    "bundleSize": {
+      "passed": true,
+      "totalSize": 1625,
+      "limit": 30720,
+      "details": {
+        "core": {
+          "size": 975,
+          "gzipSize": 434,
+          "limit": 15360
+        },
+        "animations": {
+          "size": 1785,
+          "gzipSize": 646,
+          "limit": 10240
+        },
+        "advanced": {
+          "size": 1306,
+          "gzipSize": 545,
+          "limit": 8192
+        }
+      }
+    },
+    "renderPerformance": {
+      "passed": true,
+      "p95RenderTime": 2.4,
+      "threshold": 18,
+      "fps": 60
+    },
+    "performanceScore": {
+      "passed": true,
+      "score": 88,
+      "threshold": 85
+    },
+    "basicTests": {
+      "passed": true
+    }
+  },
+  "passed": true,
+  "score": 88
+}

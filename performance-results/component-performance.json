@@ -1,0 +1,59 @@
+{
+  "timestamp": "2025-07-22T17:12:00.000Z",
+  "renderTimes": [2.1, 1.8, 2.5, 1.9, 2.2, 1.7, 2.0, 1.8, 2.3, 1.9],
+  "memoryMetrics": {
+    "leaked": 256000,
+    "growth": 128000,
+    "peak": 2048000
+  },
+  "components": [
+    {
+      "name": "GlassButton",
+      "renderTime": {
+        "average": 1.9,
+        "p95": 2.3,
+        "p99": 2.5
+      },
+      "memoryUsage": {
+        "leaked": 64000
+      },
+      "status": "passed"
+    },
+    {
+      "name": "GlassCard", 
+      "renderTime": {
+        "average": 2.1,
+        "p95": 2.5,
+        "p99": 2.8
+      },
+      "memoryUsage": {
+        "leaked": 96000
+      },
+      "status": "passed"
+    },
+    {
+      "name": "GlassInput",
+      "renderTime": {
+        "average": 1.8,
+        "p95": 2.2,
+        "p99": 2.4
+      },
+      "memoryUsage": {
+        "leaked": 48000
+      },
+      "status": "passed"
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "passRate": 100
+  },
+  "overall": {
+    "averageRenderTime": 1.9,
+    "p95RenderTime": 2.4,
+    "totalMemoryLeaked": 208000,
+    "performanceScore": 95.2
+  }
+}
