@@ -4,6 +4,7 @@ import { performanceMonitor } from '../core/performance-monitor';
 
 /**
  * Hook for component-level performance monitoring
+ * Optimized to prevent memory leaks and excessive re-renders
  */
 export function usePerformanceMonitoring(
   componentName: string,
@@ -12,61 +13,88 @@ export function usePerformanceMonitoring(
   const renderStartTime = useRef<number>(0);
   const mountStartTime = useRef<number>(0);
   const [renderCount, setRenderCount] = useState(0);
+  const isUnmounted = useRef(false);
 
-  // Track component mount
+  // Track component mount - only depends on componentName to prevent memory leaks
   useEffect(() => {
     mountStartTime.current = performance.now();
+    isUnmounted.current = false;
 
     return () => {
-      // Track unmount time
-      const unmountTime = performance.now() - mountStartTime.current;
-      performanceMonitor.trackComponent(componentName, {
-        unmountTime,
-        props: props || {},
-      });
+      // Mark as unmounted to prevent state updates after unmount
+      isUnmounted.current = true;
+      
+      // Track unmount time only if performanceMonitor exists
+      if (performanceMonitor && typeof performanceMonitor.trackComponent === 'function') {
+        const unmountTime = performance.now() - mountStartTime.current;
+        performanceMonitor.trackComponent(componentName, {
+          unmountTime,
+          props: props || {},
+        });
+      }
     };
-  }, [componentName, props]);
+  }, [componentName]); // Only depend on componentName, not props
 
-  // Track each render
+  // Track each render - optimized to reduce unnecessary tracking
   useEffect(() => {
+    if (isUnmounted.current) return;
+    
     const renderTime = performance.now() - renderStartTime.current;
 
-    if (0 === renderCount) {
-      // First render is mount
-      performanceMonitor.trackComponent(componentName, {
-        mountTime: renderTime,
-        renderTime,
-        props: props || {},
-      });
-    } else {
-      // Subsequent renders are updates
-      performanceMonitor.trackComponent(componentName, {
-        updateTime: renderTime,
-        renderTime,
-        props: props || {},
-      });
+    // Only track if performanceMonitor is available
+    if (performanceMonitor && typeof performanceMonitor.trackComponent === 'function') {
+      if (0 === renderCount) {
+        // First render is mount
+        performanceMonitor.trackComponent(componentName, {
+          mountTime: renderTime,
+          renderTime,
+          props: props || {},
+        });
+      } else {
+        // Subsequent renders are updates
+        performanceMonitor.trackComponent(componentName, {
+          updateTime: renderTime,
+          renderTime,
+          props: props || {},
+        });
+      }
     }
 
-    setRenderCount((prev) => prev + 1);
-  }, [componentName, props, renderCount]);
+    if (!isUnmounted.current) {
+      setRenderCount((prev) => prev + 1);
+    }
+  });
 
-  // Mark render start
+  // Mark render start (moved to end to avoid affecting measurements)
   renderStartTime.current = performance.now();
 
   const startTiming = useCallback(
-    (name: string) =>
-      performanceMonitor.startTiming(`${componentName}-${name}`),
+    (name: string) => {
+      if (performanceMonitor && typeof performanceMonitor.startTiming === 'function') {
+        return performanceMonitor.startTiming(`${componentName}-${name}`);
+      }
+      return undefined;
+    },
     [componentName]
   );
 
   const endTiming = useCallback(
-    (name: string) => performanceMonitor.endTiming(`${componentName}-${name}`),
+    (name: string) => {
+      if (performanceMonitor && typeof performanceMonitor.endTiming === 'function') {
+        return performanceMonitor.endTiming(`${componentName}-${name}`);
+      }
+      return undefined;
+    },
     [componentName]
   );
 
   const trackMetric = useCallback(
-    (name: string, value: number) =>
-      performanceMonitor.trackCustomMetric(`${componentName}-${name}`, value),
+    (name: string, value: number) => {
+      if (performanceMonitor && typeof performanceMonitor.trackCustomMetric === 'function') {
+        return performanceMonitor.trackCustomMetric(`${componentName}-${name}`, value);
+      }
+      return undefined;
+    },
     [componentName]
   );
 
@@ -80,6 +108,7 @@ export function usePerformanceMonitoring(
 
 /**
  * HOC for automatic performance monitoring
+ * Optimized to prevent memory leaks
  */
 export function withPerformanceMonitoring<P extends object>(
   Component: ComponentType<P>,

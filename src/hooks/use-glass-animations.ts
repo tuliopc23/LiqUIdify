@@ -68,6 +68,8 @@ export function useGlassAnimation(
 
   const animationRef = useRef<Animation | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const isUnmounted = useRef(false);
 
   const config = useMemo(
     () => ({
@@ -83,13 +85,17 @@ export function useGlassAnimation(
       keyframes: Keyframe[],
       options?: Partial<AnimationConfig>
     ) => {
-      if (!element) {
+      if (!element || isUnmounted.current) {
         return undefined;
       }
 
       // Cancel any existing animation
       if (animationRef.current) {
         animationRef.current.cancel();
+      }
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
       }
 
       const animationOptions = { ...config, ...options };
@@ -113,10 +119,10 @@ export function useGlassAnimation(
 
       animationRef.current = animation;
 
-      // Track animation progress
+      // Track animation progress with proper cleanup
       const updateProgress = () => {
-        if (!animation.currentTime || !animation.effect) {
-          return undefined;
+        if (isUnmounted.current || !animation.currentTime || !animation.effect) {
+          return;
         }
 
         const progress = Math.min(
@@ -124,22 +130,30 @@ export function useGlassAnimation(
           1
         );
 
-        setState((prev) => ({ ...prev, progress }));
+        if (!isUnmounted.current) {
+          setState((prev) => ({ ...prev, progress }));
+        }
 
-        if (1 > progress) {
-          requestAnimationFrame(updateProgress);
+        if (1 > progress && !isUnmounted.current) {
+          rafRef.current = requestAnimationFrame(updateProgress);
         }
       };
 
-      requestAnimationFrame(updateProgress);
+      rafRef.current = requestAnimationFrame(updateProgress);
 
-      // Handle animation completion
+      // Handle animation completion with proper cleanup
       animation.addEventListener('finish', () => {
-        setState((prev) => ({
-          ...prev,
-          isAnimating: false,
-          progress: 1,
-        }));
+        if (!isUnmounted.current) {
+          setState((prev) => ({
+            ...prev,
+            isAnimating: false,
+            progress: 1,
+          }));
+        }
+        if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = null;
+        }
       });
 
       return animation;
@@ -150,17 +164,25 @@ export function useGlassAnimation(
   const cancel = useCallback(() => {
     if (animationRef.current) {
       animationRef.current.cancel();
-      animationRef.current = undefined;
+      animationRef.current = null;
     }
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
-      timeoutRef.current = undefined;
+      timeoutRef.current = null;
     }
-    setState((prev) => ({ ...prev, isAnimating: false }));
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    if (!isUnmounted.current) {
+      setState((prev) => ({ ...prev, isAnimating: false }));
+    }
   }, []);
 
   useEffect(() => {
+    isUnmounted.current = false;
     return () => {
+      isUnmounted.current = true;
       cancel();
     };
   }, [cancel]);
@@ -205,13 +227,15 @@ export function useMagneticHover(
   const elementRef = useRef<HTMLElement>(null);
   const { animate } = useGlassAnimation(timing);
   const [isHovering, setIsHovering] = useState(false);
+  const isUnmounted = useRef(false);
+  const currentElementRef = useRef<HTMLElement | null>(null);
 
   const magneticProps = {};
 
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
-      if (!elementRef.current) {
-        return undefined;
+      if (!elementRef.current || isUnmounted.current) {
+        return;
       }
 
       const rect = elementRef.current.getBoundingClientRect();
@@ -242,11 +266,13 @@ export function useMagneticHover(
   );
 
   const handleMouseEnter = useCallback(() => {
+    if (isUnmounted.current) return;
     setIsHovering(true);
     document.addEventListener('mousemove', handleMouseMove);
   }, [handleMouseMove]);
 
   const handleMouseLeave = useCallback(() => {
+    if (isUnmounted.current) return;
     setIsHovering(false);
     document.removeEventListener('mousemove', handleMouseMove);
 
@@ -258,17 +284,23 @@ export function useMagneticHover(
   }, [animate, handleMouseMove]);
 
   useEffect(() => {
+    isUnmounted.current = false;
     const element = elementRef.current;
+    currentElementRef.current = element;
+    
     if (!element) {
-      return undefined;
+      return;
     }
 
     element.addEventListener('mouseenter', handleMouseEnter);
     element.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      element.removeEventListener('mouseenter', handleMouseEnter);
-      element.removeEventListener('mouseleave', handleMouseLeave);
+      isUnmounted.current = true;
+      if (currentElementRef.current) {
+        currentElementRef.current.removeEventListener('mouseenter', handleMouseEnter);
+        currentElementRef.current.removeEventListener('mouseleave', handleMouseLeave);
+      }
       document.removeEventListener('mousemove', handleMouseMove);
     };
   }, [handleMouseEnter, handleMouseLeave, handleMouseMove]);

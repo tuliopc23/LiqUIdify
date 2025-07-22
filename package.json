@@ -137,6 +137,8 @@
     "perf:benchmark:ci": "bun run build && bun run perf:benchmark",
     "perf:memory": "bun scripts/performance/performance-benchmarks.js --memory-only",
     "perf:animation": "bun scripts/performance/performance-benchmarks.js --animation-only",
+    "perf:validate": "node scripts/performance-validation.cjs",
+    "perf:validate:ci": "bun run build && bun run perf:validate",
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "metrics": "bun scripts/track-metrics.js",
