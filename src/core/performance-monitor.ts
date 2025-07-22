@@ -538,12 +538,13 @@ export function usePerformanceMonitor(componentName: string) {
 
 /**
  * Higher-order component for automatic performance tracking
+ * Note: For production use, consider using the usePerformanceMonitor hook directly
  */
 export function withPerformanceTracking<P extends object>(
   Component: React.ComponentType<P>,
   componentName?: string
 ) {
-  const WrappedComponent = React.forwardRef<any, P>((props, ref) => {
+  const WrappedComponent = (props: P) => {
     const name = componentName || Component.displayName || Component.name || 'Unknown';
     const { trackRender, trackMount } = usePerformanceMonitor(name);
     
@@ -554,8 +555,9 @@ export function withPerformanceTracking<P extends object>(
       trackRender(renderStart);
     });
 
-    return React.createElement(Component, { ...props, ref });
-  });
+    // Type assertion for flexibility, production code should use direct hook
+    return React.createElement(Component, props as any);
+  };
 
   WrappedComponent.displayName = `withPerformanceTracking(${componentName || Component.displayName || Component.name})`;
   

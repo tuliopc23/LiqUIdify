@@ -189,10 +189,10 @@ export function useGlassStateTransitions(
   
   // Memoize transitions to prevent recalculation on every render
   const transitions = useMemo(() => ({
-    hover: { scale: 1.02, opacity: 0.9, blur: intensity === 'intense' ? 16 : 8 },
-    focus: { scale: 1.01, opacity: 0.95, blur: intensity === 'intense' ? 12 : 6 },
-    active: { scale: 0.98, opacity: 0.85, blur: intensity === 'intense' ? 20 : 10 },
-    idle: { scale: 1, opacity: 1, blur: intensity === 'intense' ? 8 : 4 },
+    hover: { scale: 1.02, opacity: 0.9, blur: intensity === 'strong' ? 16 : 8 },
+    focus: { scale: 1.01, opacity: 0.95, blur: intensity === 'strong' ? 12 : 6 },
+    active: { scale: 0.98, opacity: 0.85, blur: intensity === 'strong' ? 20 : 10 },
+    idle: { scale: 1, opacity: 1, blur: intensity === 'strong' ? 8 : 4 },
   }), [intensity]);
 
   const transitionToState = useCallback(
