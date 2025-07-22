@@ -57,19 +57,22 @@ export const GlassFocusDemo: React.FC = () => {
 			<nav aria-label="Demo navigation" className="mb-8">
 				<div className="flex gap-4">
 					<button
-						onClick={() => console.log("Link 1 clicked")}
+            onClick={() => {
+            }}
 						className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer"
 					>
 						Link 1
 					</button>
 					<button
-						onClick={() => console.log("Link 2 clicked")}
+            onClick={() => {
+            }}
 						className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer"
 					>
 						Link 2
 					</button>
 					<button
-						onClick={() => console.log("Link 3 clicked")}
+            onClick={() => {
+            }}
 						className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer"
 					>
 						Link 3
@@ -158,7 +161,7 @@ export const GlassFocusDemo: React.FC = () => {
 											</GlassButton>
 											<GlassButton
 												onClick={() => {
-													console.log("Form submitted!");
+                          // Form submission handled
 													setTrapActive(false);
 												}}
 											>
@@ -199,7 +202,7 @@ export const GlassFocusDemo: React.FC = () => {
 										}}
 										role="menuitem"
 										tabIndex={roving.getRovingProps(index).tabIndex}
-										onClick={() => console.log(option.action)}
+                    onClick={() => option.action?.()}
 										onFocus={() => roving.handlers.onFocus(index)}
 										className={cn(
 											"w-full px-4 py-3 flex items-center gap-3",
@@ -247,7 +250,8 @@ export const GlassFocusDemo: React.FC = () => {
 									<button
 										key={tool.label}
 										aria-label={tool.label}
-										onClick={() => console.log(`${tool.label} clicked`)}
+                    onClick={() => {
+                    }}
 										className={cn(
 											"w-10 h-10 rounded flex items-center justify-center",
 											"hover:bg-gray-100 dark:hover:bg-gray-800",

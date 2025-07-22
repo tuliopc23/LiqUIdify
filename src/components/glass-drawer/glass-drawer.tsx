@@ -1,5 +1,5 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import { cva, type VariantProps } from "class-variance-authority";
+import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import React from "react";

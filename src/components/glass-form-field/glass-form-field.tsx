@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
 import { AlertCircle, CheckCircle, Info } from "lucide-react";
 import React, { forwardRef, useId } from "react";
 import { cn } from "@/core/utils/classname";

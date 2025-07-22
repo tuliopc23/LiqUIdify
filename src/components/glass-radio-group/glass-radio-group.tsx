@@ -1,5 +1,5 @@
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
-import { cva, type VariantProps } from "class-variance-authority";
+import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
 import { motion } from "framer-motion";
 import React from "react";
 import { cn } from "@/core/utils/classname";

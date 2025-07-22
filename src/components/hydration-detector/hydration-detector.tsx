@@ -75,7 +75,7 @@ export function HydrationDetector({
 		// Set up recovery
 		const handleRecovery = () => {
 			if (debug) {
-				console.log("[HydrationDetector] Recovery triggered");
+        // Recovery triggered - hydration mismatch detected
 			}
 
 			setHydrationState((prev) => ({

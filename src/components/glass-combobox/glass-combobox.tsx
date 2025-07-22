@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, Search, X } from "lucide-react";
 import type React from "react";

@@ -21,8 +21,10 @@
 		"noEmitOnError": false,
 
 		/* Linting - Gradual strict mode migration */
-		"noUnusedLocals": false, // TODO: Enable after fixing unused variables
-		"noUnusedParameters": false, // TODO: Enable after fixing unused parameters
+      "noUnusedLocals": true,
+      // Now enabled after console cleanup
+      "noUnusedParameters": true,
+      // Now enabled after console cleanup
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": false, // TODO: Enable after fixing index access
@@ -34,7 +36,8 @@
 		"noImplicitAny": true,
 		"noImplicitThis": true,
 		"alwaysStrict": true,
-		"strictPropertyInitialization": false, // TODO: Enable after fixing class properties
+      "strictPropertyInitialization": true,
+      // Now enabled for production safety
 
 		/* React */
 		"jsx": "react-jsx",

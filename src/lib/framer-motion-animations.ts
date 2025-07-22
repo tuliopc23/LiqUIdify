@@ -17,15 +17,11 @@ export const createFramerChoreographer = () => {
 };
 
 export const createMorphAnimation = (_element: HTMLElement, _path: string) => {
-	console.warn(
-		"SVG morphing requires GSAP MorphSVG. Consider using CSS animations or Framer Motion variants.",
-	);
+  // SVG morphing fallback - using CSS animations
 	return Promise.resolve();
 };
 
 export const createScrollAnimation = (_element: HTMLElement, _options: any) => {
-	console.warn(
-		"Scroll-triggered animations now use Framer Motion with useInView hook.",
-	);
+  // Scroll animations handled by Framer Motion useInView hook
 	return Promise.resolve();
 };

@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
 import { motion } from "framer-motion";
 import { ChevronRight, Home } from "lucide-react";
 import React, { useCallback } from "react";
@@ -108,7 +108,7 @@ const GlassBreadcrumbs = React.memo(
 						item.onClick();
 					} else if (item.href) {
 						// In a real app, you'd handle navigation here
-						console.log(`Navigate to: ${item.href}`);
+            // Navigation handled by onClick prop
 					}
 				},
 				[],

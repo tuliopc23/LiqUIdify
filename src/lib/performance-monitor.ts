@@ -106,7 +106,7 @@ export class PerformanceMonitor {
 			observer.observe({ type: "largest-contentful-paint", buffered: true });
 			this.observers.set("lcp", observer);
 		} catch (error) {
-			console.warn("LCP observer not supported:", error);
+      // LCP observer not supported in this environment
 		}
 	}
 
@@ -134,7 +134,7 @@ export class PerformanceMonitor {
 			observer.observe({ type: "first-input", buffered: true });
 			this.observers.set("fid", observer);
 		} catch (error) {
-			console.warn("FID observer not supported:", error);
+      // FID observer not supported in this environment
 		}
 	}
 
@@ -173,7 +173,7 @@ export class PerformanceMonitor {
 			observer.observe({ type: "layout-shift", buffered: true });
 			this.observers.set("cls", observer);
 		} catch (error) {
-			console.warn("CLS observer not supported:", error);
+      // CLS observer not supported in this environment
 		}
 	}
 

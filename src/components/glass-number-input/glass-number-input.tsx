@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
 import { Minus, Plus } from "lucide-react";
 import type React from "react";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
