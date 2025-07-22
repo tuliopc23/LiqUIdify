@@ -1,0 +1,148 @@
+/* Minimal Glass UI CSS for S-Tier Performance */
+@import 'tailwindcss';
+
+/* Essential CSS Custom Properties */
+:root {
+  /* Glass Material Properties */
+  --glass-light-primary: rgba(255, 255, 255, 0.15);
+  --glass-light-secondary: rgba(255, 255, 255, 0.12);
+  --glass-light-elevated: rgba(255, 255, 255, 0.2);
+  
+  /* Dark Mode Glass */
+  --glass-dark-primary: rgba(255, 255, 255, 0.08);
+  --glass-dark-secondary: rgba(255, 255, 255, 0.06);
+  --glass-dark-elevated: rgba(255, 255, 255, 0.12);
+  
+  /* Semantic Colors */
+  --background: white;
+  --foreground: #09090b;
+  --border: #e4e4e7;
+  --primary: #0f172a;
+  --primary-foreground: white;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --border: #27272a;
+  --primary: #fafafa;
+  --primary-foreground: #09090b;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+}
+
+/* Essential Glass Classes */
+.backdrop-blur-glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.backdrop-blur-glass-light {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-glass-heavy {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.bg-glass-light-primary {
+  background-color: var(--glass-light-primary);
+}
+
+.bg-glass-light-secondary {
+  background-color: var(--glass-light-secondary);
+}
+
+.bg-glass-light-elevated {
+  background-color: var(--glass-light-elevated);
+}
+
+.dark .bg-glass-light-primary {
+  background-color: var(--glass-dark-primary);
+}
+
+.dark .bg-glass-light-secondary {
+  background-color: var(--glass-dark-secondary);
+}
+
+.dark .bg-glass-light-elevated {
+  background-color: var(--glass-dark-elevated);
+}
+
+/* Performance Optimized Glass Effects */
+.glass-effect {
+  will-change: backdrop-filter, opacity, transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Essential Animation Classes */
+.glass-transition {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Shadow utilities for glass */
+.shadow-glass-sm {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-glass {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-glass-lg {
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.16);
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus visible utility */
+.focus-visible\:outline-none:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .glass-effect, [class*="glass-"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+  }
+  
+  .dark .glass-effect,
+  .dark [class*="glass-"] {
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+}
+
+/* Fallback for unsupported backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-effect, [class*="glass-"] {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .dark .glass-effect,
+  .dark [class*="glass-"] {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}

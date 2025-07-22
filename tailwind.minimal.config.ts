@@ -1,0 +1,192 @@
+import type { Config } from 'tailwindcss';
+
+/**
+ * Minimal Tailwind Configuration for S-Tier Performance
+ * Only includes essential utilities used by the library
+ */
+const minimalConfig: Config = {
+  content: [
+    './src/components/glass-button-refactored/**/*.{js,ts,jsx,tsx}',
+    './src/components/glass-card-refactored/**/*.{js,ts,jsx,tsx}',
+    './src/components/glass-input/**/*.{js,ts,jsx,tsx}',
+    './src/components/glass-modal/**/*.{js,ts,jsx,tsx}',
+    './src/core/**/*.{js,ts,jsx,tsx}',
+    './src/hooks/**/*.{js,ts,jsx,tsx}',
+    './src/providers/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: ['class'],
+  theme: {
+    extend: {
+      // Only essential colors
+      colors: {
+        border: 'var(--border)',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        primary: {
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
+        },
+        muted: {
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted-foreground)',
+        },
+      },
+      
+      // Essential spacing only
+      spacing: {
+        '0': '0px',
+        '1': '0.25rem',
+        '2': '0.5rem',
+        '3': '0.75rem',
+        '4': '1rem',
+        '6': '1.5rem',
+        '8': '2rem',
+        '12': '3rem',
+        '16': '4rem',
+      },
+      
+      // Essential border radius
+      borderRadius: {
+        'none': '0px',
+        'sm': '0.125rem',
+        'md': '0.375rem',
+        'lg': '0.5rem',
+        'xl': '0.75rem',
+        '2xl': '1rem',
+        'full': '9999px',
+      },
+      
+      // Glass-specific backdrop blur values
+      backdropBlur: {
+        'glass': '12px',
+        'glass-light': '8px',
+        'glass-heavy': '16px',
+      },
+      
+      // Essential animation timings
+      transitionDuration: {
+        '150': '150ms',
+        '200': '200ms',
+        '300': '300ms',
+      },
+      
+      // Essential shadows for glass effects
+      boxShadow: {
+        'glass-sm': '0 2px 8px rgba(0, 0, 0, 0.08)',
+        'glass': '0 8px 32px rgba(0, 0, 0, 0.12)',
+        'glass-lg': '0 16px 64px rgba(0, 0, 0, 0.16)',
+      },
+    },
+  },
+  plugins: [],
+  // Optimize output
+  experimental: {
+    optimizeUniversalDefaults: true,
+  },
+  corePlugins: {
+    // Disable unused core plugins
+    accessibility: false,
+    aspectRatio: false,
+    backdropBrightness: false,
+    backdropContrast: false,
+    backdropGrayscale: false,
+    backdropHueRotate: false,
+    backdropInvert: false,
+    backdropOpacity: false,
+    backdropSaturate: false,
+    backdropSepia: false,
+    backgroundAttachment: false,
+    backgroundClip: false,
+    backgroundOrigin: false,
+    backgroundPosition: false,
+    backgroundRepeat: false,
+    backgroundSize: false,
+    borderCollapse: false,
+    borderSpacing: false,
+    boxDecorationBreak: false,
+    boxSizing: false,
+    breakAfter: false,
+    breakBefore: false,
+    breakInside: false,
+    captionSide: false,
+    caretColor: false,
+    clear: false,
+    columns: false,
+    content: false,
+    cursor: false,
+    emptyCells: false,
+    fill: false,
+    float: false,
+    fontVariantNumeric: false,
+    forcedColorAdjust: false,
+    gridAutoColumns: false,
+    gridAutoFlow: false,
+    gridAutoRows: false,
+    gridColumn: false,
+    gridColumnEnd: false,
+    gridColumnStart: false,
+    gridRow: false,
+    gridRowEnd: false,
+    gridRowStart: false,
+    gridTemplateColumns: false,
+    gridTemplateRows: false,
+    hyphens: false,
+    imageRendering: false,
+    isolation: false,
+    listStyleImage: false,
+    listStylePosition: false,
+    listStyleType: false,
+    mixBlendMode: false,
+    objectFit: false,
+    objectPosition: false,
+    order: false,
+    outlineColor: false,
+    outlineOffset: false,
+    outlineStyle: false,
+    outlineWidth: false,
+    overscrollBehavior: false,
+    placeholderColor: false,
+    placeholderOpacity: false,
+    pointerEvents: false,
+    resize: false,
+    ringColor: false,
+    ringOffsetColor: false,
+    ringOffsetWidth: false,
+    ringOpacity: false,
+    ringWidth: false,
+    rotate: false,
+    scale: false,
+    scrollBehavior: false,
+    scrollMargin: false,
+    scrollPadding: false,
+    scrollSnapAlign: false,
+    scrollSnapStop: false,
+    scrollSnapType: false,
+    skew: false,
+    stroke: false,
+    strokeWidth: false,
+    tableLayout: false,
+    textDecorationColor: false,
+    textDecorationLine: false,
+    textDecorationStyle: false,
+    textDecorationThickness: false,
+    textIndent: false,
+    textOverflow: false,
+    textUnderlineOffset: false,
+    touchAction: false,
+    transformOrigin: false,
+    transformStyle: false,
+    transitionDelay: false,
+    transitionProperty: false,
+    transitionTimingFunction: false,
+    translate: false,
+    userSelect: false,
+    verticalAlign: false,
+    visibility: false,
+    whitespace: false,
+    willChange: false,
+    wordBreak: false,
+  }
+};
+
+export default minimalConfig;

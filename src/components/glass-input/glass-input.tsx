@@ -108,9 +108,9 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
     const hasValue = !!currentValue;
 
-    const baseClasses = cn(
+    const baseClasses = useMemo(() => cn(const baseClasses = cn(
       'w-full px-4 py-3 rounded-xl border transition-all duration-200',
-      'text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]',
+      'text-[var(--text-primary)), [dependencies]);] placeholder:text-[var(--text-secondary)]',
       getGlassClass('default'),
       focusRing, // Ensure focusRing provides a visible focus style
       'disabled:opacity-50 disabled:cursor-not-allowed',

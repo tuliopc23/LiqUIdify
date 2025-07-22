@@ -9,7 +9,9 @@
  * - Separated business logic from presentation
  */
 
-import { createContext, forwardRef, useContext } from 'react';
+import { createContext, forwardRef, useContext } from 'react'
+import { useMemo } from 'react';
+import { memo } from 'react';;
 import type {
   ComponentPropsBuilder,
   HeadingProps,
@@ -247,7 +249,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
     });
 
     // Build component classes
-    const componentClasses = cn(
+    const componentClasses = useMemo(() => cn(const componentClasses = cn(
       // Base classes
       'relative overflow-hidden',
       'rounded-xl',
@@ -277,7 +279,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
       ELEVATION_CLASSES[elevation],
 
       // Animation classes
-      !disableAnimations && microInteraction(),
+      !disableAnimations && microInteraction()), [dependencies]);,
 
       // Custom classes
       className

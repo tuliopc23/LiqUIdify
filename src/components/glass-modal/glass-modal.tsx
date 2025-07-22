@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useId, useRef } from 'react';
+import { useCallback, useEffect, useId, useRef } from 'react'
+import { useMemo } from 'react';
+import { memo } from 'react';;
 import { X } from 'lucide-react';
 import { cn } from '@/core/utils/classname';
 import { GlassFocusTrap } from '@/components/glass-focus-trap';

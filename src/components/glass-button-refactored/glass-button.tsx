@@ -11,7 +11,9 @@
  */
 
 // External dependencies
-import { forwardRef, useCallback, useRef } from 'react';
+import { forwardRef, useCallback, useRef } from 'react'
+import { useMemo } from 'react';
+import { memo } from 'react';;
 import { Slot } from '@radix-ui/react-slot';
 
 // Internal dependencies
@@ -150,7 +152,7 @@ const LoadingSpinner = ({ size = 'md' }: { size?: string }) => {
  * A premium glass-effect button component with advanced visual effects.
  * Built using the new compound component architecture for consistency and reusability.
  */
-export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
+export default memo(GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
   (
     {
       // Base props
@@ -300,7 +302,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     );
     
     // Build component classes
-    const componentClasses = cn(
+    const componentClasses = useMemo(() => cn(const componentClasses = cn(
       // Base classes
       'relative inline-flex items-center justify-center font-medium',
       'rounded-xl overflow-hidden',
@@ -327,7 +329,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       },
       
       // Animation classes
-      !disableAnimations && microInteraction(),
+      !disableAnimations && microInteraction()), [dependencies]);,
       
       // Custom classes
       className
