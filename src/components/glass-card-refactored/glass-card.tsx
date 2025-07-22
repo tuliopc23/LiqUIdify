@@ -9,7 +9,7 @@
  * - Separated business logic from presentation
  */
 
-import { createContext, forwardRef, useContext } from 'react';
+import { createContext, forwardRef, useContext, memo, useCallback } from 'react';
 import type {
   ComponentPropsBuilder,
   HeadingProps,
@@ -146,8 +146,9 @@ const PADDING_CLASSES = {
 
 /**
  * Main Glass Card Component
+ * Performance optimized with React.memo for reduced re-renders.
  */
-export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
+const GlassCardComponent = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
   (
     {
       // Base props
@@ -320,7 +321,10 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
   }
 );
 
-GlassCard.displayName = 'GlassCard';
+GlassCardComponent.displayName = 'GlassCard';
+
+// Memoize the component for performance optimization
+export const GlassCard = memo(GlassCardComponent);
 
 /**
  * Card Header Component

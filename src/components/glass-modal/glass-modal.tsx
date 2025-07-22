@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useRef } from 'react';
+import { useCallback, useEffect, useId, useRef, memo } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '@/core/utils/classname';
 import { GlassFocusTrap } from '@/components/glass-focus-trap';
@@ -20,7 +20,7 @@ export interface GlassModalProps {
   portalTarget?: HTMLElement;
 }
 
-export function GlassModal({
+const GlassModalComponent = function({
   isOpen,
   onClose,
   title,
@@ -176,3 +176,6 @@ const isClient = useIsClient();
     <GlassPortal>{modalContent}</GlassPortal>
   );
 }
+
+// Memoize the modal component for performance
+export const GlassModal = memo(GlassModalComponent);

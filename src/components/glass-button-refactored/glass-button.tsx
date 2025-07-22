@@ -11,7 +11,7 @@
  */
 
 // External dependencies
-import { forwardRef, useCallback, useRef } from 'react';
+import { forwardRef, useCallback, useRef, memo } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 
 // Internal dependencies
@@ -149,8 +149,9 @@ const LoadingSpinner = ({ size = 'md' }: { size?: string }) => {
  * 
  * A premium glass-effect button component with advanced visual effects.
  * Built using the new compound component architecture for consistency and reusability.
+ * Performance optimized with React.memo for reduced re-renders.
  */
-export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
+const GlassButtonComponent = forwardRef<HTMLButtonElement, GlassButtonProps>(
   (
     {
       // Base props
@@ -385,7 +386,10 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
   }
 );
 
-GlassButton.displayName = 'GlassButton';
+GlassButtonComponent.displayName = 'GlassButton';
+
+// Memoize the component for performance optimization
+export const GlassButton = memo(GlassButtonComponent);
 
 // Export the component and types
 export default GlassButton;

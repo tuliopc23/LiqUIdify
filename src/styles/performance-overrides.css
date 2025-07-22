@@ -1,0 +1,134 @@
+/**
+ * Performance-First Glass Utility Classes
+ * 
+ * These utilities override heavy backdrop-filter usage with optimized alternatives
+ * that provide similar visual effects with much better performance.
+ */
+
+/* Override heavy backdrop-filter utilities with lighter alternatives */
+
+/* Replace backdrop-blur-glass with optimized version */
+.backdrop-blur-glass,
+.backdrop-blur-glass-light,
+.backdrop-blur-glass-medium,
+.backdrop-blur-glass-heavy {
+  /* Remove heavy backdrop filters */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  
+  /* Use optimized glass background */
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  
+  /* Add subtle inner glow for glass effect */
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* Critical backdrop-filter usage only for modals and overlays */
+.backdrop-blur-glass-critical {
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+}
+
+/* Performance-optimized glass variants */
+.bg-glass-light-primary,
+.bg-glass-light-secondary,
+.bg-glass-light-tertiary {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.bg-glass-light-elevated {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .backdrop-blur-glass,
+  .backdrop-blur-glass-light,
+  .backdrop-blur-glass-medium {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+  
+  .bg-glass-light-primary,
+  .bg-glass-light-secondary,
+  .bg-glass-light-tertiary {
+    background: rgba(255, 255, 255, 0.06) !important;
+  }
+  
+  .bg-glass-light-elevated {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+/* Performance-conscious component specific optimizations */
+
+/* Button optimizations */
+.glass-button-perf {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button-perf:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Card optimizations */
+.glass-card-perf {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Input optimizations */
+.glass-input-perf {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.glass-input-perf:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Performance monitoring class for testing */
+.perf-optimized {
+  position: relative;
+}
+
+.perf-optimized::before {
+  content: "🚀";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 12px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Utility to completely disable backdrop-filter on low-end devices */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}

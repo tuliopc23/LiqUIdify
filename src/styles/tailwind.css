@@ -3,6 +3,9 @@
 @import './tailwind-v4-config.css';
 @import './apple-liquid-authentic.css';
 @import './glass.css';
+@import './performance-optimized-glass.css';
+@import './performance-overrides.css';
+@import './performance-critical-overrides.css';
 
 /* Apple-inspired Liquid Glass Design Tokens (Post-WWDC 2025) */
 :root {

@@ -941,9 +941,7 @@
     backdrop-filter: var(--glass-blur-light) var(--glass-saturation-normal);
     -webkit-backdrop-filter: var(--glass-blur-light)
       var(--glass-saturation-normal);
-  
-  backdrop-filter: none !important;
-}
+  }
 
   .liquid-glass-heavy,
   .liquid-glass-intense {
@@ -1222,8 +1220,8 @@
 }
 
 .liquid-glass-frost-heavy {
-  backdrop-filter: blur(8px) saturate(150%);
-  -webkit-backdrop-filter: blur(8px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
   background: rgba(255, 255, 255, 0.15);
 }
 
