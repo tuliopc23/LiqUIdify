@@ -137,7 +137,7 @@ jobs:
 
       - name: Build and analyze bundle performance
         run: |
-          npm run build:production
+          npm run build
           npm run bundle:budget:enforce
 
       - name: Run tree-shaking verification
@@ -148,9 +148,9 @@ jobs:
         id: bundle-analysis
         run: |
           # Run bundle analysis and capture metrics
-          CORE_SIZE=$(stat -c%s dist/core.mjs 2>/dev/null || echo "0")
-          ANIMATIONS_SIZE=$(stat -c%s dist/animations.mjs 2>/dev/null || echo "0")
-          ADVANCED_SIZE=$(stat -c%s dist/advanced.mjs 2>/dev/null || echo "0")
+          CORE_SIZE=$(stat -c%s dist/core.min.js 2>/dev/null || echo "0")
+          ANIMATIONS_SIZE=$(stat -c%s dist/animations.min.js 2>/dev/null || echo "0")
+          ADVANCED_SIZE=$(stat -c%s dist/advanced.min.js 2>/dev/null || echo "0")
           TOTAL_SIZE=$((CORE_SIZE + ANIMATIONS_SIZE + ADVANCED_SIZE))
 
           # Convert to KB

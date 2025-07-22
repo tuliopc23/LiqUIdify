@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
@@ -9,17 +9,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const DIST_DIR = join(__dirname, '..', 'dist');
-const BUNDLES_DIR = join(DIST_DIR, 'bundles');
 
 // Ensure dist directory exists
 if (!existsSync(DIST_DIR)) {
   mkdirSync(DIST_DIR, { recursive: true });
 }
 
+// Updated mapping to match actual built files
 const BUNDLE_MAPPING = {
-  'core.min.js': 'bundles/core-bundle.mjs',
-  'animations.min.js': 'bundles/animations-bundle.mjs',
-  'advanced.min.js': 'bundles/advanced-bundle.mjs'
+  'core.min.js': 'core.mjs',
+  'animations.min.js': 'animations.mjs', 
+  'advanced.min.js': 'advanced.mjs'
 };
 
 async function minifyBundle(inputPath, outputPath) {
