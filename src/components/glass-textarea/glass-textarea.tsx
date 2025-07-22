@@ -7,7 +7,7 @@ export interface GlassTextareaProps
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
 }
 
-export const GlassTextarea = React.forwardRef<
+export const GlassTextarea = React.memo(React.forwardRef<
   HTMLTextAreaElement,
   GlassTextareaProps
 >(({ className, variant = 'default', resize = 'vertical', ...props }, ref) => {

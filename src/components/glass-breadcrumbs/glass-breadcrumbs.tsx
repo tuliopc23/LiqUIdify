@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Home } from 'lucide-react';
 import { cn } from '@/core/utils/classname';
@@ -71,7 +71,7 @@ export interface GlassBreadcrumbsProps
   maxItems?: number;
 }
 
-const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
+const GlassBreadcrumbs = React.memo(React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
   (
     {
       className,
@@ -96,14 +96,14 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
           ]
         : items;
 
-    const handleItemClick = (item: BreadcrumbItem, _index: number) => {
+    const handleItemClick = useCallback((item: BreadcrumbItem, _index: number) => {
       if (item.onClick) {
         item.onClick();
       } else if (item.href) {
         // In a real app, you'd handle navigation here
         console.log(`Navigate to: ${item.href}`);
       }
-    };
+    }, []);
 
     return (
       <nav
@@ -142,6 +142,8 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
             const isClickable =
               !isLast && (item.href || item.onClick) && '...' !== item.label;
 
+            const handleClick = useCallback(() => handleItemClick(item, index), [item, index, handleItemClick]);
+
             return (
               <React.Fragment key={index}>
                 <li>
@@ -149,7 +151,7 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      onClick={() => handleItemClick(item, index)}
+                      onClick={handleClick}
                       className={cn(
                         breadcrumbItemVariants({
                           isActive: isLast,
@@ -185,7 +187,7 @@ const GlassBreadcrumbs = React.forwardRef<HTMLElement, GlassBreadcrumbsProps>(
       </nav>
     );
   }
-);
+));
 
 GlassBreadcrumbs.displayName = 'GlassBreadcrumbs';
 

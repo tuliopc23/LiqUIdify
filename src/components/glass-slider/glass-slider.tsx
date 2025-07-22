@@ -13,7 +13,7 @@ export interface GlassSliderProps {
   variant?: 'default' | 'minimal';
 }
 
-export const GlassSlider = React.forwardRef<HTMLDivElement, GlassSliderProps>(
+export const GlassSlider = React.memo(React.forwardRef<HTMLDivElement, GlassSliderProps>(
   (
     {
       min = 0,

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { GlassButton } from '../glass-button-refactored';
 import { GlassInput } from '../glass-input';
 import { GlassTextarea } from '../glass-textarea';
@@ -49,8 +49,12 @@ export interface ComponentShowcaseProps {
   activeSection: string;
 }
 
-export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
+export const ComponentShowcase = React.memo(function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Memoized event handlers
+  const handleOpenModal = useCallback(() => setIsModalOpen(true), []);
+  const handleCloseModal = useCallback(() => setIsModalOpen(false), []);
 
   const tableData = [
     {
@@ -420,7 +424,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                 Modal Example
               </h3>
               <div className="component-preview rounded-lg p-6 mb-4">
-                <GlassButton onClick={() => setIsModalOpen(true)}>
+                <GlassButton onClick={handleOpenModal}>
                   Open Modal
                 </GlassButton>
               </div>
@@ -440,14 +444,14 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                 <GlassButton
                   variant="primary"
                   className="flex-1"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={handleCloseModal}
                 >
                   Confirm
                 </GlassButton>
                 <GlassButton
                   variant="secondary"
                   className="flex-1"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={handleCloseModal}
                 >
                   Cancel
                 </GlassButton>
@@ -848,8 +852,24 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
         );
 
       case 'toast': {
-        const ToastDemo = () => {
+        const ToastDemo = React.memo(() => {
           const { addToast } = useToast();
+
+          const handleShowSuccess = useCallback(() => {
+            addToast({
+              type: 'success',
+              title: 'Success!',
+              description: 'Your action completed successfully.',
+            });
+          }, [addToast]);
+
+          const handleShowError = useCallback(() => {
+            addToast({
+              type: 'error',
+              title: 'Error',
+              description: 'Something went wrong. Please try again.',
+            });
+          }, [addToast]);
 
           return (
             <section className="mb-12">
@@ -864,26 +884,14 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                   <div className="flex flex-wrap gap-4">
                     <GlassButton
                       variant="primary"
-                      onClick={() =>
-                        addToast({
-                          type: 'success',
-                          title: 'Success!',
-                          description: 'Your action completed successfully.',
-                        })
-                      }
+                      onClick={handleShowSuccess}
                     >
                       Show Success
                     </GlassButton>
 
                     <GlassButton
                       variant="secondary"
-                      onClick={() =>
-                        addToast({
-                          type: 'error',
-                          title: 'Error',
-                          description:
-                            'Something went wrong. Please try again.',
-                        })
+                      onClick={handleShowError}
                       }
                     >
                       Show Error
@@ -922,7 +930,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
               </div>
             </section>
           );
-        };
+        });
 
         return <ToastDemo />;
       }
@@ -1132,4 +1140,4 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
   };
 
   return <div>{renderSection()}</div>;
-}
+});

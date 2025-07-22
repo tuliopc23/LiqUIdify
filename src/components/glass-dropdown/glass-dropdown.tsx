@@ -20,7 +20,7 @@ export interface GlassDropdownProps {
   sideOffset?: number;
 }
 
-export const GlassDropdown = React.forwardRef<
+export const GlassDropdown = React.memo(React.forwardRef<
   HTMLDivElement,
   GlassDropdownProps
 >(
