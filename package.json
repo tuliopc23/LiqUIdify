@@ -99,8 +99,9 @@
   },
   "scripts": {
     "build": "bun run build:unified",
-    "build:unified": "bun run clean && vite build && bun run build:css && bun run post-build",
+    "build:unified": "bun run clean && vite build && bun run build:css && bun run build:minified && bun run post-build",
     "build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
+    "build:minified": "bun scripts/build-minified-bundles.js",
     "build:watch": "vite build --watch",
     "build:ci": "bun run build:unified && bun run bundle:budget:enforce",
     "post-build": "cp dist/liquidui.css dist/styles.css",
@@ -178,8 +179,8 @@
   ],
   "author": {
     "name": "Tulio Pinheiro Cunha",
-    "email": "tulio@example.com",
-    "url": "https://tulio.dev"
+    "email": "contact@tuliocunha.dev",
+    "url": "https://tuliocunha.dev"
   },
   "license": "MIT",
   "repository": {
@@ -271,7 +272,6 @@
     "prettier": "^3.6.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "rolldown": "^1.0.0-beta.28",
     "rolldown-plugin-dts": "^0.14.1",
     "rolldown-vite": "^7.0.9",
     "semantic-release": "^24.2.7",
