@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { GlassAccessibleDemo } from './glass-accessible-demo';
+import type { Meta, StoryObj } from "@storybook/react";
+import { GlassAccessibleDemo } from "./glass-accessible-demo";
 
 const meta: Meta<typeof GlassAccessibleDemo> = {
-  title: 'Accessibility/AccessibilityManager Demo',
-  component: GlassAccessibleDemo,
-  parameters: {
-    docs: {
-      description: {
-        component: `
+	title: "Accessibility/AccessibilityManager Demo",
+	component: GlassAccessibleDemo,
+	parameters: {
+		docs: {
+			description: {
+				component: `
 The AccessibilityManager provides comprehensive accessibility management for Glass UI components.
 
 ## Features
@@ -68,33 +68,33 @@ accessibilityManager.announce('Form submitted successfully', 'polite');
 4. **Test with actual screen readers** in addition to automated testing
 5. **Aim for 95+ accessibility score** for production components
         `,
-      },
-    },
-  },
+			},
+		},
+	},
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    className: 'max-w-4xl mx-auto',
-  },
+	args: {
+		className: "max-w-4xl mx-auto",
+	},
 };
 
 export const InteractiveDemo: Story = {
-  render: () => (
-    <div className="space-y-6">
-      <div className="p-4 bg-blue-500/10 rounded-lg">
-        <h3 className="text-lg font-semibold mb-2">Try the Demo</h3>
-        <ol className="list-decimal list-inside space-y-1 text-sm">
-          <li>Click "Validate Accessibility" to check the demo component</li>
-          <li>Use the color pickers to test contrast ratios</li>
-          <li>Observe how invalid ARIA attributes are auto-corrected</li>
-          <li>Check the browser console for real-time validation logs</li>
-        </ol>
-      </div>
-      <GlassAccessibleDemo />
-    </div>
-  ),
+	render: () => (
+		<div className="space-y-6">
+			<div className="p-4 bg-blue-500/10 rounded-lg">
+				<h3 className="text-lg font-semibold mb-2">Try the Demo</h3>
+				<ol className="list-decimal list-inside space-y-1 text-sm">
+					<li>Click "Validate Accessibility" to check the demo component</li>
+					<li>Use the color pickers to test contrast ratios</li>
+					<li>Observe how invalid ARIA attributes are auto-corrected</li>
+					<li>Check the browser console for real-time validation logs</li>
+				</ol>
+			</div>
+			<GlassAccessibleDemo />
+		</div>
+	),
 };

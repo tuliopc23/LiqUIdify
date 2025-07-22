@@ -2,157 +2,157 @@
 
 /**
  * Static Component Export Script
- * 
+ *
  * This script exports all LiquidUI components as static HTML files for:
  * - Documentation purposes
  * - Static site generation
  * - Component showcase
  * - Design system documentation
- * 
+ *
  * Usage: npm run export:static
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
 // Get current directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const rootDir = join(__dirname, '..');
+const rootDir = join(__dirname, "..");
 
 // Component list extracted from the showcase
 const COMPONENTS = [
-  'button',
-  'input', 
-  'card',
-  'modal',
-  'tabs',
-  'badge',
-  'switch',
-  'checkbox',
-  'data-table',
-  'textarea',
-  'select',
-  'slider',
-  'progress',
-  'loading',
-  'avatar',
-  'dropdown',
-  'tooltip',
-  'popover',
-  'toast',
-  'form-examples',
-  'dashboard'
+	"button",
+	"input",
+	"card",
+	"modal",
+	"tabs",
+	"badge",
+	"switch",
+	"checkbox",
+	"data-table",
+	"textarea",
+	"select",
+	"slider",
+	"progress",
+	"loading",
+	"avatar",
+	"dropdown",
+	"tooltip",
+	"popover",
+	"toast",
+	"form-examples",
+	"dashboard",
 ];
 
 // Component metadata
 const COMPONENT_METADATA = {
-  button: {
-    title: 'Button Components',
-    description: 'Interactive buttons with glass morphism effects',
-    category: 'Form Controls'
-  },
-  input: {
-    title: 'Input Components', 
-    description: 'Text inputs with liquid glass styling',
-    category: 'Form Controls'
-  },
-  card: {
-    title: 'Card Components',
-    description: 'Container components with glass effects',
-    category: 'Layout'
-  },
-  modal: {
-    title: 'Modal Components',
-    description: 'Overlay dialogs with backdrop blur',
-    category: 'Overlays'
-  },
-  tabs: {
-    title: 'Tab Components',
-    description: 'Tabbed navigation with smooth transitions',
-    category: 'Navigation'
-  },
-  badge: {
-    title: 'Badge Components',
-    description: 'Status indicators and labels',
-    category: 'Display'
-  },
-  switch: {
-    title: 'Switch Components',
-    description: 'Toggle switches with smooth animations',
-    category: 'Form Controls'
-  },
-  checkbox: {
-    title: 'Checkbox Components',
-    description: 'Checkboxes with glass styling',
-    category: 'Form Controls'
-  },
-  'data-table': {
-    title: 'Data Table Components',
-    description: 'Interactive tables with sorting and filtering',
-    category: 'Data Display'
-  },
-  textarea: {
-    title: 'Textarea Components',
-    description: 'Multi-line text inputs',
-    category: 'Form Controls'
-  },
-  select: {
-    title: 'Select Components',
-    description: 'Dropdown selections with glass effects',
-    category: 'Form Controls'
-  },
-  slider: {
-    title: 'Slider Components',
-    description: 'Range controls with smooth interactions',
-    category: 'Form Controls'
-  },
-  progress: {
-    title: 'Progress Components',
-    description: 'Progress indicators with animations',
-    category: 'Feedback'
-  },
-  loading: {
-    title: 'Loading Components',
-    description: 'Loading states and spinners',
-    category: 'Feedback'
-  },
-  avatar: {
-    title: 'Avatar Components',
-    description: 'User profile pictures and initials',
-    category: 'Display'
-  },
-  dropdown: {
-    title: 'Dropdown Components',
-    description: 'Action menus and dropdowns',
-    category: 'Navigation'
-  },
-  tooltip: {
-    title: 'Tooltip Components',
-    description: 'Contextual information overlays',
-    category: 'Overlays'
-  },
-  popover: {
-    title: 'Popover Components',
-    description: 'Rich content overlays',
-    category: 'Overlays'
-  },
-  toast: {
-    title: 'Toast Components',
-    description: 'Notification messages',
-    category: 'Feedback'
-  },
-  'form-examples': {
-    title: 'Form Examples',
-    description: 'Complete form implementations',
-    category: 'Examples'
-  },
-  dashboard: {
-    title: 'Dashboard Examples',
-    description: 'Analytics dashboard layouts',
-    category: 'Examples'
-  }
+	button: {
+		title: "Button Components",
+		description: "Interactive buttons with glass morphism effects",
+		category: "Form Controls",
+	},
+	input: {
+		title: "Input Components",
+		description: "Text inputs with liquid glass styling",
+		category: "Form Controls",
+	},
+	card: {
+		title: "Card Components",
+		description: "Container components with glass effects",
+		category: "Layout",
+	},
+	modal: {
+		title: "Modal Components",
+		description: "Overlay dialogs with backdrop blur",
+		category: "Overlays",
+	},
+	tabs: {
+		title: "Tab Components",
+		description: "Tabbed navigation with smooth transitions",
+		category: "Navigation",
+	},
+	badge: {
+		title: "Badge Components",
+		description: "Status indicators and labels",
+		category: "Display",
+	},
+	switch: {
+		title: "Switch Components",
+		description: "Toggle switches with smooth animations",
+		category: "Form Controls",
+	},
+	checkbox: {
+		title: "Checkbox Components",
+		description: "Checkboxes with glass styling",
+		category: "Form Controls",
+	},
+	"data-table": {
+		title: "Data Table Components",
+		description: "Interactive tables with sorting and filtering",
+		category: "Data Display",
+	},
+	textarea: {
+		title: "Textarea Components",
+		description: "Multi-line text inputs",
+		category: "Form Controls",
+	},
+	select: {
+		title: "Select Components",
+		description: "Dropdown selections with glass effects",
+		category: "Form Controls",
+	},
+	slider: {
+		title: "Slider Components",
+		description: "Range controls with smooth interactions",
+		category: "Form Controls",
+	},
+	progress: {
+		title: "Progress Components",
+		description: "Progress indicators with animations",
+		category: "Feedback",
+	},
+	loading: {
+		title: "Loading Components",
+		description: "Loading states and spinners",
+		category: "Feedback",
+	},
+	avatar: {
+		title: "Avatar Components",
+		description: "User profile pictures and initials",
+		category: "Display",
+	},
+	dropdown: {
+		title: "Dropdown Components",
+		description: "Action menus and dropdowns",
+		category: "Navigation",
+	},
+	tooltip: {
+		title: "Tooltip Components",
+		description: "Contextual information overlays",
+		category: "Overlays",
+	},
+	popover: {
+		title: "Popover Components",
+		description: "Rich content overlays",
+		category: "Overlays",
+	},
+	toast: {
+		title: "Toast Components",
+		description: "Notification messages",
+		category: "Feedback",
+	},
+	"form-examples": {
+		title: "Form Examples",
+		description: "Complete form implementations",
+		category: "Examples",
+	},
+	dashboard: {
+		title: "Dashboard Examples",
+		description: "Analytics dashboard layouts",
+		category: "Examples",
+	},
 };
 
 // Base HTML template
@@ -432,8 +432,8 @@ const INDEX_TEMPLATE = `<!DOCTYPE html>
 
 // Generate component card HTML
 function generateComponentCard(componentId: string) {
-  const metadata = COMPONENT_METADATA[componentId];
-  return `
+	const metadata = COMPONENT_METADATA[componentId];
+	return `
     <a href="${componentId}.html" class="component-card">
       <h3 class="text-xl font-semibold mb-2">${metadata.title}</h3>
       <p class="text-sm opacity-80 mb-3">${metadata.description}</p>
@@ -444,7 +444,7 @@ function generateComponentCard(componentId: string) {
 
 // Generate static component content (placeholder for actual component rendering)
 function generateComponentContent(componentId: string) {
-  return `
+	return `
     <div class="component-preview">
       <h3 class="text-lg font-semibold mb-4 text-primary">Component Preview</h3>
       <div class="bg-gray-100 rounded-lg p-8 text-center">
@@ -459,19 +459,22 @@ function generateComponentContent(componentId: string) {
     
     <div class="mt-6">
       <h4 class="text-lg font-semibold mb-3 text-primary">Usage Example</h4>
-      <pre class="bg-gray-800 text-green-400 p-4 rounded-lg overflow-x-auto"><code>import { ${componentId.split('-').map(word => 
-        'Glass' + word.charAt(0).toUpperCase() + word.slice(1)
-      ).join('')} } from '@tuliocunha23/liquidui';
+      <pre class="bg-gray-800 text-green-400 p-4 rounded-lg overflow-x-auto"><code>import { ${componentId
+				.split("-")
+				.map((word) => "Glass" + word.charAt(0).toUpperCase() + word.slice(1))
+				.join("")} } from '@tuliocunha23/liquidui';
 
 function MyComponent() {
   return (
-    &lt;${componentId.split('-').map(word => 
-      'Glass' + word.charAt(0).toUpperCase() + word.slice(1)
-    ).join('')}&gt;
+    &lt;${componentId
+			.split("-")
+			.map((word) => "Glass" + word.charAt(0).toUpperCase() + word.slice(1))
+			.join("")}&gt;
       Example content
-    &lt;/${componentId.split('-').map(word => 
-      'Glass' + word.charAt(0).toUpperCase() + word.slice(1)
-    ).join('')}&gt;
+    &lt;/${componentId
+			.split("-")
+			.map((word) => "Glass" + word.charAt(0).toUpperCase() + word.slice(1))
+			.join("")}&gt;
   );
 }</code></pre>
     </div>
@@ -485,47 +488,49 @@ function MyComponent() {
 
 // Main export function
 async function exportStaticComponents() {
-  console.log('🚀 Starting static component export...');
-  
-  const exportDir = join(rootDir, 'static-export');
-  
-  // Create export directory
-  if (!existsSync(exportDir)) {
-    mkdirSync(exportDir, { recursive: true });
-  }
-  
-  // Generate index page
-  console.log('📄 Generating index page...');
-  const componentCards = COMPONENTS.map(generateComponentCard).join('');
-  const indexContent = INDEX_TEMPLATE.replace('{{COMPONENT_CARDS}}', componentCards);
-  writeFileSync(join(exportDir, 'index.html'), indexContent);
-  
-  // Generate individual component pages
-  console.log('📦 Generating component pages...');
-  for (const componentId of COMPONENTS) {
-    const metadata = COMPONENT_METADATA[componentId];
-    const content = generateComponentContent(componentId);
-    
-    const html = HTML_TEMPLATE
-      .replace(/{{TITLE}}/g, metadata.title)
-      .replace(/{{DESCRIPTION}}/g, metadata.description)
-      .replace(/{{CATEGORY}}/g, metadata.category)
-      .replace('{{CONTENT}}', content);
-    
-    writeFileSync(join(exportDir, `${componentId}.html`), html);
-    console.log(`  ✅ Generated ${componentId}.html`);
-  }
-  
-  // Generate README
-  console.log('📝 Generating README...');
-  const readmeContent = `# LiquidUI Components - Static Export
+	console.log("🚀 Starting static component export...");
+
+	const exportDir = join(rootDir, "static-export");
+
+	// Create export directory
+	if (!existsSync(exportDir)) {
+		mkdirSync(exportDir, { recursive: true });
+	}
+
+	// Generate index page
+	console.log("📄 Generating index page...");
+	const componentCards = COMPONENTS.map(generateComponentCard).join("");
+	const indexContent = INDEX_TEMPLATE.replace(
+		"{{COMPONENT_CARDS}}",
+		componentCards,
+	);
+	writeFileSync(join(exportDir, "index.html"), indexContent);
+
+	// Generate individual component pages
+	console.log("📦 Generating component pages...");
+	for (const componentId of COMPONENTS) {
+		const metadata = COMPONENT_METADATA[componentId];
+		const content = generateComponentContent(componentId);
+
+		const html = HTML_TEMPLATE.replace(/{{TITLE}}/g, metadata.title)
+			.replace(/{{DESCRIPTION}}/g, metadata.description)
+			.replace(/{{CATEGORY}}/g, metadata.category)
+			.replace("{{CONTENT}}", content);
+
+		writeFileSync(join(exportDir, `${componentId}.html`), html);
+		console.log(`  ✅ Generated ${componentId}.html`);
+	}
+
+	// Generate README
+	console.log("📝 Generating README...");
+	const readmeContent = `# LiquidUI Components - Static Export
 
 This directory contains static HTML files for all LiquidUI components.
 
 ## Files
 
 - \`index.html\` - Main overview page with all components
-${COMPONENTS.map(id => `- \`${id}.html\` - ${COMPONENT_METADATA[id].title}`).join('\n')}
+${COMPONENTS.map((id) => `- \`${id}.html\` - ${COMPONENT_METADATA[id].title}`).join("\n")}
 
 ## Usage
 
@@ -553,19 +558,19 @@ npm install @tuliocunha23/liquidui
 
 For complete documentation, visit the [GitHub repository](https://github.com/tuliopc23/LiqUIdify).
 `;
-  
-  writeFileSync(join(exportDir, 'README.md'), readmeContent);
-  
-  console.log('✅ Static export complete!');
-  console.log(`📁 Files exported to: ${exportDir}`);
-  console.log(`🌐 Open ${join(exportDir, 'index.html')} in your browser`);
-  
-  return exportDir;
+
+	writeFileSync(join(exportDir, "README.md"), readmeContent);
+
+	console.log("✅ Static export complete!");
+	console.log(`📁 Files exported to: ${exportDir}`);
+	console.log(`🌐 Open ${join(exportDir, "index.html")} in your browser`);
+
+	return exportDir;
 }
 
 // Run the export
 if (import.meta.url === `file://${process.argv[1]}`) {
-  exportStaticComponents().catch(console.error);
+	exportStaticComponents().catch(console.error);
 }
 
 export { exportStaticComponents };

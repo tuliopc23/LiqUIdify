@@ -1,11 +1,11 @@
 export {
-  Accordion,
-  GlassAccordion,
-  GlassAccordionItem,
-  GlassAccordionTrigger,
-  GlassAccordionContent,
-  type GlassAccordionProps,
-  type GlassAccordionItemProps,
-  type GlassAccordionTriggerProps,
-  type GlassAccordionContentProps,
-} from './glass-accordion';
+	Accordion,
+	GlassAccordion,
+	GlassAccordionContent,
+	type GlassAccordionContentProps,
+	GlassAccordionItem,
+	type GlassAccordionItemProps,
+	type GlassAccordionProps,
+	GlassAccordionTrigger,
+	type GlassAccordionTriggerProps,
+} from "./glass-accordion";

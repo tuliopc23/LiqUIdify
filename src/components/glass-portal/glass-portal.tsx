@@ -1,56 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { useIsClient } from '@/hooks/use-ssr-safe';
+import type React from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface GlassPortalProps {
-  children: React.ReactNode;
-  container?: Element | DocumentFragment;
-  key?: string;
+	children: React.ReactNode;
+	container?: Element | DocumentFragment;
+	key?: string;
 }
 
 const GlassPortal: React.FC<GlassPortalProps> = ({
-  children,
-  container,
-  key,
+	children,
+	container,
+	key,
 }) => {
-  const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(
-    null
-  );
-  const isClient = useIsClient();
+	const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(
+  null,
+	);
+	const isClient = useIsClient();
 
-  useEffect(() => {
-    if (!isClient) {
-      return;
-    }
+	useEffect(() => {
+		if (!isClient) {
+			return;
+		}
 
-    // Use provided container or create default
-    // Check for document.body availability
-    if (!container && (!document.body)) {
-      console.warn('[GlassPortal] document.body is not available, portal cannot be created');
-      return;
-    }
-    
-    const node = container || document.body;
-    setMountNode(node);
+		// Use provided container or create default
+		// Check for document.body availability
+		if (!container && !document.body) {
+			console.warn(
+				"[GlassPortal] document.body is not available, portal cannot be created",
+			);
+			return;
+		}
 
-    return () => {
-      setMountNode(null);
-    };
-  }, [isClient, container]);
+		const node = container || document.body;
+		setMountNode(node);
 
-  // Don't render anything during SSR
-  if (!isClient) {
-    return null;
-  }
+		return () => {
+   setMountNode(null);
+		};
+	}, [isClient, container]);
 
-  // Don't render until mount node is available
-  if (!mountNode) {
-    return null;
-  }
+	// Don't render anything during SSR
+	if (!isClient) {
+		return;
+	}
 
-  return createPortal(children, mountNode, key);
+	// Don't render until mount node is available
+	if (!mountNode) {
+		return;
+	}
+
+	return createPortal(children, mountNode, key);
 };
 
-GlassPortal.displayName = 'GlassPortal';
+GlassPortal.displayName = "GlassPortal";
 
 export { GlassPortal };

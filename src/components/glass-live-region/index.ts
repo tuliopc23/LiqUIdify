@@ -1,13 +1,13 @@
-export { 
-  GlassLiveRegion, 
-  GlassLiveRegionProvider,
-  useAnnouncement,
-  announcer 
-} from './glass-live-region';
-export type { 
-  GlassLiveRegionProps, 
-  AriaLivePriority, 
-  AriaRelevant,
-  AnnouncementPriority,
-  AnnouncementContext
-} from './glass-live-region';
+export type {
+	AnnouncementContext,
+	AnnouncementPriority,
+	AriaLivePriority,
+	AriaRelevant,
+	GlassLiveRegionProps,
+} from "./glass-live-region";
+export {
+	announcer,
+	GlassLiveRegion,
+	GlassLiveRegionProvider,
+	useAnnouncement,
+} from "./glass-live-region";

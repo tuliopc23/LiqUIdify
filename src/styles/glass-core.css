@@ -6,234 +6,236 @@
 
 /* CSS Custom Properties */
 :root {
-    /* Core Glass Properties */
-    --glass-bg-primary: rgba(255, 255, 255, 0.25);
-    --glass-bg-secondary: rgba(248, 250, 252, 0.35);
-    --glass-bg-elevated: rgba(255, 255, 255, 0.45);
+	/* Core Glass Properties */
+	--glass-bg-primary: rgba(255, 255, 255, 0.25);
+	--glass-bg-secondary: rgba(248, 250, 252, 0.35);
+	--glass-bg-elevated: rgba(255, 255, 255, 0.45);
 
-    /* Borders */
-    --glass-border-light: rgba(255, 255, 255, 0.15);
-    --glass-border-medium: rgba(255, 255, 255, 0.25);
+	/* Borders */
+	--glass-border-light: rgba(255, 255, 255, 0.15);
+	--glass-border-medium: rgba(255, 255, 255, 0.25);
 
-    /* Blur */
-    --glass-blur-light: blur(16px);
-    --glass-blur-medium: blur(24px);
+	/* Blur */
+	--glass-blur-light: blur(16px);
+	--glass-blur-medium: blur(24px);
 
-    /* Transitions */
-    --glass-transition-fast: 200ms ease-out;
-    --glass-transition-normal: 300ms ease-out;
+	/* Transitions */
+	--glass-transition-fast: 200ms ease-out;
+	--glass-transition-normal: 300ms ease-out;
 }
 
 /* Dark mode overrides */
-[data-theme='dark'] {
-    --glass-bg-primary: rgba(0, 0, 0, 0.25);
-    --glass-bg-secondary: rgba(15, 23, 42, 0.35);
-    --glass-bg-elevated: rgba(30, 41, 59, 0.45);
+[data-theme="dark"] {
+	--glass-bg-primary: rgba(0, 0, 0, 0.25);
+	--glass-bg-secondary: rgba(15, 23, 42, 0.35);
+	--glass-bg-elevated: rgba(30, 41, 59, 0.45);
 
-    --glass-border-light: rgba(255, 255, 255, 0.08);
-    --glass-border-medium: rgba(255, 255, 255, 0.15);
+	--glass-border-light: rgba(255, 255, 255, 0.08);
+	--glass-border-medium: rgba(255, 255, 255, 0.15);
 }
 
 /* Core Glass Effect */
 .glass-effect {
-    background: var(--glass-bg-primary);
-    backdrop-filter: var(--glass-blur-medium) saturate(180%);
-    -webkit-backdrop-filter: var(--glass-blur-medium) saturate(180%);
-    border: 1px solid var(--glass-border-light);
+	background: var(--glass-bg-primary);
+	backdrop-filter: var(--glass-blur-medium) saturate(180%);
+	-webkit-backdrop-filter: var(--glass-blur-medium) saturate(180%);
+	border: 1px solid var(--glass-border-light);
 }
 
 /* Button Styles */
 .glass-button-lite {
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: var(--glass-blur-light) saturate(150%);
-    -webkit-backdrop-filter: var(--glass-blur-light) saturate(150%);
+	position: relative;
+	overflow: hidden;
+	backdrop-filter: var(--glass-blur-light) saturate(150%);
+	-webkit-backdrop-filter: var(--glass-blur-light) saturate(150%);
 }
 
 .glass-button-primary {
-    background: linear-gradient(
-            135deg,
-            rgba(59, 130, 246, 0.8) 0%,
-            rgba(99, 102, 241, 0.8) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.2);
+	background: linear-gradient(
+		135deg,
+		rgba(59, 130, 246, 0.8) 0%,
+		rgba(99, 102, 241, 0.8) 100%
+	);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .glass-button-primary:hover {
-    background: linear-gradient(
-            135deg,
-            rgba(59, 130, 246, 0.9) 0%,
-            rgba(99, 102, 241, 0.9) 100%
-    );
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+	background: linear-gradient(
+		135deg,
+		rgba(59, 130, 246, 0.9) 0%,
+		rgba(99, 102, 241, 0.9) 100%
+	);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .glass-button-secondary {
-    background: var(--glass-bg-secondary);
-    border: 1px solid var(--glass-border-medium);
-    color: var(--text-primary);
+	background: var(--glass-bg-secondary);
+	border: 1px solid var(--glass-border-medium);
+	color: var(--text-primary);
 }
 
 .glass-button-secondary:hover {
-    background: var(--glass-bg-elevated);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	background: var(--glass-bg-elevated);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .glass-button-ghost {
-    background: transparent;
-    border: 1px solid transparent;
-    color: var(--text-primary);
+	background: transparent;
+	border: 1px solid transparent;
+	color: var(--text-primary);
 }
 
 .glass-button-ghost:hover {
-    background: var(--glass-bg-primary);
-    border-color: var(--glass-border-light);
+	background: var(--glass-bg-primary);
+	border-color: var(--glass-border-light);
 }
 
 .glass-button-destructive {
-    background: linear-gradient(
-            135deg,
-            rgba(239, 68, 68, 0.8) 0%,
-            rgba(220, 38, 38, 0.8) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+	background: linear-gradient(
+		135deg,
+		rgba(239, 68, 68, 0.8) 0%,
+		rgba(220, 38, 38, 0.8) 100%
+	);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: white;
 }
 
 .glass-button-destructive:hover {
-    background: linear-gradient(
-            135deg,
-            rgba(239, 68, 68, 0.9) 0%,
-            rgba(220, 38, 38, 0.9) 100%
-    );
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+	background: linear-gradient(
+		135deg,
+		rgba(239, 68, 68, 0.9) 0%,
+		rgba(220, 38, 38, 0.9) 100%
+	);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
 /* Card Styles */
 .glass-card-lite {
-    background: var(--glass-bg-primary);
-    backdrop-filter: var(--glass-blur-medium) saturate(150%);
-    -webkit-backdrop-filter: var(--glass-blur-medium) saturate(150%);
-    border: 1px solid var(--glass-border-light);
+	background: var(--glass-bg-primary);
+	backdrop-filter: var(--glass-blur-medium) saturate(150%);
+	-webkit-backdrop-filter: var(--glass-blur-medium) saturate(150%);
+	border: 1px solid var(--glass-border-light);
 }
 
 .glass-card-default {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 .glass-card-elevated {
-    background: var(--glass-bg-elevated);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2),
-    0 2px 8px 0 rgba(0, 0, 0, 0.08);
+	background: var(--glass-bg-elevated);
+	box-shadow:
+		0 8px 32px 0 rgba(31, 38, 135, 0.2),
+		0 2px 8px 0 rgba(0, 0, 0, 0.08);
 }
 
 .glass-card-outline {
-    background: transparent;
-    border-color: var(--glass-border-medium);
+	background: transparent;
+	border-color: var(--glass-border-medium);
 }
 
 /* Modal Styles */
 .glass-modal-lite {
-    background: var(--glass-bg-elevated);
-    backdrop-filter: var(--glass-blur-medium) saturate(180%);
-    -webkit-backdrop-filter: var(--glass-blur-medium) saturate(180%);
-    border: 1px solid var(--glass-border-light);
-    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.25),
-    0 12px 24px -6px rgba(0, 0, 0, 0.15);
+	background: var(--glass-bg-elevated);
+	backdrop-filter: var(--glass-blur-medium) saturate(180%);
+	-webkit-backdrop-filter: var(--glass-blur-medium) saturate(180%);
+	border: 1px solid var(--glass-border-light);
+	box-shadow:
+		0 24px 48px -12px rgba(0, 0, 0, 0.25),
+		0 12px 24px -6px rgba(0, 0, 0, 0.15);
 }
 
 /* Input Styles */
 .glass-input {
-    background: var(--glass-bg-secondary);
-    backdrop-filter: var(--glass-blur-light);
-    -webkit-backdrop-filter: var(--glass-blur-light);
-    border: 1px solid var(--glass-border-light);
-    transition: all var(--glass-transition-fast);
+	background: var(--glass-bg-secondary);
+	backdrop-filter: var(--glass-blur-light);
+	-webkit-backdrop-filter: var(--glass-blur-light);
+	border: 1px solid var(--glass-border-light);
+	transition: all var(--glass-transition-fast);
 }
 
 .glass-input:focus {
-    background: var(--glass-bg-elevated);
-    border-color: var(--glass-border-focus);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+	background: var(--glass-bg-elevated);
+	border-color: var(--glass-border-focus);
+	box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 /* Ripple Effect for Lite Components */
 .glass-ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(0);
-    animation: glass-ripple 0.6s ease-out;
-    pointer-events: none;
+	position: absolute;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.5);
+	transform: scale(0);
+	animation: glass-ripple 0.6s ease-out;
+	pointer-events: none;
 }
 
 @keyframes glass-ripple {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
+	to {
+		transform: scale(4);
+		opacity: 0;
+	}
 }
 
 /* Liquid Effect Classes */
 .glass-liquid-effect {
-    position: relative;
-    overflow: hidden;
+	position: relative;
+	overflow: hidden;
 }
 
 .glass-liquid-wave {
-    animation: glass-wave 3s ease-in-out infinite;
+	animation: glass-wave 3s ease-in-out infinite;
 }
 
 /*noinspection CssUnresolvedCustomProperty*/
 @keyframes glass-wave {
-    0%,
-    100% {
-        transform: translateY(0) rotateX(0);
-    }
-    50% {
-        /*noinspection CssUnresolvedCustomProperty*/
-        transform: translateY(var(--wave-amplitude, 10px)) rotateX(5deg);
-    }
+	0%,
+	100% {
+		transform: translateY(0) rotateX(0);
+	}
+	50% {
+		/*noinspection CssUnresolvedCustomProperty*/
+		transform: translateY(var(--wave-amplitude, 10px)) rotateX(5deg);
+	}
 }
 
 .glass-liquid-morph {
-    animation: glass-morph var(--morph-duration, 1000ms) ease-in-out;
+	animation: glass-morph var(--morph-duration, 1000ms) ease-in-out;
 }
 
 @keyframes glass-morph {
-    0% {
-        border-radius: 1rem;
-    }
-    50% {
-        border-radius: 2rem;
-    }
-    100% {
-        border-radius: 1rem;
-    }
+	0% {
+		border-radius: 1rem;
+	}
+	50% {
+		border-radius: 2rem;
+	}
+	100% {
+		border-radius: 1rem;
+	}
 }
 
 .glass-liquid-ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.5) 0%,
-            transparent 70%
-    );
-    animation: liquid-ripple 1s ease-out forwards;
-    pointer-events: none;
+	position: absolute;
+	border-radius: 50%;
+	background: radial-gradient(
+		circle,
+		rgba(255, 255, 255, 0.5) 0%,
+		transparent 70%
+	);
+	animation: liquid-ripple 1s ease-out forwards;
+	pointer-events: none;
 }
 
 @keyframes liquid-ripple {
-    from {
-        transform: scale(0);
-        opacity: 1;
-    }
-    to {
-        transform: scale(3);
-        opacity: 0;
-    }
+	from {
+		transform: scale(0);
+		opacity: 1;
+	}
+	to {
+		transform: scale(3);
+		opacity: 0;
+	}
 }

@@ -1,17 +1,16 @@
-export {
-    GracefulDegradation,
-    StaticFallback,
-    FeatureDetection,
-    NetworkAware,
-    PerformanceAware,
-    FeatureDetectionClasses,
-    ProgressiveEnhancementProvider
-} from './graceful-degradation';
-
 export type {
-    GracefulDegradationProps,
-    StaticFallbackProps,
-    FeatureDetectionProps,
-    NetworkAwareProps,
-    PerformanceAwareProps
-} from './graceful-degradation';
+	FeatureDetectionProps,
+	GracefulDegradationProps,
+	NetworkAwareProps,
+	PerformanceAwareProps,
+	StaticFallbackProps,
+} from "./graceful-degradation";
+export {
+	FeatureDetection,
+	FeatureDetectionClasses,
+	GracefulDegradation,
+	NetworkAware,
+	PerformanceAware,
+	ProgressiveEnhancementProvider,
+	StaticFallback,
+} from "./graceful-degradation";

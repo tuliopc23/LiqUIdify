@@ -1,12 +1,12 @@
 {
-  "buildCommand": "bun run build && bun run build-storybook",
-  "outputDirectory": "storybook-static",
-  "installCommand": "bun install",
-  "framework": null,
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+	"buildCommand": "bun run build && bun run build-storybook",
+	"outputDirectory": "storybook-static",
+	"installCommand": "bun install",
+	"framework": null,
+	"rewrites": [
+		{
+			"source": "/(.*)",
+			"destination": "/index.html"
+		}
+	]
 }

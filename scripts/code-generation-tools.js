@@ -12,55 +12,58 @@
  * - Migration helper code generation
  */
 
-const fs = require('fs').promises;
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs").promises;
+const path = require("path");
+const { execSync } = require("child_process");
 
 // Component templates and configurations
 const COMPONENT_TEMPLATES = {
-  'glass-component': {
-    name: 'Glass Component',
-    description: 'Basic glass morphism component with backdrop blur',
-    template: 'glass-component.tsx.template',
-    dependencies: ['clsx', 'tailwind-merge'],
-    props: {
-      className: { type: 'string', optional: true },
-      children: { type: 'React.ReactNode', optional: true },
-      glassMorphism: { type: 'number', default: 60, range: [0, 100] },
-      variant: { type: 'enum', options: ['default', 'primary', 'secondary'] }
-    }
-  },
-  'interactive-component': {
-    name: 'Interactive Component',
-    description: 'Component with physics-based interactions and animations',
-    template: 'interactive-component.tsx.template',
-    dependencies: ['framer-motion', 'gsap'],
-    props: {
-      className: { type: 'string', optional: true },
-      children: { type: 'React.ReactNode', optional: true },
-      animation: { type: 'enum', options: ['bounce', 'scale', 'slide', 'none'] },
-      physics: { type: 'boolean', default: true },
-      magneticHover: { type: 'boolean', default: false }
-    }
-  },
-  'form-component': {
-    name: 'Form Component',
-    description: 'Accessible form component with validation',
-    template: 'form-component.tsx.template',
-    dependencies: ['react-hook-form', '@radix-ui/react-slot'],
-    props: {
-      label: { type: 'string', required: true },
-      placeholder: { type: 'string', optional: true },
-      error: { type: 'string', optional: true },
-      disabled: { type: 'boolean', default: false },
-      required: { type: 'boolean', default: false }
-    }
-  }
+	"glass-component": {
+		name: "Glass Component",
+		description: "Basic glass morphism component with backdrop blur",
+		template: "glass-component.tsx.template",
+		dependencies: ["clsx", "tailwind-merge"],
+		props: {
+			className: { type: "string", optional: true },
+			children: { type: "React.ReactNode", optional: true },
+			glassMorphism: { type: "number", default: 60, range: [0, 100] },
+			variant: { type: "enum", options: ["default", "primary", "secondary"] },
+		},
+	},
+	"interactive-component": {
+		name: "Interactive Component",
+		description: "Component with physics-based interactions and animations",
+		template: "interactive-component.tsx.template",
+		dependencies: ["framer-motion", "gsap"],
+		props: {
+			className: { type: "string", optional: true },
+			children: { type: "React.ReactNode", optional: true },
+			animation: {
+				type: "enum",
+				options: ["bounce", "scale", "slide", "none"],
+			},
+			physics: { type: "boolean", default: true },
+			magneticHover: { type: "boolean", default: false },
+		},
+	},
+	"form-component": {
+		name: "Form Component",
+		description: "Accessible form component with validation",
+		template: "form-component.tsx.template",
+		dependencies: ["react-hook-form", "@radix-ui/react-slot"],
+		props: {
+			label: { type: "string", required: true },
+			placeholder: { type: "string", optional: true },
+			error: { type: "string", optional: true },
+			disabled: { type: "boolean", default: false },
+			required: { type: "boolean", default: false },
+		},
+	},
 };
 
 // File templates
 const FILE_TEMPLATES = {
-  component: `/**
+	component: `/**
  * {{COMPONENT_NAME}}
  *
  * {{COMPONENT_DESCRIPTION}}
@@ -98,7 +101,7 @@ export const {{COMPONENT_NAME}}: React.FC<{{COMPONENT_NAME}}Props> = ({
 
 export default {{COMPONENT_NAME}};`,
 
-  types: `/**
+	types: `/**
  * Type definitions for {{COMPONENT_NAME}}
  */
 
@@ -112,7 +115,7 @@ export type {{COMPONENT_NAME}}Size = 'small' | 'medium' | 'large';
 
 export type {{COMPONENT_NAME}}Animation = {{ANIMATIONS}};`,
 
-  stories: `import type { Meta, StoryObj } from '@storybook/react';
+	stories: `import type { Meta, StoryObj } from '@storybook/react';
 import { {{COMPONENT_NAME}} } from './{{COMPONENT_FILE_NAME}}';
 
 const meta: Meta<typeof {{COMPONENT_NAME}}> = {
@@ -143,7 +146,7 @@ export const Default: Story = {
 
 {{EXAMPLE_STORIES}}`,
 
-  test: `/**
+	test: `/**
  * @jest-environment jsdom
  */
 
@@ -174,7 +177,7 @@ describe('{{COMPONENT_NAME}}', () => {
 {{CUSTOM_TESTS}}
 });`,
 
-  documentation: `# {{COMPONENT_NAME}}
+	documentation: `# {{COMPONENT_NAME}}
 
 {{COMPONENT_DESCRIPTION}}
 
@@ -230,172 +233,185 @@ function Example() {
 ## Theming
 
 {{THEMING_SECTION}}
-`
+`,
 };
 
 class CodeGenerator {
-  constructor() {
-    this.outputDir = './src/components';
-    this.generatedFiles = [];
-  }
+	constructor() {
+		this.outputDir = "./src/components";
+		this.generatedFiles = [];
+	}
 
-  log(message, level = 'info') {
-    const colors = {
-      info: '\x1b[36m',
-      success: '\x1b[32m',
-      warn: '\x1b[33m',
-      error: '\x1b[31m',
-      reset: '\x1b[0m'
-    };
+	log(message, level = "info") {
+		const colors = {
+			info: "\x1b[36m",
+			success: "\x1b[32m",
+			warn: "\x1b[33m",
+			error: "\x1b[31m",
+			reset: "\x1b[0m",
+		};
 
-    const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
-    console.log(`${colors[level]}[${timestamp}] ${message}${colors.reset}`);
-  }
+		const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
+		console.log(`${colors[level]}[${timestamp}] ${message}${colors.reset}`);
+	}
 
-  async ensureDirectory(dirPath) {
-    try {
-      await fs.mkdir(dirPath, { recursive: true });
-    } catch (error) {
-      if (error.code !== 'EEXIST') {
-        throw error;
-      }
-    }
-  }
+	async ensureDirectory(dirPath) {
+		try {
+			await fs.mkdir(dirPath, { recursive: true });
+		} catch (error) {
+			if (error.code !== "EEXIST") {
+				throw error;
+			}
+		}
+	}
 
-  toPascalCase(str) {
-    return str
-      .replace(/(-|_|\s)+(.)?/g, (_, __, chr) => (chr ? chr.toUpperCase() : ''))
-      .replace(/^(.)/, (chr) => chr.toUpperCase());
-  }
+	toPascalCase(str) {
+		return str
+			.replace(/(-|_|\s)+(.)?/g, (_, __, chr) => (chr ? chr.toUpperCase() : ""))
+			.replace(/^(.)/, (chr) => chr.toUpperCase());
+	}
 
-  toCamelCase(str) {
-    return str
-      .replace(/(-|_|\s)+(.)?/g, (_, __, chr) => (chr ? chr.toUpperCase() : ''))
-      .replace(/^(.)/, (chr) => chr.toLowerCase());
-  }
+	toCamelCase(str) {
+		return str
+			.replace(/(-|_|\s)+(.)?/g, (_, __, chr) => (chr ? chr.toUpperCase() : ""))
+			.replace(/^(.)/, (chr) => chr.toLowerCase());
+	}
 
-  toKebabCase(str) {
-    return str
-      .replace(/([a-z])([A-Z])/g, '$1-$2')
-      .replace(/[\s_]+/g, '-')
-      .toLowerCase();
-  }
+	toKebabCase(str) {
+		return str
+			.replace(/([a-z])([A-Z])/g, "$1-$2")
+			.replace(/[\s_]+/g, "-")
+			.toLowerCase();
+	}
 
-  generatePropTypes(props) {
-    return Object.entries(props)
-      .map(([name, config]) => {
-        const optional = config.optional || !config.required ? '?' : '';
-        const defaultComment = config.default !== undefined ? ` // Default: ${config.default}` : '';
-        return `  ${name}${optional}: ${config.type};${defaultComment}`;
-      })
-      .join('\n');
-  }
+	generatePropTypes(props) {
+		return Object.entries(props)
+			.map(([name, config]) => {
+				const optional = config.optional || !config.required ? "?" : "";
+				const defaultComment =
+					config.default !== undefined ? ` // Default: ${config.default}` : "";
+				return `  ${name}${optional}: ${config.type};${defaultComment}`;
+			})
+			.join("\n");
+	}
 
-  generatePropDestructuring(props) {
-    return Object.entries(props)
-      .map(([name, config]) => {
-        const defaultValue = config.default !== undefined ? ` = ${JSON.stringify(config.default)}` : '';
-        return `  ${name}${defaultValue}`;
-      })
-      .join(',\n');
-  }
+	generatePropDestructuring(props) {
+		return Object.entries(props)
+			.map(([name, config]) => {
+				const defaultValue =
+					config.default !== undefined
+						? ` = ${JSON.stringify(config.default)}`
+						: "";
+				return `  ${name}${defaultValue}`;
+			})
+			.join(",\n");
+	}
 
-  generateStorybookArgTypes(props) {
-    return Object.entries(props)
-      .map(([name, config]) => {
-        let control = 'text';
-        let options = undefined;
+	generateStorybookArgTypes(props) {
+		return Object.entries(props)
+			.map(([name, config]) => {
+				let control = "text";
+				let options;
 
-        if (config.type === 'boolean') {
-          control = 'boolean';
-        } else if (config.type === 'number') {
-          control = config.range ?
-            `{ type: 'range', min: ${config.range[0]}, max: ${config.range[1]} }` :
-            'number';
-        } else if (config.type === 'enum') {
-          control = 'select';
-          options = JSON.stringify(config.options);
-        }
+				if (config.type === "boolean") {
+					control = "boolean";
+				} else if (config.type === "number") {
+					control = config.range
+						? `{ type: 'range', min: ${config.range[0]}, max: ${config.range[1]} }`
+						: "number";
+				} else if (config.type === "enum") {
+					control = "select";
+					options = JSON.stringify(config.options);
+				}
 
-        return `    ${name}: {
-      control: ${typeof control === 'string' ? `'${control}'` : control},
-      description: '${config.description || `${name} prop`}'${options ? `,\n      options: ${options}` : ''}
+				return `    ${name}: {
+      control: ${typeof control === "string" ? `'${control}'` : control},
+      description: '${config.description || `${name} prop`}'${options ? `,\n      options: ${options}` : ""}
     }`;
-      })
-      .join(',\n');
-  }
+			})
+			.join(",\n");
+	}
 
-  generateDefaultArgs(props) {
-    return Object.entries(props)
-      .filter(([_, config]) => config.default !== undefined)
-      .map(([name, config]) => `    ${name}: ${JSON.stringify(config.default)}`)
-      .join(',\n');
-  }
+	generateDefaultArgs(props) {
+		return Object.entries(props)
+			.filter(([_, config]) => config.default !== undefined)
+			.map(([name, config]) => `    ${name}: ${JSON.stringify(config.default)}`)
+			.join(",\n");
+	}
 
-  generateExampleStories(componentName, props) {
-    const examples = [
-      {
-        name: 'WithCustomStyling',
-        title: 'With Custom Styling',
-        args: {
-          className: 'border-2 border-blue-500',
-          ...Object.fromEntries(
-            Object.entries(props)
-              .filter(([_, config]) => config.type === 'enum')
-              .map(([name, config]) => [name, config.options[1] || config.options[0]])
-          )
-        }
-      },
-      {
-        name: 'HighGlassEffect',
-        title: 'High Glass Effect',
-        args: {
-          glassMorphism: 90,
-          ...Object.fromEntries(
-            Object.entries(props)
-              .filter(([_, config]) => config.type === 'boolean')
-              .map(([name, _]) => [name, true])
-          )
-        }
-      }
-    ];
+	generateExampleStories(componentName, props) {
+		const examples = [
+			{
+				name: "WithCustomStyling",
+				title: "With Custom Styling",
+				args: {
+					className: "border-2 border-blue-500",
+					...Object.fromEntries(
+						Object.entries(props)
+							.filter(([_, config]) => config.type === "enum")
+							.map(([name, config]) => [
+								name,
+								config.options[1] || config.options[0],
+							]),
+					),
+				},
+			},
+			{
+				name: "HighGlassEffect",
+				title: "High Glass Effect",
+				args: {
+					glassMorphism: 90,
+					...Object.fromEntries(
+						Object.entries(props)
+							.filter(([_, config]) => config.type === "boolean")
+							.map(([name, _]) => [name, true]),
+					),
+				},
+			},
+		];
 
-    return examples
-      .map(example => `
+		return examples
+			.map(
+				(example) => `
 export const ${example.name}: Story = {
   name: '${example.title}',
   args: {
 ${Object.entries(example.args)
-  .map(([key, value]) => `    ${key}: ${JSON.stringify(value)}`)
-  .join(',\n')}
+	.map(([key, value]) => `    ${key}: ${JSON.stringify(value)}`)
+	.join(",\n")}
   }
-};`)
-      .join('\n');
-  }
+};`,
+			)
+			.join("\n");
+	}
 
-  generateCustomTests(componentName, props) {
-    const tests = [];
+	generateCustomTests(componentName, props) {
+		const tests = [];
 
-    // Test for variants if they exist
-    const variantProp = Object.entries(props).find(([_, config]) =>
-      config.type === 'enum' && config.options
-    );
+		// Test for variants if they exist
+		const variantProp = Object.entries(props).find(
+			([_, config]) => config.type === "enum" && config.options,
+		);
 
-    if (variantProp) {
-      const [propName, config] = variantProp;
-      tests.push(`
+		if (variantProp) {
+			const [propName, config] = variantProp;
+			tests.push(`
   describe('${propName} variants', () => {
-    ${config.options.map(variant => `
+    ${config.options
+			.map(
+				(variant) => `
     it('renders ${variant} variant correctly', () => {
       render(<${componentName} ${propName}="${variant}" />);
       expect(screen.getByRole('${this.getDefaultRole(componentName)}')).toHaveClass('${variant}');
-    });`).join('')}
+    });`,
+			)
+			.join("")}
   });`);
-    }
+		}
 
-    // Test for glass morphism if it exists
-    if (props.glassMorphism) {
-      tests.push(`
+		// Test for glass morphism if it exists
+		if (props.glassMorphism) {
+			tests.push(`
   describe('glass morphism', () => {
     it('applies correct blur class for high glass morphism', () => {
       render(<${componentName} glassMorphism={90} />);
@@ -407,217 +423,243 @@ ${Object.entries(example.args)
       expect(screen.getByRole('${this.getDefaultRole(componentName)}')).toHaveClass('backdrop-blur-sm');
     });
   });`);
-    }
+		}
 
-    return tests.join('\n');
-  }
+		return tests.join("\n");
+	}
 
-  getDefaultRole(componentName) {
-    const roleMap = {
-      button: 'button',
-      card: 'article',
-      input: 'textbox',
-      modal: 'dialog',
-      nav: 'navigation'
-    };
+	getDefaultRole(componentName) {
+		const roleMap = {
+			button: "button",
+			card: "article",
+			input: "textbox",
+			modal: "dialog",
+			nav: "navigation",
+		};
 
-    const lowercaseName = componentName.toLowerCase();
-    for (const [key, role] of Object.entries(roleMap)) {
-      if (lowercaseName.includes(key)) {
-        return role;
-      }
-    }
+		const lowercaseName = componentName.toLowerCase();
+		for (const [key, role] of Object.entries(roleMap)) {
+			if (lowercaseName.includes(key)) {
+				return role;
+			}
+		}
 
-    return 'generic';
-  }
+		return "generic";
+	}
 
-  generatePropsTable(props) {
-    const tableRows = Object.entries(props)
-      .map(([name, config]) => {
-        const type = config.type === 'enum' ?
-          `\`${config.options.join(' | ')}\`` :
-          `\`${config.type}\``;
-        const required = config.required ? '✅' : '❌';
-        const defaultValue = config.default !== undefined ?
-          `\`${JSON.stringify(config.default)}\`` :
-          '-';
-        const description = config.description || `${name} prop`;
+	generatePropsTable(props) {
+		const tableRows = Object.entries(props).map(([name, config]) => {
+			const type =
+				config.type === "enum"
+					? `\`${config.options.join(" | ")}\``
+					: `\`${config.type}\``;
+			const required = config.required ? "✅" : "❌";
+			const defaultValue =
+				config.default !== undefined
+					? `\`${JSON.stringify(config.default)}\``
+					: "-";
+			const description = config.description || `${name} prop`;
 
-        return `| \`${name}\` | ${type} | ${required} | ${defaultValue} | ${description} |`;
-      });
+			return `| \`${name}\` | ${type} | ${required} | ${defaultValue} | ${description} |`;
+		});
 
-    return `| Prop | Type | Required | Default | Description |
+		return `| Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-${tableRows.join('\n')}`;
-  }
+${tableRows.join("\n")}`;
+	}
 
-  generateUsageProps(props) {
-    return Object.entries(props)
-      .filter(([_, config]) => config.default !== undefined || config.required)
-      .slice(0, 3) // Show only first 3 props to keep example clean
-      .map(([name, config]) => {
-        const value = config.default !== undefined ?
-          JSON.stringify(config.default) :
-          config.type === 'string' ? '"example"' : 'true';
-        return `      ${name}={${value}}`;
-      })
-      .join('\n');
-  }
+	generateUsageProps(props) {
+		return Object.entries(props)
+			.filter(([_, config]) => config.default !== undefined || config.required)
+			.slice(0, 3) // Show only first 3 props to keep example clean
+			.map(([name, config]) => {
+				const value =
+					config.default !== undefined
+						? JSON.stringify(config.default)
+						: config.type === "string"
+							? '"example"'
+							: "true";
+				return `      ${name}={${value}}`;
+			})
+			.join("\n");
+	}
 
-  async generateComponent(componentName, template = 'glass-component', options = {}) {
-    this.log(`Generating component: ${componentName}`, 'info');
+	async generateComponent(
+		componentName,
+		template = "glass-component",
+		options = {},
+	) {
+		this.log(`Generating component: ${componentName}`, "info");
 
-    const config = COMPONENT_TEMPLATES[template];
-    if (!config) {
-      throw new Error(`Template '${template}' not found`);
-    }
+		const config = COMPONENT_TEMPLATES[template];
+		if (!config) {
+			throw new Error(`Template '${template}' not found`);
+		}
 
-    const pascalName = this.toPascalCase(componentName);
-    const kebabName = this.toKebabCase(componentName);
-    const componentDir = path.join(this.outputDir, kebabName);
+		const pascalName = this.toPascalCase(componentName);
+		const kebabName = this.toKebabCase(componentName);
+		const componentDir = path.join(this.outputDir, kebabName);
 
-    await this.ensureDirectory(componentDir);
+		await this.ensureDirectory(componentDir);
 
-    // Merge template props with custom options
-    const props = { ...config.props, ...options.props };
+		// Merge template props with custom options
+		const props = { ...config.props, ...options.props };
 
-    // Generate main component file
-    const componentContent = FILE_TEMPLATES.component
-      .replace(/{{COMPONENT_NAME}}/g, pascalName)
-      .replace(/{{COMPONENT_DESCRIPTION}}/g, options.description || config.description)
-      .replace(/{{IMPORTS}}/g, this.generateImports(config.dependencies))
-      .replace(/{{PROP_TYPES}}/g, this.generatePropTypes(props))
-      .replace(/{{PROP_DESTRUCTURING}}/g, this.generatePropDestructuring(props))
-      .replace(/{{ADDITIONAL_PROPS}}/g, this.generateAdditionalProps(props))
-      .replace(/{{COMPONENT_CONTENT}}/g, options.content || '{children}');
+		// Generate main component file
+		const componentContent = FILE_TEMPLATES.component
+			.replace(/{{COMPONENT_NAME}}/g, pascalName)
+			.replace(
+				/{{COMPONENT_DESCRIPTION}}/g,
+				options.description || config.description,
+			)
+			.replace(/{{IMPORTS}}/g, this.generateImports(config.dependencies))
+			.replace(/{{PROP_TYPES}}/g, this.generatePropTypes(props))
+			.replace(/{{PROP_DESTRUCTURING}}/g, this.generatePropDestructuring(props))
+			.replace(/{{ADDITIONAL_PROPS}}/g, this.generateAdditionalProps(props))
+			.replace(/{{COMPONENT_CONTENT}}/g, options.content || "{children}");
 
-    await fs.writeFile(
-      path.join(componentDir, 'index.tsx'),
-      componentContent
-    );
+		await fs.writeFile(path.join(componentDir, "index.tsx"), componentContent);
 
-    // Generate types file
-    const typesContent = FILE_TEMPLATES.types
-      .replace(/{{COMPONENT_NAME}}/g, pascalName)
-      .replace(/{{PROP_TYPES}}/g, this.generatePropTypes(props))
-      .replace(/{{VARIANTS}}/g, this.generateVariantTypes(props))
-      .replace(/{{ANIMATIONS}}/g, this.generateAnimationTypes(props));
+		// Generate types file
+		const typesContent = FILE_TEMPLATES.types
+			.replace(/{{COMPONENT_NAME}}/g, pascalName)
+			.replace(/{{PROP_TYPES}}/g, this.generatePropTypes(props))
+			.replace(/{{VARIANTS}}/g, this.generateVariantTypes(props))
+			.replace(/{{ANIMATIONS}}/g, this.generateAnimationTypes(props));
 
-    await fs.writeFile(
-      path.join(componentDir, 'types.ts'),
-      typesContent
-    );
+		await fs.writeFile(path.join(componentDir, "types.ts"), typesContent);
 
-    // Generate Storybook stories
-    const storiesContent = FILE_TEMPLATES.stories
-      .replace(/{{COMPONENT_NAME}}/g, pascalName)
-      .replace(/{{COMPONENT_FILE_NAME}}/g, 'index')
-      .replace(/{{COMPONENT_DESCRIPTION}}/g, options.description || config.description)
-      .replace(/{{STORYBOOK_ARG_TYPES}}/g, this.generateStorybookArgTypes(props))
-      .replace(/{{DEFAULT_ARGS}}/g, this.generateDefaultArgs(props))
-      .replace(/{{EXAMPLE_STORIES}}/g, this.generateExampleStories(pascalName, props));
+		// Generate Storybook stories
+		const storiesContent = FILE_TEMPLATES.stories
+			.replace(/{{COMPONENT_NAME}}/g, pascalName)
+			.replace(/{{COMPONENT_FILE_NAME}}/g, "index")
+			.replace(
+				/{{COMPONENT_DESCRIPTION}}/g,
+				options.description || config.description,
+			)
+			.replace(
+				/{{STORYBOOK_ARG_TYPES}}/g,
+				this.generateStorybookArgTypes(props),
+			)
+			.replace(/{{DEFAULT_ARGS}}/g, this.generateDefaultArgs(props))
+			.replace(
+				/{{EXAMPLE_STORIES}}/g,
+				this.generateExampleStories(pascalName, props),
+			);
 
-    await fs.writeFile(
-      path.join(componentDir, `${pascalName}.stories.tsx`),
-      storiesContent
-    );
+		await fs.writeFile(
+			path.join(componentDir, `${pascalName}.stories.tsx`),
+			storiesContent,
+		);
 
-    // Generate test file
-    const testContent = FILE_TEMPLATES.test
-      .replace(/{{COMPONENT_NAME}}/g, pascalName)
-      .replace(/{{COMPONENT_FILE_NAME}}/g, 'index')
-      .replace(/{{DEFAULT_ROLE}}/g, this.getDefaultRole(pascalName))
-      .replace(/{{CUSTOM_TESTS}}/g, this.generateCustomTests(pascalName, props));
+		// Generate test file
+		const testContent = FILE_TEMPLATES.test
+			.replace(/{{COMPONENT_NAME}}/g, pascalName)
+			.replace(/{{COMPONENT_FILE_NAME}}/g, "index")
+			.replace(/{{DEFAULT_ROLE}}/g, this.getDefaultRole(pascalName))
+			.replace(
+				/{{CUSTOM_TESTS}}/g,
+				this.generateCustomTests(pascalName, props),
+			);
 
-    await fs.writeFile(
-      path.join(componentDir, `${pascalName}.test.tsx`),
-      testContent
-    );
+		await fs.writeFile(
+			path.join(componentDir, `${pascalName}.test.tsx`),
+			testContent,
+		);
 
-    // Generate documentation
-    const docsContent = FILE_TEMPLATES.documentation
-      .replace(/{{COMPONENT_NAME}}/g, pascalName)
-      .replace(/{{COMPONENT_DESCRIPTION}}/g, options.description || config.description)
-      .replace(/{{USAGE_PROPS}}/g, this.generateUsageProps(props))
-      .replace(/{{USAGE_CONTENT}}/g, options.content || 'Your content here')
-      .replace(/{{PROPS_TABLE}}/g, this.generatePropsTable(props))
-      .replace(/{{EXAMPLES_SECTION}}/g, this.generateExamplesSection(pascalName, props))
-      .replace(/{{ACCESSIBILITY_NOTES}}/g, this.generateAccessibilityNotes(pascalName))
-      .replace(/{{BUNDLE_SIZE}}/g, '2.1') // Estimated
-      .replace(/{{THEMING_SECTION}}/g, this.generateThemingSection(pascalName));
+		// Generate documentation
+		const docsContent = FILE_TEMPLATES.documentation
+			.replace(/{{COMPONENT_NAME}}/g, pascalName)
+			.replace(
+				/{{COMPONENT_DESCRIPTION}}/g,
+				options.description || config.description,
+			)
+			.replace(/{{USAGE_PROPS}}/g, this.generateUsageProps(props))
+			.replace(/{{USAGE_CONTENT}}/g, options.content || "Your content here")
+			.replace(/{{PROPS_TABLE}}/g, this.generatePropsTable(props))
+			.replace(
+				/{{EXAMPLES_SECTION}}/g,
+				this.generateExamplesSection(pascalName, props),
+			)
+			.replace(
+				/{{ACCESSIBILITY_NOTES}}/g,
+				this.generateAccessibilityNotes(pascalName),
+			)
+			.replace(/{{BUNDLE_SIZE}}/g, "2.1") // Estimated
+			.replace(/{{THEMING_SECTION}}/g, this.generateThemingSection(pascalName));
 
-    await fs.writeFile(
-      path.join(componentDir, 'README.md'),
-      docsContent
-    );
+		await fs.writeFile(path.join(componentDir, "README.md"), docsContent);
 
-    this.generatedFiles.push({
-      component: pascalName,
-      directory: componentDir,
-      files: [
-        'index.tsx',
-        'types.ts',
-        `${pascalName}.stories.tsx`,
-        `${pascalName}.test.tsx`,
-        'README.md'
-      ]
-    });
+		this.generatedFiles.push({
+			component: pascalName,
+			directory: componentDir,
+			files: [
+				"index.tsx",
+				"types.ts",
+				`${pascalName}.stories.tsx`,
+				`${pascalName}.test.tsx`,
+				"README.md",
+			],
+		});
 
-    this.log(`✅ Generated ${pascalName} component in ${componentDir}`, 'success');
-    return componentDir;
-  }
+		this.log(
+			`✅ Generated ${pascalName} component in ${componentDir}`,
+			"success",
+		);
+		return componentDir;
+	}
 
-  generateImports(dependencies) {
-    if (!dependencies || dependencies.length === 0) return '';
+	generateImports(dependencies) {
+		if (!dependencies || dependencies.length === 0) return "";
 
-    const importMap = {
-      'framer-motion': "import { motion } from 'framer-motion';",
-      'gsap': "import { gsap } from 'gsap';",
-      'react-hook-form': "import { useForm } from 'react-hook-form';",
-      '@radix-ui/react-slot': "import { Slot } from '@radix-ui/react-slot';"
-    };
+		const importMap = {
+			"framer-motion": "import { motion } from 'framer-motion';",
+			gsap: "import { gsap } from 'gsap';",
+			"react-hook-form": "import { useForm } from 'react-hook-form';",
+			"@radix-ui/react-slot": "import { Slot } from '@radix-ui/react-slot';",
+		};
 
-    return dependencies
-      .map(dep => importMap[dep] || `import '${dep}';`)
-      .join('\n');
-  }
+		return dependencies
+			.map((dep) => importMap[dep] || `import '${dep}';`)
+			.join("\n");
+	}
 
-  generateAdditionalProps(props) {
-    const additionalProps = [];
+	generateAdditionalProps(props) {
+		const additionalProps = [];
 
-    if (props.onClick) {
-      additionalProps.push('onClick={onClick}');
-    }
+		if (props.onClick) {
+			additionalProps.push("onClick={onClick}");
+		}
 
-    if (props.disabled) {
-      additionalProps.push('disabled={disabled}');
-    }
+		if (props.disabled) {
+			additionalProps.push("disabled={disabled}");
+		}
 
-    return additionalProps.length > 0 ? additionalProps.join('\n      ') : '';
-  }
+		return additionalProps.length > 0 ? additionalProps.join("\n      ") : "";
+	}
 
-  generateVariantTypes(props) {
-    const variantProp = Object.entries(props).find(([_, config]) =>
-      config.type === 'enum' && config.options
-    );
+	generateVariantTypes(props) {
+		const variantProp = Object.entries(props).find(
+			([_, config]) => config.type === "enum" && config.options,
+		);
 
-    if (variantProp) {
-      return `'${variantProp[1].options.join("' | '")}'`;
-    }
+		if (variantProp) {
+			return `'${variantProp[1].options.join("' | '")}'`;
+		}
 
-    return "'default' | 'primary' | 'secondary'";
-  }
+		return "'default' | 'primary' | 'secondary'";
+	}
 
-  generateAnimationTypes(props) {
-    if (props.animation) {
-      return `'${props.animation.options.join("' | '")}'`;
-    }
+	generateAnimationTypes(props) {
+		if (props.animation) {
+			return `'${props.animation.options.join("' | '")}'`;
+		}
 
-    return "'none' | 'fade' | 'scale' | 'slide'";
-  }
+		return "'none' | 'fade' | 'scale' | 'slide'";
+	}
 
-  generateExamplesSection(componentName, props) {
-    return `### Basic Usage
+	generateExamplesSection(componentName, props) {
+		return `### Basic Usage
 
 \`\`\`tsx
 <${componentName}>
@@ -636,22 +678,26 @@ ${tableRows.join('\n')}`;
 ### Variants
 
 ${Object.entries(props)
-  .filter(([_, config]) => config.type === 'enum')
-  .map(([propName, config]) =>
-    config.options.map(option =>
-      `\`\`\`tsx
+	.filter(([_, config]) => config.type === "enum")
+	.map(([propName, config]) =>
+		config.options
+			.map(
+				(option) =>
+					`\`\`\`tsx
 <${componentName} ${propName}="${option}">
   ${option.charAt(0).toUpperCase() + option.slice(1)} variant
 </${componentName}>
-\`\`\``
-    ).join('\n\n')
-  ).join('\n\n')}`;
-  }
+\`\`\``,
+			)
+			.join("\n\n"),
+	)
+	.join("\n\n")}`;
+	}
 
-  generateAccessibilityNotes(componentName) {
-    const role = this.getDefaultRole(componentName);
+	generateAccessibilityNotes(componentName) {
+		const role = this.getDefaultRole(componentName);
 
-    return `This component follows WCAG 2.1 AA guidelines:
+		return `This component follows WCAG 2.1 AA guidelines:
 
 - **Keyboard Navigation**: Fully accessible via keyboard
 - **Screen Readers**: Proper ARIA labels and semantic HTML
@@ -668,10 +714,10 @@ npm run test:a11y
 # Test with screen reader
 # Use NVDA, JAWS, or VoiceOver to verify compatibility
 \`\`\``;
-  }
+	}
 
-  generateThemingSection(componentName) {
-    return `The ${componentName} component supports custom theming through CSS custom properties:
+	generateThemingSection(componentName) {
+		return `The ${componentName} component supports custom theming through CSS custom properties:
 
 \`\`\`css
 .liquidify-${componentName.toLowerCase()} {
@@ -695,12 +741,15 @@ function App() {
   );
 }
 \`\`\``;
-  }
+	}
 
-  async generateMigrationGuide(fromVersion, toVersion) {
-    this.log(`Generating migration guide: v${fromVersion} → v${toVersion}`, 'info');
+	async generateMigrationGuide(fromVersion, toVersion) {
+		this.log(
+			`Generating migration guide: v${fromVersion} → v${toVersion}`,
+			"info",
+		);
 
-    const migrationContent = `# Migration Guide: v${fromVersion} → v${toVersion}
+		const migrationContent = `# Migration Guide: v${fromVersion} → v${toVersion}
 
 ## Breaking Changes
 
@@ -842,14 +891,17 @@ git checkout -- .
 Generated by LiqUIdify Code Generation Tools
 `;
 
-    await fs.writeFile('./MIGRATION.md', migrationContent);
-    this.log(`✅ Migration guide generated: MIGRATION.md`, 'success');
-  }
+		await fs.writeFile("./MIGRATION.md", migrationContent);
+		this.log(`✅ Migration guide generated: MIGRATION.md`, "success");
+	}
 
-  async generateCodemodScript(fromVersion, toVersion) {
-    this.log(`Generating codemod script: v${fromVersion} → v${toVersion}`, 'info');
+	async generateCodemodScript(fromVersion, toVersion) {
+		this.log(
+			`Generating codemod script: v${fromVersion} → v${toVersion}`,
+			"info",
+		);
 
-    const codemodContent = `#!/usr/bin/env node
+		const codemodContent = `#!/usr/bin/env node
 
 /**
  * LiqUIdify Automated Migration Codemod
@@ -1082,39 +1134,42 @@ const codemod = new LiqUIdifyCodemod();
 codemod.run();
 `;
 
-    await fs.writeFile('./scripts/liquidify-codemod.js', codemodContent);
+		await fs.writeFile("./scripts/liquidify-codemod.js", codemodContent);
 
-    // Make it executable
-    try {
-      execSync('chmod +x ./scripts/liquidify-codemod.js');
-    } catch (error) {
-      // Non-critical if chmod fails (e.g., on Windows)
-    }
+		// Make it executable
+		try {
+			execSync("chmod +x ./scripts/liquidify-codemod.js");
+		} catch (error) {
+			// Non-critical if chmod fails (e.g., on Windows)
+		}
 
-    this.log(`✅ Codemod script generated: ./scripts/liquidify-codemod.js`, 'success');
-  }
+		this.log(
+			`✅ Codemod script generated: ./scripts/liquidify-codemod.js`,
+			"success",
+		);
+	}
 
-  async generateBundle() {
-    this.log('Generating component bundle exports...', 'info');
+	async generateBundle() {
+		this.log("Generating component bundle exports...", "info");
 
-    const bundles = {
-      core: ['glass-button', 'glass-card', 'glass-container'],
-      forms: ['glass-input', 'glass-textarea', 'glass-select'],
-      navigation: ['glass-nav', 'glass-tabs', 'glass-breadcrumb'],
-      feedback: ['glass-modal', 'glass-toast', 'glass-alert'],
-      layout: ['glass-grid', 'glass-flex', 'glass-stack']
-    };
+		const bundles = {
+			core: ["glass-button", "glass-card", "glass-container"],
+			forms: ["glass-input", "glass-textarea", "glass-select"],
+			navigation: ["glass-nav", "glass-tabs", "glass-breadcrumb"],
+			feedback: ["glass-modal", "glass-toast", "glass-alert"],
+			layout: ["glass-grid", "glass-flex", "glass-stack"],
+		};
 
-    for (const [bundleName, components] of Object.entries(bundles)) {
-      const exports = components
-        .map(comp => {
-          const pascalName = this.toPascalCase(comp);
-          const kebabName = this.toKebabCase(comp);
-          return `export { ${pascalName} } from './${kebabName}';`;
-        })
-        .join('\n');
+		for (const [bundleName, components] of Object.entries(bundles)) {
+			const exports = components
+				.map((comp) => {
+					const pascalName = this.toPascalCase(comp);
+					const kebabName = this.toKebabCase(comp);
+					return `export { ${pascalName} } from './${kebabName}';`;
+				})
+				.join("\n");
 
-      const bundleContent = `/**
+			const bundleContent = `/**
  * ${bundleName.charAt(0).toUpperCase() + bundleName.slice(1)} Bundle
  *
  * ${components.length} components optimized for ${bundleName} use cases
@@ -1124,87 +1179,99 @@ ${exports}
 
 // Bundle-specific types
 export type ${bundleName.charAt(0).toUpperCase() + bundleName.slice(1)}Components = {
-${components.map(comp => `  ${this.toPascalCase(comp)}: React.ComponentType<any>;`).join('\n')}
+${components.map((comp) => `  ${this.toPascalCase(comp)}: React.ComponentType<any>;`).join("\n")}
 };
 `;
 
-      const bundleDir = path.join('./src/bundles', bundleName);
-      await this.ensureDirectory(bundleDir);
-      await fs.writeFile(path.join(bundleDir, 'index.ts'), bundleContent);
-    }
+			const bundleDir = path.join("./src/bundles", bundleName);
+			await this.ensureDirectory(bundleDir);
+			await fs.writeFile(path.join(bundleDir, "index.ts"), bundleContent);
+		}
 
-    this.log(`✅ Generated ${Object.keys(bundles).length} component bundles`, 'success');
-  }
+		this.log(
+			`✅ Generated ${Object.keys(bundles).length} component bundles`,
+			"success",
+		);
+	}
 
-  async generateReport() {
-    const report = {
-      timestamp: new Date().toISOString(),
-      generatedFiles: this.generatedFiles,
-      totalComponents: this.generatedFiles.length,
-      totalFiles: this.generatedFiles.reduce((sum, comp) => sum + comp.files.length, 0)
-    };
+	async generateReport() {
+		const report = {
+			timestamp: new Date().toISOString(),
+			generatedFiles: this.generatedFiles,
+			totalComponents: this.generatedFiles.length,
+			totalFiles: this.generatedFiles.reduce(
+				(sum, comp) => sum + comp.files.length,
+				0,
+			),
+		};
 
-    await fs.writeFile('./dist/code-generation-report.json', JSON.stringify(report, null, 2));
+		await fs.writeFile(
+			"./dist/code-generation-report.json",
+			JSON.stringify(report, null, 2),
+		);
 
-    this.log('📋 Code Generation Report:', 'info');
-    this.log(`   Components Generated: ${report.totalComponents}`, 'info');
-    this.log(`   Files Created: ${report.totalFiles}`, 'info');
-    this.log(`   Report saved: ./dist/code-generation-report.json`, 'success');
-  }
+		this.log("📋 Code Generation Report:", "info");
+		this.log(`   Components Generated: ${report.totalComponents}`, "info");
+		this.log(`   Files Created: ${report.totalFiles}`, "info");
+		this.log(`   Report saved: ./dist/code-generation-report.json`, "success");
+	}
 }
 
 // CLI interface
 async function main() {
-  const args = process.argv.slice(2);
-  const command = args[0];
+	const args = process.argv.slice(2);
+	const command = args[0];
 
-  const generator = new CodeGenerator();
+	const generator = new CodeGenerator();
 
-  try {
-    switch (command) {
-      case 'component':
-        const componentName = args[1];
-        const template = args[2] || 'glass-component';
+	try {
+		switch (command) {
+			case "component": {
+				const componentName = args[1];
+				const template = args[2] || "glass-component";
 
-        if (!componentName) {
-          throw new Error('Component name is required');
-        }
+				if (!componentName) {
+					throw new Error("Component name is required");
+				}
 
-        await generator.generateComponent(componentName, template);
-        break;
+				await generator.generateComponent(componentName, template);
+				break;
+			}
 
-      case 'migration':
-        const fromVersion = args[1];
-        const toVersion = args[2];
+			case "migration": {
+				const fromVersion = args[1];
+				const toVersion = args[2];
 
-        if (!fromVersion || !toVersion) {
-          throw new Error('Both from and to versions are required');
-        }
+				if (!fromVersion || !toVersion) {
+					throw new Error("Both from and to versions are required");
+				}
 
-        await generator.generateMigrationGuide(fromVersion, toVersion);
-        await generator.generateCodemodScript(fromVersion, toVersion);
-        break;
+				await generator.generateMigrationGuide(fromVersion, toVersion);
+				await generator.generateCodemodScript(fromVersion, toVersion);
+				break;
+			}
 
-      case 'bundle':
-        await generator.generateBundle();
-        break;
+			case "bundle":
+				await generator.generateBundle();
+				break;
 
-      case 'batch':
-        // Generate multiple components
-        const components = [
-          { name: 'glass-avatar', template: 'glass-component' },
-          { name: 'glass-badge', template: 'glass-component' },
-          { name: 'glass-progress', template: 'interactive-component' },
-          { name: 'glass-slider', template: 'form-component' }
-        ];
+			case "batch": {
+				// Generate multiple components
+				const components = [
+					{ name: "glass-avatar", template: "glass-component" },
+					{ name: "glass-badge", template: "glass-component" },
+					{ name: "glass-progress", template: "interactive-component" },
+					{ name: "glass-slider", template: "form-component" },
+				];
 
-        for (const comp of components) {
-          await generator.generateComponent(comp.name, comp.template);
-        }
-        break;
+				for (const comp of components) {
+					await generator.generateComponent(comp.name, comp.template);
+				}
+				break;
+			}
 
-      default:
-        console.log(`
+			default:
+				console.log(`
 LiqUIdify Code Generation Tools
 
 Usage:
@@ -1224,19 +1291,18 @@ Templates:
   - interactive-component
   - form-component
         `);
-        process.exit(0);
-    }
+				process.exit(0);
+		}
 
-    await generator.generateReport();
-
-  } catch (error) {
-    console.error(`❌ Error: ${error.message}`);
-    process.exit(1);
-  }
+		await generator.generateReport();
+	} catch (error) {
+		console.error(`❌ Error: ${error.message}`);
+		process.exit(1);
+	}
 }
 
 if (require.main === module) {
-  main();
+	main();
 }
 
 module.exports = CodeGenerator;

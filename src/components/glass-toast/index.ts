@@ -1,1 +1,1 @@
-export { ToastProvider, useToast, type Toast } from './glass-toast';
+export { type Toast, ToastProvider, useToast } from "./glass-toast";

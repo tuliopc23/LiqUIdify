@@ -1,55 +1,56 @@
-'use client';
+"use client";
 
-import { GlassUIProvider } from '../providers';
-import { GlassButton } from '../components/glass-button-refactored';
-import { GlassInput } from '../components/glass-input';
-import { GlassCard } from '../components/glass-card-refactored';
-import { GlassModal } from '../components/glass-modal';
+import { GlassButton } from "../components/glass-button-refactored";
+import { GlassCard } from "../components/glass-card-refactored";
+import { GlassInput } from "../components/glass-input";
+import { GlassModal } from "../components/glass-modal";
+import { GlassTabs } from "../components/glass-tabs";
 import {
-  GlassTooltip,
-  type GlassTooltipProps,
-} from '../components/glass-tooltip';
-import { GlassTabs } from '../components/glass-tabs';
+	GlassTooltip,
+	type GlassTooltipProps,
+} from "../components/glass-tooltip";
+import { GlassUIProvider } from "../providers";
 import type {
-  GlassButtonProps,
-  GlassCardProps,
-  GlassInputProps,
-  GlassTabsProps,
-} from '../types';
+	GlassButtonProps,
+	GlassCardProps,
+	GlassInputProps,
+	GlassModalProps,
+	GlassTabsProps,
+} from "../types";
 
 // Pre-wrapped components with context for documentation use
 export const DocumentationButton = (props: GlassButtonProps) => (
-  <GlassUIProvider>
-    <GlassButton {...props} />
-  </GlassUIProvider>
+	<GlassUIProvider>
+		<GlassButton {...props} />
+	</GlassUIProvider>
 );
 
 export const DocumentationInput = (props: GlassInputProps) => (
-  <GlassUIProvider>
-    <GlassInput {...props} />
-  </GlassUIProvider>
+	<GlassUIProvider>
+		<GlassInput {...props} />
+	</GlassUIProvider>
 );
 
 export const DocumentationCard = (props: GlassCardProps) => (
-  <GlassUIProvider>
-    <GlassCard {...props} />
-  </GlassUIProvider>
+	<GlassUIProvider>
+		<GlassCard {...props} />
+	</GlassUIProvider>
 );
 
-export const DocumentationModal = (props: any) => (
-  <GlassUIProvider>
-    <GlassModal {...props} />
-  </GlassUIProvider>
+export const DocumentationModal = (props: GlassModalProps) => (
+	<GlassUIProvider>
+		<GlassModal {...props} />
+	</GlassUIProvider>
 );
 
 export const DocumentationTooltip = (props: GlassTooltipProps) => (
-  <GlassUIProvider>
-    <GlassTooltip {...props} />
-  </GlassUIProvider>
+	<GlassUIProvider>
+		<GlassTooltip {...props} />
+	</GlassUIProvider>
 );
 
 export const DocumentationTabs = (props: GlassTabsProps) => (
-  <GlassUIProvider>
-    <GlassTabs {...props} />
-  </GlassUIProvider>
+	<GlassUIProvider>
+		<GlassTabs {...props} />
+	</GlassUIProvider>
 );

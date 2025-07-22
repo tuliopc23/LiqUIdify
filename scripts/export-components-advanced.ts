@@ -2,45 +2,82 @@
 
 /**
  * Advanced Static Component Export Script
- * 
+ *
  * This script creates a more advanced static export with:
  * - Real component rendering via React Server Components
  * - Interactive examples with code snippets
  * - Full documentation generation
  * - Multiple export formats (HTML, JSON, Markdown)
  * - SEO-optimized pages
- * 
+ *
  * Usage: npm run export:advanced
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import {
+	existsSync,
+	mkdirSync,
+	readdirSync,
+	readFileSync,
+	writeFileSync,
+} from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
 // Get current directory
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const rootDir = join(__dirname, '..');
+const rootDir = join(__dirname, "..");
 
 // Component metadata with advanced information
 const ADVANCED_COMPONENTS = {
-  'glass-button': {
-    title: 'Glass Button',
-    description: 'Interactive buttons with glass morphism effects and physics-based animations',
-    category: 'Form Controls',
-    complexity: 'Basic',
-    props: [
-      { name: 'variant', type: 'string', default: 'primary', description: 'Button style variant' },
-      { name: 'size', type: 'string', default: 'md', description: 'Button size' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable button interaction' },
-      { name: 'loading', type: 'boolean', default: 'false', description: 'Show loading state' },
-      { name: 'leftIcon', type: 'ReactNode', default: 'undefined', description: 'Icon on the left side' },
-      { name: 'rightIcon', type: 'ReactNode', default: 'undefined', description: 'Icon on the right side' },
-    ],
-    examples: [
-      {
-        title: 'Basic Usage',
-        code: `import { GlassButton } from '@tuliocunha23/liquidui';
+	"glass-button": {
+		title: "Glass Button",
+		description:
+			"Interactive buttons with glass morphism effects and physics-based animations",
+		category: "Form Controls",
+		complexity: "Basic",
+		props: [
+			{
+				name: "variant",
+				type: "string",
+				default: "primary",
+				description: "Button style variant",
+			},
+			{
+				name: "size",
+				type: "string",
+				default: "md",
+				description: "Button size",
+			},
+			{
+				name: "disabled",
+				type: "boolean",
+				default: "false",
+				description: "Disable button interaction",
+			},
+			{
+				name: "loading",
+				type: "boolean",
+				default: "false",
+				description: "Show loading state",
+			},
+			{
+				name: "leftIcon",
+				type: "ReactNode",
+				default: "undefined",
+				description: "Icon on the left side",
+			},
+			{
+				name: "rightIcon",
+				type: "ReactNode",
+				default: "undefined",
+				description: "Icon on the right side",
+			},
+		],
+		examples: [
+			{
+				title: "Basic Usage",
+				code: `import { GlassButton } from '@tuliocunha23/liquidui';
 
 function App() {
   return (
@@ -49,10 +86,10 @@ function App() {
     </GlassButton>
   );
 }`,
-      },
-      {
-        title: 'With Icons',
-        code: `import { GlassButton } from '@tuliocunha23/liquidui';
+			},
+			{
+				title: "With Icons",
+				code: `import { GlassButton } from '@tuliocunha23/liquidui';
 import { Download, Star } from 'lucide-react';
 
 function App() {
@@ -67,10 +104,10 @@ function App() {
     </div>
   );
 }`,
-      },
-      {
-        title: 'Variants',
-        code: `import { GlassButton } from '@tuliocunha23/liquidui';
+			},
+			{
+				title: "Variants",
+				code: `import { GlassButton } from '@tuliocunha23/liquidui';
 
 function App() {
   return (
@@ -82,36 +119,75 @@ function App() {
     </div>
   );
 }`,
-      },
-    ],
-    accessibility: {
-      features: ['Keyboard navigation', 'Screen reader support', 'Focus management', 'ARIA attributes'],
-      keyboardShortcuts: ['Enter: Activate button', 'Space: Activate button'],
-      ariaLabels: ['aria-label', 'aria-describedby', 'aria-pressed (for toggle buttons)'],
-    },
-    performance: {
-      bundleSize: '2.4kB gzipped',
-      renderTime: '< 1ms',
-      dependencies: ['framer-motion', 'class-variance-authority'],
-    },
-  },
-  'glass-input': {
-    title: 'Glass Input',
-    description: 'Text input fields with liquid glass styling and validation',
-    category: 'Form Controls',
-    complexity: 'Basic',
-    props: [
-      { name: 'type', type: 'string', default: 'text', description: 'HTML input type' },
-      { name: 'placeholder', type: 'string', default: 'undefined', description: 'Placeholder text' },
-      { name: 'value', type: 'string', default: 'undefined', description: 'Controlled value' },
-      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable input' },
-      { name: 'error', type: 'string', default: 'undefined', description: 'Error message' },
-      { name: 'label', type: 'string', default: 'undefined', description: 'Input label' },
-    ],
-    examples: [
-      {
-        title: 'Basic Input',
-        code: `import { GlassInput } from '@tuliocunha23/liquidui';
+			},
+		],
+		accessibility: {
+			features: [
+				"Keyboard navigation",
+				"Screen reader support",
+				"Focus management",
+				"ARIA attributes",
+			],
+			keyboardShortcuts: ["Enter: Activate button", "Space: Activate button"],
+			ariaLabels: [
+				"aria-label",
+				"aria-describedby",
+				"aria-pressed (for toggle buttons)",
+			],
+		},
+		performance: {
+			bundleSize: "2.4kB gzipped",
+			renderTime: "< 1ms",
+			dependencies: ["framer-motion", "class-variance-authority"],
+		},
+	},
+	"glass-input": {
+		title: "Glass Input",
+		description: "Text input fields with liquid glass styling and validation",
+		category: "Form Controls",
+		complexity: "Basic",
+		props: [
+			{
+				name: "type",
+				type: "string",
+				default: "text",
+				description: "HTML input type",
+			},
+			{
+				name: "placeholder",
+				type: "string",
+				default: "undefined",
+				description: "Placeholder text",
+			},
+			{
+				name: "value",
+				type: "string",
+				default: "undefined",
+				description: "Controlled value",
+			},
+			{
+				name: "disabled",
+				type: "boolean",
+				default: "false",
+				description: "Disable input",
+			},
+			{
+				name: "error",
+				type: "string",
+				default: "undefined",
+				description: "Error message",
+			},
+			{
+				name: "label",
+				type: "string",
+				default: "undefined",
+				description: "Input label",
+			},
+		],
+		examples: [
+			{
+				title: "Basic Input",
+				code: `import { GlassInput } from '@tuliocunha23/liquidui';
 
 function App() {
   return (
@@ -122,10 +198,10 @@ function App() {
     />
   );
 }`,
-      },
-      {
-        title: 'With Validation',
-        code: `import { GlassInput } from '@tuliocunha23/liquidui';
+			},
+			{
+				title: "With Validation",
+				code: `import { GlassInput } from '@tuliocunha23/liquidui';
 import { useState } from 'react';
 
 function App() {
@@ -154,34 +230,67 @@ function App() {
     />
   );
 }`,
-      },
-    ],
-    accessibility: {
-      features: ['Label association', 'Error announcement', 'Keyboard navigation', 'Screen reader support'],
-      keyboardShortcuts: ['Tab: Navigate to next input', 'Shift+Tab: Navigate to previous input'],
-      ariaLabels: ['aria-label', 'aria-describedby', 'aria-invalid', 'aria-required'],
-    },
-    performance: {
-      bundleSize: '1.7kB gzipped',
-      renderTime: '< 1ms',
-      dependencies: ['framer-motion', 'class-variance-authority'],
-    },
-  },
-  'glass-card': {
-    title: 'Glass Card',
-    description: 'Container components with glass effects and flexible layouts',
-    category: 'Layout',
-    complexity: 'Basic',
-    props: [
-      { name: 'variant', type: 'string', default: 'default', description: 'Card style variant' },
-      { name: 'padding', type: 'string', default: 'md', description: 'Internal padding' },
-      { name: 'hover', type: 'boolean', default: 'false', description: 'Enable hover effects' },
-      { name: 'clickable', type: 'boolean', default: 'false', description: 'Make card clickable' },
-    ],
-    examples: [
-      {
-        title: 'Basic Card',
-        code: `import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardContent } from '@tuliocunha23/liquidui';
+			},
+		],
+		accessibility: {
+			features: [
+				"Label association",
+				"Error announcement",
+				"Keyboard navigation",
+				"Screen reader support",
+			],
+			keyboardShortcuts: [
+				"Tab: Navigate to next input",
+				"Shift+Tab: Navigate to previous input",
+			],
+			ariaLabels: [
+				"aria-label",
+				"aria-describedby",
+				"aria-invalid",
+				"aria-required",
+			],
+		},
+		performance: {
+			bundleSize: "1.7kB gzipped",
+			renderTime: "< 1ms",
+			dependencies: ["framer-motion", "class-variance-authority"],
+		},
+	},
+	"glass-card": {
+		title: "Glass Card",
+		description: "Container components with glass effects and flexible layouts",
+		category: "Layout",
+		complexity: "Basic",
+		props: [
+			{
+				name: "variant",
+				type: "string",
+				default: "default",
+				description: "Card style variant",
+			},
+			{
+				name: "padding",
+				type: "string",
+				default: "md",
+				description: "Internal padding",
+			},
+			{
+				name: "hover",
+				type: "boolean",
+				default: "false",
+				description: "Enable hover effects",
+			},
+			{
+				name: "clickable",
+				type: "boolean",
+				default: "false",
+				description: "Make card clickable",
+			},
+		],
+		examples: [
+			{
+				title: "Basic Card",
+				code: `import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardContent } from '@tuliocunha23/liquidui';
 
 function App() {
   return (
@@ -195,10 +304,10 @@ function App() {
     </GlassCard>
   );
 }`,
-      },
-      {
-        title: 'Interactive Card',
-        code: `import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardContent } from '@tuliocunha23/liquidui';
+			},
+			{
+				title: "Interactive Card",
+				code: `import { GlassCard, GlassCardHeader, GlassCardTitle, GlassCardContent } from '@tuliocunha23/liquidui';
 
 function App() {
   return (
@@ -212,24 +321,32 @@ function App() {
     </GlassCard>
   );
 }`,
-      },
-    ],
-    accessibility: {
-      features: ['Semantic HTML', 'Keyboard navigation', 'Screen reader support', 'Focus management'],
-      keyboardShortcuts: ['Enter: Activate clickable card', 'Space: Activate clickable card'],
-      ariaLabels: ['aria-label', 'role', 'tabindex (for clickable cards)'],
-    },
-    performance: {
-      bundleSize: '1.1kB gzipped',
-      renderTime: '< 1ms',
-      dependencies: ['framer-motion', 'class-variance-authority'],
-    },
-  },
+			},
+		],
+		accessibility: {
+			features: [
+				"Semantic HTML",
+				"Keyboard navigation",
+				"Screen reader support",
+				"Focus management",
+			],
+			keyboardShortcuts: [
+				"Enter: Activate clickable card",
+				"Space: Activate clickable card",
+			],
+			ariaLabels: ["aria-label", "role", "tabindex (for clickable cards)"],
+		},
+		performance: {
+			bundleSize: "1.1kB gzipped",
+			renderTime: "< 1ms",
+			dependencies: ["framer-motion", "class-variance-authority"],
+		},
+	},
 };
 
 // Generate comprehensive documentation
 function generateComponentDocumentation(componentId: string, metadata: any) {
-  const html = `<!DOCTYPE html>
+	const html = `<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -432,7 +549,7 @@ function generateComponentDocumentation(componentId: string, metadata: any) {
           <h1 class="text-4xl font-bold text-primary mb-4">${metadata.title}</h1>
           <p class="text-xl text-secondary mb-4">${metadata.description}</p>
           <div class="flex flex-wrap gap-2">
-            <span class="badge category-${metadata.category.toLowerCase().replace(/\s+/g, '-')}">${metadata.category}</span>
+            <span class="badge category-${metadata.category.toLowerCase().replace(/\s+/g, "-")}">${metadata.category}</span>
             <span class="badge complexity-${metadata.complexity.toLowerCase()}">${metadata.complexity}</span>
           </div>
         </div>
@@ -456,7 +573,10 @@ function generateComponentDocumentation(componentId: string, metadata: any) {
         <pre><code class="language-bash">npm install @tuliocunha23/liquidui</code></pre>
       </div>
       <div class="code-block">
-        <pre><code class="language-typescript">import { ${componentId.split('-').map(word => 'Glass' + word.charAt(0).toUpperCase() + word.slice(1)).join('')} } from '@tuliocunha23/liquidui';</code></pre>
+        <pre><code class="language-typescript">import { ${componentId
+					.split("-")
+					.map((word) => "Glass" + word.charAt(0).toUpperCase() + word.slice(1))
+					.join("")} } from '@tuliocunha23/liquidui';</code></pre>
       </div>
     </section>
     
@@ -473,14 +593,18 @@ function generateComponentDocumentation(componentId: string, metadata: any) {
             </tr>
           </thead>
           <tbody>
-            ${metadata.props.map(prop => `
+            ${metadata.props
+							.map(
+								(prop) => `
               <tr>
                 <td><code>${prop.name}</code></td>
                 <td><code>${prop.type}</code></td>
                 <td><code>${prop.default}</code></td>
                 <td>${prop.description}</td>
               </tr>
-            `).join('')}
+            `,
+							)
+							.join("")}
           </tbody>
         </table>
       </div>
@@ -489,14 +613,18 @@ function generateComponentDocumentation(componentId: string, metadata: any) {
     <section id="examples" class="docs-section">
       <h2 class="text-2xl font-bold mb-4 text-primary">Examples</h2>
       <div class="example-grid">
-        ${metadata.examples.map(example => `
+        ${metadata.examples
+					.map(
+						(example) => `
           <div class="docs-section">
             <h3 class="text-lg font-semibold mb-3 text-primary">${example.title}</h3>
             <div class="code-block">
               <pre><code class="language-typescript">${example.code}</code></pre>
             </div>
           </div>
-        `).join('')}
+        `,
+					)
+					.join("")}
       </div>
     </section>
     
@@ -506,20 +634,20 @@ function generateComponentDocumentation(componentId: string, metadata: any) {
         <div>
           <h3 class="text-lg font-semibold mb-3 text-primary">Features</h3>
           <ul class="space-y-2">
-            ${metadata.accessibility.features.map(feature => `<li>• ${feature}</li>`).join('')}
+            ${metadata.accessibility.features.map((feature) => `<li>• ${feature}</li>`).join("")}
           </ul>
         </div>
         <div>
           <h3 class="text-lg font-semibold mb-3 text-primary">Keyboard Shortcuts</h3>
           <ul class="space-y-2">
-            ${metadata.accessibility.keyboardShortcuts.map(shortcut => `<li><code>${shortcut}</code></li>`).join('')}
+            ${metadata.accessibility.keyboardShortcuts.map((shortcut) => `<li><code>${shortcut}</code></li>`).join("")}
           </ul>
         </div>
       </div>
       <div class="mt-6">
         <h3 class="text-lg font-semibold mb-3 text-primary">ARIA Labels</h3>
         <div class="flex flex-wrap gap-2">
-          ${metadata.accessibility.ariaLabels.map(label => `<code class="badge">${label}</code>`).join('')}
+          ${metadata.accessibility.ariaLabels.map((label) => `<code class="badge">${label}</code>`).join("")}
         </div>
       </div>
     </section>
@@ -538,7 +666,7 @@ function generateComponentDocumentation(componentId: string, metadata: any) {
         <div>
           <h3 class="text-lg font-semibold mb-2 text-primary">Dependencies</h3>
           <div class="flex flex-wrap gap-1">
-            ${metadata.performance.dependencies.map(dep => `<code class="badge">${dep}</code>`).join('')}
+            ${metadata.performance.dependencies.map((dep) => `<code class="badge">${dep}</code>`).join("")}
           </div>
         </div>
       </div>
@@ -582,27 +710,27 @@ function generateComponentDocumentation(componentId: string, metadata: any) {
   </script>
 </body>
 </html>`;
-  
-  return html;
+
+	return html;
 }
 
 // Export JSON data for programmatic use
 function exportComponentData() {
-  const data = {
-    metadata: {
-      generated: new Date().toISOString(),
-      version: '1.2.0',
-      totalComponents: Object.keys(ADVANCED_COMPONENTS).length,
-    },
-    components: ADVANCED_COMPONENTS,
-  };
-  
-  return JSON.stringify(data, null, 2);
+	const data = {
+		metadata: {
+			generated: new Date().toISOString(),
+			version: "1.2.0",
+			totalComponents: Object.keys(ADVANCED_COMPONENTS).length,
+		},
+		components: ADVANCED_COMPONENTS,
+	};
+
+	return JSON.stringify(data, null, 2);
 }
 
 // Generate API documentation
 function generateApiDocs() {
-  const markdown = `# LiquidUI Components API Documentation
+	const markdown = `# LiquidUI Components API Documentation
 
 Generated on ${new Date().toISOString()}
 
@@ -612,7 +740,9 @@ LiquidUI is a React component library featuring glass morphism design and physic
 
 ## Components
 
-${Object.entries(ADVANCED_COMPONENTS).map(([id, metadata]) => `
+${Object.entries(ADVANCED_COMPONENTS)
+	.map(
+		([id, metadata]) => `
 ### ${metadata.title}
 
 ${metadata.description}
@@ -625,36 +755,47 @@ ${metadata.description}
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-${metadata.props.map(prop => `| \`${prop.name}\` | \`${prop.type}\` | \`${prop.default}\` | ${prop.description} |`).join('\n')}
+${metadata.props.map((prop) => `| \`${prop.name}\` | \`${prop.type}\` | \`${prop.default}\` | ${prop.description} |`).join("\n")}
 
 #### Usage
 
 \`\`\`typescript
-import { ${id.split('-').map(word => 'Glass' + word.charAt(0).toUpperCase() + word.slice(1)).join('')} } from '@tuliocunha23/liquidui';
+import { ${id
+			.split("-")
+			.map((word) => "Glass" + word.charAt(0).toUpperCase() + word.slice(1))
+			.join("")} } from '@tuliocunha23/liquidui';
 
 function App() {
   return (
-    <${id.split('-').map(word => 'Glass' + word.charAt(0).toUpperCase() + word.slice(1)).join('')}>
+    <${id
+			.split("-")
+			.map((word) => "Glass" + word.charAt(0).toUpperCase() + word.slice(1))
+			.join("")}>
       Content
-    </${id.split('-').map(word => 'Glass' + word.charAt(0).toUpperCase() + word.slice(1)).join('')}>
+    </${id
+			.split("-")
+			.map((word) => "Glass" + word.charAt(0).toUpperCase() + word.slice(1))
+			.join("")}>
   );
 }
 \`\`\`
 
 #### Accessibility
 
-- **Features:** ${metadata.accessibility.features.join(', ')}
-- **Keyboard Shortcuts:** ${metadata.accessibility.keyboardShortcuts.join(', ')}
-- **ARIA Labels:** ${metadata.accessibility.ariaLabels.join(', ')}
+- **Features:** ${metadata.accessibility.features.join(", ")}
+- **Keyboard Shortcuts:** ${metadata.accessibility.keyboardShortcuts.join(", ")}
+- **ARIA Labels:** ${metadata.accessibility.ariaLabels.join(", ")}
 
 #### Performance
 
 - **Bundle Size:** ${metadata.performance.bundleSize}
 - **Render Time:** ${metadata.performance.renderTime}
-- **Dependencies:** ${metadata.performance.dependencies.join(', ')}
+- **Dependencies:** ${metadata.performance.dependencies.join(", ")}
 
 ---
-`).join('')}
+`,
+	)
+	.join("")}
 
 ## Installation
 
@@ -687,51 +828,51 @@ function App() {
 
 MIT License - see LICENSE file for details.
 `;
-  
-  return markdown;
+
+	return markdown;
 }
 
 // Main export function
 async function exportAdvancedComponents() {
-  console.log('🚀 Starting advanced component export...');
-  
-  const exportDir = join(rootDir, 'static-export-advanced');
-  
-  // Create export directory
-  if (!existsSync(exportDir)) {
-    mkdirSync(exportDir, { recursive: true });
-  }
-  
-  // Create subdirectories
-  const subdirs = ['components', 'api', 'data'];
-  subdirs.forEach(dir => {
-    const dirPath = join(exportDir, dir);
-    if (!existsSync(dirPath)) {
-      mkdirSync(dirPath, { recursive: true });
-    }
-  });
-  
-  // Generate component documentation pages
-  console.log('📦 Generating component documentation...');
-  for (const [componentId, metadata] of Object.entries(ADVANCED_COMPONENTS)) {
-    const html = generateComponentDocumentation(componentId, metadata);
-    writeFileSync(join(exportDir, 'components', `${componentId}.html`), html);
-    console.log(`  ✅ Generated ${componentId}.html`);
-  }
-  
-  // Generate API documentation
-  console.log('📖 Generating API documentation...');
-  const apiMd = generateApiDocs();
-  writeFileSync(join(exportDir, 'api', 'README.md'), apiMd);
-  
-  // Export JSON data
-  console.log('📄 Exporting component data...');
-  const jsonData = exportComponentData();
-  writeFileSync(join(exportDir, 'data', 'components.json'), jsonData);
-  
-  // Generate index page
-  console.log('🏠 Generating index page...');
-  const indexHtml = `<!DOCTYPE html>
+	console.log("🚀 Starting advanced component export...");
+
+	const exportDir = join(rootDir, "static-export-advanced");
+
+	// Create export directory
+	if (!existsSync(exportDir)) {
+		mkdirSync(exportDir, { recursive: true });
+	}
+
+	// Create subdirectories
+	const subdirs = ["components", "api", "data"];
+	subdirs.forEach((dir) => {
+		const dirPath = join(exportDir, dir);
+		if (!existsSync(dirPath)) {
+			mkdirSync(dirPath, { recursive: true });
+		}
+	});
+
+	// Generate component documentation pages
+	console.log("📦 Generating component documentation...");
+	for (const [componentId, metadata] of Object.entries(ADVANCED_COMPONENTS)) {
+		const html = generateComponentDocumentation(componentId, metadata);
+		writeFileSync(join(exportDir, "components", `${componentId}.html`), html);
+		console.log(`  ✅ Generated ${componentId}.html`);
+	}
+
+	// Generate API documentation
+	console.log("📖 Generating API documentation...");
+	const apiMd = generateApiDocs();
+	writeFileSync(join(exportDir, "api", "README.md"), apiMd);
+
+	// Export JSON data
+	console.log("📄 Exporting component data...");
+	const jsonData = exportComponentData();
+	writeFileSync(join(exportDir, "data", "components.json"), jsonData);
+
+	// Generate index page
+	console.log("🏠 Generating index page...");
+	const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -777,7 +918,9 @@ async function exportAdvancedComponents() {
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      ${Object.entries(ADVANCED_COMPONENTS).map(([id, metadata]) => `
+      ${Object.entries(ADVANCED_COMPONENTS)
+				.map(
+					([id, metadata]) => `
         <a href="components/${id}.html" class="glass-card block">
           <h3 class="text-xl font-semibold text-white mb-2">${metadata.title}</h3>
           <p class="text-white opacity-80 mb-3">${metadata.description}</p>
@@ -786,19 +929,21 @@ async function exportAdvancedComponents() {
             <span class="bg-green-500 text-white px-2 py-1 rounded text-sm">${metadata.complexity}</span>
           </div>
         </a>
-      `).join('')}
+      `,
+				)
+				.join("")}
     </div>
   </div>
 </body>
 </html>`;
-  
-  writeFileSync(join(exportDir, 'index.html'), indexHtml);
-  
-  console.log('✅ Advanced export complete!');
-  console.log(`📁 Files exported to: ${exportDir}`);
-  console.log(`🌐 Open ${join(exportDir, 'index.html')} in your browser`);
-  
-  return exportDir;
+
+	writeFileSync(join(exportDir, "index.html"), indexHtml);
+
+	console.log("✅ Advanced export complete!");
+	console.log(`📁 Files exported to: ${exportDir}`);
+	console.log(`🌐 Open ${join(exportDir, "index.html")} in your browser`);
+
+	return exportDir;
 }
 
 // Run the export

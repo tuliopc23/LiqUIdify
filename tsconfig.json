@@ -1,78 +1,78 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "ES2021", "ES2022", "DOM", "DOM.Iterable"],
-    "types": ["react", "react-dom", "node"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "strict": true,
-    "declaration": true,
-    "declarationMap": true,
-    "declarationDir": "./dist/types",
-    "outDir": "./dist",
-    "noEmit": false,
+	"compilerOptions": {
+		"target": "ES2020",
+		"useDefineForClassFields": true,
+		"lib": ["ES2020", "ES2021", "ES2022", "DOM", "DOM.Iterable"],
+		"types": ["react", "react-dom", "node"],
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"strict": true,
+		"declaration": true,
+		"declarationMap": true,
+		"declarationDir": "./dist/types",
+		"outDir": "./dist",
+		"noEmit": false,
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": false,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmitOnError": false,
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": false,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmitOnError": false,
 
-    /* Linting - Gradual strict mode migration */
-    "noUnusedLocals": false, // TODO: Enable after fixing unused variables
-    "noUnusedParameters": false, // TODO: Enable after fixing unused parameters
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noUncheckedIndexedAccess": false, // TODO: Enable after fixing index access
-    
-    /* Strict type checking - keeping most important ones enabled */
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "strictPropertyInitialization": false, // TODO: Enable after fixing class properties
+		/* Linting - Gradual strict mode migration */
+		"noUnusedLocals": false, // TODO: Enable after fixing unused variables
+		"noUnusedParameters": false, // TODO: Enable after fixing unused parameters
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noUncheckedIndexedAccess": false, // TODO: Enable after fixing index access
 
-    /* React */
-    "jsx": "react-jsx",
+		/* Strict type checking - keeping most important ones enabled */
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"alwaysStrict": true,
+		"strictPropertyInitialization": false, // TODO: Enable after fixing class properties
 
-    /* Module interop */
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+		/* React */
+		"jsx": "react-jsx",
 
-    /* Path mapping */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/hooks/*": ["./src/hooks/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/utils/*": ["./src/utils/*"],
-      "@/types/*": ["./src/types/*"],
-      "@/bundles/*": ["./src/bundles/*"],
-      "@/tokens": ["./src/tokens/index"],
-      "@/design-tokens": ["./src/tokens/design-tokens"],
-      "@/core/*": ["./src/core/*"]
-    }
-  },
-  "include": [
-    "src/**/*",
-    "src/types/**/*.d.ts",
-    "src/types/jsx.d.ts",
-    "src/types/vitest.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "storybook-static",
-    "**/*.stories.*",
-    "**/*.test.*",
-    "**/*.spec.*",
-    "src/docs/guides.ts",
-    "scripts/**/*",
-    "vite.config.*.ts"
-  ]
+		/* Module interop */
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+
+		/* Path mapping */
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"],
+			"@/components/*": ["./src/components/*"],
+			"@/hooks/*": ["./src/hooks/*"],
+			"@/lib/*": ["./src/lib/*"],
+			"@/utils/*": ["./src/utils/*"],
+			"@/types/*": ["./src/types/*"],
+			"@/bundles/*": ["./src/bundles/*"],
+			"@/tokens": ["./src/tokens/index"],
+			"@/design-tokens": ["./src/tokens/design-tokens"],
+			"@/core/*": ["./src/core/*"]
+		}
+	},
+	"include": [
+		"src/**/*",
+		"src/types/**/*.d.ts",
+		"src/types/jsx.d.ts",
+		"src/types/vitest.d.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"storybook-static",
+		"**/*.stories.*",
+		"**/*.test.*",
+		"**/*.spec.*",
+		"src/docs/guides.ts",
+		"scripts/**/*",
+		"vite.config.*.ts"
+	]
 }

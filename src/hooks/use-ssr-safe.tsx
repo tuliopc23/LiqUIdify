@@ -23,10 +23,10 @@ import {
  * @returns {{ width: number, height: number }} window dimensions
  */
 export const useWindowDimensions = () => {
-  const [dimensions, setDimensions] = useState(getWindowDimensions());
+  const [_dimensions, _setDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {
-    if (!isBrowser()) {
+    if (!_isBrowser()) {
       return;
     }
 

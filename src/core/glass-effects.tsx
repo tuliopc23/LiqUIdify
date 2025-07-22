@@ -4,193 +4,193 @@
  * Provides React hooks for glass effects and interactions
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useUnifiedGlass } from './glass/unified-glass-system';
+import { useCallback, useEffect, useRef, useState } from "react";
 import type {
-  GlassEffectConfig,
-  GlassIntensity,
-  GlassVariant,
-} from './glass/unified-glass-system';
+	GlassEffectConfig,
+	GlassIntensity,
+	GlassVariant,
+} from "./glass/unified-glass-system";
+import { useUnifiedGlass } from "./glass/unified-glass-system";
 
 export interface UseGlassEffectsOptions {
-  intensity?: GlassIntensity;
-  variant?: GlassVariant;
-  interactive?: boolean;
-  magnetic?: boolean;
-  disabled?: boolean;
+	intensity?: GlassIntensity;
+	variant?: GlassVariant;
+	interactive?: boolean;
+	magnetic?: boolean;
+	disabled?: boolean;
 }
 
 export interface GlassEffectsResult {
-  glassProps: {
-    className: string;
-    style: React.CSSProperties;
-    onMouseEnter: () => void;
-    onMouseLeave: () => void;
-    onMouseMove: (event: React.MouseEvent) => void;
-  };
-  isActive: boolean;
-  setActive: (active: boolean) => void;
-  ref: React.RefObject<HTMLElement>;
+	glassProps: {
+		className: string;
+		style: React.CSSProperties;
+		onMouseEnter: () => void;
+		onMouseLeave: () => void;
+		onMouseMove: (event: React.MouseEvent) => void;
+	};
+	isActive: boolean;
+	setActive: (active: boolean) => void;
+	ref: React.RefObject<HTMLElement>;
 }
 
 /**
  * Main hook for applying glass effects to components
  */
 export function useGlassEffects(
-  options: UseGlassEffectsOptions = {}
+	options: UseGlassEffectsOptions = {},
 ): GlassEffectsResult {
-  const {
-    intensity = 'medium',
-    variant = 'default',
-    interactive = false,
-    magnetic = false,
-    disabled = false,
-  } = options;
+	const {
+		intensity = "medium",
+		variant = "default",
+		interactive = false,
+		magnetic = false,
+		disabled = false,
+	} = options;
 
-  const [isActive, setIsActive] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+	const [isActive, setIsActive] = useState(false);
+	const ref = useRef<HTMLElement>(null);
 
-  const config: GlassEffectConfig = {
-    intensity,
-    variant,
-    interactive,
-    magnetic,
-  };
+	const config: GlassEffectConfig = {
+		intensity,
+		variant,
+		interactive,
+		magnetic,
+	};
 
-  const { glassStyles, handlers } = useUnifiedGlass(config);
+	const { glassStyles, handlers } = useUnifiedGlass(config);
 
-  const handleMouseEnter = useCallback(() => {
-    if (!disabled) {
-      setIsActive(true);
-      handlers.onMouseEnter?.();
-    }
-  }, [disabled, handlers]);
+	const handleMouseEnter = useCallback(() => {
+		if (!disabled) {
+			setIsActive(true);
+			handlers.onMouseEnter?.();
+		}
+	}, [disabled, handlers]);
 
-  const handleMouseLeave = useCallback(() => {
-    if (!disabled) {
-      setIsActive(false);
-      handlers.onMouseLeave?.();
-    }
-  }, [disabled, handlers]);
+	const handleMouseLeave = useCallback(() => {
+		if (!disabled) {
+			setIsActive(false);
+			handlers.onMouseLeave?.();
+		}
+	}, [disabled, handlers]);
 
-  const handleMouseMove = useCallback(
-    (event: React.MouseEvent) => {
-      if (!disabled) {
-        handlers.onMouseMove?.(event as React.MouseEvent<HTMLDivElement>);
-      }
-    },
-    [disabled, handlers]
-  );
+	const handleMouseMove = useCallback(
+		(event: React.MouseEvent) => {
+			if (!disabled) {
+				handlers.onMouseMove?.(event as React.MouseEvent<HTMLDivElement>);
+			}
+		},
+		[disabled, handlers],
+	);
 
-  const glassProps = {
-    className: `glass-effect glass-effect--${intensity} glass-effect--${variant}`,
-    style: glassStyles,
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    onMouseMove: handleMouseMove,
-  };
+	const glassProps = {
+		className: `glass-effect glass-effect--${intensity} glass-effect--${variant}`,
+		style: glassStyles,
+		onMouseEnter: handleMouseEnter,
+		onMouseLeave: handleMouseLeave,
+		onMouseMove: handleMouseMove,
+	};
 
-  return {
-    glassProps,
-    isActive,
-    setActive: setIsActive,
-    ref,
-  };
+	return {
+		glassProps,
+		isActive,
+		setActive: setIsActive,
+		ref,
+	};
 }
 
 /**
  * Simplified hook for basic glass effects
  */
-export function useGlassBackground(intensity: GlassIntensity = 'medium') {
-  return useGlassEffects({ intensity, interactive: false, magnetic: false });
+export function useGlassBackground(intensity: GlassIntensity = "medium") {
+	return useGlassEffects({ intensity, interactive: false, magnetic: false });
 }
 
 /**
  * Hook for interactive glass effects with hover states
  */
 export function useInteractiveGlass(
-  options: Omit<UseGlassEffectsOptions, 'interactive'> = {}
+	options: Omit<UseGlassEffectsOptions, "interactive"> = {},
 ) {
-  return useGlassEffects({ ...options, interactive: true });
+	return useGlassEffects({ ...options, interactive: true });
 }
 
 /**
  * Hook for magnetic glass effects that respond to mouse movement
  */
 export function useMagneticGlass(
-  options: Omit<UseGlassEffectsOptions, 'magnetic'> = {}
+	options: Omit<UseGlassEffectsOptions, "magnetic"> = {},
 ) {
-  return useGlassEffects({ ...options, magnetic: true });
+	return useGlassEffects({ ...options, magnetic: true });
 }
 
 /**
  * Hook for glass effects with custom animation timings
  */
 export function useAnimatedGlass(
-  options: UseGlassEffectsOptions & {
-    duration?: number;
-    easing?: string;
-  } = {}
+	options: UseGlassEffectsOptions & {
+		duration?: number;
+		easing?: string;
+	} = {},
 ) {
-  const {
-    duration = 300,
-    easing = 'cubic-bezier(0.4, 0, 0.2, 1)',
-    ...glassOptions
-  } = options;
-  const result = useGlassEffects(glassOptions);
+	const {
+		duration = 300,
+		easing = "cubic-bezier(0.4, 0, 0.2, 1)",
+		...glassOptions
+	} = options;
+	const result = useGlassEffects(glassOptions);
 
-  // Override the transition in the style
-  const enhancedGlassProps = {
-    ...result.glassProps,
-    style: {
-      ...result.glassProps.style,
-      transition: `all ${duration}ms ${easing}`,
-    },
-  };
+	// Override the transition in the style
+	const enhancedGlassProps = {
+		...result.glassProps,
+		style: {
+			...result.glassProps.style,
+			transition: `all ${duration}ms ${easing}`,
+		},
+	};
 
-  return {
-    ...result,
-    glassProps: enhancedGlassProps,
-  };
+	return {
+		...result,
+		glassProps: enhancedGlassProps,
+	};
 }
 
 /**
  * Hook for glass effects that adapt based on screen size
  */
 export function useResponsiveGlass(
-  options: UseGlassEffectsOptions & {
-    mobileIntensity?: GlassIntensity;
-    desktopIntensity?: GlassIntensity;
-  } = {}
+	options: UseGlassEffectsOptions & {
+		mobileIntensity?: GlassIntensity;
+		desktopIntensity?: GlassIntensity;
+	} = {},
 ) {
-  const {
-    mobileIntensity,
-    desktopIntensity,
-    intensity: defaultIntensity,
-    ...restOptions
-  } = options;
-  const [screenSize, setScreenSize] = useState<'mobile' | 'desktop'>('desktop');
+	const {
+		mobileIntensity,
+		desktopIntensity,
+		intensity: defaultIntensity,
+		...restOptions
+	} = options;
+	const [screenSize, setScreenSize] = useState<"mobile" | "desktop">("desktop");
 
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setScreenSize(768 > window.innerWidth ? 'mobile' : 'desktop');
-    };
+	useEffect(() => {
+		const checkScreenSize = () => {
+			setScreenSize(768 > window.innerWidth ? "mobile" : "desktop");
+		};
 
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
+		checkScreenSize();
+		window.addEventListener("resize", checkScreenSize);
 
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
+		return () => window.removeEventListener("resize", checkScreenSize);
+	}, []);
 
-  const currentIntensity =
-    'mobile' === screenSize && mobileIntensity
-      ? mobileIntensity
-      : 'desktop' === screenSize && desktopIntensity
-        ? desktopIntensity
-        : defaultIntensity || 'medium';
+	const currentIntensity =
+		"mobile" === screenSize && mobileIntensity
+			? mobileIntensity
+			: "desktop" === screenSize && desktopIntensity
+				? desktopIntensity
+				: defaultIntensity || "medium";
 
-  return useGlassEffects({
-    ...restOptions,
-    intensity: currentIntensity,
-  });
+	return useGlassEffects({
+		...restOptions,
+		intensity: currentIntensity,
+	});
 }

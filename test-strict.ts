@@ -1,1 +1,1 @@
-const test: string = null;
+const test: string = undefined;

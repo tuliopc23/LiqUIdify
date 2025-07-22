@@ -1,6 +1,6 @@
-export { 
-  GlassSkipNavigation,
-  useSkipNavigation,
-  type GlassSkipNavigationProps,
-  type SkipLink
-} from './glass-skip-navigation';
+export {
+	GlassSkipNavigation,
+	type GlassSkipNavigationProps,
+	type SkipLink,
+	useSkipNavigation,
+} from "./glass-skip-navigation";

@@ -1,8 +1,8 @@
 export {
-  GlassSpinner,
-  PulseSpinner,
-  DotsSpinner,
-  RingSpinner,
-  WaveSpinner,
-  type GlassSpinnerProps,
-} from './glass-spinner';
+	DotsSpinner,
+	GlassSpinner,
+	type GlassSpinnerProps,
+	PulseSpinner,
+	RingSpinner,
+	WaveSpinner,
+} from "./glass-spinner";

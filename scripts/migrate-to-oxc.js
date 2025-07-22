@@ -1,90 +1,102 @@
 #!/usr/bin/env node
 
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { readFileSync, writeFileSync } from 'fs';
-import { execSync } from 'child_process';
+import { execSync } from "child_process";
+import { readFileSync, writeFileSync } from "fs";
+import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const projectRoot = resolve(__dirname, '..');
+const projectRoot = resolve(__dirname, "..");
 
-console.log('🚀 Migrating to OXC toolchain...\n');
+console.log("🚀 Migrating to OXC toolchain...\n");
 
 // 1. Read current package.json
-const packageJsonPath = resolve(projectRoot, 'package.json');
-const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+const packageJsonPath = resolve(projectRoot, "package.json");
+const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 
-console.log('📦 Current package analysis:');
+console.log("📦 Current package analysis:");
 
 // Check current linting tools
 const legacyDevDeps = [
-  'eslint',
-  '@typescript-eslint/eslint-plugin',
-  '@typescript-eslint/parser',
-  'eslint-config-prettier',
-  'eslint-plugin-react',
-  'eslint-plugin-react-hooks',
-  'eslint-plugin-react-refresh',
-  'eslint-plugin-storybook'
+	"eslint",
+	"@typescript-eslint/eslint-plugin",
+	"@typescript-eslint/parser",
+	"eslint-config-prettier",
+	"eslint-plugin-react",
+	"eslint-plugin-react-hooks",
+	"eslint-plugin-react-refresh",
+	"eslint-plugin-storybook",
 ];
 
-const oxcDeps = [
-  'oxc',
-  'oxlint'
-];
+const oxcDeps = ["oxc", "oxlint"];
 
 // Check what's currently installed
-const currentLegacyDeps = legacyDevDeps.filter(dep => packageJson.devDependencies?.[dep]);
-const currentOxcDeps = oxcDeps.filter(dep => packageJson.dependencies?.[dep] || packageJson.devDependencies?.[dep]);
+const currentLegacyDeps = legacyDevDeps.filter(
+	(dep) => packageJson.devDependencies?.[dep],
+);
+const currentOxcDeps = oxcDeps.filter(
+	(dep) =>
+		packageJson.dependencies?.[dep] || packageJson.devDependencies?.[dep],
+);
 
-console.log('  Legacy linting tools:', currentLegacyDeps.length > 0 ? currentLegacyDeps.join(', ') : 'None');
-console.log('  OXC tools:', currentOxcDeps.length > 0 ? currentOxcDeps.join(', ') : 'None');
+console.log(
+	"  Legacy linting tools:",
+	currentLegacyDeps.length > 0 ? currentLegacyDeps.join(", ") : "None",
+);
+console.log(
+	"  OXC tools:",
+	currentOxcDeps.length > 0 ? currentOxcDeps.join(", ") : "None",
+);
 
 // 2. Update package.json scripts to use OXC by default
-console.log('\n🔧 Updating package.json scripts...');
+console.log("\n🔧 Updating package.json scripts...");
 
 const newScripts = {
-  ...packageJson.scripts,
-  // Replace ESLint with OXlint
-  'lint': 'oxlint src',
-  'lint:fix': 'oxlint src --fix',
-  'lint:ci': 'oxlint src',
-  // Keep legacy scripts for comparison/fallback
-  'lint:eslint': packageJson.scripts.lint || 'eslint src/**/*.{ts,tsx} --no-warn-ignored',
-  'lint:eslint:fix': packageJson.scripts['lint:fix'] || 'eslint src/**/*.{ts,tsx} --fix --no-warn-ignored',
-  'lint:eslint:ci': packageJson.scripts['lint:ci'] || 'eslint src/**/*.{ts,tsx} --max-warnings 0 --no-warn-ignored',
-  
-  // Update build scripts to prefer OXC-enhanced builds
-  'build:default': 'bun run build:rolldown',
-  'build:legacy': packageJson.scripts.build || 'bun run clean && vite build && bun run build:css',
-  
-  // Add comprehensive OXC toolchain commands
-  'oxc:all': 'bun run oxc:lint && bun run type-check',
-  'ci:oxc': 'bun run oxc:all && bun run build:oxc && bun run test:ci',
-  
-  // Quality assurance with OXC
-  'qa:oxc': 'bun run oxc:all && bun run test && bun run bundle:budget:check'
+	...packageJson.scripts,
+	// Replace ESLint with OXlint
+	lint: "oxlint src",
+	"lint:fix": "oxlint src --fix",
+	"lint:ci": "oxlint src",
+	// Keep legacy scripts for comparison/fallback
+	"lint:eslint":
+		packageJson.scripts.lint || "eslint src/**/*.{ts,tsx} --no-warn-ignored",
+	"lint:eslint:fix":
+		packageJson.scripts["lint:fix"] ||
+		"eslint src/**/*.{ts,tsx} --fix --no-warn-ignored",
+	"lint:eslint:ci":
+		packageJson.scripts["lint:ci"] ||
+		"eslint src/**/*.{ts,tsx} --max-warnings 0 --no-warn-ignored",
+
+	// Update build scripts to prefer OXC-enhanced builds
+	"build:default": "bun run build:rolldown",
+	"build:legacy":
+		packageJson.scripts.build ||
+		"bun run clean && vite build && bun run build:css",
+
+	// Add comprehensive OXC toolchain commands
+	"oxc:all": "bun run oxc:lint && bun run type-check",
+	"ci:oxc": "bun run oxc:all && bun run build:oxc && bun run test:ci",
+
+	// Quality assurance with OXC
+	"qa:oxc": "bun run oxc:all && bun run test && bun run bundle:budget:check",
 };
 
 packageJson.scripts = newScripts;
 
 // 3. Add lint-staged configuration for OXC
-if (!packageJson['lint-staged']) {
-  packageJson['lint-staged'] = {};
+if (!packageJson["lint-staged"]) {
+	packageJson["lint-staged"] = {};
 }
 
-packageJson['lint-staged'] = {
-  ...packageJson['lint-staged'],
-  '*.{ts,tsx}': [
-    'oxlint --fix',
-    'prettier --write'
-  ]
+packageJson["lint-staged"] = {
+	...packageJson["lint-staged"],
+	"*.{ts,tsx}": ["oxlint --fix", "prettier --write"],
 };
 
 // 4. Write updated package.json
-writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
-console.log('  ✅ Updated package.json with OXC scripts');
+writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + "\n");
+console.log("  ✅ Updated package.json with OXC scripts");
 
 // 5. Create a performance comparison script
 const perfComparisonScript = `#!/usr/bin/env node
@@ -143,8 +155,11 @@ if (oxcBuildTime < viteBuildTime) {
 }
 `;
 
-writeFileSync(resolve(projectRoot, 'scripts/performance-comparison.js'), perfComparisonScript);
-console.log('  ✅ Created performance comparison script');
+writeFileSync(
+	resolve(projectRoot, "scripts/performance-comparison.js"),
+	perfComparisonScript,
+);
+console.log("  ✅ Created performance comparison script");
 
 // 6. Create a comprehensive validation script
 const validationScript = `#!/usr/bin/env node
@@ -204,25 +219,28 @@ if (failed === 0) {
 }
 `;
 
-writeFileSync(resolve(projectRoot, 'scripts/validate-oxc.js'), validationScript);
-console.log('  ✅ Created OXC validation script');
+writeFileSync(
+	resolve(projectRoot, "scripts/validate-oxc.js"),
+	validationScript,
+);
+console.log("  ✅ Created OXC validation script");
 
 // 7. Show migration summary
-console.log('\n🎯 Migration Summary:');
-console.log('  📝 Updated package.json scripts to use OXC by default');
-console.log('  🔧 Created lint-staged configuration for OXC');
-console.log('  📊 Added performance comparison script');
-console.log('  ✅ Created validation script');
+console.log("\n🎯 Migration Summary:");
+console.log("  📝 Updated package.json scripts to use OXC by default");
+console.log("  🔧 Created lint-staged configuration for OXC");
+console.log("  📊 Added performance comparison script");
+console.log("  ✅ Created validation script");
 
-console.log('\n📋 Next Steps:');
-console.log('  1. Run: bun run oxc:all');
-console.log('  2. Run: node scripts/validate-oxc.js');
-console.log('  3. Run: node scripts/performance-comparison.js');
-console.log('  4. Test the new build: bun run build:oxc');
-console.log('  5. If everything works, update CI/CD to use: bun run ci:oxc');
+console.log("\n📋 Next Steps:");
+console.log("  1. Run: bun run oxc:all");
+console.log("  2. Run: node scripts/validate-oxc.js");
+console.log("  3. Run: node scripts/performance-comparison.js");
+console.log("  4. Test the new build: bun run build:oxc");
+console.log("  5. If everything works, update CI/CD to use: bun run ci:oxc");
 
-console.log('\n💡 Legacy Commands (for rollback):');
-console.log('  Lint: bun run lint:eslint');
-console.log('  Build: bun run build:legacy');
+console.log("\n💡 Legacy Commands (for rollback):");
+console.log("  Lint: bun run lint:eslint");
+console.log("  Build: bun run build:legacy");
 
-console.log('\n🚀 OXC migration completed successfully!');
+console.log("\n🚀 OXC migration completed successfully!");

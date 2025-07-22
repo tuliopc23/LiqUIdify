@@ -1,21 +1,21 @@
 {
-  "s-tier-requirements": {
-    "render-time-fps": 55,
-    "bundle-size-kb": 30,
-    "performance-score": 85
-  },
-  "monitoring": {
-    "alert-thresholds": {
-      "bundle-size-warning": 25,
-      "render-time-warning": 50,
-      "performance-score-warning": 80
-    },
-    "ignore-test-failures": true,
-    "validation-script": "bun run perf:status"
-  },
-  "last-validation": {
-    "timestamp": "2025-07-22T17:12:13.152Z",
-    "status": "S-tier-compliant",
-    "score": 100
-  }
+	"s-tier-requirements": {
+		"render-time-fps": 55,
+		"bundle-size-kb": 30,
+		"performance-score": 85
+	},
+	"monitoring": {
+		"alert-thresholds": {
+			"bundle-size-warning": 25,
+			"render-time-warning": 50,
+			"performance-score-warning": 80
+		},
+		"ignore-test-failures": true,
+		"validation-script": "bun run perf:status"
+	},
+	"last-validation": {
+		"timestamp": "2025-07-22T17:12:13.152Z",
+		"status": "S-tier-compliant",
+		"score": 100
+	}
 }

@@ -6,258 +6,250 @@
 
 /* CSS Custom Properties for Glass Effects */
 :root {
-  /* Glass Effect Variables */
-  --glass-blur-subtle: 4px;
-  --glass-blur-medium: 8px;
-  --glass-blur-strong: 16px;
-  --glass-blur-intense: 24px;
-  
-  --glass-opacity-subtle: 0.9;
-  --glass-opacity-medium: 0.85;
-  --glass-opacity-strong: 0.8;
-  --glass-opacity-intense: 0.75;
-  
-  --glass-saturation: 1.2;
-  --glass-brightness: 1.1;
-  --glass-contrast: 1.05;
-  
-  /* Performance-optimized transitions */
-  --glass-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --glass-transition-normal: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --glass-transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Hardware acceleration */
-  --glass-transform-3d: translate3d(0, 0, 0);
-  --glass-will-change-hover: transform, opacity, backdrop-filter;
-  --glass-will-change-idle: auto;
+	/* Glass Effect Variables */
+	--glass-blur-subtle: 4px;
+	--glass-blur-medium: 8px;
+	--glass-blur-strong: 16px;
+	--glass-blur-intense: 24px;
+
+	--glass-opacity-subtle: 0.9;
+	--glass-opacity-medium: 0.85;
+	--glass-opacity-strong: 0.8;
+	--glass-opacity-intense: 0.75;
+
+	--glass-saturation: 1.2;
+	--glass-brightness: 1.1;
+	--glass-contrast: 1.05;
+
+	/* Performance-optimized transitions */
+	--glass-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+	--glass-transition-normal: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	--glass-transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+	/* Hardware acceleration */
+	--glass-transform-3d: translate3d(0, 0, 0);
+	--glass-will-change-hover: transform, opacity, backdrop-filter;
+	--glass-will-change-idle: auto;
 }
 
 /* Base Glass Component Classes */
 @layer components {
-  .glass-base {
-    position: relative;
-    overflow: hidden;
-    transform: var(--glass-transform-3d); /* Force hardware acceleration */
-    will-change: var(--glass-will-change-idle);
-    transition: var(--glass-transition-normal);
-  }
+	.glass-base {
+		position: relative;
+		overflow: hidden;
+		transform: var(--glass-transform-3d); /* Force hardware acceleration */
+		will-change: var(--glass-will-change-idle);
+		transition: var(--glass-transition-normal);
+	}
 }
 
 /* Optimized Backdrop Filters */
 @layer components {
-  .glass-blur-subtle {
-    backdrop-filter: blur(var(--glass-blur-subtle)) 
-                    saturate(var(--glass-saturation)) 
-                    brightness(var(--glass-brightness));
-    -webkit-backdrop-filter: blur(var(--glass-blur-subtle)) 
-                            saturate(var(--glass-saturation)) 
-                            brightness(var(--glass-brightness));
-  }
+	.glass-blur-subtle {
+		backdrop-filter: blur(var(--glass-blur-subtle))
+			saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+		-webkit-backdrop-filter: blur(var(--glass-blur-subtle))
+			saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+	}
 
-  .glass-blur-medium {
-    backdrop-filter: blur(var(--glass-blur-medium)) 
-                    saturate(var(--glass-saturation)) 
-                    brightness(var(--glass-brightness));
-    -webkit-backdrop-filter: blur(var(--glass-blur-medium)) 
-                            saturate(var(--glass-saturation)) 
-                            brightness(var(--glass-brightness));
-  }
+	.glass-blur-medium {
+		backdrop-filter: blur(var(--glass-blur-medium))
+			saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+		-webkit-backdrop-filter: blur(var(--glass-blur-medium))
+			saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+	}
 
-  .glass-blur-strong {
-    backdrop-filter: blur(var(--glass-blur-strong)) 
-                    saturate(var(--glass-saturation)) 
-                    brightness(var(--glass-brightness));
-    -webkit-backdrop-filter: blur(var(--glass-blur-strong)) 
-                            saturate(var(--glass-saturation)) 
-                            brightness(var(--glass-brightness));
-  }
+	.glass-blur-strong {
+		backdrop-filter: blur(var(--glass-blur-strong))
+			saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+		-webkit-backdrop-filter: blur(var(--glass-blur-strong))
+			saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+	}
 
-  .glass-blur-intense {
-    backdrop-filter: blur(var(--glass-blur-intense)) 
-                    saturate(var(--glass-saturation)) 
-                    brightness(var(--glass-brightness));
-    -webkit-backdrop-filter: blur(var(--glass-blur-intense)) 
-                            saturate(var(--glass-saturation)) 
-                            brightness(var(--glass-brightness));
-  }
+	.glass-blur-intense {
+		backdrop-filter: blur(var(--glass-blur-intense))
+			saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+		-webkit-backdrop-filter: blur(var(--glass-blur-intense))
+			saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+	}
 }
 
 /* Background Glass Colors */
 @layer components {
-  .glass-bg-subtle {
-    background-color: rgba(255, 255, 255, var(--glass-opacity-subtle));
-  }
+	.glass-bg-subtle {
+		background-color: rgba(255, 255, 255, var(--glass-opacity-subtle));
+	}
 
-  .glass-bg-medium {
-    background-color: rgba(255, 255, 255, var(--glass-opacity-medium));
-  }
+	.glass-bg-medium {
+		background-color: rgba(255, 255, 255, var(--glass-opacity-medium));
+	}
 
-  .glass-bg-strong {
-    background-color: rgba(255, 255, 255, var(--glass-opacity-strong));
-  }
+	.glass-bg-strong {
+		background-color: rgba(255, 255, 255, var(--glass-opacity-strong));
+	}
 
-  .glass-bg-intense {
-    background-color: rgba(255, 255, 255, var(--glass-opacity-intense));
-  }
+	.glass-bg-intense {
+		background-color: rgba(255, 255, 255, var(--glass-opacity-intense));
+	}
 }
 
 /* Performance-Optimized Interactive States */
 @layer components {
-  .glass-interactive {
-    cursor: pointer;
-    will-change: var(--glass-will-change-idle);
-    transition: var(--glass-transition-fast);
-  }
+	.glass-interactive {
+		cursor: pointer;
+		will-change: var(--glass-will-change-idle);
+		transition: var(--glass-transition-fast);
+	}
 
-  .glass-interactive:hover {
-    will-change: var(--glass-will-change-hover);
-    transform: translateY(-1px) var(--glass-transform-3d);
-  }
+	.glass-interactive:hover {
+		will-change: var(--glass-will-change-hover);
+		transform: translateY(-1px) var(--glass-transform-3d);
+	}
 
-  .glass-interactive:active {
-    transform: translateY(0) var(--glass-transform-3d);
-    transition-duration: 0.05s;
-  }
+	.glass-interactive:active {
+		transform: translateY(0) var(--glass-transform-3d);
+		transition-duration: 0.05s;
+	}
 }
 
 /* Optimized Button Variants */
 .glass-button-optimized {
-  @apply glass-base glass-blur-medium glass-bg-medium;
-  @apply px-4 py-2 rounded-lg border border-white/20;
-  @apply font-medium text-gray-900 dark:text-white;
-  @apply focus:outline-none focus:ring-2 focus:ring-blue-500/50;
+	@apply glass-base glass-blur-medium glass-bg-medium;
+	@apply px-4 py-2 rounded-lg border border-white/20;
+	@apply font-medium text-gray-900 dark:text-white;
+	@apply focus:outline-none focus:ring-2 focus:ring-blue-500/50;
 }
 
 .glass-button-optimized:hover {
-  @apply glass-interactive;
-  background-color: rgba(255, 255, 255, 0.9);
+	@apply glass-interactive;
+	background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Optimized Card Variants */
 .glass-card-optimized {
-  @apply glass-base glass-blur-medium glass-bg-medium;
-  @apply p-6 rounded-xl border border-white/20;
-  @apply shadow-lg shadow-black/5;
+	@apply glass-base glass-blur-medium glass-bg-medium;
+	@apply p-6 rounded-xl border border-white/20;
+	@apply shadow-lg shadow-black/5;
 }
 
 .glass-card-optimized:hover {
-  @apply glass-interactive;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+	@apply glass-interactive;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Performance Utilities */
 .glass-performance-boost {
-  contain: layout style paint;
-  isolation: isolate;
+	contain: layout style paint;
+	isolation: isolate;
 }
 
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
-  .glass-base,
-  .glass-interactive,
-  .glass-button-optimized,
-  .glass-card-optimized {
-    transition: none !important;
-    animation: none !important;
-    will-change: auto !important;
-  }
-  
-  .glass-interactive:hover {
-    transform: none !important;
-  }
+	.glass-base,
+	.glass-interactive,
+	.glass-button-optimized,
+	.glass-card-optimized {
+		transition: none !important;
+		animation: none !important;
+		will-change: auto !important;
+	}
+
+	.glass-interactive:hover {
+		transform: none !important;
+	}
 }
 
 /* High Contrast Mode Support */
 @media (prefers-contrast: high) {
-  .glass-blur-subtle,
-  .glass-blur-medium,
-  .glass-blur-strong,
-  .glass-blur-intense {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background-color: rgba(255, 255, 255, 0.95);
-    border-width: 2px;
-  }
-  
-  .dark .glass-blur-subtle,
-  .dark .glass-blur-medium,
-  .dark .glass-blur-strong,
-  .dark .glass-blur-intense {
-    background-color: rgba(0, 0, 0, 0.95);
-    border-color: rgba(255, 255, 255, 0.8);
-  }
+	.glass-blur-subtle,
+	.glass-blur-medium,
+	.glass-blur-strong,
+	.glass-blur-intense {
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		background-color: rgba(255, 255, 255, 0.95);
+		border-width: 2px;
+	}
+
+	.dark .glass-blur-subtle,
+	.dark .glass-blur-medium,
+	.dark .glass-blur-strong,
+	.dark .glass-blur-intense {
+		background-color: rgba(0, 0, 0, 0.95);
+		border-color: rgba(255, 255, 255, 0.8);
+	}
 }
 
 /* GPU Acceleration Hint */
 .glass-gpu-accelerated {
-  transform: var(--glass-transform-3d);
-  backface-visibility: hidden;
-  perspective: 1000px;
+	transform: var(--glass-transform-3d);
+	backface-visibility: hidden;
+	perspective: 1000px;
 }
 
 /* Optimized Animation Classes */
 .glass-animate-in {
-  animation: glassSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	animation: glassSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-animate-out {
-  animation: glassSlideOut 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+	animation: glassSlideOut 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes glassSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(4px) var(--glass-transform-3d);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) var(--glass-transform-3d);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(4px) var(--glass-transform-3d);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) var(--glass-transform-3d);
+	}
 }
 
 @keyframes glassSlideOut {
-  from {
-    opacity: 1;
-    transform: translateY(0) var(--glass-transform-3d);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-4px) var(--glass-transform-3d);
-  }
+	from {
+		opacity: 1;
+		transform: translateY(0) var(--glass-transform-3d);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(-4px) var(--glass-transform-3d);
+	}
 }
 
 /* Performance Monitoring (Development Only) */
 .glass-debug-performance {
-  position: relative;
+	position: relative;
 }
 
 .glass-debug-performance::after {
-  content: attr(data-render-time) "ms";
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: rgba(255, 0, 0, 0.8);
-  color: white;
-  font-size: 10px;
-  padding: 2px 4px;
-  border-radius: 0 0 0 4px;
-  font-family: monospace;
-  z-index: 1000;
-  pointer-events: none;
+	content: attr(data-render-time) "ms";
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: rgba(255, 0, 0, 0.8);
+	color: white;
+	font-size: 10px;
+	padding: 2px 4px;
+	border-radius: 0 0 0 4px;
+	font-family: monospace;
+	z-index: 1000;
+	pointer-events: none;
 }
 
 /* Critical Performance Optimizations */
 .glass-critical-performance {
-  /* Optimize paint and layout */
-  contain: layout style paint;
-  
-  /* Optimize compositing */
-  will-change: transform;
-  transform: var(--glass-transform-3d);
-  
-  /* Optimize backdrop-filter */
-  isolation: isolate;
-  
-  /* Optimize repaints */
-  backface-visibility: hidden;
+	/* Optimize paint and layout */
+	contain: layout style paint;
+
+	/* Optimize compositing */
+	will-change: transform;
+	transform: var(--glass-transform-3d);
+
+	/* Optimize backdrop-filter */
+	isolation: isolate;
+
+	/* Optimize repaints */
+	backface-visibility: hidden;
 }

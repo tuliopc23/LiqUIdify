@@ -7,21 +7,21 @@
  * - Critical CSS inlining
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 // Types
 interface CSSLoaderOptions {
-  disabled?: boolean;
-  onLoad?: () => void;
-  onError?: (error: Error) => void;
-  media?: string;
-  id?: string;
+	disabled?: boolean;
+	onLoad?: () => void;
+	onError?: (error: Error) => void;
+	media?: string;
+	id?: string;
 }
 
 interface CSSChunkOptions {
-  critical?: boolean;
-  preload?: boolean;
-  disabled?: boolean;
+	critical?: boolean;
+	preload?: boolean;
+	disabled?: boolean;
 }
 
 // CSS loading state tracking
@@ -33,172 +33,172 @@ const cssChunks: Record<string, string> = {};
  * Load CSS from a URL
  */
 export function loadCSS(
-  url: string,
-  options: CSSLoaderOptions = {}
+	url: string,
+	options: CSSLoaderOptions = {},
 ): Promise<void> {
-  const { disabled = false, onLoad, onError, media = 'all', id } = options;
+	const { disabled = false, onLoad, onError, media = "all", id } = options;
 
-  // Skip if disabled
-  if (disabled) {
-    return Promise.resolve();
-  }
+	// Skip if disabled
+	if (disabled) {
+		return Promise.resolve();
+	}
 
-  // Return existing promise if already loading
-  if (loadingCSS.has(url)) {
-    return loadingCSS.get(url)!;
-  }
+	// Return existing promise if already loading
+	if (loadingCSS.has(url)) {
+		return loadingCSS.get(url)!;
+	}
 
-  // Skip if already loaded
-  if (loadedCSS.has(url)) {
-    onLoad?.();
-    return Promise.resolve();
-  }
+	// Skip if already loaded
+	if (loadedCSS.has(url)) {
+		onLoad?.();
+		return Promise.resolve();
+	}
 
-  // Create loading promise
-  const promise = new Promise<void>((resolve, reject) => {
-    // Skip if no document (SSR)
-    if ('undefined' === typeof document) {
-      resolve();
-      return;
-    }
+	// Create loading promise
+	const promise = new Promise<void>((resolve, reject) => {
+		// Skip if no document (SSR)
+		if ("undefined" === typeof document) {
+			resolve();
+			return;
+		}
 
-    // Create link element
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = url;
-    link.media = media;
+		// Create link element
+		const link = document.createElement("link");
+		link.rel = "stylesheet";
+		link.href = url;
+		link.media = media;
 
-    if (id) {
-      link.id = id;
-    }
+		if (id) {
+			link.id = id;
+		}
 
-    // Handle load event
-    link.onload = () => {
-      loadedCSS.add(url);
-      loadingCSS.delete(url);
-      onLoad?.();
-      resolve();
-    };
+		// Handle load event
+		link.onload = () => {
+			loadedCSS.add(url);
+			loadingCSS.delete(url);
+			onLoad?.();
+			resolve();
+		};
 
-    // Handle error event
-    link.onerror = (error) => {
-      loadingCSS.delete(url);
-      const errorObj = new Error(`Failed to load CSS: ${url}`);
-      onError?.(errorObj);
-      reject(errorObj);
-      console.error(error);
-    };
+		// Handle error event
+		link.onerror = (error) => {
+			loadingCSS.delete(url);
+			const errorObj = new Error(`Failed to load CSS: ${url}`);
+			onError?.(errorObj);
+			reject(errorObj);
+			console.error(error);
+		};
 
-    // Add to document
-    document.head.appendChild(link);
-  });
+		// Add to document
+		document.head.appendChild(link);
+	});
 
-  // Store promise
-  loadingCSS.set(url, promise);
+	// Store promise
+	loadingCSS.set(url, promise);
 
-  return promise;
+	return promise;
 }
 
 /**
  * React hook for loading CSS
  */
 export function useCSS(url: string, options: CSSLoaderOptions = {}): boolean {
-  const [loaded, setLoaded] = useState(loadedCSS.has(url));
+	const [loaded, setLoaded] = useState(loadedCSS.has(url));
 
-  useEffect(() => {
-    if (!url || options.disabled) {
-      return;
-    }
+	useEffect(() => {
+		if (!url || options.disabled) {
+			return;
+		}
 
-    const currentOptions = { ...options };
+		const currentOptions = { ...options };
 
-    loadCSS(url, {
-      ...currentOptions,
-      onLoad: () => {
-        setLoaded(true);
-        currentOptions.onLoad?.();
-      },
-    }).catch(() => {
-      // Error already handled in loadCSS
-    });
-  }, [url, options.disabled, options]);
+		loadCSS(url, {
+			...currentOptions,
+			onLoad: () => {
+				setLoaded(true);
+				currentOptions.onLoad?.();
+			},
+		}).catch(() => {
+			// Error already handled in loadCSS
+		});
+	}, [url, options.disabled, options]);
 
-  return loaded;
+	return loaded;
 }
 
 /**
  * Register a CSS chunk
  */
 export function registerCSSChunk(name: string, url: string): void {
-  cssChunks[name] = url;
+	cssChunks[name] = url;
 }
 
 /**
  * Register multiple CSS chunks
  */
 export function registerCSSChunks(chunks: Record<string, string>): void {
-  Object.entries(chunks).forEach(([name, url]) => {
-    registerCSSChunk(name, url);
-  });
+	Object.entries(chunks).forEach(([name, url]) => {
+		registerCSSChunk(name, url);
+	});
 }
 
 /**
  * Load a CSS chunk
  */
 export function loadCSSChunk(
-  name: string,
-  options: CSSChunkOptions = {}
+	name: string,
+	options: CSSChunkOptions = {},
 ): Promise<void> {
-  const url = cssChunks[name];
+	const url = cssChunks[name];
 
-  if (!url) {
-    console.warn(`CSS chunk not found: ${name}`);
-    return Promise.resolve();
-  }
+	if (!url) {
+		console.warn(`CSS chunk not found: ${name}`);
+		return Promise.resolve();
+	}
 
-  return loadCSS(url, options);
+	return loadCSS(url, options);
 }
 
 /**
  * React hook for loading a CSS chunk
  */
 export function useCSSChunk(
-  name: string,
-  options: CSSChunkOptions = {}
+	name: string,
+	options: CSSChunkOptions = {},
 ): boolean {
-  const url = cssChunks[name];
-  return useCSS(url || '', options);
+	const url = cssChunks[name];
+	return useCSS(url || "", options);
 }
 
 /**
  * Higher-order component for loading a CSS chunk
  */
 export function withCSSChunk<P extends {}>(
-  Component: React.ComponentType<P>,
-  chunkName: string
+	Component: React.ComponentType<P>,
+	chunkName: string,
 ): React.ComponentType<P> {
-  return (props: P) => {
-    useCSSChunk(chunkName);
-    return React.createElement(Component, props as any);
-  };
+	return (props: P) => {
+		useCSSChunk(chunkName);
+		return React.createElement(Component, props as any);
+	};
 }
 
 /**
  * Utility to inline critical CSS
  */
 export function getCriticalCSS(): string {
-  // This would be replaced at build time with actual critical CSS
-  return process.env.GLASS_UI_CRITICAL_CSS || '';
+	// This would be replaced at build time with actual critical CSS
+	return process.env.GLASS_UI_CRITICAL_CSS || "";
 }
 
 // Export all functions
 export const cssLoader = {
-  loadCSS,
-  useCSS,
-  registerCSSChunk,
-  registerCSSChunks,
-  loadCSSChunk,
-  useCSSChunk,
-  withCSSChunk,
-  getCriticalCSS,
+	loadCSS,
+	useCSS,
+	registerCSSChunk,
+	registerCSSChunks,
+	loadCSSChunk,
+	useCSSChunk,
+	withCSSChunk,
+	getCriticalCSS,
 };

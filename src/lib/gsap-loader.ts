@@ -2,18 +2,18 @@
 // This file is disabled until GSAP is re-added
 
 export const loadGSAP = async () => {
-  console.warn(
-    'GSAP has been removed from dependencies. Use Framer Motion instead.'
-  );
-  return null;
+	console.warn(
+		"GSAP has been removed from dependencies. Use Framer Motion instead.",
+	);
+	return;
 };
 
 export const loadScrollTrigger = async () => {
-  console.warn('GSAP ScrollTrigger has been removed from dependencies.');
-  return null;
+	console.warn("GSAP ScrollTrigger has been removed from dependencies.");
+	return;
 };
 
 export const loadMorphSVG = async () => {
-  console.warn('GSAP MorphSVG has been removed from dependencies.');
-  return null;
+	console.warn("GSAP MorphSVG has been removed from dependencies.");
+	return;
 };

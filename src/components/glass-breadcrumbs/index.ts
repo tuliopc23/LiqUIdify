@@ -1,5 +1,5 @@
 export {
-  GlassBreadcrumbs,
-  type GlassBreadcrumbsProps,
-  type BreadcrumbItem,
-} from './glass-breadcrumbs';
+	type BreadcrumbItem,
+	GlassBreadcrumbs,
+	type GlassBreadcrumbsProps,
+} from "./glass-breadcrumbs";

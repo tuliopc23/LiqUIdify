@@ -1,5 +1,5 @@
 export {
-  GlassDropdown,
-  type GlassDropdownProps,
-  type DropdownItem,
-} from './glass-dropdown';
+	type DropdownItem,
+	GlassDropdown,
+	type GlassDropdownProps,
+} from "./glass-dropdown";

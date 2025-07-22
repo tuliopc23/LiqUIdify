@@ -1,25 +1,24 @@
-import { useEffect, useRef } from 'react';
-import { isServer } from '@/utils/ssr-safe';
+import { useEffect, useRef } from "react";
 
 export const useSSRAnimation = (
-  callback?: (element: HTMLElement) => void | (() => void)
+	_callback?: (element: HTMLElement) => undefined | (() => void),
 ) => {
-  const elementRef = useRef<HTMLDivElement>(null);
-  const cleanupRef = useRef<(() => void) | void>(undefined);
+	const _elementRef = useRef<HTMLDivElement>(null);
+	const cleanupRef = useRef<(() => void) | undefined>(undefined);
 
-  useEffect(() => {
-    if (isServer || !elementRef.current || !callback) {
-      return;
-    }
+	useEffect(() => {
+		if (_isServer || !_elementRef._current || !_callback) {
+			return;
+		}
 
-    cleanupRef.current = callback(elementRef.current);
+		cleanupRef.current = callback(elementRef.current);
 
-    return () => {
-      if (cleanupRef.current) {
-        cleanupRef.current();
-      }
-    };
-  }, [callback]);
+		return () => {
+			if (cleanupRef.current) {
+				cleanupRef.current();
+			}
+		};
+	}, [callback]);
 
-  return elementRef;
+	return elementRef;
 };

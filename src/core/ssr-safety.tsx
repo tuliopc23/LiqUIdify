@@ -4,118 +4,118 @@
  * Provides utilities for safe server-side rendering and client-side hydration
  */
 
-import React, { useEffect, useState } from 'react';
-import type { ComponentProps, ReactNode } from 'react';
+import type { ComponentProps, ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Hook to safely check if we're on the client side
  */
 export function useIsClient(): boolean {
-  const [isClient, setIsClient] = useState(false);
+	const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
 
-  return isClient;
+	return isClient;
 }
 
 /**
  * Component that only renders its children on the client side
  */
 export interface ClientOnlyProps {
-  children: ReactNode;
-  fallback?: ReactNode;
+	children: ReactNode;
+	fallback?: ReactNode;
 }
 
 export function ClientOnly({
-  children,
-  fallback = undefined,
+	children,
+	fallback = undefined,
 }: ClientOnlyProps) {
-  const isClient = useIsClient();
+	const isClient = useIsClient();
 
-  if (!isClient) {
-    return <>{fallback}</>;
-  }
+	if (!isClient) {
+		return <>{fallback}</>;
+	}
 
-  return <>{children}</>;
+	return <>{children}</>;
 }
 
 /**
  * SSR-safe component wrapper that provides fallback during SSR
  */
-export interface SSRSafeProps extends ComponentProps<'div'> {
-  children: ReactNode;
-  fallback?: ReactNode;
-  component?: keyof JSX.IntrinsicElements;
+export interface SSRSafeProps extends ComponentProps<"div"> {
+	children: ReactNode;
+	fallback?: ReactNode;
+	component?: keyof JSX.IntrinsicElements;
 }
 
 export function SSRSafe({
-  children,
-  fallback = undefined,
-  component: Component = 'div',
-  ...props
+	children,
+	fallback = undefined,
+	component: Component = "div",
+	...props
 }: SSRSafeProps) {
-  const isClient = useIsClient();
+	const isClient = useIsClient();
 
-  if (!isClient) {
-    return fallback ? (
-      <Component {...(props as any)}>{fallback}</Component>
-    ) : null;
-  }
+	if (!isClient) {
+		return fallback ? (
+			<Component {...(props as any)}>{fallback}</Component>
+		) : undefined;
+	}
 
-  return <Component {...(props as any)}>{children}</Component>;
+	return <Component {...(props as any)}>{children}</Component>;
 }
 
 /**
  * Hook for SSR-safe access to window and document objects
  */
 export function useSSRSafeWindow() {
-  const [windowObj, setWindowObj] = useState<Window | undefined>(undefined);
+	const [windowObj, setWindowObj] = useState<Window | undefined>(undefined);
 
-  useEffect(() => {
-    if ('undefined' !== typeof window) {
-      setWindowObj(window);
-    }
-  }, []);
+	useEffect(() => {
+		if ("undefined" !== typeof window) {
+			setWindowObj(window);
+		}
+	}, []);
 
-  return windowObj;
+	return windowObj;
 }
 
 /**
  * Hook for SSR-safe localStorage access
  */
 export function useSSRSafeLocalStorage() {
-  const [storage, setStorage] = useState<Storage | undefined>(undefined);
+	const [storage, setStorage] = useState<Storage | undefined>(undefined);
 
-  useEffect(() => {
-    if ('undefined' !== typeof window && window.localStorage) {
-      setStorage(window.localStorage);
-    }
-  }, []);
+	useEffect(() => {
+		if ("undefined" !== typeof window && window.localStorage) {
+			setStorage(window.localStorage);
+		}
+	}, []);
 
-  return storage;
+	return storage;
 }
 
 /**
  * Utility function to check if we're in a browser environment
  */
 export const isBrowser = (): boolean => {
-  return 'undefined' !== typeof window && 'undefined' !== typeof document;
+	return "undefined" !== typeof window && "undefined" !== typeof document;
 };
 
 /**
  * Utility function to safely access browser APIs
  */
 export function safelyAccessBrowserAPI<T>(fn: () => T, fallback: T): T {
-  if (!isBrowser()) {
-    return fallback;
-  }
+	if (!isBrowser()) {
+		return fallback;
+	}
 
-  try {
-    return fn();
-  } catch (error) {
-    console.warn('Browser API access failed:', error);
-    return fallback;
-  }
+	try {
+		return fn();
+	} catch (error) {
+		console.warn("Browser API access failed:", error);
+		return fallback;
+	}
 }

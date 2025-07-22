@@ -1,9 +1,9 @@
 export {
-  LineChart,
-  BarChart,
-  DonutChart,
-  type ChartDataPoint,
-  type LineChartProps,
-  type BarChartProps,
-  type DonutChartProps,
-} from './glass-chart';
+	BarChart,
+	type BarChartProps,
+	type ChartDataPoint,
+	DonutChart,
+	type DonutChartProps,
+	LineChart,
+	type LineChartProps,
+} from "./glass-chart";
