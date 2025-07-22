@@ -11,7 +11,7 @@ export interface GlassProgressProps {
   color?: 'blue' | 'green' | 'purple' | 'red' | 'yellow';
 }
 
-export const GlassProgress = React.forwardRef<
+export const GlassProgress = React.memo(React.forwardRef<
   HTMLDivElement,
   GlassProgressProps
 >(

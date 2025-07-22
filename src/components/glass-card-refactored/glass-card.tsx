@@ -9,7 +9,7 @@
  * - Separated business logic from presentation
  */
 
-import { createContext, forwardRef, useContext } from 'react';
+import React, { createContext, forwardRef, useCallback, useContext } from 'react';
 import type {
   ComponentPropsBuilder,
   HeadingProps,
@@ -147,7 +147,7 @@ const PADDING_CLASSES = {
 /**
  * Main Glass Card Component
  */
-export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
+export const GlassCard = React.memo(forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
   (
     {
       // Base props
@@ -203,7 +203,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
     const { currentState } = useGlassStateTransitions();
 
     // Event handlers with business logic
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
       if (interactive) {
         actions.handlePress?.();
         onCardClick?.(event);
@@ -216,21 +216,21 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
       }
 
       onClick?.(event);
-    };
+    }, [interactive, selectable, state.isSelected, actions, onCardClick, onCardSelect, onClick]);
 
-    const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
       if (hover) {
         actions.handleHover?.(true);
         onMouseEnter?.(event);
       }
-    };
+    }, [hover, actions, onMouseEnter]);
 
-    const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseLeave = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
       if (hover) {
         actions.handleHover?.(false);
         onMouseLeave?.(event);
       }
-    };
+    }, [hover, actions, onMouseLeave]);
 
     // Generate glass classes and variables
     const glassClasses = generateGlassClasses({
@@ -318,7 +318,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
       </CardContext.Provider>
     );
   }
-);
+));
 
 GlassCard.displayName = 'GlassCard';
 
