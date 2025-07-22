@@ -358,7 +358,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                     <GlassCardHeader>
                       <img
                         src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=200&fit=crop&crop=face"
-                        alt="Card image"
+                        alt="Professional headshot"
                         className="w-full h-32 object-cover rounded-lg mb-4 -mt-6 -mx-6"
                       />
                       <GlassCardTitle>Image Card</GlassCardTitle>

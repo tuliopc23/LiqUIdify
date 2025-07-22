@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, Clock, Search, TrendingUp, X } from 'lucide-react';
 import {
   cn,
@@ -41,18 +41,42 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const filteredSuggestions = suggestions
-    .filter(s => s.text.toLowerCase().includes(query.toLowerCase()))
-    .slice(0, maxSuggestions);
+  const filteredSuggestions = useMemo(
+    () => suggestions
+      .filter(s => s.text.toLowerCase().includes(query.toLowerCase()))
+      .slice(0, maxSuggestions),
+    [suggestions, query, maxSuggestions]
+  );
 
-  const recentFiltered = recentSearches
-    .filter(r => r.toLowerCase().includes(query.toLowerCase()))
-    .slice(0, 3);
+  const recentFiltered = useMemo(
+    () => recentSearches
+      .filter(r => r.toLowerCase().includes(query.toLowerCase()))
+      .slice(0, 3),
+    [recentSearches, query]
+  );
 
-  const allResults = [
-    ...recentFiltered.map(r => ({ id: r, text: r, type: 'recent' as const })),
-    ...filteredSuggestions,
-  ];
+  const allResults = useMemo(
+    () => [
+      ...recentFiltered.map(r => ({ id: r, text: r, type: 'recent' as const })),
+      ...filteredSuggestions,
+    ],
+    [recentFiltered, filteredSuggestions]
+  );
+
+  const handleSearch = useCallback(() => {
+    if (query.trim()) {
+      onSearch?.(query.trim());
+      setIsOpen(false);
+      setSelectedIndex(-1);
+    }
+  }, [query, onSearch]);
+
+  const handleSelect = useCallback((item: SearchSuggestion) => {
+    setQuery(item.text);
+    onSuggestionClick?.(item);
+    setIsOpen(false);
+    setSelectedIndex(-1);
+  }, [onSuggestionClick]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -104,22 +128,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
         document.removeEventListener('keydown', handleKeyDown);
       }
     };
-  }, [isOpen, selectedIndex, allResults, query]);
-
-  const handleSearch = () => {
-    if (query.trim()) {
-      onSearch?.(query.trim());
-      setIsOpen(false);
-      setSelectedIndex(-1);
-    }
-  };
-
-  const handleSelect = (item: SearchSuggestion) => {
-    setQuery(item.text);
-    onSuggestionClick?.(item);
-    setIsOpen(false);
-    setSelectedIndex(-1);
-  };
+  }, [isOpen, selectedIndex, allResults, query, handleSelect, handleSearch]);
 
   const getIcon = (type: SearchSuggestion['type']) => {
     switch (type) {

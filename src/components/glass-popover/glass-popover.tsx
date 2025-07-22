@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { cn, getGlassClass } from '@/core/utils/classname';
 
@@ -29,18 +29,18 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 }) => {
   const [internalOpen, setInternalOpen] = useState(false);
   const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({});
-  const triggerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
 
   const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
 
-  const setOpen = (open: boolean) => {
+  const setOpen = useCallback((open: boolean) => {
     if (onOpenChange) {
       onOpenChange(open);
     } else {
       setInternalOpen(open);
     }
-  };
+  }, [onOpenChange]);
 
   const toggleOpen = () => {
     setOpen(!isOpen);
@@ -174,7 +174,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     }
 
     return undefined;
-  }, [isOpen, closeOnClickOutside, closeOnEscape]);
+  }, [isOpen, closeOnClickOutside, closeOnEscape, setOpen]);
 
   const popover = isOpen ? (
     <div
@@ -196,13 +196,21 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 
   return (
     <>
-      <div
+      <button
         ref={triggerRef}
         onClick={toggleOpen}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleOpen();
+          }
+        }}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
         className={cn('inline-block cursor-pointer', className)}
       >
         {trigger}
-      </div>
+      </button>
 
       {popover &&
         'undefined' !== typeof window &&

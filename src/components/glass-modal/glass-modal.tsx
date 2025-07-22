@@ -47,7 +47,7 @@ export function GlassModal({
 
   // Handle backdrop click
   const handleBackdropClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
+    (event: React.MouseEvent<HTMLButtonElement>) => {
       if (closeOnBackdropClick && event.target === event.currentTarget) {
         onClose();
       }
@@ -105,7 +105,7 @@ const isClient = useIsClient();
   if (!isOpen) {return undefined;}
 
   const modalContent = (
-    <div
+    <button
       className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
       onKeyDown={(e) => {
@@ -114,7 +114,6 @@ const isClient = useIsClient();
           handleBackdropClick(e as any);
         }
       }}
-      role="button"
       tabIndex={-1}
       aria-label="Modal backdrop"
     >
@@ -168,7 +167,7 @@ const isClient = useIsClient();
           </div>
         </div>
       </GlassFocusTrap>
-    </div>
+    </button>
   );
 
   return portalTarget ? (

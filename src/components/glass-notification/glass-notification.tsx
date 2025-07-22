@@ -135,11 +135,11 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               </div>
             ) : (
               notifications.map(notification => (
-                <div
+                <button
                   key={notification.id}
                   className={cn(
                     'p-4 border-b border-[var(--glass-border)] last:border-b-0',
-                    'hover:bg-[var(--glass-bg)] cursor-pointer',
+                    'hover:bg-[var(--glass-bg)] cursor-pointer w-full text-left',
                     microInteraction.gentle,
                     !notification.read && 'bg-blue-50/50 dark:bg-blue-950/20'
                   )}
@@ -150,8 +150,6 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                       onMarkAsRead?.(notification.id);
                     }
                   }}
-                  role="button"
-                  tabIndex={0}
                   aria-label={`Notification: ${notification.title}`}
                   aria-describedby={`notification-${notification.id}-desc`}
                 >
@@ -205,7 +203,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                       <X className="w-3 h-3" />
                     </button>
                   </div>
-                </div>
+                </button>
               ))
             )}
           </div>

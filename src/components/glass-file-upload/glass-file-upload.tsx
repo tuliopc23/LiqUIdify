@@ -1,3 +1,4 @@
+
 import React, { forwardRef, useCallback, useRef, useState } from 'react';
 import { cn } from '@/core/utils/classname';
 import { type VariantProps, cva } from 'class-variance-authority';
@@ -116,6 +117,51 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     const fileInputRef = useRef<HTMLInputElement>(null);
     const dragCountRef = useRef(0);
 
+    // Handle upload
+    const handleUpload = useCallback(async (filesToUpload: FileUploadItem[]) => {
+      if (!onUpload) {return undefined;}
+
+      setUploadState('uploading');
+
+      try {
+        // Update files to uploading state
+        const updatedFiles = files.map(f => {
+          if (filesToUpload.find(u => u.id === f.id)) {
+            return { ...f, status: 'uploading' as const };
+          }
+          return f;
+        });
+        setFiles(updatedFiles);
+
+        // Upload files
+        await onUpload(filesToUpload.map(f => f.file));
+
+        // Update files to success state
+        const successFiles = files.map(f => {
+          if (filesToUpload.find(u => u.id === f.id)) {
+            return { ...f, status: 'success' as const };
+          }
+          return f;
+        });
+        setFiles(successFiles);
+        setUploadState('idle');
+      } catch (error) {
+        // Update files to error state
+        const errorFiles = files.map(f => {
+          if (filesToUpload.find(u => u.id === f.id)) {
+            return {
+              ...f,
+              status: 'error' as const,
+              error: error instanceof Error ? error.message : 'Upload failed',
+            };
+          }
+          return f;
+        });
+        setFiles(errorFiles);
+        setUploadState('error');
+      }
+    }, [onUpload, files, setFiles, setUploadState]);
+
     // Get file icon based on type
     const getFileIcon = (file: File) => {
       const type = file.type.toLowerCase();
@@ -139,7 +185,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     };
 
     // Validate file
-    const validateFile = (file: File): string | null => {
+    const validateFile = useCallback((file: File): string | null => {
       if (maxFileSize && file.size > maxFileSize) {
         return `File size exceeds ${formatFileSize(maxFileSize)}`;
       }
@@ -149,7 +195,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
       }
 
       return undefined;
-    };
+    }, [maxFileSize, allowedTypes]);
 
     // Create file preview
     const createPreview = (file: File): Promise<string | null> => {
@@ -203,11 +249,11 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         files,
         disabled,
         maxFiles,
-        maxFileSize,
-        allowedTypes,
         onFilesChange,
         onUpload,
         showPreview,
+        validateFile,
+        handleUpload,
       ]
     );
 
@@ -256,50 +302,6 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
       }
     };
 
-    // Handle upload
-    const handleUpload = async (filesToUpload: FileUploadItem[]) => {
-      if (!onUpload) {return undefined;}
-
-      setUploadState('uploading');
-
-      try {
-        // Update files to uploading state
-        const updatedFiles = files.map(f => {
-          if (filesToUpload.find(u => u.id === f.id)) {
-            return { ...f, status: 'uploading' as const };
-          }
-          return f;
-        });
-        setFiles(updatedFiles);
-
-        // Upload files
-        await onUpload(filesToUpload.map(f => f.file));
-
-        // Update files to success state
-        const successFiles = files.map(f => {
-          if (filesToUpload.find(u => u.id === f.id)) {
-            return { ...f, status: 'success' as const };
-          }
-          return f;
-        });
-        setFiles(successFiles);
-        setUploadState('idle');
-      } catch (error) {
-        // Update files to error state
-        const errorFiles = files.map(f => {
-          if (filesToUpload.find(u => u.id === f.id)) {
-            return {
-              ...f,
-              status: 'error' as const,
-              error: error instanceof Error ? error.message : 'Upload failed',
-            };
-          }
-          return f;
-        });
-        setFiles(errorFiles);
-        setUploadState('error');
-      }
-    };
 
     // Remove file
     const removeFile = (fileId: string) => {

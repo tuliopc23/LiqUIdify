@@ -127,7 +127,7 @@ export const GlassFocusDemo: React.FC = () => {
                       </GlassButton>
                       <GlassButton
                         onClick={() => {
-                          alert('Form submitted!');
+                          console.log('Form submitted!');
                           setTrapActive(false);
                         }}
                       >
@@ -165,7 +165,7 @@ export const GlassFocusDemo: React.FC = () => {
                     ref={el => { menuItemRefs.current[index] = el; }}
                     role="menuitem"
                     tabIndex={roving.getRovingProps(index).tabIndex}
-                    onClick={() => alert(option.action)}
+                    onClick={() => console.log(option.action)}
                     onFocus={() => roving.handlers.onFocus(index)}
                     className={cn(
                       'w-full px-4 py-3 flex items-center gap-3',
@@ -212,7 +212,7 @@ export const GlassFocusDemo: React.FC = () => {
                   <button
                     key={tool.label}
                     aria-label={tool.label}
-                    onClick={() => alert(`${tool.label} clicked`)}
+                    onClick={() => console.log(`${tool.label} clicked`)}
                     className={cn(
                       'w-10 h-10 rounded flex items-center justify-center',
                       'hover:bg-gray-100 dark:hover:bg-gray-800',

@@ -261,7 +261,7 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
         {fallbackImage ? (
           <img
             src={fallbackImage}
-            alt="Video content preview - fallback image"
+            alt="Video content preview"
             className="graceful-video-fallback-image"
           />
         ) : (
@@ -331,12 +331,18 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
   }
 
   return (
-    <div
+    <button
       className={`graceful-interactive ${className}`}
       onClick={onInteraction}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onInteraction?.();
+        }
+      }}
     >
       {children}
-    </div>
+    </button>
   );
 };
 

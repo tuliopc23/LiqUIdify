@@ -270,7 +270,6 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
           onClick={() => !disabled && setIsOpen(!isOpen)}
           onKeyDown={handleKeyDown}
           aria-expanded={isOpen}
-          aria-haspopup="listbox"
           aria-controls={listboxId}
           disabled={disabled}
         >
@@ -363,7 +362,14 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
                           option.disabled && 'opacity-50 cursor-not-allowed'
                         )}
                         onClick={() => handleSelect(option)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleSelect(option);
+                          }
+                        }}
                         onMouseEnter={() => setHighlightedIndex(index)}
+                        tabIndex={-1}
                       >
                         <div className="flex items-center gap-2 flex-1 min-w-0">
                           {option.icon}

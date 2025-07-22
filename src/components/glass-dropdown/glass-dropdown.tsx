@@ -39,7 +39,7 @@ export const GlassDropdown = React.forwardRef<
   ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
-    const triggerRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const isClient = useIsClient();
 
@@ -136,13 +136,21 @@ export const GlassDropdown = React.forwardRef<
         className={cn('relative inline-block', className)}
         {...props}
       >
-        <div
+        <button
           ref={triggerRef}
           onClick={() => setIsOpen(!isOpen)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setIsOpen(!isOpen);
+            }
+          }}
+          aria-expanded={isOpen}
+          aria-haspopup="true"
           className="cursor-pointer"
         >
           {trigger}
-        </div>
+        </button>
 
         {isOpen && (
           <div

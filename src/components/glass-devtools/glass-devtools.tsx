@@ -238,7 +238,7 @@ export function GlassDevTools({
             document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('click', handleElementClick, true);
         };
-    }, [enabled, defaultOpen, position, theme, state.isOpen, inspectElement]);
+    }, [enabled, defaultOpen, position, theme, state.isOpen, inspectElement, setState]);
 
     // Update performance report periodically
     useEffect(() => {
@@ -673,8 +673,9 @@ function SettingsTab({
                 <h4 className="font-semibold text-sm mb-2">Appearance</h4>
                 <div className="space-y-2">
                     <div>
-                        <label className="block text-xs mb-1">Theme</label>
+                        <label htmlFor="devtools-theme" className="block text-xs mb-1">Theme</label>
                         <select
+                            id="devtools-theme"
                             value={settings.theme}
                             onChange={(e) => onSettingsChange({ theme: e.target.value as any })}
                             className="w-full text-xs p-1 rounded border"
@@ -685,8 +686,9 @@ function SettingsTab({
                         </select>
                     </div>
                     <div>
-                        <label className="block text-xs mb-1">Position</label>
+                        <label htmlFor="devtools-position" className="block text-xs mb-1">Position</label>
                         <select
+                            id="devtools-position"
                             value={settings.position}
                             onChange={(e) => onSettingsChange({ position: e.target.value as any })}
                             className="w-full text-xs p-1 rounded border"

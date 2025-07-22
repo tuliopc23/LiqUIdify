@@ -58,7 +58,7 @@ export function GlassModalLite({
 
   return (
     <GlassPortal>
-      <div
+      <button
         className={cn(
           'glass-modal-lite-backdrop',
           'fixed inset-0 z-50',
@@ -74,8 +74,6 @@ export function GlassModalLite({
             onClose();
           }
         }}
-        role="button"
-        tabIndex={0}
         aria-label="Close modal backdrop"
       >
         <div
@@ -112,7 +110,7 @@ export function GlassModalLite({
           )}
           <div>{children}</div>
         </div>
-      </div>
+      </button>
     </GlassPortal>
   );
 }

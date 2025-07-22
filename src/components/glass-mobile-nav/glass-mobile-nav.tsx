@@ -122,7 +122,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
       { 'undefined' !== typeof window && createPortal(
         <div className="fixed inset-0 z-50 md:hidden">
           {/* Backdrop */}
-          <div
+          <button
             className="absolute inset-0 bg-black/20 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
             onKeyDown={(e) => {
@@ -131,8 +131,6 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
                 setIsOpen(false);
               }
             }}
-            role="button"
-            tabIndex={0}
             aria-label="Close navigation menu"
           />
 
