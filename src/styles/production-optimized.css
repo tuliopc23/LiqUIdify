@@ -1,0 +1,159 @@
+/* LiqUIdify Performance-Optimized CSS Bundle */
+/* Generated for S-tier performance standards */
+
+/* Core CSS Variables - Essential Only */
+:root {
+  /* Optimized glass backgrounds using gradients instead of backdrop-filter */
+  --glass-bg-light: rgba(255, 255, 255, 0.15);
+  --glass-bg-medium: rgba(255, 255, 255, 0.12);
+  --glass-bg-heavy: rgba(255, 255, 255, 0.2);
+  
+  /* Performance-first borders */
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-border-focus: rgba(59, 130, 246, 0.5);
+  
+  /* Lightweight shadows */
+  --glass-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --glass-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+  
+  /* Minimal glass effects */
+  --glass-blur-minimal: blur(4px);
+  --glass-blur-critical: blur(8px);
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg-light: rgba(255, 255, 255, 0.06);
+    --glass-bg-medium: rgba(255, 255, 255, 0.04);
+    --glass-bg-heavy: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Core Glass Components - Zero backdrop-filter approach */
+.glass-base {
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.2s ease;
+}
+
+.glass-interactive {
+  cursor: pointer;
+}
+
+.glass-interactive:hover {
+  background: var(--glass-bg-medium);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.glass-interactive:focus-visible {
+  outline: 2px solid var(--glass-border-focus);
+  outline-offset: 2px;
+}
+
+/* Component-specific optimized classes */
+.glass-button-optimized {
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.glass-button-optimized:hover {
+  background: var(--glass-bg-medium);
+  transform: translateY(-1px);
+}
+
+.glass-card-optimized {
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-input-optimized {
+  background: var(--glass-bg-light);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: all 0.15s ease;
+}
+
+.glass-input-optimized:focus {
+  border-color: var(--glass-border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Critical UI elements - minimal backdrop-filter usage */
+.glass-modal-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: var(--glass-blur-critical);
+  -webkit-backdrop-filter: var(--glass-blur-critical);
+}
+
+.glass-dropdown-backdrop {
+  background: var(--glass-bg-heavy);
+  backdrop-filter: var(--glass-blur-minimal);
+  -webkit-backdrop-filter: var(--glass-blur-minimal);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: var(--glass-shadow-hover);
+}
+
+/* Utility classes */
+.no-backdrop-filter {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.performance-optimized {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Mobile performance - disable ALL backdrop-filters */
+@media (max-width: 768px) {
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Reduced motion - remove all transitions */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* Override any existing heavy glass effects */
+[class*="backdrop-blur"],
+[class*="liquid-glass"],
+[class*="apple-liquid"],
+[class*="glass-apple"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--glass-bg-light) !important;
+  border: 1px solid var(--glass-border) !important;
+}
+
+/* Performance indicator */
+.perf-optimized::after {
+  content: "⚡";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 10px;
+  opacity: 0.3;
+  pointer-events: none;
+}
