@@ -138,52 +138,53 @@ export function LiquidGlassProvider({
 
 export const useLiquidGlass = () => useContext(LiquidGlassContext);
 
-// Content-aware glass hook
+// Content-aware glass hook with performance optimizations
 export const useContentAwareGlass = (
   contentRef: React.RefObject<HTMLElement>
 ) => {
   const { updateGlassStyle, adaptToContent } = useLiquidGlass();
   const analysisRef = useRef<ContentAnalysis | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Throttled analysis function to avoid excessive DOM operations
   const analyzeContent = useCallback(async () => {
     if (!contentRef.current || !adaptToContent) {
       return undefined;
     }
 
-    try {
-      const element = contentRef.current;
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-
-      if (!ctx) {
-        return undefined;
-      }
-
-      // Create a temporary canvas to analyze the content
-      const rect = element.getBoundingClientRect();
-      canvas.width = Math.min(rect.width, 200);
-      canvas.height = Math.min(rect.height, 200);
-
-      // Capture element as image data (simplified approach)
-      const computedStyle = getComputedStyle(element);
-      const bgColor = computedStyle.backgroundColor;
-
-      // Parse background color and analyze
-      const analysis = analyzeColor(bgColor);
-
-      if (
-        analysis &&
-        JSON.stringify(analysis) !== JSON.stringify(analysisRef.current)
-      ) {
-        analysisRef.current = analysis;
-        updateGlassStyle(analysis);
-      }
-    } catch (error) {
-      // Silently fail in production, log in development
-      if ('development' === process.env.NODE_ENV) {
-        console.warn('Content analysis failed:', error);
-      }
+    // Clear any pending analysis
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
+
+    // Throttle analysis to max once per 100ms for performance
+    timeoutRef.current = setTimeout(async () => {
+      try {
+        const element = contentRef.current;
+        if (!element) return;
+
+        // Use efficient approach - just analyze computed style
+        const computedStyle = getComputedStyle(element);
+        const bgColor = computedStyle.backgroundColor;
+
+        // Parse background color and analyze - cached result
+        const analysis = analyzeColor(bgColor);
+
+        // Only update if analysis actually changed (performance optimization)
+        if (
+          analysis &&
+          JSON.stringify(analysis) !== JSON.stringify(analysisRef.current)
+        ) {
+          analysisRef.current = analysis;
+          updateGlassStyle(analysis);
+        }
+      } catch (error) {
+        // Silently fail in production, log in development
+        if ('development' === process.env.NODE_ENV) {
+          console.warn('Content analysis failed:', error);
+        }
+      }
+    }, 100); // 100ms throttle for performance
   }, [contentRef, updateGlassStyle, adaptToContent]);
 
   useEffect(() => {
@@ -217,6 +218,10 @@ export const useContentAwareGlass = (
     return () => {
       observer.disconnect();
       resizeObserver.disconnect();
+      // Cleanup throttle timeout
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     };
   }, [analyzeContent, adaptToContent, contentRef]);
 

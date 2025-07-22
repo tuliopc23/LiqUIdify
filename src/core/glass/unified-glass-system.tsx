@@ -12,7 +12,7 @@
  * - Tree-shakeable exports
  */
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 // Types
@@ -79,32 +79,48 @@ export function useUnifiedGlass(config: GlassEffectConfig = { intensity: 'medium
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const elementRef = useRef<HTMLDivElement>(null);
 
-  const mergedConfig = {
+  // Memoize merged config to avoid recalculation
+  const mergedConfig = useMemo(() => ({
     ...GLASS_INTENSITY_CONFIG[config.intensity],
     ...config,
-  };
+  }), [config.intensity, config.variant, config.animation, config.interactive, config.magnetic, config.pixelPerfect, config.blur, config.opacity, config.saturation, config.brightness, config.contrast]);
 
-  const glassStyles: CSSProperties = {
+  // Memoize base glass styles to avoid recalculation
+  const baseGlassStyles: CSSProperties = useMemo(() => ({
     backdropFilter: `blur(${mergedConfig.blur}px) saturate(${mergedConfig.saturation}) brightness(${mergedConfig.brightness}) contrast(${mergedConfig.contrast})`,
     backgroundColor: `rgba(255, 255, 255, ${mergedConfig.opacity})`,
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    willChange: config.interactive || config.magnetic ? 'transform' : 'auto',
     ...GLASS_VARIANT_STYLES[mergedConfig.variant],
-  };
+  }), [mergedConfig.blur, mergedConfig.saturation, mergedConfig.brightness, mergedConfig.contrast, mergedConfig.opacity, mergedConfig.variant, config.interactive, config.magnetic]);
 
-  if (config.interactive && isHovered) {
-    glassStyles.transform = 'translateY(-2px)';
-    glassStyles.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
-  }
+  // Memoize dynamic styles based on hover and magnetic state
+  const dynamicStyles: CSSProperties = useMemo(() => {
+    const styles: CSSProperties = {};
 
-  if (config.magnetic && elementRef.current) {
-    const rect = elementRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const deltaX = (mousePosition.x - centerX) * 0.1;
-    const deltaY = (mousePosition.y - centerY) * 0.1;
-    
-    glassStyles.transform = `perspective(1000px) rotateX(${deltaY}deg) rotateY(${deltaX}deg)`;
-  }
+    if (config.interactive && isHovered) {
+      styles.transform = 'translateY(-2px)';
+      styles.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
+    }
+
+    if (config.magnetic && elementRef.current && (mousePosition.x !== 0 || mousePosition.y !== 0)) {
+      const rect = elementRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = (mousePosition.x - centerX) * 0.1;
+      const deltaY = (mousePosition.y - centerY) * 0.1;
+      
+      styles.transform = `perspective(1000px) rotateX(${deltaY}deg) rotateY(${deltaX}deg)`;
+    }
+
+    return styles;
+  }, [config.interactive, config.magnetic, isHovered, mousePosition.x, mousePosition.y]);
+
+  // Combine styles efficiently
+  const glassStyles = useMemo(() => ({ 
+    ...baseGlassStyles, 
+    ...dynamicStyles 
+  }), [baseGlassStyles, dynamicStyles]);
 
   const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (config.magnetic && elementRef.current) {
@@ -139,11 +155,62 @@ export function useUnifiedGlass(config: GlassEffectConfig = { intensity: 'medium
   };
 }
 
-// Backward compatibility utilities
-export const createGlassEffect = (config: GlassEffectConfig) => ({
-  className: `glass-effect glass-effect--${config.intensity}`,
-  style: useUnifiedGlass(config).glassStyles,
-});
+// Backward compatibility utilities - memoized for performance
+export const createGlassEffect = (config: GlassEffectConfig) => {
+  // Simple memoization approach
+  return useMemo(() => ({
+    className: `glass-effect glass-effect--${config.intensity}`,
+    style: useUnifiedGlass(config).glassStyles,
+  }), [config]);
+};
+
+// Generate glass CSS classes and variables with caching
+const glassClassCache = new Map<string, string>();
+const glassVariableCache = new Map<string, Record<string, string>>();
+
+export function generateGlassClasses(config: any): string {
+  const cacheKey = JSON.stringify(config);
+  
+  if (glassClassCache.has(cacheKey)) {
+    return glassClassCache.get(cacheKey)!;
+  }
+  
+  const classes = [
+    'backdrop-blur-glass',
+    'saturate-180',
+    `bg-glass-${config.variant || 'default'}-${config.intensity || 'medium'}`,
+    config.interactive ? 'glass-interactive' : '',
+    config.magnetic ? 'glass-magnetic' : '',
+  ].filter(Boolean).join(' ');
+  
+  glassClassCache.set(cacheKey, classes);
+  return classes;
+}
+
+export function generateGlassVariables(config: any): Record<string, string> {
+  const cacheKey = JSON.stringify(config);
+  
+  if (glassVariableCache.has(cacheKey)) {
+    return glassVariableCache.get(cacheKey)!;
+  }
+  
+  const intensity = config.intensity || 'medium';
+  const mergedConfig = {
+    ...GLASS_INTENSITY_CONFIG[intensity as GlassIntensity],
+    ...config,
+  };
+  
+  const variables = {
+    '--glass-blur': `${mergedConfig.blur}px`,
+    '--glass-opacity': String(mergedConfig.opacity),
+    '--glass-saturation': String(mergedConfig.saturation),
+    '--glass-brightness': String(mergedConfig.brightness),
+    '--glass-contrast': String(mergedConfig.contrast),
+  };
+  
+  glassVariableCache.set(cacheKey, variables);
+  return variables;
+}
 
 // Legacy system compatibility - backward compatible components
 import type { ComponentProps } from 'react';
@@ -183,9 +250,6 @@ export const AppleLiquidGlass: React.FC<AppleLiquidGlassProps> = ({
 };
 
 export const EnhancedAppleLiquidGlass = AppleLiquidGlass;
-
-// Additional utility exports for backward compatibility
-export { generateGlassClasses, generateGlassVariables } from '../utils/glass-effects';
 
 // Export for tree-shaking
 export default useUnifiedGlass;

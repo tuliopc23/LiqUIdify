@@ -113,7 +113,7 @@ export function useGlassAnimation(
 
       animationRef.current = animation;
 
-      // Track animation progress
+      // Track animation progress efficiently - limit RAF calls for performance
       const updateProgress = () => {
         if (!animation.currentTime || !animation.effect) {
           return undefined;
@@ -126,12 +126,16 @@ export function useGlassAnimation(
 
         setState((prev) => ({ ...prev, progress }));
 
-        if (1 > progress) {
+        // Only continue RAF if still animating (performance optimization)
+        if (1 > progress && animation.playState === 'running') {
           requestAnimationFrame(updateProgress);
         }
       };
 
-      requestAnimationFrame(updateProgress);
+      // Only start progress tracking if needed
+      if (animationOptions.duration > 0) {
+        requestAnimationFrame(updateProgress);
+      }
 
       // Handle animation completion
       animation.addEventListener('finish', () => {

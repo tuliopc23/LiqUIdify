@@ -11,7 +11,7 @@
  */
 
 // External dependencies
-import { forwardRef, useCallback, useRef } from 'react';
+import { forwardRef, memo, useCallback, useMemo, useRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 
 // Internal dependencies
@@ -150,7 +150,7 @@ const LoadingSpinner = ({ size = 'md' }: { size?: string }) => {
  * A premium glass-effect button component with advanced visual effects.
  * Built using the new compound component architecture for consistency and reusability.
  */
-export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
+const GlassButtonComponent = forwardRef<HTMLButtonElement, GlassButtonProps>(
   (
     {
       // Base props
@@ -283,24 +283,24 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       onBlur?.(event);
     }, [disabled, actions, transitionToState, onBlur]);
     
-    // Generate glass classes and variables
-    const glassClasses = generateGlassClasses({
+    // Generate glass classes and variables - memoized for performance
+    const glassClasses = useMemo(() => generateGlassClasses({
       variant,
       intensity: glassEffect?.intensity,
       state: currentState,
       glassEffect
-    });
+    }), [variant, glassEffect?.intensity, currentState, glassEffect]);
     
-    const glassVariables = generateGlassVariables(
+    const glassVariables = useMemo(() => generateGlassVariables(
       glassEffect?.intensity,
       { 
         animation: { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
         ...glassEffect 
       }
-    );
+    ), [glassEffect]);
     
-    // Build component classes
-    const componentClasses = cn(
+    // Build component classes - memoized for performance
+    const componentClasses = useMemo(() => cn(
       // Base classes
       'relative inline-flex items-center justify-center font-medium',
       'rounded-xl overflow-hidden',
@@ -331,10 +331,10 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       
       // Custom classes
       className
-    );
+    ), [glassClasses, size, variant, disabled, loading, fullWidth, iconOnly, disableAnimations, className]);
     
-    // Component content
-    const buttonContent = (
+    // Component content - memoized to prevent unnecessary re-renders
+    const buttonContent = useMemo(() => (
       <>
         {loading && (
           <div className="mr-2 flex items-center">
@@ -360,7 +360,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           </span>
         )}
       </>
-    );
+    ), [loading, size, leftIcon, children, iconOnly, loadingText, rightIcon]);
     
     // Render component
     const Component = asChild ? Slot : 'button';
@@ -385,7 +385,10 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
   }
 );
 
+// Wrap with React.memo for performance optimization
+const GlassButton = memo(GlassButtonComponent);
 GlassButton.displayName = 'GlassButton';
 
 // Export the component and types
 export default GlassButton;
+export { GlassButton };

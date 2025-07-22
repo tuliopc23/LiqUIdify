@@ -9,7 +9,7 @@
  * - Separated business logic from presentation
  */
 
-import { createContext, forwardRef, useContext } from 'react';
+import { createContext, forwardRef, memo, useContext, useMemo, useCallback } from 'react';
 import type {
   ComponentPropsBuilder,
   HeadingProps,
@@ -147,7 +147,7 @@ const PADDING_CLASSES = {
 /**
  * Main Glass Card Component
  */
-export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
+const GlassCardComponent = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
   (
     {
       // Base props
@@ -202,8 +202,8 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
     // Animation hooks
     const { currentState } = useGlassStateTransitions();
 
-    // Event handlers with business logic
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    // Event handlers with business logic - memoized for performance
+    const handleClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
       if (interactive) {
         actions.handlePress?.();
         onCardClick?.(event);
@@ -216,35 +216,35 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
       }
 
       onClick?.(event);
-    };
+    }, [interactive, selectable, state.isSelected, actions, onCardClick, onCardSelect, onClick]);
 
-    const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
       if (hover) {
         actions.handleHover?.(true);
         onMouseEnter?.(event);
       }
-    };
+    }, [hover, actions, onMouseEnter]);
 
-    const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleMouseLeave = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
       if (hover) {
         actions.handleHover?.(false);
         onMouseLeave?.(event);
       }
-    };
+    }, [hover, actions, onMouseLeave]);
 
-    // Generate glass classes and variables
-    const glassClasses = generateGlassClasses({
+    // Generate glass classes and variables - memoized for performance
+    const glassClasses = useMemo(() => generateGlassClasses({
       variant,
       intensity: glassEffect?.intensity,
       state: currentState,
       glassEffect
-    });
+    }), [variant, glassEffect?.intensity, currentState, glassEffect]);
 
-    const glassVariables = generateGlassVariables({
+    const glassVariables = useMemo(() => generateGlassVariables({
       intensity: glassEffect?.intensity,
       animation: { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
       ...glassEffect,
-    });
+    }), [glassEffect]);
 
     // Build component classes
     const componentClasses = cn(
@@ -320,6 +320,8 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardRefactoredProps>(
   }
 );
 
+// Wrap with React.memo for performance optimization
+export const GlassCard = memo(GlassCardComponent);
 GlassCard.displayName = 'GlassCard';
 
 /**
