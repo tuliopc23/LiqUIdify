@@ -99,8 +99,9 @@
   },
   "scripts": {
     "build": "bun run build:unified",
-    "build:unified": "bun run clean && vite build && bun run build:css && bun run build:minified && bun run post-build",
+    "build:unified": "bun run clean && vite build && bun run build:css:optimized && bun run build:minified && bun run post-build",
     "build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
+    "build:css:optimized": "bun scripts/optimize-css.js",
     "build:minified": "bun scripts/build-minified-bundles.js",
     "build:watch": "vite build --watch",
     "build:ci": "bun run build:unified && bun run bundle:budget:enforce",
@@ -137,6 +138,7 @@
     "perf:benchmark:ci": "bun run build && node scripts/s-tier-compliance-check.cjs",
     "perf:memory": "bun scripts/performance/performance-benchmarks.js --memory-only",
     "perf:animation": "bun scripts/performance/performance-benchmarks.js --animation-only",
+    "perf:validate:s-tier": "node scripts/validate-s-tier-performance.cjs",
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "metrics": "bun scripts/track-metrics.js",

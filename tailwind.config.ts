@@ -1,241 +1,108 @@
 import type { Config } from 'tailwindcss';
-import { designTokens } from './src/tokens/design-tokens';
 
+// Minimal config for S-tier performance
 const config: Config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './.storybook/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: ['class'],
+  // Performance optimization: drastically reduce bundle size
+  safelist: [
+    // Only the most essential glass effects
+    'backdrop-blur-md',
+    'backdrop-blur-lg',
+    'bg-white/5',
+    'bg-white/10',
+    'bg-black/5',
+    'bg-black/10',
+    'border-white/10',
+    'border-black/10',
+  ],
   theme: {
-    extend: {
-      // Design System Colors
-      colors: {
-        // Semantic colors
-        border: 'var(--border)',
-        input: 'var(--input)',
-        ring: 'var(--ring)',
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
-        primary: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
-          50: designTokens.colors.primary[50],
-          100: designTokens.colors.primary[100],
-          200: designTokens.colors.primary[200],
-          300: designTokens.colors.primary[300],
-          400: designTokens.colors.primary[400],
-          500: designTokens.colors.primary[500],
-          600: designTokens.colors.primary[600],
-          700: designTokens.colors.primary[700],
-          800: designTokens.colors.primary[800],
-          900: designTokens.colors.primary[900],
-          950: designTokens.colors.primary[950],
-        },
-        secondary: {
-          DEFAULT: 'var(--secondary)',
-          foreground: 'var(--secondary-foreground)',
-        },
-        destructive: {
-          DEFAULT: 'var(--destructive)',
-          foreground: 'var(--destructive-foreground)',
-        },
-        muted: {
-          DEFAULT: 'var(--muted)',
-          foreground: 'var(--muted-foreground)',
-        },
-        accent: {
-          DEFAULT: 'var(--accent)',
-          foreground: 'var(--accent-foreground)',
-        },
-        popover: {
-          DEFAULT: 'var(--popover)',
-          foreground: 'var(--popover-foreground)',
-        },
-        card: {
-          DEFAULT: 'var(--card)',
-          foreground: 'var(--card-foreground)',
-        },
-
-        // Glass-specific colors
-        glass: {
-          light: {
-            primary: designTokens.colors.glass.light.primary,
-            secondary: designTokens.colors.glass.light.secondary,
-            tertiary: designTokens.colors.glass.light.tertiary,
-            elevated: designTokens.colors.glass.light.elevated,
-            floating: designTokens.colors.glass.light.floating,
-            overlay: designTokens.colors.glass.light.overlay,
-          },
-          dark: {
-            primary: designTokens.colors.glass.dark.primary,
-            secondary: designTokens.colors.glass.dark.secondary,
-            tertiary: designTokens.colors.glass.dark.tertiary,
-            elevated: designTokens.colors.glass.dark.elevated,
-            floating: designTokens.colors.glass.dark.floating,
-            overlay: designTokens.colors.glass.dark.overlay,
-          },
-          states: {
-            hover: designTokens.colors.glass.states.hover,
-            active: designTokens.colors.glass.states.active,
-            focus: designTokens.colors.glass.states.focus,
-            pressed: designTokens.colors.glass.states.pressed,
-          },
-        },
-
-        // Border colors
-        'border-glass': {
-          light: {
-            subtle: designTokens.colors.border.light.subtle,
-            light: designTokens.colors.border.light.light,
-            medium: designTokens.colors.border.light.medium,
-            strong: designTokens.colors.border.light.strong,
-          },
-          dark: {
-            subtle: designTokens.colors.border.dark.subtle,
-            light: designTokens.colors.border.dark.light,
-            medium: designTokens.colors.border.dark.medium,
-            strong: designTokens.colors.border.dark.strong,
-          },
-        },
-
-        // Text colors
-        'text-primary': 'var(--text-primary)',
-        'text-secondary': 'var(--text-secondary)',
-        text: {
-          primary: 'var(--text-primary)',
-          secondary: 'var(--text-secondary)',
-        },
-
-        // Glass background colors for utilities
-        'glass-bg': {
-          primary: 'var(--glass-bg-primary)',
-          secondary: 'var(--glass-bg-secondary)',
-          tertiary: 'var(--glass-bg-tertiary)',
-          elevated: 'var(--glass-bg-elevated)',
-          floating: 'var(--glass-bg-floating)',
-          overlay: 'var(--glass-bg-overlay)',
-          hover: 'var(--glass-bg-hover)',
-          active: 'var(--glass-bg-active)',
-          focus: 'var(--glass-bg-focus)',
-          pressed: 'var(--glass-bg-pressed)',
-        },
-
-        // Glass border colors for utilities
-        'glass-border': {
-          subtle: 'var(--glass-border-subtle)',
-          light: 'var(--glass-border-light)',
-          medium: 'var(--glass-border-medium)',
-          strong: 'var(--glass-border-strong)',
-          focus: 'var(--glass-border-focus)',
-          hover: 'var(--glass-border-hover)',
-        },
+    // Minimize color palette
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      white: '#ffffff',
+      black: '#000000',
+      // Only essential glass colors
+      glass: {
+        light: 'rgba(255, 255, 255, 0.1)',
+        dark: 'rgba(0, 0, 0, 0.1)',
       },
-
-      // Typography from design tokens
-      fontFamily: designTokens.typography.fontFamily,
-      fontSize: designTokens.typography.fontSize,
-      fontWeight: designTokens.typography.fontWeight,
-
-      // Spacing from design tokens
-      spacing: designTokens.spacing,
-
-      // Border radius from design tokens
-      borderRadius: {
-        ...designTokens.borderRadius,
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+      // Minimal semantic colors
+      primary: 'var(--primary)',
+      secondary: 'var(--secondary)',
+      background: 'var(--background)',
+      foreground: 'var(--foreground)',
+    },
+    // Minimal spacing scale
+    spacing: {
+      '0': '0px',
+      '1': '0.25rem',
+      '2': '0.5rem',
+      '3': '0.75rem',
+      '4': '1rem',
+      '6': '1.5rem',
+      '8': '2rem',
+      '12': '3rem',
+      '16': '4rem',
+    },
+    // Essential border radius
+    borderRadius: {
+      none: '0',
+      sm: '0.125rem',
+      md: '0.375rem',
+      lg: '0.5rem',
+      xl: '0.75rem',
+      full: '9999px',
+    },
+    // Essential backdrop blur
+    backdropBlur: {
+      none: '0',
+      sm: '4px',
+      md: '12px',
+      lg: '16px',
+      xl: '24px',
+    },
+    // Minimal font sizes
+    fontSize: {
+      xs: '0.75rem',
+      sm: '0.875rem',
+      base: '1rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
+      '2xl': '1.5rem',
+    },
+    // Essential shadows
+    boxShadow: {
+      none: '0 0 #0000',
+      sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      md: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+      lg: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+      glass: '0 8px 32px rgba(0, 0, 0, 0.1)',
+    },
+    // Essential animations only
+    animation: {
+      none: 'none',
+      pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      'fade-in': 'fadeIn 0.3s ease-in-out',
+    },
+    keyframes: {
+      pulse: {
+        '0%, 100%': { opacity: '1' },
+        '50%': { opacity: '.5' },
       },
-
-      // Enhanced backdrop blur
-      backdropBlur: {
-        glass: '20px',
-        whisper: '2px',
-        ghost: '4px',
-        subtle: '8px',
-        light: '16px',
-        medium: '24px',
-        heavy: '32px',
-        intense: '40px',
-        extreme: '56px',
-        ultra: '72px',
+      fadeIn: {
+        '0%': { opacity: '0' },
+        '100%': { opacity: '1' },
       },
-
-      // Box shadows from design tokens
-      boxShadow: {
-        ...designTokens.shadows.glass,
-        'focus-subtle': designTokens.shadows.focus.subtle,
-        'focus-light': designTokens.shadows.focus.light,
-        'focus-medium': designTokens.shadows.focus.medium,
-        'focus-strong': designTokens.shadows.focus.strong,
-      },
-
-      // Z-index from design tokens
-      zIndex: designTokens.zIndex,
-
-      // Enhanced animations
-      animation: {
-        'glass-shimmer': 'glass-shimmer 2s ease-in-out infinite',
-        'glass-float': 'glass-float 3s ease-in-out infinite',
-        'glass-pulse': 'glass-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'glass-slide-in': 'glass-slide-in 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-        'glass-slide-out': 'glass-slide-out 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-        'glass-scale-in':
-          'glass-scale-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
-        'glass-fade-in': 'glass-fade-in 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-        'glass-magnetic': 'glass-magnetic 0.25s cubic-bezier(0.2, 0, 0, 1.2)',
-      },
-
-      // Enhanced keyframes
-      keyframes: {
-        'glass-shimmer': {
-          '0%, 100%': { transform: 'translateX(-100%)' },
-          '50%': { transform: 'translateX(100%)' },
-        },
-        'glass-float': {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-        'glass-pulse': {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.5' },
-        },
-        'glass-slide-in': {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        'glass-slide-out': {
-          '0%': { opacity: '1', transform: 'translateY(0)' },
-          '100%': { opacity: '0', transform: 'translateY(-20px)' },
-        },
-        'glass-scale-in': {
-          '0%': { opacity: '0', transform: 'scale(0.9)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        'glass-fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        'glass-magnetic': {
-          '0%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.05)' },
-          '100%': { transform: 'scale(1)' },
-        },
-      },
-
-      // Transition timing functions from design tokens
-      transitionTimingFunction: designTokens.animation.easing,
-      transitionDuration: designTokens.animation.duration,
-
-      // Breakpoints from design tokens
-      screens: designTokens.breakpoints,
     },
   },
-  plugins: [
-    // Tailwind v4: Animation utilities are built-in
-    // No need for external plugins - animations are defined in theme.animation
-  ],
+  plugins: [],
 };
+
+export default config;
 
 export default config;
