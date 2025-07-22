@@ -80,7 +80,7 @@ export function usePerformanceMonitoring(
     }
 
     setRenderCount((prev) => prev + 1);
-  }, [componentName, memoizedProps, shouldMonitor, debouncedTrackComponent]); // Removed renderCount dependency
+  }, [componentName, memoizedProps]); // Removed renderCount dependency and reduced deps for stability
 
   // Mark render start
   renderStartTime.current = performance.now();

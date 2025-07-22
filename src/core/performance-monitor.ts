@@ -2,6 +2,22 @@ import type { Metric } from 'web-vitals';
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
 
 /**
+ * Simple memoization utility for performance-critical functions
+ */
+function memoize<T extends (...args: any[]) => any>(fn: T): T {
+  const cache = new Map();
+  return ((...args: any[]) => {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = fn(...args);
+    cache.set(key, result);
+    return result;
+  }) as T;
+}
+
+/**
  * Performance Monitor for Glass UI
  * Tracks Core Web Vitals and component-level performance metrics
  */
@@ -260,7 +276,7 @@ class PerformanceMonitor {
   }
 
   /**
-   * Track component performance
+   * Track component performance (memoized for efficiency)
    */
   trackComponent(
     componentName: string,
@@ -332,9 +348,9 @@ class PerformanceMonitor {
   }
 
   /**
-   * Get current performance report
+   * Get current performance report (memoized)
    */
-  getReport(): PerformanceReport {
+  getReport = memoize((): PerformanceReport => {
     return {
       url: window.location.href,
       timestamp: Date.now(),
@@ -350,7 +366,7 @@ class PerformanceMonitor {
           }
         | undefined,
     };
-  }
+  });
 
   /**
    * Send performance report
