@@ -18,7 +18,7 @@ export interface GlassSelectProps {
   variant?: 'default' | 'search';
 }
 
-export const GlassSelect = React.forwardRef<HTMLDivElement, GlassSelectProps>(
+export const GlassSelect = React.memo(React.forwardRef<HTMLDivElement, GlassSelectProps>(
   (
     {
       options,
