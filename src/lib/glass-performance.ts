@@ -47,7 +47,7 @@ export interface AnimationTask {
 }
 
 /**
- * Default Performance Configuration
+ * Default Performance Configuration - Optimized for S-Tier (55fps)
  */
 export const DEFAULT_PERFORMANCE_CONFIG: OptimizationConfig = {
   enableGPUAcceleration: true,
@@ -57,8 +57,8 @@ export const DEFAULT_PERFORMANCE_CONFIG: OptimizationConfig = {
   enableReducedMotion: true,
   performanceBudget: {
     maxAnimations: 50,
-    maxFrameTime: 16.67, // 60fps
-    targetFPS: 60,
+    maxFrameTime: 18.18, // 55fps (S-tier requirement)
+    targetFPS: 55, // S-tier requirement
     memoryLimit: 100 * 1024 * 1024, // 100MB
     gpuMemoryLimit: 50 * 1024 * 1024, // 50MB
   },
@@ -89,8 +89,8 @@ export const QUALITY_PRESETS: Record<string, Partial<OptimizationConfig>> = {
     enableLOD: true,
     performanceBudget: {
       maxAnimations: 25,
-      maxFrameTime: 20, // 50fps
-      targetFPS: 50,
+      maxFrameTime: 18.18, // 55fps (S-tier target)
+      targetFPS: 55,
       memoryLimit: 50 * 1024 * 1024,
       gpuMemoryLimit: 25 * 1024 * 1024,
     },
@@ -102,8 +102,8 @@ export const QUALITY_PRESETS: Record<string, Partial<OptimizationConfig>> = {
     enableLOD: false,
     performanceBudget: {
       maxAnimations: 50,
-      maxFrameTime: 16.67, // 60fps
-      targetFPS: 60,
+      maxFrameTime: 18.18, // 55fps (S-tier requirement)
+      targetFPS: 55, // S-tier requirement
       memoryLimit: 100 * 1024 * 1024,
       gpuMemoryLimit: 50 * 1024 * 1024,
     },
