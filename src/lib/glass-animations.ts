@@ -3,13 +3,12 @@
  * GPU-accelerated animations with physics-based motion
  */
 
+// GSAP is no longer used - animations migrated to Framer Motion for better performance
 // import { gsap } from 'gsap';
 // import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
 
-// Registering plugins
-if ('undefined' !== typeof window && gsap) {
-  gsap.registerPlugin(MorphSVGPlugin);
-}
+// Note: GSAP plugins removed to improve bundle size and performance
+// All animations now use Framer Motion for better React integration
 
 // Import types for physics and animation
 export interface SpringPhysics {

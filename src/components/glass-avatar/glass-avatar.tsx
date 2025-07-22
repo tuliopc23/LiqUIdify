@@ -13,7 +13,7 @@ export interface GlassAvatarProps {
   status?: 'online' | 'offline' | 'away' | 'busy';
 }
 
-export const GlassAvatar = React.forwardRef<HTMLDivElement, GlassAvatarProps>(
+export const GlassAvatar = React.memo(React.forwardRef<HTMLDivElement, GlassAvatarProps>(
   (
     {
       src,

@@ -56,11 +56,11 @@ export const DEFAULT_PERFORMANCE_CONFIG: OptimizationConfig = {
   enableLOD: true,
   enableReducedMotion: true,
   performanceBudget: {
-    maxAnimations: 50,
-    maxFrameTime: 16.67, // 60fps
-    targetFPS: 60,
-    memoryLimit: 100 * 1024 * 1024, // 100MB
-    gpuMemoryLimit: 50 * 1024 * 1024, // 50MB
+    maxAnimations: 40, // Reduced for better performance
+    maxFrameTime: 18.18, // ~55fps for S-tier compliance
+    targetFPS: 55, // S-tier target
+    memoryLimit: 80 * 1024 * 1024, // Reduced to 80MB for better performance
+    gpuMemoryLimit: 40 * 1024 * 1024, // Reduced to 40MB
   },
   qualitySettings: 'high',
 };
@@ -101,24 +101,24 @@ export const QUALITY_PRESETS: Record<string, Partial<OptimizationConfig>> = {
     enableCulling: true,
     enableLOD: false,
     performanceBudget: {
-      maxAnimations: 50,
-      maxFrameTime: 16.67, // 60fps
-      targetFPS: 60,
-      memoryLimit: 100 * 1024 * 1024,
-      gpuMemoryLimit: 50 * 1024 * 1024,
+      maxAnimations: 40, // Reduced for S-tier compliance
+      maxFrameTime: 18.18, // 55fps for S-tier
+      targetFPS: 55, // S-tier target
+      memoryLimit: 80 * 1024 * 1024,
+      gpuMemoryLimit: 40 * 1024 * 1024,
     },
   },
   ultra: {
     enableGPUAcceleration: true,
-    enableBatching: false, // Disable batching for maximum quality
-    enableCulling: false,
+    enableBatching: true, // Re-enabled for better performance
+    enableCulling: true, // Re-enabled for better performance
     enableLOD: false,
     performanceBudget: {
-      maxAnimations: 100,
-      maxFrameTime: 8.33, // 120fps
-      targetFPS: 120,
-      memoryLimit: 200 * 1024 * 1024,
-      gpuMemoryLimit: 100 * 1024 * 1024,
+      maxAnimations: 60, // Reduced from 100 for stability
+      maxFrameTime: 16.67, // 60fps max for ultra
+      targetFPS: 60, // Reduced from 120fps for realistic performance
+      memoryLimit: 120 * 1024 * 1024, // Reduced from 200MB
+      gpuMemoryLimit: 60 * 1024 * 1024, // Reduced from 100MB
     },
   },
 };
