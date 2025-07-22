@@ -113,11 +113,26 @@ export function useGlassAnimation(
 
       animationRef.current = animation;
 
-      // Track animation progress
+      // Track animation progress - Throttle updates to reduce overhead
+      let lastProgressUpdate = 0;
       const updateProgress = () => {
         if (!animation.currentTime || !animation.effect) {
           return undefined;
         }
+
+        const now = performance.now();
+        // Throttle progress updates to ~30fps instead of 60fps to reduce CPU usage
+        if (now - lastProgressUpdate < 33) {
+          const progress = Math.min(
+            (animation.currentTime as number) / animationOptions.duration,
+            1
+          );
+          if (1 > progress) {
+            requestAnimationFrame(updateProgress);
+          }
+          return;
+        }
+        lastProgressUpdate = now;
 
         const progress = Math.min(
           (animation.currentTime as number) / animationOptions.duration,

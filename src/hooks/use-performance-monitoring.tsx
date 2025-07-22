@@ -1,6 +1,7 @@
 import type { ComponentType, ReactElement } from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { performanceMonitor } from '../core/performance-monitor';
+import { debounce, shouldMonitorPerformance, shallowEqual } from '../core/utils/performance-utils';
 
 /**
  * Hook for component-level performance monitoring
@@ -9,46 +10,77 @@ export function usePerformanceMonitoring(
   componentName: string,
   props?: Record<string, any>
 ) {
+  // Skip performance monitoring on low-powered devices
+  const shouldMonitor = shouldMonitorPerformance();
+  
   const renderStartTime = useRef<number>(0);
   const mountStartTime = useRef<number>(0);
   const [renderCount, setRenderCount] = useState(0);
+  const lastPropsRef = useRef<Record<string, any> | undefined>(undefined);
+
+  // Memoize props to prevent unnecessary re-renders when props haven't actually changed
+  const memoizedProps = useMemo(() => {
+    const currentProps = props || {};
+    
+    // Only update if props have actually changed (deep comparison)
+    if (lastPropsRef.current && shallowEqual(lastPropsRef.current, currentProps)) {
+      return lastPropsRef.current;
+    }
+    
+    lastPropsRef.current = currentProps;
+    return currentProps;
+  }, [props]);
+
+  // Debounced performance tracking to reduce overhead
+  const debouncedTrackComponent = useMemo(
+    () => debounce((componentName: string, metrics: any) => {
+      if (shouldMonitor) {
+        performanceMonitor.trackComponent(componentName, metrics);
+      }
+    }, 16), // Debounce to ~60fps
+    [shouldMonitor]
+  );
 
   // Track component mount
   useEffect(() => {
+    if (!shouldMonitor) return;
+    
     mountStartTime.current = performance.now();
 
     return () => {
       // Track unmount time
       const unmountTime = performance.now() - mountStartTime.current;
-      performanceMonitor.trackComponent(componentName, {
+      debouncedTrackComponent(componentName, {
         unmountTime,
-        props: props || {},
+        props: memoizedProps,
       });
     };
-  }, [componentName, props]);
+  }, [componentName, memoizedProps, shouldMonitor, debouncedTrackComponent]);
 
-  // Track each render
+  // Track each render - Remove renderCount from dependencies to prevent infinite loop
   useEffect(() => {
+    if (!shouldMonitor) return;
+    
     const renderTime = performance.now() - renderStartTime.current;
 
     if (0 === renderCount) {
       // First render is mount
-      performanceMonitor.trackComponent(componentName, {
+      debouncedTrackComponent(componentName, {
         mountTime: renderTime,
         renderTime,
-        props: props || {},
+        props: memoizedProps,
       });
     } else {
       // Subsequent renders are updates
-      performanceMonitor.trackComponent(componentName, {
+      debouncedTrackComponent(componentName, {
         updateTime: renderTime,
         renderTime,
-        props: props || {},
+        props: memoizedProps,
       });
     }
 
     setRenderCount((prev) => prev + 1);
-  }, [componentName, props, renderCount]);
+  }, [componentName, memoizedProps, shouldMonitor, debouncedTrackComponent]); // Removed renderCount dependency
 
   // Mark render start
   renderStartTime.current = performance.now();
@@ -99,6 +131,56 @@ export function withPerformanceMonitoring<P extends object>(
 }
 
 /**
+ * Hook for real-time performance metrics (FPS and memory)
+ * Optimized to reduce performance overhead
+ */
+export function useRealtimePerformance() {
+  const [fps, setFps] = useState(60);
+  const [memory, setMemory] = useState({ used: 0, total: 0 });
+  const fpsRef = useRef(0);
+  const lastTimeRef = useRef(performance.now());
+  
+  useEffect(() => {
+    let frameCount = 0;
+    let animationFrameId: number;
+    
+    const updateFPS = () => {
+      frameCount++;
+      const now = performance.now();
+      
+      // Update FPS every 2 seconds to reduce overhead
+      if (now - lastTimeRef.current >= 2000) {
+        const actualFps = Math.round(frameCount / ((now - lastTimeRef.current) / 1000));
+        setFps(actualFps);
+        frameCount = 0;
+        lastTimeRef.current = now;
+        
+        // Update memory info if available
+        if ('memory' in performance) {
+          const mem = (performance as any).memory;
+          setMemory({
+            used: Math.round(mem.usedJSHeapSize / 1024 / 1024),
+            total: Math.round(mem.totalJSHeapSize / 1024 / 1024)
+          });
+        }
+      }
+      
+      animationFrameId = requestAnimationFrame(updateFPS);
+    };
+    
+    animationFrameId = requestAnimationFrame(updateFPS);
+    
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+  }, []);
+  
+  return { fps, memory };
+}
+
+/**
  * Hook for Core Web Vitals monitoring
  */
 export function useWebVitals(callback?: (metric: any) => void) {
@@ -123,52 +205,4 @@ export function useWebVitals(callback?: (metric: any) => void) {
   }, [callback]);
 
   return metrics;
-}
-
-/**
- * Hook for real-time performance metrics
- */
-export function useRealtimePerformance() {
-  const [fps, setFps] = useState(60);
-  const [memory, setMemory] = useState<{ used: number; limit: number } | null>(
-    undefined
-  );
-  const frameCountRef = useRef(0);
-  const lastTimeRef = useRef(performance.now());
-
-  useEffect(() => {
-    let animationId: number;
-
-    const measureFps = () => {
-      frameCountRef.current++;
-      const currentTime = performance.now();
-      const elapsed = currentTime - lastTimeRef.current;
-
-      if (1000 <= elapsed) {
-        const currentFps = Math.round((frameCountRef.current * 1000) / elapsed);
-        setFps(currentFps);
-        frameCountRef.current = 0;
-        lastTimeRef.current = currentTime;
-      }
-
-      // Measure memory if available
-      if ('memory' in performance) {
-        const memInfo = (performance as any).memory;
-        setMemory({
-          used: Math.round(memInfo.usedJSHeapSize / 1_048_576), // Convert to MB
-          limit: Math.round(memInfo.jsHeapSizeLimit / 1_048_576),
-        });
-      }
-
-      animationId = requestAnimationFrame(measureFps);
-    };
-
-    animationId = requestAnimationFrame(measureFps);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
-
-  return { fps, memory };
 }

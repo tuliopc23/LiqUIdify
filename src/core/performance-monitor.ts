@@ -384,12 +384,12 @@ class PerformanceMonitor {
       this.sendReport();
     });
 
-    // Send report every 30 seconds
+    // Send report every 60 seconds instead of 30 to reduce overhead
     setInterval(() => {
       if ('visible' === document.visibilityState) {
         this.sendReport();
       }
-    }, 30_000);
+    }, 60_000); // Increased from 30_000 to 60_000
   }
 
   /**

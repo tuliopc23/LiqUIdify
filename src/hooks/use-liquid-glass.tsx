@@ -9,6 +9,7 @@ import {
   useState,
 } from 'react';
 import { liquidGlassTokens } from '../lib/liquid-glass-tokens';
+import { debounce, batchDOMUpdates } from '../core/utils/performance-utils';
 
 export interface LiquidGlassConfig {
   color?: string; // rgb string e.g. "255,255,255"
@@ -54,43 +55,49 @@ export function LiquidGlassProvider({
   const merged = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
   const [contentAnalysis, setContentAnalysis] = useState<ContentAnalysis>();
 
-  const updateGlassStyle = useCallback(
-    (analysis: ContentAnalysis) => {
+  // Debounced update function to prevent excessive DOM manipulations
+  const debouncedUpdateGlassStyle = useMemo(
+    () => debounce((analysis: ContentAnalysis) => {
       setContentAnalysis(analysis);
 
       if (!merged.adaptToContent) {
         return undefined;
       }
 
-      const root = document.documentElement;
-
-      // Adapt glass properties based on content analysis
+      // Batch DOM updates to prevent layout thrashing
       const adaptedOpacity =
         merged.opacity * (1 + (analysis.contrast - 0.5) * 0.3);
       const adaptedBlur = merged.blur * (1 + (1 - analysis.brightness) * 0.2);
       const adaptedSaturation =
         merged.saturation * (1 + analysis.brightness * 0.1);
 
-      // Set adaptive properties
-      root.style.setProperty(
-        '--glass-opacity-adaptive',
-        String(Math.max(0.1, Math.min(0.9, adaptedOpacity)))
-      );
-      root.style.setProperty(
-        '--glass-blur-adaptive',
-        `${Math.max(8, Math.min(48, adaptedBlur))}px`
-      );
-      root.style.setProperty(
-        '--glass-saturation-adaptive',
-        `${Math.max(120, Math.min(250, adaptedSaturation))}%`
-      );
+      const updates = [
+        () => {
+          const root = document.documentElement;
+          const propertiesToUpdate = [
+            ['--glass-opacity-adaptive', String(Math.max(0.1, Math.min(0.9, adaptedOpacity)))],
+            ['--glass-blur-adaptive', `${Math.max(8, Math.min(48, adaptedBlur))}px`],
+            ['--glass-saturation-adaptive', `${Math.max(120, Math.min(250, adaptedSaturation))}%`],
+            ['--glass-color-adaptive', `hsl(${analysis.dominantHue}, 20%, ${0.5 < analysis.brightness ? 95 : 15}%)`]
+          ];
 
-      // Adapt color based on dominant hue
-      const hue = analysis.dominantHue;
-      const adaptedColor = `hsl(${hue}, 20%, ${0.5 < analysis.brightness ? 95 : 15}%)`;
-      root.style.setProperty('--glass-color-adaptive', adaptedColor);
-    },
+          // Apply all properties in a single batch to minimize reflows
+          propertiesToUpdate.forEach(([property, value]) => {
+            root.style.setProperty(property, value);
+          });
+        }
+      ];
+
+      batchDOMUpdates(updates);
+    }, 250), // Debounce updates to prevent excessive DOM manipulation
     [merged]
+  );
+
+  const updateGlassStyle = useCallback(
+    (analysis: ContentAnalysis) => {
+      debouncedUpdateGlassStyle(analysis);
+    },
+    [debouncedUpdateGlassStyle]
   );
 
   useEffect(() => {

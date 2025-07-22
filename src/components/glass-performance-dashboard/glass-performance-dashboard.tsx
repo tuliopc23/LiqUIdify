@@ -57,11 +57,14 @@ export function GlassPerformanceDashboard({
     const allMetrics = performanceMonitor.getAllMetrics();
     setMetrics(allMetrics);
 
-    // Update component metrics periodically
+    // Update component metrics periodically - Reduced frequency from 1s to 5s to reduce CPU usage
     const interval = setInterval(() => {
-      const report = performanceMonitor.getReport();
-      setComponentMetrics(report.componentMetrics.slice(-10)); // Last 10 components
-    }, 1000);
+      // Only update if dashboard is visible
+      if (!document.hidden) {
+        const report = performanceMonitor.getReport();
+        setComponentMetrics(report.componentMetrics.slice(-10)); // Last 10 components
+      }
+    }, 5000); // Increased from 1000ms to 5000ms
 
     return () => {
       unsubscribers.forEach(unsub => unsub());
