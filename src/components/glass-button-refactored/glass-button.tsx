@@ -11,7 +11,7 @@
  */
 
 // External dependencies
-import { forwardRef, useCallback, useRef } from 'react';
+import React, { forwardRef, useCallback, useMemo, useRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 
 // Internal dependencies
@@ -135,14 +135,23 @@ const VARIANT_CLASSES = {
   ),
 };
 
-// Loading spinner component
-const LoadingSpinner = ({ size = 'md' }: { size?: string }) => {
-  const sizeClass = 'xs' === size ? 'w-3 h-3' : ('sm' === size ? 'w-4 h-4' : 'w-5 h-5');
+// Size map for better performance (avoid nested ternary)
+const SIZE_CLASS_MAP = {
+  xs: 'w-3 h-3',
+  sm: 'w-4 h-4',
+  md: 'w-5 h-5',
+  lg: 'w-6 h-6',
+  xl: 'w-7 h-7',
+} as const;
+
+// Loading spinner component - optimized with React.memo
+const LoadingSpinner = React.memo(({ size = 'md' }: { size?: string }) => {
+  const sizeClass = SIZE_CLASS_MAP[size as keyof typeof SIZE_CLASS_MAP] || SIZE_CLASS_MAP.md;
   
   return (
     <div className={cn('animate-spin rounded-full border-2 border-current border-t-transparent', sizeClass)} />
   );
-};
+});
 
 /**
  * Glass Button Component
@@ -333,8 +342,8 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       className
     );
     
-    // Component content
-    const buttonContent = (
+    // Component content - memoized for performance
+    const buttonContent = useMemo(() => (
       <>
         {loading && (
           <div className="mr-2 flex items-center">
@@ -360,15 +369,16 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
           </span>
         )}
       </>
-    );
+    ), [loading, size, leftIcon, children, iconOnly, loadingText, rightIcon]);
     
-    // Render component
-    const Component = asChild ? Slot : 'button';
+    // Render component - memoized for performance
+    const Component = useMemo(() => asChild ? Slot : 'button', [asChild]);
+    const buttonType = useMemo(() => !asChild ? type : undefined, [asChild, type]);
     
     return (
       <Component
         ref={combinedRef}
-        type={!asChild ? type : undefined}
+        type={buttonType}
         disabled={disabled || loading}
         className={componentClasses}
         style={glassVariables as React.CSSProperties}

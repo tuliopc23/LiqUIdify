@@ -12,7 +12,7 @@
  * - Tree-shakeable exports
  */
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 // Types
@@ -79,32 +79,41 @@ export function useUnifiedGlass(config: GlassEffectConfig = { intensity: 'medium
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const elementRef = useRef<HTMLDivElement>(null);
 
-  const mergedConfig = {
+  // Memoize merged config for performance
+  const mergedConfig = useMemo(() => ({
     ...GLASS_INTENSITY_CONFIG[config.intensity],
     ...config,
-  };
+  }), [config]);
 
-  const glassStyles: CSSProperties = {
+  // Memoize base glass styles for performance
+  const baseGlassStyles = useMemo((): CSSProperties => ({
     backdropFilter: `blur(${mergedConfig.blur}px) saturate(${mergedConfig.saturation}) brightness(${mergedConfig.brightness}) contrast(${mergedConfig.contrast})`,
     backgroundColor: `rgba(255, 255, 255, ${mergedConfig.opacity})`,
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     ...GLASS_VARIANT_STYLES[mergedConfig.variant],
-  };
+  }), [mergedConfig]);
 
-  if (config.interactive && isHovered) {
-    glassStyles.transform = 'translateY(-2px)';
-    glassStyles.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
-  }
+  // Memoize dynamic styles based on interactions
+  const glassStyles = useMemo((): CSSProperties => {
+    const styles = { ...baseGlassStyles };
 
-  if (config.magnetic && elementRef.current) {
-    const rect = elementRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const deltaX = (mousePosition.x - centerX) * 0.1;
-    const deltaY = (mousePosition.y - centerY) * 0.1;
-    
-    glassStyles.transform = `perspective(1000px) rotateX(${deltaY}deg) rotateY(${deltaX}deg)`;
-  }
+    if (config.interactive && isHovered) {
+      styles.transform = 'translateY(-2px)';
+      styles.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
+    }
+
+    if (config.magnetic && elementRef.current) {
+      const rect = elementRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = (mousePosition.x - centerX) * 0.1;
+      const deltaY = (mousePosition.y - centerY) * 0.1;
+      
+      styles.transform = `perspective(1000px) rotateX(${deltaY}deg) rotateY(${deltaX}deg)`;
+    }
+
+    return styles;
+  }, [baseGlassStyles, config.interactive, config.magnetic, isHovered, mousePosition]);
 
   const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (config.magnetic && elementRef.current) {

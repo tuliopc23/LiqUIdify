@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 import { cn } from '@/core/utils/classname';
@@ -90,12 +90,13 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
     },
     ref
   ) => {
-    const generatePageNumbers = () => {
+    // Memoize page number generation for performance
+    const pageNumbers = useMemo(() => {
       const pages: (number | 'ellipsis')[] = [];
 
       // Always include first page(s)
-      for (let i = 1; i <= Math.min(boundaryCount, totalPages); i++) {
-        pages.push(i);
+      for (let pageIndex = 1; pageIndex <= Math.min(boundaryCount, totalPages); pageIndex++) {
+        pages.push(pageIndex);
       }
 
       // Calculate start and end of sibling range
@@ -114,9 +115,9 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       }
 
       // Add sibling pages
-      for (let i = siblingStart; i <= siblingEnd; i++) {
-        if (i <= boundaryCount || i > totalPages - boundaryCount) {continue;}
-        pages.push(i);
+      for (let pageIndex = siblingStart; pageIndex <= siblingEnd; pageIndex++) {
+        if (pageIndex <= boundaryCount || pageIndex > totalPages - boundaryCount) {continue;}
+        pages.push(pageIndex);
       }
 
       // Add ellipsis after siblings if needed
@@ -126,26 +127,24 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
 
       // Always include last page(s)
       for (
-        let i = Math.max(totalPages - boundaryCount + 1, boundaryCount + 1);
-        i <= totalPages;
-        i++
+        let pageIndex = Math.max(totalPages - boundaryCount + 1, boundaryCount + 1);
+        pageIndex <= totalPages;
+        pageIndex++
       ) {
-        if (!pages.includes(i)) {
-          pages.push(i);
+        if (!pages.includes(pageIndex)) {
+          pages.push(pageIndex);
         }
       }
 
       return pages;
-    };
+    }, [totalPages, currentPage, siblingCount, boundaryCount, showEllipsis]);
 
-    const pageNumbers = generatePageNumbers();
-
-    const handlePageChange = (page: number) => {
+    const handlePageChange = useMemo(() => (page: number) => {
       if (disabled || 1 > page || page > totalPages || page === currentPage) {
         return undefined;
       }
       onPageChange(page);
-    };
+    }, [disabled, totalPages, currentPage, onPageChange]);
 
     const PaginationButton: React.FC<{
       page: number | 'ellipsis';
@@ -153,7 +152,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       disabled?: boolean;
       children: React.ReactNode;
       'aria-label'?: string;
-    }> = ({
+    }> = React.memo(({
       page,
       isActive = false,
       disabled: buttonDisabled = false,
@@ -171,7 +170,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       >
         {children}
       </motion.button>
-    );
+    ));
 
     return (
       <nav

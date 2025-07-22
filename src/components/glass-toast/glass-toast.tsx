@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react';
 import { cn, getGlassClass } from '@/core/utils/classname';
@@ -47,7 +47,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
 }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const addToast = (toast: Omit<Toast, 'id'>) => {
+  const addToast = useCallback((toast: Omit<Toast, 'id'>) => {
     const id = Math.random().toString(36).substring(2, 9);
     const newToast = { ...toast, id };
     setToasts(prev => [...prev, newToast]);
@@ -56,23 +56,30 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
     setTimeout(() => {
       removeToast(id);
     }, toast.duration || 5000);
-  };
+  }, []);
 
-  const removeToast = (id: string) => {
+  const removeToast = useCallback((id: string) => {
     setToasts(prev => prev.filter(toast => toast.id !== id));
-  };
+  }, []);
 
-  const positionClasses = {
+  // Memoize position classes to avoid recreation on each render
+  const positionClasses = useMemo(() => ({
     'top-right': 'top-4 right-4',
     'top-left': 'top-4 left-4',
     'bottom-right': 'bottom-4 right-4',
     'bottom-left': 'bottom-4 left-4',
     'top-center': 'top-4 left-1/2 transform -translate-x-1/2',
     'bottom-center': 'bottom-4 left-1/2 transform -translate-x-1/2',
-  };
+  }), []);
+
+  // Memoize context value to prevent unnecessary re-renders
+  const contextValue = useMemo(() => ({
+    addToast,
+    removeToast
+  }), [addToast, removeToast]);
 
   return (
-    <ToastContext.Provider value={{ addToast, removeToast }}>
+    <ToastContext.Provider value={contextValue}>
       {children}
       { 'undefined' !== typeof window &&
        'undefined' !== typeof document &&
@@ -99,44 +106,46 @@ interface ToastItemProps {
   onRemove: (id: string) => void;
 }
 
-const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
+const ToastItem: React.FC<ToastItemProps> = React.memo(({ toast, onRemove }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  const handleRemove = () => {
+  const handleRemove = useCallback(() => {
     setIsVisible(false);
     setTimeout(() => onRemove(toast.id), 200);
-  };
+  }, [onRemove, toast.id]);
 
-  const icons = {
+  // Memoize icon mappings to avoid recreation
+  const icons = useMemo(() => ({
     success: CheckCircle,
     error: AlertCircle,
     warning: AlertTriangle,
     info: Info,
-  };
+  }), []);
 
-  const iconColors = {
+  const iconColors = useMemo(() => ({
     success: 'text-green-500',
     error: 'text-red-500',
     warning: 'text-yellow-500',
     info: 'text-blue-500',
-  };
+  }), []);
 
   const Icon = icons[toast.type || 'info'];
 
+  // Memoize class names for better performance
+  const containerClasses = useMemo(() => cn(
+    getGlassClass('elevated'),
+    'p-4 rounded-xl border border-white/20 dark:border-white/10',
+    'min-w-[300px] max-w-[400px]',
+    'transition-all duration-200 ease-out',
+    isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+  ), [isVisible]);
+
   return (
-    <div
-      className={cn(
-        getGlassClass('elevated'),
-        'p-4 rounded-xl border border-white/20 dark:border-white/10',
-        'min-w-[300px] max-w-[400px]',
-        'transition-all duration-200 ease-out',
-        isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-      )}
-    >
+    <div className={containerClasses}>
       <div className="flex items-start space-x-3">
         <Icon
           className={cn(
@@ -174,7 +183,7 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
       </div>
     </div>
   );
-};
+});
 
 // Simple GlassToast component for direct use
 interface GlassToastProps {
