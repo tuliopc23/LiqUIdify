@@ -35,7 +35,10 @@
       "Bash(npm install:*)",
       "Bash(npx tsc:*)",
       "Bash(chmod:*)",
-      "Bash(bun:*)"
+      "Bash(bun:*)",
+      "call Ref tools mcp",
+      "Bash(cp:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }
