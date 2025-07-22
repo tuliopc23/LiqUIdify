@@ -11,7 +11,7 @@
  */
 
 // External dependencies
-import { forwardRef, useCallback, useRef } from 'react';
+import React, { forwardRef, useCallback, useRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 
 // Internal dependencies
@@ -387,5 +387,8 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
 
 GlassButton.displayName = 'GlassButton';
 
+// Memoize the component to prevent unnecessary re-renders
+const MemoizedGlassButton = React.memo(GlassButton);
+
 // Export the component and types
-export default GlassButton;
+export default MemoizedGlassButton;

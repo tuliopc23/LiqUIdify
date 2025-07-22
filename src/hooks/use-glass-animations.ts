@@ -113,7 +113,8 @@ export function useGlassAnimation(
 
       animationRef.current = animation;
 
-      // Track animation progress
+      // Track animation progress - optimized for 60fps
+      let rafId: number;
       const updateProgress = () => {
         if (!animation.currentTime || !animation.effect) {
           return undefined;
@@ -127,11 +128,18 @@ export function useGlassAnimation(
         setState((prev) => ({ ...prev, progress }));
 
         if (1 > progress) {
-          requestAnimationFrame(updateProgress);
+          rafId = requestAnimationFrame(updateProgress);
         }
       };
 
-      requestAnimationFrame(updateProgress);
+      rafId = requestAnimationFrame(updateProgress);
+
+      // Cleanup RAF on animation end
+      animation.addEventListener('finish', () => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+        }
+      });
 
       // Handle animation completion
       animation.addEventListener('finish', () => {
@@ -170,6 +178,7 @@ export function useGlassAnimation(
 
 /**
  * Hook for glass state transitions (hover, focus, active, etc.)
+ * Optimized to prevent unnecessary re-renders
  */
 export function useGlassStateTransitions(
   timing: AnimationTiming = 'normal',
@@ -177,6 +186,14 @@ export function useGlassStateTransitions(
 ) {
   const [currentState, setCurrentState] = useState<string>('idle');
   const { cancel, state } = useGlassAnimation(timing);
+  
+  // Memoize transitions to prevent recalculation on every render
+  const transitions = useMemo(() => ({
+    hover: { scale: 1.02, opacity: 0.9, blur: intensity === 'intense' ? 16 : 8 },
+    focus: { scale: 1.01, opacity: 0.95, blur: intensity === 'intense' ? 12 : 6 },
+    active: { scale: 0.98, opacity: 0.85, blur: intensity === 'intense' ? 20 : 10 },
+    idle: { scale: 1, opacity: 1, blur: intensity === 'intense' ? 8 : 4 },
+  }), [intensity]);
 
   const transitionToState = useCallback(
     (targetState: string) => {
@@ -208,54 +225,59 @@ export function useMagneticHover(
 
   const magneticProps = {};
 
-  const handleMouseMove = useCallback(
-    (event: MouseEvent) => {
-      if (!elementRef.current) {
-        return undefined;
-      }
-
-      const rect = elementRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const deltaX = event.clientX - centerX;
-      const deltaY = event.clientY - centerY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-      if (distance <= radius) {
-        const normalizedDistance = distance / radius;
-        const force = (1 - normalizedDistance) * strength;
-
-        const translateX = deltaX * force;
-        const translateY = deltaY * force;
-
-        animate(
-          elementRef.current,
-          [{ transform: `translate(${translateX}px, ${translateY}px)` }],
-          {
-            fill: 'forwards',
+  // Throttle mouse move events for better performance
+  const throttledHandleMouseMove = useCallback(
+    (() => {
+      let rafId: number | null = null;
+      return (event: MouseEvent) => {
+        if (rafId) return;
+        
+        rafId = requestAnimationFrame(() => {
+          if (!elementRef.current) {
+            rafId = null;
+            return;
           }
-        );
-      }
-    },
-    [animate, strength, radius]
+
+          const rect = elementRef.current.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          const deltaX = event.clientX - centerX;
+          const deltaY = event.clientY - centerY;
+          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+          if (distance <= radius) {
+            const normalizedDistance = distance / radius;
+            const force = (1 - normalizedDistance) * strength;
+
+            const translateX = deltaX * force;
+            const translateY = deltaY * force;
+
+            // Use CSS transform for better performance
+            elementRef.current.style.transform = `translate(${translateX}px, ${translateY}px)`;
+          }
+          
+          rafId = null;
+        });
+      };
+    })(),
+    [strength, radius]
   );
 
   const handleMouseEnter = useCallback(() => {
     setIsHovering(true);
-    document.addEventListener('mousemove', handleMouseMove);
-  }, [handleMouseMove]);
+    document.addEventListener('mousemove', throttledHandleMouseMove);
+  }, [throttledHandleMouseMove]);
 
   const handleMouseLeave = useCallback(() => {
     setIsHovering(false);
-    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mousemove', throttledHandleMouseMove);
 
     if (elementRef.current) {
-      animate(elementRef.current, [{ transform: 'translate(0px, 0px)' }], {
-        fill: 'forwards',
-      });
+      // Reset position smoothly
+      elementRef.current.style.transform = 'translate(0px, 0px)';
     }
-  }, [animate, handleMouseMove]);
+  }, [throttledHandleMouseMove]);
 
   useEffect(() => {
     const element = elementRef.current;
@@ -269,9 +291,9 @@ export function useMagneticHover(
     return () => {
       element.removeEventListener('mouseenter', handleMouseEnter);
       element.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousemove', throttledHandleMouseMove);
     };
-  }, [handleMouseEnter, handleMouseLeave, handleMouseMove]);
+  }, [handleMouseEnter, handleMouseLeave, throttledHandleMouseMove]);
 
   return { magneticProps, isHovering };
 }

@@ -1,5 +1,6 @@
 import type { Metric } from 'web-vitals';
 import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
+import React, { useCallback, useEffect } from 'react';
 
 /**
  * Performance Monitor for Glass UI
@@ -462,5 +463,103 @@ class PerformanceMonitor {
 // Export singleton instance
 export const performanceMonitor = PerformanceMonitor.getInstance();
 
+/**
+ * Check if current performance meets S-tier standards
+ */
+export function checkSTierCompliance(): {
+  compliant: boolean;
+  issues: string[];
+  score: number;
+} {
+  const monitor = PerformanceMonitor.getInstance();
+  const issues: string[] = [];
+  let score = 100;
+
+  // Check Core Web Vitals
+  const lcp = monitor.getMetric('LCP');
+  if (lcp && lcp.value > 2500) {
+    issues.push(`LCP ${lcp.value}ms exceeds 2.5s target`);
+    score -= 15;
+  }
+
+  const cls = monitor.getMetric('CLS');
+  if (cls && cls.value > 0.1) {
+    issues.push(`CLS ${cls.value} exceeds 0.1 target`);
+    score -= 15;
+  }
+
+  const inp = monitor.getMetric('INP');
+  if (inp && inp.value > 200) {
+    issues.push(`INP ${inp.value}ms exceeds 200ms target`);
+    score -= 10;
+  }
+
+  const fcp = monitor.getMetric('FCP');
+  if (fcp && fcp.value > 1800) {
+    issues.push(`FCP ${fcp.value}ms exceeds 1.8s target`);
+    score -= 10;
+  }
+
+  return {
+    compliant: score >= 85, // S-tier requires >85 score
+    issues,
+    score: Math.max(0, score),
+  };
+}
+
 // Export types
 export type { PerformanceMetric, ComponentMetric, PerformanceReport };
+
+/**
+ * Performance monitoring hook for React components
+ */
+export function usePerformanceMonitor(componentName: string) {
+  const monitor = PerformanceMonitor.getInstance();
+  
+  // Track component render time
+  const trackRender = useCallback((startTime: number) => {
+    const renderTime = performance.now() - startTime;
+    monitor.trackComponent(componentName, { renderTime });
+    
+    // Check if render time exceeds S-tier threshold (16ms for 60fps)
+    if (renderTime > 16) {
+      console.warn(`⚠️ Component ${componentName} render time: ${renderTime.toFixed(2)}ms exceeds 16ms target`);
+    }
+  }, [componentName, monitor]);
+
+  // Track component mount
+  const trackMount = useCallback(() => {
+    const mountTime = performance.now();
+    monitor.trackComponent(componentName, { mountTime });
+  }, [componentName, monitor]);
+
+  return { trackRender, trackMount };
+}
+
+/**
+ * Higher-order component for automatic performance tracking
+ */
+export function withPerformanceTracking<P extends object>(
+  Component: React.ComponentType<P>,
+  componentName?: string
+) {
+  const WrappedComponent = React.forwardRef<any, P>((props, ref) => {
+    const name = componentName || Component.displayName || Component.name || 'Unknown';
+    const { trackRender, trackMount } = usePerformanceMonitor(name);
+    
+    const renderStart = performance.now();
+    
+    useEffect(() => {
+      trackMount();
+      trackRender(renderStart);
+    });
+
+    return React.createElement(Component, { ...props, ref });
+  });
+
+  WrappedComponent.displayName = `withPerformanceTracking(${componentName || Component.displayName || Component.name})`;
+  
+  return WrappedComponent;
+}
+
+export default PerformanceMonitor;

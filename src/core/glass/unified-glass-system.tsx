@@ -12,7 +12,7 @@
  * - Tree-shakeable exports
  */
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, useMemo } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 // Types
@@ -73,47 +73,73 @@ const GLASS_VARIANT_STYLES: Record<GlassVariant, CSSProperties> = {
   },
 };
 
-// Hook for unified glass effects
+// Hook for unified glass effects - optimized for performance
 export function useUnifiedGlass(config: GlassEffectConfig = { intensity: 'medium', variant: 'default' }) {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const elementRef = useRef<HTMLDivElement>(null);
+  
+  // Memoize intensity config to prevent recalculation
+  const intensityConfig = useMemo(() => 
+    GLASS_INTENSITY_CONFIG[config.intensity], [config.intensity]
+  );
+  
+  // Memoize variant styles to prevent recalculation
+  const variantStyles = useMemo(() => 
+    GLASS_VARIANT_STYLES[config.variant], [config.variant]
+  );
 
-  const mergedConfig = {
-    ...GLASS_INTENSITY_CONFIG[config.intensity],
+  // Memoize the merged config to prevent recalculation
+  const mergedConfig = useMemo(() => ({
+    ...intensityConfig,
     ...config,
-  };
+  }), [intensityConfig, config]);
 
-  const glassStyles: CSSProperties = {
-    backdropFilter: `blur(${mergedConfig.blur}px) saturate(${mergedConfig.saturation}) brightness(${mergedConfig.brightness}) contrast(${mergedConfig.contrast})`,
-    backgroundColor: `rgba(255, 255, 255, ${mergedConfig.opacity})`,
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    ...GLASS_VARIANT_STYLES[mergedConfig.variant],
-  };
+  // Memoize glass styles calculation for performance  
+  const glassStyles: CSSProperties = useMemo(() => {
+    const baseStyles: CSSProperties = {
+      backdropFilter: `blur(${mergedConfig.blur}px) saturate(${mergedConfig.saturation}) brightness(${mergedConfig.brightness}) contrast(${mergedConfig.contrast})`,
+      backgroundColor: `rgba(255, 255, 255, ${mergedConfig.opacity})`,
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      ...variantStyles,
+    };
 
-  if (config.interactive && isHovered) {
-    glassStyles.transform = 'translateY(-2px)';
-    glassStyles.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
-  }
-
-  if (config.magnetic && elementRef.current) {
-    const rect = elementRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const deltaX = (mousePosition.x - centerX) * 0.1;
-    const deltaY = (mousePosition.y - centerY) * 0.1;
-    
-    glassStyles.transform = `perspective(1000px) rotateX(${deltaY}deg) rotateY(${deltaX}deg)`;
-  }
-
-  const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-    if (config.magnetic && elementRef.current) {
-      setMousePosition({
-        x: event.clientX,
-        y: event.clientY,
-      });
+    if (config.interactive && isHovered) {
+      baseStyles.transform = 'translateY(-2px)';
+      baseStyles.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
     }
-  }, [config.magnetic]);
+
+    if (config.magnetic && elementRef.current) {
+      const rect = elementRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = (mousePosition.x - centerX) * 0.1;
+      const deltaY = (mousePosition.y - centerY) * 0.1;
+      
+      baseStyles.transform = `perspective(1000px) rotateX(${deltaY}deg) rotateY(${deltaX}deg)`;
+    }
+
+    return baseStyles;
+  }, [mergedConfig, variantStyles, config.interactive, config.magnetic, isHovered, mousePosition]);
+
+  // Throttle mouse move for better performance
+  const throttledHandleMouseMove = useCallback(
+    (() => {
+      let rafId: number | null = null;
+      return (event: React.MouseEvent<HTMLDivElement>) => {
+        if (!config.magnetic || rafId) return;
+        
+        rafId = requestAnimationFrame(() => {
+          setMousePosition({
+            x: event.clientX,
+            y: event.clientY,
+          });
+          rafId = null;
+        });
+      };
+    })(),
+    [config.magnetic]
+  );
 
   const handleMouseEnter = useCallback(() => {
     if (config.interactive) {
@@ -131,7 +157,7 @@ export function useUnifiedGlass(config: GlassEffectConfig = { intensity: 'medium
   return {
     glassStyles,
     handlers: {
-      onMouseMove: handleMouseMove,
+      onMouseMove: throttledHandleMouseMove,
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
     },
