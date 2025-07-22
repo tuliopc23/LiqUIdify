@@ -272,7 +272,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "rolldown": "^1.0.0-beta.28",
-    "rolldown-plugin-dts": "^0.14.0",
+    "rolldown-plugin-dts": "^0.14.1",
     "rolldown-vite": "^7.0.9",
     "semantic-release": "^24.2.7",
     "storybook": "^9.0.17",

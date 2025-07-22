@@ -1,7 +1,7 @@
 {
-  "buildCommand": "npm run build && npm run build-storybook",
+  "buildCommand": "bun run build && bun run build-storybook",
   "outputDirectory": "storybook-static",
-  "installCommand": "npm install",
+  "installCommand": "bun install",
   "framework": null,
   "rewrites": [
     {

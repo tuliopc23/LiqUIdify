@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GlassDropdown } from './glass-dropdown';
-import { GlassButton } from '../glass-button/glass-button';
+import { GlassButton } from '../glass-button-refactored/glass-button';
 import { Settings, User, LogOut, HelpCircle } from 'lucide-react';
 
 const meta: Meta<typeof GlassDropdown> = {

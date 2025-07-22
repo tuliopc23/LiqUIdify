@@ -8,8 +8,8 @@ import { renderToString } from 'react-dom/server';
 import React from 'react';
 
 // Import components to test
-import { GlassButton } from '../../components/glass-button';
-import { GlassCard } from '../../components/glass-card';
+import { GlassButton } from '../../components/glass-button-refactored';
+import { GlassCard } from '../../components/glass-card-refactored';
 import { GlassInput } from '../../components/glass-input';
 
 // Mock window and browser APIs for SSR environment

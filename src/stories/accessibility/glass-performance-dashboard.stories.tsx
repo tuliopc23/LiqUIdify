@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { GlassPerformanceDashboard } from '../../components/glass-performance-dashboard';
 import { useEffect, useState } from 'react';
 import { performanceMonitor } from '../../core/performance-monitor';
-import { GlassButton } from '../../components/glass-button';
-import { GlassCard } from '../../components/glass-card';
+import { GlassButton } from '../../components/glass-button-refactored';
+import { GlassCard } from '../../components/glass-card-refactored';
 import { withPerformanceMonitoring } from '../../hooks/use-performance-monitoring';
 
 const meta = {
