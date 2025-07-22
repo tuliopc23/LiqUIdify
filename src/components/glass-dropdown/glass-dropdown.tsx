@@ -200,6 +200,6 @@ export const GlassDropdown = React.memo(React.forwardRef<
       </div>
     );
   }
-);
+));
 
 GlassDropdown.displayName = 'GlassDropdown';

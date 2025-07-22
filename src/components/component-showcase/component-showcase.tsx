@@ -892,7 +892,6 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({ activeS
                     <GlassButton
                       variant="secondary"
                       onClick={handleShowError}
-                      }
                     >
                       Show Error
                     </GlassButton>

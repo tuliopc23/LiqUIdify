@@ -144,6 +144,6 @@ export const GlassSelect = React.memo(React.forwardRef<HTMLDivElement, GlassSele
       </div>
     );
   }
-);
+));
 
 GlassSelect.displayName = 'GlassSelect';

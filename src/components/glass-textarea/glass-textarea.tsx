@@ -36,6 +36,6 @@ export const GlassTextarea = React.memo(React.forwardRef<
       {...props}
     />
   );
-});
+}));
 
 GlassTextarea.displayName = 'GlassTextarea';

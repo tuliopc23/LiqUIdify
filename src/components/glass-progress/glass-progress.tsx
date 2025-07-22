@@ -94,6 +94,6 @@ export const GlassProgress = React.memo(React.forwardRef<
       </div>
     );
   }
-);
+));
 
 GlassProgress.displayName = 'GlassProgress';

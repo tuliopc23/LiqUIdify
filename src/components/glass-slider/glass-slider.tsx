@@ -143,6 +143,6 @@ export const GlassSlider = React.memo(React.forwardRef<HTMLDivElement, GlassSlid
       </div>
     );
   }
-);
+));
 
 GlassSlider.displayName = 'GlassSlider';

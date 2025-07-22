@@ -126,6 +126,6 @@ export const GlassAvatar = React.memo(React.forwardRef<HTMLDivElement, GlassAvat
       </div>
     );
   }
-);
+));
 
 GlassAvatar.displayName = 'GlassAvatar';
