@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo, lazy, Suspense } from 'react';
 import { GlassButton } from '../glass-button-refactored';
 import { GlassInput } from '../glass-input';
 import { GlassTextarea } from '../glass-textarea';
@@ -49,66 +49,105 @@ export interface ComponentShowcaseProps {
   activeSection: string;
 }
 
-export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+// Define proper types for table data
+interface TableRowData {
+  component: string;
+  category: string;
+  status: string;
+  usage: string;
+  icon: React.ReactNode;
+}
 
-  const tableData = [
-    {
-      component: 'Button',
-      category: 'Atom',
-      status: 'Ready',
-      usage: '847 times',
-      icon: <MousePointer className="h-4 w-4 text-primary" />,
-    },
-    {
-      component: 'Input',
-      category: 'Atom',
-      status: 'Ready',
-      usage: '623 times',
-      icon: <Keyboard className="h-4 w-4 text-primary" />,
-    },
-    {
-      component: 'Modal',
-      category: 'Organism',
-      status: 'In Progress',
-      usage: '234 times',
-      icon: <Layers className="h-4 w-4 text-primary" />,
-    },
-  ];
+interface ActivityData {
+  user: string;
+  action: string;
+  time: string;
+}
 
-  const tableColumns = [
-    {
-      key: 'component' as const,
-      header: 'Component',
-      render: (value: any, item: any) => (
-        <div className="flex items-center">
-          <div className="w-8 h-8 glass-effect rounded-lg flex items-center justify-center mr-3">
-            {item.icon}
-          </div>
-          <span className="font-medium text-primary">{value}</span>
+// Memoize table data to prevent recreation on every render
+const tableData: TableRowData[] = [
+  {
+    component: 'Button',
+    category: 'Atom',
+    status: 'Ready',
+    usage: '847 times',
+    icon: <MousePointer className="h-4 w-4 text-primary" />,
+  },
+  {
+    component: 'Input',
+    category: 'Atom',
+    status: 'Ready',
+    usage: '623 times',
+    icon: <Keyboard className="h-4 w-4 text-primary" />,
+  },
+  {
+    component: 'Modal',
+    category: 'Organism',
+    status: 'In Progress',
+    usage: '234 times',
+    icon: <Layers className="h-4 w-4 text-primary" />,
+  },
+];
+
+// Memoize table columns to prevent recreation on every render
+const tableColumns = [
+  {
+    key: 'component',
+    header: 'Component',
+    render: (value: any, item: any) => (
+      <div className="flex items-center">
+        <div className="w-8 h-8 glass-effect rounded-lg flex items-center justify-center mr-3">
+          {item.icon}
         </div>
-      ),
-    },
-    {
-      key: 'category' as const,
-      header: 'Category',
-      render: (value: any) => <span className="text-secondary">{value}</span>,
-    },
-    {
-      key: 'status' as const,
-      header: 'Status',
-      render: (value: any) => (
-        <GlassBadge variant={ 'Ready' === value ? 'success' : 'warning'}>
-          {value}
-        </GlassBadge>
-      ),
-    },
-    {
-      key: 'usage' as const,
-      header: 'Usage',
-      render: (value: any) => <span className="text-secondary">{value}</span>,
-    },
-  ];
+        <span className="font-medium text-primary">{value}</span>
+      </div>
+    ),
+  },
+  {
+    key: 'category',
+    header: 'Category',
+    render: (value: any) => <span className="text-secondary">{value}</span>,
+  },
+  {
+    key: 'status',
+    header: 'Status',
+    render: (value: any) => (
+      <GlassBadge variant={'Ready' === value ? 'success' : 'warning'}>
+        {value}
+      </GlassBadge>
+    ),
+  },
+  {
+    key: 'usage',
+    header: 'Usage',
+    render: (value: any) => <span className="text-secondary">{value}</span>,
+  },
+];
+
+// Activity data for the second table
+const activityData = [
+  {
+    user: 'John Doe',
+    action: 'Created project',
+    time: '2 hours ago',
+  },
+  {
+    user: 'Jane Smith',
+    action: 'Updated profile',
+    time: '4 hours ago',
+  },
+  {
+    user: 'Mike Johnson',
+    action: 'Completed task',
+    time: '1 day ago',
+  },
+];
+
+const activityColumns = [
+  { key: 'user', header: 'User' },
+  { key: 'action', header: 'Action' },
+  { key: 'time', header: 'Time' },
+];
 
   const tabsData = [
     {
@@ -157,6 +196,9 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
       ),
     },
   ];
+
+export const ComponentShowcase = memo(function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const renderSection = () => {
     switch (activeSection) {
@@ -466,7 +508,7 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                 Interactive Data Table
               </h3>
               <div className="component-preview rounded-lg p-6">
-                <GlassTable data={tableData} columns={tableColumns} />
+                <GlassTable data={tableData} columns={tableColumns as any} />
               </div>
             </div>
           </section>
@@ -1101,28 +1143,8 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
                 </div>
 
                 <GlassTable
-                  data={[
-                    {
-                      user: 'John Doe',
-                      action: 'Created project',
-                      time: '2 hours ago',
-                    },
-                    {
-                      user: 'Jane Smith',
-                      action: 'Updated profile',
-                      time: '4 hours ago',
-                    },
-                    {
-                      user: 'Mike Johnson',
-                      action: 'Completed task',
-                      time: '1 day ago',
-                    },
-                  ]}
-                  columns={[
-                    { key: 'user', header: 'User' },
-                    { key: 'action', header: 'Action' },
-                    { key: 'time', header: 'Time' },
-                  ]}
+                  data={activityData}
+                  columns={activityColumns as any}
                 />
               </div>
             </div>
@@ -1132,4 +1154,4 @@ export function ComponentShowcase({ activeSection }: ComponentShowcaseProps) {
   };
 
   return <div>{renderSection()}</div>;
-}
+});

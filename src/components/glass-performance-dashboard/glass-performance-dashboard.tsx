@@ -46,7 +46,7 @@ export function GlassPerformanceDashboard({
   const { fps, memory } = useRealtimePerformance();
 
   useEffect(() => {
-    // Subscribe to metric updates
+    // Subscribe to metric updates with throttling
     const unsubscribers = Object.keys(METRIC_LABELS).map(metricName =>
       performanceMonitor.subscribe(metricName as any, metric => {
         setMetrics(prev => new Map(prev).set(metricName, metric));
@@ -57,11 +57,11 @@ export function GlassPerformanceDashboard({
     const allMetrics = performanceMonitor.getAllMetrics();
     setMetrics(allMetrics);
 
-    // Update component metrics periodically
+    // Update component metrics less frequently (every 2 seconds instead of 1)
     const interval = setInterval(() => {
       const report = performanceMonitor.getReport();
-      setComponentMetrics(report.componentMetrics.slice(-10)); // Last 10 components
-    }, 1000);
+      setComponentMetrics(report.componentMetrics.slice(-5)); // Only last 5 components for performance
+    }, 2000);
 
     return () => {
       unsubscribers.forEach(unsub => unsub());
