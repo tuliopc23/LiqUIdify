@@ -1,8 +1,8 @@
 {
   "config": {
-    "configFile": "/Users/tuliopinheirocunha/LiqUIdify/playwright.config.ts",
-    "rootDir": "/Users/tuliopinheirocunha/LiqUIdify/tests/e2e",
-    "forbidOnly": false,
+    "configFile": "/home/runner/work/LiqUIdify/LiqUIdify/playwright.config.ts",
+    "rootDir": "/home/runner/work/LiqUIdify/LiqUIdify/tests/e2e",
+    "forbidOnly": true,
     "fullyParallel": true,
     "globalSetup": null,
     "globalTeardown": null,
@@ -10,7 +10,30 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {},
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/tuliopc23/LiqUIdify/commit/8f8a7730443245f66ac8c17395f49cd3b8343325",
+        "commitHash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+        "buildHref": "https://github.com/tuliopc23/LiqUIdify/actions/runs/16450697203"
+      },
+      "gitCommit": {
+        "shortHash": "8f8a773",
+        "hash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+        "subject": "Initial plan",
+        "body": "Initial plan",
+        "author": {
+          "name": "copilot-swe-agent[bot]",
+          "email": "198982749+Copilot@users.noreply.github.com",
+          "time": 1753203511000
+        },
+        "committer": {
+          "name": "copilot-swe-agent[bot]",
+          "email": "198982749+Copilot@users.noreply.github.com",
+          "time": 1753203511000
+        },
+        "branch": "copilot/fix-12"
+      }
+    },
     "preserveOutput": "always",
     "reporter": [
       [
@@ -37,13 +60,36 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "/Users/tuliopinheirocunha/LiqUIdify/test-results",
+        "outputDir": "/home/runner/work/LiqUIdify/LiqUIdify/test-results",
         "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/tuliopc23/LiqUIdify/commit/8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "commitHash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "buildHref": "https://github.com/tuliopc23/LiqUIdify/actions/runs/16450697203"
+          },
+          "gitCommit": {
+            "shortHash": "8f8a773",
+            "hash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "subject": "Initial plan",
+            "body": "Initial plan",
+            "author": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "committer": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "branch": "copilot/fix-12"
+          }
+        },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "/Users/tuliopinheirocunha/LiqUIdify/tests/e2e",
+        "testDir": "/home/runner/work/LiqUIdify/LiqUIdify/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -51,13 +97,36 @@
         "timeout": 30000
       },
       {
-        "outputDir": "/Users/tuliopinheirocunha/LiqUIdify/test-results",
+        "outputDir": "/home/runner/work/LiqUIdify/LiqUIdify/test-results",
         "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/tuliopc23/LiqUIdify/commit/8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "commitHash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "buildHref": "https://github.com/tuliopc23/LiqUIdify/actions/runs/16450697203"
+          },
+          "gitCommit": {
+            "shortHash": "8f8a773",
+            "hash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "subject": "Initial plan",
+            "body": "Initial plan",
+            "author": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "committer": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "branch": "copilot/fix-12"
+          }
+        },
         "id": "firefox",
         "name": "firefox",
-        "testDir": "/Users/tuliopinheirocunha/LiqUIdify/tests/e2e",
+        "testDir": "/home/runner/work/LiqUIdify/LiqUIdify/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -65,13 +134,36 @@
         "timeout": 30000
       },
       {
-        "outputDir": "/Users/tuliopinheirocunha/LiqUIdify/test-results",
+        "outputDir": "/home/runner/work/LiqUIdify/LiqUIdify/test-results",
         "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/tuliopc23/LiqUIdify/commit/8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "commitHash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "buildHref": "https://github.com/tuliopc23/LiqUIdify/actions/runs/16450697203"
+          },
+          "gitCommit": {
+            "shortHash": "8f8a773",
+            "hash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "subject": "Initial plan",
+            "body": "Initial plan",
+            "author": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "committer": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "branch": "copilot/fix-12"
+          }
+        },
         "id": "webkit",
         "name": "webkit",
-        "testDir": "/Users/tuliopinheirocunha/LiqUIdify/tests/e2e",
+        "testDir": "/home/runner/work/LiqUIdify/LiqUIdify/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -79,13 +171,36 @@
         "timeout": 30000
       },
       {
-        "outputDir": "/Users/tuliopinheirocunha/LiqUIdify/test-results",
+        "outputDir": "/home/runner/work/LiqUIdify/LiqUIdify/test-results",
         "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/tuliopc23/LiqUIdify/commit/8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "commitHash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "buildHref": "https://github.com/tuliopc23/LiqUIdify/actions/runs/16450697203"
+          },
+          "gitCommit": {
+            "shortHash": "8f8a773",
+            "hash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "subject": "Initial plan",
+            "body": "Initial plan",
+            "author": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "committer": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "branch": "copilot/fix-12"
+          }
+        },
         "id": "Mobile Chrome",
         "name": "Mobile Chrome",
-        "testDir": "/Users/tuliopinheirocunha/LiqUIdify/tests/e2e",
+        "testDir": "/home/runner/work/LiqUIdify/LiqUIdify/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -93,13 +208,36 @@
         "timeout": 30000
       },
       {
-        "outputDir": "/Users/tuliopinheirocunha/LiqUIdify/test-results",
+        "outputDir": "/home/runner/work/LiqUIdify/LiqUIdify/test-results",
         "repeatEach": 1,
-        "retries": 0,
-        "metadata": {},
+        "retries": 2,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/tuliopc23/LiqUIdify/commit/8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "commitHash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "buildHref": "https://github.com/tuliopc23/LiqUIdify/actions/runs/16450697203"
+          },
+          "gitCommit": {
+            "shortHash": "8f8a773",
+            "hash": "8f8a7730443245f66ac8c17395f49cd3b8343325",
+            "subject": "Initial plan",
+            "body": "Initial plan",
+            "author": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "committer": {
+              "name": "copilot-swe-agent[bot]",
+              "email": "198982749+Copilot@users.noreply.github.com",
+              "time": 1753203511000
+            },
+            "branch": "copilot/fix-12"
+          }
+        },
         "id": "Mobile Safari",
         "name": "Mobile Safari",
-        "testDir": "/Users/tuliopinheirocunha/LiqUIdify/tests/e2e",
+        "testDir": "/home/runner/work/LiqUIdify/LiqUIdify/tests/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -111,11 +249,11 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.54.1",
-    "workers": 5,
+    "workers": 1,
     "webServer": {
       "command": "npm run storybook",
       "url": "http://localhost:6006",
-      "reuseExistingServer": true,
+      "reuseExistingServer": false,
       "timeout": 120000
     }
   },
@@ -127,8 +265,8 @@
     }
   ],
   "stats": {
-    "startTime": "2025-07-22T13:17:12.710Z",
-    "duration": 5445.745,
+    "startTime": "2025-07-22T17:04:28.901Z",
+    "duration": 6366.349,
     "expected": 0,
     "skipped": 0,
     "unexpected": 0,
