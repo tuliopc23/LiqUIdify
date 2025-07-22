@@ -38,14 +38,17 @@
   }
 }
 
-/* Magnetic Hover Effect */
+/* Magnetic Hover Effect - Optimized */
 .glass-magnetic {
   transition: transform 150ms ease-out;
   will-change: transform;
+  transform: translateZ(0); /* Force GPU layer */
+  backface-visibility: hidden;
 }
 
+/* Reduced animation complexity for performance */
 .glass-magnetic:hover {
-  animation: glass-magnetic-pulse 2s ease-in-out infinite;
+  transform: translateZ(0) scale(1.02);
 }
 
 @keyframes glass-magnetic-pulse {

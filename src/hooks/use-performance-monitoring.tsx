@@ -1,9 +1,9 @@
 import type { ComponentType, ReactElement } from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
 import { performanceMonitor } from '../core/performance-monitor';
 
 /**
- * Hook for component-level performance monitoring
+ * Hook for component-level performance monitoring - Optimized version
  */
 export function usePerformanceMonitoring(
   componentName: string,
@@ -12,46 +12,63 @@ export function usePerformanceMonitoring(
   const renderStartTime = useRef<number>(0);
   const mountStartTime = useRef<number>(0);
   const [renderCount, setRenderCount] = useState(0);
+  const lastPropsRef = useRef(props);
 
-  // Track component mount
+  // Only track if props actually changed to reduce overhead
+  const shouldTrack = useMemo(() => {
+    if (renderCount === 0) return true; // Always track first render
+    return JSON.stringify(props) !== JSON.stringify(lastPropsRef.current);
+  }, [props, renderCount]);
+
+  // Track component mount - only once
   useEffect(() => {
     mountStartTime.current = performance.now();
 
     return () => {
-      // Track unmount time
-      const unmountTime = performance.now() - mountStartTime.current;
-      performanceMonitor.trackComponent(componentName, {
-        unmountTime,
-        props: props || {},
-      });
+      // Track unmount time only if tracking is enabled
+      if (process.env.NODE_ENV === 'development') {
+        const unmountTime = performance.now() - mountStartTime.current;
+        performanceMonitor.trackComponent(componentName, {
+          unmountTime,
+          props: props || {},
+        });
+      }
     };
-  }, [componentName, props]);
+  }, [componentName]); // Only depend on componentName
 
-  // Track each render
+  // Track each render - optimized
   useEffect(() => {
+    if (!shouldTrack) return;
+
     const renderTime = performance.now() - renderStartTime.current;
 
-    if (0 === renderCount) {
-      // First render is mount
-      performanceMonitor.trackComponent(componentName, {
-        mountTime: renderTime,
-        renderTime,
-        props: props || {},
-      });
-    } else {
-      // Subsequent renders are updates
-      performanceMonitor.trackComponent(componentName, {
-        updateTime: renderTime,
-        renderTime,
-        props: props || {},
-      });
+    // Batch performance tracking to reduce overhead
+    if (process.env.NODE_ENV === 'development') {
+      if (0 === renderCount) {
+        // First render is mount
+        performanceMonitor.trackComponent(componentName, {
+          mountTime: renderTime,
+          renderTime,
+          props: props || {},
+        });
+      } else {
+        // Subsequent renders are updates
+        performanceMonitor.trackComponent(componentName, {
+          updateTime: renderTime,
+          renderTime,
+          props: props || {},
+        });
+      }
     }
 
     setRenderCount((prev) => prev + 1);
-  }, [componentName, props, renderCount]);
+    lastPropsRef.current = props;
+  }, [componentName, shouldTrack, renderCount, props]);
 
-  // Mark render start
-  renderStartTime.current = performance.now();
+  // Mark render start - only update when needed
+  if (shouldTrack) {
+    renderStartTime.current = performance.now();
+  }
 
   const startTiming = useCallback(
     (name: string) =>

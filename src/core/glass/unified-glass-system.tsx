@@ -12,7 +12,7 @@
  * - Tree-shakeable exports
  */
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, useMemo, memo } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 
 // Types
@@ -44,10 +44,10 @@ export interface UnifiedGlassProps {
 // Constants
 const GLASS_INTENSITY_CONFIG: Record<GlassIntensity, Required<Pick<GlassEffectConfig, 'blur' | 'opacity' | 'saturation' | 'brightness' | 'contrast'>>> = {
   none: { blur: 0, opacity: 1, saturation: 1, brightness: 1, contrast: 1 },
-  subtle: { blur: 4, opacity: 0.9, saturation: 1.1, brightness: 1.05, contrast: 1.02 },
-  medium: { blur: 8, opacity: 0.85, saturation: 1.2, brightness: 1.1, contrast: 1.05 },
-  strong: { blur: 16, opacity: 0.8, saturation: 1.3, brightness: 1.15, contrast: 1.1 },
-  intense: { blur: 24, opacity: 0.75, saturation: 1.4, brightness: 1.2, contrast: 1.15 },
+  subtle: { blur: 4, opacity: 0.9, saturation: 1.05, brightness: 1.02, contrast: 1.01 },
+  medium: { blur: 8, opacity: 0.85, saturation: 1.1, brightness: 1.05, contrast: 1.02 },
+  strong: { blur: 12, opacity: 0.8, saturation: 1.15, brightness: 1.08, contrast: 1.05 },
+  intense: { blur: 16, opacity: 0.75, saturation: 1.2, brightness: 1.1, contrast: 1.08 },
 };
 
 const GLASS_VARIANT_STYLES: Record<GlassVariant, CSSProperties> = {
@@ -73,28 +73,36 @@ const GLASS_VARIANT_STYLES: Record<GlassVariant, CSSProperties> = {
   },
 };
 
-// Hook for unified glass effects
+// Hook for unified glass effects - Optimized with memoization
 export function useUnifiedGlass(config: GlassEffectConfig = { intensity: 'medium', variant: 'default' }) {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const elementRef = useRef<HTMLDivElement>(null);
 
-  const mergedConfig = {
+  const mergedConfig = useMemo(() => ({
     ...GLASS_INTENSITY_CONFIG[config.intensity],
     ...config,
-  };
+  }), [config]);
 
-  const glassStyles: CSSProperties = {
+  const glassStyles: CSSProperties = useMemo(() => ({
     backdropFilter: `blur(${mergedConfig.blur}px) saturate(${mergedConfig.saturation}) brightness(${mergedConfig.brightness}) contrast(${mergedConfig.contrast})`,
     backgroundColor: `rgba(255, 255, 255, ${mergedConfig.opacity})`,
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    willChange: 'transform, opacity',
+    transform: 'translateZ(0)', // Force GPU layer
+    backfaceVisibility: 'hidden',
     ...GLASS_VARIANT_STYLES[mergedConfig.variant],
-  };
+  }), [mergedConfig]);
 
-  if (config.interactive && isHovered) {
-    glassStyles.transform = 'translateY(-2px)';
-    glassStyles.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
-  }
+  const interactiveStyles = useMemo(() => {
+    if (config.interactive && isHovered) {
+      return {
+        transform: 'translateZ(0) translateY(-2px)',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+      };
+    }
+    return {};
+  }, [config.interactive, isHovered]);
 
   if (config.magnetic && elementRef.current) {
     const rect = elementRef.current.getBoundingClientRect();

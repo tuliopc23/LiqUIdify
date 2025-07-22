@@ -15,9 +15,9 @@
   --glass-border-light: rgba(255, 255, 255, 0.15);
   --glass-border-medium: rgba(255, 255, 255, 0.25);
 
-  /* Blur */
-  --glass-blur-light: blur(16px);
-  --glass-blur-medium: blur(24px);
+  /* Blur - Optimized for performance (reduced intensity) */
+  --glass-blur-light: blur(8px);
+  --glass-blur-medium: blur(12px);
 
   /* Transitions */
   --glass-transition-fast: 200ms ease-out;
@@ -34,20 +34,29 @@
   --glass-border-medium: rgba(255, 255, 255, 0.15);
 }
 
-/* Core Glass Effect */
+/* Core Glass Effect - Optimized for 60fps */
 .glass-effect {
   background: var(--glass-bg-primary);
   backdrop-filter: var(--glass-blur-medium) saturate(180%);
   -webkit-backdrop-filter: var(--glass-blur-medium) saturate(180%);
   border: 1px solid var(--glass-border-light);
+  /* Performance optimizations */
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Force GPU layer */
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
-/* Button Styles */
+/* Button Styles - Performance optimized */
 .glass-button-lite {
   position: relative;
   overflow: hidden;
   backdrop-filter: var(--glass-blur-light) saturate(150%);
   -webkit-backdrop-filter: var(--glass-blur-light) saturate(150%);
+  /* Performance optimizations */
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Force GPU layer */
+  backface-visibility: hidden;
 }
 
 .glass-button-primary {

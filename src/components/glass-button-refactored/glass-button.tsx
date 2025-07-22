@@ -11,7 +11,7 @@
  */
 
 // External dependencies
-import { forwardRef, useCallback, useRef } from 'react';
+import { forwardRef, useCallback, useRef, memo } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 
 // Internal dependencies
@@ -135,22 +135,24 @@ const VARIANT_CLASSES = {
   ),
 };
 
-// Loading spinner component
-const LoadingSpinner = ({ size = 'md' }: { size?: string }) => {
+// Loading spinner component - Memoized for performance
+const LoadingSpinner = memo(({ size = 'md' }: { size?: string }) => {
   const sizeClass = 'xs' === size ? 'w-3 h-3' : ('sm' === size ? 'w-4 h-4' : 'w-5 h-5');
   
   return (
     <div className={cn('animate-spin rounded-full border-2 border-current border-t-transparent', sizeClass)} />
   );
-};
+});
+LoadingSpinner.displayName = 'LoadingSpinner';
 
 /**
  * Glass Button Component
  * 
  * A premium glass-effect button component with advanced visual effects.
  * Built using the new compound component architecture for consistency and reusability.
+ * Optimized for 60fps performance with memoization and GPU acceleration.
  */
-export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
+const GlassButtonComponent = forwardRef<HTMLButtonElement, GlassButtonProps>(
   (
     {
       // Base props
@@ -385,7 +387,10 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
   }
 );
 
-GlassButton.displayName = 'GlassButton';
+GlassButtonComponent.displayName = 'GlassButton';
+
+// Memoized export for performance optimization
+export const GlassButton = memo(GlassButtonComponent);
 
 // Export the component and types
 export default GlassButton;

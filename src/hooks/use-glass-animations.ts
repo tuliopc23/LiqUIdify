@@ -54,7 +54,7 @@ const GLASS_ANIMATION_PRESETS = {
 };
 
 /**
- * Base animation hook for consistent animation behavior
+ * Base animation hook for consistent animation behavior - Performance optimized
  */
 export function useGlassAnimation(
   timing: AnimationTiming = 'normal',
@@ -68,6 +68,7 @@ export function useGlassAnimation(
 
   const animationRef = useRef<Animation | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   const config = useMemo(
     () => ({
@@ -91,6 +92,9 @@ export function useGlassAnimation(
       if (animationRef.current) {
         animationRef.current.cancel();
       }
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
 
       const animationOptions = { ...config, ...options };
 
@@ -113,8 +117,19 @@ export function useGlassAnimation(
 
       animationRef.current = animation;
 
-      // Track animation progress
+      // Optimized progress tracking with reduced frequency
+      let lastProgressUpdate = 0;
       const updateProgress = () => {
+        const now = performance.now();
+        
+        // Throttle progress updates to reduce render frequency
+        if (now - lastProgressUpdate < 16) { // ~60fps
+          rafRef.current = requestAnimationFrame(updateProgress);
+          return;
+        }
+        
+        lastProgressUpdate = now;
+
         if (!animation.currentTime || !animation.effect) {
           return undefined;
         }
@@ -127,11 +142,11 @@ export function useGlassAnimation(
         setState((prev) => ({ ...prev, progress }));
 
         if (1 > progress) {
-          requestAnimationFrame(updateProgress);
+          rafRef.current = requestAnimationFrame(updateProgress);
         }
       };
 
-      requestAnimationFrame(updateProgress);
+      rafRef.current = requestAnimationFrame(updateProgress);
 
       // Handle animation completion
       animation.addEventListener('finish', () => {
@@ -150,11 +165,15 @@ export function useGlassAnimation(
   const cancel = useCallback(() => {
     if (animationRef.current) {
       animationRef.current.cancel();
-      animationRef.current = undefined;
+      animationRef.current = null;
     }
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
-      timeoutRef.current = undefined;
+      timeoutRef.current = null;
+    }
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
     }
     setState((prev) => ({ ...prev, isAnimating: false }));
   }, []);
