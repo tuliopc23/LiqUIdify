@@ -12,6 +12,10 @@ export function usePerformanceMonitoring(
   const renderStartTime = useRef<number>(0);
   const mountStartTime = useRef<number>(0);
   const [renderCount, setRenderCount] = useState(0);
+  const propsRef = useRef(props);
+  
+  // Update props ref without causing re-renders
+  propsRef.current = props;
 
   // Track component mount
   useEffect(() => {
@@ -22,35 +26,35 @@ export function usePerformanceMonitoring(
       const unmountTime = performance.now() - mountStartTime.current;
       performanceMonitor.trackComponent(componentName, {
         unmountTime,
-        props: props || {},
+        props: propsRef.current || {},
       });
     };
-  }, [componentName, props]);
+  }, [componentName]);
 
-  // Track each render
+  // Track each render - optimized to prevent unnecessary re-renders
   useEffect(() => {
     const renderTime = performance.now() - renderStartTime.current;
 
-    if (0 === renderCount) {
+    if (renderCount === 0) {
       // First render is mount
       performanceMonitor.trackComponent(componentName, {
         mountTime: renderTime,
         renderTime,
-        props: props || {},
+        props: propsRef.current || {},
       });
     } else {
       // Subsequent renders are updates
       performanceMonitor.trackComponent(componentName, {
         updateTime: renderTime,
         renderTime,
-        props: props || {},
+        props: propsRef.current || {},
       });
     }
 
     setRenderCount((prev) => prev + 1);
-  }, [componentName, props, renderCount]);
+  }, [componentName, renderCount]);
 
-  // Mark render start
+  // Mark render start - moved to avoid dependency issues
   renderStartTime.current = performance.now();
 
   const startTiming = useCallback(
@@ -144,7 +148,7 @@ export function useRealtimePerformance() {
       const currentTime = performance.now();
       const elapsed = currentTime - lastTimeRef.current;
 
-      if (1000 <= elapsed) {
+      if (elapsed >= 1000) {
         const currentFps = Math.round((frameCountRef.current * 1000) / elapsed);
         setFps(currentFps);
         frameCountRef.current = 0;

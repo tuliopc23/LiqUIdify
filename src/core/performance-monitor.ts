@@ -86,14 +86,14 @@ class PerformanceMonitor {
     } = {}
   ): void {
     if (this.isInitialized) {
-      return undefined;
+      return;
     }
 
     const { reportCallback, immediate = false, sampleRate = 1 } = options;
 
     // Sample rate for performance monitoring (0-1)
     if (Math.random() > sampleRate) {
-      return undefined;
+      return;
     }
 
     if (reportCallback) {
@@ -148,7 +148,7 @@ class PerformanceMonitor {
     this.notifyObservers(name, performanceMetric);
 
     // Log to console in development
-    if ('development' === process.env.NODE_ENV) {
+    if (process.env.NODE_ENV === 'development') {
       console.log(
         `[Performance] ${name}: ${metric.value.toFixed(2)}ms (${rating})`
       );
@@ -174,7 +174,7 @@ class PerformanceMonitor {
    */
   private measureTTI(): void {
     if (!('PerformanceObserver' in window)) {
-      return undefined;
+      return;
     }
 
     let tti = 0;
@@ -182,9 +182,9 @@ class PerformanceMonitor {
       const entries = list.getEntries();
 
       // Find the last long task before 5 seconds of quiet time
-      const longTasks = entries.filter((entry) => 50 < entry.duration);
+      const longTasks = entries.filter((entry) => entry.duration > 50);
 
-      if (0 < longTasks.length) {
+      if (longTasks.length > 0) {
         const lastLongTask = longTasks[longTasks.length - 1];
         if (lastLongTask) {
           tti = lastLongTask.startTime + lastLongTask.duration;
@@ -197,7 +197,7 @@ class PerformanceMonitor {
     // Estimate TTI after load
     window.addEventListener('load', () => {
       setTimeout(() => {
-        if (0 === tti) {
+        if (tti === 0) {
           tti = performance.now();
         }
 
@@ -224,7 +224,7 @@ class PerformanceMonitor {
    */
   private setupPerformanceObserver(): void {
     if (!('PerformanceObserver' in window)) {
-      return undefined;
+      return;
     }
 
     this.performanceObserver = new PerformanceObserver((list) => {
@@ -322,7 +322,7 @@ class PerformanceMonitor {
         `glass-ui-${name}`,
         'measure'
       );
-      if (0 < entries.length) {
+      if (entries.length > 0) {
         const duration = entries[entries.length - 1]?.duration || 0;
         this.trackCustomMetric(name, duration);
         return duration;
@@ -404,7 +404,7 @@ class PerformanceMonitor {
     return () => {
       const obs = this.observers.get(metricName) || [];
       const index = obs.indexOf(callback);
-      if (-1 < index) {
+      if (index > -1) {
         obs.splice(index, 1);
       }
     };
