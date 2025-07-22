@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
-import { GlassUIProvider } from '../src/providers/glass-ui-provider';
+import { GlassUIProvider } from '../src';
 import '../src/styles/tailwind.css';
 
 // Import the built CSS file if available (for production builds)
@@ -264,7 +264,7 @@ const preview: Preview = {
 
           // Apply theme-specific background with glass aesthetics
           const storybook = document.querySelector(
-            '.sb-show-main'
+            '.sb-show-main',
           ) as HTMLElement;
           if (storybook) {
             if (theme === 'dark') {
@@ -282,7 +282,7 @@ const preview: Preview = {
 
           // Apply theme to docs container with glass effect
           const docsContainer = document.querySelector(
-            '.sbdocs'
+            '.sbdocs',
           ) as HTMLElement;
           if (docsContainer) {
             if (theme === 'dark') {
@@ -323,8 +323,8 @@ const preview: Preview = {
                   : '1px solid rgba(0, 0, 0, 0.05)',
             },
           },
-          React.createElement(Story)
-        )
+          React.createElement(Story),
+        ),
       );
     },
   ],

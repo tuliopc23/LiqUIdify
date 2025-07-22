@@ -70,12 +70,12 @@ const useCardBusinessLogic = createBusinessLogicHook<CardState>(
     props: GlassCardRefactoredProps
   ) => ({
     handleHover: (isHovered: boolean) => {
-      if (!props.hover) {return undefined;}
+      if (!props.hover) {return;}
       setState((prev: CardState) => ({ ...prev, isHovered }));
     },
 
     handlePress: () => {
-      if (!props.interactive) {return undefined;}
+      if (!props.interactive) {return;}
       setState((prev: CardState) => ({ ...prev, isPressed: true }));
       setTimeout(
         () => setState((prev: CardState) => ({ ...prev, isPressed: false })),
@@ -84,7 +84,7 @@ const useCardBusinessLogic = createBusinessLogicHook<CardState>(
     },
 
     handleSelect: (isSelected: boolean) => {
-      if (!props.selectable) {return undefined;}
+      if (!props.selectable) {return;}
       setState((prev: CardState) => ({ ...prev, isSelected }));
     },
   })
@@ -99,7 +99,7 @@ interface CardContextValue {
   selectable: boolean;
 }
 
-const CardContext = createContext<CardContextValue | null>(undefined);
+const CardContext = createContext<CardContextValue | null>(null);
 
 const useCardContext = () => {
   const context = useContext(CardContext);

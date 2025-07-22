@@ -151,7 +151,7 @@ export function createPolymorphicComponent<
     const elementProps = {
       ...transformedProps,
       className: finalClassName,
-      ref: shouldForwardRef ? ref : undefined,
+      ref: shouldForwardRef ? ref : null,
     } as any;
 
     return (

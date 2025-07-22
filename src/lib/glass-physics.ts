@@ -176,7 +176,7 @@ export function hapticFeedback(
   try {
     // Check for SSR environment
     if ('undefined' === typeof window || 'undefined' === typeof navigator) {
-      return undefined;
+      return null;
     }
 
     // Try to use native vibration API if available
@@ -310,7 +310,7 @@ export const useMagneticHover = (
       // Reset animation state on error
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
-        animationRef.current = undefined;
+        animationRef.current = null;
       }
     }
   }, []);
@@ -320,7 +320,7 @@ export const useMagneticHover = (
       try {
         const element = safeRefAccess(elementRef);
         if (!element) {
-          return undefined;
+          return null;
         }
 
         const rect = safeGetBoundingClientRect(element);
@@ -371,7 +371,7 @@ export const useMagneticHover = (
       // Ensure cleanup on error
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
-        animationRef.current = undefined;
+        animationRef.current = null;
       }
     }
   }, [animate]);
@@ -379,7 +379,7 @@ export const useMagneticHover = (
   useEffect(() => {
     const element = safeRefAccess(elementRef);
     if (!element) {
-      return undefined;
+      return;
     }
 
     element.addEventListener('mousemove', handleMouseMove);
@@ -406,7 +406,7 @@ export const useRepulsionEffect = (
 
   useEffect(() => {
     if (0 === elements.length) {
-      return undefined;
+      return;
     }
 
     const updatePositions = () => {
@@ -424,7 +424,7 @@ export const useRepulsionEffect = (
 
         elements.forEach((otherElement, otherIndex) => {
           if (index === otherIndex || !otherElement) {
-            return undefined;
+            return null;
           }
 
           const otherRect = safeGetBoundingClientRect(otherElement);
@@ -508,7 +508,7 @@ export const createGlassRipple = (
   try {
     // Check for SSR environment
     if ('undefined' === typeof window || 'undefined' === typeof document) {
-      return undefined;
+      return null;
     }
 
     const ripple = document.createElement('div');
@@ -561,7 +561,7 @@ export const createGlassRipple = (
     return ripple;
   } catch (error) {
     console.error('Error creating glass ripple:', error);
-    return undefined;
+    return null;
   }
 };
 
@@ -642,7 +642,7 @@ export class FluidSimulation {
       this.particles.forEach((particle, i) => {
         const force = particleForces[i];
         if (!force) {
-          return undefined;
+          return null;
         }
 
         // Update velocity
@@ -687,7 +687,7 @@ export class FluidSimulation {
 
       this.particles.forEach((neighbor, j) => {
         if (i === j) {
-          return undefined;
+          return null;
         }
 
         const delta = particle.position.subtract(neighbor.position);
@@ -718,7 +718,7 @@ export class FluidSimulation {
 
       this.particles.forEach((neighbor, j) => {
         if (i === j) {
-          return undefined;
+          return null;
         }
 
         const distance = particle.position.distance(neighbor.position);
@@ -964,7 +964,7 @@ export class PhysicsWorld {
   private fluids: Map<string, FluidSimulation> = new Map();
   private lastTime: number = 0;
   private running: boolean = false;
-  private rafId: number | null = undefined;
+  private rafId: number | null = null;
 
   // Global forces
   gravity: Vector2D = new Vector2D(0, 98);
@@ -990,7 +990,7 @@ export class PhysicsWorld {
 
   start() {
     if (this.running) {
-      return undefined;
+      return null;
     }
 
     try {
@@ -1007,13 +1007,13 @@ export class PhysicsWorld {
     this.running = false;
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
-      this.rafId = undefined;
+      this.rafId = null;
     }
   }
 
   private update() {
     if (!this.running) {
-      return undefined;
+      return null;
     }
 
     try {

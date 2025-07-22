@@ -73,7 +73,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
     };
 
     const skeletonStyle = {
-      width: width,
+      width: width || undefined,
       height: height || ('circle' === shape ? width : undefined),
       ...style,
     };
@@ -84,13 +84,13 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
           ref={itemRef}
           className={cn(skeletonVariants({ variant, size, shape }), className)}
           style={skeletonStyle}
-          initial={animated ? { opacity: 0.4 } : undefined}
+          initial={animated ? { opacity: 0.4 } : false}
           animate={
             animated
               ? ('pulse' === variant 
                 ? pulseAnimation
                 : { opacity: [0.4, 0.8, 0.4] })
-              : undefined
+              : false
           }
           transition={
             animated

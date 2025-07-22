@@ -21,21 +21,21 @@ export const safeCreateElement = <T extends HTMLElement>(
     console.warn(
       '[SSR] createElement called in SSR environment, returning null'
     );
-    return undefined;
+    return null;
   }
 
   try {
     return document.createElement(tagName, options) as T;
   } catch (error) {
     console.warn('[SSR] Failed to create element:', error);
-    return undefined;
+    return null;
   }
 };
 
 // Safe document.body access
 export const safeGetDocumentBody = (): HTMLElement | null => {
   if (isSSR() || !document.body) {
-    return undefined;
+    return null;
   }
   return document.body;
 };
@@ -46,7 +46,7 @@ export const safeQuerySelector = <T extends Element = Element>(
   container?: Element | Document
 ): T | null => {
   if (isSSR()) {
-    return undefined;
+    return null;
   }
 
   try {
@@ -54,7 +54,7 @@ export const safeQuerySelector = <T extends Element = Element>(
     return root.querySelector<T>(selector);
   } catch (error) {
     console.warn(`[SSR] Failed to query selector "${selector}":`, error);
-    return undefined;
+    return null;
   }
 };
 
@@ -81,14 +81,14 @@ export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
   id: string
 ): T | null => {
   if (isSSR()) {
-    return undefined;
+    return null;
   }
 
   try {
     return document.getElementById(id) as T | null;
   } catch (error) {
     console.warn(`[SSR] Failed to get element by id "${id}":`, error);
-    return undefined;
+    return null;
   }
 };
 
@@ -225,14 +225,14 @@ export const safeGetComputedStyle = (
 export const safeLocalStorage = {
   getItem: (key: string): string | null => {
     if (isSSR()) {
-      return undefined;
+      return null;
     }
 
     try {
       return localStorage.getItem(key);
     } catch (error) {
       console.warn(`[SSR] Failed to get localStorage item "${key}":`, error);
-      return undefined;
+      return null;
     }
   },
 
@@ -269,14 +269,14 @@ export const safeLocalStorage = {
 export const safeSessionStorage = {
   getItem: (key: string): string | null => {
     if (isSSR()) {
-      return undefined;
+      return null;
     }
 
     try {
       return sessionStorage.getItem(key);
     } catch (error) {
       console.warn(`[SSR] Failed to get sessionStorage item "${key}":`, error);
-      return undefined;
+      return null;
     }
   },
 

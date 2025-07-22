@@ -46,14 +46,14 @@ export const LineChart: React.FC<LineChartProps> = ({
   gradient = true,
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
-  const [hoveredPoint, setHoveredPoint] = useState<number | null>(undefined);
+  const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!data.length) {return undefined;}
+  if (!data.length) {return null;}
 
   const maxValue = Math.max(...data.map(d => d.value));
   const minValue = Math.min(...data.map(d => d.value));
@@ -167,7 +167,7 @@ export const LineChart: React.FC<LineChartProps> = ({
                 animationDelay: animated ? `${i * 100}ms` : '0ms',
               }}
               onMouseEnter={() => setHoveredPoint(i)}
-              onMouseLeave={() => setHoveredPoint(undefined)}
+              onMouseLeave={() => setHoveredPoint(null)}
             />
           ))}
       </svg>
@@ -213,7 +213,7 @@ export const BarChart: React.FC<BarChartProps> = ({
     setMounted(true);
   }, []);
 
-  if (!data.length) {return undefined;}
+  if (!data.length) {return null;}
 
   const maxValue = Math.max(...data.map(d => d.value));
   const padding = 40;
@@ -303,7 +303,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
     setMounted(true);
   }, []);
 
-  if (!data.length) {return undefined;}
+  if (!data.length) {return null;}
 
   const total = data.reduce((sum, item) => sum + item.value, 0);
   const radius = Math.min(width, height) / 2 - 20;

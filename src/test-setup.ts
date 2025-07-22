@@ -36,7 +36,7 @@ Object.defineProperty(window, 'matchMedia', {
   value: vi.fn().mockImplementation(query => ({
     matches: false,
     media: query,
-    onchange: undefined,
+    onchange: null,
     addListener: vi.fn(), // deprecated
     removeListener: vi.fn(), // deprecated
     addEventListener: vi.fn(),
@@ -123,7 +123,7 @@ console.warn = vi.fn((...args) => {
       message.includes('Warning: componentWillReceiveProps') ||
       message.includes('🐌 Slow glass effect'))
   ) {
-    return undefined;
+    return null;
   }
   originalWarn(...args);
 });

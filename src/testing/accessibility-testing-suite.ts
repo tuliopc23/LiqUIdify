@@ -459,7 +459,7 @@ export class AccessibilityTestingSuite {
         const latest = reports[reports.length - 1];
         const previous = reports[reports.length - 2];
 
-        if (!latest || !previous) return undefined;
+        if (!latest || !previous) return null;
 
         if (latest.score < previous.score) {
           regressions.push({

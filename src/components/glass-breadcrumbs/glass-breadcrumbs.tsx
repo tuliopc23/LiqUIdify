@@ -91,7 +91,7 @@ const GlassBreadcrumbs = React.memo(React.forwardRef<HTMLElement, GlassBreadcrum
       maxItems && items.length > maxItems
         ? [
             ...items.slice(0, 1),
-            { label: '...', href: undefined, onClick: undefined },
+            { label: '...', href: null, onClick: null, icon: null },
             ...items.slice(-(maxItems - 2)),
           ]
         : items;

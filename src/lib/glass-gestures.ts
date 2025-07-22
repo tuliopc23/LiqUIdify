@@ -286,9 +286,9 @@ export class GlassGestureRecognizer {
       case 'Enter':
       case ' ':
         this.triggerHaptic('medium');
-        return undefined;
+        break;
       default:
-        return undefined;
+        break;
     }
 
     e.preventDefault();
@@ -331,7 +331,7 @@ export class GlassGestureRecognizer {
 
   private updateGesture(x: number, y: number): void {
     if (!this.isTracking) {
-      return undefined;
+      return;
     }
 
     const now = performance.now();
@@ -379,7 +379,7 @@ export class GlassGestureRecognizer {
 
   private endGesture(x: number, y: number): void {
     if (!this.isTracking) {
-      return undefined;
+      return;
     }
 
     const now = performance.now();
@@ -420,7 +420,7 @@ export class GlassGestureRecognizer {
 
   private cancelGesture(): void {
     if (!this.isTracking) {
-      return undefined;
+      return;
     }
 
     const gestureEvent: GestureEvent = {
@@ -519,7 +519,7 @@ export class GlassGestureRecognizer {
 
   private updateHoverState(x: number, y: number): void {
     if (!this.config.enableHover) {
-      return undefined;
+      return;
     }
 
     const rect = this.element.getBoundingClientRect();
@@ -585,7 +585,7 @@ export class GlassGestureRecognizer {
       'undefined' === typeof navigator ||
       !navigator.vibrate
     ) {
-      return undefined;
+      return;
     }
 
     const patterns = {
@@ -640,7 +640,7 @@ export function useGlassGestures(
 
   const setupGestureRecognizer = useCallback(() => {
     if (!elementRef.current) {
-      return undefined;
+      return;
     }
 
     // Clean up existing recognizer
@@ -662,7 +662,7 @@ export function useGlassGestures(
     return () => {
       if (gestureRecognizerRef.current) {
         gestureRecognizerRef.current.destroy();
-        gestureRecognizerRef.current = undefined;
+        gestureRecognizerRef.current = null;
       }
     };
   }, [setupGestureRecognizer]);

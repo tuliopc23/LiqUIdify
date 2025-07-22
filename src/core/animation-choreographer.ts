@@ -310,9 +310,9 @@ export class SpringAnimation {
   private targetValue: number;
   private velocity: number;
   private options: SpringOptions;
-  private animationFrame: number | null = undefined;
-  private onUpdateCallback: ((value: number) => void) | null = undefined;
-  private onCompleteCallback: (() => void) | null = undefined;
+  private animationFrame: number | null = null;
+  private onUpdateCallback: ((value: number) => void) | null = null;
+  private onCompleteCallback: (() => void) | null = null;
 
   constructor(
     target: HTMLElement,
@@ -352,7 +352,7 @@ export class SpringAnimation {
   stop(): this {
     if (null !== this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = undefined;
+      this.animationFrame = null;
     }
     return this;
   }
@@ -483,7 +483,7 @@ export function useMagneticEffect(
   useEffect(() => {
     const element = ref.current;
     if (!element || prefersReducedMotion) {
-      return undefined;
+      return null;
     }
 
     // State variables
@@ -551,8 +551,8 @@ export function useMagneticEffect(
           element.style.transform = '';
           element.style.transition = '';
           cancelAnimationFrame(animationFrame!);
-          animationFrame = undefined;
-          return undefined;
+          animationFrame = null;
+          return null;
         }
       } else {
         // Calculate distance from mouse to element center

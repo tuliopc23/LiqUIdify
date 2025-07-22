@@ -86,14 +86,14 @@ class PerformanceMonitor {
     } = {}
   ): void {
     if (this.isInitialized) {
-      return undefined;
+      return null;
     }
 
     const { reportCallback, immediate = false, sampleRate = 1 } = options;
 
     // Sample rate for performance monitoring (0-1)
     if (Math.random() > sampleRate) {
-      return undefined;
+      return null;
     }
 
     if (reportCallback) {
@@ -174,7 +174,7 @@ class PerformanceMonitor {
    */
   private measureTTI(): void {
     if (!('PerformanceObserver' in window)) {
-      return undefined;
+      return null;
     }
 
     let tti = 0;
@@ -224,7 +224,7 @@ class PerformanceMonitor {
    */
   private setupPerformanceObserver(): void {
     if (!('PerformanceObserver' in window)) {
-      return undefined;
+      return null;
     }
 
     this.performanceObserver = new PerformanceObserver((list) => {
@@ -256,7 +256,7 @@ class PerformanceMonitor {
         saveData: conn.saveData,
       };
     }
-    return undefined;
+    return null;
   }
 
   /**

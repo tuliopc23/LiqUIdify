@@ -30,7 +30,7 @@ export function hexToRgb(hex: string): ColorRGB | null {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16),
       }
-    : undefined;
+    : null;
 }
 
 /**

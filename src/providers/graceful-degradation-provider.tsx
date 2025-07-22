@@ -9,7 +9,7 @@ interface GracefulDegradationContextType {
 }
 
 const GracefulDegradationContext =
-  createContext<GracefulDegradationContextType | null>(undefined);
+  createContext<GracefulDegradationContextType | null>(null);
 
 interface GracefulDegradationProviderProps {
   children: ReactNode;

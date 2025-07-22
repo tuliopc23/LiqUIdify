@@ -54,7 +54,7 @@ export class SSRErrorBoundary extends React.Component<
 > {
   constructor(props: any) {
     super(props);
-    this.state = { hasError: false, error: undefined };
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -120,7 +120,7 @@ export function useWindow() {
   const [windowObj, setWindowObj] = useState<Window | null>(undefined);
 
   useEffect(() => {
-    setWindowObj('undefined' !== typeof window ? window : undefined);
+    setWindowObj('undefined' !== typeof window ? window : null);
   }, []);
 
   return windowObj;
@@ -131,7 +131,7 @@ export function useDocument() {
   const [documentObj, setDocumentObj] = useState<Document | null>(undefined);
 
   useEffect(() => {
-    setDocumentObj('undefined' !== typeof document ? document : undefined);
+    setDocumentObj('undefined' !== typeof document ? document : null);
   }, []);
 
   return documentObj;
@@ -142,7 +142,7 @@ export function useNavigator() {
   const [navigatorObj, setNavigatorObj] = useState<Navigator | null>(undefined);
 
   useEffect(() => {
-    setNavigatorObj('undefined' !== typeof navigator ? navigator : undefined);
+    setNavigatorObj('undefined' !== typeof navigator ? navigator : null);
   }, []);
 
   return navigatorObj;
@@ -154,7 +154,7 @@ export function useMatchMedia(query: string): boolean {
 
   useEffect(() => {
     if ('undefined' === typeof window) {
-      return undefined;
+      return null;
     }
 
     const mediaQuery = window.matchMedia(query);
@@ -179,7 +179,7 @@ export function useIntersectionObserver(
 
   useEffect(() => {
     if ('undefined' === typeof window || !window.IntersectionObserver) {
-      return undefined;
+      return null;
     }
 
     const obs = new IntersectionObserver(() => {}, options);
@@ -200,7 +200,7 @@ export function useResizeObserver(
 
   useEffect(() => {
     if ('undefined' === typeof window || !window.ResizeObserver) {
-      return undefined;
+      return null;
     }
 
     const obs = new ResizeObserver(callback);
@@ -220,7 +220,7 @@ export function usePerformance() {
 
   useEffect(() => {
     setPerformanceObj(
-      'undefined' !== typeof performance ? performance : undefined
+      'undefined' !== typeof performance ? performance : null
     );
   }, []);
 
@@ -237,7 +237,7 @@ export function useRequestAnimationFrame() {
     setRequestAnimationFrameFn(
       'undefined' !== typeof requestAnimationFrame
         ? requestAnimationFrame
-        : undefined
+        : null
     );
   }, []);
 
@@ -251,7 +251,7 @@ export function useSetTimeout() {
   >(undefined);
 
   useEffect(() => {
-    setSetTimeoutFn('undefined' !== typeof setTimeout ? setTimeout : undefined);
+    setSetTimeoutFn('undefined' !== typeof setTimeout ? setTimeout : null);
   }, []);
 
   return setTimeoutFn;
@@ -265,7 +265,7 @@ export function useClearTimeout() {
 
   useEffect(() => {
     setClearTimeoutFn(
-      'undefined' !== typeof clearTimeout ? clearTimeout : undefined
+      'undefined' !== typeof clearTimeout ? clearTimeout : null
     );
   }, []);
 
@@ -280,7 +280,7 @@ export function useSetInterval() {
 
   useEffect(() => {
     setSetIntervalFn(
-      'undefined' !== typeof setInterval ? setInterval : undefined
+      'undefined' !== typeof setInterval ? setInterval : null
     );
   }, []);
 
@@ -295,7 +295,7 @@ export function useClearInterval() {
 
   useEffect(() => {
     setClearIntervalFn(
-      'undefined' !== typeof clearInterval ? clearInterval : undefined
+      'undefined' !== typeof clearInterval ? clearInterval : null
     );
   }, []);
 
@@ -307,7 +307,7 @@ export function useSSRSafeDate() {
   const [dateObj, setDateObj] = useState<Date | null>(undefined);
 
   useEffect(() => {
-    setDateObj('undefined' !== typeof Date ? new Date() : undefined);
+    setDateObj('undefined' !== typeof Date ? new Date() : null);
   }, []);
 
   return dateObj;
@@ -318,7 +318,7 @@ export function useMath() {
   const [mathObj, setMathObj] = useState<Math | null>(undefined);
 
   useEffect(() => {
-    setMathObj('undefined' !== typeof Math ? Math : undefined);
+    setMathObj('undefined' !== typeof Math ? Math : null);
   }, []);
 
   return mathObj;
@@ -329,7 +329,7 @@ export function useJSON() {
   const [jsonObj, setJsonObj] = useState<JSON | null>(undefined);
 
   useEffect(() => {
-    setJsonObj('undefined' !== typeof JSON ? JSON : undefined);
+    setJsonObj('undefined' !== typeof JSON ? JSON : null);
   }, []);
 
   return jsonObj;
@@ -340,7 +340,7 @@ export function useConsole() {
   const [consoleObj, setConsoleObj] = useState<Console | null>(undefined);
 
   useEffect(() => {
-    setConsoleObj('undefined' !== typeof console ? console : undefined);
+    setConsoleObj('undefined' !== typeof console ? console : null);
   }, []);
 
   return consoleObj;
@@ -353,7 +353,7 @@ export function useProcess() {
   );
 
   useEffect(() => {
-    setProcessObj('undefined' !== typeof process ? process : undefined);
+    setProcessObj('undefined' !== typeof process ? process : null);
   }, []);
 
   return processObj;
@@ -364,7 +364,7 @@ export function useEnvironment() {
   const [env, setEnv] = useState<NodeJS.ProcessEnv | null>(undefined);
 
   useEffect(() => {
-    setEnv('undefined' !== typeof process ? process.env : undefined);
+    setEnv('undefined' !== typeof process ? process.env : null);
   }, []);
 
   return env;
@@ -377,7 +377,7 @@ export function useGlobal() {
   );
 
   useEffect(() => {
-    setGlobalObj('undefined' !== typeof globalThis ? globalThis : undefined);
+    setGlobalObj('undefined' !== typeof globalThis ? globalThis : null);
   }, []);
 
   return globalObj;
@@ -388,7 +388,7 @@ export function useBuffer() {
   const [bufferObj, setBufferObj] = useState<typeof Buffer | null>(undefined);
 
   useEffect(() => {
-    setBufferObj('undefined' !== typeof Buffer ? Buffer : undefined);
+    setBufferObj('undefined' !== typeof Buffer ? Buffer : null);
   }, []);
 
   return bufferObj;
@@ -399,7 +399,7 @@ export function useURL() {
   const [urlObj, setUrlObj] = useState<typeof URL | null>(undefined);
 
   useEffect(() => {
-    setUrlObj('undefined' !== typeof URL ? URL : undefined);
+    setUrlObj('undefined' !== typeof URL ? URL : null);
   }, []);
 
   return urlObj;
@@ -413,7 +413,7 @@ export function useURLSearchParams() {
 
   useEffect(() => {
     setUrlSearchParamsObj(
-      'undefined' !== typeof URLSearchParams ? URLSearchParams : undefined
+      'undefined' !== typeof URLSearchParams ? URLSearchParams : null
     );
   }, []);
 
@@ -427,7 +427,7 @@ export function useFormData() {
   );
 
   useEffect(() => {
-    setFormDataObj('undefined' !== typeof FormData ? FormData : undefined);
+    setFormDataObj('undefined' !== typeof FormData ? FormData : null);
   }, []);
 
   return formDataObj;
@@ -440,7 +440,7 @@ export function useHeaders() {
   );
 
   useEffect(() => {
-    setHeadersObj('undefined' !== typeof Headers ? Headers : undefined);
+    setHeadersObj('undefined' !== typeof Headers ? Headers : null);
   }, []);
 
   return headersObj;
@@ -453,7 +453,7 @@ export function useResponse() {
   );
 
   useEffect(() => {
-    setResponseObj('undefined' !== typeof Response ? Response : undefined);
+    setResponseObj('undefined' !== typeof Response ? Response : null);
   }, []);
 
   return responseObj;
@@ -466,7 +466,7 @@ export function useRequest() {
   );
 
   useEffect(() => {
-    setRequestObj('undefined' !== typeof Request ? Request : undefined);
+    setRequestObj('undefined' !== typeof Request ? Request : null);
   }, []);
 
   return requestObj;
@@ -479,7 +479,7 @@ export function useWebSocket() {
   );
 
   useEffect(() => {
-    setWebSocketObj('undefined' !== typeof WebSocket ? WebSocket : undefined);
+    setWebSocketObj('undefined' !== typeof WebSocket ? WebSocket : null);
   }, []);
 
   return webSocketObj;
@@ -490,7 +490,7 @@ export function useWorker() {
   const [workerObj, setWorkerObj] = useState<typeof Worker | null>(undefined);
 
   useEffect(() => {
-    setWorkerObj('undefined' !== typeof Worker ? Worker : undefined);
+    setWorkerObj('undefined' !== typeof Worker ? Worker : null);
   }, []);
 
   return workerObj;
@@ -504,7 +504,7 @@ export function useSharedWorker() {
 
   useEffect(() => {
     setSharedWorkerObj(
-      'undefined' !== typeof SharedWorker ? SharedWorker : undefined
+      'undefined' !== typeof SharedWorker ? SharedWorker : null
     );
   }, []);
 
@@ -519,7 +519,7 @@ export function useMessageChannel() {
 
   useEffect(() => {
     setMessageChannelObj(
-      'undefined' !== typeof MessageChannel ? MessageChannel : undefined
+      'undefined' !== typeof MessageChannel ? MessageChannel : null
     );
   }, []);
 
@@ -534,7 +534,7 @@ export function useBroadcastChannel() {
 
   useEffect(() => {
     setBroadcastChannelObj(
-      'undefined' !== typeof BroadcastChannel ? BroadcastChannel : undefined
+      'undefined' !== typeof BroadcastChannel ? BroadcastChannel : null
     );
   }, []);
 
@@ -549,7 +549,7 @@ export function useCustomEvent() {
 
   useEffect(() => {
     setCustomEventObj(
-      'undefined' !== typeof CustomEvent ? CustomEvent : undefined
+      'undefined' !== typeof CustomEvent ? CustomEvent : null
     );
   }, []);
 
@@ -564,7 +564,7 @@ export function useEventTarget() {
 
   useEffect(() => {
     setEventTargetObj(
-      'undefined' !== typeof EventTarget ? EventTarget : undefined
+      'undefined' !== typeof EventTarget ? EventTarget : null
     );
   }, []);
 
@@ -576,7 +576,7 @@ export function useEvent() {
   const [eventObj, setEventObj] = useState<typeof Event | null>(undefined);
 
   useEffect(() => {
-    setEventObj('undefined' !== typeof Event ? Event : undefined);
+    setEventObj('undefined' !== typeof Event ? Event : null);
   }, []);
 
   return eventObj;
@@ -587,7 +587,7 @@ export function useError() {
   const [errorObj, setErrorObj] = useState<typeof Error | null>(undefined);
 
   useEffect(() => {
-    setErrorObj('undefined' !== typeof Error ? Error : undefined);
+    setErrorObj('undefined' !== typeof Error ? Error : null);
   }, []);
 
   return errorObj;
@@ -600,7 +600,7 @@ export function useTypeError() {
   );
 
   useEffect(() => {
-    setTypeErrorObj('undefined' !== typeof TypeError ? TypeError : undefined);
+    setTypeErrorObj('undefined' !== typeof TypeError ? TypeError : null);
   }, []);
 
   return typeErrorObj;
@@ -614,7 +614,7 @@ export function useRangeError() {
 
   useEffect(() => {
     setRangeErrorObj(
-      'undefined' !== typeof RangeError ? RangeError : undefined
+      'undefined' !== typeof RangeError ? RangeError : null
     );
   }, []);
 
@@ -629,7 +629,7 @@ export function useReferenceError() {
 
   useEffect(() => {
     setReferenceErrorObj(
-      'undefined' !== typeof ReferenceError ? ReferenceError : undefined
+      'undefined' !== typeof ReferenceError ? ReferenceError : null
     );
   }, []);
 
@@ -644,7 +644,7 @@ export function useSyntaxError() {
 
   useEffect(() => {
     setSyntaxErrorObj(
-      'undefined' !== typeof SyntaxError ? SyntaxError : undefined
+      'undefined' !== typeof SyntaxError ? SyntaxError : null
     );
   }, []);
 
@@ -658,7 +658,7 @@ export function useURIError() {
   );
 
   useEffect(() => {
-    setUriErrorObj('undefined' !== typeof URIError ? URIError : undefined);
+    setUriErrorObj('undefined' !== typeof URIError ? URIError : null);
   }, []);
 
   return uriErrorObj;
@@ -671,7 +671,7 @@ export function useEvalError() {
   );
 
   useEffect(() => {
-    setEvalErrorObj('undefined' !== typeof EvalError ? EvalError : undefined);
+    setEvalErrorObj('undefined' !== typeof EvalError ? EvalError : null);
   }, []);
 
   return evalErrorObj;
@@ -685,7 +685,7 @@ export function useAggregateError() {
     setAggregateErrorObj(
       'undefined' !== typeof globalThis && 'AggregateError' in globalThis
         ? (globalThis as any).AggregateError
-        : undefined
+        : null
     );
   }, []);
 
@@ -700,7 +700,7 @@ export function useInternalError() {
     setInternalErrorObj(
       'undefined' !== typeof globalThis && 'InternalError' in globalThis
         ? (globalThis as any).InternalError
-        : undefined
+        : null
     );
   }, []);
 
@@ -714,7 +714,7 @@ export function usePromise() {
   );
 
   useEffect(() => {
-    setPromiseObj('undefined' !== typeof Promise ? Promise : undefined);
+    setPromiseObj('undefined' !== typeof Promise ? Promise : null);
   }, []);
 
   return promiseObj;
@@ -725,7 +725,7 @@ export function useSymbol() {
   const [symbolObj, setSymbolObj] = useState<typeof Symbol | null>(undefined);
 
   useEffect(() => {
-    setSymbolObj('undefined' !== typeof Symbol ? Symbol : undefined);
+    setSymbolObj('undefined' !== typeof Symbol ? Symbol : null);
   }, []);
 
   return symbolObj;
@@ -736,7 +736,7 @@ export function useBigInt() {
   const [bigIntObj, setBigIntObj] = useState<typeof BigInt | null>(undefined);
 
   useEffect(() => {
-    setBigIntObj('undefined' !== typeof BigInt ? BigInt : undefined);
+    setBigIntObj('undefined' !== typeof BigInt ? BigInt : null);
   }, []);
 
   return bigIntObj;
@@ -747,7 +747,7 @@ export function useProxy() {
   const [proxyObj, setProxyObj] = useState<typeof Proxy | null>(undefined);
 
   useEffect(() => {
-    setProxyObj('undefined' !== typeof Proxy ? Proxy : undefined);
+    setProxyObj('undefined' !== typeof Proxy ? Proxy : null);
   }, []);
 
   return proxyObj;
@@ -760,7 +760,7 @@ export function useReflect() {
   );
 
   useEffect(() => {
-    setReflectObj('undefined' !== typeof Reflect ? Reflect : undefined);
+    setReflectObj('undefined' !== typeof Reflect ? Reflect : null);
   }, []);
 
   return reflectObj;
@@ -771,7 +771,7 @@ export function useIntl() {
   const [intlObj, setIntlObj] = useState<typeof Intl | null>(undefined);
 
   useEffect(() => {
-    setIntlObj('undefined' !== typeof Intl ? Intl : undefined);
+    setIntlObj('undefined' !== typeof Intl ? Intl : null);
   }, []);
 
   return intlObj;
@@ -782,7 +782,7 @@ export function useDate() {
   const [dateObj, setDateObj] = useState<Date | null>(undefined);
 
   useEffect(() => {
-    setDateObj('undefined' !== typeof Date ? new Date() : undefined);
+    setDateObj('undefined' !== typeof Date ? new Date() : null);
   }, []);
 
   return dateObj;
@@ -793,7 +793,7 @@ export function useRegExp() {
   const [regExpObj, setRegExpObj] = useState<typeof RegExp | null>(undefined);
 
   useEffect(() => {
-    setRegExpObj('undefined' !== typeof RegExp ? RegExp : undefined);
+    setRegExpObj('undefined' !== typeof RegExp ? RegExp : null);
   }, []);
 
   return regExpObj;
@@ -804,7 +804,7 @@ export function useArray() {
   const [arrayObj, setArrayObj] = useState<typeof Array | null>(undefined);
 
   useEffect(() => {
-    setArrayObj('undefined' !== typeof Array ? Array : undefined);
+    setArrayObj('undefined' !== typeof Array ? Array : null);
   }, []);
 
   return arrayObj;
@@ -815,7 +815,7 @@ export function useObject() {
   const [objectObj, setObjectObj] = useState<typeof Object | null>(undefined);
 
   useEffect(() => {
-    setObjectObj('undefined' !== typeof Object ? Object : undefined);
+    setObjectObj('undefined' !== typeof Object ? Object : null);
   }, []);
 
   return objectObj;
@@ -826,7 +826,7 @@ export function useString() {
   const [stringObj, setStringObj] = useState<typeof String | null>(undefined);
 
   useEffect(() => {
-    setStringObj('undefined' !== typeof String ? String : undefined);
+    setStringObj('undefined' !== typeof String ? String : null);
   }, []);
 
   return stringObj;
@@ -837,7 +837,7 @@ export function useNumber() {
   const [numberObj, setNumberObj] = useState<typeof Number | null>(undefined);
 
   useEffect(() => {
-    setNumberObj('undefined' !== typeof Number ? Number : undefined);
+    setNumberObj('undefined' !== typeof Number ? Number : null);
   }, []);
 
   return numberObj;
@@ -850,7 +850,7 @@ export function useBoolean() {
   );
 
   useEffect(() => {
-    setBooleanObj('undefined' !== typeof Boolean ? Boolean : undefined);
+    setBooleanObj('undefined' !== typeof Boolean ? Boolean : null);
   }, []);
 
   return booleanObj;
@@ -863,7 +863,7 @@ export function useFunction() {
   );
 
   useEffect(() => {
-    setFunctionObj('undefined' !== typeof Function ? Function : undefined);
+    setFunctionObj('undefined' !== typeof Function ? Function : null);
   }, []);
 
   return functionObj;
@@ -874,7 +874,7 @@ export function useMap() {
   const [mapObj, setMapObj] = useState<typeof Map | null>(undefined);
 
   useEffect(() => {
-    setMapObj('undefined' !== typeof Map ? Map : undefined);
+    setMapObj('undefined' !== typeof Map ? Map : null);
   }, []);
 
   return mapObj;

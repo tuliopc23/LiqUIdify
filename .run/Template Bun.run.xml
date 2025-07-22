@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="BunRunConfiguration" editBeforeRun="true" focusToolWindowBeforeRun="true" singleton="false">
+    <option name="applicationParameters">
+      <list>
+        <option value="$AffectedModuleNames$" />
+      </list>
+    </option>
+    <option name="runtimeParameters">
+      <list>
+        <option value="$AffectedModuleNames$" />
+      </list>
+    </option>
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -163,7 +163,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 
     // Handle date selection
     const handleDateSelect = (date: Date) => {
-      if (isDateDisabled(date)) {return undefined;}
+      if (isDateDisabled(date)) {return;}
 
       let newDate = new Date(date);
 

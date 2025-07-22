@@ -54,9 +54,9 @@ export const createCompoundComponentWithContext = <
   defaultValue: T
 ) => {
   return {
-    Provider: undefined as any,
+    Provider: null as any,
     useContext: () => defaultValue,
-    Context: undefined as any,
+    Context: null as any,
   };
 };
 
@@ -69,7 +69,7 @@ export const createRenderPropComponent = <T extends Record<string, any>>(
   _useLogic: () => T
 ) => {
   // Type-only export for patterns
-  return undefined;
+  return null;
 };
 
 // Higher-order component pattern
@@ -95,7 +95,7 @@ export const createSlotComponent = (
   _slots: Record<string, React.ComponentType<any>>
 ) => {
   // Type-only export for patterns
-  return undefined;
+  return null;
 };
 
 // State reducer pattern

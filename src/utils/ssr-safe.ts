@@ -18,7 +18,7 @@ export const isClient = !isServer;
 export const safeWindow = new Proxy({} as Window, {
   get: (target, prop) => {
     if (isServer) {
-      return undefined;
+      return null;
     }
     return window[prop as keyof Window];
   },
@@ -30,7 +30,7 @@ export const safeWindow = new Proxy({} as Window, {
 export const safeDocument = new Proxy({} as Document, {
   get: (target, prop) => {
     if (isServer) {
-      return undefined;
+      return null;
     }
     return document[prop as keyof Document];
   },
@@ -65,7 +65,7 @@ export const storage = {
   },
   set: (key: string, value: string): void => {
     if (isServer) {
-      return undefined;
+      return;
     }
     try {
       localStorage.setItem(key, value);
@@ -75,7 +75,7 @@ export const storage = {
   },
   remove: (key: string): void => {
     if (isServer) {
-      return undefined;
+      return;
     }
     try {
       localStorage.removeItem(key);
@@ -93,11 +93,11 @@ export const useMediaQuery = (query: string): boolean => {
 
   useEffect(() => {
     if (isServer) {
-      return undefined;
+      return;
     }
 
     const mediaQuery =
-      'undefined' !== typeof window ? window.matchMedia(query) : undefined;
+      'undefined' !== typeof window ? window.matchMedia(query) : null;
     if (mediaQuery) {
       setMatches(mediaQuery.matches);
 

@@ -25,9 +25,9 @@ import {
 export const useWindowDimensions = () => {
   const [dimensions, setDimensions] = useState(getWindowDimensions());
 
-  useEffect(() => {
+  useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const handleResize = () => {
@@ -50,7 +50,7 @@ export const useScrollPosition = () => {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const handleScroll = () => {
@@ -76,12 +76,12 @@ export const useMediaQuery = (query: string): boolean => {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const win = safeWindow();
     if (!win?.matchMedia) {
-      return undefined;
+      return;
     }
 
     const mediaQuery = win.matchMedia(query);
@@ -141,7 +141,7 @@ export const useLocalStorage = <T,>(
   // Sync state when storage changes in other tabs
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const handleStorageChange = (e: StorageEvent) => {
@@ -231,7 +231,7 @@ export const useDynamicImport = <T,>(
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     let cancelled = false;
@@ -279,7 +279,7 @@ export const useUserPreferences = () => {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     setPreferences({
@@ -289,7 +289,7 @@ export const useUserPreferences = () => {
 
     const win = safeWindow();
     if (!win?.matchMedia) {
-      return undefined;
+      return;
     }
 
     const motionQuery = win.matchMedia('(prefers-reduced-motion: reduce)');
@@ -344,12 +344,12 @@ export const useIntersectionObserver = (
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const element = elementRef.current;
     if (!element) {
-      return undefined;
+      return;
     }
 
     const observer = safeIntersectionObserver(
@@ -380,12 +380,12 @@ export const useResizeObserver = (callback: ResizeObserverCallback) => {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const element = elementRef.current;
     if (!element) {
-      return undefined;
+      return;
     }
 
     const observer = safeResizeObserver((...args) =>
@@ -419,12 +419,12 @@ export const useMutationObserver = (
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const element = elementRef.current;
     if (!element) {
-      return undefined;
+      return;
     }
 
     const observer = safeMutationObserver((...args) =>
@@ -449,12 +449,12 @@ export const useDocumentVisibility = (): boolean => {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const doc = safeDocument();
     if (!doc) {
-      return undefined;
+      return;
     }
 
     const handleVisibilityChange = () => {
@@ -482,12 +482,12 @@ export const useOnlineStatus = (): boolean => {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const nav = safeWindow()?.navigator;
     if (!nav) {
-      return undefined;
+      return;
     }
 
     setIsOnline(nav.onLine);

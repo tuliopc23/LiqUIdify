@@ -42,7 +42,7 @@ export function withAnimationFallback(
 
     useEffect(() => {
       if (!respectReducedMotion) {
-        return undefined;
+        return null;
       }
 
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -63,7 +63,7 @@ export function withAnimationFallback(
           const connection = (navigator as any).connection;
           if (connection && connection.saveData) {
             setShouldAnimate(false);
-            return undefined;
+            return null;
           }
         }
 
@@ -72,7 +72,7 @@ export function withAnimationFallback(
           const deviceMemory = (navigator as any).deviceMemory;
           if (deviceMemory && 4 > deviceMemory) {
             setShouldAnimate(false);
-            return undefined;
+            return null;
           }
         }
 
@@ -81,7 +81,7 @@ export function withAnimationFallback(
           const cores = navigator.hardwareConcurrency;
           if (cores && 4 > cores) {
             setShouldAnimate(false);
-            return undefined;
+            return null;
           }
         }
       };

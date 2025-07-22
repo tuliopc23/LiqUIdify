@@ -74,12 +74,12 @@ export function parseColor(color: string): RGBColor | null {
     const h = parseInt(hslMatch[1]!, 10);
     const s = parseInt(hslMatch[2]!, 10) / 100;
     const l = parseInt(hslMatch[3]!, 10) / 100;
-    const a = hslMatch[4] ? parseFloat(hslMatch[4]) : undefined;
+    const a = hslMatch[4] ? parseFloat(hslMatch[4]) : null;
 
     return hslToRgb(h, s, l, a);
   }
 
-  return undefined;
+  return null;
 }
 
 /**
@@ -396,7 +396,7 @@ export const glassColors = {
  */
 export function getColorInfo(color: string): ColorInfo | null {
   const rgb = parseColor(color);
-  if (!rgb) {return undefined;}
+  if (!rgb) {return null;}
 
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
   const luminance = getLuminance(rgb);

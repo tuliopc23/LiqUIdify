@@ -33,7 +33,7 @@ export const SSRSafeWrapper: React.FC<SSRSafeWrapperProps> = ({
   }, []);
 
   if (isServer || !isMounted) {
-    return showFallback ? <>{fallback}</> : undefined;
+    return showFallback ? <>{fallback}</> : null;
   }
 
   return <>{children}</>;

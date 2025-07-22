@@ -201,8 +201,6 @@ export const GracefulAnimation: React.FC<GracefulAnimationProps> = ({
     } else {
       setIsVisible(true);
     }
-
-    return undefined;
   }, [disabled, prefersReducedMotion, shouldUseFallback, delay]);
 
   const animationStyle: React.CSSProperties = {

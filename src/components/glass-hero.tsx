@@ -135,7 +135,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           animation: !backgroundImage
             ? 'gradientShift 15s ease infinite'
             : undefined,
-        }}
+        } as React.CSSProperties}
         {...props}
       >
         {/* Background Video */}

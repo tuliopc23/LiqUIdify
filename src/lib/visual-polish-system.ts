@@ -270,13 +270,13 @@ export class VisualPolishManager {
     preset: keyof typeof MICRO_INTERACTION_PRESETS | MicroInteraction
   ): void {
     if (!this.config.enableMicroInteractions) {
-      return undefined;
+      return null;
     }
 
     if ('string' === typeof preset) {
       const presetConfig = MICRO_INTERACTION_PRESETS[preset];
       if (!presetConfig) {
-        return undefined;
+        return null;
       }
 
       const interaction: MicroInteraction = {
@@ -436,16 +436,16 @@ export class VisualPolishManager {
     threshold: number = 0.01
   ): void {
     if (!this.config.enableVisualRegression) {
-      return undefined;
+      return null;
     }
 
     const test: VisualRegressionTest = {
       id,
       name,
       element,
-      baseline: undefined,
+      baseline: null,
       threshold,
-      lastResult: undefined,
+      lastResult: null,
     };
 
     this.regressionTests.set(id, test);
@@ -460,7 +460,7 @@ export class VisualPolishManager {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       if (!ctx) {
-        return undefined;
+        return null;
       }
 
       const rect = test.element.getBoundingClientRect();
@@ -513,7 +513,7 @@ export class VisualPolishManager {
     expectedValue: string
   ): void {
     if (!this.config.enableCrossBrowserTesting) {
-      return undefined;
+      return null;
     }
 
     const test: CrossBrowserTest = {
@@ -727,7 +727,7 @@ export function useVisualPolish(config: Partial<PolishConfig> = {}) {
 
     return () => {
       polishManagerRef.current?.destroy();
-      polishManagerRef.current = undefined;
+      polishManagerRef.current = null;
     };
   }, [config]);
 

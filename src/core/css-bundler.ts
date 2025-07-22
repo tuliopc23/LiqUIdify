@@ -240,7 +240,7 @@ export class CSSBundler {
       );
     }
 
-    const result = await postcss(plugins).process(css, { from: undefined });
+    const result = await postcss(plugins).process(css, { from: null });
     return result.css;
   }
 

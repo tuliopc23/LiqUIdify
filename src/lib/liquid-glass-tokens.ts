@@ -288,7 +288,7 @@ export const getToken = (path: string) => {
     if (current && 'object' === typeof current && key in current) {
       current = current[key];
     } else {
-      return undefined;
+      return null;
     }
   }
 
@@ -303,7 +303,7 @@ export const getThemeToken = (theme: 'light' | 'dark', path: string) => {
     if (current && 'object' === typeof current && key in current) {
       current = current[key];
     } else {
-      return undefined;
+      return null;
     }
   }
 

@@ -75,10 +75,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       if ((e.metaKey || e.ctrlKey) && 'k' === e.key) {
         e.preventDefault();
         setIsOpen(true);
-        return undefined;
+        return;
       }
 
-      if (!isOpen) {return undefined;}
+      if (!isOpen) {return;}
 
       switch (e.key) {
         case 'ArrowDown':
@@ -208,7 +208,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   // SSR safety check
   if ('undefined' === typeof window) {
-    return undefined;
+    return null;
   }
 
   return createPortal(

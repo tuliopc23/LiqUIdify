@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="TypeScriptProgramRunner" factoryName="TypeScript" editBeforeRun="true" focusToolWindowBeforeRun="true" singleton="false">
+    <option name="interpreterRef" value="project" />
+    <option name="tsnodePackageRef" value="$PROJECT_DIR$/node_modules/tsx" />
+    <option name="enabledTsNodeEsmLoader" value="true" />
+    <option name="interpreterOptions" value="" />
+    <option name="workingDirectory" value="" />
+    <option name="tsconfigFile" value="" />
+    <option name="extraTypeScriptOptions" value="" />
+    <option name="scriptName" value="" />
+    <option name="programParameters" value="" />
+    <module name="" />
+    <option name="tsnodePackage" value="~/LiqUIdify/node_modules/tsx" />
+    <method v="2" />
+  </configuration>
+</component>

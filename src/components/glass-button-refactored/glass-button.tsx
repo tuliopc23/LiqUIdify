@@ -42,23 +42,23 @@ const useButtonBusinessLogic = createBusinessLogicHook<ButtonState, GlassButtonP
   // Actions factory
   (_state: ButtonState, setState: React.Dispatch<React.SetStateAction<ButtonState>>, props: GlassButtonProps) => ({
     handlePress: () => {
-      if (props.disabled || props.loading) {return undefined;}
+      if (props.disabled || props.loading) {return;}
       setState((prev: ButtonState) => ({ ...prev, isPressed: true }));
       setTimeout(() => setState((prev: ButtonState) => ({ ...prev, isPressed: false })), 150);
     },
     
     handleHover: (isHovered: boolean) => {
-      if (props.disabled) {return undefined;}
+      if (props.disabled) {return;}
       setState((prev: ButtonState) => ({ ...prev, isHovered }));
     },
     
     handleFocus: (isFocused: boolean) => {
-      if (props.disabled) {return undefined;}
+      if (props.disabled) {return;}
       setState((prev: ButtonState) => ({ ...prev, isFocused }));
     },
     
     handleRipple: () => {
-      if (props.disabled || props.loading) {return undefined;}
+      if (props.disabled || props.loading) {return;}
       setState((prev: ButtonState) => ({ ...prev, rippleCount: prev.rippleCount + 1 }));
     },
   })
@@ -226,7 +226,7 @@ export const GlassButton = React.memo(forwardRef<HTMLButtonElement, GlassButtonP
     
     // Event handlers with business logic
     const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled || loading) {return undefined;}
+      if (disabled || loading) return;
       
       actions.handlePress();
       actions.handleRipple();
@@ -244,7 +244,7 @@ export const GlassButton = React.memo(forwardRef<HTMLButtonElement, GlassButtonP
     }, [disabled, loading, actions, ripple, triggerRipple, transitionToState, onClick]);
     
     const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled) {return undefined;}
+      if (disabled) return;
       
       actions.handleHover(true);
       
@@ -254,7 +254,7 @@ export const GlassButton = React.memo(forwardRef<HTMLButtonElement, GlassButtonP
     }, [disabled, actions, transitionToState, onMouseEnter]);
     
     const handleMouseLeave = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled) {return undefined;}
+      if (disabled) return;
       
       actions.handleHover(false);
       
@@ -264,7 +264,7 @@ export const GlassButton = React.memo(forwardRef<HTMLButtonElement, GlassButtonP
     }, [disabled, actions, transitionToState, onMouseLeave]);
     
     const handleFocus = useCallback((event: React.FocusEvent<HTMLButtonElement>) => {
-      if (disabled) {return undefined;}
+      if (disabled) return;
       
       actions.handleFocus(true);
       
@@ -274,7 +274,7 @@ export const GlassButton = React.memo(forwardRef<HTMLButtonElement, GlassButtonP
     }, [disabled, actions, transitionToState, onFocus]);
     
     const handleBlur = useCallback((event: React.FocusEvent<HTMLButtonElement>) => {
-      if (disabled) {return undefined;}
+      if (disabled) return;
       
       actions.handleFocus(false);
       
@@ -312,7 +312,7 @@ export const GlassButton = React.memo(forwardRef<HTMLButtonElement, GlassButtonP
       glassClasses,
       
       // Size classes
-      responsiveSize[size],
+      size ? responsiveSize(size) : '',
       touchTarget.comfortable,
       
       // Variant classes

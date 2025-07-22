@@ -59,7 +59,7 @@ export function LiquidGlassProvider({
       setContentAnalysis(analysis);
 
       if (!merged.adaptToContent) {
-        return undefined;
+        return null;
       }
 
       const root = document.documentElement;
@@ -147,7 +147,7 @@ export const useContentAwareGlass = (
 
   const analyzeContent = useCallback(async () => {
     if (!contentRef.current || !adaptToContent) {
-      return undefined;
+      return null;
     }
 
     try {
@@ -156,7 +156,7 @@ export const useContentAwareGlass = (
       const ctx = canvas.getContext('2d');
 
       if (!ctx) {
-        return undefined;
+        return null;
       }
 
       // Create a temporary canvas to analyze the content
@@ -188,14 +188,14 @@ export const useContentAwareGlass = (
 
   useEffect(() => {
     if (!adaptToContent) {
-      return undefined;
+      return null;
     }
     if (
       'undefined' === typeof window ||
       !('MutationObserver' in window) ||
       !('ResizeObserver' in window)
     ) {
-      return undefined;
+      return null;
     }
 
     const observer = new MutationObserver(analyzeContent);
@@ -229,7 +229,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
     if ('development' === process.env.NODE_ENV) {
       console.warn('analyzeColor: Invalid color string provided:', colorString);
     }
-    return undefined;
+    return null;
   }
 
   try {
@@ -263,7 +263,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
       if ('development' === process.env.NODE_ENV) {
         console.warn('analyzeColor: Invalid RGB values:', { r, g, b });
       }
-      return undefined;
+      return null;
     }
 
     // Calculate brightness (luminance)

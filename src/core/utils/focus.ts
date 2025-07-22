@@ -26,7 +26,7 @@ export const createFocusTrap = (element: HTMLElement) => {
   const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
 
   const handleTabKey = (e: KeyboardEvent) => {
-    if ('Tab' !== e.key) {return undefined;}
+    if ('Tab' !== e.key) {return null;}
 
     if (e.shiftKey) {
       if (document.activeElement === firstElement) {

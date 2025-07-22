@@ -71,7 +71,7 @@ export class PerformanceMonitor {
 
   private initializeObservers(): void {
     if ('undefined' === typeof window) {
-      return undefined;
+      return;
     }
 
     // Core Web Vitals observers
@@ -86,7 +86,7 @@ export class PerformanceMonitor {
 
   private observeLCP(): void {
     if (!('PerformanceObserver' in window)) {
-      return undefined;
+      return;
     }
 
     const observer = new PerformanceObserver((list) => {
@@ -112,7 +112,7 @@ export class PerformanceMonitor {
 
   private observeFID(): void {
     if (!('PerformanceObserver' in window)) {
-      return undefined;
+      return;
     }
 
     const observer = new PerformanceObserver((list) => {
@@ -140,7 +140,7 @@ export class PerformanceMonitor {
 
   private observeCLS(): void {
     if (!('PerformanceObserver' in window)) {
-      return undefined;
+      return;
     }
 
     let clsValue = 0;
@@ -179,7 +179,7 @@ export class PerformanceMonitor {
 
   private observeFCP(): void {
     if (!('PerformanceObserver' in window)) {
-      return undefined;
+      return;
     }
 
     const observer = new PerformanceObserver((list) => {
@@ -201,7 +201,7 @@ export class PerformanceMonitor {
 
   private observeMemoryUsage(): void {
     if ('undefined' === typeof window || !('performance' in window)) {
-      return undefined;
+      return;
     }
 
     const checkMemory = () => {
@@ -281,7 +281,7 @@ export class PerformanceMonitor {
     return new Promise((resolve) => {
       if ('undefined' === typeof window) {
         resolve(0);
-        return undefined;
+        return;
       }
 
       // Use Resource Timing API to get bundle size

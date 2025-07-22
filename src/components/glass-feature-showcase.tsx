@@ -110,7 +110,7 @@ const GlassFeatureShowcase = forwardRef<
           )}
           style={{
             transform: enableMagnetic ? transform : undefined,
-          }}
+          } as React.CSSProperties}
           whileHover={
             'floating' === variant ? { y: -8, scale: 1.02 } : { y: -4 }
           }

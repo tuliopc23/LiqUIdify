@@ -482,7 +482,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
         attempts++;
       }
 
-      return undefined;
+      return null;
     },
     [items, wrap]
   );

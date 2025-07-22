@@ -255,7 +255,7 @@ export class AccessibilityManager {
   private axeOptions: any;
   private contrastCache: Map<string, ContrastResult>;
   private validationCache: Map<HTMLElement, AccessibilityReport>;
-  private observer: MutationObserver | null = undefined;
+  private observer: MutationObserver | null = null;
 
   private constructor() {
     this.contrastCache = new Map();
@@ -526,7 +526,7 @@ export class AccessibilityManager {
           reason: `Unknown ARIA attribute: ${attrName}`,
           element,
         });
-        return undefined;
+        return null;
       }
 
       // Validate attribute value
@@ -581,7 +581,7 @@ export class AccessibilityManager {
         if (!element.hasAttribute(prop)) {
           suggestions.push({
             attribute: prop,
-            currentValue: undefined,
+            currentValue: null,
             suggestedValue: this.getSuggestedARIAValue(prop, element),
             reason: `Required attribute for role="${role}"`,
           });
@@ -599,7 +599,7 @@ export class AccessibilityManager {
             element.setAttribute(prop, value);
             autoCorrections.push({
               attribute: prop,
-              oldValue: undefined,
+              oldValue: null,
               newValue: value,
               applied: true,
             });
@@ -612,7 +612,7 @@ export class AccessibilityManager {
     if (this.isInteractive(element) && !this.hasAccessibleName(element)) {
       suggestions.push({
         attribute: 'aria-label',
-        currentValue: undefined,
+        currentValue: null,
         suggestedValue: this.generateAccessibleName(element),
         reason: 'Interactive element needs accessible name',
       });
@@ -631,7 +631,7 @@ export class AccessibilityManager {
    */
   enableRealTimeMonitoring(rootElement: HTMLElement = document.body): void {
     if (!this.observer) {
-      return undefined;
+      return null;
     }
 
     this.observer.observe(rootElement, {
@@ -821,7 +821,7 @@ export class AccessibilityManager {
       case 'label':
         return 'Add a label element or aria-label attribute';
       default:
-        return undefined;
+        return null;
     }
   }
 
@@ -930,8 +930,8 @@ class FocusTrap {
   private container: HTMLElement;
   private options: FocusOptions & { onDeactivate?: () => void };
   private active: boolean = false;
-  private firstFocusableElement: HTMLElement | null = undefined;
-  private lastFocusableElement: HTMLElement | null = undefined;
+  private firstFocusableElement: HTMLElement | null = null;
+  private lastFocusableElement: HTMLElement | null = null;
 
   constructor(
     container: HTMLElement,
@@ -944,7 +944,7 @@ class FocusTrap {
 
   activate(): void {
     if (this.active) {
-      return undefined;
+      return null;
     }
 
     this.active = true;
@@ -976,7 +976,7 @@ class FocusTrap {
 
   deactivate(): void {
     if (!this.active) {
-      return undefined;
+      return null;
     }
 
     this.active = false;
@@ -1009,14 +1009,14 @@ class FocusTrap {
 
   private handleKeyDown = (event: KeyboardEvent): void => {
     if (!this.active) {
-      return undefined;
+      return null;
     }
 
     if ('Tab' === event.key) {
       this.updateFocusableElements();
 
       if (!this.firstFocusableElement || !this.lastFocusableElement) {
-        return undefined;
+        return null;
       }
 
       if (
@@ -1039,7 +1039,7 @@ class FocusTrap {
 
   private handleClickOutside = (event: MouseEvent): void => {
     if (!this.active) {
-      return undefined;
+      return null;
     }
 
     const target = event.target as HTMLElement;

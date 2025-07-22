@@ -46,7 +46,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
   // Auto-generate skip links for landmarks
   useEffect(() => {
     if (!autoGenerate || providedLinks || !isClient) {
-      return undefined;
+      return;
     }
 
     const generateSkipLinks = () => {
@@ -103,7 +103,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
         }
 
         const labelledById = form.getAttribute('aria-labelledby');
-        const labelElement = labelledById ? document.getElementById(labelledById) : undefined;
+        const labelElement = labelledById ? document.getElementById(labelledById) : null;
         const formName = 
           form.getAttribute('aria-label') ||
           labelElement?.textContent ||
@@ -147,7 +147,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     event.preventDefault();
 
     if (!isClient) {
-      return undefined;
+      return;
     }
 
     let targetElement: HTMLElement | null;
@@ -315,11 +315,11 @@ export function useSkipNavigation() {
 
   const skipTo = (id: string) => {
     if ('undefined' === typeof window || 'undefined' === typeof document) {
-      return undefined;
+      return;
     }
 
     const link = skipLinks.find(l => l.id === id);
-    if (!link) {return undefined;}
+    if (!link) {return;}
 
     // Use the same logic as handleSkipTo
     let targetElement: HTMLElement | null;

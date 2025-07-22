@@ -143,11 +143,11 @@ export class GlassPerformanceMonitor {
   private lastFrameTime: number = 0;
   private frameCount: number = 0;
   private isMonitoring: boolean = false;
-  private animationFrame: number | null = undefined;
+  private animationFrame: number | null = null;
 
   start(): void {
     if (this.isMonitoring) {
-      return undefined;
+      return;
     }
 
     this.isMonitoring = true;
@@ -160,13 +160,13 @@ export class GlassPerformanceMonitor {
     this.isMonitoring = false;
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = undefined;
+      this.animationFrame = null;
     }
   }
 
   private monitor = (): void => {
     if (!this.isMonitoring) {
-      return undefined;
+      return;
     }
 
     const now = performance.now();
@@ -260,9 +260,9 @@ export class GlassAnimationScheduler {
   private tasks: Map<string, AnimationTask> = new Map();
   private config: OptimizationConfig;
   private monitor: GlassPerformanceMonitor;
-  private animationFrame: number | null = undefined;
+  private animationFrame: number | null = null;
   private isRunning: boolean = false;
-  private intersectionObserver: IntersectionObserver | null = undefined;
+  private intersectionObserver: IntersectionObserver | null = null;
   private reducedMotion: boolean = false;
 
   constructor(config: OptimizationConfig = DEFAULT_PERFORMANCE_CONFIG) {
@@ -277,7 +277,7 @@ export class GlassAnimationScheduler {
       !this.config.enableCulling ||
       'undefined' === typeof IntersectionObserver
     ) {
-      return undefined;
+      return;
     }
 
     this.intersectionObserver = new IntersectionObserver(
@@ -302,7 +302,7 @@ export class GlassAnimationScheduler {
 
   private checkReducedMotion(): void {
     if (!this.config.enableReducedMotion || 'undefined' === typeof window) {
-      return undefined;
+      return;
     }
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -316,13 +316,13 @@ export class GlassAnimationScheduler {
   addTask(task: AnimationTask): void {
     // Skip animations if reduced motion is preferred
     if (this.reducedMotion) {
-      return undefined;
+      return;
     }
 
     // Check performance budget
     if (this.tasks.size >= this.config.performanceBudget.maxAnimations) {
       console.warn('Animation budget exceeded, skipping animation');
-      return undefined;
+      return;
     }
 
     this.tasks.set(task.id, task);
@@ -367,7 +367,7 @@ export class GlassAnimationScheduler {
 
   private start(): void {
     if (this.isRunning) {
-      return undefined;
+      return;
     }
 
     this.isRunning = true;
@@ -381,13 +381,13 @@ export class GlassAnimationScheduler {
 
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = undefined;
+      this.animationFrame = null;
     }
   }
 
   private tick = (timestamp: number = performance.now()): void => {
     if (!this.isRunning) {
-      return undefined;
+      return;
     }
 
     const frameStartTime = performance.now();
@@ -440,12 +440,12 @@ export class GlassAnimationScheduler {
     if (0.01 > visibilityRatio) {
       // Very small elements - skip every other frame
       if (0 === task.frameCount % 2) {
-        return undefined;
+        return;
       }
     } else if (0.05 > visibilityRatio) {
       // Small elements - reduce frame rate
       if (0 === task.frameCount % 1.5) {
-        return undefined;
+        return;
       }
     }
   }
@@ -467,7 +467,7 @@ export class GlassAnimationScheduler {
 
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
-      this.intersectionObserver = undefined;
+      this.intersectionObserver = null;
     }
 
     this.tasks.clear();
@@ -551,7 +551,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
 
     return () => {
       schedulerRef.current?.destroy();
-      schedulerRef.current = undefined;
+      schedulerRef.current = null;
     };
   }, []);
 
@@ -579,7 +579,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
       priority: number = 0
     ) => {
       if (!schedulerRef.current) {
-        return undefined;
+        return;
       }
 
       const task: AnimationTask = {

@@ -202,7 +202,6 @@ export function useHydrationSafe<T>(
 
       return () => clearTimeout(timer);
     }
-    return undefined;
   }, [isClient, clientValue, serverValue, delay, onMismatch, componentName]);
 
   return value;
@@ -217,7 +216,7 @@ export function useSSRSafeMediaQuery(query: string): boolean {
 
   useEffect(() => {
     if (!isClient) {
-      return undefined;
+      return;
     }
 
     const mediaQuery = window.matchMedia(query);
@@ -251,7 +250,7 @@ export function useNetworkStatus(): {
 
   useEffect(() => {
     if (!isClient) {
-      return undefined;
+      return;
     }
 
     // Update online status
@@ -306,7 +305,7 @@ export function useSSRSafeAnimation(
 
   useEffect(() => {
     if (!isClient || disabled) {
-      return undefined;
+      return;
     }
 
     let animationFrame: number;
@@ -354,7 +353,7 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
 
   useEffect(() => {
     if (!isClient) {
-      return undefined;
+      return;
     }
 
     observer.current = new IntersectionObserver(([entry]) => {
@@ -406,7 +405,7 @@ export function useSSRSafeResizeObserver<T extends HTMLElement>(
 
   useEffect(() => {
     if (!isClient) {
-      return undefined;
+      return;
     }
 
     observer.current = new ResizeObserver(([entry]) => {
@@ -446,7 +445,7 @@ export function useSSRSafeDocumentVisibility():
 
   useEffect(() => {
     if (!isClient) {
-      return undefined;
+      return;
     }
 
     const handleVisibilityChange = () => {
@@ -475,7 +474,7 @@ export function useSSRSafeFeatureDetection(feature: string): boolean {
 
   useEffect(() => {
     if (!isClient) {
-      return undefined;
+      return;
     }
 
     // Check for feature support

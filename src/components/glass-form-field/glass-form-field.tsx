@@ -116,7 +116,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         case 'warning':
           return <Info className="w-3 h-3 flex-shrink-0" />;
         default:
-          return undefined;
+          return null;
       }
     };
 
@@ -125,8 +125,8 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
       if (React.isValidElement(child)) {
         return React.cloneElement(child as any, {
           id: finalId,
-          'aria-describedby': message ? `${finalId}-message` : undefined,
-          'aria-invalid': error ? true : undefined,
+          'aria-describedby': message ? `${finalId}-message` : null,
+          'aria-invalid': error ? true : null,
           'aria-required': required,
           disabled,
           ...('object' === typeof child.props && null !== child.props

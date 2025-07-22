@@ -231,7 +231,7 @@ export const brandedUtils = {
     try {
       return createGlassColor(color);
     } catch {
-      return undefined;
+      return null;
     }
   },
 
@@ -248,7 +248,7 @@ export const brandedUtils = {
     try {
       return createAccessibleContrast(mockRatio);
     } catch {
-      return undefined;
+      return null;
     }
   },
 

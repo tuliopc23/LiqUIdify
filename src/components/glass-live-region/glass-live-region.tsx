@@ -112,14 +112,16 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 
   // Process queue
   const processQueue = useCallback(() => {
-    if (processingRef.current || 0 === announcementQueue.length) {return undefined;}
+    if (processingRef.current || 0 === announcementQueue.length) {
+      return;
+    }
 
     processingRef.current = true;
     const announcement = announcementQueue[0];
 
     if (!announcement) {
       processingRef.current = false;
-      return undefined;
+      return;
     }
 
     // Apply contextual prefix if enabled
@@ -413,7 +415,7 @@ class AnnouncementManager {
       const lastTime = this.dedupMap.get(dedupKey);
       const now = Date.now();
       if (lastTime && 1000 > now - lastTime) {
-        return undefined;
+        return;
       }
       this.dedupMap.set(dedupKey, now);
     }
@@ -438,7 +440,7 @@ class AnnouncementManager {
   }
 
   private async processQueue() {
-    if (this.processing || 0 === this.queue.length) {return undefined;}
+    if (this.processing || 0 === this.queue.length) {return;}
 
     this.processing = true;
     const announcement = this.queue.shift()!;

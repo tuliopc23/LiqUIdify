@@ -47,7 +47,7 @@ const createEnhancedGlassLayers = (children: React.ReactNode, options: any) => {
 
 const useEnhancedAppleLiquidGlass = (options: any) => {
   return {
-    containerRef: undefined,
+    containerRef: null,
     variant: { radius: 12 },
     isReady: true,
   };

@@ -26,7 +26,9 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const showTooltip = () => {
-    if (disabled) {return undefined;}
+    if (disabled) {
+      return;
+    }
 
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -45,7 +47,9 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
   };
 
   useEffect(() => {
-    if ('undefined' === typeof window) {return undefined;}
+    if ('undefined' === typeof window) {
+      return;
+    }
     if (isVisible && triggerRef.current && tooltipRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const tooltipRect = tooltipRef.current.getBoundingClientRect();
@@ -78,11 +82,15 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
         height: window.innerHeight,
       };
 
-      if (8 > left) {left = 8;}
+      if (8 > left) {
+        left = 8;
+      }
       if (left + tooltipRect.width > viewport.width - 8) {
         left = viewport.width - tooltipRect.width - 8;
       }
-      if (8 > top) {top = 8;}
+      if (8 > top) {
+        top = 8;
+      }
       if (top + tooltipRect.height > viewport.height - 8) {
         top = viewport.height - tooltipRect.height - 8;
       }
@@ -130,7 +138,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
         )}
       />
     </div>
-  ) : undefined;
+  ) : null;
 
   return (
     <>

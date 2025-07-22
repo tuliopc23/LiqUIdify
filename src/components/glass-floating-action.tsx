@@ -257,7 +257,7 @@ const GlassFloatingAction = forwardRef<
           )}
           style={{
             transform: enableMagnetic ? transform : undefined,
-          }}
+          } as React.CSSProperties}
           onClick={handleMainClick}
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}

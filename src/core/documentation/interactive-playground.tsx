@@ -210,7 +210,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       !config.accessibilityTests ||
       !previewRef.current
     ) {
-      return undefined;
+      return null;
     }
 
     const results: Record<string, { passed: boolean; message: string }> = {};
@@ -232,7 +232,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
   // Performance monitoring
   useEffect(() => {
-    if (!enablePerformanceMonitoring) {return undefined;}
+    if (!enablePerformanceMonitoring) {return null;}
 
     renderStartTime.current = performance.now();
     reRenderCount.current += 1;
@@ -255,7 +255,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       const timer = setTimeout(runA11yTests, 500);
       return () => clearTimeout(timer);
     }
-    return undefined;
+    return null;
   }, [currentProps, runA11yTests, enableA11yTesting]);
 
   // Copy code to clipboard

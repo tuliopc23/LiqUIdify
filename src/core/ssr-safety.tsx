@@ -61,7 +61,7 @@ export function SSRSafe({
   if (!isClient) {
     return fallback ? (
       <Component {...(props as any)}>{fallback}</Component>
-    ) : undefined;
+    ) : null;
   }
 
   return <Component {...(props as any)}>{children}</Component>;

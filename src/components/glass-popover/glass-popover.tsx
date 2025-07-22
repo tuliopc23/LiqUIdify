@@ -47,7 +47,9 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
   };
 
   useEffect(() => {
-    if ('undefined' === typeof window) {return undefined;}
+    if ('undefined' === typeof window) {
+      return;
+    }
     if (isOpen && triggerRef.current && popoverRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       const popoverRect = popoverRef.current.getBoundingClientRect();
@@ -166,14 +168,15 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscape);
-
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-        document.removeEventListener('keydown', handleEscape);
-      };
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
     }
 
-    return undefined;
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, [isOpen, closeOnClickOutside, closeOnEscape, setOpen]);
 
   const popover = isOpen ? (
@@ -192,7 +195,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     >
       {content}
     </div>
-  ) : undefined;
+  ) : null;
 
   return (
     <>

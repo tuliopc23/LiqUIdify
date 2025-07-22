@@ -5,7 +5,7 @@ import postcssPresetEnv from 'postcss-preset-env';
 import tailwindcssPostcss from '@tailwindcss/postcss';
 
 // Determine if we're in optimization mode
-const isOptimized = process.env.OPTIMIZE_CSS === 'true';
+const isOptimized = 'true' === process.env.OPTIMIZE_CSS;
 
 // Custom PostCSS plugin for Glass UI optimizations
 const glassUIOptimizer = () => {
@@ -42,7 +42,7 @@ const glassUIOptimizer = () => {
       root.walkDecls('backdrop-filter', (decl) => {
         // Add will-change for better performance
         const rule = decl.parent;
-        if (!rule.some(d => d.prop === 'will-change')) {
+        if (!rule.some(d => 'will-change' === d.prop)) {
           rule.append({
             prop: 'will-change',
             value: 'backdrop-filter'
@@ -55,7 +55,7 @@ const glassUIOptimizer = () => {
         if (rule.selector.includes('.glass-')) {
           let hasTransform = false;
           rule.walkDecls(decl => {
-            if (decl.prop === 'transform') hasTransform = true;
+            if ('transform' === decl.prop) hasTransform = true;
           });
           
           if (!hasTransform) {
@@ -103,7 +103,7 @@ const optimizedConfig = {
       flexbox: 'no-2009',
       grid: 'autoplace'
     }),
-    ...(process.env.NODE_ENV === 'production' ? [
+    ...('production' === process.env.NODE_ENV ? [
       cssnano({
         preset: ['default', {
           discardComments: {

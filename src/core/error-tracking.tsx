@@ -36,7 +36,7 @@ export interface ErrorTrackingConfig {
 
 class ErrorTrackingSystem {
   private static instance: ErrorTrackingSystem;
-  private sentry: any = undefined;
+  private sentry: any = null;
   private __config: ErrorTrackingConfig = {};
   private errorQueue: ErrorReport[] = [];
   private isInitialized = false;
@@ -60,7 +60,7 @@ class ErrorTrackingSystem {
       console.info(
         '[ErrorTracking] Error tracking disabled or no DSN provided'
       );
-      return undefined;
+      return null;
     }
 
     try {
@@ -87,7 +87,7 @@ class ErrorTrackingSystem {
           ((event, _hint) => {
             // Filter out known non-critical errors
             if ('NetworkError' === event.exception?.values?.[0]?.type) {
-              return undefined;
+              return null;
             }
 
             // Sanitize sensitive data
@@ -157,7 +157,7 @@ class ErrorTrackingSystem {
    */
   trackEvent(eventName: string, data?: Record<string, any>): void {
     if (!this.isInitialized || !this.sentry) {
-      return undefined;
+      return null;
     }
 
     this.sentry.addBreadcrumb({
@@ -176,13 +176,13 @@ class ErrorTrackingSystem {
     user: { id?: string; email?: string; username?: string } | null
   ): void {
     if (!this.isInitialized || !this.sentry) {
-      return undefined;
+      return null;
     }
 
     if (user) {
       this.sentry.setUser({
         id: user.id,
-        email: user.email ? '[REDACTED]' : undefined,
+        email: user.email ? '[REDACTED]' : null,
         username: user.username,
       });
     } else {
@@ -195,7 +195,7 @@ class ErrorTrackingSystem {
    */
   setContext(key: string, context: Record<string, any>): void {
     if (!this.isInitialized || !this.sentry) {
-      return undefined;
+      return null;
     }
     this.sentry.setContext(key, context);
   }
@@ -205,7 +205,7 @@ class ErrorTrackingSystem {
    */
   setTags(tags: Record<string, string>): void {
     if (!this.isInitialized || !this.sentry) {
-      return undefined;
+      return null;
     }
     this.sentry.setTags(tags);
   }

@@ -134,7 +134,7 @@ export const createSlotComponent = (slots: Record<string, React.ComponentType<an
             <SlotComponent key={slotName}>
               {slotContent}
             </SlotComponent>
-          ) : undefined;
+          ) : null;
         })}
       </>
     );

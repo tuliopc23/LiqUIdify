@@ -1,4 +1,3 @@
-
 import React, { forwardRef, useCallback, useRef, useState } from 'react';
 import { cn } from '@/core/utils/classname';
 import { type VariantProps, cva } from 'class-variance-authority';
@@ -119,7 +118,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 
     // Handle upload
     const handleUpload = useCallback(async (filesToUpload: FileUploadItem[]) => {
-      if (!onUpload) {return undefined;}
+      if (!onUpload) {return;}
 
       setUploadState('uploading');
 
@@ -194,7 +193,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         return 'File type not allowed';
       }
 
-      return undefined;
+      return null;
     }, [maxFileSize, allowedTypes]);
 
     // Create file preview
@@ -203,10 +202,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         if (file.type.startsWith('image/')) {
           const reader = new FileReader();
           reader.onload = e => resolve(e.target?.result as string);
-          reader.onerror = () => resolve(undefined);
+          reader.onerror = () => resolve(null);
           reader.readAsDataURL(file);
         } else {
-          resolve(undefined);
+          resolve(null);
         }
       });
     };
@@ -214,13 +213,13 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     // Process files
     const processFiles = useCallback(
       async (fileList: File[]) => {
-        if (disabled) {return undefined;}
+        if (disabled) {return;}
 
         const newFiles: FileUploadItem[] = [];
 
         for (const file of fileList) {
           const error = validateFile(file);
-          const preview = showPreview ? await createPreview(file) : undefined;
+          const preview = showPreview ? await createPreview(file) : null;
 
           const fileItem: FileUploadItem = {
             id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,

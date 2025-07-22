@@ -173,7 +173,7 @@ export const CHOREOGRAPHY_PRESETS: Record<string, AnimationChoreography> = {
 export class SpringPhysics {
   private config: SpringConfig;
   private state: PhysicsState;
-  private animationFrame: number | null = undefined;
+  private animationFrame: number | null = null;
   private onUpdate?: (state: PhysicsState) => void;
   private onComplete?: () => void;
 
@@ -278,7 +278,7 @@ export class SpringPhysics {
 
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = undefined;
+      this.animationFrame = null;
     }
 
     if (this.onComplete) {
@@ -363,7 +363,7 @@ export class MagneticField {
   updateElementPosition(id: string): void {
     const target = this.elements.get(id);
     if (!target) {
-      return undefined;
+      return;
     }
 
     const rect = target.element.getBoundingClientRect();
@@ -528,7 +528,7 @@ export class GestureRecognizer {
 
   private handleMove = (e: MouseEvent): void => {
     if (!this.isTracking) {
-      return undefined;
+      return;
     }
 
     const now = performance.now();
@@ -554,7 +554,7 @@ export class GestureRecognizer {
 
   private handleEnd = (e: MouseEvent): void => {
     if (!this.isTracking) {
-      return undefined;
+      return;
     }
 
     this.isTracking = false;
@@ -620,7 +620,7 @@ export class GestureRecognizer {
         deltaY = step;
         break;
       default:
-        return undefined;
+        return;
     }
 
     e.preventDefault();
@@ -732,7 +732,7 @@ export function useAdvancedPhysics(
 
     return () => {
       springRef.current?.destroy();
-      magneticRef.current = undefined;
+      magneticRef.current = null;
       choreographerRef.current?.cancel();
       gestureRef.current?.destroy();
     };
@@ -747,7 +747,7 @@ export function useAdvancedPhysics(
   // Setup gesture recognition
   useEffect(() => {
     if (!elementRef.current || !enableGestures) {
-      return undefined;
+      return;
     }
 
     gestureRef.current = new GestureRecognizer(
@@ -768,7 +768,7 @@ export function useAdvancedPhysics(
         'undefined' === typeof navigator ||
         !(navigator as any).vibrate
       ) {
-        return undefined;
+        return;
       }
 
       const patterns = {
@@ -785,7 +785,7 @@ export function useAdvancedPhysics(
   // Animation methods
   const animateToPosition = useCallback((x: number, y: number) => {
     if (!springRef.current || !elementRef.current) {
-      return undefined;
+      return;
     }
 
     const spring = springRef.current;
@@ -815,7 +815,7 @@ export function useAdvancedPhysics(
       }[]
     ) => {
       if (!choreographerRef.current) {
-        return undefined;
+        return;
       }
 
       animations.forEach(({ id, element, keyframes, options }) => {

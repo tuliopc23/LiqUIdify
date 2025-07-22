@@ -248,7 +248,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
 
         submitForm: async () => {
           if (!onSubmit) {
-            return undefined;
+            return null;
           }
 
           setState((prev) => ({ ...prev, isSubmitting: true }));
@@ -306,7 +306,7 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
     const [state, setState] = React.useState<TableState<T>>({
       items: initialItems,
       selectedItems: [],
-      sortBy: undefined,
+      sortBy: null,
       sortDirection: 'asc',
       filterBy: '',
       currentPage: 1,
@@ -420,7 +420,7 @@ export function createModalBusinessLogic(
     const [state, setState] = React.useState<ModalState>({
       isOpen: false,
       title: '',
-      content: undefined,
+      content: null,
       size: 'md',
       variant: 'primary',
       closable: true,
@@ -515,16 +515,16 @@ export function createAsyncDataBusinessLogic<T>(
 > {
   return () => {
     const [state, setState] = React.useState<AsyncDataState<T>>({
-      data: undefined,
+      data: null,
       loading: false,
-      error: undefined,
-      lastFetch: undefined,
+      error: null,
+      lastFetch: null,
     });
 
     const actions = useMemo(
       (): AsyncDataActions<T> => ({
         fetchData: async () => {
-          setState((prev) => ({ ...prev, loading: true, error: undefined }));
+          setState((prev) => ({ ...prev, loading: true, error: null }));
 
           try {
             const data = await fetchFunction();
@@ -572,10 +572,10 @@ export function createAsyncDataBusinessLogic<T>(
 
         clearData: () => {
           setState({
-            data: undefined,
+            data: null,
             loading: false,
-            error: undefined,
-            lastFetch: undefined,
+            error: null,
+            lastFetch: null,
           });
         },
       }),

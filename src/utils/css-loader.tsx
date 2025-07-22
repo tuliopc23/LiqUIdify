@@ -59,7 +59,7 @@ export function loadCSS(
     // Skip if no document (SSR)
     if ('undefined' === typeof document) {
       resolve();
-      return undefined;
+      return;
     }
 
     // Create link element
@@ -107,7 +107,7 @@ export function useCSS(url: string, options: CSSLoaderOptions = {}): boolean {
 
   useEffect(() => {
     if (!url || options.disabled) {
-      return undefined;
+      return;
     }
 
     const currentOptions = { ...options };

@@ -160,7 +160,7 @@ function useDevicePerformance(threshold: 'low' | 'medium' | 'high' = 'low'): boo
     const isClient = useIsClient();
 
     useEffect(() => {
-        if (!isClient) {return undefined;}
+        if (!isClient) {return;}
 
         // Check device memory
         const memory = (navigator as any).deviceMemory || 4;
@@ -213,7 +213,7 @@ export function FeatureDetectionClasses() {
     const isClient = useIsClient();
 
     useEffect(() => {
-        if (!isClient) {return undefined;}
+        if (!isClient) {return;}
 
         const features = [
             'css-backdrop-filter',
@@ -294,7 +294,7 @@ export function FeatureDetectionClasses() {
         };
     }, [isClient]);
 
-    return undefined;
+    return null;
 }
 
 /**
@@ -310,7 +310,7 @@ export function ProgressiveEnhancementProvider({
     const isClient = useIsClient();
 
     useEffect(() => {
-        if (!isClient) {return undefined;}
+        if (!isClient) {return;}
 
         // Remove all experience classes
         document.documentElement.classList.remove(

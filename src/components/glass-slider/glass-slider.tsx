@@ -42,7 +42,9 @@ export const GlassSlider = React.memo(React.forwardRef<HTMLDivElement, GlassSlid
 
     const updateValue = useCallback(
       (clientX: number) => {
-        if (!sliderRef.current) {return undefined;}
+        if (!sliderRef.current) {
+          return;
+        }
 
         const rect = sliderRef.current.getBoundingClientRect();
         const percentage = Math.max(
@@ -61,7 +63,9 @@ export const GlassSlider = React.memo(React.forwardRef<HTMLDivElement, GlassSlid
 
     const handleMouseMove = useCallback(
       (e: MouseEvent) => {
-        if (!isDragging || disabled) {return undefined;}
+        if (!isDragging || disabled) {
+          return;
+        }
         updateValue(e.clientX);
       },
       [isDragging, disabled, updateValue]
@@ -72,7 +76,9 @@ export const GlassSlider = React.memo(React.forwardRef<HTMLDivElement, GlassSlid
     }, []);
 
     const handleMouseDown = (e: React.MouseEvent) => {
-      if (disabled) {return undefined;}
+      if (disabled) {
+        return;
+      }
 
       setIsDragging(true);
       updateValue(e.clientX);
@@ -82,13 +88,12 @@ export const GlassSlider = React.memo(React.forwardRef<HTMLDivElement, GlassSlid
       if (isDragging) {
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
-        return () => {
-          document.removeEventListener('mousemove', handleMouseMove);
-          document.removeEventListener('mouseup', handleMouseUp);
-        };
       }
 
-      return undefined;
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
     }, [isDragging, handleMouseMove, handleMouseUp]);
 
     return (

@@ -29,15 +29,15 @@ export class GlassErrorBoundary extends Component<
   GlassErrorBoundaryProps,
   GlassErrorBoundaryState
 > {
-  private resetTimeoutId: NodeJS.Timeout | null = undefined;
+  private resetTimeoutId: NodeJS.Timeout | null = null;
   private previousResetKeys: (string | number)[] = [];
 
   constructor(props: GlassErrorBoundaryProps) {
     super(props);
     this.state = {
       hasError: false,
-      error: undefined,
-      errorInfo: undefined,
+      error: null,
+      errorInfo: null,
       errorCount: 0,
     };
   }
@@ -150,13 +150,13 @@ export class GlassErrorBoundary extends Component<
   resetErrorBoundary = () => {
     if (this.resetTimeoutId) {
       clearTimeout(this.resetTimeoutId);
-      this.resetTimeoutId = undefined;
+      this.resetTimeoutId = null;
     }
 
     this.setState({
       hasError: false,
-      error: undefined,
-      errorInfo: undefined,
+      error: null,
+      errorInfo: null,
       errorCount: 0,
     });
 
@@ -261,10 +261,10 @@ export class GlassErrorBoundary extends Component<
 
 // Hook for error handling in functional components
 export function useErrorHandler() {
-  const [error, setError] = React.useState<Error | null>(undefined);
+  const [error, setError] = React.useState<Error | null>(null);
 
   const resetError = React.useCallback(() => {
-    setError(undefined);
+    setError(null);
   }, []);
 
   const captureError = React.useCallback((error: Error) => {

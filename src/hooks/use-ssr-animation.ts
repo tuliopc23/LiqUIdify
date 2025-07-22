@@ -7,9 +7,9 @@ export const useSSRAnimation = (
   const elementRef = useRef<HTMLDivElement>(null);
   const cleanupRef = useRef<(() => void) | void>(undefined);
 
-  useEffect(() => {
+  useEffect(() => {
     if (isServer || !elementRef.current || !callback) {
-      return undefined;
+      return;
     }
 
     cleanupRef.current = callback(elementRef.current);

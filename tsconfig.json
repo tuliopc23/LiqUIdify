@@ -20,19 +20,21 @@
     "isolatedModules": true,
     "noEmitOnError": false,
 
-    /* Linting - Optimized for production */
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    /* Linting - Gradual strict mode migration */
+    "noUnusedLocals": false, // TODO: Enable after fixing unused variables
+    "noUnusedParameters": false, // TODO: Enable after fixing unused parameters
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
-    "strictNullChecks": false,
-    "strictFunctionTypes": false,
-    "strictBindCallApply": false,
-    "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": false, // TODO: Enable after fixing index access
+    
+    /* Strict type checking - keeping most important ones enabled */
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "alwaysStrict": true,
-    "noImplicitReturns": false,
-    "noUncheckedIndexedAccess": false,
+    "strictPropertyInitialization": false, // TODO: Enable after fixing class properties
 
     /* React */
     "jsx": "react-jsx",

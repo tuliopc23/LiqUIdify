@@ -43,7 +43,7 @@ export function HydrationDetector({
   useEffect(() => {
     if (!isBrowser()) {
       setHydrationState(prev => ({ ...prev, isReady: true }));
-      return undefined;
+      return null;
     }
 
     const manager = HydrationManager.getInstance();
@@ -190,7 +190,7 @@ export function HydrationMetrics({ debug = false }: { debug?: boolean }) {
   });
 
   useEffect(() => {
-    if (!isBrowser()) {return undefined;}
+    if (!isBrowser()) {return null;}
 
     const start = performance.now();
     
@@ -209,7 +209,7 @@ export function HydrationMetrics({ debug = false }: { debug?: boolean }) {
     return () => clearTimeout(timeout);
   }, []);
 
-  if (!debug) {return undefined;}
+  if (!debug) {return null;}
 
   return (
     <div style={{ position: 'fixed', top: 0, right: 0, background: 'rgba(0,0,0,0.8)', color: 'white', padding: '10px', fontSize: '12px', zIndex: 9999 }}>
@@ -233,7 +233,7 @@ export function HydrationRecovery({
   const [showRecovery, setShowRecovery] = useState(false);
 
   useEffect(() => {
-    if (!isBrowser()) {return undefined;}
+    if (!isBrowser()) {return null;}
 
     const handleError = () => {
       setShowRecovery(true);

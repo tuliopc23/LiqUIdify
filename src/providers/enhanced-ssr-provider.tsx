@@ -38,9 +38,7 @@ export function EnhancedSSRProvider({
 }: EnhancedSSRProviderProps) {
   const [isClient, setIsClient] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [_hydrationError, _setHydrationError] = useState<Error | null>(
-    undefined
-  );
+  const [_hydrationError, _setHydrationError] = useState<Error | null>(null);
   const [_hasError, _setHasError] = useState(false);
   const [_retryCount, _setRetryCount] = useState(0);
 
@@ -54,7 +52,7 @@ export function EnhancedSSRProvider({
   // Handle hydration completion
   useEffect(() => {
     if (!isClient) {
-      return undefined;
+      return;
     }
 
     const handleHydrationComplete = () => {
@@ -148,7 +146,7 @@ export function useClientOnly<T>(
   factory: () => T,
   deps: any[] = []
 ): { value: T | null; isReady: boolean } {
-  const [value, setValue] = useState<T | null>(undefined);
+  const [value, setValue] = useState<T | null>(null);
   const [isReady, setIsReady] = useState(false);
   const isClient = isBrowser();
 
@@ -202,7 +200,7 @@ export function useHydrationMetrics() {
 
   useEffect(() => {
     if (!isBrowser()) {
-      return undefined;
+      return;
     }
 
     const start = performance.now();

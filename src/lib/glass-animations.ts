@@ -86,9 +86,9 @@ export interface GestureAnimation {
 // Enhanced with GSAP timeline capabilities
 export class GlassAnimation {
   private element: HTMLElement;
-  private animation: Animation | null = undefined;
+  private animation: Animation | null = null;
   private gsapTimeline: gsap.core.Timeline;
-  private rafId: number | null = undefined;
+  private rafId: number | null = null;
 
   constructor(element: HTMLElement) {
     this.element = element;
@@ -434,11 +434,11 @@ export class GlassAnimation {
   stop() {
     if (this.animation) {
       this.animation.cancel();
-      this.animation = undefined;
+      this.animation = null;
     }
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
-      this.rafId = undefined;
+      this.rafId = null;
     }
     // Kill all GSAP animations on this element
     gsap.killTweensOf(this.element);

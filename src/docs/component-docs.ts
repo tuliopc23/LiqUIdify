@@ -112,14 +112,14 @@ export function generatePropDocs(
       type: 'string',
       description: 'Additional CSS classes to apply',
       required: false,
-      defaultValue: undefined,
+      defaultValue: null,
     },
     {
       name: 'children',
       type: 'ReactNode',
       description: 'Child elements to render',
       required: false,
-      defaultValue: undefined,
+      defaultValue: null,
     },
   ];
 

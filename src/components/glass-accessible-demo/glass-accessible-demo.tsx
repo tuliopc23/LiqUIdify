@@ -17,7 +17,9 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({ classNam
   const [bgColor, setBgColor] = useState('#f0f0f0');
 
   const validateAccessibility = async () => {
-    if (!demoRef.current) {return undefined;}
+    if (!demoRef.current) {
+      return;
+    }
     
     setValidating(true);
     try {

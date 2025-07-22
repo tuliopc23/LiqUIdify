@@ -54,9 +54,9 @@ export const safeNavigator = (): Navigator | undefined => {
  */
 export const safeLocalStorage = (): Storage | null => {
   try {
-    return isBrowser() && window.localStorage ? window.localStorage : undefined;
+    return isBrowser() && window.localStorage ? window.localStorage : null;
   } catch {
-    return undefined;
+    return null;
   }
 };
 
@@ -68,9 +68,9 @@ export const safeSessionStorage = (): Storage | null => {
   try {
     return isBrowser() && window.sessionStorage
       ? window.sessionStorage
-      : undefined;
+      : null;
   } catch {
-    return undefined;
+    return null;
   }
 };
 
@@ -161,7 +161,7 @@ export const setSessionStorageItem = <T>(key: string, value: T): boolean => {
  */
 export const safeMatchMedia = (query: string): MediaQueryList | null => {
   const win = safeWindow();
-  return win?.matchMedia ? win.matchMedia(query) : undefined;
+  return win?.matchMedia ? win.matchMedia(query) : null;
 };
 
 /**
@@ -175,7 +175,7 @@ export const safeRequestAnimationFrame = (
   const win = safeWindow();
   return win?.requestAnimationFrame
     ? win.requestAnimationFrame(callback)
-    : undefined;
+    : null;
 };
 
 /**
@@ -202,7 +202,7 @@ export const safeSetTimeout = (
   if ('undefined' !== typeof setTimeout) {
     return setTimeout(callback, delay);
   }
-  return undefined;
+  return null;
 };
 
 /**
@@ -228,7 +228,7 @@ export const safeSetInterval = (
   if ('undefined' !== typeof setInterval) {
     return setInterval(callback, delay);
   }
-  return undefined;
+  return null;
 };
 
 /**
@@ -337,14 +337,14 @@ export const safeDynamicImport = async <T>(
   importFn: () => Promise<T>
 ): Promise<T | null> => {
   if (!isBrowser()) {
-    return undefined;
+    return null;
   }
 
   try {
     return await importFn();
   } catch (error) {
     console.error('Dynamic import failed:', error);
-    return undefined;
+    return null;
   }
 };
 
@@ -372,7 +372,7 @@ export const safeIntersectionObserver = (
     return new IntersectionObserver(callback, options);
   }
 
-  return undefined;
+  return null;
 };
 
 /**
@@ -389,7 +389,7 @@ export const safeResizeObserver = (
     return new ResizeObserver(callback);
   }
 
-  return undefined;
+  return null;
 };
 
 /**
@@ -406,7 +406,7 @@ export const safeMutationObserver = (
     return new MutationObserver(callback);
   }
 
-  return undefined;
+  return null;
 };
 
 /**
@@ -429,7 +429,7 @@ export const safeGetComputedStyle = (
   element: Element
 ): CSSStyleDeclaration | null => {
   const win = safeWindow();
-  return win?.getComputedStyle ? win.getComputedStyle(element) : undefined;
+  return win?.getComputedStyle ? win.getComputedStyle(element) : null;
 };
 
 /**
@@ -441,7 +441,7 @@ export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
   tagName: K
 ): HTMLElementTagNameMap[K] | null => {
   const doc = safeDocument();
-  return doc?.createElement ? doc.createElement(tagName) : undefined;
+  return doc?.createElement ? doc.createElement(tagName) : null;
 };
 
 /**
@@ -451,7 +451,7 @@ export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
  */
 export const safeQuerySelector = (selector: string): Element | null => {
   const doc = safeDocument();
-  return doc?.querySelector ? doc.querySelector(selector) : undefined;
+  return doc?.querySelector ? doc.querySelector(selector) : null;
 };
 
 /**
@@ -473,5 +473,5 @@ export const safeQuerySelectorAll = (
  */
 export const safeGetElementById = (id: string): HTMLElement | null => {
   const doc = safeDocument();
-  return doc?.getElementById ? doc.getElementById(id) : undefined;
+  return doc?.getElementById ? doc.getElementById(id) : null;
 };

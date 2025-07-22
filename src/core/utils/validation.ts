@@ -358,7 +358,7 @@ export const a11yValidators = {
     ): Validator<any> =>
       props => {
         const isInteractive =
-          props.onClick || props.onKeyDown || props.tabIndex !== undefined;
+          props.onClick || props.onKeyDown || props.tabIndex !== null;
         if (!isInteractive) {return createValidationResult(true);}
 
         const hasTabIndex =

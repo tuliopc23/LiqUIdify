@@ -59,8 +59,8 @@ export function useGlassDevTools() {
     const [state, setState] = useState<DevToolsState>({
         isOpen: false,
         activeTab: 'inspector',
-        selectedElement: undefined,
-        inspection: undefined,
+        selectedElement: null,
+        inspection: null,
         logs: [],
         settings: {
             enableRealTimeValidation: true,
@@ -92,7 +92,9 @@ export function useGlassDevTools() {
     }, [state.settings.enableConsoleLogging]);
 
     const inspectElement = useCallback(async (element: HTMLElement) => {
-        if (!element) {return undefined;}
+        if (!element) {
+            return;
+        }
 
         addLog({
             level: 'info',
@@ -188,13 +190,13 @@ export function GlassDevTools({
     theme = 'auto'
 }: GlassDevToolsProps) {
     const { state, setState, inspectElement } = useGlassDevTools();
-    const [performanceReport, setPerformanceReport] = useState<PerformanceReport | null>(undefined);
+  const [performanceReport, setPerformanceReport] = useState<PerformanceReport | null>(null);
     const [cssReport, setCssReport] = useState<any>(undefined);
     const overlayRef = useRef<HTMLDivElement>(null);
 
     // Initialize DevTools
     useEffect(() => {
-        if (!enabled) {return undefined;}
+        if (!enabled) {return;}
 
         setState(prev => ({
             ...prev,
@@ -218,10 +220,12 @@ export function GlassDevTools({
 
         // Set up element inspection on click
         const handleElementClick = (e: MouseEvent) => {
-            if (!state.isOpen) {return undefined;}
+            if (!state.isOpen) {return;}
 
             // Check if click is inside DevTools
-            if (overlayRef.current?.contains(e.target as Node)) {return undefined;}
+            if (overlayRef.current?.contains(e.target as Node)) {
+                return;
+            }
 
             e.preventDefault();
             e.stopPropagation();
@@ -242,7 +246,7 @@ export function GlassDevTools({
 
     // Update performance report periodically
     useEffect(() => {
-        if (!enabled || !state.settings.enablePerformanceMonitoring) {return undefined;}
+        if (!enabled || !state.settings.enablePerformanceMonitoring) {return;}
 
         const interval = setInterval(() => {
             const report = performanceMonitor.getReport();
@@ -254,14 +258,14 @@ export function GlassDevTools({
 
     // Update CSS report
     useEffect(() => {
-        if (!enabled) {return undefined;}
+        if (!enabled) {return;}
 
         cssBundleAnalyzer.generateReport().then(setCssReport);
     }, [enabled]);
 
     // Real-time accessibility validation
     useEffect(() => {
-        if (!enabled || !state.settings.enableRealTimeValidation) {return undefined;}
+        if (!enabled || !state.settings.enableRealTimeValidation) {return;}
 
         accessibilityManager.enableRealTimeMonitoring();
 
@@ -271,7 +275,7 @@ export function GlassDevTools({
     }, [enabled, state.settings.enableRealTimeValidation]);
 
     if (!enabled || !state.isOpen) {
-        return undefined;
+        return null;
     }
 
     const positionClasses = {

@@ -142,7 +142,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
 
     const handlePageChange = (page: number) => {
       if (disabled || 1 > page || page > totalPages || page === currentPage) {
-        return undefined;
+        return;
       }
       onPageChange(page);
     };

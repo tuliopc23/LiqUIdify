@@ -144,7 +144,7 @@ const LIQUIDIFY_MIGRATIONS: Record<string, MigrationConfig> = {
               : 'No deprecated props found',
             suggestions: hasDeprecatedProps
               ? ['Run the glass-effect-to-glass-morphism codemod']
-              : undefined,
+              : null,
           };
         },
       },
@@ -228,7 +228,7 @@ const LIQUIDIFY_MIGRATIONS: Record<string, MigrationConfig> = {
               : 'No deprecated components found',
             suggestions: hasGlassContainer
               ? ['Run the glass-container-to-glass-panel codemod']
-              : undefined,
+              : null,
           };
         },
       },
@@ -243,7 +243,7 @@ const LIQUIDIFY_MIGRATIONS: Record<string, MigrationConfig> = {
               : 'No deprecated hooks found',
             suggestions: hasLegacyHooks
               ? ['Run the update-glass-hook codemod']
-              : undefined,
+              : null,
           };
         },
       },
