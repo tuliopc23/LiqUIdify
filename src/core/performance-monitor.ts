@@ -56,15 +56,41 @@ interface PerformanceReport {
 type PerformanceCallback = (metric: PerformanceMetric) => void;
 type ReportCallback = (report: PerformanceReport) => void;
 
+// No-op implementation for production
+class NoOpPerformanceMonitor {
+  startTiming(_name: string): void {}
+  endTiming(_name: string): number { return 0; }
+  trackCustomMetric(_name: string, _value: number): void {}
+  trackComponent(_componentName: string, _metrics: Partial<ComponentMetric>): void {}
+  clear(): void {}
+  destroy(): void {}
+  init(_options?: any): void {}
+  getReport(): PerformanceReport {
+    return {
+      url: '',
+      timestamp: 0,
+      webVitals: [],
+      componentMetrics: [],
+      customMetrics: {},
+      userAgent: '',
+    };
+  }
+  getMetric(_name: MetricName): PerformanceMetric | undefined { return undefined; }
+  getAllMetrics(): Map<string, PerformanceMetric> { return new Map(); }
+  subscribe(_metricName: MetricName, _callback: PerformanceCallback): () => void { return () => {}; }
+}
+
 class PerformanceMonitor {
   private static instance: PerformanceMonitor;
   private metrics: Map<string, PerformanceMetric> = new Map();
   private componentMetrics: Map<string, ComponentMetric> = new Map();
   private customMetrics: Map<string, number> = new Map();
+  private timingStartMap: Map<string, number> = new Map();
   private observers: Map<string, PerformanceCallback[]> = new Map();
   private reportCallbacks: ReportCallback[] = [];
   private isInitialized = false;
   private performanceObserver?: PerformanceObserver;
+  private enableDetailedProfiling = false;
 
   private constructor() {}
 
@@ -83,13 +109,16 @@ class PerformanceMonitor {
       reportCallback?: ReportCallback;
       immediate?: boolean;
       sampleRate?: number;
+      enableDetailedProfiling?: boolean;
     } = {}
   ): void {
     if (this.isInitialized) {
       return undefined;
     }
 
-    const { reportCallback, immediate = false, sampleRate = 1 } = options;
+    const { reportCallback, immediate = false, sampleRate = 1, enableDetailedProfiling = false } = options;
+
+    this.enableDetailedProfiling = enableDetailedProfiling;
 
     // Sample rate for performance monitoring (0-1)
     if (Math.random() > sampleRate) {
@@ -281,54 +310,65 @@ class PerformanceMonitor {
   }
 
   /**
-   * Track custom metric
+   * Track custom metric (conditional monitoring)
    */
   trackCustomMetric(name: string, value: number): void {
-    this.customMetrics.set(name, value);
-
-    // Also create a performance mark
-    if ('performance' in window) {
-      performance.mark(`glass-ui-${name}-end`);
-      performance.measure(
-        `glass-ui-${name}`,
-        `glass-ui-${name}-start`,
-        `glass-ui-${name}-end`
-      );
+    // Skip monitoring entirely if not explicitly enabled
+    if (!this.isMonitoringEnabled()) {
+      return;
     }
+    this.customMetrics.set(name, value);
   }
 
   /**
-   * Start timing a custom metric
+   * Start timing a custom metric (conditional monitoring)
    */
   startTiming(name: string): void {
-    if ('performance' in window) {
-      performance.mark(`glass-ui-${name}-start`);
+    // Skip monitoring entirely if not explicitly enabled
+    if (!this.isMonitoringEnabled()) {
+      return;
     }
+    this.timingStartMap.set(name, performance.now());
   }
 
   /**
-   * End timing a custom metric
+   * End timing a custom metric (conditional monitoring)
    */
   endTiming(name: string): number {
-    if ('performance' in window) {
-      performance.mark(`glass-ui-${name}-end`);
-      performance.measure(
-        `glass-ui-${name}`,
-        `glass-ui-${name}-start`,
-        `glass-ui-${name}-end`
-      );
-
-      const entries = performance.getEntriesByName(
-        `glass-ui-${name}`,
-        'measure'
-      );
-      if (0 < entries.length) {
-        const duration = entries[entries.length - 1]?.duration || 0;
-        this.trackCustomMetric(name, duration);
-        return duration;
-      }
+    // Skip monitoring entirely if not explicitly enabled
+    if (!this.isMonitoringEnabled()) {
+      return 0;
     }
-    return 0;
+    
+    const startTime = this.timingStartMap.get(name);
+    if (!startTime) {
+      return 0;
+    }
+    
+    const duration = performance.now() - startTime;
+    this.timingStartMap.delete(name);
+    this.customMetrics.set(name, duration);
+    
+    return duration;
+  }
+
+  /**
+   * Check if monitoring should be enabled (minimal overhead check)
+   */
+  private isMonitoringEnabled(): boolean {
+    // Only enable monitoring in development or when explicitly requested
+    return this.enableDetailedProfiling || 
+           process.env.NODE_ENV === 'development';
+  }
+
+  /**
+   * Check if Performance API should be used (only in development or when explicitly enabled)
+   */
+  private shouldUsePerformanceAPI(): boolean {
+    return process.env.NODE_ENV === 'development' || 
+           this.enableDetailedProfiling ||
+           (typeof window !== 'undefined' && 
+            window.localStorage?.getItem('liquidui-detailed-profiling') === 'true');
   }
 
   /**
@@ -445,6 +485,7 @@ class PerformanceMonitor {
     this.metrics.clear();
     this.componentMetrics.clear();
     this.customMetrics.clear();
+    this.timingStartMap.clear();
   }
 
   /**
@@ -459,8 +500,11 @@ class PerformanceMonitor {
   }
 }
 
-// Export singleton instance
-export const performanceMonitor = PerformanceMonitor.getInstance();
+// Export singleton instance - use no-op in production for zero overhead
+export const performanceMonitor = 
+  process.env.NODE_ENV === 'production' 
+    ? new NoOpPerformanceMonitor() as unknown as PerformanceMonitor
+    : PerformanceMonitor.getInstance();
 
 // Export types
 export type { PerformanceMetric, ComponentMetric, PerformanceReport };
