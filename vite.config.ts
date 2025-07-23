@@ -3,6 +3,7 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import { defineConfig } from "rolldown-vite";
 import dts from "vite-plugin-dts";
+import postcssConfig from "./postcss.config.js";
 
 // Load OXC configuration for consistency
 const oxcConfig = JSON.parse(readFileSync("./oxc.config.json", "utf-8"));
@@ -59,7 +60,7 @@ export default defineConfig({
 	},
 
 	css: {
-		postcss: "./postcss.config.js",
+		postcss: postcssConfig,
 		preprocessorOptions: {
 			css: {
 				charset: false,
