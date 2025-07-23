@@ -37,15 +37,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Install dependencies
         run: |
-          npm ci
+          bun install --frozen-lockfile
           npm install -g clinic autocannon
 
       - name: Build project for performance testing
         run: |
-          npm run build:production
-          npm run build:modular
+          bun run build:production
+          bun run build:modular
 
       - name: Setup performance testing environment
         run: |
@@ -62,7 +67,7 @@ jobs:
         if: matrix.test-suite == 'component-performance'
         run: |
           echo "🚀 Running component performance benchmarks..."
-          npm run test:performance:components
+          bun run test:performance:components
 
           # Store results
           cp test-results/performance-*.json performance-results/
@@ -73,7 +78,7 @@ jobs:
         if: matrix.test-suite == 'memory-leak-detection'
         run: |
           echo "🧠 Running memory leak detection..."
-          npm run test:performance:memory
+          bun run test:performance:memory
 
           # Generate memory profiling report
           node scripts/memory-profiler.js > performance-results/memory-report.json
@@ -84,10 +89,10 @@ jobs:
         if: matrix.test-suite == 'bundle-size-analysis'
         run: |
           echo "📦 Analyzing bundle performance..."
-          npm run bundle:budget:enforce
+          bun run bundle:budget:enforce
 
           # Generate bundle analysis report
-          npm run bundle:analyze:performance > performance-results/bundle-analysis.json
+          bun run bundle:analyze:performance > performance-results/bundle-analysis.json
 
           # Check for performance regressions
           node scripts/bundle-performance-check.js
@@ -98,7 +103,7 @@ jobs:
           echo "🌍 Running real-world performance scenarios..."
 
           # Start test server
-          npm run build-storybook
+          bun run build-storybook
           npx http-server storybook-static -p 8080 --silent &
           sleep 10
 
@@ -287,13 +292,18 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Run Extended Memory Leak Tests
         run: |
           echo "🧠 Running extended memory leak monitoring..."
-          npm run test:memory:extended
+          bun run test:memory:extended
         env:
           NODE_OPTIONS: "--expose-gc --max-old-space-size=8192"
 

@@ -28,11 +28,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Build production bundle
-        run: npm run build:production
+        run: bun run build:production
 
       - name: Setup Chrome for performance testing
         if: matrix.browser == 'chrome'
@@ -48,18 +53,18 @@ jobs:
 
       - name: Run component performance benchmarks
         run: |
-          npm run perf:benchmark -- --ci --browser=${{ matrix.browser }}
+          bun run perf:benchmark -- --ci --browser=${{ matrix.browser }}
         env:
           NODE_ENV: production
           PERFORMANCE_BUDGET_ENFORCE: true
 
       - name: Run memory leak detection
         run: |
-          npm run perf:memory-leak -- --ci --browser=${{ matrix.browser }}
+          bun run perf:memory-leak -- --ci --browser=${{ matrix.browser }}
 
       - name: Run real-world performance simulation
         run: |
-          npm run perf:real-world -- --ci --browser=${{ matrix.browser }}
+          bun run perf:real-world -- --ci --browser=${{ matrix.browser }}
 
       - name: Upload performance reports
         uses: actions/upload-artifact@v4
@@ -132,17 +137,22 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Build and analyze bundle performance
         run: |
-          npm run build:production
-          npm run bundle:budget:enforce
+          bun run build:production
+          bun run bundle:budget:enforce
 
       - name: Run tree-shaking verification
         run: |
-          npm run bundle:tree-shake:verify
+          bun run bundle:tree-shake:verify
 
       - name: Analyze bundle size impact
         id: bundle-analysis
@@ -208,11 +218,16 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Build for testing
-        run: npm run build
+        run: bun run build
 
       - name: Setup Chrome with memory flags
         uses: browser-actions/setup-chrome@latest
@@ -222,7 +237,7 @@ jobs:
       - name: Run comprehensive memory leak detection
         run: |
           # Run with garbage collection exposed for accurate memory measurement
-          npm run perf:memory-leak:comprehensive -- \
+          bun run perf:memory-leak:comprehensive -- \
             --cycles=20 \
             --components=all \
             --timeout=300000 \
@@ -268,16 +283,16 @@ jobs:
         run: |
           git fetch origin main
           git checkout main
-          npm ci
-          npm run build:production
-          npm run perf:benchmark -- --ci --output=main-baseline.json
+          bun install --frozen-lockfile
+          bun run build:production
+          bun run perf:benchmark -- --ci --output=main-baseline.json
 
       - name: Checkout PR branch
         run: |
           git checkout ${{ github.head_ref }}
-          npm ci
-          npm run build:production
-          npm run perf:benchmark -- --ci --output=pr-results.json
+          bun install --frozen-lockfile
+          bun run build:production
+          bun run perf:benchmark -- --ci --output=pr-results.json
 
       - name: Compare performance metrics
         id: compare
@@ -328,18 +343,23 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Build production bundle
-        run: npm run build:production
+        run: bun run build:production
 
       - name: Setup Playwright for real-world testing
         run: npx playwright install --with-deps chromium firefox webkit
 
       - name: Run real-world performance scenarios
         run: |
-          npm run perf:real-world -- \
+          bun run perf:real-world -- \
             --scenarios=mobile-3g,mobile-4g,desktop,tablet \
             --users=1,5,10 \
             --duration=60 \
@@ -351,7 +371,7 @@ jobs:
 
       - name: Test with slow devices simulation
         run: |
-          npm run perf:slow-devices -- \
+          bun run perf:slow-devices -- \
             --cpu-throttling=4 \
             --memory-limit=512mb \
             --network=slow-3g
