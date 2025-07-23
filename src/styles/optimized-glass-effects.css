@@ -114,26 +114,57 @@
 
 /* Optimized Button Variants */
 .glass-button-optimized {
-	@apply glass-base glass-blur-medium glass-bg-medium;
-	@apply px-4 py-2 rounded-lg border border-white/20;
-	@apply font-medium text-gray-900 dark:text-white;
-	@apply focus:outline-none focus:ring-2 focus:ring-blue-500/50;
+	position: relative;
+	overflow: hidden;
+	transform: translateZ(0);
+	will-change: auto;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	backdrop-filter: blur(var(--glass-blur-medium)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+	-webkit-backdrop-filter: blur(var(--glass-blur-medium)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+	background-color: rgba(255, 255, 255, var(--glass-opacity-medium));
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	font-weight: 500;
+	color: #111827;
+}
+
+.dark .glass-button-optimized {
+	color: #ffffff;
+}
+
+.glass-button-optimized:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
 }
 
 .glass-button-optimized:hover {
-	@apply glass-interactive;
+	cursor: pointer;
+	will-change: transform, opacity, background-color, border-color;
+	transform: translateY(-1px) translateZ(0);
 	background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Optimized Card Variants */
 .glass-card-optimized {
-	@apply glass-base glass-blur-medium glass-bg-medium;
-	@apply p-6 rounded-xl border border-white/20;
-	@apply shadow-lg shadow-black/5;
+	position: relative;
+	overflow: hidden;
+	transform: translateZ(0);
+	will-change: auto;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	backdrop-filter: blur(var(--glass-blur-medium)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+	-webkit-backdrop-filter: blur(var(--glass-blur-medium)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness));
+	background-color: rgba(255, 255, 255, var(--glass-opacity-medium));
+	padding: 1.5rem;
+	border-radius: 0.75rem;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .glass-card-optimized:hover {
-	@apply glass-interactive;
+	cursor: pointer;
+	will-change: transform, opacity, background-color, border-color;
+	transform: translateY(-1px) translateZ(0);
 	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 

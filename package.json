@@ -200,7 +200,7 @@
 	"bugs": {
 		"url": "https://github.com/tuliopc23/LiqUIdify/issues"
 	},
-	"homepage": "https://liquidify-fw9pi7oj6-tulio-pinheiro-cunha-s-projects.vercel.app",
+	"homepage": "https://liquidify-storybook.vercel.app",
 	"funding": {
 		"type": "github",
 		"url": "https://github.com/sponsors/tuliopc23"
@@ -220,12 +220,6 @@
 		"react-dom": ">=18.0.0"
 	},
 	"peerDependenciesMeta": {
-		"react": {
-			"optional": true
-		},
-		"react-dom": {
-			"optional": true
-		},
 		"@sentry/react": {
 			"optional": true
 		}

@@ -63,13 +63,23 @@ body {
 }
 
 .glass-card {
-	@apply glass-base;
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	background: var(--glass-light);
+	border: 1px solid var(--glass-border);
+	transform: translateZ(0);
+	will-change: backdrop-filter;
 	border-radius: var(--radius-lg);
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .glass-button {
-	@apply glass-base;
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	background: var(--glass-light);
+	border: 1px solid var(--glass-border);
+	transform: translateZ(0);
+	will-change: backdrop-filter;
 	border-radius: var(--radius-md);
 	padding: var(--space-2) var(--space-4);
 	transition: all 0.2s ease;
@@ -82,7 +92,12 @@ body {
 }
 
 .glass-input {
-	@apply glass-base;
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	background: var(--glass-light);
+	border: 1px solid var(--glass-border);
+	transform: translateZ(0);
+	will-change: backdrop-filter;
 	border-radius: var(--radius-md);
 	padding: var(--space-3);
 	width: 100%;
@@ -90,7 +105,12 @@ body {
 }
 
 .glass-modal {
-	@apply glass-base;
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	background: var(--glass-light);
+	border: 1px solid var(--glass-border);
+	transform: translateZ(0);
+	will-change: backdrop-filter;
 	border-radius: var(--radius-xl);
 	padding: var(--space-6);
 	max-width: 90vw;

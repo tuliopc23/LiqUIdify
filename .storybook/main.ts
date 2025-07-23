@@ -1,81 +1,50 @@
-import type { StorybookConfig } from "@storybook/react-vite";
-import { resolve } from "path";
-
-const config: StorybookConfig = {
-	stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-	addons: [
-		{
-			name: "@storybook/addon-docs",
-			options: {
-				csfPluginOptions: null,
-				mdxPluginOptions: {
-					mdxCompileOptions: {
-						remarkPlugins: [],
-					},
-				},
-			},
-		},
-		"@storybook/addon-a11y",
-		"@storybook/addon-themes",
-		"@storybook/addon-vitest",
-	],
-	framework: {
-		name: "@storybook/react-vite",
-		options: {
-			builder: {
-				viteConfigPath: resolve(__dirname, "../vite.config.ts"),
-			},
-		},
-	},
-	docs: {
-		defaultName: "Documentation",
-		autodocs: "tag",
-	},
-	typescript: {
-		check: false,
-		reactDocgen: "react-docgen-typescript",
-		reactDocgenTypescriptOptions: {
-			shouldExtractLiteralValuesFromEnum: true,
-			shouldRemoveUndefinedFromOptional: true,
-			propFilter: (prop) => {
-				if (prop.parent) {
-					return !/node_modules/.test(prop.parent.fileName);
-				}
-				return true;
-			},
-			savePropValueAsString: true,
-			skipChildrenPropWithoutDoc: false,
-		},
-	},
-	viteFinal: async (config) => {
-		// Enhance path resolution for better import handling
-		config.resolve = config.resolve || {};
-		config.resolve.alias = {
-			...config.resolve.alias,
-			"@": resolve(__dirname, "../src"),
-			"@/tokens": resolve(__dirname, "../src/tokens/index"),
-			"@/design-tokens": resolve(__dirname, "../src/tokens/design-tokens"),
-		};
-
-		// Ensure CSS is properly handled
-		config.css = config.css || {};
-		config.css.postcss = resolve(__dirname, "../postcss.config.js");
-
-		// Add public dir for serving static assets
-		config.publicDir = resolve(__dirname, "../public");
-
-		// Optimize build performance
-		config.build = config.build || {};
-		config.build.rollupOptions = config.build.rollupOptions || {};
-		config.build.rollupOptions.external = [
-			...((config.build.rollupOptions.external as string[]) || []),
-			"react",
-			"react-dom",
-			"react/jsx-runtime",
-		];
-
-		return config;
-	},
+/** @type { import('@storybook/react-vite').StorybookConfig } */
+const config = {
+  stories: [
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  ],
+  addons: [
+    "@storybook/addon-docs",
+    "@storybook/addon-a11y", 
+    "@storybook/addon-themes",
+    "@storybook/addon-vitest"
+  ],
+  framework: {
+    name: "@storybook/react-vite",
+    options: {}
+  },
+  features: {
+    storyStoreV7: true,
+  },
+  viteFinal: async (config) => {
+    // Ensure CSS is properly handled
+    config.css = config.css || {};
+    config.css.postcss = "./postcss.config.js";
+    
+    // Add alias for proper imports
+    config.resolve = config.resolve || {};
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": "/src",
+      "@/tokens": "/src/tokens/index",
+      "@/design-tokens": "/src/tokens/design-tokens"
+    };
+    
+    return config;
+  },
+  typescript: {
+    check: false,
+    reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+    },
+  },
+  docs: {
+    autodocs: "tag",
+    defaultName: "Documentation"
+  }
 };
 
 export default config;
