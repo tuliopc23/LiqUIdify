@@ -366,6 +366,7 @@ jobs:
             --output=real-world-results.json
 
       - name: Validate Core Web Vitals
+        if: ${{ secrets.LHCI_GITHUB_APP_TOKEN != '' }}
         run: |
           node scripts/validate-core-web-vitals.js real-world-results.json
 

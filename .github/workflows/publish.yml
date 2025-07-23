@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   publish:
+    if: ${{ secrets.NPM_TOKEN != '' }}
     runs-on: ubuntu-latest
     steps:
       # Checkout with full history for version bumping

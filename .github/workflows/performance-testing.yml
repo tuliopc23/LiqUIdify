@@ -98,7 +98,7 @@ jobs:
           node scripts/bundle-performance-check.js
 
       - name: Run Real-World Performance Tests
-        if: matrix.test-suite == 'real-world-performance'
+        if: matrix.test-suite == 'real-world-performance' && secrets.LHCI_GITHUB_APP_TOKEN != ''
         run: |
           echo "🌍 Running real-world performance scenarios..."
 
