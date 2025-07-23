@@ -215,7 +215,8 @@
 		"url": "https://github.com/sponsors/tuliopc23"
 	},
 	"files": [
-		"dist",
+		"dist/**/*.{js,mjs,cjs,d.ts,css}",
+		"dist/types/**/*",
 		"README.md",
 		"LICENSE"
 	],
