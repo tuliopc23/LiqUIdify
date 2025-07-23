@@ -71,6 +71,7 @@ jobs:
           curl -f http://localhost:3000 || exit 1
 
       - name: Run Lighthouse CI - ${{ matrix.page.name }}
+        if: ${{ secrets.LHCI_GITHUB_APP_TOKEN != '' }}
         run: |
           lhci autorun --config=lighthouserc.js
         env:

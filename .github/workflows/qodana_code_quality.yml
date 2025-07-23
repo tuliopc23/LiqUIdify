@@ -9,6 +9,7 @@ on:
 
 jobs:
   qodana:
+    if: ${{ secrets.QODANA_TOKEN_1811045394 != '' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
