@@ -14,6 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -21,13 +26,13 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Build bundles
         run: |
-          npm run build:standard
-          npm run build:optimized
-          npm run build:modular
+          bun run build:standard
+          bun run build:optimized
+          bun run build:modular
 
       - name: Analyze bundle sizes
         id: analyze
