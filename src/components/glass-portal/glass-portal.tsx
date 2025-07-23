@@ -15,7 +15,7 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
 	key,
 }) => {
 	const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(
-  null,
+  undefined,
 	);
 	const isClient = useIsClient();
 
@@ -37,7 +37,7 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
 		setMountNode(node);
 
 		return () => {
-   setMountNode(null);
+   setMountNode(undefined);
 		};
 	}, [isClient, container]);
 

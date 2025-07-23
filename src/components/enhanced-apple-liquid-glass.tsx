@@ -7,7 +7,7 @@
 import type { HTMLAttributes } from "react";
 import React, { forwardRef } from "react";
 
-// TODO: These types need to be recreated or use unified glass system
+
 // import type {
 //   ENHANCED_GLASS_VARIANTS,
 //   EnhancedGlassOptions,
@@ -22,7 +22,7 @@ interface EnhancedGlassOptions {
 	enableSubpixel?: boolean;
 	magneticStrength?: number;
 }
-// TODO: These functions need to be recreated or use unified glass system
+
 // import {
 //   createEnhancedGlassLayers,
 //   getEnhancedGlassClass,

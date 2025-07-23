@@ -1,4 +1,4 @@
-import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
+import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, Search, X } from "lucide-react";
 import type React from "react";
@@ -345,7 +345,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 										<div className="px-4 py-3 text-center text-white/60">
 											Loading...
 										</div>
-									) : 0 === filteredOptions.length ? (
+									) : (0 === filteredOptions.length ? (
 										<div className="px-4 py-3 text-center text-white/60">
 											{emptyMessage}
 										</div>
@@ -386,7 +386,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 												)}
 											</div>
 										))
-									)}
+									))}
 								</div>
 							</div>
 						</motion.div>

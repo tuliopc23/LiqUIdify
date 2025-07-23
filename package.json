@@ -98,6 +98,7 @@
 		"./package.json": "./package.json"
 	},
 	"scripts": {
+		"prepare": "bun run build",
 		"analyze:bundles": "bun scripts/analyze-bundles.js",
 		"biome:check": "bunx biome check src/",
 		"biome:ci": "bunx biome ci src/",
@@ -226,8 +227,8 @@
 	],
 	"peerDependencies": {
 		"@sentry/react": ">=9.0.0",
-		"react": ">=18.0.0",
-		"react-dom": ">=18.0.0"
+		"react": "^18 || ^19",
+		"react-dom": "^18 || ^19"
 	},
 	"peerDependenciesMeta": {
 		"@sentry/react": {
@@ -303,7 +304,10 @@
 		"vitest": "^3.2.4",
 		"vitest-axe": "^0.1.0",
 		"vitest-canvas-mock": "^0.3.3",
-		"web-vitals": "^5.0.3"
+		"web-vitals": "^5.0.3",
+		"husky": "^9.0.0",
+		"@commitlint/cli": "^19.0.0",
+		"@commitlint/config-conventional": "^19.0.0"
 	},
 	"engines": {
 		"bun": ">=1.0.0"

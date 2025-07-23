@@ -105,7 +105,7 @@ function initAudioContext() {
 function generateSound(type: HapticType, volume: number): void {
 	const ctx = initAudioContext();
 	if (!ctx) {
-		return null;
+		return ;
 	}
 
 	const oscillator = ctx.createOscillator();
@@ -272,7 +272,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 			try {
 				const ctx = initAudioContext();
 				if (!ctx) {
-					return null;
+					return ;
 				}
 
 				const response = await fetch(url);
@@ -280,7 +280,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 				return await ctx.decodeAudioData(arrayBuffer);
 			} catch (error) {
 				console.error("Failed to load audio:", url, error);
-				return null;
+				return ;
 			}
 		};
 
@@ -313,10 +313,10 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 	// Trigger vibration
 	const vibrate = useCallback((pattern: number[]) => {
 		if ("undefined" === typeof window || "undefined" === typeof navigator) {
-			return null;
+			return ;
 		}
 		if (!configRef.current.vibration || !("vibrate" in navigator)) {
-			return null;
+			return ;
 		}
 
 		const scaledPattern = pattern.map((duration) =>
@@ -329,7 +329,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 	// Play audio feedback
 	const playAudio = useCallback((type: HapticType) => {
 		if (!configRef.current.audio?.enabled) {
-			return null;
+			return ;
 		}
 
 		const { sounds, volume = 0.5 } = configRef.current.audio;
@@ -338,7 +338,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 		if (soundUrl && audioCache.current.has(soundUrl)) {
 			const ctx = initAudioContext();
 			if (!ctx) {
-				return null;
+				return ;
 			}
 
 			const buffer = safeMapGet(audioCache.current, soundUrl);
@@ -346,7 +346,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 				console.warn(
 					`[useHapticFeedback] Audio buffer not found for ${soundUrl}`,
 				);
-				return null;
+				return ;
 			}
 
 			const source = ctx.createBufferSource();
@@ -368,7 +368,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 	const applyVisual = useCallback(
 		(element: HTMLElement | null, type: HapticType) => {
 			if (!element || !configRef.current.visual?.enabled) {
-				return null;
+				return ;
 			}
 
 			// Clean up previous visual feedback

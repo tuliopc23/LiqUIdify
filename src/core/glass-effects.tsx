@@ -185,9 +185,9 @@ export function useResponsiveGlass(
 	const currentIntensity =
 		"mobile" === screenSize && mobileIntensity
 			? mobileIntensity
-			: "desktop" === screenSize && desktopIntensity
+			: ("desktop" === screenSize && desktopIntensity
 				? desktopIntensity
-				: defaultIntensity || "medium";
+				: defaultIntensity || "medium");
 
 	return useGlassEffects({
 		...restOptions,

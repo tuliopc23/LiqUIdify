@@ -1,4 +1,4 @@
-import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
+import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Calendar, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import type React from 'react';

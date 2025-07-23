@@ -11,4 +11,3 @@ export * from "./color";
 export * from "./glass-effects";
 export { responsiveSize, touchTarget } from "./responsive";
 export * from "./validation";
-// export * from './animation'; // TODO: Add animation utils when available

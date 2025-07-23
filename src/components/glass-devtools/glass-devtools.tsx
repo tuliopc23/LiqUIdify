@@ -70,8 +70,8 @@ export function useGlassDevTools() {
 	const [state, setState] = useState<DevToolsState>({
 		isOpen: false,
 		activeTab: "inspector",
-  selectedElement: null,
-  inspection: null,
+  selectedElement: undefined,
+  inspection: undefined,
 		logs: [],
 		settings: {
 			enableRealTimeValidation: true,
@@ -100,9 +100,9 @@ export function useGlassDevTools() {
 				const consoleMethod =
 					"error" === log.level
 						? "error"
-						: "warn" === log.level
+						: ("warn" === log.level
 							? "warn"
-							: "log";
+							: "log");
 				console[consoleMethod](`[Glass DevTools] ${log.message}`, log.data);
 			}
 		},
@@ -218,7 +218,7 @@ export function GlassDevTools({
 }: GlassDevToolsProps) {
 	const { state, setState, inspectElement } = useGlassDevTools();
 	const [performanceReport, setPerformanceReport] =
-  useState<PerformanceReport | null>(null);
+  useState<PerformanceReport | null>(undefined);
 	const [cssReport, setCssReport] = useState<any>(undefined);
 	const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -521,9 +521,9 @@ function AccessibilityTab({
 							"w-3 h-3 rounded-full",
 							95 <= accessibility.score
 								? "bg-green-500"
-								: 80 <= accessibility.score
+								: (80 <= accessibility.score
 									? "bg-yellow-500"
-									: "bg-red-500",
+									: "bg-red-500"),
 						)}
 					/>
 					<span className="font-semibold">{accessibility.score}/100</span>
@@ -615,9 +615,9 @@ function PerformanceTab({
 									"text-lg font-bold",
 									"good" === metric.rating
 										? "text-green-600"
-										: "needs-improvement" === metric.rating
+										: ("needs-improvement" === metric.rating
 											? "text-yellow-600"
-											: "text-red-600",
+											: "text-red-600"),
 								)}
 							>
 								{metric.value.toFixed(0)}

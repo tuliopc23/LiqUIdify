@@ -251,7 +251,7 @@ export class AccessibilityManager {
 	private axeOptions: any;
 	private contrastCache: Map<string, ContrastResult>;
 	private validationCache: Map<HTMLElement, AccessibilityReport>;
-  private observer: MutationObserver | null = null;
+  private observer: MutationObserver | null = undefined;
 
 	private constructor() {
 		this.contrastCache = new Map();
@@ -402,17 +402,17 @@ export class AccessibilityManager {
 		// Check if it meets the required level
 		const meetsRequirement =
 			"AA" === level
-				? largeText
+				? (largeText
 					? result.passes.aa.large
-					: result.passes.aa.normal
-				: largeText
+					: result.passes.aa.normal)
+				: (largeText
 					? result.passes.aaa.large
-					: result.passes.aaa.normal;
+					: result.passes.aaa.normal);
 
 		// Auto-fix if needed and requested
 		if (!meetsRequirement && autoFix) {
 			const targetRatio =
-				"AA" === level ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
+				"AA" === level ? (largeText ? 3 : 4.5) : (largeText ? 4.5 : 7);
 
 			try {
 				// For now, keep the original color if contrast is poor
@@ -577,7 +577,7 @@ export class AccessibilityManager {
 				if (!element.hasAttribute(prop)) {
 					suggestions.push({
 						attribute: prop,
-            currentValue: null,
+            currentValue: undefined,
 						suggestedValue: this.getSuggestedARIAValue(prop, element),
 						reason: `Required attribute for role="${role}"`,
 					});
@@ -595,7 +595,7 @@ export class AccessibilityManager {
 						element.setAttribute(prop, value);
 						autoCorrections.push({
 							attribute: prop,
-              oldValue: null,
+              oldValue: undefined,
 							newValue: value,
 							applied: true,
 						});
@@ -608,7 +608,7 @@ export class AccessibilityManager {
 		if (this.isInteractive(element) && !this.hasAccessibleName(element)) {
 			suggestions.push({
 				attribute: "aria-label",
-        currentValue: null,
+        currentValue: undefined,
 				suggestedValue: this.generateAccessibleName(element),
 				reason: "Interactive element needs accessible name",
 			});
@@ -837,7 +837,7 @@ export class AccessibilityManager {
 			li: "listitem",
 		};
 
-    return implicitRoles[tagName] || null;
+    return implicitRoles[tagName] || undefined;
 	}
 
 	private isInteractive(element: HTMLElement): boolean {
@@ -928,8 +928,8 @@ class FocusTrap {
 	private container: HTMLElement;
 	private options: FocusOptions & { onDeactivate?: () => void };
 	private active: boolean = false;
-  private firstFocusableElement: HTMLElement | null = null;
-  private lastFocusableElement: HTMLElement | null = null;
+  private firstFocusableElement: HTMLElement | null = undefined;
+  private lastFocusableElement: HTMLElement | null = undefined;
 
 	constructor(
 		container: HTMLElement,

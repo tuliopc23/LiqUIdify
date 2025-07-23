@@ -98,9 +98,9 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 												"ml-2 font-bold",
 												95 <= report.score
 													? "text-green-500"
-													: 80 <= report.score
+													: (80 <= report.score
 														? "text-yellow-500"
-														: "text-red-500",
+														: "text-red-500"),
 											)}
 										>
 											{report.score}/100

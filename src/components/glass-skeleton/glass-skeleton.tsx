@@ -1,4 +1,4 @@
-import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
+import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { motion } from "framer-motion";
 import React from "react";
 import { cn } from "@/core/utils/classname";
@@ -87,9 +87,9 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
 					initial={animated ? { opacity: 0.4 } : false}
 					animate={
 						animated
-							? "pulse" === variant
+							? ("pulse" === variant
 								? pulseAnimation
-								: { opacity: [0.4, 0.8, 0.4] }
+								: { opacity: [0.4, 0.8, 0.4] })
 							: false
 					}
 					transition={

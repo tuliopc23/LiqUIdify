@@ -105,7 +105,7 @@ export class PerformanceMonitor {
 		try {
 			observer.observe({ type: "largest-contentful-paint", buffered: true });
 			this.observers.set("lcp", observer);
-		} catch (error) {
+		} catch {
       // LCP observer not supported in this environment
 		}
 	}
@@ -133,7 +133,7 @@ export class PerformanceMonitor {
 		try {
 			observer.observe({ type: "first-input", buffered: true });
 			this.observers.set("fid", observer);
-		} catch (error) {
+		} catch {
       // FID observer not supported in this environment
 		}
 	}
@@ -172,7 +172,7 @@ export class PerformanceMonitor {
 		try {
 			observer.observe({ type: "layout-shift", buffered: true });
 			this.observers.set("cls", observer);
-		} catch (error) {
+		} catch {
       // CLS observer not supported in this environment
 		}
 	}
@@ -365,7 +365,7 @@ export class PerformanceMonitor {
 			if (value !== undefined) {
 				const status = this.getMetricStatusByValue(metric, value);
 				coreWebVitalsScore +=
-					"good" === status ? 100 : "needs-improvement" === status ? 50 : 0;
+					"good" === status ? 100 : ("needs-improvement" === status ? 50 : 0);
 				coreWebVitalsCount++;
 
 				if ("good" !== status) {

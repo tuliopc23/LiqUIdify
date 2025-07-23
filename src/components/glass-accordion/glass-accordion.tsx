@@ -1,5 +1,5 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
+import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";

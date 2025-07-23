@@ -1,4 +1,4 @@
-import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
+import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { cn } from '@/core/utils/classname';
@@ -79,7 +79,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
         className={cn(spinnerVariants({ variant, size, speed }), className)}
         animate={{ rotate: 360 }}
         transition={{
-          duration: 'slow' === speed ? 2 : 'fast' === speed ? 0.5 : 1,
+          duration: 'slow' === speed ? 2 : ('fast' === speed ? 0.5 : 1),
           repeat: Infinity,
           ease: 'linear',
         }}

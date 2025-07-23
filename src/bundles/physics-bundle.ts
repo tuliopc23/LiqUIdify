@@ -13,7 +13,7 @@ export {
 export { createGlassRipple, useMagneticHover } from "../lib/glass-physics";
 
 // Apple liquid glass effects
-// TODO: Implement these exports once the lib file is created
+
 // export {
 //   useAppleLiquidGlass,
 //   getAppleLiquidGlassClass,

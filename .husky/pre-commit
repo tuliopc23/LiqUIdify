@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Run prettier on staged files
+npx prettier --write --ignore-unknown $(git diff --cached --name-only)
+
+# Run lint-staged for linting
 npx lint-staged

@@ -9,6 +9,10 @@ dist/
 build/
 storybook-static/
 
+# Package artifacts
+*.tgz
+*.tar.gz
+
 # Environment variables
 .env
 .env.local
