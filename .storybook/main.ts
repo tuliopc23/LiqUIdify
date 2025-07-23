@@ -1,4 +1,7 @@
 /** @type { import('@storybook/react-vite').StorybookConfig } */
+import { resolve } from "path";
+import postcssConfig from "../postcss.config.js";
+
 const config = {
   stories: [
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
@@ -20,17 +23,17 @@ const config = {
   viteFinal: async (config) => {
     // Ensure CSS is properly handled
     config.css = config.css || {};
-    config.css.postcss = "./postcss.config.js";
-    
+    config.css.postcss = postcssConfig;
+
     // Add alias for proper imports
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
-      "@": "/src",
-      "@/tokens": "/src/tokens/index",
-      "@/design-tokens": "/src/tokens/design-tokens"
+      "@": resolve(__dirname, "../src"),
+      "@/tokens": resolve(__dirname, "../src/tokens/index"),
+      "@/design-tokens": resolve(__dirname, "../src/tokens/design-tokens")
     };
-    
+
     return config;
   },
   typescript: {
