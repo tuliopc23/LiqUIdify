@@ -27,7 +27,7 @@
       // Now enabled after console cleanup
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
-		"noUncheckedIndexedAccess": false, // TODO: Enable after fixing index access
+		"noUncheckedIndexedAccess": true,
 
 		/* Strict type checking - keeping most important ones enabled */
 		"strictNullChecks": true,

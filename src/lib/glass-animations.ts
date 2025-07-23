@@ -798,7 +798,10 @@ export const GlassUtils = {
 			const now = Date.now();
 			const duration = now - start;
 			const actualFPS = (frame / duration) * 1000;
-			console.log(`Current FPS: ${actualFPS}`);
+			// Use dev-only logger
+			// eslint-disable-next-line @typescript-eslint/no-var-requires
+			const { devLog } = require("@/utils/dev-logger");
+			devLog(`Current FPS: ${actualFPS}`);
 
 			if (1000 > duration) {
 				requestAnimationFrame(checkFrameRate);
