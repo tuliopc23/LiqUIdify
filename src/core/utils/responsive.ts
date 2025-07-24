@@ -130,7 +130,7 @@ export function matchesBreakpoint(
 		return false;
 	}
 
-	const width = typeof window !== "undefined" ? window.innerWidth : 1024;
+	const width = safeWindow.getInnerWidth();
 	const breakpointValue = parseInt(BREAKPOINTS[breakpoint]);
 
 	switch (condition) {
