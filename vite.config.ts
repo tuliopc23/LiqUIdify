@@ -146,5 +146,7 @@ export default defineConfig({
 
 	esbuild: {
 		drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
+		target: ["es2020", "edge88", "firefox78", "chrome87", "safari13.1"],
+		jsx: "automatic",
 	},
 });
