@@ -453,7 +453,7 @@ interface HapticContextValue {
   trigger: (_type: HapticType, _element?: HTMLElement | null) => void;
 }
 
-const HapticContext = createContext<HapticContextValue | null>(undefined);
+const HapticContext = createContext<HapticContextValue | null>(null);
 
 export function HapticProvider({
   children,

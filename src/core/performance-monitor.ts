@@ -195,7 +195,7 @@ class PerformanceMonitor {
     observer.observe({ entryTypes: ['longtask'] });
 
     // Estimate TTI after load
-    window.addEventListener('load', () => {
+    if (typeof window !== "undefined") { window.addEventListener('load', () => {
       setTimeout(() => {
         if (0 === tti) {
           tti = performance.now();
@@ -336,7 +336,7 @@ class PerformanceMonitor {
    */
   getReport(): PerformanceReport {
     return {
-      url: window.location.href,
+      url: if (typeof window !== "undefined") { window.location.href,
       timestamp: Date.now(),
       webVitals: [...this.metrics.values()],
       componentMetrics: [...this.componentMetrics.values()],
@@ -373,14 +373,14 @@ class PerformanceMonitor {
    */
   private setupPeriodicReporting(): void {
     // Send report on page visibility change
-    document.addEventListener('visibilitychange', () => {
+    if (typeof document !== "undefined") { document.addEventListener('visibilitychange', () => {
       if ('hidden' === document.visibilityState) {
         this.sendReport();
       }
     });
 
     // Send report before unload
-    window.addEventListener('beforeunload', () => {
+    if (typeof window !== "undefined") { window.addEventListener('beforeunload', () => {
       this.sendReport();
     });
 

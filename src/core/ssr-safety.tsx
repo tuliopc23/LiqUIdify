@@ -71,7 +71,7 @@ export function SSRSafe({
  * Hook for SSR-safe access to window and document objects
  */
 export function useSSRSafeWindow() {
-  const [windowObj, setWindowObj] = useState<Window | undefined>(undefined);
+  const [windowObj, setWindowObj] = useState<Window | undefined | null>(null);
 
   useEffect(() => {
     if ('undefined' !== typeof window) {
@@ -86,7 +86,7 @@ export function useSSRSafeWindow() {
  * Hook for SSR-safe localStorage access
  */
 export function useSSRSafeLocalStorage() {
-  const [storage, setStorage] = useState<Storage | undefined>(undefined);
+  const [storage, setStorage] = useState<Storage | undefined | null>(null);
 
   useEffect(() => {
     if ('undefined' !== typeof window && window.localStorage) {

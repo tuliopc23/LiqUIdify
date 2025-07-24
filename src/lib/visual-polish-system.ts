@@ -714,7 +714,7 @@ export class VisualPolishManager {
  */
 export function useVisualPolish(config: Partial<PolishConfig> = {}) {
   const [qualityMetrics, setQualityMetrics] =
-    useState<VisualQualityMetrics | null>(undefined);
+    useState<VisualQualityMetrics | null | null>(null);
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const polishManagerRef = useRef<VisualPolishManager | null>(null);
 
@@ -727,7 +727,7 @@ export function useVisualPolish(config: Partial<PolishConfig> = {}) {
 
     return () => {
       polishManagerRef.current?.destroy();
-      polishManagerRef.current = undefined;
+      polishManagerRef.current = null;
     };
   }, [config]);
 

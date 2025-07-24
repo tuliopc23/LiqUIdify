@@ -149,7 +149,7 @@ export function useClientOnly<T>(
   factory: () => T,
   deps: any[] = []
 ): { value: T | null; isReady: boolean } {
-  const [value, setValue] = useState<T | null>(undefined);
+  const [value, setValue] = useState<T | null | null>(null);
   const [isReady, setIsReady] = useState(false);
   const isClient = isBrowser();
 

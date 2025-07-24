@@ -246,7 +246,7 @@ export function useNetworkStatus(): {
   const [effectiveType, setEffectiveType] = useState<
     'slow-2g' | '2g' | '3g' | '4g' | undefined
   >(undefined);
-  const [saveData, setSaveData] = useState<boolean | undefined>(undefined);
+  const [saveData, setSaveData] = useState<boolean | undefined | null>(null);
 
   useEffect(() => {
     if (!isClient) {

@@ -10,7 +10,7 @@ interface SSRPortalProps {
 
 export const SSRPortal = ({ children, to = 'body' }: SSRPortalProps) => {
   const [mounted, setMounted] = useState(false);
-  const [container, setContainer] = useState<HTMLElement | null>(undefined);
+  const [container, setContainer] = useState<HTMLElement | null | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -18,7 +18,7 @@ export const SSRPortal = ({ children, to = 'body' }: SSRPortalProps) => {
     const target =
       'string' === typeof to
         ? 'undefined' !== typeof document
-          ? document.querySelector(to)
+          ? if (typeof document !== "undefined") { document.querySelector(to)
           : undefined
         : to;
 

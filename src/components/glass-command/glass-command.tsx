@@ -111,11 +111,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 		};
 
 		if ("undefined" !== typeof document) {
-			document.addEventListener("keydown", handleKeyDown);
+			if (typeof document !== "undefined") { document.addEventListener("keydown", handleKeyDown);
 		}
 		return () => {
 			if ("undefined" !== typeof document) {
-				document.removeEventListener("keydown", handleKeyDown);
+				if (typeof document !== "undefined") { document.removeEventListener("keydown", handleKeyDown);
 			}
 		};
 	}, [isOpen, selectedIndex, allFilteredItems, handleClose]);

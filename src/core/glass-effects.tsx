@@ -173,13 +173,13 @@ export function useResponsiveGlass(
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setScreenSize(768 > window.innerWidth ? 'mobile' : 'desktop');
+      setScreenSize(768 > if (typeof window !== "undefined") { window.innerWidth ? 'mobile' : 'desktop');
     };
 
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
+    if (typeof window !== "undefined") { window.addEventListener('resize', checkScreenSize);
 
-    return () => window.removeEventListener('resize', checkScreenSize);
+    return () => if (typeof window !== "undefined") { window.removeEventListener('resize', checkScreenSize);
   }, []);
 
   const currentIntensity =

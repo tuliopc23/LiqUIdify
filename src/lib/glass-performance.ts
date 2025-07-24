@@ -142,7 +142,7 @@ export class GlassPerformanceMonitor {
   private frameHistory: number[] = [];
   private lastFrameTime: number = 0;
   private isMonitoring: boolean = false;
-  private animationFrame: number | null = undefined;
+  private animationFrame: number | null = null;
 
   start(): void {
     if (this.isMonitoring) {
@@ -159,7 +159,7 @@ export class GlassPerformanceMonitor {
     this.isMonitoring = false;
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = undefined;
+      this.animationFrame = null;
     }
   }
 
@@ -259,9 +259,9 @@ export class GlassAnimationScheduler {
   private tasks: Map<string, AnimationTask> = new Map();
   private config: OptimizationConfig;
   private monitor: GlassPerformanceMonitor;
-  private animationFrame: number | null = undefined;
+  private animationFrame: number | null = null;
   private isRunning: boolean = false;
-  private intersectionObserver: IntersectionObserver | null = undefined;
+  private intersectionObserver: IntersectionObserver | null = null;
   private reducedMotion: boolean = false;
 
   constructor(config: OptimizationConfig = DEFAULT_PERFORMANCE_CONFIG) {
@@ -380,7 +380,7 @@ export class GlassAnimationScheduler {
 
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = undefined;
+      this.animationFrame = null;
     }
   }
 
@@ -466,7 +466,7 @@ export class GlassAnimationScheduler {
 
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
-      this.intersectionObserver = undefined;
+      this.intersectionObserver = null;
     }
 
     this.tasks.clear();
@@ -536,7 +536,7 @@ export class GPUAccelerationHelper {
  * Provides performance monitoring and optimization tools
  */
 export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
-  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(undefined);
+  const [metrics, setMetrics] = useState<PerformanceMetrics | null | null>(null);
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const schedulerRef = useRef<GlassAnimationScheduler | null>(null);
   const configRef = useRef<OptimizationConfig>({
@@ -550,7 +550,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
 
     return () => {
       schedulerRef.current?.destroy();
-      schedulerRef.current = undefined;
+      schedulerRef.current = null;
     };
   }, []);
 

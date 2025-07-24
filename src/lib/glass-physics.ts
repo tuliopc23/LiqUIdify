@@ -313,7 +313,7 @@ export const useMagneticHover = (
       // Reset animation state on error
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
-        animationRef.current = undefined;
+        animationRef.current = null;
       }
     }
   }, []);
@@ -374,7 +374,7 @@ export const useMagneticHover = (
       // Ensure cleanup on error
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
-        animationRef.current = undefined;
+        animationRef.current = null;
       }
     }
   }, [animate]);
@@ -966,7 +966,7 @@ export class PhysicsWorld {
   private fluids: Map<string, FluidSimulation> = new Map();
   private lastTime: number = 0;
   private running: boolean = false;
-  private rafId: number | null = undefined;
+  private rafId: number | null = null;
 
   // Global forces
   gravity: Vector2D = new Vector2D(0, 98);
@@ -1009,7 +1009,7 @@ export class PhysicsWorld {
     this.running = false;
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
-      this.rafId = undefined;
+      this.rafId = null;
     }
   }
 

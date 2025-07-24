@@ -218,8 +218,8 @@ export function GlassDevTools({
 }: GlassDevToolsProps) {
 	const { state, setState, inspectElement } = useGlassDevTools();
 	const [performanceReport, setPerformanceReport] =
-  useState<PerformanceReport | null>(undefined);
-	const [cssReport, setCssReport] = useState<any>(undefined);
+  useState<PerformanceReport | null | null>(null);
+	const [cssReport, setCssReport] = useState<any | null>(null);
 	const overlayRef = useRef<HTMLDivElement>(null);
 
 	// Initialize DevTools
@@ -246,7 +246,7 @@ export function GlassDevTools({
 			}
 		};
 
-		document.addEventListener("keydown", handleKeyDown);
+		if (typeof document !== "undefined") { document.addEventListener("keydown", handleKeyDown);
 
 		// Set up element inspection on click
 		const handleElementClick = (e: MouseEvent) => {
@@ -267,12 +267,12 @@ export function GlassDevTools({
 		};
 
 		if (state.isOpen) {
-			document.addEventListener("click", handleElementClick, true);
+			if (typeof document !== "undefined") { document.addEventListener("click", handleElementClick, true);
 		}
 
 		return () => {
-			document.removeEventListener("keydown", handleKeyDown);
-			document.removeEventListener("click", handleElementClick, true);
+			if (typeof document !== "undefined") { document.removeEventListener("keydown", handleKeyDown);
+			if (typeof document !== "undefined") { document.removeEventListener("click", handleElementClick, true);
 		};
 	}, [
 		enabled,

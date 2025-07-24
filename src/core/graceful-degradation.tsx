@@ -136,8 +136,8 @@ export function withNetworkFallback(
       updateOnlineStatus();
       updateConnectionSpeed();
 
-      window.addEventListener('online', updateOnlineStatus);
-      window.addEventListener('offline', updateOnlineStatus);
+      if (typeof window !== "undefined") { window.addEventListener('online', updateOnlineStatus);
+      if (typeof window !== "undefined") { window.addEventListener('offline', updateOnlineStatus);
 
       const connection = (navigator as any).connection;
       if (connection) {
@@ -145,8 +145,8 @@ export function withNetworkFallback(
       }
 
       return () => {
-        window.removeEventListener('online', updateOnlineStatus);
-        window.removeEventListener('offline', updateOnlineStatus);
+        if (typeof window !== "undefined") { window.removeEventListener('online', updateOnlineStatus);
+        if (typeof window !== "undefined") { window.removeEventListener('offline', updateOnlineStatus);
 
         if (connection) {
           connection.removeEventListener('change', updateConnectionSpeed);
@@ -156,7 +156,7 @@ export function withNetworkFallback(
 
     const handleRetry = () => {
       setRetryCount((prev) => prev + 1);
-      window.location.reload();
+      if (typeof window !== "undefined") { window.location.reload();
     };
 
     // Offline fallback
@@ -315,7 +315,7 @@ export function withDeviceFallback(
 
     useEffect(() => {
       const checkDeviceType = () => {
-        const width = window.innerWidth;
+        const width = if (typeof window !== "undefined") { window.innerWidth;
         const isTouchDevice = 'ontouchstart' in window;
 
         if (768 > width) {
@@ -328,9 +328,9 @@ export function withDeviceFallback(
       };
 
       checkDeviceType();
-      window.addEventListener('resize', checkDeviceType);
+      if (typeof window !== "undefined") { window.addEventListener('resize', checkDeviceType);
 
-      return () => window.removeEventListener('resize', checkDeviceType);
+      return () => if (typeof window !== "undefined") { window.removeEventListener('resize', checkDeviceType);
     }, []);
 
     switch (deviceType) {

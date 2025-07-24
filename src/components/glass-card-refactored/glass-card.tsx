@@ -111,7 +111,7 @@ interface CardContextValue {
 	selectable: boolean;
 }
 
-const CardContext = createContext<CardContextValue | null>(undefined);
+const CardContext = createContext<CardContextValue | null>(null);
 
 const useCardContext = () => {
 	const context = useContext(CardContext);

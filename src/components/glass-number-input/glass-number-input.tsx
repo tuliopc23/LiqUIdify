@@ -147,7 +147,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 		const parseNumber = useCallback(
 			(str: string): number | undefined => {
 				if (!str.trim()) {
-					return undefined;
+					return null;
 				}
 
 				// Remove formatting characters but keep decimal point and negative sign
@@ -155,7 +155,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 				const num = parseFloat(cleaned);
 
 				if (Number.isNaN(num)) {
-					return undefined;
+					return null;
 				}
 
 				// Apply precision

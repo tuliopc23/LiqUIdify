@@ -42,8 +42,8 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
 			onError?.(event.error);
 		};
 
-		window.addEventListener("error", handleError);
-		return () => window.removeEventListener("error", handleError);
+		if (typeof window !== "undefined") { window.addEventListener("error", handleError);
+		return () => if (typeof window !== "undefined") { window.removeEventListener("error", handleError);
 	}, [onError]);
 
 	const shouldFallback = hasError || shouldUseFallback(feature as any);

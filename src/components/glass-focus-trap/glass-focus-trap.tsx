@@ -384,9 +384,9 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 		}
 
 		// Add event listeners
-		document.addEventListener("keydown", handleKeyDown, true);
-		document.addEventListener("focusin", handleFocusIn, true);
-		document.addEventListener("mousedown", handleMouseDown, true);
+		if (typeof document !== "undefined") { document.addEventListener("keydown", handleKeyDown, true);
+		if (typeof document !== "undefined") { document.addEventListener("focusin", handleFocusIn, true);
+		if (typeof document !== "undefined") { document.addEventListener("mousedown", handleMouseDown, true);
 
 		return () => {
 			// Clear timeout if exists
@@ -402,9 +402,9 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 				}
 			}
 
-			document.removeEventListener("keydown", handleKeyDown, true);
-			document.removeEventListener("focusin", handleFocusIn, true);
-			document.removeEventListener("mousedown", handleMouseDown, true);
+			if (typeof document !== "undefined") { document.removeEventListener("keydown", handleKeyDown, true);
+			if (typeof document !== "undefined") { document.removeEventListener("focusin", handleFocusIn, true);
+			if (typeof document !== "undefined") { document.removeEventListener("mousedown", handleMouseDown, true);
 
 			// Call deactivate callback
 			if (onDeactivate) {

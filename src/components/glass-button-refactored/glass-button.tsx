@@ -367,9 +367,9 @@ export const GlassButton = React.memo(
 				glassEffect,
 			});
 
-			const glassVariables = generateGlassVariables(glassEffect?.intensity, {
+			const glassVariables = generateGlassVariables({ intensity: glassEffect?.intensity, config: {
 				animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
-				...glassEffect,
+            ...glassEffect, },
 			});
 
 			// Build component classes

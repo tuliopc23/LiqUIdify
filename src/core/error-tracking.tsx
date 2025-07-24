@@ -36,7 +36,7 @@ export interface ErrorTrackingConfig {
 
 class ErrorTrackingSystem {
   private static instance: ErrorTrackingSystem;
-  private sentry: any = undefined;
+  private sentry: any = null;
   private __config: ErrorTrackingConfig = {};
   private errorQueue: ErrorReport[] = [];
   private isInitialized = false;

@@ -127,8 +127,8 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 
 			// Keep popover within viewport
 			const viewport = {
-				width: window.innerWidth,
-				height: window.innerHeight,
+				width: if (typeof window !== "undefined") { window.innerWidth,
+				height: if (typeof window !== "undefined") { window.innerHeight,
 			};
 
 			if (8 > left) {
@@ -174,16 +174,16 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 		};
 
 		if (isOpen) {
-			document.addEventListener("mousedown", handleClickOutside);
-			document.addEventListener("keydown", handleEscape);
+			if (typeof document !== "undefined") { document.addEventListener("mousedown", handleClickOutside);
+			if (typeof document !== "undefined") { document.addEventListener("keydown", handleEscape);
 		} else {
-			document.removeEventListener("mousedown", handleClickOutside);
-			document.removeEventListener("keydown", handleEscape);
+			if (typeof document !== "undefined") { document.removeEventListener("mousedown", handleClickOutside);
+			if (typeof document !== "undefined") { document.removeEventListener("keydown", handleEscape);
 		}
 
 		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-			document.removeEventListener("keydown", handleEscape);
+			if (typeof document !== "undefined") { document.removeEventListener("mousedown", handleClickOutside);
+			if (typeof document !== "undefined") { document.removeEventListener("keydown", handleEscape);
 		};
 	}, [isOpen, closeOnClickOutside, closeOnEscape, setOpen]);
 

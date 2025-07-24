@@ -44,7 +44,7 @@ export function GlassPerformanceProvider({
   onMetricUpdate,
   onPerformanceIssue,
 }: GlassPerformanceProviderProps) {
-  const [monitor, setMonitor] = useState<PerformanceMonitor | null>(undefined);
+  const [monitor, setMonitor] = useState<PerformanceMonitor | null | null>(null);
   const [metrics, setMetrics] = useState<PerformanceMetrics>({});
   const [isMonitoring, setIsMonitoring] = useState(enableAutoMonitoring);
 

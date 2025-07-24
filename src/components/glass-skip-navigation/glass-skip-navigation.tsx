@@ -55,7 +55,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 			// Find landmark elements
 			DEFAULT_LANDMARKS.forEach(({ role, label, id }) => {
-				const elements = document.querySelectorAll(`[role="${role}"]`);
+				const elements = if (typeof document !== "undefined") { document.querySelectorAll(`[role="${role}"]`);
 
 				if (0 < elements.length) {
 					elements.forEach((element, index) => {
@@ -82,7 +82,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 			});
 
 			// Find headings
-			const headings = document.querySelectorAll("h1, h2");
+			const headings = if (typeof document !== "undefined") { document.querySelectorAll("h1, h2");
 			headings.forEach((heading, index) => {
 				if (!heading.id) {
 					heading.id = `heading-${index}`;
@@ -97,7 +97,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 			});
 
 			// Find forms
-			const forms = document.querySelectorAll(
+			const forms = if (typeof document !== "undefined") { document.querySelectorAll(
 				"form[aria-label], form[aria-labelledby]",
 			);
 			forms.forEach((form, index) => {
@@ -107,7 +107,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 				const labelledById = form.getAttribute("aria-labelledby");
 				const labelElement = labelledById
-					? document.getElementById(labelledById)
+					? if (typeof document !== "undefined") { document.getElementById(labelledById)
 					: undefined;
 				const formName =
 					form.getAttribute("aria-label") ||
@@ -126,7 +126,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 		// Wait for DOM to be ready
 		if ("loading" === document.readyState) {
-			document.addEventListener("DOMContentLoaded", generateSkipLinks);
+			if (typeof document !== "undefined") { document.addEventListener("DOMContentLoaded", generateSkipLinks);
 		} else {
 			generateSkipLinks();
 		}
@@ -162,9 +162,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 		if ("string" === typeof link.target) {
 			if (link.target.startsWith("#")) {
-				targetElement = document.querySelector(link.target);
+				targetElement = if (typeof document !== "undefined") { document.querySelector(link.target);
 			} else {
-				targetElement = document.getElementById(link.target);
+				targetElement = if (typeof document !== "undefined") { document.getElementById(link.target);
 			}
 		} else {
 			targetElement = link.target;
@@ -344,9 +344,9 @@ export function useSkipNavigation() {
 
 		if ("string" === typeof link.target) {
 			if (link.target.startsWith("#")) {
-				targetElement = document.querySelector(link.target);
+				targetElement = if (typeof document !== "undefined") { document.querySelector(link.target);
 			} else {
-				targetElement = document.getElementById(link.target);
+				targetElement = if (typeof document !== "undefined") { document.getElementById(link.target);
 			}
 		} else {
 			targetElement = link.target;

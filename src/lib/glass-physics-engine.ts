@@ -173,7 +173,7 @@ export const CHOREOGRAPHY_PRESETS: Record<string, AnimationChoreography> = {
 export class SpringPhysics {
   private config: SpringConfig;
   private state: PhysicsState;
-  private animationFrame: number | null = undefined;
+  private animationFrame: number | null = null;
   private onUpdate?: (state: PhysicsState) => void;
   private onComplete?: () => void;
 
@@ -278,7 +278,7 @@ export class SpringPhysics {
 
     if (this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = undefined;
+      this.animationFrame = null;
     }
 
     if (this.onComplete) {
@@ -288,8 +288,8 @@ export class SpringPhysics {
 
   destroy(): void {
     this.stop();
-    this.onUpdate = undefined;
-    this.onComplete = undefined;
+    this.onUpdate = null;
+    this.onComplete = null;
   }
 }
 
@@ -732,7 +732,7 @@ export function useAdvancedPhysics(
 
     return () => {
       springRef.current?.destroy();
-      magneticRef.current = undefined;
+      magneticRef.current = null;
       choreographerRef.current?.cancel();
       gestureRef.current?.destroy();
     };

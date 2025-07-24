@@ -36,12 +36,12 @@ export function GlassModalLite({
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
+      if (typeof document !== "undefined") { document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      if (typeof document !== "undefined") { document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = '';
     };
   }, [isOpen, onClose]);

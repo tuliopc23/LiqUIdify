@@ -255,7 +255,7 @@ export function useCompoundComponentState<T extends Record<string, any>>(
   const [state, setState] = React.useState<T>(initialState);
 
   // Always call useContext, but use a default context if none provided
-  const defaultContext = React.createContext<T | undefined>(undefined);
+  const defaultContext = React.createContext<T | undefined>(null);
   const contextToUse = context || defaultContext;
   const contextValue = React.useContext(contextToUse);
 

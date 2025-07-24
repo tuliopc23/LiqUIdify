@@ -310,9 +310,9 @@ export class SpringAnimation {
   private targetValue: number;
   private velocity: number;
   private options: SpringOptions;
-  private animationFrame: number | null = undefined;
-  private onUpdateCallback: ((value: number) => void) | null = undefined;
-  private onCompleteCallback: (() => void) | null = undefined;
+  private animationFrame: number | null = null;
+  private onUpdateCallback: ((value: number) => void) | null = null;
+  private onCompleteCallback: (() => void) | null = null;
 
   constructor(
     target: HTMLElement,
@@ -352,7 +352,7 @@ export class SpringAnimation {
   stop(): this {
     if (null !== this.animationFrame) {
       cancelAnimationFrame(this.animationFrame);
-      this.animationFrame = undefined;
+      this.animationFrame = null;
     }
     return this;
   }
@@ -551,7 +551,7 @@ export function useMagneticEffect(
           element.style.transform = '';
           element.style.transition = '';
           cancelAnimationFrame(animationFrame!);
-          animationFrame = undefined;
+          animationFrame = null;
           return;
         }
       } else {
@@ -596,17 +596,17 @@ export function useMagneticEffect(
 
     // Initialize
     updateElementPosition();
-    window.addEventListener('mousemove', handleMouseMove);
+    if (typeof window !== "undefined") { window.addEventListener('mousemove', handleMouseMove);
     element.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('resize', updateElementPosition);
-    window.addEventListener('scroll', updateElementPosition);
+    if (typeof window !== "undefined") { window.addEventListener('resize', updateElementPosition);
+    if (typeof window !== "undefined") { window.addEventListener('scroll', updateElementPosition);
 
     // Cleanup
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (typeof window !== "undefined") { window.removeEventListener('mousemove', handleMouseMove);
       element.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('resize', updateElementPosition);
-      window.removeEventListener('scroll', updateElementPosition);
+      if (typeof window !== "undefined") { window.removeEventListener('resize', updateElementPosition);
+      if (typeof window !== "undefined") { window.removeEventListener('scroll', updateElementPosition);
 
       if (null !== animationFrame) {
         cancelAnimationFrame(animationFrame);

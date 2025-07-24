@@ -262,13 +262,13 @@ export const GLASS_SHADERS = {
 // WebGL shader effect class
 export class GlassShaderEffect {
   private gl: WebGLRenderingContext;
-  private program: WebGLProgram | null = undefined;
+  private program: WebGLProgram | null = null;
   private uniforms: Map<string, WebGLUniformLocation> = new Map();
   private textures: Map<string, WebGLTexture> = new Map();
-  private frameBuffer: WebGLFramebuffer | null = undefined;
-  private renderTexture: WebGLTexture | null = undefined;
+  private frameBuffer: WebGLFramebuffer | null = null;
+  private renderTexture: WebGLTexture | null = null;
   private startTime: number;
-  private animationId: number | null = undefined;
+  private animationId: number | null = null;
 
   constructor(
     private canvas: HTMLCanvasElement,
@@ -582,7 +582,7 @@ export class GlassShaderEffect {
   stop(): void {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
-      this.animationId = undefined;
+      this.animationId = null;
     }
   }
 

@@ -47,7 +47,7 @@ export const LineChart: React.FC<LineChartProps> = ({
 	gradient = true,
 }) => {
 	const svgRef = useRef<SVGSVGElement>(null);
-  const [hoveredPoint, setHoveredPoint] = useState<number | null>(undefined);
+  const [hoveredPoint, setHoveredPoint] = useState<number | null | null>(null);
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {

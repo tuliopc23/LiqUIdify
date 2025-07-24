@@ -12,8 +12,8 @@ interface AccessibilityDemoProps {
 export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 	className,
 }) => {
-	const [report, setReport] = useState<any>(undefined);
-	const [contrastResult, setContrastResult] = useState<any>(undefined);
+	const [report, setReport] = useState<any | null>(null);
+	const [contrastResult, setContrastResult] = useState<any | null>(null);
 	const [validating, setValidating] = useState(false);
 	const demoRef = useRef<HTMLDivElement>(null);
 	const [fgColor, setFgColor] = useState("#333333");

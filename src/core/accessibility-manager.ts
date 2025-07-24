@@ -251,7 +251,7 @@ export class AccessibilityManager {
   private axeOptions: any;
   private contrastCache: Map<string, ContrastResult>;
   private validationCache: Map<HTMLElement, AccessibilityReport>;
-  private observer: MutationObserver | null = undefined;
+  private observer: MutationObserver | null = null;
 
   private constructor() {
     this.contrastCache = new Map();
@@ -923,8 +923,8 @@ class FocusTrap {
   private container: HTMLElement;
   private options: FocusOptions & { onDeactivate?: () => void };
   private active: boolean = false;
-  private firstFocusableElement: HTMLElement | null = undefined;
-  private lastFocusableElement: HTMLElement | null = undefined;
+  private firstFocusableElement: HTMLElement | null = null;
+  private lastFocusableElement: HTMLElement | null = null;
 
   constructor(
     container: HTMLElement,
@@ -961,9 +961,9 @@ class FocusTrap {
     }
 
     // Add event listeners
-    document.addEventListener('keydown', this.handleKeyDown);
+    if (typeof document !== "undefined") { document.addEventListener('keydown', this.handleKeyDown);
     if (this.options.clickOutsideDeactivates) {
-      document.addEventListener('click', this.handleClickOutside);
+      if (typeof document !== "undefined") { document.addEventListener('click', this.handleClickOutside);
     }
   }
 
@@ -973,8 +973,8 @@ class FocusTrap {
     }
 
     this.active = false;
-    document.removeEventListener('keydown', this.handleKeyDown);
-    document.removeEventListener('click', this.handleClickOutside);
+    if (typeof document !== "undefined") { document.removeEventListener('keydown', this.handleKeyDown);
+    if (typeof document !== "undefined") { document.removeEventListener('click', this.handleClickOutside);
 
     if (this.options.onDeactivate) {
       this.options.onDeactivate();

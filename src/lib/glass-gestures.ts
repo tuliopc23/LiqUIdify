@@ -658,7 +658,7 @@ export function useGlassGestures(
     return () => {
       if (gestureRecognizerRef.current) {
         gestureRecognizerRef.current.destroy();
-        gestureRecognizerRef.current = undefined;
+        gestureRecognizerRef.current = null;
       }
     };
   }, [setupGestureRecognizer]);

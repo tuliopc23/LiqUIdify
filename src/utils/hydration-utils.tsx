@@ -335,7 +335,7 @@ export function useHydrationComplete() {
  * Utility for safe client-side only execution
  */
 export function useClientOnly<T>(factory: () => T, deps: any[] = []): T | null {
-  const [value, setValue] = useState<T | null>(undefined);
+  const [value, setValue] = useState<T | null | null>(null);
   const isHydrated = useHydrationComplete();
 
   useEffect(() => {

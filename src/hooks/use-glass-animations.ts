@@ -151,11 +151,11 @@ export function useGlassAnimation(
   const cancel = useCallback(() => {
     if (animationRef.current) {
       animationRef.current.cancel();
-      animationRef.current = undefined;
+      animationRef.current = null;
     }
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
-      timeoutRef.current = undefined;
+      timeoutRef.current = null;
     }
     setState((prev) => ({ ...prev, isAnimating: false }));
   }, []);

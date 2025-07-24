@@ -25,7 +25,7 @@ export function ErrorRecovery({
   children: ReactNode;
   options?: Partial<ErrorRecoveryOptions>;
 }) {
-  const [error] = useState<Error | null>(undefined);
+  const [error] = useState<Error | null | null>(null);
   const [retryCount] = useState(0);
   const [isRetrying] = useState(false);
 
@@ -117,7 +117,7 @@ export function useLocalStorage<T>(
 
 // SSR-Safe Window Hook
 export function useWindow() {
-  const [windowObj, setWindowObj] = useState<Window | null>(undefined);
+  const [windowObj, setWindowObj] = useState<Window | null | null>(null);
 
   useEffect(() => {
     setWindowObj('undefined' !== typeof window ? window : undefined);
@@ -128,7 +128,7 @@ export function useWindow() {
 
 // SSR-Safe Document Hook
 export function useDocument() {
-  const [documentObj, setDocumentObj] = useState<Document | null>(undefined);
+  const [documentObj, setDocumentObj] = useState<Document | null | null>(null);
 
   useEffect(() => {
     setDocumentObj('undefined' !== typeof document ? document : undefined);
@@ -139,7 +139,7 @@ export function useDocument() {
 
 // SSR-Safe Navigator Hook
 export function useNavigator() {
-  const [navigatorObj, setNavigatorObj] = useState<Navigator | null>(undefined);
+  const [navigatorObj, setNavigatorObj] = useState<Navigator | null | null>(null);
 
   useEffect(() => {
     setNavigatorObj('undefined' !== typeof navigator ? navigator : undefined);
@@ -196,7 +196,7 @@ export function useResizeObserver(
   callback: ResizeObserverCallback,
   _options?: ResizeObserverOptions
 ): ResizeObserver | null {
-  const [observer, setObserver] = useState<ResizeObserver | null>(undefined);
+  const [observer, setObserver] = useState<ResizeObserver | null | null>(null);
 
   useEffect(() => {
     if ('undefined' === typeof window || !window.ResizeObserver) {
@@ -304,7 +304,7 @@ export function useClearInterval() {
 
 // SSR-Safe Date Hook
 export function useSSRSafeDate() {
-  const [dateObj, setDateObj] = useState<Date | null>(undefined);
+  const [dateObj, setDateObj] = useState<Date | null | null>(null);
 
   useEffect(() => {
     setDateObj('undefined' !== typeof Date ? new Date() : undefined);
@@ -315,7 +315,7 @@ export function useSSRSafeDate() {
 
 // SSR-Safe Math Hook
 export function useMath() {
-  const [mathObj, setMathObj] = useState<Math | null>(undefined);
+  const [mathObj, setMathObj] = useState<Math | null | null>(null);
 
   useEffect(() => {
     setMathObj('undefined' !== typeof Math ? Math : undefined);
@@ -326,7 +326,7 @@ export function useMath() {
 
 // SSR-Safe JSON Hook
 export function useJSON() {
-  const [jsonObj, setJsonObj] = useState<JSON | null>(undefined);
+  const [jsonObj, setJsonObj] = useState<JSON | null | null>(null);
 
   useEffect(() => {
     setJsonObj('undefined' !== typeof JSON ? JSON : undefined);
@@ -337,7 +337,7 @@ export function useJSON() {
 
 // SSR-Safe Console Hook
 export function useConsole() {
-  const [consoleObj, setConsoleObj] = useState<Console | null>(undefined);
+  const [consoleObj, setConsoleObj] = useState<Console | null | null>(null);
 
   useEffect(() => {
     setConsoleObj('undefined' !== typeof console ? console : undefined);
@@ -361,7 +361,7 @@ export function useProcess() {
 
 // SSR-Safe Environment Hook
 export function useEnvironment() {
-  const [env, setEnv] = useState<NodeJS.ProcessEnv | null>(undefined);
+  const [env, setEnv] = useState<NodeJS.ProcessEnv | null | null>(null);
 
   useEffect(() => {
     setEnv('undefined' !== typeof process ? process.env : undefined);
@@ -385,7 +385,7 @@ export function useGlobal() {
 
 // SSR-Safe Buffer Hook
 export function useBuffer() {
-  const [bufferObj, setBufferObj] = useState<typeof Buffer | null>(undefined);
+  const [bufferObj, setBufferObj] = useState<typeof Buffer | null | null>(null);
 
   useEffect(() => {
     setBufferObj('undefined' !== typeof Buffer ? Buffer : undefined);
@@ -396,7 +396,7 @@ export function useBuffer() {
 
 // SSR-Safe URL Hook
 export function useURL() {
-  const [urlObj, setUrlObj] = useState<typeof URL | null>(undefined);
+  const [urlObj, setUrlObj] = useState<typeof URL | null | null>(null);
 
   useEffect(() => {
     setUrlObj('undefined' !== typeof URL ? URL : undefined);
@@ -487,7 +487,7 @@ export function useWebSocket() {
 
 // SSR-Safe Worker Hook
 export function useWorker() {
-  const [workerObj, setWorkerObj] = useState<typeof Worker | null>(undefined);
+  const [workerObj, setWorkerObj] = useState<typeof Worker | null | null>(null);
 
   useEffect(() => {
     setWorkerObj('undefined' !== typeof Worker ? Worker : undefined);
@@ -573,7 +573,7 @@ export function useEventTarget() {
 
 // SSR-Safe Event Hook
 export function useEvent() {
-  const [eventObj, setEventObj] = useState<typeof Event | null>(undefined);
+  const [eventObj, setEventObj] = useState<typeof Event | null | null>(null);
 
   useEffect(() => {
     setEventObj('undefined' !== typeof Event ? Event : undefined);
@@ -584,7 +584,7 @@ export function useEvent() {
 
 // SSR-Safe Error Hook
 export function useError() {
-  const [errorObj, setErrorObj] = useState<typeof Error | null>(undefined);
+  const [errorObj, setErrorObj] = useState<typeof Error | null | null>(null);
 
   useEffect(() => {
     setErrorObj('undefined' !== typeof Error ? Error : undefined);
@@ -679,7 +679,7 @@ export function useEvalError() {
 
 // SSR-Safe AggregateError Hook
 export function useAggregateError() {
-  const [aggregateErrorObj, setAggregateErrorObj] = useState<any>(undefined);
+  const [aggregateErrorObj, setAggregateErrorObj] = useState<any | null>(null);
 
   useEffect(() => {
     setAggregateErrorObj(
@@ -694,7 +694,7 @@ export function useAggregateError() {
 
 // SSR-Safe InternalError Hook
 export function useInternalError() {
-  const [internalErrorObj, setInternalErrorObj] = useState<any>(undefined);
+  const [internalErrorObj, setInternalErrorObj] = useState<any | null>(null);
 
   useEffect(() => {
     setInternalErrorObj(
@@ -722,7 +722,7 @@ export function usePromise() {
 
 // SSR-Safe Symbol Hook
 export function useSymbol() {
-  const [symbolObj, setSymbolObj] = useState<typeof Symbol | null>(undefined);
+  const [symbolObj, setSymbolObj] = useState<typeof Symbol | null | null>(null);
 
   useEffect(() => {
     setSymbolObj('undefined' !== typeof Symbol ? Symbol : undefined);
@@ -733,7 +733,7 @@ export function useSymbol() {
 
 // SSR-Safe BigInt Hook
 export function useBigInt() {
-  const [bigIntObj, setBigIntObj] = useState<typeof BigInt | null>(undefined);
+  const [bigIntObj, setBigIntObj] = useState<typeof BigInt | null | null>(null);
 
   useEffect(() => {
     setBigIntObj('undefined' !== typeof BigInt ? BigInt : undefined);
@@ -744,7 +744,7 @@ export function useBigInt() {
 
 // SSR-Safe Proxy Hook
 export function useProxy() {
-  const [proxyObj, setProxyObj] = useState<typeof Proxy | null>(undefined);
+  const [proxyObj, setProxyObj] = useState<typeof Proxy | null | null>(null);
 
   useEffect(() => {
     setProxyObj('undefined' !== typeof Proxy ? Proxy : undefined);
@@ -768,7 +768,7 @@ export function useReflect() {
 
 // SSR-Safe Intl Hook
 export function useIntl() {
-  const [intlObj, setIntlObj] = useState<typeof Intl | null>(undefined);
+  const [intlObj, setIntlObj] = useState<typeof Intl | null | null>(null);
 
   useEffect(() => {
     setIntlObj('undefined' !== typeof Intl ? Intl : undefined);
@@ -779,7 +779,7 @@ export function useIntl() {
 
 // SSR-Safe Date Hook
 export function useDate() {
-  const [dateObj, setDateObj] = useState<Date | null>(undefined);
+  const [dateObj, setDateObj] = useState<Date | null | null>(null);
 
   useEffect(() => {
     setDateObj('undefined' !== typeof Date ? new Date() : undefined);
@@ -790,7 +790,7 @@ export function useDate() {
 
 // SSR-Safe RegExp Hook
 export function useRegExp() {
-  const [regExpObj, setRegExpObj] = useState<typeof RegExp | null>(undefined);
+  const [regExpObj, setRegExpObj] = useState<typeof RegExp | null | null>(null);
 
   useEffect(() => {
     setRegExpObj('undefined' !== typeof RegExp ? RegExp : undefined);
@@ -801,7 +801,7 @@ export function useRegExp() {
 
 // SSR-Safe Array Hook
 export function useArray() {
-  const [arrayObj, setArrayObj] = useState<typeof Array | null>(undefined);
+  const [arrayObj, setArrayObj] = useState<typeof Array | null | null>(null);
 
   useEffect(() => {
     setArrayObj('undefined' !== typeof Array ? Array : undefined);
@@ -812,7 +812,7 @@ export function useArray() {
 
 // SSR-Safe Object Hook
 export function useObject() {
-  const [objectObj, setObjectObj] = useState<typeof Object | null>(undefined);
+  const [objectObj, setObjectObj] = useState<typeof Object | null | null>(null);
 
   useEffect(() => {
     setObjectObj('undefined' !== typeof Object ? Object : undefined);
@@ -823,7 +823,7 @@ export function useObject() {
 
 // SSR-Safe String Hook
 export function useString() {
-  const [stringObj, setStringObj] = useState<typeof String | null>(undefined);
+  const [stringObj, setStringObj] = useState<typeof String | null | null>(null);
 
   useEffect(() => {
     setStringObj('undefined' !== typeof String ? String : undefined);
@@ -834,7 +834,7 @@ export function useString() {
 
 // SSR-Safe Number Hook
 export function useNumber() {
-  const [numberObj, setNumberObj] = useState<typeof Number | null>(undefined);
+  const [numberObj, setNumberObj] = useState<typeof Number | null | null>(null);
 
   useEffect(() => {
     setNumberObj('undefined' !== typeof Number ? Number : undefined);
@@ -871,7 +871,7 @@ export function useFunction() {
 
 // SSR-Safe Map Hook
 export function useMap() {
-  const [mapObj, setMapObj] = useState<typeof Map | null>(undefined);
+  const [mapObj, setMapObj] = useState<typeof Map | null | null>(null);
 
   useEffect(() => {
     setMapObj('undefined' !== typeof Map ? Map : undefined);
