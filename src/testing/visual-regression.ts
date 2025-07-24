@@ -400,7 +400,7 @@ export class VisualRegressionTester {
         break;
       case 'disabled':
         await page.evaluate((sel) => {
-          const element = typeof document !== "undefined" ? document.querySelector(sel) : null;
+          const element = safeDocument.querySelector(sel);
           if (element) {
             (element as HTMLElement).setAttribute('disabled', 'true');
           }
