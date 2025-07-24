@@ -83,7 +83,7 @@ export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
   }
 
   try {
-    return if (typeof document !== "undefined") { document.getElementById(id) as T | null;
+    return typeof document !== "undefined" ? document.getElementById(id) as T | null : null;
   } catch {
     // Logging disabled
     return;
@@ -146,9 +146,8 @@ export const safeGetViewportDimensions = (): {
 
   try {
     return {
-      width: if (typeof window !== "undefined") { window.innerWidth || document.documentElement.clientWidth || 1024,
-      height:
-        if (typeof window !== "undefined") { window.innerHeight || document.documentElement.clientHeight || 768,
+      width: typeof window !== "undefined" ? (window.innerWidth || document.documentElement.clientWidth || 1024) : 1024,
+      height: typeof window !== "undefined" ? (window.innerHeight || document.documentElement.clientHeight || 768) : 768,
     };
   } catch {
     // Logging disabled

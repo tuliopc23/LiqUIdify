@@ -246,7 +246,9 @@ export function GlassDevTools({
 			}
 		};
 
-		if (typeof document !== "undefined") { document.addEventListener("keydown", handleKeyDown);
+		if (typeof document !== "undefined") {
+			document.addEventListener("keydown", handleKeyDown);
+		}
 
 		// Set up element inspection on click
 		const handleElementClick = (e: MouseEvent) => {
@@ -267,12 +269,16 @@ export function GlassDevTools({
 		};
 
 		if (state.isOpen) {
-			if (typeof document !== "undefined") { document.addEventListener("click", handleElementClick, true);
+			if (typeof document !== "undefined") {
+				document.addEventListener("click", handleElementClick, true);
+			}
 		}
 
 		return () => {
-			if (typeof document !== "undefined") { document.removeEventListener("keydown", handleKeyDown);
-			if (typeof document !== "undefined") { document.removeEventListener("click", handleElementClick, true);
+			if (typeof document !== "undefined") {
+				document.removeEventListener("keydown", handleKeyDown);
+				document.removeEventListener("click", handleElementClick, true);
+			}
 		};
 	}, [
 		enabled,

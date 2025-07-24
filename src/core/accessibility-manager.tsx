@@ -98,12 +98,16 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
       setState((prev) => ({ ...prev, keyboardNavigation: false }));
     };
 
-    if (typeof window !== "undefined") { window.addEventListener('keydown', handleKeyDown);
-    if (typeof window !== "undefined") { window.addEventListener('mousedown', handleMouseDown);
+    if (typeof window !== "undefined") {
+      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener('mousedown', handleMouseDown);
+    }
 
     return () => {
-      if (typeof window !== "undefined") { window.removeEventListener('keydown', handleKeyDown);
-      if (typeof window !== "undefined") { window.removeEventListener('mousedown', handleMouseDown);
+      if (typeof window !== "undefined") {
+        window.removeEventListener('keydown', handleKeyDown);
+        window.removeEventListener('mousedown', handleMouseDown);
+      }
     };
   }, [focusManagement]);
 

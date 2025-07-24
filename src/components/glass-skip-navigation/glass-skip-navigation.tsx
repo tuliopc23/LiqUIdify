@@ -55,7 +55,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 			// Find landmark elements
 			DEFAULT_LANDMARKS.forEach(({ role, label, id }) => {
-				const elements = if (typeof document !== "undefined") { document.querySelectorAll(`[role="${role}"]`);
+				const elements = typeof document !== "undefined" ? document.querySelectorAll(`[role="${role}"]`) : [];
 
 				if (0 < elements.length) {
 					elements.forEach((element, index) => {
@@ -82,7 +82,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 			});
 
 			// Find headings
-			const headings = if (typeof document !== "undefined") { document.querySelectorAll("h1, h2");
+			const headings = typeof document !== "undefined" ? document.querySelectorAll("h1, h2") : [];
 			headings.forEach((heading, index) => {
 				if (!heading.id) {
 					heading.id = `heading-${index}`;
@@ -97,9 +97,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 			});
 
 			// Find forms
-			const forms = if (typeof document !== "undefined") { document.querySelectorAll(
+			const forms = typeof document !== "undefined" ? document.querySelectorAll(
 				"form[aria-label], form[aria-labelledby]",
-			);
+			) : [];
 			forms.forEach((form, index) => {
 				if (!form.id) {
 					form.id = `form-${index}`;
@@ -107,7 +107,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 				const labelledById = form.getAttribute("aria-labelledby");
 				const labelElement = labelledById
-					? if (typeof document !== "undefined") { document.getElementById(labelledById)
+					? (typeof document !== "undefined" ? document.getElementById(labelledById) : null)
 					: undefined;
 				const formName =
 					form.getAttribute("aria-label") ||
@@ -126,7 +126,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 		// Wait for DOM to be ready
 		if ("loading" === document.readyState) {
-			if (typeof document !== "undefined") { document.addEventListener("DOMContentLoaded", generateSkipLinks);
+			if (typeof document !== "undefined") {
+				document.addEventListener("DOMContentLoaded", generateSkipLinks);
+			}
 		} else {
 			generateSkipLinks();
 		}
@@ -162,9 +164,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 		if ("string" === typeof link.target) {
 			if (link.target.startsWith("#")) {
-				targetElement = if (typeof document !== "undefined") { document.querySelector(link.target);
+				targetElement = typeof document !== "undefined" ? document.querySelector(link.target) : null;
 			} else {
-				targetElement = if (typeof document !== "undefined") { document.getElementById(link.target);
+				targetElement = typeof document !== "undefined" ? document.getElementById(link.target) : null;
 			}
 		} else {
 			targetElement = link.target;
@@ -344,9 +346,9 @@ export function useSkipNavigation() {
 
 		if ("string" === typeof link.target) {
 			if (link.target.startsWith("#")) {
-				targetElement = if (typeof document !== "undefined") { document.querySelector(link.target);
+				targetElement = typeof document !== "undefined" ? document.querySelector(link.target) : null;
 			} else {
-				targetElement = if (typeof document !== "undefined") { document.getElementById(link.target);
+				targetElement = typeof document !== "undefined" ? document.getElementById(link.target) : null;
 			}
 		} else {
 			targetElement = link.target;

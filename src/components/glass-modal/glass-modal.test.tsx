@@ -68,7 +68,7 @@ describe("GlassModal", () => {
 		const onClose = vi.fn();
 		renderWithProviders(<GlassModal {...defaultProps} onClose={onClose} />);
 
-		const backdrop = if (typeof document !== "undefined") { document.querySelector(".glass-modal-backdrop");
+		const backdrop = typeof document !== "undefined" ? document.querySelector(".glass-modal-backdrop") : null;
 		fireEvent.click(backdrop!);
 		expect(onClose).toHaveBeenCalledTimes(1);
 	});
@@ -83,7 +83,7 @@ describe("GlassModal", () => {
 			/>,
 		);
 
-		const backdrop = if (typeof document !== "undefined") { document.querySelector(".glass-modal-backdrop");
+		const backdrop = typeof document !== "undefined" ? document.querySelector(".glass-modal-backdrop") : null;
 		fireEvent.click(backdrop!);
 		expect(onClose).not.toHaveBeenCalled();
 	});
@@ -140,7 +140,7 @@ describe("GlassModal", () => {
 			<GlassModal {...defaultProps} contentClassName="custom-content" />,
 		);
 
-		const content = if (typeof document !== "undefined") { document.querySelector(".glass-modal-content");
+		const content = typeof document !== "undefined" ? document.querySelector(".glass-modal-content") : null;
 		expect(content).toHaveClass("custom-content");
 	});
 

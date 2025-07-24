@@ -223,11 +223,11 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
       };
 
       if ('undefined' !== typeof document) {
-        if (typeof document !== "undefined") { document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
       }
       return () => {
         if ('undefined' !== typeof document) {
-          if (typeof document !== "undefined") { document.removeEventListener('mousedown', handleClickOutside);
+          document.removeEventListener('mousedown', handleClickOutside);
         }
       };
     }, []);

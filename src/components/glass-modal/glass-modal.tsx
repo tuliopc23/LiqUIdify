@@ -67,7 +67,7 @@ export function GlassModal({
 			try {
 				if (document.body && document.documentElement) {
 					const scrollbarWidth =
-						if (typeof window !== "undefined") { window.innerWidth - document.documentElement.clientWidth;
+						typeof window !== "undefined" ? window.innerWidth - document.documentElement.clientWidth : 0;
 					document.body.style.overflow = "hidden";
 					document.body.style.paddingRight = `${scrollbarWidth}px`;
 				}

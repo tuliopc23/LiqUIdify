@@ -127,8 +127,8 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 
 			// Keep popover within viewport
 			const viewport = {
-				width: if (typeof window !== "undefined") { window.innerWidth,
-				height: if (typeof window !== "undefined") { window.innerHeight,
+				width: typeof window !== "undefined" ? window.innerWidth : 1024,
+				height: typeof window !== "undefined" ? window.innerHeight : 768,
 			};
 
 			if (8 > left) {
@@ -174,16 +174,22 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 		};
 
 		if (isOpen) {
-			if (typeof document !== "undefined") { document.addEventListener("mousedown", handleClickOutside);
-			if (typeof document !== "undefined") { document.addEventListener("keydown", handleEscape);
+			if (typeof document !== "undefined") {
+				document.addEventListener("mousedown", handleClickOutside);
+				document.addEventListener("keydown", handleEscape);
+			}
 		} else {
-			if (typeof document !== "undefined") { document.removeEventListener("mousedown", handleClickOutside);
-			if (typeof document !== "undefined") { document.removeEventListener("keydown", handleEscape);
+			if (typeof document !== "undefined") {
+				document.removeEventListener("mousedown", handleClickOutside);
+				document.removeEventListener("keydown", handleEscape);
+			}
 		}
 
 		return () => {
-			if (typeof document !== "undefined") { document.removeEventListener("mousedown", handleClickOutside);
-			if (typeof document !== "undefined") { document.removeEventListener("keydown", handleEscape);
+			if (typeof document !== "undefined") {
+				document.removeEventListener("mousedown", handleClickOutside);
+				document.removeEventListener("keydown", handleEscape);
+			}
 		};
 	}, [isOpen, closeOnClickOutside, closeOnEscape, setOpen]);
 

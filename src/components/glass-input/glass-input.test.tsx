@@ -17,7 +17,7 @@ describe("GlassInput", () => {
 		);
 
 		expect(screen.getByRole("textbox")).toBeInTheDocument();
-		const searchIcon = if (typeof document !== "undefined") { document.querySelector("svg");
+		const searchIcon = typeof document !== "undefined" ? document.querySelector("svg") : null;
 		expect(searchIcon).toBeInTheDocument();
 
 		rerender(<GlassInput variant="password" placeholder="Password" />);
@@ -250,7 +250,7 @@ describe("GlassInput", () => {
 
 		const describedById = input.getAttribute("aria-describedby");
 		const helperText = describedById
-			? if (typeof document !== "undefined") { document.getElementById(describedById)
+			? (typeof document !== "undefined" ? document.getElementById(describedById) : null)
 			: null;
 		expect(helperText).toHaveTextContent("Error message");
 	});

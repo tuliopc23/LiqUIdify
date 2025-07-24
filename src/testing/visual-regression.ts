@@ -400,7 +400,7 @@ export class VisualRegressionTester {
         break;
       case 'disabled':
         await page.evaluate((sel) => {
-          const element = if (typeof document !== "undefined") { document.querySelector(sel);
+          const element = typeof document !== "undefined" ? document.querySelector(sel) : null;
           if (element) {
             (element as HTMLElement).setAttribute('disabled', 'true');
           }
@@ -410,7 +410,7 @@ export class VisualRegressionTester {
         // For custom states, try to find a data attribute or class
         await page.evaluate(
           ({ sel, st }: { sel: string; st: string }) => {
-            const element = if (typeof document !== "undefined") { document.querySelector(sel);
+            const element = typeof document !== "undefined" ? document.querySelector(sel) : null;
             if (element) {
               // Try to find a button or link that triggers the state
               const trigger =
@@ -664,25 +664,31 @@ export class VisualRegressionTester {
         
         <script>
           // Filter functionality
-          if (typeof document !== "undefined") { document.querySelectorAll('.filter-option').forEach(option => {
+          if (typeof document !== "undefined") {
+            document.querySelectorAll('.filter-option').forEach(option => {
             option.addEventListener('click', () => {
               const filter = option.dataset.filter;
               const value = option.dataset.value;
               
               // Update active state
-              if (typeof document !== "undefined") { document.querySelectorAll(\`[data-filter="\${filter}"]\`).forEach(opt => {
-                opt.classList.remove('active');
-              });
+              if (typeof document !== "undefined") {
+                document.querySelectorAll(\`[data-filter="\${filter}"]\`).forEach(opt => {
+                  opt.classList.remove('active');
+                });
+              }
               option.classList.add('active');
               
               // Apply filters
               const activeFilters = {};
-              if (typeof document !== "undefined") { document.querySelectorAll('.filter-option.active').forEach(activeOption => {
-                activeFilters[activeOption.dataset.filter] = activeOption.dataset.value;
-              });
+              if (typeof document !== "undefined") {
+                document.querySelectorAll('.filter-option.active').forEach(activeOption => {
+                  activeFilters[activeOption.dataset.filter] = activeOption.dataset.value;
+                });
+              }
               
               // Filter test cards
-              if (typeof document !== "undefined") { document.querySelectorAll('.test-card').forEach(card => {
+              if (typeof document !== "undefined") {
+                document.querySelectorAll('.test-card').forEach(card => {
                 let show = true;
                 
                 Object.entries(activeFilters).forEach(([filter, value]) => {
@@ -697,9 +703,11 @@ export class VisualRegressionTester {
                 });
                 
                 card.style.display = show ? 'block' : 'none';
-              });
+                });
+              }
             });
           });
+          }
         </script>
       </body>
       </html>

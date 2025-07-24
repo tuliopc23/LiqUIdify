@@ -425,12 +425,16 @@ export function useNetworkAwareFallback() {
     const handleOnline = () => updateStatus();
     const handleOffline = () => updateStatus();
 
-    if (typeof window !== "undefined") { window.addEventListener('online', handleOnline);
-    if (typeof window !== "undefined") { window.addEventListener('offline', handleOffline);
+    if (typeof window !== "undefined") {
+      window.addEventListener('online', handleOnline);
+      window.addEventListener('offline', handleOffline);
+    }
 
     return () => {
-      if (typeof window !== "undefined") { window.removeEventListener('online', handleOnline);
-      if (typeof window !== "undefined") { window.removeEventListener('offline', handleOffline);
+      if (typeof window !== "undefined") {
+        window.removeEventListener('online', handleOnline);
+        window.removeEventListener('offline', handleOffline);
+      }
     };
   }, [checkNetworkStatus, getPerformanceLevel]);
 

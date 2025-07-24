@@ -176,7 +176,7 @@ describe("GlassSelect", () => {
 		fireEvent.click(button);
 
 		// Dropdown should still open but be empty
-		const dropdown = if (typeof document !== "undefined") { document.querySelector(".animate-in");
+		const dropdown = typeof document !== "undefined" ? document.querySelector(".animate-in") : null;
 		expect(dropdown).toBeInTheDocument();
 		expect(dropdown?.children.length).toBe(0);
 	});

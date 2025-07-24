@@ -961,9 +961,11 @@ class FocusTrap {
     }
 
     // Add event listeners
-    if (typeof document !== "undefined") { document.addEventListener('keydown', this.handleKeyDown);
-    if (this.options.clickOutsideDeactivates) {
-      if (typeof document !== "undefined") { document.addEventListener('click', this.handleClickOutside);
+    if (typeof document !== "undefined") {
+      document.addEventListener('keydown', this.handleKeyDown);
+      if (this.options.clickOutsideDeactivates) {
+        document.addEventListener('click', this.handleClickOutside);
+      }
     }
   }
 
@@ -973,8 +975,10 @@ class FocusTrap {
     }
 
     this.active = false;
-    if (typeof document !== "undefined") { document.removeEventListener('keydown', this.handleKeyDown);
-    if (typeof document !== "undefined") { document.removeEventListener('click', this.handleClickOutside);
+    if (typeof document !== "undefined") {
+      document.removeEventListener('keydown', this.handleKeyDown);
+      document.removeEventListener('click', this.handleClickOutside);
+    }
 
     if (this.options.onDeactivate) {
       this.options.onDeactivate();

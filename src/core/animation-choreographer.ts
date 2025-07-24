@@ -596,17 +596,21 @@ export function useMagneticEffect(
 
     // Initialize
     updateElementPosition();
-    if (typeof window !== "undefined") { window.addEventListener('mousemove', handleMouseMove);
+    if (typeof window !== "undefined") {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('resize', updateElementPosition);
+      window.addEventListener('scroll', updateElementPosition);
+    }
     element.addEventListener('mouseleave', handleMouseLeave);
-    if (typeof window !== "undefined") { window.addEventListener('resize', updateElementPosition);
-    if (typeof window !== "undefined") { window.addEventListener('scroll', updateElementPosition);
 
     // Cleanup
     return () => {
-      if (typeof window !== "undefined") { window.removeEventListener('mousemove', handleMouseMove);
+      if (typeof window !== "undefined") {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('resize', updateElementPosition);
+        window.removeEventListener('scroll', updateElementPosition);
+      }
       element.removeEventListener('mouseleave', handleMouseLeave);
-      if (typeof window !== "undefined") { window.removeEventListener('resize', updateElementPosition);
-      if (typeof window !== "undefined") { window.removeEventListener('scroll', updateElementPosition);
 
       if (null !== animationFrame) {
         cancelAnimationFrame(animationFrame);

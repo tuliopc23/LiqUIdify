@@ -195,13 +195,14 @@ class PerformanceMonitor {
     observer.observe({ entryTypes: ['longtask'] });
 
     // Estimate TTI after load
-    if (typeof window !== "undefined") { window.addEventListener('load', () => {
-      setTimeout(() => {
-        if (0 === tti) {
-          tti = performance.now();
-        }
+    if (typeof window !== "undefined") {
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          if (0 === tti) {
+            tti = performance.now();
+          }
 
-        this.handleMetric(
+          this.handleMetric(
           {
             name: 'TTI',
             value: tti,
@@ -216,7 +217,8 @@ class PerformanceMonitor {
 
         observer.disconnect();
       }, 5000);
-    });
+      });
+    }
   }
 
   /**
@@ -336,7 +338,7 @@ class PerformanceMonitor {
    */
   getReport(): PerformanceReport {
     return {
-      url: if (typeof window !== "undefined") { window.location.href,
+      url: typeof window !== "undefined" ? window.location.href : '',
       timestamp: Date.now(),
       webVitals: [...this.metrics.values()],
       componentMetrics: [...this.componentMetrics.values()],
@@ -373,16 +375,20 @@ class PerformanceMonitor {
    */
   private setupPeriodicReporting(): void {
     // Send report on page visibility change
-    if (typeof document !== "undefined") { document.addEventListener('visibilitychange', () => {
-      if ('hidden' === document.visibilityState) {
-        this.sendReport();
-      }
-    });
+    if (typeof document !== "undefined") {
+      document.addEventListener('visibilitychange', () => {
+        if ('hidden' === document.visibilityState) {
+          this.sendReport();
+        }
+      });
+    }
 
     // Send report before unload
-    if (typeof window !== "undefined") { window.addEventListener('beforeunload', () => {
-      this.sendReport();
-    });
+    if (typeof window !== "undefined") {
+      window.addEventListener('beforeunload', () => {
+        this.sendReport();
+      });
+    }
 
     // Send report every 30 seconds
     setInterval(() => {
