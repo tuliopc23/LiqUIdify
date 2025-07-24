@@ -41,10 +41,31 @@ export type InferVariantProps<T> = T extends (props?: infer P) => any
   ? P
   : never;
 
-// Enhanced variant creator with better TypeScript support
+// Enhanced variant creator with standard cva API compatibility
 export function createVariants<
   T extends Record<string, Record<string, string>>,
->(config: VariantConfig<T>) {
+>(
+  base?: string | string[],
+  config?: {
+    variants?: T;
+    compoundVariants?: ({
+      [K in keyof T]?: keyof T[K];
+    } & {
+      class: string;
+    })[];
+    defaultVariants?: {
+      [K in keyof T]?: keyof T[K];
+    };
+  }
+) {
+  // Convert to our internal format
+  const normalizedConfig: VariantConfig<T> = {
+    base: Array.isArray(base) ? base.join(' ') : base,
+    variants: config?.variants || ({} as T),
+    compoundVariants: config?.compoundVariants,
+    defaultVariants: config?.defaultVariants,
+  };
+
   return function variants(props?: VariantProps<VariantConfig<T>>) {
     const {
       class: className,
@@ -53,14 +74,14 @@ export function createVariants<
     } = props || {};
 
     // Start with base classes
-    const classes = [config.base];
+    const classes = [normalizedConfig.base];
 
     // Add variant classes
-    Object.entries(config.variants).forEach(([variantKey, variantValues]) => {
+    Object.entries(normalizedConfig.variants).forEach(([variantKey, variantValues]) => {
       const variantValue =
         variantProps[variantKey as keyof typeof variantProps] ||
-        config.defaultVariants?.[
-          variantKey as keyof typeof config.defaultVariants
+        normalizedConfig.defaultVariants?.[
+          variantKey as keyof typeof normalizedConfig.defaultVariants
         ];
 
       if (variantValue && variantValues[variantValue as string]) {
@@ -69,13 +90,13 @@ export function createVariants<
     });
 
     // Add compound variant classes
-    config.compoundVariants?.forEach((compound) => {
+    normalizedConfig.compoundVariants?.forEach((compound) => {
       const { class: compoundClass, ...compoundVariants } = compound;
 
       const matches = Object.entries(compoundVariants).every(([key, value]) => {
         const propValue =
           variantProps[key as keyof typeof variantProps] ||
-          config.defaultVariants?.[key as keyof typeof config.defaultVariants];
+          normalizedConfig.defaultVariants?.[key as keyof typeof normalizedConfig.defaultVariants];
         return propValue === value;
       });
 
@@ -89,52 +110,53 @@ export function createVariants<
 }
 
 // Glass-specific variant presets
-export const glassVariants = createVariants({
-  base: 'relative overflow-hidden transition-all duration-300 ease-out',
-  variants: {
-    variant: {
-      default: 'glass-effect',
-      elevated: 'glass-effect-elevated',
-      floating:
-        'backdrop-blur-heavy saturate-[180%] bg-glass-light-floating border border-border-glass-light-medium',
-      overlay:
-        'backdrop-blur-ultra saturate-[200%] bg-glass-light-overlay border border-border-glass-light-strong',
-      surface:
-        'backdrop-blur-light saturate-[150%] bg-glass-light-primary border border-border-glass-light-subtle',
-      ghost:
-        'backdrop-blur-ghost saturate-[120%] bg-transparent border border-transparent hover:bg-glass-light-primary',
-      solid: 'bg-primary text-primary-foreground border border-primary/20',
+export const glassVariants = createVariants(
+  'relative overflow-hidden transition-all duration-300 ease-out',
+  {
+    variants: {
+      variant: {
+        default: 'glass-effect',
+        elevated: 'glass-effect-elevated',
+        floating:
+          'backdrop-blur-heavy saturate-[180%] bg-glass-light-floating border border-border-glass-light-medium',
+        overlay:
+          'backdrop-blur-ultra saturate-[200%] bg-glass-light-overlay border border-border-glass-light-strong',
+        surface:
+          'backdrop-blur-light saturate-[150%] bg-glass-light-primary border border-border-glass-light-subtle',
+        ghost:
+          'backdrop-blur-ghost saturate-[120%] bg-transparent border border-transparent hover:bg-glass-light-primary',
+        solid: 'bg-primary text-primary-foreground border border-primary/20',
+      },
+      size: {
+        xs: 'text-xs px-2 py-1 min-h-[28px] rounded-sm',
+        sm: 'text-sm px-3 py-1.5 min-h-[36px] rounded',
+        md: 'text-sm px-4 py-2 min-h-[44px] rounded-md',
+        lg: 'text-base px-6 py-3 min-h-[48px] rounded-lg',
+        xl: 'text-lg px-8 py-4 min-h-[52px] rounded-xl',
+      },
+      state: {
+        default: '',
+        hover: 'glass-hover',
+        active: 'scale-[0.98] opacity-95',
+        disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
+        loading: 'animate-pulse cursor-wait',
+      },
+      interactive: {
+        none: '',
+        subtle: 'hover:scale-[1.01] hover:shadow-light',
+        moderate: 'hover:scale-[1.02] hover:shadow-medium hover:-translate-y-0.5',
+        strong: 'hover:scale-[1.03] hover:shadow-heavy hover:-translate-y-1',
+        magnetic:
+          'hover:scale-[1.05] hover:shadow-intense hover:-translate-y-2 animate-glass-magnetic',
+      },
+      glow: {
+        none: '',
+        subtle: 'shadow-[0_0_20px_rgba(59,130,246,0.08)]',
+        moderate: 'shadow-[0_0_30px_rgba(59,130,246,0.12)]',
+        strong: 'shadow-[0_0_40px_rgba(59,130,246,0.15)]',
+        intense: 'shadow-[0_0_60px_rgba(59,130,246,0.20)]',
+      },
     },
-    size: {
-      xs: 'text-xs px-2 py-1 min-h-[28px] rounded-sm',
-      sm: 'text-sm px-3 py-1.5 min-h-[36px] rounded',
-      md: 'text-sm px-4 py-2 min-h-[44px] rounded-md',
-      lg: 'text-base px-6 py-3 min-h-[48px] rounded-lg',
-      xl: 'text-lg px-8 py-4 min-h-[52px] rounded-xl',
-    },
-    state: {
-      default: '',
-      hover: 'glass-hover',
-      active: 'scale-[0.98] opacity-95',
-      disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
-      loading: 'animate-pulse cursor-wait',
-    },
-    interactive: {
-      none: '',
-      subtle: 'hover:scale-[1.01] hover:shadow-light',
-      moderate: 'hover:scale-[1.02] hover:shadow-medium hover:-translate-y-0.5',
-      strong: 'hover:scale-[1.03] hover:shadow-heavy hover:-translate-y-1',
-      magnetic:
-        'hover:scale-[1.05] hover:shadow-intense hover:-translate-y-2 animate-glass-magnetic',
-    },
-    glow: {
-      none: '',
-      subtle: 'shadow-[0_0_20px_rgba(59,130,246,0.08)]',
-      moderate: 'shadow-[0_0_30px_rgba(59,130,246,0.12)]',
-      strong: 'shadow-[0_0_40px_rgba(59,130,246,0.15)]',
-      intense: 'shadow-[0_0_60px_rgba(59,130,246,0.20)]',
-    },
-  },
   compoundVariants: [
     {
       variant: 'elevated',

@@ -26,7 +26,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
 		setValidating(true);
 		try {
-			const report = await accessibilityManager.validateComponent(
+			const report = await accessibilityManager.analyzeComponent(
 				demoRef.current,
 				{
 					name: "GlassAccessibleDemo",
@@ -37,7 +37,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 			setReport(report);
 
 			// Announce the result
-			accessibilityManager.announce(
+			accessibilityManager.announceToScreenReader(
 				`Accessibility score: ${report.score}. ${report.violations.length} violations found.`,
 				0 < report.violations.length ? "assertive" : "polite",
 			);
@@ -49,10 +49,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 	};
 
 	const checkContrast = () => {
-		const result = accessibilityManager.ensureContrast(fgColor, bgColor, {
-			level: "AA",
-			autoFix: true,
-		});
+		const result = accessibilityManager.checkContrast(demoRef.current!);
 		setContrastResult(result);
 	};
 

@@ -323,6 +323,25 @@ export class AccessibilityManager {
     announcer.announce(message, priority);
   }
 
+  enableRealTimeMonitoring(rootElement: HTMLElement = document.body): void {
+    if (process.env.NODE_ENV === 'production') {
+      // Skip real-time monitoring in production for performance
+      return;
+    }
+
+    // In development, we could implement MutationObserver here
+    // For now, this is a no-op to prevent errors
+  }
+
+  disableRealTimeMonitoring(): void {
+    if (process.env.NODE_ENV === 'production') {
+      return;
+    }
+
+    // In development, we would disconnect MutationObserver here
+    // For now, this is a no-op to prevent errors
+  }
+
   async generateReport(elements: HTMLElement[]): Promise<string> {
     const reports = await Promise.all(
       elements.map(el => this.analyzeComponent(el))
