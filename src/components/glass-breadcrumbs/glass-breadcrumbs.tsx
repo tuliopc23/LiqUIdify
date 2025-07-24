@@ -37,8 +37,8 @@ const breadcrumbItemVariants = cva({
 		},
 	},
 	defaultVariants: {
-		isActive: "false",
-		isClickable: "true",
+		isActive: false,
+		isClickable: true,
 	},
 });
 
