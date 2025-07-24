@@ -51,7 +51,7 @@ export interface DegradationConfig {
 
 export class GracefulDegradationManager {
   private static instance: GracefulDegradationManager;
-  private featureSupport: FeatureSupport | null = undefined;
+  private featureSupport: FeatureSupport | null = null;
   private config: DegradationConfig;
   private listeners: Set<(support: FeatureSupport) => void> = new Set();
 

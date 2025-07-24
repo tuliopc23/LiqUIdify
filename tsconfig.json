@@ -58,6 +58,7 @@
 			"@/bundles/*": ["./src/bundles/*"],
 			"@/tokens": ["./src/tokens/index"],
 			"@/design-tokens": ["./src/tokens/design-tokens"],
+			"@/core/accessibility-manager": ["./src/core/accessibility-manager-index"],
 			"@/core/*": ["./src/core/*"]
 		}
 	},

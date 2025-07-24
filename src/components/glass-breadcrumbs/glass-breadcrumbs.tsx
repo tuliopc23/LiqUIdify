@@ -4,55 +4,43 @@ import { ChevronRight, Home } from "lucide-react";
 import React, { useCallback } from "react";
 import { cn } from "@/core/utils/classname";
 
-const breadcrumbsVariants = cva(
-	[
-		"flex items-center space-x-1 text-sm",
-		"p-2 rounded-lg backdrop-blur-md",
-		"bg-white/5 border border-white/10",
-	],
-	{
-		variants: {
-			size: {
-				sm: "text-xs p-1.5",
-				md: "text-sm p-2",
-				lg: "text-base p-3",
-			},
-			variant: {
-				default: "bg-white/5",
-				solid: "bg-white/10",
-				ghost: "bg-transparent border-transparent",
-			},
+const breadcrumbsVariants = cva({
+	base: "flex items-center space-x-1 text-sm p-2 rounded-lg backdrop-blur-md bg-white/5 border border-white/10",
+	variants: {
+		size: {
+			sm: "text-xs p-1.5",
+			md: "text-sm p-2",
+			lg: "text-base p-3",
 		},
-		defaultVariants: {
-			size: "md",
-			variant: "default",
+		variant: {
+			default: "bg-white/5",
+			solid: "bg-white/10",
+			ghost: "bg-transparent border-transparent",
 		},
 	},
-);
+	defaultVariants: {
+		size: "md",
+		variant: "default",
+	},
+});
 
-const breadcrumbItemVariants = cva(
-	[
-		"flex items-center transition-all duration-200",
-		"hover:text-blue-400 focus:text-blue-400 focus:outline-none",
-		"rounded px-2 py-1",
-	],
-	{
-		variants: {
-			isActive: {
-				true: "text-white font-medium",
-				false: "text-white/70 hover:text-white",
-			},
-			isClickable: {
-				true: "cursor-pointer hover:bg-white/5",
-				false: "cursor-default",
-			},
+const breadcrumbItemVariants = cva({
+	base: "flex items-center transition-all duration-200 hover:text-blue-400 focus:text-blue-400 focus:outline-none rounded px-2 py-1",
+	variants: {
+		isActive: {
+			true: "text-white font-medium",
+			false: "text-white/70 hover:text-white",
 		},
-		defaultVariants: {
-			isActive: false,
-			isClickable: true,
+		isClickable: {
+			true: "cursor-pointer hover:bg-white/5",
+			false: "cursor-default",
 		},
 	},
-);
+	defaultVariants: {
+		isActive: false,
+		isClickable: true,
+	},
+});
 
 export interface BreadcrumbItem {
 	label: string;

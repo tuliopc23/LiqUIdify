@@ -8,7 +8,7 @@
  * Safe reference access with null checking
  */
 export function safeRefAccess<T>(ref: React.RefObject<T>): T | null {
-  return ref.current || undefined;
+  return ref.current || null;
 }
 
 /**
@@ -42,7 +42,7 @@ export function safeQuerySelector<T extends Element = Element>(
     return parent.querySelector<T>(selector);
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -70,14 +70,14 @@ export function safeGetComputedStyle(
 ): string | CSSStyleDeclaration | null {
   try {
     if ('undefined' === typeof window || !element) {
-      return;
+      return null;
     }
 
     const computedStyle = window.getComputedStyle(element);
     return property ? computedStyle.getPropertyValue(property) : computedStyle;
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -158,7 +158,7 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
   options?: boolean | AddEventListenerOptions
 ): (() => void) | null {
   if (!element) {
-    return;
+    return null;
   }
 
   try {
@@ -173,7 +173,7 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
     };
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -184,7 +184,7 @@ export function safeRequestAnimationFrame(
   callback: FrameRequestCallback
 ): (() => void) | null {
   if ('undefined' === typeof window || !window.requestAnimationFrame) {
-    return;
+    return null;
   }
 
   try {
@@ -199,7 +199,7 @@ export function safeRequestAnimationFrame(
     };
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -208,14 +208,14 @@ export function safeRequestAnimationFrame(
  */
 export function safeCreateAudioContext(): AudioContext | null {
   if ('undefined' === typeof window || !('AudioContext' in window)) {
-    return;
+    return null;
   }
 
   try {
     return new AudioContext();
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -228,14 +228,14 @@ export function safeGetAttribute(
   fallback?: string
 ): string | null {
   if (!element) {
-    return fallback || undefined;
+    return fallback ?? null;
   }
 
   try {
-    return element.getAttribute(name) || fallback || undefined;
+    return element.getAttribute(name) ?? fallback ?? null;
   } catch {
     // Logging disabled
-    return fallback || undefined;
+    return fallback ?? null;
   }
 }
 

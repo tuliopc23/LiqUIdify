@@ -54,6 +54,7 @@ export default defineConfig({
 			"@": resolve(__dirname, "src"),
 			"@/tokens": resolve(__dirname, "src/tokens/index"),
 			"@/design-tokens": resolve(__dirname, "src/tokens/design-tokens"),
+			"@/core/accessibility-manager": resolve(__dirname, "src/core/accessibility-manager-index"),
 		},
 		mainFields: ["module", "main", "browser"],
 		conditions: ["import", "module", "browser", "default"],
@@ -84,6 +85,7 @@ export default defineConfig({
 			"@radix-ui/react-dialog",
 			"@radix-ui/react-radio-group",
 		],
+		exclude: ["axe-core"],
 		rollupOptions: {},
 	},
 

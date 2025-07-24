@@ -5,94 +5,67 @@ import { ChevronDown } from "lucide-react";
 import React from "react";
 import { cn } from "@/core/utils/classname";
 
-const accordionVariants = cva(
-	[
-		"w-full space-y-2",
-		"backdrop-blur-md rounded-lg",
-		"bg-white/5 border border-white/10",
-		"p-2",
-	],
-	{
-		variants: {
-			size: {
-				sm: "text-sm p-1",
-				md: "text-base p-2",
-				lg: "text-lg p-3",
-			},
-			variant: {
-				default: "bg-white/5",
-				solid: "bg-white/10",
-				ghost: "bg-transparent border-transparent p-0",
-			},
+const accordionVariants = cva({
+	base: "w-full space-y-2 backdrop-blur-md rounded-lg bg-white/5 border border-white/10 p-2",
+	variants: {
+		size: {
+			sm: "text-sm p-1",
+			md: "text-base p-2",
+			lg: "text-lg p-3",
 		},
-		defaultVariants: {
-			size: "md",
-			variant: "default",
+		variant: {
+			default: "bg-white/5",
+			solid: "bg-white/10",
+			ghost: "bg-transparent border-transparent p-0",
 		},
 	},
-);
+	defaultVariants: {
+		size: "md",
+		variant: "default",
+	},
+});
 
-const accordionItemVariants = cva(
-	[
-		"backdrop-blur-sm rounded-lg",
-		"border border-white/10",
-		"bg-white/5",
-		"overflow-hidden",
-		"transition-all duration-200",
-		"hover:bg-white/10",
-	],
-	{
-		variants: {
-			size: {
-				sm: "text-sm",
-				md: "text-base",
-				lg: "text-lg",
-			},
-		},
-		defaultVariants: {
-			size: "md",
+const accordionItemVariants = cva({
+	base: "backdrop-blur-sm rounded-lg border border-white/10 bg-white/5 overflow-hidden transition-all duration-200 hover:bg-white/10",
+	variants: {
+		size: {
+			sm: "text-sm",
+			md: "text-base",
+			lg: "text-lg",
 		},
 	},
-);
+	defaultVariants: {
+		size: "md",
+	},
+});
 
-const accordionTriggerVariants = cva(
-	[
-		"flex flex-1 items-center justify-between w-full",
-		"p-4 font-medium text-left",
-		"transition-all duration-200",
-		"hover:bg-white/5 focus:bg-white/10 focus:outline-none",
-		"group text-white",
-		"data-[state=open]:bg-white/5",
-	],
-	{
-		variants: {
-			size: {
-				sm: "p-2 text-sm",
-				md: "p-4 text-base",
-				lg: "p-6 text-lg",
-			},
-		},
-		defaultVariants: {
-			size: "md",
+const accordionTriggerVariants = cva({
+	base: "flex flex-1 items-center justify-between w-full p-4 font-medium text-left transition-all duration-200 hover:bg-white/5 focus:bg-white/10 focus:outline-none group text-white data-[state=open]:bg-white/5",
+	variants: {
+		size: {
+			sm: "p-2 text-sm",
+			md: "p-4 text-base",
+			lg: "p-6 text-lg",
 		},
 	},
-);
+	defaultVariants: {
+		size: "md",
+	},
+});
 
-const accordionContentVariants = cva(
-	["overflow-hidden text-white/80", "border-t border-white/10", "bg-white/5"],
-	{
-		variants: {
-			size: {
-				sm: "text-xs",
-				md: "text-sm",
-				lg: "text-base",
-			},
-		},
-		defaultVariants: {
-			size: "md",
+const accordionContentVariants = cva({
+	base: "overflow-hidden text-white/80 border-t border-white/10 bg-white/5",
+	variants: {
+		size: {
+			sm: "text-xs",
+			md: "text-sm",
+			lg: "text-base",
 		},
 	},
-);
+	defaultVariants: {
+		size: "md",
+	},
+});
 
 // Single accordion props
 export interface GlassAccordionSingleProps

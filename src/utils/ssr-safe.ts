@@ -106,6 +106,7 @@ export const useMediaQuery = (query: string): boolean => {
 
       return () => mediaQuery.removeEventListener('change', handler);
     }
+    return;
   }, [query]);
 
   return matches;

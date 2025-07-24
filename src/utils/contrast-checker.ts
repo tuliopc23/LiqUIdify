@@ -30,7 +30,7 @@ export function hexToRgb(hex: string): ColorRGB | null {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16),
       }
-    : undefined;
+    : null;
 }
 
 /**
@@ -44,7 +44,7 @@ export function getLuminance(rgb: ColorRGB): number {
     return 0.039_28 >= sRGB ? sRGB / 12.92 : ((sRGB + 0.055) / 1.055) ** 2.4;
   });
 
-  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+  return 0.2126 * (rs ?? 0) + 0.7152 * (gs ?? 0) + 0.0722 * (bs ?? 0);
 }
 
 /**

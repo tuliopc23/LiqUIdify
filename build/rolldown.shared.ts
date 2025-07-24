@@ -16,6 +16,7 @@ export const sharedExternals = [
   "clsx",
   "tailwind-merge",
   "tailwindcss-animate",
+  "axe-core", // Exclude axe-core from production bundles
   /^@radix-ui\//,
   /^react\//,
 ];

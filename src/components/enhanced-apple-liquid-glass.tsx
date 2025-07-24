@@ -29,14 +29,6 @@ interface EnhancedGlassOptions {
 //   useEnhancedAppleLiquidGlass,
 // } from '../lib/enhanced-apple-liquid-glass';
 
-// Temporary constant for variants
-const ENHANCED_GLASS_VARIANTS = {
-  subtle: 'subtle',
-  medium: 'medium',
-  strong: 'strong',
-  extreme: 'extreme',
-} as const;
-
 // Temporary implementations
 const getEnhancedGlassClass = (_intensity?: string, _options?: any) => {
   return 'backdrop-blur-xl bg-white/10 border border-white/20';
