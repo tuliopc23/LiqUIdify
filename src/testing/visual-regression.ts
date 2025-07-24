@@ -410,7 +410,7 @@ export class VisualRegressionTester {
         // For custom states, try to find a data attribute or class
         await page.evaluate(
           ({ sel, st }: { sel: string; st: string }) => {
-            const element = typeof document !== "undefined" ? document.querySelector(sel) : null;
+            const element = safeDocument.querySelector(sel);
             if (element) {
               // Try to find a button or link that triggers the state
               const trigger =
