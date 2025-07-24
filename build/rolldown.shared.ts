@@ -117,3 +117,6 @@ export const createRolldownOptions = (): Partial<RolldownOptions> => ({
     createOutputOptions('cjs'),
   ],
 });
+
+// Legacy export alias for compatibility
+export const sharedRollupOptions = createRolldownOptions();
