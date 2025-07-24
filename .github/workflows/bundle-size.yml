@@ -19,11 +19,13 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -93,8 +95,8 @@ jobs:
 
       - name: Generate detailed bundle report
         run: |
-          npm install -g webpack-bundle-analyzer
-          npm run build:analyze
+          bun add -g webpack-bundle-analyzer
+          bun run build:analyze
           
       - name: Upload bundle analysis
         uses: actions/upload-artifact@v4
