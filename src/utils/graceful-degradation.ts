@@ -349,7 +349,7 @@ export class GracefulDegradationManager {
 export function useGracefulDegradation() {
   const [manager] = useState(() => GracefulDegradationManager.getInstance());
   const [featureSupport, setFeatureSupport] = useState<FeatureSupport | null>(
-    undefined
+    null
   );
   const [isLoading, setIsLoading] = useState(true);
 
@@ -425,12 +425,20 @@ export function useNetworkAwareFallback() {
     const handleOnline = () => updateStatus();
     const handleOffline = () => updateStatus();
 
-    if (typeof window !== "undefined") { window.addEventListener('online', handleOnline);
-    if (typeof window !== "undefined") { window.addEventListener('offline', handleOffline);
+    if (typeof window !== "undefined") {
+      window.addEventListener('online', handleOnline);
+    }
+    if (typeof window !== "undefined") {
+      window.addEventListener('offline', handleOffline);
+    }
 
     return () => {
-      if (typeof window !== "undefined") { window.removeEventListener('online', handleOnline);
-      if (typeof window !== "undefined") { window.removeEventListener('offline', handleOffline);
+      if (typeof window !== "undefined") {
+        window.removeEventListener('online', handleOnline);
+      }
+      if (typeof window !== "undefined") {
+        window.removeEventListener('offline', handleOffline);
+      }
     };
   }, [checkNetworkStatus, getPerformanceLevel]);
 

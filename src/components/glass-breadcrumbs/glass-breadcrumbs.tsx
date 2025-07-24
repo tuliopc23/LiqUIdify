@@ -37,8 +37,8 @@ const breadcrumbItemVariants = cva({
 		},
 	},
 	defaultVariants: {
-		isActive: false,
-		isClickable: true,
+		isActive: "false",
+		isClickable: "true",
 	},
 });
 
@@ -119,8 +119,8 @@ const GlassBreadcrumbs = React.memo(
 										onClick={onHomeClick}
 										className={cn(
 											breadcrumbItemVariants({
-												isActive: false,
-												isClickable: true,
+												isActive: "false",
+												isClickable: "true",
 											}),
 										)}
 										aria-label="Home"
@@ -154,8 +154,8 @@ const GlassBreadcrumbs = React.memo(
 												onClick={handleClick}
 												className={cn(
 													breadcrumbItemVariants({
-														isActive: isLast,
-														isClickable: true,
+														isActive: isLast ? "true" : "false",
+														isClickable: "true",
 													}),
 												)}
 												aria-current={isLast ? "page" : undefined}
@@ -169,8 +169,8 @@ const GlassBreadcrumbs = React.memo(
 											<span
 												className={cn(
 													breadcrumbItemVariants({
-														isActive: isLast,
-														isClickable: false,
+														isActive: isLast ? "true" : "false",
+														isClickable: "false",
 													}),
 												)}
 												aria-current={isLast ? "page" : undefined}

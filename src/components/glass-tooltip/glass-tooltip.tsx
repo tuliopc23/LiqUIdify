@@ -79,8 +79,8 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
 
 			// Keep tooltip within viewport
 			const viewport = {
-				width: if (typeof window !== "undefined") { window.innerWidth,
-				height: if (typeof window !== "undefined") { window.innerHeight,
+				width: typeof window !== "undefined" ? window.innerWidth : 1024,
+				height: typeof window !== "undefined" ? window.innerHeight : 768,
 			};
 
 			if (8 > left) {

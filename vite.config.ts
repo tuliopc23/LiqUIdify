@@ -10,27 +10,12 @@ import { sharedRollupOptions } from "./build/rolldown.shared";
 const oxcConfig = JSON.parse(readFileSync("./oxc.config.json", "utf-8"));
 
 export default defineConfig({
-	// Configure rolldown-vite to use OXC transformer
-	rolldown: {
-		transform: oxcConfig.transform,
-		parser: oxcConfig.parser,
-		resolve: {
-			alias: oxcConfig.resolver.alias,
-			mainFields: oxcConfig.resolver.mainFields,
-			conditionNames: oxcConfig.resolver.conditionNames,
-		},
-		sourcemap: oxcConfig.sourcemap.enable,
-		minify: process.env.NODE_ENV === "production",
-		target: "es2020",
-	},
 
 	plugins: [
 		react({
 			jsxRuntime: "automatic",
 			jsxImportSource: "react",
 			include: /\.(tsx|ts|jsx|js)$/,
-			babel: false, // Use OXC through rolldown-vite
-			fastRefresh: process.env.NODE_ENV === "development",
 		}),
 		dts({
 			insertTypesEntry: true,
@@ -63,11 +48,6 @@ export default defineConfig({
 
 	css: {
 		postcss: postcssConfig,
-		preprocessorOptions: {
-			css: {
-				charset: false,
-			},
-		},
 	},
 
 	optimizeDeps: {
@@ -165,10 +145,6 @@ export default defineConfig({
 	logLevel: "info",
 
 	esbuild: {
-		target: "es2020",
-		jsx: "automatic",
-		jsxImportSource: "react",
-		sourcemap: true,
 		drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
 	},
 });

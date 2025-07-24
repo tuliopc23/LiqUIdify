@@ -89,7 +89,7 @@ export function getCurrentBreakpoint(): BreakpointKey {
 		return "md"; // Default for SSR
 	}
 
-	const width = if (typeof window !== "undefined") { window.innerWidth;
+	const width = typeof window !== "undefined" ? window.innerWidth : 1024;
 
 	// Convert string values to numbers for comparison
 	const breakpoints = {
@@ -130,7 +130,7 @@ export function matchesBreakpoint(
 		return false;
 	}
 
-	const width = if (typeof window !== "undefined") { window.innerWidth;
+	const width = typeof window !== "undefined" ? window.innerWidth : 1024;
 	const breakpointValue = parseInt(BREAKPOINTS[breakpoint]);
 
 	switch (condition) {
@@ -283,8 +283,14 @@ export function useBreakpoint(): BreakpointKey {
 			setBreakpoint(getCurrentBreakpoint());
 		};
 
-		if (typeof window !== "undefined") { window.addEventListener("resize", handleResize);
-		return () => if (typeof window !== "undefined") { window.removeEventListener("resize", handleResize);
+		if (typeof window !== "undefined") {
+			window.addEventListener("resize", handleResize);
+		}
+		return () => {
+			if (typeof window !== "undefined") {
+				window.removeEventListener("resize", handleResize);
+			}
+		};
 	}, []);
 
 	return breakpoint;
