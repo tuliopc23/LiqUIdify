@@ -241,10 +241,11 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 				}
 			};
 
-			if (typeof document !== "undefined") { document.addEventListener("mousedown", handleClickOutside);
-			return () =>
-				if (typeof document !== "undefined") { document.removeEventListener("mousedown", handleClickOutside);
-		}, []);
+            if (typeof document !== "undefined") { document.addEventListener("mousedown", handleClickOutside); }
+            return () => {
+                if (typeof document !== "undefined") { document.removeEventListener("mousedown", handleClickOutside); }
+            };
+        }, []);
 
 		// Scroll highlighted option into view
 		useEffect(() => {
