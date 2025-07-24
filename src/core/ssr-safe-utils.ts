@@ -88,6 +88,7 @@ export const safeDocument = {
     try {
       document.removeEventListener(type, listener, options);
     } catch {
+      // Intentionally ignoring errors, as the event listener might not exist.
     }
   },
 
