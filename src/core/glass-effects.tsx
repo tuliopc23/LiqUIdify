@@ -30,7 +30,7 @@ export interface GlassEffectsResult {
   };
   isActive: boolean;
   setActive: (active: boolean) => void;
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
 }
 
 /**
@@ -173,19 +173,26 @@ export function useResponsiveGlass(
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setScreenSize(768 > if (typeof window !== "undefined") { window.innerWidth ? 'mobile' : 'desktop');
+      const width = typeof window !== "undefined" ? window.innerWidth : 1024;
+      setScreenSize(width < 768 ? 'mobile' : 'desktop');
     };
 
     checkScreenSize();
-    if (typeof window !== "undefined") { window.addEventListener('resize', checkScreenSize);
+    if (typeof window !== "undefined") {
+      window.addEventListener('resize', checkScreenSize);
+    }
 
-    return () => if (typeof window !== "undefined") { window.removeEventListener('resize', checkScreenSize);
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener('resize', checkScreenSize);
+      }
+    };
   }, []);
 
   const currentIntensity =
-    'mobile' === screenSize && mobileIntensity
+    screenSize === 'mobile' && mobileIntensity
       ? mobileIntensity
-      : 'desktop' === screenSize && desktopIntensity
+      : screenSize === 'desktop' && desktopIntensity
         ? desktopIntensity
         : defaultIntensity || 'medium';
 

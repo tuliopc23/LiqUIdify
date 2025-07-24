@@ -18,7 +18,7 @@ export const SSRPortal = ({ children, to = 'body' }: SSRPortalProps) => {
     const target =
       'string' === typeof to
         ? 'undefined' !== typeof document
-          ? if (typeof document !== "undefined") { document.querySelector(to)
+          ? (typeof document !== "undefined" ? document.querySelector(to) : null)
           : undefined
         : to;
 
@@ -26,7 +26,7 @@ export const SSRPortal = ({ children, to = 'body' }: SSRPortalProps) => {
   }, [to]);
 
   if (isServer || !mounted || !container) {
-    return;
+    return null;
   }
 
   return createPortal(children, container);

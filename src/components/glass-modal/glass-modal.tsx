@@ -66,8 +66,9 @@ export function GlassModal({
 		if (isOpen) {
 			try {
 				if (document.body && document.documentElement) {
-					const scrollbarWidth =
-						if (typeof window !== "undefined") { window.innerWidth - document.documentElement.clientWidth;
+					const scrollbarWidth = typeof window !== "undefined" 
+						? window.innerWidth - document.documentElement.clientWidth 
+						: 0;
 					document.body.style.overflow = "hidden";
 					document.body.style.paddingRight = `${scrollbarWidth}px`;
 				}
@@ -104,7 +105,7 @@ export function GlassModal({
 	}, [isClient, isOpen, title]);
 
 	if (!isOpen) {
-		return;
+		return null;
 	}
 
 	const modalContent = (

@@ -306,12 +306,20 @@ export function FeatureDetectionClasses() {
 		};
 
 		updateNetworkStatus();
-		if (typeof window !== "undefined") { window.addEventListener("online", updateNetworkStatus);
-		if (typeof window !== "undefined") { window.addEventListener("offline", updateNetworkStatus);
+		if (typeof window !== "undefined") {
+			window.addEventListener("online", updateNetworkStatus);
+		}
+		if (typeof window !== "undefined") {
+			window.addEventListener("offline", updateNetworkStatus);
+		}
 
 		return () => {
-			if (typeof window !== "undefined") { window.removeEventListener("online", updateNetworkStatus);
-			if (typeof window !== "undefined") { window.removeEventListener("offline", updateNetworkStatus);
+			if (typeof window !== "undefined") {
+				window.removeEventListener("online", updateNetworkStatus);
+			}
+			if (typeof window !== "undefined") {
+				window.removeEventListener("offline", updateNetworkStatus);
+			}
 		};
 	}, [isClient]);
 

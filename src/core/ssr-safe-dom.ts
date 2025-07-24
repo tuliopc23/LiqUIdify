@@ -19,32 +19,32 @@ export const safeCreateElement = <T extends HTMLElement>(
 ): T | null => {
   if (isSSR()) {
     // Logging disabled
-    return;
+    return null;
   }
 
   try {
     return document.createElement(tagName, options) as T;
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 };
 
 // Safe document.body access
 export const safeGetDocumentBody = (): HTMLElement | null => {
   if (isSSR() || !document.body) {
-    return;
+    return null;
   }
   return document.body;
 };
 
-// Safe if (typeof document !== "undefined") { document.querySelector wrapper
+// Safe document.querySelector wrapper
 export const safeQuerySelector = <T extends Element = Element>(
   selector: string,
   container?: Element | Document
 ): T | null => {
   if (isSSR()) {
-    return;
+    return null;
   }
 
   try {
@@ -52,11 +52,11 @@ export const safeQuerySelector = <T extends Element = Element>(
     return root.querySelector<T>(selector);
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 };
 
-// Safe if (typeof document !== "undefined") { document.querySelectorAll wrapper
+// Safe document.querySelectorAll wrapper
 export const safeQuerySelectorAll = <T extends Element = Element>(
   selector: string,
   container?: Element | Document
@@ -74,19 +74,19 @@ export const safeQuerySelectorAll = <T extends Element = Element>(
   }
 };
 
-// Safe if (typeof document !== "undefined") { document.getElementById wrapper
+// Safe document.getElementById wrapper
 export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
   id: string
 ): T | null => {
   if (isSSR()) {
-    return;
+    return null;
   }
 
   try {
-    return if (typeof document !== "undefined") { document.getElementById(id) as T | null;
+    return document.getElementById(id) as T | null;
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 };
 
@@ -145,11 +145,14 @@ export const safeGetViewportDimensions = (): {
   }
 
   try {
-    return {
-      width: if (typeof window !== "undefined") { window.innerWidth || document.documentElement.clientWidth || 1024,
-      height:
-        if (typeof window !== "undefined") { window.innerHeight || document.documentElement.clientHeight || 768,
-    };
+    const width = typeof window !== "undefined" 
+      ? window.innerWidth || document.documentElement.clientWidth || 1024
+      : 1024;
+    const height = typeof window !== "undefined"
+      ? window.innerHeight || document.documentElement.clientHeight || 768
+      : 768;
+    
+    return { width, height };
   } catch {
     // Logging disabled
     return { width: 1024, height: 768 };
@@ -220,14 +223,14 @@ export const safeGetComputedStyle = (
 export const safeLocalStorage = {
   getItem: (key: string): string | null => {
     if (isSSR()) {
-      return;
+      return null;
     }
 
     try {
       return localStorage.getItem(key);
     } catch {
       // Logging disabled
-      return;
+      return null;
     }
   },
 
@@ -264,14 +267,14 @@ export const safeLocalStorage = {
 export const safeSessionStorage = {
   getItem: (key: string): string | null => {
     if (isSSR()) {
-      return;
+      return null;
     }
 
     try {
       return sessionStorage.getItem(key);
     } catch {
       // Logging disabled
-      return;
+      return null;
     }
   },
 

@@ -87,13 +87,21 @@ export const GlassSlider = React.memo(
 
 			useEffect(() => {
 				if (isDragging) {
-					if (typeof document !== "undefined") { document.addEventListener("mousemove", handleMouseMove);
-					if (typeof document !== "undefined") { document.addEventListener("mouseup", handleMouseUp);
+					if (typeof document !== "undefined") {
+						document.addEventListener("mousemove", handleMouseMove);
+					}
+					if (typeof document !== "undefined") {
+						document.addEventListener("mouseup", handleMouseUp);
+					}
 				}
 
 				return () => {
-					if (typeof document !== "undefined") { document.removeEventListener("mousemove", handleMouseMove);
-					if (typeof document !== "undefined") { document.removeEventListener("mouseup", handleMouseUp);
+					if (typeof document !== "undefined") {
+						document.removeEventListener("mousemove", handleMouseMove);
+					}
+					if (typeof document !== "undefined") {
+						document.removeEventListener("mouseup", handleMouseUp);
+					}
 				};
 			}, [isDragging, handleMouseMove, handleMouseUp]);
 

@@ -1,6 +1,5 @@
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { accessibilityManager } from "@/core/accessibility-manager";
 import { cn } from "@/core/utils/classname";
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
@@ -370,10 +369,10 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 			}
 
 			// Announce focus trap activation for screen readers
-			accessibilityManager.announce(
-				"Focus trapped. Press Escape to exit.",
-				"polite",
-			);
+			// accessibilityManager.announce(
+			//	"Focus trapped. Press Escape to exit.",
+			//	"polite",
+			// );
 		};
 
 		// Delay initial focus if requested
@@ -384,9 +383,15 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 		}
 
 		// Add event listeners
-		if (typeof document !== "undefined") { document.addEventListener("keydown", handleKeyDown, true);
-		if (typeof document !== "undefined") { document.addEventListener("focusin", handleFocusIn, true);
-		if (typeof document !== "undefined") { document.addEventListener("mousedown", handleMouseDown, true);
+		if (typeof document !== "undefined") {
+			document.addEventListener("keydown", handleKeyDown, true);
+		}
+		if (typeof document !== "undefined") {
+			document.addEventListener("focusin", handleFocusIn, true);
+		}
+		if (typeof document !== "undefined") {
+			document.addEventListener("mousedown", handleMouseDown, true);
+		}
 
 		return () => {
 			// Clear timeout if exists
@@ -402,9 +407,15 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 				}
 			}
 
-			if (typeof document !== "undefined") { document.removeEventListener("keydown", handleKeyDown, true);
-			if (typeof document !== "undefined") { document.removeEventListener("focusin", handleFocusIn, true);
-			if (typeof document !== "undefined") { document.removeEventListener("mousedown", handleMouseDown, true);
+			if (typeof document !== "undefined") {
+				document.removeEventListener("keydown", handleKeyDown, true);
+			}
+			if (typeof document !== "undefined") {
+				document.removeEventListener("focusin", handleFocusIn, true);
+			}
+			if (typeof document !== "undefined") {
+				document.removeEventListener("mousedown", handleMouseDown, true);
+			}
 
 			// Call deactivate callback
 			if (onDeactivate) {
@@ -423,7 +434,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 			}
 
 			// Announce focus trap deactivation
-			accessibilityManager.announce("Focus trap deactivated", "polite");
+			// accessibilityManager.announce("Focus trap deactivated", "polite");
 		};
 	}, [
 		isClient,

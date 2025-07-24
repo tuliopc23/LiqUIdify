@@ -596,17 +596,29 @@ export function useMagneticEffect(
 
     // Initialize
     updateElementPosition();
-    if (typeof window !== "undefined") { window.addEventListener('mousemove', handleMouseMove);
+    if (typeof window !== "undefined") {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
     element.addEventListener('mouseleave', handleMouseLeave);
-    if (typeof window !== "undefined") { window.addEventListener('resize', updateElementPosition);
-    if (typeof window !== "undefined") { window.addEventListener('scroll', updateElementPosition);
+    if (typeof window !== "undefined") {
+      window.addEventListener('resize', updateElementPosition);
+    }
+    if (typeof window !== "undefined") {
+      window.addEventListener('scroll', updateElementPosition);
+    }
 
     // Cleanup
     return () => {
-      if (typeof window !== "undefined") { window.removeEventListener('mousemove', handleMouseMove);
+      if (typeof window !== "undefined") {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
       element.removeEventListener('mouseleave', handleMouseLeave);
-      if (typeof window !== "undefined") { window.removeEventListener('resize', updateElementPosition);
-      if (typeof window !== "undefined") { window.removeEventListener('scroll', updateElementPosition);
+      if (typeof window !== "undefined") {
+        window.removeEventListener('resize', updateElementPosition);
+      }
+      if (typeof window !== "undefined") {
+        window.removeEventListener('scroll', updateElementPosition);
+      }
 
       if (null !== animationFrame) {
         cancelAnimationFrame(animationFrame);

@@ -577,7 +577,7 @@ export class AccessibilityManager {
         if (!element.hasAttribute(prop)) {
           suggestions.push({
             attribute: prop,
-            currentValue: undefined,
+            currentValue: null,
             suggestedValue: this.getSuggestedARIAValue(prop, element),
             reason: `Required attribute for role="${role}"`,
           });
@@ -595,7 +595,7 @@ export class AccessibilityManager {
             element.setAttribute(prop, value);
             autoCorrections.push({
               attribute: prop,
-              oldValue: undefined,
+              oldValue: null,
               newValue: value,
               applied: true,
             });
@@ -608,7 +608,7 @@ export class AccessibilityManager {
     if (this.isInteractive(element) && !this.hasAccessibleName(element)) {
       suggestions.push({
         attribute: 'aria-label',
-        currentValue: undefined,
+        currentValue: null,
         suggestedValue: this.generateAccessibleName(element),
         reason: 'Interactive element needs accessible name',
       });
@@ -832,7 +832,7 @@ export class AccessibilityManager {
       li: 'listitem',
     };
 
-    return implicitRoles[tagName] || undefined;
+    return implicitRoles[tagName] || null;
   }
 
   private isInteractive(element: HTMLElement): boolean {
@@ -961,9 +961,13 @@ class FocusTrap {
     }
 
     // Add event listeners
-    if (typeof document !== "undefined") { document.addEventListener('keydown', this.handleKeyDown);
+    if (typeof document !== "undefined") {
+      document.addEventListener('keydown', this.handleKeyDown);
+    }
     if (this.options.clickOutsideDeactivates) {
-      if (typeof document !== "undefined") { document.addEventListener('click', this.handleClickOutside);
+      if (typeof document !== "undefined") {
+        document.addEventListener('click', this.handleClickOutside);
+      }
     }
   }
 
@@ -973,8 +977,12 @@ class FocusTrap {
     }
 
     this.active = false;
-    if (typeof document !== "undefined") { document.removeEventListener('keydown', this.handleKeyDown);
-    if (typeof document !== "undefined") { document.removeEventListener('click', this.handleClickOutside);
+    if (typeof document !== "undefined") {
+      document.removeEventListener('keydown', this.handleKeyDown);
+    }
+    if (typeof document !== "undefined") {
+      document.removeEventListener('click', this.handleClickOutside);
+    }
 
     if (this.options.onDeactivate) {
       this.options.onDeactivate();
@@ -995,9 +1003,9 @@ class FocusTrap {
       ...this.container.querySelectorAll(focusableSelectors),
     ] as HTMLElement[];
 
-    this.firstFocusableElement = focusableElements[0] || undefined;
+    this.firstFocusableElement = focusableElements[0] || null;
     this.lastFocusableElement =
-      focusableElements[focusableElements.length - 1] || undefined;
+      focusableElements[focusableElements.length - 1] || null;
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {
