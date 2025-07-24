@@ -326,7 +326,7 @@ export function withDeviceFallback(
     useEffect(() => {
       const checkDeviceType = () => {
         const width = typeof window !== "undefined" ? window.innerWidth : 1024;
-        const isTouchDevice = 'ontouchstart' in window;
+        const isTouchDevice = typeof window !== "undefined" && 'ontouchstart' in window;
 
         if (768 > width) {
           setDeviceType('mobile');
