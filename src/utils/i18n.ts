@@ -31,7 +31,7 @@ const defaultMessages: Record<string, Record<string, string>> = {
     'common.success': 'Success',
     'common.warning': 'Warning',
     'common.info': 'Info',
-    
+
     // Accessibility
     'a11y.skipToContent': 'Skip to content',
     'a11y.menu': 'Menu',
@@ -40,32 +40,32 @@ const defaultMessages: Record<string, Record<string, string>> = {
     'a11y.closeModal': 'Close modal',
     'a11y.openMenu': 'Open menu',
     'a11y.closeMenu': 'Close menu',
-    
+
     // Forms
     'form.required': 'This field is required',
     'form.invalid': 'Invalid input',
     'form.submit': 'Submit',
     'form.reset': 'Reset',
-    
+
     // Glass components
     'glass.reducedMotion': 'Animations reduced for accessibility',
     'glass.highContrast': 'High contrast mode active',
-  }
+  },
 };
 
 class I18n {
   private config: I18nConfig;
   private currentLocale: string;
-  
+
   constructor(config?: Partial<I18nConfig>) {
     this.config = {
       locale: config?.locale || 'en',
       fallbackLocale: config?.fallbackLocale || 'en',
-      messages: { ...defaultMessages, ...config?.messages }
+      messages: { ...defaultMessages, ...config?.messages },
     };
     this.currentLocale = this.config.locale;
   }
-  
+
   /**
    * Translate a key to the current locale
    * @param key - The translation key
@@ -73,19 +73,24 @@ class I18n {
    * @returns The translated string
    */
   t(key: string, params?: Record<string, any>): string {
-    const messages = this.config.messages[this.currentLocale] || this.config.messages[this.config.fallbackLocale];
+    const messages =
+      this.config.messages[this.currentLocale] ||
+      this.config.messages[this.config.fallbackLocale];
     let message = messages?.[key] || key;
-    
+
     // Simple parameter interpolation
     if (params) {
       Object.entries(params).forEach(([paramKey, value]) => {
-        message = message.replace(new RegExp(`\\{${paramKey}\\}`, 'g'), String(value));
+        message = message.replace(
+          new RegExp(`\\{${paramKey}\\}`, 'g'),
+          String(value)
+        );
       });
     }
-    
+
     return message;
   }
-  
+
   /**
    * Set the current locale
    * @param locale - The locale to set
@@ -98,7 +103,7 @@ class I18n {
       this.currentLocale = this.config.fallbackLocale;
     }
   }
-  
+
   /**
    * Get the current locale
    * @returns The current locale
@@ -106,7 +111,7 @@ class I18n {
   getLocale(): string {
     return this.currentLocale;
   }
-  
+
   /**
    * Add messages for a locale
    * @param locale - The locale to add messages for
@@ -115,10 +120,10 @@ class I18n {
   addMessages(locale: string, messages: Record<string, string>): void {
     this.config.messages[locale] = {
       ...this.config.messages[locale],
-      ...messages
+      ...messages,
     };
   }
-  
+
   /**
    * Check if a locale is supported
    * @param locale - The locale to check
@@ -127,7 +132,7 @@ class I18n {
   isLocaleSupported(locale: string): boolean {
     return locale in this.config.messages;
   }
-  
+
   /**
    * Get all supported locales
    * @returns Array of supported locale codes
@@ -149,7 +154,7 @@ import { createContext, useContext } from 'react';
 export const I18nContext = createContext<I18nContext>({
   locale: 'en',
   t: i18n.t.bind(i18n),
-  setLocale: i18n.setLocale.bind(i18n)
+  setLocale: i18n.setLocale.bind(i18n),
 });
 
 export const useI18n = () => {
@@ -159,7 +164,7 @@ export const useI18n = () => {
     return {
       locale: i18n.getLocale(),
       t: i18n.t.bind(i18n),
-      setLocale: i18n.setLocale.bind(i18n)
+      setLocale: i18n.setLocale.bind(i18n),
     };
   }
   return context;

@@ -11,7 +11,7 @@ export function usePrefersReducedMotion(): boolean {
       if ('undefined' === typeof window || !window.matchMedia) {
         return false;
       }
-      
+
       // Check the initial preference
       return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
@@ -24,7 +24,7 @@ export function usePrefersReducedMotion(): boolean {
     }
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
+
     // Update state when preference changes
     const handleChange = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(event.matches);
@@ -35,7 +35,7 @@ export function usePrefersReducedMotion(): boolean {
       mediaQuery.addEventListener('change', handleChange);
       return () => mediaQuery.removeEventListener('change', handleChange);
     }
-    
+
     // Legacy browsers
     mediaQuery.addListener(handleChange);
     return () => mediaQuery.removeListener(handleChange);
@@ -55,7 +55,7 @@ export function useMotionSafeAnimations<T extends Record<string, any>>(
   reducedMotionProps: Partial<T> = {}
 ): T {
   const prefersReducedMotion = usePrefersReducedMotion();
-  
+
   if (prefersReducedMotion) {
     return {
       ...animationProps,
@@ -68,7 +68,7 @@ export function useMotionSafeAnimations<T extends Record<string, any>>(
       whileInView: undefined,
     } as T;
   }
-  
+
   return animationProps;
 }
 

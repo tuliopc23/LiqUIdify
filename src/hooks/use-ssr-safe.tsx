@@ -24,8 +24,7 @@ import {
  */
 export const useWindowDimensions = () => {
   const [dimensions, setDimensions] = useState(getWindowDimensions());
-
-  useEffect(() => {
+  useEffect(() => {
     if (!isBrowser()) {
       return;
     }

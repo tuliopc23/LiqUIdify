@@ -6,11 +6,11 @@
  */
 
 export {
-	useContentAwareGlass,
-	useLiquidGlass,
-} from "../hooks/use-liquid-glass";
+  useContentAwareGlass,
+  useLiquidGlass,
+} from '../hooks/use-liquid-glass';
 // Physics utilities
-export { createGlassRipple, useMagneticHover } from "../lib/glass-physics";
+export { createGlassRipple, useMagneticHover } from '../lib/glass-physics';
 
 // Apple liquid glass effects
 // TODO: Implement these exports once the lib file is created
@@ -21,4 +21,4 @@ export { createGlassRipple, useMagneticHover } from "../lib/glass-physics";
 // } from '../lib/enhanced-apple-liquid-glass';
 
 // Animation utilities
-export { microInteraction } from "../core/utils/classname";
+export { microInteraction } from '../core/utils/classname';

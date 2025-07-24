@@ -6,168 +6,168 @@
 
 /* Theme Custom Properties */
 :root {
-	/* Light Theme Colors */
-	--theme-bg: #ffffff;
-	--theme-fg: #0f172a;
-	--theme-muted: #64748b;
-	--theme-border: #e2e8f0;
-	--theme-accent: #3b82f6;
-	--theme-accent-hover: #2563eb;
+  /* Light Theme Colors */
+  --theme-bg: #ffffff;
+  --theme-fg: #0f172a;
+  --theme-muted: #64748b;
+  --theme-border: #e2e8f0;
+  --theme-accent: #3b82f6;
+  --theme-accent-hover: #2563eb;
 
-	/* Glass Theme Overrides */
-	--glass-theme-intensity: 0.25;
-	--glass-theme-blur: 16px;
-	--glass-theme-saturation: 180%;
+  /* Glass Theme Overrides */
+  --glass-theme-intensity: 0.25;
+  --glass-theme-blur: 16px;
+  --glass-theme-saturation: 180%;
 }
 
 /* Dark Theme */
-[data-theme="dark"] {
-	--theme-bg: #0f172a;
-	--theme-fg: #f8fafc;
-	--theme-muted: #94a3b8;
-	--theme-border: #1e293b;
-	--theme-accent: #60a5fa;
-	--theme-accent-hover: #93bbfc;
+[data-theme='dark'] {
+  --theme-bg: #0f172a;
+  --theme-fg: #f8fafc;
+  --theme-muted: #94a3b8;
+  --theme-border: #1e293b;
+  --theme-accent: #60a5fa;
+  --theme-accent-hover: #93bbfc;
 
-	--glass-theme-intensity: 0.15;
-	--glass-theme-blur: 24px;
-	--glass-theme-saturation: 150%;
+  --glass-theme-intensity: 0.15;
+  --glass-theme-blur: 24px;
+  --glass-theme-saturation: 150%;
 }
 
 /* Auto Theme (System Preference) */
 @media (prefers-color-scheme: dark) {
-	:root:not([data-theme="light"]) {
-		--theme-bg: #0f172a;
-		--theme-fg: #f8fafc;
-		--theme-muted: #94a3b8;
-		--theme-border: #1e293b;
-		--theme-accent: #60a5fa;
-		--theme-accent-hover: #93bbfc;
+  :root:not([data-theme='light']) {
+    --theme-bg: #0f172a;
+    --theme-fg: #f8fafc;
+    --theme-muted: #94a3b8;
+    --theme-border: #1e293b;
+    --theme-accent: #60a5fa;
+    --theme-accent-hover: #93bbfc;
 
-		--glass-theme-intensity: 0.15;
-		--glass-theme-blur: 24px;
-		--glass-theme-saturation: 150%;
-	}
+    --glass-theme-intensity: 0.15;
+    --glass-theme-blur: 24px;
+    --glass-theme-saturation: 150%;
+  }
 }
 
 /* Theme Variations */
 
 /* Ocean Theme */
-[data-theme="ocean"] {
-	--theme-bg: #001e3c;
-	--theme-fg: #e3f2fd;
-	--theme-muted: #90caf9;
-	--theme-border: #0d47a1;
-	--theme-accent: #2196f3;
-	--theme-accent-hover: #1976d2;
+[data-theme='ocean'] {
+  --theme-bg: #001e3c;
+  --theme-fg: #e3f2fd;
+  --theme-muted: #90caf9;
+  --theme-border: #0d47a1;
+  --theme-accent: #2196f3;
+  --theme-accent-hover: #1976d2;
 
-	--glass-theme-intensity: 0.2;
-	--glass-theme-blur: 20px;
-	--glass-theme-saturation: 200%;
+  --glass-theme-intensity: 0.2;
+  --glass-theme-blur: 20px;
+  --glass-theme-saturation: 200%;
 }
 
 /* Forest Theme */
-[data-theme="forest"] {
-	--theme-bg: #0a2e0a;
-	--theme-fg: #e8f5e9;
-	--theme-muted: #81c784;
-	--theme-border: #1b5e20;
-	--theme-accent: #4caf50;
-	--theme-accent-hover: #388e3c;
+[data-theme='forest'] {
+  --theme-bg: #0a2e0a;
+  --theme-fg: #e8f5e9;
+  --theme-muted: #81c784;
+  --theme-border: #1b5e20;
+  --theme-accent: #4caf50;
+  --theme-accent-hover: #388e3c;
 
-	--glass-theme-intensity: 0.22;
-	--glass-theme-blur: 18px;
-	--glass-theme-saturation: 170%;
+  --glass-theme-intensity: 0.22;
+  --glass-theme-blur: 18px;
+  --glass-theme-saturation: 170%;
 }
 
 /* Sunset Theme */
-[data-theme="sunset"] {
-	--theme-bg: #3c1810;
-	--theme-fg: #fff3e0;
-	--theme-muted: #ffab91;
-	--theme-border: #bf360c;
-	--theme-accent: #ff5722;
-	--theme-accent-hover: #e64a19;
+[data-theme='sunset'] {
+  --theme-bg: #3c1810;
+  --theme-fg: #fff3e0;
+  --theme-muted: #ffab91;
+  --theme-border: #bf360c;
+  --theme-accent: #ff5722;
+  --theme-accent-hover: #e64a19;
 
-	--glass-theme-intensity: 0.28;
-	--glass-theme-blur: 22px;
-	--glass-theme-saturation: 160%;
+  --glass-theme-intensity: 0.28;
+  --glass-theme-blur: 22px;
+  --glass-theme-saturation: 160%;
 }
 
 /* Theme-specific Glass Variations */
 
 /* Ocean Glass */
-[data-theme="ocean"] .glass-effect {
-	background: linear-gradient(
-		135deg,
-		rgba(33, 150, 243, var(--glass-theme-intensity)) 0%,
-		rgba(13, 71, 161, var(--glass-theme-intensity)) 100%
-	);
+[data-theme='ocean'] .glass-effect {
+  background: linear-gradient(
+    135deg,
+    rgba(33, 150, 243, var(--glass-theme-intensity)) 0%,
+    rgba(13, 71, 161, var(--glass-theme-intensity)) 100%
+  );
 }
 
 /* Forest Glass */
-[data-theme="forest"] .glass-effect {
-	background: linear-gradient(
-		135deg,
-		rgba(76, 175, 80, var(--glass-theme-intensity)) 0%,
-		rgba(27, 94, 32, var(--glass-theme-intensity)) 100%
-	);
+[data-theme='forest'] .glass-effect {
+  background: linear-gradient(
+    135deg,
+    rgba(76, 175, 80, var(--glass-theme-intensity)) 0%,
+    rgba(27, 94, 32, var(--glass-theme-intensity)) 100%
+  );
 }
 
 /* Sunset Glass */
-[data-theme="sunset"] .glass-effect {
-	background: linear-gradient(
-		135deg,
-		rgba(255, 87, 34, var(--glass-theme-intensity)) 0%,
-		rgba(191, 54, 12, var(--glass-theme-intensity)) 100%
-	);
+[data-theme='sunset'] .glass-effect {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 87, 34, var(--glass-theme-intensity)) 0%,
+    rgba(191, 54, 12, var(--glass-theme-intensity)) 100%
+  );
 }
 
 /* High Contrast Mode */
 @media (prefers-contrast: high) {
-	:root {
-		--glass-theme-intensity: 0.4;
-		--glass-theme-blur: 8px;
-		--glass-theme-saturation: 100%;
-		--theme-border: currentColor;
-	}
+  :root {
+    --glass-theme-intensity: 0.4;
+    --glass-theme-blur: 8px;
+    --glass-theme-saturation: 100%;
+    --theme-border: currentColor;
+  }
 
-	.glass-effect {
-		border-width: 2px;
-	}
+  .glass-effect {
+    border-width: 2px;
+  }
 }
 
 /* Color Scheme Utilities */
 .glass-theme-primary {
-	background: rgba(
-		var(--theme-accent-rgb, 59, 130, 246),
-		var(--glass-theme-intensity)
-	);
+  background: rgba(
+    var(--theme-accent-rgb, 59, 130, 246),
+    var(--glass-theme-intensity)
+  );
 }
 
 .glass-theme-surface {
-	background: rgba(
-		var(--theme-bg-rgb, 255, 255, 255),
-		var(--glass-theme-intensity)
-	);
+  background: rgba(
+    var(--theme-bg-rgb, 255, 255, 255),
+    var(--glass-theme-intensity)
+  );
 }
 
 .glass-theme-muted {
-	background: rgba(
-		var(--theme-muted-rgb, 100, 116, 139),
-		var(--glass-theme-intensity)
-	);
+  background: rgba(
+    var(--theme-muted-rgb, 100, 116, 139),
+    var(--glass-theme-intensity)
+  );
 }
 
 /* Theme Transitions */
 * {
-	transition:
-		background-color 300ms ease-in-out,
-		border-color 300ms ease-in-out,
-		color 300ms ease-in-out;
+  transition:
+    background-color 300ms ease-in-out,
+    border-color 300ms ease-in-out,
+    color 300ms ease-in-out;
 }
 
 /* Prevent transition on theme change */
 .theme-transitioning * {
-	transition: none !important;
+  transition: none !important;
 }

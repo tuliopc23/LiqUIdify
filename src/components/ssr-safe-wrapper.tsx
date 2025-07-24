@@ -1,13 +1,13 @@
-import type React from "react";
-import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
-import { isServer } from "@/utils/ssr-safe";
+import type React from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import { isServer } from '@/utils/ssr-safe';
 
 interface SSRSafeWrapperProps {
-	children: ReactNode;
-	fallback?: ReactNode;
-	showFallback?: boolean;
-	delay?: number;
+  children: ReactNode;
+  fallback?: ReactNode;
+  showFallback?: boolean;
+  delay?: number;
 }
 
 /**
@@ -22,22 +22,22 @@ interface SSRSafeWrapperProps {
  * ```
  */
 export const SSRSafeWrapper: React.FC<SSRSafeWrapperProps> = ({
-	children,
-	fallback = undefined,
-	showFallback = true,
-	delay = 0,
+  children,
+  fallback = undefined,
+  showFallback = true,
+  delay = 0,
 }) => {
-	const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-	if (isServer || !isMounted) {
-		return showFallback ? fallback : undefined;
-	}
+  if (isServer || !isMounted) {
+    return showFallback ? fallback : undefined;
+  }
 
-	return <>{children}</>;
+  return <>{children}</>;
 };
 
 /**
@@ -49,15 +49,15 @@ export const SSRSafeWrapper: React.FC<SSRSafeWrapperProps> = ({
  * ```
  */
 export function withSSRSafety<P extends object>(
-	Component: React.ComponentType<P>,
-	fallback: ReactNode = undefined,
-	showFallback: boolean = true,
+  Component: React.ComponentType<P>,
+  fallback: ReactNode = undefined,
+  showFallback: boolean = true
 ): React.FC<P> {
-	return (props: P) => (
-		<SSRSafeWrapper fallback={fallback} showFallback={showFallback}>
-			<Component {...props} />
-		</SSRSafeWrapper>
-	);
+  return (props: P) => (
+    <SSRSafeWrapper fallback={fallback} showFallback={showFallback}>
+      <Component {...props} />
+    </SSRSafeWrapper>
+  );
 }
 
 // Alias for backward compatibility

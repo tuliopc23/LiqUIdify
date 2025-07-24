@@ -6,271 +6,271 @@
 
 /* Animation Custom Properties */
 :root {
-	--glass-spring-duration: 600ms;
-	--glass-spring-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-	--glass-magnetic-strength: 0.15;
-	--glass-magnetic-radius: 150px;
+  --glass-spring-duration: 600ms;
+  --glass-spring-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --glass-magnetic-strength: 0.15;
+  --glass-magnetic-radius: 150px;
 }
 
 /* Spring Animations */
 .glass-spring-in {
-	animation: glass-spring-in var(--glass-spring-duration)
-		var(--glass-spring-easing);
+  animation: glass-spring-in var(--glass-spring-duration)
+    var(--glass-spring-easing);
 }
 
 @keyframes glass-spring-in {
-	0% {
-		transform: scale(0.8) translateY(20px);
-		opacity: 0;
-	}
-	40% {
-		transform: scale(1.1) translateY(-5px);
-	}
-	60% {
-		transform: scale(0.95) translateY(2px);
-	}
-	80% {
-		transform: scale(1.02) translateY(-1px);
-	}
-	100% {
-		transform: scale(1) translateY(0);
-		opacity: 1;
-	}
+  0% {
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.1) translateY(-5px);
+  }
+  60% {
+    transform: scale(0.95) translateY(2px);
+  }
+  80% {
+    transform: scale(1.02) translateY(-1px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Magnetic Hover Effect */
 .glass-magnetic {
-	transition: transform 150ms ease-out;
-	will-change: transform;
+  transition: transform 150ms ease-out;
+  will-change: transform;
 }
 
 .glass-magnetic:hover {
-	animation: glass-magnetic-pulse 2s ease-in-out infinite;
+  animation: glass-magnetic-pulse 2s ease-in-out infinite;
 }
 
 @keyframes glass-magnetic-pulse {
-	0%,
-	100% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.02);
-	}
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
 }
 
 /* Liquid Animations */
 .glass-liquid-container {
-	position: relative;
-	overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .glass-liquid-container::before {
-	content: "";
-	position: absolute;
-	top: -50%;
-	left: -50%;
-	width: 200%;
-	height: 200%;
-	background: radial-gradient(
-		circle at center,
-		rgba(255, 255, 255, 0.1) 0%,
-		transparent 70%
-	);
-	animation: glass-liquid-rotate 20s linear infinite;
-	pointer-events: none;
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  animation: glass-liquid-rotate 20s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes glass-liquid-rotate {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Morphing Effects */
 .glass-morph {
-	animation: glass-morph-shape 8s ease-in-out infinite;
+  animation: glass-morph-shape 8s ease-in-out infinite;
 }
 
 @keyframes glass-morph-shape {
-	0%,
-	100% {
-		border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-	}
-	33% {
-		border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-	}
-	66% {
-		border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
-	}
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  33% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  66% {
+    border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+  }
 }
 
 /* Parallax Layers */
 .glass-parallax-container {
-	position: relative;
-	transform-style: preserve-3d;
+  position: relative;
+  transform-style: preserve-3d;
 }
 
 .glass-parallax-layer {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	transition: transform 300ms ease-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: transform 300ms ease-out;
 }
 
 .glass-parallax-layer-1 {
-	transform: translateZ(0px);
+  transform: translateZ(0px);
 }
 
 .glass-parallax-layer-2 {
-	transform: translateZ(20px) scale(0.9);
+  transform: translateZ(20px) scale(0.9);
 }
 
 .glass-parallax-layer-3 {
-	transform: translateZ(40px) scale(0.8);
+  transform: translateZ(40px) scale(0.8);
 }
 
 /* Specular Highlights */
 .glass-specular {
-	position: relative;
-	overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .glass-specular::after {
-	content: "";
-	position: absolute;
-	top: -100%;
-	left: -100%;
-	width: 300%;
-	height: 300%;
-	background: linear-gradient(
-		45deg,
-		transparent 30%,
-		rgba(255, 255, 255, 0.1) 50%,
-		transparent 70%
-	);
-	animation: glass-specular-sweep 3s ease-in-out infinite;
-	pointer-events: none;
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  animation: glass-specular-sweep 3s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes glass-specular-sweep {
-	0% {
-		transform: translateX(-100%) translateY(-100%) rotate(45deg);
-	}
-	100% {
-		transform: translateX(100%) translateY(100%) rotate(45deg);
-	}
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 /* Particle Effects */
 .glass-particles {
-	position: relative;
-	overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .glass-particle {
-	position: absolute;
-	width: 4px;
-	height: 4px;
-	background: rgba(255, 255, 255, 0.6);
-	border-radius: 50%;
-	animation: glass-particle-float 10s ease-in-out infinite;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: glass-particle-float 10s ease-in-out infinite;
 }
 
 @keyframes glass-particle-float {
-	0% {
-		transform: translateY(100vh) rotate(0deg);
-		opacity: 0;
-	}
-	10% {
-		opacity: 1;
-	}
-	90% {
-		opacity: 1;
-	}
-	100% {
-		transform: translateY(-100vh) rotate(720deg);
-		opacity: 0;
-	}
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
 }
 
 /* Glow Effects */
 .glass-glow {
-	position: relative;
+  position: relative;
 }
 
 .glass-glow::before {
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 100%;
-	height: 100%;
-	transform: translate(-50%, -50%);
-	background: radial-gradient(
-		circle,
-		rgba(59, 130, 246, 0.4) 0%,
-		transparent 70%
-	);
-	opacity: 0;
-	transition: opacity 300ms ease-out;
-	pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.4) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  pointer-events: none;
 }
 
 .glass-glow:hover::before {
-	opacity: 1;
-	animation: glass-glow-pulse 2s ease-in-out infinite;
+  opacity: 1;
+  animation: glass-glow-pulse 2s ease-in-out infinite;
 }
 
 @keyframes glass-glow-pulse {
-	0%,
-	100% {
-		transform: translate(-50%, -50%) scale(1);
-	}
-	50% {
-		transform: translate(-50%, -50%) scale(1.2);
-	}
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
 }
 
 /* Distortion Effects */
 .glass-distort {
-	filter: url("#glass-turbulence");
-	transition: filter 300ms ease-out;
+  filter: url('#glass-turbulence');
+  transition: filter 300ms ease-out;
 }
 
 .glass-distort:hover {
-	filter: url("#glass-turbulence-hover");
+  filter: url('#glass-turbulence-hover');
 }
 
 /* Performance Optimizations */
 .glass-will-change {
-	will-change: transform, opacity, filter;
+  will-change: transform, opacity, filter;
 }
 
 .glass-gpu {
-	transform: translateZ(0);
-	backface-visibility: hidden;
-	perspective: 1000px;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-	}
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 
-	.glass-magnetic,
-	.glass-spring-in,
-	.glass-morph,
-	.glass-particles {
-		animation: none !important;
-	}
+  .glass-magnetic,
+  .glass-spring-in,
+  .glass-morph,
+  .glass-particles {
+    animation: none !important;
+  }
 }

@@ -1,14 +1,14 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Import LiqUIdify Glass Styles */
-@import "./glass.css";
-@import "./optimized-glass-effects.css";
-@import "./apple-liquid-authentic.css";
-@import "./glass-core.css";
-@import "./glass-utilities.css";
-@import "./glass-animations.css";
-@import "./glass-themes.css";
-@import "./graceful-degradation.css";
+@import './glass.css';
+@import './optimized-glass-effects.css';
+@import './apple-liquid-authentic.css';
+@import './glass-core.css';
+@import './glass-utilities.css';
+@import './glass-animations.css';
+@import './glass-themes.css';
+@import './graceful-degradation.css';
 
 /* Base Glass UI Styles */
 .glass-ui {
@@ -19,7 +19,7 @@
   --glass-saturation: 180%;
 }
 
-[data-theme="dark"] .glass-ui {
+[data-theme='dark'] .glass-ui {
   --glass-bg: rgba(0, 0, 0, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-text: rgba(255, 255, 255, 0.9);
@@ -31,6 +31,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-[data-theme="dark"] body {
+[data-theme='dark'] body {
   background: var(--glass-bg-dark-canvas, #0a0a0a);
 }
