@@ -158,7 +158,7 @@ export const withSSRFallback = <T>(
   }
 };
 
-export const useSSRSafeEffect = (
+export const getSSRSafeEffectConfig = (
   effect: () => void | (() => void),
   deps?: React.DependencyList
 ) => {
