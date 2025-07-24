@@ -51,7 +51,7 @@ const pageButtonVariants = cva(
 			},
 		},
 		defaultVariants: {
-			isActive: false,
+			isActive: "false",
 			size: "md",
 		},
 	},
@@ -171,7 +171,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
 				whileTap={!buttonDisabled && !disabled ? { scale: 0.95 } : {}}
 				onClick={() => "number" === typeof page && handlePageChange(page)}
 				disabled={buttonDisabled || disabled || "ellipsis" === page}
-				className={cn(pageButtonVariants({ isActive, size }))}
+				className={cn(pageButtonVariants({ isActive: isActive ? "true" : "false", size }))}
 				aria-label={ariaLabel}
 				aria-current={isActive ? "page" : undefined}
 			>

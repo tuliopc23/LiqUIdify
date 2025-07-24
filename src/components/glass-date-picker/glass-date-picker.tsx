@@ -39,7 +39,7 @@ const triggerVariants = cva(
       },
     },
     defaultVariants: {
-      isOpen: false,
+      isOpen: "false",
       size: 'md',
     },
   },
@@ -251,7 +251,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
           ref={triggerRef}
           type="button"
           className={cn(
-            triggerVariants({ isOpen, size }),
+            triggerVariants({ isOpen: isOpen ? "true" : "false", size }),
             focusRing,
             disabled && 'cursor-not-allowed',
           )}

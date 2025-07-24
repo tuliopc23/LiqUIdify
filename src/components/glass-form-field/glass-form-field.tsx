@@ -37,7 +37,7 @@ const labelVariants = cva(
 			},
 		},
 		defaultVariants: {
-			required: false,
+			required: "false",
 			size: "md",
 		},
 	},

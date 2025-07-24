@@ -40,7 +40,7 @@ const inputVariants = cva(
 		},
 		defaultVariants: {
 			size: "md",
-			error: false,
+			error: "false",
 		},
 	},
 );
