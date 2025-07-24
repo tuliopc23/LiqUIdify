@@ -39,7 +39,7 @@ const triggerVariants = cva(
 			},
 		},
 		defaultVariants: {
-			isOpen: false,
+			isOpen: "false",
 			size: "md",
 		},
 	},
@@ -70,8 +70,8 @@ const optionVariants = cva(
 			},
 		},
 		defaultVariants: {
-			selected: false,
-			highlighted: false,
+			selected: "false",
+			highlighted: "false",
 		},
 	},
 );
@@ -272,7 +272,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 					type="button"
 					role="combobox"
 					className={cn(
-						triggerVariants({ isOpen, size }),
+						triggerVariants({ isOpen: isOpen ? "true" : "false", size }),
 						focusRing,
 						disabled && "cursor-not-allowed",
 					)}
@@ -364,11 +364,11 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 													}
 												}}
 												role="option"
-												aria-selected={option.value === selectedValue}
+												aria-selected={option.value === selectedValue ? "true" : "false"}
 												className={cn(
 													optionVariants({
-														selected: option.value === selectedValue,
-														highlighted: index === highlightedIndex,
+														selected: option.value === selectedValue ? "true" : "false",
+														highlighted: index === highlightedIndex ? "true" : "false",
 													}),
 													option.disabled && "opacity-50 cursor-not-allowed",
 												)}

@@ -170,7 +170,7 @@ export const LineChart: React.FC<LineChartProps> = ({
 								animationDelay: animated ? `${i * 100}ms` : "0ms",
 							}}
 							onMouseEnter={() => setHoveredPoint(i)}
-       onMouseLeave={() => setHoveredPoint(undefined)}
+       onMouseLeave={() => setHoveredPoint(null)}
 						/>
 					))}
 			</svg>

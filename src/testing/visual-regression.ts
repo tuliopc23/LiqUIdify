@@ -400,7 +400,7 @@ export class VisualRegressionTester {
         break;
       case 'disabled':
         await page.evaluate((sel) => {
-          const element = safeDocument.querySelector(sel);
+          const element = document.querySelector(sel);
           if (element) {
             (element as HTMLElement).setAttribute('disabled', 'true');
           }
@@ -410,7 +410,7 @@ export class VisualRegressionTester {
         // For custom states, try to find a data attribute or class
         await page.evaluate(
           ({ sel, st }: { sel: string; st: string }) => {
-            const element = safeDocument.querySelector(sel);
+            const element = document.querySelector(sel);
             if (element) {
               // Try to find a button or link that triggers the state
               const trigger =
