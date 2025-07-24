@@ -276,7 +276,6 @@
 		"conventional-changelog-conventionalcommits": "^9.1.0",
 		"cssnano": "^7.1.0",
 		"jsdom": "^26.1.0",
-		"lint-staged": "^16.1.2",
 		"oxc": "^1.0.1",
 		"oxlint": "^1.7.0",
 		"pixelmatch": "^7.1.0",
@@ -314,11 +313,5 @@
 		"last 2 versions",
 		"not dead",
 		"not IE 11"
-	],
-	"lint-staged": {
-		"*.{ts,tsx}": [
-			"bunx oxlint --fix",
-			"prettier --write"
-		]
-	}
+	]
 }
