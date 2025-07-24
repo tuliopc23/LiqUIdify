@@ -1,4 +1,4 @@
-import { createVariants as cva, type InferVariantProps as VariantProps } from '../../lib/variant-system';
+import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { AnimatePresence, motion } from "framer-motion";
 import {
 	Archive,
@@ -212,7 +212,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 					return "File type not allowed";
 				}
 
-    return null;
+    return ;
 			},
 			[maxFileSize, allowedTypes, formatFileSize],
 		);
@@ -223,10 +223,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 				if (file.type.startsWith("image/")) {
 					const reader = new FileReader();
 					reader.onload = (e) => resolve(e.target?.result as string);
-     reader.onerror = () => resolve(null);
+     reader.onerror = () => resolve(undefined);
 					reader.readAsDataURL(file);
 				} else {
-     resolve(null);
+     resolve(undefined);
 				}
 			});
 		};

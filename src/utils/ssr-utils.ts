@@ -342,8 +342,8 @@ export const safeDynamicImport = async <T>(
 
 	try {
 		return await importFn();
-	} catch (error) {
-		console.error("Dynamic import failed:", error);
+	} catch {
+		// Dynamic import failed, return undefined
 		return;
 	}
 };

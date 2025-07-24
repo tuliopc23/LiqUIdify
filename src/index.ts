@@ -24,6 +24,7 @@ import {
 	type LiquidGlassSvgFiltersProps,
 } from "./components/liquid-glass-svg-filters";
 import { ThemeProvider } from "./components/theme-provider";
+import { I18nProvider } from "./components/i18n-provider";
 import {
 	DocumentationButton,
 	DocumentationCard,
@@ -50,6 +51,11 @@ import {
 } from "./hooks/use-ssr-safe";
 import { useTheme } from "./hooks/use-theme";
 import { toast, useToast } from "./hooks/use-toast";
+import { 
+	getMotionSafeValue, 
+	useMotionSafeAnimations,
+	usePrefersReducedMotion 
+} from "./hooks/use-prefers-reduced-motion";
 // External dependencies
 import type {
 	GlassButtonProps,
@@ -90,6 +96,7 @@ import {
 	safeRequestAnimationFrame,
 	safeWindow,
 } from "./utils/ssr-utils";
+import { i18n, t, useI18n } from "./utils/i18n";
 
 // Consolidated exports
 export {
@@ -102,6 +109,7 @@ export {
 	type AppleLiquidGlassComponentProps,
 	// Theme System
 	ThemeProvider,
+	I18nProvider,
 	// Website Building Components
 	GlassHero,
 	type GlassHeroProps,
@@ -122,6 +130,9 @@ export {
 	useTheme,
 	useToast,
 	toast,
+	usePrefersReducedMotion,
+	useMotionSafeAnimations,
+	getMotionSafeValue,
 	useIsClient,
 	useSSRSafeWindow,
 	useSSRSafeLocalStorage as useLocalStorage,
@@ -167,6 +178,10 @@ export {
 	safeDocument,
 	safeRequestAnimationFrame,
 	safeCancelAnimationFrame,
+	// i18n
+	i18n,
+	t,
+	useI18n,
 	// Pre-wrapped components for documentation
 	DocumentationButton,
 	DocumentationInput,

@@ -23,8 +23,8 @@ export function withSafeRef<T, R>(
 	if (element) {
 		try {
 			return callback(element);
-		} catch (error) {
-			console.warn("Error in safe ref callback:", error);
+		} catch {
+			// Logging disabled
 			return fallback;
 		}
 	}
@@ -40,8 +40,8 @@ export function safeQuerySelector<T extends Element = Element>(
 ): T | null {
 	try {
 		return parent.querySelector<T>(selector);
-	} catch (error) {
-		console.warn("Error in querySelector:", error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 }
@@ -55,8 +55,8 @@ export function safeQuerySelectorAll<T extends Element = Element>(
 ): T[] {
 	try {
 		return [...parent.querySelectorAll<T>(selector)];
-	} catch (error) {
-		console.warn("Error in querySelectorAll:", error);
+	} catch {
+		// Logging disabled
 		return [];
 	}
 }
@@ -75,8 +75,8 @@ export function safeGetComputedStyle(
 
 		const computedStyle = window.getComputedStyle(element);
 		return property ? computedStyle.getPropertyValue(property) : computedStyle;
-	} catch (error) {
-		console.warn("Error getting computed style:", error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 }
@@ -103,8 +103,8 @@ export function safeGetBoundingClientRect(element: Element | null): DOMRect {
 
 	try {
 		return element.getBoundingClientRect();
-	} catch (error) {
-		console.warn("Error getting bounding client rect:", error);
+	} catch {
+		// Logging disabled
 		return fallbackRect;
 	}
 }
@@ -142,8 +142,8 @@ export function safeMapGet<K, V>(
 
 	try {
 		return map.get(key);
-	} catch (error) {
-		console.warn("Error accessing map:", error);
+	} catch {
+		// Logging disabled
 		return fallback;
 	}
 }
@@ -167,12 +167,12 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
 		return () => {
 			try {
 				element.removeEventListener(type, listener as EventListener, options);
-			} catch (error) {
-				console.warn("Error removing event listener:", error);
+			} catch {
+				// Logging disabled
 			}
 		};
-	} catch (error) {
-		console.warn("Error adding event listener:", error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 }
@@ -193,12 +193,12 @@ export function safeRequestAnimationFrame(
 		return () => {
 			try {
 				window.cancelAnimationFrame(id);
-			} catch (error) {
-				console.warn("Error cancelling animation frame:", error);
+			} catch {
+				// Logging disabled
 			}
 		};
-	} catch (error) {
-		console.warn("Error requesting animation frame:", error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 }
@@ -213,8 +213,8 @@ export function safeCreateAudioContext(): AudioContext | null {
 
 	try {
 		return new AudioContext();
-	} catch (error) {
-		console.warn("Error creating AudioContext:", error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 }
@@ -233,8 +233,8 @@ export function safeGetAttribute(
 
 	try {
 		return element.getAttribute(name) || fallback || undefined;
-	} catch (error) {
-		console.warn("Error getting attribute:", error);
+	} catch {
+		// Logging disabled
 		return fallback || undefined;
 	}
 }
@@ -254,8 +254,8 @@ export function safeSetAttribute(
 	try {
 		element.setAttribute(name, value);
 		return true;
-	} catch (error) {
-		console.warn("Error setting attribute:", error);
+	} catch {
+		// Logging disabled
 		return false;
 	}
 }
@@ -274,8 +274,8 @@ export function safeGetStyle(
 
 	try {
 		return element.style[property as any] || fallback || "";
-	} catch (error) {
-		console.warn("Error getting style property:", error);
+	} catch {
+		// Logging disabled
 		return fallback || "";
 	}
 }
@@ -295,8 +295,8 @@ export function safeSetStyle(
 	try {
 		(element.style as any)[property] = value;
 		return true;
-	} catch (error) {
-		console.warn("Error setting style property:", error);
+	} catch {
+		// Logging disabled
 		return false;
 	}
 }
@@ -312,8 +312,8 @@ export function safeRemoveElement(element: Element | null): boolean {
 	try {
 		element.parentNode.removeChild(element);
 		return true;
-	} catch (error) {
-		console.warn("Error removing element:", error);
+	} catch {
+		// Logging disabled
 		return false;
 	}
 }
@@ -332,8 +332,8 @@ export function safeAppendChild(
 	try {
 		parent.appendChild(child);
 		return true;
-	} catch (error) {
-		console.warn("Error appending child:", error);
+	} catch {
+		// Logging disabled
 		return false;
 	}
 }

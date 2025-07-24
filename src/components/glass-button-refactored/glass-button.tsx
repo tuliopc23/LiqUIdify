@@ -171,7 +171,7 @@ const VARIANT_CLASSES = {
 // Loading spinner component
 const LoadingSpinner = ({ size = "md" }: { size?: string }) => {
 	const sizeClass =
-		"xs" === size ? "w-3 h-3" : "sm" === size ? "w-4 h-4" : "w-5 h-5";
+		"xs" === size ? "w-3 h-3" : ("sm" === size ? "w-4 h-4" : "w-5 h-5");
 
 	return (
 		<div

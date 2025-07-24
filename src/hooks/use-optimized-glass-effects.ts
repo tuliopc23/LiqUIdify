@@ -210,9 +210,7 @@ export function usePerformanceMonitoring(componentName: string) {
 			// Log performance issues
 			if (16 < renderTime) {
 				// More than one frame at 60fps
-				console.warn(
-					`[Performance] ${componentName} render took ${renderTime.toFixed(2)}ms (target: <16ms)`,
-				);
+				// Logging disabled
 			}
 
 			return renderTime;

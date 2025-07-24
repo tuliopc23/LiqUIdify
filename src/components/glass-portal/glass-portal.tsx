@@ -15,7 +15,7 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
 	key,
 }) => {
 	const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(
-  null,
+  undefined,
 	);
 	const isClient = useIsClient();
 
@@ -27,9 +27,7 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
 		// Use provided container or create default
 		// Check for document.body availability
 		if (!container && !document.body) {
-			console.warn(
-				"[GlassPortal] document.body is not available, portal cannot be created",
-			);
+			// Logging disabled
 			return;
 		}
 
@@ -37,7 +35,7 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
 		setMountNode(node);
 
 		return () => {
-   setMountNode(null);
+   setMountNode(undefined);
 		};
 	}, [isClient, container]);
 

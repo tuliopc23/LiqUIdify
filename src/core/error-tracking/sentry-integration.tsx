@@ -128,9 +128,7 @@ class LiqUIdifySentryIntegration {
 		// Skip if no DSN provided
 		if (!this.sentryConfig.dsn) {
 			if (isDevelopment) {
-				console.warn(
-					"[LiqUIdify] Sentry DSN not provided - error tracking disabled",
-				);
+				// Logging disabled
 			}
 			return;
 		}
@@ -214,8 +212,8 @@ class LiqUIdifySentryIntegration {
 
 			// Add performance observer for Core Web Vitals
 			this.setupPerformanceMonitoring();
-		} catch (error) {
-			console.error("[LiqUIdify] Failed to initialize Sentry:", error);
+		} catch {
+			// Logging disabled
 			// Don't throw - graceful degradation
 		}
 	}

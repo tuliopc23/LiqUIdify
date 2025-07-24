@@ -111,7 +111,7 @@ export const createStateReducer = <T extends Record<string, any>>(
 	const reducer = (state: T, action: StateAction): T => {
 		const actionCreator = actionCreators[action.type];
 		if (!actionCreator) {
-			console.warn(`Unknown action type: ${action.type}`);
+			// Logging disabled
 			return state;
 		}
 		return actionCreator(state, action.payload);
@@ -174,7 +174,7 @@ export const createThemedComponentFactory = <T extends Record<string, any>>(
 	return (themeName: string) => {
 		const theme = themeConfig[themeName];
 		if (!theme) {
-			console.warn(`Unknown theme: ${themeName}`);
+			// Logging disabled
 			return baseComponent;
 		}
 

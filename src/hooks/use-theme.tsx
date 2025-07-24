@@ -35,12 +35,8 @@ export function ThemeProvider({
 			if ("undefined" !== typeof window && window.localStorage) {
 				return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
 			}
-		} catch (error) {
-			console.warn(
-				"LocalStorage not available, using default theme:",
-				defaultTheme,
-				error,
-			);
+		} catch {
+			// Logging disabled
 		}
 		return defaultTheme;
 	});
@@ -208,8 +204,8 @@ export function ThemeProvider({
 				if ("undefined" !== typeof window && window.localStorage) {
 					localStorage.setItem(storageKey, theme);
 				}
-			} catch (error) {
-				console.warn("Could not save theme to localStorage:", error);
+			} catch {
+				// Logging disabled
 			}
 			setTheme(theme);
 		},

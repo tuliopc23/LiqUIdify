@@ -154,9 +154,9 @@ export function GlassPerformanceDashboard({
 								"text-xl font-mono",
 								55 <= fps
 									? "text-green-500"
-									: 30 <= fps
+									: (30 <= fps
 										? "text-yellow-500"
-										: "text-red-500",
+										: "text-red-500"),
 							)}
 						>
 							{fps}

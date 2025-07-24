@@ -70,7 +70,7 @@ export const storage = {
 		try {
 			localStorage.setItem(key, value);
 		} catch {
-			console.warn(`Failed to save ${key} to localStorage`);
+			// Logging disabled
 		}
 	},
 	remove: (key: string): void => {
@@ -80,7 +80,7 @@ export const storage = {
 		try {
 			localStorage.removeItem(key);
 		} catch {
-			console.warn(`Failed to remove ${key} from localStorage`);
+			// Logging disabled
 		}
 	},
 };

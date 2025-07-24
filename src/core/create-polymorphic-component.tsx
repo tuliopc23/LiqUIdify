@@ -69,7 +69,7 @@ export interface CreatePolymorphicComponentConfig<
  *   }),
  *   validateProps: (props) => {
  *     if (props.as === 'a' && !props.href) {
- *       console.warn('GlassButton: When using as="a", href prop is required');
+ *       // Logging disabled
  *     }
  *   }
  * });
@@ -126,15 +126,11 @@ export function createPolymorphicComponent<
 				restProps.disabled &&
 				!restProps["aria-disabled"]
 			) {
-				console.warn(
-					`${displayName}: Consider using aria-disabled instead of disabled for better accessibility`,
-				);
+				// Logging disabled
 			}
 
 			if ("img" === ElementComponent && !restProps.alt) {
-				console.warn(
-					`${displayName}: Image elements must have an alt attribute`,
-				);
+				// Logging disabled
 			}
 		}
 

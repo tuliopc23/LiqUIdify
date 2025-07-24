@@ -476,8 +476,8 @@ class PerformanceBenchmarker {
 				componentResults.push(result.metrics);
 				allViolations.push(...result.violations);
 				allRecommendations.push(...result.recommendations);
-			} catch (error) {
-				console.error(`Failed to benchmark ${name}:`, error);
+			} catch {
+				// Logging disabled
 			}
 		}
 

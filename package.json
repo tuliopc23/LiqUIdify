@@ -10,11 +10,13 @@
 	"exports": {
 		".": {
 			"types": "./dist/types/index.d.ts",
+			"modern": "./dist/modern/index.mjs",
 			"import": "./dist/index.mjs",
 			"require": "./dist/cjs/index.cjs"
 		},
 		"./core": {
 			"types": "./dist/types/bundles/core.d.ts",
+			"modern": "./dist/modern/core.mjs",
 			"import": "./dist/core.mjs",
 			"require": "./dist/cjs/core.cjs"
 		},
@@ -109,12 +111,13 @@
 		"build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
 		"build:css:optimized": "bun scripts/optimize-css.js",
 		"build:minified": "bun scripts/build-minified-bundles.js",
+		"build:modern": "vite build --target es2018 --outDir dist/modern",
 		"build:modular": "bun run build:unified",
 		"build:optimized": "bun run build:unified",
 		"build:oxc": "bun run oxc:check && bun run build:unified",
 		"build:production": "bun scripts/build-production.js",
 		"build:standard": "bun run build:unified",
-		"build:unified": "bun run clean && vite build && bun run build:css:optimized && bun run build:minified && bun run post-build",
+		"build:unified": "bun run clean && vite build && bun run build:modern && bun run build:css:optimized && bun run build:minified && bun run post-build",
 		"build:watch": "vite build --watch",
 		"build-storybook": "bun run build:css && bunx storybook build && bun run post-storybook",
 		"bundle:analyze:performance": "bun scripts/analyze-bundles.js",
@@ -226,8 +229,8 @@
 	],
 	"peerDependencies": {
 		"@sentry/react": ">=9.0.0",
-		"react": ">=18.0.0",
-		"react-dom": ">=18.0.0"
+		"react": "^18 || ^19",
+		"react-dom": "^18 || ^19"
 	},
 	"peerDependenciesMeta": {
 		"@sentry/react": {
@@ -270,12 +273,10 @@
 		"autoprefixer": "^10.4.21",
 		"axe-core": "^4.10.3",
 		"axe-playwright": "^2.1.0",
-		"canvas": "^3.1.2",
 		"conventional-changelog-conventionalcommits": "^9.1.0",
 		"cssnano": "^7.1.0",
 		"jsdom": "^26.1.0",
 		"lint-staged": "^16.1.2",
-		"next-themes": "^0.4.6",
 		"oxc": "^1.0.1",
 		"oxlint": "^1.7.0",
 		"pixelmatch": "^7.1.0",

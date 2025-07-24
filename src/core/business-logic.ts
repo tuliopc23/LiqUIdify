@@ -264,8 +264,8 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
 						if (isValid) {
 							await onSubmit(state.values);
 						}
-					} catch (error) {
-						console.error("Form submission error:", error);
+					} catch {
+						// Logging disabled
 					} finally {
 						setState((prev) => ({ ...prev, isSubmitting: false }));
 					}

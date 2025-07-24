@@ -178,10 +178,10 @@ export const useContentAwareGlass = (
 				analysisRef.current = analysis;
 				updateGlassStyle(analysis);
 			}
-		} catch (error) {
+		} catch {
 			// Silently fail in production, log in development
 			if ("development" === process.env.NODE_ENV) {
-				console.warn("Content analysis failed:", error);
+				// Logging disabled
 			}
 		}
 	}, [contentRef, updateGlassStyle, adaptToContent]);
@@ -227,7 +227,7 @@ export const useContentAwareGlass = (
 function analyzeColor(colorString: string): ContentAnalysis | null {
 	if (!colorString || "string" !== typeof colorString) {
 		if ("development" === process.env.NODE_ENV) {
-			console.warn("analyzeColor: Invalid color string provided:", colorString);
+			// Logging disabled
 		}
 		return;
 	}
@@ -240,10 +240,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 
 		if (!rgbMatch) {
 			if ("development" === process.env.NODE_ENV) {
-				console.warn(
-					"analyzeColor: Could not parse color string:",
-					colorString,
-				);
+				// Logging disabled
 			}
 			// Return a default analysis for unrecognized colors
 			return {
@@ -261,7 +258,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 		// Validate parsed values
 		if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) {
 			if ("development" === process.env.NODE_ENV) {
-				console.warn("analyzeColor: Invalid RGB values:", { r, g, b });
+				// Logging disabled
 			}
 			return;
 		}
@@ -283,9 +280,9 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 			contrast,
 			dominantHue: hue,
 		};
-	} catch (error) {
+	} catch {
 		if ("development" === process.env.NODE_ENV) {
-			console.warn("analyzeColor: Error processing color:", error);
+			// Logging disabled
 		}
 		// Return a safe default
 		return {

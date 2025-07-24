@@ -224,10 +224,7 @@ export function useHydrationState<T>(
 
 				// Log potential hydration mismatches in development
 				if ("development" === process.env.NODE_ENV && prev !== newValue) {
-					console.warn(`[Hydration] State change detected for ${key}:`, {
-						prev,
-						newValue,
-					});
+					// Logging disabled
 				}
 
 				return newValue;
@@ -369,7 +366,7 @@ export class HydrationErrorBoundary extends React.Component<
 	}
 
 	componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-		console.error("Hydration error:", error, errorInfo);
+		// Logging disabled
 		this.props.onError?.(error, errorInfo);
 	}
 

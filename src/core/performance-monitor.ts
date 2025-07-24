@@ -362,8 +362,8 @@ class PerformanceMonitor {
 		this.reportCallbacks.forEach((callback) => {
 			try {
 				callback(report);
-			} catch (error) {
-				console.error("Error in performance report callback:", error);
+			} catch {
+				// Logging disabled
 			}
 		});
 	}
@@ -418,8 +418,8 @@ class PerformanceMonitor {
 		observers.forEach((callback) => {
 			try {
 				callback(metric);
-			} catch (error) {
-				console.error("Error in performance observer:", error);
+			} catch {
+				// Logging disabled
 			}
 		});
 	}

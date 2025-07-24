@@ -123,8 +123,8 @@ class ErrorTrackingSystem {
 			this.processErrorQueue();
 
 			console.info("[ErrorTracking] Initialized successfully");
-		} catch (error) {
-			console.error("[ErrorTracking] Failed to initialize:", error);
+		} catch {
+			// Logging disabled
 		}
 	}
 

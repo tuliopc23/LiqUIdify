@@ -163,8 +163,8 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 						}
 						return true;
 					}
-				} catch (error) {
-					console.warn("Failed to restore focus to element:", error);
+				} catch {
+					// Logging disabled
 				}
 			}
 		}
@@ -416,8 +416,8 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 				if (!restoreFocusFromHistory() && previousActiveElement.current) {
 					try {
 						previousActiveElement.current.focus(focusOptions);
-					} catch (error) {
-						console.warn("Failed to restore focus:", error);
+					} catch {
+						// Logging disabled
 					}
 				}
 			}

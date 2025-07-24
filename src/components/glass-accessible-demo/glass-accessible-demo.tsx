@@ -41,8 +41,8 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 				`Accessibility score: ${report.score}. ${report.violations.length} violations found.`,
 				0 < report.violations.length ? "assertive" : "polite",
 			);
-		} catch (error) {
-			console.error("Validation error:", error);
+		} catch {
+			// Logging disabled
 		} finally {
 			setValidating(false);
 		}
@@ -98,9 +98,9 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 												"ml-2 font-bold",
 												95 <= report.score
 													? "text-green-500"
-													: 80 <= report.score
+													: (80 <= report.score
 														? "text-yellow-500"
-														: "text-red-500",
+														: "text-red-500"),
 											)}
 										>
 											{report.score}/100

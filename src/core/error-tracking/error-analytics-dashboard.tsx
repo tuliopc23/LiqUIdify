@@ -155,8 +155,8 @@ export const ErrorAnalyticsDashboard: React.FC<
 					await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API delay
 					setErrorData(generateMockErrorData());
 				}
-			} catch (error) {
-				console.error("Failed to fetch error data:", error);
+			} catch {
+				// Logging disabled
 				setErrorData(generateMockErrorData()); // Fallback to mock data
 			} finally {
 				setLoading(false);

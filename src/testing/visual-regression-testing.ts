@@ -314,11 +314,7 @@ export class VisualTestSuite {
 
 			if (expected && (actualX !== expected.x || actualY !== expected.y)) {
 				allPerfect = false;
-				console.warn(
-					`Pixel-perfect test failed for element ${i}: ` +
-						`expected (${expected?.x}, ${expected?.y}), ` +
-						`actual (${actualX}, ${actualY})`,
-				);
+				// Logging disabled
 			}
 		}
 

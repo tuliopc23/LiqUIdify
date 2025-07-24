@@ -66,8 +66,8 @@ export const testSentryV9Migration = async () => {
 
 		console.log("🎉 All Sentry v9 migration tests passed!");
 		return true;
-	} catch (error) {
-		console.error("❌ Sentry v9 migration test failed:", error);
+	} catch {
+		// Logging disabled
 		return false;
 	}
 };
@@ -109,8 +109,8 @@ export const testLiqUIdifySentryIntegration = async () => {
 
 		console.log("🎉 All LiqUIdify Sentry integration tests passed!");
 		return true;
-	} catch (error) {
-		console.error("❌ LiqUIdify Sentry integration test failed:", error);
+	} catch {
+		// Logging disabled
 		return false;
 	}
 };

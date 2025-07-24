@@ -57,22 +57,19 @@ export const GlassFocusDemo: React.FC = () => {
 			<nav aria-label="Demo navigation" className="mb-8">
 				<div className="flex gap-4">
 					<button
-            onClick={() => {
-            }}
+            onClick={() => {}}
 						className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer"
 					>
 						Link 1
 					</button>
 					<button
-            onClick={() => {
-            }}
+            onClick={() => {}}
 						className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer"
 					>
 						Link 2
 					</button>
 					<button
-            onClick={() => {
-            }}
+            onClick={() => {}}
 						className="text-blue-500 hover:underline bg-transparent border-none cursor-pointer"
 					>
 						Link 3
@@ -250,8 +247,7 @@ export const GlassFocusDemo: React.FC = () => {
 									<button
 										key={tool.label}
 										aria-label={tool.label}
-                    onClick={() => {
-                    }}
+                    onClick={() => {}}
 										className={cn(
 											"w-10 h-10 rounded flex items-center justify-center",
 											"hover:bg-gray-100 dark:hover:bg-gray-800",

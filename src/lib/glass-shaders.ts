@@ -334,10 +334,7 @@ export class GlassShaderEffect {
 		this.gl.compileShader(shader);
 
 		if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
-			console.error(
-				"Shader compilation error:",
-				this.gl.getShaderInfoLog(shader),
-			);
+			// Logging disabled
 			this.gl.deleteShader(shader);
 			return;
 		}
@@ -359,10 +356,7 @@ export class GlassShaderEffect {
 		this.gl.linkProgram(program);
 
 		if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
-			console.error(
-				"Program linking error:",
-				this.gl.getProgramInfoLog(program),
-			);
+			// Logging disabled
 			this.gl.deleteProgram(program);
 			return;
 		}
@@ -660,8 +654,8 @@ export function applyGlassShader(
 
 		shader.animate(config);
 		return shader;
-	} catch (error) {
-		console.error("Failed to create shader effect:", error);
+	} catch {
+		// Logging disabled
 		canvas.remove();
 		return;
 	}

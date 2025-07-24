@@ -18,16 +18,14 @@ export const safeCreateElement = <T extends HTMLElement>(
 	options?: ElementCreationOptions,
 ): T | null => {
 	if (isSSR()) {
-		console.warn(
-			"[SSR] createElement called in SSR environment, returning null",
-		);
+		// Logging disabled
 		return;
 	}
 
 	try {
 		return document.createElement(tagName, options) as T;
-	} catch (error) {
-		console.warn("[SSR] Failed to create element:", error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 };
@@ -52,8 +50,8 @@ export const safeQuerySelector = <T extends Element = Element>(
 	try {
 		const root = container || document;
 		return root.querySelector<T>(selector);
-	} catch (error) {
-		console.warn(`[SSR] Failed to query selector "${selector}":`, error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 };
@@ -70,8 +68,8 @@ export const safeQuerySelectorAll = <T extends Element = Element>(
 	try {
 		const root = container || document;
 		return root.querySelectorAll<T>(selector);
-	} catch (error) {
-		console.warn(`[SSR] Failed to query selector all "${selector}":`, error);
+	} catch {
+		// Logging disabled
 		return [] as T[];
 	}
 };
@@ -86,8 +84,8 @@ export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
 
 	try {
 		return document.getElementById(id) as T | null;
-	} catch (error) {
-		console.warn(`[SSR] Failed to get element by id "${id}":`, error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 };
@@ -110,15 +108,12 @@ export const safeAddEventListener = (
 		return () => {
 			try {
 				element.removeEventListener(type, listener, options);
-			} catch (error) {
-				console.warn(
-					`[SSR] Failed to remove event listener for "${type}":`,
-					error,
-				);
+			} catch {
+				// Logging disabled
 			}
 		};
-	} catch (error) {
-		console.warn(`[SSR] Failed to add event listener for "${type}":`, error);
+	} catch {
+		// Logging disabled
 		return () => {};
 	}
 };
@@ -134,8 +129,8 @@ export const safeGetWindowProperty = <T>(
 
 	try {
 		return (window[property] as T) ?? fallback;
-	} catch (error) {
-		console.warn(`[SSR] Failed to access window.${property}:`, error);
+	} catch {
+		// Logging disabled
 		return fallback;
 	}
 };
@@ -155,8 +150,8 @@ export const safeGetViewportDimensions = (): {
 			height:
 				window.innerHeight || document.documentElement.clientHeight || 768,
 		};
-	} catch (error) {
-		console.warn("[SSR] Failed to get viewport dimensions:", error);
+	} catch {
+		// Logging disabled
 		return { width: 1024, height: 768 };
 	}
 };
@@ -172,8 +167,8 @@ export const safeGetScrollPosition = (): { x: number; y: number } => {
 			x: window.pageXOffset || document.documentElement.scrollLeft || 0,
 			y: window.pageYOffset || document.documentElement.scrollTop || 0,
 		};
-	} catch (error) {
-		console.warn("[SSR] Failed to get scroll position:", error);
+	} catch {
+		// Logging disabled
 		return { x: 0, y: 0 };
 	}
 };
@@ -198,8 +193,8 @@ export const safeGetBoundingClientRect = (element: Element | null): DOMRect => {
 
 	try {
 		return element.getBoundingClientRect();
-	} catch (error) {
-		console.warn("[SSR] Failed to get bounding client rect:", error);
+	} catch {
+		// Logging disabled
 		return fallbackRect;
 	}
 };
@@ -215,8 +210,8 @@ export const safeGetComputedStyle = (
 
 	try {
 		return window.getComputedStyle(element, pseudoElement);
-	} catch (error) {
-		console.warn("[SSR] Failed to get computed style:", error);
+	} catch {
+		// Logging disabled
 		return {} as Partial<CSSStyleDeclaration>;
 	}
 };
@@ -230,8 +225,8 @@ export const safeLocalStorage = {
 
 		try {
 			return localStorage.getItem(key);
-		} catch (error) {
-			console.warn(`[SSR] Failed to get localStorage item "${key}":`, error);
+		} catch {
+			// Logging disabled
 			return;
 		}
 	},
@@ -244,8 +239,8 @@ export const safeLocalStorage = {
 		try {
 			localStorage.setItem(key, value);
 			return true;
-		} catch (error) {
-			console.warn(`[SSR] Failed to set localStorage item "${key}":`, error);
+		} catch {
+			// Logging disabled
 			return false;
 		}
 	},
@@ -258,8 +253,8 @@ export const safeLocalStorage = {
 		try {
 			localStorage.removeItem(key);
 			return true;
-		} catch (error) {
-			console.warn(`[SSR] Failed to remove localStorage item "${key}":`, error);
+		} catch {
+			// Logging disabled
 			return false;
 		}
 	},
@@ -274,8 +269,8 @@ export const safeSessionStorage = {
 
 		try {
 			return sessionStorage.getItem(key);
-		} catch (error) {
-			console.warn(`[SSR] Failed to get sessionStorage item "${key}":`, error);
+		} catch {
+			// Logging disabled
 			return;
 		}
 	},
@@ -288,8 +283,8 @@ export const safeSessionStorage = {
 		try {
 			sessionStorage.setItem(key, value);
 			return true;
-		} catch (error) {
-			console.warn(`[SSR] Failed to set sessionStorage item "${key}":`, error);
+		} catch {
+			// Logging disabled
 			return false;
 		}
 	},
@@ -302,11 +297,8 @@ export const safeSessionStorage = {
 		try {
 			sessionStorage.removeItem(key);
 			return true;
-		} catch (error) {
-			console.warn(
-				`[SSR] Failed to remove sessionStorage item "${key}":`,
-				error,
-			);
+		} catch {
+			// Logging disabled
 			return false;
 		}
 	},
@@ -354,12 +346,12 @@ export const safeSetBodyStyles = (styles: BodyStyleProps): (() => void) => {
 						}
 					}
 				});
-			} catch (error) {
-				console.warn("[SSR] Failed to restore body styles:", error);
+			} catch {
+				// Logging disabled
 			}
 		};
-	} catch (error) {
-		console.warn("[SSR] Failed to set body styles:", error);
+	} catch {
+		// Logging disabled
 		return () => {};
 	}
 };
@@ -376,8 +368,8 @@ export const safeFocus = (
 	try {
 		element.focus(options);
 		return document.activeElement === element;
-	} catch (error) {
-		console.warn("[SSR] Failed to focus element:", error);
+	} catch {
+		// Logging disabled
 		return false;
 	}
 };
@@ -400,8 +392,8 @@ export const safeIsElementVisible = (element: Element | null): boolean => {
 			0 < rect.height &&
 			null !== (element as HTMLElement).offsetParent
 		);
-	} catch (error) {
-		console.warn("[SSR] Failed to check element visibility:", error);
+	} catch {
+		// Logging disabled
 		return false;
 	}
 };
@@ -431,14 +423,14 @@ export const safeMatchMedia = (
 				return () => {
 					try {
 						mediaQuery.removeEventListener("change", listener);
-					} catch (error) {
-						console.warn("[SSR] Failed to remove media query listener:", error);
+					} catch {
+						// Logging disabled
 					}
 				};
 			},
 		};
-	} catch (error) {
-		console.warn(`[SSR] Failed to match media query "${query}":`, error);
+	} catch {
+		// Logging disabled
 		return {
 			matches: false,
 			addListener: () => () => {},

@@ -262,8 +262,8 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 		try {
 			await navigator.clipboard.writeText(generatedCode);
 			// Could add toast notification here
-		} catch (error) {
-			console.error("Failed to copy code:", error);
+		} catch {
+			// Logging disabled
 		}
 	}, [generatedCode]);
 

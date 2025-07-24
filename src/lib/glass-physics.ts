@@ -195,8 +195,8 @@ export function hapticFeedback(
 			const { devLog } = require("@/utils/dev-logger");
 			devLog(`Haptic feedback: ${intensity}`);
 		}
-	} catch (error) {
-		console.error("Error triggering haptic feedback:", error);
+	} catch {
+		// Logging disabled
 	}
 }
 
@@ -308,8 +308,8 @@ export const useMagneticHover = (
 			if (!springRef.current.isAtRest()) {
 				animationRef.current = requestAnimationFrame(animate);
 			}
-		} catch (error) {
-			console.error("Error in magnetic hover animation:", error);
+		} catch {
+			// Logging disabled
 			// Reset animation state on error
 			if (animationRef.current) {
 				cancelAnimationFrame(animationRef.current);
@@ -352,8 +352,8 @@ export const useMagneticHover = (
 						animationRef.current = requestAnimationFrame(animate);
 					}
 				}
-			} catch (error) {
-				console.error("Error in magnetic hover mouse move handler:", error);
+			} catch {
+				// Logging disabled
 			}
 		},
 		[strength, radius, animate],
@@ -369,8 +369,8 @@ export const useMagneticHover = (
 			if (cleanup) {
 				animationRef.current = requestAnimationFrame(animate);
 			}
-		} catch (error) {
-			console.error("Error in magnetic hover mouse leave handler:", error);
+		} catch {
+			// Logging disabled
 			// Ensure cleanup on error
 			if (animationRef.current) {
 				cancelAnimationFrame(animationRef.current);
@@ -542,8 +542,8 @@ export const createGlassRipple = (
 				ripple.style.width = `${size * 2}px`;
 				ripple.style.height = `${size * 2}px`;
 				ripple.style.opacity = "0";
-			} catch (error) {
-				console.error("Error animating glass ripple:", error);
+			} catch {
+				// Logging disabled
 			}
 		});
 
@@ -551,8 +551,8 @@ export const createGlassRipple = (
 		const cleanupTimeout = setTimeout(() => {
 			try {
 				ripple.remove();
-			} catch (error) {
-				console.error("Error removing glass ripple:", error);
+			} catch {
+				// Logging disabled
 			}
 		}, 600);
 
@@ -561,8 +561,8 @@ export const createGlassRipple = (
 		(ripple as any)._cleanupTimeout = cleanupTimeout;
 
 		return ripple;
-	} catch (error) {
-		console.error("Error creating glass ripple:", error);
+	} catch {
+		// Logging disabled
 		return;
 	}
 };
@@ -660,8 +660,8 @@ export class FluidSimulation {
 				// Apply boundaries
 				this.applyBoundaries(particle);
 			});
-		} catch (error) {
-			console.error("Error in fluid simulation update:", error);
+		} catch {
+			// Logging disabled
 		}
 	}
 
@@ -896,14 +896,14 @@ export class ParticleEmitter {
 
 					// Remove dead particles
 					return !particle.isDead();
-				} catch (error) {
-					console.error("Error updating particle:", error);
+				} catch {
+					// Logging disabled
 					// Remove errored particles
 					return false;
 				}
 			});
-		} catch (error) {
-			console.error("Error in particle emitter update:", error);
+		} catch {
+			// Logging disabled
 		}
 	}
 
@@ -999,8 +999,8 @@ export class PhysicsWorld {
 			this.running = true;
 			this.lastTime = performance.now();
 			this.update();
-		} catch (error) {
-			console.error("Error starting physics world:", error);
+		} catch {
+			// Logging disabled
 			this.running = false;
 		}
 	}
@@ -1031,24 +1031,24 @@ export class PhysicsWorld {
 					emitter.update(deltaTime);
 					emitter.removeForce(this.gravity);
 					emitter.removeForce(this.wind);
-				} catch (error) {
-					console.error(`Error updating particle emitter ${id}:`, error);
+				} catch {
+					// Logging disabled
 				}
 			});
 
 			this.fluids.forEach((fluid, id) => {
 				try {
 					fluid.update(deltaTime, [this.gravity, this.wind]);
-				} catch (error) {
-					console.error(`Error updating fluid simulation ${id}:`, error);
+				} catch {
+					// Logging disabled
 				}
 			});
 
 			// Springs update themselves based on target
 
 			this.rafId = requestAnimationFrame(() => this.update());
-		} catch (error) {
-			console.error("Critical error in physics world update:", error);
+		} catch {
+			// Logging disabled
 			// Stop the animation loop on critical error
 			this.stop();
 		}

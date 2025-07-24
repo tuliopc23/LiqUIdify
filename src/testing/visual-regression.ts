@@ -130,9 +130,7 @@ export class VisualRegressionTester {
 			const browserType = safeArrayAccess(this.options.browsers || [], i);
 
 			if (!browser || !browserType) {
-				console.warn(
-					`Skipping browser at index ${i}: browser or type not found`,
-				);
+				// Logging disabled
 				continue;
 			}
 

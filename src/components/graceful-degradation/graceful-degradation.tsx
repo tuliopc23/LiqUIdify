@@ -195,10 +195,10 @@ function useDevicePerformance(
 		let score = 0;
 
 		// Memory score
-		score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
+		score += 8 <= memory ? 3 : (4 <= memory ? 2 : 1);
 
 		// CPU score
-		score += 8 <= cores ? 3 : 4 <= cores ? 2 : 1;
+		score += 8 <= cores ? 3 : (4 <= cores ? 2 : 1);
 
 		// Save data mode
 		if (saveData) {

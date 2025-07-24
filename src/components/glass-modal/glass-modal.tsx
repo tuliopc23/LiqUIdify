@@ -77,8 +77,8 @@ export function GlassModal({
 					priority: "medium",
 					context: "general",
 				});
-			} catch (error) {
-				console.warn("[GlassModal] Failed to set body styles:", error);
+			} catch {
+				// Logging disabled
 			}
 		} else {
 			try {
@@ -86,8 +86,8 @@ export function GlassModal({
 					document.body.style.overflow = "";
 					document.body.style.paddingRight = "";
 				}
-			} catch (error) {
-				console.warn("[GlassModal] Failed to reset body styles:", error);
+			} catch {
+				// Logging disabled
 			}
 		}
 
@@ -97,8 +97,8 @@ export function GlassModal({
 					document.body.style.overflow = "";
 					document.body.style.paddingRight = "";
 				}
-			} catch (error) {
-				console.warn("[GlassModal] Failed to cleanup body styles:", error);
+			} catch {
+				// Logging disabled
 			}
 		};
 	}, [isClient, isOpen, title]);

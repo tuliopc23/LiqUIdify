@@ -114,8 +114,8 @@ export function safelyAccessBrowserAPI<T>(fn: () => T, fallback: T): T {
 
 	try {
 		return fn();
-	} catch (error) {
-		console.warn("Browser API access failed:", error);
+	} catch {
+		// Logging disabled
 		return fallback;
 	}
 }

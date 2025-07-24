@@ -471,8 +471,8 @@ export class VisualPolishManager {
 			// For now, we'll simulate with a placeholder
 			const imageData = ctx.createImageData(canvas.width, canvas.height);
 			test.baseline = imageData;
-		} catch (error) {
-			console.warn(`Failed to capture baseline for test ${test.id}:`, error);
+		} catch {
+			// Logging disabled
 		}
 	}
 
@@ -498,8 +498,8 @@ export class VisualPolishManager {
 			};
 
 			return passed;
-		} catch (error) {
-			console.warn(`Visual regression test ${id} failed:`, error);
+		} catch {
+			// Logging disabled
 			return false;
 		}
 	}

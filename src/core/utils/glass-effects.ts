@@ -127,16 +127,16 @@ export function generateGlassVariables(
 	// Convert boolean values to numbers
 	const blur =
 		"boolean" === typeof blurValue
-			? blurValue
+			? (blurValue
 				? 4 + mapIntensity(intensity) * 20
-				: 0
+				: 0)
 			: blurValue;
 
 	const saturation =
 		"boolean" === typeof saturationValue
-			? saturationValue
+			? (saturationValue
 				? 1 + mapIntensity(intensity) * 0.4
-				: 1
+				: 1)
 			: saturationValue;
 
 	return {

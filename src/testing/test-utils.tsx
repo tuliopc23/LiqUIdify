@@ -8,7 +8,7 @@ import {
 	type RenderResult,
 	render,
 } from "@testing-library/react";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "../components/theme-provider";
 import type React from "react";
 import type { ReactElement } from "react";
 import { expect, vi } from "vitest";

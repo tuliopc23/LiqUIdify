@@ -95,7 +95,7 @@ function initAudioContext() {
 	if (!audioContext && "undefined" !== typeof window) {
 		audioContext = safeCreateAudioContext();
 		if (!audioContext) {
-			console.error("[useHapticFeedback] Failed to create AudioContext");
+			// Logging disabled
 		}
 	}
 	return audioContext;
@@ -105,7 +105,7 @@ function initAudioContext() {
 function generateSound(type: HapticType, volume: number): void {
 	const ctx = initAudioContext();
 	if (!ctx) {
-		return null;
+		return ;
 	}
 
 	const oscillator = ctx.createOscillator();
@@ -272,15 +272,15 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 			try {
 				const ctx = initAudioContext();
 				if (!ctx) {
-					return null;
+					return ;
 				}
 
 				const response = await fetch(url);
 				const arrayBuffer = await response.arrayBuffer();
 				return await ctx.decodeAudioData(arrayBuffer);
-			} catch (error) {
-				console.error("Failed to load audio:", url, error);
-				return null;
+			} catch {
+				// Logging disabled
+				return ;
 			}
 		};
 
@@ -293,12 +293,8 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 						if (buffer) {
 							audioCache.current.set(url, buffer);
 						}
-					} catch (error) {
-						console.error(
-							"[useHapticFeedback] Error loading audio file:",
-							url,
-							error,
-						);
+					} catch {
+						// Logging disabled
 					}
 				}
 			},
@@ -306,17 +302,17 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
 		// Wait for all audio files to load
 		Promise.all(loadPromises).catch((error) => {
-			console.error("[useHapticFeedback] Error loading audio files:", error);
+			// Logging disabled
 		});
 	}, []);
 
 	// Trigger vibration
 	const vibrate = useCallback((pattern: number[]) => {
 		if ("undefined" === typeof window || "undefined" === typeof navigator) {
-			return null;
+			return ;
 		}
 		if (!configRef.current.vibration || !("vibrate" in navigator)) {
-			return null;
+			return ;
 		}
 
 		const scaledPattern = pattern.map((duration) =>
@@ -329,7 +325,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 	// Play audio feedback
 	const playAudio = useCallback((type: HapticType) => {
 		if (!configRef.current.audio?.enabled) {
-			return null;
+			return ;
 		}
 
 		const { sounds, volume = 0.5 } = configRef.current.audio;
@@ -338,15 +334,13 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 		if (soundUrl && audioCache.current.has(soundUrl)) {
 			const ctx = initAudioContext();
 			if (!ctx) {
-				return null;
+				return ;
 			}
 
 			const buffer = safeMapGet(audioCache.current, soundUrl);
 			if (!buffer) {
-				console.warn(
-					`[useHapticFeedback] Audio buffer not found for ${soundUrl}`,
-				);
-				return null;
+				// Logging disabled
+				return ;
 			}
 
 			const source = ctx.createBufferSource();
@@ -368,7 +362,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 	const applyVisual = useCallback(
 		(element: HTMLElement | null, type: HapticType) => {
 			if (!element || !configRef.current.visual?.enabled) {
-				return null;
+				return ;
 			}
 
 			// Clean up previous visual feedback

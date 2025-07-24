@@ -320,7 +320,7 @@ export class GlassAnimationScheduler {
 
 		// Check performance budget
 		if (this.tasks.size >= this.config.performanceBudget.maxAnimations) {
-			console.warn("Animation budget exceeded, skipping animation");
+			// Logging disabled
 			return;
 		}
 
@@ -416,8 +416,8 @@ export class GlassAnimationScheduler {
 				if (performance.now() - frameStartTime > maxFrameTime * 0.8) {
 					break; // Stop executing tasks to maintain frame rate
 				}
-			} catch (error) {
-				console.warn(`Animation task ${task.id} failed:`, error);
+			} catch {
+				// Logging disabled
 				this.removeTask(task.id);
 			}
 		}

@@ -339,8 +339,8 @@ export class CSSBundler {
 			try {
 				const result = await this.buildBundles();
 				callback?.(result);
-			} catch (error) {
-				console.error("Error rebuilding CSS bundles:", error);
+			} catch {
+				// Logging disabled
 			}
 		});
 

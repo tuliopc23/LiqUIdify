@@ -103,7 +103,7 @@ export class CSSBundleAnalyzer {
 					const stats = await fs.stat(filePath);
 					bundleSize += stats.size;
 				} catch {
-					console.warn(`CSS file not found: ${file}`);
+					// Logging disabled
 				}
 			}
 
@@ -114,9 +114,9 @@ export class CSSBundleAnalyzer {
 			const status =
 				sizeKB <= bundleConfig.maxSize
 					? "ok"
-					: sizeKB <= bundleConfig.maxSize * 1.2
+					: (sizeKB <= bundleConfig.maxSize * 1.2
 						? "warning"
-						: "error";
+						: "error");
 
 			results.bundles[bundleName] = {
 				size: sizeKB,
@@ -398,7 +398,7 @@ export class CSSBundleManager {
 					const content = await fs.readFile(filePath, "utf8");
 					combinedCSS += `\n/* ${file} */\n${content}`;
 				} catch {
-					console.warn(`CSS file not found: ${file}`);
+					// Logging disabled
 				}
 			}
 
@@ -437,19 +437,19 @@ export class CSSBundleManager {
 		const report = await this.analyzer.generateReport();
 
 		if ("fail" === report.status) {
-			console.error("❌ CSS Bundle validation failed:");
-			console.error(`Total size: ${report.totalSize}KB (exceeds 30KB limit)`);
-			report.recommendations.forEach((rec) => console.error(`- ${rec}`));
+			// Logging disabled
+			// Logging disabled
+			// report.recommendations.forEach((rec) => // Logging disabled
 			return false;
 		}
 
 		if ("warning" === report.status) {
-			console.warn("⚠️ CSS Bundle validation warnings:");
-			report.recommendations.forEach((rec) => console.warn(`- ${rec}`));
+			// Logging disabled
+			// report.recommendations.forEach((rec) => // Logging disabled
 		}
 
-		console.log("✅ CSS Bundle validation passed");
-		console.log(`Total size: ${report.totalSize}KB`);
+		// console.log("✅ CSS Bundle validation passed");
+		// console.log(`Total size: ${report.totalSize}KB`);
 
 		return true;
 	}

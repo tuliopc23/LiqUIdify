@@ -62,7 +62,7 @@ export class SSRErrorBoundary extends React.Component<
 	}
 
 	componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-		console.error("SSR Error:", error, errorInfo);
+		// Logging disabled
 	}
 
 	render() {
@@ -98,8 +98,8 @@ export function useLocalStorage<T>(
 			if (item) {
 				setValue(JSON.parse(item));
 			}
-		} catch (error) {
-			console.warn(`Failed to read localStorage key "${key}":`, error);
+		} catch {
+			// Logging disabled
 		}
 	}, [key]);
 
@@ -107,8 +107,8 @@ export function useLocalStorage<T>(
 		try {
 			setValue(newValue);
 			localStorage.setItem(key, JSON.stringify(newValue));
-		} catch (error) {
-			console.warn(`Failed to write localStorage key "${key}":`, error);
+		} catch {
+			// Logging disabled
 		}
 	};
 

@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import React, { lazy, Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import type { ComponentShowcaseProps } from "../component-showcase";
 
 // Import types for lazy components' props

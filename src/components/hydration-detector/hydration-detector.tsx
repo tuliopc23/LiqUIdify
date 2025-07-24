@@ -61,10 +61,7 @@ export function HydrationDetector({
 				};
 
 				if (debug) {
-					console.warn(
-						"[HydrationDetector] Hydration mismatch detected:",
-						mismatch,
-					);
+					// Logging disabled
 				}
 
 				manager.addMismatch(mismatch);

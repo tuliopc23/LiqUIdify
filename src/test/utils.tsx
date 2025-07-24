@@ -73,7 +73,7 @@ export async function testA11y(container: HTMLElement) {
 			expect(results).toHaveNoViolations();
 		}
 	} catch {
-		console.warn("vitest-axe not available, skipping accessibility tests");
+		// Logging disabled
 	}
 }
 

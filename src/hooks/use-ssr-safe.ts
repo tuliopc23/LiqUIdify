@@ -32,8 +32,8 @@ export function useSSRSafeWindow<T = Window>(
 		if (isClient && "undefined" !== typeof window) {
 			try {
 				setValue(selector(window));
-			} catch (error) {
-				console.warn("Error accessing window property:", error);
+			} catch {
+				// Logging disabled
 			}
 		}
 	}, [isClient, selector]);
@@ -55,8 +55,8 @@ export function useSSRSafeDocument<T = Document>(
 		if (isClient && "undefined" !== typeof document) {
 			try {
 				setValue(selector(document));
-			} catch (error) {
-				console.warn("Error accessing document property:", error);
+			} catch {
+				// Logging disabled
 			}
 		}
 	}, [isClient, selector]);
@@ -78,8 +78,8 @@ export function useSSRSafeNavigator<T = Navigator>(
 		if (isClient && "undefined" !== typeof navigator) {
 			try {
 				setValue(selector(navigator));
-			} catch (error) {
-				console.warn("Error accessing navigator property:", error);
+			} catch {
+				// Logging disabled
 			}
 		}
 	}, [isClient, selector]);
@@ -105,8 +105,8 @@ export function useSSRSafeLocalStorage<T>(
 				if (item) {
 					setStoredValue(JSON.parse(item));
 				}
-			} catch (error) {
-				console.warn(`Error reading localStorage key "${key}":`, error);
+			} catch {
+				// Logging disabled
 			}
 		}
 	}, [isClient, key]);
@@ -121,8 +121,8 @@ export function useSSRSafeLocalStorage<T>(
 			if (isClient && "undefined" !== typeof window) {
 				localStorage.setItem(key, JSON.stringify(value));
 			}
-		} catch (error) {
-			console.warn(`Error setting localStorage key "${key}":`, error);
+		} catch {
+			// Logging disabled
 		}
 	};
 
@@ -147,8 +147,8 @@ export function useSSRSafeSessionStorage<T>(
 				if (item) {
 					setStoredValue(JSON.parse(item));
 				}
-			} catch (error) {
-				console.warn(`Error reading sessionStorage key "${key}":`, error);
+			} catch {
+				// Logging disabled
 			}
 		}
 	}, [isClient, key]);
@@ -163,8 +163,8 @@ export function useSSRSafeSessionStorage<T>(
 			if (isClient && "undefined" !== typeof window) {
 				sessionStorage.setItem(key, JSON.stringify(value));
 			}
-		} catch (error) {
-			console.warn(`Error setting sessionStorage key "${key}":`, error);
+		} catch {
+			// Logging disabled
 		}
 	};
 

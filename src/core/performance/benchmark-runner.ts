@@ -240,10 +240,7 @@ class LiqUIdifyBenchmarkRunner {
 				// Brief pause between benchmarks
 				await new Promise((resolve) => setTimeout(resolve, 1000));
 			} catch (error) {
-				console.error(
-					`❌ Benchmark ${config.name} failed:`,
-					(error as Error).message || "Unknown error",
-				);
+				// Logging disabled
 
 				// Create failed result
 				const failedResult: BenchmarkResult = {
@@ -420,7 +417,7 @@ class LiqUIdifyBenchmarkRunner {
 			frameObserver.observe({ entryTypes: ["frame"] as any });
 			this.observers.push(frameObserver);
 		} catch {
-			console.warn("Frame timing not supported");
+			// Logging disabled
 		}
 
 		// Long task observer
@@ -429,7 +426,7 @@ class LiqUIdifyBenchmarkRunner {
 			entries.forEach((entry) => {
 				if (50 < entry.duration) {
 					// Tasks longer than 50ms
-					console.warn(`Long task detected: ${entry.duration}ms`);
+					// Logging disabled
 				}
 			});
 		});
@@ -438,7 +435,7 @@ class LiqUIdifyBenchmarkRunner {
 			longTaskObserver.observe({ entryTypes: ["longtask"] as any });
 			this.observers.push(longTaskObserver);
 		} catch {
-			console.warn("Long task monitoring not supported");
+			// Logging disabled
 		}
 	}
 

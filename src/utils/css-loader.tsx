@@ -86,7 +86,7 @@ export function loadCSS(
 			const errorObj = new Error(`Failed to load CSS: ${url}`);
 			onError?.(errorObj);
 			reject(errorObj);
-			console.error(error);
+			// Error already handled via onError callback
 		};
 
 		// Add to document
@@ -152,7 +152,7 @@ export function loadCSSChunk(
 	const url = cssChunks[name];
 
 	if (!url) {
-		console.warn(`CSS chunk not found: ${name}`);
+		// Logging disabled
 		return Promise.resolve();
 	}
 
