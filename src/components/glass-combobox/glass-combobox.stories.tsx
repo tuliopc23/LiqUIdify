@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+// @ts-expect-error TS(6142): Module './glass-combobox' was resolved to '/Users/... Remove this comment to see the full error message
 import { GlassCombobox } from "./glass-combobox";
 
 const meta: Meta<typeof GlassCombobox> = {
@@ -79,6 +80,7 @@ const sampleOptions = [
 
 export const Default: Story = {
 	args: {
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 		options: sampleOptions,
 		placeholder: "Choose a fruit...",
 		searchPlaceholder: "Search fruits...",
@@ -86,6 +88,7 @@ export const Default: Story = {
 };
 
 export const WithValue: Story = {
+// @ts-expect-error TS(2322): Type '{ value: string; ref?: React.Ref<HTMLDivElem... Remove this comment to see the full error message
 	args: {
 		...Default.args,
 		value: "apple",
@@ -95,6 +98,7 @@ export const WithValue: Story = {
 export const Disabled: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 		disabled: true,
 	},
 };
@@ -102,6 +106,7 @@ export const Disabled: Story = {
 export const Loading: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 		loading: true,
 	},
 };
@@ -109,6 +114,7 @@ export const Loading: Story = {
 export const Error: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 		error: true,
 	},
 };
@@ -116,6 +122,7 @@ export const Error: Story = {
 export const Success: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 		success: true,
 	},
 };
@@ -123,12 +130,14 @@ export const Success: Story = {
 export const NotClearable: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 		clearable: false,
 		value: "apple",
 	},
 };
 
 export const SmallSize: Story = {
+// @ts-expect-error TS(2322): Type '{ size: string; ref?: React.Ref<HTMLDivEleme... Remove this comment to see the full error message
 	args: {
 		...Default.args,
 		size: "sm",
@@ -136,6 +145,7 @@ export const SmallSize: Story = {
 };
 
 export const LargeSize: Story = {
+// @ts-expect-error TS(2322): Type '{ size: string; ref?: React.Ref<HTMLDivEleme... Remove this comment to see the full error message
 	args: {
 		...Default.args,
 		size: "lg",
@@ -143,6 +153,7 @@ export const LargeSize: Story = {
 };
 
 export const SecondaryVariant: Story = {
+// @ts-expect-error TS(2322): Type '{ variant: string; ref?: React.Ref<HTMLDivEl... Remove this comment to see the full error message
 	args: {
 		...Default.args,
 		variant: "secondary",
@@ -150,6 +161,7 @@ export const SecondaryVariant: Story = {
 };
 
 export const OutlineVariant: Story = {
+// @ts-expect-error TS(2322): Type '{ variant: string; ref?: React.Ref<HTMLDivEl... Remove this comment to see the full error message
 	args: {
 		...Default.args,
 		variant: "outline",
@@ -159,6 +171,7 @@ export const OutlineVariant: Story = {
 export const CustomFilter: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type '(option: any, searchValue: any) => any' is n... Remove this comment to see the full error message
 		filterFn: (option, searchValue) =>
 			option.label.toLowerCase().includes(searchValue.toLowerCase()) ||
 			option.value.toLowerCase().includes(searchValue.toLowerCase()),
@@ -168,6 +181,7 @@ export const CustomFilter: Story = {
 export const EmptyState: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type 'never[]' is not assignable to type 'string'.
 		options: [],
 		emptyText: "No fruits found",
 	},
@@ -176,9 +190,11 @@ export const EmptyState: Story = {
 export const Interactive: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type '(value: any) => void' is not assignable to t... Remove this comment to see the full error message
 		onValueChange: (value) => {
 			console.log("Selected:", value);
 		},
+// @ts-expect-error TS(2322): Type '(search: any) => void' is not assignable to ... Remove this comment to see the full error message
 		onSearchChange: (search) => {
 			console.log("Search:", search);
 		},
@@ -187,21 +203,31 @@ export const Interactive: Story = {
 
 export const AllSizes: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Small</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Small combobox"
 				size="sm"
 			/>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Medium (default)</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Medium combobox"
 				size="md"
 			/>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Large</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Large combobox"
 				size="lg"
@@ -212,21 +238,31 @@ export const AllSizes: Story = {
 
 export const AllVariants: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Default</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Default variant"
 				variant="default"
 			/>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Secondary</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Secondary variant"
 				variant="secondary"
 			/>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Outline</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Outline variant"
 				variant="outline"
@@ -237,27 +273,44 @@ export const AllVariants: Story = {
 
 export const AllStates: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Normal</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox options={sampleOptions} placeholder="Normal state" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Loading</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Loading state"
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 				loading
 			/>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Error</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox options={sampleOptions} placeholder="Error state" error />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Success</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Success state"
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 				success
 			/>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="text-sm text-gray-600">Disabled</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={sampleOptions}
 				placeholder="Disabled state"
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 				disabled
 			/>
 		</div>

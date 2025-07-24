@@ -1,7 +1,9 @@
 import { X } from 'lucide-react';
 import type React from 'react';
 import { useEffect, useRef } from 'react';
+
 import { GlassPortal } from '@/components/glass-portal';
+
 import { cn } from '@/core/utils/classname';
 
 export interface GlassModalLiteProps {
@@ -35,15 +37,13 @@ export function GlassModalLite({
       }
     };
 
-    if (isOpen) {
-      if (typeof document !== "undefined") {
+    if (isOpen && "undefined" !== typeof document) {
         document.addEventListener('keydown', handleEscape);
         document.body.style.overflow = 'hidden';
       }
-    }
 
     return () => {
-      if (typeof document !== "undefined") {
+      if ("undefined" !== typeof document) {
         document.removeEventListener('keydown', handleEscape);
         document.body.style.overflow = '';
       }
@@ -62,7 +62,9 @@ export function GlassModalLite({
   };
 
   return (
+
     <GlassPortal>
+
       <button
         className={cn(
           'glass-modal-lite-backdrop',
@@ -81,6 +83,7 @@ export function GlassModalLite({
         }}
         aria-label="Close modal backdrop"
       >
+
         <div
           ref={modalRef}
           className={cn(
@@ -97,22 +100,27 @@ export function GlassModalLite({
           onKeyDown={(e) => e.stopPropagation()}
           role="dialog"
           aria-modal="true"
-          aria-labelledby={title ? 'modal-title' : undefined}
+          aria-labelledby={title ? 'modal-title' : null}
         >
           {title && (
+
             <div className="flex items-center justify-between mb-4">
+
               <h3 id="modal-title" className="text-lg font-semibold">
                 {title}
               </h3>
+
               <button
                 onClick={onClose}
                 className="p-2 rounded-lg hover:bg-white/10 transition-colors"
                 aria-label="Close modal"
               >
+
                 <X className="h-4 w-4" />
               </button>
             </div>
           )}
+
           <div>{children}</div>
         </div>
       </button>

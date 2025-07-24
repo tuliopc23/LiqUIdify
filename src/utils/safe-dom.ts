@@ -8,7 +8,7 @@
  * Safe reference access with null checking
  */
 export function safeRefAccess<T>(ref: React.RefObject<T>): T | null {
-  return ref.current || null;
+  return ref.current || undefined;
 }
 
 /**
@@ -42,7 +42,7 @@ export function safeQuerySelector<T extends Element = Element>(
     return parent.querySelector<T>(selector);
   } catch {
     // Logging disabled
-    return null;
+    return ;
   }
 }
 
@@ -70,14 +70,14 @@ export function safeGetComputedStyle(
 ): string | CSSStyleDeclaration | null {
   try {
     if ('undefined' === typeof window || !element) {
-      return null;
+      return ;
     }
 
     const computedStyle = window.getComputedStyle(element);
     return property ? computedStyle.getPropertyValue(property) : computedStyle;
   } catch {
     // Logging disabled
-    return null;
+    return ;
   }
 }
 
@@ -154,11 +154,11 @@ export function safeMapGet<K, V>(
 export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
   element: Element | null,
   type: K,
-  listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+  listener: (this: HTMLElement, event_: HTMLElementEventMap[K]) => any,
   options?: boolean | AddEventListenerOptions
 ): (() => void) | null {
   if (!element) {
-    return null;
+    return ;
   }
 
   try {
@@ -173,7 +173,7 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
     };
   } catch {
     // Logging disabled
-    return null;
+    return ;
   }
 }
 
@@ -184,7 +184,7 @@ export function safeRequestAnimationFrame(
   callback: FrameRequestCallback
 ): (() => void) | null {
   if ('undefined' === typeof window || !window.requestAnimationFrame) {
-    return null;
+    return ;
   }
 
   try {
@@ -199,7 +199,7 @@ export function safeRequestAnimationFrame(
     };
   } catch {
     // Logging disabled
-    return null;
+    return ;
   }
 }
 
@@ -208,14 +208,14 @@ export function safeRequestAnimationFrame(
  */
 export function safeCreateAudioContext(): AudioContext | null {
   if ('undefined' === typeof window || !('AudioContext' in window)) {
-    return null;
+    return ;
   }
 
   try {
     return new AudioContext();
   } catch {
     // Logging disabled
-    return null;
+    return ;
   }
 }
 
@@ -228,14 +228,14 @@ export function safeGetAttribute(
   fallback?: string
 ): string | null {
   if (!element) {
-    return fallback ?? null;
+    return fallback ?? undefined;
   }
 
   try {
-    return element.getAttribute(name) ?? fallback ?? null;
+    return element.getAttribute(name) ?? fallback ?? undefined;
   } catch {
     // Logging disabled
-    return fallback ?? null;
+    return fallback ?? undefined;
   }
 }
 
@@ -310,7 +310,7 @@ export function safeRemoveElement(element: Element | null): boolean {
   }
 
   try {
-    element.parentNode.removeChild(element);
+    element.remove();
     return true;
   } catch {
     // Logging disabled
@@ -330,7 +330,7 @@ export function safeAppendChild(
   }
 
   try {
-    parent.appendChild(child);
+    parent.append(child);
     return true;
   } catch {
     // Logging disabled

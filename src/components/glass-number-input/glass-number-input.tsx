@@ -2,6 +2,7 @@ import { type InferVariantProps as VariantProps, createVariants as cva } from '.
 import { Minus, Plus } from "lucide-react";
 import type React from "react";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
+
 import { cn, focusRing } from "@/core/utils/classname";
 
 const numberInputVariants = cva(["relative w-full"], {
@@ -26,6 +27,7 @@ const inputVariants = cva(
 		"focus:outline-none focus:border-blue-400/50",
 		"disabled:opacity-50 disabled:cursor-not-allowed",
 	],
+
 	{
 		variants: {
 			size: {
@@ -56,6 +58,7 @@ const buttonVariants = cva(
 		"disabled:opacity-50 disabled:cursor-not-allowed",
 		"focus:outline-none focus:ring-2 focus:ring-blue-400/50",
 	],
+
 	{
 		variants: {
 			size: {
@@ -76,20 +79,33 @@ export interface GlassNumberInputProps
 			"size" | "onChange"
 		>,
 		VariantProps<typeof numberInputVariants> {
+
 	value?: number;
+
 	defaultValue?: number;
-	onChange?: (value: number | undefined) => void;
+
+	onChange?: (value: number | null) => void;
+
 	min?: number;
+
 	max?: number;
+
 	step?: number;
+
 	precision?: number;
+
 	formatOptions?: Intl.NumberFormatOptions;
 	locale?: string;
+
 	allowDecimals?: boolean;
+
 	allowNegative?: boolean;
+
 	showButtons?: boolean;
 	placeholder?: string;
+
 	error?: boolean;
+
 	disabled?: boolean;
 }
 
@@ -118,7 +134,8 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 		ref,
 	) => {
 		const [internalValue, setInternalValue] = useState<number | undefined>(
-			value !== undefined ? value : defaultValue,
+
+			value === undefined ? defaultValue : value,
 		);
 		const [displayValue, setDisplayValue] = useState("");
 		const [isFocused, setIsFocused] = useState(false);
@@ -129,44 +146,50 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 
 		// Format number for display
 		const formatNumber = useCallback(
-			(num: number | undefined): string => {
-				if (num === undefined || Number.isNaN(num)) {
+			(number_: number | null): string => {
+				if (number_ === undefined || Number.isNaN(number_)) {
 					return "";
 				}
 
 				if (formatOptions) {
-					return new Intl.NumberFormat(locale, formatOptions).format(num);
+
+					return new Intl.NumberFormat(locale, formatOptions).format(number_);
 				}
 
-				return num.toFixed(precision);
+				return number_.toFixed(precision);
 			},
 			[formatOptions, locale, precision],
 		);
 
 		// Parse display value to number
 		const parseNumber = useCallback(
-			(str: string): number | undefined => {
-				if (!str.trim()) {
-					return null;
+			(string_: string): number | undefined => {
+				if (!string_.trim()) {
+
+					return ;
 				}
 
 				// Remove formatting characters but keep decimal point and negative sign
-				const cleaned = str.replace(/[^\d.-]/g, "");
-				const num = parseFloat(cleaned);
+				const cleaned = string_.replaceAll(/[^\d.-]/g, "");
+				const number_ = Number.parseFloat(cleaned);
 
-				if (Number.isNaN(num)) {
-					return null;
+				if (Number.isNaN(number_)) {
+
+					return ;
 				}
 
 				// Apply precision
-				const rounded = Math.round(num * 10 ** precision) / 10 ** precision;
+
+				const rounded = Math.round(number_ * 10 ** precision) / 10 ** precision;
 
 				// Apply constraints
 				let constrained = rounded;
 				if (min !== undefined) {
+
 					constrained = Math.max(constrained, min);
 				}
 				if (max !== undefined) {
+
 					constrained = Math.min(constrained, max);
 				}
 
@@ -185,6 +208,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 		// Update internal value when prop value changes
 		useEffect(() => {
 			if (value !== internalValue) {
+
 				setInternalValue(value);
 			}
 		}, [value, internalValue]);
@@ -198,6 +222,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 			if (!isFocused) {
 				const parsed = parseNumber(inputValue);
 				setInternalValue(parsed);
+
 				onChange?.(parsed);
 			}
 		};
@@ -209,6 +234,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 			if (internalValue !== undefined) {
 				setDisplayValue(internalValue.toString());
 			}
+
 			props.onFocus?.(e);
 		};
 
@@ -217,7 +243,9 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 			setIsFocused(false);
 			const parsed = parseNumber(displayValue);
 			setInternalValue(parsed);
+
 			onChange?.(parsed);
+
 			props.onBlur?.(e);
 		};
 
@@ -228,11 +256,14 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 			}
 
 			const current = internalValue || 0;
+
 			const newValue = current + step;
 			const constrained =
-				max !== undefined ? Math.min(newValue, max) : newValue;
+
+				max === undefined ? newValue : Math.min(newValue, max);
 
 			setInternalValue(constrained);
+
 			onChange?.(constrained);
 		};
 
@@ -242,11 +273,14 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 			}
 
 			const current = internalValue || 0;
+
 			const newValue = current - step;
 			const constrained =
-				min !== undefined ? Math.max(newValue, min) : newValue;
+
+				min === undefined ? newValue : Math.max(newValue, min);
 
 			setInternalValue(constrained);
+
 			onChange?.(constrained);
 		};
 
@@ -257,18 +291,21 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 			}
 
 			switch (e.key) {
-				case "ArrowUp":
+				case "ArrowUp": {
 					e.preventDefault();
 					handleIncrement();
 					break;
-				case "ArrowDown":
+				}
+				case "ArrowDown": {
 					e.preventDefault();
 					handleDecrement();
 					break;
-				case "Enter":
+				}
+				case "Enter": {
 					e.preventDefault();
 					inputRef.current?.blur();
 					break;
+				}
 			}
 
 			// Allow only numeric characters, decimal point, and negative sign
@@ -303,10 +340,12 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 		);
 
 		return (
+
 			<div className={cn(numberInputVariants({ size }), className)}>
+
 				<div className="relative">
-					<input
-						ref={combinedRef}
+
+					<input ref={combinedRef}
 						type="text"
 						inputMode="numeric"
 						value={displayValue}
@@ -315,30 +354,36 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 						onBlur={handleBlur}
 						onKeyDown={handleKeyDown}
 						placeholder={placeholder}
+
 						disabled={disabled}
 						className={cn(
+
 							inputVariants({ size, error }),
 							focusRing,
 							showButtons && "pr-16",
 						)}
-						{...props}
-					/>
+						{...(props as any)}/>
 
 					{showButtons && (
+
 						<div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex flex-col gap-1">
+
 							<button
 								ref={incrementRef}
 								type="button"
 								onClick={handleIncrement}
+
 								disabled={
 									disabled ||
 									(max !== undefined &&
 										internalValue !== undefined &&
+
 										internalValue >= max)
 								}
 								className={cn(buttonVariants({ size }))}
 								aria-label="Increment"
 							>
+
 								<Plus className="w-3 h-3" />
 							</button>
 
@@ -346,15 +391,18 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 								ref={decrementRef}
 								type="button"
 								onClick={handleDecrement}
+
 								disabled={
 									disabled ||
 									(min !== undefined &&
 										internalValue !== undefined &&
+
 										internalValue <= min)
 								}
 								className={cn(buttonVariants({ size }))}
 								aria-label="Decrement"
 							>
+
 								<Minus className="w-3 h-3" />
 							</button>
 						</div>

@@ -7,6 +7,7 @@ import {
 	GlassLiveRegion,
 	GlassLiveRegionProvider,
 	useAnnouncement,
+// @ts-expect-error TS(6142): Module './glass-live-region' was resolved to '/Use... Remove this comment to see the full error message
 } from "./glass-live-region";
 
 const meta: Meta<typeof GlassLiveRegion> = {
@@ -54,7 +55,9 @@ announcer.success('File uploaded');
 	},
 	decorators: [
 		(Story) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassLiveRegionProvider>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<Story />
 			</GlassLiveRegionProvider>
 		),
@@ -92,22 +95,28 @@ export const WithQueuing: Story = {
 			};
 
 			return (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassButton onClick={addMessages}>
 						Queue Multiple Announcements
 					</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="p-4 bg-white/5 backdrop-blur-xl rounded-lg">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<h3 className="text-sm font-medium mb-2">
 							Queued Messages (will be announced by priority):
 						</h3>
-						{messages.map((msg, i) => (
-							<div key={i} className="text-sm text-white/60">
-								{msg}
+						{messages.map((message, index) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+							<div key={index} className="text-sm text-white/60">
+								{message}
 							</div>
 						))}
 					</div>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="sr-only">
 						Live regions are embedded by the provider
 					</div>
@@ -115,6 +124,7 @@ export const WithQueuing: Story = {
 			);
 		};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		return <QueueDemo />;
 	},
 };
@@ -130,8 +140,11 @@ export const ContextAwareAnnouncements: Story = {
 			} = useAnnouncement();
 
 			return (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="grid grid-cols-2 gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton
 							onClick={() => announceError("Failed to save changes")}
 							className="bg-red-500/20"
@@ -139,6 +152,7 @@ export const ContextAwareAnnouncements: Story = {
 							Announce Error
 						</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton
 							onClick={() => announceSuccess("Profile updated successfully")}
 							className="bg-green-500/20"
@@ -146,6 +160,7 @@ export const ContextAwareAnnouncements: Story = {
 							Announce Success
 						</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton
 							onClick={() => announceNavigation("Navigated to settings page")}
 							className="bg-blue-500/20"
@@ -153,6 +168,7 @@ export const ContextAwareAnnouncements: Story = {
 							Announce Navigation
 						</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton
 							onClick={() => announceLoading("Loading user data...")}
 							className="bg-yellow-500/20"
@@ -161,7 +177,9 @@ export const ContextAwareAnnouncements: Story = {
 						</GlassButton>
 					</div>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="p-4 bg-white/5 backdrop-blur-xl rounded-lg">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<p className="text-sm text-white/60">
 							Click buttons to trigger context-aware announcements. Each context
 							has different priority and prefix.
@@ -171,6 +189,7 @@ export const ContextAwareAnnouncements: Story = {
 			);
 		};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		return <ContextDemo />;
 	},
 };
@@ -199,12 +218,16 @@ export const WithDeduplication: Story = {
 			};
 
 			return (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassButton onClick={announceWithDedup}>
 						Trigger Multiple Identical Announcements
 					</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="p-4 bg-white/5 backdrop-blur-xl rounded-lg">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<p className="text-sm text-white/60">
 							Button clicked {count} times. Despite multiple calls, duplicate
 							announcements are filtered out.
@@ -214,6 +237,7 @@ export const WithDeduplication: Story = {
 			);
 		};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		return <DedupDemo />;
 	},
 };
@@ -224,20 +248,25 @@ export const CustomTiming: Story = {
 			const { announce } = useAnnouncement();
 
 			return (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="grid grid-cols-2 gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton
 							onClick={() => announce("Immediate announcement", { delay: 0 })}
 						>
 							Announce Immediately
 						</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton
 							onClick={() => announce("Delayed by 2 seconds", { delay: 2000 })}
 						>
 							Announce After 2s
 						</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton
 							onClick={() =>
 								announce("Clears after 1 second", {
@@ -249,10 +278,11 @@ export const CustomTiming: Story = {
 							Auto-clear After 1s
 						</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton
 							onClick={() =>
 								announce("Stays for 10 seconds", {
-									clearDelay: 10000,
+									clearDelay: 10_000,
 									delay: 0,
 								})
 							}
@@ -261,7 +291,9 @@ export const CustomTiming: Story = {
 						</GlassButton>
 					</div>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="p-4 bg-white/5 backdrop-blur-xl rounded-lg">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<p className="text-sm text-white/60">
 							Test different timing configurations for announcements.
 						</p>
@@ -270,6 +302,7 @@ export const CustomTiming: Story = {
 			);
 		};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		return <TimingDemo />;
 	},
 };
@@ -292,19 +325,23 @@ export const FormExample: Story = {
 			const handleSubmit = (e: React.FormEvent) => {
 				e.preventDefault();
 
-				if (!email.includes("@")) {
-					announceError("Please enter a valid email address");
-				} else {
+				if (email.includes("@")) {
 					announceSuccess("Form submitted successfully");
+				} else {
+					announceError("Please enter a valid email address");
 				}
 			};
 
 			return (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<label htmlFor="email" className="block text-sm font-medium mb-2">
 							Email Address
 						</label>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<input
 							id="email"
 							type="text"
@@ -316,9 +353,12 @@ export const FormExample: Story = {
 						/>
 					</div>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassButton type="submit">Submit Form</GlassButton>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="p-4 bg-white/5 backdrop-blur-xl rounded-lg">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<p className="text-sm text-white/60">
 							Submit the form to trigger validation announcements. Try with and
 							without @ symbol.
@@ -328,6 +368,7 @@ export const FormExample: Story = {
 			);
 		};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		return <FormDemo />;
 	},
 };

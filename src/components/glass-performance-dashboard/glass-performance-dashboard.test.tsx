@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { performanceMonitor } from "../../core/performance-monitor";
+// @ts-expect-error TS(6142): Module './glass-performance-dashboard' was resolve... Remove this comment to see the full error message
 import { GlassPerformanceDashboard } from "./glass-performance-dashboard";
 
 // Mock performance monitor
@@ -31,23 +32,27 @@ describe("GlassPerformanceDashboard", () => {
 	});
 
 	it("renders performance dashboard", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard />);
 		expect(screen.getByText("Performance Monitor")).toBeInTheDocument();
 	});
 
 	it("displays FPS counter", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard />);
 		expect(screen.getByText("FPS")).toBeInTheDocument();
 		expect(screen.getByText("60")).toBeInTheDocument();
 	});
 
 	it("displays memory usage", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard />);
 		expect(screen.getByText("Memory")).toBeInTheDocument();
 		expect(screen.getByText("50MB")).toBeInTheDocument();
 	});
 
 	it("can be collapsed", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard />);
 
 		const collapseButton = screen.getByLabelText("Collapse dashboard");
@@ -60,6 +65,7 @@ describe("GlassPerformanceDashboard", () => {
 	});
 
 	it("can be expanded from collapsed state", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard collapsed />);
 
 		const expandButton = screen.getByLabelText("Expand performance dashboard");
@@ -70,6 +76,7 @@ describe("GlassPerformanceDashboard", () => {
 
 	it("calls onClose when close button is clicked", () => {
 		const onClose = vi.fn();
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard onClose={onClose} />);
 
 		const closeButton = screen.getByLabelText("Close dashboard");
@@ -80,6 +87,7 @@ describe("GlassPerformanceDashboard", () => {
 
 	it("applies position classes correctly", () => {
 		const { container } = render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassPerformanceDashboard position="top-left" />,
 		);
 		const dashboard = container.firstChild;
@@ -88,12 +96,14 @@ describe("GlassPerformanceDashboard", () => {
 	});
 
 	it("subscribes to performance metrics on mount", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard />);
 
 		expect(performanceMonitor.subscribe).toHaveBeenCalledTimes(7); // One for each metric
 	});
 
 	it("displays Core Web Vitals section", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard />);
 		expect(screen.getByText("Core Web Vitals")).toBeInTheDocument();
 	});
@@ -101,6 +111,7 @@ describe("GlassPerformanceDashboard", () => {
 	it("updates component metrics periodically", () => {
 		vi.useFakeTimers();
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		render(<GlassPerformanceDashboard />);
 
 		expect(performanceMonitor.getReport).toHaveBeenCalledTimes(1);
@@ -116,6 +127,7 @@ describe("GlassPerformanceDashboard", () => {
 		const unsubscribe = vi.fn();
 		vi.mocked(performanceMonitor.subscribe).mockReturnValue(unsubscribe);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		const { unmount } = render(<GlassPerformanceDashboard />);
 
 		unmount();

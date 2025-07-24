@@ -687,39 +687,56 @@ export class GuideManager {
 			writable: true,
 			value: new Map(),
 		});
-		guides.forEach((guide) => {
+		for (const guide of guides) {
+// @ts-expect-error TS(2339): Property 'guides' does not exist on type 'GuideMan... Remove this comment to see the full error message
 			this.guides.set(guide.id, guide);
-		});
+		}
 	}
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 	getGuide(id) {
+// @ts-expect-error TS(2339): Property 'guides' does not exist on type 'GuideMan... Remove this comment to see the full error message
 		return this.guides.get(id);
 	}
+// @ts-expect-error TS(7006): Parameter 'category' implicitly has an 'any' type.
 	getGuidesByCategory(category) {
-		return Array.from(this.guides.values()).filter(
+// @ts-expect-error TS(2339): Property 'guides' does not exist on type 'GuideMan... Remove this comment to see the full error message
+		return [...this.guides.values()].filter(
+// @ts-expect-error TS(2571): Object is of type 'unknown'.
 			(guide) => guide.category === category,
 		);
 	}
+// @ts-expect-error TS(7006): Parameter 'difficulty' implicitly has an 'any' typ... Remove this comment to see the full error message
 	getGuidesByDifficulty(difficulty) {
-		return Array.from(this.guides.values()).filter(
+// @ts-expect-error TS(2339): Property 'guides' does not exist on type 'GuideMan... Remove this comment to see the full error message
+		return [...this.guides.values()].filter(
+// @ts-expect-error TS(2571): Object is of type 'unknown'.
 			(guide) => guide.difficulty === difficulty,
 		);
 	}
+// @ts-expect-error TS(7006): Parameter 'query' implicitly has an 'any' type.
 	searchGuides(query) {
 		const lowercaseQuery = query.toLowerCase();
-		return Array.from(this.guides.values()).filter(
+// @ts-expect-error TS(2339): Property 'guides' does not exist on type 'GuideMan... Remove this comment to see the full error message
+		return [...this.guides.values()].filter(
 			(guide) =>
+// @ts-expect-error TS(2571): Object is of type 'unknown'.
 				guide.title.toLowerCase().includes(lowercaseQuery) ||
+// @ts-expect-error TS(2571): Object is of type 'unknown'.
 				guide.description.toLowerCase().includes(lowercaseQuery) ||
+// @ts-expect-error TS(2571): Object is of type 'unknown'.
 				guide.sections.some(
+// @ts-expect-error TS(7006): Parameter 'section' implicitly has an 'any' type.
 					(section) =>
 						section.title.toLowerCase().includes(lowercaseQuery) ||
 						section.content.toLowerCase().includes(lowercaseQuery),
 				),
 		);
 	}
+// @ts-expect-error TS(7006): Parameter 'guideId' implicitly has an 'any' type.
 	getRelatedGuides(guideId) {
 		const guide = this.getGuide(guideId);
-		if (!guide) return [];
+		if (!guide) {return [];}
+// @ts-expect-error TS(7006): Parameter 'id' implicitly has an 'any' type.
 		return guide.relatedGuides.map((id) => this.getGuide(id)).filter(Boolean);
 	}
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
 
 console.log("🔍 OXC Toolchain Validation\n");
 
@@ -36,7 +36,7 @@ for (const test of tests) {
 		execSync(test.command, { stdio: "pipe" });
 		console.log(`✅ ${test.successMessage}`);
 		passed++;
-	} catch (error) {
+	} catch {
 		console.log(`❌ ${test.name} failed`);
 		failed++;
 	}

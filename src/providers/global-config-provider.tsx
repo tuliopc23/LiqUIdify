@@ -35,6 +35,7 @@ export function GlobalConfigProvider({
   const mergedConfig = { ...defaultConfig, ...config };
 
   return (
+
     <GlobalConfigContext.Provider value={mergedConfig}>
       {children}
     </GlobalConfigContext.Provider>

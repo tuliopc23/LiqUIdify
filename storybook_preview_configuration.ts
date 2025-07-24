@@ -68,7 +68,7 @@ function initializeStyles() {
     }
   `;
 
-	document.head.appendChild(style);
+	document.head.append(style);
 	isInitialized = true;
 }
 
@@ -79,7 +79,7 @@ function applyThemeToStorybook(theme: "light" | "dark") {
 	}
 
 	const root = document.documentElement;
-	root.setAttribute("data-theme", theme);
+	root.dataset.theme = theme;
 	root.classList.remove("light", "dark");
 	root.classList.add(theme);
 
@@ -155,7 +155,7 @@ const preview: Preview = {
 		controls: {
 			matchers: {
 				color:
-					/^(backgroundColor|textColor|borderColor|fillColor|strokeColor)$/i,
+					/^(backgroundcolor|textcolor|bordercolor|fillcolor|strokecolor)$/i,
 				date: /Date$/,
 			},
 			expanded: true,

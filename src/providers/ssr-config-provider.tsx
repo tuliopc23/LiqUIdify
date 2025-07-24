@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { type ReactNode, useEffect, useState } from 'react';
+
 import { ConfigProvider, type ConfigProviderProps } from './config-provider';
 
 interface SSRConfigProviderProps extends ConfigProviderProps {
@@ -24,10 +25,12 @@ export function SSRConfigProvider({
 
   // During SSR and initial hydration, show fallback or basic content
   if (!isClient) {
+
     return <>{fallback || children}</>;
   }
 
   // Once hydrated, render with full configuration
+
   return <ConfigProvider {...configProps}>{children}</ConfigProvider>;
 }
 
@@ -56,6 +59,7 @@ export function withSSRSafety<P extends object>(
     const isClient = useIsClient();
 
     if (!isClient) {
+
       return <>{fallback || undefined}</>;
     }
 

@@ -12,9 +12,9 @@
  * - Migration helper code generation
  */
 
-const fs = require("fs").promises;
-const path = require("path");
-const { execSync } = require("child_process");
+const fs = require("node:fs").promises;
+const path = require("node:path");
+const { execSync } = require("node:child_process");
 
 // Component templates and configurations
 const COMPONENT_TEMPLATES = {
@@ -244,11 +244,11 @@ class CodeGenerator {
 
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m",
-			success: "\x1b[32m",
-			warn: "\x1b[33m",
-			error: "\x1b[31m",
-			reset: "\x1b[0m",
+			info: "\u001B[36m",
+			success: "\u001B[32m",
+			warn: "\u001B[33m",
+			error: "\u001B[31m",
+			reset: "\u001B[0m",
 		};
 
 		const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
@@ -267,20 +267,20 @@ class CodeGenerator {
 
 	toPascalCase(str) {
 		return str
-			.replace(/(-|_|\s)+(.)?/g, (_, __, chr) => (chr ? chr.toUpperCase() : ""))
+			.replaceAll(/([\s_-])+(.)?/g, (_, __, chr) => (chr ? chr.toUpperCase() : ""))
 			.replace(/^(.)/, (chr) => chr.toUpperCase());
 	}
 
 	toCamelCase(str) {
 		return str
-			.replace(/(-|_|\s)+(.)?/g, (_, __, chr) => (chr ? chr.toUpperCase() : ""))
+			.replaceAll(/([\s_-])+(.)?/g, (_, __, chr) => (chr ? chr.toUpperCase() : ""))
 			.replace(/^(.)/, (chr) => chr.toLowerCase());
 	}
 
 	toKebabCase(str) {
 		return str
-			.replace(/([a-z])([A-Z])/g, "$1-$2")
-			.replace(/[\s_]+/g, "-")
+			.replaceAll(/([a-z])([A-Z])/g, "$1-$2")
+			.replaceAll(/[\s_]+/g, "-")
 			.toLowerCase();
 	}
 
@@ -289,7 +289,7 @@ class CodeGenerator {
 			.map(([name, config]) => {
 				const optional = config.optional || !config.required ? "?" : "";
 				const defaultComment =
-					config.default !== undefined ? ` // Default: ${config.default}` : "";
+					config.default === undefined ? "" : ` // Default: ${config.default}`;
 				return `  ${name}${optional}: ${config.type};${defaultComment}`;
 			})
 			.join("\n");
@@ -299,9 +299,9 @@ class CodeGenerator {
 		return Object.entries(props)
 			.map(([name, config]) => {
 				const defaultValue =
-					config.default !== undefined
-						? ` = ${JSON.stringify(config.default)}`
-						: "";
+					config.default === undefined
+						? ""
+						: ` = ${JSON.stringify(config.default)}`;
 				return `  ${name}${defaultValue}`;
 			})
 			.join(",\n");
@@ -313,15 +313,26 @@ class CodeGenerator {
 				let control = "text";
 				let options;
 
-				if (config.type === "boolean") {
+				switch (config.type) {
+				case "boolean": {
 					control = "boolean";
-				} else if (config.type === "number") {
+				
+				break;
+				}
+				case "number": {
 					control = config.range
 						? `{ type: 'range', min: ${config.range[0]}, max: ${config.range[1]} }`
 						: "number";
-				} else if (config.type === "enum") {
+				
+				break;
+				}
+				case "enum": {
 					control = "select";
 					options = JSON.stringify(config.options);
+				
+				break;
+				}
+				// No default
 				}
 
 				return `    ${name}: {
@@ -455,9 +466,9 @@ ${Object.entries(example.args)
 					: `\`${config.type}\``;
 			const required = config.required ? "✅" : "❌";
 			const defaultValue =
-				config.default !== undefined
-					? `\`${JSON.stringify(config.default)}\``
-					: "-";
+				config.default === undefined
+					? "-"
+					: `\`${JSON.stringify(config.default)}\``;
 			const description = config.description || `${name} prop`;
 
 			return `| \`${name}\` | ${type} | ${required} | ${defaultValue} | ${description} |`;
@@ -474,11 +485,11 @@ ${tableRows.join("\n")}`;
 			.slice(0, 3) // Show only first 3 props to keep example clean
 			.map(([name, config]) => {
 				const value =
-					config.default !== undefined
-						? JSON.stringify(config.default)
-						: config.type === "string"
+					config.default === undefined
+						? (config.type === "string"
 							? '"example"'
-							: "true";
+							: "true")
+						: JSON.stringify(config.default);
 				return `      ${name}={${value}}`;
 			})
 			.join("\n");
@@ -507,43 +518,43 @@ ${tableRows.join("\n")}`;
 
 		// Generate main component file
 		const componentContent = FILE_TEMPLATES.component
-			.replace(/{{COMPONENT_NAME}}/g, pascalName)
-			.replace(
-				/{{COMPONENT_DESCRIPTION}}/g,
+			.replaceAll('{{COMPONENT_NAME}}', pascalName)
+			.replaceAll(
+				'{{COMPONENT_DESCRIPTION}}',
 				options.description || config.description,
 			)
-			.replace(/{{IMPORTS}}/g, this.generateImports(config.dependencies))
-			.replace(/{{PROP_TYPES}}/g, this.generatePropTypes(props))
-			.replace(/{{PROP_DESTRUCTURING}}/g, this.generatePropDestructuring(props))
-			.replace(/{{ADDITIONAL_PROPS}}/g, this.generateAdditionalProps(props))
-			.replace(/{{COMPONENT_CONTENT}}/g, options.content || "{children}");
+			.replaceAll('{{IMPORTS}}', this.generateImports(config.dependencies))
+			.replaceAll('{{PROP_TYPES}}', this.generatePropTypes(props))
+			.replaceAll('{{PROP_DESTRUCTURING}}', this.generatePropDestructuring(props))
+			.replaceAll('{{ADDITIONAL_PROPS}}', this.generateAdditionalProps(props))
+			.replaceAll('{{COMPONENT_CONTENT}}', options.content || "{children}");
 
 		await fs.writeFile(path.join(componentDir, "index.tsx"), componentContent);
 
 		// Generate types file
 		const typesContent = FILE_TEMPLATES.types
-			.replace(/{{COMPONENT_NAME}}/g, pascalName)
-			.replace(/{{PROP_TYPES}}/g, this.generatePropTypes(props))
-			.replace(/{{VARIANTS}}/g, this.generateVariantTypes(props))
-			.replace(/{{ANIMATIONS}}/g, this.generateAnimationTypes(props));
+			.replaceAll('{{COMPONENT_NAME}}', pascalName)
+			.replaceAll('{{PROP_TYPES}}', this.generatePropTypes(props))
+			.replaceAll('{{VARIANTS}}', this.generateVariantTypes(props))
+			.replaceAll('{{ANIMATIONS}}', this.generateAnimationTypes(props));
 
 		await fs.writeFile(path.join(componentDir, "types.ts"), typesContent);
 
 		// Generate Storybook stories
 		const storiesContent = FILE_TEMPLATES.stories
-			.replace(/{{COMPONENT_NAME}}/g, pascalName)
-			.replace(/{{COMPONENT_FILE_NAME}}/g, "index")
-			.replace(
-				/{{COMPONENT_DESCRIPTION}}/g,
+			.replaceAll('{{COMPONENT_NAME}}', pascalName)
+			.replaceAll('{{COMPONENT_FILE_NAME}}', "index")
+			.replaceAll(
+				'{{COMPONENT_DESCRIPTION}}',
 				options.description || config.description,
 			)
-			.replace(
-				/{{STORYBOOK_ARG_TYPES}}/g,
+			.replaceAll(
+				'{{STORYBOOK_ARG_TYPES}}',
 				this.generateStorybookArgTypes(props),
 			)
-			.replace(/{{DEFAULT_ARGS}}/g, this.generateDefaultArgs(props))
-			.replace(
-				/{{EXAMPLE_STORIES}}/g,
+			.replaceAll('{{DEFAULT_ARGS}}', this.generateDefaultArgs(props))
+			.replaceAll(
+				'{{EXAMPLE_STORIES}}',
 				this.generateExampleStories(pascalName, props),
 			);
 
@@ -554,11 +565,11 @@ ${tableRows.join("\n")}`;
 
 		// Generate test file
 		const testContent = FILE_TEMPLATES.test
-			.replace(/{{COMPONENT_NAME}}/g, pascalName)
-			.replace(/{{COMPONENT_FILE_NAME}}/g, "index")
-			.replace(/{{DEFAULT_ROLE}}/g, this.getDefaultRole(pascalName))
-			.replace(
-				/{{CUSTOM_TESTS}}/g,
+			.replaceAll('{{COMPONENT_NAME}}', pascalName)
+			.replaceAll('{{COMPONENT_FILE_NAME}}', "index")
+			.replaceAll('{{DEFAULT_ROLE}}', this.getDefaultRole(pascalName))
+			.replaceAll(
+				'{{CUSTOM_TESTS}}',
 				this.generateCustomTests(pascalName, props),
 			);
 
@@ -569,24 +580,24 @@ ${tableRows.join("\n")}`;
 
 		// Generate documentation
 		const docsContent = FILE_TEMPLATES.documentation
-			.replace(/{{COMPONENT_NAME}}/g, pascalName)
-			.replace(
-				/{{COMPONENT_DESCRIPTION}}/g,
+			.replaceAll('{{COMPONENT_NAME}}', pascalName)
+			.replaceAll(
+				'{{COMPONENT_DESCRIPTION}}',
 				options.description || config.description,
 			)
-			.replace(/{{USAGE_PROPS}}/g, this.generateUsageProps(props))
-			.replace(/{{USAGE_CONTENT}}/g, options.content || "Your content here")
-			.replace(/{{PROPS_TABLE}}/g, this.generatePropsTable(props))
-			.replace(
-				/{{EXAMPLES_SECTION}}/g,
+			.replaceAll('{{USAGE_PROPS}}', this.generateUsageProps(props))
+			.replaceAll('{{USAGE_CONTENT}}', options.content || "Your content here")
+			.replaceAll('{{PROPS_TABLE}}', this.generatePropsTable(props))
+			.replaceAll(
+				'{{EXAMPLES_SECTION}}',
 				this.generateExamplesSection(pascalName, props),
 			)
-			.replace(
-				/{{ACCESSIBILITY_NOTES}}/g,
+			.replaceAll(
+				'{{ACCESSIBILITY_NOTES}}',
 				this.generateAccessibilityNotes(pascalName),
 			)
-			.replace(/{{BUNDLE_SIZE}}/g, "2.1") // Estimated
-			.replace(/{{THEMING_SECTION}}/g, this.generateThemingSection(pascalName));
+			.replaceAll('{{BUNDLE_SIZE}}', "2.1") // Estimated
+			.replaceAll('{{THEMING_SECTION}}', this.generateThemingSection(pascalName));
 
 		await fs.writeFile(path.join(componentDir, "README.md"), docsContent);
 
@@ -610,7 +621,7 @@ ${tableRows.join("\n")}`;
 	}
 
 	generateImports(dependencies) {
-		if (!dependencies || dependencies.length === 0) return "";
+		if (!dependencies || dependencies.length === 0) {return "";}
 
 		const importMap = {
 			"framer-motion": "import { motion } from 'framer-motion';",
@@ -1139,7 +1150,7 @@ codemod.run();
 		// Make it executable
 		try {
 			execSync("chmod +x ./scripts/liquidify-codemod.js");
-		} catch (error) {
+		} catch {
 			// Non-critical if chmod fails (e.g., on Windows)
 		}
 
@@ -1251,9 +1262,10 @@ async function main() {
 				break;
 			}
 
-			case "bundle":
+			case "bundle": {
 				await generator.generateBundle();
 				break;
+			}
 
 			case "batch": {
 				// Generate multiple components
@@ -1270,7 +1282,7 @@ async function main() {
 				break;
 			}
 
-			default:
+			default: {
 				console.log(`
 LiqUIdify Code Generation Tools
 
@@ -1292,6 +1304,7 @@ Templates:
   - form-component
         `);
 				process.exit(0);
+			}
 		}
 
 		await generator.generateReport();

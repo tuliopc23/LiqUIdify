@@ -271,24 +271,30 @@ export class GlassGestureRecognizer {
     let deltaY = 0;
 
     switch (e.key) {
-      case 'ArrowLeft':
+      case 'ArrowLeft': {
         deltaX = -step;
         break;
-      case 'ArrowRight':
+      }
+      case 'ArrowRight': {
         deltaX = step;
         break;
-      case 'ArrowUp':
+      }
+      case 'ArrowUp': {
         deltaY = -step;
         break;
-      case 'ArrowDown':
+      }
+      case 'ArrowDown': {
         deltaY = step;
         break;
+      }
       case 'Enter':
-      case ' ':
+      case ' ': {
         this.triggerHaptic('medium');
         break;
-      default:
+      }
+      default: {
         break;
+      }
     }
 
     e.preventDefault();
@@ -351,8 +357,8 @@ export class GlassGestureRecognizer {
     this.lastPosition = { x, y };
     this.lastTime = now;
 
-    const distance = Math.sqrt(
-      (x - this.startPosition.x) ** 2 + (y - this.startPosition.y) ** 2
+    const distance = Math.hypot(
+      (x - this.startPosition.x), (y - this.startPosition.y)
     );
 
     const direction =
@@ -383,8 +389,8 @@ export class GlassGestureRecognizer {
 
     const now = performance.now();
     const duration = now - this.startTime;
-    const distance = Math.sqrt(
-      (x - this.startPosition.x) ** 2 + (y - this.startPosition.y) ** 2
+    const distance = Math.hypot(
+      (x - this.startPosition.x), (y - this.startPosition.y)
     );
 
     const direction =
@@ -438,7 +444,7 @@ export class GlassGestureRecognizer {
   private detectSwipe(x: number, y: number, duration: number): void {
     const deltaX = x - this.startPosition.x;
     const deltaY = y - this.startPosition.y;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const distance = Math.hypot(deltaX, deltaY);
     const velocity = distance / duration;
 
     let direction: 'left' | 'right' | 'up' | 'down';
@@ -481,18 +487,18 @@ export class GlassGestureRecognizer {
 
       // Calculate pinch scale
       if (touch1 && touch2) {
-        const currentDistance = Math.sqrt(
-          (touch2.clientX - touch1.clientX) ** 2 +
-            (touch2.clientY - touch1.clientY) ** 2
+        const currentDistance = Math.hypot(
+          (touch2.clientX - touch1.clientX),
+            (touch2.clientY - touch1.clientY)
         );
 
         const storedTouch1 = this.touches.get(touch1.identifier);
         const storedTouch2 = this.touches.get(touch2.identifier);
 
         if (storedTouch1 && storedTouch2) {
-          const initialDistance = Math.sqrt(
-            (storedTouch2.clientX - storedTouch1.clientX) ** 2 +
-              (storedTouch2.clientY - storedTouch1.clientY) ** 2
+          const initialDistance = Math.hypot(
+            (storedTouch2.clientX - storedTouch1.clientX),
+              (storedTouch2.clientY - storedTouch1.clientY)
           );
 
           if (0 < initialDistance) {
@@ -524,7 +530,7 @@ export class GlassGestureRecognizer {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+    const distance = Math.hypot((x - centerX), (y - centerY));
 
     this.hoverState.position = { x, y };
     this.hoverState.intensity = Math.max(

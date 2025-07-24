@@ -2,6 +2,7 @@ import { type InferVariantProps as VariantProps, createVariants as cva } from '.
 import { motion } from "framer-motion";
 import { ChevronRight, Home } from "lucide-react";
 import React, { useCallback } from "react";
+
 import { cn } from "@/core/utils/classname";
 
 const breadcrumbsVariants = cva({
@@ -37,8 +38,10 @@ const breadcrumbItemVariants = cva({
 		},
 	},
 	defaultVariants: {
-		isActive: false,
-		isClickable: true,
+
+		isActive: "false",
+
+		isClickable: "true",
 	},
 });
 
@@ -49,8 +52,7 @@ export interface BreadcrumbItem {
 	icon?: React.ReactNode;
 }
 
-export interface GlassBreadcrumbsProps
-	extends React.HTMLAttributes<HTMLElement>,
+export interface GlassBreadcrumbsProps extends Omit<React.HTMLAttributes<HTMLElement>, keyof React.AriaAttributes>,
 		VariantProps<typeof breadcrumbsVariants> {
 	items: BreadcrumbItem[];
 	separator?: React.ReactNode;
@@ -65,6 +67,7 @@ const GlassBreadcrumbs = React.memo(
 			{
 				className,
 				items,
+
 				separator = <ChevronRight className="w-4 h-4 text-white/40" />,
 				showHome = true,
 				onHomeClick,
@@ -82,10 +85,7 @@ const GlassBreadcrumbs = React.memo(
 							...items.slice(0, 1),
 							{
 								label: "...",
-								href: undefined,
-								onClick: undefined,
-								icon: undefined,
-							},
+							} as BreadcrumbItem,
 							...items.slice(-(maxItems - 2)),
 						]
 					: items;
@@ -103,32 +103,41 @@ const GlassBreadcrumbs = React.memo(
 			);
 
 			return (
+
 				<nav
 					ref={ref}
 					className={cn(breadcrumbsVariants({ size, variant }), className)}
 					aria-label="Breadcrumb"
 					{...props}
 				>
+
 					<ol className="flex items-center space-x-1">
 						{showHome && (
+
 							<>
+
 								<li>
+
 									<motion.button
 										whileHover={{ scale: 1.05 }}
 										whileTap={{ scale: 0.95 }}
 										onClick={onHomeClick}
 										className={cn(
 											breadcrumbItemVariants({
-												isActive: false,
-												isClickable: true,
+
+												isActive: "false",
+
+												isClickable: "true",
 											}),
 										)}
 										aria-label="Home"
 									>
+
 										<Home className="w-4 h-4" />
 									</motion.button>
 								</li>
-								{0 < displayItems.length && (
+								{displayItems.length > 0 && (
+
 									<li className="flex items-center">{separator}</li>
 								)}
 							</>
@@ -145,37 +154,47 @@ const GlassBreadcrumbs = React.memo(
 							);
 
 							return (
+
 								<React.Fragment key={index}>
+
 									<li>
 										{isClickable ? (
+
 											<motion.button
 												whileHover={{ scale: 1.05 }}
 												whileTap={{ scale: 0.95 }}
 												onClick={handleClick}
 												className={cn(
 													breadcrumbItemVariants({
-														isActive: isLast,
-														isClickable: true,
+
+														isActive: isLast ? "true" : "false",
+
+														isClickable: "true",
 													}),
 												)}
-												aria-current={isLast ? "page" : undefined}
+												aria-current={isLast  ? "page" : undefined}
 											>
 												{item.icon && (
+
 													<span className="mr-1.5">{item.icon}</span>
 												)}
 												{item.label}
 											</motion.button>
 										) : (
+
 											<span
 												className={cn(
 													breadcrumbItemVariants({
-														isActive: isLast,
-														isClickable: false,
+
+														isActive: isLast ? "true" : "false",
+
+														isClickable: "false",
 													}),
 												)}
-												aria-current={isLast ? "page" : undefined}
+												aria-current={isLast  ? "page" : undefined}
 											>
 												{item.icon && (
+
 													<span className="mr-1.5">{item.icon}</span>
 												)}
 												{item.label}
@@ -184,6 +203,7 @@ const GlassBreadcrumbs = React.memo(
 									</li>
 
 									{!isLast && (
+
 										<li className="flex items-center">{separator}</li>
 									)}
 								</React.Fragment>

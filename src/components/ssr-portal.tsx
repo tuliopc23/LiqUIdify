@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+
 import { isServer } from '@/utils/ssr-safe';
 
 interface SSRPortalProps {
@@ -10,16 +11,16 @@ interface SSRPortalProps {
 
 export const SSRPortal = ({ children, to = 'body' }: SSRPortalProps) => {
   const [mounted, setMounted] = useState(false);
-  const [container, setContainer] = useState<HTMLElement | null | null>(null);
+  const [container, setContainer] = useState<HTMLElement | null | null>(undefined);
 
   useEffect(() => {
     setMounted(true);
 
     const target =
       'string' === typeof to
-        ? 'undefined' !== typeof document
-          ? document.querySelector(to)
-          : undefined
+        ? ('undefined' === typeof document
+          ? undefined
+          : document.querySelector(to))
         : to;
 
     setContainer(target as HTMLElement);

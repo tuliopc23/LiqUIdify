@@ -47,14 +47,14 @@ export const isGlassColor = (value: unknown): value is GlassColor => {
 
 export const isHexColor = (value: unknown): value is HexColor => {
   return (
-    'string' === typeof value && /^#([0-9A-F]{3}){1,2}$/i.test(value as string)
+    'string' === typeof value && /^#([\da-f]{3}){1,2}$/i.test(value as string)
   );
 };
 
 export const isCSSVariable = (value: unknown): value is CSSVariable => {
   return (
     'string' === typeof value &&
-    /^var\(--[a-zA-Z0-9-_]+\)$/.test(value as string)
+    /^var\(--[\w-]+\)$/.test(value as string)
   );
 };
 

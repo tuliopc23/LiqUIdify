@@ -5,7 +5,9 @@ import {
 	screen,
 	testA11y,
 	waitFor,
+// @ts-expect-error TS(2307): Cannot find module '@/test/utils' or its correspon... Remove this comment to see the full error message
 } from "@/test/utils";
+// @ts-expect-error TS(6142): Module './glass-select' was resolved to '/Users/tu... Remove this comment to see the full error message
 import { GlassSelect, type GlassSelectOption } from "./glass-select";
 
 describe("GlassSelect", () => {
@@ -25,16 +27,19 @@ describe("GlassSelect", () => {
 	});
 
 	it("renders with placeholder", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} />);
 		expect(screen.getByText("Select an option")).toBeInTheDocument();
 	});
 
 	it("renders with selected value", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} value="option2" />);
 		expect(screen.getByText("Option 2")).toBeInTheDocument();
 	});
 
 	it("opens dropdown on click", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} />);
 
 		const button = screen.getByRole("button");
@@ -47,6 +52,7 @@ describe("GlassSelect", () => {
 
 	it("closes dropdown on option select", () => {
 		const onChange = vi.fn();
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} onChange={onChange} />);
 
 		const button = screen.getByRole("button");
@@ -59,6 +65,7 @@ describe("GlassSelect", () => {
 	});
 
 	it("shows selected option with check mark", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} value="option2" />);
 
 		const button = screen.getByRole("button");
@@ -72,6 +79,7 @@ describe("GlassSelect", () => {
 	it("handles disabled state", () => {
 		const onChange = vi.fn();
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect {...defaultProps} disabled onChange={onChange} />,
 		);
 
@@ -86,6 +94,7 @@ describe("GlassSelect", () => {
 
 	it("handles disabled options", () => {
 		const onChange = vi.fn();
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} onChange={onChange} />);
 
 		const button = screen.getByRole("button");
@@ -100,8 +109,11 @@ describe("GlassSelect", () => {
 
 	it("closes dropdown when clicking outside", async () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassSelect {...defaultProps} />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div data-testid="outside">Outside</div>
 			</div>,
 		);
@@ -119,6 +131,7 @@ describe("GlassSelect", () => {
 	});
 
 	it("rotates chevron icon when open", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} />);
 
 		const button = screen.getByRole("button");
@@ -132,11 +145,13 @@ describe("GlassSelect", () => {
 
 	it("handles controlled value changes", () => {
 		const { rerender } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect {...defaultProps} value="option1" />,
 		);
 
 		expect(screen.getByText("Option 1")).toBeInTheDocument();
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		rerender(<GlassSelect {...defaultProps} value="option2" />);
 
 		expect(screen.getByText("Option 2")).toBeInTheDocument();
@@ -144,6 +159,7 @@ describe("GlassSelect", () => {
 
 	it("applies custom className", () => {
 		const { container } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect {...defaultProps} className="custom-select" />,
 		);
 
@@ -153,12 +169,14 @@ describe("GlassSelect", () => {
 
 	it("forwards ref correctly", () => {
 		const ref = vi.fn();
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} ref={ref} />);
 
 		expect(ref).toHaveBeenCalledWith(expect.any(HTMLDivElement));
 	});
 
 	it("shows ring when open", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} />);
 
 		const button = screen.getByRole("button");
@@ -170,18 +188,20 @@ describe("GlassSelect", () => {
 	});
 
 	it("handles empty options array", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect options={[]} placeholder="No options" />);
 
 		const button = screen.getByRole("button");
 		fireEvent.click(button);
 
 		// Dropdown should still open but be empty
-		const dropdown = typeof document !== "undefined" ? document.querySelector(".animate-in") : null;
+		const dropdown = typeof document === "undefined" ? null : document.querySelector(".animate-in");
 		expect(dropdown).toBeInTheDocument();
 		expect(dropdown?.children.length).toBe(0);
 	});
 
 	it("handles keyboard navigation", async () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} />);
 
 		const button = screen.getByRole("button");
@@ -197,6 +217,7 @@ describe("GlassSelect", () => {
 	it("maintains selection on re-render", () => {
 		const onChange = vi.fn();
 		const { rerender } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect {...defaultProps} onChange={onChange} />,
 		);
 
@@ -206,6 +227,7 @@ describe("GlassSelect", () => {
 
 		expect(screen.getByText("Option 2")).toBeInTheDocument();
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		rerender(<GlassSelect {...defaultProps} onChange={onChange} />);
 
 		expect(screen.getByText("Option 2")).toBeInTheDocument();
@@ -213,6 +235,7 @@ describe("GlassSelect", () => {
 
 	it("meets accessibility standards", async () => {
 		const { container } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect {...defaultProps} />,
 		);
 
@@ -220,6 +243,7 @@ describe("GlassSelect", () => {
 	});
 
 	it("handles hover states", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} />);
 
 		const button = screen.getByRole("button");
@@ -232,6 +256,7 @@ describe("GlassSelect", () => {
 	});
 
 	it("handles focus states", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} />);
 
 		const button = screen.getByRole("button");
@@ -241,6 +266,7 @@ describe("GlassSelect", () => {
 	});
 
 	it("handles variant prop", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} variant="search" />);
 
 		// The component accepts the variant prop but doesn't seem to use it
@@ -249,6 +275,7 @@ describe("GlassSelect", () => {
 	});
 
 	it("cleans up event listeners on unmount", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		const { unmount } = renderWithProviders(<GlassSelect {...defaultProps} />);
 
 		const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
@@ -264,6 +291,7 @@ describe("GlassSelect", () => {
 	});
 
 	it("handles rapid open/close actions", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassSelect {...defaultProps} />);
 
 		const button = screen.getByRole("button");
@@ -279,6 +307,7 @@ describe("GlassSelect", () => {
 
 	it("preserves other props on root element", () => {
 		const { container } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect
 				{...defaultProps}
 				data-testid="custom-select"

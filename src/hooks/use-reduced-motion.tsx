@@ -3,7 +3,8 @@
  * Provides animation control based on user preferences
  */
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { isClient } from '@/core/ssr-safety';
 
 // Type definitions
@@ -49,8 +50,8 @@ export const usePrefersReducedMotion = (
   const { forceReduced = false, onChange } = config;
 
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
-    if (forceReduced) return true;
-    if (!isClient()) return false;
+    if (forceReduced) {return true;}
+    if (!isClient()) {return false;}
 
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
@@ -62,7 +63,7 @@ export const usePrefersReducedMotion = (
       return;
     }
 
-    if (!isClient()) return;
+    if (!isClient()) {return;}
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -156,16 +157,16 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
    */
   const createTransitions = useCallback(
     (
-      transitions: Array<{
+      transitions: {
         property: string;
         duration: number;
         easing?: string;
         delay?: number;
-      }>
+      }[]
     ): string => {
       const adjustedTransitions = transitions
         .map((t) => createTransition(t.property, t.duration, t.easing, t.delay))
-        .filter((t) => t !== 'none');
+        .filter((t) => 'none' !== t);
 
       return adjustedTransitions.length > 0
         ? adjustedTransitions.join(', ')
@@ -196,12 +197,12 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
         disableExit?: boolean;
       } = {}
     ): T => {
-      if (!prefersReducedMotion) return variants;
+      if (!prefersReducedMotion) {return variants;}
 
       const adjusted: any = {};
 
       for (const [key, value] of Object.entries(variants)) {
-        if (typeof value === 'object' && value !== null) {
+        if ('object' === typeof value && null !== value) {
           // Handle animation objects
           if ('transition' in value && value.transition) {
             const adjustedTransition = adjustAnimation({
@@ -227,7 +228,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
           }
 
           // Disable exit animations if requested
-          if (options.disableExit && key === 'exit') {
+          if (options.disableExit && 'exit' === key) {
             adjusted[key] = { opacity: 1 };
           }
         } else {

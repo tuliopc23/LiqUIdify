@@ -43,13 +43,14 @@ const createEnhancedGlassLayers = (
 
 const useEnhancedAppleLiquidGlass = (_options: any) => {
   return {
-    containerRef: undefined,
+    containerRef: null,
     variant: { radius: 12 },
     isReady: true,
   };
 };
 
 import { useIsClient } from '../hooks/use-ssr-safe';
+
 import { LiquidGlassSvgFilters } from './liquid-glass-svg-filters';
 
 export interface EnhancedAppleLiquidGlassProps
@@ -125,8 +126,10 @@ export const EnhancedAppleLiquidGlass = forwardRef<
   const combinedClassName = `${glassClassName} ${className}`.trim();
 
   return (
+
     <>
       {isClient && enableSvgFilters && (
+
         <LiquidGlassSvgFilters enableAdvancedFilters />
       )}
       {isClient ? (
@@ -149,14 +152,14 @@ export const EnhancedAppleLiquidGlass = forwardRef<
           })
         )
       ) : (
-        <div
-          ref={combinedRef}
+
+        <div ref={combinedRef}
           className={combinedClassName}
           style={{
             borderRadius: `${variant.radius}px`,
             ...props.style,
           }}
-          {...props}
+          {...(props as any)}
         >
           {children}
         </div>
@@ -182,6 +185,7 @@ export const EnhancedAppleLiquidGlassCard = forwardRef<
   ref
 ) {
   return (
+
     <EnhancedAppleLiquidGlass
       ref={ref}
       className={`${className}`}
@@ -237,6 +241,7 @@ export const EnhancedAppleLiquidGlassButton = forwardRef<
   `.trim();
 
   return (
+
     <EnhancedAppleLiquidGlass
       ref={ref as any}
       as="button"
@@ -271,6 +276,7 @@ export const EnhancedAppleLiquidGlassNav = forwardRef<
   ref
 ) {
   return (
+
     <EnhancedAppleLiquidGlass
       ref={ref as any}
       as="nav"
@@ -310,6 +316,7 @@ export const EnhancedAppleLiquidGlassModal = forwardRef<
   ref
 ) {
   const modalContent = (
+
     <EnhancedAppleLiquidGlass
       ref={ref}
       className={`relative z-50 ${className}`}
@@ -324,7 +331,9 @@ export const EnhancedAppleLiquidGlassModal = forwardRef<
 
   if (backdrop) {
     return (
+
       <div className={backdropClassName}>
+
         <div className="flex items-center justify-center min-h-screen p-4">
           {modalContent}
         </div>
@@ -345,22 +354,29 @@ export const EnhancedAppleLiquidGlassShowcase: React.FC<{
   const intensities = ['subtle', 'medium', 'strong'] as const;
 
   return (
+
     <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${className}`}>
       {intensities.map((intensity) => (
+
         <div key={intensity} className="space-y-4">
+
           <h3 className="text-lg font-semibold capitalize text-gray-900 dark:text-white">
             {intensity} Intensity
           </h3>
 
           {/* Card Example */}
+
           <EnhancedAppleLiquidGlassCard
             intensity={intensity}
             enablePhysics
             magneticStrength={0.2}
             liquidFlowIntensity={0.3}
           >
+
             <div className="space-y-2">
+
               <h4 className="font-semibold">Enhanced Glass Card</h4>
+
               <p className="text-sm opacity-90">
                 Pixel-perfect {intensity} intensity with advanced physics
               </p>
@@ -368,6 +384,7 @@ export const EnhancedAppleLiquidGlassShowcase: React.FC<{
           </EnhancedAppleLiquidGlassCard>
 
           {/* Button Example */}
+
           <EnhancedAppleLiquidGlassButton
             intensity={intensity}
             variant="primary"
@@ -379,10 +396,12 @@ export const EnhancedAppleLiquidGlassShowcase: React.FC<{
           </EnhancedAppleLiquidGlassButton>
 
           {/* Navigation Example */}
+
           <EnhancedAppleLiquidGlassNav
             intensity={intensity}
             liquidFlowIntensity={0.1}
           >
+
             <span className="font-medium">{intensity} Navigation</span>
           </EnhancedAppleLiquidGlassNav>
         </div>

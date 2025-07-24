@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
+
 import { SSRSafe } from '@/components/ssr-safe-wrapper';
+
 import { ClientOnly } from './ssr-safety';
 
 // Types and Interfaces
@@ -92,6 +94,7 @@ export function withAnimationFallback(
     // Use static fallback if animations should be disabled
     if (prefersReducedMotion || !shouldAnimate) {
       return (
+
         <div className="animation-fallback">
           {staticFallback || animatedComponent}
         </div>
@@ -110,6 +113,7 @@ export function withNetworkFallback(
   options: Partial<NetworkFallbackOptions> = {}
 ) {
   const {
+
     offlineMessage = <div>You're offline. Some features may not work.</div>,
     slowConnectionFallback = undefined,
     retryButton = true,
@@ -136,7 +140,7 @@ export function withNetworkFallback(
       updateOnlineStatus();
       updateConnectionSpeed();
 
-      if (typeof window !== "undefined") {
+      if ("undefined" !== typeof window) {
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus);
       }
@@ -147,7 +151,7 @@ export function withNetworkFallback(
       }
 
       return () => {
-        if (typeof window !== "undefined") {
+        if ("undefined" !== typeof window) {
           window.removeEventListener('online', updateOnlineStatus);
           window.removeEventListener('offline', updateOnlineStatus);
         }
@@ -159,8 +163,8 @@ export function withNetworkFallback(
     }, []);
 
     const handleRetry = () => {
-      setRetryCount((prev) => prev + 1);
-      if (typeof window !== "undefined") {
+      setRetryCount((previous) => previous + 1);
+      if ("undefined" !== typeof window) {
         window.location.reload();
       }
     };
@@ -168,9 +172,11 @@ export function withNetworkFallback(
     // Offline fallback
     if (!isOnline) {
       return (
+
         <div className="network-fallback network-fallback--offline">
           {offlineMessage}
           {retryButton && (
+
             <button onClick={handleRetry} className="retry-button">
               Retry({retryCount})
             </button>
@@ -182,6 +188,7 @@ export function withNetworkFallback(
     // Slow connection fallback
     if ('slow-2g' === connectionSpeed || '2g' === connectionSpeed) {
       return (
+
         <div className="network-fallback network-fallback--slow">
           {slowConnectionFallback || component}
         </div>
@@ -219,7 +226,7 @@ export function withFeatureDetection(
 
         // Check for specific browser features
         switch (f) {
-          case 'webgl':
+          case 'webgl': {
             try {
               const canvas = document.createElement('canvas');
               return !!(
@@ -229,22 +236,26 @@ export function withFeatureDetection(
             } catch {
               return false;
             }
-          case 'webgl2':
+          }
+          case 'webgl2': {
             try {
               const canvas = document.createElement('canvas');
               return !!canvas.getContext('webgl2');
             } catch {
               return false;
             }
-          case 'webp':
+          }
+          case 'webp': {
             return new Promise<boolean>((resolve) => {
               const webP = new Image();
-              webP.onload = webP.onerror = () => resolve(2 === webP.height);
+              webP.addEventListener('load', webP.onerror = () => resolve(2 === webP.height));
               webP.src =
                 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
             });
-          default:
+          }
+          default: {
             return false;
+          }
         }
       });
 
@@ -270,7 +281,9 @@ export function withCSSFallback(
 ) {
   return function CSSFallbackWrapper() {
     return (
+
       <SSRSafe fallback={cssComponent} delay={delay}>
+
         <ClientOnly fallback={cssComponent}>{jsComponent}</ClientOnly>
       </SSRSafe>
     );
@@ -294,12 +307,13 @@ export function withProgressiveEnhancement(
 
     useEffect(() => {
       // Find the highest level that meets conditions
-      for (let i = levels.length - 1; 0 <= i; i--) {
-        if (levels[i]?.condition()) {
-          setCurrentLevel(i);
+      for (let index = levels.length - 1; 0 <= index; index--) {
+        if (levels[index]?.condition()) {
+          setCurrentLevel(index);
           break;
         }
       }
+
     }, [levels.length, levels[i]?.condition]);
 
     return <>{levels[currentLevel]?.component || levels[0]?.component}</>;
@@ -321,7 +335,7 @@ export function withDeviceFallback(
 
     useEffect(() => {
       const checkDeviceType = () => {
-        const width = typeof window !== "undefined" ? window.innerWidth : 1024;
+        const width = "undefined" === typeof window ? 1024 : window.innerWidth;
         const isTouchDevice = 'ontouchstart' in window;
 
         if (768 > width) {
@@ -334,24 +348,30 @@ export function withDeviceFallback(
       };
 
       checkDeviceType();
-      if (typeof window !== "undefined") {
+      if ("undefined" !== typeof window) {
         window.addEventListener('resize', checkDeviceType);
       }
 
       return () => {
-        if (typeof window !== "undefined") {
+        if ("undefined" !== typeof window) {
           window.removeEventListener('resize', checkDeviceType);
         }
       };
     }, []);
 
     switch (deviceType) {
-      case 'mobile':
+      case 'mobile': {
+
         return <>{mobileComponent}</>;
-      case 'tablet':
+      }
+      case 'tablet': {
+
         return <>{tabletComponent}</>;
-      default:
+      }
+      default: {
+
         return <>{desktopComponent}</>;
+      }
     }
   };
 }
@@ -373,13 +393,13 @@ export function withPerformanceFallback(
         // Check device memory
         if ('deviceMemory' in navigator) {
           const memory = (navigator as any).deviceMemory;
-          score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
+          score += 8 <= memory ? 3 : (4 <= memory ? 2 : 1);
         }
 
         // Check CPU cores
         if ('hardwareConcurrency' in navigator) {
           const cores = navigator.hardwareConcurrency;
-          score += 8 <= cores ? 3 : 4 <= cores ? 2 : 1;
+          score += 8 <= cores ? 3 : (4 <= cores ? 2 : 1);
         }
 
         // Check connection speed
@@ -388,7 +408,7 @@ export function withPerformanceFallback(
           if (connection) {
             const effectiveType = connection.effectiveType;
             score +=
-              '4g' === effectiveType ? 3 : '3g' === effectiveType ? 2 : 1;
+              '4g' === effectiveType ? 3 : ('3g' === effectiveType ? 2 : 1);
           }
         }
 

@@ -103,23 +103,21 @@ export function LiquidGlassProvider({
     root.style.setProperty('--glass-opacity', String(merged.opacity));
 
     // Set liquid glass tokens
-    Object.entries(liquidGlassTokens.colors.glass.white).forEach(
-      ([key, value]) => {
+    for (const [key, value] of Object.entries(liquidGlassTokens.colors.glass.white)) {
         root.style.setProperty(`--liquid-glass-${key}`, value as string);
       }
-    );
+    
 
     // Set shadow tokens
-    Object.entries(liquidGlassTokens.shadows.glass).forEach(([key, value]) => {
+    for (const [key, value] of Object.entries(liquidGlassTokens.shadows.glass)) {
       root.style.setProperty(`--liquid-shadow-${key}`, value as string);
-    });
+    }
 
     // Set timing tokens
-    Object.entries(liquidGlassTokens.animation.duration).forEach(
-      ([key, value]) => {
+    for (const [key, value] of Object.entries(liquidGlassTokens.animation.duration)) {
         root.style.setProperty(`--liquid-timing-${key}`, value as string);
       }
-    );
+    
 
     // Enable specular highlights if configured
     if (merged.specularHighlights) {
@@ -128,6 +126,7 @@ export function LiquidGlassProvider({
   }, [merged]);
 
   return (
+
     <LiquidGlassContext.Provider
       value={{ ...merged, contentAnalysis, updateGlassStyle }}
     >
@@ -153,9 +152,9 @@ export const useContentAwareGlass = (
     try {
       const element = contentRef.current;
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      const context = canvas.getContext('2d');
 
-      if (!ctx) {
+      if (!context) {
         return;
       }
 
@@ -229,6 +228,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
     if ('development' === process.env.NODE_ENV) {
       // Logging disabled
     }
+
     return;
   }
 
@@ -251,15 +251,16 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
       };
     }
 
-    const r = parseInt(rgbMatch[1] || '0', 10) / 255;
-    const g = parseInt(rgbMatch[2] || '0', 10) / 255;
-    const b = parseInt(rgbMatch[3] || '0', 10) / 255;
+    const r = Number.parseInt(rgbMatch[1] || '0', 10) / 255;
+    const g = Number.parseInt(rgbMatch[2] || '0', 10) / 255;
+    const b = Number.parseInt(rgbMatch[3] || '0', 10) / 255;
 
     // Validate parsed values
     if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) {
       if ('development' === process.env.NODE_ENV) {
         // Logging disabled
       }
+
       return;
     }
 

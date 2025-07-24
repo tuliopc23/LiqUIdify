@@ -86,18 +86,18 @@ export class HydrationManager {
       this.mismatches = [];
 
       // Trigger recovery callbacks
-      this.recoveryCallbacks.forEach((callback) => callback());
+      for (const callback of this.recoveryCallbacks) {callback();}
 
       this.notifyListeners();
     } catch (error) {
-      this.errorCallbacks.forEach((callback) => callback(error as Error));
+      for (const callback of this.errorCallbacks) {callback(error as Error);}
     }
   }
 
   getContext(): HydrationContext {
     return {
-      isHydrating: 0 < this.mismatches.length,
-      hasMismatch: 0 < this.mismatches.length,
+      isHydrating: this.mismatches.length > 0,
+      hasMismatch: this.mismatches.length > 0,
       mismatches: [...this.mismatches],
       retryCount: this.retryCount,
       lastRetry: Date.now(),
@@ -121,7 +121,7 @@ export class HydrationManager {
 
   private notifyListeners(): void {
     const context = this.getContext();
-    this.listeners.forEach((callback) => callback(context));
+    for (const callback of this.listeners) {callback(context);}
   }
 
   reset(): void {
@@ -201,7 +201,7 @@ export function useHydrationState<T>(
   key: string,
   serverValue: T,
   clientValue?: T
-): [T, (value: T | ((prev: T) => T)) => void] {
+): [T, (value: T | ((previous: T) => T)) => void] {
   const [state, setState] = useState<T>(() => {
     // During SSR, use server value
     if (!isBrowser()) {
@@ -218,12 +218,12 @@ export function useHydrationState<T>(
   });
 
   const setHydrationState = useCallback(
-    (value: T | ((prev: T) => T)) => {
-      setState((prev) => {
-        const newValue = value instanceof Function ? value(prev) : value;
+    (value: T | ((previous: T) => T)) => {
+      setState((previous) => {
+        const newValue = value instanceof Function ? value(previous) : value;
 
         // Log potential hydration mismatches in development
-        if ('development' === process.env.NODE_ENV && prev !== newValue) {
+        if ('development' === process.env.NODE_ENV && previous !== newValue) {
           // Logging disabled
         }
 
@@ -335,7 +335,7 @@ export function useHydrationComplete() {
  * Utility for safe client-side only execution
  */
 export function useClientOnly<T>(factory: () => T, deps: any[] = []): T | null {
-  const [value, setValue] = useState<T | null | null>(null);
+  const [value, setValue] = useState<T | null | null>(undefined);
   const isHydrated = useHydrationComplete();
 
   useEffect(() => {

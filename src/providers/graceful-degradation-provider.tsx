@@ -10,7 +10,7 @@ interface GracefulDegradationContextType {
 }
 
 const GracefulDegradationContext =
-  createContext<GracefulDegradationContextType | null>(null);
+  createContext<GracefulDegradationContextType | null>(undefined);
 
 interface GracefulDegradationProviderProps {
   children: ReactNode;
@@ -32,6 +32,7 @@ export const GracefulDegradationProvider: React.FC<
   };
 
   return (
+
     <GracefulDegradationContext.Provider
       value={{ manager, config: defaultConfig }}
     >

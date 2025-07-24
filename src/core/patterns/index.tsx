@@ -16,20 +16,20 @@ export {
 // Business logic patterns
 export const createBusinessLogicHook = <T extends Record<string, any>>(
 	initialState: T,
-	actions: Record<string, (state: T, ...args: any[]) => T>,
+	actions: Record<string, (state: T, ...arguments_: any[]) => T>,
 ) => {
 	return () => {
 		// Placeholder implementation for business logic hook pattern
 		const [state, setState] = React.useState<T>(initialState);
 
 		const boundActions = Object.keys(actions).reduce(
-			(acc, key) => {
-				acc[key] = (...args: any[]) => {
-					setState((currentState) => actions[key](currentState, ...args));
+			(accumulator, key) => {
+				accumulator[key] = (...arguments_: any[]) => {
+					setState((currentState) => actions[key](currentState, ...arguments_));
 				};
-				return acc;
+				return accumulator;
 			},
-			{} as Record<string, (...args: any[]) => void>,
+			{} as Record<string, (...arguments_: any[]) => void>,
 		);
 
 		return {
@@ -75,14 +75,14 @@ export const createCompoundComponentWithContext = <
 };
 
 // Render prop pattern
-export interface RenderPropPattern<T> {
+export interface RenderPropertyPattern<T> {
 	children: (props: T) => React.ReactNode;
 }
 
 export const createRenderPropComponent = <T extends Record<string, any>>(
 	useLogic: () => T,
 ) => {
-	return ({ children }: RenderPropPattern<T>) => {
+	return ({ children }: RenderPropertyPattern<T>) => {
 		const props = useLogic();
 		return <>{children(props)}</>;
 	};
@@ -186,9 +186,9 @@ export const createStateReducer = <T extends Record<string, any>>(
 		reducer,
 		initialState,
 		actions: Object.keys(actionCreators).reduce(
-			(acc, type) => {
-				acc[type] = (payload?: any): StateAction => ({ type, payload });
-				return acc;
+			(accumulator, type) => {
+				accumulator[type] = (payload?: any): StateAction => ({ type, payload });
+				return accumulator;
 			},
 			{} as Record<string, (payload?: any) => StateAction>,
 		),
@@ -213,16 +213,16 @@ export class ComponentEventBus {
 		const eventListeners = this.listeners.get(event);
 		if (eventListeners) {
 			eventListeners.delete(callback);
-			if (0 === eventListeners.size) {
+			if (eventListeners.size === 0) {
 				this.listeners.delete(event);
 			}
 		}
 	}
 
-	emit(event: string, ...args: any[]) {
+	emit(event: string, ...arguments_: any[]) {
 		const eventListeners = this.listeners.get(event);
 		if (eventListeners) {
-			eventListeners.forEach((callback) => callback(...args));
+			for (const callback of eventListeners) {callback(...arguments_);}
 		}
 	}
 
@@ -251,4 +251,4 @@ export const createThemedComponentFactory = <T extends Record<string, any>>(
 };
 
 // Type exports
-export type { RenderPropPattern, SlotProps, StateAction };
+export type { RenderPropertyPattern as RenderPropPattern, SlotProps, StateAction };

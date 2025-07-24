@@ -134,21 +134,21 @@ export const APPLE_MOTION_PRESETS = {
 /**
  * Timing functions for intelligent choreography
  */
-export class ChoreographyTiming {
+export const ChoreographyTiming = {
   /**
    * Calculate optimal stagger delay based on element count
    */
-  static calculateStagger(elementCount: number, _baseDuration: number): number {
+  calculateStagger(elementCount: number, _baseDuration: number): number {
     // Apple's design guidelines suggest shorter delays for more elements
     const baseStagger = 0.1;
     const factor = Math.min(1, 8 / elementCount);
     return baseStagger * factor;
-  }
+  },
 
   /**
    * Create dynamic easing based on animation context
    */
-  static createContextualEasing(
+  createContextualEasing(
     context: 'entrance' | 'exit' | 'hover' | 'focus'
   ): string {
     const easingMap = {
@@ -159,12 +159,12 @@ export class ChoreographyTiming {
     };
 
     return easingMap[context] || GLASS_EASINGS.smoothOut;
-  }
+  },
 
   /**
    * Calculate optimal duration based on distance and element size
    */
-  static calculateOptimalDuration(
+  calculateOptimalDuration(
     distance: number,
     elementSize: number,
     baseSpeed: number = 1000
@@ -177,8 +177,8 @@ export class ChoreographyTiming {
       0.3,
       Math.min(2, (distanceFactor * sizeFactor) / baseSpeed)
     );
-  }
-}
+  },
+};
 
 /**
  * Advanced Animation Choreographer
@@ -278,7 +278,7 @@ export class AdvancedChoreographer {
       stagger || ChoreographyTiming.calculateStagger(elements.length, duration);
 
     // Apply animations with stagger
-    elements.forEach((element, index) => {
+    for (const [index, element] of elements.entries()) {
       const elementStartTime = startTime + index * staggerDelay;
 
       // Set initial state
@@ -299,7 +299,7 @@ export class AdvancedChoreographer {
           elementStartTime
         );
       }
-    });
+    }
   }
 
   /**
@@ -358,7 +358,7 @@ export class AdvancedChoreographer {
   ): void {
     const { strength = 0.05, duration = 0.3, stagger = 0.02 } = options;
 
-    elements.forEach((element, index) => {
+    for (const [index, element] of elements.entries()) {
       const delay = index * stagger;
 
       element.addEventListener('mouseenter', () => {
@@ -372,7 +372,7 @@ export class AdvancedChoreographer {
         });
 
         // Animate surrounding elements with reduced effect
-        elements.forEach((otherElement, otherIndex) => {
+        for (const [otherIndex, otherElement] of elements.entries()) {
           if (otherElement !== element) {
             const distance = Math.abs(otherIndex - index);
             const neighborStrength = strength / (distance + 1);
@@ -385,7 +385,7 @@ export class AdvancedChoreographer {
               force3D: true,
             });
           }
-        });
+        }
       });
 
       element.addEventListener('mouseleave', () => {
@@ -398,7 +398,7 @@ export class AdvancedChoreographer {
         });
 
         // Reset surrounding elements
-        elements.forEach((otherElement) => {
+        for (const otherElement of elements) {
           if (otherElement !== element) {
             gsap.to(otherElement, {
               scale: 1,
@@ -407,9 +407,9 @@ export class AdvancedChoreographer {
               force3D: true,
             });
           }
-        });
+        }
       });
-    });
+    }
   }
 
   /**
@@ -427,7 +427,7 @@ export class AdvancedChoreographer {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             const element = entry.target as HTMLElement;
             const elementIndex = elements.indexOf(element);
@@ -440,7 +440,7 @@ export class AdvancedChoreographer {
               }
             }
           }
-        });
+        }
       },
       {
         threshold,
@@ -448,9 +448,9 @@ export class AdvancedChoreographer {
       }
     );
 
-    elements.forEach((element) => {
+    for (const element of elements) {
       observer.observe(element);
-    });
+    }
   }
 
   /**

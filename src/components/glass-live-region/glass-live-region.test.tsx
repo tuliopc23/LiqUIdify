@@ -6,6 +6,7 @@ import {
 	GlassLiveRegion,
 	GlassLiveRegionProvider,
 	useAnnouncement,
+// @ts-expect-error TS(6142): Module './glass-live-region' was resolved to '/Use... Remove this comment to see the full error message
 } from "./glass-live-region";
 
 describe("GlassLiveRegion Enhanced Features", () => {
@@ -22,11 +23,13 @@ describe("GlassLiveRegion Enhanced Features", () => {
 	describe("Smart Announcement Queuing", () => {
 		it("should queue multiple announcements by priority", () => {
 			const { rerender } = render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassLiveRegion message="" queueingEnabled priority="polite" />,
 			);
 
 			// Queue announcements with different priorities
 			rerender(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassLiveRegion
 					message="Low priority message"
 					queueingEnabled
@@ -47,9 +50,11 @@ describe("GlassLiveRegion Enhanced Features", () => {
 					announce("Medium priority", { priority: "medium" });
 				}, [announce]);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				return <div>{announcement}</div>;
 			};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			render(<TestComponent />);
 
 			// Critical should be announced first (0ms delay)
@@ -70,9 +75,11 @@ describe("GlassLiveRegion Enhanced Features", () => {
 					announce("Different message", { dedupKey: "other-key" });
 				}, [announce]);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				return <div>{announcement}</div>;
 			};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			render(<TestComponent />);
 
 			act(() => {
@@ -87,6 +94,7 @@ describe("GlassLiveRegion Enhanced Features", () => {
 	describe("Context-aware Announcements", () => {
 		it("should add context prefixes when enabled", () => {
 			render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassLiveRegion
 					message="Form submitted"
 					queueingEnabled={false}
@@ -107,12 +115,15 @@ describe("GlassLiveRegion Enhanced Features", () => {
 					announceError("Something went wrong");
 				}, [announceError]);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				return <div>{announcement}</div>;
 			};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			render(<TestComponent />);
 
 			act(() => {
+// @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
 				jest.advanceTimersByTime(100); // High priority has 100ms delay
 			});
 
@@ -125,6 +136,7 @@ describe("GlassLiveRegion Enhanced Features", () => {
 			const TestComponent = () => {
 				const [message, setMessage] = React.useState("");
 
+// @ts-expect-error TS(2345): Argument of type '() => () => boolean' is not assi... Remove this comment to see the full error message
 				React.useEffect(() => {
 					const unsubscribe = announcer.subscribe((msg) => {
 						setMessage(msg);
@@ -135,9 +147,11 @@ describe("GlassLiveRegion Enhanced Features", () => {
 					return unsubscribe;
 				}, []);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				return <div>{message}</div>;
 			};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			render(<TestComponent />);
 
 			act(() => {
@@ -151,7 +165,9 @@ describe("GlassLiveRegion Enhanced Features", () => {
 	describe("GlassLiveRegionProvider", () => {
 		it("should manage multiple live regions", () => {
 			render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassLiveRegionProvider>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div>Test content</div>
 				</GlassLiveRegionProvider>,
 			);
@@ -165,7 +181,9 @@ describe("GlassLiveRegion Enhanced Features", () => {
 
 		it("should separate polite and assertive announcements", () => {
 			const { container } = render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassLiveRegionProvider>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div>Test</div>
 				</GlassLiveRegionProvider>,
 			);
@@ -194,9 +212,11 @@ describe("GlassLiveRegion Enhanced Features", () => {
 					announce("Delayed message", { delay: 1000 });
 				}, [announce]);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				return <div>{announcement || "No announcement"}</div>;
 			};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			render(<TestComponent />);
 
 			// Initially no announcement
@@ -218,9 +238,11 @@ describe("GlassLiveRegion Enhanced Features", () => {
 					announce("Temporary message", { clearDelay: 2000, delay: 0 });
 				}, [announce]);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				return <div>{announcement || "No announcement"}</div>;
 			};
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			render(<TestComponent />);
 
 			// Message appears immediately

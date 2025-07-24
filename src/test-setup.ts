@@ -37,7 +37,7 @@ Object.defineProperty(window, "matchMedia", {
 	value: vi.fn().mockImplementation((query) => ({
 		matches: false,
 		media: query,
-		onchange: undefined,
+		onchange: null,
 		addListener: vi.fn(), // deprecated
 		removeListener: vi.fn(), // deprecated
 		addEventListener: vi.fn(),
@@ -47,8 +47,8 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 // Mock requestAnimationFrame
-global.requestAnimationFrame = vi.fn((cb) => {
-	setTimeout(cb, 0);
+global.requestAnimationFrame = vi.fn((callback) => {
+	setTimeout(callback, 0);
 	return 1;
 });
 
@@ -57,6 +57,7 @@ global.cancelAnimationFrame = vi.fn();
 // Mock window.getComputedStyle properly
 Object.defineProperty(window, "getComputedStyle", {
 	value: vi.fn().mockImplementation((_element: Element) => {
+
 		const style = {
 			display: "block",
 			visibility: "visible",
@@ -75,11 +76,11 @@ Object.defineProperty(window, "getComputedStyle", {
 			border: "0px",
 			outline: "none",
 			boxShadow: "none",
-			getPropertyValue: vi.fn((prop: string) => {
-				const normalizedProp = prop.replace(/-([a-z])/g, (_match, letter) =>
+			getPropertyValue: vi.fn((property: string) => {
+				const normalizedProperty = property.replaceAll(/-([a-z])/g, (_match, letter) =>
 					letter.toUpperCase(),
 				);
-				return style[normalizedProp as keyof typeof style] || "";
+				return style[normalizedProperty as keyof typeof style] || "";
 			}),
 		};
 		return style;
@@ -118,8 +119,8 @@ Object.defineProperty(window, "performance", {
 
 // Mock console.warn to reduce noise
 const originalWarn = console.warn;
-console.warn = vi.fn((...args) => {
-	const message = args[0];
+console.warn = vi.fn((...arguments_) => {
+	const message = arguments_[0];
 	if (
 		"string" === typeof message &&
 		(message.includes("Warning: ReactDOM.render is deprecated") ||
@@ -128,5 +129,5 @@ console.warn = vi.fn((...args) => {
 	) {
 		return;
 	}
-	originalWarn(...args);
+	originalWarn(...arguments_);
 });

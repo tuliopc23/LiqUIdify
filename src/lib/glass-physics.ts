@@ -29,11 +29,11 @@ export class Vector2D {
 
   // Static helper methods for backward compatibility
   static distance(a: Vector2D, b: Vector2D): number {
-    return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2);
+    return Math.hypot((b.x - a.x), (b.y - a.y));
   }
 
   static normalize(vector: Vector2D): Vector2D {
-    const magnitude = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+    const magnitude = Math.hypot(vector.x, vector.y);
     return 0 < magnitude
       ? new Vector2D(vector.x / magnitude, vector.y / magnitude)
       : new Vector2D(0, 0);
@@ -65,7 +65,7 @@ export class Vector2D {
   }
 
   magnitude(): number {
-    return Math.sqrt(this.x * this.x + this.y * this.y);
+    return Math.hypot(this.x, this.y);
   }
 
   normalize(): Vector2D {
@@ -333,8 +333,8 @@ export const useMagneticHover = (
         const mouseX = e.clientX;
         const mouseY = e.clientY;
 
-        const distance = Math.sqrt(
-          (mouseX - centerX) ** 2 + (mouseY - centerY) ** 2
+        const distance = Math.hypot(
+          (mouseX - centerX), (mouseY - centerY)
         );
 
         if (distance < radius) {
@@ -408,7 +408,7 @@ export const useRepulsionEffect = (
   const [positions, setPositions] = useState<Vector2D[]>([]);
 
   useEffect(() => {
-    if (0 === elements.length) {
+    if (elements.length === 0) {
       return;
     }
 
@@ -425,17 +425,17 @@ export const useRepulsionEffect = (
         let totalForceX = 0;
         let totalForceY = 0;
 
-        elements.forEach((otherElement, otherIndex) => {
+        for (const [otherIndex, otherElement] of elements.entries()) {
           if (index === otherIndex || !otherElement) {
-            return;
+            continue;
           }
 
           const otherRect = safeGetBoundingClientRect(otherElement);
           const otherCenterX = otherRect.left + otherRect.width / 2;
           const otherCenterY = otherRect.top + otherRect.height / 2;
 
-          const distance = Math.sqrt(
-            (centerX - otherCenterX) ** 2 + (centerY - otherCenterY) ** 2
+          const distance = Math.hypot(
+            (centerX - otherCenterX), (centerY - otherCenterY)
           );
 
           if (distance < PHYSICS_CONSTANTS.REPULSION_DISTANCE && 0 < distance) {
@@ -446,7 +446,7 @@ export const useRepulsionEffect = (
             totalForceX += directionX * force;
             totalForceY += directionY * force;
           }
-        });
+        }
 
         return new Vector2D(totalForceX, totalForceY);
       });
@@ -534,7 +534,7 @@ export const createGlassRipple = (
     // Add to element
     element.style.position = 'relative';
     element.style.overflow = 'hidden';
-    element.appendChild(ripple);
+    element.append(ripple);
 
     // Animate
     const animationFrame = requestAnimationFrame(() => {
@@ -609,7 +609,7 @@ export class FluidSimulation {
     this.pressureConstant = 200;
 
     // Initialize particles
-    for (let i = 0; i < particleCount; i++) {
+    for (let index = 0; index < particleCount; index++) {
       const position = new Vector2D(
         Math.random() * bounds.width,
         Math.random() * bounds.height
@@ -633,18 +633,18 @@ export class FluidSimulation {
       this.calculateViscosityForces(particleForces);
 
       // Add external forces
-      forces.forEach((force) => {
-        particleForces.forEach((pf) => {
+      for (const force of forces) {
+        for (const pf of particleForces) {
           pf.x += force.x;
           pf.y += force.y;
-        });
-      });
+        }
+      }
 
       // Update particles
-      this.particles.forEach((particle, i) => {
-        const force = particleForces[i];
+      for (const [index, particle] of this.particles.entries()) {
+        const force = particleForces[index];
         if (!force) {
-          return;
+          continue;
         }
 
         // Update velocity
@@ -659,37 +659,37 @@ export class FluidSimulation {
 
         // Apply boundaries
         this.applyBoundaries(particle);
-      });
+      }
     } catch {
       // Logging disabled
     }
   }
 
   private calculateDensityPressure() {
-    this.particles.forEach((particle) => {
+    for (const particle of this.particles) {
       particle.density = 0;
 
-      this.particles.forEach((neighbor) => {
+      for (const neighbor of this.particles) {
         const distance = particle.position.distance(neighbor.position);
 
         if (distance < this.smoothingRadius) {
           const influence = this.smoothingKernel(distance);
           particle.density += influence;
         }
-      });
+      }
 
       particle.pressure =
         this.pressureConstant * (particle.density - this.restDensity);
-    });
+    }
   }
 
   private calculatePressureForces(forces: Vector2D[]) {
-    this.particles.forEach((particle, i) => {
+    for (const [index, particle] of this.particles.entries()) {
       const force = new Vector2D();
 
-      this.particles.forEach((neighbor, j) => {
-        if (i === j) {
-          return;
+      for (const [index_, neighbor] of this.particles.entries()) {
+        if (index === index_) {
+          continue;
         }
 
         const delta = particle.position.subtract(neighbor.position);
@@ -703,24 +703,24 @@ export class FluidSimulation {
           force.x += (direction.x * pressure * gradient) / neighbor.density;
           force.y += (direction.y * pressure * gradient) / neighbor.density;
         }
-      });
-
-      const existingForce = forces[i];
-      if (existingForce) {
-        forces[i] = existingForce.add(force);
       }
-    });
+
+      const existingForce = forces[index];
+      if (existingForce) {
+        forces[index] = existingForce.add(force);
+      }
+    }
   }
 
   private calculateViscosityForces(forces: Vector2D[]) {
     const viscosity = this.config.viscosity;
 
-    this.particles.forEach((particle, i) => {
+    for (const [index, particle] of this.particles.entries()) {
       const force = new Vector2D();
 
-      this.particles.forEach((neighbor, j) => {
-        if (i === j) {
-          return;
+      for (const [index_, neighbor] of this.particles.entries()) {
+        if (index === index_) {
+          continue;
         }
 
         const distance = particle.position.distance(neighbor.position);
@@ -734,13 +734,13 @@ export class FluidSimulation {
           force.y +=
             (viscosity * velocityDiff.y * laplacian) / neighbor.density;
         }
-      });
-
-      const existingForce = forces[i];
-      if (existingForce) {
-        forces[i] = existingForce.add(force);
       }
-    });
+
+      const existingForce = forces[index];
+      if (existingForce) {
+        forces[index] = existingForce.add(force);
+      }
+    }
   }
 
   private smoothingKernel(distance: number): number {
@@ -889,7 +889,7 @@ export class ParticleEmitter {
           particle.acceleration = new Vector2D();
 
           // Apply forces
-          this.forces.forEach((force) => particle.applyForce(force));
+          for (const force of this.forces) {particle.applyForce(force);}
 
           // Update particle
           particle.update(deltaTime);
@@ -1024,7 +1024,7 @@ export class PhysicsWorld {
       this.lastTime = currentTime;
 
       // Update all systems with error handling
-      this.emitters.forEach((emitter, id) => {
+      for (const [id, emitter] of this.emitters.entries()) {
         try {
           emitter.addForce(this.gravity);
           emitter.addForce(this.wind);
@@ -1034,15 +1034,15 @@ export class PhysicsWorld {
         } catch {
           // Logging disabled
         }
-      });
+      }
 
-      this.fluids.forEach((fluid, id) => {
+      for (const [id, fluid] of this.fluids.entries()) {
         try {
           fluid.update(deltaTime, [this.gravity, this.wind]);
         } catch {
           // Logging disabled
         }
-      });
+      }
 
       // Springs update themselves based on target
 

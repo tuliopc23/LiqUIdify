@@ -5,6 +5,7 @@ import {
 	GracefulAnimation,
 	GracefulComponent,
 	GracefulImage,
+
 } from "./graceful-component";
 
 export const GracefulDegradationTest: React.FC = () => {
@@ -115,33 +116,50 @@ export const GracefulDegradationTest: React.FC = () => {
 	const supportScore = calculateSupportScore();
 
 	return (
+
 		<div className="graceful-degradation-test p-6 max-w-6xl mx-auto">
+
 			<h1 className="text-3xl font-bold mb-6">
 				Graceful Degradation Test Suite
 			</h1>
 
 			{/* Summary */}
+
 			<div className="mb-8 p-4 border rounded-lg bg-gray-50">
+
 				<h2 className="text-xl font-semibold mb-4">Test Summary</h2>
+
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
 					<div>
+
 						<h3 className="font-medium">Feature Support Score</h3>
+
 						<p className="text-2xl font-bold">{supportScore}%</p>
 					</div>
+
 					<div>
+
 						<h3 className="font-medium">Network Status</h3>
+
 						<p>{networkStatus.online ? "Online" : "Offline"}</p>
 					</div>
+
 					<div>
+
 						<h3 className="font-medium">Performance Level</h3>
+
 						<p className="capitalize">{performanceLevel}</p>
 					</div>
 				</div>
 			</div>
 
 			{/* Feature Matrix */}
+
 			<div className="mb-8">
+
 				<h2 className="text-xl font-semibold mb-4">Feature Support Matrix</h2>
+
 				<button
 					onClick={runFeatureTests}
 					disabled={isTesting}
@@ -152,6 +170,7 @@ export const GracefulDegradationTest: React.FC = () => {
 
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-2">
 					{Object.entries(testResults).map(([feature, supported]) => (
+
 						<div
 							key={feature}
 							className={`p-3 rounded text-sm ${
@@ -160,7 +179,9 @@ export const GracefulDegradationTest: React.FC = () => {
 									: "bg-red-100 text-red-800"
 							}`}
 						>
+
 							<div className="font-medium">{feature}</div>
+
 							<div>{supported ? "✅ Supported" : "❌ Not Supported"}</div>
 						</div>
 					))}
@@ -168,20 +189,27 @@ export const GracefulDegradationTest: React.FC = () => {
 			</div>
 
 			{/* Graceful Component Tests */}
+
 			<div className="mb-8">
+
 				<h2 className="text-xl font-semibold mb-4">Component Tests</h2>
 
 				<div className="space-y-6">
 					{/* Image Loading Test */}
+
 					<div>
+
 						<h3 className="text-lg font-medium mb-2">Image Loading</h3>
+
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
 							<GracefulImage
 								src="https://picsum.photos/300/200?random=1"
 								alt="Test image 1"
 								fallbackSrc="https://via.placeholder.com/300x200/cccccc/666666?text=Fallback"
 								className="w-full h-32 object-cover rounded"
 							/>
+
 							<GracefulImage
 								src="https://invalid-url.jpg"
 								alt="Test image 2 (will fail)"
@@ -192,10 +220,15 @@ export const GracefulDegradationTest: React.FC = () => {
 					</div>
 
 					{/* Animation Test */}
+
 					<div>
+
 						<h3 className="text-lg font-medium mb-2">Animation Support</h3>
+
 						<div className="space-y-4">
+
 							<GracefulAnimation animation="fadeIn" duration={1000}>
+
 								<div className="p-4 bg-blue-100 rounded">
 									This should fade in if animations are supported
 								</div>
@@ -206,6 +239,7 @@ export const GracefulDegradationTest: React.FC = () => {
 								duration={800}
 								delay={200}
 							>
+
 								<div className="p-4 bg-green-100 rounded">
 									This should slide up with delay
 								</div>
@@ -214,26 +248,39 @@ export const GracefulDegradationTest: React.FC = () => {
 					</div>
 
 					{/* Feature Fallback Test */}
+
 					<div>
+
 						<h3 className="text-lg font-medium mb-2">Feature Fallbacks</h3>
+
 						<div className="space-y-4">
+
 							<GracefulComponent
 								feature="webGL"
 								fallback={
+
 									<div className="p-4 bg-yellow-100 rounded">
+
 										<h4>WebGL Fallback</h4>
+
 										<p>WebGL is not supported, showing simplified version</p>
 									</div>
 								}
 								staticFallback={
+
 									<div className="p-4 bg-red-100 rounded">
+
 										<h4>Static Fallback</h4>
+
 										<p>Static content for low-performance devices</p>
 									</div>
 								}
 							>
+
 								<div className="p-4 bg-blue-100 rounded">
+
 									<h4>Enhanced WebGL Content</h4>
+
 									<p>
 										This would show advanced 3D graphics if WebGL is supported
 									</p>
@@ -243,14 +290,20 @@ export const GracefulDegradationTest: React.FC = () => {
 							<GracefulComponent
 								feature="animations"
 								fallback={
+
 									<div className="p-4 bg-orange-100 rounded">
+
 										<h4>Animation Fallback</h4>
+
 										<p>Animations disabled, showing static content</p>
 									</div>
 								}
 							>
+
 								<div className="p-4 bg-purple-100 rounded animate-pulse">
+
 									<h4>Animated Content</h4>
+
 									<p>This content has animations enabled</p>
 								</div>
 							</GracefulComponent>
@@ -260,29 +313,39 @@ export const GracefulDegradationTest: React.FC = () => {
 			</div>
 
 			{/* Performance Simulation */}
+
 			<div className="mb-8">
+
 				<h2 className="text-xl font-semibold mb-4">Performance Simulation</h2>
 
 				<div className="space-y-4">
+
 					<div className="p-4 border rounded">
+
 						<h3 className="font-medium mb-2">
 							Current Performance Level: {performanceLevel}
 						</h3>
 
 						{"low" === performanceLevel && (
+
 							<div className="bg-red-100 p-3 rounded">
+
 								<p>Low performance mode activated - using static fallbacks</p>
 							</div>
 						)}
 
 						{"medium" === performanceLevel && (
+
 							<div className="bg-yellow-100 p-3 rounded">
+
 								<p>Medium performance mode - reduced animations and quality</p>
 							</div>
 						)}
 
 						{"high" === performanceLevel && (
+
 							<div className="bg-green-100 p-3 rounded">
+
 								<p>High performance mode - full features enabled</p>
 							</div>
 						)}
@@ -291,23 +354,31 @@ export const GracefulDegradationTest: React.FC = () => {
 			</div>
 
 			{/* Network Simulation */}
+
 			<div className="mb-8">
+
 				<h2 className="text-xl font-semibold mb-4">Network Simulation</h2>
 
 				<div className="space-y-4">
+
 					<div className="p-4 border rounded">
+
 						<h3 className="font-medium mb-2">
 							Network Status: {networkStatus.online ? "Online" : "Offline"}
 						</h3>
 
 						{!networkStatus.online && (
+
 							<div className="bg-red-100 p-3 rounded">
+
 								<p>Offline mode - using cached/static content</p>
 							</div>
 						)}
 
 						{networkStatus.online && (
+
 							<div className="bg-green-100 p-3 rounded">
+
 								<p>Online mode - full network features available</p>
 							</div>
 						)}
@@ -316,19 +387,26 @@ export const GracefulDegradationTest: React.FC = () => {
 			</div>
 
 			{/* Accessibility Tests */}
+
 			<div className="mb-8">
+
 				<h2 className="text-xl font-semibold mb-4">Accessibility Tests</h2>
 
 				<div className="space-y-4">
+
 					<div className="p-4 border rounded">
+
 						<h3 className="font-medium mb-2">Reduced Motion Preference</h3>
+
 						<p>
 							System prefers reduced motion:{" "}
 							{prefersReducedMotion ? "Yes" : "No"}
 						</p>
 
 						{prefersReducedMotion && (
+
 							<div className="bg-blue-100 p-3 rounded mt-2">
+
 								<p>Animations will be disabled or simplified</p>
 							</div>
 						)}

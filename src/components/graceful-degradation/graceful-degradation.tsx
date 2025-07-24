@@ -9,6 +9,7 @@ import {
 	useIsClient,
 	useNetworkStatus,
 	useSSRSafeFeatureDetection,
+
 } from "@/hooks/use-ssr-safe";
 
 // Types
@@ -58,6 +59,7 @@ export function GracefulDegradation({
 
 	// If not client-side, render fallback
 	if (!isClient) {
+
 		return <>{fallback}</>;
 	}
 
@@ -65,6 +67,7 @@ export function GracefulDegradation({
 	if (feature) {
 		const isSupported = useSSRSafeFeatureDetection(feature);
 		if (!isSupported) {
+
 			return <>{fallback}</>;
 		}
 	}
@@ -76,6 +79,7 @@ export function GracefulDegradation({
 			!online ||
 			(effectiveType && ["slow-2g", "2g"].includes(effectiveType))
 		) {
+
 			return <>{fallback}</>;
 		}
 	}
@@ -84,11 +88,13 @@ export function GracefulDegradation({
 	if (performance) {
 		const isLowPerformance = useDevicePerformance();
 		if (isLowPerformance) {
+
 			return <>{fallback}</>;
 		}
 	}
 
 	// All checks passed, render children
+
 	return <>{children}</>;
 }
 
@@ -106,10 +112,12 @@ export function StaticFallback({ children, fallback }: StaticFallbackProps) {
 
 	// If server-side or not yet hydrated, render fallback
 	if (!isClient || !isHydrated) {
+
 		return <>{fallback}</>;
 	}
 
 	// Client-side and hydrated, render children
+
 	return <>{children}</>;
 }
 
@@ -139,6 +147,7 @@ export function NetworkAware({
 	const { online, effectiveType } = useNetworkStatus();
 
 	if (!online) {
+
 		return <>{offlineFallback}</>;
 	}
 
@@ -147,6 +156,7 @@ export function NetworkAware({
 		effectiveType &&
 		["slow-2g", "2g"].includes(effectiveType)
 	) {
+
 		return <>{slowConnectionFallback}</>;
 	}
 
@@ -246,26 +256,31 @@ export function FeatureDetectionClasses() {
 			"custom-properties",
 		];
 
-		features.forEach((feature) => {
+		for (const feature of features) {
 			let isSupported = false;
 
 			switch (feature) {
-				case "css-backdrop-filter":
+				case "css-backdrop-filter": {
 					isSupported = CSS.supports("backdrop-filter", "blur(1px)");
 					break;
-				case "css-grid":
+				}
+				case "css-grid": {
 					isSupported = CSS.supports("display", "grid");
 					break;
-				case "intersection-observer":
+				}
+				case "intersection-observer": {
 					isSupported = "IntersectionObserver" in window;
 					break;
-				case "resize-observer":
+				}
+				case "resize-observer": {
 					isSupported = "ResizeObserver" in window;
 					break;
-				case "web-animations":
+				}
+				case "web-animations": {
 					isSupported = "animate" in document.createElement("div");
 					break;
-				case "local-storage":
+				}
+				case "local-storage": {
 					try {
 						localStorage.setItem("test", "test");
 						localStorage.removeItem("test");
@@ -274,11 +289,14 @@ export function FeatureDetectionClasses() {
 						isSupported = false;
 					}
 					break;
-				case "custom-properties":
+				}
+				case "custom-properties": {
 					isSupported = CSS.supports("--test", "0");
 					break;
-				default:
+				}
+				default: {
 					isSupported = false;
+				}
 			}
 
 			if (isSupported) {
@@ -288,7 +306,7 @@ export function FeatureDetectionClasses() {
 				document.documentElement.classList.add(`no-${feature}`);
 				document.documentElement.classList.remove(`supports-${feature}`);
 			}
-		});
+		}
 
 		// Check for JavaScript
 		document.documentElement.classList.remove("no-js");
@@ -306,13 +324,13 @@ export function FeatureDetectionClasses() {
 		};
 
 		updateNetworkStatus();
-		if (typeof window !== "undefined") {
+		if ("undefined" !== typeof window) {
 			window.addEventListener("online", updateNetworkStatus);
 			window.addEventListener("offline", updateNetworkStatus);
 		}
 
 		return () => {
-			if (typeof window !== "undefined") {
+			if ("undefined" !== typeof window) {
 				window.removeEventListener("online", updateNetworkStatus);
 				window.removeEventListener("offline", updateNetworkStatus);
 			}

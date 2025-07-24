@@ -9,8 +9,8 @@
  * - Performance score: >85
  */
 
-const fs = require("fs").promises;
-const path = require("path");
+const fs = require("node:fs").promises;
+const path = require("node:path");
 
 // S-tier performance thresholds
 const S_TIER_THRESHOLDS = {
@@ -50,7 +50,7 @@ async function validateSTierPerformance() {
 		console.error("❌ S-tier performance standards NOT MET");
 		console.error(`📊 Overall Score: ${overall.score}/100 (minimum: 85)`);
 		console.error("🔍 Issues found:");
-		overall.issues.forEach((issue) => console.error(`  - ${issue}`));
+		for (const issue of overall.issues) {console.error(`  - ${issue}`);}
 		return false;
 	}
 }
@@ -74,7 +74,7 @@ async function validateBundleSize() {
 			try {
 				const stats = await fs.stat(bundlePath);
 				results.javascript.size += stats.size;
-			} catch (e) {
+			} catch {
 				console.warn(`  ⚠️ Bundle not found: ${bundle}`);
 			}
 		}
@@ -84,7 +84,7 @@ async function validateBundleSize() {
 		try {
 			const cssStats = await fs.stat(cssPath);
 			results.css.size = cssStats.size;
-		} catch (e) {
+		} catch {
 			console.warn("  ⚠️ CSS file not found");
 		}
 
@@ -191,18 +191,18 @@ async function estimateComplexity() {
 
 		// Lower complexity if optimizations are enabled
 		if (performanceConfig.includes("enableGPUAcceleration: true"))
-			complexity -= 0.2;
-		if (performanceConfig.includes("enableBatching: true")) complexity -= 0.2;
-		if (performanceConfig.includes("enableCulling: true")) complexity -= 0.2;
-		if (performanceConfig.includes("targetFPS: 55")) complexity -= 0.3; // S-tier optimized
+			{complexity -= 0.2;}
+		if (performanceConfig.includes("enableBatching: true")) {complexity -= 0.2;}
+		if (performanceConfig.includes("enableCulling: true")) {complexity -= 0.2;}
+		if (performanceConfig.includes("targetFPS: 55")) {complexity -= 0.3;} // S-tier optimized
 
 		// Check CSS optimization
 		const cssPath = path.join(__dirname, "../dist/liquidui.css");
 		const cssStats = await fs.stat(cssPath);
 
 		// Lower complexity for smaller CSS
-		if (cssStats.size < 10 * 1024) complexity -= 0.3; // < 10KB CSS is well optimized
-	} catch (e) {
+		if (cssStats.size < 10 * 1024) {complexity -= 0.3;} // < 10KB CSS is well optimized
+	} catch {
 		// If we can't read files, assume baseline complexity
 	}
 
@@ -268,12 +268,12 @@ async function calculateBundleSizeScore() {
 
 		// CSS size scoring (0-25 points)
 		if (cssKB <= 5)
-			score += 25; // Excellent: <= 5KB
+			{score += 25;} // Excellent: <= 5KB
 		else if (cssKB <= 10)
-			score += 20; // Good: <= 10KB
+			{score += 20;} // Good: <= 10KB
 		else if (cssKB <= 15)
-			score += 15; // OK: <= 15KB
-		else if (cssKB <= 30) score += 10; // Poor: <= 30KB
+			{score += 15;} // OK: <= 15KB
+		else if (cssKB <= 30) {score += 10;} // Poor: <= 30KB
 		// Else 0 points for > 30KB
 
 		// JavaScript bundle scoring (0-15 points)
@@ -285,21 +285,21 @@ async function calculateBundleSizeScore() {
 				const bundlePath = path.join(__dirname, "../dist", bundle);
 				const stats = await fs.stat(bundlePath);
 				totalJSSize += stats.size;
-			} catch (e) {
+			} catch {
 				// Bundle doesn't exist
 			}
 		}
 
 		const jsKB = totalJSSize / 1024;
 		if (jsKB <= 5)
-			score += 15; // Excellent: <= 5KB
+			{score += 15;} // Excellent: <= 5KB
 		else if (jsKB <= 10)
-			score += 12; // Good: <= 10KB
+			{score += 12;} // Good: <= 10KB
 		else if (jsKB <= 20)
-			score += 8; // OK: <= 20KB
-		else if (jsKB <= 30) score += 4; // Poor: <= 30KB
+			{score += 8;} // OK: <= 20KB
+		else if (jsKB <= 30) {score += 4;} // Poor: <= 30KB
 		// Else 0 points for > 30KB
-	} catch (e) {
+	} catch {
 		// Error reading files
 	}
 
@@ -318,10 +318,10 @@ async function calculateOptimizationScore() {
 		);
 		const performanceConfig = await fs.readFile(performanceConfigPath, "utf8");
 
-		if (performanceConfig.includes("targetFPS: 55")) score += 8; // S-tier FPS target
-		if (performanceConfig.includes("enableGPUAcceleration: true")) score += 4;
-		if (performanceConfig.includes("enableBatching: true")) score += 4;
-		if (performanceConfig.includes("enableCulling: true")) score += 4;
+		if (performanceConfig.includes("targetFPS: 55")) {score += 8;} // S-tier FPS target
+		if (performanceConfig.includes("enableGPUAcceleration: true")) {score += 4;}
+		if (performanceConfig.includes("enableBatching: true")) {score += 4;}
+		if (performanceConfig.includes("enableCulling: true")) {score += 4;}
 
 		// Check animation optimizations (0-10 points)
 		const animationsPath = path.join(
@@ -330,16 +330,16 @@ async function calculateOptimizationScore() {
 		);
 		const animations = await fs.readFile(animationsPath, "utf8");
 
-		if (!animations.includes("gsap")) score += 5; // GSAP removed for performance
-		if (animations.includes("framer-motion")) score += 5; // Using optimized animations
+		if (!animations.includes("gsap")) {score += 5;} // GSAP removed for performance
+		if (animations.includes("framer-motion")) {score += 5;} // Using optimized animations
 
 		// Check CSS optimizations (0-5 points)
 		const cssPath = path.join(__dirname, "../dist/liquidui.css");
 		const cssContent = await fs.readFile(cssPath, "utf8");
 
-		if (cssContent.includes("translateZ(0)")) score += 3; // GPU acceleration
-		if (cssContent.includes("will-change")) score += 2; // Performance hints
-	} catch (e) {
+		if (cssContent.includes("translateZ(0)")) {score += 3;} // GPU acceleration
+		if (cssContent.includes("will-change")) {score += 2;} // Performance hints
+	} catch {
 		// Error reading files
 	}
 
@@ -361,19 +361,19 @@ async function calculateCodeQualityScore() {
 			"utf8",
 		);
 
-		if (performanceMonitor.includes("onLCP")) score += 2;
-		if (performanceMonitor.includes("onINP")) score += 2;
-		if (performanceMonitor.includes("onCLS")) score += 1;
+		if (performanceMonitor.includes("onLCP")) {score += 2;}
+		if (performanceMonitor.includes("onINP")) {score += 2;}
+		if (performanceMonitor.includes("onCLS")) {score += 1;}
 
 		// Check for error handling (0-5 points)
 		const errorBoundaryPath = path.join(__dirname, "../src/components");
 		try {
 			const components = await fs.readdir(errorBoundaryPath);
-			if (components.some((c) => c.includes("error-boundary"))) score += 5;
-		} catch (e) {
+			if (components.some((c) => c.includes("error-boundary"))) {score += 5;}
+		} catch {
 			// No components directory
 		}
-	} catch (e) {
+	} catch {
 		// Error reading files, keep base score
 	}
 

@@ -7,6 +7,7 @@
 
 import { Slot } from '@radix-ui/react-slot';
 import React, { forwardRef, useMemo } from 'react';
+
 import { cn } from '@/core/utils/classname';
 import type {
   ComponentPropsBuilder,
@@ -83,8 +84,8 @@ export function createCompoundComponent<
 
   const Component = shouldForwardRef
     ? forwardRef<T, ComponentProps>(
-        ({ className, asChild: asChildProp, children, ...props }, ref) => {
-          const Comp = (asChildProp && asChild ? Slot : defaultElement) as any;
+        ({ className, asChild: asChildProperty, children, ...props }, ref) => {
+          const Comp = (asChildProperty && asChild ? Slot : defaultElement) as any;
 
           const mergedProps = useMemo(
             () => ({
@@ -96,6 +97,7 @@ export function createCompoundComponent<
           );
 
           return (
+
             <Comp ref={ref} {...mergedProps}>
               {children}
             </Comp>
@@ -104,11 +106,11 @@ export function createCompoundComponent<
       )
     : ({
         className,
-        asChild: asChildProp,
+        asChild: asChildProperty,
         children,
         ...props
       }: ComponentProps) => {
-        const Comp = (asChildProp && asChild ? Slot : defaultElement) as any;
+        const Comp = (asChildProperty && asChild ? Slot : defaultElement) as any;
 
         const mergedProps = useMemo(
           () => ({
@@ -219,6 +221,7 @@ export function createPolymorphicCompoundComponent<
       );
 
       return (
+
         <Comp ref={ref} {...mergedProps}>
           {children}
         </Comp>
@@ -238,9 +241,9 @@ export function createCompoundComponentCollection<
   T extends Record<string, any>,
 >(components: T, rootComponent: React.ComponentType<any>) {
   // Attach sub-components to root component
-  Object.entries(components).forEach(([key, component]) => {
+  for (const [key, component] of Object.entries(components)) {
     (rootComponent as any)[key] = component;
-  });
+  }
 
   return rootComponent as React.ComponentType<any> & T;
 }
@@ -255,7 +258,8 @@ export function useCompoundComponentState<T extends Record<string, any>>(
   const [state, setState] = React.useState<T>(initialState);
 
   // Always call useContext, but use a default context if none provided
-  const defaultContext = React.createContext<T | undefined>(null);
+
+  const defaultContext = React.createContext<T | undefined>(undefined);
   const contextToUse = context || defaultContext;
   const contextValue = React.useContext(contextToUse);
 
@@ -269,7 +273,7 @@ export function useCompoundComponentState<T extends Record<string, any>>(
   );
 
   const updateState = React.useCallback((updates: Partial<T>) => {
-    setState((prev) => ({ ...prev, ...updates }));
+    setState((previous) => ({ ...previous, ...updates }));
   }, []);
 
   return { state: mergedState, updateState };

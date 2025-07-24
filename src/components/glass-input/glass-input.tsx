@@ -12,6 +12,7 @@ import {
 	focusRing,
 	getGlassClass,
 	microInteraction,
+
 } from "@/core/utils/classname";
 
 // Type definitions for enhanced TypeScript support
@@ -59,13 +60,13 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 		const [showPassword, setShowPassword] = useState(false);
 		// const [isFocused, setIsFocused] = useState(false); // isFocused is not used
 		const [currentValue, setCurrentValue] = useState(
-			value !== undefined ? value : props.defaultValue || "",
+			value === undefined ? props.defaultValue || "" : value,
 		);
 		const internalInputRef = useRef<HTMLInputElement | null>(null);
 		const helperTextId = useId();
 
 		// Callback ref to handle both internal and forwarded refs
-		const setRefs = useCallback(
+		const setReferences = useCallback(
 			(node: HTMLInputElement | null) => {
 				(
 					internalInputRef as React.MutableRefObject<HTMLInputElement | null>
@@ -143,40 +144,47 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 			"password" === variant ? (showPassword ? "text" : "password") : type;
 
 		return (
+
 			<div className="relative w-full">
+
 				<div className="relative flex items-center w-full">
 					{"search" === variant && !leftIcon && (
+
 						<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-secondary pointer-events-none" />
 					)}
 					{leftIcon && (
+
 						<div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary pointer-events-none">
 							{leftIcon}
 						</div>
 					)}
-					<input
-						type={inputType}
+
+					<input type={inputType}
 						className={cn(baseClasses, getIconPadding(), className)}
-						ref={setRefs}
-						{...(value !== undefined
-							? { value: currentValue }
-							: { defaultValue: props.defaultValue })}
+						ref={setReferences}
+						{...(value === undefined
+							? { defaultValue: props.defaultValue }
+							: { value: currentValue })}
 						onChange={handleInputChange}
-						aria-invalid={error ? true : undefined}
-						aria-describedby={error && helperText ? helperTextId : undefined}
-						{...props}
-					/>
+						aria-invalid={error ? true : null}
+						aria-describedby={error && helperText ? helperTextId : null}
+						{...(props as any)}/>
+
 					<div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
 						{clearable && hasValue && (
+
 							<button
 								type="button"
 								onClick={handleClearInput}
 								aria-label="Clear input"
 								className="text-secondary hover:text-primary p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
 							>
+
 								<X className="h-4 w-4" />
 							</button>
 						)}
 						{"password" === variant && (
+
 							<button
 								type="button"
 								onClick={() => setShowPassword(!showPassword)}
@@ -185,13 +193,16 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 								className="text-secondary hover:text-primary p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
 							>
 								{showPassword ? (
+
 									<EyeOff className="h-4 w-4" />
 								) : (
+
 									<Eye className="h-4 w-4" />
 								)}
 							</button>
 						)}
 						{rightIcon && "password" !== variant && !clearable && (
+
 							<div className="text-secondary pointer-events-none">
 								{rightIcon}
 							</div>
@@ -199,6 +210,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 					</div>
 				</div>
 				{helperText && (
+
 					<p
 						id={helperTextId}
 						className={cn(

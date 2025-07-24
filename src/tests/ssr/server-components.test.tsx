@@ -80,6 +80,7 @@ describe("Server-Side Rendering Compatibility", () => {
 		it("should render without errors on server", () => {
 			expect(() => {
 				const html = renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassButton variant="default">Test Button</GlassButton>,
 				);
 				expect(html).toContain("Test Button");
@@ -87,26 +88,28 @@ describe("Server-Side Rendering Compatibility", () => {
 		});
 
 		it("should render with all variants on server", () => {
-			[
+			for (const variant of [
 				"default",
 				"primary",
 				"secondary",
 				"destructive",
 				"outline",
 				"ghost",
-			].forEach((variant) => {
+			]) {
 				expect(() => {
 					const html = renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassButton variant={variant as any}>Button content</GlassButton>,
 					);
 					expect(html).toContain("Button content");
 				}).not.toThrow();
-			});
+			}
 		});
 
 		it("should handle disabled state on server", () => {
 			expect(() => {
 				const html = renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassButton disabled>Disabled Button</GlassButton>,
 				);
 				expect(html).toContain("Disabled Button");
@@ -118,7 +121,9 @@ describe("Server-Side Rendering Compatibility", () => {
 		it("should render without errors on server", () => {
 			expect(() => {
 				const html = renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassCard>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<div>Card Content</div>
 					</GlassCard>,
 				);
@@ -129,20 +134,22 @@ describe("Server-Side Rendering Compatibility", () => {
 		it("should render with blur variants on server", () => {
 			const blurVariants = ["light", "medium", "heavy"] as const;
 
-			blurVariants.forEach((blur) => {
+			for (const blur of blurVariants) {
 				expect(() => {
 					const html = renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<GlassCard blur={blur}>Card content</GlassCard>,
 					);
 					expect(html).toContain("Card content");
 				}).not.toThrow();
-			});
+			}
 		});
 	});
 
 	describe("GlassInput SSR", () => {
 		it("should render without errors on server", () => {
 			expect(() => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				const html = renderToString(<GlassInput placeholder="Test input" />);
 				expect(html).toContain('placeholder="Test input"');
 			}).not.toThrow();
@@ -151,6 +158,7 @@ describe("Server-Side Rendering Compatibility", () => {
 		it("should handle controlled input on server", () => {
 			expect(() => {
 				const html = renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassInput value="Test value" onChange={() => {}} />,
 				);
 				expect(html).toContain('value="Test value"');
@@ -169,9 +177,13 @@ describe("Server-Side Rendering Compatibility", () => {
 				.mockImplementation(() => {});
 
 			renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassButton>Button</GlassButton>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassCard>Card</GlassCard>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassInput placeholder="Input" />
 				</div>,
 			);
@@ -186,7 +198,9 @@ describe("Server-Side Rendering Compatibility", () => {
 
 		it("should generate consistent HTML structure", () => {
 			const component = (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassCard>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassButton>Click me</GlassButton>
 				</GlassCard>
 			);
@@ -202,6 +216,7 @@ describe("Server-Side Rendering Compatibility", () => {
 		it("should work with CSS variables in SSR environment", () => {
 			expect(() => {
 				const html = renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div
 						style={{
 							backgroundColor: "var(--liquid-glass-primary)",
@@ -223,9 +238,13 @@ describe("Next.js App Router Compatibility", () => {
 		// Test that components can be used as RSCs
 		const ServerComponent = () => {
 			return (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<GlassCard>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<h1>Server Rendered Card</h1>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<p>This is rendered on the server</p>
 					</GlassCard>
 				</div>
@@ -233,6 +252,7 @@ describe("Next.js App Router Compatibility", () => {
 		};
 
 		expect(() => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			const html = renderToString(<ServerComponent />);
 			expect(html).toContain("Server Rendered Card");
 			expect(html).toContain("This is rendered on the server");
@@ -241,9 +261,11 @@ describe("Next.js App Router Compatibility", () => {
 
 	it("should support static rendering", () => {
 		const StaticComponent = () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassButton variant="primary">Static Button</GlassButton>
 		);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		const html = renderToString(<StaticComponent />);
 		expect(html).toContain("Static Button");
 		expect(html).not.toContain("undefined");
@@ -252,6 +274,7 @@ describe("Next.js App Router Compatibility", () => {
 
 describe("Progressive Enhancement", () => {
 	it("should provide fallback for JavaScript-disabled environments", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		const html = renderToString(<GlassButton>Works without JS</GlassButton>);
 
 		// Should render as a basic button that works without JavaScript
@@ -261,6 +284,7 @@ describe("Progressive Enhancement", () => {
 
 	it("should maintain accessibility without JavaScript", () => {
 		const html = renderToString(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassButton aria-label="Accessible button">Accessible</GlassButton>,
 		);
 

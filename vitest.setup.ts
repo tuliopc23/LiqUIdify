@@ -84,8 +84,8 @@ beforeAll(() => {
 	} as any;
 
 	// Mock requestAnimationFrame
-	global.requestAnimationFrame = vi.fn((cb) => {
-		setTimeout(cb, 16);
+	global.requestAnimationFrame = vi.fn((callback) => {
+		setTimeout(callback, 16);
 		return 1;
 	});
 
@@ -169,9 +169,9 @@ beforeAll(() => {
 
 	// Mock console to reduce test noise (optional)
 	const originalWarn = console.warn;
-	console.warn = (...args) => {
+	console.warn = (...arguments_) => {
 		// Filter out known development warnings
-		const message = args[0];
+		const message = arguments_[0];
 		if (
 			"string" === typeof message &&
 			(message.includes("Warning: ReactDOM.render is deprecated") ||
@@ -180,7 +180,7 @@ beforeAll(() => {
 		) {
 			return;
 		}
-		originalWarn(...args);
+		originalWarn(...arguments_);
 	};
 });
 
@@ -242,7 +242,7 @@ global.testUtils = {
 
 // Extend global types for TypeScript
 declare global {
-	const testUtils: {
+	const testUtilities: {
 		waitForAnimation: () => Promise<void>;
 		triggerResize: () => void;
 		simulateHover: (element: Element) => void;

@@ -83,8 +83,8 @@ const generateMockErrorData = (): ErrorMetric[] => {
 		"critical",
 	];
 
-	return Array.from({ length: 100 }, (_, i) => ({
-		timestamp: new Date(Date.now() - i * 3_600_000).toISOString(),
+	return Array.from({ length: 100 }, (_, index) => ({
+		timestamp: new Date(Date.now() - index * 3_600_000).toISOString(),
 		count: Math.floor(Math.random() * 50) + 1,
 		type:
 			errorTypes[Math.floor(Math.random() * errorTypes.length)] ||
@@ -217,10 +217,10 @@ export const ErrorAnalyticsDashboard: React.FC<
 	const errorTrendData = useMemo(() => {
 		const hourlyData: Record<string, number> = {};
 
-		filteredErrorData.forEach((error) => {
+		for (const error of filteredErrorData) {
 			const hour = new Date(error.timestamp).toISOString().slice(0, 13);
 			hourlyData[hour] = (hourlyData[hour] || 0) + error.count;
-		});
+		}
 
 		return Object.entries(hourlyData)
 			.map(([hour, count]) => ({
@@ -237,7 +237,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 	const componentErrorStats: ComponentErrorStats[] = useMemo(() => {
 		const componentStats: Record<string, any> = {};
 
-		filteredErrorData.forEach((error) => {
+		for (const error of filteredErrorData) {
 			if (!componentStats[error.component]) {
 				componentStats[error.component] = {
 					componentName: error.component,
@@ -250,7 +250,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 			componentStats[error.component].errorCount += error.count;
 			componentStats[error.component].userImpact += error.userImpact;
 			componentStats[error.component].errorTypes.add(error.type);
-		});
+		}
 
 		return Object.values(componentStats).map((stats: any) => ({
 			...stats,
@@ -269,7 +269,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 			critical: 0,
 		};
 
-		filteredErrorData.forEach((error) => {
+		for (const error of filteredErrorData) {
 			if (
 				error.severity &&
 				error.severity in distribution &&
@@ -281,7 +281,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 					distribution[severityKey] = currentValue + error.count;
 				}
 			}
-		});
+		}
 
 		return Object.entries(distribution).map(([severity, count]) => ({
 			name: severity,
@@ -325,9 +325,13 @@ export const ErrorAnalyticsDashboard: React.FC<
 
 	if (loading) {
 		return (
+
 			<div className={`liquidify-error-dashboard ${className}`}>
+
 				<div className="flex items-center justify-center h-96">
+
 					<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+
 					<span className="ml-2 text-gray-600">Loading error analytics...</span>
 				</div>
 			</div>
@@ -335,16 +339,22 @@ export const ErrorAnalyticsDashboard: React.FC<
 	}
 
 	return (
+
 		<div
 			className={`liquidify-error-dashboard p-6 bg-gray-50 min-h-screen ${className}`}
 		>
 			{/* Header */}
+
 			<div className="mb-8">
+
 				<div className="flex items-center justify-between">
+
 					<div>
+
 						<h1 className="text-3xl font-bold text-gray-900">
 							Error Analytics Dashboard
 						</h1>
+
 						<p className="text-gray-600 mt-1">
 							LiqUIdify Production Error Monitoring
 						</p>
@@ -352,27 +362,34 @@ export const ErrorAnalyticsDashboard: React.FC<
 
 					<div className="flex items-center space-x-4">
 						{/* Time Range Selector */}
+
 						<select
 							value={timeRange}
 							onChange={(e) => setTimeRange(e.target.value as any)}
 							className="border border-gray-300 rounded-md px-3 py-2 bg-white"
 						>
+
 							<option value="1h">Last Hour</option>
+
 							<option value="24h">Last 24 Hours</option>
+
 							<option value="7d">Last 7 Days</option>
+
 							<option value="30d">Last 30 Days</option>
 						</select>
 
 						{/* Refresh Button */}
+
 						<button
 							onClick={() => {
-								if (typeof window !== "undefined") {
+								if ("undefined" !== typeof window) {
 									window.location.reload();
 								}
 							}}
 							disabled={isRefreshing}
 							className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
 						>
+
 							<RefreshCw
 								className={`w-4 h-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`}
 							/>
@@ -381,10 +398,12 @@ export const ErrorAnalyticsDashboard: React.FC<
 
 						{/* Export Button */}
 						{enableExport && (
+
 							<button
 								onClick={handleExportData}
 								className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
 							>
+
 								<Download className="w-4 h-4 mr-2" />
 								Export
 							</button>
@@ -394,12 +413,19 @@ export const ErrorAnalyticsDashboard: React.FC<
 			</div>
 
 			{/* Key Metrics */}
+
 			<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+
 				<div className="bg-white p-4 rounded-lg shadow">
+
 					<div className="flex items-center">
+
 						<AlertTriangle className="w-8 h-8 text-red-500" />
+
 						<div className="ml-3">
+
 							<p className="text-sm text-gray-600">Total Errors</p>
+
 							<p className="text-2xl font-bold text-gray-900">
 								{dashboardStats.totalErrors}
 							</p>
@@ -408,10 +434,15 @@ export const ErrorAnalyticsDashboard: React.FC<
 				</div>
 
 				<div className="bg-white p-4 rounded-lg shadow">
+
 					<div className="flex items-center">
+
 						<Activity className="w-8 h-8 text-orange-500" />
+
 						<div className="ml-3">
+
 							<p className="text-sm text-gray-600">Active Errors</p>
+
 							<p className="text-2xl font-bold text-gray-900">
 								{dashboardStats.activeErrors}
 							</p>
@@ -420,10 +451,15 @@ export const ErrorAnalyticsDashboard: React.FC<
 				</div>
 
 				<div className="bg-white p-4 rounded-lg shadow">
+
 					<div className="flex items-center">
+
 						<Users className="w-8 h-8 text-blue-500" />
+
 						<div className="ml-3">
+
 							<p className="text-sm text-gray-600">Affected Users</p>
+
 							<p className="text-2xl font-bold text-gray-900">
 								{dashboardStats.affectedUsers}
 							</p>
@@ -432,10 +468,15 @@ export const ErrorAnalyticsDashboard: React.FC<
 				</div>
 
 				<div className="bg-white p-4 rounded-lg shadow">
+
 					<div className="flex items-center">
+
 						<Clock className="w-8 h-8 text-purple-500" />
+
 						<div className="ml-3">
+
 							<p className="text-sm text-gray-600">Avg Resolution</p>
+
 							<p className="text-2xl font-bold text-gray-900">
 								{dashboardStats.avgResolutionTime}h
 							</p>
@@ -444,10 +485,15 @@ export const ErrorAnalyticsDashboard: React.FC<
 				</div>
 
 				<div className="bg-white p-4 rounded-lg shadow">
+
 					<div className="flex items-center">
+
 						<TrendingUp className="w-8 h-8 text-yellow-500" />
+
 						<div className="ml-3">
+
 							<p className="text-sm text-gray-600">Error Rate</p>
+
 							<p className="text-2xl font-bold text-gray-900">
 								{dashboardStats.errorRate.toFixed(1)}%
 							</p>
@@ -456,10 +502,15 @@ export const ErrorAnalyticsDashboard: React.FC<
 				</div>
 
 				<div className="bg-white p-4 rounded-lg shadow">
+
 					<div className="flex items-center">
+
 						<Shield className="w-8 h-8 text-green-500" />
+
 						<div className="ml-3">
+
 							<p className="text-sm text-gray-600">Uptime</p>
+
 							<p className="text-2xl font-bold text-gray-900">
 								{dashboardStats.uptime}%
 							</p>
@@ -469,9 +520,13 @@ export const ErrorAnalyticsDashboard: React.FC<
 			</div>
 
 			{/* Filters */}
+
 			<div className="bg-white p-4 rounded-lg shadow mb-8">
+
 				<div className="flex items-center space-x-4">
+
 					<Filter className="w-5 h-5 text-gray-500" />
+
 					<span className="text-sm font-medium text-gray-700">Filters:</span>
 
 					<select
@@ -479,9 +534,11 @@ export const ErrorAnalyticsDashboard: React.FC<
 						onChange={(e) => setSelectedComponent(e.target.value)}
 						className="border border-gray-300 rounded-md px-3 py-1 text-sm"
 					>
+
 						<option value="all">All Components</option>
 						{[...new Set(errorData.map((e) => e.component))].map(
 							(component) => (
+
 								<option key={component} value={component}>
 									{component}
 								</option>
@@ -494,29 +551,40 @@ export const ErrorAnalyticsDashboard: React.FC<
 						onChange={(e) => setSelectedSeverity(e.target.value)}
 						className="border border-gray-300 rounded-md px-3 py-1 text-sm"
 					>
+
 						<option value="all">All Severities</option>
+
 						<option value="critical">Critical</option>
+
 						<option value="high">High</option>
+
 						<option value="medium">Medium</option>
+
 						<option value="low">Low</option>
 					</select>
 				</div>
 			</div>
 
 			{/* Charts Grid */}
+
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
 				{/* Error Trend Chart */}
+
 				<div className="bg-white p-6 rounded-lg shadow">
+
 					<h3 className="text-lg font-semibold text-gray-900 mb-4">
 						Error Trend (24h)
 					</h3>
+
 					<div className="w-full h-[300px] flex items-end justify-between bg-gray-50 p-4 rounded">
 						{errorTrendData.map((data, index) => (
+
 							<div
 								key={index}
 								className="flex flex-col items-center"
 								style={{ width: `${100 / errorTrendData.length}%` }}
 							>
+
 								<div
 									className="bg-blue-500 rounded-t"
 									style={{
@@ -525,6 +593,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 										width: "80%",
 									}}
 								/>
+
 								<span className="text-xs text-gray-600 mt-1 transform -rotate-45 origin-center">
 									{data.time}
 								</span>
@@ -534,19 +603,27 @@ export const ErrorAnalyticsDashboard: React.FC<
 				</div>
 
 				{/* Severity Distribution */}
+
 				<div className="bg-white p-6 rounded-lg shadow">
+
 					<h3 className="text-lg font-semibold text-gray-900 mb-4">
 						Error Severity Distribution
 					</h3>
+
 					<div className="w-full h-[300px] flex items-center justify-center">
+
 						<div className="grid grid-cols-2 gap-4 w-full max-w-sm">
 							{severityDistribution.map((item, index) => (
+
 								<div key={index} className="flex items-center space-x-2">
+
 									<div
 										className="w-4 h-4 rounded"
 										style={{ backgroundColor: item.color }}
 									/>
+
 									<span className="text-sm font-medium">{item.name}</span>
+
 									<span className="text-sm text-gray-600">{item.value}</span>
 								</div>
 							))}
@@ -557,53 +634,74 @@ export const ErrorAnalyticsDashboard: React.FC<
 
 			{/* Component Error Breakdown */}
 			{showComponentDetails && (
+
 				<div className="bg-white p-6 rounded-lg shadow mb-8">
+
 					<h3 className="text-lg font-semibold text-gray-900 mb-4">
 						Component Error Breakdown
 					</h3>
+
 					<div className="overflow-x-auto">
+
 						<table className="min-w-full divide-y divide-gray-200">
+
 							<thead className="bg-gray-50">
+
 								<tr>
+
 									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										Component
 									</th>
+
 									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										Error Count
 									</th>
+
 									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										User Impact
 									</th>
+
 									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										Avg Resolution Time
 									</th>
+
 									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										Top Error Types
 									</th>
+
 									<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										Trend
 									</th>
 								</tr>
 							</thead>
+
 							<tbody className="bg-white divide-y divide-gray-200">
 								{componentErrorStats.map((component) => (
+
 									<tr key={component.componentName}>
+
 										<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
 											{component.componentName}
 										</td>
+
 										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 											{component.errorCount}
 										</td>
+
 										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 											{component.userImpact}
 										</td>
+
 										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 											{component.avgResolutionTime.toFixed(1)}h
 										</td>
+
 										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
 											{component.topErrorTypes.join(", ")}
 										</td>
+
 										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+
 											<span
 												className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
 													"down" === component.trend
@@ -624,17 +722,23 @@ export const ErrorAnalyticsDashboard: React.FC<
 			)}
 
 			{/* Recent Errors */}
+
 			<div className="bg-white p-6 rounded-lg shadow">
+
 				<h3 className="text-lg font-semibold text-gray-900 mb-4">
 					Recent Errors
 				</h3>
+
 				<div className="space-y-4">
 					{filteredErrorData.slice(0, 10).map((error, index) => (
+
 						<div
 							key={index}
 							className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
 						>
+
 							<div className="flex items-center space-x-4">
+
 								<div
 									className={`w-3 h-3 rounded-full ${
 										"critical" === error.severity
@@ -646,17 +750,23 @@ export const ErrorAnalyticsDashboard: React.FC<
 													: "bg-green-500"
 									}`}
 								/>
+
 								<div>
+
 									<p className="text-sm font-medium text-gray-900">
 										{error.component}
 									</p>
+
 									<p className="text-xs text-gray-500">{error.type}</p>
 								</div>
 							</div>
+
 							<div className="text-right">
+
 								<p className="text-sm text-gray-900">
 									{error.count} occurrences
 								</p>
+
 								<p className="text-xs text-gray-500">
 									{new Date(error.timestamp).toLocaleString()}
 								</p>

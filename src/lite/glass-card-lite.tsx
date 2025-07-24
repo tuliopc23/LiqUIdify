@@ -1,5 +1,6 @@
 import type React from 'react';
 import { forwardRef } from 'react';
+
 import { cn } from '@/core/utils/classname';
 
 export interface GlassCardLiteProps
@@ -40,8 +41,8 @@ export const GlassCardLite = forwardRef<HTMLDivElement, GlassCardLiteProps>(
     };
 
     return (
-      <div
-        ref={ref}
+
+      <div ref={ref}
         className={cn(
           'glass-card-lite',
           'rounded-2xl',
@@ -52,7 +53,7 @@ export const GlassCardLite = forwardRef<HTMLDivElement, GlassCardLiteProps>(
           variantClasses[variant],
           className
         )}
-        {...props}
+        {...(props as any)}
       >
         {children}
       </div>

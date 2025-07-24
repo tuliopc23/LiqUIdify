@@ -37,8 +37,8 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 }));
 
 // Mock requestAnimationFrame
-global.requestAnimationFrame = vi.fn().mockImplementation((cb) => {
-  setTimeout(cb, 0);
+global.requestAnimationFrame = vi.fn().mockImplementation((callback) => {
+  setTimeout(callback, 0);
   return 1;
 });
 
@@ -55,14 +55,14 @@ global.performance = {
 // Suppress console errors in tests
 const originalError = console.error;
 beforeAll(() => {
-  console.error = (...args: any[]) => {
+  console.error = (...arguments_: any[]) => {
     if (
-      typeof args[0] === 'string' &&
-      args[0].includes('Warning: ReactDOM.render')
+      typeof arguments_[0] === 'string' &&
+      arguments_[0].includes('Warning: ReactDOM.render')
     ) {
       return null;
     }
-    originalError.call(console, ...args);
+    originalError.call(console, ...arguments_);
   };
 });
 

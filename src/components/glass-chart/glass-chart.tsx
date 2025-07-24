@@ -1,5 +1,6 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface ChartDataPoint {
@@ -47,14 +48,14 @@ export const LineChart: React.FC<LineChartProps> = ({
 	gradient = true,
 }) => {
 	const svgRef = useRef<SVGSVGElement>(null);
-  const [hoveredPoint, setHoveredPoint] = useState<number | null | null>(null);
+  const [hoveredPoint, setHoveredPoint] = useState<number | null | null>(undefined);
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
 		setMounted(true);
 	}, []);
 
-	if (!data.length) {
+	if (data.length === 0) {
 		return;
 	}
 
@@ -66,21 +67,23 @@ export const LineChart: React.FC<LineChartProps> = ({
 	const chartWidth = width - padding * 2;
 	const chartHeight = height - padding * 2;
 
-	const points = data.map((d, i) => ({
-		x: padding + (i / (data.length - 1)) * chartWidth,
+	const points = data.map((d, index) => ({
+		x: padding + (index / (data.length - 1)) * chartWidth,
 		y: padding + ((maxValue - d.value) / range) * chartHeight,
 		data: d,
 	}));
 
-	const pathData = points.reduce((path, point, i) => {
-		const command = 0 === i ? "M" : "L";
+	const pathData = points.reduce((path, point, index) => {
+		const command = 0 === index ? "M" : "L";
 		return `${path} ${command} ${point.x} ${point.y}`;
 	}, "");
 
-	const gradientId = `gradient-${Math.random().toString(36).substr(2, 9)}`;
+	const gradientId = `gradient-${Math.random().toString(36).slice(2, 11)}`;
 
 	return (
+
 		<div className={cn("relative", className)}>
+
 			<svg
 				ref={svgRef}
 				width={width}
@@ -88,13 +91,17 @@ export const LineChart: React.FC<LineChartProps> = ({
 				className="overflow-visible"
 			>
 				{gradient && (
+
 					<defs>
+
 						<linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
+
 							<stop
 								offset="0%"
 								stopColor="var(--glass-primary)"
 								stopOpacity="0.2"
 							/>
+
 							<stop
 								offset="100%"
 								stopColor="var(--glass-primary)"
@@ -105,12 +112,14 @@ export const LineChart: React.FC<LineChartProps> = ({
 				)}
 
 				{/* Grid lines */}
+
 				<g className="opacity-20">
-					{[...Array(5)].map((_, i) => {
-						const y = padding + (i / 4) * chartHeight;
+					{Array.from({length: 5}).map((_, index) => {
+						const y = padding + (index / 4) * chartHeight;
 						return (
+
 							<line
-								key={i}
+								key={index}
 								x1={padding}
 								y1={y}
 								x2={width - padding}
@@ -124,9 +133,10 @@ export const LineChart: React.FC<LineChartProps> = ({
 				</g>
 
 				{/* Gradient area */}
-				{gradient && 0 < points.length && (
+				{gradient && points.length > 0 && (
+
 					<path
-						d={`${pathData} L ${points[points.length - 1]?.x} ${height - padding} L ${padding} ${height - padding} Z`}
+						d={`${pathData} L ${points.at(-1)?.x} ${height - padding} L ${padding} ${height - padding} Z`}
 						fill={`url(#${gradientId})`}
 						className={cn(animated && "transition-all duration-1000 ease-out")}
 						style={{
@@ -136,6 +146,7 @@ export const LineChart: React.FC<LineChartProps> = ({
 				)}
 
 				{/* Line */}
+
 				<path
 					d={pathData}
 					fill="none"
@@ -152,24 +163,26 @@ export const LineChart: React.FC<LineChartProps> = ({
 
 				{/* Data points */}
 				{showDots &&
-					points.map((point, i) => (
+					points.map((point, index) => (
+
 						<circle
-							key={i}
+							key={index}
 							cx={point.x}
 							cy={point.y}
-							r={hoveredPoint === i ? 6 : 4}
+							r={hoveredPoint === index ? 6 : 4}
 							fill="var(--glass-primary)"
 							stroke="white"
 							strokeWidth="2"
 							className={cn(
 								"cursor-pointer transition-all duration-200",
 								animated && "animate-in zoom-in-0 duration-500",
-								hoveredPoint === i && "shadow-lg",
+								hoveredPoint === index && "shadow-lg",
 							)}
 							style={{
-								animationDelay: animated ? `${i * 100}ms` : "0ms",
+								animationDelay: animated ? `${index * 100}ms` : "0ms",
 							}}
-							onMouseEnter={() => setHoveredPoint(i)}
+							onMouseEnter={() => setHoveredPoint(index)}
+
        onMouseLeave={() => setHoveredPoint(undefined)}
 						/>
 					))}
@@ -177,6 +190,7 @@ export const LineChart: React.FC<LineChartProps> = ({
 
 			{/* Tooltip */}
 			{showTooltip && null !== hoveredPoint && points[hoveredPoint] && (
+
 				<div
 					className={cn(
 						"absolute z-10 px-3 py-2 rounded-lg text-sm pointer-events-none",
@@ -189,9 +203,11 @@ export const LineChart: React.FC<LineChartProps> = ({
 						transform: "translateX(-50%)",
 					}}
 				>
+
 					<div className="font-medium text-[var(--text-primary)]">
 						{points[hoveredPoint]?.data.label}
 					</div>
+
 					<div className="text-[var(--text-secondary)]">
 						{points[hoveredPoint]?.data.value.toLocaleString()}
 					</div>
@@ -216,7 +232,7 @@ export const BarChart: React.FC<BarChartProps> = ({
 		setMounted(true);
 	}, []);
 
-	if (!data.length) {
+	if (data.length === 0) {
 		return;
 	}
 
@@ -232,23 +248,25 @@ export const BarChart: React.FC<BarChartProps> = ({
 	);
 
 	return (
+
 		<div className={cn("relative", className)}>
+
 			<svg width={width} height={height} className="overflow-visible">
-				{data.map((item, i) => {
+				{data.map((item, index) => {
 					const barLength =
 						(item.value / maxValue) *
 						("vertical" === orientation ? chartHeight : chartWidth);
 					const x =
 						"vertical" === orientation
 							? padding +
-								(i / data.length) * chartWidth +
+								(index / data.length) * chartWidth +
 								(chartWidth / data.length - barThickness) / 2
 							: padding;
 					const y =
 						"vertical" === orientation
 							? height - padding - barLength
 							: padding +
-								(i / data.length) * chartHeight +
+								(index / data.length) * chartHeight +
 								(chartHeight / data.length - barThickness) / 2;
 					const barWidth =
 						"vertical" === orientation ? barThickness : barLength;
@@ -256,7 +274,9 @@ export const BarChart: React.FC<BarChartProps> = ({
 						"vertical" === orientation ? barLength : barThickness;
 
 					return (
-						<g key={i}>
+
+						<g key={index}>
+
 							<rect
 								x={x}
 								y={y}
@@ -269,12 +289,13 @@ export const BarChart: React.FC<BarChartProps> = ({
 									animated && "animate-in fade-in-0 slide-in-from-bottom-4",
 								)}
 								style={{
-									animationDelay: animated ? `${i * 100}ms` : "0ms",
+									animationDelay: animated ? `${index * 100}ms` : "0ms",
 									transform: mounted ? "scaleY(1)" : "scaleY(0)",
 									transformOrigin: "bottom",
 								}}
 							/>
 							{showValues && (
+
 								<text
 									x={x + barWidth / 2}
 									y={y - 8}
@@ -308,7 +329,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 		setMounted(true);
 	}, []);
 
-	if (!data.length) {
+	if (data.length === 0) {
 		return;
 	}
 
@@ -319,7 +340,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
 	let cumulativePercentage = 0;
 
-	const segments = data.map((item, i) => {
+	const segments = data.map((item, index) => {
 		const percentage = item.value / total;
 		const startAngle = cumulativePercentage * 2 * Math.PI - Math.PI / 2;
 		const endAngle =
@@ -349,18 +370,21 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
 		return {
 			path: pathData,
-			color: item.color || `hsl(${(i * 360) / data.length}, 70%, 60%)`,
+			color: item.color || `hsl(${(index * 360) / data.length}, 70%, 60%)`,
 			percentage,
 			...item,
 		};
 	});
 
 	return (
+
 		<div className={cn("relative", className)}>
+
 			<svg width={width} height={height}>
-				{segments.map((segment, i) => (
+				{segments.map((segment, index) => (
+
 					<path
-						key={i}
+						key={index}
 						d={segment.path}
 						fill={segment.color}
 						className={cn(
@@ -368,7 +392,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 							animated && "animate-in fade-in-0",
 						)}
 						style={{
-							animationDelay: animated ? `${i * 150}ms` : "0ms",
+							animationDelay: animated ? `${index * 150}ms` : "0ms",
 							transform: mounted ? "scale(1)" : "scale(0)",
 							transformOrigin: `${centerX}px ${centerY}px`,
 						}}
@@ -378,6 +402,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
 			{/* Center content */}
 			{centerContent && (
+
 				<div
 					className="absolute inset-0 flex items-center justify-center"
 					style={{
@@ -393,11 +418,15 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
 			{/* Labels */}
 			{showLabels && (
+
 				<div className="absolute inset-0 flex items-center justify-center">
+
 					<div className="text-center">
+
 						<div className="text-2xl font-bold text-[var(--text-primary)]">
 							{total.toLocaleString()}
 						</div>
+
 						<div className="text-sm text-[var(--text-secondary)]">Total</div>
 					</div>
 				</div>

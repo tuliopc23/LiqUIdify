@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const glob = require("glob");
 
 // Patterns to replace undefined with null
@@ -31,23 +31,23 @@ const files = glob.sync("src/**/*.{ts,tsx}", {
 
 let totalReplacements = 0;
 
-files.forEach((file) => {
+for (const file of files) {
 	let content = fs.readFileSync(file, "utf8");
 	let fileReplacements = 0;
 
-	replacements.forEach(({ pattern, replacement }) => {
+	for (const { pattern, replacement } of replacements) {
 		const matches = content.match(pattern);
 		if (matches) {
 			fileReplacements += matches.length;
 			content = content.replace(pattern, replacement);
 		}
-	});
+	}
 
 	if (fileReplacements > 0) {
 		fs.writeFileSync(file, content);
 		console.log(`Fixed ${fileReplacements} occurrences in ${file}`);
 		totalReplacements += fileReplacements;
 	}
-});
+}
 
 console.log(`\nTotal replacements: ${totalReplacements}`);

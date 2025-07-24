@@ -25,7 +25,7 @@ export function ErrorRecovery({
   children: ReactNode;
   options?: Partial<ErrorRecoveryOptions>;
 }) {
-  const [error] = useState<Error | null | null>(null);
+  const [error] = useState<Error | null | null>(undefined);
   const [retryCount] = useState(0);
   const [isRetrying] = useState(false);
 
@@ -37,10 +37,12 @@ export function ErrorRecovery({
   };
 
   if (error && retryCount >= finalOptions.maxRetries) {
+
     return <>{finalOptions.fallbackComponent}</>;
   }
 
   if (isRetrying) {
+
     return <>{finalOptions.fallbackComponent}</>;
   }
 
@@ -54,7 +56,8 @@ export class SSRErrorBoundary extends React.Component<
 > {
   constructor(props: any) {
     super(props);
-    this.state = { hasError: false, error: undefined };
+
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -67,6 +70,7 @@ export class SSRErrorBoundary extends React.Component<
 
   render() {
     if (this.state.hasError) {
+
       return this.props.fallback || <div>Error occurred</div>;
     }
 
@@ -117,35 +121,38 @@ export function useLocalStorage<T>(
 
 // SSR-Safe Window Hook
 export function useWindow() {
-  const [windowObj, setWindowObj] = useState<Window | null | null>(null);
+  const [windowObject, setWindowObject] = useState<Window | null | null>(undefined);
 
   useEffect(() => {
-    setWindowObj('undefined' !== typeof window ? window : undefined);
+
+    setWindowObject('undefined' === typeof window ? undefined : window);
   }, []);
 
-  return windowObj;
+  return windowObject;
 }
 
 // SSR-Safe Document Hook
 export function useDocument() {
-  const [documentObj, setDocumentObj] = useState<Document | null | null>(null);
+  const [documentObject, setDocumentObject] = useState<Document | null | null>(undefined);
 
   useEffect(() => {
-    setDocumentObj('undefined' !== typeof document ? document : undefined);
+
+    setDocumentObject('undefined' === typeof document ? undefined : document);
   }, []);
 
-  return documentObj;
+  return documentObject;
 }
 
 // SSR-Safe Navigator Hook
 export function useNavigator() {
-  const [navigatorObj, setNavigatorObj] = useState<Navigator | null | null>(null);
+  const [navigatorObject, setNavigatorObject] = useState<Navigator | null | null>(undefined);
 
   useEffect(() => {
-    setNavigatorObj('undefined' !== typeof navigator ? navigator : undefined);
+
+    setNavigatorObject('undefined' === typeof navigator ? undefined : navigator);
   }, []);
 
-  return navigatorObj;
+  return navigatorObject;
 }
 
 // SSR-Safe Match Media Hook
@@ -174,6 +181,7 @@ export function useIntersectionObserver(
   options?: IntersectionObserverInit
 ): IntersectionObserver | null {
   const [observer, setObserver] = useState<IntersectionObserver | null>(
+
     undefined
   );
 
@@ -196,7 +204,7 @@ export function useResizeObserver(
   callback: ResizeObserverCallback,
   _options?: ResizeObserverOptions
 ): ResizeObserver | null {
-  const [observer, setObserver] = useState<ResizeObserver | null | null>(null);
+  const [observer, setObserver] = useState<ResizeObserver | null | null>(undefined);
 
   useEffect(() => {
     if ('undefined' === typeof window || !window.ResizeObserver) {
@@ -214,668 +222,747 @@ export function useResizeObserver(
 
 // SSR-Safe Performance Hook
 export function usePerformance() {
-  const [performanceObj, setPerformanceObj] = useState<Performance | null>(
+  const [performanceObject, setPerformanceObject] = useState<Performance | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setPerformanceObj(
-      'undefined' !== typeof performance ? performance : undefined
+    setPerformanceObject(
+
+      'undefined' === typeof performance ? undefined : performance
     );
   }, []);
 
-  return performanceObj;
+  return performanceObject;
 }
 
 // SSR-Safe Request Animation Frame Hook
 export function useRequestAnimationFrame() {
-  const [requestAnimationFrameFn, setRequestAnimationFrameFn] = useState<
+  const [requestAnimationFrameFunction, setRequestAnimationFrameFunction] = useState<
     ((callback: FrameRequestCallback) => number) | null
+
   >(undefined);
 
   useEffect(() => {
-    setRequestAnimationFrameFn(
-      'undefined' !== typeof requestAnimationFrame
-        ? requestAnimationFrame
-        : undefined
+    setRequestAnimationFrameFunction(
+
+      'undefined' === typeof requestAnimationFrame
+        ? undefined
+        : requestAnimationFrame
     );
   }, []);
 
-  return requestAnimationFrameFn;
+  return requestAnimationFrameFunction;
 }
 
 // SSR-Safe Set Timeout Hook
 export function useSetTimeout() {
-  const [setTimeoutFn, setSetTimeoutFn] = useState<
+  const [setTimeoutFunction, setSetTimeoutFunction] = useState<
     ((callback: () => void, delay?: number) => NodeJS.Timeout) | null
+
   >(undefined);
 
   useEffect(() => {
-    setSetTimeoutFn('undefined' !== typeof setTimeout ? setTimeout : undefined);
+
+    setSetTimeoutFunction('undefined' === typeof setTimeout ? undefined : setTimeout);
   }, []);
 
-  return setTimeoutFn;
+  return setTimeoutFunction;
 }
 
 // SSR-Safe Clear Timeout Hook
 export function useClearTimeout() {
-  const [clearTimeoutFn, setClearTimeoutFn] = useState<
+  const [clearTimeoutFunction, setClearTimeoutFunction] = useState<
     ((id: NodeJS.Timeout) => void) | null
+
   >(undefined);
 
   useEffect(() => {
-    setClearTimeoutFn(
-      'undefined' !== typeof clearTimeout ? clearTimeout : undefined
+    setClearTimeoutFunction(
+
+      'undefined' === typeof clearTimeout ? undefined : clearTimeout
     );
   }, []);
 
-  return clearTimeoutFn;
+  return clearTimeoutFunction;
 }
 
 // SSR-Safe Set Interval Hook
 export function useSetInterval() {
-  const [setIntervalFn, setSetIntervalFn] = useState<
+  const [setIntervalFunction, setSetIntervalFunction] = useState<
     ((callback: () => void, delay?: number) => NodeJS.Timeout) | null
+
   >(undefined);
 
   useEffect(() => {
-    setSetIntervalFn(
-      'undefined' !== typeof setInterval ? setInterval : undefined
+    setSetIntervalFunction(
+
+      'undefined' === typeof setInterval ? undefined : setInterval
     );
   }, []);
 
-  return setIntervalFn;
+  return setIntervalFunction;
 }
 
 // SSR-Safe Clear Interval Hook
 export function useClearInterval() {
-  const [clearIntervalFn, setClearIntervalFn] = useState<
+  const [clearIntervalFunction, setClearIntervalFunction] = useState<
     ((id: NodeJS.Timeout) => void) | null
+
   >(undefined);
 
   useEffect(() => {
-    setClearIntervalFn(
-      'undefined' !== typeof clearInterval ? clearInterval : undefined
+    setClearIntervalFunction(
+
+      'undefined' === typeof clearInterval ? undefined : clearInterval
     );
   }, []);
 
-  return clearIntervalFn;
+  return clearIntervalFunction;
 }
 
 // SSR-Safe Date Hook
 export function useSSRSafeDate() {
-  const [dateObj, setDateObj] = useState<Date | null | null>(null);
+  const [dateObject, setDateObject] = useState<Date | null | null>(undefined);
 
   useEffect(() => {
-    setDateObj('undefined' !== typeof Date ? new Date() : undefined);
+
+    setDateObject('undefined' === typeof Date ? undefined : new Date());
   }, []);
 
-  return dateObj;
+  return dateObject;
 }
 
 // SSR-Safe Math Hook
 export function useMath() {
-  const [mathObj, setMathObj] = useState<Math | null | null>(null);
+  const [mathObject, setMathObject] = useState<Math | null | null>(undefined);
 
   useEffect(() => {
-    setMathObj('undefined' !== typeof Math ? Math : undefined);
+
+    setMathObject('undefined' === typeof Math ? undefined : Math);
   }, []);
 
-  return mathObj;
+  return mathObject;
 }
 
 // SSR-Safe JSON Hook
 export function useJSON() {
-  const [jsonObj, setJsonObj] = useState<JSON | null | null>(null);
+  const [jsonObject, setJsonObject] = useState<JSON | null | null>(undefined);
 
   useEffect(() => {
-    setJsonObj('undefined' !== typeof JSON ? JSON : undefined);
+
+    setJsonObject('undefined' === typeof JSON ? undefined : JSON);
   }, []);
 
-  return jsonObj;
+  return jsonObject;
 }
 
 // SSR-Safe Console Hook
 export function useConsole() {
-  const [consoleObj, setConsoleObj] = useState<Console | null | null>(null);
+  const [consoleObject, setConsoleObject] = useState<Console | null | null>(undefined);
 
   useEffect(() => {
-    setConsoleObj('undefined' !== typeof console ? console : undefined);
+
+    setConsoleObject('undefined' === typeof console ? undefined : console);
   }, []);
 
-  return consoleObj;
+  return consoleObject;
 }
 
 // SSR-Safe Process Hook
 export function useProcess() {
-  const [processObj, setProcessObj] = useState<NodeJS.Process | null>(
+  const [processObject, setProcessObject] = useState<NodeJS.Process | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setProcessObj('undefined' !== typeof process ? process : undefined);
+
+    setProcessObject('undefined' === typeof process ? undefined : process);
   }, []);
 
-  return processObj;
+  return processObject;
 }
 
 // SSR-Safe Environment Hook
 export function useEnvironment() {
-  const [env, setEnv] = useState<NodeJS.ProcessEnv | null | null>(null);
+  const [environment, setEnvironment] = useState<NodeJS.ProcessEnv | null | null>(undefined);
 
   useEffect(() => {
-    setEnv('undefined' !== typeof process ? process.env : undefined);
+
+    setEnvironment('undefined' === typeof process ? undefined : process.env);
   }, []);
 
-  return env;
+  return environment;
 }
 
 // SSR-Safe Global Hook
 export function useGlobal() {
-  const [globalObj, setGlobalObj] = useState<typeof globalThis | null>(
+  const [globalObject, setGlobalObject] = useState<typeof globalThis | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setGlobalObj('undefined' !== typeof globalThis ? globalThis : undefined);
+
+    setGlobalObject('undefined' === typeof globalThis ? undefined : globalThis);
   }, []);
 
-  return globalObj;
+  return globalObject;
 }
 
 // SSR-Safe Buffer Hook
 export function useBuffer() {
-  const [bufferObj, setBufferObj] = useState<typeof Buffer | null | null>(null);
+  const [bufferObject, setBufferObject] = useState<typeof Buffer | null | null>(undefined);
 
   useEffect(() => {
-    setBufferObj('undefined' !== typeof Buffer ? Buffer : undefined);
+
+    setBufferObject('undefined' === typeof Buffer ? undefined : Buffer);
   }, []);
 
-  return bufferObj;
+  return bufferObject;
 }
 
 // SSR-Safe URL Hook
 export function useURL() {
-  const [urlObj, setUrlObj] = useState<typeof URL | null | null>(null);
+  const [urlObject, setUrlObject] = useState<typeof URL | null | null>(undefined);
 
   useEffect(() => {
-    setUrlObj('undefined' !== typeof URL ? URL : undefined);
+
+    setUrlObject('undefined' === typeof URL ? undefined : URL);
   }, []);
 
-  return urlObj;
+  return urlObject;
 }
 
 // SSR-Safe URLSearchParams Hook
 export function useURLSearchParams() {
-  const [urlSearchParamsObj, setUrlSearchParamsObj] = useState<
+  const [urlSearchParamsObject, setUrlSearchParamsObject] = useState<
     typeof URLSearchParams | null
+
   >(undefined);
 
   useEffect(() => {
-    setUrlSearchParamsObj(
-      'undefined' !== typeof URLSearchParams ? URLSearchParams : undefined
+    setUrlSearchParamsObject(
+
+      'undefined' === typeof URLSearchParams ? undefined : URLSearchParams
     );
   }, []);
 
-  return urlSearchParamsObj;
+  return urlSearchParamsObject;
 }
 
 // SSR-Safe FormData Hook
 export function useFormData() {
-  const [formDataObj, setFormDataObj] = useState<typeof FormData | null>(
+  const [formDataObject, setFormDataObject] = useState<typeof FormData | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setFormDataObj('undefined' !== typeof FormData ? FormData : undefined);
+
+    setFormDataObject('undefined' === typeof FormData ? undefined : FormData);
   }, []);
 
-  return formDataObj;
+  return formDataObject;
 }
 
 // SSR-Safe Headers Hook
 export function useHeaders() {
-  const [headersObj, setHeadersObj] = useState<typeof Headers | null>(
+  const [headersObject, setHeadersObject] = useState<typeof Headers | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setHeadersObj('undefined' !== typeof Headers ? Headers : undefined);
+
+    setHeadersObject('undefined' === typeof Headers ? undefined : Headers);
   }, []);
 
-  return headersObj;
+  return headersObject;
 }
 
 // SSR-Safe Response Hook
 export function useResponse() {
-  const [responseObj, setResponseObj] = useState<typeof Response | null>(
+  const [responseObject, setResponseObject] = useState<typeof Response | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setResponseObj('undefined' !== typeof Response ? Response : undefined);
+
+    setResponseObject('undefined' === typeof Response ? undefined : Response);
   }, []);
 
-  return responseObj;
+  return responseObject;
 }
 
 // SSR-Safe Request Hook
 export function useRequest() {
-  const [requestObj, setRequestObj] = useState<typeof Request | null>(
+  const [requestObject, setRequestObject] = useState<typeof Request | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setRequestObj('undefined' !== typeof Request ? Request : undefined);
+
+    setRequestObject('undefined' === typeof Request ? undefined : Request);
   }, []);
 
-  return requestObj;
+  return requestObject;
 }
 
 // SSR-Safe WebSocket Hook
 export function useWebSocket() {
-  const [webSocketObj, setWebSocketObj] = useState<typeof WebSocket | null>(
+  const [webSocketObject, setWebSocketObject] = useState<typeof WebSocket | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setWebSocketObj('undefined' !== typeof WebSocket ? WebSocket : undefined);
+
+    setWebSocketObject('undefined' === typeof WebSocket ? undefined : WebSocket);
   }, []);
 
-  return webSocketObj;
+  return webSocketObject;
 }
 
 // SSR-Safe Worker Hook
 export function useWorker() {
-  const [workerObj, setWorkerObj] = useState<typeof Worker | null | null>(null);
+  const [workerObject, setWorkerObject] = useState<typeof Worker | null | null>(undefined);
 
   useEffect(() => {
-    setWorkerObj('undefined' !== typeof Worker ? Worker : undefined);
+
+    setWorkerObject('undefined' === typeof Worker ? undefined : Worker);
   }, []);
 
-  return workerObj;
+  return workerObject;
 }
 
 // SSR-Safe SharedWorker Hook
 export function useSharedWorker() {
-  const [sharedWorkerObj, setSharedWorkerObj] = useState<
+  const [sharedWorkerObject, setSharedWorkerObject] = useState<
     typeof SharedWorker | null
+
   >(undefined);
 
   useEffect(() => {
-    setSharedWorkerObj(
-      'undefined' !== typeof SharedWorker ? SharedWorker : undefined
+    setSharedWorkerObject(
+
+      'undefined' === typeof SharedWorker ? undefined : SharedWorker
     );
   }, []);
 
-  return sharedWorkerObj;
+  return sharedWorkerObject;
 }
 
 // SSR-Safe MessageChannel Hook
 export function useMessageChannel() {
-  const [messageChannelObj, setMessageChannelObj] = useState<
+  const [messageChannelObject, setMessageChannelObject] = useState<
     typeof MessageChannel | null
+
   >(undefined);
 
   useEffect(() => {
-    setMessageChannelObj(
-      'undefined' !== typeof MessageChannel ? MessageChannel : undefined
+    setMessageChannelObject(
+
+      'undefined' === typeof MessageChannel ? undefined : MessageChannel
     );
   }, []);
 
-  return messageChannelObj;
+  return messageChannelObject;
 }
 
 // SSR-Safe BroadcastChannel Hook
 export function useBroadcastChannel() {
-  const [broadcastChannelObj, setBroadcastChannelObj] = useState<
+  const [broadcastChannelObject, setBroadcastChannelObject] = useState<
     typeof BroadcastChannel | null
+
   >(undefined);
 
   useEffect(() => {
-    setBroadcastChannelObj(
-      'undefined' !== typeof BroadcastChannel ? BroadcastChannel : undefined
+    setBroadcastChannelObject(
+
+      'undefined' === typeof BroadcastChannel ? undefined : BroadcastChannel
     );
   }, []);
 
-  return broadcastChannelObj;
+  return broadcastChannelObject;
 }
 
 // SSR-Safe CustomEvent Hook
 export function useCustomEvent() {
-  const [customEventObj, setCustomEventObj] = useState<
+  const [customEventObject, setCustomEventObject] = useState<
     typeof CustomEvent | null
+
   >(undefined);
 
   useEffect(() => {
-    setCustomEventObj(
-      'undefined' !== typeof CustomEvent ? CustomEvent : undefined
+    setCustomEventObject(
+
+      'undefined' === typeof CustomEvent ? undefined : CustomEvent
     );
   }, []);
 
-  return customEventObj;
+  return customEventObject;
 }
 
 // SSR-Safe EventTarget Hook
 export function useEventTarget() {
-  const [eventTargetObj, setEventTargetObj] = useState<
+  const [eventTargetObject, setEventTargetObject] = useState<
     typeof EventTarget | null
+
   >(undefined);
 
   useEffect(() => {
-    setEventTargetObj(
-      'undefined' !== typeof EventTarget ? EventTarget : undefined
+    setEventTargetObject(
+
+      'undefined' === typeof EventTarget ? undefined : EventTarget
     );
   }, []);
 
-  return eventTargetObj;
+  return eventTargetObject;
 }
 
 // SSR-Safe Event Hook
 export function useEvent() {
-  const [eventObj, setEventObj] = useState<typeof Event | null | null>(null);
+  const [eventObject, setEventObject] = useState<typeof Event | null | null>(undefined);
 
   useEffect(() => {
-    setEventObj('undefined' !== typeof Event ? Event : undefined);
+
+    setEventObject('undefined' === typeof Event ? undefined : Event);
   }, []);
 
-  return eventObj;
+  return eventObject;
 }
 
 // SSR-Safe Error Hook
 export function useError() {
-  const [errorObj, setErrorObj] = useState<typeof Error | null | null>(null);
+  const [errorObject, setErrorObject] = useState<typeof Error | null | null>(undefined);
 
   useEffect(() => {
-    setErrorObj('undefined' !== typeof Error ? Error : undefined);
+
+    setErrorObject('undefined' === typeof Error ? undefined : Error);
   }, []);
 
-  return errorObj;
+  return errorObject;
 }
 
 // SSR-Safe TypeError Hook
 export function useTypeError() {
-  const [typeErrorObj, setTypeErrorObj] = useState<typeof TypeError | null>(
+  const [typeErrorObject, setTypeErrorObject] = useState<typeof TypeError | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setTypeErrorObj('undefined' !== typeof TypeError ? TypeError : undefined);
+
+    setTypeErrorObject('undefined' === typeof TypeError ? undefined : TypeError);
   }, []);
 
-  return typeErrorObj;
+  return typeErrorObject;
 }
 
 // SSR-Safe RangeError Hook
 export function useRangeError() {
-  const [rangeErrorObj, setRangeErrorObj] = useState<typeof RangeError | null>(
+  const [rangeErrorObject, setRangeErrorObject] = useState<typeof RangeError | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setRangeErrorObj(
-      'undefined' !== typeof RangeError ? RangeError : undefined
+    setRangeErrorObject(
+
+      'undefined' === typeof RangeError ? undefined : RangeError
     );
   }, []);
 
-  return rangeErrorObj;
+  return rangeErrorObject;
 }
 
 // SSR-Safe ReferenceError Hook
 export function useReferenceError() {
-  const [referenceErrorObj, setReferenceErrorObj] = useState<
+  const [referenceErrorObject, setReferenceErrorObject] = useState<
     typeof ReferenceError | null
+
   >(undefined);
 
   useEffect(() => {
-    setReferenceErrorObj(
-      'undefined' !== typeof ReferenceError ? ReferenceError : undefined
+    setReferenceErrorObject(
+
+      'undefined' === typeof ReferenceError ? undefined : ReferenceError
     );
   }, []);
 
-  return referenceErrorObj;
+  return referenceErrorObject;
 }
 
 // SSR-Safe SyntaxError Hook
 export function useSyntaxError() {
-  const [syntaxErrorObj, setSyntaxErrorObj] = useState<
+  const [syntaxErrorObject, setSyntaxErrorObject] = useState<
     typeof SyntaxError | null
+
   >(undefined);
 
   useEffect(() => {
-    setSyntaxErrorObj(
-      'undefined' !== typeof SyntaxError ? SyntaxError : undefined
+    setSyntaxErrorObject(
+
+      'undefined' === typeof SyntaxError ? undefined : SyntaxError
     );
   }, []);
 
-  return syntaxErrorObj;
+  return syntaxErrorObject;
 }
 
 // SSR-Safe URIError Hook
 export function useURIError() {
-  const [uriErrorObj, setUriErrorObj] = useState<typeof URIError | null>(
+  const [uriErrorObject, setUriErrorObject] = useState<typeof URIError | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setUriErrorObj('undefined' !== typeof URIError ? URIError : undefined);
+
+    setUriErrorObject('undefined' === typeof URIError ? undefined : URIError);
   }, []);
 
-  return uriErrorObj;
+  return uriErrorObject;
 }
 
 // SSR-Safe EvalError Hook
 export function useEvalError() {
-  const [evalErrorObj, setEvalErrorObj] = useState<typeof EvalError | null>(
+  const [evalErrorObject, setEvalErrorObject] = useState<typeof EvalError | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setEvalErrorObj('undefined' !== typeof EvalError ? EvalError : undefined);
+
+    setEvalErrorObject('undefined' === typeof EvalError ? undefined : EvalError);
   }, []);
 
-  return evalErrorObj;
+  return evalErrorObject;
 }
 
 // SSR-Safe AggregateError Hook
 export function useAggregateError() {
-  const [aggregateErrorObj, setAggregateErrorObj] = useState<any | null>(null);
+  const [aggregateErrorObject, setAggregateErrorObject] = useState<any | null>(undefined);
 
   useEffect(() => {
-    setAggregateErrorObj(
+    setAggregateErrorObject(
       'undefined' !== typeof globalThis && 'AggregateError' in globalThis
         ? (globalThis as any).AggregateError
         : undefined
     );
   }, []);
 
-  return aggregateErrorObj;
+  return aggregateErrorObject;
 }
 
 // SSR-Safe InternalError Hook
 export function useInternalError() {
-  const [internalErrorObj, setInternalErrorObj] = useState<any | null>(null);
+  const [internalErrorObject, setInternalErrorObject] = useState<any | null>(undefined);
 
   useEffect(() => {
-    setInternalErrorObj(
+    setInternalErrorObject(
       'undefined' !== typeof globalThis && 'InternalError' in globalThis
         ? (globalThis as any).InternalError
         : undefined
     );
   }, []);
 
-  return internalErrorObj;
+  return internalErrorObject;
 }
 
 // SSR-Safe Promise Hook
 export function usePromise() {
-  const [promiseObj, setPromiseObj] = useState<typeof Promise | null>(
+  const [promiseObject, setPromiseObject] = useState<typeof Promise | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setPromiseObj('undefined' !== typeof Promise ? Promise : undefined);
+
+    setPromiseObject('undefined' === typeof Promise ? undefined : Promise);
   }, []);
 
-  return promiseObj;
+  return promiseObject;
 }
 
 // SSR-Safe Symbol Hook
 export function useSymbol() {
-  const [symbolObj, setSymbolObj] = useState<typeof Symbol | null | null>(null);
+  const [symbolObject, setSymbolObject] = useState<typeof Symbol | null | null>(undefined);
 
   useEffect(() => {
-    setSymbolObj('undefined' !== typeof Symbol ? Symbol : undefined);
+
+    setSymbolObject('undefined' === typeof Symbol ? undefined : Symbol);
   }, []);
 
-  return symbolObj;
+  return symbolObject;
 }
 
 // SSR-Safe BigInt Hook
 export function useBigInt() {
-  const [bigIntObj, setBigIntObj] = useState<typeof BigInt | null | null>(null);
+  const [bigIntObject, setBigIntObject] = useState<typeof BigInt | null | null>(undefined);
 
   useEffect(() => {
-    setBigIntObj('undefined' !== typeof BigInt ? BigInt : undefined);
+
+    setBigIntObject('undefined' === typeof BigInt ? undefined : BigInt);
   }, []);
 
-  return bigIntObj;
+  return bigIntObject;
 }
 
 // SSR-Safe Proxy Hook
 export function useProxy() {
-  const [proxyObj, setProxyObj] = useState<typeof Proxy | null | null>(null);
+  const [proxyObject, setProxyObject] = useState<typeof Proxy | null | null>(undefined);
 
   useEffect(() => {
-    setProxyObj('undefined' !== typeof Proxy ? Proxy : undefined);
+
+    setProxyObject('undefined' === typeof Proxy ? undefined : Proxy);
   }, []);
 
-  return proxyObj;
+  return proxyObject;
 }
 
 // SSR-Safe Reflect Hook
 export function useReflect() {
-  const [reflectObj, setReflectObj] = useState<typeof Reflect | null>(
+  const [reflectObject, setReflectObject] = useState<typeof Reflect | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setReflectObj('undefined' !== typeof Reflect ? Reflect : undefined);
+
+    setReflectObject('undefined' === typeof Reflect ? undefined : Reflect);
   }, []);
 
-  return reflectObj;
+  return reflectObject;
 }
 
 // SSR-Safe Intl Hook
 export function useIntl() {
-  const [intlObj, setIntlObj] = useState<typeof Intl | null | null>(null);
+  const [intlObject, setIntlObject] = useState<typeof Intl | null | null>(undefined);
 
   useEffect(() => {
-    setIntlObj('undefined' !== typeof Intl ? Intl : undefined);
+
+    setIntlObject('undefined' === typeof Intl ? undefined : Intl);
   }, []);
 
-  return intlObj;
+  return intlObject;
 }
 
 // SSR-Safe Date Hook
 export function useDate() {
-  const [dateObj, setDateObj] = useState<Date | null | null>(null);
+  const [dateObject, setDateObject] = useState<Date | null | null>(undefined);
 
   useEffect(() => {
-    setDateObj('undefined' !== typeof Date ? new Date() : undefined);
+
+    setDateObject('undefined' === typeof Date ? undefined : new Date());
   }, []);
 
-  return dateObj;
+  return dateObject;
 }
 
 // SSR-Safe RegExp Hook
 export function useRegExp() {
-  const [regExpObj, setRegExpObj] = useState<typeof RegExp | null | null>(null);
+  const [regExpObject, setRegExpObject] = useState<typeof RegExp | null | null>(undefined);
 
   useEffect(() => {
-    setRegExpObj('undefined' !== typeof RegExp ? RegExp : undefined);
+
+    setRegExpObject('undefined' === typeof RegExp ? undefined : RegExp);
   }, []);
 
-  return regExpObj;
+  return regExpObject;
 }
 
 // SSR-Safe Array Hook
 export function useArray() {
-  const [arrayObj, setArrayObj] = useState<typeof Array | null | null>(null);
+  const [arrayObject, setArrayObject] = useState<typeof Array | null | null>(undefined);
 
   useEffect(() => {
-    setArrayObj('undefined' !== typeof Array ? Array : undefined);
+
+    setArrayObject('undefined' === typeof Array ? undefined : Array);
   }, []);
 
-  return arrayObj;
+  return arrayObject;
 }
 
 // SSR-Safe Object Hook
 export function useObject() {
-  const [objectObj, setObjectObj] = useState<typeof Object | null | null>(null);
+  const [objectObject, setObject] = useState<typeof Object | null | null>(undefined);
 
   useEffect(() => {
-    setObjectObj('undefined' !== typeof Object ? Object : undefined);
+
+    setObject('undefined' === typeof Object ? undefined : Object);
   }, []);
 
-  return objectObj;
+  return objectObject;
 }
 
 // SSR-Safe String Hook
 export function useString() {
-  const [stringObj, setStringObj] = useState<typeof String | null | null>(null);
+  const [stringObject, setStringObject] = useState<typeof String | null | null>(undefined);
 
   useEffect(() => {
-    setStringObj('undefined' !== typeof String ? String : undefined);
+
+    setStringObject('undefined' === typeof String ? undefined : String);
   }, []);
 
-  return stringObj;
+  return stringObject;
 }
 
 // SSR-Safe Number Hook
 export function useNumber() {
-  const [numberObj, setNumberObj] = useState<typeof Number | null | null>(null);
+  const [numberObject, setNumberObject] = useState<typeof Number | null | null>(undefined);
 
   useEffect(() => {
-    setNumberObj('undefined' !== typeof Number ? Number : undefined);
+
+    setNumberObject('undefined' === typeof Number ? undefined : Number);
   }, []);
 
-  return numberObj;
+  return numberObject;
 }
 
 // SSR-Safe Boolean Hook
 export function useBoolean() {
-  const [booleanObj, setBooleanObj] = useState<typeof Boolean | null>(
+  const [booleanObject, setBooleanObject] = useState<typeof Boolean | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setBooleanObj('undefined' !== typeof Boolean ? Boolean : undefined);
+
+    setBooleanObject('undefined' === typeof Boolean ? undefined : Boolean);
   }, []);
 
-  return booleanObj;
+  return booleanObject;
 }
 
 // SSR-Safe Function Hook
 export function useFunction() {
-  const [functionObj, setFunctionObj] = useState<typeof Function | null>(
+  const [functionObject, setFunctionObject] = useState<typeof Function | null>(
+
     undefined
   );
 
   useEffect(() => {
-    setFunctionObj('undefined' !== typeof Function ? Function : undefined);
+
+    setFunctionObject('undefined' === typeof Function ? undefined : Function);
   }, []);
 
-  return functionObj;
+  return functionObject;
 }
 
 // SSR-Safe Map Hook
 export function useMap() {
-  const [mapObj, setMapObj] = useState<typeof Map | null | null>(null);
+  const [mapObject, setMapObject] = useState<typeof Map | null | null>(undefined);
 
   useEffect(() => {
-    setMapObj('undefined' !== typeof Map ? Map : undefined);
+
+    setMapObject('undefined' === typeof Map ? undefined : Map);
   }, []);
 
-  return mapObj;
+  return mapObject;
 }

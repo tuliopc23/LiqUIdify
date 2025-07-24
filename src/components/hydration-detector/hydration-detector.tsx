@@ -5,7 +5,9 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
+
 import type { HydrationMismatch } from "../../utils/hydration-utils";
+
 import { HydrationManager } from "../../utils/hydration-utils";
 import { isBrowser } from "../../utils/ssr-utils";
 
@@ -25,6 +27,7 @@ export interface HydrationDetectorProps {
  */
 export function HydrationDetector({
 	children,
+
 	fallback = <div>Loading...</div>,
 	onMismatch,
 	onRecovery,
@@ -42,7 +45,7 @@ export function HydrationDetector({
 
 	useEffect(() => {
 		if (!isBrowser()) {
-			setHydrationState((prev) => ({ ...prev, isReady: true }));
+			setHydrationState((previous) => ({ ...previous, isReady: true }));
 			return;
 		}
 
@@ -75,10 +78,10 @@ export function HydrationDetector({
         // Recovery triggered - hydration mismatch detected
 			}
 
-			setHydrationState((prev) => ({
-				...prev,
+			setHydrationState((previous) => ({
+				...previous,
 				hasMismatch: false,
-				retryCount: prev.retryCount + 1,
+				retryCount: previous.retryCount + 1,
 			}));
 
 			onRecovery?.();
@@ -103,7 +106,7 @@ export function HydrationDetector({
 
 		// Mark as ready after initial setup
 		setTimeout(() => {
-			setHydrationState((prev) => ({ ...prev, isReady: true }));
+			setHydrationState((previous) => ({ ...previous, isReady: true }));
 		}, 0);
 
 		return () => {
@@ -115,17 +118,20 @@ export function HydrationDetector({
 
 	// Server-side rendering
 	if (!isBrowser()) {
+
 		return <>{children}</>;
 	}
 
 	// Still initializing
 	if (!hydrationState.isReady) {
+
 		return <>{fallback}</>;
 	}
 
 	// Hydration error with exhausted retries
 	if (hydrationState.hasMismatch && hydrationState.retryCount >= maxRetries) {
 		return (
+
 			<div
 				data-hydration-error="true"
 				data-retry-count={hydrationState.retryCount}
@@ -137,6 +143,7 @@ export function HydrationDetector({
 
 	// Normal rendering
 	return (
+
 		<div
 			data-hydration-state={
 				hydrationState.isHydrating ? "hydrating" : "hydrated"
@@ -157,6 +164,7 @@ export function HydrationBoundary({
 	children,
 	...props
 }: HydrationDetectorProps) {
+
 	return <HydrationDetector {...props}>{children}</HydrationDetector>;
 }
 
@@ -170,7 +178,9 @@ export function HydrationSafe({
 	...props
 }: HydrationDetectorProps & { componentName?: string }) {
 	return (
+
 		<HydrationDetector {...props}>
+
 			<div data-component={componentName} data-hydration-safe="true">
 				{children}
 			</div>
@@ -217,6 +227,7 @@ export function HydrationMetrics({ debug = false }: { debug?: boolean }) {
 	}
 
 	return (
+
 		<div
 			style={{
 				position: "fixed",
@@ -229,7 +240,9 @@ export function HydrationMetrics({ debug = false }: { debug?: boolean }) {
 				zIndex: 9999,
 			}}
 		>
+
 			<div>Hydration Duration: {metrics.duration.toFixed(2)}ms</div>
+
 			<div>Mismatches: {metrics.mismatches}</div>
 		</div>
 	);
@@ -262,11 +275,14 @@ export function HydrationRecovery({
 	}, []);
 
 	if (!showRecovery) {
+
 		return <>{children}</>;
 	}
 
 	return (
+
 		<div>
+
 			<div
 				style={{
 					background: "red",
@@ -275,7 +291,9 @@ export function HydrationRecovery({
 					margin: "10px",
 				}}
 			>
+
 				<p>Hydration error detected</p>
+
 				<button onClick={onRecover}>Recover</button>
 			</div>
 			{children}

@@ -8,6 +8,7 @@
 export {
   useContentAwareGlass,
   useLiquidGlass,
+
 } from '../hooks/use-liquid-glass';
 // Physics utilities
 export { createGlassRipple, useMagneticHover } from '../lib/glass-physics';

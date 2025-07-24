@@ -2,7 +2,7 @@
 
 console.log("🏁 Performance Comparison: Legacy vs OXC\n");
 
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
 
 // Function to measure execution time
 function measureTime(name, command) {
@@ -14,12 +14,12 @@ function measureTime(name, command) {
 		const end = performance.now();
 		const duration = ((end - start) / 1000).toFixed(2);
 		console.log(`  ✅ ${name}: ${duration}s`);
-		return parseFloat(duration);
-	} catch (error) {
+		return Number.parseFloat(duration);
+	} catch {
 		const end = performance.now();
 		const duration = ((end - start) / 1000).toFixed(2);
 		console.log(`  ❌ ${name}: ${duration}s (with errors)`);
-		return parseFloat(duration);
+		return Number.parseFloat(duration);
 	}
 }
 

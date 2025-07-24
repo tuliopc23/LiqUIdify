@@ -1,6 +1,7 @@
 import { Slot } from "@radix-ui/react-slot";
 import type React from "react";
 import { forwardRef, useEffect, useState } from "react";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassResponsiveButtonProps
@@ -130,6 +131,7 @@ const GlassResponsiveButton = forwardRef<
 		};
 
 		return (
+
 			<Comp
 				className={cn(
 					baseClasses,
@@ -149,7 +151,9 @@ const GlassResponsiveButton = forwardRef<
 			>
 				{/* Loading state overlay */}
 				{loading && (
+
 					<div className="absolute inset-0 flex items-center justify-center bg-current/10 rounded-xl">
+
 						<div
 							className={cn(
 								"animate-spin rounded-full border-2 border-current border-t-transparent",
@@ -166,12 +170,15 @@ const GlassResponsiveButton = forwardRef<
 					)}
 				>
 					{leftIcon && (
+
 						<span className={cn("flex-shrink-0", iconSizeClasses[size])}>
 							{leftIcon}
 						</span>
 					)}
+
 					<span className="truncate font-medium">{children}</span>
 					{rightIcon && (
+
 						<span className={cn("flex-shrink-0", iconSizeClasses[size])}>
 							{rightIcon}
 						</span>

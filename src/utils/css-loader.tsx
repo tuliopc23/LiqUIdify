@@ -73,24 +73,24 @@ export function loadCSS(
     }
 
     // Handle load event
-    link.onload = () => {
+    link.addEventListener('load', () => {
       loadedCSS.add(url);
       loadingCSS.delete(url);
       onLoad?.();
       resolve();
-    };
+    });
 
     // Handle error event
     link.onerror = () => {
       loadingCSS.delete(url);
-      const errorObj = new Error(`Failed to load CSS: ${url}`);
-      onError?.(errorObj);
-      reject(errorObj);
+      const errorObject = new Error(`Failed to load CSS: ${url}`);
+      onError?.(errorObject);
+      reject(errorObject);
       // Error already handled via onError callback
     };
 
     // Add to document
-    document.head.appendChild(link);
+    document.head.append(link);
   });
 
   // Store promise
@@ -137,9 +137,9 @@ export function registerCSSChunk(name: string, url: string): void {
  * Register multiple CSS chunks
  */
 export function registerCSSChunks(chunks: Record<string, string>): void {
-  Object.entries(chunks).forEach(([name, url]) => {
+  for (const [name, url] of Object.entries(chunks)) {
     registerCSSChunk(name, url);
-  });
+  }
 }
 
 /**

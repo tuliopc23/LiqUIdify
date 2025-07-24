@@ -62,10 +62,10 @@ export function useMotionSafeAnimations<T extends Record<string, any>>(
       ...reducedMotionProps,
       // Common reduced motion overrides
       transition: { duration: 0.01 },
-      animate: undefined,
-      whileHover: undefined,
-      whileTap: undefined,
-      whileInView: undefined,
+      animate: null,
+      whileHover: null,
+      whileTap: null,
+      whileInView: null,
     } as T;
   }
 

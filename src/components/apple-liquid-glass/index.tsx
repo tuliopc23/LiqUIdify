@@ -7,8 +7,11 @@ import type React from "react";
 import type {
 	GlassIntensity,
 	UnifiedGlassProps,
+
 } from "@/core/glass/unified-glass-system";
+
 import { useUnifiedGlass } from "@/core/glass/unified-glass-system";
+
 import { cn } from "@/core/utils/classname";
 
 // Re-export from enhanced apple liquid glass lib
@@ -48,6 +51,7 @@ export function AppleLiquidGlassNav({
 	});
 
 	return (
+
 		<nav
 			ref={ref}
 			className={cn(
@@ -96,6 +100,7 @@ export function AppleLiquidGlass({
 	});
 
 	return (
+
 		<Component
 			ref={ref}
 			className={cn(
@@ -141,6 +146,7 @@ export function AppleLiquidGlassCard({
 	};
 
 	return (
+
 		<AppleLiquidGlass
 			className={cn(
 				"apple-liquid-glass-card",
@@ -196,8 +202,8 @@ export function AppleLiquidGlassButton({
 	};
 
 	return (
-		<button
-			className={cn(
+
+		<button className={cn(
 				"apple-liquid-glass-button",
 				"relative",
 				"backdrop-blur-xl",
@@ -215,7 +221,7 @@ export function AppleLiquidGlassButton({
 			}}
 			disabled={disabled}
 			onClick={onClick}
-			{...props}
+			{...(props as any)}
 		>
 			{children}
 		</button>

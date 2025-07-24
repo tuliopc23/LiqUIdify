@@ -1,7 +1,10 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+
 import { accessibilityManager } from "@/core/accessibility-manager";
+
 import { cn } from "@/core/utils/classname";
+
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface SkipLink {
@@ -41,7 +44,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 	const [links, setLinks] = useState<SkipLink[]>(providedLinks || []);
 	const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 	const containerRef = useRef<HTMLDivElement>(null);
-	const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+	const linkReferences = useRef<(HTMLAnchorElement | null)[]>([]);
 	const isClient = useIsClient();
 
 	// Auto-generate skip links for landmarks
@@ -54,11 +57,11 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 			const generatedLinks: SkipLink[] = [];
 
 			// Find landmark elements
-			DEFAULT_LANDMARKS.forEach(({ role, label, id }) => {
-				const elements = typeof document !== "undefined" ? document.querySelectorAll(`[role="${role}"]`) : [];
+			for (const { role, label, id } of DEFAULT_LANDMARKS) {
+				const elements = "undefined" === typeof document ? [] : document.querySelectorAll(`[role="${role}"]`);
 
-				if (0 < elements.length) {
-					elements.forEach((element, index) => {
+				if (elements.length > 0) {
+					for (const [index, element] of elements.entries()) {
 						const elementId = element.id || `${id}-${index}`;
 
 						// Ensure element has an ID
@@ -77,13 +80,13 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 							label: `Skip to ${accessibleName}`,
 							target: `#${elementId}`,
 						});
-					});
+					}
 				}
-			});
+			}
 
 			// Find headings
-			const headings = typeof document !== "undefined" ? document.querySelectorAll("h1, h2") : [];
-			headings.forEach((heading, index) => {
+			const headings = "undefined" === typeof document ? [] : document.querySelectorAll("h1, h2");
+			for (const [index, heading] of headings.entries()) {
 				if (!heading.id) {
 					heading.id = `heading-${index}`;
 				}
@@ -94,20 +97,20 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 					label: `Skip to "${text}"`,
 					target: `#${heading.id}`,
 				});
-			});
+			}
 
 			// Find forms
-			const forms = typeof document !== "undefined" ? document.querySelectorAll(
+			const forms = "undefined" === typeof document ? [] : document.querySelectorAll(
 				"form[aria-label], form[aria-labelledby]",
-			) : [];
-			forms.forEach((form, index) => {
+			);
+			for (const [index, form] of forms.entries()) {
 				if (!form.id) {
 					form.id = `form-${index}`;
 				}
 
 				const labelledById = form.getAttribute("aria-labelledby");
 				const labelElement = labelledById
-					? (typeof document !== "undefined" ? document.getElementById(labelledById) : null)
+					? ("undefined" === typeof document ? undefined : document.getElementById(labelledById))
 					: undefined;
 				const formName =
 					form.getAttribute("aria-label") ||
@@ -119,14 +122,14 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 					label: `Skip to ${formName}`,
 					target: `#${form.id}`,
 				});
-			});
+			}
 
 			setLinks(generatedLinks);
 		};
 
 		// Wait for DOM to be ready
 		if ("loading" === document.readyState) {
-			if (typeof document !== "undefined") {
+			if ("undefined" !== typeof document) {
 				document.addEventListener("DOMContentLoaded", generateSkipLinks);
 			}
 		} else {
@@ -164,9 +167,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 		if ("string" === typeof link.target) {
 			if (link.target.startsWith("#")) {
-				targetElement = typeof document !== "undefined" ? document.querySelector(link.target) : null;
+				targetElement = "undefined" === typeof document ? undefined : document.querySelector(link.target);
 			} else {
-				targetElement = typeof document !== "undefined" ? document.getElementById(link.target) : null;
+				targetElement = "undefined" === typeof document ? undefined : document.getElementById(link.target);
 			}
 		} else {
 			targetElement = link.target;
@@ -188,6 +191,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 			// Restore original tabindex after focus
 			if (!originalTabIndex) {
 				setTimeout(() => {
+
 					targetElement.removeAttribute("tabindex");
 				}, 100);
 			}
@@ -208,26 +212,30 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
 		switch (event.key) {
 			case "ArrowDown":
-			case "ArrowRight":
+			case "ArrowRight": {
 				newIndex = Math.min(index + 1, links.length - 1);
 				handled = true;
 				break;
+			}
 
 			case "ArrowUp":
-			case "ArrowLeft":
+			case "ArrowLeft": {
 				newIndex = Math.max(index - 1, 0);
 				handled = true;
 				break;
+			}
 
-			case "Home":
+			case "Home": {
 				newIndex = 0;
 				handled = true;
 				break;
+			}
 
-			case "End":
+			case "End": {
 				newIndex = links.length - 1;
 				handled = true;
 				break;
+			}
 
 			case "Enter":
 			case " ": {
@@ -243,8 +251,8 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 		if (handled) {
 			event.preventDefault();
 
-			if (newIndex !== index && linkRefs.current[newIndex]) {
-				linkRefs.current[newIndex]?.focus();
+			if (newIndex !== index && linkReferences.current[newIndex]) {
+				linkReferences.current[newIndex]?.focus();
 				setFocusedIndex(newIndex);
 			}
 		}
@@ -261,6 +269,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 		: "absolute z-50";
 
 	return (
+
 		<nav
 			ref={containerRef}
 			className={cn(
@@ -274,10 +283,11 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 			style={customStyles}
 		>
 			{links.map((link, index) => (
+
 				<a
 					key={link.id}
-					ref={(el) => {
-						linkRefs.current[index] = el;
+					ref={(element) => {
+						linkReferences.current[index] = element;
 					}}
 					href={"string" === typeof link.target ? link.target : `#${link.id}`}
 					className={cn(
@@ -301,6 +311,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 				>
 					{link.label}
 					{link.shortcut && (
+
 						<kbd className="text-xs bg-black/10 dark:bg-white/10 px-1 py-0.5 rounded">
 							{link.shortcut}
 						</kbd>
@@ -318,17 +329,17 @@ export function useSkipNavigation() {
 	const [skipLinks, setSkipLinks] = useState<SkipLink[]>([]);
 
 	const addSkipLink = (link: SkipLink) => {
-		setSkipLinks((prev) => {
-			const exists = prev.find((l) => l.id === link.id);
+		setSkipLinks((previous) => {
+			const exists = previous.find((l) => l.id === link.id);
 			if (exists) {
-				return prev;
+				return previous;
 			}
-			return [...prev, link];
+			return [...previous, link];
 		});
 	};
 
 	const removeSkipLink = (id: string) => {
-		setSkipLinks((prev) => prev.filter((l) => l.id !== id));
+		setSkipLinks((previous) => previous.filter((l) => l.id !== id));
 	};
 
 	const skipTo = (id: string) => {
@@ -346,9 +357,9 @@ export function useSkipNavigation() {
 
 		if ("string" === typeof link.target) {
 			if (link.target.startsWith("#")) {
-				targetElement = typeof document !== "undefined" ? document.querySelector(link.target) : null;
+				targetElement = "undefined" === typeof document ? undefined : document.querySelector(link.target);
 			} else {
-				targetElement = typeof document !== "undefined" ? document.getElementById(link.target) : null;
+				targetElement = "undefined" === typeof document ? undefined : document.getElementById(link.target);
 			}
 		} else {
 			targetElement = link.target;
@@ -365,6 +376,7 @@ export function useSkipNavigation() {
 
 			if (!originalTabIndex) {
 				setTimeout(() => {
+
 					targetElement.removeAttribute("tabindex");
 				}, 100);
 			}

@@ -6,6 +6,7 @@ import {
 import type React from 'react';
 import type { ReactElement } from 'react';
 import { vi } from 'vitest';
+
 import { GlassUIProvider } from '@/providers/glass-ui-provider';
 
 // Custom render function that includes providers
@@ -15,6 +16,7 @@ export function renderWithProviders(
 ): RenderResult {
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
+
       <GlassUIProvider theme="light" hapticConfig={{ enableVibration: false }}>
         {children}
       </GlassUIProvider>
@@ -33,6 +35,7 @@ export async function testA11y(container: HTMLElement) {
 
 // Helper to create mock props
 export function createMockProps<T>(overrides?: Partial<T>): T {
+
   return {
     onClick: vi.fn(),
     onChange: vi.fn(),
@@ -47,14 +50,14 @@ export function testKeyboardNavigation(
   element: HTMLElement,
   expectedOrder: HTMLElement[]
 ) {
-  expectedOrder.forEach((expected, index) => {
+  for (const [index, expected] of expectedOrder.entries()) {
     if (index > 0) {
       element.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'Tab', bubbles: true })
       );
     }
     expect(document.activeElement).toBe(expected);
-  });
+  }
 }
 
 // Helper to test focus trap
@@ -67,9 +70,9 @@ export function testFocusTrap(container: HTMLElement) {
 
   // Test forward tab
   const firstElement = focusableElements[0] as HTMLElement;
-  const lastElement = focusableElements[
-    focusableElements.length - 1
-  ] as HTMLElement;
+  const lastElement = focusableElements.at(
+    -1
+  ) as HTMLElement;
 
   firstElement.focus();
   expect(document.activeElement).toBe(firstElement);
@@ -110,11 +113,11 @@ export function testThemeChange(
   container: HTMLElement,
   toggleTheme: () => void
 ) {
-  const initialTheme = document.documentElement.getAttribute('data-theme');
+  const initialTheme = document.documentElement.dataset.theme;
 
   toggleTheme();
 
-  const newTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = document.documentElement.dataset.theme;
   expect(newTheme).not.toBe(initialTheme);
 
   // Check that components respond to theme change

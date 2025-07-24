@@ -11,6 +11,7 @@ import {
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+
 import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
 export interface CommandItem {
@@ -52,13 +53,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 	});
 
 	const categorizedItems = filteredItems.reduce(
-		(acc, item) => {
+		(accumulator, item) => {
 			const category = item.category || "General";
-			if (!acc[category]) {
-				acc[category] = [];
+			if (!accumulator[category]) {
+				accumulator[category] = [];
 			}
-			acc[category].push(item);
-			return acc;
+			accumulator[category].push(item);
+			return accumulator;
 		},
 		{} as Record<string, CommandItem[]>,
 	);
@@ -86,27 +87,31 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 			}
 
 			switch (e.key) {
-				case "ArrowDown":
+				case "ArrowDown": {
 					e.preventDefault();
-					setSelectedIndex((prev) =>
-						Math.min(prev + 1, allFilteredItems.length - 1),
+					setSelectedIndex((previous) =>
+						Math.min(previous + 1, allFilteredItems.length - 1),
 					);
 					break;
-				case "ArrowUp":
+				}
+				case "ArrowUp": {
 					e.preventDefault();
-					setSelectedIndex((prev) => Math.max(prev - 1, 0));
+					setSelectedIndex((previous) => Math.max(previous - 1, 0));
 					break;
-				case "Enter":
+				}
+				case "Enter": {
 					e.preventDefault();
 					if (allFilteredItems[selectedIndex]) {
 						allFilteredItems[selectedIndex].action();
 						handleClose();
 					}
 					break;
-				case "Escape":
+				}
+				case "Escape": {
 					e.preventDefault();
 					handleClose();
 					break;
+				}
 			}
 		};
 
@@ -137,29 +142,40 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 			.map((key) => {
 				switch (key.toLowerCase()) {
 					case "cmd":
-					case "command":
+					case "command": {
 						return "⌘";
-					case "ctrl":
+					}
+					case "ctrl": {
 						return "^";
-					case "shift":
+					}
+					case "shift": {
 						return "⇧";
+					}
 					case "alt":
-					case "option":
+					case "option": {
 						return "⌥";
-					case "enter":
+					}
+					case "enter": {
 						return "↵";
-					case "escape":
+					}
+					case "escape": {
 						return "⎋";
-					case "backspace":
+					}
+					case "backspace": {
 						return "⌫";
-					case "delete":
+					}
+					case "delete": {
 						return "⌦";
-					case "tab":
+					}
+					case "tab": {
 						return "⇥";
-					case "space":
+					}
+					case "space": {
 						return "␣";
-					default:
+					}
+					default: {
 						return key.toUpperCase();
+					}
 				}
 			})
 			.join("");
@@ -167,23 +183,36 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
 	const getCategoryIcon = (category: string) => {
 		switch (category.toLowerCase()) {
-			case "navigation":
+			case "navigation": {
+
 				return <ArrowRight className="w-4 h-4" />;
-			case "user":
+			}
+			case "user": {
+
 				return <User className="w-4 h-4" />;
-			case "settings":
+			}
+			case "settings": {
+
 				return <Settings className="w-4 h-4" />;
-			case "content":
+			}
+			case "content": {
+
 				return <FileText className="w-4 h-4" />;
-			case "actions":
+			}
+			case "actions": {
+
 				return <Zap className="w-4 h-4" />;
-			default:
+			}
+			default: {
+
 				return <Hash className="w-4 h-4" />;
+			}
 		}
 	};
 
 	if (!isOpen) {
 		return (
+
 			<button
 				onClick={() => setIsOpen(true)}
 				className={cn(
@@ -195,10 +224,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 					className,
 				)}
 			>
+
 				<Search className="w-4 h-4" />
+
 				<span>Search...</span>
+
 				<div className="ml-auto flex items-center gap-1">
 					{shortcut.map((key, index) => (
+
 						<kbd
 							key={index}
 							className="px-1.5 py-0.5 text-xs rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]"
@@ -217,8 +250,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 	}
 
 	return createPortal(
+
 		<div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh]">
 			{/* Backdrop */}
+
 			<button
 				className="absolute inset-0 bg-black/20 backdrop-blur-sm"
 				onClick={handleClose}
@@ -232,6 +267,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 			/>
 
 			{/* Command Palette */}
+
 			<div
 				ref={containerRef}
 				className={cn(
@@ -242,8 +278,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 				)}
 			>
 				{/* Search Input */}
+
 				<div className="flex items-center gap-3 p-4 border-b border-[var(--glass-border)]">
+
 					<Search className="w-5 h-5 text-[var(--text-secondary)] flex-shrink-0" />
+
 					<input
 						ref={inputRef}
 						type="text"
@@ -256,17 +295,23 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 							"text-lg",
 						)}
 					/>
+
 					<kbd className="px-2 py-1 text-xs rounded bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--text-tertiary)]">
 						ESC
 					</kbd>
 				</div>
 
 				{/* Results */}
+
 				<div className="max-h-96 overflow-y-auto">
-					{0 === Object.entries(categorizedItems).length ? (
+					{Object.entries(categorizedItems).length === 0 ? (
+
 						<div className="p-8 text-center">
+
 							<Search className="w-8 h-8 text-[var(--text-tertiary)] mx-auto mb-2" />
+
 							<p className="text-[var(--text-secondary)]">No results found</p>
+
 							<p className="text-[var(--text-tertiary)] text-sm mt-1">
 								Try a different search term
 							</p>
@@ -274,8 +319,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 					) : (
 						Object.entries(categorizedItems).map(
 							([category, categoryItems]) => (
+
 								<div key={category} className="py-2">
 									{/* Category Header */}
+
 									<div className="flex items-center gap-2 px-4 py-2 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
 										{getCategoryIcon(category)}
 										{category}
@@ -287,6 +334,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 										const isSelected = globalIndex === selectedIndex;
 
 										return (
+
 											<button
 												key={item.id}
 												onClick={() => {
@@ -302,17 +350,21 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 											>
 												{/* Icon */}
 												{item.icon && (
+
 													<div className="w-8 h-8 flex items-center justify-center rounded-lg bg-[var(--glass-bg)] text-[var(--text-secondary)]">
 														{item.icon}
 													</div>
 												)}
 
 												{/* Content */}
+
 												<div className="flex-1 min-w-0">
+
 													<div className="font-medium text-[var(--text-primary)] truncate">
 														{item.label}
 													</div>
 													{item.description && (
+
 														<div className="text-sm text-[var(--text-secondary)] truncate">
 															{item.description}
 														</div>
@@ -321,8 +373,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
 												{/* Shortcut */}
 												{item.shortcut && (
+
 													<div className="flex items-center gap-1">
 														{item.shortcut.map((key, index) => (
+
 															<kbd
 																key={index}
 																className="px-1.5 py-0.5 text-xs rounded bg-[var(--glass-bg)] border border-[var(--glass-border)]"
@@ -334,6 +388,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 												)}
 
 												{/* Arrow */}
+
 												<ArrowRight className="w-4 h-4 text-[var(--text-tertiary)]" />
 											</button>
 										);
@@ -345,13 +400,20 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 				</div>
 
 				{/* Footer */}
+
 				<div className="flex items-center justify-between px-4 py-3 border-t border-[var(--glass-border)] text-xs text-[var(--text-tertiary)]">
+
 					<div className="flex items-center gap-4">
+
 						<span>Navigate with ↑↓</span>
+
 						<span>Select with ↵</span>
 					</div>
+
 					<div className="flex items-center gap-1">
+
 						<Command className="w-3 h-3" />
+
 						<span>Command Palette</span>
 					</div>
 				</div>

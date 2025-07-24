@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Lock, Mail, Search as SearchIcon } from "lucide-react";
+// @ts-expect-error TS(6142): Module './glass-input' was resolved to '/Users/tul... Remove this comment to see the full error message
 import { GlassInput } from "./glass-input";
 
 const meta: Meta<typeof GlassInput> = {
@@ -90,24 +91,33 @@ export const Email: Story = {
 	args: {
 		variant: "email",
 		placeholder: "Enter email...",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		leftIcon: <Mail className="h-4 w-4" />,
 	},
 };
 
 export const WithIcons: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="flex flex-col gap-4 w-80">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput
 				placeholder="With left icon"
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				leftIcon={<SearchIcon className="h-4 w-4" />}
 			/>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput
 				placeholder="With right icon"
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				rightIcon={<Lock className="h-4 w-4" />}
 			/>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput
 				placeholder="With both icons"
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				leftIcon={<Mail className="h-4 w-4" />}
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				rightIcon={<Lock className="h-4 w-4" />}
 			/>
 		</div>
@@ -116,11 +126,17 @@ export const WithIcons: Story = {
 
 export const States: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="flex flex-col gap-4 w-80">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput placeholder="Normal state" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput placeholder="Disabled state" disabled />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput placeholder="Error state" error />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput placeholder="With value" defaultValue="Some text" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput placeholder="Clearable" clearable defaultValue="Clear me" />
 		</div>
 	),

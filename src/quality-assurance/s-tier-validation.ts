@@ -323,24 +323,24 @@ export class STierValidator {
     let report = `# S-tier Validation Report\n\n`;
     report += `**Overall Score: ${totalScore.toFixed(1)}/100**\n\n`;
 
-    results.forEach((result) => {
+    for (const result of results) {
       report += `## ${result.category}\n`;
       report += `**Score: ${result.score}/100**\n\n`;
 
-      result.checks.forEach((check) => {
+      for (const check of result.checks) {
         const status = check.passed ? '✅' : '❌';
         report += `- ${status} **${check.name}**: ${check.details}\n`;
-      });
+      }
 
-      if (0 < result.recommendations.length) {
+      if (result.recommendations.length > 0) {
         report += `\n**Recommendations:**\n`;
-        result.recommendations.forEach((rec) => {
+        for (const rec of result.recommendations) {
           report += `- ${rec}\n`;
-        });
+        }
       }
 
       report += '\n';
-    });
+    }
 
     return report;
   }

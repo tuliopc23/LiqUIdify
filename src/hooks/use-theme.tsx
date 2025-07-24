@@ -53,7 +53,7 @@ export function ThemeProvider({
     root.classList.add(theme);
 
     // Set data attribute for theme
-    root.setAttribute('data-theme', theme);
+    root.dataset.theme = theme;
 
     // Set CSS custom properties based on theme
     const themeProperties = {
@@ -182,18 +182,18 @@ export function ThemeProvider({
     };
 
     // Apply all theme properties
-    Object.entries(themeProperties).forEach(([property, value]) => {
+    for (const [property, value] of Object.entries(themeProperties)) {
       root.style.setProperty(property, String(value));
-    });
+    }
 
     // Update body class for additional styling
     if (document.body) {
-      document.body.className = `${document.body.className.replace(/\b(light|dark)\b/g, '')} ${theme}`;
+      document.body.className = `${document.body.className.replaceAll(/\b(light|dark)\b/g, '')} ${theme}`;
     }
 
     console.log(`🎨 Theme applied: ${theme}`, {
       properties: Object.keys(themeProperties).length,
-      dataTheme: root.getAttribute('data-theme'),
+      dataTheme: root.dataset.theme,
     });
   }, [theme]);
 
@@ -212,6 +212,7 @@ export function ThemeProvider({
   };
 
   return (
+
     <ThemeProviderContext.Provider {...props} value={value}>
       {children}
     </ThemeProviderContext.Provider>

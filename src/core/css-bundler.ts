@@ -178,7 +178,7 @@ export class CSSBundler {
       }
     }
 
-    if (0 === combinedCSS.length) {
+    if (combinedCSS.length === 0) {
       throw new Error(`No CSS files found for bundle "${name}"`);
     }
 
@@ -240,7 +240,7 @@ export class CSSBundler {
       );
     }
 
-    const result = await postcss(plugins).process(css, { from: undefined });
+    const result = await postcss(plugins).process(css, { from: null });
     return result.css;
   }
 
@@ -250,9 +250,9 @@ export class CSSBundler {
   private async calculateGzipSize(content: string): Promise<number> {
     const zlib = require('node:zlib');
     return new Promise((resolve, reject) => {
-      zlib.gzip(content, (err: any, compressed: Buffer) => {
-        if (err) {
-          reject(err);
+      zlib.gzip(content, (error: any, compressed: Buffer) => {
+        if (error) {
+          reject(error);
         } else {
           resolve(compressed.length);
         }
@@ -274,7 +274,7 @@ export class CSSBundler {
       preload: [] as string[],
     };
 
-    Object.entries(this.config).forEach(([bundleName, config]) => {
+    for (const [bundleName, config] of Object.entries(this.config)) {
       const bundlePath = `${bundleName}.css`;
 
       if (config.critical) {
@@ -284,7 +284,7 @@ export class CSSBundler {
       } else {
         strategy.preload.push(bundlePath);
       }
-    });
+    }
 
     return strategy;
   }
@@ -325,9 +325,9 @@ export class CSSBundler {
 
     // Get all files to watch
     const filesToWatch: string[] = [];
-    Object.values(this.config).forEach((config) => {
+    for (const config of Object.values(this.config)) {
       filesToWatch.push(...config.files);
-    });
+    }
 
     const watcher = chokidar.watch(filesToWatch, {
       ignored: /node_modules/,
@@ -385,7 +385,7 @@ export class BundleSizeValidator {
     }[] = [];
 
     // Check individual bundle sizes
-    result.bundles.forEach((bundle) => {
+    for (const bundle of result.bundles) {
       const limit = this.thresholds[bundle.name];
       if (limit && bundle.size > limit) {
         violations.push({
@@ -395,7 +395,7 @@ export class BundleSizeValidator {
           severity: bundle.critical ? 'error' : 'warning',
         });
       }
-    });
+    }
 
     // Check total critical size
     if (this.thresholds.total && result.criticalSize > this.thresholds.total) {
@@ -408,7 +408,7 @@ export class BundleSizeValidator {
     }
 
     return {
-      passed: 0 === violations.filter((v) => 'error' === v.severity).length,
+      passed: violations.filter((v) => 'error' === v.severity).length === 0,
       violations,
     };
   }

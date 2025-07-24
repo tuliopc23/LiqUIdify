@@ -1,6 +1,7 @@
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassPopoverProps {
@@ -33,7 +34,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 	const triggerRef = useRef<HTMLButtonElement>(null);
 	const popoverRef = useRef<HTMLDivElement>(null);
 
-	const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
+	const isOpen = controlledOpen === undefined ? internalOpen : controlledOpen;
 
 	const setOpen = useCallback(
 		(open: boolean) => {
@@ -63,72 +64,88 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 
 			// Calculate position
 			switch (position) {
-				case "top":
+				case "top": {
 					top = triggerRect.top - popoverRect.height - 8;
 					switch (align) {
-						case "start":
+						case "start": {
 							left = triggerRect.left;
 							break;
-						case "center":
+						}
+						case "center": {
 							left =
 								triggerRect.left + (triggerRect.width - popoverRect.width) / 2;
 							break;
-						case "end":
+						}
+						case "end": {
 							left = triggerRect.right - popoverRect.width;
 							break;
+						}
 					}
 					break;
-				case "bottom":
+				}
+				case "bottom": {
 					top = triggerRect.bottom + 8;
 					switch (align) {
-						case "start":
+						case "start": {
 							left = triggerRect.left;
 							break;
-						case "center":
+						}
+						case "center": {
 							left =
 								triggerRect.left + (triggerRect.width - popoverRect.width) / 2;
 							break;
-						case "end":
+						}
+						case "end": {
 							left = triggerRect.right - popoverRect.width;
 							break;
+						}
 					}
 					break;
-				case "left":
+				}
+				case "left": {
 					left = triggerRect.left - popoverRect.width - 8;
 					switch (align) {
-						case "start":
+						case "start": {
 							top = triggerRect.top;
 							break;
-						case "center":
+						}
+						case "center": {
 							top =
 								triggerRect.top + (triggerRect.height - popoverRect.height) / 2;
 							break;
-						case "end":
+						}
+						case "end": {
 							top = triggerRect.bottom - popoverRect.height;
 							break;
+						}
 					}
 					break;
-				case "right":
+				}
+				case "right": {
 					left = triggerRect.right + 8;
 					switch (align) {
-						case "start":
+						case "start": {
 							top = triggerRect.top;
 							break;
-						case "center":
+						}
+						case "center": {
 							top =
 								triggerRect.top + (triggerRect.height - popoverRect.height) / 2;
 							break;
-						case "end":
+						}
+						case "end": {
 							top = triggerRect.bottom - popoverRect.height;
 							break;
+						}
 					}
 					break;
+				}
 			}
 
 			// Keep popover within viewport
 			const viewport = {
-				width: typeof window !== "undefined" ? window.innerWidth : 1024,
-				height: typeof window !== "undefined" ? window.innerHeight : 768,
+				width: "undefined" === typeof window ? 1024 : window.innerWidth,
+				height: "undefined" === typeof window ? 768 : window.innerHeight,
 			};
 
 			if (8 > left) {
@@ -174,19 +191,19 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 		};
 
 		if (isOpen) {
-			if (typeof document !== "undefined") {
+			if ("undefined" !== typeof document) {
 				document.addEventListener("mousedown", handleClickOutside);
 				document.addEventListener("keydown", handleEscape);
 			}
 		} else {
-			if (typeof document !== "undefined") {
+			if ("undefined" !== typeof document) {
 				document.removeEventListener("mousedown", handleClickOutside);
 				document.removeEventListener("keydown", handleEscape);
 			}
 		}
 
 		return () => {
-			if (typeof document !== "undefined") {
+			if ("undefined" !== typeof document) {
 				document.removeEventListener("mousedown", handleClickOutside);
 				document.removeEventListener("keydown", handleEscape);
 			}
@@ -194,6 +211,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 	}, [isOpen, closeOnClickOutside, closeOnEscape, setOpen]);
 
 	const popover = isOpen ? (
+
 		<div
 			ref={popoverRef}
 			style={popoverStyle}
@@ -212,7 +230,9 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 	) : undefined;
 
 	return (
+
 		<>
+
 			<button
 				ref={triggerRef}
 				onClick={toggleOpen}

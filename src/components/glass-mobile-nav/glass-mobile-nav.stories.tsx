@@ -11,6 +11,7 @@ import {
 	Star,
 	User,
 } from "lucide-react";
+// @ts-expect-error TS(6142): Module './glass-mobile-nav' was resolved to '/User... Remove this comment to see the full error message
 import { GlassMobileNav } from "./glass-mobile-nav";
 
 const meta: Meta<typeof GlassMobileNav> = {
@@ -42,24 +43,28 @@ const basicNavItems = [
 		id: "home",
 		label: "Home",
 		href: "/",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Home className="w-5 h-5" />,
 	},
 	{
 		id: "profile",
 		label: "Profile",
 		href: "/profile",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <User className="w-5 h-5" />,
 	},
 	{
 		id: "settings",
 		label: "Settings",
 		href: "/settings",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Settings className="w-5 h-5" />,
 	},
 	{
 		id: "contact",
 		label: "Contact",
 		href: "/contact",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Mail className="w-5 h-5" />,
 	},
 ];
@@ -69,11 +74,13 @@ const nestedNavItems = [
 		id: "home",
 		label: "Home",
 		href: "/",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Home className="w-5 h-5" />,
 	},
 	{
 		id: "services",
 		label: "Services",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Star className="w-5 h-5" />,
 		children: [
 			{
@@ -96,6 +103,7 @@ const nestedNavItems = [
 	{
 		id: "products",
 		label: "Products",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Search className="w-5 h-5" />,
 		children: [
 			{
@@ -119,6 +127,7 @@ const nestedNavItems = [
 		id: "contact",
 		label: "Contact",
 		href: "/contact",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Phone className="w-5 h-5" />,
 	},
 ];
@@ -128,11 +137,13 @@ const complexNavItems = [
 		id: "dashboard",
 		label: "Dashboard",
 		href: "/dashboard",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Home className="w-5 h-5" />,
 	},
 	{
 		id: "account",
 		label: "Account",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <User className="w-5 h-5" />,
 		children: [
 			{
@@ -160,6 +171,7 @@ const complexNavItems = [
 	{
 		id: "workspace",
 		label: "Workspace",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Calendar className="w-5 h-5" />,
 		children: [
 			{
@@ -182,6 +194,7 @@ const complexNavItems = [
 	{
 		id: "support",
 		label: "Support",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Bell className="w-5 h-5" />,
 		children: [
 			{
@@ -205,6 +218,7 @@ const complexNavItems = [
 		id: "settings",
 		label: "Settings",
 		href: "/settings",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Settings className="w-5 h-5" />,
 	},
 ];
@@ -260,17 +274,20 @@ export const WithActions: Story = {
 				id: "home",
 				label: "Home",
 				href: "/",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				icon: <Home className="w-5 h-5" />,
 			},
 			{
 				id: "favorites",
 				label: "Add to Favorites",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				icon: <Heart className="w-5 h-5" />,
 				action: () => alert("Added to favorites!"),
 			},
 			{
 				id: "notifications",
 				label: "Enable Notifications",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				icon: <Bell className="w-5 h-5" />,
 				action: () => alert("Notifications enabled!"),
 			},
@@ -278,6 +295,7 @@ export const WithActions: Story = {
 				id: "settings",
 				label: "Settings",
 				href: "/settings",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				icon: <Settings className="w-5 h-5" />,
 			},
 		],

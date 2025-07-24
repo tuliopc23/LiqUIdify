@@ -54,9 +54,9 @@ export const safeNavigator = (): Navigator | undefined => {
  */
 export const safeLocalStorage = (): Storage | null => {
   try {
-    return isBrowser() && window.localStorage ? window.localStorage : null;
+    return isBrowser() && window.localStorage ? window.localStorage : undefined;
   } catch {
-    return null;
+    return ;
   }
 };
 
@@ -68,9 +68,9 @@ export const safeSessionStorage = (): Storage | null => {
   try {
     return isBrowser() && window.sessionStorage
       ? window.sessionStorage
-      : null;
+      : undefined;
   } catch {
-    return null;
+    return ;
   }
 };
 
@@ -161,7 +161,7 @@ export const setSessionStorageItem = <T>(key: string, value: T): boolean => {
  */
 export const safeMatchMedia = (query: string): MediaQueryList | null => {
   const win = safeWindow();
-  return win?.matchMedia ? win.matchMedia(query) : null;
+  return win?.matchMedia ? win.matchMedia(query) : undefined;
 };
 
 /**
@@ -175,7 +175,7 @@ export const safeRequestAnimationFrame = (
   const win = safeWindow();
   return win?.requestAnimationFrame
     ? win.requestAnimationFrame(callback)
-    : null;
+    : undefined;
 };
 
 /**
@@ -202,7 +202,7 @@ export const safeSetTimeout = (
   if ('undefined' !== typeof setTimeout) {
     return setTimeout(callback, delay);
   }
-  return null;
+  return ;
 };
 
 /**
@@ -228,7 +228,7 @@ export const safeSetInterval = (
   if ('undefined' !== typeof setInterval) {
     return setInterval(callback, delay);
   }
-  return null;
+  return ;
 };
 
 /**
@@ -259,11 +259,11 @@ export const getWindowDimensions = (): { width: number; height: number } => {
  */
 export const getScrollPosition = (): { x: number; y: number } => {
   const win = safeWindow();
-  const doc = safeDocument();
+  const document_ = safeDocument();
 
   return {
-    x: win?.pageXOffset || doc?.documentElement?.scrollLeft || 0,
-    y: win?.pageYOffset || doc?.documentElement?.scrollTop || 0,
+    x: win?.pageXOffset || document_?.documentElement?.scrollLeft || 0,
+    y: win?.pageYOffset || document_?.documentElement?.scrollTop || 0,
   };
 };
 
@@ -334,17 +334,17 @@ export const isTouchDevice = (): boolean => {
  * @returns {Promise<T | null>} imported module or null
  */
 export const safeDynamicImport = async <T>(
-  importFn: () => Promise<T>
+  importFunction: () => Promise<T>
 ): Promise<T | null> => {
   if (!isBrowser()) {
-    return null;
+    return ;
   }
 
   try {
-    return await importFn();
+    return await importFunction();
   } catch {
     // Dynamic import failed, return null
-    return null;
+    return ;
   }
 };
 
@@ -372,7 +372,7 @@ export const safeIntersectionObserver = (
     return new IntersectionObserver(callback, options);
   }
 
-  return null;
+  return ;
 };
 
 /**
@@ -389,7 +389,7 @@ export const safeResizeObserver = (
     return new ResizeObserver(callback);
   }
 
-  return null;
+  return ;
 };
 
 /**
@@ -406,7 +406,7 @@ export const safeMutationObserver = (
     return new MutationObserver(callback);
   }
 
-  return null;
+  return ;
 };
 
 /**
@@ -429,7 +429,7 @@ export const safeGetComputedStyle = (
   element: Element
 ): CSSStyleDeclaration | null => {
   const win = safeWindow();
-  return win?.getComputedStyle ? win.getComputedStyle(element) : null;
+  return win?.getComputedStyle ? win.getComputedStyle(element) : undefined;
 };
 
 /**
@@ -440,8 +440,8 @@ export const safeGetComputedStyle = (
 export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
   tagName: K
 ): HTMLElementTagNameMap[K] | null => {
-  const doc = safeDocument();
-  return doc?.createElement ? doc.createElement(tagName) : null;
+  const document_ = safeDocument();
+  return document_?.createElement ? document_.createElement(tagName) : undefined;
 };
 
 /**
@@ -450,8 +450,8 @@ export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
  * @returns {Element | null} matched element or null
  */
 export const safeQuerySelector = (selector: string): Element | null => {
-  const doc = safeDocument();
-  return doc?.querySelector ? doc.querySelector(selector) : null;
+  const document_ = safeDocument();
+  return document_?.querySelector ? document_.querySelector(selector) : undefined;
 };
 
 /**
@@ -462,8 +462,8 @@ export const safeQuerySelector = (selector: string): Element | null => {
 export const safeQuerySelectorAll = (
   selector: string
 ): NodeListOf<Element> | [] => {
-  const doc = safeDocument();
-  return doc?.querySelectorAll ? doc.querySelectorAll(selector) : [];
+  const document_ = safeDocument();
+  return document_?.querySelectorAll ? document_.querySelectorAll(selector) : [];
 };
 
 /**
@@ -472,6 +472,6 @@ export const safeQuerySelectorAll = (
  * @returns {HTMLElement | null} matched element or null
  */
 export const safeGetElementById = (id: string): HTMLElement | null => {
-  const doc = safeDocument();
-  return doc?.getElementById ? doc.getElementById(id) : null;
+  const document_ = safeDocument();
+  return document_?.getElementById ? document_.getElementById(id) : undefined;
 };

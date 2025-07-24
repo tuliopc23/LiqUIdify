@@ -4,6 +4,7 @@
  */
 
 import type { ComponentType, ReactElement } from 'react';
+
 import type { GlassFeatureShowcaseProps } from '@/components/glass-feature-showcase';
 
 export interface ComponentDocumentation {
@@ -17,7 +18,7 @@ export interface ComponentDocumentation {
     | 'navigation'
     | 'data-display'
     | 'overlay';
-  props: PropDocumentation[];
+  props: PropertyDocumentation[];
   examples: ComponentExample[];
   accessibility: AccessibilityInfo;
   designTokens: string[];
@@ -26,7 +27,7 @@ export interface ComponentDocumentation {
   status: 'stable' | 'beta' | 'alpha' | 'deprecated';
 }
 
-export interface PropDocumentation {
+export interface PropertyDocumentation {
   name: string;
   type: string;
   description: string;
@@ -61,7 +62,7 @@ export interface AccessibilityInfo {
 }
 
 // Component documentation registry
-class ComponentDocRegistry {
+class ComponentDocumentRegistry {
   private docs = new Map<string, ComponentDocumentation>();
 
   register(componentName: string, documentation: ComponentDocumentation): void {
@@ -73,40 +74,40 @@ class ComponentDocRegistry {
   }
 
   getAll(): ComponentDocumentation[] {
-    return Array.from(this.docs.values());
+    return [...this.docs.values()];
   }
 
   getByCategory(
     category: ComponentDocumentation['category']
   ): ComponentDocumentation[] {
-    return this.getAll().filter((doc) => doc.category === category);
+    return this.getAll().filter((document_) => document_.category === category);
   }
 
   search(query: string): ComponentDocumentation[] {
     const lowercaseQuery = query.toLowerCase();
     return this.getAll().filter(
-      (doc) =>
-        doc.name.toLowerCase().includes(lowercaseQuery) ||
-        doc.description.toLowerCase().includes(lowercaseQuery) ||
-        doc.props.some(
-          (prop) =>
-            prop.name.toLowerCase().includes(lowercaseQuery) ||
-            prop.description.toLowerCase().includes(lowercaseQuery)
+      (document_) =>
+        document_.name.toLowerCase().includes(lowercaseQuery) ||
+        document_.description.toLowerCase().includes(lowercaseQuery) ||
+        document_.props.some(
+          (property) =>
+            property.name.toLowerCase().includes(lowercaseQuery) ||
+            property.description.toLowerCase().includes(lowercaseQuery)
         )
     );
   }
 }
 
-export const componentRegistry = new ComponentDocRegistry();
+export const componentRegistry = new ComponentDocumentRegistry();
 
 // Documentation generator utilities
 export function generatePropDocs(
   _component: ComponentType<any>,
-  customDocs?: Partial<Record<string, Omit<PropDocumentation, 'name'>>>
-): PropDocumentation[] {
+  customDocs?: Partial<Record<string, Omit<PropertyDocumentation, 'name'>>>
+): PropertyDocumentation[] {
   // This would integrate with TypeScript compiler API or react-docgen
   // For now, return a basic structure
-  const defaultProps: PropDocumentation[] = [
+  const defaultProps: PropertyDocumentation[] = [
     {
       name: 'className',
       type: 'string',
@@ -125,22 +126,22 @@ export function generatePropDocs(
 
   // Merge with custom documentation
   if (customDocs) {
-    Object.entries(customDocs).forEach(([propName, propDoc]) => {
-      const existingIndex = defaultProps.findIndex((p) => p.name === propName);
-      const mergedProp: PropDocumentation = {
-        name: propName,
-        type: propDoc?.type || 'unknown',
-        description: propDoc?.description || 'No description provided',
-        required: propDoc?.required || false,
-        ...propDoc,
+    for (const [propertyName, propertyDocument] of Object.entries(customDocs)) {
+      const existingIndex = defaultProps.findIndex((p) => p.name === propertyName);
+      const mergedProperty: PropertyDocumentation = {
+        name: propertyName,
+        type: propertyDocument?.type || 'unknown',
+        description: propertyDocument?.description || 'No description provided',
+        required: propertyDocument?.required || false,
+        ...propertyDocument,
       };
 
       if (existingIndex >= 0) {
-        defaultProps[existingIndex] = mergedProp;
+        defaultProps[existingIndex] = mergedProperty;
       } else {
-        defaultProps.push(mergedProp);
+        defaultProps.push(mergedProperty);
       }
-    });
+    }
   }
 
   return defaultProps;
@@ -350,7 +351,7 @@ export function withDocumentation<P extends object>(
 }
 
 // Documentation validation
-export function validateDocumentation(doc: ComponentDocumentation): {
+export function validateDocumentation(document_: ComponentDocumentation): {
   valid: boolean;
   errors: string[];
   warnings: string[];
@@ -359,40 +360,40 @@ export function validateDocumentation(doc: ComponentDocumentation): {
   const warnings: string[] = [];
 
   // Required fields
-  if (!doc.name) errors.push('Component name is required');
-  if (!doc.description) errors.push('Component description is required');
-  if (!doc.category) errors.push('Component category is required');
+  if (!document_.name) {errors.push('Component name is required');}
+  if (!document_.description) {errors.push('Component description is required');}
+  if (!document_.category) {errors.push('Component category is required');}
 
   // Props validation
-  if (doc.props.length === 0) {
+  if (document_.props.length === 0) {
     warnings.push('No props documented');
   }
 
-  doc.props.forEach((prop, index) => {
-    if (!prop.name) errors.push(`Prop at index ${index} missing name`);
-    if (!prop.type) errors.push(`Prop "${prop.name}" missing type`);
-    if (!prop.description)
-      warnings.push(`Prop "${prop.name}" missing description`);
-  });
+  for (const [index, property] of document_.props.entries()) {
+    if (!property.name) {errors.push(`Prop at index ${index} missing name`);}
+    if (!property.type) {errors.push(`Prop "${property.name}" missing type`);}
+    if (!property.description)
+      {warnings.push(`Prop "${property.name}" missing description`);}
+  }
 
   // Examples validation
-  if (doc.examples.length === 0) {
+  if (document_.examples.length === 0) {
     warnings.push('No examples provided');
   }
 
-  doc.examples.forEach((example, index) => {
-    if (!example.name) errors.push(`Example at index ${index} missing name`);
-    if (!example.code) errors.push(`Example "${example.name}" missing code`);
+  for (const [index, example] of document_.examples.entries()) {
+    if (!example.name) {errors.push(`Example at index ${index} missing name`);}
+    if (!example.code) {errors.push(`Example "${example.name}" missing code`);}
     if (!example.component)
-      errors.push(`Example "${example.name}" missing component`);
-  });
+      {errors.push(`Example "${example.name}" missing component`);}
+  }
 
   // Accessibility validation
-  if (doc.accessibility.keyboardSupport.length === 0) {
+  if (document_.accessibility.keyboardSupport.length === 0) {
     warnings.push('No keyboard support documented');
   }
 
-  if (doc.accessibility.ariaAttributes.length === 0) {
+  if (document_.accessibility.ariaAttributes.length === 0) {
     warnings.push('No ARIA attributes documented');
   }
 

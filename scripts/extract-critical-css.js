@@ -4,8 +4,8 @@
  */
 
 import cssnano from "cssnano";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
-import { join } from "path";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import postcss from "postcss";
 
 // Critical selectors that should be included
@@ -120,12 +120,12 @@ async function extractCriticalCSS() {
 		const atRuleString = `@${atRule.name} ${atRule.params}`.trim();
 
 		const isCritical = CRITICAL_SELECTORS.some((critical) => {
-			if (!critical.startsWith("@")) return false;
+			if (!critical.startsWith("@")) {return false;}
 
 			// Check for exact match or contains
 			return (
 				atRuleString === critical ||
-				atRuleString.includes(critical.substring(1))
+				atRuleString.includes(critical.slice(1))
 			);
 		});
 
@@ -139,7 +139,7 @@ async function extractCriticalCSS() {
 
 				atRule.walkRules((rule) => {
 					const isInnerCritical = CRITICAL_SELECTORS.some((critical) => {
-						if (critical.startsWith("@")) return false;
+						if (critical.startsWith("@")) {return false;}
 						return rule.selector.includes(critical);
 					});
 
@@ -158,9 +158,9 @@ async function extractCriticalCSS() {
 	});
 
 	// Add critical keyframes
-	const criticalKeyframes = ["glass-ripple", "glass-spring-in", "glass-wave"];
+	const criticalKeyframes = new Set(["glass-ripple", "glass-spring-in", "glass-wave"]);
 	root.walkAtRules("keyframes", (atRule) => {
-		if (criticalKeyframes.includes(atRule.params)) {
+		if (criticalKeyframes.has(atRule.params)) {
 			criticalRoot.append(atRule.clone());
 		}
 	});
@@ -188,19 +188,19 @@ async function extractCriticalCSS() {
 				// Add rules back in optimized order
 				rules.sort((a, b) => {
 					// :root first
-					if (a.selector.includes(":root")) return -1;
-					if (b.selector.includes(":root")) return 1;
+					if (a.selector.includes(":root")) {return -1;}
+					if (b.selector.includes(":root")) {return 1;}
 					// Then theme rules
-					if (a.selector.includes("data-theme")) return -1;
-					if (b.selector.includes("data-theme")) return 1;
+					if (a.selector.includes("data-theme")) {return -1;}
+					if (b.selector.includes("data-theme")) {return 1;}
 					// Then base classes
-					if (a.selector.startsWith(".glass")) return -1;
-					if (b.selector.startsWith(".glass")) return 1;
+					if (a.selector.startsWith(".glass")) {return -1;}
+					if (b.selector.startsWith(".glass")) {return 1;}
 					return 0;
 				});
 
-				rules.forEach((rule) => root.append(rule));
-				mediaQueries.forEach((mq) => root.append(mq));
+				for (const rule of rules) {root.append(rule);}
+				for (const mq of mediaQueries) {root.append(mq);}
 			},
 		},
 		// Minify

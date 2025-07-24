@@ -221,12 +221,12 @@ export const useSessionStorage = <T,>(
  * @returns {{ module: T | null, loading: boolean, error: Error | null }}
  */
 export const useDynamicImport = <T,>(
-  importFn: () => Promise<T>,
+  importFunction: () => Promise<T>,
   deps: React.DependencyList = []
 ): { module: T | null; loading: boolean; error: Error | null } => {
-  const [module, setModule] = useState<T | null | null>(null);
+  const [module, setModule] = useState<T | null | null>(undefined);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null | null>(null);
+  const [error, setError] = useState<Error | null | null>(undefined);
 
   useEffect(() => {
     if (!isBrowser()) {
@@ -240,7 +240,7 @@ export const useDynamicImport = <T,>(
       setError(undefined);
 
       try {
-        const result = await safeDynamicImport(importFn);
+        const result = await safeDynamicImport(importFunction);
         if (!cancelled) {
           setModule(result);
         }
@@ -261,7 +261,7 @@ export const useDynamicImport = <T,>(
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [importFn, ...deps]);
+  }, [importFunction, ...deps]);
 
   return { module, loading, error };
 };
@@ -295,11 +295,11 @@ export const useUserPreferences = () => {
     const darkQuery = win.matchMedia('(prefers-color-scheme: dark)');
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
-      setPreferences((prev) => ({ ...prev, prefersReducedMotion: e.matches }));
+      setPreferences((previous) => ({ ...previous, prefersReducedMotion: e.matches }));
     };
 
     const handleDarkChange = (e: MediaQueryListEvent) => {
-      setPreferences((prev) => ({ ...prev, prefersDarkScheme: e.matches }));
+      setPreferences((previous) => ({ ...previous, prefersDarkScheme: e.matches }));
     };
 
     // Modern browsers
@@ -352,7 +352,7 @@ export const useIntersectionObserver = (
     }
 
     const observer = safeIntersectionObserver(
-      (...args) => callbackRef.current(...args),
+      (...arguments_) => callbackRef.current(...arguments_),
       options
     );
 
@@ -387,8 +387,8 @@ export const useResizeObserver = (callback: ResizeObserverCallback) => {
       return;
     }
 
-    const observer = safeResizeObserver((...args) =>
-      callbackRef.current(...args)
+    const observer = safeResizeObserver((...arguments_) =>
+      callbackRef.current(...arguments_)
     );
 
     if (observer) {
@@ -426,8 +426,8 @@ export const useMutationObserver = (
       return;
     }
 
-    const observer = safeMutationObserver((...args) =>
-      callbackRef.current(...args)
+    const observer = safeMutationObserver((...arguments_) =>
+      callbackRef.current(...arguments_)
     );
 
     if (observer) {
@@ -451,16 +451,16 @@ export const useDocumentVisibility = (): boolean => {
       return;
     }
 
-    const doc = safeDocument();
-    if (!doc) {
+    const document_ = safeDocument();
+    if (!document_) {
       return;
     }
 
     const handleVisibilityChange = () => {
-      setIsVisible(!doc.hidden);
+      setIsVisible(!document_.hidden);
     };
 
-    setIsVisible(!doc.hidden);
+    setIsVisible(!document_.hidden);
 
     const cleanup = safeAddEventListener(
       'visibilitychange',

@@ -5,8 +5,8 @@
  * Provides a clear, actionable performance status for LiqUIdify
  */
 
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import STierValidator from "./validate-s-tier-performance.js";
 
 class PerformanceStatusReporter {
@@ -16,11 +16,11 @@ class PerformanceStatusReporter {
 
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m",
-			success: "\x1b[32m",
-			warn: "\x1b[33m",
-			error: "\x1b[31m",
-			reset: "\x1b[0m",
+			info: "\u001B[36m",
+			success: "\u001B[32m",
+			warn: "\u001B[33m",
+			error: "\u001B[31m",
+			reset: "\u001B[0m",
 		};
 
 		console.log(`${colors[level]}${message}${colors.reset}`);
@@ -111,9 +111,9 @@ No action required - performance targets exceeded.`
 		: `⚠️ **Performance improvements needed to meet S-tier requirements.**
 
 Priority areas for optimization:
-${!results.bundleSize.passed ? "- Reduce bundle size to meet limits" : ""}
-${!results.renderTime.passed ? "- Optimize render performance for 55+ FPS" : ""}
-${!results.performanceScore.passed ? "- Improve overall performance score" : ""}
+${results.bundleSize.passed ? "" : "- Reduce bundle size to meet limits"}
+${results.renderTime.passed ? "" : "- Optimize render performance for 55+ FPS"}
+${results.performanceScore.passed ? "" : "- Improve overall performance score"}
 
 Run \`bun run perf:validate\` for detailed recommendations.`
 }

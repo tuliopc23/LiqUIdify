@@ -347,7 +347,7 @@ export class VisualPolishManager {
 
     // Add event listeners based on trigger
     switch (trigger) {
-      case 'hover':
+      case 'hover': {
         element.addEventListener('mouseenter', handleInteraction);
         element.addEventListener('mouseleave', (_e) => {
           const animation = (element as any)._polishAnimation;
@@ -356,7 +356,8 @@ export class VisualPolishManager {
           }
         });
         break;
-      case 'focus':
+      }
+      case 'focus': {
         element.addEventListener('focus', handleInteraction);
         element.addEventListener('blur', (_e) => {
           const animation = (element as any)._polishAnimation;
@@ -365,7 +366,8 @@ export class VisualPolishManager {
           }
         });
         break;
-      case 'active':
+      }
+      case 'active': {
         element.addEventListener('mousedown', handleInteraction);
         element.addEventListener('mouseup', () => {
           const animation = (element as any)._polishAnimation;
@@ -374,12 +376,15 @@ export class VisualPolishManager {
           }
         });
         break;
-      case 'click':
+      }
+      case 'click': {
         element.addEventListener('click', handleInteraction);
         break;
-      case 'touch':
+      }
+      case 'touch': {
         element.addEventListener('touchstart', handleInteraction);
         break;
+      }
     }
 
     // Store event handlers for cleanup
@@ -395,24 +400,29 @@ export class VisualPolishManager {
 
     if (handlers) {
       switch (trigger) {
-        case 'hover':
+        case 'hover': {
           element.removeEventListener('mouseenter', handlers.handleInteraction);
           element.removeEventListener('mouseleave', handlers.handleInteraction);
           break;
-        case 'focus':
+        }
+        case 'focus': {
           element.removeEventListener('focus', handlers.handleInteraction);
           element.removeEventListener('blur', handlers.handleInteraction);
           break;
-        case 'active':
+        }
+        case 'active': {
           element.removeEventListener('mousedown', handlers.handleInteraction);
           element.removeEventListener('mouseup', handlers.handleInteraction);
           break;
-        case 'click':
+        }
+        case 'click': {
           element.removeEventListener('click', handlers.handleInteraction);
           break;
-        case 'touch':
+        }
+        case 'touch': {
           element.removeEventListener('touchstart', handlers.handleInteraction);
           break;
+        }
       }
     }
 
@@ -443,9 +453,11 @@ export class VisualPolishManager {
       id,
       name,
       element,
-      baseline: undefined,
+      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'ImageD... Remove this comment to see the full error message
+      baseline: null,
       threshold,
-      lastResult: undefined,
+      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type '{ pass... Remove this comment to see the full error message
+      lastResult: null,
     };
 
     this.regressionTests.set(id, test);
@@ -458,8 +470,8 @@ export class VisualPolishManager {
   private async captureBaseline(test: VisualRegressionTest): Promise<void> {
     try {
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      if (!ctx) {
+      const context = canvas.getContext('2d');
+      if (!context) {
         return;
       }
 
@@ -469,7 +481,7 @@ export class VisualPolishManager {
 
       // Use html2canvas or similar library in real implementation
       // For now, we'll simulate with a placeholder
-      const imageData = ctx.createImageData(canvas.width, canvas.height);
+      const imageData = context.createImageData(canvas.width, canvas.height);
       test.baseline = imageData;
     } catch {
       // Logging disabled
@@ -599,7 +611,7 @@ export class VisualPolishManager {
 
   private calculateCrossBrowserConsistency(): number {
     const tests = [...this.crossBrowserTests.values()];
-    if (0 === tests.length) {
+    if (tests.length === 0) {
       return 1;
     }
 
@@ -698,9 +710,9 @@ export class VisualPolishManager {
    */
   destroy(): void {
     // Cleanup all micro-interactions
-    this.microInteractions.forEach((interaction) => {
+    for (const interaction of this.microInteractions) {
       this.cleanupMicroInteraction(interaction);
-    });
+    }
 
     this.microInteractions.clear();
     this.regressionTests.clear();
@@ -714,7 +726,7 @@ export class VisualPolishManager {
  */
 export function useVisualPolish(config: Partial<PolishConfig> = {}) {
   const [qualityMetrics, setQualityMetrics] =
-    useState<VisualQualityMetrics | null | null>(null);
+    useState<VisualQualityMetrics | null | null>(undefined);
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const polishManagerRef = useRef<VisualPolishManager | null>(null);
 

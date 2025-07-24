@@ -5,10 +5,10 @@
  * Lightweight validation script for LiqUIdify performance requirements
  */
 
-import fs from "fs";
-import path from "path";
-import { performance } from "perf_hooks";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { performance } from "node:perf_hooks";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,11 +40,11 @@ class STierValidator {
 
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m",
-			success: "\x1b[32m",
-			warn: "\x1b[33m",
-			error: "\x1b[31m",
-			reset: "\x1b[0m",
+			info: "\u001B[36m",
+			success: "\u001B[32m",
+			warn: "\u001B[33m",
+			error: "\u001B[31m",
+			reset: "\u001B[0m",
 		};
 
 		const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
@@ -74,7 +74,7 @@ class STierValidator {
 					const stats = fs.statSync(filePath);
 					size = stats.size;
 					totalSize += size;
-				} catch (error) {
+				} catch {
 					this.log(`⚠️ Bundle ${filename} not found`, "warn");
 					size = 0;
 				}
@@ -223,9 +223,9 @@ class STierValidator {
 		const operations =
 			component.complexity === "low"
 				? 100
-				: component.complexity === "medium"
+				: (component.complexity === "medium"
 					? 500
-					: 1000;
+					: 1000);
 
 		// Simulate DOM calculations
 		for (let i = 0; i < operations; i++) {

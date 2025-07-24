@@ -45,7 +45,7 @@ export const stringValidators = {
 	required:
 		(message = "This field is required"): Validator<string> =>
 		(value) => {
-			const isValid = "string" === typeof value && 0 < value.trim().length;
+			const isValid = "string" === typeof value && value.trim().length > 0;
 			return createValidationResult(isValid, isValid ? [] : [message]);
 		},
 
@@ -96,7 +96,7 @@ export const stringValidators = {
 	alphanumeric:
 		(message = "Only letters and numbers allowed"): Validator<string> =>
 		(value) => {
-			const isValid = "string" === typeof value && /^[a-zA-Z0-9]+$/.test(value);
+			const isValid = "string" === typeof value && /^[\dA-Za-z]+$/.test(value);
 			return createValidationResult(isValid, isValid ? [] : [message]);
 		},
 };
@@ -158,7 +158,7 @@ export const arrayValidators = {
 	required:
 		(message = "At least one item is required"): Validator<any[]> =>
 		(value) => {
-			const isValid = Array.isArray(value) && 0 < value.length;
+			const isValid = Array.isArray(value) && value.length > 0;
 			return createValidationResult(isValid, isValid ? [] : [message]);
 		},
 
@@ -284,25 +284,25 @@ export function chain<T>(...validators: Validator<T>[]): Validator<T> {
 /**
  * Component prop validation
  */
-export interface PropValidationSchema {
+export interface PropertyValidationSchema {
 	[key: string]: Validator<any>;
 }
 
 export function validateProps<T extends Record<string, any>>(
 	props: T,
-	schema: PropValidationSchema,
+	schema: PropertyValidationSchema,
 ): ValidationResult {
-	const results = Object.entries(schema).map(([propName, validator]) => {
-		const propValue = props[propName];
-		const result = validator(propValue);
+	const results = Object.entries(schema).map(([propertyName, validator]) => {
+		const propertyValue = props[propertyName];
+		const result = validator(propertyValue);
 
 		// Prefix prop name to errors
-		const propErrors = result.errors.map((error) => `${propName}: ${error}`);
-		const propWarnings = result.warnings.map(
-			(warning) => `${propName}: ${warning}`,
+		const propertyErrors = result.errors.map((error) => `${propertyName}: ${error}`);
+		const propertyWarnings = result.warnings.map(
+			(warning) => `${propertyName}: ${warning}`,
 		);
 
-		return createValidationResult(result.isValid, propErrors, propWarnings);
+		return createValidationResult(result.isValid, propertyErrors, propertyWarnings);
 	});
 
 	return combineValidationResults(...results);
@@ -382,9 +382,9 @@ function getLuminance(color: string): number {
 	// Simplified luminance calculation
 	// In a real implementation, you'd parse the color properly
 	const hex = color.replace("#", "");
-	const r = parseInt(hex.substr(0, 2), 16) / 255;
-	const g = parseInt(hex.substr(2, 2), 16) / 255;
-	const b = parseInt(hex.substr(4, 2), 16) / 255;
+	const r = Number.parseInt(hex.slice(0, 2), 16) / 255;
+	const g = Number.parseInt(hex.slice(2, 4), 16) / 255;
+	const b = Number.parseInt(hex.slice(4, 6), 16) / 255;
 
 	return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
@@ -425,12 +425,12 @@ export const performanceValidators = {
  * Custom validator creation utility
  */
 export function createValidator<T>(
-	validationFn: (value: T) => boolean,
+	validationFunction: (value: T) => boolean,
 	errorMessage: string,
 	warningMessage?: string,
 ): Validator<T> {
 	return (value) => {
-		const isValid = validationFn(value);
+		const isValid = validationFunction(value);
 		const errors = isValid ? [] : [errorMessage];
 		const warnings = warningMessage && !isValid ? [warningMessage] : [];
 		return createValidationResult(isValid, errors, warnings);

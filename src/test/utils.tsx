@@ -7,7 +7,8 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import type React from 'react';
 import { vi } from 'vitest';
 import { GlassLiveRegionProvider } from '../components/glass-live-region';
-import { renderWithTheme, testUtils } from '../testing/test-utils';
+
+import { renderWithTheme, testUtils as testUtilities_ } from '../testing/test-utils';
 
 // Import vitest-axe - skip if module not found
 try {
@@ -35,6 +36,7 @@ export function renderWithProviders(
   // const { theme = 'light', initialProps = {} } = options || {};
 
   function AllProviders({ children }: { children: React.ReactNode }) {
+
     return <GlassLiveRegionProvider>{children}</GlassLiveRegionProvider>;
   }
 
@@ -126,14 +128,17 @@ export function getGlassComponentTestSuite(componentName: string) {
 
       // Check for glass effect properties
       const testElement = document.createElement('div');
+
       testElement.style.backdropFilter = 'blur(10px)';
 
       // Check webkit prefix as fallback
+
       if (!testElement.style.backdropFilter) {
         (testElement.style as any).webkitBackdropFilter = 'blur(10px)';
       }
 
       expect(
+
         'none' !== computedStyle.backdropFilter ||
           'none' !== (computedStyle as any).webkitBackdropFilter ||
           computedStyle.background.includes('rgba')
@@ -163,8 +168,8 @@ export function mockGetComputedStyle(overrides: Record<string, string> = {}) {
 
   vi.spyOn(window, 'getComputedStyle').mockReturnValue({
     ...defaultStyle,
-    getPropertyValue: (prop: string) =>
-      defaultStyle[prop as keyof typeof defaultStyle] || '',
+    getPropertyValue: (property: string) =>
+      defaultStyle[property as keyof typeof defaultStyle] || '',
   } as any);
 }
 
@@ -228,18 +233,18 @@ export function setupTestEnvironment() {
   mockGetComputedStyle();
 
   // Setup other common mocks
-  testUtils.setup();
+  testUtilities_.setup();
 }
 
 /**
  * Clean up test environment
  */
 export function cleanupTestEnvironment() {
-  testUtils.cleanup();
+  testUtilities_.cleanup();
 }
 
 // Re-export other utilities
-export { testUtils, renderWithTheme };
+export { testUtilities_ as testUtils, renderWithTheme };
 
 // Default export for convenience
 const testUtilities = {

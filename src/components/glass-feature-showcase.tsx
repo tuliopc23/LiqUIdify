@@ -2,13 +2,17 @@ import type { Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
 import type React from 'react';
 import { forwardRef, useRef } from 'react';
+
 import { cn } from '@/core/utils/classname';
+
 import { useContentAwareGlass, useLiquidGlass } from '@/hooks/use-liquid-glass';
 import {
   containerFadeIn,
   easeInOut,
   fadeInUp,
+
 } from '@/lib/framer-motion-constants';
+
 import { useMagneticHover } from '@/lib/glass-physics';
 
 export interface FeatureItem {
@@ -86,6 +90,7 @@ const GlassFeatureShowcase = forwardRef<
       );
 
       return (
+
         <motion.div
           ref={(node) => {
             (cardRef as React.MutableRefObject<HTMLDivElement | null>).current =
@@ -111,7 +116,7 @@ const GlassFeatureShowcase = forwardRef<
           )}
           style={
             {
-              transform: enableMagnetic ? transform : undefined,
+              transform: enableMagnetic ? transform : null,
             } as React.CSSProperties
           }
           whileHover={
@@ -121,13 +126,16 @@ const GlassFeatureShowcase = forwardRef<
         >
           {/* Feature Image */}
           {feature.image && (
+
             <div className="relative mb-6 overflow-hidden rounded-xl">
+
               <img
                 src={feature.image}
                 alt={feature.title}
                 className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
               />
               {feature.badge && (
+
                 <div className="absolute top-4 left-4 px-3 py-1 liquid-glass liquid-glass-specular rounded-full text-xs font-medium text-[var(--text-primary)]">
                   {feature.badge}
                 </div>
@@ -136,6 +144,7 @@ const GlassFeatureShowcase = forwardRef<
           )}
 
           {/* Icon */}
+
           <div
             className={cn(
               'flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110',
@@ -147,7 +156,9 @@ const GlassFeatureShowcase = forwardRef<
           </div>
 
           {/* Content */}
+
           <div className="space-y-3">
+
             <h3
               className={cn(
                 'font-semibold text-[var(--text-primary)] transition-colors duration-300',
@@ -162,19 +173,23 @@ const GlassFeatureShowcase = forwardRef<
             </p>
 
             {feature.link && (
+
               <div className="pt-2">
                 {feature.link.href ? (
+
                   <a
                     href={feature.link.href}
                     className="inline-flex items-center text-sm font-medium text-[var(--glass-primary)] hover:text-[var(--glass-primary-hover)] transition-colors duration-200"
                   >
                     {feature.link.label}
+
                     <svg
                       className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
+
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -184,17 +199,20 @@ const GlassFeatureShowcase = forwardRef<
                     </svg>
                   </a>
                 ) : (
+
                   <button
                     onClick={feature.link.onClick}
                     className="inline-flex items-center text-sm font-medium text-[var(--glass-primary)] hover:text-[var(--glass-primary-hover)] transition-colors duration-200"
                   >
                     {feature.link.label}
+
                     <svg
                       className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
+
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -209,12 +227,14 @@ const GlassFeatureShowcase = forwardRef<
           </div>
 
           {/* Hover Effect Overlay */}
+
           <div className="absolute inset-0 rounded-inherit bg-gradient-to-br from-[var(--glass-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
         </motion.div>
       );
     };
 
     return (
+
       <div
         ref={(node) => {
           (
@@ -232,7 +252,9 @@ const GlassFeatureShowcase = forwardRef<
       >
         {/* Background Elements */}
         {enableParallax && (
+
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
+
             <motion.div
               className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full"
               style={{
@@ -257,6 +279,7 @@ const GlassFeatureShowcase = forwardRef<
         <div className="relative max-w-7xl mx-auto">
           {/* Header */}
           {(title || subtitle || description) && (
+
             <motion.div
               className="text-center mb-16"
               variants={containerVariants}
@@ -265,6 +288,7 @@ const GlassFeatureShowcase = forwardRef<
               viewport={{ once: true, margin: '-100px' }}
             >
               {subtitle && (
+
                 <motion.div
                   variants={itemVariants}
                   className="inline-flex items-center px-4 py-2 mb-4 rounded-full liquid-glass liquid-glass-specular text-sm font-medium text-[var(--text-secondary)]"
@@ -274,6 +298,7 @@ const GlassFeatureShowcase = forwardRef<
               )}
 
               {title && (
+
                 <motion.h2
                   variants={itemVariants}
                   className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] mb-6"
@@ -283,6 +308,7 @@ const GlassFeatureShowcase = forwardRef<
               )}
 
               {description && (
+
                 <motion.p
                   variants={itemVariants}
                   className="text-lg text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed"
@@ -294,6 +320,7 @@ const GlassFeatureShowcase = forwardRef<
           )}
 
           {/* Features Grid */}
+
           <motion.div
             className={cn(
               'grid gap-8',
@@ -308,12 +335,14 @@ const GlassFeatureShowcase = forwardRef<
             viewport={{ once: true, margin: '-50px' }}
           >
             {features.map((feature, index) => (
+
               <FeatureCard key={index} feature={feature} index={index} />
             ))}
           </motion.div>
 
           {/* Additional Content */}
           {children && (
+
             <motion.div
               className="mt-16"
               variants={itemVariants}
@@ -327,7 +356,9 @@ const GlassFeatureShowcase = forwardRef<
         </div>
 
         {/* Floating Decorative Elements */}
+
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
+
           <motion.div
             className="absolute top-1/3 left-8 w-2 h-2 liquid-glass rounded-full"
             animate={{
@@ -340,6 +371,7 @@ const GlassFeatureShowcase = forwardRef<
               ease: 'easeInOut',
             }}
           />
+
           <motion.div
             className="absolute bottom-1/4 right-12 w-3 h-3 liquid-glass rounded-full"
             animate={{

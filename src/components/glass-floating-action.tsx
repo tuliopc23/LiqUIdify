@@ -1,8 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import type React from 'react';
 import { forwardRef, useCallback, useRef, useState } from 'react';
+
 import { cn } from '@/core/utils/classname';
+
 import { useLiquidGlass } from '@/hooks/use-liquid-glass';
+
 import { createGlassRipple, useMagneticHover } from '@/lib/glass-physics';
 
 export interface FloatingAction {
@@ -56,7 +59,7 @@ const GlassFloatingAction = forwardRef<
     const { elementRef: magneticRef, transform } = useMagneticHover(0.4, 80);
 
     // Callback ref to handle both button and magnetic refs
-    const setRefs = useCallback(
+    const setReferences = useCallback(
       (node: HTMLButtonElement | null) => {
         (
           buttonRef as React.MutableRefObject<HTMLButtonElement | null>
@@ -98,7 +101,7 @@ const GlassFloatingAction = forwardRef<
         createGlassRipple(buttonRef.current, x, y, 'rgba(255, 255, 255, 0.4)');
       }
 
-      if (0 < actions.length) {
+      if (actions.length > 0) {
         setIsExpanded(!isExpanded);
       } else {
         onClick?.(e as any);
@@ -110,14 +113,18 @@ const GlassFloatingAction = forwardRef<
       const actionCount = actions.length;
 
       switch (expandDirection) {
-        case 'up':
+        case 'up': {
           return { x: 0, y: -(distance * (index + 1)) };
-        case 'down':
+        }
+        case 'down': {
           return { x: 0, y: distance * (index + 1) };
-        case 'left':
+        }
+        case 'left': {
           return { x: -(distance * (index + 1)), y: 0 };
-        case 'right':
+        }
+        case 'right': {
           return { x: distance * (index + 1), y: 0 };
+        }
         case 'radial': {
           const angle = (index * 360) / actionCount;
           const radian = (angle * Math.PI) / 180;
@@ -126,8 +133,9 @@ const GlassFloatingAction = forwardRef<
             y: Math.sin(radian) * distance,
           };
         }
-        default:
+        default: {
           return { x: 0, y: -(distance * (index + 1)) };
+        }
       }
     };
 
@@ -147,17 +155,19 @@ const GlassFloatingAction = forwardRef<
     };
 
     return (
-      <div
-        ref={ref}
+
+      <div ref={ref}
         className={cn(positionClasses[position], className)}
-        {...props}
+        {...(props as any)}
       >
         {/* Action Items */}
+
         <AnimatePresence>
           {isExpanded &&
             actions.map((action, index) => {
               const position = getActionPosition(index);
               return (
+
                 <motion.div
                   key={index}
                   className="absolute"
@@ -176,6 +186,7 @@ const GlassFloatingAction = forwardRef<
                     delay: index * 0.05,
                   }}
                 >
+
                   <motion.button
                     className={cn(
                       'relative group flex items-center justify-center rounded-full shadow-lg',
@@ -191,11 +202,13 @@ const GlassFloatingAction = forwardRef<
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
+
                     <span className={iconSizes['lg' === size ? 'md' : 'sm']}>
                       {action.icon}
                     </span>
 
                     {/* Action Label */}
+
                     <motion.div
                       className="absolute whitespace-nowrap px-3 py-1 liquid-glass liquid-glass-specular rounded-lg text-xs font-medium text-[var(--text-primary)] pointer-events-none"
                       style={{
@@ -211,22 +224,22 @@ const GlassFloatingAction = forwardRef<
                         transform:
                           'radial' === expandDirection
                             ? 'translate(-50%, -50%)'
-                            : 'left' === expandDirection ||
+                            : ('left' === expandDirection ||
                                 'right' === expandDirection
                               ? 'translateY(-50%)'
-                              : 'translateX(-50%)',
+                              : 'translateX(-50%)'),
                         marginLeft:
                           'left' === expandDirection
                             ? '-8px'
-                            : 'right' === expandDirection
+                            : ('right' === expandDirection
                               ? '8px'
-                              : '0',
+                              : '0'),
                         marginTop:
                           'up' === expandDirection
                             ? '-8px'
-                            : 'down' === expandDirection
+                            : ('down' === expandDirection
                               ? '8px'
-                              : '0',
+                              : '0'),
                       }}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -241,8 +254,9 @@ const GlassFloatingAction = forwardRef<
         </AnimatePresence>
 
         {/* Main Button */}
+
         <motion.button
-          ref={setRefs}
+          ref={setReferences}
           className={cn(
             'relative group flex items-center justify-center rounded-full shadow-xl',
             'liquid-glass liquid-glass-interactive liquid-glass-ripple',
@@ -258,7 +272,7 @@ const GlassFloatingAction = forwardRef<
           )}
           style={
             {
-              transform: enableMagnetic ? transform : undefined,
+              transform: enableMagnetic ? transform : null,
             } as React.CSSProperties
           }
           onClick={handleMainClick}
@@ -269,6 +283,7 @@ const GlassFloatingAction = forwardRef<
           animate={isExpanded ? { rotate: 45 } : { rotate: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
+
           <motion.span
             className={iconSizes[size]}
             animate={isExpanded ? { rotate: 45 } : { rotate: 0 }}
@@ -278,6 +293,7 @@ const GlassFloatingAction = forwardRef<
           </motion.span>
 
           {/* Pulse Effect */}
+
           <motion.div
             className="absolute inset-0 rounded-full border-2 border-current"
             animate={{
@@ -293,8 +309,10 @@ const GlassFloatingAction = forwardRef<
         </motion.button>
 
         {/* Tooltip */}
+
         <AnimatePresence>
           {tooltip && showTooltip && !isExpanded && (
+
             <motion.div
               className="absolute whitespace-nowrap px-3 py-2 liquid-glass liquid-glass-specular rounded-lg text-sm font-medium text-[var(--text-primary)] pointer-events-none"
               style={{
@@ -323,8 +341,10 @@ const GlassFloatingAction = forwardRef<
         </AnimatePresence>
 
         {/* Background Blur Overlay */}
+
         <AnimatePresence>
           {isExpanded && (
+
             <motion.div
               className="fixed inset-0 bg-black/10 backdrop-blur-sm -z-10"
               initial={{ opacity: 0 }}

@@ -12,22 +12,22 @@
  * - Performance validation
  */
 
-const fs = require("fs").promises;
-const path = require("path");
-const { execSync, spawn } = require("child_process");
-const { performance } = require("perf_hooks");
+const fs = require("node:fs").promises;
+const path = require("node:path");
+const { execSync, spawn } = require("node:child_process");
+const { performance } = require("node:perf_hooks");
 
 // ANSI color codes for beautiful console output
 const colors = {
-	reset: "\x1b[0m",
-	bright: "\x1b[1m",
-	red: "\x1b[31m",
-	green: "\x1b[32m",
-	yellow: "\x1b[33m",
-	blue: "\x1b[34m",
-	magenta: "\x1b[35m",
-	cyan: "\x1b[36m",
-	white: "\x1b[37m",
+	reset: "\u001B[0m",
+	bright: "\u001B[1m",
+	red: "\u001B[31m",
+	green: "\u001B[32m",
+	yellow: "\u001B[33m",
+	blue: "\u001B[34m",
+	magenta: "\u001B[35m",
+	cyan: "\u001B[36m",
+	white: "\u001B[37m",
 };
 
 // S-Tier build configuration
@@ -45,7 +45,7 @@ const BUILD_CONFIG = {
 
 	// Performance thresholds
 	PERFORMANCE_TARGETS: {
-		buildTime: 60000, // 60 seconds max build time
+		buildTime: 60_000, // 60 seconds max build time
 		gzipRatio: 0.3, // 30% compression ratio minimum
 		treeshaking: 0.8, // 80% dead code elimination
 	},
@@ -86,7 +86,7 @@ class ProductionBuilder {
 				await fs.readFile("./package.json", "utf8"),
 			);
 			return packageJson.scripts && packageJson.scripts[scriptName];
-		} catch (error) {
+		} catch {
 			return false;
 		}
 	}
@@ -107,7 +107,7 @@ class ProductionBuilder {
 		for (const dep of requiredDeps) {
 			try {
 				await this.execute(`bun pm ls ${dep}`, { silent: true });
-			} catch (error) {
+			} catch {
 				this.errors.push(`Missing required dependency: ${dep}`);
 			}
 		}
@@ -116,7 +116,7 @@ class ProductionBuilder {
 		try {
 			const stats = await fs.stat("./dist");
 			// Basic check - in production you'd want more sophisticated disk space checking
-		} catch (error) {
+		} catch {
 			// dist directory doesn't exist yet, which is fine
 		}
 
@@ -216,7 +216,7 @@ class ProductionBuilder {
 						);
 					}
 				}
-			} catch (dirError) {
+			} catch {
 				// CSS directory doesn't exist, skip optimization
 				this.log(
 					"⚠️ No CSS directory found, skipping CSS optimization",
@@ -250,7 +250,7 @@ class ProductionBuilder {
 			for (const file of distFiles) {
 				if (file.endsWith(".js") || file.endsWith(".mjs")) {
 					const filePath = path.join("./dist", file);
-					const size = (await fs.stat(filePath)).size;
+					const {size} = await fs.stat(filePath);
 
 					if (file.includes("core")) {
 						bundleReport.core += size;
@@ -313,9 +313,8 @@ class ProductionBuilder {
 
 			if (bundleReport.violations.length > 0) {
 				this.log("❌ Bundle size violations:", "red");
-				bundleReport.violations.forEach((violation) =>
-					this.log(`   ${violation}`, "red"),
-				);
+				for (const violation of bundleReport.violations) {this.log(`   ${violation}`, "red")
+				;}
 				this.errors.push("Bundle size limits exceeded");
 			} else {
 				this.log("✅ All bundles meet S-tier size requirements", "green");
@@ -513,7 +512,7 @@ class ProductionBuilder {
 				try {
 					await fs.access(filePath);
 					this.log(`✅ ${file} exists`, "green");
-				} catch (error) {
+				} catch {
 					this.errors.push(`Missing required file: ${file}`);
 				}
 			}
@@ -524,7 +523,7 @@ class ProductionBuilder {
 				try {
 					await fs.access(filePath);
 					this.log(`✅ ${file} exists`, "green");
-				} catch (error) {
+				} catch {
 					this.warnings.push(
 						`CSS file not found: ${file} (build:css may need to run)`,
 					);

@@ -28,20 +28,24 @@ export type {
 
 // Default loading component
 const DefaultLoadingComponent = () => (
+
 	<div className="glass-lazy-loading flex items-center justify-center p-8">
+
 		<GlassSpinner size="md" />
 	</div>
 );
 
 // Lazy load wrapper with built-in suspense
 export function createLazyComponent<T extends ComponentType<any>>(
-	importFn: () => Promise<{ default: T }>,
+	importFunction: () => Promise<{ default: T }>,
 	LoadingComponent: ComponentType = DefaultLoadingComponent,
 ) {
-	const LazyComponent = lazy(importFn);
+	const LazyComponent = lazy(importFunction);
 
 	return (props: React.ComponentProps<T>) => (
+
 		<Suspense fallback={<LoadingComponent />}>
+
 			<LazyComponent {...props} />
 		</Suspense>
 	);
@@ -85,13 +89,13 @@ export const LazyComponentShowcase = createLazyComponent(() =>
 
 // Lazy load with preload capability
 export function createPreloadableComponent<T extends ComponentType<any>>(
-	importFn: () => Promise<{ default: T }>,
+	importFunction: () => Promise<{ default: T }>,
 ) {
 	let preloadPromise: Promise<{ default: T }> | null;
 
 	const preload = () => {
 		if (!preloadPromise) {
-			preloadPromise = importFn();
+			preloadPromise = importFunction();
 		}
 		return preloadPromise;
 	};
@@ -99,7 +103,9 @@ export function createPreloadableComponent<T extends ComponentType<any>>(
 	const LazyComponent = lazy(() => preload());
 
 	const Component = (props: React.ComponentProps<T>) => (
+
 		<Suspense fallback={<DefaultLoadingComponent />}>
+
 			<LazyComponent {...props} />
 		</Suspense>
 	);
@@ -122,12 +128,12 @@ export function useLazyLoad(
 
 		const observer = new IntersectionObserver(
 			(entries) => {
-				entries.forEach((entry) => {
+				for (const entry of entries) {
 					if (entry.isIntersecting) {
 						onIntersect();
 						observer.disconnect();
 					}
-				});
+				}
 			},
 			{
 				rootMargin: "50px",

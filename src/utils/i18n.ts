@@ -80,12 +80,12 @@ class I18n {
 
     // Simple parameter interpolation
     if (params) {
-      Object.entries(params).forEach(([paramKey, value]) => {
-        message = message.replace(
-          new RegExp(`\\{${paramKey}\\}`, 'g'),
+      for (const [parameterKey, value] of Object.entries(params)) {
+        message = message.replaceAll(
+          new RegExp(`\\{${parameterKey}\\}`, 'g'),
           String(value)
         );
-      });
+      }
     }
 
     return message;

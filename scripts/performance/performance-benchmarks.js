@@ -12,10 +12,10 @@
  * - Core Web Vitals monitoring
  */
 
-const fs = require("fs").promises;
-const path = require("path");
-const { execSync, spawn } = require("child_process");
-const { performance } = require("perf_hooks");
+const fs = require("node:fs").promises;
+const path = require("node:path");
+const { execSync, spawn } = require("node:child_process");
+const { performance } = require("node:perf_hooks");
 
 // Performance thresholds for S-tier compliance
 const PERFORMANCE_THRESHOLDS = {
@@ -125,11 +125,11 @@ class PerformanceBenchmark {
 
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m",
-			success: "\x1b[32m",
-			warn: "\x1b[33m",
-			error: "\x1b[31m",
-			reset: "\x1b[0m",
+			info: "\u001B[36m",
+			success: "\u001B[32m",
+			warn: "\u001B[33m",
+			error: "\u001B[31m",
+			reset: "\u001B[0m",
 		};
 
 		const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
@@ -142,7 +142,7 @@ class PerformanceBenchmark {
 			platform: process.platform,
 			arch: process.arch,
 			memory: process.memoryUsage(),
-			cpu: require("os").cpus()[0]?.model || "Unknown",
+			cpu: require("node:os").cpus()[0]?.model || "Unknown",
 			timestamp: new Date().toISOString(),
 		};
 	}
@@ -304,9 +304,9 @@ class PerformanceBenchmark {
 				`${componentName} mount test: ${testResults.status} (avg: ${testResults.metrics.averageRenderTime.toFixed(2)}ms, p95: ${testResults.metrics.p95RenderTime.toFixed(2)}ms)`,
 				testResults.status === "passed"
 					? "success"
-					: testResults.status === "warning"
+					: (testResults.status === "warning"
 						? "warn"
-						: "error",
+						: "error"),
 			);
 		} catch (error) {
 			testResults.status = "error";
@@ -449,9 +449,9 @@ class PerformanceBenchmark {
 				`${componentName} animation test: ${testResults.status} (${testResults.metrics.frameRate.toFixed(1)}fps, ${testResults.metrics.droppedFrames} dropped frames)`,
 				testResults.status === "passed"
 					? "success"
-					: testResults.status === "warning"
+					: (testResults.status === "warning"
 						? "warn"
-						: "error",
+						: "error"),
 			);
 		} catch (error) {
 			testResults.status = "error";
@@ -660,9 +660,9 @@ class PerformanceBenchmark {
 				`${componentName} memory test: ${testResults.status} (growth: ${memoryGrowthMB.toFixed(2)}MB)`,
 				testResults.status === "passed"
 					? "success"
-					: testResults.status === "warning"
+					: (testResults.status === "warning"
 						? "warn"
-						: "error",
+						: "error"),
 			);
 		} catch (error) {
 			testResults.status = "error";
@@ -710,9 +710,9 @@ class PerformanceBenchmark {
 
 				// Categorize bundle
 				let category = "other";
-				if (file.includes("core")) category = "core";
-				else if (file.includes("animation")) category = "animations";
-				else if (file.includes("advanced")) category = "advanced";
+				if (file.includes("core")) {category = "core";}
+				else if (file.includes("animation")) {category = "animations";}
+				else if (file.includes("advanced")) {category = "advanced";}
 
 				if (!testResults.metrics.bundles[category]) {
 					testResults.metrics.bundles[category] = { files: [], totalSize: 0 };
@@ -732,8 +732,7 @@ class PerformanceBenchmark {
 			let allBundlesPass = true;
 			const violations = [];
 
-			Object.entries(testResults.metrics.bundles).forEach(
-				([category, data]) => {
+			for (const [category, data] of Object.entries(testResults.metrics.bundles)) {
 					const threshold = PERFORMANCE_THRESHOLDS.bundleSize[category];
 					if (threshold && data.totalSize > threshold) {
 						allBundlesPass = false;
@@ -744,8 +743,8 @@ class PerformanceBenchmark {
 							overage: data.totalSize - threshold,
 						});
 					}
-				},
-			);
+				}
+			
 
 			// Check total size
 			if (
@@ -863,9 +862,9 @@ class PerformanceBenchmark {
 				`Real-world simulation: ${testResults.overallStatus}`,
 				testResults.overallStatus === "passed"
 					? "success"
-					: testResults.overallStatus === "warning"
+					: (testResults.overallStatus === "warning"
 						? "warn"
-						: "error",
+						: "error"),
 			);
 		} catch (error) {
 			testResults.overallStatus = "error";
@@ -935,14 +934,14 @@ class PerformanceBenchmark {
 				page.evaluate(() => {
 					const form = document.createElement("div");
 					form.className = "liquidify-form";
-					document.body.appendChild(form);
+					document.body.append(form);
 				}),
 
 			"focus-input": () =>
 				page.evaluate(() => {
 					const input = document.createElement("input");
 					input.className = "liquidify-input";
-					document.body.appendChild(input);
+					document.body.append(input);
 					input.focus();
 				}),
 
@@ -973,7 +972,7 @@ class PerformanceBenchmark {
 			const historyPath = "./dist/performance-history.json";
 			const historyData = await fs.readFile(historyPath, "utf8");
 			return JSON.parse(historyData);
-		} catch (error) {
+		} catch {
 			return [];
 		}
 	}
@@ -1013,10 +1012,10 @@ class PerformanceBenchmark {
 		const recommendations = [];
 
 		// Analyze test results and generate recommendations
-		this.results.tests.forEach((test) => {
+		for (const test of this.results.tests) {
 			if (test.status === "failed" || test.status === "warning") {
 				switch (test.type) {
-					case "mount":
+					case "mount": {
 						if (
 							test.metrics?.averageRenderTime >
 							PERFORMANCE_THRESHOLDS.renderTime.initial
@@ -1031,8 +1030,9 @@ class PerformanceBenchmark {
 							});
 						}
 						break;
+					}
 
-					case "animation":
+					case "animation": {
 						if (test.metrics?.frameRate < 55) {
 							recommendations.push({
 								type: "animation",
@@ -1044,8 +1044,9 @@ class PerformanceBenchmark {
 							});
 						}
 						break;
+					}
 
-					case "memory":
+					case "memory": {
 						if (test.metrics?.leakDetected) {
 							recommendations.push({
 								type: "memory",
@@ -1057,8 +1058,9 @@ class PerformanceBenchmark {
 							});
 						}
 						break;
+					}
 
-					case "bundle":
+					case "bundle": {
 						if (test.violations?.length > 0) {
 							recommendations.push({
 								type: "bundle-size",
@@ -1069,9 +1071,10 @@ class PerformanceBenchmark {
 							});
 						}
 						break;
+					}
 				}
 			}
-		});
+		}
 
 		this.results.recommendations = recommendations;
 	}
@@ -1158,7 +1161,7 @@ ${report.tests
 		(test) => `
 ### ${test.componentName || test.type} (${test.type})
 
-**Status**: ${test.status === "passed" ? "✅ PASSED" : test.status === "warning" ? "⚠️ WARNING" : "❌ FAILED"}
+**Status**: ${test.status === "passed" ? "✅ PASSED" : (test.status === "warning" ? "⚠️ WARNING" : "❌ FAILED")}
 
 ${
 	test.metrics
@@ -1223,7 +1226,7 @@ ${
 				this.log(`Running scenario: ${scenario.name}`, "info");
 
 				switch (scenario.type) {
-					case "mount":
+					case "mount": {
 						for (const component of scenario.components) {
 							const result = await this.runComponentMountTest(
 								component,
@@ -1232,8 +1235,9 @@ ${
 							this.results.tests.push(result);
 						}
 						break;
+					}
 
-					case "animation":
+					case "animation": {
 						for (const component of scenario.components) {
 							const result = await this.runAnimationPerformanceTest(
 								component,
@@ -1242,8 +1246,9 @@ ${
 							this.results.tests.push(result);
 						}
 						break;
+					}
 
-					case "memory":
+					case "memory": {
 						for (const component of scenario.components) {
 							const result = await this.runMemoryLeakTest(
 								component,
@@ -1252,6 +1257,7 @@ ${
 							this.results.tests.push(result);
 						}
 						break;
+					}
 
 					case "bundle": {
 						const result = await this.runBundleSizeAnalysis();

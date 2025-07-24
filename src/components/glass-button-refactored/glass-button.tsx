@@ -10,27 +10,34 @@
  * - Separated business logic from presentation
  */
 
+import type { PartialDeep, RequireAtLeastOne, Merge } from 'type-fest';
 import { Slot } from "@radix-ui/react-slot";
 // External dependencies
 import React, { forwardRef, useCallback, useRef } from "react";
 
 // Internal dependencies
+
 import type { InteractiveGlassProps } from "@/core";
+
 import { createBusinessLogicHook } from "@/core/business-logic";
 import {
 	generateGlassClasses,
 	generateGlassVariables,
+
 } from "@/core/glass/unified-glass-system";
+
 import { cn } from "@/core/utils/classname";
 import {
 	microInteraction,
 	responsiveSize,
 	touchTarget,
+
 } from "@/core/utils/responsive";
 import {
 	useGlassStateTransitions,
 	useMagneticHover,
 	useRippleEffect,
+
 } from "@/hooks/use-glass-animations";
 
 // Button state type
@@ -64,9 +71,9 @@ const useButtonBusinessLogic = createBusinessLogicHook<
 			if (props.disabled || props.loading) {
 				return;
 			}
-			setState((prev: ButtonState) => ({ ...prev, isPressed: true }));
+			setState((previous: ButtonState) => ({ ...previous, isPressed: true }));
 			setTimeout(
-				() => setState((prev: ButtonState) => ({ ...prev, isPressed: false })),
+				() => setState((previous: ButtonState) => ({ ...previous, isPressed: false })),
 				150,
 			);
 		},
@@ -75,29 +82,30 @@ const useButtonBusinessLogic = createBusinessLogicHook<
 			if (props.disabled) {
 				return;
 			}
-			setState((prev: ButtonState) => ({ ...prev, isHovered }));
+			setState((previous: ButtonState) => ({ ...previous, isHovered }));
 		},
 
 		handleFocus: (isFocused: boolean) => {
 			if (props.disabled) {
 				return;
 			}
-			setState((prev: ButtonState) => ({ ...prev, isFocused }));
+			setState((previous: ButtonState) => ({ ...previous, isFocused }));
 		},
 
 		handleRipple: () => {
 			if (props.disabled || props.loading) {
 				return;
 			}
-			setState((prev: ButtonState) => ({
-				...prev,
-				rippleCount: prev.rippleCount + 1,
+			setState((previous: ButtonState) => ({
+				...previous,
+				rippleCount: previous.rippleCount + 1,
 			}));
 		},
 	}),
 );
 
 // Import the ComponentPropsBuilder type
+
 import type { ComponentPropsBuilder } from "@/types/component-props";
 
 // Button-specific props extending the base interactive props
@@ -174,6 +182,7 @@ const LoadingSpinner = ({ size = "md" }: { size?: string }) => {
 		"xs" === size ? "w-3 h-3" : ("sm" === size ? "w-4 h-4" : "w-5 h-5");
 
 	return (
+
 		<div
 			className={cn(
 				"animate-spin rounded-full border-2 border-current border-t-transparent",
@@ -389,6 +398,7 @@ export const GlassButton = React.memo(
 				touchTarget.comfortable,
 
 				// Variant classes
+
 				VARIANT_CLASSES[variant],
 
 				// State classes
@@ -408,24 +418,30 @@ export const GlassButton = React.memo(
 
 			// Component content
 			const buttonContent = (
+
 				<>
 					{loading && (
+
 						<div className="mr-2 flex items-center">
+
 							<LoadingSpinner size={size} />
 						</div>
 					)}
 
 					{leftIcon && !loading && (
+
 						<span className="mr-2 flex items-center">{leftIcon}</span>
 					)}
 
 					{children && (
+
 						<span className={cn("flex items-center", iconOnly && "sr-only")}>
 							{loading && loadingText ? loadingText : children}
 						</span>
 					)}
 
 					{rightIcon && !loading && (
+
 						<span className="ml-2 flex items-center">{rightIcon}</span>
 					)}
 				</>
@@ -435,9 +451,10 @@ export const GlassButton = React.memo(
 			const Component = asChild ? Slot : "button";
 
 			return (
+
 				<Component
 					ref={combinedRef}
-					type={!asChild ? type : undefined}
+					type={asChild  ? undefined  : type}
 					disabled={disabled || loading}
 					className={componentClasses}
 					style={glassVariables as React.CSSProperties}

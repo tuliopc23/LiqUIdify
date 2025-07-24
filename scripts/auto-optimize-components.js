@@ -5,9 +5,9 @@
  * Automatically adds React.memo to components that need it for performance
  */
 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -99,20 +99,14 @@ async function optimizeComponent(componentName) {
 
 		// Add React import if not present
 		if (!content.includes("import React")) {
-			if (
-				content.includes("import { ") &&
-				content.includes(" } from 'react'")
-			) {
-				content = content.replace(
-					/import\s+\{\s*([^}]+)\s*\}\s+from\s+['"]react['"]/,
+			content = content.includes("import { ") &&
+				content.includes(" } from 'react'") ? content.replace(
+					/import\s+{\s*([^}]+)\s*}\s+from\s+["']react["']/,
 					"import React, { $1 } from 'react'",
-				);
-			} else {
-				content = content.replace(
-					/import\s+([^;]+)from\s+['"]react['"]/,
+				) : content.replace(
+					/import\s+([^;]+)from\s+["']react["']/,
 					"import React, $1 from 'react'",
 				);
-			}
 		}
 
 		// Wrap the component with React.memo
@@ -172,7 +166,7 @@ async function main() {
 
 	for (const componentName of componentsToOptimize) {
 		const success = await optimizeComponent(componentName);
-		if (success) optimized++;
+		if (success) {optimized++;}
 	}
 
 	console.log(

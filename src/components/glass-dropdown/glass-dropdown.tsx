@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
+
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface DropdownItem {
@@ -95,13 +97,15 @@ export const GlassDropdown = React.memo(
 
 				// Align dropdown
 				switch (align) {
-					case "center":
+					case "center": {
 						left =
 							triggerRect.left + (triggerRect.width - dropdownRect.width) / 2;
 						break;
-					case "end":
+					}
+					case "end": {
 						left = triggerRect.right - dropdownRect.width;
 						break;
+					}
 				}
 
 				// Keep dropdown within viewport
@@ -138,11 +142,12 @@ export const GlassDropdown = React.memo(
 			};
 
 			return (
-				<div
-					ref={ref}
+
+				<div ref={ref}
 					className={cn("relative inline-block", className)}
-					{...props}
+					{...(props as any)}
 				>
+
 					<button
 						ref={triggerRef}
 						onClick={() => setIsOpen(!isOpen)}
@@ -160,6 +165,7 @@ export const GlassDropdown = React.memo(
 					</button>
 
 					{isOpen && (
+
 						<div
 							ref={dropdownRef}
 							style={dropdownStyle}
@@ -174,6 +180,7 @@ export const GlassDropdown = React.memo(
 							{items.map((item, index) => {
 								if (item.separator) {
 									return (
+
 										<div
 											key={`separator-${index}`}
 											className="my-1 border-t border-white/10 dark:border-white/5"
@@ -182,6 +189,7 @@ export const GlassDropdown = React.memo(
 								}
 
 								return (
+
 									<button
 										key={item.value}
 										onClick={() => handleSelect(item)}
@@ -196,8 +204,10 @@ export const GlassDropdown = React.memo(
 										)}
 									>
 										{item.icon && (
+
 											<span className="flex-shrink-0 w-4 h-4">{item.icon}</span>
 										)}
+
 										<span className="truncate">{item.label}</span>
 									</button>
 								);

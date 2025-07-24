@@ -128,6 +128,7 @@ export const QUALITY_PRESETS: Record<string, Partial<OptimizationConfig>> = {
  * Tracks animation performance and provides optimization recommendations
  */
 export class GlassPerformanceMonitor {
+  frameCount: any;
   private metrics: PerformanceMetrics = {
     fps: 0,
     frameTime: 0,
@@ -281,7 +282,7 @@ export class GlassAnimationScheduler {
 
     this.intersectionObserver = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           const taskId = (entry.target as HTMLElement).dataset.animationId;
           if (taskId) {
             const task = this.tasks.get(taskId);
@@ -290,7 +291,7 @@ export class GlassAnimationScheduler {
               task.boundingRect = entry.boundingClientRect;
             }
           }
-        });
+        }
       },
       {
         rootMargin: '50px',
@@ -352,7 +353,7 @@ export class GlassAnimationScheduler {
       this.tasks.delete(id);
     }
 
-    if (0 === this.tasks.size) {
+    if (this.tasks.size === 0) {
       this.stop();
     }
   }
@@ -441,12 +442,10 @@ export class GlassAnimationScheduler {
       if (0 === task.frameCount % 2) {
         return;
       }
-    } else if (0.05 > visibilityRatio) {
-      // Small elements - reduce frame rate
-      if (0 === task.frameCount % 1.5) {
+    } else if (0.05 > visibilityRatio && // Small elements - reduce frame rate
+      0 === task.frameCount % 1.5) {
         return;
       }
-    }
   }
 
   getMetrics(): PerformanceMetrics {
@@ -477,8 +476,8 @@ export class GlassAnimationScheduler {
  * GPU Acceleration Helper
  * Optimizes elements for GPU rendering
  */
-export class GPUAccelerationHelper {
-  static enableForElement(
+export const GPUAccelerationHelper = {
+  enableForElement(
     element: HTMLElement,
     options: {
       force3D?: boolean;
@@ -509,9 +508,9 @@ export class GPUAccelerationHelper {
     // Additional optimizations
     element.style.imageRendering = 'optimizeSpeed';
     element.style.imageRendering = 'crisp-edges';
-  }
+  },
 
-  static disableForElement(element: HTMLElement): void {
+  disableForElement(element: HTMLElement): void {
     element.style.willChange = 'auto';
     element.style.transform =
       element.style.transform?.replace('translateZ(0)', '') || '';
@@ -519,24 +518,24 @@ export class GPUAccelerationHelper {
     element.style.perspective = '';
     element.style.transformStyle = '';
     element.style.imageRendering = '';
-  }
+  },
 
-  static isGPUAccelerated(element: HTMLElement): boolean {
+  isGPUAccelerated(element: HTMLElement): boolean {
     const computedStyle = window.getComputedStyle(element);
     return (
       'auto' !== computedStyle.willChange ||
       computedStyle.transform.includes('translateZ') ||
       'hidden' === computedStyle.backfaceVisibility
     );
-  }
-}
+  },
+};
 
 /**
  * React Hook for Glass Performance Optimization
  * Provides performance monitoring and optimization tools
  */
 export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
-  const [metrics, setMetrics] = useState<PerformanceMetrics | null | null>(null);
+  const [metrics, setMetrics] = useState<PerformanceMetrics | null | null>(undefined);
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const schedulerRef = useRef<GlassAnimationScheduler | null>(null);
   const configRef = useRef<OptimizationConfig>({

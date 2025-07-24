@@ -51,19 +51,27 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
 	const categories = [...new Set(sidebarItems.map((item) => item.category))];
 
 	return (
+
 		<aside className="fixed left-0 top-16 h-full w-64 glass-effect border-r border-glass overflow-y-auto">
+
 			<div className="p-6">
+
 				<nav className="space-y-2">
 					{categories.map((category) => (
+
 						<div key={category} className="mb-6">
+
 							<h3 className="text-xs font-semibold uppercase tracking-wider mb-3 text-secondary">
 								{category}
 							</h3>
+
 							<ul className="space-y-1">
 								{sidebarItems
 									.filter((item) => item.category === category)
 									.map((item) => (
+
 										<li key={item.id}>
+
 											<button
 												onClick={() => onSectionChange(item.id)}
 												className={`sidebar-item block py-2 px-3 rounded-md text-sm w-full text-left transition-colors ${

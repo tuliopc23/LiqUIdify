@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect } from 'react';
 
 export const useSSRSafeLayoutEffect =
-  'undefined' !== typeof window ? useLayoutEffect : useEffect;
+  'undefined' === typeof window ? useEffect : useLayoutEffect;
 
 export const useSSRSafe = (callback: () => void, deps: any[]) => {
   useEffect(() => {

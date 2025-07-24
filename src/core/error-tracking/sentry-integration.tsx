@@ -174,9 +174,9 @@ class LiqUIdifySentryIntegration {
 				beforeSendTransaction: (event: any) =>
 					this._beforeSendTransactionFilter(event),
 				allowUrls:
-					0 < this.sentryConfig.allowedUrls.length
+					this.sentryConfig.allowedUrls.length > 0
 						? this.sentryConfig.allowedUrls
-						: undefined,
+						: null,
 				denyUrls: this.sentryConfig.denyUrls,
 				sendDefaultPii: !this.sentryConfig.enableUserPrivacy,
 				attachStacktrace: true,
@@ -442,6 +442,7 @@ class LiqUIdifySentryIntegration {
 											className:
 												"mt-2 text-xs text-red-700 whitespace-pre-wrap",
 										},
+
 										error?.toString(),
 									),
 								],
@@ -584,7 +585,7 @@ class LiqUIdifySentryIntegration {
 	/**
 	 * Sanitize object by removing sensitive keys
 	 */
-	private sanitizeObject(obj: Record<string, any>): Record<string, any> {
+	private sanitizeObject(object: Record<string, any>): Record<string, any> {
 		const sensitiveKeys = [
 			"password",
 			"token",
@@ -595,7 +596,7 @@ class LiqUIdifySentryIntegration {
 		];
 		const sanitized: Record<string, any> = {};
 
-		for (const [key, value] of Object.entries(obj)) {
+		for (const [key, value] of Object.entries(object)) {
 			if (
 				sensitiveKeys.some((sensitiveKey) =>
 					key.toLowerCase().includes(sensitiveKey),
@@ -618,12 +619,12 @@ class LiqUIdifySentryIntegration {
 	private sanitizeErrorMessage(message: string): string {
 		// Replace dynamic values with placeholders for better grouping
 		return message
-			.replace(/\d+/g, "NUMBER")
-			.replace(
-				/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/gi,
+			.replaceAll(/\d+/g, "NUMBER")
+			.replaceAll(
+				/[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}/gi,
 				"UUID",
 			)
-			.replace(/https?:\/\/[^\s]+/g, "URL")
+			.replaceAll(/https?:\/\/\S+/g, "URL")
 			.toLowerCase();
 	}
 
@@ -634,12 +635,12 @@ class LiqUIdifySentryIntegration {
 		if ("undefined" !== typeof window && window.localStorage) {
 			let id = localStorage.getItem("liquidify_anonymous_id");
 			if (!id) {
-				id = `anon_${Math.random().toString(36).substr(2, 9)}`;
+				id = `anon_${Math.random().toString(36).slice(2, 11)}`;
 				localStorage.setItem("liquidify_anonymous_id", id);
 			}
 			return id;
 		}
-		return `anon_${Math.random().toString(36).substr(2, 9)}`;
+		return `anon_${Math.random().toString(36).slice(2, 11)}`;
 	}
 
 	/**

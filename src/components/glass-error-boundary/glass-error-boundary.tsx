@@ -1,8 +1,11 @@
 import { AlertTriangle } from "lucide-react";
 import type { ErrorInfo, ReactNode } from "react";
 import React, { Component } from "react";
+
 import { announcer } from "@/components/glass-live-region";
+
 import { errorTracking } from "@/core/error-tracking";
+
 import { cn } from "@/core/utils/classname";
 
 export interface GlassErrorBoundaryProps {
@@ -37,7 +40,8 @@ export class GlassErrorBoundary extends Component<
 		this.state = {
 			hasError: false,
 			error: null,
-			errorInfo: undefined,
+
+			errorInfo: null,
 			errorCount: 0,
 		};
 	}
@@ -60,9 +64,9 @@ export class GlassErrorBoundary extends Component<
 		} = this.props;
 
 		// Update state with error info
-		this.setState((prevState) => ({
+		this.setState((previousState) => ({
 			errorInfo,
-			errorCount: prevState.errorCount + 1,
+			errorCount: previousState.errorCount + 1,
 		}));
 
 		// Track error in production
@@ -102,7 +106,7 @@ export class GlassErrorBoundary extends Component<
 		}
 	}
 
-	componentDidUpdate(prevProps: GlassErrorBoundaryProps) {
+	componentDidUpdate(previousProps: GlassErrorBoundaryProps) {
 		const { resetKeys, resetOnPropsChange } = this.props;
 		const { hasError } = this.state;
 
@@ -110,7 +114,7 @@ export class GlassErrorBoundary extends Component<
 		if (
 			hasError &&
 			resetOnPropsChange &&
-			prevProps.children !== this.props.children
+			previousProps.children !== this.props.children
 		) {
 			this.resetErrorBoundary();
 		}
@@ -134,7 +138,7 @@ export class GlassErrorBoundary extends Component<
 	}
 
 	arraysEqual(a: (string | number)[], b: (string | number)[]): boolean {
-		return a.length === b.length && a.every((val, index) => val === b[index]);
+		return a.length === b.length && a.every((value, index) => value === b[index]);
 	}
 
 	scheduleReset = (delay: number) => {
@@ -156,7 +160,8 @@ export class GlassErrorBoundary extends Component<
 		this.setState({
 			hasError: false,
 			error: null,
-			errorInfo: undefined,
+
+			errorInfo: null,
 			errorCount: 0,
 		});
 
@@ -179,11 +184,13 @@ export class GlassErrorBoundary extends Component<
 		if (hasError && error) {
 			// Use custom fallback if provided
 			if (fallback) {
+
 				return <>{fallback(error, errorInfo!)}</>;
 			}
 
 			// Default error UI
 			return (
+
 				<div
 					className={cn(
 						"glass-error-boundary",
@@ -198,10 +205,13 @@ export class GlassErrorBoundary extends Component<
 					role="alert"
 					aria-live="assertive"
 				>
+
 					<div className="flex flex-col items-center justify-center text-center space-y-4">
+
 						<AlertTriangle className="h-12 w-12 text-destructive animate-pulse" />
 
 						<div className="space-y-2">
+
 							<h3 className="text-lg font-semibold text-primary">
 								{"page" === level && "Page Error"}
 								{"section" === level && "Section Error"}
@@ -216,6 +226,7 @@ export class GlassErrorBoundary extends Component<
 						</div>
 
 						<div className="flex gap-2">
+
 							<button
 								onClick={this.resetErrorBoundary}
 								className="glass-button-primary px-4 py-2 rounded-lg"
@@ -225,6 +236,7 @@ export class GlassErrorBoundary extends Component<
 							</button>
 
 							{"page" === level && (
+
 								<button
 									onClick={() => window.location.reload()}
 									className="glass-button-secondary px-4 py-2 rounded-lg"
@@ -236,10 +248,13 @@ export class GlassErrorBoundary extends Component<
 						</div>
 
 						{"development" === process.env.NODE_ENV && errorInfo && (
+
 							<details className="mt-4 text-left max-w-2xl w-full">
+
 								<summary className="cursor-pointer text-sm text-secondary hover:text-primary">
 									Error Details
 								</summary>
+
 								<pre className="mt-2 text-xs bg-black/10 p-4 rounded-lg overflow-auto">
 									{errorInfo.componentStack}
 								</pre>
@@ -252,6 +267,7 @@ export class GlassErrorBoundary extends Component<
 
 		// Wrap children in an isolating container if needed
 		if (isolate) {
+
 			return <div className="glass-error-boundary-container">{children}</div>;
 		}
 
@@ -261,9 +277,10 @@ export class GlassErrorBoundary extends Component<
 
 // Hook for error handling in functional components
 export function useErrorHandler() {
-	const [error, setError] = React.useState<Error | null | null>(null);
+	const [error, setError] = React.useState<Error | null | null>(undefined);
 
 	const resetError = React.useCallback(() => {
+
 		setError(undefined);
 	}, []);
 

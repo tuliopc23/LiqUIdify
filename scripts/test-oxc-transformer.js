@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { execSync } from "child_process";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "fs";
-import { tmpdir } from "os";
-import { join, resolve } from "path";
+import { execSync } from "node:child_process";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 
 /**
  * Test OXC configuration and validate TypeScript/JSX support
@@ -238,7 +238,7 @@ for (const configCheck of configChecks) {
 	console.log(`🔧 ${configCheck.name}:`);
 	const passed = configCheck.check();
 	console.log(`   ${passed ? "✅ Valid" : "❌ Invalid"}`);
-	if (!passed) allTestsPassed = false;
+	if (!passed) {allTestsPassed = false;}
 }
 
 console.log("\n" + "=".repeat(50));

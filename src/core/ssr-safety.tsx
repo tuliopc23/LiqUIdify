@@ -35,6 +35,7 @@ export function ClientOnly({
   const isClient = useIsClient();
 
   if (!isClient) {
+
     return <>{fallback}</>;
   }
 
@@ -60,6 +61,7 @@ export function SSRSafe({
 
   if (!isClient) {
     return fallback ? (
+
       <Component {...(props as any)}>{fallback}</Component>
     ) : undefined;
   }
@@ -71,22 +73,22 @@ export function SSRSafe({
  * Hook for SSR-safe access to window and document objects
  */
 export function useSSRSafeWindow() {
-  const [windowObj, setWindowObj] = useState<Window | undefined | null>(null);
+  const [windowObject, setWindowObject] = useState<Window | undefined | null>(undefined);
 
   useEffect(() => {
     if ('undefined' !== typeof window) {
-      setWindowObj(window);
+      setWindowObject(window);
     }
   }, []);
 
-  return windowObj;
+  return windowObject;
 }
 
 /**
  * Hook for SSR-safe localStorage access
  */
 export function useSSRSafeLocalStorage() {
-  const [storage, setStorage] = useState<Storage | undefined | null>(null);
+  const [storage, setStorage] = useState<Storage | undefined | null>(undefined);
 
   useEffect(() => {
     if ('undefined' !== typeof window && window.localStorage) {
@@ -107,13 +109,13 @@ export const isBrowser = (): boolean => {
 /**
  * Utility function to safely access browser APIs
  */
-export function safelyAccessBrowserAPI<T>(fn: () => T, fallback: T): T {
+export function safelyAccessBrowserAPI<T>(function_: () => T, fallback: T): T {
   if (!isBrowser()) {
     return fallback;
   }
 
   try {
-    return fn();
+    return function_();
   } catch {
     // Logging disabled
     return fallback;

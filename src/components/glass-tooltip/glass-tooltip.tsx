@@ -1,6 +1,7 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassTooltipProps {
@@ -59,28 +60,32 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
 			let left = 0;
 
 			switch (position) {
-				case "top":
+				case "top": {
 					top = triggerRect.top - tooltipRect.height - 8;
 					left = triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
 					break;
-				case "bottom":
+				}
+				case "bottom": {
 					top = triggerRect.bottom + 8;
 					left = triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
 					break;
-				case "left":
+				}
+				case "left": {
 					top = triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
 					left = triggerRect.left - tooltipRect.width - 8;
 					break;
-				case "right":
+				}
+				case "right": {
 					top = triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
 					left = triggerRect.right + 8;
 					break;
+				}
 			}
 
 			// Keep tooltip within viewport
 			const viewport = {
-				width: typeof window !== "undefined" ? window.innerWidth : 1024,
-				height: typeof window !== "undefined" ? window.innerHeight : 768,
+				width: "undefined" === typeof window ? 1024 : window.innerWidth,
+				height: "undefined" === typeof window ? 768 : window.innerHeight,
 			};
 
 			if (8 > left) {
@@ -106,6 +111,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
 	}, [isVisible, position]);
 
 	const tooltip = isVisible ? (
+
 		<div
 			ref={tooltipRef}
 			style={tooltipStyle}
@@ -123,6 +129,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
 			{content}
 
 			{/* Arrow */}
+
 			<div
 				className={cn(
 					"absolute w-2 h-2 rotate-45",
@@ -142,7 +149,9 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
 	) : undefined;
 
 	return (
+
 		<>
+
 			<div
 				ref={triggerRef}
 				onMouseEnter={showTooltip}

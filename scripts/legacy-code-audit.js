@@ -13,8 +13,8 @@
  * to guide the modernization efforts.
  */
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const glob = require("glob");
 const chalk = require("chalk");
 
@@ -36,7 +36,7 @@ const PATTERNS = {
 			description: "Manual method binding (use class properties or hooks)",
 		},
 		{
-			pattern: /this\.setState\(\{\s*[^:]+:\s*[^,}]+\s*\}\)/g,
+			pattern: /this\.setState\({\s*[^:]+:\s*[^,}]+\s*}\)/g,
 			description: "Potential setState race condition",
 		},
 		{
@@ -72,7 +72,7 @@ const PATTERNS = {
 			description: "TypeScript ignores (failed TypeScript migration)",
 		},
 		{
-			pattern: /any\s*[;,)]/g,
+			pattern: /any\s*[),;]/g,
 			description: "TypeScript any usage (incomplete typing)",
 		},
 		{
@@ -84,7 +84,7 @@ const PATTERNS = {
 };
 
 // File extensions to scan
-const EXTENSIONS = [".js", ".jsx", ".ts", ".tsx"];
+const EXTENSIONS = new Set([".js", ".jsx", ".ts", ".tsx"]);
 
 // Directories to exclude
 const EXCLUDE_DIRS = ["node_modules", "dist", "build", ".git"];
@@ -113,7 +113,7 @@ function scanFile(filePath) {
 		let fileHasIssues = false;
 
 		// Check for legacy patterns
-		PATTERNS.LEGACY_PATTERNS.forEach(({ pattern, description }) => {
+		for (const { pattern, description } of PATTERNS.LEGACY_PATTERNS) {
 			const matches = content.match(pattern);
 			if (matches) {
 				fileHasIssues = true;
@@ -128,10 +128,10 @@ function scanFile(filePath) {
 							: "medium",
 				});
 			}
-		});
+		}
 
 		// Check for duplicate implementations
-		PATTERNS.DUPLICATE_IMPLEMENTATIONS.forEach(({ pattern, description }) => {
+		for (const { pattern, description } of PATTERNS.DUPLICATE_IMPLEMENTATIONS) {
 			const matches = content.match(pattern);
 			if (matches) {
 				fileHasIssues = true;
@@ -142,10 +142,10 @@ function scanFile(filePath) {
 					priority: "high",
 				});
 			}
-		});
+		}
 
 		// Check for failed migrations
-		PATTERNS.FAILED_MIGRATIONS.forEach(({ pattern, description }) => {
+		for (const { pattern, description } of PATTERNS.FAILED_MIGRATIONS) {
 			const matches = content.match(pattern);
 			if (matches) {
 				fileHasIssues = true;
@@ -156,7 +156,7 @@ function scanFile(filePath) {
 					priority: description.includes("TypeScript") ? "high" : "medium",
 				});
 			}
-		});
+		}
 
 		// Update summary
 		results.summary.totalFiles++;
@@ -174,14 +174,14 @@ function scanFile(filePath) {
 function scanDirectory(directory) {
 	const files = glob.sync(`${directory}/**/*.*`);
 
-	files.forEach((file) => {
+	for (const file of files) {
 		const ext = path.extname(file);
 		const shouldExclude = EXCLUDE_DIRS.some((dir) => file.includes(`/${dir}/`));
 
-		if (EXTENSIONS.includes(ext) && !shouldExclude) {
+		if (EXTENSIONS.has(ext) && !shouldExclude) {
 			scanFile(file);
 		}
-	});
+	}
 }
 
 /**
@@ -236,18 +236,18 @@ function generateReport() {
 	if (results.legacyPatterns.length === 0) {
 		console.log("  No legacy patterns found.");
 	} else {
-		results.legacyPatterns.forEach((issue) => {
+		for (const issue of results.legacyPatterns) {
 			const priorityColor =
 				issue.priority === "high"
 					? chalk.red
-					: issue.priority === "medium"
+					: (issue.priority === "medium"
 						? chalk.yellow
-						: chalk.green;
+						: chalk.green);
 			console.log(
 				`  ${priorityColor(`[${issue.priority.toUpperCase()}]`)} ${issue.pattern} (${issue.count} occurrences)`,
 			);
 			console.log(`    - ${issue.file}`);
-		});
+		}
 	}
 
 	// Duplicate Implementations
@@ -255,18 +255,18 @@ function generateReport() {
 	if (results.duplicateImplementations.length === 0) {
 		console.log("  No duplicate implementations found.");
 	} else {
-		results.duplicateImplementations.forEach((issue) => {
+		for (const issue of results.duplicateImplementations) {
 			const priorityColor =
 				issue.priority === "high"
 					? chalk.red
-					: issue.priority === "medium"
+					: (issue.priority === "medium"
 						? chalk.yellow
-						: chalk.green;
+						: chalk.green);
 			console.log(
 				`  ${priorityColor(`[${issue.priority.toUpperCase()}]`)} ${issue.pattern} (${issue.count} occurrences)`,
 			);
 			console.log(`    - ${issue.file}`);
-		});
+		}
 	}
 
 	// Failed Migrations
@@ -274,18 +274,18 @@ function generateReport() {
 	if (results.failedMigrations.length === 0) {
 		console.log("  No failed migrations found.");
 	} else {
-		results.failedMigrations.forEach((issue) => {
+		for (const issue of results.failedMigrations) {
 			const priorityColor =
 				issue.priority === "high"
 					? chalk.red
-					: issue.priority === "medium"
+					: (issue.priority === "medium"
 						? chalk.yellow
-						: chalk.green;
+						: chalk.green);
 			console.log(
 				`  ${priorityColor(`[${issue.priority.toUpperCase()}]`)} ${issue.pattern} (${issue.count} occurrences)`,
 			);
 			console.log(`    - ${issue.file}`);
-		});
+		}
 	}
 
 	// Generate JSON report
@@ -310,8 +310,7 @@ function generateReport() {
 		);
 	}
 	if (
-		results.legacyPatterns.filter((p) => p.pattern.includes("setState"))
-			.length > 0
+		results.legacyPatterns.some((p) => p.pattern.includes("setState"))
 	) {
 		console.log(
 			chalk.yellow("  ! Review setState usage for potential race conditions"),

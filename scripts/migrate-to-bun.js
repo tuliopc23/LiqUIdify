@@ -9,15 +9,15 @@
  * 4. Clean up Node.js specific configurations
  */
 
-import { readdirSync, readFileSync, statSync, writeFileSync } from "fs";
-import { extname, join } from "path";
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { extname, join } from "node:path";
 
 const colors = {
-	reset: "\x1b[0m",
-	green: "\x1b[32m",
-	yellow: "\x1b[33m",
-	blue: "\x1b[34m",
-	red: "\x1b[31m",
+	reset: "\u001B[0m",
+	green: "\u001B[32m",
+	yellow: "\u001B[33m",
+	blue: "\u001B[34m",
+	red: "\u001B[31m",
 };
 
 function log(message, color = "reset") {
@@ -34,7 +34,7 @@ class BunMigrator {
 	updateShebangs(filePath) {
 		try {
 			const content = readFileSync(filePath, "utf8");
-			const updatedContent = content.replace(
+			const updatedContent = content.replaceAll(
 				/^#!\/usr\/bin\/env node$/gm,
 				"#!/usr/bin/env bun",
 			);
@@ -59,43 +59,43 @@ class BunMigrator {
 			let updatedContent = content;
 
 			// Replace npm commands
-			updatedContent = updatedContent.replace(/\\bnpm\\s+run\\s+/g, "bun run ");
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(/\\bnpm\\s+run\\s+/g, "bun run ");
+			updatedContent = updatedContent.replaceAll(
 				/\\bnpm\\s+install\\b/g,
 				"bun install",
 			);
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(
 				/\\bnpm\\s+ci\\b/g,
 				"bun install --frozen-lockfile",
 			);
-			updatedContent = updatedContent.replace(/\\bnpm\\s+test\\b/g, "bun test");
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(/\\bnpm\\s+test\\b/g, "bun test");
+			updatedContent = updatedContent.replaceAll(
 				/\\bnpm\\s+build\\b/g,
 				"bun run build",
 			);
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(
 				/\\bnpm\\s+start\\b/g,
 				"bun run start",
 			);
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(
 				/\\bnpm\\s+dev\\b/g,
 				"bun run dev",
 			);
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(
 				/\\bnpm\\s+list\\b/g,
 				"bun pm ls",
 			);
-			updatedContent = updatedContent.replace(/\\bnpm\\s+ls\\b/g, "bun pm ls");
+			updatedContent = updatedContent.replaceAll(/\\bnpm\\s+ls\\b/g, "bun pm ls");
 
 			// Replace npx commands
-			updatedContent = updatedContent.replace(/\\bnpx\\s+/g, "bunx ");
+			updatedContent = updatedContent.replaceAll(/\\bnpx\\s+/g, "bunx ");
 
 			// Replace node commands (but be careful not to replace Node.js API references)
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(
 				/\\bnode\\s+([^\\s]+\\.js)/g,
 				"bun $1",
 			);
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(
 				/\\bnode\\s+([^\\s]+\\.ts)/g,
 				"bun $1",
 			);
@@ -120,16 +120,16 @@ class BunMigrator {
 			let updatedContent = content;
 
 			// Update installation instructions
-			updatedContent = updatedContent.replace(/npm install/g, "bun install");
-			updatedContent = updatedContent.replace(/npm run/g, "bun run");
-			updatedContent = updatedContent.replace(/npx/g, "bunx");
+			updatedContent = updatedContent.replaceAll('npm install', "bun install");
+			updatedContent = updatedContent.replaceAll('npm run', "bun run");
+			updatedContent = updatedContent.replaceAll('npx', "bunx");
 
 			// Update Node.js version references to Bun
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(
 				/Node\\.js\\s+v?\\d+/g,
 				"Bun v1.0+",
 			);
-			updatedContent = updatedContent.replace(
+			updatedContent = updatedContent.replaceAll(
 				/node\\s+--version/g,
 				"bun --version",
 			);
@@ -277,7 +277,7 @@ bun run build
 		for (const file of rootFiles) {
 			try {
 				this.processFile(`./${file}`);
-			} catch (error) {
+			} catch {
 				// File might not exist, which is fine
 			}
 		}

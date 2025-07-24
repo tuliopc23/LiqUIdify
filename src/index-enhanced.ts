@@ -8,24 +8,37 @@ import React from 'react';
 // Selective exports to avoid conflicts
 export {
   // SSR Safety
+
   isServer,
+
   isClient,
   isBrowser,
+
   useHydrated,
+
   useClientOnly,
+
   useHydrationSafety,
+
   withSSRSafety,
+
   useProgressiveEnhancement,
+
 } from './core/ssr-safety';
 
 export {
   // Performance Monitoring
+
   usePerformanceMonitor,
+
   useFPSMonitor,
+
   useMemoryMonitor,
+
   withPerformanceMonitor,
   PerformanceReport,
   performanceMonitor,
+
   PERFORMANCE_THRESHOLDS,
 } from './core/performance-monitor';
 
@@ -36,6 +49,7 @@ export {
   LazyStylesheet,
   CSSMetrics,
   cssOptimizer,
+
 } from './core/css-optimizer';
 
 export {
@@ -47,6 +61,7 @@ export {
   spacing as getSpacing,
   getBorderRadius,
   getShadow,
+
 } from './tokens/unified-design-system';
 
 export {
@@ -61,6 +76,7 @@ export {
   Text,
   Label,
   Code,
+
 } from './components/typography';
 
 export {
@@ -69,32 +85,48 @@ export {
   useReducedMotion,
   withReducedMotion,
   createAccessibleAnimation,
+
 } from './hooks/use-reduced-motion';
 
 export {
   // Testing Utilities
+
   customRender as render,
+
   customRenderHook as renderHook,
+
   measureComponentPerformance,
+
   testAccessibility,
+
   testKeyboardNavigation,
+
   testScreenReaderContent,
+
   captureVisualSnapshot,
   mockMatchMedia,
   mockIntersectionObserver,
   mockResizeObserver,
+
   generateTestUser,
+
   generateTestProps,
+
   toBeInViewport,
+
   toHaveAriaLabel,
+
 } from './testing/test-utils';
 
 // Re-export existing components
 export * from './index';
 
 // Enhanced component exports with performance monitoring and accessibility
+
 import { withPerformanceMonitor } from './core/performance-monitor';
+
 import { withReducedMotion } from './hooks/use-reduced-motion';
+
 import { withSSRSafety } from './core/ssr-safety';
 
 // Import existing components
@@ -110,6 +142,7 @@ export const EnhancedGlassButton = withPerformanceMonitor(
       GlassButton,
       React.createElement('div', {}, 'Loading button...')
     ),
+
     { enableProgressiveEnhancement: true }
   ),
   'GlassButton'
@@ -118,6 +151,7 @@ export const EnhancedGlassButton = withPerformanceMonitor(
 export const EnhancedGlassCard = withPerformanceMonitor(
   withReducedMotion(
     withSSRSafety(GlassCard, React.createElement('div', {}, 'Loading card...')),
+
     { enableProgressiveEnhancement: true }
   ),
   'GlassCard'
@@ -129,6 +163,7 @@ export const EnhancedGlassInput = withPerformanceMonitor(
       GlassInput,
       React.createElement('div', {}, 'Loading input...')
     ),
+
     { enableProgressiveEnhancement: true }
   ),
   'GlassInput'
@@ -136,7 +171,8 @@ export const EnhancedGlassInput = withPerformanceMonitor(
 
 export const EnhancedGlassModal = withPerformanceMonitor(
   withReducedMotion(
-    withSSRSafety(GlassModal, null), // No fallback for modal
+    withSSRSafety(GlassModal, undefined), // No fallback for modal
+
     { enableProgressiveEnhancement: true, disableAnimations: false }
   ),
   'GlassModal'
@@ -156,7 +192,7 @@ export const createEnhancedComponent = <P extends object>(
 ) => {
   const {
     name = Component.displayName || Component.name || 'Unknown',
-    fallback = null,
+    fallback = undefined,
     enablePerformanceMonitoring = true,
     enableReducedMotion = true,
     enableSSRSafety = true,

@@ -1,6 +1,7 @@
 import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { motion } from "framer-motion";
 import React from "react";
+
 import { cn } from "@/core/utils/classname";
 
 const skeletonVariants = cva(
@@ -10,6 +11,7 @@ const skeletonVariants = cva(
 		"backdrop-blur-sm",
 		"relative overflow-hidden",
 	],
+
 	{
 		variants: {
 			variant: {
@@ -37,13 +39,17 @@ const skeletonVariants = cva(
 	},
 );
 
-export interface GlassSkeletonProps
-	extends React.HTMLAttributes<HTMLDivElement>,
+export interface GlassSkeletonProps extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
 		VariantProps<typeof skeletonVariants> {
+
 	width?: string | number;
+
 	height?: string | number;
+
 	count?: number;
+
 	spacing?: number;
+
 	animated?: boolean;
 }
 
@@ -75,11 +81,13 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
 		const skeletonStyle = {
 			width: width || undefined,
 			height: height || ("circle" === shape ? width : undefined),
+
 			...style,
 		};
 
 		const SkeletonItem = React.forwardRef<HTMLDivElement, { index: number }>(
 			({ index }, itemRef) => (
+
 				<motion.div
 					ref={itemRef}
 					className={cn(skeletonVariants({ variant, size, shape }), className)}
@@ -100,10 +108,11 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
 									ease: "easeInOut",
 									delay: index * 0.1,
 								}
-							: undefined
+							: null
 					}
 				>
 					{"shimmer" === variant && animated && (
+
 						<motion.div
 							className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
 							animate={shimmerAnimation}
@@ -120,12 +129,16 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
 		);
 
 		if (1 === count) {
+
 			return <SkeletonItem index={0} ref={ref} />;
 		}
 
 		return (
-			<div ref={ref} className="space-y-2" style={{ gap: spacing }} {...props}>
+
+			<div ref={ref} className="space-y-2" style={{ gap: spacing }} {...(props as any)}>
+
 				{Array.from({ length: count }, (_, index) => (
+
 					<SkeletonItem key={index} index={index} />
 				))}
 			</div>
@@ -141,8 +154,10 @@ export const SkeletonText: React.FC<{
 	className?: string;
 	lastLineWidth?: string;
 }> = ({ lines = 3, className, lastLineWidth = "60%" }) => (
+
 	<div className={cn("space-y-2", className)}>
 		{Array.from({ length: lines }, (_, index) => (
+
 			<GlassSkeleton
 				key={index}
 				shape="line"
@@ -157,23 +172,34 @@ export const SkeletonCard: React.FC<{
 	className?: string;
 	showAvatar?: boolean;
 }> = ({ className, showAvatar = true }) => (
+
 	<div className={cn("space-y-3 p-4", className)}>
 		{showAvatar && (
+
 			<div className="flex items-center space-x-3">
+
 				<GlassSkeleton
 					shape="circle"
+
 					width={40}
+
 					height={40}
 					variant="shimmer"
 				/>
+
 				<div className="space-y-2 flex-1">
+
 					<GlassSkeleton width="40%" height={16} variant="shimmer" />
+
 					<GlassSkeleton width="60%" height={12} variant="shimmer" />
 				</div>
 			</div>
 		)}
+
 		<div className="space-y-2">
+
 			<GlassSkeleton width="100%" height={20} variant="shimmer" />
+
 			<SkeletonText lines={3} />
 		</div>
 	</div>
@@ -184,24 +210,29 @@ export const SkeletonTable: React.FC<{
 	columns?: number;
 	className?: string;
 }> = ({ rows = 5, columns = 4, className }) => (
+
 	<div className={cn("space-y-3", className)}>
 		{/* Header */}
+
 		<div
 			className="grid gap-3"
 			style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
 		>
 			{Array.from({ length: columns }, (_, index) => (
+
 				<GlassSkeleton key={index} height={24} variant="shimmer" />
 			))}
 		</div>
 		{/* Rows */}
 		{Array.from({ length: rows }, (_, rowIndex) => (
+
 			<div
 				key={rowIndex}
 				className="grid gap-3"
 				style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
 			>
 				{Array.from({ length: columns }, (_, colIndex) => (
+
 					<GlassSkeleton key={colIndex} height={20} variant="pulse" />
 				))}
 			</div>

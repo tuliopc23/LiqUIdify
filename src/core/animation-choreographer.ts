@@ -138,19 +138,18 @@ export class AnimationSequence {
     this.animations = [];
     let delay = this.options.delay || 0;
 
-    for (let i = 0; i < this.steps.length; i++) {
-      const step = this.steps[i];
+    for (let index = 0; index < this.steps.length; index++) {
+      const step = this.steps[index];
       if (!step) {
         continue;
       }
       const targets = this.getTargetElements(step.target);
 
-      for (let j = 0; j < targets.length; j++) {
-        const target = targets[j];
+      for (const [index_, target] of targets.entries()) {
         if (!target) {
           continue;
         }
-        const staggerDelay = j * (this.options.stagger || 0);
+        const staggerDelay = index_ * (this.options.stagger || 0);
 
         // Apply reduced motion if needed
         const keyframes = this.prefersReducedMotion
@@ -208,9 +207,9 @@ export class AnimationSequence {
    * Stop all animations in the sequence
    */
   stop(): void {
-    this.animations.forEach((animation) => {
+    for (const animation of this.animations) {
       animation.cancel();
-    });
+    }
     this.animations = [];
     this.isPlaying = false;
   }
@@ -219,18 +218,18 @@ export class AnimationSequence {
    * Pause all animations in the sequence
    */
   pause(): void {
-    this.animations.forEach((animation) => {
+    for (const animation of this.animations) {
       animation.pause();
-    });
+    }
   }
 
   /**
    * Resume all animations in the sequence
    */
   resume(): void {
-    this.animations.forEach((animation) => {
+    for (const animation of this.animations) {
       animation.play();
-    });
+    }
   }
 
   /**
@@ -277,23 +276,23 @@ export class AnimationSequence {
     }
 
     const first = { ...keyframes[0] };
-    const last = { ...keyframes[keyframes.length - 1] };
+    const last = { ...keyframes.at(-1) };
 
     // Remove transform properties that cause motion
     const motionProps = ['translate', 'rotate', 'scale', 'skew'];
 
-    [first, last].forEach((frame) => {
+    for (const frame of [first, last]) {
       if (frame.transform) {
         let transform = frame.transform as string;
-        motionProps.forEach((prop) => {
-          transform = transform.replace(
-            new RegExp(`${prop}\\([^)]+\\)`, 'g'),
+        for (const property of motionProps) {
+          transform = transform.replaceAll(
+            new RegExp(`${property}\\([^)]+\\)`, 'g'),
             ''
           );
-        });
+        }
         frame.transform = transform;
       }
-    });
+    }
 
     return [first, last];
   }
@@ -430,7 +429,9 @@ export class SpringAnimation {
    */
   private applyValueToProperty(value: number): void {
     // Handle different property types
-    if ('x' === this.property || 'y' === this.property) {
+    switch (this.property) {
+    case 'x': 
+    case 'y': {
       const transform = this.target.style.transform || '';
       const regex = new RegExp(
         `translate${this.property.toUpperCase()}\\([^)]+\\)`,
@@ -438,21 +439,34 @@ export class SpringAnimation {
       );
       const newTransform = transform.replace(regex, '');
       this.target.style.transform = `${newTransform} translate${this.property.toUpperCase()}(${value}px)`;
-    } else if ('rotate' === this.property) {
+    
+    break;
+    }
+    case 'rotate': {
       const transform = this.target.style.transform || '';
       const regex = /rotate\([^)]+\)/g;
-      const newTransform = transform.replace(regex, '');
+      const newTransform = transform.replaceAll(regex, '');
       this.target.style.transform = `${newTransform} rotate(${value}deg)`;
-    } else if ('scale' === this.property) {
+    
+    break;
+    }
+    case 'scale': {
       const transform = this.target.style.transform || '';
       const regex = /scale\([^)]+\)/g;
-      const newTransform = transform.replace(regex, '');
+      const newTransform = transform.replaceAll(regex, '');
       this.target.style.transform = `${newTransform} scale(${value})`;
-    } else if ('opacity' === this.property) {
+    
+    break;
+    }
+    case 'opacity': {
       this.target.style.opacity = value.toString();
-    } else {
+    
+    break;
+    }
+    default: {
       // For other properties, assume pixels
       (this.target.style as any)[this.property] = `${value}px`;
+    }
     }
   }
 }
@@ -511,7 +525,7 @@ export function useMagneticEffect(
       if (!isHovering) {
         const dx = mouseX - elementX;
         const dy = mouseY - elementY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        const distance = Math.hypot(dx, dy);
 
         // Start hovering if mouse is within radius
         if (distance < radius) {
@@ -531,34 +545,11 @@ export function useMagneticEffect(
 
     // Update animation
     const update = () => {
-      if (!isHovering) {
-        // Return to original position
-        elementX += (0 - elementX) * friction;
-        elementY += (0 - elementY) * friction;
-        elementRotateX += (0 - elementRotateX) * friction;
-        elementRotateY += (0 - elementRotateY) * friction;
-
-        // Apply transform
-        element.style.transform = `perspective(${perspective}px) rotateX(${elementRotateX}deg) rotateY(${elementRotateY}deg)`;
-
-        // Stop animation if close to original position
-        if (
-          0.1 > Math.abs(elementX) &&
-          0.1 > Math.abs(elementY) &&
-          0.1 > Math.abs(elementRotateX) &&
-          0.1 > Math.abs(elementRotateY)
-        ) {
-          element.style.transform = '';
-          element.style.transition = '';
-          cancelAnimationFrame(animationFrame!);
-          animationFrame = null;
-          return;
-        }
-      } else {
+      if (isHovering) {
         // Calculate distance from mouse to element center
         const dx = mouseX - elementX;
         const dy = mouseY - elementY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        const distance = Math.hypot(dx, dy);
 
         // If mouse is outside radius, stop hovering
         if (distance > radius) {
@@ -588,6 +579,29 @@ export function useMagneticEffect(
             rotateY(${elementRotateY}deg)
           `;
         }
+      } else {
+        // Return to original position
+        elementX += (0 - elementX) * friction;
+        elementY += (0 - elementY) * friction;
+        elementRotateX += (0 - elementRotateX) * friction;
+        elementRotateY += (0 - elementRotateY) * friction;
+
+        // Apply transform
+        element.style.transform = `perspective(${perspective}px) rotateX(${elementRotateX}deg) rotateY(${elementRotateY}deg)`;
+
+        // Stop animation if close to original position
+        if (
+          0.1 > Math.abs(elementX) &&
+          0.1 > Math.abs(elementY) &&
+          0.1 > Math.abs(elementRotateX) &&
+          0.1 > Math.abs(elementRotateY)
+        ) {
+          element.style.transform = '';
+          element.style.transition = '';
+          cancelAnimationFrame(animationFrame!);
+          animationFrame = null;
+          return;
+        }
       }
 
       // Continue animation
@@ -596,7 +610,7 @@ export function useMagneticEffect(
 
     // Initialize
     updateElementPosition();
-    if (typeof window !== "undefined") {
+    if ("undefined" !== typeof window) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('resize', updateElementPosition);
       window.addEventListener('scroll', updateElementPosition);
@@ -605,7 +619,7 @@ export function useMagneticEffect(
 
     // Cleanup
     return () => {
-      if (typeof window !== "undefined") {
+      if ("undefined" !== typeof window) {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('resize', updateElementPosition);
         window.removeEventListener('scroll', updateElementPosition);
@@ -696,9 +710,9 @@ export class AnimationChoreographer {
    * Stop all animation sequences
    */
   stopAll(): void {
-    this.sequences.forEach((sequence) => {
+    for (const sequence of this.sequences) {
       sequence.stop();
-    });
+    }
   }
 
   /**
@@ -727,9 +741,9 @@ export class AnimationChoreographer {
     this.prefersReducedMotion = event.matches;
 
     // Update all sequences
-    this.sequences.forEach((sequence) => {
+    for (const sequence of this.sequences) {
       sequence.updateOptions({ reducedMotion: this.prefersReducedMotion });
-    });
+    }
   };
 
   /**

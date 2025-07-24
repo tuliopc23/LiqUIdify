@@ -14,7 +14,7 @@ export type BusinessLogicHook<T = any, P = any> = (props: P) => T;
 // State management utilities
 export interface StateManager<T> {
   state: T;
-  setState: (newState: T | ((prevState: T) => T)) => void;
+  setState: (newState: T | ((previousState: T) => T)) => void;
   updateState: (updates: Partial<T>) => void;
   resetState: () => void;
 }
@@ -32,7 +32,7 @@ export type Reducer<S, A> = (state: S, action: A) => S;
 export type EventHandlerFactory<
   T extends HTMLElement,
   E extends Event = Event,
-> = (...args: any[]) => (event: E & { currentTarget: T }) => void;
+> = (...arguments_: any[]) => (event: E & { currentTarget: T }) => void;
 
 /**
  * Create a business logic hook for component state management
@@ -40,12 +40,12 @@ export type EventHandlerFactory<
 export function createBusinessLogicHook<
   TState,
   TProps,
-  TActions extends Record<string, (...args: any[]) => any>,
+  TActions extends Record<string, (...arguments_: any[]) => any>,
 >(
   initialStateFactory: (props: TProps) => TState,
   actionsFactory: (
     state: TState,
-    setState: (newState: TState | ((prevState: TState) => TState)) => void,
+    setState: (newState: TState | ((previousState: TState) => TState)) => void,
     props: TProps
   ) => TActions
 ): BusinessLogicHook<{ state: TState; actions: TActions }, TProps> {
@@ -106,7 +106,7 @@ export function createReducerBusinessLogic<
  */
 export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
   state: TState,
-  setState: (newState: TState | ((prevState: TState) => TState)) => void,
+  setState: (newState: TState | ((previousState: TState) => TState)) => void,
   props: TProps
 ) {
   const handlersRef = useRef<Map<string, EventHandlerFactory<TElement>>>(
@@ -119,7 +119,7 @@ export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
       handler: (
         event: E & { currentTarget: TElement },
         state: TState,
-        setState: (newState: TState | ((prevState: TState) => TState)) => void,
+        setState: (newState: TState | ((previousState: TState) => TState)) => void,
         props: TProps
       ) => void
     ): EventHandlerFactory<TElement, E> => {
@@ -181,33 +181,33 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
     const actions = useMemo(
       (): FormActions<T> => ({
         setValue: (name: keyof T, value: T[keyof T]) => {
-          setState((prev) => ({
-            ...prev,
-            values: { ...prev.values, [name]: value },
+          setState((previous) => ({
+            ...previous,
+            values: { ...previous.values, [name]: value },
             isDirty: true,
           }));
         },
 
         setError: (name: keyof T, error: string | null) => {
-          setState((prev) => ({
-            ...prev,
-            errors: { ...prev.errors, [name]: error },
+          setState((previous) => ({
+            ...previous,
+            errors: { ...previous.errors, [name]: error },
           }));
         },
 
         setTouched: (name: keyof T, touched: boolean) => {
-          setState((prev) => ({
-            ...prev,
-            touched: { ...prev.touched, [name]: touched },
+          setState((previous) => ({
+            ...previous,
+            touched: { ...previous.touched, [name]: touched },
           }));
         },
 
         validateField: (name: keyof T) => {
           if (validationRules?.[name]) {
             const error = validationRules[name](state.values[name]);
-            setState((prev) => ({
-              ...prev,
-              errors: { ...prev.errors, [name]: error },
+            setState((previous) => ({
+              ...previous,
+              errors: { ...previous.errors, [name]: error },
             }));
           }
         },
@@ -223,17 +223,17 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
           >;
           let isValid = true;
 
-          Object.keys(validationRules).forEach((key) => {
+          for (const key of Object.keys(validationRules)) {
             const fieldName = key as keyof T;
             const error = validationRules[fieldName](state.values[fieldName]);
             errors[fieldName] = error;
             if (error) {
               isValid = false;
             }
-          });
+          }
 
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             errors,
             isValid,
           }));
@@ -257,7 +257,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
             return;
           }
 
-          setState((prev) => ({ ...prev, isSubmitting: true }));
+          setState((previous) => ({ ...previous, isSubmitting: true }));
 
           try {
             const isValid = actions.validateForm();
@@ -267,7 +267,7 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
           } catch {
             // Logging disabled
           } finally {
-            setState((prev) => ({ ...prev, isSubmitting: false }));
+            setState((previous) => ({ ...previous, isSubmitting: false }));
           }
         },
       }),
@@ -312,7 +312,8 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
     const [state, setState] = React.useState<TableState<T>>({
       items: initialItems,
       selectedItems: [],
-      sortBy: undefined,
+      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
+      sortBy: null,
       sortDirection: 'asc',
       filterBy: '',
       currentPage: 1,
@@ -324,8 +325,8 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
     const actions = useMemo(
       (): TableActions<T> => ({
         setItems: (items: T[]) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             items,
             totalItems: items.length,
             currentPage: 1,
@@ -333,57 +334,57 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
         },
 
         selectItem: (item: T) => {
-          setState((prev) => ({
-            ...prev,
-            selectedItems: prev.selectedItems.includes(item)
-              ? prev.selectedItems.filter((i) => i !== item)
-              : [...prev.selectedItems, item],
+          setState((previous) => ({
+            ...previous,
+            selectedItems: previous.selectedItems.includes(item)
+              ? previous.selectedItems.filter((index) => index !== item)
+              : [...previous.selectedItems, item],
           }));
         },
 
         selectAll: () => {
-          setState((prev) => ({
-            ...prev,
-            selectedItems: [...prev.items],
+          setState((previous) => ({
+            ...previous,
+            selectedItems: [...previous.items],
           }));
         },
 
         deselectAll: () => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             selectedItems: [],
           }));
         },
 
         sortBy: (field: string) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             sortBy: field,
             sortDirection:
-              prev.sortBy === field && 'asc' === prev.sortDirection
+              previous.sortBy === field && 'asc' === previous.sortDirection
                 ? 'desc'
                 : 'asc',
           }));
         },
 
         filter: (query: string) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             filterBy: query,
             currentPage: 1,
           }));
         },
 
         paginate: (page: number) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             currentPage: page,
           }));
         },
 
         setItemsPerPage: (count: number) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             itemsPerPage: count,
             currentPage: 1,
           }));
@@ -426,7 +427,7 @@ export function createModalBusinessLogic(
     const [state, setState] = React.useState<ModalState>({
       isOpen: false,
       title: '',
-      content: undefined,
+      content: null,
       size: 'md',
       variant: 'primary',
       closable: true,
@@ -437,51 +438,51 @@ export function createModalBusinessLogic(
     const actions = useMemo(
       (): ModalActions => ({
         open: (config = {}) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             ...config,
             isOpen: true,
           }));
         },
 
         close: () => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             isOpen: false,
           }));
         },
 
         toggle: () => {
-          setState((prev) => ({
-            ...prev,
-            isOpen: !prev.isOpen,
+          setState((previous) => ({
+            ...previous,
+            isOpen: !previous.isOpen,
           }));
         },
 
         setTitle: (title: string) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             title,
           }));
         },
 
         setContent: (content: React.ReactNode) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             content,
           }));
         },
 
         setSize: (size: ComponentSize) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             size,
           }));
         },
 
         setVariant: (variant: ComponentVariant) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             variant,
           }));
         },
@@ -521,28 +522,32 @@ export function createAsyncDataBusinessLogic<T>(
 > {
   return () => {
     const [state, setState] = React.useState<AsyncDataState<T>>({
-      data: undefined,
+      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
+      data: null,
       loading: false,
-      error: undefined,
-      lastFetch: undefined,
+      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
+      error: null,
+      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'number... Remove this comment to see the full error message
+      lastFetch: null,
     });
 
     const actions = useMemo(
       (): AsyncDataActions<T> => ({
         fetchData: async () => {
-          setState((prev) => ({ ...prev, loading: true, error: undefined }));
+          // @ts-expect-error TS(2345): Argument of type '(prev: AsyncDataState<T>) => { l... Remove this comment to see the full error message
+          setState((previous) => ({ ...previous, loading: true, error: null }));
 
           try {
             const data = await fetchFunction();
-            setState((prev) => ({
-              ...prev,
+            setState((previous) => ({
+              ...previous,
               data,
               loading: false,
               lastFetch: Date.now(),
             }));
           } catch (error) {
-            setState((prev) => ({
-              ...prev,
+            setState((previous) => ({
+              ...previous,
               error:
                 error instanceof Error ? error.message : 'An error occurred',
               loading: false,
@@ -551,23 +556,23 @@ export function createAsyncDataBusinessLogic<T>(
         },
 
         setData: (data: T) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             data,
             lastFetch: Date.now(),
           }));
         },
 
         setError: (error: string | null) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             error,
           }));
         },
 
         setLoading: (loading: boolean) => {
-          setState((prev) => ({
-            ...prev,
+          setState((previous) => ({
+            ...previous,
             loading,
           }));
         },
@@ -578,10 +583,13 @@ export function createAsyncDataBusinessLogic<T>(
 
         clearData: () => {
           setState({
-            data: undefined,
+            // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
+            data: null,
             loading: false,
-            error: undefined,
-            lastFetch: undefined,
+            // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
+            error: null,
+            // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'number... Remove this comment to see the full error message
+            lastFetch: null,
           });
         },
       }),

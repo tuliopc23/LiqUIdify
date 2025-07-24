@@ -18,4 +18,5 @@ export {
 	GlassDrawerTitle,
 	type GlassDrawerTitleProps,
 	GlassDrawerTrigger,
+
 } from "./glass-drawer";

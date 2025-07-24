@@ -3,6 +3,7 @@ import { type InferVariantProps as VariantProps, createVariants as cva } from '.
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import React from "react";
+
 import { cn } from "@/core/utils/classname";
 
 const drawerVariants = cva(
@@ -12,6 +13,7 @@ const drawerVariants = cva(
 		"data-[state=open]:animate-in data-[state=closed]:animate-out",
 		"data-[state=closed]:duration-300 data-[state=open]:duration-500",
 	],
+
 	{
 		variants: {
 			side: {
@@ -111,7 +113,9 @@ export interface GlassDrawerProps
 export interface GlassDrawerContentProps
 	extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
 		VariantProps<typeof drawerVariants> {
+
 	children: React.ReactNode;
+
 	showCloseButton?: boolean;
 	closeButtonPosition?: "header" | "overlay";
 }
@@ -142,6 +146,7 @@ export interface GlassDrawerFooterProps
 }
 
 const GlassDrawer: React.FC<GlassDrawerProps> = ({ children, ...props }) => {
+
 	return <DialogPrimitive.Root {...props}>{children}</DialogPrimitive.Root>;
 };
 
@@ -155,6 +160,7 @@ const GlassDrawerOverlay = React.forwardRef<
 	React.ElementRef<typeof DialogPrimitive.Overlay>,
 	React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
+
 	<DialogPrimitive.Overlay
 		ref={ref}
 		className={cn(
@@ -183,13 +189,17 @@ const GlassDrawerContent = React.forwardRef<
 		},
 		ref,
 	) => (
+
 		<GlassDrawerPortal>
+
 			<GlassDrawerOverlay />
+
 			<DialogPrimitive.Content
 				ref={ref}
 				className={cn(drawerVariants({ side, size }), className)}
 				{...props}
 			>
+
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
@@ -199,8 +209,11 @@ const GlassDrawerContent = React.forwardRef<
 				>
 					{children}
 					{showCloseButton && "overlay" === closeButtonPosition && (
+
 						<GlassDrawerClose className="absolute right-4 top-4 rounded-md opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-white/10">
+
 							<X className="h-4 w-4" />
+
 							<span className="sr-only">Close</span>
 						</GlassDrawerClose>
 					)}
@@ -214,7 +227,8 @@ const GlassDrawerHeader = React.forwardRef<
 	HTMLDivElement,
 	GlassDrawerHeaderProps
 >(({ className, children, ...props }, ref) => (
-	<div ref={ref} className={cn(drawerHeaderVariants(), className)} {...props}>
+
+	<div ref={ref} className={cn(drawerHeaderVariants(), className)} {...(props as any)}>
 		{children}
 	</div>
 ));
@@ -223,6 +237,7 @@ const GlassDrawerTitle = React.forwardRef<
 	React.ElementRef<typeof DialogPrimitive.Title>,
 	GlassDrawerTitleProps
 >(({ className, children, ...props }, ref) => (
+
 	<DialogPrimitive.Title
 		ref={ref}
 		className={cn("text-lg font-semibold text-white", className)}
@@ -236,6 +251,7 @@ const GlassDrawerDescription = React.forwardRef<
 	React.ElementRef<typeof DialogPrimitive.Description>,
 	GlassDrawerDescriptionProps
 >(({ className, children, ...props }, ref) => (
+
 	<DialogPrimitive.Description
 		ref={ref}
 		className={cn("text-sm text-white/70", className)}
@@ -247,10 +263,10 @@ const GlassDrawerDescription = React.forwardRef<
 
 const GlassDrawerBody = React.forwardRef<HTMLDivElement, GlassDrawerBodyProps>(
 	({ className, children, ...props }, ref) => (
-		<div
-			ref={ref}
+
+		<div ref={ref}
 			className={cn(drawerContentVariants(), className)}
-			{...props}
+			{...(props as any)}
 		>
 			{children}
 		</div>
@@ -261,7 +277,8 @@ const GlassDrawerFooter = React.forwardRef<
 	HTMLDivElement,
 	GlassDrawerFooterProps
 >(({ className, children, ...props }, ref) => (
-	<div ref={ref} className={cn(drawerFooterVariants(), className)} {...props}>
+
+	<div ref={ref} className={cn(drawerFooterVariants(), className)} {...(props as any)}>
 		{children}
 	</div>
 ));

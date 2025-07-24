@@ -6,6 +6,7 @@
 // Physics-based components
 export * from '../components/glass-slider';
 // Physics hooks
+
 export * from '../hooks/use-haptic-feedback';
 // Physics utilities
 export * from '../lib/glass-physics';

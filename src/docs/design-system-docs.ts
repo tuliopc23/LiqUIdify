@@ -34,7 +34,7 @@ export interface DesignSystemExample {
   tokens: string[];
 }
 
-export interface ColorPaletteDoc {
+export interface ColorPaletteDocument {
   name: string;
   description: string;
   colors: Array<{
@@ -48,7 +48,7 @@ export interface ColorPaletteDoc {
   }>;
 }
 
-export interface TypographyDoc {
+export interface TypographyDocument {
   name: string;
   description: string;
   scales: Array<{
@@ -60,7 +60,7 @@ export interface TypographyDoc {
   }>;
 }
 
-export interface SpacingDoc {
+export interface SpacingDocument {
   name: string;
   description: string;
   scale: Array<{
@@ -72,17 +72,19 @@ export interface SpacingDoc {
 }
 
 // Design system documentation generator
-class DesignSystemDocGenerator {
-  generateColorPalette(): ColorPaletteDoc[] {
+class DesignSystemDocumentGenerator {
+  generateColorPalette(): ColorPaletteDocument[] {
     return [
       {
         name: 'Primary Colors',
         description: 'Main brand colors used throughout the interface',
+
         colors: Object.entries(designTokens.colors.primary).map(
           ([name, value]) => ({
             name: `primary-${name}`,
             value,
             usage: this.getColorUsage('primary', name),
+
             contrast: this.calculateContrast(value),
           })
         ),
@@ -91,6 +93,7 @@ class DesignSystemDocGenerator {
         name: 'Glass Colors - Light Theme',
         description:
           'Translucent colors for glass morphism effects in light theme',
+
         colors: Object.entries(designTokens.colors.glass.light).map(
           ([name, value]) => ({
             name: `glass-light-${name}`,
@@ -103,6 +106,7 @@ class DesignSystemDocGenerator {
         name: 'Glass Colors - Dark Theme',
         description:
           'Translucent colors for glass morphism effects in dark theme',
+
         colors: Object.entries(designTokens.colors.glass.dark).map(
           ([name, value]) => ({
             name: `glass-dark-${name}`,
@@ -114,6 +118,7 @@ class DesignSystemDocGenerator {
       {
         name: 'Border Colors',
         description: 'Subtle border colors for glass components',
+
         colors: [
           ...Object.entries(designTokens.colors.border.light).map(
             ([name, value]) => ({
@@ -134,12 +139,13 @@ class DesignSystemDocGenerator {
     ];
   }
 
-  generateTypographyScale(): TypographyDoc {
+  generateTypographyScale(): TypographyDocument {
     return {
       name: 'Typography Scale',
       description:
         'Harmonious type scale with optimized line heights and letter spacing',
       scales: Object.entries(designTokens.typography.fontSize).map(
+
         ([name, [size, config]]) => ({
           name,
           size,
@@ -152,10 +158,11 @@ class DesignSystemDocGenerator {
     };
   }
 
-  generateSpacingScale(): SpacingDoc {
+  generateSpacingScale(): SpacingDocument {
     return {
       name: 'Spacing Scale',
       description: 'Consistent spacing system based on 4px grid',
+
       scale: Object.entries(designTokens.spacing).map(([name, value]) => ({
         name,
         value,
@@ -305,7 +312,7 @@ export const designSystemSections: DesignSystemSection[] = [
       {
         type: 'color-palette',
         title: 'Color Palettes',
-        content: new DesignSystemDocGenerator().generateColorPalette(),
+        content: new DesignSystemDocumentGenerator().generateColorPalette(),
       },
     ],
   },
@@ -325,7 +332,7 @@ export const designSystemSections: DesignSystemSection[] = [
       {
         type: 'typography-scale',
         title: 'Type Scale',
-        content: new DesignSystemDocGenerator().generateTypographyScale(),
+        content: new DesignSystemDocumentGenerator().generateTypographyScale(),
       },
     ],
   },
@@ -345,7 +352,7 @@ export const designSystemSections: DesignSystemSection[] = [
       {
         type: 'spacing-scale',
         title: 'Spacing Scale',
-        content: new DesignSystemDocGenerator().generateSpacingScale(),
+        content: new DesignSystemDocumentGenerator().generateSpacingScale(),
       },
     ],
   },
@@ -461,5 +468,5 @@ function getEasingUsage(name: string): string {
 // Export the documentation generator
 export const designSystemDocs = {
   sections: designSystemSections,
-  generator: new DesignSystemDocGenerator(),
+  generator: new DesignSystemDocumentGenerator(),
 };

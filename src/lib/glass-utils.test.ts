@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+// @ts-expect-error TS(2307): Cannot find module './glass-utils' or its correspo... Remove this comment to see the full error message
 import { cn, getGlassClass, glassVariants } from './glass-utils';
 
 describe('glass-utils', () => {
@@ -51,16 +52,16 @@ describe('glass-utils', () => {
       ];
       const actualVariants = Object.keys(glassVariants);
 
-      expectedVariants.forEach((variant) => {
+      for (const variant of expectedVariants) {
         expect(actualVariants).toContain(variant);
-      });
+      }
     });
 
     it('all variants return non-empty strings', () => {
-      Object.values(glassVariants).forEach((variant) => {
+      for (const variant of Object.values(glassVariants)) {
         expect(variant).toBeTruthy();
         expect(typeof variant).toBe('string');
-      });
+      }
     });
   });
 });

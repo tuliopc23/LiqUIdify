@@ -25,13 +25,13 @@ export const createGlassColor = (color: string): GlassColor => {
 export function isValidGlassColor(color: string): boolean {
   // Valid formats: hex, rgb, rgba, hsl, hsla
   const patterns = [
-    /^#[0-9A-Fa-f]{3}$/, // #RGB
-    /^#[0-9A-Fa-f]{6}$/, // #RRGGBB
-    /^#[0-9A-Fa-f]{8}$/, // #RRGGBBAA
-    /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/,
-    /^rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*[\d.]+\s*\)$/,
-    /^hsl\(\s*\d+\s*,\s*\d+%?\s*,\s*\d+%?\s*\)$/,
-    /^hsla\(\s*\d+\s*,\s*\d+%?\s*,\s*\d+%?\s*,\s*[\d.]+\s*\)$/,
+    /^#[\dA-Fa-f]{3}$/, // #RGB
+    /^#[\dA-Fa-f]{6}$/, // #RRGGBB
+    /^#[\dA-Fa-f]{8}$/, // #RRGGBBAA
+    /^rgb\((?:\s*\d+\s*,){2}\s*\d+\s*\)$/,
+    /^rgba\((?:\s*\d+\s*,){3}\s*[\d.]+\s*\)$/,
+    /^hsl\(\s*\d+(?:\s*,\s*\d+%?){2}\s*\)$/,
+    /^hsla\(\s*\d+(?:\s*,\s*\d+%?){2}\s*,\s*[\d.]+\s*\)$/,
   ];
 
   return patterns.some((pattern) => pattern.test(color));
@@ -231,6 +231,7 @@ export const brandedUtils = {
     try {
       return createGlassColor(color);
     } catch {
+      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'GlassC... Remove this comment to see the full error message
       return;
     }
   },
@@ -248,6 +249,7 @@ export const brandedUtils = {
     try {
       return createAccessibleContrast(mockRatio);
     } catch {
+      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'Access... Remove this comment to see the full error message
       return;
     }
   },

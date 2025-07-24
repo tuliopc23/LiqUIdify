@@ -148,7 +148,7 @@ export class VisualTestSuite {
           ? undefined
           : `diffs/${testId}-${browser}-${viewport}-diff.png`,
       };
-    } catch (_error) {
+    } catch {
       return {
         testId,
         testName,
@@ -303,10 +303,9 @@ export class VisualTestSuite {
 
     let allPerfect = true;
 
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i];
-      const expected = expectedPositions[i];
-      if (!element) continue;
+    for (const [index, element] of elements.entries()) {
+      const expected = expectedPositions[index];
+      if (!element) {continue;}
       const rect = element.getBoundingClientRect();
 
       const actualX = Math.round(rect.left);
@@ -379,18 +378,22 @@ export class VisualTestSuite {
     for (const state of states) {
       // Apply state
       switch (state) {
-        case 'hover':
+        case 'hover': {
           element.dispatchEvent(new MouseEvent('mouseenter'));
           break;
-        case 'focus':
+        }
+        case 'focus': {
           element.focus();
           break;
-        case 'active':
+        }
+        case 'active': {
           element.dispatchEvent(new MouseEvent('mousedown'));
           break;
-        case 'disabled':
+        }
+        case 'disabled': {
           (element as any).disabled = true;
           break;
+        }
       }
 
       // Wait for state to apply
@@ -409,18 +412,22 @@ export class VisualTestSuite {
 
       // Reset state
       switch (state) {
-        case 'hover':
+        case 'hover': {
           element.dispatchEvent(new MouseEvent('mouseleave'));
           break;
-        case 'focus':
+        }
+        case 'focus': {
           element.blur();
           break;
-        case 'active':
+        }
+        case 'active': {
           element.dispatchEvent(new MouseEvent('mouseup'));
           break;
-        case 'disabled':
+        }
+        case 'disabled': {
           (element as any).disabled = false;
           break;
+        }
       }
     }
 
@@ -442,9 +449,9 @@ export class VisualTestSuite {
     crossBrowserTests: CrossBrowserTestResult[];
     recommendations: string[];
   } {
-    const allVisualTests = Array.from(this.testResults.values()).flat();
-    const allAnimationTests = Array.from(this.animationResults.values()).flat();
-    const allCrossBrowserTests = Array.from(this.crossBrowserResults.values());
+    const allVisualTests = [...this.testResults.values()].flat();
+    const allAnimationTests = [...this.animationResults.values()].flat();
+    const allCrossBrowserTests = [...this.crossBrowserResults.values()];
 
     const totalTests =
       allVisualTests.length +
@@ -537,7 +544,7 @@ export const visualTestUtils = {
     element.style.height = '100px';
     element.style.padding = '20px';
     element.textContent = 'Test Element';
-    document.body.appendChild(element);
+    document.body.append(element);
     return element;
   },
 
@@ -587,18 +594,22 @@ export const visualTestUtils = {
     type: 'hover' | 'focus' | 'click' | 'touch'
   ): void {
     switch (type) {
-      case 'hover':
+      case 'hover': {
         element.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
         break;
-      case 'focus':
+      }
+      case 'focus': {
         element.focus();
         break;
-      case 'click':
+      }
+      case 'click': {
         element.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         break;
-      case 'touch':
+      }
+      case 'touch': {
         element.dispatchEvent(new TouchEvent('touchstart', { bubbles: true }));
         break;
+      }
     }
   },
 };

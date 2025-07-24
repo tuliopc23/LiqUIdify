@@ -1,4 +1,5 @@
 import React from "react";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassProgressProps {
@@ -43,12 +44,16 @@ export const GlassProgress = React.memo(
 			};
 
 			return (
-				<div ref={ref} className={cn("w-full", className)} {...props}>
+
+				<div ref={ref} className={cn("w-full", className)} {...(props as any)}>
 					{showValue && (
+
 						<div className="flex justify-between items-center mb-2">
+
 							<span className="text-sm text-gray-600 dark:text-gray-400">
 								Progress
 							</span>
+
 							<span className="text-sm font-medium text-gray-900 dark:text-white">
 								{Math.round(percentage)}%
 							</span>
@@ -65,6 +70,7 @@ export const GlassProgress = React.memo(
 								"bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600",
 						)}
 					>
+
 						<div
 							className={cn(
 								"h-full transition-all duration-500 ease-out rounded-full",
@@ -78,6 +84,7 @@ export const GlassProgress = React.memo(
 						/>
 
 						{/* Shimmer effect */}
+
 						<div
 							className={cn(
 								"absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent",

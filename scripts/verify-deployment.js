@@ -4,8 +4,8 @@
  * Verify deployment readiness for Vercel
  */
 
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 console.log("🔍 Verifying deployment readiness...\n");
 
@@ -28,16 +28,16 @@ const checks = {
 
 let allPassed = true;
 
-Object.entries(checks).forEach(([name, check]) => {
+for (const [name, check] of Object.entries(checks)) {
 	try {
 		const passed = check();
 		console.log(`${passed ? "✅" : "❌"} ${name}`);
-		if (!passed) allPassed = false;
+		if (!passed) {allPassed = false;}
 	} catch (error) {
 		console.log(`❌ ${name} - Error: ${error.message}`);
 		allPassed = false;
 	}
-});
+}
 
 console.log("\n📋 Build Commands:");
 const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
@@ -52,7 +52,7 @@ try {
 	console.log(`  - Build Command: ${vercelConfig.buildCommand}`);
 	console.log(`  - Output Directory: ${vercelConfig.outputDirectory}`);
 	console.log(`  - Install Command: ${vercelConfig.installCommand}`);
-} catch (error) {
+} catch {
 	console.log("  ❌ Could not read vercel.json");
 }
 

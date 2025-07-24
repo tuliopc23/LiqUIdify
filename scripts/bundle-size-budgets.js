@@ -11,11 +11,11 @@
  * - Performance regression detection
  */
 
-const fs = require("fs").promises;
-const path = require("path");
-const { execSync } = require("child_process");
-const zlib = require("zlib");
-const { promisify } = require("util");
+const fs = require("node:fs").promises;
+const path = require("node:path");
+const { execSync } = require("node:child_process");
+const zlib = require("node:zlib");
+const { promisify } = require("node:util");
 
 const gzip = promisify(zlib.gzip);
 const brotliCompress = promisify(zlib.brotliCompress);
@@ -96,11 +96,11 @@ class BundleSizeBudgetEnforcer {
 
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m", // cyan
-			warn: "\x1b[33m", // yellow
-			error: "\x1b[31m", // red
-			success: "\x1b[32m", // green
-			reset: "\x1b[0m",
+			info: "\u001B[36m", // cyan
+			warn: "\u001B[33m", // yellow
+			error: "\u001B[31m", // red
+			success: "\u001B[32m", // green
+			reset: "\u001B[0m",
 		};
 
 		const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
@@ -111,7 +111,7 @@ class BundleSizeBudgetEnforcer {
 		try {
 			const stats = await fs.stat(filePath);
 			return stats.size;
-		} catch (error) {
+		} catch {
 			return 0;
 		}
 	}
@@ -127,7 +127,7 @@ class BundleSizeBudgetEnforcer {
 				gzipped: gzipped.length,
 				brotli: brotli.length,
 			};
-		} catch (error) {
+		} catch {
 			return {
 				uncompressed: 0,
 				gzipped: 0,
@@ -206,7 +206,7 @@ class BundleSizeBudgetEnforcer {
 						bundleAnalysis.css.totalSize += sizes.uncompressed;
 					}
 				}
-			} catch (error) {
+			} catch {
 				// CSS directory doesn't exist, skip
 			}
 
@@ -415,10 +415,10 @@ class BundleSizeBudgetEnforcer {
 
 	extractCSSType(filename) {
 		// Extract CSS type from filename
-		if (filename.includes("core")) return "core";
-		if (filename.includes("animation")) return "animations";
-		if (filename.includes("utilities")) return "utilities";
-		if (filename.includes("theme")) return "themes";
+		if (filename.includes("core")) {return "core";}
+		if (filename.includes("animation")) {return "animations";}
+		if (filename.includes("utilities")) {return "utilities";}
+		if (filename.includes("theme")) {return "themes";}
 		return "core";
 	}
 
@@ -427,7 +427,7 @@ class BundleSizeBudgetEnforcer {
 			const historyPath = "./dist/bundle-size-history.json";
 			const historyData = await fs.readFile(historyPath, "utf8");
 			this.historicalData = JSON.parse(historyData);
-		} catch (error) {
+		} catch {
 			// No historical data available, start fresh
 			this.historicalData = [];
 		}
@@ -441,7 +441,7 @@ class BundleSizeBudgetEnforcer {
 			timestamp,
 			commit: commitHash,
 			totalSize: this.results.summary.totalSize,
-			budgetUsage: parseFloat(this.results.summary.budgetUsage),
+			budgetUsage: Number.parseFloat(this.results.summary.budgetUsage),
 			status: this.results.summary.status,
 			violations: this.results.violations.length,
 			warnings: this.results.warnings.length,

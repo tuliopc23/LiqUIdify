@@ -23,6 +23,7 @@ describe('AccessibilityManager', () => {
   describe('validateComponent', () => {
     it('should validate a component and return accessibility report', async () => {
       const { container } = render(
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <button aria-label="Test button">Click me</button>
       );
       const element = container.firstChild as HTMLElement;
@@ -40,6 +41,7 @@ describe('AccessibilityManager', () => {
     });
 
     it('should cache validation results', async () => {
+      // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       const { container } = render(<div role="main">Content</div>);
       const element = container.firstChild as HTMLElement;
       expect(element).toBeTruthy();
@@ -83,6 +85,7 @@ describe('AccessibilityManager', () => {
   describe('validateARIA', () => {
     it('should validate ARIA attributes', () => {
       const { container } = render(
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <button aria-expanded="true" aria-pressed="false">
           Toggle
         </button>
@@ -98,6 +101,7 @@ describe('AccessibilityManager', () => {
 
     it('should detect invalid ARIA attributes', () => {
       const { container } = render(
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <button aria-expanded="maybe">Bad button</button>
       );
       const element = container.firstChild as HTMLElement;
@@ -110,6 +114,7 @@ describe('AccessibilityManager', () => {
     });
 
     it('should auto-correct invalid boolean ARIA values', () => {
+      // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       const { container } = render(<button aria-expanded="yes">Toggle</button>);
       const element = container.firstChild as HTMLElement;
       expect(element).toBeTruthy();
@@ -120,6 +125,7 @@ describe('AccessibilityManager', () => {
     });
 
     it('should suggest missing required ARIA attributes', () => {
+      // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       const { container } = render(<div role="combobox">Dropdown</div>);
       const element = container.firstChild as HTMLElement;
       expect(element).toBeTruthy();
@@ -136,9 +142,13 @@ describe('AccessibilityManager', () => {
   describe('manageFocus', () => {
     it('should create focus trap', () => {
       const { container } = render(
+        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div>
+          // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <button>First</button>
+          // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <button>Second</button>
+          // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           <button>Third</button>
         </div>
       );
@@ -162,6 +172,7 @@ describe('AccessibilityManager', () => {
 
   describe('Real-time monitoring', () => {
     it('should enable and disable monitoring', () => {
+      // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       const { container } = render(<div>Content</div>);
 
       expect(() => {

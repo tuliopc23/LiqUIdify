@@ -92,17 +92,21 @@ export class VisualRegressionTester {
       let browser: Browser;
 
       switch (browserType) {
-        case 'chromium':
+        case 'chromium': {
           browser = await chromium.launch();
           break;
-        case 'firefox':
+        }
+        case 'firefox': {
           browser = await firefox.launch();
           break;
-        case 'webkit':
+        }
+        case 'webkit': {
           browser = await webkit.launch();
           break;
-        default:
+        }
+        default: {
           throw new Error(`Unsupported browser type: ${browserType}`);
+        }
       }
 
       this.browsers.push(browser);
@@ -125,9 +129,9 @@ export class VisualRegressionTester {
     const results: VisualTestResult[] = [];
 
     // Iterate through browsers
-    for (let i = 0; i < this.browsers.length; i++) {
-      const browser = safeArrayAccess(this.browsers, i);
-      const browserType = safeArrayAccess(this.options.browsers || [], i);
+    for (let index = 0; index < this.browsers.length; index++) {
+      const browser = safeArrayAccess(this.browsers, index);
+      const browserType = safeArrayAccess(this.options.browsers || [], index);
 
       if (!browser || !browserType) {
         // Logging disabled
@@ -247,9 +251,9 @@ export class VisualRegressionTester {
     await this.setComponentState(page, selector, animationState);
 
     // Capture frames
-    for (let i = 0; i < frames; i++) {
-      const timestamp = i * frameInterval;
-      const frameNumber = i + 1;
+    for (let index = 0; index < frames; index++) {
+      const timestamp = index * frameInterval;
+      const frameNumber = index + 1;
 
       // Wait for frame time
       await page.waitForTimeout(frameInterval);
@@ -388,29 +392,33 @@ export class VisualRegressionTester {
   ): Promise<void> {
     // Execute state change based on state name
     switch (state) {
-      case 'hover':
+      case 'hover': {
         await page.hover(selector);
         break;
-      case 'focus':
+      }
+      case 'focus': {
         await page.focus(selector);
         break;
-      case 'active':
+      }
+      case 'active': {
         await page.focus(selector);
         await page.mouse.down();
         break;
-      case 'disabled':
+      }
+      case 'disabled': {
         await page.evaluate((sel) => {
-          const element = typeof document !== "undefined" ? document.querySelector(sel) : null;
+          const element = typeof document === "undefined" ? null : document.querySelector(sel);
           if (element) {
             (element as HTMLElement).setAttribute('disabled', 'true');
           }
         }, selector);
         break;
-      default:
+      }
+      default: {
         // For custom states, try to find a data attribute or class
         await page.evaluate(
           ({ sel, st }: { sel: string; st: string }) => {
-            const element = typeof document !== "undefined" ? document.querySelector(sel) : null;
+            const element = typeof document === "undefined" ? null : document.querySelector(sel);
             if (element) {
               // Try to find a button or link that triggers the state
               const trigger =
@@ -422,7 +430,7 @@ export class VisualRegressionTester {
                 (trigger as HTMLElement).click();
               } else {
                 // Try to set a data attribute
-                (element as HTMLElement).setAttribute('data-state', st);
+                element as HTMLElement.dataset.state = st;
                 // Dispatch custom event
                 element.dispatchEvent(
                   new CustomEvent('statechange', {
@@ -435,6 +443,7 @@ export class VisualRegressionTester {
           { sel: selector, st: state }
         );
         break;
+      }
     }
 
     // Wait for any state changes to apply
@@ -510,17 +519,17 @@ export class VisualRegressionTester {
    * Create necessary directories
    */
   private createDirectories(): void {
-    const dirs = [
+    const directories = [
       this.options.diffDir,
       this.options.baselineDir,
       this.options.screenshotDir,
     ].filter(Boolean) as string[];
 
-    dirs.forEach((dir) => {
+    for (const dir of directories) {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
-    });
+    }
   }
 
   /**
@@ -610,7 +619,7 @@ export class VisualRegressionTester {
     `;
 
     // Add test cards
-    results.forEach((result) => {
+    for (const result of results) {
       const statusClass = result.passed ? 'pass' : 'fail';
 
       html += `
@@ -657,7 +666,7 @@ export class VisualRegressionTester {
           </div>
         </div>
       `;
-    });
+    }
 
     html += `
         </div>

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
-const [,, resultsJsonPath] = process.argv;
+const resultsJsonPath = process.argv[2];
 if (!resultsJsonPath) {
   console.warn("[analyze-memory-patterns] No results JSON path provided.");
   process.exit(0);

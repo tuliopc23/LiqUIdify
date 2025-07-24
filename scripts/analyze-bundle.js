@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
-const { gzipSync } = require("zlib");
+const fs = require("node:fs");
+const path = require("node:path");
+const { gzipSync } = require("node:zlib");
 
 /**
  * S-tier Bundle Size Analyzer
@@ -22,7 +22,7 @@ function getFileSize(filePath) {
 	try {
 		const stats = fs.statSync(filePath);
 		return stats.size;
-	} catch (error) {
+	} catch {
 		return 0;
 	}
 }
@@ -32,7 +32,7 @@ function getGzipSize(filePath) {
 		const content = fs.readFileSync(filePath);
 		const compressed = gzipSync(content);
 		return compressed.length;
-	} catch (error) {
+	} catch {
 		return 0;
 	}
 }
@@ -51,8 +51,8 @@ function analyzeBundle() {
 	let totalGzipSize = 0;
 	let allPassed = true;
 
-	Object.entries(BUNDLE_LIMITS).forEach(([bundleName, limit]) => {
-		if (bundleName === "total") return;
+	for (const [bundleName, limit] of Object.entries(BUNDLE_LIMITS)) {
+		if (bundleName === "total") {continue;}
 
 		const filePath = path.join(DIST_DIR, bundleName);
 		const size = getFileSize(filePath);
@@ -67,7 +67,7 @@ function analyzeBundle() {
 		console.log(
 			`${bundleName.padEnd(17)} | ${formatSize(size).padEnd(9)} | ${formatSize(gzipSize).padEnd(9)} | ${formatSize(limit).padEnd(9)} | ${passed ? "✅" : "❌"}`,
 		);
-	});
+	}
 
 	console.log("------------------|-----------|-----------|-----------|-------");
 
@@ -82,7 +82,7 @@ function analyzeBundle() {
 
 	// Analyze what's taking up space
 	const bundles = ["core.min.js", "animations.min.js", "advanced.min.js"];
-	bundles.forEach((bundleName) => {
+	for (const bundleName of bundles) {
 		const filePath = path.join(DIST_DIR, bundleName);
 		const mapPath = filePath + ".map";
 
@@ -100,11 +100,11 @@ function analyzeBundle() {
 				console.log(
 					`  Hooks: ${sources.filter((s) => s.includes("/hooks/")).length}`,
 				);
-			} catch (e) {
+			} catch {
 				// Source map parsing failed
 			}
 		}
-	});
+	}
 
 	// Generate JSON report
 	const report = {
@@ -141,13 +141,13 @@ function analyzeBundle() {
 
 	console.log("\n📄 Report saved to: dist/bundle-size-report.json");
 
-	if (!allPassed) {
+	if (allPassed) {
+		console.log("\n✅ All bundles meet S-tier size requirements!");
+	} else {
 		console.error(
 			"\n❌ Bundle size limits exceeded! S-tier requirements not met.",
 		);
 		process.exit(1);
-	} else {
-		console.log("\n✅ All bundles meet S-tier size requirements!");
 	}
 }
 

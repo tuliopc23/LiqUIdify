@@ -1,4 +1,5 @@
 import React from "react";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassTextareaProps
@@ -14,6 +15,7 @@ export const GlassTextarea = React.memo(
 			ref,
 		) => {
 			return (
+
 				<textarea
 					ref={ref}
 					className={cn(

@@ -10,6 +10,7 @@ import {
   useState,
   // useCallback,
 } from 'react';
+
 import { useProgressiveEnhancement } from '../utils/hydration-utils';
 import { isBrowser } from '../utils/ssr-utils';
 
@@ -30,6 +31,7 @@ export interface EnhancedSSRProviderProps {
 export function EnhancedSSRProvider({
   children,
   fallback = undefined,
+
   loading = <div>Loading...</div>,
   onHydrationComplete,
   // onHydrationError,
@@ -40,6 +42,7 @@ export function EnhancedSSRProvider({
   const [isClient, setIsClient] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
   const [_hydrationError, _setHydrationError] = useState<Error | null>(
+
     undefined
   );
   const [_hasError, _setHasError] = useState(false);
@@ -70,21 +73,25 @@ export function EnhancedSSRProvider({
 
   // Server-side rendering
   if (!isClient) {
+
     return <>{fallback || children}</>;
   }
 
   // Hydration error state
   if (_hasError && _retryCount >= maxHydrationRetries) {
+
     return <>{fallback || loading}</>;
   }
 
   // Hydration in progress
   if (!isHydrated) {
+
     return <>{loading}</>;
   }
 
   // Fully hydrated with enhancements
   return (
+
     <div
       data-ssr-hydrated="true"
       data-enhancements={JSON.stringify(enhancements)}
@@ -131,7 +138,9 @@ export function withEnhancedSSR<P extends object>(
 ) {
   const EnhancedComponent = (props: P) => {
     return (
+
       <EnhancedSSRProvider {...options}>
+
         <Component {...props} />
       </EnhancedSSRProvider>
     );
@@ -149,7 +158,7 @@ export function useClientOnly<T>(
   factory: () => T,
   deps: any[] = []
 ): { value: T | null; isReady: boolean } {
-  const [value, setValue] = useState<T | null | null>(null);
+  const [value, setValue] = useState<T | null | null>(undefined);
   const [isReady, setIsReady] = useState(false);
   const isClient = isBrowser();
 
@@ -175,7 +184,7 @@ export function useHydrationSafeState<T>(
     if (!isBrowser()) {
       return serverValue;
     }
-    return clientValue !== undefined ? clientValue : serverValue;
+    return clientValue === undefined ? serverValue : clientValue;
   });
 
   return [state, setState];
@@ -184,7 +193,7 @@ export function useHydrationSafeState<T>(
 /**
  * Utility for creating SSR-safe event handlers
  */
-export function createSSREventHandler<T extends (...args: any[]) => any>(
+export function createSSREventHandler<T extends (...arguments_: any[]) => any>(
   handler: T
 ): T | (() => void) {
   return isBrowser() ? handler : () => {};
@@ -207,7 +216,7 @@ export function useHydrationMetrics() {
     }
 
     const start = performance.now();
-    setMetrics((prev) => ({ ...prev, hydrationStart: start }));
+    setMetrics((previous) => ({ ...previous, hydrationStart: start }));
 
     const handleHydrationComplete = () => {
       const end = performance.now();

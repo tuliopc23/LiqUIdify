@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type React from "react";
 import { forwardRef, useCallback, useRef, useState } from "react";
+
 import { cn } from "@/core/utils/classname";
 
 const fileUploadVariants = cva(
@@ -19,6 +20,7 @@ const fileUploadVariants = cva(
 		"relative w-full rounded-xl border-2 border-dashed transition-all duration-200",
 		"bg-white/5 backdrop-blur-sm",
 	],
+
 	{
 		variants: {
 			size: {
@@ -46,6 +48,7 @@ const fileItemVariants = cva(
 		"bg-white/5 backdrop-blur-sm border border-white/10",
 		"transition-all duration-200",
 	],
+
 	{
 		variants: {
 			status: {
@@ -70,18 +73,26 @@ export interface FileUploadItem {
 	preview?: string;
 }
 
-export interface GlassFileUploadProps
-	extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,
+export interface GlassFileUploadProps extends Omit<Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>, "onChange">,
 		VariantProps<typeof fileUploadVariants> {
+
 	onFilesChange?: (files: FileUploadItem[]) => void;
+
 	onUpload?: (files: File[]) => Promise<void>;
 	accept?: string;
+
 	multiple?: boolean;
+
 	maxFiles?: number;
+
 	maxFileSize?: number; // in bytes
+
 	disabled?: boolean;
+
 	showPreview?: boolean;
+
 	showProgress?: boolean;
+
 	allowedTypes?: string[];
 	dropzoneText?: string;
 	browseText?: string;
@@ -137,6 +148,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 					setFiles(updatedFiles);
 
 					// Upload files
+
 					await onUpload(filesToUpload.map((f) => f.file));
 
 					// Update files to success state
@@ -197,18 +209,19 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 			}
 			const k = 1024;
 			const sizes = ["Bytes", "KB", "MB", "GB"];
-			const i = Math.floor(Math.log(bytes) / Math.log(k));
-			return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
+			const index = Math.floor(Math.log(bytes) / Math.log(k));
+			return `${Number.parseFloat((bytes / k ** index).toFixed(2))} ${sizes[index]}`;
 		};
 
 		// Validate file
 		const validateFile = useCallback(
 			(file: File): string | null => {
 				if (maxFileSize && file.size > maxFileSize) {
+
 					return `File size exceeds ${formatFileSize(maxFileSize)}`;
 				}
 
-				if (0 < allowedTypes.length && !allowedTypes.includes(file.type)) {
+				if (allowedTypes.length > 0 && !allowedTypes.includes(file.type)) {
 					return "File type not allowed";
 				}
 
@@ -222,10 +235,12 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 			return new Promise((resolve) => {
 				if (file.type.startsWith("image/")) {
 					const reader = new FileReader();
-					reader.onload = (e) => resolve(e.target?.result as string);
+					reader.addEventListener('load', (e) => resolve(e.target?.result as string));
+
      reader.onerror = () => resolve(undefined);
 					reader.readAsDataURL(file);
 				} else {
+
      resolve(undefined);
 				}
 			});
@@ -245,7 +260,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 					const preview = showPreview ? await createPreview(file) : undefined;
 
 					const fileItem: FileUploadItem = {
-						id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+						id: `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`,
 						file,
 						status: error ? "error" : "pending",
 						error: error || undefined,
@@ -257,12 +272,13 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 
 				const updatedFiles = [...files, ...newFiles].slice(0, maxFiles);
 				setFiles(updatedFiles);
+
 				onFilesChange?.(updatedFiles);
 
 				// Auto-upload if onUpload is provided
 				if (onUpload) {
 					const validFiles = newFiles.filter((f) => "pending" === f.status);
-					if (0 < validFiles.length) {
+					if (validFiles.length > 0) {
 						await handleUpload(validFiles);
 					}
 				}
@@ -283,7 +299,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 		// Handle file input change
 		const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 			const fileList = [...(e.target.files || [])];
-			if (0 < fileList.length) {
+			if (fileList.length > 0) {
 				processFiles(fileList);
 			}
 		};
@@ -320,7 +336,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 			dragCountRef.current = 0;
 
 			const fileList = [...e.dataTransfer.files];
-			if (0 < fileList.length) {
+			if (fileList.length > 0) {
 				processFiles(fileList);
 			}
 		};
@@ -329,6 +345,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 		const removeFile = (fileId: string) => {
 			const updatedFiles = files.filter((f) => f.id !== fileId);
 			setFiles(updatedFiles);
+
 			onFilesChange?.(updatedFiles);
 		};
 
@@ -342,8 +359,8 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 		const currentState = isDragOver ? "dragover" : uploadState;
 
 		return (
-			<div
-				ref={ref}
+
+			<div ref={ref}
 				className={cn(
 					fileUploadVariants({ size, state: currentState }),
 					className,
@@ -352,21 +369,27 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 				onDragLeave={handleDragLeave}
 				onDragOver={handleDragOver}
 				onDrop={handleDrop}
-				{...props}
+				{...(props as any)}
 			>
+
 				<input
 					ref={fileInputRef}
 					type="file"
 					accept={accept}
+
 					multiple={multiple}
 					onChange={handleInputChange}
 					className="hidden"
+
 					disabled={disabled}
 				/>
 
 				{/* Upload Area */}
+
 				<div className="text-center">
+
 					<div className="flex justify-center mb-4">
+
 						<Upload
 							className={cn(
 								"w-12 h-12 transition-colors duration-200",
@@ -380,6 +403,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 					<button
 						type="button"
 						onClick={openFileDialog}
+
 						disabled={disabled}
 						className={cn(
 							"px-4 py-2 rounded-lg transition-all duration-200",
@@ -393,8 +417,10 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 				</div>
 
 				{/* File List */}
+
 				<AnimatePresence>
-					{0 < files.length && (
+					{files.length > 0 && (
+
 						<motion.div
 							initial={{ opacity: 0, y: 10 }}
 							animate={{ opacity: 1, y: 0 }}
@@ -405,6 +431,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 								const Icon = getFileIcon(fileItem.file);
 
 								return (
+
 									<motion.div
 										key={fileItem.id}
 										initial={{ opacity: 0, x: -20 }}
@@ -415,30 +442,38 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 										)}
 									>
 										{/* File Preview/Icon */}
+
 										<div className="flex-shrink-0">
 											{fileItem.preview ? (
+
 												<img
 													src={fileItem.preview}
 													alt={fileItem.file.name}
 													className="w-10 h-10 object-cover rounded"
 												/>
 											) : (
+
 												<Icon className="w-10 h-10 text-white/60" />
 											)}
 										</div>
 
 										{/* File Info */}
+
 										<div className="flex-1 min-w-0">
+
 											<p className="text-white/90 truncate font-medium">
 												{fileItem.file.name}
 											</p>
+
 											<p className="text-white/60 text-sm">
 												{formatFileSize(fileItem.file.size)}
 											</p>
 
 											{/* Progress Bar */}
 											{showProgress && "uploading" === fileItem.status && (
+
 												<div className="w-full bg-white/10 rounded-full h-1.5 mt-1">
+
 													<div
 														className="bg-blue-400 h-1.5 rounded-full transition-all duration-300"
 														style={{ width: `${fileItem.progress || 0}%` }}
@@ -448,6 +483,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 
 											{/* Error Message */}
 											{fileItem.error && (
+
 												<p className="text-red-400 text-xs mt-1">
 													{fileItem.error}
 												</p>
@@ -455,12 +491,14 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
 										</div>
 
 										{/* Remove Button */}
+
 										<button
 											type="button"
 											onClick={() => removeFile(fileItem.id)}
 											className="flex-shrink-0 p-1 hover:bg-white/10 rounded-lg transition-colors"
 											aria-label="Remove file"
 										>
+
 											<X className="w-4 h-4 text-white/60" />
 										</button>
 									</motion.div>

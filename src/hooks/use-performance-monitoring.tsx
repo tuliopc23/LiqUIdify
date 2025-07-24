@@ -47,7 +47,7 @@ export function usePerformanceMonitoring(
       });
     }
 
-    setRenderCount((prev) => prev + 1);
+    setRenderCount((previous) => previous + 1);
   }, [componentName, props, renderCount]);
 
   // Mark render start
@@ -90,6 +90,7 @@ export function withPerformanceMonitoring<P extends object>(
 
   function WrappedComponent(props: P): ReactElement {
     usePerformanceMonitoring(displayName, props as Record<string, any>);
+
     return <Component {...props} />;
   }
 
@@ -109,9 +110,9 @@ export function useWebVitals(callback?: (metric: any) => void) {
     performanceMonitor.init({
       reportCallback: (report) => {
         const vitals: Record<string, number> = {};
-        report.webVitals.forEach((metric) => {
+        for (const metric of report.webVitals) {
           vitals[metric.name] = metric.value;
-        });
+        }
         setMetrics(vitals);
 
         if (callback) {
@@ -131,6 +132,7 @@ export function useWebVitals(callback?: (metric: any) => void) {
 export function useRealtimePerformance() {
   const [fps, setFps] = useState(60);
   const [memory, setMemory] = useState<{ used: number; limit: number } | null>(
+
     undefined
   );
   const frameCountRef = useRef(0);

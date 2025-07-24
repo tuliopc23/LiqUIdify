@@ -190,7 +190,7 @@ class PerformanceBenchmarker {
 	): Promise<number> {
 		const times: number[] = [];
 
-		for (let i = 0; i < iterations; i++) {
+		for (let index = 0; index < iterations; index++) {
 			const startTime = performance.now();
 
 			// Simulate React render cycle
@@ -221,8 +221,8 @@ class PerformanceBenchmarker {
 		// Initial render
 		await this.simulateRender(ComponentClass, props);
 
-		for (let i = 0; i < iterations; i++) {
-			const newProps = { ...props, key: i }; // Force re-render
+		for (let index = 0; index < iterations; index++) {
+			const newProps = { ...props, key: index }; // Force re-render
 
 			const startTime = performance.now();
 			await this.simulateRender(ComponentClass, newProps);
@@ -246,9 +246,9 @@ class PerformanceBenchmarker {
 
 		// Create multiple instances to measure memory impact
 		const instances: any[] = [];
-		for (let i = 0; 100 > i; i++) {
+		for (let index = 0; 100 > index; index++) {
 			instances.push(
-				await this.simulateRender(ComponentClass, { ...props, key: i }),
+				await this.simulateRender(ComponentClass, { ...props, key: index }),
 			);
 		}
 
@@ -328,11 +328,11 @@ class PerformanceBenchmarker {
 					}
 				};
 
-				if ("undefined" !== typeof requestAnimationFrame) {
-					requestAnimationFrame(animationCallback);
-				} else {
+				if ("undefined" === typeof requestAnimationFrame) {
 					// Fallback for non-browser environments
 					setTimeout(animationCallback, 16); // Simulate 60fps
+				} else {
+					requestAnimationFrame(animationCallback);
 				}
 			};
 
@@ -448,7 +448,7 @@ class PerformanceBenchmarker {
 		}
 
 		return {
-			passed: 0 === violations.length,
+			passed: violations.length === 0,
 			score: Math.max(0, totalScore),
 			metrics: benchmark,
 			violations,
@@ -490,7 +490,7 @@ class PerformanceBenchmarker {
 
 		const report: PerformanceReport = {
 			overall: {
-				passed: 0 === allViolations.length,
+				passed: allViolations.length === 0,
 				score: overallScore,
 				grade,
 			},
@@ -521,9 +521,9 @@ class PerformanceBenchmarker {
 			// Create and destroy component instances
 			const instances: any[] = [];
 
-			for (let i = 0; 50 > i; i++) {
+			for (let index = 0; 50 > index; index++) {
 				instances.push(
-					await this.simulateRender(ComponentClass, { ...props, key: i }),
+					await this.simulateRender(ComponentClass, { ...props, key: index }),
 				);
 			}
 
@@ -544,19 +544,14 @@ class PerformanceBenchmarker {
 
 		// Calculate memory growth trend
 		const firstMeasurement = measurements[0] || 0;
-		const lastMeasurement = measurements[measurements.length - 1] || 0;
+		const lastMeasurement = measurements.at(-1) || 0;
 		const growth = lastMeasurement - firstMeasurement;
 
 		const hasLeak =
 			growth > PERFORMANCE_THRESHOLDS.MEMORY_LEAK_THRESHOLD * 1024 * 1024;
 
 		let recommendation = "";
-		if (hasLeak) {
-			recommendation =
-				"Memory leak detected. Check for event listeners, timers, or references that are not being cleaned up.";
-		} else {
-			recommendation = "No significant memory leaks detected.";
-		}
+		recommendation = hasLeak ? "Memory leak detected. Check for event listeners, timers, or references that are not being cleaned up." : "No significant memory leaks detected.";
 
 		return {
 			hasLeak,
@@ -604,7 +599,7 @@ class PerformanceBenchmarker {
 	}
 
 	private calculateOverallScore(results: ComponentBenchmark[]): number {
-		if (0 === results.length) {
+		if (results.length === 0) {
 			return 0;
 		}
 

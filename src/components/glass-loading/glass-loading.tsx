@@ -1,4 +1,5 @@
 import React from "react";
+
 import { cn } from "@/core/utils/classname";
 
 export interface GlassLoadingProps {
@@ -32,6 +33,7 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
 		};
 
 		const renderSpinner = () => (
+
 			<div
 				className={cn(
 					sizeClasses[size],
@@ -41,16 +43,18 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
 		);
 
 		const renderDots = () => (
+
 			<div className="flex space-x-1">
-				{[0, 1, 2].map((i) => (
+				{[0, 1, 2].map((index) => (
+
 					<div
-						key={i}
+						key={index}
 						className={cn(
 							dotSizes[size],
 							"bg-blue-500 rounded-full animate-pulse",
 						)}
 						style={{
-							animationDelay: `${i * 0.2}s`,
+							animationDelay: `${index * 0.2}s`,
 							animationDuration: "1s",
 						}}
 					/>
@@ -59,6 +63,7 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
 		);
 
 		const renderPulse = () => (
+
 			<div
 				className={cn(
 					sizeClasses[size],
@@ -68,13 +73,15 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
 		);
 
 		const renderBars = () => (
+
 			<div className="flex space-x-1 items-end">
-				{[0, 1, 2, 3].map((i) => (
+				{[0, 1, 2, 3].map((index) => (
+
 					<div
-						key={i}
+						key={index}
 						className={cn(barSizes[size], "bg-blue-500 animate-pulse")}
 						style={{
-							animationDelay: `${i * 0.15}s`,
+							animationDelay: `${index * 0.15}s`,
 							animationDuration: "0.8s",
 						}}
 					/>
@@ -84,28 +91,33 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
 
 		const renderVariant = () => {
 			switch (variant) {
-				case "dots":
+				case "dots": {
 					return renderDots();
-				case "pulse":
+				}
+				case "pulse": {
 					return renderPulse();
-				case "bars":
+				}
+				case "bars": {
 					return renderBars();
-				default:
+				}
+				default: {
 					return renderSpinner();
+				}
 			}
 		};
 
 		return (
-			<div
-				ref={ref}
+
+			<div ref={ref}
 				className={cn(
 					"flex flex-col items-center justify-center space-y-3",
 					className,
 				)}
-				{...props}
+				{...(props as any)}
 			>
 				{renderVariant()}
 				{text && (
+
 					<p className="text-sm text-gray-600 dark:text-gray-400 animate-pulse">
 						{text}
 					</p>

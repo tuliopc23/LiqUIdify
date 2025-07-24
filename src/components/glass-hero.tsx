@@ -2,13 +2,17 @@ import type { Variants } from 'framer-motion';
 import { motion } from 'framer-motion';
 import type React from 'react';
 import { forwardRef, useCallback, useRef } from 'react';
+
 import { cn } from '@/core/utils/classname';
+
 import { useContentAwareGlass, useLiquidGlass } from '@/hooks/use-liquid-glass';
 // Removed branded type import - using string literals directly
 import {
   containerFadeInFast,
   fadeInUpLarge,
+
 } from '@/lib/framer-motion-constants';
+
 import { useMagneticHover } from '@/lib/glass-physics';
 import { GlassButton } from './glass-button-refactored';
 
@@ -60,7 +64,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
     const { elementRef: magneticRef, transform } = useMagneticHover(0.2, 200);
 
     // Callback ref to handle both content and magnetic refs
-    const setRefs = useCallback(
+    const setReferences = useCallback(
       (node: HTMLDivElement | null) => {
         (contentRef as React.MutableRefObject<HTMLDivElement | null>).current =
           node;
@@ -116,8 +120,8 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
       : {};
 
     return (
-      <div
-        ref={setRefs}
+
+      <div ref={setReferences}
         className={cn(
           'relative overflow-hidden',
           'liquid-glass-adaptive liquid-glass-depth-2',
@@ -127,22 +131,23 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         )}
         style={
           {
-            transform: enableMagnetic ? transform : undefined,
+            transform: enableMagnetic ? transform : null,
             backgroundImage: backgroundImage
               ? `url(${backgroundImage})`
               : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 20%, #4a4a4a 40%, #6b7280 60%, #9ca3af 80%, #e5e7eb 100%)',
             backgroundSize: backgroundImage ? 'cover' : '400% 400%',
             backgroundPosition: 'center',
             backgroundAttachment: enableParallax ? 'fixed' : 'scroll',
-            animation: !backgroundImage
-              ? 'gradientShift 15s ease infinite'
-              : undefined,
+            animation: backgroundImage
+              ? null
+              : 'gradientShift 15s ease infinite',
           } as React.CSSProperties
         }
-        {...props}
+        {...(props as any)}
       >
         {/* Background Video */}
         {backgroundVideo && (
+
           <video
             autoPlay
             muted
@@ -151,7 +156,9 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
             className="absolute inset-0 w-full h-full object-cover -z-10"
             aria-label="Background video"
           >
+
             <source src={backgroundVideo} type="video/mp4" />
+
             <track
               kind="captions"
               srcLang="en"
@@ -162,10 +169,13 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         )}
 
         {/* Background Overlay */}
+
         <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-black/5 dark:from-black/20 dark:via-transparent dark:to-black/40 -z-5" />
 
         {/* Animated Background Elements */}
+
         <div className="absolute inset-0 overflow-hidden -z-10">
+
           <motion.div
             className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
             style={{
@@ -184,6 +194,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               ease: 'easeInOut',
             }}
           />
+
           <motion.div
             className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full"
             style={{
@@ -203,6 +214,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               delay: 3,
             }}
           />
+
           <motion.div
             className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full"
             style={{
@@ -225,6 +237,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         </div>
 
         {/* Content Container */}
+
         <motion.div
           className={cn(
             'relative z-10 flex flex-col h-full max-w-7xl mx-auto',
@@ -236,9 +249,12 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
           {...parallaxVariants}
         >
           {'split' === variant ? (
+
             <div className="grid lg:grid-cols-2 gap-12 items-center h-full">
+
               <div className="space-y-8">
                 {subtitle && (
+
                   <motion.div
                     variants={itemVariants}
                     className="inline-flex items-center px-4 py-2 rounded-full liquid-glass liquid-glass-specular text-sm font-medium text-[var(--text-secondary)]"
@@ -258,6 +274,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                 </motion.h1>
 
                 {description && (
+
                   <motion.p
                     variants={itemVariants}
                     className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl leading-relaxed"
@@ -267,11 +284,13 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                 )}
 
                 {(primaryAction || secondaryAction) && (
+
                   <motion.div
                     variants={itemVariants}
                     className="flex flex-col sm:flex-row gap-4"
                   >
                     {primaryAction && (
+
                       <GlassButton
                         variant="primary"
                         size={'lg'}
@@ -283,6 +302,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                       </GlassButton>
                     )}
                     {secondaryAction && (
+
                       <GlassButton
                         variant="secondary"
                         size={'lg'}
@@ -300,8 +320,10 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               <div className="relative">{children}</div>
             </div>
           ) : (
+
             <div className="flex flex-col justify-center items-center h-full space-y-8 text-center">
               {subtitle && (
+
                 <motion.div
                   variants={itemVariants}
                   className="inline-flex items-center px-6 py-3 rounded-full liquid-glass liquid-glass-specular text-sm font-medium text-[var(--text-secondary)]"
@@ -321,6 +343,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               </motion.h1>
 
               {description && (
+
                 <motion.p
                   variants={itemVariants}
                   className="text-lg md:text-xl text-[var(--text-secondary)] max-w-3xl leading-relaxed"
@@ -330,11 +353,13 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               )}
 
               {(primaryAction || secondaryAction) && (
+
                 <motion.div
                   variants={itemVariants}
                   className="flex flex-col sm:flex-row gap-6 pt-4"
                 >
                   {primaryAction && (
+
                     <GlassButton
                       variant="primary"
                       size={'xl'}
@@ -346,6 +371,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
                     </GlassButton>
                   )}
                   {secondaryAction && (
+
                     <GlassButton
                       variant="secondary"
                       size={'xl'}
@@ -360,6 +386,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               )}
 
               {children && (
+
                 <motion.div variants={itemVariants} className="pt-8">
                   {children}
                 </motion.div>
@@ -369,7 +396,9 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
         </motion.div>
 
         {/* Floating Glass Elements */}
+
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
+
           <motion.div
             className="absolute top-20 right-20 w-4 h-4 liquid-glass rounded-full"
             animate={{
@@ -382,6 +411,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               ease: 'easeInOut',
             }}
           />
+
           <motion.div
             className="absolute bottom-32 left-16 w-6 h-6 liquid-glass rounded-full"
             animate={{
@@ -395,6 +425,7 @@ const GlassHero = forwardRef<HTMLDivElement, GlassHeroProps>(
               delay: 1.5,
             }}
           />
+
           <motion.div
             className="absolute top-1/2 right-8 w-3 h-3 liquid-glass rounded-full"
             animate={{

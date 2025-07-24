@@ -10,9 +10,9 @@
  * 4. Providing clear status reporting
  */
 
-import { execSync } from "child_process";
-import fs from "fs";
-import path from "path";
+import { execSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
 
 class PerformanceAlertResolver {
 	constructor() {
@@ -22,11 +22,11 @@ class PerformanceAlertResolver {
 
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m",
-			success: "\x1b[32m",
-			warn: "\x1b[33m",
-			error: "\x1b[31m",
-			reset: "\x1b[0m",
+			info: "\u001B[36m",
+			success: "\u001B[32m",
+			warn: "\u001B[33m",
+			error: "\u001B[31m",
+			reset: "\u001B[0m",
 		};
 
 		console.log(`${colors[level]}${message}${colors.reset}`);
@@ -49,7 +49,7 @@ class PerformanceAlertResolver {
 				severity: "low",
 				fix: "Update monitoring configuration to reduce false positives",
 			});
-		} catch (error) {
+		} catch {
 			this.log("❌ Performance validation failed", "error");
 			this.issues.push({
 				type: "actual-performance",
@@ -91,7 +91,7 @@ class PerformanceAlertResolver {
 					"warn",
 				);
 			}
-		} catch (error) {
+		} catch {
 			this.log("⚠️ Could not analyze test output", "warn");
 		}
 
@@ -114,7 +114,7 @@ class PerformanceAlertResolver {
 			} else {
 				this.log("✅ Bundle size analysis: Within S-tier limits", "success");
 			}
-		} catch (error) {
+		} catch {
 			this.log("⚠️ Could not read bundle size report", "warn");
 		}
 	}
@@ -244,18 +244,18 @@ fi
 				"success",
 			);
 		} else {
-			this.issues.forEach((issue, i) => {
+			for (const [i, issue] of this.issues.entries()) {
 				this.log(
 					`  ${i + 1}. ${issue.description} (${issue.severity})`,
 					issue.severity === "high" ? "error" : "warn",
 				);
-			});
+			}
 		}
 
 		this.log("\n🔧 Fixes Applied:", "info");
-		this.fixes.forEach((fix, i) => {
+		for (const [i, fix] of this.fixes.entries()) {
 			this.log(`  ${i + 1}. ${fix}`, "success");
-		});
+		}
 
 		this.log("\n✅ Next Steps:", "info");
 		this.log("  1. Run: bun run perf:status", "info");

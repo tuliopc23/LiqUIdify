@@ -103,81 +103,90 @@ function initAudioContext() {
 
 // Generate synthetic sound
 function generateSound(type: HapticType, volume: number): void {
-  const ctx = initAudioContext();
-  if (!ctx) {
+  const context = initAudioContext();
+  if (!context) {
     return;
   }
 
-  const oscillator = ctx.createOscillator();
-  const gainNode = ctx.createGain();
+  const oscillator = context.createOscillator();
+  const gainNode = context.createGain();
 
   oscillator.connect(gainNode);
-  gainNode.connect(ctx.destination);
+  gainNode.connect(context.destination);
 
   // Configure sound based on type
   switch (type) {
-    case 'light':
+    case 'light': {
       oscillator.frequency.value = 800;
       oscillator.type = 'sine';
       gainNode.gain.value = volume * 0.1;
       break;
-    case 'medium':
+    }
+    case 'medium': {
       oscillator.frequency.value = 600;
       oscillator.type = 'sine';
       gainNode.gain.value = volume * 0.2;
       break;
-    case 'heavy':
+    }
+    case 'heavy': {
       oscillator.frequency.value = 400;
       oscillator.type = 'square';
       gainNode.gain.value = volume * 0.3;
       break;
-    case 'success':
+    }
+    case 'success': {
       oscillator.frequency.value = 880;
       oscillator.type = 'sine';
       gainNode.gain.value = volume * 0.2;
       // Frequency sweep up
       oscillator.frequency.exponentialRampToValueAtTime(
         1760,
-        ctx.currentTime + 0.1
+        context.currentTime + 0.1
       );
       break;
-    case 'warning':
+    }
+    case 'warning': {
       oscillator.frequency.value = 440;
       oscillator.type = 'triangle';
       gainNode.gain.value = volume * 0.25;
       break;
-    case 'error':
+    }
+    case 'error': {
       oscillator.frequency.value = 220;
       oscillator.type = 'sawtooth';
       gainNode.gain.value = volume * 0.3;
       break;
-    case 'selection':
+    }
+    case 'selection': {
       oscillator.frequency.value = 1000;
       oscillator.type = 'sine';
       gainNode.gain.value = volume * 0.05;
       break;
-    case 'impact':
+    }
+    case 'impact': {
       oscillator.frequency.value = 150;
       oscillator.type = 'square';
       gainNode.gain.value = volume * 0.4;
       break;
-    case 'notification':
+    }
+    case 'notification': {
       oscillator.frequency.value = 660;
       oscillator.type = 'sine';
       gainNode.gain.value = volume * 0.15;
       // Create notification melody
-      oscillator.frequency.setValueAtTime(660, ctx.currentTime);
-      oscillator.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
-      oscillator.frequency.setValueAtTime(660, ctx.currentTime + 0.2);
+      oscillator.frequency.setValueAtTime(660, context.currentTime);
+      oscillator.frequency.setValueAtTime(880, context.currentTime + 0.1);
+      oscillator.frequency.setValueAtTime(660, context.currentTime + 0.2);
       break;
+    }
   }
 
   // Envelope
-  gainNode.gain.setValueAtTime(gainNode.gain.value, ctx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+  gainNode.gain.setValueAtTime(gainNode.gain.value, context.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.1);
 
-  oscillator.start(ctx.currentTime);
-  oscillator.stop(ctx.currentTime + 0.1);
+  oscillator.start(context.currentTime);
+  oscillator.stop(context.currentTime + 0.1);
 }
 
 // Visual feedback animation
@@ -270,16 +279,18 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
     const loadAudio = async (url: string): Promise<AudioBuffer | null> => {
       try {
-        const ctx = initAudioContext();
-        if (!ctx) {
+        const context = initAudioContext();
+        if (!context) {
+
           return;
         }
 
         const response = await fetch(url);
         const arrayBuffer = await response.arrayBuffer();
-        return await ctx.decodeAudioData(arrayBuffer);
+        return await context.decodeAudioData(arrayBuffer);
       } catch {
         // Logging disabled
+
         return;
       }
     };
@@ -332,8 +343,8 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
     const soundUrl = sounds?.[type];
 
     if (soundUrl && audioCache.current.has(soundUrl)) {
-      const ctx = initAudioContext();
-      if (!ctx) {
+      const context = initAudioContext();
+      if (!context) {
         return;
       }
 
@@ -343,12 +354,12 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
         return;
       }
 
-      const source = ctx.createBufferSource();
-      const gainNode = ctx.createGain();
+      const source = context.createBufferSource();
+      const gainNode = context.createGain();
 
       source.buffer = buffer;
       source.connect(gainNode);
-      gainNode.connect(ctx.destination);
+      gainNode.connect(context.destination);
       gainNode.gain.value = volume;
 
       source.start();
@@ -374,23 +385,27 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
       const visualConfig = { ...configRef.current.visual };
 
       switch (type) {
-        case 'success':
+        case 'success': {
           visualConfig.color = 'rgba(34, 197, 94, 0.2)';
           visualConfig.scale = 1.05;
           break;
-        case 'warning':
+        }
+        case 'warning': {
           visualConfig.color = 'rgba(251, 191, 36, 0.2)';
           visualConfig.scale = 0.98;
           break;
-        case 'error':
+        }
+        case 'error': {
           visualConfig.color = 'rgba(239, 68, 68, 0.2)';
           visualConfig.scale = 0.95;
           visualConfig.blur = 2;
           break;
-        case 'impact':
+        }
+        case 'impact': {
           visualConfig.scale = 0.9;
           visualConfig.duration = 150;
           break;
+        }
       }
 
       cleanupRef.current = applyVisualFeedback(element, visualConfig);
@@ -453,7 +468,7 @@ interface HapticContextValue {
   trigger: (_type: HapticType, _element?: HTMLElement | null) => void;
 }
 
-const HapticContext = createContext<HapticContextValue | null>(null);
+const HapticContext = createContext<HapticContextValue | null>(undefined);
 
 export function HapticProvider({
   children,
@@ -465,6 +480,7 @@ export function HapticProvider({
   const haptic = useHapticFeedback(config);
 
   return (
+
     <HapticContext.Provider value={{ config, trigger: haptic.trigger }}>
       {children}
     </HapticContext.Provider>

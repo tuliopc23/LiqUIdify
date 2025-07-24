@@ -1,12 +1,15 @@
 import type React from "react";
 import { forwardRef } from "react";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
+
 import { microInteraction } from "@/core/utils/responsive";
+
 import type { ComponentSize } from "@/types/branded";
+
 import { createComponentSize } from "@/types/branded";
 
-export interface GlassResponsiveCardProps
-	extends React.HTMLAttributes<HTMLDivElement> {
+export interface GlassResponsiveCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes> {
 	variant?: "default" | "elevated" | "outlined" | "pressed";
 	hover?: boolean;
 	bordered?: boolean;
@@ -61,9 +64,9 @@ const GlassResponsiveCard = forwardRef<
 		const baseClasses = cn(
 			"rounded-xl overflow-hidden",
 			variantClasses[variant],
-			"none" !== padding
-				? paddingClasses[padding as keyof typeof paddingClasses]
-				: "",
+			"none" === padding
+				? ""
+				: paddingClasses[padding as keyof typeof paddingClasses],
 			bordered &&
 				"outlined" !== variant &&
 				"border border-[var(--glass-border)]",
@@ -78,7 +81,8 @@ const GlassResponsiveCard = forwardRef<
 		);
 
 		return (
-			<div ref={ref} className={cn(baseClasses, className)} {...props}>
+
+			<div ref={ref} className={cn(baseClasses, className)} {...(props as any)}>
 				{children}
 			</div>
 		);

@@ -1,7 +1,10 @@
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+
 import { accessibilityManager } from "@/core/accessibility-manager";
+
 import { cn } from "@/core/utils/classname";
+
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface GlassFocusTrapProps {
@@ -96,20 +99,20 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
 		return [
 			...containerRef.current.querySelectorAll<HTMLElement>(focusableSelectors),
-		].filter((el) => {
+		].filter((element) => {
 			// Check if element is visible and focusable
-			const style = window.getComputedStyle(el);
-			const rect = el.getBoundingClientRect();
+			const style = window.getComputedStyle(element);
+			const rect = element.getBoundingClientRect();
 
 			return (
 				"none" !== style.display &&
 				"hidden" !== style.visibility &&
 				"0" !== style.opacity &&
-				null !== el.offsetParent &&
+				null !== element.offsetParent &&
 				0 < rect.width &&
 				0 < rect.height &&
-				!el.hasAttribute("inert") &&
-				!el.closest("[inert]")
+				!element.hasAttribute("inert") &&
+				!element.closest("[inert]")
 			);
 		});
 	}, [isClient]);
@@ -142,8 +145,8 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 	const restoreFocusFromHistory = useCallback(() => {
 		const history = focusHistory.current;
 
-		for (let i = history.length - 1; 0 <= i; i--) {
-			const historyItem = history[i];
+		for (let index = history.length - 1; 0 <= index; index--) {
+			const historyItem = history[index];
 			if (!historyItem) {
 				continue;
 			}
@@ -179,8 +182,8 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 			}
 
 			// Check if this is the active trap in the stack
-			if (trapStack && 0 < focusTrapStack.length) {
-				const activeTrap = focusTrapStack[focusTrapStack.length - 1];
+			if (trapStack && focusTrapStack.length > 0) {
+				const activeTrap = focusTrapStack.at(-1);
 				if (activeTrap !== instanceRef.current) {
 					return;
 				}
@@ -198,12 +201,12 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 			}
 
 			const focusableElements = getFocusableElements();
-			if (0 === focusableElements.length) {
+			if (focusableElements.length === 0) {
 				return;
 			}
 
 			const firstElement = focusableElements[0];
-			const lastElement = focusableElements[focusableElements.length - 1] as
+			const lastElement = focusableElements.at(-1) as
 				| HTMLElement
 				| undefined;
 
@@ -254,8 +257,8 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 			}
 
 			// Check if this is the active trap in the stack
-			if (trapStack && 0 < focusTrapStack.length) {
-				const activeTrap = focusTrapStack[focusTrapStack.length - 1];
+			if (trapStack && focusTrapStack.length > 0) {
+				const activeTrap = focusTrapStack.at(-1);
 				if (activeTrap !== instanceRef.current) {
 					return;
 				}
@@ -264,7 +267,11 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 			const target = event.target as HTMLElement;
 
 			// If focus moved outside the trap, bring it back
-			if (!containerRef.current?.contains(target)) {
+			if (containerRef.current?.contains(target)) {
+				// Update last focused element within trap
+				lastFocusedElement.current = target;
+				saveFocusHistory(target);
+			} else {
 				event.preventDefault();
 				event.stopPropagation();
 
@@ -277,16 +284,12 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 				} else {
 					// Fall back to first focusable element
 					const focusableElements = getFocusableElements();
-					if (0 < focusableElements.length && focusableElements[0]) {
+					if (focusableElements.length > 0 && focusableElements[0]) {
 						focusableElements[0].focus(focusOptions);
 					} else if (fallbackFocus?.current) {
 						fallbackFocus.current.focus(focusOptions);
 					}
 				}
-			} else {
-				// Update last focused element within trap
-				lastFocusedElement.current = target;
-				saveFocusHistory(target);
 			}
 		},
 		[
@@ -360,7 +363,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 				lastFocusedElement.current = initialFocus.current;
 			} else {
 				const focusableElements = getFocusableElements();
-				if (0 < focusableElements.length && focusableElements[0]) {
+				if (focusableElements.length > 0 && focusableElements[0]) {
 					focusableElements[0].focus(focusOptions);
 					lastFocusedElement.current = focusableElements[0];
 				} else if (fallbackFocus?.current) {
@@ -384,7 +387,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 		}
 
 		// Add event listeners
-		if (typeof document !== "undefined") {
+		if ("undefined" !== typeof document) {
 			document.addEventListener("keydown", handleKeyDown, true);
 			document.addEventListener("focusin", handleFocusIn, true);
 			document.addEventListener("mousedown", handleMouseDown, true);
@@ -404,7 +407,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 				}
 			}
 
-			if (typeof document !== "undefined") {
+			if ("undefined" !== typeof document) {
 				document.removeEventListener("keydown", handleKeyDown, true);
 				document.removeEventListener("focusin", handleFocusIn, true);
 				document.removeEventListener("mousedown", handleMouseDown, true);
@@ -416,15 +419,13 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 			}
 
 			// Return focus to previous element
-			if (returnFocus && restoreFocus) {
-				if (!restoreFocusFromHistory() && previousActiveElement.current) {
+			if (returnFocus && restoreFocus && !restoreFocusFromHistory() && previousActiveElement.current) {
 					try {
 						previousActiveElement.current.focus(focusOptions);
 					} catch {
 						// Logging disabled
 					}
 				}
-			}
 
 			// Announce focus trap deactivation
 			accessibilityManager.announce("Focus trap deactivated", "polite");
@@ -450,12 +451,13 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 	]);
 
 	return (
+
 		<div
 			ref={containerRef}
 			className={cn("glass-focus-trap", className)}
 			data-focus-trap-active={isActive}
-			aria-modal={isActive ? "true" : undefined}
-			role={isActive ? "dialog" : undefined}
+			aria-modal={isActive ? "true" : null}
+			role={isActive  ? "dialog" : undefined}
 		>
 			{children}
 		</div>

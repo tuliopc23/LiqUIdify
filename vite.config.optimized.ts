@@ -1,13 +1,13 @@
 import react from "@vitejs/plugin-react";
-import { readFileSync } from "fs";
-import { resolve } from "path";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { defineConfig } from "rolldown-vite";
 import dts from "vite-plugin-dts";
 import postcssConfig from "./postcss.config.js";
 import { sharedRollupOptions } from "./build/rolldown.shared";
 
 // Load OXC configuration for consistency
-const oxcConfig = JSON.parse(readFileSync("./oxc.config.json", "utf-8"));
+const oxcConfig = JSON.parse(readFileSync("./oxc.config.json", "utf8"));
 
 export default defineConfig({
 	// Configure rolldown-vite to use OXC transformer
@@ -20,7 +20,7 @@ export default defineConfig({
 			conditionNames: oxcConfig.resolver.conditionNames,
 		},
 		sourcemap: oxcConfig.sourcemap.enable,
-		minify: process.env.NODE_ENV === "production",
+		minify: "production" === process.env.NODE_ENV,
 		target: "es2020",
 	},
 
@@ -30,7 +30,7 @@ export default defineConfig({
 			jsxImportSource: "react",
 			include: /\.(tsx|ts|jsx|js)$/,
 			babel: false, // Use OXC through rolldown-vite
-			fastRefresh: process.env.NODE_ENV === "development",
+			fastRefresh: "development" === process.env.NODE_ENV,
 		}),
 		dts({
 			insertTypesEntry: true,
@@ -134,7 +134,7 @@ export default defineConfig({
 			name: "LiquidUI",
 			formats: ["es", "cjs"],
 			fileName: (format, entryName) => {
-				const extension = format === "es" ? "mjs" : "cjs";
+				const extension = "es" === format ? "mjs" : "cjs";
 				return `${entryName}.${extension}`;
 			},
 		},
@@ -169,6 +169,6 @@ export default defineConfig({
 		jsx: "automatic",
 		jsxImportSource: "react",
 		sourcemap: true,
-		drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
+		drop: "production" === process.env.NODE_ENV ? ["console", "debugger"] : [],
 	},
 });

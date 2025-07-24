@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassSliderProps {
@@ -86,15 +87,13 @@ export const GlassSlider = React.memo(
 			};
 
 			useEffect(() => {
-				if (isDragging) {
-					if (typeof document !== "undefined") {
+				if (isDragging && "undefined" !== typeof document) {
 						document.addEventListener("mousemove", handleMouseMove);
 						document.addEventListener("mouseup", handleMouseUp);
 					}
-				}
 
 				return () => {
-					if (typeof document !== "undefined") {
+					if ("undefined" !== typeof document) {
 						document.removeEventListener("mousemove", handleMouseMove);
 						document.removeEventListener("mouseup", handleMouseUp);
 					}
@@ -102,12 +101,16 @@ export const GlassSlider = React.memo(
 			}, [isDragging, handleMouseMove, handleMouseUp]);
 
 			return (
-				<div ref={ref} className={cn("relative w-full", className)} {...props}>
+
+				<div ref={ref} className={cn("relative w-full", className)} {...(props as any)}>
 					{showValue && (
+
 						<div className="flex justify-between items-center mb-3">
+
 							<span className="text-sm text-gray-600 dark:text-gray-400">
 								Value
 							</span>
+
 							<span className="text-sm font-medium text-gray-900 dark:text-white">
 								{currentValue}
 							</span>
@@ -125,12 +128,14 @@ export const GlassSlider = React.memo(
 						onMouseDown={handleMouseDown}
 					>
 						{/* Track fill */}
+
 						<div
 							className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-200"
 							style={{ width: `${percentage}%` }}
 						/>
 
 						{/* Thumb */}
+
 						<div
 							ref={thumbRef}
 							className={cn(
@@ -147,7 +152,9 @@ export const GlassSlider = React.memo(
 					</div>
 
 					<div className="flex justify-between items-center mt-2 text-xs text-gray-500 dark:text-gray-400">
+
 						<span>{min}</span>
+
 						<span>{max}</span>
 					</div>
 				</div>

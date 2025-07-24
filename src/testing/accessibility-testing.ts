@@ -192,7 +192,7 @@ export async function testKeyboardNavigation(
           severity: 'error',
         });
       }
-    } catch (_error) {
+    } catch {
       issues.push({
         element,
         issue: 'Element focus() method failed',
@@ -250,7 +250,7 @@ function getFocusableElements(
     'details > summary',
   ].join(', ');
 
-  const elements = Array.from(container.querySelectorAll(focusableSelectors));
+  const elements = [...container.querySelectorAll(focusableSelectors)];
 
   if (!includeHidden) {
     return elements.filter((element) => {
@@ -286,8 +286,8 @@ export function testScreenReaderCompatibility(
   const headings = container.querySelectorAll('h1, h2, h3, h4, h5, h6');
   let previousLevel = 0;
 
-  headings.forEach((heading) => {
-    const level = parseInt(heading.tagName.charAt(1));
+  for (const heading of headings) {
+    const level = Number.parseInt(heading.tagName.charAt(1));
 
     if (level > previousLevel + 1) {
       issues.push({
@@ -298,11 +298,11 @@ export function testScreenReaderCompatibility(
     }
 
     previousLevel = level;
-  });
+  }
 
   // Test for alt text on images
   const images = container.querySelectorAll('img');
-  images.forEach((img) => {
+  for (const img of images) {
     if (!img.hasAttribute('alt')) {
       issues.push({
         element: img,
@@ -310,11 +310,11 @@ export function testScreenReaderCompatibility(
         suggestion: 'Add descriptive alt text or alt="" for decorative images',
       });
     }
-  });
+  }
 
   // Test for form labels
   const inputs = container.querySelectorAll('input, select, textarea');
-  inputs.forEach((input) => {
+  for (const input of inputs) {
     const id = input.getAttribute('id');
     const ariaLabel = input.getAttribute('aria-label');
     const ariaLabelledby = input.getAttribute('aria-labelledby');
@@ -330,11 +330,11 @@ export function testScreenReaderCompatibility(
         });
       }
     }
-  });
+  }
 
   // Test for button text
   const buttons = container.querySelectorAll('button');
-  buttons.forEach((button) => {
+  for (const button of buttons) {
     const text = button.textContent?.trim();
     const ariaLabel = button.getAttribute('aria-label');
     const ariaLabelledby = button.getAttribute('aria-labelledby');
@@ -347,7 +347,7 @@ export function testScreenReaderCompatibility(
           'Add text content, aria-label, or aria-labelledby attribute',
       });
     }
-  });
+  }
 
   return {
     passed: issues.length === 0,

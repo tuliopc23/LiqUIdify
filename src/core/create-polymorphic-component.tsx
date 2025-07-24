@@ -4,6 +4,7 @@
 
 import type { ElementType } from 'react';
 import { forwardRef } from 'react';
+
 import { cn } from '@/core/utils/classname';
 import type {
   PolymorphicComponent,
@@ -147,10 +148,11 @@ export function createPolymorphicComponent<
     const elementProps = {
       ...transformedProps,
       className: finalClassName,
-      ref: shouldForwardRef ? ref : undefined,
+      ref: shouldForwardRef ? ref : null,
     } as any;
 
     return (
+
       <ElementComponent key={key} {...elementProps}>
         {children}
       </ElementComponent>
@@ -267,13 +269,13 @@ export function createPolymorphicSlots<
 } {
   const components = {} as any;
 
-  Object.entries(slots).forEach(([key, config]) => {
+  for (const [key, config] of Object.entries(slots)) {
     components[key] = createPolymorphicComponent({
       defaultElement: config.defaultElement,
       displayName: config.displayName,
       baseClassName: `glass-${key.toLowerCase()}`,
     });
-  });
+  }
 
   return components;
 }

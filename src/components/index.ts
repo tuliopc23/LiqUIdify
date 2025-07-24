@@ -7,10 +7,14 @@ export type {
   BaseGlassProps,
   InteractiveGlassProps,
   UnifiedGlassProps,
+
 } from '@/core/base-component';
 // Core Utilities - Re-export from core
+
 export { cn, microInteraction } from '@/core/utils/classname';
+
 export { focusRing } from '@/core/utils/focus';
+
 export { responsiveSize, touchTarget } from '@/core/utils/responsive';
 // Type Exports - Essential types for component usage
 export type {
@@ -18,7 +22,9 @@ export type {
   CardVariantProps,
   GlassVariantProps,
   InputVariantProps,
+
 } from '@/lib/variant-system';
+
 export type { ComponentSize } from '@/types/branded';
 // SSR Utilities
 export {
@@ -26,6 +32,7 @@ export {
   isServer,
   safeDocument,
   safeWindow,
+
 } from '@/utils/ssr-utils';
 // Apple Liquid Glass Components - Enhanced with multi-layer structure
 export {
@@ -34,8 +41,10 @@ export {
   AppleLiquidGlassCard,
   type AppleLiquidGlassComponentProps,
   AppleLiquidGlassNav,
+
 } from './apple-liquid-glass';
 // Utility Components
+
 export { ClientOnly } from './client-only';
 // Showcase and Demo Components
 export { ComponentShowcase } from './component-showcase';
@@ -48,10 +57,12 @@ export {
   EnhancedAppleLiquidGlassNav,
   type EnhancedAppleLiquidGlassProps,
   EnhancedAppleLiquidGlassShowcase,
+
 } from './enhanced-apple-liquid-glass';
 // Core Glass Components - Working and tested
 export { GlassButton, type GlassButtonProps } from './glass-button-refactored';
 export { GlassCard, type GlassCardProps } from './glass-card-refactored';
+
 export { GlassHero, type GlassHeroProps } from './glass-hero';
 export { GlassInput, type GlassInputProps } from './glass-input';
 export { GlassModal, type GlassModalProps } from './glass-modal';
@@ -60,8 +71,11 @@ export { GlassTooltip, type GlassTooltipProps } from './glass-tooltip';
 export {
   LiquidGlassSvgFilters,
   type LiquidGlassSvgFiltersProps,
+
 } from './liquid-glass-svg-filters';
+
 export { SSRPortal } from './ssr-portal';
+
 export { SSRSafeWrapper } from './ssr-safe-wrapper';
 // Theme and Provider Components
 export { ThemeProvider } from './theme-provider';

@@ -89,16 +89,16 @@ export function getCurrentBreakpoint(): BreakpointKey {
 		return "md"; // Default for SSR
 	}
 
-	const width = typeof window !== "undefined" ? window.innerWidth : 0;
+	const width = "undefined" === typeof window ? 0 : window.innerWidth;
 
 	// Convert string values to numbers for comparison
 	const breakpoints = {
-		"2xl": parseInt(BREAKPOINTS["2xl"]),
-		xl: parseInt(BREAKPOINTS.xl),
-		lg: parseInt(BREAKPOINTS.lg),
-		md: parseInt(BREAKPOINTS.md),
-		sm: parseInt(BREAKPOINTS.sm),
-		xs: parseInt(BREAKPOINTS.xs),
+		"2xl": Number.parseInt(BREAKPOINTS["2xl"]),
+		xl: Number.parseInt(BREAKPOINTS.xl),
+		lg: Number.parseInt(BREAKPOINTS.lg),
+		md: Number.parseInt(BREAKPOINTS.md),
+		sm: Number.parseInt(BREAKPOINTS.sm),
+		xs: Number.parseInt(BREAKPOINTS.xs),
 	};
 
 	if (width >= breakpoints["2xl"]) {
@@ -130,14 +130,16 @@ export function matchesBreakpoint(
 		return false;
 	}
 
-	const width = typeof window !== "undefined" ? window.innerWidth : 0;
-	const breakpointValue = parseInt(BREAKPOINTS[breakpoint]);
+	const width = "undefined" === typeof window ? 0 : window.innerWidth;
+	const breakpointValue = Number.parseInt(BREAKPOINTS[breakpoint]);
 
 	switch (condition) {
-		case "up":
+		case "up": {
 			return width >= breakpointValue;
-		case "down":
+		}
+		case "down": {
 			return width < breakpointValue;
+		}
 		case "only": {
 			const breakpointKeys = Object.keys(BREAKPOINTS) as BreakpointKey[];
 			const currentIndex = breakpointKeys.indexOf(breakpoint);
@@ -149,11 +151,12 @@ export function matchesBreakpoint(
 
 			return (
 				width >= breakpointValue &&
-				width < parseInt(BREAKPOINTS[nextBreakpoint])
+				width < Number.parseInt(BREAKPOINTS[nextBreakpoint])
 			);
 		}
-		default:
+		default: {
 			return false;
+		}
 	}
 }
 
@@ -166,12 +169,12 @@ export function createResponsiveClasses(
 ): string {
 	const classes = [baseClass];
 
-	Object.entries(breakpoints).forEach(([breakpoint, className]) => {
+	for (const [breakpoint, className] of Object.entries(breakpoints)) {
 		if (className) {
 			const prefix = "xs" === breakpoint ? "" : `${breakpoint}:`;
 			classes.push(`${prefix}${className}`);
 		}
-	});
+	}
 
 	return classes.join(" ");
 }
@@ -237,12 +240,12 @@ export function responsiveGrid(
 ): string {
 	const classes: string[] = [];
 
-	Object.entries(columns).forEach(([breakpoint, cols]) => {
+	for (const [breakpoint, cols] of Object.entries(columns)) {
 		if (cols) {
 			const prefix = "xs" === breakpoint ? "" : `${breakpoint}:`;
 			classes.push(`${prefix}grid-cols-${cols}`);
 		}
-	});
+	}
 
 	return classes.join(" ");
 }
@@ -283,11 +286,11 @@ export function useBreakpoint(): BreakpointKey {
 			setBreakpoint(getCurrentBreakpoint());
 		};
 
-		if (typeof window !== "undefined") {
+		if ("undefined" !== typeof window) {
 			window.addEventListener("resize", handleResize);
 		}
 		return () => {
-			if (typeof window !== "undefined") {
+			if ("undefined" !== typeof window) {
 				window.removeEventListener("resize", handleResize);
 			}
 		};
@@ -304,11 +307,11 @@ export function responsiveVisibility(
 ): string {
 	const classes: string[] = [];
 
-	Object.entries(show).forEach(([breakpoint, isVisible]) => {
+	for (const [breakpoint, isVisible] of Object.entries(show)) {
 		const prefix = "xs" === breakpoint ? "" : `${breakpoint}:`;
 		const visibility = isVisible ? "block" : "hidden";
 		classes.push(`${prefix}${visibility}`);
-	});
+	}
 
 	return classes.join(" ");
 }

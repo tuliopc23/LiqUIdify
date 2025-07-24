@@ -27,7 +27,9 @@ export function renderWithTheme(
 
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (
+
       <ThemeProvider
+
         attribute="class"
         defaultTheme={theme}
         enableSystem={theme === 'system'}
@@ -109,8 +111,8 @@ export function setupTestEnvironment() {
   mockMatchMedia();
 
   // Mock requestAnimationFrame
-  global.requestAnimationFrame = vi.fn((cb: FrameRequestCallback) => {
-    setTimeout(cb, 0);
+  global.requestAnimationFrame = vi.fn((callback: FrameRequestCallback) => {
+    setTimeout(callback, 0);
     return 1;
   }) as any;
   global.cancelAnimationFrame = vi.fn();
@@ -137,6 +139,7 @@ export const customMatchers = {
   toHaveGlassEffect(received: HTMLElement) {
     const style = window.getComputedStyle(received);
     const hasBackdropFilter =
+
       style.backdropFilter && style.backdropFilter !== 'none';
     const hasBackground = style.background?.includes('rgba');
 
@@ -227,6 +230,7 @@ export class ComponentTester {
   // Test if component has proper glass styling
   hasGlassEffect(): boolean {
     const style = window.getComputedStyle(this.component);
+
     return style.backdropFilter !== 'none' && style.background.includes('rgba');
   }
 
@@ -301,9 +305,9 @@ export function setupVisualTesting() {
 }
 
 // Performance testing helpers
-export function measureRenderTime(renderFn: () => void): number {
+export function measureRenderTime(renderFunction: () => void): number {
   const start = performance.now();
-  renderFn();
+  renderFunction();
   return performance.now() - start;
 }
 

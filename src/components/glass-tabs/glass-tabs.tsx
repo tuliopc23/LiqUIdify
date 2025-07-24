@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+
 import { cn } from "@/core/utils/classname";
 
 export interface GlassTabItem {
@@ -38,7 +39,9 @@ export function GlassTabs({
 	const baseId = useId();
 
 	return (
+
 		<div className={cn("w-full", className)}>
+
 			<div
 				role="tablist"
 				aria-orientation="horizontal" // Change to 'vertical' if orientation prop is implemented
@@ -48,6 +51,7 @@ export function GlassTabs({
 				)}
 			>
 				{tabs.map((tab) => (
+
 					<button
 						type="button"
 						role="tab"
@@ -73,6 +77,7 @@ export function GlassTabs({
 			</div>
 
 			{tabs.map((tab) => (
+
 				<div
 					key={tab.id}
 					id={`${baseId}-panel-${tab.id}`}
@@ -82,6 +87,7 @@ export function GlassTabs({
 					className={cn("tab-content focus:outline-none", tabPanelClassName)} // Added focus:outline-none for potential programmatic focus
 				>
 					{activeTab === tab.id && (
+
 						<div className="glass-effect rounded-lg p-6">{tab.content}</div>
 					)}
 				</div>

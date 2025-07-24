@@ -4,6 +4,7 @@ export type {
 	NetworkAwareProps,
 	PerformanceAwareProps,
 	StaticFallbackProps,
+
 } from "./graceful-degradation";
 export {
 	FeatureDetection,
@@ -13,4 +14,5 @@ export {
 	PerformanceAware,
 	ProgressiveEnhancementProvider,
 	StaticFallback,
+
 } from "./graceful-degradation";

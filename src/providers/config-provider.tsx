@@ -2,10 +2,12 @@ import type { ReactNode } from 'react';
 import {
   GlassUIProvider,
   type GlassUIProviderProps,
+
 } from './glass-ui-provider';
 import {
   GlobalConfigProvider,
   type GlobalConfigProviderProps,
+
 } from './global-config-provider';
 
 export interface ConfigProviderProps {
@@ -28,7 +30,9 @@ export function ConfigProvider({
   globalConfig,
 }: ConfigProviderProps) {
   return (
+
     <GlobalConfigProvider config={globalConfig}>
+
       <GlassUIProvider
         theme={theme}
         glassConfig={glassConfig}

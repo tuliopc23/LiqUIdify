@@ -230,8 +230,8 @@ export class GracefulDegradationManager {
 
     try {
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      return !!ctx;
+      const context = canvas.getContext('2d');
+      return !!context;
     } catch {
       return false;
     }
@@ -256,7 +256,7 @@ export class GracefulDegradationManager {
 
   private notifyListeners(): void {
     if (this.featureSupport) {
-      this.listeners.forEach((callback) => callback(this.featureSupport!));
+      for (const callback of this.listeners) {callback(this.featureSupport!);}
     }
   }
 
@@ -349,6 +349,7 @@ export class GracefulDegradationManager {
 export function useGracefulDegradation() {
   const [manager] = useState(() => GracefulDegradationManager.getInstance());
   const [featureSupport, setFeatureSupport] = useState<FeatureSupport | null>(
+    // @ts-expect-error TS(2345): Argument of type 'undefined' is not assignable to ... Remove this comment to see the full error message
     undefined
   );
   const [isLoading, setIsLoading] = useState(true);
@@ -425,13 +426,13 @@ export function useNetworkAwareFallback() {
     const handleOnline = () => updateStatus();
     const handleOffline = () => updateStatus();
 
-    if (typeof window !== "undefined") {
+    if ("undefined" !== typeof window) {
       window.addEventListener('online', handleOnline);
       window.addEventListener('offline', handleOffline);
     }
 
     return () => {
-      if (typeof window !== "undefined") {
+      if ("undefined" !== typeof window) {
         window.removeEventListener('online', handleOnline);
         window.removeEventListener('offline', handleOffline);
       }

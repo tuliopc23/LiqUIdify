@@ -2,6 +2,7 @@ import { Loader2 } from 'lucide-react';
 import type React from 'react';
 import type { ButtonHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
+
 import { cn } from '@/core/utils/classname';
 
 export interface GlassButtonLiteProps
@@ -50,8 +51,8 @@ export const GlassButtonLite = forwardRef<
     };
 
     return (
-      <button
-        ref={ref}
+
+      <button ref={ref}
         className={cn(
           'glass-button-lite',
           'inline-flex items-center justify-center',
@@ -65,17 +66,23 @@ export const GlassButtonLite = forwardRef<
           className
         )}
         disabled={disabled || loading}
-        {...props}
+        {...(props as any)}
       >
         {loading ? (
+
           <>
+
             <Loader2 className="animate-spin" />
+
             <span>Loading...</span>
           </>
         ) : (
+
           <>
+
             {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
             {children}
+
             {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
           </>
         )}

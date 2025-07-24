@@ -31,13 +31,13 @@ interface PlaygroundConfig {
 	componentName: string;
 	component: React.ComponentType<any>;
 	defaultProps: Record<string, any>;
-	propControls: PropControl[];
+	propControls: PropertyControl[];
 	codeTemplate: string;
 	examples: PlaygroundExample[];
 	accessibilityTests?: AccessibilityTest[];
 }
 
-interface PropControl {
+interface PropertyControl {
 	name: string;
 	type:
 		| "string"
@@ -80,18 +80,21 @@ const VIEWPORT_SIZES: ViewportSize[] = [
 		name: "Mobile",
 		width: 375,
 		height: 667,
+
 		icon: <Smartphone className="w-4 h-4" />,
 	},
 	{
 		name: "Tablet",
 		width: 768,
 		height: 1024,
+
 		icon: <Tablet className="w-4 h-4" />,
 	},
 	{
 		name: "Desktop",
 		width: 1200,
 		height: 800,
+
 		icon: <Monitor className="w-4 h-4" />,
 	},
 ];
@@ -133,6 +136,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 }) => {
 	const [currentProps, setCurrentProps] = useState(config.defaultProps);
 	const [selectedExample, setSelectedExample] = useState<number | null>(
+
 		undefined,
 	);
 	const [viewport, setViewport] = useState(VIEWPORT_SIZES[2]); // Desktop by default
@@ -179,11 +183,12 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 	}, [currentProps, customCode, config.componentName, config.codeTemplate]);
 
 	// Handle prop changes
-	const handlePropChange = useCallback((propName: string, value: any) => {
-		setCurrentProps((prev) => ({
-			...prev,
-			[propName]: value,
+	const handlePropertyChange = useCallback((propertyName: string, value: any) => {
+		setCurrentProps((previous) => ({
+			...previous,
+			[propertyName]: value,
 		}));
+
 		setSelectedExample(undefined);
 	}, []);
 
@@ -298,65 +303,75 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 	// Reset to defaults
 	const resetToDefaults = useCallback(() => {
 		setCurrentProps(config.defaultProps);
+
 		setSelectedExample(undefined);
 		setCustomCode("");
 		reRenderCount.current = 0;
 	}, [config.defaultProps]);
 
 	// Group prop controls by category
-	const propControlsByCategory = useMemo(() => {
-		const grouped: Record<string, PropControl[]> = {};
+	const propertyControlsByCategory = useMemo(() => {
+		const grouped: Record<string, PropertyControl[]> = {};
 
-		config.propControls.forEach((control) => {
+		for (const control of config.propControls) {
 			const category = control.category || "General";
 			if (!grouped[category]) {
 				grouped[category] = [];
 			}
 			grouped[category].push(control);
-		});
+		}
 
 		return grouped;
 	}, [config.propControls]);
 
 	// Render prop control
-	const renderPropControl = (control: PropControl) => {
+	const renderPropertyControl = (control: PropertyControl) => {
 		const value = currentProps[control.name] ?? control.defaultValue;
 
 		const baseInputClasses =
 			"w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 
 		switch (control.type) {
-			case "boolean":
+			case "boolean": {
 				return (
+
 					<label className="flex items-center space-x-2">
+
 						<input
 							type="checkbox"
 							checked={value}
-							onChange={(e) => handlePropChange(control.name, e.target.checked)}
+							onChange={(e) => handlePropertyChange(control.name, e.target.checked)}
 							className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
 						/>
+
 						<span className="text-sm">{control.name}</span>
 					</label>
 				);
+			}
 
-			case "select":
+			case "select": {
 				return (
+
 					<select
 						value={value}
-						onChange={(e) => handlePropChange(control.name, e.target.value)}
+						onChange={(e) => handlePropertyChange(control.name, e.target.value)}
 						className={baseInputClasses}
 					>
 						{control.options?.map((option) => (
+
 							<option key={option} value={option}>
 								{option}
 							</option>
 						))}
 					</select>
 				);
+			}
 
-			case "range":
+			case "range": {
 				return (
+
 					<div className="space-y-2">
+
 						<input
 							type="range"
 							min={control.min || 0}
@@ -364,50 +379,59 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 							step={control.step || 1}
 							value={value}
 							onChange={(e) =>
-								handlePropChange(control.name, Number(e.target.value))
+								handlePropertyChange(control.name, Number(e.target.value))
 							}
 							className="w-full"
 						/>
+
 						<div className="text-sm text-gray-600 text-center">{value}</div>
 					</div>
 				);
+			}
 
-			case "color":
+			case "color": {
 				return (
+
 					<div className="flex space-x-2">
+
 						<input
 							type="color"
 							value={value}
-							onChange={(e) => handlePropChange(control.name, e.target.value)}
+							onChange={(e) => handlePropertyChange(control.name, e.target.value)}
 							className="w-12 h-10 border border-gray-300 rounded cursor-pointer"
 						/>
+
 						<input
 							type="text"
 							value={value}
-							onChange={(e) => handlePropChange(control.name, e.target.value)}
+							onChange={(e) => handlePropertyChange(control.name, e.target.value)}
 							className={`${baseInputClasses} flex-1`}
 							placeholder="#000000"
 						/>
 					</div>
 				);
+			}
 
-			case "textarea":
+			case "textarea": {
 				return (
+
 					<textarea
 						value={value}
-						onChange={(e) => handlePropChange(control.name, e.target.value)}
+						onChange={(e) => handlePropertyChange(control.name, e.target.value)}
 						className={`${baseInputClasses} min-h-[100px]`}
 						rows={4}
 					/>
 				);
+			}
 
-			case "number":
+			case "number": {
 				return (
+
 					<input
 						type="number"
 						value={value}
 						onChange={(e) =>
-							handlePropChange(control.name, Number(e.target.value))
+							handlePropertyChange(control.name, Number(e.target.value))
 						}
 						min={control.min}
 						max={control.max}
@@ -415,32 +439,41 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 						className={baseInputClasses}
 					/>
 				);
+			}
 
-			default: // string
+			default: { // string
 				return (
+
 					<input
 						type="text"
 						value={value}
-						onChange={(e) => handlePropChange(control.name, e.target.value)}
+						onChange={(e) => handlePropertyChange(control.name, e.target.value)}
 						className={baseInputClasses}
 					/>
 				);
+			}
 		}
 	};
 
 	const ComponentToRender = config.component;
 
 	return (
+
 		<div
 			className={`liquidify-playground ${className} bg-gray-50 min-h-screen`}
 		>
 			{/* Header */}
+
 			<div className="bg-white border-b border-gray-200 px-6 py-4">
+
 				<div className="flex items-center justify-between">
+
 					<div>
+
 						<h1 className="text-2xl font-bold text-gray-900">
 							{config.componentName} Playground
 						</h1>
+
 						<p className="text-gray-600 mt-1">
 							Interactive component documentation and testing
 						</p>
@@ -448,6 +481,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
 					<div className="flex items-center space-x-4">
 						{/* Layout Toggle */}
+
 						<button
 							onClick={() =>
 								setLayout("horizontal" === layout ? "vertical" : "horizontal")
@@ -455,33 +489,43 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 							className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
 							title="Toggle layout"
 						>
+
 							<RefreshCw className="w-5 h-5" />
 						</button>
 
 						{/* Performance Metrics */}
 						{enablePerformanceMonitoring && (
+
 							<div className="flex items-center space-x-2 text-sm text-gray-600">
+
 								<Zap className="w-4 h-4" />
+
 								<span>{performanceMetrics.renderTime}ms</span>
+
 								<span>({performanceMetrics.reRenders} renders)</span>
 							</div>
 						)}
 
 						{/* Actions */}
+
 						<div className="flex items-center space-x-2">
+
 							<button
 								onClick={copyCode}
 								className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
 							>
+
 								<Copy className="w-4 h-4 mr-1" />
 								Copy
 							</button>
 
 							{enableCodeExport && (
+
 								<button
 									onClick={exportConfig}
 									className="flex items-center px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md"
 								>
+
 									<Download className="w-4 h-4 mr-1" />
 									Export
 								</button>
@@ -491,6 +535,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 								onClick={resetToDefaults}
 								className="flex items-center px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
 							>
+
 								<RefreshCw className="w-4 h-4 mr-1" />
 								Reset
 							</button>
@@ -499,13 +544,18 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 				</div>
 
 				{/* Controls Bar */}
+
 				<div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+
 					<div className="flex items-center space-x-4">
 						{/* Viewport Controls */}
 						{showViewportControls && (
+
 							<div className="flex items-center space-x-2">
+
 								<span className="text-sm text-gray-600">Viewport:</span>
 								{VIEWPORT_SIZES.map((viewportSize) => (
+
 									<button
 										key={viewportSize.name}
 										onClick={() => setViewport(viewportSize)}
@@ -516,6 +566,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 										}`}
 									>
 										{viewportSize.icon}
+
 										<span className="ml-1">{viewportSize.name}</span>
 									</button>
 								))}
@@ -524,8 +575,11 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
 						{/* Theme Controls */}
 						{showThemeControls && (
+
 							<div className="flex items-center space-x-2">
+
 								<Palette className="w-4 h-4 text-gray-600" />
+
 								<select
 									value={theme?.value || "light"}
 									onChange={(e) =>
@@ -537,6 +591,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 									className="border border-gray-300 rounded-md px-2 py-1 text-sm"
 								>
 									{THEMES.map((themeOption) => (
+
 										<option key={themeOption.value} value={themeOption.value}>
 											{themeOption.name}
 										</option>
@@ -547,6 +602,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 					</div>
 
 					<div className="flex items-center space-x-2">
+
 						<button
 							onClick={() => setShowProps(!showProps)}
 							className={`flex items-center px-3 py-1 rounded-md text-sm ${
@@ -555,6 +611,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 									: "text-gray-600 hover:bg-gray-100"
 							}`}
 						>
+
 							<Settings className="w-4 h-4 mr-1" />
 							Props
 						</button>
@@ -567,15 +624,18 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 									: "text-gray-600 hover:bg-gray-100"
 							}`}
 						>
+
 							<Code className="w-4 h-4 mr-1" />
 							Code
 						</button>
 
 						{enableA11yTesting && (
+
 							<button
 								onClick={runA11yTests}
 								className="flex items-center px-3 py-1 rounded-md text-sm text-gray-600 hover:bg-gray-100"
 							>
+
 								<Accessibility className="w-4 h-4 mr-1" />
 								A11y Test
 							</button>
@@ -585,18 +645,25 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 			</div>
 
 			{/* Main Content */}
+
 			<div
 				className={`flex ${"horizontal" === layout ? "flex-row" : "flex-col"} h-[calc(100vh-200px)]`}
 			>
 				{/* Preview Panel */}
+
 				<div
 					className={`${"horizontal" === layout ? "flex-1" : "h-1/2"} bg-white`}
 				>
+
 					<div className="h-full flex flex-col">
 						{/* Preview Header */}
+
 						<div className="px-6 py-3 border-b border-gray-200 bg-gray-50">
+
 							<div className="flex items-center justify-between">
+
 								<h3 className="font-medium text-gray-900">Preview</h3>
+
 								<div className="text-sm text-gray-600">
 									{viewport?.width} × {viewport?.height}
 								</div>
@@ -604,7 +671,9 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 						</div>
 
 						{/* Preview Content */}
+
 						<div className="flex-1 p-6 overflow-auto">
+
 							<div
 								ref={previewRef}
 								className={`mx-auto transition-all duration-300 ${theme?.bg} ${theme?.text}`}
@@ -614,28 +683,37 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 									maxWidth: "100%",
 								}}
 							>
+
 								<div className="p-8 flex items-center justify-center min-h-full">
+
 									<ComponentToRender {...currentProps} />
 								</div>
 							</div>
 						</div>
 
 						{/* Accessibility Results */}
-						{enableA11yTesting && 0 < Object.keys(a11yResults).length && (
+						{enableA11yTesting && Object.keys(a11yResults).length > 0 && (
+
 							<div className="border-t border-gray-200 p-4 bg-gray-50">
+
 								<h4 className="font-medium text-gray-900 mb-2">
 									Accessibility Tests
 								</h4>
+
 								<div className="space-y-1">
 									{Object.entries(a11yResults).map(([testName, result]) => (
+
 										<div
 											key={testName}
 											className="flex items-center space-x-2 text-sm"
 										>
+
 											<div
 												className={`w-2 h-2 rounded-full ${result.passed ? "bg-green-500" : "bg-red-500"}`}
 											/>
+
 											<span className="font-medium">{testName}:</span>
+
 											<span
 												className={
 													result.passed ? "text-green-700" : "text-red-700"
@@ -652,15 +730,20 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 				</div>
 
 				{/* Controls Panel */}
+
 				<div
 					className={`${"horizontal" === layout ? "w-80 border-l" : "h-1/2 border-t"} border-gray-200 bg-white overflow-auto`}
 				>
 					{/* Examples */}
-					{0 < config.examples.length && (
+					{config.examples.length > 0 && (
+
 						<div className="p-4 border-b border-gray-200">
+
 							<h3 className="font-medium text-gray-900 mb-3">Examples</h3>
+
 							<div className="space-y-2">
 								{config.examples.map((example, index) => (
+
 									<button
 										key={index}
 										onClick={() => handleExampleSelect(index)}
@@ -670,7 +753,9 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 												: "border-gray-200 hover:border-gray-300"
 										}`}
 									>
+
 										<div className="font-medium text-sm">{example.name}</div>
+
 										<div className="text-xs text-gray-600 mt-1">
 											{example.description}
 										</div>
@@ -682,23 +767,32 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
 					{/* Props Controls */}
 					{showProps && (
+
 						<div className="p-4">
+
 							<h3 className="font-medium text-gray-900 mb-3">Props</h3>
+
 							<div className="space-y-6">
-								{Object.entries(propControlsByCategory).map(
+								{Object.entries(propertyControlsByCategory).map(
 									([category, controls]) => (
+
 										<div key={category}>
+
 											<h4 className="font-medium text-sm text-gray-700 mb-3">
 												{category}
 											</h4>
+
 											<div className="space-y-4">
 												{controls.map((control) => (
+
 													<div key={control.name}>
+
 														<label className="block text-sm font-medium text-gray-700 mb-1">
 															{control.name}
 														</label>
-														{renderPropControl(control)}
+														{renderPropertyControl(control)}
 														{control.description && (
+
 															<p className="text-xs text-gray-500 mt-1">
 																{control.description}
 															</p>
@@ -715,9 +809,13 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
 					{/* Code Panel */}
 					{showCode && (
+
 						<div className="p-4 border-t border-gray-200">
+
 							<div className="flex items-center justify-between mb-3">
+
 								<h3 className="font-medium text-gray-900">Generated Code</h3>
+
 								<button
 									onClick={copyCode}
 									className="text-sm text-blue-600 hover:text-blue-700"
@@ -725,8 +823,11 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 									Copy
 								</button>
 							</div>
+
 							<div className="relative">
+
 								<pre className="bg-gray-900 text-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+
 									<code>{generatedCode}</code>
 								</pre>
 							</div>

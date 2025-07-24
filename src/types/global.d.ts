@@ -10,7 +10,7 @@ declare global {
 
   // Add missing type definitions
   type FrameRequestCallback = (time: DOMHighResTimeStamp) => void;
-  type EventListener = (evt: Event) => void;
+  type EventListener = (event_: Event) => void;
   type AddEventListenerOptions =
     | boolean
     | {

@@ -1,10 +1,12 @@
 import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { motion } from 'framer-motion';
 import React from 'react';
+
 import { cn } from '@/core/utils/classname';
 
 const spinnerVariants = cva(
   ['inline-block rounded-full', 'border-2 border-solid'],
+
   {
     variants: {
       variant: {
@@ -50,12 +52,13 @@ const containerVariants = cva('flex items-center justify-center', {
   },
 });
 
-export interface GlassSpinnerProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+export interface GlassSpinnerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
     VariantProps<typeof spinnerVariants>,
     VariantProps<typeof containerVariants> {
   label?: string;
+
   showLabel?: boolean;
+
   centered?: boolean;
 }
 
@@ -75,6 +78,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
     ref,
   ) => {
     const SpinnerElement = () => (
+
       <motion.div
         className={cn(spinnerVariants({ variant, size, speed }), className)}
         animate={{ rotate: 360 }}
@@ -89,17 +93,19 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
     );
 
     const content = (
-      <div
-        ref={ref}
+
+      <div ref={ref}
         className={cn(
           containerVariants({ orientation }),
           centered && 'fixed inset-0 z-50 bg-black/20 backdrop-blur-sm',
           className,
         )}
-        {...props}
+        {...(props as any)}
       >
+
         <SpinnerElement />
         {showLabel && (
+
           <span className="text-sm text-white/70 select-none">{label}</span>
         )}
       </div>
@@ -122,10 +128,12 @@ export const PulseSpinner: React.FC<{
   };
 
   return (
+
     <div className={cn('flex space-x-1', className)}>
-      {[0, 1, 2].map((i) => (
+      {[0, 1, 2].map((index) => (
+
         <motion.div
-          key={i}
+          key={index}
           className={cn('rounded-full', sizeClasses[size], `bg-${color}/50`)}
           animate={{
             scale: [1, 1.2, 1],
@@ -134,7 +142,7 @@ export const PulseSpinner: React.FC<{
           transition={{
             duration: 1.2,
             repeat: Infinity,
-            delay: i * 0.2,
+            delay: index * 0.2,
             ease: 'easeInOut',
           }}
         />
@@ -156,10 +164,12 @@ export const DotsSpinner: React.FC<{
   };
 
   return (
+
     <div className={cn('flex space-x-1', className)}>
-      {Array.from({ length: count }).map((_, i) => (
+      {Array.from({ length: count }).map((_, index) => (
+
         <motion.div
-          key={i}
+          key={index}
           className={cn('rounded-full bg-white/60', sizeClasses[size])}
           animate={{
             y: [0, -8, 0],
@@ -167,7 +177,7 @@ export const DotsSpinner: React.FC<{
           transition={{
             duration: 0.6,
             repeat: Infinity,
-            delay: i * 0.1,
+            delay: index * 0.1,
             ease: 'easeInOut',
           }}
         />
@@ -189,6 +199,7 @@ export const RingSpinner: React.FC<{
   };
 
   return (
+
     <motion.div
       className={cn(
         'rounded-full border-white/20',
@@ -215,10 +226,12 @@ export const WaveSpinner: React.FC<{
   bars?: number;
 }> = ({ className, bars = 5 }) => {
   return (
+
     <div className={cn('flex items-end space-x-1', className)}>
-      {Array.from({ length: bars }).map((_, i) => (
+      {Array.from({ length: bars }).map((_, index) => (
+
         <motion.div
-          key={i}
+          key={index}
           className="w-1 bg-gradient-to-t from-blue-400 to-purple-400 rounded-full"
           animate={{
             height: [8, 24, 8],
@@ -226,7 +239,7 @@ export const WaveSpinner: React.FC<{
           transition={{
             duration: 1,
             repeat: Infinity,
-            delay: i * 0.1,
+            delay: index * 0.1,
             ease: 'easeInOut',
           }}
         />

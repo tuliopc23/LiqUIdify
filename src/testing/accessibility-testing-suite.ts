@@ -142,20 +142,8 @@ export class AccessibilityTestingSuite {
 
     // Check for basic accessibility requirements
     const images = container.querySelectorAll('img');
-    images.forEach((img) => {
-      if (!img.hasAttribute('alt')) {
-        violations.push({
-          ruleId: 'image-alt',
-          description: 'Image missing alt text',
-          impact: 'critical',
-          target: 'img',
-          html: img.outerHTML,
-          failureSummary: 'Image elements must have alt attributes',
-          help: 'Add descriptive alt text to images',
-          helpUrl:
-            'https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html',
-        });
-      } else {
+    for (const img of images) {
+      if (img.hasAttribute('alt')) {
         passes.push({
           ruleId: 'image-alt',
           description: 'Image has alt text',
@@ -167,29 +155,29 @@ export class AccessibilityTestingSuite {
           helpUrl:
             'https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html',
         });
+      } else {
+        violations.push({
+          ruleId: 'image-alt',
+          description: 'Image missing alt text',
+          impact: 'critical',
+          target: 'img',
+          html: img.outerHTML,
+          failureSummary: 'Image elements must have alt attributes',
+          help: 'Add descriptive alt text to images',
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html',
+        });
       }
-    });
+    }
 
     // Check for ARIA attributes on glass components
     const glassComponents = container.querySelectorAll(
       '[data-glass-component]'
     );
-    glassComponents.forEach((component) => {
-      const componentType = component.getAttribute('data-glass-component');
+    for (const component of glassComponents) {
+      const componentType = component.dataset.glassComponent;
 
-      if (!component.hasAttribute('role')) {
-        violations.push({
-          ruleId: 'glass-component-roles',
-          description: `Glass ${componentType} missing ARIA role`,
-          impact: 'serious',
-          target: component.tagName.toLowerCase(),
-          html: component.outerHTML,
-          failureSummary: `Glass ${componentType} should have appropriate ARIA role`,
-          help: `Add appropriate role attribute to glass ${componentType}`,
-          helpUrl:
-            'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
-        });
-      } else {
+      if (component.hasAttribute('role')) {
         passes.push({
           ruleId: 'glass-component-roles',
           description: `Glass ${componentType} has ARIA role`,
@@ -201,8 +189,20 @@ export class AccessibilityTestingSuite {
           helpUrl:
             'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
         });
+      } else {
+        violations.push({
+          ruleId: 'glass-component-roles',
+          description: `Glass ${componentType} missing ARIA role`,
+          impact: 'serious',
+          target: component.tagName.toLowerCase(),
+          html: component.outerHTML,
+          failureSummary: `Glass ${componentType} should have appropriate ARIA role`,
+          help: `Add appropriate role attribute to glass ${componentType}`,
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
+        });
       }
-    });
+    }
 
     return { violations, passes };
   }
@@ -237,15 +237,15 @@ export class AccessibilityTestingSuite {
 
     // Check for tabindex values
     let hasInvalidTabIndex = false;
-    focusableElements.forEach((element) => {
+    for (const element of focusableElements) {
       const tabIndex = element.getAttribute('tabindex');
       if (
         tabIndex &&
-        (Number.isNaN(parseInt(tabIndex)) || parseInt(tabIndex) < -1)
+        (Number.isNaN(Number.parseInt(tabIndex)) || Number.parseInt(tabIndex) < -1)
       ) {
         hasInvalidTabIndex = true;
       }
-    });
+    }
 
     if (hasInvalidTabIndex) {
       violations.push({
@@ -289,7 +289,7 @@ export class AccessibilityTestingSuite {
     );
 
     // Check for focus indicators
-    focusableElements.forEach((element) => {
+    for (const element of focusableElements) {
       const computedStyle = window.getComputedStyle(element);
       const hasOutline =
         computedStyle.outline && computedStyle.outline !== 'none';
@@ -322,7 +322,7 @@ export class AccessibilityTestingSuite {
             'https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html',
         });
       }
-    });
+    }
 
     return { violations, passes };
   }
@@ -341,14 +341,26 @@ export class AccessibilityTestingSuite {
       'button, [role="button"], [role="link"], input, select, textarea'
     );
 
-    interactiveElements.forEach((element) => {
+    for (const element of interactiveElements) {
       const hasLabel =
         element.hasAttribute('aria-label') ||
         element.hasAttribute('aria-labelledby') ||
         element.textContent?.trim() ||
         (element as HTMLInputElement).placeholder;
 
-      if (!hasLabel) {
+      if (hasLabel) {
+        passes.push({
+          ruleId: 'screen-reader-label',
+          description: 'Interactive element has accessible label',
+          impact: 'minor',
+          target: element.tagName.toLowerCase(),
+          html: element.outerHTML,
+          failureSummary: '',
+          help: 'Element has appropriate accessible name',
+          helpUrl:
+            'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
+        });
+      } else {
         violations.push({
           ruleId: 'screen-reader-label',
           description: 'Interactive element missing accessible label',
@@ -361,20 +373,8 @@ export class AccessibilityTestingSuite {
           helpUrl:
             'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
         });
-      } else {
-        passes.push({
-          ruleId: 'screen-reader-label',
-          description: 'Interactive element has accessible label',
-          impact: 'minor',
-          target: element.tagName.toLowerCase(),
-          html: element.outerHTML,
-          failureSummary: '',
-          help: 'Element has appropriate accessible name',
-          helpUrl:
-            'https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html',
-        });
       }
-    });
+    }
 
     return { violations, passes };
   }
@@ -389,7 +389,7 @@ export class AccessibilityTestingSuite {
     const baseScore = 100;
     let deductions = 0;
 
-    violations.forEach((violation) => {
+    for (const violation of violations) {
       const impactMultiplier = {
         minor: 1,
         moderate: 3,
@@ -397,7 +397,7 @@ export class AccessibilityTestingSuite {
         critical: 10,
       };
       deductions += impactMultiplier[violation.impact];
-    });
+    }
 
     return Math.max(0, baseScore - deductions);
   }
@@ -457,12 +457,12 @@ export class AccessibilityTestingSuite {
     const regressions: any[] = [];
     const improvements: any[] = [];
 
-    this.testResults.forEach((reports, componentName) => {
+    for (const [componentName, reports] of this.testResults.entries()) {
       if (reports.length >= 2) {
-        const latest = reports[reports.length - 1];
-        const previous = reports[reports.length - 2];
+        const latest = reports.at(-1);
+        const previous = reports.at(-2);
 
-        if (!latest || !previous) return null;
+        if (!latest || !previous)  { null; continue; }
 
         if (latest.score < previous.score) {
           regressions.push({
@@ -484,10 +484,10 @@ export class AccessibilityTestingSuite {
           });
         }
       }
-    });
+    }
 
     return {
-      components: Array.from(this.testResults.keys()),
+      components: [...this.testResults.keys()],
       regressions,
       improvements,
     };

@@ -6,6 +6,7 @@ import {
 	focusRing,
 	getGlassClass,
 	microInteraction,
+
 } from "@/core/utils/classname";
 
 export interface SearchSuggestion {
@@ -105,15 +106,17 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 			}
 
 			switch (event.key) {
-				case "ArrowDown":
+				case "ArrowDown": {
 					event.preventDefault();
-					setSelectedIndex((prev) => Math.min(prev + 1, allResults.length - 1));
+					setSelectedIndex((previous) => Math.min(previous + 1, allResults.length - 1));
 					break;
-				case "ArrowUp":
+				}
+				case "ArrowUp": {
 					event.preventDefault();
-					setSelectedIndex((prev) => Math.max(prev - 1, -1));
+					setSelectedIndex((previous) => Math.max(previous - 1, -1));
 					break;
-				case "Enter":
+				}
+				case "Enter": {
 					event.preventDefault();
 					if (0 <= selectedIndex && allResults[selectedIndex]) {
 						handleSelect(allResults[selectedIndex]);
@@ -121,11 +124,13 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 						handleSearch();
 					}
 					break;
-				case "Escape":
+				}
+				case "Escape": {
 					setIsOpen(false);
 					setSelectedIndex(-1);
 					inputRef.current?.blur();
 					break;
+				}
 			}
 		};
 
@@ -144,25 +149,36 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 
 	const getIcon = (type: SearchSuggestion["type"]) => {
 		switch (type) {
-			case "recent":
+			case "recent": {
+
 				return <Clock className="w-4 h-4 text-[var(--text-tertiary)]" />;
-			case "trending":
+			}
+			case "trending": {
+
 				return <TrendingUp className="w-4 h-4 text-[var(--text-tertiary)]" />;
-			default:
+			}
+			default: {
+
 				return <Search className="w-4 h-4 text-[var(--text-tertiary)]" />;
+			}
 		}
 	};
 
 	return (
+
 		<div
 			ref={containerRef}
 			className={cn("relative w-full max-w-md", className)}
 		>
 			{/* Search Input */}
+
 			<div className="relative">
+
 				<div className="absolute left-3 top-1/2 -translate-y-1/2">
+
 					<Search className="w-4 h-4 text-[var(--text-secondary)]" />
 				</div>
+
 				<input
 					ref={inputRef}
 					type="text"
@@ -190,6 +206,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 					)}
 				/>
 				{query && (
+
 					<button
 						onClick={() => {
 							setQuery("");
@@ -198,13 +215,15 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 						}}
 						className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-lg hover:bg-[var(--glass-bg)] text-[var(--text-secondary)]"
 					>
+
 						<X className="w-4 h-4" />
 					</button>
 				)}
 			</div>
 
 			{/* Search Dropdown */}
-			{isOpen && (query || 0 < recentSearches.length) && (
+			{isOpen && (query || recentSearches.length > 0) && (
+
 				<div
 					className={cn(
 						"absolute top-full left-0 right-0 mt-2 rounded-xl border z-50",
@@ -213,12 +232,15 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 					)}
 				>
 					{/* Recent Searches */}
-					{!query && 0 < recentSearches.length && (
+					{!query && recentSearches.length > 0 && (
+
 						<div className="p-2">
+
 							<div className="px-3 py-2 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
 								Recent
 							</div>
 							{recentSearches.slice(0, 5).map((recent) => (
+
 								<button
 									key={recent}
 									onClick={() =>
@@ -230,7 +252,9 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 										microInteraction.gentle,
 									)}
 								>
+
 									<Clock className="w-4 h-4 text-[var(--text-tertiary)]" />
+
 									<span className="flex-1 truncate">{recent}</span>
 								</button>
 							))}
@@ -238,14 +262,17 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 					)}
 
 					{/* Search Results */}
-					{0 < allResults.length && (
+					{allResults.length > 0 && (
+
 						<div className="p-2">
 							{query && (
+
 								<div className="px-3 py-2 text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">
 									Suggestions
 								</div>
 							)}
 							{allResults.map((result, index) => (
+
 								<button
 									key={result.id}
 									onClick={() => handleSelect(result)}
@@ -257,10 +284,14 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 									)}
 								>
 									{getIcon(result.type)}
+
 									<div className="flex-1 min-w-0">
+
 										<div className="flex items-center justify-between">
+
 											<span className="truncate">{result.text}</span>
 											{"count" in result && result.count && (
+
 												<span className="text-xs text-[var(--text-tertiary)] ml-2">
 													{result.count.toLocaleString()}
 												</span>
@@ -268,11 +299,13 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 										</div>
 										{"category" in result &&
 											"string" === typeof result.category && (
+
 												<div className="text-xs text-[var(--text-tertiary)] mt-0.5">
 													in {result.category}
 												</div>
 											)}
 									</div>
+
 									<ArrowRight className="w-3 h-3 text-[var(--text-tertiary)] opacity-0 group-hover:opacity-100 transition-opacity" />
 								</button>
 							))}
@@ -280,12 +313,16 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
 					)}
 
 					{/* No Results */}
-					{query && 0 === allResults.length && (
+					{query && allResults.length === 0 && (
+
 						<div className="p-8 text-center">
+
 							<Search className="w-8 h-8 text-[var(--text-tertiary)] mx-auto mb-2" />
+
 							<p className="text-[var(--text-secondary)] text-sm">
 								No results found
 							</p>
+
 							<p className="text-[var(--text-tertiary)] text-xs mt-1">
 								Try a different search term
 							</p>

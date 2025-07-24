@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
 	NotificationCenter,
 	type NotificationItem,
+// @ts-expect-error TS(6142): Module './glass-notification' was resolved to '/Us... Remove this comment to see the full error message
 } from "./glass-notification";
 
 const meta: Meta<typeof NotificationCenter> = {
@@ -199,24 +200,25 @@ export const Interactive: Story = {
 			useState<NotificationItem[]>(sampleNotifications);
 
 		const handleMarkAsRead = (id: string) => {
-			setNotifications((prev) =>
-				prev.map((notif) =>
+			setNotifications((previous) =>
+				previous.map((notif) =>
 					notif.id === id ? { ...notif, read: true } : notif,
 				),
 			);
 		};
 
 		const handleMarkAllAsRead = () => {
-			setNotifications((prev) =>
-				prev.map((notif) => ({ ...notif, read: true })),
+			setNotifications((previous) =>
+				previous.map((notif) => ({ ...notif, read: true })),
 			);
 		};
 
 		const handleDismiss = (id: string) => {
-			setNotifications((prev) => prev.filter((notif) => notif.id !== id));
+			setNotifications((previous) => previous.filter((notif) => notif.id !== id));
 		};
 
 		return (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<NotificationCenter
 				notifications={notifications}
 				onMarkAsRead={handleMarkAsRead}

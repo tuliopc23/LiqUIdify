@@ -1,6 +1,7 @@
 import type React from 'react';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
+
 import { isServer } from '@/utils/ssr-safe';
 
 interface SSRSafeWrapperProps {
@@ -21,6 +22,7 @@ interface SSRSafeWrapperProps {
  * </SSRSafeWrapper>
  * ```
  */
+
 export const SSRSafeWrapper: React.FC<SSRSafeWrapperProps> = ({
   children,
   fallback = undefined,
@@ -54,7 +56,9 @@ export function withSSRSafety<P extends object>(
   showFallback: boolean = true
 ): React.FC<P> {
   return (props: P) => (
+
     <SSRSafeWrapper fallback={fallback} showFallback={showFallback}>
+
       <Component {...props} />
     </SSRSafeWrapper>
   );

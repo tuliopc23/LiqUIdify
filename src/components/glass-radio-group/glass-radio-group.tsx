@@ -2,9 +2,10 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { motion } from "framer-motion";
 import React from "react";
+
 import { cn } from "@/core/utils/classname";
 
-const radioGroupVariants = cva("grid gap-2", {
+const radioGroupVariants = cva(["grid gap-2"], {
 	variants: {
 		orientation: {
 			horizontal: "grid-flow-col",
@@ -29,6 +30,7 @@ const radioItemVariants = cva(
 		"data-[state=checked]:bg-white/10 data-[state=checked]:shadow-lg",
 		"backdrop-blur-md border border-white/10",
 	],
+
 	{
 		variants: {
 			size: {
@@ -63,12 +65,14 @@ export interface GlassRadioGroupProps
 			"orientation"
 		>,
 		VariantProps<typeof radioGroupVariants> {
+
 	children: React.ReactNode;
 }
 
 export interface GlassRadioItemProps
 	extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>,
 		VariantProps<typeof radioItemVariants> {
+
 	children: React.ReactNode;
 	value: string;
 	id?: string;
@@ -79,6 +83,7 @@ const GlassRadioGroup = React.forwardRef<
 	GlassRadioGroupProps
 >(({ className, orientation, size, ...props }, ref) => {
 	return (
+
 		<RadioGroupPrimitive.Root
 			className={cn(radioGroupVariants({ orientation, size }), className)}
 			{...props}
@@ -92,18 +97,23 @@ const GlassRadioItem = React.forwardRef<
 	GlassRadioItemProps
 >(({ className, children, size, variant, ...props }, ref) => {
 	return (
+
 		<motion.div
 			whileHover={{ scale: 1.02 }}
 			whileTap={{ scale: 0.98 }}
 			transition={{ type: "spring", stiffness: 400, damping: 25 }}
 		>
+
 			<RadioGroupPrimitive.Item
 				ref={ref}
 				className={cn(radioItemVariants({ size, variant }), className)}
 				{...props}
 			>
+
 				<div className={cn(radioIndicatorVariants())}>
+
 					<RadioGroupPrimitive.Indicator asChild>
+
 						<motion.div
 							initial={{ scale: 0, opacity: 0 }}
 							animate={{ scale: 1, opacity: 1 }}
@@ -113,6 +123,7 @@ const GlassRadioItem = React.forwardRef<
 						/>
 					</RadioGroupPrimitive.Indicator>
 				</div>
+
 				<div className="flex-1">{children}</div>
 			</RadioGroupPrimitive.Item>
 		</motion.div>

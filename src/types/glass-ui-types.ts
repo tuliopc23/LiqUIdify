@@ -326,8 +326,8 @@ export const typeGuards = {
   isResponsiveProp: <T>(value: unknown): value is Responsive<T> => {
     if ('object' === typeof value && null !== value) {
       const keys = Object.keys(value);
-      const validKeys = ['sm', 'md', 'lg', 'xl'];
-      return keys.every((key) => validKeys.includes(key));
+      const validKeys = new Set(['sm', 'md', 'lg', 'xl']);
+      return keys.every((key) => validKeys.has(key));
     }
     return true; // Non-object values are valid (non-responsive)
   },
@@ -380,15 +380,15 @@ export const propValidators = {
    * Validate responsive prop
    */
   validateResponsiveProp: <T>(
-    prop: Responsive<T>,
+    property: Responsive<T>,
     validator: (value: T) => boolean
   ): boolean => {
-    if ('object' === typeof prop && null !== prop) {
-      return Object.values(prop).every(
+    if ('object' === typeof property && null !== property) {
+      return Object.values(property).every(
         (value) => value === undefined || validator(value as T)
       );
     }
-    return validator(prop as T);
+    return validator(property as T);
   },
 };
 
@@ -402,37 +402,37 @@ export const styleGenerators = {
   generateGlassVariables: (
     config: Partial<GlassEffectConfig>
   ): Partial<GlassCSSVariables> => {
-    const vars: Partial<GlassCSSVariables> = {};
+    const variables: Partial<GlassCSSVariables> = {};
 
     if (config.opacity) {
-      vars['--glass-opacity'] = config.opacity as number;
+      variables['--glass-opacity'] = config.opacity as number;
     }
 
     if (config.blur) {
-      vars['--glass-blur'] = `blur(${config.blur}px)`;
+      variables['--glass-blur'] = `blur(${config.blur}px)`;
     }
 
     if (config.saturation) {
-      vars['--glass-saturation'] = `saturate(${config.saturation}%)`;
+      variables['--glass-saturation'] = `saturate(${config.saturation}%)`;
     }
 
-    return vars;
+    return variables;
   },
 
   /**
    * Generate responsive styles
    */
   generateResponsiveStyles: <T>(
-    prop: Responsive<T>,
+    property: Responsive<T>,
     generator: (value: T) => CSSProperties
   ): CSSProperties => {
-    if ('object' === typeof prop && null !== prop) {
+    if ('object' === typeof property && null !== property) {
       // This would typically integrate with a CSS-in-JS solution
       // For now, return base styles
-      const baseValue = (prop as any).sm || (prop as any).md;
+      const baseValue = (property as any).sm || (property as any).md;
       return baseValue ? generator(baseValue) : {};
     }
-    return generator(prop as T);
+    return generator(property as T);
   },
 };
 

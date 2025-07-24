@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
+
 import { cn } from "@/core/utils/classname";
 
-export interface GlassVisuallyHiddenProps
-	extends React.HTMLAttributes<HTMLSpanElement> {
+export interface GlassVisuallyHiddenProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, keyof React.AriaAttributes> {
 	asChild?: boolean;
 	children: React.ReactNode;
 }
@@ -25,6 +25,7 @@ const GlassVisuallyHidden = forwardRef<
 
 	if (asChild) {
 		return (
+
 			<>
 				{React.Children.map(children, (child) => {
 					if (React.isValidElement(child)) {
@@ -43,6 +44,7 @@ const GlassVisuallyHidden = forwardRef<
 	}
 
 	return (
+
 		<Component
 			ref={ref}
 			className={cn(visuallyHiddenStyles, className)}

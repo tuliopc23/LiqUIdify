@@ -216,7 +216,7 @@ export class PerformanceTestingInfrastructure {
       GlassFocusTrap: 1.8,
       GlassErrorBoundary: 2.1,
     };
-    return sizeMap[componentName] || 1.0;
+    return sizeMap[componentName] || 1;
   }
 
   /**
@@ -241,7 +241,7 @@ export class PerformanceTestingInfrastructure {
     const initialMemory = performance.memory.usedJSHeapSize;
     let peakMemory = initialMemory;
 
-    for (let i = 0; i < iterations; i++) {
+    for (let index = 0; index < iterations; index++) {
       testFunction();
       const currentMemory = performance.memory.usedJSHeapSize;
       peakMemory = Math.max(peakMemory, currentMemory);
@@ -313,7 +313,7 @@ export class PerformanceTestingInfrastructure {
     if (options.measureMemory && performance.memory) {
       memoryUsage.initial = performance.memory.usedJSHeapSize;
 
-      for (let i = 0; i < iterations; i++) {
+      for (let index = 0; index < iterations; index++) {
         testFunction();
         memoryUsage.peak = Math.max(
           memoryUsage.peak,
@@ -360,7 +360,7 @@ export class PerformanceTestingInfrastructure {
     const regressions: PerformanceRegression[] = [];
 
     // Check Core Web Vitals
-    Object.entries(currentMetrics.metrics).forEach(([metric, value]) => {
+    for (const [metric, value] of Object.entries(currentMetrics.metrics)) {
       const baselineValue =
         baseline.metrics[metric as keyof PerformanceMetrics];
       const threshold = this.thresholds.get(metric) || 0;
@@ -376,7 +376,7 @@ export class PerformanceTestingInfrastructure {
           exceeded: true,
         });
       }
-    });
+    }
 
     // Check bundle size
     const bundleSizeChange =
@@ -419,7 +419,7 @@ export class PerformanceTestingInfrastructure {
       recommendations: string[];
     };
   } {
-    const regressions = Array.from(this.baselineMetrics.entries()).flatMap(
+    const regressions = [...this.baselineMetrics.entries()].flatMap(
       ([name, baseline]) => {
         return this.checkPerformanceRegression(name, baseline);
       }
@@ -428,7 +428,7 @@ export class PerformanceTestingInfrastructure {
     const recommendations: string[] = [];
 
     // Core Web Vitals recommendations
-    const latestMetrics = Array.from(this.baselineMetrics.values()).pop();
+    const latestMetrics = [...this.baselineMetrics.values()].pop();
     if (latestMetrics) {
       if (latestMetrics.metrics.lcp > 2500) {
         recommendations.push('LCP is high - optimize images and critical CSS');

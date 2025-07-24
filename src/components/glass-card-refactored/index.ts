@@ -19,4 +19,5 @@ export {
 	CardTitle as GlassCardTitle,
 	GlassCard as default,
 	GlassCard,
+
 } from "./glass-card";

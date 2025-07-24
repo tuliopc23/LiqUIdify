@@ -42,11 +42,11 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
 			onError?.(event.error);
 		};
 
-		if (typeof window !== "undefined") {
+		if ("undefined" !== typeof window) {
 			window.addEventListener("error", handleError);
 		}
 		return () => {
-			if (typeof window !== "undefined") {
+			if ("undefined" !== typeof window) {
 				window.removeEventListener("error", handleError);
 			}
 		};
@@ -58,6 +58,7 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
 	if (!isMounted) {
 		// SSR-safe rendering
 		return (
+
 			<div className={`graceful-component ${degradationClass}`} style={style}>
 				{children}
 			</div>
@@ -70,6 +71,7 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
 			(!networkStatus.online || "low" === performanceLevel)
 		) {
 			return (
+
 				<div
 					className={`graceful-component graceful-static-fallback ${degradationClass}`}
 					style={style}
@@ -81,6 +83,7 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
 
 		if (fallback) {
 			return (
+
 				<div
 					className={`graceful-component graceful-fallback ${degradationClass}`}
 					style={style}
@@ -92,16 +95,19 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
 
 		// Default fallback
 		return (
+
 			<div
 				className={`graceful-component graceful-static-fallback ${degradationClass}`}
 				style={style}
 			>
+
 				<p>Feature temporarily unavailable</p>
 			</div>
 		);
 	}
 
 	return (
+
 		<div className={`graceful-component ${degradationClass}`} style={style}>
 			{children}
 		</div>
@@ -133,7 +139,7 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
 
 	const shouldUseLowQuality =
 		!networkStatus.online || "low" === performanceLevel;
-	const processedSrc = shouldUseLowQuality && fallbackSrc ? fallbackSrc : src;
+	const processedSource = shouldUseLowQuality && fallbackSrc ? fallbackSrc : src;
 
 	const handleError = () => {
 		setImageError(true);
@@ -145,6 +151,7 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
 
 	if (imageError && fallbackSrc) {
 		return (
+
 			<img
 				src={fallbackSrc}
 				alt={alt}
@@ -156,14 +163,17 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
 	}
 
 	return (
+
 		<div className={`graceful-image-container ${className}`} style={style}>
 			{!imageLoaded && placeholder && (
+
 				<div className="graceful-image-placeholder">{placeholder}</div>
 			)}
+
 			<img
-				src={processedSrc}
+				src={processedSource}
 				alt={alt}
-				className={`graceful-image ${!imageLoaded ? "graceful-image-loading" : ""}`}
+				className={`graceful-image ${imageLoaded ? "" : "graceful-image-loading"}`}
 				style={{
 					...style,
 					opacity: imageLoaded ? 1 : 0,
@@ -223,6 +233,7 @@ export const GracefulAnimation: React.FC<GracefulAnimationProps> = ({
 	};
 
 	return (
+
 		<div className={`graceful-animation ${className}`} style={animationStyle}>
 			{children}
 		</div>
@@ -263,16 +274,21 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
 
 	if (shouldUseStatic || videoError) {
 		return (
+
 			<div className={`graceful-video-fallback ${className}`}>
 				{fallbackImage ? (
+
 					<img
 						src={fallbackImage}
 						alt="Video content preview"
 						className="graceful-video-fallback-image"
 					/>
 				) : (
+
 					<div className="graceful-video-placeholder">
+
 						<p>Video unavailable</p>
+
 						{poster && <img src={poster} alt="Video thumbnail preview" />}
 					</div>
 				)}
@@ -281,6 +297,7 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
 	}
 
 	return (
+
 		<video
 			className={`graceful-video ${className}`}
 			src={src}
@@ -291,6 +308,7 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
 			onError={handleError}
 			controls
 		>
+
 			<track kind="captions" srcLang="en" label="English captions" default />
 		</video>
 	);
@@ -321,9 +339,12 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
 
 	if (!isInteractive) {
 		return (
+
 			<div className={`graceful-interactive-fallback ${className}`}>
 				{staticFallback || (
+
 					<div className="graceful-static-fallback">
+
 						<p>Interactive features disabled</p>
 					</div>
 				)}
@@ -332,6 +353,7 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
 	}
 
 	return (
+
 		<button
 			className={`graceful-interactive ${className}`}
 			onClick={onInteraction}
@@ -356,11 +378,16 @@ export const CSSAccordion: React.FC<{
 	className?: string;
 }> = ({ items, className = "" }) => {
 	return (
+
 		<div className={`css-accordion-fallback ${className}`}>
 			{items.map((item, index) => (
+
 				<div key={index}>
+
 					<input type="checkbox" id={`accordion-${index}`} />
+
 					<label htmlFor={`accordion-${index}`}>{item.title}</label>
+
 					<div className="content">{item.content}</div>
 				</div>
 			))}
@@ -377,15 +404,19 @@ export const CSSTabs: React.FC<{
 	className?: string;
 }> = ({ tabs, className = "" }) => {
 	return (
+
 		<div className={`css-tabs-fallback ${className}`}>
+
 			<div className="tab-list">
 				{tabs.map((tab) => (
+
 					<a key={tab.id} href={`#${tab.id}`} className="tab-trigger">
 						{tab.label}
 					</a>
 				))}
 			</div>
 			{tabs.map((tab) => (
+
 				<div key={tab.id} id={tab.id} className="tab-content">
 					{tab.content}
 				</div>
@@ -401,10 +432,15 @@ export const CSSModal: React.FC<{
 	className?: string;
 }> = ({ trigger, content, modalId, className = "" }) => {
 	return (
+
 		<div className={`css-modal-container ${className}`}>
+
 			<a href={`#${modalId}`}>{trigger}</a>
+
 			<div id={modalId} className="css-modal-fallback">
+
 				<div className="modal-content">
+
 					<a
 						href={`#close-${modalId}`}
 						style={{ float: "right" }}

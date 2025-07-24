@@ -5,13 +5,13 @@
  * Ensures maximum optimization for production builds
  */
 
-const { execSync } = require("child_process");
-const fs = require("fs");
-const path = require("path");
+const { execSync } = require("node:child_process");
+const fs = require("node:fs");
+const path = require("node:path");
 const terser = require("terser");
 const cssnano = require("cssnano");
 const postcss = require("postcss");
-const { gzipSync, brotliCompressSync } = require("zlib");
+const { gzipSync, brotliCompressSync } = require("node:zlib");
 
 const BUILD_DIR = path.join(__dirname, "..", "dist");
 const OPTIMIZATION_REPORT = path.join(BUILD_DIR, "optimization-report.json");
@@ -189,7 +189,7 @@ function createCompressedVersions(filePath) {
 	// Brotli compression
 	const brotlied = brotliCompressSync(content, {
 		params: {
-			[require("zlib").constants.BROTLI_PARAM_QUALITY]: 11, // Maximum quality
+			[require("node:zlib").constants.BROTLI_PARAM_QUALITY]: 11, // Maximum quality
 		},
 	});
 	fs.writeFileSync(`${filePath}.br`, brotlied);
@@ -216,7 +216,7 @@ async function generateTreeShakingReport() {
 		// Find unused exports
 		const unusedExports = [];
 		if (stats.modules) {
-			stats.modules.forEach((module) => {
+			for (const module of stats.modules) {
 				if (module.usedExports && module.providedExports) {
 					const unused = module.providedExports.filter(
 						(exp) => !module.usedExports.includes(exp),
@@ -228,7 +228,7 @@ async function generateTreeShakingReport() {
 						});
 					}
 				}
-			});
+			}
 		}
 
 		return {
@@ -344,9 +344,9 @@ async function optimizeBuild() {
 
 		if (report.results.treeShaking.unusedExports.length > 0) {
 			console.log("  ⚠️  Found unused exports:");
-			report.results.treeShaking.unusedExports.forEach(({ module, unused }) => {
+			for (const { module, unused } of report.results.treeShaking.unusedExports) {
 				console.log(`    ${module}: ${unused.join(", ")}`);
-			});
+			}
 		} else {
 			console.log("  ✅ No unused exports detected");
 		}

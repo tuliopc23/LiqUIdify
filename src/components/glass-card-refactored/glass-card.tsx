@@ -20,6 +20,7 @@ import type {
 	HeadingProps,
 	LayoutGlassProps,
 	ParagraphProps,
+
 } from "@/core";
 import {
 	cn,
@@ -28,6 +29,7 @@ import {
 	generateGlassVariables,
 	microInteraction,
 	useGlassStateTransitions,
+
 } from "@/core";
 
 // Card state type
@@ -79,16 +81,16 @@ const useCardBusinessLogic = createBusinessLogicHook<CardState>(
 			if (!props.hover) {
 				return;
 			}
-			setState((prev: CardState) => ({ ...prev, isHovered }));
+			setState((previous: CardState) => ({ ...previous, isHovered }));
 		},
 
 		handlePress: () => {
 			if (!props.interactive) {
 				return;
 			}
-			setState((prev: CardState) => ({ ...prev, isPressed: true }));
+			setState((previous: CardState) => ({ ...previous, isPressed: true }));
 			setTimeout(
-				() => setState((prev: CardState) => ({ ...prev, isPressed: false })),
+				() => setState((previous: CardState) => ({ ...previous, isPressed: false })),
 				150,
 			);
 		},
@@ -97,7 +99,7 @@ const useCardBusinessLogic = createBusinessLogicHook<CardState>(
 			if (!props.selectable) {
 				return;
 			}
-			setState((prev: CardState) => ({ ...prev, isSelected }));
+			setState((previous: CardState) => ({ ...previous, isSelected }));
 		},
 	}),
 );
@@ -111,7 +113,7 @@ interface CardContextValue {
 	selectable: boolean;
 }
 
-const CardContext = createContext<CardContextValue | null>(null);
+const CardContext = createContext<CardContextValue | null>(undefined);
 
 const useCardContext = () => {
 	const context = useContext(CardContext);
@@ -164,13 +166,19 @@ export const GlassCard = React.memo(
 		(
 			{
 				// Base props
+
 				size = "md",
+
 				variant = "primary",
+
 				className,
+
 				children,
 
 				// Layout props
+
 				padding = "md",
+
 				radius = "md",
 
 				// Card-specific props
@@ -183,15 +191,21 @@ export const GlassCard = React.memo(
 				orientation = "vertical",
 
 				// Glass effect props
+
 				glassEffect = { intensity: "medium", blur: true, backdrop: true },
 
 				// Animation props
+
 				animation = "normal",
+
 				disableAnimations = false,
 
 				// Event handlers
+
 				onClick,
+
 				onMouseEnter,
+
 				onMouseLeave,
 				onCardClick,
 				onCardSelect,
@@ -287,9 +301,11 @@ export const GlassCard = React.memo(
 				glassClasses,
 
 				// Variant classes
+
 				VARIANT_CLASSES[variant],
 
 				// Layout classes
+
 				PADDING_CLASSES[padding],
 
 				// State classes
@@ -323,7 +339,9 @@ export const GlassCard = React.memo(
 			};
 
 			return (
+
 				<CardContext.Provider value={contextValue}>
+
 					<div
 						ref={ref}
 						className={componentClasses}
@@ -340,9 +358,9 @@ export const GlassCard = React.memo(
 						}}
 						onMouseEnter={handleMouseEnter}
 						onMouseLeave={handleMouseLeave}
-						role={interactive || selectable ? "button" : undefined}
-						tabIndex={interactive || selectable ? 0 : undefined}
-						aria-pressed={selectable ? state.isSelected : undefined}
+						role={interactive || selectable  ? "button" : undefined}
+						tabIndex={interactive || selectable  ? 0 : undefined}
+						aria-pressed={selectable  ? state.isSelected  : undefined}
 						aria-label={
 							interactive || selectable ? "Interactive card" : undefined
 						}
@@ -368,14 +386,14 @@ export const CardHeader = forwardRef<
 	const { variant } = useCardContext();
 
 	return (
-		<div
-			ref={ref}
+
+		<div ref={ref}
 			className={cn(
 				"flex flex-col space-y-1.5 p-6",
 				"apple" === variant && "pb-4",
 				className,
 			)}
-			{...props}
+			{...(props as any)}
 		>
 			{children}
 		</div>
@@ -392,6 +410,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HeadingProps>(
 		const { variant } = useCardContext();
 
 		return (
+
 			<h3
 				ref={ref}
 				className={cn(
@@ -418,6 +437,7 @@ export const CardDescription = forwardRef<HTMLParagraphElement, ParagraphProps>(
 		const { variant } = useCardContext();
 
 		return (
+
 			<p
 				ref={ref}
 				className={cn(
@@ -445,10 +465,10 @@ export const CardContent = forwardRef<
 	const { padding } = useCardContext();
 
 	return (
-		<div
-			ref={ref}
+
+		<div ref={ref}
 			className={cn("flex-1", "none" !== padding && "p-6 pt-0", className)}
-			{...props}
+			{...(props as any)}
 		>
 			{children}
 		</div>
@@ -467,14 +487,14 @@ export const CardFooter = forwardRef<
 	const { variant } = useCardContext();
 
 	return (
-		<div
-			ref={ref}
+
+		<div ref={ref}
 			className={cn(
 				"flex items-center p-6 pt-0",
 				"apple" === variant && "pt-4",
 				className,
 			)}
-			{...props}
+			{...(props as any)}
 		>
 			{children}
 		</div>
@@ -491,10 +511,10 @@ export const CardActions = forwardRef<
 	ComponentPropsBuilder<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
 	return (
-		<div
-			ref={ref}
+
+		<div ref={ref}
 			className={cn("flex items-center gap-2 p-6 pt-0", className)}
-			{...props}
+			{...(props as any)}
 		>
 			{children}
 		</div>

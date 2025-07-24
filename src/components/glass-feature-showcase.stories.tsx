@@ -13,6 +13,7 @@ import {
   Users,
   Zap,
 } from 'lucide-react';
+// @ts-expect-error TS(6142): Module './glass-feature-showcase' was resolved to ... Remove this comment to see the full error message
 import { GlassFeatureShowcase } from './glass-feature-showcase';
 
 const meta: Meta<typeof GlassFeatureShowcase> = {
@@ -61,6 +62,7 @@ type Story = StoryObj<typeof meta>;
 // Basic demo data
 const basicFeatures = [
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Zap className="w-6 h-6 text-blue-500" />,
     title: 'Lightning Fast',
     description:
@@ -68,6 +70,7 @@ const basicFeatures = [
     link: { label: 'Learn more', href: '#performance' },
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Shield className="w-6 h-6 text-green-500" />,
     title: 'Secure by Default',
     description:
@@ -75,6 +78,7 @@ const basicFeatures = [
     badge: 'Enterprise',
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Palette className="w-6 h-6 text-purple-500" />,
     title: 'Customizable',
     description:
@@ -101,6 +105,7 @@ export const GridCards: Story = {
 // Floating Variant with Images
 const floatingFeatures = [
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Smartphone className="w-8 h-8 text-blue-400" />,
     title: 'Mobile First',
     description:
@@ -111,6 +116,7 @@ const floatingFeatures = [
     link: { label: 'View demo', onClick: () => console.log('Mobile demo') },
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Layers className="w-8 h-8 text-emerald-400" />,
     title: 'Component Library',
     description:
@@ -122,6 +128,7 @@ const floatingFeatures = [
 
 export const FloatingWithImages: Story = {
   args: {
+    // @ts-expect-error TS(2322): Type '({ icon: Element; title: string; description... Remove this comment to see the full error message
     features: floatingFeatures,
     layout: 'grid',
     columns: 2,
@@ -134,24 +141,28 @@ export const FloatingWithImages: Story = {
 // Minimal Stacked Layout
 const minimalFeatures = [
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Code2 className="w-6 h-6 text-gray-600" />,
     title: 'Developer Experience',
     description:
       'TypeScript support, comprehensive documentation, and excellent IDE integration.',
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Gauge className="w-6 h-6 text-gray-600" />,
     title: 'Performance Monitoring',
     description:
       'Built-in analytics and performance tracking for production applications.',
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Users className="w-6 h-6 text-gray-600" />,
     title: 'Community Driven',
     description:
       'Active community support with regular updates and feature requests.',
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Globe className="w-6 h-6 text-gray-600" />,
     title: 'Global CDN',
     description:
@@ -172,6 +183,7 @@ export const MinimalStacked: Story = {
 // Single Column Showcase
 const singleColumnFeatures = [
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Rocket className="w-8 h-8 text-orange-500" />,
     title: 'Launch Ready',
     description:
@@ -181,6 +193,7 @@ const singleColumnFeatures = [
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop',
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Lock className="w-8 h-8 text-red-500" />,
     title: 'Enterprise Security',
     description:
@@ -209,21 +222,25 @@ export const SingleColumn: Story = {
 // Four Column Grid
 const fourColumnFeatures = [
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Zap className="w-6 h-6 text-yellow-500" />,
     title: 'Speed',
     description: 'Lightning-fast rendering and optimized bundle size.',
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Shield className="w-6 h-6 text-blue-500" />,
     title: 'Security',
     description: 'Built with security best practices and regular audits.',
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Sparkles className="w-6 h-6 text-pink-500" />,
     title: 'Design',
     description: 'Beautiful glass morphism effects and smooth animations.',
   },
   {
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     icon: <Code2 className="w-6 h-6 text-green-500" />,
     title: 'DX',
     description: 'Excellent developer experience with TypeScript support.',

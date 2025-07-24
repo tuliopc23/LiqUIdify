@@ -12,9 +12,9 @@
  * Usage: npm run export:static
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 // Get current directory
 const __filename = fileURLToPath(import.meta.url);
@@ -512,9 +512,9 @@ async function exportStaticComponents() {
 		const metadata = COMPONENT_METADATA[componentId];
 		const content = generateComponentContent(componentId);
 
-		const html = HTML_TEMPLATE.replace(/{{TITLE}}/g, metadata.title)
-			.replace(/{{DESCRIPTION}}/g, metadata.description)
-			.replace(/{{CATEGORY}}/g, metadata.category)
+		const html = HTML_TEMPLATE.replaceAll('{{TITLE}}', metadata.title)
+			.replaceAll('{{DESCRIPTION}}', metadata.description)
+			.replaceAll('{{CATEGORY}}', metadata.category)
 			.replace("{{CONTENT}}", content);
 
 		writeFileSync(join(exportDir, `${componentId}.html`), html);

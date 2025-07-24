@@ -5,17 +5,17 @@
  * Ensures all tools are properly configured and working
  */
 
-import { execSync } from "child_process";
-import { existsSync, readFileSync } from "fs";
-import { join } from "path";
+import { execSync } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 const colors = {
-	reset: "\x1b[0m",
-	green: "\x1b[32m",
-	yellow: "\x1b[33m",
-	blue: "\x1b[34m",
-	red: "\x1b[31m",
-	cyan: "\x1b[36m",
+	reset: "\u001B[0m",
+	green: "\u001B[32m",
+	yellow: "\u001B[33m",
+	blue: "\u001B[34m",
+	red: "\u001B[31m",
+	cyan: "\u001B[36m",
 };
 
 function log(message, color = "reset") {
@@ -38,13 +38,13 @@ class BunOxcVerifier {
 			log(`✅ Bun ${bunVersion} is installed`, "green");
 
 			// Check if version is 1.0+
-			const majorVersion = parseInt(bunVersion.split(".")[0]);
+			const majorVersion = Number.parseInt(bunVersion.split(".")[0]);
 			if (majorVersion < 1) {
 				this.warnings.push(
 					`⚠️ Bun version ${bunVersion} is below 1.0. Consider upgrading.`,
 				);
 			}
-		} catch (error) {
+		} catch {
 			this.errors.push("❌ Bun is not installed or not in PATH");
 			log("❌ Bun is not installed or not in PATH", "red");
 		}
@@ -60,7 +60,7 @@ class BunOxcVerifier {
 			}).trim();
 			this.checks.push(`✅ oxlint ${oxlintVersion} is available`);
 			log(`✅ oxlint ${oxlintVersion} is available`, "green");
-		} catch (error) {
+		} catch {
 			this.errors.push("❌ oxlint is not available");
 			log("❌ oxlint is not available", "red");
 		}
@@ -84,7 +84,7 @@ class BunOxcVerifier {
 			} else {
 				this.warnings.push("⚠️ oxlint package not found in dependencies");
 			}
-		} catch (error) {
+		} catch {
 			this.errors.push("❌ Could not read package.json");
 		}
 	}
@@ -108,7 +108,7 @@ class BunOxcVerifier {
 				try {
 					JSON.parse(readFileSync(file, "utf8"));
 					this.checks.push(`✅ ${file} has valid JSON syntax`);
-				} catch (error) {
+				} catch {
 					this.errors.push(`❌ ${file} has invalid JSON syntax`);
 					log(`❌ ${file} has invalid JSON syntax`, "red");
 				}
@@ -171,7 +171,7 @@ class BunOxcVerifier {
 			} else {
 				this.warnings.push("⚠️ Bun engine requirement not specified");
 			}
-		} catch (error) {
+		} catch {
 			this.errors.push("❌ Could not parse package.json");
 		}
 	}
@@ -207,7 +207,7 @@ class BunOxcVerifier {
 			} else {
 				this.warnings.push("⚠️ Path aliases not configured");
 			}
-		} catch (error) {
+		} catch {
 			this.errors.push("❌ Could not parse oxc.config.json");
 		}
 
@@ -236,7 +236,7 @@ class BunOxcVerifier {
 					"⚠️ Bun environment not configured in .oxlintrc.json",
 				);
 			}
-		} catch (error) {
+		} catch {
 			this.errors.push("❌ Could not parse .oxlintrc.json");
 		}
 	}
@@ -249,7 +249,7 @@ class BunOxcVerifier {
 			execSync("bun run lint", { stdio: "pipe" });
 			this.checks.push("✅ Linting command works");
 			log("✅ Linting command works", "green");
-		} catch (error) {
+		} catch {
 			this.errors.push("❌ Linting command failed");
 			log("❌ Linting command failed", "red");
 		}
@@ -259,7 +259,7 @@ class BunOxcVerifier {
 			execSync("bun run type-check", { stdio: "pipe" });
 			this.checks.push("✅ Type checking works");
 			log("✅ Type checking works", "green");
-		} catch (error) {
+		} catch {
 			this.warnings.push("⚠️ Type checking failed (may have type errors)");
 		}
 
@@ -268,7 +268,7 @@ class BunOxcVerifier {
 			execSync("bun run build:simple", { stdio: "pipe" });
 			this.checks.push("✅ Build command works");
 			log("✅ Build command works", "green");
-		} catch (error) {
+		} catch {
 			this.warnings.push("⚠️ Build command failed");
 		}
 	}
@@ -407,13 +407,13 @@ bun run build
 
 		// Write report to file
 		try {
-			const fs = await import("fs");
+			const fs = await import("node:fs");
 			fs.writeFileSync("./BUN_OXC_VERIFICATION_REPORT.md", reportContent);
 			log(
 				"\\n📋 Verification report saved to BUN_OXC_VERIFICATION_REPORT.md",
 				"blue",
 			);
-		} catch (error) {
+		} catch {
 			log("⚠️ Could not save verification report", "yellow");
 		}
 

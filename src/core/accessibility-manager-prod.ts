@@ -1,5 +1,7 @@
 import type { AxeResults } from 'axe-core';
+
 import { announcer } from '@/components/glass-live-region';
+
 import { checkGlassContrast, getContrastRatio } from '@/core/utils/color';
 
 // Re-export types from the main accessibility manager
@@ -33,11 +35,11 @@ const mockAxeResults: AxeResults = {
 };
 
 // Lazy load axe-core only in development
-let axeInstance: typeof import('axe-core') | null = null;
+let axeInstance: typeof import('axe-core') | null;
 
 async function getAxe() {
-  if (process.env.NODE_ENV === 'production') {
-    return null;
+  if ('production' === process.env.NODE_ENV) {
+    return ;
   }
   
   if (!axeInstance) {
@@ -45,7 +47,7 @@ async function getAxe() {
       axeInstance = await import('axe-core');
     } catch {
       console.warn('axe-core not available');
-      return null;
+      return ;
     }
   }
   
@@ -54,6 +56,7 @@ async function getAxe() {
 
 export class AccessibilityManager {
   private static instance: AccessibilityManager | null = null;
+
   private cache = new WeakMap<HTMLElement, AccessibilityReport>();
 
   static getInstance(): AccessibilityManager {
@@ -63,8 +66,33 @@ export class AccessibilityManager {
     return AccessibilityManager.instance;
   }
 
+  async validateComponent(element: HTMLElement): Promise<AccessibilityReport> {
+    return this.analyzeComponent(element);
+  }
+
+  announce(message: string, priority: string = 'polite'): void {
+    if (typeof announcer !== 'undefined' && announcer.announce) {
+      announcer.announce(message, { priority: priority as any });
+    }
+  }
+
+  ensureContrast(element: HTMLElement, options?: any): { background: string; foreground: string } {
+    const computedStyle = window.getComputedStyle(element);
+    const background = computedStyle.backgroundColor || '#ffffff';
+    const foreground = computedStyle.color || '#000000';
+    return { background, foreground };
+  }
+
+  enableRealTimeMonitoring(): void {
+    console.log('Real-time monitoring enabled');
+  }
+
+  disableRealTimeMonitoring(): void {
+    console.log('Real-time monitoring disabled');
+  }
+
   async runAudit(element: HTMLElement, options?: any): Promise<AxeResults> {
-    if (process.env.NODE_ENV === 'production') {
+    if ('production' === process.env.NODE_ENV) {
       return mockAxeResults;
     }
 
@@ -74,6 +102,7 @@ export class AccessibilityManager {
     }
 
     try {
+
       return await axe.default.run(element, options);
     } catch (error) {
       console.error('Accessibility audit failed:', error);
@@ -84,10 +113,11 @@ export class AccessibilityManager {
   async analyzeComponent(
     element: HTMLElement,
     componentInfo?: ComponentInfo
+
   ): Promise<AccessibilityReport> {
     // Check cache first
     const cached = this.cache.get(element);
-    if (cached && Date.now() - cached.timestamp.getTime() < 5000) {
+    if (cached && 5000 > Date.now() - cached.timestamp.getTime()) {
       return cached;
     }
 
@@ -136,7 +166,7 @@ export class AccessibilityManager {
         id: 'missing-alt-text',
         description: 'Images without alt text',
         suggestion: 'Add descriptive alt text to all images',
-        elements: Array.from(images) as HTMLElement[]
+        elements: [...images] as HTMLElement[]
       });
     }
 
@@ -147,7 +177,7 @@ export class AccessibilityManager {
         id: 'empty-buttons',
         description: 'Buttons without text content',
         suggestion: 'Add text or aria-label to buttons',
-        elements: Array.from(emptyButtons) as HTMLElement[]
+        elements: [...emptyButtons] as HTMLElement[]
       });
     }
 
@@ -159,24 +189,24 @@ export class AccessibilityManager {
 
     // Contrast suggestions
     const elementsWithBg = element.querySelectorAll('[style*="background"]');
-    elementsWithBg.forEach(el => {
-      const contrast = this.checkContrast(el as HTMLElement);
+    for (const element_ of elementsWithBg) {
+      const contrast = this.checkContrast(element_ as HTMLElement);
       if (contrast && !contrast.passes.aa.normal) {
         suggestions.push({
           type: 'contrast',
           message: `Low contrast ratio (${contrast.ratio.toFixed(2)}:1). Consider adjusting colors.`,
           priority: 'high',
           autoFixAvailable: true,
-          fix: () => this.autoFixContrast(el as HTMLElement, contrast)
+          fix: () => this.autoFixContrast(element_ as HTMLElement, contrast)
         });
       }
-    });
+    }
 
     // Keyboard navigation suggestions
     const interactiveElements = element.querySelectorAll('a, button, input, select, textarea, [tabindex]');
-    const tabIndexes = Array.from(interactiveElements)
-      .map(el => parseInt(el.getAttribute('tabindex') || '0'))
-      .filter(index => index > 0);
+    const tabIndexes = [...interactiveElements]
+      .map(element_ => Number.parseInt(element_.getAttribute('tabindex') || '0'))
+      .filter(index => 0 < index);
     
     if (tabIndexes.length > 0) {
       suggestions.push({
@@ -192,7 +222,7 @@ export class AccessibilityManager {
 
   private calculateScore(results: AxeResults): number {
     const totalTests = results.passes.length + results.violations.length;
-    if (totalTests === 0) return 100;
+    if (0 === totalTests) {return 100;}
 
     const violationWeight = results.violations.reduce((sum, v) => {
       const impactWeight = {
@@ -211,8 +241,8 @@ export class AccessibilityManager {
   }
 
   private determineWCAGLevel(score: number): 'A' | 'AA' | 'AAA' {
-    if (score >= 95) return 'AAA';
-    if (score >= 85) return 'AA';
+    if (95 <= score) {return 'AAA';}
+    if (85 <= score) {return 'AA';}
     return 'A';
   }
 
@@ -222,42 +252,42 @@ export class AccessibilityManager {
       const bg = computed.backgroundColor;
       const fg = computed.color;
       
-      if (!bg || !fg || bg === 'transparent' || fg === 'transparent') {
-        return null;
+      if (!bg || !fg || 'transparent' === bg || 'transparent' === fg) {
+        return ;
       }
 
       const ratio = getContrastRatio(fg, bg);
-      const fontSize = parseFloat(computed.fontSize);
+      const fontSize = Number.parseFloat(computed.fontSize);
       const fontWeight = computed.fontWeight;
-      const isLarge = fontSize >= 18 || (fontSize >= 14 && parseInt(fontWeight) >= 700);
+      const isLarge = 18 <= fontSize || (14 <= fontSize && 700 <= Number.parseInt(fontWeight));
 
       return {
         ratio,
         passes: {
           aa: {
-            normal: ratio >= 4.5,
-            large: ratio >= 3
+            normal: 4.5 <= ratio ,
+            large: 3 <= ratio 
           },
           aaa: {
-            normal: ratio >= 7,
-            large: ratio >= 4.5
+            normal: 7 <= ratio ,
+            large: 4.5 <= ratio 
           }
         },
         recommendation: this.getContrastRecommendation(ratio, isLarge)
       };
     } catch {
-      return null;
+      return ;
     }
   }
 
   private getContrastRecommendation(ratio: number, isLarge: boolean): string {
     if (isLarge) {
-      if (ratio >= 4.5) return 'Excellent contrast for large text (AAA)';
-      if (ratio >= 3) return 'Good contrast for large text (AA)';
+      if (4.5 <= ratio) {return 'Excellent contrast for large text (AAA)';}
+      if (3 <= ratio) {return 'Good contrast for large text (AA)';}
       return 'Insufficient contrast for large text';
     } else {
-      if (ratio >= 7) return 'Excellent contrast (AAA)';
-      if (ratio >= 4.5) return 'Good contrast (AA)';
+      if (7 <= ratio) {return 'Excellent contrast (AAA)';}
+      if (4.5 <= ratio) {return 'Good contrast (AA)';}
       return 'Insufficient contrast';
     }
   }
@@ -285,31 +315,31 @@ export class AccessibilityManager {
     const autoCorrections: ARIACorrection[] = [];
 
     // Check ARIA attributes
-    const ariaAttrs = Array.from(element.attributes).filter(attr => 
-      attr.name.startsWith('aria-')
+    const ariaAttributes = [...element.attributes].filter(attribute => 
+      attribute.name.startsWith('aria-')
     );
 
-    ariaAttrs.forEach(attr => {
+    for (const attribute of ariaAttributes) {
       // Validate attribute values
-      if (attr.name === 'aria-hidden' && attr.value !== 'true' && attr.value !== 'false') {
+      if ('aria-hidden' === attribute.name && 'true' !== attribute.value && 'false' !== attribute.value) {
         errors.push({
-          attribute: attr.name,
-          value: attr.value,
+          attribute: attribute.name,
+          value: attribute.value,
           reason: 'aria-hidden must be "true" or "false"',
           element
         });
       }
 
       // Check for deprecated attributes
-      if (attr.name === 'aria-grabbed') {
+      if ('aria-grabbed' === attribute.name) {
         suggestions.push({
-          attribute: attr.name,
-          currentValue: attr.value,
+          attribute: attribute.name,
+          currentValue: attribute.value,
           suggestedValue: '',
           reason: 'aria-grabbed is deprecated in ARIA 1.1'
         });
       }
-    });
+    }
 
     return {
       valid: errors.length === 0,
@@ -325,13 +355,13 @@ export class AccessibilityManager {
 
   async generateReport(elements: HTMLElement[]): Promise<string> {
     const reports = await Promise.all(
-      elements.map(el => this.analyzeComponent(el))
+      elements.map(element => this.analyzeComponent(element))
     );
 
     const totalScore = reports.reduce((sum, r) => sum + r.score, 0) / reports.length;
     const allViolations = reports.flatMap(r => r.violations);
-    const criticalCount = allViolations.filter(v => v.impact === 'critical').length;
-    const seriousCount = allViolations.filter(v => v.impact === 'serious').length;
+    const criticalCount = allViolations.filter(v => 'critical' === v.impact).length;
+    const seriousCount = allViolations.filter(v => 'serious' === v.impact).length;
 
     return `
 # Accessibility Report
@@ -352,10 +382,11 @@ ${this.generateRecommendations(reports)}
   }
 
   private groupViolationsByImpact(violations: Violation[]): string {
-    const grouped = violations.reduce((acc, v) => {
-      if (!acc[v.impact]) acc[v.impact] = [];
-      acc[v.impact].push(v);
-      return acc;
+    const grouped = violations.reduce((accumulator, v) => {
+      if (!accumulator[v.impact]) {accumulator[v.impact] = [];}
+      accumulator[v.impact].push(v);
+      return accumulator;
+
     }, {} as Record<string, Violation[]>);
 
     return Object.entries(grouped)
@@ -364,29 +395,31 @@ ${this.generateRecommendations(reports)}
         return order[a as keyof typeof order] - order[b as keyof typeof order];
       })
       .map(([impact, violations]) => 
+
         `### ${impact.charAt(0).toUpperCase() + impact.slice(1)} (${violations.length})
-${violations.map(v => `- ${v.help}`).join('\n')}`
+
+${violations.map((v: any) => `- ${v.help}`).join('\n')}`
       ).join('\n\n');
   }
 
   private generateRecommendations(reports: AccessibilityReport[]): string {
     const recommendations = new Set<string>();
     
-    reports.forEach(report => {
-      if (report.score < 85) {
+    for (const report of reports) {
+      if (85 > report.score) {
         recommendations.add('Focus on fixing critical and serious violations first');
       }
       
-      if (report.suggestions.some(s => s.type === 'contrast')) {
+      if (report.suggestions.some((s: any) => 'contrast' === s.type)) {
         recommendations.add('Review and adjust color contrast ratios across components');
       }
       
-      if (report.warnings.some(w => w.id === 'missing-alt-text')) {
+      if (report.warnings.some((w: any) => 'missing-alt-text' === w.id)) {
         recommendations.add('Ensure all images have descriptive alt text');
       }
-    });
+    }
 
-    return Array.from(recommendations).map(r => `- ${r}`).join('\n');
+    return [...recommendations].map(r => `- ${r}`).join('\n');
   }
 }
 

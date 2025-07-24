@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import fs from "fs";
-const [,, artifactsDir] = process.argv;
+import fs from "node:fs";
+const artifactsDir = process.argv[2];
 const output = {
   generated: new Date().toISOString(),
   score: 100

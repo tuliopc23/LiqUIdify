@@ -1,5 +1,6 @@
 import { Check, ChevronDown } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+
 import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassSelectOption {
@@ -53,11 +54,11 @@ export const GlassSelect = React.memo(
 					}
 				};
 
-				if (typeof document !== "undefined") {
+				if ("undefined" !== typeof document) {
 					document.addEventListener("mousedown", handleClickOutside);
 				}
 				return () => {
-					if (typeof document !== "undefined") {
+					if ("undefined" !== typeof document) {
 						document.removeEventListener("mousedown", handleClickOutside);
 					}
 				};
@@ -72,11 +73,12 @@ export const GlassSelect = React.memo(
 			const selectedOption = options.find((opt) => opt.value === selectedValue);
 
 			return (
-				<div
-					ref={ref || selectRef}
+
+				<div ref={ref || selectRef}
 					className={cn("relative", className)}
-					{...props}
+					{...(props as any)}
 				>
+
 					<button
 						type="button"
 						onClick={() => !disabled && setIsOpen(!isOpen)}
@@ -95,6 +97,7 @@ export const GlassSelect = React.memo(
 							isOpen && "ring-2 ring-blue-500/50 border-transparent",
 						)}
 					>
+
 						<span
 							className={cn(
 								selectedOption
@@ -104,6 +107,7 @@ export const GlassSelect = React.memo(
 						>
 							{selectedOption ? selectedOption.label : placeholder}
 						</span>
+
 						<ChevronDown
 							className={cn(
 								"h-4 w-4 text-gray-400 transition-transform duration-200",
@@ -113,6 +117,7 @@ export const GlassSelect = React.memo(
 					</button>
 
 					{isOpen && (
+
 						<div
 							className={cn(
 								getGlassClass("elevated"),
@@ -122,6 +127,7 @@ export const GlassSelect = React.memo(
 							)}
 						>
 							{options.map((option) => (
+
 								<button
 									key={option.value}
 									type="button"
@@ -139,8 +145,10 @@ export const GlassSelect = React.memo(
 										"first:rounded-t-xl last:rounded-b-xl",
 									)}
 								>
+
 									<span>{option.label}</span>
 									{selectedValue === option.value && (
+
 										<Check className="h-4 w-4 text-blue-600 dark:text-blue-400" />
 									)}
 								</button>

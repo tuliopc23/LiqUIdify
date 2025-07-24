@@ -58,8 +58,8 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
         navigator.userAgent.includes('JAWS') ||
         window.speechSynthesis?.speaking;
 
-      setState((prev) => ({
-        ...prev,
+      setState((previous) => ({
+        ...previous,
         reducedMotion,
         highContrast: highContrastMedia || highContrast,
         screenReader: Boolean(screenReader),
@@ -90,21 +90,21 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if ('Tab' === e.key) {
-        setState((prev) => ({ ...prev, keyboardNavigation: true }));
+        setState((previous) => ({ ...previous, keyboardNavigation: true }));
       }
     };
 
     const handleMouseDown = () => {
-      setState((prev) => ({ ...prev, keyboardNavigation: false }));
+      setState((previous) => ({ ...previous, keyboardNavigation: false }));
     };
 
-    if (typeof window !== "undefined") {
+    if ("undefined" !== typeof window) {
       window.addEventListener('keydown', handleKeyDown);
       window.addEventListener('mousedown', handleMouseDown);
     }
 
     return () => {
-      if (typeof window !== "undefined") {
+      if ("undefined" !== typeof window) {
         window.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('mousedown', handleMouseDown);
       }
@@ -153,9 +153,9 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
         'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
       );
       const firstElement = focusableElements[0] as HTMLElement;
-      const lastElement = focusableElements[
-        focusableElements.length - 1
-      ] as HTMLElement;
+      const lastElement = focusableElements.at(
+        -1
+      ) as HTMLElement;
 
       const handleTabKey = (e: KeyboardEvent) => {
         if ('Tab' !== e.key) {

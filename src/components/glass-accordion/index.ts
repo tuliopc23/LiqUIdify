@@ -8,4 +8,5 @@ export {
 	type GlassAccordionProps,
 	GlassAccordionTrigger,
 	type GlassAccordionTriggerProps,
+
 } from "./glass-accordion";

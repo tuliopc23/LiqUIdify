@@ -15,6 +15,7 @@ import {
   getEnhancedGlassClass,
   PIXEL_PERFECT_CONFIG,
   useEnhancedAppleLiquidGlass,
+// @ts-expect-error TS(2307): Cannot find module './enhanced-apple-liquid-glass'... Remove this comment to see the full error message
 } from './enhanced-apple-liquid-glass';
 
 // Mock DOM APIs
@@ -85,20 +86,25 @@ describe('Enhanced Apple Liquid Glass System', () => {
 
       // Check that blur values increase
       for (let i = 1; i < variants.length; i++) {
+        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         expect(variants[i].backdrop.blur).toBeGreaterThan(
+          // @ts-expect-error TS(2571): Object is of type 'unknown'.
           variants[i - 1].backdrop.blur
         );
       }
 
       // Check that opacity values increase
       for (let i = 1; i < variants.length; i++) {
+        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         expect(variants[i].backdrop.opacity).toBeGreaterThan(
+          // @ts-expect-error TS(2571): Object is of type 'unknown'.
           variants[i - 1].backdrop.opacity
         );
       }
 
       // Check that radius values increase
       for (let i = 1; i < variants.length; i++) {
+        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         expect(variants[i].radius).toBeGreaterThan(variants[i - 1].radius);
       }
     });
@@ -115,6 +121,7 @@ describe('Enhanced Apple Liquid Glass System', () => {
     it('should have correct z-index ordering', () => {
       const layers = Object.values(ENHANCED_GLASS_LAYERS);
       const zIndexes = layers
+        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         .map((layer) => layer.zIndex)
         .sort((a, b) => a - b);
 

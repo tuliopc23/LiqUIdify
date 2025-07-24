@@ -11,8 +11,8 @@
  */
 
 const { CSSBundler, BundleSizeValidator } = require("../dist/core/css-bundler");
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 // Configuration
 const BUNDLE_CONFIG = {
@@ -66,7 +66,7 @@ async function buildCSS() {
 		console.log("📦 Bundle Results:");
 		console.log("─".repeat(60));
 
-		result.bundles.forEach((bundle) => {
+		for (const bundle of result.bundles) {
 			const sizeKB = (bundle.size / 1024).toFixed(2);
 			const gzipKB = (bundle.gzipSize / 1024).toFixed(2);
 			const critical = bundle.critical ? "🔥 CRITICAL" : "⚡ LAZY";
@@ -74,7 +74,7 @@ async function buildCSS() {
 			console.log(
 				`${bundle.name.padEnd(12)} │ ${sizeKB.padStart(8)}KB │ ${gzipKB.padStart(8)}KB gzip │ ${critical}`,
 			);
-		});
+		}
 
 		console.log("─".repeat(60));
 		console.log(`Total Size: ${(result.totalSize / 1024).toFixed(2)}KB`);
@@ -88,7 +88,7 @@ async function buildCSS() {
 			console.log("✅ All bundle size limits passed!");
 		} else {
 			console.log("❌ Bundle size violations:");
-			validation.violations.forEach((violation) => {
+			for (const violation of validation.violations) {
 				const actualKB = (violation.actual / 1024).toFixed(2);
 				const limitKB = (violation.limit / 1024).toFixed(2);
 				const icon = violation.severity === "error" ? "🚨" : "⚠️";
@@ -96,18 +96,18 @@ async function buildCSS() {
 				console.log(
 					`${icon} ${violation.bundle}: ${actualKB}KB > ${limitKB}KB limit`,
 				);
-			});
+			}
 		}
 
 		// Display warnings and errors
 		if (result.warnings.length > 0) {
 			console.log("\n⚠️  Warnings:");
-			result.warnings.forEach((warning) => console.log(`   ${warning}`));
+			for (const warning of result.warnings) {console.log(`   ${warning}`);}
 		}
 
 		if (result.errors.length > 0) {
 			console.log("\n🚨 Errors:");
-			result.errors.forEach((error) => console.log(`   ${error}`));
+			for (const error of result.errors) {console.log(`   ${error}`);}
 			process.exit(1);
 		}
 
@@ -186,20 +186,20 @@ function watchCSS() {
 			console.log("✅ All bundles within size limits");
 		} else {
 			console.log("❌ Size limit violations detected");
-			validation.violations.forEach((violation) => {
+			for (const violation of validation.violations) {
 				const actualKB = (violation.actual / 1024).toFixed(2);
 				const limitKB = (violation.limit / 1024).toFixed(2);
 				console.log(`   ${violation.bundle}: ${actualKB}KB > ${limitKB}KB`);
-			});
+			}
 		}
 		console.log("");
 	});
 }
 
 // CLI handling
-const args = process.argv.slice(2);
+const args = new Set(process.argv.slice(2));
 
-if (args.includes("--watch") || args.includes("-w")) {
+if (args.has("--watch") || args.has("-w")) {
 	watchCSS();
 } else {
 	buildCSS();

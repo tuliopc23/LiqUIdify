@@ -182,7 +182,7 @@ class ErrorTrackingSystem {
     if (user) {
       this.sentry.setUser({
         id: user.id,
-        email: user.email ? '[REDACTED]' : undefined,
+        email: user.email ? '[REDACTED]' : null,
         username: user.username,
       });
     } else {
@@ -236,18 +236,26 @@ class ErrorTrackingSystem {
           error: Error;
           resetError: () => void;
         }) => (
+
           <div className="flex min-h-screen items-center justify-center p-4">
+
             <div className="glass-effect rounded-lg p-8 max-w-md">
+
               <h2 className="text-xl font-semibold mb-4">
                 Something went wrong
               </h2>
+
               <p className="text-gray-600 mb-4">
                 We've been notified and are working on a fix.
               </p>
+
               <details className="text-sm text-gray-500 mb-4">
+
                 <summary>Error details</summary>
+
                 <pre className="mt-2 whitespace-pre-wrap">{error.message}</pre>
               </details>
+
               <button
                 onClick={resetError}
                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
@@ -345,7 +353,7 @@ class ErrorTrackingSystem {
    * Process queued errors after initialization
    */
   private processErrorQueue(): void {
-    while (0 < this.errorQueue.length) {
+    while (this.errorQueue.length > 0) {
       const report = this.errorQueue.shift();
       if (report) {
         this.sendToSentry(report);
@@ -357,7 +365,7 @@ class ErrorTrackingSystem {
    * Generate unique error ID
    */
   private generateErrorId(): string {
-    return `err_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `err_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
   }
 }
 
@@ -397,6 +405,7 @@ export function ErrorTrackingProvider({
   const ErrorBoundary = errorTracking.createErrorBoundary();
 
   if (ErrorBoundary) {
+
     return <ErrorBoundary>{children}</ErrorBoundary>;
   }
 

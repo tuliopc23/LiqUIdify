@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const glob = require("glob");
 
 // Pattern to find return null statements in void functions
 const voidReturnPatterns = [
 	// Arrow functions with explicit return null
-	{ pattern: /(\) => \{)([^}]*)(return null;)/g, replacement: "$1$2" },
+	{ pattern: /(\) => {)([^}]*)(return null;)/g, replacement: "$1$2" },
 	// Conditional returns in callbacks
 	{
 		pattern: /if \([^)]+\) {\s*return null;\s*}/g,
@@ -29,7 +29,7 @@ const files = glob.sync("src/**/*.{ts,tsx}", {
 
 let totalReplacements = 0;
 
-files.forEach((file) => {
+for (const file of files) {
 	let content = fs.readFileSync(file, "utf8");
 	let fileReplacements = 0;
 
@@ -50,11 +50,11 @@ files.forEach((file) => {
 			/(on[A-Z]\w*|handle\w*)\s*[:=]\s*\([^)]*\)\s*=>\s*{[^}]*return null;/g;
 		const matches = content.match(eventHandlerPattern);
 		if (matches) {
-			content = content.replace(/return null;/g, (match, offset) => {
+			content = content.replaceAll('return null;', (match, offset) => {
 				// Check if this is inside an event handler
 				const before = content.substring(Math.max(0, offset - 200), offset);
 				if (
-					before.match(/(on[A-Z]\w*|handle\w*)\s*[:=]\s*\([^)]*\)\s*=>\s*{/) ||
+					/(on[A-Z]\w*|handle\w*)\s*[:=]\s*\([^)]*\)\s*=>\s*{/.test(before) ||
 					before.includes("useEffect") ||
 					before.includes("useLayoutEffect")
 				) {
@@ -71,6 +71,6 @@ files.forEach((file) => {
 		console.log(`Fixed ${fileReplacements} void returns in ${file}`);
 		totalReplacements += fileReplacements;
 	}
-});
+}
 
 console.log(`\nTotal replacements: ${totalReplacements}`);

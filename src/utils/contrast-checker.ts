@@ -23,14 +23,14 @@ export interface ColorRGB {
  * Convert hex color to RGB
  */
 export function hexToRgb(hex: string): ColorRGB | null {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
+        r: Number.parseInt(result[1], 16),
+        g: Number.parseInt(result[2], 16),
+        b: Number.parseInt(result[3], 16),
       }
-    : null;
+    : undefined;
 }
 
 /**
@@ -116,16 +116,16 @@ export function getAccessibleColors(
   const suggestions: string[] = [];
 
   // Generate lighter and darker variations
-  for (let i = 0; 255 >= i; i += 15) {
-    const lightColor = { r: i, g: i, b: i };
-    const darkColor = { r: 255 - i, g: 255 - i, b: 255 - i };
+  for (let index = 0; 255 >= index; index += 15) {
+    const lightColor = { r: index, g: index, b: index };
+    const darkColor = { r: 255 - index, g: 255 - index, b: 255 - index };
 
     if (getContrastRatio(baseRgb, lightColor) >= targetRatio) {
-      suggestions.push(`#${i.toString(16).padStart(2, '0').repeat(3)}`);
+      suggestions.push(`#${index.toString(16).padStart(2, '0').repeat(3)}`);
     }
 
     if (getContrastRatio(baseRgb, darkColor) >= targetRatio) {
-      const hex = (255 - i).toString(16).padStart(2, '0');
+      const hex = (255 - index).toString(16).padStart(2, '0');
       suggestions.push(`#${hex.repeat(3)}`);
     }
   }

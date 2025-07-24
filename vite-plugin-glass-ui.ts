@@ -116,13 +116,13 @@ export function glassUIPlugin(options: GlassUIPluginOptions = {}): Plugin {
 			// Add tree-shaking annotations
 			if ((treeShaking && id.endsWith(".ts")) || id.endsWith(".tsx")) {
 				// Mark pure functions
-				code = code.replace(
+				code = code.replaceAll(
 					/export\s+function\s+(\w+)/g,
 					"/*#__PURE__*/ export function $1",
 				);
 
 				// Mark pure components
-				code = code.replace(
+				code = code.replaceAll(
 					/export\s+const\s+(\w+)\s*=\s*React\.forwardRef/g,
 					"/*#__PURE__*/ export const $1 = React.forwardRef",
 				);
@@ -135,14 +135,14 @@ export function glassUIPlugin(options: GlassUIPluginOptions = {}): Plugin {
 
 			// Minify inline CSS
 			if (minifyCSS && code.includes("`") && code.includes("css")) {
-				code = code.replace(/`([^`]+)`/g, (match, css) => {
+				code = code.replaceAll(/`([^`]+)`/g, (match, css) => {
 					if (css.includes("{") && css.includes("}")) {
 						const minified = css
-							.replace(/\s+/g, " ")
-							.replace(/:\s+/g, ":")
-							.replace(/;\s+/g, ";")
-							.replace(/\{\s+/g, "{")
-							.replace(/\}\s+/g, "}")
+							.replaceAll(/\s+/g, " ")
+							.replaceAll(/:\s+/g, ":")
+							.replaceAll(/;\s+/g, ";")
+							.replaceAll(/{\s+/g, "{")
+							.replaceAll(/}\s+/g, "}")
 							.trim();
 						return `\`${minified}\``;
 					}

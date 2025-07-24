@@ -5,9 +5,9 @@
  * Runs performance analysis without external dependencies
  */
 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -166,7 +166,7 @@ class SimplePerformanceTest {
 					!file.includes(".stories."),
 			);
 
-			if (!mainFile) return;
+			if (!mainFile) {return;}
 
 			const filePath = path.join(componentPath, mainFile);
 			const content = fs.readFileSync(filePath, "utf8");
@@ -174,17 +174,17 @@ class SimplePerformanceTest {
 			// Check for performance anti-patterns
 			const antiPatterns = [
 				{
-					pattern: /useEffect\(\s*\(\)\s*=>\s*{[\s\S]*?},\s*\[\]\s*\)/g,
+					pattern: /useEffect\(\s*\(\)\s*=>\s*{[\S\s]*?},\s*\[]\s*\)/g,
 					issue: "Empty dependency array in useEffect",
 					severity: "medium",
 				},
 				{
-					pattern: /useState\((?!.*useMemo|.*useCallback).*\{.*\}\)/g,
+					pattern: /useState\((?!.*useMemo|.*useCallback).*{.*}\)/g,
 					issue: "Complex object in useState without memoization",
 					severity: "high",
 				},
 				{
-					pattern: /onClick\s*=\s*\{.*\s*=>\s*.*\}/g,
+					pattern: /onClick\s*=\s*{.*\s*=>\s*.*}/g,
 					issue: "Inline arrow function in onClick (causes re-renders)",
 					severity: "high",
 				},
@@ -229,7 +229,7 @@ class SimplePerformanceTest {
 					file: mainFile,
 				});
 			}
-		} catch (error) {
+		} catch {
 			// Skip file if there's an issue reading it
 		}
 	}
@@ -376,11 +376,11 @@ class SimplePerformanceTest {
 		// Show recommendations
 		if (this.results.recommendations.length > 0) {
 			console.log("\n💡 Recommendations:");
-			this.results.recommendations.forEach((rec, index) => {
+			for (const [index, rec] of this.results.recommendations.entries()) {
 				console.log(
 					`${index + 1}. [${rec.priority.toUpperCase()}] ${rec.category}: ${rec.suggestion}`,
 				);
-			});
+			}
 		}
 
 		// S-tier compliance check

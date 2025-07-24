@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+// @ts-expect-error TS(6142): Module './component-showcase' was resolved to '/Us... Remove this comment to see the full error message
 import { ComponentShowcase } from "./component-showcase";
 
 const meta: Meta<typeof ComponentShowcase> = {
@@ -78,13 +79,21 @@ export const Overlay: Story = {
 
 export const AllComponents: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="space-y-8">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<ComponentShowcase activeSection="buttons" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<ComponentShowcase activeSection="forms" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<ComponentShowcase activeSection="navigation" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<ComponentShowcase activeSection="feedback" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<ComponentShowcase activeSection="data-display" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<ComponentShowcase activeSection="layout" />
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<ComponentShowcase activeSection="overlay" />
 		</div>
 	),

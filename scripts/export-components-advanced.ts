@@ -19,9 +19,9 @@ import {
 	readdirSync,
 	readFileSync,
 	writeFileSync,
-} from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+} from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 // Get current directory
 const __filename = fileURLToPath(import.meta.url);
@@ -549,7 +549,7 @@ function generateComponentDocumentation(componentId: string, metadata: any) {
           <h1 class="text-4xl font-bold text-primary mb-4">${metadata.title}</h1>
           <p class="text-xl text-secondary mb-4">${metadata.description}</p>
           <div class="flex flex-wrap gap-2">
-            <span class="badge category-${metadata.category.toLowerCase().replace(/\s+/g, "-")}">${metadata.category}</span>
+            <span class="badge category-${metadata.category.toLowerCase().replaceAll(/\s+/g, "-")}">${metadata.category}</span>
             <span class="badge complexity-${metadata.complexity.toLowerCase()}">${metadata.complexity}</span>
           </div>
         </div>
@@ -845,12 +845,12 @@ async function exportAdvancedComponents() {
 
 	// Create subdirectories
 	const subdirs = ["components", "api", "data"];
-	subdirs.forEach((dir) => {
+	for (const dir of subdirs) {
 		const dirPath = join(exportDir, dir);
 		if (!existsSync(dirPath)) {
 			mkdirSync(dirPath, { recursive: true });
 		}
-	});
+	}
 
 	// Generate component documentation pages
 	console.log("📦 Generating component documentation...");

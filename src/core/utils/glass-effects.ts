@@ -8,6 +8,7 @@ import type { ComponentVariant } from "../base-component";
 import type {
 	GlassIntensity,
 	GlassVariant,
+
 } from "../glass/unified-glass-system";
 
 export interface GlassEffectOptions {
@@ -24,6 +25,7 @@ export interface GlassEffectOptions {
 	state?: string;
 	glassEffect?: any;
 	animation?: any;
+	config?: Record<string, any>;
 }
 
 /**
@@ -59,18 +61,24 @@ function mapComponentVariantToGlassVariant(
  */
 export function mapIntensity(intensity: GlassIntensity): number {
 	switch (intensity) {
-		case "none":
+		case "none": {
 			return 0;
-		case "subtle":
+		}
+		case "subtle": {
 			return 0.25;
-		case "medium":
+		}
+		case "medium": {
 			return 0.5;
-		case "strong":
+		}
+		case "strong": {
 			return 0.75;
-		case "intense":
+		}
+		case "intense": {
 			return 1;
-		default:
+		}
+		default: {
 			return 0.5;
+		}
 	}
 }
 

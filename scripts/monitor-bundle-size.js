@@ -11,8 +11,8 @@
  * - Total critical: <30KB
  */
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const gzipSize = require("gzip-size");
 const chalk = require("chalk");
 
@@ -26,7 +26,7 @@ const SIZE_BUDGETS = {
 };
 
 // Critical bundles (loaded immediately)
-const CRITICAL_BUNDLES = ["core.css"];
+const CRITICAL_BUNDLES = new Set(["core.css"]);
 
 class BundleSizeMonitor {
 	constructor(distDir = "dist/css") {
@@ -65,7 +65,7 @@ class BundleSizeMonitor {
 			this.results.bundles.push(bundle);
 			this.results.totalSize += bundle.size;
 
-			if (CRITICAL_BUNDLES.includes(file)) {
+			if (CRITICAL_BUNDLES.has(file)) {
 				this.results.criticalSize += bundle.size;
 			}
 		}
@@ -85,7 +85,7 @@ class BundleSizeMonitor {
 
 		const size = Buffer.byteLength(content, "utf8");
 		const compressed = await gzipSize(content);
-		const isCritical = CRITICAL_BUNDLES.includes(filename);
+		const isCritical = CRITICAL_BUNDLES.has(filename);
 
 		return {
 			name: filename,
@@ -102,7 +102,7 @@ class BundleSizeMonitor {
 	 */
 	checkSizeBudgets() {
 		// Check individual bundle budgets
-		this.results.bundles.forEach((bundle) => {
+		for (const bundle of this.results.bundles) {
 			const budget = SIZE_BUDGETS[bundle.name];
 			if (budget && bundle.gzipSize > budget) {
 				this.results.violations.push({
@@ -114,7 +114,7 @@ class BundleSizeMonitor {
 				});
 				this.results.passed = false;
 			}
-		});
+		}
 
 		// Check total critical size
 		if (this.results.criticalSize > SIZE_BUDGETS["total-critical"]) {
@@ -145,7 +145,7 @@ class BundleSizeMonitor {
 		);
 		console.log("─".repeat(80));
 
-		this.results.bundles.forEach((bundle) => {
+		for (const bundle of this.results.bundles) {
 			const sizeKB = (bundle.size / 1024).toFixed(1);
 			const gzipKB = (bundle.gzipSize / 1024).toFixed(1);
 			const budget = SIZE_BUDGETS[bundle.name];
@@ -169,7 +169,7 @@ class BundleSizeMonitor {
 					`${budgetKB.padStart(8)}KB ` +
 					statusColor(`${status.padStart(10)}`),
 			);
-		});
+		}
 
 		console.log("─".repeat(80));
 		console.log(
@@ -182,7 +182,7 @@ class BundleSizeMonitor {
 		// Display violations
 		if (this.results.violations.length > 0) {
 			console.log(chalk.red.bold("❌ Size Budget Violations:"));
-			this.results.violations.forEach((violation) => {
+			for (const violation of this.results.violations) {
 				const actualKB = (violation.actual / 1024).toFixed(1);
 				const budgetKB = (violation.budget / 1024).toFixed(1);
 				const overageKB = (
@@ -195,7 +195,7 @@ class BundleSizeMonitor {
 					`${icon} ${violation.name}: ${actualKB}KB > ${budgetKB}KB ` +
 						`(+${overageKB}KB over budget)`,
 				);
-			});
+			}
 			console.log("");
 		} else {
 			console.log(chalk.green.bold("✅ All bundles within size budgets!"));
@@ -260,7 +260,7 @@ class BundleSizeMonitor {
 			};
 
 			// Compare individual bundles
-			this.results.bundles.forEach((currentBundle) => {
+			for (const currentBundle of this.results.bundles) {
 				const previousBundle = previousReport.bundles.find(
 					(b) => b.name === currentBundle.name,
 				);
@@ -276,19 +276,19 @@ class BundleSizeMonitor {
 						});
 					}
 				}
-			});
+			}
 
 			// Display comparison
 			if (comparison.bundleChanges.length > 0) {
 				console.log(chalk.blue.bold("📈 Size Changes Since Last Build:"));
-				comparison.bundleChanges.forEach((change) => {
+				for (const change of comparison.bundleChanges) {
 					const diffKB = (change.sizeDiff / 1024).toFixed(1);
 					const icon = change.sizeDiff > 0 ? "📈" : "📉";
 					const color = change.sizeDiff > 0 ? chalk.red : chalk.green;
 					const sign = change.sizeDiff > 0 ? "+" : "";
 
 					console.log(`${icon} ${change.name}: ${color(`${sign}${diffKB}KB`)}`);
-				});
+				}
 				console.log("");
 			}
 
@@ -336,15 +336,15 @@ async function main() {
 				chalk.red.bold("💥 Build failed due to size budget violations"),
 			);
 			process.exit(1);
-		} else if (!monitor.results.passed) {
+		} else if (monitor.results.passed) {
+			console.log(chalk.green.bold("🎉 All size budgets passed!"));
+			process.exit(0);
+		} else {
 			console.log(
 				chalk.yellow.bold(
 					"⚠️  Size budget violations detected (not failing build)",
 				),
 			);
-			process.exit(0);
-		} else {
-			console.log(chalk.green.bold("🎉 All size budgets passed!"));
 			process.exit(0);
 		}
 	} catch (error) {

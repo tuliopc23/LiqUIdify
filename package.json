@@ -1,317 +1,313 @@
 {
-	"name": "liquidify",
-	"version": "1.2.4",
-	"type": "module",
-	"description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
-	"main": "./dist/cjs/index.cjs",
-	"module": "./dist/index.mjs",
-	"types": "./dist/types/index.d.ts",
-	"style": "./dist/liquidui.css",
-	"exports": {
-		".": {
-			"types": "./dist/types/index.d.ts",
-			"modern": "./dist/modern/index.mjs",
-			"import": "./dist/index.mjs",
-			"require": "./dist/cjs/index.cjs"
-		},
-		"./core": {
-			"types": "./dist/types/bundles/core.d.ts",
-			"modern": "./dist/modern/core.mjs",
-			"import": "./dist/core.mjs",
-			"require": "./dist/cjs/core.cjs"
-		},
-		"./animations": {
-			"types": "./dist/types/bundles/animations.d.ts",
-			"import": "./dist/animations.mjs",
-			"require": "./dist/cjs/animations.cjs"
-		},
-		"./advanced": {
-			"types": "./dist/types/bundles/advanced.d.ts",
-			"import": "./dist/advanced.mjs",
-			"require": "./dist/cjs/advanced.cjs"
-		},
-		"./forms": {
-			"types": "./dist/types/bundles/forms.d.ts",
-			"import": "./dist/forms.mjs",
-			"require": "./dist/cjs/forms.cjs"
-		},
-		"./layout": {
-			"types": "./dist/types/bundles/layout.d.ts",
-			"import": "./dist/layout.mjs",
-			"require": "./dist/cjs/layout.cjs"
-		},
-		"./accessibility": {
-			"types": "./dist/types/bundles/accessibility.d.ts",
-			"import": "./dist/accessibility.mjs",
-			"require": "./dist/cjs/accessibility.cjs"
-		},
-		"./feedback": {
-			"types": "./dist/types/bundles/feedback.d.ts",
-			"import": "./dist/feedback.mjs",
-			"require": "./dist/cjs/feedback.cjs"
-		},
-		"./navigation": {
-			"types": "./dist/types/bundles/navigation.d.ts",
-			"import": "./dist/navigation.mjs",
-			"require": "./dist/cjs/navigation.cjs"
-		},
-		"./physics": {
-			"types": "./dist/types/bundles/physics.d.ts",
-			"import": "./dist/physics.mjs",
-			"require": "./dist/cjs/physics.cjs"
-		},
-		"./ssr": {
-			"types": "./dist/types/bundles/ssr.d.ts",
-			"import": "./dist/ssr.mjs",
-			"require": "./dist/cjs/ssr.cjs"
-		},
-		"./button": {
-			"types": "./dist/types/components/glass-button/index.d.ts",
-			"import": "./dist/components/button.mjs",
-			"require": "./dist/cjs/components/button.cjs"
-		},
-		"./card": {
-			"types": "./dist/types/components/glass-card/index.d.ts",
-			"import": "./dist/components/card.mjs",
-			"require": "./dist/cjs/components/card.cjs"
-		},
-		"./input": {
-			"types": "./dist/types/components/glass-input/index.d.ts",
-			"import": "./dist/components/input.mjs",
-			"require": "./dist/cjs/components/input.cjs"
-		},
-		"./modal": {
-			"types": "./dist/types/components/glass-modal/index.d.ts",
-			"import": "./dist/components/modal.mjs",
-			"require": "./dist/cjs/components/modal.cjs"
-		},
-		"./tokens": {
-			"types": "./dist/types/tokens/index.d.ts",
-			"import": "./dist/tokens.mjs",
-			"require": "./dist/cjs/tokens.cjs"
-		},
-		"./context": {
-			"types": "./dist/types/providers/index.d.ts",
-			"import": "./dist/providers.mjs",
-			"require": "./dist/cjs/providers.cjs"
-		},
-		"./styles": "./dist/liquidui.css",
-		"./css": "./dist/liquidui.css",
-		"./package.json": "./package.json"
-	},
-	"scripts": {
-		"analyze:bundles": "bun scripts/analyze-bundles.js",
-		"biome:check": "bunx biome check src/",
-		"biome:ci": "bunx biome ci src/",
-		"biome:fix": "bunx biome check src/ --write",
-		"biome:format": "bunx biome format src/ --write",
-		"build": "bun run build:unified",
-		"build:analyze": "bun run build:unified && bun run analyze:bundles",
-		"build:ci": "bun run build:unified && bun run bundle:budget:enforce",
-		"build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
-		"build:css:optimized": "bun scripts/optimize-css.js",
-		"build:minified": "bun scripts/build-minified-bundles.js",
-		"build:modern": "vite build --target es2018 --outDir dist/modern",
-		"build:modular": "bun run build:unified",
-		"build:optimized": "bun run build:unified",
-		"build:oxc": "bun run oxc:check && bun run build:unified",
-		"build:production": "bun scripts/build-production.js",
-		"build:standard": "bun run build:unified",
-		"build:unified": "bun run clean && vite build && bun run build:modern && bun run build:css:optimized && bun run build:minified && bun run post-build",
-		"build:watch": "vite build --watch",
-		"build-storybook": "bun run build:css && bunx storybook build && bun run post-storybook",
-		"bundle:analyze:performance": "bun scripts/analyze-bundles.js",
-		"bundle:budget:check": "bun scripts/analyze-bundle.js",
-		"bundle:budget:enforce": "bun run bundle:budget:check",
-		"bundle:budget:report": "bun run bundle:budget:check && echo 'Bundle budget report available at dist/BUNDLE_BUDGET_REPORT.md'",
-		"bundle:tree-shake:verify": "bun scripts/analyze-bundles.js --verify-tree-shake",
-		"ci:full": "bun run oxc:check && bun run build:unified && bun run test:ci",
-		"clean": "rm -rf dist",
-		"clean:node": "rm -rf node_modules package-lock.json && bun install",
-		"codegen:batch": "bun scripts/code-generation-tools.js batch",
-		"codegen:bundle": "bun scripts/code-generation-tools.js bundle",
-		"codegen:component": "bun scripts/code-generation-tools.js component",
-		"codegen:migration": "bun scripts/code-generation-tools.js migration",
-		"dev": "vite",
-		"export:advanced": "tsx scripts/export-components-advanced.ts",
-		"export:static": "tsx scripts/export-components-static.ts",
-		"export:storybook": "storybook build --output-dir static-export/storybook",
-		"fix:all": "bun run fix:deps && bun run oxc:lint:fix && bun run build:unified",
-		"fix:deps": "bash scripts/fix-dependencies.sh",
-		"format": "prettier --write src/**/*.{ts,tsx,css}",
-		"lint": "bunx oxlint src --quiet",
-		"lint:ci": "bunx oxlint src --quiet",
-		"lint:fix": "bunx oxlint src --fix --quiet",
-		"migrate-to-bun": "bun scripts/migrate-to-bun.js",
-		"metrics": "bun scripts/track-metrics.js",
-		"metrics:watch": "bun scripts/track-metrics.js --watch",
-		"oxc:check": "bun run oxc:lint && bun run type-check",
-		"oxc:lint": "bunx oxlint src --quiet",
-		"oxc:lint:fix": "bunx oxlint src --fix --quiet",
-		"perf:animation": "bun scripts/performance/performance-benchmarks.js --animation-only",
-		"perf:benchmark": "node scripts/s-tier-compliance-check.cjs",
-		"perf:benchmark:ci": "bun run build && node scripts/s-tier-compliance-check.cjs",
-		"perf:memory": "bun scripts/performance/performance-benchmarks.js --memory-only",
-		"perf:memory-leak": "node scripts/performance/performance-benchmarks.js --memory-only",
-		"perf:memory-leak:comprehensive": "node scripts/performance/performance-benchmarks.js --memory-only --cycles=20",
-		"perf:real-world": "node scripts/performance/performance-benchmarks.js --scenario=simulation",
-		"perf:resolve-alert": "node scripts/resolve-performance-alert.js",
-		"perf:status": "node scripts/performance-status.js",
-		"perf:test": "bun run build:simple && bun scripts/performance-test.js",
-		"perf:validate": "node scripts/validate-s-tier-performance.js",
-		"perf:validate:ci": "bun run build && node scripts/validate-s-tier-performance.js",
-		"perf:validate:s-tier": "node scripts/validate-s-tier-performance.cjs",
-		"post-build": "cp dist/liquidui.css dist/styles.css",
-		"post-storybook": "cp dist/liquidui.css storybook-static/liquidui.css",
-		"qa:full": "bun run oxc:check && bun run test && bun run bundle:budget:check",
-		"release": "semantic-release",
-		"release:dry": "semantic-release --dry-run",
-		"storybook": "storybook dev -p 6006",
-		"test": "vitest",
-		"test:a11y": "playwright test --grep \"accessibility\"",
-		"test:ci": "vitest run --coverage",
-		"test:e2e": "playwright test",
-		"test:e2e:ui": "playwright test --ui",
-		"test:memory:extended": "bun scripts/extended-memory-tests.js",
-		"test:performance": "node scripts/performance-test-simple.cjs",
-		"test:performance:components": "node scripts/performance-test-simple.cjs",
-		"test:performance:memory": "bun scripts/memory-leak-tests.js",
-		"test:visual": "playwright test tests/visual/**/*.visual.spec.ts",
-		"test:visual:ci": "bun run test:visual",
-		"test:visual:update": "bun run test:visual -- --update-snapshots",
-		"type-check": "tsc --noEmit",
-		"verify-bun": "bun scripts/verify-bun-oxc-setup.js"
-	},
-	"keywords": [
-		"glassmorphism",
-		"liquidui",
-		"liquid-glass",
-		"ui-library",
-		"physics",
-		"content-aware",
-		"magnetic-hover",
-		"spring-animations",
-		"accessibility",
-		"typescript",
-		"react",
-		"webgl",
-		"design-system",
-		"components",
-		"tailwind"
-	],
-	"author": {
-		"name": "Tulio Pinheiro Cunha",
-		"email": "contact@tuliocunha.dev",
-		"url": "https://tuliocunha.dev"
-	},
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/tuliopc23/LiqUIdify.git"
-	},
-	"bugs": {
-		"url": "https://github.com/tuliopc23/LiqUIdify/issues"
-	},
-	"homepage": "https://liquidify-storybook.vercel.app",
-	"funding": {
-		"type": "github",
-		"url": "https://github.com/sponsors/tuliopc23"
-	},
-	"files": [
-		"dist/**/*.{js,mjs,cjs,d.ts,css}",
-		"dist/types/**/*",
-		"README.md",
-		"LICENSE"
-	],
-	"sideEffects": [
-		"*.css",
-		"src/styles/**"
-	],
-	"peerDependencies": {
-		"@sentry/react": ">=9.0.0",
-		"react": "^18 || ^19",
-		"react-dom": "^18 || ^19"
-	},
-	"peerDependenciesMeta": {
-		"@sentry/react": {
-			"optional": true
-		}
-	},
-	"dependencies": {
-		"@radix-ui/react-accordion": "^1.2.11",
-		"@radix-ui/react-dialog": "^1.1.14",
-		"@radix-ui/react-radio-group": "^1.3.7",
-		"@radix-ui/react-slot": "^1.2.3",
-		"class-variance-authority": "^0.7.1",
-		"clsx": "^2.1.1",
-		"framer-motion": "^12.23.6",
-		"lucide-react": "^0.525.0",
-		"tailwind-merge": "^3.3.1"
-	},
-	"devDependencies": {
-		"@axe-core/playwright": "^4.10.2",
-		"@biomejs/biome": "^2.1.2",
-		"@playwright/test": "^1.54.1",
-		"@semantic-release/changelog": "^6.0.3",
-		"@semantic-release/git": "^10.0.1",
-		"@semantic-release/github": "^11.0.3",
-		"@sentry/react": "^9.40.0",
-		"@sentry/types": "^9.40.0",
-		"@storybook/addon-a11y": "^9.0.17",
-		"@storybook/addon-docs": "^9.0.17",
-		"@storybook/addon-themes": "^9.0.17",
-		"@storybook/addon-vitest": "^9.0.17",
-		"@storybook/react-vite": "^9.0.17",
-		"@tailwindcss/postcss": "^4.1.11",
-		"@testing-library/dom": "^10.4.0",
-		"@testing-library/react": "^16.3.0",
-		"@types/pngjs": "^6.0.5",
-		"@types/react": "^19.1.8",
-		"@types/react-dom": "^19.1.6",
-		"@vitejs/plugin-react": "^4.7.0",
-		"@vitest/coverage-v8": "^3.2.4",
-		"autoprefixer": "^10.4.21",
-		"axe-core": "^4.10.3",
-		"axe-playwright": "^2.1.0",
-		"conventional-changelog-conventionalcommits": "^9.1.0",
-		"cssnano": "^7.1.0",
-		"jsdom": "^26.1.0",
-		"oxc": "^1.0.1",
-		"oxlint": "^1.8.0",
-		"pixelmatch": "^7.1.0",
-		"pngjs": "^7.0.0",
-		"postcss": "^8.5.6",
-		"postcss-cli": "^11.0.1",
-		"postcss-import": "^16.1.1",
-		"postcss-preset-env": "^10.2.4",
-		"prettier": "^3.6.2",
-		"puppeteer": "^24.14.0",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
-		"rolldown-plugin-dts": "^0.14.1",
-		"rolldown-vite": "^7.0.9",
-		"semantic-release": "^24.2.7",
-		"storybook": "^9.0.17",
-		"tailwindcss": "^4.1.11",
-		"tailwindcss-animate": "^1.0.7",
-		"terser": "^5.43.1",
-		"tslib": "^2.8.1",
-		"tsx": "^4.20.3",
-		"typescript": "^5.8.3",
-		"vite": "^7.0.6",
-		"vite-plugin-dts": "^4.5.4",
-		"vitest": "^3.2.4",
-		"vitest-axe": "^0.1.0",
-		"vitest-canvas-mock": "^0.3.3",
-		"web-vitals": "^5.0.3"
-	},
-	"engines": {
-		"bun": ">=1.0.0"
-	},
-	"browserslist": [
-		"> 0.5%",
-		"last 2 versions",
-		"not dead",
-		"not IE 11"
-	]
+  "name": "liquidify",
+  "version": "1.2.4",
+  "type": "module",
+  "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "style": "./dist/liquidui.css",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "modern": "./dist/modern/index.mjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/cjs/index.cjs"
+    },
+    "./core": {
+      "types": "./dist/types/bundles/core.d.ts",
+      "modern": "./dist/modern/core.mjs",
+      "import": "./dist/core.mjs",
+      "require": "./dist/cjs/core.cjs"
+    },
+    "./animations": {
+      "types": "./dist/types/bundles/animations.d.ts",
+      "import": "./dist/animations.mjs",
+      "require": "./dist/cjs/animations.cjs"
+    },
+    "./advanced": {
+      "types": "./dist/types/bundles/advanced.d.ts",
+      "import": "./dist/advanced.mjs",
+      "require": "./dist/cjs/advanced.cjs"
+    },
+    "./forms": {
+      "types": "./dist/types/bundles/forms.d.ts",
+      "import": "./dist/forms.mjs",
+      "require": "./dist/cjs/forms.cjs"
+    },
+    "./layout": {
+      "types": "./dist/types/bundles/layout.d.ts",
+      "import": "./dist/layout.mjs",
+      "require": "./dist/cjs/layout.cjs"
+    },
+    "./accessibility": {
+      "types": "./dist/types/bundles/accessibility.d.ts",
+      "import": "./dist/accessibility.mjs",
+      "require": "./dist/cjs/accessibility.cjs"
+    },
+    "./feedback": {
+      "types": "./dist/types/bundles/feedback.d.ts",
+      "import": "./dist/feedback.mjs",
+      "require": "./dist/cjs/feedback.cjs"
+    },
+    "./navigation": {
+      "types": "./dist/types/bundles/navigation.d.ts",
+      "import": "./dist/navigation.mjs",
+      "require": "./dist/cjs/navigation.cjs"
+    },
+    "./physics": {
+      "types": "./dist/types/bundles/physics.d.ts",
+      "import": "./dist/physics.mjs",
+      "require": "./dist/cjs/physics.cjs"
+    },
+    "./ssr": {
+      "types": "./dist/types/bundles/ssr.d.ts",
+      "import": "./dist/ssr.mjs",
+      "require": "./dist/cjs/ssr.cjs"
+    },
+    "./button": {
+      "types": "./dist/types/components/glass-button/index.d.ts",
+      "import": "./dist/components/button.mjs",
+      "require": "./dist/cjs/components/button.cjs"
+    },
+    "./card": {
+      "types": "./dist/types/components/glass-card/index.d.ts",
+      "import": "./dist/components/card.mjs",
+      "require": "./dist/cjs/components/card.cjs"
+    },
+    "./input": {
+      "types": "./dist/types/components/glass-input/index.d.ts",
+      "import": "./dist/components/input.mjs",
+      "require": "./dist/cjs/components/input.cjs"
+    },
+    "./modal": {
+      "types": "./dist/types/components/glass-modal/index.d.ts",
+      "import": "./dist/components/modal.mjs",
+      "require": "./dist/cjs/components/modal.cjs"
+    },
+    "./tokens": {
+      "types": "./dist/types/tokens/index.d.ts",
+      "import": "./dist/tokens.mjs",
+      "require": "./dist/cjs/tokens.cjs"
+    },
+    "./context": {
+      "types": "./dist/types/providers/index.d.ts",
+      "import": "./dist/providers.mjs",
+      "require": "./dist/cjs/providers.cjs"
+    },
+    "./styles": "./dist/liquidui.css",
+    "./css": "./dist/liquidui.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "analyze:bundles": "bun scripts/analyze-bundles.js",
+    "build": "bun run build",
+    "build:analyze": "bun run build:unified && bun run analyze:bundles",
+    "build:ci": "bun run build:unified && bun run bundle:budget:enforce",
+    "build:css": "postcss src/styles/tailwind.css -o dist/liquidui.css",
+    "build:css:optimized": "bun scripts/optimize-css.js",
+    "build:minified": "bun scripts/build-minified-bundles.js",
+    "build:modern": "vite build --target es2018 --outDir dist/modern",
+    "build:modular": "bun run build:unified",
+    "build:optimized": "bun run build:unified",
+    "build:oxc": "bun run oxc:check && bun run build:unified",
+    "build:production": "bun scripts/build-production.js",
+    "build:standard": "bun run build:unified",
+    "build:unified": "bun run clean && vite build && bun run build:modern && bun run build:css:optimized && bun run build:minified && bun run post-build",
+    "build:watch": "vite build --watch",
+    "build-storybook": "bun run build:css && bunx storybook build && bun run post-storybook",
+    "bundle:analyze:performance": "bun scripts/analyze-bundles.js",
+    "bundle:budget:check": "bun scripts/analyze-bundle.js",
+    "bundle:budget:enforce": "bun run bundle:budget:check",
+    "bundle:budget:report": "bun run bundle:budget:check && echo 'Bundle budget report available at dist/BUNDLE_BUDGET_REPORT.md'",
+    "bundle:tree-shake:verify": "bun scripts/analyze-bundles.js --verify-tree-shake",
+    "clean": "rm -rf dist",
+    "clean:node": "rm -rf node_modules package-lock.json && bun install",
+    "codegen:batch": "bun scripts/code-generation-tools.js batch",
+    "codegen:bundle": "bun scripts/code-generation-tools.js bundle",
+    "codegen:component": "bun scripts/code-generation-tools.js component",
+    "codegen:migration": "bun scripts/code-generation-tools.js migration",
+    "dev": "vite",
+    "export:advanced": "tsx scripts/export-components-advanced.ts",
+    "export:static": "tsx scripts/export-components-static.ts",
+    "export:storybook": "storybook build --output-dir static-export/storybook",
+    "fix:all": "bun run fix:deps && bun run oxc:lint:fix && bun run build:unified",
+    "fix:deps": "bash scripts/fix-dependencies.sh",
+    "format": "prettier --write src/**/*.{ts,tsx,css}",
+    "lint": "bun run eslint src",
+    "lint:ci": "bunx eslint src --quiet",
+    "lint:fix": "bunx eslint src --fix",
+    "metrics": "bun scripts/track-metrics.js",
+    "metrics:watch": "bun scripts/track-metrics.js --watch",
+    "perf:animation": "bun scripts/performance/performance-benchmarks.js --animation-only",
+    "perf:benchmark": "node scripts/s-tier-compliance-check.cjs",
+    "perf:benchmark:ci": "bun run build && node scripts/s-tier-compliance-check.cjs",
+    "perf:memory": "bun scripts/performance/performance-benchmarks.js --memory-only",
+    "perf:memory-leak": "node scripts/performance/performance-benchmarks.js --memory-only",
+    "perf:memory-leak:comprehensive": "node scripts/performance/performance-benchmarks.js --memory-only --cycles=20",
+    "perf:real-world": "node scripts/performance/performance-benchmarks.js --scenario=simulation",
+    "perf:resolve-alert": "node scripts/resolve-performance-alert.js",
+    "perf:status": "node scripts/performance-status.js",
+    "perf:test": "bun run build:simple && bun scripts/performance-test.js",
+    "perf:validate": "node scripts/validate-s-tier-performance.js",
+    "perf:validate:ci": "bun run build && node scripts/validate-s-tier-performance.js",
+    "perf:validate:s-tier": "node scripts/validate-s-tier-performance.cjs",
+    "post-build": "cp dist/liquidui.css dist/styles.css",
+    "post-storybook": "cp dist/liquidui.css storybook-static/liquidui.css",
+    "qa:full": "bun run oxc:check && bun run test && bun run bundle:budget:check",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
+    "storybook": "storybook dev -p 6006",
+    "test": "vitest",
+    "test:a11y": "playwright test --grep \"accessibility\"",
+    "test:ci": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:memory:extended": "bun scripts/extended-memory-tests.js",
+    "test:performance": "node scripts/performance-test-simple.cjs",
+    "test:performance:components": "node scripts/performance-test-simple.cjs",
+    "test:performance:memory": "bun scripts/memory-leak-tests.js",
+    "test:visual": "playwright test tests/visual/**/*.visual.spec.ts",
+    "test:visual:ci": "bun run test:visual",
+    "test:visual:update": "bun run test:visual -- --update-snapshots",
+    "type-check": "tsc --noEmit",
+    "verify-bun": "bun scripts/verify-bun-oxc-setup.js"
+  },
+  "keywords": [
+    "glassmorphism",
+    "liquidui",
+    "liquid-glass",
+    "ui-library",
+    "physics",
+    "content-aware",
+    "magnetic-hover",
+    "spring-animations",
+    "accessibility",
+    "typescript",
+    "react",
+    "webgl",
+    "design-system",
+    "components",
+    "tailwind"
+  ],
+  "author": {
+    "name": "Tulio Pinheiro Cunha",
+    "email": "contact@tuliocunha.dev",
+    "url": "https://tuliocunha.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuliopc23/LiqUIdify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tuliopc23/LiqUIdify/issues"
+  },
+  "homepage": "https://liquidify-storybook.vercel.app",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/tuliopc23"
+  },
+  "files": [
+    "dist/**/*.{js,mjs,cjs,d.ts,css}",
+    "dist/types/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css",
+    "src/styles/**"
+  ],
+  "peerDependencies": {
+    "@sentry/react": ">=9.0.0",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "peerDependenciesMeta": {
+    "@sentry/react": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.11",
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-radio-group": "^1.3.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "eslint": "^9.31.0",
+    "eslint-config-unicorn": "^0.5.0",
+    "eslint-plugin-unicorn": "^60.0.0",
+    "framer-motion": "^12.23.9",
+    "lucide-react": "^0.525.0",
+    "tailwind-merge": "^3.3.1",
+    "type-fest": "^4.41.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@biomejs/biome": "^2.1.2",
+    "@eslint/js": "^9.31.0",
+    "@playwright/test": "^1.54.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.3",
+    "@sentry/react": "^9.41.0",
+    "@sentry/types": "^9.41.0",
+    "@storybook/addon-a11y": "^9.0.18",
+    "@storybook/addon-docs": "^9.0.18",
+    "@storybook/addon-themes": "^9.0.18",
+    "@storybook/addon-vitest": "^9.0.18",
+    "@storybook/react-vite": "^9.0.18",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.7.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "autoprefixer": "^10.4.21",
+    "axe-core": "^4.10.3",
+    "axe-playwright": "^2.1.0",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "cssnano": "^7.1.0",
+    "jsdom": "^26.1.0",
+    "oxc": "^1.0.1",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1",
+    "postcss-preset-env": "^10.2.4",
+    "prettier": "^3.6.2",
+    "puppeteer": "^24.15.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "rolldown-plugin-dts": "^0.14.1",
+    "rolldown-vite": "^7.0.10",
+    "semantic-release": "^24.2.7",
+    "storybook": "^9.0.18",
+    "tailwindcss": "^4.1.11",
+    "tailwindcss-animate": "^1.0.7",
+    "terser": "^5.43.1",
+    "tslib": "^2.8.1",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.38.0",
+    "vite": "^7.0.6",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.2.4",
+    "vitest-axe": "^0.1.0",
+    "vitest-canvas-mock": "^0.3.3",
+    "web-vitals": "^5.0.3"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not IE 11"
+  ]
 }

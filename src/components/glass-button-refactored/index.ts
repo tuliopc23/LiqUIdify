@@ -3,4 +3,5 @@
  */
 
 export type { GlassButtonProps } from "./glass-button";
+
 export { GlassButton as default, GlassButton } from "./glass-button";

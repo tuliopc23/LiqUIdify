@@ -114,9 +114,9 @@ export class CSSBundleAnalyzer {
       const status =
         sizeKB <= bundleConfig.maxSize
           ? 'ok'
-          : sizeKB <= bundleConfig.maxSize * 1.2
+          : (sizeKB <= bundleConfig.maxSize * 1.2
             ? 'warning'
-            : 'error';
+            : 'error');
 
       results.bundles[bundleName] = {
         size: sizeKB,
@@ -255,7 +255,7 @@ export class CSSBundleAnalyzer {
     let status: 'pass' | 'warning' | 'fail' = 'pass';
     if (30 < analysis.totalSize) {
       status = 'fail';
-    } else if (0 < analysis.recommendations.length) {
+    } else if (analysis.recommendations.length > 0) {
       status = 'warning';
     }
 
@@ -280,7 +280,7 @@ export class CSSBundleAnalyzer {
     // This is a simplified version - in production, use proper critical CSS detection
 
     // Extract selector from rule
-    const selectorMatch = rule.match(/^([^{]+)\{/);
+    const selectorMatch = rule.match(/^([^{]+){/);
     if (!selectorMatch) {
       return false;
     }
@@ -310,7 +310,7 @@ export class CSSBundleAnalyzer {
     // Remove CSS rules that don't match any used selectors
     const rules = this.parseCSSRules(css);
     const usedRules = rules.filter((rule) => {
-      const selectorMatch = rule.match(/^([^{]+)\{/);
+      const selectorMatch = rule.match(/^([^{]+){/);
       if (!selectorMatch) {
         return true;
       }
@@ -327,14 +327,14 @@ export class CSSBundleAnalyzer {
   private minifyCSS(css: string): string {
     // Basic CSS minification
     return css
-      .replace(/\/\*[\s\S]*?\*\//g, '') // Remove comments
-      .replace(/\s+/g, ' ') // Collapse whitespace
-      .replace(/;\s*}/g, '}') // Remove last semicolon in blocks
-      .replace(/\s*{\s*/g, '{') // Clean up braces
-      .replace(/\s*}\s*/g, '}')
-      .replace(/\s*,\s*/g, ',') // Clean up commas
-      .replace(/\s*:\s*/g, ':') // Clean up colons
-      .replace(/\s*;\s*/g, ';') // Clean up semicolons
+      .replaceAll(/\/\*[\S\s]*?\*\//g, '') // Remove comments
+      .replaceAll(/\s+/g, ' ') // Collapse whitespace
+      .replaceAll(/;\s*}/g, '}') // Remove last semicolon in blocks
+      .replaceAll(/\s*{\s*/g, '{') // Clean up braces
+      .replaceAll(/\s*}\s*/g, '}')
+      .replaceAll(/\s*,\s*/g, ',') // Clean up commas
+      .replaceAll(/\s*:\s*/g, ':') // Clean up colons
+      .replaceAll(/\s*;\s*/g, ';') // Clean up semicolons
       .trim();
   }
 

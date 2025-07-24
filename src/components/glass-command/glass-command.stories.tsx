@@ -8,6 +8,7 @@ import {
 	Settings,
 	User,
 } from "lucide-react";
+// @ts-expect-error TS(6142): Module './glass-command' was resolved to '/Users/t... Remove this comment to see the full error message
 import { CommandPalette } from "./glass-command";
 
 const meta: Meta<typeof CommandPalette> = {
@@ -35,6 +36,7 @@ const sampleCommands = [
 		id: "home",
 		label: "Go to Home",
 		description: "Navigate to the home page",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Home className="w-4 h-4" />,
 		category: "Navigation",
 		action: () => console.log("Navigate to home"),
@@ -44,6 +46,7 @@ const sampleCommands = [
 		id: "settings",
 		label: "Open Settings",
 		description: "Configure application settings",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Settings className="w-4 h-4" />,
 		category: "Settings",
 		shortcut: ["cmd", "comma"],
@@ -54,6 +57,7 @@ const sampleCommands = [
 		id: "profile",
 		label: "View Profile",
 		description: "View and edit your profile",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <User className="w-4 h-4" />,
 		category: "User",
 		action: () => console.log("View profile"),
@@ -63,6 +67,7 @@ const sampleCommands = [
 		id: "search",
 		label: "Search Documents",
 		description: "Search through all documents",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Search className="w-4 h-4" />,
 		category: "Content",
 		shortcut: ["cmd", "f"],
@@ -73,6 +78,7 @@ const sampleCommands = [
 		id: "bookmarks",
 		label: "Manage Bookmarks",
 		description: "View and organize bookmarks",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Bookmark className="w-4 h-4" />,
 		category: "Content",
 		action: () => console.log("Manage bookmarks"),
@@ -82,6 +88,7 @@ const sampleCommands = [
 		id: "mail",
 		label: "Compose Email",
 		description: "Create a new email message",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Mail className="w-4 h-4" />,
 		category: "Actions",
 		shortcut: ["cmd", "n"],
@@ -92,6 +99,7 @@ const sampleCommands = [
 		id: "calendar",
 		label: "Open Calendar",
 		description: "View your calendar and appointments",
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		icon: <Calendar className="w-4 h-4" />,
 		category: "Actions",
 		action: () => console.log("Open calendar"),
@@ -140,7 +148,9 @@ export const MinimalCommands: Story = {
 
 export const WithCategories: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="w-full max-w-2xl">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<CommandPalette
 				items={sampleCommands}
 				placeholder="Search commands by category..."

@@ -6,6 +6,7 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import type { AnimationTiming, GlassIntensity } from '@/core/base-component';
 
 // Define GlassEffectState locally since it's not exported
@@ -95,8 +96,8 @@ export function useGlassAnimation(
 
       const animationOptions = { ...config, ...options };
 
-      setState((prev) => ({
-        ...prev,
+      setState((previous) => ({
+        ...previous,
         isAnimating: true,
         startTime: Date.now(),
         endTime: Date.now() + animationOptions.duration,
@@ -125,7 +126,7 @@ export function useGlassAnimation(
           1
         );
 
-        setState((prev) => ({ ...prev, progress }));
+        setState((previous) => ({ ...previous, progress }));
 
         if (1 > progress) {
           requestAnimationFrame(updateProgress);
@@ -136,8 +137,8 @@ export function useGlassAnimation(
 
       // Handle animation completion
       animation.addEventListener('finish', () => {
-        setState((prev) => ({
-          ...prev,
+        setState((previous) => ({
+          ...previous,
           isAnimating: false,
           progress: 1,
         }));
@@ -157,7 +158,7 @@ export function useGlassAnimation(
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
-    setState((prev) => ({ ...prev, isAnimating: false }));
+    setState((previous) => ({ ...previous, isAnimating: false }));
   }, []);
 
   useEffect(() => {
@@ -221,7 +222,7 @@ export function useMagneticHover(
 
       const deltaX = event.clientX - centerX;
       const deltaY = event.clientY - centerY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      const distance = Math.hypot(deltaX, deltaY);
 
       if (distance <= radius) {
         const normalizedDistance = distance / radius;
@@ -336,8 +337,8 @@ export function useLiquidFlow(
       const keyframes = [];
       const steps = 60; // 60 fps
 
-      for (let i = 0; i <= steps; i++) {
-        const progress = i / steps;
+      for (let index = 0; index <= steps; index++) {
+        const progress = index / steps;
         const y = amplitude * Math.sin(progress * frequency * Math.PI * 2);
         keyframes.push({
           transform: `translateY(${y}px)`,

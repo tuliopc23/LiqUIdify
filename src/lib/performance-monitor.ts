@@ -91,7 +91,7 @@ export class PerformanceMonitor {
 
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      const lastEntry = entries[entries.length - 1] as PerformanceEntry & {
+      const lastEntry = entries.at(-1) as PerformanceEntry & {
         renderTime?: number;
         loadTime?: number;
       };
@@ -117,7 +117,7 @@ export class PerformanceMonitor {
 
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry) => {
+      for (const entry of entries) {
         const fid = (
           entry as PerformanceEntry & {
             processingStart?: number;
@@ -127,7 +127,7 @@ export class PerformanceMonitor {
           ? (entry as any).processingStart - entry.startTime
           : 0;
         this.updateMetric('fid', fid);
-      });
+      }
     });
 
     try {
@@ -151,7 +151,7 @@ export class PerformanceMonitor {
       entries.forEach((entry: any) => {
         if (!entry.hadRecentInput) {
           const firstSessionEntry = clsEntries[0];
-          const lastSessionEntry = clsEntries[clsEntries.length - 1];
+          const lastSessionEntry = clsEntries.at(-1);
 
           if (
             !firstSessionEntry ||
@@ -184,11 +184,11 @@ export class PerformanceMonitor {
 
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry) => {
+      for (const entry of entries) {
         if ('first-contentful-paint' === entry.name) {
           this.updateMetric('fcp', entry.startTime);
         }
-      });
+      }
     });
 
     try {
@@ -222,10 +222,10 @@ export class PerformanceMonitor {
 
   public measureComponentRender<T>(
     componentName: string,
-    renderFn: () => T
+    renderFunction: () => T
   ): T {
     const startTime = performance.now();
-    const result = renderFn();
+    const result = renderFunction();
     const endTime = performance.now();
     const renderTime = endTime - startTime;
 
@@ -360,12 +360,12 @@ export class PerformanceMonitor {
     let coreWebVitalsScore = 0;
     let coreWebVitalsCount = 0;
 
-    ['lcp', 'fid', 'cls'].forEach((metric) => {
+    for (const metric of ['lcp', 'fid', 'cls']) {
       const value = metrics[metric as keyof PerformanceMetrics];
       if (value !== undefined) {
         const status = this.getMetricStatusByValue(metric, value);
         coreWebVitalsScore +=
-          'good' === status ? 100 : 'needs-improvement' === status ? 50 : 0;
+          'good' === status ? 100 : ('needs-improvement' === status ? 50 : 0);
         coreWebVitalsCount++;
 
         if ('good' !== status) {
@@ -374,7 +374,7 @@ export class PerformanceMonitor {
           );
         }
       }
-    });
+    }
 
     coreWebVitalsScore =
       0 < coreWebVitalsCount ? coreWebVitalsScore / coreWebVitalsCount : 0;
@@ -420,7 +420,7 @@ export class PerformanceMonitor {
   }
 
   public disconnect(): void {
-    this.observers.forEach((observer) => observer.disconnect());
+    for (const observer of this.observers) {observer.disconnect();}
     this.observers.clear();
   }
 }

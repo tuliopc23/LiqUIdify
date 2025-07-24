@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
  * Safe layout effect that works on server
  */
 export const useIsomorphicLayoutEffect =
-  'undefined' !== typeof window ? useLayoutEffect : useEffect;
+  'undefined' === typeof window ? useEffect : useLayoutEffect;
 
 /**
  * Check if code is running on server
@@ -16,11 +16,11 @@ export const isClient = !isServer;
  * Safe window object with all properties
  */
 export const safeWindow = new Proxy({} as Window, {
-  get: (_target, prop) => {
+  get: (_target, property) => {
     if (isServer) {
       return;
     }
-    return window[prop as keyof Window];
+    return window[property as keyof Window];
   },
 });
 
@@ -28,11 +28,11 @@ export const safeWindow = new Proxy({} as Window, {
  * Safe document object
  */
 export const safeDocument = new Proxy({} as Document, {
-  get: (_target, prop) => {
+  get: (_target, property) => {
     if (isServer) {
       return;
     }
-    return document[prop as keyof Document];
+    return document[property as keyof Document];
   },
 });
 
@@ -97,7 +97,7 @@ export const useMediaQuery = (query: string): boolean => {
     }
 
     const mediaQuery =
-      'undefined' !== typeof window ? window.matchMedia(query) : undefined;
+      'undefined' === typeof window ? undefined : window.matchMedia(query);
     if (mediaQuery) {
       setMatches(mediaQuery.matches);
 

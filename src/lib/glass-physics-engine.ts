@@ -249,11 +249,11 @@ export class SpringPhysics {
     this.state.acceleration = { x: accelerationX, y: accelerationY };
 
     // Check if animation should continue
-    const distanceToTarget = Math.sqrt(
-      (position.x - target.x) ** 2 + (position.y - target.y) ** 2
+    const distanceToTarget = Math.hypot(
+      (position.x - target.x), (position.y - target.y)
     );
-    const velocityMagnitude = Math.sqrt(
-      velocity.x * velocity.x + velocity.y * velocity.y
+    const velocityMagnitude = Math.hypot(
+      velocity.x, velocity.y
     );
 
     const shouldContinue =
@@ -288,7 +288,9 @@ export class SpringPhysics {
 
   destroy(): void {
     this.stop();
+    // @ts-expect-error TS(2322): Type 'null' is not assignable to type '((state: Ph... Remove this comment to see the full error message
     this.onUpdate = null;
+    // @ts-expect-error TS(2322): Type 'null' is not assignable to type '(() => void... Remove this comment to see the full error message
     this.onComplete = null;
   }
 }
@@ -339,7 +341,7 @@ export class MagneticField {
     // Calculate distance
     const deltaX = cursorX - position.x;
     const deltaY = cursorY - position.y;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const distance = Math.hypot(deltaX, deltaY);
 
     // Return zero force if outside range or below threshold
     if (distance > range || distance < threshold) {
@@ -440,27 +442,27 @@ export class AnimationChoreographer {
   }
 
   play(): void {
-    this.animations.forEach(({ animation }) => {
+    for (const { animation } of this.animations) {
       animation.play();
-    });
+    }
   }
 
   pause(): void {
-    this.animations.forEach(({ animation }) => {
+    for (const { animation } of this.animations) {
       animation.pause();
-    });
+    }
   }
 
   reverse(): void {
-    this.animations.forEach(({ animation }) => {
+    for (const { animation } of this.animations) {
       animation.reverse();
-    });
+    }
   }
 
   cancel(): void {
-    this.animations.forEach(({ animation }) => {
+    for (const { animation } of this.animations) {
       animation.cancel();
-    });
+    }
     this.animations.clear();
   }
 
@@ -607,20 +609,25 @@ export class GestureRecognizer {
     let deltaY = 0;
 
     switch (e.key) {
-      case 'ArrowLeft':
+      case 'ArrowLeft': {
         deltaX = -step;
         break;
-      case 'ArrowRight':
+      }
+      case 'ArrowRight': {
         deltaX = step;
         break;
-      case 'ArrowUp':
+      }
+      case 'ArrowUp': {
         deltaY = -step;
         break;
-      case 'ArrowDown':
+      }
+      case 'ArrowDown': {
         deltaY = step;
         break;
-      default:
+      }
+      default: {
         return;
+      }
     }
 
     e.preventDefault();
@@ -818,9 +825,9 @@ export function useAdvancedPhysics(
         return;
       }
 
-      animations.forEach(({ id, element, keyframes, options }) => {
+      for (const { id, element, keyframes, options } of animations) {
         choreographerRef.current?.addAnimation(id, element, keyframes, options);
-      });
+      }
 
       choreographerRef.current.play();
     },

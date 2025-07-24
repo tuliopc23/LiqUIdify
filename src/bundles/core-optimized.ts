@@ -7,6 +7,7 @@
  */
 
 // Core utilities (minimal)
+
 export { cn } from '@/core/utils/classname';
 // Essential form components (minimal footprint)
 export { GlassButton } from '../components/glass-button-refactored';
@@ -17,6 +18,7 @@ export { GlassInput } from '../components/glass-input';
 export { ThemeProvider } from '../components/theme-provider';
 export { useIsClient, useSSRSafeWindow } from '../hooks/use-ssr-safe';
 // Essential hooks (tree-shakeable)
+
 export { useTheme } from '../hooks/use-theme';
 
 // Base types

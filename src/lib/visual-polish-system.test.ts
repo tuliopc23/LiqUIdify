@@ -59,7 +59,7 @@ Object.defineProperty(global, 'navigator', {
 
 Object.defineProperty(document, 'createElement', {
   value: vi.fn((tagName: string) => {
-    if (tagName === 'canvas') return mockCanvas;
+    if (tagName === 'canvas') {return mockCanvas;}
     return mockElement;
   }),
   writable: true,
@@ -132,6 +132,7 @@ describe('Visual Polish System', () => {
         polishManager.addMicroInteraction(
           'test-custom',
           mockElement,
+          // @ts-expect-error TS(2345): Argument of type 'Omit<MicroInteraction, "id" | "e... Remove this comment to see the full error message
           customInteraction
         );
 
@@ -160,13 +161,13 @@ describe('Visual Polish System', () => {
           'rippleEffect',
         ];
 
-        triggers.forEach((preset, index) => {
+        for (const [index, preset] of triggers.entries()) {
           polishManager.addMicroInteraction(
             `test-${index}`,
             mockElement,
             preset
           );
-        });
+        }
 
         // Should have set up event listeners for each trigger type
         expect(mockElement.addEventListener).toHaveBeenCalledTimes(
@@ -190,7 +191,7 @@ describe('Visual Polish System', () => {
         // Simulate interaction
         const handlers = mockElement.addEventListener.mock.calls;
         const mouseEnterHandler = handlers.find(
-          (call) => call[0] === 'mouseenter'
+          (call: any) => call[0] === 'mouseenter'
         )?.[1];
 
         if (mouseEnterHandler) {
@@ -332,10 +333,10 @@ describe('Visual Polish System', () => {
         expect(metrics).toHaveProperty('overallScore');
 
         // All scores should be between 0 and 1
-        Object.values(metrics).forEach((score) => {
+        for (const score of Object.values(metrics)) {
           expect(score).toBeGreaterThanOrEqual(0);
           expect(score).toBeLessThanOrEqual(1);
-        });
+        }
       });
 
       it('should provide quality recommendations', () => {
@@ -343,10 +344,10 @@ describe('Visual Polish System', () => {
         const recommendations = polishManager.getQualityRecommendations();
 
         expect(Array.isArray(recommendations)).toBe(true);
-        recommendations.forEach((recommendation) => {
+        for (const recommendation of recommendations) {
           expect(typeof recommendation).toBe('string');
           expect(recommendation.length).toBeGreaterThan(0);
-        });
+        }
       });
 
       it('should update overall score based on individual metrics', () => {
@@ -568,13 +569,13 @@ describe('Visual Polish System', () => {
         'glowEffect',
       ];
 
-      requiredPresets.forEach((preset) => {
+      for (const preset of requiredPresets) {
         expect(MICRO_INTERACTION_PRESETS).toHaveProperty(preset);
-      });
+      }
     });
 
     it('should have valid preset configurations', () => {
-      Object.entries(MICRO_INTERACTION_PRESETS).forEach(([_name, preset]) => {
+      for (const [_name, preset] of Object.entries(MICRO_INTERACTION_PRESETS)) {
         expect(preset).toHaveProperty('trigger');
         expect(preset).toHaveProperty('animation');
         expect(preset).toHaveProperty('feedback');
@@ -592,16 +593,16 @@ describe('Visual Polish System', () => {
         expect(preset.timing).toHaveProperty('delay');
         expect(preset.timing).toHaveProperty('duration');
         expect(preset.timing).toHaveProperty('easing');
-      });
+      }
     });
 
     it('should have reasonable timing values', () => {
-      Object.entries(MICRO_INTERACTION_PRESETS).forEach(([_name, preset]) => {
+      for (const [_name, preset] of Object.entries(MICRO_INTERACTION_PRESETS)) {
         expect(preset.timing.delay).toBeGreaterThanOrEqual(0);
         expect(preset.timing.duration).toBeGreaterThan(0);
         expect(preset.timing.duration).toBeLessThan(2000); // Reasonable upper limit
         expect(typeof preset.timing.easing).toBe('string');
-      });
+      }
     });
   });
 

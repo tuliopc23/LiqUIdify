@@ -4,8 +4,8 @@
  * Properly fixes malformed ternary operators in SSR-safe code
  */
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 const glob = require("glob");
 
 console.log("🛡️ Fixing SSR syntax issues...");
@@ -17,7 +17,7 @@ const files = glob.sync("src/**/*.{ts,tsx}", {
 
 let totalFixed = 0;
 
-files.forEach((filePath) => {
+for (const filePath of files) {
 	let content = fs.readFileSync(filePath, "utf8");
 	let modified = false;
 
@@ -55,13 +55,13 @@ files.forEach((filePath) => {
 		},
 	];
 
-	fixes.forEach((fix) => {
+	for (const fix of fixes) {
 		const before = content;
 		content = content.replace(fix.pattern, fix.replacement);
 		if (content !== before) {
 			modified = true;
 		}
-	});
+	}
 
 	// Additional specific patterns that are common
 	const specificFixes = [
@@ -95,26 +95,26 @@ files.forEach((filePath) => {
 		},
 	];
 
-	specificFixes.forEach((fix) => {
+	for (const fix of specificFixes) {
 		const before = content;
 		content = content.replace(fix.pattern, fix.replacement);
 		if (content !== before) {
 			modified = true;
 		}
-	});
+	}
 
 	if (modified) {
 		fs.writeFileSync(filePath, content);
 		totalFixed++;
 		console.log(`✓ Fixed ${filePath}`);
 	}
-});
+}
 
 console.log(`✅ Fixed ${totalFixed} files with SSR syntax issues`);
 
 // Also create a summary of remaining issues
 console.log("\n📋 Running type check to verify fixes...");
-const { execSync } = require("child_process");
+const { execSync } = require("node:child_process");
 
 try {
 	execSync("bun run type-check", { stdio: "pipe" });

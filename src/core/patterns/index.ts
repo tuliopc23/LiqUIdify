@@ -13,6 +13,7 @@ export {
 	createGlassPolymorphicComponent,
 	createPolymorphicComponent,
 	createPolymorphicSlots,
+
 } from "../create-polymorphic-component";
 
 // Business logic patterns
@@ -22,7 +23,7 @@ export const createBusinessLogicHook = <T extends Record<string, any>>(
 		state: T,
 		setState: React.Dispatch<React.SetStateAction<T>>,
 		props: any,
-	) => Record<string, (...args: any[]) => void>,
+	) => Record<string, (...arguments_: any[]) => void>,
 ) => {
 	return (props: any) => {
 		const [state, setState] = React.useState<T>(() =>
@@ -61,7 +62,7 @@ export const createCompoundComponentWithContext = <
 };
 
 // Render prop pattern
-export interface RenderPropPattern<T> {
+export interface RenderPropertyPattern<T> {
 	children: (props: T) => React.ReactNode;
 }
 
@@ -121,9 +122,9 @@ export const createStateReducer = <T extends Record<string, any>>(
 		reducer,
 		initialState,
 		actions: Object.keys(actionCreators).reduce(
-			(acc, type) => {
-				acc[type] = (payload?: any): StateAction => ({ type, payload });
-				return acc;
+			(accumulator, type) => {
+				accumulator[type] = (payload?: any): StateAction => ({ type, payload });
+				return accumulator;
 			},
 			{} as Record<string, (payload?: any) => StateAction>,
 		),
@@ -148,16 +149,16 @@ export class ComponentEventBus {
 		const eventListeners = this.listeners.get(event);
 		if (eventListeners) {
 			eventListeners.delete(callback);
-			if (0 === eventListeners.size) {
+			if (eventListeners.size === 0) {
 				this.listeners.delete(event);
 			}
 		}
 	}
 
-	emit(event: string, ...args: any[]) {
+	emit(event: string, ...arguments_: any[]) {
 		const eventListeners = this.listeners.get(event);
 		if (eventListeners) {
-			eventListeners.forEach((callback) => callback(...args));
+			for (const callback of eventListeners) {callback(...arguments_);}
 		}
 	}
 

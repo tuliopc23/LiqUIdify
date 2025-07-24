@@ -1,9 +1,14 @@
 import { X } from "lucide-react";
 import { useCallback, useEffect, useId, useRef } from "react";
+
 import { GlassFocusTrap } from "@/components/glass-focus-trap";
+
 import { announcer } from "@/components/glass-live-region";
+
 import { GlassPortal } from "@/components/glass-portal";
+
 import { cn } from "@/core/utils/classname";
+
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface GlassModalProps {
@@ -67,7 +72,7 @@ export function GlassModal({
 			try {
 				if (document.body && document.documentElement) {
 					const scrollbarWidth =
-						typeof window !== "undefined" ? window.innerWidth - document.documentElement.clientWidth : 0;
+						 "undefined" === typeof window ? 0 : window.innerWidth - document.documentElement.clientWidth;
 					document.body.style.overflow = "hidden";
 					document.body.style.paddingRight = `${scrollbarWidth}px`;
 				}
@@ -108,6 +113,7 @@ export function GlassModal({
 	}
 
 	const modalContent = (
+
 		<button
 			className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
 			onClick={handleBackdropClick}
@@ -120,6 +126,7 @@ export function GlassModal({
 			tabIndex={-1}
 			aria-label="Modal backdrop"
 		>
+
 			<GlassFocusTrap
 				active={isOpen}
 				onEscape={handleEscape}
@@ -128,11 +135,12 @@ export function GlassModal({
 				}
 				className="glass-modal-focus-trap w-full max-w-md"
 			>
+
 				<div
 					ref={modalRef}
 					role="dialog"
 					aria-modal="true"
-					aria-labelledby={title ? titleId : undefined}
+					aria-labelledby={title ? titleId : null}
 					aria-describedby={descriptionId}
 					className={cn(
 						"glass-modal",
@@ -144,7 +152,9 @@ export function GlassModal({
 					onKeyDown={(e) => e.stopPropagation()}
 				>
 					{title && (
+
 						<div className="glass-modal-header flex items-center justify-between mb-4">
+
 							<h3
 								id={titleId}
 								className={cn(
@@ -154,16 +164,19 @@ export function GlassModal({
 							>
 								{title}
 							</h3>
+
 							<button
 								ref={closeButtonRef}
 								onClick={onClose}
 								aria-label="Close modal"
 								className="glass-modal-close p-2 rounded-lg glass-effect btn-scale focus:outline-none focus:ring-2 focus:ring-primary"
 							>
+
 								<X className="h-4 w-4 text-secondary" />
 							</button>
 						</div>
 					)}
+
 					<div
 						id={descriptionId}
 						className={cn("glass-modal-content", contentClassName)}
@@ -176,8 +189,10 @@ export function GlassModal({
 	);
 
 	return portalTarget ? (
+
 		<GlassPortal container={portalTarget}>{modalContent}</GlassPortal>
 	) : (
+
 		<GlassPortal>{modalContent}</GlassPortal>
 	);
 }

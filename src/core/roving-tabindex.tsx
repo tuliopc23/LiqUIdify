@@ -54,11 +54,11 @@ export function useRovingTabindex(
 
   // Update tabindex attributes
   useEffect(() => {
-    items.forEach((item, index) => {
+    for (const [index, item] of items.entries()) {
       if (item) {
         item.setAttribute('tabindex', index === currentIndex ? '0' : '-1');
       }
-    });
+    }
   }, [items, currentIndex]);
 
   // Handle active change callback
@@ -81,14 +81,14 @@ export function useRovingTabindex(
   const findNextEnabledIndex = useCallback(
     (startIndex: number, direction: 1 | -1): number => {
       const totalItems = items.length;
-      let currentIdx = startIndex;
+      let currentIndex_ = startIndex;
       let attempts = 0;
 
       while (attempts < totalItems) {
-        currentIdx = (currentIdx + direction + totalItems) % totalItems;
+        currentIndex_ = (currentIndex_ + direction + totalItems) % totalItems;
 
-        if (!items[currentIdx]?.hasAttribute('disabled')) {
-          return currentIdx;
+        if (!items[currentIndex_]?.hasAttribute('disabled')) {
+          return currentIndex_;
         }
 
         attempts++;
@@ -114,8 +114,8 @@ export function useRovingTabindex(
       let matchIndex = -1;
 
       // Start search from current index + 1
-      for (let i = 0; i < items.length; i++) {
-        const index = (currentIndex + 1 + i) % items.length;
+      for (let index_ = 0; index_ < items.length; index_++) {
+        const index = (currentIndex + 1 + index_) % items.length;
         const item = items[index];
 
         if (item && !item.hasAttribute('disabled')) {
@@ -153,51 +153,57 @@ export function useRovingTabindex(
       let newIndex = currentIndex;
 
       switch (key) {
-        case 'ArrowUp':
+        case 'ArrowUp': {
           if ('vertical' === orientation || 'both' === orientation) {
             newIndex = findNextEnabledIndex(currentIndex, -1);
             handled = true;
           }
           break;
+        }
 
-        case 'ArrowDown':
+        case 'ArrowDown': {
           if ('vertical' === orientation || 'both' === orientation) {
             newIndex = findNextEnabledIndex(currentIndex, 1);
             handled = true;
           }
           break;
+        }
 
-        case 'ArrowLeft':
+        case 'ArrowLeft': {
           if ('horizontal' === orientation || 'both' === orientation) {
             newIndex = findNextEnabledIndex(currentIndex, -1);
             handled = true;
           }
           break;
+        }
 
-        case 'ArrowRight':
+        case 'ArrowRight': {
           if ('horizontal' === orientation || 'both' === orientation) {
             newIndex = findNextEnabledIndex(currentIndex, 1);
             handled = true;
           }
           break;
+        }
 
-        case 'Home':
+        case 'Home': {
           if (homeEndKeys) {
             // Find first enabled item
             newIndex = findNextEnabledIndex(-1, 1);
             handled = true;
           }
           break;
+        }
 
-        case 'End':
+        case 'End': {
           if (homeEndKeys) {
             // Find last enabled item
             newIndex = findNextEnabledIndex(items.length, -1);
             handled = true;
           }
           break;
+        }
 
-        case 'PageUp':
+        case 'PageUp': {
           if (pageKeys) {
             // Move up by 10 items or to start
             const jumpUp = Math.max(0, currentIndex - 10);
@@ -208,8 +214,9 @@ export function useRovingTabindex(
             handled = true;
           }
           break;
+        }
 
-        case 'PageDown':
+        case 'PageDown': {
           if (pageKeys) {
             // Move down by 10 items or to end
             const jumpDown = Math.min(items.length - 1, currentIndex + 10);
@@ -220,14 +227,16 @@ export function useRovingTabindex(
             handled = true;
           }
           break;
+        }
 
-        default:
+        default: {
           // Handle typeahead for printable characters
           if (1 === key.length && !event.ctrlKey && !event.metaKey) {
             handleTypeahead(key);
             handled = true;
           }
           break;
+        }
       }
 
       if (handled) {
@@ -318,12 +327,12 @@ export function RovingTabindexGroup({
   role,
   'aria-label': ariaLabel,
 }: RovingTabindexGroupProps) {
-  const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  const itemReferences = useRef<(HTMLElement | null)[]>([]);
   const [items, setItems] = useState<HTMLElement[]>([]);
 
   // Collect item refs
   useEffect(() => {
-    const validItems = itemRefs.current.filter(
+    const validItems = itemReferences.current.filter(
       (item): item is HTMLElement => null !== item
     );
     setItems(validItems);
@@ -345,15 +354,15 @@ export function RovingTabindexGroup({
 
     return React.cloneElement(child, {
       ...roving.getRovingProps(index),
-      ref: (el: HTMLElement | null) => {
-        itemRefs.current[index] = el;
+      ref: (element: HTMLElement | null) => {
+        itemReferences.current[index] = element;
         // Preserve original ref if exists
         const originalRef = (child as any).ref;
         if (originalRef) {
           if ('function' === typeof originalRef) {
-            originalRef(el);
+            originalRef(element);
           } else {
-            originalRef.current = el;
+            originalRef.current = element;
           }
         }
       },
@@ -361,6 +370,7 @@ export function RovingTabindexGroup({
   });
 
   return (
+
     <div
       className={className}
       role={role}
@@ -403,8 +413,8 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
 
   // Update tabindex attributes
   useEffect(() => {
-    items.forEach((row, rowIndex) => {
-      row.forEach((cell, colIndex) => {
+    for (const [rowIndex, row] of items.entries()) {
+      for (const [colIndex, cell] of row.entries()) {
         if (cell) {
           const isCurrent =
             rowIndex === currentCell.row && colIndex === currentCell.col;
@@ -412,8 +422,8 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
           cell.setAttribute('aria-rowindex', String(rowIndex + 1));
           cell.setAttribute('aria-colindex', String(colIndex + 1));
         }
-      });
-    });
+      }
+    }
   }, [items, currentCell]);
 
   // Handle cell change callback
@@ -442,13 +452,13 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
       rowDelta: number,
       colDelta: number
     ): { row: number; col: number } | null => {
-      const numRows = items.length;
-      const numCols = Math.max(...items.map((row) => row.length));
+      const numberRows = items.length;
+      const numberCols = Math.max(...items.map((row) => row.length));
 
       let row = startRow;
       let col = startCol;
       let attempts = 0;
-      const maxAttempts = numRows * numCols;
+      const maxAttempts = numberRows * numberCols;
 
       while (attempts < maxAttempts) {
         row += rowDelta;
@@ -457,21 +467,21 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
         // Handle wrapping
         if (wrap) {
           if (0 > row) {
-            row = numRows - 1;
+            row = numberRows - 1;
           }
-          if (row >= numRows) {
+          if (row >= numberRows) {
             row = 0;
           }
           if (0 > col) {
-            col = numCols - 1;
+            col = numberCols - 1;
           }
-          if (col >= numCols) {
+          if (col >= numberCols) {
             col = 0;
           }
         } else {
           // Clamp to bounds
-          row = Math.max(0, Math.min(numRows - 1, row));
-          col = Math.max(0, Math.min(numCols - 1, col));
+          row = Math.max(0, Math.min(numberRows - 1, row));
+          col = Math.max(0, Math.min(numberCols - 1, col));
         }
 
         const cell = items[row]?.[col];
@@ -550,7 +560,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
           break;
         }
 
-        case 'Home':
+        case 'Home': {
           if (homeEndKeys) {
             if (event.ctrlKey) {
               // Go to first cell
@@ -569,8 +579,9 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
             }
           }
           break;
+        }
 
-        case 'End':
+        case 'End': {
           if (homeEndKeys) {
             if (event.ctrlKey) {
               // Go to last cell
@@ -601,8 +612,9 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
             }
           }
           break;
+        }
 
-        default:
+        default: {
           // Handle typeahead
           if (1 === key.length && !event.ctrlKey && !event.metaKey) {
             // Use flat roving for typeahead in grid
@@ -610,6 +622,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
             handled = true;
           }
           break;
+        }
       }
 
       if (handled) {

@@ -4,9 +4,9 @@
  * Script to generate CSS variables file from design tokens
  */
 
-import { writeFileSync } from "fs";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
+import { writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 // Import the CSS generator (this would be compiled from TypeScript)
 import { generateThemeCSS } from "../dist/styles/css-variables.js";

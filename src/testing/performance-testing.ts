@@ -51,19 +51,19 @@ export class PerformanceMonitor {
     return duration;
   }
 
-  measureRenderTime<T>(fn: () => T): { result: T; renderTime: number } {
+  measureRenderTime<T>(function_: () => T): { result: T; renderTime: number } {
     const startTime = performance.now();
-    const result = fn();
+    const result = function_();
     const renderTime = performance.now() - startTime;
 
     return { result, renderTime };
   }
 
   async measureAsyncRenderTime<T>(
-    fn: () => Promise<T>
+    function_: () => Promise<T>
   ): Promise<{ result: T; renderTime: number }> {
     const startTime = performance.now();
-    const result = await fn();
+    const result = await function_();
     const renderTime = performance.now() - startTime;
 
     return { result, renderTime };
@@ -101,7 +101,7 @@ export class PerformanceMonitor {
       // Largest Contentful Paint
       const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        const lcpEntry = entries[entries.length - 1];
+        const lcpEntry = entries.at(-1);
         if (lcpEntry) {
           metrics.largestContentfulPaint = lcpEntry.startTime;
           lcpObserver.disconnect();
@@ -116,7 +116,7 @@ export class PerformanceMonitor {
         fcpObserver.observe({ entryTypes: ['paint'] });
         lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
         this.observers.push(fcpObserver, lcpObserver);
-      } catch (_error) {
+      } catch {
         // Fallback for environments that don't support these APIs
         resolve({
           renderTime: 0,
@@ -127,7 +127,7 @@ export class PerformanceMonitor {
   }
 
   cleanup(): void {
-    this.observers.forEach((observer) => observer.disconnect());
+    for (const observer of this.observers) {observer.disconnect();}
     this.observers = [];
     this.measurements.clear();
   }
@@ -136,7 +136,7 @@ export class PerformanceMonitor {
 // Component performance testing
 export function createPerformanceTest(
   name: string,
-  renderFn: () => void | Promise<void>,
+  renderFunction: () => void | Promise<void>,
   thresholds: Partial<PerformanceMetrics> = {}
 ): () => Promise<PerformanceBenchmark> {
   return async () => {
@@ -145,7 +145,7 @@ export function createPerformanceTest(
     try {
       // Measure render time
       monitor.startMeasurement('render');
-      await renderFn();
+      await renderFunction();
       const renderTime = monitor.endMeasurement('render');
 
       // Get memory usage
@@ -239,7 +239,7 @@ export class PerformanceRegression {
       percentageIncrease: number;
     }> = [];
 
-    Object.entries(currentMetrics).forEach(([key, value]) => {
+    for (const [key, value] of Object.entries(currentMetrics)) {
       const metric = key as keyof PerformanceMetrics;
       const baselineValue = baselineMetrics[metric];
 
@@ -256,7 +256,7 @@ export class PerformanceRegression {
           });
         }
       }
-    });
+    }
 
     return {
       hasRegression: regressions.length > 0,
@@ -286,24 +286,24 @@ export function measureComponentRender<P extends object>(
 
 // Interaction performance testing
 export function measureInteractionTime(
-  interactionFn: () => void | Promise<void>
+  interactionFunction: () => void | Promise<void>
 ): Promise<number> {
   return new Promise(async (resolve) => {
     const startTime = performance.now();
 
-    await interactionFn();
+    await interactionFunction();
 
     // Use requestIdleCallback if available, otherwise setTimeout
-    if (typeof requestIdleCallback !== 'undefined') {
-      requestIdleCallback(() => {
-        const endTime = performance.now();
-        resolve(endTime - startTime);
-      });
-    } else {
+    if (typeof requestIdleCallback === 'undefined') {
       setTimeout(() => {
         const endTime = performance.now();
         resolve(endTime - startTime);
       }, 0);
+    } else {
+      requestIdleCallback(() => {
+        const endTime = performance.now();
+        resolve(endTime - startTime);
+      });
     }
   });
 }
@@ -337,14 +337,14 @@ export const performancePresets = {
 // Enhanced performance testing with configurable options
 export function createEnhancedPerformanceTest(
   name: string,
-  renderFn: () => void | Promise<void>,
-  opts: PerformanceTestOptions = {}
+  renderFunction: () => void | Promise<void>,
+  options: PerformanceTestOptions = {}
 ): () => Promise<PerformanceBenchmark> {
   const thresholds: Partial<PerformanceMetrics> = {
-    renderTime: opts.renderTimeThreshold,
-    memoryUsage: opts.memoryThreshold,
+    renderTime: options.renderTimeThreshold,
+    memoryUsage: options.memoryThreshold,
   };
-  return createPerformanceTest(name, renderFn, thresholds);
+  return createPerformanceTest(name, renderFunction, thresholds);
 }
 
 // Export utilities for easy testing

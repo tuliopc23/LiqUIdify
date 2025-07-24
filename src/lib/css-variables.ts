@@ -10,6 +10,7 @@ import type {
   GlassState,
   GlassTiming,
   GlassVariant,
+
 } from '@/types/tailwind';
 
 // Core CSS variable utilities
@@ -216,9 +217,9 @@ export const applyCSSVars = (
   element: HTMLElement,
   variables: Record<string, string>
 ): void => {
-  Object.entries(variables).forEach(([property, value]) => {
+  for (const [property, value] of Object.entries(variables)) {
     cssVar.set(element, property, value);
-  });
+  }
 };
 
 // Helper to get multiple CSS variable values
@@ -227,9 +228,9 @@ export const getCSSVars = (
   properties: string[]
 ): Record<string, string> => {
   return properties.reduce(
-    (acc, property) => {
-      acc[property] = cssVar.getValue(element, property);
-      return acc;
+    (accumulator, property) => {
+      accumulator[property] = cssVar.getValue(element, property);
+      return accumulator;
     },
     {} as Record<string, string>
   );

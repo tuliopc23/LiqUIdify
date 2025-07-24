@@ -4,7 +4,7 @@
 
 declare global {
   namespace gsap {
-    interface TweenVars {
+    interface TweenVariables {
       [key: string]: any;
       duration?: number;
       delay?: number;
@@ -23,19 +23,19 @@ declare global {
 
     namespace core {
       interface Timeline {
-        to(target: any, vars: TweenVars, position?: string | number): Timeline;
+        to(target: any, variables: TweenVariables, position?: string | number): Timeline;
         from(
           target: any,
-          vars: TweenVars,
+          variables: TweenVariables,
           position?: string | number
         ): Timeline;
         fromTo(
           target: any,
-          fromVars: TweenVars,
-          toVars: TweenVars,
+          fromVariables: TweenVariables,
+          toVariables: TweenVariables,
           position?: string | number
         ): Timeline;
-        set(target: any, vars: TweenVars, position?: string | number): Timeline;
+        set(target: any, variables: TweenVariables, position?: string | number): Timeline;
         add(child: any, position?: string | number): Timeline;
         call(
           callback: () => void,
@@ -45,7 +45,7 @@ declare global {
         ): Timeline;
         eventCallback(
           type: string,
-          callback?: (...args: any[]) => void
+          callback?: (...arguments_: any[]) => void
         ): Timeline;
         play(): Timeline;
         pause(): Timeline;
@@ -68,10 +68,10 @@ declare global {
     }
 
     interface GSAPStatic {
-      to(target: any, vars: TweenVars): core.Tween;
-      from(target: any, vars: TweenVars): core.Tween;
-      fromTo(target: any, fromVars: TweenVars, toVars: TweenVars): core.Tween;
-      set(target: any, vars: TweenVars): core.Tween;
+      to(target: any, variables: TweenVariables): core.Tween;
+      from(target: any, variables: TweenVariables): core.Tween;
+      fromTo(target: any, fromVariables: TweenVariables, toVariables: TweenVariables): core.Tween;
+      set(target: any, variables: TweenVariables): core.Tween;
       timeline(): core.Timeline;
       killTweensOf(target: any): void;
       registerPlugin(...plugins: any[]): void;

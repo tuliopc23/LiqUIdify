@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+// @ts-expect-error TS(6142): Module './glass-combobox' was resolved to '/Users/... Remove this comment to see the full error message
 import { GlassCombobox } from "./glass-combobox";
 
 describe("GlassCombobox", () => {
@@ -11,9 +12,12 @@ describe("GlassCombobox", () => {
 
 	it("renders correctly", () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -24,9 +28,12 @@ describe("GlassCombobox", () => {
 
 	it("shows options when clicked", async () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -43,9 +50,12 @@ describe("GlassCombobox", () => {
 
 	it("filters options based on search input", async () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -67,9 +77,12 @@ describe("GlassCombobox", () => {
 		const mockOnChange = vi.fn();
 
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={mockOnChange}
 			/>,
 		);
@@ -87,10 +100,13 @@ describe("GlassCombobox", () => {
 
 	it("displays selected value correctly", () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
 				value="option1"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -100,10 +116,14 @@ describe("GlassCombobox", () => {
 
 	it("is disabled when disabled prop is true", () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 				disabled
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -114,11 +134,15 @@ describe("GlassCombobox", () => {
 
 	it("shows clear button when clearable and has value", () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
 				value="option1"
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 				clearable
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -131,11 +155,15 @@ describe("GlassCombobox", () => {
 		const mockOnChange = vi.fn();
 
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
 				value="option1"
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 				clearable
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={mockOnChange}
 			/>,
 		);
@@ -148,9 +176,12 @@ describe("GlassCombobox", () => {
 
 	it("supports keyboard navigation", async () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -165,10 +196,13 @@ describe("GlassCombobox", () => {
 
 	it("shows empty state when no options match search", async () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
 				emptyMessage="No options found"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -186,10 +220,13 @@ describe("GlassCombobox", () => {
 
 	it("applies correct CSS classes for different sizes", () => {
 		const { rerender } = render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
 				size="sm"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -198,10 +235,13 @@ describe("GlassCombobox", () => {
 		expect(combobox).toHaveClass("text-sm");
 
 		rerender(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
 				size="lg"
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);
@@ -212,10 +252,14 @@ describe("GlassCombobox", () => {
 
 	it("shows loading state correctly", () => {
 		render(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassCombobox
+// @ts-expect-error TS(2322): Type '{ value: string; label: string; }[]' is not ... Remove this comment to see the full error message
 				options={mockOptions}
 				placeholder="Select an option"
+// @ts-expect-error TS(2322): Type 'boolean' is not assignable to type 'string'.
 				loading
+// @ts-expect-error TS(2322): Type 'Mock<Procedure>' is not assignable to type '... Remove this comment to see the full error message
 				onChange={vi.fn()}
 			/>,
 		);

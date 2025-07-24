@@ -11,9 +11,9 @@
  * - Automated testing of migrations
  */
 
-const fs = require("fs").promises;
-const path = require("path");
-const { execSync } = require("child_process");
+const fs = require("node:fs").promises;
+const path = require("node:path");
+const { execSync } = require("node:child_process");
 const babel = require("@babel/core");
 const traverse = require("@babel/traverse").default;
 const generate = require("@babel/generator").default;
@@ -341,25 +341,30 @@ class LiqUIdifyMigrationCoder {
 
 		for (const change of relevantChanges) {
 			switch (change.type) {
-				case "prop-rename":
+				case "prop-rename": {
 					this.renameProp(path, change, appliedChanges);
 					break;
+				}
 
-				case "prop-add":
+				case "prop-add": {
 					this.addProp(path, change, appliedChanges);
 					break;
+				}
 
-				case "prop-remove":
+				case "prop-remove": {
 					this.removeProp(path, change, appliedChanges, warnings);
 					break;
+				}
 
-				case "prop-deprecate":
+				case "prop-deprecate": {
 					this.deprecateProp(path, change, warnings);
 					break;
+				}
 
-				case "component-rename":
+				case "component-rename": {
 					this.renameComponent(path, change, appliedChanges);
 					break;
+				}
 			}
 		}
 	}
@@ -500,7 +505,7 @@ class LiqUIdifyMigrationCoder {
 	 * Create backup of source directory
 	 */
 	async createBackup() {
-		const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+		const timestamp = new Date().toISOString().replaceAll(/[.:]/g, "-");
 		const backupDir = `${this.sourceDir}_backup_${timestamp}`;
 
 		this.log(`💾 Creating backup at ${backupDir}`, "info");
@@ -699,12 +704,12 @@ If you encounter any issues with this migration:
 	 */
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m", // cyan
-			warn: "\x1b[33m", // yellow
-			error: "\x1b[31m", // red
-			success: "\x1b[32m", // green
-			debug: "\x1b[90m", // gray
-			reset: "\x1b[0m",
+			info: "\u001B[36m", // cyan
+			warn: "\u001B[33m", // yellow
+			error: "\u001B[31m", // red
+			success: "\u001B[32m", // green
+			debug: "\u001B[90m", // gray
+			reset: "\u001B[0m",
 		};
 
 		if (level === "debug" && !this.options.verbose) {

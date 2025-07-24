@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+// @ts-expect-error TS(6142): Module './glass-select' was resolved to '/Users/tu... Remove this comment to see the full error message
 import { GlassSelect } from "./glass-select";
 
 const meta: Meta<typeof GlassSelect> = {
@@ -15,12 +16,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
 	args: {
+// @ts-expect-error TS(2322): Type '{ children: string; }' is not assignable to ... Remove this comment to see the full error message
 		children: "GlassSelect Component",
 	},
 };
 
 export const Secondary: Story = {
 	args: {
+// @ts-expect-error TS(2322): Type '"secondary"' is not assignable to type '"def... Remove this comment to see the full error message
 		variant: "secondary",
 		children: "Secondary GlassSelect",
 	},
@@ -28,9 +31,13 @@ export const Secondary: Story = {
 
 export const Sizes: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="flex items-center gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect size="sm">Small</GlassSelect>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect size="md">Medium</GlassSelect>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassSelect size="lg">Large</GlassSelect>
 		</div>
 	),
@@ -38,9 +45,13 @@ export const Sizes: Story = {
 
 export const States: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="flex flex-col gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="flex items-center gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassSelect>Normal</GlassSelect>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassSelect disabled>Disabled</GlassSelect>
 			</div>
 		</div>

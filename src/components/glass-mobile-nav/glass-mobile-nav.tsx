@@ -2,6 +2,7 @@ import { ChevronRight, Menu, X } from "lucide-react";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+
 import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
 interface NavItem {
@@ -25,14 +26,10 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 	onItemClick,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null | null>(null);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null | null>(undefined);
 
 	useEffect(() => {
-		if (isOpen) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "";
-		}
+		document.body.style.overflow = isOpen ? "hidden" : "";
 
 		return () => {
 			document.body.style.overflow = "";
@@ -41,6 +38,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 
 	const handleItemClick = (item: NavItem) => {
 		if (item.children?.length) {
+
     setActiveSubmenu(activeSubmenu === item.id ? undefined : item.id);
 		} else {
 			if (item.action) {
@@ -52,6 +50,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 	};
 
 	const MenuTrigger = () => (
+
 		<button
 			onClick={() => setIsOpen(!isOpen)}
 			className={cn(
@@ -66,15 +65,19 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 			aria-label="Toggle navigation menu"
 		>
 			{isOpen ? (
+
 				<X className="w-5 h-5 text-[var(--text-primary)]" />
 			) : (
+
 				<Menu className="w-5 h-5 text-[var(--text-primary)]" />
 			)}
 		</button>
 	);
 
 	const renderNavItem = (item: NavItem, level = 0) => (
+
 		<div key={item.id} className="w-full">
+
 			<button
 				onClick={() => handleItemClick(item)}
 				className={cn(
@@ -84,17 +87,21 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 					0 < level && "pl-8 border-l-2 border-[var(--glass-border)]",
 				)}
 			>
+
 				<div className="flex items-center gap-3">
 					{item.icon && (
+
 						<span className="w-5 h-5 text-[var(--text-secondary)]">
 							{item.icon}
 						</span>
 					)}
+
 					<span className="text-[var(--text-primary)] font-medium">
 						{item.label}
 					</span>
 				</div>
 				{item.children?.length && (
+
 					<ChevronRight
 						className={cn(
 							"w-4 h-4 text-[var(--text-secondary)] transition-transform duration-200",
@@ -106,6 +113,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 
 			{/* Submenu */}
 			{item.children?.length && activeSubmenu === item.id && (
+
 				<div className="border-t border-[var(--glass-border)]">
 					{item.children.map((child) => renderNavItem(child, level + 1))}
 				</div>
@@ -114,16 +122,21 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 	);
 
 	if (!isOpen) {
+
 		return <MenuTrigger />;
 	}
 
 	return (
+
 		<>
+
 			<MenuTrigger />
 			{"undefined" !== typeof window &&
 				createPortal(
+
 					<div className="fixed inset-0 z-50 md:hidden">
 						{/* Backdrop */}
+
 						<button
 							className="absolute inset-0 bg-black/20 backdrop-blur-sm"
 							onClick={() => setIsOpen(false)}
@@ -137,6 +150,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 						/>
 
 						{/* Navigation Panel */}
+
 						<div
 							className={cn(
 								"absolute right-0 top-0 h-full w-80 max-w-[85vw]",
@@ -146,19 +160,24 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 							)}
 						>
 							{/* Header */}
+
 							<div className="flex items-center justify-between p-4 border-b border-[var(--glass-border)]">
+
 								<h2 className="text-lg font-semibold text-[var(--text-primary)]">
 									Navigation
 								</h2>
+
 								<button
 									onClick={() => setIsOpen(false)}
 									className="p-2 rounded-lg hover:bg-[var(--glass-bg)] text-[var(--text-secondary)]"
 								>
+
 									<X className="w-5 h-5" />
 								</button>
 							</div>
 
 							{/* Navigation Items */}
+
 							<div className="flex flex-col overflow-y-auto h-[calc(100%-80px)]">
 								{items.map((item) => renderNavItem(item))}
 							</div>

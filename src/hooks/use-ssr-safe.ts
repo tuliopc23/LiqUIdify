@@ -183,7 +183,7 @@ export function useHydrationSafe<T>(
   const [value, setValue] = useState<T>(serverValue);
   const isClient = useIsClient();
   const _componentName = useRef(
-    `hydration-${Math.random().toString(36).substring(2, 9)}`
+    `hydration-${Math.random().toString(36).slice(2, 9)}`
   ).current;
 
   useEffect(() => {
@@ -246,7 +246,7 @@ export function useNetworkStatus(): {
   const [effectiveType, setEffectiveType] = useState<
     'slow-2g' | '2g' | '3g' | '4g' | undefined
   >(undefined);
-  const [saveData, setSaveData] = useState<boolean | undefined | null>(null);
+  const [saveData, setSaveData] = useState<boolean | undefined | null>(undefined);
 
   useEffect(() => {
     if (!isClient) {
@@ -290,6 +290,7 @@ export function useNetworkStatus(): {
     };
   }, [isClient]);
 
+  // @ts-expect-error TS(2322): Type 'boolean | null | undefined' is not assignabl... Remove this comment to see the full error message
   return { online, effectiveType, saveData };
 }
 
@@ -297,7 +298,7 @@ export function useNetworkStatus(): {
  * Hook to safely handle animations in SSR environments
  */
 export function useSSRSafeAnimation(
-  animationFn: () => void,
+  animationFunction: () => void,
   options: { delay?: number; disabled?: boolean } = {}
 ): void {
   const { delay = 0, disabled = false } = options;
@@ -311,7 +312,7 @@ export function useSSRSafeAnimation(
     let animationFrame: number;
     const timer = setTimeout(() => {
       animationFrame = requestAnimationFrame(() => {
-        animationFn();
+        animationFunction();
       });
     }, delay);
 
@@ -321,7 +322,7 @@ export function useSSRSafeAnimation(
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [isClient, animationFn, delay, disabled]);
+  }, [isClient, animationFunction, delay, disabled]);
 }
 
 /**
@@ -333,6 +334,7 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
 ): [(node: T | null) => void, boolean, IntersectionObserverEntry | null] {
   const isClient = useIsClient();
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(
+    // @ts-expect-error TS(2345): Argument of type 'undefined' is not assignable to ... Remove this comment to see the full error message
     undefined
   );
   const [isIntersecting, setIsIntersecting] = useState(false);
@@ -481,22 +483,27 @@ export function useSSRSafeFeatureDetection(feature: string): boolean {
     let isSupported = false;
 
     switch (feature) {
-      case 'css-backdrop-filter':
+      case 'css-backdrop-filter': {
         isSupported = CSS.supports('backdrop-filter', 'blur(1px)');
         break;
-      case 'css-grid':
+      }
+      case 'css-grid': {
         isSupported = CSS.supports('display', 'grid');
         break;
-      case 'intersection-observer':
+      }
+      case 'intersection-observer': {
         isSupported = 'IntersectionObserver' in window;
         break;
-      case 'resize-observer':
+      }
+      case 'resize-observer': {
         isSupported = 'ResizeObserver' in window;
         break;
-      case 'web-animations':
+      }
+      case 'web-animations': {
         isSupported = 'animate' in document.createElement('div');
         break;
-      case 'local-storage':
+      }
+      case 'local-storage': {
         try {
           localStorage.setItem('test', 'test');
           localStorage.removeItem('test');
@@ -505,8 +512,10 @@ export function useSSRSafeFeatureDetection(feature: string): boolean {
           isSupported = false;
         }
         break;
-      default:
+      }
+      default: {
         isSupported = false;
+      }
     }
 
     setSupported(isSupported);

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+// @ts-expect-error TS(6142): Module './glass-badge' was resolved to '/Users/tul... Remove this comment to see the full error message
 import { GlassBadge } from "./glass-badge";
 
 const meta: Meta<typeof GlassBadge> = {
@@ -79,10 +80,15 @@ export const Error: Story = {
 
 export const AllVariants: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="flex items-center gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassBadge variant="default">Default</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassBadge variant="success">Success</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassBadge variant="warning">Warning</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassBadge variant="error">Error</GlassBadge>
 		</div>
 	),
@@ -90,17 +96,28 @@ export const AllVariants: Story = {
 
 export const Examples: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="flex flex-col gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="flex items-center gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassBadge>New</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassBadge variant="success">Available</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassBadge variant="warning">Pending</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassBadge variant="error">Sold Out</GlassBadge>
 			</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="flex items-center gap-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassBadge>Draft</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassBadge variant="success">Published</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassBadge variant="warning">Review</GlassBadge>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<GlassBadge variant="error">Rejected</GlassBadge>
 			</div>
 		</div>

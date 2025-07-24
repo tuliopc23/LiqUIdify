@@ -85,6 +85,7 @@ Pixel-perfect multi-layer glass system with advanced visual effects and Apple HI
 	},
 	decorators: [
 		(Story) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div
 				className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-8 flex items-center justify-center"
 				style={{
@@ -95,6 +96,7 @@ Pixel-perfect multi-layer glass system with advanced visual effects and Apple HI
           `,
 				}}
 			>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<Story />
 			</div>
 		),
@@ -117,8 +119,11 @@ export const Default: Story = {
 		liquidFlowIntensity: 0.3,
 		distortionStrength: 0.3,
 		children: (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="p-6 space-y-2">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<h3 className="text-lg font-semibold">Enhanced Apple Liquid Glass</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<p className="text-sm opacity-90">
 					Pixel-perfect multi-layer rendering with advanced visual effects
 				</p>
@@ -133,8 +138,11 @@ export const SubtleIntensity: Story = {
 		...Default.args,
 		intensity: "subtle",
 		children: (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="p-6 space-y-2">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<h3 className="text-lg font-semibold">Subtle Glass Effect</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<p className="text-sm opacity-90">Light and elegant glass appearance</p>
 			</div>
 		),
@@ -146,8 +154,11 @@ export const StrongIntensity: Story = {
 		...Default.args,
 		intensity: "strong",
 		children: (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="p-6 space-y-2">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<h3 className="text-lg font-semibold">Strong Glass Effect</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<p className="text-sm opacity-90">Pronounced depth and visual impact</p>
 			</div>
 		),
@@ -157,10 +168,14 @@ export const StrongIntensity: Story = {
 export const ExtremeIntensity: Story = {
 	args: {
 		...Default.args,
+// @ts-expect-error TS(2322): Type '"extreme"' is not assignable to type '"subtl... Remove this comment to see the full error message
 		intensity: "extreme",
 		children: (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="p-6 space-y-2">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<h3 className="text-lg font-semibold">Extreme Glass Effect</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<p className="text-sm opacity-90">Maximum visual drama and depth</p>
 			</div>
 		),
@@ -169,26 +184,38 @@ export const ExtremeIntensity: Story = {
 
 // Enhanced Glass Card
 export const EnhancedCard: Story = {
-	render: (args) => (
-		<EnhancedAppleLiquidGlassCard {...args}>
+	render: (arguments_) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+		<EnhancedAppleLiquidGlassCard {...arguments_}>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="flex items-center space-x-3">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<span className="text-white font-bold text-lg">✨</span>
 					</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<h3 className="text-lg font-semibold">Enhanced Glass Card</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<p className="text-sm opacity-75">Pixel-perfect rendering</p>
 					</div>
 				</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<p className="text-sm opacity-90 leading-relaxed">
 					This card demonstrates the enhanced multi-layer glass system with
 					advanced visual effects and Apple HIG compliance.
 				</p>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="flex space-x-2">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="px-3 py-1 bg-white/20 rounded-full text-xs">
 						Feature
 					</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="px-3 py-1 bg-white/20 rounded-full text-xs">
 						Enhanced
 					</div>
@@ -206,26 +233,30 @@ export const EnhancedCard: Story = {
 
 // Enhanced Glass Button
 export const EnhancedButton: Story = {
-	render: (args) => (
+	render: (arguments_) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<EnhancedAppleLiquidGlassButton
-				{...args}
+				{...arguments_}
 				variant="primary"
 				size="md"
 				onClick={() => alert("Enhanced button clicked!")}
 			>
 				Primary Button
 			</EnhancedAppleLiquidGlassButton>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<EnhancedAppleLiquidGlassButton
-				{...args}
+				{...arguments_}
 				variant="secondary"
 				size="md"
 				intensity="subtle"
 			>
 				Secondary Button
 			</EnhancedAppleLiquidGlassButton>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<EnhancedAppleLiquidGlassButton
-				{...args}
+				{...arguments_}
 				variant="ghost"
 				size="sm"
 				intensity="strong"
@@ -244,22 +275,32 @@ export const EnhancedButton: Story = {
 
 // Enhanced Glass Navigation
 export const EnhancedNavigation: Story = {
-	render: (args) => (
-		<EnhancedAppleLiquidGlassNav {...args}>
+	render: (arguments_) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+		<EnhancedAppleLiquidGlassNav {...arguments_}>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<div className="flex items-center justify-between w-full max-w-md">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="flex items-center space-x-3">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<span className="text-white font-bold text-sm">L</span>
 					</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<span className="font-semibold">LiquidUI</span>
 				</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="flex items-center space-x-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<button className="text-sm opacity-75 hover:opacity-100 transition-opacity">
 						Home
 					</button>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<button className="text-sm opacity-75 hover:opacity-100 transition-opacity">
 						About
 					</button>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<button className="text-sm opacity-75 hover:opacity-100 transition-opacity">
 						Contact
 					</button>
@@ -276,28 +317,39 @@ export const EnhancedNavigation: Story = {
 
 // Enhanced Glass Modal
 export const EnhancedModal: Story = {
-	render: (args) => (
+	render: (arguments_) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="relative">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<EnhancedAppleLiquidGlassModal
-				{...args}
+				{...arguments_}
 				backdrop={false}
 				className="max-w-sm"
 			>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="space-y-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="text-center">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<div className="w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 							<span className="text-white font-bold text-2xl">✓</span>
 						</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<h3 className="text-xl font-semibold mb-2">Success!</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<p className="text-sm opacity-90 leading-relaxed">
 							Your enhanced glass modal is working perfectly with pixel-perfect
 							rendering and advanced visual effects.
 						</p>
 					</div>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="flex space-x-3">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<button className="flex-1 px-4 py-2 bg-white/20 rounded-lg text-sm font-medium hover:bg-white/30 transition-colors">
 							Cancel
 						</button>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 						<button className="flex-1 px-4 py-2 bg-blue-500 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
 							Continue
 						</button>
@@ -316,30 +368,39 @@ export const EnhancedModal: Story = {
 
 // Physics and Animation Demo
 export const PhysicsDemo: Story = {
-	render: (args) => (
+	render: (arguments_) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="space-y-6">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<EnhancedAppleLiquidGlassCard
-				{...args}
+				{...arguments_}
 				enablePhysics={true}
 				magneticStrength={0.4}
 				liquidFlowIntensity={0.6}
 			>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="text-center space-y-2">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<h3 className="text-lg font-semibold">High Physics</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<p className="text-sm opacity-90">
 						Strong magnetic hover and liquid flow effects
 					</p>
 				</div>
 			</EnhancedAppleLiquidGlassCard>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<EnhancedAppleLiquidGlassCard
-				{...args}
+				{...arguments_}
 				enablePhysics={true}
 				magneticStrength={0.1}
 				liquidFlowIntensity={0.2}
 			>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="text-center space-y-2">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<h3 className="text-lg font-semibold">Low Physics</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<p className="text-sm opacity-90">
 						Subtle magnetic hover and gentle liquid flow
 					</p>
@@ -357,7 +418,9 @@ export const PhysicsDemo: Story = {
 // Complete Showcase
 export const CompleteShowcase: Story = {
 	render: () => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="max-w-4xl">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<EnhancedAppleLiquidGlassShowcase />
 		</div>
 	),
@@ -368,23 +431,30 @@ export const CompleteShowcase: Story = {
 
 // Accessibility Demo
 export const AccessibilityDemo: Story = {
-	render: (args) => (
+	render: (arguments_) => (
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		<div className="space-y-4">
-			<EnhancedAppleLiquidGlassCard {...args}>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
+			<EnhancedAppleLiquidGlassCard {...arguments_}>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				<div className="space-y-2">
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<h3 className="text-lg font-semibold">Accessibility First</h3>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<p className="text-sm opacity-90">
 						This component respects reduced motion preferences and provides
 						proper focus management.
 					</p>
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 					<div className="text-xs opacity-75">
 						Try using keyboard navigation and screen readers
 					</div>
 				</div>
 			</EnhancedAppleLiquidGlassCard>
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<EnhancedAppleLiquidGlassButton
-				{...args}
+				{...arguments_}
 				onClick={() => alert("Accessible button activated!")}
 				aria-label="Accessible enhanced glass button"
 			>

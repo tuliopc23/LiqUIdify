@@ -89,7 +89,7 @@ export class ProductionDeploymentOptimizer {
           chunks: 'all',
           cacheGroups: {
             vendor: {
-              test: /[\\/]node_modules[\\/]/,
+              test: /[/\\]node_modules[/\\]/,
               name: 'vendors',
               chunks: 'all',
             },
@@ -325,7 +325,7 @@ echo "Rollback completed successfully!"
     }
 
     return {
-      ready: 0 === issues.length,
+      ready: issues.length === 0,
       issues,
       warnings,
     };

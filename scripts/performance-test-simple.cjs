@@ -5,9 +5,9 @@
  * Tests core performance metrics without browser dependencies
  */
 
-const fs = require("fs");
-const path = require("path");
-const { performance } = require("perf_hooks");
+const fs = require("node:fs");
+const path = require("node:path");
+const { performance } = require("node:perf_hooks");
 
 // S-tier Performance Thresholds
 const PERFORMANCE_THRESHOLDS = {
@@ -33,11 +33,11 @@ class SimplePerformanceTester {
 
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m",
-			success: "\x1b[32m",
-			warn: "\x1b[33m",
-			error: "\x1b[31m",
-			reset: "\x1b[0m",
+			info: "\u001B[36m",
+			success: "\u001B[32m",
+			warn: "\u001B[33m",
+			error: "\u001B[31m",
+			reset: "\u001B[0m",
 		};
 
 		const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
@@ -289,7 +289,7 @@ class SimplePerformanceTester {
 				// Create objects that simulate component state
 				objects.push({
 					id: i,
-					data: new Array(50).fill(i), // Reduced from 100
+					data: Array.from({length: 50}).fill(i), // Reduced from 100
 					listeners: new Set(),
 					timestamp: Date.now(),
 				});
@@ -364,22 +364,22 @@ class SimplePerformanceTester {
 				id: i,
 				style: `backdrop-filter: blur(${i}px)`,
 				className: `glass-component-${i}`,
-				properties: new Array(10).fill(i),
+				properties: Array.from({length: 10}).fill(i),
 			});
 		}
 
 		// Simulate style calculations
-		data.forEach((item) => {
+		for (const item of data) {
 			const computed = {
 				...item,
 				computed: item.properties.reduce((acc, val) => acc + val, 0),
 			};
-		});
+		}
 	}
 
 	simulateFrameWork() {
 		// Simulate animation calculations
-		const elements = new Array(50).fill(0).map((_, i) => ({
+		const elements = Array.from({length: 50}).fill(0).map((_, i) => ({
 			x: Math.sin(Date.now() / 1000 + i) * 100,
 			y: Math.cos(Date.now() / 1000 + i) * 100,
 			opacity: (Math.sin(Date.now() / 1000) + 1) / 2,
@@ -395,16 +395,16 @@ class SimplePerformanceTester {
 		const totalTests = this.results.tests.length;
 		const passedTests = this.results.summary.passed;
 
-		if (totalTests === 0) return 0;
+		if (totalTests === 0) {return 0;}
 
 		// Base score from pass rate
 		let score = (passedTests / totalTests) * 100;
 
 		// Bonus points for excellent performance
-		this.results.tests.forEach((test) => {
+		for (const test of this.results.tests) {
 			if (test.status === "passed") {
 				switch (test.type) {
-					case "bundle-size":
+					case "bundle-size": {
 						// Bonus for being well under the limit
 						if (
 							test.metrics.totalSize <
@@ -413,7 +413,8 @@ class SimplePerformanceTester {
 							score += 5;
 						}
 						break;
-					case "render-performance":
+					}
+					case "render-performance": {
 						// Bonus for fast render times
 						if (
 							test.metrics.averageRenderTime <
@@ -422,15 +423,17 @@ class SimplePerformanceTester {
 							score += 5;
 						}
 						break;
-					case "frame-rate":
+					}
+					case "frame-rate": {
 						// Bonus for high frame rates
 						if (test.metrics.frameRate > 58) {
 							score += 5;
 						}
 						break;
+					}
 				}
 			}
-		});
+		}
 
 		return Math.min(100, Math.round(score));
 	}

@@ -1,5 +1,5 @@
 /** @type { import('@storybook/react-vite').StorybookConfig } */
-import { resolve } from "path";
+import { resolve } from "node:path";
 import postcssConfig from "../postcss.config.js";
 
 const config = {
@@ -83,7 +83,7 @@ const config = {
     reactDocgen: "react-docgen-typescript",
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+      propFilter: (property) => (property.parent ? !/node_modules/.test(property.parent.fileName) : true),
     },
   },
   docs: {

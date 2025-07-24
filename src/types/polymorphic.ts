@@ -16,7 +16,7 @@ type ElementRef<T extends ElementType> = T extends keyof JSX.IntrinsicElements
   ? JSX.IntrinsicElements[T] extends { ref?: infer R }
     ? R
     : never
-  : T extends new (...args: any[]) => infer Instance
+  : T extends new (...arguments_: any[]) => infer Instance
     ? Instance
     : never;
 

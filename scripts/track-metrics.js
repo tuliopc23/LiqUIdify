@@ -5,10 +5,10 @@
  * Tracks adoption metrics (npm downloads, GitHub stars) and celebrates milestones
  */
 
-import { promises as fs } from "fs";
-import https from "https";
-import path from "path";
-import { fileURLToPath } from "url";
+import { promises as fs } from "node:fs";
+import https from "node:https";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,8 +20,8 @@ class CommunityMetricsTracker {
 		this.metricsFile = path.join(__dirname, "../.community-metrics.json");
 		this.milestones = {
 			npm: {
-				downloads: [100, 500, 1000, 5000, 10000, 25000, 50000, 100000],
-				weeklyDownloads: [10, 50, 100, 500, 1000, 2500, 5000, 10000],
+				downloads: [100, 500, 1000, 5000, 10_000, 25_000, 50_000, 100_000],
+				weeklyDownloads: [10, 50, 100, 500, 1000, 2500, 5000, 10_000],
 			},
 			github: {
 				stars: [10, 25, 50, 100, 250, 500, 1000, 2500, 5000],
@@ -46,8 +46,8 @@ class CommunityMetricsTracker {
 					res.on("end", () => {
 						try {
 							resolve(JSON.parse(data));
-						} catch (e) {
-							reject(e);
+						} catch (error) {
+							reject(error);
 						}
 					});
 				})
@@ -141,7 +141,7 @@ class CommunityMetricsTracker {
 	checkMilestones(current, previous) {
 		const achievements = [];
 
-		if (!previous) return achievements;
+		if (!previous) {return achievements;}
 
 		// Check npm milestones
 		if (current.npm) {
@@ -269,9 +269,9 @@ class CommunityMetricsTracker {
 		if (achievements.length > 0) {
 			report.push("## 🎉 New Milestones Achieved!");
 			report.push("");
-			achievements.forEach((achievement) => {
+			for (const achievement of achievements) {
 				report.push(`- ${achievement.message}`);
-			});
+			}
 			report.push("");
 		}
 
@@ -291,7 +291,7 @@ class CommunityMetricsTracker {
 			const previousData = await this.loadPreviousMetrics();
 			const previousMetrics =
 				previousData.history.length > 0
-					? previousData.history[previousData.history.length - 1]
+					? previousData.history.at(-1)
 					: null;
 
 			// Fetch current metrics
@@ -332,9 +332,9 @@ class CommunityMetricsTracker {
 				console.log(
 					"\n🎊 NEW MILESTONES ACHIEVED! Consider sharing the good news:",
 				);
-				achievements.forEach((achievement) => {
+				for (const achievement of achievements) {
 					console.log(`   ${achievement.message}`);
-				});
+				}
 				console.log("\n   Consider posting about these achievements on:");
 				console.log("   - GitHub Discussions");
 				console.log("   - Discord (when available)");

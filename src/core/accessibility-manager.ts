@@ -1,6 +1,8 @@
 import type { AxeResults } from 'axe-core';
 import axe from 'axe-core';
+
 import { announcer } from '@/components/glass-live-region';
+
 import { checkGlassContrast, getContrastRatio } from '@/core/utils/color';
 
 // Types and Interfaces
@@ -402,17 +404,17 @@ export class AccessibilityManager {
     // Check if it meets the required level
     const meetsRequirement =
       'AA' === level
-        ? largeText
+        ? (largeText
           ? result.passes.aa.large
-          : result.passes.aa.normal
-        : largeText
+          : result.passes.aa.normal)
+        : (largeText
           ? result.passes.aaa.large
-          : result.passes.aaa.normal;
+          : result.passes.aaa.normal);
 
     // Auto-fix if needed and requested
     if (!meetsRequirement && autoFix) {
       const targetRatio =
-        'AA' === level ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
+        'AA' === level ? (largeText ? 3 : 4.5) : (largeText ? 4.5 : 7);
 
       try {
         // For now, keep the original color if contrast is poor
@@ -505,48 +507,48 @@ export class AccessibilityManager {
     }
 
     // Validate ARIA attributes
-    const ariaAttributes = [...element.attributes].filter((attr) =>
-      attr.name.startsWith('aria-')
+    const ariaAttributes = [...element.attributes].filter((attribute) =>
+      attribute.name.startsWith('aria-')
     );
 
-    ariaAttributes.forEach((attr) => {
-      const attrName = attr.name;
-      const attrValue = attr.value;
-      const attrRule =
-        ARIA_RULES.attributes[attrName as keyof typeof ARIA_RULES.attributes];
+    for (const attribute of ariaAttributes) {
+      const attributeName = attribute.name;
+      const attributeValue = attribute.value;
+      const attributeRule =
+        ARIA_RULES.attributes[attributeName as keyof typeof ARIA_RULES.attributes];
 
-      if (!attrRule) {
+      if (!attributeRule) {
         errors.push({
-          attribute: attrName,
-          value: attrValue,
-          reason: `Unknown ARIA attribute: ${attrName}`,
+          attribute: attributeName,
+          value: attributeValue,
+          reason: `Unknown ARIA attribute: ${attributeName}`,
           element,
         });
-        return;
+        continue;
       }
 
       // Validate attribute value
       if (
-        'boolean' === attrRule.type &&
-        'values' in attrRule &&
-        !attrRule.values?.includes(attrValue)
+        'boolean' === attributeRule.type &&
+        'values' in attributeRule &&
+        !attributeRule.values?.includes(attributeValue)
       ) {
         errors.push({
-          attribute: attrName,
-          value: attrValue,
-          reason: `Invalid boolean value: ${attrValue}. Must be "true" or "false"`,
+          attribute: attributeName,
+          value: attributeValue,
+          reason: `Invalid boolean value: ${attributeValue}. Must be "true" or "false"`,
           element,
         });
 
         const correction: ARIACorrection = {
-          attribute: attrName,
-          oldValue: attrValue,
+          attribute: attributeName,
+          oldValue: attributeValue,
           newValue: 'false',
           applied: false,
         };
 
         if (autoCorrect) {
-          element.setAttribute(attrName, 'false');
+          element.setAttribute(attributeName, 'false');
           correction.applied = true;
         }
 
@@ -554,35 +556,36 @@ export class AccessibilityManager {
       }
 
       // Validate idref attributes
-      if ('idref' === attrRule.type) {
-        const ids = attrValue.split(' ').filter((id) => id.trim());
+      if ('idref' === attributeRule.type) {
+        const ids = attributeValue.split(' ').filter((id) => id.trim());
         const missingIds = ids.filter((id) => !document.getElementById(id));
 
-        if (0 < missingIds.length) {
+        if (missingIds.length > 0) {
           errors.push({
-            attribute: attrName,
-            value: attrValue,
+            attribute: attributeName,
+            value: attributeValue,
             reason: `Referenced IDs not found: ${missingIds.join(', ')}`,
             element,
           });
         }
       }
-    });
+    }
 
     // Check required attributes for role
     if (role && ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]) {
       const roleRule = ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles];
 
-      roleRule.requiredProps?.forEach((prop) => {
-        if (!element.hasAttribute(prop)) {
+      if (roleRule.requiredProps) {for (const property of roleRule.requiredProps) {
+        if (!element.hasAttribute(property)) {
           suggestions.push({
-            attribute: prop,
-            currentValue: undefined,
-            suggestedValue: this.getSuggestedARIAValue(prop, element),
+            attribute: property,
+
+            currentValue: null,
+            suggestedValue: this.getSuggestedARIAValue(property, element),
             reason: `Required attribute for role="${role}"`,
           });
         }
-      });
+      }}
 
       // Apply implicit props if missing
       if (
@@ -590,17 +593,18 @@ export class AccessibilityManager {
         roleRule.implicitProps &&
         autoCorrect
       ) {
-        Object.entries(roleRule.implicitProps).forEach(([prop, value]) => {
-          if (!element.hasAttribute(prop)) {
-            element.setAttribute(prop, value);
+        for (const [property, value] of Object.entries(roleRule.implicitProps)) {
+          if (!element.hasAttribute(property)) {
+            element.setAttribute(property, value);
             autoCorrections.push({
-              attribute: prop,
-              oldValue: undefined,
+              attribute: property,
+
+              oldValue: null,
               newValue: value,
               applied: true,
             });
           }
-        });
+        }
       }
     }
 
@@ -608,14 +612,15 @@ export class AccessibilityManager {
     if (this.isInteractive(element) && !this.hasAccessibleName(element)) {
       suggestions.push({
         attribute: 'aria-label',
-        currentValue: undefined,
+
+        currentValue: null,
         suggestedValue: this.generateAccessibleName(element),
         reason: 'Interactive element needs accessible name',
       });
     }
 
     return {
-      valid: 0 === errors.length,
+      valid: errors.length === 0,
       errors,
       suggestions,
       autoCorrections,
@@ -679,7 +684,7 @@ export class AccessibilityManager {
     // Check for empty headings
     const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
     const emptyHeadings = [...headings].filter((h) => !h.textContent?.trim());
-    if (0 < emptyHeadings.length) {
+    if (emptyHeadings.length > 0) {
       warnings.push({
         id: 'empty-headings',
         description: 'Empty heading elements found',
@@ -692,7 +697,7 @@ export class AccessibilityManager {
     const positiveTabindex = element.querySelectorAll(
       '[tabindex]:not([tabindex="0"]):not([tabindex="-1"])'
     );
-    if (0 < positiveTabindex.length) {
+    if (positiveTabindex.length > 0) {
       warnings.push({
         id: 'positive-tabindex',
         description: 'Positive tabindex values can disrupt keyboard navigation',
@@ -712,7 +717,7 @@ export class AccessibilityManager {
     const suggestions: Suggestion[] = [];
 
     // Contrast suggestions
-    violations.forEach((violation) => {
+    for (const violation of violations) {
       if ('color-contrast' === violation.id) {
         suggestions.push({
           type: 'contrast',
@@ -722,11 +727,11 @@ export class AccessibilityManager {
           fix: () => this.fixContrastIssues(element),
         });
       }
-    });
+    }
 
     // ARIA suggestions
     const ariaValidation = this.validateARIA(element, false);
-    ariaValidation.suggestions.forEach((ariaSuggestion) => {
+    for (const ariaSuggestion of ariaValidation.suggestions) {
       suggestions.push({
         type: 'aria',
         message: `Add ${ariaSuggestion.attribute}: ${ariaSuggestion.reason}`,
@@ -741,7 +746,7 @@ export class AccessibilityManager {
           }
         },
       });
-    });
+    }
 
     // Keyboard navigation suggestions
     if (this.isInteractive(element) && !element.hasAttribute('tabindex')) {
@@ -781,7 +786,7 @@ export class AccessibilityManager {
         v.id.includes('aa') || 'serious' === v.impact || 'critical' === v.impact
     );
 
-    if (!hasAAViolations && 0 === violations.length) {
+    if (!hasAAViolations && violations.length === 0) {
       return 'AAA';
     }
     if (!hasAAViolations) {
@@ -794,7 +799,7 @@ export class AccessibilityManager {
     _element: HTMLElement,
     suggestions: Suggestion[]
   ): void {
-    suggestions.forEach((suggestion) => {
+    for (const suggestion of suggestions) {
       if (suggestion.autoFixAvailable && suggestion.fix) {
         try {
           suggestion.fix();
@@ -802,19 +807,23 @@ export class AccessibilityManager {
           // Logging disabled
         }
       }
-    });
+    }
   }
 
   private generateFix(violationId: string, _node: any): string | undefined {
     switch (violationId) {
-      case 'color-contrast':
+      case 'color-contrast': {
         return 'Use AccessibilityManager.ensureContrast() to fix contrast issues';
-      case 'image-alt':
+      }
+      case 'image-alt': {
         return 'Add descriptive alt text to the image';
-      case 'label':
+      }
+      case 'label': {
         return 'Add a label element or aria-label attribute';
-      default:
+      }
+      default: {
         return;
+      }
     }
   }
 
@@ -874,14 +883,18 @@ export class AccessibilityManager {
     element: HTMLElement
   ): string {
     switch (attribute) {
-      case 'aria-label':
+      case 'aria-label': {
         return this.generateAccessibleName(element);
-      case 'aria-expanded':
+      }
+      case 'aria-expanded': {
         return 'false';
-      case 'aria-checked':
+      }
+      case 'aria-checked': {
         return 'false';
-      default:
+      }
+      default: {
         return '';
+      }
     }
   }
 
@@ -900,7 +913,7 @@ export class AccessibilityManager {
   }
 
   private handleMutations(mutations: MutationRecord[]): void {
-    mutations.forEach((mutation) => {
+    for (const mutation of mutations) {
       if (
         'attributes' === mutation.type &&
         mutation.attributeName?.startsWith('aria-')
@@ -912,7 +925,7 @@ export class AccessibilityManager {
           // Logging disabled
         }
       }
-    });
+    }
   }
 }
 
@@ -961,7 +974,7 @@ class FocusTrap {
     }
 
     // Add event listeners
-    if (typeof document !== "undefined") {
+    if ("undefined" !== typeof document) {
       document.addEventListener('keydown', this.handleKeyDown);
       if (this.options.clickOutsideDeactivates) {
         document.addEventListener('click', this.handleClickOutside);
@@ -975,7 +988,7 @@ class FocusTrap {
     }
 
     this.active = false;
-    if (typeof document !== "undefined") {
+    if ("undefined" !== typeof document) {
       document.removeEventListener('keydown', this.handleKeyDown);
       document.removeEventListener('click', this.handleClickOutside);
     }
@@ -1001,7 +1014,7 @@ class FocusTrap {
 
     this.firstFocusableElement = focusableElements[0] || undefined;
     this.lastFocusableElement =
-      focusableElements[focusableElements.length - 1] || undefined;
+      focusableElements.at(-1) || undefined;
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {

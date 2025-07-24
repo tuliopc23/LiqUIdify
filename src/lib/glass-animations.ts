@@ -185,11 +185,11 @@ export class GlassAnimation {
     const fragments: HTMLElement[] = [];
 
     // Create fragments
-    for (let i = 0; i < pieces; i++) {
+    for (let index = 0; index < pieces; index++) {
       const fragment = this.element.cloneNode(true) as HTMLElement;
       fragment.style.position = 'absolute';
       fragment.style.clipPath = this.generateRandomClipPath();
-      this.element.parentElement?.appendChild(fragment);
+      this.element.parentElement?.append(fragment);
       fragments.push(fragment);
     }
 
@@ -197,8 +197,8 @@ export class GlassAnimation {
     this.element.style.opacity = '0';
 
     // Animate fragments
-    fragments.forEach((fragment, i) => {
-      const angle = (i / pieces) * Math.PI * 2;
+    for (const [index, fragment] of fragments.entries()) {
+      const angle = (index / pieces) * Math.PI * 2;
       const distance = 100 + Math.random() * 200;
       const x = Math.cos(angle) * distance;
       const y = Math.sin(angle) * distance;
@@ -221,7 +221,7 @@ export class GlassAnimation {
           fill: 'forwards',
         }
       ).onfinish = () => fragment.remove();
-    });
+    }
   }
 
   // Ripple effect from point
@@ -246,7 +246,7 @@ export class GlassAnimation {
       height: ${size}px;
     `;
 
-    this.element.appendChild(ripple);
+    this.element.append(ripple);
 
     ripple.animate(
       [
@@ -284,11 +284,7 @@ export class GlassAnimation {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -speed;
 
-      if ('y' === axis) {
-        this.element.style.transform = `translateY(${rate}px)`;
-      } else {
-        this.element.style.transform = `translateX(${rate}px)`;
-      }
+      this.element.style.transform = 'y' === axis ? `translateY(${rate}px)` : `translateX(${rate}px)`;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -300,7 +296,7 @@ export class GlassAnimation {
     const keyframes: globalThis.Keyframe[] = [];
     const steps = 10;
 
-    for (let i = 0; i < steps; i++) {
+    for (let index = 0; index < steps; index++) {
       const x = (Math.random() - 0.5) * intensity;
       const y = (Math.random() - 0.5) * intensity;
       const hue = Math.random() * 360;
@@ -308,7 +304,7 @@ export class GlassAnimation {
       keyframes.push({
         transform: `translate(${x}px, ${y}px)`,
         filter: `hue-rotate(${hue}deg)`,
-        offset: i / steps,
+        offset: index / steps,
       });
     }
 
@@ -355,8 +351,8 @@ export class GlassAnimation {
     const points = [];
     const vertices = 3 + Math.floor(Math.random() * 3);
 
-    for (let i = 0; i < vertices; i++) {
-      const angle = (i / vertices) * Math.PI * 2;
+    for (let index = 0; index < vertices; index++) {
+      const angle = (index / vertices) * Math.PI * 2;
       const radius = 30 + Math.random() * 20;
       const x = 50 + Math.cos(angle) * radius;
       const y = 50 + Math.sin(angle) * radius;
@@ -372,9 +368,9 @@ export class GlassAnimation {
     gsap.set(this.element, { force3D: true }); // Force GPU acceleration
 
     const tl = gsap.timeline();
-    animations.forEach(({ target, vars }) => {
+    for (const { target, vars } of animations) {
       tl.to(target, vars, 0); // Add all animations to start simultaneously
-    });
+    }
 
     return tl;
   }
@@ -403,7 +399,7 @@ export class GlassAnimation {
 
       const deltaX = e.clientX - centerX;
       const deltaY = e.clientY - centerY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      const distance = Math.hypot(deltaX, deltaY);
 
       if (distance < radius) {
         const force = (radius - distance) / radius;
@@ -471,24 +467,24 @@ export class GlassChoreographer {
     options: globalThis.KeyframeAnimationOptions,
     staggerDelay = 50
   ) {
-    elements.forEach((element, index) => {
+    for (const [index, element] of elements.entries()) {
       const animation = this.add(element);
       animation.animate(keyframes, {
         ...options,
         delay: (options.delay || 0) + index * staggerDelay,
       });
-    });
+    }
   }
 
   // Batch animate multiple elements with GSAP for optimal performance
-  batchAnimate(elements: HTMLElement[], vars: gsap.TweenVars, stagger = 0.1) {
+  batchAnimate(elements: HTMLElement[], variables: gsap.TweenVars, stagger = 0.1) {
     // Use GSAP's batch method for GPU acceleration
     gsap.set(elements, { force3D: true });
 
     return gsap.to(elements, {
-      ...vars,
+      ...variables,
       stagger: stagger,
-      ease: vars.ease || 'power2.out',
+      ease: variables.ease || 'power2.out',
     });
   }
 
@@ -500,7 +496,7 @@ export class GlassChoreographer {
   ) {
     this.masterTimeline.clear();
 
-    elements.forEach((element, index) => {
+    for (const [index, element] of elements.entries()) {
       this.masterTimeline.to(
         element,
         {
@@ -513,7 +509,7 @@ export class GlassChoreographer {
         },
         index * staggerDelay
       );
-    });
+    }
 
     return this.masterTimeline;
   }
@@ -608,7 +604,7 @@ export class GlassChoreographer {
 
   // Clear all animations
   clear() {
-    this.animations.forEach((animation) => animation.stop());
+    for (const animation of this.animations) {animation.stop();}
     this.animations.clear();
     this.masterTimeline.kill();
     this.masterTimeline = gsap.timeline();
@@ -655,18 +651,22 @@ export class GlassGestureAnimator {
       let triggered = false;
 
       switch (direction) {
-        case 'left':
+        case 'left': {
           triggered = deltaX < -threshold && Math.abs(deltaY) < threshold;
           break;
-        case 'right':
+        }
+        case 'right': {
           triggered = deltaX > threshold && Math.abs(deltaY) < threshold;
           break;
-        case 'up':
+        }
+        case 'up': {
           triggered = deltaY < -threshold && Math.abs(deltaX) < threshold;
           break;
-        case 'down':
+        }
+        case 'down': {
           triggered = deltaY > threshold && Math.abs(deltaX) < threshold;
           break;
+        }
       }
 
       if (triggered) {
@@ -697,7 +697,7 @@ export class GlassGestureAnimator {
       }
       const dx = touch0.clientX - touch1.clientX;
       const dy = touch0.clientY - touch1.clientY;
-      return Math.sqrt(dx * dx + dy * dy);
+      return Math.hypot(dx, dy);
     };
 
     const handleStart = (e: TouchEvent) => {
@@ -728,6 +728,7 @@ export class GlassGestureAnimator {
   // Play animation based on config
   private playAnimation(config: AnimationConfig) {
     const choreographer = new GlassChoreographer();
+    // @ts-expect-error TS(2341): Property 'getKeyframesForType' is private and only... Remove this comment to see the full error message
     const keyframes = choreographer.getKeyframesForType(config.type);
 
     this.animation.animate(keyframes, {
@@ -779,12 +780,12 @@ export const GlassUtils = {
     ).matches;
 
     if (prefersReducedMotion) {
-      elements.forEach((element) => {
+      for (const element of elements) {
         gsap.to(element, {
           clearProps: 'all', // Remove animations
           opacity: 1, // Ensure visibility
         });
-      });
+      }
     }
   },
 
@@ -815,7 +816,7 @@ export const GlassUtils = {
   batchAnimate(elements: HTMLElement[], animations: gsap.TweenVars[]) {
     const tl = gsap.timeline();
 
-    elements.forEach((element, index) => {
+    for (const [index, element] of elements.entries()) {
       const animation = animations[index] || animations[0];
       tl.to(
         element,
@@ -825,7 +826,7 @@ export const GlassUtils = {
         },
         0
       );
-    });
+    }
 
     return tl;
   },
@@ -849,12 +850,12 @@ export const GlassUtils = {
   createMagneticField(elements: HTMLElement[], radius = 100, strength = 0.3) {
     const cleanupFunctions: (() => void)[] = [];
 
-    elements.forEach((element) => {
+    for (const element of elements) {
       const animation = new GlassAnimation(element);
       const cleanup = animation.magneticField(radius, strength);
       cleanupFunctions.push(cleanup);
-    });
+    }
 
-    return () => cleanupFunctions.forEach((cleanup) => cleanup());
+    return () => { for (const cleanup of cleanupFunctions) {cleanup()} };
   },
 };

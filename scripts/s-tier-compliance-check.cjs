@@ -5,9 +5,9 @@
  * Validates that LiqUIdify meets all S-tier performance standards
  */
 
-const fs = require("fs");
-const path = require("path");
-const { performance } = require("perf_hooks");
+const fs = require("node:fs");
+const path = require("node:path");
+const { performance } = require("node:perf_hooks");
 
 // S-tier Requirements as specified in the GitHub issue
 const S_TIER_REQUIREMENTS = {
@@ -29,11 +29,11 @@ class STierComplianceChecker {
 
 	log(message, level = "info") {
 		const colors = {
-			info: "\x1b[36m",
-			success: "\x1b[32m",
-			warn: "\x1b[33m",
-			error: "\x1b[31m",
-			reset: "\x1b[0m",
+			info: "\u001B[36m",
+			success: "\u001B[32m",
+			warn: "\u001B[33m",
+			error: "\u001B[31m",
+			reset: "\u001B[0m",
 		};
 
 		const timestamp = new Date().toISOString().split("T")[1].split(".")[0];
@@ -230,7 +230,7 @@ class STierComplianceChecker {
 				},
 				props: {
 					variant:
-						i % 3 === 0 ? "primary" : i % 3 === 1 ? "secondary" : "tertiary",
+						i % 3 === 0 ? "primary" : (i % 3 === 1 ? "secondary" : "tertiary"),
 					size:
 						i % 4 === 0 ? "sm" : i % 4 === 1 ? "md" : i % 4 === 2 ? "lg" : "xl",
 					interactive: i % 2 === 0,
@@ -240,7 +240,7 @@ class STierComplianceChecker {
 		}
 
 		// Simulate style calculations and animations
-		elements.forEach((element) => {
+		for (const element of elements) {
 			const computed = {
 				transform: `translateX(${Math.sin(Date.now() / 1000) * 10}px) translateY(${Math.cos(Date.now() / 1000) * 5}px)`,
 				opacity: 0.8 + Math.sin(Date.now() / 2000) * 0.2,
@@ -249,7 +249,7 @@ class STierComplianceChecker {
 
 			// Simulate DOM operations
 			const computedStyles = { ...element.styles, ...computed };
-		});
+		}
 	}
 
 	generateSummaryReport() {
@@ -329,9 +329,8 @@ ${this.results.recommendations.length === 0 ? "No recommendations needed." : thi
 					`❌ S-tier compliance check failed with ${this.results.issues.length} issue(s)`,
 					"error",
 				);
-				this.results.issues.forEach((issue) =>
-					this.log(`  - ${issue}`, "error"),
-				);
+				for (const issue of this.results.issues) {this.log(`  - ${issue}`, "error")
+				;}
 				process.exit(1);
 			}
 		} catch (error) {

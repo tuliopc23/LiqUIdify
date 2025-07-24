@@ -4,6 +4,7 @@
  */
 
 // Design tokens can be imported when needed
+
 import { cn } from '@/core/utils/classname';
 
 // Class variance authority (cva) alias
@@ -48,7 +49,7 @@ export function createVariants<
   return function variants(props?: VariantProps<VariantConfig<T>>) {
     const {
       class: className,
-      className: classNameProp,
+      className: classNameProperty,
       ...variantProps
     } = props || {};
 
@@ -56,7 +57,7 @@ export function createVariants<
     const classes = [config.base];
 
     // Add variant classes
-    Object.entries(config.variants).forEach(([variantKey, variantValues]) => {
+    for (const [variantKey, variantValues] of Object.entries(config.variants)) {
       const variantValue =
         variantProps[variantKey as keyof typeof variantProps] ||
         config.defaultVariants?.[
@@ -66,25 +67,25 @@ export function createVariants<
       if (variantValue && variantValues[variantValue as string]) {
         classes.push(variantValues[variantValue as string]);
       }
-    });
+    }
 
     // Add compound variant classes
-    config.compoundVariants?.forEach((compound) => {
+    if (config.compoundVariants) {for (const compound of config.compoundVariants) {
       const { class: compoundClass, ...compoundVariants } = compound;
 
       const matches = Object.entries(compoundVariants).every(([key, value]) => {
-        const propValue =
+        const propertyValue =
           variantProps[key as keyof typeof variantProps] ||
           config.defaultVariants?.[key as keyof typeof config.defaultVariants];
-        return propValue === value;
+        return propertyValue === value;
       });
 
       if (matches) {
         classes.push(compoundClass);
       }
-    });
+    }}
 
-    return cn(classes, className, classNameProp);
+    return cn(classes, className, classNameProperty);
   };
 }
 

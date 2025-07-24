@@ -113,7 +113,7 @@ class LiqUIdifyBenchmarkRunner {
 		try {
 			// Warmup iterations
 			console.log(`🔥 Warming up (${warmupIterations} iterations)...`);
-			for (let i = 0; i < warmupIterations; i++) {
+			for (let index = 0; index < warmupIterations; index++) {
 				await this.renderComponent(Component, props);
 				await this.waitForNextFrame();
 			}
@@ -126,7 +126,7 @@ class LiqUIdifyBenchmarkRunner {
 			console.log(`📊 Running benchmark (${iterations} iterations)...`);
 			const benchmarkStart = performance.now();
 
-			for (let i = 0; i < iterations; i++) {
+			for (let index = 0; index < iterations; index++) {
 				const renderStart = performance.now();
 
 				await this.renderComponent(Component, props);
@@ -145,7 +145,7 @@ class LiqUIdifyBenchmarkRunner {
 				}
 
 				// Yield to event loop occasionally
-				if (0 === i % 10) {
+				if (0 === index % 10) {
 					await this.waitForNextFrame();
 				}
 			}
@@ -204,7 +204,7 @@ class LiqUIdifyBenchmarkRunner {
 				},
 				frameRate: frameRateStats,
 				bundleImpact,
-				passed: 0 === violations.length,
+				passed: violations.length === 0,
 				violations,
 				timestamp: new Date().toISOString(),
 			};
@@ -293,7 +293,7 @@ class LiqUIdifyBenchmarkRunner {
 			console.log(`📊 Memory leak test cycle ${cycle + 1}/${cycles}`);
 
 			// Render and unmount component multiple times
-			for (let i = 0; 50 > i; i++) {
+			for (let index = 0; 50 > index; index++) {
 				await this.renderComponent(Component, props);
 				await this.unmountComponent();
 			}
@@ -316,20 +316,14 @@ class LiqUIdifyBenchmarkRunner {
 		// Calculate leak rate (bytes per cycle)
 		const leakRate = this.calculateLeakRate(memoryGrowth);
 		const totalGrowth =
-			(memorySnapshots[memorySnapshots.length - 1] ?? 0) - baseline;
+			(memorySnapshots.at(-1) ?? 0) - baseline;
 
 		const hasLeak = leakRate > this.thresholds.maxMemoryLeak / cycles;
 
 		let analysis = "";
-		if (hasLeak) {
-			analysis =
-				`Memory leak detected: ${(leakRate / 1024).toFixed(2)}KB per cycle. ` +
-				`Total growth: ${(totalGrowth / 1024 / 1024).toFixed(2)}MB`;
-		} else {
-			analysis =
-				`No significant memory leak detected. ` +
+		analysis = hasLeak ? `Memory leak detected: ${(leakRate / 1024).toFixed(2)}KB per cycle. ` +
+				`Total growth: ${(totalGrowth / 1024 / 1024).toFixed(2)}MB` : `No significant memory leak detected. ` +
 				`Total growth: ${(totalGrowth / 1024).toFixed(2)}KB within acceptable range.`;
-		}
 
 		return {
 			hasLeak,
@@ -406,11 +400,11 @@ class LiqUIdifyBenchmarkRunner {
 		// Frame timing observer
 		const frameObserver = new PerformanceObserver((list) => {
 			const entries = list.getEntries();
-			entries.forEach((entry) => {
+			for (const entry of entries) {
 				if ("frame" === (entry as any).entryType) {
 					this.frameMetrics.push(entry.duration);
 				}
-			});
+			}
 		});
 
 		try {
@@ -423,12 +417,12 @@ class LiqUIdifyBenchmarkRunner {
 		// Long task observer
 		const longTaskObserver = new PerformanceObserver((list) => {
 			const entries = list.getEntries();
-			entries.forEach((entry) => {
+			for (const entry of entries) {
 				if (50 < entry.duration) {
 					// Tasks longer than 50ms
 					// Logging disabled
 				}
-			});
+			}
 		});
 
 		try {
@@ -464,11 +458,11 @@ class LiqUIdifyBenchmarkRunner {
 
 		// Simulate DOM manipulation memory allocation
 		if ("undefined" !== typeof window) {
-			const tempElements = Array.from({ length: 10 }, () =>
+			const temporaryElements = Array.from({ length: 10 }, () =>
 				document.createElement("div"),
 			);
 			// Clean up immediately to avoid affecting memory measurements
-			tempElements.forEach((el) => el.remove());
+			for (const element of temporaryElements) {element.remove();}
 		}
 	}
 
@@ -485,10 +479,10 @@ class LiqUIdifyBenchmarkRunner {
 	 */
 	private async waitForNextFrame(): Promise<void> {
 		return new Promise((resolve) => {
-			if ("undefined" !== typeof requestAnimationFrame) {
-				requestAnimationFrame(() => resolve());
-			} else {
+			if ("undefined" === typeof requestAnimationFrame) {
 				setTimeout(resolve, 16); // Fallback for Node.js
+			} else {
+				requestAnimationFrame(() => resolve());
 			}
 		});
 	}
@@ -531,7 +525,7 @@ class LiqUIdifyBenchmarkRunner {
 		min: number;
 		drops: number;
 	} {
-		if (0 === this.frameMetrics.length) {
+		if (this.frameMetrics.length === 0) {
 			return { average: 60, min: 60, drops: 0 };
 		}
 
@@ -614,10 +608,10 @@ class LiqUIdifyBenchmarkRunner {
 
 		// Use linear regression to find trend
 		const n = memoryGrowth.length;
-		const sumX = memoryGrowth.reduce((sum, _, i) => sum + i, 0);
-		const sumY = memoryGrowth.reduce((sum, val) => sum + val, 0);
-		const sumXY = memoryGrowth.reduce((sum, val, i) => sum + i * val, 0);
-		const sumXX = memoryGrowth.reduce((sum, _, i) => sum + i * i, 0);
+		const sumX = memoryGrowth.reduce((sum, _, index) => sum + index, 0);
+		const sumY = memoryGrowth.reduce((sum, value) => sum + value, 0);
+		const sumXY = memoryGrowth.reduce((sum, value, index) => sum + index * value, 0);
+		const sumXX = memoryGrowth.reduce((sum, _, index) => sum + index * index, 0);
 
 		const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
 
@@ -634,17 +628,17 @@ class LiqUIdifyBenchmarkRunner {
 		let complexity = 1;
 
 		// Increase complexity based on props
-		const propCount = Object.keys(_props).length;
-		complexity += propCount * 0.1;
+		const propertyCount = Object.keys(_props).length;
+		complexity += propertyCount * 0.1;
 
 		// Increase complexity for certain prop types
-		Object.values(_props).forEach((value) => {
+		for (const value of Object.values(_props)) {
 			if (Array.isArray(value)) {
 				complexity += value.length * 0.01;
 			} else if ("object" === typeof value && null !== value) {
 				complexity += 0.2;
 			}
-		});
+		}
 
 		return Math.min(complexity, 3); // Cap at 3x base complexity
 	}
@@ -753,9 +747,9 @@ class LiqUIdifyBenchmarkRunner {
 	): string[] {
 		const recommendations: string[] = [];
 
-		Object.entries(scenarios).forEach(([scenarioName, result]) => {
+		for (const [scenarioName, result] of Object.entries(scenarios)) {
 			if (!result.passed) {
-				result.violations.forEach((violation) => {
+				for (const violation of result.violations) {
 					if (violation.includes("render time")) {
 						recommendations.push(
 							`Optimize render performance for ${scenarioName}: consider memoization, virtual scrolling, or code splitting`,
@@ -769,9 +763,9 @@ class LiqUIdifyBenchmarkRunner {
 							`Improve frame rate for ${scenarioName}: reduce DOM manipulations and use CSS animations`,
 						);
 					}
-				});
+				}
 			}
-		});
+		}
 
 		// Remove duplicates
 		return [...new Set(recommendations)];
@@ -788,7 +782,7 @@ class LiqUIdifyBenchmarkRunner {
 		await this.triggerGC();
 
 		// Warm up performance measuring
-		for (let i = 0; 3 > i; i++) {
+		for (let index = 0; 3 > index; index++) {
 			performance.now();
 			await this.waitForNextFrame();
 		}
@@ -821,11 +815,11 @@ class LiqUIdifyBenchmarkRunner {
 		console.log(`   Memory: ${memoryLeak}KB leaked`);
 		console.log(`   FPS: ${frameRate} avg (${result.frameRate.drops} drops)`);
 
-		if (0 < result.violations.length) {
+		if (result.violations.length > 0) {
 			console.log(`   Violations:`);
-			result.violations.forEach((violation) => {
+			for (const violation of result.violations) {
 				console.log(`     - ${violation}`);
-			});
+			}
 		}
 	}
 
@@ -853,7 +847,7 @@ class LiqUIdifyBenchmarkRunner {
 				total,
 				passed,
 				failed: total - passed,
-				passRate: parseFloat(passRate),
+				passRate: Number.parseFloat(passRate),
 				timestamp: new Date().toISOString(),
 			},
 			thresholds: this.thresholds,
@@ -891,7 +885,7 @@ class LiqUIdifyBenchmarkRunner {
 	 * Cleanup observers
 	 */
 	public dispose(): void {
-		this.observers.forEach((observer) => observer.disconnect());
+		for (const observer of this.observers) {observer.disconnect();}
 		this.observers = [];
 	}
 }

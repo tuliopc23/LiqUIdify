@@ -20,7 +20,7 @@ export interface ComponentConfig {
 		| "layout"
 		| "advanced";
 	description: string;
-	props: PropDefinition[];
+	props: PropertyDefinition[];
 	variants?: VariantDefinition[];
 	animations?: AnimationDefinition[];
 	accessibility?: AccessibilityConfig;
@@ -29,7 +29,7 @@ export interface ComponentConfig {
 	glassMorphismLevel?: number;
 }
 
-export interface PropDefinition {
+export interface PropertyDefinition {
 	name: string;
 	type:
 		| "string"
@@ -198,14 +198,14 @@ ${exportStatement}`;
 	 */
 	private generatePropsInterface(): string {
 		const props = this.config.props
-			.map((prop) => {
-				const optional = prop.required ? "" : "?";
-				const deprecated = prop.deprecated ? "\n  /** @deprecated */" : "";
-				const since = prop.since ? `\n  /** @since ${prop.since} */` : "";
+			.map((property) => {
+				const optional = property.required ? "" : "?";
+				const deprecated = property.deprecated ? "\n  /** @deprecated */" : "";
+				const since = property.since ? `\n  /** @since ${property.since} */` : "";
 
 				return `  ${deprecated}${since}
-  /** ${prop.description} */
-  ${prop.name}${optional}: ${this.getTypeScript(prop)};`;
+  /** ${property.description} */
+  ${property.name}${optional}: ${this.getTypeScript(property)};`;
 			})
 			.join("\n");
 
@@ -256,7 +256,7 @@ export const ${componentName} = forwardRef<HTMLElement, ${componentName}Props>(
       glassMorphism = ${glassLevel},
       a11y = true,
       animation = true,
-      ${this.config.props.map((prop) => `${prop.name}${prop.defaultValue !== undefined ? ` = ${JSON.stringify(prop.defaultValue)}` : ""}`).join(",\n      ")},
+      ${this.config.props.map((property) => `${property.name}${property.defaultValue === undefined ? "" : ` = ${JSON.stringify(property.defaultValue)}`}`).join(",\n      ")},
       ...props
     },
     ref
@@ -381,8 +381,8 @@ ${componentName}.displayName = '${componentName}';`;
 			return "";
 		}
 
-		const variantProp = this.config.props.find((p) => "variant" === p.name);
-		if (!variantProp) {
+		const variantProperty = this.config.props.find((p) => "variant" === p.name);
+		if (!variantProperty) {
 			return "";
 		}
 
@@ -815,8 +815,8 @@ function MyComponent() {
 |------|------|---------|-------------|
 ${this.config.props
 	.map(
-		(prop) =>
-			`| \`${prop.name}\` | \`${this.getTypeScript(prop)}\` | \`${prop.defaultValue || "undefined"}\` | ${prop.description} |`,
+		(property) =>
+			`| \`${property.name}\` | \`${this.getTypeScript(property)}\` | \`${property.defaultValue || "undefined"}\` | ${property.description} |`,
 	)
 	.join("\n")}
 
@@ -862,16 +862,19 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 	}
 
 	// Helper methods for code generation
-	private getTypeScript(prop: PropDefinition): string {
-		switch (prop.type) {
-			case "enum":
-				return prop.enumValues
-					? prop.enumValues.map((v) => `'${v}'`).join(" | ")
+	private getTypeScript(property: PropertyDefinition): string {
+		switch (property.type) {
+			case "enum": {
+				return property.enumValues
+					? property.enumValues.map((v) => `'${v}'`).join(" | ")
 					: "string";
-			case "React.ReactNode":
+			}
+			case "React.ReactNode": {
 				return "React.ReactNode";
-			default:
-				return prop.type;
+			}
+			default: {
+				return property.type;
+			}
 		}
 	}
 
@@ -880,10 +883,10 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 	}
 
 	private getAriaLabelLogic(): string {
-		const labelProp = this.config.props.find(
+		const labelProperty = this.config.props.find(
 			(p) => "children" === p.name || "label" === p.name,
 		);
-		return labelProp ? labelProp.name : "undefined";
+		return labelProperty ? labelProperty.name : "undefined";
 	}
 
 	private getElementType(): string {
@@ -945,16 +948,16 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 	}
 
 	private generateChildrenLogic(): string {
-		const childrenProp = this.config.props.find((p) => "children" === p.name);
-		return childrenProp ? "{children}" : "";
+		const childrenProperty = this.config.props.find((p) => "children" === p.name);
+		return childrenProperty ? "{children}" : "";
 	}
 
 	private generateEnumTypes(): string {
 		const enumProps = this.config.props.filter((p) => "enum" === p.type);
 		return enumProps
 			.map(
-				(prop) =>
-					`export type ${this.config.name}${prop.name.charAt(0).toUpperCase() + prop.name.slice(1)} = ${prop.enumValues?.map((v) => `'${v}'`).join(" | ") || "string"};`,
+				(property) =>
+					`export type ${this.config.name}${property.name.charAt(0).toUpperCase() + property.name.slice(1)} = ${property.enumValues?.map((v) => `'${v}'`).join(" | ") || "string"};`,
 			)
 			.join("\n");
 	}
@@ -996,12 +999,12 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
 	private generatePropTests(): string {
 		return this.config.props
-			.map((prop) => {
-				if ("boolean" === prop.type) {
+			.map((property) => {
+				if ("boolean" === property.type) {
 					return `
-    it('handles ${prop.name} prop', () => {
-      const { rerender } = render(<${this.config.name} ${prop.name}={false} />);
-      rerender(<${this.config.name} ${prop.name}={true} />);
+    it('handles ${property.name} prop', () => {
+      const { rerender } = render(<${this.config.name} ${property.name}={false} />);
+      rerender(<${this.config.name} ${property.name}={true} />);
       // Should not crash with boolean changes
     });`;
 				}
@@ -1075,34 +1078,38 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
 	private generateStorybookArgTypes(): string {
 		return this.config.props
-			.map((prop) => {
-				const control = this.getStorybookControl(prop);
-				return `${prop.name}: {
-      description: '${prop.description}',
+			.map((property) => {
+				const control = this.getStorybookControl(property);
+				return `${property.name}: {
+      description: '${property.description}',
       ${control}
     }`;
 			})
 			.join(",\n    ");
 	}
 
-	private getStorybookControl(prop: PropDefinition): string {
-		switch (prop.type) {
-			case "boolean":
+	private getStorybookControl(property: PropertyDefinition): string {
+		switch (property.type) {
+			case "boolean": {
 				return "control: 'boolean'";
-			case "number":
+			}
+			case "number": {
 				return "control: { type: 'range', min: 0, max: 100 }";
-			case "enum":
-				return `control: 'select',\n      options: [${prop.enumValues?.map((v) => `'${v}'`).join(", ")}]`;
-			default:
+			}
+			case "enum": {
+				return `control: 'select',\n      options: [${property.enumValues?.map((v) => `'${v}'`).join(", ")}]`;
+			}
+			default: {
 				return "control: 'text'";
+			}
 		}
 	}
 
 	private generateDefaultStoryArgs(): string {
 		return this.config.props
-			.map((prop) => {
-				if (prop.defaultValue !== undefined) {
-					return `${prop.name}: ${JSON.stringify(prop.defaultValue)}`;
+			.map((property) => {
+				if (property.defaultValue !== undefined) {
+					return `${property.name}: ${JSON.stringify(property.defaultValue)}`;
 				}
 				return "";
 			})
@@ -1118,7 +1125,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 		return this.config.examples
 			.map(
 				(example) => `
-export const ${example.name.replace(/\s+/g, "")}: Story = {
+export const ${example.name.replaceAll(/\s+/g, "")}: Story = {
   args: {
     ${Object.entries(example.props)
 			.map(([key, value]) => `${key}: ${JSON.stringify(value)}`)

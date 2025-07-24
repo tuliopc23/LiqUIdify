@@ -184,8 +184,8 @@ class PerformanceMonitor {
       // Find the last long task before 5 seconds of quiet time
       const longTasks = entries.filter((entry) => 50 < entry.duration);
 
-      if (0 < longTasks.length) {
-        const lastLongTask = longTasks[longTasks.length - 1];
+      if (longTasks.length > 0) {
+        const lastLongTask = longTasks.at(-1);
         if (lastLongTask) {
           tti = lastLongTask.startTime + lastLongTask.duration;
         }
@@ -195,7 +195,7 @@ class PerformanceMonitor {
     observer.observe({ entryTypes: ['longtask'] });
 
     // Estimate TTI after load
-    if (typeof window !== "undefined") {
+    if ("undefined" !== typeof window) {
       window.addEventListener('load', () => {
         setTimeout(() => {
           if (0 === tti) {
@@ -324,8 +324,8 @@ class PerformanceMonitor {
         `glass-ui-${name}`,
         'measure'
       );
-      if (0 < entries.length) {
-        const duration = entries[entries.length - 1]?.duration || 0;
+      if (entries.length > 0) {
+        const duration = entries.at(-1)?.duration || 0;
         this.trackCustomMetric(name, duration);
         return duration;
       }
@@ -338,7 +338,7 @@ class PerformanceMonitor {
    */
   getReport(): PerformanceReport {
     return {
-      url: typeof window !== "undefined" ? window.location.href : '',
+      url: "undefined" === typeof window ? '' : window.location.href,
       timestamp: Date.now(),
       webVitals: [...this.metrics.values()],
       componentMetrics: [...this.componentMetrics.values()],
@@ -361,13 +361,13 @@ class PerformanceMonitor {
     const report = this.getReport();
 
     // Notify all report callbacks
-    this.reportCallbacks.forEach((callback) => {
+    for (const callback of this.reportCallbacks) {
       try {
         callback(report);
       } catch {
         // Logging disabled
       }
-    });
+    }
   }
 
   /**
@@ -375,7 +375,7 @@ class PerformanceMonitor {
    */
   private setupPeriodicReporting(): void {
     // Send report on page visibility change
-    if (typeof document !== "undefined") {
+    if ("undefined" !== typeof document) {
       document.addEventListener('visibilitychange', () => {
         if ('hidden' === document.visibilityState) {
           this.sendReport();
@@ -384,7 +384,7 @@ class PerformanceMonitor {
     }
 
     // Send report before unload
-    if (typeof window !== "undefined") {
+    if ("undefined" !== typeof window) {
       window.addEventListener('beforeunload', () => {
         this.sendReport();
       });
@@ -421,13 +421,13 @@ class PerformanceMonitor {
    */
   private notifyObservers(metricName: string, metric: PerformanceMetric): void {
     const observers = this.observers.get(metricName) || [];
-    observers.forEach((callback) => {
+    for (const callback of observers) {
       try {
         callback(metric);
       } catch {
         // Logging disabled
       }
-    });
+    }
   }
 
   /**

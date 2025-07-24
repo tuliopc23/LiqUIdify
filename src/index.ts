@@ -5,25 +5,33 @@ import {
 	EnhancedAppleLiquidGlassCard as AppleLiquidGlassCard,
 	type EnhancedAppleLiquidGlassProps as AppleLiquidGlassComponentProps,
 	EnhancedAppleLiquidGlassNav as AppleLiquidGlassNav,
+
 } from "./components/enhanced-apple-liquid-glass";
 import {
 	type FeatureItem,
 	GlassFeatureShowcase,
 	type GlassFeatureShowcaseProps,
+
 } from "./components/glass-feature-showcase";
 import {
 	type FloatingAction,
 	GlassFloatingAction,
 	type GlassFloatingActionProps,
+
 } from "./components/glass-floating-action";
+
 import { GlassFooter, type GlassFooterProps } from "./components/glass-footer";
+
 import { GlassHeader, type GlassHeaderProps } from "./components/glass-header";
+
 import { GlassHero, type GlassHeroProps } from "./components/glass-hero";
 import {
 	LiquidGlassSvgFilters,
 	type LiquidGlassSvgFiltersProps,
+
 } from "./components/liquid-glass-svg-filters";
 import { ThemeProvider } from "./components/theme-provider";
+
 import { I18nProvider } from "./components/i18n-provider";
 import {
 	DocumentationButton,
@@ -32,6 +40,7 @@ import {
 	DocumentationModal,
 	DocumentationTabs,
 	DocumentationTooltip,
+
 } from "./documentation";
 import {
 	useHydrationSafe,
@@ -49,6 +58,7 @@ import {
 	useSSRSafeSessionStorage,
 	useSSRSafeWindow,
 } from "./hooks/use-ssr-safe";
+
 import { useTheme } from "./hooks/use-theme";
 import { toast, useToast } from "./hooks/use-toast";
 import { 
@@ -245,9 +255,13 @@ export * from "./components/glass-visually-hidden";
 export * from "./components/navbar";
 export * from "./components/sidebar";
 export * from "./components/theme-toggle";
+
 export * from "./hooks/use-haptic-feedback";
+
 export * from "./hooks/use-liquid-glass";
+
 export * from "./hooks/use-mobile";
+
 export * from "./hooks/use-performance-monitoring";
 export * from "./lib/glass-physics";
 export * from "./lib/liquid-glass-tokens";

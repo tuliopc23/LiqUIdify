@@ -9,7 +9,7 @@ if (typeof window !== "undefined") {
 	const link = document.createElement("link");
 	link.rel = "stylesheet";
 	link.href = "/liquidui.css";
-	document.head.appendChild(link);
+	document.head.append(link);
 }
 
 // Add a flag to ensure single initialization
@@ -48,7 +48,7 @@ if (typeof document !== "undefined") {
       --storybook-theme-transition: all 0.3s ease;
     }
   `;
-	document.head.appendChild(style);
+	document.head.append(style);
 }
 
 // Remove the problematic color contrast checker function
@@ -101,7 +101,7 @@ const preview: Preview = {
 		controls: {
 			matchers: {
 				color:
-					/^(backgroundColor|textColor|borderColor|fillColor|strokeColor)$/i,
+					/^(backgroundcolor|textcolor|bordercolor|fillcolor|strokecolor)$/i,
 				date: /Date$/,
 			},
 			expanded: true,
@@ -258,7 +258,7 @@ const preview: Preview = {
 			React.useEffect(() => {
 				if (typeof document !== "undefined") {
 					const root = document.documentElement;
-					root.setAttribute("data-theme", theme);
+					root.dataset.theme = theme;
 					root.classList.remove("light", "dark");
 					root.classList.add(theme);
 

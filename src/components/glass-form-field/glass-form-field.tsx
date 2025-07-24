@@ -1,6 +1,7 @@
 import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { AlertCircle, CheckCircle, Info } from "lucide-react";
 import React, { forwardRef, useId } from "react";
+
 import { cn } from "@/core/utils/classname";
 
 const formFieldVariants = cva(["space-y-2", "transition-all duration-200"], {
@@ -24,6 +25,7 @@ const formFieldVariants = cva(["space-y-2", "transition-all duration-200"], {
 
 const labelVariants = cva(
 	["block font-medium transition-colors duration-200", "text-white/90"],
+
 	{
 		variants: {
 			required: {
@@ -45,6 +47,7 @@ const labelVariants = cva(
 
 const helperTextVariants = cva(
 	["flex items-center gap-1.5 text-xs transition-colors duration-200"],
+
 	{
 		variants: {
 			state: {
@@ -60,17 +63,19 @@ const helperTextVariants = cva(
 	},
 );
 
-export interface GlassFormFieldProps
-	extends React.HTMLAttributes<HTMLDivElement>,
+export interface GlassFormFieldProps extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
 		VariantProps<typeof formFieldVariants> {
 	label?: string;
 	helperText?: string;
 	error?: string;
 	success?: string;
 	warning?: string;
+
 	required?: boolean;
+
 	children: React.ReactNode;
 	htmlFor?: string;
+
 	disabled?: boolean;
 }
 
@@ -109,14 +114,21 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
 		// Get appropriate icon
 		const getIcon = () => {
 			switch (state) {
-				case "error":
+				case "error": {
+
 					return <AlertCircle className="w-3 h-3 flex-shrink-0" />;
-				case "success":
+				}
+				case "success": {
+
 					return <CheckCircle className="w-3 h-3 flex-shrink-0" />;
-				case "warning":
+				}
+				case "warning": {
+
 					return <Info className="w-3 h-3 flex-shrink-0" />;
-				default:
+				}
+				default: {
 					return;
+				}
 			}
 		};
 
@@ -125,8 +137,8 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
 			if (React.isValidElement(child)) {
 				return React.cloneElement(child as any, {
 					id: finalId,
-					"aria-describedby": message ? `${finalId}-message` : undefined,
-					"aria-invalid": error ? true : undefined,
+					"aria-describedby": message ? `${finalId}-message` : null,
+					"aria-invalid": error ? true : null,
 					"aria-required": required,
 					disabled,
 					...("object" === typeof child.props && null !== child.props
@@ -138,19 +150,21 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
 		});
 
 		return (
-			<div
-				ref={ref}
+
+			<div ref={ref}
 				className={cn(
 					formFieldVariants({ variant, size }),
 					disabled && "opacity-50 cursor-not-allowed",
 					className,
 				)}
-				{...props}
+				{...(props as any)}
 			>
 				{label && (
+
 					<label
 						htmlFor={finalId}
 						className={cn(
+
 							labelVariants({ required, size }),
 							disabled && "cursor-not-allowed",
 						)}
@@ -166,13 +180,15 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
 				</div>
 
 				{message && (
+
 					<div
 						id={`${finalId}-message`}
 						className={cn(helperTextVariants({ state }))}
-						role={error ? "alert" : undefined}
-						aria-live={error ? "polite" : undefined}
+						role={error  ? "alert" : undefined}
+						aria-live={error ? "polite" : null}
 					>
 						{getIcon()}
+
 						<span className="flex-1">{message}</span>
 					</div>
 				)}

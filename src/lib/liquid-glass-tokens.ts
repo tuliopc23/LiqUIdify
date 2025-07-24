@@ -315,26 +315,26 @@ export const generateCSSCustomProperties = (
   theme: 'light' | 'dark' = 'light'
 ) => {
   const themeTokens = glassThemes[theme];
-  const cssVars: Record<string, string> = {};
+  const cssVariables: Record<string, string> = {};
 
   // Generate CSS custom properties from theme tokens
-  Object.entries(themeTokens).forEach(([category, values]) => {
-    Object.entries(values).forEach(([key, value]) => {
-      cssVars[`--glass-${category}-${key}`] = value as string;
-    });
-  });
+  for (const [category, values] of Object.entries(themeTokens)) {
+    for (const [key, value] of Object.entries(values)) {
+      cssVariables[`--glass-${category}-${key}`] = value as string;
+    }
+  }
 
   // Add spacing tokens
-  Object.entries(liquidGlassTokens.spacing).forEach(([key, value]) => {
-    cssVars[`--glass-spacing-${key}`] = value;
-  });
+  for (const [key, value] of Object.entries(liquidGlassTokens.spacing)) {
+    cssVariables[`--glass-spacing-${key}`] = value;
+  }
 
   // Add blur tokens
-  Object.entries(liquidGlassTokens.blur).forEach(([key, value]) => {
-    cssVars[`--glass-blur-${key}`] = `blur(${value})`;
-  });
+  for (const [key, value] of Object.entries(liquidGlassTokens.blur)) {
+    cssVariables[`--glass-blur-${key}`] = `blur(${value})`;
+  }
 
-  return cssVars;
+  return cssVariables;
 };
 
 // Export types for TypeScript support

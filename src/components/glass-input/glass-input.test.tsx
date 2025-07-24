@@ -1,10 +1,13 @@
 import { Mail, Search } from "lucide-react";
 import { describe, expect, it, vi } from "vitest";
+// @ts-expect-error TS(2307): Cannot find module '@/test/utils' or its correspon... Remove this comment to see the full error message
 import { fireEvent, renderWithProviders, screen, testA11y } from "@/test/utils";
+// @ts-expect-error TS(6142): Module './glass-input' was resolved to '/Users/tul... Remove this comment to see the full error message
 import { GlassInput } from "./glass-input";
 
 describe("GlassInput", () => {
 	it("renders with default props", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassInput placeholder="Enter text" />);
 		const input = screen.getByPlaceholderText("Enter text");
 		expect(input).toBeInTheDocument();
@@ -13,19 +16,22 @@ describe("GlassInput", () => {
 
 	it("renders with different variants", () => {
 		const { rerender } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput variant="search" placeholder="Search" />,
 		);
 
 		expect(screen.getByRole("textbox")).toBeInTheDocument();
-		const searchIcon = typeof document !== "undefined" ? document.querySelector("svg") : null;
+		const searchIcon = typeof document === "undefined" ? null : document.querySelector("svg");
 		expect(searchIcon).toBeInTheDocument();
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		rerender(<GlassInput variant="password" placeholder="Password" />);
 		expect(screen.getByPlaceholderText("Password")).toHaveAttribute(
 			"type",
 			"password",
 		);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		rerender(<GlassInput variant="email" placeholder="Email" />);
 		expect(screen.getByPlaceholderText("Email")).toBeInTheDocument();
 	});
@@ -33,6 +39,7 @@ describe("GlassInput", () => {
 	it("handles controlled input", () => {
 		const onChange = vi.fn();
 		const { rerender } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput value="initial" onChange={onChange} />,
 		);
 
@@ -42,11 +49,13 @@ describe("GlassInput", () => {
 		fireEvent.change(input, { target: { value: "updated" } });
 		expect(onChange).toHaveBeenCalledTimes(1);
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		rerender(<GlassInput value="updated" onChange={onChange} />);
 		expect(input.value).toBe("updated");
 	});
 
 	it("handles uncontrolled input", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassInput defaultValue="default" />);
 		const input = screen.getByRole("textbox") as HTMLInputElement;
 
@@ -58,6 +67,7 @@ describe("GlassInput", () => {
 
 	it("shows password toggle for password variant", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput variant="password" placeholder="Password" />,
 		);
 
@@ -77,6 +87,7 @@ describe("GlassInput", () => {
 	it("shows clear button when clearable and has value", () => {
 		const onChange = vi.fn();
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput clearable value="test value" onChange={onChange} />,
 		);
 
@@ -92,12 +103,14 @@ describe("GlassInput", () => {
 	});
 
 	it("does not show clear button when empty", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassInput clearable value="" />);
 		expect(screen.queryByLabelText("Clear input")).not.toBeInTheDocument();
 	});
 
 	it("focuses input after clearing", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput clearable value="test" onChange={vi.fn()} />,
 		);
 
@@ -110,8 +123,11 @@ describe("GlassInput", () => {
 
 	it("renders with left and right icons", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				leftIcon={<Mail data-testid="left-icon" />}
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				rightIcon={<Search data-testid="right-icon" />}
 				placeholder="With icons"
 			/>,
@@ -123,6 +139,7 @@ describe("GlassInput", () => {
 
 	it("shows error state", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput
 				error
 				helperText="This field is required"
@@ -140,6 +157,7 @@ describe("GlassInput", () => {
 
 	it("shows helper text without error", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput helperText="Enter your email address" placeholder="Email" />,
 		);
 
@@ -148,6 +166,7 @@ describe("GlassInput", () => {
 	});
 
 	it("handles disabled state", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassInput disabled placeholder="Disabled input" />);
 
 		const input = screen.getByPlaceholderText("Disabled input");
@@ -157,6 +176,7 @@ describe("GlassInput", () => {
 
 	it("forwards ref correctly", () => {
 		const ref = vi.fn();
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassInput ref={ref} />);
 
 		expect(ref).toHaveBeenCalledWith(expect.any(HTMLInputElement));
@@ -164,16 +184,19 @@ describe("GlassInput", () => {
 
 	it("supports different input types", () => {
 		const { rerender } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput type="email" placeholder="Email" />,
 		);
 
 		let input = screen.getByPlaceholderText("Email");
 		expect(input).toHaveAttribute("type", "email");
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		rerender(<GlassInput type="number" placeholder="Number" />);
 		input = screen.getByPlaceholderText("Number");
 		expect(input).toHaveAttribute("type", "number");
 
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		rerender(<GlassInput type="tel" placeholder="Phone" />);
 		input = screen.getByPlaceholderText("Phone");
 		expect(input).toHaveAttribute("type", "tel");
@@ -184,6 +207,7 @@ describe("GlassInput", () => {
 		const onBlur = vi.fn();
 
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput onFocus={onFocus} onBlur={onBlur} placeholder="Focus test" />,
 		);
 
@@ -198,6 +222,7 @@ describe("GlassInput", () => {
 
 	it("applies custom className", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput className="custom-input" placeholder="Custom" />,
 		);
 
@@ -211,6 +236,7 @@ describe("GlassInput", () => {
 		const onKeyPress = vi.fn();
 
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput
 				onKeyDown={onKeyDown}
 				onKeyUp={onKeyUp}
@@ -233,6 +259,7 @@ describe("GlassInput", () => {
 
 	it("meets accessibility standards", async () => {
 		const { container } = renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput placeholder="Accessible input" aria-label="Test input" />,
 		);
 
@@ -241,6 +268,7 @@ describe("GlassInput", () => {
 
 	it("has proper ARIA attributes when error", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput error helperText="Error message" placeholder="Error field" />,
 		);
 
@@ -250,16 +278,18 @@ describe("GlassInput", () => {
 
 		const describedById = input.getAttribute("aria-describedby");
 		const helperText = describedById
-			? (typeof document !== "undefined" ? document.getElementById(describedById) : null)
+			? (typeof document === "undefined" ? null : document.getElementById(describedById))
 			: null;
 		expect(helperText).toHaveTextContent("Error message");
 	});
 
 	it("handles complex icon arrangements", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput
 				variant="password"
 				clearable
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 				rightIcon={<Mail />}
 				value="test"
 				onChange={vi.fn()}
@@ -272,6 +302,7 @@ describe("GlassInput", () => {
 	});
 
 	it("maintains focus ring styles", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassInput placeholder="Focus ring test" />);
 		const input = screen.getByPlaceholderText("Focus ring test");
 
@@ -281,6 +312,7 @@ describe("GlassInput", () => {
 	});
 
 	it("handles maxLength attribute", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassInput maxLength={10} placeholder="Max length" />);
 
 		const input = screen.getByPlaceholderText("Max length");
@@ -288,6 +320,7 @@ describe("GlassInput", () => {
 	});
 
 	it("handles required attribute", () => {
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 		renderWithProviders(<GlassInput required placeholder="Required field" />);
 
 		const input = screen.getByPlaceholderText("Required field");
@@ -296,6 +329,7 @@ describe("GlassInput", () => {
 
 	it("handles autoComplete attribute", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput autoComplete="email" placeholder="Email" />,
 		);
 
@@ -305,6 +339,7 @@ describe("GlassInput", () => {
 
 	it("handles pattern attribute", () => {
 		renderWithProviders(
+// @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
 			<GlassInput pattern="[0-9]*" placeholder="Numbers only" />,
 		);
 

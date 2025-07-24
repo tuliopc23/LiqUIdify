@@ -6,6 +6,7 @@ export interface CheckboxGroupProps {
 }
 
 const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ children, name }) => (
+
 	<div role="group" aria-labelledby={name}>
 		{children}
 	</div>

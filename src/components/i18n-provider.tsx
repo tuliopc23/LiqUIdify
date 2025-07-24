@@ -1,35 +1,33 @@
+import type { I18nConfig } from '../utils/i18n';
 import React, { useCallback, useMemo, useState } from 'react';
 import {
-  type I18nConfig,
   I18nContext,
   i18n as i18nInstance,
 } from '../utils/i18n';
 
-export interface I18nProviderProps {
+interface I18nProviderProps {
   children: React.ReactNode;
   locale?: string;
   messages?: Record<string, Record<string, string>>;
-  fallbackLocale?: string;
 }
 
 /**
  * I18n Provider component for LiqUIdify
  * Provides internationalization context to child components
  */
-export function I18nProvider({
+export const I18nProvider = ({
   children,
   locale = 'en',
   messages,
-  fallbackLocale = 'en',
-}: I18nProviderProps) {
+}: I18nProviderProps) => {
   const [currentLocale, setCurrentLocale] = useState(locale);
 
   // Initialize i18n with provided config
   useMemo(() => {
     if (messages) {
-      Object.entries(messages).forEach(([loc, msgs]) => {
+      for (const [loc, msgs] of Object.entries(messages)) {
         i18nInstance.addMessages(loc, msgs);
-      });
+      }
     }
     i18nInstance.setLocale(locale);
   }, [locale, messages]);
@@ -39,23 +37,21 @@ export function I18nProvider({
     setCurrentLocale(newLocale);
   }, []);
 
-  const t = useCallback(
-    (key: string, params?: Record<string, any>) => {
-      return i18nInstance.t(key, params);
-    },
-    [currentLocale]
+  const translate = useCallback(
+    (key: string, params?: Record<string, unknown>) => i18nInstance.t(key, params),
+    [],
   ); // Re-create when locale changes
 
   const contextValue = useMemo(
     () => ({
       locale: currentLocale,
-      t,
       setLocale,
+      t: translate,
     }),
-    [currentLocale, t, setLocale]
+    [currentLocale, setLocale, translate],
   );
 
   return (
     <I18nContext.Provider value={contextValue}>{children}</I18nContext.Provider>
   );
-}
+};

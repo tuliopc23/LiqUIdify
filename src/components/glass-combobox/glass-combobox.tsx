@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, Search, X } from "lucide-react";
 import type React from "react";
 import { forwardRef, useEffect, useId, useRef, useState } from "react";
+
 import { cn, focusRing } from "@/core/utils/classname";
 
 const comboboxVariants = cva(["relative w-full"], {
@@ -18,15 +19,13 @@ const comboboxVariants = cva(["relative w-full"], {
 	},
 });
 
-const triggerVariants = cva(
-	[
+const triggerVariants = cva([
 		"flex items-center justify-between w-full px-4 py-3 text-left",
 		"bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl",
 		"hover:bg-white/10 focus:bg-white/10 focus:outline-none",
 		"transition-all duration-200",
 		"disabled:opacity-50 disabled:cursor-not-allowed",
-	],
-	{
+	], {
 		variants: {
 			isOpen: {
 				true: "border-blue-400/50 bg-white/10",
@@ -51,14 +50,12 @@ const listboxVariants = cva([
 	"shadow-xl shadow-black/20",
 ]);
 
-const optionVariants = cva(
-	[
+const optionVariants = cva([
 		"flex items-center justify-between px-4 py-3 text-left cursor-pointer",
 		"hover:bg-white/10 focus:bg-white/10 focus:outline-none",
 		"transition-all duration-200",
 		"text-white/90",
-	],
-	{
+	], {
 		variants: {
 			selected: {
 				true: "bg-blue-500/20 text-blue-400",
@@ -83,20 +80,27 @@ export interface ComboboxOption {
 	icon?: React.ReactNode;
 }
 
-export interface GlassComboboxProps
-	extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">,
+export interface GlassComboboxProps extends Omit<Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>, "onChange">,
 		VariantProps<typeof comboboxVariants> {
+
 	options: ComboboxOption[];
 	value?: string;
 	defaultValue?: string;
+
 	onChange?: (value: string) => void;
+
 	onSearch?: (query: string) => void;
 	placeholder?: string;
+
 	disabled?: boolean;
+
 	clearable?: boolean;
+
 	searchable?: boolean;
+
 	loading?: boolean;
 	emptyMessage?: string;
+
 	maxOptions?: number;
 }
 
@@ -137,7 +141,9 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 		const listboxId = `${comboboxId}-listbox`;
 
 		// Filter options based on search query
+
 		const filteredOptions = options
+
 			.filter((option) => {
 				if (!searchQuery) {
 					return true;
@@ -147,7 +153,9 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 			.slice(0, maxOptions);
 
 		// Find selected option
+
 		const selectedOption = options.find(
+
 			(option) => option.value === selectedValue,
 		);
 
@@ -158,6 +166,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 			}
 
 			setSelectedValue(option.value);
+
 			onChange?.(option.value);
 			setIsOpen(false);
 			setSearchQuery("");
@@ -168,6 +177,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 		const handleClear = (e: React.MouseEvent) => {
 			e.stopPropagation();
 			setSelectedValue("");
+
 			onChange?.("");
 			setSearchQuery("");
 		};
@@ -179,23 +189,25 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 			}
 
 			switch (e.key) {
-				case "ArrowDown":
-					e.preventDefault();
-					if (!isOpen) {
-						setIsOpen(true);
-					} else {
-						setHighlightedIndex((prev) =>
-							prev < filteredOptions.length - 1 ? prev + 1 : prev,
-						);
-					}
-					break;
-				case "ArrowUp":
+				case "ArrowDown": {
 					e.preventDefault();
 					if (isOpen) {
-						setHighlightedIndex((prev) => (0 < prev ? prev - 1 : prev));
+						setHighlightedIndex((previous) =>
+							previous < filteredOptions.length - 1 ? previous + 1 : previous,
+						);
+					} else {
+						setIsOpen(true);
 					}
 					break;
-				case "Enter":
+				}
+				case "ArrowUp": {
+					e.preventDefault();
+					if (isOpen) {
+						setHighlightedIndex((previous) => (0 < previous ? previous - 1 : previous));
+					}
+					break;
+				}
+				case "Enter": {
 					e.preventDefault();
 					if (isOpen && 0 <= highlightedIndex) {
 						const option = filteredOptions[highlightedIndex];
@@ -206,15 +218,18 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 						setIsOpen(true);
 					}
 					break;
-				case "Escape":
+				}
+				case "Escape": {
 					setIsOpen(false);
 					setSearchQuery("");
 					setHighlightedIndex(-1);
 					triggerRef.current?.focus();
 					break;
-				case "Tab":
+				}
+				case "Tab": {
 					setIsOpen(false);
 					break;
+				}
 			}
 		};
 
@@ -222,6 +237,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 		const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 			const query = e.target.value;
 			setSearchQuery(query);
+
 			onSearch?.(query);
 			setHighlightedIndex(-1);
 		};
@@ -241,11 +257,11 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 				}
 			};
 
-            if (typeof document !== "undefined") {
+            if ("undefined" !== typeof document) {
                 document.addEventListener("mousedown", handleClickOutside);
             }
             return () => {
-                if (typeof document !== "undefined") {
+                if ("undefined" !== typeof document) {
                     document.removeEventListener("mousedown", handleClickOutside);
                 }
             };
@@ -262,16 +278,18 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 		}, [highlightedIndex]);
 
 		return (
-			<div
-				ref={ref}
+
+			<div ref={ref}
 				className={cn(comboboxVariants({ size }), className)}
-				{...props}
+				{...(props as any)}
 			>
+
 				<button
 					ref={triggerRef}
 					type="button"
 					role="combobox"
 					className={cn(
+
 						triggerVariants({ isOpen, size }),
 						focusRing,
 						disabled && "cursor-not-allowed",
@@ -280,10 +298,13 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 					onKeyDown={handleKeyDown}
 					aria-expanded={isOpen}
 					aria-controls={listboxId}
+
 					disabled={disabled}
 				>
+
 					<div className="flex items-center gap-2 flex-1 min-w-0">
 						{selectedOption?.icon}
+
 						<span
 							className={cn("truncate", !selectedOption && "text-white/60")}
 						>
@@ -293,6 +314,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
 					<div className="flex items-center gap-1">
 						{clearable && selectedValue && (
+
 							<button
 								type="button"
 								onClick={handleClear}
@@ -300,9 +322,11 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 								aria-label="Clear selection"
 								aria-haspopup="false"
 							>
+
 								<X className="w-4 h-4 text-white/60" />
 							</button>
 						)}
+
 						<ChevronDown
 							className={cn(
 								"w-4 h-4 text-white/60 transition-transform duration-200",
@@ -314,6 +338,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
 				<AnimatePresence>
 					{isOpen && (
+
 						<motion.div
 							initial={{ opacity: 0, y: -10 }}
 							animate={{ opacity: 1, y: 0 }}
@@ -321,6 +346,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 							transition={{ duration: 0.2 }}
 							className={cn(listboxVariants())}
 						>
+
 							<div
 								ref={listboxRef}
 								role="listbox"
@@ -329,9 +355,13 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 								className="py-2"
 							>
 								{searchable && (
+
 									<div className="px-3 pb-2 border-b border-white/10">
+
 										<div className="relative">
+
 											<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/60" />
+
 											<input
 												ref={searchRef}
 												type="text"
@@ -347,27 +377,33 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
 								<div className="max-h-48 overflow-y-auto">
 									{loading ? (
+
 										<div className="px-4 py-3 text-center text-white/60">
 											Loading...
 										</div>
-									) : (0 === filteredOptions.length ? (
+									) : (filteredOptions.length === 0 ? (
+
 										<div className="px-4 py-3 text-center text-white/60">
 											{emptyMessage}
 										</div>
 									) : (
+
 										filteredOptions.map((option, index) => (
+
 											<div
 												key={option.value}
-												ref={(el) => {
-													if (el) {
-														optionsRef.current[index] = el;
+												ref={(element) => {
+													if (element) {
+														optionsRef.current[index] = element;
 													}
 												}}
 												role="option"
 												aria-selected={option.value === selectedValue}
 												className={cn(
 													optionVariants({
+
 														selected: option.value === selectedValue,
+
 														highlighted: index === highlightedIndex,
 													}),
 													option.disabled && "opacity-50 cursor-not-allowed",
@@ -382,11 +418,14 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 												onMouseEnter={() => setHighlightedIndex(index)}
 												tabIndex={-1}
 											>
+
 												<div className="flex items-center gap-2 flex-1 min-w-0">
 													{option.icon}
+
 													<span className="truncate">{option.label}</span>
 												</div>
 												{option.value === selectedValue && (
+
 													<Check className="w-4 h-4 text-blue-400" />
 												)}
 											</div>

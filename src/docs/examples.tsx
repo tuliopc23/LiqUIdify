@@ -513,11 +513,11 @@ export class ExampleManager {
 
   constructor() {
     // Register all examples
-    exampleCollections.forEach((collection) => {
-      collection.examples.forEach((example) => {
+    for (const collection of exampleCollections) {
+      for (const example of collection.examples) {
         this.examples.set(example.id, example);
-      });
-    });
+      }
+    }
   }
 
   getExample(id: string): InteractiveExample | undefined {
@@ -527,7 +527,7 @@ export class ExampleManager {
   getExamplesByCategory(
     category: InteractiveExample['category']
   ): InteractiveExample[] {
-    return Array.from(this.examples.values()).filter(
+    return [...this.examples.values()].filter(
       (example) => example.category === category
     );
   }
@@ -535,20 +535,20 @@ export class ExampleManager {
   getExamplesByDifficulty(
     difficulty: InteractiveExample['difficulty']
   ): InteractiveExample[] {
-    return Array.from(this.examples.values()).filter(
+    return [...this.examples.values()].filter(
       (example) => example.difficulty === difficulty
     );
   }
 
   getExamplesByTag(tag: string): InteractiveExample[] {
-    return Array.from(this.examples.values()).filter((example) =>
+    return [...this.examples.values()].filter((example) =>
       example.tags.includes(tag)
     );
   }
 
   searchExamples(query: string): InteractiveExample[] {
     const lowercaseQuery = query.toLowerCase();
-    return Array.from(this.examples.values()).filter(
+    return [...this.examples.values()].filter(
       (example) =>
         example.title.toLowerCase().includes(lowercaseQuery) ||
         example.description.toLowerCase().includes(lowercaseQuery) ||
@@ -558,7 +558,7 @@ export class ExampleManager {
 
   getRelatedExamples(exampleId: string): InteractiveExample[] {
     const example = this.getExample(exampleId);
-    if (!example) return [];
+    if (!example) {return [];}
 
     return example.relatedExamples
       .map((id) => this.getExample(id))

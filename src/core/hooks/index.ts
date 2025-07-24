@@ -6,8 +6,10 @@
  */
 
 export { AccessibilityManager as useAccessibilityManager } from "../accessibility-manager";
+
 export { useGlassEffects as useGlassEffect } from "../glass-effects";
 // Re-export hooks from other core modules
+
 export { SSRSafe as useSSRSafe } from "../ssr-safety";
 
 // Placeholder exports for hooks that may be implemented later

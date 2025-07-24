@@ -7,12 +7,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import {
 	type AccessibilityReport,
 	accessibilityManager,
+
 } from "@/core/accessibility-manager";
+
 import { cssBundleAnalyzer } from "@/core/css-optimization";
 import {
 	type PerformanceReport,
 	performanceMonitor,
+
 } from "@/core/performance-monitor";
+
 import { cn } from "@/core/utils/classname";
 
 // DevTools interfaces
@@ -33,7 +37,7 @@ export interface ComponentInspection {
 	};
 }
 
-export interface DevToolsState {
+export interface DevelopmentToolsState {
 	isOpen: boolean;
 	activeTab:
 		| "inspector"
@@ -43,11 +47,11 @@ export interface DevToolsState {
 		| "settings";
 	selectedElement: HTMLElement | null;
 	inspection: ComponentInspection | null;
-	logs: DevToolsLog[];
-	settings: DevToolsSettings;
+	logs: DevelopmentToolsLog[];
+	settings: DevelopmentToolsSettings;
 }
 
-export interface DevToolsLog {
+export interface DevelopmentToolsLog {
 	id: string;
 	timestamp: Date;
 	level: "info" | "warn" | "error" | "debug";
@@ -56,7 +60,7 @@ export interface DevToolsLog {
 	data?: any;
 }
 
-export interface DevToolsSettings {
+export interface DevelopmentToolsSettings {
 	enableRealTimeValidation: boolean;
 	enablePerformanceMonitoring: boolean;
 	enableAccessibilityHighlights: boolean;
@@ -67,11 +71,13 @@ export interface DevToolsSettings {
 
 // DevTools hook
 export function useGlassDevTools() {
-	const [state, setState] = useState<DevToolsState>({
+	const [state, setState] = useState<DevelopmentToolsState>({
 		isOpen: false,
 		activeTab: "inspector",
-  selectedElement: undefined,
-  inspection: undefined,
+
+  selectedElement: null,
+
+  inspection: null,
 		logs: [],
 		settings: {
 			enableRealTimeValidation: true,
@@ -84,16 +90,16 @@ export function useGlassDevTools() {
 	});
 
 	const addLog = useCallback(
-		(log: Omit<DevToolsLog, "id" | "timestamp">) => {
-			const newLog: DevToolsLog = {
+		(log: Omit<DevelopmentToolsLog, "id" | "timestamp">) => {
+			const newLog: DevelopmentToolsLog = {
 				...log,
-				id: Math.random().toString(36).substr(2, 9),
+				id: Math.random().toString(36).slice(2, 11),
 				timestamp: new Date(),
 			};
 
-			setState((prev) => ({
-				...prev,
-				logs: [newLog, ...prev.logs].slice(0, 100), // Keep last 100 logs
+			setState((previous) => ({
+				...previous,
+				logs: [newLog, ...previous.logs].slice(0, 100), // Keep last 100 logs
 			}));
 
 			if (state.settings.enableConsoleLogging) {
@@ -124,7 +130,7 @@ export function useGlassDevTools() {
 			try {
 				// Get component information
 				const componentName =
-					element.getAttribute("data-component") ||
+					element.dataset.component ||
 					element.className.split(" ").find((c) => c.startsWith("glass-")) ||
 					element.tagName.toLowerCase();
 
@@ -141,6 +147,7 @@ export function useGlassDevTools() {
 				// Get performance data
 				const performanceReport = performanceMonitor.getReport();
 				const componentMetrics = performanceReport.componentMetrics.find(
+
 					(m) => m.componentName === componentName,
 				);
 
@@ -171,8 +178,8 @@ export function useGlassDevTools() {
 					},
 				};
 
-				setState((prev) => ({
-					...prev,
+				setState((previous) => ({
+					...previous,
 					selectedElement: element,
 					inspection,
 				}));
@@ -203,7 +210,7 @@ export function useGlassDevTools() {
 }
 
 // Main DevTools component
-export interface GlassDevToolsProps {
+export interface GlassDevelopmentToolsProps {
 	enabled?: boolean;
 	defaultOpen?: boolean;
 	position?: "bottom" | "right" | "floating";
@@ -215,11 +222,11 @@ export function GlassDevTools({
 	defaultOpen = false,
 	position = "bottom",
 	theme = "auto",
-}: GlassDevToolsProps) {
+}: GlassDevelopmentToolsProps) {
 	const { state, setState, inspectElement } = useGlassDevTools();
 	const [performanceReport, setPerformanceReport] =
-  useState<PerformanceReport | null | null>(null);
-	const [cssReport, setCssReport] = useState<any | null>(null);
+  useState<PerformanceReport | null | null>(undefined);
+	const [cssReport, setCssReport] = useState<any | null>(undefined);
 	const overlayRef = useRef<HTMLDivElement>(null);
 
 	// Initialize DevTools
@@ -228,11 +235,11 @@ export function GlassDevTools({
 			return;
 		}
 
-		setState((prev) => ({
-			...prev,
+		setState((previous) => ({
+			...previous,
 			isOpen: defaultOpen,
 			settings: {
-				...prev.settings,
+				...previous.settings,
 				position,
 				theme,
 			},
@@ -242,11 +249,11 @@ export function GlassDevTools({
 		const handleKeyDown = (e: KeyboardEvent) => {
 			if ((e.ctrlKey || e.metaKey) && e.shiftKey && "D" === e.key) {
 				e.preventDefault();
-				setState((prev) => ({ ...prev, isOpen: !prev.isOpen }));
+				setState((previous) => ({ ...previous, isOpen: !previous.isOpen }));
 			}
 		};
 
-		if (typeof document !== "undefined") {
+		if ("undefined" !== typeof document) {
 			document.addEventListener("keydown", handleKeyDown);
 		}
 
@@ -268,14 +275,12 @@ export function GlassDevTools({
 			inspectElement(element);
 		};
 
-		if (state.isOpen) {
-			if (typeof document !== "undefined") {
+		if (state.isOpen && "undefined" !== typeof document) {
 				document.addEventListener("click", handleElementClick, true);
 			}
-		}
 
 		return () => {
-			if (typeof document !== "undefined") {
+			if ("undefined" !== typeof document) {
 				document.removeEventListener("keydown", handleKeyDown);
 				document.removeEventListener("click", handleElementClick, true);
 			}
@@ -337,6 +342,7 @@ export function GlassDevTools({
 	};
 
 	return (
+
 		<div
 			ref={overlayRef}
 			className={cn(
@@ -346,20 +352,27 @@ export function GlassDevTools({
 			)}
 		>
 			{/* Header */}
+
 			<div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700">
+
 				<div className="flex items-center gap-2">
+
 					<div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+
 					<h3 className="font-semibold text-sm">Glass UI DevTools</h3>
 				</div>
+
 				<div className="flex items-center gap-2">
+
 					<button
-						onClick={() => setState((prev) => ({ ...prev, logs: [] }))}
+						onClick={() => setState((previous) => ({ ...previous, logs: [] }))}
 						className="text-xs px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
 					>
 						Clear
 					</button>
+
 					<button
-						onClick={() => setState((prev) => ({ ...prev, isOpen: false }))}
+						onClick={() => setState((previous) => ({ ...previous, isOpen: false }))}
 						className="text-xs px-2 py-1 rounded bg-red-100 dark:bg-red-900 hover:bg-red-200 dark:hover:bg-red-800"
 					>
 						Close
@@ -368,6 +381,7 @@ export function GlassDevTools({
 			</div>
 
 			{/* Tabs */}
+
 			<div className="flex border-b border-gray-200 dark:border-gray-700">
 				{(
 					[
@@ -378,9 +392,10 @@ export function GlassDevTools({
 						"settings",
 					] as const
 				).map((tab) => (
+
 					<button
 						key={tab}
-						onClick={() => setState((prev) => ({ ...prev, activeTab: tab }))}
+						onClick={() => setState((previous) => ({ ...previous, activeTab: tab }))}
 						className={cn(
 							"px-3 py-2 text-xs font-medium capitalize border-b-2 transition-colors",
 							state.activeTab === tab
@@ -394,27 +409,33 @@ export function GlassDevTools({
 			</div>
 
 			{/* Content */}
+
 			<div className="flex-1 overflow-auto p-3">
 				{"inspector" === state.activeTab && (
+
 					<InspectorTab inspection={state.inspection} />
 				)}
 				{"accessibility" === state.activeTab && (
+
 					<AccessibilityTab
 						inspection={state.inspection}
 						onValidate={(element) => inspectElement(element)}
 					/>
 				)}
 				{"performance" === state.activeTab && (
+
 					<PerformanceTab report={performanceReport} cssReport={cssReport} />
 				)}
+
 				{"console" === state.activeTab && <ConsoleTab logs={state.logs} />}
 				{"settings" === state.activeTab && (
+
 					<SettingsTab
 						settings={state.settings}
 						onSettingsChange={(settings) =>
-							setState((prev) => ({
-								...prev,
-								settings: { ...prev.settings, ...settings },
+							setState((previous) => ({
+								...previous,
+								settings: { ...previous.settings, ...settings },
 							}))
 						}
 					/>
@@ -432,8 +453,11 @@ function InspectorTab({
 }) {
 	if (!inspection) {
 		return (
+
 			<div className="text-center text-gray-500 py-8">
+
 				<p>Click on any element to inspect it</p>
+
 				<p className="text-xs mt-2">
 					Use Ctrl/Cmd + Shift + D to toggle DevTools
 				</p>
@@ -442,17 +466,27 @@ function InspectorTab({
 	}
 
 	return (
+
 		<div className="space-y-4">
+
 			<div>
+
 				<h4 className="font-semibold text-sm mb-2">Component Info</h4>
+
 				<div className="bg-gray-50 dark:bg-gray-800 rounded p-3 text-xs">
+
 					<div>
+
 						<strong>Name:</strong> {inspection.componentName}
 					</div>
+
 					<div>
+
 						<strong>Tag:</strong> {inspection.element.tagName.toLowerCase()}
 					</div>
+
 					<div>
+
 						<strong>Classes:</strong>{" "}
 						{inspection.styles.appliedClasses.join(", ")}
 					</div>
@@ -460,28 +494,38 @@ function InspectorTab({
 			</div>
 
 			<div>
+
 				<h4 className="font-semibold text-sm mb-2">Glass Effects</h4>
+
 				<div className="bg-gray-50 dark:bg-gray-800 rounded p-3 text-xs">
-					{0 < inspection.styles.glassEffects.length ? (
+					{inspection.styles.glassEffects.length > 0 ? (
 						inspection.styles.glassEffects.map((effect) => (
+
 							<div key={effect} className="mb-1">
 								• {effect}
 							</div>
 						))
 					) : (
+
 						<div className="text-gray-500">No glass effects detected</div>
 					)}
 				</div>
 			</div>
 
 			<div>
+
 				<h4 className="font-semibold text-sm mb-2">Performance</h4>
+
 				<div className="bg-gray-50 dark:bg-gray-800 rounded p-3 text-xs">
+
 					<div>
+
 						<strong>Render Time:</strong>{" "}
 						{inspection.performance.renderTime.toFixed(2)}ms
 					</div>
+
 					<div>
+
 						<strong>Updates:</strong> {inspection.performance.updateCount}
 					</div>
 				</div>
@@ -500,7 +544,9 @@ function AccessibilityTab({
 }) {
 	if (!inspection) {
 		return (
+
 			<div className="text-center text-gray-500 py-8">
+
 				<p>Select an element to view accessibility information</p>
 			</div>
 		);
@@ -509,9 +555,13 @@ function AccessibilityTab({
 	const { accessibility } = inspection;
 
 	return (
+
 		<div className="space-y-4">
+
 			<div className="flex items-center justify-between">
+
 				<h4 className="font-semibold text-sm">Accessibility Score</h4>
+
 				<button
 					onClick={() => onValidate(inspection.element)}
 					className="text-xs px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 hover:bg-blue-200 dark:hover:bg-blue-800"
@@ -521,7 +571,9 @@ function AccessibilityTab({
 			</div>
 
 			<div className="bg-gray-50 dark:bg-gray-800 rounded p-3">
+
 				<div className="flex items-center gap-2 mb-2">
+
 					<div
 						className={cn(
 							"w-3 h-3 rounded-full",
@@ -532,25 +584,34 @@ function AccessibilityTab({
 									: "bg-red-500"),
 						)}
 					/>
+
 					<span className="font-semibold">{accessibility.score}/100</span>
+
 					<span className="text-xs text-gray-500">
 						WCAG {accessibility.wcagLevel}
 					</span>
 				</div>
 			</div>
 
-			{0 < accessibility.violations.length && (
+			{accessibility.violations.length > 0 && (
+
 				<div>
+
 					<h5 className="font-semibold text-sm mb-2 text-red-600">
 						Violations
 					</h5>
+
 					<div className="space-y-2">
+
 						{accessibility.violations.map((violation, index) => (
+
 							<div
 								key={index}
 								className="bg-red-50 dark:bg-red-900/20 rounded p-2 text-xs"
 							>
+
 								<div className="font-semibold">{violation.description}</div>
+
 								<div className="text-gray-600 dark:text-gray-400 mt-1">
 									{violation.help}
 								</div>
@@ -560,19 +621,26 @@ function AccessibilityTab({
 				</div>
 			)}
 
-			{0 < accessibility.suggestions.length && (
+			{accessibility.suggestions.length > 0 && (
+
 				<div>
+
 					<h5 className="font-semibold text-sm mb-2 text-blue-600">
 						Suggestions
 					</h5>
+
 					<div className="space-y-2">
+
 						{accessibility.suggestions.map((suggestion, index) => (
+
 							<div
 								key={index}
 								className="bg-blue-50 dark:bg-blue-900/20 rounded p-2 text-xs"
 							>
+
 								<div>{suggestion.message}</div>
 								{suggestion.autoFixAvailable && (
+
 									<button
 										onClick={() => suggestion.fix?.()}
 										className="mt-1 text-xs px-2 py-1 rounded bg-blue-100 dark:bg-blue-800 hover:bg-blue-200 dark:hover:bg-blue-700"
@@ -599,23 +667,33 @@ function PerformanceTab({
 }) {
 	if (!report) {
 		return (
+
 			<div className="text-center text-gray-500 py-8">
+
 				<p>Performance data loading...</p>
 			</div>
 		);
 	}
 
 	return (
+
 		<div className="space-y-4">
+
 			<div>
+
 				<h4 className="font-semibold text-sm mb-2">Core Web Vitals</h4>
+
 				<div className="grid grid-cols-2 gap-2">
+
 					{report.webVitals.map((metric) => (
+
 						<div
 							key={metric.name}
 							className="bg-gray-50 dark:bg-gray-800 rounded p-2 text-xs"
 						>
+
 							<div className="font-semibold">{metric.name}</div>
+
 							<div
 								className={cn(
 									"text-lg font-bold",
@@ -635,17 +713,24 @@ function PerformanceTab({
 			</div>
 
 			{cssReport && (
+
 				<div>
+
 					<h4 className="font-semibold text-sm mb-2">Bundle Sizes</h4>
+
 					<div className="bg-gray-50 dark:bg-gray-800 rounded p-3 text-xs">
+
 						<div className="mb-2">
+
 							<strong>Total:</strong> {cssReport.totalSize}KB / 30KB
+
 							<div
 								className={cn(
 									"w-full bg-gray-200 rounded-full h-2 mt-1",
 									30 < cssReport.totalSize ? "bg-red-200" : "bg-green-200",
 								)}
 							>
+
 								<div
 									className={cn(
 										"h-2 rounded-full transition-all",
@@ -659,7 +744,9 @@ function PerformanceTab({
 						</div>
 						{Object.entries(cssReport.bundles).map(
 							([name, bundle]: [string, any]) => (
+
 								<div key={name} className="mb-1">
+
 									<strong>{name}:</strong> {bundle.size}KB / {bundle.maxSize}KB
 								</div>
 							),
@@ -669,15 +756,22 @@ function PerformanceTab({
 			)}
 
 			<div>
+
 				<h4 className="font-semibold text-sm mb-2">Component Performance</h4>
+
 				<div className="space-y-2 max-h-32 overflow-auto">
+
 					{report.componentMetrics.slice(0, 5).map((component, index) => (
+
 						<div
 							key={index}
 							className="bg-gray-50 dark:bg-gray-800 rounded p-2 text-xs"
 						>
+
 							<div className="font-semibold">{component.componentName}</div>
+
 							<div>Render: {component.renderTime.toFixed(2)}ms</div>
+
 							<div>Re-renders: {component.rerenderCount}</div>
 						</div>
 					))}
@@ -688,15 +782,19 @@ function PerformanceTab({
 }
 
 // Console Tab Component
-function ConsoleTab({ logs }: { logs: DevToolsLog[] }) {
+function ConsoleTab({ logs }: { logs: DevelopmentToolsLog[] }) {
 	return (
+
 		<div className="space-y-1 max-h-64 overflow-auto">
-			{0 === logs.length ? (
+			{logs.length === 0 ? (
+
 				<div className="text-center text-gray-500 py-8">
+
 					<p>No logs yet</p>
 				</div>
 			) : (
 				logs.map((log) => (
+
 					<div
 						key={log.id}
 						className={cn(
@@ -710,10 +808,13 @@ function ConsoleTab({ logs }: { logs: DevToolsLog[] }) {
 										: "bg-gray-50 dark:bg-gray-800 border-gray-500",
 						)}
 					>
+
 						<div className="flex items-center gap-2 mb-1">
+
 							<span className="font-mono text-xs text-gray-500">
 								{log.timestamp.toLocaleTimeString()}
 							</span>
+
 							<span
 								className={cn(
 									"px-1 rounded text-xs font-semibold",
@@ -728,12 +829,17 @@ function ConsoleTab({ logs }: { logs: DevToolsLog[] }) {
 							>
 								{log.level.toUpperCase()}
 							</span>
+
 							<span className="text-xs text-gray-600">{log.category}</span>
 						</div>
+
 						<div>{log.message}</div>
 						{log.data && (
+
 							<details className="mt-1">
+
 								<summary className="cursor-pointer text-gray-600">Data</summary>
+
 								<pre className="mt-1 text-xs bg-gray-100 dark:bg-gray-900 p-1 rounded overflow-auto">
 									{JSON.stringify(log.data, undefined, 2)}
 								</pre>
@@ -751,14 +857,19 @@ function SettingsTab({
 	settings,
 	onSettingsChange,
 }: {
-	settings: DevToolsSettings;
-	onSettingsChange: (settings: Partial<DevToolsSettings>) => void;
+	settings: DevelopmentToolsSettings;
+	onSettingsChange: (settings: Partial<DevelopmentToolsSettings>) => void;
 }) {
 	return (
+
 		<div className="space-y-4">
+
 			<div>
+
 				<h4 className="font-semibold text-sm mb-2">Monitoring</h4>
+
 				<div className="space-y-2">
+
 					<input
 						id="real-time-validation"
 						type="checkbox"
@@ -767,12 +878,14 @@ function SettingsTab({
 							onSettingsChange({ enableRealTimeValidation: e.target.checked })
 						}
 					/>
+
 					<label
 						htmlFor="real-time-validation"
 						className="flex items-center gap-2 text-xs"
 					>
 						Real-time accessibility validation
 					</label>
+
 					<input
 						id="performance-monitoring"
 						type="checkbox"
@@ -783,12 +896,14 @@ function SettingsTab({
 							})
 						}
 					/>
+
 					<label
 						htmlFor="performance-monitoring"
 						className="flex items-center gap-2 text-xs"
 					>
 						Performance monitoring
 					</label>
+
 					<input
 						id="accessibility-highlights"
 						type="checkbox"
@@ -799,12 +914,14 @@ function SettingsTab({
 							})
 						}
 					/>
+
 					<label
 						htmlFor="accessibility-highlights"
 						className="flex items-center gap-2 text-xs"
 					>
 						Accessibility highlights
 					</label>
+
 					<input
 						id="console-logging"
 						type="checkbox"
@@ -813,6 +930,7 @@ function SettingsTab({
 							onSettingsChange({ enableConsoleLogging: e.target.checked })
 						}
 					/>
+
 					<label
 						htmlFor="console-logging"
 						className="flex items-center gap-2 text-xs"
@@ -823,12 +941,17 @@ function SettingsTab({
 			</div>
 
 			<div>
+
 				<h4 className="font-semibold text-sm mb-2">Appearance</h4>
+
 				<div className="space-y-2">
+
 					<div>
+
 						<label htmlFor="devtools-theme" className="block text-xs mb-1">
 							Theme
 						</label>
+
 						<select
 							id="devtools-theme"
 							value={settings.theme}
@@ -837,15 +960,21 @@ function SettingsTab({
 							}
 							className="w-full text-xs p-1 rounded border"
 						>
+
 							<option value="auto">Auto</option>
+
 							<option value="light">Light</option>
+
 							<option value="dark">Dark</option>
 						</select>
 					</div>
+
 					<div>
+
 						<label htmlFor="devtools-position" className="block text-xs mb-1">
 							Position
 						</label>
+
 						<select
 							id="devtools-position"
 							value={settings.position}
@@ -854,8 +983,11 @@ function SettingsTab({
 							}
 							className="w-full text-xs p-1 rounded border"
 						>
+
 							<option value="bottom">Bottom</option>
+
 							<option value="right">Right</option>
+
 							<option value="floating">Floating</option>
 						</select>
 					</div>
@@ -863,8 +995,11 @@ function SettingsTab({
 			</div>
 
 			<div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+
 				<div className="text-xs text-gray-500">
+
 					<div>Glass UI DevTools v1.0.0</div>
+
 					<div>Press Ctrl/Cmd + Shift + D to toggle</div>
 				</div>
 			</div>

@@ -6,6 +6,7 @@
  */
 
 import { useCallback, useMemo, useRef } from 'react';
+
 import type { GlassIntensity } from '@/core/base-component';
 
 export interface OptimizedGlassConfig {
@@ -42,7 +43,7 @@ export function useOptimizedGlassEffects(config: OptimizedGlassConfig) {
     }
 
     const classes = generateOptimizedGlassClasses(config);
-    GLASS_EFFECT_CACHE.set(cacheKey, { classes, variables: undefined });
+    GLASS_EFFECT_CACHE.set(cacheKey, { classes, variables: null });
     return classes;
   }, [cacheKey, config]);
 
@@ -118,17 +119,21 @@ function generateOptimizedGlassClasses(config: OptimizedGlassConfig): string {
 
   // Intensity-specific optimizations
   switch (intensity) {
-    case 'subtle':
+    case 'subtle': {
       baseClasses.push('backdrop-blur-[4px]', 'bg-white/5');
       break;
-    case 'medium':
+    }
+    case 'medium': {
       baseClasses.push('backdrop-blur-[8px]', 'bg-white/10');
       break;
-    case 'strong':
+    }
+    case 'strong': {
       baseClasses.push('backdrop-blur-[16px]', 'bg-white/15');
       break;
-    default:
+    }
+    default: {
       baseClasses.push('backdrop-blur-[8px]', 'bg-white/10');
+    }
   }
 
   return baseClasses.join(' ');

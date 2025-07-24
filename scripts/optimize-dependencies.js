@@ -5,9 +5,9 @@
  * Finds duplicate dependencies and suggests optimizations
  */
 
-import { execSync } from "child_process";
-import { readFileSync } from "fs";
-import { join } from "path";
+import { execSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 function analyzeDependencies() {
 	console.log(
@@ -29,9 +29,9 @@ function analyzeDependencies() {
 
 	// Traverse dependency tree
 	function traverse(deps, path = []) {
-		if (!deps) return;
+		if (!deps) {return;}
 
-		Object.entries(deps).forEach(([name, info]) => {
+		for (const [name, info] of Object.entries(deps)) {
 			const version = info.version;
 			const key = `${name}@${version}`;
 
@@ -49,17 +49,17 @@ function analyzeDependencies() {
 			if (info.dependencies) {
 				traverse(info.dependencies, [...path, name]);
 			}
-		});
+		}
 	}
 
 	traverse(tree.dependencies);
 
 	// Find duplicates
-	dependencies.forEach((versions, name) => {
+	for (const [name, versions] of dependencies.entries()) {
 		if (versions.size > 1) {
-			duplicates.set(name, Array.from(versions));
+			duplicates.set(name, [...versions]);
 		}
-	});
+	}
 
 	// Report findings
 	if (duplicates.size === 0) {
@@ -67,13 +67,13 @@ function analyzeDependencies() {
 	} else {
 		console.log(`Found ${duplicates.size} packages with multiple versions:\n`);
 
-		duplicates.forEach((versions, name) => {
+		for (const [name, versions] of duplicates.entries()) {
 			console.log(`📦 ${name}`);
-			versions.forEach(({ version, path }) => {
+			for (const { version, path } of versions) {
 				console.log(`   - ${version} (${path})`);
-			});
+			}
 			console.log("");
-		});
+		}
 
 		console.log("\n📋 Optimization suggestions:");
 		console.log('1. Run "npm dedupe" to flatten the dependency tree');
@@ -97,7 +97,7 @@ function analyzeDependencies() {
 	];
 
 	console.log("\nHeavy dependencies analysis:");
-	heavyDeps.forEach(({ name, threshold }) => {
+	for (const { name, threshold } of heavyDeps) {
 		const isDep = Object.keys(packageJson.dependencies || {}).some((dep) =>
 			dep.includes(name),
 		);
@@ -111,7 +111,7 @@ function analyzeDependencies() {
 				console.log(`  ⚠️  Consider lazy loading if bundle > ${threshold}KB`);
 			}
 		}
-	});
+	}
 
 	// Suggest optimizations
 	console.log("\n🚀 Additional optimization suggestions:");

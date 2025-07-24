@@ -40,16 +40,16 @@ export function parseColor(color: string): RGBColor | null {
 		const hex = color.slice(1);
 		if (3 === hex.length) {
 			return {
-				r: parseInt(hex[0]! + hex[0]!, 16),
-				g: parseInt(hex[1]! + hex[1]!, 16),
-				b: parseInt(hex[2]! + hex[2]!, 16),
+				r: Number.parseInt(hex[0]! + hex[0]!, 16),
+				g: Number.parseInt(hex[1]! + hex[1]!, 16),
+				b: Number.parseInt(hex[2]! + hex[2]!, 16),
 			};
 		}
 		if (6 === hex.length) {
 			return {
-				r: parseInt(hex.slice(0, 2), 16),
-				g: parseInt(hex.slice(2, 4), 16),
-				b: parseInt(hex.slice(4, 6), 16),
+				r: Number.parseInt(hex.slice(0, 2), 16),
+				g: Number.parseInt(hex.slice(2, 4), 16),
+				b: Number.parseInt(hex.slice(4, 6), 16),
 			};
 		}
 	}
@@ -60,9 +60,9 @@ export function parseColor(color: string): RGBColor | null {
 	);
 	if (rgbMatch) {
 		return {
-			r: parseInt(rgbMatch[1]!, 10),
-			g: parseInt(rgbMatch[2]!, 10),
-			b: parseInt(rgbMatch[3]!, 10),
+			r: Number.parseInt(rgbMatch[1]!, 10),
+			g: Number.parseInt(rgbMatch[2]!, 10),
+			b: Number.parseInt(rgbMatch[3]!, 10),
 		};
 	}
 
@@ -71,14 +71,15 @@ export function parseColor(color: string): RGBColor | null {
 		/hsla?\((\d+),\s*(\d+)%,\s*(\d+)%(?:,\s*([\d.]+))?\)/,
 	);
 	if (hslMatch) {
-		const h = parseInt(hslMatch[1]!, 10);
-		const s = parseInt(hslMatch[2]!, 10) / 100;
-		const l = parseInt(hslMatch[3]!, 10) / 100;
-		const a = hslMatch[4] ? parseFloat(hslMatch[4]) : undefined;
+		const h = Number.parseInt(hslMatch[1]!, 10);
+		const s = Number.parseInt(hslMatch[2]!, 10) / 100;
+		const l = Number.parseInt(hslMatch[3]!, 10) / 100;
+		const a = hslMatch[4] ? Number.parseFloat(hslMatch[4]) : undefined;
 
 		return hslToRgb(h, s, l, a);
 	}
 
+// @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'RGBCol... Remove this comment to see the full error message
 	return;
 }
 
@@ -119,15 +120,18 @@ export function rgbToHsl(
 		s = 0.5 < l ? diff / (2 - sum) : diff / sum;
 
 		switch (max) {
-			case r:
+			case r: {
 				h = ((g - b) / diff + (g < b ? 6 : 0)) / 6;
 				break;
-			case g:
+			}
+			case g: {
 				h = ((b - r) / diff + 2) / 6;
 				break;
-			case b:
+			}
+			case b: {
 				h = ((r - g) / diff + 4) / 6;
 				break;
+			}
 		}
 	}
 
@@ -322,8 +326,8 @@ export function generatePalette(
 	const palette: string[] = [];
 	const stepSize = 100 / (steps - 1);
 
-	for (let i = 0; i < steps; i++) {
-		const lightness = i * stepSize;
+	for (let index = 0; index < steps; index++) {
+		const lightness = index * stepSize;
 		const rgb = parseColor(baseColor);
 		if (!rgb) {
 			continue;
@@ -419,6 +423,7 @@ export const glassColors = {
 export function getColorInfo(color: string): ColorInfo | null {
 	const rgb = parseColor(color);
 	if (!rgb) {
+// @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'ColorI... Remove this comment to see the full error message
 		return;
 	}
 
@@ -455,12 +460,15 @@ export function formatColor(color: string, format: ColorFormat): string {
 	}
 
 	switch (format) {
-		case "hex":
+		case "hex": {
 			return rgbToHex(rgb.r, rgb.g, rgb.b);
-		case "rgb":
+		}
+		case "rgb": {
 			return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-		case "rgba":
+		}
+		case "rgba": {
 			return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a || 1})`;
+		}
 		case "hsl": {
 			const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
 			return `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
@@ -469,8 +477,9 @@ export function formatColor(color: string, format: ColorFormat): string {
 			const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
 			return `hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${rgb.a || 1})`;
 		}
-		default:
+		default: {
 			return color;
+		}
 	}
 }
 

@@ -9,9 +9,9 @@
  * - Render performance > 55fps
  */
 
-const fs = require("fs").promises;
-const path = require("path");
-const { execSync } = require("child_process");
+const fs = require("node:fs").promises;
+const path = require("node:path");
+const { execSync } = require("node:child_process");
 
 // Performance targets
 const PERFORMANCE_TARGETS = {
@@ -135,8 +135,7 @@ async function extractCriticalCSS(cssContent) {
 	let currentRule = "";
 	let isCritical = false;
 
-	for (let i = 0; i < lines.length; i++) {
-		const line = lines[i];
+	for (const line of lines) {
 
 		// Check if this is the start of a new rule
 		if (line.includes("{") && !line.includes("}")) {
@@ -191,7 +190,7 @@ function validatePerformance({
 
 	if (issues.length > 0) {
 		console.error("⚠️ Performance issues detected:");
-		issues.forEach((issue) => console.error(`  - ${issue}`));
+		for (const issue of issues) {console.error(`  - ${issue}`);}
 		return false;
 	}
 
@@ -234,14 +233,14 @@ async function generatePerformanceReport(stats) {
 function minifyCSS(css) {
 	// Basic CSS minification
 	return css
-		.replace(/\/\*[\s\S]*?\*\//g, "") // Remove comments
-		.replace(/\s+/g, " ") // Collapse whitespace
-		.replace(/;\s*}/g, "}") // Remove last semicolon in blocks
-		.replace(/\s*{\s*/g, "{") // Clean up braces
-		.replace(/\s*}\s*/g, "}")
-		.replace(/\s*,\s*/g, ",") // Clean up commas
-		.replace(/\s*:\s*/g, ":") // Clean up colons
-		.replace(/\s*;\s*/g, ";") // Clean up semicolons
+		.replaceAll(/\/\*[\S\s]*?\*\//g, "") // Remove comments
+		.replaceAll(/\s+/g, " ") // Collapse whitespace
+		.replaceAll(/;\s*}/g, "}") // Remove last semicolon in blocks
+		.replaceAll(/\s*{\s*/g, "{") // Clean up braces
+		.replaceAll(/\s*}\s*/g, "}")
+		.replaceAll(/\s*,\s*/g, ",") // Clean up commas
+		.replaceAll(/\s*:\s*/g, ":") // Clean up colons
+		.replaceAll(/\s*;\s*/g, ";") // Clean up semicolons
 		.trim();
 }
 

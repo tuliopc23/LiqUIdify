@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readFileSync } from "node:fs";
 import { glob } from "glob";
-import { createRequire } from "module";
-import { dirname, resolve } from "path";
-import { fileURLToPath } from "url";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const require = createRequire(import.meta.url);
 
@@ -44,17 +44,17 @@ try {
 	// Use require to load tsconfig.json (handles comments)
 	try {
 		tsConfig = require(resolve(projectRoot, "tsconfig.json"));
-	} catch (requireError) {
+	} catch {
 		// Fallback: manually parse with comment removal
 		let tsConfigContent = readFileSync(
 			resolve(projectRoot, "tsconfig.json"),
 			"utf-8",
 		);
 		tsConfigContent = tsConfigContent
-			.replace(/\/\*[\s\S]*?\*\//g, "") // Remove block comments
-			.replace(/\/\/.*$/gm, "") // Remove line comments
-			.replace(/,\s*}/g, "}") // Remove trailing commas
-			.replace(/,\s*]/g, "]");
+			.replaceAll(/\/\*[\S\s]*?\*\//g, "") // Remove block comments
+			.replaceAll(/\/\/.*$/gm, "") // Remove line comments
+			.replaceAll(/,\s*}/g, "}") // Remove trailing commas
+			.replaceAll(/,\s*]/g, "]");
 		tsConfig = JSON.parse(tsConfigContent);
 	}
 
@@ -119,10 +119,10 @@ for (const test of testAliases) {
 		`  ${oxcMatch && tsMatch ? "✅" : "⚠️"} ${test.alias} -> ${test.expected}`,
 	);
 	if (!oxcMatch)
-		console.log(
+		{console.log(
 			`    OXC: Expected ${test.expected}, got ${oxcAliases[test.alias]}`,
-		);
-	if (!tsMatch) console.log(`    TS: Path mapping not found or incorrect`);
+		);}
+	if (!tsMatch) {console.log(`    TS: Path mapping not found or incorrect`);}
 }
 
 // 4. Test file resolution
@@ -141,9 +141,9 @@ for (const file of sampleFiles) {
 		const content = readFileSync(filePath, "utf-8");
 
 		// Check for alias imports
-		const aliasImports = content.match(/@\/[^\s'"]+/g) || [];
-		const relativeImports = content.match(/from\s+['"]\.\.?\/[^'"]+/g) || [];
-		const externalImports = content.match(/from\s+['"][^@./][^'"]+/g) || [];
+		const aliasImports = content.match(/@\/[^\s"']+/g) || [];
+		const relativeImports = content.match(/from\s+["']\.\.?\/[^"']+/g) || [];
+		const externalImports = content.match(/from\s+["'][^./@][^"']+/g) || [];
 
 		console.log(`  📋 ${file}:`);
 		console.log(`    ${aliasImports.length} alias imports (@ prefixed)`);

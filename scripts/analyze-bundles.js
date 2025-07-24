@@ -6,10 +6,10 @@
  */
 
 import chalk from "chalk";
-import { existsSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { glob } from "glob";
-import { basename, join } from "path";
-import { gzipSync } from "zlib";
+import { basename, join } from "node:path";
+import { gzipSync } from "node:zlib";
 
 const BUNDLE_TARGETS = {
 	core: { max: 15, warn: 12 },
@@ -58,7 +58,7 @@ function analyzeBundles() {
 	const history = loadHistory();
 	const timestamp = new Date().toISOString();
 
-	files.forEach((file) => {
+	for (const file of files) {
 		const filePath = join(distDir, file);
 		const bundleName = basename(file, ".mjs");
 		const sizes = getFileSize(filePath);
@@ -72,7 +72,7 @@ function analyzeBundles() {
 		// Check against targets
 		const target = BUNDLE_TARGETS[bundleName];
 		if (target) {
-			const sizeKB = parseFloat(sizes.gzippedKB);
+			const sizeKB = Number.parseFloat(sizes.gzippedKB);
 
 			let status = "✅";
 			let color = "green";
@@ -94,7 +94,7 @@ function analyzeBundles() {
 			// Check for regression
 			const previousSize = history[bundleName]?.gzippedKB;
 			if (previousSize) {
-				const diff = sizeKB - parseFloat(previousSize);
+				const diff = sizeKB - Number.parseFloat(previousSize);
 				if (diff > 0.5) {
 					// 0.5KB regression threshold
 					console.log(
@@ -116,7 +116,7 @@ function analyzeBundles() {
 			);
 			console.log();
 		}
-	});
+	}
 
 	// Update history
 	Object.assign(history, results);
@@ -126,7 +126,7 @@ function analyzeBundles() {
 	console.log(chalk.bold("\n📈 Summary:"));
 
 	const totalSize = Object.values(results).reduce(
-		(sum, r) => sum + parseFloat(r.gzippedKB),
+		(sum, r) => sum + Number.parseFloat(r.gzippedKB),
 		0,
 	);
 
@@ -139,7 +139,7 @@ function analyzeBundles() {
 		total: {
 			gzippedKB: totalSize.toFixed(2),
 			rawKB: Object.values(results)
-				.reduce((sum, r) => sum + parseFloat(r.rawKB), 0)
+				.reduce((sum, r) => sum + Number.parseFloat(r.rawKB), 0)
 				.toFixed(2),
 		},
 		targets: BUNDLE_TARGETS,
@@ -151,7 +151,7 @@ function analyzeBundles() {
 	// Exit with error if any bundle exceeds max size
 	const hasErrors = Object.entries(results).some(([name, sizes]) => {
 		const target = BUNDLE_TARGETS[name];
-		return target && parseFloat(sizes.gzippedKB) > target.max;
+		return target && Number.parseFloat(sizes.gzippedKB) > target.max;
 	});
 
 	if (hasErrors) {

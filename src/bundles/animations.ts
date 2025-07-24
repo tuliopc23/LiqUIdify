@@ -13,7 +13,9 @@ export const loadFramerMotion = (): Promise<typeof FramerMotion> =>
 
 export * from '../components/apple-liquid-glass';
 // Advanced visual components
+
 export * from '../components/glass-feature-showcase';
+
 export * from '../components/glass-floating-action';
 export * from '../components/glass-loading';
 export * from '../components/glass-progress';
@@ -21,6 +23,7 @@ export * from '../components/glass-progress';
 export * from '../components/glass-slider';
 // Animation-heavy components
 export * from '../components/glass-spinner';
+
 export * from '../components/liquid-glass-svg-filters';
 export {
   type AnimationConfig as HookAnimationConfig,
@@ -34,8 +37,10 @@ export {
   useRippleEffect,
   useSpringAnimation,
 } from '../hooks/use-glass-animations';
+
 export * from '../hooks/use-haptic-feedback';
 // Animation hooks (tree-shakeable)
+
 export * from '../hooks/use-liquid-glass';
 // Animation utilities
 export * from '../lib/framer-motion-constants';
