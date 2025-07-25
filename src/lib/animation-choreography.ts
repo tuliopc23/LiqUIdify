@@ -16,7 +16,7 @@ import { GLASS_EASINGS } from './glass-animations';
  */
 export interface AnimationSequence {
   id: string;
-  animations: ChoreographyStep[];
+  animations: Array<ChoreographyStep>;
   duration?: number;
   delay?: number;
   repeat?: number;
@@ -30,7 +30,7 @@ export interface AnimationSequence {
  * Individual step in choreography
  */
 export interface ChoreographyStep {
-  elements: HTMLElement[];
+  elements: Array<HTMLElement>;
   type: AnimationType;
   duration: number;
   delay?: number;
@@ -307,7 +307,7 @@ export class AdvancedChoreographer {
    */
   executePreset(
     presetName: keyof typeof APPLE_MOTION_PRESETS,
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     options: Partial<ChoreographyStep> = {}
   ): gsap.core.Timeline {
     const preset = APPLE_MOTION_PRESETS[presetName];
@@ -332,7 +332,7 @@ export class AdvancedChoreographer {
    * Create staggered entrance animation
    */
   createStaggeredEntrance(
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     type: 'fadeIn' | 'slideIn' | 'scaleIn' | 'liquidFlow' = 'fadeIn'
   ): gsap.core.Timeline {
     const presetMap = {
@@ -349,7 +349,7 @@ export class AdvancedChoreographer {
    * Create coordinated hover effects
    */
   createHoverChoreography(
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     options: {
       strength?: number;
       duration?: number;
@@ -416,7 +416,7 @@ export class AdvancedChoreographer {
    * Create scroll-triggered choreography
    */
   createScrollChoreography(
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     options: {
       threshold?: number;
       once?: boolean;
@@ -479,7 +479,7 @@ export class AdvancedChoreographer {
   /**
    * Get active animations
    */
-  getActiveAnimations(): string[] {
+  getActiveAnimations(): Array<string> {
     return [...this.activeAnimations];
   }
 
@@ -504,7 +504,7 @@ export const ChoreographyUtils = {
    * Quick staggered animation
    */
   stagger: (
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     preset: keyof typeof APPLE_MOTION_PRESETS,
     options?: Partial<ChoreographyStep>
   ) => {
@@ -515,7 +515,7 @@ export const ChoreographyUtils = {
    * Create entrance animation
    */
   entrance: (
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     type: 'fadeIn' | 'slideIn' | 'scaleIn' | 'liquidFlow' = 'fadeIn'
   ) => {
     return globalChoreographer.createStaggeredEntrance(elements, type);
@@ -525,7 +525,7 @@ export const ChoreographyUtils = {
    * Setup hover choreography
    */
   hover: (
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     options?: { strength?: number; duration?: number; stagger?: number }
   ) => {
     return globalChoreographer.createHoverChoreography(elements, options);
@@ -535,7 +535,7 @@ export const ChoreographyUtils = {
    * Setup scroll choreography
    */
   scroll: (
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     options?: {
       threshold?: number;
       once?: boolean;

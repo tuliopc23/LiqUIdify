@@ -1,190 +1,176 @@
-import { ChevronRight, Menu, X } from "lucide-react";
-import type React from "react";
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import { ChevronRight, Menu, X } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
+import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
 
 interface NavItem {
-	id: string;
-	label: string;
-	href?: string;
-	icon?: React.ReactNode;
-	children?: NavItem[];
-	action?: () => void;
+  id: string;
+  label: string;
+  href?: string;
+  icon?: React.ReactNode;
+  children?: Array<NavItem>;
+  action?: () => void;
 }
 
 interface GlassMobileNavProps {
-	items: NavItem[];
-	className?: string;
-	onItemClick?: (item: NavItem) => void;
+  items: Array<NavItem>;
+  className?: string;
+  onItemClick?: (item: NavItem) => void;
 }
 
 export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
-	items,
-	className,
-	onItemClick,
+  items,
+  className,
+  onItemClick,
 }) => {
-	const [isOpen, setIsOpen] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null | null>(undefined);
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null | null>(
+    undefined
+  );
 
-	useEffect(() => {
-		document.body.style.overflow = isOpen ? "hidden" : "";
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
 
-		return () => {
-			document.body.style.overflow = "";
-		};
-	}, [isOpen]);
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
-	const handleItemClick = (item: NavItem) => {
-		if (item.children?.length) {
+  const handleItemClick = (item: NavItem) => {
+    if (item.children?.length) {
+      setActiveSubmenu(activeSubmenu === item.id ? undefined : item.id);
+    } else {
+      if (item.action) {
+        item.action();
+      }
+      onItemClick?.(item);
+      setIsOpen(false);
+    }
+  };
 
-    setActiveSubmenu(activeSubmenu === item.id ? undefined : item.id);
-		} else {
-			if (item.action) {
-				item.action();
-			}
-			onItemClick?.(item);
-			setIsOpen(false);
-		}
-	};
+  const MenuTrigger = () => (
+    <button
+      onClick={() => setIsOpen(!isOpen)}
+      className={cn(
+        'rounded-xl p-3',
+        getGlassClass('default'),
+        'hover:bg-[var(--glass-bg-elevated)]',
+        microInteraction.interactive,
+        'focus:outline-none focus:ring-2 focus:ring-blue-500/30',
+        'md:hidden', // Only show on mobile
+        className
+      )}
+      aria-label="Toggle navigation menu"
+    >
+      {isOpen ? (
+        <X className="h-5 w-5 text-[var(--text-primary)]" />
+      ) : (
+        <Menu className="h-5 w-5 text-[var(--text-primary)]" />
+      )}
+    </button>
+  );
 
-	const MenuTrigger = () => (
+  const renderNavItem = (item: NavItem, level = 0) => (
+    <div key={item.id} className="w-full">
+      <button
+        onClick={() => handleItemClick(item)}
+        className={cn(
+          'flex w-full items-center justify-between p-4 text-left',
+          'hover:bg-[var(--glass-bg)] active:bg-[var(--glass-bg-pressed)]',
+          microInteraction.gentle,
+          0 < level && 'border-[var(--glass-border)] border-l-2 pl-8'
+        )}
+      >
+        <div className="flex items-center gap-3">
+          {item.icon && (
+            <span className="h-5 w-5 text-[var(--text-secondary)]">
+              {item.icon}
+            </span>
+          )}
 
-		<button
-			onClick={() => setIsOpen(!isOpen)}
-			className={cn(
-				"p-3 rounded-xl",
-				getGlassClass("default"),
-				"hover:bg-[var(--glass-bg-elevated)]",
-				microInteraction.interactive,
-				"focus:outline-none focus:ring-2 focus:ring-blue-500/30",
-				"md:hidden", // Only show on mobile
-				className,
-			)}
-			aria-label="Toggle navigation menu"
-		>
-			{isOpen ? (
+          <span className="font-medium text-[var(--text-primary)]">
+            {item.label}
+          </span>
+        </div>
+        {item.children?.length && (
+          <ChevronRight
+            className={cn(
+              'h-4 w-4 text-[var(--text-secondary)] transition-transform duration-200',
+              activeSubmenu === item.id && 'rotate-90'
+            )}
+          />
+        )}
+      </button>
 
-				<X className="w-5 h-5 text-[var(--text-primary)]" />
-			) : (
+      {/* Submenu */}
+      {item.children?.length && activeSubmenu === item.id && (
+        <div className="border-[var(--glass-border)] border-t">
+          {item.children.map((child) => renderNavItem(child, level + 1))}
+        </div>
+      )}
+    </div>
+  );
 
-				<Menu className="w-5 h-5 text-[var(--text-primary)]" />
-			)}
-		</button>
-	);
+  if (!isOpen) {
+    return <MenuTrigger />;
+  }
 
-	const renderNavItem = (item: NavItem, level = 0) => (
+  return (
+    <>
+      <MenuTrigger />
+      {'undefined' !== typeof window &&
+        createPortal(
+          <div className="fixed inset-0 z-50 md:hidden">
+            {/* Backdrop */}
 
-		<div key={item.id} className="w-full">
+            <button
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+              onClick={() => setIsOpen(false)}
+              onKeyDown={(e) => {
+                if ('Enter' === e.key || ' ' === e.key) {
+                  e.preventDefault();
+                  setIsOpen(false);
+                }
+              }}
+              aria-label="Close navigation menu"
+            />
 
-			<button
-				onClick={() => handleItemClick(item)}
-				className={cn(
-					"w-full flex items-center justify-between p-4 text-left",
-					"hover:bg-[var(--glass-bg)] active:bg-[var(--glass-bg-pressed)]",
-					microInteraction.gentle,
-					0 < level && "pl-8 border-l-2 border-[var(--glass-border)]",
-				)}
-			>
+            {/* Navigation Panel */}
 
-				<div className="flex items-center gap-3">
-					{item.icon && (
+            <div
+              className={cn(
+                'absolute top-0 right-0 h-full w-80 max-w-[85vw]',
+                getGlassClass('elevated'),
+                'border-[var(--glass-border)] border-l',
+                'slide-in-from-right animate-in duration-300'
+              )}
+            >
+              {/* Header */}
 
-						<span className="w-5 h-5 text-[var(--text-secondary)]">
-							{item.icon}
-						</span>
-					)}
+              <div className="flex items-center justify-between border-[var(--glass-border)] border-b p-4">
+                <h2 className="font-semibold text-[var(--text-primary)] text-lg">
+                  Navigation
+                </h2>
 
-					<span className="text-[var(--text-primary)] font-medium">
-						{item.label}
-					</span>
-				</div>
-				{item.children?.length && (
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-lg p-2 text-[var(--text-secondary)] hover:bg-[var(--glass-bg)]"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-					<ChevronRight
-						className={cn(
-							"w-4 h-4 text-[var(--text-secondary)] transition-transform duration-200",
-							activeSubmenu === item.id && "rotate-90",
-						)}
-					/>
-				)}
-			</button>
+              {/* Navigation Items */}
 
-			{/* Submenu */}
-			{item.children?.length && activeSubmenu === item.id && (
-
-				<div className="border-t border-[var(--glass-border)]">
-					{item.children.map((child) => renderNavItem(child, level + 1))}
-				</div>
-			)}
-		</div>
-	);
-
-	if (!isOpen) {
-
-		return <MenuTrigger />;
-	}
-
-	return (
-
-		<>
-
-			<MenuTrigger />
-			{"undefined" !== typeof window &&
-				createPortal(
-
-					<div className="fixed inset-0 z-50 md:hidden">
-						{/* Backdrop */}
-
-						<button
-							className="absolute inset-0 bg-black/20 backdrop-blur-sm"
-							onClick={() => setIsOpen(false)}
-							onKeyDown={(e) => {
-								if ("Enter" === e.key || " " === e.key) {
-									e.preventDefault();
-									setIsOpen(false);
-								}
-							}}
-							aria-label="Close navigation menu"
-						/>
-
-						{/* Navigation Panel */}
-
-						<div
-							className={cn(
-								"absolute right-0 top-0 h-full w-80 max-w-[85vw]",
-								getGlassClass("elevated"),
-								"border-l border-[var(--glass-border)]",
-								"animate-in slide-in-from-right duration-300",
-							)}
-						>
-							{/* Header */}
-
-							<div className="flex items-center justify-between p-4 border-b border-[var(--glass-border)]">
-
-								<h2 className="text-lg font-semibold text-[var(--text-primary)]">
-									Navigation
-								</h2>
-
-								<button
-									onClick={() => setIsOpen(false)}
-									className="p-2 rounded-lg hover:bg-[var(--glass-bg)] text-[var(--text-secondary)]"
-								>
-
-									<X className="w-5 h-5" />
-								</button>
-							</div>
-
-							{/* Navigation Items */}
-
-							<div className="flex flex-col overflow-y-auto h-[calc(100%-80px)]">
-								{items.map((item) => renderNavItem(item))}
-							</div>
-						</div>
-					</div>,
-					document.body,
-				)}
-		</>
-	);
+              <div className="flex h-[calc(100%-80px)] flex-col overflow-y-auto">
+                {items.map((item) => renderNavItem(item))}
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
+    </>
+  );
 };

@@ -42,8 +42,8 @@ interface ComponentMetric {
 interface PerformanceReport {
   url: string;
   timestamp: number;
-  webVitals: PerformanceMetric[];
-  componentMetrics: ComponentMetric[];
+  webVitals: Array<PerformanceMetric>;
+  componentMetrics: Array<ComponentMetric>;
   customMetrics: Record<string, number>;
   userAgent: string;
   connection?: {
@@ -61,8 +61,8 @@ class PerformanceMonitor {
   private metrics: Map<string, PerformanceMetric> = new Map();
   private componentMetrics: Map<string, ComponentMetric> = new Map();
   private customMetrics: Map<string, number> = new Map();
-  private observers: Map<string, PerformanceCallback[]> = new Map();
-  private reportCallbacks: ReportCallback[] = [];
+  private observers: Map<string, Array<PerformanceCallback>> = new Map();
+  private reportCallbacks: Array<ReportCallback> = [];
   private isInitialized = false;
   private performanceObserver?: PerformanceObserver;
 
@@ -195,7 +195,7 @@ class PerformanceMonitor {
     observer.observe({ entryTypes: ['longtask'] });
 
     // Estimate TTI after load
-    if ("undefined" !== typeof window) {
+    if ('undefined' !== typeof window) {
       window.addEventListener('load', () => {
         setTimeout(() => {
           if (0 === tti) {
@@ -203,20 +203,20 @@ class PerformanceMonitor {
           }
 
           this.handleMetric(
-          {
-            name: 'TTI',
-            value: tti,
-            id: `tti-${Date.now()}`,
-            navigationType: 'navigate',
-            rating: 'good',
-            delta: tti,
-            entries: [],
-          } as unknown as Metric,
-          'TTI' as MetricName
-        );
+            {
+              name: 'TTI',
+              value: tti,
+              id: `tti-${Date.now()}`,
+              navigationType: 'navigate',
+              rating: 'good',
+              delta: tti,
+              entries: [],
+            } as unknown as Metric,
+            'TTI' as MetricName
+          );
 
-        observer.disconnect();
-      }, 5000);
+          observer.disconnect();
+        }, 5000);
       });
     }
   }
@@ -338,7 +338,7 @@ class PerformanceMonitor {
    */
   getReport(): PerformanceReport {
     return {
-      url: "undefined" === typeof window ? '' : window.location.href,
+      url: 'undefined' === typeof window ? '' : window.location.href,
       timestamp: Date.now(),
       webVitals: [...this.metrics.values()],
       componentMetrics: [...this.componentMetrics.values()],
@@ -375,7 +375,7 @@ class PerformanceMonitor {
    */
   private setupPeriodicReporting(): void {
     // Send report on page visibility change
-    if ("undefined" !== typeof document) {
+    if ('undefined' !== typeof document) {
       document.addEventListener('visibilitychange', () => {
         if ('hidden' === document.visibilityState) {
           this.sendReport();
@@ -384,7 +384,7 @@ class PerformanceMonitor {
     }
 
     // Send report before unload
-    if ("undefined" !== typeof window) {
+    if ('undefined' !== typeof window) {
       window.addEventListener('beforeunload', () => {
         this.sendReport();
       });

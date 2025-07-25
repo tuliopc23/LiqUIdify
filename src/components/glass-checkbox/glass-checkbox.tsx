@@ -1,40 +1,40 @@
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-import { cn } from "@/core/utils/classname";
+import { cn } from '@/core/utils/classname';
 
 export interface GlassCheckboxProps
-	extends React.InputHTMLAttributes<HTMLInputElement> {
-	label?: string;
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
 }
 
 const GlassCheckbox = forwardRef<HTMLInputElement, GlassCheckboxProps>(
-	({ className, label, id, ...props }, ref) => {
-		const checkboxId =
-			id || `checkbox-${Math.random().toString(36).slice(2, 11)}`;
+  ({ className, label, id, ...props }, ref) => {
+    const checkboxId =
+      id || `checkbox-${Math.random().toString(36).slice(2, 11)}`;
 
-		return (
-			<label
-				className="flex items-center space-x-3 cursor-pointer"
-				htmlFor={checkboxId}
-			>
-				<input
-					type="checkbox"
-					id={checkboxId}
-					className={cn(
-						"w-5 h-5 rounded glass-effect border-2 border-glass focus:ring-2 focus:ring-primary transition-colors",
-						"checked:bg-primary checked:border-primary",
-						className,
-					)}
-					ref={ref}
-					{...(props as any)}
-				/>
+    return (
+      <label
+        className="flex cursor-pointer items-center space-x-3"
+        htmlFor={checkboxId}
+      >
+        <input
+          type="checkbox"
+          id={checkboxId}
+          className={cn(
+            'glass-effect h-5 w-5 rounded border-2 border-glass transition-colors focus:ring-2 focus:ring-primary',
+            'checked:border-primary checked:bg-primary',
+            className
+          )}
+          ref={ref}
+          {...(props as any)}
+        />
 
-				{label && <span className="text-primary">{label}</span>}
-			</label>
-		);
-	},
+        {label && <span className="text-primary">{label}</span>}
+      </label>
+    );
+  }
 );
 
-GlassCheckbox.displayName = "GlassCheckbox";
+GlassCheckbox.displayName = 'GlassCheckbox';
 
 export { GlassCheckbox };

@@ -9,22 +9,22 @@ import path from 'node:path';
 // CSS Bundle Configuration
 export interface CSSBundleConfig {
   core: {
-    files: string[];
+    files: Array<string>;
     maxSize: number; // KB
     critical: boolean;
   };
   animations: {
-    files: string[];
+    files: Array<string>;
     maxSize: number;
     lazyLoad: boolean;
   };
   utilities: {
-    files: string[];
+    files: Array<string>;
     maxSize: number;
     treeshake: boolean;
   };
   themes: {
-    files: string[];
+    files: Array<string>;
     maxSize: number;
     dynamic: boolean;
   };
@@ -65,11 +65,11 @@ export const DEFAULT_CSS_CONFIG: CSSBundleConfig = {
 export interface CriticalCSSOptions {
   html: string;
   css: string;
-  dimensions: {
+  dimensions: Array<{
     width: number;
     height: number;
-  }[];
-  ignore: string[];
+  }>;
+  ignore: Array<string>;
 }
 
 // Bundle size analyzer
@@ -90,7 +90,7 @@ export class CSSBundleAnalyzer {
       { size: number; maxSize: number; status: 'ok' | 'warning' | 'error' }
     >;
     totalSize: number;
-    recommendations: string[];
+    recommendations: Array<string>;
   }> {
     const results: any = { bundles: {}, totalSize: 0, recommendations: [] };
 
@@ -114,9 +114,9 @@ export class CSSBundleAnalyzer {
       const status =
         sizeKB <= bundleConfig.maxSize
           ? 'ok'
-          : (sizeKB <= bundleConfig.maxSize * 1.2
+          : sizeKB <= bundleConfig.maxSize * 1.2
             ? 'warning'
-            : 'error');
+            : 'error';
 
       results.bundles[bundleName] = {
         size: sizeKB,
@@ -160,8 +160,8 @@ export class CSSBundleAnalyzer {
     // For now, implementing a basic version
 
     const cssRules = this.parseCSSRules(options.css);
-    const criticalRules: string[] = [];
-    const remainingRules: string[] = [];
+    const criticalRules: Array<string> = [];
+    const remainingRules: Array<string> = [];
 
     // Analyze which rules are critical (above-the-fold)
     for (const rule of cssRules) {
@@ -201,7 +201,7 @@ export class CSSBundleAnalyzer {
       removeUnused: boolean;
       minify: boolean;
       autoprefixer: boolean;
-      purgeSelectors?: string[];
+      purgeSelectors?: Array<string>;
     }
   ): Promise<{
     optimized: string;
@@ -247,7 +247,7 @@ export class CSSBundleAnalyzer {
     timestamp: Date;
     bundles: any;
     totalSize: number;
-    recommendations: string[];
+    recommendations: Array<string>;
     status: 'pass' | 'warning' | 'fail';
   }> {
     const analysis = await this.analyzeBundles();
@@ -267,7 +267,7 @@ export class CSSBundleAnalyzer {
   }
 
   // Private helper methods
-  private parseCSSRules(css: string): string[] {
+  private parseCSSRules(css: string): Array<string> {
     // Simple CSS rule parser - in production, use a proper CSS parser
     return css
       .split('}')
@@ -306,7 +306,7 @@ export class CSSBundleAnalyzer {
     return criticalSelectors.some((critical) => selector?.includes(critical));
   }
 
-  private removeUnusedCSS(css: string, usedSelectors: string[]): string {
+  private removeUnusedCSS(css: string, usedSelectors: Array<string>): string {
     // Remove CSS rules that don't match any used selectors
     const rules = this.parseCSSRules(css);
     const usedRules = rules.filter((rule) => {
@@ -340,7 +340,7 @@ export class CSSBundleAnalyzer {
 
   private addVendorPrefixes(css: string): string {
     // Basic vendor prefix addition for common properties
-    const prefixMap: Record<string, string[]> = {
+    const prefixMap: Record<string, Array<string>> = {
       transform: ['-webkit-transform', '-moz-transform', '-ms-transform'],
       transition: ['-webkit-transition', '-moz-transition', '-ms-transition'],
       'backdrop-filter': ['-webkit-backdrop-filter'],

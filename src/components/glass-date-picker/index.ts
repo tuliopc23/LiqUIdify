@@ -1,5 +1,4 @@
 export {
-	GlassDatePicker,
-	type GlassDatePickerProps,
-
-} from "./glass-date-picker";
+  GlassDatePicker,
+  type GlassDatePickerProps,
+} from './glass-date-picker';

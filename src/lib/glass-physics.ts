@@ -29,7 +29,7 @@ export class Vector2D {
 
   // Static helper methods for backward compatibility
   static distance(a: Vector2D, b: Vector2D): number {
-    return Math.hypot((b.x - a.x), (b.y - a.y));
+    return Math.hypot(b.x - a.x, b.y - a.y);
   }
 
   static normalize(vector: Vector2D): Vector2D {
@@ -333,9 +333,7 @@ export const useMagneticHover = (
         const mouseX = e.clientX;
         const mouseY = e.clientY;
 
-        const distance = Math.hypot(
-          (mouseX - centerX), (mouseY - centerY)
-        );
+        const distance = Math.hypot(mouseX - centerX, mouseY - centerY);
 
         if (distance < radius) {
           const force = Math.max(0, 1 - distance / radius);
@@ -402,10 +400,10 @@ export const useMagneticHover = (
 
 // Repulsion effect between elements
 export const useRepulsionEffect = (
-  elements: HTMLElement[],
+  elements: Array<HTMLElement>,
   repulsionStrength: number = 50
 ) => {
-  const [positions, setPositions] = useState<Vector2D[]>([]);
+  const [positions, setPositions] = useState<Array<Vector2D>>([]);
 
   useEffect(() => {
     if (elements.length === 0) {
@@ -435,7 +433,8 @@ export const useRepulsionEffect = (
           const otherCenterY = otherRect.top + otherRect.height / 2;
 
           const distance = Math.hypot(
-            (centerX - otherCenterX), (centerY - otherCenterY)
+            centerX - otherCenterX,
+            centerY - otherCenterY
           );
 
           if (distance < PHYSICS_CONSTANTS.REPULSION_DISTANCE && 0 < distance) {
@@ -592,7 +591,7 @@ export class FluidParticle {
 
 // Simplified fluid simulation
 export class FluidSimulation {
-  private particles: FluidParticle[] = [];
+  private particles: Array<FluidParticle> = [];
   private config: FluidConfig;
   private smoothingRadius: number;
   private restDensity: number;
@@ -618,7 +617,7 @@ export class FluidSimulation {
     }
   }
 
-  update(deltaTime: number, forces: Vector2D[] = []) {
+  update(deltaTime: number, forces: Array<Vector2D> = []) {
     try {
       // Calculate densities and pressures
       this.calculateDensityPressure();
@@ -683,7 +682,7 @@ export class FluidSimulation {
     }
   }
 
-  private calculatePressureForces(forces: Vector2D[]) {
+  private calculatePressureForces(forces: Array<Vector2D>) {
     for (const [index, particle] of this.particles.entries()) {
       const force = new Vector2D();
 
@@ -712,7 +711,7 @@ export class FluidSimulation {
     }
   }
 
-  private calculateViscosityForces(forces: Vector2D[]) {
+  private calculateViscosityForces(forces: Array<Vector2D>) {
     const viscosity = this.config.viscosity;
 
     for (const [index, particle] of this.particles.entries()) {
@@ -787,7 +786,7 @@ export class FluidSimulation {
     // Add max bounds based on container
   }
 
-  getParticles(): FluidParticle[] {
+  getParticles(): Array<FluidParticle> {
     return this.particles;
   }
 }
@@ -864,9 +863,9 @@ export interface EmitterConfig {
 // Particle emitter
 export class ParticleEmitter {
   private config: EmitterConfig;
-  private particles: Particle[] = [];
+  private particles: Array<Particle> = [];
   private emitAccumulator: number = 0;
-  private forces: Vector2D[] = [];
+  private forces: Array<Vector2D> = [];
 
   constructor(config: EmitterConfig) {
     this.config = config;
@@ -889,7 +888,9 @@ export class ParticleEmitter {
           particle.acceleration = new Vector2D();
 
           // Apply forces
-          for (const force of this.forces) {particle.applyForce(force);}
+          for (const force of this.forces) {
+            particle.applyForce(force);
+          }
 
           // Update particle
           particle.update(deltaTime);
@@ -946,7 +947,7 @@ export class ParticleEmitter {
     }
   }
 
-  getParticles(): Particle[] {
+  getParticles(): Array<Particle> {
     return this.particles;
   }
 
@@ -1024,7 +1025,7 @@ export class PhysicsWorld {
       this.lastTime = currentTime;
 
       // Update all systems with error handling
-      for (const [id, emitter] of this.emitters.entries()) {
+      for (const [_id, emitter] of this.emitters.entries()) {
         try {
           emitter.addForce(this.gravity);
           emitter.addForce(this.wind);
@@ -1036,7 +1037,7 @@ export class PhysicsWorld {
         }
       }
 
-      for (const [id, fluid] of this.fluids.entries()) {
+      for (const [_id, fluid] of this.fluids.entries()) {
         try {
           fluid.update(deltaTime, [this.gravity, this.wind]);
         } catch {

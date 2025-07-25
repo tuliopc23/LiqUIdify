@@ -85,7 +85,9 @@ export function createCompoundComponent<
   const Component = shouldForwardRef
     ? forwardRef<T, ComponentProps>(
         ({ className, asChild: asChildProperty, children, ...props }, ref) => {
-          const Comp = (asChildProperty && asChild ? Slot : defaultElement) as any;
+          const Comp = (
+            asChildProperty && asChild ? Slot : defaultElement
+          ) as any;
 
           const mergedProps = useMemo(
             () => ({
@@ -97,7 +99,6 @@ export function createCompoundComponent<
           );
 
           return (
-
             <Comp ref={ref} {...mergedProps}>
               {children}
             </Comp>
@@ -110,7 +111,9 @@ export function createCompoundComponent<
         children,
         ...props
       }: ComponentProps) => {
-        const Comp = (asChildProperty && asChild ? Slot : defaultElement) as any;
+        const Comp = (
+          asChildProperty && asChild ? Slot : defaultElement
+        ) as any;
 
         const mergedProps = useMemo(
           () => ({
@@ -221,7 +224,6 @@ export function createPolymorphicCompoundComponent<
       );
 
       return (
-
         <Comp ref={ref} {...mergedProps}>
           {children}
         </Comp>

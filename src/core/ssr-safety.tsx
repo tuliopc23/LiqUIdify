@@ -35,7 +35,6 @@ export function ClientOnly({
   const isClient = useIsClient();
 
   if (!isClient) {
-
     return <>{fallback}</>;
   }
 
@@ -61,7 +60,6 @@ export function SSRSafe({
 
   if (!isClient) {
     return fallback ? (
-
       <Component {...(props as any)}>{fallback}</Component>
     ) : undefined;
   }
@@ -73,7 +71,9 @@ export function SSRSafe({
  * Hook for SSR-safe access to window and document objects
  */
 export function useSSRSafeWindow() {
-  const [windowObject, setWindowObject] = useState<Window | undefined | null>(undefined);
+  const [windowObject, setWindowObject] = useState<Window | undefined | null>(
+    undefined
+  );
 
   useEffect(() => {
     if ('undefined' !== typeof window) {
@@ -105,6 +105,11 @@ export function useSSRSafeLocalStorage() {
 export const isBrowser = (): boolean => {
   return 'undefined' !== typeof window && 'undefined' !== typeof document;
 };
+
+/**
+ * Alias for isBrowser for backward compatibility
+ */
+export const isClient = isBrowser;
 
 /**
  * Utility function to safely access browser APIs

@@ -6,19 +6,17 @@
  */
 
 export type {
-	GlassAnimation,
-	GlassEffectConfig,
-	GlassIntensity,
-	GlassVariant,
-	UnifiedGlassProps,
-
-} from "./unified-glass-system";
+  GlassAnimation,
+  GlassEffectConfig,
+  GlassIntensity,
+  GlassVariant,
+  UnifiedGlassProps,
+} from './unified-glass-system';
 // Default export
 export {
-	AppleLiquidGlass,
-	createGlassEffect,
-	default,
-	EnhancedAppleLiquidGlass,
-	useUnifiedGlass,
-
-} from "./unified-glass-system";
+  AppleLiquidGlass,
+  createGlassEffect,
+  default,
+  EnhancedAppleLiquidGlass,
+  useUnifiedGlass,
+} from './unified-glass-system';

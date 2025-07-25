@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -12,9 +12,6 @@
     "indentWidth": 2,
     "lineWidth": 80,
     "lineEnding": "lf"
-  },
-  "organizeImports": {
-    "enabled": true
   },
   "linter": {
     "enabled": true,
@@ -48,7 +45,7 @@
       },
       "performance": {
         "noAccumulatingSpread": "error",
-        "noBarrelFile": "warn"
+        "noBarrelFile": "off"
       },
       "nursery": {
         "useSortedClasses": {
@@ -102,23 +99,23 @@
     ]
   },
   "files": {
-    "include": ["src/**/*.ts", "src/**/*.tsx", "*.config.ts", "*.config.js"],
-    "ignore": [
-      "**/node_modules",
-      "**/dist",
-      "**/build",
-      "**/.next",
-      "**/coverage",
-      "**/*.min.js",
-      "**/generated",
-      "**/.turbo",
-      "**/.vercel",
-      "**/storybook-static"
+    "includes": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "*.config.ts",
+      "*.config.js",
+      "vite.config.ts",
+      "scripts/**/*.ts"
     ]
   },
   "overrides": [
     {
-      "include": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
+      "includes": [
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/*.spec.ts",
+        "**/*.spec.tsx"
+      ],
       "linter": {
         "rules": {
           "suspicious": {
@@ -128,11 +125,21 @@
       }
     },
     {
-      "include": ["**/*.stories.tsx"],
+      "includes": ["**/*.stories.tsx"],
       "linter": {
         "rules": {
           "correctness": {
             "useExhaustiveDependencies": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["scripts/**/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
           }
         }
       }

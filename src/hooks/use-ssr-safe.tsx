@@ -96,7 +96,7 @@ export const useMediaQuery = (query: string): boolean => {
       return () => mediaQuery.removeEventListener('change', handleChange);
     }
     // Legacy browsers
-    else if (mediaQuery.addListener) {
+    if (mediaQuery.addListener) {
       mediaQuery.addListener(handleChange);
       return () => mediaQuery.removeListener(handleChange);
     }
@@ -295,11 +295,17 @@ export const useUserPreferences = () => {
     const darkQuery = win.matchMedia('(prefers-color-scheme: dark)');
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
-      setPreferences((previous) => ({ ...previous, prefersReducedMotion: e.matches }));
+      setPreferences((previous) => ({
+        ...previous,
+        prefersReducedMotion: e.matches,
+      }));
     };
 
     const handleDarkChange = (e: MediaQueryListEvent) => {
-      setPreferences((previous) => ({ ...previous, prefersDarkScheme: e.matches }));
+      setPreferences((previous) => ({
+        ...previous,
+        prefersDarkScheme: e.matches,
+      }));
     };
 
     // Modern browsers
@@ -312,7 +318,7 @@ export const useUserPreferences = () => {
       };
     }
     // Legacy browsers
-    else if (motionQuery.addListener) {
+    if (motionQuery.addListener) {
       motionQuery.addListener(handleMotionChange);
       darkQuery.addListener(handleDarkChange);
       return () => {

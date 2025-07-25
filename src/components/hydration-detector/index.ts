@@ -3,10 +3,9 @@
  */
 
 export {
-	HydrationBoundary,
-	HydrationDetector,
-	HydrationMetrics,
-	HydrationRecovery,
-	HydrationSafe,
-
-} from "./hydration-detector";
+  HydrationBoundary,
+  HydrationDetector,
+  HydrationMetrics,
+  HydrationRecovery,
+  HydrationSafe,
+} from './hydration-detector';

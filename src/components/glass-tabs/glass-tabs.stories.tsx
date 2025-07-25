@@ -1,24 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
-import { GlassTabs, GlassTabItem } from "./glass-tabs";
-import { 
-  User, 
-  Settings, 
-  Bell, 
-  Shield, 
-  CreditCard,
-  Globe,
+import type { Meta, StoryObj } from '@storybook/react';
+import {
+  Bell,
   Code,
-  Palette,
+  CreditCard,
   Database,
-  Terminal
-} from "lucide-react";
+  Shield,
+  Terminal,
+  User,
+} from 'lucide-react';
+import { useState } from 'react';
+import { type GlassTabItem, GlassTabs } from './glass-tabs';
 
 const meta = {
-  title: "Glass UI/GlassTabs",
+  title: 'Glass UI/GlassTabs',
   component: GlassTabs,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component: `
@@ -65,44 +62,44 @@ function MyComponent() {
       },
     },
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     tabs: {
-      control: "object",
-      description: "Array of tab items",
+      control: 'object',
+      description: 'Array of tab items',
     },
     defaultTab: {
-      control: "text",
-      description: "ID of the default active tab",
+      control: 'text',
+      description: 'ID of the default active tab',
     },
     className: {
-      control: "text",
-      description: "Additional CSS classes for container",
+      control: 'text',
+      description: 'Additional CSS classes for container',
     },
     tabListClassName: {
-      control: "text",
-      description: "Additional CSS classes for tab list",
+      control: 'text',
+      description: 'Additional CSS classes for tab list',
     },
     tabButtonClassName: {
-      control: "text",
-      description: "Additional CSS classes for tab buttons",
+      control: 'text',
+      description: 'Additional CSS classes for tab buttons',
     },
     activeTabButtonClassName: {
-      control: "text",
-      description: "CSS classes for active tab button",
+      control: 'text',
+      description: 'CSS classes for active tab button',
     },
     inactiveTabButtonClassName: {
-      control: "text",
-      description: "CSS classes for inactive tab buttons",
+      control: 'text',
+      description: 'CSS classes for inactive tab buttons',
     },
     tabPanelClassName: {
-      control: "text",
-      description: "Additional CSS classes for tab panels",
+      control: 'text',
+      description: 'Additional CSS classes for tab panels',
     },
     orientation: {
-      control: "select",
-      options: ["horizontal", "vertical"],
-      description: "Tab orientation (future enhancement)",
+      control: 'select',
+      options: ['horizontal', 'vertical'],
+      description: 'Tab orientation (future enhancement)',
     },
   },
 } satisfies Meta<typeof GlassTabs>;
@@ -111,25 +108,30 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Basic tabs for examples
-const basicTabs: GlassTabItem[] = [
+const basicTabs: Array<GlassTabItem> = [
   {
-    id: "overview",
-    label: "Overview",
+    id: 'overview',
+    label: 'Overview',
     content: (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Overview</h3>
+        <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+          Overview
+        </h3>
         <p className="text-gray-600 dark:text-gray-400">
-          This is the overview tab content. It provides a general introduction to the topic at hand.
+          This is the overview tab content. It provides a general introduction
+          to the topic at hand.
         </p>
       </div>
     ),
   },
   {
-    id: "details",
-    label: "Details",
+    id: 'details',
+    label: 'Details',
     content: (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Details</h3>
+        <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+          Details
+        </h3>
         <p className="text-gray-600 dark:text-gray-400">
           This tab contains more detailed information about the subject matter.
         </p>
@@ -137,11 +139,13 @@ const basicTabs: GlassTabItem[] = [
     ),
   },
   {
-    id: "resources",
-    label: "Resources",
+    id: 'resources',
+    label: 'Resources',
     content: (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Resources</h3>
+        <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+          Resources
+        </h3>
         <p className="text-gray-600 dark:text-gray-400">
           Find additional resources and documentation here.
         </p>
@@ -161,7 +165,7 @@ export const Default: Story = {
 export const WithDefaultTab: Story = {
   args: {
     tabs: basicTabs,
-    defaultTab: "details",
+    defaultTab: 'details',
   },
 };
 
@@ -170,16 +174,18 @@ export const WithIcons: Story = {
   args: {
     tabs: [
       {
-        id: "profile",
+        id: 'profile',
         label: (
           <span className="flex items-center gap-2">
-            <User className="w-4 h-4" />
+            <User className="h-4 w-4" />
             Profile
           </span>
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Profile Settings</h3>
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              Profile Settings
+            </h3>
             <p className="text-gray-600 dark:text-gray-400">
               Manage your personal information and profile settings.
             </p>
@@ -187,16 +193,18 @@ export const WithIcons: Story = {
         ),
       },
       {
-        id: "notifications",
+        id: 'notifications',
         label: (
           <span className="flex items-center gap-2">
-            <Bell className="w-4 h-4" />
+            <Bell className="h-4 w-4" />
             Notifications
           </span>
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Notification Preferences</h3>
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              Notification Preferences
+            </h3>
             <p className="text-gray-600 dark:text-gray-400">
               Configure how and when you receive notifications.
             </p>
@@ -204,16 +212,18 @@ export const WithIcons: Story = {
         ),
       },
       {
-        id: "security",
+        id: 'security',
         label: (
           <span className="flex items-center gap-2">
-            <Shield className="w-4 h-4" />
+            <Shield className="h-4 w-4" />
             Security
           </span>
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Security Settings</h3>
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              Security Settings
+            </h3>
             <p className="text-gray-600 dark:text-gray-400">
               Manage your account security and privacy settings.
             </p>
@@ -229,24 +239,24 @@ export const WithDisabledTabs: Story = {
   args: {
     tabs: [
       {
-        id: "active1",
-        label: "Active Tab 1",
+        id: 'active1',
+        label: 'Active Tab 1',
         content: <div>This tab is active and clickable.</div>,
       },
       {
-        id: "disabled1",
-        label: "Disabled Tab",
+        id: 'disabled1',
+        label: 'Disabled Tab',
         content: <div>This content is not accessible.</div>,
         disabled: true,
       },
       {
-        id: "active2",
-        label: "Active Tab 2",
+        id: 'active2',
+        label: 'Active Tab 2',
         content: <div>Another active tab.</div>,
       },
       {
-        id: "disabled2",
-        label: "Another Disabled",
+        id: 'disabled2',
+        label: 'Another Disabled',
         content: <div>This content is also not accessible.</div>,
         disabled: true,
       },
@@ -257,32 +267,34 @@ export const WithDisabledTabs: Story = {
 // Interactive Demo
 export const InteractiveDemo: Story = {
   render: () => {
-    const [activeSection, setActiveSection] = useState<string>("");
-    
-    const demoTabs: GlassTabItem[] = [
+    const [_activeSection, _setActiveSection] = useState<string>('');
+
+    const demoTabs: Array<GlassTabItem> = [
       {
-        id: "frontend",
+        id: 'frontend',
         label: (
           <span className="flex items-center gap-2">
-            <Code className="w-4 h-4" />
+            <Code className="h-4 w-4" />
             Frontend
           </span>
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Frontend Technologies</h3>
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              Frontend Technologies
+            </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <h4 className="font-medium mb-2">Frameworks</h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+              <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                <h4 className="mb-2 font-medium">Frameworks</h4>
+                <ul className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
                   <li>• React</li>
                   <li>• Vue.js</li>
                   <li>• Angular</li>
                 </ul>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <h4 className="font-medium mb-2">Tools</h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+              <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                <h4 className="mb-2 font-medium">Tools</h4>
+                <ul className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
                   <li>• Webpack</li>
                   <li>• Vite</li>
                   <li>• TypeScript</li>
@@ -293,28 +305,30 @@ export const InteractiveDemo: Story = {
         ),
       },
       {
-        id: "backend",
+        id: 'backend',
         label: (
           <span className="flex items-center gap-2">
-            <Database className="w-4 h-4" />
+            <Database className="h-4 w-4" />
             Backend
           </span>
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Backend Technologies</h3>
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              Backend Technologies
+            </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <h4 className="font-medium mb-2">Languages</h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+              <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                <h4 className="mb-2 font-medium">Languages</h4>
+                <ul className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
                   <li>• Node.js</li>
                   <li>• Python</li>
                   <li>• Go</li>
                 </ul>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <h4 className="font-medium mb-2">Databases</h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+              <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                <h4 className="mb-2 font-medium">Databases</h4>
+                <ul className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
                   <li>• PostgreSQL</li>
                   <li>• MongoDB</li>
                   <li>• Redis</li>
@@ -325,28 +339,30 @@ export const InteractiveDemo: Story = {
         ),
       },
       {
-        id: "devops",
+        id: 'devops',
         label: (
           <span className="flex items-center gap-2">
-            <Terminal className="w-4 h-4" />
+            <Terminal className="h-4 w-4" />
             DevOps
           </span>
         ),
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">DevOps & Infrastructure</h3>
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              DevOps & Infrastructure
+            </h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <h4 className="font-medium mb-2">CI/CD</h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+              <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                <h4 className="mb-2 font-medium">CI/CD</h4>
+                <ul className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
                   <li>• GitHub Actions</li>
                   <li>• Jenkins</li>
                   <li>• GitLab CI</li>
                 </ul>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <h4 className="font-medium mb-2">Cloud</h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+              <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                <h4 className="mb-2 font-medium">Cloud</h4>
+                <ul className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
                   <li>• AWS</li>
                   <li>• Google Cloud</li>
                   <li>• Azure</li>
@@ -357,7 +373,7 @@ export const InteractiveDemo: Story = {
         ),
       },
     ];
-    
+
     return (
       <div className="w-[600px]">
         <GlassTabs tabs={demoTabs} />
@@ -369,34 +385,34 @@ export const InteractiveDemo: Story = {
 // Settings Example
 export const SettingsExample: Story = {
   render: () => {
-    const settingsTabs: GlassTabItem[] = [
+    const settingsTabs: Array<GlassTabItem> = [
       {
-        id: "account",
-        label: "Account",
+        id: 'account',
+        label: 'Account',
         content: (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
                 Account Settings
               </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
                     Username
                   </label>
                   <input
                     type="text"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-2 dark:border-gray-600"
                     placeholder="john_doe"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
                     Email
                   </label>
                   <input
                     type="email"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                    className="w-full rounded-lg border border-gray-300 px-4 py-2 dark:border-gray-600"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -406,11 +422,11 @@ export const SettingsExample: Story = {
         ),
       },
       {
-        id: "privacy",
-        label: "Privacy",
+        id: 'privacy',
+        label: 'Privacy',
         content: (
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
               Privacy Settings
             </h3>
             <div className="space-y-4">
@@ -431,30 +447,30 @@ export const SettingsExample: Story = {
         ),
       },
       {
-        id: "billing",
-        label: "Billing",
+        id: 'billing',
+        label: 'Billing',
         content: (
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
               Billing Information
             </h3>
-            <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <div className="flex items-center gap-3 mb-2">
-                <CreditCard className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
+              <div className="mb-2 flex items-center gap-3">
+                <CreditCard className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 <span className="font-medium">Current Plan: Pro</span>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-gray-600 text-sm dark:text-gray-400">
                 $19/month • Renews on Jan 15, 2025
               </p>
             </div>
-            <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+            <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
               Manage Subscription
             </button>
           </div>
         ),
       },
     ];
-    
+
     return (
       <div className="w-[500px]">
         <GlassTabs tabs={settingsTabs} />
@@ -466,32 +482,34 @@ export const SettingsExample: Story = {
 // Documentation Example
 export const DocumentationExample: Story = {
   render: () => {
-    const docsTabs: GlassTabItem[] = [
+    const docsTabs: Array<GlassTabItem> = [
       {
-        id: "installation",
-        label: "Installation",
+        id: 'installation',
+        label: 'Installation',
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Installation</h3>
-            <div className="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm">
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              Installation
+            </h3>
+            <div className="rounded-lg bg-gray-900 p-4 font-mono text-gray-100 text-sm">
               npm install glass-ui-components
             </div>
-            <p className="text-gray-600 dark:text-gray-400">
-              Or using yarn:
-            </p>
-            <div className="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm">
+            <p className="text-gray-600 dark:text-gray-400">Or using yarn:</p>
+            <div className="rounded-lg bg-gray-900 p-4 font-mono text-gray-100 text-sm">
               yarn add glass-ui-components
             </div>
           </div>
         ),
       },
       {
-        id: "usage",
-        label: "Usage",
+        id: 'usage',
+        label: 'Usage',
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Basic Usage</h3>
-            <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              Basic Usage
+            </h3>
+            <pre className="overflow-x-auto rounded-lg bg-gray-900 p-4 text-gray-100">
               <code>{`import { GlassTabs } from 'glass-ui-components';
 
 const tabs = [
@@ -505,17 +523,19 @@ const tabs = [
         ),
       },
       {
-        id: "api",
-        label: "API",
+        id: 'api',
+        label: 'API',
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">API Reference</h3>
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
+              API Reference
+            </h3>
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-2">Prop</th>
-                  <th className="text-left py-2">Type</th>
-                  <th className="text-left py-2">Default</th>
+                  <th className="py-2 text-left">Prop</th>
+                  <th className="py-2 text-left">Type</th>
+                  <th className="py-2 text-left">Default</th>
                 </tr>
               </thead>
               <tbody className="text-gray-600 dark:text-gray-400">
@@ -540,7 +560,7 @@ const tabs = [
         ),
       },
     ];
-    
+
     return (
       <div className="w-[600px]">
         <GlassTabs tabs={docsTabs} />
@@ -554,86 +574,109 @@ export const CustomStyling: Story = {
   args: {
     tabs: [
       {
-        id: "custom1",
-        label: "Custom Tab 1",
+        id: 'custom1',
+        label: 'Custom Tab 1',
         content: <div>Custom styled content 1</div>,
       },
       {
-        id: "custom2",
-        label: "Custom Tab 2",
+        id: 'custom2',
+        label: 'Custom Tab 2',
         content: <div>Custom styled content 2</div>,
       },
       {
-        id: "custom3",
-        label: "Custom Tab 3",
+        id: 'custom3',
+        label: 'Custom Tab 3',
         content: <div>Custom styled content 3</div>,
       },
     ],
-    tabListClassName: "bg-gradient-to-r from-purple-500/20 to-blue-500/20",
-    activeTabButtonClassName: "bg-gradient-to-r from-purple-500 to-blue-500 text-white",
-    inactiveTabButtonClassName: "text-gray-600 hover:text-purple-600",
+    tabListClassName: 'bg-gradient-to-r from-purple-500/20 to-blue-500/20',
+    activeTabButtonClassName:
+      'bg-gradient-to-r from-purple-500 to-blue-500 text-white',
+    inactiveTabButtonClassName: 'text-gray-600 hover:text-purple-600',
   },
 };
 
 // Accessibility Demo
 export const AccessibilityDemo: Story = {
   render: () => {
-    const accessibilityTabs: GlassTabItem[] = [
+    const accessibilityTabs: Array<GlassTabItem> = [
       {
-        id: "keyboard",
-        label: "Keyboard Nav",
+        id: 'keyboard',
+        label: 'Keyboard Nav',
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
               Keyboard Navigation
             </h3>
-            <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <h4 className="font-medium mb-2">Available Shortcuts:</h4>
+            <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
+              <h4 className="mb-2 font-medium">Available Shortcuts:</h4>
               <ul className="space-y-2 text-sm">
-                <li>• <kbd>Tab</kbd> - Move focus to tab list</li>
-                <li>• <kbd>←</kbd> <kbd>→</kbd> - Navigate between tabs</li>
-                <li>• <kbd>Home</kbd> - Go to first tab</li>
-                <li>• <kbd>End</kbd> - Go to last tab</li>
-                <li>• <kbd>Space</kbd> or <kbd>Enter</kbd> - Activate tab</li>
+                <li>
+                  • <kbd>Tab</kbd> - Move focus to tab list
+                </li>
+                <li>
+                  • <kbd>←</kbd> <kbd>→</kbd> - Navigate between tabs
+                </li>
+                <li>
+                  • <kbd>Home</kbd> - Go to first tab
+                </li>
+                <li>
+                  • <kbd>End</kbd> - Go to last tab
+                </li>
+                <li>
+                  • <kbd>Space</kbd> or <kbd>Enter</kbd> - Activate tab
+                </li>
               </ul>
             </div>
           </div>
         ),
       },
       {
-        id: "aria",
-        label: "ARIA Support",
+        id: 'aria',
+        label: 'ARIA Support',
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
               ARIA Attributes
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
               This component includes comprehensive ARIA support:
             </p>
-            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <li>• <code>role="tablist"</code> on tab container</li>
-              <li>• <code>role="tab"</code> on each tab button</li>
-              <li>• <code>role="tabpanel"</code> on content panels</li>
-              <li>• <code>aria-selected</code> indicates active tab</li>
-              <li>• <code>aria-controls</code> links tabs to panels</li>
-              <li>• <code>aria-labelledby</code> links panels to tabs</li>
+            <ul className="space-y-2 text-gray-600 text-sm dark:text-gray-400">
+              <li>
+                • <code>role="tablist"</code> on tab container
+              </li>
+              <li>
+                • <code>role="tab"</code> on each tab button
+              </li>
+              <li>
+                • <code>role="tabpanel"</code> on content panels
+              </li>
+              <li>
+                • <code>aria-selected</code> indicates active tab
+              </li>
+              <li>
+                • <code>aria-controls</code> links tabs to panels
+              </li>
+              <li>
+                • <code>aria-labelledby</code> links panels to tabs
+              </li>
             </ul>
           </div>
         ),
       },
       {
-        id: "screen-reader",
-        label: "Screen Readers",
+        id: 'screen-reader',
+        label: 'Screen Readers',
         content: (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
               Screen Reader Support
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
               The component is fully compatible with screen readers:
             </p>
-            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+            <ul className="space-y-2 text-gray-600 text-sm dark:text-gray-400">
               <li>• Tab count is announced</li>
               <li>• Active tab state is communicated</li>
               <li>• Tab panel changes are announced</li>
@@ -643,7 +686,7 @@ export const AccessibilityDemo: Story = {
         ),
       },
     ];
-    
+
     return (
       <div className="w-[500px]">
         <GlassTabs tabs={accessibilityTabs} />

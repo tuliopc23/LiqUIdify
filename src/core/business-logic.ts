@@ -32,7 +32,7 @@ export type Reducer<S, A> = (state: S, action: A) => S;
 export type EventHandlerFactory<
   T extends HTMLElement,
   E extends Event = Event,
-> = (...arguments_: any[]) => (event: E & { currentTarget: T }) => void;
+> = (...arguments_: Array<any>) => (event: E & { currentTarget: T }) => void;
 
 /**
  * Create a business logic hook for component state management
@@ -40,7 +40,7 @@ export type EventHandlerFactory<
 export function createBusinessLogicHook<
   TState,
   TProps,
-  TActions extends Record<string, (...arguments_: any[]) => any>,
+  TActions extends Record<string, (...arguments_: Array<any>) => any>,
 >(
   initialStateFactory: (props: TProps) => TState,
   actionsFactory: (
@@ -119,7 +119,9 @@ export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
       handler: (
         event: E & { currentTarget: TElement },
         state: TState,
-        setState: (newState: TState | ((previousState: TState) => TState)) => void,
+        setState: (
+          newState: TState | ((previousState: TState) => TState)
+        ) => void,
         props: TProps
       ) => void
     ): EventHandlerFactory<TElement, E> => {
@@ -282,8 +284,8 @@ export function createFormBusinessLogic<T extends Record<string, any>>(
  * Table/List business logic utilities
  */
 export interface TableState<T = any> {
-  items: T[];
-  selectedItems: T[];
+  items: Array<T>;
+  selectedItems: Array<T>;
   sortBy: string | null;
   sortDirection: 'asc' | 'desc';
   filterBy: string;
@@ -294,7 +296,7 @@ export interface TableState<T = any> {
 }
 
 export interface TableActions<T = any> {
-  setItems: (items: T[]) => void;
+  setItems: (items: Array<T>) => void;
   selectItem: (item: T) => void;
   selectAll: () => void;
   deselectAll: () => void;
@@ -305,7 +307,7 @@ export interface TableActions<T = any> {
 }
 
 export function createTableBusinessLogic<T extends Record<string, any>>(
-  initialItems: T[] = [],
+  initialItems: Array<T> = [],
   itemsPerPage: number = 10
 ): BusinessLogicHook<{ state: TableState<T>; actions: TableActions<T> }, {}> {
   return () => {
@@ -324,7 +326,7 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
 
     const actions = useMemo(
       (): TableActions<T> => ({
-        setItems: (items: T[]) => {
+        setItems: (items: Array<T>) => {
           setState((previous) => ({
             ...previous,
             items,

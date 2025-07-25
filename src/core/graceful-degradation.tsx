@@ -94,7 +94,6 @@ export function withAnimationFallback(
     // Use static fallback if animations should be disabled
     if (prefersReducedMotion || !shouldAnimate) {
       return (
-
         <div className="animation-fallback">
           {staticFallback || animatedComponent}
         </div>
@@ -113,7 +112,6 @@ export function withNetworkFallback(
   options: Partial<NetworkFallbackOptions> = {}
 ) {
   const {
-
     offlineMessage = <div>You're offline. Some features may not work.</div>,
     slowConnectionFallback = undefined,
     retryButton = true,
@@ -140,7 +138,7 @@ export function withNetworkFallback(
       updateOnlineStatus();
       updateConnectionSpeed();
 
-      if ("undefined" !== typeof window) {
+      if ('undefined' !== typeof window) {
         window.addEventListener('online', updateOnlineStatus);
         window.addEventListener('offline', updateOnlineStatus);
       }
@@ -151,7 +149,7 @@ export function withNetworkFallback(
       }
 
       return () => {
-        if ("undefined" !== typeof window) {
+        if ('undefined' !== typeof window) {
           window.removeEventListener('online', updateOnlineStatus);
           window.removeEventListener('offline', updateOnlineStatus);
         }
@@ -164,7 +162,7 @@ export function withNetworkFallback(
 
     const handleRetry = () => {
       setRetryCount((previous) => previous + 1);
-      if ("undefined" !== typeof window) {
+      if ('undefined' !== typeof window) {
         window.location.reload();
       }
     };
@@ -172,11 +170,9 @@ export function withNetworkFallback(
     // Offline fallback
     if (!isOnline) {
       return (
-
         <div className="network-fallback network-fallback--offline">
           {offlineMessage}
           {retryButton && (
-
             <button onClick={handleRetry} className="retry-button">
               Retry({retryCount})
             </button>
@@ -188,7 +184,6 @@ export function withNetworkFallback(
     // Slow connection fallback
     if ('slow-2g' === connectionSpeed || '2g' === connectionSpeed) {
       return (
-
         <div className="network-fallback network-fallback--slow">
           {slowConnectionFallback || component}
         </div>
@@ -203,7 +198,7 @@ export function withNetworkFallback(
  * Feature Detection Fallback
  */
 export function withFeatureDetection(
-  feature: string | string[],
+  feature: string | Array<string>,
   enhancedComponent: ReactNode,
   fallbackComponent: ReactNode
 ) {
@@ -248,7 +243,10 @@ export function withFeatureDetection(
           case 'webp': {
             return new Promise<boolean>((resolve) => {
               const webP = new Image();
-              webP.addEventListener('load', webP.onerror = () => resolve(2 === webP.height));
+              webP.addEventListener(
+                'load',
+                (webP.onerror = () => resolve(2 === webP.height))
+              );
               webP.src =
                 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
             });
@@ -277,13 +275,10 @@ export function withFeatureDetection(
 export function withCSSFallback(
   jsComponent: ReactNode,
   cssComponent: ReactNode,
-  delay: number = 100
+  _delay: number = 100
 ) {
   return function CSSFallbackWrapper() {
-    return (
-
-      <ClientOnly fallback={cssComponent}>{jsComponent}</ClientOnly>
-    );
+    return <ClientOnly fallback={cssComponent}>{jsComponent}</ClientOnly>;
   };
 }
 
@@ -297,7 +292,7 @@ export interface ProgressiveEnhancementLevel {
 }
 
 export function withProgressiveEnhancement(
-  levels: ProgressiveEnhancementLevel[]
+  levels: Array<ProgressiveEnhancementLevel>
 ) {
   return function ProgressiveEnhancementWrapper() {
     const [currentLevel, setCurrentLevel] = useState(0);
@@ -310,7 +305,6 @@ export function withProgressiveEnhancement(
           break;
         }
       }
-
     }, [levels.length, levels[i]?.condition]);
 
     return <>{levels[currentLevel]?.component || levels[0]?.component}</>;
@@ -332,7 +326,7 @@ export function withDeviceFallback(
 
     useEffect(() => {
       const checkDeviceType = () => {
-        const width = "undefined" === typeof window ? 1024 : window.innerWidth;
+        const width = 'undefined' === typeof window ? 1024 : window.innerWidth;
         const isTouchDevice = 'ontouchstart' in window;
 
         if (768 > width) {
@@ -345,12 +339,12 @@ export function withDeviceFallback(
       };
 
       checkDeviceType();
-      if ("undefined" !== typeof window) {
+      if ('undefined' !== typeof window) {
         window.addEventListener('resize', checkDeviceType);
       }
 
       return () => {
-        if ("undefined" !== typeof window) {
+        if ('undefined' !== typeof window) {
           window.removeEventListener('resize', checkDeviceType);
         }
       };
@@ -358,15 +352,12 @@ export function withDeviceFallback(
 
     switch (deviceType) {
       case 'mobile': {
-
         return <>{mobileComponent}</>;
       }
       case 'tablet': {
-
         return <>{tabletComponent}</>;
       }
       default: {
-
         return <>{desktopComponent}</>;
       }
     }
@@ -390,13 +381,13 @@ export function withPerformanceFallback(
         // Check device memory
         if ('deviceMemory' in navigator) {
           const memory = (navigator as any).deviceMemory;
-          score += 8 <= memory ? 3 : (4 <= memory ? 2 : 1);
+          score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
         }
 
         // Check CPU cores
         if ('hardwareConcurrency' in navigator) {
           const cores = navigator.hardwareConcurrency;
-          score += 8 <= cores ? 3 : (4 <= cores ? 2 : 1);
+          score += 8 <= cores ? 3 : 4 <= cores ? 2 : 1;
         }
 
         // Check connection speed
@@ -405,7 +396,7 @@ export function withPerformanceFallback(
           if (connection) {
             const effectiveType = connection.effectiveType;
             score +=
-              '4g' === effectiveType ? 3 : ('3g' === effectiveType ? 2 : 1);
+              '4g' === effectiveType ? 3 : '3g' === effectiveType ? 2 : 1;
           }
         }
 

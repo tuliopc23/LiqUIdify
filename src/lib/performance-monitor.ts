@@ -144,7 +144,7 @@ export class PerformanceMonitor {
     }
 
     let clsValue = 0;
-    let clsEntries: any[] = [];
+    let clsEntries: Array<any> = [];
 
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
@@ -287,7 +287,7 @@ export class PerformanceMonitor {
       // Use Resource Timing API to get bundle size
       const resources = performance.getEntriesByType(
         'resource'
-      ) as PerformanceResourceTiming[];
+      ) as Array<PerformanceResourceTiming>;
       const bundle = resources.find((resource) =>
         resource.name.includes(bundleName)
       );
@@ -350,11 +350,11 @@ export class PerformanceMonitor {
     summary: {
       overallScore: number;
       coreWebVitalsScore: number;
-      recommendations: string[];
+      recommendations: Array<string>;
     };
   } {
     const metrics = this.getMetrics();
-    const recommendations: string[] = [];
+    const recommendations: Array<string> = [];
 
     // Calculate Core Web Vitals score
     let coreWebVitalsScore = 0;
@@ -365,7 +365,7 @@ export class PerformanceMonitor {
       if (value !== undefined) {
         const status = this.getMetricStatusByValue(metric, value);
         coreWebVitalsScore +=
-          'good' === status ? 100 : ('needs-improvement' === status ? 50 : 0);
+          'good' === status ? 100 : 'needs-improvement' === status ? 50 : 0;
         coreWebVitalsCount++;
 
         if ('good' !== status) {
@@ -420,7 +420,9 @@ export class PerformanceMonitor {
   }
 
   public disconnect(): void {
-    for (const observer of this.observers) {observer.disconnect();}
+    for (const observer of this.observers) {
+      observer.disconnect();
+    }
     this.observers.clear();
   }
 }

@@ -1,8 +1,7 @@
 export {
-	GlassSkeleton,
-	type GlassSkeletonProps,
-	SkeletonCard,
-	SkeletonTable,
-	SkeletonText,
-
-} from "./glass-skeleton";
+  GlassSkeleton,
+  type GlassSkeletonProps,
+  SkeletonCard,
+  SkeletonTable,
+  SkeletonText,
+} from './glass-skeleton';

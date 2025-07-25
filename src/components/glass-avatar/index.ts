@@ -1,1 +1,1 @@
-export { GlassAvatar, type GlassAvatarProps } from "./glass-avatar";
+export { GlassAvatar, type GlassAvatarProps } from './glass-avatar';

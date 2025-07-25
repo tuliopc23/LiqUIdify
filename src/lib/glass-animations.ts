@@ -97,7 +97,7 @@ export class GlassAnimation {
 
   // Animate with Web Animations API
   animate(
-    keyframes: globalThis.Keyframe[],
+    keyframes: Array<globalThis.Keyframe>,
     options: globalThis.KeyframeAnimationOptions
   ): globalThis.Animation {
     // Force GPU acceleration
@@ -128,15 +128,14 @@ export class GlassAnimation {
           this.element.style.willChange = 'auto';
         },
       });
-    } else {
-      // Fallback to Web Animations API for non-SVG elements
-      const currentPath = this.element.getAttribute('d') || '';
-      return this.animate([{ d: currentPath }, { d: targetPath }], {
-        duration,
-        easing: GLASS_EASINGS.liquidFlow,
-        fill: 'forwards',
-      });
     }
+    // Fallback to Web Animations API for non-SVG elements
+    const currentPath = this.element.getAttribute('d') || '';
+    return this.animate([{ d: currentPath }, { d: targetPath }], {
+      duration,
+      easing: GLASS_EASINGS.liquidFlow,
+      fill: 'forwards',
+    });
   }
 
   // Enhanced liquid animation with GSAP
@@ -182,7 +181,7 @@ export class GlassAnimation {
   // Shatter effect
   shatter(pieces = 12, duration = 800) {
     // const bounds = element.getBoundingClientRect();
-    const fragments: HTMLElement[] = [];
+    const fragments: Array<HTMLElement> = [];
 
     // Create fragments
     for (let index = 0; index < pieces; index++) {
@@ -284,7 +283,8 @@ export class GlassAnimation {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -speed;
 
-      this.element.style.transform = 'y' === axis ? `translateY(${rate}px)` : `translateX(${rate}px)`;
+      this.element.style.transform =
+        'y' === axis ? `translateY(${rate}px)` : `translateX(${rate}px)`;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -293,7 +293,7 @@ export class GlassAnimation {
 
   // Glitch effect
   glitch(intensity = 5, duration = 200) {
-    const keyframes: globalThis.Keyframe[] = [];
+    const keyframes: Array<globalThis.Keyframe> = [];
     const steps = 10;
 
     for (let index = 0; index < steps; index++) {
@@ -363,7 +363,7 @@ export class GlassAnimation {
   }
 
   // Batch processing for multiple animations
-  batchAnimate(animations: { target: string; vars: gsap.TweenVars }[]) {
+  batchAnimate(animations: Array<{ target: string; vars: gsap.TweenVars }>) {
     // Use GSAP's batch method for optimal performance
     gsap.set(this.element, { force3D: true }); // Force GPU acceleration
 
@@ -462,8 +462,8 @@ export class GlassChoreographer {
 
   // Enhanced stagger animations with GSAP
   stagger(
-    elements: HTMLElement[],
-    keyframes: globalThis.Keyframe[],
+    elements: Array<HTMLElement>,
+    keyframes: Array<globalThis.Keyframe>,
     options: globalThis.KeyframeAnimationOptions,
     staggerDelay = 50
   ) {
@@ -477,7 +477,11 @@ export class GlassChoreographer {
   }
 
   // Batch animate multiple elements with GSAP for optimal performance
-  batchAnimate(elements: HTMLElement[], variables: gsap.TweenVars, stagger = 0.1) {
+  batchAnimate(
+    elements: Array<HTMLElement>,
+    variables: gsap.TweenVars,
+    stagger = 0.1
+  ) {
     // Use GSAP's batch method for GPU acceleration
     gsap.set(elements, { force3D: true });
 
@@ -490,7 +494,7 @@ export class GlassChoreographer {
 
   // Physics-based cascade with spring effects
   springCascade(
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     target: { x?: number; y?: number; scale?: number },
     staggerDelay = 0.1
   ) {
@@ -516,7 +520,7 @@ export class GlassChoreographer {
 
   // Cascade animation
   cascade(
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     animationType: AnimationType,
     duration = 500,
     staggerDelay = 100
@@ -526,8 +530,8 @@ export class GlassChoreographer {
   }
 
   // Get predefined keyframes for animation type
-  private getKeyframesForType(type: AnimationType): globalThis.Keyframe[] {
-    const keyframeMap: Record<AnimationType, globalThis.Keyframe[]> = {
+  private getKeyframesForType(type: AnimationType): Array<globalThis.Keyframe> {
+    const keyframeMap: Record<AnimationType, Array<globalThis.Keyframe>> = {
       fade: [{ opacity: 0 }, { opacity: 1 }],
       slide: [
         { transform: 'translateY(20px)', opacity: 0 },
@@ -604,7 +608,9 @@ export class GlassChoreographer {
 
   // Clear all animations
   clear() {
-    for (const animation of this.animations) {animation.stop();}
+    for (const animation of this.animations) {
+      animation.stop();
+    }
     this.animations.clear();
     this.masterTimeline.kill();
     this.masterTimeline = gsap.timeline();
@@ -766,7 +772,7 @@ export function createGestureAnimator(
 // GPU acceleration utilities
 export const GlassUtils = {
   // Force GPU acceleration on multiple elements
-  enableGPUAcceleration(elements: HTMLElement[]) {
+  enableGPUAcceleration(elements: Array<HTMLElement>) {
     gsap.set(elements, {
       force3D: true,
       willChange: 'transform',
@@ -774,7 +780,7 @@ export const GlassUtils = {
   },
 
   // Enhanced reduced motion support with graceful animation scaling
-  enableReducedMotion(elements: HTMLElement[]) {
+  enableReducedMotion(elements: Array<HTMLElement>) {
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
@@ -813,7 +819,10 @@ export const GlassUtils = {
   },
 
   // Batch animate with optimal performance
-  batchAnimate(elements: HTMLElement[], animations: gsap.TweenVars[]) {
+  batchAnimate(
+    elements: Array<HTMLElement>,
+    animations: Array<gsap.TweenVars>
+  ) {
     const tl = gsap.timeline();
 
     for (const [index, element] of elements.entries()) {
@@ -833,7 +842,7 @@ export const GlassUtils = {
 
   // Physics-based spring animation for multiple elements
   springAnimation(
-    elements: HTMLElement[],
+    elements: Array<HTMLElement>,
     target: gsap.TweenVars,
     stagger = 0.1
   ) {
@@ -847,8 +856,12 @@ export const GlassUtils = {
   },
 
   // Magnetic effect for multiple elements
-  createMagneticField(elements: HTMLElement[], radius = 100, strength = 0.3) {
-    const cleanupFunctions: (() => void)[] = [];
+  createMagneticField(
+    elements: Array<HTMLElement>,
+    radius = 100,
+    strength = 0.3
+  ) {
+    const cleanupFunctions: Array<() => void> = [];
 
     for (const element of elements) {
       const animation = new GlassAnimation(element);
@@ -856,6 +869,10 @@ export const GlassUtils = {
       cleanupFunctions.push(cleanup);
     }
 
-    return () => { for (const cleanup of cleanupFunctions) {cleanup()} };
+    return () => {
+      for (const cleanup of cleanupFunctions) {
+        cleanup();
+      }
+    };
   },
 };

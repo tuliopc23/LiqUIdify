@@ -82,7 +82,7 @@ export function useGlassAnimation(
   const animate = useCallback(
     (
       element: HTMLElement,
-      keyframes: Keyframe[],
+      keyframes: Array<Keyframe>,
       options?: Partial<AnimationConfig>
     ) => {
       if (!element) {

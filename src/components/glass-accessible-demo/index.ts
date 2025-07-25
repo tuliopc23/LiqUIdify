@@ -1,1 +1,1 @@
-export { GlassAccessibleDemo } from "./glass-accessible-demo";
+export { GlassAccessibleDemo } from './glass-accessible-demo';

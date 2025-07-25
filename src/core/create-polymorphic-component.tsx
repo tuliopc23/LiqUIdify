@@ -152,7 +152,6 @@ export function createPolymorphicComponent<
     } as any;
 
     return (
-
       <ElementComponent key={key} {...elementProps}>
         {children}
       </ElementComponent>

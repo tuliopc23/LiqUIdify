@@ -199,7 +199,7 @@ export function useOptimizedAnimations(enabled: boolean = true) {
 }
 
 // Performance monitoring hook
-export function usePerformanceMonitoring(componentName: string) {
+export function usePerformanceMonitoring(_componentName: string) {
   const renderCountRef = useRef(0);
   const lastRenderTime = useRef(0);
 
@@ -220,7 +220,7 @@ export function usePerformanceMonitoring(componentName: string) {
 
       return renderTime;
     };
-  }, [componentName]);
+  }, []);
 
   return {
     renderCount: renderCountRef.current,

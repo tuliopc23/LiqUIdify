@@ -1,13 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React, { useState } from "react";
-import { GlassSlider } from "./glass-slider";
-import { Volume2, Sun, Zap, Gauge, DollarSign, Clock } from "lucide-react";
+import type { Meta, StoryObj } from '@storybook/react';
+import { DollarSign, Gauge, Sun, Volume2 } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
+import { GlassSlider } from './glass-slider';
 
 const meta = {
-  title: "Glass UI/GlassSlider",
+  title: 'Glass UI/GlassSlider',
   component: GlassSlider,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component: `
@@ -47,44 +48,44 @@ function MyComponent() {
       },
     },
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     min: {
-      control: "number",
-      description: "Minimum value",
+      control: 'number',
+      description: 'Minimum value',
     },
     max: {
-      control: "number",
-      description: "Maximum value",
+      control: 'number',
+      description: 'Maximum value',
     },
     step: {
-      control: "number",
-      description: "Step interval",
+      control: 'number',
+      description: 'Step interval',
     },
     value: {
-      control: "number",
-      description: "Current value",
+      control: 'number',
+      description: 'Current value',
     },
     onChange: {
-      action: "changed",
-      description: "Callback when value changes",
+      action: 'changed',
+      description: 'Callback when value changes',
     },
     disabled: {
-      control: "boolean",
-      description: "Whether the slider is disabled",
+      control: 'boolean',
+      description: 'Whether the slider is disabled',
     },
     showValue: {
-      control: "boolean",
-      description: "Show value label",
+      control: 'boolean',
+      description: 'Show value label',
     },
     variant: {
-      control: "select",
-      options: ["default", "minimal"],
-      description: "Visual variant",
+      control: 'select',
+      options: ['default', 'minimal'],
+      description: 'Visual variant',
     },
     className: {
-      control: "text",
-      description: "Additional CSS classes",
+      control: 'text',
+      description: 'Additional CSS classes',
     },
   },
 } satisfies Meta<typeof GlassSlider>;
@@ -107,16 +108,12 @@ export const Default: Story = {
 export const Controlled: Story = {
   render: (args) => {
     const [value, setValue] = useState(30);
-    
+
     return (
       <div className="w-80 space-y-4">
-        <GlassSlider
-          {...args}
-          value={value}
-          onChange={setValue}
-        />
+        <GlassSlider {...args} value={value} onChange={setValue} />
         <div className="text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 text-sm dark:text-gray-400">
             Current Value: <span className="font-bold text-lg">{value}</span>
           </p>
         </div>
@@ -135,10 +132,10 @@ export const Controlled: Story = {
 export const CustomRange: Story = {
   render: () => {
     const [temperature, setTemperature] = useState(20);
-    
+
     return (
       <div className="w-80 space-y-2">
-        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        <h3 className="font-medium text-gray-700 text-sm dark:text-gray-300">
           Temperature Control
         </h3>
         <GlassSlider
@@ -150,7 +147,7 @@ export const CustomRange: Story = {
           showValue={false}
         />
         <div className="text-center">
-          <span className="text-2xl font-bold text-gray-900 dark:text-white">
+          <span className="font-bold text-2xl text-gray-900 dark:text-white">
             {temperature}°C
           </span>
         </div>
@@ -163,23 +160,23 @@ export const CustomRange: Story = {
 export const StepIntervals: Story = {
   render: () => {
     return (
-      <div className="space-y-8 w-80">
+      <div className="w-80 space-y-8">
         <div>
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <h3 className="mb-2 font-medium text-gray-700 text-sm dark:text-gray-300">
             Step: 1
           </h3>
           <GlassSlider min={0} max={10} step={1} />
         </div>
-        
+
         <div>
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <h3 className="mb-2 font-medium text-gray-700 text-sm dark:text-gray-300">
             Step: 0.1
           </h3>
           <GlassSlider min={0} max={1} step={0.1} />
         </div>
-        
+
         <div>
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <h3 className="mb-2 font-medium text-gray-700 text-sm dark:text-gray-300">
             Step: 5
           </h3>
           <GlassSlider min={0} max={100} step={5} />
@@ -205,29 +202,21 @@ export const Disabled: Story = {
 export const MinimalVariant: Story = {
   render: () => {
     const [value, setValue] = useState(50);
-    
+
     return (
-      <div className="space-y-8 w-80">
+      <div className="w-80 space-y-8">
         <div>
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <h3 className="mb-2 font-medium text-gray-700 text-sm dark:text-gray-300">
             Default Variant
           </h3>
-          <GlassSlider
-            value={value}
-            onChange={setValue}
-            variant="default"
-          />
+          <GlassSlider value={value} onChange={setValue} variant="default" />
         </div>
-        
+
         <div>
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <h3 className="mb-2 font-medium text-gray-700 text-sm dark:text-gray-300">
             Minimal Variant
           </h3>
-          <GlassSlider
-            value={value}
-            onChange={setValue}
-            variant="minimal"
-          />
+          <GlassSlider value={value} onChange={setValue} variant="minimal" />
         </div>
       </div>
     );
@@ -238,19 +227,19 @@ export const MinimalVariant: Story = {
 export const VolumeControl: Story = {
   render: () => {
     const [volume, setVolume] = useState(30);
-    
+
     const getVolumeIcon = () => {
-      if (volume === 0) return "🔇";
-      if (volume < 33) return "🔈";
-      if (volume < 66) return "🔉";
-      return "🔊";
+      if (volume === 0) return '🔇';
+      if (volume < 33) return '🔈';
+      if (volume < 66) return '🔉';
+      return '🔊';
     };
-    
+
     return (
       <div className="w-80 space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-            <Volume2 className="w-4 h-4" />
+          <h3 className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300">
+            <Volume2 className="h-4 w-4" />
             Volume Control
           </h3>
           <span className="text-2xl">{getVolumeIcon()}</span>
@@ -263,7 +252,7 @@ export const VolumeControl: Story = {
           onChange={setVolume}
           showValue={false}
         />
-        <div className="flex justify-between text-xs text-gray-500">
+        <div className="flex justify-between text-gray-500 text-xs">
           <button
             onClick={() => setVolume(0)}
             className="hover:text-gray-700 dark:hover:text-gray-300"
@@ -289,21 +278,21 @@ export const InteractiveDemo: Story = {
     const [brightness, setBrightness] = useState(70);
     const [speed, setSpeed] = useState(50);
     const [price, setPrice] = useState(250);
-    
+
     return (
       <div className="w-96 space-y-8">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
           Interactive Slider Controls
         </h3>
-        
+
         <div className="space-y-6">
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                <Sun className="w-4 h-4" />
+            <div className="mb-2 flex items-center justify-between">
+              <label className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300">
+                <Sun className="h-4 w-4" />
                 Brightness
               </label>
-              <span className="text-sm font-bold">{brightness}%</span>
+              <span className="font-bold text-sm">{brightness}%</span>
             </div>
             <GlassSlider
               min={0}
@@ -313,14 +302,14 @@ export const InteractiveDemo: Story = {
               showValue={false}
             />
           </div>
-          
+
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                <Gauge className="w-4 h-4" />
+            <div className="mb-2 flex items-center justify-between">
+              <label className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300">
+                <Gauge className="h-4 w-4" />
                 Animation Speed
               </label>
-              <span className="text-sm font-bold">{speed}ms</span>
+              <span className="font-bold text-sm">{speed}ms</span>
             </div>
             <GlassSlider
               min={0}
@@ -331,14 +320,14 @@ export const InteractiveDemo: Story = {
               showValue={false}
             />
           </div>
-          
+
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                <DollarSign className="w-4 h-4" />
+            <div className="mb-2 flex items-center justify-between">
+              <label className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300">
+                <DollarSign className="h-4 w-4" />
                 Price Range
               </label>
-              <span className="text-sm font-bold">${price}</span>
+              <span className="font-bold text-sm">${price}</span>
             </div>
             <GlassSlider
               min={0}
@@ -350,13 +339,13 @@ export const InteractiveDemo: Story = {
             />
           </div>
         </div>
-        
-        <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-          <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">
+
+        <div className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+          <h4 className="mb-2 font-semibold text-gray-900 text-sm dark:text-white">
             Current Settings:
           </h4>
           <div
-            className="h-20 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold transition-all"
+            className="flex h-20 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 font-bold text-white transition-all"
             style={{
               opacity: brightness / 100,
               animationDuration: `${speed}ms`,
@@ -378,21 +367,21 @@ export const FormIntegration: Story = {
       skills: 7,
       availability: 40,
     });
-    
+
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       alert(JSON.stringify(formData, null, 2));
     };
-    
+
     return (
       <form onSubmit={handleSubmit} className="w-96 space-y-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
           Candidate Assessment
         </h3>
-        
+
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Years of Experience
             </label>
             <GlassSlider
@@ -400,12 +389,14 @@ export const FormIntegration: Story = {
               max={20}
               step={1}
               value={formData.experience}
-              onChange={(value) => setFormData({ ...formData, experience: value })}
+              onChange={(value) =>
+                setFormData({ ...formData, experience: value })
+              }
             />
           </div>
-          
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Technical Skills (1-10)
             </label>
             <GlassSlider
@@ -416,9 +407,9 @@ export const FormIntegration: Story = {
               onChange={(value) => setFormData({ ...formData, skills: value })}
             />
           </div>
-          
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Weekly Availability (hours)
             </label>
             <GlassSlider
@@ -426,14 +417,16 @@ export const FormIntegration: Story = {
               max={40}
               step={5}
               value={formData.availability}
-              onChange={(value) => setFormData({ ...formData, availability: value })}
+              onChange={(value) =>
+                setFormData({ ...formData, availability: value })
+              }
             />
           </div>
         </div>
-        
+
         <button
           type="submit"
-          className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
         >
           Submit Assessment
         </button>
@@ -446,39 +439,47 @@ export const FormIntegration: Story = {
 export const AccessibilityDemo: Story = {
   render: () => {
     const [value, setValue] = useState(50);
-    
+
     return (
       <div className="w-96 space-y-6">
         <div>
-          <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+          <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
             Accessibility Features
           </h3>
-          
+
           <div className="space-y-4">
             <GlassSlider
               value={value}
               onChange={setValue}
               aria-label="Demonstration slider"
             />
-            
-            <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+
+            <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
+              <h4 className="mb-2 font-semibold text-blue-900 dark:text-blue-100">
                 Keyboard Navigation
               </h4>
-              <ul className="space-y-1 text-sm text-blue-800 dark:text-blue-200">
-                <li>• Use <kbd>←</kbd> <kbd>→</kbd> to adjust by step</li>
-                <li>• Use <kbd>Home</kbd> to jump to minimum</li>
-                <li>• Use <kbd>End</kbd> to jump to maximum</li>
-                <li>• Use <kbd>Page Up</kbd> <kbd>Page Down</kbd> for larger steps</li>
+              <ul className="space-y-1 text-blue-800 text-sm dark:text-blue-200">
+                <li>
+                  • Use <kbd>←</kbd> <kbd>→</kbd> to adjust by step
+                </li>
+                <li>
+                  • Use <kbd>Home</kbd> to jump to minimum
+                </li>
+                <li>
+                  • Use <kbd>End</kbd> to jump to maximum
+                </li>
+                <li>
+                  • Use <kbd>Page Up</kbd> <kbd>Page Down</kbd> for larger steps
+                </li>
               </ul>
             </div>
           </div>
-          
-          <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-white">
+
+          <div className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h4 className="mb-2 font-semibold text-gray-900 text-sm dark:text-white">
               Screen Reader Support:
             </h4>
-            <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
+            <ul className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
               <li>• Announces current value</li>
               <li>• Provides min/max context</li>
               <li>• Updates on value change</li>
@@ -497,16 +498,16 @@ export const RealTimePreview: Story = {
     const [blur, setBlur] = useState(0);
     const [opacity, setOpacity] = useState(100);
     const [scale, setScale] = useState(100);
-    
+
     return (
       <div className="w-96 space-y-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
           Real-time CSS Effects
         </h3>
-        
+
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Blur Effect
             </label>
             <GlassSlider
@@ -518,9 +519,9 @@ export const RealTimePreview: Story = {
               showValue={false}
             />
           </div>
-          
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Opacity
             </label>
             <GlassSlider
@@ -532,9 +533,9 @@ export const RealTimePreview: Story = {
               showValue={false}
             />
           </div>
-          
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Scale
             </label>
             <GlassSlider
@@ -547,10 +548,10 @@ export const RealTimePreview: Story = {
             />
           </div>
         </div>
-        
-        <div className="p-8 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+
+        <div className="flex items-center justify-center rounded-lg bg-gray-100 p-8 dark:bg-gray-800">
           <div
-            className="p-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg text-white font-bold transition-all duration-300"
+            className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 p-6 font-bold text-white transition-all duration-300"
             style={{
               filter: `blur(${blur}px)`,
               opacity: opacity / 100,
@@ -560,9 +561,10 @@ export const RealTimePreview: Story = {
             Preview Element
           </div>
         </div>
-        
-        <div className="text-xs text-gray-500 dark:text-gray-400 font-mono">
-          filter: blur({blur}px);<br />
+
+        <div className="font-mono text-gray-500 text-xs dark:text-gray-400">
+          filter: blur({blur}px);
+          <br />
           opacity: {opacity / 100};<br />
           transform: scale({scale / 100});
         </div>

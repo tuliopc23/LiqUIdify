@@ -1,5 +1,4 @@
 export {
-	GlassResponsiveCard,
-	type GlassResponsiveCardProps,
-
-} from "./glass-responsive-card";
+  GlassResponsiveCard,
+  type GlassResponsiveCardProps,
+} from './glass-responsive-card';

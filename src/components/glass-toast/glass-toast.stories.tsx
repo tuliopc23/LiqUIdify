@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
-import { GlassToast, ToastProvider, useToast } from "./glass-toast";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { GlassToast, ToastProvider, useToast } from './glass-toast';
 
 const meta = {
-  title: "Components/GlassToast",
+  title: 'Components/GlassToast',
   component: GlassToast,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
         component: `
@@ -25,20 +25,20 @@ component and a complete toast system with ToastProvider and useToast hook for d
       },
     },
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     type: {
-      description: "Type of toast notification",
-      control: { type: "select" },
-      options: ["success", "error", "warning", "info"],
+      description: 'Type of toast notification',
+      control: { type: 'select' },
+      options: ['success', 'error', 'warning', 'info'],
     },
     message: {
-      description: "Message content of the toast",
-      control: { type: "text" },
+      description: 'Message content of the toast',
+      control: { type: 'text' },
     },
     onClose: {
-      description: "Callback when close button is clicked",
-      action: "closed",
+      description: 'Callback when close button is clicked',
+      action: 'closed',
     },
   },
 } satisfies Meta<typeof GlassToast>;
@@ -49,8 +49,8 @@ type Story = StoryObj<typeof meta>;
 // Default standalone toast
 export const Default: Story = {
   args: {
-    type: "info",
-    message: "This is a simple toast notification",
+    type: 'info',
+    message: 'This is a simple toast notification',
   },
 };
 
@@ -61,22 +61,22 @@ export const Types: Story = {
       <GlassToast
         type="success"
         message="Operation completed successfully!"
-        onClose={() => console.log("Success toast closed")}
+        onClose={() => console.log('Success toast closed')}
       />
       <GlassToast
         type="error"
         message="An error occurred while processing your request."
-        onClose={() => console.log("Error toast closed")}
+        onClose={() => console.log('Error toast closed')}
       />
       <GlassToast
         type="warning"
         message="Please save your work before continuing."
-        onClose={() => console.log("Warning toast closed")}
+        onClose={() => console.log('Warning toast closed')}
       />
       <GlassToast
         type="info"
         message="New updates are available for your application."
-        onClose={() => console.log("Info toast closed")}
+        onClose={() => console.log('Info toast closed')}
       />
     </div>
   ),
@@ -92,48 +92,48 @@ const ToastProviderDemo = () => {
         <button
           onClick={() =>
             addToast({
-              type: "success",
-              title: "Success!",
-              description: "Your changes have been saved.",
+              type: 'success',
+              title: 'Success!',
+              description: 'Your changes have been saved.',
             })
           }
-          className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+          className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
         >
           Show Success Toast
         </button>
         <button
           onClick={() =>
             addToast({
-              type: "error",
-              title: "Error",
-              description: "Failed to save changes. Please try again.",
+              type: 'error',
+              title: 'Error',
+              description: 'Failed to save changes. Please try again.',
             })
           }
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
         >
           Show Error Toast
         </button>
         <button
           onClick={() =>
             addToast({
-              type: "warning",
-              title: "Warning",
-              description: "Your session will expire in 5 minutes.",
+              type: 'warning',
+              title: 'Warning',
+              description: 'Your session will expire in 5 minutes.',
             })
           }
-          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+          className="rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
         >
           Show Warning Toast
         </button>
         <button
           onClick={() =>
             addToast({
-              type: "info",
-              title: "Information",
-              description: "New features have been added to your dashboard.",
+              type: 'info',
+              title: 'Information',
+              description: 'New features have been added to your dashboard.',
             })
           }
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
         >
           Show Info Toast
         </button>
@@ -158,11 +158,11 @@ const PositionDemo = ({ position }: { position: any }) => {
     <button
       onClick={() =>
         addToast({
-          description: `Toast at ${position.replace("-", " ")} position`,
+          description: `Toast at ${position.replace('-', ' ')} position`,
           duration: 3000,
         })
       }
-      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+      className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
     >
       Show Toast at {position}
     </button>
@@ -172,16 +172,21 @@ const PositionDemo = ({ position }: { position: any }) => {
 export const Positions: Story = {
   render: () => (
     <div className="space-y-8">
-      {["top-right", "top-left", "bottom-right", "bottom-left", "top-center", "bottom-center"].map(
-        (position) => (
-          <div key={position}>
-            <h3 className="text-sm font-medium mb-2">{position}</h3>
-            <ToastProvider position={position as any}>
-              <PositionDemo position={position} />
-            </ToastProvider>
-          </div>
-        )
-      )}
+      {[
+        'top-right',
+        'top-left',
+        'bottom-right',
+        'bottom-left',
+        'top-center',
+        'bottom-center',
+      ].map((position) => (
+        <div key={position}>
+          <h3 className="mb-2 font-medium text-sm">{position}</h3>
+          <ToastProvider position={position as any}>
+            <PositionDemo position={position} />
+          </ToastProvider>
+        </div>
+      ))}
     </div>
   ),
 };
@@ -197,28 +202,26 @@ const ActionToastDemo = () => {
         onClick={() => {
           setUndone(false);
           addToast({
-            type: "success",
-            title: "Item deleted",
-            description: "The item has been removed from your list.",
+            type: 'success',
+            title: 'Item deleted',
+            description: 'The item has been removed from your list.',
             action: {
-              label: "Undo",
+              label: 'Undo',
               onClick: () => {
                 setUndone(true);
                 addToast({
-                  type: "info",
-                  description: "Action undone successfully!",
+                  type: 'info',
+                  description: 'Action undone successfully!',
                 });
               },
             },
           });
         }}
-        className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+        className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
       >
         Delete Item
       </button>
-      {undone && (
-        <p className="text-sm text-green-600">Item restored!</p>
-      )}
+      {undone && <p className="text-green-600 text-sm">Item restored!</p>}
     </div>
   );
 };
@@ -240,33 +243,33 @@ const DurationDemo = () => {
       <button
         onClick={() =>
           addToast({
-            description: "This toast will disappear in 2 seconds",
+            description: 'This toast will disappear in 2 seconds',
             duration: 2000,
           })
         }
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
       >
         2 Second Toast
       </button>
       <button
         onClick={() =>
           addToast({
-            description: "This toast will stay for 10 seconds",
+            description: 'This toast will stay for 10 seconds',
             duration: 10000,
           })
         }
-        className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600"
+        className="rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-purple-600"
       >
         10 Second Toast
       </button>
       <button
         onClick={() =>
           addToast({
-            type: "warning",
-            description: "This toast uses the default 5 second duration",
+            type: 'warning',
+            description: 'This toast uses the default 5 second duration',
           })
         }
-        className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+        className="rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
       >
         Default Duration
       </button>
@@ -288,22 +291,22 @@ const MultipleToastsDemo = () => {
 
   const showMultipleToasts = () => {
     addToast({
-      type: "info",
-      title: "First Toast",
-      description: "This is the first notification",
+      type: 'info',
+      title: 'First Toast',
+      description: 'This is the first notification',
     });
     setTimeout(() => {
       addToast({
-        type: "success",
-        title: "Second Toast",
-        description: "This is the second notification",
+        type: 'success',
+        title: 'Second Toast',
+        description: 'This is the second notification',
       });
     }, 500);
     setTimeout(() => {
       addToast({
-        type: "warning",
-        title: "Third Toast",
-        description: "This is the third notification",
+        type: 'warning',
+        title: 'Third Toast',
+        description: 'This is the third notification',
       });
     }, 1000);
   };
@@ -311,7 +314,7 @@ const MultipleToastsDemo = () => {
   return (
     <button
       onClick={showMultipleToasts}
-      className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600"
+      className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 text-white hover:from-blue-600 hover:to-purple-600"
     >
       Show Multiple Toasts
     </button>
@@ -335,8 +338,8 @@ const RealWorldDemo = () => {
   const handleSave = async () => {
     setSaving(true);
     addToast({
-      type: "info",
-      description: "Saving your changes...",
+      type: 'info',
+      description: 'Saving your changes...',
       duration: 2000,
     });
 
@@ -345,17 +348,17 @@ const RealWorldDemo = () => {
 
     setSaving(false);
     addToast({
-      type: "success",
-      title: "Changes saved!",
-      description: "Your document has been successfully saved.",
+      type: 'success',
+      title: 'Changes saved!',
+      description: 'Your document has been successfully saved.',
     });
   };
 
   const handleUpload = async () => {
     setUploading(true);
     addToast({
-      type: "info",
-      description: "Uploading file...",
+      type: 'info',
+      description: 'Uploading file...',
       duration: 3000,
     });
 
@@ -364,28 +367,29 @@ const RealWorldDemo = () => {
 
     setUploading(false);
     addToast({
-      type: "success",
-      title: "Upload complete!",
-      description: "Your file has been uploaded successfully.",
+      type: 'success',
+      title: 'Upload complete!',
+      description: 'Your file has been uploaded successfully.',
       action: {
-        label: "View File",
-        onClick: () => console.log("Viewing file..."),
+        label: 'View File',
+        onClick: () => console.log('Viewing file...'),
       },
     });
   };
 
   const handleNetworkError = () => {
     addToast({
-      type: "error",
-      title: "Network Error",
-      description: "Unable to connect to the server. Please check your internet connection.",
+      type: 'error',
+      title: 'Network Error',
+      description:
+        'Unable to connect to the server. Please check your internet connection.',
       duration: 8000,
       action: {
-        label: "Retry",
+        label: 'Retry',
         onClick: () => {
           addToast({
-            type: "info",
-            description: "Retrying connection...",
+            type: 'info',
+            description: 'Retrying connection...',
           });
         },
       },
@@ -394,25 +398,25 @@ const RealWorldDemo = () => {
 
   return (
     <div className="space-y-4">
-      <h3 className="font-semibold mb-4">Real-world Toast Examples</h3>
+      <h3 className="mb-4 font-semibold">Real-world Toast Examples</h3>
       <div className="grid grid-cols-1 gap-4">
         <button
           onClick={handleSave}
           disabled={saving}
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {saving ? "Saving..." : "Save Document"}
+          {saving ? 'Saving...' : 'Save Document'}
         </button>
         <button
           onClick={handleUpload}
           disabled={uploading}
-          className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {uploading ? "Uploading..." : "Upload File"}
+          {uploading ? 'Uploading...' : 'Upload File'}
         </button>
         <button
           onClick={handleNetworkError}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
         >
           Simulate Network Error
         </button>
@@ -432,63 +436,66 @@ export const RealWorldExamples: Story = {
 // Form validation example
 const FormValidationDemo = () => {
   const { addToast } = useToast();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const errors = [];
-    if (!email) errors.push("Email is required");
-    if (!email.includes("@")) errors.push("Invalid email format");
-    if (!password) errors.push("Password is required");
-    if (password.length < 8) errors.push("Password must be at least 8 characters");
+    if (!email) errors.push('Email is required');
+    if (!email.includes('@')) errors.push('Invalid email format');
+    if (!password) errors.push('Password is required');
+    if (password.length < 8)
+      errors.push('Password must be at least 8 characters');
 
     if (errors.length > 0) {
       errors.forEach((error) => {
         addToast({
-          type: "error",
+          type: 'error',
           description: error,
           duration: 4000,
         });
       });
     } else {
       addToast({
-        type: "success",
-        title: "Success!",
-        description: "Form submitted successfully.",
+        type: 'success',
+        title: 'Success!',
+        description: 'Form submitted successfully.',
       });
-      setEmail("");
-      setPassword("");
+      setEmail('');
+      setPassword('');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 w-80">
-      <h3 className="font-semibold mb-4">Login Form (with validation toasts)</h3>
+    <form onSubmit={handleSubmit} className="w-80 space-y-4">
+      <h3 className="mb-4 font-semibold">
+        Login Form (with validation toasts)
+      </h3>
       <div>
-        <label className="block text-sm font-medium mb-1">Email</label>
+        <label className="mb-1 block font-medium text-sm">Email</label>
         <input
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500"
           placeholder="your@email.com"
         />
       </div>
       <div>
-        <label className="block text-sm font-medium mb-1">Password</label>
+        <label className="mb-1 block font-medium text-sm">Password</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500"
           placeholder="Enter password"
         />
       </div>
       <button
         type="submit"
-        className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
       >
         Submit
       </button>
@@ -508,8 +515,8 @@ export const FormValidation: Story = {
 export const ThemeVariations: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="p-6 bg-white rounded-lg">
-        <h3 className="font-semibold mb-4">Light Theme</h3>
+      <div className="rounded-lg bg-white p-6">
+        <h3 className="mb-4 font-semibold">Light Theme</h3>
         <div className="space-y-2">
           <GlassToast type="success" message="Success toast in light theme" />
           <GlassToast type="error" message="Error toast in light theme" />
@@ -517,8 +524,8 @@ export const ThemeVariations: Story = {
           <GlassToast type="info" message="Info toast in light theme" />
         </div>
       </div>
-      <div className="p-6 bg-gray-900 rounded-lg">
-        <h3 className="font-semibold text-white mb-4">Dark Theme</h3>
+      <div className="rounded-lg bg-gray-900 p-6">
+        <h3 className="mb-4 font-semibold text-white">Dark Theme</h3>
         <div className="space-y-2">
           <GlassToast type="success" message="Success toast in dark theme" />
           <GlassToast type="error" message="Error toast in dark theme" />

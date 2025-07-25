@@ -32,7 +32,6 @@ export const GracefulDegradationProvider: React.FC<
   };
 
   return (
-
     <GracefulDegradationContext.Provider
       value={{ manager, config: defaultConfig }}
     >

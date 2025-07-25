@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 export interface RovingTabindexOptions {
-  items: HTMLElement[];
+  items: Array<HTMLElement>;
   orientation?: 'horizontal' | 'vertical' | 'both';
   loop?: boolean;
   preventScroll?: boolean;
@@ -307,7 +307,7 @@ export function useRovingTabindex(
  * RovingTabindexGroup component for declarative usage
  */
 export interface RovingTabindexGroupProps {
-  children: React.ReactElement[];
+  children: Array<React.ReactElement>;
   orientation?: 'horizontal' | 'vertical' | 'both';
   loop?: boolean;
   preventScroll?: boolean;
@@ -327,8 +327,8 @@ export function RovingTabindexGroup({
   role,
   'aria-label': ariaLabel,
 }: RovingTabindexGroupProps) {
-  const itemReferences = useRef<(HTMLElement | null)[]>([]);
-  const [items, setItems] = useState<HTMLElement[]>([]);
+  const itemReferences = useRef<Array<HTMLElement | null>>([]);
+  const [items, setItems] = useState<Array<HTMLElement>>([]);
 
   // Collect item refs
   useEffect(() => {
@@ -370,7 +370,6 @@ export function RovingTabindexGroup({
   });
 
   return (
-
     <div
       className={className}
       role={role}
@@ -387,7 +386,7 @@ export function RovingTabindexGroup({
  */
 export interface GridRovingTabindexOptions
   extends Omit<RovingTabindexOptions, 'orientation' | 'items'> {
-  items: HTMLElement[][];
+  items: Array<Array<HTMLElement>>;
   wrap?: boolean;
   onCellChange?: (element: HTMLElement, row: number, col: number) => void;
 }
@@ -404,7 +403,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
   } = options;
 
   const [currentCell, setCurrentCell] = useState({ row: 0, col: 0 });
-  const flatItems = useRef<HTMLElement[]>([]);
+  const flatItems = useRef<Array<HTMLElement>>([]);
 
   // Flatten grid for typeahead
   useEffect(() => {

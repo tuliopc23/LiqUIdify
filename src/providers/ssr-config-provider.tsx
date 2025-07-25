@@ -25,7 +25,6 @@ export function SSRConfigProvider({
 
   // During SSR and initial hydration, show fallback or basic content
   if (!isClient) {
-
     return <>{fallback || children}</>;
   }
 
@@ -59,7 +58,6 @@ export function withSSRSafety<P extends object>(
     const isClient = useIsClient();
 
     if (!isClient) {
-
       return <>{fallback || undefined}</>;
     }
 

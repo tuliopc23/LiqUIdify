@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Drawer } from './glass-drawer';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { Menu, Settings, User, Bell, Search, X } from 'lucide-react';
+import { Bell, Menu, Search, Settings, User, X } from 'lucide-react';
 import React from 'react';
+import { GlassButton } from '../glass-button-refactored/glass-button';
+import { Drawer } from './glass-drawer';
 
 const meta = {
   title: 'Components/GlassDrawer',
@@ -11,7 +11,8 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A drawer component with glassmorphic styling that slides in from different sides of the screen.',
+        component:
+          'A drawer component with glassmorphic styling that slides in from different sides of the screen.',
       },
     },
   },
@@ -32,7 +33,7 @@ export const Default: Story = {
         <Drawer.Header>
           <Drawer.Title>Default Drawer</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 hover:opacity-100 transition-opacity">
+            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -42,7 +43,9 @@ export const Default: Story = {
           <p className="mt-4">It slides in from the right side by default.</p>
         </Drawer.Body>
         <Drawer.Footer>
-          <GlassButton variant="outline" size="sm">Cancel</GlassButton>
+          <GlassButton variant="outline" size="sm">
+            Cancel
+          </GlassButton>
           <GlassButton size="sm">Save Changes</GlassButton>
         </Drawer.Footer>
       </Drawer.Content>
@@ -61,26 +64,38 @@ export const LeftSide: Story = {
         <Drawer.Header>
           <Drawer.Title>Navigation Menu</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 hover:opacity-100 transition-opacity">
+            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
         </Drawer.Header>
         <Drawer.Body>
           <nav className="space-y-2">
-            <a href="#" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-colors">
+            <a
+              href="#"
+              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/10"
+            >
               <Menu className="h-5 w-5" />
               <span>Dashboard</span>
             </a>
-            <a href="#" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-colors">
+            <a
+              href="#"
+              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/10"
+            >
               <User className="h-5 w-5" />
               <span>Profile</span>
             </a>
-            <a href="#" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-colors">
+            <a
+              href="#"
+              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/10"
+            >
               <Settings className="h-5 w-5" />
               <span>Settings</span>
             </a>
-            <a href="#" className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/10 transition-colors">
+            <a
+              href="#"
+              className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/10"
+            >
               <Bell className="h-5 w-5" />
               <span>Notifications</span>
             </a>
@@ -104,7 +119,7 @@ export const TopSide: Story = {
             <input
               type="text"
               placeholder="Search..."
-              className="flex-1 bg-transparent border-b border-white/20 pb-2 outline-none placeholder:text-white/40"
+              className="flex-1 border-white/20 border-b bg-transparent pb-2 outline-none placeholder:text-white/40"
             />
           </div>
         </Drawer.Body>
@@ -141,7 +156,9 @@ export const BottomSide: Story = {
           </div>
         </Drawer.Body>
         <Drawer.Footer>
-          <GlassButton variant="outline" size="sm">Reject All</GlassButton>
+          <GlassButton variant="outline" size="sm">
+            Reject All
+          </GlassButton>
           <GlassButton size="sm">Accept Selected</GlassButton>
         </Drawer.Footer>
       </Drawer.Content>
@@ -160,7 +177,7 @@ export const SmallSize: Story = {
         <Drawer.Header>
           <Drawer.Title>Small Drawer</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 hover:opacity-100 transition-opacity">
+            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -183,7 +200,7 @@ export const LargeSize: Story = {
         <Drawer.Header>
           <Drawer.Title>Large Drawer</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 hover:opacity-100 transition-opacity">
+            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -192,8 +209,8 @@ export const LargeSize: Story = {
           <p>This is a large-sized drawer with more content space.</p>
           <div className="mt-6 space-y-4">
             {Array.from({ length: 5 }, (_, i) => (
-              <div key={i} className="p-4 rounded-lg bg-white/5">
-                <h4 className="font-medium mb-2">Section {i + 1}</h4>
+              <div key={i} className="rounded-lg bg-white/5 p-4">
+                <h4 className="mb-2 font-medium">Section {i + 1}</h4>
                 <p className="text-sm text-white/70">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
@@ -216,7 +233,7 @@ export const FullSize: Story = {
         <Drawer.Header>
           <Drawer.Title>Full Width Drawer</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 hover:opacity-100 transition-opacity">
+            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -240,7 +257,7 @@ export const WithForm: Story = {
         <Drawer.Header>
           <Drawer.Title>Edit Profile</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 hover:opacity-100 transition-opacity">
+            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -248,25 +265,25 @@ export const WithForm: Story = {
         <Drawer.Body>
           <form className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Name</label>
+              <label className="mb-2 block font-medium text-sm">Name</label>
               <input
                 type="text"
-                className="w-full px-3 py-2 bg-white/10 rounded-lg border border-white/20 focus:border-white/40 outline-none"
+                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
                 placeholder="John Doe"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label className="mb-2 block font-medium text-sm">Email</label>
               <input
                 type="email"
-                className="w-full px-3 py-2 bg-white/10 rounded-lg border border-white/20 focus:border-white/40 outline-none"
+                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
                 placeholder="john@example.com"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Bio</label>
+              <label className="mb-2 block font-medium text-sm">Bio</label>
               <textarea
-                className="w-full px-3 py-2 bg-white/10 rounded-lg border border-white/20 focus:border-white/40 outline-none"
+                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
                 rows={4}
                 placeholder="Tell us about yourself..."
               />
@@ -274,7 +291,9 @@ export const WithForm: Story = {
           </form>
         </Drawer.Body>
         <Drawer.Footer>
-          <GlassButton variant="outline" size="sm">Cancel</GlassButton>
+          <GlassButton variant="outline" size="sm">
+            Cancel
+          </GlassButton>
           <GlassButton size="sm">Save Changes</GlassButton>
         </Drawer.Footer>
       </Drawer.Content>
@@ -286,7 +305,7 @@ export const WithForm: Story = {
 export const WithoutCloseButton: Story = {
   render: () => {
     const [open, setOpen] = React.useState(false);
-    
+
     return (
       <Drawer open={open} onOpenChange={setOpen}>
         <Drawer.Trigger asChild>
@@ -298,10 +317,14 @@ export const WithoutCloseButton: Story = {
           </Drawer.Header>
           <Drawer.Body>
             <p>This drawer doesn't have a close button in the header.</p>
-            <p className="mt-4">You can close it by clicking outside or using the button below.</p>
+            <p className="mt-4">
+              You can close it by clicking outside or using the button below.
+            </p>
           </Drawer.Body>
           <Drawer.Footer>
-            <GlassButton size="sm" onClick={() => setOpen(false)}>Close</GlassButton>
+            <GlassButton size="sm" onClick={() => setOpen(false)}>
+              Close
+            </GlassButton>
           </Drawer.Footer>
         </Drawer.Content>
       </Drawer>
@@ -320,7 +343,7 @@ export const ScrollableContent: Story = {
         <Drawer.Header>
           <Drawer.Title>Terms of Service</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 hover:opacity-100 transition-opacity">
+            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -328,17 +351,19 @@ export const ScrollableContent: Story = {
         <Drawer.Body>
           {Array.from({ length: 20 }, (_, i) => (
             <div key={i} className="mb-4">
-              <h3 className="font-medium mb-2">{i + 1}. Section Title</h3>
+              <h3 className="mb-2 font-medium">{i + 1}. Section Title</h3>
               <p className="text-sm text-white/70">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                nostrud exercitation ullamco laboris.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris.
               </p>
             </div>
           ))}
         </Drawer.Body>
         <Drawer.Footer>
-          <GlassButton variant="outline" size="sm">Decline</GlassButton>
+          <GlassButton variant="outline" size="sm">
+            Decline
+          </GlassButton>
           <GlassButton size="sm">Accept</GlassButton>
         </Drawer.Footer>
       </Drawer.Content>

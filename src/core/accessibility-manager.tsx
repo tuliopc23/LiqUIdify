@@ -98,13 +98,13 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
       setState((previous) => ({ ...previous, keyboardNavigation: false }));
     };
 
-    if ("undefined" !== typeof window) {
+    if ('undefined' !== typeof window) {
       window.addEventListener('keydown', handleKeyDown);
       window.addEventListener('mousedown', handleMouseDown);
     }
 
     return () => {
-      if ("undefined" !== typeof window) {
+      if ('undefined' !== typeof window) {
         window.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('mousedown', handleMouseDown);
       }
@@ -153,9 +153,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
         'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
       );
       const firstElement = focusableElements[0] as HTMLElement;
-      const lastElement = focusableElements.at(
-        -1
-      ) as HTMLElement;
+      const lastElement = focusableElements.at(-1) as HTMLElement;
 
       const handleTabKey = (e: KeyboardEvent) => {
         if ('Tab' !== e.key) {

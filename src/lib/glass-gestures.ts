@@ -358,7 +358,8 @@ export class GlassGestureRecognizer {
     this.lastTime = now;
 
     const distance = Math.hypot(
-      (x - this.startPosition.x), (y - this.startPosition.y)
+      x - this.startPosition.x,
+      y - this.startPosition.y
     );
 
     const direction =
@@ -390,7 +391,8 @@ export class GlassGestureRecognizer {
     const now = performance.now();
     const duration = now - this.startTime;
     const distance = Math.hypot(
-      (x - this.startPosition.x), (y - this.startPosition.y)
+      x - this.startPosition.x,
+      y - this.startPosition.y
     );
 
     const direction =
@@ -488,8 +490,8 @@ export class GlassGestureRecognizer {
       // Calculate pinch scale
       if (touch1 && touch2) {
         const currentDistance = Math.hypot(
-          (touch2.clientX - touch1.clientX),
-            (touch2.clientY - touch1.clientY)
+          touch2.clientX - touch1.clientX,
+          touch2.clientY - touch1.clientY
         );
 
         const storedTouch1 = this.touches.get(touch1.identifier);
@@ -497,8 +499,8 @@ export class GlassGestureRecognizer {
 
         if (storedTouch1 && storedTouch2) {
           const initialDistance = Math.hypot(
-            (storedTouch2.clientX - storedTouch1.clientX),
-              (storedTouch2.clientY - storedTouch1.clientY)
+            storedTouch2.clientX - storedTouch1.clientX,
+            storedTouch2.clientY - storedTouch1.clientY
           );
 
           if (0 < initialDistance) {
@@ -530,7 +532,7 @@ export class GlassGestureRecognizer {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    const distance = Math.hypot((x - centerX), (y - centerY));
+    const distance = Math.hypot(x - centerX, y - centerY);
 
     this.hoverState.position = { x, y };
     this.hoverState.intensity = Math.max(

@@ -1,5 +1,5 @@
 // Bun Test Setup
-import { beforeAll, afterEach } from 'bun:test';
+import { afterEach, beforeAll } from 'bun:test';
 
 declare global {
   var IS_REACT_ACT_ENVIRONMENT: boolean;
@@ -37,15 +37,10 @@ class MockIntersectionObserver implements IntersectionObserver {
   readonly rootMargin: string = '';
   readonly thresholds: ReadonlyArray<number> = [];
 
-  constructor(
-    _callback: IntersectionObserverCallback,
-    _options?: IntersectionObserverInit
-  ) {}
-
   disconnect(): void {}
   observe(_target: Element): void {}
   unobserve(_target: Element): void {}
-  takeRecords(): IntersectionObserverEntry[] {
+  takeRecords(): Array<IntersectionObserverEntry> {
     return [];
   }
 }
@@ -54,7 +49,6 @@ global.IntersectionObserver = MockIntersectionObserver as any;
 
 // Mock ResizeObserver
 class MockResizeObserver implements ResizeObserver {
-  constructor(_callback: ResizeObserverCallback) {}
   disconnect(): void {}
   observe(_target: Element, _options?: ResizeObserverOptions): void {}
   unobserve(_target: Element): void {}

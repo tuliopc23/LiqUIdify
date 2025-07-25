@@ -31,14 +31,14 @@ export interface ErrorTrackingConfig {
   sampleRate?: number;
   tracesSampleRate?: number;
   beforeSend?: (event: any, hint: any) => any;
-  integrations?: any[];
+  integrations?: Array<any>;
 }
 
 class ErrorTrackingSystem {
   private static instance: ErrorTrackingSystem;
   private sentry: any = null;
   private __config: ErrorTrackingConfig = {};
-  private errorQueue: ErrorReport[] = [];
+  private errorQueue: Array<ErrorReport> = [];
   private isInitialized = false;
 
   private constructor() {}
@@ -236,21 +236,17 @@ class ErrorTrackingSystem {
           error: Error;
           resetError: () => void;
         }) => (
-
           <div className="flex min-h-screen items-center justify-center p-4">
-
-            <div className="glass-effect rounded-lg p-8 max-w-md">
-
-              <h2 className="text-xl font-semibold mb-4">
+            <div className="glass-effect max-w-md rounded-lg p-8">
+              <h2 className="mb-4 font-semibold text-xl">
                 Something went wrong
               </h2>
 
-              <p className="text-gray-600 mb-4">
+              <p className="mb-4 text-gray-600">
                 We've been notified and are working on a fix.
               </p>
 
-              <details className="text-sm text-gray-500 mb-4">
-
+              <details className="mb-4 text-gray-500 text-sm">
                 <summary>Error details</summary>
 
                 <pre className="mt-2 whitespace-pre-wrap">{error.message}</pre>
@@ -258,7 +254,7 @@ class ErrorTrackingSystem {
 
               <button
                 onClick={resetError}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                className="rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
               >
                 Try again
               </button>
@@ -295,7 +291,7 @@ class ErrorTrackingSystem {
   async getErrorAnalytics(): Promise<{
     totalErrors: number;
     errorRate: number;
-    topErrors: { message: string; count: number }[];
+    topErrors: Array<{ message: string; count: number }>;
     affectedUsers: number;
   }> {
     // This would typically fetch from Sentry API
@@ -405,7 +401,6 @@ export function ErrorTrackingProvider({
   const ErrorBoundary = errorTracking.createErrorBoundary();
 
   if (ErrorBoundary) {
-
     return <ErrorBoundary>{children}</ErrorBoundary>;
   }
 

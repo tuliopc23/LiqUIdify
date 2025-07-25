@@ -1,6 +1,6 @@
-import { bundle, type BundleOptions } from 'lightningcss';
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { type BundleOptions, bundle } from 'lightningcss';
 
 const inputFile = join(process.cwd(), 'src/styles/tailwind.css');
 const outputFile = join(process.cwd(), 'dist/liquidui.css');
@@ -8,7 +8,7 @@ const outputFile = join(process.cwd(), 'dist/liquidui.css');
 // Ensure output directory exists
 mkdirSync(dirname(outputFile), { recursive: true });
 
-const options: BundleOptions<{}> = {
+const options: BundleOptions<void> = {
   filename: inputFile,
   minify: process.env.NODE_ENV === 'production',
   sourceMap: true,

@@ -1,2 +1,1 @@
-
-export { GlassTable } from "./glass-table";
+export { GlassTable } from './glass-table';

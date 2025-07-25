@@ -140,7 +140,7 @@ export class GlassPerformanceMonitor {
     layoutThrashing: 0,
   };
 
-  private frameHistory: number[] = [];
+  private frameHistory: Array<number> = [];
   private lastFrameTime: number = 0;
   private isMonitoring: boolean = false;
   private animationFrame: number | null = null;
@@ -220,8 +220,8 @@ export class GlassPerformanceMonitor {
     this.metrics.layoutThrashing = count;
   }
 
-  getRecommendations(): string[] {
-    const recommendations: string[] = [];
+  getRecommendations(): Array<string> {
+    const recommendations: Array<string> = [];
     const { fps, activeAnimations, droppedFrames, memoryUsage } = this.metrics;
 
     if (30 > fps) {
@@ -442,17 +442,19 @@ export class GlassAnimationScheduler {
       if (0 === task.frameCount % 2) {
         return;
       }
-    } else if (0.05 > visibilityRatio && // Small elements - reduce frame rate
-      0 === task.frameCount % 1.5) {
-        return;
-      }
+    } else if (
+      0.05 > visibilityRatio && // Small elements - reduce frame rate
+      0 === task.frameCount % 1.5
+    ) {
+      return;
+    }
   }
 
   getMetrics(): PerformanceMetrics {
     return this.monitor.getMetrics();
   }
 
-  getRecommendations(): string[] {
+  getRecommendations(): Array<string> {
     return this.monitor.getRecommendations();
   }
 
@@ -535,8 +537,10 @@ export const GPUAccelerationHelper = {
  * Provides performance monitoring and optimization tools
  */
 export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
-  const [metrics, setMetrics] = useState<PerformanceMetrics | null | null>(undefined);
-  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [metrics, setMetrics] = useState<PerformanceMetrics | null | null>(
+    undefined
+  );
+  const [recommendations, setRecommendations] = useState<Array<string>>([]);
   const schedulerRef = useRef<GlassAnimationScheduler | null>(null);
   const configRef = useRef<OptimizationConfig>({
     ...DEFAULT_PERFORMANCE_CONFIG,

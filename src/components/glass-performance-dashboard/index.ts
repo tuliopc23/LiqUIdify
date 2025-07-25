@@ -1,2 +1,1 @@
-
-export * from "./glass-performance-dashboard";
+export * from './glass-performance-dashboard';

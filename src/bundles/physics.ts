@@ -4,12 +4,12 @@
  */
 
 // Physics-based components
-export * from "../components/glass-slider";
+export * from '../components/glass-slider';
 // Physics hooks
 
-export * from "../hooks/use-haptic-feedback";
+export * from '../hooks/use-haptic-feedback';
 // Physics utilities
-export * from "../lib/glass-physics";
+export * from '../lib/glass-physics';
 
 // Tree-shaking marker
-export const PHYSICS_BUNDLE_MARKER = "liquidui-physics" as const;
+export const PHYSICS_BUNDLE_MARKER = 'liquidui-physics' as const;

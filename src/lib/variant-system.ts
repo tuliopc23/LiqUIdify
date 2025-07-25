@@ -19,11 +19,13 @@ export interface VariantConfig<
 > {
   base?: string;
   variants: T;
-  compoundVariants?: ({
-    [K in keyof T]?: keyof T[K];
-  } & {
-    class: string;
-  })[];
+  compoundVariants?: Array<
+    {
+      [K in keyof T]?: keyof T[K];
+    } & {
+      class: string;
+    }
+  >;
   defaultVariants?: {
     [K in keyof T]?: keyof T[K];
   };
@@ -70,20 +72,26 @@ export function createVariants<
     }
 
     // Add compound variant classes
-    if (config.compoundVariants) {for (const compound of config.compoundVariants) {
-      const { class: compoundClass, ...compoundVariants } = compound;
+    if (config.compoundVariants) {
+      for (const compound of config.compoundVariants) {
+        const { class: compoundClass, ...compoundVariants } = compound;
 
-      const matches = Object.entries(compoundVariants).every(([key, value]) => {
-        const propertyValue =
-          variantProps[key as keyof typeof variantProps] ||
-          config.defaultVariants?.[key as keyof typeof config.defaultVariants];
-        return propertyValue === value;
-      });
+        const matches = Object.entries(compoundVariants).every(
+          ([key, value]) => {
+            const propertyValue =
+              variantProps[key as keyof typeof variantProps] ||
+              config.defaultVariants?.[
+                key as keyof typeof config.defaultVariants
+              ];
+            return propertyValue === value;
+          }
+        );
 
-      if (matches) {
-        classes.push(compoundClass);
+        if (matches) {
+          classes.push(compoundClass);
+        }
       }
-    }}
+    }
 
     return cn(classes, className, classNameProperty);
   };

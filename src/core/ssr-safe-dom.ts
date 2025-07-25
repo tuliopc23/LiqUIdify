@@ -65,9 +65,9 @@ export const safeQuerySelector = <T extends Element = Element>(
 export const safeQuerySelectorAll = <T extends Element = Element>(
   selector: string,
   container?: Element | Document
-): NodeListOf<T> | T[] => {
+): NodeListOf<T> | Array<T> => {
   if (isSSR()) {
-    return [] as T[];
+    return [] as Array<T>;
   }
 
   try {
@@ -75,7 +75,7 @@ export const safeQuerySelectorAll = <T extends Element = Element>(
     return root.querySelectorAll<T>(selector);
   } catch {
     // Logging disabled
-    return [] as T[];
+    return [] as Array<T>;
   }
 };
 
@@ -89,7 +89,9 @@ export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
   }
 
   try {
-    return "undefined" === typeof document ? undefined : document.getElementById(id) as T | null;
+    return 'undefined' === typeof document
+      ? undefined
+      : (document.getElementById(id) as T | null);
   } catch {
     // Logging disabled
     // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
@@ -153,8 +155,14 @@ export const safeGetViewportDimensions = (): {
 
   try {
     return {
-      width: "undefined" === typeof window ? 1024 : (window.innerWidth || document.documentElement.clientWidth || 1024),
-      height: "undefined" === typeof window ? 768 : (window.innerHeight || document.documentElement.clientHeight || 768),
+      width:
+        'undefined' === typeof window
+          ? 1024
+          : window.innerWidth || document.documentElement.clientWidth || 1024,
+      height:
+        'undefined' === typeof window
+          ? 768
+          : window.innerHeight || document.documentElement.clientHeight || 768,
     };
   } catch {
     // Logging disabled

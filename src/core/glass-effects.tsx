@@ -4,13 +4,11 @@
  * Provides React hooks for glass effects and interactions
  */
 
-import type { PartialDeep, RequireAtLeastOne, Merge } from 'type-fest';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type {
   GlassEffectConfig,
   GlassIntensity,
   GlassVariant,
-
 } from './glass/unified-glass-system';
 
 import { useUnifiedGlass } from './glass/unified-glass-system';
@@ -177,16 +175,20 @@ export function useResponsiveGlass(
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setScreenSize("undefined" !== typeof window && 768 > window.innerWidth ? 'mobile' : 'desktop');
+      setScreenSize(
+        'undefined' !== typeof window && 768 > window.innerWidth
+          ? 'mobile'
+          : 'desktop'
+      );
     };
 
     checkScreenSize();
-    if ("undefined" !== typeof window) {
+    if ('undefined' !== typeof window) {
       window.addEventListener('resize', checkScreenSize);
     }
 
     return () => {
-      if ("undefined" !== typeof window) {
+      if ('undefined' !== typeof window) {
         window.removeEventListener('resize', checkScreenSize);
       }
     };
@@ -195,9 +197,9 @@ export function useResponsiveGlass(
   const currentIntensity =
     'mobile' === screenSize && mobileIntensity
       ? mobileIntensity
-      : ('desktop' === screenSize && desktopIntensity
+      : 'desktop' === screenSize && desktopIntensity
         ? desktopIntensity
-        : defaultIntensity || 'medium');
+        : defaultIntensity || 'medium';
 
   return useGlassEffects({
     ...restOptions,

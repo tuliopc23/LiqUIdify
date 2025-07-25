@@ -50,8 +50,8 @@ export interface AnimationSequenceOptions {
 }
 
 export interface AnimationStep {
-  target: string | HTMLElement | HTMLElement[];
-  keyframes: Keyframe[];
+  target: string | HTMLElement | Array<HTMLElement>;
+  keyframes: Array<Keyframe>;
   duration?: number;
   options?: KeyframeAnimationOptions;
   onStart?: () => void;
@@ -82,8 +82,8 @@ export interface MagneticOptions {
  * Manages a sequence of coordinated animations
  */
 export class AnimationSequence {
-  private steps: AnimationStep[] = [];
-  private animations: Animation[] = [];
+  private steps: Array<AnimationStep> = [];
+  private animations: Array<Animation> = [];
   private isPlaying: boolean = false;
   private options: AnimationSequenceOptions;
   private prefersReducedMotion: boolean;
@@ -118,7 +118,7 @@ export class AnimationSequence {
   /**
    * Add multiple animation steps
    */
-  addAll(steps: AnimationStep[]): this {
+  addAll(steps: Array<AnimationStep>): this {
     this.steps.push(...steps);
     return this;
   }
@@ -254,21 +254,21 @@ export class AnimationSequence {
    * Get target elements from selector or element reference
    */
   private getTargetElements(
-    target: string | HTMLElement | HTMLElement[]
-  ): HTMLElement[] {
+    target: string | HTMLElement | Array<HTMLElement>
+  ): Array<HTMLElement> {
     if ('string' === typeof target) {
-      return [...document.querySelectorAll(target)] as HTMLElement[];
-    } else if (Array.isArray(target)) {
-      return target;
-    } else {
-      return [target];
+      return [...document.querySelectorAll(target)] as Array<HTMLElement>;
     }
+    if (Array.isArray(target)) {
+      return target;
+    }
+    return [target];
   }
 
   /**
    * Simplify keyframes for reduced motion
    */
-  private simplifyKeyframes(keyframes: Keyframe[]): Keyframe[] {
+  private simplifyKeyframes(keyframes: Array<Keyframe>): Array<Keyframe> {
     // For reduced motion, we only keep the first and last keyframe
     // and remove transform properties that cause motion
     if (2 >= keyframes.length) {
@@ -430,43 +430,43 @@ export class SpringAnimation {
   private applyValueToProperty(value: number): void {
     // Handle different property types
     switch (this.property) {
-    case 'x': 
-    case 'y': {
-      const transform = this.target.style.transform || '';
-      const regex = new RegExp(
-        `translate${this.property.toUpperCase()}\\([^)]+\\)`,
-        'g'
-      );
-      const newTransform = transform.replace(regex, '');
-      this.target.style.transform = `${newTransform} translate${this.property.toUpperCase()}(${value}px)`;
-    
-    break;
-    }
-    case 'rotate': {
-      const transform = this.target.style.transform || '';
-      const regex = /rotate\([^)]+\)/g;
-      const newTransform = transform.replaceAll(regex, '');
-      this.target.style.transform = `${newTransform} rotate(${value}deg)`;
-    
-    break;
-    }
-    case 'scale': {
-      const transform = this.target.style.transform || '';
-      const regex = /scale\([^)]+\)/g;
-      const newTransform = transform.replaceAll(regex, '');
-      this.target.style.transform = `${newTransform} scale(${value})`;
-    
-    break;
-    }
-    case 'opacity': {
-      this.target.style.opacity = value.toString();
-    
-    break;
-    }
-    default: {
-      // For other properties, assume pixels
-      (this.target.style as any)[this.property] = `${value}px`;
-    }
+      case 'x':
+      case 'y': {
+        const transform = this.target.style.transform || '';
+        const regex = new RegExp(
+          `translate${this.property.toUpperCase()}\\([^)]+\\)`,
+          'g'
+        );
+        const newTransform = transform.replace(regex, '');
+        this.target.style.transform = `${newTransform} translate${this.property.toUpperCase()}(${value}px)`;
+
+        break;
+      }
+      case 'rotate': {
+        const transform = this.target.style.transform || '';
+        const regex = /rotate\([^)]+\)/g;
+        const newTransform = transform.replaceAll(regex, '');
+        this.target.style.transform = `${newTransform} rotate(${value}deg)`;
+
+        break;
+      }
+      case 'scale': {
+        const transform = this.target.style.transform || '';
+        const regex = /scale\([^)]+\)/g;
+        const newTransform = transform.replaceAll(regex, '');
+        this.target.style.transform = `${newTransform} scale(${value})`;
+
+        break;
+      }
+      case 'opacity': {
+        this.target.style.opacity = value.toString();
+
+        break;
+      }
+      default: {
+        // For other properties, assume pixels
+        (this.target.style as any)[this.property] = `${value}px`;
+      }
     }
   }
 }
@@ -610,7 +610,7 @@ export function useMagneticEffect(
 
     // Initialize
     updateElementPosition();
-    if ("undefined" !== typeof window) {
+    if ('undefined' !== typeof window) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('resize', updateElementPosition);
       window.addEventListener('scroll', updateElementPosition);
@@ -619,7 +619,7 @@ export function useMagneticEffect(
 
     // Cleanup
     return () => {
-      if ("undefined" !== typeof window) {
+      if ('undefined' !== typeof window) {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('resize', updateElementPosition);
         window.removeEventListener('scroll', updateElementPosition);

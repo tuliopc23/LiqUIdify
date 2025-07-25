@@ -1,12 +1,11 @@
 /**
  * Story Template for LiquidUI Components
- * 
+ *
  * This template provides a consistent structure for all component stories
  * to ensure comprehensive documentation and testing coverage.
  */
 
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import type { Meta } from '@storybook/react';
 
 // Example template structure
 export const storyTemplate = {
@@ -19,19 +18,13 @@ export const storyTemplate = {
 
   // 2. Variants - All component variants
   Variants: {
-    render: () => (
-      <div className="space-y-4">
-        {/* Show all variants */}
-      </div>
-    ),
+    render: () => <div className="space-y-4">{/* Show all variants */}</div>,
   },
 
   // 3. Sizes - All size options
   Sizes: {
     render: () => (
-      <div className="flex items-center gap-4">
-        {/* Show all sizes */}
-      </div>
+      <div className="flex items-center gap-4">{/* Show all sizes */}</div>
     ),
   },
 
@@ -40,15 +33,15 @@ export const storyTemplate = {
     render: () => (
       <div className="grid grid-cols-3 gap-4">
         <div>
-          <h4 className="text-sm font-medium mb-2">Normal</h4>
+          <h4 className="mb-2 font-medium text-sm">Normal</h4>
           {/* Normal state */}
         </div>
         <div>
-          <h4 className="text-sm font-medium mb-2">Disabled</h4>
+          <h4 className="mb-2 font-medium text-sm">Disabled</h4>
           {/* Disabled state */}
         </div>
         <div>
-          <h4 className="text-sm font-medium mb-2">Loading</h4>
+          <h4 className="mb-2 font-medium text-sm">Loading</h4>
           {/* Loading state */}
         </div>
       </div>
@@ -59,12 +52,12 @@ export const storyTemplate = {
   ThemeShowcase: {
     render: () => (
       <div className="grid grid-cols-2 gap-8">
-        <div className="light p-6 rounded-lg bg-white/50">
-          <h3 className="text-lg font-semibold mb-4">Light Theme</h3>
+        <div className="light rounded-lg bg-white/50 p-6">
+          <h3 className="mb-4 font-semibold text-lg">Light Theme</h3>
           {/* Component in light theme */}
         </div>
-        <div className="dark p-6 rounded-lg bg-black/50">
-          <h3 className="text-lg font-semibold mb-4 text-white">Dark Theme</h3>
+        <div className="dark rounded-lg bg-black/50 p-6">
+          <h3 className="mb-4 font-semibold text-lg text-white">Dark Theme</h3>
           {/* Component in dark theme */}
         </div>
       </div>
@@ -75,11 +68,7 @@ export const storyTemplate = {
   InteractiveDemo: {
     render: () => {
       // Add state hooks and handlers
-      return (
-        <div className="space-y-4">
-          {/* Interactive component */}
-        </div>
-      );
+      return <div className="space-y-4">{/* Interactive component */}</div>;
     },
   },
 
@@ -87,7 +76,7 @@ export const storyTemplate = {
   AccessibilityDemo: {
     render: () => (
       <div className="space-y-4">
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-gray-600 text-sm dark:text-gray-400">
           Keyboard navigation: Tab, Enter, Space, Arrow keys
         </p>
         {/* Component with accessibility features highlighted */}
@@ -99,16 +88,16 @@ export const storyTemplate = {
   ResponsiveDemo: {
     render: () => (
       <div className="space-y-8">
-        <div className="max-w-sm mx-auto">
-          <h4 className="text-sm font-medium mb-2">Mobile (max-w-sm)</h4>
+        <div className="mx-auto max-w-sm">
+          <h4 className="mb-2 font-medium text-sm">Mobile (max-w-sm)</h4>
           {/* Mobile view */}
         </div>
-        <div className="max-w-md mx-auto">
-          <h4 className="text-sm font-medium mb-2">Tablet (max-w-md)</h4>
+        <div className="mx-auto max-w-md">
+          <h4 className="mb-2 font-medium text-sm">Tablet (max-w-md)</h4>
           {/* Tablet view */}
         </div>
         <div>
-          <h4 className="text-sm font-medium mb-2">Desktop (full width)</h4>
+          <h4 className="mb-2 font-medium text-sm">Desktop (full width)</h4>
           {/* Desktop view */}
         </div>
       </div>
@@ -172,8 +161,10 @@ export function createMeta<T>(config: {
   category?: keyof typeof storyCategories;
 }) {
   return {
-    title: config.category 
-      ? storyCategories[config.category as keyof typeof storyCategories][config.title as any] || config.title
+    title: config.category
+      ? storyCategories[config.category as keyof typeof storyCategories][
+          config.title as any
+        ] || config.title
       : config.title,
     component: config.component,
     parameters: {

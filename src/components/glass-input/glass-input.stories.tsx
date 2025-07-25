@@ -1,139 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-import { GlassInput } from './glass-input';
-import { Card } from '../glass-card-refactored/glass-card';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { 
-  Search,
-  Mail,
-  Lock,
-  User,
-  Phone,
-  Calendar,
-  CreditCard,
-  DollarSign,
-  Globe,
-  Link,
-  Hash,
+import {
   AtSign,
-  MapPin,
-  Home,
   Building,
-  FileText,
-  Edit,
-  Bookmark,
-  Star,
-  Heart,
-  Flag,
-  Tag,
-  Folder,
-  File,
-  Image,
-  Video,
-  Music,
-  Mic,
-  Camera,
-  Wifi,
-  Bluetooth,
-  Battery,
-  Clock,
-  AlertCircle,
-  Info,
-  HelpCircle,
-  CheckCircle,
-  XCircle,
-  AlertTriangle,
-  Shield,
-  Key,
-  Eye,
-  EyeOff,
-  Filter,
-  Settings,
-  Sliders,
-  Package,
-  ShoppingCart,
-  Gift,
-  Award,
-  Zap,
-  Activity,
-  BarChart,
-  PieChart,
-  TrendingUp,
-  Database,
-  Server,
-  Cpu,
-  HardDrive,
-  Monitor,
-  Smartphone,
-  Tablet,
-  Headphones,
-  Keyboard,
-  Mouse,
-  Printer,
-  Code,
-  Terminal,
-  GitBranch,
-  GitCommit,
-  Github,
-  Gitlab,
-  Twitter,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Youtube,
-  Twitch,
-  MessageCircle,
-  Send,
-  Bell,
-  BellOff,
-  Volume2,
-  VolumeX,
-  Sun,
-  Moon,
-  Cloud,
-  CloudRain,
-  CloudSnow,
-  Wind,
-  Droplets,
-  Thermometer,
-  Umbrella,
-  Coffee,
-  Pizza,
-  Apple,
-  Anchor,
-  Aperture,
-  Archive,
-  ArrowRight,
-  ArrowLeft,
-  Download,
-  Upload,
-  RefreshCw,
-  RotateCw,
-  Save,
-  Trash2,
+  Calendar,
   Copy,
-  Clipboard,
-  Check,
-  X,
-  Plus,
-  Minus,
-  ChevronRight,
-  ChevronLeft,
-  ChevronUp,
-  ChevronDown,
-  ChevronsRight,
-  ChevronsLeft,
-  ChevronsUp,
-  ChevronsDown,
-  Square,
-  Circle,
-  Triangle,
-  Hexagon,
-  Octagon,
-  Command,
-  Option,
-  Delete
+  CreditCard,
+  Filter,
+  Globe,
+  Hash,
+  HelpCircle,
+  Home,
+  Link,
+  Mail,
+  MapPin,
+  Phone,
+  Search,
+  Shield,
+  User,
 } from 'lucide-react';
+import React from 'react';
+import { GlassButton } from '../glass-button-refactored/glass-button';
+import { Card } from '../glass-card-refactored/glass-card';
+import { GlassInput } from './glass-input';
 
 const meta = {
   title: 'Components/Forms/GlassInput',
@@ -222,7 +110,7 @@ The input component follows WAI-ARIA guidelines:
         category: 'Variant',
       },
     },
-    
+
     // Content
     placeholder: {
       control: 'text',
@@ -256,7 +144,7 @@ The input component follows WAI-ARIA guidelines:
         category: 'Content',
       },
     },
-    
+
     // Icons
     leftIcon: {
       control: false,
@@ -274,7 +162,7 @@ The input component follows WAI-ARIA guidelines:
         category: 'Icons',
       },
     },
-    
+
     // Features
     clearable: {
       control: 'boolean',
@@ -294,11 +182,20 @@ The input component follows WAI-ARIA guidelines:
         category: 'Features',
       },
     },
-    
+
     // HTML Props
     type: {
       control: 'select',
-      options: ['text', 'email', 'tel', 'url', 'number', 'date', 'time', 'datetime-local'],
+      options: [
+        'text',
+        'email',
+        'tel',
+        'url',
+        'number',
+        'date',
+        'time',
+        'datetime-local',
+      ],
       description: 'HTML input type',
       table: {
         type: { summary: 'string' },
@@ -350,7 +247,7 @@ The input component follows WAI-ARIA guidelines:
         category: 'HTML Props',
       },
     },
-    
+
     // Events
     onChange: {
       action: 'changed',
@@ -397,25 +294,29 @@ export const Playground: Story = {
 // Variants showcase
 export const Variants: Story = {
   render: () => (
-    <div className="space-y-6 w-full max-w-md">
+    <div className="w-full max-w-md space-y-6">
       <div className="space-y-2">
-        <label className="text-sm font-medium">Default</label>
+        <label className="font-medium text-sm">Default</label>
         <GlassInput placeholder="Enter text..." />
       </div>
-      
+
       <div className="space-y-2">
-        <label className="text-sm font-medium">Search</label>
+        <label className="font-medium text-sm">Search</label>
         <GlassInput variant="search" placeholder="Search..." clearable />
       </div>
-      
+
       <div className="space-y-2">
-        <label className="text-sm font-medium">Password</label>
+        <label className="font-medium text-sm">Password</label>
         <GlassInput variant="password" placeholder="Enter password" />
       </div>
-      
+
       <div className="space-y-2">
-        <label className="text-sm font-medium">Email</label>
-        <GlassInput variant="email" type="email" placeholder="you@example.com" />
+        <label className="font-medium text-sm">Email</label>
+        <GlassInput
+          variant="email"
+          type="email"
+          placeholder="you@example.com"
+        />
       </div>
     </div>
   ),
@@ -424,37 +325,37 @@ export const Variants: Story = {
 // With icons
 export const WithIcons: Story = {
   render: () => (
-    <div className="space-y-6 w-full max-w-md">
-      <GlassInput 
+    <div className="w-full max-w-md space-y-6">
+      <GlassInput
         leftIcon={<User className="h-4 w-4" />}
         placeholder="Username"
       />
-      
-      <GlassInput 
+
+      <GlassInput
         leftIcon={<Mail className="h-4 w-4" />}
         placeholder="Email address"
         type="email"
       />
-      
-      <GlassInput 
+
+      <GlassInput
         leftIcon={<Phone className="h-4 w-4" />}
         placeholder="Phone number"
         type="tel"
       />
-      
-      <GlassInput 
+
+      <GlassInput
         leftIcon={<CreditCard className="h-4 w-4" />}
         placeholder="Card number"
         rightIcon={<Shield className="h-4 w-4 text-green-500" />}
       />
-      
-      <GlassInput 
+
+      <GlassInput
         leftIcon={<Calendar className="h-4 w-4" />}
         placeholder="Select date"
         type="date"
       />
-      
-      <GlassInput 
+
+      <GlassInput
         leftIcon={<Link className="h-4 w-4" />}
         placeholder="Website URL"
         type="url"
@@ -466,47 +367,47 @@ export const WithIcons: Story = {
 // Features showcase
 export const Features: Story = {
   render: () => (
-    <div className="space-y-6 w-full max-w-md">
+    <div className="w-full max-w-md space-y-6">
       <div className="space-y-2">
-        <label className="text-sm font-medium">Clearable Input</label>
-        <GlassInput 
+        <label className="font-medium text-sm">Clearable Input</label>
+        <GlassInput
           placeholder="Type something..."
           clearable
           defaultValue="Clear me!"
         />
       </div>
-      
+
       <div className="space-y-2">
-        <label className="text-sm font-medium">With Helper Text</label>
-        <GlassInput 
+        <label className="font-medium text-sm">With Helper Text</label>
+        <GlassInput
           placeholder="Email"
           helperText="We'll never share your email"
           leftIcon={<Mail className="h-4 w-4" />}
         />
       </div>
-      
+
       <div className="space-y-2">
-        <label className="text-sm font-medium">Error State</label>
-        <GlassInput 
+        <label className="font-medium text-sm">Error State</label>
+        <GlassInput
           placeholder="Required field"
           error
           helperText="This field is required"
           defaultValue="Invalid input"
         />
       </div>
-      
+
       <div className="space-y-2">
-        <label className="text-sm font-medium">Disabled</label>
-        <GlassInput 
+        <label className="font-medium text-sm">Disabled</label>
+        <GlassInput
           placeholder="Disabled input"
           disabled
           defaultValue="Cannot edit"
         />
       </div>
-      
+
       <div className="space-y-2">
-        <label className="text-sm font-medium">Read Only</label>
-        <GlassInput 
+        <label className="font-medium text-sm">Read Only</label>
+        <GlassInput
           placeholder="Read only"
           readOnly
           defaultValue="Read only value"
@@ -525,45 +426,51 @@ export const FormExample: Story = {
       password: '',
       confirmPassword: '',
     });
-    
+
     const [errors, setErrors] = React.useState<Record<string, string>>({});
-    
+
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       const newErrors: Record<string, string> = {};
-      
+
       if (!formData.username) newErrors.username = 'Username is required';
       if (!formData.email) newErrors.email = 'Email is required';
       if (!formData.password) newErrors.password = 'Password is required';
       if (formData.password !== formData.confirmPassword) {
         newErrors.confirmPassword = 'Passwords do not match';
       }
-      
+
       setErrors(newErrors);
-      
+
       if (Object.keys(newErrors).length === 0) {
         alert('Form submitted successfully!');
       }
     };
-    
-    const handleChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData(prev => ({ ...prev, [field]: e.target.value }));
-      // Clear error when user types
-      if (errors[field]) {
-        setErrors(prev => ({ ...prev, [field]: '' }));
-      }
-    };
-    
+
+    const handleChange =
+      (field: keyof typeof formData) =>
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+        // Clear error when user types
+        if (errors[field]) {
+          setErrors((prev) => ({ ...prev, [field]: '' }));
+        }
+      };
+
     return (
       <Card className="w-full max-w-md">
         <Card.Header>
           <Card.Title>Create Account</Card.Title>
-          <Card.Description>Fill in your details to get started</Card.Description>
+          <Card.Description>
+            Fill in your details to get started
+          </Card.Description>
         </Card.Header>
         <Card.Content>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="username" className="text-sm font-medium">Username</label>
+              <label htmlFor="username" className="font-medium text-sm">
+                Username
+              </label>
               <GlassInput
                 id="username"
                 placeholder="johndoe"
@@ -575,9 +482,11 @@ export const FormExample: Story = {
                 required
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">Email</label>
+              <label htmlFor="email" className="font-medium text-sm">
+                Email
+              </label>
               <GlassInput
                 id="email"
                 type="email"
@@ -591,9 +500,11 @@ export const FormExample: Story = {
                 autoComplete="email"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">Password</label>
+              <label htmlFor="password" className="font-medium text-sm">
+                Password
+              </label>
               <GlassInput
                 id="password"
                 variant="password"
@@ -601,14 +512,16 @@ export const FormExample: Story = {
                 value={formData.password}
                 onChange={handleChange('password')}
                 error={!!errors.password}
-                helperText={errors.password || "Must be at least 8 characters"}
+                helperText={errors.password || 'Must be at least 8 characters'}
                 required
                 autoComplete="new-password"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label htmlFor="confirmPassword" className="text-sm font-medium">Confirm Password</label>
+              <label htmlFor="confirmPassword" className="font-medium text-sm">
+                Confirm Password
+              </label>
               <GlassInput
                 id="confirmPassword"
                 variant="password"
@@ -621,7 +534,7 @@ export const FormExample: Story = {
                 autoComplete="new-password"
               />
             </div>
-            
+
             <GlassButton type="submit" variant="primary" fullWidth>
               Create Account
             </GlassButton>
@@ -635,43 +548,41 @@ export const FormExample: Story = {
 // Real-world examples
 export const RealWorldExamples: Story = {
   render: () => (
-    <div className="space-y-8 max-w-6xl">
+    <div className="max-w-6xl space-y-8">
       {/* Search Examples */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Search Inputs</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h3 className="font-semibold text-lg">Search Inputs</h3>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <GlassInput
             variant="search"
             placeholder="Search products..."
             clearable
           />
-          
+
           <GlassInput
             leftIcon={<Search className="h-4 w-4" />}
             rightIcon={<Filter className="h-4 w-4" />}
             placeholder="Search with filters"
           />
-          
+
           <GlassInput
             variant="search"
             placeholder="Search by location"
             leftIcon={<MapPin className="h-4 w-4" />}
             clearable
           />
-          
+
           <GlassInput
             leftIcon={<Globe className="h-4 w-4" />}
             placeholder="Search globally"
-            rightIcon={
-              <span className="text-xs text-gray-500">⌘K</span>
-            }
+            rightIcon={<span className="text-gray-500 text-xs">⌘K</span>}
           />
         </div>
       </div>
-      
+
       {/* Payment Form */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Payment Information</h3>
+        <h3 className="font-semibold text-lg">Payment Information</h3>
         <Card className="max-w-md">
           <Card.Content className="space-y-4">
             <GlassInput
@@ -680,7 +591,7 @@ export const RealWorldExamples: Story = {
               maxLength={19}
               autoComplete="cc-number"
             />
-            
+
             <div className="grid grid-cols-2 gap-4">
               <GlassInput
                 placeholder="MM/YY"
@@ -694,7 +605,7 @@ export const RealWorldExamples: Story = {
                 autoComplete="cc-csc"
               />
             </div>
-            
+
             <GlassInput
               leftIcon={<User className="h-4 w-4" />}
               placeholder="Cardholder name"
@@ -703,11 +614,11 @@ export const RealWorldExamples: Story = {
           </Card.Content>
         </Card>
       </div>
-      
+
       {/* Contact Form */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Contact Information</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
+        <h3 className="font-semibold text-lg">Contact Information</h3>
+        <div className="grid max-w-2xl grid-cols-1 gap-4 md:grid-cols-2">
           <GlassInput
             leftIcon={<User className="h-4 w-4" />}
             placeholder="First name"
@@ -743,11 +654,11 @@ export const RealWorldExamples: Story = {
           />
         </div>
       </div>
-      
+
       {/* Settings Inputs */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Settings</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
+        <h3 className="font-semibold text-lg">Settings</h3>
+        <div className="grid max-w-2xl grid-cols-1 gap-4 md:grid-cols-2">
           <GlassInput
             leftIcon={<AtSign className="h-4 w-4" />}
             placeholder="Username"
@@ -781,20 +692,22 @@ export const InteractiveDemo: Story = {
     const [value, setValue] = React.useState('');
     const [searchTerm, setSearchTerm] = React.useState('');
     const [password, setPassword] = React.useState('');
-    
+
     const passwordStrength = React.useMemo(() => {
       if (!password) return { strength: 0, label: '' };
       if (password.length < 6) return { strength: 1, label: 'Weak' };
       if (password.length < 10) return { strength: 2, label: 'Medium' };
       return { strength: 3, label: 'Strong' };
     }, [password]);
-    
+
     return (
-      <div className="space-y-8 w-full max-w-md">
+      <div className="w-full max-w-md space-y-8">
         <Card>
           <Card.Header>
             <Card.Title>Controlled Input</Card.Title>
-            <Card.Description>Character count: {value.length}/50</Card.Description>
+            <Card.Description>
+              Character count: {value.length}/50
+            </Card.Description>
           </Card.Header>
           <Card.Content>
             <GlassInput
@@ -808,7 +721,7 @@ export const InteractiveDemo: Story = {
             />
           </Card.Content>
         </Card>
-        
+
         <Card>
           <Card.Header>
             <Card.Title>Live Search</Card.Title>
@@ -823,14 +736,19 @@ export const InteractiveDemo: Story = {
             />
             {searchTerm && (
               <div className="space-y-2">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+                <p className="text-gray-600 text-sm dark:text-gray-400">
                   Searching for: "{searchTerm}"
                 </p>
                 <div className="space-y-1">
                   {['Apple', 'Banana', 'Orange', 'Grape', 'Mango']
-                    .filter(item => item.toLowerCase().includes(searchTerm.toLowerCase()))
-                    .map(item => (
-                      <div key={item} className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+                    .filter((item) =>
+                      item.toLowerCase().includes(searchTerm.toLowerCase())
+                    )
+                    .map((item) => (
+                      <div
+                        key={item}
+                        className="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      >
                         {item}
                       </div>
                     ))}
@@ -839,7 +757,7 @@ export const InteractiveDemo: Story = {
             )}
           </Card.Content>
         </Card>
-        
+
         <Card>
           <Card.Header>
             <Card.Title>Password Strength</Card.Title>
@@ -859,12 +777,14 @@ export const InteractiveDemo: Story = {
                     <div
                       key={level}
                       className={cn(
-                        "h-2 flex-1 rounded transition-colors",
+                        'h-2 flex-1 rounded transition-colors',
                         level <= passwordStrength.strength
-                          ? level === 1 ? "bg-red-500"
-                          : level === 2 ? "bg-yellow-500"
-                          : "bg-green-500"
-                          : "bg-gray-200 dark:bg-gray-700"
+                          ? level === 1
+                            ? 'bg-red-500'
+                            : level === 2
+                              ? 'bg-yellow-500'
+                              : 'bg-green-500'
+                          : 'bg-gray-200 dark:bg-gray-700'
                       )}
                     />
                   ))}
@@ -882,34 +802,36 @@ export const InteractiveDemo: Story = {
 export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4 p-6 rounded-xl bg-white/80 dark:bg-gray-900/80">
-          <h3 className="text-lg font-semibold">Light Theme</h3>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="space-y-4 rounded-xl bg-white/80 p-6 dark:bg-gray-900/80">
+          <h3 className="font-semibold text-lg">Light Theme</h3>
           <div className="space-y-4">
             <GlassInput placeholder="Default input" />
             <GlassInput variant="search" placeholder="Search..." clearable />
-            <GlassInput 
+            <GlassInput
               placeholder="With icon"
               leftIcon={<Mail className="h-4 w-4" />}
             />
-            <GlassInput 
+            <GlassInput
               placeholder="Error state"
               error
               helperText="Something went wrong"
             />
           </div>
         </div>
-        
-        <div className="space-y-4 p-6 rounded-xl bg-gray-900/80 dark:bg-white/80">
-          <h3 className="text-lg font-semibold text-white dark:text-gray-900">Dark Theme</h3>
+
+        <div className="space-y-4 rounded-xl bg-gray-900/80 p-6 dark:bg-white/80">
+          <h3 className="font-semibold text-lg text-white dark:text-gray-900">
+            Dark Theme
+          </h3>
           <div className="space-y-4">
             <GlassInput placeholder="Default input" />
             <GlassInput variant="search" placeholder="Search..." clearable />
-            <GlassInput 
+            <GlassInput
               placeholder="With icon"
               leftIcon={<Mail className="h-4 w-4" />}
             />
-            <GlassInput 
+            <GlassInput
               placeholder="Error state"
               error
               helperText="Something went wrong"
@@ -920,7 +842,7 @@ export const ThemeShowcase: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { 
+    backgrounds: {
       default: 'liquid-gradient',
     },
   },
@@ -929,13 +851,16 @@ export const ThemeShowcase: Story = {
 // Accessibility showcase
 export const AccessibilityShowcase: Story = {
   render: () => (
-    <div className="space-y-8 max-w-2xl">
+    <div className="max-w-2xl space-y-8">
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Proper Labeling</h3>
+        <h3 className="font-semibold text-lg">Proper Labeling</h3>
         <Card>
           <Card.Content className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="accessible-input-1" className="text-sm font-medium">
+              <label
+                htmlFor="accessible-input-1"
+                className="font-medium text-sm"
+              >
                 Email Address (with visible label)
               </label>
               <GlassInput
@@ -946,7 +871,7 @@ export const AccessibilityShowcase: Story = {
                 autoComplete="email"
               />
             </div>
-            
+
             <div className="space-y-2">
               <label htmlFor="accessible-input-2" className="sr-only">
                 Search
@@ -961,13 +886,13 @@ export const AccessibilityShowcase: Story = {
           </Card.Content>
         </Card>
       </div>
-      
+
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Error Handling</h3>
+        <h3 className="font-semibold text-lg">Error Handling</h3>
         <Card>
           <Card.Content className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="error-input" className="text-sm font-medium">
+              <label htmlFor="error-input" className="font-medium text-sm">
                 Required Field
               </label>
               <GlassInput
@@ -982,12 +907,12 @@ export const AccessibilityShowcase: Story = {
           </Card.Content>
         </Card>
       </div>
-      
+
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Focus Management</h3>
+        <h3 className="font-semibold text-lg">Focus Management</h3>
         <Card>
           <Card.Content className="space-y-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600 text-sm dark:text-gray-400">
               Tab through these inputs to see focus indicators
             </p>
             <GlassInput placeholder="First input" />
@@ -997,9 +922,9 @@ export const AccessibilityShowcase: Story = {
           </Card.Content>
         </Card>
       </div>
-      
+
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Autocomplete Support</h3>
+        <h3 className="font-semibold text-lg">Autocomplete Support</h3>
         <Card>
           <Card.Content>
             <form className="space-y-4">

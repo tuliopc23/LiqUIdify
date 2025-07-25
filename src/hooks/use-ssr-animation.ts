@@ -20,8 +20,8 @@ export const useSSRAnimation = (
         cleanupRef.current();
       }
     };
-  // @ts-expect-error TS(2552): Cannot find name 'callback'. Did you mean '_callba... Remove this comment to see the full error message
-  }, [callback]);
+    // @ts-expect-error TS(2552): Cannot find name 'callback'. Did you mean '_callba... Remove this comment to see the full error message
+  }, [_callback]);
 
   // @ts-expect-error TS(2552): Cannot find name 'elementRef'. Did you mean '_elem... Remove this comment to see the full error message
   return elementRef;

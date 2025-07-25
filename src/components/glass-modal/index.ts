@@ -1,2 +1,1 @@
-
-export { GlassModal, type GlassModalProps } from "./glass-modal";
+export { GlassModal, type GlassModalProps } from './glass-modal';

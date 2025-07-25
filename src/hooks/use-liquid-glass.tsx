@@ -103,21 +103,25 @@ export function LiquidGlassProvider({
     root.style.setProperty('--glass-opacity', String(merged.opacity));
 
     // Set liquid glass tokens
-    for (const [key, value] of Object.entries(liquidGlassTokens.colors.glass.white)) {
-        root.style.setProperty(`--liquid-glass-${key}`, value as string);
-      }
-    
+    for (const [key, value] of Object.entries(
+      liquidGlassTokens.colors.glass.white
+    )) {
+      root.style.setProperty(`--liquid-glass-${key}`, value as string);
+    }
 
     // Set shadow tokens
-    for (const [key, value] of Object.entries(liquidGlassTokens.shadows.glass)) {
+    for (const [key, value] of Object.entries(
+      liquidGlassTokens.shadows.glass
+    )) {
       root.style.setProperty(`--liquid-shadow-${key}`, value as string);
     }
 
     // Set timing tokens
-    for (const [key, value] of Object.entries(liquidGlassTokens.animation.duration)) {
-        root.style.setProperty(`--liquid-timing-${key}`, value as string);
-      }
-    
+    for (const [key, value] of Object.entries(
+      liquidGlassTokens.animation.duration
+    )) {
+      root.style.setProperty(`--liquid-timing-${key}`, value as string);
+    }
 
     // Enable specular highlights if configured
     if (merged.specularHighlights) {
@@ -126,7 +130,6 @@ export function LiquidGlassProvider({
   }, [merged]);
 
   return (
-
     <LiquidGlassContext.Provider
       value={{ ...merged, contentAnalysis, updateGlassStyle }}
     >

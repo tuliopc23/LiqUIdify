@@ -63,7 +63,7 @@ export interface HapticFeedbackConfig {
   visual?: VisualFeedbackConfig;
   intensity?: number;
   customPatterns?: {
-    [key: string]: number[];
+    [key: string]: Array<number>;
   };
 }
 
@@ -281,7 +281,6 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
       try {
         const context = initAudioContext();
         if (!context) {
-
           return;
         }
 
@@ -312,13 +311,13 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
     );
 
     // Wait for all audio files to load
-    Promise.all(loadPromises).catch((error) => {
+    Promise.all(loadPromises).catch((_error) => {
       // Logging disabled
     });
   }, []);
 
   // Trigger vibration
-  const vibrate = useCallback((pattern: number[]) => {
+  const vibrate = useCallback((pattern: Array<number>) => {
     if ('undefined' === typeof window || 'undefined' === typeof navigator) {
       return;
     }
@@ -432,7 +431,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
   );
 
   // Create custom pattern
-  const createPattern = useCallback((name: string, pattern: number[]) => {
+  const createPattern = useCallback((name: string, pattern: Array<number>) => {
     if (!configRef.current.customPatterns) {
       configRef.current.customPatterns = {};
     }
@@ -480,7 +479,6 @@ export function HapticProvider({
   const haptic = useHapticFeedback(config);
 
   return (
-
     <HapticContext.Provider value={{ config, trigger: haptic.trigger }}>
       {children}
     </HapticContext.Provider>

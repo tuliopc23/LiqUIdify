@@ -41,8 +41,8 @@ export const GlassCardLite = forwardRef<HTMLDivElement, GlassCardLiteProps>(
     };
 
     return (
-
-      <div ref={ref}
+      <div
+        ref={ref}
         className={cn(
           'glass-card-lite',
           'rounded-2xl',

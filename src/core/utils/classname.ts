@@ -5,8 +5,8 @@
  * conditional classes, arrays, and objects.
  */
 
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * Combines multiple class values into a single string
@@ -17,8 +17,8 @@ import { twMerge } from "tailwind-merge";
  * @example
  * cn('base-class', { 'active': isActive }, ['additional', 'classes'])
  */
-export function cn(...inputs: ClassValue[]): string {
-	return twMerge(clsx(inputs));
+export function cn(...inputs: Array<ClassValue>): string {
+  return twMerge(clsx(inputs));
 }
 
 /**
@@ -29,16 +29,16 @@ export function cn(...inputs: ClassValue[]): string {
  * @returns Function that applies variants based on props
  */
 export function createVariantClass<T extends Record<string, string>>(
-	base: string,
-	variants: T,
+  base: string,
+  variants: T
 ) {
-	return (props: Partial<Record<keyof T, boolean>>): string => {
-		const variantClasses = Object.entries(variants)
-			.filter(([key]) => props[key as keyof T])
-			.map(([, value]) => value);
+  return (props: Partial<Record<keyof T, boolean>>): string => {
+    const variantClasses = Object.entries(variants)
+      .filter(([key]) => props[key as keyof T])
+      .map(([, value]) => value);
 
-		return cn(base, ...variantClasses);
-	};
+    return cn(base, ...variantClasses);
+  };
 }
 
 /**
@@ -48,7 +48,7 @@ export function createVariantClass<T extends Record<string, string>>(
  * @returns Function that returns class based on size prop
  */
 export function createSizeClass<T extends Record<string, string>>(sizeMap: T) {
-	return (size: keyof T): string => sizeMap[size] || "";
+  return (size: keyof T): string => sizeMap[size] || '';
 }
 
 /**
@@ -56,23 +56,23 @@ export function createSizeClass<T extends Record<string, string>>(sizeMap: T) {
  * Provides predefined glass effect classes for consistent styling
  */
 export const GLASS_CLASSES = {
-	default:
-		"backdrop-blur-glass saturate-[180%] bg-glass-light-primary border border-border-glass-light",
-	elevated:
-		"backdrop-blur-glass-heavy saturate-[200%] bg-glass-light-elevated border border-border-glass-light-medium shadow-glass-sm",
-	floating:
-		"backdrop-blur-glass-heavy saturate-[180%] bg-glass-light-floating border border-border-glass-light-medium shadow-glass-md",
-	overlay:
-		"backdrop-blur-glass-ultra saturate-[200%] bg-glass-light-overlay border border-border-glass-light-strong shadow-glass-lg",
-	hover:
-		"hover:backdrop-blur-glass-heavy hover:saturate-[190%] hover:bg-glass-light-hover hover:border-border-glass-light-hover transition-all duration-glass",
-	active:
-		"active:backdrop-blur-glass active:saturate-[170%] active:bg-glass-light-active active:scale-[0.98] transition-all duration-glass-fast",
-	pressed:
-		"backdrop-blur-glass saturate-[160%] bg-glass-light-pressed scale-[0.98]",
-	interactive:
-		"cursor-pointer transition-all duration-glass hover:scale-[1.02] active:scale-[0.98]",
-	disabled: "opacity-50 cursor-not-allowed pointer-events-none",
+  default:
+    'backdrop-blur-glass saturate-[180%] bg-glass-light-primary border border-border-glass-light',
+  elevated:
+    'backdrop-blur-glass-heavy saturate-[200%] bg-glass-light-elevated border border-border-glass-light-medium shadow-glass-sm',
+  floating:
+    'backdrop-blur-glass-heavy saturate-[180%] bg-glass-light-floating border border-border-glass-light-medium shadow-glass-md',
+  overlay:
+    'backdrop-blur-glass-ultra saturate-[200%] bg-glass-light-overlay border border-border-glass-light-strong shadow-glass-lg',
+  hover:
+    'hover:backdrop-blur-glass-heavy hover:saturate-[190%] hover:bg-glass-light-hover hover:border-border-glass-light-hover transition-all duration-glass',
+  active:
+    'active:backdrop-blur-glass active:saturate-[170%] active:bg-glass-light-active active:scale-[0.98] transition-all duration-glass-fast',
+  pressed:
+    'backdrop-blur-glass saturate-[160%] bg-glass-light-pressed scale-[0.98]',
+  interactive:
+    'cursor-pointer transition-all duration-glass hover:scale-[1.02] active:scale-[0.98]',
+  disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
 } as const;
 
 /**
@@ -82,9 +82,9 @@ export const GLASS_CLASSES = {
  * @returns The corresponding glass classes
  */
 export function getGlassClass(
-	variant: keyof typeof GLASS_CLASSES = "default",
+  variant: keyof typeof GLASS_CLASSES = 'default'
 ): string {
-	return GLASS_CLASSES[variant] || GLASS_CLASSES.default;
+  return GLASS_CLASSES[variant] || GLASS_CLASSES.default;
 }
 
 /**
@@ -92,18 +92,18 @@ export function getGlassClass(
  * Provides consistent focus ring styling across components
  */
 export function focusRing(visible: boolean = true): string {
-	if (!visible) {
-		return "";
-	}
+  if (!visible) {
+    return '';
+  }
 
-	return cn(
-		"focus:outline-none",
-		"focus:ring-2",
-		"focus:ring-blue-500",
-		"focus:ring-opacity-50",
-		"focus:ring-offset-2",
-		"focus:ring-offset-white",
-	);
+  return cn(
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-blue-500',
+    'focus:ring-opacity-50',
+    'focus:ring-offset-2',
+    'focus:ring-offset-white'
+  );
 }
 
 /**
@@ -111,37 +111,37 @@ export function focusRing(visible: boolean = true): string {
  * Provides subtle interaction feedback
  */
 function createMicroInteraction(
-	type: "hover" | "active" | "focus" = "hover",
+  type: 'hover' | 'active' | 'focus' = 'hover'
 ): string {
-	const interactions = {
-		hover: "hover:scale-[1.02] hover:shadow-lg transition-all duration-200",
-		active: "active:scale-[0.98] transition-all duration-100",
-		focus: "focus:scale-[1.01] focus:shadow-md transition-all duration-150",
-	};
+  const interactions = {
+    hover: 'hover:scale-[1.02] hover:shadow-lg transition-all duration-200',
+    active: 'active:scale-[0.98] transition-all duration-100',
+    focus: 'focus:scale-[1.01] focus:shadow-md transition-all duration-150',
+  };
 
-	return interactions[type];
+  return interactions[type];
 }
 
 // Create microInteraction object with both function and properties
 export const microInteraction = Object.assign(createMicroInteraction, {
-	gentle: createMicroInteraction("hover"),
-	interactive: "hover:scale-[1.02] hover:shadow-lg transition-all duration-200",
-	smooth: "hover:scale-[1.01] transition-all duration-150",
+  gentle: createMicroInteraction('hover'),
+  interactive: 'hover:scale-[1.02] hover:shadow-lg transition-all duration-200',
+  smooth: 'hover:scale-[1.01] transition-all duration-150',
 });
 
 /**
  * Animation duration utilities
  */
 export const ANIMATION_DURATIONS = {
-	fast: "duration-150",
-	normal: "duration-300",
-	slow: "duration-500",
-	glass: "duration-300",
-	"glass-fast": "duration-150",
+  fast: 'duration-150',
+  normal: 'duration-300',
+  slow: 'duration-500',
+  glass: 'duration-300',
+  'glass-fast': 'duration-150',
 } as const;
 
 export function animationDuration(
-	speed: keyof typeof ANIMATION_DURATIONS = "normal",
+  speed: keyof typeof ANIMATION_DURATIONS = 'normal'
 ): string {
-	return ANIMATION_DURATIONS[speed];
+  return ANIMATION_DURATIONS[speed];
 }

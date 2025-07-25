@@ -132,7 +132,6 @@ export function useWebVitals(callback?: (metric: any) => void) {
 export function useRealtimePerformance() {
   const [fps, setFps] = useState(60);
   const [memory, setMemory] = useState<{ used: number; limit: number } | null>(
-
     undefined
   );
   const frameCountRef = useRef(0);

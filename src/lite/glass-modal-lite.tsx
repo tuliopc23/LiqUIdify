@@ -37,13 +37,13 @@ export function GlassModalLite({
       }
     };
 
-    if (isOpen && "undefined" !== typeof document) {
-        document.addEventListener('keydown', handleEscape);
-        document.body.style.overflow = 'hidden';
-      }
+    if (isOpen && 'undefined' !== typeof document) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
 
     return () => {
-      if ("undefined" !== typeof document) {
+      if ('undefined' !== typeof document) {
         document.removeEventListener('keydown', handleEscape);
         document.body.style.overflow = '';
       }
@@ -62,9 +62,7 @@ export function GlassModalLite({
   };
 
   return (
-
     <GlassPortal>
-
       <button
         className={cn(
           'glass-modal-lite-backdrop',
@@ -83,7 +81,6 @@ export function GlassModalLite({
         }}
         aria-label="Close modal backdrop"
       >
-
         <div
           ref={modalRef}
           className={cn(
@@ -103,19 +100,16 @@ export function GlassModalLite({
           aria-labelledby={title ? 'modal-title' : null}
         >
           {title && (
-
-            <div className="flex items-center justify-between mb-4">
-
-              <h3 id="modal-title" className="text-lg font-semibold">
+            <div className="mb-4 flex items-center justify-between">
+              <h3 id="modal-title" className="font-semibold text-lg">
                 {title}
               </h3>
 
               <button
                 onClick={onClose}
-                className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+                className="rounded-lg p-2 transition-colors hover:bg-white/10"
                 aria-label="Close modal"
               >
-
                 <X className="h-4 w-4" />
               </button>
             </div>

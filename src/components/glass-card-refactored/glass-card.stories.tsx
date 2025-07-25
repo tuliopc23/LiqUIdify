@@ -1,96 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-import { Card, GlassCard } from './glass-card';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { 
-  Heart, 
-  Share2, 
+import {
+  Activity,
+  Bookmark,
+  Check,
+  DollarSign,
+  Eye,
+  Heart,
   MessageCircle,
   MoreVertical,
-  Star,
-  Clock,
-  Calendar,
-  User,
-  Users,
-  MapPin,
-  Link,
-  Eye,
-  Download,
-  FileText,
-  Image as ImageIcon,
-  Play,
-  Pause,
-  Volume2,
-  Settings,
-  ChevronRight,
-  TrendingUp,
-  TrendingDown,
-  DollarSign,
+  Share2,
   ShoppingCart,
-  Package,
-  CreditCard,
-  Bookmark,
-  Bell,
-  Mail,
-  Phone,
-  Video,
-  Shield,
-  Award,
-  Zap,
-  Gift,
-  ThumbsUp,
-  AlertCircle,
-  CheckCircle,
-  XCircle,
-  Info,
-  HelpCircle,
-  Coffee,
-  Briefcase,
-  Home,
-  Building,
-  Compass,
-  Map,
-  Navigation,
-  Globe,
-  Wifi,
-  Battery,
-  Cloud,
-  Database,
-  Server,
-  Code,
-  Terminal,
-  GitBranch,
-  Activity,
-  BarChart,
-  PieChart,
-  LineChart,
-  Edit,
-  Copy,
-  Trash2,
-  Plus,
-  Minus,
-  X,
-  Check,
-  ExternalLink,
-  LogIn,
-  LogOut,
-  RefreshCw,
-  RotateCw,
-  Loader,
-  Search,
-  Filter,
-  Send,
-  Upload,
-  FolderOpen,
-  File,
-  Archive,
-  Inbox,
-  Tag,
-  Hash,
-  AtSign,
-  Percent,
-  Save
+  Star,
+  TrendingDown,
+  TrendingUp,
+  Users,
 } from 'lucide-react';
+import React from 'react';
+import { GlassButton } from '../glass-button-refactored/glass-button';
+import { Card, GlassCard } from './glass-card';
 
 const meta = {
   title: 'Components/Layout/GlassCard',
@@ -177,14 +104,24 @@ The card component follows WAI-ARIA guidelines:
         category: 'Content',
       },
     },
-    
+
     // Appearance
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'ghost', 'destructive', 'apple'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'ghost',
+        'destructive',
+        'apple',
+      ],
       description: 'Visual style variant',
       table: {
-        type: { summary: 'primary | secondary | tertiary | ghost | destructive | apple' },
+        type: {
+          summary:
+            'primary | secondary | tertiary | ghost | destructive | apple',
+        },
         defaultValue: { summary: 'primary' },
         category: 'Appearance',
       },
@@ -248,7 +185,7 @@ The card component follows WAI-ARIA guidelines:
         category: 'Appearance',
       },
     },
-    
+
     // Interactive
     hover: {
       control: 'boolean',
@@ -286,18 +223,20 @@ The card component follows WAI-ARIA guidelines:
         category: 'Interactive',
       },
     },
-    
+
     // Glass Effects
     glassEffect: {
       control: 'object',
       description: 'Glass effect configuration',
       table: {
         type: { summary: 'GlassEffect' },
-        defaultValue: { summary: '{ intensity: "medium", blur: true, backdrop: true }' },
+        defaultValue: {
+          summary: '{ intensity: "medium", blur: true, backdrop: true }',
+        },
         category: 'Glass Effects',
       },
     },
-    
+
     // Animation
     animation: {
       control: 'select',
@@ -318,7 +257,7 @@ The card component follows WAI-ARIA guidelines:
         category: 'Animation',
       },
     },
-    
+
     // Events
     onCardClick: {
       action: 'card clicked',
@@ -363,13 +302,20 @@ export const Playground: Story = {
       <>
         <Card.Header>
           <Card.Title>Glass Card</Card.Title>
-          <Card.Description>This is a glass card with compound components</Card.Description>
+          <Card.Description>
+            This is a glass card with compound components
+          </Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>Customize this card using the controls panel to explore different variants, sizes, and effects.</p>
+          <p>
+            Customize this card using the controls panel to explore different
+            variants, sizes, and effects.
+          </p>
         </Card.Content>
         <Card.Footer>
-          <GlassButton size="sm" variant="ghost">Learn More</GlassButton>
+          <GlassButton size="sm" variant="ghost">
+            Learn More
+          </GlassButton>
         </Card.Footer>
       </>
     ),
@@ -379,14 +325,16 @@ export const Playground: Story = {
 // Variants showcase
 export const Variants: Story = {
   render: () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+    <div className="grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       <Card variant="primary">
         <Card.Header>
           <Card.Title>Primary</Card.Title>
           <Card.Description>Default glass effect</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p className="text-sm">Standard glass appearance with white/gray background.</p>
+          <p className="text-sm">
+            Standard glass appearance with white/gray background.
+          </p>
         </Card.Content>
       </Card>
 
@@ -396,7 +344,9 @@ export const Variants: Story = {
           <Card.Description>Subtle glass effect</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p className="text-sm">Lighter background for nested or secondary content.</p>
+          <p className="text-sm">
+            Lighter background for nested or secondary content.
+          </p>
         </Card.Content>
       </Card>
 
@@ -426,7 +376,9 @@ export const Variants: Story = {
           <Card.Description>Danger variant</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p className="text-sm">Red-tinted glass for warnings or destructive actions.</p>
+          <p className="text-sm">
+            Red-tinted glass for warnings or destructive actions.
+          </p>
         </Card.Content>
       </Card>
 
@@ -436,7 +388,9 @@ export const Variants: Story = {
           <Card.Description>macOS-inspired</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p className="text-sm">Premium glass effect inspired by Apple's design language.</p>
+          <p className="text-sm">
+            Premium glass effect inspired by Apple's design language.
+          </p>
         </Card.Content>
       </Card>
     </div>
@@ -446,8 +400,8 @@ export const Variants: Story = {
 // Sizes showcase
 export const Sizes: Story = {
   render: () => (
-    <div className="flex flex-col gap-6 w-full max-w-4xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="flex w-full max-w-4xl flex-col gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card size="xs" padding="xs">
           <Card.Header>
             <Card.Title>Extra Small</Card.Title>
@@ -502,20 +456,26 @@ export const InteractiveStates: Story = {
   render: () => {
     const [selected1, setSelected1] = React.useState(false);
     const [selected2, setSelected2] = React.useState(false);
-    const [selected3, setSelected3] = React.useState(false);
+    const [_selected3, _setSelected3] = React.useState(false);
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+      <div className="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
         <Card hover>
           <Card.Header>
             <Card.Title>Hoverable Card</Card.Title>
             <Card.Description>Hover to see effect</Card.Description>
           </Card.Header>
           <Card.Content>
-            <p className="text-sm mb-4">This card has hover effects enabled. Move your mouse over it.</p>
+            <p className="mb-4 text-sm">
+              This card has hover effects enabled. Move your mouse over it.
+            </p>
             <div className="flex gap-2">
-              <GlassButton size="sm" variant="primary">Action</GlassButton>
-              <GlassButton size="sm" variant="ghost">Cancel</GlassButton>
+              <GlassButton size="sm" variant="primary">
+                Action
+              </GlassButton>
+              <GlassButton size="sm" variant="ghost">
+                Cancel
+              </GlassButton>
             </div>
           </Card.Content>
         </Card>
@@ -526,8 +486,10 @@ export const InteractiveStates: Story = {
             <Card.Description>Click anywhere on the card</Card.Description>
           </Card.Header>
           <Card.Content>
-            <p className="text-sm mb-4">This entire card is clickable. Try clicking it!</p>
-            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <p className="mb-4 text-sm">
+              This entire card is clickable. Try clicking it!
+            </p>
+            <div className="flex items-center gap-2 text-gray-600 text-sm dark:text-gray-400">
               <Eye className="h-4 w-4" />
               <span>1.2k views</span>
             </div>
@@ -540,17 +502,28 @@ export const InteractiveStates: Story = {
             <Card.Description>Click to select/deselect</Card.Description>
           </Card.Header>
           <Card.Content>
-            <p className="text-sm">This card can be selected. {selected1 ? 'Selected!' : 'Not selected'}</p>
+            <p className="text-sm">
+              This card can be selected.{' '}
+              {selected1 ? 'Selected!' : 'Not selected'}
+            </p>
           </Card.Content>
         </Card>
 
-        <Card selectable selected={selected2} onCardSelect={setSelected2} variant="secondary">
+        <Card
+          selectable
+          selected={selected2}
+          onCardSelect={setSelected2}
+          variant="secondary"
+        >
           <Card.Header>
             <Card.Title>Selectable Card 2</Card.Title>
             <Card.Description>Another selectable option</Card.Description>
           </Card.Header>
           <Card.Content>
-            <p className="text-sm">Multiple cards can be selected. {selected2 ? 'Selected!' : 'Not selected'}</p>
+            <p className="text-sm">
+              Multiple cards can be selected.{' '}
+              {selected2 ? 'Selected!' : 'Not selected'}
+            </p>
           </Card.Content>
         </Card>
       </div>
@@ -561,14 +534,16 @@ export const InteractiveStates: Story = {
 // Glass effects showcase
 export const GlassEffects: Story = {
   render: () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+    <div className="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
       <Card glassEffect={{ intensity: 'weak', blur: true, backdrop: true }}>
         <Card.Header>
           <Card.Title>Weak Glass</Card.Title>
           <Card.Description>Subtle transparency</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p className="text-sm">Low intensity glass effect for minimal visual impact.</p>
+          <p className="text-sm">
+            Low intensity glass effect for minimal visual impact.
+          </p>
         </Card.Content>
       </Card>
 
@@ -588,7 +563,9 @@ export const GlassEffects: Story = {
           <Card.Description>High transparency</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p className="text-sm">Maximum glass effect for dramatic visual impact.</p>
+          <p className="text-sm">
+            Maximum glass effect for dramatic visual impact.
+          </p>
         </Card.Content>
       </Card>
 
@@ -604,7 +581,7 @@ export const GlassEffects: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { 
+    backgrounds: {
       default: 'liquid-gradient',
     },
   },
@@ -613,7 +590,7 @@ export const GlassEffects: Story = {
 // Elevation showcase
 export const Elevations: Story = {
   render: () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+    <div className="grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       <Card elevation="none">
         <Card.Header>
           <Card.Title>No Shadow</Card.Title>
@@ -665,18 +642,20 @@ export const Elevations: Story = {
 // Real-world examples
 export const RealWorldExamples: Story = {
   render: () => (
-    <div className="space-y-8 w-full max-w-6xl">
+    <div className="w-full max-w-6xl space-y-8">
       {/* Dashboard Cards */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Dashboard Metrics</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <h3 className="font-semibold text-lg">Dashboard Metrics</h3>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card variant="primary" hover>
             <Card.Content>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Total Revenue</p>
-                  <p className="text-2xl font-bold">$48,250</p>
-                  <p className="text-sm text-green-600 flex items-center gap-1 mt-1">
+                  <p className="text-gray-600 text-sm dark:text-gray-400">
+                    Total Revenue
+                  </p>
+                  <p className="font-bold text-2xl">$48,250</p>
+                  <p className="mt-1 flex items-center gap-1 text-green-600 text-sm">
                     <TrendingUp className="h-3 w-3" />
                     12.5%
                   </p>
@@ -690,9 +669,11 @@ export const RealWorldExamples: Story = {
             <Card.Content>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Active Users</p>
-                  <p className="text-2xl font-bold">2,845</p>
-                  <p className="text-sm text-green-600 flex items-center gap-1 mt-1">
+                  <p className="text-gray-600 text-sm dark:text-gray-400">
+                    Active Users
+                  </p>
+                  <p className="font-bold text-2xl">2,845</p>
+                  <p className="mt-1 flex items-center gap-1 text-green-600 text-sm">
                     <TrendingUp className="h-3 w-3" />
                     8.2%
                   </p>
@@ -706,9 +687,11 @@ export const RealWorldExamples: Story = {
             <Card.Content>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Orders</p>
-                  <p className="text-2xl font-bold">184</p>
-                  <p className="text-sm text-red-600 flex items-center gap-1 mt-1">
+                  <p className="text-gray-600 text-sm dark:text-gray-400">
+                    Orders
+                  </p>
+                  <p className="font-bold text-2xl">184</p>
+                  <p className="mt-1 flex items-center gap-1 text-red-600 text-sm">
                     <TrendingDown className="h-3 w-3" />
                     3.1%
                   </p>
@@ -722,9 +705,11 @@ export const RealWorldExamples: Story = {
             <Card.Content>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Conversion</p>
-                  <p className="text-2xl font-bold">3.24%</p>
-                  <p className="text-sm text-green-600 flex items-center gap-1 mt-1">
+                  <p className="text-gray-600 text-sm dark:text-gray-400">
+                    Conversion
+                  </p>
+                  <p className="font-bold text-2xl">3.24%</p>
+                  <p className="mt-1 flex items-center gap-1 text-green-600 text-sm">
                     <TrendingUp className="h-3 w-3" />
                     1.8%
                   </p>
@@ -738,8 +723,8 @@ export const RealWorldExamples: Story = {
 
       {/* Product Card */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">E-commerce Product</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <h3 className="font-semibold text-lg">E-commerce Product</h3>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card hover interactive padding="none" className="overflow-hidden">
             <div className="h-48 bg-gradient-to-br from-purple-500 to-pink-600" />
             <Card.Header>
@@ -748,23 +733,32 @@ export const RealWorldExamples: Story = {
                   <Card.Title>Premium Headphones</Card.Title>
                   <Card.Description>Wireless Noise Cancelling</Card.Description>
                 </div>
-                <GlassButton size="sm" variant="ghost" iconOnly aria-label="Save">
+                <GlassButton
+                  size="sm"
+                  variant="ghost"
+                  iconOnly
+                  aria-label="Save"
+                >
                   <Heart className="h-4 w-4" />
                 </GlassButton>
               </div>
             </Card.Header>
             <Card.Content>
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <p className="text-2xl font-bold">$299</p>
-                  <p className="text-sm text-gray-500 line-through">$349</p>
+                  <p className="font-bold text-2xl">$299</p>
+                  <p className="text-gray-500 text-sm line-through">$349</p>
                 </div>
                 <div className="flex items-center gap-1">
                   <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
                   <span className="text-sm">4.8</span>
                 </div>
               </div>
-              <GlassButton variant="primary" fullWidth leftIcon={<ShoppingCart className="h-4 w-4" />}>
+              <GlassButton
+                variant="primary"
+                fullWidth
+                leftIcon={<ShoppingCart className="h-4 w-4" />}
+              >
                 Add to Cart
               </GlassButton>
             </Card.Content>
@@ -778,23 +772,32 @@ export const RealWorldExamples: Story = {
                   <Card.Title>Smart Watch Pro</Card.Title>
                   <Card.Description>Fitness & Health Tracking</Card.Description>
                 </div>
-                <GlassButton size="sm" variant="ghost" iconOnly aria-label="Save">
+                <GlassButton
+                  size="sm"
+                  variant="ghost"
+                  iconOnly
+                  aria-label="Save"
+                >
                   <Heart className="h-4 w-4" />
                 </GlassButton>
               </div>
             </Card.Header>
             <Card.Content>
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <p className="text-2xl font-bold">$449</p>
-                  <p className="text-sm text-gray-500 line-through">$499</p>
+                  <p className="font-bold text-2xl">$449</p>
+                  <p className="text-gray-500 text-sm line-through">$499</p>
                 </div>
                 <div className="flex items-center gap-1">
                   <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
                   <span className="text-sm">4.9</span>
                 </div>
               </div>
-              <GlassButton variant="primary" fullWidth leftIcon={<ShoppingCart className="h-4 w-4" />}>
+              <GlassButton
+                variant="primary"
+                fullWidth
+                leftIcon={<ShoppingCart className="h-4 w-4" />}
+              >
                 Add to Cart
               </GlassButton>
             </Card.Content>
@@ -804,7 +807,7 @@ export const RealWorldExamples: Story = {
 
       {/* Social Media Post */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Social Media Post</h3>
+        <h3 className="font-semibold text-lg">Social Media Post</h3>
         <Card className="max-w-2xl">
           <Card.Header>
             <div className="flex items-start gap-3">
@@ -813,7 +816,9 @@ export const RealWorldExamples: Story = {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold">Sarah Johnson</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">@sarahjohnson • 2h</p>
+                    <p className="text-gray-600 text-sm dark:text-gray-400">
+                      @sarahjohnson • 2h
+                    </p>
                   </div>
                   <GlassButton size="sm" variant="ghost" iconOnly>
                     <MoreVertical className="h-4 w-4" />
@@ -824,24 +829,25 @@ export const RealWorldExamples: Story = {
           </Card.Header>
           <Card.Content>
             <p className="mb-4">
-              Just launched our new glassmorphism design system! The combination of transparency, 
-              blur, and subtle shadows creates such a premium feel. What do you think? 🎨✨
+              Just launched our new glassmorphism design system! The combination
+              of transparency, blur, and subtle shadows creates such a premium
+              feel. What do you think? 🎨✨
             </p>
-            <div className="h-64 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-600 rounded-lg mb-4" />
-            <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-              <button className="flex items-center gap-2 hover:text-blue-500 transition-colors">
+            <div className="mb-4 h-64 rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-pink-600" />
+            <div className="flex items-center justify-between text-gray-600 text-sm dark:text-gray-400">
+              <button className="flex items-center gap-2 transition-colors hover:text-blue-500">
                 <Heart className="h-5 w-5" />
                 <span>483</span>
               </button>
-              <button className="flex items-center gap-2 hover:text-blue-500 transition-colors">
+              <button className="flex items-center gap-2 transition-colors hover:text-blue-500">
                 <MessageCircle className="h-5 w-5" />
                 <span>52</span>
               </button>
-              <button className="flex items-center gap-2 hover:text-blue-500 transition-colors">
+              <button className="flex items-center gap-2 transition-colors hover:text-blue-500">
                 <Share2 className="h-5 w-5" />
                 <span>Share</span>
               </button>
-              <button className="flex items-center gap-2 hover:text-blue-500 transition-colors">
+              <button className="flex items-center gap-2 transition-colors hover:text-blue-500">
                 <Bookmark className="h-5 w-5" />
               </button>
             </div>
@@ -855,15 +861,16 @@ export const RealWorldExamples: Story = {
 // Compound components demo
 export const CompoundComponents: Story = {
   render: () => (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+    <div className="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
       <Card>
         <Card.Header>
           <Card.Title>Using All Components</Card.Title>
           <Card.Description>Complete card structure</Card.Description>
         </Card.Header>
         <Card.Content>
-          <p className="text-sm mb-4">
-            This card uses all available compound components to create a complete structure.
+          <p className="mb-4 text-sm">
+            This card uses all available compound components to create a
+            complete structure.
           </p>
           <div className="space-y-2 text-sm">
             <div className="flex items-center gap-2">
@@ -893,11 +900,17 @@ export const CompoundComponents: Story = {
           </div>
         </Card.Content>
         <Card.Footer>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Footer content here</p>
+          <p className="text-gray-600 text-sm dark:text-gray-400">
+            Footer content here
+          </p>
         </Card.Footer>
         <Card.Actions>
-          <GlassButton size="sm" variant="ghost">Cancel</GlassButton>
-          <GlassButton size="sm" variant="primary">Confirm</GlassButton>
+          <GlassButton size="sm" variant="ghost">
+            Cancel
+          </GlassButton>
+          <GlassButton size="sm" variant="primary">
+            Confirm
+          </GlassButton>
         </Card.Actions>
       </Card>
 
@@ -908,7 +921,8 @@ export const CompoundComponents: Story = {
         </Card.Header>
         <Card.Content>
           <p className="text-sm">
-            You can use only the components you need. This card omits the Footer and Actions.
+            You can use only the components you need. This card omits the Footer
+            and Actions.
           </p>
         </Card.Content>
       </Card>
@@ -918,9 +932,9 @@ export const CompoundComponents: Story = {
           <Card.Title>Custom Padding</Card.Title>
         </Card.Header>
         <Card.Content>
-          <p className="text-sm px-6">
-            The padding prop controls the card's internal spacing, but individual components 
-            maintain their own padding for consistency.
+          <p className="px-6 text-sm">
+            The padding prop controls the card's internal spacing, but
+            individual components maintain their own padding for consistency.
           </p>
         </Card.Content>
       </Card>
@@ -945,9 +959,9 @@ export const CompoundComponents: Story = {
 export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4 p-6 rounded-xl bg-white/80 dark:bg-gray-900/80">
-          <h3 className="text-lg font-semibold">Light Theme</h3>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="space-y-4 rounded-xl bg-white/80 p-6 dark:bg-gray-900/80">
+          <h3 className="font-semibold text-lg">Light Theme</h3>
           <div className="space-y-4">
             <Card variant="primary">
               <Card.Header>
@@ -955,10 +969,12 @@ export const ThemeShowcase: Story = {
                 <Card.Description>Light theme appearance</Card.Description>
               </Card.Header>
               <Card.Content>
-                <p className="text-sm">Glass effects adapt to light backgrounds</p>
+                <p className="text-sm">
+                  Glass effects adapt to light backgrounds
+                </p>
               </Card.Content>
             </Card>
-            
+
             <Card variant="secondary">
               <Card.Header>
                 <Card.Title>Secondary Card</Card.Title>
@@ -969,9 +985,11 @@ export const ThemeShowcase: Story = {
             </Card>
           </div>
         </div>
-        
-        <div className="space-y-4 p-6 rounded-xl bg-gray-900/80 dark:bg-white/80">
-          <h3 className="text-lg font-semibold text-white dark:text-gray-900">Dark Theme</h3>
+
+        <div className="space-y-4 rounded-xl bg-gray-900/80 p-6 dark:bg-white/80">
+          <h3 className="font-semibold text-lg text-white dark:text-gray-900">
+            Dark Theme
+          </h3>
           <div className="space-y-4">
             <Card variant="primary">
               <Card.Header>
@@ -982,7 +1000,7 @@ export const ThemeShowcase: Story = {
                 <p className="text-sm">Enhanced glass effects in dark mode</p>
               </Card.Content>
             </Card>
-            
+
             <Card variant="secondary">
               <Card.Header>
                 <Card.Title>Secondary Card</Card.Title>
@@ -997,7 +1015,7 @@ export const ThemeShowcase: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { 
+    backgrounds: {
       default: 'liquid-gradient',
     },
   },
@@ -1007,39 +1025,46 @@ export const ThemeShowcase: Story = {
 export const AccessibilityShowcase: Story = {
   render: () => {
     const [selected, setSelected] = React.useState(false);
-    
+
     return (
-      <div className="space-y-8 max-w-4xl">
+      <div className="max-w-4xl space-y-8">
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Keyboard Navigation</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Interactive cards can be navigated with keyboard. Try pressing Tab to focus cards.
+          <h3 className="font-semibold text-lg">Keyboard Navigation</h3>
+          <p className="text-gray-600 text-sm dark:text-gray-400">
+            Interactive cards can be navigated with keyboard. Try pressing Tab
+            to focus cards.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Card interactive onCardClick={() => alert('Card 1 activated!')}>
               <Card.Header>
                 <Card.Title>Interactive Card 1</Card.Title>
-                <Card.Description>Press Enter or Space to activate</Card.Description>
+                <Card.Description>
+                  Press Enter or Space to activate
+                </Card.Description>
               </Card.Header>
               <Card.Content>
-                <p className="text-sm">This card is fully keyboard accessible.</p>
+                <p className="text-sm">
+                  This card is fully keyboard accessible.
+                </p>
               </Card.Content>
             </Card>
-            
+
             <Card interactive onCardClick={() => alert('Card 2 activated!')}>
               <Card.Header>
                 <Card.Title>Interactive Card 2</Card.Title>
                 <Card.Description>Tab navigation supported</Card.Description>
               </Card.Header>
               <Card.Content>
-                <p className="text-sm">Focus indicators show the active element.</p>
+                <p className="text-sm">
+                  Focus indicators show the active element.
+                </p>
               </Card.Content>
             </Card>
           </div>
         </div>
-        
+
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Screen Reader Support</h3>
+          <h3 className="font-semibold text-lg">Screen Reader Support</h3>
           <Card selectable selected={selected} onCardSelect={setSelected}>
             <Card.Header>
               <Card.Title>Selectable Card</Card.Title>
@@ -1047,28 +1072,39 @@ export const AccessibilityShowcase: Story = {
             </Card.Header>
             <Card.Content>
               <p className="text-sm">
-                This card has role="button" and aria-pressed={selected ? 'true' : 'false'}.
-                Screen readers will announce its interactive state.
+                This card has role="button" and aria-pressed=
+                {selected ? 'true' : 'false'}. Screen readers will announce its
+                interactive state.
               </p>
             </Card.Content>
           </Card>
         </div>
-        
+
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Focus Management</h3>
+          <h3 className="font-semibold text-lg">Focus Management</h3>
           <Card variant="primary">
             <Card.Header>
               <Card.Title>Card with Interactive Elements</Card.Title>
               <Card.Description>Multiple focusable items</Card.Description>
             </Card.Header>
             <Card.Content>
-              <p className="text-sm mb-4">
-                When a card contains interactive elements, each element is individually focusable.
+              <p className="mb-4 text-sm">
+                When a card contains interactive elements, each element is
+                individually focusable.
               </p>
               <div className="flex gap-2">
-                <GlassButton size="sm" variant="primary">Primary</GlassButton>
-                <GlassButton size="sm" variant="ghost">Secondary</GlassButton>
-                <GlassButton size="sm" variant="ghost" iconOnly aria-label="More options">
+                <GlassButton size="sm" variant="primary">
+                  Primary
+                </GlassButton>
+                <GlassButton size="sm" variant="ghost">
+                  Secondary
+                </GlassButton>
+                <GlassButton
+                  size="sm"
+                  variant="ghost"
+                  iconOnly
+                  aria-label="More options"
+                >
                   <MoreVertical className="h-4 w-4" />
                 </GlassButton>
               </div>

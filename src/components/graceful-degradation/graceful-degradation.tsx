@@ -3,45 +3,44 @@
  * Provides fallback components for browsers without JavaScript or modern features
  */
 
-import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import {
-	useIsClient,
-	useNetworkStatus,
-	useSSRSafeFeatureDetection,
-
-} from "@/hooks/use-ssr-safe";
+  useIsClient,
+  useNetworkStatus,
+  useSSRSafeFeatureDetection,
+} from '@/hooks/use-ssr-safe';
 
 // Types
 export interface GracefulDegradationProps {
-	children: ReactNode;
-	fallback: ReactNode;
-	feature?: string;
-	network?: boolean;
-	performance?: boolean;
+  children: ReactNode;
+  fallback: ReactNode;
+  feature?: string;
+  network?: boolean;
+  performance?: boolean;
 }
 
 export interface StaticFallbackProps {
-	children: ReactNode;
-	fallback: ReactNode;
+  children: ReactNode;
+  fallback: ReactNode;
 }
 
 export interface FeatureDetectionProps {
-	children: ReactNode;
-	fallback: ReactNode;
-	feature: string;
+  children: ReactNode;
+  fallback: ReactNode;
+  feature: string;
 }
 
 export interface NetworkAwareProps {
-	children: ReactNode;
-	offlineFallback: ReactNode;
-	slowConnectionFallback?: ReactNode;
+  children: ReactNode;
+  offlineFallback: ReactNode;
+  slowConnectionFallback?: ReactNode;
 }
 
 export interface PerformanceAwareProps {
-	children: ReactNode;
-	lowPerformanceFallback: ReactNode;
-	threshold?: "low" | "medium" | "high";
+  children: ReactNode;
+  lowPerformanceFallback: ReactNode;
+  threshold?: 'low' | 'medium' | 'high';
 }
 
 /**
@@ -49,53 +48,49 @@ export interface PerformanceAwareProps {
  * Provides fallbacks based on feature detection, network status, and device performance
  */
 export function GracefulDegradation({
-	children,
-	fallback,
-	feature,
-	network = false,
-	performance = false,
+  children,
+  fallback,
+  feature,
+  network = false,
+  performance = false,
 }: GracefulDegradationProps) {
-	const isClient = useIsClient();
+  const isClient = useIsClient();
 
-	// If not client-side, render fallback
-	if (!isClient) {
+  // If not client-side, render fallback
+  if (!isClient) {
+    return <>{fallback}</>;
+  }
 
-		return <>{fallback}</>;
-	}
+  // Feature detection
+  if (feature) {
+    const isSupported = useSSRSafeFeatureDetection(feature);
+    if (!isSupported) {
+      return <>{fallback}</>;
+    }
+  }
 
-	// Feature detection
-	if (feature) {
-		const isSupported = useSSRSafeFeatureDetection(feature);
-		if (!isSupported) {
+  // Network awareness
+  if (network) {
+    const { online, effectiveType } = useNetworkStatus();
+    if (
+      !online ||
+      (effectiveType && ['slow-2g', '2g'].includes(effectiveType))
+    ) {
+      return <>{fallback}</>;
+    }
+  }
 
-			return <>{fallback}</>;
-		}
-	}
+  // Performance awareness
+  if (performance) {
+    const isLowPerformance = useDevicePerformance();
+    if (isLowPerformance) {
+      return <>{fallback}</>;
+    }
+  }
 
-	// Network awareness
-	if (network) {
-		const { online, effectiveType } = useNetworkStatus();
-		if (
-			!online ||
-			(effectiveType && ["slow-2g", "2g"].includes(effectiveType))
-		) {
+  // All checks passed, render children
 
-			return <>{fallback}</>;
-		}
-	}
-
-	// Performance awareness
-	if (performance) {
-		const isLowPerformance = useDevicePerformance();
-		if (isLowPerformance) {
-
-			return <>{fallback}</>;
-		}
-	}
-
-	// All checks passed, render children
-
-	return <>{children}</>;
+  return <>{children}</>;
 }
 
 /**
@@ -103,22 +98,21 @@ export function GracefulDegradation({
  * Provides static HTML fallback for JavaScript components
  */
 export function StaticFallback({ children, fallback }: StaticFallbackProps) {
-	const isClient = useIsClient();
-	const [isHydrated, setIsHydrated] = useState(false);
+  const isClient = useIsClient();
+  const [isHydrated, setIsHydrated] = useState(false);
 
-	useEffect(() => {
-		setIsHydrated(true);
-	}, []);
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
-	// If server-side or not yet hydrated, render fallback
-	if (!isClient || !isHydrated) {
+  // If server-side or not yet hydrated, render fallback
+  if (!isClient || !isHydrated) {
+    return <>{fallback}</>;
+  }
 
-		return <>{fallback}</>;
-	}
+  // Client-side and hydrated, render children
 
-	// Client-side and hydrated, render children
-
-	return <>{children}</>;
+  return <>{children}</>;
 }
 
 /**
@@ -126,13 +120,13 @@ export function StaticFallback({ children, fallback }: StaticFallbackProps) {
  * Renders fallback if a specific browser feature is not supported
  */
 export function FeatureDetection({
-	children,
-	fallback,
-	feature,
+  children,
+  fallback,
+  feature,
 }: FeatureDetectionProps) {
-	const isSupported = useSSRSafeFeatureDetection(feature);
+  const isSupported = useSSRSafeFeatureDetection(feature);
 
-	return isSupported ? children : fallback;
+  return isSupported ? children : fallback;
 }
 
 /**
@@ -140,27 +134,25 @@ export function FeatureDetection({
  * Renders different content based on network status
  */
 export function NetworkAware({
-	children,
-	offlineFallback,
-	slowConnectionFallback,
+  children,
+  offlineFallback,
+  slowConnectionFallback,
 }: NetworkAwareProps) {
-	const { online, effectiveType } = useNetworkStatus();
+  const { online, effectiveType } = useNetworkStatus();
 
-	if (!online) {
+  if (!online) {
+    return <>{offlineFallback}</>;
+  }
 
-		return <>{offlineFallback}</>;
-	}
+  if (
+    slowConnectionFallback &&
+    effectiveType &&
+    ['slow-2g', '2g'].includes(effectiveType)
+  ) {
+    return <>{slowConnectionFallback}</>;
+  }
 
-	if (
-		slowConnectionFallback &&
-		effectiveType &&
-		["slow-2g", "2g"].includes(effectiveType)
-	) {
-
-		return <>{slowConnectionFallback}</>;
-	}
-
-	return <>{children}</>;
+  return <>{children}</>;
 }
 
 /**
@@ -168,215 +160,215 @@ export function NetworkAware({
  * Renders different content based on device performance
  */
 export function PerformanceAware({
-	children,
-	lowPerformanceFallback,
-	threshold = "low",
+  children,
+  lowPerformanceFallback,
+  threshold = 'low',
 }: PerformanceAwareProps) {
-	const isLowPerformance = useDevicePerformance(threshold);
+  const isLowPerformance = useDevicePerformance(threshold);
 
-	return isLowPerformance ? lowPerformanceFallback : children;
+  return isLowPerformance ? lowPerformanceFallback : children;
 }
 
 /**
  * Hook to detect device performance
  */
 function useDevicePerformance(
-	threshold: "low" | "medium" | "high" = "low",
+  threshold: 'low' | 'medium' | 'high' = 'low'
 ): boolean {
-	const [isLowPerformance, setIsLowPerformance] = useState(false);
-	const isClient = useIsClient();
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
+  const isClient = useIsClient();
 
-	useEffect(() => {
-		if (!isClient) {
-			return;
-		}
+  useEffect(() => {
+    if (!isClient) {
+      return;
+    }
 
-		// Check device memory
-		const memory = (navigator as any).deviceMemory || 4;
+    // Check device memory
+    const memory = (navigator as any).deviceMemory || 4;
 
-		// Check CPU cores
-		const cores = navigator.hardwareConcurrency || 4;
+    // Check CPU cores
+    const cores = navigator.hardwareConcurrency || 4;
 
-		// Check for battery saving mode
-		const connection = (navigator as any).connection;
-		const saveData = connection?.saveData || false;
+    // Check for battery saving mode
+    const connection = (navigator as any).connection;
+    const saveData = connection?.saveData || false;
 
-		// Calculate performance score
-		let score = 0;
+    // Calculate performance score
+    let score = 0;
 
-		// Memory score
-		score += 8 <= memory ? 3 : (4 <= memory ? 2 : 1);
+    // Memory score
+    score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
 
-		// CPU score
-		score += 8 <= cores ? 3 : (4 <= cores ? 2 : 1);
+    // CPU score
+    score += 8 <= cores ? 3 : 4 <= cores ? 2 : 1;
 
-		// Save data mode
-		if (saveData) {
-			score = 0; // Force low performance mode
-		}
+    // Save data mode
+    if (saveData) {
+      score = 0; // Force low performance mode
+    }
 
-		// Determine if low performance based on threshold
-		const thresholdMap = {
-			low: 2, // Very low-end devices
-			medium: 4, // Mid-range devices
-			high: 6, // Only high-end devices get full experience
-		};
+    // Determine if low performance based on threshold
+    const thresholdMap = {
+      low: 2, // Very low-end devices
+      medium: 4, // Mid-range devices
+      high: 6, // Only high-end devices get full experience
+    };
 
-		setIsLowPerformance(score < thresholdMap[threshold]);
+    setIsLowPerformance(score < thresholdMap[threshold]);
 
-		// Add class to document for CSS targeting
-		if (score < thresholdMap[threshold]) {
-			document.documentElement.classList.add("low-performance");
-		} else {
-			document.documentElement.classList.remove("low-performance");
-		}
-	}, [isClient, threshold]);
+    // Add class to document for CSS targeting
+    if (score < thresholdMap[threshold]) {
+      document.documentElement.classList.add('low-performance');
+    } else {
+      document.documentElement.classList.remove('low-performance');
+    }
+  }, [isClient, threshold]);
 
-	return isLowPerformance;
+  return isLowPerformance;
 }
 
 /**
  * Component to apply feature detection classes to document
  */
 export function FeatureDetectionClasses() {
-	const isClient = useIsClient();
+  const isClient = useIsClient();
 
-	useEffect(() => {
-		if (!isClient) {
-			return;
-		}
+  useEffect(() => {
+    if (!isClient) {
+      return;
+    }
 
-		const features = [
-			"css-backdrop-filter",
-			"css-grid",
-			"intersection-observer",
-			"resize-observer",
-			"web-animations",
-			"local-storage",
-			"custom-properties",
-		];
+    const features = [
+      'css-backdrop-filter',
+      'css-grid',
+      'intersection-observer',
+      'resize-observer',
+      'web-animations',
+      'local-storage',
+      'custom-properties',
+    ];
 
-		for (const feature of features) {
-			let isSupported = false;
+    for (const feature of features) {
+      let isSupported = false;
 
-			switch (feature) {
-				case "css-backdrop-filter": {
-					isSupported = CSS.supports("backdrop-filter", "blur(1px)");
-					break;
-				}
-				case "css-grid": {
-					isSupported = CSS.supports("display", "grid");
-					break;
-				}
-				case "intersection-observer": {
-					isSupported = "IntersectionObserver" in window;
-					break;
-				}
-				case "resize-observer": {
-					isSupported = "ResizeObserver" in window;
-					break;
-				}
-				case "web-animations": {
-					isSupported = "animate" in document.createElement("div");
-					break;
-				}
-				case "local-storage": {
-					try {
-						localStorage.setItem("test", "test");
-						localStorage.removeItem("test");
-						isSupported = true;
-					} catch {
-						isSupported = false;
-					}
-					break;
-				}
-				case "custom-properties": {
-					isSupported = CSS.supports("--test", "0");
-					break;
-				}
-				default: {
-					isSupported = false;
-				}
-			}
+      switch (feature) {
+        case 'css-backdrop-filter': {
+          isSupported = CSS.supports('backdrop-filter', 'blur(1px)');
+          break;
+        }
+        case 'css-grid': {
+          isSupported = CSS.supports('display', 'grid');
+          break;
+        }
+        case 'intersection-observer': {
+          isSupported = 'IntersectionObserver' in window;
+          break;
+        }
+        case 'resize-observer': {
+          isSupported = 'ResizeObserver' in window;
+          break;
+        }
+        case 'web-animations': {
+          isSupported = 'animate' in document.createElement('div');
+          break;
+        }
+        case 'local-storage': {
+          try {
+            localStorage.setItem('test', 'test');
+            localStorage.removeItem('test');
+            isSupported = true;
+          } catch {
+            isSupported = false;
+          }
+          break;
+        }
+        case 'custom-properties': {
+          isSupported = CSS.supports('--test', '0');
+          break;
+        }
+        default: {
+          isSupported = false;
+        }
+      }
 
-			if (isSupported) {
-				document.documentElement.classList.add(`supports-${feature}`);
-				document.documentElement.classList.remove(`no-${feature}`);
-			} else {
-				document.documentElement.classList.add(`no-${feature}`);
-				document.documentElement.classList.remove(`supports-${feature}`);
-			}
-		}
+      if (isSupported) {
+        document.documentElement.classList.add(`supports-${feature}`);
+        document.documentElement.classList.remove(`no-${feature}`);
+      } else {
+        document.documentElement.classList.add(`no-${feature}`);
+        document.documentElement.classList.remove(`supports-${feature}`);
+      }
+    }
 
-		// Check for JavaScript
-		document.documentElement.classList.remove("no-js");
-		document.documentElement.classList.add("js");
+    // Check for JavaScript
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
 
-		// Check for network status
-		const updateNetworkStatus = () => {
-			if (navigator.onLine) {
-				document.documentElement.classList.remove("offline");
-				document.documentElement.classList.add("online");
-			} else {
-				document.documentElement.classList.add("offline");
-				document.documentElement.classList.remove("online");
-			}
-		};
+    // Check for network status
+    const updateNetworkStatus = () => {
+      if (navigator.onLine) {
+        document.documentElement.classList.remove('offline');
+        document.documentElement.classList.add('online');
+      } else {
+        document.documentElement.classList.add('offline');
+        document.documentElement.classList.remove('online');
+      }
+    };
 
-		updateNetworkStatus();
-		if ("undefined" !== typeof window) {
-			window.addEventListener("online", updateNetworkStatus);
-			window.addEventListener("offline", updateNetworkStatus);
-		}
+    updateNetworkStatus();
+    if ('undefined' !== typeof window) {
+      window.addEventListener('online', updateNetworkStatus);
+      window.addEventListener('offline', updateNetworkStatus);
+    }
 
-		return () => {
-			if ("undefined" !== typeof window) {
-				window.removeEventListener("online", updateNetworkStatus);
-				window.removeEventListener("offline", updateNetworkStatus);
-			}
-		};
-	}, [isClient]);
+    return () => {
+      if ('undefined' !== typeof window) {
+        window.removeEventListener('online', updateNetworkStatus);
+        window.removeEventListener('offline', updateNetworkStatus);
+      }
+    };
+  }, [isClient]);
 
-	return;
+  return;
 }
 
 /**
  * Component to apply progressive enhancement classes
  */
 export function ProgressiveEnhancementProvider({
-	children,
-	level = "base",
+  children,
+  level = 'base',
 }: {
-	children: ReactNode;
-	level?: "base" | "enhanced" | "advanced";
+  children: ReactNode;
+  level?: 'base' | 'enhanced' | 'advanced';
 }) {
-	const isClient = useIsClient();
+  const isClient = useIsClient();
 
-	useEffect(() => {
-		if (!isClient) {
-			return;
-		}
+  useEffect(() => {
+    if (!isClient) {
+      return;
+    }
 
-		// Remove all experience classes
-		document.documentElement.classList.remove(
-			"base-experience",
-			"enhanced-experience",
-			"advanced-experience",
-		);
+    // Remove all experience classes
+    document.documentElement.classList.remove(
+      'base-experience',
+      'enhanced-experience',
+      'advanced-experience'
+    );
 
-		// Add appropriate class
-		document.documentElement.classList.add(`${level}-experience`);
-	}, [isClient, level]);
+    // Add appropriate class
+    document.documentElement.classList.add(`${level}-experience`);
+  }, [isClient, level]);
 
-	return <>{children}</>;
+  return <>{children}</>;
 }
 
 export default {
-	GracefulDegradation,
-	StaticFallback,
-	FeatureDetection,
-	NetworkAware,
-	PerformanceAware,
-	FeatureDetectionClasses,
-	ProgressiveEnhancementProvider,
+  GracefulDegradation,
+  StaticFallback,
+  FeatureDetection,
+  NetworkAware,
+  PerformanceAware,
+  FeatureDetectionClasses,
+  ProgressiveEnhancementProvider,
 };

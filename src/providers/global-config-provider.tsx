@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { type ReactNode, createContext, useContext } from 'react';
+import { createContext, type ReactNode, useContext } from 'react';
 
 export interface GlobalConfig {
   defaultVariant?: 'default' | 'glass' | 'frosted' | 'liquid';
@@ -35,7 +35,6 @@ export function GlobalConfigProvider({
   const mergedConfig = { ...defaultConfig, ...config };
 
   return (
-
     <GlobalConfigContext.Provider value={mergedConfig}>
       {children}
     </GlobalConfigContext.Provider>

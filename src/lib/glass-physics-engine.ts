@@ -250,11 +250,10 @@ export class SpringPhysics {
 
     // Check if animation should continue
     const distanceToTarget = Math.hypot(
-      (position.x - target.x), (position.y - target.y)
+      position.x - target.x,
+      position.y - target.y
     );
-    const velocityMagnitude = Math.hypot(
-      velocity.x, velocity.y
-    );
+    const velocityMagnitude = Math.hypot(velocity.x, velocity.y);
 
     const shouldContinue =
       distanceToTarget > precision || velocityMagnitude > precision;
@@ -403,7 +402,7 @@ export class AnimationChoreographer {
   addAnimation(
     id: string,
     element: HTMLElement,
-    keyframes: Keyframe[],
+    keyframes: Array<Keyframe>,
     options: KeyframeAnimationOptions = {}
   ): void {
     const animationCount = this.animations.size;
@@ -432,13 +431,13 @@ export class AnimationChoreographer {
     if (0 < parallel) {
       // Parallel with slight offset
       return index * parallel * 1000;
-    } else if (0 < sequence) {
+    }
+    if (0 < sequence) {
       // Sequential with gap
       return index * sequence * 1000;
-    } else {
-      // Staggered
-      return index * stagger * 1000;
     }
+    // Staggered
+    return index * stagger * 1000;
   }
 
   play(): void {
@@ -814,12 +813,12 @@ export function useAdvancedPhysics(
 
   const choreographAnimation = useCallback(
     (
-      animations: {
+      animations: Array<{
         id: string;
         element: HTMLElement;
-        keyframes: Keyframe[];
+        keyframes: Array<Keyframe>;
         options?: KeyframeAnimationOptions;
-      }[]
+      }>
     ) => {
       if (!choreographerRef.current) {
         return;

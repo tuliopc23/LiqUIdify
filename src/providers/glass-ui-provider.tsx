@@ -34,17 +34,11 @@ export function GlassUIProvider({
   hapticConfig,
 }: GlassUIProviderProps) {
   return (
-
     <GlassErrorBoundary level="page">
-
       <ThemeProvider defaultTheme={theme} storageKey="glass-ui-theme">
-
         <LiquidGlassProvider {...glassConfig}>
-
           <HapticProvider {...hapticConfig}>
-
             <GlassLiveRegionProvider>
-
               <ToastProvider>{children}</ToastProvider>
             </GlassLiveRegionProvider>
           </HapticProvider>

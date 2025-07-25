@@ -11,205 +11,207 @@
  */
 
 export interface ComponentConfig {
-	name: string;
-	category:
-		| "core"
-		| "forms"
-		| "navigation"
-		| "feedback"
-		| "layout"
-		| "advanced";
-	description: string;
-	props: PropertyDefinition[];
-	variants?: VariantDefinition[];
-	animations?: AnimationDefinition[];
-	accessibility?: AccessibilityConfig;
-	examples?: ExampleDefinition[];
-	dependencies?: string[];
-	glassMorphismLevel?: number;
+  name: string;
+  category:
+    | 'core'
+    | 'forms'
+    | 'navigation'
+    | 'feedback'
+    | 'layout'
+    | 'advanced';
+  description: string;
+  props: Array<PropertyDefinition>;
+  variants?: Array<VariantDefinition>;
+  animations?: Array<AnimationDefinition>;
+  accessibility?: AccessibilityConfig;
+  examples?: Array<ExampleDefinition>;
+  dependencies?: Array<string>;
+  glassMorphismLevel?: number;
 }
 
 export interface PropertyDefinition {
-	name: string;
-	type:
-		| "string"
-		| "number"
-		| "boolean"
-		| "object"
-		| "array"
-		| "function"
-		| "enum"
-		| "React.ReactNode";
-	required?: boolean;
-	defaultValue?: any;
-	description: string;
-	enumValues?: string[];
-	deprecated?: boolean;
-	since?: string;
+  name: string;
+  type:
+    | 'string'
+    | 'number'
+    | 'boolean'
+    | 'object'
+    | 'array'
+    | 'function'
+    | 'enum'
+    | 'React.ReactNode';
+  required?: boolean;
+  defaultValue?: any;
+  description: string;
+  enumValues?: Array<string>;
+  deprecated?: boolean;
+  since?: string;
 }
 
 export interface VariantDefinition {
-	name: string;
-	props: Record<string, any>;
-	description: string;
+  name: string;
+  props: Record<string, any>;
+  description: string;
 }
 
 export interface AnimationDefinition {
-	name: string;
-	type: "spring" | "tween" | "gesture" | "physics";
-	properties: string[];
-	defaultConfig: Record<string, any>;
+  name: string;
+  type: 'spring' | 'tween' | 'gesture' | 'physics';
+  properties: Array<string>;
+  defaultConfig: Record<string, any>;
 }
 
 export interface AccessibilityConfig {
-	roles: string[];
-	ariaAttributes: string[];
-	keyboardSupport: string[];
-	screenReaderSupport: boolean;
-	colorContrastCompliant: boolean;
-	focusManagement: boolean;
+  roles: Array<string>;
+  ariaAttributes: Array<string>;
+  keyboardSupport: Array<string>;
+  screenReaderSupport: boolean;
+  colorContrastCompliant: boolean;
+  focusManagement: boolean;
 }
 
 export interface ExampleDefinition {
-	name: string;
-	description: string;
-	code: string;
-	props: Record<string, any>;
+  name: string;
+  description: string;
+  code: string;
+  props: Record<string, any>;
 }
 
 export interface GenerationOptions {
-	includeTests?: boolean;
-	includeStories?: boolean;
-	includeDocumentation?: boolean;
-	includeTypes?: boolean;
-	includeMigration?: boolean;
-	targetVersion?: string;
-	framework?: "react" | "vue" | "angular" | "svelte";
-	styleFramework?: "tailwind" | "styled-components" | "emotion" | "css-modules";
-	bundleStrategy?: "esm" | "cjs" | "umd" | "all";
+  includeTests?: boolean;
+  includeStories?: boolean;
+  includeDocumentation?: boolean;
+  includeTypes?: boolean;
+  includeMigration?: boolean;
+  targetVersion?: string;
+  framework?: 'react' | 'vue' | 'angular' | 'svelte';
+  styleFramework?: 'tailwind' | 'styled-components' | 'emotion' | 'css-modules';
+  bundleStrategy?: 'esm' | 'cjs' | 'umd' | 'all';
 }
 
 class LiqUIdifyCodeGenerator {
-	private config: ComponentConfig;
-	private options: GenerationOptions;
+  private config: ComponentConfig;
+  private options: GenerationOptions;
 
-	constructor(config: ComponentConfig, options: GenerationOptions = {}) {
-		this.config = config;
-		this.options = {
-			includeTests: true,
-			includeStories: true,
-			includeDocumentation: true,
-			includeTypes: true,
-			includeMigration: false,
-			targetVersion: "1.0.0",
-			framework: "react",
-			styleFramework: "tailwind",
-			bundleStrategy: "all",
-			...options,
-		};
-	}
+  constructor(config: ComponentConfig, options: GenerationOptions = {}) {
+    this.config = config;
+    this.options = {
+      includeTests: true,
+      includeStories: true,
+      includeDocumentation: true,
+      includeTypes: true,
+      includeMigration: false,
+      targetVersion: '1.0.0',
+      framework: 'react',
+      styleFramework: 'tailwind',
+      bundleStrategy: 'all',
+      ...options,
+    };
+  }
 
-	/**
-	 * Generate complete component package
-	 */
-	public generateComponent(): GeneratedFiles {
-		const files: GeneratedFiles = {};
+  /**
+   * Generate complete component package
+   */
+  public generateComponent(): GeneratedFiles {
+    const files: GeneratedFiles = {};
 
-		// Core component file
-		files[`${this.config.name}.tsx`] = this.generateComponentFile();
+    // Core component file
+    files[`${this.config.name}.tsx`] = this.generateComponentFile();
 
-		// TypeScript types
-		if (this.options.includeTypes) {
-			files[`${this.config.name}.types.ts`] = this.generateTypesFile();
-		}
+    // TypeScript types
+    if (this.options.includeTypes) {
+      files[`${this.config.name}.types.ts`] = this.generateTypesFile();
+    }
 
-		// Test file
-		if (this.options.includeTests) {
-			files[`${this.config.name}.test.tsx`] = this.generateTestFile();
-		}
+    // Test file
+    if (this.options.includeTests) {
+      files[`${this.config.name}.test.tsx`] = this.generateTestFile();
+    }
 
-		// Storybook stories
-		if (this.options.includeStories) {
-			files[`${this.config.name}.stories.tsx`] = this.generateStoriesFile();
-		}
+    // Storybook stories
+    if (this.options.includeStories) {
+      files[`${this.config.name}.stories.tsx`] = this.generateStoriesFile();
+    }
 
-		// Documentation
-		if (this.options.includeDocumentation) {
-			files[`${this.config.name}.md`] = this.generateDocumentationFile();
-		}
+    // Documentation
+    if (this.options.includeDocumentation) {
+      files[`${this.config.name}.md`] = this.generateDocumentationFile();
+    }
 
-		// Index file for exports
-		files["index.ts"] = this.generateIndexFile();
+    // Index file for exports
+    files['index.ts'] = this.generateIndexFile();
 
-		// Package.json for standalone component
-		files["package.json"] = this.generatePackageJson();
+    // Package.json for standalone component
+    files['package.json'] = this.generatePackageJson();
 
-		return files;
-	}
+    return files;
+  }
 
-	/**
-	 * Generate React component file
-	 */
-	private generateComponentFile(): string {
-		const imports = this.generateImports();
-		const propsInterface = this.generatePropsInterface();
-		const componentLogic = this.generateComponentLogic();
-		const exportStatement = this.generateExportStatement();
+  /**
+   * Generate React component file
+   */
+  private generateComponentFile(): string {
+    const imports = this.generateImports();
+    const propsInterface = this.generatePropsInterface();
+    const componentLogic = this.generateComponentLogic();
+    const exportStatement = this.generateExportStatement();
 
-		return `${imports}
+    return `${imports}
 
 ${propsInterface}
 
 ${componentLogic}
 
 ${exportStatement}`;
-	}
+  }
 
-	/**
-	 * Generate component imports
-	 */
-	private generateImports(): string {
-		const coreImports = [
-			"import React, { forwardRef, useMemo, useCallback } from 'react';",
-			"import { cn } from '../../lib/utils';",
-			"import { useGlassMorphism } from '../../core/glass/unified-glass-system';",
-			"import { useAccessibility } from '../../core/accessibility';",
-			"import { useLiqUIdifyErrorTracking } from '../../core/error-tracking';",
-		];
+  /**
+   * Generate component imports
+   */
+  private generateImports(): string {
+    const coreImports = [
+      "import React, { forwardRef, useMemo, useCallback } from 'react';",
+      "import { cn } from '../../lib/utils';",
+      "import { useGlassMorphism } from '../../core/glass/unified-glass-system';",
+      "import { useAccessibility } from '../../core/accessibility';",
+      "import { useLiqUIdifyErrorTracking } from '../../core/error-tracking';",
+    ];
 
-		if (this.config.animations) {
-			coreImports.push(
-				"import { motion, AnimatePresence } from 'framer-motion';",
-			);
-			coreImports.push("import { usePhysics } from '../../lib/physics';");
-		}
+    if (this.config.animations) {
+      coreImports.push(
+        "import { motion, AnimatePresence } from 'framer-motion';"
+      );
+      coreImports.push("import { usePhysics } from '../../lib/physics';");
+    }
 
-		if (this.config.dependencies) {
-			coreImports.push(
-				...this.config.dependencies.map((dep) => `import ${dep};`),
-			);
-		}
+    if (this.config.dependencies) {
+      coreImports.push(
+        ...this.config.dependencies.map((dep) => `import ${dep};`)
+      );
+    }
 
-		return coreImports.join("\n");
-	}
+    return coreImports.join('\n');
+  }
 
-	/**
-	 * Generate TypeScript props interface
-	 */
-	private generatePropsInterface(): string {
-		const props = this.config.props
-			.map((property) => {
-				const optional = property.required ? "" : "?";
-				const deprecated = property.deprecated ? "\n  /** @deprecated */" : "";
-				const since = property.since ? `\n  /** @since ${property.since} */` : "";
+  /**
+   * Generate TypeScript props interface
+   */
+  private generatePropsInterface(): string {
+    const props = this.config.props
+      .map((property) => {
+        const optional = property.required ? '' : '?';
+        const deprecated = property.deprecated ? '\n  /** @deprecated */' : '';
+        const since = property.since
+          ? `\n  /** @since ${property.since} */`
+          : '';
 
-				return `  ${deprecated}${since}
+        return `  ${deprecated}${since}
   /** ${property.description} */
   ${property.name}${optional}: ${this.getTypeScript(property)};`;
-			})
-			.join("\n");
+      })
+      .join('\n');
 
-		const baseProps = `
+    const baseProps = `
   /** Custom CSS class for styling */
   className?: string;
   /** Glass morphism effect intensity (0-100) */
@@ -221,23 +223,23 @@ ${exportStatement}`;
   /** Forward ref to underlying DOM element */
   ref?: React.Ref<HTMLElement>;`;
 
-		return `/**
+    return `/**
  * ${this.config.name} component props
  *
  * ${this.config.description}
  */
 export interface ${this.config.name}Props {${props}${baseProps}
 }`;
-	}
+  }
 
-	/**
-	 * Generate main component logic
-	 */
-	private generateComponentLogic(): string {
-		const componentName = this.config.name;
-		const glassLevel = this.config.glassMorphismLevel || 60;
+  /**
+   * Generate main component logic
+   */
+  private generateComponentLogic(): string {
+    const componentName = this.config.name;
+    const glassLevel = this.config.glassMorphismLevel || 60;
 
-		return `/**
+    return `/**
  * ${componentName} - ${this.config.description}
  *
  * S-Tier LiqUIdify component with glassmorphism design and accessibility features.
@@ -256,7 +258,7 @@ export const ${componentName} = forwardRef<HTMLElement, ${componentName}Props>(
       glassMorphism = ${glassLevel},
       a11y = true,
       animation = true,
-      ${this.config.props.map((property) => `${property.name}${property.defaultValue === undefined ? "" : ` = ${JSON.stringify(property.defaultValue)}`}`).join(",\n      ")},
+      ${this.config.props.map((property) => `${property.name}${property.defaultValue === undefined ? '' : ` = ${JSON.stringify(property.defaultValue)}`}`).join(',\n      ')},
       ...props
     },
     ref
@@ -321,7 +323,7 @@ export const ${componentName} = forwardRef<HTMLElement, ${componentName}Props>(
 
       // Custom className
       className
-    ), [${this.getDependencies().join(", ")}]);
+    ), [${this.getDependencies().join(', ')}]);
 
     ${this.generateEventHandlers()}
 
@@ -330,17 +332,17 @@ export const ${componentName} = forwardRef<HTMLElement, ${componentName}Props>(
 );
 
 ${componentName}.displayName = '${componentName}';`;
-	}
+  }
 
-	/**
-	 * Generate animation logic
-	 */
-	private generateAnimationLogic(): string {
-		if (!this.config.animations) {
-			return "";
-		}
+  /**
+   * Generate animation logic
+   */
+  private generateAnimationLogic(): string {
+    if (!this.config.animations) {
+      return '';
+    }
 
-		return `
+    return `
     // Animation configuration
     const animationConfig = useMemo(() => {
       if (!animation) return null;
@@ -371,43 +373,43 @@ ${componentName}.displayName = '${componentName}';`;
         transition: { type: 'spring', stiffness: 600 }
       }
     });`;
-	}
+  }
 
-	/**
-	 * Generate variant logic
-	 */
-	private generateVariantLogic(): string {
-		if (!this.config.variants) {
-			return "";
-		}
+  /**
+   * Generate variant logic
+   */
+  private generateVariantLogic(): string {
+    if (!this.config.variants) {
+      return '';
+    }
 
-		const variantProperty = this.config.props.find((p) => "variant" === p.name);
-		if (!variantProperty) {
-			return "";
-		}
+    const variantProperty = this.config.props.find((p) => 'variant' === p.name);
+    if (!variantProperty) {
+      return '';
+    }
 
-		return `
+    return `
     // Variant configuration
     const variantStyles = useMemo(() => {
       switch (variant) {
         ${this.config.variants
-					.map(
-						(v) => `
+          .map(
+            (v) => `
         case '${v.name}':
-          return '${this.generateVariantClasses(v)}';`,
-					)
-					.join("")}
+          return '${this.generateVariantClasses(v)}';`
+          )
+          .join('')}
         default:
           return '';
       }
     }, [variant]);`;
-	}
+  }
 
-	/**
-	 * Generate component state logic
-	 */
-	private generateStateLogic(): string {
-		return `
+  /**
+   * Generate component state logic
+   */
+  private generateStateLogic(): string {
+    return `
     // Internal state
     const [isFocused, setIsFocused] = React.useState(false);
     const [isHovered, setIsHovered] = React.useState(false);
@@ -416,13 +418,13 @@ ${componentName}.displayName = '${componentName}';`;
     // Ref management
     const elementRef = React.useRef<HTMLElement>(null);
     React.useImperativeHandle(ref, () => elementRef.current!);`;
-	}
+  }
 
-	/**
-	 * Generate event handlers
-	 */
-	private generateEventHandlers(): string {
-		return `
+  /**
+   * Generate event handlers
+   */
+  private generateEventHandlers(): string {
+    return `
     // Event handlers with error tracking
     const handleFocus = useCallback((event: React.FocusEvent) => {
       try {
@@ -461,15 +463,15 @@ ${componentName}.displayName = '${componentName}';`;
         trackError(error as Error, { userInteraction: 'hover_end' });
       }
     }, [props.onMouseLeave, trackError]);`;
-	}
+  }
 
-	/**
-	 * Generate render logic
-	 */
-	private generateRenderLogic(): string {
-		const Element = this.getElementType();
+  /**
+   * Generate render logic
+   */
+  private generateRenderLogic(): string {
+    const Element = this.getElementType();
 
-		return `
+    return `
     // Render component
     const ComponentElement = animation ? motion.${Element} : '${Element}';
 
@@ -489,13 +491,13 @@ ${componentName}.displayName = '${componentName}';`;
         ${this.generateChildrenLogic()}
       </ComponentElement>
     );`;
-	}
+  }
 
-	/**
-	 * Generate TypeScript types file
-	 */
-	private generateTypesFile(): string {
-		return `/**
+  /**
+   * Generate TypeScript types file
+   */
+  private generateTypesFile(): string {
+    return `/**
  * ${this.config.name} TypeScript Definitions
  *
  * Generated automatically by LiqUIdify Code Generator
@@ -523,13 +525,13 @@ ${this.generateVariantTypes()}
 export type ${this.config.name}Component = React.ForwardRefExoticComponent<
   ${this.config.name}Props & React.RefAttributes<${this.config.name}Ref>
 >;`;
-	}
+  }
 
-	/**
-	 * Generate test file
-	 */
-	private generateTestFile(): string {
-		return `/**
+  /**
+   * Generate test file
+   */
+  private generateTestFile(): string {
+    return `/**
  * ${this.config.name} Component Tests
  *
  * Comprehensive test suite including accessibility, performance, and functionality tests
@@ -667,13 +669,13 @@ describe('${this.config.name}', () => {
     });
   });
 });`;
-	}
+  }
 
-	/**
-	 * Generate Storybook stories
-	 */
-	private generateStoriesFile(): string {
-		return `/**
+  /**
+   * Generate Storybook stories
+   */
+  private generateStoriesFile(): string {
+    return `/**
  * ${this.config.name} Storybook Stories
  *
  * Interactive documentation and testing scenarios
@@ -779,13 +781,13 @@ export const GlassMorphismShowcase: Story = {
     }
   }
 };`;
-	}
+  }
 
-	/**
-	 * Generate documentation file
-	 */
-	private generateDocumentationFile(): string {
-		return `# ${this.config.name}
+  /**
+   * Generate documentation file
+   */
+  private generateDocumentationFile(): string {
+    return `# ${this.config.name}
 
 ${this.config.description}
 
@@ -814,11 +816,11 @@ function MyComponent() {
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 ${this.config.props
-	.map(
-		(property) =>
-			`| \`${property.name}\` | \`${this.getTypeScript(property)}\` | \`${property.defaultValue || "undefined"}\` | ${property.description} |`,
-	)
-	.join("\n")}
+  .map(
+    (property) =>
+      `| \`${property.name}\` | \`${this.getTypeScript(property)}\` | \`${property.defaultValue || 'undefined'}\` | ${property.description} |`
+  )
+  .join('\n')}
 
 ## Examples
 
@@ -828,7 +830,7 @@ ${this.generateDocumentationExamples()}
 
 This component follows WCAG 2.1 AA guidelines and includes:
 
-${this.config.accessibility ? this.generateAccessibilityDocs() : "- Basic accessibility support"}
+${this.config.accessibility ? this.generateAccessibilityDocs() : '- Basic accessibility support'}
 
 ## Performance
 
@@ -859,168 +861,170 @@ See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines.
 ## License
 
 MIT License - see [LICENSE](../../LICENSE) file.`;
-	}
+  }
 
-	// Helper methods for code generation
-	private getTypeScript(property: PropertyDefinition): string {
-		switch (property.type) {
-			case "enum": {
-				return property.enumValues
-					? property.enumValues.map((v) => `'${v}'`).join(" | ")
-					: "string";
-			}
-			case "React.ReactNode": {
-				return "React.ReactNode";
-			}
-			default: {
-				return property.type;
-			}
-		}
-	}
+  // Helper methods for code generation
+  private getTypeScript(property: PropertyDefinition): string {
+    switch (property.type) {
+      case 'enum': {
+        return property.enumValues
+          ? property.enumValues.map((v) => `'${v}'`).join(' | ')
+          : 'string';
+      }
+      case 'React.ReactNode': {
+        return 'React.ReactNode';
+      }
+      default: {
+        return property.type;
+      }
+    }
+  }
 
-	private getDefaultRole(): string {
-		return this.config.accessibility?.roles[0] || "button";
-	}
+  private getDefaultRole(): string {
+    return this.config.accessibility?.roles[0] || 'button';
+  }
 
-	private getAriaLabelLogic(): string {
-		const labelProperty = this.config.props.find(
-			(p) => "children" === p.name || "label" === p.name,
-		);
-		return labelProperty ? labelProperty.name : "undefined";
-	}
+  private getAriaLabelLogic(): string {
+    const labelProperty = this.config.props.find(
+      (p) => 'children' === p.name || 'label' === p.name
+    );
+    return labelProperty ? labelProperty.name : 'undefined';
+  }
 
-	private getElementType(): string {
-		if (this.config.name.toLowerCase().includes("button")) {
-			return "button";
-		}
-		if (this.config.name.toLowerCase().includes("input")) {
-			return "input";
-		}
-		if (this.config.name.toLowerCase().includes("link")) {
-			return "a";
-		}
-		return "div";
-	}
+  private getElementType(): string {
+    if (this.config.name.toLowerCase().includes('button')) {
+      return 'button';
+    }
+    if (this.config.name.toLowerCase().includes('input')) {
+      return 'input';
+    }
+    if (this.config.name.toLowerCase().includes('link')) {
+      return 'a';
+    }
+    return 'div';
+  }
 
-	private generateBaseClasses(): string {
-		// Generate base Tailwind classes based on component type
-		const baseClasses = [
-			"relative",
-			"inline-flex",
-			"items-center",
-			"justify-center",
-			"rounded-lg",
-			"border",
-			"border-white/20",
-			"backdrop-blur-md",
-			"transition-all",
-			"duration-200",
-		];
+  private generateBaseClasses(): string {
+    // Generate base Tailwind classes based on component type
+    const baseClasses = [
+      'relative',
+      'inline-flex',
+      'items-center',
+      'justify-center',
+      'rounded-lg',
+      'border',
+      'border-white/20',
+      'backdrop-blur-md',
+      'transition-all',
+      'duration-200',
+    ];
 
-		return baseClasses.join(" ");
-	}
+    return baseClasses.join(' ');
+  }
 
-	private generateVariantClasses(variant: VariantDefinition): string {
-		// Generate variant-specific classes
-		return `variant-${variant.name}`;
-	}
+  private generateVariantClasses(variant: VariantDefinition): string {
+    // Generate variant-specific classes
+    return `variant-${variant.name}`;
+  }
 
-	private generateVariantClassLogic(): string {
-		if (!this.config.variants) {
-			return "variantStyles,";
-		}
-		return "variantStyles,";
-	}
+  private generateVariantClassLogic(): string {
+    if (!this.config.variants) {
+      return 'variantStyles,';
+    }
+    return 'variantStyles,';
+  }
 
-	private generateAnimationClassLogic(): string {
-		return 'animation ? "animate-in" : "",';
-	}
+  private generateAnimationClassLogic(): string {
+    return 'animation ? "animate-in" : "",';
+  }
 
-	private getDependencies(): string[] {
-		const deps = ["className", "glassMorphism"];
-		if (this.config.variants) {
-			deps.push("variant", "variantStyles");
-		}
-		if (this.config.animations) {
-			deps.push("animation", "animationConfig");
-		}
-		return deps;
-	}
+  private getDependencies(): Array<string> {
+    const deps = ['className', 'glassMorphism'];
+    if (this.config.variants) {
+      deps.push('variant', 'variantStyles');
+    }
+    if (this.config.animations) {
+      deps.push('animation', 'animationConfig');
+    }
+    return deps;
+  }
 
-	private generateChildrenLogic(): string {
-		const childrenProperty = this.config.props.find((p) => "children" === p.name);
-		return childrenProperty ? "{children}" : "";
-	}
+  private generateChildrenLogic(): string {
+    const childrenProperty = this.config.props.find(
+      (p) => 'children' === p.name
+    );
+    return childrenProperty ? '{children}' : '';
+  }
 
-	private generateEnumTypes(): string {
-		const enumProps = this.config.props.filter((p) => "enum" === p.type);
-		return enumProps
-			.map(
-				(property) =>
-					`export type ${this.config.name}${property.name.charAt(0).toUpperCase() + property.name.slice(1)} = ${property.enumValues?.map((v) => `'${v}'`).join(" | ") || "string"};`,
-			)
-			.join("\n");
-	}
+  private generateEnumTypes(): string {
+    const enumProps = this.config.props.filter((p) => 'enum' === p.type);
+    return enumProps
+      .map(
+        (property) =>
+          `export type ${this.config.name}${property.name.charAt(0).toUpperCase() + property.name.slice(1)} = ${property.enumValues?.map((v) => `'${v}'`).join(' | ') || 'string'};`
+      )
+      .join('\n');
+  }
 
-	private generateAnimationTypes(): string {
-		if (!this.config.animations) {
-			return "";
-		}
+  private generateAnimationTypes(): string {
+    if (!this.config.animations) {
+      return '';
+    }
 
-		return `export interface AnimationConfig {
+    return `export interface AnimationConfig {
   type?: 'spring' | 'tween' | 'gesture' | 'physics';
   duration?: number;
   stiffness?: number;
   damping?: number;
   glass?: boolean;
 }`;
-	}
+  }
 
-	private generateAccessibilityTypes(): string {
-		return `export interface AccessibilityConfig {
+  private generateAccessibilityTypes(): string {
+    return `export interface AccessibilityConfig {
   enabled?: boolean;
   role?: string;
   label?: string;
   keyboardNavigation?: boolean;
   screenReaderSupport?: boolean;
 }`;
-	}
+  }
 
-	private generateVariantTypes(): string {
-		if (!this.config.variants) {
-			return "";
-		}
+  private generateVariantTypes(): string {
+    if (!this.config.variants) {
+      return '';
+    }
 
-		const variantNames = this.config.variants
-			.map((v) => `'${v.name}'`)
-			.join(" | ");
-		return `export type ${this.config.name}Variant = ${variantNames};`;
-	}
+    const variantNames = this.config.variants
+      .map((v) => `'${v.name}'`)
+      .join(' | ');
+    return `export type ${this.config.name}Variant = ${variantNames};`;
+  }
 
-	private generatePropTests(): string {
-		return this.config.props
-			.map((property) => {
-				if ("boolean" === property.type) {
-					return `
+  private generatePropTests(): string {
+    return this.config.props
+      .map((property) => {
+        if ('boolean' === property.type) {
+          return `
     it('handles ${property.name} prop', () => {
       const { rerender } = render(<${this.config.name} ${property.name}={false} />);
       rerender(<${this.config.name} ${property.name}={true} />);
       // Should not crash with boolean changes
     });`;
-				}
-				return "";
-			})
-			.join("\n");
-	}
+        }
+        return '';
+      })
+      .join('\n');
+  }
 
-	private generateAccessibilityTests(): string {
-		if (!this.config.accessibility) {
-			return "";
-		}
+  private generateAccessibilityTests(): string {
+    if (!this.config.accessibility) {
+      return '';
+    }
 
-		return this.config.accessibility.keyboardSupport
-			.map(
-				(key) => `
+    return this.config.accessibility.keyboardSupport
+      .map(
+        (key) => `
     it('supports ${key} key interaction', async () => {
       const user = userEvent.setup();
       render(<${this.config.name} />);
@@ -1028,13 +1032,13 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
       const element = screen.getByRole('${this.getDefaultRole()}');
       await user.type(element, '{${key}}');
       // Should handle ${key} key properly
-    });`,
-			)
-			.join("\n");
-	}
+    });`
+      )
+      .join('\n');
+  }
 
-	private generateInteractionTests(): string {
-		return `
+  private generateInteractionTests(): string {
+    return `
     it('handles click events', async () => {
       const handleClick = jest.fn();
       render(<${this.config.name} onClick={handleClick} />);
@@ -1058,78 +1062,78 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
       element.blur();
       expect(handleBlur).toHaveBeenCalled();
     });`;
-	}
+  }
 
-	private generateVariantTests(): string {
-		if (!this.config.variants) {
-			return "";
-		}
+  private generateVariantTests(): string {
+    if (!this.config.variants) {
+      return '';
+    }
 
-		return this.config.variants
-			.map(
-				(variant) => `
+    return this.config.variants
+      .map(
+        (variant) => `
     it('renders ${variant.name} variant correctly', () => {
       render(<${this.config.name} variant="${variant.name}" />);
       // Should render ${variant.name} variant without errors
-    });`,
-			)
-			.join("\n");
-	}
+    });`
+      )
+      .join('\n');
+  }
 
-	private generateStorybookArgTypes(): string {
-		return this.config.props
-			.map((property) => {
-				const control = this.getStorybookControl(property);
-				return `${property.name}: {
+  private generateStorybookArgTypes(): string {
+    return this.config.props
+      .map((property) => {
+        const control = this.getStorybookControl(property);
+        return `${property.name}: {
       description: '${property.description}',
       ${control}
     }`;
-			})
-			.join(",\n    ");
-	}
+      })
+      .join(',\n    ');
+  }
 
-	private getStorybookControl(property: PropertyDefinition): string {
-		switch (property.type) {
-			case "boolean": {
-				return "control: 'boolean'";
-			}
-			case "number": {
-				return "control: { type: 'range', min: 0, max: 100 }";
-			}
-			case "enum": {
-				return `control: 'select',\n      options: [${property.enumValues?.map((v) => `'${v}'`).join(", ")}]`;
-			}
-			default: {
-				return "control: 'text'";
-			}
-		}
-	}
+  private getStorybookControl(property: PropertyDefinition): string {
+    switch (property.type) {
+      case 'boolean': {
+        return "control: 'boolean'";
+      }
+      case 'number': {
+        return "control: { type: 'range', min: 0, max: 100 }";
+      }
+      case 'enum': {
+        return `control: 'select',\n      options: [${property.enumValues?.map((v) => `'${v}'`).join(', ')}]`;
+      }
+      default: {
+        return "control: 'text'";
+      }
+    }
+  }
 
-	private generateDefaultStoryArgs(): string {
-		return this.config.props
-			.map((property) => {
-				if (property.defaultValue !== undefined) {
-					return `${property.name}: ${JSON.stringify(property.defaultValue)}`;
-				}
-				return "";
-			})
-			.filter(Boolean)
-			.join(",\n    ");
-	}
+  private generateDefaultStoryArgs(): string {
+    return this.config.props
+      .map((property) => {
+        if (property.defaultValue !== undefined) {
+          return `${property.name}: ${JSON.stringify(property.defaultValue)}`;
+        }
+        return '';
+      })
+      .filter(Boolean)
+      .join(',\n    ');
+  }
 
-	private generateExampleStories(): string {
-		if (!this.config.examples) {
-			return "";
-		}
+  private generateExampleStories(): string {
+    if (!this.config.examples) {
+      return '';
+    }
 
-		return this.config.examples
-			.map(
-				(example) => `
-export const ${example.name.replaceAll(/\s+/g, "")}: Story = {
+    return this.config.examples
+      .map(
+        (example) => `
+export const ${example.name.replaceAll(/\s+/g, '')}: Story = {
   args: {
     ${Object.entries(example.props)
-			.map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
-			.join(",\n    ")}
+      .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
+      .join(',\n    ')}
   },
   parameters: {
     docs: {
@@ -1138,19 +1142,19 @@ export const ${example.name.replaceAll(/\s+/g, "")}: Story = {
       }
     }
   }
-};`,
-			)
-			.join("\n");
-	}
+};`
+      )
+      .join('\n');
+  }
 
-	private generateDocumentationExamples(): string {
-		if (!this.config.examples) {
-			return "";
-		}
+  private generateDocumentationExamples(): string {
+    if (!this.config.examples) {
+      return '';
+    }
 
-		return this.config.examples
-			.map(
-				(example) => `
+    return this.config.examples
+      .map(
+        (example) => `
 ### ${example.name}
 
 ${example.description}
@@ -1158,93 +1162,93 @@ ${example.description}
 \`\`\`tsx
 ${example.code}
 \`\`\`
-`,
-			)
-			.join("\n");
-	}
+`
+      )
+      .join('\n');
+  }
 
-	private generateAccessibilityDocs(): string {
-		if (!this.config.accessibility) {
-			return "";
-		}
+  private generateAccessibilityDocs(): string {
+    if (!this.config.accessibility) {
+      return '';
+    }
 
-		const {
-			roles,
-			ariaAttributes,
-			keyboardSupport,
-			screenReaderSupport,
-			colorContrastCompliant,
-			focusManagement,
-		} = this.config.accessibility;
+    const {
+      roles,
+      ariaAttributes,
+      keyboardSupport,
+      screenReaderSupport,
+      colorContrastCompliant,
+      focusManagement,
+    } = this.config.accessibility;
 
-		return `
-- **Roles**: ${roles.join(", ")}
-- **ARIA Attributes**: ${ariaAttributes.join(", ")}
-- **Keyboard Support**: ${keyboardSupport.join(", ")}
-- **Screen Reader**: ${screenReaderSupport ? "Full support" : "Basic support"}
-- **Color Contrast**: ${colorContrastCompliant ? "WCAG AA compliant" : "Needs review"}
-- **Focus Management**: ${focusManagement ? "Automatic" : "Manual"}`;
-	}
+    return `
+- **Roles**: ${roles.join(', ')}
+- **ARIA Attributes**: ${ariaAttributes.join(', ')}
+- **Keyboard Support**: ${keyboardSupport.join(', ')}
+- **Screen Reader**: ${screenReaderSupport ? 'Full support' : 'Basic support'}
+- **Color Contrast**: ${colorContrastCompliant ? 'WCAG AA compliant' : 'Needs review'}
+- **Focus Management**: ${focusManagement ? 'Automatic' : 'Manual'}`;
+  }
 
-	private estimateBundleSize(): number {
-		// Rough estimation based on component complexity
-		let size = 2; // Base size
-		size += this.config.props.length * 0.1;
-		if (this.config.animations) {
-			size += 1;
-		}
-		if (this.config.variants) {
-			size += this.config.variants.length * 0.2;
-		}
-		return Math.round(size * 10) / 10;
-	}
+  private estimateBundleSize(): number {
+    // Rough estimation based on component complexity
+    let size = 2; // Base size
+    size += this.config.props.length * 0.1;
+    if (this.config.animations) {
+      size += 1;
+    }
+    if (this.config.variants) {
+      size += this.config.variants.length * 0.2;
+    }
+    return Math.round(size * 10) / 10;
+  }
 
-	private generateIndexFile(): string {
-		return `/**
+  private generateIndexFile(): string {
+    return `/**
  * ${this.config.name} Component Exports
  */
 
 export { ${this.config.name} } from './${this.config.name}';
 export type { ${this.config.name}Props } from './${this.config.name}';
-${this.options.includeTypes ? `export * from './${this.config.name}.types';` : ""}`;
-	}
+${this.options.includeTypes ? `export * from './${this.config.name}.types';` : ''}`;
+  }
 
-	private generatePackageJson(): string {
-		return JSON.stringify(
-			{
-				name: `@liquidify/${this.config.name.toLowerCase()}`,
-				version: this.options.targetVersion,
-				description: this.config.description,
-				main: "./index.js",
-				module: "./index.mjs",
-				types: "./index.d.ts",
-				exports: {
-					".": {
-						import: "./index.mjs",
-						require: "./index.js",
-						types: "./index.d.ts",
-					},
-				},
-				keywords: [
-					"liquidify",
-					"react",
-					"component",
-					"glassmorphism",
-					this.config.category,
-				],
-				peerDependencies: {
-					react: ">=18.0.0",
-					"react-dom": ">=18.0.0",
-				},
-			},
-			undefined,
-			2,
-		);
-	}
+  private generatePackageJson(): string {
+    return JSON.stringify(
+      {
+        name: `@liquidify/${this.config.name.toLowerCase()}`,
+        version: this.options.targetVersion,
+        description: this.config.description,
+        main: './index.js',
+        module: './index.mjs',
+        types: './index.d.ts',
+        exports: {
+          '.': {
+            import: './index.mjs',
+            require: './index.js',
+            types: './index.d.ts',
+          },
+        },
+        keywords: [
+          'liquidify',
+          'react',
+          'component',
+          'glassmorphism',
+          this.config.category,
+        ],
+        peerDependencies: {
+          react: '>=18.0.0',
+          'react-dom': '>=18.0.0',
+        },
+      },
+      undefined,
+      2
+    );
+  }
 
-	private generateExportStatement(): string {
-		return `export default ${this.config.name};`;
-	}
+  private generateExportStatement(): string {
+    return `export default ${this.config.name};`;
+  }
 }
 
 // Types for generated files
@@ -1255,19 +1259,19 @@ export default LiqUIdifyCodeGenerator;
 
 // Utility functions for common component patterns
 export const generateComponentFromConfig = (
-	config: ComponentConfig,
-	options?: GenerationOptions,
+  config: ComponentConfig,
+  options?: GenerationOptions
 ): GeneratedFiles => {
-	const generator = new LiqUIdifyCodeGenerator(config, options);
-	return generator.generateComponent();
+  const generator = new LiqUIdifyCodeGenerator(config, options);
+  return generator.generateComponent();
 };
 
 export const generateMigrationCode = (
-	fromVersion: string,
-	toVersion: string,
-	componentName: string,
+  fromVersion: string,
+  toVersion: string,
+  componentName: string
 ): string => {
-	return `/**
+  return `/**
  * Migration Guide: ${componentName} v${fromVersion} → v${toVersion}
  */
 

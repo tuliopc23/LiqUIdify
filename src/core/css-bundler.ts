@@ -8,7 +8,7 @@ import { performanceMonitor } from './performance-monitor';
 // Types
 export interface CSSBundle {
   name: string;
-  files: string[];
+  files: Array<string>;
   output: string;
   critical: boolean;
   size: number;
@@ -17,23 +17,23 @@ export interface CSSBundle {
 
 export interface CSSBundleConfig {
   core: {
-    files: string[];
+    files: Array<string>;
     critical: true;
     maxSize: number; // 15KB
   };
   animations: {
-    files: string[];
+    files: Array<string>;
     critical: false;
     maxSize: number; // 10KB
     lazy: true;
   };
   utilities: {
-    files: string[];
+    files: Array<string>;
     critical: false;
     maxSize: number; // 8KB
   };
   themes: {
-    files: string[];
+    files: Array<string>;
     critical: false;
     maxSize: number; // 5KB
     lazy: true;
@@ -41,11 +41,11 @@ export interface CSSBundleConfig {
 }
 
 export interface BundleResult {
-  bundles: CSSBundle[];
+  bundles: Array<CSSBundle>;
   totalSize: number;
   criticalSize: number;
-  warnings: string[];
-  errors: string[];
+  warnings: Array<string>;
+  errors: Array<string>;
 }
 
 // Default bundle configuration
@@ -168,7 +168,7 @@ export class CSSBundler {
 
     // Combine all CSS files
     let combinedCSS = '';
-    const existingFiles: string[] = [];
+    const existingFiles: Array<string> = [];
 
     for (const filePath of config.files) {
       if (fs.existsSync(filePath)) {
@@ -264,14 +264,14 @@ export class CSSBundler {
    * Generate CSS loading strategy
    */
   generateLoadingStrategy(): {
-    critical: string[];
-    lazy: string[];
-    preload: string[];
+    critical: Array<string>;
+    lazy: Array<string>;
+    preload: Array<string>;
   } {
     const strategy = {
-      critical: [] as string[],
-      lazy: [] as string[],
-      preload: [] as string[],
+      critical: [] as Array<string>,
+      lazy: [] as Array<string>,
+      preload: [] as Array<string>,
     };
 
     for (const [bundleName, config] of Object.entries(this.config)) {
@@ -324,7 +324,7 @@ export class CSSBundler {
     const chokidar = require('chokidar');
 
     // Get all files to watch
-    const filesToWatch: string[] = [];
+    const filesToWatch: Array<string> = [];
     for (const config of Object.values(this.config)) {
       filesToWatch.push(...config.files);
     }
@@ -370,19 +370,19 @@ export class BundleSizeValidator {
    */
   validate(result: BundleResult): {
     passed: boolean;
-    violations: {
+    violations: Array<{
       bundle: string;
       actual: number;
       limit: number;
       severity: 'warning' | 'error';
-    }[];
+    }>;
   } {
-    const violations: {
+    const violations: Array<{
       bundle: string;
       actual: number;
       limit: number;
       severity: 'warning' | 'error';
-    }[] = [];
+    }> = [];
 
     // Check individual bundle sizes
     for (const bundle of result.bundles) {
@@ -425,8 +425,8 @@ export class CSSPerformanceAnalyzer {
     parseTime: number;
     renderTime: number;
     unusedRules: number;
-    complexSelectors: string[];
-    recommendations: string[];
+    complexSelectors: Array<string>;
+    recommendations: Array<string>;
   }> {
     const css = fs.readFileSync(bundlePath, 'utf8');
     const startTime = performance.now();
@@ -436,8 +436,8 @@ export class CSSPerformanceAnalyzer {
     const parseTime = performance.now() - startTime;
 
     // Analyze selectors
-    const selectors: string[] = [];
-    const complexSelectors: string[] = [];
+    const selectors: Array<string> = [];
+    const complexSelectors: Array<string> = [];
 
     ast.walkRules((rule) => {
       selectors.push(rule.selector);
@@ -454,7 +454,7 @@ export class CSSPerformanceAnalyzer {
     });
 
     // Generate recommendations
-    const recommendations: string[] = [];
+    const recommendations: Array<string> = [];
 
     if (complexSelectors.length > selectors.length * 0.1) {
       recommendations.push(

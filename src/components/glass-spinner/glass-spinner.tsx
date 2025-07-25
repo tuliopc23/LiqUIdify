@@ -1,8 +1,10 @@
-import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { motion } from 'framer-motion';
 import React from 'react';
-
 import { cn } from '@/core/utils/classname';
+import {
+  createVariants as cva,
+  type InferVariantProps as VariantProps,
+} from '../../lib/variant-system';
 
 const spinnerVariants = cva(
   ['inline-block rounded-full', 'border-2 border-solid'],
@@ -19,12 +21,12 @@ const spinnerVariants = cva(
         glass: 'border-white/10 border-t-white/50 backdrop-blur-sm',
       },
       size: {
-        xs: 'w-3 h-3 border',
-        sm: 'w-4 h-4 border',
-        md: 'w-6 h-6 border-2',
-        lg: 'w-8 h-8 border-2',
-        xl: 'w-12 h-12 border-2',
-        '2xl': 'w-16 h-16 border-4',
+        xs: 'h-3 w-3 border',
+        sm: 'h-4 w-4 border',
+        md: 'h-6 w-6 border-2',
+        lg: 'h-8 w-8 border-2',
+        xl: 'h-12 w-12 border-2',
+        '2xl': 'h-16 w-16 border-4',
       },
       speed: {
         slow: 'animate-spin-slow',
@@ -37,7 +39,7 @@ const spinnerVariants = cva(
       size: 'md',
       speed: 'normal',
     },
-  },
+  }
 );
 
 const containerVariants = cva('flex items-center justify-center', {
@@ -52,7 +54,11 @@ const containerVariants = cva('flex items-center justify-center', {
   },
 });
 
-export interface GlassSpinnerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
+export interface GlassSpinnerProps
+  extends Omit<
+      React.HTMLAttributes<HTMLDivElement>,
+      keyof React.AriaAttributes
+    >,
     VariantProps<typeof spinnerVariants>,
     VariantProps<typeof containerVariants> {
   label?: string;
@@ -75,15 +81,14 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
       centered = false,
       ...props
     },
-    ref,
+    ref
   ) => {
     const SpinnerElement = () => (
-
       <motion.div
         className={cn(spinnerVariants({ variant, size, speed }), className)}
         animate={{ rotate: 360 }}
         transition={{
-          duration: 'slow' === speed ? 2 : ('fast' === speed ? 0.5 : 1),
+          duration: 'slow' === speed ? 2 : 'fast' === speed ? 0.5 : 1,
           repeat: Infinity,
           ease: 'linear',
         }}
@@ -93,26 +98,24 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
     );
 
     const content = (
-
-      <div ref={ref}
+      <div
+        ref={ref}
         className={cn(
           containerVariants({ orientation }),
           centered && 'fixed inset-0 z-50 bg-black/20 backdrop-blur-sm',
-          className,
+          className
         )}
         {...(props as any)}
       >
-
         <SpinnerElement />
         {showLabel && (
-
-          <span className="text-sm text-white/70 select-none">{label}</span>
+          <span className="select-none text-sm text-white/70">{label}</span>
         )}
       </div>
     );
 
     return content;
-  },
+  }
 );
 
 // Pulse spinner variant
@@ -128,10 +131,8 @@ export const PulseSpinner: React.FC<{
   };
 
   return (
-
     <div className={cn('flex space-x-1', className)}>
       {[0, 1, 2].map((index) => (
-
         <motion.div
           key={index}
           className={cn('rounded-full', sizeClasses[size], `bg-${color}/50`)}
@@ -164,10 +165,8 @@ export const DotsSpinner: React.FC<{
   };
 
   return (
-
     <div className={cn('flex space-x-1', className)}>
       {Array.from({ length: count }).map((_, index) => (
-
         <motion.div
           key={index}
           className={cn('rounded-full bg-white/60', sizeClasses[size])}
@@ -199,12 +198,11 @@ export const RingSpinner: React.FC<{
   };
 
   return (
-
     <motion.div
       className={cn(
         'rounded-full border-white/20',
         sizeClasses[size],
-        className,
+        className
       )}
       style={{
         borderWidth: thickness,
@@ -226,13 +224,11 @@ export const WaveSpinner: React.FC<{
   bars?: number;
 }> = ({ className, bars = 5 }) => {
   return (
-
     <div className={cn('flex items-end space-x-1', className)}>
       {Array.from({ length: bars }).map((_, index) => (
-
         <motion.div
           key={index}
-          className="w-1 bg-gradient-to-t from-blue-400 to-purple-400 rounded-full"
+          className="w-1 rounded-full bg-gradient-to-t from-blue-400 to-purple-400"
           animate={{
             height: [8, 24, 8],
           }}

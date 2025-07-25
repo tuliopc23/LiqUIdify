@@ -22,7 +22,7 @@ export interface MicroInteraction {
   trigger: 'hover' | 'focus' | 'active' | 'click' | 'touch';
   element: HTMLElement;
   animation: {
-    keyframes: Keyframe[];
+    keyframes: Array<Keyframe>;
     options: KeyframeAnimationOptions;
   };
   feedback: {
@@ -661,8 +661,8 @@ export class VisualPolishManager {
   /**
    * Get quality recommendations
    */
-  getQualityRecommendations(): string[] {
-    const recommendations: string[] = [];
+  getQualityRecommendations(): Array<string> {
+    const recommendations: Array<string> = [];
     const { qualityMetrics } = this;
 
     if (0.9 > qualityMetrics.pixelPerfectScore) {
@@ -727,7 +727,7 @@ export class VisualPolishManager {
 export function useVisualPolish(config: Partial<PolishConfig> = {}) {
   const [qualityMetrics, setQualityMetrics] =
     useState<VisualQualityMetrics | null | null>(undefined);
-  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [recommendations, setRecommendations] = useState<Array<string>>([]);
   const polishManagerRef = useRef<VisualPolishManager | null>(null);
 
   // Initialize polish manager

@@ -1,1 +1,1 @@
-export { GlassCheckbox, type GlassCheckboxProps } from "./glass-checkbox";
+export { GlassCheckbox, type GlassCheckboxProps } from './glass-checkbox';

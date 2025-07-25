@@ -8,9 +8,9 @@ import { checkGlassContrast, getContrastRatio } from '@/core/utils/color';
 // Types and Interfaces
 export interface AccessibilityReport {
   score: number; // 0-100, target: 95+
-  violations: Violation[];
-  warnings: Warning[];
-  suggestions: Suggestion[];
+  violations: Array<Violation>;
+  warnings: Array<Warning>;
+  suggestions: Array<Suggestion>;
   wcagLevel: 'A' | 'AA' | 'AAA';
   timestamp: Date;
   componentInfo?: ComponentInfo;
@@ -22,12 +22,12 @@ export interface Violation {
   description: string;
   help: string;
   helpUrl: string;
-  nodes: ViolationNode[];
+  nodes: Array<ViolationNode>;
 }
 
 export interface ViolationNode {
   html: string;
-  target: string[];
+  target: Array<string>;
   failureSummary: string;
   fix?: string;
 }
@@ -36,7 +36,7 @@ export interface Warning {
   id: string;
   description: string;
   suggestion: string;
-  elements: HTMLElement[];
+  elements: Array<HTMLElement>;
 }
 
 export interface Suggestion {
@@ -75,9 +75,9 @@ export interface FocusOptions {
 
 export interface ARIAValidation {
   valid: boolean;
-  errors: ARIAError[];
-  suggestions: ARIASuggestion[];
-  autoCorrections: ARIACorrection[];
+  errors: Array<ARIAError>;
+  suggestions: Array<ARIASuggestion>;
+  autoCorrections: Array<ARIACorrection>;
 }
 
 export interface ARIAError {
@@ -404,17 +404,17 @@ export class AccessibilityManager {
     // Check if it meets the required level
     const meetsRequirement =
       'AA' === level
-        ? (largeText
+        ? largeText
           ? result.passes.aa.large
-          : result.passes.aa.normal)
-        : (largeText
+          : result.passes.aa.normal
+        : largeText
           ? result.passes.aaa.large
-          : result.passes.aaa.normal);
+          : result.passes.aaa.normal;
 
     // Auto-fix if needed and requested
     if (!meetsRequirement && autoFix) {
       const targetRatio =
-        'AA' === level ? (largeText ? 3 : 4.5) : (largeText ? 4.5 : 7);
+        'AA' === level ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
 
       try {
         // For now, keep the original color if contrast is poor
@@ -489,9 +489,9 @@ export class AccessibilityManager {
     element: HTMLElement,
     autoCorrect: boolean = true
   ): ARIAValidation {
-    const errors: ARIAError[] = [];
-    const suggestions: ARIASuggestion[] = [];
-    const autoCorrections: ARIACorrection[] = [];
+    const errors: Array<ARIAError> = [];
+    const suggestions: Array<ARIASuggestion> = [];
+    const autoCorrections: Array<ARIACorrection> = [];
 
     // Get element's role
     const role = element.getAttribute('role') || this.getImplicitRole(element);
@@ -515,7 +515,9 @@ export class AccessibilityManager {
       const attributeName = attribute.name;
       const attributeValue = attribute.value;
       const attributeRule =
-        ARIA_RULES.attributes[attributeName as keyof typeof ARIA_RULES.attributes];
+        ARIA_RULES.attributes[
+          attributeName as keyof typeof ARIA_RULES.attributes
+        ];
 
       if (!attributeRule) {
         errors.push({
@@ -575,17 +577,19 @@ export class AccessibilityManager {
     if (role && ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]) {
       const roleRule = ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles];
 
-      if (roleRule.requiredProps) {for (const property of roleRule.requiredProps) {
-        if (!element.hasAttribute(property)) {
-          suggestions.push({
-            attribute: property,
+      if (roleRule.requiredProps) {
+        for (const property of roleRule.requiredProps) {
+          if (!element.hasAttribute(property)) {
+            suggestions.push({
+              attribute: property,
 
-            currentValue: null,
-            suggestedValue: this.getSuggestedARIAValue(property, element),
-            reason: `Required attribute for role="${role}"`,
-          });
+              currentValue: null,
+              suggestedValue: this.getSuggestedARIAValue(property, element),
+              reason: `Required attribute for role="${role}"`,
+            });
+          }
         }
-      }}
+      }
 
       // Apply implicit props if missing
       if (
@@ -593,7 +597,9 @@ export class AccessibilityManager {
         roleRule.implicitProps &&
         autoCorrect
       ) {
-        for (const [property, value] of Object.entries(roleRule.implicitProps)) {
+        for (const [property, value] of Object.entries(
+          roleRule.implicitProps
+        )) {
           if (!element.hasAttribute(property)) {
             element.setAttribute(property, value);
             autoCorrections.push({
@@ -652,7 +658,7 @@ export class AccessibilityManager {
 
   // Private helper methods
 
-  private processViolations(axeViolations: any[]): Violation[] {
+  private processViolations(axeViolations: Array<any>): Array<Violation> {
     return axeViolations.map((violation) => ({
       id: violation.id,
       impact: violation.impact,
@@ -668,8 +674,8 @@ export class AccessibilityManager {
     }));
   }
 
-  private generateWarnings(element: HTMLElement): Warning[] {
-    const warnings: Warning[] = [];
+  private generateWarnings(element: HTMLElement): Array<Warning> {
+    const warnings: Array<Warning> = [];
 
     // Check for missing lang attribute
     if (element === document.documentElement && !element.lang) {
@@ -689,7 +695,7 @@ export class AccessibilityManager {
         id: 'empty-headings',
         description: 'Empty heading elements found',
         suggestion: 'Add content to headings or remove them',
-        elements: emptyHeadings as HTMLElement[],
+        elements: emptyHeadings as Array<HTMLElement>,
       });
     }
 
@@ -702,7 +708,7 @@ export class AccessibilityManager {
         id: 'positive-tabindex',
         description: 'Positive tabindex values can disrupt keyboard navigation',
         suggestion: 'Use tabindex="0" or "-1" instead',
-        elements: [...positiveTabindex] as HTMLElement[],
+        elements: [...positiveTabindex] as Array<HTMLElement>,
       });
     }
 
@@ -711,10 +717,10 @@ export class AccessibilityManager {
 
   private generateSuggestions(
     element: HTMLElement,
-    violations: Violation[],
-    _warnings: Warning[]
-  ): Suggestion[] {
-    const suggestions: Suggestion[] = [];
+    violations: Array<Violation>,
+    _warnings: Array<Warning>
+  ): Array<Suggestion> {
+    const suggestions: Array<Suggestion> = [];
 
     // Contrast suggestions
     for (const violation of violations) {
@@ -780,7 +786,7 @@ export class AccessibilityManager {
     return Math.round(score);
   }
 
-  private determineWCAGLevel(violations: Violation[]): 'A' | 'AA' | 'AAA' {
+  private determineWCAGLevel(violations: Array<Violation>): 'A' | 'AA' | 'AAA' {
     const hasAAViolations = violations.some(
       (v) =>
         v.id.includes('aa') || 'serious' === v.impact || 'critical' === v.impact
@@ -797,7 +803,7 @@ export class AccessibilityManager {
 
   private applyAutoFixes(
     _element: HTMLElement,
-    suggestions: Suggestion[]
+    suggestions: Array<Suggestion>
   ): void {
     for (const suggestion of suggestions) {
       if (suggestion.autoFixAvailable && suggestion.fix) {
@@ -912,7 +918,7 @@ export class AccessibilityManager {
     }
   }
 
-  private handleMutations(mutations: MutationRecord[]): void {
+  private handleMutations(mutations: Array<MutationRecord>): void {
     for (const mutation of mutations) {
       if (
         'attributes' === mutation.type &&
@@ -974,7 +980,7 @@ class FocusTrap {
     }
 
     // Add event listeners
-    if ("undefined" !== typeof document) {
+    if ('undefined' !== typeof document) {
       document.addEventListener('keydown', this.handleKeyDown);
       if (this.options.clickOutsideDeactivates) {
         document.addEventListener('click', this.handleClickOutside);
@@ -988,7 +994,7 @@ class FocusTrap {
     }
 
     this.active = false;
-    if ("undefined" !== typeof document) {
+    if ('undefined' !== typeof document) {
       document.removeEventListener('keydown', this.handleKeyDown);
       document.removeEventListener('click', this.handleClickOutside);
     }
@@ -1010,11 +1016,10 @@ class FocusTrap {
 
     const focusableElements = [
       ...this.container.querySelectorAll(focusableSelectors),
-    ] as HTMLElement[];
+    ] as Array<HTMLElement>;
 
     this.firstFocusableElement = focusableElements[0] || undefined;
-    this.lastFocusableElement =
-      focusableElements.at(-1) || undefined;
+    this.lastFocusableElement = focusableElements.at(-1) || undefined;
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {

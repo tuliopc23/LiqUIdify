@@ -1,20 +1,23 @@
 // Export production-safe version by default
-export * from './accessibility-manager-prod';
 
 // Re-export specific items that may be needed
 export type {
   AccessibilityReport,
-  Violation,
-  ViolationNode,
-  Warning,
-  Suggestion,
+  ARIACorrection,
+  ARIAError,
+  ARIASuggestion,
+  ARIAValidation,
   ComponentInfo,
   ContrastResult,
   FocusOptions,
-  ARIAValidation,
-  ARIAError,
-  ARIASuggestion,
-  ARIACorrection
+  Suggestion,
+  Violation,
+  ViolationNode,
+  Warning,
 } from './accessibility-manager-prod';
+export * from './accessibility-manager-prod';
 
-export { AccessibilityManager, accessibilityManager } from './accessibility-manager-prod';
+export {
+  AccessibilityManager,
+  accessibilityManager,
+} from './accessibility-manager-prod';

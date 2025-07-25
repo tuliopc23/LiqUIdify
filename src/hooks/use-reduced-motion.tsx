@@ -3,7 +3,8 @@
  * Provides animation control based on user preferences
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { isClient } from '@/core/ssr-safety';
 
@@ -50,8 +51,12 @@ export const usePrefersReducedMotion = (
   const { forceReduced = false, onChange } = config;
 
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
-    if (forceReduced) {return true;}
-    if (!isClient()) {return false;}
+    if (forceReduced) {
+      return true;
+    }
+    if (!isClient()) {
+      return false;
+    }
 
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
@@ -63,7 +68,9 @@ export const usePrefersReducedMotion = (
       return;
     }
 
-    if (!isClient()) {return;}
+    if (!isClient()) {
+      return;
+    }
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -76,7 +83,8 @@ export const usePrefersReducedMotion = (
     if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener('change', handleChange);
       return () => mediaQuery.removeEventListener('change', handleChange);
-    } else if (mediaQuery.addListener) {
+    }
+    if (mediaQuery.addListener) {
       // Fallback for older browsers
       mediaQuery.addListener(handleChange);
       return () => mediaQuery.removeListener(handleChange);
@@ -157,12 +165,12 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
    */
   const createTransitions = useCallback(
     (
-      transitions: {
+      transitions: Array<{
         property: string;
         duration: number;
         easing?: string;
         delay?: number;
-      }[]
+      }>
     ): string => {
       const adjustedTransitions = transitions
         .map((t) => createTransition(t.property, t.duration, t.easing, t.delay))
@@ -197,7 +205,9 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
         disableExit?: boolean;
       } = {}
     ): T => {
-      if (!prefersReducedMotion) {return variants;}
+      if (!prefersReducedMotion) {
+        return variants;
+      }
 
       const adjusted: any = {};
 
