@@ -2,7 +2,11 @@ import { forwardRef } from "react";
 
 import { cn } from "@/core/utils/classname";
 
-export interface GlassBadgeProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, keyof React.AriaAttributes> {
+export interface GlassBadgeProps
+	extends Omit<
+		React.HTMLAttributes<HTMLSpanElement>,
+		keyof React.AriaAttributes
+	> {
 	variant?: "default" | "success" | "warning" | "error";
 }
 
@@ -16,7 +20,6 @@ const GlassBadge = forwardRef<HTMLSpanElement, GlassBadgeProps>(
 		};
 
 		return (
-
 			<span
 				ref={ref}
 				className={cn(

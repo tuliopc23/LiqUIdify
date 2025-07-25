@@ -1,0 +1,20 @@
+[test]
+# Test runner configuration
+root = "./src"
+preload = ["./src/test/setup.ts"]
+coverage = true
+coverageThreshold = 80
+
+# Coverage reporter configuration
+coverageReporter = ["text", "lcov", "html"]
+
+# Coverage exclusions
+coverageSkipTestFiles = true
+
+# Test patterns
+testNamePattern = ""
+testPathPattern = ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}"]
+
+# Environment
+timeout = 5000
+bail = false

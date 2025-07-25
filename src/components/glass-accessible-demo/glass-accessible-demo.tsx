@@ -70,21 +70,16 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 	}, []);
 
 	return (
-
 		<div ref={demoRef} className={cn("space-y-6", className)}>
-
 			<GlassCard className="p-6">
-
 				<h2 className="text-2xl font-bold mb-4">Accessibility Manager Demo</h2>
 
 				{/* Accessibility Validation Demo */}
 
 				<section className="mb-6">
-
 					<h3 className="text-xl font-semibold mb-3">Component Validation</h3>
 
 					<div className="space-y-3">
-
 						<GlassButton
 							onClick={validateAccessibility}
 							disabled={validating}
@@ -94,17 +89,13 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 						</GlassButton>
 
 						{report && (
-
 							<div
 								className="mt-4 p-4 bg-white/10 rounded-lg"
 								role="region"
 								aria-label="Accessibility validation results"
 							>
-
 								<div className="grid grid-cols-2 gap-4">
-
 									<div>
-
 										<span className="font-medium">Score:</span>
 
 										<span
@@ -112,9 +103,9 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 												"ml-2 font-bold",
 												95 <= report.score
 													? "text-green-500"
-													: (80 <= report.score
+													: 80 <= report.score
 														? "text-yellow-500"
-														: "text-red-500"),
+														: "text-red-500",
 											)}
 										>
 											{report.score}/100
@@ -122,21 +113,18 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 									</div>
 
 									<div>
-
 										<span className="font-medium">WCAG Level:</span>
 
 										<span className="ml-2 font-bold">{report.wcagLevel}</span>
 									</div>
 
 									<div>
-
 										<span className="font-medium">Violations:</span>
 
 										<span className="ml-2">{report.violations.length}</span>
 									</div>
 
 									<div>
-
 										<span className="font-medium">Warnings:</span>
 
 										<span className="ml-2">{report.warnings.length}</span>
@@ -144,9 +132,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 								</div>
 
 								{report.violations.length > 0 && (
-
 									<details className="mt-4">
-
 										<summary className="cursor-pointer font-medium">
 											View Violations
 										</summary>
@@ -154,9 +140,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 										<ul className="mt-2 space-y-2">
 											{report.violations.map(
 												(violation: any, index: number) => (
-
 													<li key={index} className="text-sm">
-
 														<strong>{violation.id}:</strong>{" "}
 														{violation.description}
 													</li>
@@ -173,15 +157,11 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 				{/* Contrast Checker Demo */}
 
 				<section className="mb-6">
-
 					<h3 className="text-xl font-semibold mb-3">Contrast Checker</h3>
 
 					<div className="space-y-3">
-
 						<div className="flex gap-4">
-
 							<label className="flex-1">
-
 								<span className="block text-sm font-medium mb-1">
 									Foreground
 								</span>
@@ -196,7 +176,6 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 							</label>
 
 							<label className="flex-1">
-
 								<span className="block text-sm font-medium mb-1">
 									Background
 								</span>
@@ -214,17 +193,13 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 						<GlassButton onClick={checkContrast}>Check Contrast</GlassButton>
 
 						{contrastResult && (
-
 							<div
 								className="mt-4 p-4 bg-white/10 rounded-lg"
 								role="region"
 								aria-label="Contrast check results"
 							>
-
 								<div className="space-y-2">
-
 									<div>
-
 										<span className="font-medium">Contrast Ratio:</span>
 
 										<span className="ml-2 font-bold">
@@ -233,7 +208,6 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 									</div>
 
 									<div>
-
 										<span className="font-medium">AA Normal:</span>
 
 										<span
@@ -249,7 +223,6 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 									</div>
 
 									<div>
-
 										<span className="font-medium">AAA Normal:</span>
 
 										<span
@@ -264,9 +237,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 										</span>
 									</div>
 									{contrastResult.suggestedForeground && (
-
 										<div>
-
 											<span className="font-medium">Suggested Color:</span>
 
 											<span
@@ -289,7 +260,6 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 				{/* ARIA Validation Demo */}
 
 				<section>
-
 					<h3 className="text-xl font-semibold mb-3">
 						ARIA Validation Examples
 					</h3>
@@ -298,7 +268,6 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 						{/* Good example */}
 
 						<div className="p-3 bg-green-500/10 rounded">
-
 							<button
 								aria-label="Good example button"
 								aria-pressed="false"
@@ -315,7 +284,6 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 						{/* Bad example - will be auto-corrected */}
 
 						<div className="p-3 bg-red-500/10 rounded">
-
 							<button
 								aria-expanded="false"
 								className="px-4 py-2 bg-red-500/20 rounded"

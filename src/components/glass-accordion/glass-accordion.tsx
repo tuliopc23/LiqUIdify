@@ -1,10 +1,12 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { type InferVariantProps as VariantProps, createVariants as cva } from '../../lib/variant-system';
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
-
 import { cn } from "@/core/utils/classname";
+import {
+	createVariants as cva,
+	type InferVariantProps as VariantProps,
+} from "../../lib/variant-system";
 
 const accordionVariants = cva({
 	base: "w-full space-y-2 backdrop-blur-md rounded-lg bg-white/5 border border-white/10 p-2",
@@ -127,7 +129,6 @@ const GlassAccordion = React.forwardRef<
 	GlassAccordionProps
 >(({ className, size, variant, ...props }, ref) => {
 	return (
-
 		<AccordionPrimitive.Root
 			ref={ref}
 			className={cn(accordionVariants({ size, variant }), className)}
@@ -141,7 +142,6 @@ const GlassAccordionItem = React.forwardRef<
 	GlassAccordionItemProps
 >(({ className, size, ...props }, ref) => {
 	return (
-
 		<AccordionPrimitive.Item
 			ref={ref}
 			className={cn(accordionItemVariants({ size }), className)}
@@ -155,23 +155,18 @@ const GlassAccordionTrigger = React.forwardRef<
 	GlassAccordionTriggerProps
 >(({ className, children, size, showIcon = true, ...props }, ref) => {
 	return (
-
 		<AccordionPrimitive.Header className="flex">
-
 			<AccordionPrimitive.Trigger
 				ref={ref}
 				className={cn(accordionTriggerVariants({ size }), className)}
 				{...props}
 			>
-
 				<span className="flex-1 text-left">{children}</span>
 				{showIcon && (
-
 					<motion.div
 						className="text-white/60 group-hover:text-white transition-colors"
 						transition={{ duration: 0.2 }}
 					>
-
 						<ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
 					</motion.div>
 				)}
@@ -185,13 +180,11 @@ const GlassAccordionContent = React.forwardRef<
 	GlassAccordionContentProps
 >(({ className, children, size, ...props }, ref) => {
 	return (
-
 		<AccordionPrimitive.Content
 			ref={ref}
 			className={cn(accordionContentVariants({ size }), className)}
 			{...props}
 		>
-
 			<motion.div
 				initial={{ opacity: 0, y: -10 }}
 				animate={{ opacity: 1, y: 0 }}

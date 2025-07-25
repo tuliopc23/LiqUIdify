@@ -71,8 +71,8 @@ export const GlassAvatar = React.memo(
 			};
 
 			return (
-
-				<div ref={ref}
+				<div
+					ref={ref}
 					className={cn(
 						"relative inline-flex items-center justify-center",
 						sizeClasses[size],
@@ -85,7 +85,6 @@ export const GlassAvatar = React.memo(
 					{...(props as any)}
 				>
 					{src ? (
-
 						<img
 							src={src}
 							alt={alt || (fallback ? `Avatar for ${fallback}` : "User avatar")}
@@ -98,8 +97,7 @@ export const GlassAvatar = React.memo(
 								(e.target as HTMLImageElement).style.display = "none";
 							}}
 						/>
-					) : (fallback ? (
-
+					) : fallback ? (
 						<span
 							className={cn(
 								"font-medium text-gray-900 dark:text-white",
@@ -109,18 +107,16 @@ export const GlassAvatar = React.memo(
 							{getInitials(fallback)}
 						</span>
 					) : (
-
 						<User
 							className={cn(
 								"w-1/2 h-1/2 text-gray-400",
 								"bg-gray-200 dark:bg-gray-700 p-1 rounded-full",
 							)}
 						/>
-					))}
+					)}
 
 					{/* Status indicator */}
 					{status && (
-
 						<div
 							className={cn(
 								"absolute bottom-0 right-0 rounded-full border-2 border-white dark:border-gray-900",

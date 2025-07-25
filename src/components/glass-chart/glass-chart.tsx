@@ -48,7 +48,9 @@ export const LineChart: React.FC<LineChartProps> = ({
 	gradient = true,
 }) => {
 	const svgRef = useRef<SVGSVGElement>(null);
-  const [hoveredPoint, setHoveredPoint] = useState<number | null | null>(undefined);
+	const [hoveredPoint, setHoveredPoint] = useState<number | null | null>(
+		undefined,
+	);
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
@@ -81,9 +83,7 @@ export const LineChart: React.FC<LineChartProps> = ({
 	const gradientId = `gradient-${Math.random().toString(36).slice(2, 11)}`;
 
 	return (
-
 		<div className={cn("relative", className)}>
-
 			<svg
 				ref={svgRef}
 				width={width}
@@ -91,11 +91,8 @@ export const LineChart: React.FC<LineChartProps> = ({
 				className="overflow-visible"
 			>
 				{gradient && (
-
 					<defs>
-
 						<linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
-
 							<stop
 								offset="0%"
 								stopColor="var(--glass-primary)"
@@ -114,10 +111,9 @@ export const LineChart: React.FC<LineChartProps> = ({
 				{/* Grid lines */}
 
 				<g className="opacity-20">
-					{Array.from({length: 5}).map((_, index) => {
+					{Array.from({ length: 5 }).map((_, index) => {
 						const y = padding + (index / 4) * chartHeight;
 						return (
-
 							<line
 								key={index}
 								x1={padding}
@@ -134,7 +130,6 @@ export const LineChart: React.FC<LineChartProps> = ({
 
 				{/* Gradient area */}
 				{gradient && points.length > 0 && (
-
 					<path
 						d={`${pathData} L ${points.at(-1)?.x} ${height - padding} L ${padding} ${height - padding} Z`}
 						fill={`url(#${gradientId})`}
@@ -164,7 +159,6 @@ export const LineChart: React.FC<LineChartProps> = ({
 				{/* Data points */}
 				{showDots &&
 					points.map((point, index) => (
-
 						<circle
 							key={index}
 							cx={point.x}
@@ -182,15 +176,13 @@ export const LineChart: React.FC<LineChartProps> = ({
 								animationDelay: animated ? `${index * 100}ms` : "0ms",
 							}}
 							onMouseEnter={() => setHoveredPoint(index)}
-
-       onMouseLeave={() => setHoveredPoint(undefined)}
+							onMouseLeave={() => setHoveredPoint(undefined)}
 						/>
 					))}
 			</svg>
 
 			{/* Tooltip */}
 			{showTooltip && null !== hoveredPoint && points[hoveredPoint] && (
-
 				<div
 					className={cn(
 						"absolute z-10 px-3 py-2 rounded-lg text-sm pointer-events-none",
@@ -203,7 +195,6 @@ export const LineChart: React.FC<LineChartProps> = ({
 						transform: "translateX(-50%)",
 					}}
 				>
-
 					<div className="font-medium text-[var(--text-primary)]">
 						{points[hoveredPoint]?.data.label}
 					</div>
@@ -248,9 +239,7 @@ export const BarChart: React.FC<BarChartProps> = ({
 	);
 
 	return (
-
 		<div className={cn("relative", className)}>
-
 			<svg width={width} height={height} className="overflow-visible">
 				{data.map((item, index) => {
 					const barLength =
@@ -274,9 +263,7 @@ export const BarChart: React.FC<BarChartProps> = ({
 						"vertical" === orientation ? barLength : barThickness;
 
 					return (
-
 						<g key={index}>
-
 							<rect
 								x={x}
 								y={y}
@@ -295,7 +282,6 @@ export const BarChart: React.FC<BarChartProps> = ({
 								}}
 							/>
 							{showValues && (
-
 								<text
 									x={x + barWidth / 2}
 									y={y - 8}
@@ -377,12 +363,9 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 	});
 
 	return (
-
 		<div className={cn("relative", className)}>
-
 			<svg width={width} height={height}>
 				{segments.map((segment, index) => (
-
 					<path
 						key={index}
 						d={segment.path}
@@ -402,7 +385,6 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
 			{/* Center content */}
 			{centerContent && (
-
 				<div
 					className="absolute inset-0 flex items-center justify-center"
 					style={{
@@ -418,11 +400,8 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
 			{/* Labels */}
 			{showLabels && (
-
 				<div className="absolute inset-0 flex items-center justify-center">
-
 					<div className="text-center">
-
 						<div className="text-2xl font-bold text-[var(--text-primary)]">
 							{total.toLocaleString()}
 						</div>

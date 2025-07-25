@@ -1,37 +1,33 @@
-/** @type { import('@storybook/react-vite').StorybookConfig } */
-import { resolve } from "node:path";
-import postcssConfig from "../postcss.config.js";
+import type { StorybookConfig } from '@storybook/react-vite';
+import { resolve } from 'node:path';
 
-const config = {
+const config: StorybookConfig = {
   stories: [
-    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'
   ],
   addons: [
-    "@storybook/addon-docs",
-    "@storybook/addon-a11y", 
-    "@storybook/addon-themes",
-    "@storybook/addon-vitest"
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y', 
+    '@storybook/addon-themes'
   ],
   framework: {
-    name: "@storybook/react-vite",
+    name: '@storybook/react-vite',
     options: {}
   },
   features: {
     storyStoreV7: true,
   },
   viteFinal: async (config) => {
-    // Ensure CSS is properly handled
-    config.css = config.css || {};
-    config.css.postcss = postcssConfig;
+    // CSS is handled by Lightning CSS now
 
     // Add alias for proper imports
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...config.resolve.alias,
-      "@": resolve(__dirname, "../src"),
-      "@/tokens": resolve(__dirname, "../src/tokens/index"),
-      "@/design-tokens": resolve(__dirname, "../src/tokens/design-tokens")
+      '@': resolve(__dirname, '../src'),
+      '@/tokens': resolve(__dirname, '../src/tokens/index'),
+      '@/design-tokens': resolve(__dirname, '../src/tokens/design-tokens')
     };
 
     // ---------- Performance Optimisations ----------
@@ -39,18 +35,18 @@ const config = {
     // re-scanning them on every launch.
     config.optimizeDeps = config.optimizeDeps || {};
     config.optimizeDeps.include = [
-      "react",
-      "react-dom",
-      "react/jsx-runtime",
-      "framer-motion",
-      "clsx",
-      "class-variance-authority",
-      "tailwind-merge",
-      "lucide-react",
-      "@radix-ui/react-slot",
-      "@radix-ui/react-accordion",
-      "@radix-ui/react-dialog",
-      "@radix-ui/react-radio-group",
+      'react',
+      'react-dom',
+      'react/jsx-runtime',
+      'framer-motion',
+      'clsx',
+      'class-variance-authority',
+      'tailwind-merge',
+      'lucide-react',
+      '@radix-ui/react-slot',
+      '@radix-ui/react-accordion',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-radio-group',
     ];
 
     // Use Rollup manualChunks to avoid a single huge bundle in docs mode
@@ -60,11 +56,11 @@ const config = {
       ...config.build.rollupOptions.output,
       manualChunks: {
         vendor: [
-          "react",
-          "react-dom",
-          "framer-motion",
-          "lucide-react",
-          "clsx",
+          'react',
+          'react-dom',
+          'framer-motion',
+          'lucide-react',
+          'clsx',
         ],
       },
     };
@@ -73,22 +69,22 @@ const config = {
     config.build.sourcemap = false;
 
     // Lower logging noise during Storybook build
-    config.logLevel = "error";
+    config.logLevel = 'error';
     // ----------------------------------------------
 
     return config;
   },
   typescript: {
     check: false,
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (property) => (property.parent ? !/node_modules/.test(property.parent.fileName) : true),
     },
   },
   docs: {
-    autodocs: "tag",
-    defaultName: "Documentation"
+    autodocs: 'tag',
+    defaultName: 'Documentation'
   }
 };
 

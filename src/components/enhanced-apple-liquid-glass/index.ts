@@ -11,7 +11,6 @@ export {
 	EnhancedAppleLiquidGlassNav,
 	type EnhancedAppleLiquidGlassProps,
 	EnhancedAppleLiquidGlassShowcase,
-
 } from "../enhanced-apple-liquid-glass";
 
 // TODO: Implement these exports once the lib file is created
@@ -32,5 +31,4 @@ export {
 export {
 	LiquidGlassSvgFilters,
 	type LiquidGlassSvgFiltersProps,
-
 } from "../liquid-glass-svg-filters";

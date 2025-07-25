@@ -10,7 +10,6 @@
  * - Separated business logic from presentation
  */
 
-import type { PartialDeep, RequireAtLeastOne, Merge } from 'type-fest';
 import { Slot } from "@radix-ui/react-slot";
 // External dependencies
 import React, { forwardRef, useCallback, useRef } from "react";
@@ -23,7 +22,6 @@ import { createBusinessLogicHook } from "@/core/business-logic";
 import {
 	generateGlassClasses,
 	generateGlassVariables,
-
 } from "@/core/glass/unified-glass-system";
 
 import { cn } from "@/core/utils/classname";
@@ -31,13 +29,11 @@ import {
 	microInteraction,
 	responsiveSize,
 	touchTarget,
-
 } from "@/core/utils/responsive";
 import {
 	useGlassStateTransitions,
 	useMagneticHover,
 	useRippleEffect,
-
 } from "@/hooks/use-glass-animations";
 
 // Button state type
@@ -73,7 +69,11 @@ const useButtonBusinessLogic = createBusinessLogicHook<
 			}
 			setState((previous: ButtonState) => ({ ...previous, isPressed: true }));
 			setTimeout(
-				() => setState((previous: ButtonState) => ({ ...previous, isPressed: false })),
+				() =>
+					setState((previous: ButtonState) => ({
+						...previous,
+						isPressed: false,
+					})),
 				150,
 			);
 		},
@@ -179,10 +179,9 @@ const VARIANT_CLASSES = {
 // Loading spinner component
 const LoadingSpinner = ({ size = "md" }: { size?: string }) => {
 	const sizeClass =
-		"xs" === size ? "w-3 h-3" : ("sm" === size ? "w-4 h-4" : "w-5 h-5");
+		"xs" === size ? "w-3 h-3" : "sm" === size ? "w-4 h-4" : "w-5 h-5";
 
 	return (
-
 		<div
 			className={cn(
 				"animate-spin rounded-full border-2 border-current border-t-transparent",
@@ -376,9 +375,12 @@ export const GlassButton = React.memo(
 				glassEffect,
 			});
 
-			const glassVariables = generateGlassVariables({ intensity: glassEffect?.intensity, config: {
-				animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
-            ...glassEffect, },
+			const glassVariables = generateGlassVariables({
+				intensity: glassEffect?.intensity,
+				config: {
+					animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+					...glassEffect,
+				},
 			});
 
 			// Build component classes
@@ -418,30 +420,24 @@ export const GlassButton = React.memo(
 
 			// Component content
 			const buttonContent = (
-
 				<>
 					{loading && (
-
 						<div className="mr-2 flex items-center">
-
 							<LoadingSpinner size={size} />
 						</div>
 					)}
 
 					{leftIcon && !loading && (
-
 						<span className="mr-2 flex items-center">{leftIcon}</span>
 					)}
 
 					{children && (
-
 						<span className={cn("flex items-center", iconOnly && "sr-only")}>
 							{loading && loadingText ? loadingText : children}
 						</span>
 					)}
 
 					{rightIcon && !loading && (
-
 						<span className="ml-2 flex items-center">{rightIcon}</span>
 					)}
 				</>
@@ -451,10 +447,9 @@ export const GlassButton = React.memo(
 			const Component = asChild ? Slot : "button";
 
 			return (
-
 				<Component
 					ref={combinedRef}
-					type={asChild  ? undefined  : type}
+					type={asChild ? undefined : type}
 					disabled={disabled || loading}
 					className={componentClasses}
 					style={glassVariables as React.CSSProperties}

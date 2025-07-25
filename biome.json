@@ -1,0 +1,141 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "lineEnding": "lf"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noForEach": "off",
+        "noStaticOnlyClass": "off",
+        "noUselessSwitchCase": "error",
+        "useLiteralKeys": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error",
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "error",
+        "noUndeclaredVariables": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off",
+        "useConsistentArrayType": {
+          "level": "error",
+          "options": {
+            "syntax": "generic"
+          }
+        },
+        "useImportType": "error",
+        "useExportType": "error",
+        "useNodejsImportProtocol": "off",
+        "noUselessElse": "error"
+      },
+      "performance": {
+        "noAccumulatingSpread": "error",
+        "noBarrelFile": "warn"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "options": {
+            "attributes": ["className", "class"],
+            "functions": ["clsx", "cva", "tw", "cn"]
+          }
+        }
+      },
+      "suspicious": {
+        "noExplicitAny": "warn",
+        "noImplicitAnyLet": "error",
+        "noArrayIndexKey": "warn"
+      },
+      "a11y": {
+        "useValidAnchor": "error",
+        "useButtonType": "error",
+        "useAltText": "error",
+        "useAriaPropsForRole": "error",
+        "useValidAriaProps": "error",
+        "useValidAriaValues": "error",
+        "noAccessKey": "error",
+        "noAutofocus": "warn",
+        "useKeyWithClickEvents": "error",
+        "useKeyWithMouseEvents": "error"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "es5",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "quoteProperties": "asNeeded"
+    },
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": false
+    },
+    "globals": [
+      "globalThis",
+      "console",
+      "process",
+      "Buffer",
+      "__dirname",
+      "__filename"
+    ]
+  },
+  "files": {
+    "include": ["src/**/*.ts", "src/**/*.tsx", "*.config.ts", "*.config.js"],
+    "ignore": [
+      "**/node_modules",
+      "**/dist",
+      "**/build",
+      "**/.next",
+      "**/coverage",
+      "**/*.min.js",
+      "**/generated",
+      "**/.turbo",
+      "**/.vercel",
+      "**/storybook-static"
+    ]
+  },
+  "overrides": [
+    {
+      "include": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["**/*.stories.tsx"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useExhaustiveDependencies": "off"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -4,53 +4,53 @@
 type VariantGenerator = (variant: string) => string;
 
 const _createVariantGenerator = (baseClass: string): VariantGenerator => {
-  return (variant: string) => `${baseClass}--${variant}`;
+	return (variant: string) => `${baseClass}--${variant}`;
 };
 
 // Animation utilities with spring physics config
 interface SpringConfig {
-  stiffness: number;
-  damping: number;
-  mass: number;
+	stiffness: number;
+	damping: number;
+	mass: number;
 }
 
 const defaultSpringConfig: SpringConfig = {
-  stiffness: 170,
-  damping: 26,
-  mass: 1,
+	stiffness: 170,
+	damping: 26,
+	mass: 1,
 };
 
 const _createSpringAnimation = (config: SpringConfig = defaultSpringConfig) => {
-  return {
-    type: 'spring',
-    stiffness: config.stiffness,
-    damping: config.damping,
-    mass: config.mass,
-  };
+	return {
+		type: "spring",
+		stiffness: config.stiffness,
+		damping: config.damping,
+		mass: config.mass,
+	};
 };
 
 // Dark mode toggle class generator
 const _createDarkModeClass = (isDarkMode: boolean): string => {
-  return isDarkMode ? 'dark-mode' : 'light-mode';
+	return isDarkMode ? "dark-mode" : "light-mode";
 };
 
 // Accessibility focus visibility states
-const focusVisibleClass = 'focus-visible';
+const focusVisibleClass = "focus-visible";
 const _createFocusVisibilityClass = (isVisible: boolean): string => {
-  return isVisible ? focusVisibleClass : '';
+	return isVisible ? focusVisibleClass : "";
 };
 
 // Breakpoint-aware responsive utilities
-type Breakpoint = 'sm' | 'md' | 'lg' | 'xl';
+type Breakpoint = "sm" | "md" | "lg" | "xl";
 
 interface ResponsiveClassConfig {
-  baseClass: string;
-  breakpoint?: Breakpoint;
+	baseClass: string;
+	breakpoint?: Breakpoint;
 }
 
 const _createResponsiveClass = ({
-  baseClass,
-  breakpoint,
+	baseClass,
+	breakpoint,
 }: ResponsiveClassConfig): string => {
-  return breakpoint ? `${baseClass}--${breakpoint}` : baseClass;
+	return breakpoint ? `${baseClass}--${breakpoint}` : baseClass;
 };

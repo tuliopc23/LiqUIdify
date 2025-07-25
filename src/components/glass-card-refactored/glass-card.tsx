@@ -20,7 +20,6 @@ import type {
 	HeadingProps,
 	LayoutGlassProps,
 	ParagraphProps,
-
 } from "@/core";
 import {
 	cn,
@@ -29,7 +28,6 @@ import {
 	generateGlassVariables,
 	microInteraction,
 	useGlassStateTransitions,
-
 } from "@/core";
 
 // Card state type
@@ -90,7 +88,11 @@ const useCardBusinessLogic = createBusinessLogicHook<CardState>(
 			}
 			setState((previous: CardState) => ({ ...previous, isPressed: true }));
 			setTimeout(
-				() => setState((previous: CardState) => ({ ...previous, isPressed: false })),
+				() =>
+					setState((previous: CardState) => ({
+						...previous,
+						isPressed: false,
+					})),
 				150,
 			);
 		},
@@ -339,9 +341,7 @@ export const GlassCard = React.memo(
 			};
 
 			return (
-
 				<CardContext.Provider value={contextValue}>
-
 					<div
 						ref={ref}
 						className={componentClasses}
@@ -358,9 +358,9 @@ export const GlassCard = React.memo(
 						}}
 						onMouseEnter={handleMouseEnter}
 						onMouseLeave={handleMouseLeave}
-						role={interactive || selectable  ? "button" : undefined}
-						tabIndex={interactive || selectable  ? 0 : undefined}
-						aria-pressed={selectable  ? state.isSelected  : undefined}
+						role={interactive || selectable ? "button" : undefined}
+						tabIndex={interactive || selectable ? 0 : undefined}
+						aria-pressed={selectable ? state.isSelected : undefined}
 						aria-label={
 							interactive || selectable ? "Interactive card" : undefined
 						}
@@ -386,8 +386,8 @@ export const CardHeader = forwardRef<
 	const { variant } = useCardContext();
 
 	return (
-
-		<div ref={ref}
+		<div
+			ref={ref}
 			className={cn(
 				"flex flex-col space-y-1.5 p-6",
 				"apple" === variant && "pb-4",
@@ -410,7 +410,6 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HeadingProps>(
 		const { variant } = useCardContext();
 
 		return (
-
 			<h3
 				ref={ref}
 				className={cn(
@@ -437,7 +436,6 @@ export const CardDescription = forwardRef<HTMLParagraphElement, ParagraphProps>(
 		const { variant } = useCardContext();
 
 		return (
-
 			<p
 				ref={ref}
 				className={cn(
@@ -465,8 +463,8 @@ export const CardContent = forwardRef<
 	const { padding } = useCardContext();
 
 	return (
-
-		<div ref={ref}
+		<div
+			ref={ref}
 			className={cn("flex-1", "none" !== padding && "p-6 pt-0", className)}
 			{...(props as any)}
 		>
@@ -487,8 +485,8 @@ export const CardFooter = forwardRef<
 	const { variant } = useCardContext();
 
 	return (
-
-		<div ref={ref}
+		<div
+			ref={ref}
 			className={cn(
 				"flex items-center p-6 pt-0",
 				"apple" === variant && "pt-4",
@@ -511,8 +509,8 @@ export const CardActions = forwardRef<
 	ComponentPropsBuilder<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
 	return (
-
-		<div ref={ref}
+		<div
+			ref={ref}
 			className={cn("flex items-center gap-2 p-6 pt-0", className)}
 			{...(props as any)}
 		>
