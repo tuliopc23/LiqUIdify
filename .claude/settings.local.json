@@ -3,7 +3,11 @@
     "allow": [
       "Bash(bun add:*)",
       "Bash(rm:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "mcp__hi-ai__start_session",
+      "mcp__hi-ai__update_memory",
+      "mcp__hi-ai__save_memory",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
