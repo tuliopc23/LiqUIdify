@@ -21,18 +21,9 @@ const options: BundleOptions<{}> = {
   drafts: {
     customMedia: true,
   },
-  include: {
-    nesting: true,
-    customProperties: true,
-  },
-  exclude: {
-    logicalProperties: true,
-  },
-  resolver: {
-    read(filePath: string): string {
-      return readFileSync(filePath, 'utf8');
-    },
-  },
+  // Features are controlled via the Features enum in Lightning CSS
+  // include: Features.Nesting | Features.CustomProperties,
+  // exclude: Features.LogicalProperties,
 };
 
 async function buildCSS() {

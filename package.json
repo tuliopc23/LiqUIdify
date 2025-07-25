@@ -100,14 +100,14 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "bun run clean && rolldown-vite build && bun run build:css && bun run post-build",
+    "build": "bun run clean && vite build && bun run build:css && bun run post-build",
     "build:css": "bun scripts/build-css-lightning.ts",
-    "build:modern": "rolldown-vite build --target es2018 --outDir dist/modern",
-    "build:watch": "rolldown-vite build --watch",
+    "build:modern": "vite build --target es2018 --outDir dist/modern",
+    "build:watch": "vite build --watch",
     "build-storybook": "bun run build:css && bunx storybook build && bun run post-storybook",
     "clean": "rm -rf dist",
     "clean:node": "rm -rf node_modules package-lock.json && bun install",
-    "dev": "rolldown-vite",
+    "dev": "vite",
     "format": "biome format --write .",
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",

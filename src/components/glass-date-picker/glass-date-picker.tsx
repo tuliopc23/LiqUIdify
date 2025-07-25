@@ -6,7 +6,8 @@ import { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { cn, focusRing } from '@/core/utils/classname';
 
-const datePickerVariants = cva(['relative w-full'], {
+const datePickerVariants = cva({
+  base: 'relative w-full',
   variants: {
     size: {
       sm: 'text-sm',
@@ -19,20 +20,18 @@ const datePickerVariants = cva(['relative w-full'], {
   },
 });
 
-const triggerVariants = cva(
-  [
+const triggerVariants = cva({
+  base: cn(
     'flex items-center justify-between w-full px-4 py-3 text-left',
     'bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl',
     'hover:bg-white/10 focus:bg-white/10 focus:outline-none',
     'transition-all duration-200',
     'disabled:opacity-50 disabled:cursor-not-allowed',
-  ],
-
-  {
+  ),
     variants: {
       isOpen: {
-        true: 'border-blue-400/50 bg-white/10',
-        false: 'border-white/10',
+        'true': 'border-blue-400/50 bg-white/10',
+        'false': 'border-white/10',
       },
       size: {
         sm: 'px-3 py-2 text-sm',
@@ -41,18 +40,21 @@ const triggerVariants = cva(
       },
     },
     defaultVariants: {
-      isOpen: false,
+      isOpen: 'false',
       size: 'md',
     },
   },
 );
 
-const calendarVariants = cva([
-  'absolute z-50 mt-1 p-4',
-  'bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl',
-  'shadow-xl shadow-black/20',
-  'min-w-[280px]',
-]);
+const calendarVariants = cva({
+  base: cn(
+    'absolute z-50 mt-1 p-4',
+    'bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl',
+    'shadow-xl shadow-black/20',
+    'min-w-[280px]',
+  ),
+  variants: {},
+});
 
 export interface GlassDatePickerProps extends Omit<
     Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
@@ -270,7 +272,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
           type="button"
           className={cn(
 
-            triggerVariants({ isOpen, size }),
+            triggerVariants({ isOpen: isOpen ? 'true' : 'false', size }),
             focusRing,
             disabled && 'cursor-not-allowed',
           )}

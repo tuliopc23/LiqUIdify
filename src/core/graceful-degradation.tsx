@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
-import { SSRSafe } from '@/components/ssr-safe-wrapper';
+// import { SSRSafe } from '@/components/ssr-safe-wrapper';
 
 import { ClientOnly } from './ssr-safety';
 
@@ -282,10 +282,7 @@ export function withCSSFallback(
   return function CSSFallbackWrapper() {
     return (
 
-      <SSRSafe fallback={cssComponent} delay={delay}>
-
-        <ClientOnly fallback={cssComponent}>{jsComponent}</ClientOnly>
-      </SSRSafe>
+      <ClientOnly fallback={cssComponent}>{jsComponent}</ClientOnly>
     );
   };
 }

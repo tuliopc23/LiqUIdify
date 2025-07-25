@@ -8,7 +8,8 @@ import {
 	type InferVariantProps as VariantProps,
 } from "../../lib/variant-system";
 
-const comboboxVariants = cva(["relative w-full"], {
+const comboboxVariants = cva({
+	base: "relative w-full",
 	variants: {
 		size: {
 			sm: "text-sm",
@@ -21,19 +22,18 @@ const comboboxVariants = cva(["relative w-full"], {
 	},
 });
 
-const triggerVariants = cva(
-	[
+const triggerVariants = cva({
+	base: cn(
 		"flex items-center justify-between w-full px-4 py-3 text-left",
 		"bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl",
 		"hover:bg-white/10 focus:bg-white/10 focus:outline-none",
 		"transition-all duration-200",
 		"disabled:opacity-50 disabled:cursor-not-allowed",
-	],
-	{
+	),
 		variants: {
 			isOpen: {
-				true: "border-blue-400/50 bg-white/10",
-				false: "border-white/10",
+				"true": "border-blue-400/50 bg-white/10",
+				"false": "border-white/10",
 			},
 			size: {
 				sm: "px-3 py-2 text-sm",
@@ -42,39 +42,41 @@ const triggerVariants = cva(
 			},
 		},
 		defaultVariants: {
-			isOpen: false,
+			isOpen: "false",
 			size: "md",
 		},
 	},
 );
 
-const listboxVariants = cva([
-	"absolute z-50 w-full mt-1 max-h-60 overflow-auto",
-	"bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl",
-	"shadow-xl shadow-black/20",
-]);
+const listboxVariants = cva({
+	base: cn(
+		"absolute z-50 w-full mt-1 max-h-60 overflow-auto",
+		"bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl",
+		"shadow-xl shadow-black/20",
+	),
+	variants: {},
+});
 
-const optionVariants = cva(
-	[
+const optionVariants = cva({
+	base: cn(
 		"flex items-center justify-between px-4 py-3 text-left cursor-pointer",
 		"hover:bg-white/10 focus:bg-white/10 focus:outline-none",
 		"transition-all duration-200",
 		"text-white/90",
-	],
-	{
+	),
 		variants: {
 			selected: {
-				true: "bg-blue-500/20 text-blue-400",
-				false: "text-white/90",
+				"true": "bg-blue-500/20 text-blue-400",
+				"false": "text-white/90",
 			},
 			highlighted: {
-				true: "bg-white/10",
-				false: "",
+				"true": "bg-white/10",
+				"false": "",
 			},
 		},
 		defaultVariants: {
-			selected: false,
-			highlighted: false,
+			selected: "false",
+			highlighted: "false",
 		},
 	},
 );
@@ -298,7 +300,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 					type="button"
 					role="combobox"
 					className={cn(
-						triggerVariants({ isOpen, size }),
+						triggerVariants({ isOpen: isOpen ? "true" : "false", size }),
 						focusRing,
 						disabled && "cursor-not-allowed",
 					)}
@@ -396,9 +398,8 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 												aria-selected={option.value === selectedValue}
 												className={cn(
 													optionVariants({
-														selected: option.value === selectedValue,
-
-														highlighted: index === highlightedIndex,
+														selected: option.value === selectedValue ? "true" : "false",
+														highlighted: index === highlightedIndex ? "true" : "false",
 													}),
 													option.disabled && "opacity-50 cursor-not-allowed",
 												)}

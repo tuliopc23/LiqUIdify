@@ -7,11 +7,10 @@ export * from "../components/glass-accordion";
 export * from "../components/glass-breadcrumbs";
 export * from "../components/glass-drawer";
 
-export * from "../components/glass-footer";
-
-export * from "../components/glass-header";
-
-export * from "../components/glass-hero";
+// Removed deleted components
+// export * from "../components/glass-footer";
+// export * from "../components/glass-header";
+// export * from "../components/glass-hero";
 export * from "../components/glass-pagination";
 export * from "../components/glass-popover";
 export * from "../components/glass-portal";

@@ -7,7 +7,10 @@
       "mcp__hi-ai__start_session",
       "mcp__hi-ai__update_memory",
       "mcp__hi-ai__save_memory",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(find:*)",
+      "Bash(bun run build:*)",
+      "Bash(killall:*)"
     ],
     "deny": []
   }

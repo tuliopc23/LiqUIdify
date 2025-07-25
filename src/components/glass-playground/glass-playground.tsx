@@ -10,7 +10,18 @@
 import { Check, Code, Copy, Download, Eye, Maximize2 } from "lucide-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-import * as LiquidComponents from "@/components";
+// Import specific components instead of wildcard
+import { 
+  GlassButton,
+  GlassCard,
+  GlassInput,
+  GlassBadge,
+  GlassTooltip,
+  GlassModal,
+  GlassProgress,
+  GlassSwitch,
+  GlassCheckbox 
+} from "@/index";
 
 import { cn } from "@/core/utils/classname";
 
@@ -80,7 +91,15 @@ export function GlassPlayground({
 	// Combine default scope with provided scope
 	const playgroundScope = useMemo(
 		() => ({
-			...LiquidComponents,
+			GlassButton,
+			GlassCard,
+			GlassInput,
+			GlassBadge,
+			GlassTooltip,
+			GlassModal,
+			GlassProgress,
+			GlassSwitch,
+			GlassCheckbox,
 			React,
 			useState,
 			useCallback,

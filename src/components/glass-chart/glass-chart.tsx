@@ -48,9 +48,7 @@ export const LineChart: React.FC<LineChartProps> = ({
 	gradient = true,
 }) => {
 	const svgRef = useRef<SVGSVGElement>(null);
-	const [hoveredPoint, setHoveredPoint] = useState<number | null | null>(
-		undefined,
-	);
+	const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
@@ -176,7 +174,7 @@ export const LineChart: React.FC<LineChartProps> = ({
 								animationDelay: animated ? `${index * 100}ms` : "0ms",
 							}}
 							onMouseEnter={() => setHoveredPoint(index)}
-							onMouseLeave={() => setHoveredPoint(undefined)}
+							onMouseLeave={() => setHoveredPoint(null)}
 						/>
 					))}
 			</svg>

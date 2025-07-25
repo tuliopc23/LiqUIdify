@@ -1,6 +1,10 @@
 // Core Components - Main glass UI components
 export * from "./components/glass-button-refactored";
 export * from "./components/glass-card-refactored";
+
+// Re-export refactored components with cleaner names
+export { GlassButton } from "./components/glass-button-refactored";
+export { GlassCard } from "./components/glass-card-refactored";
 export * from "./components/glass-input";
 export * from "./components/glass-modal";
 
@@ -74,6 +78,9 @@ export * from "./components/hydration-detector";
 export * from "./components/theme-provider";
 export * from "./components/theme-toggle";
 export * from "./providers";
+
+// Main Provider Export
+export { GlassUIProvider } from "./providers";
 
 // Hooks
 export * from "./hooks/use-glass-animations";

@@ -14,9 +14,9 @@ export const loadFramerMotion = (): Promise<typeof FramerMotion> =>
 export * from "../components/apple-liquid-glass";
 // Advanced visual components
 
-export * from "../components/glass-feature-showcase";
-
-export * from "../components/glass-floating-action";
+// Removed deleted components
+// export * from "../components/glass-feature-showcase";
+// export * from "../components/glass-floating-action";
 export * from "../components/glass-loading";
 export * from "../components/glass-progress";
 // Physics-based components
@@ -24,7 +24,7 @@ export * from "../components/glass-slider";
 // Animation-heavy components
 export * from "../components/glass-spinner";
 
-export * from "../components/liquid-glass-svg-filters";
+// export * from "../components/liquid-glass-svg-filters";
 export {
 	type AnimationConfig as HookAnimationConfig,
 	type AnimationState,
