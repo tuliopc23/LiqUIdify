@@ -93,19 +93,17 @@ const drawerVariants = cva(
   }
 );
 
-const drawerHeaderVariants = cva([
-  'flex items-center justify-between',
-  'border-white/10 border-b p-4',
-  'bg-white/5',
-]);
+const drawerHeaderVariants = cva(
+  'flex items-center justify-between p-4 border-b border-white/10 bg-white/5'
+);
 
-const drawerContentVariants = cva(['flex-1 overflow-y-auto p-4', 'text-white']);
+const drawerContentVariants = cva(
+  'flex-1 overflow-y-auto p-4 text-white'
+);
 
-const drawerFooterVariants = cva([
-  'flex items-center justify-end gap-2',
-  'border-white/10 border-t p-4',
-  'bg-white/5',
-]);
+const drawerFooterVariants = cva(
+  'flex items-center justify-end gap-2 p-4 border-t border-white/10 bg-white/5'
+);
 
 export interface GlassDrawerProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root> {
@@ -113,11 +111,11 @@ export interface GlassDrawerProps
 }
 
 export interface GlassDrawerContentProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    VariantProps<typeof drawerVariants> {
+  extends Omit<React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>, 'children'> {
   children: React.ReactNode;
-
+  className?: string;
   showCloseButton?: boolean;
+}
   closeButtonPosition?: 'header' | 'overlay';
 }
 

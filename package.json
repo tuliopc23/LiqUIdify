@@ -125,6 +125,11 @@
     "test:e2e": "nx e2e storybook",
     "test:e2e:ui": "playwright test --ui",
     "type-check": "nx type-check components",
+    "type-check:strict": "tsc --noEmit --strict --noImplicitAny --strictNullChecks",
+    "ts:analyze": "bun scripts/analyze-ts-issues.ts",
+    "ts:fix:any": "bun scripts/fix-any-types.ts",
+    "ts:fix:types": "bun scripts/fix-missing-types.ts",
+    "ts:fix:all": "bun scripts/fix-all-ts-issues.ts",
     "graph": "nx graph",
     "affected:graph": "nx affected:graph"
   },
