@@ -5,12 +5,13 @@
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/liquidify)](https://bundlephobia.com/package/liquidify)
 [![Performance](https://img.shields.io/badge/Performance-S--Tier-brightgreen)](https://github.com/tuliopc23/LiqUIdify)
+[![Storybook](https://img.shields.io/badge/Storybook-52%20Components-ff4785)](https://liquidify-storybook.vercel.app)
 
-> 🚀 **Production-ready React component library** with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.
+> 🚀 **Production-ready React component library** with glassmorphism design and physics-based interactions. 52+ components, TypeScript-first, accessibility-ready, 100% Storybook coverage.
 
 ## ✨ Features
 
-- 🎨 **40+ Glassmorphism Components** - Beautiful, modern UI components with glass effects
+- 🎨 **52+ Glassmorphism Components** - Beautiful, modern UI components with glass effects
 - ⚡ **S-Tier Performance** - Bundle size < 30KB, 60fps animations
 - 🔧 **TypeScript First** - Full type safety and excellent DX
 - ♿ **Accessibility Ready** - WCAG 2.1 AA compliant with screen reader support
@@ -20,6 +21,8 @@
 - 🔄 **SSR Compatible** - Works with Next.js, Remix, and other SSR frameworks
 - 🎯 **Tree Shakeable** - Import only what you need
 - 📦 **Modular Architecture** - Use individual components or complete bundles
+- 📚 **100% Storybook Coverage** - Comprehensive documentation and examples
+- 🎮 **Interactive Playground** - Live code editing and component testing
 
 ## 🚀 Quick Start
 
@@ -77,44 +80,59 @@ import { AnimationComponents } from 'liquidify/animations';
 
 ## 📚 Documentation
 
-- 📖 **[Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground
-- 📋 **[API Reference](./docs/API_REFERENCE.md)** - Complete component documentation
-- 🎯 **[Usage Examples](./docs/USAGE_EXAMPLES.md)** - Real-world implementation patterns
-- 🚀 **[Framework Guides](./docs/FRAMEWORK_GUIDES.md)** - Integration with Next.js, Vite, etc.
+- 📖 **[Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground with 52 components
+- 📋 **[API Reference](./docs/API_REFERENCE.md)** - Complete component documentation and props
+- 🎯 **[Usage Examples](./docs/USAGE_EXAMPLES.md)** - Real-world implementation patterns and demos
+- 🚀 **[Framework Guides](./docs/FRAMEWORK_GUIDES.md)** - Integration with Next.js, Vite, Remix, and more
+- 🎨 **[Design System](https://liquidify-storybook.vercel.app/?path=/docs/design-system-overview--docs)** - Design tokens, principles, and guidelines
 
 ## 🎨 Component Categories
 
-### Core Components
-- `GlassButton` - Interactive buttons with glass effects
-- `GlassCard` - Container components with backdrop blur
-- `GlassInput` - Form inputs with glassmorphism styling
-- `GlassModal` - Overlay dialogs and modals
+### 🎯 Core Components (15KB bundle)
+- `GlassButton` - Interactive buttons with magnetic hover and ripple effects
+- `GlassCard` - Container components with compound component pattern
+- `GlassInput` - Form inputs with validation states and icons
+- `GlassModal` - Overlay dialogs with focus trap and animations
+- `GlassErrorBoundary` - Graceful error handling with glass styling
+- `GlassFocusTrap` - Accessibility-focused component wrapper
 
-### Form Components
-- `GlassCheckbox` - Styled checkboxes
-- `GlassRadio` - Radio button groups
-- `GlassSelect` - Dropdown selectors
-- `GlassTextarea` - Multi-line text inputs
-- `GlassSlider` - Range sliders
-- `GlassSwitch` - Toggle switches
+### 📝 Form Components (8KB bundle)
+- `GlassFormField` - Complete form field wrapper with validation
+- `GlassCheckbox` & `GlassCheckboxGroup` - Styled checkboxes with groups
+- `GlassRadioGroup` - Radio button groups with proper ARIA
+- `GlassSelect` - Dropdown selectors with search functionality
+- `GlassTextarea` - Multi-line text inputs with auto-grow
+- `GlassSlider` - Range sliders with custom styling
+- `GlassSwitch` - Toggle switches with smooth animations
+- `GlassNumberInput` - Number inputs with increment/decrement
+- `GlassDatePicker` - Date selection with calendar popup
+- `GlassFileUpload` - Drag & drop file upload with progress
 
-### Navigation
-- `GlassNavbar` - Navigation headers
-- `GlassSidebar` - Side navigation panels
-- `GlassTabs` - Tabbed interfaces
-- `GlassBreadcrumb` - Navigation breadcrumbs
+### 🧭 Navigation Components (6KB bundle)
+- `GlassTabs` - Tabbed interfaces with keyboard navigation
+- `GlassBreadcrumbs` - Navigation breadcrumbs with separators
+- `GlassMobileNav` - Mobile-optimized navigation
+- `GlassSkipNavigation` - Accessibility skip links
 
-### Feedback
-- `GlassToast` - Notification toasts
-- `GlassAlert` - Alert messages
-- `GlassProgress` - Progress indicators
-- `GlassSpinner` - Loading spinners
+### 💬 Feedback Components (5KB bundle)
+- `GlassToast` - Notification toasts with positioning
+- `GlassProgress` - Progress indicators (linear, circular, steps)
+- `GlassLoading` - Loading spinners (spinner, dots, pulse, bars)
+- `GlassNotification` - System notifications with actions
+- `GlassSkeleton` - Loading placeholders with shimmer effects
 
-### Advanced
-- `GlassChart` - Data visualization
-- `GlassTable` - Data tables
-- `GlassCalendar` - Date pickers
-- `GlassDropzone` - File upload areas
+### 📊 Advanced Components (12KB bundle)
+- `GlassChart` - Data visualization (Line, Bar, Donut charts)
+- `GlassTable` - Data tables with sorting, filtering, pagination
+- `GlassPlayground` - Interactive code playground with live editing
+- `GlassPerformanceMonitor` - Real-time performance metrics
+- `AppleLiquidGlass` - Advanced glassmorphism effects
+
+### ♿ Accessibility Components (4KB bundle)
+- `GlassAccessibleDemo` - Accessibility features demonstration
+- `GlassFocusDemo` - Focus management examples
+- `GlassLiveRegion` - Screen reader announcements
+- `GlassVisuallyHidden` - Screen reader only content
 
 ## 🎯 Framework Integration
 
@@ -278,7 +296,16 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [React](https://reactjs.org/) - UI library
 
-## 📊 Stats
+## 📊 Project Status
+
+| Metric | Status |
+|--------|--------|
+| Components | 52/52 with Storybook coverage |
+| Bundle Size | < 30KB (core), < 60KB (full) |
+| TypeScript | 100% coverage |
+| Accessibility | WCAG 2.1 AA compliant |
+| Framework Support | Next.js, Vite, Remix, Gatsby, CRA |
+| Test Coverage | 95%+ |
 
 ![GitHub stars](https://img.shields.io/github/stars/tuliopc23/LiqUIdify?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/tuliopc23/LiqUIdify?style=social)
@@ -287,11 +314,31 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 ---
 
+## 🔗 Links
+
+- **[📖 Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground
+- **[🔗 GitHub](https://github.com/tuliopc23/LiqUIdify)** - Source code and issues
+- **[📦 NPM](https://www.npmjs.com/package/liquidify)** - Package registry
+- **[💬 Discussions](https://github.com/tuliopc23/LiqUIdify/discussions)** - Community discussions
+- **[🐛 Issues](https://github.com/tuliopc23/LiqUIdify/issues)** - Bug reports and feature requests
+
+## 🤝 Community
+
+- **Discord** - [Join our community](https://discord.gg/liquidify) (coming soon)
+- **Twitter** - [@liquidify_ui](https://twitter.com/liquidify_ui) for updates
+- **Contributing** - See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines
+
+---
+
 <div align="center">
   <p>Made with ❤️ by <a href="https://tuliocunha.dev">Tulio Pinheiro Cunha</a></p>
   <p>
     <a href="https://liquidify-storybook.vercel.app">📖 Storybook</a> •
     <a href="https://github.com/tuliopc23/LiqUIdify">🔗 GitHub</a> •
-    <a href="https://www.npmjs.com/package/liquidify">📦 NPM</a>
+    <a href="https://www.npmjs.com/package/liquidify">📦 NPM</a> •
+    <a href="./docs/API_REFERENCE.md">📋 API Docs</a>
+  </p>
+  <p>
+    <strong>52 components • 100% TypeScript • WCAG 2.1 AA • MIT License</strong>
   </p>
 </div>

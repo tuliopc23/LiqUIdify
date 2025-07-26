@@ -10,7 +10,12 @@
       "Bash(git add:*)",
       "Bash(find:*)",
       "Bash(bun run build:*)",
-      "Bash(killall:*)"
+      "Bash(killall:*)",
+      "Bash(ls:*)",
+      "Bash(tree:*)",
+      "Bash(bun init:*)",
+      "Bash(bun test:*)",
+      "Bash(bun run lint:*)"
     ],
     "deny": []
   }

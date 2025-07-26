@@ -8,20 +8,29 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
-      include: ['src/**/*'],
-      exclude: ['src/**/*.test.*', 'src/**/*.spec.*'],
+      include: ['libs/components/src/**/*'],
+      exclude: [
+        'libs/components/src/**/*.test.*',
+        'libs/components/src/**/*.spec.*',
+      ],
+      outDir: 'dist/libs/components/types',
+      entryRoot: 'libs/components/src',
     }),
   ],
 
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      '@liquidify/components': resolve(
+        __dirname,
+        'libs/components/src/index.ts'
+      ),
+      '@': resolve(__dirname, 'libs/components/src'),
     },
   },
 
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, 'libs/components/src/index.ts'),
       name: 'LiquidUI',
       formats: ['es', 'cjs'],
       fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`,
@@ -40,10 +49,15 @@ export default defineConfig({
     emptyOutDir: true,
     target: 'es2020',
     minify: false,
+    outDir: 'dist/libs/components',
   },
 
   esbuild: {
     target: 'es2020',
     jsx: 'automatic',
   },
+
+  // Root configuration for Nx workspace
+  root: __dirname,
+  cacheDir: 'node_modules/.vite',
 });

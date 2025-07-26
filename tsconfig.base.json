@@ -1,0 +1,61 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+
+    /* Strict type checking - Balanced for productivity */
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitAny": true,
+    "strictPropertyInitialization": false,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+
+    /* React */
+    "jsx": "react-jsx",
+
+    /* Module interop */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Path mapping */
+    "baseUrl": ".",
+    "paths": {
+      "@liquidify/components": ["libs/components/src/index.ts"],
+      "@liquidify/tokens": ["libs/tokens/src/index.ts"],
+      "@liquidify/utils": ["libs/utils/src/index.ts"],
+      "@/*": ["libs/components/src/*"],
+      "@/core/*": ["libs/components/src/core/*"],
+      "@/components/*": ["libs/components/src/components/*"],
+      "@/hooks/*": ["libs/components/src/hooks/*"],
+      "@/types/*": ["libs/components/src/types/*"],
+      "@/tokens/*": ["libs/components/src/tokens/*"],
+      "@/design-tokens": ["libs/components/src/tokens/design-tokens"],
+      "@/styles/*": ["libs/components/src/styles/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "dist",
+    "**/*.stories.*",
+    "**/*.test.*",
+    "**/*.spec.*"
+  ]
+}

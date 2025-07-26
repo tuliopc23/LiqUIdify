@@ -1,0 +1,65 @@
+{
+  "name": "components",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/components/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:ui"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/libs/components"],
+      "options": {
+        "command": "vite build",
+        "cwd": "libs/components"
+      },
+      "dependsOn": ["build:css"]
+    },
+    "build:css": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun scripts/build-css-lightning.ts",
+        "cwd": "{workspaceRoot}"
+      },
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/scripts/build-css-lightning.ts",
+        "{workspaceRoot}/tailwind.config.ts",
+        "{projectRoot}/src/**/*.{css,scss,less}",
+        "{projectRoot}/src/styles/**/*"
+      ],
+      "outputs": ["{workspaceRoot}/dist/liquidui.css"]
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun test",
+        "cwd": "{projectRoot}"
+      },
+      "cache": true,
+      "inputs": ["default", "^production"]
+    },
+    "test:ci": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun test --coverage",
+        "cwd": "{projectRoot}"
+      },
+      "cache": true
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun biome lint libs/components/src/**/*.{ts,tsx}"
+      },
+      "cache": true
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit",
+        "cwd": "{projectRoot}"
+      },
+      "cache": true
+    }
+  }
+}

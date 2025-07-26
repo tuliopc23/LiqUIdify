@@ -102,6 +102,10 @@
     "includes": [
       "src/**/*.ts",
       "src/**/*.tsx",
+      "libs/**/src/**/*.ts",
+      "libs/**/src/**/*.tsx",
+      "apps/**/src/**/*.ts",
+      "apps/**/src/**/*.tsx",
       "*.config.ts",
       "*.config.js",
       "vite.config.ts",

@@ -1,54 +1,11 @@
 {
-	"compilerOptions": {
-		"target": "ES2022",
-		"lib": ["ES2022", "DOM", "DOM.Iterable"],
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"allowImportingTsExtensions": false,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"noEmit": true,
-		"skipLibCheck": true,
-
-		/* Strict type checking - Balanced for productivity */
-		"strict": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictBindCallApply": true,
-		"noImplicitAny": true,
-		"strictPropertyInitialization": false, // Relaxed for React
-		"alwaysStrict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitReturns": true,
-		"noUncheckedIndexedAccess": true, // Extra safety for arrays
-		"exactOptionalPropertyTypes": false, // Too strict for React props
-
-		/* React */
-		"jsx": "react-jsx",
-
-		/* Module interop */
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
-
-		/* Path mapping */
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"]
-		}
-	},
-	"include": [
-		"src/**/*",
-		"vite.config.ts",
-		"scripts/**/*.ts"
-	],
-	"exclude": [
-		"node_modules",
-		"dist",
-		"**/*.stories.*",
-		"**/*.test.*",
-		"**/*.spec.*"
-	]
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./libs/components"
+    }
+  ]
 }
