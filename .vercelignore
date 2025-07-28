@@ -10,6 +10,7 @@ playwright-report
 
 # Build artifacts (keep only storybook-static)
 dist
+!dist/storybook
 build
 .next
 out

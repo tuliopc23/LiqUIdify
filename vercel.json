@@ -1,0 +1,6 @@
+{
+  "buildCommand": "bun run build-storybook",
+  "outputDirectory": "dist/storybook",
+  "installCommand": "bun install",
+  "framework": null
+}
