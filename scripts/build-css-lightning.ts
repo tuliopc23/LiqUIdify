@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { type BundleOptions, bundle } from 'lightningcss';
 
-const inputFile = join(process.cwd(), 'src/styles/tailwind.css');
+const inputFile = join(process.cwd(), 'libs/components/src/styles/main.css');
 const outputFile = join(process.cwd(), 'dist/liquidui.css');
 
 // Ensure output directory exists

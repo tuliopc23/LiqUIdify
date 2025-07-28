@@ -1,0 +1,35 @@
+/* LiqUIdify Main CSS Entry Point */
+/* Import all glass styles */
+@import './glass.css';
+@import './optimized-glass-effects.css';
+@import './apple-liquid-authentic.css';
+@import './glass-core.css';
+@import './glass-utilities.css';
+@import './glass-animations.css';
+@import './glass-themes.css';
+@import './graceful-degradation.css';
+
+/* Base Glass UI Styles */
+.glass-ui {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-text: rgba(0, 0, 0, 0.8);
+  --glass-blur: 10px;
+  --glass-saturation: 180%;
+}
+
+[data-theme='dark'] .glass-ui {
+  --glass-bg: rgba(0, 0, 0, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-text: rgba(255, 255, 255, 0.9);
+}
+
+/* Storybook compatibility */
+body {
+  background: var(--glass-bg-canvas, #ffffff);
+  transition: background-color 0.3s ease;
+}
+
+[data-theme='dark'] body {
+  background: var(--glass-bg-dark-canvas, #0a0a0a);
+}

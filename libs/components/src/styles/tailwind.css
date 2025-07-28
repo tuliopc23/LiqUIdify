@@ -1,4 +1,7 @@
-@import 'tailwindcss';
+/* Tailwind CSS Base Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Import LiqUIdify Glass Styles */
 @import './glass.css';
