@@ -3,5 +3,5 @@
   "installCommand": "bun install --frozen-lockfile",
   "buildCommand": "bun run build-storybook",
   "outputDirectory": "dist/storybook",
-  "framework": "vite"
+  "framework": null
 }
