@@ -8,7 +8,7 @@ const outputFile = join(process.cwd(), 'dist/liquidui.css');
 // Ensure output directory exists
 mkdirSync(dirname(outputFile), { recursive: true });
 
-const options: BundleOptions<any> = {
+const options: BundleOptions<{ [key: string]: number }> = {
   filename: inputFile,
   minify: process.env.NODE_ENV === 'production',
   sourceMap: true,
