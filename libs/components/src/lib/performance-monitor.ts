@@ -3,6 +3,27 @@
  * Implements real-time performance monitoring with automated reporting
  */
 
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart?: number;
+  startTime: number;
+}
+
+interface LayoutShiftEntry extends PerformanceEntry {
+  hadRecentInput: boolean;
+  startTime: number;
+  value: number;
+}
+
+interface PerformanceMemory {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
+interface ExtendedPerformance extends Performance {
+  memory?: PerformanceMemory;
+}
+
 export interface PerformanceMetrics {
   // Core Web Vitals
   lcp?: number; // Largest Contentful Paint
@@ -118,13 +139,9 @@ export class PerformanceMonitor {
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       for (const entry of entries) {
-        const fid = (
-          entry as PerformanceEntry & {
-            processingStart?: number;
-            startTime?: number;
-          }
-        ).processingStart
-          ? (entry as any).processingStart - entry.startTime
+        const fidEntry = entry as PerformanceEventTiming;
+        const fid = fidEntry.processingStart
+          ? fidEntry.processingStart - fidEntry.startTime
           : 0;
         this.updateMetric('fid', fid);
       }
@@ -148,20 +165,21 @@ export class PerformanceMonitor {
 
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: any) => {
-        if (!entry.hadRecentInput) {
+      entries.forEach((entry) => {
+        const layoutShiftEntry = entry as LayoutShiftEntry;
+        if (!layoutShiftEntry.hadRecentInput) {
           const firstSessionEntry = clsEntries[0];
           const lastSessionEntry = clsEntries.at(-1);
 
           if (
             !firstSessionEntry ||
-            1000 > entry.startTime - lastSessionEntry.startTime
+            1000 > layoutShiftEntry.startTime - (lastSessionEntry as LayoutShiftEntry).startTime
           ) {
-            clsEntries.push(entry);
-            clsValue += entry.value;
+            clsEntries.push(layoutShiftEntry);
+            clsValue += layoutShiftEntry.value;
           } else {
-            clsEntries = [entry];
-            clsValue = entry.value;
+            clsEntries = [layoutShiftEntry];
+            clsValue = layoutShiftEntry.value;
           }
         }
       });
@@ -205,9 +223,9 @@ export class PerformanceMonitor {
     }
 
     const checkMemory = () => {
-      const memory = (performance as any).memory;
-      if (memory) {
-        this.updateMetric('memoryUsage', memory.usedJSHeapSize);
+      const extendedPerformance = performance as ExtendedPerformance;
+      if (extendedPerformance.memory) {
+        this.updateMetric('memoryUsage', extendedPerformance.memory.usedJSHeapSize);
       }
     };
 
@@ -215,9 +233,9 @@ export class PerformanceMonitor {
     const interval = setInterval(checkMemory, 5000);
 
     // Store interval for cleanup
-    (this.observers as any).set('memory', {
+    this.observers.set('memory', {
       disconnect: () => clearInterval(interval),
-    });
+    } as PerformanceObserver);
   }
 
   public measureComponentRender<T>(
@@ -420,7 +438,7 @@ export class PerformanceMonitor {
   }
 
   public disconnect(): void {
-    for (const observer of this.observers) {
+    for (const [, observer] of this.observers) {
       observer.disconnect();
     }
     this.observers.clear();

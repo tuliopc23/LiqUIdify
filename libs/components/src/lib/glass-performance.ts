@@ -6,6 +6,16 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+interface PerformanceMemory {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
+interface ExtendedPerformance extends Performance {
+  memory?: PerformanceMemory;
+}
+
 export interface PerformanceMetrics {
   fps: number;
   frameTime: number;
@@ -197,8 +207,10 @@ export class GlassPerformanceMonitor {
 
     // Update memory usage if available
     if ('memory' in performance) {
-      const memory = (performance as any).memory;
-      this.metrics.memoryUsage = memory.usedJSHeapSize;
+      const extendedPerformance = performance as ExtendedPerformance;
+      if (extendedPerformance.memory) {
+        this.metrics.memoryUsage = extendedPerformance.memory.usedJSHeapSize;
+      }
     }
 
     this.animationFrame = requestAnimationFrame(this.monitor);
@@ -537,8 +549,8 @@ export const GPUAccelerationHelper = {
  * Provides performance monitoring and optimization tools
  */
 export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
-  const [metrics, setMetrics] = useState<PerformanceMetrics | null | null>(
-    undefined
+  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(
+    null
   );
   const [recommendations, setRecommendations] = useState<Array<string>>([]);
   const schedulerRef = useRef<GlassAnimationScheduler | null>(null);

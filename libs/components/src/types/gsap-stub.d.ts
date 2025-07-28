@@ -4,7 +4,7 @@
 
 declare global {
   namespace gsap {
-    interface TweenVariables {
+    interface TweenVars {
       [key: string]: any;
       duration?: number;
       delay?: number;
@@ -25,23 +25,23 @@ declare global {
       interface Timeline {
         to(
           target: any,
-          variables: TweenVariables,
+          variables: TweenVars,
           position?: string | number
         ): Timeline;
         from(
           target: any,
-          variables: TweenVariables,
+          variables: TweenVars,
           position?: string | number
         ): Timeline;
         fromTo(
           target: any,
-          fromVariables: TweenVariables,
-          toVariables: TweenVariables,
+          fromVariables: TweenVars,
+          toVariables: TweenVars,
           position?: string | number
         ): Timeline;
         set(
           target: any,
-          variables: TweenVariables,
+          variables: TweenVars,
           position?: string | number
         ): Timeline;
         add(child: any, position?: string | number): Timeline;
@@ -76,14 +76,14 @@ declare global {
     }
 
     interface GSAPStatic {
-      to(target: any, variables: TweenVariables): core.Tween;
-      from(target: any, variables: TweenVariables): core.Tween;
+      to(target: any, variables: TweenVars): core.Tween;
+      from(target: any, variables: TweenVars): core.Tween;
       fromTo(
         target: any,
-        fromVariables: TweenVariables,
-        toVariables: TweenVariables
+        fromVariables: TweenVars,
+        toVariables: TweenVars
       ): core.Tween;
-      set(target: any, variables: TweenVariables): core.Tween;
+      set(target: any, variables: TweenVars): core.Tween;
       timeline(): core.Timeline;
       killTweensOf(target: any): void;
       registerPlugin(...plugins: Array<any>): void;

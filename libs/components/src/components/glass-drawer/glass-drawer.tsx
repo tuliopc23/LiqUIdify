@@ -5,7 +5,6 @@ import React from 'react';
 import { cn } from '@/core/utils/classname';
 import {
   createVariants as cva,
-  type InferVariantProps as VariantProps,
 } from '../../lib/variant-system';
 
 const drawerVariants = cva(
@@ -111,11 +110,10 @@ export interface GlassDrawerProps
 }
 
 export interface GlassDrawerContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>, 'children'> {
+  extends Omit<React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>, 'children'> {
   children: React.ReactNode;
   className?: string;
   showCloseButton?: boolean;
-}
   closeButtonPosition?: 'header' | 'overlay';
 }
 
@@ -222,7 +220,7 @@ const GlassDrawerHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(drawerHeaderVariants(), className)}
-    {...(props as any)}
+    {...(props as unknown)}
   >
     {children}
   </div>
@@ -259,7 +257,7 @@ const GlassDrawerBody = React.forwardRef<HTMLDivElement, GlassDrawerBodyProps>(
     <div
       ref={ref}
       className={cn(drawerContentVariants(), className)}
-      {...(props as any)}
+      {...(props as unknown)}
     >
       {children}
     </div>
@@ -273,7 +271,7 @@ const GlassDrawerFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(drawerFooterVariants(), className)}
-    {...(props as any)}
+    {...(props as unknown)}
   >
     {children}
   </div>

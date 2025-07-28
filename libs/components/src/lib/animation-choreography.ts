@@ -36,8 +36,8 @@ export interface ChoreographyStep {
   delay?: number;
   stagger?: number;
   ease?: string;
-  from?: Record<string, any>;
-  to?: Record<string, any>;
+  from?: Record<string, unknown>;
+  to?: Record<string, unknown>;
   parallel?: boolean;
 }
 

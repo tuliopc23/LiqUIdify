@@ -19,24 +19,21 @@ export const safeCreateElement = <T extends HTMLElement>(
 ): T | null => {
   if (isSSR()) {
     // Logging disabled
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
-    return;
+    return null;
   }
 
   try {
     return document.createElement(tagName, options) as T;
   } catch {
     // Logging disabled
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
-    return;
+    return null;
   }
 };
 
 // Safe document.body access
 export const safeGetDocumentBody = (): HTMLElement | null => {
   if (isSSR() || !document.body) {
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'HTMLEl... Remove this comment to see the full error message
-    return;
+    return null;
   }
   return document.body;
 };
@@ -47,8 +44,7 @@ export const safeQuerySelector = <T extends Element = Element>(
   container?: Element | Document
 ): T | null => {
   if (isSSR()) {
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
-    return;
+    return null;
   }
 
   try {
@@ -56,8 +52,7 @@ export const safeQuerySelector = <T extends Element = Element>(
     return root.querySelector<T>(selector);
   } catch {
     // Logging disabled
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
-    return;
+    return null;
   }
 };
 
@@ -84,18 +79,16 @@ export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
   id: string
 ): T | null => {
   if (isSSR()) {
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
-    return;
+    return null;
   }
 
   try {
     return 'undefined' === typeof document
-      ? undefined
+      ? null
       : (document.getElementById(id) as T | null);
   } catch {
     // Logging disabled
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
-    return;
+    return null;
   }
 };
 
@@ -234,16 +227,14 @@ export const safeGetComputedStyle = (
 export const safeLocalStorage = {
   getItem: (key: string): string | null => {
     if (isSSR()) {
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
-      return;
+      return null;
     }
 
     try {
       return localStorage.getItem(key);
     } catch {
       // Logging disabled
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
-      return;
+      return null;
     }
   },
 
@@ -280,16 +271,14 @@ export const safeLocalStorage = {
 export const safeSessionStorage = {
   getItem: (key: string): string | null => {
     if (isSSR()) {
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
-      return;
+      return null;
     }
 
     try {
       return sessionStorage.getItem(key);
     } catch {
       // Logging disabled
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
-      return;
+      return null;
     }
   },
 
