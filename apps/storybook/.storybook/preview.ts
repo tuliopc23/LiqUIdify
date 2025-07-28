@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import React from "react";
-import { GlassUIProvider } from "../src";
-import "../src/styles/tailwind.css";
+import { GlassUIProvider } from "../../../libs/components/src";
+import "../../../libs/components/src/styles/tailwind.css";
 
 // Import the built CSS file if available (for production builds)
 if (typeof window !== "undefined") {
@@ -301,7 +301,7 @@ const preview: Preview = {
 			// Wrap story in GlassUIProvider for all necessary context providers
 			return React.createElement(
 				GlassUIProvider,
-				{ theme },
+				{ theme: theme },
 				React.createElement(
 					"div",
 					{

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { motion } from 'framer-motion';
 import { ChevronRight, RefreshCw, Sparkles, Zap } from 'lucide-react';
 import React from 'react';
-import { GlassButton, GlassCard } from '@/components';
+import { GlassButton, GlassCard } from '../..';
 
 const meta = {
   title: 'Design System/Animation Patterns',

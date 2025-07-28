@@ -19,8 +19,8 @@ import {
   GlassSlider,
   GlassSwitch,
   GlassTooltip,
-} from '@/components';
-import { ThemeToggle } from '@/components/theme-toggle';
+} from '../..';
+import { ThemeToggle } from '../../components/theme-toggle';
 
 const meta = {
   title: 'Design System/Theme Showcase',
