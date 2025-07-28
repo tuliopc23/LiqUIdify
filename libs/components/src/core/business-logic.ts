@@ -146,7 +146,7 @@ export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
 /**
  * Form business logic utilities
  */
-export interface FormState<T = Record<string, any>> {
+export interface FormState<T = Record<string, unknown>> {
   values: T;
   errors: Record<keyof T, string | null>;
   touched: Record<keyof T, boolean>;
@@ -155,7 +155,7 @@ export interface FormState<T = Record<string, any>> {
   isDirty: boolean;
 }
 
-export interface FormActions<T = Record<string, any>> {
+export interface FormActions<T = Record<string, unknown>> {
   setValue: (name: keyof T, value: T[keyof T]) => void;
   setError: (name: keyof T, error: string | null) => void;
   setTouched: (name: keyof T, touched: boolean) => void;
@@ -165,7 +165,7 @@ export interface FormActions<T = Record<string, any>> {
   submitForm: () => void;
 }
 
-export function createFormBusinessLogic<T extends Record<string, any>>(
+export function createFormBusinessLogic<T extends Record<string, unknown>>(
   initialValues: T,
   validationRules?: Record<keyof T, (value: any) => string | null>,
   onSubmit?: (values: T) => void | Promise<void>
@@ -306,7 +306,7 @@ export interface TableActions<T = any> {
   setItemsPerPage: (count: number) => void;
 }
 
-export function createTableBusinessLogic<T extends Record<string, any>>(
+export function createTableBusinessLogic<T extends Record<string, unknown>>(
   initialItems: Array<T> = [],
   itemsPerPage: number = 10
 ): BusinessLogicHook<{ state: TableState<T>; actions: TableActions<T> }, {}> {
@@ -314,7 +314,6 @@ export function createTableBusinessLogic<T extends Record<string, any>>(
     const [state, setState] = React.useState<TableState<T>>({
       items: initialItems,
       selectedItems: [],
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
       sortBy: null,
       sortDirection: 'asc',
       filterBy: '',
@@ -524,19 +523,15 @@ export function createAsyncDataBusinessLogic<T>(
 > {
   return () => {
     const [state, setState] = React.useState<AsyncDataState<T>>({
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
       data: null,
       loading: false,
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
       error: null,
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'number... Remove this comment to see the full error message
       lastFetch: null,
     });
 
     const actions = useMemo(
       (): AsyncDataActions<T> => ({
         fetchData: async () => {
-          // @ts-expect-error TS(2345): Argument of type '(prev: AsyncDataState<T>) => { l... Remove this comment to see the full error message
           setState((previous) => ({ ...previous, loading: true, error: null }));
 
           try {
@@ -585,12 +580,9 @@ export function createAsyncDataBusinessLogic<T>(
 
         clearData: () => {
           setState({
-            // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'T | nu... Remove this comment to see the full error message
             data: null,
             loading: false,
-            // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'string... Remove this comment to see the full error message
             error: null,
-            // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'number... Remove this comment to see the full error message
             lastFetch: null,
           });
         },

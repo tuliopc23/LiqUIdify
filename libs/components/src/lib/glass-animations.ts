@@ -530,7 +530,7 @@ export class GlassChoreographer {
   }
 
   // Get predefined keyframes for animation type
-  private getKeyframesForType(type: AnimationType): Array<globalThis.Keyframe> {
+  public getKeyframesForType(type: AnimationType): Array<globalThis.Keyframe> {
     const keyframeMap: Record<AnimationType, Array<globalThis.Keyframe>> = {
       fade: [{ opacity: 0 }, { opacity: 1 }],
       slide: [
@@ -608,7 +608,7 @@ export class GlassChoreographer {
 
   // Clear all animations
   clear() {
-    for (const animation of this.animations) {
+    for (const [, animation] of this.animations) {
       animation.stop();
     }
     this.animations.clear();
@@ -734,7 +734,6 @@ export class GlassGestureAnimator {
   // Play animation based on config
   private playAnimation(config: AnimationConfig) {
     const choreographer = new GlassChoreographer();
-    // @ts-expect-error TS(2341): Property 'getKeyframesForType' is private and only... Remove this comment to see the full error message
     const keyframes = choreographer.getKeyframesForType(config.type);
 
     this.animation.animate(keyframes, {

@@ -6,6 +6,13 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+interface ElementWithPolishData extends HTMLElement {
+  _polishAnimation?: any;
+  _polishHandlers?: {
+    handleInteraction: (event: Event) => void;
+  };
+}
+
 export interface VisualQualityMetrics {
   pixelPerfectScore: number;
   crossBrowserConsistency: number;
@@ -342,7 +349,7 @@ export class VisualPolishManager {
       }
 
       // Store animation reference for cleanup
-      (element as any)._polishAnimation = animationInstance;
+      (element as ElementWithPolishData)._polishAnimation = animationInstance;
     };
 
     // Add event listeners based on trigger
@@ -350,7 +357,7 @@ export class VisualPolishManager {
       case 'hover': {
         element.addEventListener('mouseenter', handleInteraction);
         element.addEventListener('mouseleave', (_e) => {
-          const animation = (element as any)._polishAnimation;
+          const animation = (element as ElementWithPolishData)._polishAnimation;
           if (animation) {
             animation.reverse();
           }
@@ -360,7 +367,7 @@ export class VisualPolishManager {
       case 'focus': {
         element.addEventListener('focus', handleInteraction);
         element.addEventListener('blur', (_e) => {
-          const animation = (element as any)._polishAnimation;
+          const animation = (element as ElementWithPolishData)._polishAnimation;
           if (animation) {
             animation.reverse();
           }
@@ -370,7 +377,7 @@ export class VisualPolishManager {
       case 'active': {
         element.addEventListener('mousedown', handleInteraction);
         element.addEventListener('mouseup', () => {
-          const animation = (element as any)._polishAnimation;
+          const animation = (element as ElementWithPolishData)._polishAnimation;
           if (animation) {
             animation.reverse();
           }
@@ -388,7 +395,7 @@ export class VisualPolishManager {
     }
 
     // Store event handlers for cleanup
-    (element as any)._polishHandlers = { handleInteraction };
+    (element as ElementWithPolishData)._polishHandlers = { handleInteraction };
   }
 
   /**
@@ -396,7 +403,7 @@ export class VisualPolishManager {
    */
   private cleanupMicroInteraction(interaction: MicroInteraction): void {
     const { element, trigger } = interaction;
-    const handlers = (element as any)._polishHandlers;
+    const handlers = (element as ElementWithPolishData)._polishHandlers;
 
     if (handlers) {
       switch (trigger) {
@@ -427,13 +434,13 @@ export class VisualPolishManager {
     }
 
     // Cancel any running animations
-    const animation = (element as any)._polishAnimation;
+    const animation = (element as ElementWithPolishData)._polishAnimation;
     if (animation) {
       animation.cancel();
     }
 
-    delete (element as any)._polishHandlers;
-    delete (element as any)._polishAnimation;
+    delete (element as ElementWithPolishData)._polishHandlers;
+    delete (element as ElementWithPolishData)._polishAnimation;
   }
 
   /**
@@ -453,10 +460,8 @@ export class VisualPolishManager {
       id,
       name,
       element,
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'ImageD... Remove this comment to see the full error message
       baseline: null,
       threshold,
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type '{ pass... Remove this comment to see the full error message
       lastResult: null,
     };
 
@@ -710,7 +715,7 @@ export class VisualPolishManager {
    */
   destroy(): void {
     // Cleanup all micro-interactions
-    for (const interaction of this.microInteractions) {
+    for (const [, interaction] of this.microInteractions) {
       this.cleanupMicroInteraction(interaction);
     }
 
@@ -726,7 +731,7 @@ export class VisualPolishManager {
  */
 export function useVisualPolish(config: Partial<PolishConfig> = {}) {
   const [qualityMetrics, setQualityMetrics] =
-    useState<VisualQualityMetrics | null | null>(undefined);
+    useState<VisualQualityMetrics | null>(null);
   const [recommendations, setRecommendations] = useState<Array<string>>([]);
   const polishManagerRef = useRef<VisualPolishManager | null>(null);
 

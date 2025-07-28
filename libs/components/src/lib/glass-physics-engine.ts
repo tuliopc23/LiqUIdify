@@ -6,6 +6,11 @@
 
 import { useCallback, useEffect, useRef } from 'react';
 
+// Extended Navigator interface for haptic feedback
+interface NavigatorWithVibrate {
+  vibrate?: (pattern: number | number[]) => boolean;
+}
+
 export interface SpringConfig {
   tension: number;
   friction: number;
@@ -287,10 +292,8 @@ export class SpringPhysics {
 
   destroy(): void {
     this.stop();
-    // @ts-expect-error TS(2322): Type 'null' is not assignable to type '((state: Ph... Remove this comment to see the full error message
-    this.onUpdate = null;
-    // @ts-expect-error TS(2322): Type 'null' is not assignable to type '(() => void... Remove this comment to see the full error message
-    this.onComplete = null;
+    this.onUpdate = undefined;
+    this.onComplete = undefined;
   }
 }
 
@@ -441,26 +444,26 @@ export class AnimationChoreographer {
   }
 
   play(): void {
-    for (const { animation } of this.animations) {
-      animation.play();
+    for (const [, animationData] of this.animations) {
+      animationData.animation.play();
     }
   }
 
   pause(): void {
-    for (const { animation } of this.animations) {
-      animation.pause();
+    for (const [, animationData] of this.animations) {
+      animationData.animation.pause();
     }
   }
 
   reverse(): void {
-    for (const { animation } of this.animations) {
-      animation.reverse();
+    for (const [, animationData] of this.animations) {
+      animationData.animation.reverse();
     }
   }
 
   cancel(): void {
-    for (const { animation } of this.animations) {
-      animation.cancel();
+    for (const [, animationData] of this.animations) {
+      animationData.animation.cancel();
     }
     this.animations.clear();
   }
@@ -771,9 +774,13 @@ export function useAdvancedPhysics(
     (intensity: 'light' | 'medium' | 'heavy' = 'light') => {
       if (
         !enableHaptics ||
-        'undefined' === typeof navigator ||
-        !(navigator as any).vibrate
+        'undefined' === typeof navigator
       ) {
+        return;
+      }
+
+      const navigatorWithVibrate = navigator as Navigator & NavigatorWithVibrate;
+      if (!navigatorWithVibrate.vibrate) {
         return;
       }
 
@@ -783,7 +790,7 @@ export function useAdvancedPhysics(
         heavy: 50,
       };
 
-      (navigator as any).vibrate(patterns[intensity]);
+      navigatorWithVibrate.vibrate(patterns[intensity]);
     },
     [enableHaptics]
   );
