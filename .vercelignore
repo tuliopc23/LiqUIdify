@@ -8,9 +8,9 @@ coverage
 test-results
 playwright-report
 
-# Build artifacts (keep only component library)
+# Build artifacts (keep only storybook-static)
 dist
-!dist/libs/components
+!dist/storybook
 build
 .next
 out

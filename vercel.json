@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "bun install --frozen-lockfile",
-  "buildCommand": "bun run build",
-  "outputDirectory": "dist/libs/components",
+  "buildCommand": "bun run build-storybook",
+  "outputDirectory": "dist/storybook",
   "framework": "vite"
 }
