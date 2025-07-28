@@ -1,6 +1,9 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { type BundleOptions, bundle } from 'lightningcss';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const inputFile = join(__dirname, '../libs/components/src/styles/glass.css');
 const outputFile = join(__dirname, '../dist/liquidui.css');
