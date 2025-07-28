@@ -198,7 +198,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
    * Creates framer-motion animation variants with reduced motion
    */
   const createMotionVariants = useCallback(
-    <T extends Record<string, any>>(
+    <T extends Record<string, unknown>>(
       variants: T,
       options: {
         essential?: boolean;

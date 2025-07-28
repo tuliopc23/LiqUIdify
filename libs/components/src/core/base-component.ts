@@ -238,5 +238,5 @@ export type PartialGlassProps<T> = Partial<T>;
 // Generic component props builder
 export type ComponentPropsBuilder<
   T extends HTMLElement,
-  P extends Record<string, any> = {},
+  P extends Record<string, unknown> = {},
 > = UnifiedGlassProps & HTMLAttributes<T> & P;

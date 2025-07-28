@@ -556,8 +556,8 @@ export const createGlassRipple = (
     }, 600);
 
     // Store cleanup references for potential early cleanup
-    (ripple as any)._animationFrame = animationFrame;
-    (ripple as any)._cleanupTimeout = cleanupTimeout;
+    (ripple as unknown)._animationFrame = animationFrame;
+    (ripple as unknown)._cleanupTimeout = cleanupTimeout;
 
     return ripple;
   } catch {

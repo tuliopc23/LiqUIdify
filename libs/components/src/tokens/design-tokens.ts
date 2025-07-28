@@ -414,7 +414,7 @@ export const createGlassVar = (
 export const getDesignToken = {
   spacing: (token: SpacingToken) => designTokens.spacing[token],
   color: (category: keyof typeof designTokens.colors, token: string) =>
-    (designTokens.colors[category] as any)?.[token],
+    (designTokens.colors[category] as unknown)?.[token],
   typography: {
     fontSize: (token: TypographyToken) =>
       designTokens.typography.fontSize[token],

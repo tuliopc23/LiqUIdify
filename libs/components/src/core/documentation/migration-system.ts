@@ -852,7 +852,7 @@ export function createMigrationCLI() {
       projectPath: string,
       from: string,
       to: string,
-      options: any
+      options: Record<string, unknown>
     ) => {
       return await migrationSystem.runMigration(projectPath, from, to, options);
     },

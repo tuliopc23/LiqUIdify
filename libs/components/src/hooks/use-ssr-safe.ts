@@ -266,7 +266,7 @@ export function useNetworkStatus(): {
 
     // Update connection info if available
     if ('connection' in navigator) {
-      const connection = (navigator as any).connection;
+      const connection = (navigator as unknown).connection;
 
       if (connection) {
         setEffectiveType(connection.effectiveType);

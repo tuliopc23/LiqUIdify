@@ -30,7 +30,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 interface PlaygroundConfig {
   componentName: string;
   component: React.ComponentType<any>;
-  defaultProps: Record<string, any>;
+  defaultProps: Record<string, unknown>;
   propControls: Array<PropertyControl>;
   codeTemplate: string;
   examples: Array<PlaygroundExample>;
@@ -59,7 +59,7 @@ interface PropertyControl {
 interface PlaygroundExample {
   name: string;
   description: string;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
   code: string;
 }
 
@@ -183,7 +183,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
   // Handle prop changes
   const handlePropertyChange = useCallback(
-    (propertyName: string, value: any) => {
+    (propertyName: string, value: unknown) => {
       setCurrentProps((previous) => ({
         ...previous,
         [propertyName]: value,

@@ -235,7 +235,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 
   // Component error breakdown
   const componentErrorStats: Array<ComponentErrorStats> = useMemo(() => {
-    const componentStats: Record<string, any> = {};
+    const componentStats: Record<string, unknown> = {};
 
     for (const error of filteredErrorData) {
       if (!componentStats[error.component]) {
@@ -252,7 +252,7 @@ export const ErrorAnalyticsDashboard: React.FC<
       componentStats[error.component].errorTypes.add(error.type);
     }
 
-    return Object.values(componentStats).map((stats: any) => ({
+    return Object.values(componentStats).map((stats: unknown) => ({
       ...stats,
       avgResolutionTime: Math.random() * 5, // Mock data
       topErrorTypes: [...(stats?.errorTypes || [])].slice(0, 3),
@@ -358,7 +358,7 @@ export const ErrorAnalyticsDashboard: React.FC<
 
             <select
               value={timeRange}
-              onChange={(e) => setTimeRange(e.target.value as any)}
+              onChange={(e) => setTimeRange(e.target.value as unknown)}
               className="rounded-md border border-gray-300 bg-white px-3 py-2"
             >
               <option value="1h">Last Hour</option>

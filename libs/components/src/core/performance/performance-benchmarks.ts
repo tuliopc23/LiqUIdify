@@ -258,8 +258,8 @@ class PerformanceBenchmarker {
     instances.length = 0;
 
     // Force garbage collection if available
-    if ((global as any).gc) {
-      (global as any).gc();
+    if ((global as unknown).gc) {
+      (global as unknown).gc();
     }
 
     return peakMemory - initialMemory;
@@ -534,8 +534,8 @@ class PerformanceBenchmarker {
       instances.length = 0;
 
       // Force garbage collection if available
-      if ((global as any).gc) {
-        (global as any).gc();
+      if ((global as unknown).gc) {
+        (global as unknown).gc();
       }
 
       // Wait between cycles
@@ -573,8 +573,8 @@ class PerformanceBenchmarker {
     }
 
     // Browser environment fallback
-    if ('undefined' !== typeof performance && (performance as any).memory) {
-      return (performance as any).memory.usedJSHeapSize;
+    if ('undefined' !== typeof performance && (performance as unknown).memory) {
+      return (performance as unknown).memory.usedJSHeapSize;
     }
 
     return 0;
@@ -686,7 +686,7 @@ export const performanceBenchmarker = new PerformanceBenchmarker();
 export function createPerformanceTest(
   componentName: string,
   ComponentClass: ComponentType<any>,
-  props: any = {}
+  props: Record<string, unknown> = {}
 ) {
   return async () => {
     const result = await performanceBenchmarker.benchmarkComponent(
@@ -708,7 +708,7 @@ export function createPerformanceTest(
 export function createMemoryLeakTest(
   componentName: string,
   ComponentClass: ComponentType<any>,
-  props: any = {}
+  props: Record<string, unknown> = {}
 ) {
   return async () => {
     const result = await performanceBenchmarker.detectMemoryLeaks(

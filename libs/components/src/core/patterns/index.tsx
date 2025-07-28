@@ -14,7 +14,7 @@ export {
 } from '../create-polymorphic-component';
 
 // Business logic patterns
-export const createBusinessLogicHook = <T extends Record<string, any>>(
+export const createBusinessLogicHook = <T extends Record<string, unknown>>(
   initialState: T,
   actions: Record<string, (state: T, ...arguments_: Array<any>) => T>
 ) => {
@@ -42,7 +42,7 @@ export const createBusinessLogicHook = <T extends Record<string, any>>(
 
 // Compound component with context pattern
 export const createCompoundComponentWithContext = <
-  T extends Record<string, any>,
+  T extends Record<string, unknown>,
 >(
   contextName: string,
   defaultValue: T
@@ -79,7 +79,7 @@ export interface RenderPropertyPattern<T> {
   children: (props: T) => React.ReactNode;
 }
 
-export const createRenderPropComponent = <T extends Record<string, any>>(
+export const createRenderPropComponent = <T extends Record<string, unknown>>(
   useLogic: () => T
 ) => {
   return ({ children }: RenderPropertyPattern<T>) => {
@@ -89,7 +89,7 @@ export const createRenderPropComponent = <T extends Record<string, any>>(
 };
 
 // Higher-order component pattern
-export const withGlassEffect = <P extends Record<string, any>>(
+export const withGlassEffect = <P extends Record<string, unknown>>(
   WrappedComponent: React.ComponentType<P>,
   glassConfig?: {
     variant?: 'light' | 'dark' | 'neutral';
@@ -169,7 +169,7 @@ export interface StateAction<T = any> {
   payload?: T;
 }
 
-export const createStateReducer = <T extends Record<string, any>>(
+export const createStateReducer = <T extends Record<string, unknown>>(
   initialState: T,
   actionCreators: Record<string, (state: T, payload?: any) => T>
 ) => {
@@ -187,7 +187,7 @@ export const createStateReducer = <T extends Record<string, any>>(
     initialState,
     actions: Object.keys(actionCreators).reduce(
       (accumulator, type) => {
-        accumulator[type] = (payload?: any): StateAction => ({ type, payload });
+        accumulator[type] = (payload?: unknown): StateAction => ({ type, payload });
         return accumulator;
       },
       {} as Record<string, (payload?: any) => StateAction>
@@ -234,7 +234,7 @@ export class ComponentEventBus {
 }
 
 // Factory pattern for creating themed components
-export const createThemedComponentFactory = <T extends Record<string, any>>(
+export const createThemedComponentFactory = <T extends Record<string, unknown>>(
   baseComponent: React.ComponentType<T>,
   themeConfig: Record<string, Partial<T>>
 ) => {

@@ -12,7 +12,7 @@ export interface I18nConfig {
 
 export interface I18nContext {
   locale: string;
-  t: (key: string, params?: Record<string, any>) => string;
+  t: (key: string, params?: Record<string, unknown>) => string;
   setLocale: (locale: string) => void;
 }
 
@@ -72,7 +72,7 @@ class I18n {
    * @param params - Optional parameters for interpolation
    * @returns The translated string
    */
-  t(key: string, params?: Record<string, any>): string {
+  t(key: string, params?: Record<string, unknown>): string {
     const messages =
       this.config.messages[this.currentLocale] ||
       this.config.messages[this.config.fallbackLocale];

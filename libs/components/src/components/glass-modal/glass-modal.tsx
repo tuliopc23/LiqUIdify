@@ -121,7 +121,7 @@ export function GlassModal({
       onKeyDown={(e) => {
         if ('Enter' === e.key || ' ' === e.key) {
           e.preventDefault();
-          handleBackdropClick(e as any);
+          handleBackdropClick(e as unknown);
         }
       }}
       tabIndex={-1}

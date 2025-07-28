@@ -170,9 +170,9 @@ class LiqUIdifySentryIntegration {
         tracesSampleRate: this.sentryConfig.tracesSampleRate,
         replaysSessionSampleRate: this.sentryConfig.replaysSessionSampleRate,
         replaysOnErrorSampleRate: this.sentryConfig.replaysOnErrorSampleRate,
-        beforeSend: (event: any, hint?: any) =>
+        beforeSend: (event: Event, hint?: unknown) =>
           this.beforeSendFilter(event, hint),
-        beforeSendTransaction: (event: any) =>
+        beforeSendTransaction: (event: Event) =>
           this._beforeSendTransactionFilter(event),
         allowUrls:
           this.sentryConfig.allowedUrls.length > 0
@@ -321,7 +321,7 @@ class LiqUIdifySentryIntegration {
       scope.setLevel(level);
 
       scope.setContext('performance_metrics', metrics);
-      scope.setContext('component_context', context as any);
+      scope.setContext('component_context', context as unknown);
 
       // Create a custom performance event
       const performanceEvent = {
@@ -346,7 +346,7 @@ class LiqUIdifySentryIntegration {
     message: string,
     category: string = 'liquidify',
     level: SeverityLevel = 'info',
-    data?: Record<string, any>
+    data?: Record<string, unknown>
   ): void {
     if (!this.initialized) {
       return;
@@ -461,12 +461,12 @@ class LiqUIdifySentryIntegration {
             ]
           ),
         beforeCapture: (
-          scope: any,
+          scope: unknown,
           _error: unknown,
           componentStack: string
         ) => {
           scope.setTag('liquidify.error_boundary', 'true');
-          scope.setContext('error_boundary', { componentStack } as any);
+          scope.setContext('error_boundary', { componentStack } as unknown);
           scope.setLevel('error');
         },
       }
@@ -520,7 +520,7 @@ class LiqUIdifySentryIntegration {
       stackTrace.some(
         (frame) =>
           frame.filename?.includes('liquidify') ||
-          (frame as any).function?.includes('liquidify')
+          (frame as unknown).function?.includes('liquidify')
       ) ||
       event.tags?.['liquidify.component'] !== undefined
     );
@@ -586,7 +586,7 @@ class LiqUIdifySentryIntegration {
   /**
    * Sanitize object by removing sensitive keys
    */
-  private sanitizeObject(object: Record<string, any>): Record<string, any> {
+  private sanitizeObject(object: Record<string, unknown>): Record<string, unknown> {
     const sensitiveKeys = [
       'password',
       'token',
@@ -595,7 +595,7 @@ class LiqUIdifySentryIntegration {
       'auth',
       'session',
     ];
-    const sanitized: Record<string, any> = {};
+    const sanitized: Record<string, unknown> = {};
 
     for (const [key, value] of Object.entries(object)) {
       if (
@@ -666,7 +666,7 @@ class LiqUIdifySentryIntegration {
     try {
       import('web-vitals').then((webVitals) => {
         const { onCLS, onINP, onLCP } = webVitals;
-        onCLS((metric: any) => {
+        onCLS((metric: unknown) => {
           if (0.1 < metric.value) {
             // CLS threshold
             this.capturePerformanceIssue('cumulative-layout-shift', {
@@ -675,7 +675,7 @@ class LiqUIdifySentryIntegration {
           }
         });
 
-        onINP((metric: any) => {
+        onINP((metric: unknown) => {
           if (100 < metric.value) {
             // FID threshold
             this.capturePerformanceIssue('first-input-delay', {
@@ -684,7 +684,7 @@ class LiqUIdifySentryIntegration {
           }
         });
 
-        onLCP((metric: any) => {
+        onLCP((metric: unknown) => {
           if (2500 < metric.value) {
             // LCP threshold
             this.capturePerformanceIssue('largest-contentful-paint', {
@@ -774,7 +774,7 @@ export function useLiqUIdifyErrorTracking(componentName: string) {
     message: string,
     category?: string,
     level?: SeverityLevel,
-    data?: Record<string, any>
+    data?: Record<string, unknown>
   ) => {
     sentry?.addBreadcrumb(
       `[${componentName}] ${message}`,

@@ -36,7 +36,7 @@ interface ComponentMetric {
   mountTime?: number;
   unmountTime?: number;
   rerenderCount: number;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
 }
 
 interface PerformanceReport {
@@ -248,9 +248,9 @@ class PerformanceMonitor {
   /**
    * Capture network information
    */
-  private captureNetworkInfo(): Record<string, any> | undefined {
+  private captureNetworkInfo(): Record<string, unknown> | undefined {
     if ('connection' in navigator) {
-      const conn = (navigator as any).connection;
+      const conn = (navigator as unknown).connection;
       return {
         effectiveType: conn.effectiveType,
         downlink: conn.downlink,

@@ -465,7 +465,7 @@ export class SpringAnimation {
       }
       default: {
         // For other properties, assume pixels
-        (this.target.style as any)[this.property] = `${value}px`;
+        (this.target.style as unknown)[this.property] = `${value}px`;
       }
     }
   }

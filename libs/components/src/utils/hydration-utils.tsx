@@ -173,8 +173,8 @@ export function useHydrationSafety(
   const detectMismatch = useCallback(
     (
       type: HydrationMismatch['type'],
-      serverValue: any,
-      clientValue: any,
+      serverValue: unknown,
+      clientValue: unknown,
       path = ''
     ) => {
       if (serverValue !== clientValue) {
@@ -307,7 +307,7 @@ export function withHydrationSafety<P extends object>(
 /**
  * Utility for creating SSR-safe component props
  */
-export function createSSRProps<T extends Record<string, any>>(
+export function createSSRProps<T extends Record<string, unknown>>(
   serverProps: T,
   clientProps?: Partial<T>
 ): T {

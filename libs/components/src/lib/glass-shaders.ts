@@ -327,8 +327,7 @@ export class GlassShaderEffect {
   private createShader(type: number, source: string): WebGLShader | null {
     const shader = this.gl.createShader(type);
     if (!shader) {
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'WebGLS... Remove this comment to see the full error message
-      return;
+      return null;
     }
 
     this.gl.shaderSource(shader, source);
@@ -337,8 +336,7 @@ export class GlassShaderEffect {
     if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
       // Logging disabled
       this.gl.deleteShader(shader);
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'WebGLS... Remove this comment to see the full error message
-      return;
+      return null;
     }
 
     return shader;
@@ -350,8 +348,7 @@ export class GlassShaderEffect {
   ): WebGLProgram | null {
     const program = this.gl.createProgram();
     if (!program) {
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'WebGLP... Remove this comment to see the full error message
-      return;
+      return null;
     }
 
     this.gl.attachShader(program, vertexShader);
@@ -361,8 +358,7 @@ export class GlassShaderEffect {
     if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
       // Logging disabled
       this.gl.deleteProgram(program);
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'WebGLP... Remove this comment to see the full error message
-      return;
+      return null;
     }
 
     return program;
@@ -439,8 +435,7 @@ export class GlassShaderEffect {
       0,
       this.gl.RGBA,
       this.gl.UNSIGNED_BYTE,
-      // @ts-expect-error TS(2345): Argument of type 'undefined' is not assignable to ... Remove this comment to see the full error message
-      undefined
+      null
     );
 
     this.gl.texParameteri(
@@ -621,8 +616,7 @@ export function applyGlassShader(
 ): GlassShaderEffect | null {
   // SSR safety check
   if ('undefined' === typeof window || 'undefined' === typeof document) {
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'GlassS... Remove this comment to see the full error message
-    return;
+    return null;
   }
 
   // Create canvas overlay
@@ -663,8 +657,7 @@ export function applyGlassShader(
   } catch {
     // Logging disabled
     canvas.remove();
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'GlassS... Remove this comment to see the full error message
-    return;
+    return null;
   }
 }
 

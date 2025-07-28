@@ -210,7 +210,7 @@ export const objectValidators = {
     },
 
   shape:
-    <T extends Record<string, any>>(
+    <T extends Record<string, unknown>>(
       schema: { [K in keyof T]: Validator<T[K]> },
       _message = 'Object validation failed'
     ): Validator<T> =>
@@ -220,15 +220,15 @@ export const objectValidators = {
       }
 
       const results = Object.entries(schema).map(([key, validator]) => {
-        const fieldValue = (value as any)[key];
+        const fieldValue = (value as unknown)[key];
         const result = validator(fieldValue);
 
         // Prefix field name to errors
         const fieldErrors = result.errors.map(
-          (error: any) => `${key}: ${error}`
+          (error: Error) => `${key}: ${error}`
         );
         const fieldWarnings = result.warnings.map(
-          (warning: any) => `${key}: ${warning}`
+          (warning: unknown) => `${key}: ${warning}`
         );
 
         return createValidationResult(
@@ -288,7 +288,7 @@ export interface PropertyValidationSchema {
   [key: string]: Validator<any>;
 }
 
-export function validateProps<T extends Record<string, any>>(
+export function validateProps<T extends Record<string, unknown>>(
   props: T,
   schema: PropertyValidationSchema
 ): ValidationResult {

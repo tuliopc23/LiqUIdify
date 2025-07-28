@@ -16,7 +16,7 @@ export interface BenchmarkConfig {
   name: string;
   description: string;
   component: React.ComponentType<any>;
-  props?: Record<string, any>;
+  props?: Record<string, unknown>;
   iterations?: number;
   warmupIterations?: number;
   timeout?: number;
@@ -402,14 +402,14 @@ class LiqUIdifyBenchmarkRunner {
     const frameObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       for (const entry of entries) {
-        if ('frame' === (entry as any).entryType) {
+        if ('frame' === (entry as unknown).entryType) {
           this.frameMetrics.push(entry.duration);
         }
       }
     });
 
     try {
-      frameObserver.observe({ entryTypes: ['frame'] as any });
+      frameObserver.observe({ entryTypes: ['frame'] as unknown });
       this.observers.push(frameObserver);
     } catch {
       // Logging disabled
@@ -427,7 +427,7 @@ class LiqUIdifyBenchmarkRunner {
     });
 
     try {
-      longTaskObserver.observe({ entryTypes: ['longtask'] as any });
+      longTaskObserver.observe({ entryTypes: ['longtask'] as unknown });
       this.observers.push(longTaskObserver);
     } catch {
       // Logging disabled
@@ -494,10 +494,10 @@ class LiqUIdifyBenchmarkRunner {
    * Force garbage collection (if available)
    */
   private async triggerGC(): Promise<void> {
-    if ('undefined' !== typeof window && (window as any).gc) {
-      (window as any).gc();
-    } else if ('undefined' !== typeof global && (global as any).gc) {
-      (global as any).gc();
+    if ('undefined' !== typeof window && (window as unknown).gc) {
+      (window as unknown).gc();
+    } else if ('undefined' !== typeof global && (global as unknown).gc) {
+      (global as unknown).gc();
     }
 
     // Wait a bit for GC to complete
@@ -508,8 +508,8 @@ class LiqUIdifyBenchmarkRunner {
    * Get current memory usage
    */
   private getMemoryUsage(): number {
-    if ('undefined' !== typeof performance && (performance as any).memory) {
-      return (performance as any).memory.usedJSHeapSize;
+    if ('undefined' !== typeof performance && (performance as unknown).memory) {
+      return (performance as unknown).memory.usedJSHeapSize;
     }
 
     if ('undefined' !== typeof process && process.memoryUsage) {
@@ -908,7 +908,7 @@ export default LiqUIdifyBenchmarkRunner;
 // Utility functions for common benchmark scenarios
 export const createComponentBenchmark = (
   component: React.ComponentType<any>,
-  props: any = {},
+  props: Record<string, unknown> = {},
   options: Partial<BenchmarkConfig> = {}
 ): BenchmarkConfig => ({
   name: component.displayName || component.name || 'Component',
@@ -923,7 +923,7 @@ export const createComponentBenchmark = (
 
 export const createMemoryLeakTest = (
   component: React.ComponentType<any>,
-  props: any = {}
+  props: Record<string, unknown> = {}
 ): BenchmarkConfig => ({
   name: `${component.displayName || component.name} Memory Leak Test`,
   description: `Memory leak detection for ${component.displayName || component.name}`,

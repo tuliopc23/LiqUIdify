@@ -42,7 +42,7 @@ const LiquidGlassContext = createContext<
     contentAnalysis?: ContentAnalysis;
     updateGlassStyle: (_analysis: ContentAnalysis) => void;
   }
->(defaultConfig as any);
+>(defaultConfig as unknown);
 
 export function LiquidGlassProvider({
   children,

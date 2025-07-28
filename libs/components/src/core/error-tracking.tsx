@@ -13,7 +13,7 @@ export interface ErrorMetadata {
   buildVersion?: string;
   environment?: 'development' | 'staging' | 'production';
   tags?: Record<string, string>;
-  extra?: Record<string, any>;
+  extra?: Record<string, unknown>;
 }
 
 export interface ErrorReport {
@@ -155,7 +155,7 @@ class ErrorTrackingSystem {
   /**
    * Track a custom event
    */
-  trackEvent(eventName: string, data?: Record<string, any>): void {
+  trackEvent(eventName: string, data?: Record<string, unknown>): void {
     if (!this.isInitialized || !this.sentry) {
       return;
     }
@@ -193,7 +193,7 @@ class ErrorTrackingSystem {
   /**
    * Set additional context
    */
-  setContext(key: string, context: Record<string, any>): void {
+  setContext(key: string, context: Record<string, unknown>): void {
     if (!this.isInitialized || !this.sentry) {
       return;
     }
@@ -261,7 +261,7 @@ class ErrorTrackingSystem {
             </div>
           </div>
         ),
-        beforeCapture: (scope: any) => {
+        beforeCapture: (scope: unknown) => {
           scope.setTag('errorBoundary', true);
           scope.setLevel('error');
         },
@@ -332,7 +332,7 @@ class ErrorTrackingSystem {
 
     // Capture the error
     if (errorInfo) {
-      this.sentry.withScope((scope: any) => {
+      this.sentry.withScope((scope: unknown) => {
         scope.setContext('errorInfo', {
           componentStack: errorInfo.componentStack,
         });
@@ -373,12 +373,12 @@ export function useErrorTracking() {
   return {
     trackError: (error: Error, metadata?: ErrorMetadata) =>
       errorTracking.trackError(error, undefined, metadata),
-    trackEvent: (eventName: string, data?: Record<string, any>) =>
+    trackEvent: (eventName: string, data?: Record<string, unknown>) =>
       errorTracking.trackEvent(eventName, data),
     setUser: (
       user: { id?: string; email?: string; username?: string } | null
     ) => errorTracking.setUser(user),
-    setContext: (key: string, context: Record<string, any>) =>
+    setContext: (key: string, context: Record<string, unknown>) =>
       errorTracking.setContext(key, context),
   };
 }

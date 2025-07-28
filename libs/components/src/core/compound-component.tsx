@@ -69,7 +69,7 @@ export interface CompoundComponentOptions<T extends HTMLElement> {
  */
 export function createCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
-  P extends Record<string, any> = {},
+  P extends Record<string, unknown> = {},
 >(options: CompoundComponentOptions<T>) {
   const {
     displayName,
@@ -87,7 +87,7 @@ export function createCompoundComponent<
         ({ className, asChild: asChildProperty, children, ...props }, ref) => {
           const Comp = (
             asChildProperty && asChild ? Slot : defaultElement
-          ) as any;
+          ) as unknown;
 
           const mergedProps = useMemo(
             () => ({
@@ -113,7 +113,7 @@ export function createCompoundComponent<
       }: ComponentProps) => {
         const Comp = (
           asChildProperty && asChild ? Slot : defaultElement
-        ) as any;
+        ) as unknown;
 
         const mergedProps = useMemo(
           () => ({
@@ -139,7 +139,7 @@ export function createCompoundComponent<
  */
 export function createCompoundComponentWithContext<
   T extends HTMLElement = HTMLDivElement,
-  P extends Record<string, any> = {},
+  P extends Record<string, unknown> = {},
   C extends CompoundComponentContext = CompoundComponentContext,
 >(
   options: CompoundComponentOptions<T> & {
@@ -168,7 +168,7 @@ export function createCompoundComponentWithContext<
  */
 export function withGlassEffects<
   T extends HTMLElement,
-  P extends Record<string, any>,
+  P extends Record<string, unknown>,
 >(Component: React.ComponentType<P>, defaultGlassConfig?: UnifiedGlassProps) {
   const WrappedComponent = forwardRef<T, P & UnifiedGlassProps>(
     ({ glassEffect, variant, size, ...props }, ref) => {
@@ -182,7 +182,7 @@ export function withGlassEffects<
         [glassEffect, variant, size, defaultGlassConfig]
       );
 
-      return <Component ref={ref} {...glassProps} {...(props as any)} />;
+      return <Component ref={ref} {...glassProps} {...(props as unknown)} />;
     }
   );
 
@@ -196,7 +196,7 @@ export function withGlassEffects<
  */
 export function createPolymorphicCompoundComponent<
   T extends React.ElementType = 'div',
-  P extends Record<string, any> = {},
+  P extends Record<string, unknown> = {},
 >(
   options: CompoundComponentOptions<HTMLElement> & {
     /** Default element type */
@@ -240,11 +240,11 @@ export function createPolymorphicCompoundComponent<
  * Utility for creating compound component collections
  */
 export function createCompoundComponentCollection<
-  T extends Record<string, any>,
+  T extends Record<string, unknown>,
 >(components: T, rootComponent: React.ComponentType<any>) {
   // Attach sub-components to root component
   for (const [key, component] of Object.entries(components)) {
-    (rootComponent as any)[key] = component;
+    (rootComponent as unknown)[key] = component;
   }
 
   return rootComponent as React.ComponentType<any> & T;
@@ -253,7 +253,7 @@ export function createCompoundComponentCollection<
 /**
  * Hook for managing compound component state
  */
-export function useCompoundComponentState<T extends Record<string, any>>(
+export function useCompoundComponentState<T extends Record<string, unknown>>(
   initialState: T,
   context?: React.Context<T | undefined>
 ) {
@@ -286,7 +286,7 @@ export function useCompoundComponentState<T extends Record<string, any>>(
  */
 export function createAccessibleCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
-  P extends Record<string, any> = {},
+  P extends Record<string, unknown> = {},
 >(
   options: CompoundComponentOptions<T> & {
     /** Default ARIA role */
@@ -314,13 +314,13 @@ export function createAccessibleCompoundComponent<
  */
 export function createResponsiveCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
-  P extends Record<string, any> = {},
+  P extends Record<string, unknown> = {},
 >(
   options: CompoundComponentOptions<T> & {
     /** Responsive breakpoints */
     breakpoints?: Record<string, string>;
     /** Default responsive props */
-    defaultResponsiveProps?: Record<string, any>;
+    defaultResponsiveProps?: Record<string, unknown>;
   }
 ) {
   const { breakpoints, defaultResponsiveProps, ...componentOptions } = options;

@@ -250,7 +250,7 @@ export class CSSBundler {
   private async calculateGzipSize(content: string): Promise<number> {
     const zlib = require('node:zlib');
     return new Promise((resolve, reject) => {
-      zlib.gzip(content, (error: any, compressed: Buffer) => {
+      zlib.gzip(content, (error: Error, compressed: Buffer) => {
         if (error) {
           reject(error);
         } else {

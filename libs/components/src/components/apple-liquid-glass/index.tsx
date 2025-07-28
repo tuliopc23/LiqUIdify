@@ -218,7 +218,7 @@ export function AppleLiquidGlassButton({
       }}
       disabled={disabled}
       onClick={onClick}
-      {...(props as any)}
+      {...(props as unknown)}
     >
       {children}
     </button>

@@ -7,11 +7,11 @@ export const createFramerChoreographer = () => {
   const controls = useAnimation();
 
   return {
-    to: (props: any) => controls.start(props),
-    from: (props: any) => controls.set(props),
+    to: (props: Record<string, unknown>) => controls.start(props),
+    from: (props: Record<string, unknown>) => controls.set(props),
     timeline: () => ({
-      to: (props: any) => controls.start(props),
-      from: (props: any) => controls.set(props),
+      to: (props: Record<string, unknown>) => controls.start(props),
+      from: (props: Record<string, unknown>) => controls.set(props),
     }),
   };
 };
@@ -21,7 +21,7 @@ export const createMorphAnimation = (_element: HTMLElement, _path: string) => {
   return Promise.resolve();
 };
 
-export const createScrollAnimation = (_element: HTMLElement, _options: any) => {
+export const createScrollAnimation = (_element: HTMLElement, _options: Record<string, unknown>) => {
   // Scroll animations handled by Framer Motion useInView hook
   return Promise.resolve();
 };

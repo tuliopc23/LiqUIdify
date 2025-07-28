@@ -251,7 +251,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
       role={role}
       aria-live={priority}
       aria-atomic={atomic}
-      aria-relevant={relevantString as any}
+      aria-relevant={relevantString as unknown}
       className={cn(
         'glass-live-region',
         {

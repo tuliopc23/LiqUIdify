@@ -54,7 +54,7 @@ export function GlassPerformanceDashboard({
   useEffect(() => {
     // Subscribe to metric updates
     const unsubscribers = Object.keys(METRIC_LABELS).map((metricName) =>
-      performanceMonitor.subscribe(metricName as any, (metric) => {
+      performanceMonitor.subscribe(metricName as unknown, (metric) => {
         setMetrics((previous) => new Map(previous).set(metricName, metric));
       })
     );
