@@ -105,7 +105,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
           centered && 'fixed inset-0 z-50 bg-black/20 backdrop-blur-sm',
           className
         )}
-        {...(props as any)}
+        {...(props as unknown)}
       >
         <SpinnerElement />
         {showLabel && (

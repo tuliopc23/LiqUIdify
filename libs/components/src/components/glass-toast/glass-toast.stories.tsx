@@ -182,7 +182,7 @@ export const Positions: Story = {
       ].map((position) => (
         <div key={position}>
           <h3 className="mb-2 font-medium text-sm">{position}</h3>
-          <ToastProvider position={position as any}>
+          <ToastProvider position={position as unknown}>
             <PositionDemo position={position} />
           </ToastProvider>
         </div>

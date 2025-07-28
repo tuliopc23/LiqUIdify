@@ -353,7 +353,7 @@ export const GlassCard = React.memo(
                 ('Enter' === e.key || ' ' === e.key)
               ) {
                 e.preventDefault();
-                handleClick(e as any);
+                handleClick(e as unknown);
               }
             }}
             onMouseEnter={handleMouseEnter}
@@ -393,7 +393,7 @@ export const CardHeader = forwardRef<
         'apple' === variant && 'pb-4',
         className
       )}
-      {...(props as any)}
+      {...(props as unknown)}
     >
       {children}
     </div>
@@ -466,7 +466,7 @@ export const CardContent = forwardRef<
     <div
       ref={ref}
       className={cn('flex-1', 'none' !== padding && 'p-6 pt-0', className)}
-      {...(props as any)}
+      {...(props as unknown)}
     >
       {children}
     </div>
@@ -492,7 +492,7 @@ export const CardFooter = forwardRef<
         'apple' === variant && 'pt-4',
         className
       )}
-      {...(props as any)}
+      {...(props as unknown)}
     >
       {children}
     </div>
@@ -512,7 +512,7 @@ export const CardActions = forwardRef<
     <div
       ref={ref}
       className={cn('flex items-center gap-2 p-6 pt-0', className)}
-      {...(props as any)}
+      {...(props as unknown)}
     >
       {children}
     </div>

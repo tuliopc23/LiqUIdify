@@ -357,7 +357,7 @@ export function RovingTabindexGroup({
       ref: (element: HTMLElement | null) => {
         itemReferences.current[index] = element;
         // Preserve original ref if exists
-        const originalRef = (child as any).ref;
+        const originalRef = (child as unknown).ref;
         if (originalRef) {
           if ('function' === typeof originalRef) {
             originalRef(element);
@@ -366,7 +366,7 @@ export function RovingTabindexGroup({
           }
         }
       },
-    } as any);
+    } as unknown);
   });
 
   return (

@@ -15,7 +15,7 @@ export const useSSRSafe = (callback: () => void, deps: Array<any>) => {
 export const isSSR = () => 'undefined' === typeof window;
 
 // Additional SSR-safe hooks for demo component
-export const useIntersectionObserver = (_callback?: any) => {
+export const useIntersectionObserver = (_callback?: Function) => {
   return [{ isIntersecting: false }];
 };
 export const useMediaQuery = (_query: string) => false;

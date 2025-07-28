@@ -62,7 +62,7 @@ export function withAnimationFallback(
       // Check for performance constraints
       const checkPerformance = () => {
         if ('connection' in navigator) {
-          const connection = (navigator as any).connection;
+          const connection = (navigator as unknown).connection;
           if (connection?.saveData) {
             setShouldAnimate(false);
             return;
@@ -71,7 +71,7 @@ export function withAnimationFallback(
 
         // Check device memory
         if ('deviceMemory' in navigator) {
-          const deviceMemory = (navigator as any).deviceMemory;
+          const deviceMemory = (navigator as unknown).deviceMemory;
           if (deviceMemory && 4 > deviceMemory) {
             setShouldAnimate(false);
             return;
@@ -128,7 +128,7 @@ export function withNetworkFallback(
       };
 
       const updateConnectionSpeed = () => {
-        const connection = (navigator as any).connection;
+        const connection = (navigator as unknown).connection;
         if (connection) {
           const effectiveType = connection.effectiveType;
           setConnectionSpeed(effectiveType);
@@ -143,7 +143,7 @@ export function withNetworkFallback(
         window.addEventListener('offline', updateOnlineStatus);
       }
 
-      const connection = (navigator as any).connection;
+      const connection = (navigator as unknown).connection;
       if (connection) {
         connection.addEventListener('change', updateConnectionSpeed);
       }
@@ -380,7 +380,7 @@ export function withPerformanceFallback(
 
         // Check device memory
         if ('deviceMemory' in navigator) {
-          const memory = (navigator as any).deviceMemory;
+          const memory = (navigator as unknown).deviceMemory;
           score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
         }
 
@@ -392,7 +392,7 @@ export function withPerformanceFallback(
 
         // Check connection speed
         if ('connection' in navigator) {
-          const connection = (navigator as any).connection;
+          const connection = (navigator as unknown).connection;
           if (connection) {
             const effectiveType = connection.effectiveType;
             score +=
@@ -402,7 +402,7 @@ export function withPerformanceFallback(
 
         // Check for save-data preference
         if ('connection' in navigator) {
-          const connection = (navigator as any).connection;
+          const connection = (navigator as unknown).connection;
           if (connection?.saveData) {
             score = 0; // Force low performance mode
           }
@@ -498,10 +498,10 @@ export const gracefulDegradation = {
     },
 
     getDeviceCapabilities: () => ({
-      memory: (navigator as any).deviceMemory || 4,
+      memory: (navigator as unknown).deviceMemory || 4,
       cores: navigator.hardwareConcurrency || 4,
-      connection: (navigator as any).connection?.effectiveType || '4g',
-      saveData: (navigator as any).connection?.saveData || false,
+      connection: (navigator as unknown).connection?.effectiveType || '4g',
+      saveData: (navigator as unknown).connection?.saveData || false,
     }),
 
     getAccessibilityPreferences: () => ({
@@ -513,7 +513,7 @@ export const gracefulDegradation = {
         window.matchMedia('(prefers-contrast: high)').matches,
       reducedData:
         'undefined' !== typeof window &&
-        (navigator as any).connection?.saveData,
+        (navigator as unknown).connection?.saveData,
     }),
   },
 };

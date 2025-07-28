@@ -7,7 +7,7 @@ export interface ChartDataPoint {
   label: string;
   value: number;
   color?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 interface BaseChartProps {

@@ -118,7 +118,7 @@ console.log('1. Review the changes with: git diff');
 console.log('2. Run type checking: bun run type-check');
 console.log('3. Fix any remaining issues manually');
 
-function inferParameterType(paramName: string, func: any, sourceFile: any): string {
+function inferParameterType(paramName: string, func: unknown, sourceFile: unknown): string {
   const lowerName = paramName.toLowerCase();
   
   // React event handlers
@@ -169,7 +169,7 @@ function inferParameterType(paramName: string, func: any, sourceFile: any): stri
   return 'unknown';
 }
 
-function inferReturnType(func: any, sourceFile: any): string {
+function inferReturnType(func: unknown, sourceFile: unknown): string {
   const funcName = func.getName?.() || '';
   const body = func.getBody?.();
   
@@ -218,7 +218,7 @@ function inferReturnType(func: any, sourceFile: any): string {
   return 'unknown';
 }
 
-function inferPropertyType(propName: string, interfaceDecl: any, sourceFile: any): string {
+function inferPropertyType(propName: string, interfaceDecl: unknown, sourceFile: unknown): string {
   const lowerName = propName.toLowerCase();
   
   // React props patterns
@@ -246,7 +246,7 @@ function inferPropertyType(propName: string, interfaceDecl: any, sourceFile: any
   return 'unknown';
 }
 
-function extractComponentName(func: any, sourceFile: any): string | null {
+function extractComponentName(func: unknown, sourceFile: unknown): string | null {
   const funcName = func.getName?.() || '';
   
   // If function name looks like a component (PascalCase)

@@ -715,7 +715,7 @@ export function useAggregateError() {
   useEffect(() => {
     setAggregateErrorObject(
       'undefined' !== typeof globalThis && 'AggregateError' in globalThis
-        ? (globalThis as any).AggregateError
+        ? (globalThis as unknown).AggregateError
         : undefined
     );
   }, []);
@@ -732,7 +732,7 @@ export function useInternalError() {
   useEffect(() => {
     setInternalErrorObject(
       'undefined' !== typeof globalThis && 'InternalError' in globalThis
-        ? (globalThis as any).InternalError
+        ? (globalThis as unknown).InternalError
         : undefined
     );
   }, []);

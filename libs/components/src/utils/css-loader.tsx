@@ -179,7 +179,7 @@ export function withCSSChunk<P extends {}>(
 ): React.ComponentType<P> {
   return (props: P) => {
     useCSSChunk(chunkName);
-    return React.createElement(Component, props as any);
+    return React.createElement(Component, props as unknown);
   };
 }
 

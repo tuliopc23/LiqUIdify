@@ -26,7 +26,7 @@ const GlassCheckbox = forwardRef<HTMLInputElement, GlassCheckboxProps>(
             className
           )}
           ref={ref}
-          {...(props as any)}
+          {...(props as unknown)}
         />
 
         {label && <span className="text-primary">{label}</span>}

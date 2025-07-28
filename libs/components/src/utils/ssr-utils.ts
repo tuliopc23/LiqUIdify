@@ -211,7 +211,7 @@ export const safeSetTimeout = (
  */
 export const safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
   if ('undefined' !== typeof clearTimeout && null !== id) {
-    clearTimeout(id as any);
+    clearTimeout(id as unknown);
   }
 };
 
@@ -237,7 +237,7 @@ export const safeSetInterval = (
  */
 export const safeClearInterval = (id: NodeJS.Timeout | number | null): void => {
   if ('undefined' !== typeof clearInterval && null !== id) {
-    clearInterval(id as any);
+    clearInterval(id as unknown);
   }
 };
 

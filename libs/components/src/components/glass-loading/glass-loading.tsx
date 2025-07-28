@@ -107,7 +107,7 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
           'flex flex-col items-center justify-center space-y-3',
           className
         )}
-        {...(props as any)}
+        {...(props as unknown)}
       >
         {renderVariant()}
         {text && (

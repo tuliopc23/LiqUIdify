@@ -9,7 +9,7 @@ declare module 'tailwindcss' {
     content?: Array<string> | { files: Array<string>; extract?: any };
     darkMode?: 'media' | 'class' | ['class', string];
     theme?: {
-      extend?: Record<string, any>;
+      extend?: Record<string, unknown>;
       [key: string]: any;
     };
     plugins?: Array<any>;

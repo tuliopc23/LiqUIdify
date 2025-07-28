@@ -334,7 +334,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
     // Add to stack if enabled
     if (trapStack && instanceRef.current) {
-      focusTrapStack.push(instanceRef.current as any);
+      focusTrapStack.push(instanceRef.current as unknown);
     }
 
     // Store the previously focused element
@@ -399,7 +399,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
       // Remove from stack
       if (trapStack && instanceRef.current) {
-        const index = focusTrapStack.indexOf(instanceRef.current as any);
+        const index = focusTrapStack.indexOf(instanceRef.current as unknown);
         if (-1 < index) {
           focusTrapStack.splice(index, 1);
         }

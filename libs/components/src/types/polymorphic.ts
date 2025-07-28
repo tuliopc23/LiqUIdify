@@ -90,7 +90,7 @@ export type ValidHTMLAttributes<T extends ElementType> =
  * });
  */
 export type CreatePolymorphicComponent = <
-  Props extends Record<string, any>,
+  Props extends Record<string, unknown>,
   DefaultElement extends ElementType = 'div',
 >(config: {
   defaultElement: DefaultElement;
@@ -224,7 +224,7 @@ export function isInteractiveElement(
     'details',
     'dialog',
   ];
-  return interactiveElements.includes(element as any);
+  return interactiveElements.includes(element as unknown);
 }
 
 /**
@@ -242,5 +242,5 @@ export function isSemanticElement(
     'nav',
     'section',
   ];
-  return semanticElements.includes(element as any);
+  return semanticElements.includes(element as unknown);
 }

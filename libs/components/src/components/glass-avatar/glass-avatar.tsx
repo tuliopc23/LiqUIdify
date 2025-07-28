@@ -83,7 +83,7 @@ export const GlassAvatar = React.memo(
             'overflow-hidden',
             className
           )}
-          {...(props as any)}
+          {...(props as unknown)}
         >
           {src ? (
             <img

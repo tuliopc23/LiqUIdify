@@ -26,28 +26,28 @@ import {
 import { GlassTabs } from '../glass-tabs';
 
 // Fallback components for react-live (removed for production)
-const LiveProvider = ({ children }: any) => (
+const LiveProvider = ({ children }: React.ReactNode) => (
   <div data-playground="fallback">{children}</div>
 );
-const LiveEditor = ({ className }: any) => (
+const LiveEditor = ({ className }: unknown) => (
   <div className={cn('rounded bg-gray-100 p-4', className)}>
     <p className="text-gray-600 text-sm">
       Live editor disabled in production build
     </p>
   </div>
 );
-const LivePreview = ({ Component, ...props }: any) => (
-  <div className="rounded border bg-white p-4" {...(props as any)}>
+const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
+  <div className="rounded border bg-white p-4" {...(props as unknown)}>
     <p className="text-gray-600 text-sm">
       Live preview disabled in production build
     </p>
   </div>
 );
-const LiveError = ({ className, ...props }: any) => undefined;
+const LiveError = ({ className, ...props }: Record<string, unknown>) => undefined;
 
 export interface PlaygroundProps {
   code: string;
-  scope?: Record<string, any>;
+  scope?: Record<string, unknown>;
   title?: string;
   description?: string;
   showEditor?: boolean;
@@ -317,8 +317,8 @@ function PlaygroundPreview() {
   return (
     <div className="playground-preview flex h-full items-center justify-center">
       <LivePreview
-        Component={({ children, ...props }: any) => (
-          <div className="mx-auto w-full max-w-2xl" {...(props as any)}>
+        Component={({ children, ...props }: Record<string, unknown>) => (
+          <div className="mx-auto w-full max-w-2xl" {...(props as unknown)}>
             {children}
           </div>
         )}

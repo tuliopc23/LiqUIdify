@@ -16,7 +16,7 @@ import { isInteractiveElement } from '../types/polymorphic';
  * Configuration for creating polymorphic components
  */
 export interface CreatePolymorphicComponentConfig<
-  Props extends Record<string, any>,
+  Props extends Record<string, unknown>,
   DefaultElement extends ElementType,
 > {
   /** Default element type when 'as' prop is not provided */
@@ -82,7 +82,7 @@ export interface CreatePolymorphicComponentConfig<
  * ```
  */
 export function createPolymorphicComponent<
-  Props extends Record<string, any>,
+  Props extends Record<string, unknown>,
   DefaultElement extends ElementType = 'div',
 >(
   config: CreatePolymorphicComponentConfig<Props, DefaultElement>
@@ -149,7 +149,7 @@ export function createPolymorphicComponent<
       ...transformedProps,
       className: finalClassName,
       ref: shouldForwardRef ? ref : null,
-    } as any;
+    } as unknown;
 
     return (
       <ElementComponent key={key} {...elementProps}>
@@ -181,7 +181,7 @@ export function createPolymorphicComponent<
  * ```
  */
 export interface GlassPolymorphicConfig<
-  Props extends Record<string, any>,
+  Props extends Record<string, unknown>,
   DefaultElement extends ElementType,
 > extends CreatePolymorphicComponentConfig<Props, DefaultElement> {
   /** Glass effect configuration */
@@ -194,7 +194,7 @@ export interface GlassPolymorphicConfig<
 }
 
 export function createGlassPolymorphicComponent<
-  Props extends Record<string, any>,
+  Props extends Record<string, unknown>,
   DefaultElement extends ElementType = 'div',
 >(
   config: GlassPolymorphicConfig<Props, DefaultElement>
@@ -255,18 +255,18 @@ export function createPolymorphicSlots<
     {
       defaultElement: ElementType;
       displayName: string;
-      props?: Record<string, any>;
+      props?: Record<string, unknown>;
     }
   >,
 >(
   slots: Slots
 ): {
   [K in keyof Slots]: PolymorphicComponent<
-    Slots[K]['props'] extends Record<string, any> ? Slots[K]['props'] : {},
+    Slots[K]['props'] extends Record<string, unknown> ? Slots[K]['props'] : {},
     Slots[K]['defaultElement']
   >;
 } {
-  const components = {} as any;
+  const components = {} as unknown;
 
   for (const [key, config] of Object.entries(slots)) {
     components[key] = createPolymorphicComponent({

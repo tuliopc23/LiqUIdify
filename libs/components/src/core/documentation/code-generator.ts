@@ -50,7 +50,7 @@ export interface PropertyDefinition {
 
 export interface VariantDefinition {
   name: string;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
   description: string;
 }
 
@@ -58,7 +58,7 @@ export interface AnimationDefinition {
   name: string;
   type: 'spring' | 'tween' | 'gesture' | 'physics';
   properties: Array<string>;
-  defaultConfig: Record<string, any>;
+  defaultConfig: Record<string, unknown>;
 }
 
 export interface AccessibilityConfig {
@@ -74,7 +74,7 @@ export interface ExampleDefinition {
   name: string;
   description: string;
   code: string;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
 }
 
 export interface GenerationOptions {

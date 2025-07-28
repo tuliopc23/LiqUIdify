@@ -299,7 +299,7 @@ export class GracefulDegradationManager {
     const online = navigator.onLine;
 
     if ('connection' in navigator) {
-      const connection = (navigator as any).connection;
+      const connection = (navigator as unknown).connection;
       return {
         online,
         effectiveType: connection.effectiveType,
@@ -316,7 +316,7 @@ export class GracefulDegradationManager {
       return 'high';
     }
 
-    const memory = (navigator as any).deviceMemory;
+    const memory = (navigator as unknown).deviceMemory;
     const cores = navigator.hardwareConcurrency;
 
     if (memory && cores) {
@@ -331,7 +331,7 @@ export class GracefulDegradationManager {
 
     // Fallback based on connection speed
     if ('connection' in navigator) {
-      const connection = (navigator as any).connection;
+      const connection = (navigator as unknown).connection;
       const effectiveType = connection.effectiveType;
 
       if ('4g' === effectiveType) {

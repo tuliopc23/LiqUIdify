@@ -342,7 +342,7 @@ export const typeGuards = {
       'object' === typeof value &&
       null !== value &&
       'glassEffect' in value &&
-      'object' === typeof (value as any).glassEffect
+      'object' === typeof (value as unknown).glassEffect
     );
   },
 };
@@ -429,7 +429,7 @@ export const styleGenerators = {
     if ('object' === typeof property && null !== property) {
       // This would typically integrate with a CSS-in-JS solution
       // For now, return base styles
-      const baseValue = (property as any).sm || (property as any).md;
+      const baseValue = (property as unknown).sm || (property as unknown).md;
       return baseValue ? generator(baseValue) : {};
     }
     return generator(property as T);

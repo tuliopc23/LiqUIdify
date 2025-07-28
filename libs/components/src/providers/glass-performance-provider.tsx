@@ -132,7 +132,7 @@ export function useGlassPerformance(): PerformanceContextValue {
 }
 
 // HOC for automatic performance monitoring of components
-export function withPerformanceMonitoring<P extends Record<string, any>>(
+export function withPerformanceMonitoring<P extends Record<string, unknown>>(
   Component: React.ComponentType<P>,
   componentName?: string
 ): React.ComponentType<P> {

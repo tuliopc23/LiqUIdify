@@ -164,7 +164,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
             onChange={handleInputChange}
             aria-invalid={error ? true : null}
             aria-describedby={error && helperText ? helperTextId : null}
-            {...(props as any)}
+            {...(props as unknown)}
           />
 
           <div className="-translate-y-1/2 absolute top-1/2 right-3 flex transform items-center space-x-2">

@@ -184,13 +184,13 @@ function useDevicePerformance(
     }
 
     // Check device memory
-    const memory = (navigator as any).deviceMemory || 4;
+    const memory = (navigator as unknown).deviceMemory || 4;
 
     // Check CPU cores
     const cores = navigator.hardwareConcurrency || 4;
 
     // Check for battery saving mode
-    const connection = (navigator as any).connection;
+    const connection = (navigator as unknown).connection;
     const saveData = connection?.saveData || false;
 
     // Calculate performance score

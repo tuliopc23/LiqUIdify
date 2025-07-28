@@ -50,7 +50,7 @@ export function usePrefersReducedMotion(): boolean {
  * @param reducedMotionProps - The props to apply when reduced motion is preferred
  * @returns The appropriate props based on user preference
  */
-export function useMotionSafeAnimations<T extends Record<string, any>>(
+export function useMotionSafeAnimations<T extends Record<string, unknown>>(
   animationProps: T,
   reducedMotionProps: Partial<T> = {}
 ): T {

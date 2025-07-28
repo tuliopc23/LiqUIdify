@@ -76,7 +76,7 @@ export const GlassSelect = React.memo(
         <div
           ref={ref || selectRef}
           className={cn('relative', className)}
-          {...(props as any)}
+          {...(props as unknown)}
         >
           <button
             type="button"

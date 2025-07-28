@@ -60,11 +60,11 @@ export function SSRSafe({
 
   if (!isClient) {
     return fallback ? (
-      <Component {...(props as any)}>{fallback}</Component>
+      <Component {...(props as unknown)}>{fallback}</Component>
     ) : undefined;
   }
 
-  return <Component {...(props as any)}>{children}</Component>;
+  return <Component {...(props as unknown)}>{children}</Component>;
 }
 
 /**

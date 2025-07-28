@@ -78,7 +78,7 @@ export class AccessibilityManager {
 
   announce(message: string, priority: string = 'polite'): void {
     if (typeof announcer !== 'undefined' && announcer.announce) {
-      announcer.announce(message, { priority: priority as any });
+      announcer.announce(message, { priority: priority as unknown });
     }
   }
 
@@ -132,7 +132,7 @@ export class AccessibilityManager {
 
     const violations = axeResults.violations.map((v) => ({
       id: v.id,
-      impact: v.impact as any,
+      impact: v.impact as unknown,
       description: v.description,
       help: v.help,
       helpUrl: v.helpUrl,
@@ -451,7 +451,7 @@ ${this.generateRecommendations(reports)}
         ([impact, violations]) =>
           `### ${impact.charAt(0).toUpperCase() + impact.slice(1)} (${violations.length})
 
-${violations.map((v: any) => `- ${v.help}`).join('\n')}`
+${violations.map((v: unknown) => `- ${v.help}`).join('\n')}`
       )
       .join('\n\n');
   }
@@ -466,13 +466,13 @@ ${violations.map((v: any) => `- ${v.help}`).join('\n')}`
         );
       }
 
-      if (report.suggestions.some((s: any) => 'contrast' === s.type)) {
+      if (report.suggestions.some((s: unknown) => 'contrast' === s.type)) {
         recommendations.add(
           'Review and adjust color contrast ratios across components'
         );
       }
 
-      if (report.warnings.some((w: any) => 'missing-alt-text' === w.id)) {
+      if (report.warnings.some((w: unknown) => 'missing-alt-text' === w.id)) {
         recommendations.add('Ensure all images have descriptive alt text');
       }
     }
@@ -484,7 +484,7 @@ ${violations.map((v: any) => `- ${v.help}`).join('\n')}`
 interface ComponentInfo {
   name: string;
   type: string;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
 }
 
 interface Warning {

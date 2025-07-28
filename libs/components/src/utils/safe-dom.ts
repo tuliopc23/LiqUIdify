@@ -273,7 +273,7 @@ export function safeGetStyle(
   }
 
   try {
-    return element.style[property as any] || fallback || '';
+    return element.style[property as unknown] || fallback || '';
   } catch {
     // Logging disabled
     return fallback || '';
@@ -293,7 +293,7 @@ export function safeSetStyle(
   }
 
   try {
-    (element.style as any)[property] = value;
+    (element.style as unknown)[property] = value;
     return true;
   } catch {
     // Logging disabled

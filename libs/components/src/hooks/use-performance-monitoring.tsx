@@ -7,7 +7,7 @@ import { performanceMonitor } from '../core/performance-monitor';
  */
 export function usePerformanceMonitoring(
   componentName: string,
-  props?: Record<string, any>
+  props?: Record<string, unknown>
 ) {
   const renderStartTime = useRef<number>(0);
   const mountStartTime = useRef<number>(0);
@@ -89,7 +89,7 @@ export function withPerformanceMonitoring<P extends object>(
     componentName || Component.displayName || Component.name || 'Unknown';
 
   function WrappedComponent(props: P): ReactElement {
-    usePerformanceMonitoring(displayName, props as Record<string, any>);
+    usePerformanceMonitoring(displayName, props as Record<string, unknown>);
 
     return <Component {...props} />;
   }
@@ -154,7 +154,7 @@ export function useRealtimePerformance() {
 
       // Measure memory if available
       if ('memory' in performance) {
-        const memInfo = (performance as any).memory;
+        const memInfo = (performance as unknown).memory;
         setMemory({
           used: Math.round(memInfo.usedJSHeapSize / 1_048_576), // Convert to MB
           limit: Math.round(memInfo.jsHeapSizeLimit / 1_048_576),

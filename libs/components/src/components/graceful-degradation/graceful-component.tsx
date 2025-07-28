@@ -52,7 +52,7 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
     };
   }, [onError]);
 
-  const shouldFallback = hasError || shouldUseFallback(feature as any);
+  const shouldFallback = hasError || shouldUseFallback(feature as unknown);
   const degradationClass = getDegradationClass(feature, className);
 
   if (!isMounted) {

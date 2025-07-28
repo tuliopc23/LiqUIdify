@@ -89,7 +89,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
     {
       key: 'component' as const,
       header: 'Component',
-      render: (value: any, item: any) => (
+      render: (value: unknown, item: unknown) => (
         <div className="flex items-center">
           <div className="glass-effect mr-3 flex h-8 w-8 items-center justify-center rounded-lg">
             {item.icon}
@@ -103,12 +103,12 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
       key: 'category' as const,
       header: 'Category',
 
-      render: (value: any) => <span className="text-secondary">{value}</span>,
+      render: (value: unknown) => <span className="text-secondary">{value}</span>,
     },
     {
       key: 'status' as const,
       header: 'Status',
-      render: (value: any) => (
+      render: (value: unknown) => (
         <GlassBadge variant={'Ready' === value ? 'success' : 'warning'}>
           {value}
         </GlassBadge>
@@ -118,7 +118,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
       key: 'usage' as const,
       header: 'Usage',
 
-      render: (value: any) => <span className="text-secondary">{value}</span>,
+      render: (value: unknown) => <span className="text-secondary">{value}</span>,
     },
   ];
 

@@ -50,7 +50,7 @@ export interface Suggestion {
 export interface ComponentInfo {
   name: string;
   type: string;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
 }
 
 export interface ContrastResult {
@@ -665,7 +665,7 @@ export class AccessibilityManager {
       description: violation.description,
       help: violation.help,
       helpUrl: violation.helpUrl,
-      nodes: violation.nodes.map((node: any) => ({
+      nodes: violation.nodes.map((node: Node) => ({
         html: node.html,
         target: node.target,
         failureSummary: node.failureSummary,

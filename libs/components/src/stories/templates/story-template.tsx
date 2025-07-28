@@ -163,7 +163,7 @@ export function createMeta<T>(config: {
   return {
     title: config.category
       ? storyCategories[config.category as keyof typeof storyCategories][
-          config.title as any
+          config.title as unknown
         ] || config.title
       : config.title,
     component: config.component,

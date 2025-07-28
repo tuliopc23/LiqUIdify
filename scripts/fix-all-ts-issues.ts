@@ -79,11 +79,11 @@ for (const sourceFile of project.getSourceFiles()) {
     
     // More sophisticated type inference
     if (context === 'parameter') {
-      const param = parent as any;
+      const param = parent as unknown;
       const paramName = param.getName?.() || '';
       suggestedType = inferParameterType(paramName);
     } else if (context === 'property') {
-      const prop = parent as any;
+      const prop = parent as unknown;
       const propName = prop.getName?.() || '';
       suggestedType = inferReactPropType(propName);
     }
@@ -209,7 +209,7 @@ for (const sourceFile of project.getSourceFiles()) {
     
     // Check if this element is inside a map function
     if (isInsideMapFunction(element)) {
-      const hasKeyProp = element.getAttributes?.().some((attr: any) => 
+      const hasKeyProp = element.getAttributes?.().some((attr: unknown) => 
         attr.getName?.() === 'key'
       );
       
@@ -347,7 +347,7 @@ function inferReactPropType(propName: string): string {
   return 'unknown';
 }
 
-function inferReturnType(func: any, sourceFile: any): string {
+function inferReturnType(func: unknown, sourceFile: unknown): string {
   const funcName = func.getName?.() || '';
   
   // React components (PascalCase functions in .tsx files)

@@ -24,7 +24,7 @@ export interface GlassEffectOptions {
   state?: string;
   glassEffect?: any;
   animation?: any;
-  config?: Record<string, any>;
+  config?: Record<string, unknown>;
 }
 
 /**
@@ -106,7 +106,7 @@ export function generateGlassClasses(options: GlassEffectOptions): string {
  */
 export function generateGlassVariables(
   intensityOrOptions: GlassIntensity | GlassEffectOptions | undefined,
-  additionalOptions?: any
+  additionalOptions?: Record<string, unknown>
 ): Record<string, string> {
   // Handle both old signature (intensity, options) and new signature (options)
   let options: GlassEffectOptions;
