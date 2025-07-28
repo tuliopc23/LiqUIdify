@@ -17,7 +17,7 @@
     "build:css": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "bun scripts/build-css-lightning.ts",
+        "command": "tsx scripts/build-css-lightning.ts",
         "cwd": "{workspaceRoot}"
       },
       "cache": true,
@@ -49,7 +49,8 @@
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "bun biome lint libs/components/src/**/*.{ts,tsx}"
+        "command": "biome lint --no-errors-on-unmatched libs/components/src",
+        "cwd": "{workspaceRoot}"
       },
       "cache": true
     },

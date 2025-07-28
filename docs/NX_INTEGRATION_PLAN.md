@@ -127,7 +127,7 @@ LiqUIdify/
     "build:css": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "bun scripts/build-css-lightning.ts",
+        "command": "tsx scripts/build-css-lightning.ts",
         "cwd": "{workspaceRoot}"
       },
       "cache": true
