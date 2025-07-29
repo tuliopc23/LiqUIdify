@@ -227,9 +227,9 @@ export const useDynamicImport = <T,>(
   importFunction: () => Promise<T>,
   deps: React.DependencyList = []
 ): { module: T | null; loading: boolean; error: Error | null } => {
-  const [module, setModule] = useState<T | null | null>(undefined);
+  const [module, setModule] = useState<T | null>(undefined);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null | null>(undefined);
+  const [error, setError] = useState<Error | null>(undefined);
 
   useEffect(() => {
     if (!isBrowser()) {
