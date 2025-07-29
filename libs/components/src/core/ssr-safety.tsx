@@ -4,8 +4,7 @@
  * Provides utilities for safe server-side rendering and client-side hydration
  */
 
-import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
 /**
  * Hook to safely check if we're on the client side

@@ -12,9 +12,8 @@
  * - Tree-shakeable exports
  */
 
-import type React from 'react';
-import type { CSSProperties, ReactNode } from 'react';
-import { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, type CSSProperties, type ReactNode, type ComponentProps } from 'react';
+
 
 // Types
 export type GlassIntensity =
@@ -194,7 +193,6 @@ export const createGlassEffect = (config: GlassEffectConfig) => ({
 });
 
 // Legacy system compatibility - backward compatible components
-import type { ComponentProps } from 'react';
 
 export interface AppleLiquidGlassProps extends ComponentProps<'div'> {
   intensity?: GlassIntensity;

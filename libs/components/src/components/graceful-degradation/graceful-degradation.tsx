@@ -3,8 +3,7 @@
  * Provides fallback components for browsers without JavaScript or modern features
  */
 
-import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import {
   useIsClient,
   useNetworkStatus,

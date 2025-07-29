@@ -1,6 +1,6 @@
 import { Minus, Plus } from 'lucide-react';
-import type React from 'react';
-import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+
 import { cn, focusRing } from '@/core/utils/classname';
 import { createVariants as cva } from '../../lib/variant-system';
 

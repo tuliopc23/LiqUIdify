@@ -1,5 +1,5 @@
-import type React from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
 
 import { accessibilityManager } from '@/core/accessibility-manager';
 

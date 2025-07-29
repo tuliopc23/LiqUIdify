@@ -3,8 +3,8 @@
  * Provides animation control based on user preferences
  */
 
-import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+
 
 import { isClient } from '@/core/ssr-safety';
 

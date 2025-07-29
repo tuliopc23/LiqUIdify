@@ -3,7 +3,7 @@
  * Provides vibration patterns, audio feedback, and visual feedback coordination
  */
 
-import { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, createContext, useContext, type ReactNode } from 'react';
 import {
   safeAppendChild,
   safeCreateAudioContext,
@@ -456,10 +456,8 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
   };
 }
 
-import type React from 'react';
 // Haptic feedback provider for global configuration
-import type { ReactNode } from 'react';
-import { createContext, useContext } from 'react';
+
 
 interface HapticContextValue {
   config: HapticFeedbackConfig;

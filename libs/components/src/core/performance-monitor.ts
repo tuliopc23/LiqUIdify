@@ -1,5 +1,4 @@
-import type { Metric } from 'web-vitals';
-import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
+import { onCLS, onFCP, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
 
 /**
  * Performance Monitor for Glass UI
