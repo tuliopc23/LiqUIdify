@@ -9,8 +9,8 @@ expect.extend({
       pass,
       message: () =>
         pass
-          ? `expected element not to be in the document`
-          : `expected element to be in the document`,
+          ? "expected element not to be in the document"
+          : "expected element to be in the document",
     };
   },
   toHaveClass(received: HTMLElement, className: string) {
@@ -29,8 +29,8 @@ expect.extend({
       pass,
       message: () =>
         pass
-          ? `expected element not to be disabled`
-          : `expected element to be disabled`,
+          ? "expected element not to be disabled"
+          : "expected element to be disabled",
     };
   },
 });
