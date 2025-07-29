@@ -292,7 +292,7 @@ class ErrorTrackingSystem {
   async getErrorAnalytics(): Promise<{
     totalErrors: number;
     errorRate: number;
-    topErrors: { message: string; count: number }[];
+    topErrors: Array<{ message: string; count: number }>;
     affectedUsers: number;
   }> {
     // This would typically fetch from Sentry API

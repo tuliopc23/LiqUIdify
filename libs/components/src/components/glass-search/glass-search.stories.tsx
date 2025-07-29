@@ -403,7 +403,9 @@ export const SuggestionTypes: Story = {
 export const LoadingAndEmptyStates: Story = {
   render: () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [searchResults, setSearchResults] = useState<SearchSuggestion[]>([]);
+    const [searchResults, setSearchResults] = useState<Array<SearchSuggestion>>(
+      []
+    );
 
     const handleSearch = async (query: string) => {
       setIsLoading(true);

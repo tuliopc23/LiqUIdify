@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import {
   AlertCircle,
   Copy,
@@ -16,7 +16,7 @@ import { GlassTooltip } from './glass-tooltip';
 const meta = { title: 'Components/GlassTooltip' }
   component: GlassTooltip,
   parameters: { layout: 'centered' }
-    docs: { description: {
+    { 
         component: `
 The GlassTooltip component displays helpful information on hover with glassmorphic styling. It automatically 
 positions itself to stay within the viewport and includes a directional arrow.
@@ -29,8 +29,7 @@ positions itself to stay within the viewport and includes a directional arrow.
 - **Smooth animations**: Fade and zoom animations
 - **Arrow indicator**: Points to the trigger element
 - **Disable option**: Can be disabled when needed
-        `,
-      },
+        `,,
     },
   },
   tags: ['autodocs'],
@@ -41,22 +40,21 @@ positions itself to stay within the viewport and includes a directional arrow.
       </div>
     ),
   ],
-  argTypes: { content: {
-      description: 'Content to display in the tooltip' }
-      control: { type: 'text' },
+  argTypes: { 
+      description: 'Content to display in the tooltip' type: 'text' ,
     },
     position: { description: 'Position of the tooltip relative to the trigger' }
-      control: { type: 'select' },
+      { type: 'select' },
       options: ['top', 'bottom', 'left', 'right'],
     },
     delay: { description: 'Delay in milliseconds before showing tooltip' }
-      control: { type: 'range', min: 0, max: 2000, step: 100 },
+      { type: 'range', min: 0, max: 2000, step: 100 },
     },
     disabled: { description: 'Disable the tooltip' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     className: { description: 'Additional CSS classes for the tooltip' }
-      control: { type: 'text' },
+      { type: 'text' },
     },
   },
 } satisfies Meta<typeof GlassTooltip>;
@@ -71,10 +69,10 @@ export const Default: Story = { args: {
     delay: 500,
   },
   render: (args) => (
-    <GlassTooltip {...args}>
-      <button
-        type="button"
-        className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+    <_GlassTooltip {..._args}>
+      <_button
+        _type="button"
+        _className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
       >
         Hover me
       </button>

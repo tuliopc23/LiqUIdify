@@ -1,4 +1,3 @@
-
 import { createContext, type ReactNode, useContext } from 'react';
 
 export interface GlobalConfig {

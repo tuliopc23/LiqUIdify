@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import {
   AlertCircle,
   AlertTriangle,
@@ -28,7 +28,7 @@ import { GlassModal } from './glass-modal';
 const meta = { title: 'Components/Overlays/GlassModal' }
   component: GlassModal,
   parameters: { layout: 'centered' }
-    docs: { description: {
+    { 
         component: ` }
 A glassmorphic modal dialog component with focus management, animations, and comprehensive accessibility features.
 
@@ -94,88 +94,75 @@ The modal follows WAI-ARIA dialog pattern:
 - Focus management with initial focus and restoration
 - Screen reader announcements on open
 - Keyboard navigation support
-        `,
-      },
+        `,,
     },
   },
   tags: ['autodocs'],
-  argTypes: { isOpen: {
-      control: 'boolean' }
+  argTypes: { 
+      control: 'boolean' 
       description: 'Whether the modal is open',
-      table: {
-        type: { summary: 'boolean' },
-        category: 'State',
-      },
+      table: summary: 'boolean' ,
+        category: 'State',,
     },
     onClose: { action: 'closed' }
       description: 'Callback when modal should close',
-      table: {
-        type: { summary: '() => void' },
+      table: {summary: '() => void' ,
         category: 'Events',
       },
     },
     title: { control: 'text' }
       description: 'Modal title',
-      table: {
-        type: { summary: 'string' },
+      table: {summary: 'string' ,
         category: 'Content',
       },
     },
     children: { control: false }
       description: 'Modal content',
-      table: {
-        type: { summary: 'React.ReactNode' },
+      table: {summary: 'React.ReactNode' ,
         category: 'Content',
       },
     },
     closeOnBackdropClick: { control: 'boolean' }
       description: 'Close when clicking outside the modal',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
+      table: {summary: 'boolean' ,
+        defaultValue: summary: 'true' ,
         category: 'Behavior',
       },
     },
     closeOnEscape: { control: 'boolean' }
       description: 'Close when pressing Escape key',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
+      table: {summary: 'boolean' ,
+        defaultValue: summary: 'true' ,
         category: 'Behavior',
       },
     },
     className: { control: 'text' }
       description: 'Additional CSS classes for the modal',
-      table: {
-        type: { summary: 'string' },
+      table: {summary: 'string' ,
         category: 'Styling',
       },
     },
     titleClassName: { control: 'text' }
       description: 'Additional CSS classes for the title',
-      table: {
-        type: { summary: 'string' },
+      table: {summary: 'string' ,
         category: 'Styling',
       },
     },
     contentClassName: { control: 'text' }
       description: 'Additional CSS classes for the content',
-      table: {
-        type: { summary: 'string' },
+      table: {summary: 'string' ,
         category: 'Styling',
       },
     },
     initialFocus: { control: false }
       description: 'Element to focus when modal opens',
-      table: {
-        type: { summary: 'React.RefObject<HTMLElement>' },
+      table: {summary: 'React.RefObject<HTMLElement>' ,
         category: 'Behavior',
       },
     },
     portalTarget: { control: false }
       description: 'Custom portal target element',
-      table: {
-        type: { summary: 'HTMLElement' },
+      table: {summary: 'HTMLElement' ,
         category: 'Advanced',
       },
     },
@@ -189,7 +176,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 {/* Default story - Interactive playground  */}
-export const Playground: Story = { render: (args) => { }
+export const Playground: Story = { render: (_args) => { }
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
@@ -307,7 +294,7 @@ export const DialogTypes: Story = { render: () => { }
     const [confirmOpen, setConfirmOpen] = React.useState(false);
     const [alertOpen, setAlertOpen] = React.useState(false);
     const [promptOpen, setPromptOpen] = React.useState(false);
-    const [customOpen, setCustomOpen] = React.useState(false);
+    const [_customOpen, setCustomOpen] = React.useState(false);
 
     const [promptValue, setPromptValue] = React.useState('');
 
@@ -430,7 +417,7 @@ export const DialogTypes: Story = { render: () => { }
               <GlassButton
                 type="button"
                 variant="primary" onClick={() => {
-                  alert(`Project created: ${promptValue}`);
+                  alert(`_Project _created: ${promptValue}`);
                   setPromptOpen(false);
                   setPromptValue('');
                 disabled={!promptValue}
@@ -440,9 +427,7 @@ export const DialogTypes: Story = { render: () => { }
             </div>
           </div>
         </GlassModal>
-
-        {/* Custom Dialog  */}
-        <GlassModal isOpen={customOpen} onClose={() => setCustomOpen(false)}>
+        <GlassModal isOpen=_customOpenonClose={() => setCustomOpen(false)}>
           <div className="space-y-6 text-center">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/20">
               <Gift className="h-8 w-8 text-green-600 dark:text-green-400" />
@@ -475,11 +460,9 @@ export const DialogTypes: Story = { render: () => { }
     );
   },
 };
-
-{/* Form modal  */}
-export const FormModal: Story = { render: () => { }
+export const _FormModal: Story = { render: () => { }
     const [isOpen, setIsOpen] = React.useState(false);
-    const [formData, setFormData] = React.useState({ name: '' }
+    const [_formData, _setFormData] = React.useState({ name: '' }
       email: '',
       message: '',
       subscribe: false,
@@ -923,9 +906,7 @@ export const NestedModals: Story = { render: () => { }
     );
   },
 };
-
-{/* Theme showcase  */}
-export const ThemeShowcase: Story = { render: () => { }
+export const _ThemeShowcase: Story = { render: () => { }
     const [lightOpen, setLightOpen] = React.useState(false);
     const [darkOpen, setDarkOpen] = React.useState(false);
 

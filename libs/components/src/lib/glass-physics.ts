@@ -190,11 +190,13 @@ export function hapticFeedback(
     } else {
       // Fallback for non-mobile or non-supporting browsers
       // Use dev-only logger (lazy import to avoid circular dep in SSR)
-      import('@/utils/dev-logger').then(({ devLog }) => {
-        devLog(`Haptic feedback: ${intensity}`);
-      }).catch(() => {
-        // Silent fail for dev logger
-      });
+      import('@/utils/dev-logger')
+        .then(({ devLog }) => {
+          devLog(`Haptic feedback: ${intensity}`);
+        })
+        .catch(() => {
+          // Silent fail for dev logger
+        });
     }
   } catch {
     // Logging disabled
@@ -404,7 +406,7 @@ export const useRepulsionEffect = (
   elements: Array<HTMLElement>,
   repulsionStrength: number = 50
 ) => {
-  const [positions, setPositions] = useState<Vector2D[]>([]);
+  const [positions, setPositions] = useState<Array<Vector2D>>([]);
 
   useEffect(() => {
     if (elements.length === 0) {

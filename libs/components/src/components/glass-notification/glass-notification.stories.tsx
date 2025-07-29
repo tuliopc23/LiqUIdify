@@ -155,7 +155,7 @@ export const OnlyUnread: Story = {
 export const Interactive: Story = {
   render: () => {
     const [notifications, setNotifications] =
-      useState<NotificationItem[]>(sampleNotifications);
+      useState<Array<NotificationItem>>(sampleNotifications);
 
     const handleMarkAsRead = (id: string) => {
       setNotifications((prev) =>
@@ -332,12 +332,14 @@ export const ManyNotifications: Story = {
 // Real-time simulation
 export const RealTimeUpdates: Story = {
   render: () => {
-    const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+    const [notifications, setNotifications] = useState<Array<NotificationItem>>(
+      []
+    );
 
     // Simulate real-time notifications
     useState(() => {
       const interval = setInterval(() => {
-        const types: NotificationItem['type'][] = [
+        const types: Array<NotificationItem['type']> = [
           'success',
           'error',
           'warning',

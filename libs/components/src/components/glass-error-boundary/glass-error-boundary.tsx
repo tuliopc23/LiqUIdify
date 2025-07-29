@@ -12,7 +12,7 @@ export interface GlassErrorBoundaryProps {
   children: ReactNode;
   fallback?: (error: Error, errorInfo: ErrorInfo) => ReactNode;
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
-  resetKeys?: string | number[];
+  resetKeys?: string | Array<number>;
   resetOnPropsChange?: boolean;
   isolate?: boolean;
   level?: 'page' | 'section' | 'component';
@@ -33,7 +33,7 @@ export class GlassErrorBoundary extends Component<
   GlassErrorBoundaryState
 > {
   private resetTimeoutId: NodeJS.Timeout | null = null;
-  private previousResetKeys: string | number[] = [];
+  private previousResetKeys: string | Array<number> = [];
 
   constructor(props: GlassErrorBoundaryProps) {
     super(props);
@@ -137,7 +137,7 @@ export class GlassErrorBoundary extends Component<
     }
   }
 
-  arraysEqual(a: string | number[], b: string | number[]): boolean {
+  arraysEqual(a: string | Array<number>, b: string | Array<number>): boolean {
     return (
       a.length === b.length && a.every((value, index) => value === b[index])
     );

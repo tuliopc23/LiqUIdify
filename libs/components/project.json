@@ -49,7 +49,7 @@
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "biome lint --no-errors-on-unmatched libs/components/src",
+        "command": "biome check libs/components/src",
         "cwd": "{workspaceRoot}"
       },
       "cache": true
@@ -57,7 +57,7 @@
     "type-check": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsc --noEmit",
+        "command": "tsc --project tsconfig.lib.json --noEmit",
         "cwd": "{projectRoot}"
       },
       "cache": true

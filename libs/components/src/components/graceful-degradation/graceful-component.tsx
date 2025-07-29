@@ -352,10 +352,10 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
 
 // CSS-only fallback components
 export const CSSAccordion: React.FC<{
-  items: {
+  items: Array<{
     title: string;
     content: React.ReactNode;
-  }[];
+  }>;
   className?: string;
 }> = ({ items, className = '' }) => {
   return (
@@ -374,11 +374,11 @@ export const CSSAccordion: React.FC<{
 };
 
 export const CSSTabs: React.FC<{
-  tabs: {
+  tabs: Array<{
     label: string;
     content: React.ReactNode;
     id: string;
-  }[];
+  }>;
   className?: string;
 }> = ({ tabs, className = '' }) => {
   return (

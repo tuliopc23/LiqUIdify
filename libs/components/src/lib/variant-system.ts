@@ -20,7 +20,7 @@ export interface VariantConfig<
   compoundVariants?: Array<
     {
       [K in keyof T]?: keyof T[K];
-    } & { class: string; }
+    } & { class: string }
   >;
   defaultVariants?: {
     [K in keyof T]?: keyof T[K];

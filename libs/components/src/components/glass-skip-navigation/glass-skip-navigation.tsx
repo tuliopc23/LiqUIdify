@@ -41,10 +41,10 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
   announceOnFocus = true,
   customStyles,
 }) => {
-  const [links, setLinks] = useState<SkipLink[]>(providedLinks || []);
+  const [links, setLinks] = useState<Array<SkipLink>>(providedLinks || []);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
   const containerRef = useRef<HTMLDivElement>(null);
-  const linkReferences = useRef<HTMLAnchorElement | null[]>([]);
+  const linkReferences = useRef<HTMLAnchorElement | Array<null>>([]);
   const isClient = useIsClient();
 
   // Auto-generate skip links for landmarks
@@ -339,7 +339,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
  * Hook for programmatically managing skip navigation
  */
 export function useSkipNavigation() {
-  const [skipLinks, setSkipLinks] = useState<SkipLink[]>([]);
+  const [skipLinks, setSkipLinks] = useState<Array<SkipLink>>([]);
 
   const addSkipLink = (link: SkipLink) => {
     setSkipLinks((previous) => {

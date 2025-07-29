@@ -26,7 +26,7 @@ declare global {
   type IntersectionObserverInit = {
     root?: Element | Document | null;
     rootMargin?: string;
-    threshold?: number | number[];
+    threshold?: number | Array<number>;
   };
   type ResizeObserverCallback = (
     entries: Array<ResizeObserverEntry>,

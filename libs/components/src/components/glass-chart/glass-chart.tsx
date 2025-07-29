@@ -115,14 +115,13 @@ export const LineChart: React.FC<LineChartProps> = ({
             const y = padding + (index / 4) * chartHeight;
             return (
               <line
-                key={index}
+                key={`grid-line-${index}`}
                 x1={padding}
                 y1={y}
                 x2={width - padding}
                 y2={y}
-                stroke="var(--text-secondary)"
-                strokeWidth="1"
-                strokeDasharray="2,2"
+                stroke="currentColor"
+                strokeWidth={1}
               />
             );
           })}
@@ -160,7 +159,7 @@ export const LineChart: React.FC<LineChartProps> = ({
         {showDots &&
           points.map((point, index) => (
             <circle
-              key={index}
+              key={`point-${index}-${point.x}-${point.y}`}
               cx={point.x}
               cy={point.y}
               r={hoveredPoint === index ? 6 : 4}
@@ -269,7 +268,7 @@ export const BarChart: React.FC<BarChartProps> = ({
             'vertical' === orientation ? barLength : barThickness;
 
           return (
-            <g key={index}>
+            <g key={`bar-${item.label}-${index}`}>
               <rect
                 x={x}
                 y={y}
@@ -374,7 +373,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
         <title>Icon</title>
         {segments.map((segment, index) => (
           <path
-            key={index}
+            key={`segment-${index}-${segment.color}`}
             d={segment.path}
             fill={segment.color}
             className={cn(

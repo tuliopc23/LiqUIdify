@@ -202,7 +202,7 @@ export function withNetworkFallback(
  * Feature Detection Fallback
  */
 export function withFeatureDetection(
-  feature: string | string[],
+  feature: string | Array<string>,
   enhancedComponent: ReactNode,
   fallbackComponent: ReactNode
 ) {

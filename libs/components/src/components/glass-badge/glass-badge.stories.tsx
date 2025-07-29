@@ -64,7 +64,7 @@ export const Warning: Story = {
   },
 };
 
-export const Error: Story = {
+export const ErrorBadge: Story = {
   args: {
     children: 'Error',
     variant: 'error',
@@ -362,19 +362,13 @@ export const AccessibilityDemo: Story = {
       <div className="space-y-3">
         <div className="flex items-center gap-2">
           <span className="text-white">Order #12345</span>
-          <GlassBadge
-            variant="success"
-            role="status"
-            aria-label="Order delivered"
-          >
+          <GlassBadge variant="success" aria-label="Order delivered">
             Delivered
           </GlassBadge>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-white">Payment Status:</span>
-          <GlassBadge variant="warning" role="status">
-            Processing
-          </GlassBadge>
+          <GlassBadge variant="warning">Processing</GlassBadge>
           <span className="text-sm text-white/60">(Expected: 2-3 days)</span>
         </div>
         <div className="flex items-center gap-2">

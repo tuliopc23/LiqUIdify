@@ -173,7 +173,7 @@ export class AccessibilityManager {
         id: 'missing-alt-text',
         description: 'Images without alt text',
         suggestion: 'Add descriptive alt text to all images',
-        elements: [...images] as HTMLElement[],
+        elements: [...images] as Array<HTMLElement>,
       });
     }
 
@@ -184,7 +184,7 @@ export class AccessibilityManager {
         id: 'empty-buttons',
         description: 'Buttons without text content',
         suggestion: 'Add text or aria-label to buttons',
-        elements: [...emptyButtons] as HTMLElement[],
+        elements: [...emptyButtons] as Array<HTMLElement>,
       });
     }
 

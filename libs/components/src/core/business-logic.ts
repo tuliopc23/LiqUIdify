@@ -9,7 +9,7 @@ import React, { useCallback, useMemo, useRef } from 'react';
 import type { ComponentSize, ComponentVariant } from './base-component';
 
 // Generic business logic hook type
-export type BusinessLogicHook<T = any, P = any> = (props: P) => T;
+export type BusinessLogicHook<T = unknown, P = unknown> = (props: P) => T;
 
 // State management utilities
 export interface StateManager<T> {
@@ -20,7 +20,7 @@ export interface StateManager<T> {
 }
 
 // Action definition
-export interface Action<T = any> {
+export interface Action<T = unknown> {
   type: string;
   payload?: T;
 }
@@ -32,7 +32,9 @@ export type Reducer<S, A> = (state: S, action: A) => S;
 export type EventHandlerFactory<
   T extends HTMLElement,
   E extends Event = Event,
-> = (...arguments_: Array<any>) => (event: E & { currentTarget: T }) => void;
+> = (
+  ...arguments_: Array<unknown>
+) => (event: E & { currentTarget: T }) => void;
 
 /**
  * Create a business logic hook for component state management
@@ -40,7 +42,7 @@ export type EventHandlerFactory<
 export function createBusinessLogicHook<
   TState,
   TProps,
-  TActions extends Record<string, (...arguments_: Array<any>) => any>,
+  TActions extends Record<string, (...arguments_: Array<unknown>) => unknown>,
 >(
   initialStateFactory: (props: TProps) => TState,
   actionsFactory: (
@@ -167,7 +169,7 @@ export interface FormActions<T = Record<string, unknown>> {
 
 export function createFormBusinessLogic<T extends Record<string, unknown>>(
   initialValues: T,
-  validationRules?: Record<keyof T, (value: any) => string | null>,
+  validationRules?: Record<keyof T, (value: unknown) => string | null>,
   onSubmit?: (values: T) => void | Promise<void>
 ): BusinessLogicHook<{ state: FormState<T>; actions: FormActions<T> }, {}> {
   return () => {
@@ -283,7 +285,7 @@ export function createFormBusinessLogic<T extends Record<string, unknown>>(
 /**
  * Table/List business logic utilities
  */
-export interface TableState<T = any> {
+export interface TableState<T = unknown> {
   items: Array<T>;
   selectedItems: Array<T>;
   sortBy: string | null;
@@ -295,7 +297,7 @@ export interface TableState<T = any> {
   isLoading: boolean;
 }
 
-export interface TableActions<T = any> {
+export interface TableActions<T = unknown> {
   setItems: (items: Array<T>) => void;
   selectItem: (item: T) => void;
   selectAll: () => void;
@@ -498,7 +500,7 @@ export function createModalBusinessLogic(
 /**
  * Generic async data fetching business logic
  */
-export interface AsyncDataState<T = any> {
+export interface AsyncDataState<T = unknown> {
   data: T | null;
   loading: boolean;
   error: string | null;

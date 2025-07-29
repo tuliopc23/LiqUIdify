@@ -156,14 +156,14 @@ export const numberValidators = {
  */
 export const arrayValidators = {
   required:
-    (message = 'At least one item is required'): Validator<any[]> =>
+    (message = 'At least one item is required'): Validator<Array<any>> =>
     (value) => {
       const isValid = Array.isArray(value) && value.length > 0;
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
   minLength:
-    (min: number, message?: string): Validator<any[]> =>
+    (min: number, message?: string): Validator<Array<any>> =>
     (value) => {
       const actualMessage = message || `Must have at least ${min} items`;
       const isValid = Array.isArray(value) && value.length >= min;
@@ -171,7 +171,7 @@ export const arrayValidators = {
     },
 
   maxLength:
-    (max: number, message?: string): Validator<any[]> =>
+    (max: number, message?: string): Validator<Array<any>> =>
     (value) => {
       const actualMessage = message || `Must have no more than ${max} items`;
       const isValid = Array.isArray(value) && value.length <= max;
@@ -179,7 +179,7 @@ export const arrayValidators = {
     },
 
   unique:
-    (message = 'All items must be unique'): Validator<any[]> =>
+    (message = 'All items must be unique'): Validator<Array<any>> =>
     (value) => {
       if (!Array.isArray(value)) {
         return createValidationResult(false, ['Value must be an array']);

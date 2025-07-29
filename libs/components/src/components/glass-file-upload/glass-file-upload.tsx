@@ -101,7 +101,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     },
     ref
   ) => {
-    const [files, setFiles] = useState<FileUploadItem[]>([]);
+    const [files, setFiles] = useState<Array<FileUploadItem>>([]);
     const [isDragOver, setIsDragOver] = useState(false);
     const [uploadState, setUploadState] = useState<
       'idle' | 'uploading' | 'error'

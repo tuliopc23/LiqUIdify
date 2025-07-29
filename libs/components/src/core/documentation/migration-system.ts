@@ -611,7 +611,7 @@ export class LiqUIdifyMigrationSystem {
   private async findFiles(
     basePath: string,
     patterns: Array<string>
-  ): Promise<string[]> {
+  ): Promise<Array<string>> {
     // Simple glob implementation - in production, use a proper glob library
     const files: Array<string> = [];
 

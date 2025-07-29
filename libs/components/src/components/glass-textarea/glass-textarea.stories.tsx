@@ -1,13 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import { Code, FileText, Mail, MessageSquare } from 'lucide-react';
-import type React from 'react';
 import { useState } from 'react';
 import { GlassTextarea } from './glass-textarea';
 
 const meta = { title: 'Glass UI/GlassTextarea' }
   component: GlassTextarea,
   parameters: { layout: 'centered' }
-    docs: { description: {
+    { 
         component: `
 ## GlassTextarea Component
  }
@@ -38,13 +37,12 @@ function MyComponent() {
   );
 }
 \`\`\`
-        `,
-      },
+        `,,
     },
   },
   tags: ['autodocs'],
-  argTypes: { placeholder: {
-      control: 'text' }
+  argTypes: { 
+      control: 'text' 
       description: 'Placeholder text',
     },
     value: { control: 'text' }
@@ -90,7 +88,7 @@ export const Default: Story = { args: {
 };
 
 {/* Controlled Example  */}
-export const Controlled: Story = { render: (args) => { }
+export const Controlled: Story = { render: (_args) => { }
     const [value, setValue] = useState('');
 
     return (

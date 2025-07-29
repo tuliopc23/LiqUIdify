@@ -1,15 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import { Bell, Menu, Search, Settings, User, X } from 'lucide-react';
-import React from 'react';
 import { GlassButton } from '../glass-button-refactored/glass-button';
 import { Drawer } from './glass-drawer';
 
 const meta = { title: 'Components/GlassDrawer' }
   component: Drawer,
   parameters: { layout: 'centered' }
-    docs: { description: {
+    { 
         component:
-          'A drawer component with glassmorphic styling that slides in from different sides of the screen.' }
+          'A drawer component with glassmorphic styling that slides in from different sides of the screen.' 
       },
     },
   },

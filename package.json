@@ -113,7 +113,7 @@
     "dev:storybook": "nx storybook storybook",
     "format": "biome format --write .",
     "lint": "nx run-many -t lint",
-    "lint:fix": "biome check --fix .",
+    "lint:fix": "biome check --fix --unsafe .",
     "lint:affected": "nx affected -t lint",
     "post-build": "bun scripts/post-build.ts",
     "release": "semantic-release",

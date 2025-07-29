@@ -38,7 +38,7 @@ export function HydrationDetector({
   const [hydrationState, setHydrationState] = useState({
     isHydrating: true,
     hasMismatch: false,
-    mismatches: [] as HydrationMismatch[],
+    mismatches: [] as Array<HydrationMismatch>,
     retryCount: 0,
     isReady: false,
   });

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import {
   ChevronDown,
   HelpCircle,
@@ -6,13 +6,12 @@ import {
   Settings,
   User,
 } from 'lucide-react';
-import { useState } from 'react';
 import { GlassPopover } from './glass-popover';
 
 const meta = { title: 'Components/GlassPopover' }
   component: GlassPopover,
   parameters: { layout: 'centered' }
-    docs: { description: {
+    { 
         component: `
 The GlassPopover component provides a floating panel that appears near a trigger element. It supports multiple  }
 positioning options, automatic viewport adjustment, and can be controlled or uncontrolled.
@@ -24,43 +23,41 @@ positioning options, automatic viewport adjustment, and can be controlled or unc
 - **Portal rendering**: Renders in a portal to avoid z-index issues
 - **Keyboard accessible**: Escape key to close, proper ARIA attributes
 - **Click outside detection**: Optional close on click outside
-        `,
-      },
+        `,,
     },
   },
   tags: ['autodocs'],
-  argTypes: { trigger: {
-      description: 'The element that triggers the popover' }
-      control: { type: 'text' },
+  argTypes: { 
+      description: 'The element that triggers the popover' type: 'text' ,
     },
     content: { description: 'The content to display in the popover' }
-      control: { type: 'text' },
+      { type: 'text' },
     },
     position: { description: 'Position of the popover relative to the trigger' }
-      control: { type: 'select' },
+      { type: 'select' },
       options: ['top', 'bottom', 'left', 'right'],
     },
     align: { description: 'Alignment of the popover relative to the trigger' }
-      control: { type: 'select' },
+      { type: 'select' },
       options: ['start', 'center', 'end'],
     },
     open: { description: 'Controlled open state' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     onOpenChange: { description: 'Callback when open state changes' }
       action: 'openChanged',
     },
     closeOnClickOutside: { description: 'Close when clicking outside the popover' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     closeOnEscape: { description: 'Close when pressing Escape key' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     className: { description: 'Additional CSS classes for the trigger' }
-      control: { type: 'text' },
+      { type: 'text' },
     },
     contentClassName: { description: 'Additional CSS classes for the content' }
-      control: { type: 'text' },
+      { type: 'text' },
     },
   },
 } satisfies Meta<typeof GlassPopover>;

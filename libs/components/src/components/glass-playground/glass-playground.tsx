@@ -46,7 +46,8 @@ const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
 const LiveError = ({ className, ...props }: Record<string, unknown>) =>
   undefined;
 
-export interface PlaygroundProps { code: string; }
+export interface PlaygroundProps {
+  code: string;
   scope?: Record<string, unknown>;
   title?: string;
   description?: string;
@@ -59,7 +60,8 @@ export interface PlaygroundProps { code: string; }
   autoRun?: boolean;
 }
 
-export function GlassPlayground({ code: initialCode }
+export function GlassPlayground({
+  code: initialCode,
   scope = {},
   title,
   description,
@@ -107,10 +109,12 @@ export function GlassPlayground({ code: initialCode }
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch {
-        {/* Logging disabled  */}
+        // Logging disabled
+      }
+    }
   }, [code, window]);
 
-  {/* Download code as file  */}
+  // Download code as file
   const handleDownload = useCallback(() => {
     if (window) {
       const blob = new Blob([code], { type: 'text/plain' });
@@ -122,9 +126,10 @@ export function GlassPlayground({ code: initialCode }
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-    }, [code, title, window]);
+    }
+  }, [code, title, window]);
 
-  {/* Toggle fullscreen  */}
+  // Toggle fullscreen
   const handleFullscreen = useCallback(() => {
     setFullscreen((previous) => !previous);
   },
@@ -197,7 +202,7 @@ export function GlassPlayground({ code: initialCode }
 
       <div
         className="relative"
-        style={{ height: 'number' === typeof height ? `${height}px` : height>
+        style={{ height: 'number' === typeof height ? `${height}px` : height }}
         <LiveProvider
           code={code}
           scope={playgroundScope}
@@ -207,17 +212,18 @@ export function GlassPlayground({ code: initialCode }
           {showEditor && showPreview ? (
             <GlassTabs
               tabs={[
-                { id: 'preview' }
+                {
+                  id: 'preview',
                   label: (
                     <div className="flex items-center gap-2">
                       <Eye className="h-4 w-4" />
                       Preview
                     </div>
                   ),
-
-                  content: <PlaygroundPreview />,
+                  content: <PlaygroundPreview />
                 },
-                { id: 'code' }
+                {
+                  id: 'code',
                   label: (
                     <div className="flex items-center gap-2">
                       <Code className="h-4 w-4" />

@@ -76,7 +76,7 @@ const generateMockErrorData = (): Array<ErrorMetric> => {
     'accessibility_error',
     'performance_error',
   ];
-  const severities: 'low' | 'medium' | 'high' | 'critical'[] = [
+  const severities: 'low' | 'medium' | 'high' | Array<'critical'> = [
     'low',
     'medium',
     'high',
@@ -117,14 +117,14 @@ const sanitizeObjectKey = (key: string): string => {
     'isPrototypeOf',
     'propertyIsEnumerable',
     'toString',
-    'valueOf'
+    'valueOf',
   ];
-  
+
   // If the key is dangerous, prefix it with 'safe_'
   if (dangerousKeys.includes(key.toLowerCase())) {
     return `safe_${key}`;
   }
-  
+
   // Also ensure the key is a string and not empty
   const sanitizedKey = String(key).trim();
   return sanitizedKey || 'unknown_component';
@@ -155,7 +155,7 @@ export const ErrorAnalyticsDashboard: React.FC<
   showComponentDetails = true,
   enableExport = true,
 }) => {
-  const [errorData, setErrorData] = useState<ErrorMetric[]>([]);
+  const [errorData, setErrorData] = useState<Array<ErrorMetric>>([]);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'1h' | '24h' | '7d' | '30d'>(
     '24h'
@@ -272,8 +272,8 @@ export const ErrorAnalyticsDashboard: React.FC<
     for (const error of filteredErrorData) {
       // Sanitize component name to prevent prototype pollution
       const safeComponentName = sanitizeObjectKey(error.component);
-      
-      if (!Object.prototype.hasOwnProperty.call(componentStats, safeComponentName)) {
+
+      if (!Object.hasOwn(componentStats, safeComponentName)) {
         componentStats[safeComponentName] = {
           componentName: safeComponentName,
           errorCount: 0,

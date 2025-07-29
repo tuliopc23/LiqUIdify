@@ -550,7 +550,7 @@ export const GPUAccelerationHelper = {
  */
 export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
   const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
-  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [recommendations, setRecommendations] = useState<Array<string>>([]);
   const schedulerRef = useRef<GlassAnimationScheduler | null>(null);
   const configRef = useRef<OptimizationConfig>({
     ...DEFAULT_PERFORMANCE_CONFIG,

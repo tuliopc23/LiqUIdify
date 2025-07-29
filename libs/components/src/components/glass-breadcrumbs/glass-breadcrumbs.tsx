@@ -79,7 +79,7 @@ const GlassBreadcrumbs = React.memo(
       },
       ref
     ) => {
-      {/* Truncate items if maxItems is specified */}
+      // Truncate items if maxItems is specified
       const displayItems =
         maxItems && items.length > maxItems
           ? [
@@ -96,8 +96,8 @@ const GlassBreadcrumbs = React.memo(
           if (item.onClick) {
             item.onClick();
           } else if (item.href) {
-            {/* In a real app, you'd handle navigation here */}
-            {/* Navigation handled by onClick prop */}
+            // In a real app, you'd handle navigation here
+            // Navigation handled by onClick prop
           }
         },
         []

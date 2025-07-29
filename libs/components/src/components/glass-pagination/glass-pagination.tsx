@@ -81,7 +81,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
     ref
   ) => {
     const generatePageNumbers = () => {
-      const pages: number | 'ellipsis'[] = [];
+      const pages: number | Array<'ellipsis'> = [];
 
       // Always include first page(s)
 

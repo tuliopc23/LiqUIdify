@@ -47,7 +47,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
   position = 'top-right',
 }) => {
-  const [toasts, setToasts] = useState<Toast[]>([]);
+  const [toasts, setToasts] = useState<Array<Toast>>([]);
 
   const addToast = (toast: Omit<Toast, 'id'>) => {
     const id = Math.random().toString(36).slice(2, 9);

@@ -49,7 +49,7 @@ export interface GlassLiveRegionProps {
   message?: string;
   priority?: AriaLivePriority;
   atomic?: boolean;
-  relevant?: AriaRelevant | AriaRelevant[];
+  relevant?: AriaRelevant | Array<AriaRelevant>;
   className?: string;
   clearDelay?: number;
   visuallyHidden?: boolean;
@@ -100,7 +100,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
     message
   );
   const [announcementQueue, setAnnouncementQueue] = useState<
-    QueuedAnnouncement[]
+    Array<QueuedAnnouncement>
   >([]);
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const processingRef = useRef<boolean>(false);
@@ -272,7 +272,7 @@ export function useAnnouncement() {
   const [announcementOptions, setAnnouncementOptions] =
     useState<AnnouncementOptions>({});
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
-  const queueRef = useRef<QueuedAnnouncement[]>([]);
+  const queueRef = useRef<Array<QueuedAnnouncement>>([]);
   const dedupMapRef = useRef<Map<string, number>>(new Map());
 
   const announce = useCallback(
@@ -510,7 +510,7 @@ export const GlassLiveRegionProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [announcements, setAnnouncements] = useState<
-    { id: string; message: string; options: AnnouncementOptions }[]
+    Array<{ id: string; message: string; options: AnnouncementOptions }>
   >([]);
 
   useEffect(() => {

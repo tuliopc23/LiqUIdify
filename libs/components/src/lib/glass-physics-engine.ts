@@ -8,7 +8,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 // Extended Navigator interface for haptic feedback
 interface NavigatorWithVibrate {
-  vibrate?: (pattern: number | number[]) => boolean;
+  vibrate?: (pattern: number | Array<number>) => boolean;
 }
 
 export interface SpringConfig {

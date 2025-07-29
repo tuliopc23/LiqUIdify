@@ -60,9 +60,9 @@ export const safeQuerySelector = <T extends Element = Element>(
 export const safeQuerySelectorAll = <T extends Element = Element>(
   selector: string,
   container?: Element | Document
-): NodeListOf<T> | T[] => {
+): NodeListOf<T> | Array<T> => {
   if (isSSR()) {
-    return [] as T[];
+    return [] as Array<T>;
   }
 
   try {
@@ -70,7 +70,7 @@ export const safeQuerySelectorAll = <T extends Element = Element>(
     return root.querySelectorAll<T>(selector);
   } catch {
     // Logging disabled
-    return [] as T[];
+    return [] as Array<T>;
   }
 };
 

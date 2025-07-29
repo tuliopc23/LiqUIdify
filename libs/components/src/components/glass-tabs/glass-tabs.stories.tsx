@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import {
   Bell,
   Code,
@@ -14,7 +14,7 @@ import { type GlassTabItem, GlassTabs } from './glass-tabs';
 const meta = { title: 'Glass UI/GlassTabs' }
   component: GlassTabs,
   parameters: { layout: 'centered' }
-    docs: { description: {
+    { 
         component: `
 ## GlassTabs Component
  }
@@ -52,13 +52,12 @@ function MyComponent() {
   );
 }
 \`\`\`
-        `,
-      },
+        `,,
     },
   },
   tags: ['autodocs'],
-  argTypes: { tabs: {
-      control: 'object' }
+  argTypes: { 
+      control: 'object' 
       description: 'Array of tab items',
     },
     defaultTab: { control: 'text' }
@@ -450,7 +449,7 @@ export const SettingsExample: Story = { render: () => {
 
 {/* Documentation Example  */}
 export const DocumentationExample: Story = { render: () => {
-    const docsTabs: Array<GlassTabItem> = [
+    const _docsTabs: Array<GlassTabItem> = [
       {
         id: 'installation' }
         label: 'Installation',
@@ -529,7 +528,7 @@ const tabs = [
 
     return (
       <div className="w-[600px]">
-        <GlassTabs tabs={docsTabs} />
+        <GlassTabs tabs={_docsTabs} />
       </div>
     );
   },

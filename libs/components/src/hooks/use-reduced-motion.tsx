@@ -165,12 +165,12 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
    */
   const createTransitions = useCallback(
     (
-      transitions: {
+      transitions: Array<{
         property: string;
         duration: number;
         easing?: string;
         delay?: number;
-      }[]
+      }>
     ): string => {
       const adjustedTransitions = transitions
         .map((t) => createTransition(t.property, t.duration, t.easing, t.delay))

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import { X } from 'lucide-react';
 import React from 'react';
 import { GlassButton } from '@/components/glass-button-refactored/glass-button';
@@ -8,15 +8,15 @@ import { GlassPortal } from '@/components/glass-portal/glass-portal';
 const meta = { title: 'Components/Glass Portal' }
   component: GlassPortal,
   parameters: { layout: 'centered' }
-    docs: { description: {
-        component: }
+    { 
+        component: 
           'A portal component that renders content outside the DOM hierarchy while maintaining glassmorphism styling. Perfect for modals, tooltips, and dropdown menus.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: { container: {
-      description: 'DOM element to render the portal into' }
+  argTypes: { 
+      description: 'DOM element to render the portal into' 
       control: false,
     },
     children: { description: 'Content to render in the portal' }
@@ -130,10 +130,8 @@ export const ModalExample: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Modal dialog implementation using portal' }
-      },
+  parameters: { 
+        story: 'Modal dialog implementation using portal' ,
     },
   },
 };
@@ -146,7 +144,7 @@ export const TooltipExample: Story = { render: () => { }
       y: 0,
     });
 
-    const showTooltip = (id: string, event: React.MouseEvent) => {
+    const showTooltip = (_id: string, event: React.MouseEvent) => {
       const rect = event.currentTarget.getBoundingClientRect();
       setTooltipPosition({ x: rect.left + rect.width / 2 }
         y: rect.top - 10,
@@ -198,7 +196,7 @@ export const TooltipExample: Story = { render: () => { }
                   left: `${tooltipPosition.x}px`,
                   top: `${tooltipPosition.y}px`,
                   transform: 'translate(-50%, -100%)',>
-                <div className="glass-effect fade-in zoom-in-95 animate-in rounded-lg px-3 py-2 text-sm">
+                <_div _className="glass-effect fade-in zoom-in-95 animate-in rounded-lg px-3 py-2 text-sm">
                   {tooltipVisible === 'save' && 'Save your changes'}
                   {tooltipVisible === 'publish' && 'Publish to production'}
                   {tooltipVisible === 'delete' && 'Delete permanently'}
@@ -211,10 +209,8 @@ export const TooltipExample: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Tooltips rendered via portal for proper positioning' }
-      },
+  parameters: { 
+        story: 'Tooltips rendered via portal for proper positioning' ,
     },
   },
 };
@@ -262,7 +258,7 @@ export const DropdownExample: Story = { render: () => { }
                 style={{
                   left: `${dropdownPosition.x}px`,
                   top: `${dropdownPosition.y}px`,>
-                <div className="glass-effect slide-in-from-top-2 min-w-[200px] animate-in rounded-lg p-2">
+                <_div _className="glass-effect slide-in-from-top-2 min-w-[200px] animate-in rounded-lg p-2">
                   {menuItems.map((item, index) => (
                     <button
                       type="button"
@@ -278,12 +274,12 @@ export const DropdownExample: Story = { render: () => { }
                 </div>
               </div>
               <div
-                className="fixed inset-0 z-[9998]" onClick={() => setDropdownOpen(false)}
+                className="fixed inset-0 z-[9998]" onClick=() => setDropdownOpen(false)
               />
             </GlassPortal>
           )}
-        </GlassCard>
-      </div>
+        </_GlassCard>
+      </_div>
     );
   },
   parameters: { docs: {
@@ -343,13 +339,11 @@ export const NestedPortals: Story = { render: () => { }
                     >
                       Close
                     </GlassButton>
-                  </div>
-
-                  {showInner && (
+                  </div>showInner && (
                     <GlassPortal>
                       <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
                         <div
-                          className="absolute inset-0 bg-black/30" onClick={() => setShowInner(false)}
+                          className="absolute inset-0 bg-black/30" onClick=() => setShowInner(false)
                         />
                         <GlassCard className="relative z-10 w-full max-w-sm bg-blue-500/10 p-6">
                           <h4 className="mb-4 font-bold text-lg">
@@ -368,7 +362,7 @@ export const NestedPortals: Story = { render: () => { }
                         </GlassCard>
                       </div>
                     </GlassPortal>
-                  )}
+                  )
                 </GlassCard>
               </div>
             </GlassPortal>
@@ -377,11 +371,8 @@ export const NestedPortals: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Demonstration of nested portals with proper z-index management' }
-      },
-    },
+  parameters: 
+        story: 'Demonstration of nested portals with proper z-index management' ,,
   },
 };
 

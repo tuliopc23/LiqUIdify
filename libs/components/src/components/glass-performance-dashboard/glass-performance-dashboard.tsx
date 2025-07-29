@@ -48,7 +48,7 @@ export function GlassPerformanceDashboard({
 }: GlassPerformanceDashboardProps) {
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   const [metrics, setMetrics] = useState<Map<string, any>>(new Map());
-  const [componentMetrics, setComponentMetrics] = useState<any[]>([]);
+  const [componentMetrics, setComponentMetrics] = useState<Array<any>>([]);
   const { fps, memory } = useRealtimePerformance();
 
   useEffect(() => {

@@ -141,7 +141,7 @@ export function matchesBreakpoint(
       return width < breakpointValue;
     }
     case 'only': {
-      const breakpointKeys = Object.keys(BREAKPOINTS) as BreakpointKey[];
+      const breakpointKeys = Object.keys(BREAKPOINTS) as Array<BreakpointKey>;
       const currentIndex = breakpointKeys.indexOf(breakpoint);
       const nextBreakpoint = breakpointKeys[currentIndex + 1];
 

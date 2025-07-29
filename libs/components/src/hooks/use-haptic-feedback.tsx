@@ -1,4 +1,3 @@
-
 /**
  * useHapticFeedback - Advanced haptic feedback hook
  * Provides vibration patterns, audio feedback, and visual feedback coordination

@@ -78,10 +78,13 @@ export interface GestureAnimation {
 // Export basic animation utilities
 export function createGlassAnimation() {
   return {
-    animate: (keyframes: Keyframe[], options: KeyframeAnimationOptions) => {
+    animate: (
+      _keyframes: Array<Keyframe>,
+      _options: KeyframeAnimationOptions
+    ) => {
       // Basic animation utility
       return null;
-    }
+    },
   };
 }
 
@@ -94,12 +97,15 @@ export class GlassAnimation {
     this.element = element;
   }
 
-  animate(keyframes: Keyframe[], options: KeyframeAnimationOptions): Animation | null {
+  animate(
+    keyframes: Array<Keyframe>,
+    options: KeyframeAnimationOptions
+  ): Animation | null {
     if (!this.element) return null;
-    
+
     this.element.style.willChange = 'transform, opacity, filter';
     this.animation = this.element.animate(keyframes, options);
-    
+
     this.animation.onfinish = () => {
       this.element.style.willChange = 'auto';
     };

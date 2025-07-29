@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import React from 'react';
 import { GlassButton } from '@/components/glass-button-refactored/glass-button';
 import { GlassCard } from '@/components/glass-card-refactored/glass-card';
@@ -7,16 +7,15 @@ import { GlassFocusDemo } from '@/components/glass-focus-demo/glass-focus-demo';
 const meta = { title: 'Components/Glass Focus Demo' }
   component: GlassFocusDemo,
   parameters: { layout: 'centered' }
-    docs: { description: {
-        component: }
+    { 
+        component: 
           'An interactive demonstration of focus management patterns, keyboard navigation, and focus indicators with glassmorphism styling.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: { className: {
-      description: 'Additional CSS classes' }
-      control: { type: 'text' },
+  argTypes: { 
+      description: 'Additional CSS classes' type: 'text' ,
     },
   },
 } satisfies Meta<typeof GlassFocusDemo>;
@@ -110,10 +109,8 @@ export const KeyboardNavigationGuide: Story = { render: () => (
       <GlassFocusDemo />
     </div>
   ) }
-  parameters: { docs: {
-      description: {
-        story: 'Complete keyboard navigation guide with the focus demo' }
-      },
+  { 
+        story: 'Complete keyboard navigation guide with the focus demo' ,
     },
   },
 };
@@ -227,21 +224,19 @@ export const FocusPatterns: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Different focus indicator styles and patterns demonstration' }
-      },
+  parameters: { 
+        story: 'Different focus indicator styles and patterns demonstration' ,
     },
   },
 };
 
 export const FocusTraversalDemo: Story = { render: () => { }
-    const [focusPath, setFocusPath] = React.useState<string[]>([]);
+    const [focusPath, setFocusPath] = React.useState<Array<string>>([]);
     const [currentFocus, setCurrentFocus] = React.useState<string>('');
 
     const handleFocus = (element: string) => {
       setCurrentFocus(element);
-      setFocusPath((prev) => [...prev, element].slice(-5)); {/* Keep last 5  */}
+      setFocusPath((prev) => [...prev, element].slice(-5)); 
     };
 
     return (
@@ -345,11 +340,9 @@ export const FocusTraversalDemo: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
+  parameters: { 
         story:
-          'Track and visualize focus movement through interactive elements' }
-      },
+          'Track and visualize focus movement through interactive elements' ,
     },
   },
 };
@@ -463,7 +456,6 @@ export const FocusWithinDemo: Story = { render: () => { }
           }`}
           onFocus={() => setHasFocusWithin(true)}
           onBlur={(e) => {
-            {/* Check if focus is still within this container  */}
             if (!e.currentTarget.contains(e.relatedTarget)) {
               setHasFocusWithin(false);
             }
@@ -487,13 +479,11 @@ export const FocusWithinDemo: Story = { render: () => { }
             <GlassButton type="button" variant="primary" fullWidth>
               Send Message
             </GlassButton>
-          </form>
-
-          {hasFocusWithin && (
+          </form>hasFocusWithin && (
             <p className="fade-in mt-4 animate-in text-blue-500 text-sm">
               Form has focus - ready for input!
             </p>
-          )}
+          )
         </div>
       </div>
     );

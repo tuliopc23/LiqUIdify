@@ -7,18 +7,21 @@ import { cn } from '@/core/utils/classname';
 import { GlassButton } from '../glass-button-refactored';
 import { GlassCard } from '../glass-card-refactored';
 
-interface AccessibilityViolation { id: string;
-  description: string; }
+interface AccessibilityViolation {
+  id: string;
+  description: string;
 }
 
-interface AccessibilityReport { score: number;
+interface AccessibilityReport {
+  score: number;
   wcagLevel: string;
   violations: Array<AccessibilityViolation>;
-  warnings: Array<any>; }
+  warnings: Array<{ id: string; description: string }>;
 }
 
-interface ContrastResult { ratio: number;
-  passes: { }
+interface ContrastResult {
+  ratio: number;
+  passes: {
     aa: { normal: boolean; large: boolean };
     aaa: { normal: boolean; large: boolean };
   };
@@ -51,7 +54,8 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
     try {
       const report = await accessibilityManager.validateComponent(
         demoRef.current,
-        { name: 'GlassAccessibleDemo' }
+        {
+          name: 'GlassAccessibleDemo',
           type: 'demo',
           props: { className },
         }
@@ -71,7 +75,8 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
   };
 
   const checkContrast = () => {
-    const result = accessibilityManager.ensureContrast(fgColor, bgColor, { level: 'AA' }
+    const result = accessibilityManager.ensureContrast(fgColor, bgColor, {
+      level: 'AA',
       autoFix: true,
     });
     setContrastResult(result);
@@ -86,9 +91,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
     return () => {
       accessibilityManager.disableRealTimeMonitoring();
     };
-  },
-        []
-      );
+  }, []);
 
   return (
     <div ref={demoRef} className={cn('space-y-6', className)}>
@@ -111,9 +114,8 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
             </GlassButton>
 
             {report && (
-              <div
+              <section
                 className="mt-4 rounded-lg bg-white/10 p-4"
-                role="region"
                 aria-label="Accessibility validation results"
               >
                 <div className="grid grid-cols-2 gap-4">
@@ -161,8 +163,8 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                     <ul className="mt-2 space-y-2">
                       {report.violations.map(
-                        (violation: AccessibilityViolation, index: number) => (
-                          <li key={index} className="text-sm">
+                        (violation: AccessibilityViolation) => (
+                          <li key={violation.id} className="text-sm">
                             <strong>{violation.id}:</strong>{' '}
                             {violation.description}
                           </li>
@@ -171,7 +173,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
                     </ul>
                   </details>
                 )}
-              </div>
+              </section>
             )}
           </div>
         </section>
@@ -183,10 +185,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
           <div className="space-y-3">
             <div className="flex gap-4">
-              <label
-                htmlFor="foreground-color"
-                className="flex-1"
-              >
+              <label htmlFor="foreground-color" className="flex-1">
                 <span className="mb-1 block font-medium text-sm">
                   Foreground
                 </span>
@@ -201,10 +200,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
                 />
               </label>
 
-              <label
-                htmlFor="background-color"
-                className="flex-1"
-              >
+              <label htmlFor="background-color" className="flex-1">
                 <span className="mb-1 block font-medium text-sm">
                   Background
                 </span>
@@ -220,15 +216,13 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
               </label>
             </div>
 
-            <GlassButton type="button"
-              onClick={checkContrast}>
+            <GlassButton type="button" onClick={checkContrast}>
               Check Contrast
             </GlassButton>
 
             {contrastResult && (
-              <div
+              <section
                 className="mt-4 rounded-lg bg-white/10 p-4"
-                role="region"
                 aria-label="Contrast check results"
               >
                 <div className="space-y-2">
@@ -275,14 +269,17 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                       <span
                         className="ml-2 rounded px-2 py-1"
-                        style={{ backgroundColor: bgColor }
-                          color: contrastResult.suggestedForeground,>
+                        style={{
+                          backgroundColor: bgColor,
+                          color: contrastResult.suggestedForeground,
+                        }}
+                      >
                         {contrastResult.suggestedForeground}
                       </span>
                     </div>
                   )}
                 </div>
-              </div>
+              </section>
             )}
           </div>
         </section>

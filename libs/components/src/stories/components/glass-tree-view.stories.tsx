@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Columns, Database, Key, Settings, Table, Type } from 'lucide-react';
+import type { StoryObj } from '@storybook/react';
+import { Settings, } from 'lucide-react';
 import React from 'react';
 import { GlassButton } from '@/components/glass-button-refactored/glass-button';
 import { GlassCard } from '@/components/glass-card-refactored/glass-card';
@@ -11,15 +11,15 @@ import {
 const meta = { title: 'Components/Glass Tree View' }
   component: GlassTreeView,
   parameters: { layout: 'padded' }
-    docs: { description: {
-        component: }
+    { 
+        component: 
           'A hierarchical tree view component with glassmorphism styling. Supports nested structures, custom icons, selection states, and expand/collapse animations.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: { nodes: {
-      description: 'Tree nodes to display' }
+  argTypes: { 
+      description: 'Tree nodes to display' 
       control: false,
     },
     onNodeSelect: { description: 'Callback when a node is selected' }
@@ -29,16 +29,16 @@ const meta = { title: 'Components/Glass Tree View' }
       action: 'node toggled',
     },
     selectedNodeId: { description: 'ID of the selected node' }
-      control: { type: 'text' },
+      { type: 'text' },
     },
     expandedNodeIds: { description: 'IDs of expanded nodes' }
       control: false,
     },
     showIcons: { description: 'Show node icons' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     indentSize: { description: 'Indentation size in pixels' }
-      control: { type: 'number', min: 10, max: 40, step: 5 },
+      { type: 'number', min: 10, max: 40, step: 5 },
     },
   },
 } satisfies Meta<typeof GlassTreeView>;
@@ -115,10 +115,8 @@ export const WithSelection: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Tree view with selection state management' }
-      },
+  parameters: { 
+        story: 'Tree view with selection state management' ,
     },
   },
 };
@@ -210,7 +208,7 @@ export const DatabaseSchema: Story = { args: {
 };
 
 export const ControlledExpansion: Story = { render: () => { }
-    const [expandedNodeIds, setExpandedNodeIds] = React.useState<string[]>(
+    const [expandedNodeIds, setExpandedNodeIds] = React.useState<Array<string>>(
       ['src']
     );
 
@@ -230,14 +228,14 @@ export const ControlledExpansion: Story = { render: () => { }
             type="button"
             size="sm" onClick={() => {
               const allNodeIds: Array<string> = [];
-              const collectIds = (nodes: Array<TreeNode>) => {
+              const _collectIds = (nodes: Array<TreeNode>) => {
                 nodes.forEach((node) => {
                   if (node.children) {
                     allNodeIds.push(node.id);
-                    collectIds(node.children);
+                    _collectIds(node.children);
                   };
               };
-              collectIds(fileSystemNodes);
+              _collectIds(fileSystemNodes);
               setExpandedNodeIds(allNodeIds);>
             Expand All
           </GlassButton>
@@ -251,14 +249,14 @@ export const ControlledExpansion: Story = { render: () => { }
         </div>
 
         <GlassTreeView
-          nodes={fileSystemNodes}
-          expandedNodeIds={expandedNodeIds}
+          nodes=fileSystemNodes
+          expandedNodeIds=expandedNodeIds
           onNodeExpand={handleNodeExpand}
         />
       </div>
     );
   },
-  parameters: { docs: {
+  _parameters: { docs: {
       description: {
         story:
           'Controlled expansion state with expand/collapse all functionality' }

@@ -52,7 +52,7 @@ export class SSRErrorBoundary extends React.Component<
   { children: ReactNode; fallback?: ReactNode },
   { hasError: boolean; error: Error | null }
 > {
-  constructor(props: any) {
+  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
     super(props);
 
     this.state = { hasError: false, error: null };
@@ -708,15 +708,15 @@ export function useEvalError() {
 
 // SSR-Safe AggregateError Hook
 export function useAggregateError() {
-  const [aggregateErrorObject, setAggregateErrorObject] = useState<any | null>(
-    undefined
-  );
+  const [aggregateErrorObject, setAggregateErrorObject] = useState<
+    typeof AggregateError | null
+  >(null);
 
   useEffect(() => {
     setAggregateErrorObject(
       'undefined' !== typeof globalThis && 'AggregateError' in globalThis
-        ? (globalThis as unknown).AggregateError
-        : undefined
+        ? AggregateError
+        : null
     );
   }, []);
 
@@ -725,15 +725,15 @@ export function useAggregateError() {
 
 // SSR-Safe InternalError Hook
 export function useInternalError() {
-  const [internalErrorObject, setInternalErrorObject] = useState<any | null>(
-    undefined
-  );
+  const [internalErrorObject, setInternalErrorObject] =
+    useState<ErrorConstructor | null>(null);
 
   useEffect(() => {
     setInternalErrorObject(
       'undefined' !== typeof globalThis && 'InternalError' in globalThis
-        ? (globalThis as unknown).InternalError
-        : undefined
+        ? ((globalThis as Record<string, unknown>)
+            .InternalError as ErrorConstructor)
+        : null
     );
   }, []);
 

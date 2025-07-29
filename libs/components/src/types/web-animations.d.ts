@@ -118,16 +118,16 @@ declare global {
   interface PropertyIndexedKeyframes {
     [property: string]:
       | string
-      | string[]
+      | Array<string>
       | number
-      | number[]
+      | Array<number>
       | null
       | string
       | number
-      | null[];
-    offset?: number | number | null[];
-    easing?: string | string[];
-    composite?: CompositeOperation | CompositeOperation[];
+      | Array<null>;
+    offset?: number | number | Array<null>;
+    easing?: string | Array<string>;
+    composite?: CompositeOperation | Array<CompositeOperation>;
   }
 
   type AnimationReplaceState = 'active' | 'removed' | 'persisted';

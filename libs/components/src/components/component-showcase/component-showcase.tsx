@@ -193,47 +193,6 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
   const renderSection = () => {
     switch (activeSection) {
-      default: {
-        return (
-          <div>
-            {/* Hero Section */}
-
-            <div className="mb-12">
-              <div className="glass-effect mb-8 rounded-2xl p-8">
-                <h1 className="mb-4 font-bold text-4xl text-primary">
-                  Liquid Glass Component Library
-                </h1>
-
-                <p className="mb-6 text-secondary text-xl">
-                  A complete React component library with Apple-inspired design
-                  and liquid glass aesthetic. Features comprehensive light/dark
-                  mode support, smooth animations, and SwiftUI-like
-                  micro-interactions.
-                </p>
-
-                <div className="flex flex-wrap gap-4">
-                  <GlassButton
-                    type="button"
-                    variant="primary"
-                    leftIcon={<Download />}
-                  >
-                    Get Started
-                  </GlassButton>
-
-                  <GlassButton
-                    type="button"
-                    variant="secondary"
-                    leftIcon={<Github />}
-                  >
-                    View on GitHub
-                  </GlassButton>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      }
-
       case 'button': {
         return (
           <section className="mb-12">
@@ -554,7 +513,8 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                 <GlassButton
                   type="button"
                   variant="primary"
-                  className="flex-1" onClick={handleCloseModal}
+                  className="flex-1"
+                  onClick={handleCloseModal}
                 >
                   Confirm
                 </GlassButton>
@@ -562,7 +522,8 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                 <GlassButton
                   type="button"
                   variant="secondary"
-                  className="flex-1" onClick={handleCloseModal}
+                  className="flex-1"
+                  onClick={handleCloseModal}
                 >
                   Cancel
                 </GlassButton>
@@ -1080,14 +1041,16 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                   <div className="flex flex-wrap gap-4">
                     <GlassButton
                       type="button"
-                      variant="primary" onClick={handleShowSuccess}
+                      variant="primary"
+                      onClick={handleShowSuccess}
                     >
                       Show Success
                     </GlassButton>
 
                     <GlassButton
                       type="button"
-                      variant="secondary" onClick={handleShowError}
+                      variant="secondary"
+                      onClick={handleShowError}
                     >
                       Show Error
                     </GlassButton>
@@ -1381,7 +1344,49 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                 />
               </div>
             </div>
-          </section>        );
+          </section>
+        );
+      }
+
+      default: {
+        return (
+          <div>
+            {/* Hero Section */}
+
+            <div className="mb-12">
+              <div className="glass-effect mb-8 rounded-2xl p-8">
+                <h1 className="mb-4 font-bold text-4xl text-primary">
+                  Liquid Glass Component Library
+                </h1>
+
+                <p className="mb-6 text-secondary text-xl">
+                  A complete React component library with Apple-inspired design
+                  and liquid glass aesthetic. Features comprehensive light/dark
+                  mode support, smooth animations, and SwiftUI-like
+                  micro-interactions.
+                </p>
+
+                <div className="flex flex-wrap gap-4">
+                  <GlassButton
+                    type="button"
+                    variant="primary"
+                    leftIcon={<Download />}
+                  >
+                    Get Started
+                  </GlassButton>
+
+                  <GlassButton
+                    type="button"
+                    variant="secondary"
+                    leftIcon={<Github />}
+                  >
+                    View on GitHub
+                  </GlassButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
       }
     }
   };

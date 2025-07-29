@@ -246,9 +246,7 @@ export function useNetworkStatus(): {
   const [effectiveType, setEffectiveType] = useState<
     'slow-2g' | '2g' | '3g' | '4g' | undefined
   >(undefined);
-  const [saveData, setSaveData] = useState<boolean | undefined>(
-    undefined
-  );
+  const [saveData, setSaveData] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     if (!isClient) {
@@ -334,9 +332,7 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
   callback?: (entry: IntersectionObserverEntry) => void
 ): [(node: T | null) => void, boolean, IntersectionObserverEntry | null] {
   const isClient = useIsClient();
-  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(
-    null
-  );
+  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
   const ref = useRef<T | null>(null);

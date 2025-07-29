@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import React from 'react';
 import { GlassButton } from '@/components/glass-button-refactored/glass-button';
 import { GlassCard } from '@/components/glass-card-refactored/glass-card';
@@ -9,28 +9,27 @@ import { GlassInput } from '@/components/glass-input/glass-input';
 const meta = { title: 'Components/Glass Focus Trap' }
   component: GlassFocusTrap,
   parameters: { layout: 'centered' }
-    docs: { description: {
-        component: }
+    { 
+        component: 
           'A focus trap component that constrains keyboard navigation within a specific area. Essential for modals, dropdowns, and other overlay components to ensure accessibility.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: { active: {
-      description: 'Whether the focus trap is active' }
-      control: { type: 'boolean' },
+  argTypes: { 
+      description: 'Whether the focus trap is active' type: 'boolean' ,
     },
     returnFocus: { description: 'Return focus to the trigger element when deactivated' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     initialFocus: { description: 'Selector or element to focus when activated' }
       control: false,
     },
     allowOutsideClick: { description: 'Allow clicks outside the trap' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     escapeDeactivates: { description: 'Deactivate trap when Escape key is pressed' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     onDeactivate: { description: 'Callback when focus trap is deactivated' }
       action: 'deactivated',
@@ -159,11 +158,8 @@ export const ModalExample: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Focus trap used in a modal dialog pattern' }
-      },
-    },
+  parameters: 
+        story: 'Focus trap used in a modal dialog pattern' ,,
   },
 };
 
@@ -363,7 +359,7 @@ export const AccessibilityDemo: Story = { render: () => { }
                     id="test-input"
                     placeholder="Type something..."
                     aria-required="true"
-                    onFocus={() => setAnnouncement('Text input focused')}
+                    onFocus=() => setAnnouncement('Text input focused')
                   />
                 </div>
 
@@ -371,16 +367,14 @@ export const AccessibilityDemo: Story = { render: () => { }
                   <legend className="mb-2 font-medium text-sm">Options</legend>
                   <div className="space-y-2">
                     <GlassCheckbox
-                      onFocus={() =>
+                      onFocus=() =>
                         setAnnouncement('Option 1 checkbox focused')
-                      }
                     >
                       Option 1
                     </GlassCheckbox>
                     <GlassCheckbox
-                      onFocus={() =>
+                      onFocus=() =>
                         setAnnouncement('Option 2 checkbox focused')
-                      }
                     >
                       Option 2
                     </GlassCheckbox>
@@ -403,17 +397,15 @@ export const AccessibilityDemo: Story = { render: () => { }
                     Submit
                   </GlassButton>
                 </div>
-              </div>
-
-              {announcement && (
+              </div>announcement && (
                 <div
                   role="status"
                   aria-live="polite"
                   className="mt-4 text-[var(--text-secondary)] text-sm"
                 >
-                  Screen reader: {announcement}
+                  Screen reader: announcement
                 </div>
-              )}
+              )
             </GlassCard>
           </GlassFocusTrap>
         )}

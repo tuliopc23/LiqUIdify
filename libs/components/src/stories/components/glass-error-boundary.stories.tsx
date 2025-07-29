@@ -1,45 +1,44 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import React from 'react';
 import { GlassButton } from '@/components/glass-button-refactored/glass-button';
 import { GlassCard } from '@/components/glass-card-refactored/glass-card';
 import {
   GlassAsyncErrorBoundary,
   GlassErrorBoundary,
-  useErrorHandler,
 } from '@/components/glass-error-boundary/glass-error-boundary';
 
 const meta = { title: 'Components/Glass Error Boundary' }
   component: GlassErrorBoundary,
   parameters: { layout: 'padded' }
-    docs: { description: {
-        component: }
+    { 
+        component: 
           'An error boundary component that gracefully handles JavaScript errors in React components. Features glassmorphism design, automatic recovery, and accessibility support.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: { fallback: {
-      description: 'Custom fallback UI renderer function' }
+  argTypes: { 
+      description: 'Custom fallback UI renderer function' 
       control: false,
     },
     onError: { description: 'Callback when an error is caught' }
       action: 'error caught',
     },
     resetKeys: { description: 'Keys that trigger error boundary reset when changed' }
-      control: { type: 'object' },
+      { type: 'object' },
     },
     resetOnPropsChange: { description: 'Reset error boundary when props change' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     isolate: { description: 'Isolate children in a container' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     level: { description: 'Error boundary level for UI styling' }
-      control: { type: 'select' },
+      { type: 'select' },
       options: ['page', 'section', 'component'],
     },
     trackErrors: { description: 'Track errors in production' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
   },
 } satisfies Meta<typeof GlassErrorBoundary>;
@@ -76,7 +75,7 @@ const AsyncBuggyComponent: React.FC = () => {
 
 export const Default: Story = { render: () => { }
     const [shouldCrash, setShouldCrash] = React.useState(false);
-    const [resetKey, setResetKey] = React.useState(0);
+    const [_resetKey, setResetKey] = React.useState(0);
 
     return (
       <div className="space-y-4">
@@ -107,20 +106,19 @@ export const Default: Story = { render: () => { }
           </div>
 
           <GlassErrorBoundary
-            resetKeys={[resetKey]}
+            resetKeys=[resetKey]
             level="component"
-            onError={(error, errorInfo) => {
+            onError=(_error, _errorInfo) => {
               console.log('Error caught:', error);
               console.log('Error info:', errorInfo);>
-            <BuggyComponent shouldCrash={shouldCrash} />
+            <BuggyComponent shouldCrash=shouldCrash/>
           </GlassErrorBoundary>
         </GlassCard>
       </div>
     );
-  },
-};
+  },;
 
-export const CustomFallback: Story = { render: () => { }
+export const _CustomFallback: Story = { render: () => { }
     const [shouldCrash, setShouldCrash] = React.useState(false);
 
     return (
@@ -161,11 +159,8 @@ export const CustomFallback: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Error boundary with custom fallback UI component' }
-      },
-    },
+  parameters: 
+        story: 'Error boundary with custom fallback UI component' ,,
   },
 };
 

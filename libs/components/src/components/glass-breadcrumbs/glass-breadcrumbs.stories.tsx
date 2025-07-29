@@ -375,7 +375,7 @@ export const RealWorldExamples: Story = {
 // Interactive demo
 export const InteractiveDemo: Story = {
   render: () => {
-    const [path, setPath] = React.useState<string[]>(['Home']);
+    const [path, setPath] = React.useState<Array<string>>(['Home']);
 
     const items: Array<BreadcrumbItem> = path.map((label, index) => ({
       label,

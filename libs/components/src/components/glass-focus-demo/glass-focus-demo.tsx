@@ -13,16 +13,16 @@ export const GlassFocusDemo: React.FC = () => {
   const [trapActive, setTrapActive] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
   const menuRef = useRef<HTMLDivElement>(null);
-  const menuItemReferences = useRef<HTMLButtonElement | null[]>([]);
+  const menuItemReferences = useRef<HTMLButtonElement | Array<null>>([]);
 
-  {/* Setup roving tabindex for menu  */}
+  // Setup roving tabindex for menu
   const menuItems = menuItemReferences.current.filter(
     Boolean
-  ) as HTMLElement[];
-  const roving = useRovingTabindex({ items: menuItems }
+  ) as Array<HTMLElement>;
+  const roving = useRovingTabindex({
+    items: menuItems,
     orientation: 'vertical',
     loop: true,
-
     onActiveChange: (_, index) => setSelectedMenuItem(index),
   });
 
@@ -31,7 +31,8 @@ export const GlassFocusDemo: React.FC = () => {
     { icon: '👤', label: 'Profile', action: 'View your profile' },
     { icon: '⚙️', label: 'Settings', action: 'Adjust preferences' },
     { icon: '📧', label: 'Messages', action: 'Check messages', badge: 3 },
-    { icon: '🔔' }
+    {
+      icon: '🔔',
       label: 'Notifications',
       action: 'View notifications',
       badge: 7,
@@ -42,11 +43,10 @@ export const GlassFocusDemo: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Skip Navigation Demo  */}
-
+      {/* Skip Navigation Demo */}
       <GlassSkipNavigation autoGenerate visibleOnFocus position="top" />
 
-      {/* Header for skip nav target  */}
+      {/* Header for skip nav target */}
 
       <header className="mb-8">
         <h1 id="main-heading" className="mb-4 font-bold text-3xl">
@@ -65,7 +65,7 @@ export const GlassFocusDemo: React.FC = () => {
         <div className="flex gap-4">
           <button
             type="button"
-              onClick={() => {
+            onClick={() => {}}
             className="cursor-pointer border-none bg-transparent text-blue-500 hover:underline"
           >
             Link 1
@@ -73,7 +73,7 @@ export const GlassFocusDemo: React.FC = () => {
 
           <button
             type="button"
-              onClick={() => {
+            onClick={() => {}}
             className="cursor-pointer border-none bg-transparent text-blue-500 hover:underline"
           >
             Link 2
@@ -81,7 +81,7 @@ export const GlassFocusDemo: React.FC = () => {
 
           <button
             type="button"
-              onClick={() => {
+            onClick={() => {}}
             className="cursor-pointer border-none bg-transparent text-blue-500 hover:underline"
           >
             Link 3
@@ -169,20 +169,19 @@ export const GlassFocusDemo: React.FC = () => {
                     <div className="flex justify-end gap-3">
                       <GlassButton
                         type="button"
-                        variant="ghost" onClick={() => setTrapActive(false)}
+                        variant="ghost"
+                        onClick={() => setTrapActive(false)}
                       >
                         Cancel
                       </GlassButton>
 
                       <GlassButton
                         type="button"
-              onClick={() => {
-                          {/* Form submission handled  */}
+                        onClick={() => {
+                          // Form submission handled
                           setTrapActive(false);
-                        } onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => {
-                          {/* Form submission handled  */}
-                          setTrapActive(false);
-                        )(e);>
+                        }}
+                      >
                         Submit
                       </GlassButton>
                     </div>
@@ -220,6 +219,7 @@ export const GlassFocusDemo: React.FC = () => {
                     key={option.label}
                     ref={(element) => {
                       menuItemReferences.current[index] = element;
+                    }}
                     role="menuitem"
                     {...roving.getRovingProps(index)}
                     onClick={() => option.action?.()}
@@ -272,7 +272,7 @@ export const GlassFocusDemo: React.FC = () => {
                     type="button"
                     key={tool.label}
                     aria-label={tool.label}
-                    onClick={() => {
+                    onClick={() => {}}
                     className={cn(
                       'flex h-10 w-10 items-center justify-center rounded',
                       'hover:bg-gray-100 dark:hover:bg-gray-800',

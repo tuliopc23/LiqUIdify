@@ -440,7 +440,9 @@ export const FileTypeExamples: Story = {
 // Upload states and progress
 export const UploadStates: Story = {
   render: () => {
-    const [_uploadingFiles, setUploadingFiles] = useState<FileUploadItem[]>([]);
+    const [_uploadingFiles, setUploadingFiles] = useState<
+      Array<FileUploadItem>
+    >([]);
 
     const simulateUpload = async (_files: Array<File>) => {
       // Simulate upload progress
@@ -504,9 +506,13 @@ export const UploadStates: Story = {
 // Real-world examples
 export const RealWorldExamples: Story = {
   render: () => {
-    const [profileFiles, setProfileFiles] = useState<FileUploadItem[]>([]);
-    const [portfolioFiles, setPortfolioFiles] = useState<FileUploadItem[]>([]);
-    const [_documentFiles, setDocumentFiles] = useState<FileUploadItem[]>([]);
+    const [profileFiles, setProfileFiles] = useState<Array<FileUploadItem>>([]);
+    const [portfolioFiles, setPortfolioFiles] = useState<Array<FileUploadItem>>(
+      []
+    );
+    const [_documentFiles, setDocumentFiles] = useState<Array<FileUploadItem>>(
+      []
+    );
 
     return (
       <div className="space-y-12">
@@ -653,7 +659,7 @@ export const RealWorldExamples: Story = {
 // Accessibility showcase
 export const AccessibilityShowcase: Story = {
   render: () => {
-    const [files, setFiles] = useState<FileUploadItem[]>([]);
+    const [files, setFiles] = useState<Array<FileUploadItem>>([]);
 
     return (
       <div className="space-y-6">

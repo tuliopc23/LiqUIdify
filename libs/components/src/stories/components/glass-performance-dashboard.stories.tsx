@@ -310,13 +310,13 @@ export const ResponsiveGrid: Story = {
 export const AlertsAndThresholds: Story = {
   render: () => {
     const [alerts, setAlerts] = React.useState<
-      {
+      Array<{
         id: number;
         metric: string;
         value: number;
         threshold: number;
         severity: 'warning' | 'critical';
-      }[]
+      }>
     >([]);
 
     React.useEffect(() => {

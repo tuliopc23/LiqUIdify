@@ -20,7 +20,7 @@ export interface TreeNode { id: string;
 export interface GlassTreeViewProps
   extends React.HTMLAttributes<HTMLDivElement> { nodes: Array<TreeNode>;
   onNodeSelect?: (node: TreeNode) => void; }
-  onNodeExpand?: (node: TreeNode, expanded: boolean) => void;
+  onNodeExpand?: (_node: TreeNode, _expanded: boolean) => void;
   selectedNodeId?: string;
   expandedNodeIds?: Array<string>;
   showIcons?: boolean;
@@ -42,16 +42,16 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
     Set<string>
   >(() => {
     const initial = new Set<string>();
-    const collectDefaultExpanded = (nodes: Array<TreeNode>) => {
+    const _collectDefaultExpanded = (nodes: Array<TreeNode>) => {
       nodes.forEach((node) => {
         if (node.defaultExpanded) {
           initial.add(node.id);
         }
         if (node.children) {
-          collectDefaultExpanded(node.children);
+          _collectDefaultExpanded(node.children);
         };
     };
-    collectDefaultExpanded(nodes);
+    _collectDefaultExpanded(nodes);
     return initial;
   });
 
@@ -121,13 +121,13 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
           aria-selected={isSelected}
         >
           {hasChildren && (
-            <span className="text-[var(--text-secondary)]">
+            <_span _className="text-[var(--text-secondary)]">
               {isExpanded ? (
                 <ChevronDown className="h-4 w-4" />
               ) : (
                 <ChevronRight className="h-4 w-4" />
               )}
-            </span>
+            </_span>
           )}
 
           {showIcons && (

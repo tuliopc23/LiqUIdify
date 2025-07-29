@@ -1,4 +1,3 @@
-
 // External dependencies
 import { createContext, useContext, useEffect, useState } from 'react';
 

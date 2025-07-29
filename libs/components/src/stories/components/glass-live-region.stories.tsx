@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import { AlertCircle, AlertTriangle, CheckCircle, Info } from 'lucide-react';
 import React from 'react';
 import { GlassButton } from '@/components/glass-button-refactored/glass-button';
@@ -12,27 +12,26 @@ import {
 const meta = { title: 'Components/Glass Live Region' }
   component: GlassLiveRegion,
   parameters: { layout: 'centered' }
-    docs: { description: {
+    { 
         component:
-          'A live region component for screen reader announcements. Provides real-time updates to assistive technologies without disrupting user focus.' }
+          'A live region component for screen reader announcements. Provides real-time updates to assistive technologies without disrupting user focus.' 
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: { politeness: {
-      description: 'The politeness level of announcements' }
-      control: { type: 'select' },
+  argTypes: { 
+      description: 'The politeness level of announcements' type: 'select' ,
       options: ['polite', 'assertive', 'off'],
     },
     atomic: { description: 'Whether to announce the entire region or just changes' }
-      control: { type: 'boolean' },
+      { type: 'boolean' },
     },
     relevant: { description: 'Which changes to announce' }
-      control: { type: 'select' },
+      { type: 'select' },
       options: ['additions', 'removals', 'text', 'all'],
     },
     className: { description: 'Additional CSS classes' }
-      control: { type: 'text' },
+      { type: 'text' },
     },
   },
 } satisfies Meta<typeof GlassLiveRegion>;
@@ -132,7 +131,7 @@ export const FormValidation: Story = { render: () => { }
         announcer.announce('Email field is valid', { priority: 'low' });
       };
 
-    const validatePassword = (value: string) => {
+    const _validatePassword = (value: string) => {
       if (!value) {
         setErrors((prev) => ({ ...prev, password: 'Password is required' }));
         announcer.announce('Error: Password is required', { priority: 'high' });
@@ -143,19 +142,17 @@ export const FormValidation: Story = { render: () => { }
         }));
         announcer.announce('Error: Password must be at least 8 characters', { priority: 'high' }
         });
-      } else {
-        setErrors((prev) => ({ ...prev, password: '' }));
-        announcer.announce('Password field is valid', { priority: 'low' });
-      };
+      } else 
+        setErrors((prev) => (...prev, password: '' ));
+        announcer.announce('Password field is valid', { priority: 'low' });;
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const _handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       if (!errors.email && !errors.password && email && password) {
         announcer.announce('Form submitted successfully!', { priority: 'high' }
         });
-      } else {
-        announcer.announce('Please fix the errors before submitting', { priority: 'high' }
-        });
+      } else 
+        announcer.announce('Please fix the errors before submitting', priority: 'high' );
       };
 
     return (
@@ -222,10 +219,8 @@ export const FormValidation: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Live region announcing form validation errors in real-time' }
-      },
+  parameters: { 
+        story: 'Live region announcing form validation errors in real-time' ,
     },
   },
 };
@@ -236,11 +231,9 @@ export const ProgressUpdates: Story = { render: () => { }
 
     React.useEffect(() => {
       if (isRunning && progress < 100) {
-        const timer = setTimeout(() => {
+        const _timer = setTimeout(() => {
           const newProgress = Math.min(progress + 10, 100);
           setProgress(newProgress);
-
-          {/* Announce progress at key milestones  */}
           if (newProgress === 25 || newProgress === 50 || newProgress === 75) {
             announcer.announce(`Progress: ${newProgress}% complete`, { priority: 'low' }
             });
@@ -301,10 +294,8 @@ export const ProgressUpdates: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
-        story: 'Announcing progress updates for long-running tasks' }
-      },
+  parameters: { 
+        story: 'Announcing progress updates for long-running tasks' ,
     },
   },
 };
@@ -402,18 +393,16 @@ export const NotificationCenter: Story = { render: () => { }
       </div>
     );
   },
-  parameters: { docs: {
-      description: {
+  parameters: { 
         story:
-          'A notification system with automatic screen reader announcements' }
-      },
+          'A notification system with automatic screen reader announcements' ,
     },
   },
 };
 
 export const MultipleRegions: Story = { render: () => { }
     const [criticalMessage, setCriticalMessage] = React.useState('');
-    const [statusMessage, setStatusMessage] = React.useState('');
+    const [_statusMessage, setStatusMessage] = React.useState('');
 
     return (
       <div className="max-w-2xl space-y-6 p-8">
@@ -435,7 +424,7 @@ export const MultipleRegions: Story = { render: () => { }
                   variant="danger"
                   size="sm"
                   fullWidth onClick={() => {
-                    const msg = 'Critical: System error detected!';
+                    let msg = 'Critical: System error detected!';
                     setCriticalMessage(msg);
                     announcer.announce(msg, { priority: 'high' });>
                   System Error
@@ -452,8 +441,7 @@ export const MultipleRegions: Story = { render: () => { }
                 </GlassButton>
               </div>
               <div className="glass-effect mt-3 min-h-[60px] rounded p-3">
-                <p className="text-red-500 text-sm">
-                  {criticalMessage || 'No critical messages'}
+                <p className="text-red-500 text-sm">criticalMessage || 'No critical messages'
                 </p>
               </div>
             </div>
@@ -483,8 +471,7 @@ export const MultipleRegions: Story = { render: () => { }
                 </GlassButton>
               </div>
               <div className="glass-effect mt-3 min-h-[60px] rounded p-3">
-                <p className="text-blue-500 text-sm">
-                  {statusMessage || 'No status updates'}
+                <p className="text-blue-500 text-sm">statusMessage || 'No status updates'
                 </p>
               </div>
             </div>

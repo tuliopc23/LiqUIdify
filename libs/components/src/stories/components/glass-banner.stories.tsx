@@ -365,7 +365,7 @@ export const FixedPosition: Story = {
 export const AnimatedAppearance: Story = {
   render: () => {
     const [banners, setBanners] = React.useState<
-      { id: number; message: string }[]
+      Array<{ id: number; message: string }>
     >([]);
     const nextId = React.useRef(1);
 

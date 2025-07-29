@@ -310,7 +310,7 @@ export class PerformanceMonitor {
       // Use Resource Timing API to get bundle size
       const resources = performance.getEntriesByType(
         'resource'
-      ) as PerformanceResourceTiming[];
+      ) as Array<PerformanceResourceTiming>;
       const bundle = resources.find((resource) =>
         resource.name.includes(bundleName)
       );
