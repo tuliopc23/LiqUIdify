@@ -113,7 +113,9 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
       key: 'category' as const,
       header: 'Category',
 
-      render: (value: unknown) => <span className="text-secondary">{String(value)}</span>,
+      render: (value: unknown) => (
+        <span className="text-secondary">{String(value)}</span>
+      ),
     },
     {
       key: 'status' as const,
@@ -128,7 +130,9 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
       key: 'usage' as const,
       header: 'Usage',
 
-      render: (value: unknown) => <span className="text-primary">{String(value)}</span>,
+      render: (value: unknown) => (
+        <span className="text-primary">{String(value)}</span>
+      ),
     },
   ];
 

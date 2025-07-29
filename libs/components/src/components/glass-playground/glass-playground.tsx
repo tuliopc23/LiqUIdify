@@ -43,7 +43,8 @@ const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
     </p>
   </div>
 );
-const LiveError = ({ className, ...props }: Record<string, unknown>) => undefined;
+const LiveError = ({ className, ...props }: Record<string, unknown>) =>
+  undefined;
 
 export interface PlaygroundProps {
   code: string;

@@ -235,12 +235,15 @@ export const ErrorAnalyticsDashboard: React.FC<
 
   // Component error breakdown
   const componentErrorStats: Array<ComponentErrorStats> = useMemo(() => {
-    const componentStats: Record<string, {
-      componentName: string;
-      errorCount: number;
-      userImpact: number;
-      errorTypes: Set<string>;
-    }> = {};
+    const componentStats: Record<
+      string,
+      {
+        componentName: string;
+        errorCount: number;
+        userImpact: number;
+        errorTypes: Set<string>;
+      }
+    > = {};
 
     for (const error of filteredErrorData) {
       if (!componentStats[error.component]) {

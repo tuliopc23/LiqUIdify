@@ -586,7 +586,9 @@ class LiqUIdifySentryIntegration {
   /**
    * Sanitize object by removing sensitive keys
    */
-  private sanitizeObject(object: Record<string, unknown>): Record<string, unknown> {
+  private sanitizeObject(
+    object: Record<string, unknown>
+  ): Record<string, unknown> {
     const sensitiveKeys = [
       'password',
       'token',

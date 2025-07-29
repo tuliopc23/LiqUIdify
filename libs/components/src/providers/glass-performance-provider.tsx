@@ -17,9 +17,7 @@ interface PerformanceContextValue {
   generateReport: () => ReturnType<PerformanceMonitor['generateReport']> | null;
 }
 
-const PerformanceContext = createContext<PerformanceContextValue | null>(
-  null
-);
+const PerformanceContext = createContext<PerformanceContextValue | null>(null);
 
 export interface GlassPerformanceProviderProps {
   children: ReactNode;
@@ -44,9 +42,7 @@ export function GlassPerformanceProvider({
   onMetricUpdate,
   onPerformanceIssue,
 }: GlassPerformanceProviderProps) {
-  const [monitor, setMonitor] = useState<PerformanceMonitor | null>(
-    null
-  );
+  const [monitor, setMonitor] = useState<PerformanceMonitor | null>(null);
   const [metrics, setMetrics] = useState<PerformanceMetrics>({});
   const [isMonitoring, setIsMonitoring] = useState(enableAutoMonitoring);
 

@@ -23,38 +23,46 @@ let unusedImportFixes = 0;
 
 for (const sourceFile of project.getSourceFiles()) {
   const imports = sourceFile.getImportDeclarations();
-  
+
   for (const importDecl of imports) {
     const namedImports = importDecl.getNamedImports();
     const unusedImports: string[] = [];
-    
+
     for (const namedImport of namedImports) {
       const identifier = namedImport.getName();
-      const references = sourceFile.getDescendantsOfKind(SyntaxKind.Identifier)
-        .filter(id => id.getText() === identifier && id !== namedImport.getNameNode());
-      
+      const references = sourceFile
+        .getDescendantsOfKind(SyntaxKind.Identifier)
+        .filter(
+          (id) =>
+            id.getText() === identifier && id !== namedImport.getNameNode()
+        );
+
       if (references.length === 0) {
         unusedImports.push(identifier);
         unusedImportFixes++;
       }
     }
-    
+
     // Remove unused imports
     if (unusedImports.length > 0) {
-      const remainingImports = namedImports.filter(ni => !unusedImports.includes(ni.getName()));
-      
+      const remainingImports = namedImports.filter(
+        (ni) => !unusedImports.includes(ni.getName())
+      );
+
       if (remainingImports.length === 0) {
         // Remove entire import if no named imports remain
         importDecl.remove();
       } else {
         // Keep only used imports
         importDecl.removeNamedImports();
-        remainingImports.forEach(ni => {
+        remainingImports.forEach((ni) => {
           importDecl.addNamedImport(ni.getName());
         });
       }
-      
-      console.log(`  ✅ Removed unused imports: ${unusedImports.join(', ')} from ${sourceFile.getBaseName()}`);
+
+      console.log(
+        `  ✅ Removed unused imports: ${unusedImports.join(', ')} from ${sourceFile.getBaseName()}`
+      );
     }
   }
 }
@@ -69,14 +77,14 @@ let anyTypeFixes = 0;
 for (const sourceFile of project.getSourceFiles()) {
   // Fix 'any' keywords
   const anyNodes = sourceFile.getDescendantsOfKind(SyntaxKind.AnyKeyword);
-  
-  anyNodes.forEach(anyNode => {
+
+  anyNodes.forEach((anyNode) => {
     const parent = anyNode.getParent();
     if (!parent) return;
-    
+
     const context = getTypeContext(anyNode);
     let suggestedType = 'unknown';
-    
+
     // More sophisticated type inference
     if (context === 'parameter') {
       const param = parent as unknown;
@@ -87,14 +95,14 @@ for (const sourceFile of project.getSourceFiles()) {
       const propName = prop.getName?.() || '';
       suggestedType = inferReactPropType(propName);
     }
-    
+
     anyNode.replaceWithText(suggestedType);
     anyTypeFixes++;
   });
-  
+
   // Fix Record<string, any> -> Record<string, unknown>
   const recordTypes = sourceFile.getDescendantsOfKind(SyntaxKind.TypeReference);
-  recordTypes.forEach(typeRef => {
+  recordTypes.forEach((typeRef) => {
     const typeName = typeRef.getTypeName();
     if (Node.isIdentifier(typeName) && typeName.getText() === 'Record') {
       const typeArgs = typeRef.getTypeArguments();
@@ -114,14 +122,18 @@ console.log('🔄 Step 3: Fixing dangerous type assertions...');
 let assertionFixes = 0;
 
 for (const sourceFile of project.getSourceFiles()) {
-  const typeAssertions = sourceFile.getDescendantsOfKind(SyntaxKind.AsExpression);
-  
-  typeAssertions.forEach(assertion => {
+  const typeAssertions = sourceFile.getDescendantsOfKind(
+    SyntaxKind.AsExpression
+  );
+
+  typeAssertions.forEach((assertion) => {
     const typeText = assertion.getTypeNode().getText();
     if (typeText === 'any') {
       assertion.getTypeNode().replaceWithText('unknown');
       assertionFixes++;
-      console.log(`  ✅ Fixed 'as any' -> 'as unknown' in ${sourceFile.getBaseName()}`);
+      console.log(
+        `  ✅ Fixed 'as any' -> 'as unknown' in ${sourceFile.getBaseName()}`
+      );
     }
   });
 }
@@ -136,29 +148,33 @@ let paramTypeFixes = 0;
 for (const sourceFile of project.getSourceFiles()) {
   // Regular functions
   const functions = sourceFile.getFunctions();
-  functions.forEach(func => {
-    func.getParameters().forEach(param => {
+  functions.forEach((func) => {
+    func.getParameters().forEach((param) => {
       if (!param.getTypeNode() && !param.hasInitializer()) {
         const paramName = param.getName();
         const inferredType = inferParameterType(paramName);
-        
+
         if (inferredType !== 'unknown') {
           param.setType(inferredType);
           paramTypeFixes++;
-          console.log(`  ✅ Added type '${inferredType}' to parameter '${paramName}' in ${func.getName()}`);
+          console.log(
+            `  ✅ Added type '${inferredType}' to parameter '${paramName}' in ${func.getName()}`
+          );
         }
       }
     });
   });
-  
+
   // Arrow functions
-  const arrowFunctions = sourceFile.getDescendantsOfKind(SyntaxKind.ArrowFunction);
-  arrowFunctions.forEach(arrowFunc => {
-    arrowFunc.getParameters().forEach(param => {
+  const arrowFunctions = sourceFile.getDescendantsOfKind(
+    SyntaxKind.ArrowFunction
+  );
+  arrowFunctions.forEach((arrowFunc) => {
+    arrowFunc.getParameters().forEach((param) => {
       if (!param.getTypeNode() && !param.hasInitializer()) {
         const paramName = param.getName();
         const inferredType = inferParameterType(paramName);
-        
+
         if (inferredType !== 'unknown') {
           param.setType(inferredType);
           paramTypeFixes++;
@@ -177,14 +193,16 @@ let returnTypeFixes = 0;
 
 for (const sourceFile of project.getSourceFiles()) {
   const functions = sourceFile.getFunctions();
-  
-  functions.forEach(func => {
+
+  functions.forEach((func) => {
     if (!func.getReturnTypeNode() && func.getName() && func.isExported()) {
       const inferredReturnType = inferReturnType(func, sourceFile);
       if (inferredReturnType !== 'unknown') {
         func.setReturnType(inferredReturnType);
         returnTypeFixes++;
-        console.log(`  ✅ Added return type '${inferredReturnType}' to function '${func.getName()}'`);
+        console.log(
+          `  ✅ Added return type '${inferredReturnType}' to function '${func.getName()}'`
+        );
       }
     }
   });
@@ -199,23 +217,27 @@ let reactFixes = 0;
 
 for (const sourceFile of project.getSourceFiles()) {
   if (!sourceFile.getBaseName().includes('.tsx')) continue;
-  
+
   // Fix missing key props in mapped elements
   const jsxElements = sourceFile.getDescendantsOfKind(SyntaxKind.JsxElement);
-  const jsxSelfClosingElements = sourceFile.getDescendantsOfKind(SyntaxKind.JsxSelfClosingElement);
-  
-  [...jsxElements, ...jsxSelfClosingElements].forEach(element => {
+  const jsxSelfClosingElements = sourceFile.getDescendantsOfKind(
+    SyntaxKind.JsxSelfClosingElement
+  );
+
+  [...jsxElements, ...jsxSelfClosingElements].forEach((element) => {
     const parent = element.getParent();
-    
+
     // Check if this element is inside a map function
     if (isInsideMapFunction(element)) {
-      const hasKeyProp = element.getAttributes?.().some((attr: unknown) => 
-        attr.getName?.() === 'key'
-      );
-      
+      const hasKeyProp = element
+        .getAttributes?.()
+        .some((attr: unknown) => attr.getName?.() === 'key');
+
       if (!hasKeyProp) {
         // This is a potential issue but requires manual review
-        console.log(`  ⚠️  Missing key prop in mapped element at ${sourceFile.getBaseName()}:${element.getStartLineNumber()}`);
+        console.log(
+          `  ⚠️  Missing key prop in mapped element at ${sourceFile.getBaseName()}:${element.getStartLineNumber()}`
+        );
       }
     }
   });
@@ -230,9 +252,11 @@ let tsIgnoreFixes = 0;
 for (const sourceFile of project.getSourceFiles()) {
   const fullText = sourceFile.getFullText();
   const tsIgnoreMatches = fullText.match(/\/\/ @ts-ignore.*$/gm) || [];
-  
-  tsIgnoreMatches.forEach(match => {
-    console.log(`  ⚠️  Found @ts-ignore in ${sourceFile.getBaseName()}: ${match.trim()}`);
+
+  tsIgnoreMatches.forEach((match) => {
+    console.log(
+      `  ⚠️  Found @ts-ignore in ${sourceFile.getBaseName()}: ${match.trim()}`
+    );
     console.log(`     Consider fixing the underlying type issue instead`);
   });
 }
@@ -244,21 +268,28 @@ let cleanupFixes = 0;
 for (const sourceFile of project.getSourceFiles()) {
   // Remove empty interfaces
   const interfaces = sourceFile.getInterfaces();
-  interfaces.forEach(interfaceDecl => {
-    if (interfaceDecl.getProperties().length === 0 && interfaceDecl.getExtends().length === 0) {
-      console.log(`  ⚠️  Empty interface '${interfaceDecl.getName()}' in ${sourceFile.getBaseName()}`);
+  interfaces.forEach((interfaceDecl) => {
+    if (
+      interfaceDecl.getProperties().length === 0 &&
+      interfaceDecl.getExtends().length === 0
+    ) {
+      console.log(
+        `  ⚠️  Empty interface '${interfaceDecl.getName()}' in ${sourceFile.getBaseName()}`
+      );
       console.log(`     Consider removing or adding properties`);
     }
   });
-  
+
   // Remove duplicate type definitions
   const typeAliases = sourceFile.getTypeAliases();
   const typeNames = new Set<string>();
-  
-  typeAliases.forEach(typeAlias => {
+
+  typeAliases.forEach((typeAlias) => {
     const name = typeAlias.getName();
     if (typeNames.has(name)) {
-      console.log(`  ⚠️  Duplicate type alias '${name}' in ${sourceFile.getBaseName()}`);
+      console.log(
+        `  ⚠️  Duplicate type alias '${name}' in ${sourceFile.getBaseName()}`
+      );
     }
     typeNames.add(name);
   });
@@ -284,100 +315,113 @@ console.log('1. Review changes: git diff');
 console.log('2. Run type check: bun run type-check');
 console.log('3. Run linting: bun run lint');
 console.log('4. Test your application');
-console.log('5. Commit changes: git add . && git commit -m "fix: improve TypeScript types"');
+console.log(
+  '5. Commit changes: git add . && git commit -m "fix: improve TypeScript types"'
+);
 
 // Helper functions
 function getTypeContext(anyNode: Node): string {
   const parent = anyNode.getParent();
-  
+
   if (!parent) return 'unknown';
-  
+
   if (Node.isAsExpression(parent)) return 'assertion';
   if (Node.isParameter(parent)) return 'parameter';
-  if (Node.isPropertyDeclaration(parent) || Node.isPropertySignature(parent)) return 'property';
-  if (Node.isFunctionDeclaration(parent) || Node.isMethodDeclaration(parent)) return 'return';
+  if (Node.isPropertyDeclaration(parent) || Node.isPropertySignature(parent))
+    return 'property';
+  if (Node.isFunctionDeclaration(parent) || Node.isMethodDeclaration(parent))
+    return 'return';
   if (Node.isTypeAliasDeclaration(parent)) return 'alias';
-  
+
   return 'unknown';
 }
 
 function inferParameterType(paramName: string): string {
   const lowerName = paramName.toLowerCase();
-  
+
   // React event handlers
-  if (lowerName.includes('event') || lowerName === 'e') return 'React.SyntheticEvent';
+  if (lowerName.includes('event') || lowerName === 'e')
+    return 'React.SyntheticEvent';
   if (lowerName.includes('click')) return 'React.MouseEvent';
   if (lowerName.includes('change')) return 'React.ChangeEvent';
   if (lowerName.includes('key')) return 'React.KeyboardEvent';
-  
+
   // HTML elements
   if (lowerName.includes('element') || lowerName === 'el') return 'HTMLElement';
   if (lowerName.includes('ref')) return 'React.RefObject<HTMLElement>';
-  
+
   // Common React props
   if (lowerName.includes('children')) return 'React.ReactNode';
   if (lowerName.includes('classname')) return 'string';
   if (lowerName.includes('props')) return 'Record<string, unknown>';
-  
+
   // Functions
   if (lowerName.includes('callback') || lowerName === 'cb') return 'Function';
   if (lowerName.includes('handler')) return 'Function';
-  
+
   // Data types
-  if (lowerName.includes('config') || lowerName.includes('options')) return 'Record<string, unknown>';
+  if (lowerName.includes('config') || lowerName.includes('options'))
+    return 'Record<string, unknown>';
   if (lowerName.includes('id')) return 'string';
   if (lowerName.includes('index') || lowerName === 'i') return 'number';
-  if (lowerName.includes('count') || lowerName.includes('length')) return 'number';
-  if (lowerName.includes('name') || lowerName.includes('title')) return 'string';
-  if (lowerName.includes('enabled') || lowerName.includes('visible')) return 'boolean';
+  if (lowerName.includes('count') || lowerName.includes('length'))
+    return 'number';
+  if (lowerName.includes('name') || lowerName.includes('title'))
+    return 'string';
+  if (lowerName.includes('enabled') || lowerName.includes('visible'))
+    return 'boolean';
   if (lowerName.includes('error') || lowerName === 'err') return 'Error';
-  
+
   return 'unknown';
 }
 
 function inferReactPropType(propName: string): string {
   const lowerName = propName.toLowerCase();
-  
+
   if (lowerName === 'children') return 'React.ReactNode';
   if (lowerName === 'classname') return 'string';
   if (lowerName === 'style') return 'React.CSSProperties';
   if (lowerName.startsWith('on') && lowerName.length > 2) return 'Function';
   if (lowerName.includes('ref')) return 'React.RefObject<HTMLElement>';
-  
+
   return 'unknown';
 }
 
 function inferReturnType(func: unknown, sourceFile: unknown): string {
   const funcName = func.getName?.() || '';
-  
+
   // React components (PascalCase functions in .tsx files)
   if (sourceFile.getBaseName().includes('.tsx')) {
     if (funcName[0] && funcName[0] === funcName[0].toUpperCase()) {
       return 'React.ReactElement | null';
     }
   }
-  
+
   // React hooks
   if (funcName.startsWith('use') && funcName.length > 3) {
     return 'unknown'; // Hooks return various types
   }
-  
+
   // Boolean functions
-  if (funcName.startsWith('is') || funcName.startsWith('has') || funcName.startsWith('can')) {
+  if (
+    funcName.startsWith('is') ||
+    funcName.startsWith('has') ||
+    funcName.startsWith('can')
+  ) {
     return 'boolean';
   }
-  
+
   // Event handlers
   if (funcName.includes('Handler') || funcName.includes('Callback')) {
     return 'void';
   }
-  
+
   return 'void'; // Default for most functions
 }
 
 function isInsideMapFunction(node: Node): boolean {
   let current = node.getParent();
-  
+
   while (current) {
     if (Node.isCallExpression(current)) {
       const expression = current.getExpression();
@@ -390,6 +434,6 @@ function isInsideMapFunction(node: Node): boolean {
     }
     current = current.getParent();
   }
-  
+
   return false;
 }

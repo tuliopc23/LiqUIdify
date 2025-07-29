@@ -153,7 +153,10 @@ export const useLocalStorage = <T,>(
       }
     };
 
-    const cleanup = safeAddEventListener('storage', handleStorageChange as unknown);
+    const cleanup = safeAddEventListener(
+      'storage',
+      handleStorageChange as unknown
+    );
     return cleanup;
   }, [key]);
 

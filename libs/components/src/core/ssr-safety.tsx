@@ -60,9 +60,7 @@ export function SSRSafe({
   const isClient = useIsClient();
 
   if (!isClient) {
-    return fallback ? (
-      <Component {...props}>{fallback}</Component>
-    ) : undefined;
+    return fallback ? <Component {...props}>{fallback}</Component> : undefined;
   }
 
   return <Component {...props}>{children}</Component>;

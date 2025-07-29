@@ -173,7 +173,9 @@ export class PerformanceMonitor {
 
           if (
             !firstSessionEntry ||
-            1000 > layoutShiftEntry.startTime - (lastSessionEntry as LayoutShiftEntry).startTime
+            1000 >
+              layoutShiftEntry.startTime -
+                (lastSessionEntry as LayoutShiftEntry).startTime
           ) {
             clsEntries.push(layoutShiftEntry);
             clsValue += layoutShiftEntry.value;
@@ -225,7 +227,10 @@ export class PerformanceMonitor {
     const checkMemory = () => {
       const extendedPerformance = performance as ExtendedPerformance;
       if (extendedPerformance.memory) {
-        this.updateMetric('memoryUsage', extendedPerformance.memory.usedJSHeapSize);
+        this.updateMetric(
+          'memoryUsage',
+          extendedPerformance.memory.usedJSHeapSize
+        );
       }
     };
 

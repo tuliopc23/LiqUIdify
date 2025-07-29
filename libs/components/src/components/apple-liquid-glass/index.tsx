@@ -159,7 +159,10 @@ export function AppleLiquidGlassCard({
 
 // Apple Liquid Glass Button component
 export interface AppleLiquidGlassButtonProps
-  extends Omit<React.ComponentPropsWithoutRef<'button'>, 'className' | 'style' | 'children'> {
+  extends Omit<
+    React.ComponentPropsWithoutRef<'button'>,
+    'className' | 'style' | 'children'
+  > {
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;

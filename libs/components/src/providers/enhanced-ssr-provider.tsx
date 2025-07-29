@@ -41,9 +41,7 @@ export function EnhancedSSRProvider({
 }: EnhancedSSRProviderProps) {
   const [isClient, setIsClient] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [_hydrationError, _setHydrationError] = useState<Error | null>(
-    null
-  );
+  const [_hydrationError, _setHydrationError] = useState<Error | null>(null);
   const [_hasError, _setHasError] = useState(false);
   const [_retryCount, _setRetryCount] = useState(0);
 

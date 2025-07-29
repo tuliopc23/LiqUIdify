@@ -399,7 +399,9 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
       // Remove from stack
       if (trapStack && instanceRef.current) {
-        const index = focusTrapStack.indexOf(instanceRef.current as FocusTrapInstance);
+        const index = focusTrapStack.indexOf(
+          instanceRef.current as FocusTrapInstance
+        );
         if (-1 < index) {
           focusTrapStack.splice(index, 1);
         }

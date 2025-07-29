@@ -21,7 +21,10 @@ export const createMorphAnimation = (_element: HTMLElement, _path: string) => {
   return Promise.resolve();
 };
 
-export const createScrollAnimation = (_element: HTMLElement, _options: Record<string, unknown>) => {
+export const createScrollAnimation = (
+  _element: HTMLElement,
+  _options: Record<string, unknown>
+) => {
   // Scroll animations handled by Framer Motion useInView hook
   return Promise.resolve();
 };

@@ -772,14 +772,12 @@ export function useAdvancedPhysics(
   // Haptic feedback
   const triggerHaptic = useCallback(
     (intensity: 'light' | 'medium' | 'heavy' = 'light') => {
-      if (
-        !enableHaptics ||
-        'undefined' === typeof navigator
-      ) {
+      if (!enableHaptics || 'undefined' === typeof navigator) {
         return;
       }
 
-      const navigatorWithVibrate = navigator as Navigator & NavigatorWithVibrate;
+      const navigatorWithVibrate = navigator as Navigator &
+        NavigatorWithVibrate;
       if (!navigatorWithVibrate.vibrate) {
         return;
       }

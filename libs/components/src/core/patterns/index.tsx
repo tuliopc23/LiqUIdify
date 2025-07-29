@@ -187,7 +187,10 @@ export const createStateReducer = <T extends Record<string, unknown>>(
     initialState,
     actions: Object.keys(actionCreators).reduce(
       (accumulator, type) => {
-        accumulator[type] = (payload?: unknown): StateAction => ({ type, payload });
+        accumulator[type] = (payload?: unknown): StateAction => ({
+          type,
+          payload,
+        });
         return accumulator;
       },
       {} as Record<string, (payload?: any) => StateAction>

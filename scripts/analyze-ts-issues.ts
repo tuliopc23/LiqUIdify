@@ -27,7 +27,7 @@ const project = new Project({
     noUnusedLocals: true,
     noUnusedParameters: true,
     noUncheckedIndexedAccess: true,
-  }
+  },
 });
 
 // Add all TypeScript files from your libs directory
@@ -41,10 +41,10 @@ console.log(`📁 Analyzing ${project.getSourceFiles().length} files...\n`);
 const diagnostics = project.getPreEmitDiagnostics();
 console.log(`🚨 Found ${diagnostics.length} TypeScript diagnostics\n`);
 
-diagnostics.forEach(diagnostic => {
+diagnostics.forEach((diagnostic) => {
   const sourceFile = diagnostic.getSourceFile();
   const lineAndColumn = diagnostic.getLineAndColumnAtPos();
-  
+
   if (sourceFile && lineAndColumn) {
     issues.push({
       file: path.relative(process.cwd(), sourceFile.getFilePath()),
@@ -52,8 +52,11 @@ diagnostics.forEach(diagnostic => {
       column: lineAndColumn.column,
       type: 'diagnostic',
       description: diagnostic.getMessageText().toString(),
-      severity: diagnostic.getCategory() === ts.DiagnosticCategory.Error ? 'error' : 'warning',
-      fixable: false
+      severity:
+        diagnostic.getCategory() === ts.DiagnosticCategory.Error
+          ? 'error'
+          : 'warning',
+      fixable: false,
     });
   }
 });
@@ -61,24 +64,26 @@ diagnostics.forEach(diagnostic => {
 // Analyze each file for common issues
 for (const sourceFile of project.getSourceFiles()) {
   const relativePath = path.relative(process.cwd(), sourceFile.getFilePath());
-  
+
   // 1. Find 'any' types
   const anyNodes = sourceFile.getDescendantsOfKind(SyntaxKind.AnyKeyword);
-  anyNodes.forEach(anyNode => {
+  anyNodes.forEach((anyNode) => {
     issues.push({
       file: relativePath,
       line: anyNode.getStartLineNumber(),
       column: anyNode.getStartColumnNumber(),
       type: 'any-type',
-      description: 'Usage of \'any\' type detected',
+      description: "Usage of 'any' type detected",
       severity: 'warning',
-      fixable: true
+      fixable: true,
     });
   });
-  
+
   // 2. Find non-null assertions (!.)
-  const nonNullAssertions = sourceFile.getDescendantsOfKind(SyntaxKind.NonNullExpression);
-  nonNullAssertions.forEach(assertion => {
+  const nonNullAssertions = sourceFile.getDescendantsOfKind(
+    SyntaxKind.NonNullExpression
+  );
+  nonNullAssertions.forEach((assertion) => {
     issues.push({
       file: relativePath,
       line: assertion.getStartLineNumber(),
@@ -86,13 +91,15 @@ for (const sourceFile of project.getSourceFiles()) {
       type: 'non-null-assertion',
       description: 'Non-null assertion (!) used - potentially unsafe',
       severity: 'warning',
-      fixable: true
+      fixable: true,
     });
   });
-  
+
   // 3. Find type assertions (as any, as unknown)
-  const typeAssertions = sourceFile.getDescendantsOfKind(SyntaxKind.AsExpression);
-  typeAssertions.forEach(assertion => {
+  const typeAssertions = sourceFile.getDescendantsOfKind(
+    SyntaxKind.AsExpression
+  );
+  typeAssertions.forEach((assertion) => {
     const typeText = assertion.getType().getText();
     if (typeText.includes('any')) {
       issues.push({
@@ -102,14 +109,14 @@ for (const sourceFile of project.getSourceFiles()) {
         type: 'type-assertion-any',
         description: `Type assertion to 'any': ${assertion.getText()}`,
         severity: 'error',
-        fixable: true
+        fixable: true,
       });
     }
   });
-  
+
   // 4. Find functions without return types
   const functions = sourceFile.getFunctions();
-  functions.forEach(func => {
+  functions.forEach((func) => {
     if (!func.getReturnTypeNode() && func.getName() && func.isExported()) {
       issues.push({
         file: relativePath,
@@ -118,14 +125,16 @@ for (const sourceFile of project.getSourceFiles()) {
         type: 'missing-return-type',
         description: `Function '${func.getName()}' missing return type annotation`,
         severity: 'warning',
-        fixable: true
+        fixable: true,
       });
     }
   });
-  
+
   // 5. Find arrow functions without return types
-  const arrowFunctions = sourceFile.getDescendantsOfKind(SyntaxKind.ArrowFunction);
-  arrowFunctions.forEach(arrowFunc => {
+  const arrowFunctions = sourceFile.getDescendantsOfKind(
+    SyntaxKind.ArrowFunction
+  );
+  arrowFunctions.forEach((arrowFunc) => {
     const parent = arrowFunc.getParent();
     if (!arrowFunc.getReturnTypeNode() && Node.isVariableDeclaration(parent)) {
       const name = parent.getName();
@@ -137,16 +146,16 @@ for (const sourceFile of project.getSourceFiles()) {
           type: 'missing-return-type',
           description: `Arrow function '${name}' missing return type annotation`,
           severity: 'warning',
-          fixable: true
+          fixable: true,
         });
       }
     }
   });
-  
+
   // 6. Find parameters without types
   const allFunctions = [...functions, ...arrowFunctions];
-  allFunctions.forEach(func => {
-    func.getParameters().forEach(param => {
+  allFunctions.forEach((func) => {
+    func.getParameters().forEach((param) => {
       if (!param.getTypeNode() && !param.hasInitializer()) {
         issues.push({
           file: relativePath,
@@ -155,21 +164,25 @@ for (const sourceFile of project.getSourceFiles()) {
           type: 'missing-parameter-type',
           description: `Parameter '${param.getName()}' missing type annotation`,
           severity: 'error',
-          fixable: true
+          fixable: true,
         });
       }
     });
   });
-  
+
   // 7. Find unused imports
   const imports = sourceFile.getImportDeclarations();
-  imports.forEach(importDecl => {
+  imports.forEach((importDecl) => {
     const namedImports = importDecl.getNamedImports();
-    namedImports.forEach(namedImport => {
+    namedImports.forEach((namedImport) => {
       const identifier = namedImport.getName();
-      const references = sourceFile.getDescendantsOfKind(SyntaxKind.Identifier)
-        .filter(id => id.getText() === identifier && id !== namedImport.getNameNode());
-      
+      const references = sourceFile
+        .getDescendantsOfKind(SyntaxKind.Identifier)
+        .filter(
+          (id) =>
+            id.getText() === identifier && id !== namedImport.getNameNode()
+        );
+
       if (references.length === 0) {
         issues.push({
           file: relativePath,
@@ -178,18 +191,19 @@ for (const sourceFile of project.getSourceFiles()) {
           type: 'unused-import',
           description: `Unused import '${identifier}'`,
           severity: 'warning',
-          fixable: true
+          fixable: true,
         });
       }
     });
   });
-  
+
   // 8. Find @ts-ignore comments
-  const tsIgnoreComments = sourceFile.getFullText().match(/\/\/ @ts-ignore.*$/gm) || [];
+  const tsIgnoreComments =
+    sourceFile.getFullText().match(/\/\/ @ts-ignore.*$/gm) || [];
   tsIgnoreComments.forEach((comment, index) => {
     const commentIndex = sourceFile.getFullText().indexOf(comment);
     const pos = sourceFile.getLineAndColumnAtPos(commentIndex);
-    
+
     issues.push({
       file: relativePath,
       line: pos.line,
@@ -197,7 +211,7 @@ for (const sourceFile of project.getSourceFiles()) {
       type: 'ts-ignore',
       description: `@ts-ignore comment found: ${comment.trim()}`,
       severity: 'warning',
-      fixable: false
+      fixable: false,
     });
   });
 }
@@ -217,9 +231,9 @@ console.log('=====================================\n');
 
 const summary = {
   total: issues.length,
-  errors: issues.filter(i => i.severity === 'error').length,
-  warnings: issues.filter(i => i.severity === 'warning').length,
-  fixable: issues.filter(i => i.fixable).length,
+  errors: issues.filter((i) => i.severity === 'error').length,
+  warnings: issues.filter((i) => i.severity === 'warning').length,
+  fixable: issues.filter((i) => i.fixable).length,
 };
 
 console.log(`📈 Summary:`);
@@ -230,14 +244,17 @@ console.log(`   🔧 Auto-fixable: ${summary.fixable}`);
 console.log(`   📝 Manual fixes needed: ${summary.total - summary.fixable}\n`);
 
 // Group by type
-const byType = issues.reduce((acc, issue) => {
-  acc[issue.type] = (acc[issue.type] || 0) + 1;
-  return acc;
-}, {} as Record<string, number>);
+const byType = issues.reduce(
+  (acc, issue) => {
+    acc[issue.type] = (acc[issue.type] || 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>
+);
 
 console.log('📋 Issues by Type:');
 Object.entries(byType)
-  .sort(([,a], [,b]) => b - a)
+  .sort(([, a], [, b]) => b - a)
   .forEach(([type, count]) => {
     const icon = getTypeIcon(type);
     console.log(`   ${icon} ${type}: ${count}`);
@@ -247,19 +264,28 @@ console.log('\n🔍 Detailed Issues:');
 console.log('==================\n');
 
 // Group issues by file
-const byFile = issues.reduce((acc, issue) => {
-  if (!acc[issue.file]) acc[issue.file] = [];
-  acc[issue.file].push(issue);
-  return acc;
-}, {} as Record<string, TypeIssue[]>);
+const byFile = issues.reduce(
+  (acc, issue) => {
+    if (!acc[issue.file]) acc[issue.file] = [];
+    acc[issue.file].push(issue);
+    return acc;
+  },
+  {} as Record<string, TypeIssue[]>
+);
 
 Object.entries(byFile).forEach(([file, fileIssues]) => {
   console.log(`📁 ${file} (${fileIssues.length} issues)`);
-  fileIssues.forEach(issue => {
-    const icon = issue.severity === 'error' ? '🔴' : 
-                 issue.severity === 'warning' ? '🟡' : '🔵';
+  fileIssues.forEach((issue) => {
+    const icon =
+      issue.severity === 'error'
+        ? '🔴'
+        : issue.severity === 'warning'
+          ? '🟡'
+          : '🔵';
     const fixIcon = issue.fixable ? '🔧' : '📝';
-    console.log(`   ${icon} ${fixIcon} Line ${issue.line}: ${issue.description}`);
+    console.log(
+      `   ${icon} ${fixIcon} Line ${issue.line}: ${issue.description}`
+    );
   });
   console.log();
 });
@@ -270,17 +296,23 @@ console.log('==================\n');
 
 if (byType['any-type']) {
   console.log('🎯 High Priority:');
-  console.log(`   • Replace ${byType['any-type']} 'any' types with proper types`);
+  console.log(
+    `   • Replace ${byType['any-type']} 'any' types with proper types`
+  );
   console.log('   • Run: bun scripts/fix-any-types.ts');
 }
 
 if (byType['missing-parameter-type']) {
-  console.log(`   • Add type annotations to ${byType['missing-parameter-type']} parameters`);
+  console.log(
+    `   • Add type annotations to ${byType['missing-parameter-type']} parameters`
+  );
   console.log('   • Run: bun scripts/fix-missing-types.ts');
 }
 
 if (byType['missing-return-type']) {
-  console.log(`   • Add return type annotations to ${byType['missing-return-type']} functions`);
+  console.log(
+    `   • Add return type annotations to ${byType['missing-return-type']} functions`
+  );
   console.log('   • Run: bun scripts/fix-return-types.ts');
 }
 
@@ -292,12 +324,16 @@ if (byType['unused-import']) {
 
 if (byType['non-null-assertion']) {
   console.log('⚠️  Code Safety:');
-  console.log(`   • Review ${byType['non-null-assertion']} non-null assertions`);
+  console.log(
+    `   • Review ${byType['non-null-assertion']} non-null assertions`
+  );
   console.log('   • Run: bun scripts/fix-non-null-assertions.ts');
 }
 
 console.log('\n🚀 Next Steps:');
-console.log('1. Run individual fix scripts or comprehensive fix: bun scripts/fix-all-ts-issues.ts');
+console.log(
+  '1. Run individual fix scripts or comprehensive fix: bun scripts/fix-all-ts-issues.ts'
+);
 console.log('2. Update tsconfig.lib.json to enable strict mode gradually');
 console.log('3. Review and test changes');
 console.log('4. Re-run analysis to track progress');
@@ -311,7 +347,7 @@ function getTypeIcon(type: string): string {
     'missing-parameter-type': '📥',
     'unused-import': '🧹',
     'ts-ignore': '🙈',
-    'diagnostic': '🚨',
+    diagnostic: '🚨',
   };
   return icons[type] || '📋';
 }

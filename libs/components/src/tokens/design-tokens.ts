@@ -415,7 +415,7 @@ export const getDesignToken = {
   spacing: (token: SpacingToken) => designTokens.spacing[token],
   color: (category: keyof typeof designTokens.colors, token: string) => {
     const colorCategory = designTokens.colors[category];
-    return colorCategory && typeof colorCategory === 'object' 
+    return colorCategory && typeof colorCategory === 'object'
       ? (colorCategory as Record<string, string>)[token]
       : undefined;
   },

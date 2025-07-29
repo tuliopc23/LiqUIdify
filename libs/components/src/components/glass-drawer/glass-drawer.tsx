@@ -3,9 +3,7 @@ import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/core/utils/classname';
-import {
-  createVariants as cva,
-} from '../../lib/variant-system';
+import { createVariants as cva } from '../../lib/variant-system';
 
 const drawerVariants = cva({
   base: [
@@ -160,7 +158,10 @@ export interface GlassDrawerProps
 }
 
 export interface GlassDrawerContentProps
-  extends Omit<React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>, 'children'> {
+  extends Omit<
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
+    'children'
+  > {
   children: React.ReactNode;
   className?: string;
   showCloseButton?: boolean;
@@ -269,11 +270,7 @@ const GlassDrawerHeader = React.forwardRef<
   HTMLDivElement,
   GlassDrawerHeaderProps
 >(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(drawerHeaderVariants(), className)}
-    {...props}
-  >
+  <div ref={ref} className={cn(drawerHeaderVariants(), className)} {...props}>
     {children}
   </div>
 ));
@@ -320,11 +317,7 @@ const GlassDrawerFooter = React.forwardRef<
   HTMLDivElement,
   GlassDrawerFooterProps
 >(({ className, children, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(drawerFooterVariants(), className)}
-    {...props}
-  >
+  <div ref={ref} className={cn(drawerFooterVariants(), className)} {...props}>
     {children}
   </div>
 ));

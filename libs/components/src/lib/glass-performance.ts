@@ -549,9 +549,7 @@ export const GPUAccelerationHelper = {
  * Provides performance monitoring and optimization tools
  */
 export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
-  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(
-    null
-  );
+  const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
   const [recommendations, setRecommendations] = useState<Array<string>>([]);
   const schedulerRef = useRef<GlassAnimationScheduler | null>(null);
   const configRef = useRef<OptimizationConfig>({
