@@ -1,25 +1,21 @@
-import {
-  ChevronDown,
-  ChevronRight,
-  File,
-  Folder,
-  FolderOpen,
-} from 'lucide-react';
 import React from 'react';
 import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
+import { ChevronDown, ChevronRight, Folder, FolderOpen, File } from 'lucide-react';
 
-export interface TreeNode { id: string;
+export interface TreeNode {
+  id: string;
   label: string;
   icon?: React.ReactNode;
   children?: Array<TreeNode>;
   selectable?: boolean;
   defaultExpanded?: boolean;
-  data?: any; }
+  data?: any;
 }
 
 export interface GlassTreeViewProps
-  extends React.HTMLAttributes<HTMLDivElement> { nodes: Array<TreeNode>;
-  onNodeSelect?: (node: TreeNode) => void; }
+  extends React.HTMLAttributes<HTMLDivElement> {
+  nodes: Array<TreeNode>;
+  onNodeSelect?: (node: TreeNode) => void;
   onNodeExpand?: (_node: TreeNode, _expanded: boolean) => void;
   selectedNodeId?: string;
   expandedNodeIds?: Array<string>;
@@ -49,7 +45,8 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
         }
         if (node.children) {
           _collectDefaultExpanded(node.children);
-        };
+        }
+      });
     };
     _collectDefaultExpanded(nodes);
     return initial;
@@ -109,25 +106,27 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
                 'border border-blue-500/30 bg-blue-500/10'
               )
           )}
-          style={{ paddingLeft: `${level * indentSize + 8}px` } onClick={() => {
+          style={{ paddingLeft: `${level * indentSize + 8}px` }}
+          onClick={() => {
             if (hasChildren) {
               toggleExpanded(node);
             }
             if (node.selectable !== false) {
               onNodeSelect?.(node);
             }
+          }}
           role="treeitem"
           aria-expanded={hasChildren ? isExpanded : undefined}
           aria-selected={isSelected}
         >
           {hasChildren && (
-            <_span _className="text-[var(--text-secondary)]">
+            <span className="text-[var(--text-secondary)]">
               {isExpanded ? (
                 <ChevronDown className="h-4 w-4" />
               ) : (
                 <ChevronRight className="h-4 w-4" />
               )}
-            </_span>
+            </span>
           )}
 
           {showIcons && (

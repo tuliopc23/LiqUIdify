@@ -203,6 +203,7 @@ export function GlassPlayground({
       <div
         className="relative"
         style={{ height: 'number' === typeof height ? `${height}px` : height }}
+      >
         <LiveProvider
           code={code}
           scope={playgroundScope}
@@ -301,6 +302,7 @@ function PlaygroundEditor({
             'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
           fontSize: '14px',
           lineHeight: '1.5',
+        }}
       />
 
       {!editable && (
@@ -337,10 +339,8 @@ function PlaygroundError() {
 {/* Styles for the playground  */}
 const playgroundStyles = `
   .playground-editor { background: transparent !important; }
-  }
 
   .playground-editor textarea { outline: none !important; }
-  }
 
   .playground-preview {
     background-image:
@@ -354,7 +354,6 @@ const playgroundStyles = `
   }
 
   .prism-code { background: transparent !important; }
-  }
 `;
 
 {/* Inject styles  */}
@@ -365,8 +364,12 @@ if ('undefined' !== typeof document) {
     style.id = styleId;
     style.textContent = playgroundStyles;
     document.head.append(style);
+  }
+}
+
 {/* Export example templates  */}
-export const PlaygroundTemplates = { button: `
+export const PlaygroundTemplates = {
+  button: `
 <div className="flex gap-4 items-center">
   <GlassButton type="button" variant="primary">
     Primary Button
@@ -380,10 +383,10 @@ export const PlaygroundTemplates = { button: `
     Ghost Button
   </GlassButton>
 </div>
-` }
+`,
   card: `
 <GlassCard className="max-w-md">
-  <GlassCardHeader aria-label="Glass card header>">
+  <GlassCardHeader aria-label="Glass card header">
     <GlassCardTitle>Interactive Card</GlassCardTitle>
     <GlassCardDescription>
       Edit this code to see changes in real-time
@@ -394,7 +397,7 @@ export const PlaygroundTemplates = { button: `
     <p>This is an interactive playground where you can experiment with LiqUIdify components.</p>
   </GlassCardContent>
 
-  <GlassCardFooter aria-label="Glass card footer>">
+  <GlassCardFooter aria-label="Glass card footer">
     <GlassButton type="button" variant="primary">Action</GlassButton>
   </GlassCardFooter>
 </GlassCard>
