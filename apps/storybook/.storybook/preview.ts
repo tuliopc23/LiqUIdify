@@ -19,7 +19,7 @@ const isInitialized = false;
 if (typeof document !== "undefined") {
 	// Add CSS for docs rendering
 	const style = document.createElement("style");
-	style.innerHTML = `
+	style.textContent = `
     .docs-story {
       background: transparent !important;
       padding: 1rem;
