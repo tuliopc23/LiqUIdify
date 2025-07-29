@@ -184,7 +184,7 @@ export const Positions: Story = {
         <div className="relative h-32">
           <GlassSkipNavigation
             position="top"
-            alwaysVisible={true}
+            alwaysVisible
             links={[
               { href: '#content1', label: 'Skip to content' },
               { href: '#nav1', label: 'Skip to navigation' },
@@ -200,7 +200,7 @@ export const Positions: Story = {
         <div className="relative h-32">
           <GlassSkipNavigation
             position="left"
-            alwaysVisible={true}
+            alwaysVisible
             links={[
               { href: '#content2', label: 'Skip to content' },
               { href: '#nav2', label: 'Skip to navigation' },
@@ -216,7 +216,7 @@ export const Positions: Story = {
         <div className="relative h-32">
           <GlassSkipNavigation
             position="right"
-            alwaysVisible={true}
+            alwaysVisible
             links={[
               { href: '#content3', label: 'Skip to content' },
               { href: '#nav3', label: 'Skip to navigation' },
@@ -412,7 +412,7 @@ export const StylingVariations: Story = {
         <h3 className="mb-4 font-semibold">Default Styling</h3>
         <div className="relative h-20 rounded-lg border">
           <GlassSkipNavigation
-            alwaysVisible={true}
+            alwaysVisible
             links={[
               { href: '#content', label: 'Skip to content' },
               { href: '#nav', label: 'Skip to navigation' },
@@ -437,7 +437,7 @@ export const StylingVariations: Story = {
           `}</style>
           <GlassSkipNavigation
             className="custom-skip-nav"
-            alwaysVisible={true}
+            alwaysVisible
             links={[
               { href: '#content', label: 'Skip to content' },
               { href: '#nav', label: 'Skip to navigation' },

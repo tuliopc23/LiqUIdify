@@ -271,7 +271,7 @@ export const RealtimeLineChart: StoryObj = {
     return (
       <div className="p-8">
         <h3 className="mb-4 font-semibold text-lg">Real-time Monitoring</h3>
-        <LineChart data={data} width={600} height={300} animated={true} />
+        <LineChart data={data} width={600} height={300} animated />
       </div>
     );
   },

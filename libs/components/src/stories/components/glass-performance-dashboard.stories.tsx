@@ -83,7 +83,7 @@ export const LiveMetrics: Story = {
           </div>
           <GlassPerformanceDashboard
             refreshInterval={isLive ? 1000 : 0}
-            showDetails={true}
+            showDetails
           />
         </div>
       </div>
@@ -164,7 +164,7 @@ export const DetailedAnalytics: Story = {
           </GlassCard>
 
           <GlassPerformanceDashboard
-            showDetails={true}
+            showDetails
             theme={
               metrics.find((m) => m.id === selectedMetric)?.color || 'blue'
             }
@@ -236,7 +236,7 @@ export const MultipleChartTypes: Story = {
             </div>
           </div>
 
-          <GlassPerformanceDashboard showDetails={true} chartType={chartType} />
+          <GlassPerformanceDashboard showDetails chartType={chartType} />
         </div>
       </div>
     );
@@ -396,7 +396,7 @@ export const AlertsAndThresholds: Story = {
             </div>
           )}
 
-          <GlassPerformanceDashboard showDetails={true} theme="orange" />
+          <GlassPerformanceDashboard showDetails theme="orange" />
         </div>
       </div>
     );
@@ -420,7 +420,7 @@ export const DarkModeOptimized: Story = {
           </h1>
           <p className="text-gray-400">Optimized for low-light environments</p>
         </div>
-        <GlassPerformanceDashboard showDetails={true} theme="blue" />
+        <GlassPerformanceDashboard showDetails theme="blue" />
       </div>
     </div>
   ),
