@@ -11,7 +11,7 @@ const outputFile = join(__dirname, '../dist/liquidui.css');
 // Ensure output directory exists
 mkdirSync(dirname(outputFile), { recursive: true });
 
-const options: BundleOptions<{}> = {
+const options: BundleOptions<object> = {
   filename: inputFile,
   minify: process.env.NODE_ENV === 'production',
   sourceMap: true,
@@ -47,4 +47,4 @@ async function buildCSS() {
 }
 
 // Run the build
-buildCSS();
+void buildCSS();
