@@ -158,7 +158,7 @@ export function useClientOnly<T>(
       setValue(factory());
       setIsReady(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: SSR provider with managed dependencies
   }, [isClient, factory, ...deps]);
 
   return { value, isReady };

@@ -1,4 +1,4 @@
-/* eslint-disable react-refresh/only-export-components */
+
 import React, { type ReactNode, useEffect, useState } from 'react';
 
 import { ConfigProvider, type ConfigProviderProps } from './config-provider';

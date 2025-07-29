@@ -348,7 +348,7 @@ export function useClientOnly<T>(
     if (isHydrated) {
       setValue(factory());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Hydration effect with controlled timing
   }, [isHydrated, factory, ...deps]);
 
   return value;

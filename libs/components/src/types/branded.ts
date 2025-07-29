@@ -231,8 +231,7 @@ export const brandedUtils = {
     try {
       return createGlassColor(color);
     } catch {
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'GlassC... Remove this comment to see the full error message
-      return;
+      return null;
     }
   },
 
@@ -249,8 +248,7 @@ export const brandedUtils = {
     try {
       return createAccessibleContrast(mockRatio);
     } catch {
-      // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'Access... Remove this comment to see the full error message
-      return;
+      return null;
     }
   },
 

@@ -8,7 +8,7 @@ export const useSSRSafe = (callback: () => void, deps: Array<any>) => {
     if ('undefined' !== typeof window) {
       callback();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Custom hook with dynamic deps
   }, deps);
 };
 

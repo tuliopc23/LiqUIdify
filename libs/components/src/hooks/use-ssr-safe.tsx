@@ -263,7 +263,7 @@ export const useDynamicImport = <T,>(
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: SSR-safe hook with controlled deps
   }, [importFunction, ...deps]);
 
   return { module, loading, error };

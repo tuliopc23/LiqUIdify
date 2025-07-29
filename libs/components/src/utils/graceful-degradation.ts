@@ -351,8 +351,7 @@ export class GracefulDegradationManager {
 export function useGracefulDegradation() {
   const [manager] = useState(() => GracefulDegradationManager.getInstance());
   const [featureSupport, setFeatureSupport] = useState<FeatureSupport | null>(
-    // @ts-expect-error TS(2345): Argument of type 'undefined' is not assignable to ... Remove this comment to see the full error message
-    undefined
+    null
   );
   const [isLoading, setIsLoading] = useState(true);
 

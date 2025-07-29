@@ -79,8 +79,7 @@ export function parseColor(color: string): RGBColor | null {
     return hslToRgb(h, s, l, a);
   }
 
-  // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'RGBCol... Remove this comment to see the full error message
-  return;
+  return null;
 }
 
 /**
@@ -423,8 +422,7 @@ export const glassColors = {
 export function getColorInfo(color: string): ColorInfo | null {
   const rgb = parseColor(color);
   if (!rgb) {
-    // @ts-expect-error TS(2322): Type 'undefined' is not assignable to type 'ColorI... Remove this comment to see the full error message
-    return;
+    return null;
   }
 
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);

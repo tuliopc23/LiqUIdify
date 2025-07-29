@@ -189,11 +189,12 @@ export function hapticFeedback(
       navigator.vibrate(patterns[intensity]);
     } else {
       // Fallback for non-mobile or non-supporting browsers
-      // Use dev-only logger
-      // Lazy import to avoid circular dep in SSR
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const { devLog } = require('@/utils/dev-logger');
-      devLog(`Haptic feedback: ${intensity}`);
+      // Use dev-only logger (lazy import to avoid circular dep in SSR)
+      import('@/utils/dev-logger').then(({ devLog }) => {
+        devLog(`Haptic feedback: ${intensity}`);
+      }).catch(() => {
+        // Silent fail for dev logger
+      });
     }
   } catch {
     // Logging disabled

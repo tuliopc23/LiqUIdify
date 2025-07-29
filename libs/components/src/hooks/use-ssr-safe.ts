@@ -246,7 +246,7 @@ export function useNetworkStatus(): {
   const [effectiveType, setEffectiveType] = useState<
     'slow-2g' | '2g' | '3g' | '4g' | undefined
   >(undefined);
-  const [saveData, setSaveData] = useState<boolean | undefined | null>(
+  const [saveData, setSaveData] = useState<boolean | undefined>(
     undefined
   );
 
@@ -292,7 +292,6 @@ export function useNetworkStatus(): {
     };
   }, [isClient]);
 
-  // @ts-expect-error TS(2322): Type 'boolean | null | undefined' is not assignabl... Remove this comment to see the full error message
   return { online, effectiveType, saveData };
 }
 
@@ -336,8 +335,7 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
 ): [(node: T | null) => void, boolean, IntersectionObserverEntry | null] {
   const isClient = useIsClient();
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(
-    // @ts-expect-error TS(2345): Argument of type 'undefined' is not assignable to ... Remove this comment to see the full error message
-    undefined
+    null
   );
   const [isIntersecting, setIsIntersecting] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
