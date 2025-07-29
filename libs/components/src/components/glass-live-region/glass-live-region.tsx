@@ -395,7 +395,7 @@ class AnnouncementManager {
     (message: string, options: AnnouncementOptions) => void
   > = new Set();
   private queue: Array<QueuedAnnouncement> = [];
-  private processing: boolean = false;
+  private processing = false;
   private dedupMap: Map<string, number> = new Map();
 
   announce(message: string, options: AnnouncementOptions = {}) {

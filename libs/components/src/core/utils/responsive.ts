@@ -30,7 +30,7 @@ export function responsiveSize(
 /**
  * Ensure touch targets meet accessibility standards (minimum 44px)
  */
-function createTouchTarget(size: number = 44): string {
+function createTouchTarget(size = 44): string {
   const minSize = Math.max(size, 44); // WCAG minimum touch target
   return `min-h-[${minSize}px] min-w-[${minSize}px]`;
 }
@@ -223,8 +223,8 @@ export function aspectRatio(ratio: string | number): string {
 export function fluidTypography(
   minSize: number,
   maxSize: number,
-  minViewport: number = 320,
-  maxViewport: number = 1200
+  minViewport = 320,
+  maxViewport = 1200
 ): string {
   const slope = (maxSize - minSize) / (maxViewport - minViewport);
   const yAxisIntersection = -minViewport * slope + minSize;

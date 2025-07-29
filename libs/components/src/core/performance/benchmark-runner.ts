@@ -271,7 +271,7 @@ class LiqUIdifyBenchmarkRunner {
    */
   async detectMemoryLeaks(
     config: BenchmarkConfig,
-    cycles: number = 10
+    cycles = 10
   ): Promise<{
     hasLeak: boolean;
     leakRate: number;

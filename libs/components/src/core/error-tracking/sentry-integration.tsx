@@ -344,7 +344,7 @@ class LiqUIdifySentryIntegration {
    */
   public addBreadcrumb(
     message: string,
-    category: string = 'liquidify',
+    category = 'liquidify',
     level: SeverityLevel = 'info',
     data?: Record<string, unknown>
   ): void {

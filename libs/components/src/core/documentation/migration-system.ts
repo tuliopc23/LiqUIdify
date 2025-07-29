@@ -254,7 +254,7 @@ const LIQUIDIFY_MIGRATIONS: Record<string, MigrationConfig> = {
 
 export class LiqUIdifyMigrationSystem {
   private migrations: Map<string, MigrationConfig> = new Map();
-  private backupDir: string = '.liquidify-migration-backup';
+  private backupDir = '.liquidify-migration-backup';
 
   constructor() {
     // Load pre-defined migrations

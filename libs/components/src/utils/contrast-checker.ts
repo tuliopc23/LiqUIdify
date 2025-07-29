@@ -106,7 +106,7 @@ export function checkContrast(
  */
 export function getAccessibleColors(
   baseColor: string,
-  targetRatio: number = 4.5
+  targetRatio = 4.5
 ): Array<string> {
   const baseRgb = hexToRgb(baseColor);
   if (!baseRgb) {
