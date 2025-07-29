@@ -864,12 +864,10 @@ export class AccessibilityManager {
   }
 
   private hasAccessibleName(element: HTMLElement): boolean {
-    return !!(
-      element.getAttribute('aria-label') ||
+    return Boolean(element.getAttribute('aria-label') ||
       element.getAttribute('aria-labelledby') ||
       element.textContent?.trim() ||
-      (element as HTMLInputElement).placeholder
-    );
+      (element as HTMLInputElement).placeholder);
   }
 
   private generateAccessibleName(element: HTMLElement): string {

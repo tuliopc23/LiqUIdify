@@ -594,7 +594,7 @@ export class LiqUIdifyMigrationSystem {
             report.warnings.push({
               file: filePath,
               message: `${rule.name}: ${result.message}`,
-              autoFixable: !!result.suggestions,
+              autoFixable: Boolean(result.suggestions),
             });
           }
         }
