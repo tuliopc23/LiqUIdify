@@ -494,7 +494,7 @@ export const FormExample: Story = {
                 leftIcon={<User className="h-4 w-4" />}
                 value={formData.username}
                 onChange={handleChange('username')}
-                error={!!errors.username}
+                error={Boolean(errors.username)}
                 helperText={errors.username}
                 required
               />
@@ -511,7 +511,7 @@ export const FormExample: Story = {
                 leftIcon={<Mail className="h-4 w-4" />}
                 value={formData.email}
                 onChange={handleChange('email')}
-                error={!!errors.email}
+                error={Boolean(errors.email)}
                 helperText={errors.email}
                 required
                 autoComplete="email"
@@ -528,7 +528,7 @@ export const FormExample: Story = {
                 placeholder="Enter password"
                 value={formData.password}
                 onChange={handleChange('password')}
-                error={!!errors.password}
+                error={Boolean(errors.password)}
                 helperText={errors.password || 'Must be at least 8 characters'}
                 required
                 autoComplete="new-password"
@@ -545,7 +545,7 @@ export const FormExample: Story = {
                 placeholder="Confirm password"
                 value={formData.confirmPassword}
                 onChange={handleChange('confirmPassword')}
-                error={!!errors.confirmPassword}
+                error={Boolean(errors.confirmPassword)}
                 helperText={errors.confirmPassword}
                 required
                 autoComplete="new-password"

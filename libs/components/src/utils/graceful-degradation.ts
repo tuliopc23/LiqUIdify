@@ -203,7 +203,7 @@ export class GracefulDegradationManager {
       const canvas = document.createElement('canvas');
       const gl =
         canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      return !!gl;
+      return Boolean(gl);
     } catch {
       return false;
     }
@@ -217,7 +217,7 @@ export class GracefulDegradationManager {
     try {
       const canvas = document.createElement('canvas');
       const gl = canvas.getContext('webgl2');
-      return !!gl;
+      return Boolean(gl);
     } catch {
       return false;
     }
@@ -231,7 +231,7 @@ export class GracefulDegradationManager {
     try {
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
-      return !!context;
+      return Boolean(context);
     } catch {
       return false;
     }
