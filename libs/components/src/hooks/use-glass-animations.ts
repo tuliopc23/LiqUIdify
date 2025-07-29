@@ -308,7 +308,7 @@ export function useSpringAnimation() {
       targetValue: number,
       property = 'transform'
     ) => {
-      const springEasing = `cubic-bezier(0.34, 1.56, 0.64, 1)`;
+      const springEasing = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 
       animate(element, [{ [property]: `${targetValue}` }], {
         duration: 500,

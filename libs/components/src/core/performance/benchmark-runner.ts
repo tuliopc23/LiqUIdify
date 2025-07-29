@@ -323,7 +323,7 @@ class LiqUIdifyBenchmarkRunner {
     analysis = hasLeak
       ? `Memory leak detected: ${(leakRate / 1024).toFixed(2)}KB per cycle. ` +
         `Total growth: ${(totalGrowth / 1024 / 1024).toFixed(2)}MB`
-      : `No significant memory leak detected. ` +
+      : "No significant memory leak detected. " +
         `Total growth: ${(totalGrowth / 1024).toFixed(2)}KB within acceptable range.`;
 
     return {
@@ -825,7 +825,7 @@ class LiqUIdifyBenchmarkRunner {
     console.log(`   FPS: ${frameRate} avg (${result.frameRate.drops} drops)`);
 
     if (result.violations.length > 0) {
-      console.log(`   Violations:`);
+      console.log("   Violations:");
       for (const violation of result.violations) {
         console.log(`     - ${violation}`);
       }
@@ -842,14 +842,14 @@ class LiqUIdifyBenchmarkRunner {
     const total = results.length;
     const passRate = ((passed / total) * 100).toFixed(1);
 
-    console.log(`\n📊 Benchmark Suite Results:`);
+    console.log("\n📊 Benchmark Suite Results:");
     console.log(`   Passed: ${passed}/${total} (${passRate}%)`);
 
     if (passed < total) {
-      console.log(`   ❌ Performance requirements not met`);
+      console.log("   ❌ Performance requirements not met");
       process.exit(1);
     } else {
-      console.log(`   ✅ All performance requirements met`);
+      console.log("   ✅ All performance requirements met");
     }
 
     // Generate detailed report file
