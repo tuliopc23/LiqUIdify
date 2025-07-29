@@ -53,7 +53,7 @@ export const clientOnly = <T>(
  * Safe storage wrapper
  */
 export const storage = {
-  get: (key: string, fallback: string = ''): string => {
+  get: (key: string, fallback = ''): string => {
     if (isServer) {
       return fallback;
     }

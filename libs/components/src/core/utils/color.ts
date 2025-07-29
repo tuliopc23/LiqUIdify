@@ -320,7 +320,7 @@ export function setOpacity(color: string, opacity: number): string {
  */
 export function generatePalette(
   baseColor: string,
-  steps: number = 9
+  steps = 9
 ): Array<string> {
   const palette: Array<string> = [];
   const stepSize = 100 / (steps - 1);
@@ -347,7 +347,7 @@ export const glassColors = {
   /**
    * Generate backdrop color for glass effect
    */
-  backdrop(baseColor: string, opacity: number = 0.7): string {
+  backdrop(baseColor: string, opacity = 0.7): string {
     return setOpacity(baseColor, opacity);
   },
 
@@ -356,7 +356,7 @@ export const glassColors = {
    */
   overlay(
     variant: 'light' | 'dark' | 'neutral' = 'neutral',
-    opacity: number = 0.1
+    opacity = 0.1
   ): string {
     const baseColors = {
       light: '#ffffff',
@@ -372,7 +372,7 @@ export const glassColors = {
    */
   border(
     variant: 'light' | 'dark' | 'neutral' = 'neutral',
-    opacity: number = 0.2
+    opacity = 0.2
   ): string {
     const baseColors = {
       light: '#ffffff',
@@ -388,7 +388,7 @@ export const glassColors = {
    */
   shadow(
     variant: 'light' | 'dark' | 'neutral' = 'neutral',
-    opacity: number = 0.1
+    opacity = 0.1
   ): string {
     const baseColors = {
       light: '#000000',
@@ -404,7 +404,7 @@ export const glassColors = {
    */
   specular(
     variant: 'light' | 'dark' | 'neutral' = 'neutral',
-    opacity: number = 0.3
+    opacity = 0.3
   ): string {
     const baseColors = {
       light: '#ffffff',
@@ -487,7 +487,7 @@ export function formatColor(color: string, format: ColorFormat): string {
 export function mixColors(
   color1: string,
   color2: string,
-  ratio: number = 0.5
+  ratio = 0.5
 ): string {
   const rgb1 = parseColor(color1);
   const rgb2 = parseColor(color2);
@@ -516,7 +516,7 @@ export function checkGlassContrast(
   foreground: string | RGBColor,
   glassBackground: string | RGBColor,
   backdropBackground: string | RGBColor,
-  glassOpacity: number = 0.25
+  glassOpacity = 0.25
 ): {
   ratio: number;
   passes: {
@@ -590,7 +590,7 @@ export function checkGlassContrast(
  */
 export function isGlassSafe(
   foreground: string,
-  glassOpacity: number = 0.25
+  glassOpacity = 0.25
 ): boolean {
   // Test against common backgrounds
   const testBackgrounds = ['#ffffff', '#000000', '#f0f0f0', '#1a1a1a'];

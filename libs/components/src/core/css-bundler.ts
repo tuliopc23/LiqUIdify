@@ -94,7 +94,7 @@ export class CSSBundler {
 
   constructor(
     config: CSSBundleConfig = DEFAULT_BUNDLE_CONFIG,
-    outputDir: string = 'dist/css'
+    outputDir = 'dist/css'
   ) {
     this.config = config;
     this.outputDir = outputDir;

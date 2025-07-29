@@ -76,7 +76,7 @@ export class AccessibilityManager {
     return this.analyzeComponent(element);
   }
 
-  announce(message: string, priority: string = 'polite'): void {
+  announce(message: string, priority = 'polite'): void {
     if (typeof announcer !== 'undefined' && announcer.announce) {
       announcer.announce(message, { priority: priority as unknown });
     }

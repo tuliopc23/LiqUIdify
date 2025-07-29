@@ -200,8 +200,8 @@ export function useGlassStateTransitions(
  * Hook for magnetic hover effects
  */
 export function useMagneticHover(
-  strength: number = 0.3,
-  radius: number = 100,
+  strength = 0.3,
+  radius = 100,
   timing: AnimationTiming = 'fast'
 ) {
   const elementRef = useRef<HTMLElement>(null);
@@ -283,7 +283,7 @@ export function useMagneticHover(
  */
 export function useRippleEffect(
   timing: AnimationTiming = 'normal',
-  _color: string = 'rgba(255, 255, 255, 0.3)'
+  _color = 'rgba(255, 255, 255, 0.3)'
 ) {
   const { animate } = useGlassAnimation(timing);
 
@@ -306,7 +306,7 @@ export function useSpringAnimation() {
     (
       element: HTMLElement,
       targetValue: number,
-      property: string = 'transform'
+      property = 'transform'
     ) => {
       const springEasing = `cubic-bezier(0.34, 1.56, 0.64, 1)`;
 
@@ -326,9 +326,9 @@ export function useSpringAnimation() {
  * Hook for liquid flow animations
  */
 export function useLiquidFlow(
-  amplitude: number = 20,
-  frequency: number = 2,
-  duration: number = 2000
+  amplitude = 20,
+  frequency = 2,
+  duration = 2000
 ) {
   const { animate } = useGlassAnimation('normal');
 

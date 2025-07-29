@@ -487,7 +487,7 @@ export class AccessibilityManager {
    */
   validateARIA(
     element: HTMLElement,
-    autoCorrect: boolean = true
+    autoCorrect = true
   ): ARIAValidation {
     const errors: Array<ARIAError> = [];
     const suggestions: Array<ARIASuggestion> = [];
@@ -939,7 +939,7 @@ export class AccessibilityManager {
 class FocusTrap {
   private container: HTMLElement;
   private options: FocusOptions & { onDeactivate?: () => void };
-  private active: boolean = false;
+  private active = false;
   private firstFocusableElement: HTMLElement | null = null;
   private lastFocusableElement: HTMLElement | null = null;
 

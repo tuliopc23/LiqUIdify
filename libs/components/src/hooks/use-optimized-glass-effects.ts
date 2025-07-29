@@ -172,7 +172,7 @@ function generateOptimizedGlassVariables(
 }
 
 // Hook for optimized animations
-export function useOptimizedAnimations(enabled: boolean = true) {
+export function useOptimizedAnimations(enabled = true) {
   const prefersReducedMotion = useMemo(() => {
     if ('undefined' === typeof window) {
       return false;

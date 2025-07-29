@@ -114,13 +114,13 @@ export class GlassGestureRecognizer {
   private element: HTMLElement;
   private config: GestureConfig;
   private callbacks: GestureCallbacks;
-  private isTracking: boolean = false;
-  private startTime: number = 0;
+  private isTracking = false;
+  private startTime = 0;
   private startPosition: { x: number; y: number } = { x: 0, y: 0 };
   private currentPosition: { x: number; y: number } = { x: 0, y: 0 };
   private velocity: { x: number; y: number } = { x: 0, y: 0 };
   private lastPosition: { x: number; y: number } = { x: 0, y: 0 };
-  private lastTime: number = 0;
+  private lastTime = 0;
   private touches: Map<number, Touch> = new Map();
   private hoverState: HoverState = {
     isHovering: false,

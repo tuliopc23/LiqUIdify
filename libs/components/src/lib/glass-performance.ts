@@ -151,8 +151,8 @@ export class GlassPerformanceMonitor {
   };
 
   private frameHistory: Array<number> = [];
-  private lastFrameTime: number = 0;
-  private isMonitoring: boolean = false;
+  private lastFrameTime = 0;
+  private isMonitoring = false;
   private animationFrame: number | null = null;
 
   start(): void {
@@ -273,9 +273,9 @@ export class GlassAnimationScheduler {
   private config: OptimizationConfig;
   private monitor: GlassPerformanceMonitor;
   private animationFrame: number | null = null;
-  private isRunning: boolean = false;
+  private isRunning = false;
   private intersectionObserver: IntersectionObserver | null = null;
-  private reducedMotion: boolean = false;
+  private reducedMotion = false;
 
   constructor(config: OptimizationConfig = DEFAULT_PERFORMANCE_CONFIG) {
     this.config = config;
@@ -588,7 +588,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
       id: string,
       element: HTMLElement,
       callback: (timestamp: number) => void,
-      priority: number = 0
+      priority = 0
     ) => {
       if (!schedulerRef.current) {
         return;
