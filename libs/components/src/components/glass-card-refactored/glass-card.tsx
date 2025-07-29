@@ -317,8 +317,8 @@ export const GlassCard = React.memo(
           'ring-2 ring-blue-500/20': state.isSelected,
           'hover:shadow-lg': hover && !disableAnimations,
           'active:scale-[0.98]': interactive && !disableAnimations,
-          flex: 'horizontal' === orientation,
-          'flex-col': 'vertical' === orientation,
+          flex: orientation === 'horizontal',
+          'flex-col': orientation === 'vertical',
         },
 
         // Elevation classes
@@ -350,7 +350,7 @@ export const GlassCard = React.memo(
             onKeyDown={(e) => {
               if (
                 (interactive || selectable) &&
-                ('Enter' === e.key || ' ' === e.key)
+                (e.key === 'Enter' || e.key === ' ')
               ) {
                 e.preventDefault();
                 actions.handlePress?.();
@@ -396,7 +396,7 @@ export const CardHeader = forwardRef<
       ref={ref}
       className={cn(
         'flex flex-col space-y-1.5 p-6',
-        'apple' === variant && 'pb-4',
+        variant === 'apple' && 'pb-4',
         className
       )}
       {...props}
@@ -421,7 +421,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HeadingProps>(
         className={cn(
           'font-semibold text-lg leading-none tracking-tight',
           'text-gray-900 dark:text-gray-100',
-          'apple' === variant && 'text-gray-800 dark:text-gray-200',
+          variant === 'apple' && 'text-gray-800 dark:text-gray-200',
           className
         )}
         {...props}
@@ -446,7 +446,7 @@ export const CardDescription = forwardRef<HTMLParagraphElement, ParagraphProps>(
         ref={ref}
         className={cn(
           'text-gray-600 text-sm dark:text-gray-400',
-          'apple' === variant && 'text-gray-700 dark:text-gray-300',
+          variant === 'apple' && 'text-gray-700 dark:text-gray-300',
           className
         )}
         {...props}
@@ -471,7 +471,7 @@ export const CardContent = forwardRef<
   return (
     <div
       ref={ref}
-      className={cn('flex-1', 'none' !== padding && 'p-6 pt-0', className)}
+      className={cn('flex-1', padding !== 'none' && 'p-6 pt-0', className)}
       {...props}
     >
       {children}
@@ -495,7 +495,7 @@ export const CardFooter = forwardRef<
       ref={ref}
       className={cn(
         'flex items-center p-6 pt-0',
-        'apple' === variant && 'pt-4',
+        variant === 'apple' && 'pt-4',
         className
       )}
       {...props}

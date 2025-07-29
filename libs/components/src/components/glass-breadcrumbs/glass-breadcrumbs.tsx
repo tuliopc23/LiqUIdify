@@ -139,7 +139,7 @@ const GlassBreadcrumbs = React.memo(
             {displayItems.map((item, index) => {
               const isLast = index === displayItems.length - 1;
               const isClickable =
-                !isLast && (item.href || item.onClick) && '...' !== item.label;
+                !isLast && (item.href || item.onClick) && item.label !== '...';
 
               const handleClick = () => handleItemClick(item, index);
 

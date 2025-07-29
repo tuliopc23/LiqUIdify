@@ -52,7 +52,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
   };
 
   useEffect(() => {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return;
     }
     if (isOpen && triggerRef.current && popoverRef.current) {
@@ -144,17 +144,17 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
 
       // Keep popover within viewport
       const viewport = {
-        width: 'undefined' === typeof window ? 1024 : window.innerWidth,
-        height: 'undefined' === typeof window ? 768 : window.innerHeight,
+        width: typeof window === 'undefined' ? 1024 : window.innerWidth,
+        height: typeof window === 'undefined' ? 768 : window.innerHeight,
       };
 
-      if (8 > left) {
+      if (left < 8) {
         left = 8;
       }
       if (left + popoverRect.width > viewport.width - 8) {
         left = viewport.width - popoverRect.width - 8;
       }
-      if (8 > top) {
+      if (top < 8) {
         top = 8;
       }
       if (top + popoverRect.height > viewport.height - 8) {
@@ -185,25 +185,25 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     };
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (closeOnEscape && isOpen && 'Escape' === event.key) {
+      if (closeOnEscape && isOpen && event.key === 'Escape') {
         setOpen(false);
       }
     };
 
     if (isOpen) {
-      if ('undefined' !== typeof document) {
+      if (typeof document !== 'undefined') {
         document.addEventListener('mousedown', handleClickOutside);
         document.addEventListener('keydown', handleEscape);
       }
     } else {
-      if ('undefined' !== typeof document) {
+      if (typeof document !== 'undefined') {
         document.removeEventListener('mousedown', handleClickOutside);
         document.removeEventListener('keydown', handleEscape);
       }
     }
 
     return () => {
-      if ('undefined' !== typeof document) {
+      if (typeof document !== 'undefined') {
         document.removeEventListener('mousedown', handleClickOutside);
         document.removeEventListener('keydown', handleEscape);
       }
@@ -235,7 +235,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
         ref={triggerRef}
         onClick={toggleOpen}
         onKeyDown={(e) => {
-          if ('Enter' === e.key || ' ' === e.key) {
+          if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             toggleOpen();
           }
@@ -248,7 +248,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
       </button>
 
       {popover &&
-        'undefined' !== typeof window &&
+        typeof window !== 'undefined' &&
         createPortal(popover, document.body)}
     </>
   );

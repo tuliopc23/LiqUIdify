@@ -63,7 +63,7 @@ export const GlassDropdown = React.memo(
         };
 
         const handleEscape = (event: KeyboardEvent) => {
-          if (isOpen && 'Escape' === event.key) {
+          if (isOpen && event.key === 'Escape') {
             setIsOpen(false);
           }
         };
@@ -114,7 +114,7 @@ export const GlassDropdown = React.memo(
           height: window.innerHeight,
         };
 
-        if (8 > left) {
+        if (left < 8) {
           left = 8;
         }
         if (left + dropdownRect.width > viewport.width - 8) {
@@ -152,7 +152,7 @@ export const GlassDropdown = React.memo(
             ref={triggerRef}
             onClick={() => setIsOpen(!isOpen)}
             onKeyDown={(e) => {
-              if ('Enter' === e.key || ' ' === e.key) {
+              if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 setIsOpen(!isOpen);
               }

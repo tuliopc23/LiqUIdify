@@ -41,7 +41,7 @@ export function getLuminance(rgb: ColorRGB): number {
 
   const [rs, gs, bs] = [r, g, b].map((c) => {
     const sRGB = c / 255;
-    return 0.039_28 >= sRGB ? sRGB / 12.92 : ((sRGB + 0.055) / 1.055) ** 2.4;
+    return sRGB <= 0.039_28 ? sRGB / 12.92 : ((sRGB + 0.055) / 1.055) ** 2.4;
   });
 
   return 0.2126 * (rs ?? 0) + 0.7152 * (gs ?? 0) + 0.0722 * (bs ?? 0);
@@ -78,17 +78,17 @@ export function checkContrast(
 
   // WCAG 2.1 standards
   const passes = {
-    normalText: 4.5 <= ratio, // AA standard for normal text
-    largeText: 3 <= ratio, // AA standard for large text (18pt+ or 14pt+ bold)
-    uiComponents: 3 <= ratio, // AA standard for UI components
+    normalText: ratio >= 4.5, // AA standard for normal text
+    largeText: ratio >= 3, // AA standard for large text (18pt+ or 14pt+ bold)
+    uiComponents: ratio >= 3, // AA standard for UI components
   };
 
   let level: ContrastResult['level'];
-  if (7 <= ratio) {
+  if (ratio >= 7) {
     level = 'AAA';
-  } else if (4.5 <= ratio) {
+  } else if (ratio >= 4.5) {
     level = 'AA';
-  } else if (3 <= ratio) {
+  } else if (ratio >= 3) {
     level = 'A';
   } else {
     level = 'FAIL';
@@ -116,7 +116,7 @@ export function getAccessibleColors(
   const suggestions: Array<string> = [];
 
   // Generate lighter and darker variations
-  for (let index = 0; 255 >= index; index += 15) {
+  for (let index = 0; index <= 255; index += 15) {
     const lightColor = { r: index, g: index, b: index };
     const darkColor = { r: 255 - index, g: 255 - index, b: 255 - index };
 
@@ -143,7 +143,7 @@ export function isLightColor(color: string): boolean {
   }
 
   const luminance = getLuminance(rgb);
-  return 0.5 < luminance;
+  return luminance > 0.5;
 }
 
 /**

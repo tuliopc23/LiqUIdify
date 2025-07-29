@@ -118,7 +118,7 @@ export function createPolymorphicComponent<
     const ElementComponent = Element as React.ElementType;
 
     // Validate props
-    if ('production' !== process.env.NODE_ENV) {
+    if (process.env.NODE_ENV !== 'production') {
       validateProps?.(mergedProps as Props & { as?: ElementType });
 
       // Additional built-in validations
@@ -130,7 +130,7 @@ export function createPolymorphicComponent<
         // Logging disabled
       }
 
-      if ('img' === ElementComponent && !restProps.alt) {
+      if (ElementComponent === 'img' && !restProps.alt) {
         // Logging disabled
       }
     }

@@ -220,7 +220,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
     // Navigate months
     const navigateMonth = (direction: 'prev' | 'next') => {
       const newDate = new Date(viewDate);
-      if ('prev' === direction) {
+      if (direction === 'prev') {
         newDate.setMonth(newDate.getMonth() - 1);
       } else {
         newDate.setMonth(newDate.getMonth() + 1);
@@ -241,11 +241,11 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
         }
       };
 
-      if ('undefined' !== typeof document) {
+      if (typeof document !== 'undefined') {
         document.addEventListener('mousedown', handleClickOutside);
       }
       return () => {
-        if ('undefined' !== typeof document) {
+        if (typeof document !== 'undefined') {
           document.removeEventListener('mousedown', handleClickOutside);
         }
       };

@@ -42,11 +42,11 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
       onError?.(event.error);
     };
 
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('error', handleError);
     }
     return () => {
-      if ('undefined' !== typeof window) {
+      if (typeof window !== 'undefined') {
         window.removeEventListener('error', handleError);
       }
     };
@@ -67,7 +67,7 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
   if (shouldFallback) {
     if (
       staticFallback &&
-      (!networkStatus.online || 'low' === performanceLevel)
+      (!networkStatus.online || performanceLevel === 'low')
     ) {
       return (
         <div
@@ -132,7 +132,7 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const shouldUseLowQuality =
-    !networkStatus.online || 'low' === performanceLevel;
+    !networkStatus.online || performanceLevel === 'low';
   const processedSource =
     shouldUseLowQuality && fallbackSrc ? fallbackSrc : src;
 
@@ -255,7 +255,7 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
 
   const shouldUseStatic =
     !networkStatus.online ||
-    'low' === performanceLevel ||
+    performanceLevel === 'low' ||
     shouldUseFallback('webGL');
 
   const handleError = () => {
@@ -317,7 +317,7 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
   const [isInteractive, setIsInteractive] = useState(true);
 
   useEffect(() => {
-    const shouldDisable = !networkStatus.online || 'low' === performanceLevel;
+    const shouldDisable = !networkStatus.online || performanceLevel === 'low';
     setIsInteractive(!shouldDisable);
   }, [networkStatus, performanceLevel]);
 
@@ -339,7 +339,7 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
       className={`graceful-interactive ${className}`}
       onClick={onInteraction}
       onKeyDown={(e) => {
-        if ('Enter' === e.key || ' ' === e.key) {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           onInteraction?.();
         }

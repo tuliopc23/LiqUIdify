@@ -91,7 +91,7 @@ let audioContext: AudioContext | null;
 
 // Initialize audio context
 function initAudioContext() {
-  if (!audioContext && 'undefined' !== typeof window) {
+  if (!audioContext && typeof window !== 'undefined') {
     audioContext = safeCreateAudioContext();
     if (!audioContext) {
       // Logging disabled
@@ -193,7 +193,7 @@ function applyVisualFeedback(
   element: HTMLElement,
   config: VisualFeedbackConfig
 ): () => void {
-  if (!config.enabled || 'undefined' === typeof window) {
+  if (!config.enabled || typeof window === 'undefined') {
     return () => {};
   }
 
@@ -223,7 +223,7 @@ function applyVisualFeedback(
   element.style.transition = `transform ${config.duration}ms ease-out, filter ${config.duration}ms ease-out`;
   element.style.transform = `${originalTransform} scale(${config.scale})`;
 
-  if (config.blur && 0 < config.blur) {
+  if (config.blur && config.blur > 0) {
     element.style.filter = `${originalFilter} blur(${config.blur}px)`;
   }
 
@@ -317,7 +317,7 @@ export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
 
   // Trigger vibration
   const vibrate = useCallback((pattern: Array<number>) => {
-    if ('undefined' === typeof window || 'undefined' === typeof navigator) {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
       return;
     }
     if (!configRef.current.vibration || !('vibrate' in navigator)) {

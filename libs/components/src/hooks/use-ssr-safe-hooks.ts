@@ -1,18 +1,18 @@
 import { useEffect, useLayoutEffect } from 'react';
 
 export const useSSRSafeLayoutEffect =
-  'undefined' === typeof window ? useEffect : useLayoutEffect;
+  typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 export const useSSRSafe = (callback: () => void, deps: Array<any>) => {
   useEffect(() => {
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       callback();
     }
     // biome-ignore lint/correctness/useExhaustiveDependencies: Custom hook with dynamic deps
   }, deps);
 };
 
-export const isSSR = () => 'undefined' === typeof window;
+export const isSSR = () => typeof window === 'undefined';
 
 // Additional SSR-safe hooks for demo component
 export const useIntersectionObserver = (_callback?: Function) => {

@@ -34,7 +34,7 @@ export class Vector2D {
 
   static normalize(vector: Vector2D): Vector2D {
     const magnitude = Math.hypot(vector.x, vector.y);
-    return 0 < magnitude
+    return magnitude > 0
       ? new Vector2D(vector.x / magnitude, vector.y / magnitude)
       : new Vector2D(0, 0);
   }
@@ -70,7 +70,7 @@ export class Vector2D {
 
   normalize(): Vector2D {
     const mag = this.magnitude();
-    return 0 < mag ? this.divide(mag) : new Vector2D();
+    return mag > 0 ? this.divide(mag) : new Vector2D();
   }
 
   dot(v: Vector2D): number {
@@ -174,7 +174,7 @@ export function hapticFeedback(
 ) {
   try {
     // Check for SSR environment
-    if ('undefined' === typeof window || 'undefined' === typeof navigator) {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
       return;
     }
 
@@ -440,7 +440,7 @@ export const useRepulsionEffect = (
             centerY - otherCenterY
           );
 
-          if (distance < PHYSICS_CONSTANTS.REPULSION_DISTANCE && 0 < distance) {
+          if (distance < PHYSICS_CONSTANTS.REPULSION_DISTANCE && distance > 0) {
             const force = repulsionStrength / (distance * distance);
             const directionX = (centerX - otherCenterX) / distance;
             const directionY = (centerY - otherCenterY) / distance;
@@ -511,7 +511,7 @@ export const createGlassRipple = (
 ) => {
   try {
     // Check for SSR environment
-    if ('undefined' === typeof window || 'undefined' === typeof document) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
 
@@ -697,7 +697,7 @@ export class FluidSimulation {
         const delta = particle.position.subtract(neighbor.position);
         const distance = delta.magnitude();
 
-        if (distance < this.smoothingRadius && 0 < distance) {
+        if (distance < this.smoothingRadius && distance > 0) {
           const pressure = (particle.pressure + neighbor.pressure) / 2;
           const direction = delta.normalize();
           const gradient = this.smoothingKernelGradient(distance);
@@ -844,7 +844,7 @@ export class Particle {
   }
 
   isDead(): boolean {
-    return 0 >= this.lifespan;
+    return this.lifespan <= 0;
   }
 
   getOpacity(): number {
@@ -879,7 +879,7 @@ export class ParticleEmitter {
       // Emit new particles
       this.emitAccumulator += deltaTime * this.config.rate;
 
-      while (1 <= this.emitAccumulator) {
+      while (this.emitAccumulator >= 1) {
         this.emit();
         this.emitAccumulator -= 1;
       }
@@ -945,7 +945,7 @@ export class ParticleEmitter {
 
   removeForce(force: Vector2D) {
     const index = this.forces.indexOf(force);
-    if (-1 < index) {
+    if (index > -1) {
       this.forces.splice(index, 1);
     }
   }

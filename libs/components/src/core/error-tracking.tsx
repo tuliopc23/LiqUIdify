@@ -70,7 +70,7 @@ class ErrorTrackingSystem {
       const integrations = [...(_config.integrations || [])];
 
       // Add browser tracing integration if performance monitoring is enabled
-      if (_config.tracesSampleRate && 0 < _config.tracesSampleRate) {
+      if (_config.tracesSampleRate && _config.tracesSampleRate > 0) {
         integrations.push(Sentry.browserTracingIntegration());
       }
 
@@ -86,7 +86,7 @@ class ErrorTrackingSystem {
           _config.beforeSend ||
           ((event, _hint) => {
             // Filter out known non-critical errors
-            if ('NetworkError' === event.exception?.values?.[0]?.type) {
+            if (event.exception?.values?.[0]?.type === 'NetworkError') {
               return;
             }
 
@@ -395,7 +395,7 @@ export function ErrorTrackingProvider({
   config,
 }: ErrorTrackingProviderProps) {
   // Initialize on mount
-  if ('undefined' !== typeof window) {
+  if (typeof window !== 'undefined') {
     errorTracking.initialize(config);
   }
 

@@ -72,7 +72,7 @@ export function GlassPerformanceProvider({
       // Check for performance issues
       if (onPerformanceIssue) {
         const report = monitor.generateReport();
-        if (70 > report.summary.overallScore) {
+        if (report.summary.overallScore < 70) {
           // Threshold for performance issues
           onPerformanceIssue(report);
         }

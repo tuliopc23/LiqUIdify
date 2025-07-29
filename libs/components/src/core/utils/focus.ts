@@ -26,7 +26,7 @@ export const createFocusTrap = (element: HTMLElement) => {
   const lastElement = focusableElements.at(-1) as HTMLElement;
 
   const handleTabKey = (e: KeyboardEvent) => {
-    if ('Tab' !== e.key) {
+    if (e.key !== 'Tab') {
       return;
     }
 
@@ -65,7 +65,7 @@ export const focusFirst = (container: HTMLElement) => {
  * Restore focus to a previously focused element
  */
 export const restoreFocus = (element: HTMLElement | null) => {
-  if (element && 'function' === typeof element.focus) {
+  if (element && typeof element.focus === 'function') {
     element.focus();
   }
 };

@@ -111,10 +111,10 @@ export function generateGlassVariables(
   // Handle both old signature (intensity, options) and new signature (options)
   let options: GlassEffectOptions;
 
-  if ('string' === typeof intensityOrOptions) {
+  if (typeof intensityOrOptions === 'string') {
     // Old signature: generateGlassVariables(intensity, options)
     options = { intensity: intensityOrOptions, ...additionalOptions };
-  } else if (intensityOrOptions && 'object' === typeof intensityOrOptions) {
+  } else if (intensityOrOptions && typeof intensityOrOptions === 'object') {
     // New signature: generateGlassVariables(options)
     options = intensityOrOptions;
   } else {
@@ -133,14 +133,14 @@ export function generateGlassVariables(
 
   // Convert boolean values to numbers
   const blur =
-    'boolean' === typeof blurValue
+    typeof blurValue === 'boolean'
       ? blurValue
         ? 4 + mapIntensity(intensity) * 20
         : 0
       : blurValue;
 
   const saturation =
-    'boolean' === typeof saturationValue
+    typeof saturationValue === 'boolean'
       ? saturationValue
         ? 1 + mapIntensity(intensity) * 0.4
         : 1

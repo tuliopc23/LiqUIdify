@@ -57,7 +57,7 @@ export function loadCSS(
   // Create loading promise
   const promise = new Promise<void>((resolve, reject) => {
     // Skip if no document (SSR)
-    if ('undefined' === typeof document) {
+    if (typeof document === 'undefined') {
       resolve();
       return;
     }

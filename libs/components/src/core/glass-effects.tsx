@@ -176,28 +176,28 @@ export function useResponsiveGlass(
   useEffect(() => {
     const checkScreenSize = () => {
       setScreenSize(
-        'undefined' !== typeof window && 768 > window.innerWidth
+        typeof window !== 'undefined' && window.innerWidth < 768
           ? 'mobile'
           : 'desktop'
       );
     };
 
     checkScreenSize();
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('resize', checkScreenSize);
     }
 
     return () => {
-      if ('undefined' !== typeof window) {
+      if (typeof window !== 'undefined') {
         window.removeEventListener('resize', checkScreenSize);
       }
     };
   }, []);
 
   const currentIntensity =
-    'mobile' === screenSize && mobileIntensity
+    screenSize === 'mobile' && mobileIntensity
       ? mobileIntensity
-      : 'desktop' === screenSize && desktopIntensity
+      : screenSize === 'desktop' && desktopIntensity
         ? desktopIntensity
         : defaultIntensity || 'medium';
 

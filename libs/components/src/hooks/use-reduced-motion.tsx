@@ -174,7 +174,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
     ): string => {
       const adjustedTransitions = transitions
         .map((t) => createTransition(t.property, t.duration, t.easing, t.delay))
-        .filter((t) => 'none' !== t);
+        .filter((t) => t !== 'none');
 
       return adjustedTransitions.length > 0
         ? adjustedTransitions.join(', ')
@@ -212,7 +212,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
       const adjusted: any = {};
 
       for (const [key, value] of Object.entries(variants)) {
-        if ('object' === typeof value && null !== value) {
+        if (typeof value === 'object' && value !== null) {
           // Handle animation objects
           if ('transition' in value && value.transition) {
             const adjustedTransition = adjustAnimation({
@@ -238,7 +238,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
           }
 
           // Disable exit animations if requested
-          if (options.disableExit && 'exit' === key) {
+          if (options.disableExit && key === 'exit') {
             adjusted[key] = { opacity: 1 };
           }
         } else {

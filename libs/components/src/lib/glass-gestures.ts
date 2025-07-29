@@ -219,7 +219,7 @@ export class GlassGestureRecognizer {
   private handleTouchStart = (e: TouchEvent): void => {
     e.preventDefault();
 
-    if (1 === e.touches.length) {
+    if (e.touches.length === 1) {
       const touch = e.touches[0];
       if (touch) {
         this.touches.set(touch.identifier, touch);
@@ -230,7 +230,7 @@ export class GlassGestureRecognizer {
         );
         this.triggerHaptic('light');
       }
-    } else if (2 === e.touches.length) {
+    } else if (e.touches.length === 2) {
       // Handle multi-touch gestures
       this.handleMultiTouch(e.touches);
     }
@@ -239,18 +239,18 @@ export class GlassGestureRecognizer {
   private handleTouchMove = (e: TouchEvent): void => {
     e.preventDefault();
 
-    if (1 === e.touches.length && this.isTracking) {
+    if (e.touches.length === 1 && this.isTracking) {
       const touch = e.touches[0];
       if (touch) {
         this.updateGesture(touch.clientX, touch.clientY);
       }
-    } else if (2 === e.touches.length) {
+    } else if (e.touches.length === 2) {
       this.handleMultiTouchMove(e.touches);
     }
   };
 
   private handleTouchEnd = (e: TouchEvent): void => {
-    if (1 === e.changedTouches.length && this.isTracking) {
+    if (e.changedTouches.length === 1 && this.isTracking) {
       const touch = e.changedTouches[0];
       if (touch) {
         this.touches.delete(touch.identifier);
@@ -308,7 +308,7 @@ export class GlassGestureRecognizer {
   };
 
   private handleKeyUp = (e: KeyboardEvent): void => {
-    if ('Enter' === e.key || ' ' === e.key) {
+    if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
     }
   };
@@ -343,7 +343,7 @@ export class GlassGestureRecognizer {
     const now = performance.now();
     const deltaTime = now - this.lastTime;
 
-    if (0 < deltaTime) {
+    if (deltaTime > 0) {
       const deltaX = x - this.lastPosition.x;
       const deltaY = y - this.lastPosition.y;
 
@@ -363,7 +363,7 @@ export class GlassGestureRecognizer {
     );
 
     const direction =
-      0 < distance
+      distance > 0
         ? {
             x: (x - this.startPosition.x) / distance,
             y: (y - this.startPosition.y) / distance,
@@ -396,7 +396,7 @@ export class GlassGestureRecognizer {
     );
 
     const direction =
-      0 < distance
+      distance > 0
         ? {
             x: (x - this.startPosition.x) / distance,
             y: (y - this.startPosition.y) / distance,
@@ -416,7 +416,7 @@ export class GlassGestureRecognizer {
     this.callbacks.onGestureEnd?.(gestureEvent);
 
     // Detect swipe gesture
-    if (distance > this.config.threshold.swipe && 500 > duration) {
+    if (distance > this.config.threshold.swipe && duration < 500) {
       this.detectSwipe(x, y, duration);
     }
 
@@ -452,9 +452,9 @@ export class GlassGestureRecognizer {
     let direction: 'left' | 'right' | 'up' | 'down';
 
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      direction = 0 < deltaX ? 'right' : 'left';
+      direction = deltaX > 0 ? 'right' : 'left';
     } else {
-      direction = 0 < deltaY ? 'down' : 'up';
+      direction = deltaY > 0 ? 'down' : 'up';
     }
 
     const swipeGesture: SwipeGesture = {
@@ -470,7 +470,7 @@ export class GlassGestureRecognizer {
 
   private handleMultiTouch(touches: TouchList): void {
     // Handle pinch and rotate gestures
-    if (2 === touches.length) {
+    if (touches.length === 2) {
       const touch1 = touches[0];
       const touch2 = touches[1];
 
@@ -483,7 +483,7 @@ export class GlassGestureRecognizer {
   }
 
   private handleMultiTouchMove(touches: TouchList): void {
-    if (2 === touches.length) {
+    if (touches.length === 2) {
       const touch1 = touches[0];
       const touch2 = touches[1];
 
@@ -503,7 +503,7 @@ export class GlassGestureRecognizer {
             storedTouch2.clientY - storedTouch1.clientY
           );
 
-          if (0 < initialDistance) {
+          if (initialDistance > 0) {
             const scale = currentDistance / initialDistance;
             const center = {
               x: (touch1.clientX + touch2.clientX) / 2,
@@ -586,7 +586,7 @@ export class GlassGestureRecognizer {
   private triggerHaptic(intensity: 'light' | 'medium' | 'heavy'): void {
     if (
       !this.config.enableHaptics ||
-      'undefined' === typeof navigator ||
+      typeof navigator === 'undefined' ||
       !navigator.vibrate
     ) {
       return;

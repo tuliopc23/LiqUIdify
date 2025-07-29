@@ -5,7 +5,7 @@
 
 // SSR environment check utilities
 export const isSSR = (): boolean => {
-  return 'undefined' === typeof window || 'undefined' === typeof document;
+  return typeof window === 'undefined' || typeof document === 'undefined';
 };
 
 export const isClient = (): boolean => {
@@ -83,7 +83,7 @@ export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
   }
 
   try {
-    return 'undefined' === typeof document
+    return typeof document === 'undefined'
       ? null
       : (document.getElementById(id) as T | null);
   } catch {
@@ -149,11 +149,11 @@ export const safeGetViewportDimensions = (): {
   try {
     return {
       width:
-        'undefined' === typeof window
+        typeof window === 'undefined'
           ? 1024
           : window.innerWidth || document.documentElement.clientWidth || 1024,
       height:
-        'undefined' === typeof window
+        typeof window === 'undefined'
           ? 768
           : window.innerHeight || document.documentElement.clientHeight || 768,
     };
@@ -346,7 +346,7 @@ export const safeSetBodyStyles = (styles: BodyStyleProps): (() => void) => {
         for (const property of Object.keys(originalStyles)) {
           const originalValue = originalStyles[property];
           if (originalValue !== undefined) {
-            if ('' === originalValue) {
+            if (originalValue === '') {
               body.style.removeProperty(property);
             } else {
               body.style.setProperty(property, originalValue);
@@ -392,12 +392,12 @@ export const safeIsElementVisible = (element: Element | null): boolean => {
     const rect = safeGetBoundingClientRect(element);
 
     return (
-      'none' !== style.display &&
-      'hidden' !== style.visibility &&
-      0 < Number.parseFloat(style.opacity || '1') &&
-      0 < rect.width &&
-      0 < rect.height &&
-      null !== (element as HTMLElement).offsetParent
+      style.display !== 'none' &&
+      style.visibility !== 'hidden' &&
+      Number.parseFloat(style.opacity || '1') > 0 &&
+      rect.width > 0 &&
+      rect.height > 0 &&
+      (element as HTMLElement).offsetParent !== null
     );
   } catch {
     // Logging disabled

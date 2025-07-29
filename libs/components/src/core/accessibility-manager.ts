@@ -269,7 +269,7 @@ export class AccessibilityManager {
     };
 
     // Initialize mutation observer for real-time validation
-    if ('undefined' !== typeof window && window.MutationObserver) {
+    if (typeof window !== 'undefined' && window.MutationObserver) {
       this.observer = new MutationObserver(this.handleMutations.bind(this));
     }
   }
@@ -290,7 +290,7 @@ export class AccessibilityManager {
   ): Promise<AccessibilityReport> {
     // Check cache first
     const cached = this.validationCache.get(element);
-    if (cached && 5000 > Date.now() - cached.timestamp.getTime()) {
+    if (cached && Date.now() - cached.timestamp.getTime() < 5000) {
       return cached;
     }
 
@@ -386,15 +386,15 @@ export class AccessibilityManager {
       const baseResult = {
         ratio,
         passes: {
-          aa: { normal: 4.5 <= ratio, large: 3 <= ratio },
-          aaa: { normal: 7 <= ratio, large: 4.5 <= ratio },
+          aa: { normal: ratio >= 4.5, large: ratio >= 3 },
+          aaa: { normal: ratio >= 7, large: ratio >= 4.5 },
         },
         recommendation:
-          7 <= ratio
+          ratio >= 7
             ? 'Excellent'
-            : 4.5 <= ratio
+            : ratio >= 4.5
               ? 'Good'
-              : 3 <= ratio
+              : ratio >= 3
                 ? 'Fair'
                 : 'Poor',
       };
@@ -403,7 +403,7 @@ export class AccessibilityManager {
 
     // Check if it meets the required level
     const meetsRequirement =
-      'AA' === level
+      level === 'AA'
         ? largeText
           ? result.passes.aa.large
           : result.passes.aa.normal
@@ -414,7 +414,7 @@ export class AccessibilityManager {
     // Auto-fix if needed and requested
     if (!meetsRequirement && autoFix) {
       const targetRatio =
-        'AA' === level ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
+        level === 'AA' ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
 
       try {
         // For now, keep the original color if contrast is poor
@@ -477,7 +477,7 @@ export class AccessibilityManager {
    */
   announce(message: string, priority: 'polite' | 'assertive' = 'polite'): void {
     announcer.announce(message, {
-      priority: 'assertive' === priority ? 'high' : 'medium',
+      priority: priority === 'assertive' ? 'high' : 'medium',
       context: 'general',
     });
   }
@@ -531,7 +531,7 @@ export class AccessibilityManager {
 
       // Validate attribute value
       if (
-        'boolean' === attributeRule.type &&
+        attributeRule.type === 'boolean' &&
         'values' in attributeRule &&
         !attributeRule.values?.includes(attributeValue)
       ) {
@@ -558,7 +558,7 @@ export class AccessibilityManager {
       }
 
       // Validate idref attributes
-      if ('idref' === attributeRule.type) {
+      if (attributeRule.type === 'idref') {
         const ids = attributeValue.split(' ').filter((id) => id.trim());
         const missingIds = ids.filter((id) => !document.getElementById(id));
 
@@ -724,7 +724,7 @@ export class AccessibilityManager {
 
     // Contrast suggestions
     for (const violation of violations) {
-      if ('color-contrast' === violation.id) {
+      if (violation.id === 'color-contrast') {
         suggestions.push({
           type: 'contrast',
           message: 'Improve color contrast for better readability',
@@ -773,7 +773,7 @@ export class AccessibilityManager {
       results.violations.length +
       results.passes.length +
       results.incomplete.length;
-    if (0 === totalChecks) {
+    if (totalChecks === 0) {
       return 100;
     }
 
@@ -789,7 +789,7 @@ export class AccessibilityManager {
   private determineWCAGLevel(violations: Array<Violation>): 'A' | 'AA' | 'AAA' {
     const hasAAViolations = violations.some(
       (v) =>
-        v.id.includes('aa') || 'serious' === v.impact || 'critical' === v.impact
+        v.id.includes('aa') || v.impact === 'serious' || v.impact === 'critical'
     );
 
     if (!hasAAViolations && violations.length === 0) {
@@ -919,7 +919,7 @@ export class AccessibilityManager {
   private handleMutations(mutations: Array<MutationRecord>): void {
     for (const mutation of mutations) {
       if (
-        'attributes' === mutation.type &&
+        mutation.type === 'attributes' &&
         mutation.attributeName?.startsWith('aria-')
       ) {
         const element = mutation.target as HTMLElement;
@@ -962,7 +962,7 @@ class FocusTrap {
     // Set initial focus
     if (this.options.initialFocus) {
       const initialElement =
-        'string' === typeof this.options.initialFocus
+        typeof this.options.initialFocus === 'string'
           ? (this.container.querySelector(
               this.options.initialFocus
             ) as HTMLElement)
@@ -978,7 +978,7 @@ class FocusTrap {
     }
 
     // Add event listeners
-    if ('undefined' !== typeof document) {
+    if (typeof document !== 'undefined') {
       document.addEventListener('keydown', this.handleKeyDown);
       if (this.options.clickOutsideDeactivates) {
         document.addEventListener('click', this.handleClickOutside);
@@ -992,7 +992,7 @@ class FocusTrap {
     }
 
     this.active = false;
-    if ('undefined' !== typeof document) {
+    if (typeof document !== 'undefined') {
       document.removeEventListener('keydown', this.handleKeyDown);
       document.removeEventListener('click', this.handleClickOutside);
     }
@@ -1025,7 +1025,7 @@ class FocusTrap {
       return;
     }
 
-    if ('Tab' === event.key) {
+    if (event.key === 'Tab') {
       this.updateFocusableElements();
 
       if (!this.firstFocusableElement || !this.lastFocusableElement) {
@@ -1045,7 +1045,7 @@ class FocusTrap {
         event.preventDefault();
         this.firstFocusableElement.focus();
       }
-    } else if ('Escape' === event.key && this.options.escapeDeactivates) {
+    } else if (event.key === 'Escape' && this.options.escapeDeactivates) {
       this.deactivate();
     }
   };

@@ -408,7 +408,7 @@ export class BundleSizeValidator {
     }
 
     return {
-      passed: violations.filter((v) => 'error' === v.severity).length === 0,
+      passed: violations.filter((v) => v.severity === 'error').length === 0,
       violations,
     };
   }
@@ -444,7 +444,7 @@ export class CSSPerformanceAnalyzer {
 
       // Check for complex selectors
       if (
-        (rule.selector.includes(' ') && 3 < rule.selector.split(' ').length) ||
+        (rule.selector.includes(' ') && rule.selector.split(' ').length > 3) ||
         rule.selector.includes('+') ||
         rule.selector.includes('~') ||
         rule.selector.includes('>')

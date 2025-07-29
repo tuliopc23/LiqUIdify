@@ -86,7 +86,7 @@ export function LiquidGlassProvider({
 
       // Adapt color based on dominant hue
       const hue = analysis.dominantHue;
-      const adaptedColor = `hsl(${hue}, 20%, ${0.5 < analysis.brightness ? 95 : 15}%)`;
+      const adaptedColor = `hsl(${hue}, 20%, ${analysis.brightness > 0.5 ? 95 : 15}%)`;
       root.style.setProperty('--glass-color-adaptive', adaptedColor);
     },
     [merged]
@@ -181,7 +181,7 @@ export const useContentAwareGlass = (
       }
     } catch {
       // Silently fail in production, log in development
-      if ('development' === process.env.NODE_ENV) {
+      if (process.env.NODE_ENV === 'development') {
         // Logging disabled
       }
     }
@@ -192,7 +192,7 @@ export const useContentAwareGlass = (
       return;
     }
     if (
-      'undefined' === typeof window ||
+      typeof window === 'undefined' ||
       !('MutationObserver' in window) ||
       !('ResizeObserver' in window)
     ) {
@@ -226,8 +226,8 @@ export const useContentAwareGlass = (
 
 // Helper function to analyze color
 function analyzeColor(colorString: string): ContentAnalysis | null {
-  if (!colorString || 'string' !== typeof colorString) {
-    if ('development' === process.env.NODE_ENV) {
+  if (!colorString || typeof colorString !== 'string') {
+    if (process.env.NODE_ENV === 'development') {
       // Logging disabled
     }
 
@@ -241,7 +241,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
     );
 
     if (!rgbMatch) {
-      if ('development' === process.env.NODE_ENV) {
+      if (process.env.NODE_ENV === 'development') {
         // Logging disabled
       }
       // Return a default analysis for unrecognized colors
@@ -259,7 +259,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
 
     // Validate parsed values
     if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) {
-      if ('development' === process.env.NODE_ENV) {
+      if (process.env.NODE_ENV === 'development') {
         // Logging disabled
       }
 
@@ -284,7 +284,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
       dominantHue: hue,
     };
   } catch {
-    if ('development' === process.env.NODE_ENV) {
+    if (process.env.NODE_ENV === 'development') {
       // Logging disabled
     }
     // Return a safe default
@@ -303,7 +303,7 @@ function rgbToHue(r: number, g: number, b: number): number {
   const min = Math.min(r, g, b);
   const delta = max - min;
 
-  if (0 === delta) {
+  if (delta === 0) {
     return 0;
   }
 

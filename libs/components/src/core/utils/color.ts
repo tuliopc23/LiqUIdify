@@ -38,14 +38,14 @@ export function parseColor(color: string): RGBColor | null {
   // Handle hex colors
   if (color.startsWith('#')) {
     const hex = color.slice(1);
-    if (3 === hex.length) {
+    if (hex.length === 3) {
       return {
         r: Number.parseInt(hex[0]! + hex[0]!, 16),
         g: Number.parseInt(hex[1]! + hex[1]!, 16),
         b: Number.parseInt(hex[2]! + hex[2]!, 16),
       };
     }
-    if (6 === hex.length) {
+    if (hex.length === 6) {
       return {
         r: Number.parseInt(hex.slice(0, 2), 16),
         g: Number.parseInt(hex.slice(2, 4), 16),
@@ -88,7 +88,7 @@ export function parseColor(color: string): RGBColor | null {
 export function rgbToHex(r: number, g: number, b: number): string {
   const toHex = (n: number) => {
     const hex = Math.round(Math.max(0, Math.min(255, n))).toString(16);
-    return 1 === hex.length ? `0${hex}` : hex;
+    return hex.length === 1 ? `0${hex}` : hex;
   };
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
@@ -115,8 +115,8 @@ export function rgbToHsl(
   let h = 0;
   let s = 0;
 
-  if (0 !== diff) {
-    s = 0.5 < l ? diff / (2 - sum) : diff / sum;
+  if (diff !== 0) {
+    s = l > 0.5 ? diff / (2 - sum) : diff / sum;
 
     switch (max) {
       case r: {
@@ -154,10 +154,10 @@ export function hslToRgb(
   h /= 360;
 
   const hueToRgb = (p: number, q: number, t: number) => {
-    if (0 > t) {
+    if (t < 0) {
       t += 1;
     }
-    if (1 < t) {
+    if (t > 1) {
       t -= 1;
     }
     if (t < 1 / 6) {
@@ -174,10 +174,10 @@ export function hslToRgb(
 
   let r, g, b;
 
-  if (0 === s) {
+  if (s === 0) {
     r = g = b = l; // achromatic
   } else {
-    const q = 0.5 > l ? l * (1 + s) : l + s - l * s;
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
     const p = 2 * l - q;
     r = hueToRgb(p, q, h + 1 / 3);
     g = hueToRgb(p, q, h);
@@ -196,7 +196,7 @@ export function hslToRgb(
  * Calculate luminance of a color (for contrast ratio calculations)
  */
 export function getLuminance(color: string | RGBColor): number {
-  const rgb = 'string' === typeof color ? parseColor(color) : color;
+  const rgb = typeof color === 'string' ? parseColor(color) : color;
   if (!rgb) {
     return 0;
   }
@@ -205,7 +205,7 @@ export function getLuminance(color: string | RGBColor): number {
 
   const normalize = (value: number) => {
     const normalized = value / 255;
-    return 0.039_28 >= normalized
+    return normalized <= 0.039_28
       ? normalized / 12.92
       : ((normalized + 0.055) / 1.055) ** 2.4;
   };
@@ -240,18 +240,18 @@ export function meetsContrastRequirement(
 ): boolean {
   const ratio = getContrastRatio(foreground, background);
 
-  if ('AAA' === level) {
-    return 'large' === size ? 4.5 <= ratio : 7 <= ratio;
+  if (level === 'AAA') {
+    return size === 'large' ? ratio >= 4.5 : ratio >= 7;
   }
 
-  return 'large' === size ? 3 <= ratio : 4.5 <= ratio;
+  return size === 'large' ? ratio >= 3 : ratio >= 4.5;
 }
 
 /**
  * Determine if a color is light or dark
  */
 export function isLightColor(color: string | RGBColor): boolean {
-  return 0.5 < getLuminance(color);
+  return getLuminance(color) > 0.5;
 }
 
 /**
@@ -427,7 +427,7 @@ export function getColorInfo(color: string): ColorInfo | null {
 
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
   const luminance = getLuminance(rgb);
-  const isDark = 0.5 > luminance;
+  const isDark = luminance < 0.5;
   const isLight = !isDark;
 
   return {
@@ -445,7 +445,7 @@ export function getColorInfo(color: string): ColorInfo | null {
  */
 export function isValidColor(color: string): boolean {
   const rgb = parseColor(color);
-  return null !== rgb;
+  return rgb !== null;
 }
 
 /**
@@ -526,13 +526,13 @@ export function checkGlassContrast(
   recommendation: string;
 } {
   const fg =
-    'string' === typeof foreground ? parseColor(foreground) : foreground;
+    typeof foreground === 'string' ? parseColor(foreground) : foreground;
   const glassBg =
-    'string' === typeof glassBackground
+    typeof glassBackground === 'string'
       ? parseColor(glassBackground)
       : glassBackground;
   const backdropBg =
-    'string' === typeof backdropBackground
+    typeof backdropBackground === 'string'
       ? parseColor(backdropBackground)
       : backdropBackground;
 
@@ -556,24 +556,24 @@ export function checkGlassContrast(
     ratio,
     passes: {
       aa: {
-        normal: 4.5 <= ratio,
-        large: 3 <= ratio,
+        normal: ratio >= 4.5,
+        large: ratio >= 3,
       },
       aaa: {
-        normal: 7 <= ratio,
-        large: 4.5 <= ratio,
+        normal: ratio >= 7,
+        large: ratio >= 4.5,
       },
     },
     recommendation: '',
   };
 
-  if (3 > ratio) {
+  if (ratio < 3) {
     result.recommendation =
       'Very poor contrast. Consider using a different color combination.';
-  } else if (4.5 > ratio) {
+  } else if (ratio < 4.5) {
     result.recommendation =
       'Acceptable for large text only (18pt+ or 14pt+ bold).';
-  } else if (7 > ratio) {
+  } else if (ratio < 7) {
     result.recommendation = 'Good contrast. Meets WCAG AA standards.';
   } else {
     result.recommendation = 'Excellent contrast. Meets WCAG AAA standards.';

@@ -145,7 +145,7 @@ class LiqUIdifyBenchmarkRunner {
         }
 
         // Yield to event loop occasionally
-        if (0 === index % 10) {
+        if (index % 10 === 0) {
           await this.waitForNextFrame();
         }
       }
@@ -293,7 +293,7 @@ class LiqUIdifyBenchmarkRunner {
       console.log(`📊 Memory leak test cycle ${cycle + 1}/${cycles}`);
 
       // Render and unmount component multiple times
-      for (let index = 0; 50 > index; index++) {
+      for (let index = 0; index < 50; index++) {
         await this.renderComponent(Component, props);
         await this.unmountComponent();
       }
@@ -310,7 +310,7 @@ class LiqUIdifyBenchmarkRunner {
 
     // Analyze memory growth trend
     const memoryGrowth = memorySnapshots.map((memory, index) =>
-      0 === index ? 0 : memory - (memorySnapshots[0] ?? 0)
+      index === 0 ? 0 : memory - (memorySnapshots[0] ?? 0)
     );
 
     // Calculate leak rate (bytes per cycle)
@@ -394,7 +394,7 @@ class LiqUIdifyBenchmarkRunner {
    * Setup performance observers
    */
   private setupPerformanceObservers(): void {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return;
     }
 
@@ -402,7 +402,7 @@ class LiqUIdifyBenchmarkRunner {
     const frameObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       for (const entry of entries) {
-        if ('frame' === (entry as unknown).entryType) {
+        if ((entry as unknown).entryType === 'frame') {
           this.frameMetrics.push(entry.duration);
         }
       }
@@ -419,7 +419,7 @@ class LiqUIdifyBenchmarkRunner {
     const longTaskObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       for (const entry of entries) {
-        if (50 < entry.duration) {
+        if (entry.duration > 50) {
           // Tasks longer than 50ms
           // Logging disabled
         }
@@ -458,7 +458,7 @@ class LiqUIdifyBenchmarkRunner {
     }
 
     // Simulate DOM manipulation memory allocation
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       const temporaryElements = Array.from({ length: 10 }, () =>
         document.createElement('div')
       );
@@ -482,7 +482,7 @@ class LiqUIdifyBenchmarkRunner {
    */
   private async waitForNextFrame(): Promise<void> {
     return new Promise((resolve) => {
-      if ('undefined' === typeof requestAnimationFrame) {
+      if (typeof requestAnimationFrame === 'undefined') {
         setTimeout(resolve, 16); // Fallback for Node.js
       } else {
         requestAnimationFrame(() => resolve());
@@ -494,9 +494,9 @@ class LiqUIdifyBenchmarkRunner {
    * Force garbage collection (if available)
    */
   private async triggerGC(): Promise<void> {
-    if ('undefined' !== typeof window && (window as unknown).gc) {
+    if (typeof window !== 'undefined' && (window as unknown).gc) {
       (window as unknown).gc();
-    } else if ('undefined' !== typeof global && (global as unknown).gc) {
+    } else if (typeof global !== 'undefined' && (global as unknown).gc) {
       (global as unknown).gc();
     }
 
@@ -508,11 +508,11 @@ class LiqUIdifyBenchmarkRunner {
    * Get current memory usage
    */
   private getMemoryUsage(): number {
-    if ('undefined' !== typeof performance && (performance as unknown).memory) {
+    if (typeof performance !== 'undefined' && (performance as unknown).memory) {
       return (performance as unknown).memory.usedJSHeapSize;
     }
 
-    if ('undefined' !== typeof process && process.memoryUsage) {
+    if (typeof process !== 'undefined' && process.memoryUsage) {
       return process.memoryUsage().heapUsed;
     }
 
@@ -538,7 +538,7 @@ class LiqUIdifyBenchmarkRunner {
     const average =
       frameRates.reduce((sum, rate) => sum + rate, 0) / frameRates.length;
     const min = Math.min(...frameRates);
-    const drops = frameRates.filter((rate) => 55 > rate).length;
+    const drops = frameRates.filter((rate) => rate < 55).length;
 
     return { average, min, drops };
   }
@@ -605,7 +605,7 @@ class LiqUIdifyBenchmarkRunner {
    * Calculate memory leak rate
    */
   private calculateLeakRate(memoryGrowth: Array<number>): number {
-    if (2 > memoryGrowth.length) {
+    if (memoryGrowth.length < 2) {
       return 0;
     }
 
@@ -644,7 +644,7 @@ class LiqUIdifyBenchmarkRunner {
     for (const value of Object.values(_props)) {
       if (Array.isArray(value)) {
         complexity += value.length * 0.01;
-      } else if ('object' === typeof value && null !== value) {
+      } else if (typeof value === 'object' && value !== null) {
         complexity += 0.2;
       }
     }
@@ -668,7 +668,7 @@ class LiqUIdifyBenchmarkRunner {
 
     const delay = delays[speed as keyof typeof delays] || 0;
 
-    if (0 < delay) {
+    if (delay > 0) {
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
 
@@ -791,7 +791,7 @@ class LiqUIdifyBenchmarkRunner {
     await this.triggerGC();
 
     // Warm up performance measuring
-    for (let index = 0; 3 > index; index++) {
+    for (let index = 0; index < 3; index++) {
       performance.now();
       await this.waitForNextFrame();
     }

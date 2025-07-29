@@ -624,7 +624,7 @@ export class LiqUIdifyMigrationSystem {
         if (
           entry.isDirectory() &&
           !entry.name.startsWith('.') &&
-          'node_modules' !== entry.name
+          entry.name !== 'node_modules'
         ) {
           await scanDir(fullPath);
         } else if (entry.isFile()) {
@@ -633,7 +633,7 @@ export class LiqUIdifyMigrationSystem {
             patterns.some((pattern) => {
               const patternExtension = pattern.split('.').pop();
               return (
-                '*' === patternExtension || extension === `.${patternExtension}`
+                patternExtension === '*' || extension === `.${patternExtension}`
               );
             })
           ) {
@@ -781,7 +781,7 @@ import { Component } from '${change.newName}';
 
     // Add manual steps based on breaking changes that can't be automated
     for (const change of migration.breakingChanges) {
-      if ('critical' === change.severity) {
+      if (change.severity === 'critical') {
         steps.push(
           `Review and update ${change.component || 'usage'} for ${change.reason}`
         );
@@ -797,12 +797,12 @@ import { Component } from '${change.newName}';
 
     // Estimate time based on complexity
     let estimatedMinutes = Math.max(1, Math.ceil(fileCount / 10));
-    if (0 < errorCount) {
+    if (errorCount > 0) {
       estimatedMinutes += errorCount * 2; // Add 2 minutes per error for manual fixes
     }
 
     report.summary.estimatedTimeToComplete =
-      1 === estimatedMinutes ? '1 minute' : `${estimatedMinutes} minutes`;
+      estimatedMinutes === 1 ? '1 minute' : `${estimatedMinutes} minutes`;
   }
 
   private isVersionInRange(
@@ -812,8 +812,8 @@ import { Component } from '${change.newName}';
     targetTo: string
   ): boolean {
     return (
-      0 <= this.compareVersions(migrationFrom, targetFrom) &&
-      0 >= this.compareVersions(migrationTo, targetTo)
+      this.compareVersions(migrationFrom, targetFrom) >= 0 &&
+      this.compareVersions(migrationTo, targetTo) <= 0
     );
   }
 

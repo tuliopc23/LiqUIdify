@@ -41,18 +41,18 @@ export type ThemeId = Brand<string, 'ThemeId'>;
 // Type guards for branded types
 export const isGlassColor = (value: unknown): value is GlassColor => {
   return (
-    'string' === typeof value && /^(#|rgb|hsl|var\()/.test(value as string)
+    typeof value === 'string' && /^(#|rgb|hsl|var\()/.test(value as string)
   );
 };
 
 export const isHexColor = (value: unknown): value is HexColor => {
   return (
-    'string' === typeof value && /^#([\da-f]{3}){1,2}$/i.test(value as string)
+    typeof value === 'string' && /^#([\da-f]{3}){1,2}$/i.test(value as string)
   );
 };
 
 export const isCSSVariable = (value: unknown): value is CSSVariable => {
-  return 'string' === typeof value && /^var\(--[\w-]+\)$/.test(value as string);
+  return typeof value === 'string' && /^var\(--[\w-]+\)$/.test(value as string);
 };
 
 // Type constructors for branded types

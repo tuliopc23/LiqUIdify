@@ -31,7 +31,7 @@ export function usePerformanceMonitoring(
   useEffect(() => {
     const renderTime = performance.now() - renderStartTime.current;
 
-    if (0 === renderCount) {
+    if (renderCount === 0) {
       // First render is mount
       performanceMonitor.trackComponent(componentName, {
         mountTime: renderTime,
@@ -145,7 +145,7 @@ export function useRealtimePerformance() {
       const currentTime = performance.now();
       const elapsed = currentTime - lastTimeRef.current;
 
-      if (1000 <= elapsed) {
+      if (elapsed >= 1000) {
         const currentFps = Math.round((frameCountRef.current * 1000) / elapsed);
         setFps(currentFps);
         frameCountRef.current = 0;

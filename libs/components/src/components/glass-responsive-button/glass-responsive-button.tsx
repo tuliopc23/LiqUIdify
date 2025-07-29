@@ -42,7 +42,7 @@ const GlassResponsiveButton = forwardRef<
 
     useEffect(() => {
       const checkMobile = () => {
-        setIsMobile(768 > window.innerWidth && 'ontouchstart' in window);
+        setIsMobile(window.innerWidth < 768 && 'ontouchstart' in window);
       };
 
       checkMobile();

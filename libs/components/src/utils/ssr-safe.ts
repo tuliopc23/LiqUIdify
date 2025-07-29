@@ -4,12 +4,12 @@ import { useEffect, useLayoutEffect, useState } from 'react';
  * Safe layout effect that works on server
  */
 export const useIsomorphicLayoutEffect =
-  'undefined' === typeof window ? useEffect : useLayoutEffect;
+  typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 /**
  * Check if code is running on server
  */
-export const isServer = 'undefined' === typeof window;
+export const isServer = typeof window === 'undefined';
 export const isClient = !isServer;
 
 /**
@@ -97,7 +97,7 @@ export const useMediaQuery = (query: string): boolean => {
     }
 
     const mediaQuery =
-      'undefined' === typeof window ? undefined : window.matchMedia(query);
+      typeof window === 'undefined' ? undefined : window.matchMedia(query);
     if (mediaQuery) {
       setMatches(mediaQuery.matches);
 

@@ -68,11 +68,11 @@ const GlassResponsiveCard = forwardRef<
     const baseClasses = cn(
       'overflow-hidden rounded-xl',
       variantClasses[variant],
-      'none' === padding
+      padding === 'none'
         ? ''
         : paddingClasses[padding as keyof typeof paddingClasses],
       bordered &&
-        'outlined' !== variant &&
+        variant !== 'outlined' &&
         'border border-[var(--glass-border)]',
       hover && 'glass-interactive cursor-pointer',
       microInteraction.smooth,

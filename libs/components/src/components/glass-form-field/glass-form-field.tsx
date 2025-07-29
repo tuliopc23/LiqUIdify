@@ -165,7 +165,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         )}
 
         <div
-          className={cn('inline' === variant ? 'flex-1' : 'w-full', 'relative')}
+          className={cn(variant === 'inline' ? 'flex-1' : 'w-full', 'relative')}
         >
           {enhancedChildren}
         </div>

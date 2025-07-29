@@ -182,11 +182,11 @@ export class GlassPerformanceMonitor {
     const now = performance.now();
     const frameTime = now - this.lastFrameTime;
 
-    if (0 < this.lastFrameTime) {
+    if (this.lastFrameTime > 0) {
       this.frameHistory.push(frameTime);
 
       // Keep only last 60 frames for FPS calculation
-      if (60 < this.frameHistory.length) {
+      if (this.frameHistory.length > 60) {
         this.frameHistory.shift();
       }
 
@@ -197,7 +197,7 @@ export class GlassPerformanceMonitor {
       this.metrics.frameTime = avgFrameTime;
 
       // Count dropped frames (frames that took longer than 16.67ms)
-      if (16.67 < frameTime) {
+      if (frameTime > 16.67) {
         this.metrics.droppedFrames++;
       }
     }
@@ -236,19 +236,19 @@ export class GlassPerformanceMonitor {
     const recommendations: Array<string> = [];
     const { fps, activeAnimations, droppedFrames, memoryUsage } = this.metrics;
 
-    if (30 > fps) {
+    if (fps < 30) {
       recommendations.push(
         'Consider reducing animation complexity or enabling reduced motion'
       );
     }
 
-    if (50 < activeAnimations) {
+    if (activeAnimations > 50) {
       recommendations.push(
         'Too many active animations - consider animation culling'
       );
     }
 
-    if (10 < droppedFrames) {
+    if (droppedFrames > 10) {
       recommendations.push(
         'High frame drop rate - enable GPU acceleration or reduce quality'
       );
@@ -287,7 +287,7 @@ export class GlassAnimationScheduler {
   private setupIntersectionObserver(): void {
     if (
       !this.config.enableCulling ||
-      'undefined' === typeof IntersectionObserver
+      typeof IntersectionObserver === 'undefined'
     ) {
       return;
     }
@@ -313,7 +313,7 @@ export class GlassAnimationScheduler {
   }
 
   private checkReducedMotion(): void {
-    if (!this.config.enableReducedMotion || 'undefined' === typeof window) {
+    if (!this.config.enableReducedMotion || typeof window === 'undefined') {
       return;
     }
 
@@ -449,14 +449,14 @@ export class GlassAnimationScheduler {
     const visibilityRatio = elementArea / viewportArea;
 
     // Reduce animation quality for small or distant elements
-    if (0.01 > visibilityRatio) {
+    if (visibilityRatio < 0.01) {
       // Very small elements - skip every other frame
-      if (0 === task.frameCount % 2) {
+      if (task.frameCount % 2 === 0) {
         return;
       }
     } else if (
-      0.05 > visibilityRatio && // Small elements - reduce frame rate
-      0 === task.frameCount % 1.5
+      visibilityRatio < 0.05 && // Small elements - reduce frame rate
+      task.frameCount % 1.5 === 0
     ) {
       return;
     }
@@ -537,9 +537,9 @@ export const GPUAccelerationHelper = {
   isGPUAccelerated(element: HTMLElement): boolean {
     const computedStyle = window.getComputedStyle(element);
     return (
-      'auto' !== computedStyle.willChange ||
+      computedStyle.willChange !== 'auto' ||
       computedStyle.transform.includes('translateZ') ||
-      'hidden' === computedStyle.backfaceVisibility
+      computedStyle.backfaceVisibility === 'hidden'
     );
   },
 };

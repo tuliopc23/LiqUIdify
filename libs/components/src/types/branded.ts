@@ -56,7 +56,7 @@ export const createAccessibleContrast = (ratio: number): AccessibleContrast => {
 
 export function isValidContrastRatio(ratio: number): boolean {
   // WCAG AA standards: 4.5:1 for normal text, 3:1 for large text
-  return 3 <= ratio;
+  return ratio >= 3;
 }
 
 /**
@@ -68,7 +68,7 @@ export function isValidContrastRatio(ratio: number): boolean {
 export type GlassOpacity = Brand<number, 'GlassOpacity'>;
 
 export const createGlassOpacity = (opacity: number): GlassOpacity => {
-  if (0 > opacity || 1 < opacity) {
+  if (opacity < 0 || opacity > 1) {
     throw new Error(`Opacity must be between 0 and 1, got ${opacity}`);
   }
   return opacity as GlassOpacity;
@@ -83,7 +83,7 @@ export const createGlassOpacity = (opacity: number): GlassOpacity => {
 export type GlassBlur = Brand<number, 'GlassBlur'>;
 
 export const createGlassBlur = (pixels: number): GlassBlur => {
-  if (0 > pixels || 100 < pixels) {
+  if (pixels < 0 || pixels > 100) {
     throw new Error(`Blur must be between 0 and 100 pixels, got ${pixels}`);
   }
   return pixels as GlassBlur;
@@ -108,7 +108,7 @@ export const createCSSUnit = (value: string): CSSUnit => {
 export function isValidCSSUnit(value: string): boolean {
   const pattern =
     /^-?\d*\.?\d+(px|em|rem|%|vh|vw|vmin|vmax|ch|ex|cm|mm|in|pt|pc)$/;
-  return pattern.test(value) || '0' === value || 'auto' === value;
+  return pattern.test(value) || value === '0' || value === 'auto';
 }
 
 /**
@@ -120,7 +120,7 @@ export function isValidCSSUnit(value: string): boolean {
 export type AnimationDuration = Brand<number, 'AnimationDuration'>;
 
 export const createAnimationDuration = (ms: number): AnimationDuration => {
-  if (0 > ms || 10_000 < ms) {
+  if (ms < 0 || ms > 10_000) {
     throw new Error(
       `Animation duration must be between 0 and 10000ms, got ${ms}`
     );
@@ -137,7 +137,7 @@ export const createAnimationDuration = (ms: number): AnimationDuration => {
 export type ZIndex = Brand<number, 'ZIndex'>;
 
 export const createZIndex = (value: number): ZIndex => {
-  if (-999 > value || 9999 < value) {
+  if (value < -999 || value > 9999) {
     throw new Error(`Z-index should be between -999 and 9999, got ${value}`);
   }
   return value as ZIndex;
@@ -193,31 +193,31 @@ export const createComponentSize = (size: string): ComponentSize => {
  */
 export const isBrandedType = {
   isGlassColor: (value: unknown): value is GlassColor =>
-    'string' === typeof value && isValidGlassColor(value),
+    typeof value === 'string' && isValidGlassColor(value),
 
   isAccessibleContrast: (value: unknown): value is AccessibleContrast =>
-    'number' === typeof value && isValidContrastRatio(value),
+    typeof value === 'number' && isValidContrastRatio(value),
 
   isGlassOpacity: (value: unknown): value is GlassOpacity =>
-    'number' === typeof value && 0 <= value && 1 >= value,
+    typeof value === 'number' && value >= 0 && value <= 1,
 
   isGlassBlur: (value: unknown): value is GlassBlur =>
-    'number' === typeof value && 0 <= value && 100 >= value,
+    typeof value === 'number' && value >= 0 && value <= 100,
 
   isCSSUnit: (value: unknown): value is CSSUnit =>
-    'string' === typeof value && isValidCSSUnit(value),
+    typeof value === 'string' && isValidCSSUnit(value),
 
   isAnimationDuration: (value: unknown): value is AnimationDuration =>
-    'number' === typeof value && 0 <= value && 10_000 >= value,
+    typeof value === 'number' && value >= 0 && value <= 10_000,
 
   isZIndex: (value: unknown): value is ZIndex =>
-    'number' === typeof value && -999 <= value && 9999 >= value,
+    typeof value === 'number' && value >= -999 && value <= 9999,
 
   isThemeName: (value: unknown): value is ThemeName =>
-    'string' === typeof value && VALID_THEMES.includes(value as unknown),
+    typeof value === 'string' && VALID_THEMES.includes(value as unknown),
 
   isComponentSize: (value: unknown): value is ComponentSize =>
-    'string' === typeof value && VALID_SIZES.includes(value as unknown),
+    typeof value === 'string' && VALID_SIZES.includes(value as unknown),
 };
 
 /**

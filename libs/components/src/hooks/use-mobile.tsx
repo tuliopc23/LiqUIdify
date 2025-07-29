@@ -8,7 +8,7 @@ export function useIsMobile() {
   );
 
   React.useEffect(() => {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return;
     }
 

@@ -193,10 +193,10 @@ function useDevicePerformance(
     let score = 0;
 
     // Memory score
-    score += 8 <= memory ? 3 : 4 <= memory ? 2 : 1;
+    score += memory >= 8 ? 3 : memory >= 4 ? 2 : 1;
 
     // CPU score
-    score += 8 <= cores ? 3 : 4 <= cores ? 2 : 1;
+    score += cores >= 8 ? 3 : cores >= 4 ? 2 : 1;
 
     // Save data mode
     if (saveData) {
@@ -312,13 +312,13 @@ export function FeatureDetectionClasses() {
     };
 
     updateNetworkStatus();
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('online', updateNetworkStatus);
       window.addEventListener('offline', updateNetworkStatus);
     }
 
     return () => {
-      if ('undefined' !== typeof window) {
+      if (typeof window !== 'undefined') {
         window.removeEventListener('online', updateNetworkStatus);
         window.removeEventListener('offline', updateNetworkStatus);
       }

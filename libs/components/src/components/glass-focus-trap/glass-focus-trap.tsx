@@ -105,12 +105,12 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       const rect = element.getBoundingClientRect();
 
       return (
-        'none' !== style.display &&
-        'hidden' !== style.visibility &&
-        '0' !== style.opacity &&
-        null !== element.offsetParent &&
-        0 < rect.width &&
-        0 < rect.height &&
+        style.display !== 'none' &&
+        style.visibility !== 'hidden' &&
+        style.opacity !== '0' &&
+        element.offsetParent !== null &&
+        rect.width > 0 &&
+        rect.height > 0 &&
         !element.hasAttribute('inert') &&
         !element.closest('[inert]')
       );
@@ -135,7 +135,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       });
 
       // Keep only last 10 focus history items
-      if (10 < focusHistory.current.length) {
+      if (focusHistory.current.length > 10) {
         focusHistory.current.shift();
       }
     },
@@ -145,7 +145,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   const restoreFocusFromHistory = useCallback(() => {
     const history = focusHistory.current;
 
-    for (let index = history.length - 1; 0 <= index; index--) {
+    for (let index = history.length - 1; index >= 0; index--) {
       const historyItem = history[index];
       if (!historyItem) {
         continue;
@@ -189,14 +189,14 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         }
       }
 
-      if ('Escape' === event.key && onEscape) {
+      if (event.key === 'Escape' && onEscape) {
         event.preventDefault();
         event.stopPropagation();
         onEscape();
         return;
       }
 
-      if ('Tab' !== event.key) {
+      if (event.key !== 'Tab') {
         return;
       }
 
@@ -349,7 +349,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         return;
       }
 
-      if ('string' === typeof initialFocus) {
+      if (typeof initialFocus === 'string') {
         const element =
           containerRef.current?.querySelector<HTMLElement>(initialFocus);
         if (element) {
@@ -385,7 +385,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
     }
 
     // Add event listeners
-    if ('undefined' !== typeof document) {
+    if (typeof document !== 'undefined') {
       document.addEventListener('keydown', handleKeyDown, true);
       document.addEventListener('focusin', handleFocusIn, true);
       document.addEventListener('mousedown', handleMouseDown, true);
@@ -402,12 +402,12 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         const index = focusTrapStack.indexOf(
           instanceRef.current as FocusTrapInstance
         );
-        if (-1 < index) {
+        if (index > -1) {
           focusTrapStack.splice(index, 1);
         }
       }
 
-      if ('undefined' !== typeof document) {
+      if (typeof document !== 'undefined') {
         document.removeEventListener('keydown', handleKeyDown, true);
         document.removeEventListener('focusin', handleFocusIn, true);
         document.removeEventListener('mousedown', handleMouseDown, true);

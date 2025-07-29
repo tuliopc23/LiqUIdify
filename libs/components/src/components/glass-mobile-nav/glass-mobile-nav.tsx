@@ -82,7 +82,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
           'flex w-full items-center justify-between p-4 text-left',
           'hover:bg-[var(--glass-bg)] active:bg-[var(--glass-bg-pressed)]',
           microInteraction.gentle,
-          0 < level && 'border-[var(--glass-border)] border-l-2 pl-8'
+          level > 0 && 'border-[var(--glass-border)] border-l-2 pl-8'
         )}
       >
         <div className="flex items-center gap-3">
@@ -122,7 +122,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   return (
     <>
       <MenuTrigger />
-      {'undefined' !== typeof window &&
+      {typeof window !== 'undefined' &&
         createPortal(
           <div className="fixed inset-0 z-50 md:hidden">
             {/* Backdrop */}
@@ -132,7 +132,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
               className="absolute inset-0 bg-black/20 backdrop-blur-sm"
               onClick={() => setIsOpen(false)}
               onKeyDown={(e) => {
-                if ('Enter' === e.key || ' ' === e.key) {
+                if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
                   setIsOpen(false);
                 }

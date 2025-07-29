@@ -44,7 +44,7 @@ const mockAxeResults: AxeResults = {
 let axeInstance: typeof import('axe-core') | null;
 
 async function getAxe() {
-  if ('production' === process.env.NODE_ENV) {
+  if (process.env.NODE_ENV === 'production') {
     return;
   }
 
@@ -101,7 +101,7 @@ export class AccessibilityManager {
   }
 
   async runAudit(element: HTMLElement, options?: any): Promise<AxeResults> {
-    if ('production' === process.env.NODE_ENV) {
+    if (process.env.NODE_ENV === 'production') {
       return mockAxeResults;
     }
 
@@ -124,7 +124,7 @@ export class AccessibilityManager {
   ): Promise<AccessibilityReport> {
     // Check cache first
     const cached = this.cache.get(element);
-    if (cached && 5000 > Date.now() - cached.timestamp.getTime()) {
+    if (cached && Date.now() - cached.timestamp.getTime() < 5000) {
       return cached;
     }
 
@@ -220,7 +220,7 @@ export class AccessibilityManager {
       .map((element_) =>
         Number.parseInt(element_.getAttribute('tabindex') || '0')
       )
-      .filter((index) => 0 < index);
+      .filter((index) => index > 0);
 
     if (tabIndexes.length > 0) {
       suggestions.push({
@@ -237,7 +237,7 @@ export class AccessibilityManager {
 
   private calculateScore(results: AxeResults): number {
     const totalTests = results.passes.length + results.violations.length;
-    if (0 === totalTests) {
+    if (totalTests === 0) {
       return 100;
     }
 
@@ -261,10 +261,10 @@ export class AccessibilityManager {
   }
 
   private determineWCAGLevel(score: number): 'A' | 'AA' | 'AAA' {
-    if (95 <= score) {
+    if (score >= 95) {
       return 'AAA';
     }
-    if (85 <= score) {
+    if (score >= 85) {
       return 'AA';
     }
     return 'A';
@@ -276,7 +276,7 @@ export class AccessibilityManager {
       const bg = computed.backgroundColor;
       const fg = computed.color;
 
-      if (!bg || !fg || 'transparent' === bg || 'transparent' === fg) {
+      if (!bg || !fg || bg === 'transparent' || fg === 'transparent') {
         return;
       }
 
@@ -284,19 +284,19 @@ export class AccessibilityManager {
       const fontSize = Number.parseFloat(computed.fontSize);
       const fontWeight = computed.fontWeight;
       const isLarge =
-        18 <= fontSize ||
-        (14 <= fontSize && 700 <= Number.parseInt(fontWeight));
+        fontSize >= 18 ||
+        (fontSize >= 14 && Number.parseInt(fontWeight) >= 700);
 
       return {
         ratio,
         passes: {
           aa: {
-            normal: 4.5 <= ratio,
-            large: 3 <= ratio,
+            normal: ratio >= 4.5,
+            large: ratio >= 3,
           },
           aaa: {
-            normal: 7 <= ratio,
-            large: 4.5 <= ratio,
+            normal: ratio >= 7,
+            large: ratio >= 4.5,
           },
         },
         recommendation: this.getContrastRecommendation(ratio, isLarge),
@@ -308,18 +308,18 @@ export class AccessibilityManager {
 
   private getContrastRecommendation(ratio: number, isLarge: boolean): string {
     if (isLarge) {
-      if (4.5 <= ratio) {
+      if (ratio >= 4.5) {
         return 'Excellent contrast for large text (AAA)';
       }
-      if (3 <= ratio) {
+      if (ratio >= 3) {
         return 'Good contrast for large text (AA)';
       }
       return 'Insufficient contrast for large text';
     }
-    if (7 <= ratio) {
+    if (ratio >= 7) {
       return 'Excellent contrast (AAA)';
     }
-    if (4.5 <= ratio) {
+    if (ratio >= 4.5) {
       return 'Good contrast (AA)';
     }
     return 'Insufficient contrast';
@@ -359,9 +359,9 @@ export class AccessibilityManager {
     for (const attribute of ariaAttributes) {
       // Validate attribute values
       if (
-        'aria-hidden' === attribute.name &&
-        'true' !== attribute.value &&
-        'false' !== attribute.value
+        attribute.name === 'aria-hidden' &&
+        attribute.value !== 'true' &&
+        attribute.value !== 'false'
       ) {
         errors.push({
           attribute: attribute.name,
@@ -372,7 +372,7 @@ export class AccessibilityManager {
       }
 
       // Check for deprecated attributes
-      if ('aria-grabbed' === attribute.name) {
+      if (attribute.name === 'aria-grabbed') {
         suggestions.push({
           attribute: attribute.name,
           currentValue: attribute.value,
@@ -406,10 +406,10 @@ export class AccessibilityManager {
       reports.reduce((sum, r) => sum + r.score, 0) / reports.length;
     const allViolations = reports.flatMap((r) => r.violations);
     const criticalCount = allViolations.filter(
-      (v) => 'critical' === v.impact
+      (v) => v.impact === 'critical'
     ).length;
     const seriousCount = allViolations.filter(
-      (v) => 'serious' === v.impact
+      (v) => v.impact === 'serious'
     ).length;
 
     return `
@@ -460,19 +460,19 @@ ${violations.map((v: unknown) => `- ${v.help}`).join('\n')}`
     const recommendations = new Set<string>();
 
     for (const report of reports) {
-      if (85 > report.score) {
+      if (report.score < 85) {
         recommendations.add(
           'Focus on fixing critical and serious violations first'
         );
       }
 
-      if (report.suggestions.some((s: unknown) => 'contrast' === s.type)) {
+      if (report.suggestions.some((s: unknown) => s.type === 'contrast')) {
         recommendations.add(
           'Review and adjust color contrast ratios across components'
         );
       }
 
-      if (report.warnings.some((w: unknown) => 'missing-alt-text' === w.id)) {
+      if (report.warnings.some((w: unknown) => w.id === 'missing-alt-text')) {
         recommendations.add('Ensure all images have descriptive alt text');
       }
     }

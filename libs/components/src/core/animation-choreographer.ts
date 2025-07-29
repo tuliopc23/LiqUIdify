@@ -103,7 +103,7 @@ export class AnimationSequence {
     // Check for reduced motion preference
     this.prefersReducedMotion =
       this.options.reducedMotion ||
-      ('undefined' !== typeof window &&
+      (typeof window !== 'undefined' &&
         window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
   }
 
@@ -244,7 +244,7 @@ export class AnimationSequence {
     // Update reduced motion preference
     this.prefersReducedMotion =
       this.options.reducedMotion ||
-      ('undefined' !== typeof window &&
+      (typeof window !== 'undefined' &&
         window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
 
     return this;
@@ -256,7 +256,7 @@ export class AnimationSequence {
   private getTargetElements(
     target: string | HTMLElement | Array<HTMLElement>
   ): Array<HTMLElement> {
-    if ('string' === typeof target) {
+    if (typeof target === 'string') {
       return [...document.querySelectorAll(target)] as Array<HTMLElement>;
     }
     if (Array.isArray(target)) {
@@ -271,7 +271,7 @@ export class AnimationSequence {
   private simplifyKeyframes(keyframes: Array<Keyframe>): Array<Keyframe> {
     // For reduced motion, we only keep the first and last keyframe
     // and remove transform properties that cause motion
-    if (2 >= keyframes.length) {
+    if (keyframes.length <= 2) {
       return keyframes;
     }
 
@@ -349,7 +349,7 @@ export class SpringAnimation {
    * Stop the spring animation
    */
   stop(): this {
-    if (null !== this.animationFrame) {
+    if (this.animationFrame !== null) {
       cancelAnimationFrame(this.animationFrame);
       this.animationFrame = null;
     }
@@ -361,7 +361,7 @@ export class SpringAnimation {
    */
   setTarget(value: number): this {
     this.targetValue = value;
-    if (null === this.animationFrame) {
+    if (this.animationFrame === null) {
       this.start();
     }
     return this;
@@ -491,7 +491,7 @@ export function useMagneticEffect(
 
   const prefersReducedMotion =
     respectReducedMotion &&
-    'undefined' !== typeof window &&
+    typeof window !== 'undefined' &&
     window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
@@ -591,10 +591,10 @@ export function useMagneticEffect(
 
         // Stop animation if close to original position
         if (
-          0.1 > Math.abs(elementX) &&
-          0.1 > Math.abs(elementY) &&
-          0.1 > Math.abs(elementRotateX) &&
-          0.1 > Math.abs(elementRotateY)
+          Math.abs(elementX) < 0.1 &&
+          Math.abs(elementY) < 0.1 &&
+          Math.abs(elementRotateX) < 0.1 &&
+          Math.abs(elementRotateY) < 0.1
         ) {
           element.style.transform = '';
           element.style.transition = '';
@@ -610,7 +610,7 @@ export function useMagneticEffect(
 
     // Initialize
     updateElementPosition();
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('resize', updateElementPosition);
       window.addEventListener('scroll', updateElementPosition);
@@ -619,14 +619,14 @@ export function useMagneticEffect(
 
     // Cleanup
     return () => {
-      if ('undefined' !== typeof window) {
+      if (typeof window !== 'undefined') {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('resize', updateElementPosition);
         window.removeEventListener('scroll', updateElementPosition);
       }
       element.removeEventListener('mouseleave', handleMouseLeave);
 
-      if (null !== animationFrame) {
+      if (animationFrame !== null) {
         cancelAnimationFrame(animationFrame);
       }
     };
@@ -652,11 +652,11 @@ export class AnimationChoreographer {
 
   constructor() {
     this.prefersReducedMotion =
-      'undefined' !== typeof window &&
+      typeof window !== 'undefined' &&
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
     // Listen for changes to reduced motion preference
-    if ('undefined' !== typeof window && window.matchMedia) {
+    if (typeof window !== 'undefined' && window.matchMedia) {
       window
         .matchMedia('(prefers-reduced-motion: reduce)')
         .addEventListener('change', this.handleReducedMotionChange);
@@ -753,7 +753,7 @@ export class AnimationChoreographer {
     this.stopAll();
     this.sequences.clear();
 
-    if ('undefined' !== typeof window && window.matchMedia) {
+    if (typeof window !== 'undefined' && window.matchMedia) {
       window
         .matchMedia('(prefers-reduced-motion: reduce)')
         .removeEventListener('change', this.handleReducedMotionChange);

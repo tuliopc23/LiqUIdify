@@ -179,7 +179,7 @@ const VARIANT_CLASSES = {
 // Loading spinner component
 const LoadingSpinner = ({ size = 'md' }: { size?: string }) => {
   const sizeClass =
-    'xs' === size ? 'w-3 h-3' : 'sm' === size ? 'w-4 h-4' : 'w-5 h-5';
+    size === 'xs' ? 'w-3 h-3' : size === 'sm' ? 'w-4 h-4' : 'w-5 h-5';
 
   return (
     <div
@@ -266,7 +266,7 @@ export const GlassButton = React.memo(
           if (buttonRef.current !== node) {
             buttonRef.current = node;
           }
-          if ('function' === typeof ref) {
+          if (typeof ref === 'function') {
             ref(node);
           } else if (ref) {
             ref.current = node;

@@ -308,7 +308,7 @@ export const typeGuards = {
       'info',
     ];
     return (
-      'string' === typeof value && variants.includes(value as ComponentVariant)
+      typeof value === 'string' && variants.includes(value as ComponentVariant)
     );
   },
 
@@ -317,14 +317,14 @@ export const typeGuards = {
    */
   isComponentSize: (value: unknown): value is ComponentSize => {
     const sizes: Array<ComponentSize> = ['xs', 'sm', 'md', 'lg', 'xl'];
-    return 'string' === typeof value && sizes.includes(value as ComponentSize);
+    return typeof value === 'string' && sizes.includes(value as ComponentSize);
   },
 
   /**
    * Check if value is a responsive prop
    */
   isResponsiveProp: <T>(value: unknown): value is Responsive<T> => {
-    if ('object' === typeof value && null !== value) {
+    if (typeof value === 'object' && value !== null) {
       const keys = Object.keys(value);
       const validKeys = new Set(['sm', 'md', 'lg', 'xl']);
       return keys.every((key) => validKeys.has(key));
@@ -339,10 +339,10 @@ export const typeGuards = {
     value: unknown
   ): value is { glassEffect: GlassEffectConfig } => {
     return (
-      'object' === typeof value &&
-      null !== value &&
+      typeof value === 'object' &&
+      value !== null &&
       'glassEffect' in value &&
-      'object' === typeof (value as unknown).glassEffect
+      typeof (value as unknown).glassEffect === 'object'
     );
   },
 };
@@ -383,7 +383,7 @@ export const propValidators = {
     property: Responsive<T>,
     validator: (value: T) => boolean
   ): boolean => {
-    if ('object' === typeof property && null !== property) {
+    if (typeof property === 'object' && property !== null) {
       return Object.values(property).every(
         (value) => value === undefined || validator(value as T)
       );
@@ -426,7 +426,7 @@ export const styleGenerators = {
     property: Responsive<T>,
     generator: (value: T) => CSSProperties
   ): CSSProperties => {
-    if ('object' === typeof property && null !== property) {
+    if (typeof property === 'object' && property !== null) {
       // This would typically integrate with a CSS-in-JS solution
       // For now, return base styles
       const baseValue = (property as unknown).sm || (property as unknown).md;

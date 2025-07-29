@@ -212,14 +212,14 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
           e.preventDefault();
           if (isOpen) {
             setHighlightedIndex((previous) =>
-              0 < previous ? previous - 1 : previous
+              previous > 0 ? previous - 1 : previous
             );
           }
           break;
         }
         case 'Enter': {
           e.preventDefault();
-          if (isOpen && 0 <= highlightedIndex) {
+          if (isOpen && highlightedIndex >= 0) {
             const option = filteredOptions[highlightedIndex];
             if (option) {
               handleSelect(option);
@@ -267,11 +267,11 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
         }
       };
 
-      if ('undefined' !== typeof document) {
+      if (typeof document !== 'undefined') {
         document.addEventListener('mousedown', handleClickOutside);
       }
       return () => {
-        if ('undefined' !== typeof document) {
+        if (typeof document !== 'undefined') {
           document.removeEventListener('mousedown', handleClickOutside);
         }
       };
@@ -279,7 +279,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
     // Scroll highlighted option into view
     useEffect(() => {
-      if (0 <= highlightedIndex && optionsRef.current[highlightedIndex]) {
+      if (highlightedIndex >= 0 && optionsRef.current[highlightedIndex]) {
         optionsRef.current[highlightedIndex].scrollIntoView({
           block: 'nearest',
           behavior: 'smooth',
@@ -405,7 +405,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
                         )}
                         onClick={() => handleSelect(option)}
                         onKeyDown={(e) => {
-                          if ('Enter' === e.key || ' ' === e.key) {
+                          if (e.key === 'Enter' || e.key === ' ') {
                             e.preventDefault();
                             handleSelect(option);
                           }

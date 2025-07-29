@@ -383,7 +383,7 @@ ${componentName}.displayName = '${componentName}';`;
       return '';
     }
 
-    const variantProperty = this.config.props.find((p) => 'variant' === p.name);
+    const variantProperty = this.config.props.find((p) => p.name === 'variant');
     if (!variantProperty) {
       return '';
     }
@@ -886,7 +886,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
   private getAriaLabelLogic(): string {
     const labelProperty = this.config.props.find(
-      (p) => 'children' === p.name || 'label' === p.name
+      (p) => p.name === 'children' || p.name === 'label'
     );
     return labelProperty ? labelProperty.name : 'undefined';
   }
@@ -951,13 +951,13 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
   private generateChildrenLogic(): string {
     const childrenProperty = this.config.props.find(
-      (p) => 'children' === p.name
+      (p) => p.name === 'children'
     );
     return childrenProperty ? '{children}' : '';
   }
 
   private generateEnumTypes(): string {
-    const enumProps = this.config.props.filter((p) => 'enum' === p.type);
+    const enumProps = this.config.props.filter((p) => p.type === 'enum');
     return enumProps
       .map(
         (property) =>
@@ -1004,7 +1004,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   private generatePropTests(): string {
     return this.config.props
       .map((property) => {
-        if ('boolean' === property.type) {
+        if (property.type === 'boolean') {
           return `
     it('handles ${property.name} prop', () => {
       const { rerender } = render(<${this.config.name} ${property.name}={false} />);

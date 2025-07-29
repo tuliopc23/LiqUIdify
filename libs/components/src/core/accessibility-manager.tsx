@@ -42,7 +42,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
   // Detect user preferences
   useEffect(() => {
-    if (!respectPreferences || 'undefined' === typeof window) {
+    if (!respectPreferences || typeof window === 'undefined') {
       return;
     }
 
@@ -89,7 +89,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ('Tab' === e.key) {
+      if (e.key === 'Tab') {
         setState((previous) => ({ ...previous, keyboardNavigation: true }));
       }
     };
@@ -98,13 +98,13 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
       setState((previous) => ({ ...previous, keyboardNavigation: false }));
     };
 
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('keydown', handleKeyDown);
       window.addEventListener('mousedown', handleMouseDown);
     }
 
     return () => {
-      if ('undefined' !== typeof window) {
+      if (typeof window !== 'undefined') {
         window.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('mousedown', handleMouseDown);
       }
@@ -156,7 +156,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
       const lastElement = focusableElements.at(-1) as HTMLElement;
 
       const handleTabKey = (e: KeyboardEvent) => {
-        if ('Tab' !== e.key) {
+        if (e.key !== 'Tab') {
           return;
         }
 

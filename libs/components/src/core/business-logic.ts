@@ -364,7 +364,7 @@ export function createTableBusinessLogic<T extends Record<string, unknown>>(
             ...previous,
             sortBy: field,
             sortDirection:
-              previous.sortBy === field && 'asc' === previous.sortDirection
+              previous.sortBy === field && previous.sortDirection === 'asc'
                 ? 'desc'
                 : 'asc',
           }));

@@ -49,7 +49,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
   };
 
   useEffect(() => {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return;
     }
     if (isVisible && triggerRef.current && tooltipRef.current) {
@@ -84,17 +84,17 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
 
       // Keep tooltip within viewport
       const viewport = {
-        width: 'undefined' === typeof window ? 1024 : window.innerWidth,
-        height: 'undefined' === typeof window ? 768 : window.innerHeight,
+        width: typeof window === 'undefined' ? 1024 : window.innerWidth,
+        height: typeof window === 'undefined' ? 768 : window.innerHeight,
       };
 
-      if (8 > left) {
+      if (left < 8) {
         left = 8;
       }
       if (left + tooltipRect.width > viewport.width - 8) {
         left = viewport.width - tooltipRect.width - 8;
       }
-      if (8 > top) {
+      if (top < 8) {
         top = 8;
       }
       if (top + tooltipRect.height > viewport.height - 8) {
@@ -134,13 +134,13 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
           'absolute h-2 w-2 rotate-45',
           getGlassClass('elevated'),
           'border border-white/20 dark:border-white/10',
-          'top' === position &&
+          position === 'top' &&
             '-translate-x-1/2 bottom-[-5px] left-1/2 transform border-t-0 border-l-0',
-          'bottom' === position &&
+          position === 'bottom' &&
             '-translate-x-1/2 top-[-5px] left-1/2 transform border-r-0 border-b-0',
-          'left' === position &&
+          position === 'left' &&
             '-translate-y-1/2 top-1/2 right-[-5px] transform border-b-0 border-l-0',
-          'right' === position &&
+          position === 'right' &&
             '-translate-y-1/2 top-1/2 left-[-5px] transform border-t-0 border-r-0'
         )}
       />
@@ -159,7 +159,7 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
       </div>
 
       {tooltip &&
-        'undefined' !== typeof window &&
+        typeof window !== 'undefined' &&
         createPortal(tooltip, document.body)}
     </>
   );

@@ -70,7 +70,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
         (
           internalInputRef as React.MutableRefObject<HTMLInputElement | null>
         ).current = node;
-        if ('function' === typeof ref) {
+        if (typeof ref === 'function') {
           ref(node);
         } else if (ref) {
           (ref as React.MutableRefObject<HTMLInputElement | null>).current =
@@ -122,30 +122,30 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
     const getIconPadding = () => {
       let pr = 'pr-4'; // Default right padding
-      if ('password' === variant || (clearable && hasValue) || rightIcon) {
+      if (variant === 'password' || (clearable && hasValue) || rightIcon) {
         pr = 'pr-10'; // Space for one icon
       }
       if (
-        ('password' === variant && clearable && hasValue) ||
-        ('password' === variant && rightIcon) ||
+        (variant === 'password' && clearable && hasValue) ||
+        (variant === 'password' && rightIcon) ||
         (clearable && hasValue && rightIcon)
       ) {
         pr = 'pr-20'; // Space for two icons if needed, adjust as per visual design
       }
 
-      if (leftIcon || 'search' === variant) {
+      if (leftIcon || variant === 'search') {
         return `pl-10 ${pr}`;
       }
       return `pl-4 ${pr}`;
     };
 
     const inputType =
-      'password' === variant ? (showPassword ? 'text' : 'password') : type;
+      variant === 'password' ? (showPassword ? 'text' : 'password') : type;
 
     return (
       <div className="relative w-full">
         <div className="relative flex w-full items-center">
-          {'search' === variant && !leftIcon && (
+          {variant === 'search' && !leftIcon && (
             <Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 h-4 w-4 transform text-secondary" />
           )}
           {leftIcon && (
@@ -178,7 +178,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 <X className="h-4 w-4" />
               </button>
             )}
-            {'password' === variant && (
+            {variant === 'password' && (
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -193,7 +193,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 )}
               </button>
             )}
-            {rightIcon && 'password' !== variant && !clearable && (
+            {rightIcon && variant !== 'password' && !clearable && (
               <div className="pointer-events-none text-secondary">
                 {rightIcon}
               </div>

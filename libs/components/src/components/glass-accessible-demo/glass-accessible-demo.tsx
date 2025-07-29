@@ -125,9 +125,9 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
                     <span
                       className={cn(
                         'ml-2 font-bold',
-                        95 <= report.score
+                        report.score >= 95
                           ? 'text-green-500'
-                          : 80 <= report.score
+                          : report.score >= 80
                             ? 'text-yellow-500'
                             : 'text-red-500'
                       )}

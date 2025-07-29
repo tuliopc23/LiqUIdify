@@ -32,18 +32,18 @@ export function GlassModalLite({
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if ('Escape' === e.key) {
+      if (e.key === 'Escape') {
         onClose();
       }
     };
 
-    if (isOpen && 'undefined' !== typeof document) {
+    if (isOpen && typeof document !== 'undefined') {
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
-      if ('undefined' !== typeof document) {
+      if (typeof document !== 'undefined') {
         document.removeEventListener('keydown', handleEscape);
         document.body.style.overflow = '';
       }
@@ -75,7 +75,7 @@ export function GlassModalLite({
         )}
         onClick={onClose}
         onKeyDown={(e) => {
-          if ('Enter' === e.key || ' ' === e.key) {
+          if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             onClose();
           }

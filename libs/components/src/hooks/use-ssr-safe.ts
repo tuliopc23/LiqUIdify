@@ -29,7 +29,7 @@ export function useSSRSafeWindow<T = Window>(
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && 'undefined' !== typeof window) {
+    if (isClient && typeof window !== 'undefined') {
       try {
         setValue(selector(window));
       } catch {
@@ -52,7 +52,7 @@ export function useSSRSafeDocument<T = Document>(
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && 'undefined' !== typeof document) {
+    if (isClient && typeof document !== 'undefined') {
       try {
         setValue(selector(document));
       } catch {
@@ -75,7 +75,7 @@ export function useSSRSafeNavigator<T = Navigator>(
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && 'undefined' !== typeof navigator) {
+    if (isClient && typeof navigator !== 'undefined') {
       try {
         setValue(selector(navigator));
       } catch {
@@ -99,7 +99,7 @@ export function useSSRSafeLocalStorage<T>(
 
   // Initialize from localStorage if available
   useEffect(() => {
-    if (isClient && 'undefined' !== typeof window) {
+    if (isClient && typeof window !== 'undefined') {
       try {
         const item = localStorage.getItem(key);
         if (item) {
@@ -118,7 +118,7 @@ export function useSSRSafeLocalStorage<T>(
       setStoredValue(value);
 
       // Save to localStorage if client-side
-      if (isClient && 'undefined' !== typeof window) {
+      if (isClient && typeof window !== 'undefined') {
         localStorage.setItem(key, JSON.stringify(value));
       }
     } catch {
@@ -141,7 +141,7 @@ export function useSSRSafeSessionStorage<T>(
 
   // Initialize from sessionStorage if available
   useEffect(() => {
-    if (isClient && 'undefined' !== typeof window) {
+    if (isClient && typeof window !== 'undefined') {
       try {
         const item = sessionStorage.getItem(key);
         if (item) {
@@ -160,7 +160,7 @@ export function useSSRSafeSessionStorage<T>(
       setStoredValue(value);
 
       // Save to sessionStorage if client-side
-      if (isClient && 'undefined' !== typeof window) {
+      if (isClient && typeof window !== 'undefined') {
         sessionStorage.setItem(key, JSON.stringify(value));
       }
     } catch {

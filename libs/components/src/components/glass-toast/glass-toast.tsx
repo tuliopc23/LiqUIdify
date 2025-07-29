@@ -76,8 +76,8 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
-      {'undefined' !== typeof window &&
-        'undefined' !== typeof document &&
+      {typeof window !== 'undefined' &&
+        typeof document !== 'undefined' &&
         document.body &&
         createPortal(
           <div

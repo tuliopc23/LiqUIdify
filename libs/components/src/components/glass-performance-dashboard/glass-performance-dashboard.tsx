@@ -187,9 +187,9 @@ export function GlassPerformanceDashboard({
             <div
               className={cn(
                 'font-mono text-xl',
-                55 <= fps
+                fps >= 55
                   ? 'text-green-500'
-                  : 30 <= fps
+                  : fps >= 30
                     ? 'text-yellow-500'
                     : 'text-red-500'
               )}
@@ -228,8 +228,8 @@ export function GlassPerformanceDashboard({
                       getMetricColor(metric.rating)
                     )}
                   >
-                    {metric.value.toFixed('CLS' === name ? 3 : 0)}
-                    {'CLS' === name ? '' : 'ms'}
+                    {metric.value.toFixed(name === 'CLS' ? 3 : 0)}
+                    {name === 'CLS' ? '' : 'ms'}
                   </div>
                 </div>
 

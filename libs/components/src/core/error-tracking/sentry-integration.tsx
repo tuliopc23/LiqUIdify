@@ -14,9 +14,9 @@ import type { Integration, SeverityLevel, User } from '@sentry/types';
 import React from 'react';
 
 // Environment detection utilities
-const isProduction = 'production' === process.env.NODE_ENV;
-const isDevelopment = 'development' === process.env.NODE_ENV;
-const isTest = 'test' === process.env.NODE_ENV;
+const isProduction = process.env.NODE_ENV === 'production';
+const isDevelopment = process.env.NODE_ENV === 'development';
+const isTest = process.env.NODE_ENV === 'test';
 
 // Sentry configuration for LiqUIdify
 export interface LiqUIdifySentryConfig {
@@ -145,7 +145,7 @@ class LiqUIdifySentryIntegration {
       // Session replay for debugging using v9 API
       if (
         this.sentryConfig.enableSessionReplay &&
-        'undefined' !== typeof window
+        typeof window !== 'undefined'
       ) {
         integrations.push(
           Sentry.replayIntegration({
@@ -263,14 +263,14 @@ class LiqUIdifySentryIntegration {
         // Add performance tags for filtering
         if (
           context.performanceMetrics.renderTime &&
-          16 < context.performanceMetrics.renderTime
+          context.performanceMetrics.renderTime > 16
         ) {
           scope.setTag('liquidify.slow_render', 'true');
         }
 
         if (
           context.performanceMetrics.bundleSize &&
-          30_720 < context.performanceMetrics.bundleSize
+          context.performanceMetrics.bundleSize > 30_720
         ) {
           scope.setTag('liquidify.large_bundle', 'true');
         }
@@ -311,10 +311,10 @@ class LiqUIdifySentryIntegration {
 
       // Set severity based on performance impact
       let level: SeverityLevel = 'info';
-      if (100 < metrics.duration) {
+      if (metrics.duration > 100) {
         level = 'warning';
       }
-      if (500 < metrics.duration) {
+      if (metrics.duration > 500) {
         level = 'error';
       }
 
@@ -331,7 +331,7 @@ class LiqUIdifySentryIntegration {
           bundleSize: metrics.bundleSize,
           memoryUsage: metrics.memoryUsage,
           componentCount: metrics.componentCount,
-          threshold_exceeded: 100 < metrics.duration,
+          threshold_exceeded: metrics.duration > 100,
         },
       };
 
@@ -606,7 +606,7 @@ class LiqUIdifySentryIntegration {
         )
       ) {
         sanitized[key] = '[Filtered]';
-      } else if ('object' === typeof value && null !== value) {
+      } else if (typeof value === 'object' && value !== null) {
         sanitized[key] = this.sanitizeObject(value);
       } else {
         sanitized[key] = value;
@@ -632,7 +632,7 @@ class LiqUIdifySentryIntegration {
    * Generate anonymous user ID
    */
   private generateAnonymousId(): string {
-    if ('undefined' !== typeof window && window.localStorage) {
+    if (typeof window !== 'undefined' && window.localStorage) {
       let id = localStorage.getItem('liquidify_anonymous_id');
       if (!id) {
         id = `anon_${Math.random().toString(36).slice(2, 11)}`;
@@ -659,7 +659,7 @@ class LiqUIdifySentryIntegration {
   private setupPerformanceMonitoring(): void {
     if (
       !this.sentryConfig.enablePerformanceMonitoring ||
-      'undefined' === typeof window
+      typeof window === 'undefined'
     ) {
       return;
     }
@@ -669,7 +669,7 @@ class LiqUIdifySentryIntegration {
       import('web-vitals').then((webVitals) => {
         const { onCLS, onINP, onLCP } = webVitals;
         onCLS((metric: unknown) => {
-          if (0.1 < metric.value) {
+          if (metric.value > 0.1) {
             // CLS threshold
             this.capturePerformanceIssue('cumulative-layout-shift', {
               duration: metric.value * 1000,
@@ -678,7 +678,7 @@ class LiqUIdifySentryIntegration {
         });
 
         onINP((metric: unknown) => {
-          if (100 < metric.value) {
+          if (metric.value > 100) {
             // FID threshold
             this.capturePerformanceIssue('first-input-delay', {
               duration: metric.value,
@@ -687,7 +687,7 @@ class LiqUIdifySentryIntegration {
         });
 
         onLCP((metric: unknown) => {
-          if (2500 < metric.value) {
+          if (metric.value > 2500) {
             // LCP threshold
             this.capturePerformanceIssue('largest-contentful-paint', {
               duration: metric.value,

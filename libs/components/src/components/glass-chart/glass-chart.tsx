@@ -74,7 +74,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   }));
 
   const pathData = points.reduce((path, point, index) => {
-    const command = 0 === index ? 'M' : 'L';
+    const command = index === 0 ? 'M' : 'L';
     return `${path} ${command} ${point.x} ${point.y}`;
   }, '');
 
@@ -181,7 +181,7 @@ export const LineChart: React.FC<LineChartProps> = ({
       </svg>
 
       {/* Tooltip */}
-      {showTooltip && null !== hoveredPoint && points[hoveredPoint] && (
+      {showTooltip && hoveredPoint !== null && points[hoveredPoint] && (
         <div
           className={cn(
             'pointer-events-none absolute z-10 rounded-lg px-3 py-2 text-sm',
@@ -232,7 +232,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   const chartHeight = height - padding * 2;
 
   const barThickness = Math.min(
-    (('vertical' === orientation ? chartWidth : chartHeight) / data.length) *
+    ((orientation === 'vertical' ? chartWidth : chartHeight) / data.length) *
       0.6,
     40
   );
@@ -249,23 +249,23 @@ export const BarChart: React.FC<BarChartProps> = ({
         {data.map((item, index) => {
           const barLength =
             (item.value / maxValue) *
-            ('vertical' === orientation ? chartHeight : chartWidth);
+            (orientation === 'vertical' ? chartHeight : chartWidth);
           const x =
-            'vertical' === orientation
+            orientation === 'vertical'
               ? padding +
                 (index / data.length) * chartWidth +
                 (chartWidth / data.length - barThickness) / 2
               : padding;
           const y =
-            'vertical' === orientation
+            orientation === 'vertical'
               ? height - padding - barLength
               : padding +
                 (index / data.length) * chartHeight +
                 (chartHeight / data.length - barThickness) / 2;
           const barWidth =
-            'vertical' === orientation ? barThickness : barLength;
+            orientation === 'vertical' ? barThickness : barLength;
           const barHeight =
-            'vertical' === orientation ? barLength : barThickness;
+            orientation === 'vertical' ? barLength : barThickness;
 
           return (
             <g key={`bar-${item.label}-${index}`}>
@@ -337,7 +337,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
     const endAngle =
       (cumulativePercentage + percentage) * 2 * Math.PI - Math.PI / 2;
 
-    const largeArcFlag = 0.5 < percentage ? 1 : 0;
+    const largeArcFlag = percentage > 0.5 ? 1 : 0;
 
     const x1 = centerX + radius * Math.cos(startAngle);
     const y1 = centerY + radius * Math.sin(startAngle);
