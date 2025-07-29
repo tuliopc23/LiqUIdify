@@ -149,7 +149,7 @@ export function createPolymorphicComponent<
       ...transformedProps,
       className: finalClassName,
       ref: shouldForwardRef ? ref : null,
-    } as unknown;
+    };
 
     return (
       <ElementComponent key={key} {...elementProps}>

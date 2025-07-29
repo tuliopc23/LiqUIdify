@@ -42,7 +42,7 @@ export function EnhancedSSRProvider({
   const [isClient, setIsClient] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
   const [_hydrationError, _setHydrationError] = useState<Error | null>(
-    undefined
+    null
   );
   const [_hasError, _setHasError] = useState(false);
   const [_retryCount, _setRetryCount] = useState(0);
@@ -151,7 +151,7 @@ export function useClientOnly<T>(
   factory: () => T,
   deps: Array<any> = []
 ): { value: T | null; isReady: boolean } {
-  const [value, setValue] = useState<T | null | null>(undefined);
+  const [value, setValue] = useState<T | null>(null);
   const [isReady, setIsReady] = useState(false);
   const isClient = isBrowser();
 

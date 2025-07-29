@@ -3,108 +3,109 @@
   "version": "1.2.4",
   "type": "module",
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
-  "main": "./dist/cjs/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/types/index.d.ts",
-  "style": "./dist/liquidui.css",
+  "main": "./dist/libs/components/index.cjs",
+  "module": "./dist/libs/components/index.mjs",
+  "types": "./dist/libs/components/index.d.ts",
+  "style": "./dist/libs/components/liquidui.css",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "modern": "./dist/modern/index.mjs",
-      "import": "./dist/index.mjs",
-      "require": "./dist/cjs/index.cjs"
+      "types": "./dist/libs/components/index.d.ts",
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs",
+      "style": "./dist/libs/components/liquidui.css"
     },
     "./core": {
-      "types": "./dist/types/bundles/core.d.ts",
-      "modern": "./dist/modern/core.mjs",
-      "import": "./dist/core.mjs",
-      "require": "./dist/cjs/core.cjs"
+      "types": "./dist/libs/components/bundles/core.d.ts",
+      "modern": "./dist/libs/components/core.mjs",
+      "import": "./dist/libs/components/core.mjs",
+      "require": "./dist/libs/components/cjs/core.cjs"
     },
     "./animations": {
-      "types": "./dist/types/bundles/animations.d.ts",
-      "import": "./dist/animations.mjs",
-      "require": "./dist/cjs/animations.cjs"
+      "types": "./dist/libs/components/bundles/animations.d.ts",
+      "import": "./dist/libs/components/animations.mjs",
+      "require": "./dist/libs/components/cjs/animations.cjs"
     },
     "./advanced": {
-      "types": "./dist/types/bundles/advanced.d.ts",
-      "import": "./dist/advanced.mjs",
-      "require": "./dist/cjs/advanced.cjs"
+      "types": "./dist/libs/components/bundles/advanced.d.ts",
+      "import": "./dist/libs/components/advanced.mjs",
+      "require": "./dist/libs/components/cjs/advanced.cjs"
     },
     "./forms": {
-      "types": "./dist/types/bundles/forms.d.ts",
-      "import": "./dist/forms.mjs",
-      "require": "./dist/cjs/forms.cjs"
+      "types": "./dist/libs/components/bundles/forms.d.ts",
+      "import": "./dist/libs/components/forms.mjs",
+      "require": "./dist/libs/components/cjs/forms.cjs"
     },
     "./layout": {
-      "types": "./dist/types/bundles/layout.d.ts",
-      "import": "./dist/layout.mjs",
-      "require": "./dist/cjs/layout.cjs"
+      "types": "./dist/libs/components/bundles/layout.d.ts",
+      "import": "./dist/libs/components/layout.mjs",
+      "require": "./dist/libs/components/cjs/layout.cjs"
     },
     "./accessibility": {
-      "types": "./dist/types/bundles/accessibility.d.ts",
-      "import": "./dist/accessibility.mjs",
-      "require": "./dist/cjs/accessibility.cjs"
+      "types": "./dist/libs/components/bundles/accessibility.d.ts",
+      "import": "./dist/libs/components/accessibility.mjs",
+      "require": "./dist/libs/components/cjs/accessibility.cjs"
     },
     "./feedback": {
-      "types": "./dist/types/bundles/feedback.d.ts",
-      "import": "./dist/feedback.mjs",
-      "require": "./dist/cjs/feedback.cjs"
+      "types": "./dist/libs/components/bundles/feedback.d.ts",
+      "import": "./dist/libs/components/feedback.mjs",
+      "require": "./dist/libs/components/cjs/feedback.cjs"
     },
     "./navigation": {
-      "types": "./dist/types/bundles/navigation.d.ts",
-      "import": "./dist/navigation.mjs",
-      "require": "./dist/cjs/navigation.cjs"
+      "types": "./dist/libs/components/bundles/navigation.d.ts",
+      "import": "./dist/libs/components/navigation.mjs",
+      "require": "./dist/libs/components/cjs/navigation.cjs"
     },
     "./physics": {
-      "types": "./dist/types/bundles/physics.d.ts",
-      "import": "./dist/physics.mjs",
-      "require": "./dist/cjs/physics.cjs"
+      "types": "./dist/libs/components/bundles/physics.d.ts",
+      "import": "./dist/libs/components/physics.mjs",
+      "require": "./dist/libs/components/cjs/physics.cjs"
     },
     "./ssr": {
-      "types": "./dist/types/bundles/ssr.d.ts",
-      "import": "./dist/ssr.mjs",
-      "require": "./dist/cjs/ssr.cjs"
+      "types": "./dist/libs/components/bundles/ssr.d.ts",
+      "import": "./dist/libs/components/ssr.mjs",
+      "require": "./dist/libs/components/cjs/ssr.cjs"
     },
     "./button": {
-      "types": "./dist/types/components/glass-button/index.d.ts",
-      "import": "./dist/components/button.mjs",
-      "require": "./dist/cjs/components/button.cjs"
+      "types": "./dist/libs/components/components/glass-button/index.d.ts",
+      "import": "./dist/libs/components/components/button.mjs",
+      "require": "./dist/libs/components/cjs/components/button.cjs"
     },
     "./card": {
-      "types": "./dist/types/components/glass-card/index.d.ts",
-      "import": "./dist/components/card.mjs",
-      "require": "./dist/cjs/components/card.cjs"
+      "types": "./dist/libs/components/components/glass-card/index.d.ts",
+      "import": "./dist/libs/components/components/card.mjs",
+      "require": "./dist/libs/components/cjs/components/card.cjs"
     },
     "./input": {
-      "types": "./dist/types/components/glass-input/index.d.ts",
-      "import": "./dist/components/input.mjs",
-      "require": "./dist/cjs/components/input.cjs"
+      "types": "./dist/libs/components/components/glass-input/index.d.ts",
+      "import": "./dist/libs/components/components/input.mjs",
+      "require": "./dist/libs/components/cjs/components/input.cjs"
     },
     "./modal": {
-      "types": "./dist/types/components/glass-modal/index.d.ts",
-      "import": "./dist/components/modal.mjs",
-      "require": "./dist/cjs/components/modal.cjs"
+      "types": "./dist/libs/components/components/glass-modal/index.d.ts",
+      "import": "./dist/libs/components/components/modal.mjs",
+      "require": "./dist/libs/components/cjs/components/modal.cjs"
     },
     "./tokens": {
-      "types": "./dist/types/tokens/index.d.ts",
-      "import": "./dist/tokens.mjs",
-      "require": "./dist/cjs/tokens.cjs"
+      "types": "./dist/libs/components/tokens/index.d.ts",
+      "import": "./dist/libs/components/tokens.mjs",
+      "require": "./dist/libs/components/cjs/tokens.cjs"
     },
     "./context": {
-      "types": "./dist/types/providers/index.d.ts",
-      "import": "./dist/providers.mjs",
-      "require": "./dist/cjs/providers.cjs"
+      "types": "./dist/libs/components/providers/index.d.ts",
+      "import": "./dist/libs/components/providers.mjs",
+      "require": "./dist/libs/components/cjs/providers.cjs"
     },
-    "./styles": "./dist/liquidui.css",
-    "./css": "./dist/liquidui.css",
+    "./styles": "./dist/libs/components/liquidui.css",
+    "./css": "./dist/libs/components/liquidui.css",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "nx build components",
+    "build": "bun run build:lib",
+    "build:lib": "nx build components && bun run post-build",
+    "build:storybook": "nx build-storybook storybook",
     "build:css": "nx build:css components",
     "build:modern": "nx build components --target es2018",
     "build:watch": "nx build components --watch",
-    "build-storybook": "nx build-storybook storybook",
     "build:all": "nx run-many -t build --parallel=3",
     "clean": "rm -rf dist",
     "clean:node": "rm -rf node_modules package-lock.json && bun install",
@@ -114,8 +115,7 @@
     "lint": "nx run-many -t lint",
     "lint:fix": "biome check --fix .",
     "lint:affected": "nx affected -t lint",
-    "post-build": "cp dist/libs/components/liquidui.css dist/libs/components/styles.css",
-    "post-storybook": "cp dist/liquidui.css storybook-static/liquidui.css",
+    "post-build": "bun scripts/post-build.ts",
     "release": "semantic-release",
     "release:dry": "semantic-release --dry-run",
     "storybook": "nx storybook storybook",
@@ -131,7 +131,10 @@
     "ts:fix:types": "bun scripts/fix-missing-types.ts",
     "ts:fix:all": "bun scripts/fix-all-ts-issues.ts",
     "graph": "nx graph",
-    "affected:graph": "nx affected:graph"
+    "affected:graph": "nx affected:graph",
+    "docs:dev": "nx dev docs",
+    "docs:build": "nx build docs",
+    "docs:preview": "nx preview docs"
   },
   "keywords": [
     "glassmorphism",
@@ -169,8 +172,7 @@
     "url": "https://github.com/sponsors/tuliopc23"
   },
   "files": [
-    "dist/**/*.{js,mjs,cjs,d.ts,css}",
-    "dist/types/**/*",
+    "dist/libs/components/**/*.{js,mjs,cjs,d.ts,css}",
     "README.md",
     "LICENSE"
   ],
@@ -205,11 +207,13 @@
     "@axe-core/playwright": "^4.10.2",
     "@biomejs/biome": "^2.1.2",
     "@gitopslovers/nx-biome": "^1.5.0",
+    "@nx/devkit": "21.3.7",
     "@nx/js": "^21.3.7",
     "@nx/playwright": "^21.3.7",
     "@nx/react": "^21.3.7",
     "@nx/storybook": "^21.3.7",
     "@nx/vite": "^21.3.7",
+    "@nx/web": "21.3.7",
     "@playwright/test": "^1.54.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
@@ -219,22 +223,29 @@
     "@storybook/addon-a11y": "^9.0.18",
     "@storybook/addon-docs": "^9.0.18",
     "@storybook/addon-themes": "^9.0.18",
+    "@storybook/blocks": "8.6.14",
     "@storybook/react-vite": "^9.0.18",
+    "@swc-node/register": "~1.9.1",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
     "@tailwindcss/postcss": "^4.1.11",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/bun": "^1.2.19",
+    "@types/node": "^20.0.0",
     "@types/pngjs": "^6.0.5",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitest/ui": "^3.0.0",
+    "autoprefixer": "^10.4.19",
     "axe-core": "^4.10.3",
     "axe-playwright": "^2.1.0",
-    "autoprefixer": "^10.4.19",
     "conventional-changelog-conventionalcommits": "^9.1.0",
-    "cssnano": "^6.1.3",
     "happy-dom": "^18.0.1",
+    "jiti": "2.4.2",
     "jsdom": "^26.1.0",
     "lightningcss": "^1.30.1",
     "nx": "21.3.7",
@@ -257,6 +268,8 @@
     "typescript": "^5.8.3",
     "vite": "^7.0.6",
     "vite-plugin-dts": "^4.5.4",
+    "vitepress": "^1.6.3",
+    "vitest": "^3.0.0",
     "web-vitals": "^5.0.3"
   },
   "engines": {

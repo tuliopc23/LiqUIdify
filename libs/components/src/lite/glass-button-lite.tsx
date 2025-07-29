@@ -66,7 +66,7 @@ export const GlassButtonLite = forwardRef<
           className
         )}
         disabled={disabled || loading}
-        {...(props as unknown)}
+        {...props}
       >
         {loading ? (
           <>

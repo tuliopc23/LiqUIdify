@@ -269,10 +269,10 @@ export class GlassErrorBoundary extends Component<
 
 // Hook for error handling in functional components
 export function useErrorHandler() {
-  const [error, setError] = React.useState<Error | null | null>(undefined);
+  const [error, setError] = React.useState<Error | null>(null);
 
   const resetError = React.useCallback(() => {
-    setError(undefined);
+    setError(null);
   }, []);
 
   const captureError = React.useCallback((error: Error) => {

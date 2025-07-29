@@ -45,6 +45,14 @@ import { GlassTextarea } from '../glass-textarea';
 import { useToast } from '../glass-toast';
 import { GlassTooltip } from '../glass-tooltip';
 
+interface TableDataItem {
+  component: string;
+  category: string;
+  status: string;
+  usage: string;
+  icon: React.ReactNode;
+}
+
 export interface ComponentShowcaseProps {
   activeSection: string;
 }
@@ -89,28 +97,30 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
     {
       key: 'component' as const,
       header: 'Component',
-      render: (value: unknown, item: unknown) => (
-        <div className="flex items-center">
-          <div className="glass-effect mr-3 flex h-8 w-8 items-center justify-center rounded-lg">
-            {item.icon}
+      render: (value: unknown, item: unknown) => {
+        const typedItem = item as TableDataItem;
+        return (
+          <div className="flex items-center">
+            <div className="glass-effect mr-3 flex h-8 w-8 items-center justify-center rounded-lg">
+              {typedItem.icon}
+            </div>
+            <span className="font-medium text-primary">{String(value)}</span>
           </div>
-
-          <span className="font-medium text-primary">{value}</span>
-        </div>
-      ),
+        );
+      },
     },
     {
       key: 'category' as const,
       header: 'Category',
 
-      render: (value: unknown) => <span className="text-secondary">{value}</span>,
+      render: (value: unknown) => <span className="text-secondary">{String(value)}</span>,
     },
     {
       key: 'status' as const,
       header: 'Status',
       render: (value: unknown) => (
-        <GlassBadge variant={'Ready' === value ? 'success' : 'warning'}>
-          {value}
+        <GlassBadge variant={String(value) === 'Ready' ? 'success' : 'warning'}>
+          {String(value)}
         </GlassBadge>
       ),
     },
@@ -118,7 +128,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
       key: 'usage' as const,
       header: 'Usage',
 
-      render: (value: unknown) => <span className="text-secondary">{value}</span>,
+      render: (value: unknown) => <span className="text-primary">{String(value)}</span>,
     },
   ];
 

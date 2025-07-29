@@ -18,7 +18,7 @@ interface PerformanceContextValue {
 }
 
 const PerformanceContext = createContext<PerformanceContextValue | null>(
-  undefined
+  null
 );
 
 export interface GlassPerformanceProviderProps {
@@ -44,8 +44,8 @@ export function GlassPerformanceProvider({
   onMetricUpdate,
   onPerformanceIssue,
 }: GlassPerformanceProviderProps) {
-  const [monitor, setMonitor] = useState<PerformanceMonitor | null | null>(
-    undefined
+  const [monitor, setMonitor] = useState<PerformanceMonitor | null>(
+    null
   );
   const [metrics, setMetrics] = useState<PerformanceMetrics>({});
   const [isMonitoring, setIsMonitoring] = useState(enableAutoMonitoring);
@@ -99,7 +99,7 @@ export function GlassPerformanceProvider({
   };
 
   const generateReport = () => {
-    return monitor ? monitor.generateReport() : undefined;
+    return monitor ? monitor.generateReport() : null;
   };
 
   const contextValue: PerformanceContextValue = {

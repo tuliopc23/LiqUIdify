@@ -44,7 +44,7 @@ export const GlassProgress = React.memo(
       };
 
       return (
-        <div ref={ref} className={cn('w-full', className)} {...(props as unknown)}>
+        <div ref={ref} className={cn('w-full', className)} {...props}>
           {showValue && (
             <div className="mb-2 flex items-center justify-between">
               <span className="text-gray-600 text-sm dark:text-gray-400">

@@ -36,9 +36,9 @@ interface AccessibilityDemoProps {
 export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
   className,
 }) => {
-  const [report, setReport] = useState<AccessibilityReport | null>(undefined);
+  const [report, setReport] = useState<AccessibilityReport | null>(null);
   const [contrastResult, setContrastResult] = useState<ContrastResult | null>(
-    undefined
+    null
   );
   const [validating, setValidating] = useState(false);
   const demoRef = useRef<HTMLDivElement>(null);

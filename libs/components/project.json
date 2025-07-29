@@ -9,7 +9,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/libs/components"],
       "options": {
-        "command": "vite build",
+        "command": "vite build --mode production",
         "cwd": "libs/components"
       },
       "dependsOn": ["build:css"]
@@ -27,7 +27,7 @@
         "{projectRoot}/src/**/*.{css,scss,less}",
         "{projectRoot}/src/styles/**/*"
       ],
-      "outputs": ["{workspaceRoot}/dist/liquidui.css"]
+      "outputs": ["{workspaceRoot}/dist/liquidui.css", "{workspaceRoot}/dist/libs/components/liquidui.css"]
     },
     "test": {
       "executor": "nx:run-commands",

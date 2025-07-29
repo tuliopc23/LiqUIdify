@@ -235,7 +235,12 @@ export const ErrorAnalyticsDashboard: React.FC<
 
   // Component error breakdown
   const componentErrorStats: Array<ComponentErrorStats> = useMemo(() => {
-    const componentStats: Record<string, unknown> = {};
+    const componentStats: Record<string, {
+      componentName: string;
+      errorCount: number;
+      userImpact: number;
+      errorTypes: Set<string>;
+    }> = {};
 
     for (const error of filteredErrorData) {
       if (!componentStats[error.component]) {
@@ -252,10 +257,10 @@ export const ErrorAnalyticsDashboard: React.FC<
       componentStats[error.component].errorTypes.add(error.type);
     }
 
-    return Object.values(componentStats).map((stats: unknown) => ({
+    return Object.values(componentStats).map((stats) => ({
       ...stats,
       avgResolutionTime: Math.random() * 5, // Mock data
-      topErrorTypes: [...(stats?.errorTypes || [])].slice(0, 3),
+      topErrorTypes: [...stats.errorTypes].slice(0, 3),
       trend: 0.5 < Math.random() ? 'down' : ('up' as 'up' | 'down'),
     }));
   }, [filteredErrorData]);

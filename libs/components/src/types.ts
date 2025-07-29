@@ -22,7 +22,7 @@ export type {
   UnifiedGlassProps,
 } from './core/base-component';
 // Re-export utility types
-export type { AccessibilityTestResult } from './testing/accessibility-testing';
+// Note: AccessibilityTestResult is defined in core/accessibility-manager.tsx
 // Re-export branded types
 export type {
   AccessibleContrast,

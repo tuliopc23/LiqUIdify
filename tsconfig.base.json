@@ -10,8 +10,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "skipLibCheck": true,
-
-    /* Strict type checking - Balanced for productivity */
     "strict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -25,29 +23,23 @@
     "noImplicitReturns": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": false,
-
-    /* React */
     "jsx": "react-jsx",
-
-    /* Module interop */
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-
-    /* Path mapping */
     "baseUrl": ".",
     "paths": {
+      "@/*": ["libs/components/src/*"],
+      "@/components/*": ["libs/components/src/components/*"],
+      "@/core/*": ["libs/components/src/core/*"],
+      "@/design-tokens": ["libs/components/src/tokens/design-tokens"],
+      "@/hooks/*": ["libs/components/src/hooks/*"],
+      "@/styles/*": ["libs/components/src/styles/*"],
+      "@/tokens/*": ["libs/components/src/tokens/*"],
+      "@/types/*": ["libs/components/src/types/*"],
       "@liquidify/components": ["libs/components/src/index.ts"],
       "@liquidify/tokens": ["libs/tokens/src/index.ts"],
-      "@liquidify/utils": ["libs/utils/src/index.ts"],
-      "@/*": ["libs/components/src/*"],
-      "@/core/*": ["libs/components/src/core/*"],
-      "@/components/*": ["libs/components/src/components/*"],
-      "@/hooks/*": ["libs/components/src/hooks/*"],
-      "@/types/*": ["libs/components/src/types/*"],
-      "@/tokens/*": ["libs/components/src/tokens/*"],
-      "@/design-tokens": ["libs/components/src/tokens/design-tokens"],
-      "@/styles/*": ["libs/components/src/styles/*"]
+      "@liquidify/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": [

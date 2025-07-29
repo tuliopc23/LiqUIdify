@@ -216,9 +216,8 @@ export const GlassFocusDemo: React.FC = () => {
                       menuItemReferences.current[index] = element;
                     }}
                     role="menuitem"
-                    tabIndex={roving.getRovingProps(index).tabIndex}
+                    {...roving.getRovingProps(index)}
                     onClick={() => option.action?.()}
-                    onFocus={() => roving.handlers.onFocus(index)}
                     className={cn(
                       'flex w-full items-center gap-3 px-4 py-3',
                       'hover:bg-gray-100 dark:hover:bg-gray-800',

@@ -37,7 +37,7 @@ const LiveEditor = ({ className }: unknown) => (
   </div>
 );
 const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
-  <div className="rounded border bg-white p-4" {...(props as unknown)}>
+  <div className="rounded border bg-white p-4" {...props}>
     <p className="text-gray-600 text-sm">
       Live preview disabled in production build
     </p>
@@ -318,7 +318,7 @@ function PlaygroundPreview() {
     <div className="playground-preview flex h-full items-center justify-center">
       <LivePreview
         Component={({ children, ...props }: Record<string, unknown>) => (
-          <div className="mx-auto w-full max-w-2xl" {...(props as unknown)}>
+          <div className="mx-auto w-full max-w-2xl" {...props}>
             {children}
           </div>
         )}

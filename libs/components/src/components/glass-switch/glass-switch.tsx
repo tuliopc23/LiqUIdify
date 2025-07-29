@@ -32,7 +32,7 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
             checked={isChecked}
             onChange={handleChange}
             ref={ref}
-            {...(props as unknown)}
+            {...props}
           />
 
           <div

@@ -161,10 +161,8 @@ export function createMeta<T>(config: {
   category?: keyof typeof storyCategories;
 }) {
   return {
-    title: config.category
-      ? storyCategories[config.category as keyof typeof storyCategories][
-          config.title as unknown
-        ] || config.title
+    title: config.category && config.category in storyCategories
+      ? `${storyCategories[config.category as keyof typeof storyCategories]}/${config.title}`
       : config.title,
     component: config.component,
     parameters: {

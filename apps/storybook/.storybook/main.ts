@@ -73,11 +73,31 @@ const config: StorybookConfig = {
                 "lucide-react",
                 "clsx",
               ],
+              radix: [
+                "@radix-ui/react-slot",
+                "@radix-ui/react-accordion",
+                "@radix-ui/react-dialog",
+                "@radix-ui/react-radio-group",
+              ],
+              storybook: [
+                "@storybook/blocks",
+                "@storybook/addon-docs",
+                "@storybook/addon-a11y",
+                "@storybook/addon-themes",
+              ],
             },
           },
         },
-        // Disable source maps to shave a few hundred ms off build
-        sourcemap: false,
+        // Enable source maps for better debugging
+        sourcemap: true,
+        // Optimize for production
+        minify: "terser",
+        terserOptions: {
+          compress: {
+            drop_console: true,
+            drop_debugger: true,
+          },
+        },
       },
 
       // Lower logging noise during Storybook build

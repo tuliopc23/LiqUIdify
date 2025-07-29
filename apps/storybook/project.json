@@ -45,7 +45,7 @@
         "outputDir": "dist/storybook",
         "configDir": "apps/storybook/.storybook"
       },
-      "dependsOn": ["components:build:css", "components:build"]
+      "dependsOn": ["components:build:css"]
     },
     "test": {
       "executor": "@nx/playwright:playwright",

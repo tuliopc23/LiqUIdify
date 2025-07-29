@@ -7,102 +7,152 @@ import {
   createVariants as cva,
 } from '../../lib/variant-system';
 
-const drawerVariants = cva(
-  [
+const drawerVariants = cva({
+  base: [
     'fixed z-50 gap-4 bg-black/80 backdrop-blur-sm',
     'border border-white/10 shadow-lg',
     'data-[state=closed]:animate-out data-[state=open]:animate-in',
     'data-[state=closed]:duration-300 data-[state=open]:duration-500',
+  ].join(' '),
+  variants: {
+    side: {
+      top: 'data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 border-b',
+      bottom:
+        'data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 border-t',
+      left: 'data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm',
+      right:
+        'data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm',
+    },
+    size: {
+      sm: '',
+      md: '',
+      lg: '',
+      xl: '',
+      full: '',
+    },
+  },
+  compoundVariants: [
+    {
+      side: 'left' as const,
+      size: 'sm' as const,
+      class: 'max-w-xs',
+    },
+    {
+      side: 'right' as const,
+      size: 'sm' as const,
+      class: 'max-w-xs',
+    },
+    {
+      side: 'left' as const,
+      size: 'md' as const,
+      class: 'max-w-sm',
+    },
+    {
+      side: 'right' as const,
+      size: 'md' as const,
+      class: 'max-w-sm',
+    },
+    {
+      side: 'left' as const,
+      size: 'lg' as const,
+      class: 'max-w-md',
+    },
+    {
+      side: 'right' as const,
+      size: 'lg' as const,
+      class: 'max-w-md',
+    },
+    {
+      side: 'left' as const,
+      size: 'xl' as const,
+      class: 'max-w-lg',
+    },
+    {
+      side: 'right' as const,
+      size: 'xl' as const,
+      class: 'max-w-lg',
+    },
+    {
+      side: 'left' as const,
+      size: 'full' as const,
+      class: 'max-w-full',
+    },
+    {
+      side: 'right' as const,
+      size: 'full' as const,
+      class: 'max-w-full',
+    },
+    {
+      side: 'top' as const,
+      size: 'sm' as const,
+      class: 'max-h-32',
+    },
+    {
+      side: 'bottom' as const,
+      size: 'sm' as const,
+      class: 'max-h-32',
+    },
+    {
+      side: 'top' as const,
+      size: 'md' as const,
+      class: 'max-h-48',
+    },
+    {
+      side: 'bottom' as const,
+      size: 'md' as const,
+      class: 'max-h-48',
+    },
+    {
+      side: 'top' as const,
+      size: 'lg' as const,
+      class: 'max-h-64',
+    },
+    {
+      side: 'bottom' as const,
+      size: 'lg' as const,
+      class: 'max-h-64',
+    },
+    {
+      side: 'top' as const,
+      size: 'xl' as const,
+      class: 'max-h-80',
+    },
+    {
+      side: 'bottom' as const,
+      size: 'xl' as const,
+      class: 'max-h-80',
+    },
+    {
+      side: 'top' as const,
+      size: 'full' as const,
+      class: 'max-h-full',
+    },
+    {
+      side: 'bottom' as const,
+      size: 'full' as const,
+      class: 'max-h-full',
+    },
   ],
+  defaultVariants: {
+    side: 'right' as const,
+    size: 'md' as const,
+  },
+});
 
-  {
-    variants: {
-      side: {
-        top: 'data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 border-b',
-        bottom:
-          'data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 border-t',
-        left: 'data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm',
-        right:
-          'data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm',
-      },
-      size: {
-        sm: '',
-        md: '',
-        lg: '',
-        xl: '',
-        full: '',
-      },
-    },
-    compoundVariants: [
-      {
-        side: ['left', 'right'],
-        size: 'sm',
-        class: 'max-w-xs',
-      },
-      {
-        side: ['left', 'right'],
-        size: 'md',
-        class: 'max-w-sm',
-      },
-      {
-        side: ['left', 'right'],
-        size: 'lg',
-        class: 'max-w-md',
-      },
-      {
-        side: ['left', 'right'],
-        size: 'xl',
-        class: 'max-w-lg',
-      },
-      {
-        side: ['left', 'right'],
-        size: 'full',
-        class: 'max-w-full',
-      },
-      {
-        side: ['top', 'bottom'],
-        size: 'sm',
-        class: 'max-h-32',
-      },
-      {
-        side: ['top', 'bottom'],
-        size: 'md',
-        class: 'max-h-48',
-      },
-      {
-        side: ['top', 'bottom'],
-        size: 'lg',
-        class: 'max-h-64',
-      },
-      {
-        side: ['top', 'bottom'],
-        size: 'xl',
-        class: 'max-h-80',
-      },
-      {
-        side: ['top', 'bottom'],
-        size: 'full',
-        class: 'max-h-full',
-      },
-    ],
-    defaultVariants: {
-      side: 'right',
-      size: 'md',
-    },
-  }
-);
+const drawerHeaderVariants = cva({
+  base: 'flex items-center justify-between p-4 border-b border-white/10 bg-white/5',
+  variants: {},
+});
 
-const drawerHeaderVariants = cva(
-  'flex items-center justify-between p-4 border-b border-white/10 bg-white/5'
-);
+const drawerContentVariants = cva({
+  base: 'flex-1 overflow-y-auto p-4 text-white',
+  variants: {},
+});
 
-const drawerContentVariants = cva(
-  'flex-1 overflow-y-auto p-4 text-white'
-);
-
-const drawerFooterVariants = cva(
-  'flex items-center justify-end gap-2 p-4 border-t border-white/10 bg-white/5'
-);
+const drawerFooterVariants = cva({
+  base: 'flex items-center justify-end gap-2 p-4 border-t border-white/10 bg-white/5',
+  variants: {},
+});
 
 export interface GlassDrawerProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root> {
@@ -115,6 +165,8 @@ export interface GlassDrawerContentProps
   className?: string;
   showCloseButton?: boolean;
   closeButtonPosition?: 'header' | 'overlay';
+  side?: 'top' | 'bottom' | 'left' | 'right';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 }
 
 export interface GlassDrawerHeaderProps
@@ -220,7 +272,7 @@ const GlassDrawerHeader = React.forwardRef<
   <div
     ref={ref}
     className={cn(drawerHeaderVariants(), className)}
-    {...(props as unknown)}
+    {...props}
   >
     {children}
   </div>
@@ -257,7 +309,7 @@ const GlassDrawerBody = React.forwardRef<HTMLDivElement, GlassDrawerBodyProps>(
     <div
       ref={ref}
       className={cn(drawerContentVariants(), className)}
-      {...(props as unknown)}
+      {...props}
     >
       {children}
     </div>
@@ -271,7 +323,7 @@ const GlassDrawerFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(drawerFooterVariants(), className)}
-    {...(props as unknown)}
+    {...props}
   >
     {children}
   </div>

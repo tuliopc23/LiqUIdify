@@ -6,7 +6,8 @@ import {
   type InferVariantProps as VariantProps,
 } from '../../lib/variant-system';
 
-const formFieldVariants = cva(['space-y-2', 'transition-all duration-200'], {
+const formFieldVariants = cva({
+  base: 'space-y-2 transition-all duration-200',
   variants: {
     variant: {
       default: '',
@@ -20,56 +21,47 @@ const formFieldVariants = cva(['space-y-2', 'transition-all duration-200'], {
     },
   },
   defaultVariants: {
-    variant: 'default',
-    size: 'md',
+    variant: 'default' as const,
+    size: 'md' as const,
   },
 });
 
-const labelVariants = cva(
-  ['block font-medium transition-colors duration-200', 'text-white/90'],
+const labelVariants = cva({
+  base: 'block font-medium transition-colors duration-200 text-white/90',
+  variants: {
+    required: {
+      true: "after:ml-1 after:text-red-400 after:content-['*']",
+      false: '',
+    },
+    size: {
+      sm: 'text-xs',
+      md: 'text-sm',
+      lg: 'text-base',
+    },
+  },
+  defaultVariants: {
+    required: false as const,
+    size: 'md' as const,
+  },
+});
 
-  {
-    variants: {
-      required: {
-        true: "after:ml-1 after:text-red-400 after:content-['*']",
-        false: '',
-      },
-      size: {
-        sm: 'text-xs',
-        md: 'text-sm',
-        lg: 'text-base',
-      },
+const helperTextVariants = cva({
+  base: 'flex items-center gap-1.5 text-xs transition-colors duration-200',
+  variants: {
+    state: {
+      default: 'text-white/60',
+      error: 'text-red-400',
+      success: 'text-green-400',
+      warning: 'text-yellow-400',
     },
-    defaultVariants: {
-      required: false,
-      size: 'md',
-    },
-  }
-);
-
-const helperTextVariants = cva(
-  ['flex items-center gap-1.5 text-xs transition-colors duration-200'],
-
-  {
-    variants: {
-      state: {
-        default: 'text-white/60',
-        error: 'text-red-400',
-        success: 'text-green-400',
-        warning: 'text-yellow-400',
-      },
-    },
-    defaultVariants: {
-      state: 'default',
-    },
-  }
-);
+  },
+  defaultVariants: {
+    state: 'default' as const,
+  },
+});
 
 export interface GlassFormFieldProps
-  extends Omit<
-      React.HTMLAttributes<HTMLDivElement>,
-      keyof React.AriaAttributes
-    >,
+  extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof formFieldVariants> {
   label?: string;
   helperText?: string;
@@ -138,15 +130,13 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
     // Clone children to add proper IDs and aria attributes
     const enhancedChildren = React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
-        return React.cloneElement(child as unknown, {
+        return React.cloneElement(child as React.ReactElement<any>, {
+          ...child.props,
           id: finalId,
-          'aria-describedby': message ? `${finalId}-message` : null,
-          'aria-invalid': error ? true : null,
-          'aria-required': required,
+          'aria-describedby': message ? `${finalId}-message` : undefined,
+          'aria-invalid': error ? true : undefined,
+          'aria-required': required || undefined,
           disabled,
-          ...('object' === typeof child.props && null !== child.props
-            ? child.props
-            : {}),
         });
       }
       return child;
@@ -160,7 +150,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
           disabled && 'cursor-not-allowed opacity-50',
           className
         )}
-        {...(props as unknown)}
+        {...props}
       >
         {label && (
           <label
@@ -185,7 +175,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
             id={`${finalId}-message`}
             className={cn(helperTextVariants({ state }))}
             role={error ? 'alert' : undefined}
-            aria-live={error ? 'polite' : null}
+            aria-live={error ? 'polite' : undefined}
           >
             {getIcon()}
 

@@ -42,7 +42,8 @@ const spinnerVariants = cva(
   }
 );
 
-const containerVariants = cva('flex items-center justify-center', {
+const containerVariants = cva({
+  base: 'flex items-center justify-center',
   variants: {
     orientation: {
       horizontal: 'flex-row space-x-2',
@@ -105,7 +106,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
           centered && 'fixed inset-0 z-50 bg-black/20 backdrop-blur-sm',
           className
         )}
-        {...(props as unknown)}
+        {...props}
       >
         <SpinnerElement />
         {showLabel && (

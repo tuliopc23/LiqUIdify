@@ -291,7 +291,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
       <div
         ref={ref}
         className={cn(comboboxVariants({ size }), className)}
-        {...(props as unknown)}
+        {...props}
       >
         <button
           ref={triggerRef}

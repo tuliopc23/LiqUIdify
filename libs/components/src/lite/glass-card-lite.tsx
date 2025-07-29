@@ -53,7 +53,7 @@ export const GlassCardLite = forwardRef<HTMLDivElement, GlassCardLiteProps>(
           variantClasses[variant],
           className
         )}
-        {...(props as unknown)}
+        {...props}
       >
         {children}
       </div>

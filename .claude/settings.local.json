@@ -15,7 +15,15 @@
       "Bash(tree:*)",
       "Bash(bun init:*)",
       "Bash(bun test:*)",
-      "Bash(bun run lint:*)"
+      "Bash(bun run lint:*)",
+      "Bash(npm run dev:*)",
+      "Bash(bun run:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:storybook:*)",
+      "Bash(chmod:*)",
+      "Bash(./fix-spread-operators.sh:*)",
+      "Bash(grep:*)",
+      "Bash(sed:*)"
     ],
     "deny": []
   }

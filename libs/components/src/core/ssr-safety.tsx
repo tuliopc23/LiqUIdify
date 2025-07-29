@@ -44,10 +44,11 @@ export function ClientOnly({
 /**
  * SSR-safe component wrapper that provides fallback during SSR
  */
-export interface SSRSafeProps extends ComponentProps<'div'> {
+export interface SSRSafeProps {
   children: ReactNode;
   fallback?: ReactNode;
   component?: keyof JSX.IntrinsicElements;
+  [key: string]: any;
 }
 
 export function SSRSafe({
@@ -60,11 +61,11 @@ export function SSRSafe({
 
   if (!isClient) {
     return fallback ? (
-      <Component {...(props as unknown)}>{fallback}</Component>
+      <Component {...props}>{fallback}</Component>
     ) : undefined;
   }
 
-  return <Component {...(props as unknown)}>{children}</Component>;
+  return <Component {...props}>{children}</Component>;
 }
 
 /**

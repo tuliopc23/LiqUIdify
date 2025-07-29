@@ -182,7 +182,7 @@ export function withGlassEffects<
         [glassEffect, variant, size, defaultGlassConfig]
       );
 
-      return <Component ref={ref} {...glassProps} {...(props as unknown)} />;
+      return <Component ref={ref} {...glassProps} {...(props as P)} />;
     }
   );
 

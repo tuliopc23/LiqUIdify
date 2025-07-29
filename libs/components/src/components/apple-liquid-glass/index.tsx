@@ -159,8 +159,14 @@ export function AppleLiquidGlassCard({
 
 // Apple Liquid Glass Button component
 export interface AppleLiquidGlassButtonProps
-  extends Omit<AppleLiquidGlassComponentProps, 'as'>,
-    React.ComponentPropsWithoutRef<'button'> {
+  extends Omit<React.ComponentPropsWithoutRef<'button'>, 'className' | 'style' | 'children'> {
+  children?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+  intensity?: GlassIntensity;
+  magnetic?: boolean;
+  animated?: boolean;
+  interactive?: boolean;
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
@@ -218,7 +224,7 @@ export function AppleLiquidGlassButton({
       }}
       disabled={disabled}
       onClick={onClick}
-      {...(props as unknown)}
+      {...props}
     >
       {children}
     </button>

@@ -1,5 +1,5 @@
 // Bun Test Setup
-import { afterEach, beforeAll } from 'bun:test';
+import { afterEach, beforeAll } from '@jest/globals';
 
 declare global {
   var IS_REACT_ACT_ENVIRONMENT: boolean;
@@ -45,7 +45,7 @@ class MockIntersectionObserver implements IntersectionObserver {
   }
 }
 
-global.IntersectionObserver = MockIntersectionObserver as unknown;
+global.IntersectionObserver = MockIntersectionObserver as any;
 
 // Mock ResizeObserver
 class MockResizeObserver implements ResizeObserver {
@@ -54,4 +54,4 @@ class MockResizeObserver implements ResizeObserver {
   unobserve(_target: Element): void {}
 }
 
-global.ResizeObserver = MockResizeObserver as unknown;
+global.ResizeObserver = MockResizeObserver as any;

@@ -31,7 +31,7 @@ import {
 } from '@/core';
 
 // Card state type
-interface CardState {
+interface CardState extends Record<string, boolean> {
   isHovered: boolean;
   isPressed: boolean;
   isSelected: boolean;
@@ -353,7 +353,13 @@ export const GlassCard = React.memo(
                 ('Enter' === e.key || ' ' === e.key)
               ) {
                 e.preventDefault();
-                handleClick(e as unknown);
+                actions.handlePress?.();
+                if (onCardClick) {
+                  onCardClick({
+                    ...e,
+                    currentTarget: e.currentTarget as HTMLDivElement,
+                  } as React.MouseEvent<HTMLDivElement>);
+                }
               }
             }}
             onMouseEnter={handleMouseEnter}
@@ -393,7 +399,7 @@ export const CardHeader = forwardRef<
         'apple' === variant && 'pb-4',
         className
       )}
-      {...(props as unknown)}
+      {...props}
     >
       {children}
     </div>
@@ -466,7 +472,7 @@ export const CardContent = forwardRef<
     <div
       ref={ref}
       className={cn('flex-1', 'none' !== padding && 'p-6 pt-0', className)}
-      {...(props as unknown)}
+      {...props}
     >
       {children}
     </div>
@@ -492,7 +498,7 @@ export const CardFooter = forwardRef<
         'apple' === variant && 'pt-4',
         className
       )}
-      {...(props as unknown)}
+      {...props}
     >
       {children}
     </div>
@@ -512,7 +518,7 @@ export const CardActions = forwardRef<
     <div
       ref={ref}
       className={cn('flex items-center gap-2 p-6 pt-0', className)}
-      {...(props as unknown)}
+      {...props}
     >
       {children}
     </div>

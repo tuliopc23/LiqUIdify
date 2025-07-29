@@ -177,8 +177,8 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
       }
 
       return disabledDates.some(
-        (disabledDate: unknown) =>
-          date.toDateString() === disabledDate.toDateString()
+        (disabledDate) =>
+          date.toDateString() === (disabledDate as Date).toDateString()
       );
     };
 
@@ -263,7 +263,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
       <div
         ref={ref}
         className={cn(datePickerVariants({ size }), className)}
-        {...(props as unknown)}
+        {...props}
       >
         <button
           ref={triggerRef}
@@ -285,7 +285,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                 !selectedDate && 'text-white/60'
               )}
             >
-              {formatDate(selectedDate) || placeholder}
+              {formatDate(selectedDate ?? null) || placeholder}
             </span>
           </div>
         </button>

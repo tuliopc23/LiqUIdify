@@ -413,8 +413,12 @@ export const createGlassVar = (
 // Helper to get design token values with TypeScript safety
 export const getDesignToken = {
   spacing: (token: SpacingToken) => designTokens.spacing[token],
-  color: (category: keyof typeof designTokens.colors, token: string) =>
-    (designTokens.colors[category] as unknown)?.[token],
+  color: (category: keyof typeof designTokens.colors, token: string) => {
+    const colorCategory = designTokens.colors[category];
+    return colorCategory && typeof colorCategory === 'object' 
+      ? (colorCategory as Record<string, string>)[token]
+      : undefined;
+  },
   typography: {
     fontSize: (token: TypographyToken) =>
       designTokens.typography.fontSize[token],

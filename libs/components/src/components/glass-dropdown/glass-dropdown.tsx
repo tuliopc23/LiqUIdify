@@ -145,7 +145,7 @@ export const GlassDropdown = React.memo(
         <div
           ref={ref}
           className={cn('relative inline-block', className)}
-          {...(props as unknown)}
+          {...props}
         >
           <button
             ref={triggerRef}

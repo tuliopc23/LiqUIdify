@@ -219,7 +219,7 @@ export const AppleLiquidGlass: React.FC<AppleLiquidGlassProps> = ({
   });
 
   return (
-    <div ref={ref} style={glassStyles} {...handlers} {...(props as unknown)}>
+    <div ref={ref} style={glassStyles} {...handlers} {...props}>
       {children}
     </div>
   );

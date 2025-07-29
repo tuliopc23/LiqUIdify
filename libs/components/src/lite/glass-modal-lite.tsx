@@ -97,7 +97,7 @@ export function GlassModalLite({
           onKeyDown={(e) => e.stopPropagation()}
           role="dialog"
           aria-modal="true"
-          aria-labelledby={title ? 'modal-title' : null}
+          aria-labelledby={title ? 'modal-title' : undefined}
         >
           {title && (
             <div className="mb-4 flex items-center justify-between">

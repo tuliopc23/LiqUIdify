@@ -104,7 +104,7 @@ export const GlassSlider = React.memo(
         <div
           ref={ref}
           className={cn('relative w-full', className)}
-          {...(props as unknown)}
+          {...props}
         >
           {showValue && (
             <div className="mb-3 flex items-center justify-between">

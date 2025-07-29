@@ -85,7 +85,7 @@ const GlassResponsiveCard = forwardRef<
     );
 
     return (
-      <div ref={ref} className={cn(baseClasses, className)} {...(props as unknown)}>
+      <div ref={ref} className={cn(baseClasses, className)} {...props}>
         {children}
       </div>
     );
