@@ -441,7 +441,7 @@ export const LoadingAndEmptyStates: Story = {
           />
           {isLoading && (
             <div className="flex items-center gap-2 text-sm text-white/60">
-              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white/60"></div>
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white/60" />
               Searching...
             </div>
           )}
