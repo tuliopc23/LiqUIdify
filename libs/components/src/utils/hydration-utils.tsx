@@ -341,7 +341,7 @@ export function useClientOnly<T>(
   factory: () => T,
   deps: Array<unknown> = []
 ): T | null {
-  const [value, setValue] = useState<T | null | null>(undefined);
+  const [value, setValue] = useState<T | null>(undefined);
   const isHydrated = useHydrationComplete();
 
   useEffect(() => {

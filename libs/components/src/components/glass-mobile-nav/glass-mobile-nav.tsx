@@ -27,7 +27,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   onItemClick,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null | null>(
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(
     undefined
   );
 
