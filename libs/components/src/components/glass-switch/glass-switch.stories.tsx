@@ -138,7 +138,7 @@ export const DisabledStates: Story = {
     return (
       <div className="space-y-4">
         <GlassSwitch label="Disabled OFF" disabled checked={false} />
-        <GlassSwitch label="Disabled ON" disabled checked={true} />
+        <GlassSwitch label="Disabled ON" disabled checked />
       </div>
     );
   },
