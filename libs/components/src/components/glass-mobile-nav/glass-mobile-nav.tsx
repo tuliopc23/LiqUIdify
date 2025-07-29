@@ -52,6 +52,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 
   const MenuTrigger = () => (
     <button
+      type="button"
       onClick={() => setIsOpen(!isOpen)}
       className={cn(
         'rounded-xl p-3',
@@ -75,6 +76,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   const renderNavItem = (item: NavItem, level = 0) => (
     <div key={item.id} className="w-full">
       <button
+        type="button"
         onClick={() => handleItemClick(item)}
         className={cn(
           'flex w-full items-center justify-between p-4 text-left',
@@ -126,6 +128,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
             {/* Backdrop */}
 
             <button
+              type="button"
               className="absolute inset-0 bg-black/20 backdrop-blur-sm"
               onClick={() => setIsOpen(false)}
               onKeyDown={(e) => {
@@ -155,6 +158,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
                 </h2>
 
                 <button
+                  type="button"
                   onClick={() => setIsOpen(false)}
                   className="rounded-lg p-2 text-[var(--text-secondary)] hover:bg-[var(--glass-bg)]"
                 >

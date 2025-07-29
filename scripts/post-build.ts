@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 import { copyFileSync, existsSync, mkdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join } from 'node:path';
 
 const distDir = join(process.cwd(), 'dist/libs/components');
 const cssSource = join(process.cwd(), 'dist/liquidui.css');

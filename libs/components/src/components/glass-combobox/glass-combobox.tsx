@@ -144,7 +144,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
     const triggerRef = useRef<HTMLButtonElement>(null);
     const listboxRef = useRef<HTMLDivElement>(null);
     const searchRef = useRef<HTMLInputElement>(null);
-    const optionsRef = useRef<Array<HTMLDivElement>>([]);
+    const optionsRef = useRef<HTMLDivElement[]>([]);
 
     const comboboxId = useId();
     const listboxId = `${comboboxId}-listbox`;

@@ -14,7 +14,7 @@ export interface TimelineItem {
 
 export interface GlassTimelineProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  items: TimelineItem[];
+  items: Array<TimelineItem>;
   orientation?: 'vertical' | 'horizontal';
   alternating?: boolean;
 }
@@ -53,7 +53,7 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
       <div className={cn('relative', className)} {...props}>
         <div className="flex items-start overflow-x-auto pb-4">
           {items.map((item, index) => (
-            <div key={item.id} className="flex items-start min-w-[250px]">
+            <div key={item.id} className="flex min-w-[250px] items-start">
               <div className="flex flex-col items-center">
                 <div
                   className={cn(
@@ -65,9 +65,9 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
                 >
                   {item.icon || getStatusIcon(item.status)}
                 </div>
-                <div className="mt-4 space-y-1 text-center px-4">
+                <div className="mt-4 space-y-1 px-4 text-center">
                   {item.date && (
-                    <p className="text-xs text-[var(--text-secondary)]">
+                    <p className="text-[var(--text-secondary)] text-xs">
                       {item.date}
                     </p>
                   )}
@@ -75,14 +75,14 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
                     {item.title}
                   </h3>
                   {item.description && (
-                    <p className="text-sm text-[var(--text-secondary)]">
+                    <p className="text-[var(--text-secondary)] text-sm">
                       {item.description}
                     </p>
                   )}
                 </div>
               </div>
               {index < items.length - 1 && (
-                <div className="flex-1 h-[2px] bg-gradient-to-r from-transparent via-white/20 to-transparent mt-5" />
+                <div className="mt-5 h-[2px] flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
               )}
             </div>
           ))}
@@ -106,7 +106,7 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
             <div
               className={cn(
                 'absolute top-10 w-[2px] bg-gradient-to-b from-white/20 to-transparent',
-                alternating ? 'left-1/2 -translate-x-1/2' : 'left-5',
+                alternating ? '-translate-x-1/2 left-1/2' : 'left-5',
                 'h-full'
               )}
             />
@@ -140,15 +140,15 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
               )}
             >
               {item.date && (
-                <p className="text-xs text-[var(--text-secondary)] mb-1">
+                <p className="mb-1 text-[var(--text-secondary)] text-xs">
                   {item.date}
                 </p>
               )}
-              <h3 className="font-medium text-[var(--text-primary)] mb-2">
+              <h3 className="mb-2 font-medium text-[var(--text-primary)]">
                 {item.title}
               </h3>
               {item.description && (
-                <p className="text-sm text-[var(--text-secondary)] mb-3">
+                <p className="mb-3 text-[var(--text-secondary)] text-sm">
                   {item.description}
                 </p>
               )}

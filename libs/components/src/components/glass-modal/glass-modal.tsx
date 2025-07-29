@@ -116,6 +116,7 @@ export function GlassModal({
 
   const modalContent = (
     <button
+      type="button"
       className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
       onKeyDown={(e) => {
@@ -163,6 +164,7 @@ export function GlassModal({
               </h3>
 
               <button
+                type="button"
                 ref={closeButtonRef}
                 onClick={onClose}
                 aria-label="Close modal"

@@ -23,14 +23,11 @@ import {
 import React from 'react';
 import { GlassButton } from './glass-button';
 
-const meta = {
-  title: 'Components/Forms/GlassButton',
+const meta = { title: 'Components/Forms/GlassButton' }
   component: GlassButton,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: `
+  parameters: { layout: 'centered' }
+    docs: { description: {
+        component: ` }
 A premium button component with advanced glassmorphism effects, fluid animations, and comprehensive accessibility features.
 
 ## Features
@@ -50,29 +47,26 @@ A premium button component with advanced glassmorphism effects, fluid animations
 \`\`\`tsx
 import { GlassButton } from '@/components/glass-button';
 
-// Basic usage
-<GlassButton variant="primary">
+{/* Basic usage  */}
+<GlassButton type="button" variant="primary">
   Click me
 </GlassButton>
 
-// With icons
-<GlassButton variant="secondary" leftIcon={<Mail />}>
+{/* With icons  */}
+<GlassButton type="button" variant="secondary" leftIcon={<Mail />}>
   Send Email
 </GlassButton>
 
-// Loading state
-<GlassButton loading loadingText="Processing...">
+{/* Loading state  */}
+<GlassButton type="button" loading loadingText="Processing...">
   Submit
 </GlassButton>
 
-// Custom glass effect
-<GlassButton
-  glassEffect={{
-    intensity: 'strong',
+{/* Custom glass effect  */}
+<GlassButton type="button"
+  glassEffect={{ intensity: 'strong' }
     blur: true,
-    backdrop: true
-  }}
->
+    backdrop: true>
   Premium Button
 </GlassButton>
 \`\`\`
@@ -97,25 +91,22 @@ The button component follows WAI-ARIA guidelines:
   },
   tags: ['autodocs'],
   argTypes: {
-    // Content
-    children: {
-      control: 'text',
+    {/* Content  */}
+    children: { control: 'text' }
       description: 'Button content',
       table: {
         type: { summary: 'React.ReactNode' },
         category: 'Content',
       },
     },
-    leftIcon: {
-      control: false,
+    leftIcon: { control: false }
       description: 'Icon to display on the left side',
       table: {
         type: { summary: 'React.ReactNode' },
         category: 'Content',
       },
     },
-    rightIcon: {
-      control: false,
+    rightIcon: { control: false }
       description: 'Icon to display on the right side',
       table: {
         type: { summary: 'React.ReactNode' },
@@ -123,9 +114,8 @@ The button component follows WAI-ARIA guidelines:
       },
     },
 
-    // Appearance
-    variant: {
-      control: 'select',
+    {/* Appearance  */}
+    variant: { control: 'select' }
       options: [
         'primary',
         'secondary',
@@ -135,17 +125,15 @@ The button component follows WAI-ARIA guidelines:
         'apple',
       ],
       description: 'Visual style variant of the button',
-      table: {
-        type: {
+      table: { type: {
           summary:
-            'primary | secondary | tertiary | ghost | destructive | apple',
+            'primary | secondary | tertiary | ghost | destructive | apple' }
         },
         defaultValue: { summary: 'primary' },
         category: 'Appearance',
       },
     },
-    size: {
-      control: 'select',
+    size: { control: 'select' }
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
       description: 'Size of the button',
       table: {
@@ -154,8 +142,7 @@ The button component follows WAI-ARIA guidelines:
         category: 'Appearance',
       },
     },
-    fullWidth: {
-      control: 'boolean',
+    fullWidth: { control: 'boolean' }
       description: 'Makes button take full width of container',
       table: {
         type: { summary: 'boolean' },
@@ -163,8 +150,7 @@ The button component follows WAI-ARIA guidelines:
         category: 'Appearance',
       },
     },
-    iconOnly: {
-      control: 'boolean',
+    iconOnly: { control: 'boolean' }
       description: 'Optimizes button for icon-only display',
       table: {
         type: { summary: 'boolean' },
@@ -173,9 +159,8 @@ The button component follows WAI-ARIA guidelines:
       },
     },
 
-    // State
-    disabled: {
-      control: 'boolean',
+    {/* State  */}
+    disabled: { control: 'boolean' }
       description: 'Whether the button is disabled',
       table: {
         type: { summary: 'boolean' },
@@ -183,8 +168,7 @@ The button component follows WAI-ARIA guidelines:
         category: 'State',
       },
     },
-    loading: {
-      control: 'boolean',
+    loading: { control: 'boolean' }
       description: 'Shows loading state with spinner',
       table: {
         type: { summary: 'boolean' },
@@ -192,8 +176,7 @@ The button component follows WAI-ARIA guidelines:
         category: 'State',
       },
     },
-    loadingText: {
-      control: 'text',
+    loadingText: { control: 'text' }
       description: 'Text to display when loading',
       table: {
         type: { summary: 'string' },
@@ -201,9 +184,8 @@ The button component follows WAI-ARIA guidelines:
       },
     },
 
-    // Glass Effects
-    glassEffect: {
-      control: 'object',
+    {/* Glass Effects  */}
+    glassEffect: { control: 'object' }
       description: 'Glass effect configuration',
       table: {
         type: { summary: 'GlassEffect' },
@@ -214,9 +196,8 @@ The button component follows WAI-ARIA guidelines:
       },
     },
 
-    // Animation
-    animation: {
-      control: 'select',
+    {/* Animation  */}
+    animation: { control: 'select' }
       options: ['none', 'subtle', 'normal', 'energetic'],
       description: 'Animation intensity',
       table: {
@@ -225,8 +206,7 @@ The button component follows WAI-ARIA guidelines:
         category: 'Animation',
       },
     },
-    disableAnimations: {
-      control: 'boolean',
+    disableAnimations: { control: 'boolean' }
       description: 'Disable all animations',
       table: {
         type: { summary: 'boolean' },
@@ -234,8 +214,7 @@ The button component follows WAI-ARIA guidelines:
         category: 'Animation',
       },
     },
-    magnetic: {
-      control: 'boolean',
+    magnetic: { control: 'boolean' }
       description: 'Enable magnetic hover effect',
       table: {
         type: { summary: 'boolean' },
@@ -243,8 +222,7 @@ The button component follows WAI-ARIA guidelines:
         category: 'Animation',
       },
     },
-    ripple: {
-      control: 'boolean',
+    ripple: { control: 'boolean' }
       description: 'Enable ripple effect on click',
       table: {
         type: { summary: 'boolean' },
@@ -253,9 +231,8 @@ The button component follows WAI-ARIA guidelines:
       },
     },
 
-    // HTML Button Props
-    type: {
-      control: 'select',
+    {/* HTML Button Props  */}
+    type: { control: 'select' }
       options: ['button', 'submit', 'reset'],
       description: 'HTML button type',
       table: {
@@ -264,8 +241,7 @@ The button component follows WAI-ARIA guidelines:
         category: 'HTML Props',
       },
     },
-    asChild: {
-      control: 'boolean',
+    asChild: { control: 'boolean' }
       description: 'Renders as child component (useful for links)',
       table: {
         type: { summary: 'boolean' },
@@ -274,42 +250,32 @@ The button component follows WAI-ARIA guidelines:
       },
     },
 
-    // Events
-    onClick: {
-      action: 'clicked',
+    {/* Events  */}
+    onClick: { action: 'clicked' }
       description: 'Click event handler',
       table: {
         type: { summary: '(event: MouseEvent) => void' },
         category: 'Events',
       },
     },
-    onMouseEnter: {
-      action: 'mouse enter',
-      table: {
-        category: 'Events',
+    onMouseEnter: { action: 'mouse enter' }
+      table: { category: 'Events' }
       },
     },
-    onMouseLeave: {
-      action: 'mouse leave',
-      table: {
-        category: 'Events',
+    onMouseLeave: { action: 'mouse leave' }
+      table: { category: 'Events' }
       },
     },
-    onFocus: {
-      action: 'focus',
-      table: {
-        category: 'Events',
+    onFocus: { action: 'focus' }
+      table: { category: 'Events' }
       },
     },
-    onBlur: {
-      action: 'blur',
-      table: {
-        category: 'Events',
+    onBlur: { action: 'blur' }
+      table: { category: 'Events' }
       },
     },
   },
-  args: {
-    children: 'Button',
+  args: { children: 'Button' }
     variant: 'primary',
     size: 'md',
     disabled: false,
@@ -327,28 +293,38 @@ The button component follows WAI-ARIA guidelines:
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default story - Interactive playground
-export const Playground: Story = {
-  args: {
-    children: 'Click me',
+{/* Default story - Interactive playground  */}
+export const Playground: Story = { args: {
+    children: 'Click me' }
   },
 };
 
-// Variants showcase
-export const Variants: Story = {
-  render: () => (
+{/* Variants showcase  */}
+export const Variants: Story = { render: () => (
     <div className="flex flex-col gap-8">
       <div className="space-y-4">
         <h3 className="font-medium text-gray-600 text-sm dark:text-gray-400">
           All Variants
         </h3>
         <div className="flex flex-wrap items-center gap-4">
-          <GlassButton variant="primary">Primary</GlassButton>
-          <GlassButton variant="secondary">Secondary</GlassButton>
-          <GlassButton variant="tertiary">Tertiary</GlassButton>
-          <GlassButton variant="ghost">Ghost</GlassButton>
-          <GlassButton variant="destructive">Destructive</GlassButton>
-          <GlassButton variant="apple">Apple Style</GlassButton>
+          <GlassButton type="button" variant="primary">
+            Primary
+          </GlassButton>
+          <GlassButton type="button" variant="secondary">
+            Secondary
+          </GlassButton>
+          <GlassButton type="button" variant="tertiary">
+            Tertiary
+          </GlassButton>
+          <GlassButton type="button" variant="ghost">
+            Ghost
+          </GlassButton>
+          <GlassButton type="button" variant="destructive">
+            Destructive
+          </GlassButton>
+          <GlassButton type="button" variant="apple">
+            Apple Style
+          </GlassButton>
         </div>
       </div>
 
@@ -358,24 +334,28 @@ export const Variants: Story = {
         </h3>
         <div className="flex flex-wrap items-center gap-4">
           <GlassButton
-            variant="primary"
+            type="button"
+            variant="primary" }
             leftIcon={<Send className="h-4 w-4" />}
           >
             Send
           </GlassButton>
           <GlassButton
+            type="button"
             variant="secondary"
             leftIcon={<Save className="h-4 w-4" />}
           >
             Save Draft
           </GlassButton>
           <GlassButton
+            type="button"
             variant="destructive"
             leftIcon={<Trash2 className="h-4 w-4" />}
           >
             Delete
           </GlassButton>
           <GlassButton
+            type="button"
             variant="ghost"
             rightIcon={<ChevronRight className="h-4 w-4" />}
           >
@@ -387,20 +367,29 @@ export const Variants: Story = {
   ),
 };
 
-// Sizes showcase
-export const Sizes: Story = {
-  render: () => (
+{/* Sizes showcase  */}
+export const Sizes: Story = { render: () => (
     <div className="flex flex-col gap-8">
       <div className="space-y-4">
         <h3 className="font-medium text-gray-600 text-sm dark:text-gray-400">
           All Sizes
         </h3>
         <div className="flex flex-wrap items-center gap-4">
-          <GlassButton size="xs">Extra Small</GlassButton>
-          <GlassButton size="sm">Small</GlassButton>
-          <GlassButton size="md">Medium</GlassButton>
-          <GlassButton size="lg">Large</GlassButton>
-          <GlassButton size="xl">Extra Large</GlassButton>
+          <GlassButton type="button" size="xs">
+            Extra Small
+          </GlassButton>
+          <GlassButton type="button" size="sm">
+            Small
+          </GlassButton>
+          <GlassButton type="button" size="md">
+            Medium
+          </GlassButton>
+          <GlassButton type="button" size="lg">
+            Large
+          </GlassButton>
+          <GlassButton type="button" size="xl">
+            Extra Large
+          </GlassButton>
         </div>
       </div>
 
@@ -409,19 +398,39 @@ export const Sizes: Story = {
           Sizes with Icons
         </h3>
         <div className="flex flex-wrap items-center gap-4">
-          <GlassButton size="xs" leftIcon={<Plus className="h-3 w-3" />}>
+          <GlassButton
+            type="button"
+            size="xs" }
+            leftIcon={<Plus className="h-3 w-3" />}
+          >
             Add
           </GlassButton>
-          <GlassButton size="sm" leftIcon={<Plus className="h-3.5 w-3.5" />}>
+          <GlassButton
+            type="button"
+            size="sm"
+            leftIcon={<Plus className="h-3.5 w-3.5" />}
+          >
             Add
           </GlassButton>
-          <GlassButton size="md" leftIcon={<Plus className="h-4 w-4" />}>
+          <GlassButton
+            type="button"
+            size="md"
+            leftIcon={<Plus className="h-4 w-4" />}
+          >
             Add
           </GlassButton>
-          <GlassButton size="lg" leftIcon={<Plus className="h-5 w-5" />}>
+          <GlassButton
+            type="button"
+            size="lg"
+            leftIcon={<Plus className="h-5 w-5" />}
+          >
             Add
           </GlassButton>
-          <GlassButton size="xl" leftIcon={<Plus className="h-6 w-6" />}>
+          <GlassButton
+            type="button"
+            size="xl"
+            leftIcon={<Plus className="h-6 w-6" />}
+          >
             Add
           </GlassButton>
         </div>
@@ -430,11 +439,10 @@ export const Sizes: Story = {
   ),
 };
 
-// States showcase
-export const States: Story = {
-  render: () => (
+{/* States showcase  */}
+export const States: Story = { render: () => (
     <div className="flex flex-col gap-8">
-      {(
+      {( }
         ['primary', 'secondary', 'tertiary', 'ghost', 'destructive'] as const
       ).map((variant) => (
         <div key={variant} className="space-y-4">
@@ -442,14 +450,21 @@ export const States: Story = {
             {variant} States
           </h3>
           <div className="flex flex-wrap items-center gap-4">
-            <GlassButton variant={variant}>Normal</GlassButton>
-            <GlassButton variant={variant} disabled>
+            <GlassButton type="button" variant={variant}>
+              Normal
+            </GlassButton>
+            <GlassButton type="button" variant={variant} disabled>
               Disabled
             </GlassButton>
-            <GlassButton variant={variant} loading>
+            <GlassButton type="button" variant={variant} loading>
               Loading
             </GlassButton>
-            <GlassButton variant={variant} loading loadingText="Processing...">
+            <GlassButton
+              type="button"
+              variant={variant}
+              loading
+              loadingText="Processing..."
+            >
               With Text
             </GlassButton>
           </div>
@@ -459,9 +474,8 @@ export const States: Story = {
   ),
 };
 
-// Glass effects showcase
-export const GlassEffects: Story = {
-  render: () => (
+{/* Glass effects showcase  */}
+export const GlassEffects: Story = { render: () => (
     <div className="flex flex-col gap-8">
       <div className="space-y-4">
         <h3 className="font-medium text-gray-600 text-sm dark:text-gray-400">
@@ -469,18 +483,18 @@ export const GlassEffects: Story = {
         </h3>
         <div className="flex flex-wrap items-center gap-4">
           <GlassButton
-            glassEffect={{ intensity: 'weak', blur: true, backdrop: true }}
-          >
+            type="button" }
+            glassEffect={{ intensity: 'weak', blur: true, backdrop: true>
             Weak Glass
           </GlassButton>
           <GlassButton
-            glassEffect={{ intensity: 'medium', blur: true, backdrop: true }}
-          >
+            type="button"
+            glassEffect={{ intensity: 'medium', blur: true, backdrop: true>
             Medium Glass
           </GlassButton>
           <GlassButton
-            glassEffect={{ intensity: 'strong', blur: true, backdrop: true }}
-          >
+            type="button"
+            glassEffect={{ intensity: 'strong', blur: true, backdrop: true>
             Strong Glass
           </GlassButton>
         </div>
@@ -492,49 +506,55 @@ export const GlassEffects: Story = {
         </h3>
         <div className="flex flex-wrap items-center gap-4">
           <GlassButton
-            glassEffect={{ intensity: 'medium', blur: false, backdrop: false }}
-          >
+            type="button"
+            glassEffect={{ intensity: 'medium', blur: false, backdrop: false>
             No Effects
           </GlassButton>
           <GlassButton
-            glassEffect={{ intensity: 'medium', blur: true, backdrop: false }}
-          >
+            type="button"
+            glassEffect={{ intensity: 'medium', blur: true, backdrop: false>
             Blur Only
           </GlassButton>
           <GlassButton
-            glassEffect={{ intensity: 'medium', blur: false, backdrop: true }}
-          >
+            type="button"
+            glassEffect={{ intensity: 'medium', blur: false, backdrop: true>
             Backdrop Only
           </GlassButton>
           <GlassButton
-            glassEffect={{ intensity: 'medium', blur: true, backdrop: true }}
-          >
+            type="button"
+            glassEffect={{ intensity: 'medium', blur: true, backdrop: true>
             All Effects
           </GlassButton>
         </div>
       </div>
     </div>
   ),
-  parameters: {
-    backgrounds: {
-      default: 'liquid-gradient',
+  parameters: { backgrounds: {
+      default: 'liquid-gradient' }
     },
   },
 };
 
-// Animation effects
-export const AnimationEffects: Story = {
-  render: () => (
+{/* Animation effects  */}
+export const AnimationEffects: Story = { render: () => (
     <div className="flex flex-col gap-8">
       <div className="space-y-4">
         <h3 className="font-medium text-gray-600 text-sm dark:text-gray-400">
           Animation Levels
         </h3>
         <div className="flex flex-wrap items-center gap-4">
-          <GlassButton animation="none">No Animation</GlassButton>
-          <GlassButton animation="subtle">Subtle</GlassButton>
-          <GlassButton animation="normal">Normal</GlassButton>
-          <GlassButton animation="energetic">Energetic</GlassButton>
+          <GlassButton type="button" animation="none">
+            No Animation
+          </GlassButton>
+          <GlassButton type="button" animation="subtle">
+            Subtle
+          </GlassButton>
+          <GlassButton type="button" animation="normal">
+            Normal
+          </GlassButton>
+          <GlassButton type="button" animation="energetic">
+            Energetic
+          </GlassButton>
         </div>
       </div>
 
@@ -543,37 +563,43 @@ export const AnimationEffects: Story = {
           Special Effects
         </h3>
         <div className="flex flex-wrap items-center gap-4">
-          <GlassButton magnetic>Magnetic Hover</GlassButton>
-          <GlassButton ripple={false}>No Ripple</GlassButton>
-          <GlassButton magnetic ripple>
+          <GlassButton type="button" magnetic>
+            Magnetic Hover
+          </GlassButton> }
+          <GlassButton type="button" ripple={false}>
+            No Ripple
+          </GlassButton>
+          <GlassButton type="button" magnetic ripple>
             All Effects
           </GlassButton>
-          <GlassButton disableAnimations>Disabled Animations</GlassButton>
+          <GlassButton type="button" disableAnimations>
+            Disabled Animations
+          </GlassButton>
         </div>
       </div>
     </div>
   ),
 };
 
-// Icon buttons
-export const IconButtons: Story = {
-  render: () => (
+{/* Icon buttons  */}
+export const IconButtons: Story = { render: () => (
     <div className="flex flex-col gap-8">
       <div className="space-y-4">
         <h3 className="font-medium text-gray-600 text-sm dark:text-gray-400">
           Icon Only Buttons
         </h3>
         <div className="flex flex-wrap items-center gap-4">
-          <GlassButton size="xs" iconOnly aria-label="Like">
+          <GlassButton type="button" size="xs" iconOnly aria-label="Like">
             <Heart className="h-3.5 w-3.5" />
           </GlassButton>
-          <GlassButton size="sm" iconOnly aria-label="Settings">
+          <GlassButton type="button" size="sm" iconOnly aria-label="Settings">
             <Settings className="h-4 w-4" />
           </GlassButton>
-          <GlassButton size="md" iconOnly aria-label="Share">
+          <GlassButton type="button" size="md" iconOnly aria-label="Share">
             <Share2 className="h-5 w-5" />
           </GlassButton>
           <GlassButton
+            type="button"
             size="lg"
             iconOnly
             variant="destructive"
@@ -589,39 +615,55 @@ export const IconButtons: Story = {
           Social Media Icons
         </h3>
         <div className="flex flex-wrap items-center gap-4">
-          <GlassButton variant="ghost" iconOnly aria-label="Home">
+          <GlassButton type="button" variant="ghost" iconOnly aria-label="Home">
             <Home className="h-5 w-5" />
           </GlassButton>
-          <GlassButton variant="ghost" iconOnly aria-label="Notifications">
+          <GlassButton
+            type="button"
+            variant="ghost"
+            iconOnly
+            aria-label="Notifications"
+          >
             <Bell className="h-5 w-5" />
           </GlassButton>
-          <GlassButton variant="ghost" iconOnly aria-label="Messages">
+          <GlassButton
+            type="button"
+            variant="ghost"
+            iconOnly
+            aria-label="Messages"
+          >
             <MessageCircle className="h-5 w-5" />
           </GlassButton>
-          <GlassButton variant="ghost" iconOnly aria-label="Profile">
+          <GlassButton
+            type="button"
+            variant="ghost"
+            iconOnly
+            aria-label="Profile"
+          >
             <User className="h-5 w-5" />
           </GlassButton>
         </div>
       </div>
     </div>
-  ),
+  ) }
 };
 
-// Full width examples
-export const FullWidth: Story = {
-  render: () => (
+{/* Full width examples  */}
+export const FullWidth: Story = { render: () => (
     <div className="w-full max-w-md space-y-4">
-      <GlassButton fullWidth variant="primary">
+      <GlassButton type="button" fullWidth variant="primary">
         Sign In
       </GlassButton>
       <GlassButton
+        type="button"
         fullWidth
-        variant="secondary"
+        variant="secondary" }
         leftIcon={<User className="h-4 w-4" />}
       >
         Continue with Email
       </GlassButton>
       <GlassButton
+        type="button"
         fullWidth
         variant="apple"
         leftIcon={<Globe className="h-4 w-4" />}
@@ -629,35 +671,45 @@ export const FullWidth: Story = {
         Continue with Apple
       </GlassButton>
       <div className="grid grid-cols-2 gap-4">
-        <GlassButton variant="ghost">Cancel</GlassButton>
-        <GlassButton variant="primary">Confirm</GlassButton>
+        <GlassButton type="button" variant="ghost">
+          Cancel
+        </GlassButton>
+        <GlassButton type="button" variant="primary">
+          Confirm
+        </GlassButton>
       </div>
     </div>
   ),
 };
 
-// Real-world examples
-export const RealWorldExamples: Story = {
-  render: () => (
-    <div className="flex max-w-4xl flex-col gap-8">
-      {/* E-commerce */}
+{/* Real-world examples  */}
+export const RealWorldExamples: Story = { render: () => (
+    <div className="flex max-w-4xl flex-col gap-8"> }
+      {/* E-commerce  */}
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">E-commerce</h3>
         <div className="flex flex-wrap items-center gap-4">
           <GlassButton
+            type="button"
             variant="primary"
             leftIcon={<ShoppingCart className="h-4 w-4" />}
           >
             Add to Cart
           </GlassButton>
-          <GlassButton variant="apple">Buy Now</GlassButton>
-          <GlassButton variant="ghost" leftIcon={<Heart className="h-4 w-4" />}>
+          <GlassButton type="button" variant="apple">
+            Buy Now
+          </GlassButton>
+          <GlassButton
+            type="button"
+            variant="ghost"
+            leftIcon={<Heart className="h-4 w-4" />}
+          >
             Save for Later
           </GlassButton>
         </div>
       </div>
 
-      {/* Forms */}
+      {/* Forms  */}
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Form Actions</h3>
         <div className="flex flex-wrap items-center gap-4">
@@ -665,13 +717,17 @@ export const RealWorldExamples: Story = {
             Submit
           </GlassButton>
           <GlassButton
+            type="button"
             variant="secondary"
             leftIcon={<Save className="h-4 w-4" />}
           >
             Save Draft
           </GlassButton>
-          <GlassButton variant="ghost">Cancel</GlassButton>
+          <GlassButton type="button" variant="ghost">
+            Cancel
+          </GlassButton>
           <GlassButton
+            type="button"
             variant="destructive"
             leftIcon={<Trash2 className="h-4 w-4" />}
           >
@@ -680,27 +736,52 @@ export const RealWorldExamples: Story = {
         </div>
       </div>
 
-      {/* Media Controls */}
+      {/* Media Controls  */}
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Media Controls</h3>
         <div className="flex items-center gap-2">
-          <GlassButton size="sm" iconOnly variant="ghost" aria-label="Previous">
+          <GlassButton
+            type="button"
+            size="sm"
+            iconOnly
+            variant="ghost"
+            aria-label="Previous"
+          >
             <ChevronRight className="h-4 w-4 rotate-180" />
           </GlassButton>
-          <GlassButton size="sm" iconOnly aria-label="Play">
+          <GlassButton type="button" size="sm" iconOnly aria-label="Play">
             <ArrowRight className="h-4 w-4" />
           </GlassButton>
-          <GlassButton size="sm" iconOnly variant="ghost" aria-label="Next">
+          <GlassButton
+            type="button"
+            size="sm"
+            iconOnly
+            variant="ghost"
+            aria-label="Next"
+          >
             <ChevronRight className="h-4 w-4" />
           </GlassButton>
           <div className="ml-4 flex items-center gap-2">
-            <GlassButton size="sm" iconOnly variant="ghost" aria-label="Mute">
+            <GlassButton
+              type="button"
+              size="sm"
+              iconOnly
+              variant="ghost"
+              aria-label="Mute"
+            >
               <Mic className="h-4 w-4" />
             </GlassButton>
-            <GlassButton size="sm" iconOnly variant="ghost" aria-label="Camera">
+            <GlassButton
+              type="button"
+              size="sm"
+              iconOnly
+              variant="ghost"
+              aria-label="Camera"
+            >
               <Camera className="h-4 w-4" />
             </GlassButton>
             <GlassButton
+              type="button"
               size="sm"
               iconOnly
               variant="ghost"
@@ -715,9 +796,8 @@ export const RealWorldExamples: Story = {
   ),
 };
 
-// Interactive demo
-export const InteractiveDemo: Story = {
-  render: () => {
+{/* Interactive demo  */}
+export const InteractiveDemo: Story = { render: () => { }
     const [count, setCount] = React.useState(0);
     const [loading, setLoading] = React.useState(false);
     const [copied, setCopied] = React.useState(false);
@@ -741,7 +821,8 @@ export const InteractiveDemo: Story = {
           <h3 className="font-bold text-2xl">Interactive Counter</h3>
           <p className="font-mono text-4xl">{count}</p>
           <GlassButton
-            onClick={handleClick}
+            type="button"
+              onClick={handleClick}
             loading={loading}
             loadingText="Incrementing..."
             variant="primary"
@@ -755,7 +836,8 @@ export const InteractiveDemo: Story = {
         <div className="space-y-4 text-center">
           <h3 className="font-semibold text-lg">Copy Example</h3>
           <GlassButton
-            onClick={handleCopy}
+            type="button"
+              onClick={handleCopy}
             variant={copied ? 'secondary' : 'ghost'}
             leftIcon={
               copied ? (
@@ -773,30 +855,29 @@ export const InteractiveDemo: Story = {
   },
 };
 
-// Theme showcase
-export const ThemeShowcase: Story = {
-  render: () => (
+{/* Theme showcase  */}
+export const ThemeShowcase: Story = { render: () => (
     <div className="space-y-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="space-y-4 rounded-xl bg-white/80 p-6 dark:bg-gray-900/80">
           <h3 className="font-semibold text-lg">Light Theme</h3>
           <div className="space-y-3">
-            <GlassButton variant="primary" fullWidth>
+            <GlassButton type="button" variant="primary" fullWidth>
               Primary Action
             </GlassButton>
-            <GlassButton variant="secondary" fullWidth>
+            <GlassButton type="button" variant="secondary" fullWidth>
               Secondary Action
             </GlassButton>
-            <GlassButton variant="tertiary" fullWidth>
+            <GlassButton type="button" variant="tertiary" fullWidth>
               Tertiary Action
             </GlassButton>
-            <GlassButton variant="ghost" fullWidth>
+            <GlassButton type="button" variant="ghost" fullWidth>
               Ghost Action
             </GlassButton>
-            <GlassButton variant="destructive" fullWidth>
+            <GlassButton type="button" variant="destructive" fullWidth>
               Destructive Action
             </GlassButton>
-            <GlassButton variant="apple" fullWidth>
+            <GlassButton type="button" variant="apple" fullWidth>
               Apple Style
             </GlassButton>
           </div>
@@ -807,39 +888,37 @@ export const ThemeShowcase: Story = {
             Dark Theme
           </h3>
           <div className="space-y-3">
-            <GlassButton variant="primary" fullWidth>
+            <GlassButton type="button" variant="primary" fullWidth>
               Primary Action
             </GlassButton>
-            <GlassButton variant="secondary" fullWidth>
+            <GlassButton type="button" variant="secondary" fullWidth>
               Secondary Action
             </GlassButton>
-            <GlassButton variant="tertiary" fullWidth>
+            <GlassButton type="button" variant="tertiary" fullWidth>
               Tertiary Action
             </GlassButton>
-            <GlassButton variant="ghost" fullWidth>
+            <GlassButton type="button" variant="ghost" fullWidth>
               Ghost Action
             </GlassButton>
-            <GlassButton variant="destructive" fullWidth>
+            <GlassButton type="button" variant="destructive" fullWidth>
               Destructive Action
             </GlassButton>
-            <GlassButton variant="apple" fullWidth>
+            <GlassButton type="button" variant="apple" fullWidth>
               Apple Style
             </GlassButton>
           </div>
         </div>
       </div>
     </div>
-  ),
-  parameters: {
-    backgrounds: {
-      default: 'liquid-gradient',
+  ) }
+  parameters: { backgrounds: {
+      default: 'liquid-gradient' }
     },
   },
 };
 
-// Accessibility showcase
-export const AccessibilityShowcase: Story = {
-  render: () => (
+{/* Accessibility showcase  */}
+export const AccessibilityShowcase: Story = { render: () => (
     <div className="max-w-2xl space-y-8">
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Keyboard Navigation</h3>
@@ -847,9 +926,13 @@ export const AccessibilityShowcase: Story = {
           Try navigating with Tab and activating buttons with Space or Enter
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <GlassButton>First Button</GlassButton>
-          <GlassButton variant="primary">Second Button</GlassButton>
-          <GlassButton variant="ghost">Third Button</GlassButton>
+          <GlassButton type="button">First Button</GlassButton>
+          <GlassButton type="button" variant="primary">
+            Second Button
+          </GlassButton>
+          <GlassButton type="button" variant="ghost">
+            Third Button
+          </GlassButton>
         </div>
       </div>
 
@@ -857,12 +940,17 @@ export const AccessibilityShowcase: Story = {
         <h3 className="font-semibold text-lg">Screen Reader Support</h3>
         <div className="space-y-3">
           <GlassButton
-            aria-label="Save document to cloud"
+            type="button"
+            aria-label="Save document to cloud" }
             leftIcon={<Save className="h-4 w-4" />}
           >
             Save
           </GlassButton>
-          <GlassButton aria-describedby="delete-warning" variant="destructive">
+          <GlassButton
+            type="button"
+            aria-describedby="delete-warning"
+            variant="destructive"
+          >
             Delete Account
           </GlassButton>
           <p
@@ -882,8 +970,12 @@ export const AccessibilityShowcase: Story = {
             Focus is trapped within this container. Tab through the buttons.
           </p>
           <div className="flex items-center gap-4">
-            <GlassButton variant="ghost">Cancel</GlassButton>
-            <GlassButton variant="primary">Confirm</GlassButton>
+            <GlassButton type="button" variant="ghost">
+              Cancel
+            </GlassButton>
+            <GlassButton type="button" variant="primary">
+              Confirm
+            </GlassButton>
           </div>
         </div>
       </div>
@@ -892,6 +984,7 @@ export const AccessibilityShowcase: Story = {
         <h3 className="font-semibold text-lg">Loading Announcements</h3>
         <div className="space-y-3">
           <GlassButton
+            type="button"
             loading
             loadingText="Submitting form..."
             aria-live="polite"
@@ -899,6 +992,7 @@ export const AccessibilityShowcase: Story = {
             Submit
           </GlassButton>
           <GlassButton
+            type="button"
             loading
             variant="primary"
             aria-label="Processing payment"

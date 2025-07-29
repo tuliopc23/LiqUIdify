@@ -76,7 +76,7 @@ export interface CreatePolymorphicComponentConfig<
  * });
  *
  * // Usage
- * <GlassButton variant="primary">Click me</GlassButton>
+ * <GlassButton type="button" variant="primary">Click me</GlassButton>
  * <GlassButton as="a" href="/home">Navigate</GlassButton>
  * <GlassButton as={Link} to="/about">Router Link</GlassButton>
  * ```

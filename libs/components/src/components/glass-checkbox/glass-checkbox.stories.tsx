@@ -48,20 +48,17 @@ import { GlassCheckbox } from '@/components/glass-checkbox';
 <GlassCheckbox 
   checked={checked} 
   onChange={(e) => setChecked(e.target.checked)}
-  label="Subscribe to newsletter"
-/>
+  label="Subscribe to newsletter" />
 
 // With custom styling
 <GlassCheckbox 
   label="Premium feature"
-  className="scale-125"
-/>
+  className="scale-125" />
 
 // Disabled state
 <GlassCheckbox 
   label="Unavailable option"
-  disabled
-/>
+  disabled />
 \`\`\`
 
 ## Keyboard Shortcuts
@@ -436,7 +433,7 @@ export const FormExamples: Story = {
                   <GlassCheckbox label="Browser notifications" />
                 </div>
               </div>
-              <GlassButton variant="primary" fullWidth>
+              <GlassButton type="button" variant="primary" fullWidth>
                 Save Settings
               </GlassButton>
             </div>
@@ -564,8 +561,12 @@ export const RealWorldExamples: Story = {
             </div>
           </Card.Content>
           <Card.Footer>
-            <GlassButton variant="primary">Continue to Payment</GlassButton>
-            <GlassButton variant="ghost">Compare Plans</GlassButton>
+            <GlassButton type="button" variant="primary">
+              Continue to Payment
+            </GlassButton>
+            <GlassButton type="button" variant="ghost">
+              Compare Plans
+            </GlassButton>
           </Card.Footer>
         </Card>
       </div>
@@ -746,10 +747,10 @@ export const AccessibilityShowcase: Story = {
                 <GlassCheckbox label="Focus this checkbox" />
                 <GlassCheckbox label="Then tab to this one" />
                 <div className="flex items-center gap-4 pt-2">
-                  <GlassButton size="sm" variant="ghost">
+                  <GlassButton type="button" size="sm" variant="ghost">
                     Previous
                   </GlassButton>
-                  <GlassButton size="sm" variant="primary">
+                  <GlassButton type="button" size="sm" variant="primary">
                     Next
                   </GlassButton>
                 </div>

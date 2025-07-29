@@ -62,14 +62,21 @@ export const LiveMetrics: Story = {
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-bold text-white">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-6 flex items-center justify-between">
+            <h1 className="font-bold text-3xl text-white">
               Performance Monitor
             </h1>
             <GlassButton
+              type="button"
               variant={isLive ? 'primary' : 'ghost'}
               onClick={() => setIsLive(!isLive)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  (() => setIsLive(!isLive))(e);
+                }
+              }}
             >
               {isLive ? '🔴 Live' : '⏸ Paused'}
             </GlassButton>
@@ -97,10 +104,10 @@ export const CompactView: Story = {
     showDetails: false,
   },
   render: (args) => (
-    <div className="p-6 bg-gradient-to-br from-purple-900 to-pink-900">
-      <div className="max-w-4xl mx-auto">
-        <GlassCard className="p-6 mb-6">
-          <h2 className="text-xl font-bold text-white mb-2">
+    <div className="bg-gradient-to-br from-purple-900 to-pink-900 p-6">
+      <div className="mx-auto max-w-4xl">
+        <GlassCard className="mb-6 p-6">
+          <h2 className="mb-2 font-bold text-white text-xl">
             Compact Performance View
           </h2>
           <p className="text-white/70">
@@ -133,17 +140,18 @@ export const DetailedAnalytics: Story = {
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-6">
-        <div className="max-w-7xl mx-auto">
-          <GlassCard className="p-6 mb-6">
-            <h2 className="text-2xl font-bold text-white mb-4">
+        <div className="mx-auto max-w-7xl">
+          <GlassCard className="mb-6 p-6">
+            <h2 className="mb-4 font-bold text-2xl text-white">
               Detailed Performance Analytics
             </h2>
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex flex-wrap gap-3">
               {metrics.map((metric) => (
                 <button
+                  type="button"
                   key={metric.id}
                   onClick={() => setSelectedMetric(metric.id)}
-                  className={`px-4 py-2 rounded-lg transition-all ${
+                  className={`rounded-lg px-4 py-2 transition-all ${
                     selectedMetric === metric.id
                       ? `bg-${metric.color}-500/20 text-${metric.color}-400 border border-${metric.color}-500/50`
                       : 'bg-white/5 text-white/70 hover:bg-white/10'
@@ -162,22 +170,22 @@ export const DetailedAnalytics: Story = {
             }
           />
 
-          <GlassCard className="p-6 mt-6">
-            <h3 className="text-lg font-semibold text-white mb-3">
+          <GlassCard className="mt-6 p-6">
+            <h3 className="mb-3 font-semibold text-lg text-white">
               {metrics.find((m) => m.id === selectedMetric)?.label} Details
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="glass-effect rounded-lg p-4">
-                <p className="text-sm text-white/60 mb-1">Average</p>
-                <p className="text-2xl font-bold text-white">64.3%</p>
+                <p className="mb-1 text-sm text-white/60">Average</p>
+                <p className="font-bold text-2xl text-white">64.3%</p>
               </div>
               <div className="glass-effect rounded-lg p-4">
-                <p className="text-sm text-white/60 mb-1">Peak</p>
-                <p className="text-2xl font-bold text-white">89.7%</p>
+                <p className="mb-1 text-sm text-white/60">Peak</p>
+                <p className="font-bold text-2xl text-white">89.7%</p>
               </div>
               <div className="glass-effect rounded-lg p-4">
-                <p className="text-sm text-white/60 mb-1">Trend</p>
-                <p className="text-2xl font-bold text-green-400">↑ 12%</p>
+                <p className="mb-1 text-sm text-white/60">Trend</p>
+                <p className="font-bold text-2xl text-green-400">↑ 12%</p>
               </div>
             </div>
           </GlassCard>
@@ -202,18 +210,25 @@ export const MultipleChartTypes: Story = {
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-900 to-purple-900 p-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="mx-auto max-w-7xl">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-white mb-4">
+            <h2 className="mb-4 font-bold text-2xl text-white">
               Chart Visualization Options
             </h2>
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex flex-wrap gap-2">
               {(['line', 'bar', 'area', 'radar'] as const).map((type) => (
                 <GlassButton
+                  type="button"
                   key={type}
                   variant={chartType === type ? 'primary' : 'ghost'}
                   size="sm"
                   onClick={() => setChartType(type)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      (() => setChartType(type))(e);
+                    }
+                  }}
                 >
                   {type.charAt(0).toUpperCase() + type.slice(1)} Chart
                 </GlassButton>
@@ -241,9 +256,9 @@ export const ResponsiveGrid: Story = {
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-900 to-emerald-900 p-6">
-        <div className="max-w-7xl mx-auto">
-          <GlassCard className="p-6 mb-6">
-            <h2 className="text-xl font-bold text-white mb-4">
+        <div className="mx-auto max-w-7xl">
+          <GlassCard className="mb-6 p-6">
+            <h2 className="mb-4 font-bold text-white text-xl">
               Responsive Grid Layout
             </h2>
             <div className="flex items-center gap-4">
@@ -256,7 +271,7 @@ export const ResponsiveGrid: Story = {
                 onChange={(e) => setColumns(Number(e.target.value))}
                 className="flex-1"
               />
-              <span className="text-white font-mono">{columns}</span>
+              <span className="font-mono text-white">{columns}</span>
             </div>
           </GlassCard>
 
@@ -267,11 +282,11 @@ export const ResponsiveGrid: Story = {
             {['CPU', 'Memory', 'Network', 'Disk', 'GPU', 'Temperature'].map(
               (metric) => (
                 <GlassCard key={metric} className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">
+                  <h3 className="mb-4 font-semibold text-lg text-white">
                     {metric}
                   </h3>
-                  <div className="h-32 bg-gradient-to-br from-white/5 to-white/10 rounded-lg flex items-center justify-center">
-                    <span className="text-3xl font-bold text-white/80">
+                  <div className="flex h-32 items-center justify-center rounded-lg bg-gradient-to-br from-white/5 to-white/10">
+                    <span className="font-bold text-3xl text-white/80">
                       {Math.floor(Math.random() * 40 + 40)}%
                     </span>
                   </div>
@@ -295,13 +310,13 @@ export const ResponsiveGrid: Story = {
 export const AlertsAndThresholds: Story = {
   render: () => {
     const [alerts, setAlerts] = React.useState<
-      Array<{
+      {
         id: number;
         metric: string;
         value: number;
         threshold: number;
         severity: 'warning' | 'critical';
-      }>
+      }[]
     >([]);
 
     React.useEffect(() => {
@@ -327,9 +342,9 @@ export const AlertsAndThresholds: Story = {
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-red-900 to-orange-900 p-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="mx-auto max-w-7xl">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-white mb-2">
+            <h2 className="mb-2 font-bold text-2xl text-white">
               Performance Alerts
             </h2>
             <p className="text-white/70">
@@ -342,7 +357,7 @@ export const AlertsAndThresholds: Story = {
               {alerts.map((alert) => (
                 <div
                   key={alert.id}
-                  className={`glass-effect rounded-lg p-4 border animate-in slide-in-from-right ${
+                  className={`glass-effect slide-in-from-right animate-in rounded-lg border p-4 ${
                     alert.severity === 'critical'
                       ? 'border-red-500/50 bg-red-500/10'
                       : 'border-yellow-500/50 bg-yellow-500/10'
@@ -360,11 +375,12 @@ export const AlertsAndThresholds: Story = {
                         {alert.severity === 'critical' ? '⚠️' : '⚠️'}{' '}
                         {alert.metric} Alert
                       </span>
-                      <p className="text-sm text-white/70 mt-1">
+                      <p className="mt-1 text-sm text-white/70">
                         Current: {alert.value}% (Threshold: {alert.threshold}%)
                       </p>
                     </div>
                     <button
+                      type="button"
                       onClick={() =>
                         setAlerts((prev) =>
                           prev.filter((a) => a.id !== alert.id)
@@ -397,9 +413,9 @@ export const AlertsAndThresholds: Story = {
 export const DarkModeOptimized: Story = {
   render: () => (
     <div className="dark min-h-screen bg-black p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-8 text-center">
+          <h1 className="mb-2 font-bold text-3xl text-white">
             Dark Mode Dashboard
           </h1>
           <p className="text-gray-400">Optimized for low-light environments</p>
@@ -425,8 +441,8 @@ export const MobileResponsive: Story = {
   },
   render: (args) => (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 p-4">
-      <div className="max-w-sm mx-auto">
-        <h2 className="text-xl font-bold text-white mb-4 text-center">
+      <div className="mx-auto max-w-sm">
+        <h2 className="mb-4 text-center font-bold text-white text-xl">
           Mobile Dashboard
         </h2>
         <GlassPerformanceDashboard {...args} />

@@ -5,7 +5,7 @@ import { cn } from '@/core/utils/classname';
 import { createVariants as cva } from '../../lib/variant-system';
 
 const paginationVariants = cva({
-  base: 'flex items-center justify-center space-x-1 rounded-lg p-2 backdrop-blur-md border border-white/10 bg-white/5',
+  base: 'flex items-center justify-center space-x-1 rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-md',
   variants: {
     size: {
       sm: 'p-1 text-xs',
@@ -25,7 +25,7 @@ const paginationVariants = cva({
 });
 
 const pageButtonVariants = cva({
-  base: 'flex h-8 min-w-[32px] items-center justify-center px-2 rounded-md transition-all duration-200 hover:bg-white/10 focus:bg-white/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-white/70 hover:text-white',
+  base: 'flex h-8 min-w-[32px] items-center justify-center rounded-md px-2 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white focus:bg-white/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
   variants: {
     isActive: {
       true: 'border border-blue-400/30 bg-blue-500/20 text-blue-400',
@@ -81,7 +81,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
     ref
   ) => {
     const generatePageNumbers = () => {
-      const pages: Array<number | 'ellipsis'> = [];
+      const pages: number | 'ellipsis'[] = [];
 
       // Always include first page(s)
 
@@ -164,6 +164,12 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         whileHover={!buttonDisabled && !disabled ? { scale: 1.05 } : {}}
         whileTap={!buttonDisabled && !disabled ? { scale: 0.95 } : {}}
         onClick={() => 'number' === typeof page && handlePageChange(page)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            (() => 'number' === typeof page && handlePageChange(page))(e);
+          }
+        }}
         disabled={buttonDisabled || disabled || 'ellipsis' === page}
         className={cn(
           pageButtonVariants({ isActive: isActive ? 'true' : 'false', size })
@@ -206,7 +212,9 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
 
         {/* Page Numbers */}
         {pageNumbers.map((page, index) => (
-          <React.Fragment key={index}>
+          <React.Fragment
+            key={page === 'ellipsis' ? `ellipsis-${index}` : `page-${page}`}
+          >
             {'ellipsis' === page ? (
               <span className="flex h-8 min-w-[32px] items-center justify-center text-white/40">
                 <MoreHorizontal className="h-4 w-4" />

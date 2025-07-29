@@ -207,6 +207,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   if (!isOpen) {
     return (
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
         className={cn(
           'flex items-center gap-2 rounded-lg px-3 py-2',
@@ -245,6 +246,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       {/* Backdrop */}
 
       <button
+        type="button"
         className="absolute inset-0 bg-black/20 backdrop-blur-sm"
         onClick={handleClose}
         onKeyDown={(e) => {
@@ -321,6 +323,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
                     return (
                       <button
+                        type="button"
                         key={item.id}
                         onClick={() => {
                           item.action();

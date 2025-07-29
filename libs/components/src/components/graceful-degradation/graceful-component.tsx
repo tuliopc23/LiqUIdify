@@ -335,6 +335,7 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
 
   return (
     <button
+      type="button"
       className={`graceful-interactive ${className}`}
       onClick={onInteraction}
       onKeyDown={(e) => {
@@ -351,10 +352,10 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
 
 // CSS-only fallback components
 export const CSSAccordion: React.FC<{
-  items: Array<{
+  items: {
     title: string;
     content: React.ReactNode;
-  }>;
+  }[];
   className?: string;
 }> = ({ items, className = '' }) => {
   return (
@@ -373,11 +374,11 @@ export const CSSAccordion: React.FC<{
 };
 
 export const CSSTabs: React.FC<{
-  tabs: Array<{
+  tabs: {
     label: string;
     content: React.ReactNode;
     id: string;
-  }>;
+  }[];
   className?: string;
 }> = ({ tabs, className = '' }) => {
   return (

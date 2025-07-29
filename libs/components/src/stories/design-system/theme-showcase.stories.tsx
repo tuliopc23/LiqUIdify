@@ -106,24 +106,30 @@ export const CompleteShowcase: Story = {
                     <h4 className="font-medium text-gray-600 text-sm dark:text-gray-400">
                       Default Variants
                     </h4>
-                    <GlassButton>Default</GlassButton>
-                    <GlassButton variant="primary">Primary</GlassButton>
-                    <GlassButton variant="ghost">Ghost</GlassButton>
-                    <GlassButton variant="danger">Danger</GlassButton>
+                    <GlassButton type="button">Default</GlassButton>
+                    <GlassButton type="button" variant="primary">
+                      Primary
+                    </GlassButton>
+                    <GlassButton type="button" variant="ghost">
+                      Ghost
+                    </GlassButton>
+                    <GlassButton type="button" variant="danger">
+                      Danger
+                    </GlassButton>
                   </div>
                   <div className="space-y-4">
                     <h4 className="font-medium text-gray-600 text-sm dark:text-gray-400">
                       With Icons
                     </h4>
-                    <GlassButton>
+                    <GlassButton type="button">
                       <Mail className="mr-2 h-4 w-4" />
                       Email
                     </GlassButton>
-                    <GlassButton variant="primary">
+                    <GlassButton type="button" variant="primary">
                       <Download className="mr-2 h-4 w-4" />
                       Download
                     </GlassButton>
-                    <GlassButton variant="ghost">
+                    <GlassButton type="button" variant="ghost">
                       <Settings className="mr-2 h-4 w-4" />
                       Settings
                     </GlassButton>
@@ -132,17 +138,29 @@ export const CompleteShowcase: Story = {
                     <h4 className="font-medium text-gray-600 text-sm dark:text-gray-400">
                       States
                     </h4>
-                    <GlassButton disabled>Disabled</GlassButton>
-                    <GlassButton loading>Loading</GlassButton>
-                    <GlassButton fullWidth>Full Width</GlassButton>
+                    <GlassButton type="button" disabled>
+                      Disabled
+                    </GlassButton>
+                    <GlassButton type="button" loading>
+                      Loading
+                    </GlassButton>
+                    <GlassButton type="button" fullWidth>
+                      Full Width
+                    </GlassButton>
                   </div>
                   <div className="space-y-4">
                     <h4 className="font-medium text-gray-600 text-sm dark:text-gray-400">
                       Sizes
                     </h4>
-                    <GlassButton size="sm">Small</GlassButton>
-                    <GlassButton size="md">Medium</GlassButton>
-                    <GlassButton size="lg">Large</GlassButton>
+                    <GlassButton type="button" size="sm">
+                      Small
+                    </GlassButton>
+                    <GlassButton type="button" size="md">
+                      Medium
+                    </GlassButton>
+                    <GlassButton type="button" size="lg">
+                      Large
+                    </GlassButton>
                   </div>
                 </div>
               </GlassCard>
@@ -154,7 +172,10 @@ export const CompleteShowcase: Story = {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <GlassCard className="space-y-6 p-6">
                   <div>
-                    <label className="mb-2 block font-medium text-sm">
+                    <label
+                      htmlFor="email-input-3rkooz"
+                      className="mb-2 block font-medium text-sm"
+                    >
                       Email Input
                     </label>
                     <GlassInput
@@ -166,7 +187,10 @@ export const CompleteShowcase: Story = {
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block font-medium text-sm">
+                    <label
+                      htmlFor="search-input-nq515u"
+                      className="mb-2 block font-medium text-sm"
+                    >
                       Search Input
                     </label>
                     <GlassInput
@@ -178,7 +202,10 @@ export const CompleteShowcase: Story = {
                     />
                   </div>
                   <div>
-                    <label className="mb-2 block font-medium text-sm">
+                    <label
+                      htmlFor="disabled-input-4ildb6"
+                      className="mb-2 block font-medium text-sm"
+                    >
                       Disabled Input
                     </label>
                     <GlassInput disabled placeholder="This input is disabled" />
@@ -187,23 +214,37 @@ export const CompleteShowcase: Story = {
 
                 <GlassCard className="space-y-6 p-6">
                   <div className="flex items-center justify-between">
-                    <label className="font-medium text-sm">
+                    <label
+                      htmlFor="enable-notifications-i3e8s1"
+                      className="font-medium text-sm"
+                    >
                       Enable notifications
                     </label>
                     <GlassSwitch checked={switchOn} onChange={setSwitchOn} />
                   </div>
                   <div className="flex items-center gap-3">
                     <GlassCheckbox checked={checked} onChange={setChecked} />
-                    <label className="text-sm">I agree to the terms</label>
+                    <label
+                      htmlFor="i-agree-to-the-terms-n99jrs"
+                      className="text-sm"
+                    >
+                      I agree to the terms
+                    </label>
                   </div>
                   <div className="space-y-2">
-                    <label className="mb-2 block font-medium text-sm">
+                    <label
+                      htmlFor="progress-progress-6v8gbq"
+                      className="mb-2 block font-medium text-sm"
+                    >
                       Progress ({progress}%)
                     </label>
                     <GlassProgress value={progress} />
                   </div>
                   <div className="space-y-2">
-                    <label className="mb-2 block font-medium text-sm">
+                    <label
+                      htmlFor="volume-slider-hvdodt"
+                      className="mb-2 block font-medium text-sm"
+                    >
                       Volume ({slider})
                     </label>
                     <GlassSlider
@@ -233,12 +274,12 @@ export const CompleteShowcase: Story = {
 
                   <div className="ml-auto flex gap-4">
                     <GlassTooltip content="Add to favorites">
-                      <GlassButton size="sm" variant="ghost">
+                      <GlassButton type="button" size="sm" variant="ghost">
                         <Heart className="h-4 w-4" />
                       </GlassButton>
                     </GlassTooltip>
                     <GlassTooltip content="Rate this item">
-                      <GlassButton size="sm" variant="ghost">
+                      <GlassButton type="button" size="sm" variant="ghost">
                         <Star className="h-4 w-4" />
                       </GlassButton>
                     </GlassTooltip>
@@ -257,7 +298,7 @@ export const CompleteShowcase: Story = {
                     This card has a subtle hover effect with enhanced glass
                     morphism on interaction.
                   </p>
-                  <GlassButton size="sm" fullWidth>
+                  <GlassButton type="button" size="sm" fullWidth>
                     Learn More
                   </GlassButton>
                 </GlassCard>
@@ -267,7 +308,12 @@ export const CompleteShowcase: Story = {
                   <p className="text-gray-600 text-sm dark:text-gray-400">
                     Different glass opacity and blur for visual hierarchy.
                   </p>
-                  <GlassButton size="sm" variant="ghost" fullWidth>
+                  <GlassButton
+                    type="button"
+                    size="sm"
+                    variant="ghost"
+                    fullWidth
+                  >
                     View Details
                   </GlassButton>
                 </GlassCard>
@@ -295,7 +341,12 @@ export const CompleteShowcase: Story = {
                 </p>
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                   {['Ripple', 'Scale', 'Glow', 'Magnetic'].map((effect) => (
-                    <GlassButton key={effect} variant="ghost" className="h-24">
+                    <GlassButton
+                      type="button"
+                      key={effect}
+                      variant="ghost"
+                      className="h-24"
+                    >
                       {effect} Effect
                     </GlassButton>
                   ))}
@@ -348,11 +399,13 @@ function ComponentGrid() {
       <GlassCard className="space-y-4 p-6">
         <h3 className="font-semibold text-lg">Button Variants</h3>
         <div className="space-y-3">
-          <GlassButton fullWidth>Default Button</GlassButton>
-          <GlassButton variant="primary" fullWidth>
+          <GlassButton type="button" fullWidth>
+            Default Button
+          </GlassButton>
+          <GlassButton type="button" variant="primary" fullWidth>
             Primary Button
           </GlassButton>
-          <GlassButton variant="ghost" fullWidth>
+          <GlassButton type="button" variant="ghost" fullWidth>
             Ghost Button
           </GlassButton>
         </div>

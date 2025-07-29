@@ -148,6 +148,7 @@ export const GlassDropdown = React.memo(
           {...props}
         >
           <button
+            type="button"
             ref={triggerRef}
             onClick={() => setIsOpen(!isOpen)}
             onKeyDown={(e) => {
@@ -187,6 +188,7 @@ export const GlassDropdown = React.memo(
 
                 return (
                   <button
+                    type="button"
                     key={item.value}
                     onClick={() => handleSelect(item)}
                     disabled={item.disabled}

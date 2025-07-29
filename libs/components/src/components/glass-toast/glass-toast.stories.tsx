@@ -90,6 +90,7 @@ const ToastProviderDemo = () => {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <button
+          type="button"
           onClick={() =>
             addToast({
               type: 'success',
@@ -102,6 +103,7 @@ const ToastProviderDemo = () => {
           Show Success Toast
         </button>
         <button
+          type="button"
           onClick={() =>
             addToast({
               type: 'error',
@@ -114,6 +116,7 @@ const ToastProviderDemo = () => {
           Show Error Toast
         </button>
         <button
+          type="button"
           onClick={() =>
             addToast({
               type: 'warning',
@@ -126,6 +129,7 @@ const ToastProviderDemo = () => {
           Show Warning Toast
         </button>
         <button
+          type="button"
           onClick={() =>
             addToast({
               type: 'info',
@@ -156,6 +160,7 @@ const PositionDemo = ({ position }: { position: any }) => {
 
   return (
     <button
+      type="button"
       onClick={() =>
         addToast({
           description: `Toast at ${position.replace('-', ' ')} position`,
@@ -199,6 +204,7 @@ const ActionToastDemo = () => {
   return (
     <div className="space-y-4">
       <button
+        type="button"
         onClick={() => {
           setUndone(false);
           addToast({
@@ -241,6 +247,7 @@ const DurationDemo = () => {
   return (
     <div className="space-y-4">
       <button
+        type="button"
         onClick={() =>
           addToast({
             description: 'This toast will disappear in 2 seconds',
@@ -252,6 +259,7 @@ const DurationDemo = () => {
         2 Second Toast
       </button>
       <button
+        type="button"
         onClick={() =>
           addToast({
             description: 'This toast will stay for 10 seconds',
@@ -263,6 +271,7 @@ const DurationDemo = () => {
         10 Second Toast
       </button>
       <button
+        type="button"
         onClick={() =>
           addToast({
             type: 'warning',
@@ -313,6 +322,7 @@ const MultipleToastsDemo = () => {
 
   return (
     <button
+      type="button"
       onClick={showMultipleToasts}
       className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 text-white hover:from-blue-600 hover:to-purple-600"
     >
@@ -401,6 +411,7 @@ const RealWorldDemo = () => {
       <h3 className="mb-4 font-semibold">Real-world Toast Examples</h3>
       <div className="grid grid-cols-1 gap-4">
         <button
+          type="button"
           onClick={handleSave}
           disabled={saving}
           className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
@@ -408,6 +419,7 @@ const RealWorldDemo = () => {
           {saving ? 'Saving...' : 'Save Document'}
         </button>
         <button
+          type="button"
           onClick={handleUpload}
           disabled={uploading}
           className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
@@ -415,6 +427,7 @@ const RealWorldDemo = () => {
           {uploading ? 'Uploading...' : 'Upload File'}
         </button>
         <button
+          type="button"
           onClick={handleNetworkError}
           className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
         >
@@ -474,8 +487,14 @@ const FormValidationDemo = () => {
         Login Form (with validation toasts)
       </h3>
       <div>
-        <label className="mb-1 block font-medium text-sm">Email</label>
+        <label
+          htmlFor="email-56avvb"
+          className="mb-1 block font-medium text-sm"
+        >
+          Email
+        </label>
         <input
+          id="input-1-0jz717"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -484,8 +503,14 @@ const FormValidationDemo = () => {
         />
       </div>
       <div>
-        <label className="mb-1 block font-medium text-sm">Password</label>
+        <label
+          htmlFor="password-t1xfsq"
+          className="mb-1 block font-medium text-sm"
+        >
+          Password
+        </label>
         <input
+          id="input-2-m9g8or"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

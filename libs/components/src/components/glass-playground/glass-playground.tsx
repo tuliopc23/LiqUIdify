@@ -3,15 +3,15 @@
  * Live editing and preview system for LiqUIdify components
  */
 
-// Removed branded type import - using string literals directly
-// Note: react-live removed for production build - using fallback
-// import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';
-// import { themes } from 'prism-react-renderer';
+{/* Removed branded type import - using string literals directly  */}
+{/* Note: react-live removed for production build - using fallback  */}
+{/* import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';  */}
+{/* import { themes } from 'prism-react-renderer';  */}
 import { Check, Code, Copy, Download, Eye, Maximize2 } from 'lucide-react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/core/utils/classname';
 import { useSSRSafeWindow } from '@/hooks/use-ssr-safe';
-// Import specific components instead of wildcard
+{/* Import specific components instead of wildcard  */}
 import {
   GlassBadge,
   GlassButton,
@@ -25,7 +25,7 @@ import {
 } from '@/index';
 import { GlassTabs } from '../glass-tabs';
 
-// Fallback components for react-live (removed for production)
+{/* Fallback components for react-live (removed for production)  */}
 const LiveProvider = ({ children }: React.ReactNode) => (
   <div data-playground="fallback">{children}</div>
 );
@@ -46,8 +46,7 @@ const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
 const LiveError = ({ className, ...props }: Record<string, unknown>) =>
   undefined;
 
-export interface PlaygroundProps {
-  code: string;
+export interface PlaygroundProps { code: string; }
   scope?: Record<string, unknown>;
   title?: string;
   description?: string;
@@ -60,8 +59,7 @@ export interface PlaygroundProps {
   autoRun?: boolean;
 }
 
-export function GlassPlayground({
-  code: initialCode,
+export function GlassPlayground({ code: initialCode }
   scope = {},
   title,
   description,
@@ -80,7 +78,7 @@ export function GlassPlayground({
 
   const window = useSSRSafeWindow((w) => w, undefined);
 
-  // Combine default scope with provided scope
+  {/* Combine default scope with provided scope  */}
   const playgroundScope = useMemo(
     () => ({
       GlassButton,
@@ -101,7 +99,7 @@ export function GlassPlayground({
     [scope]
   );
 
-  // Copy code to clipboard
+  {/* Copy code to clipboard  */}
   const handleCopy = useCallback(async () => {
     if (window?.navigator?.clipboard) {
       try {
@@ -109,12 +107,10 @@ export function GlassPlayground({
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch {
-        // Logging disabled
-      }
-    }
+        {/* Logging disabled  */}
   }, [code, window]);
 
-  // Download code as file
+  {/* Download code as file  */}
   const handleDownload = useCallback(() => {
     if (window) {
       const blob = new Blob([code], { type: 'text/plain' });
@@ -126,15 +122,16 @@ export function GlassPlayground({
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-    }
-  }, [code, title, window]);
+    }, [code, title, window]);
 
-  // Toggle fullscreen
+  {/* Toggle fullscreen  */}
   const handleFullscreen = useCallback(() => {
     setFullscreen((previous) => !previous);
-  }, []);
+  },
+        []
+      );
 
-  // Get appropriate theme (fallback for production)
+  {/* Get appropriate theme (fallback for production)  */}
   const editorTheme = {
     plain: { color: '#24292e', backgroundColor: '#ffffff' },
     styles: [],
@@ -148,7 +145,7 @@ export function GlassPlayground({
         className
       )}
     >
-      {/* Header */}
+      {/* Header  */}
 
       <div className="glass-header border-white/10 border-b px-4 py-3">
         <div className="flex items-center justify-between">
@@ -163,9 +160,9 @@ export function GlassPlayground({
 
           <div className="flex items-center gap-2">
             <GlassButton
+              type="button"
               variant="ghost"
-              size={'sm'}
-              onClick={handleCopy}
+              size={'sm'} onClick={handleCopy}
               aria-label="Copy code"
             >
               {copied ? (
@@ -176,18 +173,18 @@ export function GlassPlayground({
             </GlassButton>
 
             <GlassButton
+              type="button"
               variant="ghost"
-              size={'sm'}
-              onClick={handleDownload}
+              size={'sm'} onClick={handleDownload}
               aria-label="Download code"
             >
               <Download className="h-4 w-4" />
             </GlassButton>
 
             <GlassButton
+              type="button"
               variant="ghost"
-              size={'sm'}
-              onClick={handleFullscreen}
+              size={'sm'} onClick={handleFullscreen}
               aria-label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
               <Maximize2 className="h-4 w-4" />
@@ -196,12 +193,11 @@ export function GlassPlayground({
         </div>
       </div>
 
-      {/* Content */}
+      {/* Content  */}
 
       <div
         className="relative"
-        style={{ height: 'number' === typeof height ? `${height}px` : height }}
-      >
+        style={{ height: 'number' === typeof height ? `${height}px` : height>
         <LiveProvider
           code={code}
           scope={playgroundScope}
@@ -211,8 +207,7 @@ export function GlassPlayground({
           {showEditor && showPreview ? (
             <GlassTabs
               tabs={[
-                {
-                  id: 'preview',
+                { id: 'preview' }
                   label: (
                     <div className="flex items-center gap-2">
                       <Eye className="h-4 w-4" />
@@ -222,8 +217,7 @@ export function GlassPlayground({
 
                   content: <PlaygroundPreview />,
                 },
-                {
-                  id: 'code',
+                { id: 'code' }
                   label: (
                     <div className="flex items-center gap-2">
                       <Code className="h-4 w-4" />
@@ -269,7 +263,7 @@ export function GlassPlayground({
             </div>
           )}
 
-          {/* Error display */}
+          {/* Error display  */}
 
           <PlaygroundError />
         </LiveProvider>
@@ -278,7 +272,7 @@ export function GlassPlayground({
   );
 }
 
-// Playground Editor Component
+{/* Playground Editor Component  */}
 interface PlaygroundEditorProps {
   editable?: boolean;
   onChange?: (code: string) => void;
@@ -301,7 +295,6 @@ function PlaygroundEditor({
             'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
           fontSize: '14px',
           lineHeight: '1.5',
-        }}
       />
 
       {!editable && (
@@ -313,7 +306,7 @@ function PlaygroundEditor({
   );
 }
 
-// Playground Preview Component
+{/* Playground Preview Component  */}
 function PlaygroundPreview() {
   return (
     <div className="playground-preview flex h-full items-center justify-center">
@@ -328,21 +321,19 @@ function PlaygroundPreview() {
   );
 }
 
-// Playground Error Component
+{/* Playground Error Component  */}
 function PlaygroundError() {
   return (
     <LiveError className="absolute right-0 bottom-0 left-0 border-red-500/20 border-t bg-red-500/10 p-4 font-mono text-red-600 text-sm backdrop-blur-md" />
   );
 }
 
-// Styles for the playground
+{/* Styles for the playground  */}
 const playgroundStyles = `
-  .playground-editor {
-    background: transparent !important;
+  .playground-editor { background: transparent !important; }
   }
 
-  .playground-editor textarea {
-    outline: none !important;
+  .playground-editor textarea { outline: none !important; }
   }
 
   .playground-preview {
@@ -356,12 +347,11 @@ const playgroundStyles = `
       );
   }
 
-  .prism-code {
-    background: transparent !important;
+  .prism-code { background: transparent !important; }
   }
 `;
 
-// Inject styles
+{/* Inject styles  */}
 if ('undefined' !== typeof document) {
   const styleId = 'glass-playground-styles';
   if (!document.getElementById(styleId)) {
@@ -369,30 +359,25 @@ if ('undefined' !== typeof document) {
     style.id = styleId;
     style.textContent = playgroundStyles;
     document.head.append(style);
-  }
-}
-
-// Export example templates
-export const PlaygroundTemplates = {
-  button: `
+{/* Export example templates  */}
+export const PlaygroundTemplates = { button: `
 <div className="flex gap-4 items-center">
-  <GlassButton variant="primary">
+  <GlassButton type="button" variant="primary">
     Primary Button
   </GlassButton>
 
-  <GlassButton variant="secondary">
+  <GlassButton type="button" variant="secondary">
     Secondary Button
   </GlassButton>
 
-  <GlassButton variant="ghost">
+  <GlassButton type="button" variant="ghost">
     Ghost Button
   </GlassButton>
 </div>
-`,
-
+` }
   card: `
 <GlassCard className="max-w-md">
-  <GlassCardHeader>
+  <GlassCardHeader aria-label="Glass card header>">
     <GlassCardTitle>Interactive Card</GlassCardTitle>
     <GlassCardDescription>
       Edit this code to see changes in real-time
@@ -403,8 +388,8 @@ export const PlaygroundTemplates = {
     <p>This is an interactive playground where you can experiment with LiqUIdify components.</p>
   </GlassCardContent>
 
-  <GlassCardFooter>
-    <GlassButton variant="primary">Action</GlassButton>
+  <GlassCardFooter aria-label="Glass card footer>">
+    <GlassButton type="button" variant="primary">Action</GlassButton>
   </GlassCardFooter>
 </GlassCard>
 `,
@@ -426,8 +411,7 @@ function FormExample() {
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+        required />
 
       <GlassButton type="submit" variant="primary" className="w-full">
         Submit

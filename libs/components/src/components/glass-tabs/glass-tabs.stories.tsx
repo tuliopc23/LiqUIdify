@@ -11,16 +11,13 @@ import {
 import { useState } from 'react';
 import { type GlassTabItem, GlassTabs } from './glass-tabs';
 
-const meta = {
-  title: 'Glass UI/GlassTabs',
+const meta = { title: 'Glass UI/GlassTabs' }
   component: GlassTabs,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
+  parameters: { layout: 'centered' }
+    docs: { description: {
         component: `
 ## GlassTabs Component
-
+ }
 A sophisticated tab component with glassmorphic design, smooth transitions, and full accessibility support. Perfect for organizing content into logical sections with elegant visual separation.
 
 ### Key Features
@@ -36,14 +33,12 @@ A sophisticated tab component with glassmorphic design, smooth transitions, and 
 \`\`\`tsx
 import { GlassTabs, GlassTabItem } from '@/components/glass-tabs';
 
-const tabs: GlassTabItem[] = [
-  {
-    id: 'tab1',
+const tabs: Array<GlassTabItem> = [
+  { id: 'tab1' }
     label: 'Profile',
     content: <ProfileContent />
   },
-  {
-    id: 'tab2',
+  { id: 'tab2' }
     label: 'Settings',
     content: <SettingsContent />
   }
@@ -53,8 +48,7 @@ function MyComponent() {
   return (
     <GlassTabs 
       tabs={tabs}
-      defaultTab="tab1"
-    />
+      defaultTab="tab1" />
   );
 }
 \`\`\`
@@ -63,41 +57,32 @@ function MyComponent() {
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    tabs: {
-      control: 'object',
+  argTypes: { tabs: {
+      control: 'object' }
       description: 'Array of tab items',
     },
-    defaultTab: {
-      control: 'text',
+    defaultTab: { control: 'text' }
       description: 'ID of the default active tab',
     },
-    className: {
-      control: 'text',
+    className: { control: 'text' }
       description: 'Additional CSS classes for container',
     },
-    tabListClassName: {
-      control: 'text',
+    tabListClassName: { control: 'text' }
       description: 'Additional CSS classes for tab list',
     },
-    tabButtonClassName: {
-      control: 'text',
+    tabButtonClassName: { control: 'text' }
       description: 'Additional CSS classes for tab buttons',
     },
-    activeTabButtonClassName: {
-      control: 'text',
+    activeTabButtonClassName: { control: 'text' }
       description: 'CSS classes for active tab button',
     },
-    inactiveTabButtonClassName: {
-      control: 'text',
+    inactiveTabButtonClassName: { control: 'text' }
       description: 'CSS classes for inactive tab buttons',
     },
-    tabPanelClassName: {
-      control: 'text',
+    tabPanelClassName: { control: 'text' }
       description: 'Additional CSS classes for tab panels',
     },
-    orientation: {
-      control: 'select',
+    orientation: { control: 'select' }
       options: ['horizontal', 'vertical'],
       description: 'Tab orientation (future enhancement)',
     },
@@ -107,10 +92,9 @@ function MyComponent() {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Basic tabs for examples
+{/* Basic tabs for examples  */}
 const basicTabs: Array<GlassTabItem> = [
-  {
-    id: 'overview',
+  { id: 'overview' }
     label: 'Overview',
     content: (
       <div className="space-y-4">
@@ -124,8 +108,7 @@ const basicTabs: Array<GlassTabItem> = [
       </div>
     ),
   },
-  {
-    id: 'details',
+  { id: 'details' }
     label: 'Details',
     content: (
       <div className="space-y-4">
@@ -138,8 +121,7 @@ const basicTabs: Array<GlassTabItem> = [
       </div>
     ),
   },
-  {
-    id: 'resources',
+  { id: 'resources' }
     label: 'Resources',
     content: (
       <div className="space-y-4">
@@ -154,27 +136,24 @@ const basicTabs: Array<GlassTabItem> = [
   },
 ];
 
-// Default Story
-export const Default: Story = {
-  args: {
-    tabs: basicTabs,
+{/* Default Story  */}
+export const Default: Story = { args: {
+    tabs: basicTabs }
   },
 };
 
-// With Default Tab
-export const WithDefaultTab: Story = {
-  args: {
-    tabs: basicTabs,
+{/* With Default Tab  */}
+export const WithDefaultTab: Story = { args: {
+    tabs: basicTabs }
     defaultTab: 'details',
   },
 };
 
-// With Icons
-export const WithIcons: Story = {
-  args: {
+{/* With Icons  */}
+export const WithIcons: Story = { args: {
     tabs: [
       {
-        id: 'profile',
+        id: 'profile' }
         label: (
           <span className="flex items-center gap-2">
             <User className="h-4 w-4" />
@@ -192,8 +171,7 @@ export const WithIcons: Story = {
           </div>
         ),
       },
-      {
-        id: 'notifications',
+      { id: 'notifications' }
         label: (
           <span className="flex items-center gap-2">
             <Bell className="h-4 w-4" />
@@ -211,8 +189,7 @@ export const WithIcons: Story = {
           </div>
         ),
       },
-      {
-        id: 'security',
+      { id: 'security' }
         label: (
           <span className="flex items-center gap-2">
             <Shield className="h-4 w-4" />
@@ -234,28 +211,24 @@ export const WithIcons: Story = {
   },
 };
 
-// With Disabled Tabs
-export const WithDisabledTabs: Story = {
-  args: {
+{/* With Disabled Tabs  */}
+export const WithDisabledTabs: Story = { args: {
     tabs: [
       {
-        id: 'active1',
+        id: 'active1' }
         label: 'Active Tab 1',
         content: <div>This tab is active and clickable.</div>,
       },
-      {
-        id: 'disabled1',
+      { id: 'disabled1' }
         label: 'Disabled Tab',
         content: <div>This content is not accessible.</div>,
         disabled: true,
       },
-      {
-        id: 'active2',
+      { id: 'active2' }
         label: 'Active Tab 2',
         content: <div>Another active tab.</div>,
       },
-      {
-        id: 'disabled2',
+      { id: 'disabled2' }
         label: 'Another Disabled',
         content: <div>This content is also not accessible.</div>,
         disabled: true,
@@ -264,14 +237,12 @@ export const WithDisabledTabs: Story = {
   },
 };
 
-// Interactive Demo
-export const InteractiveDemo: Story = {
-  render: () => {
+{/* Interactive Demo  */}
+export const InteractiveDemo: Story = { render: () => { }
     const [_activeSection, _setActiveSection] = useState<string>('');
 
     const demoTabs: Array<GlassTabItem> = [
-      {
-        id: 'frontend',
+      { id: 'frontend' }
         label: (
           <span className="flex items-center gap-2">
             <Code className="h-4 w-4" />
@@ -304,8 +275,7 @@ export const InteractiveDemo: Story = {
           </div>
         ),
       },
-      {
-        id: 'backend',
+      { id: 'backend' }
         label: (
           <span className="flex items-center gap-2">
             <Database className="h-4 w-4" />
@@ -338,8 +308,7 @@ export const InteractiveDemo: Story = {
           </div>
         ),
       },
-      {
-        id: 'devops',
+      { id: 'devops' }
         label: (
           <span className="flex items-center gap-2">
             <Terminal className="h-4 w-4" />
@@ -382,12 +351,11 @@ export const InteractiveDemo: Story = {
   },
 };
 
-// Settings Example
-export const SettingsExample: Story = {
-  render: () => {
+{/* Settings Example  */}
+export const SettingsExample: Story = { render: () => {
     const settingsTabs: Array<GlassTabItem> = [
       {
-        id: 'account',
+        id: 'account' }
         label: 'Account',
         content: (
           <div className="space-y-6">
@@ -397,32 +365,31 @@ export const SettingsExample: Story = {
               </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+                  <label htmlFor="username-x1hayd" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
                     Username
                   </label>
-                  <input
+                  <input id="input-402" 
                     type="text"
                     className="w-full rounded-lg border border-gray-300 px-4 py-2 dark:border-gray-600"
                     placeholder="john_doe"
-                  />
+                  / />
                 </div>
                 <div>
-                  <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+                  <label htmlFor="email-llg1wu" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
                     Email
                   </label>
-                  <input
+                  <input id="input-412" 
                     type="email"
                     className="w-full rounded-lg border border-gray-300 px-4 py-2 dark:border-gray-600"
                     placeholder="john@example.com"
-                  />
+                  / />
                 </div>
               </div>
             </div>
           </div>
         ),
       },
-      {
-        id: 'privacy',
+      { id: 'privacy' }
         label: 'Privacy',
         content: (
           <div className="space-y-6">
@@ -430,24 +397,23 @@ export const SettingsExample: Story = {
               Privacy Settings
             </h3>
             <div className="space-y-4">
-              <label className="flex items-center gap-3">
-                <input type="checkbox" className="rounded" />
+              <label htmlFor="form-field" className="flex items-center gap-3">
+                <input id="input-433" type="checkbox" className="rounded" / />
                 <span className="text-sm">Make profile public</span>
               </label>
-              <label className="flex items-center gap-3">
-                <input type="checkbox" className="rounded" />
+              <label htmlFor="form-field" className="flex items-center gap-3">
+                <input id="input-437" type="checkbox" className="rounded" / />
                 <span className="text-sm">Show email address</span>
               </label>
-              <label className="flex items-center gap-3">
-                <input type="checkbox" className="rounded" />
+              <label htmlFor="form-field" className="flex items-center gap-3">
+                <input id="input-441" type="checkbox" className="rounded" / />
                 <span className="text-sm">Allow direct messages</span>
               </label>
             </div>
           </div>
         ),
       },
-      {
-        id: 'billing',
+      { id: 'billing' }
         label: 'Billing',
         content: (
           <div className="space-y-6">
@@ -463,7 +429,10 @@ export const SettingsExample: Story = {
                 $19/month • Renews on Jan 15, 2025
               </p>
             </div>
-            <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+            <button
+              type="button"
+              className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            >
               Manage Subscription
             </button>
           </div>
@@ -479,12 +448,11 @@ export const SettingsExample: Story = {
   },
 };
 
-// Documentation Example
-export const DocumentationExample: Story = {
-  render: () => {
+{/* Documentation Example  */}
+export const DocumentationExample: Story = { render: () => {
     const docsTabs: Array<GlassTabItem> = [
       {
-        id: 'installation',
+        id: 'installation' }
         label: 'Installation',
         content: (
           <div className="space-y-4">
@@ -501,8 +469,7 @@ export const DocumentationExample: Story = {
           </div>
         ),
       },
-      {
-        id: 'usage',
+      { id: 'usage' }
         label: 'Usage',
         content: (
           <div className="space-y-4">
@@ -522,8 +489,7 @@ const tabs = [
           </div>
         ),
       },
-      {
-        id: 'api',
+      { id: 'api' }
         label: 'API',
         content: (
           <div className="space-y-4">
@@ -541,7 +507,7 @@ const tabs = [
               <tbody className="text-gray-600 dark:text-gray-400">
                 <tr className="border-b">
                   <td className="py-2">tabs</td>
-                  <td className="py-2">GlassTabItem[]</td>
+                  <td className="py-2">Array<GlassTabItem></td>
                   <td className="py-2">required</td>
                 </tr>
                 <tr className="border-b">
@@ -569,22 +535,19 @@ const tabs = [
   },
 };
 
-// Custom Styling
-export const CustomStyling: Story = {
-  args: {
+{/* Custom Styling  */}
+export const CustomStyling: Story = { args: {
     tabs: [
       {
-        id: 'custom1',
+        id: 'custom1' }
         label: 'Custom Tab 1',
         content: <div>Custom styled content 1</div>,
       },
-      {
-        id: 'custom2',
+      { id: 'custom2' }
         label: 'Custom Tab 2',
         content: <div>Custom styled content 2</div>,
       },
-      {
-        id: 'custom3',
+      { id: 'custom3' }
         label: 'Custom Tab 3',
         content: <div>Custom styled content 3</div>,
       },
@@ -596,12 +559,11 @@ export const CustomStyling: Story = {
   },
 };
 
-// Accessibility Demo
-export const AccessibilityDemo: Story = {
-  render: () => {
+{/* Accessibility Demo  */}
+export const AccessibilityDemo: Story = { render: () => {
     const accessibilityTabs: Array<GlassTabItem> = [
       {
-        id: 'keyboard',
+        id: 'keyboard' }
         label: 'Keyboard Nav',
         content: (
           <div className="space-y-4">
@@ -631,8 +593,7 @@ export const AccessibilityDemo: Story = {
           </div>
         ),
       },
-      {
-        id: 'aria',
+      { id: 'aria' }
         label: 'ARIA Support',
         content: (
           <div className="space-y-4">
@@ -665,8 +626,7 @@ export const AccessibilityDemo: Story = {
           </div>
         ),
       },
-      {
-        id: 'screen-reader',
+      { id: 'screen-reader' }
         label: 'Screen Readers',
         content: (
           <div className="space-y-4">

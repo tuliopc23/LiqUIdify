@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
-import { Project, SyntaxKind, Node, ts } from 'ts-morph';
 import path from 'path';
+import { Node, Project, SyntaxKind, ts } from 'ts-morph';
 
 interface TypeIssue {
   file: string;
@@ -33,7 +33,7 @@ const project = new Project({
 // Add all TypeScript files from your libs directory
 project.addSourceFilesAtPaths('libs/components/src/**/*.{ts,tsx}');
 
-const issues: TypeIssue[] = [];
+const issues: Array<TypeIssue> = [];
 
 console.log(`📁 Analyzing ${project.getSourceFiles().length} files...\n`);
 
@@ -200,7 +200,7 @@ for (const sourceFile of project.getSourceFiles()) {
   // 8. Find @ts-ignore comments
   const tsIgnoreComments =
     sourceFile.getFullText().match(/\/\/ @ts-ignore.*$/gm) || [];
-  tsIgnoreComments.forEach((comment, index) => {
+  tsIgnoreComments.forEach((comment, _index) => {
     const commentIndex = sourceFile.getFullText().indexOf(comment);
     const pos = sourceFile.getLineAndColumnAtPos(commentIndex);
 
@@ -270,7 +270,7 @@ const byFile = issues.reduce(
     acc[issue.file].push(issue);
     return acc;
   },
-  {} as Record<string, TypeIssue[]>
+  {} as Record<string, Array<TypeIssue>>
 );
 
 Object.entries(byFile).forEach(([file, fileIssues]) => {

@@ -39,8 +39,7 @@ import { GlassNumberInput } from '@/components/glass-number-input';
 <GlassNumberInput
   value={42}
   onChange={(value) => setValue(value)}
-  placeholder="Enter a number"
-/>
+  placeholder="Enter a number" />
 
 // With validation and formatting
 <GlassNumberInput
@@ -54,8 +53,7 @@ import { GlassNumberInput } from '@/components/glass-number-input';
     style: 'currency',
     currency: 'USD'
   }}
-  showButtons
-/>
+  showButtons />
 
 // Percentage input
 <GlassNumberInput
@@ -68,8 +66,7 @@ import { GlassNumberInput } from '@/components/glass-number-input';
     style: 'percent',
     minimumFractionDigits: 0,
     maximumFractionDigits: 1
-  }}
-/>
+  }} />
 \`\`\`
 
 ## Keyboard Shortcuts
@@ -298,7 +295,7 @@ export const BasicUsage: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Integer Input</h3>
+          <h3 className="font-medium text-sm text-white/80">Integer Input</h3>
           <GlassNumberInput
             value={integerValue || undefined}
             onChange={setIntegerValue}
@@ -308,7 +305,7 @@ export const BasicUsage: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Decimal Input</h3>
+          <h3 className="font-medium text-sm text-white/80">Decimal Input</h3>
           <GlassNumberInput
             value={decimalValue || undefined}
             onChange={setDecimalValue}
@@ -320,7 +317,7 @@ export const BasicUsage: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Range Input (0-100)
           </h3>
           <GlassNumberInput
@@ -358,7 +355,7 @@ export const Sizes: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Small Size</h3>
+          <h3 className="font-medium text-sm text-white/80">Small Size</h3>
           <GlassNumberInput
             value={value1 || undefined}
             onChange={setValue1}
@@ -368,7 +365,7 @@ export const Sizes: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Medium Size</h3>
+          <h3 className="font-medium text-sm text-white/80">Medium Size</h3>
           <GlassNumberInput
             value={value2 || undefined}
             onChange={setValue2}
@@ -378,7 +375,7 @@ export const Sizes: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Large Size</h3>
+          <h3 className="font-medium text-sm text-white/80">Large Size</h3>
           <GlassNumberInput
             value={value3 || undefined}
             onChange={setValue3}
@@ -412,7 +409,7 @@ export const States: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Normal State</h3>
+          <h3 className="font-medium text-sm text-white/80">Normal State</h3>
           <GlassNumberInput
             value={normalValue || undefined}
             onChange={setNormalValue}
@@ -421,7 +418,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Error State</h3>
+          <h3 className="font-medium text-sm text-white/80">Error State</h3>
           <GlassNumberInput
             value={errorValue || undefined}
             onChange={setErrorValue}
@@ -433,7 +430,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Disabled State</h3>
+          <h3 className="font-medium text-sm text-white/80">Disabled State</h3>
           <GlassNumberInput
             value={disabledValue || undefined}
             disabled
@@ -442,7 +439,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Without Buttons</h3>
+          <h3 className="font-medium text-sm text-white/80">Without Buttons</h3>
           <GlassNumberInput
             value={normalValue || undefined}
             onChange={setNormalValue}
@@ -471,19 +468,19 @@ export const FormattingExamples: Story = {
   render: () => {
     const [currency, setCurrency] = useState<number | null>(1299.99);
     const [percentage, setPercentage] = useState<number | null>(0.15);
-    const [decimal, setDecimal] = useState<number | null>(3.14159);
+    const [decimal, setDecimal] = useState<number | null>(Math.PI);
     const [scientific, setScientific] = useState<number | null>(1000000);
 
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Currency Format</h3>
+          <h3 className="font-medium text-sm text-white/80">Currency Format</h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-3">
               <DollarSign className="h-5 w-5 text-green-400" />
               <div>
                 <div className="font-medium text-white/90">Price Input</div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   USD currency formatting
                 </div>
               </div>
@@ -505,7 +502,7 @@ export const FormattingExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Percentage Format
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -513,7 +510,7 @@ export const FormattingExamples: Story = {
               <Percent className="h-5 w-5 text-blue-400" />
               <div>
                 <div className="font-medium text-white/90">Rate Input</div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   Percentage formatting (0-1 range)
                 </div>
               </div>
@@ -537,7 +534,7 @@ export const FormattingExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Decimal Precision
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -545,7 +542,7 @@ export const FormattingExamples: Story = {
               <Calculator className="h-5 w-5 text-purple-400" />
               <div>
                 <div className="font-medium text-white/90">Pi Value</div>
-                <div className="text-white/60 text-sm">5 decimal places</div>
+                <div className="text-sm text-white/60">5 decimal places</div>
               </div>
             </div>
             <GlassNumberInput
@@ -564,13 +561,13 @@ export const FormattingExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Large Numbers</h3>
+          <h3 className="font-medium text-sm text-white/80">Large Numbers</h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center gap-3">
               <Hash className="h-5 w-5 text-orange-400" />
               <div>
                 <div className="font-medium text-white/90">Population</div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   Number with thousand separators
                 </div>
               </div>
@@ -616,11 +613,14 @@ export const RealWorldExamples: Story = {
     return (
       <div className="space-y-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Shopping Cart</h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm max-w-md">
+          <h3 className="font-medium text-sm text-white/80">Shopping Cart</h3>
+          <div className="max-w-md rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <div className="space-y-4">
               <div>
-                <label className="block mb-2 font-medium text-white/80 text-sm">
+                <label
+                  htmlFor="quantity-oc2sl5"
+                  className="mb-2 block font-medium text-sm text-white/80"
+                >
                   Quantity
                 </label>
                 <GlassNumberInput
@@ -634,7 +634,10 @@ export const RealWorldExamples: Story = {
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-white/80 text-sm">
+                <label
+                  htmlFor="unit-price-kx66zx"
+                  className="mb-2 block font-medium text-sm text-white/80"
+                >
                   Unit Price
                 </label>
                 <GlassNumberInput
@@ -652,7 +655,10 @@ export const RealWorldExamples: Story = {
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-white/80 text-sm">
+                <label
+                  htmlFor="discount-rate-wg4715"
+                  className="mb-2 block font-medium text-sm text-white/80"
+                >
                   Discount Rate
                 </label>
                 <GlassNumberInput
@@ -669,10 +675,10 @@ export const RealWorldExamples: Story = {
                 />
               </div>
 
-              <div className="border-t border-white/10 pt-4">
-                <div className="flex justify-between items-center">
+              <div className="border-white/10 border-t pt-4">
+                <div className="flex items-center justify-between">
                   <span className="font-medium text-white/80">Total:</span>
-                  <span className="font-bold text-white/90 text-lg">
+                  <span className="font-bold text-lg text-white/90">
                     ${total.toFixed(2)}
                   </span>
                 </div>
@@ -682,13 +688,16 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Game Settings</h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm max-w-md">
+          <h3 className="font-medium text-sm text-white/80">Game Settings</h3>
+          <div className="max-w-md rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <Target className="h-5 w-5 text-green-400" />
                 <div className="flex-1">
-                  <label className="block mb-2 font-medium text-white/80 text-sm">
+                  <label
+                    htmlFor="target-score-0-100-h9w5n2"
+                    className="mb-2 block font-medium text-sm text-white/80"
+                  >
                     Target Score (0-100)
                   </label>
                   <GlassNumberInput
@@ -705,7 +714,10 @@ export const RealWorldExamples: Story = {
               <div className="flex items-center gap-4">
                 <Timer className="h-5 w-5 text-blue-400" />
                 <div className="flex-1">
-                  <label className="block mb-2 font-medium text-white/80 text-sm">
+                  <label
+                    htmlFor="timer-seconds-s80rc3"
+                    className="mb-2 block font-medium text-sm text-white/80"
+                  >
                     Timer (seconds)
                   </label>
                   <GlassNumberInput
@@ -735,13 +747,16 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Financial Calculator
           </h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm max-w-lg">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="max-w-lg rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <label className="block mb-2 font-medium text-white/80 text-sm">
+                <label
+                  htmlFor="principal-amount-a01eqo"
+                  className="mb-2 block font-medium text-sm text-white/80"
+                >
                   Principal Amount
                 </label>
                 <GlassNumberInput
@@ -758,7 +773,10 @@ export const RealWorldExamples: Story = {
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-white/80 text-sm">
+                <label
+                  htmlFor="interest-rate-annual--jr0f3k"
+                  className="mb-2 block font-medium text-sm text-white/80"
+                >
                   Interest Rate (Annual %)
                 </label>
                 <GlassNumberInput
@@ -776,14 +794,20 @@ export const RealWorldExamples: Story = {
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-white/80 text-sm">
+                <label
+                  htmlFor="term-years-bqs663"
+                  className="mb-2 block font-medium text-sm text-white/80"
+                >
                   Term (Years)
                 </label>
                 <GlassNumberInput defaultValue={5} min={1} max={30} step={1} />
               </div>
 
               <div>
-                <label className="block mb-2 font-medium text-white/80 text-sm">
+                <label
+                  htmlFor="payments-per-year-mklh98"
+                  className="mb-2 block font-medium text-sm text-white/80"
+                >
                   Payments per Year
                 </label>
                 <GlassNumberInput defaultValue={12} min={1} max={52} step={1} />
@@ -829,7 +853,7 @@ export const AccessibilityShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <p className="text-white/60 text-sm">
+          <p className="text-sm text-white/60">
             Try keyboard navigation: Tab to focus, Arrow keys to adjust, Enter
             to confirm
           </p>
@@ -892,7 +916,7 @@ export const ThemeShowcase: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Ocean Theme</h3>
+          <h3 className="font-medium text-sm text-white/80">Ocean Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
             <GlassNumberInput
               value={value1 || undefined}
@@ -905,7 +929,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Sunset Theme</h3>
+          <h3 className="font-medium text-sm text-white/80">Sunset Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
             <GlassNumberInput
               value={value2 || undefined}
@@ -923,7 +947,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Forest Theme</h3>
+          <h3 className="font-medium text-sm text-white/80">Forest Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
             <GlassNumberInput
               value={value3 || undefined}

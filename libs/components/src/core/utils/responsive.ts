@@ -141,7 +141,7 @@ export function matchesBreakpoint(
       return width < breakpointValue;
     }
     case 'only': {
-      const breakpointKeys = Object.keys(BREAKPOINTS) as Array<BreakpointKey>;
+      const breakpointKeys = Object.keys(BREAKPOINTS) as BreakpointKey[];
       const currentIndex = breakpointKeys.indexOf(breakpoint);
       const nextBreakpoint = breakpointKeys[currentIndex + 1];
 
@@ -254,15 +254,18 @@ export function responsiveGrid(
  * Media query hook for React components
  */
 export function useMediaQuery(query: string): boolean {
-  if ('undefined' === typeof window) {
-    return false;
-  }
-
-  const [matches, setMatches] = React.useState(
-    () => window.matchMedia(query).matches
-  );
+  const [matches, setMatches] = React.useState(() => {
+    if ('undefined' === typeof window) {
+      return false;
+    }
+    return window.matchMedia(query).matches;
+  });
 
   React.useEffect(() => {
+    if ('undefined' === typeof window) {
+      return;
+    }
+
     const mediaQuery = window.matchMedia(query);
     const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
 

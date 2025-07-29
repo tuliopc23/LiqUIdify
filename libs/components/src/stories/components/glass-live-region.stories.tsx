@@ -9,36 +9,29 @@ import {
   GlassLiveRegion,
 } from '@/components/glass-live-region/glass-live-region';
 
-const meta = {
-  title: 'Components/Glass Live Region',
+const meta = { title: 'Components/Glass Live Region' }
   component: GlassLiveRegion,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
+  parameters: { layout: 'centered' }
+    docs: { description: {
         component:
-          'A live region component for screen reader announcements. Provides real-time updates to assistive technologies without disrupting user focus.',
+          'A live region component for screen reader announcements. Provides real-time updates to assistive technologies without disrupting user focus.' }
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    politeness: {
-      description: 'The politeness level of announcements',
+  argTypes: { politeness: {
+      description: 'The politeness level of announcements' }
       control: { type: 'select' },
       options: ['polite', 'assertive', 'off'],
     },
-    atomic: {
-      description: 'Whether to announce the entire region or just changes',
+    atomic: { description: 'Whether to announce the entire region or just changes' }
       control: { type: 'boolean' },
     },
-    relevant: {
-      description: 'Which changes to announce',
+    relevant: { description: 'Which changes to announce' }
       control: { type: 'select' },
       options: ['additions', 'removals', 'text', 'all'],
     },
-    className: {
-      description: 'Additional CSS classes',
+    className: { description: 'Additional CSS classes' }
       control: { type: 'text' },
     },
   },
@@ -47,10 +40,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: () => {
+export const Default: Story = { render: () => { }
     const [message, setMessage] = React.useState('');
-    const [inputValue, setInputValue] = React.useState('');
+    const [_inputValue, _setInputValue] = React.useState('');
 
     const announce = (
       text: string,
@@ -61,56 +53,56 @@ export const Default: Story = {
     };
 
     return (
-      <div className="space-y-6 p-8 max-w-2xl">
+      <div className="max-w-2xl space-y-6 p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Live Region Demo</h2>
-          <p className="text-[var(--text-secondary)] mb-6">
+          <h2 className="mb-4 font-bold text-xl">Live Region Demo</h2>
+          <p className="mb-6 text-[var(--text-secondary)]">
             Click the buttons below to trigger screen reader announcements. The
             messages will be announced without moving focus.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+          <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <GlassButton
-              variant="primary"
-              onClick={() =>
+              type="button"
+              variant="primary" onClick={() =>
                 announce('Success! Your changes have been saved.', 'high')
               }
             >
-              <CheckCircle className="w-4 h-4 mr-2" />
+              <CheckCircle className="mr-2 h-4 w-4" />
               Success Message
             </GlassButton>
 
             <GlassButton
-              variant="danger"
-              onClick={() => announce('Error! Unable to save changes.', 'high')}
+              type="button"
+              variant="danger" onClick={() => announce('Error! Unable to save changes.', 'high')}
             >
-              <AlertCircle className="w-4 h-4 mr-2" />
+              <AlertCircle className="mr-2 h-4 w-4" />
               Error Message
             </GlassButton>
 
             <GlassButton
-              variant="ghost"
-              onClick={() =>
+              type="button"
+              variant="ghost" onClick={() =>
                 announce('Warning: This action cannot be undone.', 'medium')
               }
             >
-              <AlertTriangle className="w-4 h-4 mr-2" />
+              <AlertTriangle className="mr-2 h-4 w-4" />
               Warning Message
             </GlassButton>
 
             <GlassButton
-              variant="ghost"
-              onClick={() =>
+              type="button"
+              variant="ghost" onClick={() =>
                 announce('Info: New features are available.', 'low')
               }
             >
-              <Info className="w-4 h-4 mr-2" />
+              <Info className="mr-2 h-4 w-4" />
               Info Message
             </GlassButton>
           </div>
 
           <div className="glass-effect rounded-lg p-4">
-            <h3 className="font-medium mb-2">Last Announcement:</h3>
+            <h3 className="mb-2 font-medium">Last Announcement:</h3>
             <p className="text-[var(--text-secondary)]">
               {message || 'No announcements yet'}
             </p>
@@ -123,8 +115,7 @@ export const Default: Story = {
   },
 };
 
-export const FormValidation: Story = {
-  render: () => {
+export const FormValidation: Story = { render: () => { }
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [errors, setErrors] = React.useState<Record<string, string>>({});
@@ -139,8 +130,7 @@ export const FormValidation: Story = {
       } else {
         setErrors((prev) => ({ ...prev, email: '' }));
         announcer.announce('Email field is valid', { priority: 'low' });
-      }
-    };
+      };
 
     const validatePassword = (value: string) => {
       if (!value) {
@@ -151,39 +141,34 @@ export const FormValidation: Story = {
           ...prev,
           password: 'Password must be at least 8 characters',
         }));
-        announcer.announce('Error: Password must be at least 8 characters', {
-          priority: 'high',
+        announcer.announce('Error: Password must be at least 8 characters', { priority: 'high' }
         });
       } else {
         setErrors((prev) => ({ ...prev, password: '' }));
         announcer.announce('Password field is valid', { priority: 'low' });
-      }
-    };
+      };
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       if (!errors.email && !errors.password && email && password) {
-        announcer.announce('Form submitted successfully!', {
-          priority: 'high',
+        announcer.announce('Form submitted successfully!', { priority: 'high' }
         });
       } else {
-        announcer.announce('Please fix the errors before submitting', {
-          priority: 'high',
+        announcer.announce('Please fix the errors before submitting', { priority: 'high' }
         });
-      }
-    };
+      };
 
     return (
-      <div className="p-8 max-w-md">
+      <div className="max-w-md p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Form with Live Validation</h2>
-          <p className="text-sm text-[var(--text-secondary)] mb-6">
+          <h2 className="mb-4 font-bold text-xl">Form with Live Validation</h2>
+          <p className="mb-6 text-[var(--text-secondary)] text-sm">
             Form validation errors are announced to screen readers in real-time.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-1">
+              <label htmlFor="email" className="mb-1 block font-medium text-sm">
                 Email
               </label>
               <GlassInput
@@ -196,7 +181,7 @@ export const FormValidation: Story = {
                 aria-describedby={errors.email ? 'email-error' : undefined}
               />
               {errors.email && (
-                <p id="email-error" className="text-sm text-red-500 mt-1">
+                <p id="email-error" className="mt-1 text-red-500 text-sm">
                   {errors.email}
                 </p>
               )}
@@ -205,7 +190,7 @@ export const FormValidation: Story = {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium mb-1"
+                className="mb-1 block font-medium text-sm"
               >
                 Password
               </label>
@@ -221,7 +206,7 @@ export const FormValidation: Story = {
                 }
               />
               {errors.password && (
-                <p id="password-error" className="text-sm text-red-500 mt-1">
+                <p id="password-error" className="mt-1 text-red-500 text-sm">
                   {errors.password}
                 </p>
               )}
@@ -237,17 +222,15 @@ export const FormValidation: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Live region announcing form validation errors in real-time',
+        story: 'Live region announcing form validation errors in real-time' }
       },
     },
   },
 };
 
-export const ProgressUpdates: Story = {
-  render: () => {
+export const ProgressUpdates: Story = { render: () => { }
     const [progress, setProgress] = React.useState(0);
     const [isRunning, setIsRunning] = React.useState(false);
 
@@ -257,22 +240,18 @@ export const ProgressUpdates: Story = {
           const newProgress = Math.min(progress + 10, 100);
           setProgress(newProgress);
 
-          // Announce progress at key milestones
+          {/* Announce progress at key milestones  */}
           if (newProgress === 25 || newProgress === 50 || newProgress === 75) {
-            announcer.announce(`Progress: ${newProgress}% complete`, {
-              priority: 'low',
+            announcer.announce(`Progress: ${newProgress}% complete`, { priority: 'low' }
             });
           } else if (newProgress === 100) {
-            announcer.announce('Task completed successfully!', {
-              priority: 'high',
+            announcer.announce('Task completed successfully!', { priority: 'high' }
             });
             setIsRunning(false);
-          }
-        }, 500);
+          }, 500);
 
         return () => clearTimeout(timer);
-      }
-    }, [isRunning, progress]);
+      }, [isRunning, progress]);
 
     const startTask = () => {
       setProgress(0);
@@ -281,23 +260,23 @@ export const ProgressUpdates: Story = {
     };
 
     return (
-      <div className="p-8 max-w-md">
+      <div className="max-w-md p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Progress Updates</h2>
-          <p className="text-sm text-[var(--text-secondary)] mb-6">
+          <h2 className="mb-4 font-bold text-xl">Progress Updates</h2>
+          <p className="mb-6 text-[var(--text-secondary)] text-sm">
             Progress updates are announced at 25%, 50%, 75%, and completion.
           </p>
 
           <div className="space-y-4">
             <div>
-              <div className="flex justify-between text-sm mb-1">
+              <div className="mb-1 flex justify-between text-sm">
                 <span>Progress</span>
                 <span>{progress}%</span>
               </div>
-              <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
                 <div
                   className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
-                  style={{ width: `${progress}%` }}
+                  style={{ width: `${progress}%`
                   role="progressbar"
                   aria-valuenow={progress}
                   aria-valuemin={0}
@@ -307,6 +286,7 @@ export const ProgressUpdates: Story = {
             </div>
 
             <GlassButton
+              type="button"
               onClick={startTask}
               disabled={isRunning}
               variant="primary"
@@ -321,23 +301,20 @@ export const ProgressUpdates: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Announcing progress updates for long-running tasks',
+        story: 'Announcing progress updates for long-running tasks' }
       },
     },
   },
 };
 
-export const NotificationCenter: Story = {
-  render: () => {
+export const NotificationCenter: Story = { render: () => { }
     const [notifications, setNotifications] = React.useState<
-      Array<{
-        id: number;
+      { id: number;
         type: 'success' | 'error' | 'warning' | 'info';
-        message: string;
-      }>
+        message: string; }
+      }[]
     >([]);
 
     const addNotification = (
@@ -348,58 +325,55 @@ export const NotificationCenter: Story = {
       const notification = { id, type, message };
 
       setNotifications((prev) => [...prev, notification]);
-      announcer.announce(message, {
-        priority:
-          type === 'error' ? 'high' : type === 'warning' ? 'medium' : 'low',
+      announcer.announce(message, { priority: type === 'error' ? 'high' : type === 'warning' ? 'medium' : 'low' }
         context: type,
       });
 
-      // Auto-remove after 5 seconds
+      {/* Auto-remove after 5 seconds  */}
       setTimeout(() => {
         setNotifications((prev) => prev.filter((n) => n.id !== id));
       }, 5000);
     };
 
-    const iconMap = {
-      success: <CheckCircle className="w-5 h-5 text-green-500" />,
-      error: <AlertCircle className="w-5 h-5 text-red-500" />,
-      warning: <AlertTriangle className="w-5 h-5 text-yellow-500" />,
-      info: <Info className="w-5 h-5 text-blue-500" />,
+    const iconMap = { success: <CheckCircle className="h-5 w-5 text-green-500" /> }
+      error: <AlertCircle className="h-5 w-5 text-red-500" />,
+      warning: <AlertTriangle className="h-5 w-5 text-yellow-500" />,
+      info: <Info className="h-5 w-5 text-blue-500" />,
     };
 
     return (
-      <div className="p-8 max-w-lg">
+      <div className="max-w-lg p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Notification Center</h2>
-          <p className="text-sm text-[var(--text-secondary)] mb-6">
+          <h2 className="mb-4 font-bold text-xl">Notification Center</h2>
+          <p className="mb-6 text-[var(--text-secondary)] text-sm">
             All notifications are announced to screen readers with appropriate
             priority.
           </p>
 
-          <div className="grid grid-cols-2 gap-2 mb-6">
+          <div className="mb-6 grid grid-cols-2 gap-2">
             <GlassButton
-              size="sm"
-              onClick={() =>
+              type="button"
+              size="sm" onClick={() =>
                 addNotification('success', 'File uploaded successfully')
               }
             >
               Success
             </GlassButton>
             <GlassButton
-              size="sm"
-              onClick={() => addNotification('error', 'Failed to save changes')}
+              type="button"
+              size="sm" onClick={() => addNotification('error', 'Failed to save changes')}
             >
               Error
             </GlassButton>
             <GlassButton
-              size="sm"
-              onClick={() => addNotification('warning', 'Low disk space')}
+              type="button"
+              size="sm" onClick={() => addNotification('warning', 'Low disk space')}
             >
               Warning
             </GlassButton>
             <GlassButton
-              size="sm"
-              onClick={() => addNotification('info', 'New update available')}
+              type="button"
+              size="sm" onClick={() => addNotification('info', 'New update available')}
             >
               Info
             </GlassButton>
@@ -407,17 +381,17 @@ export const NotificationCenter: Story = {
 
           <div className="space-y-2">
             {notifications.length === 0 ? (
-              <p className="text-center text-[var(--text-secondary)] py-4">
+              <p className="py-4 text-center text-[var(--text-secondary)]">
                 No notifications
               </p>
             ) : (
               notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className="glass-effect rounded-lg p-3 flex items-center gap-3 animate-in slide-in-from-right"
+                  className="glass-effect slide-in-from-right flex animate-in items-center gap-3 rounded-lg p-3"
                 >
                   {iconMap[notification.type]}
-                  <span className="text-sm flex-1">{notification.message}</span>
+                  <span className="flex-1 text-sm">{notification.message}</span>
                 </div>
               ))
             )}
@@ -428,98 +402,88 @@ export const NotificationCenter: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
         story:
-          'A notification system with automatic screen reader announcements',
+          'A notification system with automatic screen reader announcements' }
       },
     },
   },
 };
 
-export const MultipleRegions: Story = {
-  render: () => {
+export const MultipleRegions: Story = { render: () => { }
     const [criticalMessage, setCriticalMessage] = React.useState('');
     const [statusMessage, setStatusMessage] = React.useState('');
 
     return (
-      <div className="p-8 max-w-2xl space-y-6">
+      <div className="max-w-2xl space-y-6 p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Multiple Live Regions</h2>
-          <p className="text-sm text-[var(--text-secondary)] mb-6">
+          <h2 className="mb-4 font-bold text-xl">Multiple Live Regions</h2>
+          <p className="mb-6 text-[var(--text-secondary)] text-sm">
             Different types of messages use different live regions with
             appropriate politeness levels.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
-              <h3 className="font-medium mb-3">
+              <h3 className="mb-3 font-medium">
                 Critical Messages (Assertive)
               </h3>
               <div className="space-y-2">
                 <GlassButton
+                  type="button"
                   variant="danger"
                   size="sm"
-                  fullWidth
-                  onClick={() => {
+                  fullWidth onClick={() => {
                     const msg = 'Critical: System error detected!';
                     setCriticalMessage(msg);
-                    announcer.announce(msg, { priority: 'high' });
-                  }}
-                >
+                    announcer.announce(msg, { priority: 'high' });>
                   System Error
                 </GlassButton>
                 <GlassButton
+                  type="button"
                   variant="danger"
                   size="sm"
-                  fullWidth
-                  onClick={() => {
+                  fullWidth onClick={() => {
                     const msg = 'Critical: Connection lost!';
                     setCriticalMessage(msg);
-                    announcer.announce(msg, { priority: 'high' });
-                  }}
-                >
+                    announcer.announce(msg, { priority: 'high' });>
                   Connection Lost
                 </GlassButton>
               </div>
-              <div className="mt-3 p-3 glass-effect rounded min-h-[60px]">
-                <p className="text-sm text-red-500">
+              <div className="glass-effect mt-3 min-h-[60px] rounded p-3">
+                <p className="text-red-500 text-sm">
                   {criticalMessage || 'No critical messages'}
                 </p>
               </div>
             </div>
 
             <div>
-              <h3 className="font-medium mb-3">Status Updates (Polite)</h3>
+              <h3 className="mb-3 font-medium">Status Updates (Polite)</h3>
               <div className="space-y-2">
                 <GlassButton
+                  type="button"
                   variant="ghost"
                   size="sm"
-                  fullWidth
-                  onClick={() => {
+                  fullWidth onClick={() => {
                     const msg = 'Status: File saved';
                     setStatusMessage(msg);
-                    announcer.announce(msg, { priority: 'low' });
-                  }}
-                >
+                    announcer.announce(msg, { priority: 'low' });>
                   File Saved
                 </GlassButton>
                 <GlassButton
+                  type="button"
                   variant="ghost"
                   size="sm"
-                  fullWidth
-                  onClick={() => {
+                  fullWidth onClick={() => {
                     const msg = 'Status: Settings updated';
                     setStatusMessage(msg);
-                    announcer.announce(msg, { priority: 'low' });
-                  }}
-                >
+                    announcer.announce(msg, { priority: 'low' });>
                   Settings Updated
                 </GlassButton>
               </div>
-              <div className="mt-3 p-3 glass-effect rounded min-h-[60px]">
-                <p className="text-sm text-blue-500">
+              <div className="glass-effect mt-3 min-h-[60px] rounded p-3">
+                <p className="text-blue-500 text-sm">
                   {statusMessage || 'No status updates'}
                 </p>
               </div>
@@ -532,11 +496,10 @@ export const MultipleRegions: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
         story:
-          'Using multiple live regions for different types of announcements',
+          'Using multiple live regions for different types of announcements' }
       },
     },
   },

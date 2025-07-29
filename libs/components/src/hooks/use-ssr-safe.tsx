@@ -220,7 +220,7 @@ export const useSessionStorage = <T,>(
 /**
  * Hook for SSR-safe dynamic imports
  * @param {() => Promise<T>} importFn - dynamic import function
- * @param {any[]} deps - dependencies
+ * @param {Array<any>} deps - dependencies
  * @returns {{ module: T | null, loading: boolean, error: Error | null }}
  */
 export const useDynamicImport = <T,>(

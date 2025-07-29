@@ -269,9 +269,9 @@ export class CSSBundler {
     preload: Array<string>;
   } {
     const strategy = {
-      critical: [] as Array<string>,
-      lazy: [] as Array<string>,
-      preload: [] as Array<string>,
+      critical: [] as string[],
+      lazy: [] as string[],
+      preload: [] as string[],
     };
 
     for (const [bundleName, config] of Object.entries(this.config)) {
@@ -370,19 +370,19 @@ export class BundleSizeValidator {
    */
   validate(result: BundleResult): {
     passed: boolean;
-    violations: Array<{
+    violations: {
       bundle: string;
       actual: number;
       limit: number;
       severity: 'warning' | 'error';
-    }>;
+    }[];
   } {
-    const violations: Array<{
+    const violations: {
       bundle: string;
       actual: number;
       limit: number;
       severity: 'warning' | 'error';
-    }> = [];
+    }[] = [];
 
     // Check individual bundle sizes
     for (const bundle of result.bundles) {

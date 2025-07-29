@@ -76,7 +76,7 @@ const generateMockErrorData = (): Array<ErrorMetric> => {
     'accessibility_error',
     'performance_error',
   ];
-  const severities: Array<'low' | 'medium' | 'high' | 'critical'> = [
+  const severities: 'low' | 'medium' | 'high' | 'critical'[] = [
     'low',
     'medium',
     'high',
@@ -106,6 +106,30 @@ const COLORS = {
   critical: '#DC2626',
 };
 
+// Utility function to sanitize object keys and prevent prototype pollution
+const sanitizeObjectKey = (key: string): string => {
+  // Remove or replace dangerous keys that could lead to prototype pollution
+  const dangerousKeys = [
+    '__proto__',
+    'constructor',
+    'prototype',
+    'hasOwnProperty',
+    'isPrototypeOf',
+    'propertyIsEnumerable',
+    'toString',
+    'valueOf'
+  ];
+  
+  // If the key is dangerous, prefix it with 'safe_'
+  if (dangerousKeys.includes(key.toLowerCase())) {
+    return `safe_${key}`;
+  }
+  
+  // Also ensure the key is a string and not empty
+  const sanitizedKey = String(key).trim();
+  return sanitizedKey || 'unknown_component';
+};
+
 export interface ErrorAnalyticsDashboardProps {
   /** Custom CSS class for styling */
   className?: string;
@@ -131,7 +155,7 @@ export const ErrorAnalyticsDashboard: React.FC<
   showComponentDetails = true,
   enableExport = true,
 }) => {
-  const [errorData, setErrorData] = useState<Array<ErrorMetric>>([]);
+  const [errorData, setErrorData] = useState<ErrorMetric[]>([]);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'1h' | '24h' | '7d' | '30d'>(
     '24h'
@@ -246,18 +270,21 @@ export const ErrorAnalyticsDashboard: React.FC<
     > = {};
 
     for (const error of filteredErrorData) {
-      if (!componentStats[error.component]) {
-        componentStats[error.component] = {
-          componentName: error.component,
+      // Sanitize component name to prevent prototype pollution
+      const safeComponentName = sanitizeObjectKey(error.component);
+      
+      if (!Object.prototype.hasOwnProperty.call(componentStats, safeComponentName)) {
+        componentStats[safeComponentName] = {
+          componentName: safeComponentName,
           errorCount: 0,
           userImpact: 0,
           errorTypes: new Set(),
         };
       }
 
-      componentStats[error.component].errorCount += error.count;
-      componentStats[error.component].userImpact += error.userImpact;
-      componentStats[error.component].errorTypes.add(error.type);
+      componentStats[safeComponentName].errorCount += error.count;
+      componentStats[safeComponentName].userImpact += error.userImpact;
+      componentStats[safeComponentName].errorTypes.add(error.type);
     }
 
     return Object.values(componentStats).map((stats) => ({
@@ -381,6 +408,7 @@ export const ErrorAnalyticsDashboard: React.FC<
             {/* Refresh Button */}
 
             <button
+              type="button"
               onClick={() => {
                 if ('undefined' !== typeof window) {
                   window.location.reload();
@@ -398,6 +426,7 @@ export const ErrorAnalyticsDashboard: React.FC<
             {/* Export Button */}
             {enableExport && (
               <button
+                type="button"
                 onClick={handleExportData}
                 className="flex items-center rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700"
               >

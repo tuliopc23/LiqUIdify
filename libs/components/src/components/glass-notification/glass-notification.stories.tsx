@@ -155,7 +155,7 @@ export const OnlyUnread: Story = {
 export const Interactive: Story = {
   render: () => {
     const [notifications, setNotifications] =
-      useState<Array<NotificationItem>>(sampleNotifications);
+      useState<NotificationItem[]>(sampleNotifications);
 
     const handleMarkAsRead = (id: string) => {
       setNotifications((prev) =>
@@ -187,30 +187,35 @@ export const Interactive: Story = {
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           <button
+            type="button"
             onClick={() => addNotification('success')}
             className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
           >
             Add Success
           </button>
           <button
+            type="button"
             onClick={() => addNotification('error')}
             className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
           >
             Add Error
           </button>
           <button
+            type="button"
             onClick={() => addNotification('warning')}
             className="rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
           >
             Add Warning
           </button>
           <button
+            type="button"
             onClick={() => addNotification('info')}
             className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
           >
             Add Info
           </button>
           <button
+            type="button"
             onClick={() => addNotification('system')}
             className="rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
           >
@@ -327,14 +332,12 @@ export const ManyNotifications: Story = {
 // Real-time simulation
 export const RealTimeUpdates: Story = {
   render: () => {
-    const [notifications, setNotifications] = useState<Array<NotificationItem>>(
-      []
-    );
+    const [notifications, setNotifications] = useState<NotificationItem[]>([]);
 
     // Simulate real-time notifications
     useState(() => {
       const interval = setInterval(() => {
-        const types: Array<NotificationItem['type']> = [
+        const types: NotificationItem['type'][] = [
           'success',
           'error',
           'warning',

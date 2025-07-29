@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { cn } from '@/core/utils/classname';
+import { generateStaticKey } from '@/core/utils/stable-key';
 
 export interface GlassLoadingProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -45,7 +46,7 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
       <div className="flex space-x-1">
         {[0, 1, 2].map((index) => (
           <div
-            key={index}
+            key={generateStaticKey('dot', index)}
             className={cn(
               dotSizes[size],
               'animate-pulse rounded-full bg-blue-500'
@@ -72,7 +73,7 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
       <div className="flex items-end space-x-1">
         {[0, 1, 2, 3].map((index) => (
           <div
-            key={index}
+            key={generateStaticKey('bar', index)}
             className={cn(barSizes[size], 'animate-pulse bg-blue-500')}
             style={{
               animationDelay: `${index * 0.15}s`,

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { GlassPagination } from './glass-pagination';
 
 const meta = {
@@ -32,8 +31,7 @@ import { GlassPagination } from '@/components/glass-pagination';
 <GlassPagination
   currentPage={1}
   totalPages={10}
-  onPageChange={(page) => console.log('Page:', page)}
-/>
+  onPageChange={(page) => console.log('Page:', page)} />
 
 // With custom configuration
 <GlassPagination
@@ -44,8 +42,7 @@ import { GlassPagination } from '@/components/glass-pagination';
   boundaryCount={2}
   showFirstLast={true}
   variant="solid"
-  size="lg"
-/>
+  size="lg" />
 \`\`\`
 
 ## Keyboard Shortcuts
@@ -227,7 +224,7 @@ export const Variants: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Default Variant</h3>
+          <h3 className="font-medium text-sm text-white/80">Default Variant</h3>
           <GlassPagination
             currentPage={page1}
             totalPages={10}
@@ -237,7 +234,7 @@ export const Variants: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Solid Variant</h3>
+          <h3 className="font-medium text-sm text-white/80">Solid Variant</h3>
           <GlassPagination
             currentPage={page2}
             totalPages={10}
@@ -247,7 +244,7 @@ export const Variants: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Ghost Variant</h3>
+          <h3 className="font-medium text-sm text-white/80">Ghost Variant</h3>
           <GlassPagination
             currentPage={page3}
             totalPages={10}
@@ -281,7 +278,7 @@ export const Sizes: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Small Size</h3>
+          <h3 className="font-medium text-sm text-white/80">Small Size</h3>
           <GlassPagination
             currentPage={page1}
             totalPages={8}
@@ -291,7 +288,7 @@ export const Sizes: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Medium Size</h3>
+          <h3 className="font-medium text-sm text-white/80">Medium Size</h3>
           <GlassPagination
             currentPage={page2}
             totalPages={8}
@@ -301,7 +298,7 @@ export const Sizes: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Large Size</h3>
+          <h3 className="font-medium text-sm text-white/80">Large Size</h3>
           <GlassPagination
             currentPage={page3}
             totalPages={8}
@@ -336,7 +333,7 @@ export const States: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">First Page</h3>
+          <h3 className="font-medium text-sm text-white/80">First Page</h3>
           <GlassPagination
             currentPage={page1}
             totalPages={10}
@@ -345,7 +342,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Middle Page</h3>
+          <h3 className="font-medium text-sm text-white/80">Middle Page</h3>
           <GlassPagination
             currentPage={page2}
             totalPages={10}
@@ -354,7 +351,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Last Page</h3>
+          <h3 className="font-medium text-sm text-white/80">Last Page</h3>
           <GlassPagination
             currentPage={page3}
             totalPages={10}
@@ -363,7 +360,7 @@ export const States: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Disabled State</h3>
+          <h3 className="font-medium text-sm text-white/80">Disabled State</h3>
           <GlassPagination
             currentPage={page4}
             totalPages={10}
@@ -397,7 +394,7 @@ export const ConfigurationExamples: Story = {
     return (
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Compact Mode (No First/Last)
           </h3>
           <GlassPagination
@@ -410,7 +407,7 @@ export const ConfigurationExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Extended Siblings (siblingCount: 2)
           </h3>
           <GlassPagination
@@ -423,7 +420,7 @@ export const ConfigurationExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             No Ellipsis Mode
           </h3>
           <GlassPagination
@@ -460,11 +457,11 @@ export const RealWorldExamples: Story = {
     return (
       <div className="flex flex-col gap-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Search Results Pagination
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <div className="mb-4 text-white/60 text-sm">
+            <div className="mb-4 text-sm text-white/60">
               Showing results 21-30 of 100 total results
             </div>
             <div className="space-y-2">
@@ -476,7 +473,7 @@ export const RealWorldExamples: Story = {
                   <div className="font-medium text-white/90">
                     Result {21 + i}
                   </div>
-                  <div className="text-white/60 text-sm">
+                  <div className="text-sm text-white/60">
                     Search result description...
                   </div>
                 </div>
@@ -494,15 +491,15 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Data Table Pagination
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
             <div className="mb-4 flex items-center justify-between">
-              <div className="text-white/60 text-sm">
+              <div className="text-sm text-white/60">
                 Showing 111-120 of 500 items
               </div>
-              <div className="text-white/60 text-sm">
+              <div className="text-sm text-white/60">
                 Page {tablePage} of 50
               </div>
             </div>
@@ -510,27 +507,27 @@ export const RealWorldExamples: Story = {
               <table className="w-full">
                 <thead className="bg-white/5">
                   <tr>
-                    <th className="px-4 py-3 text-left text-white/80 text-sm font-medium">
+                    <th className="px-4 py-3 text-left font-medium text-sm text-white/80">
                       Name
                     </th>
-                    <th className="px-4 py-3 text-left text-white/80 text-sm font-medium">
+                    <th className="px-4 py-3 text-left font-medium text-sm text-white/80">
                       Status
                     </th>
-                    <th className="px-4 py-3 text-left text-white/80 text-sm font-medium">
+                    <th className="px-4 py-3 text-left font-medium text-sm text-white/80">
                       Date
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {Array.from({ length: 10 }, (_, i) => (
-                    <tr key={i} className="border-t border-white/5">
-                      <td className="px-4 py-3 text-white/90 text-sm">
+                    <tr key={i} className="border-white/5 border-t">
+                      <td className="px-4 py-3 text-sm text-white/90">
                         Item {111 + i}
                       </td>
                       <td className="px-4 py-3 text-green-400 text-sm">
                         Active
                       </td>
-                      <td className="px-4 py-3 text-white/60 text-sm">
+                      <td className="px-4 py-3 text-sm text-white/60">
                         2024-01-15
                       </td>
                     </tr>
@@ -550,7 +547,7 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Image Gallery Pagination
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -658,7 +655,7 @@ export const ThemeShowcase: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Ocean Theme</h3>
+          <h3 className="font-medium text-sm text-white/80">Ocean Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
             <GlassPagination
               currentPage={page1}
@@ -670,7 +667,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Sunset Theme</h3>
+          <h3 className="font-medium text-sm text-white/80">Sunset Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
             <GlassPagination
               currentPage={page2}
@@ -682,7 +679,7 @@ export const ThemeShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Forest Theme</h3>
+          <h3 className="font-medium text-sm text-white/80">Forest Theme</h3>
           <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
             <GlassPagination
               currentPage={page3}

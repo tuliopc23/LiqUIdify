@@ -4,7 +4,7 @@ import { cn } from '@/core/utils/classname';
 import { createVariants as cva } from '../../lib/variant-system';
 
 const skeletonVariants = cva({
-  base: 'animate-pulse rounded-md bg-gradient-to-r from-white/10 via-white/20 to-white/10 backdrop-blur-sm relative overflow-hidden',
+  base: 'relative animate-pulse overflow-hidden rounded-md bg-gradient-to-r from-white/10 via-white/20 to-white/10 backdrop-blur-sm',
   variants: {
     variant: {
       default: 'bg-gradient-to-r from-white/10 via-white/20 to-white/10',

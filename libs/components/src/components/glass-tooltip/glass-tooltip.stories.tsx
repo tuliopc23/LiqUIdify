@@ -13,19 +13,16 @@ import {
 } from 'lucide-react';
 import { GlassTooltip } from './glass-tooltip';
 
-const meta = {
-  title: 'Components/GlassTooltip',
+const meta = { title: 'Components/GlassTooltip' }
   component: GlassTooltip,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
+  parameters: { layout: 'centered' }
+    docs: { description: {
         component: `
 The GlassTooltip component displays helpful information on hover with glassmorphic styling. It automatically 
 positions itself to stay within the viewport and includes a directional arrow.
 
 ## Features
-- **Smart positioning**: Automatically adjusts to stay within viewport
+- **Smart positioning**: Automatically adjusts to stay within viewport }
 - **Four positions**: Top, bottom, left, and right placement
 - **Configurable delay**: Set hover delay before showing
 - **Portal rendering**: Renders in document body to avoid z-index issues
@@ -44,26 +41,21 @@ positions itself to stay within the viewport and includes a directional arrow.
       </div>
     ),
   ],
-  argTypes: {
-    content: {
-      description: 'Content to display in the tooltip',
+  argTypes: { content: {
+      description: 'Content to display in the tooltip' }
       control: { type: 'text' },
     },
-    position: {
-      description: 'Position of the tooltip relative to the trigger',
+    position: { description: 'Position of the tooltip relative to the trigger' }
       control: { type: 'select' },
       options: ['top', 'bottom', 'left', 'right'],
     },
-    delay: {
-      description: 'Delay in milliseconds before showing tooltip',
+    delay: { description: 'Delay in milliseconds before showing tooltip' }
       control: { type: 'range', min: 0, max: 2000, step: 100 },
     },
-    disabled: {
-      description: 'Disable the tooltip',
+    disabled: { description: 'Disable the tooltip' }
       control: { type: 'boolean' },
     },
-    className: {
-      description: 'Additional CSS classes for the tooltip',
+    className: { description: 'Additional CSS classes for the tooltip' }
       control: { type: 'text' },
     },
   },
@@ -72,77 +64,101 @@ positions itself to stay within the viewport and includes a directional arrow.
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default story
-export const Default: Story = {
-  args: {
-    content: 'This is a helpful tooltip',
+{/* Default story  */}
+export const Default: Story = { args: {
+    content: 'This is a helpful tooltip' }
     position: 'top',
     delay: 500,
   },
   render: (args) => (
     <GlassTooltip {...args}>
-      <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+      <button
+        type="button"
+        className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+      >
         Hover me
       </button>
     </GlassTooltip>
   ),
 };
 
-// Different positions
-export const Positions: Story = {
-  render: () => (
+{/* Different positions  */}
+export const Positions: Story = { render: () => (
     <div className="grid grid-cols-2 gap-16">
       <GlassTooltip content="Tooltip on top" position="top">
-        <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        >
           Top
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Tooltip on bottom" position="bottom">
-        <button className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600">
+        <button
+          type="button"
+          className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+        >
           Bottom
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Tooltip on left" position="left">
-        <button className="rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-purple-600">
+        <button
+          type="button"
+          className="rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-purple-600"
+        >
           Left
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Tooltip on right" position="right">
-        <button className="rounded-lg bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">
+        <button
+          type="button"
+          className="rounded-lg bg-orange-500 px-4 py-2 text-white hover:bg-orange-600"
+        >
           Right
         </button>
       </GlassTooltip>
     </div>
-  ),
+  ) }
 };
 
-// Different delays
-export const Delays: Story = {
-  render: () => (
-    <div className="flex gap-4">
+{/* Different delays  */}
+export const Delays: Story = { render: () => (
+    <div className="flex gap-4"> }
       <GlassTooltip content="Instant (0ms delay)" delay={0}>
-        <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        >
           Instant
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Quick (200ms delay)" delay={200}>
-        <button className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600">
+        <button
+          type="button"
+          className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+        >
           Quick
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Default (500ms delay)" delay={500}>
-        <button className="rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-purple-600">
+        <button
+          type="button"
+          className="rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-purple-600"
+        >
           Default
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Slow (1000ms delay)" delay={1000}>
-        <button className="rounded-lg bg-orange-500 px-4 py-2 text-white hover:bg-orange-600">
+        <button
+          type="button"
+          className="rounded-lg bg-orange-500 px-4 py-2 text-white hover:bg-orange-600"
+        >
           Slow
         </button>
       </GlassTooltip>
@@ -150,40 +166,50 @@ export const Delays: Story = {
   ),
 };
 
-// With icons
-export const WithIcons: Story = {
-  render: () => (
+{/* With icons  */}
+export const WithIcons: Story = { render: () => (
     <div className="flex gap-4">
       <GlassTooltip content="Get help">
-        <button className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+        <button
+          type="button"
+          className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
           <HelpCircle className="h-5 w-5" />
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="More information">
-        <button className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+        <button
+          type="button"
+          className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
           <Info className="h-5 w-5" />
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Warning: This action cannot be undone">
-        <button className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+        <button
+          type="button"
+          className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
           <AlertCircle className="h-5 w-5 text-yellow-500" />
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Settings">
-        <button className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+        <button
+          type="button"
+          className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
           <Settings className="h-5 w-5" />
         </button>
       </GlassTooltip>
     </div>
-  ),
+  ) }
 };
 
-// Rich content
-export const RichContent: Story = {
-  render: () => (
+{/* Rich content  */}
+export const RichContent: Story = { render: () => (
     <div className="flex gap-4">
       <GlassTooltip
         content={
@@ -193,10 +219,13 @@ export const RichContent: Story = {
             <p className="mt-1 text-gray-500 text-xs">
               Last active: 2 hours ago
             </p>
-          </div>
+          </div> }
         }
       >
-        <button className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <button
+          type="button"
+          className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        >
           <User className="h-4 w-4" />
           <span>User Profile</span>
         </button>
@@ -229,7 +258,10 @@ export const RichContent: Story = {
           </div>
         }
       >
-        <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        >
           Show Shortcuts
         </button>
       </GlassTooltip>
@@ -237,18 +269,23 @@ export const RichContent: Story = {
   ),
 };
 
-// Disabled state
-export const DisabledState: Story = {
-  render: () => (
-    <div className="flex gap-4">
+{/* Disabled state  */}
+export const DisabledState: Story = { render: () => (
+    <div className="flex gap-4"> }
       <GlassTooltip content="This tooltip is enabled" disabled={false}>
-        <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        >
           Enabled Tooltip
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="This tooltip won't show" disabled={true}>
-        <button className="cursor-not-allowed rounded-lg bg-gray-400 px-4 py-2 text-white">
+        <button
+          type="button"
+          className="cursor-not-allowed rounded-lg bg-gray-400 px-4 py-2 text-white"
+        >
           Disabled Tooltip
         </button>
       </GlassTooltip>
@@ -256,30 +293,41 @@ export const DisabledState: Story = {
   ),
 };
 
-// Action buttons with tooltips
-export const ActionButtons: Story = {
-  render: () => (
+{/* Action buttons with tooltips  */}
+export const ActionButtons: Story = { render: () => (
     <div className="flex gap-2">
       <GlassTooltip content="Download file" position="top">
-        <button className="rounded bg-blue-500 p-2 text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="rounded bg-blue-500 p-2 text-white hover:bg-blue-600"
+        >
           <Download className="h-4 w-4" />
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Copy to clipboard" position="top">
-        <button className="rounded bg-green-500 p-2 text-white hover:bg-green-600">
+        <button
+          type="button"
+          className="rounded bg-green-500 p-2 text-white hover:bg-green-600"
+        >
           <Copy className="h-4 w-4" />
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Share" position="top">
-        <button className="rounded bg-purple-500 p-2 text-white hover:bg-purple-600">
+        <button
+          type="button"
+          className="rounded bg-purple-500 p-2 text-white hover:bg-purple-600"
+        >
           <Share2 className="h-4 w-4" />
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Edit" position="top">
-        <button className="rounded bg-yellow-500 p-2 text-white hover:bg-yellow-600">
+        <button
+          type="button"
+          className="rounded bg-yellow-500 p-2 text-white hover:bg-yellow-600"
+        >
           <Edit className="h-4 w-4" />
         </button>
       </GlassTooltip>
@@ -288,34 +336,36 @@ export const ActionButtons: Story = {
         content="Delete (This action cannot be undone)"
         position="top"
       >
-        <button className="rounded bg-red-500 p-2 text-white hover:bg-red-600">
+        <button
+          type="button"
+          className="rounded bg-red-500 p-2 text-white hover:bg-red-600"
+        >
           <Trash2 className="h-4 w-4" />
         </button>
       </GlassTooltip>
     </div>
-  ),
+  ) }
 };
 
-// Form field tooltips
-export const FormFieldTooltips: Story = {
-  render: () => (
+{/* Form field tooltips  */}
+export const FormFieldTooltips: Story = { render: () => (
     <form className="w-80 space-y-4">
       <div>
-        <label className="mb-1 flex items-center gap-2 font-medium text-sm">
-          Username
+        <label htmlFor="username-fhxgic" className="mb-1 flex items-center gap-2 font-medium text-sm">
+          Username }
           <GlassTooltip content="Your username must be unique and contain only letters, numbers, and underscores">
             <Info className="h-4 w-4 text-gray-400" />
           </GlassTooltip>
         </label>
-        <input
+        <input id="input-376" 
           type="text"
           className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500"
           placeholder="Enter username"
-        />
+        / />
       </div>
 
       <div>
-        <label className="mb-1 flex items-center gap-2 font-medium text-sm">
+        <label htmlFor="form-field" className="mb-1 flex items-center gap-2 font-medium text-sm">
           Password
           <GlassTooltip
             content={
@@ -333,26 +383,28 @@ export const FormFieldTooltips: Story = {
             <Info className="h-4 w-4 text-gray-400" />
           </GlassTooltip>
         </label>
-        <input
+        <input id="input-402" 
           type="password"
           className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500"
           placeholder="Enter password"
-        />
+        / />
       </div>
     </form>
   ),
 };
 
-// Edge positioning (viewport awareness demo)
-export const ViewportAwareness: Story = {
-  render: () => (
+{/* Edge positioning (viewport awareness demo)  */}
+export const ViewportAwareness: Story = { render: () => (
     <div className="relative h-96 overflow-hidden rounded-lg border-2 border-gray-300 border-dashed dark:border-gray-700">
       <div className="absolute top-2 left-2">
         <GlassTooltip
           content="This tooltip adjusts its position to stay within viewport"
           position="left"
         >
-          <button className="rounded bg-blue-500 px-3 py-1 text-sm text-white">
+          <button
+            type="button"
+            className="rounded bg-blue-500 px-3 py-1 text-sm text-white"
+          >
             Top Left
           </button>
         </GlassTooltip>
@@ -363,7 +415,10 @@ export const ViewportAwareness: Story = {
           content="This tooltip adjusts its position to stay within viewport"
           position="right"
         >
-          <button className="rounded bg-green-500 px-3 py-1 text-sm text-white">
+          <button
+            type="button"
+            className="rounded bg-green-500 px-3 py-1 text-sm text-white"
+          >
             Top Right
           </button>
         </GlassTooltip>
@@ -374,7 +429,10 @@ export const ViewportAwareness: Story = {
           content="This tooltip adjusts its position to stay within viewport"
           position="left"
         >
-          <button className="rounded bg-purple-500 px-3 py-1 text-sm text-white">
+          <button
+            type="button"
+            className="rounded bg-purple-500 px-3 py-1 text-sm text-white"
+          >
             Bottom Left
           </button>
         </GlassTooltip>
@@ -385,21 +443,26 @@ export const ViewportAwareness: Story = {
           content="This tooltip adjusts its position to stay within viewport"
           position="right"
         >
-          <button className="rounded bg-orange-500 px-3 py-1 text-sm text-white">
+          <button
+            type="button"
+            className="rounded bg-orange-500 px-3 py-1 text-sm text-white"
+          >
             Bottom Right
           </button>
         </GlassTooltip>
       </div>
     </div>
-  ),
+  ) }
 };
 
-// Long content
-export const LongContent: Story = {
-  render: () => (
+{/* Long content  */}
+export const LongContent: Story = { render: () => (
     <div className="flex gap-4">
       <GlassTooltip content="This is a very long tooltip that contains a lot of text to demonstrate how the component handles content wrapping and maximum width constraints. The tooltip should wrap text nicely and maintain readability.">
-        <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        >
           Long Tooltip
         </button>
       </GlassTooltip>
@@ -412,13 +475,16 @@ export const LongContent: Story = {
               The GlassTooltip component provides contextual information on
               hover.
             </p>
-            <code className="block rounded bg-gray-100 p-2 text-xs dark:bg-gray-800">
+            <code className="block rounded bg-gray-100 p-2 text-xs dark:bg-gray-800"> }
               {`<GlassTooltip content="..." position="top">`}
             </code>
           </div>
         }
       >
-        <button className="rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-purple-600">
+        <button
+          type="button"
+          className="rounded-lg bg-purple-500 px-4 py-2 text-white hover:bg-purple-600"
+        >
           Code Example
         </button>
       </GlassTooltip>
@@ -426,15 +492,17 @@ export const LongContent: Story = {
   ),
 };
 
-// Theme variations
-export const ThemeVariations: Story = {
-  render: () => (
+{/* Theme variations  */}
+export const ThemeVariations: Story = { render: () => (
     <div className="space-y-8">
       <div className="rounded-lg bg-white p-6">
         <h3 className="mb-4 font-semibold">Light Theme</h3>
         <div className="flex gap-4">
           <GlassTooltip content="Tooltip in light theme">
-            <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+            <button
+              type="button"
+              className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            >
               Hover me
             </button>
           </GlassTooltip>
@@ -445,25 +513,30 @@ export const ThemeVariations: Story = {
         <h3 className="mb-4 font-semibold text-white">Dark Theme</h3>
         <div className="flex gap-4">
           <GlassTooltip content="Tooltip in dark theme">
-            <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+            <button
+              type="button"
+              className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            >
               Hover me
             </button>
           </GlassTooltip>
         </div>
       </div>
     </div>
-  ),
+  ) }
 };
 
-// Custom styling
-export const CustomStyling: Story = {
-  render: () => (
+{/* Custom styling  */}
+export const CustomStyling: Story = { render: () => (
     <div className="flex gap-4">
       <GlassTooltip
         content="Custom styled tooltip"
         className="!bg-gradient-to-r !from-purple-500 !to-pink-500 !text-white !border-purple-600"
       >
-        <button className="rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 text-white">
+        <button
+          type="button"
+          className="rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 text-white"
+        >
           Gradient Tooltip
         </button>
       </GlassTooltip>
@@ -472,28 +545,33 @@ export const CustomStyling: Story = {
         content="Large tooltip with custom padding"
         className="!px-6 !py-4 !text-lg"
       >
-        <button className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600">
+        <button
+          type="button"
+          className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+        >
           Large Tooltip
         </button>
       </GlassTooltip>
 
       <GlassTooltip content="Rounded tooltip" className="!rounded-full !px-4">
-        <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+        <button
+          type="button"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+        >
           Rounded Tooltip
         </button>
       </GlassTooltip>
     </div>
-  ),
+  ) }
 };
 
-// Interactive elements
-export const InteractiveElements: Story = {
-  render: () => (
+{/* Interactive elements  */}
+export const InteractiveElements: Story = { render: () => (
     <div className="space-y-4">
       <div className="flex gap-4">
         <GlassTooltip content="Click to toggle">
-          <label className="flex cursor-pointer items-center gap-2">
-            <input type="checkbox" className="rounded" />
+          <label htmlFor="form-field" className="flex cursor-pointer items-center gap-2">
+            <input id="input-595" type="checkbox" className="rounded" / />
             <span>Checkbox with tooltip</span>
           </label>
         </GlassTooltip>
@@ -501,7 +579,7 @@ export const InteractiveElements: Story = {
 
       <div className="flex gap-4">
         <GlassTooltip content="Select an option">
-          <select className="rounded-lg border border-gray-300 px-3 py-2">
+          <select id="select-1-sqn8g8" className="rounded-lg border border-gray-300 px-3 py-2">
             <option>Option 1</option>
             <option>Option 2</option>
             <option>Option 3</option>
@@ -511,9 +589,9 @@ export const InteractiveElements: Story = {
 
       <div className="flex gap-4">
         <GlassTooltip content="Adjust the value">
-          <input type="range" className="w-32" />
+          <input id="input-613" type="range" className="w-32" / />
         </GlassTooltip>
       </div>
     </div>
-  ),
+  ) }
 };

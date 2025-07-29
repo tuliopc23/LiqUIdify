@@ -136,7 +136,10 @@ export const CountBadges: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <div className="relative">
-        <button className="rounded-lg bg-white/10 px-4 py-2 text-white hover:bg-white/20">
+        <button
+          type="button"
+          className="rounded-lg bg-white/10 px-4 py-2 text-white hover:bg-white/20"
+        >
           Notifications
         </button>
         <GlassBadge className="-top-2 -right-2 absolute" variant="error">
@@ -144,7 +147,10 @@ export const CountBadges: Story = {
         </GlassBadge>
       </div>
       <div className="relative">
-        <button className="rounded-lg bg-white/10 px-4 py-2 text-white hover:bg-white/20">
+        <button
+          type="button"
+          className="rounded-lg bg-white/10 px-4 py-2 text-white hover:bg-white/20"
+        >
           Messages
         </button>
         <GlassBadge className="-top-2 -right-2 absolute" variant="default">
@@ -152,7 +158,10 @@ export const CountBadges: Story = {
         </GlassBadge>
       </div>
       <div className="relative">
-        <button className="rounded-lg bg-white/10 px-4 py-2 text-white hover:bg-white/20">
+        <button
+          type="button"
+          className="rounded-lg bg-white/10 px-4 py-2 text-white hover:bg-white/20"
+        >
           Updates
         </button>
         <GlassBadge className="-top-2 -right-2 absolute" variant="success">

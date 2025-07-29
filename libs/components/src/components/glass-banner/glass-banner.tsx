@@ -58,8 +58,8 @@ export const GlassBanner: React.FC<GlassBannerProps> = ({
         'relative overflow-hidden rounded-lg border p-4',
         getGlassClass('default'),
         config.className,
-        'animate-in slide-in-from-top-2',
-        !isVisible && 'animate-out slide-out-to-top-2',
+        'slide-in-from-top-2 animate-in',
+        !isVisible && 'slide-out-to-top-2 animate-out',
         className
       )}
       role="alert"
@@ -74,6 +74,7 @@ export const GlassBanner: React.FC<GlassBannerProps> = ({
           {action}
           {dismissible && (
             <button
+              type="button"
               onClick={handleDismiss}
               className={cn(
                 'rounded-lg p-1 hover:bg-white/10',

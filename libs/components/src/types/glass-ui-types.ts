@@ -33,7 +33,7 @@ export type DeepPartial<T> = T extends object
  * Deep readonly utility type
  * @example
  * ```ts
- * type MutableConfig = { a: { b: string[] } };
+ * type MutableConfig = { a: { b: Array<string> } };
  * type ImmutableConfig = DeepReadonly<MutableConfig>;
  * // { readonly a: { readonly b: readonly string[] } }
  * ```

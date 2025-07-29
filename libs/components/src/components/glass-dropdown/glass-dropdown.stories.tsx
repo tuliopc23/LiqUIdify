@@ -83,21 +83,19 @@ const items = [
 ];
 
 <GlassDropdown
-  trigger={<button>Options</button>}
+  trigger={<button type="button">Options</button>}
   items={items}
-  onSelect={(value) => console.log(value)}
-/>
+  onSelect={(value) => console.log(value)} />
 
 // With custom trigger
 <GlassDropdown
   trigger={
-    <GlassButton variant="ghost" iconOnly>
+    <GlassButton type="button" variant="ghost" iconOnly>
       <MoreVertical />
     </GlassButton>
   }
   items={menuItems}
-  align="end"
-/>
+  align="end" />
 \`\`\`
 
 ## Keyboard Shortcuts
@@ -132,7 +130,7 @@ The dropdown follows WAI-ARIA guidelines:
       control: 'object',
       description: 'Array of dropdown items',
       table: {
-        type: { summary: 'DropdownItem[]' },
+        type: { summary: 'Array<DropdownItem>' },
         category: 'Content',
       },
     },
@@ -194,6 +192,7 @@ export const Playground: Story = {
   args: {
     trigger: (
       <GlassButton
+        type="button"
         variant="secondary"
         rightIcon={<ChevronDown className="h-4 w-4" />}
       >
@@ -219,7 +218,7 @@ export const BasicExamples: Story = {
   render: () => (
     <div className="flex flex-wrap gap-8">
       <GlassDropdown
-        trigger={<GlassButton>Simple Menu</GlassButton>}
+        trigger={<GlassButton type="button">Simple Menu</GlassButton>}
         items={[
           { label: 'Option 1', value: 'opt1' },
           { label: 'Option 2', value: 'opt2' },
@@ -229,7 +228,11 @@ export const BasicExamples: Story = {
       />
 
       <GlassDropdown
-        trigger={<GlassButton variant="primary">With Icons</GlassButton>}
+        trigger={
+          <GlassButton type="button" variant="primary">
+            With Icons
+          </GlassButton>
+        }
         items={[
           { label: 'Save', value: 'save', icon: <Save className="h-4 w-4" /> },
           {
@@ -247,7 +250,12 @@ export const BasicExamples: Story = {
 
       <GlassDropdown
         trigger={
-          <GlassButton variant="ghost" iconOnly aria-label="More options">
+          <GlassButton
+            type="button"
+            variant="ghost"
+            iconOnly
+            aria-label="More options"
+          >
             <MoreVertical className="h-4 w-4" />
           </GlassButton>
         }
@@ -273,7 +281,7 @@ export const AlignmentOptions: Story = {
     <div className="flex flex-col items-center gap-8">
       <div className="flex gap-16">
         <GlassDropdown
-          trigger={<GlassButton>Align Start</GlassButton>}
+          trigger={<GlassButton type="button">Align Start</GlassButton>}
           items={[
             { label: 'This dropdown', value: 'item1' },
             { label: 'is aligned to', value: 'item2' },
@@ -283,7 +291,7 @@ export const AlignmentOptions: Story = {
         />
 
         <GlassDropdown
-          trigger={<GlassButton>Align Center</GlassButton>}
+          trigger={<GlassButton type="button">Align Center</GlassButton>}
           items={[
             { label: 'This dropdown', value: 'item1' },
             { label: 'is centered', value: 'item2' },
@@ -293,7 +301,7 @@ export const AlignmentOptions: Story = {
         />
 
         <GlassDropdown
-          trigger={<GlassButton>Align End</GlassButton>}
+          trigger={<GlassButton type="button">Align End</GlassButton>}
           items={[
             { label: 'This dropdown', value: 'item1' },
             { label: 'is aligned to', value: 'item2' },
@@ -310,7 +318,7 @@ export const AlignmentOptions: Story = {
 export const ItemStates: Story = {
   render: () => (
     <GlassDropdown
-      trigger={<GlassButton>Item States Demo</GlassButton>}
+      trigger={<GlassButton type="button">Item States Demo</GlassButton>}
       items={[
         {
           label: 'Regular Item',
@@ -365,7 +373,7 @@ export const RealWorldExamples: Story = {
                 <div className="flex items-center gap-2">
                   <GlassDropdown
                     trigger={
-                      <GlassButton variant="ghost" size="sm">
+                      <GlassButton type="button" variant="ghost" size="sm">
                         View: {selectedView === 'grid' ? 'Grid' : 'List'}
                         <ChevronDown className="ml-1 h-3 w-3" />
                       </GlassButton>
@@ -387,7 +395,7 @@ export const RealWorldExamples: Story = {
 
                   <GlassDropdown
                     trigger={
-                      <GlassButton variant="ghost" size="sm">
+                      <GlassButton type="button" variant="ghost" size="sm">
                         Sort
                         <ChevronDown className="ml-1 h-3 w-3" />
                       </GlassButton>
@@ -420,6 +428,7 @@ export const RealWorldExamples: Story = {
                   <GlassDropdown
                     trigger={
                       <GlassButton
+                        type="button"
                         variant="ghost"
                         iconOnly
                         size="sm"
@@ -472,7 +481,10 @@ export const RealWorldExamples: Story = {
                       <FileText className="h-8 w-8 text-gray-400" />
                       <GlassDropdown
                         trigger={
-                          <button className="opacity-0 transition-opacity hover:opacity-100">
+                          <button
+                            type="button"
+                            className="opacity-0 transition-opacity hover:opacity-100"
+                          >
                             <MoreVertical className="h-4 w-4" />
                           </button>
                         }
@@ -529,6 +541,7 @@ export const RealWorldExamples: Story = {
             <GlassDropdown
               trigger={
                 <GlassButton
+                  type="button"
                   variant="ghost"
                   className="flex items-center gap-2"
                 >
@@ -634,7 +647,12 @@ export const RealWorldExamples: Story = {
                       <td className="py-3 text-right">
                         <GlassDropdown
                           trigger={
-                            <GlassButton variant="ghost" iconOnly size="sm">
+                            <GlassButton
+                              type="button"
+                              variant="ghost"
+                              iconOnly
+                              size="sm"
+                            >
                               <MoreVertical className="h-4 w-4" />
                             </GlassButton>
                           }
@@ -687,7 +705,7 @@ export const NavigationDropdown: Story = {
     <div className="flex flex-wrap gap-4">
       <GlassDropdown
         trigger={
-          <GlassButton variant="ghost">
+          <GlassButton type="button" variant="ghost">
             Products
             <ChevronDown className="ml-1 h-4 w-4" />
           </GlassButton>
@@ -724,7 +742,7 @@ export const NavigationDropdown: Story = {
 
       <GlassDropdown
         trigger={
-          <GlassButton variant="ghost">
+          <GlassButton type="button" variant="ghost">
             Resources
             <ChevronDown className="ml-1 h-4 w-4" />
           </GlassButton>
@@ -771,7 +789,7 @@ export const ThemeShowcase: Story = {
         <div className="space-y-4 rounded-xl bg-white/80 p-6 dark:bg-gray-900/80">
           <h3 className="font-semibold text-lg">Light Theme</h3>
           <GlassDropdown
-            trigger={<GlassButton>Light Theme Menu</GlassButton>}
+            trigger={<GlassButton type="button">Light Theme Menu</GlassButton>}
             items={[
               {
                 label: 'Action 1',
@@ -799,7 +817,7 @@ export const ThemeShowcase: Story = {
             Dark Theme
           </h3>
           <GlassDropdown
-            trigger={<GlassButton>Dark Theme Menu</GlassButton>}
+            trigger={<GlassButton type="button">Dark Theme Menu</GlassButton>}
             items={[
               {
                 label: 'Action 1',
@@ -842,7 +860,7 @@ export const AccessibilityShowcase: Story = {
         </p>
         <GlassDropdown
           trigger={
-            <GlassButton>
+            <GlassButton type="button">
               Keyboard Accessible Menu
               <ChevronDown className="ml-2 h-4 w-4" />
             </GlassButton>
@@ -880,7 +898,7 @@ export const AccessibilityShowcase: Story = {
         </p>
         <GlassDropdown
           trigger={
-            <GlassButton aria-label="Options menu">
+            <GlassButton type="button" aria-label="Options menu">
               Options
               <ChevronDown className="ml-2 h-4 w-4" />
             </GlassButton>
@@ -915,7 +933,7 @@ export const CustomStyling: Story = {
   render: () => (
     <div className="flex flex-wrap gap-8">
       <GlassDropdown
-        trigger={<GlassButton>Custom Content Style</GlassButton>}
+        trigger={<GlassButton type="button">Custom Content Style</GlassButton>}
         items={[
           { label: 'Option 1', value: 'opt1' },
           { label: 'Option 2', value: 'opt2' },
@@ -925,7 +943,7 @@ export const CustomStyling: Story = {
       />
 
       <GlassDropdown
-        trigger={<GlassButton>Wide Dropdown</GlassButton>}
+        trigger={<GlassButton type="button">Wide Dropdown</GlassButton>}
         items={[
           {
             label: 'This is a very long menu item that needs more space',
@@ -938,7 +956,7 @@ export const CustomStyling: Story = {
       />
 
       <GlassDropdown
-        trigger={<GlassButton>Compact Menu</GlassButton>}
+        trigger={<GlassButton type="button">Compact Menu</GlassButton>}
         items={[
           { label: 'A', value: 'a' },
           { label: 'B', value: 'b' },

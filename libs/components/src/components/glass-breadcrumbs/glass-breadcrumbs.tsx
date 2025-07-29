@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ChevronRight, Home } from 'lucide-react';
 import React, { useCallback } from 'react';
 import { cn } from '@/core/utils/classname';
+import { getItemKey } from '@/core/utils/stable-key';
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
@@ -41,7 +42,6 @@ const breadcrumbItemVariants = cva({
   },
   defaultVariants: {
     isActive: 'false',
-
     isClickable: 'true',
   },
 });
@@ -69,7 +69,6 @@ const GlassBreadcrumbs = React.memo(
       {
         className,
         items,
-
         separator = <ChevronRight className="h-4 w-4 text-white/40" />,
         showHome = true,
         onHomeClick,
@@ -80,7 +79,7 @@ const GlassBreadcrumbs = React.memo(
       },
       ref
     ) => {
-      // Truncate items if maxItems is specified
+      {/* Truncate items if maxItems is specified */}
       const displayItems =
         maxItems && items.length > maxItems
           ? [
@@ -97,8 +96,8 @@ const GlassBreadcrumbs = React.memo(
           if (item.onClick) {
             item.onClick();
           } else if (item.href) {
-            // In a real app, you'd handle navigation here
-            // Navigation handled by onClick prop
+            {/* In a real app, you'd handle navigation here */}
+            {/* Navigation handled by onClick prop */}
           }
         },
         []
@@ -116,13 +115,13 @@ const GlassBreadcrumbs = React.memo(
               <>
                 <li>
                   <motion.button
+                    type="button"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={onHomeClick}
                     className={cn(
                       breadcrumbItemVariants({
                         isActive: 'false',
-
                         isClickable: 'true',
                       })
                     )}
@@ -142,23 +141,20 @@ const GlassBreadcrumbs = React.memo(
               const isClickable =
                 !isLast && (item.href || item.onClick) && '...' !== item.label;
 
-              const handleClick = useCallback(
-                () => handleItemClick(item, index),
-                [item, index]
-              );
+              const handleClick = () => handleItemClick(item, index);
 
               return (
-                <React.Fragment key={index}>
+                <React.Fragment key={getItemKey(item, 'breadcrumb', index)}>
                   <li>
                     {isClickable ? (
                       <motion.button
+                        type="button"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={handleClick}
                         className={cn(
                           breadcrumbItemVariants({
                             isActive: isLast ? 'true' : 'false',
-
                             isClickable: 'true',
                           })
                         )}
@@ -174,7 +170,6 @@ const GlassBreadcrumbs = React.memo(
                         className={cn(
                           breadcrumbItemVariants({
                             isActive: isLast ? 'true' : 'false',
-
                             isClickable: 'false',
                           })
                         )}

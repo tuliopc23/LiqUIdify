@@ -52,6 +52,7 @@ export const GlassButtonLite = forwardRef<
 
     return (
       <button
+        type="button"
         ref={ref}
         className={cn(
           'glass-button-lite',

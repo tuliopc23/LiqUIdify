@@ -375,7 +375,7 @@ export const RealWorldExamples: Story = {
 // Interactive demo
 export const InteractiveDemo: Story = {
   render: () => {
-    const [path, setPath] = React.useState<Array<string>>(['Home']);
+    const [path, setPath] = React.useState<string[]>(['Home']);
 
     const items: Array<BreadcrumbItem> = path.map((label, index) => ({
       label,
@@ -395,24 +395,28 @@ export const InteractiveDemo: Story = {
 
         <div className="flex flex-wrap gap-2">
           <button
+            type="button"
             onClick={() => addLevel('Products')}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Add "Products"
           </button>
           <button
+            type="button"
             onClick={() => addLevel('Services')}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Add "Services"
           </button>
           <button
+            type="button"
             onClick={() => addLevel('About')}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Add "About"
           </button>
           <button
+            type="button"
             onClick={() => setPath(['Home'])}
             className="rounded-lg bg-red-500/20 px-3 py-1 text-sm text-white hover:bg-red-500/30"
           >

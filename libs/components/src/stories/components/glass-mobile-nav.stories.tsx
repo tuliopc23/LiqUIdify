@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
-  ChevronRight,
   FileText,
   HelpCircle,
   Home,
@@ -53,12 +52,12 @@ const navigationItems = [
     id: 'home',
     label: 'Home',
     href: '/',
-    icon: <Home className="w-5 h-5" />,
+    icon: <Home className="h-5 w-5" />,
   },
   {
     id: 'profile',
     label: 'Profile',
-    icon: <User className="w-5 h-5" />,
+    icon: <User className="h-5 w-5" />,
     children: [
       { id: 'profile-settings', label: 'Settings', href: '/profile/settings' },
       {
@@ -72,7 +71,7 @@ const navigationItems = [
   {
     id: 'docs',
     label: 'Documentation',
-    icon: <FileText className="w-5 h-5" />,
+    icon: <FileText className="h-5 w-5" />,
     children: [
       {
         id: 'getting-started',
@@ -87,18 +86,18 @@ const navigationItems = [
     id: 'settings',
     label: 'Settings',
     href: '/settings',
-    icon: <Settings className="w-5 h-5" />,
+    icon: <Settings className="h-5 w-5" />,
   },
   {
     id: 'help',
     label: 'Help & Support',
-    icon: <HelpCircle className="w-5 h-5" />,
+    icon: <HelpCircle className="h-5 w-5" />,
     action: () => alert('Help clicked!'),
   },
   {
     id: 'logout',
     label: 'Logout',
-    icon: <LogOut className="w-5 h-5" />,
+    icon: <LogOut className="h-5 w-5" />,
     action: () => alert('Logout clicked!'),
   },
 ];
@@ -108,19 +107,19 @@ export const Default: Story = {
     items: navigationItems,
   },
   render: (args) => (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="flex justify-end">
         <GlassMobileNav {...args} />
       </div>
-      <div className="mt-8 p-6 glass-effect rounded-lg">
-        <h1 className="text-2xl font-bold mb-4 text-[var(--text-primary)]">
+      <div className="glass-effect mt-8 rounded-lg p-6">
+        <h1 className="mb-4 font-bold text-2xl text-[var(--text-primary)]">
           Mobile Navigation Demo
         </h1>
-        <p className="text-[var(--text-secondary)] mb-4">
+        <p className="mb-4 text-[var(--text-secondary)]">
           Click the menu button above to open the mobile navigation. This
           component is designed for mobile devices and includes:
         </p>
-        <ul className="list-disc list-inside space-y-2 text-[var(--text-secondary)]">
+        <ul className="list-inside list-disc space-y-2 text-[var(--text-secondary)]">
           <li>Smooth slide-in animation from the right</li>
           <li>Glassmorphism design with backdrop blur</li>
           <li>Support for nested menu items</li>
@@ -172,7 +171,7 @@ export const DeeplyNested: Story = {
       {
         id: 'products',
         label: 'Products',
-        icon: <Menu className="w-5 h-5" />,
+        icon: <Menu className="h-5 w-5" />,
         children: [
           {
             id: 'electronics',
@@ -215,9 +214,9 @@ export const InteractiveDemo: Story = {
     }));
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-xl font-semibold text-[var(--text-primary)]">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="font-semibold text-[var(--text-primary)] text-xl">
             Interactive Demo
           </h2>
           <GlassMobileNav

@@ -4,15 +4,12 @@ import React from 'react';
 import { GlassButton } from '../glass-button-refactored/glass-button';
 import { Drawer } from './glass-drawer';
 
-const meta = {
-  title: 'Components/GlassDrawer',
+const meta = { title: 'Components/GlassDrawer' }
   component: Drawer,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
+  parameters: { layout: 'centered' }
+    docs: { description: {
         component:
-          'A drawer component with glassmorphic styling that slides in from different sides of the screen.',
+          'A drawer component with glassmorphic styling that slides in from different sides of the screen.' }
       },
     },
   },
@@ -22,18 +19,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default drawer
-export const Default: Story = {
-  render: () => (
+{/* Default drawer  */}
+export const Default: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Open Drawer</GlassButton>
+        <GlassButton type="button">Open Drawer</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content>
         <Drawer.Header>
           <Drawer.Title>Default Drawer</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
+            <button
+              type="button"
+              className="rounded-md opacity-70 transition-opacity hover:opacity-100"
+            >
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -43,28 +42,32 @@ export const Default: Story = {
           <p className="mt-4">It slides in from the right side by default.</p>
         </Drawer.Body>
         <Drawer.Footer>
-          <GlassButton variant="outline" size="sm">
+          <GlassButton type="button" variant="outline" size="sm">
             Cancel
           </GlassButton>
-          <GlassButton size="sm">Save Changes</GlassButton>
+          <GlassButton type="button" size="sm">
+            Save Changes
+          </GlassButton>
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>
-  ),
+  ) }
 };
 
-// Different sides
-export const LeftSide: Story = {
-  render: () => (
+{/* Different sides  */}
+export const LeftSide: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Open Left Drawer</GlassButton>
+        <GlassButton type="button">Open Left Drawer</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content side="left">
         <Drawer.Header>
           <Drawer.Title>Navigation Menu</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
+            <button
+              type="button"
+              className="rounded-md opacity-70 transition-opacity hover:opacity-100"
+            >
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -72,28 +75,28 @@ export const LeftSide: Story = {
         <Drawer.Body>
           <nav className="space-y-2">
             <a
-              href="#"
+              href="#placeholder"
               className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/10"
             >
               <Menu className="h-5 w-5" />
               <span>Dashboard</span>
             </a>
             <a
-              href="#"
+              href="#placeholder"
               className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/10"
             >
               <User className="h-5 w-5" />
               <span>Profile</span>
             </a>
             <a
-              href="#"
+              href="#placeholder"
               className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/10"
             >
               <Settings className="h-5 w-5" />
               <span>Settings</span>
             </a>
             <a
-              href="#"
+              href="#placeholder"
               className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/10"
             >
               <Bell className="h-5 w-5" />
@@ -103,36 +106,33 @@ export const LeftSide: Story = {
         </Drawer.Body>
       </Drawer.Content>
     </Drawer>
-  ),
+  ) }
 };
 
-export const TopSide: Story = {
-  render: () => (
+export const TopSide: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Open Top Drawer</GlassButton>
+        <GlassButton type="button">Open Top Drawer</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content side="top" size="sm">
         <Drawer.Body>
           <div className="flex items-center gap-4">
             <Search className="h-5 w-5 text-white/60" />
-            <input
+            <input id="input-127" 
               type="text"
               placeholder="Search..."
-              className="flex-1 border-white/20 border-b bg-transparent pb-2 outline-none placeholder:text-white/40"
-            />
+              className="flex-1 border-white/20 border-b bg-transparent pb-2 outline-none placeholder:text-white/40" />
           </div>
         </Drawer.Body>
       </Drawer.Content>
     </Drawer>
-  ),
+  ) }
 };
 
-export const BottomSide: Story = {
-  render: () => (
+export const BottomSide: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Open Bottom Drawer</GlassButton>
+        <GlassButton type="button">Open Bottom Drawer</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content side="bottom" size="md">
         <Drawer.Header>
@@ -141,43 +141,47 @@ export const BottomSide: Story = {
         <Drawer.Body>
           <p>We use cookies to enhance your browsing experience.</p>
           <div className="mt-4 space-y-2">
-            <label className="flex items-center gap-2">
-              <input type="checkbox" defaultChecked className="rounded" />
+            <label htmlFor="form-field" className="flex items-center gap-2">
+              <input id="input-152" type="checkbox" defaultChecked className="rounded" / />
               <span>Necessary cookies</span>
             </label>
-            <label className="flex items-center gap-2">
-              <input type="checkbox" className="rounded" />
+            <label htmlFor="form-field" className="flex items-center gap-2">
+              <input id="input-156" type="checkbox" className="rounded" / />
               <span>Analytics cookies</span>
             </label>
-            <label className="flex items-center gap-2">
-              <input type="checkbox" className="rounded" />
+            <label htmlFor="form-field" className="flex items-center gap-2">
+              <input id="input-160" type="checkbox" className="rounded" / />
               <span>Marketing cookies</span>
             </label>
           </div>
         </Drawer.Body>
         <Drawer.Footer>
-          <GlassButton variant="outline" size="sm">
+          <GlassButton type="button" variant="outline" size="sm">
             Reject All
           </GlassButton>
-          <GlassButton size="sm">Accept Selected</GlassButton>
+          <GlassButton type="button" size="sm">
+            Accept Selected
+          </GlassButton>
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>
-  ),
+  ) }
 };
 
-// Different sizes
-export const SmallSize: Story = {
-  render: () => (
+{/* Different sizes  */}
+export const SmallSize: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Small Drawer</GlassButton>
+        <GlassButton type="button">Small Drawer</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content size="sm">
         <Drawer.Header>
           <Drawer.Title>Small Drawer</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
+            <button
+              type="button"
+              className="rounded-md opacity-70 transition-opacity hover:opacity-100"
+            >
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -187,27 +191,29 @@ export const SmallSize: Story = {
         </Drawer.Body>
       </Drawer.Content>
     </Drawer>
-  ),
+  ) }
 };
 
-export const LargeSize: Story = {
-  render: () => (
+export const LargeSize: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Large Drawer</GlassButton>
+        <GlassButton type="button">Large Drawer</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content size="lg">
         <Drawer.Header>
           <Drawer.Title>Large Drawer</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
+            <button
+              type="button"
+              className="rounded-md opacity-70 transition-opacity hover:opacity-100"
+            >
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
         </Drawer.Header>
         <Drawer.Body>
           <p>This is a large-sized drawer with more content space.</p>
-          <div className="mt-6 space-y-4">
+          <div className="mt-6 space-y-4"> }
             {Array.from({ length: 5 }, (_, i) => (
               <div key={i} className="rounded-lg bg-white/5 p-4">
                 <h4 className="mb-2 font-medium">Section {i + 1}</h4>
@@ -223,17 +229,19 @@ export const LargeSize: Story = {
   ),
 };
 
-export const FullSize: Story = {
-  render: () => (
+export const FullSize: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Full Width Drawer</GlassButton>
+        <GlassButton type="button">Full Width Drawer</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content size="full">
         <Drawer.Header>
           <Drawer.Title>Full Width Drawer</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
+            <button
+              type="button"
+              className="rounded-md opacity-70 transition-opacity hover:opacity-100"
+            >
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -243,21 +251,23 @@ export const FullSize: Story = {
         </Drawer.Body>
       </Drawer.Content>
     </Drawer>
-  ),
+  ) }
 };
 
-// With form
-export const WithForm: Story = {
-  render: () => (
+{/* With form  */}
+export const WithForm: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Edit Profile</GlassButton>
+        <GlassButton type="button">Edit Profile</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content>
         <Drawer.Header>
           <Drawer.Title>Edit Profile</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
+            <button
+              type="button"
+              className="rounded-md opacity-70 transition-opacity hover:opacity-100"
+            >
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
@@ -265,51 +275,51 @@ export const WithForm: Story = {
         <Drawer.Body>
           <form className="space-y-4">
             <div>
-              <label className="mb-2 block font-medium text-sm">Name</label>
-              <input
+              <label htmlFor="name-p8c480" className="mb-2 block font-medium text-sm">Name</label>
+              <input id="input-290" 
                 type="text"
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
                 placeholder="John Doe"
-              />
+              / />
             </div>
             <div>
-              <label className="mb-2 block font-medium text-sm">Email</label>
-              <input
+              <label htmlFor="email-yecb5w" className="mb-2 block font-medium text-sm">Email</label>
+              <input id="input-298" 
                 type="email"
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
                 placeholder="john@example.com"
-              />
+              / />
             </div>
             <div>
-              <label className="mb-2 block font-medium text-sm">Bio</label>
-              <textarea
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
+              <label htmlFor="bio-hvgtxu" className="mb-2 block font-medium text-sm">Bio</label>
+              <textarea id="textarea-1-tg7lb0" 
+                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40" }
                 rows={4}
-                placeholder="Tell us about yourself..."
-              />
+                placeholder="Tell us about yourself..." />
             </div>
           </form>
         </Drawer.Body>
         <Drawer.Footer>
-          <GlassButton variant="outline" size="sm">
+          <GlassButton type="button" variant="outline" size="sm">
             Cancel
           </GlassButton>
-          <GlassButton size="sm">Save Changes</GlassButton>
+          <GlassButton type="button" size="sm">
+            Save Changes
+          </GlassButton>
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>
   ),
 };
 
-// Without close button
-export const WithoutCloseButton: Story = {
-  render: () => {
+{/* Without close button  */}
+export const WithoutCloseButton: Story = { render: () => { }
     const [open, setOpen] = React.useState(false);
 
     return (
       <Drawer open={open} onOpenChange={setOpen}>
         <Drawer.Trigger asChild>
-          <GlassButton>Open Drawer</GlassButton>
+          <GlassButton type="button">Open Drawer</GlassButton>
         </Drawer.Trigger>
         <Drawer.Content showCloseButton={false}>
           <Drawer.Header>
@@ -322,7 +332,7 @@ export const WithoutCloseButton: Story = {
             </p>
           </Drawer.Body>
           <Drawer.Footer>
-            <GlassButton size="sm" onClick={() => setOpen(false)}>
+            <GlassButton type="button" size="sm" onClick={() => setOpen(false)}>
               Close
             </GlassButton>
           </Drawer.Footer>
@@ -332,23 +342,25 @@ export const WithoutCloseButton: Story = {
   },
 };
 
-// With scrollable content
-export const ScrollableContent: Story = {
-  render: () => (
+{/* With scrollable content  */}
+export const ScrollableContent: Story = { render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
-        <GlassButton>Open Scrollable Drawer</GlassButton>
+        <GlassButton type="button">Open Scrollable Drawer</GlassButton>
       </Drawer.Trigger>
       <Drawer.Content>
         <Drawer.Header>
           <Drawer.Title>Terms of Service</Drawer.Title>
           <Drawer.Close asChild>
-            <button className="rounded-md opacity-70 transition-opacity hover:opacity-100">
+            <button
+              type="button"
+              className="rounded-md opacity-70 transition-opacity hover:opacity-100"
+            >
               <X className="h-4 w-4" />
             </button>
           </Drawer.Close>
         </Drawer.Header>
-        <Drawer.Body>
+        <Drawer.Body> }
           {Array.from({ length: 20 }, (_, i) => (
             <div key={i} className="mb-4">
               <h3 className="mb-2 font-medium">{i + 1}. Section Title</h3>
@@ -361,10 +373,12 @@ export const ScrollableContent: Story = {
           ))}
         </Drawer.Body>
         <Drawer.Footer>
-          <GlassButton variant="outline" size="sm">
+          <GlassButton type="button" variant="outline" size="sm">
             Decline
           </GlassButton>
-          <GlassButton size="sm">Accept</GlassButton>
+          <GlassButton type="button" size="sm">
+            Accept
+          </GlassButton>
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>

@@ -54,7 +54,11 @@ export function GracefulDegradation({
   network = false,
   performance = false,
 }: GracefulDegradationProps) {
+  // All hooks must be called at the top level
   const isClient = useIsClient();
+  const isSupported = useSSRSafeFeatureDetection(feature || '');
+  const { online, effectiveType } = useNetworkStatus();
+  const isLowPerformance = useDevicePerformance();
 
   // If not client-side, render fallback
   if (!isClient) {
@@ -62,16 +66,12 @@ export function GracefulDegradation({
   }
 
   // Feature detection
-  if (feature) {
-    const isSupported = useSSRSafeFeatureDetection(feature);
-    if (!isSupported) {
-      return <>{fallback}</>;
-    }
+  if (feature && !isSupported) {
+    return <>{fallback}</>;
   }
 
   // Network awareness
   if (network) {
-    const { online, effectiveType } = useNetworkStatus();
     if (
       !online ||
       (effectiveType && ['slow-2g', '2g'].includes(effectiveType))
@@ -81,15 +81,11 @@ export function GracefulDegradation({
   }
 
   // Performance awareness
-  if (performance) {
-    const isLowPerformance = useDevicePerformance();
-    if (isLowPerformance) {
-      return <>{fallback}</>;
-    }
+  if (performance && isLowPerformance) {
+    return <>{fallback}</>;
   }
 
   // All checks passed, render children
-
   return <>{children}</>;
 }
 

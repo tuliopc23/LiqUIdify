@@ -7,10 +7,8 @@ import {
   Palette,
   Play,
   Settings,
-  Sparkles,
 } from 'lucide-react';
 import { useState } from 'react';
-import { GlassButton } from '../glass-button-refactored/glass-button';
 import { GlassCard } from '../glass-card-refactored/glass-card';
 import { GlassInput } from '../glass-input/glass-input';
 import { GlassSelect } from '../glass-select/glass-select';
@@ -49,8 +47,7 @@ import { GlassPlayground, PlaygroundTemplates } from '@/components/glass-playgro
 <GlassPlayground
   code={PlaygroundTemplates.button}
   title="Button Playground"
-  description="Experiment with button variants and properties"
-/>
+  description="Experiment with button variants and properties" />
 
 // Advanced usage with custom scope
 <GlassPlayground
@@ -63,16 +60,14 @@ import { GlassPlayground, PlaygroundTemplates } from '@/components/glass-playgro
   showEditor={true}
   showPreview={true}
   editable={true}
-  height={600}
-/>
+  height={600} />
 
 // Read-only example
 <GlassPlayground
   code={exampleCode}
   title="Read-only Example"
   editable={false}
-  showEditor={false}
-/>
+  showEditor={false} />
 \`\`\`
 
 ## Templates
@@ -330,7 +325,7 @@ export const InteractiveDemo: Story = {
               <div>
                 <label
                   htmlFor="template-select"
-                  className="mb-2 block text-sm font-medium text-white/90"
+                  className="mb-2 block font-medium text-sm text-white/90"
                 >
                   Template
                 </label>
@@ -349,7 +344,7 @@ export const InteractiveDemo: Story = {
               <div>
                 <label
                   htmlFor="height-input"
-                  className="mb-2 block text-sm font-medium text-white/90"
+                  className="mb-2 block font-medium text-sm text-white/90"
                 >
                   Height
                 </label>
@@ -366,7 +361,7 @@ export const InteractiveDemo: Story = {
               <div>
                 <label
                   htmlFor="theme-select"
-                  className="mb-2 block text-sm font-medium text-white/90"
+                  className="mb-2 block font-medium text-sm text-white/90"
                 >
                   Theme
                 </label>
@@ -464,26 +459,23 @@ function DocumentationExample() {
         </div>
 
         <div className="flex gap-2">
-          <GlassButton
-            variant="secondary"
-            onClick={() => setCount(count - 1)}
+          <GlassButton type="button"
+            variant="secondary" onClick={() => setCount(count - 1)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => setCount(count - 1))(e); } }}
             className="flex-1"
           >
             Decrease
           </GlassButton>
 
-          <GlassButton
-            variant="primary"
-            onClick={() => setCount(count + 1)}
+          <GlassButton type="button"
+            variant="primary" onClick={() => setCount(count + 1)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => setCount(count + 1))(e); } }}
             className="flex-1"
           >
             Increase
           </GlassButton>
         </div>
 
-        <GlassButton
-          variant="ghost"
-          onClick={() => setCount(0)}
+        <GlassButton type="button"
+          variant="ghost" onClick={() => setCount(0)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => setCount(0))(e); } }}
           className="w-full"
         >
           Reset
@@ -568,13 +560,13 @@ function TutorialStep() {
     1: {
       title: "Create a Button",
       content: "Let's start by creating a simple glass button component.",
-      component: <GlassButton variant="primary">My First Button</GlassButton>
+      component: <GlassButton type="button" variant="primary">My First Button</GlassButton>
     },
     2: {
       title: "Add an Icon",
       content: "Now let's add an icon to make it more interactive.",
       component: (
-        <GlassButton variant="primary">
+        <GlassButton type="button" variant="primary">
           <Settings className="mr-2 h-4 w-4" />
           Button with Icon
         </GlassButton>
@@ -584,9 +576,8 @@ function TutorialStep() {
       title: "Make it Interactive",
       content: "Finally, let's add some interactivity with state.",
       component: (
-        <GlassButton
-          variant="primary"
-          onClick={() => alert('Button clicked!')}
+        <GlassButton type="button"
+          variant="primary" onClick={() => alert('Button clicked!')} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => alert('Button clicked!'))(e); } }}
         >
           <Sparkles className="mr-2 h-4 w-4" />
           Interactive Button
@@ -616,17 +607,15 @@ function TutorialStep() {
       </div>
 
       <div className="flex justify-between">
-        <GlassButton
-          variant="ghost"
-          onClick={() => setStep(Math.max(1, step - 1))}
+        <GlassButton type="button"
+          variant="ghost" onClick={() => setStep(Math.max(1, step - 1))} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => setStep(Math.max(1, step - 1)))(e); } }}
           disabled={step === 1}
         >
           Previous
         </GlassButton>
 
-        <GlassButton
-          variant="primary"
-          onClick={() => setStep(Math.min(totalSteps, step + 1))}
+        <GlassButton type="button"
+          variant="primary" onClick={() => setStep(Math.min(totalSteps, step + 1))} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => setStep(Math.min(totalSteps, step + 1)))(e); } }}
           disabled={step === totalSteps}
         >
           Next
@@ -721,9 +710,8 @@ function CustomGlassComponent() {
         This is a custom component built with glassmorphism effects.
       </p>
 
-      <GlassButton
-        variant={isActive ? "primary" : "secondary"}
-        onClick={() => setIsActive(!isActive)}
+      <GlassButton type="button"
+        variant={isActive ? "primary" : "secondary"} onClick={() => setIsActive(!isActive)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => setIsActive(!isActive))(e); } }}
       >
         {isActive ? 'Deactivate' : 'Activate'}
       </GlassButton>
@@ -786,9 +774,8 @@ function FullscreenDemo() {
           onChange={(e) => setNewItem(e.target.value)}
           placeholder="Add new item..."
           onKeyPress={(e) => e.key === 'Enter' && addItem()}
-          className="flex-1"
-        />
-        <GlassButton variant="primary" onClick={addItem}>
+          className="flex-1" />
+        <GlassButton type="button" variant="primary" onClick={addItem} }}>
           Add
         </GlassButton>
       </div>
@@ -807,8 +794,7 @@ function FullscreenDemo() {
               type="checkbox"
               checked={item.completed}
               onChange={() => toggleItem(item.id)}
-              className="h-4 w-4"
-            />
+              className="h-4 w-4" />
             <span className={\`
               flex-1 \${item.completed ? 'line-through text-white/50' : 'text-white/90'}
             \`}>
@@ -952,8 +938,7 @@ function AccessibleDemo() {
               border backdrop-blur-sm
             \`}
             role="option"
-            aria-selected={index === focusedIndex}
-            onClick={() => setFocusedIndex(index)}
+            aria-selected={index === focusedIndex} onClick={() => setFocusedIndex(index)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => setFocusedIndex(index))(e); } }}
           >
             {item} Item
           </div>

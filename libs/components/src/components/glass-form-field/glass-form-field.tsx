@@ -27,7 +27,7 @@ const formFieldVariants = cva({
 });
 
 const labelVariants = cva({
-  base: 'block font-medium transition-colors duration-200 text-white/90',
+  base: 'block font-medium text-white/90 transition-colors duration-200',
   variants: {
     required: {
       true: "after:ml-1 after:text-red-400 after:content-['*']",

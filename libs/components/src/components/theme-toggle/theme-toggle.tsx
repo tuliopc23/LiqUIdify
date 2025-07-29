@@ -7,6 +7,7 @@ export function ThemeToggle() {
 
   return (
     <button
+      type="button"
       onClick={() => setTheme('light' === theme ? 'dark' : 'light')}
       className="glass-effect btn-scale rounded-lg p-2 transition-all duration-200 hover:bg-opacity-80"
     >

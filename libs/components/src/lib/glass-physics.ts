@@ -403,7 +403,7 @@ export const useRepulsionEffect = (
   elements: Array<HTMLElement>,
   repulsionStrength: number = 50
 ) => {
-  const [positions, setPositions] = useState<Array<Vector2D>>([]);
+  const [positions, setPositions] = useState<Vector2D[]>([]);
 
   useEffect(() => {
     if (elements.length === 0) {

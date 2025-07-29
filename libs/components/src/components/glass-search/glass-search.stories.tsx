@@ -1,16 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import {
-  Book,
-  Clock,
-  Film,
-  MapPin,
-  Music,
-  Search,
-  Star,
-  TrendingUp,
-  User,
-} from 'lucide-react';
-import React, { useState } from 'react';
+import { Book, Clock, Search, TrendingUp, User } from 'lucide-react';
+import { useState } from 'react';
 import { GlassSearch, type SearchSuggestion } from './glass-search';
 
 const meta = {
@@ -41,8 +31,7 @@ import { GlassSearch } from '@/components/glass-search';
 // Basic usage
 <GlassSearch
   placeholder="Search products..."
-  onSearch={(query) => console.log('Search:', query)}
-/>
+  onSearch={(query) => console.log('Search:', query)} />
 
 // With suggestions and recent searches
 <GlassSearch
@@ -51,8 +40,7 @@ import { GlassSearch } from '@/components/glass-search';
   recentSearches={recentSearches}
   onSearch={handleSearch}
   onSuggestionClick={handleSuggestionClick}
-  maxSuggestions={8}
-/>
+  maxSuggestions={8} />
 \`\`\`
 
 ## Keyboard Shortcuts
@@ -128,7 +116,7 @@ The search component follows WAI-ARIA guidelines:
       control: 'object',
       description: 'Array of search suggestions',
       table: {
-        type: { summary: 'SearchSuggestion[]' },
+        type: { summary: 'Array<SearchSuggestion>' },
         category: 'Data',
       },
     },
@@ -136,7 +124,7 @@ The search component follows WAI-ARIA guidelines:
       control: 'object',
       description: 'Array of recent search terms',
       table: {
-        type: { summary: 'string[]' },
+        type: { summary: 'Array<string>' },
         category: 'Data',
       },
     },
@@ -164,7 +152,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Sample data for stories
-const sampleSuggestions: SearchSuggestion[] = [
+const sampleSuggestions: Array<SearchSuggestion> = [
   {
     id: '1',
     text: 'React components',
@@ -263,7 +251,7 @@ export const BasicUsage: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Simple Search</h3>
+        <h3 className="font-medium text-sm text-white/80">Simple Search</h3>
         <GlassSearch
           placeholder="Type to search..."
           onSearch={(query) => console.log('Search:', query)}
@@ -271,7 +259,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">
+        <h3 className="font-medium text-sm text-white/80">
           With Recent Searches
         </h3>
         <GlassSearch
@@ -282,7 +270,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">With Suggestions</h3>
+        <h3 className="font-medium text-sm text-white/80">With Suggestions</h3>
         <GlassSearch
           placeholder="Search documentation..."
           suggestions={sampleSuggestions.slice(0, 5)}
@@ -307,7 +295,7 @@ export const BasicUsage: Story = {
 // Different suggestion types
 export const SuggestionTypes: Story = {
   render: () => {
-    const categorizedSuggestions: SearchSuggestion[] = [
+    const categorizedSuggestions: Array<SearchSuggestion> = [
       // Recent
       { id: 'r1', text: 'React components', type: 'recent' },
       { id: 'r2', text: 'TypeScript guide', type: 'recent' },
@@ -362,10 +350,10 @@ export const SuggestionTypes: Story = {
     return (
       <div className="space-y-6">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Mixed Suggestion Types
           </h3>
-          <p className="text-white/60 text-sm">
+          <p className="text-sm text-white/60">
             Shows recent searches, trending topics, and regular suggestions
           </p>
           <GlassSearch
@@ -437,10 +425,10 @@ export const LoadingAndEmptyStates: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Interactive Search
           </h3>
-          <p className="text-white/60 text-sm">
+          <p className="text-sm text-white/60">
             Try searching "React" or "no results" to see different states
           </p>
           <GlassSearch
@@ -450,7 +438,7 @@ export const LoadingAndEmptyStates: Story = {
             maxSuggestions={6}
           />
           {isLoading && (
-            <div className="flex items-center gap-2 text-white/60 text-sm">
+            <div className="flex items-center gap-2 text-sm text-white/60">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white/60"></div>
               Searching...
             </div>
@@ -458,7 +446,7 @@ export const LoadingAndEmptyStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Empty State</h3>
+          <h3 className="font-medium text-sm text-white/80">Empty State</h3>
           <GlassSearch
             placeholder="Search for something that doesn't exist..."
             suggestions={[]}
@@ -484,7 +472,7 @@ export const LoadingAndEmptyStates: Story = {
 // Real-world examples
 export const RealWorldExamples: Story = {
   render: () => {
-    const ecommerceSuggestions: SearchSuggestion[] = [
+    const ecommerceSuggestions: Array<SearchSuggestion> = [
       {
         id: 'e1',
         text: 'iPhone 15 Pro',
@@ -522,7 +510,7 @@ export const RealWorldExamples: Story = {
       },
     ];
 
-    const documentationSuggestions: SearchSuggestion[] = [
+    const documentationSuggestions: Array<SearchSuggestion> = [
       {
         id: 'd1',
         text: 'Getting Started',
@@ -555,7 +543,7 @@ export const RealWorldExamples: Story = {
       },
     ];
 
-    const socialSuggestions: SearchSuggestion[] = [
+    const socialSuggestions: Array<SearchSuggestion> = [
       { id: 's1', text: 'John Smith', type: 'suggestion', category: 'People' },
       {
         id: 's2',
@@ -589,7 +577,7 @@ export const RealWorldExamples: Story = {
     return (
       <div className="space-y-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             E-commerce Search
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -599,7 +587,7 @@ export const RealWorldExamples: Story = {
               </div>
               <div>
                 <div className="font-medium text-white/90">Product Search</div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   Search millions of products
                 </div>
               </div>
@@ -614,7 +602,7 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Documentation Search
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -624,7 +612,7 @@ export const RealWorldExamples: Story = {
               </div>
               <div>
                 <div className="font-medium text-white/90">Documentation</div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   Find guides, APIs, and examples
                 </div>
               </div>
@@ -639,7 +627,7 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Social Platform Search
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -649,7 +637,7 @@ export const RealWorldExamples: Story = {
               </div>
               <div>
                 <div className="font-medium text-white/90">Social Search</div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   Find people, posts, and hashtags
                 </div>
               </div>
@@ -699,7 +687,7 @@ export const AccessibilityShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <p className="text-white/60 text-sm">
+          <p className="text-sm text-white/60">
             Try navigating with keyboard: Tab to focus, Arrow keys to navigate
             suggestions, Enter to select
           </p>
@@ -757,7 +745,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Ocean Theme</h3>
+        <h3 className="font-medium text-sm text-white/80">Ocean Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
           <GlassSearch
             placeholder="Search the depths..."
@@ -768,7 +756,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Sunset Theme</h3>
+        <h3 className="font-medium text-sm text-white/80">Sunset Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
           <GlassSearch
             placeholder="Discover something new..."
@@ -779,7 +767,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Forest Theme</h3>
+        <h3 className="font-medium text-sm text-white/80">Forest Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
           <GlassSearch
             placeholder="Explore nature..."

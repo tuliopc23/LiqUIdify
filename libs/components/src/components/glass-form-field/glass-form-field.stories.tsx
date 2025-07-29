@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
-  AlertCircle,
   CheckCircle,
   CreditCard,
   Eye,
@@ -17,14 +16,11 @@ import { GlassSelect } from '../glass-select/glass-select';
 import { GlassTextarea } from '../glass-textarea/glass-textarea';
 import { GlassFormField } from './glass-form-field';
 
-const meta = {
-  title: 'Components/Forms/GlassFormField',
+const meta = { title: 'Components/Forms/GlassFormField' }
   component: GlassFormField,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: `
+  parameters: { layout: 'centered' }
+    docs: { description: {
+        component: ` }
 A comprehensive form field wrapper component with advanced glassmorphism effects, comprehensive validation states, and accessibility features.
 
 ## Features
@@ -44,12 +40,12 @@ A comprehensive form field wrapper component with advanced glassmorphism effects
 import { GlassFormField } from '@/components/glass-form-field';
 import { GlassInput } from '@/components/glass-input';
 
-// Basic usage
+{/* Basic usage  */}
 <GlassFormField label="Email" required>
   <GlassInput type="email" placeholder="Enter your email" />
 </GlassFormField>
 
-// With validation states
+{/* With validation states  */}
 <GlassFormField
   label="Password"
   error="Password must be at least 8 characters"
@@ -58,7 +54,7 @@ import { GlassInput } from '@/components/glass-input';
   <GlassInput type="password" placeholder="Enter password" />
 </GlassFormField>
 
-// Card variant
+{/* Card variant  */}
 <GlassFormField
   variant="card"
   label="Description"
@@ -67,7 +63,7 @@ import { GlassInput } from '@/components/glass-input';
   <GlassTextarea placeholder="Enter description..." />
 </GlassFormField>
 
-// Inline variant
+{/* Inline variant  */}
 <GlassFormField
   variant="inline"
   label="Subscribe"
@@ -97,17 +93,15 @@ The form field component follows WAI-ARIA guidelines:
   },
   tags: ['autodocs'],
   argTypes: {
-    // Layout & Structure
-    variant: {
-      control: 'select',
+    {/* Layout & Structure  */}
+    variant: { control: 'select' }
       options: ['default', 'card', 'inline'],
       description: 'Visual variant of the form field',
       table: {
         defaultValue: { summary: 'default' },
       },
     },
-    size: {
-      control: 'select',
+    size: { control: 'select' }
       options: ['sm', 'md', 'lg'],
       description: 'Size of the form field',
       table: {
@@ -115,54 +109,45 @@ The form field component follows WAI-ARIA guidelines:
       },
     },
 
-    // Content
-    label: {
-      control: 'text',
+    {/* Content  */}
+    label: { control: 'text' }
       description: 'Label text for the form field',
     },
-    helperText: {
-      control: 'text',
+    helperText: { control: 'text' }
       description: 'Helper text displayed below the input',
     },
 
-    // Validation States
-    error: {
-      control: 'text',
+    {/* Validation States  */}
+    error: { control: 'text' }
       description: 'Error message (displays in red with alert icon)',
     },
-    success: {
-      control: 'text',
+    success: { control: 'text' }
       description: 'Success message (displays in green with check icon)',
     },
-    warning: {
-      control: 'text',
+    warning: { control: 'text' }
       description: 'Warning message (displays in yellow with info icon)',
     },
 
-    // Behavior
-    required: {
-      control: 'boolean',
+    {/* Behavior  */}
+    required: { control: 'boolean' }
       description: 'Whether the field is required (adds asterisk to label)',
       table: {
         defaultValue: { summary: 'false' },
       },
     },
-    disabled: {
-      control: 'boolean',
+    disabled: { control: 'boolean' }
       description: 'Whether the field is disabled',
       table: {
         defaultValue: { summary: 'false' },
       },
     },
 
-    // Advanced
-    htmlFor: {
-      control: 'text',
+    {/* Advanced  */}
+    htmlFor: { control: 'text' }
       description:
         'Custom ID for the form control (auto-generated if not provided)',
     },
-    className: {
-      control: 'text',
+    className: { control: 'text' }
       description: 'Additional CSS classes',
     },
   },
@@ -171,10 +156,9 @@ The form field component follows WAI-ARIA guidelines:
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Basic playground story
-export const Playground: Story = {
-  args: {
-    label: 'Email Address',
+{/* Basic playground story  */}
+export const Playground: Story = { args: {
+    label: 'Email Address' }
     helperText: 'We will never share your email with anyone',
     required: false,
     disabled: false,
@@ -187,16 +171,14 @@ export const Playground: Story = {
         <GlassInput
           type="email"
           placeholder="Enter your email"
-          leftIcon={<Mail className="h-4 w-4" />}
-        />
+          leftIcon={<Mail className="h-4 w-4" />} />
       </GlassFormField>
     </div>
   ),
 };
 
-// Variants showcase
-export const Variants: Story = {
-  render: () => (
+{/* Variants showcase  */}
+export const Variants: Story = { render: () => (
     <div className="space-y-8">
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
@@ -222,7 +204,7 @@ export const Variants: Story = {
             variant="card"
             label="Bio"
             helperText="Tell us about yourself"
-          >
+          > }
             <GlassTextarea placeholder="Write your bio here..." rows={3} />
           </GlassFormField>
         </div>
@@ -235,7 +217,7 @@ export const Variants: Story = {
         <div className="w-80">
           <GlassFormField variant="inline" label="Newsletter">
             <div className="flex items-center">
-              <input type="checkbox" className="mr-2" />
+              <input id="input-236" type="checkbox" className="mr-2" / />
               <span className="text-sm text-white/70">
                 Subscribe to updates
               </span>
@@ -247,10 +229,9 @@ export const Variants: Story = {
   ),
 };
 
-// Sizes showcase
-export const Sizes: Story = {
-  render: () => (
-    <div className="space-y-6">
+{/* Sizes showcase  */}
+export const Sizes: Story = { render: () => (
+    <div className="space-y-6"> }
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <div key={size} className="w-80">
           <h3 className="mb-3 font-medium text-white/90">Size: {size}</h3>
@@ -268,9 +249,8 @@ export const Sizes: Story = {
   ),
 };
 
-// Validation states showcase
-export const ValidationStates: Story = {
-  render: () => (
+{/* Validation states showcase  */}
+export const ValidationStates: Story = { render: () => (
     <div className="space-y-6">
       <div className="w-80">
         <h3 className="mb-3 font-medium text-white/90">Default State</h3>
@@ -322,12 +302,11 @@ export const ValidationStates: Story = {
         </GlassFormField>
       </div>
     </div>
-  ),
+  ) }
 };
 
-// Different input types
-export const InputTypes: Story = {
-  render: () => (
+{/* Different input types  */}
+export const InputTypes: Story = { render: () => (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       <GlassFormField
         label="Email"
@@ -336,17 +315,15 @@ export const InputTypes: Story = {
       >
         <GlassInput
           type="email"
-          placeholder="john@example.com"
-          leftIcon={<Mail className="h-4 w-4" />}
-        />
+          placeholder="john@example.com" }
+          leftIcon={<Mail className="h-4 w-4" />} />
       </GlassFormField>
 
       <GlassFormField label="Phone Number" helperText="Include country code">
         <GlassInput
           type="tel"
           placeholder="+1 (555) 123-4567"
-          leftIcon={<Phone className="h-4 w-4" />}
-        />
+          leftIcon={<Phone className="h-4 w-4" />} />
       </GlassFormField>
 
       <GlassFormField label="Country" required>
@@ -357,8 +334,7 @@ export const InputTypes: Story = {
             { value: 'uk', label: 'United Kingdom' },
             { value: 'de', label: 'Germany' },
           ]}
-          placeholder="Select country"
-        />
+          placeholder="Select country" />
       </GlassFormField>
 
       <GlassFormField
@@ -372,11 +348,9 @@ export const InputTypes: Story = {
   ),
 };
 
-// Real-world examples
-export const RealWorldExamples: Story = {
-  render: () => {
-    const [formData, setFormData] = useState({
-      email: '',
+{/* Real-world examples  */}
+export const RealWorldExamples: Story = { render: () => { }
+    const [formData, setFormData] = useState({ email: '' }
       password: '',
       confirmPassword: '',
       firstName: '',
@@ -399,11 +373,10 @@ export const RealWorldExamples: Story = {
     const handleInputChange = (field: string, value: string) => {
       setFormData((prev) => ({ ...prev, [field]: value }));
 
-      // Clear error when user starts typing
+      {/* Clear error when user starts typing  */}
       if (errors[field]) {
         setErrors((prev) => ({ ...prev, [field]: '' }));
-      }
-    };
+      };
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -430,12 +403,11 @@ export const RealWorldExamples: Story = {
 
       if (Object.keys(newErrors).length === 0) {
         alert('Form submitted successfully!');
-      }
-    };
+      };
 
     return (
       <div className="w-full max-w-md">
-        <h3 className="mb-6 font-bold text-xl text-white/90">Create Account</h3>
+        <h3 className="mb-6 font-bold text-white/90 text-xl">Create Account</h3>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
@@ -448,16 +420,14 @@ export const RealWorldExamples: Story = {
                 placeholder="John"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange('firstName', e.target.value)}
-                leftIcon={<User className="h-4 w-4" />}
-              />
+                leftIcon={<User className="h-4 w-4" />} />
             </GlassFormField>
 
             <GlassFormField label="Last Name" required error={errors.lastName}>
               <GlassInput
                 placeholder="Doe"
                 value={formData.lastName}
-                onChange={(e) => handleInputChange('lastName', e.target.value)}
-              />
+                onChange={(e) => handleInputChange('lastName', e.target.value)} />
             </GlassFormField>
           </div>
 
@@ -476,8 +446,7 @@ export const RealWorldExamples: Story = {
               placeholder="john@example.com"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              leftIcon={<Mail className="h-4 w-4" />}
-            />
+              leftIcon={<Mail className="h-4 w-4" />} />
           </GlassFormField>
 
           <GlassFormField
@@ -495,7 +464,7 @@ export const RealWorldExamples: Story = {
               rightIcon={
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+              onClick={() => setShowPassword(!showPassword)}
                   className="text-white/60 hover:text-white/90"
                 >
                   {showPassword ? (
@@ -504,8 +473,7 @@ export const RealWorldExamples: Story = {
                     <Eye className="h-4 w-4" />
                   )}
                 </button>
-              }
-            />
+              } />
           </GlassFormField>
 
           <GlassFormField
@@ -520,8 +488,7 @@ export const RealWorldExamples: Story = {
               onChange={(e) =>
                 handleInputChange('confirmPassword', e.target.value)
               }
-              leftIcon={<Lock className="h-4 w-4" />}
-            />
+              leftIcon={<Lock className="h-4 w-4" />} />
           </GlassFormField>
 
           <GlassFormField label="Country" required error={errors.country}>
@@ -536,8 +503,7 @@ export const RealWorldExamples: Story = {
                 { value: 'fr', label: 'France' },
                 { value: 'jp', label: 'Japan' },
               ]}
-              placeholder="Select your country"
-            />
+              placeholder="Select your country" />
           </GlassFormField>
 
           <div className="pt-4">
@@ -556,9 +522,8 @@ export const RealWorldExamples: Story = {
   },
 };
 
-// Interactive playground
-export const InteractiveDemo: Story = {
-  render: () => {
+{/* Interactive playground  */}
+export const InteractiveDemo: Story = { render: () => { }
     const [fieldState, setFieldState] = useState<
       'default' | 'error' | 'success' | 'warning'
     >('default');
@@ -579,8 +544,7 @@ export const InteractiveDemo: Story = {
           return { warning: 'This field has a warning' };
         default:
           return { helperText: 'This is helper text' };
-      }
-    };
+      };
 
     return (
       <div className="space-y-8">
@@ -590,10 +554,10 @@ export const InteractiveDemo: Story = {
           </h3>
           <div className="grid grid-cols-2 gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm md:grid-cols-4">
             <div>
-              <label className="mb-2 block text-sm font-medium text-white/90">
+              <label htmlFor="state-dvqv2f" className="mb-2 block font-medium text-sm text-white/90">
                 State
               </label>
-              <select
+              <select id="select-1-s6d1zt" 
                 value={fieldState}
                 onChange={(e) =>
                   setFieldState(
@@ -614,10 +578,10 @@ export const InteractiveDemo: Story = {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium text-white/90">
+              <label htmlFor="variant-yqlnr8" className="mb-2 block font-medium text-sm text-white/90">
                 Variant
               </label>
-              <select
+              <select id="select-2-g1he0o" 
                 value={variant}
                 onChange={(e) =>
                   setVariant(e.target.value as 'default' | 'card' | 'inline')
@@ -631,10 +595,10 @@ export const InteractiveDemo: Story = {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium text-white/90">
+              <label htmlFor="size-gc5vu1" className="mb-2 block font-medium text-sm text-white/90">
                 Size
               </label>
-              <select
+              <select id="select-3-e4wrh6" 
                 value={size}
                 onChange={(e) => setSize(e.target.value as 'sm' | 'md' | 'lg')}
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
@@ -646,21 +610,19 @@ export const InteractiveDemo: Story = {
             </div>
 
             <div className="space-y-2">
-              <label className="flex items-center gap-2">
-                <input
+              <label htmlFor="form-field" className="flex items-center gap-2">
+                <input id="input-636" 
                   type="checkbox"
                   checked={isRequired}
-                  onChange={(e) => setIsRequired(e.target.checked)}
-                />
+                  onChange={(e) => setIsRequired(e.target.checked)} />
                 <span className="text-sm text-white/90">Required</span>
               </label>
 
-              <label className="flex items-center gap-2">
-                <input
+              <label htmlFor="form-field" className="flex items-center gap-2">
+                <input id="input-644" 
                   type="checkbox"
                   checked={isDisabled}
-                  onChange={(e) => setIsDisabled(e.target.checked)}
-                />
+                  onChange={(e) => setIsDisabled(e.target.checked)} />
                 <span className="text-sm text-white/90">Disabled</span>
               </label>
             </div>
@@ -682,8 +644,7 @@ export const InteractiveDemo: Story = {
             >
               <GlassInput
                 placeholder="Type something..."
-                leftIcon={<CreditCard className="h-4 w-4" />}
-              />
+                leftIcon={<CreditCard className="h-4 w-4" />} />
             </GlassFormField>
           </div>
         </div>
@@ -692,9 +653,8 @@ export const InteractiveDemo: Story = {
   },
 };
 
-// Theme showcase
-export const ThemeShowcase: Story = {
-  render: () => (
+{/* Theme showcase  */}
+export const ThemeShowcase: Story = { render: () => (
     <div className="space-y-8">
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
@@ -709,9 +669,8 @@ export const ThemeShowcase: Story = {
             >
               <GlassInput
                 type="email"
-                placeholder="john@example.com"
-                leftIcon={<Mail className="h-4 w-4" />}
-              />
+                placeholder="john@example.com" }
+                leftIcon={<Mail className="h-4 w-4" />} />
             </GlassFormField>
           </div>
         </div>
@@ -731,8 +690,7 @@ export const ThemeShowcase: Story = {
               <GlassInput
                 type="email"
                 placeholder="john@example.com"
-                leftIcon={<Mail className="h-4 w-4" />}
-              />
+                leftIcon={<Mail className="h-4 w-4" />} />
             </GlassFormField>
           </div>
         </div>
@@ -752,8 +710,7 @@ export const ThemeShowcase: Story = {
               <GlassInput
                 type="email"
                 placeholder="john@example.com"
-                leftIcon={<Mail className="h-4 w-4" />}
-              />
+                leftIcon={<Mail className="h-4 w-4" />} />
             </GlassFormField>
           </div>
         </div>
@@ -762,9 +719,8 @@ export const ThemeShowcase: Story = {
   ),
 };
 
-// Accessibility showcase
-export const AccessibilityShowcase: Story = {
-  render: () => (
+{/* Accessibility showcase  */}
+export const AccessibilityShowcase: Story = { render: () => (
     <div className="space-y-8">
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
@@ -804,7 +760,7 @@ export const AccessibilityShowcase: Story = {
         <h3 className="mb-4 font-semibold text-lg text-white/90">
           Keyboard Navigation Test
         </h3>
-        <div className="space-y-4 w-80">
+        <div className="w-80 space-y-4">
           <GlassFormField
             label="First Name"
             helperText="Use Tab to navigate between fields"
@@ -824,15 +780,13 @@ export const AccessibilityShowcase: Story = {
           >
             <GlassInput
               type="email"
-              placeholder="Error state for screen readers"
-            />
+              placeholder="Error state for screen readers" />
           </GlassFormField>
 
           <GlassFormField label="Comments" helperText="Shift+Tab to go back">
             <GlassTextarea
-              placeholder="Test keyboard navigation here..."
-              rows={3}
-            />
+              placeholder="Test keyboard navigation here..." }
+              rows={3} />
           </GlassFormField>
         </div>
       </div>
@@ -849,8 +803,7 @@ export const AccessibilityShowcase: Story = {
           >
             <GlassInput
               placeholder="Try with a screen reader"
-              aria-label="Screen reader friendly input field"
-            />
+              aria-label="Screen reader friendly input field" />
           </GlassFormField>
         </div>
       </div>

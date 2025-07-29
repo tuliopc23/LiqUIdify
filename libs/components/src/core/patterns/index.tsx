@@ -138,7 +138,7 @@ export const createSlotComponent = (
   slots: Record<string, React.ComponentType<any>>
 ) => {
   return ({ children }: { children: React.ReactNode }) => {
-    const slotElements: Record<string, Array<React.ReactNode>> = {};
+    const slotElements: Record<string, React.Array<ReactNode>> = {};
 
     React.Children.forEach(children, (child) => {
       if (React.isValidElement(child) && child.props.slot) {

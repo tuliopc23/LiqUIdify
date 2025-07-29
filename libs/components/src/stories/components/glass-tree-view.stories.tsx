@@ -8,46 +8,36 @@ import {
   type TreeNode,
 } from '@/components/glass-tree-view/glass-tree-view';
 
-const meta = {
-  title: 'Components/Glass Tree View',
+const meta = { title: 'Components/Glass Tree View' }
   component: GlassTreeView,
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        component:
+  parameters: { layout: 'padded' }
+    docs: { description: {
+        component: }
           'A hierarchical tree view component with glassmorphism styling. Supports nested structures, custom icons, selection states, and expand/collapse animations.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    nodes: {
-      description: 'Tree nodes to display',
+  argTypes: { nodes: {
+      description: 'Tree nodes to display' }
       control: false,
     },
-    onNodeSelect: {
-      description: 'Callback when a node is selected',
+    onNodeSelect: { description: 'Callback when a node is selected' }
       action: 'node selected',
     },
-    onNodeExpand: {
-      description: 'Callback when a node is expanded/collapsed',
+    onNodeExpand: { description: 'Callback when a node is expanded/collapsed' }
       action: 'node toggled',
     },
-    selectedNodeId: {
-      description: 'ID of the selected node',
+    selectedNodeId: { description: 'ID of the selected node' }
       control: { type: 'text' },
     },
-    expandedNodeIds: {
-      description: 'IDs of expanded nodes',
+    expandedNodeIds: { description: 'IDs of expanded nodes' }
       control: false,
     },
-    showIcons: {
-      description: 'Show node icons',
+    showIcons: { description: 'Show node icons' }
       control: { type: 'boolean' },
     },
-    indentSize: {
-      description: 'Indentation size in pixels',
+    indentSize: { description: 'Indentation size in pixels' }
       control: { type: 'number', min: 10, max: 40, step: 5 },
     },
   },
@@ -56,14 +46,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const fileSystemNodes: TreeNode[] = [
-  {
-    id: 'src',
+const fileSystemNodes: Array<TreeNode> = [
+  { id: 'src' }
     label: 'src',
     defaultExpanded: true,
     children: [
-      {
-        id: 'components',
+      { id: 'components' }
         label: 'components',
         defaultExpanded: true,
         children: [
@@ -72,8 +60,7 @@ const fileSystemNodes: TreeNode[] = [
           { id: 'Modal.tsx', label: 'Modal.tsx' },
         ],
       },
-      {
-        id: 'utils',
+      { id: 'utils' }
         label: 'utils',
         children: [
           { id: 'helpers.ts', label: 'helpers.ts' },
@@ -84,8 +71,7 @@ const fileSystemNodes: TreeNode[] = [
       { id: 'index.tsx', label: 'index.tsx' },
     ],
   },
-  {
-    id: 'public',
+  { id: 'public' }
     label: 'public',
     children: [
       { id: 'index.html', label: 'index.html' },
@@ -96,22 +82,20 @@ const fileSystemNodes: TreeNode[] = [
   { id: 'README.md', label: 'README.md' },
 ];
 
-export const Default: Story = {
-  args: {
-    nodes: fileSystemNodes,
+export const Default: Story = { args: {
+    nodes: fileSystemNodes }
     showIcons: true,
   },
 };
 
-export const WithSelection: Story = {
-  render: () => {
+export const WithSelection: Story = { render: () => { }
     const [selectedNodeId, setSelectedNodeId] =
       React.useState<string>('Button.tsx');
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
-          <h3 className="text-lg font-bold mb-4">File Explorer</h3>
+          <h3 className="mb-4 font-bold text-lg">File Explorer</h3>
           <GlassTreeView
             nodes={fileSystemNodes}
             selectedNodeId={selectedNodeId}
@@ -119,7 +103,7 @@ export const WithSelection: Story = {
           />
         </div>
         <div>
-          <h3 className="text-lg font-bold mb-4">Selected File</h3>
+          <h3 className="mb-4 font-bold text-lg">Selected File</h3>
           <GlassCard className="p-6">
             <p className="text-[var(--text-secondary)]">
               {selectedNodeId
@@ -131,100 +115,83 @@ export const WithSelection: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Tree view with selection state management',
+        story: 'Tree view with selection state management' }
       },
     },
   },
 };
 
-export const DatabaseSchema: Story = {
-  args: {
+export const DatabaseSchema: Story = { args: {
     nodes: [
       {
-        id: 'database',
+        id: 'database' }
         label: 'Production Database',
         icon: <Database className="h-4 w-4" />,
         defaultExpanded: true,
         children: [
-          {
-            id: 'users-table',
+          { id: 'users-table' }
             label: 'users',
             icon: <Table className="h-4 w-4" />,
             children: [
-              {
-                id: 'users-id',
+              { id: 'users-id' }
                 label: 'id',
                 icon: <Key className="h-4 w-4" />,
               },
-              {
-                id: 'users-name',
+              { id: 'users-name' }
                 label: 'name',
                 icon: <Type className="h-4 w-4" />,
               },
-              {
-                id: 'users-email',
+              { id: 'users-email' }
                 label: 'email',
                 icon: <Type className="h-4 w-4" />,
               },
-              {
-                id: 'users-created',
+              { id: 'users-created' }
                 label: 'created_at',
                 icon: <Type className="h-4 w-4" />,
               },
             ],
           },
-          {
-            id: 'posts-table',
+          { id: 'posts-table' }
             label: 'posts',
             icon: <Table className="h-4 w-4" />,
             children: [
-              {
-                id: 'posts-id',
+              { id: 'posts-id' }
                 label: 'id',
                 icon: <Key className="h-4 w-4" />,
               },
-              {
-                id: 'posts-title',
+              { id: 'posts-title' }
                 label: 'title',
                 icon: <Type className="h-4 w-4" />,
               },
-              {
-                id: 'posts-content',
+              { id: 'posts-content' }
                 label: 'content',
                 icon: <Type className="h-4 w-4" />,
               },
-              {
-                id: 'posts-user-id',
+              { id: 'posts-user-id' }
                 label: 'user_id',
                 icon: <Columns className="h-4 w-4" />,
               },
             ],
           },
-          {
-            id: 'comments-table',
+          { id: 'comments-table' }
             label: 'comments',
             icon: <Table className="h-4 w-4" />,
             children: [
-              {
-                id: 'comments-id',
+              { id: 'comments-id' }
                 label: 'id',
                 icon: <Key className="h-4 w-4" />,
               },
-              {
-                id: 'comments-text',
+              { id: 'comments-text' }
                 label: 'text',
                 icon: <Type className="h-4 w-4" />,
               },
-              {
-                id: 'comments-post-id',
+              { id: 'comments-post-id' }
                 label: 'post_id',
                 icon: <Columns className="h-4 w-4" />,
               },
-              {
-                id: 'comments-user-id',
+              { id: 'comments-user-id' }
                 label: 'user_id',
                 icon: <Columns className="h-4 w-4" />,
               },
@@ -234,20 +201,18 @@ export const DatabaseSchema: Story = {
       },
     ],
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Database schema visualization with custom icons',
+        story: 'Database schema visualization with custom icons' }
       },
     },
   },
 };
 
-export const ControlledExpansion: Story = {
-  render: () => {
-    const [expandedNodeIds, setExpandedNodeIds] = React.useState<string[]>([
-      'src',
-    ]);
+export const ControlledExpansion: Story = { render: () => { }
+    const [expandedNodeIds, setExpandedNodeIds] = React.useState<string[]>(
+      ['src']
+    );
 
     const handleNodeExpand = (node: TreeNode, expanded: boolean) => {
       setExpandedNodeIds((prev) => {
@@ -262,27 +227,24 @@ export const ControlledExpansion: Story = {
       <div className="space-y-4">
         <div className="flex gap-2">
           <GlassButton
-            size="sm"
-            onClick={() => {
-              const allNodeIds: string[] = [];
-              const collectIds = (nodes: TreeNode[]) => {
+            type="button"
+            size="sm" onClick={() => {
+              const allNodeIds: Array<string> = [];
+              const collectIds = (nodes: Array<TreeNode>) => {
                 nodes.forEach((node) => {
                   if (node.children) {
                     allNodeIds.push(node.id);
                     collectIds(node.children);
-                  }
-                });
+                  };
               };
               collectIds(fileSystemNodes);
-              setExpandedNodeIds(allNodeIds);
-            }}
-          >
+              setExpandedNodeIds(allNodeIds);>
             Expand All
           </GlassButton>
           <GlassButton
+            type="button"
             size="sm"
-            variant="ghost"
-            onClick={() => setExpandedNodeIds([])}
+            variant="ghost" onClick={() => setExpandedNodeIds([])}
           >
             Collapse All
           </GlassButton>
@@ -296,21 +258,19 @@ export const ControlledExpansion: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
         story:
-          'Controlled expansion state with expand/collapse all functionality',
+          'Controlled expansion state with expand/collapse all functionality' }
       },
     },
   },
 };
 
-export const SettingsMenu: Story = {
-  args: {
+export const SettingsMenu: Story = { args: {
     nodes: [
       {
-        id: 'general',
+        id: 'general' }
         label: 'General',
         icon: <Settings className="h-4 w-4" />,
         defaultExpanded: true,
@@ -320,8 +280,7 @@ export const SettingsMenu: Story = {
           { id: 'accessibility', label: 'Accessibility' },
         ],
       },
-      {
-        id: 'privacy',
+      { id: 'privacy' }
         label: 'Privacy & Security',
         children: [
           { id: 'passwords', label: 'Passwords' },
@@ -329,8 +288,7 @@ export const SettingsMenu: Story = {
           { id: 'privacy-settings', label: 'Privacy Settings' },
         ],
       },
-      {
-        id: 'notifications',
+      { id: 'notifications' }
         label: 'Notifications',
         children: [
           { id: 'email-notif', label: 'Email' },
@@ -338,8 +296,7 @@ export const SettingsMenu: Story = {
           { id: 'sms-notif', label: 'SMS' },
         ],
       },
-      {
-        id: 'advanced',
+      { id: 'advanced' }
         label: 'Advanced',
         children: [
           { id: 'developer', label: 'Developer Options' },
@@ -350,61 +307,51 @@ export const SettingsMenu: Story = {
     ],
     showIcons: true,
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Settings menu structure using tree view',
+        story: 'Settings menu structure using tree view' }
       },
     },
   },
 };
 
-export const WithDataBinding: Story = {
-  render: () => {
+export const WithDataBinding: Story = { render: () => { }
     const [selectedNode, setSelectedNode] = React.useState<TreeNode | null>(
       null
     );
 
-    const nodesWithData: TreeNode[] = [
-      {
-        id: 'products',
+    const nodesWithData: Array<TreeNode> = [
+      { id: 'products' }
         label: 'Products',
         defaultExpanded: true,
         children: [
-          {
-            id: 'electronics',
+          { id: 'electronics' }
             label: 'Electronics',
             data: { category: 'electronics', itemCount: 152 },
             children: [
-              {
-                id: 'phones',
+              { id: 'phones' }
                 label: 'Phones',
                 data: { subcategory: 'phones', itemCount: 45 },
               },
-              {
-                id: 'laptops',
+              { id: 'laptops' }
                 label: 'Laptops',
                 data: { subcategory: 'laptops', itemCount: 32 },
               },
-              {
-                id: 'tablets',
+              { id: 'tablets' }
                 label: 'Tablets',
                 data: { subcategory: 'tablets', itemCount: 28 },
               },
             ],
           },
-          {
-            id: 'clothing',
+          { id: 'clothing' }
             label: 'Clothing',
             data: { category: 'clothing', itemCount: 324 },
             children: [
-              {
-                id: 'mens',
+              { id: 'mens' }
                 label: "Men's",
                 data: { subcategory: 'mens', itemCount: 156 },
               },
-              {
-                id: 'womens',
+              { id: 'womens' }
                 label: "Women's",
                 data: { subcategory: 'womens', itemCount: 168 },
               },
@@ -415,9 +362,9 @@ export const WithDataBinding: Story = {
     ];
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
-          <h3 className="text-lg font-bold mb-4">Product Categories</h3>
+          <h3 className="mb-4 font-bold text-lg">Product Categories</h3>
           <GlassTreeView
             nodes={nodesWithData}
             onNodeSelect={setSelectedNode}
@@ -425,7 +372,7 @@ export const WithDataBinding: Story = {
           />
         </div>
         <div>
-          <h3 className="text-lg font-bold mb-4">Category Details</h3>
+          <h3 className="mb-4 font-bold text-lg">Category Details</h3>
           <GlassCard className="p-6">
             {selectedNode?.data ? (
               <div className="space-y-3">
@@ -451,26 +398,23 @@ export const WithDataBinding: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Tree nodes with custom data binding',
+        story: 'Tree nodes with custom data binding' }
       },
     },
   },
 };
 
-export const CompactTree: Story = {
-  args: {
+export const CompactTree: Story = { args: {
     nodes: [
       {
-        id: 'root',
+        id: 'root' }
         label: 'Root',
         children: [
           { id: 'child1', label: 'Child 1' },
           { id: 'child2', label: 'Child 2' },
-          {
-            id: 'child3',
+          { id: 'child3' }
             label: 'Child 3',
             children: [
               { id: 'grandchild1', label: 'Grandchild 1' },
@@ -488,26 +432,23 @@ export const CompactTree: Story = {
       <GlassTreeView {...args} />
     </div>
   ),
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Compact tree view without icons and smaller indentation',
+        story: 'Compact tree view without icons and smaller indentation' }
       },
     },
   },
 };
 
-export const NonSelectableNodes: Story = {
-  args: {
+export const NonSelectableNodes: Story = { args: {
     nodes: [
       {
-        id: 'categories',
+        id: 'categories' }
         label: 'Categories',
         selectable: false,
         defaultExpanded: true,
         children: [
-          {
-            id: 'active',
+          { id: 'active' }
             label: 'Active Items',
             selectable: false,
             children: [
@@ -515,8 +456,7 @@ export const NonSelectableNodes: Story = {
               { id: 'item2', label: 'Item 2' },
             ],
           },
-          {
-            id: 'archived',
+          { id: 'archived' }
             label: 'Archived Items',
             selectable: false,
             children: [
@@ -528,10 +468,9 @@ export const NonSelectableNodes: Story = {
       },
     ],
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Tree with non-selectable parent nodes',
+        story: 'Tree with non-selectable parent nodes' }
       },
     },
   },

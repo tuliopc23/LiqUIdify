@@ -49,8 +49,7 @@ function MyComponent() {
     <GlassSwitch
       checked={isEnabled}
       onChange={setIsEnabled}
-      label="Enable notifications"
-    />
+      label="Enable notifications" />
   );
 }
 \`\`\`

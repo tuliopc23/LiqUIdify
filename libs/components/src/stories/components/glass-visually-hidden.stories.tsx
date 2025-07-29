@@ -41,48 +41,48 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <div className="p-8 max-w-2xl">
+    <div className="max-w-2xl p-8">
       <GlassCard className="p-6">
-        <h2 className="text-xl font-bold mb-4">Visually Hidden Content Demo</h2>
-        <p className="text-[var(--text-secondary)] mb-6">
+        <h2 className="mb-4 font-bold text-xl">Visually Hidden Content Demo</h2>
+        <p className="mb-6 text-[var(--text-secondary)]">
           The following examples demonstrate content that is hidden visually but
           available to screen readers.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="font-medium mb-3">
+            <h3 className="mb-3 font-medium">
               Icon Buttons with Hidden Labels
             </h3>
             <div className="flex gap-3">
-              <GlassButton variant="ghost" size="sm">
-                <Download className="w-4 h-4" />
+              <GlassButton type="button" variant="ghost" size="sm">
+                <Download className="h-4 w-4" />
                 <GlassVisuallyHidden>Download file</GlassVisuallyHidden>
               </GlassButton>
 
-              <GlassButton variant="ghost" size="sm">
-                <Edit className="w-4 h-4" />
+              <GlassButton type="button" variant="ghost" size="sm">
+                <Edit className="h-4 w-4" />
                 <GlassVisuallyHidden>Edit document</GlassVisuallyHidden>
               </GlassButton>
 
-              <GlassButton variant="ghost" size="sm">
-                <Save className="w-4 h-4" />
+              <GlassButton type="button" variant="ghost" size="sm">
+                <Save className="h-4 w-4" />
                 <GlassVisuallyHidden>Save changes</GlassVisuallyHidden>
               </GlassButton>
 
-              <GlassButton variant="danger" size="sm">
-                <Trash className="w-4 h-4" />
+              <GlassButton type="button" variant="danger" size="sm">
+                <Trash className="h-4 w-4" />
                 <GlassVisuallyHidden>Delete item</GlassVisuallyHidden>
               </GlassButton>
             </div>
-            <p className="text-sm text-[var(--text-secondary)] mt-2">
+            <p className="mt-2 text-[var(--text-secondary)] text-sm">
               These buttons appear as icon-only but have descriptive text for
               screen readers.
             </p>
           </div>
 
           <div>
-            <h3 className="font-medium mb-3">Form with Hidden Labels</h3>
+            <h3 className="mb-3 font-medium">Form with Hidden Labels</h3>
             <form className="space-y-3">
               <div>
                 <GlassVisuallyHidden as="label" htmlFor="search">
@@ -102,16 +102,16 @@ export const Default: Story = {
           </div>
 
           <div>
-            <h3 className="font-medium mb-3">Skip Links</h3>
+            <h3 className="mb-3 font-medium">Skip Links</h3>
             <GlassVisuallyHidden focusable>
               <a
                 href="#main-content"
-                className="focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-500 focus:text-white focus:rounded"
+                className="focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-blue-500 focus:px-4 focus:py-2 focus:text-white"
               >
                 Skip to main content
               </a>
             </GlassVisuallyHidden>
-            <p className="text-sm text-[var(--text-secondary)]">
+            <p className="text-[var(--text-secondary)] text-sm">
               Tab to reveal the skip link (only visible when focused).
             </p>
           </div>
@@ -130,9 +130,9 @@ export const FormAccessibility: Story = {
     });
 
     return (
-      <div className="p-8 max-w-md">
+      <div className="max-w-md p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">
+          <h2 className="mb-4 font-bold text-xl">
             Accessible Form
             <GlassVisuallyHidden>
               {' '}
@@ -144,7 +144,7 @@ export const FormAccessibility: Story = {
             <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium mb-1"
+                className="mb-1 block font-medium text-sm"
               >
                 Username
                 <GlassVisuallyHidden>
@@ -168,7 +168,7 @@ export const FormAccessibility: Story = {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-1">
+              <label htmlFor="email" className="mb-1 block font-medium text-sm">
                 Email
                 <GlassVisuallyHidden>
                   {' '}
@@ -189,7 +189,7 @@ export const FormAccessibility: Story = {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium mb-1"
+                className="mb-1 block font-medium text-sm"
               >
                 Password
                 <GlassVisuallyHidden>
@@ -247,7 +247,7 @@ export const DataTable: Story = {
     return (
       <div className="p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Team Members</h2>
+          <h2 className="mb-4 font-bold text-xl">Team Members</h2>
 
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -255,34 +255,37 @@ export const DataTable: Story = {
                 Team member list showing name, role, and current status
               </caption>
               <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left py-2 px-4">Name</th>
-                  <th className="text-left py-2 px-4">Role</th>
-                  <th className="text-left py-2 px-4">Status</th>
-                  <th className="text-left py-2 px-4">
+                <tr className="border-white/10 border-b">
+                  <th className="px-4 py-2 text-left">Name</th>
+                  <th className="px-4 py-2 text-left">Role</th>
+                  <th className="px-4 py-2 text-left">Status</th>
+                  <th className="px-4 py-2 text-left">
                     <GlassVisuallyHidden>Actions</GlassVisuallyHidden>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((member) => (
-                  <tr key={member.id} className="border-b border-white/5">
-                    <td className="py-3 px-4">{member.name}</td>
-                    <td className="py-3 px-4">{member.role}</td>
-                    <td className="py-3 px-4">
+                  <tr key={member.id} className="border-white/5 border-b">
+                    <td className="px-4 py-3">{member.name}</td>
+                    <td className="px-4 py-3">{member.role}</td>
+                    <td className="px-4 py-3">
                       <span
-                        className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs ${
+                        className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs ${
                           member.status === 'Active'
                             ? 'bg-green-500/20 text-green-500'
                             : 'bg-yellow-500/20 text-yellow-500'
                         }`}
                       >
-                        <span className="w-2 h-2 rounded-full bg-current" />
+                        <span className="h-2 w-2 rounded-full bg-current" />
                         {member.status}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
-                      <button className="text-blue-500 hover:underline">
+                    <td className="px-4 py-3">
+                      <button
+                        type="button"
+                        className="text-blue-500 hover:underline"
+                      >
                         Edit
                         <GlassVisuallyHidden>
                           {' '}
@@ -296,7 +299,7 @@ export const DataTable: Story = {
             </table>
           </div>
 
-          <div className="mt-4 text-sm text-[var(--text-secondary)]">
+          <div className="mt-4 text-[var(--text-secondary)] text-sm">
             <GlassVisuallyHidden>
               Table shows {data.length} team members.
               {data.filter((m) => m.status === 'Active').length} are currently
@@ -329,9 +332,9 @@ export const NavigationContext: Story = {
     ];
 
     return (
-      <div className="p-8 max-w-lg">
+      <div className="max-w-lg p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">Navigation with Context</h2>
+          <h2 className="mb-4 font-bold text-xl">Navigation with Context</h2>
 
           <nav aria-label="Main navigation">
             <GlassVisuallyHidden as="h3">Main Menu</GlassVisuallyHidden>
@@ -339,8 +342,9 @@ export const NavigationContext: Story = {
               {navItems.map((item) => (
                 <li key={item.id}>
                   <button
+                    type="button"
                     onClick={() => setCurrentPage(item.id)}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
+                    className={`w-full rounded-lg px-4 py-3 text-left transition-all ${
                       currentPage === item.id
                         ? 'bg-blue-500/20 text-blue-500'
                         : 'hover:bg-white/5'
@@ -350,7 +354,7 @@ export const NavigationContext: Story = {
                     <span className="flex items-center justify-between">
                       <span>{item.label}</span>
                       {item.badge && (
-                        <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                        <span className="rounded-full bg-red-500 px-2 py-1 text-white text-xs">
                           {item.badge}
                           <GlassVisuallyHidden>
                             {' '}
@@ -368,8 +372,8 @@ export const NavigationContext: Story = {
             </ul>
           </nav>
 
-          <div className="mt-6 p-4 glass-effect rounded-lg">
-            <p className="text-sm text-[var(--text-secondary)]">
+          <div className="glass-effect mt-6 rounded-lg p-4">
+            <p className="text-[var(--text-secondary)] text-sm">
               Current page:{' '}
               <strong>
                 {navItems.find((i) => i.id === currentPage)?.label}
@@ -415,9 +419,9 @@ export const ComplexInteractions: Story = {
     ];
 
     return (
-      <div className="p-8 max-w-2xl">
+      <div className="max-w-2xl p-8">
         <GlassCard className="p-6">
-          <h2 className="text-xl font-bold mb-4">
+          <h2 className="mb-4 font-bold text-xl">
             Project Dashboard
             <GlassVisuallyHidden>
               {' '}
@@ -428,7 +432,7 @@ export const ComplexInteractions: Story = {
           <div className="space-y-4">
             {cards.map((card) => (
               <div key={card.id} className="glass-effect rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
+                <div className="mb-2 flex items-center justify-between">
                   <h3 className="font-medium">
                     {card.title}
                     <GlassVisuallyHidden>
@@ -436,6 +440,7 @@ export const ComplexInteractions: Story = {
                     </GlassVisuallyHidden>
                   </h3>
                   <button
+                    type="button"
                     onClick={() => toggleCard(card.id)}
                     className="text-blue-500 text-sm"
                     aria-expanded={expandedCards.has(card.id)}
@@ -448,7 +453,7 @@ export const ComplexInteractions: Story = {
 
                 <div className="flex items-center gap-4 text-sm">
                   <span
-                    className={`px-2 py-1 rounded text-xs ${
+                    className={`rounded px-2 py-1 text-xs ${
                       card.status === 'Completed'
                         ? 'bg-green-500/20 text-green-500'
                         : card.status === 'In Progress'
@@ -464,11 +469,11 @@ export const ComplexInteractions: Story = {
                       Progress: {card.progress}% complete
                     </GlassVisuallyHidden>
                     <div
-                      className="w-full bg-white/10 rounded-full h-2"
+                      className="h-2 w-full rounded-full bg-white/10"
                       aria-hidden="true"
                     >
                       <div
-                        className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all"
+                        className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all"
                         style={{ width: `${card.progress}%` }}
                       />
                     </div>
@@ -480,7 +485,7 @@ export const ComplexInteractions: Story = {
                 {expandedCards.has(card.id) && (
                   <div
                     id={`details-${card.id}`}
-                    className="mt-4 text-sm text-[var(--text-secondary)]"
+                    className="mt-4 text-[var(--text-secondary)] text-sm"
                   >
                     <p>Additional project details would appear here...</p>
                     <GlassVisuallyHidden>

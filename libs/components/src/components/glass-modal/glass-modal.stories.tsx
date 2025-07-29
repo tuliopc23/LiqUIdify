@@ -25,14 +25,11 @@ import { GlassCheckbox } from '../glass-checkbox/glass-checkbox';
 import { GlassInput } from '../glass-input/glass-input';
 import { GlassModal } from './glass-modal';
 
-const meta = {
-  title: 'Components/Overlays/GlassModal',
+const meta = { title: 'Components/Overlays/GlassModal' }
   component: GlassModal,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: `
+  parameters: { layout: 'centered' }
+    docs: { description: {
+        component: ` }
 A glassmorphic modal dialog component with focus management, animations, and comprehensive accessibility features.
 
 ## Features
@@ -53,7 +50,7 @@ A glassmorphic modal dialog component with focus management, animations, and com
 \`\`\`tsx
 import { GlassModal } from '@/components/glass-modal';
 
-// Basic usage
+{/* Basic usage  */}
 const [isOpen, setIsOpen] = useState(false);
 
 <GlassModal
@@ -64,7 +61,7 @@ const [isOpen, setIsOpen] = useState(false);
   <p>Modal content goes here</p>
 </GlassModal>
 
-// With custom options
+{/* With custom options  */}
 <GlassModal
   isOpen={isOpen}
   onClose={handleClose}
@@ -75,8 +72,9 @@ const [isOpen, setIsOpen] = useState(false);
   <div className="space-y-4">
     <p>Are you sure you want to proceed?</p>
     <div className="flex gap-2">
-      <GlassButton onClick={handleConfirm}>Confirm</GlassButton>
-      <GlassButton variant="ghost" onClick={handleClose}>Cancel</GlassButton>
+      <GlassButton type="button"
+              onClick={handleConfirm}>Confirm</GlassButton>
+      <GlassButton type="button" variant="ghost" onClick={handleClose}>Cancel</GlassButton>
     </div>
   </div>
 </GlassModal>
@@ -101,41 +99,36 @@ The modal follows WAI-ARIA dialog pattern:
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    isOpen: {
-      control: 'boolean',
+  argTypes: { isOpen: {
+      control: 'boolean' }
       description: 'Whether the modal is open',
       table: {
         type: { summary: 'boolean' },
         category: 'State',
       },
     },
-    onClose: {
-      action: 'closed',
+    onClose: { action: 'closed' }
       description: 'Callback when modal should close',
       table: {
         type: { summary: '() => void' },
         category: 'Events',
       },
     },
-    title: {
-      control: 'text',
+    title: { control: 'text' }
       description: 'Modal title',
       table: {
         type: { summary: 'string' },
         category: 'Content',
       },
     },
-    children: {
-      control: false,
+    children: { control: false }
       description: 'Modal content',
       table: {
         type: { summary: 'React.ReactNode' },
         category: 'Content',
       },
     },
-    closeOnBackdropClick: {
-      control: 'boolean',
+    closeOnBackdropClick: { control: 'boolean' }
       description: 'Close when clicking outside the modal',
       table: {
         type: { summary: 'boolean' },
@@ -143,8 +136,7 @@ The modal follows WAI-ARIA dialog pattern:
         category: 'Behavior',
       },
     },
-    closeOnEscape: {
-      control: 'boolean',
+    closeOnEscape: { control: 'boolean' }
       description: 'Close when pressing Escape key',
       table: {
         type: { summary: 'boolean' },
@@ -152,40 +144,35 @@ The modal follows WAI-ARIA dialog pattern:
         category: 'Behavior',
       },
     },
-    className: {
-      control: 'text',
+    className: { control: 'text' }
       description: 'Additional CSS classes for the modal',
       table: {
         type: { summary: 'string' },
         category: 'Styling',
       },
     },
-    titleClassName: {
-      control: 'text',
+    titleClassName: { control: 'text' }
       description: 'Additional CSS classes for the title',
       table: {
         type: { summary: 'string' },
         category: 'Styling',
       },
     },
-    contentClassName: {
-      control: 'text',
+    contentClassName: { control: 'text' }
       description: 'Additional CSS classes for the content',
       table: {
         type: { summary: 'string' },
         category: 'Styling',
       },
     },
-    initialFocus: {
-      control: false,
+    initialFocus: { control: false }
       description: 'Element to focus when modal opens',
       table: {
         type: { summary: 'React.RefObject<HTMLElement>' },
         category: 'Behavior',
       },
     },
-    portalTarget: {
-      control: false,
+    portalTarget: { control: false }
       description: 'Custom portal target element',
       table: {
         type: { summary: 'HTMLElement' },
@@ -193,8 +180,7 @@ The modal follows WAI-ARIA dialog pattern:
       },
     },
   },
-  args: {
-    closeOnBackdropClick: true,
+  args: { closeOnBackdropClick: true }
     closeOnEscape: true,
   },
 } satisfies Meta<typeof GlassModal>;
@@ -202,14 +188,16 @@ The modal follows WAI-ARIA dialog pattern:
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default story - Interactive playground
-export const Playground: Story = {
-  render: (args) => {
+{/* Default story - Interactive playground  */}
+export const Playground: Story = { render: (args) => { }
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
       <>
-        <GlassButton onClick={() => setIsOpen(true)}>Open Modal</GlassButton>
+        <GlassButton type="button"
+              onClick={() => setIsOpen(true)}>
+          Open Modal
+        </GlassButton>
 
         <GlassModal
           {...args}
@@ -229,24 +217,26 @@ export const Playground: Story = {
   },
 };
 
-// Basic examples
-export const BasicExamples: Story = {
-  render: () => {
+{/* Basic examples  */}
+export const BasicExamples: Story = { render: () => { }
     const [simpleOpen, setSimpleOpen] = React.useState(false);
     const [noTitleOpen, setNoTitleOpen] = React.useState(false);
     const [longContentOpen, setLongContentOpen] = React.useState(false);
 
     return (
       <div className="flex flex-wrap gap-4">
-        <GlassButton onClick={() => setSimpleOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setSimpleOpen(true)}>
           Simple Modal
         </GlassButton>
 
-        <GlassButton onClick={() => setNoTitleOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setNoTitleOpen(true)}>
           No Title Modal
         </GlassButton>
 
-        <GlassButton onClick={() => setLongContentOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setLongContentOpen(true)}>
           Long Content
         </GlassButton>
 
@@ -266,6 +256,7 @@ export const BasicExamples: Story = {
               Your action was completed successfully.
             </p>
             <GlassButton
+              type="button"
               onClick={() => setNoTitleOpen(false)}
               variant="primary"
             >
@@ -311,9 +302,8 @@ export const BasicExamples: Story = {
   },
 };
 
-// Dialog types
-export const DialogTypes: Story = {
-  render: () => {
+{/* Dialog types  */}
+export const DialogTypes: Story = { render: () => { }
     const [confirmOpen, setConfirmOpen] = React.useState(false);
     const [alertOpen, setAlertOpen] = React.useState(false);
     const [promptOpen, setPromptOpen] = React.useState(false);
@@ -323,23 +313,27 @@ export const DialogTypes: Story = {
 
     return (
       <div className="grid max-w-md grid-cols-2 gap-4">
-        <GlassButton onClick={() => setConfirmOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setConfirmOpen(true)}>
           Confirm Dialog
         </GlassButton>
 
-        <GlassButton onClick={() => setAlertOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setAlertOpen(true)}>
           Alert Dialog
         </GlassButton>
 
-        <GlassButton onClick={() => setPromptOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setPromptOpen(true)}>
           Prompt Dialog
         </GlassButton>
 
-        <GlassButton onClick={() => setCustomOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setCustomOpen(true)}>
           Custom Dialog
         </GlassButton>
 
-        {/* Confirm Dialog */}
+        {/* Confirm Dialog  */}
         <GlassModal
           isOpen={confirmOpen}
           onClose={() => setConfirmOpen(false)}
@@ -360,14 +354,14 @@ export const DialogTypes: Story = {
             </div>
             <div className="flex justify-end gap-2">
               <GlassButton
-                variant="ghost"
-                onClick={() => setConfirmOpen(false)}
+                type="button"
+                variant="ghost" onClick={() => setConfirmOpen(false)}
               >
                 Cancel
               </GlassButton>
               <GlassButton
-                variant="destructive"
-                onClick={() => setConfirmOpen(false)}
+                type="button"
+                variant="destructive" onClick={() => setConfirmOpen(false)}
               >
                 Delete
               </GlassButton>
@@ -375,7 +369,7 @@ export const DialogTypes: Story = {
           </div>
         </GlassModal>
 
-        {/* Alert Dialog */}
+        {/* Alert Dialog  */}
         <GlassModal
           isOpen={alertOpen}
           onClose={() => setAlertOpen(false)}
@@ -394,8 +388,8 @@ export const DialogTypes: Story = {
             </div>
             <div className="flex justify-end">
               <GlassButton
-                variant="primary"
-                onClick={() => setAlertOpen(false)}
+                type="button"
+                variant="primary" onClick={() => setAlertOpen(false)}
               >
                 OK
               </GlassButton>
@@ -403,13 +397,12 @@ export const DialogTypes: Story = {
           </div>
         </GlassModal>
 
-        {/* Prompt Dialog */}
+        {/* Prompt Dialog  */}
         <GlassModal
           isOpen={promptOpen}
           onClose={() => {
             setPromptOpen(false);
             setPromptValue('');
-          }}
           title="Enter Name"
         >
           <div className="space-y-4">
@@ -424,21 +417,22 @@ export const DialogTypes: Story = {
             />
             <div className="flex justify-end gap-2">
               <GlassButton
-                variant="ghost"
-                onClick={() => {
+                type="button"
+                variant="ghost" onClick={() => {
                   setPromptOpen(false);
                   setPromptValue('');
-                }}
-              >
+                } onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => {
+                  setPromptOpen(false);
+                  setPromptValue('');
+                )(e);>
                 Cancel
               </GlassButton>
               <GlassButton
-                variant="primary"
-                onClick={() => {
+                type="button"
+                variant="primary" onClick={() => {
                   alert(`Project created: ${promptValue}`);
                   setPromptOpen(false);
                   setPromptValue('');
-                }}
                 disabled={!promptValue}
               >
                 Create
@@ -447,7 +441,7 @@ export const DialogTypes: Story = {
           </div>
         </GlassModal>
 
-        {/* Custom Dialog */}
+        {/* Custom Dialog  */}
         <GlassModal isOpen={customOpen} onClose={() => setCustomOpen(false)}>
           <div className="space-y-6 text-center">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/20">
@@ -461,15 +455,15 @@ export const DialogTypes: Story = {
             </div>
             <div className="flex flex-col gap-2">
               <GlassButton
-                variant="primary"
-                onClick={() => setCustomOpen(false)}
+                type="button"
+                variant="primary" onClick={() => setCustomOpen(false)}
                 fullWidth
               >
                 Claim Reward
               </GlassButton>
               <GlassButton
-                variant="ghost"
-                onClick={() => setCustomOpen(false)}
+                type="button"
+                variant="ghost" onClick={() => setCustomOpen(false)}
                 fullWidth
               >
                 Maybe Later
@@ -482,12 +476,10 @@ export const DialogTypes: Story = {
   },
 };
 
-// Form modal
-export const FormModal: Story = {
-  render: () => {
+{/* Form modal  */}
+export const FormModal: Story = { render: () => { }
     const [isOpen, setIsOpen] = React.useState(false);
-    const [formData, setFormData] = React.useState({
-      name: '',
+    const [formData, setFormData] = React.useState({ name: '' }
       email: '',
       message: '',
       subscribe: false,
@@ -502,7 +494,10 @@ export const FormModal: Story = {
 
     return (
       <>
-        <GlassButton onClick={() => setIsOpen(true)}>Contact Us</GlassButton>
+        <GlassButton type="button"
+              onClick={() => setIsOpen(true)}>
+          Contact Us
+        </GlassButton>
 
         <GlassModal
           isOpen={isOpen}
@@ -570,8 +565,7 @@ export const FormModal: Story = {
             <div className="flex gap-2 pt-4">
               <GlassButton
                 type="button"
-                variant="ghost"
-                onClick={() => setIsOpen(false)}
+                variant="ghost" onClick={() => setIsOpen(false)}
               >
                 Cancel
               </GlassButton>
@@ -586,9 +580,8 @@ export const FormModal: Story = {
   },
 };
 
-// Real-world examples
-export const RealWorldExamples: Story = {
-  render: () => {
+{/* Real-world examples  */}
+export const RealWorldExamples: Story = { render: () => { }
     const [loginOpen, setLoginOpen] = React.useState(false);
     const [shareOpen, setShareOpen] = React.useState(false);
     const [settingsOpen, setSettingsOpen] = React.useState(false);
@@ -596,23 +589,27 @@ export const RealWorldExamples: Story = {
 
     return (
       <div className="grid max-w-lg grid-cols-2 gap-4">
-        <GlassButton onClick={() => setLoginOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setLoginOpen(true)}>
           Login Modal
         </GlassButton>
 
-        <GlassButton onClick={() => setShareOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setShareOpen(true)}>
           Share Modal
         </GlassButton>
 
-        <GlassButton onClick={() => setSettingsOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setSettingsOpen(true)}>
           Settings Modal
         </GlassButton>
 
-        <GlassButton onClick={() => setImageOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setImageOpen(true)}>
           Image Modal
         </GlassButton>
 
-        {/* Login Modal */}
+        {/* Login Modal  */}
         <GlassModal
           isOpen={loginOpen}
           onClose={() => setLoginOpen(false)}
@@ -639,12 +636,15 @@ export const RealWorldExamples: Story = {
 
             <div className="flex items-center justify-between">
               <GlassCheckbox label="Remember me" />
-              <button className="text-blue-500 text-sm hover:underline">
+              <button
+                type="button"
+                className="text-blue-500 text-sm hover:underline"
+              >
                 Forgot password?
               </button>
             </div>
 
-            <GlassButton variant="primary" fullWidth>
+            <GlassButton type="button" variant="primary" fullWidth>
               Sign In
             </GlassButton>
 
@@ -660,20 +660,20 @@ export const RealWorldExamples: Story = {
             </div>
 
             <div className="grid grid-cols-3 gap-2">
-              <GlassButton variant="secondary">
+              <GlassButton type="button" variant="secondary">
                 <Github className="h-4 w-4" />
               </GlassButton>
-              <GlassButton variant="secondary">
+              <GlassButton type="button" variant="secondary">
                 <Mail className="h-4 w-4" />
               </GlassButton>
-              <GlassButton variant="secondary">
+              <GlassButton type="button" variant="secondary">
                 <Globe className="h-4 w-4" />
               </GlassButton>
             </div>
           </div>
         </GlassModal>
 
-        {/* Share Modal */}
+        {/* Share Modal  */}
         <GlassModal
           isOpen={shareOpen}
           onClose={() => setShareOpen(false)}
@@ -687,11 +687,11 @@ export const RealWorldExamples: Story = {
             <div className="flex items-center gap-2 rounded-lg border border-gray-200 p-3 dark:border-gray-700">
               <input
                 type="text"
-                value="https://example.com/shared-content"
+                value="https:{/* example.com/shared-content"  */}
                 readOnly
                 className="flex-1 bg-transparent text-sm outline-none"
               />
-              <GlassButton size="sm" variant="ghost">
+              <GlassButton type="button" size="sm" variant="ghost">
                 <Copy className="h-4 w-4" />
               </GlassButton>
             </div>
@@ -704,6 +704,7 @@ export const RealWorldExamples: Story = {
                 { icon: Globe, label: 'Web' },
               ].map(({ icon: Icon, label }) => (
                 <button
+                  type="button"
                   key={label}
                   className="flex flex-col items-center gap-2 rounded-lg p-3 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
@@ -715,7 +716,7 @@ export const RealWorldExamples: Story = {
           </div>
         </GlassModal>
 
-        {/* Settings Modal */}
+        {/* Settings Modal  */}
         <GlassModal
           isOpen={settingsOpen}
           onClose={() => setSettingsOpen(false)}
@@ -787,17 +788,19 @@ export const RealWorldExamples: Story = {
 
             <div className="flex gap-2 border-gray-200 border-t pt-4 dark:border-gray-700">
               <GlassButton
-                variant="ghost"
-                onClick={() => setSettingsOpen(false)}
+                type="button"
+                variant="ghost" onClick={() => setSettingsOpen(false)}
               >
                 Cancel
               </GlassButton>
-              <GlassButton variant="primary">Save Changes</GlassButton>
+              <GlassButton type="button" variant="primary">
+                Save Changes
+              </GlassButton>
             </div>
           </div>
         </GlassModal>
 
-        {/* Image Modal */}
+        {/* Image Modal  */}
         <GlassModal
           isOpen={imageOpen}
           onClose={() => setImageOpen(false)}
@@ -815,13 +818,13 @@ export const RealWorldExamples: Story = {
                 </p>
               </div>
               <div className="flex gap-2">
-                <GlassButton variant="ghost" size="sm">
+                <GlassButton type="button" variant="ghost" size="sm">
                   <Download className="h-4 w-4" />
                 </GlassButton>
-                <GlassButton variant="ghost" size="sm">
+                <GlassButton type="button" variant="ghost" size="sm">
                   <Share2 className="h-4 w-4" />
                 </GlassButton>
-                <GlassButton variant="ghost" size="sm">
+                <GlassButton type="button" variant="ghost" size="sm">
                   <Heart className="h-4 w-4" />
                 </GlassButton>
               </div>
@@ -833,16 +836,16 @@ export const RealWorldExamples: Story = {
   },
 };
 
-// Nested modals
-export const NestedModals: Story = {
-  render: () => {
+{/* Nested modals  */}
+export const NestedModals: Story = { render: () => { }
     const [firstOpen, setFirstOpen] = React.useState(false);
     const [secondOpen, setSecondOpen] = React.useState(false);
     const [thirdOpen, setThirdOpen] = React.useState(false);
 
     return (
       <>
-        <GlassButton onClick={() => setFirstOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setFirstOpen(true)}>
           Open Nested Modals
         </GlassButton>
 
@@ -855,7 +858,10 @@ export const NestedModals: Story = {
             <p>
               This is the first modal. You can open another modal from here.
             </p>
-            <GlassButton variant="primary" onClick={() => setSecondOpen(true)}>
+            <GlassButton
+              type="button"
+              variant="primary" onClick={() => setSecondOpen(true)}
+            >
               Open Second Modal
             </GlassButton>
           </div>
@@ -869,10 +875,16 @@ export const NestedModals: Story = {
           <div className="space-y-4">
             <p>This is the second modal, opened from the first one.</p>
             <div className="flex gap-2">
-              <GlassButton variant="ghost" onClick={() => setSecondOpen(false)}>
+              <GlassButton
+                type="button"
+                variant="ghost" onClick={() => setSecondOpen(false)}
+              >
                 Back
               </GlassButton>
-              <GlassButton variant="primary" onClick={() => setThirdOpen(true)}>
+              <GlassButton
+                type="button"
+                variant="primary" onClick={() => setThirdOpen(true)}
+              >
                 Open Third Modal
               </GlassButton>
             </div>
@@ -893,13 +905,16 @@ export const NestedModals: Story = {
               </p>
             </div>
             <GlassButton
-              variant="primary"
-              onClick={() => {
+              type="button"
+              variant="primary" onClick={() => {
                 setThirdOpen(false);
                 setSecondOpen(false);
                 setFirstOpen(false);
-              }}
-            >
+              } onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => {
+                setThirdOpen(false);
+                setSecondOpen(false);
+                setFirstOpen(false);
+              )(e);>
               Close All
             </GlassButton>
           </div>
@@ -909,22 +924,23 @@ export const NestedModals: Story = {
   },
 };
 
-// Theme showcase
-export const ThemeShowcase: Story = {
-  render: () => {
+{/* Theme showcase  */}
+export const ThemeShowcase: Story = { render: () => { }
     const [lightOpen, setLightOpen] = React.useState(false);
     const [darkOpen, setDarkOpen] = React.useState(false);
 
     return (
       <div className="flex gap-4">
         <div className="rounded-xl bg-white/80 p-6 dark:bg-gray-900/80">
-          <GlassButton onClick={() => setLightOpen(true)}>
+          <GlassButton type="button"
+              onClick={() => setLightOpen(true)}>
             Light Theme Modal
           </GlassButton>
         </div>
 
         <div className="rounded-xl bg-gray-900/80 p-6 dark:bg-white/80">
-          <GlassButton onClick={() => setDarkOpen(true)}>
+          <GlassButton type="button"
+              onClick={() => setDarkOpen(true)}>
             Dark Theme Modal
           </GlassButton>
         </div>
@@ -940,7 +956,10 @@ export const ThemeShowcase: Story = {
             <div className="rounded-lg bg-gray-100 p-4">
               <p className="text-sm">The glass effect adapts to the theme.</p>
             </div>
-            <GlassButton variant="primary" onClick={() => setLightOpen(false)}>
+            <GlassButton
+              type="button"
+              variant="primary" onClick={() => setLightOpen(false)}
+            >
               Close
             </GlassButton>
           </div>
@@ -957,7 +976,10 @@ export const ThemeShowcase: Story = {
             <div className="rounded-lg bg-gray-800 p-4">
               <p className="text-sm">The glass effect adapts to the theme.</p>
             </div>
-            <GlassButton variant="primary" onClick={() => setDarkOpen(false)}>
+            <GlassButton
+              type="button"
+              variant="primary" onClick={() => setDarkOpen(false)}
+            >
               Close
             </GlassButton>
           </div>
@@ -965,16 +987,14 @@ export const ThemeShowcase: Story = {
       </div>
     );
   },
-  parameters: {
-    backgrounds: {
-      default: 'liquid-gradient',
+  parameters: { backgrounds: {
+      default: 'liquid-gradient' }
     },
   },
 };
 
-// Accessibility showcase
-export const AccessibilityShowcase: Story = {
-  render: () => {
+{/* Accessibility showcase  */}
+export const AccessibilityShowcase: Story = { render: () => { }
     const [focusOpen, setFocusOpen] = React.useState(false);
     const [ariaOpen, setAriaOpen] = React.useState(false);
     const firstInputRef = React.useRef<HTMLInputElement>(null);
@@ -989,7 +1009,8 @@ export const AccessibilityShowcase: Story = {
             </Card.Description>
           </Card.Header>
           <Card.Content>
-            <GlassButton onClick={() => setFocusOpen(true)}>
+            <GlassButton type="button"
+              onClick={() => setFocusOpen(true)}>
               Open Focus Demo
             </GlassButton>
           </Card.Content>
@@ -1003,7 +1024,8 @@ export const AccessibilityShowcase: Story = {
             </Card.Description>
           </Card.Header>
           <Card.Content>
-            <GlassButton onClick={() => setAriaOpen(true)}>
+            <GlassButton type="button"
+              onClick={() => setAriaOpen(true)}>
               Open ARIA Demo
             </GlassButton>
           </Card.Content>
@@ -1025,8 +1047,12 @@ export const AccessibilityShowcase: Story = {
             />
             <GlassInput placeholder="Tab to this input" />
             <div className="flex gap-2">
-              <GlassButton variant="ghost">Cancel</GlassButton>
-              <GlassButton variant="primary">Submit</GlassButton>
+              <GlassButton type="button" variant="ghost">
+                Cancel
+              </GlassButton>
+              <GlassButton type="button" variant="primary">
+                Submit
+              </GlassButton>
             </div>
             <p className="text-gray-600 text-sm dark:text-gray-400">
               Press Escape to close the modal.
@@ -1055,7 +1081,10 @@ export const AccessibilityShowcase: Story = {
               Screen readers will announce this modal properly with all its
               content.
             </p>
-            <GlassButton variant="primary" onClick={() => setAriaOpen(false)}>
+            <GlassButton
+              type="button"
+              variant="primary" onClick={() => setAriaOpen(false)}
+            >
               Got it
             </GlassButton>
           </div>
@@ -1065,24 +1094,26 @@ export const AccessibilityShowcase: Story = {
   },
 };
 
-// Custom styling
-export const CustomStyling: Story = {
-  render: () => {
+{/* Custom styling  */}
+export const CustomStyling: Story = { render: () => { }
     const [coloredOpen, setColoredOpen] = React.useState(false);
     const [minimalOpen, setMinimalOpen] = React.useState(false);
     const [largeOpen, setLargeOpen] = React.useState(false);
 
     return (
       <div className="flex flex-wrap gap-4">
-        <GlassButton onClick={() => setColoredOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setColoredOpen(true)}>
           Colored Modal
         </GlassButton>
 
-        <GlassButton onClick={() => setMinimalOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setMinimalOpen(true)}>
           Minimal Modal
         </GlassButton>
 
-        <GlassButton onClick={() => setLargeOpen(true)}>
+        <GlassButton type="button"
+              onClick={() => setLargeOpen(true)}>
           Large Modal
         </GlassButton>
 
@@ -1100,8 +1131,7 @@ export const CustomStyling: Story = {
             </div>
             <GlassButton
               variant="secondary"
-              className="border-white/30 bg-white/20 text-white hover:bg-white/30"
-              onClick={() => setColoredOpen(false)}
+              className="border-white/30 bg-white/20 text-white hover:bg-white/30" onClick={() => setColoredOpen(false)}
             >
               Close
             </GlassButton>
@@ -1177,10 +1207,15 @@ export const CustomStyling: Story = {
             </div>
 
             <div className="flex justify-end gap-2 border-gray-200 border-t pt-4 dark:border-gray-700">
-              <GlassButton variant="ghost" onClick={() => setLargeOpen(false)}>
+              <GlassButton
+                type="button"
+                variant="ghost" onClick={() => setLargeOpen(false)}
+              >
                 Cancel
               </GlassButton>
-              <GlassButton variant="primary">Save Changes</GlassButton>
+              <GlassButton type="button" variant="primary">
+                Save Changes
+              </GlassButton>
             </div>
           </div>
         </GlassModal>

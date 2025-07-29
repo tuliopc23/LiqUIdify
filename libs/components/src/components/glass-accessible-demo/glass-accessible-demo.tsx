@@ -7,21 +7,18 @@ import { cn } from '@/core/utils/classname';
 import { GlassButton } from '../glass-button-refactored';
 import { GlassCard } from '../glass-card-refactored';
 
-interface AccessibilityViolation {
-  id: string;
-  description: string;
+interface AccessibilityViolation { id: string;
+  description: string; }
 }
 
-interface AccessibilityReport {
-  score: number;
+interface AccessibilityReport { score: number;
   wcagLevel: string;
-  violations: AccessibilityViolation[];
-  warnings: any[];
+  violations: Array<AccessibilityViolation>;
+  warnings: Array<any>; }
 }
 
-interface ContrastResult {
-  ratio: number;
-  passes: {
+interface ContrastResult { ratio: number;
+  passes: { }
     aa: { normal: boolean; large: boolean };
     aaa: { normal: boolean; large: boolean };
   };
@@ -54,8 +51,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
     try {
       const report = await accessibilityManager.validateComponent(
         demoRef.current,
-        {
-          name: 'GlassAccessibleDemo',
+        { name: 'GlassAccessibleDemo' }
           type: 'demo',
           props: { className },
         }
@@ -75,8 +71,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
   };
 
   const checkContrast = () => {
-    const result = accessibilityManager.ensureContrast(fgColor, bgColor, {
-      level: 'AA',
+    const result = accessibilityManager.ensureContrast(fgColor, bgColor, { level: 'AA' }
       autoFix: true,
     });
     setContrastResult(result);
@@ -91,20 +86,23 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
     return () => {
       accessibilityManager.disableRealTimeMonitoring();
     };
-  }, []);
+  },
+        []
+      );
 
   return (
     <div ref={demoRef} className={cn('space-y-6', className)}>
       <GlassCard className="p-6">
         <h2 className="mb-4 font-bold text-2xl">Accessibility Manager Demo</h2>
 
-        {/* Accessibility Validation Demo */}
+        {/* Accessibility Validation Demo  */}
 
         <section className="mb-6">
           <h3 className="mb-3 font-semibold text-xl">Component Validation</h3>
 
           <div className="space-y-3">
             <GlassButton
+              type="button"
               onClick={validateAccessibility}
               disabled={validating}
               aria-busy={validating}
@@ -178,19 +176,23 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
           </div>
         </section>
 
-        {/* Contrast Checker Demo */}
+        {/* Contrast Checker Demo  */}
 
         <section className="mb-6">
           <h3 className="mb-3 font-semibold text-xl">Contrast Checker</h3>
 
           <div className="space-y-3">
             <div className="flex gap-4">
-              <label className="flex-1">
+              <label
+                htmlFor="foreground-color"
+                className="flex-1"
+              >
                 <span className="mb-1 block font-medium text-sm">
                   Foreground
                 </span>
 
                 <input
+                  id="foreground-color"
                   type="color"
                   value={fgColor}
                   onChange={(e) => setFgColor(e.target.value)}
@@ -199,12 +201,16 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
                 />
               </label>
 
-              <label className="flex-1">
+              <label
+                htmlFor="background-color"
+                className="flex-1"
+              >
                 <span className="mb-1 block font-medium text-sm">
                   Background
                 </span>
 
                 <input
+                  id="background-color"
                   type="color"
                   value={bgColor}
                   onChange={(e) => setBgColor(e.target.value)}
@@ -214,7 +220,10 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
               </label>
             </div>
 
-            <GlassButton onClick={checkContrast}>Check Contrast</GlassButton>
+            <GlassButton type="button"
+              onClick={checkContrast}>
+              Check Contrast
+            </GlassButton>
 
             {contrastResult && (
               <div
@@ -266,11 +275,8 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                       <span
                         className="ml-2 rounded px-2 py-1"
-                        style={{
-                          backgroundColor: bgColor,
-                          color: contrastResult.suggestedForeground,
-                        }}
-                      >
+                        style={{ backgroundColor: bgColor }
+                          color: contrastResult.suggestedForeground,>
                         {contrastResult.suggestedForeground}
                       </span>
                     </div>
@@ -281,7 +287,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
           </div>
         </section>
 
-        {/* ARIA Validation Demo */}
+        {/* ARIA Validation Demo  */}
 
         <section>
           <h3 className="mb-3 font-semibold text-xl">
@@ -289,10 +295,11 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
           </h3>
 
           <div className="space-y-3">
-            {/* Good example */}
+            {/* Good example  */}
 
             <div className="rounded bg-green-500/10 p-3">
               <button
+                type="button"
                 aria-label="Good example button"
                 aria-pressed="false"
                 className="rounded bg-green-500/20 px-4 py-2"
@@ -305,10 +312,11 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
               </span>
             </div>
 
-            {/* Bad example - will be auto-corrected */}
+            {/* Bad example - will be auto-corrected  */}
 
             <div className="rounded bg-red-500/10 p-3">
               <button
+                type="button"
                 aria-expanded="false"
                 className="rounded bg-red-500/20 px-4 py-2"
               >

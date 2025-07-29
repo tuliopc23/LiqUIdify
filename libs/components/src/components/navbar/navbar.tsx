@@ -52,7 +52,10 @@ export function Navbar() {
 
               {/* GitHub Link */}
 
-              <button className="rounded-lg bg-white/20 p-2 transition-all duration-200 hover:scale-105 hover:bg-white/30">
+              <button
+                type="button"
+                className="rounded-lg bg-white/20 p-2 transition-all duration-200 hover:scale-105 hover:bg-white/30"
+              >
                 <Github className="h-5 w-5 text-white" />
               </button>
             </div>

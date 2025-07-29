@@ -6,42 +6,33 @@ import { GlassCheckbox } from '@/components/glass-checkbox/glass-checkbox';
 import { GlassFocusTrap } from '@/components/glass-focus-trap/glass-focus-trap';
 import { GlassInput } from '@/components/glass-input/glass-input';
 
-const meta = {
-  title: 'Components/Glass Focus Trap',
+const meta = { title: 'Components/Glass Focus Trap' }
   component: GlassFocusTrap,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component:
+  parameters: { layout: 'centered' }
+    docs: { description: {
+        component: }
           'A focus trap component that constrains keyboard navigation within a specific area. Essential for modals, dropdowns, and other overlay components to ensure accessibility.',
       },
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    active: {
-      description: 'Whether the focus trap is active',
+  argTypes: { active: {
+      description: 'Whether the focus trap is active' }
       control: { type: 'boolean' },
     },
-    returnFocus: {
-      description: 'Return focus to the trigger element when deactivated',
+    returnFocus: { description: 'Return focus to the trigger element when deactivated' }
       control: { type: 'boolean' },
     },
-    initialFocus: {
-      description: 'Selector or element to focus when activated',
+    initialFocus: { description: 'Selector or element to focus when activated' }
       control: false,
     },
-    allowOutsideClick: {
-      description: 'Allow clicks outside the trap',
+    allowOutsideClick: { description: 'Allow clicks outside the trap' }
       control: { type: 'boolean' },
     },
-    escapeDeactivates: {
-      description: 'Deactivate trap when Escape key is pressed',
+    escapeDeactivates: { description: 'Deactivate trap when Escape key is pressed' }
       control: { type: 'boolean' },
     },
-    onDeactivate: {
-      description: 'Callback when focus trap is deactivated',
+    onDeactivate: { description: 'Callback when focus trap is deactivated' }
       action: 'deactivated',
     },
   },
@@ -50,19 +41,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: () => {
+export const Default: Story = { render: () => { }
     const [isActive, setIsActive] = React.useState(false);
 
     return (
       <div className="space-y-4 p-8">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold mb-4">Focus Trap Demo</h2>
-          <p className="text-[var(--text-secondary)] mb-4">
+        <div className="mb-8 text-center">
+          <h2 className="mb-4 font-bold text-2xl">Focus Trap Demo</h2>
+          <p className="mb-4 text-[var(--text-secondary)]">
             Click the button below to activate the focus trap. Use Tab and
             Shift+Tab to navigate.
           </p>
-          <GlassButton onClick={() => setIsActive(true)}>
+          <GlassButton type="button"
+              onClick={() => setIsActive(true)}>
             Activate Focus Trap
           </GlassButton>
         </div>
@@ -74,9 +65,9 @@ export const Default: Story = {
             escapeDeactivates
             onDeactivate={() => setIsActive(false)}
           >
-            <GlassCard className="p-6 max-w-md mx-auto">
-              <h3 className="text-lg font-bold mb-4">Trapped Focus Area</h3>
-              <p className="text-sm text-[var(--text-secondary)] mb-4">
+            <GlassCard className="mx-auto max-w-md p-6">
+              <h3 className="mb-4 font-bold text-lg">Trapped Focus Area</h3>
+              <p className="mb-4 text-[var(--text-secondary)] text-sm">
                 Focus is now trapped within this card. Press Escape or click the
                 close button to exit.
               </p>
@@ -86,14 +77,16 @@ export const Default: Story = {
                 <GlassInput placeholder="Second input" />
                 <GlassCheckbox>Accept terms and conditions</GlassCheckbox>
 
-                <div className="flex gap-2 justify-end">
+                <div className="flex justify-end gap-2">
                   <GlassButton
-                    variant="ghost"
-                    onClick={() => setIsActive(false)}
+                    type="button"
+                    variant="ghost" onClick={() => setIsActive(false)}
                   >
                     Cancel
                   </GlassButton>
-                  <GlassButton variant="primary">Submit</GlassButton>
+                  <GlassButton type="button" variant="primary">
+                    Submit
+                  </GlassButton>
                 </div>
               </form>
             </GlassCard>
@@ -104,21 +97,20 @@ export const Default: Story = {
   },
 };
 
-export const ModalExample: Story = {
-  render: () => {
+export const ModalExample: Story = { render: () => { }
     const [showModal, setShowModal] = React.useState(false);
 
     return (
       <div className="p-8">
-        <GlassButton onClick={() => setShowModal(true)}>
+        <GlassButton type="button"
+              onClick={() => setShowModal(true)}>
           Open Modal with Focus Trap
         </GlassButton>
 
         {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div
-              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
-              onClick={() => setShowModal(false)}
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setShowModal(false)}
             />
 
             <GlassFocusTrap
@@ -128,33 +120,35 @@ export const ModalExample: Story = {
               allowOutsideClick={false}
               onDeactivate={() => setShowModal(false)}
             >
-              <GlassCard className="relative z-10 p-8 max-w-lg w-full mx-4">
-                <h2 className="text-2xl font-bold mb-4">Modal Dialog</h2>
-                <p className="text-[var(--text-secondary)] mb-6">
+              <GlassCard className="relative z-10 mx-4 w-full max-w-lg p-8">
+                <h2 className="mb-4 font-bold text-2xl">Modal Dialog</h2>
+                <p className="mb-6 text-[var(--text-secondary)]">
                   This modal demonstrates focus trapping. Tab navigation is
                   constrained within the modal, and clicking outside or pressing
                   Escape will close it.
                 </p>
 
-                <div className="space-y-4 mb-6">
+                <div className="mb-6 space-y-4">
                   <GlassInput placeholder="Email address" type="email" />
                   <GlassInput placeholder="Password" type="password" />
                 </div>
 
-                <div className="flex gap-3 justify-end">
+                <div className="flex justify-end gap-3">
                   <GlassButton
-                    variant="ghost"
-                    onClick={() => setShowModal(false)}
+                    type="button"
+                    variant="ghost" onClick={() => setShowModal(false)}
                   >
                     Cancel
                   </GlassButton>
                   <GlassButton
-                    variant="primary"
-                    onClick={() => {
+                    type="button"
+                    variant="primary" onClick={() => {
                       alert('Form submitted!');
                       setShowModal(false);
-                    }}
-                  >
+                    } onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => {
+                      alert('Form submitted!');
+                      setShowModal(false);
+                    )(e);>
                     Sign In
                   </GlassButton>
                 </div>
@@ -165,22 +159,21 @@ export const ModalExample: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Focus trap used in a modal dialog pattern',
+        story: 'Focus trap used in a modal dialog pattern' }
       },
     },
   },
 };
 
-export const InitialFocusExample: Story = {
-  render: () => {
+export const InitialFocusExample: Story = { render: () => { }
     const [isActive, setIsActive] = React.useState(false);
 
     return (
       <div className="p-8">
-        <GlassButton onClick={() => setIsActive(true)}>
+        <GlassButton type="button"
+              onClick={() => setIsActive(true)}>
           Open with Custom Initial Focus
         </GlassButton>
 
@@ -192,24 +185,29 @@ export const InitialFocusExample: Story = {
               initialFocus="[data-focus-target]"
               onDeactivate={() => setIsActive(false)}
             >
-              <GlassCard className="p-6 max-w-md">
-                <h3 className="text-lg font-bold mb-4">Custom Initial Focus</h3>
-                <p className="text-sm text-[var(--text-secondary)] mb-4">
+              <GlassCard className="max-w-md p-6">
+                <h3 className="mb-4 font-bold text-lg">Custom Initial Focus</h3>
+                <p className="mb-4 text-[var(--text-secondary)] text-sm">
                   The second button will receive initial focus instead of the
                   first focusable element.
                 </p>
 
                 <div className="space-y-3">
-                  <GlassButton variant="ghost" fullWidth>
+                  <GlassButton type="button" variant="ghost" fullWidth>
                     First Button
                   </GlassButton>
-                  <GlassButton variant="primary" fullWidth data-focus-target>
+                  <GlassButton
+                    type="button"
+                    variant="primary"
+                    fullWidth
+                    data-focus-target
+                  >
                     This Button Gets Initial Focus
                   </GlassButton>
                   <GlassButton
+                    type="button"
                     variant="ghost"
-                    fullWidth
-                    onClick={() => setIsActive(false)}
+                    fullWidth onClick={() => setIsActive(false)}
                   >
                     Close
                   </GlassButton>
@@ -221,23 +219,22 @@ export const InitialFocusExample: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
-        story: 'Demonstrating custom initial focus target selection',
+        story: 'Demonstrating custom initial focus target selection' }
       },
     },
   },
 };
 
-export const NestedFocusTraps: Story = {
-  render: () => {
+export const NestedFocusTraps: Story = { render: () => { }
     const [outerActive, setOuterActive] = React.useState(false);
     const [innerActive, setInnerActive] = React.useState(false);
 
     return (
       <div className="p-8">
-        <GlassButton onClick={() => setOuterActive(true)}>
+        <GlassButton type="button"
+              onClick={() => setOuterActive(true)}>
           Open Nested Focus Traps Demo
         </GlassButton>
 
@@ -247,21 +244,21 @@ export const NestedFocusTraps: Story = {
             returnFocus
             onDeactivate={() => setOuterActive(false)}
           >
-            <GlassCard className="p-6 max-w-lg mt-4">
-              <h3 className="text-lg font-bold mb-4">Outer Focus Trap</h3>
-              <p className="text-sm text-[var(--text-secondary)] mb-4">
+            <GlassCard className="mt-4 max-w-lg p-6">
+              <h3 className="mb-4 font-bold text-lg">Outer Focus Trap</h3>
+              <p className="mb-4 text-[var(--text-secondary)] text-sm">
                 This is the outer focus trap. Click the button below to activate
                 a nested trap.
               </p>
 
-              <div className="space-y-3 mb-4">
+              <div className="mb-4 space-y-3">
                 <GlassInput placeholder="Outer input 1" />
                 <GlassInput placeholder="Outer input 2" />
               </div>
 
               <GlassButton
-                variant="primary"
-                onClick={() => setInnerActive(true)}
+                type="button"
+                variant="primary" onClick={() => setInnerActive(true)}
               >
                 Open Inner Focus Trap
               </GlassButton>
@@ -273,15 +270,15 @@ export const NestedFocusTraps: Story = {
                     returnFocus
                     onDeactivate={() => setInnerActive(false)}
                   >
-                    <GlassCard className="p-4 bg-blue-500/10">
-                      <h4 className="font-bold mb-2">Inner Focus Trap</h4>
-                      <p className="text-sm text-[var(--text-secondary)] mb-3">
+                    <GlassCard className="bg-blue-500/10 p-4">
+                      <h4 className="mb-2 font-bold">Inner Focus Trap</h4>
+                      <p className="mb-3 text-[var(--text-secondary)] text-sm">
                         Focus is now trapped in this inner area.
                       </p>
                       <GlassInput placeholder="Inner input" className="mb-3" />
                       <GlassButton
-                        size="sm"
-                        onClick={() => setInnerActive(false)}
+                        type="button"
+                        size="sm" onClick={() => setInnerActive(false)}
                       >
                         Close Inner
                       </GlassButton>
@@ -291,8 +288,8 @@ export const NestedFocusTraps: Story = {
               )}
 
               <GlassButton
-                variant="ghost"
-                onClick={() => setOuterActive(false)}
+                type="button"
+                variant="ghost" onClick={() => setOuterActive(false)}
                 className="mt-4"
               >
                 Close Outer
@@ -303,26 +300,24 @@ export const NestedFocusTraps: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
         story:
-          'Demonstrating nested focus traps with proper activation/deactivation',
+          'Demonstrating nested focus traps with proper activation/deactivation' }
       },
     },
   },
 };
 
-export const AccessibilityDemo: Story = {
-  render: () => {
+export const AccessibilityDemo: Story = { render: () => { }
     const [isActive, setIsActive] = React.useState(false);
     const [announcement, setAnnouncement] = React.useState('');
 
     return (
       <div className="p-8">
-        <div className="mb-6 glass-effect rounded-lg p-4">
-          <h3 className="font-bold mb-2">Keyboard Navigation Guide</h3>
-          <ul className="text-sm text-[var(--text-secondary)] space-y-1">
+        <div className="glass-effect mb-6 rounded-lg p-4">
+          <h3 className="mb-2 font-bold">Keyboard Navigation Guide</h3>
+          <ul className="space-y-1 text-[var(--text-secondary)] text-sm">
             <li>
               • <kbd>Tab</kbd> - Move focus forward
             </li>
@@ -338,7 +333,8 @@ export const AccessibilityDemo: Story = {
           </ul>
         </div>
 
-        <GlassButton onClick={() => setIsActive(true)}>
+        <GlassButton type="button"
+              onClick={() => setIsActive(true)}>
           Test Accessibility Features
         </GlassButton>
 
@@ -349,11 +345,9 @@ export const AccessibilityDemo: Story = {
             escapeDeactivates
             onDeactivate={() => {
               setIsActive(false);
-              setAnnouncement('Focus trap closed');
-            }}
-          >
-            <GlassCard className="p-6 max-w-md mt-4">
-              <h3 className="text-lg font-bold mb-4">
+              setAnnouncement('Focus trap closed');>
+            <GlassCard className="mt-4 max-w-md p-6">
+              <h3 className="mb-4 font-bold text-lg">
                 Accessibility Test Area
               </h3>
 
@@ -361,7 +355,7 @@ export const AccessibilityDemo: Story = {
                 <div>
                   <label
                     htmlFor="test-input"
-                    className="block text-sm font-medium mb-1"
+                    className="mb-1 block font-medium text-sm"
                   >
                     Test Input (Required)
                   </label>
@@ -374,7 +368,7 @@ export const AccessibilityDemo: Story = {
                 </div>
 
                 <fieldset>
-                  <legend className="text-sm font-medium mb-2">Options</legend>
+                  <legend className="mb-2 font-medium text-sm">Options</legend>
                   <div className="space-y-2">
                     <GlassCheckbox
                       onFocus={() =>
@@ -395,13 +389,14 @@ export const AccessibilityDemo: Story = {
 
                 <div className="flex gap-2">
                   <GlassButton
-                    variant="ghost"
-                    onClick={() => setIsActive(false)}
+                    type="button"
+                    variant="ghost" onClick={() => setIsActive(false)}
                     onFocus={() => setAnnouncement('Cancel button focused')}
                   >
                     Cancel
                   </GlassButton>
                   <GlassButton
+                    type="button"
                     variant="primary"
                     onFocus={() => setAnnouncement('Submit button focused')}
                   >
@@ -414,7 +409,7 @@ export const AccessibilityDemo: Story = {
                 <div
                   role="status"
                   aria-live="polite"
-                  className="mt-4 text-sm text-[var(--text-secondary)]"
+                  className="mt-4 text-[var(--text-secondary)] text-sm"
                 >
                   Screen reader: {announcement}
                 </div>
@@ -425,11 +420,10 @@ export const AccessibilityDemo: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
+  parameters: { docs: {
       description: {
         story:
-          'Comprehensive accessibility features demonstration with screen reader announcements',
+          'Comprehensive accessibility features demonstration with screen reader announcements' }
       },
     },
   },

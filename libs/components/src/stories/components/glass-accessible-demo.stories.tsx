@@ -29,9 +29,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="mx-auto max-w-4xl p-4">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">Accessibility Manager Demo</h1>
+        <h1 className="mb-2 font-bold text-3xl">Accessibility Manager Demo</h1>
         <p className="text-[var(--text-secondary)]">
           This component demonstrates various accessibility features and tools
           available in the LiqUIdify component library.
@@ -47,7 +47,7 @@ export const WithCustomStyling: Story = {
     className: 'shadow-xl',
   },
   render: (args) => (
-    <div className="max-w-4xl mx-auto p-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 min-h-screen">
+    <div className="mx-auto min-h-screen max-w-4xl bg-gradient-to-br from-blue-50 to-purple-50 p-4 dark:from-gray-900 dark:to-gray-800">
       <GlassAccessibleDemo {...args} />
     </div>
   ),
@@ -64,13 +64,13 @@ export const FeatureShowcase: Story = {
   render: () => (
     <div className="space-y-8 p-8">
       <GlassCard className="p-6">
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 className="mb-4 font-bold text-2xl">
           Accessibility Features Overview
         </h2>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           <div>
-            <h3 className="font-semibold mb-2 text-lg">Component Validation</h3>
-            <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
+            <h3 className="mb-2 font-semibold text-lg">Component Validation</h3>
+            <ul className="space-y-2 text-[var(--text-secondary)] text-sm">
               <li>• Real-time WCAG compliance checking</li>
               <li>• Accessibility score calculation</li>
               <li>• Detailed violation reporting</li>
@@ -80,8 +80,8 @@ export const FeatureShowcase: Story = {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-2 text-lg">Contrast Checking</h3>
-            <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
+            <h3 className="mb-2 font-semibold text-lg">Contrast Checking</h3>
+            <ul className="space-y-2 text-[var(--text-secondary)] text-sm">
               <li>• Real-time contrast ratio calculation</li>
               <li>• WCAG AA/AAA compliance checking</li>
               <li>• Auto-fix suggestions for failing colors</li>
@@ -91,8 +91,8 @@ export const FeatureShowcase: Story = {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-2 text-lg">ARIA Validation</h3>
-            <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
+            <h3 className="mb-2 font-semibold text-lg">ARIA Validation</h3>
+            <ul className="space-y-2 text-[var(--text-secondary)] text-sm">
               <li>• Automatic ARIA attribute validation</li>
               <li>• Invalid attribute detection</li>
               <li>• Auto-correction of common mistakes</li>
@@ -102,8 +102,8 @@ export const FeatureShowcase: Story = {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-2 text-lg">Real-time Monitoring</h3>
-            <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
+            <h3 className="mb-2 font-semibold text-lg">Real-time Monitoring</h3>
+            <ul className="space-y-2 text-[var(--text-secondary)] text-sm">
               <li>• Live accessibility issue detection</li>
               <li>• DOM mutation observation</li>
               <li>• Focus management tracking</li>
@@ -133,17 +133,17 @@ export const InteractiveGuide: Story = {
       React.useState<string>('validation');
 
     return (
-      <div className="max-w-5xl mx-auto p-8">
-        <GlassCard className="p-6 mb-6">
-          <h2 className="text-2xl font-bold mb-4">
+      <div className="mx-auto max-w-5xl p-8">
+        <GlassCard className="mb-6 p-6">
+          <h2 className="mb-4 font-bold text-2xl">
             Interactive Accessibility Guide
           </h2>
-          <p className="text-[var(--text-secondary)] mb-6">
+          <p className="mb-6 text-[var(--text-secondary)]">
             Click on the tabs below to learn about different accessibility
             features:
           </p>
 
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="mb-6 flex flex-wrap gap-2">
             {[
               { id: 'validation', label: 'Validation' },
               { id: 'contrast', label: 'Contrast' },
@@ -151,11 +151,12 @@ export const InteractiveGuide: Story = {
               { id: 'monitoring', label: 'Monitoring' },
             ].map((tab) => (
               <button
+                type="button"
                 key={tab.id}
                 onClick={() => setActiveFeature(tab.id)}
-                className={`px-4 py-2 rounded-lg transition-all ${
+                className={`rounded-lg px-4 py-2 transition-all ${
                   activeFeature === tab.id
-                    ? 'bg-blue-500/20 text-blue-500 font-medium'
+                    ? 'bg-blue-500/20 font-medium text-blue-500'
                     : 'hover:bg-white/10'
                 }`}
               >
@@ -167,8 +168,8 @@ export const InteractiveGuide: Story = {
           <div className="glass-effect rounded-lg p-4">
             {activeFeature === 'validation' && (
               <div>
-                <h3 className="font-semibold mb-2">Component Validation</h3>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <h3 className="mb-2 font-semibold">Component Validation</h3>
+                <p className="text-[var(--text-secondary)] text-sm">
                   The validation feature scans your components for accessibility
                   issues in real-time. It checks for missing ARIA labels,
                   incorrect heading hierarchy, color contrast issues, keyboard
@@ -181,8 +182,8 @@ export const InteractiveGuide: Story = {
 
             {activeFeature === 'contrast' && (
               <div>
-                <h3 className="font-semibold mb-2">Color Contrast Checker</h3>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <h3 className="mb-2 font-semibold">Color Contrast Checker</h3>
+                <p className="text-[var(--text-secondary)] text-sm">
                   The contrast checker ensures your color combinations meet WCAG
                   standards. It calculates the contrast ratio between foreground
                   and background colors, showing whether they pass AA or AAA
@@ -195,8 +196,8 @@ export const InteractiveGuide: Story = {
 
             {activeFeature === 'aria' && (
               <div>
-                <h3 className="font-semibold mb-2">ARIA Validation</h3>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <h3 className="mb-2 font-semibold">ARIA Validation</h3>
+                <p className="text-[var(--text-secondary)] text-sm">
                   ARIA (Accessible Rich Internet Applications) attributes help
                   screen readers understand your content. This feature validates
                   ARIA usage, detecting common mistakes like invalid attribute
@@ -209,8 +210,8 @@ export const InteractiveGuide: Story = {
 
             {activeFeature === 'monitoring' && (
               <div>
-                <h3 className="font-semibold mb-2">Real-time Monitoring</h3>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <h3 className="mb-2 font-semibold">Real-time Monitoring</h3>
+                <p className="text-[var(--text-secondary)] text-sm">
                   Real-time monitoring continuously watches your application for
                   accessibility issues as users interact with it. It detects
                   dynamic content changes, focus management problems, and
@@ -239,9 +240,9 @@ export const InteractiveGuide: Story = {
 export const DarkModeDemo: Story = {
   render: () => (
     <div className="dark min-h-screen bg-gray-900 p-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-4xl">
         <div className="mb-6 text-white">
-          <h1 className="text-3xl font-bold mb-2">Dark Mode Accessibility</h1>
+          <h1 className="mb-2 font-bold text-3xl">Dark Mode Accessibility</h1>
           <p className="text-gray-300">
             Testing accessibility features in dark mode to ensure proper
             contrast and visibility.
@@ -264,10 +265,10 @@ export const DarkModeDemo: Story = {
 
 export const CompactView: Story = {
   render: () => (
-    <div className="max-w-sm mx-auto p-4">
+    <div className="mx-auto max-w-sm p-4">
       <GlassCard className="p-4">
-        <h2 className="text-lg font-bold mb-3">Compact Accessibility Tools</h2>
-        <p className="text-xs text-[var(--text-secondary)] mb-4">
+        <h2 className="mb-3 font-bold text-lg">Compact Accessibility Tools</h2>
+        <p className="mb-4 text-[var(--text-secondary)] text-xs">
           All features work perfectly even in limited space.
         </p>
       </GlassCard>

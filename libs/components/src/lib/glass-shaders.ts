@@ -519,6 +519,7 @@ export class GlassShaderEffect {
       return;
     }
 
+    // biome-ignore lint/correctness/useHookAtTopLevel: WebGL API call, not a React hook
     this.gl.useProgram(this.program);
 
     for (const [key, value] of Object.entries(uniforms)) {
@@ -541,6 +542,7 @@ export class GlassShaderEffect {
       return;
     }
 
+    // biome-ignore lint/correctness/useHookAtTopLevel: WebGL API call, not a React hook
     this.gl.useProgram(this.program);
 
     // Update time uniform
@@ -573,7 +575,7 @@ export class GlassShaderEffect {
   animate(uniforms?: Partial<ShaderUniforms>): void {
     const loop = () => {
       this.render(uniforms);
-      this.animationId = requestAnimationFrame(loop);
+      this.animationId = window.requestAnimationFrame(loop);
     };
     loop();
   }
@@ -581,7 +583,7 @@ export class GlassShaderEffect {
   // Stop animation
   stop(): void {
     if (this.animationId) {
-      cancelAnimationFrame(this.animationId);
+      window.cancelAnimationFrame(this.animationId);
       this.animationId = null;
     }
   }
@@ -647,7 +649,8 @@ export function applyGlassShader(
 
     if (context) {
       // This is a simplified version - in production, you'd use html2canvas or similar
-      context.fillStyle = getComputedStyle(element).backgroundColor || 'white';
+      const computedStyle = window.getComputedStyle(element);
+      context.fillStyle = computedStyle.backgroundColor || 'white';
       context.fillRect(0, 0, elementCanvas.width, elementCanvas.height);
       shader.loadTexture('texture', elementCanvas);
     }

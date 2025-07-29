@@ -253,6 +253,7 @@ class ErrorTrackingSystem {
               </details>
 
               <button
+                type="button"
                 onClick={resetError}
                 className="rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
               >
@@ -291,7 +292,7 @@ class ErrorTrackingSystem {
   async getErrorAnalytics(): Promise<{
     totalErrors: number;
     errorRate: number;
-    topErrors: Array<{ message: string; count: number }>;
+    topErrors: { message: string; count: number }[];
     affectedUsers: number;
   }> {
     // This would typically fetch from Sentry API

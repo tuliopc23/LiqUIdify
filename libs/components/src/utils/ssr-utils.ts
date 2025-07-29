@@ -28,7 +28,7 @@ export const isNavigator = (): boolean => 'undefined' !== typeof navigator;
  * Safe window object with SSR fallback
  * @returns {Window | undefined} window object or undefined
  */
-export const safeWindow = (): Window | undefined => {
+export const safeWindow = (): Window | _undefined => {
   return isBrowser() ? window : undefined;
 };
 
@@ -36,7 +36,7 @@ export const safeWindow = (): Window | undefined => {
  * Safe document object with SSR fallback
  * @returns {Document | undefined} document object or undefined
  */
-export const safeDocument = (): Document | undefined => {
+export const safeDocument = (): Document | _undefined => {
   return isDocument() ? document : undefined;
 };
 
@@ -44,7 +44,7 @@ export const safeDocument = (): Document | undefined => {
  * Safe navigator object with SSR fallback
  * @returns {Navigator | undefined} navigator object or undefined
  */
-export const safeNavigator = (): Navigator | undefined => {
+export const safeNavigator = (): Navigator | _undefined => {
   return isNavigator() ? navigator : undefined;
 };
 
@@ -412,7 +412,7 @@ export const safeMutationObserver = (
 /**
  * Execute callback only in browser environment
  * @param {Function} callback - function to execute
- * @param {any[]} deps - dependencies for the callback
+ * @param {Array<any>} deps - dependencies for the callback
  */
 export const clientOnly = (
   callback: () => void,

@@ -695,7 +695,7 @@ export class AccessibilityManager {
         id: 'empty-headings',
         description: 'Empty heading elements found',
         suggestion: 'Add content to headings or remove them',
-        elements: emptyHeadings as Array<HTMLElement>,
+        elements: emptyHeadings as HTMLElement[],
       });
     }
 
@@ -708,7 +708,7 @@ export class AccessibilityManager {
         id: 'positive-tabindex',
         description: 'Positive tabindex values can disrupt keyboard navigation',
         suggestion: 'Use tabindex="0" or "-1" instead',
-        elements: [...positiveTabindex] as Array<HTMLElement>,
+        elements: [...positiveTabindex] as HTMLElement[],
       });
     }
 
@@ -1016,7 +1016,7 @@ class FocusTrap {
 
     const focusableElements = [
       ...this.container.querySelectorAll(focusableSelectors),
-    ] as Array<HTMLElement>;
+    ] as HTMLElement[];
 
     this.firstFocusableElement = focusableElements[0] || undefined;
     this.lastFocusableElement = focusableElements.at(-1) || undefined;

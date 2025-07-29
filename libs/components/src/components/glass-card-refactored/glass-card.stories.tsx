@@ -313,7 +313,7 @@ export const Playground: Story = {
           </p>
         </Card.Content>
         <Card.Footer>
-          <GlassButton size="sm" variant="ghost">
+          <GlassButton type="button" size="sm" variant="ghost">
             Learn More
           </GlassButton>
         </Card.Footer>
@@ -470,10 +470,10 @@ export const InteractiveStates: Story = {
               This card has hover effects enabled. Move your mouse over it.
             </p>
             <div className="flex gap-2">
-              <GlassButton size="sm" variant="primary">
+              <GlassButton type="button" size="sm" variant="primary">
                 Action
               </GlassButton>
-              <GlassButton size="sm" variant="ghost">
+              <GlassButton type="button" size="sm" variant="ghost">
                 Cancel
               </GlassButton>
             </div>
@@ -734,6 +734,7 @@ export const RealWorldExamples: Story = {
                   <Card.Description>Wireless Noise Cancelling</Card.Description>
                 </div>
                 <GlassButton
+                  type="button"
                   size="sm"
                   variant="ghost"
                   iconOnly
@@ -755,6 +756,7 @@ export const RealWorldExamples: Story = {
                 </div>
               </div>
               <GlassButton
+                type="button"
                 variant="primary"
                 fullWidth
                 leftIcon={<ShoppingCart className="h-4 w-4" />}
@@ -773,6 +775,7 @@ export const RealWorldExamples: Story = {
                   <Card.Description>Fitness & Health Tracking</Card.Description>
                 </div>
                 <GlassButton
+                  type="button"
                   size="sm"
                   variant="ghost"
                   iconOnly
@@ -794,6 +797,7 @@ export const RealWorldExamples: Story = {
                 </div>
               </div>
               <GlassButton
+                type="button"
                 variant="primary"
                 fullWidth
                 leftIcon={<ShoppingCart className="h-4 w-4" />}
@@ -820,7 +824,7 @@ export const RealWorldExamples: Story = {
                       @sarahjohnson • 2h
                     </p>
                   </div>
-                  <GlassButton size="sm" variant="ghost" iconOnly>
+                  <GlassButton type="button" size="sm" variant="ghost" iconOnly>
                     <MoreVertical className="h-4 w-4" />
                   </GlassButton>
                 </div>
@@ -835,19 +839,31 @@ export const RealWorldExamples: Story = {
             </p>
             <div className="mb-4 h-64 rounded-lg bg-gradient-to-br from-blue-500 via-purple-500 to-pink-600" />
             <div className="flex items-center justify-between text-gray-600 text-sm dark:text-gray-400">
-              <button className="flex items-center gap-2 transition-colors hover:text-blue-500">
+              <button
+                type="button"
+                className="flex items-center gap-2 transition-colors hover:text-blue-500"
+              >
                 <Heart className="h-5 w-5" />
                 <span>483</span>
               </button>
-              <button className="flex items-center gap-2 transition-colors hover:text-blue-500">
+              <button
+                type="button"
+                className="flex items-center gap-2 transition-colors hover:text-blue-500"
+              >
                 <MessageCircle className="h-5 w-5" />
                 <span>52</span>
               </button>
-              <button className="flex items-center gap-2 transition-colors hover:text-blue-500">
+              <button
+                type="button"
+                className="flex items-center gap-2 transition-colors hover:text-blue-500"
+              >
                 <Share2 className="h-5 w-5" />
                 <span>Share</span>
               </button>
-              <button className="flex items-center gap-2 transition-colors hover:text-blue-500">
+              <button
+                type="button"
+                className="flex items-center gap-2 transition-colors hover:text-blue-500"
+              >
                 <Bookmark className="h-5 w-5" />
               </button>
             </div>
@@ -905,10 +921,10 @@ export const CompoundComponents: Story = {
           </p>
         </Card.Footer>
         <Card.Actions>
-          <GlassButton size="sm" variant="ghost">
+          <GlassButton type="button" size="sm" variant="ghost">
             Cancel
           </GlassButton>
-          <GlassButton size="sm" variant="primary">
+          <GlassButton type="button" size="sm" variant="primary">
             Confirm
           </GlassButton>
         </Card.Actions>
@@ -946,7 +962,7 @@ export const CompoundComponents: Story = {
           </p>
         </Card.Content>
         <Card.Actions>
-          <GlassButton size="sm" fullWidth>
+          <GlassButton type="button" size="sm" fullWidth>
             Action Button
           </GlassButton>
         </Card.Actions>
@@ -1093,13 +1109,14 @@ export const AccessibilityShowcase: Story = {
                 individually focusable.
               </p>
               <div className="flex gap-2">
-                <GlassButton size="sm" variant="primary">
+                <GlassButton type="button" size="sm" variant="primary">
                   Primary
                 </GlassButton>
-                <GlassButton size="sm" variant="ghost">
+                <GlassButton type="button" size="sm" variant="ghost">
                   Secondary
                 </GlassButton>
                 <GlassButton
+                  type="button"
                   size="sm"
                   variant="ghost"
                   iconOnly

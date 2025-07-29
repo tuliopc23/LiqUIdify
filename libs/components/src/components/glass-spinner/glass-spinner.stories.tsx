@@ -212,6 +212,7 @@ export const CenteredOverlay: Story = {
     return (
       <div className="space-y-4">
         <button
+          type="button"
           onClick={() => {
             setLoading(true);
             setTimeout(() => setLoading(false), 3000);
@@ -296,6 +297,7 @@ export const ButtonLoading: Story = {
     return (
       <div className="space-y-4">
         <button
+          type="button"
           onClick={() => handleClick('save')}
           disabled={loading.save}
           className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
@@ -305,6 +307,7 @@ export const ButtonLoading: Story = {
         </button>
 
         <button
+          type="button"
           onClick={() => handleClick('submit')}
           disabled={loading.submit}
           className="flex items-center gap-2 rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
@@ -314,6 +317,7 @@ export const ButtonLoading: Story = {
         </button>
 
         <button
+          type="button"
           onClick={() => handleClick('delete')}
           disabled={loading.delete}
           className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-50"
@@ -402,6 +406,7 @@ export const DataTableLoading: Story = {
           )}
         </div>
         <button
+          type="button"
           onClick={() => {
             setLoading(true);
             setTimeout(() => setLoading(false), 3000);

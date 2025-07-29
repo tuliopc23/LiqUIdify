@@ -19,7 +19,7 @@ const numberInputVariants = cva({
 });
 
 const inputVariants = cva({
-  base: 'w-full border text-center transition-all duration-200 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm text-white placeholder-white/60 hover:bg-white/10 focus:bg-white/10 focus:border-blue-400/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+  base: 'w-full rounded-xl border border-white/10 bg-white/5 text-center text-white placeholder-white/60 backdrop-blur-sm transition-all duration-200 hover:bg-white/10 focus:border-blue-400/50 focus:bg-white/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
   variants: {
     size: {
       sm: 'px-8 py-2 text-sm',
@@ -38,7 +38,7 @@ const inputVariants = cva({
 });
 
 const buttonVariants = cva({
-  base: '-translate-y-1/2 absolute top-1/2 transform flex items-center justify-center bg-white/10 hover:bg-white/20 active:bg-white/30 rounded-lg border border-white/10 text-white/70 hover:text-white transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-400/50',
+  base: '-translate-y-1/2 absolute top-1/2 flex transform items-center justify-center rounded-lg border border-white/10 bg-white/10 text-white/70 transition-all duration-200 hover:bg-white/20 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400/50 active:bg-white/30 disabled:cursor-not-allowed disabled:opacity-50',
   variants: {
     size: {
       sm: 'h-6 w-6',
@@ -131,7 +131,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
 
     // Parse display value to number
     const parseNumber = useCallback(
-      (string_: string): number | undefined => {
+      (string_: string): number | _undefined => {
         if (!string_.trim()) {
           return undefined;
         }

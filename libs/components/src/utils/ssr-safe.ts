@@ -42,7 +42,7 @@ export const safeDocument = new Proxy({} as Document, {
 export const clientOnly = <T>(
   callback: () => T,
   fallback?: T
-): T | undefined => {
+): T | _undefined => {
   if (isServer) {
     return fallback;
   }

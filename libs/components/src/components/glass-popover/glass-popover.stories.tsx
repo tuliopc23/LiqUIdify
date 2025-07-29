@@ -9,15 +9,12 @@ import {
 import { useState } from 'react';
 import { GlassPopover } from './glass-popover';
 
-const meta = {
-  title: 'Components/GlassPopover',
+const meta = { title: 'Components/GlassPopover' }
   component: GlassPopover,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
+  parameters: { layout: 'centered' }
+    docs: { description: {
         component: `
-The GlassPopover component provides a floating panel that appears near a trigger element. It supports multiple 
+The GlassPopover component provides a floating panel that appears near a trigger element. It supports multiple  }
 positioning options, automatic viewport adjustment, and can be controlled or uncontrolled.
 
 ## Features
@@ -32,47 +29,37 @@ positioning options, automatic viewport adjustment, and can be controlled or unc
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    trigger: {
-      description: 'The element that triggers the popover',
+  argTypes: { trigger: {
+      description: 'The element that triggers the popover' }
       control: { type: 'text' },
     },
-    content: {
-      description: 'The content to display in the popover',
+    content: { description: 'The content to display in the popover' }
       control: { type: 'text' },
     },
-    position: {
-      description: 'Position of the popover relative to the trigger',
+    position: { description: 'Position of the popover relative to the trigger' }
       control: { type: 'select' },
       options: ['top', 'bottom', 'left', 'right'],
     },
-    align: {
-      description: 'Alignment of the popover relative to the trigger',
+    align: { description: 'Alignment of the popover relative to the trigger' }
       control: { type: 'select' },
       options: ['start', 'center', 'end'],
     },
-    open: {
-      description: 'Controlled open state',
+    open: { description: 'Controlled open state' }
       control: { type: 'boolean' },
     },
-    onOpenChange: {
-      description: 'Callback when open state changes',
+    onOpenChange: { description: 'Callback when open state changes' }
       action: 'openChanged',
     },
-    closeOnClickOutside: {
-      description: 'Close when clicking outside the popover',
+    closeOnClickOutside: { description: 'Close when clicking outside the popover' }
       control: { type: 'boolean' },
     },
-    closeOnEscape: {
-      description: 'Close when pressing Escape key',
+    closeOnEscape: { description: 'Close when pressing Escape key' }
       control: { type: 'boolean' },
     },
-    className: {
-      description: 'Additional CSS classes for the trigger',
+    className: { description: 'Additional CSS classes for the trigger' }
       control: { type: 'text' },
     },
-    contentClassName: {
-      description: 'Additional CSS classes for the content',
+    contentClassName: { description: 'Additional CSS classes for the content' }
       control: { type: 'text' },
     },
   },
@@ -81,26 +68,27 @@ positioning options, automatic viewport adjustment, and can be controlled or unc
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default story
-export const Default: Story = {
-  args: {
-    trigger: 'Click me',
+{/* Default story  */}
+export const Default: Story = { args: {
+    trigger: 'Click me' }
     content: 'This is a popover content!',
     position: 'bottom',
     align: 'center',
   },
 };
 
-// Position variations
-export const Positions: Story = {
-  render: () => (
+{/* Position variations  */}
+export const Positions: Story = { render: () => (
     <div className="grid grid-cols-2 gap-16 p-20">
       <div className="text-center">
         <GlassPopover
           trigger={
-            <button className="rounded-lg bg-blue-500 px-4 py-2 text-white">
+            <button
+              type="button"
+              className="rounded-lg bg-blue-500 px-4 py-2 text-white"
+            >
               Top
-            </button>
+            </button> }
           }
           content="Popover positioned at the top"
           position="top"
@@ -109,7 +97,10 @@ export const Positions: Story = {
       <div className="text-center">
         <GlassPopover
           trigger={
-            <button className="rounded-lg bg-green-500 px-4 py-2 text-white">
+            <button
+              type="button"
+              className="rounded-lg bg-green-500 px-4 py-2 text-white"
+            >
               Bottom
             </button>
           }
@@ -120,7 +111,10 @@ export const Positions: Story = {
       <div className="text-center">
         <GlassPopover
           trigger={
-            <button className="rounded-lg bg-purple-500 px-4 py-2 text-white">
+            <button
+              type="button"
+              className="rounded-lg bg-purple-500 px-4 py-2 text-white"
+            >
               Left
             </button>
           }
@@ -131,7 +125,10 @@ export const Positions: Story = {
       <div className="text-center">
         <GlassPopover
           trigger={
-            <button className="rounded-lg bg-orange-500 px-4 py-2 text-white">
+            <button
+              type="button"
+              className="rounded-lg bg-orange-500 px-4 py-2 text-white"
+            >
               Right
             </button>
           }
@@ -143,15 +140,17 @@ export const Positions: Story = {
   ),
 };
 
-// Alignment variations
-export const Alignments: Story = {
-  render: () => (
+{/* Alignment variations  */}
+export const Alignments: Story = { render: () => (
     <div className="flex gap-8 p-8">
       <GlassPopover
         trigger={
-          <button className="rounded-lg bg-blue-500 px-4 py-2 text-white">
+          <button
+            type="button"
+            className="rounded-lg bg-blue-500 px-4 py-2 text-white"
+          >
             Start Aligned
-          </button>
+          </button> }
         }
         content={
           <div className="w-48">
@@ -163,7 +162,10 @@ export const Alignments: Story = {
       />
       <GlassPopover
         trigger={
-          <button className="rounded-lg bg-green-500 px-4 py-2 text-white">
+          <button
+            type="button"
+            className="rounded-lg bg-green-500 px-4 py-2 text-white"
+          >
             Center Aligned
           </button>
         }
@@ -177,7 +179,10 @@ export const Alignments: Story = {
       />
       <GlassPopover
         trigger={
-          <button className="rounded-lg bg-purple-500 px-4 py-2 text-white">
+          <button
+            type="button"
+            className="rounded-lg bg-purple-500 px-4 py-2 text-white"
+          >
             End Aligned
           </button>
         }
@@ -193,16 +198,18 @@ export const Alignments: Story = {
   ),
 };
 
-// Rich content example
-export const RichContent: Story = {
-  args: {
+{/* Rich content example  */}
+export const RichContent: Story = { args: {
     trigger: (
-      <button className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
+      <button
+        type="button"
+        className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+      >
         <User className="h-4 w-4" />
         <span>Account</span>
         <ChevronDown className="h-4 w-4" />
       </button>
-    ),
+    ) }
     content: (
       <div className="w-64">
         <div className="flex items-center gap-3 border-gray-200 border-b p-3 dark:border-gray-700">
@@ -213,20 +220,32 @@ export const RichContent: Story = {
           </div>
         </div>
         <div className="p-2">
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800">
+          <button
+            type="button"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
             <User className="h-4 w-4" />
             <span>Profile</span>
           </button>
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800">
+          <button
+            type="button"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
             <Settings className="h-4 w-4" />
             <span>Settings</span>
           </button>
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800">
+          <button
+            type="button"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
             <HelpCircle className="h-4 w-4" />
             <span>Help</span>
           </button>
           <hr className="my-2 border-gray-200 dark:border-gray-700" />
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-red-600 hover:bg-gray-100 dark:hover:bg-gray-800">
+          <button
+            type="button"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-red-600 hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
             <span>Sign Out</span>
           </button>
         </div>
@@ -235,22 +254,23 @@ export const RichContent: Story = {
   },
 };
 
-// Controlled example
-export const Controlled: Story = {
-  render: () => {
+{/* Controlled example  */}
+export const Controlled: Story = { render: () => { }
     const [open, setOpen] = useState(false);
 
     return (
       <div className="space-y-4 text-center">
         <div className="space-x-4">
           <button
-            onClick={() => setOpen(true)}
+            type="button"
+              onClick={() => setOpen(true)}
             className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
           >
             Open Popover
           </button>
           <button
-            onClick={() => setOpen(false)}
+            type="button"
+              onClick={() => setOpen(false)}
             className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
           >
             Close Popover
@@ -258,7 +278,10 @@ export const Controlled: Story = {
         </div>
         <GlassPopover
           trigger={
-            <button className="rounded-lg bg-blue-500 px-4 py-2 text-white">
+            <button
+              type="button"
+              className="rounded-lg bg-blue-500 px-4 py-2 text-white"
+            >
               Controlled Popover
             </button>
           }
@@ -278,16 +301,18 @@ export const Controlled: Story = {
   },
 };
 
-// Interactive form example
-export const InteractiveForm: Story = {
-  render: () => {
+{/* Interactive form example  */}
+export const InteractiveForm: Story = { render: () => { }
     const [email, setEmail] = useState('');
     const [notifications, setNotifications] = useState(true);
 
     return (
       <GlassPopover
         trigger={
-          <button className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white">
+          <button
+            type="button"
+            className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white"
+          >
             <Settings className="h-4 w-4" />
             <span>Quick Settings</span>
           </button>
@@ -297,8 +322,14 @@ export const InteractiveForm: Story = {
             <h3 className="mb-4 font-semibold">Quick Settings</h3>
             <div className="space-y-4">
               <div>
-                <label className="mb-1 block font-medium text-sm">Email</label>
+                <label
+                  htmlFor="email-53lnb3"
+                  className="mb-1 block font-medium text-sm"
+                >
+                  Email
+                </label>
                 <input
+                  id="input-351"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -307,11 +338,15 @@ export const InteractiveForm: Story = {
                 />
               </div>
               <div className="flex items-center justify-between">
-                <label className="font-medium text-sm">
+                <label
+                  htmlFor="form-field"
+                  className="font-medium text-sm"
+                >
                   Email Notifications
                 </label>
                 <button
-                  onClick={() => setNotifications(!notifications)}
+                  type="button"
+              onClick={() => setNotifications(!notifications)}
                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                     notifications ? 'bg-blue-600' : 'bg-gray-300'
                   }`}
@@ -323,7 +358,10 @@ export const InteractiveForm: Story = {
                   />
                 </button>
               </div>
-              <button className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+              <button
+                type="button"
+                className="w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              >
                 Save Changes
               </button>
             </div>
@@ -335,25 +373,36 @@ export const InteractiveForm: Story = {
   },
 };
 
-// Multiple popovers
-export const MultiplePopovers: Story = {
-  render: () => (
+{/* Multiple popovers  */}
+export const MultiplePopovers: Story = { render: () => (
     <div className="flex gap-4">
       <GlassPopover
         trigger={
-          <button className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+          <button
+            type="button"
+            className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
             <MoreVertical className="h-5 w-5" />
-          </button>
+          </button> }
         }
         content={
           <div className="min-w-[150px] p-2">
-            <button className="w-full rounded px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800">
+            <button
+              type="button"
+              className="w-full rounded px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
               Edit
             </button>
-            <button className="w-full rounded px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800">
+            <button
+              type="button"
+              className="w-full rounded px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
               Duplicate
             </button>
-            <button className="w-full rounded px-3 py-2 text-left text-red-600 hover:bg-gray-100 dark:hover:bg-gray-800">
+            <button
+              type="button"
+              className="w-full rounded px-3 py-2 text-left text-red-600 hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
               Delete
             </button>
           </div>
@@ -361,7 +410,10 @@ export const MultiplePopovers: Story = {
       />
       <GlassPopover
         trigger={
-          <button className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800">
+          <button
+            type="button"
+            className="rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
             <HelpCircle className="h-5 w-5" />
           </button>
         }
@@ -379,16 +431,18 @@ export const MultiplePopovers: Story = {
   ),
 };
 
-// Edge positioning (viewport awareness demo)
-export const ViewportAwareness: Story = {
-  render: () => (
+{/* Edge positioning (viewport awareness demo)  */}
+export const ViewportAwareness: Story = { render: () => (
     <div className="relative h-96 rounded-lg border-2 border-gray-300 border-dashed dark:border-gray-700">
       <div className="absolute top-4 left-4">
         <GlassPopover
           trigger={
-            <button className="rounded bg-blue-500 px-3 py-1 text-white">
+            <button
+              type="button"
+              className="rounded bg-blue-500 px-3 py-1 text-white"
+            >
               Top Left
-            </button>
+            </button> }
           }
           content={
             <div className="p-4">
@@ -400,7 +454,10 @@ export const ViewportAwareness: Story = {
       <div className="absolute top-4 right-4">
         <GlassPopover
           trigger={
-            <button className="rounded bg-green-500 px-3 py-1 text-white">
+            <button
+              type="button"
+              className="rounded bg-green-500 px-3 py-1 text-white"
+            >
               Top Right
             </button>
           }
@@ -414,7 +471,10 @@ export const ViewportAwareness: Story = {
       <div className="absolute bottom-4 left-4">
         <GlassPopover
           trigger={
-            <button className="rounded bg-purple-500 px-3 py-1 text-white">
+            <button
+              type="button"
+              className="rounded bg-purple-500 px-3 py-1 text-white"
+            >
               Bottom Left
             </button>
           }
@@ -428,7 +488,10 @@ export const ViewportAwareness: Story = {
       <div className="absolute right-4 bottom-4">
         <GlassPopover
           trigger={
-            <button className="rounded bg-orange-500 px-3 py-1 text-white">
+            <button
+              type="button"
+              className="rounded bg-orange-500 px-3 py-1 text-white"
+            >
               Bottom Right
             </button>
           }
@@ -443,14 +506,16 @@ export const ViewportAwareness: Story = {
   ),
 };
 
-// Custom styling
-export const CustomStyling: Story = {
-  args: {
+{/* Custom styling  */}
+export const CustomStyling: Story = { args: {
     trigger: (
-      <button className="rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 font-semibold text-white">
+      <button
+        type="button"
+        className="rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 font-semibold text-white"
+      >
         Custom Styled
       </button>
-    ),
+    ) }
     content: (
       <div>
         <h3 className="mb-2 bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text font-bold text-transparent">
@@ -464,25 +529,18 @@ export const CustomStyling: Story = {
   },
 };
 
-// Nested popovers
-export const NestedPopovers: Story = {
-  render: () => (
+{/* Nested popovers  */}
+export const NestedPopovers: Story = { render: () => (
     <GlassPopover
       trigger={
-        <button className="rounded-lg bg-blue-500 px-4 py-2 text-white">
+        <button
+          type="button"
+          className="rounded-lg bg-blue-500 px-4 py-2 text-white"
+        >
           Parent Popover
-        </button>
+        </button> }
       }
       content={
-        <div className="p-4">
-          <p className="mb-4">This is the parent popover</p>
-          <GlassPopover
-            trigger={
-              <button className="rounded bg-green-500 px-3 py-1 text-white">
-                Child Popover
-              </button>
-            }
-            content={
               <div className="p-4">
                 <p>This is a nested popover!</p>
               </div>
@@ -496,9 +554,8 @@ export const NestedPopovers: Story = {
   ),
 };
 
-// Loading state example
-export const LoadingContent: Story = {
-  render: () => {
+{/* Loading state example  */}
+export const LoadingContent: Story = { render: () => { }
     const [loading, setLoading] = useState(false);
 
     const handleOpen = () => {
@@ -510,7 +567,8 @@ export const LoadingContent: Story = {
       <GlassPopover
         trigger={
           <button
-            onClick={handleOpen}
+            type="button"
+              onClick={handleOpen}
             className="rounded-lg bg-blue-500 px-4 py-2 text-white"
           >
             Load Content

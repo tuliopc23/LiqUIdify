@@ -15,7 +15,7 @@ import { cn } from '@/core/utils/classname';
 import { createVariants as cva } from '../../lib/variant-system';
 
 const fileUploadVariants = cva({
-  base: 'relative w-full rounded-xl border-2 border-dashed transition-all duration-200 bg-white/5 backdrop-blur-sm',
+  base: 'relative w-full rounded-xl border-2 border-dashed bg-white/5 backdrop-blur-sm transition-all duration-200',
   variants: {
     size: {
       sm: 'min-h-[120px] p-4',
@@ -36,7 +36,7 @@ const fileUploadVariants = cva({
 });
 
 const fileItemVariants = cva({
-  base: 'flex items-center gap-3 rounded-lg p-3 border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-200',
+  base: 'flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3 backdrop-blur-sm transition-all duration-200',
   variants: {
     status: {
       pending: 'border-white/10',
@@ -101,7 +101,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     },
     ref
   ) => {
-    const [files, setFiles] = useState<Array<FileUploadItem>>([]);
+    const [files, setFiles] = useState<FileUploadItem[]>([]);
     const [isDragOver, setIsDragOver] = useState(false);
     const [uploadState, setUploadState] = useState<
       'idle' | 'uploading' | 'error'
@@ -274,6 +274,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
         showPreview,
         validateFile,
         handleUpload,
+        createPreview,
       ]
     );
 

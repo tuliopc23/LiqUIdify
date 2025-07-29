@@ -4,16 +4,13 @@ import type React from 'react';
 import { useState } from 'react';
 import { GlassTextarea } from './glass-textarea';
 
-const meta = {
-  title: 'Glass UI/GlassTextarea',
+const meta = { title: 'Glass UI/GlassTextarea' }
   component: GlassTextarea,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
+  parameters: { layout: 'centered' }
+    docs: { description: {
         component: `
 ## GlassTextarea Component
-
+ }
 A sophisticated textarea component with glassmorphic styling, customizable resize behavior, and comprehensive form support. Perfect for multi-line text input with elegant visual design.
 
 ### Key Features
@@ -37,8 +34,7 @@ function MyComponent() {
       value={text}
       onChange={(e) => setText(e.target.value)}
       placeholder="Enter your message..."
-      resize="vertical"
-    />
+      resize="vertical" />
   );
 }
 \`\`\`
@@ -47,47 +43,37 @@ function MyComponent() {
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    placeholder: {
-      control: 'text',
+  argTypes: { placeholder: {
+      control: 'text' }
       description: 'Placeholder text',
     },
-    value: {
-      control: 'text',
+    value: { control: 'text' }
       description: 'Textarea value',
     },
-    onChange: {
-      action: 'changed',
+    onChange: { action: 'changed' }
       description: 'Change event handler',
     },
-    disabled: {
-      control: 'boolean',
+    disabled: { control: 'boolean' }
       description: 'Whether the textarea is disabled',
     },
-    variant: {
-      control: 'select',
+    variant: { control: 'select' }
       options: ['default', 'minimal'],
       description: 'Visual variant',
     },
-    resize: {
-      control: 'select',
+    resize: { control: 'select' }
       options: ['none', 'vertical', 'horizontal', 'both'],
       description: 'Resize behavior',
     },
-    rows: {
-      control: 'number',
+    rows: { control: 'number' }
       description: 'Number of visible text rows',
     },
-    cols: {
-      control: 'number',
+    cols: { control: 'number' }
       description: 'Number of visible text columns',
     },
-    maxLength: {
-      control: 'number',
+    maxLength: { control: 'number' }
       description: 'Maximum character length',
     },
-    className: {
-      control: 'text',
+    className: { control: 'text' }
       description: 'Additional CSS classes',
     },
   },
@@ -96,17 +82,15 @@ function MyComponent() {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default Story
-export const Default: Story = {
-  args: {
-    placeholder: 'Enter your text here...',
+{/* Default Story  */}
+export const Default: Story = { args: {
+    placeholder: 'Enter your text here...' }
     rows: 4,
   },
 };
 
-// Controlled Example
-export const Controlled: Story = {
-  render: (args) => {
+{/* Controlled Example  */}
+export const Controlled: Story = { render: (args) => { }
     const [value, setValue] = useState('');
 
     return (
@@ -115,8 +99,7 @@ export const Controlled: Story = {
           {...args}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Type something..."
-        />
+          placeholder="Type something..." />
         <div className="text-gray-600 text-sm dark:text-gray-400">
           Character count: {value.length}
         </div>
@@ -125,9 +108,8 @@ export const Controlled: Story = {
   },
 };
 
-// Variants
-export const Variants: Story = {
-  render: () => {
+{/* Variants  */}
+export const Variants: Story = { render: () => {
     return (
       <div className="w-96 space-y-6">
         <div>
@@ -136,8 +118,7 @@ export const Variants: Story = {
           </h3>
           <GlassTextarea
             placeholder="Default glassmorphic style..."
-            variant="default"
-          />
+            variant="default" />
         </div>
 
         <div>
@@ -146,17 +127,15 @@ export const Variants: Story = {
           </h3>
           <GlassTextarea
             placeholder="Minimal style with bottom border..."
-            variant="minimal"
-          />
+            variant="minimal" />
         </div>
       </div>
-    );
+    ); }
   },
 };
 
-// Resize Options
-export const ResizeOptions: Story = {
-  render: () => {
+{/* Resize Options  */}
+export const ResizeOptions: Story = { render: () => {
     return (
       <div className="grid grid-cols-2 gap-6">
         <div>
@@ -165,9 +144,8 @@ export const ResizeOptions: Story = {
           </h3>
           <GlassTextarea
             placeholder="Cannot be resized"
-            resize="none"
-            rows={3}
-          />
+            resize="none" }
+            rows={3} />
         </div>
 
         <div>
@@ -177,8 +155,7 @@ export const ResizeOptions: Story = {
           <GlassTextarea
             placeholder="Resize vertically only"
             resize="vertical"
-            rows={3}
-          />
+            rows={3} />
         </div>
 
         <div>
@@ -188,8 +165,7 @@ export const ResizeOptions: Story = {
           <GlassTextarea
             placeholder="Resize horizontally only"
             resize="horizontal"
-            rows={3}
-          />
+            rows={3} />
         </div>
 
         <div>
@@ -199,23 +175,21 @@ export const ResizeOptions: Story = {
           <GlassTextarea
             placeholder="Resize in both directions"
             resize="both"
-            rows={3}
-          />
+            rows={3} />
         </div>
       </div>
     );
   },
 };
 
-// Different Sizes
-export const DifferentSizes: Story = {
-  render: () => {
+{/* Different Sizes  */}
+export const DifferentSizes: Story = { render: () => {
     return (
       <div className="w-96 space-y-6">
         <div>
           <h3 className="mb-2 font-medium text-gray-700 text-sm dark:text-gray-300">
             Small (2 rows)
-          </h3>
+          </h3> }
           <GlassTextarea placeholder="Small textarea..." rows={2} />
         </div>
 
@@ -237,18 +211,16 @@ export const DifferentSizes: Story = {
   },
 };
 
-// Disabled State
-export const Disabled: Story = {
-  args: {
-    placeholder: 'This textarea is disabled',
+{/* Disabled State  */}
+export const Disabled: Story = { args: {
+    placeholder: 'This textarea is disabled' }
     disabled: true,
     value: 'You cannot edit this text',
   },
 };
 
-// With Character Limit
-export const WithCharacterLimit: Story = {
-  render: () => {
+{/* With Character Limit  */}
+export const WithCharacterLimit: Story = { render: () => { }
     const [value, setValue] = useState('');
     const maxLength = 200;
 
@@ -259,8 +231,7 @@ export const WithCharacterLimit: Story = {
           onChange={(e) => setValue(e.target.value)}
           placeholder="Write your bio (max 200 characters)..."
           maxLength={maxLength}
-          rows={4}
-        />
+          rows={4} />
         <div className="text-right text-sm">
           <span
             className={
@@ -277,9 +248,8 @@ export const WithCharacterLimit: Story = {
   },
 };
 
-// Interactive Demo
-export const InteractiveDemo: Story = {
-  render: () => {
+{/* Interactive Demo  */}
+export const InteractiveDemo: Story = { render: () => { }
     const [comment, setComment] = useState('');
     const [feedback, setFeedback] = useState('');
     const [notes, setNotes] = useState('');
@@ -292,7 +262,7 @@ export const InteractiveDemo: Story = {
 
         <div className="space-y-6">
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label htmlFor="comment-ct657k" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               <MessageSquare className="mr-1 inline h-4 w-4" />
               Comment
             </label>
@@ -300,12 +270,11 @@ export const InteractiveDemo: Story = {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Share your thoughts..."
-              rows={3}
-            />
+              rows={3} />
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label htmlFor="feedback-nbdse2" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               <FileText className="mr-1 inline h-4 w-4" />
               Feedback
             </label>
@@ -314,12 +283,11 @@ export const InteractiveDemo: Story = {
               onChange={(e) => setFeedback(e.target.value)}
               placeholder="How can we improve?"
               rows={4}
-              variant="minimal"
-            />
+              variant="minimal" />
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label htmlFor="form-field" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               <Code className="mr-1 inline h-4 w-4" />
               Code Snippet
             </label>
@@ -328,8 +296,7 @@ export const InteractiveDemo: Story = {
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Paste your code here..."
               rows={5}
-              className="font-mono text-sm"
-            />
+              className="font-mono text-sm" />
           </div>
         </div>
 
@@ -348,11 +315,9 @@ export const InteractiveDemo: Story = {
   },
 };
 
-// Form Integration
-export const FormIntegration: Story = {
-  render: () => {
-    const [formData, setFormData] = useState({
-      message: '',
+{/* Form Integration  */}
+export const FormIntegration: Story = { render: () => { }
+    const [formData, setFormData] = useState({ message: '' }
       description: '',
       notes: '',
     });
@@ -374,7 +339,7 @@ export const FormIntegration: Story = {
 
         <div className="space-y-4">
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label htmlFor="message--9uci19" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Message *
             </label>
             <GlassTextarea
@@ -382,24 +347,22 @@ export const FormIntegration: Story = {
               onChange={(e) => updateField('message', e.target.value)}
               placeholder="Your message..."
               rows={4}
-              required
-            />
+              required />
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label htmlFor="form-field" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Project Description
             </label>
             <GlassTextarea
               value={formData.description}
               onChange={(e) => updateField('description', e.target.value)}
               placeholder="Tell us about your project..."
-              rows={5}
-            />
+              rows={5} />
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label htmlFor="form-field" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
               Additional Notes
             </label>
             <GlassTextarea
@@ -407,8 +370,7 @@ export const FormIntegration: Story = {
               onChange={(e) => updateField('notes', e.target.value)}
               placeholder="Any other information..."
               rows={3}
-              variant="minimal"
-            />
+              variant="minimal" />
           </div>
         </div>
 
@@ -424,9 +386,8 @@ export const FormIntegration: Story = {
   },
 };
 
-// Real-world Examples
-export const RealWorldExamples: Story = {
-  render: () => {
+{/* Real-world Examples  */}
+export const RealWorldExamples: Story = { render: () => { }
     const [reviewText, setReviewText] = useState('');
     const [codeSnippet, setCodeSnippet] =
       useState(`function calculateSum(a, b) {
@@ -442,7 +403,7 @@ export const RealWorldExamples: Story = {
           <div className="space-y-4">
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
-                <button key={star} className="text-2xl">
+                <button type="button" key={star} className="text-2xl">
                   ⭐
                 </button>
               ))}
@@ -451,9 +412,11 @@ export const RealWorldExamples: Story = {
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
               placeholder="Share your experience with this product..."
-              rows={4}
-            />
-            <button className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600">
+              rows={4} />
+            <button
+              type="button"
+              className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+            >
               Submit Review
             </button>
           </div>
@@ -469,13 +432,18 @@ export const RealWorldExamples: Story = {
               onChange={(e) => setCodeSnippet(e.target.value)}
               className="bg-gray-900 font-mono text-green-400 text-sm"
               rows={8}
-              resize="both"
-            />
+              resize="both" />
             <div className="flex gap-2">
-              <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+              <button
+                type="button"
+                className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              >
                 Run Code
               </button>
-              <button className="rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600">
+              <button
+                type="button"
+                className="rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
+              >
                 Clear
               </button>
             </div>
@@ -486,9 +454,8 @@ export const RealWorldExamples: Story = {
   },
 };
 
-// Accessibility Demo
-export const AccessibilityDemo: Story = {
-  render: () => {
+{/* Accessibility Demo  */}
+export const AccessibilityDemo: Story = { render: () => { }
     const [value, setValue] = useState('');
 
     return (
@@ -512,8 +479,7 @@ export const AccessibilityDemo: Story = {
                 onChange={(e) => setValue(e.target.value)}
                 placeholder="Fully accessible textarea..."
                 aria-describedby="textarea-help"
-                rows={4}
-              />
+                rows={4} />
               <p
                 id="textarea-help"
                 className="mt-2 text-gray-600 text-sm dark:text-gray-400"
@@ -558,11 +524,9 @@ export const AccessibilityDemo: Story = {
   },
 };
 
-// Email Composer Example
-export const EmailComposer: Story = {
-  render: () => {
-    const [email, setEmail] = useState({
-      to: 'john@example.com',
+{/* Email Composer Example  */}
+export const EmailComposer: Story = { render: () => { }
+    const [email, setEmail] = useState({ to: 'john@example.com' }
       subject: 'Project Update',
       body: '',
     });
@@ -577,26 +541,26 @@ export const EmailComposer: Story = {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-1 block font-medium text-gray-700 text-sm dark:text-gray-300">
+              <label htmlFor="to-k70nse" className="mb-1 block font-medium text-gray-700 text-sm dark:text-gray-300">
                 To
               </label>
-              <input
+              <input id="input-574" 
                 type="email"
                 value={email.to}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 dark:border-gray-600"
                 readOnly
-              />
+              / />
             </div>
             <div>
-              <label className="mb-1 block font-medium text-gray-700 text-sm dark:text-gray-300">
+              <label htmlFor="subject-k48h85" className="mb-1 block font-medium text-gray-700 text-sm dark:text-gray-300">
                 Subject
               </label>
-              <input
+              <input id="input-585" 
                 type="text"
                 value={email.subject}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 dark:border-gray-600"
                 readOnly
-              />
+              / />
             </div>
           </div>
 
@@ -604,23 +568,34 @@ export const EmailComposer: Story = {
             value={email.body}
             onChange={(e) => setEmail({ ...email, body: e.target.value })}
             placeholder="Write your email message..."
-            rows={8}
-          />
+            rows={8} />
 
           <div className="flex items-center justify-between">
             <div className="flex gap-2">
-              <button className="px-3 py-1 text-gray-600 text-sm hover:text-gray-900">
+              <button
+                type="button"
+                className="px-3 py-1 text-gray-600 text-sm hover:text-gray-900"
+              >
                 📎 Attach
               </button>
-              <button className="px-3 py-1 text-gray-600 text-sm hover:text-gray-900">
+              <button
+                type="button"
+                className="px-3 py-1 text-gray-600 text-sm hover:text-gray-900"
+              >
                 😊 Emoji
               </button>
             </div>
             <div className="flex gap-2">
-              <button className="px-4 py-2 text-gray-600 hover:text-gray-900">
+              <button
+                type="button"
+                className="px-4 py-2 text-gray-600 hover:text-gray-900"
+              >
                 Save Draft
               </button>
-              <button className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+              <button
+                type="button"
+                className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              >
                 Send
               </button>
             </div>

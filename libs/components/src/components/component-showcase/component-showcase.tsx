@@ -212,11 +212,19 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                 </p>
 
                 <div className="flex flex-wrap gap-4">
-                  <GlassButton variant="primary" leftIcon={<Download />}>
+                  <GlassButton
+                    type="button"
+                    variant="primary"
+                    leftIcon={<Download />}
+                  >
                     Get Started
                   </GlassButton>
 
-                  <GlassButton variant="secondary" leftIcon={<Github />}>
+                  <GlassButton
+                    type="button"
+                    variant="secondary"
+                    leftIcon={<Github />}
+                  >
                     View on GitHub
                   </GlassButton>
                 </div>
@@ -240,15 +248,27 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
               <div className="component-preview mb-4 rounded-lg p-6">
                 <div className="flex flex-wrap items-center gap-4">
-                  <GlassButton variant="primary">Primary</GlassButton>
+                  <GlassButton type="button" variant="primary">
+                    Primary
+                  </GlassButton>
 
-                  <GlassButton variant="secondary">Secondary</GlassButton>
+                  <GlassButton type="button" variant="secondary">
+                    Secondary
+                  </GlassButton>
 
-                  <GlassButton variant="tertiary">Tertiary</GlassButton>
+                  <GlassButton type="button" variant="tertiary">
+                    Tertiary
+                  </GlassButton>
 
-                  <GlassButton variant="ghost">Ghost</GlassButton>
+                  <GlassButton type="button" variant="ghost">
+                    Ghost
+                  </GlassButton>
 
-                  <GlassButton variant="primary" rightIcon={<Heart />}>
+                  <GlassButton
+                    type="button"
+                    variant="primary"
+                    rightIcon={<Heart />}
+                  >
                     With Icon
                   </GlassButton>
                 </div>
@@ -256,10 +276,10 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
               <div className="code-block overflow-x-auto rounded-lg p-4 font-mono text-sm">
                 <code className="text-primary">
-                  {`<GlassButton variant="primary">Primary</GlassButton>
-<GlassButton variant="secondary">Secondary</GlassButton>
-<GlassButton variant="tertiary">Tertiary</GlassButton>
-<GlassButton variant="ghost">Ghost</GlassButton>`}
+                  {`<GlassButton type="button" variant="primary">Primary</GlassButton>
+<GlassButton type="button" variant="secondary">Secondary</GlassButton>
+<GlassButton type="button" variant="tertiary">Tertiary</GlassButton>
+<GlassButton type="button" variant="ghost">Ghost</GlassButton>`}
                 </code>
               </div>
             </div>
@@ -271,15 +291,15 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
               <div className="component-preview mb-4 rounded-lg p-6">
                 <div className="flex flex-wrap items-center gap-4">
-                  <GlassButton variant="primary" size="sm">
+                  <GlassButton type="button" variant="primary" size="sm">
                     Small
                   </GlassButton>
 
-                  <GlassButton variant="primary" size="md">
+                  <GlassButton type="button" variant="primary" size="md">
                     Medium
                   </GlassButton>
 
-                  <GlassButton variant="primary" size="lg">
+                  <GlassButton type="button" variant="primary" size="lg">
                     Large
                   </GlassButton>
                 </div>
@@ -421,8 +441,8 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
               <div className="component-preview mb-4 rounded-lg p-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  <GlassCard>
-                    <GlassCardHeader>
+                  <GlassCard aria-label="Glass card">
+                    <GlassCardHeader aria-label="Glass card header>">
                       <GlassCardTitle>Basic Card</GlassCardTitle>
 
                       <GlassCardDescription>
@@ -431,13 +451,15 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                       </GlassCardDescription>
                     </GlassCardHeader>
 
-                    <GlassCardFooter>
-                      <GlassButton size="sm">Learn More</GlassButton>
+                    <GlassCardFooter aria-label="Glass card footer>">
+                      <GlassButton type="button" size="sm">
+                        Learn More
+                      </GlassButton>
                     </GlassCardFooter>
                   </GlassCard>
 
-                  <GlassCard>
-                    <GlassCardHeader>
+                  <GlassCard aria-label="Glass card">
+                    <GlassCardHeader aria-label="Glass card header>">
                       <img
                         src="https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=400&h=200&fit=crop&crop=face"
                         alt="Professional headshot"
@@ -452,8 +474,8 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                     </GlassCardHeader>
                   </GlassCard>
 
-                  <GlassCard>
-                    <GlassCardHeader>
+                  <GlassCard aria-label="Glass card">
+                    <GlassCardHeader aria-label="Glass card header>">
                       <div className="mb-4 flex items-center justify-between">
                         <GlassCardTitle>Total Users</GlassCardTitle>
 
@@ -511,7 +533,9 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
               </h3>
 
               <div className="component-preview mb-4 rounded-lg p-6">
-                <GlassButton onClick={handleOpenModal}>Open Modal</GlassButton>
+                <GlassButton type="button" onClick={handleOpenModal}>
+                  Open Modal
+                </GlassButton>
               </div>
             </div>
 
@@ -528,17 +552,17 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
               <div className="flex space-x-3">
                 <GlassButton
+                  type="button"
                   variant="primary"
-                  className="flex-1"
-                  onClick={handleCloseModal}
+                  className="flex-1" onClick={handleCloseModal}
                 >
                   Confirm
                 </GlassButton>
 
                 <GlassButton
+                  type="button"
                   variant="secondary"
-                  className="flex-1"
-                  onClick={handleCloseModal}
+                  className="flex-1" onClick={handleCloseModal}
                 >
                   Cancel
                 </GlassButton>
@@ -828,6 +852,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                   <GlassDropdown
                     trigger={
                       <GlassButton
+                        type="button"
                         variant="secondary"
                         rightIcon={<ChevronDown className="h-4 w-4" />}
                       >
@@ -901,7 +926,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                     content="This is a helpful tooltip"
                     position="top"
                   >
-                    <GlassButton variant="secondary">
+                    <GlassButton type="button" variant="secondary">
                       Hover me (Top)
                     </GlassButton>
                   </GlassTooltip>
@@ -910,13 +935,15 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                     content="More detailed information can go here with multiple lines of text"
                     position="bottom"
                   >
-                    <GlassButton variant="secondary">
+                    <GlassButton type="button" variant="secondary">
                       Hover me (Bottom)
                     </GlassButton>
                   </GlassTooltip>
 
                   <GlassTooltip content="Left tooltip" position="left">
-                    <GlassButton variant="secondary">Left</GlassButton>
+                    <GlassButton type="button" variant="secondary">
+                      Left
+                    </GlassButton>
                   </GlassTooltip>
                 </div>
               </div>
@@ -941,7 +968,9 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                 <div className="flex gap-4">
                   <GlassPopover
                     trigger={
-                      <GlassButton variant="secondary">User Info</GlassButton>
+                      <GlassButton type="button" variant="secondary">
+                        User Info
+                      </GlassButton>
                     }
                     content={
                       <div className="space-y-3">
@@ -960,11 +989,19 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                         </div>
 
                         <div className="flex gap-2">
-                          <GlassButton size="sm" variant="primary">
+                          <GlassButton
+                            type="button"
+                            size="sm"
+                            variant="primary"
+                          >
                             Follow
                           </GlassButton>
 
-                          <GlassButton size="sm" variant="secondary">
+                          <GlassButton
+                            type="button"
+                            size="sm"
+                            variant="secondary"
+                          >
                             Message
                           </GlassButton>
                         </div>
@@ -974,7 +1011,9 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
                   <GlassPopover
                     trigger={
-                      <GlassButton variant="secondary">Contact</GlassButton>
+                      <GlassButton type="button" variant="secondary">
+                        Contact
+                      </GlassButton>
                     }
                     content={
                       <div className="space-y-2">
@@ -1039,15 +1078,22 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
                 <div className="component-preview mb-4 rounded-lg p-6">
                   <div className="flex flex-wrap gap-4">
-                    <GlassButton variant="primary" onClick={handleShowSuccess}>
+                    <GlassButton
+                      type="button"
+                      variant="primary" onClick={handleShowSuccess}
+                    >
                       Show Success
                     </GlassButton>
 
-                    <GlassButton variant="secondary" onClick={handleShowError}>
+                    <GlassButton
+                      type="button"
+                      variant="secondary" onClick={handleShowError}
+                    >
                       Show Error
                     </GlassButton>
 
                     <GlassButton
+                      type="button"
                       variant="tertiary"
                       onClick={() =>
                         addToast({
@@ -1064,6 +1110,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                     </GlassButton>
 
                     <GlassButton
+                      type="button"
                       variant="ghost"
                       onClick={() =>
                         addToast({
@@ -1195,11 +1242,11 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                   </div>
 
                   <div className="flex gap-4">
-                    <GlassButton variant="primary" size="lg">
+                    <GlassButton type="button" variant="primary" size="lg">
                       Create Account
                     </GlassButton>
 
-                    <GlassButton variant="secondary" size="lg">
+                    <GlassButton type="button" variant="secondary" size="lg">
                       Cancel
                     </GlassButton>
                   </div>
@@ -1224,7 +1271,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
               <div className="component-preview mb-4 rounded-lg p-6">
                 <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-                  <GlassCard>
+                  <GlassCard aria-label="Glass card">
                     <GlassCardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
@@ -1242,7 +1289,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                     </GlassCardContent>
                   </GlassCard>
 
-                  <GlassCard>
+                  <GlassCard aria-label="Glass card">
                     <GlassCardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
@@ -1264,7 +1311,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                     </GlassCardContent>
                   </GlassCard>
 
-                  <GlassCard>
+                  <GlassCard aria-label="Glass card">
                     <GlassCardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
@@ -1293,6 +1340,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                   <GlassDropdown
                     trigger={
                       <GlassButton
+                        type="button"
                         variant="secondary"
                         rightIcon={<ChevronDown className="h-4 w-4" />}
                       >
@@ -1333,8 +1381,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                 />
               </div>
             </div>
-          </section>
-        );
+          </section>        );
       }
     }
   };

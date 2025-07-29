@@ -58,28 +58,28 @@ export const AllVariants: Story = {
     <div className="space-y-4">
       <GlassBanner variant="info">
         <p className="font-medium">Information</p>
-        <p className="text-sm mt-1">
+        <p className="mt-1 text-sm">
           This is an informational message to keep users updated.
         </p>
       </GlassBanner>
 
       <GlassBanner variant="success">
         <p className="font-medium">Success!</p>
-        <p className="text-sm mt-1">
+        <p className="mt-1 text-sm">
           Your changes have been saved successfully.
         </p>
       </GlassBanner>
 
       <GlassBanner variant="warning">
         <p className="font-medium">Warning</p>
-        <p className="text-sm mt-1">
+        <p className="mt-1 text-sm">
           Please review your settings before continuing.
         </p>
       </GlassBanner>
 
       <GlassBanner variant="error">
         <p className="font-medium">Error</p>
-        <p className="text-sm mt-1">
+        <p className="mt-1 text-sm">
           There was a problem processing your request.
         </p>
       </GlassBanner>
@@ -100,13 +100,13 @@ export const WithActions: Story = {
       <GlassBanner
         variant="info"
         action={
-          <GlassButton size="sm" variant="ghost">
+          <GlassButton type="button" size="sm" variant="ghost">
             Learn More
           </GlassButton>
         }
       >
         <p className="font-medium">New Feature Available</p>
-        <p className="text-sm mt-1">
+        <p className="mt-1 text-sm">
           Check out our latest updates and improvements.
         </p>
       </GlassBanner>
@@ -115,17 +115,17 @@ export const WithActions: Story = {
         variant="warning"
         action={
           <div className="flex gap-2">
-            <GlassButton size="sm" variant="ghost">
+            <GlassButton type="button" size="sm" variant="ghost">
               Ignore
             </GlassButton>
-            <GlassButton size="sm" variant="primary">
+            <GlassButton type="button" size="sm" variant="primary">
               Update Now
             </GlassButton>
           </div>
         }
       >
         <p className="font-medium">Update Required</p>
-        <p className="text-sm mt-1">
+        <p className="mt-1 text-sm">
           A new version is available. Update to get the latest features.
         </p>
       </GlassBanner>
@@ -176,11 +176,12 @@ export const Dismissible: Story = {
         ))}
 
         {banners.length === 0 && (
-          <div className="text-center py-8">
-            <p className="text-[var(--text-secondary)] mb-4">
+          <div className="py-8 text-center">
+            <p className="mb-4 text-[var(--text-secondary)]">
               All banners dismissed!
             </p>
             <GlassButton
+              type="button"
               onClick={() =>
                 setBanners([
                   {
@@ -222,19 +223,19 @@ export const CustomIcons: Story = {
     <div className="space-y-4">
       <GlassBanner variant="info" icon={<Sparkles className="h-5 w-5" />}>
         <p className="font-medium">New Features Released!</p>
-        <p className="text-sm mt-1">Discover what\'s new in this version.</p>
+        <p className="mt-1 text-sm">Discover what\'s new in this version.</p>
       </GlassBanner>
 
       <GlassBanner variant="success" icon={<Download className="h-5 w-5" />}>
         <p className="font-medium">Download Complete</p>
-        <p className="text-sm mt-1">
+        <p className="mt-1 text-sm">
           Your file has been downloaded successfully.
         </p>
       </GlassBanner>
 
       <GlassBanner variant="warning" icon={<Zap className="h-5 w-5" />}>
         <p className="font-medium">High Usage Detected</p>
-        <p className="text-sm mt-1">You\'re approaching your usage limit.</p>
+        <p className="mt-1 text-sm">You\'re approaching your usage limit.</p>
       </GlassBanner>
     </div>
   ),
@@ -254,7 +255,7 @@ export const ComplexContent: Story = {
         variant="info"
         dismissible
         action={
-          <GlassButton size="sm" variant="primary">
+          <GlassButton type="button" size="sm" variant="primary">
             Get Started
           </GlassButton>
         }
@@ -264,7 +265,7 @@ export const ComplexContent: Story = {
           <p className="text-sm">
             Get started with our comprehensive component library:
           </p>
-          <ul className="text-sm space-y-1 ml-4">
+          <ul className="ml-4 space-y-1 text-sm">
             <li>• 50+ glassmorphism components</li>
             <li>• Fully accessible and responsive</li>
             <li>• Dark mode support</li>
@@ -277,10 +278,10 @@ export const ComplexContent: Story = {
         <div className="flex items-center justify-between">
           <div>
             <p className="font-medium">Payment Successful</p>
-            <p className="text-sm mt-1">Transaction ID: #TXN-2024-001234</p>
+            <p className="mt-1 text-sm">Transaction ID: #TXN-2024-001234</p>
           </div>
           <div className="text-right">
-            <p className="text-2xl font-bold">$99.00</p>
+            <p className="font-bold text-2xl">$99.00</p>
             <p className="text-xs">Charged to Visa •••• 1234</p>
           </div>
         </div>
@@ -304,18 +305,20 @@ export const FixedPosition: Story = {
     return (
       <div className="relative h-[400px] overflow-hidden">
         <GlassCard className="h-full p-6">
-          <h2 className="text-xl font-bold mb-4">Fixed Position Banners</h2>
-          <p className="text-[var(--text-secondary)] mb-4">
+          <h2 className="mb-4 font-bold text-xl">Fixed Position Banners</h2>
+          <p className="mb-4 text-[var(--text-secondary)]">
             Banners can be positioned at the top or bottom of containers.
           </p>
           <div className="space-y-2">
             <GlassButton
+              type="button"
               onClick={() => setShowTopBanner(!showTopBanner)}
               variant="ghost"
             >
               Toggle Top Banner
             </GlassButton>
             <GlassButton
+              type="button"
               onClick={() => setShowBottomBanner(!showBottomBanner)}
               variant="ghost"
             >
@@ -325,7 +328,7 @@ export const FixedPosition: Story = {
         </GlassCard>
 
         {showTopBanner && (
-          <div className="absolute top-0 left-0 right-0 p-4">
+          <div className="absolute top-0 right-0 left-0 p-4">
             <GlassBanner
               variant="info"
               dismissible
@@ -337,7 +340,7 @@ export const FixedPosition: Story = {
         )}
 
         {showBottomBanner && (
-          <div className="absolute bottom-0 left-0 right-0 p-4">
+          <div className="absolute right-0 bottom-0 left-0 p-4">
             <GlassBanner
               variant="warning"
               dismissible
@@ -362,7 +365,7 @@ export const FixedPosition: Story = {
 export const AnimatedAppearance: Story = {
   render: () => {
     const [banners, setBanners] = React.useState<
-      Array<{ id: number; message: string }>
+      { id: number; message: string }[]
     >([]);
     const nextId = React.useRef(1);
 
@@ -379,8 +382,10 @@ export const AnimatedAppearance: Story = {
     return (
       <div className="space-y-4">
         <div className="text-center">
-          <GlassButton onClick={addBanner}>Add Animated Banner</GlassButton>
-          <p className="text-sm text-[var(--text-secondary)] mt-2">
+          <GlassButton type="button" onClick={addBanner}>
+            Add Animated Banner
+          </GlassButton>
+          <p className="mt-2 text-[var(--text-secondary)] text-sm">
             Banners auto-dismiss after 5 seconds
           </p>
         </div>

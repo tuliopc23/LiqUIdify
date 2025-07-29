@@ -231,6 +231,7 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
   return (
     <>
       <button
+        type="button"
         ref={triggerRef}
         onClick={toggleOpen}
         onKeyDown={(e) => {

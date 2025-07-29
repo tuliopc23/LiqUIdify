@@ -47,7 +47,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
   position = 'top-right',
 }) => {
-  const [toasts, setToasts] = useState<Array<Toast>>([]);
+  const [toasts, setToasts] = useState<Toast[]>([]);
 
   const addToast = (toast: Omit<Toast, 'id'>) => {
     const id = Math.random().toString(36).slice(2, 9);
@@ -160,6 +160,7 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
 
           {toast.action && (
             <button
+              type="button"
               onClick={toast.action.onClick}
               className="mt-2 font-medium text-blue-600 text-sm hover:underline dark:text-blue-400"
             >
@@ -169,6 +170,7 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
         </div>
 
         <button
+          type="button"
           onClick={handleRemove}
           className="flex-shrink-0 rounded-lg p-1 transition-colors hover:bg-white/10 dark:hover:bg-white/5"
         >
@@ -227,6 +229,7 @@ export const GlassToast: React.FC<GlassToastProps> = ({
 
         {onClose && (
           <button
+            type="button"
             onClick={onClose}
             className="flex-shrink-0 rounded-lg p-1 transition-colors hover:bg-white/10 dark:hover:bg-white/5"
           >

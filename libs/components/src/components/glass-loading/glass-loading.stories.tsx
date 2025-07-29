@@ -7,7 +7,7 @@ import {
   Send,
   Upload,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GlassButton } from '../glass-button-refactored/glass-button';
 import { GlassCard } from '../glass-card-refactored/glass-card';
 import { GlassLoading } from './glass-loading';
@@ -45,17 +45,15 @@ import { GlassLoading } from '@/components/glass-loading';
 <GlassLoading
   variant="dots"
   size="lg"
-  text="Loading data..."
-/>
+  text="Loading data..." />
 
 // In a card or container
-<GlassCard>
+<GlassCard aria-label="Glass card>">
   <div className="p-8 text-center">
     <GlassLoading
       variant="pulse"
       size="xl"
-      text="Processing your request..."
-    />
+      text="Processing your request..." />
   </div>
 </GlassCard>
 
@@ -225,8 +223,15 @@ export const RealWorldExamples: Story = {
           </h3>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <GlassButton
+              type="button"
               variant="primary"
               onClick={() => simulateLoading('save')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  (() => simulateLoading('save'))(e);
+                }
+              }}
               disabled={loadingStates.save}
               leftIcon={
                 loadingStates.save ? undefined : <Save className="h-4 w-4" />
@@ -240,8 +245,15 @@ export const RealWorldExamples: Story = {
             </GlassButton>
 
             <GlassButton
+              type="button"
               variant="secondary"
               onClick={() => simulateLoading('upload')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  (() => simulateLoading('upload'))(e);
+                }
+              }}
               disabled={loadingStates.upload}
               leftIcon={
                 loadingStates.upload ? undefined : (
@@ -257,8 +269,15 @@ export const RealWorldExamples: Story = {
             </GlassButton>
 
             <GlassButton
+              type="button"
               variant="tertiary"
               onClick={() => simulateLoading('download')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  (() => simulateLoading('download'))(e);
+                }
+              }}
               disabled={loadingStates.download}
               leftIcon={
                 loadingStates.download ? undefined : (
@@ -274,8 +293,15 @@ export const RealWorldExamples: Story = {
             </GlassButton>
 
             <GlassButton
+              type="button"
               variant="ghost"
               onClick={() => simulateLoading('send')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  (() => simulateLoading('send'))(e);
+                }
+              }}
               disabled={loadingStates.send}
               leftIcon={
                 loadingStates.send ? undefined : <Send className="h-4 w-4" />
@@ -357,7 +383,7 @@ export const InteractiveDemo: Story = {
             <div>
               <label
                 htmlFor="variant-select"
-                className="mb-2 block text-sm font-medium text-white/90"
+                className="mb-2 block font-medium text-sm text-white/90"
               >
                 Variant
               </label>
@@ -381,7 +407,7 @@ export const InteractiveDemo: Story = {
             <div>
               <label
                 htmlFor="size-select"
-                className="mb-2 block text-sm font-medium text-white/90"
+                className="mb-2 block font-medium text-sm text-white/90"
               >
                 Size
               </label>
@@ -403,7 +429,7 @@ export const InteractiveDemo: Story = {
             <div>
               <label
                 htmlFor="text-input"
-                className="mb-2 block text-sm font-medium text-white/90"
+                className="mb-2 block font-medium text-sm text-white/90"
               >
                 Loading Text
               </label>
@@ -418,8 +444,12 @@ export const InteractiveDemo: Story = {
             </div>
 
             <div className="space-y-2">
-              <label className="flex items-center gap-2">
+              <label
+                htmlFor="setshowtextetargetchecked--show-text-4rmhs8"
+                className="flex items-center gap-2"
+              >
                 <input
+                  id="input-1-a9j0f9"
                   type="checkbox"
                   checked={showText}
                   onChange={(e) => setShowText(e.target.checked)}
@@ -427,8 +457,12 @@ export const InteractiveDemo: Story = {
                 <span className="text-sm text-white/90">Show Text</span>
               </label>
 
-              <label className="flex items-center gap-2">
+              <label
+                htmlFor="setisloadingetargetchecked--is-loading-q0jnn0"
+                className="flex items-center gap-2"
+              >
                 <input
+                  id="input-2-lkaaz6"
                   type="checkbox"
                   checked={isLoading}
                   onChange={(e) => setIsLoading(e.target.checked)}
@@ -476,8 +510,15 @@ export const PerformanceShowcase: Story = {
           </h3>
           <div className="mb-4">
             <GlassButton
+              type="button"
               variant="secondary"
               onClick={() => setShowMany(!showMany)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  (() => setShowMany(!showMany))(e);
+                }
+              }}
               leftIcon={<RefreshCw className="h-4 w-4" />}
             >
               {showMany ? 'Hide' : 'Show'} Multiple Loaders

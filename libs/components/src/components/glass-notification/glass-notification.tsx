@@ -87,6 +87,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       {/* Notification Bell Button */}
 
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           'relative rounded-xl p-2',
@@ -124,6 +125,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               <div className="flex items-center gap-2">
                 {0 < unreadCount && (
                   <button
+                    type="button"
                     onClick={onMarkAllAsRead}
                     className="font-medium text-blue-500 text-xs hover:text-blue-600"
                   >
@@ -132,6 +134,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 )}
 
                 <button
+                  type="button"
                   onClick={() => setIsOpen(false)}
                   className="rounded-lg p-1 text-[var(--text-secondary)] hover:bg-[var(--glass-bg)]"
                 >
@@ -155,6 +158,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
             ) : (
               notifications.map((notification) => (
                 <button
+                  type="button"
                   key={notification.id}
                   className={cn(
                     'border-[var(--glass-border)] border-b p-4 last:border-b-0',
@@ -207,6 +211,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                         )}
                         {notification.action && (
                           <button
+                            type="button"
                             onClick={(e) => {
                               e.stopPropagation();
                               notification.action?.onClick();
@@ -220,6 +225,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                     </div>
 
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         onDismiss?.(notification.id);

@@ -227,18 +227,21 @@ export const Controlled: Story = {
         </p>
         <div className="flex gap-2">
           <button
+            type="button"
             onClick={() => setValue('option1')}
             className="rounded bg-blue-500 px-3 py-1 text-sm text-white"
           >
             Select Option 1
           </button>
           <button
+            type="button"
             onClick={() => setValue('option2')}
             className="rounded bg-green-500 px-3 py-1 text-sm text-white"
           >
             Select Option 2
           </button>
           <button
+            type="button"
             onClick={() => setValue('option3')}
             className="rounded bg-purple-500 px-3 py-1 text-sm text-white"
           >

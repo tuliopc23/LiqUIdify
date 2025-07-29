@@ -1,7 +1,6 @@
 #!/usr/bin/env bun
 
-import { Project, SyntaxKind, Node } from 'ts-morph';
-import path from 'path';
+import { Node, Project, SyntaxKind } from 'ts-morph';
 
 console.log('🚀 TypeScript Comprehensive Fix Tool');
 console.log('====================================\n');
@@ -26,7 +25,7 @@ for (const sourceFile of project.getSourceFiles()) {
 
   for (const importDecl of imports) {
     const namedImports = importDecl.getNamedImports();
-    const unusedImports: string[] = [];
+    const unusedImports: Array<string> = [];
 
     for (const namedImport of namedImports) {
       const identifier = namedImport.getName();
@@ -213,7 +212,7 @@ totalFixes += returnTypeFixes;
 
 // 6. Fix common React/JSX issues
 console.log('⚛️  Step 6: Fixing React/JSX issues...');
-let reactFixes = 0;
+const reactFixes = 0;
 
 for (const sourceFile of project.getSourceFiles()) {
   if (!sourceFile.getBaseName().includes('.tsx')) continue;
@@ -225,7 +224,7 @@ for (const sourceFile of project.getSourceFiles()) {
   );
 
   [...jsxElements, ...jsxSelfClosingElements].forEach((element) => {
-    const parent = element.getParent();
+    const _parent = element.getParent();
 
     // Check if this element is inside a map function
     if (isInsideMapFunction(element)) {
@@ -247,7 +246,7 @@ console.log(`✅ Analyzed React/JSX patterns\n`);
 
 // 7. Remove @ts-ignore comments and fix underlying issues
 console.log('🙈 Step 7: Handling @ts-ignore comments...');
-let tsIgnoreFixes = 0;
+const _tsIgnoreFixes = 0;
 
 for (const sourceFile of project.getSourceFiles()) {
   const fullText = sourceFile.getFullText();
@@ -263,7 +262,7 @@ for (const sourceFile of project.getSourceFiles()) {
 
 // 8. Clean up empty/redundant type definitions
 console.log('🧼 Step 8: Cleaning up redundant types...');
-let cleanupFixes = 0;
+const _cleanupFixes = 0;
 
 for (const sourceFile of project.getSourceFiles()) {
   // Remove empty interfaces

@@ -38,22 +38,34 @@ or accepts custom links.
               <h2 className="mb-2 font-semibold text-lg">Navigation</h2>
               <ul className="flex gap-4">
                 <li>
-                  <a href="#" className="text-blue-500 hover:underline">
+                  <a
+                    href="#placeholder"
+                    className="text-blue-500 hover:underline"
+                  >
                     Home
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-blue-500 hover:underline">
+                  <a
+                    href="#placeholder"
+                    className="text-blue-500 hover:underline"
+                  >
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-blue-500 hover:underline">
+                  <a
+                    href="#placeholder"
+                    className="text-blue-500 hover:underline"
+                  >
                     Services
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-blue-500 hover:underline">
+                  <a
+                    href="#placeholder"
+                    className="text-blue-500 hover:underline"
+                  >
                     Contact
                   </a>
                 </li>
@@ -306,25 +318,25 @@ export const RealWorldExample: Story = {
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 <a
-                  href="#"
+                  href="#placeholder"
                   className="inline-flex items-center border-blue-500 border-b-2 px-1 pt-1 font-medium text-gray-900 text-sm dark:text-white"
                 >
                   Home
                 </a>
                 <a
-                  href="#"
+                  href="#placeholder"
                   className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-gray-500 text-sm hover:text-gray-700 dark:hover:text-gray-300"
                 >
                   About
                 </a>
                 <a
-                  href="#"
+                  href="#placeholder"
                   className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-gray-500 text-sm hover:text-gray-700 dark:hover:text-gray-300"
                 >
                   Services
                 </a>
                 <a
-                  href="#"
+                  href="#placeholder"
                   className="inline-flex items-center border-transparent border-b-2 px-1 pt-1 font-medium text-gray-500 text-sm hover:text-gray-700 dark:hover:text-gray-300"
                 >
                   Contact
@@ -373,13 +385,13 @@ export const RealWorldExample: Story = {
       >
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <nav className="flex space-x-4">
-            <a href="#" className="text-gray-300 hover:text-white">
+            <a href="#placeholder" className="text-gray-300 hover:text-white">
               Privacy Policy
             </a>
-            <a href="#" className="text-gray-300 hover:text-white">
+            <a href="#placeholder" className="text-gray-300 hover:text-white">
               Terms of Service
             </a>
-            <a href="#" className="text-gray-300 hover:text-white">
+            <a href="#placeholder" className="text-gray-300 hover:text-white">
               Contact Us
             </a>
           </nav>

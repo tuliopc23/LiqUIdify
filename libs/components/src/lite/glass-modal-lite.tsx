@@ -64,6 +64,7 @@ export function GlassModalLite({
   return (
     <GlassPortal>
       <button
+        type="button"
         className={cn(
           'glass-modal-lite-backdrop',
           'fixed inset-0 z-50',
@@ -106,6 +107,7 @@ export function GlassModalLite({
               </h3>
 
               <button
+                type="button"
                 onClick={onClose}
                 className="rounded-lg p-2 transition-colors hover:bg-white/10"
                 aria-label="Close modal"

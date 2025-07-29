@@ -50,7 +50,7 @@ export interface AnimationSequenceOptions {
 }
 
 export interface AnimationStep {
-  target: string | HTMLElement | Array<HTMLElement>;
+  target: string | HTMLElement | HTMLElement[];
   keyframes: Array<Keyframe>;
   duration?: number;
   options?: KeyframeAnimationOptions;
@@ -254,10 +254,10 @@ export class AnimationSequence {
    * Get target elements from selector or element reference
    */
   private getTargetElements(
-    target: string | HTMLElement | Array<HTMLElement>
+    target: string | HTMLElement | HTMLElement[]
   ): Array<HTMLElement> {
     if ('string' === typeof target) {
-      return [...document.querySelectorAll(target)] as Array<HTMLElement>;
+      return [...document.querySelectorAll(target)] as HTMLElement[];
     }
     if (Array.isArray(target)) {
       return target;

@@ -307,7 +307,7 @@ export function useRovingTabindex(
  * RovingTabindexGroup component for declarative usage
  */
 export interface RovingTabindexGroupProps {
-  children: Array<React.ReactElement>;
+  children: React.Array<ReactElement>;
   orientation?: 'horizontal' | 'vertical' | 'both';
   loop?: boolean;
   preventScroll?: boolean;
@@ -327,8 +327,8 @@ export function RovingTabindexGroup({
   role,
   'aria-label': ariaLabel,
 }: RovingTabindexGroupProps) {
-  const itemReferences = useRef<Array<HTMLElement | null>>([]);
-  const [items, setItems] = useState<Array<HTMLElement>>([]);
+  const itemReferences = useRef<HTMLElement | null[]>([]);
+  const [items, setItems] = useState<HTMLElement[]>([]);
 
   // Collect item refs
   useEffect(() => {
@@ -386,7 +386,7 @@ export function RovingTabindexGroup({
  */
 export interface GridRovingTabindexOptions
   extends Omit<RovingTabindexOptions, 'orientation' | 'items'> {
-  items: Array<Array<HTMLElement>>;
+  items: Array<HTMLElement[]>;
   wrap?: boolean;
   onCellChange?: (element: HTMLElement, row: number, col: number) => void;
 }
@@ -403,7 +403,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
   } = options;
 
   const [currentCell, setCurrentCell] = useState({ row: 0, col: 0 });
-  const flatItems = useRef<Array<HTMLElement>>([]);
+  const flatItems = useRef<HTMLElement[]>([]);
 
   // Flatten grid for typeahead
   useEffect(() => {

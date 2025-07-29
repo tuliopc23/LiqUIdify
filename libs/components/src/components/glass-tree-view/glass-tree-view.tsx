@@ -8,23 +8,21 @@ import {
 import React from 'react';
 import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
 
-export interface TreeNode {
-  id: string;
+export interface TreeNode { id: string;
   label: string;
   icon?: React.ReactNode;
-  children?: TreeNode[];
+  children?: Array<TreeNode>;
   selectable?: boolean;
   defaultExpanded?: boolean;
-  data?: any;
+  data?: any; }
 }
 
 export interface GlassTreeViewProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  nodes: TreeNode[];
-  onNodeSelect?: (node: TreeNode) => void;
+  extends React.HTMLAttributes<HTMLDivElement> { nodes: Array<TreeNode>;
+  onNodeSelect?: (node: TreeNode) => void; }
   onNodeExpand?: (node: TreeNode, expanded: boolean) => void;
   selectedNodeId?: string;
-  expandedNodeIds?: string[];
+  expandedNodeIds?: Array<string>;
   showIcons?: boolean;
   indentSize?: number;
 }
@@ -44,15 +42,14 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
     Set<string>
   >(() => {
     const initial = new Set<string>();
-    const collectDefaultExpanded = (nodes: TreeNode[]) => {
+    const collectDefaultExpanded = (nodes: Array<TreeNode>) => {
       nodes.forEach((node) => {
         if (node.defaultExpanded) {
           initial.add(node.id);
         }
         if (node.children) {
           collectDefaultExpanded(node.children);
-        }
-      });
+        };
     };
     collectDefaultExpanded(nodes);
     return initial;
@@ -103,24 +100,22 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
       <div key={node.id}>
         <div
           className={cn(
-            'flex items-center gap-1 py-1 px-2 rounded-lg cursor-pointer',
+            'flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1',
             'hover:bg-white/5',
             microInteraction.interactive,
             isSelected &&
               cn(
                 getGlassClass('default'),
-                'bg-blue-500/10 border border-blue-500/30'
+                'border border-blue-500/30 bg-blue-500/10'
               )
           )}
-          style={{ paddingLeft: `${level * indentSize + 8}px` }}
-          onClick={() => {
+          style={{ paddingLeft: `${level * indentSize + 8}px` } onClick={() => {
             if (hasChildren) {
               toggleExpanded(node);
             }
             if (node.selectable !== false) {
               onNodeSelect?.(node);
             }
-          }}
           role="treeitem"
           aria-expanded={hasChildren ? isExpanded : undefined}
           aria-selected={isSelected}
@@ -147,7 +142,7 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
         </div>
 
         {hasChildren && isExpanded && (
-          <div className="animate-in slide-in-from-top-1">
+          <div className="slide-in-from-top-1 animate-in">
             {node.children!.map((child) => renderNode(child, level + 1))}
           </div>
         )}

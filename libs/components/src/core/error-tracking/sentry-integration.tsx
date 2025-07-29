@@ -100,8 +100,7 @@ export enum LiqUIdifyErrorType {
 class LiqUIdifySentryIntegration {
   private initialized = false;
   private sentryConfig: Required<LiqUIdifySentryConfig>;
-  private errorQueue: Array<{ error: Error; context?: LiqUIdifyErrorContext }> =
-    [];
+  private errorQueue: { error: Error; context?: LiqUIdifyErrorContext }[] = [];
 
   constructor(config: LiqUIdifySentryConfig = {}) {
     this.sentryConfig = { ...DEFAULT_CONFIG, ...config };

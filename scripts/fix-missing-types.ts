@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
-import { Project, SyntaxKind, Node } from 'ts-morph';
 import path from 'path';
+import { Node, Project, SyntaxKind } from 'ts-morph';
 
 const project = new Project({
   tsConfigFilePath: 'tsconfig.base.json',
@@ -275,7 +275,7 @@ function inferReturnType(func: unknown, sourceFile: unknown): string {
 function inferPropertyType(
   propName: string,
   interfaceDecl: unknown,
-  sourceFile: unknown
+  _sourceFile: unknown
 ): string {
   const lowerName = propName.toLowerCase();
 
@@ -318,7 +318,7 @@ function inferPropertyType(
 
 function extractComponentName(
   func: unknown,
-  sourceFile: unknown
+  _sourceFile: unknown
 ): string | null {
   const funcName = func.getName?.() || '';
 

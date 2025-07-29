@@ -500,6 +500,7 @@ export const AccessibilityDemo: Story = {
         </div>
         <div className="flex items-center gap-3">
           <button
+            type="button"
             className="flex items-center gap-3 rounded-lg p-2 hover:bg-white/10"
             aria-label="Open John Doe's profile"
           >

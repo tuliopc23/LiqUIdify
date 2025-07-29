@@ -66,6 +66,7 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
                   .map((item) => (
                     <li key={item.id}>
                       <button
+                        type="button"
                         onClick={() => onSectionChange(item.id)}
                         className={`sidebar-item block w-full rounded-md px-3 py-2 text-left text-sm transition-colors ${
                           activeSection === item.id ? 'active' : ''

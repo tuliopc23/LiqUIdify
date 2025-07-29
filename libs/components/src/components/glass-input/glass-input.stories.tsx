@@ -57,27 +57,23 @@ import { GlassInput } from '@/components/glass-input';
 // With icons
 <GlassInput 
   leftIcon={<User />}
-  placeholder="Username"
-/>
+  placeholder="Username" />
 
 // Search variant
 <GlassInput 
   variant="search"
   placeholder="Search..."
-  clearable
-/>
+  clearable />
 
 // Password variant
 <GlassInput 
   variant="password"
-  placeholder="Enter password"
-/>
+  placeholder="Enter password" />
 
 // With error
 <GlassInput 
   error
-  helperText="This field is required"
-/>
+  helperText="This field is required" />
 \`\`\`
 
 ## Keyboard Shortcuts
@@ -296,22 +292,30 @@ export const Variants: Story = {
   render: () => (
     <div className="w-full max-w-md space-y-6">
       <div className="space-y-2">
-        <label className="font-medium text-sm">Default</label>
+        <label htmlFor="default-wzyhfm" className="font-medium text-sm">
+          Default
+        </label>
         <GlassInput placeholder="Enter text..." />
       </div>
 
       <div className="space-y-2">
-        <label className="font-medium text-sm">Search</label>
+        <label htmlFor="search-i2jni6" className="font-medium text-sm">
+          Search
+        </label>
         <GlassInput variant="search" placeholder="Search..." clearable />
       </div>
 
       <div className="space-y-2">
-        <label className="font-medium text-sm">Password</label>
+        <label htmlFor="password-rw5cnt" className="font-medium text-sm">
+          Password
+        </label>
         <GlassInput variant="password" placeholder="Enter password" />
       </div>
 
       <div className="space-y-2">
-        <label className="font-medium text-sm">Email</label>
+        <label htmlFor="email-bj7d8g" className="font-medium text-sm">
+          Email
+        </label>
         <GlassInput
           variant="email"
           type="email"
@@ -369,7 +373,9 @@ export const Features: Story = {
   render: () => (
     <div className="w-full max-w-md space-y-6">
       <div className="space-y-2">
-        <label className="font-medium text-sm">Clearable Input</label>
+        <label htmlFor="clearable-input-1x2whl" className="font-medium text-sm">
+          Clearable Input
+        </label>
         <GlassInput
           placeholder="Type something..."
           clearable
@@ -378,7 +384,12 @@ export const Features: Story = {
       </div>
 
       <div className="space-y-2">
-        <label className="font-medium text-sm">With Helper Text</label>
+        <label
+          htmlFor="with-helper-text-0mskls"
+          className="font-medium text-sm"
+        >
+          With Helper Text
+        </label>
         <GlassInput
           placeholder="Email"
           helperText="We'll never share your email"
@@ -387,7 +398,9 @@ export const Features: Story = {
       </div>
 
       <div className="space-y-2">
-        <label className="font-medium text-sm">Error State</label>
+        <label htmlFor="error-state-eg2rdm" className="font-medium text-sm">
+          Error State
+        </label>
         <GlassInput
           placeholder="Required field"
           error
@@ -397,7 +410,9 @@ export const Features: Story = {
       </div>
 
       <div className="space-y-2">
-        <label className="font-medium text-sm">Disabled</label>
+        <label htmlFor="disabled-ast2t6" className="font-medium text-sm">
+          Disabled
+        </label>
         <GlassInput
           placeholder="Disabled input"
           disabled
@@ -406,7 +421,9 @@ export const Features: Story = {
       </div>
 
       <div className="space-y-2">
-        <label className="font-medium text-sm">Read Only</label>
+        <label htmlFor="read-only-pgjl04" className="font-medium text-sm">
+          Read Only
+        </label>
         <GlassInput
           placeholder="Read only"
           readOnly
@@ -918,7 +935,7 @@ export const AccessibilityShowcase: Story = {
             <GlassInput placeholder="First input" />
             <GlassInput placeholder="Second input" />
             <GlassInput placeholder="Third input" />
-            <GlassButton>Submit Form</GlassButton>
+            <GlassButton type="button">Submit Form</GlassButton>
           </Card.Content>
         </Card>
       </div>

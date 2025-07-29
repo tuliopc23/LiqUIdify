@@ -3,42 +3,40 @@
  * GPU-accelerated animations with physics-based motion
  */
 
-// GSAP is no longer used - animations migrated to Framer Motion for better performance
-// import { gsap } from 'gsap';
-// import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';
+{/* GSAP is no longer used - animations migrated to Framer Motion for better performance  */}
+{/* import { gsap } from 'gsap';  */}
+{/* import { MorphSVGPlugin } from 'gsap/MorphSVGPlugin';  */}
 
-// Note: GSAP plugins removed to improve bundle size and performance
-// All animations now use Framer Motion for better React integration
+{/* Note: GSAP plugins removed to improve bundle size and performance  */}
+{/* All animations now use Framer Motion for better React integration  */}
 
-// Import types for physics and animation
-export interface SpringPhysics {
-  mass: number;
+{/* Import types for physics and animation  */}
+export interface SpringPhysics { mass: number;
   tension: number;
-  friction: number;
+  friction: number; }
 }
 
-export interface Vector2D {
-  x: number;
-  y: number;
+export interface Vector2D { x: number;
+  y: number; }
 }
 
-// Animation timing functions
+{/* Animation timing functions  */}
 export const GLASS_EASINGS = {
-  // Apple-inspired easings
+  {/* Apple-inspired easings  */}
   smoothOut: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   smoothInOut: 'cubic-bezier(0.45, 0, 0.55, 1)',
   anticipate: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
   elastic: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
   bounce: 'cubic-bezier(0.87, -0.41, 0.19, 1.44)',
 
-  // Physics-based easings
+  {/* Physics-based easings  */}
   spring: (tension = 0.5, friction = 0.3) =>
     `cubic-bezier(${tension}, ${friction}, 0.35, 1)`,
   fluid: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
   magnetic: 'cubic-bezier(0.2, 0, 0, 1.2)',
   gravity: 'cubic-bezier(0.4, 0.0, 0.68, 0.06)',
 
-  // Custom glass easings
+  {/* Custom glass easings  */}
   glassIn: 'cubic-bezier(0.32, 0, 0.67, 0)',
   glassOut: 'cubic-bezier(0.33, 1, 0.68, 1)',
   glassInOut: 'cubic-bezier(0.65, 0, 0.35, 1)',
@@ -46,7 +44,7 @@ export const GLASS_EASINGS = {
   crystalShatter: 'cubic-bezier(0.89, 0.03, 0.69, 0.22)',
 };
 
-// Animation types
+{/* Animation types  */}
 export type AnimationType =
   | 'fade'
   | 'slide'
@@ -64,26 +62,24 @@ export type AnimationType =
   | 'glitch'
   | 'parallax';
 
-export interface AnimationConfig {
-  type: AnimationType;
+export interface AnimationConfig { type: AnimationType;
   duration?: number;
   delay?: number;
   easing?: string | ((t: number) => number);
   iterations?: number;
   direction?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
   fill?: 'none' | 'forwards' | 'backwards' | 'both';
-  playbackRate?: number;
+  playbackRate?: number; }
 }
 
-export interface GestureAnimation {
-  gesture: 'swipe' | 'pinch' | 'rotate' | 'pan' | 'tap' | 'press';
+export interface GestureAnimation { gesture: 'swipe' | 'pinch' | 'rotate' | 'pan' | 'tap' | 'press';
   animation: AnimationConfig;
   threshold?: number;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'any';
+  direction?: 'up' | 'down' | 'left' | 'right' | 'any'; }
 }
 
-// GPU-accelerated animation class
-// Enhanced with GSAP timeline capabilities
+{/* GPU-accelerated animation class  */}
+{/* Enhanced with GSAP timeline capabilities  */}
 export class GlassAnimation {
   private element: HTMLElement;
   private animation: Animation | null = null;
@@ -95,12 +91,12 @@ export class GlassAnimation {
     this.gsapTimeline = gsap.timeline();
   }
 
-  // Animate with Web Animations API
+  {/* Animate with Web Animations API  */}
   animate(
-    keyframes: Array<globalThis.Keyframe>,
+    keyframes: globalThis.Array<Keyframe>,
     options: globalThis.KeyframeAnimationOptions
   ): globalThis.Animation {
-    // Force GPU acceleration
+    {/* Force GPU acceleration  */}
     this.element.style.willChange = 'transform, opacity, filter';
 
     this.animation = this.element.animate(keyframes, {
@@ -115,12 +111,11 @@ export class GlassAnimation {
     return this.animation;
   }
 
-  // Enhanced morphing between shapes using GSAP MorphSVG
+  {/* Enhanced morphing between shapes using GSAP MorphSVG  */}
   morphTo(targetPath: string, duration = 1000) {
-    // Check if element is SVG path
+    {/* Check if element is SVG path  */}
     if ('path' === this.element.tagName || 'PATH' === this.element.tagName) {
-      return gsap.to(this.element, {
-        duration: duration / 1000,
+      return gsap.to(this.element, { duration: duration / 1000 }
         morphSVG: targetPath,
         ease: 'power2.inOut',
         force3D: true,
@@ -129,7 +124,7 @@ export class GlassAnimation {
         },
       });
     }
-    // Fallback to Web Animations API for non-SVG elements
+    {/* Fallback to Web Animations API for non-SVG elements  */}
     const currentPath = this.element.getAttribute('d') || '';
     return this.animate([{ d: currentPath }, { d: targetPath }], {
       duration,
@@ -138,7 +133,7 @@ export class GlassAnimation {
     });
   }
 
-  // Enhanced liquid animation with GSAP
+  {/* Enhanced liquid animation with GSAP  */}
   liquid(amplitude = 20, _frequency = 2, duration = 2000) {
     this.gsapTimeline.clear();
     this.gsapTimeline.to(this.element, {
@@ -150,40 +145,38 @@ export class GlassAnimation {
     });
   }
 
-  // Elastic effect using GSAP
+  {/* Elastic effect using GSAP  */}
   elasticEffect(_amplitude = 1.5, _frequency = 2, _duration = 1600) {
-    // gsap.to(this.element, {
-    //   x: amplitude * 100,
-    //   duration,
-    //   ease: `elastic.out(${frequency}, ${amplitude})`,
-    // });
+    {/* gsap.to(this.element, {  */}
+    {/* x: amplitude * 100, */}
+    {/* duration,  */}
+    {/* ease: `elastic.out(${frequency}, ${amplitude})`,  */}
+    {/* });  */}
   }
 
-  // Add magnetic hover effect with GSAP
+  {/* Add magnetic hover effect with GSAP  */}
   magneticHover(_strength = 50, duration = 0.5) {
     this.element.addEventListener('mouseenter', () => {
-      gsap.to(this.element, {
-        duration: duration / 1.5,
+      gsap.to(this.element, { duration: duration / 1.5 }
         scale: 1.1,
         ease: 'power3.out',
       });
     });
 
     this.element.addEventListener('mouseleave', () => {
-      gsap.to(this.element, {
-        duration: duration,
+      gsap.to(this.element, { duration: duration }
         scale: 1,
         ease: 'power3.in',
       });
     });
   }
 
-  // Shatter effect
+  {/* Shatter effect  */}
   shatter(pieces = 12, duration = 800) {
-    // const bounds = element.getBoundingClientRect();
+    {/* const bounds = element.getBoundingClientRect();  */}
     const fragments: Array<HTMLElement> = [];
 
-    // Create fragments
+    {/* Create fragments  */}
     for (let index = 0; index < pieces; index++) {
       const fragment = this.element.cloneNode(true) as HTMLElement;
       fragment.style.position = 'absolute';
@@ -192,10 +185,10 @@ export class GlassAnimation {
       fragments.push(fragment);
     }
 
-    // Hide original
+    {/* Hide original  */}
     this.element.style.opacity = '0';
 
-    // Animate fragments
+    {/* Animate fragments  */}
     for (const [index, fragment] of fragments.entries()) {
       const angle = (index / pieces) * Math.PI * 2;
       const distance = 100 + Math.random() * 200;
@@ -220,10 +213,7 @@ export class GlassAnimation {
           fill: 'forwards',
         }
       ).onfinish = () => fragment.remove();
-    }
-  }
-
-  // Ripple effect from point
+  {/* Ripple effect from point  */}
   ripple(
     x: number,
     y: number,
@@ -260,7 +250,7 @@ export class GlassAnimation {
     ).onfinish = () => ripple.remove();
   }
 
-  // Wave animation
+  {/* Wave animation  */}
   wave(amplitude = 10, duration = 1500) {
     return this.animate(
       [
@@ -277,7 +267,7 @@ export class GlassAnimation {
     );
   }
 
-  // Parallax scroll effect
+  {/* Parallax scroll effect  */}
   parallax(speed = 0.5, axis: 'y' | 'x' = 'y') {
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
@@ -291,9 +281,9 @@ export class GlassAnimation {
     return () => window.removeEventListener('scroll', handleScroll);
   }
 
-  // Glitch effect
+  {/* Glitch effect  */}
   glitch(intensity = 5, duration = 200) {
-    const keyframes: Array<globalThis.Keyframe> = [];
+    const keyframes: globalThis.Array<Keyframe> = [];
     const steps = 10;
 
     for (let index = 0; index < steps; index++) {
@@ -321,20 +311,17 @@ export class GlassAnimation {
     });
   }
 
-  // Dissolve effect
+  {/* Dissolve effect  */}
   dissolve(duration = 1000) {
     return this.animate(
       [
-        {
-          opacity: 1,
+        { opacity: 1 }
           filter: 'blur(0px) saturate(100%)',
         },
-        {
-          opacity: 0.5,
+        { opacity: 0.5 }
           filter: 'blur(10px) saturate(200%)',
         },
-        {
-          opacity: 0,
+        { opacity: 0 }
           filter: 'blur(20px) saturate(0%)',
         },
       ],
@@ -346,7 +333,7 @@ export class GlassAnimation {
     );
   }
 
-  // Helper to generate random clip paths for shatter
+  {/* Helper to generate random clip paths for shatter  */}
   private generateRandomClipPath(): string {
     const points = [];
     const vertices = 3 + Math.floor(Math.random() * 3);
@@ -362,26 +349,25 @@ export class GlassAnimation {
     return `polygon(${points.join(', ')})`;
   }
 
-  // Batch processing for multiple animations
-  batchAnimate(animations: Array<{ target: string; vars: gsap.TweenVars }>) {
-    // Use GSAP's batch method for optimal performance
-    gsap.set(this.element, { force3D: true }); // Force GPU acceleration
+  {/* Batch processing for multiple animations  */}
+  batchAnimate(animations: { target: string; vars: gsap.TweenVars }[]) {
+    {/* Use GSAP's batch method for optimal performance  */}
+    gsap.set(this.element, { force3D: true }); {/* Force GPU acceleration  */}
 
     const tl = gsap.timeline();
     for (const { target, vars } of animations) {
-      tl.to(target, vars, 0); // Add all animations to start simultaneously
+      tl.to(target, vars, 0); {/* Add all animations to start simultaneously  */}
     }
 
     return tl;
   }
 
-  // Physics-based spring animation
+  {/* Physics-based spring animation  */}
   springTo(
     target: { x?: number; y?: number; scale?: number },
     config: SpringPhysics = { mass: 1, tension: 280, friction: 60 }
   ) {
-    return gsap.to(this.element, {
-      x: target.x,
+    return gsap.to(this.element, { x: target.x }
       y: target.y,
       scale: target.scale,
       duration: Math.sqrt(config.mass / config.tension) * 2,
@@ -390,7 +376,7 @@ export class GlassAnimation {
     });
   }
 
-  // Advanced magnetic field effect
+  {/* Advanced magnetic field effect  */}
   magneticField(radius = 100, strength = 0.3) {
     const handleMouseMove = (e: MouseEvent) => {
       const rect = this.element.getBoundingClientRect();
@@ -406,27 +392,24 @@ export class GlassAnimation {
         const moveX = deltaX * force * strength;
         const moveY = deltaY * force * strength;
 
-        gsap.to(this.element, {
-          x: moveX,
+        gsap.to(this.element, { x: moveX }
           y: moveY,
           duration: 0.2,
           ease: 'power2.out',
         });
       } else {
-        gsap.to(this.element, {
-          x: 0,
+        gsap.to(this.element, { x: 0 }
           y: 0,
           duration: 0.3,
           ease: 'elastic.out(1, 0.3)',
         });
-      }
-    };
+      };
 
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
   }
 
-  // Stop all animations
+  {/* Stop all animations  */}
   stop() {
     if (this.animation) {
       this.animation.cancel();
@@ -436,15 +419,12 @@ export class GlassAnimation {
       cancelAnimationFrame(this.rafId);
       this.rafId = null;
     }
-    // Kill all GSAP animations on this element
+    {/* Kill all GSAP animations on this element  */}
     gsap.killTweensOf(this.element);
     this.gsapTimeline.kill();
     this.element.style.willChange = 'auto';
-  }
-}
-
-// Choreographed animations for multiple elements
-// Enhanced with GSAP timeline for better performance
+{/* Choreographed animations for multiple elements  */}
+{/* Enhanced with GSAP timeline for better performance  */}
 export class GlassChoreographer {
   private animations: Map<HTMLElement, GlassAnimation> = new Map();
   private masterTimeline: gsap.core.Timeline;
@@ -453,17 +433,17 @@ export class GlassChoreographer {
     this.masterTimeline = gsap.timeline();
   }
 
-  // Add element to choreography
+  {/* Add element to choreography  */}
   add(element: HTMLElement): GlassAnimation {
     const animation = new GlassAnimation(element);
     this.animations.set(element, animation);
     return animation;
   }
 
-  // Enhanced stagger animations with GSAP
+  {/* Enhanced stagger animations with GSAP  */}
   stagger(
     elements: Array<HTMLElement>,
-    keyframes: Array<globalThis.Keyframe>,
+    keyframes: globalThis.Array<Keyframe>,
     options: globalThis.KeyframeAnimationOptions,
     staggerDelay = 50
   ) {
@@ -473,16 +453,13 @@ export class GlassChoreographer {
         ...options,
         delay: (options.delay || 0) + index * staggerDelay,
       });
-    }
-  }
-
-  // Batch animate multiple elements with GSAP for optimal performance
+  {/* Batch animate multiple elements with GSAP for optimal performance  */}
   batchAnimate(
     elements: Array<HTMLElement>,
     variables: gsap.TweenVars,
     stagger = 0.1
   ) {
-    // Use GSAP's batch method for GPU acceleration
+    {/* Use GSAP's batch method for GPU acceleration  */}
     gsap.set(elements, { force3D: true });
 
     return gsap.to(elements, {
@@ -492,7 +469,7 @@ export class GlassChoreographer {
     });
   }
 
-  // Physics-based cascade with spring effects
+  {/* Physics-based cascade with spring effects  */}
   springCascade(
     elements: Array<HTMLElement>,
     target: { x?: number; y?: number; scale?: number },
@@ -503,8 +480,7 @@ export class GlassChoreographer {
     for (const [index, element] of elements.entries()) {
       this.masterTimeline.to(
         element,
-        {
-          x: target.x,
+        { x: target.x }
           y: target.y,
           scale: target.scale,
           duration: 0.6,
@@ -518,7 +494,7 @@ export class GlassChoreographer {
     return this.masterTimeline;
   }
 
-  // Cascade animation
+  {/* Cascade animation  */}
   cascade(
     elements: Array<HTMLElement>,
     animationType: AnimationType,
@@ -529,9 +505,9 @@ export class GlassChoreographer {
     this.stagger(elements, keyframes, { duration }, staggerDelay);
   }
 
-  // Get predefined keyframes for animation type
-  public getKeyframesForType(type: AnimationType): Array<globalThis.Keyframe> {
-    const keyframeMap: Record<AnimationType, Array<globalThis.Keyframe>> = {
+  {/* Get predefined keyframes for animation type  */}
+  public getKeyframesForType(type: AnimationType): globalThis.Array<Keyframe> {
+    const keyframeMap: Record<AnimationType, globalThis.Array<Keyframe>> = {
       fade: [{ opacity: 0 }, { opacity: 1 }],
       slide: [
         { transform: 'translateY(20px)', opacity: 0 },
@@ -606,7 +582,7 @@ export class GlassChoreographer {
     return keyframeMap[type] || keyframeMap.fade;
   }
 
-  // Clear all animations
+  {/* Clear all animations  */}
   clear() {
     for (const [, animation] of this.animations) {
       animation.stop();
@@ -614,10 +590,7 @@ export class GlassChoreographer {
     this.animations.clear();
     this.masterTimeline.kill();
     this.masterTimeline = gsap.timeline();
-  }
-}
-
-// Gesture-based animation controller
+{/* Gesture-based animation controller  */}
 export class GlassGestureAnimator {
   private element: HTMLElement;
   private animation: GlassAnimation;
@@ -628,7 +601,7 @@ export class GlassGestureAnimator {
     this.animation = new GlassAnimation(element);
   }
 
-  // Enable swipe animations
+  {/* Enable swipe animations  */}
   onSwipe(
     direction: 'left' | 'right' | 'up' | 'down',
     animationConfig: AnimationConfig
@@ -641,8 +614,7 @@ export class GlassGestureAnimator {
       if (touch) {
         startX = touch.clientX;
         startY = touch.clientY;
-      }
-    };
+      };
 
     const handleEnd = (e: TouchEvent | MouseEvent) => {
       const touch = 'changedTouches' in e ? e.changedTouches[0] : e;
@@ -672,13 +644,9 @@ export class GlassGestureAnimator {
         case 'down': {
           triggered = deltaY > threshold && Math.abs(deltaX) < threshold;
           break;
-        }
-      }
-
       if (triggered) {
         this.playAnimation(animationConfig);
-      }
-    };
+      };
 
     this.element.addEventListener('touchstart', handleStart, { passive: true });
     this.element.addEventListener('touchend', handleEnd, { passive: true });
@@ -688,7 +656,7 @@ export class GlassGestureAnimator {
     this.gestureHandlers.set(`swipe-${direction}`, handleEnd);
   }
 
-  // Enable pinch animations
+  {/* Enable pinch animations  */}
   onPinch(animationConfig: AnimationConfig) {
     let initialDistance = 0;
 
@@ -709,8 +677,7 @@ export class GlassGestureAnimator {
     const handleStart = (e: TouchEvent) => {
       if (2 === e.touches.length) {
         initialDistance = getDistance(e.touches);
-      }
-    };
+      };
 
     const handleMove = (e: TouchEvent) => {
       if (2 === e.touches.length && 0 < initialDistance) {
@@ -721,8 +688,6 @@ export class GlassGestureAnimator {
 
         if (0.2 < Math.abs(scale - 1)) {
           this.playAnimation(animationConfig);
-        }
-      }
     };
 
     this.element.addEventListener('touchstart', handleStart, { passive: true });
@@ -731,13 +696,12 @@ export class GlassGestureAnimator {
     this.gestureHandlers.set('pinch', handleMove as (e: TouchEvent) => void);
   }
 
-  // Play animation based on config
+  {/* Play animation based on config  */}
   private playAnimation(config: AnimationConfig) {
     const choreographer = new GlassChoreographer();
     const keyframes = choreographer.getKeyframesForType(config.type);
 
-    this.animation.animate(keyframes, {
-      duration: config.duration || 500,
+    this.animation.animate(keyframes, { duration: config.duration || 500 }
       easing: (config.easing as string) || GLASS_EASINGS.smoothOut,
       iterations: config.iterations || 1,
       direction: config.direction || 'normal',
@@ -746,14 +710,11 @@ export class GlassGestureAnimator {
     });
   }
 
-  // Clean up
+  {/* Clean up  */}
   destroy() {
     this.animation.stop();
     this.gestureHandlers.clear();
-  }
-}
-
-// Export animation utilities
+{/* Export animation utilities  */}
 export function createGlassAnimation(element: HTMLElement): GlassAnimation {
   return new GlassAnimation(element);
 }
@@ -768,17 +729,16 @@ export function createGestureAnimator(
   return new GlassGestureAnimator(element);
 }
 
-// GPU acceleration utilities
+{/* GPU acceleration utilities  */}
 export const GlassUtils = {
-  // Force GPU acceleration on multiple elements
+  {/* Force GPU acceleration on multiple elements  */}
   enableGPUAcceleration(elements: Array<HTMLElement>) {
-    gsap.set(elements, {
-      force3D: true,
+    gsap.set(elements, { force3D: true }
       willChange: 'transform',
     });
   },
 
-  // Enhanced reduced motion support with graceful animation scaling
+  {/* Enhanced reduced motion support with graceful animation scaling  */}
   enableReducedMotion(elements: Array<HTMLElement>) {
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
@@ -787,14 +747,12 @@ export const GlassUtils = {
     if (prefersReducedMotion) {
       for (const element of elements) {
         gsap.to(element, {
-          clearProps: 'all', // Remove animations
-          opacity: 1, // Ensure visibility
+          clearProps: 'all', {/* Remove animations  */}
+          opacity: 1, {/* Ensure visibility  */}
         });
-      }
-    }
   },
 
-  // Frame rate tracking for animations
+  {/* Frame rate tracking for animations  */}
   trackFrameRate() {
     const start = Date.now();
     let frame = 0;
@@ -804,23 +762,20 @@ export const GlassUtils = {
       const now = Date.now();
       const duration = now - start;
       const actualFPS = (frame / duration) * 1000;
-      // Use dev-only logger
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      {/* Use dev-only logger  */}
+      {/* eslint-disable-next-line @typescript-eslint/no-var-requires  */}
       const { devLog } = require('@/utils/dev-logger');
       devLog(`Current FPS: ${actualFPS}`);
 
       if (1000 > duration) {
         requestAnimationFrame(checkFrameRate);
-      }
-    }
-
     requestAnimationFrame(checkFrameRate);
   },
 
-  // Batch animate with optimal performance
+  {/* Batch animate with optimal performance  */}
   batchAnimate(
     elements: Array<HTMLElement>,
-    animations: Array<gsap.TweenVars>
+    animations: gsap.Array<TweenVars>
   ) {
     const tl = gsap.timeline();
 
@@ -839,7 +794,7 @@ export const GlassUtils = {
     return tl;
   },
 
-  // Physics-based spring animation for multiple elements
+  {/* Physics-based spring animation for multiple elements  */}
   springAnimation(
     elements: Array<HTMLElement>,
     target: gsap.TweenVars,
@@ -854,13 +809,13 @@ export const GlassUtils = {
     });
   },
 
-  // Magnetic effect for multiple elements
+  {/* Magnetic effect for multiple elements  */}
   createMagneticField(
     elements: Array<HTMLElement>,
     radius = 100,
     strength = 0.3
   ) {
-    const cleanupFunctions: Array<() => void> = [];
+    const cleanupFunctions: () =[] void> = [];
 
     for (const element of elements) {
       const animation = new GlassAnimation(element);
@@ -871,7 +826,6 @@ export const GlassUtils = {
     return () => {
       for (const cleanup of cleanupFunctions) {
         cleanup();
-      }
-    };
+      };
   },
 };

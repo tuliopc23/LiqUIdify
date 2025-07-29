@@ -66,6 +66,7 @@ export const GracefulDegradationDemo: React.FC = () => {
         <h2 className="mb-4 font-semibold text-xl">Feature Support</h2>
 
         <button
+          type="button"
           onClick={() => setShowDetails(!showDetails)}
           className="mb-4 rounded bg-blue-500 px-4 py-2 text-white"
         >
@@ -151,7 +152,10 @@ export const GracefulDegradationDemo: React.FC = () => {
               </div>
             }
           >
-            <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
+            <button
+              type="button"
+              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            >
               Click me (if interactions work)
             </button>
           </GracefulInteractive>
@@ -222,7 +226,10 @@ export const GracefulDegradationDemo: React.FC = () => {
 
             <CSSModal
               trigger={
-                <button className="rounded bg-green-500 px-4 py-2 text-white">
+                <button
+                  type="button"
+                  className="rounded bg-green-500 px-4 py-2 text-white"
+                >
                   Open Modal
                 </button>
               }

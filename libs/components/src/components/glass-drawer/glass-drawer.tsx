@@ -138,7 +138,7 @@ const drawerVariants = cva({
 });
 
 const drawerHeaderVariants = cva({
-  base: 'flex items-center justify-between p-4 border-b border-white/10 bg-white/5',
+  base: 'flex items-center justify-between border-white/10 border-b bg-white/5 p-4',
   variants: {},
 });
 
@@ -148,7 +148,7 @@ const drawerContentVariants = cva({
 });
 
 const drawerFooterVariants = cva({
-  base: 'flex items-center justify-end gap-2 p-4 border-t border-white/10 bg-white/5',
+  base: 'flex items-center justify-end gap-2 border-white/10 border-t bg-white/5 p-4',
   variants: {},
 });
 

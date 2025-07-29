@@ -5,11 +5,9 @@ import {
   CheckCircle,
   FileText,
   Image,
-  Music,
-  Upload,
   Video,
 } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { type FileUploadItem, GlassFileUpload } from './glass-file-upload';
 
 const meta = {
@@ -42,8 +40,7 @@ import { GlassFileUpload } from '@/components/glass-file-upload';
 <GlassFileUpload
   onFilesChange={(files) => console.log('Files:', files)}
   accept="image/*"
-  multiple
-/>
+  multiple />
 
 // With upload handler
 <GlassFileUpload
@@ -53,8 +50,7 @@ import { GlassFileUpload } from '@/components/glass-file-upload';
   maxFileSize={10 * 1024 * 1024} // 10MB
   allowedTypes={['image/jpeg', 'image/png']}
   showPreview
-  showProgress
-/>
+  showProgress />
 \`\`\`
 
 ## File Types Supported
@@ -84,7 +80,7 @@ The file upload component follows WAI-ARIA guidelines:
       action: 'files changed',
       description: 'Callback fired when files are added or removed',
       table: {
-        type: { summary: '(files: FileUploadItem[]) => void' },
+        type: { summary: '(files: Array<FileUploadItem>) => void' },
         category: 'Core',
       },
     },
@@ -92,7 +88,7 @@ The file upload component follows WAI-ARIA guidelines:
       action: 'upload started',
       description: 'Callback for handling file uploads',
       table: {
-        type: { summary: '(files: File[]) => Promise<void>' },
+        type: { summary: '(files: Array<File>) => Promise<void>' },
         category: 'Core',
       },
     },
@@ -143,7 +139,7 @@ The file upload component follows WAI-ARIA guidelines:
       control: 'object',
       description: 'Array of allowed MIME types',
       table: {
-        type: { summary: 'string[]' },
+        type: { summary: 'Array<string>' },
         category: 'Configuration',
       },
     },
@@ -253,7 +249,7 @@ export const BasicUsage: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">
+        <h3 className="font-medium text-sm text-white/80">
           Simple File Upload
         </h3>
         <GlassFileUpload
@@ -262,7 +258,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">
+        <h3 className="font-medium text-sm text-white/80">
           Single File Upload
         </h3>
         <GlassFileUpload
@@ -275,7 +271,7 @@ export const BasicUsage: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">
+        <h3 className="font-medium text-sm text-white/80">
           With File Restrictions
         </h3>
         <GlassFileUpload
@@ -306,7 +302,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Small Size</h3>
+        <h3 className="font-medium text-sm text-white/80">Small Size</h3>
         <GlassFileUpload
           size="sm"
           dropzoneText="Drop files here"
@@ -316,7 +312,7 @@ export const Sizes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Medium Size</h3>
+        <h3 className="font-medium text-sm text-white/80">Medium Size</h3>
         <GlassFileUpload
           size="md"
           onFilesChange={(files) => console.log('Medium upload:', files)}
@@ -324,7 +320,7 @@ export const Sizes: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Large Size</h3>
+        <h3 className="font-medium text-sm text-white/80">Large Size</h3>
         <GlassFileUpload
           size="lg"
           onFilesChange={(files) => console.log('Large upload:', files)}
@@ -350,13 +346,13 @@ export const FileTypeExamples: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Image Upload</h3>
+        <h3 className="font-medium text-sm text-white/80">Image Upload</h3>
         <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <Image className="h-5 w-5 text-blue-400" />
             <div>
               <div className="font-medium text-white/90">Image Gallery</div>
-              <div className="text-white/60 text-sm">
+              <div className="text-sm text-white/60">
                 Upload photos and images
               </div>
             </div>
@@ -378,13 +374,13 @@ export const FileTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Document Upload</h3>
+        <h3 className="font-medium text-sm text-white/80">Document Upload</h3>
         <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <FileText className="h-5 w-5 text-green-400" />
             <div>
               <div className="font-medium text-white/90">Document Manager</div>
-              <div className="text-white/60 text-sm">
+              <div className="text-sm text-white/60">
                 Upload PDFs and documents
               </div>
             </div>
@@ -405,13 +401,13 @@ export const FileTypeExamples: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Media Upload</h3>
+        <h3 className="font-medium text-sm text-white/80">Media Upload</h3>
         <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center gap-3">
             <Video className="h-5 w-5 text-purple-400" />
             <div>
               <div className="font-medium text-white/90">Media Library</div>
-              <div className="text-white/60 text-sm">
+              <div className="text-sm text-white/60">
                 Upload videos and audio files
               </div>
             </div>
@@ -444,9 +440,9 @@ export const FileTypeExamples: Story = {
 // Upload states and progress
 export const UploadStates: Story = {
   render: () => {
-    const [uploadingFiles, setUploadingFiles] = useState<FileUploadItem[]>([]);
+    const [_uploadingFiles, setUploadingFiles] = useState<FileUploadItem[]>([]);
 
-    const simulateUpload = async (files: File[]) => {
+    const simulateUpload = async (_files: Array<File>) => {
       // Simulate upload progress
       for (let i = 0; i <= 100; i += 10) {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -463,7 +459,7 @@ export const UploadStates: Story = {
     return (
       <div className="space-y-8">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Upload with Progress
           </h3>
           <GlassFileUpload
@@ -475,7 +471,7 @@ export const UploadStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Error State Example
           </h3>
           <GlassFileUpload
@@ -486,7 +482,7 @@ export const UploadStates: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">Disabled State</h3>
+          <h3 className="font-medium text-sm text-white/80">Disabled State</h3>
           <GlassFileUpload disabled dropzoneText="Upload is disabled" />
         </div>
       </div>
@@ -510,12 +506,12 @@ export const RealWorldExamples: Story = {
   render: () => {
     const [profileFiles, setProfileFiles] = useState<FileUploadItem[]>([]);
     const [portfolioFiles, setPortfolioFiles] = useState<FileUploadItem[]>([]);
-    const [documentFiles, setDocumentFiles] = useState<FileUploadItem[]>([]);
+    const [_documentFiles, setDocumentFiles] = useState<FileUploadItem[]>([]);
 
     return (
       <div className="space-y-12">
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Profile Picture Upload
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -525,7 +521,7 @@ export const RealWorldExamples: Story = {
               </div>
               <div>
                 <div className="font-medium text-white/90">Profile Picture</div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   Upload a profile photo (max 2MB)
                 </div>
               </div>
@@ -542,7 +538,7 @@ export const RealWorldExamples: Story = {
               showPreview
             />
             {profileFiles.length > 0 && (
-              <div className="mt-4 text-white/60 text-sm">
+              <div className="mt-4 text-sm text-white/60">
                 Selected: {profileFiles[0].file.name}
               </div>
             )}
@@ -550,7 +546,7 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Portfolio Upload
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -562,7 +558,7 @@ export const RealWorldExamples: Story = {
                 <div className="font-medium text-white/90">
                   Portfolio Gallery
                 </div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   Upload your work samples and portfolio items
                 </div>
               </div>
@@ -577,7 +573,7 @@ export const RealWorldExamples: Story = {
             />
             {portfolioFiles.length > 0 && (
               <div className="mt-4">
-                <div className="text-white/80 text-sm font-medium">
+                <div className="font-medium text-sm text-white/80">
                   {portfolioFiles.length} file(s) selected
                 </div>
                 <div className="mt-2 space-y-1">
@@ -597,7 +593,7 @@ export const RealWorldExamples: Story = {
         </div>
 
         <div className="space-y-4">
-          <h3 className="font-medium text-white/80 text-sm">
+          <h3 className="font-medium text-sm text-white/80">
             Document Submission
           </h3>
           <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
@@ -607,7 +603,7 @@ export const RealWorldExamples: Story = {
               </div>
               <div>
                 <div className="font-medium text-white/90">Legal Documents</div>
-                <div className="text-white/60 text-sm">
+                <div className="text-sm text-white/60">
                   Submit required documentation (PDF only)
                 </div>
               </div>
@@ -624,10 +620,10 @@ export const RealWorldExamples: Story = {
             />
             <div className="mt-4 rounded-lg border border-yellow-400/20 bg-yellow-400/10 p-3">
               <div className="flex items-start gap-2">
-                <AlertCircle className="mt-0.5 h-4 w-4 text-yellow-400 flex-shrink-0" />
-                <div className="text-yellow-200 text-sm">
+                <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-yellow-400" />
+                <div className="text-sm text-yellow-200">
                   <div className="font-medium">Requirements:</div>
-                  <ul className="mt-1 list-disc list-inside space-y-0.5 text-xs">
+                  <ul className="mt-1 list-inside list-disc space-y-0.5 text-xs">
                     <li>PDF format only</li>
                     <li>Maximum 25MB per file</li>
                     <li>Up to 5 documents</li>
@@ -676,7 +672,7 @@ export const AccessibilityShowcase: Story = {
         </div>
 
         <div className="space-y-4">
-          <p className="text-white/60 text-sm">
+          <p className="text-sm text-white/60">
             Try using keyboard navigation: Tab to focus the upload area,
             Space/Enter to open file dialog
           </p>
@@ -743,7 +739,7 @@ export const ThemeShowcase: Story = {
   render: () => (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Ocean Theme</h3>
+        <h3 className="font-medium text-sm text-white/80">Ocean Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
           <GlassFileUpload
             dropzoneText="Drop files into the ocean..."
@@ -754,7 +750,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Sunset Theme</h3>
+        <h3 className="font-medium text-sm text-white/80">Sunset Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
           <GlassFileUpload
             dropzoneText="Upload files to the sunset..."
@@ -765,7 +761,7 @@ export const ThemeShowcase: Story = {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-medium text-white/80 text-sm">Forest Theme</h3>
+        <h3 className="font-medium text-sm text-white/80">Forest Theme</h3>
         <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
           <GlassFileUpload
             dropzoneText="Plant files in the forest..."

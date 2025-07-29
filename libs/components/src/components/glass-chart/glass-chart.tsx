@@ -87,7 +87,9 @@ export const LineChart: React.FC<LineChartProps> = ({
         width={width}
         height={height}
         className="overflow-visible"
+        aria-hidden="true"
       >
+        <title>Icon</title>
         {gradient && (
           <defs>
             <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
@@ -238,7 +240,13 @@ export const BarChart: React.FC<BarChartProps> = ({
 
   return (
     <div className={cn('relative', className)}>
-      <svg width={width} height={height} className="overflow-visible">
+      <svg
+        width={width}
+        height={height}
+        className="overflow-visible"
+        aria-hidden="true"
+      >
+        <title>Icon</title>
         {data.map((item, index) => {
           const barLength =
             (item.value / maxValue) *
@@ -362,7 +370,8 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
   return (
     <div className={cn('relative', className)}>
-      <svg width={width} height={height}>
+      <svg width={width} height={height} aria-hidden="true">
+        <title>Icon</title>
         {segments.map((segment, index) => (
           <path
             key={index}

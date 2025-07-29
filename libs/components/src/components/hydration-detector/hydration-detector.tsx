@@ -38,7 +38,7 @@ export function HydrationDetector({
   const [hydrationState, setHydrationState] = useState({
     isHydrating: true,
     hasMismatch: false,
-    mismatches: [] as Array<HydrationMismatch>,
+    mismatches: [] as HydrationMismatch[],
     retryCount: 0,
     isReady: false,
   });
@@ -281,7 +281,9 @@ export function HydrationRecovery({
       >
         <p>Hydration error detected</p>
 
-        <button onClick={onRecover}>Recover</button>
+        <button type="button" onClick={onRecover}>
+          Recover
+        </button>
       </div>
       {children}
     </div>

@@ -39,8 +39,7 @@ function MyComponent() {
       min={0}
       max={100}
       step={1}
-      showValue={true}
-    />
+      showValue={true} />
   );
 }
 \`\`\`
@@ -254,6 +253,7 @@ export const VolumeControl: Story = {
         />
         <div className="flex justify-between text-gray-500 text-xs">
           <button
+            type="button"
             onClick={() => setVolume(0)}
             className="hover:text-gray-700 dark:hover:text-gray-300"
           >
@@ -261,6 +261,7 @@ export const VolumeControl: Story = {
           </button>
           <span className="font-medium">{volume}%</span>
           <button
+            type="button"
             onClick={() => setVolume(100)}
             className="hover:text-gray-700 dark:hover:text-gray-300"
           >
@@ -288,7 +289,10 @@ export const InteractiveDemo: Story = {
         <div className="space-y-6">
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300">
+              <label
+                htmlFor="brightness-jru606"
+                className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300"
+              >
                 <Sun className="h-4 w-4" />
                 Brightness
               </label>
@@ -305,7 +309,10 @@ export const InteractiveDemo: Story = {
 
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300">
+              <label
+                htmlFor="animation-speed-i9kuig"
+                className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300"
+              >
                 <Gauge className="h-4 w-4" />
                 Animation Speed
               </label>
@@ -323,7 +330,10 @@ export const InteractiveDemo: Story = {
 
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300">
+              <label
+                htmlFor="price-range-h0kix5"
+                className="flex items-center gap-2 font-medium text-gray-700 text-sm dark:text-gray-300"
+              >
                 <DollarSign className="h-4 w-4" />
                 Price Range
               </label>
@@ -381,7 +391,10 @@ export const FormIntegration: Story = {
 
         <div className="space-y-4">
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="years-of-experience-eaichh"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Years of Experience
             </label>
             <GlassSlider
@@ -396,7 +409,10 @@ export const FormIntegration: Story = {
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="technical-skills-1-10-9e6sk2"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Technical Skills (1-10)
             </label>
             <GlassSlider
@@ -409,7 +425,10 @@ export const FormIntegration: Story = {
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="weekly-availability-hours-ymuots"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Weekly Availability (hours)
             </label>
             <GlassSlider
@@ -507,7 +526,10 @@ export const RealTimePreview: Story = {
 
         <div className="space-y-4">
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="blur-effect-mfkx4e"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Blur Effect
             </label>
             <GlassSlider
@@ -521,7 +543,10 @@ export const RealTimePreview: Story = {
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="opacity-94kdsl"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Opacity
             </label>
             <GlassSlider
@@ -535,7 +560,10 @@ export const RealTimePreview: Story = {
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="scale-016424"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Scale
             </label>
             <GlassSlider

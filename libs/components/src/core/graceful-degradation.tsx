@@ -173,7 +173,11 @@ export function withNetworkFallback(
         <div className="network-fallback network-fallback--offline">
           {offlineMessage}
           {retryButton && (
-            <button onClick={handleRetry} className="retry-button">
+            <button
+              type="button"
+              onClick={handleRetry}
+              className="retry-button"
+            >
               Retry({retryCount})
             </button>
           )}
@@ -198,7 +202,7 @@ export function withNetworkFallback(
  * Feature Detection Fallback
  */
 export function withFeatureDetection(
-  feature: string | Array<string>,
+  feature: string | string[],
   enhancedComponent: ReactNode,
   fallbackComponent: ReactNode
 ) {

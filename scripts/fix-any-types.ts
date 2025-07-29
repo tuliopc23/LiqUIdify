@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
-import { Project, SyntaxKind, Node } from 'ts-morph';
 import path from 'path';
+import { Node, Project, SyntaxKind } from 'ts-morph';
 
 const project = new Project({
   tsConfigFilePath: 'tsconfig.base.json',
@@ -31,7 +31,7 @@ for (const sourceFile of project.getSourceFiles()) {
 
   console.log(`  🎯 Found ${anyNodes.length} 'any' types`);
 
-  anyNodes.forEach((anyNode, index) => {
+  anyNodes.forEach((anyNode, _index) => {
     const parent = anyNode.getParent();
 
     if (!parent) return;

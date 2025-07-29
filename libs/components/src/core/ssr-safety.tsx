@@ -4,7 +4,7 @@
  * Provides utilities for safe server-side rendering and client-side hydration
  */
 
-import type { ComponentProps, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
 /**

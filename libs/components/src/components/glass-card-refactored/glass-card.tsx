@@ -346,7 +346,7 @@ export const GlassCard = React.memo(
             ref={ref}
             className={componentClasses}
             style={glassVariables as React.CSSProperties}
-            onClick={handleClick}
+            onClick={(onClick = { handleClick })}
             onKeyDown={(e) => {
               if (
                 (interactive || selectable) &&

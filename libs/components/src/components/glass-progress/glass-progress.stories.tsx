@@ -208,6 +208,7 @@ export const LoadingSimulation: Story = {
       <div className="space-y-4">
         <GlassProgress value={progress} showValue color="green" />
         <button
+          type="button"
           onClick={startLoading}
           disabled={loading}
           className="w-full rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
@@ -314,6 +315,7 @@ export const RealWorldExamples: Story = {
             </div>
             <GlassProgress value={uploadProgress} size="sm" color="blue" />
             <button
+              type="button"
               onClick={simulateUpload}
               disabled={isUploading}
               className="text-blue-500 text-sm hover:text-blue-600 disabled:text-gray-400"

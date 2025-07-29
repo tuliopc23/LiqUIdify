@@ -41,7 +41,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const sampleItems: TimelineItem[] = [
+const sampleItems: Array<TimelineItem> = [
   {
     id: '1',
     title: 'Project Started',
@@ -100,7 +100,7 @@ export const AlternatingLayout: Story = {
     alternating: true,
   },
   render: (args) => (
-    <div className="max-w-4xl mx-auto">
+    <div className="mx-auto max-w-4xl">
       <GlassTimeline {...args} />
     </div>
   ),
@@ -169,20 +169,20 @@ export const WithRichContent: Story = {
         status: 'completed',
         content: (
           <div className="space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-[var(--text-secondary)]">
+            <div className="flex items-center justify-between">
+              <span className="text-[var(--text-secondary)] text-sm">
                 Revenue
               </span>
               <span className="font-bold text-green-400">+25%</span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-[var(--text-secondary)]">
+            <div className="flex items-center justify-between">
+              <span className="text-[var(--text-secondary)] text-sm">
                 Users
               </span>
               <span className="font-bold text-blue-400">10.5K</span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-[var(--text-secondary)]">
+            <div className="flex items-center justify-between">
+              <span className="text-[var(--text-secondary)] text-sm">
                 Engagement
               </span>
               <span className="font-bold text-purple-400">87%</span>
@@ -197,16 +197,21 @@ export const WithRichContent: Story = {
         status: 'completed',
         content: (
           <div className="space-y-2">
-            <p className="text-sm text-[var(--text-secondary)]">
+            <p className="text-[var(--text-secondary)] text-sm">
               Major features released:
             </p>
-            <ul className="text-sm space-y-1">
+            <ul className="space-y-1 text-sm">
               <li>• New dashboard UI</li>
               <li>• Advanced analytics</li>
               <li>• API v2 endpoints</li>
               <li>• Mobile app beta</li>
             </ul>
-            <GlassButton size="sm" variant="primary" className="mt-3">
+            <GlassButton
+              type="button"
+              size="sm"
+              variant="primary"
+              className="mt-3"
+            >
               View Release Notes
             </GlassButton>
           </div>
@@ -219,9 +224,9 @@ export const WithRichContent: Story = {
         status: 'active',
         icon: <Users className="h-4 w-4" />,
         content: (
-          <div className="text-center py-4">
-            <p className="text-3xl font-bold mb-2">15 → 25</p>
-            <p className="text-sm text-[var(--text-secondary)]">Team members</p>
+          <div className="py-4 text-center">
+            <p className="mb-2 font-bold text-3xl">15 → 25</p>
+            <p className="text-[var(--text-secondary)] text-sm">Team members</p>
           </div>
         ),
       },
@@ -238,7 +243,7 @@ export const WithRichContent: Story = {
 
 export const ProjectRoadmap: Story = {
   render: () => {
-    const roadmapItems: TimelineItem[] = [
+    const roadmapItems: Array<TimelineItem> = [
       {
         id: 'phase1',
         title: 'Foundation',
@@ -280,7 +285,7 @@ export const ProjectRoadmap: Story = {
     return (
       <div className="space-y-6">
         <GlassCard className="p-6">
-          <h2 className="text-2xl font-bold mb-2">Product Roadmap</h2>
+          <h2 className="mb-2 font-bold text-2xl">Product Roadmap</h2>
           <p className="text-[var(--text-secondary)]">
             Our journey to building the future
           </p>
@@ -303,12 +308,18 @@ export const InteractiveTimeline: Story = {
   render: () => {
     const [selectedItem, setSelectedItem] = React.useState<string | null>(null);
 
-    const interactiveItems: TimelineItem[] = sampleItems.map((item) => ({
+    const interactiveItems: Array<TimelineItem> = sampleItems.map((item) => ({
       ...item,
       content: (
         <div
-          className="cursor-pointer hover:bg-white/5 p-3 rounded-lg transition-colors"
+          className="cursor-pointer rounded-lg p-3 transition-colors hover:bg-white/5"
           onClick={() => setSelectedItem(item.id)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              (() => setSelectedItem(item.id))(e);
+            }
+          }}
         >
           <p className="text-sm">Click for more details</p>
         </div>
@@ -316,24 +327,24 @@ export const InteractiveTimeline: Story = {
     }));
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
-          <h3 className="text-lg font-bold mb-4">Timeline</h3>
+          <h3 className="mb-4 font-bold text-lg">Timeline</h3>
           <GlassTimeline items={interactiveItems} />
         </div>
 
         <div>
-          <h3 className="text-lg font-bold mb-4">Details</h3>
+          <h3 className="mb-4 font-bold text-lg">Details</h3>
           <GlassCard className="p-6">
             {selectedItem ? (
               <div>
-                <h4 className="font-bold mb-2">
+                <h4 className="mb-2 font-bold">
                   {sampleItems.find((i) => i.id === selectedItem)?.title}
                 </h4>
                 <p className="text-[var(--text-secondary)]">
                   {sampleItems.find((i) => i.id === selectedItem)?.description}
                 </p>
-                <p className="text-sm mt-4">
+                <p className="mt-4 text-sm">
                   Date: {sampleItems.find((i) => i.id === selectedItem)?.date}
                 </p>
               </div>
@@ -386,8 +397,8 @@ export const DarkModeTimeline: Story = {
     alternating: true,
   },
   render: (args) => (
-    <div className="dark min-h-[400px] bg-gray-900 p-8 rounded-lg">
-      <h2 className="text-2xl font-bold text-white mb-6 text-center">
+    <div className="dark min-h-[400px] rounded-lg bg-gray-900 p-8">
+      <h2 className="mb-6 text-center font-bold text-2xl text-white">
         Dark Mode Timeline
       </h2>
       <GlassTimeline {...args} />

@@ -48,7 +48,7 @@ export function GlassPerformanceDashboard({
 }: GlassPerformanceDashboardProps) {
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   const [metrics, setMetrics] = useState<Map<string, any>>(new Map());
-  const [componentMetrics, setComponentMetrics] = useState<Array<any>>([]);
+  const [componentMetrics, setComponentMetrics] = useState<any[]>([]);
   const { fps, memory } = useRealtimePerformance();
 
   useEffect(() => {
@@ -88,11 +88,19 @@ export function GlassPerformanceDashboard({
     return (
       <div className={cn('fixed z-50', positionClasses[position], className)}>
         <button
+          type="button"
           onClick={() => setCollapsed(false)}
           className="rounded-lg border border-white/10 bg-black/10 p-2 backdrop-blur-lg transition-colors hover:bg-black/20"
           aria-label="Expand performance dashboard"
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            aria-hidden="true"
+          >
+            <title>Icon</title>
             <path
               d="M5 7.5L10 12.5L15 7.5"
               stroke="currentColor"
@@ -120,11 +128,19 @@ export function GlassPerformanceDashboard({
 
           <div className="flex gap-2">
             <button
+              type="button"
               onClick={() => setCollapsed(true)}
               className="rounded p-1 transition-colors hover:bg-white/10"
               aria-label="Collapse dashboard"
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <title>Icon</title>
                 <path
                   d="M11 6.5L8 3.5L5 6.5"
                   stroke="currentColor"
@@ -136,11 +152,19 @@ export function GlassPerformanceDashboard({
             </button>
             {onClose && (
               <button
+                type="button"
                 onClick={onClose}
                 className="rounded p-1 transition-colors hover:bg-white/10"
                 aria-label="Close dashboard"
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <title>Icon</title>
                   <path
                     d="M12 4L4 12M4 4L12 12"
                     stroke="currentColor"

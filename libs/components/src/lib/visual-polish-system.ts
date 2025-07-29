@@ -732,7 +732,7 @@ export class VisualPolishManager {
 export function useVisualPolish(config: Partial<PolishConfig> = {}) {
   const [qualityMetrics, setQualityMetrics] =
     useState<VisualQualityMetrics | null>(null);
-  const [recommendations, setRecommendations] = useState<Array<string>>([]);
+  const [recommendations, setRecommendations] = useState<string[]>([]);
   const polishManagerRef = useRef<VisualPolishManager | null>(null);
 
   // Initialize polish manager

@@ -227,7 +227,7 @@ class LiqUIdifyBenchmarkRunner {
    */
   async runBenchmarkSuite(
     configs: Array<BenchmarkConfig>
-  ): Promise<Array<BenchmarkResult>> {
+  ): Promise<BenchmarkResult[]> {
     console.log(`🚀 Running benchmark suite (${configs.length} benchmarks)`);
 
     const results: Array<BenchmarkResult> = [];

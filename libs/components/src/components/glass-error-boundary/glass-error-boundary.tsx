@@ -12,7 +12,7 @@ export interface GlassErrorBoundaryProps {
   children: ReactNode;
   fallback?: (error: Error, errorInfo: ErrorInfo) => ReactNode;
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
-  resetKeys?: Array<string | number>;
+  resetKeys?: string | number[];
   resetOnPropsChange?: boolean;
   isolate?: boolean;
   level?: 'page' | 'section' | 'component';
@@ -33,7 +33,7 @@ export class GlassErrorBoundary extends Component<
   GlassErrorBoundaryState
 > {
   private resetTimeoutId: NodeJS.Timeout | null = null;
-  private previousResetKeys: Array<string | number> = [];
+  private previousResetKeys: string | number[] = [];
 
   constructor(props: GlassErrorBoundaryProps) {
     super(props);
@@ -137,7 +137,7 @@ export class GlassErrorBoundary extends Component<
     }
   }
 
-  arraysEqual(a: Array<string | number>, b: Array<string | number>): boolean {
+  arraysEqual(a: string | number[], b: string | number[]): boolean {
     return (
       a.length === b.length && a.every((value, index) => value === b[index])
     );
@@ -224,6 +224,7 @@ export class GlassErrorBoundary extends Component<
 
             <div className="flex gap-2">
               <button
+                type="button"
                 onClick={this.resetErrorBoundary}
                 className="glass-button-primary rounded-lg px-4 py-2"
                 aria-label="Retry loading the content"
@@ -233,6 +234,7 @@ export class GlassErrorBoundary extends Component<
 
               {'page' === level && (
                 <button
+                  type="button"
                   onClick={() => window.location.reload()}
                   className="glass-button-secondary rounded-lg px-4 py-2"
                   aria-label="Reload the entire page"

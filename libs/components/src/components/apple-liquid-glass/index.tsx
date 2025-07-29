@@ -209,6 +209,7 @@ export function AppleLiquidGlassButton({
 
   return (
     <button
+      type="button"
       className={cn(
         'apple-liquid-glass-button',
         'relative',

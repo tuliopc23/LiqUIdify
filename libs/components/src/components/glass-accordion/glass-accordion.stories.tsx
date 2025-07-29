@@ -269,18 +269,21 @@ export const Controlled: Story = {
       <div className="w-[600px] space-y-4">
         <div className="flex gap-2">
           <button
+            type="button"
             onClick={() => setValue('item-1')}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Open First
           </button>
           <button
+            type="button"
             onClick={() => setValue('item-2')}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Open Second
           </button>
           <button
+            type="button"
             onClick={() => setValue('item-3')}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >

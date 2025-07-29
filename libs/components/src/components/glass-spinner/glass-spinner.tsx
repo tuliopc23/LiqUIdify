@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import { cn } from '@/core/utils/classname';
+import { generateStaticKey } from '@/core/utils/stable-key';
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
@@ -135,7 +136,7 @@ export const PulseSpinner: React.FC<{
     <div className={cn('flex space-x-1', className)}>
       {[0, 1, 2].map((index) => (
         <motion.div
-          key={index}
+          key={generateStaticKey('pulse', index)}
           className={cn('rounded-full', sizeClasses[size], `bg-${color}/50`)}
           animate={{
             scale: [1, 1.2, 1],
@@ -169,7 +170,7 @@ export const DotsSpinner: React.FC<{
     <div className={cn('flex space-x-1', className)}>
       {Array.from({ length: count }).map((_, index) => (
         <motion.div
-          key={index}
+          key={generateStaticKey('dot', index)}
           className={cn('rounded-full bg-white/60', sizeClasses[size])}
           animate={{
             y: [0, -8, 0],
@@ -228,7 +229,7 @@ export const WaveSpinner: React.FC<{
     <div className={cn('flex items-end space-x-1', className)}>
       {Array.from({ length: bars }).map((_, index) => (
         <motion.div
-          key={index}
+          key={generateStaticKey('wave-bar', index)}
           className="w-1 rounded-full bg-gradient-to-t from-blue-400 to-purple-400"
           animate={{
             height: [8, 24, 8],

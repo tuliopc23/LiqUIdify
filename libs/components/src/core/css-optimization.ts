@@ -65,10 +65,10 @@ export const DEFAULT_CSS_CONFIG: CSSBundleConfig = {
 export interface CriticalCSSOptions {
   html: string;
   css: string;
-  dimensions: Array<{
+  dimensions: {
     width: number;
     height: number;
-  }>;
+  }[];
   ignore: Array<string>;
 }
 

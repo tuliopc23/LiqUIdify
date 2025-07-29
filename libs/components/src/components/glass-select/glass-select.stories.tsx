@@ -28,7 +28,7 @@ A sophisticated select dropdown component featuring glassmorphic styling, smooth
 \`\`\`tsx
 import { GlassSelect, GlassSelectOption } from '@/components/glass-select';
 
-const options: GlassSelectOption[] = [
+const options: Array<GlassSelectOption> = [
   { value: 'option1', label: 'Option 1' },
   { value: 'option2', label: 'Option 2', disabled: true },
   { value: 'option3', label: 'Option 3' }
@@ -42,8 +42,7 @@ function MyComponent() {
       options={options}
       value={selectedValue}
       onChange={setSelectedValue}
-      placeholder="Select an option"
-    />
+      placeholder="Select an option" />
   );
 }
 \`\`\`
@@ -212,7 +211,10 @@ export const InteractiveDemo: Story = {
 
           <div className="space-y-4">
             <div>
-              <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+              <label
+                htmlFor="country-xyr8s3"
+                className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+              >
                 Country
               </label>
               <GlassSelect
@@ -224,7 +226,10 @@ export const InteractiveDemo: Story = {
             </div>
 
             <div>
-              <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+              <label
+                htmlFor="preferred-framework-6ztlaa"
+                className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+              >
                 Preferred Framework
               </label>
               <GlassSelect
@@ -236,7 +241,10 @@ export const InteractiveDemo: Story = {
             </div>
 
             <div>
-              <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+              <label
+                htmlFor="priority-level-75ifsj"
+                className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+              >
                 Priority Level
               </label>
               <GlassSelect
@@ -317,7 +325,10 @@ export const FormIntegration: Story = {
 
         <div className="space-y-4">
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="role-oone7x"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Role
             </label>
             <GlassSelect
@@ -329,7 +340,10 @@ export const FormIntegration: Story = {
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="department-gl6udk"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Department
             </label>
             <GlassSelect
@@ -343,7 +357,10 @@ export const FormIntegration: Story = {
           </div>
 
           <div>
-            <label className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+            <label
+              htmlFor="experience-ko9vu7"
+              className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+            >
               Experience
             </label>
             <GlassSelect
