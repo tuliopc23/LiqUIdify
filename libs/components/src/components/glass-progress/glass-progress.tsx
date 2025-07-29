@@ -87,8 +87,9 @@ export const GlassProgress = React.memo(
                 'animate-pulse opacity-50'
               )}
               style={{
-                background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
-                transform: "translateX(-100%)",
+                background:
+                  'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)',
+                transform: 'translateX(-100%)',
               }}
             />
           </div>

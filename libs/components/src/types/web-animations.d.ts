@@ -57,9 +57,13 @@ declare global {
     commitStyles(): void;
     persist(): void;
 
-    oncancel: ((this: Animation, event_: AnimationPlaybackEvent) => any) | null;
-    onfinish: ((this: Animation, event_: AnimationPlaybackEvent) => any) | null;
-    onremove: ((this: Animation, event_: Event) => any) | null;
+    oncancel:
+      | ((this: Animation, event_: AnimationPlaybackEvent) => void)
+      | null;
+    onfinish:
+      | ((this: Animation, event_: AnimationPlaybackEvent) => void)
+      | null;
+    onremove: ((this: Animation, event_: Event) => void) | null;
   }
 
   interface AnimationEffect {

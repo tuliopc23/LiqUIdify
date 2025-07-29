@@ -275,7 +275,13 @@ export function useRovingTabindex(
 
   const getRovingProps = useCallback(
     (index: number) => {
-      const props: any = {
+      const props: {
+        tabIndex: number;
+        'data-roving-tabindex-item': boolean;
+        onKeyDown: (event: React.KeyboardEvent) => void;
+        onFocus: () => void;
+        onMouseEnter?: () => void;
+      } = {
         tabIndex: index === currentIndex ? 0 : -1,
         'data-roving-tabindex-item': true,
         onKeyDown: handleKeyDown,

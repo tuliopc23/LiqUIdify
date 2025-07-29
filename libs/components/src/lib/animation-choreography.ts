@@ -8,7 +8,7 @@
  */
 
 // import { gsap } from 'gsap';
-import { GLASS_EASINGS, type AnimationType } from './glass-animations';
+import { type AnimationType, GLASS_EASINGS } from './glass-animations';
 
 /**
  * Animation sequence configuration

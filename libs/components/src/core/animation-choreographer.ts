@@ -9,7 +9,7 @@
  * - Performance optimization
  */
 
-import { useEffect, type RefObject } from 'react';
+import { type RefObject, useEffect } from 'react';
 import { performanceMonitor } from './performance-monitor';
 
 // Import Web Animation API types or define them if not available

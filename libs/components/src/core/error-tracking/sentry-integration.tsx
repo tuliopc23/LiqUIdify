@@ -476,20 +476,23 @@ class LiqUIdifySentryIntegration {
   /**
    * Filter errors before sending to Sentry
    */
-  private beforeSendFilter(event: any, _hint?: any): any {
+  private beforeSendFilter(
+    event: Sentry.Event,
+    _hint?: Sentry.EventHint
+  ): Sentry.Event | null {
     // Skip if in development and error is not LiqUIdify related
     if (isDevelopment && !this.isLiqUIdifyError(event)) {
-      return;
+      return null;
     }
 
     // Filter out common browser extension errors
     if (this.isBrowserExtensionError(event)) {
-      return;
+      return null;
     }
 
     // Filter out network errors that aren't actionable
     if (this.isNetworkError(event)) {
-      return;
+      return null;
     }
 
     // Sanitize sensitive data
@@ -499,10 +502,12 @@ class LiqUIdifySentryIntegration {
   /**
    * Filter transactions before sending to Sentry
    */
-  private _beforeSendTransactionFilter(event: any): any {
+  private _beforeSendTransactionFilter(
+    event: Sentry.Event
+  ): Sentry.Event | null {
     // Only send performance data for LiqUIdify components
     if (!event.transaction?.includes('liquidify')) {
-      return;
+      return null;
     }
     return event;
   }

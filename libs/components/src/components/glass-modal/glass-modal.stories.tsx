@@ -427,7 +427,7 @@ export const DialogTypes: Story = { render: () => { }
             </div>
           </div>
         </GlassModal>
-        <GlassModal isOpen=_customOpenonClose={() => setCustomOpen(false)}>
+        <GlassModal isOpen=_customOpenonClose=() => setCustomOpen(false)>
           <div className="space-y-6 text-center">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/20">
               <Gift className="h-8 w-8 text-green-600 dark:text-green-400" />

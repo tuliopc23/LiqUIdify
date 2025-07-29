@@ -174,7 +174,7 @@ export class PerformanceMonitor {
           if (
             !firstSessionEntry ||
             layoutShiftEntry.startTime -
-                (lastSessionEntry as LayoutShiftEntry).startTime <
+              (lastSessionEntry as LayoutShiftEntry).startTime <
               1000
           ) {
             clsEntries.push(layoutShiftEntry);

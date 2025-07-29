@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BarChart, DonutChart, LineChart, type ChartDataPoint } from './glass-chart';
+import {
+  BarChart,
+  type ChartDataPoint,
+  DonutChart,
+  LineChart,
+} from './glass-chart';
 
 const meta = {
   title: 'Components/GlassChart',

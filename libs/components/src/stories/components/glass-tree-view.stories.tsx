@@ -251,7 +251,7 @@ export const ControlledExpansion: Story = { render: () => { }
         <GlassTreeView
           nodes=fileSystemNodes
           expandedNodeIds=expandedNodeIds
-          onNodeExpand={handleNodeExpand}
+          onNodeExpand=handleNodeExpand
         />
       </div>
     );

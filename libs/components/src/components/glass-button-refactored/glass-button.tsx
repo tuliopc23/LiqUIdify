@@ -48,7 +48,7 @@ interface ButtonState {
 const useButtonBusinessLogic = createBusinessLogicHook<
   ButtonState,
   GlassButtonProps,
-  any
+  Record<string, unknown>
 >(
   // Initial state factory
   (_props: GlassButtonProps) => ({

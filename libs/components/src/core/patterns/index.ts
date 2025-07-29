@@ -17,12 +17,12 @@ export {
 
 // Business logic patterns
 export const createBusinessLogicHook = <T extends Record<string, unknown>>(
-  initialStateFactory: (props: any) => T,
+  initialStateFactory: (props: Record<string, unknown>) => T,
   actionsFactory: (
     state: T,
     setState: React.Dispatch<React.SetStateAction<T>>,
-    props: any
-  ) => Record<string, (...arguments_: Array<any>) => void>
+    props: Record<string, unknown>
+  ) => Record<string, (...arguments_: Array<unknown>) => void>
 ) => {
   return (props: Record<string, unknown>) => {
     const [state, setState] = React.useState<T>(() =>
@@ -99,14 +99,14 @@ export const createSlotComponent = (
 };
 
 // State reducer pattern
-export interface StateAction<T = any> {
+export interface StateAction<T = unknown> {
   type: string;
   payload?: T;
 }
 
 export const createStateReducer = <T extends Record<string, unknown>>(
   initialState: T,
-  actionCreators: Record<string, (state: T, payload?: any) => T>
+  actionCreators: Record<string, (state: T, payload?: unknown) => T>
 ) => {
   const reducer = (state: T, action: StateAction): T => {
     const actionCreator = actionCreators[action.type];

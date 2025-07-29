@@ -318,10 +318,7 @@ export function setOpacity(color: string, opacity: number): string {
 /**
  * Generate a color palette from a base color
  */
-export function generatePalette(
-  baseColor: string,
-  steps = 9
-): Array<string> {
+export function generatePalette(baseColor: string, steps = 9): Array<string> {
   const palette: Array<string> = [];
   const stepSize = 100 / (steps - 1);
 
@@ -484,11 +481,7 @@ export function formatColor(color: string, format: ColorFormat): string {
 /**
  * Mix two colors
  */
-export function mixColors(
-  color1: string,
-  color2: string,
-  ratio = 0.5
-): string {
+export function mixColors(color1: string, color2: string, ratio = 0.5): string {
   const rgb1 = parseColor(color1);
   const rgb2 = parseColor(color2);
 
@@ -588,10 +581,7 @@ export function checkGlassContrast(
  * @param glassOpacity - Opacity of the glass effect
  * @returns Whether the color is safe for glass effects
  */
-export function isGlassSafe(
-  foreground: string,
-  glassOpacity = 0.25
-): boolean {
+export function isGlassSafe(foreground: string, glassOpacity = 0.25): boolean {
   // Test against common backgrounds
   const testBackgrounds = ['#ffffff', '#000000', '#f0f0f0', '#1a1a1a'];
 

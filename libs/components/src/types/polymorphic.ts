@@ -17,7 +17,7 @@ type ElementRef<T extends ElementType> = T extends keyof JSX.IntrinsicElements
     ? R
     : never
   : T extends new (
-        ...arguments_: Array<any>
+        ...arguments_: Array<unknown>
       ) => infer Instance
     ? Instance
     : never;
@@ -154,21 +154,21 @@ export type SemanticPolymorphicProps<
   : PolymorphicComponentProps<'div', Props>;
 
 /**
- * Utility type for extracting component props from polymorphic component
- * @example
- * type ButtonElement = ExtractPolymorphicElement<typeof Button>;
- * type ButtonProps = ExtractPolymorphicProps<typeof Button>;
+ * Extract the element type from a polymorphic component
  */
 export type ExtractPolymorphicElement<T> = T extends PolymorphicComponent<
-  any,
+  unknown,
   infer E
 >
   ? E
   : never;
 
+/**
+ * Extract the props type from a polymorphic component
+ */
 export type ExtractPolymorphicProps<T> = T extends PolymorphicComponent<
   infer P,
-  any
+  unknown
 >
   ? P
   : never;

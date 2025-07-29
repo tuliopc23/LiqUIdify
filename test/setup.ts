@@ -3,7 +3,7 @@ import { expect } from 'bun:test';
 
 // Add custom matchers for React testing
 expect.extend({
-  toBeInTheDocument(received: any) {
+  toBeInTheDocument(received: HTMLElement) {
     const pass = received && document.body.contains(received);
     return {
       pass,

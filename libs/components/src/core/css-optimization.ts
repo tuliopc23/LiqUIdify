@@ -92,7 +92,14 @@ export class CSSBundleAnalyzer {
     totalSize: number;
     recommendations: Array<string>;
   }> {
-    const results: any = { bundles: {}, totalSize: 0, recommendations: [] };
+    const results: {
+      bundles: Record<
+        string,
+        { size: number; maxSize: number; status: 'ok' | 'warning' | 'error' }
+      >;
+      totalSize: number;
+      recommendations: Array<string>;
+    } = { bundles: {}, totalSize: 0, recommendations: [] };
 
     for (const [bundleName, bundleConfig] of Object.entries(this.config)) {
       let bundleSize = 0;
@@ -245,7 +252,10 @@ export class CSSBundleAnalyzer {
    */
   async generateReport(): Promise<{
     timestamp: Date;
-    bundles: any;
+    bundles: Record<
+      string,
+      { size: number; maxSize: number; status: 'ok' | 'warning' | 'error' }
+    >;
     totalSize: number;
     recommendations: Array<string>;
     status: 'pass' | 'warning' | 'fail';
@@ -382,11 +392,14 @@ export class CSSBundleManager {
    */
   async buildBundles(outputDir: string): Promise<{
     bundles: Record<string, string>;
-    manifest: any;
-    report: any;
+    manifest: Record<string, { path: string; size: number; hash: string }>;
+    report: { totalSize: number; status: 'pass' | 'warning' | 'fail' };
   }> {
     const bundles: Record<string, string> = {};
-    const manifest: any = { bundles: {}, timestamp: new Date().toISOString() };
+    const manifest: Record<
+      string,
+      { path: string; size: number; hash: string }
+    > = {};
 
     for (const [bundleName, bundleConfig] of Object.entries(this.config)) {
       let combinedCSS = '';
@@ -415,13 +428,10 @@ export class CSSBundleManager {
       const outputPath = path.join(outputDir, `${bundleName}.css`);
       await fs.writeFile(outputPath, optimized.optimized);
 
-      manifest.bundles[bundleName] = {
+      manifest[bundleName] = {
         path: `${bundleName}.css`,
         size: optimized.stats.optimizedSize,
-        originalSize: optimized.stats.originalSize,
-        reduction: optimized.stats.reduction,
-        lazyLoad: bundleConfig.lazyLoad || false,
-        critical: bundleConfig.critical || false,
+        hash: 'TODO: Add hash generation', // Placeholder for hash
       };
     }
 

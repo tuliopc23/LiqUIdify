@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useRef, useState, type ComponentType, type ReactElement } from 'react';
+import {
+  type ComponentType,
+  type ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { performanceMonitor } from '../core/performance-monitor';
 
 /**
@@ -101,7 +108,11 @@ export function withPerformanceMonitoring<P extends object>(
 /**
  * Hook for Core Web Vitals monitoring
  */
-export function useWebVitals(callback?: (metric: any) => void) {
+export function useWebVitals(
+  callback?: (metric: {
+    webVitals: Array<{ name: string; value: number }>;
+  }) => void
+) {
   const [metrics, setMetrics] = useState<Record<string, number>>({});
 
   useEffect(() => {

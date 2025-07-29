@@ -19,7 +19,7 @@ import { GlassFormField } from './glass-form-field';
 const meta = { title: 'Components/Forms/GlassFormField' }
   component: GlassFormField,
   parameters: { layout: 'centered' }
-    docs: { description: {
+    { 
         component: ` }
 A comprehensive form field wrapper component with advanced glassmorphism effects, comprehensive validation states, and accessibility features.
 
@@ -87,30 +87,24 @@ The form field component follows WAI-ARIA guidelines:
 - **Error**: Red styling with error message and alert icon
 - **Success**: Green styling with success message and check icon
 - **Warning**: Yellow/orange styling with warning message and info icon
-        `,
-      },
+        `,,
     },
   },
   tags: ['autodocs'],
-  argTypes: {
-    {/* Layout & Structure  */}
-    variant: { control: 'select' }
+  argTypes: {control: 'select' 
       options: ['default', 'card', 'inline'],
       description: 'Visual variant of the form field',
-      table: {
-        defaultValue: { summary: 'default' },
-      },
+      table: summary: 'default' ,,
     },
     size: { control: 'select' }
       options: ['sm', 'md', 'lg'],
       description: 'Size of the form field',
-      table: {
-        defaultValue: { summary: 'md' },
+      table: {summary: 'md' ,
       },
     },
 
     {/* Content  */}
-    label: { control: 'text' }
+    { control: 'text' }
       description: 'Label text for the form field',
     },
     helperText: { control: 'text' }
@@ -118,7 +112,7 @@ The form field component follows WAI-ARIA guidelines:
     },
 
     {/* Validation States  */}
-    error: { control: 'text' }
+    { control: 'text' }
       description: 'Error message (displays in red with alert icon)',
     },
     success: { control: 'text' }
@@ -129,21 +123,19 @@ The form field component follows WAI-ARIA guidelines:
     },
 
     {/* Behavior  */}
-    required: { control: 'boolean' }
+    { control: 'boolean' }
       description: 'Whether the field is required (adds asterisk to label)',
-      table: {
-        defaultValue: { summary: 'false' },
+      table: {summary: 'false' ,
       },
     },
     disabled: { control: 'boolean' }
       description: 'Whether the field is disabled',
-      table: {
-        defaultValue: { summary: 'false' },
+      table: {summary: 'false' ,
       },
     },
 
     {/* Advanced  */}
-    htmlFor: { control: 'text' }
+    { control: 'text' }
       description:
         'Custom ID for the form control (auto-generated if not provided)',
     },

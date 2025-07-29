@@ -314,11 +314,11 @@ export class LiqUIdifyMigrationSystem {
     guide += `This guide will help you migrate your LiqUIdify components to version ${toVersion}.\n\n`;
 
     // Table of contents
-    guide += "## Table of Contents\n\n";
+    guide += '## Table of Contents\n\n';
     for (const [index, migration] of migrations.entries()) {
       guide += `${index + 1}. [${migration.fromVersion} → ${migration.toVersion}](#migration-${migration.fromVersion.replaceAll('.', '')}-to-${migration.toVersion.replaceAll('.', '')})\n`;
     }
-    guide += "\n";
+    guide += '\n';
 
     // Migration steps
     for (const [index, migration] of migrations.entries()) {
@@ -326,7 +326,7 @@ export class LiqUIdifyMigrationSystem {
       guide += `${migration.description}\n\n`;
 
       if (migration.breakingChanges.length > 0) {
-        guide += "### Breaking Changes\n\n";
+        guide += '### Breaking Changes\n\n';
 
         for (const [
           changeIndex,
@@ -343,55 +343,61 @@ export class LiqUIdifyMigrationSystem {
 
           // Add code examples
           guide += this.generateCodeExample(change);
-          guide += "\n";
+          guide += '\n';
         }
       }
 
       // Automated migration section
-      guide += "### Automated Migration\n\n";
-      guide += "Run the following command to automatically migrate your code:\n\n";
-      guide += "\`\`\`bash\n";
+      guide += '### Automated Migration\n\n';
+      guide +=
+        'Run the following command to automatically migrate your code:\n\n';
+      guide += '\`\`\`bash\n';
       guide += `npx @liquidify/migrate ${migration.fromVersion} ${migration.toVersion}\n`;
-      guide += "\`\`\`\n\n";
+      guide += '\`\`\`\n\n';
 
       // Manual steps if any
       const manualSteps = this.getManualMigrationSteps(migration);
       if (manualSteps.length > 0) {
-        guide += "### Manual Steps Required\n\n";
+        guide += '### Manual Steps Required\n\n';
         for (const [stepIndex, step] of manualSteps.entries()) {
           guide += `${stepIndex + 1}. ${step}\n`;
         }
-        guide += "\n";
+        guide += '\n';
       }
 
-      guide += "---\n\n";
+      guide += '---\n\n';
     }
 
     // Final steps
-    guide += "## Final Steps\n\n";
+    guide += '## Final Steps\n\n';
     guide += `1. **Update Dependencies:** Update your package.json to use LiqUIdify ${toVersion}\n`;
-    guide += "2. **Run Tests:** Ensure all your tests pass after migration\n";
-    guide += "3. **Check Performance:** Verify that performance meets your requirements\n";
-    guide += "4. **Update Documentation:** Update any component documentation that references the old API\n\n";
+    guide += '2. **Run Tests:** Ensure all your tests pass after migration\n';
+    guide +=
+      '3. **Check Performance:** Verify that performance meets your requirements\n';
+    guide +=
+      '4. **Update Documentation:** Update any component documentation that references the old API\n\n';
 
     // Rollback information
-    guide += "## Rollback\n\n";
+    guide += '## Rollback\n\n';
     const hasRollbackSupport = migrations.some((m) => m.rollbackSupported);
     if (hasRollbackSupport) {
-      guide += "Some migrations support automatic rollback. If you need to rollback:\n\n";
-      guide += "\`\`\`bash\n";
+      guide +=
+        'Some migrations support automatic rollback. If you need to rollback:\n\n';
+      guide += '\`\`\`bash\n';
       guide += `npx @liquidify/migrate --rollback ${toVersion} ${fromVersion}\n`;
-      guide += "\`\`\`\n\n";
+      guide += '\`\`\`\n\n';
     } else {
-      guide += "⚠️ **Warning:** This migration does not support automatic rollback. Make sure to backup your code before proceeding.\n\n";
+      guide +=
+        '⚠️ **Warning:** This migration does not support automatic rollback. Make sure to backup your code before proceeding.\n\n';
     }
 
     // Support section
-    guide += "## Need Help?\n\n";
-    guide += "- 📖 [Documentation](https://liquidify.dev/docs)\n";
-    guide += "- 💬 [Discord Community](https://discord.gg/liquidify)\n";
-    guide += "- 🐛 [Report Issues](https://github.com/liquidify/liquidify/issues)\n";
-    guide += "- 📧 [Email Support](mailto:support@liquidify.dev)\n\n";
+    guide += '## Need Help?\n\n';
+    guide += '- 📖 [Documentation](https://liquidify.dev/docs)\n';
+    guide += '- 💬 [Discord Community](https://discord.gg/liquidify)\n';
+    guide +=
+      '- 🐛 [Report Issues](https://github.com/liquidify/liquidify/issues)\n';
+    guide += '- 📧 [Email Support](mailto:support@liquidify.dev)\n\n';
 
     return guide;
   }

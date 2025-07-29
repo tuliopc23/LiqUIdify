@@ -1,6 +1,9 @@
-import React, { createContext, useContext, type ReactNode } from 'react';
+import React, { createContext, type ReactNode, useContext } from 'react';
 
-import { GracefulDegradationManager, type DegradationConfig } from '../utils/graceful-degradation';
+import {
+  type DegradationConfig,
+  GracefulDegradationManager,
+} from '../utils/graceful-degradation';
 
 interface GracefulDegradationContextType {
   manager: GracefulDegradationManager;

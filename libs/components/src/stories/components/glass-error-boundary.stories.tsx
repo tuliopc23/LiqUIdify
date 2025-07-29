@@ -108,15 +108,14 @@ export const Default: Story = { render: () => { }
           <GlassErrorBoundary
             resetKeys=[resetKey]
             level="component"
-            onError=(_error, _errorInfo) => {
+            onError=(_error, _errorInfo) => 
               console.log('Error caught:', error);
               console.log('Error info:', errorInfo);>
             <BuggyComponent shouldCrash=shouldCrash/>
           </GlassErrorBoundary>
         </GlassCard>
       </div>
-    );
-  },;
+    );,;
 
 export const _CustomFallback: Story = { render: () => { }
     const [shouldCrash, setShouldCrash] = React.useState(false);

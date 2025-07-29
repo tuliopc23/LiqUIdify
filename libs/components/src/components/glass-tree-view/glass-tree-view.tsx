@@ -14,7 +14,7 @@ export interface TreeNode { id: string;
   children?: Array<TreeNode>;
   selectable?: boolean;
   defaultExpanded?: boolean;
-  data?: any; }
+  data?: unknown; }
 }
 
 export interface GlassTreeViewProps

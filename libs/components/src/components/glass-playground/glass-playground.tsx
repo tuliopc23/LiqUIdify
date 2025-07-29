@@ -7,11 +7,14 @@
 {/* Note: react-live removed for production build - using fallback  */}
 {/* import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live';  */}
 {/* import { themes } from 'prism-react-renderer';  */}
+
 import { Check, Code, Copy, Download, Eye, Maximize2 } from 'lucide-react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@/core/utils/classname';
 import { useSSRSafeWindow } from '@/hooks/use-ssr-safe';
+
 {/* Import specific components instead of wildcard  */}
+
 import {
   GlassBadge,
   GlassButton,
@@ -79,8 +82,6 @@ export function GlassPlayground({
   const [activeTab] = useState<'preview' | 'code'>('preview');
 
   const window = useSSRSafeWindow((w) => w, undefined);
-
-  {/* Combine default scope with provided scope  */}
   const playgroundScope = useMemo(
     () => ({
       GlassButton,
@@ -100,8 +101,6 @@ export function GlassPlayground({
     }),
     [scope]
   );
-
-  {/* Copy code to clipboard  */}
   const handleCopy = useCallback(async () => {
     if (window?.navigator?.clipboard) {
       try {
@@ -135,8 +134,6 @@ export function GlassPlayground({
   },
         []
       );
-
-  {/* Get appropriate theme (fallback for production)  */}
   const editorTheme = {
     plain: { color: '#24292e', backgroundColor: '#ffffff' },
     styles: [],

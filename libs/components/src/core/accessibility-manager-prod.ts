@@ -84,7 +84,7 @@ export class AccessibilityManager {
 
   ensureContrast(
     element: HTMLElement,
-    _options?: any
+    _options?: { level?: 'AA' | 'AAA'; largeText?: boolean; autoFix?: boolean }
   ): { background: string; foreground: string } {
     const computedStyle = window.getComputedStyle(element);
     const background = computedStyle.backgroundColor || '#ffffff';
@@ -100,7 +100,10 @@ export class AccessibilityManager {
     console.log('Real-time monitoring disabled');
   }
 
-  async runAudit(element: HTMLElement, options?: any): Promise<AxeResults> {
+  async runAudit(
+    element: HTMLElement,
+    options?: { runOnly?: { type: string; values: Array<string> } }
+  ): Promise<AxeResults> {
     if (process.env.NODE_ENV === 'production') {
       return mockAxeResults;
     }
@@ -333,7 +336,10 @@ export class AccessibilityManager {
     console.log('Auto-fixing contrast for element', element, contrast);
   }
 
-  private generateFix(violationId: string, _node: any): string | undefined {
+  private generateFix(
+    violationId: string,
+    _node: { html: string; target: Array<string> }
+  ): string | undefined {
     // Generate fix suggestions based on violation type
     const fixes: Record<string, string> = {
       'color-contrast':

@@ -249,7 +249,10 @@ const ARIA_RULES = {
  */
 export class AccessibilityManager {
   private static instance: AccessibilityManager;
-  private axeOptions: any;
+  private axeOptions: {
+    runOnly: { type: string; values: Array<string> };
+    resultTypes: Array<string>;
+  };
   private contrastCache: Map<string, ContrastResult>;
   private validationCache: Map<HTMLElement, AccessibilityReport>;
   private observer: MutationObserver | null = null;
@@ -484,10 +487,7 @@ export class AccessibilityManager {
   /**
    * Validate ARIA attributes
    */
-  validateARIA(
-    element: HTMLElement,
-    autoCorrect = true
-  ): ARIAValidation {
+  validateARIA(element: HTMLElement, autoCorrect = true): ARIAValidation {
     const errors: Array<ARIAError> = [];
     const suggestions: Array<ARIASuggestion> = [];
     const autoCorrections: Array<ARIACorrection> = [];
@@ -815,7 +815,10 @@ export class AccessibilityManager {
     }
   }
 
-  private generateFix(violationId: string, _node: any): string | undefined {
+  private generateFix(
+    violationId: string,
+    _node: { html: string; target: Array<string> }
+  ): string | undefined {
     switch (violationId) {
       case 'color-contrast': {
         return 'Use AccessibilityManager.ensureContrast() to fix contrast issues';
@@ -863,10 +866,12 @@ export class AccessibilityManager {
   }
 
   private hasAccessibleName(element: HTMLElement): boolean {
-    return Boolean(element.getAttribute('aria-label') ||
-      element.getAttribute('aria-labelledby') ||
-      element.textContent?.trim() ||
-      (element as HTMLInputElement).placeholder);
+    return Boolean(
+      element.getAttribute('aria-label') ||
+        element.getAttribute('aria-labelledby') ||
+        element.textContent?.trim() ||
+        (element as HTMLInputElement).placeholder
+    );
   }
 
   private generateAccessibleName(element: HTMLElement): string {

@@ -138,7 +138,7 @@ export const createSlotComponent = (
   slots: Record<string, React.ComponentType<any>>
 ) => {
   return ({ children }: { children: React.ReactNode }) => {
-    const slotElements: Record<string, React.Array<ReactNode>> = {};
+    const slotElements: Record<string, React.Array<React.ReactNode>> = {};
 
     React.Children.forEach(children, (child) => {
       if (React.isValidElement(child) && child.props.slot) {
@@ -164,14 +164,14 @@ export const createSlotComponent = (
 };
 
 // State reducer pattern
-export interface StateAction<T = any> {
+export interface StateAction<T = unknown> {
   type: string;
   payload?: T;
 }
 
 export const createStateReducer = <T extends Record<string, unknown>>(
   initialState: T,
-  actionCreators: Record<string, (state: T, payload?: any) => T>
+  actionCreators: Record<string, (state: T, payload?: unknown) => T>
 ) => {
   const reducer = (state: T, action: StateAction): T => {
     const actionCreator = actionCreators[action.type];
@@ -193,7 +193,7 @@ export const createStateReducer = <T extends Record<string, unknown>>(
         });
         return accumulator;
       },
-      {} as Record<string, (payload?: any) => StateAction>
+      {} as Record<string, (payload?: unknown) => StateAction>
     ),
   };
 };

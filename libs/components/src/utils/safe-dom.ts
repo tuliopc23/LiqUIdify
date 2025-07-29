@@ -154,7 +154,7 @@ export function safeMapGet<K, V>(
 export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
   element: Element | null,
   type: K,
-  listener: (this: HTMLElement, event_: HTMLElementEventMap[K]) => any,
+  listener: (this: HTMLElement, event_: HTMLElementEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
 ): (() => void) | null {
   if (!element) {

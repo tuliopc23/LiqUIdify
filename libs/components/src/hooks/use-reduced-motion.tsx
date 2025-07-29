@@ -3,8 +3,8 @@
  * Provides animation control based on user preferences
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
-
+import type React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { isClient } from '@/core/ssr-safety';
 
@@ -209,7 +209,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
         return variants;
       }
 
-      const adjusted: any = {};
+      const adjusted: Record<string, unknown> = {};
 
       for (const [key, value] of Object.entries(variants)) {
         if (typeof value === 'object' && value !== null) {
