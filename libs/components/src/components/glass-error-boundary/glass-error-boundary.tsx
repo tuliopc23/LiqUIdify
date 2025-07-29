@@ -105,7 +105,7 @@ export class GlassErrorBoundary extends Component<
     }
   }
 
-  componentDidUpdate(previousProps: GlassErrorBoundaryProps) {
+  componentDidUpdate(prevProps) {
     const { resetKeys, resetOnPropsChange } = this.props;
     const { hasError } = this.state;
 
