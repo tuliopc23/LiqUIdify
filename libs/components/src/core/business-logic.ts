@@ -108,6 +108,23 @@ function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
     new Map(),
   );
 
+  const createEventHandler = useCallback(
+    <E extends Event>(
+      event: E & { currentTarget: TElement },
+      handler: (
+        event: E & { currentTarget: TElement },
+        state: TState,
+        setState: (
+          newState: TState | ((previousState: TState) => TState),
+        ) => void,
+        props: TProps,
+      ) => void,
+    ) => {
+      handler(event as E & { currentTarget: TElement }, state, setState, props);
+    },
+    [state, setState, props],
+  );
+
   const createHandler = useCallback(
     <E extends Event>(
       name: string,
@@ -121,18 +138,13 @@ function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
       ) => void,
     ): EventHandlerFactory<TElement, E> => {
       const factory: EventHandlerFactory<TElement, E> = () => (event) => {
-        handler(
-          event as E & { currentTarget: TElement },
-          state,
-          setState,
-          props,
-        );
+        createEventHandler(event, handler);
       };
 
       handlersRef.current.set(name, factory as EventHandlerFactory<TElement>);
       return factory;
     },
-    [state, setState, props],
+    [createEventHandler],
   );
 
   return { createHandler, handlersRef };
@@ -160,6 +172,136 @@ interface FormActions<T = Record<string, unknown>> {
   submitForm: () => void;
 }
 
+// Helper functions for form actions
+function createFormValueSetter<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<FormState<T>>>,
+) {
+  return (name: keyof T, value: T[keyof T]) => {
+    setState((previous) => ({
+      ...previous,
+      values: { ...previous.values, [name]: value },
+      isDirty: true,
+    }));
+  };
+}
+
+function createFormErrorSetter<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<FormState<T>>>,
+) {
+  return (name: keyof T, error: string | null) => {
+    setState((previous) => ({
+      ...previous,
+      errors: { ...previous.errors, [name]: error },
+    }));
+  };
+}
+
+function createFormTouchedSetter<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<FormState<T>>>,
+) {
+  return (name: keyof T, touched: boolean) => {
+    setState((previous) => ({
+      ...previous,
+      touched: { ...previous.touched, [name]: touched },
+    }));
+  };
+}
+
+function createFormFieldValidator<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<FormState<T>>>,
+  state: FormState<T>,
+  validationRules?: Record<keyof T, (value: unknown) => string | null>,
+) {
+  return (name: keyof T) => {
+    if (!validationRules?.[name]) {
+      return;
+    }
+
+    const error = validationRules[name](state.values[name]);
+    setState((previous) => ({
+      ...previous,
+      errors: { ...previous.errors, [name]: error },
+    }));
+  };
+}
+
+function createFormValidator<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<FormState<T>>>,
+  state: FormState<T>,
+  validationRules?: Record<keyof T, (value: unknown) => string | null>,
+) {
+  return () => {
+    if (!validationRules) {
+      return true;
+    }
+
+    const errors: Record<keyof T, string | null> = {} as Record<
+      keyof T,
+      string | null
+    >;
+    let isValid = true;
+
+    for (const key of Object.keys(validationRules)) {
+      const fieldName = key as keyof T;
+      const error = validationRules[fieldName](state.values[fieldName]);
+      errors[fieldName] = error;
+      if (error) {
+        isValid = false;
+      }
+    }
+
+    setState((previous) => ({
+      ...previous,
+      errors,
+      isValid,
+    }));
+
+    return isValid;
+  };
+}
+
+function createFormReset<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<FormState<T>>>,
+  initialValues: T,
+) {
+  return () => {
+    setState({
+      values: initialValues,
+      errors: {} as Record<keyof T, string | null>,
+      touched: {} as Record<keyof T, boolean>,
+      isValid: true,
+      isSubmitting: false,
+      isDirty: false,
+    });
+  };
+}
+
+function createFormSubmitter<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<FormState<T>>>,
+  state: FormState<T>,
+  validateForm: () => boolean,
+  onSubmit?: (values: T) => void | Promise<void>,
+) {
+  return async () => {
+    if (!onSubmit) {
+      return;
+    }
+
+    setState((previous) => ({ ...previous, isSubmitting: true }));
+
+    try {
+      const isValid = validateForm();
+      if (isValid) {
+        await onSubmit(state.values);
+      }
+    } catch {
+      // Logging disabled
+    } finally {
+      setState((previous) => ({ ...previous, isSubmitting: false }));
+    }
+  };
+}
+
 function createFormBusinessLogic<T extends Record<string, unknown>>(
   initialValues: T,
   validationRules?: Record<keyof T, (value: unknown) => string | null>,
@@ -175,101 +317,38 @@ function createFormBusinessLogic<T extends Record<string, unknown>>(
       isDirty: false,
     });
 
-    const actions = useMemo(
-      (): FormActions<T> => ({
-        setValue: (name: keyof T, value: T[keyof T]) => {
-          setState((previous) => ({
-            ...previous,
-            values: { ...previous.values, [name]: value },
-            isDirty: true,
-          }));
-        },
+    const actions = useMemo((): FormActions<T> => {
+      const setValue = createFormValueSetter(setState);
+      const setError = createFormErrorSetter(setState);
+      const setTouched = createFormTouchedSetter(setState);
+      const validateField = createFormFieldValidator(
+        setState,
+        state,
+        validationRules,
+      );
+      const validateForm = createFormValidator(
+        setState,
+        state,
+        validationRules,
+      );
+      const resetForm = createFormReset(setState, initialValues);
+      const submitForm = createFormSubmitter(
+        setState,
+        state,
+        validateForm,
+        onSubmit,
+      );
 
-        setError: (name: keyof T, error: string | null) => {
-          setState((previous) => ({
-            ...previous,
-            errors: { ...previous.errors, [name]: error },
-          }));
-        },
-
-        setTouched: (name: keyof T, touched: boolean) => {
-          setState((previous) => ({
-            ...previous,
-            touched: { ...previous.touched, [name]: touched },
-          }));
-        },
-
-        validateField: (name: keyof T) => {
-          if (validationRules?.[name]) {
-            const error = validationRules[name](state.values[name]);
-            setState((previous) => ({
-              ...previous,
-              errors: { ...previous.errors, [name]: error },
-            }));
-          }
-        },
-
-        validateForm: () => {
-          if (!validationRules) {
-            return true;
-          }
-
-          const errors: Record<keyof T, string | null> = {} as Record<
-            keyof T,
-            string | null
-          >;
-          let isValid = true;
-
-          for (const key of Object.keys(validationRules)) {
-            const fieldName = key as keyof T;
-            const error = validationRules[fieldName](state.values[fieldName]);
-            errors[fieldName] = error;
-            if (error) {
-              isValid = false;
-            }
-          }
-
-          setState((previous) => ({
-            ...previous,
-            errors,
-            isValid,
-          }));
-
-          return isValid;
-        },
-
-        resetForm: () => {
-          setState({
-            values: initialValues,
-            errors: {} as Record<keyof T, string | null>,
-            touched: {} as Record<keyof T, boolean>,
-            isValid: true,
-            isSubmitting: false,
-            isDirty: false,
-          });
-        },
-
-        submitForm: async () => {
-          if (!onSubmit) {
-            return;
-          }
-
-          setState((previous) => ({ ...previous, isSubmitting: true }));
-
-          try {
-            const isValid = actions.validateForm();
-            if (isValid) {
-              await onSubmit(state.values);
-            }
-          } catch {
-            // Logging disabled
-          } finally {
-            setState((previous) => ({ ...previous, isSubmitting: false }));
-          }
-        },
-      }),
-      [state, initialValues, onSubmit, validationRules],
-    );
+      return {
+        setValue,
+        setError,
+        setTouched,
+        validateField,
+        validateForm,
+        resetForm,
+        submitForm,
+      };
+    }, [state, initialValues, onSubmit, validationRules]);
 
     return { state, actions };
   };
@@ -301,6 +380,113 @@ interface TableActions<T = unknown> {
   setItemsPerPage: (count: number) => void;
 }
 
+// Helper functions for table actions
+function createTableItemsSetter<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<TableState<T>>>,
+) {
+  return (items: Array<T>) => {
+    setState((previous) => ({
+      ...previous,
+      items,
+      totalItems: items.length,
+      currentPage: 1,
+    }));
+  };
+}
+
+function createTableItemSelector<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<TableState<T>>>,
+) {
+  return (item: T) => {
+    setState((previous) => {
+      const isSelected = previous.selectedItems.includes(item);
+      const selectedItems = isSelected
+        ? previous.selectedItems.filter((selectedItem) => selectedItem !== item)
+        : [...previous.selectedItems, item];
+
+      return {
+        ...previous,
+        selectedItems,
+      };
+    });
+  };
+}
+
+function createTableSelectAll<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<TableState<T>>>,
+) {
+  return () => {
+    setState((previous) => ({
+      ...previous,
+      selectedItems: [...previous.items],
+    }));
+  };
+}
+
+function createTableDeselectAll<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<TableState<T>>>,
+) {
+  return () => {
+    setState((previous) => ({
+      ...previous,
+      selectedItems: [],
+    }));
+  };
+}
+
+function createTableSorter<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<TableState<T>>>,
+) {
+  return (field: string) => {
+    setState((previous) => {
+      const isSameField = previous.sortBy === field;
+      const isCurrentlyAsc = previous.sortDirection === "asc";
+      const newDirection = isSameField && isCurrentlyAsc ? "desc" : "asc";
+
+      return {
+        ...previous,
+        sortBy: field,
+        sortDirection: newDirection,
+      };
+    });
+  };
+}
+
+function createTableFilter<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<TableState<T>>>,
+) {
+  return (query: string) => {
+    setState((previous) => ({
+      ...previous,
+      filterBy: query,
+      currentPage: 1,
+    }));
+  };
+}
+
+function createTablePaginator<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<TableState<T>>>,
+) {
+  return (page: number) => {
+    setState((previous) => ({
+      ...previous,
+      currentPage: page,
+    }));
+  };
+}
+
+function createTableItemsPerPageSetter<T extends Record<string, unknown>>(
+  setState: React.Dispatch<React.SetStateAction<TableState<T>>>,
+) {
+  return (count: number) => {
+    setState((previous) => ({
+      ...previous,
+      itemsPerPage: count,
+      currentPage: 1,
+    }));
+  };
+}
+
 function createTableBusinessLogic<T extends Record<string, unknown>>(
   initialItems: Array<T> = [],
   itemsPerPage = 10,
@@ -318,76 +504,27 @@ function createTableBusinessLogic<T extends Record<string, unknown>>(
       isLoading: false,
     });
 
-    const actions = useMemo(
-      (): TableActions<T> => ({
-        setItems: (items: Array<T>) => {
-          setState((previous) => ({
-            ...previous,
-            items,
-            totalItems: items.length,
-            currentPage: 1,
-          }));
-        },
+    const actions = useMemo((): TableActions<T> => {
+      const setItems = createTableItemsSetter(setState);
+      const selectItem = createTableItemSelector(setState);
+      const selectAll = createTableSelectAll(setState);
+      const deselectAll = createTableDeselectAll(setState);
+      const sortBy = createTableSorter(setState);
+      const filter = createTableFilter(setState);
+      const paginate = createTablePaginator(setState);
+      const setItemsPerPage = createTableItemsPerPageSetter(setState);
 
-        selectItem: (item: T) => {
-          setState((previous) => ({
-            ...previous,
-            selectedItems: previous.selectedItems.includes(item)
-              ? previous.selectedItems.filter((index) => index !== item)
-              : [...previous.selectedItems, item],
-          }));
-        },
-
-        selectAll: () => {
-          setState((previous) => ({
-            ...previous,
-            selectedItems: [...previous.items],
-          }));
-        },
-
-        deselectAll: () => {
-          setState((previous) => ({
-            ...previous,
-            selectedItems: [],
-          }));
-        },
-
-        sortBy: (field: string) => {
-          setState((previous) => ({
-            ...previous,
-            sortBy: field,
-            sortDirection:
-              previous.sortBy === field && previous.sortDirection === "asc"
-                ? "desc"
-                : "asc",
-          }));
-        },
-
-        filter: (query: string) => {
-          setState((previous) => ({
-            ...previous,
-            filterBy: query,
-            currentPage: 1,
-          }));
-        },
-
-        paginate: (page: number) => {
-          setState((previous) => ({
-            ...previous,
-            currentPage: page,
-          }));
-        },
-
-        setItemsPerPage: (count: number) => {
-          setState((previous) => ({
-            ...previous,
-            itemsPerPage: count,
-            currentPage: 1,
-          }));
-        },
-      }),
-      [],
-    );
+      return {
+        setItems,
+        selectItem,
+        selectAll,
+        deselectAll,
+        sortBy,
+        filter,
+        paginate,
+        setItemsPerPage,
+      };
+    }, []);
 
     return { state, actions };
   };
@@ -509,6 +646,92 @@ interface AsyncDataActions<T = any> {
   clearData: () => void;
 }
 
+// Helper functions for async data actions
+function createAsyncDataFetcher<T>(
+  setState: React.Dispatch<React.SetStateAction<AsyncDataState<T>>>,
+  fetchFunction: () => Promise<T>,
+) {
+  return async () => {
+    setState((previous) => ({ ...previous, loading: true, error: null }));
+
+    try {
+      const data = await fetchFunction();
+      setState((previous) => ({
+        ...previous,
+        data,
+        loading: false,
+        lastFetch: Date.now(),
+      }));
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "An error occurred";
+      setState((previous) => ({
+        ...previous,
+        error: errorMessage,
+        loading: false,
+      }));
+    }
+  };
+}
+
+function createAsyncDataSetter<T>(
+  setState: React.Dispatch<React.SetStateAction<AsyncDataState<T>>>,
+) {
+  return (data: T) => {
+    setState((previous) => ({
+      ...previous,
+      data,
+      lastFetch: Date.now(),
+    }));
+  };
+}
+
+function createAsyncErrorSetter<T>(
+  setState: React.Dispatch<React.SetStateAction<AsyncDataState<T>>>,
+) {
+  return (error: string | null) => {
+    setState((previous) => ({
+      ...previous,
+      error,
+    }));
+  };
+}
+
+function createAsyncLoadingSetter<T>(
+  setState: React.Dispatch<React.SetStateAction<AsyncDataState<T>>>,
+) {
+  return (loading: boolean) => {
+    setState((previous) => ({
+      ...previous,
+      loading,
+    }));
+  };
+}
+
+function createAsyncDataClearer<T>(
+  setState: React.Dispatch<React.SetStateAction<AsyncDataState<T>>>,
+) {
+  return () => {
+    setState({
+      data: null,
+      loading: false,
+      error: null,
+      lastFetch: null,
+    });
+  };
+}
+
+function shouldAutoFetch<T>(
+  state: AsyncDataState<T>,
+  cacheTimeout: number,
+): boolean {
+  return (
+    !state.data &&
+    !state.loading &&
+    (!state.lastFetch || Date.now() - state.lastFetch > cacheTimeout)
+  );
+}
+
 function createAsyncDataBusinessLogic<T>(
   fetchFunction: () => Promise<T>,
   cacheTimeout: number = 5 * 60 * 1000, // 5 minutes
@@ -524,75 +747,30 @@ function createAsyncDataBusinessLogic<T>(
       lastFetch: null,
     });
 
-    const actions = useMemo(
-      (): AsyncDataActions<T> => ({
-        fetchData: async () => {
-          setState((previous) => ({ ...previous, loading: true, error: null }));
+    const actions = useMemo((): AsyncDataActions<T> => {
+      const fetchData = createAsyncDataFetcher(setState, fetchFunction);
+      const setData = createAsyncDataSetter(setState);
+      const setError = createAsyncErrorSetter(setState);
+      const setLoading = createAsyncLoadingSetter(setState);
+      const clearData = createAsyncDataClearer(setState);
 
-          try {
-            const data = await fetchFunction();
-            setState((previous) => ({
-              ...previous,
-              data,
-              loading: false,
-              lastFetch: Date.now(),
-            }));
-          } catch (error) {
-            setState((previous) => ({
-              ...previous,
-              error:
-                error instanceof Error ? error.message : "An error occurred",
-              loading: false,
-            }));
-          }
-        },
+      const refetch = async () => {
+        await fetchData();
+      };
 
-        setData: (data: T) => {
-          setState((previous) => ({
-            ...previous,
-            data,
-            lastFetch: Date.now(),
-          }));
-        },
-
-        setError: (error: string | null) => {
-          setState((previous) => ({
-            ...previous,
-            error,
-          }));
-        },
-
-        setLoading: (loading: boolean) => {
-          setState((previous) => ({
-            ...previous,
-            loading,
-          }));
-        },
-
-        refetch: async () => {
-          await actions.fetchData();
-        },
-
-        clearData: () => {
-          setState({
-            data: null,
-            loading: false,
-            error: null,
-            lastFetch: null,
-          });
-        },
-      }),
-      [fetchFunction],
-    );
+      return {
+        fetchData,
+        setData,
+        setError,
+        setLoading,
+        refetch,
+        clearData,
+      };
+    }, [fetchFunction]);
 
     // Auto-fetch if cache is expired
     React.useEffect(() => {
-      const shouldFetch =
-        !state.data &&
-        !state.loading &&
-        (!state.lastFetch || Date.now() - state.lastFetch > cacheTimeout);
-
-      if (shouldFetch) {
+      if (shouldAutoFetch(state, cacheTimeout)) {
         actions.fetchData();
       }
     }, [state.data, state.loading, state.lastFetch, actions, cacheTimeout]);

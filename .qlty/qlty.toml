@@ -300,6 +300,7 @@ name = "stringslint"
 
 [[plugin]]
 name = "oxc"
+mode = "disabled"
 
 [[plugin]]
 name = "knip"

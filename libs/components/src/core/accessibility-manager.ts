@@ -262,13 +262,13 @@ const ARIA_RULES = {
  */
 export class AccessibilityManager {
   private static instance: AccessibilityManager;
-  private axeOptions: {
+  private readonly axeOptions: {
     runOnly: { type: string; values: Array<string> };
     resultTypes: Array<string>;
   };
-  private contrastCache: Map<string, ContrastResult>;
-  private validationCache: Map<HTMLElement, AccessibilityReport>;
-  private observer: MutationObserver | null = null;
+  private readonly contrastCache: Map<string, ContrastResult>;
+  private readonly validationCache: Map<HTMLElement, AccessibilityReport>;
+  private readonly observer: MutationObserver | null = null;
 
   private constructor() {
     this.contrastCache = new Map();
@@ -311,10 +311,10 @@ export class AccessibilityManager {
 
     try {
       // Run axe-core validation
-      const results = (await axe.run(
+      const results = axe.run(
         element,
         this.axeOptions,
-      )) as unknown as AxeResults;
+      ) as unknown as AxeResults;
 
       // Process violations
       const violations = this.processViolations(
@@ -387,72 +387,79 @@ export class AccessibilityManager {
       return cached;
     }
 
-    let result: ContrastResult;
-
-    // Check contrast with glass effect if applicable
-    if (glassEffect) {
-      const baseResult = checkGlassContrast(
-        foreground,
-        background,
-        glassEffect.backdropColor || "#ffffff",
-        glassEffect.opacity,
-      );
-      result = { ...baseResult } as ContrastResult;
-    } else {
-      const ratio = getContrastRatio(foreground, background);
-      const baseResult = {
-        ratio,
-        passes: {
-          aa: { normal: ratio >= 4.5, large: ratio >= 3 },
-          aaa: { normal: ratio >= 7, large: ratio >= 4.5 },
-        },
-        recommendation:
-          ratio >= 7
-            ? "Excellent"
-            : ratio >= 4.5
-              ? "Good"
-              : ratio >= 3
-                ? "Fair"
-                : "Poor",
-      };
-      result = { ...baseResult } as ContrastResult;
-    }
+    // Calculate contrast result
+    const result = this.calculateContrastResult(
+      foreground,
+      background,
+      glassEffect,
+    );
 
     // Check if it meets the required level
-    const meetsRequirement =
-      level === "AA"
-        ? largeText
-          ? result.passes.aa.large
-          : result.passes.aa.normal
-        : largeText
-          ? result.passes.aaa.large
-          : result.passes.aaa.normal;
+    const meetsRequirement = this.checkContrastRequirement(
+      result,
+      level,
+      largeText,
+    );
 
-    // Auto-fix if needed and requested
+    // Apply auto-fix if needed
     if (!meetsRequirement && autoFix) {
-      const targetRatio =
-        level === "AA" ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
-
-      try {
-        // For now, keep the original color if contrast is poor
-        // In a real implementation, we would calculate a better color
-        result.suggestedForeground = foreground;
-        result.autoFixed = false;
-
-        // Announce the fix
-        this.announce(
-          `Contrast adjusted for better accessibility. New ratio: ${targetRatio}:1`,
-          "polite",
-        );
-      } catch {
-        // Logging disabled
-      }
+      this.applyContrastAutoFix(result, foreground, level, largeText);
     }
 
     // Cache the result
     this.contrastCache.set(cacheKey, result);
 
     return result;
+  }
+
+  private calculateContrastResult(
+    foreground: string,
+    background: string,
+    glassEffect?: { opacity: number; backdropColor?: string },
+  ): ContrastResult {
+    if (glassEffect) {
+      const baseResult = checkGlassContrast(
+        foreground,
+        background,
+        glassEffect.backdropColor ?? "#ffffff",
+        glassEffect.opacity,
+      );
+      return { ...baseResult } as ContrastResult;
+    }
+
+    const ratio = getContrastRatio(foreground, background);
+    return {
+      ratio,
+      passes: {
+        aa: { normal: ratio >= 4.5, large: ratio >= 3 },
+        aaa: { normal: ratio >= 7, large: ratio >= 4.5 },
+      },
+      recommendation: this.getContrastRecommendation(ratio),
+    } as ContrastResult;
+  }
+
+  private applyContrastAutoFix(
+    result: ContrastResult,
+    foreground: string,
+    level: "AA" | "AAA",
+    largeText: boolean,
+  ): void {
+    const targetRatio = this.getTargetContrastRatio(level, largeText);
+
+    try {
+      // For now, keep the original color if contrast is poor
+      // In a real implementation, we would calculate a better color
+      result.suggestedForeground = foreground;
+      result.autoFixed = false;
+
+      // Announce the fix
+      this.announce(
+        `Contrast adjusted for better accessibility. New ratio: ${targetRatio}:1`,
+        "polite",
+      );
+    } catch {
+      // Logging disabled
+    }
   }
 
   /**
@@ -508,9 +515,41 @@ export class AccessibilityManager {
     const autoCorrections: Array<ARIACorrection> = [];
 
     // Get element's role
-    const role = element.getAttribute("role") || this.getImplicitRole(element);
+    const role = element.getAttribute("role") ?? this.getImplicitRole(element);
 
-    // Check role validity
+    // Validate role
+    this.validateRole(role, element, errors);
+
+    // Validate ARIA attributes
+    this.validateAriaAttributes(element, errors, autoCorrections, autoCorrect);
+
+    // Check role requirements
+    if (role) {
+      this.checkRoleRequirements(
+        role,
+        element,
+        suggestions,
+        autoCorrections,
+        autoCorrect,
+      );
+    }
+
+    // Check for missing labels on interactive elements
+    this.checkInteractiveLabels(element, suggestions);
+
+    return {
+      valid: errors.length === 0,
+      errors,
+      suggestions,
+      autoCorrections,
+    };
+  }
+
+  private validateRole(
+    role: string | null,
+    element: HTMLElement,
+    errors: Array<ARIAError>,
+  ): void {
     if (role && !ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]) {
       errors.push({
         attribute: "role",
@@ -519,132 +558,192 @@ export class AccessibilityManager {
         element,
       });
     }
+  }
 
-    // Validate ARIA attributes
+  private validateAriaAttributes(
+    element: HTMLElement,
+    errors: Array<ARIAError>,
+    autoCorrections: Array<ARIACorrection>,
+    autoCorrect: boolean,
+  ): void {
     const ariaAttributes = [...element.attributes].filter((attribute) =>
       attribute.name.startsWith("aria-"),
     );
 
     for (const attribute of ariaAttributes) {
-      const attributeName = attribute.name;
-      const attributeValue = attribute.value;
-      const attributeRule =
-        ARIA_RULES.attributes[
-          attributeName as keyof typeof ARIA_RULES.attributes
-        ];
+      this.validateSingleAriaAttribute(
+        attribute,
+        element,
+        errors,
+        autoCorrections,
+        autoCorrect,
+      );
+    }
+  }
 
-      if (!attributeRule) {
-        errors.push({
-          attribute: attributeName,
-          value: attributeValue,
-          reason: `Unknown ARIA attribute: ${attributeName}`,
-          element,
-        });
-        continue;
+  private validateSingleAriaAttribute(
+    attribute: Attr,
+    element: HTMLElement,
+    errors: Array<ARIAError>,
+    autoCorrections: Array<ARIACorrection>,
+    autoCorrect: boolean,
+  ): void {
+    const attributeName = attribute.name;
+    const attributeValue = attribute.value;
+    const attributeRule =
+      ARIA_RULES.attributes[
+        attributeName as keyof typeof ARIA_RULES.attributes
+      ];
+
+    if (!attributeRule) {
+      errors.push({
+        attribute: attributeName,
+        value: attributeValue,
+        reason: `Unknown ARIA attribute: ${attributeName}`,
+        element,
+      });
+      return;
+    }
+
+    // Validate boolean attributes
+    if (attributeRule.type === "boolean") {
+      this.validateBooleanAttribute(
+        attributeName,
+        attributeValue,
+        attributeRule,
+        element,
+        errors,
+        autoCorrections,
+        autoCorrect,
+      );
+    }
+
+    // Validate idref attributes
+    if (attributeRule.type === "idref") {
+      this.validateIdrefAttribute(
+        attributeName,
+        attributeValue,
+        element,
+        errors,
+      );
+    }
+  }
+
+  private validateBooleanAttribute(
+    attributeName: string,
+    attributeValue: string,
+    attributeRule: { type: string; values?: Array<string> },
+    element: HTMLElement,
+    errors: Array<ARIAError>,
+    autoCorrections: Array<ARIACorrection>,
+    autoCorrect: boolean,
+  ): void {
+    if (
+      "values" in attributeRule &&
+      !attributeRule.values?.includes(attributeValue)
+    ) {
+      errors.push({
+        attribute: attributeName,
+        value: attributeValue,
+        reason: `Invalid boolean value: ${attributeValue}. Must be "true" or "false"`,
+        element,
+      });
+
+      const correction: ARIACorrection = {
+        attribute: attributeName,
+        oldValue: attributeValue,
+        newValue: "false",
+        applied: false,
+      };
+
+      if (autoCorrect) {
+        element.setAttribute(attributeName, "false");
+        correction.applied = true;
       }
 
-      // Validate attribute value
-      if (
-        attributeRule.type === "boolean" &&
-        "values" in attributeRule &&
-        !attributeRule.values?.includes(attributeValue)
-      ) {
-        errors.push({
-          attribute: attributeName,
-          value: attributeValue,
-          reason: `Invalid boolean value: ${attributeValue}. Must be "true" or "false"`,
-          element,
-        });
+      autoCorrections.push(correction);
+    }
+  }
 
-        const correction: ARIACorrection = {
-          attribute: attributeName,
-          oldValue: attributeValue,
-          newValue: "false",
-          applied: false,
-        };
+  private validateIdrefAttribute(
+    attributeName: string,
+    attributeValue: string,
+    element: HTMLElement,
+    errors: Array<ARIAError>,
+  ): void {
+    const ids = attributeValue.split(" ").filter((id) => id.trim());
+    const missingIds = ids.filter((id) => !document.getElementById(id));
 
-        if (autoCorrect) {
-          element.setAttribute(attributeName, "false");
-          correction.applied = true;
-        }
+    if (missingIds.length > 0) {
+      errors.push({
+        attribute: attributeName,
+        value: attributeValue,
+        reason: `Referenced IDs not found: ${missingIds.join(", ")}`,
+        element,
+      });
+    }
+  }
 
-        autoCorrections.push(correction);
-      }
+  private checkRoleRequirements(
+    role: string,
+    element: HTMLElement,
+    suggestions: Array<ARIASuggestion>,
+    autoCorrections: Array<ARIACorrection>,
+    autoCorrect: boolean,
+  ): void {
+    const roleRule = ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles];
+    if (!roleRule) return;
 
-      // Validate idref attributes
-      if (attributeRule.type === "idref") {
-        const ids = attributeValue.split(" ").filter((id) => id.trim());
-        const missingIds = ids.filter((id) => !document.getElementById(id));
-
-        if (missingIds.length > 0) {
-          errors.push({
-            attribute: attributeName,
-            value: attributeValue,
-            reason: `Referenced IDs not found: ${missingIds.join(", ")}`,
-            element,
+    // Check required properties
+    if (roleRule.requiredProps) {
+      for (const property of roleRule.requiredProps) {
+        if (!element.hasAttribute(property)) {
+          suggestions.push({
+            attribute: property,
+            currentValue: null,
+            suggestedValue: this.getSuggestedARIAValue(property, element),
+            reason: `Required attribute for role="${role}"`,
           });
         }
       }
     }
 
-    // Check required attributes for role
-    if (role && ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]) {
-      const roleRule = ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles];
+    // Apply implicit props if missing
+    if ("implicitProps" in roleRule && roleRule.implicitProps && autoCorrect) {
+      this.applyImplicitProps(roleRule.implicitProps, element, autoCorrections);
+    }
+  }
 
-      if (roleRule.requiredProps) {
-        for (const property of roleRule.requiredProps) {
-          if (!element.hasAttribute(property)) {
-            suggestions.push({
-              attribute: property,
-
-              currentValue: null,
-              suggestedValue: this.getSuggestedARIAValue(property, element),
-              reason: `Required attribute for role="${role}"`,
-            });
-          }
-        }
-      }
-
-      // Apply implicit props if missing
-      if (
-        "implicitProps" in roleRule &&
-        roleRule.implicitProps &&
-        autoCorrect
-      ) {
-        for (const [property, value] of Object.entries(
-          roleRule.implicitProps,
-        )) {
-          if (!element.hasAttribute(property)) {
-            element.setAttribute(property, value);
-            autoCorrections.push({
-              attribute: property,
-
-              oldValue: null,
-              newValue: value,
-              applied: true,
-            });
-          }
-        }
+  private applyImplicitProps(
+    implicitProps: Record<string, string>,
+    element: HTMLElement,
+    autoCorrections: Array<ARIACorrection>,
+  ): void {
+    for (const [property, value] of Object.entries(implicitProps)) {
+      if (!element.hasAttribute(property)) {
+        element.setAttribute(property, value);
+        autoCorrections.push({
+          attribute: property,
+          oldValue: null,
+          newValue: value,
+          applied: true,
+        });
       }
     }
+  }
 
-    // Check for missing labels on interactive elements
+  private checkInteractiveLabels(
+    element: HTMLElement,
+    suggestions: Array<ARIASuggestion>,
+  ): void {
     if (this.isInteractive(element) && !this.hasAccessibleName(element)) {
       suggestions.push({
         attribute: "aria-label",
-
         currentValue: null,
         suggestedValue: this.generateAccessibleName(element),
         reason: "Interactive element needs accessible name",
       });
     }
-
-    return {
-      valid: errors.length === 0,
-      errors,
-      suggestions,
-      autoCorrections,
-    };
   }
 
   /**
@@ -868,11 +967,11 @@ export class AccessibilityManager {
       li: "listitem",
     };
 
-    return implicitRoles[tagName] || null;
+    return implicitRoles[tagName] ?? null;
   }
 
   private isInteractive(element: HTMLElement): boolean {
-    const role = element.getAttribute("role") || this.getImplicitRole(element);
+    const role = element.getAttribute("role") ?? this.getImplicitRole(element);
     if (
       role &&
       ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]?.interactive
@@ -886,9 +985,9 @@ export class AccessibilityManager {
 
   private hasAccessibleName(element: HTMLElement): boolean {
     return Boolean(
-      element.getAttribute("aria-label") ||
-        element.getAttribute("aria-labelledby") ||
-        element.textContent?.trim() ||
+      element.getAttribute("aria-label") ??
+        element.getAttribute("aria-labelledby") ??
+        element.textContent?.trim() ??
         (element as HTMLInputElement).placeholder,
     );
   }
@@ -899,10 +998,10 @@ export class AccessibilityManager {
 
     if (element.className) {
       const className = element.className.split(" ")[0];
-      return `${role || type} ${className}`;
+      return `${role ?? type} ${className}`;
     }
 
-    return `${role || type} element`;
+    return `${role ?? type} element`;
   }
 
   private getSuggestedARIAValue(
@@ -954,14 +1053,42 @@ export class AccessibilityManager {
       }
     }
   }
+
+  private getContrastRecommendation(ratio: number): string {
+    if (ratio >= 7) return "Excellent";
+    if (ratio >= 4.5) return "Good";
+    if (ratio >= 3) return "Fair";
+    return "Poor";
+  }
+
+  private checkContrastRequirement(
+    result: ContrastResult,
+    level: "AA" | "AAA",
+    largeText: boolean,
+  ): boolean {
+    if (level === "AA") {
+      return largeText ? result.passes.aa.large : result.passes.aa.normal;
+    }
+    return largeText ? result.passes.aaa.large : result.passes.aaa.normal;
+  }
+
+  private getTargetContrastRatio(
+    level: "AA" | "AAA",
+    largeText: boolean,
+  ): number {
+    if (level === "AA") {
+      return largeText ? 3 : 4.5;
+    }
+    return largeText ? 4.5 : 7;
+  }
 }
 
 /**
  * FocusTrap implementation for focus management
  */
 class FocusTrap {
-  private container: HTMLElement;
-  private options: FocusOptions & { onDeactivate?: () => void };
+  private readonly container: HTMLElement;
+  private readonly options: FocusOptions & { onDeactivate?: () => void };
   private active = false;
   private firstFocusableElement: HTMLElement | null = null;
   private lastFocusableElement: HTMLElement | null = null;
@@ -1043,7 +1170,7 @@ class FocusTrap {
     this.lastFocusableElement = focusableElements.at(-1) || null;
   }
 
-  private handleKeyDown = (event: KeyboardEvent): void => {
+  private readonly handleKeyDown = (event: KeyboardEvent): void => {
     if (!this.active) {
       return;
     }
@@ -1073,7 +1200,7 @@ class FocusTrap {
     }
   };
 
-  private handleClickOutside = (event: MouseEvent): void => {
+  private readonly handleClickOutside = (event: MouseEvent): void => {
     if (!this.active) {
       return;
     }

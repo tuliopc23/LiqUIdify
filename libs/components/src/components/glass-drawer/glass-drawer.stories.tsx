@@ -1,26 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
-import { Bell, Menu, Search, Settings, User, X } from 'lucide-react'
-import { GlassButton } from '../glass-button-refactored/glass-button'
-import { Drawer } from './glass-drawer'
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import { Bell, Menu, Search, Settings, User, X } from "lucide-react";
+import { GlassButton } from "../glass-button-refactored/glass-button";
+import { Drawer } from "./glass-drawer";
 
 const meta = {
-  title: 'Components/GlassDrawer',
+  title: "Components/GlassDrawer",
   component: Drawer,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A drawer component with glassmorphic styling that slides in from different sides of the screen.',
+          "A drawer component with glassmorphic styling that slides in from different sides of the screen.",
       },
     },
   },
-  tags: ['autodocs'],
-} satisfies Meta<typeof Drawer>
+  tags: ["autodocs"],
+} satisfies Meta<typeof Drawer>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 {
   /* Default drawer  */
@@ -58,7 +58,7 @@ export const Default: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};
 
 {
   /* Different sides  */
@@ -116,7 +116,7 @@ export const LeftSide: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};
 
 export const TopSide: Story = {
   render: () => (
@@ -139,7 +139,7 @@ export const TopSide: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};
 
 export const BottomSide: Story = {
   render: () => (
@@ -184,7 +184,7 @@ export const BottomSide: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};
 
 {
   /* Different sizes  */
@@ -213,7 +213,7 @@ export const SmallSize: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};
 
 export const LargeSize: Story = {
   render: () => (
@@ -249,7 +249,7 @@ export const LargeSize: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};
 
 export const FullSize: Story = {
   render: () => (
@@ -275,7 +275,7 @@ export const FullSize: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};
 
 {
   /* With form  */
@@ -355,14 +355,14 @@ export const WithForm: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};
 
 {
   /* Without close button  */
 }
 export const WithoutCloseButton: Story = {
   render: () => {
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = React.useState(false);
 
     return (
       <Drawer open={open} onOpenChange={setOpen}>
@@ -386,9 +386,9 @@ export const WithoutCloseButton: Story = {
           </Drawer.Footer>
         </Drawer.Content>
       </Drawer>
-    )
+    );
   },
-}
+};
 
 {
   /* With scrollable content  */
@@ -434,4 +434,4 @@ export const ScrollableContent: Story = {
       </Drawer.Content>
     </Drawer>
   ),
-}
+};

@@ -3,7 +3,6 @@ import React, { Component, type ErrorInfo, type ReactNode } from "react";
 
 import { announcer } from "@/components/glass-live-region";
 
-
 import { cn } from "@/core/utils/classname";
 
 export interface GlassErrorBoundaryProps {
@@ -66,7 +65,6 @@ export class GlassErrorBoundary extends Component<
       errorInfo,
       errorCount: previousState.errorCount + 1,
     }));
-
 
     // Log error to console in development
     if (process.env.NODE_ENV === "development") {

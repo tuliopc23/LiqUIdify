@@ -199,7 +199,7 @@ export function GlassPlayground({
 
       <div
         className="relative"
-        style={{ height: 'number' === typeof height ? `${height}px` : height }}
+        style={{ height: 'number' === typeof height ? `${height}px` : height }}>
         <LiveProvider
           code={code}
           scope={playgroundScope}
