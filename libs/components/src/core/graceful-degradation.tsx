@@ -228,10 +228,8 @@ export function withFeatureDetection(
           case 'webgl': {
             try {
               const canvas = document.createElement('canvas');
-              return !!(
-                canvas.getContext('webgl') ||
-                canvas.getContext('experimental-webgl')
-              );
+              return Boolean(canvas.getContext('webgl') ||
+                canvas.getContext('experimental-webgl'));
             } catch {
               return false;
             }
@@ -239,7 +237,7 @@ export function withFeatureDetection(
           case 'webgl2': {
             try {
               const canvas = document.createElement('canvas');
-              return !!canvas.getContext('webgl2');
+              return Boolean(canvas.getContext('webgl2'));
             } catch {
               return false;
             }

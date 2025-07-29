@@ -323,7 +323,7 @@ export const a11yValidators = {
     (props) => {
       const hasAriaLabel = props['aria-label'] || props['aria-labelledby'];
       return createValidationResult(
-        !!hasAriaLabel,
+        Boolean(hasAriaLabel),
         hasAriaLabel ? [] : [message]
       );
     },
