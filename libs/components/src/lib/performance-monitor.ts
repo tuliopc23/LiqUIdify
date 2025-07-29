@@ -161,7 +161,7 @@ export class PerformanceMonitor {
     }
 
     let clsValue = 0;
-    let clsEntries: Array<any> = [];
+    let clsEntries: Array<LayoutShiftEntry> = [];
 
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();

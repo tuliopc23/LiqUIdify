@@ -101,6 +101,19 @@ export interface ARIACorrection {
 }
 
 // ARIA Rules Database
+interface AxeViolation {
+  id: string;
+  impact: 'minor' | 'moderate' | 'serious' | 'critical';
+  description: string;
+  help: string;
+  helpUrl: string;
+  nodes: Array<{
+    html: string;
+    target: Array<string>;
+    failureSummary: string;
+  }>;
+}
+
 const ARIA_RULES = {
   roles: {
     button: {
@@ -304,7 +317,9 @@ export class AccessibilityManager {
       )) as unknown as AxeResults;
 
       // Process violations
-      const violations = this.processViolations(results.violations);
+      const violations = this.processViolations(
+        results.violations as unknown as Array<AxeViolation>
+      );
 
       // Generate warnings and suggestions
       const warnings = this.generateWarnings(element);
@@ -657,14 +672,16 @@ export class AccessibilityManager {
 
   // Private helper methods
 
-  private processViolations(axeViolations: Array<any>): Array<Violation> {
+  private processViolations(
+    axeViolations: Array<AxeViolation>
+  ): Array<Violation> {
     return axeViolations.map((violation) => ({
       id: violation.id,
       impact: violation.impact,
       description: violation.description,
       help: violation.help,
       helpUrl: violation.helpUrl,
-      nodes: violation.nodes.map((node: Node) => ({
+      nodes: violation.nodes.map((node) => ({
         html: node.html,
         target: node.target,
         failureSummary: node.failureSummary,
@@ -849,7 +866,7 @@ export class AccessibilityManager {
       li: 'listitem',
     };
 
-    return implicitRoles[tagName] || undefined;
+    return implicitRoles[tagName] || null;
   }
 
   private isInteractive(element: HTMLElement): boolean {
@@ -1020,8 +1037,8 @@ class FocusTrap {
       ...this.container.querySelectorAll(focusableSelectors),
     ] as Array<HTMLElement>;
 
-    this.firstFocusableElement = focusableElements[0] || undefined;
-    this.lastFocusableElement = focusableElements.at(-1) || undefined;
+    this.firstFocusableElement = focusableElements[0] || null;
+    this.lastFocusableElement = focusableElements.at(-1) || null;
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {

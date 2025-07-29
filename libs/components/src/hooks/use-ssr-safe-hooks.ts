@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect } from 'react';
 export const useSSRSafeLayoutEffect =
   typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
-export const useSSRSafe = (callback: () => void, deps: Array<any>) => {
+export const useSSRSafe = (callback: () => void, deps: Array<unknown>) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       callback();

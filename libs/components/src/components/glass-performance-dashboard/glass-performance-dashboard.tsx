@@ -13,6 +13,16 @@ export interface GlassPerformanceDashboardProps {
   onClose?: () => void;
 }
 
+interface PerformanceMetric {
+  value: number;
+  rating: 'good' | 'needs-improvement' | 'poor';
+}
+
+interface ComponentMetric {
+  componentName: string;
+  renderTime?: number;
+}
+
 const METRIC_LABELS = {
   LCP: 'Largest Contentful Paint',
   FID: 'First Input Delay',
@@ -47,16 +57,23 @@ export function GlassPerformanceDashboard({
   onClose,
 }: GlassPerformanceDashboardProps) {
   const [collapsed, setCollapsed] = useState(initialCollapsed);
-  const [metrics, setMetrics] = useState<Map<string, any>>(new Map());
-  const [componentMetrics, setComponentMetrics] = useState<Array<any>>([]);
+  const [metrics, setMetrics] = useState<Map<string, PerformanceMetric>>(
+    new Map()
+  );
+  const [componentMetrics, setComponentMetrics] = useState<
+    Array<ComponentMetric>
+  >([]);
   const { fps, memory } = useRealtimePerformance();
 
   useEffect(() => {
     // Subscribe to metric updates
     const unsubscribers = Object.keys(METRIC_LABELS).map((metricName) =>
-      performanceMonitor.subscribe(metricName as unknown, (metric) => {
-        setMetrics((previous) => new Map(previous).set(metricName, metric));
-      })
+      performanceMonitor.subscribe(
+        metricName as keyof typeof METRIC_LABELS,
+        (metric) => {
+          setMetrics((previous) => new Map(previous).set(metricName, metric));
+        }
+      )
     );
 
     // Get initial metrics
