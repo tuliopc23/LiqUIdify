@@ -1,5 +1,5 @@
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { useDegradationAware } from '../../utils/graceful-degradation';
 import '../../styles/graceful-degradation.css';
 

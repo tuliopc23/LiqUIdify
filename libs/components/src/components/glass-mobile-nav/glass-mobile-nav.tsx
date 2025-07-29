@@ -1,6 +1,6 @@
 import { ChevronRight, Menu, X } from 'lucide-react';
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { createPortal } from 'react-dom';
 
 import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';

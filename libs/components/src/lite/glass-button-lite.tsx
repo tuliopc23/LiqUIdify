@@ -1,7 +1,6 @@
 import { Loader2 } from 'lucide-react';
-import type React from 'react';
-import type { ButtonHTMLAttributes } from 'react';
-import { forwardRef } from 'react';
+import React, { forwardRef, type ButtonHTMLAttributes } from 'react';
+
 
 import { cn } from '@/core/utils/classname';
 

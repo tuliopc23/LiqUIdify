@@ -2,8 +2,7 @@
  * Factory for creating type-safe polymorphic Glass UI components
  */
 
-import type { ElementType } from 'react';
-import { forwardRef } from 'react';
+import { forwardRef, type ElementType } from 'react';
 
 import { cn } from '@/core/utils/classname';
 import type {

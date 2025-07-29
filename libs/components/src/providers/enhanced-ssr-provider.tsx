@@ -3,12 +3,11 @@
  * Provides comprehensive SSR support with automatic recovery mechanisms
  */
 
-import type React from 'react';
-import type { ReactNode } from 'react';
 import {
   useEffect,
   useState,
   // useCallback,
+  type ReactNode,
 } from 'react';
 
 import { useProgressiveEnhancement } from '../utils/hydration-utils';

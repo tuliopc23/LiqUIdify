@@ -1,5 +1,5 @@
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { createPortal } from 'react-dom';
 
 import { useIsClient } from '@/hooks/use-ssr-safe';

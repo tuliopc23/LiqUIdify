@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { DollarSign, Gauge, Sun, Volume2 } from 'lucide-react';
-import type React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 import { GlassSlider } from './glass-slider';
 
 const meta = {

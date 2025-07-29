@@ -1,5 +1,4 @@
-import type { AxeResults } from 'axe-core';
-import axe from 'axe-core';
+import axe, { type AxeResults } from 'axe-core';
 
 import { announcer } from '@/components/glass-live-region';
 

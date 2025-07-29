@@ -1,6 +1,5 @@
 import { AlertTriangle } from 'lucide-react';
-import type { ErrorInfo, ReactNode } from 'react';
-import React, { Component } from 'react';
+import React, { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { announcer } from '@/components/glass-live-region';
 
