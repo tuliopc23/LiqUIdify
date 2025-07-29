@@ -41,7 +41,7 @@ export interface PropertyDefinition {
     | 'enum'
     | 'React.ReactNode';
   required?: boolean;
-  defaultValue?: any;
+  defaultValue?: unknown;
   description: string;
   enumValues?: Array<string>;
   deprecated?: boolean;

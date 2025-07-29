@@ -9,7 +9,8 @@ import {
   Video,
   X,
 } from 'lucide-react';
-import React, { forwardRef, useCallback, useRef, useState } from 'react';
+import type React from 'react';
+import { forwardRef, useCallback, useRef, useState } from 'react';
 
 import { cn } from '@/core/utils/classname';
 import { createVariants as cva } from '../../lib/variant-system';

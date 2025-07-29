@@ -6,14 +6,14 @@
 declare module 'tailwindcss' {
   // Re-export the main Config type for Tailwind v4
   export interface Config {
-    content?: Array<string> | { files: Array<string>; extract?: any };
+    content?: Array<string> | { files: Array<string>; extract?: unknown };
     darkMode?: 'media' | 'class' | ['class', string];
     theme?: {
       extend?: Record<string, unknown>;
-      [key: string]: any;
+      [key: string]: unknown;
     };
-    plugins?: Array<any>;
-    [key: string]: any;
+    plugins?: Array<unknown>;
+    [key: string]: unknown;
   }
 }
 

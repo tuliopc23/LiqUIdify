@@ -78,9 +78,6 @@ export const reducer = (state: State, action: Action): State => {
 
     case actionTypes.DISMISS_TOAST: {
       const { toastId } = action;
-
-      {/* ! Side effects ! - This could be extracted into a dismissToast() action,  */}
-      {/* but I'll keep it here for simplicity  */}
       if (toastId) {
         addToRemoveQueue(toastId);
       } else {
@@ -101,7 +98,7 @@ export const reducer = (state: State, action: Action): State => {
         ),
       };
     }
-    case actionTypes.REMOVE_TOAST: {
+    case actionTypes.REMOVE_TOAST: 
       if (action.toastId === undefined) {
         return {
           ...state,
@@ -112,11 +109,9 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         toasts: state.toasts.filter((t) => t.id !== action.toastId),
       };
-    }
 
-    default: {
-      return state;
-};
+    default: 
+      return state;;
 
 const listeners: (state: State) =[] void> = [];
 
@@ -177,4 +172,4 @@ function useToast() {
   };
 }
 
-export { useToast, toast };
+export type { useToast, toast };

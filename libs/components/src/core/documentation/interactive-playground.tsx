@@ -23,8 +23,8 @@ import {
   Tablet,
   Zap,
 } from 'lucide-react';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 // Types for playground configuration
 interface PlaygroundConfig {
@@ -47,7 +47,7 @@ interface PropertyControl {
     | 'color'
     | 'range'
     | 'textarea';
-  defaultValue: any;
+  defaultValue: unknown;
   options?: Array<string> | Array<number>;
   min?: number;
   max?: number;

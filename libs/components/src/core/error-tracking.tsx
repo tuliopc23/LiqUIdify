@@ -30,13 +30,16 @@ export interface ErrorTrackingConfig {
   enabled?: boolean;
   sampleRate?: number;
   tracesSampleRate?: number;
-  beforeSend?: (event: any, hint: any) => any;
-  integrations?: Array<any>;
+  beforeSend?: (
+    event: Sentry.Event,
+    hint: Sentry.EventHint
+  ) => Sentry.Event | null;
+  integrations?: Array<Sentry.Integration>;
 }
 
 class ErrorTrackingSystem {
   private static instance: ErrorTrackingSystem;
-  private sentry: any = null;
+  private sentry: typeof import('@sentry/react') | null = null;
   private __config: ErrorTrackingConfig = {};
   private errorQueue: Array<ErrorReport> = [];
   private isInitialized = false;
@@ -220,7 +223,9 @@ class ErrorTrackingSystem {
   /**
    * Create an error boundary component
    */
-  createErrorBoundary(_fallback?: ReactNode): any {
+  createErrorBoundary(
+    _fallback?: ReactNode
+  ): React.ComponentType<{ children: ReactNode }> {
     if (!this.isInitialized || !this.sentry) {
       // Return a basic error boundary if Sentry isn't loaded
       return ({ children }: { children: ReactNode }) => children;

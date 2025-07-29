@@ -324,7 +324,9 @@ export const isTouchDevice = (): boolean => {
   const win = safeWindow();
   const nav = safeNavigator();
 
-  return Boolean(win && ('ontouchstart' in win || (nav && nav.maxTouchPoints > 0)));
+  return Boolean(
+    win && ('ontouchstart' in win || (nav && nav.maxTouchPoints > 0))
+  );
 };
 
 /**
@@ -416,7 +418,7 @@ export const safeMutationObserver = (
  */
 export const clientOnly = (
   callback: () => void,
-  _deps: Array<any> = []
+  _deps: Array<unknown> = []
 ): void => {
   if (isBrowser()) {
     callback();

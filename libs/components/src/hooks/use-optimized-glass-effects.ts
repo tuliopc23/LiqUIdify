@@ -166,7 +166,8 @@ function generateOptimizedGlassVariables(
     '--glass-opacity': `${opacity || settings.opacity}`,
     '--glass-saturation': `${saturation}`,
     '--glass-brightness': `${brightness}`,
-    '--glass-backdrop': "blur(var(--glass-blur)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness))",
+    '--glass-backdrop':
+      'blur(var(--glass-blur)) saturate(var(--glass-saturation)) brightness(var(--glass-brightness))',
     '--glass-transition': 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
   };
 }

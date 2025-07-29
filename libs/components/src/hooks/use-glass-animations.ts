@@ -303,12 +303,8 @@ export function useSpringAnimation() {
   const { animate } = useGlassAnimation('normal');
 
   const springTo = useCallback(
-    (
-      element: HTMLElement,
-      targetValue: number,
-      property = 'transform'
-    ) => {
-      const springEasing = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+    (element: HTMLElement, targetValue: number, property = 'transform') => {
+      const springEasing = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 
       animate(element, [{ [property]: `${targetValue}` }], {
         duration: 500,
@@ -325,11 +321,7 @@ export function useSpringAnimation() {
 /**
  * Hook for liquid flow animations
  */
-export function useLiquidFlow(
-  amplitude = 20,
-  frequency = 2,
-  duration = 2000
-) {
+export function useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
   const { animate } = useGlassAnimation('normal');
 
   const startFlow = useCallback(

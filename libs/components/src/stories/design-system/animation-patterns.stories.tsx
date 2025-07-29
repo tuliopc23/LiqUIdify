@@ -5,10 +5,10 @@ import React from 'react';
 import { GlassButton, GlassCard } from '../..';
 
 const meta = { title: 'Design System/Animation Patterns' }
-  parameters: { layout: 'centered' }
-    docs: { description: {
+  { layout: 'centered' }
+    { 
         component:
-          'Consistent animation patterns and microinteractions used throughout the LiquidUI library.' }
+          'Consistent animation patterns and microinteractions used throughout the LiquidUI library.' 
       },
     },
   },

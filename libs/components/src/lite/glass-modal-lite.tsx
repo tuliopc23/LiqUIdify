@@ -1,6 +1,6 @@
 import { X } from 'lucide-react';
-import React, { useEffect, useRef } from 'react';
-
+import type React from 'react';
+import { useEffect, useRef } from 'react';
 
 import { GlassPortal } from '@/components/glass-portal';
 

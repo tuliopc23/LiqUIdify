@@ -5,7 +5,7 @@
 declare global {
   namespace gsap {
     interface TweenVars {
-      [key: string]: any;
+      [key: string]: unknown;
       duration?: number;
       delay?: number;
       ease?: string;
@@ -24,36 +24,36 @@ declare global {
     namespace core {
       interface Timeline {
         to(
-          target: any,
+          target: unknown,
           variables: TweenVars,
           position?: string | number
         ): Timeline;
         from(
-          target: any,
+          target: unknown,
           variables: TweenVars,
           position?: string | number
         ): Timeline;
         fromTo(
-          target: any,
+          target: unknown,
           fromVariables: TweenVars,
           toVariables: TweenVars,
           position?: string | number
         ): Timeline;
         set(
-          target: any,
+          target: unknown,
           variables: TweenVars,
           position?: string | number
         ): Timeline;
-        add(child: any, position?: string | number): Timeline;
+        add(child: unknown, position?: string | number): Timeline;
         call(
           callback: () => void,
-          params?: Array<any>,
-          scope?: any,
+          params?: Array<unknown>,
+          scope?: unknown,
           position?: string | number
         ): Timeline;
         eventCallback(
           type: string,
-          callback?: (...arguments_: Array<any>) => void
+          callback?: (...arguments_: Array<unknown>) => void
         ): Timeline;
         play(): Timeline;
         pause(): Timeline;
@@ -76,24 +76,24 @@ declare global {
     }
 
     interface GSAPStatic {
-      to(target: any, variables: TweenVars): core.Tween;
-      from(target: any, variables: TweenVars): core.Tween;
+      to(target: unknown, variables: TweenVars): core.Tween;
+      from(target: unknown, variables: TweenVars): core.Tween;
       fromTo(
-        target: any,
+        target: unknown,
         fromVariables: TweenVars,
         toVariables: TweenVars
       ): core.Tween;
-      set(target: any, variables: TweenVars): core.Tween;
+      set(target: unknown, variables: TweenVars): core.Tween;
       timeline(): core.Timeline;
-      killTweensOf(target: any): void;
-      registerPlugin(...plugins: Array<any>): void;
+      killTweensOf(target: unknown): void;
+      registerPlugin(...plugins: Array<unknown>): void;
     }
   }
 
   const gsap: gsap.GSAPStatic;
 
   interface MorphSVGPluginStatic {
-    [key: string]: any;
+    [key: string]: unknown;
   }
 
   const MorphSVGPlugin: MorphSVGPluginStatic;

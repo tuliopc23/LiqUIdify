@@ -155,7 +155,7 @@ export const WithToastProvider: Story = {
 };
 
 // Different positions
-const PositionDemo = ({ position }: { position: any }) => {
+const PositionDemo = ({ position }: { position: string }) => {
   const { addToast } = useToast();
 
   return (

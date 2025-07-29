@@ -282,11 +282,11 @@ export const componentTokens = {
 // Utility functions for token access
 export const getToken = (path: string) => {
   const keys = path.split('.');
-  let current: any = liquidGlassTokens;
+  let current: unknown = liquidGlassTokens;
 
   for (const key of keys) {
     if (current && typeof current === 'object' && key in current) {
-      current = current[key];
+      current = (current as Record<string, unknown>)[key];
     } else {
       return;
     }
@@ -297,11 +297,11 @@ export const getToken = (path: string) => {
 
 export const getThemeToken = (theme: 'light' | 'dark', path: string) => {
   const keys = path.split('.');
-  let current: any = glassThemes[theme];
+  let current: unknown = glassThemes[theme];
 
   for (const key of keys) {
     if (current && typeof current === 'object' && key in current) {
-      current = current[key];
+      current = (current as Record<string, unknown>)[key];
     } else {
       return;
     }

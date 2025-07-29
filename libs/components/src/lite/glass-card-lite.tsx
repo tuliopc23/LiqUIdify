@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
-
+import type React from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '@/core/utils/classname';
 

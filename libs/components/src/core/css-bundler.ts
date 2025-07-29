@@ -163,7 +163,10 @@ export class CSSBundler {
   /**
    * Build a single CSS bundle
    */
-  private async buildBundle(name: string, config: any): Promise<CSSBundle> {
+  private async buildBundle(
+    name: string,
+    config: { files: Array<string>; critical?: boolean }
+  ): Promise<CSSBundle> {
     const startTime = performance.now();
 
     // Combine all CSS files
@@ -212,7 +215,10 @@ export class CSSBundler {
   /**
    * Process CSS with PostCSS plugins
    */
-  private async processCSS(css: string, config: any): Promise<string> {
+  private async processCSS(
+    css: string,
+    config: { critical?: boolean }
+  ): Promise<string> {
     const plugins = [
       autoprefixer,
       cssnano({

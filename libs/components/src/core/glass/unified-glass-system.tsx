@@ -12,8 +12,14 @@
  * - Tree-shakeable exports
  */
 
-import React, { useCallback, useRef, useState, type CSSProperties, type ReactNode, type ComponentProps } from 'react';
-
+import React, {
+  type ComponentProps,
+  type CSSProperties,
+  type ReactNode,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 
 // Types
 export type GlassIntensity =

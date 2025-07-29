@@ -9,8 +9,8 @@ import { isBrowser } from './ssr-utils';
 export interface HydrationMismatch {
   type: 'prop' | 'state' | 'style' | 'content' | 'structure';
   component: string;
-  serverValue: any;
-  clientValue: any;
+  serverValue: unknown;
+  clientValue: unknown;
   path: string;
   timestamp: number;
 }
@@ -23,8 +23,8 @@ export interface HydrationContext {
   lastRetry: number;
   detectMismatch?: (
     type: HydrationMismatch['type'],
-    serverValue: any,
-    clientValue: any,
+    serverValue: unknown,
+    clientValue: unknown,
     path?: string
   ) => void;
 }
@@ -339,7 +339,7 @@ export function useHydrationComplete() {
  */
 export function useClientOnly<T>(
   factory: () => T,
-  deps: Array<any> = []
+  deps: Array<unknown> = []
 ): T | null {
   const [value, setValue] = useState<T | null | null>(undefined);
   const isHydrated = useHydrationComplete();

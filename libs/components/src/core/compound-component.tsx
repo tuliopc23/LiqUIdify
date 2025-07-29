@@ -21,7 +21,7 @@ export interface CompoundComponentContext {
   variant?: string;
   disabled?: boolean;
   readonly?: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 // Create compound component context

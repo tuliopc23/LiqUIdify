@@ -3,9 +3,12 @@
  * Detects and handles hydration mismatches with automatic recovery
  */
 
-import { useEffect, useState, type ReactNode } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
-import { HydrationManager, type HydrationMismatch } from '../../utils/hydration-utils';
+import {
+  HydrationManager,
+  type HydrationMismatch,
+} from '../../utils/hydration-utils';
 import { isBrowser } from '../../utils/ssr-utils';
 
 export interface HydrationDetectorProps {

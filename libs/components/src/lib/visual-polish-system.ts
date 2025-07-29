@@ -7,7 +7,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface ElementWithPolishData extends HTMLElement {
-  _polishAnimation?: any;
+  _polishAnimation?: Animation;
   _polishHandlers?: {
     handleInteraction: (event: Event) => void;
   };

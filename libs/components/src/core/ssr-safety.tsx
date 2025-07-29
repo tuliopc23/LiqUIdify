@@ -4,7 +4,7 @@
  * Provides utilities for safe server-side rendering and client-side hydration
  */
 
-import { useEffect, useState, type ReactNode } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
 /**
  * Hook to safely check if we're on the client side
@@ -47,7 +47,7 @@ export interface SSRSafeProps {
   children: ReactNode;
   fallback?: ReactNode;
   component?: keyof JSX.IntrinsicElements;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function SSRSafe({

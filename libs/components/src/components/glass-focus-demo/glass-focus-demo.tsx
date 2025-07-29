@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-
+import type React from 'react';
+import { useRef, useState } from 'react';
 
 import { RovingTabindexGroup, useRovingTabindex } from '@/core/roving-tabindex';
 

@@ -22,8 +22,8 @@ export interface GlassEffectOptions {
   borders?: boolean;
   shadows?: boolean;
   state?: string;
-  glassEffect?: any;
-  animation?: any;
+  glassEffect?: Record<string, unknown>;
+  animation?: Record<string, unknown>;
   config?: Record<string, unknown>;
 }
 
