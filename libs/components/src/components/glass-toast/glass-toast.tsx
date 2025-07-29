@@ -189,7 +189,7 @@ interface GlassToastProps {
   onClose?: () => void;
 }
 
-export const GlassToast: React.FC<GlassToastProps> = ({
+const GlassToast: React.FC<GlassToastProps> = ({
   type = "info",
   message,
   onClose,

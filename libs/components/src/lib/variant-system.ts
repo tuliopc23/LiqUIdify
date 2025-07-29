@@ -6,15 +6,9 @@
 import { cn } from "@/core/utils/classname";
 
 // Class variance authority (cva) alias
-export { createVariants as cva };
-
 // Re-export cn from central location
-export { cn };
-
 // Base variant configuration
-export interface VariantConfig<
-  T extends Record<string, Record<string, string>>,
-> {
+interface VariantConfig<T extends Record<string, Record<string, string>>> {
   base?: string;
   variants: T;
   compoundVariants?: Array<
@@ -28,7 +22,7 @@ export interface VariantConfig<
 }
 
 // Create variant function type
-export type VariantProps<T extends VariantConfig<unknown>> = {
+type VariantProps<T extends VariantConfig<unknown>> = {
   [K in keyof T["variants"]]?: keyof T["variants"][K];
 } & {
   class?: string;
@@ -115,4 +109,4 @@ export const glassVariants = createVariants({
 });
 
 // Export type for TypeScript support
-export type GlassVariantProps = InferVariantProps<typeof glassVariants>;
+type GlassVariantProps = InferVariantProps<typeof glassVariants>;

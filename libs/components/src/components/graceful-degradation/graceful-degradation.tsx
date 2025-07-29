@@ -357,13 +357,3 @@ export function ProgressiveEnhancementProvider({
 
   return <>{children}</>;
 }
-
-export default {
-  GracefulDegradation,
-  StaticFallback,
-  FeatureDetection,
-  NetworkAware,
-  PerformanceAware,
-  FeatureDetectionClasses,
-  ProgressiveEnhancementProvider,
-};

@@ -31,7 +31,7 @@ export type GlassIntensity = "subtle" | "medium" | "strong";
 export type AnimationTiming = "instant" | "fast" | "normal" | "slow" | "slower";
 
 // Glass visual effects configuration
-export interface GlassEffectConfig {
+interface GlassEffectConfig {
   /** Glass effect intensity level */
   intensity?: GlassIntensity;
   /** Enable blur effect */
@@ -47,7 +47,7 @@ export interface GlassEffectConfig {
 }
 
 // Base props that all Glass components inherit
-export interface BaseGlassProps {
+interface BaseGlassProps {
   /** Component size */
   size?: ComponentSize;
   /** Component variant */
@@ -93,7 +93,7 @@ export interface CompoundComponentProps {
 }
 
 // Layout component props
-export interface LayoutGlassProps extends BaseGlassProps {
+interface LayoutGlassProps extends BaseGlassProps {
   /** Padding size */
   padding?: ComponentSize | "none";
   /** Margin size */
@@ -105,7 +105,7 @@ export interface LayoutGlassProps extends BaseGlassProps {
 }
 
 // Form component props
-export interface FormGlassProps extends InteractiveGlassProps {
+interface FormGlassProps extends InteractiveGlassProps {
   /** Form field name */
   name?: string;
   /** Form field value */
@@ -129,51 +129,48 @@ export interface FormGlassProps extends InteractiveGlassProps {
 }
 
 // Generic component reference type
-export type ComponentRef<T extends HTMLElement = HTMLElement> =
-  React.RefObject<T>;
+type ComponentRef<T extends HTMLElement = HTMLElement> = React.RefObject<T>;
 
 // Component prop types for different HTML elements
-export type ButtonProps = ComponentPropsWithoutRef<"button">;
-export type DivProps = ComponentPropsWithoutRef<"div">;
-export type InputProps = ComponentPropsWithoutRef<"input">;
-export type TextareaProps = ComponentPropsWithoutRef<"textarea">;
-export type SelectProps = ComponentPropsWithoutRef<"select">;
-export type LabelProps = ComponentPropsWithoutRef<"label">;
-export type SpanProps = ComponentPropsWithoutRef<"span">;
-export type HeadingProps = ComponentPropsWithoutRef<"h1">;
-export type ParagraphProps = ComponentPropsWithoutRef<"p">;
+type ButtonProps = ComponentPropsWithoutRef<"button">;
+type DivProps = ComponentPropsWithoutRef<"div">;
+type InputProps = ComponentPropsWithoutRef<"input">;
+type TextareaProps = ComponentPropsWithoutRef<"textarea">;
+type SelectProps = ComponentPropsWithoutRef<"select">;
+type LabelProps = ComponentPropsWithoutRef<"label">;
+type SpanProps = ComponentPropsWithoutRef<"span">;
+type HeadingProps = ComponentPropsWithoutRef<"h1">;
+type ParagraphProps = ComponentPropsWithoutRef<"p">;
 
 // Polymorphic component props
-export type PolymorphicProps<T extends React.ElementType> = {
+type PolymorphicProps<T extends React.ElementType> = {
   as?: T;
 } & ComponentPropsWithoutRef<T>;
 
 // Component factory types
-export type GlassComponent<
-  T extends HTMLElement,
-  P = {},
-> = ForwardRefExoticComponent<P & RefAttributes<T>>;
+type GlassComponent<T extends HTMLElement, P = {}> = ForwardRefExoticComponent<
+  P & RefAttributes<T>
+>;
 
 // Compound component factory
-export type CompoundGlassComponent<
-  T extends HTMLElement,
-  P = {},
-> = GlassComponent<T, P & CompoundComponentProps>;
+type CompoundGlassComponent<T extends HTMLElement, P = {}> = GlassComponent<
+  T,
+  P & CompoundComponentProps
+>;
 
 // Event handler types
-export type GlassEventHandler<
-  T extends HTMLElement,
-  E extends Event = Event,
-> = (event: E & { currentTarget: T }) => void;
+type GlassEventHandler<T extends HTMLElement, E extends Event = Event> = (
+  event: E & { currentTarget: T },
+) => void;
 
 // Common event handlers
-export type ClickHandler = GlassEventHandler<HTMLElement, MouseEvent>;
-export type KeyHandler = GlassEventHandler<HTMLElement, KeyboardEvent>;
-export type FocusHandler = GlassEventHandler<HTMLElement, FocusEvent>;
-export type ChangeHandler = GlassEventHandler<HTMLInputElement, Event>;
+type ClickHandler = GlassEventHandler<HTMLElement, MouseEvent>;
+type KeyHandler = GlassEventHandler<HTMLElement, KeyboardEvent>;
+type FocusHandler = GlassEventHandler<HTMLElement, FocusEvent>;
+type ChangeHandler = GlassEventHandler<HTMLInputElement, Event>;
 
 // Accessibility props
-export interface AccessibilityProps {
+interface AccessibilityProps {
   /** ARIA label */
   "aria-label"?: string;
   /** ARIA labelled by */
@@ -195,7 +192,7 @@ export interface AccessibilityProps {
 }
 
 // Style configuration
-export interface StyleConfig {
+interface StyleConfig {
   /** CSS custom properties */
   style?: React.CSSProperties;
   /** CSS variables */
@@ -205,7 +202,7 @@ export interface StyleConfig {
 }
 
 // Performance optimization props
-export interface PerformanceProps {
+interface PerformanceProps {
   /** Lazy load component */
   lazy?: boolean;
   /** Virtualization enabled */
@@ -230,10 +227,10 @@ export interface UnifiedGlassProps
 }
 
 // Type utilities
-export type OmitGlassProps<T, K extends keyof T> = Omit<T, K>;
-export type PickGlassProps<T, K extends keyof T> = Pick<T, K>;
-export type RequiredGlassProps<T> = Required<T>;
-export type PartialGlassProps<T> = Partial<T>;
+type OmitGlassProps<T, K extends keyof T> = Omit<T, K>;
+type PickGlassProps<T, K extends keyof T> = Pick<T, K>;
+type RequiredGlassProps<T> = Required<T>;
+type PartialGlassProps<T> = Partial<T>;
 
 // Generic component props builder
 export type ComponentPropsBuilder<

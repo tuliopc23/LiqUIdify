@@ -11,8 +11,6 @@ import type {
 } from "type-fest";
 
 // Re-export commonly used is functions for convenience
-export { is };
-
 // Custom type guards for Glass UI components
 export const isGlassComponent = (value: unknown): value is HTMLElement => {
   return is.htmlElement(value) && value.classList.contains("glass-");
@@ -27,35 +25,35 @@ export const isValidBlur = (value: unknown): value is number => {
 };
 
 // Type utilities using type-fest
-export type GlassVariant = LiteralUnion<
+type GlassVariant = LiteralUnion<
   "default" | "subtle" | "intense" | "dark",
   string
 >;
 
-export type GlassSize = LiteralUnion<"xs" | "sm" | "md" | "lg" | "xl", string>;
+type GlassSize = LiteralUnion<"xs" | "sm" | "md" | "lg" | "xl", string>;
 
 // Component props utilities
-export type WithClassName<T> = Merge<T, { className?: string }>;
-export type WithChildren<T> = Merge<T, { children?: React.ReactNode }>;
-export type WithRef<T> = Merge<T, { ref?: React.Ref<Element> }>;
+type WithClassName<T> = Merge<T, { className?: string }>;
+type WithChildren<T> = Merge<T, { children?: React.ReactNode }>;
+type WithRef<T> = Merge<T, { ref?: React.Ref<Element> }>;
 
 // Make certain props required
-export type RequireProps<T, K extends keyof T> = SetRequired<T, K>;
+type RequireProps<T, K extends keyof T> = SetRequired<T, K>;
 
 // Make certain props optional
-export type OptionalProps<T, K extends keyof T> = SetOptional<T, K>;
+type OptionalProps<T, K extends keyof T> = SetOptional<T, K>;
 
 // Omit certain props
-export type OmitProps<T, K extends keyof T> = Except<T, K>;
+type OmitProps<T, K extends keyof T> = Except<T, K>;
 
 // Require at least one of specified props
-export type RequireOneOf<T, K extends keyof T> = RequireAtLeastOne<T, K>;
+type RequireOneOf<T, K extends keyof T> = RequireAtLeastOne<T, K>;
 
 // Deep partial for complex state objects
-export type DeepPartial<T> = PartialDeep<T>;
+type DeepPartial<T> = PartialDeep<T>;
 
 // Extract values from object types
-export type Values<T> = ValueOf<T>;
+type Values<T> = ValueOf<T>;
 
 // Validation helpers
 export const validateGlassProps = (props: unknown) => {
@@ -81,7 +79,7 @@ export const validateGlassProps = (props: unknown) => {
 };
 
 // Type-safe event handler creator
-export const createEventHandler = <T extends HTMLElement, E extends Event>(
+const createEventHandler = <T extends HTMLElement, E extends Event>(
   handler: (event: E, element: T) => void,
 ) => {
   return (event: E) => {

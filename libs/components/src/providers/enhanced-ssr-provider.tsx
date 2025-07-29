@@ -13,7 +13,7 @@ import {
 import { useProgressiveEnhancement } from "../utils/hydration-utils";
 import { isBrowser } from "../utils/ssr-utils";
 
-export interface EnhancedSSRProviderProps {
+interface EnhancedSSRProviderProps {
   children: ReactNode;
   fallback?: ReactNode;
   loading?: ReactNode;
@@ -144,7 +144,7 @@ export function withEnhancedSSR<P extends object>(
 /**
  * Hook for safe client-side only execution
  */
-export function useClientOnly<T>(
+function useClientOnly<T>(
   factory: () => T,
   deps: Array<unknown> = [],
 ): { value: T | null; isReady: boolean } {
@@ -183,7 +183,7 @@ export function useHydrationSafeState<T>(
 /**
  * Utility for creating SSR-safe event handlers
  */
-export function createSSREventHandler<
+function createSSREventHandler<
   T extends (...arguments_: Array<unknown>) => unknown,
 >(handler: T): T | (() => void) {
   return isBrowser() ? handler : () => {};
@@ -192,7 +192,7 @@ export function createSSREventHandler<
 /**
  * Hook for measuring hydration performance
  */
-export function useHydrationMetrics() {
+function useHydrationMetrics() {
   const [metrics, setMetrics] = useState({
     hydrationStart: 0,
     hydrationEnd: 0,

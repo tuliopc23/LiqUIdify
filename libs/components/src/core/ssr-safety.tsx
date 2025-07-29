@@ -9,7 +9,7 @@ import { type ReactNode, useEffect, useState } from "react";
 /**
  * Hook to safely check if we're on the client side
  */
-export function useIsClient(): boolean {
+function useIsClient(): boolean {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -22,15 +22,12 @@ export function useIsClient(): boolean {
 /**
  * Component that only renders its children on the client side
  */
-export interface ClientOnlyProps {
+interface ClientOnlyProps {
   children: ReactNode;
   fallback?: ReactNode;
 }
 
-export function ClientOnly({
-  children,
-  fallback = undefined,
-}: ClientOnlyProps) {
+function ClientOnly({ children, fallback = undefined }: ClientOnlyProps) {
   const isClient = useIsClient();
 
   if (!isClient) {
@@ -43,14 +40,14 @@ export function ClientOnly({
 /**
  * SSR-safe component wrapper that provides fallback during SSR
  */
-export interface SSRSafeProps {
+interface SSRSafeProps {
   children: ReactNode;
   fallback?: ReactNode;
   component?: keyof JSX.IntrinsicElements;
   [key: string]: unknown;
 }
 
-export function SSRSafe({
+function SSRSafe({
   children,
   fallback = undefined,
   component: Component = "div",
@@ -68,7 +65,7 @@ export function SSRSafe({
 /**
  * Hook for SSR-safe access to window and document objects
  */
-export function useSSRSafeWindow() {
+function useSSRSafeWindow() {
   const [windowObject, setWindowObject] = useState<Window | undefined | null>(
     undefined,
   );
@@ -85,7 +82,7 @@ export function useSSRSafeWindow() {
 /**
  * Hook for SSR-safe localStorage access
  */
-export function useSSRSafeLocalStorage() {
+function useSSRSafeLocalStorage() {
   const [storage, setStorage] = useState<Storage | undefined | null>(undefined);
 
   useEffect(() => {
@@ -100,19 +97,19 @@ export function useSSRSafeLocalStorage() {
 /**
  * Utility function to check if we're in a browser environment
  */
-export const isBrowser = (): boolean => {
+const isBrowser = (): boolean => {
   return typeof window !== "undefined" && typeof document !== "undefined";
 };
 
 /**
  * Alias for isBrowser for backward compatibility
  */
-export const isClient = isBrowser;
+const isClient = isBrowser;
 
 /**
  * Utility function to safely access browser APIs
  */
-export function safelyAccessBrowserAPI<T>(function_: () => T, fallback: T): T {
+function safelyAccessBrowserAPI<T>(function_: () => T, fallback: T): T {
   if (!isBrowser()) {
     return fallback;
   }

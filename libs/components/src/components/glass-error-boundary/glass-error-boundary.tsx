@@ -3,7 +3,6 @@ import React, { Component, type ErrorInfo, type ReactNode } from "react";
 
 import { announcer } from "@/components/glass-live-region";
 
-import { errorTracking } from "@/core/error-tracking";
 
 import { cn } from "@/core/utils/classname";
 
@@ -68,20 +67,6 @@ export class GlassErrorBoundary extends Component<
       errorCount: previousState.errorCount + 1,
     }));
 
-    // Track error in production
-    if (trackErrors && process.env.NODE_ENV === "production") {
-      errorTracking.trackError(error, errorInfo, {
-        component: componentName || "Unknown",
-        action: "component-error",
-        tags: {
-          level,
-          errorCount: String(this.state.errorCount + 1),
-        },
-        extra: {
-          componentStack: errorInfo.componentStack,
-        },
-      });
-    }
 
     // Log error to console in development
     if (process.env.NODE_ENV === "development") {

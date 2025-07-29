@@ -18,7 +18,7 @@ interface GlassEffectState {
 }
 
 // Animation state management
-export interface AnimationState {
+interface AnimationState {
   isAnimating: boolean;
   currentState: string;
   progress: number;
@@ -27,7 +27,7 @@ export interface AnimationState {
 }
 
 // Animation configuration
-export interface AnimationConfig {
+interface AnimationConfig {
   duration: number;
   easing: string;
   delay?: number;
@@ -58,7 +58,7 @@ const GLASS_ANIMATION_PRESETS = {
 /**
  * Base animation hook for consistent animation behavior
  */
-export function useGlassAnimation(
+function useGlassAnimation(
   timing: AnimationTiming = "normal",
   customConfig?: Partial<AnimationConfig>,
 ) {
@@ -299,7 +299,7 @@ export function useRippleEffect(
 /**
  * Hook for spring animations
  */
-export function useSpringAnimation() {
+function useSpringAnimation() {
   const { animate } = useGlassAnimation("normal");
 
   const springTo = useCallback(
@@ -321,7 +321,7 @@ export function useSpringAnimation() {
 /**
  * Hook for liquid flow animations
  */
-export function useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
+function useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
   const { animate } = useGlassAnimation("normal");
 
   const startFlow = useCallback(
@@ -351,4 +351,3 @@ export function useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
 }
 
 // Export all hooks and utilities
-export { TIMING_PRESETS, GLASS_ANIMATION_PRESETS };

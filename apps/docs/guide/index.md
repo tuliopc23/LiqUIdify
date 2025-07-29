@@ -2,7 +2,7 @@
 
 LiqUIdify is a modern React component library that brings the elegance of glassmorphism design to your applications. With over 40 production-ready components, physics-based interactions, and a focus on accessibility, LiqUIdify helps you build beautiful and performant user interfaces.
 
-## What is LiqUIdify?
+## What is LiqUIdify
 
 LiqUIdify combines three core concepts:
 

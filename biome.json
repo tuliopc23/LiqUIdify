@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -24,6 +24,7 @@
         "useLiteralKeys": "off"
       },
       "correctness": {
+        "noUnusedFunctionParameters": "off",
         "noUnusedVariables": "error",
         "noUnusedImports": "error",
         "useExhaustiveDependencies": "warn",
@@ -79,7 +80,7 @@
     "formatter": {
       "jsxQuoteStyle": "double",
       "quoteStyle": "single",
-      "semicolons": "always",
+      "semicolons": "asNeeded",
       "trailingCommas": "es5",
       "arrowParentheses": "always",
       "bracketSpacing": true,
@@ -102,14 +103,40 @@
     "includes": [
       "src/**/*.ts",
       "src/**/*.tsx",
+      "src/**/*.js",
+      "src/**/*.jsx",
       "libs/**/src/**/*.ts",
       "libs/**/src/**/*.tsx",
+      "libs/**/src/**/*.js",
+      "libs/**/src/**/*.jsx",
       "apps/**/src/**/*.ts",
       "apps/**/src/**/*.tsx",
+      "apps/**/src/**/*.js",
+      "apps/**/src/**/*.jsx",
       "*.config.ts",
       "*.config.js",
       "vite.config.ts",
-      "scripts/**/*.ts"
+      "tailwind.config.ts",
+      "scripts/**/*.ts",
+      "scripts/**/*.js"
+    ],
+    "experimentalScannerIgnores": [
+      "**/*.d.ts",
+      "**/dist/**",
+      "**/build/**",
+      "**/lib/**/*.js",
+      "**/esm/**/*.js",
+      "**/cjs/**/*.js",
+      "**/node_modules/**",
+      "**/.turbo/**",
+      "**/.next/**",
+      "**/.vite/**",
+      "**/coverage/**",
+      "**/storybook-static/**",
+      "**/*.min.js",
+      "**/*.min.ts",
+      "**/vite.config.*.timestamp*",
+      "**/vitest.config.*.timestamp*"
     ]
   },
   "overrides": [
@@ -134,6 +161,25 @@
         "rules": {
           "correctness": {
             "useExhaustiveDependencies": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.tsx"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedFunctionParameters": "off",
+            "noUnusedVariables": {
+              "level": "warn",
+              "options": {
+                "ignoreRestSiblings": true
+              }
+            }
+          },
+          "style": {
+            "noParameterAssign": "off"
           }
         }
       }

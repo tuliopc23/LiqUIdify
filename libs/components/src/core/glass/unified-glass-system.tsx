@@ -34,7 +34,7 @@ export type GlassVariant =
   | "floating"
   | "card"
   | "modal";
-export type GlassAnimation = "none" | "subtle" | "smooth" | "bouncy" | "liquid";
+type GlassAnimation = "none" | "subtle" | "smooth" | "bouncy" | "liquid";
 
 export interface GlassEffectConfig {
   intensity: GlassIntensity;
@@ -50,7 +50,7 @@ export interface GlassEffectConfig {
   contrast?: number;
 }
 
-export interface UnifiedGlassProps {
+interface UnifiedGlassProps {
   children: ReactNode;
   config?: GlassEffectConfig;
   className?: string;
@@ -193,21 +193,21 @@ export function useUnifiedGlass(
 }
 
 // Backward compatibility utilities
-export const createGlassEffect = (config: GlassEffectConfig) => ({
+const createGlassEffect = (config: GlassEffectConfig) => ({
   className: `glass-effect glass-effect--${config.intensity}`,
   style: useUnifiedGlass(config).glassStyles,
 });
 
 // Legacy system compatibility - backward compatible components
 
-export interface AppleLiquidGlassProps extends ComponentProps<"div"> {
+interface AppleLiquidGlassProps extends ComponentProps<"div"> {
   intensity?: GlassIntensity;
   variant?: GlassVariant;
   interactive?: boolean;
   magnetic?: boolean;
 }
 
-export const AppleLiquidGlass: React.FC<AppleLiquidGlassProps> = ({
+const AppleLiquidGlass: React.FC<AppleLiquidGlassProps> = ({
   children,
   intensity = "medium",
   variant = "default",
@@ -229,7 +229,7 @@ export const AppleLiquidGlass: React.FC<AppleLiquidGlassProps> = ({
   );
 };
 
-export const EnhancedAppleLiquidGlass = AppleLiquidGlass;
+const EnhancedAppleLiquidGlass = AppleLiquidGlass;
 
 // Additional utility exports for backward compatibility
 export {
@@ -238,4 +238,3 @@ export {
 } from "../utils/glass-effects";
 
 // Export for tree-shaking
-export default useUnifiedGlass;

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-export interface RovingTabindexOptions {
+interface RovingTabindexOptions {
   items: Array<HTMLElement>;
   orientation?: "horizontal" | "vertical" | "both";
   loop?: boolean;
@@ -12,7 +12,7 @@ export interface RovingTabindexOptions {
   focusOnHover?: boolean;
 }
 
-export interface RovingTabindexReturn {
+interface RovingTabindexReturn {
   currentIndex: number;
   setCurrentIndex: (index: number) => void;
   handlers: {
@@ -312,7 +312,7 @@ export function useRovingTabindex(
 /**
  * RovingTabindexGroup component for declarative usage
  */
-export interface RovingTabindexGroupProps {
+interface RovingTabindexGroupProps {
   children: React.Array<ReactElement>;
   orientation?: "horizontal" | "vertical" | "both";
   loop?: boolean;
@@ -390,14 +390,14 @@ export function RovingTabindexGroup({
 /**
  * Grid-based roving tabindex for 2D navigation
  */
-export interface GridRovingTabindexOptions
+interface GridRovingTabindexOptions
   extends Omit<RovingTabindexOptions, "orientation" | "items"> {
   items: Array<Array<HTMLElement>>;
   wrap?: boolean;
   onCellChange?: (element: HTMLElement, row: number, col: number) => void;
 }
 
-export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
+function useGridRovingTabindex(options: GridRovingTabindexOptions) {
   const {
     items,
     wrap = true,

@@ -7,61 +7,9 @@
  */
 
 // Export base component types and interfaces (avoiding duplicates)
-export type {
-  AccessibilityProps,
-  AnimationTiming,
-  BaseGlassProps,
-  ButtonProps,
-  ComponentPropsBuilder,
-  ComponentRef,
-  CompoundComponentProps,
-  CompoundGlassComponent,
-  DivProps,
-  FormGlassProps,
-  GlassComponent,
-  GlassEffectConfig,
-  GlassEventHandler,
-  HeadingProps,
-  InputProps,
-  InteractiveGlassProps,
-  KeyHandler,
-  LabelProps,
-  LayoutGlassProps,
-  OmitGlassProps,
-  ParagraphProps,
-  PartialGlassProps,
-  PerformanceProps,
-  PickGlassProps,
-  PolymorphicProps,
-  RequiredGlassProps,
-  SelectProps,
-  SpanProps,
-  StyleConfig,
-  TextareaProps,
-  UnifiedGlassProps,
-} from "./base-component";
+export type { InteractiveGlassProps } from "./base-component";
 
-// Export core types (primary source)
-export type {
-  A11yProps,
-  AnimationPreset,
-  ChangeHandler,
-  ClickHandler,
-  ComponentSize,
-  ComponentState,
-  ComponentVariant,
-  ElementProps,
-  ErrorInfo,
-  FocusHandler,
-  GlassConfig,
-  GlassIntensity,
-  GlassVariant,
-  OmitProps,
-  PerformanceMetrics,
-  PropsWithChildren,
-  ThemeConfig,
-  TransitionDuration,
-} from "./types";
+// Export core types (primary source);
 
 import {
   useGlassStateTransitions,
@@ -92,17 +40,3 @@ export * from "./patterns";
 export * from "./utils";
 
 // Re-export specific named exports
-export {
-  cn,
-  createBusinessLogicHook,
-  createCompoundComponentWithContext,
-  generateGlassClasses,
-  generateGlassVariables,
-  mapIntensity,
-  microInteraction,
-  responsiveSize,
-  touchTarget,
-  useGlassStateTransitions,
-  useMagneticHover,
-  useRippleEffect,
-};

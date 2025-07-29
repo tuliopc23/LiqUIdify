@@ -9,10 +9,10 @@ import React, { useCallback, useMemo, useRef } from "react";
 import type { ComponentSize, ComponentVariant } from "./base-component";
 
 // Generic business logic hook type
-export type BusinessLogicHook<T = unknown, P = unknown> = (props: P) => T;
+type BusinessLogicHook<T = unknown, P = unknown> = (props: P) => T;
 
 // State management utilities
-export interface StateManager<T> {
+interface StateManager<T> {
   state: T;
   setState: (newState: T | ((previousState: T) => T)) => void;
   updateState: (updates: Partial<T>) => void;
@@ -20,19 +20,16 @@ export interface StateManager<T> {
 }
 
 // Action definition
-export interface Action<T = unknown> {
+interface Action<T = unknown> {
   type: string;
   payload?: T;
 }
 
 // Reducer function type
-export type Reducer<S, A> = (state: S, action: A) => S;
+type Reducer<S, A> = (state: S, action: A) => S;
 
 // Event handler factory
-export type EventHandlerFactory<
-  T extends HTMLElement,
-  E extends Event = Event,
-> = (
+type EventHandlerFactory<T extends HTMLElement, E extends Event = Event> = (
   ...arguments_: Array<unknown>
 ) => (event: E & { currentTarget: T }) => void;
 
@@ -70,11 +67,7 @@ export function createBusinessLogicHook<
 /**
  * Create a reducer-based business logic hook
  */
-export function createReducerBusinessLogic<
-  TState,
-  TAction extends Action,
-  TProps,
->(
+function createReducerBusinessLogic<TState, TAction extends Action, TProps>(
   initialStateFactory: (props: TProps) => TState,
   reducer: Reducer<TState, TAction>,
   effectsFactory?: (
@@ -106,7 +99,7 @@ export function createReducerBusinessLogic<
 /**
  * Create event handlers with business logic separation
  */
-export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
+function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
   state: TState,
   setState: (newState: TState | ((previousState: TState) => TState)) => void,
   props: TProps,
@@ -148,7 +141,7 @@ export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
 /**
  * Form business logic utilities
  */
-export interface FormState<T = Record<string, unknown>> {
+interface FormState<T = Record<string, unknown>> {
   values: T;
   errors: Record<keyof T, string | null>;
   touched: Record<keyof T, boolean>;
@@ -157,7 +150,7 @@ export interface FormState<T = Record<string, unknown>> {
   isDirty: boolean;
 }
 
-export interface FormActions<T = Record<string, unknown>> {
+interface FormActions<T = Record<string, unknown>> {
   setValue: (name: keyof T, value: T[keyof T]) => void;
   setError: (name: keyof T, error: string | null) => void;
   setTouched: (name: keyof T, touched: boolean) => void;
@@ -167,7 +160,7 @@ export interface FormActions<T = Record<string, unknown>> {
   submitForm: () => void;
 }
 
-export function createFormBusinessLogic<T extends Record<string, unknown>>(
+function createFormBusinessLogic<T extends Record<string, unknown>>(
   initialValues: T,
   validationRules?: Record<keyof T, (value: unknown) => string | null>,
   onSubmit?: (values: T) => void | Promise<void>,
@@ -285,7 +278,7 @@ export function createFormBusinessLogic<T extends Record<string, unknown>>(
 /**
  * Table/List business logic utilities
  */
-export interface TableState<T = unknown> {
+interface TableState<T = unknown> {
   items: Array<T>;
   selectedItems: Array<T>;
   sortBy: string | null;
@@ -297,7 +290,7 @@ export interface TableState<T = unknown> {
   isLoading: boolean;
 }
 
-export interface TableActions<T = unknown> {
+interface TableActions<T = unknown> {
   setItems: (items: Array<T>) => void;
   selectItem: (item: T) => void;
   selectAll: () => void;
@@ -308,7 +301,7 @@ export interface TableActions<T = unknown> {
   setItemsPerPage: (count: number) => void;
 }
 
-export function createTableBusinessLogic<T extends Record<string, unknown>>(
+function createTableBusinessLogic<T extends Record<string, unknown>>(
   initialItems: Array<T> = [],
   itemsPerPage = 10,
 ): BusinessLogicHook<{ state: TableState<T>; actions: TableActions<T> }, {}> {
@@ -403,7 +396,7 @@ export function createTableBusinessLogic<T extends Record<string, unknown>>(
 /**
  * Modal/Dialog business logic utilities
  */
-export interface ModalState {
+interface ModalState {
   isOpen: boolean;
   title: string;
   content: React.ReactNode;
@@ -413,7 +406,7 @@ export interface ModalState {
   backdrop: boolean;
 }
 
-export interface ModalActions {
+interface ModalActions {
   open: (config?: Partial<ModalState>) => void;
   close: () => void;
   toggle: () => void;
@@ -423,7 +416,7 @@ export interface ModalActions {
   setVariant: (variant: ComponentVariant) => void;
 }
 
-export function createModalBusinessLogic(
+function createModalBusinessLogic(
   initialState: Partial<ModalState> = {},
 ): BusinessLogicHook<{ state: ModalState; actions: ModalActions }, {}> {
   return () => {
@@ -500,14 +493,14 @@ export function createModalBusinessLogic(
 /**
  * Generic async data fetching business logic
  */
-export interface AsyncDataState<T = unknown> {
+interface AsyncDataState<T = unknown> {
   data: T | null;
   loading: boolean;
   error: string | null;
   lastFetch: number | null;
 }
 
-export interface AsyncDataActions<T = any> {
+interface AsyncDataActions<T = any> {
   fetchData: () => Promise<void>;
   setData: (data: T) => void;
   setError: (error: string | null) => void;
@@ -516,7 +509,7 @@ export interface AsyncDataActions<T = any> {
   clearData: () => void;
 }
 
-export function createAsyncDataBusinessLogic<T>(
+function createAsyncDataBusinessLogic<T>(
   fetchFunction: () => Promise<T>,
   cacheTimeout: number = 5 * 60 * 1000, // 5 minutes
 ): BusinessLogicHook<

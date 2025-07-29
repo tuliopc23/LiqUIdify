@@ -69,7 +69,7 @@ function App() {
 }
 ```
 
-## Why LiqUIdify?
+## Why LiqUIdify
 
 LiqUIdify combines the elegance of glassmorphism design with the power of modern React development. Built with performance and accessibility in mind, it provides a comprehensive set of components that work seamlessly together.
 

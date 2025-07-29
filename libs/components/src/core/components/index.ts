@@ -7,28 +7,13 @@
 
 // Re-export components from other core modules
 
-export { SSRErrorBoundary as ErrorBoundary } from "../error-recovery";
-
-export { gracefulDegradation as GracefulDegradation } from "../graceful-degradation";
 // export { CompoundComponent } from '../compound-component';
 
 // Placeholder exports for components that may be implemented later
-export const GlassContainer = () => undefined;
+const GlassContainer = () => unknown;
 // Note: GlassCard, GlassButton, GlassInput, and GlassModal are now implemented
 // and exported from their respective component files
 
 // Base component utilities
-export {
-  createGlassPolymorphicComponent,
-  createPolymorphicComponent,
-} from "../create-polymorphic-component";
 
-// Types for component development
-export type {
-  ComponentSize,
-  ComponentState,
-  ComponentVariant,
-  GlassConfig,
-  GlassIntensity,
-  GlassVariant,
-} from "../types";
+// Types for component development;

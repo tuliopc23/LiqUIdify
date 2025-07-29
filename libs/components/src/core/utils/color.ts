@@ -6,23 +6,23 @@
  */
 
 // Color format types
-export type ColorFormat = "hex" | "rgb" | "rgba" | "hsl" | "hsla";
+type ColorFormat = "hex" | "rgb" | "rgba" | "hsl" | "hsla";
 
-export interface RGBColor {
+interface RGBColor {
   r: number;
   g: number;
   b: number;
   a?: number;
 }
 
-export interface HSLColor {
+interface HSLColor {
   h: number;
   s: number;
   l: number;
   a?: number;
 }
 
-export interface ColorInfo {
+interface ColorInfo {
   hex: string;
   rgb: RGBColor;
   hsl: HSLColor;
@@ -34,7 +34,7 @@ export interface ColorInfo {
 /**
  * Parse a color string into RGB values
  */
-export function parseColor(color: string): RGBColor | null {
+function parseColor(color: string): RGBColor | null {
   // Handle hex colors
   if (color.startsWith("#")) {
     const hex = color.slice(1);
@@ -85,7 +85,7 @@ export function parseColor(color: string): RGBColor | null {
 /**
  * Convert RGB to hex
  */
-export function rgbToHex(r: number, g: number, b: number): string {
+function rgbToHex(r: number, g: number, b: number): string {
   const toHex = (n: number) => {
     const hex = Math.round(Math.max(0, Math.min(255, n))).toString(16);
     return hex.length === 1 ? `0${hex}` : hex;
@@ -96,12 +96,7 @@ export function rgbToHex(r: number, g: number, b: number): string {
 /**
  * Convert RGB to HSL
  */
-export function rgbToHsl(
-  r: number,
-  g: number,
-  b: number,
-  a?: number,
-): HSLColor {
+function rgbToHsl(r: number, g: number, b: number, a?: number): HSLColor {
   r /= 255;
   g /= 255;
   b /= 255;
@@ -145,12 +140,7 @@ export function rgbToHsl(
 /**
  * Convert HSL to RGB
  */
-export function hslToRgb(
-  h: number,
-  s: number,
-  l: number,
-  a?: number,
-): RGBColor {
+function hslToRgb(h: number, s: number, l: number, a?: number): RGBColor {
   h /= 360;
 
   const hueToRgb = (p: number, q: number, t: number) => {
@@ -195,7 +185,7 @@ export function hslToRgb(
 /**
  * Calculate luminance of a color (for contrast ratio calculations)
  */
-export function getLuminance(color: string | RGBColor): number {
+function getLuminance(color: string | RGBColor): number {
   const rgb = typeof color === "string" ? parseColor(color) : color;
   if (!rgb) {
     return 0;
@@ -232,7 +222,7 @@ export function getContrastRatio(
 /**
  * Check if a color meets WCAG contrast requirements
  */
-export function meetsContrastRequirement(
+function meetsContrastRequirement(
   foreground: string | RGBColor,
   background: string | RGBColor,
   level: "AA" | "AAA" = "AA",
@@ -250,14 +240,14 @@ export function meetsContrastRequirement(
 /**
  * Determine if a color is light or dark
  */
-export function isLightColor(color: string | RGBColor): boolean {
+function isLightColor(color: string | RGBColor): boolean {
   return getLuminance(color) > 0.5;
 }
 
 /**
  * Get complementary color
  */
-export function getComplementaryColor(color: string): string {
+function getComplementaryColor(color: string): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -273,7 +263,7 @@ export function getComplementaryColor(color: string): string {
 /**
  * Lighten a color by a percentage
  */
-export function lighten(color: string, amount: number): string {
+function lighten(color: string, amount: number): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -289,7 +279,7 @@ export function lighten(color: string, amount: number): string {
 /**
  * Darken a color by a percentage
  */
-export function darken(color: string, amount: number): string {
+function darken(color: string, amount: number): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -305,7 +295,7 @@ export function darken(color: string, amount: number): string {
 /**
  * Adjust color opacity
  */
-export function setOpacity(color: string, opacity: number): string {
+function setOpacity(color: string, opacity: number): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -318,7 +308,7 @@ export function setOpacity(color: string, opacity: number): string {
 /**
  * Generate a color palette from a base color
  */
-export function generatePalette(baseColor: string, steps = 9): Array<string> {
+function generatePalette(baseColor: string, steps = 9): Array<string> {
   const palette: Array<string> = [];
   const stepSize = 100 / (steps - 1);
 
@@ -340,7 +330,7 @@ export function generatePalette(baseColor: string, steps = 9): Array<string> {
 /**
  * Glass effect color utilities
  */
-export const glassColors = {
+const glassColors = {
   /**
    * Generate backdrop color for glass effect
    */
@@ -416,7 +406,7 @@ export const glassColors = {
 /**
  * Get comprehensive color information
  */
-export function getColorInfo(color: string): ColorInfo | null {
+function getColorInfo(color: string): ColorInfo | null {
   const rgb = parseColor(color);
   if (!rgb) {
     return null;
@@ -440,7 +430,7 @@ export function getColorInfo(color: string): ColorInfo | null {
 /**
  * Validate color format
  */
-export function isValidColor(color: string): boolean {
+function isValidColor(color: string): boolean {
   const rgb = parseColor(color);
   return rgb !== null;
 }
@@ -448,7 +438,7 @@ export function isValidColor(color: string): boolean {
 /**
  * Format color to specific format
  */
-export function formatColor(color: string, format: ColorFormat): string {
+function formatColor(color: string, format: ColorFormat): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -481,7 +471,7 @@ export function formatColor(color: string, format: ColorFormat): string {
 /**
  * Mix two colors
  */
-export function mixColors(color1: string, color2: string, ratio = 0.5): string {
+function mixColors(color1: string, color2: string, ratio = 0.5): string {
   const rgb1 = parseColor(color1);
   const rgb2 = parseColor(color2);
 
@@ -581,7 +571,7 @@ export function checkGlassContrast(
  * @param glassOpacity - Opacity of the glass effect
  * @returns Whether the color is safe for glass effects
  */
-export function isGlassSafe(foreground: string, glassOpacity = 0.25): boolean {
+function isGlassSafe(foreground: string, glassOpacity = 0.25): boolean {
   // Test against common backgrounds
   const testBackgrounds = ["#ffffff", "#000000", "#f0f0f0", "#1a1a1a"];
 

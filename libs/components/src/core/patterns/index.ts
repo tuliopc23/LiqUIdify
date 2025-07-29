@@ -7,14 +7,7 @@
 
 import React from "react";
 
-export { CompoundComponent } from "../compound-component";
 // Re-export from other pattern modules
-export {
-  createGlassPolymorphicComponent,
-  createPolymorphicComponent,
-  createPolymorphicSlots,
-} from "../create-polymorphic-component";
-
 // Business logic patterns
 export const createBusinessLogicHook = <T extends Record<string, unknown>>(
   initialStateFactory: (props: Record<string, unknown>) => T,
@@ -61,11 +54,11 @@ export const createCompoundComponentWithContext = <
 };
 
 // Render prop pattern
-export interface RenderPropertyPattern<T> {
+interface RenderPropertyPattern<T> {
   children: (props: T) => React.ReactNode;
 }
 
-export const createRenderPropComponent = <T extends Record<string, unknown>>(
+const createRenderPropComponent = <T extends Record<string, unknown>>(
   _useLogic: () => T,
 ) => {
   // Type-only export for patterns
@@ -73,7 +66,7 @@ export const createRenderPropComponent = <T extends Record<string, unknown>>(
 };
 
 // Higher-order component pattern
-export const withGlassEffect = <P extends Record<string, unknown>>(
+const withGlassEffect = <P extends Record<string, unknown>>(
   WrappedComponent: React.ComponentType<P>,
   _glassConfig?: {
     variant?: "light" | "dark" | "neutral";
@@ -86,12 +79,12 @@ export const withGlassEffect = <P extends Record<string, unknown>>(
 };
 
 // Slot-based composition pattern
-export interface SlotProps {
+interface SlotProps {
   slot?: string;
   children?: React.ReactNode;
 }
 
-export const createSlotComponent = (
+const createSlotComponent = (
   _slots: Record<string, React.ComponentType<unknown>>,
 ) => {
   // Type-only export for patterns
@@ -99,12 +92,12 @@ export const createSlotComponent = (
 };
 
 // State reducer pattern
-export interface StateAction<T = unknown> {
+interface StateAction<T = unknown> {
   type: string;
   payload?: T;
 }
 
-export const createStateReducer = <T extends Record<string, unknown>>(
+const createStateReducer = <T extends Record<string, unknown>>(
   initialState: T,
   actionCreators: Record<string, (state: T, payload?: unknown) => T>,
 ) => {
@@ -134,7 +127,7 @@ export const createStateReducer = <T extends Record<string, unknown>>(
 };
 
 // Observer pattern for component communication
-export class ComponentEventBus {
+class ComponentEventBus {
   private listeners: Map<string, Set<Function>> = new Map();
 
   on(event: string, callback: Function) {
@@ -172,7 +165,7 @@ export class ComponentEventBus {
 }
 
 // Factory pattern for creating themed components
-export const createThemedComponentFactory = <T extends Record<string, unknown>>(
+const createThemedComponentFactory = <T extends Record<string, unknown>>(
   baseComponent: React.ComponentType<T>,
   themeConfig: Record<string, Partial<T>>,
 ) => {
@@ -191,7 +184,7 @@ export const createThemedComponentFactory = <T extends Record<string, unknown>>(
 // Type exports are handled by interface declarations above
 
 // Pattern utilities
-export const patternUtils = {
+const patternUtils = {
   createBusinessLogicHook,
   createCompoundComponentWithContext,
   createRenderPropComponent,

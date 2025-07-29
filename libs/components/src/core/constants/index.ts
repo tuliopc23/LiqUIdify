@@ -6,14 +6,14 @@
  */
 
 // Glass effect constants
-export const GLASS_INTENSITY_VALUES = {
+const GLASS_INTENSITY_VALUES = {
   weak: 0.3,
   medium: 0.6,
   strong: 0.8,
   extreme: 1,
 } as const;
 
-export const GLASS_BLUR_VALUES = {
+const GLASS_BLUR_VALUES = {
   weak: 4,
   medium: 8,
   strong: 12,
@@ -21,14 +21,14 @@ export const GLASS_BLUR_VALUES = {
 } as const;
 
 // Animation constants
-export const ANIMATION_DURATIONS = {
+const ANIMATION_DURATIONS = {
   fast: 150,
   medium: 300,
   slow: 500,
   slower: 750,
 } as const;
 
-export const SPRING_CONFIGS = {
+const SPRING_CONFIGS = {
   subtle: { tension: 300, friction: 30 },
   smooth: { tension: 280, friction: 25 },
   bouncy: { tension: 400, friction: 20 },
@@ -36,7 +36,7 @@ export const SPRING_CONFIGS = {
 } as const;
 
 // Component size constants
-export const SIZE_VALUES = {
+const SIZE_VALUES = {
   xs: "0.5rem",
   sm: "0.75rem",
   md: "1rem",
@@ -44,7 +44,7 @@ export const SIZE_VALUES = {
   xl: "1.5rem",
 } as const;
 
-export const PADDING_VALUES = {
+const PADDING_VALUES = {
   xs: "0.25rem 0.5rem",
   sm: "0.5rem 0.75rem",
   md: "0.75rem 1rem",
@@ -53,7 +53,7 @@ export const PADDING_VALUES = {
 } as const;
 
 // Border radius constants
-export const BORDER_RADIUS_VALUES = {
+const BORDER_RADIUS_VALUES = {
   none: "0",
   sm: "0.125rem",
   md: "0.25rem",
@@ -63,7 +63,7 @@ export const BORDER_RADIUS_VALUES = {
 } as const;
 
 // Z-index constants
-export const Z_INDEX = {
+const Z_INDEX = {
   hide: -1,
   auto: "auto",
   base: 0,
@@ -90,7 +90,7 @@ export const BREAKPOINTS = {
 } as const;
 
 // Color constants
-export const GLASS_COLORS = {
+const GLASS_COLORS = {
   light: {
     backdrop: "rgba(255, 255, 255, 0.7)",
     overlay: "rgba(255, 255, 255, 0.1)",
@@ -112,7 +112,7 @@ export const GLASS_COLORS = {
 } as const;
 
 // Performance constants
-export const PERFORMANCE_BUDGETS = {
+const PERFORMANCE_BUDGETS = {
   maxBundleSize: 30 * 1024, // 30KB
   maxComponentSize: 5 * 1024, // 5KB
   maxRenderTime: 16, // 16ms (60fps)
@@ -120,7 +120,7 @@ export const PERFORMANCE_BUDGETS = {
 } as const;
 
 // Accessibility constants
-export const A11Y_CONSTANTS = {
+const A11Y_CONSTANTS = {
   minContrastRatio: 4.5,
   minTouchTarget: 44, // pixels
   maxLineHeight: 1.5,
@@ -129,7 +129,7 @@ export const A11Y_CONSTANTS = {
 } as const;
 
 // Error tracking constants
-export const ERROR_TYPES = {
+const ERROR_TYPES = {
   RENDER_ERROR: "render_error",
   ASYNC_ERROR: "async_error",
   NETWORK_ERROR: "network_error",
@@ -138,7 +138,7 @@ export const ERROR_TYPES = {
 } as const;
 
 // Development constants
-export const DEV_CONSTANTS = {
+const DEV_CONSTANTS = {
   debugMode: process.env.NODE_ENV === "development",
   verbose: process.env.VERBOSE === "true",
   enablePerformanceMonitoring: process.env.PERF_MONITORING === "true",
@@ -146,7 +146,7 @@ export const DEV_CONSTANTS = {
 } as const;
 
 // CSS class prefixes
-export const CLASS_PREFIXES = {
+const CLASS_PREFIXES = {
   glass: "glass-",
   component: "liquid-",
   utility: "util-",
@@ -155,7 +155,7 @@ export const CLASS_PREFIXES = {
 } as const;
 
 // Animation easing functions
-export const EASING_FUNCTIONS = {
+const EASING_FUNCTIONS = {
   linear: "linear",
   easeIn: "cubic-bezier(0.4, 0, 1, 1)",
   easeOut: "cubic-bezier(0, 0, 0.2, 1)",
@@ -165,12 +165,12 @@ export const EASING_FUNCTIONS = {
 } as const;
 
 // Export type-only versions for better TypeScript support
-export type GlassIntensityKey = keyof typeof GLASS_INTENSITY_VALUES;
-export type AnimationDurationKey = keyof typeof ANIMATION_DURATIONS;
-export type ComponentSizeKey = keyof typeof SIZE_VALUES;
-export type BorderRadiusKey = keyof typeof BORDER_RADIUS_VALUES;
+type GlassIntensityKey = keyof typeof GLASS_INTENSITY_VALUES;
+type AnimationDurationKey = keyof typeof ANIMATION_DURATIONS;
+type ComponentSizeKey = keyof typeof SIZE_VALUES;
+type BorderRadiusKey = keyof typeof BORDER_RADIUS_VALUES;
 export type BreakpointKey = keyof typeof BREAKPOINTS;
-export type GlassColorKey = keyof typeof GLASS_COLORS;
-export type ErrorTypeKey = keyof typeof ERROR_TYPES;
-export type ClassPrefixKey = keyof typeof CLASS_PREFIXES;
-export type EasingFunctionKey = keyof typeof EASING_FUNCTIONS;
+type GlassColorKey = keyof typeof GLASS_COLORS;
+type ErrorTypeKey = keyof typeof ERROR_TYPES;
+type ClassPrefixKey = keyof typeof CLASS_PREFIXES;
+type EasingFunctionKey = keyof typeof EASING_FUNCTIONS;

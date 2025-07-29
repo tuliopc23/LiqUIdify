@@ -1,25 +1,32 @@
-import type { StoryObj } from '@storybook/react';
-import { Bell, Menu, Search, Settings, User, X } from 'lucide-react';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { Drawer } from './glass-drawer';
+import type { Meta, StoryObj } from '@storybook/react'
+import React from 'react'
+import { Bell, Menu, Search, Settings, User, X } from 'lucide-react'
+import { GlassButton } from '../glass-button-refactored/glass-button'
+import { Drawer } from './glass-drawer'
 
-const meta = { title: 'Components/GlassDrawer' }
+const meta = {
+  title: 'Components/GlassDrawer',
   component: Drawer,
-  parameters: { layout: 'centered' }
-    { 
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
         component:
-          'A drawer component with glassmorphic styling that slides in from different sides of the screen.' 
+          'A drawer component with glassmorphic styling that slides in from different sides of the screen.',
       },
     },
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Drawer>;
+} satisfies Meta<typeof Drawer>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-{/* Default drawer  */}
-export const Default: Story = { render: () => (
+{
+  /* Default drawer  */
+}
+export const Default: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Open Drawer</GlassButton>
@@ -50,11 +57,14 @@ export const Default: Story = { render: () => (
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>
-  ) }
-};
+  ),
+}
 
-{/* Different sides  */}
-export const LeftSide: Story = { render: () => (
+{
+  /* Different sides  */
+}
+export const LeftSide: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Open Left Drawer</GlassButton>
@@ -105,10 +115,11 @@ export const LeftSide: Story = { render: () => (
         </Drawer.Body>
       </Drawer.Content>
     </Drawer>
-  ) }
-};
+  ),
+}
 
-export const TopSide: Story = { render: () => (
+export const TopSide: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Open Top Drawer</GlassButton>
@@ -117,18 +128,21 @@ export const TopSide: Story = { render: () => (
         <Drawer.Body>
           <div className="flex items-center gap-4">
             <Search className="h-5 w-5 text-white/60" />
-            <input id="input-127" 
+            <input
+              id="input-127"
               type="text"
               placeholder="Search..."
-              className="flex-1 border-white/20 border-b bg-transparent pb-2 outline-none placeholder:text-white/40" />
+              className="flex-1 border-white/20 border-b bg-transparent pb-2 outline-none placeholder:text-white/40"
+            />
           </div>
         </Drawer.Body>
       </Drawer.Content>
     </Drawer>
-  ) }
-};
+  ),
+}
 
-export const BottomSide: Story = { render: () => (
+export const BottomSide: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Open Bottom Drawer</GlassButton>
@@ -141,15 +155,20 @@ export const BottomSide: Story = { render: () => (
           <p>We use cookies to enhance your browsing experience.</p>
           <div className="mt-4 space-y-2">
             <label htmlFor="form-field" className="flex items-center gap-2">
-              <input id="input-152" type="checkbox" defaultChecked className="rounded" / />
+              <input
+                id="input-152"
+                type="checkbox"
+                defaultChecked
+                className="rounded"
+              />
               <span>Necessary cookies</span>
             </label>
             <label htmlFor="form-field" className="flex items-center gap-2">
-              <input id="input-156" type="checkbox" className="rounded" / />
+              <input id="input-156" type="checkbox" className="rounded" />
               <span>Analytics cookies</span>
             </label>
             <label htmlFor="form-field" className="flex items-center gap-2">
-              <input id="input-160" type="checkbox" className="rounded" / />
+              <input id="input-160" type="checkbox" className="rounded" />
               <span>Marketing cookies</span>
             </label>
           </div>
@@ -164,11 +183,14 @@ export const BottomSide: Story = { render: () => (
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>
-  ) }
-};
+  ),
+}
 
-{/* Different sizes  */}
-export const SmallSize: Story = { render: () => (
+{
+  /* Different sizes  */
+}
+export const SmallSize: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Small Drawer</GlassButton>
@@ -190,10 +212,11 @@ export const SmallSize: Story = { render: () => (
         </Drawer.Body>
       </Drawer.Content>
     </Drawer>
-  ) }
-};
+  ),
+}
 
-export const LargeSize: Story = { render: () => (
+export const LargeSize: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Large Drawer</GlassButton>
@@ -212,7 +235,7 @@ export const LargeSize: Story = { render: () => (
         </Drawer.Header>
         <Drawer.Body>
           <p>This is a large-sized drawer with more content space.</p>
-          <div className="mt-6 space-y-4"> }
+          <div className="mt-6 space-y-4">
             {Array.from({ length: 5 }, (_, i) => (
               <div key={i} className="rounded-lg bg-white/5 p-4">
                 <h4 className="mb-2 font-medium">Section {i + 1}</h4>
@@ -226,9 +249,10 @@ export const LargeSize: Story = { render: () => (
       </Drawer.Content>
     </Drawer>
   ),
-};
+}
 
-export const FullSize: Story = { render: () => (
+export const FullSize: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Full Width Drawer</GlassButton>
@@ -250,11 +274,14 @@ export const FullSize: Story = { render: () => (
         </Drawer.Body>
       </Drawer.Content>
     </Drawer>
-  ) }
-};
+  ),
+}
 
-{/* With form  */}
-export const WithForm: Story = { render: () => (
+{
+  /* With form  */
+}
+export const WithForm: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Edit Profile</GlassButton>
@@ -274,27 +301,46 @@ export const WithForm: Story = { render: () => (
         <Drawer.Body>
           <form className="space-y-4">
             <div>
-              <label htmlFor="name-p8c480" className="mb-2 block font-medium text-sm">Name</label>
-              <input id="input-290" 
+              <label
+                htmlFor="name-p8c480"
+                className="mb-2 block font-medium text-sm"
+              >
+                Name
+              </label>
+              <input
+                id="input-290"
                 type="text"
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
                 placeholder="John Doe"
-              / />
+              />
             </div>
             <div>
-              <label htmlFor="email-yecb5w" className="mb-2 block font-medium text-sm">Email</label>
-              <input id="input-298" 
+              <label
+                htmlFor="email-yecb5w"
+                className="mb-2 block font-medium text-sm"
+              >
+                Email
+              </label>
+              <input
+                id="input-298"
                 type="email"
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
                 placeholder="john@example.com"
-              / />
+              />
             </div>
             <div>
-              <label htmlFor="bio-hvgtxu" className="mb-2 block font-medium text-sm">Bio</label>
-              <textarea id="textarea-1-tg7lb0" 
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40" }
+              <label
+                htmlFor="bio-hvgtxu"
+                className="mb-2 block font-medium text-sm"
+              >
+                Bio
+              </label>
+              <textarea
+                id="textarea-1-tg7lb0"
+                className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 outline-none focus:border-white/40"
                 rows={4}
-                placeholder="Tell us about yourself..." />
+                placeholder="Tell us about yourself..."
+              />
             </div>
           </form>
         </Drawer.Body>
@@ -309,11 +355,14 @@ export const WithForm: Story = { render: () => (
       </Drawer.Content>
     </Drawer>
   ),
-};
+}
 
-{/* Without close button  */}
-export const WithoutCloseButton: Story = { render: () => { }
-    const [open, setOpen] = React.useState(false);
+{
+  /* Without close button  */
+}
+export const WithoutCloseButton: Story = {
+  render: () => {
+    const [open, setOpen] = React.useState(false)
 
     return (
       <Drawer open={open} onOpenChange={setOpen}>
@@ -337,12 +386,15 @@ export const WithoutCloseButton: Story = { render: () => { }
           </Drawer.Footer>
         </Drawer.Content>
       </Drawer>
-    );
+    )
   },
-};
+}
 
-{/* With scrollable content  */}
-export const ScrollableContent: Story = { render: () => (
+{
+  /* With scrollable content  */
+}
+export const ScrollableContent: Story = {
+  render: () => (
     <Drawer>
       <Drawer.Trigger asChild>
         <GlassButton type="button">Open Scrollable Drawer</GlassButton>
@@ -359,7 +411,7 @@ export const ScrollableContent: Story = { render: () => (
             </button>
           </Drawer.Close>
         </Drawer.Header>
-        <Drawer.Body> }
+        <Drawer.Body>
           {Array.from({ length: 20 }, (_, i) => (
             <div key={i} className="mb-4">
               <h3 className="mb-2 font-medium">{i + 1}. Section Title</h3>
@@ -382,4 +434,4 @@ export const ScrollableContent: Story = { render: () => (
       </Drawer.Content>
     </Drawer>
   ),
-};
+}

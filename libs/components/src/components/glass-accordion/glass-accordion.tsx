@@ -71,7 +71,7 @@ const accordionContentVariants = cva({
 });
 
 // Single accordion props
-export interface GlassAccordionSingleProps
+interface GlassAccordionSingleProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>,
       "type"
@@ -86,7 +86,7 @@ export interface GlassAccordionSingleProps
 }
 
 // Multiple accordion props
-export interface GlassAccordionMultipleProps
+interface GlassAccordionMultipleProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>,
       "type"

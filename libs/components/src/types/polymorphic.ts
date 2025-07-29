@@ -34,10 +34,7 @@ type PropsToOmit<T extends ElementType, P> = keyof (P &
  *   size?: 'sm' | 'md' | 'lg';
  * }>;
  */
-export type PolymorphicComponentProps<
-  T extends ElementType,
-  Props = {},
-> = Props &
+type PolymorphicComponentProps<T extends ElementType, Props = {}> = Props &
   Omit<ComponentPropsWithoutRef<T>, PropsToOmit<T, Props>> & {
     as?: T;
   };
@@ -74,7 +71,7 @@ export type PolymorphicComponent<Props, DefaultElement extends ElementType> = <
 /**
  * Helper type for extracting valid HTML attributes
  */
-export type ValidHTMLAttributes<T extends ElementType> =
+type ValidHTMLAttributes<T extends ElementType> =
   T extends keyof JSX.IntrinsicElements
     ? Omit<JSX.IntrinsicElements[T], "ref" | "key">
     : {};
@@ -87,7 +84,7 @@ export type ValidHTMLAttributes<T extends ElementType> =
  *   displayName: 'GlassButton',
  * });
  */
-export type CreatePolymorphicComponent = <
+type CreatePolymorphicComponent = <
   Props extends Record<string, unknown>,
   DefaultElement extends ElementType = "div",
 >(config: {
@@ -104,7 +101,7 @@ export type CreatePolymorphicComponent = <
  *   Body: PolymorphicSlot<{ padded?: boolean }, 'div'>;
  * };
  */
-export type PolymorphicSlot<
+type PolymorphicSlot<
   Props = {},
   DefaultElement extends ElementType = "div",
 > = PolymorphicComponent<Props, DefaultElement>;
@@ -112,7 +109,7 @@ export type PolymorphicSlot<
 /**
  * Constraint for components that must be interactive
  */
-export type InteractiveElement =
+type InteractiveElement =
   | "button"
   | "a"
   | "input"
@@ -124,7 +121,7 @@ export type InteractiveElement =
 /**
  * Props for interactive polymorphic components
  */
-export type InteractivePolymorphicProps<
+type InteractivePolymorphicProps<
   T extends ElementType,
   Props = {},
 > = T extends InteractiveElement ? PolymorphicComponentProps<T, Props> : never;
@@ -132,7 +129,7 @@ export type InteractivePolymorphicProps<
 /**
  * Type for components that must be semantic HTML
  */
-export type SemanticElement =
+type SemanticElement =
   | "article"
   | "aside"
   | "footer"
@@ -144,7 +141,7 @@ export type SemanticElement =
 /**
  * Props for semantic polymorphic components
  */
-export type SemanticPolymorphicProps<
+type SemanticPolymorphicProps<
   T extends ElementType,
   Props = {},
 > = T extends SemanticElement
@@ -154,19 +151,19 @@ export type SemanticPolymorphicProps<
 /**
  * Extract the element type from a polymorphic component
  */
-export type ExtractPolymorphicElement<T> =
+type ExtractPolymorphicElement<T> =
   T extends PolymorphicComponent<unknown, infer E> ? E : never;
 
 /**
  * Extract the props type from a polymorphic component
  */
-export type ExtractPolymorphicProps<T> =
+type ExtractPolymorphicProps<T> =
   T extends PolymorphicComponent<infer P, unknown> ? P : never;
 
 /**
  * Type-safe event handler props for polymorphic components
  */
-export type PolymorphicEventHandlers<T extends ElementType> = {
+type PolymorphicEventHandlers<T extends ElementType> = {
   [K in keyof ComponentPropsWithoutRef<T> as K extends `on${string}`
     ? K
     : never]?: ComponentPropsWithoutRef<T>[K];
@@ -175,7 +172,7 @@ export type PolymorphicEventHandlers<T extends ElementType> = {
 /**
  * Type-safe ARIA props for polymorphic components
  */
-export type PolymorphicAriaProps<T extends ElementType> = {
+type PolymorphicAriaProps<T extends ElementType> = {
   [K in keyof ComponentPropsWithoutRef<T> as K extends `aria-${string}`
     ? K
     : never]?: ComponentPropsWithoutRef<T>[K];
@@ -184,14 +181,14 @@ export type PolymorphicAriaProps<T extends ElementType> = {
 /**
  * Type-safe data attributes for polymorphic components
  */
-export interface PolymorphicDataProps {
+interface PolymorphicDataProps {
   [key: `data-${string}`]: string | number | boolean | undefined;
 }
 
 /**
  * Complete polymorphic props with all attributes
  */
-export type CompletePolymorphicProps<
+type CompletePolymorphicProps<
   T extends ElementType,
   Props = {},
 > = PolymorphicComponentPropsWithRef<T, Props> &
@@ -220,9 +217,7 @@ export function isInteractiveElement(
 /**
  * Type guard to check if element is semantic
  */
-export function isSemanticElement(
-  element: ElementType,
-): element is SemanticElement {
+function isSemanticElement(element: ElementType): element is SemanticElement {
   const semanticElements: Array<SemanticElement> = [
     "article",
     "aside",

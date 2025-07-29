@@ -15,7 +15,7 @@ export interface HydrationMismatch {
   timestamp: number;
 }
 
-export interface HydrationContext {
+interface HydrationContext {
   isHydrating: boolean;
   hasMismatch: boolean;
   mismatches: Array<HydrationMismatch>;
@@ -29,7 +29,7 @@ export interface HydrationContext {
   ) => void;
 }
 
-export interface HydrationOptions {
+interface HydrationOptions {
   maxRetries?: number;
   retryDelay?: number;
   onMismatch?: (mismatch: HydrationMismatch) => void;
@@ -203,7 +203,7 @@ export function useHydrationSafety(
 /**
  * Hook for SSR-safe state initialization with hydration support
  */
-export function useHydrationState<T>(
+function useHydrationState<T>(
   _key: string,
   serverValue: T,
   clientValue?: T,
@@ -307,7 +307,7 @@ export function withHydrationSafety<P extends object>(
 /**
  * Utility for creating SSR-safe component props
  */
-export function createSSRProps<T extends Record<string, unknown>>(
+function createSSRProps<T extends Record<string, unknown>>(
   serverProps: T,
   clientProps?: Partial<T>,
 ): T {
@@ -324,7 +324,7 @@ export function createSSRProps<T extends Record<string, unknown>>(
 /**
  * Hook for detecting hydration completion
  */
-export function useHydrationComplete() {
+function useHydrationComplete() {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
@@ -337,7 +337,7 @@ export function useHydrationComplete() {
 /**
  * Utility for safe client-side only execution
  */
-export function useClientOnly<T>(
+function useClientOnly<T>(
   factory: () => T,
   deps: Array<unknown> = [],
 ): T | null {
@@ -357,7 +357,7 @@ export function useClientOnly<T>(
 /**
  * Error boundary for hydration errors
  */
-export class HydrationErrorBoundary extends React.Component<
+class HydrationErrorBoundary extends React.Component<
   {
     children: React.ReactNode;
     fallback?: React.ReactNode;

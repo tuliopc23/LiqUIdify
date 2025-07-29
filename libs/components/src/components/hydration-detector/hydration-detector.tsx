@@ -11,7 +11,7 @@ import {
 } from "../../utils/hydration-utils";
 import { isBrowser } from "../../utils/ssr-utils";
 
-export interface HydrationDetectorProps {
+interface HydrationDetectorProps {
   children: ReactNode;
   fallback?: ReactNode;
   onMismatch?: (mismatch: HydrationMismatch) => void;

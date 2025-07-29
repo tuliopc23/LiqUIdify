@@ -6,27 +6,22 @@
  */
 
 // Base component types
-export type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
-export type ComponentVariant =
+type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
+type ComponentVariant =
   | "primary"
   | "secondary"
   | "tertiary"
   | "ghost"
   | "outline";
-export type GlassIntensity = "subtle" | "medium" | "strong";
-export type GlassVariant = "light" | "dark" | "neutral" | "colored";
+type GlassIntensity = "subtle" | "medium" | "strong";
+type GlassVariant = "light" | "dark" | "neutral" | "colored";
 
 // Animation types
-export type AnimationPreset =
-  | "none"
-  | "subtle"
-  | "smooth"
-  | "bouncy"
-  | "springy";
-export type TransitionDuration = "fast" | "medium" | "slow" | "slower";
+type AnimationPreset = "none" | "subtle" | "smooth" | "bouncy" | "springy";
+type TransitionDuration = "fast" | "medium" | "slow" | "slower";
 
 // Accessibility types
-export interface A11yProps {
+interface A11yProps {
   "aria-label"?: string;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
@@ -37,7 +32,7 @@ export interface A11yProps {
 }
 
 // Glass effect configuration
-export interface GlassConfig {
+interface GlassConfig {
   variant?: GlassVariant;
   intensity?: GlassIntensity;
   blur?: boolean;
@@ -46,7 +41,7 @@ export interface GlassConfig {
 }
 
 // Glass effect configuration (extended)
-export interface GlassEffectConfig {
+interface GlassEffectConfig {
   /** Glass effect intensity level */
   intensity?: GlassIntensity;
   /** Enable blur effect */
@@ -67,7 +62,7 @@ export interface GlassEffectConfig {
 }
 
 // Component state types
-export interface ComponentState {
+interface ComponentState {
   isLoading?: boolean;
   isDisabled?: boolean;
   isActive?: boolean;
@@ -76,7 +71,7 @@ export interface ComponentState {
 }
 
 // Theme types
-export interface ThemeConfig {
+interface ThemeConfig {
   colorScheme?: "light" | "dark" | "auto";
   primaryColor?: string;
   accentColor?: string;
@@ -84,37 +79,28 @@ export interface ThemeConfig {
 }
 
 // Event handler types
-export type ClickHandler = (event: React.MouseEvent) => void;
-export type ChangeHandler<T = unknown> = (value: T) => void;
-export type FocusHandler = (event: React.FocusEvent) => void;
+type ClickHandler = (event: React.MouseEvent) => void;
+type ChangeHandler<T = unknown> = (value: T) => void;
+type FocusHandler = (event: React.FocusEvent) => void;
 
 // Utility types
-export type OmitProps<T, K extends keyof T> = Omit<T, K>;
-export type PropsWithChildren<T = {}> = T & { children?: React.ReactNode };
-export type ElementProps<T extends keyof JSX.IntrinsicElements> =
+type OmitProps<T, K extends keyof T> = Omit<T, K>;
+type PropsWithChildren<T = {}> = T & { children?: React.ReactNode };
+type ElementProps<T extends keyof JSX.IntrinsicElements> =
   JSX.IntrinsicElements[T];
 
 // Error types
-export interface ErrorInfo {
+interface ErrorInfo {
   message: string;
   stack?: string;
   componentStack?: string;
 }
 
 // Performance types
-export interface PerformanceMetrics {
+interface PerformanceMetrics {
   renderTime: number;
   bundleSize?: number;
   memoryUsage?: number;
 }
 
-// Re-export commonly used React types
-export type {
-  ComponentPropsWithoutRef,
-  ComponentPropsWithRef,
-  CSSProperties,
-  ElementType,
-  ForwardedRef,
-  ReactElement,
-  ReactNode,
-} from "react";
+// Re-export commonly used React types;

@@ -16,7 +16,7 @@ import type {
 } from "./base-component";
 
 // Context for compound components
-export interface CompoundComponentContext {
+interface CompoundComponentContext {
   size?: string;
   variant?: string;
   disabled?: boolean;
@@ -25,7 +25,7 @@ export interface CompoundComponentContext {
 }
 
 // Create compound component context
-export function createCompoundContext<T extends CompoundComponentContext>(
+function createCompoundContext<T extends CompoundComponentContext>(
   displayName: string,
   defaultValue?: T,
 ) {
@@ -49,7 +49,7 @@ export function createCompoundContext<T extends CompoundComponentContext>(
 }
 
 // Compound component factory options
-export interface CompoundComponentOptions<T extends HTMLElement> {
+interface CompoundComponentOptions<T extends HTMLElement> {
   /** Component display name */
   displayName: string;
   /** Default HTML element */
@@ -67,7 +67,7 @@ export interface CompoundComponentOptions<T extends HTMLElement> {
 /**
  * Create a compound component with consistent patterns
  */
-export function createCompoundComponent<
+function createCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
   P extends Record<string, unknown> = {},
 >(options: CompoundComponentOptions<T>) {
@@ -137,7 +137,7 @@ export function createCompoundComponent<
 /**
  * Create a compound component with context
  */
-export function createCompoundComponentWithContext<
+function createCompoundComponentWithContext<
   T extends HTMLElement = HTMLDivElement,
   P extends Record<string, unknown> = {},
   C extends CompoundComponentContext = CompoundComponentContext,
@@ -166,7 +166,7 @@ export function createCompoundComponentWithContext<
 /**
  * Higher-order component for adding glass effects to compound components
  */
-export function withGlassEffects<
+function withGlassEffects<
   T extends HTMLElement,
   P extends Record<string, unknown>,
 >(Component: React.ComponentType<P>, defaultGlassConfig?: UnifiedGlassProps) {
@@ -194,7 +194,7 @@ export function withGlassEffects<
 /**
  * Utility for creating polymorphic compound components
  */
-export function createPolymorphicCompoundComponent<
+function createPolymorphicCompoundComponent<
   T extends React.ElementType = "div",
   P extends Record<string, unknown> = {},
 >(
@@ -239,9 +239,10 @@ export function createPolymorphicCompoundComponent<
 /**
  * Utility for creating compound component collections
  */
-export function createCompoundComponentCollection<
-  T extends Record<string, unknown>,
->(components: T, rootComponent: React.ComponentType<any>) {
+function createCompoundComponentCollection<T extends Record<string, unknown>>(
+  components: T,
+  rootComponent: React.ComponentType<any>,
+) {
   // Attach sub-components to root component
   for (const [key, component] of Object.entries(components)) {
     (rootComponent as unknown)[key] = component;
@@ -253,7 +254,7 @@ export function createCompoundComponentCollection<
 /**
  * Hook for managing compound component state
  */
-export function useCompoundComponentState<T extends Record<string, unknown>>(
+function useCompoundComponentState<T extends Record<string, unknown>>(
   initialState: T,
   context?: React.Context<T | undefined>,
 ) {
@@ -284,7 +285,7 @@ export function useCompoundComponentState<T extends Record<string, unknown>>(
 /**
  * Utility for creating accessible compound components
  */
-export function createAccessibleCompoundComponent<
+function createAccessibleCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
   P extends Record<string, unknown> = {},
 >(
@@ -312,7 +313,7 @@ export function createAccessibleCompoundComponent<
 /**
  * Utility for creating responsive compound components
  */
-export function createResponsiveCompoundComponent<
+function createResponsiveCompoundComponent<
   T extends HTMLElement = HTMLDivElement,
   P extends Record<string, unknown> = {},
 >(
@@ -337,4 +338,4 @@ export function createResponsiveCompoundComponent<
 }
 
 // Export main compound component for compatibility
-export const CompoundComponent = createCompoundComponent;
+const CompoundComponent = createCompoundComponent;

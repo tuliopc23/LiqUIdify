@@ -84,7 +84,7 @@ export const microInteraction = Object.assign(createMicroInteraction, {
 /**
  * Get current breakpoint based on window width
  */
-export function getCurrentBreakpoint(): BreakpointKey {
+function getCurrentBreakpoint(): BreakpointKey {
   if (typeof window === "undefined") {
     return "md"; // Default for SSR
   }
@@ -122,7 +122,7 @@ export function getCurrentBreakpoint(): BreakpointKey {
 /**
  * Check if screen size matches a breakpoint condition
  */
-export function matchesBreakpoint(
+function matchesBreakpoint(
   condition: "up" | "down" | "only",
   breakpoint: BreakpointKey,
 ): boolean {
@@ -163,7 +163,7 @@ export function matchesBreakpoint(
 /**
  * Create responsive utility classes
  */
-export function createResponsiveClasses(
+function createResponsiveClasses(
   baseClass: string,
   breakpoints: Partial<Record<BreakpointKey, string>>,
 ): string {
@@ -182,7 +182,7 @@ export function createResponsiveClasses(
 /**
  * Container query utilities (for modern browsers)
  */
-export function containerQuery(
+function containerQuery(
   size: "xs" | "sm" | "md" | "lg" | "xl",
   className: string,
 ): string {
@@ -200,7 +200,7 @@ export function containerQuery(
 /**
  * Aspect ratio utilities
  */
-export function aspectRatio(ratio: string | number): string {
+function aspectRatio(ratio: string | number): string {
   if (typeof ratio === "number") {
     return `aspect-[${ratio}]`;
   }
@@ -220,7 +220,7 @@ export function aspectRatio(ratio: string | number): string {
 /**
  * Fluid typography utilities
  */
-export function fluidTypography(
+function fluidTypography(
   minSize: number,
   maxSize: number,
   minViewport = 320,
@@ -235,7 +235,7 @@ export function fluidTypography(
 /**
  * Generate responsive grid classes
  */
-export function responsiveGrid(
+function responsiveGrid(
   columns: Partial<Record<BreakpointKey, number>>,
 ): string {
   const classes: Array<string> = [];
@@ -253,7 +253,7 @@ export function responsiveGrid(
 /**
  * Media query hook for React components
  */
-export function useMediaQuery(query: string): boolean {
+function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = React.useState(() => {
     if (typeof window === "undefined") {
       return false;
@@ -279,7 +279,7 @@ export function useMediaQuery(query: string): boolean {
 /**
  * Responsive breakpoint hook
  */
-export function useBreakpoint(): BreakpointKey {
+function useBreakpoint(): BreakpointKey {
   const [breakpoint, setBreakpoint] = React.useState<BreakpointKey>(() =>
     getCurrentBreakpoint(),
   );
@@ -305,7 +305,7 @@ export function useBreakpoint(): BreakpointKey {
 /**
  * Responsive visibility utilities
  */
-export function responsiveVisibility(
+function responsiveVisibility(
   show: Partial<Record<BreakpointKey, boolean>>,
 ): string {
   const classes: Array<string> = [];
@@ -323,9 +323,9 @@ export function responsiveVisibility(
 import * as React from "react";
 
 // Type exports
-export type ResponsiveValue<T> = T | Partial<Record<BreakpointKey, T>>;
+type ResponsiveValue<T> = T | Partial<Record<BreakpointKey, T>>;
 
-export interface ResponsiveConfig {
+interface ResponsiveConfig {
   breakpoints?: Partial<Record<BreakpointKey, number>>;
   containerSizes?: Partial<Record<BreakpointKey, string>>;
 }

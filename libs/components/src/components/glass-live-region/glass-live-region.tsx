@@ -3,8 +3,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { cn } from "@/core/utils/classname";
 
-export type AriaLivePriority = "polite" | "assertive" | "off";
-export type AriaRelevant =
+type AriaLivePriority = "polite" | "assertive" | "off";
+type AriaRelevant =
   | "additions"
   | "removals"
   | "text"
@@ -16,8 +16,8 @@ export type AriaRelevant =
   | "text additions"
   | "text removals";
 
-export type AnnouncementPriority = "low" | "medium" | "high" | "critical";
-export type AnnouncementContext =
+type AnnouncementPriority = "low" | "medium" | "high" | "critical";
+type AnnouncementContext =
   | "navigation"
   | "form"
   | "notification"
@@ -45,7 +45,7 @@ interface AnnouncementOptions {
   dedupKey?: string;
 }
 
-export interface GlassLiveRegionProps {
+interface GlassLiveRegionProps {
   message?: string;
   priority?: AriaLivePriority;
   atomic?: boolean;
@@ -83,7 +83,7 @@ const CONTEXT_PREFIXES: Record<AnnouncementContext, string> = {
   general: "",
 };
 
-export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
+const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
   message,
   priority = "polite",
   atomic = true,
@@ -267,7 +267,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 };
 
 // Enhanced hook for managing live region announcements
-export function useAnnouncement() {
+function useAnnouncement() {
   const [announcement, setAnnouncement] = useState<string>("");
   const [announcementOptions, setAnnouncementOptions] =
     useState<AnnouncementOptions>({});
@@ -506,7 +506,7 @@ class AnnouncementManager {
 export const announcer = new AnnouncementManager();
 
 // Enhanced global live region provider
-export const GlassLiveRegionProvider: React.FC<{
+const GlassLiveRegionProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [announcements, setAnnouncements] = useState<

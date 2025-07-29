@@ -1,6 +1,10 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { resolve } from "node:path";
 import { mergeConfig } from "vite";
+// Import addon modules to ensure they're available
+import "@storybook/addon-docs/preset";
+import "@storybook/addon-a11y";
+import "@storybook/addon-themes";
 
 const config: StorybookConfig = {
   stories: [

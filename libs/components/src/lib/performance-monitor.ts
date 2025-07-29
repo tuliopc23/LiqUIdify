@@ -59,7 +59,7 @@ export interface PerformanceThresholds {
   bundleSize: { good: number; needsImprovement: number };
 }
 
-export const DEFAULT_THRESHOLDS: PerformanceThresholds = {
+const DEFAULT_THRESHOLDS: PerformanceThresholds = {
   lcp: { good: 2500, needsImprovement: 4000 },
   fid: { good: 100, needsImprovement: 300 },
   cls: { good: 0.1, needsImprovement: 0.25 },
@@ -453,7 +453,7 @@ export class PerformanceMonitor {
 // Singleton instance for global performance monitoring
 let globalPerformanceMonitor: PerformanceMonitor | null;
 
-export function getPerformanceMonitor(): PerformanceMonitor {
+function getPerformanceMonitor(): PerformanceMonitor {
   if (!globalPerformanceMonitor) {
     globalPerformanceMonitor = new PerformanceMonitor();
   }

@@ -6,18 +6,18 @@
  */
 
 // Basic validation types
-export interface ValidationResult {
+interface ValidationResult {
   isValid: boolean;
   errors: Array<string>;
   warnings: Array<string>;
 }
 
-export type Validator<T = unknown> = (value: T) => ValidationResult;
+type Validator<T = unknown> = (value: T) => ValidationResult;
 
 /**
  * Create a validation result
  */
-export function createValidationResult(
+function createValidationResult(
   isValid: boolean,
   errors: Array<string> = [],
   warnings: Array<string> = [],
@@ -28,7 +28,7 @@ export function createValidationResult(
 /**
  * Combine multiple validation results
  */
-export function combineValidationResults(
+function combineValidationResults(
   ...results: Array<ValidationResult>
 ): ValidationResult {
   const allErrors = results.flatMap((r) => r.errors);
@@ -41,7 +41,7 @@ export function combineValidationResults(
 /**
  * String validation utilities
  */
-export const stringValidators = {
+const stringValidators = {
   required:
     (message = "This field is required"): Validator<string> =>
     (value) => {
@@ -104,7 +104,7 @@ export const stringValidators = {
 /**
  * Number validation utilities
  */
-export const numberValidators = {
+const numberValidators = {
   required:
     (message = "Number is required"): Validator<number> =>
     (value) => {
@@ -154,7 +154,7 @@ export const numberValidators = {
 /**
  * Array validation utilities
  */
-export const arrayValidators = {
+const arrayValidators = {
   required:
     <T>(message = "At least one item is required"): Validator<Array<T>> =>
     (value) => {
@@ -192,7 +192,7 @@ export const arrayValidators = {
 /**
  * Object validation utilities
  */
-export const objectValidators = {
+const objectValidators = {
   required:
     (message = "Object is required"): Validator<object> =>
     (value) => {
@@ -245,7 +245,7 @@ export const objectValidators = {
 /**
  * Conditional validation
  */
-export function conditional<T>(
+function conditional<T>(
   condition: (value: T) => boolean,
   validator: Validator<T>,
 ): Validator<T> {
@@ -260,9 +260,7 @@ export function conditional<T>(
 /**
  * Optional validation (only validates if value is not null/undefined)
  */
-export function optional<T>(
-  validator: Validator<T>,
-): Validator<T | null | undefined> {
+function optional<T>(validator: Validator<T>): Validator<T | null | undefined> {
   return (value) => {
     if (value === null || value === undefined) {
       return createValidationResult(true);
@@ -274,7 +272,7 @@ export function optional<T>(
 /**
  * Chain multiple validators
  */
-export function chain<T>(...validators: Array<Validator<T>>): Validator<T> {
+function chain<T>(...validators: Array<Validator<T>>): Validator<T> {
   return (value) => {
     const results = validators.map((validator) => validator(value));
     return combineValidationResults(...results);
@@ -284,11 +282,11 @@ export function chain<T>(...validators: Array<Validator<T>>): Validator<T> {
 /**
  * Component prop validation
  */
-export interface PropertyValidationSchema {
+interface PropertyValidationSchema {
   [key: string]: Validator<unknown>;
 }
 
-export function validateProps<T extends Record<string, unknown>>(
+function validateProps<T extends Record<string, unknown>>(
   props: T,
   schema: PropertyValidationSchema,
 ): ValidationResult {
@@ -317,7 +315,7 @@ export function validateProps<T extends Record<string, unknown>>(
 /**
  * Accessibility validation utilities
  */
-export const a11yValidators = {
+const a11yValidators = {
   ariaLabel:
     (
       message = "aria-label or aria-labelledby is required",
@@ -403,7 +401,7 @@ function getLuminance(color: string): number {
 /**
  * Performance validation utilities
  */
-export const performanceValidators = {
+const performanceValidators = {
   bundleSize:
     (maxSize: number, message?: string): Validator<number> =>
     (size) => {
@@ -435,7 +433,7 @@ export const performanceValidators = {
 /**
  * Custom validator creation utility
  */
-export function createValidator<T>(
+function createValidator<T>(
   validationFunction: (value: T) => boolean,
   errorMessage: string,
   warningMessage?: string,

@@ -40,7 +40,7 @@ export const GLASS_EASINGS = {
 };
 
 // Animation types
-export type AnimationType =
+type AnimationType =
   | "fade"
   | "slide"
   | "scale"
@@ -68,7 +68,7 @@ export interface AnimationConfig {
   playbackRate?: number;
 }
 
-export interface GestureAnimation {
+interface GestureAnimation {
   gesture: "swipe" | "pinch" | "rotate" | "pan" | "tap" | "press";
   animation: AnimationConfig;
   threshold?: number;

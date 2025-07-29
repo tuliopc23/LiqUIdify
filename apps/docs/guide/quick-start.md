@@ -89,7 +89,7 @@ module.exports = {
 - Check out [Usage Examples](/guide/usage-examples)
 - Read the [API Reference](/api/)
 
-## Need Help?
+## Need Help
 
 - [GitHub Issues](https://github.com/tuliopc23/LiqUIdify/issues)
 - [Storybook Playground](https://liquidify-storybook.vercel.app)

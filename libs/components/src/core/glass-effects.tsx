@@ -13,7 +13,7 @@ import type {
 
 import { useUnifiedGlass } from "./glass/unified-glass-system";
 
-export interface UseGlassEffectsOptions {
+interface UseGlassEffectsOptions {
   intensity?: GlassIntensity;
   variant?: GlassVariant;
   interactive?: boolean;
@@ -21,7 +21,7 @@ export interface UseGlassEffectsOptions {
   disabled?: boolean;
 }
 
-export interface GlassEffectsResult {
+interface GlassEffectsResult {
   glassProps: {
     className: string;
     style: React.CSSProperties;
@@ -37,7 +37,7 @@ export interface GlassEffectsResult {
 /**
  * Main hook for applying glass effects to components
  */
-export function useGlassEffects(
+function useGlassEffects(
   options: UseGlassEffectsOptions = {},
 ): GlassEffectsResult {
   const {
@@ -103,14 +103,14 @@ export function useGlassEffects(
 /**
  * Simplified hook for basic glass effects
  */
-export function useGlassBackground(intensity: GlassIntensity = "medium") {
+function useGlassBackground(intensity: GlassIntensity = "medium") {
   return useGlassEffects({ intensity, interactive: false, magnetic: false });
 }
 
 /**
  * Hook for interactive glass effects with hover states
  */
-export function useInteractiveGlass(
+function useInteractiveGlass(
   options: Omit<UseGlassEffectsOptions, "interactive"> = {},
 ) {
   return useGlassEffects({ ...options, interactive: true });
@@ -119,7 +119,7 @@ export function useInteractiveGlass(
 /**
  * Hook for magnetic glass effects that respond to mouse movement
  */
-export function useMagneticGlass(
+function useMagneticGlass(
   options: Omit<UseGlassEffectsOptions, "magnetic"> = {},
 ) {
   return useGlassEffects({ ...options, magnetic: true });
@@ -128,7 +128,7 @@ export function useMagneticGlass(
 /**
  * Hook for glass effects with custom animation timings
  */
-export function useAnimatedGlass(
+function useAnimatedGlass(
   options: UseGlassEffectsOptions & {
     duration?: number;
     easing?: string;
@@ -159,7 +159,7 @@ export function useAnimatedGlass(
 /**
  * Hook for glass effects that adapt based on screen size
  */
-export function useResponsiveGlass(
+function useResponsiveGlass(
   options: UseGlassEffectsOptions & {
     mobileIntensity?: GlassIntensity;
     desktopIntensity?: GlassIntensity;

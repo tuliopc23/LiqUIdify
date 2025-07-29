@@ -109,7 +109,7 @@ const useButtonBusinessLogic = createBusinessLogicHook<
 import type { ComponentPropsBuilder } from "@/types/component-props";
 
 // Button-specific props extending the base interactive props
-export interface GlassButtonProps
+interface GlassButtonProps
   extends InteractiveGlassProps,
     Omit<ComponentPropsBuilder<HTMLButtonElement>, "size" | "type"> {
   /** Button content */
@@ -470,4 +470,3 @@ export const GlassButton = React.memo(
 GlassButton.displayName = "GlassButton";
 
 // Export the component and types
-export default GlassButton;

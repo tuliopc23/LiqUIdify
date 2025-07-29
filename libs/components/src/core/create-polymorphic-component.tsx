@@ -14,7 +14,7 @@ import { isInteractiveElement } from "../types/polymorphic";
 /**
  * Configuration for creating polymorphic components
  */
-export interface CreatePolymorphicComponentConfig<
+interface CreatePolymorphicComponentConfig<
   Props extends Record<string, unknown>,
   DefaultElement extends ElementType,
 > {
@@ -80,7 +80,7 @@ export interface CreatePolymorphicComponentConfig<
  * <GlassButton as={Link} to="/about">Router Link</GlassButton>
  * ```
  */
-export function createPolymorphicComponent<
+function createPolymorphicComponent<
   Props extends Record<string, unknown>,
   DefaultElement extends ElementType = "div",
 >(
@@ -179,7 +179,7 @@ export function createPolymorphicComponent<
  * });
  * ```
  */
-export interface GlassPolymorphicConfig<
+interface GlassPolymorphicConfig<
   Props extends Record<string, unknown>,
   DefaultElement extends ElementType,
 > extends CreatePolymorphicComponentConfig<Props, DefaultElement> {
@@ -192,7 +192,7 @@ export interface GlassPolymorphicConfig<
   };
 }
 
-export function createGlassPolymorphicComponent<
+function createGlassPolymorphicComponent<
   Props extends Record<string, unknown>,
   DefaultElement extends ElementType = "div",
 >(
@@ -248,7 +248,7 @@ export function createGlassPolymorphicComponent<
  * });
  * ```
  */
-export function createPolymorphicSlots<
+function createPolymorphicSlots<
   Slots extends Record<
     string,
     {

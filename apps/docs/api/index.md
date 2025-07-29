@@ -1325,7 +1325,6 @@ LiqUIdify has minimal peer dependencies:
 
 - **React** (18+): Core framework
 - **React DOM** (18+): DOM rendering
-- **@sentry/react** (optional): Error monitoring
 
 Internal dependencies are bundled and optimized for performance.
 

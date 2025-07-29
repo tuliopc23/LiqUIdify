@@ -16,8 +16,8 @@ const THRESHOLDS = {
   TTI: { good: 3800, poor: 7300 }, // Time to Interactive
 } as const;
 
-export type MetricName = keyof typeof THRESHOLDS;
-export type PerformanceRating = "good" | "needs-improvement" | "poor";
+type MetricName = keyof typeof THRESHOLDS;
+type PerformanceRating = "good" | "needs-improvement" | "poor";
 
 interface PerformanceMetric {
   name: MetricName;
@@ -467,5 +467,4 @@ class PerformanceMonitor {
 // Export singleton instance
 export const performanceMonitor = PerformanceMonitor.getInstance();
 
-// Export types
-export type { PerformanceMetric, ComponentMetric, PerformanceReport };
+// Export types;

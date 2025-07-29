@@ -22,7 +22,7 @@ export type ComponentPropsBuilder<T extends HTMLElement> =
             : HTMLAttributes<T>;
 
 // Unified glass props for all glass components
-export interface UnifiedGlassProps {
+interface UnifiedGlassProps {
   blur?: number;
   transparency?: number;
   overlay?: boolean;
@@ -32,27 +32,27 @@ export interface UnifiedGlassProps {
 }
 
 // Combine glass props with HTML props
-export type GlassComponentProps<T extends HTMLElement> =
-  ComponentPropsBuilder<T> & UnifiedGlassProps;
+type GlassComponentProps<T extends HTMLElement> = ComponentPropsBuilder<T> &
+  UnifiedGlassProps;
 
 // Specific component prop types
-export type GlassButtonProps = GlassComponentProps<HTMLButtonElement> & {
+type GlassButtonProps = GlassComponentProps<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
 };
 
-export type GlassCardProps = GlassComponentProps<HTMLDivElement> & {
+type GlassCardProps = GlassComponentProps<HTMLDivElement> & {
   padding?: "none" | "sm" | "md" | "lg";
   elevation?: "low" | "medium" | "high";
 };
 
-export type GlassInputProps = GlassComponentProps<HTMLInputElement> & {
+type GlassInputProps = GlassComponentProps<HTMLInputElement> & {
   label?: string;
   error?: string;
   helperText?: string;
 };
 
-export type GlassTabsProps = GlassComponentProps<HTMLDivElement> & {
+type GlassTabsProps = GlassComponentProps<HTMLDivElement> & {
   defaultValue?: string;
   value?: string;
   onValueChange?: (value: string) => void;

@@ -10,7 +10,7 @@ import type {
   GlassVariant,
 } from "../glass/unified-glass-system";
 
-export interface GlassEffectOptions {
+interface GlassEffectOptions {
   intensity?: GlassIntensity;
   variant?: GlassVariant | ComponentVariant;
   opacity?: number;
@@ -160,7 +160,7 @@ export function generateGlassVariables(
 /**
  * Combines glass classes and variables into a single style object
  */
-export function createGlassStyle(options: GlassEffectOptions) {
+function createGlassStyle(options: GlassEffectOptions) {
   return {
     className: generateGlassClasses(options),
     style: generateGlassVariables(options),
@@ -170,7 +170,7 @@ export function createGlassStyle(options: GlassEffectOptions) {
 /**
  * Preset configurations for common glass effects
  */
-export const GLASS_PRESETS = {
+const GLASS_PRESETS = {
   card: {
     intensity: "medium" as GlassIntensity,
     variant: "card" as GlassVariant,
@@ -189,11 +189,11 @@ export const GLASS_PRESETS = {
   },
 } as const;
 
-export type GlassPreset = keyof typeof GLASS_PRESETS;
+type GlassPreset = keyof typeof GLASS_PRESETS;
 
 /**
  * Apply a preset glass effect configuration
  */
-export function applyGlassPreset(preset: GlassPreset) {
+function applyGlassPreset(preset: GlassPreset) {
   return createGlassStyle(GLASS_PRESETS[preset]);
 }

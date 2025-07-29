@@ -5,7 +5,7 @@ import { announcer } from "@/components/glass-live-region";
 import { checkGlassContrast, getContrastRatio } from "@/core/utils/color";
 
 // Types and Interfaces
-export interface AccessibilityReport {
+interface AccessibilityReport {
   score: number; // 0-100, target: 95+
   violations: Array<Violation>;
   warnings: Array<Warning>;
@@ -15,7 +15,7 @@ export interface AccessibilityReport {
   componentInfo?: ComponentInfo;
 }
 
-export interface Violation {
+interface Violation {
   id: string;
   impact: "minor" | "moderate" | "serious" | "critical";
   description: string;
@@ -24,21 +24,21 @@ export interface Violation {
   nodes: Array<ViolationNode>;
 }
 
-export interface ViolationNode {
+interface ViolationNode {
   html: string;
   target: Array<string>;
   failureSummary: string;
   fix?: string;
 }
 
-export interface Warning {
+interface Warning {
   id: string;
   description: string;
   suggestion: string;
   elements: Array<HTMLElement>;
 }
 
-export interface Suggestion {
+interface Suggestion {
   type: "contrast" | "aria" | "keyboard" | "structure";
   message: string;
   priority: "low" | "medium" | "high";
@@ -46,13 +46,13 @@ export interface Suggestion {
   fix?: () => void;
 }
 
-export interface ComponentInfo {
+interface ComponentInfo {
   name: string;
   type: string;
   props: Record<string, unknown>;
 }
 
-export interface ContrastResult {
+interface ContrastResult {
   ratio: number;
   passes: {
     aa: { normal: boolean; large: boolean };
@@ -64,7 +64,7 @@ export interface ContrastResult {
   autoFixed?: boolean;
 }
 
-export interface FocusOptions {
+interface FocusOptions {
   initialFocus?: string | HTMLElement;
   returnFocus?: boolean;
   escapeDeactivates?: boolean;
@@ -72,28 +72,28 @@ export interface FocusOptions {
   preventScroll?: boolean;
 }
 
-export interface ARIAValidation {
+interface ARIAValidation {
   valid: boolean;
   errors: Array<ARIAError>;
   suggestions: Array<ARIASuggestion>;
   autoCorrections: Array<ARIACorrection>;
 }
 
-export interface ARIAError {
+interface ARIAError {
   attribute: string;
   value: string;
   reason: string;
   element: HTMLElement;
 }
 
-export interface ARIASuggestion {
+interface ARIASuggestion {
   attribute: string;
   currentValue: string | null;
   suggestedValue: string;
   reason: string;
 }
 
-export interface ARIACorrection {
+interface ARIACorrection {
   attribute: string;
   oldValue: string | null;
   newValue: string;
@@ -1086,4 +1086,4 @@ class FocusTrap {
 }
 
 // Export singleton instance getter
-export const accessibilityManager = AccessibilityManager.getInstance();
+const accessibilityManager = AccessibilityManager.getInstance();

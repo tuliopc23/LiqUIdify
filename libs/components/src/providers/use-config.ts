@@ -5,5 +5,3 @@ import { useGlobalConfig } from "./global-config-provider";
  * Alias for useGlobalConfig for easier import and usage
  */
 export const useConfig = useGlobalConfig;
-
-export { useGlobalConfig };
