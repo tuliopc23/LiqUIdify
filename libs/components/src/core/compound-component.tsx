@@ -210,7 +210,7 @@ export function createPolymorphicCompoundComponent<
   } & React.ComponentPropsWithoutRef<As> &
     P;
 
-  const Component = forwardRef<any, PolymorphicProps<T>>(
+  const Component = forwardRef<HTMLElement, PolymorphicProps<T>>(
     ({ as, className, children, ...props }, ref) => {
       const Comp = as || defaultAs;
 
@@ -241,13 +241,13 @@ export function createPolymorphicCompoundComponent<
  */
 export function createCompoundComponentCollection<
   T extends Record<string, unknown>,
->(components: T, rootComponent: React.ComponentType<any>) {
+>(components: T, rootComponent: React.ComponentType<unknown>) {
   // Attach sub-components to root component
   for (const [key, component] of Object.entries(components)) {
     (rootComponent as unknown)[key] = component;
   }
 
-  return rootComponent as React.ComponentType<any> & T;
+  return rootComponent as React.ComponentType<unknown> & T;
 }
 
 /**

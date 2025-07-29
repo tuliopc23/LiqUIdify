@@ -29,7 +29,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 // Types for playground configuration
 interface PlaygroundConfig {
   componentName: string;
-  component: React.ComponentType<any>;
+  component: React.ComponentType<unknown>;
   defaultProps: Record<string, unknown>;
   propControls: Array<PropertyControl>;
   codeTemplate: string;

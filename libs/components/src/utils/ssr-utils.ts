@@ -414,7 +414,7 @@ export const safeMutationObserver = (
 /**
  * Execute callback only in browser environment
  * @param {Function} callback - function to execute
- * @param {Array<any>} deps - dependencies for the callback
+ * @param {React.DependencyList} deps - dependencies for the callback
  */
 export const clientOnly = (
   callback: () => void,

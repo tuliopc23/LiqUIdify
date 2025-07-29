@@ -655,7 +655,7 @@ describe('${this.config.name}', () => {
     it('handles invalid props gracefully', () => {
       // Should not throw with invalid props
       expect(() => {
-        render(<${this.config.name} {...({ invalidProp: 'test' } as any)} />);
+        render(<${this.config.name} {...({ invalidProp: 'test' } as unknown)} />);
       }).not.toThrow();
     });
 
@@ -1287,7 +1287,7 @@ import { ${componentName} } from 'liquidify/${componentName.toLowerCase()}';
 // - New 'glassMorphism' prop for glass effect control
 
 // Migration function
-export function migrate${componentName}Props(oldProps: any): any {
+export function migrate${componentName}Props(oldProps: Record<string, unknown>): Record<string, unknown> {
   const { size, theme, ...rest } = oldProps;
 
   return {

@@ -15,7 +15,7 @@ import { PerformanceObserver, performance } from 'node:perf_hooks';
 export interface BenchmarkConfig {
   name: string;
   description: string;
-  component: React.ComponentType<any>;
+  component: React.ComponentType<unknown>;
   props?: Record<string, unknown>;
   iterations?: number;
   warmupIterations?: number;
@@ -547,7 +547,7 @@ class LiqUIdifyBenchmarkRunner {
    * Analyze bundle impact (simplified simulation)
    */
   private async analyzeBundleImpact(
-    Component: React.ComponentType<any>
+    Component: React.ComponentType<unknown>
   ): Promise<{
     size: number;
     gzipped: number;
@@ -912,7 +912,7 @@ export default LiqUIdifyBenchmarkRunner;
 
 // Utility functions for common benchmark scenarios
 export const createComponentBenchmark = (
-  component: React.ComponentType<any>,
+  component: React.ComponentType<unknown>,
   props: Record<string, unknown> = {},
   options: Partial<BenchmarkConfig> = {}
 ): BenchmarkConfig => ({
@@ -927,7 +927,7 @@ export const createComponentBenchmark = (
 });
 
 export const createMemoryLeakTest = (
-  component: React.ComponentType<any>,
+  component: React.ComponentType<unknown>,
   props: Record<string, unknown> = {}
 ): BenchmarkConfig => ({
   name: `${component.displayName || component.name} Memory Leak Test`,

@@ -98,7 +98,7 @@ export function createPolymorphicComponent<
   } = config;
 
   const Component = forwardRef<
-    any,
+    HTMLElement,
     PolymorphicComponentPropsWithRef<DefaultElement, Props>
   >(function PolymorphicComponent(props, ref) {
     // Merge with default props

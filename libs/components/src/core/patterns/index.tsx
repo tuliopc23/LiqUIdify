@@ -16,7 +16,7 @@ export {
 // Business logic patterns
 export const createBusinessLogicHook = <T extends Record<string, unknown>>(
   initialState: T,
-  actions: Record<string, (state: T, ...arguments_: Array<any>) => T>
+  actions: Record<string, (state: T, ...arguments_: unknown[]) => T>
 ) => {
   return () => {
     // Placeholder implementation for business logic hook pattern
@@ -24,12 +24,12 @@ export const createBusinessLogicHook = <T extends Record<string, unknown>>(
 
     const boundActions = Object.keys(actions).reduce(
       (accumulator, key) => {
-        accumulator[key] = (...arguments_: Array<any>) => {
+        accumulator[key] = (...arguments_: unknown[]) => {
           setState((currentState) => actions[key](currentState, ...arguments_));
         };
         return accumulator;
       },
-      {} as Record<string, (...arguments_: Array<any>) => void>
+      {} as Record<string, (...arguments_: unknown[]) => void>
     );
 
     return {
@@ -100,7 +100,7 @@ export const withGlassEffect = <P extends Record<string, unknown>>(
   const displayName =
     WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-  const WithGlassEffect = React.forwardRef<any, P>((props, ref) => {
+  const WithGlassEffect = React.forwardRef<HTMLElement, P>((props, ref) => {
     const glassClasses = React.useMemo(() => {
       const {
         variant = 'neutral',
@@ -135,7 +135,7 @@ export interface SlotProps {
 }
 
 export const createSlotComponent = (
-  slots: Record<string, React.ComponentType<any>>
+  slots: Record<string, React.ComponentType<unknown>>
 ) => {
   return ({ children }: { children: React.ReactNode }) => {
     const slotElements: Record<string, React.Array<React.ReactNode>> = {};
@@ -222,7 +222,7 @@ export class ComponentEventBus {
     }
   }
 
-  emit(event: string, ...arguments_: Array<any>) {
+  emit(event: string, ...arguments_: unknown[]) {
     const eventListeners = this.listeners.get(event);
     if (eventListeners) {
       for (const callback of eventListeners) {
@@ -248,7 +248,7 @@ export const createThemedComponentFactory = <T extends Record<string, unknown>>(
       return baseComponent;
     }
 
-    return React.forwardRef<any, T>((props, ref) => {
+    return React.forwardRef<HTMLElement, T>((props, ref) => {
       const mergedProps = { ...theme, ...props } as T;
       return React.createElement(baseComponent, { ...mergedProps, ref });
     });

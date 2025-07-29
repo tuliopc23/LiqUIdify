@@ -24,7 +24,7 @@ export { customRender as render };
 
 // Helper to create mock components
 export const createMockComponent = (name: string) => {
-  return React.forwardRef<any, any>((props, ref) => (
+  return React.forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>((props, ref) => (
     <div data-testid={`mock-${name}`} ref={ref} {...props} />
   ));
 };

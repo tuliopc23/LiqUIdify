@@ -1,4 +1,4 @@
-import axe, { type AxeResults } from 'axe-core';
+import axe, { type AxeResults, type Result } from 'axe-core';
 
 import { announcer } from '@/components/glass-live-region';
 
@@ -657,7 +657,7 @@ export class AccessibilityManager {
 
   // Private helper methods
 
-  private processViolations(axeViolations: Array<any>): Array<Violation> {
+  private processViolations(axeViolations: Result[]): Array<Violation> {
     return axeViolations.map((violation) => ({
       id: violation.id,
       impact: violation.impact,

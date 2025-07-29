@@ -19,8 +19,13 @@ export interface OptimizedGlassConfig {
   variant?: string;
 }
 
+interface GlassEffectCacheEntry {
+  classes: string;
+  variables: Record<string, string> | null;
+}
+
 // Memoized glass effect calculations
-const GLASS_EFFECT_CACHE = new Map<string, any>();
+const GLASS_EFFECT_CACHE = new Map<string, GlassEffectCacheEntry>();
 
 export function useOptimizedGlassEffects(config: OptimizedGlassConfig) {
   const _cacheKeyRef = useRef<string>('');

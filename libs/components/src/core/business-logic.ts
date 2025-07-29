@@ -507,7 +507,7 @@ export interface AsyncDataState<T = unknown> {
   lastFetch: number | null;
 }
 
-export interface AsyncDataActions<T = any> {
+export interface AsyncDataActions<T = unknown> {
   fetchData: () => Promise<void>;
   setData: (data: T) => void;
   setError: (error: string | null) => void;
