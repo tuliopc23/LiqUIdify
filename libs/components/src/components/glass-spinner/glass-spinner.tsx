@@ -90,7 +90,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
         className={cn(spinnerVariants({ variant, size, speed }), className)}
         animate={{ rotate: 360 }}
         transition={{
-          duration: 'slow' === speed ? 2 : 'fast' === speed ? 0.5 : 1,
+          duration: speed === 'slow' ? 2 : speed === 'fast' ? 0.5 : 1,
           repeat: Infinity,
           ease: 'linear',
         }}

@@ -72,7 +72,7 @@ export function GlassModal({
       try {
         if (document.body && document.documentElement) {
           const scrollbarWidth =
-            'undefined' === typeof window
+            typeof window === 'undefined'
               ? 0
               : window.innerWidth - document.documentElement.clientWidth;
           document.body.style.overflow = 'hidden';
@@ -120,7 +120,7 @@ export function GlassModal({
       className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
       onKeyDown={(e) => {
-        if ('Enter' === e.key || ' ' === e.key) {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           handleBackdropClick(e as unknown);
         }

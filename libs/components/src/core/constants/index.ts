@@ -139,10 +139,10 @@ export const ERROR_TYPES = {
 
 // Development constants
 export const DEV_CONSTANTS = {
-  debugMode: 'development' === process.env.NODE_ENV,
-  verbose: 'true' === process.env.VERBOSE,
-  enablePerformanceMonitoring: 'true' === process.env.PERF_MONITORING,
-  enableA11yChecks: 'false' !== process.env.A11Y_CHECKS,
+  debugMode: process.env.NODE_ENV === 'development',
+  verbose: process.env.VERBOSE === 'true',
+  enablePerformanceMonitoring: process.env.PERF_MONITORING === 'true',
+  enableA11yChecks: process.env.A11Y_CHECKS !== 'false',
 } as const;
 
 // CSS class prefixes

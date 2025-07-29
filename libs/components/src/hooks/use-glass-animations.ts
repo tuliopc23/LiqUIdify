@@ -128,7 +128,7 @@ export function useGlassAnimation(
 
         setState((previous) => ({ ...previous, progress }));
 
-        if (1 > progress) {
+        if (progress < 1) {
           requestAnimationFrame(updateProgress);
         }
       };

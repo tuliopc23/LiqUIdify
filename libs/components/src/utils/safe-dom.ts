@@ -69,7 +69,7 @@ export function safeGetComputedStyle(
   property?: string
 ): string | CSSStyleDeclaration | null {
   try {
-    if ('undefined' === typeof window || !element) {
+    if (typeof window === 'undefined' || !element) {
       return;
     }
 
@@ -121,7 +121,7 @@ export function safeArrayAccess<T>(
     return fallback;
   }
 
-  if (0 > index || index >= array.length) {
+  if (index < 0 || index >= array.length) {
     return fallback;
   }
 
@@ -183,7 +183,7 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
 export function safeRequestAnimationFrame(
   callback: FrameRequestCallback
 ): (() => void) | null {
-  if ('undefined' === typeof window || !window.requestAnimationFrame) {
+  if (typeof window === 'undefined' || !window.requestAnimationFrame) {
     return;
   }
 
@@ -207,7 +207,7 @@ export function safeRequestAnimationFrame(
  * Safe audio context creation
  */
 export function safeCreateAudioContext(): AudioContext | null {
-  if ('undefined' === typeof window || !('AudioContext' in window)) {
+  if (typeof window === 'undefined' || !('AudioContext' in window)) {
     return;
   }
 

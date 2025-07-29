@@ -70,13 +70,13 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     const minutes = Math.floor(diff / 60_000);
     const hours = Math.floor(diff / 3_600_000);
 
-    if (1 > minutes) {
+    if (minutes < 1) {
       return 'Just now';
     }
-    if (60 > minutes) {
+    if (minutes < 60) {
       return `${minutes}m ago`;
     }
-    if (24 > hours) {
+    if (hours < 24) {
       return `${hours}h ago`;
     }
     return timestamp.toLocaleDateString();
@@ -98,9 +98,9 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         )}
       >
         <Bell className="h-5 w-5 text-[var(--text-secondary)]" />
-        {0 < unreadCount && (
+        {unreadCount > 0 && (
           <span className="-top-1 -right-1 absolute flex h-5 w-5 items-center justify-center rounded-full bg-red-500 font-medium text-white text-xs">
-            {9 < unreadCount ? '9+' : unreadCount}
+            {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
       </button>
@@ -123,7 +123,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               </h3>
 
               <div className="flex items-center gap-2">
-                {0 < unreadCount && (
+                {unreadCount > 0 && (
                   <button
                     type="button"
                     onClick={onMarkAllAsRead}
@@ -168,7 +168,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                   )}
                   onClick={() => onMarkAsRead?.(notification.id)}
                   onKeyDown={(e) => {
-                    if ('Enter' === e.key || ' ' === e.key) {
+                    if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
                       onMarkAsRead?.(notification.id);
                     }

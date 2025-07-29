@@ -280,7 +280,7 @@ export class VisualPolishManager {
       return;
     }
 
-    if ('string' === typeof preset) {
+    if (typeof preset === 'string') {
       const presetConfig = MICRO_INTERACTION_PRESETS[preset];
       if (!presetConfig) {
         return;
@@ -327,7 +327,7 @@ export class VisualPolishManager {
 
     const handleInteraction = (event: Event) => {
       // Prevent default for certain triggers
-      if ('click' === trigger && 'click' === event.type) {
+      if (trigger === 'click' && event.type === 'click') {
         event.preventDefault();
       }
 
@@ -585,7 +585,7 @@ export class VisualPolishManager {
    */
   private calculateMicroInteractionQuality(): number {
     const totalInteractions = this.microInteractions.size;
-    if (0 === totalInteractions) {
+    if (totalInteractions === 0) {
       return 1;
     }
 
@@ -643,7 +643,7 @@ export class VisualPolishManager {
    * Trigger haptic feedback
    */
   private triggerHapticFeedback(): void {
-    if ('undefined' !== typeof navigator && navigator.vibrate) {
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
       navigator.vibrate(10);
     }
   }
@@ -670,33 +670,33 @@ export class VisualPolishManager {
     const recommendations: Array<string> = [];
     const { qualityMetrics } = this;
 
-    if (0.9 > qualityMetrics.pixelPerfectScore) {
+    if (qualityMetrics.pixelPerfectScore < 0.9) {
       recommendations.push(
         'Improve pixel-perfect alignment and spacing consistency'
       );
     }
 
-    if (0.95 > qualityMetrics.crossBrowserConsistency) {
+    if (qualityMetrics.crossBrowserConsistency < 0.95) {
       recommendations.push('Address cross-browser compatibility issues');
     }
 
-    if (0.9 > qualityMetrics.animationSmoothness) {
+    if (qualityMetrics.animationSmoothness < 0.9) {
       recommendations.push(
         'Optimize animations for better performance and smoothness'
       );
     }
 
-    if (0.85 > qualityMetrics.microInteractionQuality) {
+    if (qualityMetrics.microInteractionQuality < 0.85) {
       recommendations.push(
         'Enhance micro-interactions for better user feedback'
       );
     }
 
-    if (0.9 > qualityMetrics.colorContrast) {
+    if (qualityMetrics.colorContrast < 0.9) {
       recommendations.push('Improve color contrast for better accessibility');
     }
 
-    if (0.9 > qualityMetrics.typographyQuality) {
+    if (qualityMetrics.typographyQuality < 0.9) {
       recommendations.push('Enhance typography consistency and hierarchy');
     }
 

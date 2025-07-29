@@ -8,7 +8,7 @@ export function usePrefersReducedMotion(): boolean {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(
     () => {
       // Check if we're in a browser environment
-      if ('undefined' === typeof window || !window.matchMedia) {
+      if (typeof window === 'undefined' || !window.matchMedia) {
         return false;
       }
 
@@ -19,7 +19,7 @@ export function usePrefersReducedMotion(): boolean {
 
   useEffect(() => {
     // Check if we're in a browser environment
-    if ('undefined' === typeof window || !window.matchMedia) {
+    if (typeof window === 'undefined' || !window.matchMedia) {
       return;
     }
 

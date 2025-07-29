@@ -108,7 +108,7 @@ function generateOptimizedGlassClasses(config: OptimizedGlassConfig): string {
   ];
 
   // State-specific optimizations
-  if ('hover' === state) {
+  if (state === 'hover') {
     baseClasses.push(
       'transform',
       'scale-[1.02]',
@@ -174,7 +174,7 @@ function generateOptimizedGlassVariables(
 // Hook for optimized animations
 export function useOptimizedAnimations(enabled = true) {
   const prefersReducedMotion = useMemo(() => {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return false;
     }
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -213,7 +213,7 @@ export function usePerformanceMonitoring(_componentName: string) {
       lastRenderTime.current = renderTime;
 
       // Log performance issues
-      if (16 < renderTime) {
+      if (renderTime > 16) {
         // More than one frame at 60fps
         // Logging disabled
       }

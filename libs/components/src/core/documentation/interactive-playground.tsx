@@ -163,12 +163,12 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
     }
 
     const propsString = Object.entries(currentProps)
-      .filter(([_, value]) => value !== undefined && '' !== value)
+      .filter(([_, value]) => value !== undefined && value !== '')
       .map(([key, value]) => {
-        if ('string' === typeof value) {
+        if (typeof value === 'string') {
           return `${key}="${value}"`;
         }
-        if ('boolean' === typeof value) {
+        if (typeof value === 'boolean') {
           return value ? key : '';
         }
         return `${key}={${JSON.stringify(value)}}`;
@@ -490,7 +490,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
             <button
               type="button"
               onClick={() =>
-                setLayout('horizontal' === layout ? 'vertical' : 'horizontal')
+                setLayout(layout === 'horizontal' ? 'vertical' : 'horizontal')
               }
               className="rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
               title="Toggle layout"
@@ -641,12 +641,12 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       {/* Main Content */}
 
       <div
-        className={`flex ${'horizontal' === layout ? 'flex-row' : 'flex-col'} h-[calc(100vh-200px)]`}
+        className={`flex ${layout === 'horizontal' ? 'flex-row' : 'flex-col'} h-[calc(100vh-200px)]`}
       >
         {/* Preview Panel */}
 
         <div
-          className={`${'horizontal' === layout ? 'flex-1' : 'h-1/2'} bg-white`}
+          className={`${layout === 'horizontal' ? 'flex-1' : 'h-1/2'} bg-white`}
         >
           <div className="flex h-full flex-col">
             {/* Preview Header */}
@@ -716,7 +716,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
         {/* Controls Panel */}
 
         <div
-          className={`${'horizontal' === layout ? 'w-80 border-l' : 'h-1/2 border-t'} overflow-auto border-gray-200 bg-white`}
+          className={`${layout === 'horizontal' ? 'w-80 border-l' : 'h-1/2 border-t'} overflow-auto border-gray-200 bg-white`}
         >
           {/* Examples */}
           {config.examples.length > 0 && (

@@ -61,20 +61,20 @@ export const GlassProgress = React.memo(
             className={cn(
               'relative w-full overflow-hidden rounded-full',
               sizeClasses[size],
-              'default' === variant && getGlassClass('default'),
-              'minimal' === variant && 'bg-gray-200 dark:bg-gray-700',
-              'gradient' === variant &&
+              variant === 'default' && getGlassClass('default'),
+              variant === 'minimal' && 'bg-gray-200 dark:bg-gray-700',
+              variant === 'gradient' &&
                 'bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600'
             )}
           >
             <div
               className={cn(
                 'h-full rounded-full transition-all duration-500 ease-out',
-                'default' === variant &&
+                variant === 'default' &&
                   `bg-gradient-to-r ${colorClasses[color]}`,
-                'gradient' === variant &&
+                variant === 'gradient' &&
                   `bg-gradient-to-r ${colorClasses[color]}`,
-                'minimal' === variant && `bg-${color}-500`
+                variant === 'minimal' && `bg-${color}-500`
               )}
               style={{ width: `${percentage}%` }}
             />

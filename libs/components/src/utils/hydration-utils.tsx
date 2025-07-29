@@ -228,7 +228,7 @@ export function useHydrationState<T>(
       const newValue = value instanceof Function ? value(previous) : value;
 
       // Log potential hydration mismatches in development
-      if ('development' === process.env.NODE_ENV && previous !== newValue) {
+      if (process.env.NODE_ENV === 'development' && previous !== newValue) {
         // Logging disabled
       }
 

@@ -144,7 +144,7 @@ export const useLocalStorage = <T,>(
     }
 
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === key && null !== e.newValue) {
+      if (e.key === key && e.newValue !== null) {
         try {
           setStoredValue(JSON.parse(e.newValue));
         } catch {

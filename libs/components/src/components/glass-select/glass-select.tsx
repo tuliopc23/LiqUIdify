@@ -54,11 +54,11 @@ export const GlassSelect = React.memo(
           }
         };
 
-        if ('undefined' !== typeof document) {
+        if (typeof document !== 'undefined') {
           document.addEventListener('mousedown', handleClickOutside);
         }
         return () => {
-          if ('undefined' !== typeof document) {
+          if (typeof document !== 'undefined') {
             document.removeEventListener('mousedown', handleClickOutside);
           }
         };

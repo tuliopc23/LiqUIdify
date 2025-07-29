@@ -70,7 +70,7 @@ export class GlassErrorBoundary extends Component<
     }));
 
     // Track error in production
-    if (trackErrors && 'production' === process.env.NODE_ENV) {
+    if (trackErrors && process.env.NODE_ENV === 'production') {
       errorTracking.trackError(error, errorInfo, {
         component: componentName || 'Unknown',
         action: 'component-error',
@@ -85,7 +85,7 @@ export class GlassErrorBoundary extends Component<
     }
 
     // Log error to console in development
-    if ('development' === process.env.NODE_ENV) {
+    if (process.env.NODE_ENV === 'development') {
       // Logging disabled
     }
 
@@ -101,7 +101,7 @@ export class GlassErrorBoundary extends Component<
     );
 
     // Auto-recover after multiple errors (circuit breaker pattern)
-    if (3 <= this.state.errorCount) {
+    if (this.state.errorCount >= 3) {
       this.scheduleReset(5000);
     }
   }
@@ -196,9 +196,9 @@ export class GlassErrorBoundary extends Component<
             'glass-error-boundary',
             'glass-effect rounded-lg p-6',
             {
-              'min-h-screen': 'page' === level,
-              'min-h-[400px]': 'section' === level,
-              'min-h-[200px]': 'component' === level,
+              'min-h-screen': level === 'page',
+              'min-h-[400px]': level === 'section',
+              'min-h-[200px]': level === 'component',
             },
             className
           )}
@@ -210,13 +210,13 @@ export class GlassErrorBoundary extends Component<
 
             <div className="space-y-2">
               <h3 className="font-semibold text-lg text-primary">
-                {'page' === level && 'Page Error'}
-                {'section' === level && 'Section Error'}
-                {'component' === level && 'Component Error'}
+                {level === 'page' && 'Page Error'}
+                {level === 'section' && 'Section Error'}
+                {level === 'component' && 'Component Error'}
               </h3>
 
               <p className="max-w-md text-secondary text-sm">
-                {'production' === process.env.NODE_ENV
+                {process.env.NODE_ENV === 'production'
                   ? 'Something went wrong. Please try refreshing the page.'
                   : error.message}
               </p>
@@ -232,7 +232,7 @@ export class GlassErrorBoundary extends Component<
                 Try Again
               </button>
 
-              {'page' === level && (
+              {level === 'page' && (
                 <button
                   type="button"
                   onClick={() => window.location.reload()}
@@ -244,7 +244,7 @@ export class GlassErrorBoundary extends Component<
               )}
             </div>
 
-            {'development' === process.env.NODE_ENV && errorInfo && (
+            {process.env.NODE_ENV === 'development' && errorInfo && (
               <details className="mt-4 w-full max-w-2xl text-left">
                 <summary className="cursor-pointer text-secondary text-sm hover:text-primary">
                   Error Details

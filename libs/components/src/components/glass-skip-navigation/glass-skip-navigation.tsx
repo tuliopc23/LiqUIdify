@@ -59,7 +59,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
       // Find landmark elements
       for (const { role, label, id } of DEFAULT_LANDMARKS) {
         const elements =
-          'undefined' === typeof document
+          typeof document === 'undefined'
             ? []
             : document.querySelectorAll(`[role="${role}"]`);
 
@@ -89,7 +89,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
       // Find headings
       const headings =
-        'undefined' === typeof document
+        typeof document === 'undefined'
           ? []
           : document.querySelectorAll('h1, h2');
       for (const [index, heading] of headings.entries()) {
@@ -107,7 +107,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
       // Find forms
       const forms =
-        'undefined' === typeof document
+        typeof document === 'undefined'
           ? []
           : document.querySelectorAll(
               'form[aria-label], form[aria-labelledby]'
@@ -119,7 +119,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
         const labelledById = form.getAttribute('aria-labelledby');
         const labelElement = labelledById
-          ? 'undefined' === typeof document
+          ? typeof document === 'undefined'
             ? undefined
             : document.getElementById(labelledById)
           : undefined;
@@ -139,8 +139,8 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     };
 
     // Wait for DOM to be ready
-    if ('loading' === document.readyState) {
-      if ('undefined' !== typeof document) {
+    if (document.readyState === 'loading') {
+      if (typeof document !== 'undefined') {
         document.addEventListener('DOMContentLoaded', generateSkipLinks);
       }
     } else {
@@ -176,15 +176,15 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
     let targetElement: HTMLElement | null;
 
-    if ('string' === typeof link.target) {
+    if (typeof link.target === 'string') {
       if (link.target.startsWith('#')) {
         targetElement =
-          'undefined' === typeof document
+          typeof document === 'undefined'
             ? undefined
             : document.querySelector(link.target);
       } else {
         targetElement =
-          'undefined' === typeof document
+          typeof document === 'undefined'
             ? undefined
             : document.getElementById(link.target);
       }
@@ -303,7 +303,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
           ref={(element) => {
             linkReferences.current[index] = element;
           }}
-          href={'string' === typeof link.target ? link.target : `#${link.id}`}
+          href={typeof link.target === 'string' ? link.target : `#${link.id}`}
           className={cn(
             'glass-skip-link',
             'inline-flex items-center gap-2 px-4 py-2',
@@ -320,7 +320,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
           onKeyDown={(e) => handleKeyDown(e, index)}
           onFocus={() => setFocusedIndex(index)}
           onBlur={() => setFocusedIndex(-1)}
-          tabIndex={0 === index ? 0 : -1}
+          tabIndex={index === 0 ? 0 : -1}
           data-skip-link={link.id}
         >
           {link.label}
@@ -356,7 +356,7 @@ export function useSkipNavigation() {
   };
 
   const skipTo = (id: string) => {
-    if ('undefined' === typeof window || 'undefined' === typeof document) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
 
@@ -368,15 +368,15 @@ export function useSkipNavigation() {
     // Use the same logic as handleSkipTo
     let targetElement: HTMLElement | null;
 
-    if ('string' === typeof link.target) {
+    if (typeof link.target === 'string') {
       if (link.target.startsWith('#')) {
         targetElement =
-          'undefined' === typeof document
+          typeof document === 'undefined'
             ? undefined
             : document.querySelector(link.target);
       } else {
         targetElement =
-          'undefined' === typeof document
+          typeof document === 'undefined'
             ? undefined
             : document.getElementById(link.target);
       }

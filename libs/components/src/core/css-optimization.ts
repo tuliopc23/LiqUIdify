@@ -127,11 +127,11 @@ export class CSSBundleAnalyzer {
       results.totalSize += sizeKB;
 
       // Generate recommendations
-      if ('warning' === status) {
+      if (status === 'warning') {
         results.recommendations.push(
           `${bundleName} bundle is approaching size limit (${sizeKB}KB/${bundleConfig.maxSize}KB)`
         );
-      } else if ('error' === status) {
+      } else if (status === 'error') {
         results.recommendations.push(
           `${bundleName} bundle exceeds size limit (${sizeKB}KB/${bundleConfig.maxSize}KB) - optimization required`
         );
@@ -139,7 +139,7 @@ export class CSSBundleAnalyzer {
     }
 
     // Overall bundle size check
-    if (30 < results.totalSize) {
+    if (results.totalSize > 30) {
       results.recommendations.push(
         `Total bundle size (${results.totalSize}KB) exceeds 30KB target - critical optimization needed`
       );
@@ -253,7 +253,7 @@ export class CSSBundleAnalyzer {
     const analysis = await this.analyzeBundles();
 
     let status: 'pass' | 'warning' | 'fail' = 'pass';
-    if (30 < analysis.totalSize) {
+    if (analysis.totalSize > 30) {
       status = 'fail';
     } else if (analysis.recommendations.length > 0) {
       status = 'warning';
@@ -436,14 +436,14 @@ export class CSSBundleManager {
   async validateBundles(): Promise<boolean> {
     const report = await this.analyzer.generateReport();
 
-    if ('fail' === report.status) {
+    if (report.status === 'fail') {
       // Logging disabled
       // Logging disabled
       // report.recommendations.forEach((rec) => // Logging disabled
       return false;
     }
 
-    if ('warning' === report.status) {
+    if (report.status === 'warning') {
       // Logging disabled
       // report.recommendations.forEach((rec) => // Logging disabled
     }

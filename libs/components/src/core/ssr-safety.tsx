@@ -75,7 +75,7 @@ export function useSSRSafeWindow() {
   );
 
   useEffect(() => {
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       setWindowObject(window);
     }
   }, []);
@@ -90,7 +90,7 @@ export function useSSRSafeLocalStorage() {
   const [storage, setStorage] = useState<Storage | undefined | null>(undefined);
 
   useEffect(() => {
-    if ('undefined' !== typeof window && window.localStorage) {
+    if (typeof window !== 'undefined' && window.localStorage) {
       setStorage(window.localStorage);
     }
   }, []);
@@ -102,7 +102,7 @@ export function useSSRSafeLocalStorage() {
  * Utility function to check if we're in a browser environment
  */
 export const isBrowser = (): boolean => {
-  return 'undefined' !== typeof window && 'undefined' !== typeof document;
+  return typeof window !== 'undefined' && typeof document !== 'undefined';
 };
 
 /**

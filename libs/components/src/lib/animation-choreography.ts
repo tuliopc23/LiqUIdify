@@ -432,7 +432,7 @@ export class AdvancedChoreographer {
             const element = entry.target as HTMLElement;
             const elementIndex = elements.indexOf(element);
 
-            if (-1 !== elementIndex) {
+            if (elementIndex !== -1) {
               this.executePreset(preset, [element]);
 
               if (once) {

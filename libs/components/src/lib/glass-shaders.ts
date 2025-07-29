@@ -275,7 +275,7 @@ export class GlassShaderEffect {
     private shaderType: keyof typeof GLASS_SHADERS
   ) {
     // SSR safety check
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       throw new TypeError('GlassShaderEffect cannot be used during SSR');
     }
 
@@ -528,9 +528,9 @@ export class GlassShaderEffect {
         continue;
       }
 
-      if ('number' === typeof value) {
+      if (typeof value === 'number') {
         this.gl.uniform1f(location, value);
-      } else if (Array.isArray(value) && 2 === value.length) {
+      } else if (Array.isArray(value) && value.length === 2) {
         this.gl.uniform2fv(location, value);
       }
     }
@@ -617,7 +617,7 @@ export function applyGlassShader(
   config?: Partial<ShaderUniforms>
 ): GlassShaderEffect | null {
   // SSR safety check
-  if ('undefined' === typeof window || 'undefined' === typeof document) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
     return null;
   }
 

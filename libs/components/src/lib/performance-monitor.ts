@@ -91,7 +91,7 @@ export class PerformanceMonitor {
   }
 
   private initializeObservers(): void {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return;
     }
 
@@ -173,9 +173,9 @@ export class PerformanceMonitor {
 
           if (
             !firstSessionEntry ||
-            1000 >
-              layoutShiftEntry.startTime -
-                (lastSessionEntry as LayoutShiftEntry).startTime
+            layoutShiftEntry.startTime -
+                (lastSessionEntry as LayoutShiftEntry).startTime <
+              1000
           ) {
             clsEntries.push(layoutShiftEntry);
             clsValue += layoutShiftEntry.value;
@@ -205,7 +205,7 @@ export class PerformanceMonitor {
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       for (const entry of entries) {
-        if ('first-contentful-paint' === entry.name) {
+        if (entry.name === 'first-contentful-paint') {
           this.updateMetric('fcp', entry.startTime);
         }
       }
@@ -220,7 +220,7 @@ export class PerformanceMonitor {
   }
 
   private observeMemoryUsage(): void {
-    if ('undefined' === typeof window || !('performance' in window)) {
+    if (typeof window === 'undefined' || !('performance' in window)) {
       return;
     }
 
@@ -277,7 +277,7 @@ export class PerformanceMonitor {
         frameCount++;
 
         // Detect dropped frames (>20ms between frames indicates dropped frame)
-        if (20 < frameDelta) {
+        if (frameDelta > 20) {
           droppedFrames++;
         }
 
@@ -302,7 +302,7 @@ export class PerformanceMonitor {
 
   public measureBundleSize(bundleName: string): Promise<number> {
     return new Promise((resolve) => {
-      if ('undefined' === typeof window) {
+      if (typeof window === 'undefined') {
         resolve(0);
         return;
       }
@@ -388,10 +388,10 @@ export class PerformanceMonitor {
       if (value !== undefined) {
         const status = this.getMetricStatusByValue(metric, value);
         coreWebVitalsScore +=
-          'good' === status ? 100 : 'needs-improvement' === status ? 50 : 0;
+          status === 'good' ? 100 : status === 'needs-improvement' ? 50 : 0;
         coreWebVitalsCount++;
 
-        if ('good' !== status) {
+        if (status !== 'good') {
           recommendations.push(
             `Improve ${metric.toUpperCase()}: Current value ${value}, target: ${this.thresholds[metric as keyof PerformanceThresholds]?.good}`
           );
@@ -400,7 +400,7 @@ export class PerformanceMonitor {
     }
 
     coreWebVitalsScore =
-      0 < coreWebVitalsCount ? coreWebVitalsScore / coreWebVitalsCount : 0;
+      coreWebVitalsCount > 0 ? coreWebVitalsScore / coreWebVitalsCount : 0;
 
     // Calculate overall score including component performance
     let overallScore = coreWebVitalsScore;
@@ -425,7 +425,7 @@ export class PerformanceMonitor {
       overallScore -= 15;
     }
 
-    if (metrics.animationFrameRate && 55 > metrics.animationFrameRate) {
+    if (metrics.animationFrameRate && metrics.animationFrameRate < 55) {
       recommendations.push(
         `Improve animation performance: ${metrics.animationFrameRate.toFixed(1)}fps (target: >55fps)`
       );

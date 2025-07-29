@@ -45,7 +45,7 @@ export const stringValidators = {
   required:
     (message = 'This field is required'): Validator<string> =>
     (value) => {
-      const isValid = 'string' === typeof value && value.trim().length > 0;
+      const isValid = typeof value === 'string' && value.trim().length > 0;
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
@@ -54,7 +54,7 @@ export const stringValidators = {
     (value) => {
       const actualMessage =
         message || `Must be at least ${min} characters long`;
-      const isValid = 'string' === typeof value && value.length >= min;
+      const isValid = typeof value === 'string' && value.length >= min;
       return createValidationResult(isValid, isValid ? [] : [actualMessage]);
     },
 
@@ -63,14 +63,14 @@ export const stringValidators = {
     (value) => {
       const actualMessage =
         message || `Must be no more than ${max} characters long`;
-      const isValid = 'string' === typeof value && value.length <= max;
+      const isValid = typeof value === 'string' && value.length <= max;
       return createValidationResult(isValid, isValid ? [] : [actualMessage]);
     },
 
   pattern:
     (regex: RegExp, message = 'Invalid format'): Validator<string> =>
     (value) => {
-      const isValid = 'string' === typeof value && regex.test(value);
+      const isValid = typeof value === 'string' && regex.test(value);
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
@@ -78,7 +78,7 @@ export const stringValidators = {
     (message = 'Invalid email address'): Validator<string> =>
     (value) => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const isValid = 'string' === typeof value && emailRegex.test(value);
+      const isValid = typeof value === 'string' && emailRegex.test(value);
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
@@ -96,7 +96,7 @@ export const stringValidators = {
   alphanumeric:
     (message = 'Only letters and numbers allowed'): Validator<string> =>
     (value) => {
-      const isValid = 'string' === typeof value && /^[\dA-Za-z]+$/.test(value);
+      const isValid = typeof value === 'string' && /^[\dA-Za-z]+$/.test(value);
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 };
@@ -108,7 +108,7 @@ export const numberValidators = {
   required:
     (message = 'Number is required'): Validator<number> =>
     (value) => {
-      const isValid = 'number' === typeof value && !Number.isNaN(value);
+      const isValid = typeof value === 'number' && !Number.isNaN(value);
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
@@ -116,7 +116,7 @@ export const numberValidators = {
     (min: number, message?: string): Validator<number> =>
     (value) => {
       const actualMessage = message || `Must be at least ${min}`;
-      const isValid = 'number' === typeof value && value >= min;
+      const isValid = typeof value === 'number' && value >= min;
       return createValidationResult(isValid, isValid ? [] : [actualMessage]);
     },
 
@@ -124,21 +124,21 @@ export const numberValidators = {
     (max: number, message?: string): Validator<number> =>
     (value) => {
       const actualMessage = message || `Must be no more than ${max}`;
-      const isValid = 'number' === typeof value && value <= max;
+      const isValid = typeof value === 'number' && value <= max;
       return createValidationResult(isValid, isValid ? [] : [actualMessage]);
     },
 
   integer:
     (message = 'Must be a whole number'): Validator<number> =>
     (value) => {
-      const isValid = 'number' === typeof value && Number.isInteger(value);
+      const isValid = typeof value === 'number' && Number.isInteger(value);
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
   positive:
     (message = 'Must be positive'): Validator<number> =>
     (value) => {
-      const isValid = 'number' === typeof value && 0 < value;
+      const isValid = typeof value === 'number' && value > 0;
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
@@ -146,7 +146,7 @@ export const numberValidators = {
     (min: number, max: number, message?: string): Validator<number> =>
     (value) => {
       const actualMessage = message || `Must be between ${min} and ${max}`;
-      const isValid = 'number' === typeof value && value >= min && value <= max;
+      const isValid = typeof value === 'number' && value >= min && value <= max;
       return createValidationResult(isValid, isValid ? [] : [actualMessage]);
     },
 };
@@ -196,7 +196,7 @@ export const objectValidators = {
   required:
     (message = 'Object is required'): Validator<object> =>
     (value) => {
-      const isValid = 'object' === typeof value && null !== value;
+      const isValid = typeof value === 'object' && value !== null;
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
@@ -205,7 +205,7 @@ export const objectValidators = {
     (value) => {
       const actualMessage = message || `Must have property '${property}'`;
       const isValid =
-        'object' === typeof value && null !== value && property in value;
+        typeof value === 'object' && value !== null && property in value;
       return createValidationResult(isValid, isValid ? [] : [actualMessage]);
     },
 
@@ -215,7 +215,7 @@ export const objectValidators = {
       _message = 'Object validation failed'
     ): Validator<T> =>
     (value) => {
-      if ('object' !== typeof value || null === value) {
+      if (typeof value !== 'object' || value === null) {
         return createValidationResult(false, ['Value must be an object']);
       }
 
@@ -264,7 +264,7 @@ export function optional<T>(
   validator: Validator<T>
 ): Validator<T | null | undefined> {
   return (value) => {
-    if (null === value || value === undefined) {
+    if (value === null || value === undefined) {
       return createValidationResult(true);
     }
     return validator(value);
@@ -331,8 +331,8 @@ export const a11yValidators = {
   altText:
     (message = 'alt attribute is required for images'): Validator<any> =>
     (props) => {
-      if ('img' === props.as || 'img' === props.role) {
-        const hasAlt = 'string' === typeof props.alt;
+      if (props.as === 'img' || props.role === 'img') {
+        const hasAlt = typeof props.alt === 'string';
         return createValidationResult(hasAlt, hasAlt ? [] : [message]);
       }
       return createValidationResult(true);
@@ -364,14 +364,14 @@ export const a11yValidators = {
     ): Validator<any> =>
     (props) => {
       const isInteractive =
-        props.onClick || props.onKeyDown || null !== props.tabIndex;
+        props.onClick || props.onKeyDown || props.tabIndex !== null;
       if (!isInteractive) {
         return createValidationResult(true);
       }
 
       const hasTabIndex =
-        'number' === typeof props.tabIndex && 0 <= props.tabIndex;
-      const hasKeyHandler = 'function' === typeof props.onKeyDown;
+        typeof props.tabIndex === 'number' && props.tabIndex >= 0;
+      const hasKeyHandler = typeof props.onKeyDown === 'function';
       const isAccessible = hasTabIndex || hasKeyHandler;
 
       return createValidationResult(

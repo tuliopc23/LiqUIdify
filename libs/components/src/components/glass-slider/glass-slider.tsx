@@ -87,13 +87,13 @@ export const GlassSlider = React.memo(
       };
 
       useEffect(() => {
-        if (isDragging && 'undefined' !== typeof document) {
+        if (isDragging && typeof document !== 'undefined') {
           document.addEventListener('mousemove', handleMouseMove);
           document.addEventListener('mouseup', handleMouseUp);
         }
 
         return () => {
-          if ('undefined' !== typeof document) {
+          if (typeof document !== 'undefined') {
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
           }
@@ -118,8 +118,8 @@ export const GlassSlider = React.memo(
             ref={sliderRef}
             className={cn(
               'relative h-2 cursor-pointer rounded-full',
-              'default' === variant && getGlassClass('default'),
-              'minimal' === variant && 'bg-gray-200 dark:bg-gray-700',
+              variant === 'default' && getGlassClass('default'),
+              variant === 'minimal' && 'bg-gray-200 dark:bg-gray-700',
               disabled && 'cursor-not-allowed opacity-50'
             )}
             onMouseDown={handleMouseDown}

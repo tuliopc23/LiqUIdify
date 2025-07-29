@@ -28,11 +28,11 @@ export const GlassTextarea = React.memo(
             'hover:bg-white/10 dark:hover:bg-white/5',
             'disabled:cursor-not-allowed disabled:opacity-50',
             'min-h-[100px]',
-            'none' === resize && 'resize-none',
-            'vertical' === resize && 'resize-y',
-            'horizontal' === resize && 'resize-x',
-            'both' === resize && 'resize',
-            'minimal' === variant &&
+            resize === 'none' && 'resize-none',
+            resize === 'vertical' && 'resize-y',
+            resize === 'horizontal' && 'resize-x',
+            resize === 'both' && 'resize',
+            variant === 'minimal' &&
               'rounded-none border-0 border-white/30 border-b bg-transparent focus:border-blue-500/50 dark:border-white/20',
             className
           )}

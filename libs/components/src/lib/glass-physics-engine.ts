@@ -431,11 +431,11 @@ export class AnimationChoreographer {
   private calculateDelay(index: number): number {
     const { stagger, sequence, parallel } = this.config;
 
-    if (0 < parallel) {
+    if (parallel > 0) {
       // Parallel with slight offset
       return index * parallel * 1000;
     }
-    if (0 < sequence) {
+    if (sequence > 0) {
       // Sequential with gap
       return index * sequence * 1000;
     }
@@ -538,7 +538,7 @@ export class GestureRecognizer {
     const now = performance.now();
     const deltaTime = now - this.lastTime;
 
-    if (0 < deltaTime) {
+    if (deltaTime > 0) {
       const deltaX = e.clientX - this.currentPosition.x;
       const deltaY = e.clientY - this.currentPosition.y;
 
@@ -570,7 +570,7 @@ export class GestureRecognizer {
   };
 
   private handleTouchStart = (e: TouchEvent): void => {
-    if (1 === e.touches.length) {
+    if (e.touches.length === 1) {
       const touch = e.touches[0];
       if (touch) {
         this.handleStart({
@@ -582,7 +582,7 @@ export class GestureRecognizer {
   };
 
   private handleTouchMove = (e: TouchEvent): void => {
-    if (1 === e.touches.length) {
+    if (e.touches.length === 1) {
       const touch = e.touches[0];
       if (touch) {
         this.handleMove({
@@ -594,7 +594,7 @@ export class GestureRecognizer {
   };
 
   private handleTouchEnd = (e: TouchEvent): void => {
-    if (1 === e.changedTouches.length) {
+    if (e.changedTouches.length === 1) {
       const touch = e.changedTouches[0];
       if (touch) {
         this.handleEnd({
@@ -772,7 +772,7 @@ export function useAdvancedPhysics(
   // Haptic feedback
   const triggerHaptic = useCallback(
     (intensity: 'light' | 'medium' | 'heavy' = 'light') => {
-      if (!enableHaptics || 'undefined' === typeof navigator) {
+      if (!enableHaptics || typeof navigator === 'undefined') {
         return;
       }
 

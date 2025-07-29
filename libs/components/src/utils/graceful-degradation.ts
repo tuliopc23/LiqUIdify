@@ -90,7 +90,7 @@ export class GracefulDegradationManager {
     support.serviceWorker = 'serviceWorker' in navigator;
 
     // WebAssembly support
-    support.webAssembly = 'undefined' !== typeof WebAssembly;
+    support.webAssembly = typeof WebAssembly !== 'undefined';
 
     // Observer APIs
     support.intersectionObserver = 'IntersectionObserver' in window;
@@ -178,7 +178,7 @@ export class GracefulDegradationManager {
   }
 
   private checkCSSFeature(property: string): boolean {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return false;
     }
 
@@ -195,7 +195,7 @@ export class GracefulDegradationManager {
   }
 
   private checkWebGLSupport(): boolean {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return false;
     }
 
@@ -210,7 +210,7 @@ export class GracefulDegradationManager {
   }
 
   private checkWebGL2Support(): boolean {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return false;
     }
 
@@ -224,7 +224,7 @@ export class GracefulDegradationManager {
   }
 
   private checkCanvasSupport(): boolean {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return false;
     }
 
@@ -292,7 +292,7 @@ export class GracefulDegradationManager {
     downlink?: number;
     rtt?: number;
   }> {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return { online: true };
     }
 
@@ -312,7 +312,7 @@ export class GracefulDegradationManager {
   }
 
   public getPerformanceLevel(): 'high' | 'medium' | 'low' {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return 'high';
     }
 
@@ -320,10 +320,10 @@ export class GracefulDegradationManager {
     const cores = navigator.hardwareConcurrency;
 
     if (memory && cores) {
-      if (8 <= memory && 8 <= cores) {
+      if (memory >= 8 && cores >= 8) {
         return 'high';
       }
-      if (4 <= memory && 4 <= cores) {
+      if (memory >= 4 && cores >= 4) {
         return 'medium';
       }
       return 'low';
@@ -334,10 +334,10 @@ export class GracefulDegradationManager {
       const connection = (navigator as unknown).connection;
       const effectiveType = connection.effectiveType;
 
-      if ('4g' === effectiveType) {
+      if (effectiveType === '4g') {
         return 'high';
       }
-      if ('3g' === effectiveType) {
+      if (effectiveType === '3g') {
         return 'medium';
       }
       return 'low';
@@ -427,13 +427,13 @@ export function useNetworkAwareFallback() {
     const handleOnline = () => updateStatus();
     const handleOffline = () => updateStatus();
 
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('online', handleOnline);
       window.addEventListener('offline', handleOffline);
     }
 
     return () => {
-      if ('undefined' !== typeof window) {
+      if (typeof window !== 'undefined') {
         window.removeEventListener('online', handleOnline);
         window.removeEventListener('offline', handleOffline);
       }
@@ -443,10 +443,10 @@ export function useNetworkAwareFallback() {
   return {
     networkStatus,
     performanceLevel,
-    shouldReduceMotion: 'low' === performanceLevel,
-    shouldReduceQuality: 'low' === performanceLevel || !networkStatus.online,
+    shouldReduceMotion: performanceLevel === 'low',
+    shouldReduceQuality: performanceLevel === 'low' || !networkStatus.online,
     shouldUseStaticFallbacks:
-      'low' === performanceLevel || !networkStatus.online,
+      performanceLevel === 'low' || !networkStatus.online,
   };
 }
 
@@ -457,7 +457,7 @@ export function useAccessibilityFallback() {
   const [highContrast, setHighContrast] = useState(false);
 
   useEffect(() => {
-    if ('undefined' === typeof window) {
+    if (typeof window === 'undefined') {
       return;
     }
 

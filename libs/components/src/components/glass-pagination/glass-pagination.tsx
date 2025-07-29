@@ -163,14 +163,14 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       <motion.button
         whileHover={!buttonDisabled && !disabled ? { scale: 1.05 } : {}}
         whileTap={!buttonDisabled && !disabled ? { scale: 0.95 } : {}}
-        onClick={() => 'number' === typeof page && handlePageChange(page)}
+        onClick={() => typeof page === 'number' && handlePageChange(page)}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            (() => 'number' === typeof page && handlePageChange(page))(e);
+            (() => typeof page === 'number' && handlePageChange(page))(e);
           }
         }}
-        disabled={buttonDisabled || disabled || 'ellipsis' === page}
+        disabled={buttonDisabled || disabled || page === 'ellipsis'}
         className={cn(
           pageButtonVariants({ isActive: isActive ? 'true' : 'false', size })
         )}
@@ -215,7 +215,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
           <React.Fragment
             key={page === 'ellipsis' ? `ellipsis-${index}` : `page-${page}`}
           >
-            {'ellipsis' === page ? (
+            {page === 'ellipsis' ? (
               <span className="flex h-8 min-w-[32px] items-center justify-center text-white/40">
                 <MoreHorizontal className="h-4 w-4" />
               </span>

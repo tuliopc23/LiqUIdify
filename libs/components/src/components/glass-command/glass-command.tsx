@@ -76,7 +76,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Open command palette
-      if ((e.metaKey || e.ctrlKey) && 'k' === e.key) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         setIsOpen(true);
         return;
@@ -115,11 +115,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       }
     };
 
-    if ('undefined' !== typeof document) {
+    if (typeof document !== 'undefined') {
       document.addEventListener('keydown', handleKeyDown);
     }
     return () => {
-      if ('undefined' !== typeof document) {
+      if (typeof document !== 'undefined') {
         document.removeEventListener('keydown', handleKeyDown);
       }
     };
@@ -237,7 +237,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   }
 
   // SSR safety check
-  if ('undefined' === typeof window) {
+  if (typeof window === 'undefined') {
     return;
   }
 
@@ -250,7 +250,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         className="absolute inset-0 bg-black/20 backdrop-blur-sm"
         onClick={handleClose}
         onKeyDown={(e) => {
-          if ('Enter' === e.key || ' ' === e.key) {
+          if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             handleClose();
           }

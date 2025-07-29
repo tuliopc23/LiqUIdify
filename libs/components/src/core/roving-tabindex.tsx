@@ -134,7 +134,7 @@ export function useRovingTabindex(
         }
       }
 
-      if (-1 !== matchIndex) {
+      if (matchIndex !== -1) {
         focusItem(matchIndex);
       }
 
@@ -154,7 +154,7 @@ export function useRovingTabindex(
 
       switch (key) {
         case 'ArrowUp': {
-          if ('vertical' === orientation || 'both' === orientation) {
+          if (orientation === 'vertical' || orientation === 'both') {
             newIndex = findNextEnabledIndex(currentIndex, -1);
             handled = true;
           }
@@ -162,7 +162,7 @@ export function useRovingTabindex(
         }
 
         case 'ArrowDown': {
-          if ('vertical' === orientation || 'both' === orientation) {
+          if (orientation === 'vertical' || orientation === 'both') {
             newIndex = findNextEnabledIndex(currentIndex, 1);
             handled = true;
           }
@@ -170,7 +170,7 @@ export function useRovingTabindex(
         }
 
         case 'ArrowLeft': {
-          if ('horizontal' === orientation || 'both' === orientation) {
+          if (orientation === 'horizontal' || orientation === 'both') {
             newIndex = findNextEnabledIndex(currentIndex, -1);
             handled = true;
           }
@@ -178,7 +178,7 @@ export function useRovingTabindex(
         }
 
         case 'ArrowRight': {
-          if ('horizontal' === orientation || 'both' === orientation) {
+          if (orientation === 'horizontal' || orientation === 'both') {
             newIndex = findNextEnabledIndex(currentIndex, 1);
             handled = true;
           }
@@ -231,7 +231,7 @@ export function useRovingTabindex(
 
         default: {
           // Handle typeahead for printable characters
-          if (1 === key.length && !event.ctrlKey && !event.metaKey) {
+          if (key.length === 1 && !event.ctrlKey && !event.metaKey) {
             handleTypeahead(key);
             handled = true;
           }
@@ -333,7 +333,7 @@ export function RovingTabindexGroup({
   // Collect item refs
   useEffect(() => {
     const validItems = itemReferences.current.filter(
-      (item): item is HTMLElement => null !== item
+      (item): item is HTMLElement => item !== null
     );
     setItems(validItems);
   }, []);
@@ -359,7 +359,7 @@ export function RovingTabindexGroup({
         // Preserve original ref if exists
         const originalRef = (child as unknown).ref;
         if (originalRef) {
-          if ('function' === typeof originalRef) {
+          if (typeof originalRef === 'function') {
             originalRef(element);
           } else {
             originalRef.current = element;
@@ -465,13 +465,13 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
 
         // Handle wrapping
         if (wrap) {
-          if (0 > row) {
+          if (row < 0) {
             row = numberRows - 1;
           }
           if (row >= numberRows) {
             row = 0;
           }
-          if (0 > col) {
+          if (col < 0) {
             col = numberCols - 1;
           }
           if (col >= numberCols) {
@@ -615,7 +615,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
 
         default: {
           // Handle typeahead
-          if (1 === key.length && !event.ctrlKey && !event.metaKey) {
+          if (key.length === 1 && !event.ctrlKey && !event.metaKey) {
             // Use flat roving for typeahead in grid
             // Implementation would be similar to linear roving
             handled = true;

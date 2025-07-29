@@ -148,7 +148,7 @@ class PerformanceMonitor {
     this.notifyObservers(name, performanceMetric);
 
     // Log to console in development
-    if ('development' === process.env.NODE_ENV) {
+    if (process.env.NODE_ENV === 'development') {
       console.log(
         `[Performance] ${name}: ${metric.value.toFixed(2)}ms (${rating})`
       );
@@ -182,7 +182,7 @@ class PerformanceMonitor {
       const entries = list.getEntries();
 
       // Find the last long task before 5 seconds of quiet time
-      const longTasks = entries.filter((entry) => 50 < entry.duration);
+      const longTasks = entries.filter((entry) => entry.duration > 50);
 
       if (longTasks.length > 0) {
         const lastLongTask = longTasks.at(-1);
@@ -195,10 +195,10 @@ class PerformanceMonitor {
     observer.observe({ entryTypes: ['longtask'] });
 
     // Estimate TTI after load
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('load', () => {
         setTimeout(() => {
-          if (0 === tti) {
+          if (tti === 0) {
             tti = performance.now();
           }
 
@@ -232,7 +232,7 @@ class PerformanceMonitor {
     this.performanceObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         if (
-          'measure' === entry.entryType &&
+          entry.entryType === 'measure' &&
           entry.name.startsWith('glass-ui-')
         ) {
           this.customMetrics.set(entry.name, entry.duration);
@@ -338,7 +338,7 @@ class PerformanceMonitor {
    */
   getReport(): PerformanceReport {
     return {
-      url: 'undefined' === typeof window ? '' : window.location.href,
+      url: typeof window === 'undefined' ? '' : window.location.href,
       timestamp: Date.now(),
       webVitals: [...this.metrics.values()],
       componentMetrics: [...this.componentMetrics.values()],
@@ -375,16 +375,16 @@ class PerformanceMonitor {
    */
   private setupPeriodicReporting(): void {
     // Send report on page visibility change
-    if ('undefined' !== typeof document) {
+    if (typeof document !== 'undefined') {
       document.addEventListener('visibilitychange', () => {
-        if ('hidden' === document.visibilityState) {
+        if (document.visibilityState === 'hidden') {
           this.sendReport();
         }
       });
     }
 
     // Send report before unload
-    if ('undefined' !== typeof window) {
+    if (typeof window !== 'undefined') {
       window.addEventListener('beforeunload', () => {
         this.sendReport();
       });
@@ -392,7 +392,7 @@ class PerformanceMonitor {
 
     // Send report every 30 seconds
     setInterval(() => {
-      if ('visible' === document.visibilityState) {
+      if (document.visibilityState === 'visible') {
         this.sendReport();
       }
     }, 30_000);
@@ -410,7 +410,7 @@ class PerformanceMonitor {
     return () => {
       const obs = this.observers.get(metricName) || [];
       const index = obs.indexOf(callback);
-      if (-1 < index) {
+      if (index > -1) {
         obs.splice(index, 1);
       }
     };

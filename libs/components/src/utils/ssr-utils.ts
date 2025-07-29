@@ -8,7 +8,7 @@
  * Check if code is running in a browser environment
  * @returns {boolean} true if running in browser, false if server-side
  */
-export const isBrowser = (): boolean => 'undefined' !== typeof window;
+export const isBrowser = (): boolean => typeof window !== 'undefined';
 export const isClient = isBrowser;
 export const isServer = (): boolean => !isBrowser();
 
@@ -16,13 +16,13 @@ export const isServer = (): boolean => !isBrowser();
  * Check if document object is available
  * @returns {boolean} true if document is available
  */
-export const isDocument = (): boolean => 'undefined' !== typeof document;
+export const isDocument = (): boolean => typeof document !== 'undefined';
 
 /**
  * Check if navigator object is available
  * @returns {boolean} true if navigator is available
  */
-export const isNavigator = (): boolean => 'undefined' !== typeof navigator;
+export const isNavigator = (): boolean => typeof navigator !== 'undefined';
 
 /**
  * Safe window object with SSR fallback
@@ -184,7 +184,7 @@ export const safeRequestAnimationFrame = (
  */
 export const safeCancelAnimationFrame = (id: number | null): void => {
   const win = safeWindow();
-  if (win?.cancelAnimationFrame && null !== id) {
+  if (win?.cancelAnimationFrame && id !== null) {
     win.cancelAnimationFrame(id);
   }
 };
@@ -199,7 +199,7 @@ export const safeSetTimeout = (
   callback: () => void,
   delay: number
 ): NodeJS.Timeout | number | null => {
-  if ('undefined' !== typeof setTimeout) {
+  if (typeof setTimeout !== 'undefined') {
     return setTimeout(callback, delay);
   }
   return;
@@ -210,7 +210,7 @@ export const safeSetTimeout = (
  * @param {NodeJS.Timeout | number | null} id - timeout ID to clear
  */
 export const safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
-  if ('undefined' !== typeof clearTimeout && null !== id) {
+  if (typeof clearTimeout !== 'undefined' && id !== null) {
     clearTimeout(id as unknown);
   }
 };
@@ -225,7 +225,7 @@ export const safeSetInterval = (
   callback: () => void,
   delay: number
 ): NodeJS.Timeout | number | null => {
-  if ('undefined' !== typeof setInterval) {
+  if (typeof setInterval !== 'undefined') {
     return setInterval(callback, delay);
   }
   return;
@@ -236,7 +236,7 @@ export const safeSetInterval = (
  * @param {NodeJS.Timeout | number | null} id - interval ID to clear
  */
 export const safeClearInterval = (id: NodeJS.Timeout | number | null): void => {
-  if ('undefined' !== typeof clearInterval && null !== id) {
+  if (typeof clearInterval !== 'undefined' && id !== null) {
     clearInterval(id as unknown);
   }
 };
@@ -324,7 +324,7 @@ export const isTouchDevice = (): boolean => {
   const win = safeWindow();
   const nav = safeNavigator();
 
-  return Boolean(win && ('ontouchstart' in win || (nav && 0 < nav.maxTouchPoints)));
+  return Boolean(win && ('ontouchstart' in win || (nav && nav.maxTouchPoints > 0)));
 };
 
 /**
