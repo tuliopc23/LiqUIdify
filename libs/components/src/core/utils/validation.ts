@@ -368,7 +368,7 @@ export const a11yValidators = {
     ): Validator<Record<string, unknown>> =>
     (props) => {
       const isInteractive =
-        props.onClick || props.onKeyDown || props.tabIndex !== null;
+        Boolean(props.onClick || props.onKeyDown || props.tabIndex !== null);
       if (!isInteractive) {
         return createValidationResult(true);
       }
