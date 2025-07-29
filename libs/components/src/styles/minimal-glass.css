@@ -98,7 +98,6 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   background: var(--glass-light);
-  border: 1px solid var(--glass-border);
   transform: translateZ(0);
   will-change: backdrop-filter;
   border-radius: var(--radius-md);
