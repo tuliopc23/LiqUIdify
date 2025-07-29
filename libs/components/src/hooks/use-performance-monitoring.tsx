@@ -5,15 +5,15 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react';
-import { performanceMonitor } from '../core/performance-monitor';
+} from "react";
+import { performanceMonitor } from "../core/performance-monitor";
 
 /**
  * Hook for component-level performance monitoring
  */
 export function usePerformanceMonitoring(
   componentName: string,
-  props?: Record<string, unknown>
+  props?: Record<string, unknown>,
 ) {
   const renderStartTime = useRef<number>(0);
   const mountStartTime = useRef<number>(0);
@@ -62,18 +62,18 @@ export function usePerformanceMonitoring(
   const startTiming = useCallback(
     (name: string) =>
       performanceMonitor.startTiming(`${componentName}-${name}`),
-    [componentName]
+    [componentName],
   );
 
   const endTiming = useCallback(
     (name: string) => performanceMonitor.endTiming(`${componentName}-${name}`),
-    [componentName]
+    [componentName],
   );
 
   const trackMetric = useCallback(
     (name: string, value: number) =>
       performanceMonitor.trackCustomMetric(`${componentName}-${name}`, value),
-    [componentName]
+    [componentName],
   );
 
   return {
@@ -89,10 +89,10 @@ export function usePerformanceMonitoring(
  */
 export function withPerformanceMonitoring<P extends object>(
   Component: ComponentType<P>,
-  componentName?: string
+  componentName?: string,
 ): ComponentType<P> {
   const displayName =
-    componentName || Component.displayName || Component.name || 'Unknown';
+    componentName || Component.displayName || Component.name || "Unknown";
 
   function WrappedComponent(props: P): ReactElement {
     usePerformanceMonitoring(displayName, props as Record<string, unknown>);
@@ -111,7 +111,7 @@ export function withPerformanceMonitoring<P extends object>(
 export function useWebVitals(
   callback?: (metric: {
     webVitals: Array<{ name: string; value: number }>;
-  }) => void
+  }) => void,
 ) {
   const [metrics, setMetrics] = useState<Record<string, number>>({});
 
@@ -142,7 +142,7 @@ export function useWebVitals(
 export function useRealtimePerformance() {
   const [fps, setFps] = useState(60);
   const [memory, setMemory] = useState<{ used: number; limit: number } | null>(
-    undefined
+    undefined,
   );
   const frameCountRef = useRef(0);
   const lastTimeRef = useRef(performance.now());
@@ -163,7 +163,7 @@ export function useRealtimePerformance() {
       }
 
       // Measure memory if available
-      if ('memory' in performance) {
+      if ("memory" in performance) {
         const memInfo = (performance as unknown).memory;
         setMemory({
           used: Math.round(memInfo.usedJSHeapSize / 1_048_576), // Convert to MB

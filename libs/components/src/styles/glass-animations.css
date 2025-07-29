@@ -65,7 +65,7 @@
 }
 
 .glass-liquid-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -141,7 +141,7 @@
 }
 
 .glass-specular::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -100%;
   left: -100%;
@@ -204,7 +204,7 @@
 }
 
 .glass-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -238,12 +238,12 @@
 
 /* Distortion Effects */
 .glass-distort {
-  filter: url('#glass-turbulence');
+  filter: url("#glass-turbulence");
   transition: filter 300ms ease-out;
 }
 
 .glass-distort:hover {
-  filter: url('#glass-turbulence-hover');
+  filter: url("#glass-turbulence-hover");
 }
 
 /* Performance Optimizations */

@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useEffect, useState } from 'react';
-import { GlassProgress } from './glass-progress';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useEffect, useState } from "react";
+import { GlassProgress } from "./glass-progress";
 
 const meta = {
-  title: 'Components/GlassProgress',
+  title: "Components/GlassProgress",
   component: GlassProgress,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -24,7 +24,7 @@ It supports different sizes, colors, variants, and can optionally show the perce
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="w-full max-w-md p-8">
@@ -34,35 +34,35 @@ It supports different sizes, colors, variants, and can optionally show the perce
   ],
   argTypes: {
     value: {
-      description: 'Current progress value',
-      control: { type: 'range', min: 0, max: 100, step: 1 },
+      description: "Current progress value",
+      control: { type: "range", min: 0, max: 100, step: 1 },
     },
     max: {
-      description: 'Maximum value (default: 100)',
-      control: { type: 'number', min: 1 },
+      description: "Maximum value (default: 100)",
+      control: { type: "number", min: 1 },
     },
     size: {
-      description: 'Size of the progress bar',
-      control: { type: 'select' },
-      options: ['sm', 'md', 'lg'],
+      description: "Size of the progress bar",
+      control: { type: "select" },
+      options: ["sm", "md", "lg"],
     },
     variant: {
-      description: 'Visual variant of the progress bar',
-      control: { type: 'select' },
-      options: ['default', 'gradient', 'minimal'],
+      description: "Visual variant of the progress bar",
+      control: { type: "select" },
+      options: ["default", "gradient", "minimal"],
     },
     showValue: {
-      description: 'Show the percentage value',
-      control: { type: 'boolean' },
+      description: "Show the percentage value",
+      control: { type: "boolean" },
     },
     color: {
-      description: 'Color theme of the progress bar',
-      control: { type: 'select' },
-      options: ['blue', 'green', 'purple', 'red', 'yellow'],
+      description: "Color theme of the progress bar",
+      control: { type: "select" },
+      options: ["blue", "green", "purple", "red", "yellow"],
     },
     className: {
-      description: 'Additional CSS classes',
-      control: { type: 'text' },
+      description: "Additional CSS classes",
+      control: { type: "text" },
     },
   },
 } satisfies Meta<typeof GlassProgress>;
@@ -75,10 +75,10 @@ export const Default: Story = {
   args: {
     value: 60,
     max: 100,
-    size: 'md',
-    variant: 'default',
+    size: "md",
+    variant: "default",
     showValue: false,
-    color: 'blue',
+    color: "blue",
   },
 };
 
@@ -213,7 +213,7 @@ export const LoadingSimulation: Story = {
           disabled={loading}
           className="w-full rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {loading ? 'Loading...' : 'Start Loading'}
+          {loading ? "Loading..." : "Start Loading"}
         </button>
       </div>
     );
@@ -224,10 +224,10 @@ export const LoadingSimulation: Story = {
 export const MultipleProgress: Story = {
   render: () => {
     const tasks = [
-      { name: 'Uploading files', progress: 75, color: 'blue' as const },
-      { name: 'Processing data', progress: 45, color: 'purple' as const },
-      { name: 'Generating report', progress: 90, color: 'green' as const },
-      { name: 'Sending emails', progress: 30, color: 'yellow' as const },
+      { name: "Uploading files", progress: 75, color: "blue" as const },
+      { name: "Processing data", progress: 45, color: "purple" as const },
+      { name: "Generating report", progress: 90, color: "green" as const },
+      { name: "Sending emails", progress: 30, color: "yellow" as const },
     ];
 
     return (
@@ -320,7 +320,7 @@ export const RealWorldExamples: Story = {
               disabled={isUploading}
               className="text-blue-500 text-sm hover:text-blue-600 disabled:text-gray-400"
             >
-              {isUploading ? 'Uploading...' : 'Start Upload'}
+              {isUploading ? "Uploading..." : "Start Upload"}
             </button>
           </div>
         </div>
@@ -330,10 +330,10 @@ export const RealWorldExamples: Story = {
           <h3 className="mb-4 font-semibold">Skills</h3>
           <div className="space-y-4">
             {[
-              { skill: 'React', level: 90, color: 'blue' as const },
-              { skill: 'TypeScript', level: 85, color: 'purple' as const },
-              { skill: 'Node.js', level: 75, color: 'green' as const },
-              { skill: 'Python', level: 60, color: 'yellow' as const },
+              { skill: "React", level: 90, color: "blue" as const },
+              { skill: "TypeScript", level: 85, color: "purple" as const },
+              { skill: "Node.js", level: 75, color: "green" as const },
+              { skill: "Python", level: 60, color: "yellow" as const },
             ].map((item) => (
               <div key={item.skill}>
                 <div className="mb-1 flex justify-between">
@@ -429,9 +429,9 @@ export const IndeterminateLoading: Story = {
 export const StackedProgress: Story = {
   render: () => {
     const segments = [
-      { label: 'Completed', value: 40, color: 'bg-green-500' },
-      { label: 'In Progress', value: 30, color: 'bg-blue-500' },
-      { label: 'Pending', value: 30, color: 'bg-gray-300' },
+      { label: "Completed", value: 40, color: "bg-green-500" },
+      { label: "In Progress", value: 30, color: "bg-blue-500" },
+      { label: "Pending", value: 30, color: "bg-gray-300" },
     ];
 
     return (

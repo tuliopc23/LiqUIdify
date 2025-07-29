@@ -20,36 +20,36 @@ export interface I18nContext {
 const defaultMessages: Record<string, Record<string, string>> = {
   en: {
     // Common UI elements
-    'common.close': 'Close',
-    'common.open': 'Open',
-    'common.save': 'Save',
-    'common.cancel': 'Cancel',
-    'common.delete': 'Delete',
-    'common.edit': 'Edit',
-    'common.loading': 'Loading...',
-    'common.error': 'Error',
-    'common.success': 'Success',
-    'common.warning': 'Warning',
-    'common.info': 'Info',
+    "common.close": "Close",
+    "common.open": "Open",
+    "common.save": "Save",
+    "common.cancel": "Cancel",
+    "common.delete": "Delete",
+    "common.edit": "Edit",
+    "common.loading": "Loading...",
+    "common.error": "Error",
+    "common.success": "Success",
+    "common.warning": "Warning",
+    "common.info": "Info",
 
     // Accessibility
-    'a11y.skipToContent': 'Skip to content',
-    'a11y.menu': 'Menu',
-    'a11y.navigation': 'Navigation',
-    'a11y.search': 'Search',
-    'a11y.closeModal': 'Close modal',
-    'a11y.openMenu': 'Open menu',
-    'a11y.closeMenu': 'Close menu',
+    "a11y.skipToContent": "Skip to content",
+    "a11y.menu": "Menu",
+    "a11y.navigation": "Navigation",
+    "a11y.search": "Search",
+    "a11y.closeModal": "Close modal",
+    "a11y.openMenu": "Open menu",
+    "a11y.closeMenu": "Close menu",
 
     // Forms
-    'form.required': 'This field is required',
-    'form.invalid': 'Invalid input',
-    'form.submit': 'Submit',
-    'form.reset': 'Reset',
+    "form.required": "This field is required",
+    "form.invalid": "Invalid input",
+    "form.submit": "Submit",
+    "form.reset": "Reset",
 
     // Glass components
-    'glass.reducedMotion': 'Animations reduced for accessibility',
-    'glass.highContrast': 'High contrast mode active',
+    "glass.reducedMotion": "Animations reduced for accessibility",
+    "glass.highContrast": "High contrast mode active",
   },
 };
 
@@ -59,8 +59,8 @@ class I18n {
 
   constructor(config?: Partial<I18nConfig>) {
     this.config = {
-      locale: config?.locale || 'en',
-      fallbackLocale: config?.fallbackLocale || 'en',
+      locale: config?.locale || "en",
+      fallbackLocale: config?.fallbackLocale || "en",
       messages: { ...defaultMessages, ...config?.messages },
     };
     this.currentLocale = this.config.locale;
@@ -82,8 +82,8 @@ class I18n {
     if (params) {
       for (const [parameterKey, value] of Object.entries(params)) {
         message = message.replaceAll(
-          new RegExp(`\\{${parameterKey}\\}`, 'g'),
-          String(value)
+          new RegExp(`\\{${parameterKey}\\}`, "g"),
+          String(value),
         );
       }
     }
@@ -149,10 +149,10 @@ export const i18n = new I18n();
 export const t = i18n.t.bind(i18n);
 
 // React hook for i18n (to be used with a context provider)
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
 export const I18nContext = createContext<I18nContext>({
-  locale: 'en',
+  locale: "en",
   t: i18n.t.bind(i18n),
   setLocale: i18n.setLocale.bind(i18n),
 });

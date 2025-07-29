@@ -45,8 +45,8 @@ bun add liquidify
 ### Basic Usage
 
 ```tsx
-import { GlassButton, GlassCard, ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
+import { GlassButton, GlassCard, ThemeProvider } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return (
@@ -69,13 +69,13 @@ function App() {
 
 ```tsx
 // Import specific components
-import { GlassButton } from 'liquidify/button';
-import { GlassCard } from 'liquidify/card';
+import { GlassButton } from "liquidify/button";
+import { GlassCard } from "liquidify/card";
 
 // Import component bundles
-import { CoreComponents } from 'liquidify/core';
-import { FormComponents } from 'liquidify/forms';
-import { AnimationComponents } from 'liquidify/animations';
+import { CoreComponents } from "liquidify/core";
+import { FormComponents } from "liquidify/forms";
+import { AnimationComponents } from "liquidify/animations";
 ```
 
 ## 📚 Documentation
@@ -89,6 +89,7 @@ import { AnimationComponents } from 'liquidify/animations';
 ## 🎨 Component Categories
 
 ### 🎯 Core Components (15KB bundle)
+
 - `GlassButton` - Interactive buttons with magnetic hover and ripple effects
 - `GlassCard` - Container components with compound component pattern
 - `GlassInput` - Form inputs with validation states and icons
@@ -97,6 +98,7 @@ import { AnimationComponents } from 'liquidify/animations';
 - `GlassFocusTrap` - Accessibility-focused component wrapper
 
 ### 📝 Form Components (8KB bundle)
+
 - `GlassFormField` - Complete form field wrapper with validation
 - `GlassCheckbox` & `GlassCheckboxGroup` - Styled checkboxes with groups
 - `GlassRadioGroup` - Radio button groups with proper ARIA
@@ -109,12 +111,14 @@ import { AnimationComponents } from 'liquidify/animations';
 - `GlassFileUpload` - Drag & drop file upload with progress
 
 ### 🧭 Navigation Components (6KB bundle)
+
 - `GlassTabs` - Tabbed interfaces with keyboard navigation
 - `GlassBreadcrumbs` - Navigation breadcrumbs with separators
 - `GlassMobileNav` - Mobile-optimized navigation
 - `GlassSkipNavigation` - Accessibility skip links
 
 ### 💬 Feedback Components (5KB bundle)
+
 - `GlassToast` - Notification toasts with positioning
 - `GlassProgress` - Progress indicators (linear, circular, steps)
 - `GlassLoading` - Loading spinners (spinner, dots, pulse, bars)
@@ -122,6 +126,7 @@ import { AnimationComponents } from 'liquidify/animations';
 - `GlassSkeleton` - Loading placeholders with shimmer effects
 
 ### 📊 Advanced Components (12KB bundle)
+
 - `GlassChart` - Data visualization (Line, Bar, Donut charts)
 - `GlassTable` - Data tables with sorting, filtering, pagination
 - `GlassPlayground` - Interactive code playground with live editing
@@ -129,6 +134,7 @@ import { AnimationComponents } from 'liquidify/animations';
 - `AppleLiquidGlass` - Advanced glassmorphism effects
 
 ### ♿ Accessibility Components (4KB bundle)
+
 - `GlassAccessibleDemo` - Accessibility features demonstration
 - `GlassFocusDemo` - Focus management examples
 - `GlassLiveRegion` - Screen reader announcements
@@ -140,8 +146,8 @@ import { AnimationComponents } from 'liquidify/animations';
 
 ```tsx
 // pages/_app.tsx
-import { ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
+import { ThemeProvider } from "liquidify";
+import "liquidify/styles";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -156,13 +162,13 @@ export default function App({ Component, pageProps }) {
 
 ```tsx
 // main.tsx
-import { ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
+import { ThemeProvider } from "liquidify";
+import "liquidify/styles";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider>
     <App />
-  </ThemeProvider>
+  </ThemeProvider>,
 );
 ```
 
@@ -170,11 +176,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 ```tsx
 // app/root.tsx
-import { ThemeProvider } from 'liquidify';
-import liquidifyStyles from 'liquidify/styles';
+import { ThemeProvider } from "liquidify";
+import liquidifyStyles from "liquidify/styles";
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: liquidifyStyles },
+  { rel: "stylesheet", href: liquidifyStyles },
 ];
 
 export default function App() {
@@ -199,30 +205,26 @@ export default function App() {
 LiqUIdify supports comprehensive theming:
 
 ```tsx
-import { ThemeProvider, createTheme } from 'liquidify';
+import { ThemeProvider, createTheme } from "liquidify";
 
 const customTheme = createTheme({
   colors: {
-    primary: '#667eea',
-    secondary: '#764ba2',
+    primary: "#667eea",
+    secondary: "#764ba2",
     glass: {
-      background: 'rgba(255, 255, 255, 0.1)',
-      border: 'rgba(255, 255, 255, 0.2)',
-      blur: '10px',
+      background: "rgba(255, 255, 255, 0.1)",
+      border: "rgba(255, 255, 255, 0.2)",
+      blur: "10px",
     },
   },
   animations: {
-    duration: '0.3s',
-    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    duration: "0.3s",
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
   },
 });
 
 function App() {
-  return (
-    <ThemeProvider theme={customTheme}>
-      {/* Your app */}
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={customTheme}>{/* Your app */}</ThemeProvider>;
 }
 ```
 
@@ -298,14 +300,14 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 ## 📊 Project Status
 
-| Metric | Status |
-|--------|--------|
-| Components | 52/52 with Storybook coverage |
-| Bundle Size | < 30KB (core), < 60KB (full) |
-| TypeScript | 100% coverage |
-| Accessibility | WCAG 2.1 AA compliant |
+| Metric            | Status                            |
+| ----------------- | --------------------------------- |
+| Components        | 52/52 with Storybook coverage     |
+| Bundle Size       | < 30KB (core), < 60KB (full)      |
+| TypeScript        | 100% coverage                     |
+| Accessibility     | WCAG 2.1 AA compliant             |
 | Framework Support | Next.js, Vite, Remix, Gatsby, CRA |
-| Test Coverage | 95%+ |
+| Test Coverage     | 95%+                              |
 
 ![GitHub stars](https://img.shields.io/github/stars/tuliopc23/LiqUIdify?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/tuliopc23/LiqUIdify?style=social)

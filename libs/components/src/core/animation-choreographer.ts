@@ -9,8 +9,8 @@
  * - Performance optimization
  */
 
-import { type RefObject, useEffect } from 'react';
-import { performanceMonitor } from './performance-monitor';
+import { type RefObject, useEffect } from "react";
+import { performanceMonitor } from "./performance-monitor";
 
 // Import Web Animation API types or define them if not available
 interface Keyframe {
@@ -30,12 +30,12 @@ interface KeyframeAnimationOptions {
 }
 
 type PlaybackDirection =
-  | 'normal'
-  | 'reverse'
-  | 'alternate'
-  | 'alternate-reverse';
-type FillMode = 'none' | 'forwards' | 'backwards' | 'both' | 'auto';
-type CompositeOperation = 'replace' | 'add' | 'accumulate';
+  | "normal"
+  | "reverse"
+  | "alternate"
+  | "alternate-reverse";
+type FillMode = "none" | "forwards" | "backwards" | "both" | "auto";
+type CompositeOperation = "replace" | "add" | "accumulate";
 
 // Types
 export interface AnimationSequenceOptions {
@@ -43,7 +43,7 @@ export interface AnimationSequenceOptions {
   stagger?: number;
   easing?: string;
   delay?: number;
-  direction?: 'forward' | 'reverse' | 'alternate';
+  direction?: "forward" | "reverse" | "alternate";
   iterations?: number;
   reducedMotion?: boolean;
 }
@@ -91,9 +91,9 @@ export class AnimationSequence {
     this.options = {
       duration: 500,
       stagger: 50,
-      easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+      easing: "cubic-bezier(0.25, 0.1, 0.25, 1)",
       delay: 0,
-      direction: 'forward',
+      direction: "forward",
       iterations: 1,
       reducedMotion: false,
       ...options,
@@ -102,8 +102,8 @@ export class AnimationSequence {
     // Check for reduced motion preference
     this.prefersReducedMotion =
       this.options.reducedMotion ||
-      (typeof window !== 'undefined' &&
-        window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+      (typeof window !== "undefined" &&
+        window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
   }
 
   /**
@@ -131,7 +131,7 @@ export class AnimationSequence {
     }
 
     this.isPlaying = true;
-    performanceMonitor.startTiming('animation-sequence');
+    performanceMonitor.startTiming("animation-sequence");
 
     // Create animations
     this.animations = [];
@@ -157,15 +157,15 @@ export class AnimationSequence {
 
         // Create animation
         const directionMapping: Record<string, PlaybackDirection> = {
-          forward: 'normal',
-          reverse: 'reverse',
-          alternate: 'alternate',
+          forward: "normal",
+          reverse: "reverse",
+          alternate: "alternate",
         };
 
         const direction =
           this.options.direction && directionMapping[this.options.direction]
             ? directionMapping[this.options.direction]
-            : 'normal';
+            : "normal";
 
         const animation = target.animate(keyframes, {
           duration: this.options.duration,
@@ -178,11 +178,11 @@ export class AnimationSequence {
 
         // Add event listeners
         if (step.onStart) {
-          animation.addEventListener('start', step.onStart);
+          animation.addEventListener("start", step.onStart);
         }
 
         if (step.onFinish) {
-          animation.addEventListener('finish', step.onFinish);
+          animation.addEventListener("finish", step.onFinish);
         }
 
         this.animations.push(animation);
@@ -199,7 +199,7 @@ export class AnimationSequence {
     await Promise.all(this.animations.map((animation) => animation.finished));
 
     this.isPlaying = false;
-    performanceMonitor.endTiming('animation-sequence');
+    performanceMonitor.endTiming("animation-sequence");
   }
 
   /**
@@ -243,8 +243,8 @@ export class AnimationSequence {
     // Update reduced motion preference
     this.prefersReducedMotion =
       this.options.reducedMotion ||
-      (typeof window !== 'undefined' &&
-        window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+      (typeof window !== "undefined" &&
+        window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
 
     return this;
   }
@@ -253,9 +253,9 @@ export class AnimationSequence {
    * Get target elements from selector or element reference
    */
   private getTargetElements(
-    target: string | HTMLElement | Array<HTMLElement>
+    target: string | HTMLElement | Array<HTMLElement>,
   ): Array<HTMLElement> {
-    if (typeof target === 'string') {
+    if (typeof target === "string") {
       return [...document.querySelectorAll(target)] as Array<HTMLElement>;
     }
     if (Array.isArray(target)) {
@@ -278,15 +278,15 @@ export class AnimationSequence {
     const last = { ...keyframes.at(-1) };
 
     // Remove transform properties that cause motion
-    const motionProps = ['translate', 'rotate', 'scale', 'skew'];
+    const motionProps = ["translate", "rotate", "scale", "skew"];
 
     for (const frame of [first, last]) {
       if (frame.transform) {
         let transform = frame.transform as string;
         for (const property of motionProps) {
           transform = transform.replaceAll(
-            new RegExp(`${property}\\([^)]+\\)`, 'g'),
-            ''
+            new RegExp(`${property}\\([^)]+\\)`, "g"),
+            "",
           );
         }
         frame.transform = transform;
@@ -317,7 +317,7 @@ export class SpringAnimation {
     property: string,
     initialValue: number,
     targetValue: number,
-    options: SpringOptions = {}
+    options: SpringOptions = {},
   ) {
     this.target = target;
     this.property = property;
@@ -429,35 +429,35 @@ export class SpringAnimation {
   private applyValueToProperty(value: number): void {
     // Handle different property types
     switch (this.property) {
-      case 'x':
-      case 'y': {
-        const transform = this.target.style.transform || '';
+      case "x":
+      case "y": {
+        const transform = this.target.style.transform || "";
         const regex = new RegExp(
           `translate${this.property.toUpperCase()}\\([^)]+\\)`,
-          'g'
+          "g",
         );
-        const newTransform = transform.replace(regex, '');
+        const newTransform = transform.replace(regex, "");
         this.target.style.transform = `${newTransform} translate${this.property.toUpperCase()}(${value}px)`;
 
         break;
       }
-      case 'rotate': {
-        const transform = this.target.style.transform || '';
+      case "rotate": {
+        const transform = this.target.style.transform || "";
         const regex = /rotate\([^)]+\)/g;
-        const newTransform = transform.replaceAll(regex, '');
+        const newTransform = transform.replaceAll(regex, "");
         this.target.style.transform = `${newTransform} rotate(${value}deg)`;
 
         break;
       }
-      case 'scale': {
-        const transform = this.target.style.transform || '';
+      case "scale": {
+        const transform = this.target.style.transform || "";
         const regex = /scale\([^)]+\)/g;
-        const newTransform = transform.replaceAll(regex, '');
+        const newTransform = transform.replaceAll(regex, "");
         this.target.style.transform = `${newTransform} scale(${value})`;
 
         break;
       }
-      case 'opacity': {
+      case "opacity": {
         this.target.style.opacity = value.toString();
 
         break;
@@ -476,7 +476,7 @@ export class SpringAnimation {
  */
 export function useMagneticEffect(
   ref: RefObject<HTMLElement>,
-  options: MagneticOptions = {}
+  options: MagneticOptions = {},
 ): void {
   const {
     strength = 40,
@@ -490,8 +490,8 @@ export function useMagneticEffect(
 
   const prefersReducedMotion =
     respectReducedMotion &&
-    typeof window !== 'undefined' &&
-    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
   useEffect(() => {
     const element = ref.current;
@@ -529,7 +529,7 @@ export function useMagneticEffect(
         // Start hovering if mouse is within radius
         if (distance < radius) {
           isHovering = true;
-          element.style.transition = 'none';
+          element.style.transition = "none";
           if (!animationFrame) {
             animationFrame = requestAnimationFrame(update);
           }
@@ -553,7 +553,7 @@ export function useMagneticEffect(
         // If mouse is outside radius, stop hovering
         if (distance > radius) {
           isHovering = false;
-          element.style.transition = 'transform 0.5s ease-out';
+          element.style.transition = "transform 0.5s ease-out";
         } else {
           // Calculate magnetic effect
           const power = Math.min(distance / radius, 1);
@@ -595,8 +595,8 @@ export function useMagneticEffect(
           Math.abs(elementRotateX) < 0.1 &&
           Math.abs(elementRotateY) < 0.1
         ) {
-          element.style.transform = '';
-          element.style.transition = '';
+          element.style.transform = "";
+          element.style.transition = "";
           cancelAnimationFrame(animationFrame!);
           animationFrame = null;
           return;
@@ -609,21 +609,21 @@ export function useMagneticEffect(
 
     // Initialize
     updateElementPosition();
-    if (typeof window !== 'undefined') {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('resize', updateElementPosition);
-      window.addEventListener('scroll', updateElementPosition);
+    if (typeof window !== "undefined") {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("resize", updateElementPosition);
+      window.addEventListener("scroll", updateElementPosition);
     }
-    element.addEventListener('mouseleave', handleMouseLeave);
+    element.addEventListener("mouseleave", handleMouseLeave);
 
     // Cleanup
     return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('resize', updateElementPosition);
-        window.removeEventListener('scroll', updateElementPosition);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("resize", updateElementPosition);
+        window.removeEventListener("scroll", updateElementPosition);
       }
-      element.removeEventListener('mouseleave', handleMouseLeave);
+      element.removeEventListener("mouseleave", handleMouseLeave);
 
       if (animationFrame !== null) {
         cancelAnimationFrame(animationFrame);
@@ -651,14 +651,14 @@ export class AnimationChoreographer {
 
   constructor() {
     this.prefersReducedMotion =
-      typeof window !== 'undefined' &&
-      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
     // Listen for changes to reduced motion preference
-    if (typeof window !== 'undefined' && window.matchMedia) {
+    if (typeof window !== "undefined" && window.matchMedia) {
       window
-        .matchMedia('(prefers-reduced-motion: reduce)')
-        .addEventListener('change', this.handleReducedMotionChange);
+        .matchMedia("(prefers-reduced-motion: reduce)")
+        .addEventListener("change", this.handleReducedMotionChange);
     }
   }
 
@@ -667,7 +667,7 @@ export class AnimationChoreographer {
    */
   createSequence(
     id: string,
-    options: AnimationSequenceOptions = {}
+    options: AnimationSequenceOptions = {},
   ): AnimationSequence {
     const sequence = new AnimationSequence({
       ...options,
@@ -722,14 +722,14 @@ export class AnimationChoreographer {
     property: string,
     initialValue: number,
     targetValue: number,
-    options: SpringOptions = {}
+    options: SpringOptions = {},
   ): SpringAnimation {
     return new SpringAnimation(
       target,
       property,
       initialValue,
       targetValue,
-      options
+      options,
     );
   }
 
@@ -752,10 +752,10 @@ export class AnimationChoreographer {
     this.stopAll();
     this.sequences.clear();
 
-    if (typeof window !== 'undefined' && window.matchMedia) {
+    if (typeof window !== "undefined" && window.matchMedia) {
       window
-        .matchMedia('(prefers-reduced-motion: reduce)')
-        .removeEventListener('change', this.handleReducedMotionChange);
+        .matchMedia("(prefers-reduced-motion: reduce)")
+        .removeEventListener("change", this.handleReducedMotionChange);
     }
   }
 }

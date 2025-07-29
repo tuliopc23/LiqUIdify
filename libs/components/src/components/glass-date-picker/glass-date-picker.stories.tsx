@@ -1,16 +1,16 @@
-import { GlassDatePicker } from './glass-date-picker';
-import '@/styles/apple-liquid-authentic.css';
+import { GlassDatePicker } from "./glass-date-picker";
+import "@/styles/apple-liquid-authentic.css";
 
 export default {
-  title: 'Components/GlassDatePicker',
+  title: "Components/GlassDatePicker",
   component: GlassDatePicker,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A date picker component with Liquid Glass styling for consistent Apple-inspired UI.',
+          "A date picker component with Liquid Glass styling for consistent Apple-inspired UI.",
       },
     },
   },
@@ -36,8 +36,8 @@ export const EdgeCases = () => (
       <h3 className="mb-2 text-white">Date Range (Min/Max)</h3>
       <GlassDatePicker
         placeholder="Select date within range..."
-        minDate={new Date('2024-01-01')}
-        maxDate={new Date('2024-12-31')}
+        minDate={new Date("2024-01-01")}
+        maxDate={new Date("2024-12-31")}
       />
     </div>
   </div>

@@ -5,9 +5,9 @@
  * and provide consistent animation behaviors across all Glass UI components.
  */
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import type { AnimationTiming, GlassIntensity } from '@/core/base-component';
+import type { AnimationTiming, GlassIntensity } from "@/core/base-component";
 
 // Define GlassEffectState locally since it's not exported
 interface GlassEffectState {
@@ -32,39 +32,39 @@ export interface AnimationConfig {
   easing: string;
   delay?: number;
   iterations?: number;
-  direction?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
-  fill?: 'none' | 'forwards' | 'backwards' | 'both';
+  direction?: "normal" | "reverse" | "alternate" | "alternate-reverse";
+  fill?: "none" | "forwards" | "backwards" | "both";
 }
 
 // Animation timing presets
 const TIMING_PRESETS: Record<AnimationTiming, AnimationConfig> = {
-  instant: { duration: 0, easing: 'linear' },
-  fast: { duration: 150, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
-  normal: { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
-  slow: { duration: 500, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
-  slower: { duration: 750, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
+  instant: { duration: 0, easing: "linear" },
+  fast: { duration: 150, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+  normal: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+  slow: { duration: 500, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+  slower: { duration: 750, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
 };
 
 // Glass-specific animation presets
 const GLASS_ANIMATION_PRESETS = {
-  'glass-in': { duration: 300, easing: 'cubic-bezier(0.32, 0, 0.67, 0)' },
-  'glass-out': { duration: 300, easing: 'cubic-bezier(0.33, 1, 0.68, 1)' },
-  'liquid-flow': { duration: 600, easing: 'cubic-bezier(0.36, 0.66, 0.04, 1)' },
-  magnetic: { duration: 200, easing: 'cubic-bezier(0.2, 0, 0, 1.2)' },
-  spring: { duration: 400, easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)' },
-  bounce: { duration: 500, easing: 'cubic-bezier(0.87, -0.41, 0.19, 1.44)' },
+  "glass-in": { duration: 300, easing: "cubic-bezier(0.32, 0, 0.67, 0)" },
+  "glass-out": { duration: 300, easing: "cubic-bezier(0.33, 1, 0.68, 1)" },
+  "liquid-flow": { duration: 600, easing: "cubic-bezier(0.36, 0.66, 0.04, 1)" },
+  magnetic: { duration: 200, easing: "cubic-bezier(0.2, 0, 0, 1.2)" },
+  spring: { duration: 400, easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)" },
+  bounce: { duration: 500, easing: "cubic-bezier(0.87, -0.41, 0.19, 1.44)" },
 };
 
 /**
  * Base animation hook for consistent animation behavior
  */
 export function useGlassAnimation(
-  timing: AnimationTiming = 'normal',
-  customConfig?: Partial<AnimationConfig>
+  timing: AnimationTiming = "normal",
+  customConfig?: Partial<AnimationConfig>,
 ) {
   const [state, setState] = useState<AnimationState>({
     isAnimating: false,
-    currentState: 'idle',
+    currentState: "idle",
     progress: 0,
   });
 
@@ -76,14 +76,14 @@ export function useGlassAnimation(
       ...TIMING_PRESETS[timing],
       ...customConfig,
     }),
-    [timing, customConfig]
+    [timing, customConfig],
   );
 
   const animate = useCallback(
     (
       element: HTMLElement,
       keyframes: Array<Keyframe>,
-      options?: Partial<AnimationConfig>
+      options?: Partial<AnimationConfig>,
     ) => {
       if (!element) {
         return;
@@ -123,7 +123,7 @@ export function useGlassAnimation(
 
         const progress = Math.min(
           (animation.currentTime as number) / animationOptions.duration,
-          1
+          1,
         );
 
         setState((previous) => ({ ...previous, progress }));
@@ -136,7 +136,7 @@ export function useGlassAnimation(
       requestAnimationFrame(updateProgress);
 
       // Handle animation completion
-      animation.addEventListener('finish', () => {
+      animation.addEventListener("finish", () => {
         setState((previous) => ({
           ...previous,
           isAnimating: false,
@@ -146,7 +146,7 @@ export function useGlassAnimation(
 
       return animation;
     },
-    [config]
+    [config],
   );
 
   const cancel = useCallback(() => {
@@ -174,10 +174,10 @@ export function useGlassAnimation(
  * Hook for glass state transitions (hover, focus, active, etc.)
  */
 export function useGlassStateTransitions(
-  timing: AnimationTiming = 'normal',
-  _intensity: GlassIntensity = 'medium'
+  timing: AnimationTiming = "normal",
+  _intensity: GlassIntensity = "medium",
 ) {
-  const [currentState, setCurrentState] = useState<string>('idle');
+  const [currentState, setCurrentState] = useState<string>("idle");
   const { cancel, state } = useGlassAnimation(timing);
 
   const transitionToState = useCallback(
@@ -190,7 +190,7 @@ export function useGlassStateTransitions(
 
       setCurrentState(targetState);
     },
-    [currentState, cancel]
+    [currentState, cancel],
   );
 
   return { transitionToState, currentState, isAnimating: state.isAnimating };
@@ -202,7 +202,7 @@ export function useGlassStateTransitions(
 export function useMagneticHover(
   strength = 0.3,
   radius = 100,
-  timing: AnimationTiming = 'fast'
+  timing: AnimationTiming = "fast",
 ) {
   const elementRef = useRef<HTMLElement>(null);
   const { animate } = useGlassAnimation(timing);
@@ -235,26 +235,26 @@ export function useMagneticHover(
           elementRef.current,
           [{ transform: `translate(${translateX}px, ${translateY}px)` }],
           {
-            fill: 'forwards',
-          }
+            fill: "forwards",
+          },
         );
       }
     },
-    [animate, strength, radius]
+    [animate, strength, radius],
   );
 
   const handleMouseEnter = useCallback(() => {
     setIsHovering(true);
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
 
   const handleMouseLeave = useCallback(() => {
     setIsHovering(false);
-    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener("mousemove", handleMouseMove);
 
     if (elementRef.current) {
-      animate(elementRef.current, [{ transform: 'translate(0px, 0px)' }], {
-        fill: 'forwards',
+      animate(elementRef.current, [{ transform: "translate(0px, 0px)" }], {
+        fill: "forwards",
       });
     }
   }, [animate, handleMouseMove]);
@@ -265,13 +265,13 @@ export function useMagneticHover(
       return;
     }
 
-    element.addEventListener('mouseenter', handleMouseEnter);
-    element.addEventListener('mouseleave', handleMouseLeave);
+    element.addEventListener("mouseenter", handleMouseEnter);
+    element.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      element.removeEventListener('mouseenter', handleMouseEnter);
-      element.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mousemove', handleMouseMove);
+      element.removeEventListener("mouseenter", handleMouseEnter);
+      element.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mousemove", handleMouseMove);
     };
   }, [handleMouseEnter, handleMouseLeave, handleMouseMove]);
 
@@ -282,8 +282,8 @@ export function useMagneticHover(
  * Hook for ripple effects
  */
 export function useRippleEffect(
-  timing: AnimationTiming = 'normal',
-  _color = 'rgba(255, 255, 255, 0.3)'
+  timing: AnimationTiming = "normal",
+  _color = "rgba(255, 255, 255, 0.3)",
 ) {
   const { animate } = useGlassAnimation(timing);
 
@@ -300,19 +300,19 @@ export function useRippleEffect(
  * Hook for spring animations
  */
 export function useSpringAnimation() {
-  const { animate } = useGlassAnimation('normal');
+  const { animate } = useGlassAnimation("normal");
 
   const springTo = useCallback(
-    (element: HTMLElement, targetValue: number, property = 'transform') => {
-      const springEasing = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+    (element: HTMLElement, targetValue: number, property = "transform") => {
+      const springEasing = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 
       animate(element, [{ [property]: `${targetValue}` }], {
         duration: 500,
         easing: springEasing,
-        fill: 'forwards',
+        fill: "forwards",
       });
     },
-    [animate]
+    [animate],
   );
 
   return { springTo };
@@ -322,7 +322,7 @@ export function useSpringAnimation() {
  * Hook for liquid flow animations
  */
 export function useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
-  const { animate } = useGlassAnimation('normal');
+  const { animate } = useGlassAnimation("normal");
 
   const startFlow = useCallback(
     (element: HTMLElement) => {
@@ -341,10 +341,10 @@ export function useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
       animate(element, keyframes, {
         duration,
         iterations: Infinity,
-        easing: 'linear',
+        easing: "linear",
       });
     },
-    [animate, amplitude, frequency, duration]
+    [animate, amplitude, frequency, duration],
   );
 
   return { startFlow };

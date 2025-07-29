@@ -18,20 +18,16 @@ npm install liquidify
 
 ```tsx
 // In your main entry file (App.tsx, main.tsx, etc.)
-import 'liquidify/styles'
+import "liquidify/styles";
 ```
 
 ### 2. Wrap Your App
 
 ```tsx
-import { GlassProvider } from 'liquidify'
+import { GlassProvider } from "liquidify";
 
 function App() {
-  return (
-    <GlassProvider>
-      {/* Your app content */}
-    </GlassProvider>
-  )
+  return <GlassProvider>{/* Your app content */}</GlassProvider>;
 }
 ```
 
@@ -40,33 +36,25 @@ function App() {
 Here's a simple example using LiqUIdify components:
 
 ```tsx
-import { GlassCard, GlassButton, GlassInput } from 'liquidify'
-import 'liquidify/styles'
+import { GlassCard, GlassButton, GlassInput } from "liquidify";
+import "liquidify/styles";
 
 function LoginForm() {
   return (
     <GlassCard className="p-6 max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-4">Login</h2>
-      
+
       <div className="space-y-4">
-        <GlassInput
-          type="email"
-          placeholder="Email address"
-          label="Email"
-        />
-        
-        <GlassInput
-          type="password"
-          placeholder="Password"
-          label="Password"
-        />
-        
+        <GlassInput type="email" placeholder="Email address" label="Email" />
+
+        <GlassInput type="password" placeholder="Password" label="Password" />
+
         <GlassButton fullWidth variant="primary">
           Sign In
         </GlassButton>
       </div>
     </GlassCard>
-  )
+  );
 }
 ```
 
@@ -79,19 +67,19 @@ LiqUIdify works great with Tailwind CSS. Here's how to set it up:
 module.exports = {
   content: [
     // ... your content paths
-    './node_modules/liquidify/dist/**/*.{js,mjs}'
+    "./node_modules/liquidify/dist/**/*.{js,mjs}",
   ],
   theme: {
     extend: {
       // LiqUIdify's glass effect utilities
       backdropBlur: {
-        xs: '2px',
-        '2xl': '40px',
-        '3xl': '64px',
-      }
-    }
-  }
-}
+        xs: "2px",
+        "2xl": "40px",
+        "3xl": "64px",
+      },
+    },
+  },
+};
 ```
 
 ## Next Steps

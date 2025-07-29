@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Heart, MessageCircle, Share2, User } from 'lucide-react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Heart, MessageCircle, Share2, User } from "lucide-react";
 import {
   GlassSkeleton,
   SkeletonCard,
   SkeletonTable,
   SkeletonText,
-} from './glass-skeleton';
+} from "./glass-skeleton";
 
 const meta = {
-  title: 'Components/Feedback/GlassSkeleton',
+  title: "Components/Feedback/GlassSkeleton",
   component: GlassSkeleton,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -69,103 +69,103 @@ The skeleton component follows accessibility guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Appearance
     variant: {
-      control: 'select',
-      options: ['default', 'shimmer', 'pulse'],
-      description: 'Animation style variant',
+      control: "select",
+      options: ["default", "shimmer", "pulse"],
+      description: "Animation style variant",
       table: {
-        type: { summary: 'default | shimmer | pulse' },
-        defaultValue: { summary: 'default' },
-        category: 'Appearance',
+        type: { summary: "default | shimmer | pulse" },
+        defaultValue: { summary: "default" },
+        category: "Appearance",
       },
     },
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg', 'xl'],
-      description: 'Predefined size of the skeleton',
+      control: "select",
+      options: ["sm", "md", "lg", "xl"],
+      description: "Predefined size of the skeleton",
       table: {
-        type: { summary: 'sm | md | lg | xl' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "sm | md | lg | xl" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
     shape: {
-      control: 'select',
-      options: ['rectangle', 'circle', 'line'],
-      description: 'Shape of the skeleton element',
+      control: "select",
+      options: ["rectangle", "circle", "line"],
+      description: "Shape of the skeleton element",
       table: {
-        type: { summary: 'rectangle | circle | line' },
-        defaultValue: { summary: 'rectangle' },
-        category: 'Appearance',
+        type: { summary: "rectangle | circle | line" },
+        defaultValue: { summary: "rectangle" },
+        category: "Appearance",
       },
     },
 
     // Dimensions
     width: {
-      control: 'text',
-      description: 'Width of the skeleton (CSS value)',
+      control: "text",
+      description: "Width of the skeleton (CSS value)",
       table: {
-        type: { summary: 'string | number' },
-        category: 'Dimensions',
+        type: { summary: "string | number" },
+        category: "Dimensions",
       },
     },
     height: {
-      control: 'text',
-      description: 'Height of the skeleton (CSS value)',
+      control: "text",
+      description: "Height of the skeleton (CSS value)",
       table: {
-        type: { summary: 'string | number' },
-        category: 'Dimensions',
+        type: { summary: "string | number" },
+        category: "Dimensions",
       },
     },
 
     // Multiple Elements
     count: {
-      control: { type: 'number', min: 1, max: 10, step: 1 },
-      description: 'Number of skeleton elements to render',
+      control: { type: "number", min: 1, max: 10, step: 1 },
+      description: "Number of skeleton elements to render",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '1' },
-        category: 'Multiple Elements',
+        type: { summary: "number" },
+        defaultValue: { summary: "1" },
+        category: "Multiple Elements",
       },
     },
     spacing: {
-      control: { type: 'number', min: 0, max: 32, step: 2 },
-      description: 'Spacing between multiple elements (px)',
+      control: { type: "number", min: 0, max: 32, step: 2 },
+      description: "Spacing between multiple elements (px)",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '8' },
-        category: 'Multiple Elements',
+        type: { summary: "number" },
+        defaultValue: { summary: "8" },
+        category: "Multiple Elements",
       },
     },
 
     // Animation
     animated: {
-      control: 'boolean',
-      description: 'Enable/disable animations',
+      control: "boolean",
+      description: "Enable/disable animations",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Animation',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Animation",
       },
     },
 
     // HTML Props
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
   },
   args: {
-    variant: 'default',
-    size: 'md',
-    shape: 'rectangle',
+    variant: "default",
+    size: "md",
+    shape: "rectangle",
     count: 1,
     spacing: 8,
     animated: true,
@@ -218,11 +218,11 @@ export const Variants: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -279,11 +279,11 @@ export const Shapes: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -329,11 +329,11 @@ export const PreBuiltPatterns: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -455,11 +455,11 @@ export const ContentTypeExamples: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -619,11 +619,11 @@ export const RealWorldExamples: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -705,11 +705,11 @@ export const LoadingStatesComparison: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },

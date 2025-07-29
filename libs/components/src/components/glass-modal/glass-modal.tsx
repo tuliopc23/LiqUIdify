@@ -1,15 +1,15 @@
-import { X } from 'lucide-react';
-import { useCallback, useEffect, useId, useRef } from 'react';
+import { X } from "lucide-react";
+import { useCallback, useEffect, useId, useRef } from "react";
 
-import { GlassFocusTrap } from '@/components/glass-focus-trap';
+import { GlassFocusTrap } from "@/components/glass-focus-trap";
 
-import { announcer } from '@/components/glass-live-region';
+import { announcer } from "@/components/glass-live-region";
 
-import { GlassPortal } from '@/components/glass-portal';
+import { GlassPortal } from "@/components/glass-portal";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
-import { useIsClient } from '@/hooks/use-ssr-safe';
+import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface GlassModalProps {
   isOpen: boolean;
@@ -57,7 +57,7 @@ export function GlassModal({
         onClose();
       }
     },
-    [closeOnBackdropClick, onClose]
+    [closeOnBackdropClick, onClose],
   );
 
   // Manage body scroll lock
@@ -72,17 +72,17 @@ export function GlassModal({
       try {
         if (document.body && document.documentElement) {
           const scrollbarWidth =
-            typeof window === 'undefined'
+            typeof window === "undefined"
               ? 0
               : window.innerWidth - document.documentElement.clientWidth;
-          document.body.style.overflow = 'hidden';
+          document.body.style.overflow = "hidden";
           document.body.style.paddingRight = `${scrollbarWidth}px`;
         }
 
         // Announce modal opened
-        announcer.announce(`${title || 'Dialog'} opened`, {
-          priority: 'medium',
-          context: 'general',
+        announcer.announce(`${title || "Dialog"} opened`, {
+          priority: "medium",
+          context: "general",
         });
       } catch {
         // Logging disabled
@@ -90,8 +90,8 @@ export function GlassModal({
     } else {
       try {
         if (document.body) {
-          document.body.style.overflow = '';
-          document.body.style.paddingRight = '';
+          document.body.style.overflow = "";
+          document.body.style.paddingRight = "";
         }
       } catch {
         // Logging disabled
@@ -101,8 +101,8 @@ export function GlassModal({
     return () => {
       try {
         if (document.body) {
-          document.body.style.overflow = '';
-          document.body.style.paddingRight = '';
+          document.body.style.overflow = "";
+          document.body.style.paddingRight = "";
         }
       } catch {
         // Logging disabled
@@ -120,7 +120,7 @@ export function GlassModal({
       className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           handleBackdropClick(e as unknown);
         }
@@ -143,10 +143,10 @@ export function GlassModal({
           aria-labelledby={title ? titleId : null}
           aria-describedby={descriptionId}
           className={cn(
-            'glass-modal',
-            'glass-effect w-full animate-scale rounded-2xl p-8',
-            'outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
-            className
+            "glass-modal",
+            "glass-effect w-full animate-scale rounded-2xl p-8",
+            "outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+            className,
           )}
           onClick={(e) => e.stopPropagation()}
           onKeyDown={(e) => e.stopPropagation()}
@@ -156,8 +156,8 @@ export function GlassModal({
               <h3
                 id={titleId}
                 className={cn(
-                  'glass-modal-title font-semibold text-lg text-primary',
-                  titleClassName
+                  "glass-modal-title font-semibold text-lg text-primary",
+                  titleClassName,
                 )}
               >
                 {title}
@@ -177,7 +177,7 @@ export function GlassModal({
 
           <div
             id={descriptionId}
-            className={cn('glass-modal-content', contentClassName)}
+            className={cn("glass-modal-content", contentClassName)}
           >
             {children}
           </div>

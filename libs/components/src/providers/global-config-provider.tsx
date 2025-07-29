@@ -1,21 +1,21 @@
-import { createContext, type ReactNode, useContext } from 'react';
+import { createContext, type ReactNode, useContext } from "react";
 
 export interface GlobalConfig {
-  defaultVariant?: 'default' | 'glass' | 'frosted' | 'liquid';
-  defaultSize?: 'sm' | 'md' | 'lg';
+  defaultVariant?: "default" | "glass" | "frosted" | "liquid";
+  defaultSize?: "sm" | "md" | "lg";
   enableAnimations?: boolean;
   enableA11y?: boolean;
-  colorScheme?: 'auto' | 'light' | 'dark';
+  colorScheme?: "auto" | "light" | "dark";
   reducedMotion?: boolean;
   highContrast?: boolean;
 }
 
 const defaultConfig: GlobalConfig = {
-  defaultVariant: 'glass',
-  defaultSize: 'md',
+  defaultVariant: "glass",
+  defaultSize: "md",
   enableAnimations: true,
   enableA11y: true,
-  colorScheme: 'auto',
+  colorScheme: "auto",
   reducedMotion: false,
   highContrast: false,
 };
@@ -44,7 +44,7 @@ export function useGlobalConfig() {
   const context = useContext(GlobalConfigContext);
   if (!context) {
     throw new Error(
-      'useGlobalConfig must be used within a GlobalConfigProvider'
+      "useGlobalConfig must be used within a GlobalConfigProvider",
     );
   }
   return context;

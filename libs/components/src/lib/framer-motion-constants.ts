@@ -1,8 +1,8 @@
-import type { Transition, Variants } from 'framer-motion';
+import type { Transition, Variants } from "framer-motion";
 
 // Reusable transition constants typed as Transition
 export const springFast: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 400,
   damping: 30,
 };
@@ -19,16 +19,16 @@ export const easeOutQuart: Transition = {
 
 export const easeInOut: Transition = {
   duration: 0.3,
-  ease: 'easeInOut',
+  ease: "easeInOut",
 };
 
 export const smoothTransition: Transition = {
   duration: 0.8,
-  ease: 'easeInOut',
+  ease: "easeInOut",
 };
 
 export const bounceTransition: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 300,
   damping: 20,
   mass: 0.8,

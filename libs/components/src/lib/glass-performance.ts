@@ -4,7 +4,7 @@
  * Requirements: 5.3, 5.6 - Animation performance optimization with reduced motion support
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface PerformanceMemory {
   usedJSHeapSize: number;
@@ -42,7 +42,7 @@ export interface OptimizationConfig {
   enableLOD: boolean; // Level of Detail
   enableReducedMotion: boolean;
   performanceBudget: AnimationBudget;
-  qualitySettings: 'low' | 'medium' | 'high' | 'ultra';
+  qualitySettings: "low" | "medium" | "high" | "ultra";
 }
 
 export interface AnimationTask {
@@ -72,7 +72,7 @@ export const DEFAULT_PERFORMANCE_CONFIG: OptimizationConfig = {
     memoryLimit: 80 * 1024 * 1024, // Reduced to 80MB for better performance
     gpuMemoryLimit: 40 * 1024 * 1024, // Reduced to 40MB
   },
-  qualitySettings: 'high',
+  qualitySettings: "high",
 };
 
 /**
@@ -206,7 +206,7 @@ export class GlassPerformanceMonitor {
     this.frameCount++;
 
     // Update memory usage if available
-    if ('memory' in performance) {
+    if ("memory" in performance) {
       const extendedPerformance = performance as ExtendedPerformance;
       if (extendedPerformance.memory) {
         this.metrics.memoryUsage = extendedPerformance.memory.usedJSHeapSize;
@@ -238,25 +238,25 @@ export class GlassPerformanceMonitor {
 
     if (fps < 30) {
       recommendations.push(
-        'Consider reducing animation complexity or enabling reduced motion'
+        "Consider reducing animation complexity or enabling reduced motion",
       );
     }
 
     if (activeAnimations > 50) {
       recommendations.push(
-        'Too many active animations - consider animation culling'
+        "Too many active animations - consider animation culling",
       );
     }
 
     if (droppedFrames > 10) {
       recommendations.push(
-        'High frame drop rate - enable GPU acceleration or reduce quality'
+        "High frame drop rate - enable GPU acceleration or reduce quality",
       );
     }
 
     if (memoryUsage > 100 * 1024 * 1024) {
       recommendations.push(
-        'High memory usage - consider animation cleanup and garbage collection'
+        "High memory usage - consider animation cleanup and garbage collection",
       );
     }
 
@@ -287,7 +287,7 @@ export class GlassAnimationScheduler {
   private setupIntersectionObserver(): void {
     if (
       !this.config.enableCulling ||
-      typeof IntersectionObserver === 'undefined'
+      typeof IntersectionObserver === "undefined"
     ) {
       return;
     }
@@ -306,21 +306,21 @@ export class GlassAnimationScheduler {
         }
       },
       {
-        rootMargin: '50px',
+        rootMargin: "50px",
         threshold: 0.1,
-      }
+      },
     );
   }
 
   private checkReducedMotion(): void {
-    if (!this.config.enableReducedMotion || typeof window === 'undefined') {
+    if (!this.config.enableReducedMotion || typeof window === "undefined") {
       return;
     }
 
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     this.reducedMotion = mediaQuery.matches;
 
-    mediaQuery.addEventListener('change', (e) => {
+    mediaQuery.addEventListener("change", (e) => {
       this.reducedMotion = e.matches;
     });
   }
@@ -371,10 +371,10 @@ export class GlassAnimationScheduler {
   }
 
   private enableGPUAcceleration(element: HTMLElement): void {
-    element.style.willChange = 'transform, opacity';
-    element.style.transform = element.style.transform || 'translateZ(0)';
-    element.style.backfaceVisibility = 'hidden';
-    element.style.perspective = '1000px';
+    element.style.willChange = "transform, opacity";
+    element.style.transform = element.style.transform || "translateZ(0)";
+    element.style.backfaceVisibility = "hidden";
+    element.style.perspective = "1000px";
   }
 
   private start(): void {
@@ -497,7 +497,7 @@ export const GPUAccelerationHelper = {
       force3D?: boolean;
       enableWillChange?: boolean;
       optimizeTransforms?: boolean;
-    } = {}
+    } = {},
   ): void {
     const {
       force3D = true,
@@ -506,40 +506,40 @@ export const GPUAccelerationHelper = {
     } = options;
 
     if (force3D) {
-      element.style.transform = element.style.transform || 'translateZ(0)';
-      element.style.backfaceVisibility = 'hidden';
-      element.style.perspective = '1000px';
+      element.style.transform = element.style.transform || "translateZ(0)";
+      element.style.backfaceVisibility = "hidden";
+      element.style.perspective = "1000px";
     }
 
     if (enableWillChange) {
-      element.style.willChange = 'transform, opacity';
+      element.style.willChange = "transform, opacity";
     }
 
     if (optimizeTransforms) {
-      element.style.transformStyle = 'preserve-3d';
+      element.style.transformStyle = "preserve-3d";
     }
 
     // Additional optimizations
-    element.style.imageRendering = 'optimizeSpeed';
-    element.style.imageRendering = 'crisp-edges';
+    element.style.imageRendering = "optimizeSpeed";
+    element.style.imageRendering = "crisp-edges";
   },
 
   disableForElement(element: HTMLElement): void {
-    element.style.willChange = 'auto';
+    element.style.willChange = "auto";
     element.style.transform =
-      element.style.transform?.replace('translateZ(0)', '') || '';
-    element.style.backfaceVisibility = '';
-    element.style.perspective = '';
-    element.style.transformStyle = '';
-    element.style.imageRendering = '';
+      element.style.transform?.replace("translateZ(0)", "") || "";
+    element.style.backfaceVisibility = "";
+    element.style.perspective = "";
+    element.style.transformStyle = "";
+    element.style.imageRendering = "";
   },
 
   isGPUAccelerated(element: HTMLElement): boolean {
     const computedStyle = window.getComputedStyle(element);
     return (
-      computedStyle.willChange !== 'auto' ||
-      computedStyle.transform.includes('translateZ') ||
-      computedStyle.backfaceVisibility === 'hidden'
+      computedStyle.willChange !== "auto" ||
+      computedStyle.transform.includes("translateZ") ||
+      computedStyle.backfaceVisibility === "hidden"
     );
   },
 };
@@ -588,7 +588,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
       id: string,
       element: HTMLElement,
       callback: (timestamp: number) => void,
-      priority = 0
+      priority = 0,
     ) => {
       if (!schedulerRef.current) {
         return;
@@ -607,7 +607,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
 
       schedulerRef.current.addTask(task);
     },
-    []
+    [],
   );
 
   const removeAnimation = useCallback((id: string) => {
@@ -634,7 +634,7 @@ export function useGlassPerformance(config: Partial<OptimizationConfig> = {}) {
         updateConfig(qualityConfig);
       }
     },
-    [updateConfig]
+    [updateConfig],
   );
 
   return {

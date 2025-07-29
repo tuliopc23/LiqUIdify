@@ -27,7 +27,10 @@
         "{projectRoot}/src/**/*.{css,scss,less}",
         "{projectRoot}/src/styles/**/*"
       ],
-      "outputs": ["{workspaceRoot}/dist/liquidui.css", "{workspaceRoot}/dist/libs/components/liquidui.css"]
+      "outputs": [
+        "{workspaceRoot}/dist/liquidui.css",
+        "{workspaceRoot}/dist/libs/components/liquidui.css"
+      ]
     },
     "test": {
       "executor": "nx:run-commands",

@@ -1,15 +1,15 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from "react";
 
 /**
  * Safe layout effect that works on server
  */
 export const useIsomorphicLayoutEffect =
-  typeof window === 'undefined' ? useEffect : useLayoutEffect;
+  typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 /**
  * Check if code is running on server
  */
-export const isServer = typeof window === 'undefined';
+export const isServer = typeof window === "undefined";
 export const isClient = !isServer;
 
 /**
@@ -41,7 +41,7 @@ export const safeDocument = new Proxy({} as Document, {
  */
 export const clientOnly = <T>(
   callback: () => T,
-  fallback?: T
+  fallback?: T,
 ): T | _undefined => {
   if (isServer) {
     return fallback;
@@ -53,7 +53,7 @@ export const clientOnly = <T>(
  * Safe storage wrapper
  */
 export const storage = {
-  get: (key: string, fallback = ''): string => {
+  get: (key: string, fallback = ""): string => {
     if (isServer) {
       return fallback;
     }
@@ -97,14 +97,14 @@ export const useMediaQuery = (query: string): boolean => {
     }
 
     const mediaQuery =
-      typeof window === 'undefined' ? undefined : window.matchMedia(query);
+      typeof window === "undefined" ? undefined : window.matchMedia(query);
     if (mediaQuery) {
       setMatches(mediaQuery.matches);
 
       const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
-      mediaQuery.addEventListener('change', handler);
+      mediaQuery.addEventListener("change", handler);
 
-      return () => mediaQuery.removeEventListener('change', handler);
+      return () => mediaQuery.removeEventListener("change", handler);
     }
     return;
   }, [query]);

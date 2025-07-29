@@ -77,12 +77,7 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "react/jsx-runtime",
-        "@sentry/react",
-      ],
+      external: ["react", "react-dom", "react/jsx-runtime", "@sentry/react"],
       output: {
         preserveModules: false,
         exports: "named",

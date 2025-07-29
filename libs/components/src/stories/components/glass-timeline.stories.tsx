@@ -1,38 +1,38 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Code, Rocket, Star, Target, Trophy, Users } from 'lucide-react';
-import React from 'react';
-import { GlassButton } from '@/components/glass-button-refactored/glass-button';
-import { GlassCard } from '@/components/glass-card-refactored/glass-card';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Code, Rocket, Star, Target, Trophy, Users } from "lucide-react";
+import React from "react";
+import { GlassButton } from "@/components/glass-button-refactored/glass-button";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
 import {
   GlassTimeline,
   type TimelineItem,
-} from '@/components/glass-timeline/glass-timeline';
+} from "@/components/glass-timeline/glass-timeline";
 
 const meta = {
-  title: 'Components/Glass Timeline',
+  title: "Components/Glass Timeline",
   component: GlassTimeline,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
         component:
-          'A timeline component for displaying chronological events with glassmorphism design. Supports vertical and horizontal layouts, alternating patterns, and custom content.',
+          "A timeline component for displaying chronological events with glassmorphism design. Supports vertical and horizontal layouts, alternating patterns, and custom content.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     orientation: {
-      description: 'Timeline orientation',
-      control: { type: 'select' },
-      options: ['vertical', 'horizontal'],
+      description: "Timeline orientation",
+      control: { type: "select" },
+      options: ["vertical", "horizontal"],
     },
     alternating: {
-      description: 'Alternate item positions (vertical only)',
-      control: { type: 'boolean' },
+      description: "Alternate item positions (vertical only)",
+      control: { type: "boolean" },
     },
     items: {
-      description: 'Timeline items to display',
+      description: "Timeline items to display",
       control: false,
     },
   },
@@ -43,51 +43,51 @@ type Story = StoryObj<typeof meta>;
 
 const sampleItems: Array<TimelineItem> = [
   {
-    id: '1',
-    title: 'Project Started',
-    description: 'Initial planning and setup',
-    date: 'January 2024',
-    status: 'completed',
+    id: "1",
+    title: "Project Started",
+    description: "Initial planning and setup",
+    date: "January 2024",
+    status: "completed",
   },
   {
-    id: '2',
-    title: 'Development Phase',
-    description: 'Core features implementation',
-    date: 'March 2024',
-    status: 'completed',
+    id: "2",
+    title: "Development Phase",
+    description: "Core features implementation",
+    date: "March 2024",
+    status: "completed",
   },
   {
-    id: '3',
-    title: 'Beta Release',
-    description: 'Testing with early adopters',
-    date: 'June 2024',
-    status: 'active',
+    id: "3",
+    title: "Beta Release",
+    description: "Testing with early adopters",
+    date: "June 2024",
+    status: "active",
   },
   {
-    id: '4',
-    title: 'Official Launch',
-    description: 'Public release scheduled',
-    date: 'September 2024',
-    status: 'pending',
+    id: "4",
+    title: "Official Launch",
+    description: "Public release scheduled",
+    date: "September 2024",
+    status: "pending",
   },
 ];
 
 export const Default: Story = {
   args: {
     items: sampleItems,
-    orientation: 'vertical',
+    orientation: "vertical",
   },
 };
 
 export const HorizontalTimeline: Story = {
   args: {
     items: sampleItems,
-    orientation: 'horizontal',
+    orientation: "horizontal",
   },
   parameters: {
     docs: {
       description: {
-        story: 'Timeline with horizontal layout, ideal for process flows',
+        story: "Timeline with horizontal layout, ideal for process flows",
       },
     },
   },
@@ -96,7 +96,7 @@ export const HorizontalTimeline: Story = {
 export const AlternatingLayout: Story = {
   args: {
     items: sampleItems,
-    orientation: 'vertical',
+    orientation: "vertical",
     alternating: true,
   },
   render: (args) => (
@@ -107,7 +107,7 @@ export const AlternatingLayout: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Vertical timeline with alternating left/right positioning',
+        story: "Vertical timeline with alternating left/right positioning",
       },
     },
   },
@@ -117,35 +117,35 @@ export const WithCustomIcons: Story = {
   args: {
     items: [
       {
-        id: '1',
-        title: 'Ideation',
-        description: 'Brainstorming and concept development',
-        date: 'Week 1',
-        status: 'completed',
+        id: "1",
+        title: "Ideation",
+        description: "Brainstorming and concept development",
+        date: "Week 1",
+        status: "completed",
         icon: <Rocket className="h-4 w-4" />,
       },
       {
-        id: '2',
-        title: 'Planning',
-        description: 'Setting goals and milestones',
-        date: 'Week 2-3',
-        status: 'completed',
+        id: "2",
+        title: "Planning",
+        description: "Setting goals and milestones",
+        date: "Week 2-3",
+        status: "completed",
         icon: <Target className="h-4 w-4" />,
       },
       {
-        id: '3',
-        title: 'Execution',
-        description: 'Building and iterating',
-        date: 'Week 4-8',
-        status: 'active',
+        id: "3",
+        title: "Execution",
+        description: "Building and iterating",
+        date: "Week 4-8",
+        status: "active",
         icon: <Code className="h-4 w-4" />,
       },
       {
-        id: '4',
-        title: 'Launch',
-        description: 'Go live and celebrate',
-        date: 'Week 10',
-        status: 'pending',
+        id: "4",
+        title: "Launch",
+        description: "Go live and celebrate",
+        date: "Week 10",
+        status: "pending",
         icon: <Trophy className="h-4 w-4" />,
       },
     ],
@@ -153,7 +153,7 @@ export const WithCustomIcons: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Timeline with custom icons for each milestone',
+        story: "Timeline with custom icons for each milestone",
       },
     },
   },
@@ -163,10 +163,10 @@ export const WithRichContent: Story = {
   args: {
     items: [
       {
-        id: '1',
-        title: 'Q1 2024 Review',
-        date: 'March 31, 2024',
-        status: 'completed',
+        id: "1",
+        title: "Q1 2024 Review",
+        date: "March 31, 2024",
+        status: "completed",
         content: (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -191,10 +191,10 @@ export const WithRichContent: Story = {
         ),
       },
       {
-        id: '2',
-        title: 'Product Update 2.0',
-        date: 'April 15, 2024',
-        status: 'completed',
+        id: "2",
+        title: "Product Update 2.0",
+        date: "April 15, 2024",
+        status: "completed",
         content: (
           <div className="space-y-2">
             <p className="text-[var(--text-secondary)] text-sm">
@@ -218,10 +218,10 @@ export const WithRichContent: Story = {
         ),
       },
       {
-        id: '3',
-        title: 'Team Expansion',
-        date: 'May 1, 2024',
-        status: 'active',
+        id: "3",
+        title: "Team Expansion",
+        date: "May 1, 2024",
+        status: "active",
         icon: <Users className="h-4 w-4" />,
         content: (
           <div className="py-4 text-center">
@@ -235,7 +235,7 @@ export const WithRichContent: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Timeline items with rich custom content',
+        story: "Timeline items with rich custom content",
       },
     },
   },
@@ -245,40 +245,40 @@ export const ProjectRoadmap: Story = {
   render: () => {
     const roadmapItems: Array<TimelineItem> = [
       {
-        id: 'phase1',
-        title: 'Foundation',
-        description: 'Core infrastructure and basic features',
-        date: 'Q1 2024',
-        status: 'completed',
+        id: "phase1",
+        title: "Foundation",
+        description: "Core infrastructure and basic features",
+        date: "Q1 2024",
+        status: "completed",
         icon: <Star className="h-4 w-4" />,
       },
       {
-        id: 'phase2',
-        title: 'Enhancement',
-        description: 'Advanced features and optimizations',
-        date: 'Q2 2024',
-        status: 'completed',
+        id: "phase2",
+        title: "Enhancement",
+        description: "Advanced features and optimizations",
+        date: "Q2 2024",
+        status: "completed",
       },
       {
-        id: 'phase3',
-        title: 'Expansion',
-        description: 'New markets and integrations',
-        date: 'Q3 2024',
-        status: 'active',
+        id: "phase3",
+        title: "Expansion",
+        description: "New markets and integrations",
+        date: "Q3 2024",
+        status: "active",
       },
       {
-        id: 'phase4',
-        title: 'Innovation',
-        description: 'AI features and automation',
-        date: 'Q4 2024',
-        status: 'pending',
+        id: "phase4",
+        title: "Innovation",
+        description: "AI features and automation",
+        date: "Q4 2024",
+        status: "pending",
       },
       {
-        id: 'phase5',
-        title: 'Scale',
-        description: 'Global rollout and enterprise features',
-        date: 'Q1 2025',
-        status: 'pending',
+        id: "phase5",
+        title: "Scale",
+        description: "Global rollout and enterprise features",
+        date: "Q1 2025",
+        status: "pending",
       },
     ];
 
@@ -298,7 +298,7 @@ export const ProjectRoadmap: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Product roadmap visualization using timeline',
+        story: "Product roadmap visualization using timeline",
       },
     },
   },
@@ -315,7 +315,7 @@ export const InteractiveTimeline: Story = {
           className="cursor-pointer rounded-lg p-3 transition-colors hover:bg-white/5"
           onClick={() => setSelectedItem(item.id)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
+            if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
               (() => setSelectedItem(item.id))(e);
             }
@@ -361,7 +361,7 @@ export const InteractiveTimeline: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Interactive timeline with click events',
+        story: "Interactive timeline with click events",
       },
     },
   },
@@ -370,12 +370,12 @@ export const InteractiveTimeline: Story = {
 export const CompactTimeline: Story = {
   args: {
     items: [
-      { id: '1', title: 'Started', status: 'completed' },
-      { id: '2', title: 'In Progress', status: 'active' },
-      { id: '3', title: 'Review', status: 'pending' },
-      { id: '4', title: 'Complete', status: 'pending' },
+      { id: "1", title: "Started", status: "completed" },
+      { id: "2", title: "In Progress", status: "active" },
+      { id: "3", title: "Review", status: "pending" },
+      { id: "4", title: "Complete", status: "pending" },
     ],
-    orientation: 'horizontal',
+    orientation: "horizontal",
   },
   render: (args) => (
     <div className="max-w-md">
@@ -385,7 +385,7 @@ export const CompactTimeline: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Compact timeline for simple progress tracking',
+        story: "Compact timeline for simple progress tracking",
       },
     },
   },
@@ -405,10 +405,10 @@ export const DarkModeTimeline: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { default: 'dark' },
+    backgrounds: { default: "dark" },
     docs: {
       description: {
-        story: 'Timeline component in dark mode',
+        story: "Timeline component in dark mode",
       },
     },
   },

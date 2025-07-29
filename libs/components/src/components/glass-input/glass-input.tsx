@@ -1,4 +1,4 @@
-import { Eye, EyeOff, Search, X } from 'lucide-react';
+import { Eye, EyeOff, Search, X } from "lucide-react";
 import {
   forwardRef,
   useCallback,
@@ -6,16 +6,16 @@ import {
   useId,
   useRef,
   useState,
-} from 'react';
+} from "react";
 import {
   cn,
   focusRing,
   getGlassClass,
   microInteraction,
-} from '@/core/utils/classname';
+} from "@/core/utils/classname";
 
 // Type definitions for enhanced TypeScript support
-type ComponentVariant = 'default' | 'search' | 'password' | 'email';
+type ComponentVariant = "default" | "search" | "password" | "email";
 
 export interface GlassInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -43,7 +43,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
   (
     {
       className,
-      variant = 'default',
+      variant = "default",
       leftIcon,
       rightIcon,
       clearable = false,
@@ -54,12 +54,12 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
       onChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [showPassword, setShowPassword] = useState(false);
     // const [isFocused, setIsFocused] = useState(false); // isFocused is not used
     const [currentValue, setCurrentValue] = useState(
-      value === undefined ? props.defaultValue || '' : value
+      value === undefined ? props.defaultValue || "" : value,
     );
     const internalInputRef = useRef<HTMLInputElement | null>(null);
     const helperTextId = useId();
@@ -70,14 +70,14 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
         (
           internalInputRef as React.MutableRefObject<HTMLInputElement | null>
         ).current = node;
-        if (typeof ref === 'function') {
+        if (typeof ref === "function") {
           ref(node);
         } else if (ref) {
           (ref as React.MutableRefObject<HTMLInputElement | null>).current =
             node;
         }
       },
-      [ref]
+      [ref],
     );
 
     useEffect(() => {
@@ -92,14 +92,14 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
     };
 
     const handleClearInput = () => {
-      setCurrentValue('');
+      setCurrentValue("");
       // Manually trigger onChange if the parent component needs to know
       if (internalInputRef.current) {
-        const event = new Event('input', { bubbles: true });
+        const event = new Event("input", { bubbles: true });
         // Create a native event to simulate user input for controlled components
-        Object.defineProperty(event, 'target', {
+        Object.defineProperty(event, "target", {
           writable: false,
-          value: { value: '' },
+          value: { value: "" },
         });
         onChange?.(event as unknown as React.ChangeEvent<HTMLInputElement>);
         internalInputRef.current.focus();
@@ -109,43 +109,43 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
     const hasValue = Boolean(currentValue);
 
     const baseClasses = cn(
-      'w-full rounded-xl border px-4 py-3 transition-all duration-200',
-      'text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]',
-      getGlassClass('default'),
+      "w-full rounded-xl border px-4 py-3 transition-all duration-200",
+      "text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
+      getGlassClass("default"),
       focusRing, // Ensure focusRing provides a visible focus style
-      'disabled:cursor-not-allowed disabled:opacity-50',
+      "disabled:cursor-not-allowed disabled:opacity-50",
       error
-        ? 'border-red-400/50 focus:border-red-500'
-        : 'border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]',
-      microInteraction.gentle
+        ? "border-red-400/50 focus:border-red-500"
+        : "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
+      microInteraction.gentle,
     );
 
     const getIconPadding = () => {
-      let pr = 'pr-4'; // Default right padding
-      if (variant === 'password' || (clearable && hasValue) || rightIcon) {
-        pr = 'pr-10'; // Space for one icon
+      let pr = "pr-4"; // Default right padding
+      if (variant === "password" || (clearable && hasValue) || rightIcon) {
+        pr = "pr-10"; // Space for one icon
       }
       if (
-        (variant === 'password' && clearable && hasValue) ||
-        (variant === 'password' && rightIcon) ||
+        (variant === "password" && clearable && hasValue) ||
+        (variant === "password" && rightIcon) ||
         (clearable && hasValue && rightIcon)
       ) {
-        pr = 'pr-20'; // Space for two icons if needed, adjust as per visual design
+        pr = "pr-20"; // Space for two icons if needed, adjust as per visual design
       }
 
-      if (leftIcon || variant === 'search') {
+      if (leftIcon || variant === "search") {
         return `pl-10 ${pr}`;
       }
       return `pl-4 ${pr}`;
     };
 
     const inputType =
-      variant === 'password' ? (showPassword ? 'text' : 'password') : type;
+      variant === "password" ? (showPassword ? "text" : "password") : type;
 
     return (
       <div className="relative w-full">
         <div className="relative flex w-full items-center">
-          {variant === 'search' && !leftIcon && (
+          {variant === "search" && !leftIcon && (
             <Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 h-4 w-4 transform text-secondary" />
           )}
           {leftIcon && (
@@ -178,11 +178,11 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 <X className="h-4 w-4" />
               </button>
             )}
-            {variant === 'password' && (
+            {variant === "password" && (
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-label={showPassword ? "Hide password" : "Show password"}
                 aria-pressed={showPassword}
                 className="rounded p-1 text-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
@@ -193,7 +193,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 )}
               </button>
             )}
-            {rightIcon && variant !== 'password' && !clearable && (
+            {rightIcon && variant !== "password" && !clearable && (
               <div className="pointer-events-none text-secondary">
                 {rightIcon}
               </div>
@@ -204,8 +204,8 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
           <p
             id={helperTextId}
             className={cn(
-              'mt-1.5 text-xs',
-              error ? 'text-red-500' : 'text-[var(--text-muted)]'
+              "mt-1.5 text-xs",
+              error ? "text-red-500" : "text-[var(--text-muted)]",
             )}
           >
             {helperText}
@@ -213,9 +213,9 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
-GlassInput.displayName = 'GlassInput';
+GlassInput.displayName = "GlassInput";
 
 export { GlassInput };

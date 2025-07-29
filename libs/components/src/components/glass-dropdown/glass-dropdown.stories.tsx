@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   AlignLeft,
   Archive,
@@ -40,17 +40,17 @@ import {
   User,
   Video,
   X,
-} from 'lucide-react';
-import React from 'react';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { Card } from '../glass-card-refactored/glass-card';
-import { GlassDropdown } from './glass-dropdown';
+} from "lucide-react";
+import React from "react";
+import { GlassButton } from "../glass-button-refactored/glass-button";
+import { Card } from "../glass-card-refactored/glass-card";
+import { GlassDropdown } from "./glass-dropdown";
 
 const meta = {
-  title: 'Components/Overlays/GlassDropdown',
+  title: "Components/Overlays/GlassDropdown",
   component: GlassDropdown,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -116,70 +116,70 @@ The dropdown follows WAI-ARIA guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     trigger: {
       control: false,
-      description: 'The element that triggers the dropdown',
+      description: "The element that triggers the dropdown",
       table: {
-        type: { summary: 'React.ReactNode' },
-        category: 'Content',
+        type: { summary: "React.ReactNode" },
+        category: "Content",
       },
     },
     items: {
-      control: 'object',
-      description: 'Array of dropdown items',
+      control: "object",
+      description: "Array of dropdown items",
       table: {
-        type: { summary: 'Array<DropdownItem>' },
-        category: 'Content',
+        type: { summary: "Array<DropdownItem>" },
+        category: "Content",
       },
     },
     onSelect: {
-      action: 'selected',
-      description: 'Callback when an item is selected',
+      action: "selected",
+      description: "Callback when an item is selected",
       table: {
-        type: { summary: '(value: string) => void' },
-        category: 'Events',
+        type: { summary: "(value: string) => void" },
+        category: "Events",
       },
     },
     align: {
-      control: 'radio',
-      options: ['start', 'center', 'end'],
-      description: 'Alignment of dropdown relative to trigger',
+      control: "radio",
+      options: ["start", "center", "end"],
+      description: "Alignment of dropdown relative to trigger",
       table: {
-        type: { summary: 'start | center | end' },
-        defaultValue: { summary: 'start' },
-        category: 'Layout',
+        type: { summary: "start | center | end" },
+        defaultValue: { summary: "start" },
+        category: "Layout",
       },
     },
     sideOffset: {
-      control: { type: 'number', min: 0, max: 20 },
-      description: 'Distance between trigger and dropdown',
+      control: { type: "number", min: 0, max: 20 },
+      description: "Distance between trigger and dropdown",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '4' },
-        category: 'Layout',
+        type: { summary: "number" },
+        defaultValue: { summary: "4" },
+        category: "Layout",
       },
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes for the container',
+      control: "text",
+      description: "Additional CSS classes for the container",
       table: {
-        type: { summary: 'string' },
-        category: 'Styling',
+        type: { summary: "string" },
+        category: "Styling",
       },
     },
     contentClassName: {
-      control: 'text',
-      description: 'Additional CSS classes for the dropdown content',
+      control: "text",
+      description: "Additional CSS classes for the dropdown content",
       table: {
-        type: { summary: 'string' },
-        category: 'Styling',
+        type: { summary: "string" },
+        category: "Styling",
       },
     },
   },
   args: {
-    align: 'start',
+    align: "start",
     sideOffset: 4,
   },
 } satisfies Meta<typeof GlassDropdown>;
@@ -200,13 +200,13 @@ export const Playground: Story = {
       </GlassButton>
     ),
     items: [
-      { label: 'Edit', value: 'edit', icon: <Edit className="h-4 w-4" /> },
-      { label: 'Copy', value: 'copy', icon: <Copy className="h-4 w-4" /> },
-      { label: 'Share', value: 'share', icon: <Share2 className="h-4 w-4" /> },
-      { separator: true, value: 'sep1', label: '' },
+      { label: "Edit", value: "edit", icon: <Edit className="h-4 w-4" /> },
+      { label: "Copy", value: "copy", icon: <Copy className="h-4 w-4" /> },
+      { label: "Share", value: "share", icon: <Share2 className="h-4 w-4" /> },
+      { separator: true, value: "sep1", label: "" },
       {
-        label: 'Delete',
-        value: 'delete',
+        label: "Delete",
+        value: "delete",
         icon: <Trash2 className="h-4 w-4" />,
       },
     ],
@@ -220,11 +220,11 @@ export const BasicExamples: Story = {
       <GlassDropdown
         trigger={<GlassButton type="button">Simple Menu</GlassButton>}
         items={[
-          { label: 'Option 1', value: 'opt1' },
-          { label: 'Option 2', value: 'opt2' },
-          { label: 'Option 3', value: 'opt3' },
+          { label: "Option 1", value: "opt1" },
+          { label: "Option 2", value: "opt2" },
+          { label: "Option 3", value: "opt3" },
         ]}
-        onSelect={(value) => console.log('Selected:', value)}
+        onSelect={(value) => console.log("Selected:", value)}
       />
 
       <GlassDropdown
@@ -234,15 +234,15 @@ export const BasicExamples: Story = {
           </GlassButton>
         }
         items={[
-          { label: 'Save', value: 'save', icon: <Save className="h-4 w-4" /> },
+          { label: "Save", value: "save", icon: <Save className="h-4 w-4" /> },
           {
-            label: 'Export',
-            value: 'export',
+            label: "Export",
+            value: "export",
             icon: <Download className="h-4 w-4" />,
           },
           {
-            label: 'Print',
-            value: 'print',
+            label: "Print",
+            value: "print",
             icon: <Printer className="h-4 w-4" />,
           },
         ]}
@@ -260,12 +260,12 @@ export const BasicExamples: Story = {
           </GlassButton>
         }
         items={[
-          { label: 'View', value: 'view', icon: <Eye className="h-4 w-4" /> },
-          { label: 'Edit', value: 'edit', icon: <Edit className="h-4 w-4" /> },
-          { separator: true, value: 'sep1', label: '' },
+          { label: "View", value: "view", icon: <Eye className="h-4 w-4" /> },
+          { label: "Edit", value: "edit", icon: <Edit className="h-4 w-4" /> },
+          { separator: true, value: "sep1", label: "" },
           {
-            label: 'Delete',
-            value: 'delete',
+            label: "Delete",
+            value: "delete",
             icon: <Trash2 className="h-4 w-4" />,
           },
         ]}
@@ -283,9 +283,9 @@ export const AlignmentOptions: Story = {
         <GlassDropdown
           trigger={<GlassButton type="button">Align Start</GlassButton>}
           items={[
-            { label: 'This dropdown', value: 'item1' },
-            { label: 'is aligned to', value: 'item2' },
-            { label: 'the start', value: 'item3' },
+            { label: "This dropdown", value: "item1" },
+            { label: "is aligned to", value: "item2" },
+            { label: "the start", value: "item3" },
           ]}
           align="start"
         />
@@ -293,9 +293,9 @@ export const AlignmentOptions: Story = {
         <GlassDropdown
           trigger={<GlassButton type="button">Align Center</GlassButton>}
           items={[
-            { label: 'This dropdown', value: 'item1' },
-            { label: 'is centered', value: 'item2' },
-            { label: 'below trigger', value: 'item3' },
+            { label: "This dropdown", value: "item1" },
+            { label: "is centered", value: "item2" },
+            { label: "below trigger", value: "item3" },
           ]}
           align="center"
         />
@@ -303,9 +303,9 @@ export const AlignmentOptions: Story = {
         <GlassDropdown
           trigger={<GlassButton type="button">Align End</GlassButton>}
           items={[
-            { label: 'This dropdown', value: 'item1' },
-            { label: 'is aligned to', value: 'item2' },
-            { label: 'the end', value: 'item3' },
+            { label: "This dropdown", value: "item1" },
+            { label: "is aligned to", value: "item2" },
+            { label: "the end", value: "item3" },
           ]}
           align="end"
         />
@@ -321,32 +321,32 @@ export const ItemStates: Story = {
       trigger={<GlassButton type="button">Item States Demo</GlassButton>}
       items={[
         {
-          label: 'Regular Item',
-          value: 'regular',
+          label: "Regular Item",
+          value: "regular",
           icon: <Check className="h-4 w-4" />,
         },
         {
-          label: 'Another Item',
-          value: 'another',
+          label: "Another Item",
+          value: "another",
           icon: <Star className="h-4 w-4" />,
         },
-        { separator: true, value: 'sep1', label: '' },
+        { separator: true, value: "sep1", label: "" },
         {
-          label: 'Disabled Item',
-          value: 'disabled',
+          label: "Disabled Item",
+          value: "disabled",
           icon: <X className="h-4 w-4" />,
           disabled: true,
         },
         {
-          label: 'Also Disabled',
-          value: 'disabled2',
+          label: "Also Disabled",
+          value: "disabled2",
           icon: <Lock className="h-4 w-4" />,
           disabled: true,
         },
-        { separator: true, value: 'sep2', label: '' },
+        { separator: true, value: "sep2", label: "" },
         {
-          label: 'Final Item',
-          value: 'final',
+          label: "Final Item",
+          value: "final",
           icon: <Flag className="h-4 w-4" />,
         },
       ]}
@@ -357,9 +357,9 @@ export const ItemStates: Story = {
 // Real-world examples
 export const RealWorldExamples: Story = {
   render: () => {
-    const [selectedView, setSelectedView] = React.useState('grid');
-    const [_selectedSort, setSelectedSort] = React.useState('name');
-    const [_selectedFilter, _setSelectedFilter] = React.useState('all');
+    const [selectedView, setSelectedView] = React.useState("grid");
+    const [_selectedSort, setSelectedSort] = React.useState("name");
+    const [_selectedFilter, _setSelectedFilter] = React.useState("all");
 
     return (
       <div className="max-w-4xl space-y-8">
@@ -374,19 +374,19 @@ export const RealWorldExamples: Story = {
                   <GlassDropdown
                     trigger={
                       <GlassButton type="button" variant="ghost" size="sm">
-                        View: {selectedView === 'grid' ? 'Grid' : 'List'}
+                        View: {selectedView === "grid" ? "Grid" : "List"}
                         <ChevronDown className="ml-1 h-3 w-3" />
                       </GlassButton>
                     }
                     items={[
                       {
-                        label: 'Grid View',
-                        value: 'grid',
+                        label: "Grid View",
+                        value: "grid",
                         icon: <Grid className="h-4 w-4" />,
                       },
                       {
-                        label: 'List View',
-                        value: 'list',
+                        label: "List View",
+                        value: "list",
                         icon: <List className="h-4 w-4" />,
                       },
                     ]}
@@ -402,23 +402,23 @@ export const RealWorldExamples: Story = {
                     }
                     items={[
                       {
-                        label: 'Name',
-                        value: 'name',
+                        label: "Name",
+                        value: "name",
                         icon: <AlignLeft className="h-4 w-4" />,
                       },
                       {
-                        label: 'Date Modified',
-                        value: 'date',
+                        label: "Date Modified",
+                        value: "date",
                         icon: <Calendar className="h-4 w-4" />,
                       },
                       {
-                        label: 'Size',
-                        value: 'size',
+                        label: "Size",
+                        value: "size",
                         icon: <HardDrive className="h-4 w-4" />,
                       },
                       {
-                        label: 'Type',
-                        value: 'type',
+                        label: "Type",
+                        value: "type",
                         icon: <File className="h-4 w-4" />,
                       },
                     ]}
@@ -439,24 +439,24 @@ export const RealWorldExamples: Story = {
                     }
                     items={[
                       {
-                        label: 'New Folder',
-                        value: 'new-folder',
+                        label: "New Folder",
+                        value: "new-folder",
                         icon: <Folder className="h-4 w-4" />,
                       },
                       {
-                        label: 'Upload Files',
-                        value: 'upload',
+                        label: "Upload Files",
+                        value: "upload",
                         icon: <Upload className="h-4 w-4" />,
                       },
-                      { separator: true, value: 'sep1', label: '' },
+                      { separator: true, value: "sep1", label: "" },
                       {
-                        label: 'Select All',
-                        value: 'select-all',
+                        label: "Select All",
+                        value: "select-all",
                         icon: <Square className="h-4 w-4" />,
                       },
                       {
-                        label: 'Refresh',
-                        value: 'refresh',
+                        label: "Refresh",
+                        value: "refresh",
                         icon: <RefreshCw className="h-4 w-4" />,
                       },
                     ]}
@@ -468,10 +468,10 @@ export const RealWorldExamples: Story = {
             <Card.Content>
               <div className="grid grid-cols-4 gap-4">
                 {[
-                  'Document.pdf',
-                  'Presentation.pptx',
-                  'Spreadsheet.xlsx',
-                  'Image.png',
+                  "Document.pdf",
+                  "Presentation.pptx",
+                  "Spreadsheet.xlsx",
+                  "Image.png",
                 ].map((file) => (
                   <div
                     key={file}
@@ -490,35 +490,35 @@ export const RealWorldExamples: Story = {
                         }
                         items={[
                           {
-                            label: 'Open',
-                            value: 'open',
+                            label: "Open",
+                            value: "open",
                             icon: <Eye className="h-4 w-4" />,
                           },
                           {
-                            label: 'Rename',
-                            value: 'rename',
+                            label: "Rename",
+                            value: "rename",
                             icon: <Edit className="h-4 w-4" />,
                           },
                           {
-                            label: 'Copy',
-                            value: 'copy',
+                            label: "Copy",
+                            value: "copy",
                             icon: <Copy className="h-4 w-4" />,
                           },
-                          { separator: true, value: 'sep1', label: '' },
+                          { separator: true, value: "sep1", label: "" },
                           {
-                            label: 'Share',
-                            value: 'share',
+                            label: "Share",
+                            value: "share",
                             icon: <Share2 className="h-4 w-4" />,
                           },
                           {
-                            label: 'Download',
-                            value: 'download',
+                            label: "Download",
+                            value: "download",
                             icon: <Download className="h-4 w-4" />,
                           },
-                          { separator: true, value: 'sep2', label: '' },
+                          { separator: true, value: "sep2", label: "" },
                           {
-                            label: 'Delete',
-                            value: 'delete',
+                            label: "Delete",
+                            value: "delete",
                             icon: <Trash2 className="h-4 w-4" />,
                           },
                         ]}
@@ -552,35 +552,35 @@ export const RealWorldExamples: Story = {
               }
               items={[
                 {
-                  label: 'Profile',
-                  value: 'profile',
+                  label: "Profile",
+                  value: "profile",
                   icon: <User className="h-4 w-4" />,
                 },
                 {
-                  label: 'Settings',
-                  value: 'settings',
+                  label: "Settings",
+                  value: "settings",
                   icon: <Settings className="h-4 w-4" />,
                 },
                 {
-                  label: 'Notifications',
-                  value: 'notifications',
+                  label: "Notifications",
+                  value: "notifications",
                   icon: <Bell className="h-4 w-4" />,
                 },
-                { separator: true, value: 'sep1', label: '' },
+                { separator: true, value: "sep1", label: "" },
                 {
-                  label: 'Help & Support',
-                  value: 'help',
+                  label: "Help & Support",
+                  value: "help",
                   icon: <HelpCircle className="h-4 w-4" />,
                 },
                 {
-                  label: 'Keyboard Shortcuts',
-                  value: 'shortcuts',
+                  label: "Keyboard Shortcuts",
+                  value: "shortcuts",
                   icon: <Keyboard className="h-4 w-4" />,
                 },
-                { separator: true, value: 'sep2', label: '' },
+                { separator: true, value: "sep2", label: "" },
                 {
-                  label: 'Log Out',
-                  value: 'logout',
+                  label: "Log Out",
+                  value: "logout",
                   icon: <LogOut className="h-4 w-4" />,
                 },
               ]}
@@ -606,19 +606,19 @@ export const RealWorldExamples: Story = {
                 <tbody>
                   {[
                     {
-                      name: 'Project Alpha',
-                      status: 'Active',
-                      date: '2024-01-15',
+                      name: "Project Alpha",
+                      status: "Active",
+                      date: "2024-01-15",
                     },
                     {
-                      name: 'Project Beta',
-                      status: 'Pending',
-                      date: '2024-01-14',
+                      name: "Project Beta",
+                      status: "Pending",
+                      date: "2024-01-14",
                     },
                     {
-                      name: 'Project Gamma',
-                      status: 'Completed',
-                      date: '2024-01-13',
+                      name: "Project Gamma",
+                      status: "Completed",
+                      date: "2024-01-13",
                     },
                   ].map((project) => (
                     <tr
@@ -629,13 +629,13 @@ export const RealWorldExamples: Story = {
                       <td className="py-3">
                         <span
                           className={cn(
-                            'rounded-full px-2 py-1 text-xs',
-                            project.status === 'Active' &&
-                              'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400',
-                            project.status === 'Pending' &&
-                              'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400',
-                            project.status === 'Completed' &&
-                              'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400'
+                            "rounded-full px-2 py-1 text-xs",
+                            project.status === "Active" &&
+                              "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
+                            project.status === "Pending" &&
+                              "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400",
+                            project.status === "Completed" &&
+                              "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400",
                           )}
                         >
                           {project.status}
@@ -658,29 +658,29 @@ export const RealWorldExamples: Story = {
                           }
                           items={[
                             {
-                              label: 'View Details',
-                              value: 'view',
+                              label: "View Details",
+                              value: "view",
                               icon: <Eye className="h-4 w-4" />,
                             },
                             {
-                              label: 'Edit',
-                              value: 'edit',
+                              label: "Edit",
+                              value: "edit",
                               icon: <Edit className="h-4 w-4" />,
                             },
                             {
-                              label: 'Duplicate',
-                              value: 'duplicate',
+                              label: "Duplicate",
+                              value: "duplicate",
                               icon: <Copy className="h-4 w-4" />,
                             },
-                            { separator: true, value: 'sep1', label: '' },
+                            { separator: true, value: "sep1", label: "" },
                             {
-                              label: 'Archive',
-                              value: 'archive',
+                              label: "Archive",
+                              value: "archive",
                               icon: <Archive className="h-4 w-4" />,
                             },
                             {
-                              label: 'Delete',
-                              value: 'delete',
+                              label: "Delete",
+                              value: "delete",
                               icon: <Trash2 className="h-4 w-4" />,
                             },
                           ]}
@@ -712,29 +712,29 @@ export const NavigationDropdown: Story = {
         }
         items={[
           {
-            label: 'Analytics',
-            value: 'analytics',
+            label: "Analytics",
+            value: "analytics",
             icon: <BarChart className="h-4 w-4" />,
           },
           {
-            label: 'Database',
-            value: 'database',
+            label: "Database",
+            value: "database",
             icon: <Database className="h-4 w-4" />,
           },
           {
-            label: 'Storage',
-            value: 'storage',
+            label: "Storage",
+            value: "storage",
             icon: <HardDrive className="h-4 w-4" />,
           },
           {
-            label: 'Hosting',
-            value: 'hosting',
+            label: "Hosting",
+            value: "hosting",
             icon: <Server className="h-4 w-4" />,
           },
-          { separator: true, value: 'sep1', label: '' },
+          { separator: true, value: "sep1", label: "" },
           {
-            label: 'View All Products',
-            value: 'all',
+            label: "View All Products",
+            value: "all",
             icon: <Grid className="h-4 w-4" />,
           },
         ]}
@@ -749,30 +749,30 @@ export const NavigationDropdown: Story = {
         }
         items={[
           {
-            label: 'Documentation',
-            value: 'docs',
+            label: "Documentation",
+            value: "docs",
             icon: <FileText className="h-4 w-4" />,
           },
           {
-            label: 'API Reference',
-            value: 'api',
+            label: "API Reference",
+            value: "api",
             icon: <Code className="h-4 w-4" />,
           },
           {
-            label: 'Tutorials',
-            value: 'tutorials',
+            label: "Tutorials",
+            value: "tutorials",
             icon: <Video className="h-4 w-4" />,
           },
-          { label: 'Blog', value: 'blog', icon: <Edit className="h-4 w-4" /> },
-          { separator: true, value: 'sep1', label: '' },
+          { label: "Blog", value: "blog", icon: <Edit className="h-4 w-4" /> },
+          { separator: true, value: "sep1", label: "" },
           {
-            label: 'Community',
-            value: 'community',
+            label: "Community",
+            value: "community",
             icon: <Users className="h-4 w-4" />,
           },
           {
-            label: 'Support',
-            value: 'support',
+            label: "Support",
+            value: "support",
             icon: <HelpCircle className="h-4 w-4" />,
           },
         ]}
@@ -792,19 +792,19 @@ export const ThemeShowcase: Story = {
             trigger={<GlassButton type="button">Light Theme Menu</GlassButton>}
             items={[
               {
-                label: 'Action 1',
-                value: 'action1',
+                label: "Action 1",
+                value: "action1",
                 icon: <Check className="h-4 w-4" />,
               },
               {
-                label: 'Action 2',
-                value: 'action2',
+                label: "Action 2",
+                value: "action2",
                 icon: <Star className="h-4 w-4" />,
               },
-              { separator: true, value: 'sep1', label: '' },
+              { separator: true, value: "sep1", label: "" },
               {
-                label: 'Disabled',
-                value: 'disabled',
+                label: "Disabled",
+                value: "disabled",
                 icon: <X className="h-4 w-4" />,
                 disabled: true,
               },
@@ -820,19 +820,19 @@ export const ThemeShowcase: Story = {
             trigger={<GlassButton type="button">Dark Theme Menu</GlassButton>}
             items={[
               {
-                label: 'Action 1',
-                value: 'action1',
+                label: "Action 1",
+                value: "action1",
                 icon: <Check className="h-4 w-4" />,
               },
               {
-                label: 'Action 2',
-                value: 'action2',
+                label: "Action 2",
+                value: "action2",
                 icon: <Star className="h-4 w-4" />,
               },
-              { separator: true, value: 'sep1', label: '' },
+              { separator: true, value: "sep1", label: "" },
               {
-                label: 'Disabled',
-                value: 'disabled',
+                label: "Disabled",
+                value: "disabled",
                 icon: <X className="h-4 w-4" />,
                 disabled: true,
               },
@@ -844,7 +844,7 @@ export const ThemeShowcase: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };
@@ -867,24 +867,24 @@ export const AccessibilityShowcase: Story = {
           }
           items={[
             {
-              label: 'First Item (Tab to focus)',
-              value: 'item1',
+              label: "First Item (Tab to focus)",
+              value: "item1",
               icon: <ArrowDown className="h-4 w-4" />,
             },
             {
-              label: 'Second Item',
-              value: 'item2',
+              label: "Second Item",
+              value: "item2",
               icon: <Circle className="h-4 w-4" />,
             },
             {
-              label: 'Third Item',
-              value: 'item3',
+              label: "Third Item",
+              value: "item3",
               icon: <Square className="h-4 w-4" />,
             },
-            { separator: true, value: 'sep1', label: '' },
+            { separator: true, value: "sep1", label: "" },
             {
-              label: 'Last Item',
-              value: 'item4',
+              label: "Last Item",
+              value: "item4",
               icon: <ArrowUp className="h-4 w-4" />,
             },
           ]}
@@ -905,19 +905,19 @@ export const AccessibilityShowcase: Story = {
           }
           items={[
             {
-              label: 'View (announces as button)',
-              value: 'view',
+              label: "View (announces as button)",
+              value: "view",
               icon: <Eye className="h-4 w-4" />,
             },
             {
-              label: 'Edit (announces as button)',
-              value: 'edit',
+              label: "Edit (announces as button)",
+              value: "edit",
               icon: <Edit className="h-4 w-4" />,
             },
-            { separator: true, value: 'sep1', label: '' },
+            { separator: true, value: "sep1", label: "" },
             {
-              label: 'Delete (disabled)',
-              value: 'delete',
+              label: "Delete (disabled)",
+              value: "delete",
               icon: <Trash2 className="h-4 w-4" />,
               disabled: true,
             },
@@ -935,9 +935,9 @@ export const CustomStyling: Story = {
       <GlassDropdown
         trigger={<GlassButton type="button">Custom Content Style</GlassButton>}
         items={[
-          { label: 'Option 1', value: 'opt1' },
-          { label: 'Option 2', value: 'opt2' },
-          { label: 'Option 3', value: 'opt3' },
+          { label: "Option 1", value: "opt1" },
+          { label: "Option 2", value: "opt2" },
+          { label: "Option 3", value: "opt3" },
         ]}
         contentClassName="bg-purple-900/90 border-purple-500/30"
       />
@@ -946,11 +946,11 @@ export const CustomStyling: Story = {
         trigger={<GlassButton type="button">Wide Dropdown</GlassButton>}
         items={[
           {
-            label: 'This is a very long menu item that needs more space',
-            value: 'long1',
+            label: "This is a very long menu item that needs more space",
+            value: "long1",
           },
-          { label: 'Another long item with lots of text', value: 'long2' },
-          { label: 'Yet another lengthy menu option', value: 'long3' },
+          { label: "Another long item with lots of text", value: "long2" },
+          { label: "Yet another lengthy menu option", value: "long3" },
         ]}
         contentClassName="min-w-[300px]"
       />
@@ -958,9 +958,9 @@ export const CustomStyling: Story = {
       <GlassDropdown
         trigger={<GlassButton type="button">Compact Menu</GlassButton>}
         items={[
-          { label: 'A', value: 'a' },
-          { label: 'B', value: 'b' },
-          { label: 'C', value: 'c' },
+          { label: "A", value: "a" },
+          { label: "B", value: "b" },
+          { label: "C", value: "c" },
         ]}
         contentClassName="min-w-[80px]"
         sideOffset={0}

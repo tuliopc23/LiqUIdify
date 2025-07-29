@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Book, Clock, Search, TrendingUp, User } from 'lucide-react';
-import { useState } from 'react';
-import { GlassSearch, type SearchSuggestion } from './glass-search';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Book, Clock, Search, TrendingUp, User } from "lucide-react";
+import { useState } from "react";
+import { GlassSearch, type SearchSuggestion } from "./glass-search";
 
 const meta = {
-  title: 'Components/Forms/GlassSearch',
+  title: "Components/Forms/GlassSearch",
   component: GlassSearch,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -62,85 +62,85 @@ The search component follows WAI-ARIA guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Core Props
     placeholder: {
-      control: 'text',
-      description: 'Placeholder text for the search input',
+      control: "text",
+      description: "Placeholder text for the search input",
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'Search...' },
-        category: 'Core',
+        type: { summary: "string" },
+        defaultValue: { summary: "Search..." },
+        category: "Core",
       },
     },
     onSearch: {
-      action: 'search performed',
-      description: 'Callback fired when search is performed',
+      action: "search performed",
+      description: "Callback fired when search is performed",
       table: {
-        type: { summary: '(query: string) => void' },
-        category: 'Core',
+        type: { summary: "(query: string) => void" },
+        category: "Core",
       },
     },
     onSuggestionClick: {
-      action: 'suggestion clicked',
-      description: 'Callback fired when a suggestion is clicked',
+      action: "suggestion clicked",
+      description: "Callback fired when a suggestion is clicked",
       table: {
-        type: { summary: '(suggestion: SearchSuggestion) => void' },
-        category: 'Core',
+        type: { summary: "(suggestion: SearchSuggestion) => void" },
+        category: "Core",
       },
     },
 
     // Configuration
     maxSuggestions: {
-      control: { type: 'number', min: 1, max: 20, step: 1 },
-      description: 'Maximum number of suggestions to display',
+      control: { type: "number", min: 1, max: 20, step: 1 },
+      description: "Maximum number of suggestions to display",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '8' },
-        category: 'Configuration',
+        type: { summary: "number" },
+        defaultValue: { summary: "8" },
+        category: "Configuration",
       },
     },
     showTrending: {
-      control: 'boolean',
-      description: 'Show trending suggestions',
+      control: "boolean",
+      description: "Show trending suggestions",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Configuration',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Configuration",
       },
     },
 
     // Data
     suggestions: {
-      control: 'object',
-      description: 'Array of search suggestions',
+      control: "object",
+      description: "Array of search suggestions",
       table: {
-        type: { summary: 'Array<SearchSuggestion>' },
-        category: 'Data',
+        type: { summary: "Array<SearchSuggestion>" },
+        category: "Data",
       },
     },
     recentSearches: {
-      control: 'object',
-      description: 'Array of recent search terms',
+      control: "object",
+      description: "Array of recent search terms",
       table: {
-        type: { summary: 'Array<string>' },
-        category: 'Data',
+        type: { summary: "Array<string>" },
+        category: "Data",
       },
     },
 
     // HTML Props
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
   },
   args: {
-    placeholder: 'Search...',
+    placeholder: "Search...",
     maxSuggestions: 8,
     showTrending: true,
     suggestions: [],
@@ -154,83 +154,83 @@ type Story = StoryObj<typeof meta>;
 // Sample data for stories
 const sampleSuggestions: Array<SearchSuggestion> = [
   {
-    id: '1',
-    text: 'React components',
-    type: 'suggestion',
-    category: 'Development',
+    id: "1",
+    text: "React components",
+    type: "suggestion",
+    category: "Development",
     count: 1250,
   },
   {
-    id: '2',
-    text: 'TypeScript tutorial',
-    type: 'suggestion',
-    category: 'Learning',
+    id: "2",
+    text: "TypeScript tutorial",
+    type: "suggestion",
+    category: "Learning",
     count: 892,
   },
   {
-    id: '3',
-    text: 'Tailwind CSS',
-    type: 'trending',
-    category: 'Styling',
+    id: "3",
+    text: "Tailwind CSS",
+    type: "trending",
+    category: "Styling",
     count: 2340,
   },
   {
-    id: '4',
-    text: 'Next.js 15',
-    type: 'trending',
-    category: 'Framework',
+    id: "4",
+    text: "Next.js 15",
+    type: "trending",
+    category: "Framework",
     count: 1876,
   },
   {
-    id: '5',
-    text: 'Storybook setup',
-    type: 'suggestion',
-    category: 'Tools',
+    id: "5",
+    text: "Storybook setup",
+    type: "suggestion",
+    category: "Tools",
     count: 567,
   },
   {
-    id: '6',
-    text: 'Framer Motion',
-    type: 'suggestion',
-    category: 'Animation',
+    id: "6",
+    text: "Framer Motion",
+    type: "suggestion",
+    category: "Animation",
     count: 734,
   },
   {
-    id: '7',
-    text: 'Glass morphism',
-    type: 'trending',
-    category: 'Design',
+    id: "7",
+    text: "Glass morphism",
+    type: "trending",
+    category: "Design",
     count: 445,
   },
   {
-    id: '8',
-    text: 'React hooks',
-    type: 'suggestion',
-    category: 'Development',
+    id: "8",
+    text: "React hooks",
+    type: "suggestion",
+    category: "Development",
     count: 3210,
   },
   {
-    id: '9',
-    text: 'CSS Grid',
-    type: 'suggestion',
-    category: 'Styling',
+    id: "9",
+    text: "CSS Grid",
+    type: "suggestion",
+    category: "Styling",
     count: 1567,
   },
   {
-    id: '10',
-    text: 'JavaScript ES2024',
-    type: 'trending',
-    category: 'Language',
+    id: "10",
+    text: "JavaScript ES2024",
+    type: "trending",
+    category: "Language",
     count: 987,
   },
 ];
 
 const sampleRecentSearches = [
-  'React best practices',
-  'TypeScript interfaces',
-  'CSS animations',
-  'Node.js API',
-  'Git workflow',
+  "React best practices",
+  "TypeScript interfaces",
+  "CSS animations",
+  "Node.js API",
+  "Git workflow",
 ];
 
 // Default story - Interactive playground
@@ -254,7 +254,7 @@ export const BasicUsage: Story = {
         <h3 className="font-medium text-sm text-white/80">Simple Search</h3>
         <GlassSearch
           placeholder="Type to search..."
-          onSearch={(query) => console.log('Search:', query)}
+          onSearch={(query) => console.log("Search:", query)}
         />
       </div>
 
@@ -264,8 +264,8 @@ export const BasicUsage: Story = {
         </h3>
         <GlassSearch
           placeholder="Search products..."
-          recentSearches={['iPhone 15', 'MacBook Pro', 'AirPods']}
-          onSearch={(query) => console.log('Search:', query)}
+          recentSearches={["iPhone 15", "MacBook Pro", "AirPods"]}
+          onSearch={(query) => console.log("Search:", query)}
         />
       </div>
 
@@ -274,18 +274,18 @@ export const BasicUsage: Story = {
         <GlassSearch
           placeholder="Search documentation..."
           suggestions={sampleSuggestions.slice(0, 5)}
-          onSearch={(query) => console.log('Search:', query)}
+          onSearch={(query) => console.log("Search:", query)}
         />
       </div>
     </div>
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -297,52 +297,52 @@ export const SuggestionTypes: Story = {
   render: () => {
     const categorizedSuggestions: Array<SearchSuggestion> = [
       // Recent
-      { id: 'r1', text: 'React components', type: 'recent' },
-      { id: 'r2', text: 'TypeScript guide', type: 'recent' },
+      { id: "r1", text: "React components", type: "recent" },
+      { id: "r2", text: "TypeScript guide", type: "recent" },
 
       // Trending
       {
-        id: 't1',
-        text: 'AI and Machine Learning',
-        type: 'trending',
-        category: 'Technology',
+        id: "t1",
+        text: "AI and Machine Learning",
+        type: "trending",
+        category: "Technology",
         count: 5432,
       },
       {
-        id: 't2',
-        text: 'Web3 Development',
-        type: 'trending',
-        category: 'Blockchain',
+        id: "t2",
+        text: "Web3 Development",
+        type: "trending",
+        category: "Blockchain",
         count: 3210,
       },
       {
-        id: 't3',
-        text: 'Sustainable Design',
-        type: 'trending',
-        category: 'Design',
+        id: "t3",
+        text: "Sustainable Design",
+        type: "trending",
+        category: "Design",
         count: 2876,
       },
 
       // Regular suggestions
       {
-        id: 's1',
-        text: 'JavaScript Frameworks',
-        type: 'suggestion',
-        category: 'Development',
+        id: "s1",
+        text: "JavaScript Frameworks",
+        type: "suggestion",
+        category: "Development",
         count: 4321,
       },
       {
-        id: 's2',
-        text: 'UI/UX Best Practices',
-        type: 'suggestion',
-        category: 'Design',
+        id: "s2",
+        text: "UI/UX Best Practices",
+        type: "suggestion",
+        category: "Design",
         count: 2654,
       },
       {
-        id: 's3',
-        text: 'Cloud Architecture',
-        type: 'suggestion',
-        category: 'Infrastructure',
+        id: "s3",
+        text: "Cloud Architecture",
+        type: "suggestion",
+        category: "Infrastructure",
         count: 1987,
       },
     ];
@@ -359,7 +359,7 @@ export const SuggestionTypes: Story = {
           <GlassSearch
             placeholder="Search topics..."
             suggestions={categorizedSuggestions}
-            recentSearches={['React hooks', 'CSS Grid']}
+            recentSearches={["React hooks", "CSS Grid"]}
             maxSuggestions={10}
           />
         </div>
@@ -388,11 +388,11 @@ export const SuggestionTypes: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -404,20 +404,20 @@ export const LoadingAndEmptyStates: Story = {
   render: () => {
     const [isLoading, setIsLoading] = useState(false);
     const [searchResults, setSearchResults] = useState<Array<SearchSuggestion>>(
-      []
+      [],
     );
 
     const handleSearch = async (query: string) => {
       setIsLoading(true);
       // Simulate API call
       setTimeout(() => {
-        if (query.toLowerCase().includes('no results')) {
+        if (query.toLowerCase().includes("no results")) {
           setSearchResults([]);
         } else {
           setSearchResults(
             sampleSuggestions.filter((s) =>
-              s.text.toLowerCase().includes(query.toLowerCase())
-            )
+              s.text.toLowerCase().includes(query.toLowerCase()),
+            ),
           );
         }
         setIsLoading(false);
@@ -460,11 +460,11 @@ export const LoadingAndEmptyStates: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -476,102 +476,102 @@ export const RealWorldExamples: Story = {
   render: () => {
     const ecommerceSuggestions: Array<SearchSuggestion> = [
       {
-        id: 'e1',
-        text: 'iPhone 15 Pro',
-        type: 'trending',
-        category: 'Electronics',
+        id: "e1",
+        text: "iPhone 15 Pro",
+        type: "trending",
+        category: "Electronics",
         count: 8765,
       },
       {
-        id: 'e2',
-        text: 'MacBook Air M3',
-        type: 'suggestion',
-        category: 'Computers',
+        id: "e2",
+        text: "MacBook Air M3",
+        type: "suggestion",
+        category: "Computers",
         count: 5432,
       },
       {
-        id: 'e3',
-        text: 'AirPods Pro 2',
-        type: 'suggestion',
-        category: 'Audio',
+        id: "e3",
+        text: "AirPods Pro 2",
+        type: "suggestion",
+        category: "Audio",
         count: 4321,
       },
       {
-        id: 'e4',
-        text: 'iPad Pro 12.9',
-        type: 'trending',
-        category: 'Tablets',
+        id: "e4",
+        text: "iPad Pro 12.9",
+        type: "trending",
+        category: "Tablets",
         count: 3210,
       },
       {
-        id: 'e5',
-        text: 'Apple Watch Series 9',
-        type: 'suggestion',
-        category: 'Wearables',
+        id: "e5",
+        text: "Apple Watch Series 9",
+        type: "suggestion",
+        category: "Wearables",
         count: 2876,
       },
     ];
 
     const documentationSuggestions: Array<SearchSuggestion> = [
       {
-        id: 'd1',
-        text: 'Getting Started',
-        type: 'suggestion',
-        category: 'Guides',
+        id: "d1",
+        text: "Getting Started",
+        type: "suggestion",
+        category: "Guides",
       },
       {
-        id: 'd2',
-        text: 'API Reference',
-        type: 'suggestion',
-        category: 'Documentation',
+        id: "d2",
+        text: "API Reference",
+        type: "suggestion",
+        category: "Documentation",
       },
       {
-        id: 'd3',
-        text: 'Component Props',
-        type: 'trending',
-        category: 'Components',
+        id: "d3",
+        text: "Component Props",
+        type: "trending",
+        category: "Components",
       },
       {
-        id: 'd4',
-        text: 'Styling Guide',
-        type: 'suggestion',
-        category: 'Theming',
+        id: "d4",
+        text: "Styling Guide",
+        type: "suggestion",
+        category: "Theming",
       },
       {
-        id: 'd5',
-        text: 'Migration Guide',
-        type: 'suggestion',
-        category: 'Guides',
+        id: "d5",
+        text: "Migration Guide",
+        type: "suggestion",
+        category: "Guides",
       },
     ];
 
     const socialSuggestions: Array<SearchSuggestion> = [
-      { id: 's1', text: 'John Smith', type: 'suggestion', category: 'People' },
+      { id: "s1", text: "John Smith", type: "suggestion", category: "People" },
       {
-        id: 's2',
-        text: '#WebDevelopment',
-        type: 'trending',
-        category: 'Hashtags',
+        id: "s2",
+        text: "#WebDevelopment",
+        type: "trending",
+        category: "Hashtags",
         count: 12540,
       },
       {
-        id: 's3',
-        text: 'Tech Conference 2024',
-        type: 'trending',
-        category: 'Events',
+        id: "s3",
+        text: "Tech Conference 2024",
+        type: "trending",
+        category: "Events",
         count: 8900,
       },
       {
-        id: 's4',
-        text: 'Sarah Johnson',
-        type: 'suggestion',
-        category: 'People',
+        id: "s4",
+        text: "Sarah Johnson",
+        type: "suggestion",
+        category: "People",
       },
       {
-        id: 's5',
-        text: '#JavaScript',
-        type: 'trending',
-        category: 'Hashtags',
+        id: "s5",
+        text: "#JavaScript",
+        type: "trending",
+        category: "Hashtags",
         count: 45670,
       },
     ];
@@ -597,7 +597,7 @@ export const RealWorldExamples: Story = {
             <GlassSearch
               placeholder="Search products, brands, categories..."
               suggestions={ecommerceSuggestions}
-              recentSearches={['MacBook', 'iPhone case', 'wireless charger']}
+              recentSearches={["MacBook", "iPhone case", "wireless charger"]}
               maxSuggestions={6}
             />
           </div>
@@ -622,7 +622,7 @@ export const RealWorldExamples: Story = {
             <GlassSearch
               placeholder="Search documentation..."
               suggestions={documentationSuggestions}
-              recentSearches={['installation', 'hooks', 'theming']}
+              recentSearches={["installation", "hooks", "theming"]}
               maxSuggestions={8}
             />
           </div>
@@ -647,7 +647,7 @@ export const RealWorldExamples: Story = {
             <GlassSearch
               placeholder="Search people, hashtags, posts..."
               suggestions={socialSuggestions}
-              recentSearches={['@username', '#react', 'conference']}
+              recentSearches={["@username", "#react", "conference"]}
               maxSuggestions={7}
             />
           </div>
@@ -657,11 +657,11 @@ export const RealWorldExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -671,7 +671,7 @@ export const RealWorldExamples: Story = {
 // Accessibility showcase
 export const AccessibilityShowcase: Story = {
   render: () => {
-    const [selectedSuggestion, setSelectedSuggestion] = useState<string>('');
+    const [selectedSuggestion, setSelectedSuggestion] = useState<string>("");
 
     return (
       <div className="space-y-6">
@@ -731,11 +731,11 @@ export const AccessibilityShowcase: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -752,7 +752,7 @@ export const ThemeShowcase: Story = {
           <GlassSearch
             placeholder="Search the depths..."
             suggestions={sampleSuggestions.slice(0, 4)}
-            recentSearches={['ocean life', 'marine biology']}
+            recentSearches={["ocean life", "marine biology"]}
           />
         </div>
       </div>
@@ -763,7 +763,7 @@ export const ThemeShowcase: Story = {
           <GlassSearch
             placeholder="Discover something new..."
             suggestions={sampleSuggestions.slice(2, 6)}
-            recentSearches={['sunset photography', 'golden hour']}
+            recentSearches={["sunset photography", "golden hour"]}
           />
         </div>
       </div>
@@ -774,7 +774,7 @@ export const ThemeShowcase: Story = {
           <GlassSearch
             placeholder="Explore nature..."
             suggestions={sampleSuggestions.slice(4, 8)}
-            recentSearches={['forest trails', 'wildlife']}
+            recentSearches={["forest trails", "wildlife"]}
           />
         </div>
       </div>

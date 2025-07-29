@@ -6,8 +6,8 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react';
-import { liquidGlassTokens } from '../lib/liquid-glass-tokens';
+} from "react";
+import { liquidGlassTokens } from "../lib/liquid-glass-tokens";
 
 export interface LiquidGlassConfig {
   color?: string; // rgb string e.g. "255,255,255"
@@ -27,7 +27,7 @@ export interface ContentAnalysis {
 }
 
 const defaultConfig: Required<LiquidGlassConfig> = {
-  color: '255,255,255',
+  color: "255,255,255",
   blur: 24,
   saturation: 180,
   opacity: 0.75,
@@ -72,59 +72,59 @@ export function LiquidGlassProvider({
 
       // Set adaptive properties
       root.style.setProperty(
-        '--glass-opacity-adaptive',
-        String(Math.max(0.1, Math.min(0.9, adaptedOpacity)))
+        "--glass-opacity-adaptive",
+        String(Math.max(0.1, Math.min(0.9, adaptedOpacity))),
       );
       root.style.setProperty(
-        '--glass-blur-adaptive',
-        `${Math.max(8, Math.min(48, adaptedBlur))}px`
+        "--glass-blur-adaptive",
+        `${Math.max(8, Math.min(48, adaptedBlur))}px`,
       );
       root.style.setProperty(
-        '--glass-saturation-adaptive',
-        `${Math.max(120, Math.min(250, adaptedSaturation))}%`
+        "--glass-saturation-adaptive",
+        `${Math.max(120, Math.min(250, adaptedSaturation))}%`,
       );
 
       // Adapt color based on dominant hue
       const hue = analysis.dominantHue;
       const adaptedColor = `hsl(${hue}, 20%, ${analysis.brightness > 0.5 ? 95 : 15}%)`;
-      root.style.setProperty('--glass-color-adaptive', adaptedColor);
+      root.style.setProperty("--glass-color-adaptive", adaptedColor);
     },
-    [merged]
+    [merged],
   );
 
   useEffect(() => {
     const root = document.documentElement;
 
     // Set base properties
-    root.style.setProperty('--glass-color', `rgb(${merged.color})`);
-    root.style.setProperty('--glass-blur', `${merged.blur}px`);
-    root.style.setProperty('--glass-saturation', `${merged.saturation}%`);
-    root.style.setProperty('--glass-opacity', String(merged.opacity));
+    root.style.setProperty("--glass-color", `rgb(${merged.color})`);
+    root.style.setProperty("--glass-blur", `${merged.blur}px`);
+    root.style.setProperty("--glass-saturation", `${merged.saturation}%`);
+    root.style.setProperty("--glass-opacity", String(merged.opacity));
 
     // Set liquid glass tokens
     for (const [key, value] of Object.entries(
-      liquidGlassTokens.colors.glass.white
+      liquidGlassTokens.colors.glass.white,
     )) {
       root.style.setProperty(`--liquid-glass-${key}`, value as string);
     }
 
     // Set shadow tokens
     for (const [key, value] of Object.entries(
-      liquidGlassTokens.shadows.glass
+      liquidGlassTokens.shadows.glass,
     )) {
       root.style.setProperty(`--liquid-shadow-${key}`, value as string);
     }
 
     // Set timing tokens
     for (const [key, value] of Object.entries(
-      liquidGlassTokens.animation.duration
+      liquidGlassTokens.animation.duration,
     )) {
       root.style.setProperty(`--liquid-timing-${key}`, value as string);
     }
 
     // Enable specular highlights if configured
     if (merged.specularHighlights) {
-      root.style.setProperty('--specular-enabled', '1');
+      root.style.setProperty("--specular-enabled", "1");
     }
   }, [merged]);
 
@@ -141,7 +141,7 @@ export const useLiquidGlass = () => useContext(LiquidGlassContext);
 
 // Content-aware glass hook
 export const useContentAwareGlass = (
-  contentRef: React.RefObject<HTMLElement>
+  contentRef: React.RefObject<HTMLElement>,
 ) => {
   const { updateGlassStyle, adaptToContent } = useLiquidGlass();
   const analysisRef = useRef<ContentAnalysis | null>(null);
@@ -153,8 +153,8 @@ export const useContentAwareGlass = (
 
     try {
       const element = contentRef.current;
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
 
       if (!context) {
         return;
@@ -181,7 +181,7 @@ export const useContentAwareGlass = (
       }
     } catch {
       // Silently fail in production, log in development
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         // Logging disabled
       }
     }
@@ -192,9 +192,9 @@ export const useContentAwareGlass = (
       return;
     }
     if (
-      typeof window === 'undefined' ||
-      !('MutationObserver' in window) ||
-      !('ResizeObserver' in window)
+      typeof window === "undefined" ||
+      !("MutationObserver" in window) ||
+      !("ResizeObserver" in window)
     ) {
       return;
     }
@@ -207,7 +207,7 @@ export const useContentAwareGlass = (
         attributes: true,
         childList: true,
         subtree: true,
-        attributeFilter: ['style', 'class'],
+        attributeFilter: ["style", "class"],
       });
       resizeObserver.observe(contentRef.current);
     }
@@ -226,8 +226,8 @@ export const useContentAwareGlass = (
 
 // Helper function to analyze color
 function analyzeColor(colorString: string): ContentAnalysis | null {
-  if (!colorString || typeof colorString !== 'string') {
-    if (process.env.NODE_ENV === 'development') {
+  if (!colorString || typeof colorString !== "string") {
+    if (process.env.NODE_ENV === "development") {
       // Logging disabled
     }
 
@@ -237,29 +237,29 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
   try {
     // Parse RGB values from color string with better error handling
     const rgbMatch = colorString.match(
-      /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/
+      /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/,
     );
 
     if (!rgbMatch) {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         // Logging disabled
       }
       // Return a default analysis for unrecognized colors
       return {
-        averageColor: 'rgb(128, 128, 128)',
+        averageColor: "rgb(128, 128, 128)",
         brightness: 0.5,
         contrast: 0.5,
         dominantHue: 0,
       };
     }
 
-    const r = Number.parseInt(rgbMatch[1] || '0', 10) / 255;
-    const g = Number.parseInt(rgbMatch[2] || '0', 10) / 255;
-    const b = Number.parseInt(rgbMatch[3] || '0', 10) / 255;
+    const r = Number.parseInt(rgbMatch[1] || "0", 10) / 255;
+    const g = Number.parseInt(rgbMatch[2] || "0", 10) / 255;
+    const b = Number.parseInt(rgbMatch[3] || "0", 10) / 255;
 
     // Validate parsed values
     if (Number.isNaN(r) || Number.isNaN(g) || Number.isNaN(b)) {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         // Logging disabled
       }
 
@@ -284,12 +284,12 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
       dominantHue: hue,
     };
   } catch {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       // Logging disabled
     }
     // Return a safe default
     return {
-      averageColor: 'rgb(128, 128, 128)',
+      averageColor: "rgb(128, 128, 128)",
       brightness: 0.5,
       contrast: 0.5,
       dominantHue: 0,

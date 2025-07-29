@@ -1,4 +1,4 @@
-import { type Metric, onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals';
+import { type Metric, onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals";
 
 /**
  * Performance Monitor for Glass UI
@@ -17,7 +17,7 @@ const THRESHOLDS = {
 } as const;
 
 export type MetricName = keyof typeof THRESHOLDS;
-export type PerformanceRating = 'good' | 'needs-improvement' | 'poor';
+export type PerformanceRating = "good" | "needs-improvement" | "poor";
 
 interface PerformanceMetric {
   name: MetricName;
@@ -82,7 +82,7 @@ class PerformanceMonitor {
       reportCallback?: ReportCallback;
       immediate?: boolean;
       sampleRate?: number;
-    } = {}
+    } = {},
   ): void {
     if (this.isInitialized) {
       return;
@@ -100,13 +100,13 @@ class PerformanceMonitor {
     }
 
     // Core Web Vitals
-    onLCP((metric) => this.handleMetric(metric, 'LCP'));
+    onLCP((metric) => this.handleMetric(metric, "LCP"));
     // FID has been deprecated in favor of INP
     // onFID(metric => this.handleMetric(metric, 'FID'));
-    onCLS((metric) => this.handleMetric(metric, 'CLS'));
-    onFCP((metric) => this.handleMetric(metric, 'FCP'));
-    onTTFB((metric) => this.handleMetric(metric, 'TTFB'));
-    onINP((metric) => this.handleMetric(metric, 'INP'));
+    onCLS((metric) => this.handleMetric(metric, "CLS"));
+    onFCP((metric) => this.handleMetric(metric, "FCP"));
+    onTTFB((metric) => this.handleMetric(metric, "TTFB"));
+    onINP((metric) => this.handleMetric(metric, "INP"));
 
     // Time to Interactive (custom implementation)
     this.measureTTI();
@@ -147,9 +147,9 @@ class PerformanceMonitor {
     this.notifyObservers(name, performanceMetric);
 
     // Log to console in development
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       console.log(
-        `[Performance] ${name}: ${metric.value.toFixed(2)}ms (${rating})`
+        `[Performance] ${name}: ${metric.value.toFixed(2)}ms (${rating})`,
       );
     }
   }
@@ -160,19 +160,19 @@ class PerformanceMonitor {
   private getRating(name: MetricName, value: number): PerformanceRating {
     const threshold = THRESHOLDS[name];
     if (value <= threshold.good) {
-      return 'good';
+      return "good";
     }
     if (value <= threshold.poor) {
-      return 'needs-improvement';
+      return "needs-improvement";
     }
-    return 'poor';
+    return "poor";
   }
 
   /**
    * Measure Time to Interactive
    */
   private measureTTI(): void {
-    if (!('PerformanceObserver' in window)) {
+    if (!("PerformanceObserver" in window)) {
       return;
     }
 
@@ -191,11 +191,11 @@ class PerformanceMonitor {
       }
     });
 
-    observer.observe({ entryTypes: ['longtask'] });
+    observer.observe({ entryTypes: ["longtask"] });
 
     // Estimate TTI after load
-    if (typeof window !== 'undefined') {
-      window.addEventListener('load', () => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("load", () => {
         setTimeout(() => {
           if (tti === 0) {
             tti = performance.now();
@@ -203,15 +203,15 @@ class PerformanceMonitor {
 
           this.handleMetric(
             {
-              name: 'TTI',
+              name: "TTI",
               value: tti,
               id: `tti-${Date.now()}`,
-              navigationType: 'navigate',
-              rating: 'good',
+              navigationType: "navigate",
+              rating: "good",
               delta: tti,
               entries: [],
             } as unknown as Metric,
-            'TTI' as MetricName
+            "TTI" as MetricName,
           );
 
           observer.disconnect();
@@ -224,15 +224,15 @@ class PerformanceMonitor {
    * Set up Performance Observer for additional metrics
    */
   private setupPerformanceObserver(): void {
-    if (!('PerformanceObserver' in window)) {
+    if (!("PerformanceObserver" in window)) {
       return;
     }
 
     this.performanceObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         if (
-          entry.entryType === 'measure' &&
-          entry.name.startsWith('glass-ui-')
+          entry.entryType === "measure" &&
+          entry.name.startsWith("glass-ui-")
         ) {
           this.customMetrics.set(entry.name, entry.duration);
         }
@@ -240,7 +240,7 @@ class PerformanceMonitor {
     });
 
     this.performanceObserver.observe({
-      entryTypes: ['measure', 'navigation', 'resource'],
+      entryTypes: ["measure", "navigation", "resource"],
     });
   }
 
@@ -248,7 +248,7 @@ class PerformanceMonitor {
    * Capture network information
    */
   private captureNetworkInfo(): Record<string, unknown> | undefined {
-    if ('connection' in navigator) {
+    if ("connection" in navigator) {
       const conn = (navigator as unknown).connection;
       return {
         effectiveType: conn.effectiveType,
@@ -265,7 +265,7 @@ class PerformanceMonitor {
    */
   trackComponent(
     componentName: string,
-    metrics: Partial<ComponentMetric>
+    metrics: Partial<ComponentMetric>,
   ): void {
     const existing = this.componentMetrics.get(componentName) || {
       componentName,
@@ -288,12 +288,12 @@ class PerformanceMonitor {
     this.customMetrics.set(name, value);
 
     // Also create a performance mark
-    if ('performance' in window) {
+    if ("performance" in window) {
       performance.mark(`glass-ui-${name}-end`);
       performance.measure(
         `glass-ui-${name}`,
         `glass-ui-${name}-start`,
-        `glass-ui-${name}-end`
+        `glass-ui-${name}-end`,
       );
     }
   }
@@ -302,7 +302,7 @@ class PerformanceMonitor {
    * Start timing a custom metric
    */
   startTiming(name: string): void {
-    if ('performance' in window) {
+    if ("performance" in window) {
       performance.mark(`glass-ui-${name}-start`);
     }
   }
@@ -311,17 +311,17 @@ class PerformanceMonitor {
    * End timing a custom metric
    */
   endTiming(name: string): number {
-    if ('performance' in window) {
+    if ("performance" in window) {
       performance.mark(`glass-ui-${name}-end`);
       performance.measure(
         `glass-ui-${name}`,
         `glass-ui-${name}-start`,
-        `glass-ui-${name}-end`
+        `glass-ui-${name}-end`,
       );
 
       const entries = performance.getEntriesByName(
         `glass-ui-${name}`,
-        'measure'
+        "measure",
       );
       if (entries.length > 0) {
         const duration = entries.at(-1)?.duration || 0;
@@ -337,7 +337,7 @@ class PerformanceMonitor {
    */
   getReport(): PerformanceReport {
     return {
-      url: typeof window === 'undefined' ? '' : window.location.href,
+      url: typeof window === "undefined" ? "" : window.location.href,
       timestamp: Date.now(),
       webVitals: [...this.metrics.values()],
       componentMetrics: [...this.componentMetrics.values()],
@@ -374,24 +374,24 @@ class PerformanceMonitor {
    */
   private setupPeriodicReporting(): void {
     // Send report on page visibility change
-    if (typeof document !== 'undefined') {
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') {
+    if (typeof document !== "undefined") {
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
           this.sendReport();
         }
       });
     }
 
     // Send report before unload
-    if (typeof window !== 'undefined') {
-      window.addEventListener('beforeunload', () => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("beforeunload", () => {
         this.sendReport();
       });
     }
 
     // Send report every 30 seconds
     setInterval(() => {
-      if (document.visibilityState === 'visible') {
+      if (document.visibilityState === "visible") {
         this.sendReport();
       }
     }, 30_000);

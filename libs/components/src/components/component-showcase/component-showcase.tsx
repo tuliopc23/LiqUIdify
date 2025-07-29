@@ -16,11 +16,11 @@ import {
   TrendingUp,
   User,
   Users,
-} from 'lucide-react';
-import React, { useCallback, useState } from 'react';
-import { GlassAvatar } from '../glass-avatar';
-import { GlassBadge } from '../glass-badge';
-import { GlassButton } from '../glass-button-refactored';
+} from "lucide-react";
+import React, { useCallback, useState } from "react";
+import { GlassAvatar } from "../glass-avatar";
+import { GlassBadge } from "../glass-badge";
+import { GlassButton } from "../glass-button-refactored";
 import {
   GlassCard,
   GlassCardContent,
@@ -28,22 +28,22 @@ import {
   GlassCardFooter,
   GlassCardHeader,
   GlassCardTitle,
-} from '../glass-card-refactored';
-import { GlassCheckbox } from '../glass-checkbox';
-import { GlassDropdown } from '../glass-dropdown';
-import { GlassInput } from '../glass-input';
-import { GlassLoading } from '../glass-loading';
-import { GlassModal } from '../glass-modal';
-import { GlassPopover } from '../glass-popover';
-import { GlassProgress } from '../glass-progress';
-import { GlassSelect } from '../glass-select';
-import { GlassSlider } from '../glass-slider';
-import { GlassSwitch } from '../glass-switch';
-import { GlassTable } from '../glass-table';
-import { GlassTabs } from '../glass-tabs';
-import { GlassTextarea } from '../glass-textarea';
-import { useToast } from '../glass-toast';
-import { GlassTooltip } from '../glass-tooltip';
+} from "../glass-card-refactored";
+import { GlassCheckbox } from "../glass-checkbox";
+import { GlassDropdown } from "../glass-dropdown";
+import { GlassInput } from "../glass-input";
+import { GlassLoading } from "../glass-loading";
+import { GlassModal } from "../glass-modal";
+import { GlassPopover } from "../glass-popover";
+import { GlassProgress } from "../glass-progress";
+import { GlassSelect } from "../glass-select";
+import { GlassSlider } from "../glass-slider";
+import { GlassSwitch } from "../glass-switch";
+import { GlassTable } from "../glass-table";
+import { GlassTabs } from "../glass-tabs";
+import { GlassTextarea } from "../glass-textarea";
+import { useToast } from "../glass-toast";
+import { GlassTooltip } from "../glass-tooltip";
 
 interface TableDataItem {
   component: string;
@@ -68,26 +68,26 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
   const tableData = [
     {
-      component: 'Button',
-      category: 'Atom',
-      status: 'Ready',
-      usage: '847 times',
+      component: "Button",
+      category: "Atom",
+      status: "Ready",
+      usage: "847 times",
 
       icon: <MousePointer className="h-4 w-4 text-primary" />,
     },
     {
-      component: 'Input',
-      category: 'Atom',
-      status: 'Ready',
-      usage: '623 times',
+      component: "Input",
+      category: "Atom",
+      status: "Ready",
+      usage: "623 times",
 
       icon: <Keyboard className="h-4 w-4 text-primary" />,
     },
     {
-      component: 'Modal',
-      category: 'Organism',
-      status: 'In Progress',
-      usage: '234 times',
+      component: "Modal",
+      category: "Organism",
+      status: "In Progress",
+      usage: "234 times",
 
       icon: <Layers className="h-4 w-4 text-primary" />,
     },
@@ -95,8 +95,8 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
   const tableColumns = [
     {
-      key: 'component' as const,
-      header: 'Component',
+      key: "component" as const,
+      header: "Component",
       render: (value: unknown, item: unknown) => {
         const typedItem = item as TableDataItem;
         return (
@@ -110,25 +110,25 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
       },
     },
     {
-      key: 'category' as const,
-      header: 'Category',
+      key: "category" as const,
+      header: "Category",
 
       render: (value: unknown) => (
         <span className="text-secondary">{String(value)}</span>
       ),
     },
     {
-      key: 'status' as const,
-      header: 'Status',
+      key: "status" as const,
+      header: "Status",
       render: (value: unknown) => (
-        <GlassBadge variant={String(value) === 'Ready' ? 'success' : 'warning'}>
+        <GlassBadge variant={String(value) === "Ready" ? "success" : "warning"}>
           {String(value)}
         </GlassBadge>
       ),
     },
     {
-      key: 'usage' as const,
-      header: 'Usage',
+      key: "usage" as const,
+      header: "Usage",
 
       render: (value: unknown) => (
         <span className="text-primary">{String(value)}</span>
@@ -138,8 +138,8 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
   const tabsData = [
     {
-      id: 'components',
-      label: 'Components',
+      id: "components",
+      label: "Components",
       content: (
         <div>
           <h4 className="mb-3 font-semibold text-primary">Component Library</h4>
@@ -163,8 +163,8 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
       ),
     },
     {
-      id: 'documentation',
-      label: 'Documentation',
+      id: "documentation",
+      label: "Documentation",
       content: (
         <div>
           <h4 className="mb-3 font-semibold text-primary">Documentation</h4>
@@ -177,8 +177,8 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
       ),
     },
     {
-      id: 'examples',
-      label: 'Examples',
+      id: "examples",
+      label: "Examples",
       content: (
         <div>
           <h4 className="mb-3 font-semibold text-primary">Examples</h4>
@@ -193,7 +193,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
   const renderSection = () => {
     switch (activeSection) {
-      case 'button': {
+      case "button": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -268,7 +268,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'input': {
+      case "input": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -348,7 +348,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'checkbox': {
+      case "checkbox": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -386,7 +386,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'card': {
+      case "card": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -459,7 +459,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'tabs': {
+      case "tabs": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -479,7 +479,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'modal': {
+      case "modal": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -533,7 +533,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'data-table': {
+      case "data-table": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">Data Table</h2>
@@ -551,7 +551,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'textarea': {
+      case "textarea": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -600,7 +600,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'select': {
+      case "select": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -624,10 +624,10 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
                     <GlassSelect
                       options={[
-                        { value: 'react', label: 'React' },
-                        { value: 'vue', label: 'Vue.js' },
-                        { value: 'angular', label: 'Angular' },
-                        { value: 'svelte', label: 'Svelte' },
+                        { value: "react", label: "React" },
+                        { value: "vue", label: "Vue.js" },
+                        { value: "angular", label: "Angular" },
+                        { value: "svelte", label: "Svelte" },
                       ]}
                       placeholder="Select framework..."
                     />
@@ -643,12 +643,12 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
                     <GlassSelect
                       options={[
-                        { value: 'spa', label: 'Single Page App' },
-                        { value: 'ssr', label: 'Server Side Rendered' },
-                        { value: 'static', label: 'Static Site' },
+                        { value: "spa", label: "Single Page App" },
+                        { value: "ssr", label: "Server Side Rendered" },
+                        { value: "static", label: "Static Site" },
                         {
-                          value: 'mobile',
-                          label: 'Mobile App',
+                          value: "mobile",
+                          label: "Mobile App",
                           disabled: true,
                         },
                       ]}
@@ -662,7 +662,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'slider': {
+      case "slider": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -696,7 +696,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'progress': {
+      case "progress": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -727,7 +727,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'loading': {
+      case "loading": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -755,7 +755,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'avatar': {
+      case "avatar": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -796,7 +796,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'dropdown': {
+      case "dropdown": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -822,21 +822,21 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                     }
                     items={[
                       {
-                        label: 'Edit',
-                        value: 'edit',
+                        label: "Edit",
+                        value: "edit",
 
                         icon: <Edit className="h-4 w-4" />,
                       },
                       {
-                        label: 'Share',
-                        value: 'share',
+                        label: "Share",
+                        value: "share",
 
                         icon: <Share className="h-4 w-4" />,
                       },
-                      { label: '', value: 'separator', separator: true },
+                      { label: "", value: "separator", separator: true },
                       {
-                        label: 'Delete',
-                        value: 'delete',
+                        label: "Delete",
+                        value: "delete",
 
                         icon: <Trash className="h-4 w-4" />,
                       },
@@ -847,19 +847,19 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                     trigger={<GlassAvatar size="md" fallback="JD" />}
                     items={[
                       {
-                        label: 'Profile',
-                        value: 'profile',
+                        label: "Profile",
+                        value: "profile",
 
                         icon: <User className="h-4 w-4" />,
                       },
                       {
-                        label: 'Settings',
-                        value: 'settings',
+                        label: "Settings",
+                        value: "settings",
 
                         icon: <Settings className="h-4 w-4" />,
                       },
-                      { label: '', value: 'separator', separator: true },
-                      { label: 'Logout', value: 'logout' },
+                      { label: "", value: "separator", separator: true },
+                      { label: "Logout", value: "logout" },
                     ]}
                   />
                 </div>
@@ -869,7 +869,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'tooltip': {
+      case "tooltip": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -913,7 +913,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'popover': {
+      case "popover": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -1006,23 +1006,23 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'toast': {
+      case "toast": {
         const ToastDemo = React.memo(() => {
           const { addToast } = useToast();
 
           const handleShowSuccess = useCallback(() => {
             addToast({
-              type: 'success',
-              title: 'Success!',
-              description: 'Your action completed successfully.',
+              type: "success",
+              title: "Success!",
+              description: "Your action completed successfully.",
             });
           }, [addToast]);
 
           const handleShowError = useCallback(() => {
             addToast({
-              type: 'error',
-              title: 'Error',
-              description: 'Something went wrong. Please try again.',
+              type: "error",
+              title: "Error",
+              description: "Something went wrong. Please try again.",
             });
           }, [addToast]);
 
@@ -1060,11 +1060,11 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                       variant="tertiary"
                       onClick={() =>
                         addToast({
-                          type: 'warning',
-                          description: 'This is a warning message with action.',
+                          type: "warning",
+                          description: "This is a warning message with action.",
                           action: {
-                            label: 'Undo',
-                            onClick: () => console.log('Undo clicked'),
+                            label: "Undo",
+                            onClick: () => console.log("Undo clicked"),
                           },
                         })
                       }
@@ -1077,7 +1077,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                       variant="ghost"
                       onClick={() =>
                         addToast({
-                          type: 'info',
+                          type: "info",
                           description:
                             "Here's some helpful information for you.",
                         })
@@ -1095,7 +1095,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         return <ToastDemo />;
       }
 
-      case 'form-examples': {
+      case "form-examples": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -1164,10 +1164,10 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
 
                     <GlassSelect
                       options={[
-                        { value: 'developer', label: 'Developer' },
-                        { value: 'designer', label: 'Designer' },
-                        { value: 'manager', label: 'Project Manager' },
-                        { value: 'other', label: 'Other' },
+                        { value: "developer", label: "Developer" },
+                        { value: "designer", label: "Designer" },
+                        { value: "manager", label: "Project Manager" },
+                        { value: "other", label: "Other" },
                       ]}
                       placeholder="Select your role..."
                     />
@@ -1220,7 +1220,7 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
         );
       }
 
-      case 'dashboard': {
+      case "dashboard": {
         return (
           <section className="mb-12">
             <h2 className="mb-6 font-bold text-2xl text-primary">
@@ -1311,9 +1311,9 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                       </GlassButton>
                     }
                     items={[
-                      { label: 'All Time', value: 'all' },
-                      { label: 'Last Week', value: 'week' },
-                      { label: 'Last Month', value: 'month' },
+                      { label: "All Time", value: "all" },
+                      { label: "Last Week", value: "week" },
+                      { label: "Last Month", value: "month" },
                     ]}
                   />
                 </div>
@@ -1321,25 +1321,25 @@ export const ComponentShowcase = React.memo(function ComponentShowcase({
                 <GlassTable
                   data={[
                     {
-                      user: 'John Doe',
-                      action: 'Created project',
-                      time: '2 hours ago',
+                      user: "John Doe",
+                      action: "Created project",
+                      time: "2 hours ago",
                     },
                     {
-                      user: 'Jane Smith',
-                      action: 'Updated profile',
-                      time: '4 hours ago',
+                      user: "Jane Smith",
+                      action: "Updated profile",
+                      time: "4 hours ago",
                     },
                     {
-                      user: 'Mike Johnson',
-                      action: 'Completed task',
-                      time: '1 day ago',
+                      user: "Mike Johnson",
+                      action: "Completed task",
+                      time: "1 day ago",
                     },
                   ]}
                   columns={[
-                    { key: 'user', header: 'User' },
-                    { key: 'action', header: 'Action' },
-                    { key: 'time', header: 'Time' },
+                    { key: "user", header: "User" },
+                    { key: "action", header: "Action" },
+                    { key: "time", header: "Time" },
                   ]}
                 />
               </div>

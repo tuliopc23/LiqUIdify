@@ -1,4 +1,4 @@
 export {
   GlassNumberInput,
   type GlassNumberInputProps,
-} from './glass-number-input';
+} from "./glass-number-input";

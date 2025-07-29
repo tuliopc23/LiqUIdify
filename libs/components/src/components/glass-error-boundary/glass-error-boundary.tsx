@@ -1,11 +1,11 @@
-import { AlertTriangle } from 'lucide-react';
-import React, { Component, type ErrorInfo, type ReactNode } from 'react';
+import { AlertTriangle } from "lucide-react";
+import React, { Component, type ErrorInfo, type ReactNode } from "react";
 
-import { announcer } from '@/components/glass-live-region';
+import { announcer } from "@/components/glass-live-region";
 
-import { errorTracking } from '@/core/error-tracking';
+import { errorTracking } from "@/core/error-tracking";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
 export interface GlassErrorBoundaryProps {
   children: ReactNode;
@@ -14,7 +14,7 @@ export interface GlassErrorBoundaryProps {
   resetKeys?: string | Array<number>;
   resetOnPropsChange?: boolean;
   isolate?: boolean;
-  level?: 'page' | 'section' | 'component';
+  level?: "page" | "section" | "component";
   className?: string;
   componentName?: string;
   trackErrors?: boolean;
@@ -46,7 +46,7 @@ export class GlassErrorBoundary extends Component<
   }
 
   static getDerivedStateFromError(
-    error: Error
+    error: Error,
   ): Partial<GlassErrorBoundaryState> {
     return {
       hasError: true,
@@ -57,7 +57,7 @@ export class GlassErrorBoundary extends Component<
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     const {
       onError,
-      level = 'component',
+      level = "component",
       componentName,
       trackErrors = true,
     } = this.props;
@@ -69,10 +69,10 @@ export class GlassErrorBoundary extends Component<
     }));
 
     // Track error in production
-    if (trackErrors && process.env.NODE_ENV === 'production') {
+    if (trackErrors && process.env.NODE_ENV === "production") {
       errorTracking.trackError(error, errorInfo, {
-        component: componentName || 'Unknown',
-        action: 'component-error',
+        component: componentName || "Unknown",
+        action: "component-error",
         tags: {
           level,
           errorCount: String(this.state.errorCount + 1),
@@ -84,7 +84,7 @@ export class GlassErrorBoundary extends Component<
     }
 
     // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       // Logging disabled
     }
 
@@ -96,7 +96,7 @@ export class GlassErrorBoundary extends Component<
     // Announce error to screen readers
     announcer.announce(
       `An error occurred in the ${level}. The content may not display correctly.`,
-      { priority: 'high', context: 'error' }
+      { priority: "high", context: "error" },
     );
 
     // Auto-recover after multiple errors (circuit breaker pattern)
@@ -166,9 +166,9 @@ export class GlassErrorBoundary extends Component<
       errorCount: 0,
     });
 
-    announcer.announce('Error recovered. Content restored.', {
-      priority: 'medium',
-      context: 'success',
+    announcer.announce("Error recovered. Content restored.", {
+      priority: "medium",
+      context: "success",
     });
   };
 
@@ -178,7 +178,7 @@ export class GlassErrorBoundary extends Component<
       children,
       fallback,
       isolate = true,
-      level = 'component',
+      level = "component",
       className,
     } = this.props;
 
@@ -192,14 +192,14 @@ export class GlassErrorBoundary extends Component<
       return (
         <div
           className={cn(
-            'glass-error-boundary',
-            'glass-effect rounded-lg p-6',
+            "glass-error-boundary",
+            "glass-effect rounded-lg p-6",
             {
-              'min-h-screen': level === 'page',
-              'min-h-[400px]': level === 'section',
-              'min-h-[200px]': level === 'component',
+              "min-h-screen": level === "page",
+              "min-h-[400px]": level === "section",
+              "min-h-[200px]": level === "component",
             },
-            className
+            className,
           )}
           role="alert"
           aria-live="assertive"
@@ -209,14 +209,14 @@ export class GlassErrorBoundary extends Component<
 
             <div className="space-y-2">
               <h3 className="font-semibold text-lg text-primary">
-                {level === 'page' && 'Page Error'}
-                {level === 'section' && 'Section Error'}
-                {level === 'component' && 'Component Error'}
+                {level === "page" && "Page Error"}
+                {level === "section" && "Section Error"}
+                {level === "component" && "Component Error"}
               </h3>
 
               <p className="max-w-md text-secondary text-sm">
-                {process.env.NODE_ENV === 'production'
-                  ? 'Something went wrong. Please try refreshing the page.'
+                {process.env.NODE_ENV === "production"
+                  ? "Something went wrong. Please try refreshing the page."
                   : error.message}
               </p>
             </div>
@@ -231,7 +231,7 @@ export class GlassErrorBoundary extends Component<
                 Try Again
               </button>
 
-              {level === 'page' && (
+              {level === "page" && (
                 <button
                   type="button"
                   onClick={() => window.location.reload()}
@@ -243,7 +243,7 @@ export class GlassErrorBoundary extends Component<
               )}
             </div>
 
-            {process.env.NODE_ENV === 'development' && errorInfo && (
+            {process.env.NODE_ENV === "development" && errorInfo && (
               <details className="mt-4 w-full max-w-2xl text-left">
                 <summary className="cursor-pointer text-secondary text-sm hover:text-primary">
                   Error Details
@@ -301,12 +301,12 @@ export function GlassAsyncErrorBoundary({
       captureError(new Error(event.reason));
     };
 
-    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+    window.addEventListener("unhandledrejection", handleUnhandledRejection);
 
     return () => {
       window.removeEventListener(
-        'unhandledrejection',
-        handleUnhandledRejection
+        "unhandledrejection",
+        handleUnhandledRejection,
       );
     };
   }, [captureError]);

@@ -1,11 +1,11 @@
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { accessibilityManager } from '@/core/accessibility-manager';
+import { accessibilityManager } from "@/core/accessibility-manager";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
-import { useIsClient } from '@/hooks/use-ssr-safe';
+import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface SkipLink {
   id: string;
@@ -17,7 +17,7 @@ export interface SkipLink {
 export interface GlassSkipNavigationProps {
   links?: Array<SkipLink>;
   autoGenerate?: boolean;
-  position?: 'top' | 'left' | 'right';
+  position?: "top" | "left" | "right";
   className?: string;
   visibleOnFocus?: boolean;
   announceOnFocus?: boolean;
@@ -25,17 +25,17 @@ export interface GlassSkipNavigationProps {
 }
 
 const DEFAULT_LANDMARKS = [
-  { role: 'navigation', label: 'main navigation', id: 'nav' },
-  { role: 'main', label: 'main content', id: 'main' },
-  { role: 'search', label: 'search', id: 'search' },
-  { role: 'complementary', label: 'sidebar', id: 'sidebar' },
-  { role: 'contentinfo', label: 'footer', id: 'footer' },
+  { role: "navigation", label: "main navigation", id: "nav" },
+  { role: "main", label: "main content", id: "main" },
+  { role: "search", label: "search", id: "search" },
+  { role: "complementary", label: "sidebar", id: "sidebar" },
+  { role: "contentinfo", label: "footer", id: "footer" },
 ];
 
 export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
   links: providedLinks,
   autoGenerate = true,
-  position = 'top',
+  position = "top",
   className,
   visibleOnFocus = true,
   announceOnFocus = true,
@@ -59,7 +59,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
       // Find landmark elements
       for (const { role, label, id } of DEFAULT_LANDMARKS) {
         const elements =
-          typeof document === 'undefined'
+          typeof document === "undefined"
             ? []
             : document.querySelectorAll(`[role="${role}"]`);
 
@@ -74,8 +74,8 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
             // Get accessible name
             const accessibleName =
-              element.getAttribute('aria-label') ||
-              element.getAttribute('aria-labelledby') ||
+              element.getAttribute("aria-label") ||
+              element.getAttribute("aria-labelledby") ||
               label;
 
             generatedLinks.push({
@@ -89,9 +89,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
       // Find headings
       const headings =
-        typeof document === 'undefined'
+        typeof document === "undefined"
           ? []
-          : document.querySelectorAll('h1, h2');
+          : document.querySelectorAll("h1, h2");
       for (const [index, heading] of headings.entries()) {
         if (!heading.id) {
           heading.id = `heading-${index}`;
@@ -107,24 +107,24 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
       // Find forms
       const forms =
-        typeof document === 'undefined'
+        typeof document === "undefined"
           ? []
           : document.querySelectorAll(
-              'form[aria-label], form[aria-labelledby]'
+              "form[aria-label], form[aria-labelledby]",
             );
       for (const [index, form] of forms.entries()) {
         if (!form.id) {
           form.id = `form-${index}`;
         }
 
-        const labelledById = form.getAttribute('aria-labelledby');
+        const labelledById = form.getAttribute("aria-labelledby");
         const labelElement = labelledById
-          ? typeof document === 'undefined'
+          ? typeof document === "undefined"
             ? undefined
             : document.getElementById(labelledById)
           : undefined;
         const formName =
-          form.getAttribute('aria-label') ||
+          form.getAttribute("aria-label") ||
           labelElement?.textContent ||
           `Form ${index + 1}`;
 
@@ -139,9 +139,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     };
 
     // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      if (typeof document !== 'undefined') {
-        document.addEventListener('DOMContentLoaded', generateSkipLinks);
+    if (document.readyState === "loading") {
+      if (typeof document !== "undefined") {
+        document.addEventListener("DOMContentLoaded", generateSkipLinks);
       }
     } else {
       generateSkipLinks();
@@ -156,7 +156,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['role', 'aria-label', 'aria-labelledby'],
+      attributeFilter: ["role", "aria-label", "aria-labelledby"],
     });
 
     return () => {
@@ -166,7 +166,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
   const handleSkipTo = (
     link: SkipLink,
-    event: React.MouseEvent | React.KeyboardEvent
+    event: React.MouseEvent | React.KeyboardEvent,
   ) => {
     event.preventDefault();
 
@@ -176,15 +176,15 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
     let targetElement: HTMLElement | null;
 
-    if (typeof link.target === 'string') {
-      if (link.target.startsWith('#')) {
+    if (typeof link.target === "string") {
+      if (link.target.startsWith("#")) {
         targetElement =
-          typeof document === 'undefined'
+          typeof document === "undefined"
             ? undefined
             : document.querySelector(link.target);
       } else {
         targetElement =
-          typeof document === 'undefined'
+          typeof document === "undefined"
             ? undefined
             : document.getElementById(link.target);
       }
@@ -194,29 +194,29 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 
     if (targetElement) {
       // Ensure element is focusable
-      const originalTabIndex = targetElement.getAttribute('tabindex');
-      if (!targetElement.hasAttribute('tabindex')) {
-        targetElement.setAttribute('tabindex', '-1');
+      const originalTabIndex = targetElement.getAttribute("tabindex");
+      if (!targetElement.hasAttribute("tabindex")) {
+        targetElement.setAttribute("tabindex", "-1");
       }
 
       // Focus the element
       targetElement.focus();
 
       // Scroll into view
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
 
       // Restore original tabindex after focus
       if (!originalTabIndex) {
         setTimeout(() => {
-          targetElement.removeAttribute('tabindex');
+          targetElement.removeAttribute("tabindex");
         }, 100);
       }
 
       // Announce navigation
       if (announceOnFocus) {
         accessibilityManager.announce(
-          `Navigated to ${link.label.replace('Skip to ', '')}`,
-          'polite'
+          `Navigated to ${link.label.replace("Skip to ", "")}`,
+          "polite",
         );
       }
     }
@@ -227,34 +227,34 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     let newIndex = index;
 
     switch (event.key) {
-      case 'ArrowDown':
-      case 'ArrowRight': {
+      case "ArrowDown":
+      case "ArrowRight": {
         newIndex = Math.min(index + 1, links.length - 1);
         handled = true;
         break;
       }
 
-      case 'ArrowUp':
-      case 'ArrowLeft': {
+      case "ArrowUp":
+      case "ArrowLeft": {
         newIndex = Math.max(index - 1, 0);
         handled = true;
         break;
       }
 
-      case 'Home': {
+      case "Home": {
         newIndex = 0;
         handled = true;
         break;
       }
 
-      case 'End': {
+      case "End": {
         newIndex = links.length - 1;
         handled = true;
         break;
       }
 
-      case 'Enter':
-      case ' ': {
+      case "Enter":
+      case " ": {
         const link = links[index];
         if (link) {
           handleSkipTo(link, event);
@@ -275,24 +275,24 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
   };
 
   const positionClasses = {
-    top: 'top-0 left-0 right-0 flex-row justify-center',
-    left: 'top-0 left-0 bottom-0 flex-col justify-start',
-    right: 'top-0 right-0 bottom-0 flex-col justify-start',
+    top: "top-0 left-0 right-0 flex-row justify-center",
+    left: "top-0 left-0 bottom-0 flex-col justify-start",
+    right: "top-0 right-0 bottom-0 flex-col justify-start",
   };
 
   const visibilityClasses = visibleOnFocus
-    ? 'sr-only focus-within:not-sr-only focus-within:absolute focus-within:z-50'
-    : 'absolute z-50';
+    ? "sr-only focus-within:not-sr-only focus-within:absolute focus-within:z-50"
+    : "absolute z-50";
 
   return (
     <nav
       ref={containerRef}
       className={cn(
-        'glass-skip-navigation',
+        "glass-skip-navigation",
         visibilityClasses,
         positionClasses[position],
-        'flex gap-2 p-2',
-        className
+        "flex gap-2 p-2",
+        className,
       )}
       aria-label="Skip navigation"
       style={customStyles}
@@ -303,18 +303,18 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
           ref={(element) => {
             linkReferences.current[index] = element;
           }}
-          href={typeof link.target === 'string' ? link.target : `#${link.id}`}
+          href={typeof link.target === "string" ? link.target : `#${link.id}`}
           className={cn(
-            'glass-skip-link',
-            'inline-flex items-center gap-2 px-4 py-2',
-            'bg-white/90 backdrop-blur-xl dark:bg-gray-900/90',
-            'rounded-lg border border-white/20',
-            'font-medium text-gray-900 text-sm dark:text-white',
-            'hover:bg-white/95 dark:hover:bg-gray-800/95',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
-            'transition-all duration-200',
-            'shadow-lg',
-            focusedIndex === index && 'ring-2 ring-blue-500'
+            "glass-skip-link",
+            "inline-flex items-center gap-2 px-4 py-2",
+            "bg-white/90 backdrop-blur-xl dark:bg-gray-900/90",
+            "rounded-lg border border-white/20",
+            "font-medium text-gray-900 text-sm dark:text-white",
+            "hover:bg-white/95 dark:hover:bg-gray-800/95",
+            "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+            "transition-all duration-200",
+            "shadow-lg",
+            focusedIndex === index && "ring-2 ring-blue-500",
           )}
           onClick={(e) => handleSkipTo(link, e)}
           onKeyDown={(e) => handleKeyDown(e, index)}
@@ -356,7 +356,7 @@ export function useSkipNavigation() {
   };
 
   const skipTo = (id: string) => {
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
+    if (typeof window === "undefined" || typeof document === "undefined") {
       return;
     }
 
@@ -368,15 +368,15 @@ export function useSkipNavigation() {
     // Use the same logic as handleSkipTo
     let targetElement: HTMLElement | null;
 
-    if (typeof link.target === 'string') {
-      if (link.target.startsWith('#')) {
+    if (typeof link.target === "string") {
+      if (link.target.startsWith("#")) {
         targetElement =
-          typeof document === 'undefined'
+          typeof document === "undefined"
             ? undefined
             : document.querySelector(link.target);
       } else {
         targetElement =
-          typeof document === 'undefined'
+          typeof document === "undefined"
             ? undefined
             : document.getElementById(link.target);
       }
@@ -385,23 +385,23 @@ export function useSkipNavigation() {
     }
 
     if (targetElement) {
-      const originalTabIndex = targetElement.getAttribute('tabindex');
-      if (!targetElement.hasAttribute('tabindex')) {
-        targetElement.setAttribute('tabindex', '-1');
+      const originalTabIndex = targetElement.getAttribute("tabindex");
+      if (!targetElement.hasAttribute("tabindex")) {
+        targetElement.setAttribute("tabindex", "-1");
       }
 
       targetElement.focus();
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
 
       if (!originalTabIndex) {
         setTimeout(() => {
-          targetElement.removeAttribute('tabindex');
+          targetElement.removeAttribute("tabindex");
         }, 100);
       }
 
       accessibilityManager.announce(
-        `Navigated to ${link.label.replace('Skip to ', '')}`,
-        'polite'
+        `Navigated to ${link.label.replace("Skip to ", "")}`,
+        "polite",
       );
     }
   };

@@ -6,7 +6,7 @@
  */
 
 // Color format types
-export type ColorFormat = 'hex' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
+export type ColorFormat = "hex" | "rgb" | "rgba" | "hsl" | "hsla";
 
 export interface RGBColor {
   r: number;
@@ -36,7 +36,7 @@ export interface ColorInfo {
  */
 export function parseColor(color: string): RGBColor | null {
   // Handle hex colors
-  if (color.startsWith('#')) {
+  if (color.startsWith("#")) {
     const hex = color.slice(1);
     if (hex.length === 3) {
       return {
@@ -56,7 +56,7 @@ export function parseColor(color: string): RGBColor | null {
 
   // Handle rgb/rgba colors
   const rgbMatch = color.match(
-    /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/
+    /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/,
   );
   if (rgbMatch) {
     return {
@@ -68,7 +68,7 @@ export function parseColor(color: string): RGBColor | null {
 
   // Handle hsl/hsla colors
   const hslMatch = color.match(
-    /hsla?\((\d+),\s*(\d+)%,\s*(\d+)%(?:,\s*([\d.]+))?\)/
+    /hsla?\((\d+),\s*(\d+)%,\s*(\d+)%(?:,\s*([\d.]+))?\)/,
   );
   if (hslMatch) {
     const h = Number.parseInt(hslMatch[1]!, 10);
@@ -100,7 +100,7 @@ export function rgbToHsl(
   r: number,
   g: number,
   b: number,
-  a?: number
+  a?: number,
 ): HSLColor {
   r /= 255;
   g /= 255;
@@ -149,7 +149,7 @@ export function hslToRgb(
   h: number,
   s: number,
   l: number,
-  a?: number
+  a?: number,
 ): RGBColor {
   h /= 360;
 
@@ -196,7 +196,7 @@ export function hslToRgb(
  * Calculate luminance of a color (for contrast ratio calculations)
  */
 export function getLuminance(color: string | RGBColor): number {
-  const rgb = typeof color === 'string' ? parseColor(color) : color;
+  const rgb = typeof color === "string" ? parseColor(color) : color;
   if (!rgb) {
     return 0;
   }
@@ -218,7 +218,7 @@ export function getLuminance(color: string | RGBColor): number {
  */
 export function getContrastRatio(
   color1: string | RGBColor,
-  color2: string | RGBColor
+  color2: string | RGBColor,
 ): number {
   const lum1 = getLuminance(color1);
   const lum2 = getLuminance(color2);
@@ -235,16 +235,16 @@ export function getContrastRatio(
 export function meetsContrastRequirement(
   foreground: string | RGBColor,
   background: string | RGBColor,
-  level: 'AA' | 'AAA' = 'AA',
-  size: 'normal' | 'large' = 'normal'
+  level: "AA" | "AAA" = "AA",
+  size: "normal" | "large" = "normal",
 ): boolean {
   const ratio = getContrastRatio(foreground, background);
 
-  if (level === 'AAA') {
-    return size === 'large' ? ratio >= 4.5 : ratio >= 7;
+  if (level === "AAA") {
+    return size === "large" ? ratio >= 4.5 : ratio >= 7;
   }
 
-  return size === 'large' ? ratio >= 3 : ratio >= 4.5;
+  return size === "large" ? ratio >= 3 : ratio >= 4.5;
 }
 
 /**
@@ -352,13 +352,13 @@ export const glassColors = {
    * Generate overlay color for glass effect
    */
   overlay(
-    variant: 'light' | 'dark' | 'neutral' = 'neutral',
-    opacity = 0.1
+    variant: "light" | "dark" | "neutral" = "neutral",
+    opacity = 0.1,
   ): string {
     const baseColors = {
-      light: '#ffffff',
-      dark: '#000000',
-      neutral: '#808080',
+      light: "#ffffff",
+      dark: "#000000",
+      neutral: "#808080",
     };
 
     return setOpacity(baseColors[variant], opacity);
@@ -368,13 +368,13 @@ export const glassColors = {
    * Generate border color for glass effect
    */
   border(
-    variant: 'light' | 'dark' | 'neutral' = 'neutral',
-    opacity = 0.2
+    variant: "light" | "dark" | "neutral" = "neutral",
+    opacity = 0.2,
   ): string {
     const baseColors = {
-      light: '#ffffff',
-      dark: '#ffffff',
-      neutral: '#ffffff',
+      light: "#ffffff",
+      dark: "#ffffff",
+      neutral: "#ffffff",
     };
 
     return setOpacity(baseColors[variant], opacity);
@@ -384,13 +384,13 @@ export const glassColors = {
    * Generate shadow color for glass effect
    */
   shadow(
-    variant: 'light' | 'dark' | 'neutral' = 'neutral',
-    opacity = 0.1
+    variant: "light" | "dark" | "neutral" = "neutral",
+    opacity = 0.1,
   ): string {
     const baseColors = {
-      light: '#000000',
-      dark: '#000000',
-      neutral: '#000000',
+      light: "#000000",
+      dark: "#000000",
+      neutral: "#000000",
     };
 
     return setOpacity(baseColors[variant], opacity);
@@ -400,13 +400,13 @@ export const glassColors = {
    * Generate specular highlight color
    */
   specular(
-    variant: 'light' | 'dark' | 'neutral' = 'neutral',
-    opacity = 0.3
+    variant: "light" | "dark" | "neutral" = "neutral",
+    opacity = 0.3,
   ): string {
     const baseColors = {
-      light: '#ffffff',
-      dark: '#ffffff',
-      neutral: '#ffffff',
+      light: "#ffffff",
+      dark: "#ffffff",
+      neutral: "#ffffff",
     };
 
     return setOpacity(baseColors[variant], opacity);
@@ -455,20 +455,20 @@ export function formatColor(color: string, format: ColorFormat): string {
   }
 
   switch (format) {
-    case 'hex': {
+    case "hex": {
       return rgbToHex(rgb.r, rgb.g, rgb.b);
     }
-    case 'rgb': {
+    case "rgb": {
       return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
     }
-    case 'rgba': {
+    case "rgba": {
       return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a || 1})`;
     }
-    case 'hsl': {
+    case "hsl": {
       const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
       return `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
     }
-    case 'hsla': {
+    case "hsla": {
       const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
       return `hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%, ${rgb.a || 1})`;
     }
@@ -486,7 +486,7 @@ export function mixColors(color1: string, color2: string, ratio = 0.5): string {
   const rgb2 = parseColor(color2);
 
   if (!rgb1 || !rgb2) {
-    throw new Error('Invalid color format');
+    throw new Error("Invalid color format");
   }
 
   const mixed = {
@@ -509,7 +509,7 @@ export function checkGlassContrast(
   foreground: string | RGBColor,
   glassBackground: string | RGBColor,
   backdropBackground: string | RGBColor,
-  glassOpacity = 0.25
+  glassOpacity = 0.25,
 ): {
   ratio: number;
   passes: {
@@ -519,18 +519,18 @@ export function checkGlassContrast(
   recommendation: string;
 } {
   const fg =
-    typeof foreground === 'string' ? parseColor(foreground) : foreground;
+    typeof foreground === "string" ? parseColor(foreground) : foreground;
   const glassBg =
-    typeof glassBackground === 'string'
+    typeof glassBackground === "string"
       ? parseColor(glassBackground)
       : glassBackground;
   const backdropBg =
-    typeof backdropBackground === 'string'
+    typeof backdropBackground === "string"
       ? parseColor(backdropBackground)
       : backdropBackground;
 
   if (!fg || !glassBg || !backdropBg) {
-    throw new Error('Invalid color format');
+    throw new Error("Invalid color format");
   }
 
   // Calculate effective background color (glass + backdrop)
@@ -542,7 +542,7 @@ export function checkGlassContrast(
 
   const ratio = getContrastRatio(
     rgbToHex(fg.r, fg.g, fg.b),
-    rgbToHex(effectiveBg.r, effectiveBg.g, effectiveBg.b)
+    rgbToHex(effectiveBg.r, effectiveBg.g, effectiveBg.b),
   );
 
   const result = {
@@ -557,19 +557,19 @@ export function checkGlassContrast(
         large: ratio >= 4.5,
       },
     },
-    recommendation: '',
+    recommendation: "",
   };
 
   if (ratio < 3) {
     result.recommendation =
-      'Very poor contrast. Consider using a different color combination.';
+      "Very poor contrast. Consider using a different color combination.";
   } else if (ratio < 4.5) {
     result.recommendation =
-      'Acceptable for large text only (18pt+ or 14pt+ bold).';
+      "Acceptable for large text only (18pt+ or 14pt+ bold).";
   } else if (ratio < 7) {
-    result.recommendation = 'Good contrast. Meets WCAG AA standards.';
+    result.recommendation = "Good contrast. Meets WCAG AA standards.";
   } else {
-    result.recommendation = 'Excellent contrast. Meets WCAG AAA standards.';
+    result.recommendation = "Excellent contrast. Meets WCAG AAA standards.";
   }
 
   return result;
@@ -583,10 +583,10 @@ export function checkGlassContrast(
  */
 export function isGlassSafe(foreground: string, glassOpacity = 0.25): boolean {
   // Test against common backgrounds
-  const testBackgrounds = ['#ffffff', '#000000', '#f0f0f0', '#1a1a1a'];
+  const testBackgrounds = ["#ffffff", "#000000", "#f0f0f0", "#1a1a1a"];
 
   for (const bg of testBackgrounds) {
-    const result = checkGlassContrast(foreground, '#ffffff', bg, glassOpacity);
+    const result = checkGlassContrast(foreground, "#ffffff", bg, glassOpacity);
     if (!result.passes.aa.normal) {
       return false;
     }

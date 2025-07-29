@@ -8,10 +8,10 @@ import {
   type ReactNode,
   useEffect,
   useState,
-} from 'react';
+} from "react";
 
-import { useProgressiveEnhancement } from '../utils/hydration-utils';
-import { isBrowser } from '../utils/ssr-utils';
+import { useProgressiveEnhancement } from "../utils/hydration-utils";
+import { isBrowser } from "../utils/ssr-utils";
 
 export interface EnhancedSSRProviderProps {
   children: ReactNode;
@@ -126,7 +126,7 @@ export function useEnhancement() {
  */
 export function withEnhancedSSR<P extends object>(
   Component: React.ComponentType<P>,
-  options: Omit<EnhancedSSRProviderProps, 'children'> = {}
+  options: Omit<EnhancedSSRProviderProps, "children"> = {},
 ) {
   const EnhancedComponent = (props: P) => {
     return (
@@ -136,7 +136,7 @@ export function withEnhancedSSR<P extends object>(
     );
   };
 
-  EnhancedComponent.displayName = `withEnhancedSSR(${Component.displayName || Component.name || 'Unknown'})`;
+  EnhancedComponent.displayName = `withEnhancedSSR(${Component.displayName || Component.name || "Unknown"})`;
 
   return EnhancedComponent;
 }
@@ -146,7 +146,7 @@ export function withEnhancedSSR<P extends object>(
  */
 export function useClientOnly<T>(
   factory: () => T,
-  deps: Array<unknown> = []
+  deps: Array<unknown> = [],
 ): { value: T | null; isReady: boolean } {
   const [value, setValue] = useState<T | null>(null);
   const [isReady, setIsReady] = useState(false);
@@ -168,7 +168,7 @@ export function useClientOnly<T>(
  */
 export function useHydrationSafeState<T>(
   serverValue: T,
-  clientValue?: T
+  clientValue?: T,
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [state, setState] = useState<T>(() => {
     if (!isBrowser()) {

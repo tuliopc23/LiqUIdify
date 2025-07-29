@@ -1,9 +1,9 @@
-import { Github, Layers, Search } from 'lucide-react';
+import { Github, Layers, Search } from "lucide-react";
 
-import { AppleLiquidGlassNav } from '@/components/apple-liquid-glass';
+import { AppleLiquidGlassNav } from "@/components/apple-liquid-glass";
 
 // import { LiquidGlassSvgFilters } from "@/components/liquid-glass-svg-filters";
-import { ThemeToggle } from '../theme-toggle';
+import { ThemeToggle } from "../theme-toggle";
 
 export function Navbar() {
   return (

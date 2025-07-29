@@ -4,11 +4,11 @@
  * Core utilities for generating glass effect classes and CSS variables
  */
 
-import type { ComponentVariant } from '../base-component';
+import type { ComponentVariant } from "../base-component";
 import type {
   GlassIntensity,
   GlassVariant,
-} from '../glass/unified-glass-system';
+} from "../glass/unified-glass-system";
 
 export interface GlassEffectOptions {
   intensity?: GlassIntensity;
@@ -31,12 +31,12 @@ export interface GlassEffectOptions {
  * Maps ComponentVariant to GlassVariant
  */
 function mapComponentVariantToGlassVariant(
-  variant: ComponentVariant | GlassVariant
+  variant: ComponentVariant | GlassVariant,
 ): GlassVariant {
   // If it's already a GlassVariant, return as is
   if (
-    ['default', 'elevated', 'floating', 'card', 'modal'].includes(
-      variant as string
+    ["default", "elevated", "floating", "card", "modal"].includes(
+      variant as string,
     )
   ) {
     return variant as GlassVariant;
@@ -44,15 +44,15 @@ function mapComponentVariantToGlassVariant(
 
   // Map ComponentVariant to GlassVariant
   const variantMap: Record<ComponentVariant, GlassVariant> = {
-    primary: 'elevated',
-    secondary: 'default',
-    tertiary: 'floating',
-    ghost: 'default',
-    destructive: 'elevated',
-    apple: 'card',
+    primary: "elevated",
+    secondary: "default",
+    tertiary: "floating",
+    ghost: "default",
+    destructive: "elevated",
+    apple: "card",
   };
 
-  return variantMap[variant as ComponentVariant] || 'default';
+  return variantMap[variant as ComponentVariant] || "default";
 }
 
 /**
@@ -60,19 +60,19 @@ function mapComponentVariantToGlassVariant(
  */
 export function mapIntensity(intensity: GlassIntensity): number {
   switch (intensity) {
-    case 'none': {
+    case "none": {
       return 0;
     }
-    case 'subtle': {
+    case "subtle": {
       return 0.25;
     }
-    case 'medium': {
+    case "medium": {
       return 0.5;
     }
-    case 'strong': {
+    case "strong": {
       return 0.75;
     }
-    case 'intense': {
+    case "intense": {
       return 1;
     }
     default: {
@@ -85,20 +85,20 @@ export function mapIntensity(intensity: GlassIntensity): number {
  * Generates CSS classes for glass effects
  */
 export function generateGlassClasses(options: GlassEffectOptions): string {
-  const { intensity = 'medium', variant = 'default' } = options;
+  const { intensity = "medium", variant = "default" } = options;
 
   // Map the variant to GlassVariant if needed
   const mappedVariant = variant
     ? mapComponentVariantToGlassVariant(variant)
-    : 'default';
+    : "default";
 
   const baseClasses = [
-    'glass-effect',
+    "glass-effect",
     `glass-effect--${intensity}`,
     `glass-effect--${mappedVariant}`,
   ];
 
-  return baseClasses.join(' ');
+  return baseClasses.join(" ");
 }
 
 /**
@@ -106,24 +106,24 @@ export function generateGlassClasses(options: GlassEffectOptions): string {
  */
 export function generateGlassVariables(
   intensityOrOptions: GlassIntensity | GlassEffectOptions | undefined,
-  additionalOptions?: Record<string, unknown>
+  additionalOptions?: Record<string, unknown>,
 ): Record<string, string> {
   // Handle both old signature (intensity, options) and new signature (options)
   let options: GlassEffectOptions;
 
-  if (typeof intensityOrOptions === 'string') {
+  if (typeof intensityOrOptions === "string") {
     // Old signature: generateGlassVariables(intensity, options)
     options = { intensity: intensityOrOptions, ...additionalOptions };
-  } else if (intensityOrOptions && typeof intensityOrOptions === 'object') {
+  } else if (intensityOrOptions && typeof intensityOrOptions === "object") {
     // New signature: generateGlassVariables(options)
     options = intensityOrOptions;
   } else {
     // Default options
-    options = { intensity: 'medium' };
+    options = { intensity: "medium" };
   }
 
   const {
-    intensity = 'medium',
+    intensity = "medium",
     opacity = 0.1 + mapIntensity(intensity) * 0.3,
     blur: blurValue = 4 + mapIntensity(intensity) * 20,
     saturation: saturationValue = 1 + mapIntensity(intensity) * 0.4,
@@ -133,27 +133,27 @@ export function generateGlassVariables(
 
   // Convert boolean values to numbers
   const blur =
-    typeof blurValue === 'boolean'
+    typeof blurValue === "boolean"
       ? blurValue
         ? 4 + mapIntensity(intensity) * 20
         : 0
       : blurValue;
 
   const saturation =
-    typeof saturationValue === 'boolean'
+    typeof saturationValue === "boolean"
       ? saturationValue
         ? 1 + mapIntensity(intensity) * 0.4
         : 1
       : saturationValue;
 
   return {
-    '--glass-opacity': opacity.toString(),
-    '--glass-blur': `${blur}px`,
-    '--glass-saturation': saturation.toString(),
-    '--glass-brightness': brightness.toString(),
-    '--glass-contrast': contrast.toString(),
-    '--glass-backdrop-filter': `blur(${blur}px) saturate(${saturation}) brightness(${brightness}) contrast(${contrast})`,
-    '--glass-background': `rgba(255, 255, 255, ${opacity})`,
+    "--glass-opacity": opacity.toString(),
+    "--glass-blur": `${blur}px`,
+    "--glass-saturation": saturation.toString(),
+    "--glass-brightness": brightness.toString(),
+    "--glass-contrast": contrast.toString(),
+    "--glass-backdrop-filter": `blur(${blur}px) saturate(${saturation}) brightness(${brightness}) contrast(${contrast})`,
+    "--glass-background": `rgba(255, 255, 255, ${opacity})`,
   };
 }
 
@@ -172,20 +172,20 @@ export function createGlassStyle(options: GlassEffectOptions) {
  */
 export const GLASS_PRESETS = {
   card: {
-    intensity: 'medium' as GlassIntensity,
-    variant: 'card' as GlassVariant,
+    intensity: "medium" as GlassIntensity,
+    variant: "card" as GlassVariant,
   },
   modal: {
-    intensity: 'strong' as GlassIntensity,
-    variant: 'modal' as GlassVariant,
+    intensity: "strong" as GlassIntensity,
+    variant: "modal" as GlassVariant,
   },
   navigation: {
-    intensity: 'subtle' as GlassIntensity,
-    variant: 'elevated' as GlassVariant,
+    intensity: "subtle" as GlassIntensity,
+    variant: "elevated" as GlassVariant,
   },
   floating: {
-    intensity: 'medium' as GlassIntensity,
-    variant: 'floating' as GlassVariant,
+    intensity: "medium" as GlassIntensity,
+    variant: "floating" as GlassVariant,
   },
 } as const;
 

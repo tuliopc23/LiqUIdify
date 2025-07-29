@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { designTokens } from '@/tokens/design-tokens';
+import type { Meta, StoryObj } from "@storybook/react";
+import { designTokens } from "@/tokens/design-tokens";
 
 const meta = {
-  title: 'Design System/Design Tokens',
+  title: "Design System/Design Tokens",
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
         component:
-          'Comprehensive design tokens for consistent theming across the LiquidUI component library.',
+          "Comprehensive design tokens for consistent theming across the LiquidUI component library.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta;
 
 export default meta;
@@ -38,7 +38,7 @@ export const Typography: Story = {
                   <span
                     style={{
                       fontSize,
-                      ...(typeof properties === 'object' ? properties : {}),
+                      ...(typeof properties === "object" ? properties : {}),
                     }}
                     className="font-sans"
                   >
@@ -49,7 +49,7 @@ export const Typography: Story = {
                   </span>
                 </div>
               );
-            }
+            },
           )}
         </div>
       </div>
@@ -63,7 +63,7 @@ export const Typography: Story = {
                 <h3 className="font-semibold text-lg capitalize">{key}</h3>
                 <p
                   style={{
-                    fontFamily: Array.isArray(fonts) ? fonts.join(', ') : fonts,
+                    fontFamily: Array.isArray(fonts) ? fonts.join(", ") : fonts,
                   }}
                   className="text-base"
                 >
@@ -71,11 +71,11 @@ export const Typography: Story = {
                 </p>
                 <p className="font-mono text-gray-500 text-xs">
                   {Array.isArray(fonts)
-                    ? `${fonts.slice(0, 3).join(', ')}...`
+                    ? `${fonts.slice(0, 3).join(", ")}...`
                     : fonts}
                 </p>
               </div>
-            )
+            ),
           )}
         </div>
       </div>
@@ -185,7 +185,7 @@ export const Colors: Story = {
                 className="h-20 w-full rounded-lg border"
                 style={{
                   backgroundColor: `rgba(0, 122, 255, ${opacity / 100})`,
-                  borderColor: 'rgba(0, 0, 0, 0.1)',
+                  borderColor: "rgba(0, 0, 0, 0.1)",
                 }}
               />
               <span className="mt-2 font-mono text-sm">{opacity}%</span>
@@ -205,13 +205,13 @@ export const Motion: Story = {
         <h2 className="mb-6 font-bold text-2xl">Animation Timing</h2>
         <div className="space-y-4">
           {[
-            { name: 'Fast', duration: '150ms', easing: 'ease-out' },
-            { name: 'Normal', duration: '300ms', easing: 'ease-in-out' },
-            { name: 'Slow', duration: '500ms', easing: 'ease-in-out' },
+            { name: "Fast", duration: "150ms", easing: "ease-out" },
+            { name: "Normal", duration: "300ms", easing: "ease-in-out" },
+            { name: "Slow", duration: "500ms", easing: "ease-in-out" },
             {
-              name: 'Spring',
-              duration: '700ms',
-              easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+              name: "Spring",
+              duration: "700ms",
+              easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
             },
           ].map(({ name, duration, easing }) => (
             <div key={name} className="flex items-center gap-4">
@@ -227,7 +227,7 @@ export const Motion: Story = {
                 />
               </div>
               <span className="w-40 font-mono text-gray-400 text-xs">
-                {duration} / {easing.split('(')[0]}
+                {duration} / {easing.split("(")[0]}
               </span>
             </div>
           ))}
@@ -242,9 +242,9 @@ export const Motion: Story = {
               key={blur}
               className="flex aspect-square flex-col items-center justify-center rounded-lg p-4 text-center"
               style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
                 backdropFilter: `blur(${blur}px)`,
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                border: "1px solid rgba(255, 255, 255, 0.2)",
               }}
             >
               <span className="font-semibold text-lg">Blur</span>
@@ -285,7 +285,7 @@ function ColorSwatch({
 }
 
 // Add keyframes for animation demo
-const style = document.createElement('style');
+const style = document.createElement("style");
 style.textContent = `
   @keyframes slide {
     from { transform: translateX(0); }

@@ -1,19 +1,19 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 import {
   GlassUIProvider,
   type GlassUIProviderProps,
-} from './glass-ui-provider';
+} from "./glass-ui-provider";
 import {
   GlobalConfigProvider,
   type GlobalConfigProviderProps,
-} from './global-config-provider';
+} from "./global-config-provider";
 
 export interface ConfigProviderProps {
   children: ReactNode;
-  glassConfig?: GlassUIProviderProps['glassConfig'];
-  hapticConfig?: GlassUIProviderProps['hapticConfig'];
-  theme?: GlassUIProviderProps['theme'];
-  globalConfig?: GlobalConfigProviderProps['config'];
+  glassConfig?: GlassUIProviderProps["glassConfig"];
+  hapticConfig?: GlassUIProviderProps["hapticConfig"];
+  theme?: GlassUIProviderProps["theme"];
+  globalConfig?: GlobalConfigProviderProps["config"];
 }
 
 /**
@@ -24,7 +24,7 @@ export function ConfigProvider({
   children,
   glassConfig,
   hapticConfig,
-  theme = 'light',
+  theme = "light",
   globalConfig,
 }: ConfigProviderProps) {
   return (

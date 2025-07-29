@@ -21,8 +21,8 @@
 
 ```tsx
 // app/layout.tsx (Next.js 13+)
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
 
 export default function RootLayout({
   children,
@@ -47,8 +47,8 @@ export default function RootLayout({
 
 ```tsx
 // components/WelcomeCard.tsx
-import { GlassCard, GlassButton } from 'liquidify';
-import { Sparkles } from 'lucide-react';
+import { GlassCard, GlassButton } from "liquidify";
+import { Sparkles } from "lucide-react";
 
 export function WelcomeCard() {
   return (
@@ -59,12 +59,12 @@ export function WelcomeCard() {
           Welcome to LiqUIdify
         </h2>
       </div>
-      
+
       <p className="text-white/70 mb-6">
         Start building beautiful, accessible interfaces with glassmorphism
         effects and smooth animations.
       </p>
-      
+
       <GlassButton variant="primary" className="w-full">
         Get Started
       </GlassButton>
@@ -89,8 +89,8 @@ import {
   GlassChart,
   GlassBadge,
   GlassAvatar,
-  useTheme
-} from 'liquidify';
+  useTheme,
+} from "liquidify";
 import {
   Search,
   Bell,
@@ -98,8 +98,8 @@ import {
   TrendingUp,
   Users,
   DollarSign,
-  Activity
-} from 'lucide-react';
+  Activity,
+} from "lucide-react";
 
 interface DashboardProps {
   user: {
@@ -114,42 +114,42 @@ export function Dashboard({ user }: DashboardProps) {
 
   const stats = [
     {
-      title: 'Total Revenue',
-      value: '$54,239',
-      change: '+12.5%',
-      trend: 'up',
+      title: "Total Revenue",
+      value: "$54,239",
+      change: "+12.5%",
+      trend: "up",
       icon: DollarSign,
     },
     {
-      title: 'Active Users',
-      value: '12,847',
-      change: '+8.2%',
-      trend: 'up',
+      title: "Active Users",
+      value: "12,847",
+      change: "+8.2%",
+      trend: "up",
       icon: Users,
     },
     {
-      title: 'Conversion Rate',
-      value: '3.24%',
-      change: '-2.1%',
-      trend: 'down',
+      title: "Conversion Rate",
+      value: "3.24%",
+      change: "-2.1%",
+      trend: "down",
       icon: TrendingUp,
     },
     {
-      title: 'Server Load',
-      value: '78%',
-      change: '+5.3%',
-      trend: 'up',
+      title: "Server Load",
+      value: "78%",
+      change: "+5.3%",
+      trend: "up",
       icon: Activity,
     },
   ];
 
   const chartData = [
-    { label: 'Jan', value: 65 },
-    { label: 'Feb', value: 78 },
-    { label: 'Mar', value: 82 },
-    { label: 'Apr', value: 71 },
-    { label: 'May', value: 89 },
-    { label: 'Jun', value: 95 },
+    { label: "Jan", value: 65 },
+    { label: "Feb", value: 78 },
+    { label: "Mar", value: 82 },
+    { label: "Apr", value: 71 },
+    { label: "May", value: 89 },
+    { label: "Jun", value: 95 },
   ];
 
   return (
@@ -165,20 +165,20 @@ export function Dashboard({ user }: DashboardProps) {
               className="w-64"
             />
           </div>
-          
+
           <div className="flex items-center gap-4">
             <GlassButton
               variant="ghost"
               size="sm"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               <Settings className="h-4 w-4" />
             </GlassButton>
-            
+
             <GlassButton variant="ghost" size="sm">
               <Bell className="h-4 w-4" />
             </GlassButton>
-            
+
             <div className="flex items-center gap-3">
               <GlassAvatar src={user.avatar} alt={user.name} size="sm" />
               <div className="text-sm">
@@ -204,7 +204,7 @@ export function Dashboard({ user }: DashboardProps) {
                   </p>
                   <div className="flex items-center gap-1 mt-2">
                     <GlassBadge
-                      variant={stat.trend === 'up' ? 'success' : 'destructive'}
+                      variant={stat.trend === "up" ? "success" : "destructive"}
                       size="sm"
                     >
                       {stat.change}
@@ -228,7 +228,7 @@ export function Dashboard({ user }: DashboardProps) {
             <LineChart
               data={chartData}
               height={300}
-              colors={['#667eea', '#764ba2']}
+              colors={["#667eea", "#764ba2"]}
               animated
               responsive
             />
@@ -277,16 +277,16 @@ export function Dashboard({ user }: DashboardProps) {
 
 ```tsx
 // components/LoginForm.tsx
-import { useState } from 'react';
+import { useState } from "react";
 import {
   GlassCard,
   GlassFormField,
   GlassInput,
   GlassButton,
   GlassCheckbox,
-  useToast
-} from 'liquidify';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+  useToast,
+} from "liquidify";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 interface LoginFormData {
   email: string;
@@ -296,8 +296,8 @@ interface LoginFormData {
 
 export function LoginForm() {
   const [formData, setFormData] = useState<LoginFormData>({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     remember: false,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -309,15 +309,15 @@ export function LoginForm() {
     const newErrors: Record<string, string> = {};
 
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = "Please enter a valid email";
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+      newErrors.password = "Password must be at least 8 characters";
     }
 
     setErrors(newErrors);
@@ -326,25 +326,25 @@ export function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsLoading(true);
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       toast({
-        title: 'Success!',
-        description: 'You have been logged in successfully.',
-        variant: 'success',
+        title: "Success!",
+        description: "You have been logged in successfully.",
+        variant: "success",
       });
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Invalid credentials. Please try again.',
-        variant: 'error',
+        title: "Error",
+        description: "Invalid credentials. Please try again.",
+        variant: "error",
       });
     } finally {
       setIsLoading(false);
@@ -352,9 +352,9 @@ export function LoginForm() {
   };
 
   const handleInputChange = (field: keyof LoginFormData, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
+      setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
 
@@ -365,37 +365,27 @@ export function LoginForm() {
           <h1 className="text-2xl font-bold text-white/90 mb-2">
             Welcome Back
           </h1>
-          <p className="text-white/60">
-            Sign in to your account to continue
-          </p>
+          <p className="text-white/60">Sign in to your account to continue</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <GlassFormField
-            label="Email Address"
-            required
-            error={errors.email}
-          >
+          <GlassFormField label="Email Address" required error={errors.email}>
             <GlassInput
               type="email"
               placeholder="john@example.com"
               value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
+              onChange={(e) => handleInputChange("email", e.target.value)}
               leftIcon={<Mail className="h-4 w-4" />}
               error={!!errors.email}
             />
           </GlassFormField>
 
-          <GlassFormField
-            label="Password"
-            required
-            error={errors.password}
-          >
+          <GlassFormField label="Password" required error={errors.password}>
             <GlassInput
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
               value={formData.password}
-              onChange={(e) => handleInputChange('password', e.target.value)}
+              onChange={(e) => handleInputChange("password", e.target.value)}
               leftIcon={<Lock className="h-4 w-4" />}
               rightIcon={
                 <button
@@ -417,10 +407,10 @@ export function LoginForm() {
           <div className="flex items-center justify-between">
             <GlassCheckbox
               checked={formData.remember}
-              onChange={(checked) => handleInputChange('remember', checked)}
+              onChange={(checked) => handleInputChange("remember", checked)}
               label="Remember me"
             />
-            
+
             <GlassButton
               variant="ghost"
               size="sm"
@@ -445,7 +435,7 @@ export function LoginForm() {
 
         <div className="mt-8 text-center">
           <p className="text-white/60">
-            Don't have an account?{' '}
+            Don't have an account?{" "}
             <GlassButton
               variant="ghost"
               size="sm"
@@ -465,7 +455,7 @@ export function LoginForm() {
 
 ```tsx
 // components/RegistrationForm.tsx
-import { useState } from 'react';
+import { useState } from "react";
 import {
   GlassCard,
   GlassFormField,
@@ -474,25 +464,33 @@ import {
   GlassSelect,
   GlassProgress,
   GlassCheckbox,
-  GlassBadge
-} from 'liquidify';
-import { User, Mail, Lock, Building, ArrowRight, ArrowLeft, Check } from 'lucide-react';
+  GlassBadge,
+} from "liquidify";
+import {
+  User,
+  Mail,
+  Lock,
+  Building,
+  ArrowRight,
+  ArrowLeft,
+  Check,
+} from "lucide-react";
 
 interface RegistrationData {
   // Step 1: Personal Info
   firstName: string;
   lastName: string;
   email: string;
-  
+
   // Step 2: Account Details
   password: string;
   confirmPassword: string;
-  
+
   // Step 3: Company Info
   company: string;
   role: string;
   teamSize: string;
-  
+
   // Step 4: Preferences
   newsletter: boolean;
   terms: boolean;
@@ -501,14 +499,14 @@ interface RegistrationData {
 export function RegistrationForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<RegistrationData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    company: '',
-    role: '',
-    teamSize: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    company: "",
+    role: "",
+    teamSize: "",
     newsletter: true,
     terms: false,
   });
@@ -518,10 +516,10 @@ export function RegistrationForm() {
   const progress = (currentStep / totalSteps) * 100;
 
   const steps = [
-    { title: 'Personal Info', description: 'Basic information' },
-    { title: 'Account', description: 'Login credentials' },
-    { title: 'Company', description: 'Organization details' },
-    { title: 'Finish', description: 'Final preferences' },
+    { title: "Personal Info", description: "Basic information" },
+    { title: "Account", description: "Login credentials" },
+    { title: "Company", description: "Organization details" },
+    { title: "Finish", description: "Final preferences" },
   ];
 
   const validateStep = (step: number): boolean => {
@@ -529,29 +527,29 @@ export function RegistrationForm() {
 
     switch (step) {
       case 1:
-        if (!formData.firstName) newErrors.firstName = 'First name is required';
-        if (!formData.lastName) newErrors.lastName = 'Last name is required';
-        if (!formData.email) newErrors.email = 'Email is required';
-        else if (!/\S+@\S+\.\S+/.test(formData.email)) 
-          newErrors.email = 'Invalid email format';
+        if (!formData.firstName) newErrors.firstName = "First name is required";
+        if (!formData.lastName) newErrors.lastName = "Last name is required";
+        if (!formData.email) newErrors.email = "Email is required";
+        else if (!/\S+@\S+\.\S+/.test(formData.email))
+          newErrors.email = "Invalid email format";
         break;
-        
+
       case 2:
-        if (!formData.password) newErrors.password = 'Password is required';
-        else if (formData.password.length < 8) 
-          newErrors.password = 'Password must be at least 8 characters';
-        if (formData.password !== formData.confirmPassword) 
-          newErrors.confirmPassword = 'Passwords do not match';
+        if (!formData.password) newErrors.password = "Password is required";
+        else if (formData.password.length < 8)
+          newErrors.password = "Password must be at least 8 characters";
+        if (formData.password !== formData.confirmPassword)
+          newErrors.confirmPassword = "Passwords do not match";
         break;
-        
+
       case 3:
-        if (!formData.company) newErrors.company = 'Company name is required';
-        if (!formData.role) newErrors.role = 'Role is required';
-        if (!formData.teamSize) newErrors.teamSize = 'Team size is required';
+        if (!formData.company) newErrors.company = "Company name is required";
+        if (!formData.role) newErrors.role = "Role is required";
+        if (!formData.teamSize) newErrors.teamSize = "Team size is required";
         break;
-        
+
       case 4:
-        if (!formData.terms) newErrors.terms = 'You must accept the terms';
+        if (!formData.terms) newErrors.terms = "You must accept the terms";
         break;
     }
 
@@ -561,18 +559,18 @@ export function RegistrationForm() {
 
   const handleNext = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, totalSteps));
+      setCurrentStep((prev) => Math.min(prev + 1, totalSteps));
     }
   };
 
   const handlePrevious = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 1));
+    setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
   const handleInputChange = (field: keyof RegistrationData, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: '' }));
+      setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
 
@@ -590,11 +588,13 @@ export function RegistrationForm() {
                 <GlassInput
                   placeholder="John"
                   value={formData.firstName}
-                  onChange={(e) => handleInputChange('firstName', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("firstName", e.target.value)
+                  }
                   leftIcon={<User className="h-4 w-4" />}
                 />
               </GlassFormField>
-              
+
               <GlassFormField
                 label="Last Name"
                 required
@@ -603,27 +603,25 @@ export function RegistrationForm() {
                 <GlassInput
                   placeholder="Doe"
                   value={formData.lastName}
-                  onChange={(e) => handleInputChange('lastName', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("lastName", e.target.value)
+                  }
                 />
               </GlassFormField>
             </div>
-            
-            <GlassFormField
-              label="Email Address"
-              required
-              error={errors.email}
-            >
+
+            <GlassFormField label="Email Address" required error={errors.email}>
               <GlassInput
                 type="email"
                 placeholder="john@company.com"
                 value={formData.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
+                onChange={(e) => handleInputChange("email", e.target.value)}
                 leftIcon={<Mail className="h-4 w-4" />}
               />
             </GlassFormField>
           </div>
         );
-        
+
       case 2:
         return (
           <div className="space-y-4">
@@ -637,11 +635,11 @@ export function RegistrationForm() {
                 type="password"
                 placeholder="Create a strong password"
                 value={formData.password}
-                onChange={(e) => handleInputChange('password', e.target.value)}
+                onChange={(e) => handleInputChange("password", e.target.value)}
                 leftIcon={<Lock className="h-4 w-4" />}
               />
             </GlassFormField>
-            
+
             <GlassFormField
               label="Confirm Password"
               required
@@ -651,13 +649,15 @@ export function RegistrationForm() {
                 type="password"
                 placeholder="Confirm your password"
                 value={formData.confirmPassword}
-                onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("confirmPassword", e.target.value)
+                }
                 leftIcon={<Lock className="h-4 w-4" />}
               />
             </GlassFormField>
           </div>
         );
-        
+
       case 3:
         return (
           <div className="space-y-4">
@@ -669,51 +669,43 @@ export function RegistrationForm() {
               <GlassInput
                 placeholder="Acme Inc."
                 value={formData.company}
-                onChange={(e) => handleInputChange('company', e.target.value)}
+                onChange={(e) => handleInputChange("company", e.target.value)}
                 leftIcon={<Building className="h-4 w-4" />}
               />
             </GlassFormField>
-            
-            <GlassFormField
-              label="Your Role"
-              required
-              error={errors.role}
-            >
+
+            <GlassFormField label="Your Role" required error={errors.role}>
               <GlassSelect
                 value={formData.role}
-                onChange={(value) => handleInputChange('role', value)}
+                onChange={(value) => handleInputChange("role", value)}
                 options={[
-                  { value: 'developer', label: 'Developer' },
-                  { value: 'designer', label: 'Designer' },
-                  { value: 'manager', label: 'Manager' },
-                  { value: 'founder', label: 'Founder/CEO' },
-                  { value: 'other', label: 'Other' },
+                  { value: "developer", label: "Developer" },
+                  { value: "designer", label: "Designer" },
+                  { value: "manager", label: "Manager" },
+                  { value: "founder", label: "Founder/CEO" },
+                  { value: "other", label: "Other" },
                 ]}
                 placeholder="Select your role"
               />
             </GlassFormField>
-            
-            <GlassFormField
-              label="Team Size"
-              required
-              error={errors.teamSize}
-            >
+
+            <GlassFormField label="Team Size" required error={errors.teamSize}>
               <GlassSelect
                 value={formData.teamSize}
-                onChange={(value) => handleInputChange('teamSize', value)}
+                onChange={(value) => handleInputChange("teamSize", value)}
                 options={[
-                  { value: '1', label: 'Just me' },
-                  { value: '2-10', label: '2-10 people' },
-                  { value: '11-50', label: '11-50 people' },
-                  { value: '51-200', label: '51-200 people' },
-                  { value: '200+', label: '200+ people' },
+                  { value: "1", label: "Just me" },
+                  { value: "2-10", label: "2-10 people" },
+                  { value: "11-50", label: "11-50 people" },
+                  { value: "51-200", label: "51-200 people" },
+                  { value: "200+", label: "200+ people" },
                 ]}
                 placeholder="Select team size"
               />
             </GlassFormField>
           </div>
         );
-        
+
       case 4:
         return (
           <div className="space-y-6">
@@ -728,19 +720,19 @@ export function RegistrationForm() {
                 Just a few final preferences to complete your registration.
               </p>
             </div>
-            
+
             <div className="space-y-4">
               <GlassCheckbox
                 checked={formData.newsletter}
-                onChange={(checked) => handleInputChange('newsletter', checked)}
+                onChange={(checked) => handleInputChange("newsletter", checked)}
                 label="Send me product updates and newsletters"
                 description="Get the latest features and tips delivered to your inbox"
               />
-              
+
               <GlassFormField error={errors.terms}>
                 <GlassCheckbox
                   checked={formData.terms}
-                  onChange={(checked) => handleInputChange('terms', checked)}
+                  onChange={(checked) => handleInputChange("terms", checked)}
                   label="I agree to the Terms of Service and Privacy Policy"
                   description="Required to create your account"
                 />
@@ -748,7 +740,7 @@ export function RegistrationForm() {
             </div>
           </div>
         );
-        
+
       default:
         return null;
     }
@@ -774,16 +766,16 @@ export function RegistrationForm() {
               <div
                 key={index}
                 className={`flex items-center ${
-                  index + 1 <= currentStep ? 'text-blue-400' : 'text-white/40'
+                  index + 1 <= currentStep ? "text-blue-400" : "text-white/40"
                 }`}
               >
                 <div
                   className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-medium ${
                     index + 1 < currentStep
-                      ? 'bg-blue-500 border-blue-500 text-white'
+                      ? "bg-blue-500 border-blue-500 text-white"
                       : index + 1 === currentStep
-                      ? 'border-blue-400 text-blue-400'
-                      : 'border-white/20 text-white/40'
+                        ? "border-blue-400 text-blue-400"
+                        : "border-white/20 text-white/40"
                   }`}
                 >
                   {index + 1 < currentStep ? (
@@ -795,7 +787,7 @@ export function RegistrationForm() {
                 {index < steps.length - 1 && (
                   <div
                     className={`flex-1 h-0.5 ml-4 ${
-                      index + 1 < currentStep ? 'bg-blue-500' : 'bg-white/20'
+                      index + 1 < currentStep ? "bg-blue-500" : "bg-white/20"
                     }`}
                   />
                 )}
@@ -806,9 +798,7 @@ export function RegistrationForm() {
         </div>
 
         {/* Form Content */}
-        <div className="mb-8">
-          {renderStep()}
-        </div>
+        <div className="mb-8">{renderStep()}</div>
 
         {/* Navigation */}
         <div className="flex justify-between">
@@ -820,11 +810,11 @@ export function RegistrationForm() {
           >
             Previous
           </GlassButton>
-          
+
           {currentStep === totalSteps ? (
             <GlassButton
               variant="primary"
-              onClick={() => console.log('Submit registration', formData)}
+              onClick={() => console.log("Submit registration", formData)}
               disabled={!formData.terms}
             >
               Create Account
@@ -858,10 +848,10 @@ import {
   GlassButton,
   GlassBadge,
   GlassProgress,
-  useToast
-} from 'liquidify';
-import { Heart, ShoppingCart, Star, Eye } from 'lucide-react';
-import { useState } from 'react';
+  useToast,
+} from "liquidify";
+import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
+import { useState } from "react";
 
 interface Product {
   id: string;
@@ -888,40 +878,42 @@ export function ProductGrid({
   products,
   onAddToCart,
   onToggleWishlist,
-  wishlistIds
+  wishlistIds,
 }: ProductGridProps) {
-  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
+  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
+    {},
+  );
   const { toast } = useToast();
 
   const handleAddToCart = async (product: Product) => {
     if (!product.inStock) return;
 
-    setLoadingStates(prev => ({ ...prev, [product.id]: true }));
-    
+    setLoadingStates((prev) => ({ ...prev, [product.id]: true }));
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
       onAddToCart(product.id);
-      
+
       toast({
-        title: 'Added to cart!',
+        title: "Added to cart!",
         description: `${product.name} has been added to your cart.`,
-        variant: 'success',
+        variant: "success",
       });
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to add item to cart. Please try again.',
-        variant: 'error',
+        title: "Error",
+        description: "Failed to add item to cart. Please try again.",
+        variant: "error",
       });
     } finally {
-      setLoadingStates(prev => ({ ...prev, [product.id]: false }));
+      setLoadingStates((prev) => ({ ...prev, [product.id]: false }));
     }
   };
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
     }).format(price);
   };
 
@@ -930,7 +922,7 @@ export function ProductGrid({
       <Star
         key={i}
         className={`h-4 w-4 ${
-          i < rating ? 'text-yellow-400 fill-current' : 'text-white/20'
+          i < rating ? "text-yellow-400 fill-current" : "text-white/20"
         }`}
       />
     ));
@@ -942,7 +934,11 @@ export function ProductGrid({
         const isWishlisted = wishlistIds.includes(product.id);
         const isLoading = loadingStates[product.id];
         const discountPercentage = product.originalPrice
-          ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+          ? Math.round(
+              ((product.originalPrice - product.price) /
+                product.originalPrice) *
+                100,
+            )
           : 0;
 
         return (
@@ -958,7 +954,7 @@ export function ProductGrid({
                 alt={product.name}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
-              
+
               {/* Badges */}
               <div className="absolute top-3 left-3 flex flex-col gap-2">
                 {product.isNew && (
@@ -984,16 +980,14 @@ export function ProductGrid({
                   variant="ghost"
                   size="sm"
                   onClick={() => onToggleWishlist(product.id)}
-                  className={`p-2 ${isWishlisted ? 'text-red-400' : 'text-white/60'}`}
+                  className={`p-2 ${isWishlisted ? "text-red-400" : "text-white/60"}`}
                 >
-                  <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-current' : ''}`} />
+                  <Heart
+                    className={`h-4 w-4 ${isWishlisted ? "fill-current" : ""}`}
+                  />
                 </GlassButton>
-                
-                <GlassButton
-                  variant="ghost"
-                  size="sm"
-                  className="p-2"
-                >
+
+                <GlassButton variant="ghost" size="sm" className="p-2">
                   <Eye className="h-4 w-4" />
                 </GlassButton>
               </div>
@@ -1027,9 +1021,7 @@ export function ProductGrid({
 
               {/* Rating */}
               <div className="flex items-center gap-2">
-                <div className="flex">
-                  {renderStars(product.rating)}
-                </div>
+                <div className="flex">{renderStars(product.rating)}</div>
                 <span className="text-sm text-white/60">
                   ({product.reviews})
                 </span>
@@ -1060,7 +1052,7 @@ export function ProductGrid({
 
               {/* Add to Cart Button */}
               <GlassButton
-                variant={product.inStock ? 'primary' : 'ghost'}
+                variant={product.inStock ? "primary" : "ghost"}
                 size="sm"
                 className="w-full"
                 onClick={() => handleAddToCart(product)}
@@ -1069,7 +1061,7 @@ export function ProductGrid({
                 loadingText="Adding..."
                 leftIcon={<ShoppingCart className="h-4 w-4" />}
               >
-                {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                {product.inStock ? "Add to Cart" : "Out of Stock"}
               </GlassButton>
             </div>
           </GlassCard>
@@ -1096,92 +1088,92 @@ import {
   GlassBadge,
   LineChart,
   BarChart,
-  DonutChart
-} from 'liquidify';
-import { TrendingUp, TrendingDown, Download, Filter } from 'lucide-react';
+  DonutChart,
+} from "liquidify";
+import { TrendingUp, TrendingDown, Download, Filter } from "lucide-react";
 
 interface MetricData {
   title: string;
   value: string;
   change: number;
-  trend: 'up' | 'down';
+  trend: "up" | "down";
   data: Array<{ label: string; value: number }>;
 }
 
 export function AnalyticsDashboard() {
   const timeRanges = [
-    { value: '7d', label: 'Last 7 days' },
-    { value: '30d', label: 'Last 30 days' },
-    { value: '90d', label: 'Last 3 months' },
-    { value: '1y', label: 'Last year' },
+    { value: "7d", label: "Last 7 days" },
+    { value: "30d", label: "Last 30 days" },
+    { value: "90d", label: "Last 3 months" },
+    { value: "1y", label: "Last year" },
   ];
 
   const metrics: MetricData[] = [
     {
-      title: 'Total Revenue',
-      value: '$124,563',
+      title: "Total Revenue",
+      value: "$124,563",
       change: 12.5,
-      trend: 'up',
+      trend: "up",
       data: [
-        { label: 'Mon', value: 2400 },
-        { label: 'Tue', value: 1398 },
-        { label: 'Wed', value: 9800 },
-        { label: 'Thu', value: 3908 },
-        { label: 'Fri', value: 4800 },
-        { label: 'Sat', value: 3800 },
-        { label: 'Sun', value: 4300 },
+        { label: "Mon", value: 2400 },
+        { label: "Tue", value: 1398 },
+        { label: "Wed", value: 9800 },
+        { label: "Thu", value: 3908 },
+        { label: "Fri", value: 4800 },
+        { label: "Sat", value: 3800 },
+        { label: "Sun", value: 4300 },
       ],
     },
     {
-      title: 'Active Users',
-      value: '48,293',
+      title: "Active Users",
+      value: "48,293",
       change: -3.2,
-      trend: 'down',
+      trend: "down",
       data: [
-        { label: 'Mon', value: 6400 },
-        { label: 'Tue', value: 7398 },
-        { label: 'Wed', value: 5800 },
-        { label: 'Thu', value: 6908 },
-        { label: 'Fri', value: 7800 },
-        { label: 'Sat', value: 6800 },
-        { label: 'Sun', value: 7300 },
+        { label: "Mon", value: 6400 },
+        { label: "Tue", value: 7398 },
+        { label: "Wed", value: 5800 },
+        { label: "Thu", value: 6908 },
+        { label: "Fri", value: 7800 },
+        { label: "Sat", value: 6800 },
+        { label: "Sun", value: 7300 },
       ],
     },
     {
-      title: 'Conversion Rate',
-      value: '3.24%',
+      title: "Conversion Rate",
+      value: "3.24%",
       change: 8.1,
-      trend: 'up',
+      trend: "up",
       data: [
-        { label: 'Mon', value: 24 },
-        { label: 'Tue', value: 18 },
-        { label: 'Wed', value: 32 },
-        { label: 'Thu', value: 28 },
-        { label: 'Fri', value: 35 },
-        { label: 'Sat', value: 29 },
-        { label: 'Sun', value: 31 },
+        { label: "Mon", value: 24 },
+        { label: "Tue", value: 18 },
+        { label: "Wed", value: 32 },
+        { label: "Thu", value: 28 },
+        { label: "Fri", value: 35 },
+        { label: "Sat", value: 29 },
+        { label: "Sun", value: 31 },
       ],
     },
   ];
 
   const trafficSources = [
-    { label: 'Organic Search', value: 45, color: '#667eea' },
-    { label: 'Direct', value: 25, color: '#764ba2' },
-    { label: 'Social Media', value: 15, color: '#f093fb' },
-    { label: 'Email', value: 10, color: '#4facfe' },
-    { label: 'Referral', value: 5, color: '#43e97b' },
+    { label: "Organic Search", value: 45, color: "#667eea" },
+    { label: "Direct", value: 25, color: "#764ba2" },
+    { label: "Social Media", value: 15, color: "#f093fb" },
+    { label: "Email", value: 10, color: "#4facfe" },
+    { label: "Referral", value: 5, color: "#43e97b" },
   ];
 
   const deviceData = [
-    { label: 'Desktop', value: 58 },
-    { label: 'Mobile', value: 35 },
-    { label: 'Tablet', value: 7 },
+    { label: "Desktop", value: 58 },
+    { label: "Mobile", value: 35 },
+    { label: "Tablet", value: 7 },
   ];
 
   const tabs = [
     {
-      id: 'overview',
-      label: 'Overview',
+      id: "overview",
+      label: "Overview",
       content: (
         <div className="space-y-6">
           {/* Metrics Grid */}
@@ -1193,10 +1185,10 @@ export function AnalyticsDashboard() {
                     {metric.title}
                   </h3>
                   <GlassBadge
-                    variant={metric.trend === 'up' ? 'success' : 'destructive'}
+                    variant={metric.trend === "up" ? "success" : "destructive"}
                     size="sm"
                   >
-                    {metric.trend === 'up' ? (
+                    {metric.trend === "up" ? (
                       <TrendingUp className="h-3 w-3 mr-1" />
                     ) : (
                       <TrendingDown className="h-3 w-3 mr-1" />
@@ -1204,18 +1196,18 @@ export function AnalyticsDashboard() {
                     {Math.abs(metric.change)}%
                   </GlassBadge>
                 </div>
-                
+
                 <div className="mb-4">
                   <span className="text-2xl font-bold text-white/90">
                     {metric.value}
                   </span>
                 </div>
-                
+
                 <div className="h-20">
                   <LineChart
                     data={metric.data}
                     height={80}
-                    colors={[metric.trend === 'up' ? '#10b981' : '#ef4444']}
+                    colors={[metric.trend === "up" ? "#10b981" : "#ef4444"]}
                     animated
                     responsive
                   />
@@ -1244,24 +1236,24 @@ export function AnalyticsDashboard() {
                 </GlassButton>
               </div>
             </div>
-            
+
             <LineChart
               data={[
-                { label: 'Jan', value: 65000 },
-                { label: 'Feb', value: 78000 },
-                { label: 'Mar', value: 82000 },
-                { label: 'Apr', value: 71000 },
-                { label: 'May', value: 89000 },
-                { label: 'Jun', value: 95000 },
-                { label: 'Jul', value: 88000 },
-                { label: 'Aug', value: 92000 },
-                { label: 'Sep', value: 87000 },
-                { label: 'Oct', value: 96000 },
-                { label: 'Nov', value: 104000 },
-                { label: 'Dec', value: 124563 },
+                { label: "Jan", value: 65000 },
+                { label: "Feb", value: 78000 },
+                { label: "Mar", value: 82000 },
+                { label: "Apr", value: 71000 },
+                { label: "May", value: 89000 },
+                { label: "Jun", value: 95000 },
+                { label: "Jul", value: 88000 },
+                { label: "Aug", value: 92000 },
+                { label: "Sep", value: 87000 },
+                { label: "Oct", value: 96000 },
+                { label: "Nov", value: 104000 },
+                { label: "Dec", value: 124563 },
               ]}
               height={400}
-              colors={['#667eea', '#764ba2']}
+              colors={["#667eea", "#764ba2"]}
               animated
               responsive
               grid
@@ -1272,20 +1264,15 @@ export function AnalyticsDashboard() {
       ),
     },
     {
-      id: 'traffic',
-      label: 'Traffic',
+      id: "traffic",
+      label: "Traffic",
       content: (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <GlassCard className="p-6">
             <h3 className="text-lg font-semibold text-white/90 mb-6">
               Traffic Sources
             </h3>
-            <DonutChart
-              data={trafficSources}
-              height={300}
-              animated
-              legend
-            />
+            <DonutChart data={trafficSources} height={300} animated legend />
           </GlassCard>
 
           <GlassCard className="p-6">
@@ -1295,7 +1282,7 @@ export function AnalyticsDashboard() {
             <BarChart
               data={deviceData}
               height={300}
-              colors={['#667eea', '#764ba2', '#f093fb']}
+              colors={["#667eea", "#764ba2", "#f093fb"]}
               animated
               responsive
             />
@@ -1304,8 +1291,8 @@ export function AnalyticsDashboard() {
       ),
     },
     {
-      id: 'users',
-      label: 'Users',
+      id: "users",
+      label: "Users",
       content: (
         <div className="space-y-6">
           <GlassCard className="p-6">
@@ -1314,15 +1301,15 @@ export function AnalyticsDashboard() {
             </h3>
             <LineChart
               data={[
-                { label: '00:00', value: 45 },
-                { label: '04:00', value: 23 },
-                { label: '08:00', value: 78 },
-                { label: '12:00', value: 95 },
-                { label: '16:00', value: 87 },
-                { label: '20:00', value: 65 },
+                { label: "00:00", value: 45 },
+                { label: "04:00", value: 23 },
+                { label: "08:00", value: 78 },
+                { label: "12:00", value: 95 },
+                { label: "16:00", value: 87 },
+                { label: "20:00", value: 65 },
               ]}
               height={300}
-              colors={['#4facfe', '#00f2fe']}
+              colors={["#4facfe", "#00f2fe"]}
               animated
               responsive
               grid
@@ -1343,13 +1330,9 @@ export function AnalyticsDashboard() {
             Track your business performance and growth
           </p>
         </div>
-        
+
         <div className="flex gap-3">
-          <GlassSelect
-            value="30d"
-            options={timeRanges}
-            className="w-40"
-          />
+          <GlassSelect value="30d" options={timeRanges} className="w-40" />
           <GlassButton variant="primary">
             <Download className="h-4 w-4 mr-2" />
             Export Report
@@ -1358,11 +1341,7 @@ export function AnalyticsDashboard() {
       </div>
 
       {/* Tabs */}
-      <GlassTabs
-        tabs={tabs}
-        variant="pills"
-        className="space-y-6"
-      />
+      <GlassTabs tabs={tabs} variant="pills" className="space-y-6" />
     </div>
   );
 }
@@ -1376,28 +1355,23 @@ export function AnalyticsDashboard() {
 
 ```tsx
 // components/HeroSection.tsx
-import {
-  GlassButton,
-  GlassCard,
-  GlassBadge,
-  useTheme
-} from 'liquidify';
-import { ArrowRight, Play, Star, Check } from 'lucide-react';
+import { GlassButton, GlassCard, GlassBadge, useTheme } from "liquidify";
+import { ArrowRight, Play, Star, Check } from "lucide-react";
 
 export function HeroSection() {
   const { theme } = useTheme();
 
   const features = [
-    'TypeScript First',
-    'Accessibility Ready',
-    'Dark Mode Support',
-    '50+ Components'
+    "TypeScript First",
+    "Accessibility Ready",
+    "Dark Mode Support",
+    "50+ Components",
   ];
 
   const stats = [
-    { label: 'GitHub Stars', value: '2.4k' },
-    { label: 'Weekly Downloads', value: '12k' },
-    { label: 'Active Users', value: '500+' },
+    { label: "GitHub Stars", value: "2.4k" },
+    { label: "Weekly Downloads", value: "12k" },
+    { label: "Active Users", value: "500+" },
   ];
 
   return (
@@ -1444,7 +1418,8 @@ export function HeroSection() {
         {/* Subtitle */}
         <p className="text-xl md:text-2xl text-white/70 mb-8 max-w-3xl mx-auto leading-relaxed">
           Build stunning, accessible React applications with our comprehensive
-          component library featuring glassmorphism effects and smooth animations.
+          component library featuring glassmorphism effects and smooth
+          animations.
         </p>
 
         {/* Features List */}
@@ -1467,7 +1442,7 @@ export function HeroSection() {
           >
             Get Started Free
           </GlassButton>
-          
+
           <GlassButton
             variant="ghost"
             size="lg"
@@ -1501,7 +1476,7 @@ export function HeroSection() {
               </div>
               <span className="text-white/60 text-sm">App.tsx</span>
             </div>
-            
+
             <pre className="text-sm text-white/80 font-mono overflow-x-auto">
               <code>{`import { GlassButton, GlassCard } from 'liquidify';
 
@@ -1539,26 +1514,26 @@ function App() {
 
 ```tsx
 // utils/lazyComponents.ts
-import { lazy, Suspense } from 'react';
-import { GlassLoading } from 'liquidify';
+import { lazy, Suspense } from "react";
+import { GlassLoading } from "liquidify";
 
 // Lazy load heavy components
-export const LazyChart = lazy(() => 
-  import('liquidify').then(module => ({ default: module.LineChart }))
+export const LazyChart = lazy(() =>
+  import("liquidify").then((module) => ({ default: module.LineChart })),
 );
 
 export const LazyTable = lazy(() =>
-  import('liquidify').then(module => ({ default: module.GlassTable }))
+  import("liquidify").then((module) => ({ default: module.GlassTable })),
 );
 
 export const LazyPlayground = lazy(() =>
-  import('liquidify').then(module => ({ default: module.GlassPlayground }))
+  import("liquidify").then((module) => ({ default: module.GlassPlayground })),
 );
 
 // Wrapper component with loading fallback
 export function LazyComponent({
   children,
-  fallback
+  fallback,
 }: {
   children: React.ReactNode;
   fallback?: React.ReactNode;
@@ -1568,7 +1543,11 @@ export function LazyComponent({
       fallback={
         fallback || (
           <div className="flex items-center justify-center p-8">
-            <GlassLoading variant="spinner" size="lg" text="Loading component..." />
+            <GlassLoading
+              variant="spinner"
+              size="lg"
+              text="Loading component..."
+            />
           </div>
         )
       }
@@ -1585,8 +1564,8 @@ function MyDashboard() {
       <LazyComponent>
         <LazyChart data={chartData} height={300} />
       </LazyComponent>
-      
-      <LazyComponent 
+
+      <LazyComponent
         fallback={<div className="h-64 bg-white/5 rounded-lg animate-pulse" />}
       >
         <LazyTable data={tableData} columns={columns} />
@@ -1606,27 +1585,27 @@ function MyDashboard() {
 // import { GlassButton, GlassCard, GlassChart } from 'liquidify';
 
 // ✅ Import from specific bundles
-import { GlassButton, GlassCard } from 'liquidify/core';     // ~15KB
-import { GlassInput, GlassSelect } from 'liquidify/forms';   // ~8KB
-import { LineChart } from 'liquidify/advanced';             // ~12KB
+import { GlassButton, GlassCard } from "liquidify/core"; // ~15KB
+import { GlassInput, GlassSelect } from "liquidify/forms"; // ~8KB
+import { LineChart } from "liquidify/advanced"; // ~12KB
 
 // ✅ Or import individual components
-import { GlassButton } from 'liquidify/button';             // ~3KB
-import { GlassCard } from 'liquidify/card';                 // ~4KB
+import { GlassButton } from "liquidify/button"; // ~3KB
+import { GlassCard } from "liquidify/card"; // ~4KB
 
 // Tree shaking configuration for bundlers
 export const optimizedImports = {
   // For webpack
   resolve: {
     alias: {
-      'liquidify': 'liquidify/core', // Default to core bundle
-    }
+      liquidify: "liquidify/core", // Default to core bundle
+    },
   },
-  
+
   // For vite
   optimizeDeps: {
-    include: ['liquidify/core', 'liquidify/forms']
-  }
+    include: ["liquidify/core", "liquidify/forms"],
+  },
 };
 ```
 
@@ -1634,10 +1613,10 @@ export const optimizedImports = {
 
 ```tsx
 // components/VirtualizedTable.tsx
-import { useMemo } from 'react';
-import { FixedSizeList as List } from 'react-window';
-import { GlassCard, GlassInput } from 'liquidify/core';
-import { Search } from 'lucide-react';
+import { useMemo } from "react";
+import { FixedSizeList as List } from "react-window";
+import { GlassCard, GlassInput } from "liquidify/core";
+import { Search } from "lucide-react";
 
 interface VirtualizedTableProps<T> {
   data: T[];
@@ -1654,14 +1633,12 @@ export function VirtualizedTable<T>({
   height,
   renderItem,
   searchable = false,
-  onSearch
+  onSearch,
 }: VirtualizedTableProps<T>) {
   const itemCount = data.length;
 
   const ItemRenderer = ({ index, style }: { index: number; style: any }) => (
-    <div style={style}>
-      {renderItem(data[index], index)}
-    </div>
+    <div style={style}>{renderItem(data[index], index)}</div>
   );
 
   return (
@@ -1675,7 +1652,7 @@ export function VirtualizedTable<T>({
           />
         </div>
       )}
-      
+
       <List
         height={height}
         itemCount={itemCount}
@@ -1690,13 +1667,15 @@ export function VirtualizedTable<T>({
 
 // Usage with 10,000+ items
 function BigDataTable() {
-  const bigData = useMemo(() => 
-    Array.from({ length: 10000 }, (_, i) => ({
-      id: i,
-      name: `User ${i}`,
-      email: `user${i}@example.com`
-    }))
-  , []);
+  const bigData = useMemo(
+    () =>
+      Array.from({ length: 10000 }, (_, i) => ({
+        id: i,
+        name: `User ${i}`,
+        email: `user${i}@example.com`,
+      })),
+    [],
+  );
 
   return (
     <VirtualizedTable

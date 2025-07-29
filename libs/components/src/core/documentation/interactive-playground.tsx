@@ -22,9 +22,9 @@ import {
   Smartphone,
   Tablet,
   Zap,
-} from 'lucide-react';
-import type React from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+} from "lucide-react";
+import type React from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 // Types for playground configuration
 interface PlaygroundConfig {
@@ -40,13 +40,13 @@ interface PlaygroundConfig {
 interface PropertyControl {
   name: string;
   type:
-    | 'string'
-    | 'number'
-    | 'boolean'
-    | 'select'
-    | 'color'
-    | 'range'
-    | 'textarea';
+    | "string"
+    | "number"
+    | "boolean"
+    | "select"
+    | "color"
+    | "range"
+    | "textarea";
   defaultValue: unknown;
   options?: Array<string> | Array<number>;
   min?: number;
@@ -77,21 +77,21 @@ interface ViewportSize {
 
 const VIEWPORT_SIZES: Array<ViewportSize> = [
   {
-    name: 'Mobile',
+    name: "Mobile",
     width: 375,
     height: 667,
 
     icon: <Smartphone className="h-4 w-4" />,
   },
   {
-    name: 'Tablet',
+    name: "Tablet",
     width: 768,
     height: 1024,
 
     icon: <Tablet className="h-4 w-4" />,
   },
   {
-    name: 'Desktop',
+    name: "Desktop",
     width: 1200,
     height: 800,
 
@@ -100,9 +100,9 @@ const VIEWPORT_SIZES: Array<ViewportSize> = [
 ];
 
 const THEMES = [
-  { name: 'Light', value: 'light', bg: 'bg-white', text: 'text-gray-900' },
-  { name: 'Dark', value: 'dark', bg: 'bg-gray-900', text: 'text-white' },
-  { name: 'System', value: 'system', bg: 'bg-gray-100', text: 'text-gray-800' },
+  { name: "Light", value: "light", bg: "bg-white", text: "text-gray-900" },
+  { name: "Dark", value: "dark", bg: "bg-gray-900", text: "text-white" },
+  { name: "System", value: "system", bg: "bg-gray-100", text: "text-gray-800" },
 ];
 
 export interface InteractivePlaygroundProps {
@@ -121,22 +121,22 @@ export interface InteractivePlaygroundProps {
   /** Show theme controls */
   showThemeControls?: boolean;
   /** Default layout orientation */
-  defaultLayout?: 'horizontal' | 'vertical';
+  defaultLayout?: "horizontal" | "vertical";
 }
 
 export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
   config,
-  className = '',
+  className = "",
   enableCodeExport = true,
   enableA11yTesting = true,
   enablePerformanceMonitoring = true,
   showViewportControls = true,
   showThemeControls = true,
-  defaultLayout = 'horizontal',
+  defaultLayout = "horizontal",
 }) => {
   const [currentProps, setCurrentProps] = useState(config.defaultProps);
   const [selectedExample, setSelectedExample] = useState<number | null>(
-    undefined
+    undefined,
   );
   const [viewport, setViewport] = useState(VIEWPORT_SIZES[2]); // Desktop by default
   const [theme, setTheme] = useState(THEMES[0]);
@@ -150,7 +150,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
     renderTime: number;
     reRenders: number;
   }>({ renderTime: 0, reRenders: 0 });
-  const [customCode, setCustomCode] = useState('');
+  const [customCode, setCustomCode] = useState("");
 
   const previewRef = useRef<HTMLDivElement>(null);
   const renderStartTime = useRef<number>(0);
@@ -163,22 +163,22 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
     }
 
     const propsString = Object.entries(currentProps)
-      .filter(([_, value]) => value !== undefined && value !== '')
+      .filter(([_, value]) => value !== undefined && value !== "")
       .map(([key, value]) => {
-        if (typeof value === 'string') {
+        if (typeof value === "string") {
           return `${key}="${value}"`;
         }
-        if (typeof value === 'boolean') {
-          return value ? key : '';
+        if (typeof value === "boolean") {
+          return value ? key : "";
         }
         return `${key}={${JSON.stringify(value)}}`;
       })
       .filter(Boolean)
-      .join('\n    ');
+      .join("\n    ");
 
     return config.codeTemplate
-      .replace('{{componentName}}', config.componentName)
-      .replace('{{props}}', propsString);
+      .replace("{{componentName}}", config.componentName)
+      .replace("{{props}}", propsString);
   }, [currentProps, customCode, config.componentName, config.codeTemplate]);
 
   // Handle prop changes
@@ -191,7 +191,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
       setSelectedExample(undefined);
     },
-    []
+    [],
   );
 
   // Handle example selection
@@ -201,10 +201,10 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       if (example) {
         setCurrentProps({ ...config.defaultProps, ...example.props });
         setSelectedExample(exampleIndex);
-        setCustomCode(example.code || '');
+        setCustomCode(example.code || "");
       }
     },
-    [config.defaultProps, config.examples]
+    [config.defaultProps, config.examples],
   );
 
   // Run accessibility tests
@@ -226,7 +226,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       } catch (error) {
         results[test.name] = {
           passed: false,
-          message: `Test failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          message: `Test failed: ${error instanceof Error ? error.message : "Unknown error"}`,
         };
       }
     }
@@ -280,16 +280,16 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       component: config.componentName,
       props: currentProps,
       code: generatedCode,
-      viewport: viewport?.name || 'Desktop',
-      theme: theme?.name || 'Light',
+      viewport: viewport?.name || "Desktop",
+      theme: theme?.name || "Light",
       timestamp: new Date().toISOString(),
     };
 
     const blob = new Blob([JSON.stringify(exportData, undefined, 2)], {
-      type: 'application/json',
+      type: "application/json",
     });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `${config.componentName}-playground-config.json`;
     a.click();
@@ -307,7 +307,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
     setCurrentProps(config.defaultProps);
 
     setSelectedExample(undefined);
-    setCustomCode('');
+    setCustomCode("");
     reRenderCount.current = 0;
   }, [config.defaultProps]);
 
@@ -316,7 +316,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
     const grouped: Record<string, Array<PropertyControl>> = {};
 
     for (const control of config.propControls) {
-      const category = control.category || 'General';
+      const category = control.category || "General";
       if (!grouped[category]) {
         grouped[category] = [];
       }
@@ -331,10 +331,10 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
     const value = currentProps[control.name] ?? control.defaultValue;
 
     const baseInputClasses =
-      'w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500';
+      "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
 
     switch (control.type) {
-      case 'boolean': {
+      case "boolean": {
         return (
           <label
             htmlFor="handlepropertychangecontrolname-etargetchecked--classnamerounded-border-gray-300-text-blue-600-focusring-blue-500--controlname-pp5cch"
@@ -355,7 +355,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
         );
       }
 
-      case 'select': {
+      case "select": {
         return (
           <select
             id="select-1-ngq43h"
@@ -372,7 +372,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
         );
       }
 
-      case 'range': {
+      case "range": {
         return (
           <div className="space-y-2">
             <input
@@ -393,7 +393,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
         );
       }
 
-      case 'color': {
+      case "color": {
         return (
           <div className="flex space-x-2">
             <input
@@ -420,7 +420,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
         );
       }
 
-      case 'textarea': {
+      case "textarea": {
         return (
           <textarea
             id="textarea-1-o2e9jo"
@@ -432,7 +432,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
         );
       }
 
-      case 'number': {
+      case "number": {
         return (
           <input
             id="input-5-ckph7d"
@@ -490,7 +490,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
             <button
               type="button"
               onClick={() =>
-                setLayout(layout === 'horizontal' ? 'vertical' : 'horizontal')
+                setLayout(layout === "horizontal" ? "vertical" : "horizontal")
               }
               className="rounded-md p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900"
               title="Toggle layout"
@@ -559,8 +559,8 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
                     onClick={() => setViewport(viewportSize)}
                     className={`flex items-center rounded-md px-3 py-1 text-sm ${
                       viewport?.name === viewportSize.name
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'text-gray-600 hover:bg-gray-100'
+                        ? "bg-blue-100 text-blue-700"
+                        : "text-gray-600 hover:bg-gray-100"
                     }`}
                   >
                     {viewportSize.icon}
@@ -578,11 +578,11 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
 
                 <select
                   id="select-2-2h73j1"
-                  value={theme?.value || 'light'}
+                  value={theme?.value || "light"}
                   onChange={(e) =>
                     setTheme(
                       THEMES.find((t) => t.value === e.target.value) ||
-                        THEMES[0]
+                        THEMES[0],
                     )
                   }
                   className="rounded-md border border-gray-300 px-2 py-1 text-sm"
@@ -603,8 +603,8 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
               onClick={() => setShowProps(!showProps)}
               className={`flex items-center rounded-md px-3 py-1 text-sm ${
                 showProps
-                  ? 'bg-blue-100 text-blue-700'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? "bg-blue-100 text-blue-700"
+                  : "text-gray-600 hover:bg-gray-100"
               }`}
             >
               <Settings className="mr-1 h-4 w-4" />
@@ -616,8 +616,8 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
               onClick={() => setShowCode(!showCode)}
               className={`flex items-center rounded-md px-3 py-1 text-sm ${
                 showCode
-                  ? 'bg-blue-100 text-blue-700'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  ? "bg-blue-100 text-blue-700"
+                  : "text-gray-600 hover:bg-gray-100"
               }`}
             >
               <Code className="mr-1 h-4 w-4" />
@@ -641,12 +641,12 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
       {/* Main Content */}
 
       <div
-        className={`flex ${layout === 'horizontal' ? 'flex-row' : 'flex-col'} h-[calc(100vh-200px)]`}
+        className={`flex ${layout === "horizontal" ? "flex-row" : "flex-col"} h-[calc(100vh-200px)]`}
       >
         {/* Preview Panel */}
 
         <div
-          className={`${layout === 'horizontal' ? 'flex-1' : 'h-1/2'} bg-white`}
+          className={`${layout === "horizontal" ? "flex-1" : "h-1/2"} bg-white`}
         >
           <div className="flex h-full flex-col">
             {/* Preview Header */}
@@ -670,7 +670,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
                 style={{
                   width: viewport?.width,
                   minHeight: viewport?.height,
-                  maxWidth: '100%',
+                  maxWidth: "100%",
                 }}
               >
                 <div className="flex min-h-full items-center justify-center p-8">
@@ -693,14 +693,14 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
                       className="flex items-center space-x-2 text-sm"
                     >
                       <div
-                        className={`h-2 w-2 rounded-full ${result.passed ? 'bg-green-500' : 'bg-red-500'}`}
+                        className={`h-2 w-2 rounded-full ${result.passed ? "bg-green-500" : "bg-red-500"}`}
                       />
 
                       <span className="font-medium">{testName}:</span>
 
                       <span
                         className={
-                          result.passed ? 'text-green-700' : 'text-red-700'
+                          result.passed ? "text-green-700" : "text-red-700"
                         }
                       >
                         {result.message}
@@ -716,7 +716,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
         {/* Controls Panel */}
 
         <div
-          className={`${layout === 'horizontal' ? 'w-80 border-l' : 'h-1/2 border-t'} overflow-auto border-gray-200 bg-white`}
+          className={`${layout === "horizontal" ? "w-80 border-l" : "h-1/2 border-t"} overflow-auto border-gray-200 bg-white`}
         >
           {/* Examples */}
           {config.examples.length > 0 && (
@@ -731,8 +731,8 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
                     onClick={() => handleExampleSelect(index)}
                     className={`w-full rounded-md border p-3 text-left ${
                       selectedExample === index
-                        ? 'border-blue-500 bg-blue-50'
-                        : 'border-gray-200 hover:border-gray-300'
+                        ? "border-blue-500 bg-blue-50"
+                        : "border-gray-200 hover:border-gray-300"
                     }`}
                   >
                     <div className="font-medium text-sm">{example.name}</div>
@@ -778,7 +778,7 @@ export const InteractivePlayground: React.FC<InteractivePlaygroundProps> = ({
                         ))}
                       </div>
                     </div>
-                  )
+                  ),
                 )}
               </div>
             </div>

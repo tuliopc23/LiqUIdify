@@ -1,72 +1,72 @@
-import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import React from 'react';
-import { cn } from '@/core/utils/classname';
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import React from "react";
+import { cn } from "@/core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
-} from '../../lib/variant-system';
+} from "../../lib/variant-system";
 
 const accordionVariants = cva({
-  base: 'w-full space-y-2 rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-md',
+  base: "w-full space-y-2 rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-md",
   variants: {
     size: {
-      sm: 'p-1 text-sm',
-      md: 'p-2 text-base',
-      lg: 'p-3 text-lg',
+      sm: "p-1 text-sm",
+      md: "p-2 text-base",
+      lg: "p-3 text-lg",
     },
     variant: {
-      default: 'bg-white/5',
-      solid: 'bg-white/10',
-      ghost: 'border-transparent bg-transparent p-0',
+      default: "bg-white/5",
+      solid: "bg-white/10",
+      ghost: "border-transparent bg-transparent p-0",
     },
   },
   defaultVariants: {
-    size: 'md',
-    variant: 'default',
+    size: "md",
+    variant: "default",
   },
 });
 
 const accordionItemVariants = cva({
-  base: 'overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-200 hover:bg-white/10',
+  base: "overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-200 hover:bg-white/10",
   variants: {
     size: {
-      sm: 'text-sm',
-      md: 'text-base',
-      lg: 'text-lg',
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: "md",
   },
 });
 
 const accordionTriggerVariants = cva({
-  base: 'group flex w-full flex-1 items-center justify-between p-4 text-left font-medium text-white transition-all duration-200 hover:bg-white/5 focus:bg-white/10 focus:outline-none data-[state=open]:bg-white/5',
+  base: "group flex w-full flex-1 items-center justify-between p-4 text-left font-medium text-white transition-all duration-200 hover:bg-white/5 focus:bg-white/10 focus:outline-none data-[state=open]:bg-white/5",
   variants: {
     size: {
-      sm: 'p-2 text-sm',
-      md: 'p-4 text-base',
-      lg: 'p-6 text-lg',
+      sm: "p-2 text-sm",
+      md: "p-4 text-base",
+      lg: "p-6 text-lg",
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: "md",
   },
 });
 
 const accordionContentVariants = cva({
-  base: 'overflow-hidden border-white/10 border-t bg-white/5 text-white/80',
+  base: "overflow-hidden border-white/10 border-t bg-white/5 text-white/80",
   variants: {
     size: {
-      sm: 'text-xs',
-      md: 'text-sm',
-      lg: 'text-base',
+      sm: "text-xs",
+      md: "text-sm",
+      lg: "text-base",
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: "md",
   },
 });
 
@@ -74,11 +74,11 @@ const accordionContentVariants = cva({
 export interface GlassAccordionSingleProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>,
-      'type'
+      "type"
     >,
     VariantProps<typeof accordionVariants> {
   children: React.ReactNode;
-  type: 'single';
+  type: "single";
   collapsible?: boolean;
   value?: string;
   defaultValue?: string;
@@ -89,11 +89,11 @@ export interface GlassAccordionSingleProps
 export interface GlassAccordionMultipleProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>,
-      'type'
+      "type"
     >,
     VariantProps<typeof accordionVariants> {
   children: React.ReactNode;
-  type: 'multiple';
+  type: "multiple";
   value?: Array<string>;
   defaultValue?: Array<string>;
   onValueChange?: (value: Array<string>) => void;
@@ -198,10 +198,10 @@ const GlassAccordionContent = React.forwardRef<
   );
 });
 
-GlassAccordion.displayName = 'GlassAccordion';
-GlassAccordionItem.displayName = 'GlassAccordionItem';
-GlassAccordionTrigger.displayName = 'GlassAccordionTrigger';
-GlassAccordionContent.displayName = 'GlassAccordionContent';
+GlassAccordion.displayName = "GlassAccordion";
+GlassAccordionItem.displayName = "GlassAccordionItem";
+GlassAccordionTrigger.displayName = "GlassAccordionTrigger";
+GlassAccordionContent.displayName = "GlassAccordionContent";
 
 // Compound component pattern
 const Accordion = Object.assign(GlassAccordion, {

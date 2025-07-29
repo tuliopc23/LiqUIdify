@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Bell,
   BellOff,
@@ -12,17 +12,17 @@ import {
   VolumeX,
   Wifi,
   WifiOff,
-} from 'lucide-react';
-import type React from 'react';
-import { useState } from 'react';
+} from "lucide-react";
+import type React from "react";
+import { useState } from "react";
 
-import { GlassSwitch } from './glass-switch';
+import { GlassSwitch } from "./glass-switch";
 
 const meta = {
-  title: 'Glass UI/GlassSwitch',
+  title: "Glass UI/GlassSwitch",
   component: GlassSwitch,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -58,31 +58,31 @@ function MyComponent() {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     checked: {
-      control: 'boolean',
-      description: 'Whether the switch is checked',
+      control: "boolean",
+      description: "Whether the switch is checked",
     },
     onChange: {
-      action: 'changed',
-      description: 'Callback when switch state changes',
+      action: "changed",
+      description: "Callback when switch state changes",
     },
     label: {
-      control: 'text',
-      description: 'Label text for the switch',
+      control: "text",
+      description: "Label text for the switch",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Whether the switch is disabled',
+      control: "boolean",
+      description: "Whether the switch is disabled",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
     id: {
-      control: 'text',
-      description: 'Custom ID for the input element',
+      control: "text",
+      description: "Custom ID for the input element",
     },
   },
 } satisfies Meta<typeof GlassSwitch>;
@@ -93,7 +93,7 @@ type Story = StoryObj<typeof meta>;
 // Default Story
 export const Default: Story = {
   args: {
-    label: 'Enable feature',
+    label: "Enable feature",
   },
 };
 
@@ -111,8 +111,8 @@ export const Controlled: Story = {
           label="Toggle me"
         />
         <p className="text-gray-600 text-sm dark:text-gray-400">
-          Switch is:{' '}
-          <span className="font-semibold">{checked ? 'ON' : 'OFF'}</span>
+          Switch is:{" "}
+          <span className="font-semibold">{checked ? "ON" : "OFF"}</span>
         </p>
       </div>
     );
@@ -122,7 +122,7 @@ export const Controlled: Story = {
 // With Label
 export const WithLabel: Story = {
   args: {
-    label: 'Enable notifications',
+    label: "Enable notifications",
   },
 };
 
@@ -167,25 +167,25 @@ export const MultipleSwitches: Story = {
 
         <GlassSwitch
           checked={settings.notifications}
-          onChange={(checked) => updateSetting('notifications', checked)}
+          onChange={(checked) => updateSetting("notifications", checked)}
           label="Push Notifications"
         />
 
         <GlassSwitch
           checked={settings.darkMode}
-          onChange={(checked) => updateSetting('darkMode', checked)}
+          onChange={(checked) => updateSetting("darkMode", checked)}
           label="Dark Mode"
         />
 
         <GlassSwitch
           checked={settings.autoSave}
-          onChange={(checked) => updateSetting('autoSave', checked)}
+          onChange={(checked) => updateSetting("autoSave", checked)}
           label="Auto-save"
         />
 
         <GlassSwitch
           checked={settings.analytics}
-          onChange={(checked) => updateSetting('analytics', checked)}
+          onChange={(checked) => updateSetting("analytics", checked)}
           label="Analytics Tracking"
         />
       </div>
@@ -203,7 +203,7 @@ export const InteractiveDemo: Story = {
     return (
       <div
         className={`w-96 rounded-lg p-6 transition-colors ${
-          isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
+          isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
         }`}
       >
         <h3 className="mb-6 font-semibold text-lg">System Settings</h3>
@@ -251,13 +251,13 @@ export const InteractiveDemo: Story = {
 
         <div
           className={`mt-6 rounded-lg p-4 ${
-            isDarkMode ? 'bg-gray-800' : 'bg-gray-100'
+            isDarkMode ? "bg-gray-800" : "bg-gray-100"
           }`}
         >
           <p className="text-sm opacity-75">
-            {isDarkMode ? 'Dark mode is active' : 'Light mode is active'}.
-            Notifications are {isNotificationsOn ? 'enabled' : 'disabled'}.
-            Wi-Fi is {isWifiOn ? 'connected' : 'disconnected'}.
+            {isDarkMode ? "Dark mode is active" : "Light mode is active"}.
+            Notifications are {isNotificationsOn ? "enabled" : "disabled"}.
+            Wi-Fi is {isWifiOn ? "connected" : "disconnected"}.
           </p>
         </div>
       </div>
@@ -298,17 +298,17 @@ export const FormIntegration: Story = {
             </h4>
             <GlassSwitch
               checked={formData.emailNotifications}
-              onChange={(checked) => updateField('emailNotifications', checked)}
+              onChange={(checked) => updateField("emailNotifications", checked)}
               label="Email notifications"
             />
             <GlassSwitch
               checked={formData.smsNotifications}
-              onChange={(checked) => updateField('smsNotifications', checked)}
+              onChange={(checked) => updateField("smsNotifications", checked)}
               label="SMS notifications"
             />
             <GlassSwitch
               checked={formData.marketingEmails}
-              onChange={(checked) => updateField('marketingEmails', checked)}
+              onChange={(checked) => updateField("marketingEmails", checked)}
               label="Marketing emails"
             />
           </div>
@@ -319,7 +319,7 @@ export const FormIntegration: Story = {
             </h4>
             <GlassSwitch
               checked={formData.dataSharing}
-              onChange={(checked) => updateField('dataSharing', checked)}
+              onChange={(checked) => updateField("dataSharing", checked)}
               label="Share usage data"
             />
           </div>
@@ -330,7 +330,7 @@ export const FormIntegration: Story = {
             </h4>
             <GlassSwitch
               checked={formData.twoFactor}
-              onChange={(checked) => updateField('twoFactor', checked)}
+              onChange={(checked) => updateField("twoFactor", checked)}
               label="Two-factor authentication"
             />
           </div>
@@ -374,8 +374,8 @@ export const StatusIndicators: Story = {
                 <p className="font-medium">Profile Visibility</p>
                 <p className="text-gray-500 text-sm">
                   {status.visibility
-                    ? 'Visible to everyone'
-                    : 'Hidden from search'}
+                    ? "Visible to everyone"
+                    : "Hidden from search"}
                 </p>
               </div>
             </div>
@@ -397,7 +397,7 @@ export const StatusIndicators: Story = {
               <div>
                 <p className="font-medium">Sound Effects</p>
                 <p className="text-gray-500 text-sm">
-                  {status.sound ? 'All sounds enabled' : 'Muted'}
+                  {status.sound ? "All sounds enabled" : "Muted"}
                 </p>
               </div>
             </div>
@@ -418,8 +418,8 @@ export const StatusIndicators: Story = {
                 <p className="font-medium">Security Mode</p>
                 <p className="text-gray-500 text-sm">
                   {status.security
-                    ? 'Enhanced security active'
-                    : 'Standard security'}
+                    ? "Enhanced security active"
+                    : "Standard security"}
                 </p>
               </div>
             </div>
@@ -559,6 +559,6 @@ export const ThemeShowcase: Story = {
     );
   },
   parameters: {
-    backgrounds: { default: 'light' },
+    backgrounds: { default: "light" },
   },
 };

@@ -1,32 +1,32 @@
-import { GlassCombobox } from './glass-combobox';
-import '@/styles/apple-liquid-authentic.css';
+import { GlassCombobox } from "./glass-combobox";
+import "@/styles/apple-liquid-authentic.css";
 
 const sampleOptions = [
-  { value: 'apple', label: 'Apple', icon: '🍎' },
-  { value: 'banana', label: 'Banana', icon: '🍌' },
-  { value: 'cherry', label: 'Cherry', icon: '🍒' },
-  { value: 'dragonfruit', label: 'Dragon Fruit', icon: '🐉' },
-  { value: 'elderberry', label: 'Elderberry', icon: '🫐' },
+  { value: "apple", label: "Apple", icon: "🍎" },
+  { value: "banana", label: "Banana", icon: "🍌" },
+  { value: "cherry", label: "Cherry", icon: "🍒" },
+  { value: "dragonfruit", label: "Dragon Fruit", icon: "🐉" },
+  { value: "elderberry", label: "Elderberry", icon: "🫐" },
 ];
 
 const disabledOptions = [
-  { value: 'apple', label: 'Apple', icon: '🍎' },
-  { value: 'banana', label: 'Banana', icon: '🍌', disabled: true },
-  { value: 'cherry', label: 'Cherry', icon: '🍒' },
-  { value: 'dragonfruit', label: 'Dragon Fruit', icon: '🐉', disabled: true },
-  { value: 'elderberry', label: 'Elderberry', icon: '🫐' },
+  { value: "apple", label: "Apple", icon: "🍎" },
+  { value: "banana", label: "Banana", icon: "🍌", disabled: true },
+  { value: "cherry", label: "Cherry", icon: "🍒" },
+  { value: "dragonfruit", label: "Dragon Fruit", icon: "🐉", disabled: true },
+  { value: "elderberry", label: "Elderberry", icon: "🫐" },
 ];
 
 export default {
-  title: 'Components/GlassCombobox',
+  title: "Components/GlassCombobox",
   component: GlassCombobox,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A searchable dropdown component with Liquid Glass styling for consistent Apple-inspired UI.',
+          "A searchable dropdown component with Liquid Glass styling for consistent Apple-inspired UI.",
       },
     },
   },

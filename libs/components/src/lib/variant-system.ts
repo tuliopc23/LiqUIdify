@@ -3,7 +3,7 @@
  * Type-safe component variants with better composition
  */
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
 // Class variance authority (cva) alias
 export { createVariants as cva };
@@ -29,7 +29,7 @@ export interface VariantConfig<
 
 // Create variant function type
 export type VariantProps<T extends VariantConfig<unknown>> = {
-  [K in keyof T['variants']]?: keyof T['variants'][K];
+  [K in keyof T["variants"]]?: keyof T["variants"][K];
 } & {
   class?: string;
   className?: string;
@@ -80,7 +80,7 @@ export function createVariants<
                 key as keyof typeof config.defaultVariants
               ];
             return propertyValue === value;
-          }
+          },
         );
 
         if (matches) {
@@ -95,22 +95,22 @@ export function createVariants<
 
 // Simple variant system for basic functionality
 export const glassVariants = createVariants({
-  base: 'relative overflow-hidden transition-all duration-300 ease-out',
+  base: "relative overflow-hidden transition-all duration-300 ease-out",
   variants: {
     variant: {
-      default: 'glass-effect',
-      elevated: 'glass-effect-elevated',
-      floating: 'backdrop-blur-heavy saturate-[180%]',
+      default: "glass-effect",
+      elevated: "glass-effect-elevated",
+      floating: "backdrop-blur-heavy saturate-[180%]",
     },
     size: {
-      sm: 'text-sm px-3 py-1.5',
-      md: 'text-sm px-4 py-2',
-      lg: 'text-base px-6 py-3',
+      sm: "text-sm px-3 py-1.5",
+      md: "text-sm px-4 py-2",
+      lg: "text-base px-6 py-3",
     },
   },
   defaultVariants: {
-    variant: 'default',
-    size: 'md',
+    variant: "default",
+    size: "md",
   },
 });
 

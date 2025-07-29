@@ -10,31 +10,31 @@
  * - Separated business logic from presentation
  */
 
-import { Slot } from '@radix-ui/react-slot';
+import { Slot } from "@radix-ui/react-slot";
 // External dependencies
-import React, { forwardRef, useCallback, useRef } from 'react';
+import React, { forwardRef, useCallback, useRef } from "react";
 
 // Internal dependencies
 
-import type { InteractiveGlassProps } from '@/core';
+import type { InteractiveGlassProps } from "@/core";
 
-import { createBusinessLogicHook } from '@/core/business-logic';
+import { createBusinessLogicHook } from "@/core/business-logic";
 import {
   generateGlassClasses,
   generateGlassVariables,
-} from '@/core/glass/unified-glass-system';
+} from "@/core/glass/unified-glass-system";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 import {
   microInteraction,
   responsiveSize,
   touchTarget,
-} from '@/core/utils/responsive';
+} from "@/core/utils/responsive";
 import {
   useGlassStateTransitions,
   useMagneticHover,
   useRippleEffect,
-} from '@/hooks/use-glass-animations';
+} from "@/hooks/use-glass-animations";
 
 // Button state type
 interface ButtonState {
@@ -61,7 +61,7 @@ const useButtonBusinessLogic = createBusinessLogicHook<
   (
     _state: ButtonState,
     setState: React.Dispatch<React.SetStateAction<ButtonState>>,
-    props: GlassButtonProps
+    props: GlassButtonProps,
   ) => ({
     handlePress: () => {
       if (props.disabled || props.loading) {
@@ -74,7 +74,7 @@ const useButtonBusinessLogic = createBusinessLogicHook<
             ...previous,
             isPressed: false,
           })),
-        150
+        150,
       );
     },
 
@@ -101,21 +101,21 @@ const useButtonBusinessLogic = createBusinessLogicHook<
         rippleCount: previous.rippleCount + 1,
       }));
     },
-  })
+  }),
 );
 
 // Import the ComponentPropsBuilder type
 
-import type { ComponentPropsBuilder } from '@/types/component-props';
+import type { ComponentPropsBuilder } from "@/types/component-props";
 
 // Button-specific props extending the base interactive props
 export interface GlassButtonProps
   extends InteractiveGlassProps,
-    Omit<ComponentPropsBuilder<HTMLButtonElement>, 'size' | 'type'> {
+    Omit<ComponentPropsBuilder<HTMLButtonElement>, "size" | "type"> {
   /** Button content */
   children?: React.ReactNode;
   /** Button type */
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   /** Icon to display on the left side */
   leftIcon?: React.ReactNode;
   /** Icon to display on the right side */
@@ -135,57 +135,57 @@ export interface GlassButtonProps
 // Variant class mappings
 const VARIANT_CLASSES = {
   primary: cn(
-    'font-semibold text-white dark:text-white',
-    'bg-gradient-to-b from-blue-500 to-blue-600',
-    'hover:from-blue-400 hover:to-blue-500',
-    'active:from-blue-600 active:to-blue-600',
-    'shadow-blue-500/25 shadow-lg',
-    'border border-blue-400/30'
+    "font-semibold text-white dark:text-white",
+    "bg-gradient-to-b from-blue-500 to-blue-600",
+    "hover:from-blue-400 hover:to-blue-500",
+    "active:from-blue-600 active:to-blue-600",
+    "shadow-blue-500/25 shadow-lg",
+    "border border-blue-400/30",
   ),
   secondary: cn(
-    'text-gray-900 dark:text-white',
-    'border-gray-200 dark:border-gray-700',
-    'hover:bg-gray-50 dark:hover:bg-gray-800',
-    'active:bg-gray-100 dark:active:bg-gray-700'
+    "text-gray-900 dark:text-white",
+    "border-gray-200 dark:border-gray-700",
+    "hover:bg-gray-50 dark:hover:bg-gray-800",
+    "active:bg-gray-100 dark:active:bg-gray-700",
   ),
   tertiary: cn(
-    'bg-transparent text-gray-900 dark:text-white',
-    'hover:bg-gray-50 dark:hover:bg-gray-800',
-    'active:bg-gray-100 dark:active:bg-gray-700'
+    "bg-transparent text-gray-900 dark:text-white",
+    "hover:bg-gray-50 dark:hover:bg-gray-800",
+    "active:bg-gray-100 dark:active:bg-gray-700",
   ),
   ghost: cn(
-    'bg-transparent text-gray-600 dark:text-gray-400',
-    'hover:bg-gray-50 dark:hover:bg-gray-800',
-    'active:bg-gray-100 dark:active:bg-gray-700'
+    "bg-transparent text-gray-600 dark:text-gray-400",
+    "hover:bg-gray-50 dark:hover:bg-gray-800",
+    "active:bg-gray-100 dark:active:bg-gray-700",
   ),
   destructive: cn(
-    'font-semibold text-white',
-    'bg-gradient-to-b from-red-500 to-red-600',
-    'hover:from-red-400 hover:to-red-500',
-    'active:from-red-600 active:to-red-600',
-    'shadow-lg shadow-red-500/25',
-    'border border-red-400/30'
+    "font-semibold text-white",
+    "bg-gradient-to-b from-red-500 to-red-600",
+    "hover:from-red-400 hover:to-red-500",
+    "active:from-red-600 active:to-red-600",
+    "shadow-lg shadow-red-500/25",
+    "border border-red-400/30",
   ),
   apple: cn(
-    'font-semibold text-white',
-    'bg-gradient-to-b from-gray-800 to-gray-900',
-    'hover:from-gray-700 hover:to-gray-800',
-    'active:from-gray-900 active:to-gray-900',
-    'shadow-gray-800/25 shadow-lg',
-    'border border-gray-600/30'
+    "font-semibold text-white",
+    "bg-gradient-to-b from-gray-800 to-gray-900",
+    "hover:from-gray-700 hover:to-gray-800",
+    "active:from-gray-900 active:to-gray-900",
+    "shadow-gray-800/25 shadow-lg",
+    "border border-gray-600/30",
   ),
 };
 
 // Loading spinner component
-const LoadingSpinner = ({ size = 'md' }: { size?: string }) => {
+const LoadingSpinner = ({ size = "md" }: { size?: string }) => {
   const sizeClass =
-    size === 'xs' ? 'w-3 h-3' : size === 'sm' ? 'w-4 h-4' : 'w-5 h-5';
+    size === "xs" ? "w-3 h-3" : size === "sm" ? "w-4 h-4" : "w-5 h-5";
 
   return (
     <div
       className={cn(
-        'animate-spin rounded-full border-2 border-current border-t-transparent',
-        sizeClass
+        "animate-spin rounded-full border-2 border-current border-t-transparent",
+        sizeClass,
       )}
     />
   );
@@ -202,8 +202,8 @@ export const GlassButton = React.memo(
     (
       {
         // Base props
-        size = 'md',
-        variant = 'primary',
+        size = "md",
+        variant = "primary",
         className,
         children,
 
@@ -214,7 +214,7 @@ export const GlassButton = React.memo(
         ripple = true,
 
         // Button-specific props
-        type = 'button',
+        type = "button",
         leftIcon,
         rightIcon,
         loadingText,
@@ -223,10 +223,10 @@ export const GlassButton = React.memo(
         iconOnly = false,
 
         // Glass effect props
-        glassEffect = { intensity: 'medium', blur: true, backdrop: true },
+        glassEffect = { intensity: "medium", blur: true, backdrop: true },
 
         // Animation props
-        animation = 'normal',
+        animation = "normal",
         disableAnimations = false,
 
         // Event handlers
@@ -238,7 +238,7 @@ export const GlassButton = React.memo(
 
         ...props
       },
-      ref
+      ref,
     ) => {
       const buttonRef = useRef<HTMLButtonElement>(null);
       const { actions } = useButtonBusinessLogic({
@@ -266,13 +266,13 @@ export const GlassButton = React.memo(
           if (buttonRef.current !== node) {
             buttonRef.current = node;
           }
-          if (typeof ref === 'function') {
+          if (typeof ref === "function") {
             ref(node);
           } else if (ref) {
             ref.current = node;
           }
         },
-        [ref]
+        [ref],
       );
 
       // Event handlers with business logic
@@ -291,8 +291,8 @@ export const GlassButton = React.memo(
           }
 
           // Trigger state transition
-          transitionToState('active');
-          setTimeout(() => transitionToState('idle'), 150);
+          transitionToState("active");
+          setTimeout(() => transitionToState("idle"), 150);
 
           onClick?.(event);
         },
@@ -304,7 +304,7 @@ export const GlassButton = React.memo(
           triggerRipple,
           transitionToState,
           onClick,
-        ]
+        ],
       );
 
       const handleMouseEnter = useCallback(
@@ -315,11 +315,11 @@ export const GlassButton = React.memo(
 
           actions.handleHover(true);
 
-          transitionToState('hover');
+          transitionToState("hover");
 
           onMouseEnter?.(event);
         },
-        [disabled, actions, transitionToState, onMouseEnter]
+        [disabled, actions, transitionToState, onMouseEnter],
       );
 
       const handleMouseLeave = useCallback(
@@ -330,11 +330,11 @@ export const GlassButton = React.memo(
 
           actions.handleHover(false);
 
-          transitionToState('idle');
+          transitionToState("idle");
 
           onMouseLeave?.(event);
         },
-        [disabled, actions, transitionToState, onMouseLeave]
+        [disabled, actions, transitionToState, onMouseLeave],
       );
 
       const handleFocus = useCallback(
@@ -345,11 +345,11 @@ export const GlassButton = React.memo(
 
           actions.handleFocus(true);
 
-          transitionToState('focus');
+          transitionToState("focus");
 
           onFocus?.(event);
         },
-        [disabled, actions, transitionToState, onFocus]
+        [disabled, actions, transitionToState, onFocus],
       );
 
       const handleBlur = useCallback(
@@ -360,11 +360,11 @@ export const GlassButton = React.memo(
 
           actions.handleFocus(false);
 
-          transitionToState('idle');
+          transitionToState("idle");
 
           onBlur?.(event);
         },
-        [disabled, actions, transitionToState, onBlur]
+        [disabled, actions, transitionToState, onBlur],
       );
 
       // Generate glass classes and variables
@@ -378,7 +378,7 @@ export const GlassButton = React.memo(
       const glassVariables = generateGlassVariables({
         intensity: glassEffect?.intensity,
         config: {
-          animation: { duration: 300, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' },
+          animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
           ...glassEffect,
         },
       });
@@ -386,17 +386,17 @@ export const GlassButton = React.memo(
       // Build component classes
       const componentClasses = cn(
         // Base classes
-        'relative inline-flex items-center justify-center font-medium',
-        'overflow-hidden rounded-xl',
-        'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-        'transition-all duration-300 ease-out',
-        'will-change-transform',
+        "relative inline-flex items-center justify-center font-medium",
+        "overflow-hidden rounded-xl",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+        "transition-all duration-300 ease-out",
+        "will-change-transform",
 
         // Glass effect classes
         glassClasses,
 
         // Size classes
-        size ? responsiveSize(size) : '',
+        size ? responsiveSize(size) : "",
         touchTarget.comfortable,
 
         // Variant classes
@@ -405,17 +405,17 @@ export const GlassButton = React.memo(
 
         // State classes
         {
-          'cursor-not-allowed opacity-50': disabled,
-          'cursor-wait': loading,
-          'w-full': fullWidth,
-          'aspect-square': iconOnly,
+          "cursor-not-allowed opacity-50": disabled,
+          "cursor-wait": loading,
+          "w-full": fullWidth,
+          "aspect-square": iconOnly,
         },
 
         // Animation classes
         !disableAnimations && microInteraction(),
 
         // Custom classes
-        className
+        className,
       );
 
       // Component content
@@ -432,7 +432,7 @@ export const GlassButton = React.memo(
           )}
 
           {children && (
-            <span className={cn('flex items-center', iconOnly && 'sr-only')}>
+            <span className={cn("flex items-center", iconOnly && "sr-only")}>
               {loading && loadingText ? loadingText : children}
             </span>
           )}
@@ -444,7 +444,7 @@ export const GlassButton = React.memo(
       );
 
       // Render component
-      const Component = asChild ? Slot : 'button';
+      const Component = asChild ? Slot : "button";
 
       return (
         <Component
@@ -463,11 +463,11 @@ export const GlassButton = React.memo(
           {buttonContent}
         </Component>
       );
-    }
-  )
+    },
+  ),
 );
 
-GlassButton.displayName = 'GlassButton';
+GlassButton.displayName = "GlassButton";
 
 // Export the component and types
 export default GlassButton;

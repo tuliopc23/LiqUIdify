@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   safeGetBoundingClientRect,
   safeRefAccess,
   safeRequestAnimationFrame,
-} from '../utils/safe-dom';
+} from "../utils/safe-dom";
 
 /**
  * Glass Physics - Physics engine for realistic motion
@@ -24,7 +24,7 @@ export const PHYSICS_CONSTANTS = {
 export class Vector2D {
   constructor(
     public x: number = 0,
-    public y: number = 0
+    public y: number = 0,
   ) {}
 
   // Static helper methods for backward compatibility
@@ -90,7 +90,7 @@ export class Vector2D {
     const sin = Math.sin(angle);
     return new Vector2D(
       this.x * cos - this.y * sin,
-      this.x * sin + this.y * cos
+      this.x * sin + this.y * cos,
     );
   }
 
@@ -107,7 +107,7 @@ class LegacySpringPhysics {
 
   constructor(
     private tension: number = PHYSICS_CONSTANTS.SPRING_TENSION,
-    private friction: number = PHYSICS_CONSTANTS.SPRING_FRICTION
+    private friction: number = PHYSICS_CONSTANTS.SPRING_FRICTION,
   ) {}
 
   setTarget(x: number, y: number) {
@@ -118,9 +118,9 @@ class LegacySpringPhysics {
     const force = Vector2D.multiply(
       new Vector2D(
         this.target.x - this.position.x,
-        this.target.y - this.position.y
+        this.target.y - this.position.y,
       ),
-      this.tension
+      this.tension,
     );
 
     this.velocity = Vector2D.add(this.velocity, force);
@@ -170,11 +170,11 @@ export const SPRING_PRESETS = {
  * Provides tactile feedback when animations are triggered
  */
 export function hapticFeedback(
-  intensity: 'light' | 'medium' | 'heavy' = 'medium'
+  intensity: "light" | "medium" | "heavy" = "medium",
 ) {
   try {
     // Check for SSR environment
-    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+    if (typeof window === "undefined" || typeof navigator === "undefined") {
       return;
     }
 
@@ -190,7 +190,7 @@ export function hapticFeedback(
     } else {
       // Fallback for non-mobile or non-supporting browsers
       // Use dev-only logger (lazy import to avoid circular dep in SSR)
-      import('@/utils/dev-logger')
+      import("@/utils/dev-logger")
         .then(({ devLog }) => {
           devLog(`Haptic feedback: ${intensity}`);
         })
@@ -270,7 +270,7 @@ export class Spring2D {
   update(target: Vector2D, deltaTime: number): Vector2D {
     return new Vector2D(
       this.springX.update(target.x, deltaTime),
-      this.springY.update(target.y, deltaTime)
+      this.springY.update(target.y, deltaTime),
     );
   }
 
@@ -292,11 +292,11 @@ export class Spring2D {
 // Magnetic hover effect hook
 export const useMagneticHover = (
   strength: number = PHYSICS_CONSTANTS.MAGNETIC_STRENGTH,
-  radius: number = PHYSICS_CONSTANTS.MAGNETIC_RADIUS
+  radius: number = PHYSICS_CONSTANTS.MAGNETIC_RADIUS,
 ) => {
   const elementRef = useRef<HTMLElement>(null);
   const [transform, setTransform] = useState(
-    'translate3d(0px, 0px, 0px) scale(1)'
+    "translate3d(0px, 0px, 0px) scale(1)",
   );
   const springRef = useRef(new LegacySpringPhysics());
   const animationRef = useRef<number | null>(null);
@@ -305,7 +305,7 @@ export const useMagneticHover = (
     try {
       const position = springRef.current.update();
       setTransform(
-        `translate3d(${position.x}px, ${position.y}px, 0px) scale(${1 + Math.abs(position.x + position.y) * 0.0001})`
+        `translate3d(${position.x}px, ${position.y}px, 0px) scale(${1 + Math.abs(position.x + position.y) * 0.0001})`,
       );
 
       if (!springRef.current.isAtRest()) {
@@ -357,7 +357,7 @@ export const useMagneticHover = (
         // Logging disabled
       }
     },
-    [strength, radius, animate]
+    [strength, radius, animate],
   );
 
   const handleMouseLeave = useCallback(() => {
@@ -386,12 +386,12 @@ export const useMagneticHover = (
       return;
     }
 
-    element.addEventListener('mousemove', handleMouseMove);
-    element.addEventListener('mouseleave', handleMouseLeave);
+    element.addEventListener("mousemove", handleMouseMove);
+    element.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      element.removeEventListener('mousemove', handleMouseMove);
-      element.removeEventListener('mouseleave', handleMouseLeave);
+      element.removeEventListener("mousemove", handleMouseMove);
+      element.removeEventListener("mouseleave", handleMouseLeave);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -404,7 +404,7 @@ export const useMagneticHover = (
 // Repulsion effect between elements
 export const useRepulsionEffect = (
   elements: Array<HTMLElement>,
-  repulsionStrength = 50
+  repulsionStrength = 50,
 ) => {
   const [positions, setPositions] = useState<Array<Vector2D>>([]);
 
@@ -437,7 +437,7 @@ export const useRepulsionEffect = (
 
           const distance = Math.hypot(
             centerX - otherCenterX,
-            centerY - otherCenterY
+            centerY - otherCenterY,
           );
 
           if (distance < PHYSICS_CONSTANTS.REPULSION_DISTANCE && distance > 0) {
@@ -467,7 +467,7 @@ export const useRepulsionEffect = (
 export const createFluidMorph = (
   fromElement: HTMLElement,
   toElement: HTMLElement,
-  duration = 500
+  duration = 500,
 ) => {
   const fromRect = safeGetBoundingClientRect(fromElement);
   const toRect = safeGetBoundingClientRect(toElement);
@@ -507,35 +507,35 @@ export const createGlassRipple = (
   element: HTMLElement,
   x: number,
   y: number,
-  color = 'rgba(255, 255, 255, 0.3)'
+  color = "rgba(255, 255, 255, 0.3)",
 ) => {
   try {
     // Check for SSR environment
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
+    if (typeof window === "undefined" || typeof document === "undefined") {
       return;
     }
 
-    const ripple = document.createElement('div');
+    const ripple = document.createElement("div");
     const rect = safeGetBoundingClientRect(element);
     const size = Math.max(rect.width, rect.height);
 
     // Set ripple styles
-    ripple.style.position = 'absolute';
-    ripple.style.borderRadius = '50%';
+    ripple.style.position = "absolute";
+    ripple.style.borderRadius = "50%";
     ripple.style.background = color;
-    ripple.style.pointerEvents = 'none';
-    ripple.style.width = '0px';
-    ripple.style.height = '0px';
+    ripple.style.pointerEvents = "none";
+    ripple.style.width = "0px";
+    ripple.style.height = "0px";
     ripple.style.left = `${x - rect.left}px`;
     ripple.style.top = `${y - rect.top}px`;
-    ripple.style.opacity = '1';
+    ripple.style.opacity = "1";
     ripple.style.transition =
-      'width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out';
-    ripple.style.transform = 'translate(-50%, -50%)';
+      "width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out";
+    ripple.style.transform = "translate(-50%, -50%)";
 
     // Add to element
-    element.style.position = 'relative';
-    element.style.overflow = 'hidden';
+    element.style.position = "relative";
+    element.style.overflow = "hidden";
     element.append(ripple);
 
     // Animate
@@ -543,7 +543,7 @@ export const createGlassRipple = (
       try {
         ripple.style.width = `${size * 2}px`;
         ripple.style.height = `${size * 2}px`;
-        ripple.style.opacity = '0';
+        ripple.style.opacity = "0";
       } catch {
         // Logging disabled
       }
@@ -603,7 +603,7 @@ export class FluidSimulation {
   constructor(
     config: FluidConfig,
     particleCount: number,
-    bounds: { width: number; height: number }
+    bounds: { width: number; height: number },
   ) {
     this.config = config;
     this.smoothingRadius = 20;
@@ -614,7 +614,7 @@ export class FluidSimulation {
     for (let index = 0; index < particleCount; index++) {
       const position = new Vector2D(
         Math.random() * bounds.width,
-        Math.random() * bounds.height
+        Math.random() * bounds.height,
       );
       this.particles.push(new FluidParticle(position));
     }
@@ -651,12 +651,12 @@ export class FluidSimulation {
 
         // Update velocity
         particle.velocity = particle.velocity.add(
-          force.multiply(deltaTime / particle.density)
+          force.multiply(deltaTime / particle.density),
         );
 
         // Update position
         particle.position = particle.position.add(
-          particle.velocity.multiply(deltaTime)
+          particle.velocity.multiply(deltaTime),
         );
 
         // Apply boundaries
@@ -823,7 +823,7 @@ export class Particle {
     this.lifespan = config.lifespan || 1000;
     this.maxLifespan = this.lifespan;
     this.size = config.size || 5;
-    this.color = config.color || '#ffffff';
+    this.color = config.color || "#ffffff";
     this.mass = config.mass || 1;
   }
 
@@ -926,7 +926,7 @@ export class ParticleEmitter {
     // Create velocity vector
     const velocity = new Vector2D(
       Math.cos(angle) * emitSpeed,
-      Math.sin(angle) * emitSpeed
+      Math.sin(angle) * emitSpeed,
     );
 
     // Create particle

@@ -1,8 +1,8 @@
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import type React from "react";
+import { useEffect, useState } from "react";
 
-import { useDegradationAware } from '../../utils/graceful-degradation';
-import '../../styles/graceful-degradation.css';
+import { useDegradationAware } from "../../utils/graceful-degradation";
+import "../../styles/graceful-degradation.css";
 
 export interface GracefulComponentProps {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
   fallback,
   staticFallback,
   feature,
-  className = '',
+  className = "",
   style,
   onError,
 }) => {
@@ -43,12 +43,12 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
       onError?.(event.error);
     };
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('error', handleError);
+    if (typeof window !== "undefined") {
+      window.addEventListener("error", handleError);
     }
     return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('error', handleError);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("error", handleError);
       }
     };
   }, [onError]);
@@ -68,7 +68,7 @@ export const GracefulComponent: React.FC<GracefulComponentProps> = ({
   if (shouldFallback) {
     if (
       staticFallback &&
-      (!networkStatus.online || performanceLevel === 'low')
+      (!networkStatus.online || performanceLevel === "low")
     ) {
       return (
         <div
@@ -116,7 +116,7 @@ export interface GracefulImageProps {
   placeholder?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
 }
 
 export const GracefulImage: React.FC<GracefulImageProps> = ({
@@ -124,16 +124,16 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
   alt,
   fallbackSrc,
   placeholder,
-  className = '',
+  className = "",
   style,
-  loading = 'lazy',
+  loading = "lazy",
 }) => {
   const { networkStatus, performanceLevel } = useDegradationAware();
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const shouldUseLowQuality =
-    !networkStatus.online || performanceLevel === 'low';
+    !networkStatus.online || performanceLevel === "low";
   const processedSource =
     shouldUseLowQuality && fallbackSrc ? fallbackSrc : src;
 
@@ -166,11 +166,11 @@ export const GracefulImage: React.FC<GracefulImageProps> = ({
       <img
         src={processedSource}
         alt={alt}
-        className={`graceful-image ${imageLoaded ? '' : 'graceful-image-loading'}`}
+        className={`graceful-image ${imageLoaded ? "" : "graceful-image-loading"}`}
         style={{
           ...style,
           opacity: imageLoaded ? 1 : 0,
-          transition: 'opacity 0.3s ease',
+          transition: "opacity 0.3s ease",
         }}
         loading={loading}
         onError={handleError}
@@ -191,11 +191,11 @@ export interface GracefulAnimationProps {
 
 export const GracefulAnimation: React.FC<GracefulAnimationProps> = ({
   children,
-  animation = 'fadeIn',
+  animation = "fadeIn",
   duration = 300,
   delay = 0,
   disabled = false,
-  className = '',
+  className = "",
 }) => {
   const { prefersReducedMotion, shouldUseFallback } = useDegradationAware();
   const [isVisible, setIsVisible] = useState(false);
@@ -204,7 +204,7 @@ export const GracefulAnimation: React.FC<GracefulAnimationProps> = ({
     if (
       !disabled &&
       !prefersReducedMotion &&
-      !shouldUseFallback('animations')
+      !shouldUseFallback("animations")
     ) {
       const timer = setTimeout(() => setIsVisible(true), delay);
       return () => clearTimeout(timer);
@@ -218,9 +218,9 @@ export const GracefulAnimation: React.FC<GracefulAnimationProps> = ({
       isVisible &&
       !disabled &&
       !prefersReducedMotion &&
-      !shouldUseFallback('animations')
+      !shouldUseFallback("animations")
         ? `${animation} ${duration}ms ease-out forwards`
-        : 'none',
+        : "none",
     opacity: isVisible ? 1 : 0,
   };
 
@@ -245,7 +245,7 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
   src,
   poster,
   fallbackImage,
-  className = '',
+  className = "",
   autoPlay = false,
   muted = false,
   loop = false,
@@ -256,8 +256,8 @@ export const GracefulVideo: React.FC<GracefulVideoProps> = ({
 
   const shouldUseStatic =
     !networkStatus.online ||
-    performanceLevel === 'low' ||
-    shouldUseFallback('webGL');
+    performanceLevel === "low" ||
+    shouldUseFallback("webGL");
 
   const handleError = () => {
     setVideoError(true);
@@ -311,14 +311,14 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
   children,
   fallback: _fallback,
   staticFallback,
-  className = '',
+  className = "",
   onInteraction,
 }) => {
   const { networkStatus, performanceLevel } = useDegradationAware();
   const [isInteractive, setIsInteractive] = useState(true);
 
   useEffect(() => {
-    const shouldDisable = !networkStatus.online || performanceLevel === 'low';
+    const shouldDisable = !networkStatus.online || performanceLevel === "low";
     setIsInteractive(!shouldDisable);
   }, [networkStatus, performanceLevel]);
 
@@ -340,7 +340,7 @@ export const GracefulInteractive: React.FC<GracefulInteractiveProps> = ({
       className={`graceful-interactive ${className}`}
       onClick={onInteraction}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           onInteraction?.();
         }
@@ -358,7 +358,7 @@ export const CSSAccordion: React.FC<{
     content: React.ReactNode;
   }>;
   className?: string;
-}> = ({ items, className = '' }) => {
+}> = ({ items, className = "" }) => {
   return (
     <div className={`css-accordion-fallback ${className}`}>
       {items.map((item, index) => (
@@ -381,7 +381,7 @@ export const CSSTabs: React.FC<{
     id: string;
   }>;
   className?: string;
-}> = ({ tabs, className = '' }) => {
+}> = ({ tabs, className = "" }) => {
   return (
     <div className={`css-tabs-fallback ${className}`}>
       <div className="tab-list">
@@ -405,7 +405,7 @@ export const CSSModal: React.FC<{
   content: React.ReactNode;
   modalId: string;
   className?: string;
-}> = ({ trigger, content, modalId, className = '' }) => {
+}> = ({ trigger, content, modalId, className = "" }) => {
   return (
     <div className={`css-modal-container ${className}`}>
       <a href={`#${modalId}`}>{trigger}</a>
@@ -414,7 +414,7 @@ export const CSSModal: React.FC<{
         <div className="modal-content">
           <a
             href={`#close-${modalId}`}
-            style={{ float: 'right' }}
+            style={{ float: "right" }}
             aria-label="Close modal"
           >
             ×

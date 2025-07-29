@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 export interface RovingTabindexOptions {
   items: Array<HTMLElement>;
-  orientation?: 'horizontal' | 'vertical' | 'both';
+  orientation?: "horizontal" | "vertical" | "both";
   loop?: boolean;
   preventScroll?: boolean;
   onActiveChange?: (element: HTMLElement, index: number) => void;
@@ -22,7 +22,7 @@ export interface RovingTabindexReturn {
   };
   getRovingProps: (index: number) => {
     tabIndex: number;
-    'data-roving-tabindex-item': boolean;
+    "data-roving-tabindex-item": boolean;
     onKeyDown: (event: React.KeyboardEvent) => void;
     onFocus: () => void;
     onMouseEnter?: () => void;
@@ -34,11 +34,11 @@ export interface RovingTabindexReturn {
  * within composite widgets like menus, toolbars, and grids
  */
 export function useRovingTabindex(
-  options: RovingTabindexOptions
+  options: RovingTabindexOptions,
 ): RovingTabindexReturn {
   const {
     items,
-    orientation = 'vertical',
+    orientation = "vertical",
     loop: _loop = true,
     preventScroll = false,
     onActiveChange,
@@ -49,14 +49,14 @@ export function useRovingTabindex(
   } = options;
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const typeaheadRef = useRef<string>('');
+  const typeaheadRef = useRef<string>("");
   const typeaheadTimerRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Update tabindex attributes
   useEffect(() => {
     for (const [index, item] of items.entries()) {
       if (item) {
-        item.setAttribute('tabindex', index === currentIndex ? '0' : '-1');
+        item.setAttribute("tabindex", index === currentIndex ? "0" : "-1");
       }
     }
   }, [items, currentIndex]);
@@ -70,12 +70,12 @@ export function useRovingTabindex(
 
   const focusItem = useCallback(
     (index: number) => {
-      if (items[index] && !items[index].hasAttribute('disabled')) {
+      if (items[index] && !items[index].hasAttribute("disabled")) {
         items[index].focus({ preventScroll });
         setCurrentIndex(index);
       }
     },
-    [items, preventScroll]
+    [items, preventScroll],
   );
 
   const findNextEnabledIndex = useCallback(
@@ -87,7 +87,7 @@ export function useRovingTabindex(
       while (attempts < totalItems) {
         currentIndex_ = (currentIndex_ + direction + totalItems) % totalItems;
 
-        if (!items[currentIndex_]?.hasAttribute('disabled')) {
+        if (!items[currentIndex_]?.hasAttribute("disabled")) {
           return currentIndex_;
         }
 
@@ -96,7 +96,7 @@ export function useRovingTabindex(
 
       return startIndex; // All items disabled
     },
-    [items]
+    [items],
   );
 
   const handleTypeahead = useCallback(
@@ -118,11 +118,11 @@ export function useRovingTabindex(
         const index = (currentIndex + 1 + index_) % items.length;
         const item = items[index];
 
-        if (item && !item.hasAttribute('disabled')) {
+        if (item && !item.hasAttribute("disabled")) {
           const text = (
             item.textContent ||
-            item.getAttribute('aria-label') ||
-            ''
+            item.getAttribute("aria-label") ||
+            ""
           )
             .toLowerCase()
             .trim();
@@ -140,10 +140,10 @@ export function useRovingTabindex(
 
       // Reset typeahead after timeout
       typeaheadTimerRef.current = setTimeout(() => {
-        typeaheadRef.current = '';
+        typeaheadRef.current = "";
       }, typeaheadTimeout);
     },
-    [items, currentIndex, focusItem, typeaheadTimeout]
+    [items, currentIndex, focusItem, typeaheadTimeout],
   );
 
   const handleKeyDown = useCallback(
@@ -153,39 +153,39 @@ export function useRovingTabindex(
       let newIndex = currentIndex;
 
       switch (key) {
-        case 'ArrowUp': {
-          if (orientation === 'vertical' || orientation === 'both') {
+        case "ArrowUp": {
+          if (orientation === "vertical" || orientation === "both") {
             newIndex = findNextEnabledIndex(currentIndex, -1);
             handled = true;
           }
           break;
         }
 
-        case 'ArrowDown': {
-          if (orientation === 'vertical' || orientation === 'both') {
+        case "ArrowDown": {
+          if (orientation === "vertical" || orientation === "both") {
             newIndex = findNextEnabledIndex(currentIndex, 1);
             handled = true;
           }
           break;
         }
 
-        case 'ArrowLeft': {
-          if (orientation === 'horizontal' || orientation === 'both') {
+        case "ArrowLeft": {
+          if (orientation === "horizontal" || orientation === "both") {
             newIndex = findNextEnabledIndex(currentIndex, -1);
             handled = true;
           }
           break;
         }
 
-        case 'ArrowRight': {
-          if (orientation === 'horizontal' || orientation === 'both') {
+        case "ArrowRight": {
+          if (orientation === "horizontal" || orientation === "both") {
             newIndex = findNextEnabledIndex(currentIndex, 1);
             handled = true;
           }
           break;
         }
 
-        case 'Home': {
+        case "Home": {
           if (homeEndKeys) {
             // Find first enabled item
             newIndex = findNextEnabledIndex(-1, 1);
@@ -194,7 +194,7 @@ export function useRovingTabindex(
           break;
         }
 
-        case 'End': {
+        case "End": {
           if (homeEndKeys) {
             // Find last enabled item
             newIndex = findNextEnabledIndex(items.length, -1);
@@ -203,26 +203,26 @@ export function useRovingTabindex(
           break;
         }
 
-        case 'PageUp': {
+        case "PageUp": {
           if (pageKeys) {
             // Move up by 10 items or to start
             const jumpUp = Math.max(0, currentIndex - 10);
             newIndex = findNextEnabledIndex(
               jumpUp,
-              jumpUp < currentIndex ? 1 : -1
+              jumpUp < currentIndex ? 1 : -1,
             );
             handled = true;
           }
           break;
         }
 
-        case 'PageDown': {
+        case "PageDown": {
           if (pageKeys) {
             // Move down by 10 items or to end
             const jumpDown = Math.min(items.length - 1, currentIndex + 10);
             newIndex = findNextEnabledIndex(
               jumpDown,
-              jumpDown > currentIndex ? -1 : 1
+              jumpDown > currentIndex ? -1 : 1,
             );
             handled = true;
           }
@@ -257,7 +257,7 @@ export function useRovingTabindex(
       items.length,
       handleTypeahead,
       focusItem,
-    ]
+    ],
   );
 
   const handleFocus = useCallback((index: number) => {
@@ -266,24 +266,24 @@ export function useRovingTabindex(
 
   const handleMouseEnter = useCallback(
     (index: number) => {
-      if (focusOnHover && !items[index]?.hasAttribute('disabled')) {
+      if (focusOnHover && !items[index]?.hasAttribute("disabled")) {
         focusItem(index);
       }
     },
-    [focusOnHover, items, focusItem]
+    [focusOnHover, items, focusItem],
   );
 
   const getRovingProps = useCallback(
     (index: number) => {
       const props: {
         tabIndex: number;
-        'data-roving-tabindex-item': boolean;
+        "data-roving-tabindex-item": boolean;
         onKeyDown: (event: React.KeyboardEvent) => void;
         onFocus: () => void;
         onMouseEnter?: () => void;
       } = {
         tabIndex: index === currentIndex ? 0 : -1,
-        'data-roving-tabindex-item': true,
+        "data-roving-tabindex-item": true,
         onKeyDown: handleKeyDown,
         onFocus: () => handleFocus(index),
       };
@@ -294,7 +294,7 @@ export function useRovingTabindex(
 
       return props;
     },
-    [currentIndex, handleKeyDown, handleFocus, handleMouseEnter, focusOnHover]
+    [currentIndex, handleKeyDown, handleFocus, handleMouseEnter, focusOnHover],
   );
 
   return {
@@ -314,24 +314,24 @@ export function useRovingTabindex(
  */
 export interface RovingTabindexGroupProps {
   children: React.Array<ReactElement>;
-  orientation?: 'horizontal' | 'vertical' | 'both';
+  orientation?: "horizontal" | "vertical" | "both";
   loop?: boolean;
   preventScroll?: boolean;
   onActiveChange?: (element: HTMLElement, index: number) => void;
   className?: string;
   role?: string;
-  'aria-label'?: string;
+  "aria-label"?: string;
 }
 
 export function RovingTabindexGroup({
   children,
-  orientation = 'vertical',
+  orientation = "vertical",
   loop = true,
   preventScroll = false,
   onActiveChange,
   className,
   role,
-  'aria-label': ariaLabel,
+  "aria-label": ariaLabel,
 }: RovingTabindexGroupProps) {
   const itemReferences = useRef<HTMLElement | Array<null>>([]);
   const [items, setItems] = useState<Array<HTMLElement>>([]);
@@ -339,7 +339,7 @@ export function RovingTabindexGroup({
   // Collect item refs
   useEffect(() => {
     const validItems = itemReferences.current.filter(
-      (item): item is HTMLElement => item !== null
+      (item): item is HTMLElement => item !== null,
     );
     setItems(validItems);
   }, []);
@@ -365,7 +365,7 @@ export function RovingTabindexGroup({
         // Preserve original ref if exists
         const originalRef = (child as unknown).ref;
         if (originalRef) {
-          if (typeof originalRef === 'function') {
+          if (typeof originalRef === "function") {
             originalRef(element);
           } else {
             originalRef.current = element;
@@ -391,7 +391,7 @@ export function RovingTabindexGroup({
  * Grid-based roving tabindex for 2D navigation
  */
 export interface GridRovingTabindexOptions
-  extends Omit<RovingTabindexOptions, 'orientation' | 'items'> {
+  extends Omit<RovingTabindexOptions, "orientation" | "items"> {
   items: Array<Array<HTMLElement>>;
   wrap?: boolean;
   onCellChange?: (element: HTMLElement, row: number, col: number) => void;
@@ -423,9 +423,9 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
         if (cell) {
           const isCurrent =
             rowIndex === currentCell.row && colIndex === currentCell.col;
-          cell.setAttribute('tabindex', isCurrent ? '0' : '-1');
-          cell.setAttribute('aria-rowindex', String(rowIndex + 1));
-          cell.setAttribute('aria-colindex', String(colIndex + 1));
+          cell.setAttribute("tabindex", isCurrent ? "0" : "-1");
+          cell.setAttribute("aria-rowindex", String(rowIndex + 1));
+          cell.setAttribute("aria-colindex", String(colIndex + 1));
         }
       }
     }
@@ -442,12 +442,12 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
   const focusCell = useCallback(
     (row: number, col: number) => {
       const cell = items[row]?.[col];
-      if (cell && !cell.hasAttribute('disabled')) {
+      if (cell && !cell.hasAttribute("disabled")) {
         cell.focus({ preventScroll });
         setCurrentCell({ row, col });
       }
     },
-    [items, preventScroll]
+    [items, preventScroll],
   );
 
   const findNextEnabledCell = useCallback(
@@ -455,7 +455,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
       startRow: number,
       startCol: number,
       rowDelta: number,
-      colDelta: number
+      colDelta: number,
     ): { row: number; col: number } | null => {
       const numberRows = items.length;
       const numberCols = Math.max(...items.map((row) => row.length));
@@ -490,7 +490,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
         }
 
         const cell = items[row]?.[col];
-        if (cell && !cell.hasAttribute('disabled')) {
+        if (cell && !cell.hasAttribute("disabled")) {
           return { row, col };
         }
 
@@ -499,7 +499,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
 
       return;
     },
-    [items, wrap]
+    [items, wrap],
   );
 
   const handleKeyDown = useCallback(
@@ -509,12 +509,12 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
       let newCell = { ...currentCell };
 
       switch (key) {
-        case 'ArrowUp': {
+        case "ArrowUp": {
           const upCell = findNextEnabledCell(
             currentCell.row,
             currentCell.col,
             -1,
-            0
+            0,
           );
           if (upCell) {
             newCell = upCell;
@@ -523,12 +523,12 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
           break;
         }
 
-        case 'ArrowDown': {
+        case "ArrowDown": {
           const downCell = findNextEnabledCell(
             currentCell.row,
             currentCell.col,
             1,
-            0
+            0,
           );
           if (downCell) {
             newCell = downCell;
@@ -537,12 +537,12 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
           break;
         }
 
-        case 'ArrowLeft': {
+        case "ArrowLeft": {
           const leftCell = findNextEnabledCell(
             currentCell.row,
             currentCell.col,
             0,
-            -1
+            -1,
           );
           if (leftCell) {
             newCell = leftCell;
@@ -551,12 +551,12 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
           break;
         }
 
-        case 'ArrowRight': {
+        case "ArrowRight": {
           const rightCell = findNextEnabledCell(
             currentCell.row,
             currentCell.col,
             0,
-            1
+            1,
           );
           if (rightCell) {
             newCell = rightCell;
@@ -565,7 +565,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
           break;
         }
 
-        case 'Home': {
+        case "Home": {
           if (homeEndKeys) {
             if (event.ctrlKey) {
               // Go to first cell
@@ -586,7 +586,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
           break;
         }
 
-        case 'End': {
+        case "End": {
           if (homeEndKeys) {
             if (event.ctrlKey) {
               // Go to last cell
@@ -596,7 +596,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
                 lastRow + 1,
                 lastCol + 1,
                 0,
-                -1
+                -1,
               );
               if (lastCell) {
                 newCell = lastCell;
@@ -608,7 +608,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
                 currentCell.row,
                 items[currentCell.row]?.length || 0,
                 0,
-                -1
+                -1,
               );
               if (lastInRow) {
                 newCell = lastInRow;
@@ -642,7 +642,7 @@ export function useGridRovingTabindex(options: GridRovingTabindexOptions) {
         }
       }
     },
-    [currentCell, findNextEnabledCell, homeEndKeys, focusCell, items]
+    [currentCell, findNextEnabledCell, homeEndKeys, focusCell, items],
   );
 
   return {

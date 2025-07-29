@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import {
   NotificationCenter,
   type NotificationItem,
-} from './glass-notification';
+} from "./glass-notification";
 
 const meta = {
-  title: 'Components/GlassNotification',
+  title: "Components/GlassNotification",
   component: NotificationCenter,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
         component: `
@@ -27,7 +27,7 @@ actions, and real-time updates. It includes features like mark as read, dismiss,
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="flex min-h-[500px] justify-end p-8">
@@ -37,24 +37,24 @@ actions, and real-time updates. It includes features like mark as read, dismiss,
   ],
   argTypes: {
     notifications: {
-      description: 'Array of notification items',
-      control: { type: 'object' },
+      description: "Array of notification items",
+      control: { type: "object" },
     },
     onMarkAsRead: {
-      description: 'Callback when a notification is marked as read',
-      action: 'marked as read',
+      description: "Callback when a notification is marked as read",
+      action: "marked as read",
     },
     onMarkAllAsRead: {
-      description: 'Callback when all notifications are marked as read',
-      action: 'marked all as read',
+      description: "Callback when all notifications are marked as read",
+      action: "marked all as read",
     },
     onDismiss: {
-      description: 'Callback when a notification is dismissed',
-      action: 'dismissed',
+      description: "Callback when a notification is dismissed",
+      action: "dismissed",
     },
     className: {
-      description: 'Additional CSS classes',
-      control: { type: 'text' },
+      description: "Additional CSS classes",
+      control: { type: "text" },
     },
   },
 } satisfies Meta<typeof NotificationCenter>;
@@ -65,60 +65,60 @@ type Story = StoryObj<typeof meta>;
 // Sample notifications data
 const sampleNotifications: Array<NotificationItem> = [
   {
-    id: '1',
-    title: 'Welcome to GlassUI',
+    id: "1",
+    title: "Welcome to GlassUI",
     message:
-      'Thanks for trying out our notification system. Click to mark as read.',
-    type: 'success',
+      "Thanks for trying out our notification system. Click to mark as read.",
+    type: "success",
     timestamp: new Date(Date.now() - 60000), // 1 minute ago
     read: false,
     action: {
-      label: 'Get Started',
-      onClick: () => console.log('Get started clicked'),
+      label: "Get Started",
+      onClick: () => console.log("Get started clicked"),
     },
   },
   {
-    id: '2',
-    title: 'New Feature Available',
-    message: 'Check out our new dark mode theme. It looks amazing!',
-    type: 'info',
+    id: "2",
+    title: "New Feature Available",
+    message: "Check out our new dark mode theme. It looks amazing!",
+    type: "info",
     timestamp: new Date(Date.now() - 300000), // 5 minutes ago
     read: false,
   },
   {
-    id: '3',
-    title: 'System Update',
-    message: 'Your system will restart in 10 minutes to apply updates.',
-    type: 'warning',
+    id: "3",
+    title: "System Update",
+    message: "Your system will restart in 10 minutes to apply updates.",
+    type: "warning",
     timestamp: new Date(Date.now() - 1800000), // 30 minutes ago
     read: true,
     action: {
-      label: 'Postpone',
-      onClick: () => console.log('Update postponed'),
+      label: "Postpone",
+      onClick: () => console.log("Update postponed"),
     },
   },
   {
-    id: '4',
-    title: 'Error Detected',
-    message: 'Failed to save your changes. Please try again.',
-    type: 'error',
+    id: "4",
+    title: "Error Detected",
+    message: "Failed to save your changes. Please try again.",
+    type: "error",
     timestamp: new Date(Date.now() - 3600000), // 1 hour ago
     read: true,
     action: {
-      label: 'Retry',
-      onClick: () => console.log('Retrying save'),
+      label: "Retry",
+      onClick: () => console.log("Retrying save"),
     },
   },
   {
-    id: '5',
-    title: 'Team Invitation',
-    message: 'John Doe invited you to join the Design Team.',
-    type: 'system',
+    id: "5",
+    title: "Team Invitation",
+    message: "John Doe invited you to join the Design Team.",
+    type: "system",
     timestamp: new Date(Date.now() - 86400000), // 1 day ago
     read: false,
     action: {
-      label: 'Accept',
-      onClick: () => console.log('Invitation accepted'),
+      label: "Accept",
+      onClick: () => console.log("Invitation accepted"),
     },
   },
 ];
@@ -159,7 +159,7 @@ export const Interactive: Story = {
 
     const handleMarkAsRead = (id: string) => {
       setNotifications((prev) =>
-        prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+        prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
       );
     };
 
@@ -171,7 +171,7 @@ export const Interactive: Story = {
       setNotifications((prev) => prev.filter((n) => n.id !== id));
     };
 
-    const addNotification = (type: NotificationItem['type']) => {
+    const addNotification = (type: NotificationItem["type"]) => {
       const newNotification: NotificationItem = {
         id: Date.now().toString(),
         title: `New ${type} notification`,
@@ -188,35 +188,35 @@ export const Interactive: Story = {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => addNotification('success')}
+            onClick={() => addNotification("success")}
             className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
           >
             Add Success
           </button>
           <button
             type="button"
-            onClick={() => addNotification('error')}
+            onClick={() => addNotification("error")}
             className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
           >
             Add Error
           </button>
           <button
             type="button"
-            onClick={() => addNotification('warning')}
+            onClick={() => addNotification("warning")}
             className="rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
           >
             Add Warning
           </button>
           <button
             type="button"
-            onClick={() => addNotification('info')}
+            onClick={() => addNotification("info")}
             className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
           >
             Add Info
           </button>
           <button
             type="button"
-            onClick={() => addNotification('system')}
+            onClick={() => addNotification("system")}
             className="rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
           >
             Add System
@@ -240,42 +240,42 @@ export const NotificationTypes: Story = {
   args: {
     notifications: [
       {
-        id: 'success',
-        title: 'Success Notification',
-        message: 'Your changes have been saved successfully.',
-        type: 'success',
+        id: "success",
+        title: "Success Notification",
+        message: "Your changes have been saved successfully.",
+        type: "success",
         timestamp: new Date(),
         read: false,
       },
       {
-        id: 'error',
-        title: 'Error Notification',
-        message: 'An error occurred while processing your request.',
-        type: 'error',
+        id: "error",
+        title: "Error Notification",
+        message: "An error occurred while processing your request.",
+        type: "error",
         timestamp: new Date(),
         read: false,
       },
       {
-        id: 'warning',
-        title: 'Warning Notification',
-        message: 'Your session will expire in 5 minutes.',
-        type: 'warning',
+        id: "warning",
+        title: "Warning Notification",
+        message: "Your session will expire in 5 minutes.",
+        type: "warning",
         timestamp: new Date(),
         read: false,
       },
       {
-        id: 'info',
-        title: 'Info Notification',
-        message: 'New features are now available in your dashboard.',
-        type: 'info',
+        id: "info",
+        title: "Info Notification",
+        message: "New features are now available in your dashboard.",
+        type: "info",
         timestamp: new Date(),
         read: false,
       },
       {
-        id: 'system',
-        title: 'System Notification',
-        message: 'Scheduled maintenance will begin at midnight.',
-        type: 'system',
+        id: "system",
+        title: "System Notification",
+        message: "Scheduled maintenance will begin at midnight.",
+        type: "system",
         timestamp: new Date(),
         read: false,
       },
@@ -288,24 +288,24 @@ export const LongContent: Story = {
   args: {
     notifications: [
       {
-        id: '1',
-        title: 'Very Long Notification Title That Should Be Truncated Properly',
+        id: "1",
+        title: "Very Long Notification Title That Should Be Truncated Properly",
         message:
-          'This is an extremely long notification message that contains a lot of text to test how the component handles overflow and text truncation. The component should display this gracefully without breaking the layout.',
-        type: 'info',
+          "This is an extremely long notification message that contains a lot of text to test how the component handles overflow and text truncation. The component should display this gracefully without breaking the layout.",
+        type: "info",
         timestamp: new Date(),
         read: false,
         action: {
-          label: 'View Details',
-          onClick: () => console.log('View details clicked'),
+          label: "View Details",
+          onClick: () => console.log("View details clicked"),
         },
       },
       {
-        id: '2',
-        title: 'Another Long Title',
+        id: "2",
+        title: "Another Long Title",
         message:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        type: 'warning',
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        type: "warning",
         timestamp: new Date(),
         read: false,
       },
@@ -320,9 +320,9 @@ export const ManyNotifications: Story = {
       id: i.toString(),
       title: `Notification ${i + 1}`,
       message: `This is notification number ${i + 1} in a long list.`,
-      type: ['success', 'error', 'warning', 'info', 'system'][
+      type: ["success", "error", "warning", "info", "system"][
         i % 5
-      ] as NotificationItem['type'],
+      ] as NotificationItem["type"],
       timestamp: new Date(Date.now() - i * 60000),
       read: i % 3 === 0,
     })),
@@ -333,25 +333,25 @@ export const ManyNotifications: Story = {
 export const RealTimeUpdates: Story = {
   render: () => {
     const [notifications, setNotifications] = useState<Array<NotificationItem>>(
-      []
+      [],
     );
 
     // Simulate real-time notifications
     useState(() => {
       const interval = setInterval(() => {
-        const types: Array<NotificationItem['type']> = [
-          'success',
-          'error',
-          'warning',
-          'info',
-          'system',
+        const types: Array<NotificationItem["type"]> = [
+          "success",
+          "error",
+          "warning",
+          "info",
+          "system",
         ];
         const messages = [
-          'New user signed up',
-          'Payment received',
-          'Server response slow',
-          'Backup completed',
-          'New message received',
+          "New user signed up",
+          "Payment received",
+          "Server response slow",
+          "Backup completed",
+          "New message received",
         ];
 
         const newNotification: NotificationItem = {
@@ -379,12 +379,12 @@ export const RealTimeUpdates: Story = {
             notifications={notifications}
             onMarkAsRead={(id) => {
               setNotifications((prev) =>
-                prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+                prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
               );
             }}
             onMarkAllAsRead={() => {
               setNotifications((prev) =>
-                prev.map((n) => ({ ...n, read: true }))
+                prev.map((n) => ({ ...n, read: true })),
               );
             }}
             onDismiss={(id) => {
@@ -415,7 +415,7 @@ export const DarkTheme: Story = {
 export const CustomStyling: Story = {
   args: {
     notifications: sampleNotifications.slice(0, 3),
-    className: 'custom-notification-center',
+    className: "custom-notification-center",
   },
   decorators: [
     (Story) => (

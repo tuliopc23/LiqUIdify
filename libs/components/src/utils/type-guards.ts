@@ -1,4 +1,4 @@
-import is from '@sindresorhus/is';
+import is from "@sindresorhus/is";
 import type {
   Except,
   LiteralUnion,
@@ -8,14 +8,14 @@ import type {
   SetOptional,
   SetRequired,
   ValueOf,
-} from 'type-fest';
+} from "type-fest";
 
 // Re-export commonly used is functions for convenience
 export { is };
 
 // Custom type guards for Glass UI components
 export const isGlassComponent = (value: unknown): value is HTMLElement => {
-  return is.htmlElement(value) && value.classList.contains('glass-');
+  return is.htmlElement(value) && value.classList.contains("glass-");
 };
 
 export const isValidOpacity = (value: unknown): value is number => {
@@ -28,11 +28,11 @@ export const isValidBlur = (value: unknown): value is number => {
 
 // Type utilities using type-fest
 export type GlassVariant = LiteralUnion<
-  'default' | 'subtle' | 'intense' | 'dark',
+  "default" | "subtle" | "intense" | "dark",
   string
 >;
 
-export type GlassSize = LiteralUnion<'xs' | 'sm' | 'md' | 'lg' | 'xl', string>;
+export type GlassSize = LiteralUnion<"xs" | "sm" | "md" | "lg" | "xl", string>;
 
 // Component props utilities
 export type WithClassName<T> = Merge<T, { className?: string }>;
@@ -63,17 +63,17 @@ export const validateGlassProps = (props: unknown) => {
 
   const glassProp = props as Record<string, unknown>;
 
-  if ('opacity' in glassProp) {
+  if ("opacity" in glassProp) {
     is.assert.number(glassProp.opacity);
     if (!isValidOpacity(glassProp.opacity)) {
-      throw new TypeError('Opacity must be between 0 and 1');
+      throw new TypeError("Opacity must be between 0 and 1");
     }
   }
 
-  if ('blur' in glassProp) {
+  if ("blur" in glassProp) {
     is.assert.number(glassProp.blur);
     if (!isValidBlur(glassProp.blur)) {
-      throw new TypeError('Blur must be between 0 and 100');
+      throw new TypeError("Blur must be between 0 and 100");
     }
   }
 
@@ -82,12 +82,12 @@ export const validateGlassProps = (props: unknown) => {
 
 // Type-safe event handler creator
 export const createEventHandler = <T extends HTMLElement, E extends Event>(
-  handler: (event: E, element: T) => void
+  handler: (event: E, element: T) => void,
 ) => {
   return (event: E) => {
     const element = event.currentTarget as T;
     if (!is.htmlElement(element)) {
-      throw new TypeError('Event target must be an HTML element');
+      throw new TypeError("Event target must be an HTML element");
     }
     handler(event, element);
   };

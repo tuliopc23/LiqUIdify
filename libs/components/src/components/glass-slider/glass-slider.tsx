@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import { cn, getGlassClass } from '@/core/utils/classname';
+import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassSliderProps {
   min?: number;
@@ -11,7 +11,7 @@ export interface GlassSliderProps {
   disabled?: boolean;
   className?: string;
   showValue?: boolean;
-  variant?: 'default' | 'minimal';
+  variant?: "default" | "minimal";
 }
 
 export const GlassSlider = React.memo(
@@ -26,10 +26,10 @@ export const GlassSlider = React.memo(
         disabled,
         className,
         showValue = true,
-        variant = 'default',
+        variant = "default",
         ...props
       },
-      ref
+      ref,
     ) => {
       const [currentValue, setCurrentValue] = useState(value);
       const [isDragging, setIsDragging] = useState(false);
@@ -51,7 +51,7 @@ export const GlassSlider = React.memo(
           const rect = sliderRef.current.getBoundingClientRect();
           const percentage = Math.max(
             0,
-            Math.min(1, (clientX - rect.left) / rect.width)
+            Math.min(1, (clientX - rect.left) / rect.width),
           );
           const newValue = min + percentage * (max - min);
           const steppedValue = Math.round(newValue / step) * step;
@@ -60,7 +60,7 @@ export const GlassSlider = React.memo(
           setCurrentValue(clampedValue);
           onChange?.(clampedValue);
         },
-        [min, max, step, onChange]
+        [min, max, step, onChange],
       );
 
       const handleMouseMove = useCallback(
@@ -70,7 +70,7 @@ export const GlassSlider = React.memo(
           }
           updateValue(e.clientX);
         },
-        [isDragging, disabled, updateValue]
+        [isDragging, disabled, updateValue],
       );
 
       const handleMouseUp = useCallback(() => {
@@ -87,21 +87,21 @@ export const GlassSlider = React.memo(
       };
 
       useEffect(() => {
-        if (isDragging && typeof document !== 'undefined') {
-          document.addEventListener('mousemove', handleMouseMove);
-          document.addEventListener('mouseup', handleMouseUp);
+        if (isDragging && typeof document !== "undefined") {
+          document.addEventListener("mousemove", handleMouseMove);
+          document.addEventListener("mouseup", handleMouseUp);
         }
 
         return () => {
-          if (typeof document !== 'undefined') {
-            document.removeEventListener('mousemove', handleMouseMove);
-            document.removeEventListener('mouseup', handleMouseUp);
+          if (typeof document !== "undefined") {
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
           }
         };
       }, [isDragging, handleMouseMove, handleMouseUp]);
 
       return (
-        <div ref={ref} className={cn('relative w-full', className)} {...props}>
+        <div ref={ref} className={cn("relative w-full", className)} {...props}>
           {showValue && (
             <div className="mb-3 flex items-center justify-between">
               <span className="text-gray-600 text-sm dark:text-gray-400">
@@ -117,10 +117,10 @@ export const GlassSlider = React.memo(
           <div
             ref={sliderRef}
             className={cn(
-              'relative h-2 cursor-pointer rounded-full',
-              variant === 'default' && getGlassClass('default'),
-              variant === 'minimal' && 'bg-gray-200 dark:bg-gray-700',
-              disabled && 'cursor-not-allowed opacity-50'
+              "relative h-2 cursor-pointer rounded-full",
+              variant === "default" && getGlassClass("default"),
+              variant === "minimal" && "bg-gray-200 dark:bg-gray-700",
+              disabled && "cursor-not-allowed opacity-50",
             )}
             onMouseDown={handleMouseDown}
           >
@@ -136,13 +136,13 @@ export const GlassSlider = React.memo(
             <div
               ref={thumbRef}
               className={cn(
-                '-translate-y-1/2 -translate-x-1/2 absolute top-1/2 transform',
-                'h-5 w-5 rounded-full transition-all duration-200',
-                getGlassClass('elevated'),
-                'border-2 border-white/30 dark:border-white/20',
-                'hover:scale-110 active:scale-95',
-                isDragging && 'scale-110 ring-4 ring-blue-500/30',
-                disabled && 'cursor-not-allowed'
+                "-translate-y-1/2 -translate-x-1/2 absolute top-1/2 transform",
+                "h-5 w-5 rounded-full transition-all duration-200",
+                getGlassClass("elevated"),
+                "border-2 border-white/30 dark:border-white/20",
+                "hover:scale-110 active:scale-95",
+                isDragging && "scale-110 ring-4 ring-blue-500/30",
+                disabled && "cursor-not-allowed",
               )}
               style={{ left: `${percentage}%` }}
             />
@@ -155,8 +155,8 @@ export const GlassSlider = React.memo(
           </div>
         </div>
       );
-    }
-  )
+    },
+  ),
 );
 
-GlassSlider.displayName = 'GlassSlider';
+GlassSlider.displayName = "GlassSlider";

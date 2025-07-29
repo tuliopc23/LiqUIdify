@@ -5,4 +5,4 @@ export {
   PulseSpinner,
   RingSpinner,
   WaveSpinner,
-} from './glass-spinner';
+} from "./glass-spinner";

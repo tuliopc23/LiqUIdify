@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Bell,
   File,
@@ -7,17 +7,17 @@ import {
   MessageCircle,
   Settings,
   Shield,
-} from 'lucide-react';
-import React from 'react';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { Card } from '../glass-card-refactored/glass-card';
-import { GlassCheckbox } from './glass-checkbox';
+} from "lucide-react";
+import React from "react";
+import { GlassButton } from "../glass-button-refactored/glass-button";
+import { Card } from "../glass-card-refactored/glass-card";
+import { GlassCheckbox } from "./glass-checkbox";
 
 const meta = {
-  title: 'Components/Forms/GlassCheckbox',
+  title: "Components/Forms/GlassCheckbox",
   component: GlassCheckbox,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -79,117 +79,117 @@ The checkbox component follows WAI-ARIA guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Content
     label: {
-      control: 'text',
-      description: 'Label text for the checkbox',
+      control: "text",
+      description: "Label text for the checkbox",
       table: {
-        type: { summary: 'string' },
-        category: 'Content',
+        type: { summary: "string" },
+        category: "Content",
       },
     },
 
     // State
     checked: {
-      control: 'boolean',
-      description: 'Checked state of the checkbox',
+      control: "boolean",
+      description: "Checked state of the checkbox",
       table: {
-        type: { summary: 'boolean' },
-        category: 'State',
+        type: { summary: "boolean" },
+        category: "State",
       },
     },
     defaultChecked: {
-      control: 'boolean',
-      description: 'Default checked state (uncontrolled)',
+      control: "boolean",
+      description: "Default checked state (uncontrolled)",
       table: {
-        type: { summary: 'boolean' },
-        category: 'State',
+        type: { summary: "boolean" },
+        category: "State",
       },
     },
     indeterminate: {
-      control: 'boolean',
-      description: 'Indeterminate state (partially checked)',
+      control: "boolean",
+      description: "Indeterminate state (partially checked)",
       table: {
-        type: { summary: 'boolean' },
-        category: 'State',
+        type: { summary: "boolean" },
+        category: "State",
       },
     },
     disabled: {
-      control: 'boolean',
-      description: 'Disabled state',
+      control: "boolean",
+      description: "Disabled state",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'State',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "State",
       },
     },
 
     // Appearance
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
       table: {
-        type: { summary: 'string' },
-        category: 'Appearance',
+        type: { summary: "string" },
+        category: "Appearance",
       },
     },
 
     // HTML Props
     id: {
-      control: 'text',
-      description: 'HTML id attribute',
+      control: "text",
+      description: "HTML id attribute",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
     name: {
-      control: 'text',
-      description: 'HTML name attribute',
+      control: "text",
+      description: "HTML name attribute",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
     value: {
-      control: 'text',
-      description: 'HTML value attribute',
+      control: "text",
+      description: "HTML value attribute",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
     required: {
-      control: 'boolean',
-      description: 'Required field',
+      control: "boolean",
+      description: "Required field",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'HTML Props',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "HTML Props",
       },
     },
 
     // Events
     onChange: {
-      action: 'changed',
-      description: 'Change event handler',
+      action: "changed",
+      description: "Change event handler",
       table: {
-        type: { summary: '(event: ChangeEvent<HTMLInputElement>) => void' },
-        category: 'Events',
+        type: { summary: "(event: ChangeEvent<HTMLInputElement>) => void" },
+        category: "Events",
       },
     },
     onFocus: {
-      action: 'focused',
+      action: "focused",
       table: {
-        category: 'Events',
+        category: "Events",
       },
     },
     onBlur: {
-      action: 'blurred',
+      action: "blurred",
       table: {
-        category: 'Events',
+        category: "Events",
       },
     },
   },
@@ -205,7 +205,7 @@ type Story = StoryObj<typeof meta>;
 // Default story - Interactive playground
 export const Playground: Story = {
   args: {
-    label: 'Check me',
+    label: "Check me",
   },
 };
 
@@ -311,22 +311,22 @@ export const InteractiveDemo: Story = {
             <GlassCheckbox
               label="Option 1"
               checked={checkedItems.item1}
-              onChange={handleChildChange('item1')}
+              onChange={handleChildChange("item1")}
             />
             <GlassCheckbox
               label="Option 2"
               checked={checkedItems.item2}
-              onChange={handleChildChange('item2')}
+              onChange={handleChildChange("item2")}
             />
             <GlassCheckbox
               label="Option 3"
               checked={checkedItems.item3}
-              onChange={handleChildChange('item3')}
+              onChange={handleChildChange("item3")}
             />
             <GlassCheckbox
               label="Option 4"
               checked={checkedItems.item4}
-              onChange={handleChildChange('item4')}
+              onChange={handleChildChange("item4")}
             />
           </div>
 
@@ -379,18 +379,18 @@ export const FormExamples: Story = {
                 <GlassCheckbox
                   label="I accept the Terms and Conditions"
                   checked={formData.terms}
-                  onChange={handleChange('terms')}
+                  onChange={handleChange("terms")}
                   required
                 />
                 <GlassCheckbox
                   label="Subscribe to newsletter"
                   checked={formData.newsletter}
-                  onChange={handleChange('newsletter')}
+                  onChange={handleChange("newsletter")}
                 />
                 <GlassCheckbox
                   label="Send me promotional emails"
                   checked={formData.marketing}
-                  onChange={handleChange('marketing')}
+                  onChange={handleChange("marketing")}
                 />
               </div>
               <GlassButton
@@ -675,7 +675,7 @@ export const ThemeShowcase: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };

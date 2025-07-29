@@ -1,11 +1,11 @@
 #!/usr/bin/env bun
-import { copyFileSync, existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { copyFileSync, existsSync, mkdirSync } from "node:fs";
+import { join } from "node:path";
 
-const distDir = join(process.cwd(), 'dist/libs/components');
-const cssSource = join(process.cwd(), 'dist/liquidui.css');
-const cssTarget = join(distDir, 'liquidui.css');
-const stylesTarget = join(distDir, 'styles.css');
+const distDir = join(process.cwd(), "dist/libs/components");
+const cssSource = join(process.cwd(), "dist/liquidui.css");
+const cssTarget = join(distDir, "liquidui.css");
+const stylesTarget = join(distDir, "styles.css");
 
 // Ensure dist directory exists
 if (!existsSync(distDir)) {
@@ -16,8 +16,8 @@ if (!existsSync(distDir)) {
 if (existsSync(cssSource)) {
   copyFileSync(cssSource, cssTarget);
   copyFileSync(cssSource, stylesTarget);
-  console.log('✅ CSS files copied successfully');
+  console.log("✅ CSS files copied successfully");
 } else {
-  console.error('❌ CSS source file not found:', cssSource);
+  console.error("❌ CSS source file not found:", cssSource);
   process.exit(1);
 }

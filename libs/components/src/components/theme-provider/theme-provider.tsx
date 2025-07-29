@@ -1,4 +1,4 @@
-import { ThemeProvider as BaseThemeProvider } from '@/hooks/use-theme';
+import { ThemeProvider as BaseThemeProvider } from "@/hooks/use-theme";
 
 interface ThemeProviderProps {
   children: React.ReactNode;

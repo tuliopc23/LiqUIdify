@@ -1,37 +1,37 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Download, Edit, Save, Trash } from 'lucide-react';
-import React from 'react';
-import { GlassButton } from '@/components/glass-button-refactored/glass-button';
-import { GlassCard } from '@/components/glass-card-refactored/glass-card';
-import { GlassInput } from '@/components/glass-input/glass-input';
-import { GlassVisuallyHidden } from '@/components/glass-visually-hidden/glass-visually-hidden';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Download, Edit, Save, Trash } from "lucide-react";
+import React from "react";
+import { GlassButton } from "@/components/glass-button-refactored/glass-button";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
+import { GlassInput } from "@/components/glass-input/glass-input";
+import { GlassVisuallyHidden } from "@/components/glass-visually-hidden/glass-visually-hidden";
 
 const meta = {
-  title: 'Components/Glass Visually Hidden',
+  title: "Components/Glass Visually Hidden",
   component: GlassVisuallyHidden,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A component that visually hides content while keeping it accessible to screen readers. Essential for providing context and additional information to assistive technologies.',
+          "A component that visually hides content while keeping it accessible to screen readers. Essential for providing context and additional information to assistive technologies.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     children: {
       description:
-        'Content to be visually hidden but accessible to screen readers',
-      control: { type: 'text' },
+        "Content to be visually hidden but accessible to screen readers",
+      control: { type: "text" },
     },
     as: {
-      description: 'The element type to render',
-      control: { type: 'text' },
+      description: "The element type to render",
+      control: { type: "text" },
     },
     focusable: {
-      description: 'Whether the element can receive focus',
-      control: { type: 'boolean' },
+      description: "Whether the element can receive focus",
+      control: { type: "boolean" },
     },
   },
 } satisfies Meta<typeof GlassVisuallyHidden>;
@@ -124,9 +124,9 @@ export const Default: Story = {
 export const FormAccessibility: Story = {
   render: () => {
     const [formData, setFormData] = React.useState({
-      username: '',
-      email: '',
-      password: '',
+      username: "",
+      email: "",
+      password: "",
     });
 
     return (
@@ -135,7 +135,7 @@ export const FormAccessibility: Story = {
           <h2 className="mb-4 font-bold text-xl">
             Accessible Form
             <GlassVisuallyHidden>
-              {' '}
+              {" "}
               - All fields are required
             </GlassVisuallyHidden>
           </h2>
@@ -148,7 +148,7 @@ export const FormAccessibility: Story = {
               >
                 Username
                 <GlassVisuallyHidden>
-                  {' '}
+                  {" "}
                   (3-20 characters, letters and numbers only)
                 </GlassVisuallyHidden>
               </label>
@@ -171,7 +171,7 @@ export const FormAccessibility: Story = {
               <label htmlFor="email" className="mb-1 block font-medium text-sm">
                 Email
                 <GlassVisuallyHidden>
-                  {' '}
+                  {" "}
                   (must be a valid email address)
                 </GlassVisuallyHidden>
               </label>
@@ -193,7 +193,7 @@ export const FormAccessibility: Story = {
               >
                 Password
                 <GlassVisuallyHidden>
-                  {' '}
+                  {" "}
                   (minimum 8 characters)
                 </GlassVisuallyHidden>
               </label>
@@ -210,14 +210,14 @@ export const FormAccessibility: Story = {
               <GlassVisuallyHidden id="password-strength" aria-live="polite">
                 {formData.password.length < 8
                   ? `Password is ${formData.password.length} characters, needs ${8 - formData.password.length} more`
-                  : 'Password meets minimum length requirement'}
+                  : "Password meets minimum length requirement"}
               </GlassVisuallyHidden>
             </div>
 
             <GlassButton type="submit" variant="primary" fullWidth>
               Create Account
               <GlassVisuallyHidden>
-                {' '}
+                {" "}
                 (all fields must be filled correctly)
               </GlassVisuallyHidden>
             </GlassButton>
@@ -230,7 +230,7 @@ export const FormAccessibility: Story = {
     docs: {
       description: {
         story:
-          'A form with visually hidden helper text and requirements for screen readers',
+          "A form with visually hidden helper text and requirements for screen readers",
       },
     },
   },
@@ -239,9 +239,9 @@ export const FormAccessibility: Story = {
 export const DataTable: Story = {
   render: () => {
     const data = [
-      { id: 1, name: 'John Doe', role: 'Developer', status: 'Active' },
-      { id: 2, name: 'Jane Smith', role: 'Designer', status: 'Away' },
-      { id: 3, name: 'Bob Johnson', role: 'Manager', status: 'Active' },
+      { id: 1, name: "John Doe", role: "Developer", status: "Active" },
+      { id: 2, name: "Jane Smith", role: "Designer", status: "Away" },
+      { id: 3, name: "Bob Johnson", role: "Manager", status: "Active" },
     ];
 
     return (
@@ -272,9 +272,9 @@ export const DataTable: Story = {
                     <td className="px-4 py-3">
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs ${
-                          member.status === 'Active'
-                            ? 'bg-green-500/20 text-green-500'
-                            : 'bg-yellow-500/20 text-yellow-500'
+                          member.status === "Active"
+                            ? "bg-green-500/20 text-green-500"
+                            : "bg-yellow-500/20 text-yellow-500"
                         }`}
                       >
                         <span className="h-2 w-2 rounded-full bg-current" />
@@ -288,7 +288,7 @@ export const DataTable: Story = {
                       >
                         Edit
                         <GlassVisuallyHidden>
-                          {' '}
+                          {" "}
                           {member.name}
                         </GlassVisuallyHidden>
                       </button>
@@ -302,7 +302,7 @@ export const DataTable: Story = {
           <div className="mt-4 text-[var(--text-secondary)] text-sm">
             <GlassVisuallyHidden>
               Table shows {data.length} team members.
-              {data.filter((m) => m.status === 'Active').length} are currently
+              {data.filter((m) => m.status === "Active").length} are currently
               active.
             </GlassVisuallyHidden>
             <p>Hover over the table to see hidden accessibility features.</p>
@@ -314,7 +314,7 @@ export const DataTable: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'A data table with visually hidden context for screen readers',
+        story: "A data table with visually hidden context for screen readers",
       },
     },
   },
@@ -322,13 +322,13 @@ export const DataTable: Story = {
 
 export const NavigationContext: Story = {
   render: () => {
-    const [currentPage, setCurrentPage] = React.useState('home');
+    const [currentPage, setCurrentPage] = React.useState("home");
 
     const navItems = [
-      { id: 'home', label: 'Home', badge: null },
-      { id: 'messages', label: 'Messages', badge: 3 },
-      { id: 'notifications', label: 'Notifications', badge: 12 },
-      { id: 'settings', label: 'Settings', badge: null },
+      { id: "home", label: "Home", badge: null },
+      { id: "messages", label: "Messages", badge: 3 },
+      { id: "notifications", label: "Notifications", badge: 12 },
+      { id: "settings", label: "Settings", badge: null },
     ];
 
     return (
@@ -346,10 +346,10 @@ export const NavigationContext: Story = {
                     onClick={() => setCurrentPage(item.id)}
                     className={`w-full rounded-lg px-4 py-3 text-left transition-all ${
                       currentPage === item.id
-                        ? 'bg-blue-500/20 text-blue-500'
-                        : 'hover:bg-white/5'
+                        ? "bg-blue-500/20 text-blue-500"
+                        : "hover:bg-white/5"
                     }`}
-                    aria-current={currentPage === item.id ? 'page' : undefined}
+                    aria-current={currentPage === item.id ? "page" : undefined}
                   >
                     <span className="flex items-center justify-between">
                       <span>{item.label}</span>
@@ -357,7 +357,7 @@ export const NavigationContext: Story = {
                         <span className="rounded-full bg-red-500 px-2 py-1 text-white text-xs">
                           {item.badge}
                           <GlassVisuallyHidden>
-                            {' '}
+                            {" "}
                             new {item.label.toLowerCase()}
                           </GlassVisuallyHidden>
                         </span>
@@ -374,7 +374,7 @@ export const NavigationContext: Story = {
 
           <div className="glass-effect mt-6 rounded-lg p-4">
             <p className="text-[var(--text-secondary)] text-sm">
-              Current page:{' '}
+              Current page:{" "}
               <strong>
                 {navItems.find((i) => i.id === currentPage)?.label}
               </strong>
@@ -388,7 +388,7 @@ export const NavigationContext: Story = {
     docs: {
       description: {
         story:
-          'Navigation menu with visually hidden context and status information',
+          "Navigation menu with visually hidden context and status information",
       },
     },
   },
@@ -397,7 +397,7 @@ export const NavigationContext: Story = {
 export const ComplexInteractions: Story = {
   render: () => {
     const [expandedCards, setExpandedCards] = React.useState<Set<number>>(
-      new Set()
+      new Set(),
     );
 
     const toggleCard = (id: number) => {
@@ -413,9 +413,9 @@ export const ComplexInteractions: Story = {
     };
 
     const cards = [
-      { id: 1, title: 'Project Alpha', status: 'In Progress', progress: 65 },
-      { id: 2, title: 'Project Beta', status: 'Completed', progress: 100 },
-      { id: 3, title: 'Project Gamma', status: 'Planning', progress: 15 },
+      { id: 1, title: "Project Alpha", status: "In Progress", progress: 65 },
+      { id: 2, title: "Project Beta", status: "Completed", progress: 100 },
+      { id: 3, title: "Project Gamma", status: "Planning", progress: 15 },
     ];
 
     return (
@@ -424,7 +424,7 @@ export const ComplexInteractions: Story = {
           <h2 className="mb-4 font-bold text-xl">
             Project Dashboard
             <GlassVisuallyHidden>
-              {' '}
+              {" "}
               - {cards.length} projects total
             </GlassVisuallyHidden>
           </h2>
@@ -446,7 +446,7 @@ export const ComplexInteractions: Story = {
                     aria-expanded={expandedCards.has(card.id)}
                     aria-controls={`details-${card.id}`}
                   >
-                    {expandedCards.has(card.id) ? 'Hide' : 'Show'} Details
+                    {expandedCards.has(card.id) ? "Hide" : "Show"} Details
                     <GlassVisuallyHidden> for {card.title}</GlassVisuallyHidden>
                   </button>
                 </div>
@@ -454,11 +454,11 @@ export const ComplexInteractions: Story = {
                 <div className="flex items-center gap-4 text-sm">
                   <span
                     className={`rounded px-2 py-1 text-xs ${
-                      card.status === 'Completed'
-                        ? 'bg-green-500/20 text-green-500'
-                        : card.status === 'In Progress'
-                          ? 'bg-blue-500/20 text-blue-500'
-                          : 'bg-gray-500/20 text-gray-500'
+                      card.status === "Completed"
+                        ? "bg-green-500/20 text-green-500"
+                        : card.status === "In Progress"
+                          ? "bg-blue-500/20 text-blue-500"
+                          : "bg-gray-500/20 text-gray-500"
                     }`}
                   >
                     {card.status}
@@ -508,7 +508,7 @@ export const ComplexInteractions: Story = {
     docs: {
       description: {
         story:
-          'Complex UI with multiple visually hidden elements providing rich context',
+          "Complex UI with multiple visually hidden elements providing rich context",
       },
     },
   },

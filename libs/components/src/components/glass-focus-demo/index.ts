@@ -1,1 +1,1 @@
-export { GlassFocusDemo } from './glass-focus-demo';
+export { GlassFocusDemo } from "./glass-focus-demo";

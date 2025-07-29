@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Check,
   Download,
@@ -7,8 +7,8 @@ import {
   Search,
   Settings,
   Star,
-} from 'lucide-react';
-import React from 'react';
+} from "lucide-react";
+import React from "react";
 import {
   GlassBadge,
   GlassButton,
@@ -19,21 +19,21 @@ import {
   GlassSlider,
   GlassSwitch,
   GlassTooltip,
-} from '../..';
-import { ThemeToggle } from '../../components/theme-toggle';
+} from "../..";
+import { ThemeToggle } from "../../components/theme-toggle";
 
 const meta = {
-  title: 'Design System/Theme Showcase',
+  title: "Design System/Theme Showcase",
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
         component:
-          'Comprehensive showcase of all components in both light and dark themes with consistent glassmorphism design.',
+          "Comprehensive showcase of all components in both light and dark themes with consistent glassmorphism design.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta;
 
 export default meta;
@@ -41,16 +41,16 @@ type Story = StoryObj<typeof meta>;
 
 export const CompleteShowcase: Story = {
   render: () => {
-    const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
-    const [email, setEmail] = React.useState('');
-    const [search, setSearch] = React.useState('');
+    const [theme, setTheme] = React.useState<"light" | "dark">("light");
+    const [email, setEmail] = React.useState("");
+    const [search, setSearch] = React.useState("");
     const [checked, setChecked] = React.useState(false);
     const [switchOn, setSwitchOn] = React.useState(true);
     const [progress, _setProgress] = React.useState(65);
     const [slider, setSlider] = React.useState(50);
 
     React.useEffect(() => {
-      document.documentElement.classList.remove('light', 'dark');
+      document.documentElement.classList.remove("light", "dark");
       document.documentElement.classList.add(theme);
       document.documentElement.dataset.theme = theme;
     }, [theme]);
@@ -62,9 +62,9 @@ export const CompleteShowcase: Story = {
           className="fixed inset-0 transition-all duration-700"
           style={{
             background:
-              theme === 'dark'
-                ? 'radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0.9) 35%, rgba(30, 41, 59, 0.95) 100%)'
-                : 'radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, rgba(248, 250, 252, 0.95) 35%, rgba(226, 232, 240, 0.98) 100%)',
+              theme === "dark"
+                ? "radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0.9) 35%, rgba(30, 41, 59, 0.95) 100%)"
+                : "radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, rgba(248, 250, 252, 0.95) 35%, rgba(226, 232, 240, 0.98) 100%)",
           }}
         />
 
@@ -340,7 +340,7 @@ export const CompleteShowcase: Story = {
                   different elements.
                 </p>
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                  {['Ripple', 'Scale', 'Glow', 'Magnetic'].map((effect) => (
+                  {["Ripple", "Scale", "Glow", "Magnetic"].map((effect) => (
                     <GlassButton
                       type="button"
                       key={effect}
@@ -371,7 +371,7 @@ export const LightTheme: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { default: 'light' },
+    backgrounds: { default: "light" },
   },
 };
 
@@ -388,7 +388,7 @@ export const DarkTheme: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { default: 'dark' },
+    backgrounds: { default: "dark" },
   },
 };
 

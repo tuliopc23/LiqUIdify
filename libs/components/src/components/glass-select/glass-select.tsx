@@ -1,7 +1,7 @@
-import { Check, ChevronDown } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import { Check, ChevronDown } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { cn, getGlassClass } from '@/core/utils/classname';
+import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface GlassSelectOption {
   value: string;
@@ -16,7 +16,7 @@ export interface GlassSelectProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
-  variant?: 'default' | 'search';
+  variant?: "default" | "search";
 }
 
 export const GlassSelect = React.memo(
@@ -26,16 +26,16 @@ export const GlassSelect = React.memo(
         options,
         value,
         onChange,
-        placeholder = 'Select an option',
+        placeholder = "Select an option",
         disabled,
         className,
-        variant: _variant = 'default',
+        variant: _variant = "default",
         ...props
       },
-      ref
+      ref,
     ) => {
       const [isOpen, setIsOpen] = useState(false);
-      const [selectedValue, setSelectedValue] = useState(value || '');
+      const [selectedValue, setSelectedValue] = useState(value || "");
       const selectRef = useRef<HTMLDivElement>(null);
 
       useEffect(() => {
@@ -54,12 +54,12 @@ export const GlassSelect = React.memo(
           }
         };
 
-        if (typeof document !== 'undefined') {
-          document.addEventListener('mousedown', handleClickOutside);
+        if (typeof document !== "undefined") {
+          document.addEventListener("mousedown", handleClickOutside);
         }
         return () => {
-          if (typeof document !== 'undefined') {
-            document.removeEventListener('mousedown', handleClickOutside);
+          if (typeof document !== "undefined") {
+            document.removeEventListener("mousedown", handleClickOutside);
           }
         };
       }, []);
@@ -75,7 +75,7 @@ export const GlassSelect = React.memo(
       return (
         <div
           ref={ref || selectRef}
-          className={cn('relative', className)}
+          className={cn("relative", className)}
           {...props}
         >
           <button
@@ -83,24 +83,24 @@ export const GlassSelect = React.memo(
             onClick={() => !disabled && setIsOpen(!isOpen)}
             disabled={disabled}
             className={cn(
-              getGlassClass('default'),
-              'w-full rounded-xl px-4 py-3 text-left',
-              'flex items-center justify-between',
-              'transition-all duration-200 ease-out',
-              'border border-white/20 dark:border-white/10',
-              'text-gray-900 dark:text-white',
-              'placeholder:text-gray-500 dark:placeholder:text-gray-400',
-              'focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500/50',
-              'hover:bg-white/10 dark:hover:bg-white/5',
-              disabled && 'cursor-not-allowed opacity-50',
-              isOpen && 'border-transparent ring-2 ring-blue-500/50'
+              getGlassClass("default"),
+              "w-full rounded-xl px-4 py-3 text-left",
+              "flex items-center justify-between",
+              "transition-all duration-200 ease-out",
+              "border border-white/20 dark:border-white/10",
+              "text-gray-900 dark:text-white",
+              "placeholder:text-gray-500 dark:placeholder:text-gray-400",
+              "focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500/50",
+              "hover:bg-white/10 dark:hover:bg-white/5",
+              disabled && "cursor-not-allowed opacity-50",
+              isOpen && "border-transparent ring-2 ring-blue-500/50",
             )}
           >
             <span
               className={cn(
                 selectedOption
-                  ? 'text-gray-900 dark:text-white'
-                  : 'text-gray-500 dark:text-gray-400'
+                  ? "text-gray-900 dark:text-white"
+                  : "text-gray-500 dark:text-gray-400",
               )}
             >
               {selectedOption ? selectedOption.label : placeholder}
@@ -108,8 +108,8 @@ export const GlassSelect = React.memo(
 
             <ChevronDown
               className={cn(
-                'h-4 w-4 text-gray-400 transition-transform duration-200',
-                isOpen && 'rotate-180'
+                "h-4 w-4 text-gray-400 transition-transform duration-200",
+                isOpen && "rotate-180",
               )}
             />
           </button>
@@ -117,10 +117,10 @@ export const GlassSelect = React.memo(
           {isOpen && (
             <div
               className={cn(
-                getGlassClass('elevated'),
-                'absolute z-50 mt-2 w-full rounded-xl border border-white/20 dark:border-white/10',
-                'max-h-60 overflow-auto',
-                'fade-in-0 zoom-in-95 animate-in duration-200'
+                getGlassClass("elevated"),
+                "absolute z-50 mt-2 w-full rounded-xl border border-white/20 dark:border-white/10",
+                "max-h-60 overflow-auto",
+                "fade-in-0 zoom-in-95 animate-in duration-200",
               )}
             >
               {options.map((option) => (
@@ -130,15 +130,15 @@ export const GlassSelect = React.memo(
                   onClick={() => !option.disabled && handleSelect(option.value)}
                   disabled={option.disabled}
                   className={cn(
-                    'w-full px-4 py-3 text-left transition-colors duration-200',
-                    'hover:bg-white/10 dark:hover:bg-white/5',
-                    'focus:bg-white/10 focus:outline-none dark:focus:bg-white/5',
-                    'flex items-center justify-between',
-                    'text-gray-900 dark:text-white',
-                    option.disabled && 'cursor-not-allowed opacity-50',
+                    "w-full px-4 py-3 text-left transition-colors duration-200",
+                    "hover:bg-white/10 dark:hover:bg-white/5",
+                    "focus:bg-white/10 focus:outline-none dark:focus:bg-white/5",
+                    "flex items-center justify-between",
+                    "text-gray-900 dark:text-white",
+                    option.disabled && "cursor-not-allowed opacity-50",
                     selectedValue === option.value &&
-                      'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-                    'first:rounded-t-xl last:rounded-b-xl'
+                      "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+                    "first:rounded-t-xl last:rounded-b-xl",
                   )}
                 >
                   <span>{option.label}</span>
@@ -151,8 +151,8 @@ export const GlassSelect = React.memo(
           )}
         </div>
       );
-    }
-  )
+    },
+  ),
 );
 
-GlassSelect.displayName = 'GlassSelect';
+GlassSelect.displayName = "GlassSelect";

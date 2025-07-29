@@ -3,7 +3,7 @@
  * Provides fallbacks when advanced features aren't supported
  */
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
 export interface FeatureSupport {
   animations: boolean;
@@ -81,42 +81,42 @@ export class GracefulDegradationManager {
     const support: Partial<FeatureSupport> = {};
 
     // Animation support
-    support.animations = this.checkCSSFeature('animation');
+    support.animations = this.checkCSSFeature("animation");
 
     // WebGL support
     support.webGL = this.checkWebGLSupport();
 
     // Service Worker support
-    support.serviceWorker = 'serviceWorker' in navigator;
+    support.serviceWorker = "serviceWorker" in navigator;
 
     // WebAssembly support
-    support.webAssembly = typeof WebAssembly !== 'undefined';
+    support.webAssembly = typeof WebAssembly !== "undefined";
 
     // Observer APIs
-    support.intersectionObserver = 'IntersectionObserver' in window;
-    support.resizeObserver = 'ResizeObserver' in window;
+    support.intersectionObserver = "IntersectionObserver" in window;
+    support.resizeObserver = "ResizeObserver" in window;
 
     // Media queries
-    support.matchMedia = 'matchMedia' in window;
+    support.matchMedia = "matchMedia" in window;
 
     // Clipboard API
-    support.clipboard = 'clipboard' in navigator;
+    support.clipboard = "clipboard" in navigator;
 
     // Geolocation
-    support.geolocation = 'geolocation' in navigator;
+    support.geolocation = "geolocation" in navigator;
 
     // Notifications
-    support.notifications = 'Notification' in window;
+    support.notifications = "Notification" in window;
 
     // Push API
-    support.push = 'PushManager' in window;
+    support.push = "PushManager" in window;
 
     // WebRTC
-    support.webRTC = 'RTCPeerConnection' in window;
+    support.webRTC = "RTCPeerConnection" in window;
 
     // Web Audio
     support.webAudio =
-      'AudioContext' in window || 'webkitAudioContext' in window;
+      "AudioContext" in window || "webkitAudioContext" in window;
 
     // Canvas
     support.canvas = this.checkCanvasSupport();
@@ -125,52 +125,52 @@ export class GracefulDegradationManager {
     support.webGL2 = this.checkWebGL2Support();
 
     // WebGPU
-    support.webGPU = 'gpu' in navigator;
+    support.webGPU = "gpu" in navigator;
 
     // File System Access API
-    support.fileSystem = 'showOpenFilePicker' in window;
+    support.fileSystem = "showOpenFilePicker" in window;
 
     // Web Share API
-    support.webShare = 'share' in navigator;
+    support.webShare = "share" in navigator;
 
     // Vibration API
-    support.vibration = 'vibrate' in navigator;
+    support.vibration = "vibrate" in navigator;
 
     // Battery API
-    support.battery = 'getBattery' in navigator;
+    support.battery = "getBattery" in navigator;
 
     // Device APIs
-    support.deviceOrientation = 'DeviceOrientationEvent' in window;
-    support.deviceMotion = 'DeviceMotionEvent' in window;
+    support.deviceOrientation = "DeviceOrientationEvent" in window;
+    support.deviceMotion = "DeviceMotionEvent" in window;
 
     // Speech APIs
-    support.speechSynthesis = 'speechSynthesis' in window;
+    support.speechSynthesis = "speechSynthesis" in window;
     support.speechRecognition =
-      'SpeechRecognition' in window || 'webkitSpeechRecognition' in window;
+      "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
 
     // Payment APIs
-    support.paymentRequest = 'PaymentRequest' in window;
+    support.paymentRequest = "PaymentRequest" in window;
 
     // Credential Management
-    support.credentialManagement = 'credentials' in navigator;
+    support.credentialManagement = "credentials" in navigator;
 
     // WebAuthn
-    support.webAuthn = 'PublicKeyCredential' in window;
+    support.webAuthn = "PublicKeyCredential" in window;
 
     // WebXR
-    support.webXR = 'XR' in window || 'XRSystem' in window;
+    support.webXR = "XR" in window || "XRSystem" in window;
 
     // WebNFC
-    support.webNFC = 'NDEFReader' in window;
+    support.webNFC = "NDEFReader" in window;
 
     // WebSerial
-    support.webSerial = 'serial' in navigator;
+    support.webSerial = "serial" in navigator;
 
     // WebUSB
-    support.webUSB = 'usb' in navigator;
+    support.webUSB = "usb" in navigator;
 
     // WebBluetooth
-    support.webBluetooth = 'bluetooth' in navigator;
+    support.webBluetooth = "bluetooth" in navigator;
 
     this.featureSupport = support as FeatureSupport;
     this.notifyListeners();
@@ -178,11 +178,11 @@ export class GracefulDegradationManager {
   }
 
   private checkCSSFeature(property: string): boolean {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return false;
     }
 
-    const element = document.createElement('div');
+    const element = document.createElement("div");
     const capitalizedProperty =
       property.charAt(0).toUpperCase() + property.slice(1);
 
@@ -195,14 +195,14 @@ export class GracefulDegradationManager {
   }
 
   private checkWebGLSupport(): boolean {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return false;
     }
 
     try {
-      const canvas = document.createElement('canvas');
+      const canvas = document.createElement("canvas");
       const gl =
-        canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
       return Boolean(gl);
     } catch {
       return false;
@@ -210,13 +210,13 @@ export class GracefulDegradationManager {
   }
 
   private checkWebGL2Support(): boolean {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return false;
     }
 
     try {
-      const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl2');
+      const canvas = document.createElement("canvas");
+      const gl = canvas.getContext("webgl2");
       return Boolean(gl);
     } catch {
       return false;
@@ -224,13 +224,13 @@ export class GracefulDegradationManager {
   }
 
   private checkCanvasSupport(): boolean {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return false;
     }
 
     try {
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
       return Boolean(context);
     } catch {
       return false;
@@ -273,13 +273,13 @@ export class GracefulDegradationManager {
     return !this.featureSupport[feature];
   }
 
-  public getFallbackClass(feature: string, baseClass = ''): string {
+  public getFallbackClass(feature: string, baseClass = ""): string {
     if (!this.config.enableCSSFallbacks) {
       return baseClass;
     }
 
     const shouldFallback = this.shouldUseFallback(
-      feature as keyof FeatureSupport
+      feature as keyof FeatureSupport,
     );
     const fallbackClass = shouldFallback ? `${baseClass}--fallback` : baseClass;
 
@@ -292,13 +292,13 @@ export class GracefulDegradationManager {
     downlink?: number;
     rtt?: number;
   }> {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return { online: true };
     }
 
     const online = navigator.onLine;
 
-    if ('connection' in navigator) {
+    if ("connection" in navigator) {
       const connection = (navigator as unknown).connection;
       return {
         online,
@@ -311,9 +311,9 @@ export class GracefulDegradationManager {
     return { online };
   }
 
-  public getPerformanceLevel(): 'high' | 'medium' | 'low' {
-    if (typeof window === 'undefined') {
-      return 'high';
+  public getPerformanceLevel(): "high" | "medium" | "low" {
+    if (typeof window === "undefined") {
+      return "high";
     }
 
     const memory = (navigator as unknown).deviceMemory;
@@ -321,29 +321,29 @@ export class GracefulDegradationManager {
 
     if (memory && cores) {
       if (memory >= 8 && cores >= 8) {
-        return 'high';
+        return "high";
       }
       if (memory >= 4 && cores >= 4) {
-        return 'medium';
+        return "medium";
       }
-      return 'low';
+      return "low";
     }
 
     // Fallback based on connection speed
-    if ('connection' in navigator) {
+    if ("connection" in navigator) {
       const connection = (navigator as unknown).connection;
       const effectiveType = connection.effectiveType;
 
-      if (effectiveType === '4g') {
-        return 'high';
+      if (effectiveType === "4g") {
+        return "high";
       }
-      if (effectiveType === '3g') {
-        return 'medium';
+      if (effectiveType === "3g") {
+        return "medium";
       }
-      return 'low';
+      return "low";
     }
 
-    return 'high';
+    return "high";
   }
 }
 
@@ -351,7 +351,7 @@ export class GracefulDegradationManager {
 export function useGracefulDegradation() {
   const [manager] = useState(() => GracefulDegradationManager.getInstance());
   const [featureSupport, setFeatureSupport] = useState<FeatureSupport | null>(
-    null
+    null,
   );
   const [isLoading, setIsLoading] = useState(true);
 
@@ -373,14 +373,14 @@ export function useGracefulDegradation() {
     (feature: keyof FeatureSupport) => {
       return manager.shouldUseFallback(feature);
     },
-    [manager]
+    [manager],
   );
 
   const getFallbackClass = useCallback(
-    (feature: string, baseClass = '') => {
+    (feature: string, baseClass = "") => {
       return manager.getFallbackClass(feature, baseClass);
     },
-    [manager]
+    [manager],
   );
 
   const checkNetworkStatus = useCallback(async () => {
@@ -408,8 +408,8 @@ export function useNetworkAwareFallback() {
   const { checkNetworkStatus, getPerformanceLevel } = useGracefulDegradation();
   const [networkStatus, setNetworkStatus] = useState({ online: true });
   const [performanceLevel, setPerformanceLevel] = useState<
-    'high' | 'medium' | 'low'
-  >('high');
+    "high" | "medium" | "low"
+  >("high");
 
   useEffect(() => {
     const updateStatus = async () => {
@@ -427,15 +427,15 @@ export function useNetworkAwareFallback() {
     const handleOnline = () => updateStatus();
     const handleOffline = () => updateStatus();
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('online', handleOnline);
-      window.addEventListener('offline', handleOffline);
+    if (typeof window !== "undefined") {
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
     }
 
     return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('online', handleOnline);
-        window.removeEventListener('offline', handleOffline);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("online", handleOnline);
+        window.removeEventListener("offline", handleOffline);
       }
     };
   }, [checkNetworkStatus, getPerformanceLevel]);
@@ -443,10 +443,10 @@ export function useNetworkAwareFallback() {
   return {
     networkStatus,
     performanceLevel,
-    shouldReduceMotion: performanceLevel === 'low',
-    shouldReduceQuality: performanceLevel === 'low' || !networkStatus.online,
+    shouldReduceMotion: performanceLevel === "low",
+    shouldReduceQuality: performanceLevel === "low" || !networkStatus.online,
     shouldUseStaticFallbacks:
-      performanceLevel === 'low' || !networkStatus.online,
+      performanceLevel === "low" || !networkStatus.online,
   };
 }
 
@@ -457,15 +457,15 @@ export function useAccessibilityFallback() {
   const [highContrast, setHighContrast] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
     const mediaQueryMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
+      "(prefers-reduced-motion: reduce)",
     );
-    const mediaQueryData = window.matchMedia('(prefers-reduced-data: reduce)');
-    const mediaQueryContrast = window.matchMedia('(prefers-contrast: high)');
+    const mediaQueryData = window.matchMedia("(prefers-reduced-data: reduce)");
+    const mediaQueryContrast = window.matchMedia("(prefers-contrast: high)");
 
     const updateMotion = (e: MediaQueryListEvent) =>
       setPrefersReducedMotion(e.matches);
@@ -478,14 +478,14 @@ export function useAccessibilityFallback() {
     setPrefersReducedData(mediaQueryData.matches);
     setHighContrast(mediaQueryContrast.matches);
 
-    mediaQueryMotion.addEventListener('change', updateMotion);
-    mediaQueryData.addEventListener('change', updateData);
-    mediaQueryContrast.addEventListener('change', updateContrast);
+    mediaQueryMotion.addEventListener("change", updateMotion);
+    mediaQueryData.addEventListener("change", updateData);
+    mediaQueryContrast.addEventListener("change", updateContrast);
 
     return () => {
-      mediaQueryMotion.removeEventListener('change', updateMotion);
-      mediaQueryData.removeEventListener('change', updateData);
-      mediaQueryContrast.removeEventListener('change', updateContrast);
+      mediaQueryMotion.removeEventListener("change", updateMotion);
+      mediaQueryData.removeEventListener("change", updateData);
+      mediaQueryContrast.removeEventListener("change", updateContrast);
     };
   }, []);
 
@@ -516,7 +516,7 @@ export function useDegradationAware() {
         accessibility.shouldUseStaticFallbacks
       );
     },
-    getDegradationClass: (feature: string, baseClass = '') => {
+    getDegradationClass: (feature: string, baseClass = "") => {
       const classes = [baseClass];
 
       if (graceful.shouldUseFallback(feature as keyof FeatureSupport)) {
@@ -539,7 +539,7 @@ export function useDegradationAware() {
         classes.push(`${baseClass}--high-contrast`);
       }
 
-      return classes.filter(Boolean).join(' ');
+      return classes.filter(Boolean).join(" ");
     },
   };
 }

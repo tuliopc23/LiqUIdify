@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-export { CompoundComponent } from '../compound-component';
+export { CompoundComponent } from "../compound-component";
 /**
  * Core Patterns Module
  *
@@ -11,12 +11,12 @@ export {
   createGlassPolymorphicComponent,
   createPolymorphicComponent,
   createPolymorphicSlots,
-} from '../create-polymorphic-component';
+} from "../create-polymorphic-component";
 
 // Business logic patterns
 export const createBusinessLogicHook = <T extends Record<string, unknown>>(
   initialState: T,
-  actions: Record<string, (state: T, ...arguments_: Array<any>) => T>
+  actions: Record<string, (state: T, ...arguments_: Array<any>) => T>,
 ) => {
   return () => {
     // Placeholder implementation for business logic hook pattern
@@ -29,7 +29,7 @@ export const createBusinessLogicHook = <T extends Record<string, unknown>>(
         };
         return accumulator;
       },
-      {} as Record<string, (...arguments_: Array<any>) => void>
+      {} as Record<string, (...arguments_: Array<any>) => void>,
     );
 
     return {
@@ -45,7 +45,7 @@ export const createCompoundComponentWithContext = <
   T extends Record<string, unknown>,
 >(
   contextName: string,
-  defaultValue: T
+  defaultValue: T,
 ) => {
   const Context = React.createContext<T | undefined>(defaultValue);
 
@@ -61,7 +61,7 @@ export const createCompoundComponentWithContext = <
     const context = React.useContext(Context);
     if (context === undefined) {
       throw new Error(
-        `use${contextName} must be used within a ${contextName}Provider`
+        `use${contextName} must be used within a ${contextName}Provider`,
       );
     }
     return context;
@@ -80,7 +80,7 @@ export interface RenderPropertyPattern<T> {
 }
 
 export const createRenderPropComponent = <T extends Record<string, unknown>>(
-  useLogic: () => T
+  useLogic: () => T,
 ) => {
   return ({ children }: RenderPropertyPattern<T>) => {
     const props = useLogic();
@@ -92,29 +92,29 @@ export const createRenderPropComponent = <T extends Record<string, unknown>>(
 export const withGlassEffect = <P extends Record<string, unknown>>(
   WrappedComponent: React.ComponentType<P>,
   glassConfig?: {
-    variant?: 'light' | 'dark' | 'neutral';
-    intensity?: 'weak' | 'medium' | 'strong';
+    variant?: "light" | "dark" | "neutral";
+    intensity?: "weak" | "medium" | "strong";
     blur?: boolean;
-  }
+  },
 ) => {
   const displayName =
-    WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    WrappedComponent.displayName || WrappedComponent.name || "Component";
 
   const WithGlassEffect = React.forwardRef<any, P>((props, ref) => {
     const glassClasses = React.useMemo(() => {
       const {
-        variant = 'neutral',
-        intensity = 'medium',
+        variant = "neutral",
+        intensity = "medium",
         blur = true,
       } = glassConfig || {};
       return [
-        'glass-effect',
+        "glass-effect",
         `glass-${variant}`,
         `glass-intensity-${intensity}`,
-        blur && 'glass-blur',
+        blur && "glass-blur",
       ]
         .filter(Boolean)
-        .join(' ');
+        .join(" ");
     }, [glassConfig]);
 
     return (
@@ -135,7 +135,7 @@ export interface SlotProps {
 }
 
 export const createSlotComponent = (
-  slots: Record<string, React.ComponentType<any>>
+  slots: Record<string, React.ComponentType<any>>,
 ) => {
   return ({ children }: { children: React.ReactNode }) => {
     const slotElements: Record<string, React.Array<React.ReactNode>> = {};
@@ -171,7 +171,7 @@ export interface StateAction<T = unknown> {
 
 export const createStateReducer = <T extends Record<string, unknown>>(
   initialState: T,
-  actionCreators: Record<string, (state: T, payload?: unknown) => T>
+  actionCreators: Record<string, (state: T, payload?: unknown) => T>,
 ) => {
   const reducer = (state: T, action: StateAction): T => {
     const actionCreator = actionCreators[action.type];
@@ -193,7 +193,7 @@ export const createStateReducer = <T extends Record<string, unknown>>(
         });
         return accumulator;
       },
-      {} as Record<string, (payload?: unknown) => StateAction>
+      {} as Record<string, (payload?: unknown) => StateAction>,
     ),
   };
 };
@@ -239,7 +239,7 @@ export class ComponentEventBus {
 // Factory pattern for creating themed components
 export const createThemedComponentFactory = <T extends Record<string, unknown>>(
   baseComponent: React.ComponentType<T>,
-  themeConfig: Record<string, Partial<T>>
+  themeConfig: Record<string, Partial<T>>,
 ) => {
   return (themeName: string) => {
     const theme = themeConfig[themeName];

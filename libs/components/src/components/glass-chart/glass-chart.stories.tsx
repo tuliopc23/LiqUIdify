@@ -1,50 +1,50 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   BarChart,
   type ChartDataPoint,
   DonutChart,
   LineChart,
-} from './glass-chart';
+} from "./glass-chart";
 
 const meta = {
-  title: 'Components/GlassChart',
+  title: "Components/GlassChart",
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A collection of chart components with glassmorphic styling including Line, Bar, and Donut charts.',
+          "A collection of chart components with glassmorphic styling including Line, Bar, and Donut charts.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 } satisfies Meta;
 
 export default meta;
 
 // Sample data
 const lineChartData: Array<ChartDataPoint> = [
-  { label: 'Jan', value: 65 },
-  { label: 'Feb', value: 78 },
-  { label: 'Mar', value: 82 },
-  { label: 'Apr', value: 71 },
-  { label: 'May', value: 89 },
-  { label: 'Jun', value: 95 },
-  { label: 'Jul', value: 88 },
+  { label: "Jan", value: 65 },
+  { label: "Feb", value: 78 },
+  { label: "Mar", value: 82 },
+  { label: "Apr", value: 71 },
+  { label: "May", value: 89 },
+  { label: "Jun", value: 95 },
+  { label: "Jul", value: 88 },
 ];
 
 const barChartData: Array<ChartDataPoint> = [
-  { label: 'Product A', value: 1250, color: '#3b82f6' },
-  { label: 'Product B', value: 2100, color: '#8b5cf6' },
-  { label: 'Product C', value: 1800, color: '#ec4899' },
-  { label: 'Product D', value: 1450, color: '#10b981' },
-  { label: 'Product E', value: 2300, color: '#f59e0b' },
+  { label: "Product A", value: 1250, color: "#3b82f6" },
+  { label: "Product B", value: 2100, color: "#8b5cf6" },
+  { label: "Product C", value: 1800, color: "#ec4899" },
+  { label: "Product D", value: 1450, color: "#10b981" },
+  { label: "Product E", value: 2300, color: "#f59e0b" },
 ];
 
 const donutChartData: Array<ChartDataPoint> = [
-  { label: 'Desktop', value: 45, color: '#3b82f6' },
-  { label: 'Mobile', value: 35, color: '#8b5cf6' },
-  { label: 'Tablet', value: 20, color: '#ec4899' },
+  { label: "Desktop", value: 45, color: "#3b82f6" },
+  { label: "Mobile", value: 35, color: "#8b5cf6" },
+  { label: "Tablet", value: 20, color: "#ec4899" },
 ];
 
 // Line Chart Stories
@@ -237,10 +237,10 @@ export const DashboardExample: StoryObj = {
         <h3 className="mb-4 font-semibold text-lg">Growth Trend</h3>
         <LineChart
           data={[
-            { label: 'Q1', value: 25 },
-            { label: 'Q2', value: 45 },
-            { label: 'Q3', value: 60 },
-            { label: 'Q4', value: 85 },
+            { label: "Q1", value: 25 },
+            { label: "Q2", value: 45 },
+            { label: "Q3", value: 60 },
+            { label: "Q4", value: 85 },
           ]}
           width={400}
           height={250}
@@ -255,7 +255,7 @@ export const DashboardExample: StoryObj = {
 const generateRealtimeData = () => {
   const now = new Date();
   return Array.from({ length: 10 }, (_, i) => ({
-    label: `${now.getHours()}:${String(now.getMinutes() - (9 - i)).padStart(2, '0')}`,
+    label: `${now.getHours()}:${String(now.getMinutes() - (9 - i)).padStart(2, "0")}`,
     value: Math.floor(Math.random() * 50) + 50,
   }));
 };
@@ -282,4 +282,4 @@ export const RealtimeLineChart: StoryObj = {
 };
 
 // Import React for the real-time example
-import React from 'react';
+import React from "react";

@@ -5,7 +5,7 @@
 
 export interface ContrastResult {
   ratio: number;
-  level: 'AAA' | 'AA' | 'A' | 'FAIL';
+  level: "AAA" | "AA" | "A" | "FAIL";
   passes: {
     normalText: boolean;
     largeText: boolean;
@@ -65,13 +65,13 @@ export function getContrastRatio(color1: ColorRGB, color2: ColorRGB): number {
  */
 export function checkContrast(
   foreground: string,
-  background: string
+  background: string,
 ): ContrastResult {
   const fgRgb = hexToRgb(foreground);
   const bgRgb = hexToRgb(background);
 
   if (!fgRgb || !bgRgb) {
-    throw new Error('Invalid color format. Please use hex colors.');
+    throw new Error("Invalid color format. Please use hex colors.");
   }
 
   const ratio = getContrastRatio(fgRgb, bgRgb);
@@ -83,15 +83,15 @@ export function checkContrast(
     uiComponents: ratio >= 3, // AA standard for UI components
   };
 
-  let level: ContrastResult['level'];
+  let level: ContrastResult["level"];
   if (ratio >= 7) {
-    level = 'AAA';
+    level = "AAA";
   } else if (ratio >= 4.5) {
-    level = 'AA';
+    level = "AA";
   } else if (ratio >= 3) {
-    level = 'A';
+    level = "A";
   } else {
-    level = 'FAIL';
+    level = "FAIL";
   }
 
   return {
@@ -106,7 +106,7 @@ export function checkContrast(
  */
 export function getAccessibleColors(
   baseColor: string,
-  targetRatio = 4.5
+  targetRatio = 4.5,
 ): Array<string> {
   const baseRgb = hexToRgb(baseColor);
   if (!baseRgb) {
@@ -121,11 +121,11 @@ export function getAccessibleColors(
     const darkColor = { r: 255 - index, g: 255 - index, b: 255 - index };
 
     if (getContrastRatio(baseRgb, lightColor) >= targetRatio) {
-      suggestions.push(`#${index.toString(16).padStart(2, '0').repeat(3)}`);
+      suggestions.push(`#${index.toString(16).padStart(2, "0").repeat(3)}`);
     }
 
     if (getContrastRatio(baseRgb, darkColor) >= targetRatio) {
-      const hex = (255 - index).toString(16).padStart(2, '0');
+      const hex = (255 - index).toString(16).padStart(2, "0");
       suggestions.push(`#${hex.repeat(3)}`);
     }
   }
@@ -150,17 +150,17 @@ export function isLightColor(color: string): boolean {
  * Get the best contrasting color (black or white) for a given background
  */
 export function getBestContrastColor(backgroundColor: string): string {
-  const whiteContrast = checkContrast('#ffffff', backgroundColor);
-  const blackContrast = checkContrast('#000000', backgroundColor);
+  const whiteContrast = checkContrast("#ffffff", backgroundColor);
+  const blackContrast = checkContrast("#000000", backgroundColor);
 
-  return whiteContrast.ratio > blackContrast.ratio ? '#ffffff' : '#000000';
+  return whiteContrast.ratio > blackContrast.ratio ? "#ffffff" : "#000000";
 }
 
 /**
  * Validate if a color palette meets accessibility standards
  */
 export function validateColorPalette(
-  palette: Record<string, string>
+  palette: Record<string, string>,
 ): Record<string, Array<ContrastResult>> {
   const results: Record<string, Array<ContrastResult>> = {};
 

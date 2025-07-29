@@ -1,13 +1,13 @@
-import type React from 'react';
-import { useRef, useState } from 'react';
+import type React from "react";
+import { useRef, useState } from "react";
 
-import { RovingTabindexGroup, useRovingTabindex } from '@/core/roving-tabindex';
+import { RovingTabindexGroup, useRovingTabindex } from "@/core/roving-tabindex";
 
-import { cn } from '@/core/utils/classname';
-import { GlassButton } from '../glass-button-refactored';
-import { GlassCard } from '../glass-card-refactored';
-import { GlassFocusTrap } from '../glass-focus-trap';
-import { GlassSkipNavigation } from '../glass-skip-navigation';
+import { cn } from "@/core/utils/classname";
+import { GlassButton } from "../glass-button-refactored";
+import { GlassCard } from "../glass-card-refactored";
+import { GlassFocusTrap } from "../glass-focus-trap";
+import { GlassSkipNavigation } from "../glass-skip-navigation";
 
 export const GlassFocusDemo: React.FC = () => {
   const [trapActive, setTrapActive] = useState(false);
@@ -17,28 +17,28 @@ export const GlassFocusDemo: React.FC = () => {
 
   // Setup roving tabindex for menu
   const menuItems = menuItemReferences.current.filter(
-    Boolean
+    Boolean,
   ) as Array<HTMLElement>;
   const roving = useRovingTabindex({
     items: menuItems,
-    orientation: 'vertical',
+    orientation: "vertical",
     loop: true,
     onActiveChange: (_, index) => setSelectedMenuItem(index),
   });
 
   const menuOptions = [
-    { icon: '🏠', label: 'Home', action: 'Navigate to home' },
-    { icon: '👤', label: 'Profile', action: 'View your profile' },
-    { icon: '⚙️', label: 'Settings', action: 'Adjust preferences' },
-    { icon: '📧', label: 'Messages', action: 'Check messages', badge: 3 },
+    { icon: "🏠", label: "Home", action: "Navigate to home" },
+    { icon: "👤", label: "Profile", action: "View your profile" },
+    { icon: "⚙️", label: "Settings", action: "Adjust preferences" },
+    { icon: "📧", label: "Messages", action: "Check messages", badge: 3 },
     {
-      icon: '🔔',
-      label: 'Notifications',
-      action: 'View notifications',
+      icon: "🔔",
+      label: "Notifications",
+      action: "View notifications",
       badge: 7,
     },
-    { icon: '📊', label: 'Analytics', action: 'View analytics' },
-    { icon: '🚪', label: 'Sign Out', action: 'Sign out of account' },
+    { icon: "📊", label: "Analytics", action: "View analytics" },
+    { icon: "🚪", label: "Sign Out", action: "Sign out of account" },
   ];
 
   return (
@@ -99,10 +99,10 @@ export const GlassFocusDemo: React.FC = () => {
 
           <div className="space-y-4">
             <p>
-              Click the button below to activate a focus trap. Press{' '}
+              Click the button below to activate a focus trap. Press{" "}
               <kbd className="rounded bg-gray-200 px-2 py-1 text-sm dark:bg-gray-700">
                 Escape
-              </kbd>{' '}
+              </kbd>{" "}
               to deactivate.
             </p>
 
@@ -224,13 +224,13 @@ export const GlassFocusDemo: React.FC = () => {
                     {...roving.getRovingProps(index)}
                     onClick={() => option.action?.()}
                     className={cn(
-                      'flex w-full items-center gap-3 px-4 py-3',
-                      'hover:bg-gray-100 dark:hover:bg-gray-800',
-                      'focus:bg-blue-50 dark:focus:bg-blue-900/20',
-                      'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset',
-                      'transition-colors duration-150',
+                      "flex w-full items-center gap-3 px-4 py-3",
+                      "hover:bg-gray-100 dark:hover:bg-gray-800",
+                      "focus:bg-blue-50 dark:focus:bg-blue-900/20",
+                      "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset",
+                      "transition-colors duration-150",
                       selectedMenuItem === index &&
-                        'bg-blue-50 dark:bg-blue-900/20'
+                        "bg-blue-50 dark:bg-blue-900/20",
                     )}
                   >
                     <span className="text-xl">{option.icon}</span>
@@ -260,13 +260,13 @@ export const GlassFocusDemo: React.FC = () => {
                 className="inline-flex gap-1 rounded-lg border border-gray-200 p-2 dark:border-gray-700"
               >
                 {[
-                  { icon: 'B', label: 'Bold', style: 'font-bold' },
-                  { icon: 'I', label: 'Italic', style: 'italic' },
-                  { icon: 'U', label: 'Underline', style: 'underline' },
-                  { icon: 'S', label: 'Strikethrough', style: 'line-through' },
-                  { icon: '≤', label: 'Align left' },
-                  { icon: '≡', label: 'Align center' },
-                  { icon: '≥', label: 'Align right' },
+                  { icon: "B", label: "Bold", style: "font-bold" },
+                  { icon: "I", label: "Italic", style: "italic" },
+                  { icon: "U", label: "Underline", style: "underline" },
+                  { icon: "S", label: "Strikethrough", style: "line-through" },
+                  { icon: "≤", label: "Align left" },
+                  { icon: "≡", label: "Align center" },
+                  { icon: "≥", label: "Align right" },
                 ].map((tool) => (
                   <button
                     type="button"
@@ -274,12 +274,12 @@ export const GlassFocusDemo: React.FC = () => {
                     aria-label={tool.label}
                     onClick={() => {}}
                     className={cn(
-                      'flex h-10 w-10 items-center justify-center rounded',
-                      'hover:bg-gray-100 dark:hover:bg-gray-800',
-                      'focus:bg-blue-50 dark:focus:bg-blue-900/20',
-                      'focus:outline-none focus:ring-2 focus:ring-blue-500',
-                      'transition-colors duration-150',
-                      tool.style
+                      "flex h-10 w-10 items-center justify-center rounded",
+                      "hover:bg-gray-100 dark:hover:bg-gray-800",
+                      "focus:bg-blue-50 dark:focus:bg-blue-900/20",
+                      "focus:outline-none focus:ring-2 focus:ring-blue-500",
+                      "transition-colors duration-150",
+                      tool.style,
                     )}
                   >
                     {tool.icon}
@@ -298,10 +298,10 @@ export const GlassFocusDemo: React.FC = () => {
           <div className="space-y-4">
             <p>
               Skip navigation links are automatically generated for this page.
-              Focus on the page (click here) and press{' '}
+              Focus on the page (click here) and press{" "}
               <kbd className="rounded bg-gray-200 px-2 py-1 text-sm dark:bg-gray-700">
                 Tab
-              </kbd>{' '}
+              </kbd>{" "}
               to reveal them.
             </p>
 

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Download,
   Heart,
@@ -9,15 +9,15 @@ import {
   Star,
   Trash2,
   User,
-} from 'lucide-react';
-import React from 'react';
-import { GlassButton } from './glass-button';
+} from "lucide-react";
+import React from "react";
+import { GlassButton } from "./glass-button";
 
 const meta = {
-  title: 'Components/Forms/GlassButton',
+  title: "Components/Forms/GlassButton",
   component: GlassButton,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -40,131 +40,131 @@ A versatile button component with glassmorphism styling and comprehensive varian
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Content
     children: {
-      control: 'text',
-      description: 'Button content',
+      control: "text",
+      description: "Button content",
       table: {
-        type: { summary: 'React.ReactNode' },
-        category: 'Content',
+        type: { summary: "React.ReactNode" },
+        category: "Content",
       },
     },
     leftIcon: {
       control: false,
-      description: 'Icon to display on the left side',
+      description: "Icon to display on the left side",
       table: {
-        type: { summary: 'React.ReactNode' },
-        category: 'Content',
+        type: { summary: "React.ReactNode" },
+        category: "Content",
       },
     },
     rightIcon: {
       control: false,
-      description: 'Icon to display on the right side',
+      description: "Icon to display on the right side",
       table: {
-        type: { summary: 'React.ReactNode' },
-        category: 'Content',
+        type: { summary: "React.ReactNode" },
+        category: "Content",
       },
     },
 
     // Appearance
     variant: {
-      control: 'select',
+      control: "select",
       options: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'ghost',
-        'destructive',
-        'apple',
+        "primary",
+        "secondary",
+        "tertiary",
+        "ghost",
+        "destructive",
+        "apple",
       ],
-      description: 'Visual style variant of the button',
+      description: "Visual style variant of the button",
       table: {
         type: {
           summary:
-            'primary | secondary | tertiary | ghost | destructive | apple',
+            "primary | secondary | tertiary | ghost | destructive | apple",
         },
-        defaultValue: { summary: 'primary' },
-        category: 'Appearance',
+        defaultValue: { summary: "primary" },
+        category: "Appearance",
       },
     },
     size: {
-      control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      description: 'Size of the button',
+      control: "select",
+      options: ["xs", "sm", "md", "lg", "xl"],
+      description: "Size of the button",
       table: {
-        type: { summary: 'xs | sm | md | lg | xl' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "xs | sm | md | lg | xl" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
 
     // States
     disabled: {
-      control: 'boolean',
-      description: 'Whether the button is disabled',
+      control: "boolean",
+      description: "Whether the button is disabled",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'States',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "States",
       },
     },
     loading: {
-      control: 'boolean',
-      description: 'Whether the button is in loading state',
+      control: "boolean",
+      description: "Whether the button is in loading state",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'States',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "States",
       },
     },
 
     // Behavior
     type: {
-      control: 'select',
-      options: ['button', 'submit', 'reset'],
-      description: 'HTML button type',
+      control: "select",
+      options: ["button", "submit", "reset"],
+      description: "HTML button type",
       table: {
-        type: { summary: 'button | submit | reset' },
-        defaultValue: { summary: 'button' },
-        category: 'Behavior',
+        type: { summary: "button | submit | reset" },
+        defaultValue: { summary: "button" },
+        category: "Behavior",
       },
     },
     onClick: {
-      action: 'clicked',
-      description: 'Click event handler',
+      action: "clicked",
+      description: "Click event handler",
       table: {
-        type: { summary: '(event: MouseEvent) => void' },
-        category: 'Behavior',
+        type: { summary: "(event: MouseEvent) => void" },
+        category: "Behavior",
       },
     },
 
     // Accessibility
-    'aria-label': {
-      control: 'text',
-      description: 'Accessible label for screen readers',
+    "aria-label": {
+      control: "text",
+      description: "Accessible label for screen readers",
       table: {
-        type: { summary: 'string' },
-        category: 'Accessibility',
+        type: { summary: "string" },
+        category: "Accessibility",
       },
     },
-    'aria-describedby': {
-      control: 'text',
-      description: 'ID of element that describes the button',
+    "aria-describedby": {
+      control: "text",
+      description: "ID of element that describes the button",
       table: {
-        type: { summary: 'string' },
-        category: 'Accessibility',
+        type: { summary: "string" },
+        category: "Accessibility",
       },
     },
 
     // Styling
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
       table: {
-        type: { summary: 'string' },
-        category: 'Styling',
+        type: { summary: "string" },
+        category: "Styling",
       },
     },
   },
@@ -176,49 +176,49 @@ type Story = StoryObj<typeof meta>;
 // Basic Examples
 export const Default: Story = {
   args: {
-    children: 'Button',
+    children: "Button",
   },
 };
 
 export const Primary: Story = {
   args: {
-    variant: 'primary',
-    children: 'Primary Button',
+    variant: "primary",
+    children: "Primary Button",
   },
 };
 
 export const Secondary: Story = {
   args: {
-    variant: 'secondary',
-    children: 'Secondary Button',
+    variant: "secondary",
+    children: "Secondary Button",
   },
 };
 
 export const Tertiary: Story = {
   args: {
-    variant: 'tertiary',
-    children: 'Tertiary Button',
+    variant: "tertiary",
+    children: "Tertiary Button",
   },
 };
 
 export const Ghost: Story = {
   args: {
-    variant: 'ghost',
-    children: 'Ghost Button',
+    variant: "ghost",
+    children: "Ghost Button",
   },
 };
 
 export const Destructive: Story = {
   args: {
-    variant: 'destructive',
-    children: 'Delete',
+    variant: "destructive",
+    children: "Delete",
   },
 };
 
 export const Apple: Story = {
   args: {
-    variant: 'apple',
-    children: 'Apple Style',
+    variant: "apple",
+    children: "Apple Style",
   },
 };
 
@@ -239,14 +239,14 @@ export const Sizes: Story = {
 export const WithLeftIcon: Story = {
   args: {
     leftIcon: <Download className="h-4 w-4" />,
-    children: 'Download',
+    children: "Download",
   },
 };
 
 export const WithRightIcon: Story = {
   args: {
     rightIcon: <Settings className="h-4 w-4" />,
-    children: 'Settings',
+    children: "Settings",
   },
 };
 
@@ -254,14 +254,14 @@ export const WithBothIcons: Story = {
   args: {
     leftIcon: <User className="h-4 w-4" />,
     rightIcon: <Settings className="h-4 w-4" />,
-    children: 'Profile Settings',
+    children: "Profile Settings",
   },
 };
 
 export const IconOnly: Story = {
   args: {
     leftIcon: <Heart className="h-4 w-4" />,
-    'aria-label': 'Like',
+    "aria-label": "Like",
   },
 };
 
@@ -269,14 +269,14 @@ export const IconOnly: Story = {
 export const Loading: Story = {
   args: {
     loading: true,
-    children: 'Loading...',
+    children: "Loading...",
   },
 };
 
 export const Disabled: Story = {
   args: {
     disabled: true,
-    children: 'Disabled Button',
+    children: "Disabled Button",
   },
 };
 
@@ -284,7 +284,7 @@ export const LoadingWithIcon: Story = {
   args: {
     loading: true,
     leftIcon: <Save className="h-4 w-4" />,
-    children: 'Saving...',
+    children: "Saving...",
   },
 };
 
@@ -499,7 +499,7 @@ export const InteractiveDemo: Story = {
       <div className="space-y-4">
         <div className="flex gap-4">
           <GlassButton onClick={handleAsyncAction} loading={loading}>
-            {loading ? 'Processing...' : 'Async Action'}
+            {loading ? "Processing..." : "Async Action"}
           </GlassButton>
           <GlassButton variant="secondary" onClick={() => setCount(0)}>
             Reset Counter
@@ -536,7 +536,7 @@ export const ThemeDemo: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };
@@ -547,11 +547,11 @@ export const PerformanceTest: Story = {
     <div className="grid grid-cols-5 gap-2">
       {Array.from({ length: 50 }, (_, index) => {
         const variants = [
-          'primary',
-          'secondary',
-          'tertiary',
-          'ghost',
-          'apple',
+          "primary",
+          "secondary",
+          "tertiary",
+          "ghost",
+          "apple",
         ] as const;
         const variant = variants[index % 5];
         return (

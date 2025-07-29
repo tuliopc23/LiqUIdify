@@ -272,21 +272,21 @@ export class GlassShaderEffect {
 
   constructor(
     private canvas: HTMLCanvasElement,
-    private shaderType: keyof typeof GLASS_SHADERS
+    private shaderType: keyof typeof GLASS_SHADERS,
   ) {
     // SSR safety check
-    if (typeof window === 'undefined') {
-      throw new TypeError('GlassShaderEffect cannot be used during SSR');
+    if (typeof window === "undefined") {
+      throw new TypeError("GlassShaderEffect cannot be used during SSR");
     }
 
-    const gl = canvas.getContext('webgl', {
+    const gl = canvas.getContext("webgl", {
       alpha: true,
       premultipliedAlpha: true,
       preserveDrawingBuffer: true,
     });
 
     if (!gl) {
-      throw new Error('WebGL not supported');
+      throw new Error("WebGL not supported");
     }
 
     this.gl = gl;
@@ -298,20 +298,20 @@ export class GlassShaderEffect {
     // Create shader program
     const vertexShader = this.createShader(
       this.gl.VERTEX_SHADER,
-      VERTEX_SHADER
+      VERTEX_SHADER,
     );
     const fragmentShader = this.createShader(
       this.gl.FRAGMENT_SHADER,
-      GLASS_SHADERS[this.shaderType]
+      GLASS_SHADERS[this.shaderType],
     );
 
     if (!vertexShader || !fragmentShader) {
-      throw new Error('Failed to create shaders');
+      throw new Error("Failed to create shaders");
     }
 
     this.program = this.createProgram(vertexShader, fragmentShader);
     if (!this.program) {
-      throw new Error('Failed to create shader program');
+      throw new Error("Failed to create shader program");
     }
 
     // Set up geometry
@@ -344,7 +344,7 @@ export class GlassShaderEffect {
 
   private createProgram(
     vertexShader: WebGLShader,
-    fragmentShader: WebGLShader
+    fragmentShader: WebGLShader,
   ): WebGLProgram | null {
     const program = this.gl.createProgram();
     if (!program) {
@@ -379,7 +379,7 @@ export class GlassShaderEffect {
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
     this.gl.bufferData(this.gl.ARRAY_BUFFER, positions, this.gl.STATIC_DRAW);
 
-    const positionLoc = this.gl.getAttribLocation(this.program, 'a_position');
+    const positionLoc = this.gl.getAttribLocation(this.program, "a_position");
     this.gl.enableVertexAttribArray(positionLoc);
     this.gl.vertexAttribPointer(positionLoc, 2, this.gl.FLOAT, false, 0, 0);
 
@@ -388,7 +388,7 @@ export class GlassShaderEffect {
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texCoordBuffer);
     this.gl.bufferData(this.gl.ARRAY_BUFFER, texCoords, this.gl.STATIC_DRAW);
 
-    const texCoordLoc = this.gl.getAttribLocation(this.program, 'a_texCoord');
+    const texCoordLoc = this.gl.getAttribLocation(this.program, "a_texCoord");
     this.gl.enableVertexAttribArray(texCoordLoc);
     this.gl.vertexAttribPointer(texCoordLoc, 2, this.gl.FLOAT, false, 0, 0);
   }
@@ -399,17 +399,17 @@ export class GlassShaderEffect {
     }
 
     const uniformNames = [
-      'u_texture',
-      'u_normalMap',
-      'u_depthMap',
-      'u_time',
-      'u_resolution',
-      'u_mouse',
-      'u_distortion',
-      'u_chromaticAberration',
-      'u_refraction',
-      'u_noiseScale',
-      'u_liquidness',
+      "u_texture",
+      "u_normalMap",
+      "u_depthMap",
+      "u_time",
+      "u_resolution",
+      "u_mouse",
+      "u_distortion",
+      "u_chromaticAberration",
+      "u_refraction",
+      "u_noiseScale",
+      "u_liquidness",
     ];
 
     for (const name of uniformNames) {
@@ -435,28 +435,28 @@ export class GlassShaderEffect {
       0,
       this.gl.RGBA,
       this.gl.UNSIGNED_BYTE,
-      null
+      null,
     );
 
     this.gl.texParameteri(
       this.gl.TEXTURE_2D,
       this.gl.TEXTURE_MIN_FILTER,
-      this.gl.LINEAR
+      this.gl.LINEAR,
     );
     this.gl.texParameteri(
       this.gl.TEXTURE_2D,
       this.gl.TEXTURE_MAG_FILTER,
-      this.gl.LINEAR
+      this.gl.LINEAR,
     );
     this.gl.texParameteri(
       this.gl.TEXTURE_2D,
       this.gl.TEXTURE_WRAP_S,
-      this.gl.CLAMP_TO_EDGE
+      this.gl.CLAMP_TO_EDGE,
     );
     this.gl.texParameteri(
       this.gl.TEXTURE_2D,
       this.gl.TEXTURE_WRAP_T,
-      this.gl.CLAMP_TO_EDGE
+      this.gl.CLAMP_TO_EDGE,
     );
 
     this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this.frameBuffer);
@@ -465,14 +465,14 @@ export class GlassShaderEffect {
       this.gl.COLOR_ATTACHMENT0,
       this.gl.TEXTURE_2D,
       this.renderTexture,
-      0
+      0,
     );
   }
 
   // Load texture from image or canvas
   loadTexture(
     name: string,
-    source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement
+    source: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement,
   ): void {
     const texture = this.gl.createTexture();
     if (!texture) {
@@ -486,28 +486,28 @@ export class GlassShaderEffect {
       this.gl.RGBA,
       this.gl.RGBA,
       this.gl.UNSIGNED_BYTE,
-      source
+      source,
     );
 
     this.gl.texParameteri(
       this.gl.TEXTURE_2D,
       this.gl.TEXTURE_MIN_FILTER,
-      this.gl.LINEAR
+      this.gl.LINEAR,
     );
     this.gl.texParameteri(
       this.gl.TEXTURE_2D,
       this.gl.TEXTURE_MAG_FILTER,
-      this.gl.LINEAR
+      this.gl.LINEAR,
     );
     this.gl.texParameteri(
       this.gl.TEXTURE_2D,
       this.gl.TEXTURE_WRAP_S,
-      this.gl.CLAMP_TO_EDGE
+      this.gl.CLAMP_TO_EDGE,
     );
     this.gl.texParameteri(
       this.gl.TEXTURE_2D,
       this.gl.TEXTURE_WRAP_T,
-      this.gl.CLAMP_TO_EDGE
+      this.gl.CLAMP_TO_EDGE,
     );
 
     this.textures.set(name, texture);
@@ -528,7 +528,7 @@ export class GlassShaderEffect {
         continue;
       }
 
-      if (typeof value === 'number') {
+      if (typeof value === "number") {
         this.gl.uniform1f(location, value);
       } else if (Array.isArray(value) && value.length === 2) {
         this.gl.uniform2fv(location, value);
@@ -614,45 +614,45 @@ export class GlassShaderEffect {
 export function applyGlassShader(
   element: HTMLElement,
   shaderType: keyof typeof GLASS_SHADERS,
-  config?: Partial<ShaderUniforms>
+  config?: Partial<ShaderUniforms>,
 ): GlassShaderEffect | null {
   // SSR safety check
-  if (typeof window === 'undefined' || typeof document === 'undefined') {
+  if (typeof window === "undefined" || typeof document === "undefined") {
     return null;
   }
 
   // Create canvas overlay
-  const canvas = document.createElement('canvas');
+  const canvas = document.createElement("canvas");
   const rect = element.getBoundingClientRect();
 
   canvas.width = rect.width * (window.devicePixelRatio || 1);
   canvas.height = rect.height * (window.devicePixelRatio || 1);
-  canvas.style.position = 'absolute';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  canvas.style.pointerEvents = 'none';
-  canvas.style.zIndex = '1';
+  canvas.style.position = "absolute";
+  canvas.style.top = "0";
+  canvas.style.left = "0";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.style.pointerEvents = "none";
+  canvas.style.zIndex = "1";
 
-  element.style.position = 'relative';
+  element.style.position = "relative";
   element.append(canvas);
 
   try {
     const shader = new GlassShaderEffect(canvas, shaderType);
 
     // Capture element as texture
-    const elementCanvas = document.createElement('canvas');
+    const elementCanvas = document.createElement("canvas");
     elementCanvas.width = canvas.width;
     elementCanvas.height = canvas.height;
-    const context = elementCanvas.getContext('2d');
+    const context = elementCanvas.getContext("2d");
 
     if (context) {
       // This is a simplified version - in production, you'd use html2canvas or similar
       const computedStyle = window.getComputedStyle(element);
-      context.fillStyle = computedStyle.backgroundColor || 'white';
+      context.fillStyle = computedStyle.backgroundColor || "white";
       context.fillRect(0, 0, elementCanvas.width, elementCanvas.height);
-      shader.loadTexture('texture', elementCanvas);
+      shader.loadTexture("texture", elementCanvas);
     }
 
     shader.animate(config);

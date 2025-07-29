@@ -5,17 +5,17 @@ import {
   CheckCircle,
   Info,
   X,
-} from 'lucide-react';
-import type React from 'react';
-import { useState } from 'react';
+} from "lucide-react";
+import type React from "react";
+import { useState } from "react";
 
-import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
+import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
 export interface NotificationItem {
   id: string;
   title: string;
   message: string;
-  type?: 'success' | 'error' | 'warning' | 'info' | 'system';
+  type?: "success" | "error" | "warning" | "info" | "system";
   timestamp?: Date;
   read?: boolean;
   avatar?: string;
@@ -43,23 +43,23 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const unreadCount = notifications.filter((n) => !n.read).length;
 
-  const getIcon = (type: NotificationItem['type']) => {
-    const iconClasses = 'w-4 h-4 flex-shrink-0';
+  const getIcon = (type: NotificationItem["type"]) => {
+    const iconClasses = "w-4 h-4 flex-shrink-0";
     switch (type) {
-      case 'success': {
-        return <CheckCircle className={cn(iconClasses, 'text-green-500')} />;
+      case "success": {
+        return <CheckCircle className={cn(iconClasses, "text-green-500")} />;
       }
-      case 'error': {
-        return <AlertCircle className={cn(iconClasses, 'text-red-500')} />;
+      case "error": {
+        return <AlertCircle className={cn(iconClasses, "text-red-500")} />;
       }
-      case 'warning': {
-        return <AlertTriangle className={cn(iconClasses, 'text-yellow-500')} />;
+      case "warning": {
+        return <AlertTriangle className={cn(iconClasses, "text-yellow-500")} />;
       }
-      case 'info': {
-        return <Info className={cn(iconClasses, 'text-blue-500')} />;
+      case "info": {
+        return <Info className={cn(iconClasses, "text-blue-500")} />;
       }
       default: {
-        return <Bell className={cn(iconClasses, 'text-gray-500')} />;
+        return <Bell className={cn(iconClasses, "text-gray-500")} />;
       }
     }
   };
@@ -71,7 +71,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
     const hours = Math.floor(diff / 3_600_000);
 
     if (minutes < 1) {
-      return 'Just now';
+      return "Just now";
     }
     if (minutes < 60) {
       return `${minutes}m ago`;
@@ -83,24 +83,24 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
   };
 
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn("relative", className)}>
       {/* Notification Bell Button */}
 
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          'relative rounded-xl p-2',
-          getGlassClass('default'),
-          'hover:bg-[var(--glass-bg-elevated)]',
+          "relative rounded-xl p-2",
+          getGlassClass("default"),
+          "hover:bg-[var(--glass-bg-elevated)]",
           microInteraction.gentle,
-          'focus:outline-none focus:ring-2 focus:ring-blue-500/30'
+          "focus:outline-none focus:ring-2 focus:ring-blue-500/30",
         )}
       >
         <Bell className="h-5 w-5 text-[var(--text-secondary)]" />
         {unreadCount > 0 && (
           <span className="-top-1 -right-1 absolute flex h-5 w-5 items-center justify-center rounded-full bg-red-500 font-medium text-white text-xs">
-            {unreadCount > 9 ? '9+' : unreadCount}
+            {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
       </button>
@@ -109,9 +109,9 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
       {isOpen && (
         <div
           className={cn(
-            'absolute top-full right-0 z-50 mt-2 max-h-96 w-80 overflow-hidden rounded-xl',
-            getGlassClass('elevated'),
-            'border border-[var(--glass-border)]'
+            "absolute top-full right-0 z-50 mt-2 max-h-96 w-80 overflow-hidden rounded-xl",
+            getGlassClass("elevated"),
+            "border border-[var(--glass-border)]",
           )}
         >
           {/* Header */}
@@ -161,14 +161,14 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                   type="button"
                   key={notification.id}
                   className={cn(
-                    'border-[var(--glass-border)] border-b p-4 last:border-b-0',
-                    'w-full cursor-pointer text-left hover:bg-[var(--glass-bg)]',
+                    "border-[var(--glass-border)] border-b p-4 last:border-b-0",
+                    "w-full cursor-pointer text-left hover:bg-[var(--glass-bg)]",
                     microInteraction.gentle,
-                    !notification.read && 'bg-blue-50/50 dark:bg-blue-950/20'
+                    !notification.read && "bg-blue-50/50 dark:bg-blue-950/20",
                   )}
                   onClick={() => onMarkAsRead?.(notification.id)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
                       onMarkAsRead?.(notification.id);
                     }
@@ -183,10 +183,10 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                       <div className="flex items-center justify-between gap-2">
                         <h4
                           className={cn(
-                            'truncate font-medium text-sm',
+                            "truncate font-medium text-sm",
                             notification.read
-                              ? 'text-[var(--text-secondary)]'
-                              : 'text-[var(--text-primary)]'
+                              ? "text-[var(--text-secondary)]"
+                              : "text-[var(--text-primary)]",
                           )}
                         >
                           {notification.title}

@@ -17,7 +17,7 @@ export function safeRefAccess<T>(ref: React.RefObject<T>): T | null {
 export function withSafeRef<T, R>(
   ref: React.RefObject<T>,
   callback: (element: T) => R,
-  fallback?: R
+  fallback?: R,
 ): R | undefined {
   const element = safeRefAccess(ref);
   if (element) {
@@ -36,7 +36,7 @@ export function withSafeRef<T, R>(
  */
 export function safeQuerySelector<T extends Element = Element>(
   selector: string,
-  parent: Document | Element = document
+  parent: Document | Element = document,
 ): T | null {
   try {
     return parent.querySelector<T>(selector);
@@ -51,7 +51,7 @@ export function safeQuerySelector<T extends Element = Element>(
  */
 export function safeQuerySelectorAll<T extends Element = Element>(
   selector: string,
-  parent: Document | Element = document
+  parent: Document | Element = document,
 ): Array<T> {
   try {
     return [...parent.querySelectorAll<T>(selector)];
@@ -66,10 +66,10 @@ export function safeQuerySelectorAll<T extends Element = Element>(
  */
 export function safeGetComputedStyle(
   element: Element,
-  property?: string
+  property?: string,
 ): string | CSSStyleDeclaration | null {
   try {
-    if (typeof window === 'undefined' || !element) {
+    if (typeof window === "undefined" || !element) {
       return;
     }
 
@@ -115,7 +115,7 @@ export function safeGetBoundingClientRect(element: Element | null): DOMRect {
 export function safeArrayAccess<T>(
   array: Array<T>,
   index: number,
-  fallback?: T
+  fallback?: T,
 ): T | undefined {
   if (!Array.isArray(array)) {
     return fallback;
@@ -134,7 +134,7 @@ export function safeArrayAccess<T>(
 export function safeMapGet<K, V>(
   map: Map<K, V> | null | undefined,
   key: K,
-  fallback?: V
+  fallback?: V,
 ): V | undefined {
   if (!map || !map.has(key)) {
     return fallback;
@@ -155,7 +155,7 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
   element: Element | null,
   type: K,
   listener: (this: HTMLElement, event_: HTMLElementEventMap[K]) => void,
-  options?: boolean | AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions,
 ): (() => void) | null {
   if (!element) {
     return;
@@ -181,9 +181,9 @@ export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
  * Safe requestAnimationFrame with cancellation
  */
 export function safeRequestAnimationFrame(
-  callback: FrameRequestCallback
+  callback: FrameRequestCallback,
 ): (() => void) | null {
-  if (typeof window === 'undefined' || !window.requestAnimationFrame) {
+  if (typeof window === "undefined" || !window.requestAnimationFrame) {
     return;
   }
 
@@ -207,7 +207,7 @@ export function safeRequestAnimationFrame(
  * Safe audio context creation
  */
 export function safeCreateAudioContext(): AudioContext | null {
-  if (typeof window === 'undefined' || !('AudioContext' in window)) {
+  if (typeof window === "undefined" || !("AudioContext" in window)) {
     return;
   }
 
@@ -225,7 +225,7 @@ export function safeCreateAudioContext(): AudioContext | null {
 export function safeGetAttribute(
   element: Element | null,
   name: string,
-  fallback?: string
+  fallback?: string,
 ): string | null {
   if (!element) {
     return fallback ?? undefined;
@@ -245,7 +245,7 @@ export function safeGetAttribute(
 export function safeSetAttribute(
   element: Element | null,
   name: string,
-  value: string
+  value: string,
 ): boolean {
   if (!element) {
     return false;
@@ -266,17 +266,17 @@ export function safeSetAttribute(
 export function safeGetStyle(
   element: HTMLElement | null,
   property: string,
-  fallback?: string
+  fallback?: string,
 ): string {
   if (!element) {
-    return fallback || '';
+    return fallback || "";
   }
 
   try {
-    return element.style[property as unknown] || fallback || '';
+    return element.style[property as unknown] || fallback || "";
   } catch {
     // Logging disabled
-    return fallback || '';
+    return fallback || "";
   }
 }
 
@@ -286,7 +286,7 @@ export function safeGetStyle(
 export function safeSetStyle(
   element: HTMLElement | null,
   property: string,
-  value: string
+  value: string,
 ): boolean {
   if (!element) {
     return false;
@@ -323,7 +323,7 @@ export function safeRemoveElement(element: Element | null): boolean {
  */
 export function safeAppendChild(
   parent: Element | null,
-  child: Node | null
+  child: Node | null,
 ): boolean {
   if (!parent || !child) {
     return false;

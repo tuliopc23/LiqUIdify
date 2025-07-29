@@ -144,7 +144,7 @@
 }
 
 /* Dark Theme Overrides */
-[data-theme='dark'],
+[data-theme="dark"],
 .dark {
   --glass-bg-canvas: #0a0a0a;
   --glass-bg-primary: rgba(18, 18, 18, 0.25);
@@ -224,9 +224,9 @@
 
   /* Apple Typography */
   --apple-font-system:
-    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     system-ui, sans-serif;
-  --apple-font-mono: 'SF Mono', Monaco, Menlo, Consolas, monospace;
+  --apple-font-mono: "SF Mono", Monaco, Menlo, Consolas, monospace;
 
   /* Apple Spacing (8pt grid) */
   --apple-space-xs: 2px;
@@ -267,7 +267,7 @@
 }
 
 /* Dark Mode Apple Tokens */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --apple-system-blue: #409cff;
   --apple-system-gray: #636366;
   --apple-system-gray2: #48484a;
@@ -607,7 +607,7 @@
 }
 
 .liquid-glass-specular::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -668,7 +668,7 @@
 }
 
 .liquid-glass-shimmer::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -709,7 +709,7 @@
 }
 
 .liquid-glass-ripple::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -989,7 +989,7 @@
     background: rgba(255, 255, 255, 0.9);
   }
 
-  [data-theme='dark'] .liquid-glass,
+  [data-theme="dark"] .liquid-glass,
   .dark .liquid-glass {
     background: rgba(0, 0, 0, 0.9);
     border-color: rgba(255, 255, 255, 0.8);
@@ -1004,7 +1004,7 @@
     --text-primary: rgba(0, 0, 0, 1);
   }
 
-  [data-theme='dark'],
+  [data-theme="dark"],
   .dark {
     --glass-border-medium: rgba(255, 255, 255, 0.5);
     --glass-bg-primary: rgba(18, 18, 18, 0.4);
@@ -1029,7 +1029,7 @@
     --text-primary: rgba(0, 0, 0, 0.75);
   }
 
-  [data-theme='dark'],
+  [data-theme="dark"],
   .dark {
     --glass-border-medium: rgba(255, 255, 255, 0.2);
     --glass-bg-primary: rgba(18, 18, 18, 0.15);
@@ -1072,7 +1072,7 @@
 }
 
 .liquid-glass-holographic::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -1110,7 +1110,7 @@
 }
 
 .liquid-glass-iridescent::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -1278,7 +1278,7 @@
 }
 
 .liquid-glass-crystal::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -1312,7 +1312,7 @@
 
 .liquid-glass-plasma::before,
 .liquid-glass-plasma::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 150%;
   height: 150%;
@@ -1436,7 +1436,7 @@
 }
 
 .liquid-glass-aurora::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50%;
   left: -50%;
@@ -1480,7 +1480,7 @@
 }
 
 .liquid-glass-metal::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -1562,7 +1562,7 @@
 }
 
 /* Focus Trap Styles */
-.glass-focus-trap[data-focus-trap-active='true'] {
+.glass-focus-trap[data-focus-trap-active="true"] {
   position: relative;
 }
 

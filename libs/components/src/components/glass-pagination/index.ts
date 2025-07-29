@@ -1,1 +1,1 @@
-export { GlassPagination, type GlassPaginationProps } from './glass-pagination';
+export { GlassPagination, type GlassPaginationProps } from "./glass-pagination";

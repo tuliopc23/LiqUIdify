@@ -6,33 +6,33 @@
  */
 
 // Base component types
-export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type ComponentVariant =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'ghost'
-  | 'outline';
-export type GlassIntensity = 'subtle' | 'medium' | 'strong';
-export type GlassVariant = 'light' | 'dark' | 'neutral' | 'colored';
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "ghost"
+  | "outline";
+export type GlassIntensity = "subtle" | "medium" | "strong";
+export type GlassVariant = "light" | "dark" | "neutral" | "colored";
 
 // Animation types
 export type AnimationPreset =
-  | 'none'
-  | 'subtle'
-  | 'smooth'
-  | 'bouncy'
-  | 'springy';
-export type TransitionDuration = 'fast' | 'medium' | 'slow' | 'slower';
+  | "none"
+  | "subtle"
+  | "smooth"
+  | "bouncy"
+  | "springy";
+export type TransitionDuration = "fast" | "medium" | "slow" | "slower";
 
 // Accessibility types
 export interface A11yProps {
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  'aria-describedby'?: string;
-  'aria-expanded'?: boolean;
-  'aria-disabled'?: boolean;
-  'aria-hidden'?: boolean;
+  "aria-label"?: string;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+  "aria-expanded"?: boolean;
+  "aria-disabled"?: boolean;
+  "aria-hidden"?: boolean;
   role?: string;
 }
 
@@ -77,10 +77,10 @@ export interface ComponentState {
 
 // Theme types
 export interface ThemeConfig {
-  colorScheme?: 'light' | 'dark' | 'auto';
+  colorScheme?: "light" | "dark" | "auto";
   primaryColor?: string;
   accentColor?: string;
-  borderRadius?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  borderRadius?: "none" | "sm" | "md" | "lg" | "xl" | "full";
 }
 
 // Event handler types
@@ -117,4 +117,4 @@ export type {
   ForwardedRef,
   ReactElement,
   ReactNode,
-} from 'react';
+} from "react";

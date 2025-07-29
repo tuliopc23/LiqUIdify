@@ -7,7 +7,7 @@
  * - Critical CSS inlining
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 // Types
 interface CSSLoaderOptions {
@@ -34,9 +34,9 @@ const cssChunks: Record<string, string> = {};
  */
 export function loadCSS(
   url: string,
-  options: CSSLoaderOptions = {}
+  options: CSSLoaderOptions = {},
 ): Promise<void> {
-  const { disabled = false, onLoad, onError, media = 'all', id } = options;
+  const { disabled = false, onLoad, onError, media = "all", id } = options;
 
   // Skip if disabled
   if (disabled) {
@@ -57,14 +57,14 @@ export function loadCSS(
   // Create loading promise
   const promise = new Promise<void>((resolve, reject) => {
     // Skip if no document (SSR)
-    if (typeof document === 'undefined') {
+    if (typeof document === "undefined") {
       resolve();
       return;
     }
 
     // Create link element
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
     link.href = url;
     link.media = media;
 
@@ -73,7 +73,7 @@ export function loadCSS(
     }
 
     // Handle load event
-    link.addEventListener('load', () => {
+    link.addEventListener("load", () => {
       loadedCSS.add(url);
       loadingCSS.delete(url);
       onLoad?.();
@@ -147,7 +147,7 @@ export function registerCSSChunks(chunks: Record<string, string>): void {
  */
 export function loadCSSChunk(
   name: string,
-  options: CSSChunkOptions = {}
+  options: CSSChunkOptions = {},
 ): Promise<void> {
   const url = cssChunks[name];
 
@@ -164,10 +164,10 @@ export function loadCSSChunk(
  */
 export function useCSSChunk(
   name: string,
-  options: CSSChunkOptions = {}
+  options: CSSChunkOptions = {},
 ): boolean {
   const url = cssChunks[name];
-  return useCSS(url || '', options);
+  return useCSS(url || "", options);
 }
 
 /**
@@ -175,7 +175,7 @@ export function useCSSChunk(
  */
 export function withCSSChunk<P extends {}>(
   Component: React.ComponentType<P>,
-  chunkName: string
+  chunkName: string,
 ): React.ComponentType<P> {
   return (props: P) => {
     useCSSChunk(chunkName);
@@ -188,7 +188,7 @@ export function withCSSChunk<P extends {}>(
  */
 export function getCriticalCSS(): string {
   // This would be replaced at build time with actual critical CSS
-  return process.env.GLASS_UI_CRITICAL_CSS || '';
+  return process.env.GLASS_UI_CRITICAL_CSS || "";
 }
 
 // Export all functions

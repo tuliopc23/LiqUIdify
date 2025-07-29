@@ -1,58 +1,58 @@
-import { motion } from 'framer-motion';
-import React from 'react';
-import { cn } from '@/core/utils/classname';
-import { generateStaticKey } from '@/core/utils/stable-key';
+import { motion } from "framer-motion";
+import React from "react";
+import { cn } from "@/core/utils/classname";
+import { generateStaticKey } from "@/core/utils/stable-key";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
-} from '../../lib/variant-system';
+} from "../../lib/variant-system";
 
 const spinnerVariants = cva(
-  ['inline-block rounded-full', 'border-2 border-solid'],
+  ["inline-block rounded-full", "border-2 border-solid"],
 
   {
     variants: {
       variant: {
-        default: 'border-white/20 border-t-blue-400',
-        primary: 'border-white/20 border-t-blue-500',
-        secondary: 'border-white/20 border-t-purple-400',
-        success: 'border-white/20 border-t-green-400',
-        warning: 'border-white/20 border-t-yellow-400',
-        error: 'border-white/20 border-t-red-400',
-        glass: 'border-white/10 border-t-white/50 backdrop-blur-sm',
+        default: "border-white/20 border-t-blue-400",
+        primary: "border-white/20 border-t-blue-500",
+        secondary: "border-white/20 border-t-purple-400",
+        success: "border-white/20 border-t-green-400",
+        warning: "border-white/20 border-t-yellow-400",
+        error: "border-white/20 border-t-red-400",
+        glass: "border-white/10 border-t-white/50 backdrop-blur-sm",
       },
       size: {
-        xs: 'h-3 w-3 border',
-        sm: 'h-4 w-4 border',
-        md: 'h-6 w-6 border-2',
-        lg: 'h-8 w-8 border-2',
-        xl: 'h-12 w-12 border-2',
-        '2xl': 'h-16 w-16 border-4',
+        xs: "h-3 w-3 border",
+        sm: "h-4 w-4 border",
+        md: "h-6 w-6 border-2",
+        lg: "h-8 w-8 border-2",
+        xl: "h-12 w-12 border-2",
+        "2xl": "h-16 w-16 border-4",
       },
       speed: {
-        slow: 'animate-spin-slow',
-        normal: 'animate-spin',
-        fast: 'animate-spin-fast',
+        slow: "animate-spin-slow",
+        normal: "animate-spin",
+        fast: "animate-spin-fast",
       },
     },
     defaultVariants: {
-      variant: 'default',
-      size: 'md',
-      speed: 'normal',
+      variant: "default",
+      size: "md",
+      speed: "normal",
     },
-  }
+  },
 );
 
 const containerVariants = cva({
-  base: 'flex items-center justify-center',
+  base: "flex items-center justify-center",
   variants: {
     orientation: {
-      horizontal: 'flex-row space-x-2',
-      vertical: 'flex-col space-y-2',
+      horizontal: "flex-row space-x-2",
+      vertical: "flex-col space-y-2",
     },
   },
   defaultVariants: {
-    orientation: 'horizontal',
+    orientation: "horizontal",
   },
 });
 
@@ -78,21 +78,21 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
       size,
       speed,
       orientation,
-      label = 'Loading...',
+      label = "Loading...",
       showLabel = false,
       centered = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const SpinnerElement = () => (
       <motion.div
         className={cn(spinnerVariants({ variant, size, speed }), className)}
         animate={{ rotate: 360 }}
         transition={{
-          duration: speed === 'slow' ? 2 : speed === 'fast' ? 0.5 : 1,
+          duration: speed === "slow" ? 2 : speed === "fast" ? 0.5 : 1,
           repeat: Infinity,
-          ease: 'linear',
+          ease: "linear",
         }}
         role="status"
         aria-label={label}
@@ -104,8 +104,8 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
         ref={ref}
         className={cn(
           containerVariants({ orientation }),
-          centered && 'fixed inset-0 z-50 bg-black/20 backdrop-blur-sm',
-          className
+          centered && "fixed inset-0 z-50 bg-black/20 backdrop-blur-sm",
+          className,
         )}
         {...props}
       >
@@ -117,27 +117,27 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
     );
 
     return content;
-  }
+  },
 );
 
 // Pulse spinner variant
 export const PulseSpinner: React.FC<{
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   color?: string;
-}> = ({ className, size = 'md', color = 'white' }) => {
+}> = ({ className, size = "md", color = "white" }) => {
   const sizeClasses = {
-    sm: 'w-2 h-2',
-    md: 'w-3 h-3',
-    lg: 'w-4 h-4',
+    sm: "w-2 h-2",
+    md: "w-3 h-3",
+    lg: "w-4 h-4",
   };
 
   return (
-    <div className={cn('flex space-x-1', className)}>
+    <div className={cn("flex space-x-1", className)}>
       {[0, 1, 2].map((index) => (
         <motion.div
-          key={generateStaticKey('pulse', index)}
-          className={cn('rounded-full', sizeClasses[size], `bg-${color}/50`)}
+          key={generateStaticKey("pulse", index)}
+          className={cn("rounded-full", sizeClasses[size], `bg-${color}/50`)}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.5, 1, 0.5],
@@ -146,7 +146,7 @@ export const PulseSpinner: React.FC<{
             duration: 1.2,
             repeat: Infinity,
             delay: index * 0.2,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
         />
       ))}
@@ -157,21 +157,21 @@ export const PulseSpinner: React.FC<{
 // Dots spinner variant
 export const DotsSpinner: React.FC<{
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   count?: number;
-}> = ({ className, size = 'md', count = 3 }) => {
+}> = ({ className, size = "md", count = 3 }) => {
   const sizeClasses = {
-    sm: 'w-1.5 h-1.5',
-    md: 'w-2 h-2',
-    lg: 'w-3 h-3',
+    sm: "w-1.5 h-1.5",
+    md: "w-2 h-2",
+    lg: "w-3 h-3",
   };
 
   return (
-    <div className={cn('flex space-x-1', className)}>
+    <div className={cn("flex space-x-1", className)}>
       {Array.from({ length: count }).map((_, index) => (
         <motion.div
-          key={generateStaticKey('dot', index)}
-          className={cn('rounded-full bg-white/60', sizeClasses[size])}
+          key={generateStaticKey("dot", index)}
+          className={cn("rounded-full bg-white/60", sizeClasses[size])}
           animate={{
             y: [0, -8, 0],
           }}
@@ -179,7 +179,7 @@ export const DotsSpinner: React.FC<{
             duration: 0.6,
             repeat: Infinity,
             delay: index * 0.1,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
         />
       ))}
@@ -190,31 +190,31 @@ export const DotsSpinner: React.FC<{
 // Ring spinner variant
 export const RingSpinner: React.FC<{
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   thickness?: number;
-}> = ({ className, size = 'md', thickness = 2 }) => {
+}> = ({ className, size = "md", thickness = 2 }) => {
   const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-6 h-6',
-    lg: 'w-8 h-8',
+    sm: "w-4 h-4",
+    md: "w-6 h-6",
+    lg: "w-8 h-8",
   };
 
   return (
     <motion.div
       className={cn(
-        'rounded-full border-white/20',
+        "rounded-full border-white/20",
         sizeClasses[size],
-        className
+        className,
       )}
       style={{
         borderWidth: thickness,
-        borderTopColor: 'rgba(59, 130, 246, 0.8)',
+        borderTopColor: "rgba(59, 130, 246, 0.8)",
       }}
       animate={{ rotate: 360 }}
       transition={{
         duration: 1,
         repeat: Infinity,
-        ease: 'linear',
+        ease: "linear",
       }}
     />
   );
@@ -226,10 +226,10 @@ export const WaveSpinner: React.FC<{
   bars?: number;
 }> = ({ className, bars = 5 }) => {
   return (
-    <div className={cn('flex items-end space-x-1', className)}>
+    <div className={cn("flex items-end space-x-1", className)}>
       {Array.from({ length: bars }).map((_, index) => (
         <motion.div
-          key={generateStaticKey('wave-bar', index)}
+          key={generateStaticKey("wave-bar", index)}
           className="w-1 rounded-full bg-gradient-to-t from-blue-400 to-purple-400"
           animate={{
             height: [8, 24, 8],
@@ -238,7 +238,7 @@ export const WaveSpinner: React.FC<{
             duration: 1,
             repeat: Infinity,
             delay: index * 0.1,
-            ease: 'easeInOut',
+            ease: "easeInOut",
           }}
         />
       ))}
@@ -246,6 +246,6 @@ export const WaveSpinner: React.FC<{
   );
 };
 
-GlassSpinner.displayName = 'GlassSpinner';
+GlassSpinner.displayName = "GlassSpinner";
 
 export { GlassSpinner };

@@ -1,9 +1,9 @@
-import React, { createContext, type ReactNode, useContext } from 'react';
+import React, { createContext, type ReactNode, useContext } from "react";
 
 import {
   type DegradationConfig,
   GracefulDegradationManager,
-} from '../utils/graceful-degradation';
+} from "../utils/graceful-degradation";
 
 interface GracefulDegradationContextType {
   manager: GracefulDegradationManager;
@@ -45,7 +45,7 @@ export const useGracefulDegradation = () => {
   const context = useContext(GracefulDegradationContext);
   if (!context) {
     throw new Error(
-      'useGracefulDegradation must be used within GracefulDegradationProvider'
+      "useGracefulDegradation must be used within GracefulDegradationProvider",
     );
   }
   return context;

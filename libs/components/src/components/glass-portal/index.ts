@@ -1,1 +1,1 @@
-export { GlassPortal, type GlassPortalProps } from './glass-portal';
+export { GlassPortal, type GlassPortalProps } from "./glass-portal";

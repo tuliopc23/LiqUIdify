@@ -8,7 +8,7 @@
  * Check if code is running in a browser environment
  * @returns {boolean} true if running in browser, false if server-side
  */
-export const isBrowser = (): boolean => typeof window !== 'undefined';
+export const isBrowser = (): boolean => typeof window !== "undefined";
 export const isClient = isBrowser;
 export const isServer = (): boolean => !isBrowser();
 
@@ -16,13 +16,13 @@ export const isServer = (): boolean => !isBrowser();
  * Check if document object is available
  * @returns {boolean} true if document is available
  */
-export const isDocument = (): boolean => typeof document !== 'undefined';
+export const isDocument = (): boolean => typeof document !== "undefined";
 
 /**
  * Check if navigator object is available
  * @returns {boolean} true if navigator is available
  */
-export const isNavigator = (): boolean => typeof navigator !== 'undefined';
+export const isNavigator = (): boolean => typeof navigator !== "undefined";
 
 /**
  * Safe window object with SSR fallback
@@ -170,7 +170,7 @@ export const safeMatchMedia = (query: string): MediaQueryList | null => {
  * @returns {number | null} request ID or null
  */
 export const safeRequestAnimationFrame = (
-  callback: FrameRequestCallback
+  callback: FrameRequestCallback,
 ): number | null => {
   const win = safeWindow();
   return win?.requestAnimationFrame
@@ -197,9 +197,9 @@ export const safeCancelAnimationFrame = (id: number | null): void => {
  */
 export const safeSetTimeout = (
   callback: () => void,
-  delay: number
+  delay: number,
 ): NodeJS.Timeout | number | null => {
-  if (typeof setTimeout !== 'undefined') {
+  if (typeof setTimeout !== "undefined") {
     return setTimeout(callback, delay);
   }
   return;
@@ -210,7 +210,7 @@ export const safeSetTimeout = (
  * @param {NodeJS.Timeout | number | null} id - timeout ID to clear
  */
 export const safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
-  if (typeof clearTimeout !== 'undefined' && id !== null) {
+  if (typeof clearTimeout !== "undefined" && id !== null) {
     clearTimeout(id as unknown);
   }
 };
@@ -223,9 +223,9 @@ export const safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
  */
 export const safeSetInterval = (
   callback: () => void,
-  delay: number
+  delay: number,
 ): NodeJS.Timeout | number | null => {
-  if (typeof setInterval !== 'undefined') {
+  if (typeof setInterval !== "undefined") {
     return setInterval(callback, delay);
   }
   return;
@@ -236,7 +236,7 @@ export const safeSetInterval = (
  * @param {NodeJS.Timeout | number | null} id - interval ID to clear
  */
 export const safeClearInterval = (id: NodeJS.Timeout | number | null): void => {
-  if (typeof clearInterval !== 'undefined' && id !== null) {
+  if (typeof clearInterval !== "undefined" && id !== null) {
     clearInterval(id as unknown);
   }
 };
@@ -277,7 +277,7 @@ export const getScrollPosition = (): { x: number; y: number } => {
 export const safeAddEventListener = (
   event: string,
   handler: EventListener,
-  options?: AddEventListenerOptions
+  options?: AddEventListenerOptions,
 ): (() => void) => {
   const win = safeWindow();
 
@@ -294,7 +294,7 @@ export const safeAddEventListener = (
  * @returns {boolean} true if user prefers reduced motion
  */
 export const prefersReducedMotion = (): boolean => {
-  const mediaQuery = safeMatchMedia('(prefers-reduced-motion: reduce)');
+  const mediaQuery = safeMatchMedia("(prefers-reduced-motion: reduce)");
   return mediaQuery?.matches ?? false;
 };
 
@@ -303,7 +303,7 @@ export const prefersReducedMotion = (): boolean => {
  * @returns {boolean} true if user prefers dark scheme
  */
 export const prefersDarkScheme = (): boolean => {
-  const mediaQuery = safeMatchMedia('(prefers-color-scheme: dark)');
+  const mediaQuery = safeMatchMedia("(prefers-color-scheme: dark)");
   return mediaQuery?.matches ?? false;
 };
 
@@ -313,7 +313,7 @@ export const prefersDarkScheme = (): boolean => {
  */
 export const getUserAgent = (): string => {
   const nav = safeNavigator();
-  return nav?.userAgent || '';
+  return nav?.userAgent || "";
 };
 
 /**
@@ -325,7 +325,7 @@ export const isTouchDevice = (): boolean => {
   const nav = safeNavigator();
 
   return Boolean(
-    win && ('ontouchstart' in win || (nav && nav.maxTouchPoints > 0))
+    win && ("ontouchstart" in win || (nav && nav.maxTouchPoints > 0)),
   );
 };
 
@@ -336,7 +336,7 @@ export const isTouchDevice = (): boolean => {
  * @returns {Promise<T | null>} imported module or null
  */
 export const safeDynamicImport = async <T>(
-  importFunction: () => Promise<T>
+  importFunction: () => Promise<T>,
 ): Promise<T | null> => {
   if (!isBrowser()) {
     return;
@@ -366,11 +366,11 @@ export const createNoOp = (): (() => void) => {
  */
 export const safeIntersectionObserver = (
   callback: IntersectionObserverCallback,
-  options?: IntersectionObserverInit
+  options?: IntersectionObserverInit,
 ): IntersectionObserver | null => {
   const win = safeWindow();
 
-  if (win && 'IntersectionObserver' in win) {
+  if (win && "IntersectionObserver" in win) {
     return new IntersectionObserver(callback, options);
   }
 
@@ -383,11 +383,11 @@ export const safeIntersectionObserver = (
  * @returns {ResizeObserver | null} observer instance or null
  */
 export const safeResizeObserver = (
-  callback: ResizeObserverCallback
+  callback: ResizeObserverCallback,
 ): ResizeObserver | null => {
   const win = safeWindow();
 
-  if (win && 'ResizeObserver' in win) {
+  if (win && "ResizeObserver" in win) {
     return new ResizeObserver(callback);
   }
 
@@ -400,11 +400,11 @@ export const safeResizeObserver = (
  * @returns {MutationObserver | null} observer instance or null
  */
 export const safeMutationObserver = (
-  callback: MutationCallback
+  callback: MutationCallback,
 ): MutationObserver | null => {
   const win = safeWindow();
 
-  if (win && 'MutationObserver' in win) {
+  if (win && "MutationObserver" in win) {
     return new MutationObserver(callback);
   }
 
@@ -418,7 +418,7 @@ export const safeMutationObserver = (
  */
 export const clientOnly = (
   callback: () => void,
-  _deps: Array<unknown> = []
+  _deps: Array<unknown> = [],
 ): void => {
   if (isBrowser()) {
     callback();
@@ -431,7 +431,7 @@ export const clientOnly = (
  * @returns {CSSStyleDeclaration | null} computed style or null
  */
 export const safeGetComputedStyle = (
-  element: Element
+  element: Element,
 ): CSSStyleDeclaration | null => {
   const win = safeWindow();
   return win?.getComputedStyle ? win.getComputedStyle(element) : undefined;
@@ -443,7 +443,7 @@ export const safeGetComputedStyle = (
  * @returns {HTMLElementTagNameMap[K] | null} created element or null
  */
 export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
-  tagName: K
+  tagName: K,
 ): HTMLElementTagNameMap[K] | null => {
   const document_ = safeDocument();
   return document_?.createElement
@@ -469,7 +469,7 @@ export const safeQuerySelector = (selector: string): Element | null => {
  * @returns {NodeListOf<Element> | []} matched elements or empty array
  */
 export const safeQuerySelectorAll = (
-  selector: string
+  selector: string,
 ): NodeListOf<Element> | [] => {
   const document_ = safeDocument();
   return document_?.querySelectorAll

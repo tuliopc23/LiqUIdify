@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { GlassSkipNavigation } from './glass-skip-navigation';
+import type { Meta, StoryObj } from "@storybook/react";
+import { GlassSkipNavigation } from "./glass-skip-navigation";
 
 const meta = {
-  title: 'Components/GlassSkipNavigation',
+  title: "Components/GlassSkipNavigation",
   component: GlassSkipNavigation,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
         component: `
@@ -24,7 +24,7 @@ or accepts custom links.
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <div className="relative min-h-screen">
@@ -110,29 +110,29 @@ or accepts custom links.
   ],
   argTypes: {
     links: {
-      description: 'Custom skip links',
-      control: { type: 'object' },
+      description: "Custom skip links",
+      control: { type: "object" },
     },
     autoGenerate: {
-      description: 'Automatically generate links from landmarks',
-      control: { type: 'boolean' },
+      description: "Automatically generate links from landmarks",
+      control: { type: "boolean" },
     },
     position: {
-      description: 'Position of the skip navigation',
-      control: { type: 'select' },
-      options: ['top', 'left', 'right'],
+      description: "Position of the skip navigation",
+      control: { type: "select" },
+      options: ["top", "left", "right"],
     },
     visibleOnFocus: {
-      description: 'Only show when focused',
-      control: { type: 'boolean' },
+      description: "Only show when focused",
+      control: { type: "boolean" },
     },
     alwaysVisible: {
-      description: 'Always show the skip navigation',
-      control: { type: 'boolean' },
+      description: "Always show the skip navigation",
+      control: { type: "boolean" },
     },
     className: {
-      description: 'Additional CSS classes',
-      control: { type: 'text' },
+      description: "Additional CSS classes",
+      control: { type: "text" },
     },
   },
 } satisfies Meta<typeof GlassSkipNavigation>;
@@ -144,7 +144,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     autoGenerate: true,
-    position: 'top',
+    position: "top",
     visibleOnFocus: true,
   },
 };
@@ -153,12 +153,12 @@ export const Default: Story = {
 export const CustomLinks: Story = {
   args: {
     links: [
-      { href: '#main-content', label: 'Skip to main content' },
-      { href: '#navigation', label: 'Skip to navigation' },
-      { href: '#features', label: 'Skip to features' },
-      { href: '#pricing', label: 'Skip to pricing' },
-      { href: '#sidebar', label: 'Skip to sidebar' },
-      { href: '#footer', label: 'Skip to page footer' },
+      { href: "#main-content", label: "Skip to main content" },
+      { href: "#navigation", label: "Skip to navigation" },
+      { href: "#features", label: "Skip to features" },
+      { href: "#pricing", label: "Skip to pricing" },
+      { href: "#sidebar", label: "Skip to sidebar" },
+      { href: "#footer", label: "Skip to page footer" },
     ],
     autoGenerate: false,
   },
@@ -186,8 +186,8 @@ export const Positions: Story = {
             position="top"
             alwaysVisible
             links={[
-              { href: '#content1', label: 'Skip to content' },
-              { href: '#nav1', label: 'Skip to navigation' },
+              { href: "#content1", label: "Skip to content" },
+              { href: "#nav1", label: "Skip to navigation" },
             ]}
           />
         </div>
@@ -202,8 +202,8 @@ export const Positions: Story = {
             position="left"
             alwaysVisible
             links={[
-              { href: '#content2', label: 'Skip to content' },
-              { href: '#nav2', label: 'Skip to navigation' },
+              { href: "#content2", label: "Skip to content" },
+              { href: "#nav2", label: "Skip to navigation" },
             ]}
           />
         </div>
@@ -218,8 +218,8 @@ export const Positions: Story = {
             position="right"
             alwaysVisible
             links={[
-              { href: '#content3', label: 'Skip to content' },
-              { href: '#nav3', label: 'Skip to navigation' },
+              { href: "#content3", label: "Skip to content" },
+              { href: "#nav3", label: "Skip to navigation" },
             ]}
           />
         </div>
@@ -236,31 +236,31 @@ export const WithInstructions: Story = {
         <h3 className="mb-2 font-semibold">Keyboard Navigation Instructions</h3>
         <ol className="list-inside list-decimal space-y-1 text-sm">
           <li>
-            Press{' '}
+            Press{" "}
             <kbd className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700">
               Tab
-            </kbd>{' '}
+            </kbd>{" "}
             to focus the skip links
           </li>
           <li>
-            Use{' '}
+            Use{" "}
             <kbd className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700">
               Arrow Keys
-            </kbd>{' '}
+            </kbd>{" "}
             to navigate between links
           </li>
           <li>
-            Press{' '}
+            Press{" "}
             <kbd className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700">
               Enter
-            </kbd>{' '}
+            </kbd>{" "}
             to jump to the section
           </li>
           <li>
-            Press{' '}
+            Press{" "}
             <kbd className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700">
               Escape
-            </kbd>{' '}
+            </kbd>{" "}
             to hide the menu
           </li>
         </ol>
@@ -268,9 +268,9 @@ export const WithInstructions: Story = {
 
       <GlassSkipNavigation
         links={[
-          { href: '#instructions', label: 'Skip to instructions' },
-          { href: '#demo-content', label: 'Skip to demo content' },
-          { href: '#demo-footer', label: 'Skip to footer' },
+          { href: "#instructions", label: "Skip to instructions" },
+          { href: "#demo-content", label: "Skip to demo content" },
+          { href: "#demo-footer", label: "Skip to footer" },
         ]}
       />
 
@@ -299,10 +299,10 @@ export const RealWorldExample: Story = {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <GlassSkipNavigation
         links={[
-          { href: '#main-navigation', label: 'Skip to navigation' },
-          { href: '#main-content', label: 'Skip to main content' },
-          { href: '#search', label: 'Skip to search' },
-          { href: '#footer-nav', label: 'Skip to footer' },
+          { href: "#main-navigation", label: "Skip to navigation" },
+          { href: "#main-content", label: "Skip to main content" },
+          { href: "#search", label: "Skip to search" },
+          { href: "#footer-nav", label: "Skip to footer" },
         ]}
       />
 
@@ -414,8 +414,8 @@ export const StylingVariations: Story = {
           <GlassSkipNavigation
             alwaysVisible
             links={[
-              { href: '#content', label: 'Skip to content' },
-              { href: '#nav', label: 'Skip to navigation' },
+              { href: "#content", label: "Skip to content" },
+              { href: "#nav", label: "Skip to navigation" },
             ]}
           />
         </div>
@@ -439,8 +439,8 @@ export const StylingVariations: Story = {
             className="custom-skip-nav"
             alwaysVisible
             links={[
-              { href: '#content', label: 'Skip to content' },
-              { href: '#nav', label: 'Skip to navigation' },
+              { href: "#content", label: "Skip to content" },
+              { href: "#nav", label: "Skip to navigation" },
             ]}
           />
         </div>
@@ -468,9 +468,9 @@ export const AccessibilityTesting: Story = {
 
       <GlassSkipNavigation
         links={[
-          { href: '#test-1', label: 'Skip to first test section' },
-          { href: '#test-2', label: 'Skip to second test section' },
-          { href: '#test-3', label: 'Skip to third test section' },
+          { href: "#test-1", label: "Skip to first test section" },
+          { href: "#test-2", label: "Skip to second test section" },
+          { href: "#test-3", label: "Skip to third test section" },
         ]}
       />
 

@@ -1,17 +1,17 @@
-import { Heart, MessageCircle, Star } from 'lucide-react';
-import { GlassResponsiveCard } from './glass-responsive-card';
-import '@/styles/apple-liquid-authentic.css';
+import { Heart, MessageCircle, Star } from "lucide-react";
+import { GlassResponsiveCard } from "./glass-responsive-card";
+import "@/styles/apple-liquid-authentic.css";
 
 export default {
-  title: 'Components/GlassResponsiveCard',
+  title: "Components/GlassResponsiveCard",
   component: GlassResponsiveCard,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A responsive card component with Liquid Glass styling for consistent Apple-inspired UI.',
+          "A responsive card component with Liquid Glass styling for consistent Apple-inspired UI.",
       },
     },
   },

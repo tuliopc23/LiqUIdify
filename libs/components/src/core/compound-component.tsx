@@ -5,15 +5,15 @@
  * patterns and proper forwardRef usage throughout the Glass UI library.
  */
 
-import { Slot } from '@radix-ui/react-slot';
-import React, { forwardRef, useMemo } from 'react';
+import { Slot } from "@radix-ui/react-slot";
+import React, { forwardRef, useMemo } from "react";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 import type {
   ComponentPropsBuilder,
   CompoundComponentProps,
   UnifiedGlassProps,
-} from './base-component';
+} from "./base-component";
 
 // Context for compound components
 export interface CompoundComponentContext {
@@ -27,7 +27,7 @@ export interface CompoundComponentContext {
 // Create compound component context
 export function createCompoundContext<T extends CompoundComponentContext>(
   displayName: string,
-  defaultValue?: T
+  defaultValue?: T,
 ) {
   const Context = React.createContext<T | undefined>(defaultValue);
 
@@ -39,7 +39,7 @@ export function createCompoundContext<T extends CompoundComponentContext>(
     const context = React.useContext(Context);
     if (!context) {
       throw new Error(
-        `use${displayName} must be used within a ${displayName}Provider`
+        `use${displayName} must be used within a ${displayName}Provider`,
       );
     }
     return context;
@@ -73,7 +73,7 @@ export function createCompoundComponent<
 >(options: CompoundComponentOptions<T>) {
   const {
     displayName,
-    defaultElement = 'div',
+    defaultElement = "div",
     defaultClassName,
     defaultProps = {},
     asChild = true,
@@ -95,7 +95,7 @@ export function createCompoundComponent<
               ...props,
               className: cn(defaultClassName, className),
             }),
-            [props, className]
+            [props, className],
           );
 
           return (
@@ -103,7 +103,7 @@ export function createCompoundComponent<
               {children}
             </Comp>
           );
-        }
+        },
       )
     : ({
         className,
@@ -121,13 +121,13 @@ export function createCompoundComponent<
             ...props,
             className: cn(defaultClassName, className),
           }),
-          [props, className]
+          [props, className],
         );
 
         return <Comp {...mergedProps}>{children}</Comp>;
       };
 
-  if ('displayName' in Component) {
+  if ("displayName" in Component) {
     Component.displayName = displayName;
   }
 
@@ -144,13 +144,13 @@ export function createCompoundComponentWithContext<
 >(
   options: CompoundComponentOptions<T> & {
     contextDefaultValue?: C;
-  }
+  },
 ) {
   const { contextDefaultValue, ...componentOptions } = options;
 
   const { Provider, useContext, Context } = createCompoundContext<C>(
     options.displayName,
-    contextDefaultValue
+    contextDefaultValue,
   );
 
   const Component = createCompoundComponent<T, P>(componentOptions);
@@ -179,14 +179,14 @@ export function withGlassEffects<
           variant,
           size,
         }),
-        [glassEffect, variant, size, defaultGlassConfig]
+        [glassEffect, variant, size, defaultGlassConfig],
       );
 
       return <Component ref={ref} {...glassProps} {...(props as P)} />;
-    }
+    },
   );
 
-  WrappedComponent.displayName = `withGlassEffects(${Component.displayName || 'Component'})`;
+  WrappedComponent.displayName = `withGlassEffects(${Component.displayName || "Component"})`;
 
   return WrappedComponent;
 }
@@ -195,15 +195,15 @@ export function withGlassEffects<
  * Utility for creating polymorphic compound components
  */
 export function createPolymorphicCompoundComponent<
-  T extends React.ElementType = 'div',
+  T extends React.ElementType = "div",
   P extends Record<string, unknown> = {},
 >(
   options: CompoundComponentOptions<HTMLElement> & {
     /** Default element type */
     defaultAs?: T;
-  }
+  },
 ) {
-  const { defaultAs = 'div' as T, ...componentOptions } = options;
+  const { defaultAs = "div" as T, ...componentOptions } = options;
 
   type PolymorphicProps<As extends React.ElementType> = {
     as?: As;
@@ -220,7 +220,7 @@ export function createPolymorphicCompoundComponent<
           ...props,
           className: cn(componentOptions.defaultClassName, className),
         }),
-        [props, className]
+        [props, className],
       );
 
       return (
@@ -228,7 +228,7 @@ export function createPolymorphicCompoundComponent<
           {children}
         </Comp>
       );
-    }
+    },
   );
 
   Component.displayName = options.displayName;
@@ -255,7 +255,7 @@ export function createCompoundComponentCollection<
  */
 export function useCompoundComponentState<T extends Record<string, unknown>>(
   initialState: T,
-  context?: React.Context<T | undefined>
+  context?: React.Context<T | undefined>,
 ) {
   const [state, setState] = React.useState<T>(initialState);
 
@@ -271,7 +271,7 @@ export function useCompoundComponentState<T extends Record<string, unknown>>(
       ...contextValue,
       ...state,
     }),
-    [initialState, contextValue, state]
+    [initialState, contextValue, state],
   );
 
   const updateState = React.useCallback((updates: Partial<T>) => {
@@ -293,7 +293,7 @@ export function createAccessibleCompoundComponent<
     defaultRole?: string;
     /** Default ARIA attributes */
     defaultAriaAttributes?: Record<string, string | boolean>;
-  }
+  },
 ) {
   const { defaultRole, defaultAriaAttributes, ...componentOptions } = options;
 
@@ -321,7 +321,7 @@ export function createResponsiveCompoundComponent<
     breakpoints?: Record<string, string>;
     /** Default responsive props */
     defaultResponsiveProps?: Record<string, unknown>;
-  }
+  },
 ) {
   const { breakpoints, defaultResponsiveProps, ...componentOptions } = options;
 

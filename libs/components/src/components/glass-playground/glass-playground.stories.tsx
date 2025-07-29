@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Code,
   Eye,
@@ -7,20 +7,20 @@ import {
   Palette,
   Play,
   Settings,
-} from 'lucide-react';
-import { useState } from 'react';
-import { GlassCard } from '../glass-card-refactored/glass-card';
-import { GlassInput } from '../glass-input/glass-input';
-import { GlassSelect } from '../glass-select/glass-select';
-import { GlassSwitch } from '../glass-switch/glass-switch';
-import { GlassTabs } from '../glass-tabs/glass-tabs';
-import { GlassPlayground, PlaygroundTemplates } from './glass-playground';
+} from "lucide-react";
+import { useState } from "react";
+import { GlassCard } from "../glass-card-refactored/glass-card";
+import { GlassInput } from "../glass-input/glass-input";
+import { GlassSelect } from "../glass-select/glass-select";
+import { GlassSwitch } from "../glass-switch/glass-switch";
+import { GlassTabs } from "../glass-tabs/glass-tabs";
+import { GlassPlayground, PlaygroundTemplates } from "./glass-playground";
 
 const meta = {
-  title: 'Components/Development/GlassPlayground',
+  title: "Components/Development/GlassPlayground",
   component: GlassPlayground,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
         component: `
@@ -97,80 +97,80 @@ The playground component includes:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Content
     code: {
-      control: 'text',
-      description: 'Initial code content for the playground',
+      control: "text",
+      description: "Initial code content for the playground",
     },
     title: {
-      control: 'text',
-      description: 'Title displayed in the playground header',
+      control: "text",
+      description: "Title displayed in the playground header",
     },
     description: {
-      control: 'text',
-      description: 'Description text shown below the title',
+      control: "text",
+      description: "Description text shown below the title",
     },
 
     // Layout
     showEditor: {
-      control: 'boolean',
-      description: 'Whether to show the code editor',
+      control: "boolean",
+      description: "Whether to show the code editor",
       table: {
-        defaultValue: { summary: 'true' },
+        defaultValue: { summary: "true" },
       },
     },
     showPreview: {
-      control: 'boolean',
-      description: 'Whether to show the live preview',
+      control: "boolean",
+      description: "Whether to show the live preview",
       table: {
-        defaultValue: { summary: 'true' },
+        defaultValue: { summary: "true" },
       },
     },
     height: {
-      control: 'number',
-      description: 'Height of the playground container in pixels',
+      control: "number",
+      description: "Height of the playground container in pixels",
       table: {
-        defaultValue: { summary: '400' },
+        defaultValue: { summary: "400" },
       },
     },
 
     // Behavior
     editable: {
-      control: 'boolean',
-      description: 'Whether the code can be edited',
+      control: "boolean",
+      description: "Whether the code can be edited",
       table: {
-        defaultValue: { summary: 'true' },
+        defaultValue: { summary: "true" },
       },
     },
     autoRun: {
-      control: 'boolean',
-      description: 'Whether to automatically run code changes',
+      control: "boolean",
+      description: "Whether to automatically run code changes",
       table: {
-        defaultValue: { summary: 'true' },
+        defaultValue: { summary: "true" },
       },
     },
 
     // Appearance
     theme: {
-      control: 'select',
-      options: ['light', 'dark'],
-      description: 'Editor theme',
+      control: "select",
+      options: ["light", "dark"],
+      description: "Editor theme",
       table: {
-        defaultValue: { summary: 'light' },
+        defaultValue: { summary: "light" },
       },
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
 
     // Advanced
     scope: {
-      control: 'object',
+      control: "object",
       description:
-        'Additional components and variables available in the playground',
+        "Additional components and variables available in the playground",
     },
   },
 } satisfies Meta<typeof GlassPlayground>;
@@ -182,13 +182,13 @@ type Story = StoryObj<typeof meta>;
 export const Playground: Story = {
   args: {
     code: PlaygroundTemplates.button,
-    title: 'Interactive Playground',
-    description: 'Edit the code below to see changes in real-time',
+    title: "Interactive Playground",
+    description: "Edit the code below to see changes in real-time",
     showEditor: true,
     showPreview: true,
     editable: true,
     height: 400,
-    theme: 'light',
+    theme: "light",
     autoRun: true,
   },
 };
@@ -286,28 +286,28 @@ export const LayoutVariations: Story = {
 export const InteractiveDemo: Story = {
   args: {},
   render: () => {
-    const [selectedTemplate, setSelectedTemplate] = useState('button');
+    const [selectedTemplate, setSelectedTemplate] = useState("button");
     const [showEditor, setShowEditor] = useState(true);
     const [showPreview, setShowPreview] = useState(true);
     const [isEditable, setIsEditable] = useState(true);
     const [playgroundHeight, setPlaygroundHeight] = useState(400);
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
+    const [theme, setTheme] = useState<"light" | "dark">("light");
 
     const templates = {
       button: {
         code: PlaygroundTemplates.button,
-        title: 'Button Components',
-        description: 'Interactive button showcase with variants',
+        title: "Button Components",
+        description: "Interactive button showcase with variants",
       },
       card: {
         code: PlaygroundTemplates.card,
-        title: 'Glass Card',
-        description: 'Card component with glassmorphism effects',
+        title: "Glass Card",
+        description: "Card component with glassmorphism effects",
       },
       form: {
         code: PlaygroundTemplates.form,
-        title: 'Interactive Form',
-        description: 'Form with validation and state management',
+        title: "Interactive Form",
+        description: "Form with validation and state management",
       },
     };
 
@@ -334,9 +334,9 @@ export const InteractiveDemo: Story = {
                   value={selectedTemplate}
                   onChange={setSelectedTemplate}
                   options={[
-                    { value: 'button', label: 'Button Components' },
-                    { value: 'card', label: 'Glass Card' },
-                    { value: 'form', label: 'Interactive Form' },
+                    { value: "button", label: "Button Components" },
+                    { value: "card", label: "Glass Card" },
+                    { value: "form", label: "Interactive Form" },
                   ]}
                 />
               </div>
@@ -368,10 +368,10 @@ export const InteractiveDemo: Story = {
                 <GlassSelect
                   id="theme-select"
                   value={theme}
-                  onChange={(value) => setTheme(value as 'light' | 'dark')}
+                  onChange={(value) => setTheme(value as "light" | "dark")}
                   options={[
-                    { value: 'light', label: 'Light Theme' },
-                    { value: 'dark', label: 'Dark Theme' },
+                    { value: "light", label: "Light Theme" },
+                    { value: "dark", label: "Dark Theme" },
                   ]}
                 />
               </div>
@@ -648,7 +648,7 @@ export const AdvancedFeatures: Story = {
         <GlassTabs
           tabs={[
             {
-              id: 'basic',
+              id: "basic",
               label: (
                 <div className="flex items-center gap-2">
                   <Play className="h-4 w-4" />
@@ -665,7 +665,7 @@ export const AdvancedFeatures: Story = {
               ),
             },
             {
-              id: 'advanced',
+              id: "advanced",
               label: (
                 <div className="flex items-center gap-2">
                   <Layers className="h-4 w-4" />
@@ -682,7 +682,7 @@ export const AdvancedFeatures: Story = {
               ),
             },
             {
-              id: 'custom',
+              id: "custom",
               label: (
                 <div className="flex items-center gap-2">
                   <Palette className="h-4 w-4" />

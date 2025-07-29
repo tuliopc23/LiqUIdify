@@ -13,7 +13,7 @@ type Brand<T, TBrand> = T & { [brand]: TBrand };
  * const color: GlassColor = createGlassColor('#3b82f6');
  * const invalid: GlassColor = '#xyz'; // Type error
  */
-export type GlassColor = Brand<string, 'GlassColor'>;
+export type GlassColor = Brand<string, "GlassColor">;
 
 export const createGlassColor = (color: string): GlassColor => {
   if (!isValidGlassColor(color)) {
@@ -43,12 +43,12 @@ export function isValidGlassColor(color: string): boolean {
  * const ratio: AccessibleContrast = createAccessibleContrast(4.5);
  * const invalid: AccessibleContrast = createAccessibleContrast(1.5); // Throws error
  */
-export type AccessibleContrast = Brand<number, 'AccessibleContrast'>;
+export type AccessibleContrast = Brand<number, "AccessibleContrast">;
 
 export const createAccessibleContrast = (ratio: number): AccessibleContrast => {
   if (!isValidContrastRatio(ratio)) {
     throw new Error(
-      `Contrast ratio ${ratio} does not meet WCAG standards. Minimum is 3:1`
+      `Contrast ratio ${ratio} does not meet WCAG standards. Minimum is 3:1`,
     );
   }
   return ratio as AccessibleContrast;
@@ -65,7 +65,7 @@ export function isValidContrastRatio(ratio: number): boolean {
  * const opacity: GlassOpacity = createGlassOpacity(0.25);
  * const invalid: GlassOpacity = createGlassOpacity(1.5); // Throws error
  */
-export type GlassOpacity = Brand<number, 'GlassOpacity'>;
+export type GlassOpacity = Brand<number, "GlassOpacity">;
 
 export const createGlassOpacity = (opacity: number): GlassOpacity => {
   if (opacity < 0 || opacity > 1) {
@@ -80,7 +80,7 @@ export const createGlassOpacity = (opacity: number): GlassOpacity => {
  * const blur: GlassBlur = createGlassBlur(16);
  * const invalid: GlassBlur = createGlassBlur(-5); // Throws error
  */
-export type GlassBlur = Brand<number, 'GlassBlur'>;
+export type GlassBlur = Brand<number, "GlassBlur">;
 
 export const createGlassBlur = (pixels: number): GlassBlur => {
   if (pixels < 0 || pixels > 100) {
@@ -96,7 +96,7 @@ export const createGlassBlur = (pixels: number): GlassBlur => {
  * const height: CSSUnit = createCSSUnit('50%');
  * const invalid: CSSUnit = createCSSUnit('invalid'); // Throws error
  */
-export type CSSUnit = Brand<string, 'CSSUnit'>;
+export type CSSUnit = Brand<string, "CSSUnit">;
 
 export const createCSSUnit = (value: string): CSSUnit => {
   if (!isValidCSSUnit(value)) {
@@ -108,7 +108,7 @@ export const createCSSUnit = (value: string): CSSUnit => {
 export function isValidCSSUnit(value: string): boolean {
   const pattern =
     /^-?\d*\.?\d+(px|em|rem|%|vh|vw|vmin|vmax|ch|ex|cm|mm|in|pt|pc)$/;
-  return pattern.test(value) || value === '0' || value === 'auto';
+  return pattern.test(value) || value === "0" || value === "auto";
 }
 
 /**
@@ -117,12 +117,12 @@ export function isValidCSSUnit(value: string): boolean {
  * const duration: AnimationDuration = createAnimationDuration(300);
  * const invalid: AnimationDuration = createAnimationDuration(-100); // Throws error
  */
-export type AnimationDuration = Brand<number, 'AnimationDuration'>;
+export type AnimationDuration = Brand<number, "AnimationDuration">;
 
 export const createAnimationDuration = (ms: number): AnimationDuration => {
   if (ms < 0 || ms > 10_000) {
     throw new Error(
-      `Animation duration must be between 0 and 10000ms, got ${ms}`
+      `Animation duration must be between 0 and 10000ms, got ${ms}`,
     );
   }
   return ms as AnimationDuration;
@@ -134,7 +134,7 @@ export const createAnimationDuration = (ms: number): AnimationDuration => {
  * const zIndex: ZIndex = createZIndex(100);
  * const invalid: ZIndex = createZIndex(10000); // Throws error (too high)
  */
-export type ZIndex = Brand<number, 'ZIndex'>;
+export type ZIndex = Brand<number, "ZIndex">;
 
 export const createZIndex = (value: number): ZIndex => {
   if (value < -999 || value > 9999) {
@@ -149,21 +149,21 @@ export const createZIndex = (value: number): ZIndex => {
  * const theme: ThemeName = createThemeName('dark');
  * const invalid: ThemeName = createThemeName('random'); // Throws error
  */
-export type ThemeName = Brand<string, 'ThemeName'>;
+export type ThemeName = Brand<string, "ThemeName">;
 
 const VALID_THEMES = [
-  'light',
-  'dark',
-  'auto',
-  'ocean',
-  'forest',
-  'sunset',
+  "light",
+  "dark",
+  "auto",
+  "ocean",
+  "forest",
+  "sunset",
 ] as const;
 
 export const createThemeName = (name: string): ThemeName => {
   if (!VALID_THEMES.includes(name as unknown)) {
     throw new Error(
-      `Invalid theme name: ${name}. Valid themes: ${VALID_THEMES.join(', ')}`
+      `Invalid theme name: ${name}. Valid themes: ${VALID_THEMES.join(", ")}`,
     );
   }
   return name as ThemeName;
@@ -175,14 +175,14 @@ export const createThemeName = (name: string): ThemeName => {
  * const size: ComponentSize = createComponentSize('md');
  * const invalid: ComponentSize = createComponentSize('huge'); // Throws error
  */
-export type ComponentSize = Brand<string, 'ComponentSize'>;
+export type ComponentSize = Brand<string, "ComponentSize">;
 
-const VALID_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+const VALID_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 
 export const createComponentSize = (size: string): ComponentSize => {
   if (!VALID_SIZES.includes(size as unknown)) {
     throw new Error(
-      `Invalid component size: ${size}. Valid sizes: ${VALID_SIZES.join(', ')}`
+      `Invalid component size: ${size}. Valid sizes: ${VALID_SIZES.join(", ")}`,
     );
   }
   return size as ComponentSize;
@@ -193,31 +193,31 @@ export const createComponentSize = (size: string): ComponentSize => {
  */
 export const isBrandedType = {
   isGlassColor: (value: unknown): value is GlassColor =>
-    typeof value === 'string' && isValidGlassColor(value),
+    typeof value === "string" && isValidGlassColor(value),
 
   isAccessibleContrast: (value: unknown): value is AccessibleContrast =>
-    typeof value === 'number' && isValidContrastRatio(value),
+    typeof value === "number" && isValidContrastRatio(value),
 
   isGlassOpacity: (value: unknown): value is GlassOpacity =>
-    typeof value === 'number' && value >= 0 && value <= 1,
+    typeof value === "number" && value >= 0 && value <= 1,
 
   isGlassBlur: (value: unknown): value is GlassBlur =>
-    typeof value === 'number' && value >= 0 && value <= 100,
+    typeof value === "number" && value >= 0 && value <= 100,
 
   isCSSUnit: (value: unknown): value is CSSUnit =>
-    typeof value === 'string' && isValidCSSUnit(value),
+    typeof value === "string" && isValidCSSUnit(value),
 
   isAnimationDuration: (value: unknown): value is AnimationDuration =>
-    typeof value === 'number' && value >= 0 && value <= 10_000,
+    typeof value === "number" && value >= 0 && value <= 10_000,
 
   isZIndex: (value: unknown): value is ZIndex =>
-    typeof value === 'number' && value >= -999 && value <= 9999,
+    typeof value === "number" && value >= -999 && value <= 9999,
 
   isThemeName: (value: unknown): value is ThemeName =>
-    typeof value === 'string' && VALID_THEMES.includes(value as unknown),
+    typeof value === "string" && VALID_THEMES.includes(value as unknown),
 
   isComponentSize: (value: unknown): value is ComponentSize =>
-    typeof value === 'string' && VALID_SIZES.includes(value as unknown),
+    typeof value === "string" && VALID_SIZES.includes(value as unknown),
 };
 
 /**
@@ -240,7 +240,7 @@ export const brandedUtils = {
    */
   calculateContrast: (
     _fg: GlassColor,
-    _bg: GlassColor
+    _bg: GlassColor,
   ): AccessibleContrast | null => {
     // This would integrate with the contrast checker utility
     // For now, return a mock implementation

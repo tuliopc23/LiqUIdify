@@ -1,55 +1,55 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 import {
   Accordion,
   GlassAccordion,
   GlassAccordionContent,
   GlassAccordionItem,
   GlassAccordionTrigger,
-} from './glass-accordion';
+} from "./glass-accordion";
 
 const meta = {
-  title: 'Components/Layout/GlassAccordion',
+  title: "Components/Layout/GlassAccordion",
   component: GlassAccordion,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A flexible accordion component with glassmorphism design, smooth animations, and support for single or multiple expanded items.',
+          "A flexible accordion component with glassmorphism design, smooth animations, and support for single or multiple expanded items.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     type: {
-      control: 'radio',
-      options: ['single', 'multiple'],
+      control: "radio",
+      options: ["single", "multiple"],
       description:
-        'Type of accordion - single allows only one item open at a time, multiple allows multiple items open',
+        "Type of accordion - single allows only one item open at a time, multiple allows multiple items open",
     },
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'Size variant affecting padding and text size',
+      control: "select",
+      options: ["sm", "md", "lg"],
+      description: "Size variant affecting padding and text size",
     },
     variant: {
-      control: 'select',
-      options: ['default', 'solid', 'ghost'],
-      description: 'Visual style variant of the accordion',
+      control: "select",
+      options: ["default", "solid", "ghost"],
+      description: "Visual style variant of the accordion",
     },
     collapsible: {
-      control: 'boolean',
-      description: 'For single type - allows collapsing all items',
-      if: { arg: 'type', eq: 'single' },
+      control: "boolean",
+      description: "For single type - allows collapsing all items",
+      if: { arg: "type", eq: "single" },
     },
     defaultValue: {
-      control: 'text',
-      description: 'Default expanded item(s)',
+      control: "text",
+      description: "Default expanded item(s)",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
 } satisfies Meta<typeof GlassAccordion>;
@@ -60,8 +60,8 @@ type Story = StoryObj<typeof meta>;
 // Basic single accordion
 export const Single: Story = {
   args: {
-    type: 'single',
-    defaultValue: 'item-1',
+    type: "single",
+    defaultValue: "item-1",
     collapsible: true,
   },
   render: (args) => (
@@ -101,8 +101,8 @@ export const Single: Story = {
 // Multiple accordion
 export const Multiple: Story = {
   args: {
-    type: 'multiple',
-    defaultValue: ['item-1', 'item-2'],
+    type: "multiple",
+    defaultValue: ["item-1", "item-2"],
   },
   render: (args) => (
     <div className="w-[600px]">
@@ -263,28 +263,28 @@ export const NoIcon: Story = {
 // Controlled example
 export const Controlled: Story = {
   render: () => {
-    const [value, setValue] = React.useState<string>('item-2');
+    const [value, setValue] = React.useState<string>("item-2");
 
     return (
       <div className="w-[600px] space-y-4">
         <div className="flex gap-2">
           <button
             type="button"
-            onClick={() => setValue('item-1')}
+            onClick={() => setValue("item-1")}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Open First
           </button>
           <button
             type="button"
-            onClick={() => setValue('item-2')}
+            onClick={() => setValue("item-2")}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Open Second
           </button>
           <button
             type="button"
-            onClick={() => setValue('item-3')}
+            onClick={() => setValue("item-3")}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Open Third
@@ -436,7 +436,7 @@ export const ThemeShowcase: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };

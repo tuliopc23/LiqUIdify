@@ -28,7 +28,7 @@
   }
 
   /* Dark mode adjustments */
-  :root[data-theme='dark'],
+  :root[data-theme="dark"],
   .dark {
     --apple-glass-bg: rgba(255, 255, 255, 0.03);
     --apple-glass-border: rgba(255, 255, 255, 0.08);
@@ -63,7 +63,7 @@
 
   /* The signature liquid glass depth effect */
   .apple-glass::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -82,7 +82,7 @@
 
   /* The authentic liquid glass after effect */
   .apple-glass::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -186,7 +186,7 @@
   }
 
   .apple-glass--ripple::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -218,7 +218,7 @@
   }
 
   .apple-glass--shimmer::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -50%;
     left: -50%;
@@ -246,7 +246,7 @@
   }
 
   .apple-glass--glow::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -2px;
     left: -2px;

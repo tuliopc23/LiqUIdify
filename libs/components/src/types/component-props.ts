@@ -5,7 +5,7 @@ import type {
   InputHTMLAttributes,
   SelectHTMLAttributes,
   TextareaHTMLAttributes,
-} from 'react';
+} from "react";
 
 // Generic component props builder
 export type ComponentPropsBuilder<T extends HTMLElement> =
@@ -37,13 +37,13 @@ export type GlassComponentProps<T extends HTMLElement> =
 
 // Specific component prop types
 export type GlassButtonProps = GlassComponentProps<HTMLButtonElement> & {
-  variant?: 'primary' | 'secondary' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
 };
 
 export type GlassCardProps = GlassComponentProps<HTMLDivElement> & {
-  padding?: 'none' | 'sm' | 'md' | 'lg';
-  elevation?: 'low' | 'medium' | 'high';
+  padding?: "none" | "sm" | "md" | "lg";
+  elevation?: "low" | "medium" | "high";
 };
 
 export type GlassInputProps = GlassComponentProps<HTMLInputElement> & {

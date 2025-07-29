@@ -1,9 +1,9 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState } from "react";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
 export interface GlassSwitchProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label?: string;
   onChange?: (checked: boolean) => void;
 }
@@ -37,16 +37,16 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
 
           <div
             className={cn(
-              'h-6 w-11 rounded-full shadow-inner transition-colors duration-200',
-              isChecked ? 'bg-primary' : 'glass-effect',
-              className
+              "h-6 w-11 rounded-full shadow-inner transition-colors duration-200",
+              isChecked ? "bg-primary" : "glass-effect",
+              className,
             )}
           />
 
           <div
             className={cn(
-              'absolute inset-y-0 h-5 w-5 translate-y-0.5 transform rounded-full bg-white shadow transition-transform duration-200',
-              isChecked ? 'translate-x-6' : 'translate-x-0.5'
+              "absolute inset-y-0 h-5 w-5 translate-y-0.5 transform rounded-full bg-white shadow transition-transform duration-200",
+              isChecked ? "translate-x-6" : "translate-x-0.5",
             )}
           />
         </div>
@@ -54,9 +54,9 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
         {label && <span className="text-primary">{label}</span>}
       </label>
     );
-  }
+  },
 );
 
-GlassSwitch.displayName = 'GlassSwitch';
+GlassSwitch.displayName = "GlassSwitch";
 
 export { GlassSwitch };

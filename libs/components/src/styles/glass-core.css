@@ -25,7 +25,7 @@
 }
 
 /* Dark mode overrides */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --glass-bg-primary: rgba(0, 0, 0, 0.25);
   --glass-bg-secondary: rgba(15, 23, 42, 0.35);
   --glass-bg-elevated: rgba(30, 41, 59, 0.45);

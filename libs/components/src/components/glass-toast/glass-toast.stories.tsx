@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import { GlassToast, ToastProvider, useToast } from './glass-toast';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { GlassToast, ToastProvider, useToast } from "./glass-toast";
 
 const meta = {
-  title: 'Components/GlassToast',
+  title: "Components/GlassToast",
   component: GlassToast,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -25,20 +25,20 @@ component and a complete toast system with ToastProvider and useToast hook for d
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     type: {
-      description: 'Type of toast notification',
-      control: { type: 'select' },
-      options: ['success', 'error', 'warning', 'info'],
+      description: "Type of toast notification",
+      control: { type: "select" },
+      options: ["success", "error", "warning", "info"],
     },
     message: {
-      description: 'Message content of the toast',
-      control: { type: 'text' },
+      description: "Message content of the toast",
+      control: { type: "text" },
     },
     onClose: {
-      description: 'Callback when close button is clicked',
-      action: 'closed',
+      description: "Callback when close button is clicked",
+      action: "closed",
     },
   },
 } satisfies Meta<typeof GlassToast>;
@@ -49,8 +49,8 @@ type Story = StoryObj<typeof meta>;
 // Default standalone toast
 export const Default: Story = {
   args: {
-    type: 'info',
-    message: 'This is a simple toast notification',
+    type: "info",
+    message: "This is a simple toast notification",
   },
 };
 
@@ -61,22 +61,22 @@ export const Types: Story = {
       <GlassToast
         type="success"
         message="Operation completed successfully!"
-        onClose={() => console.log('Success toast closed')}
+        onClose={() => console.log("Success toast closed")}
       />
       <GlassToast
         type="error"
         message="An error occurred while processing your request."
-        onClose={() => console.log('Error toast closed')}
+        onClose={() => console.log("Error toast closed")}
       />
       <GlassToast
         type="warning"
         message="Please save your work before continuing."
-        onClose={() => console.log('Warning toast closed')}
+        onClose={() => console.log("Warning toast closed")}
       />
       <GlassToast
         type="info"
         message="New updates are available for your application."
-        onClose={() => console.log('Info toast closed')}
+        onClose={() => console.log("Info toast closed")}
       />
     </div>
   ),
@@ -93,9 +93,9 @@ const ToastProviderDemo = () => {
           type="button"
           onClick={() =>
             addToast({
-              type: 'success',
-              title: 'Success!',
-              description: 'Your changes have been saved.',
+              type: "success",
+              title: "Success!",
+              description: "Your changes have been saved.",
             })
           }
           className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
@@ -106,9 +106,9 @@ const ToastProviderDemo = () => {
           type="button"
           onClick={() =>
             addToast({
-              type: 'error',
-              title: 'Error',
-              description: 'Failed to save changes. Please try again.',
+              type: "error",
+              title: "Error",
+              description: "Failed to save changes. Please try again.",
             })
           }
           className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
@@ -119,9 +119,9 @@ const ToastProviderDemo = () => {
           type="button"
           onClick={() =>
             addToast({
-              type: 'warning',
-              title: 'Warning',
-              description: 'Your session will expire in 5 minutes.',
+              type: "warning",
+              title: "Warning",
+              description: "Your session will expire in 5 minutes.",
             })
           }
           className="rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
@@ -132,9 +132,9 @@ const ToastProviderDemo = () => {
           type="button"
           onClick={() =>
             addToast({
-              type: 'info',
-              title: 'Information',
-              description: 'New features have been added to your dashboard.',
+              type: "info",
+              title: "Information",
+              description: "New features have been added to your dashboard.",
             })
           }
           className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
@@ -163,7 +163,7 @@ const PositionDemo = ({ position }: { position: string }) => {
       type="button"
       onClick={() =>
         addToast({
-          description: `Toast at ${position.replace('-', ' ')} position`,
+          description: `Toast at ${position.replace("-", " ")} position`,
           duration: 3000,
         })
       }
@@ -178,12 +178,12 @@ export const Positions: Story = {
   render: () => (
     <div className="space-y-8">
       {[
-        'top-right',
-        'top-left',
-        'bottom-right',
-        'bottom-left',
-        'top-center',
-        'bottom-center',
+        "top-right",
+        "top-left",
+        "bottom-right",
+        "bottom-left",
+        "top-center",
+        "bottom-center",
       ].map((position) => (
         <div key={position}>
           <h3 className="mb-2 font-medium text-sm">{position}</h3>
@@ -208,16 +208,16 @@ const ActionToastDemo = () => {
         onClick={() => {
           setUndone(false);
           addToast({
-            type: 'success',
-            title: 'Item deleted',
-            description: 'The item has been removed from your list.',
+            type: "success",
+            title: "Item deleted",
+            description: "The item has been removed from your list.",
             action: {
-              label: 'Undo',
+              label: "Undo",
               onClick: () => {
                 setUndone(true);
                 addToast({
-                  type: 'info',
-                  description: 'Action undone successfully!',
+                  type: "info",
+                  description: "Action undone successfully!",
                 });
               },
             },
@@ -250,7 +250,7 @@ const DurationDemo = () => {
         type="button"
         onClick={() =>
           addToast({
-            description: 'This toast will disappear in 2 seconds',
+            description: "This toast will disappear in 2 seconds",
             duration: 2000,
           })
         }
@@ -262,7 +262,7 @@ const DurationDemo = () => {
         type="button"
         onClick={() =>
           addToast({
-            description: 'This toast will stay for 10 seconds',
+            description: "This toast will stay for 10 seconds",
             duration: 10000,
           })
         }
@@ -274,8 +274,8 @@ const DurationDemo = () => {
         type="button"
         onClick={() =>
           addToast({
-            type: 'warning',
-            description: 'This toast uses the default 5 second duration',
+            type: "warning",
+            description: "This toast uses the default 5 second duration",
           })
         }
         className="rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
@@ -300,22 +300,22 @@ const MultipleToastsDemo = () => {
 
   const showMultipleToasts = () => {
     addToast({
-      type: 'info',
-      title: 'First Toast',
-      description: 'This is the first notification',
+      type: "info",
+      title: "First Toast",
+      description: "This is the first notification",
     });
     setTimeout(() => {
       addToast({
-        type: 'success',
-        title: 'Second Toast',
-        description: 'This is the second notification',
+        type: "success",
+        title: "Second Toast",
+        description: "This is the second notification",
       });
     }, 500);
     setTimeout(() => {
       addToast({
-        type: 'warning',
-        title: 'Third Toast',
-        description: 'This is the third notification',
+        type: "warning",
+        title: "Third Toast",
+        description: "This is the third notification",
       });
     }, 1000);
   };
@@ -348,8 +348,8 @@ const RealWorldDemo = () => {
   const handleSave = async () => {
     setSaving(true);
     addToast({
-      type: 'info',
-      description: 'Saving your changes...',
+      type: "info",
+      description: "Saving your changes...",
       duration: 2000,
     });
 
@@ -358,17 +358,17 @@ const RealWorldDemo = () => {
 
     setSaving(false);
     addToast({
-      type: 'success',
-      title: 'Changes saved!',
-      description: 'Your document has been successfully saved.',
+      type: "success",
+      title: "Changes saved!",
+      description: "Your document has been successfully saved.",
     });
   };
 
   const handleUpload = async () => {
     setUploading(true);
     addToast({
-      type: 'info',
-      description: 'Uploading file...',
+      type: "info",
+      description: "Uploading file...",
       duration: 3000,
     });
 
@@ -377,29 +377,29 @@ const RealWorldDemo = () => {
 
     setUploading(false);
     addToast({
-      type: 'success',
-      title: 'Upload complete!',
-      description: 'Your file has been uploaded successfully.',
+      type: "success",
+      title: "Upload complete!",
+      description: "Your file has been uploaded successfully.",
       action: {
-        label: 'View File',
-        onClick: () => console.log('Viewing file...'),
+        label: "View File",
+        onClick: () => console.log("Viewing file..."),
       },
     });
   };
 
   const handleNetworkError = () => {
     addToast({
-      type: 'error',
-      title: 'Network Error',
+      type: "error",
+      title: "Network Error",
       description:
-        'Unable to connect to the server. Please check your internet connection.',
+        "Unable to connect to the server. Please check your internet connection.",
       duration: 8000,
       action: {
-        label: 'Retry',
+        label: "Retry",
         onClick: () => {
           addToast({
-            type: 'info',
-            description: 'Retrying connection...',
+            type: "info",
+            description: "Retrying connection...",
           });
         },
       },
@@ -416,7 +416,7 @@ const RealWorldDemo = () => {
           disabled={saving}
           className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {saving ? 'Saving...' : 'Save Document'}
+          {saving ? "Saving..." : "Save Document"}
         </button>
         <button
           type="button"
@@ -424,7 +424,7 @@ const RealWorldDemo = () => {
           disabled={uploading}
           className="rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {uploading ? 'Uploading...' : 'Upload File'}
+          {uploading ? "Uploading..." : "Upload File"}
         </button>
         <button
           type="button"
@@ -449,35 +449,35 @@ export const RealWorldExamples: Story = {
 // Form validation example
 const FormValidationDemo = () => {
   const { addToast } = useToast();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const errors = [];
-    if (!email) errors.push('Email is required');
-    if (!email.includes('@')) errors.push('Invalid email format');
-    if (!password) errors.push('Password is required');
+    if (!email) errors.push("Email is required");
+    if (!email.includes("@")) errors.push("Invalid email format");
+    if (!password) errors.push("Password is required");
     if (password.length < 8)
-      errors.push('Password must be at least 8 characters');
+      errors.push("Password must be at least 8 characters");
 
     if (errors.length > 0) {
       errors.forEach((error) => {
         addToast({
-          type: 'error',
+          type: "error",
           description: error,
           duration: 4000,
         });
       });
     } else {
       addToast({
-        type: 'success',
-        title: 'Success!',
-        description: 'Form submitted successfully.',
+        type: "success",
+        title: "Success!",
+        description: "Form submitted successfully.",
       });
-      setEmail('');
-      setPassword('');
+      setEmail("");
+      setPassword("");
     }
   };
 

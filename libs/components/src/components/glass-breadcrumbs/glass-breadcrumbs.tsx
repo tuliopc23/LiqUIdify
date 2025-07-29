@@ -1,48 +1,48 @@
-import { motion } from 'framer-motion';
-import { ChevronRight, Home } from 'lucide-react';
-import React, { useCallback } from 'react';
-import { cn } from '@/core/utils/classname';
-import { getItemKey } from '@/core/utils/stable-key';
+import { motion } from "framer-motion";
+import { ChevronRight, Home } from "lucide-react";
+import React, { useCallback } from "react";
+import { cn } from "@/core/utils/classname";
+import { getItemKey } from "@/core/utils/stable-key";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
-} from '../../lib/variant-system';
+} from "../../lib/variant-system";
 
 const breadcrumbsVariants = cva({
-  base: 'flex items-center space-x-1 rounded-lg border border-white/10 bg-white/5 p-2 text-sm backdrop-blur-md',
+  base: "flex items-center space-x-1 rounded-lg border border-white/10 bg-white/5 p-2 text-sm backdrop-blur-md",
   variants: {
     size: {
-      sm: 'p-1.5 text-xs',
-      md: 'p-2 text-sm',
-      lg: 'p-3 text-base',
+      sm: "p-1.5 text-xs",
+      md: "p-2 text-sm",
+      lg: "p-3 text-base",
     },
     variant: {
-      default: 'bg-white/5',
-      solid: 'bg-white/10',
-      ghost: 'border-transparent bg-transparent',
+      default: "bg-white/5",
+      solid: "bg-white/10",
+      ghost: "border-transparent bg-transparent",
     },
   },
   defaultVariants: {
-    size: 'md',
-    variant: 'default',
+    size: "md",
+    variant: "default",
   },
 });
 
 const breadcrumbItemVariants = cva({
-  base: 'flex items-center rounded px-2 py-1 transition-all duration-200 hover:text-blue-400 focus:text-blue-400 focus:outline-none',
+  base: "flex items-center rounded px-2 py-1 transition-all duration-200 hover:text-blue-400 focus:text-blue-400 focus:outline-none",
   variants: {
     isActive: {
-      true: 'font-medium text-white',
-      false: 'text-white/70 hover:text-white',
+      true: "font-medium text-white",
+      false: "text-white/70 hover:text-white",
     },
     isClickable: {
-      true: 'cursor-pointer hover:bg-white/5',
-      false: 'cursor-default',
+      true: "cursor-pointer hover:bg-white/5",
+      false: "cursor-default",
     },
   },
   defaultVariants: {
-    isActive: 'false',
-    isClickable: 'true',
+    isActive: "false",
+    isClickable: "true",
   },
 });
 
@@ -77,7 +77,7 @@ const GlassBreadcrumbs = React.memo(
         variant,
         ...props
       },
-      ref
+      ref,
     ) => {
       // Truncate items if maxItems is specified
       const displayItems =
@@ -85,7 +85,7 @@ const GlassBreadcrumbs = React.memo(
           ? [
               ...items.slice(0, 1),
               {
-                label: '...',
+                label: "...",
               } as BreadcrumbItem,
               ...items.slice(-(maxItems - 2)),
             ]
@@ -100,7 +100,7 @@ const GlassBreadcrumbs = React.memo(
             // Navigation handled by onClick prop
           }
         },
-        []
+        [],
       );
 
       return (
@@ -121,9 +121,9 @@ const GlassBreadcrumbs = React.memo(
                     onClick={onHomeClick}
                     className={cn(
                       breadcrumbItemVariants({
-                        isActive: 'false',
-                        isClickable: 'true',
-                      })
+                        isActive: "false",
+                        isClickable: "true",
+                      }),
                     )}
                     aria-label="Home"
                   >
@@ -139,12 +139,12 @@ const GlassBreadcrumbs = React.memo(
             {displayItems.map((item, index) => {
               const isLast = index === displayItems.length - 1;
               const isClickable =
-                !isLast && (item.href || item.onClick) && item.label !== '...';
+                !isLast && (item.href || item.onClick) && item.label !== "...";
 
               const handleClick = () => handleItemClick(item, index);
 
               return (
-                <React.Fragment key={getItemKey(item, 'breadcrumb', index)}>
+                <React.Fragment key={getItemKey(item, "breadcrumb", index)}>
                   <li>
                     {isClickable ? (
                       <motion.button
@@ -154,11 +154,11 @@ const GlassBreadcrumbs = React.memo(
                         onClick={handleClick}
                         className={cn(
                           breadcrumbItemVariants({
-                            isActive: isLast ? 'true' : 'false',
-                            isClickable: 'true',
-                          })
+                            isActive: isLast ? "true" : "false",
+                            isClickable: "true",
+                          }),
                         )}
-                        aria-current={isLast ? 'page' : undefined}
+                        aria-current={isLast ? "page" : undefined}
                       >
                         {item.icon && (
                           <span className="mr-1.5">{item.icon}</span>
@@ -169,11 +169,11 @@ const GlassBreadcrumbs = React.memo(
                       <span
                         className={cn(
                           breadcrumbItemVariants({
-                            isActive: isLast ? 'true' : 'false',
-                            isClickable: 'false',
-                          })
+                            isActive: isLast ? "true" : "false",
+                            isClickable: "false",
+                          }),
                         )}
-                        aria-current={isLast ? 'page' : undefined}
+                        aria-current={isLast ? "page" : undefined}
                       >
                         {item.icon && (
                           <span className="mr-1.5">{item.icon}</span>
@@ -192,10 +192,10 @@ const GlassBreadcrumbs = React.memo(
           </ol>
         </nav>
       );
-    }
-  )
+    },
+  ),
 );
 
-GlassBreadcrumbs.displayName = 'GlassBreadcrumbs';
+GlassBreadcrumbs.displayName = "GlassBreadcrumbs";
 
 export { GlassBreadcrumbs };

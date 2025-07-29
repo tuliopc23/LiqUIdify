@@ -1,24 +1,24 @@
 export default {
   // Test files pattern
-  testMatch: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}'],
+  testMatch: ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}"],
 
   // Setup files
-  preload: ['./test/setup.ts'],
+  preload: ["./test/setup.ts"],
 
   // Coverage configuration
   coverage: {
     enabled: true,
-    provider: 'v8',
-    reporter: ['text', 'json', 'html', 'lcov'],
+    provider: "v8",
+    reporter: ["text", "json", "html", "lcov"],
     exclude: [
-      '**/*.stories.tsx',
-      '**/*.d.ts',
-      '**/node_modules/**',
-      '**/test/**',
-      '**/.next/**',
-      '**/coverage/**',
-      '**/scripts/**',
-      '**/storybook-static/**',
+      "**/*.stories.tsx",
+      "**/*.d.ts",
+      "**/node_modules/**",
+      "**/test/**",
+      "**/.next/**",
+      "**/coverage/**",
+      "**/scripts/**",
+      "**/storybook-static/**",
     ],
     threshold: {
       global: {
@@ -31,16 +31,16 @@ export default {
   },
 
   // Test environment
-  environment: 'jsdom',
+  environment: "jsdom",
 
   // Timeout
   timeout: 10000,
 
   // Watch mode
   watchIgnore: [
-    '**/node_modules/**',
-    '**/.next/**',
-    '**/coverage/**',
-    '**/storybook-static/**',
+    "**/node_modules/**",
+    "**/.next/**",
+    "**/coverage/**",
+    "**/storybook-static/**",
   ],
 };

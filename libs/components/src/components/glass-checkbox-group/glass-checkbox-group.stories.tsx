@@ -1,17 +1,17 @@
-import { GlassCheckbox } from '../glass-checkbox';
-import CheckboxGroup from './glass-checkbox-group';
-import '@/styles/apple-liquid-authentic.css';
+import { GlassCheckbox } from "../glass-checkbox";
+import CheckboxGroup from "./glass-checkbox-group";
+import "@/styles/apple-liquid-authentic.css";
 
 export default {
-  title: 'Components/GlassCheckboxGroup',
+  title: "Components/GlassCheckboxGroup",
   component: CheckboxGroup,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A group of checkboxes with Liquid Glass styling for consistent Apple-inspired UI.',
+          "A group of checkboxes with Liquid Glass styling for consistent Apple-inspired UI.",
       },
     },
   },

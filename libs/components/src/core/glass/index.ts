@@ -11,7 +11,7 @@ export type {
   GlassIntensity,
   GlassVariant,
   UnifiedGlassProps,
-} from './unified-glass-system';
+} from "./unified-glass-system";
 // Default export
 export {
   AppleLiquidGlass,
@@ -19,4 +19,4 @@ export {
   default,
   EnhancedAppleLiquidGlass,
   useUnifiedGlass,
-} from './unified-glass-system';
+} from "./unified-glass-system";

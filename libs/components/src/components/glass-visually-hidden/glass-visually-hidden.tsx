@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
 export interface GlassVisuallyHiddenProps
   extends Omit<
@@ -12,20 +12,20 @@ export interface GlassVisuallyHiddenProps
 }
 
 const visuallyHiddenStyles = cn(
-  'absolute',
-  'h-px w-px',
-  'm-[-1px] p-0',
-  'overflow-hidden',
-  'whitespace-nowrap',
-  'border-0',
-  'clip-path-[inset(50%)]'
+  "absolute",
+  "h-px w-px",
+  "m-[-1px] p-0",
+  "overflow-hidden",
+  "whitespace-nowrap",
+  "border-0",
+  "clip-path-[inset(50%)]",
 );
 
 const GlassVisuallyHidden = forwardRef<
   HTMLSpanElement,
   GlassVisuallyHiddenProps
 >(({ className, asChild = false, children, ...props }, ref) => {
-  const Component = asChild ? React.Fragment : 'span';
+  const Component = asChild ? React.Fragment : "span";
 
   if (asChild) {
     return (
@@ -35,7 +35,7 @@ const GlassVisuallyHidden = forwardRef<
             const childProps = child.props as unknown;
             return React.cloneElement(child, {
               className: cn(visuallyHiddenStyles, childProps?.className),
-              ...(typeof childProps === 'object' && childProps !== null
+              ...(typeof childProps === "object" && childProps !== null
                 ? childProps
                 : {}),
             });
@@ -57,6 +57,6 @@ const GlassVisuallyHidden = forwardRef<
   );
 });
 
-GlassVisuallyHidden.displayName = 'GlassVisuallyHidden';
+GlassVisuallyHidden.displayName = "GlassVisuallyHidden";
 
 export { GlassVisuallyHidden };

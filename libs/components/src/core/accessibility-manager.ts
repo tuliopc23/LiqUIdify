@@ -1,8 +1,8 @@
-import axe, { type AxeResults } from 'axe-core';
+import axe, { type AxeResults } from "axe-core";
 
-import { announcer } from '@/components/glass-live-region';
+import { announcer } from "@/components/glass-live-region";
 
-import { checkGlassContrast, getContrastRatio } from '@/core/utils/color';
+import { checkGlassContrast, getContrastRatio } from "@/core/utils/color";
 
 // Types and Interfaces
 export interface AccessibilityReport {
@@ -10,14 +10,14 @@ export interface AccessibilityReport {
   violations: Array<Violation>;
   warnings: Array<Warning>;
   suggestions: Array<Suggestion>;
-  wcagLevel: 'A' | 'AA' | 'AAA';
+  wcagLevel: "A" | "AA" | "AAA";
   timestamp: Date;
   componentInfo?: ComponentInfo;
 }
 
 export interface Violation {
   id: string;
-  impact: 'minor' | 'moderate' | 'serious' | 'critical';
+  impact: "minor" | "moderate" | "serious" | "critical";
   description: string;
   help: string;
   helpUrl: string;
@@ -39,9 +39,9 @@ export interface Warning {
 }
 
 export interface Suggestion {
-  type: 'contrast' | 'aria' | 'keyboard' | 'structure';
+  type: "contrast" | "aria" | "keyboard" | "structure";
   message: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: "low" | "medium" | "high";
   autoFixAvailable: boolean;
   fix?: () => void;
 }
@@ -103,7 +103,7 @@ export interface ARIACorrection {
 // ARIA Rules Database
 interface AxeViolation {
   id: string;
-  impact: 'minor' | 'moderate' | 'serious' | 'critical';
+  impact: "minor" | "moderate" | "serious" | "critical";
   description: string;
   help: string;
   helpUrl: string;
@@ -119,137 +119,137 @@ const ARIA_RULES = {
     button: {
       requiredProps: [],
       allowedProps: [
-        'aria-expanded',
-        'aria-pressed',
-        'aria-disabled',
-        'aria-label',
-        'aria-labelledby',
-        'aria-describedby',
+        "aria-expanded",
+        "aria-pressed",
+        "aria-disabled",
+        "aria-label",
+        "aria-labelledby",
+        "aria-describedby",
       ],
-      implicitProps: { 'aria-pressed': 'false' },
+      implicitProps: { "aria-pressed": "false" },
       interactive: true,
     },
     link: {
       requiredProps: [],
       allowedProps: [
-        'aria-disabled',
-        'aria-expanded',
-        'aria-label',
-        'aria-labelledby',
-        'aria-describedby',
+        "aria-disabled",
+        "aria-expanded",
+        "aria-label",
+        "aria-labelledby",
+        "aria-describedby",
       ],
       interactive: true,
     },
     img: {
-      requiredProps: ['aria-label', 'aria-labelledby', 'alt'],
-      allowedProps: ['aria-describedby', 'aria-hidden'],
+      requiredProps: ["aria-label", "aria-labelledby", "alt"],
+      allowedProps: ["aria-describedby", "aria-hidden"],
       interactive: false,
     },
     navigation: {
       requiredProps: [],
-      allowedProps: ['aria-label', 'aria-labelledby'],
+      allowedProps: ["aria-label", "aria-labelledby"],
       interactive: false,
       landmark: true,
     },
     main: {
       requiredProps: [],
-      allowedProps: ['aria-label', 'aria-labelledby'],
+      allowedProps: ["aria-label", "aria-labelledby"],
       interactive: false,
       landmark: true,
     },
     alert: {
       requiredProps: [],
-      allowedProps: ['aria-label', 'aria-labelledby', 'aria-describedby'],
-      implicitProps: { 'aria-live': 'assertive', 'aria-atomic': 'true' },
+      allowedProps: ["aria-label", "aria-labelledby", "aria-describedby"],
+      implicitProps: { "aria-live": "assertive", "aria-atomic": "true" },
       interactive: false,
     },
     status: {
       requiredProps: [],
-      allowedProps: ['aria-label', 'aria-labelledby', 'aria-describedby'],
-      implicitProps: { 'aria-live': 'polite', 'aria-atomic': 'true' },
+      allowedProps: ["aria-label", "aria-labelledby", "aria-describedby"],
+      implicitProps: { "aria-live": "polite", "aria-atomic": "true" },
       interactive: false,
     },
     combobox: {
-      requiredProps: ['aria-expanded', 'aria-controls'],
+      requiredProps: ["aria-expanded", "aria-controls"],
       allowedProps: [
-        'aria-autocomplete',
-        'aria-readonly',
-        'aria-required',
-        'aria-activedescendant',
-        'aria-label',
-        'aria-labelledby',
+        "aria-autocomplete",
+        "aria-readonly",
+        "aria-required",
+        "aria-activedescendant",
+        "aria-label",
+        "aria-labelledby",
       ],
       interactive: true,
     },
     menu: {
       requiredProps: [],
       allowedProps: [
-        'aria-label',
-        'aria-labelledby',
-        'aria-activedescendant',
-        'aria-orientation',
+        "aria-label",
+        "aria-labelledby",
+        "aria-activedescendant",
+        "aria-orientation",
       ],
       interactive: true,
     },
     menuitem: {
       requiredProps: [],
       allowedProps: [
-        'aria-disabled',
-        'aria-expanded',
-        'aria-checked',
-        'aria-label',
-        'aria-labelledby',
+        "aria-disabled",
+        "aria-expanded",
+        "aria-checked",
+        "aria-label",
+        "aria-labelledby",
       ],
       interactive: true,
-      requiresParent: ['menu', 'menubar'],
+      requiresParent: ["menu", "menubar"],
     },
   },
 
   attributes: {
-    'aria-label': {
-      type: 'string',
+    "aria-label": {
+      type: "string",
       allowEmpty: false,
     },
-    'aria-labelledby': {
-      type: 'idref',
-      allowEmpty: false,
-      multiple: true,
-    },
-    'aria-describedby': {
-      type: 'idref',
+    "aria-labelledby": {
+      type: "idref",
       allowEmpty: false,
       multiple: true,
     },
-    'aria-expanded': {
-      type: 'boolean',
-      values: ['true', 'false'],
+    "aria-describedby": {
+      type: "idref",
+      allowEmpty: false,
+      multiple: true,
     },
-    'aria-checked': {
-      type: 'tristate',
-      values: ['true', 'false', 'mixed'],
+    "aria-expanded": {
+      type: "boolean",
+      values: ["true", "false"],
     },
-    'aria-disabled': {
-      type: 'boolean',
-      values: ['true', 'false'],
+    "aria-checked": {
+      type: "tristate",
+      values: ["true", "false", "mixed"],
     },
-    'aria-hidden': {
-      type: 'boolean',
-      values: ['true', 'false'],
+    "aria-disabled": {
+      type: "boolean",
+      values: ["true", "false"],
     },
-    'aria-live': {
-      type: 'token',
-      values: ['polite', 'assertive', 'off'],
+    "aria-hidden": {
+      type: "boolean",
+      values: ["true", "false"],
     },
-    'aria-atomic': {
-      type: 'boolean',
-      values: ['true', 'false'],
+    "aria-live": {
+      type: "token",
+      values: ["polite", "assertive", "off"],
     },
-    'aria-controls': {
-      type: 'idref',
+    "aria-atomic": {
+      type: "boolean",
+      values: ["true", "false"],
+    },
+    "aria-controls": {
+      type: "idref",
       allowEmpty: false,
     },
-    'aria-activedescendant': {
-      type: 'idref',
+    "aria-activedescendant": {
+      type: "idref",
       allowEmpty: false,
     },
   },
@@ -277,14 +277,14 @@ export class AccessibilityManager {
     // Configure axe-core options
     this.axeOptions = {
       runOnly: {
-        type: 'tag',
-        values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'best-practice'],
+        type: "tag",
+        values: ["wcag2a", "wcag2aa", "wcag21aa", "best-practice"],
       },
-      resultTypes: ['violations', 'incomplete', 'passes'],
+      resultTypes: ["violations", "incomplete", "passes"],
     };
 
     // Initialize mutation observer for real-time validation
-    if (typeof window !== 'undefined' && window.MutationObserver) {
+    if (typeof window !== "undefined" && window.MutationObserver) {
       this.observer = new MutationObserver(this.handleMutations.bind(this));
     }
   }
@@ -301,7 +301,7 @@ export class AccessibilityManager {
    */
   async validateComponent(
     element: HTMLElement,
-    componentInfo?: ComponentInfo
+    componentInfo?: ComponentInfo,
   ): Promise<AccessibilityReport> {
     // Check cache first
     const cached = this.validationCache.get(element);
@@ -313,12 +313,12 @@ export class AccessibilityManager {
       // Run axe-core validation
       const results = (await axe.run(
         element,
-        this.axeOptions
+        this.axeOptions,
       )) as unknown as AxeResults;
 
       // Process violations
       const violations = this.processViolations(
-        results.violations as unknown as Array<AxeViolation>
+        results.violations as unknown as Array<AxeViolation>,
       );
 
       // Generate warnings and suggestions
@@ -326,7 +326,7 @@ export class AccessibilityManager {
       const suggestions = this.generateSuggestions(
         element,
         violations,
-        warnings
+        warnings,
       );
 
       // Calculate accessibility score
@@ -355,7 +355,7 @@ export class AccessibilityManager {
     } catch (error) {
       // Logging disabled
       throw new Error(
-        `Failed to validate component: ${error instanceof Error ? error.message : 'Unknown error'}`
+        `Failed to validate component: ${error instanceof Error ? error.message : "Unknown error"}`,
       );
     }
   }
@@ -367,14 +367,14 @@ export class AccessibilityManager {
     foreground: string,
     background: string,
     options: {
-      level?: 'AA' | 'AAA';
+      level?: "AA" | "AAA";
       largeText?: boolean;
       autoFix?: boolean;
       glassEffect?: { opacity: number; backdropColor?: string };
-    } = {}
+    } = {},
   ): ContrastResult {
     const {
-      level = 'AA',
+      level = "AA",
       largeText = false,
       autoFix = true,
       glassEffect,
@@ -394,8 +394,8 @@ export class AccessibilityManager {
       const baseResult = checkGlassContrast(
         foreground,
         background,
-        glassEffect.backdropColor || '#ffffff',
-        glassEffect.opacity
+        glassEffect.backdropColor || "#ffffff",
+        glassEffect.opacity,
       );
       result = { ...baseResult } as ContrastResult;
     } else {
@@ -408,19 +408,19 @@ export class AccessibilityManager {
         },
         recommendation:
           ratio >= 7
-            ? 'Excellent'
+            ? "Excellent"
             : ratio >= 4.5
-              ? 'Good'
+              ? "Good"
               : ratio >= 3
-                ? 'Fair'
-                : 'Poor',
+                ? "Fair"
+                : "Poor",
       };
       result = { ...baseResult } as ContrastResult;
     }
 
     // Check if it meets the required level
     const meetsRequirement =
-      level === 'AA'
+      level === "AA"
         ? largeText
           ? result.passes.aa.large
           : result.passes.aa.normal
@@ -431,7 +431,7 @@ export class AccessibilityManager {
     // Auto-fix if needed and requested
     if (!meetsRequirement && autoFix) {
       const targetRatio =
-        level === 'AA' ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
+        level === "AA" ? (largeText ? 3 : 4.5) : largeText ? 4.5 : 7;
 
       try {
         // For now, keep the original color if contrast is poor
@@ -442,7 +442,7 @@ export class AccessibilityManager {
         // Announce the fix
         this.announce(
           `Contrast adjusted for better accessibility. New ratio: ${targetRatio}:1`,
-          'polite'
+          "polite",
         );
       } catch {
         // Logging disabled
@@ -492,10 +492,10 @@ export class AccessibilityManager {
   /**
    * Screen reader announcements
    */
-  announce(message: string, priority: 'polite' | 'assertive' = 'polite'): void {
+  announce(message: string, priority: "polite" | "assertive" = "polite"): void {
     announcer.announce(message, {
-      priority: priority === 'assertive' ? 'high' : 'medium',
-      context: 'general',
+      priority: priority === "assertive" ? "high" : "medium",
+      context: "general",
     });
   }
 
@@ -508,12 +508,12 @@ export class AccessibilityManager {
     const autoCorrections: Array<ARIACorrection> = [];
 
     // Get element's role
-    const role = element.getAttribute('role') || this.getImplicitRole(element);
+    const role = element.getAttribute("role") || this.getImplicitRole(element);
 
     // Check role validity
     if (role && !ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]) {
       errors.push({
-        attribute: 'role',
+        attribute: "role",
         value: role,
         reason: `Invalid ARIA role: ${role}`,
         element,
@@ -522,7 +522,7 @@ export class AccessibilityManager {
 
     // Validate ARIA attributes
     const ariaAttributes = [...element.attributes].filter((attribute) =>
-      attribute.name.startsWith('aria-')
+      attribute.name.startsWith("aria-"),
     );
 
     for (const attribute of ariaAttributes) {
@@ -545,8 +545,8 @@ export class AccessibilityManager {
 
       // Validate attribute value
       if (
-        attributeRule.type === 'boolean' &&
-        'values' in attributeRule &&
+        attributeRule.type === "boolean" &&
+        "values" in attributeRule &&
         !attributeRule.values?.includes(attributeValue)
       ) {
         errors.push({
@@ -559,12 +559,12 @@ export class AccessibilityManager {
         const correction: ARIACorrection = {
           attribute: attributeName,
           oldValue: attributeValue,
-          newValue: 'false',
+          newValue: "false",
           applied: false,
         };
 
         if (autoCorrect) {
-          element.setAttribute(attributeName, 'false');
+          element.setAttribute(attributeName, "false");
           correction.applied = true;
         }
 
@@ -572,15 +572,15 @@ export class AccessibilityManager {
       }
 
       // Validate idref attributes
-      if (attributeRule.type === 'idref') {
-        const ids = attributeValue.split(' ').filter((id) => id.trim());
+      if (attributeRule.type === "idref") {
+        const ids = attributeValue.split(" ").filter((id) => id.trim());
         const missingIds = ids.filter((id) => !document.getElementById(id));
 
         if (missingIds.length > 0) {
           errors.push({
             attribute: attributeName,
             value: attributeValue,
-            reason: `Referenced IDs not found: ${missingIds.join(', ')}`,
+            reason: `Referenced IDs not found: ${missingIds.join(", ")}`,
             element,
           });
         }
@@ -607,12 +607,12 @@ export class AccessibilityManager {
 
       // Apply implicit props if missing
       if (
-        'implicitProps' in roleRule &&
+        "implicitProps" in roleRule &&
         roleRule.implicitProps &&
         autoCorrect
       ) {
         for (const [property, value] of Object.entries(
-          roleRule.implicitProps
+          roleRule.implicitProps,
         )) {
           if (!element.hasAttribute(property)) {
             element.setAttribute(property, value);
@@ -631,11 +631,11 @@ export class AccessibilityManager {
     // Check for missing labels on interactive elements
     if (this.isInteractive(element) && !this.hasAccessibleName(element)) {
       suggestions.push({
-        attribute: 'aria-label',
+        attribute: "aria-label",
 
         currentValue: null,
         suggestedValue: this.generateAccessibleName(element),
-        reason: 'Interactive element needs accessible name',
+        reason: "Interactive element needs accessible name",
       });
     }
 
@@ -659,7 +659,7 @@ export class AccessibilityManager {
       attributes: true,
       childList: true,
       subtree: true,
-      attributeFilter: ['aria-', 'role', 'tabindex'],
+      attributeFilter: ["aria-", "role", "tabindex"],
     });
   }
 
@@ -673,7 +673,7 @@ export class AccessibilityManager {
   // Private helper methods
 
   private processViolations(
-    axeViolations: Array<AxeViolation>
+    axeViolations: Array<AxeViolation>,
   ): Array<Violation> {
     return axeViolations.map((violation) => ({
       id: violation.id,
@@ -696,33 +696,33 @@ export class AccessibilityManager {
     // Check for missing lang attribute
     if (element === document.documentElement && !element.lang) {
       warnings.push({
-        id: 'missing-lang',
-        description: 'Document missing language declaration',
-        suggestion: 'Add lang attribute to html element',
+        id: "missing-lang",
+        description: "Document missing language declaration",
+        suggestion: "Add lang attribute to html element",
         elements: [element],
       });
     }
 
     // Check for empty headings
-    const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const headings = element.querySelectorAll("h1, h2, h3, h4, h5, h6");
     const emptyHeadings = [...headings].filter((h) => !h.textContent?.trim());
     if (emptyHeadings.length > 0) {
       warnings.push({
-        id: 'empty-headings',
-        description: 'Empty heading elements found',
-        suggestion: 'Add content to headings or remove them',
+        id: "empty-headings",
+        description: "Empty heading elements found",
+        suggestion: "Add content to headings or remove them",
         elements: emptyHeadings as Array<HTMLElement>,
       });
     }
 
     // Check for positive tabindex
     const positiveTabindex = element.querySelectorAll(
-      '[tabindex]:not([tabindex="0"]):not([tabindex="-1"])'
+      '[tabindex]:not([tabindex="0"]):not([tabindex="-1"])',
     );
     if (positiveTabindex.length > 0) {
       warnings.push({
-        id: 'positive-tabindex',
-        description: 'Positive tabindex values can disrupt keyboard navigation',
+        id: "positive-tabindex",
+        description: "Positive tabindex values can disrupt keyboard navigation",
         suggestion: 'Use tabindex="0" or "-1" instead',
         elements: [...positiveTabindex] as Array<HTMLElement>,
       });
@@ -734,17 +734,17 @@ export class AccessibilityManager {
   private generateSuggestions(
     element: HTMLElement,
     violations: Array<Violation>,
-    _warnings: Array<Warning>
+    _warnings: Array<Warning>,
   ): Array<Suggestion> {
     const suggestions: Array<Suggestion> = [];
 
     // Contrast suggestions
     for (const violation of violations) {
-      if (violation.id === 'color-contrast') {
+      if (violation.id === "color-contrast") {
         suggestions.push({
-          type: 'contrast',
-          message: 'Improve color contrast for better readability',
-          priority: 'high',
+          type: "contrast",
+          message: "Improve color contrast for better readability",
+          priority: "high",
           autoFixAvailable: true,
           fix: () => this.fixContrastIssues(element),
         });
@@ -755,15 +755,15 @@ export class AccessibilityManager {
     const ariaValidation = this.validateARIA(element, false);
     for (const ariaSuggestion of ariaValidation.suggestions) {
       suggestions.push({
-        type: 'aria',
+        type: "aria",
         message: `Add ${ariaSuggestion.attribute}: ${ariaSuggestion.reason}`,
-        priority: 'medium',
+        priority: "medium",
         autoFixAvailable: true,
         fix: () => {
           if (ariaSuggestion.suggestedValue) {
             element.setAttribute(
               ariaSuggestion.attribute,
-              ariaSuggestion.suggestedValue
+              ariaSuggestion.suggestedValue,
             );
           }
         },
@@ -771,13 +771,13 @@ export class AccessibilityManager {
     }
 
     // Keyboard navigation suggestions
-    if (this.isInteractive(element) && !element.hasAttribute('tabindex')) {
+    if (this.isInteractive(element) && !element.hasAttribute("tabindex")) {
       suggestions.push({
-        type: 'keyboard',
-        message: 'Add tabindex for keyboard accessibility',
-        priority: 'medium',
+        type: "keyboard",
+        message: "Add tabindex for keyboard accessibility",
+        priority: "medium",
         autoFixAvailable: true,
-        fix: () => element.setAttribute('tabindex', '0'),
+        fix: () => element.setAttribute("tabindex", "0"),
       });
     }
 
@@ -802,24 +802,26 @@ export class AccessibilityManager {
     return Math.round(score);
   }
 
-  private determineWCAGLevel(violations: Array<Violation>): 'A' | 'AA' | 'AAA' {
+  private determineWCAGLevel(violations: Array<Violation>): "A" | "AA" | "AAA" {
     const hasAAViolations = violations.some(
       (v) =>
-        v.id.includes('aa') || v.impact === 'serious' || v.impact === 'critical'
+        v.id.includes("aa") ||
+        v.impact === "serious" ||
+        v.impact === "critical",
     );
 
     if (!hasAAViolations && violations.length === 0) {
-      return 'AAA';
+      return "AAA";
     }
     if (!hasAAViolations) {
-      return 'AA';
+      return "AA";
     }
-    return 'A';
+    return "A";
   }
 
   private applyAutoFixes(
     _element: HTMLElement,
-    suggestions: Array<Suggestion>
+    suggestions: Array<Suggestion>,
   ): void {
     for (const suggestion of suggestions) {
       if (suggestion.autoFixAvailable && suggestion.fix) {
@@ -834,17 +836,17 @@ export class AccessibilityManager {
 
   private generateFix(
     violationId: string,
-    _node: { html: string; target: Array<string> }
+    _node: { html: string; target: Array<string> },
   ): string | undefined {
     switch (violationId) {
-      case 'color-contrast': {
-        return 'Use AccessibilityManager.ensureContrast() to fix contrast issues';
+      case "color-contrast": {
+        return "Use AccessibilityManager.ensureContrast() to fix contrast issues";
       }
-      case 'image-alt': {
-        return 'Add descriptive alt text to the image';
+      case "image-alt": {
+        return "Add descriptive alt text to the image";
       }
-      case 'label': {
-        return 'Add a label element or aria-label attribute';
+      case "label": {
+        return "Add a label element or aria-label attribute";
       }
       default: {
         return;
@@ -855,22 +857,22 @@ export class AccessibilityManager {
   private getImplicitRole(element: HTMLElement): string | null {
     const tagName = element.tagName.toLowerCase();
     const implicitRoles: Record<string, string | null> = {
-      button: 'button',
-      a: element.hasAttribute('href') ? 'link' : 'generic',
-      nav: 'navigation',
-      main: 'main',
-      img: 'img',
-      form: 'form',
-      ul: 'list',
-      ol: 'list',
-      li: 'listitem',
+      button: "button",
+      a: element.hasAttribute("href") ? "link" : "generic",
+      nav: "navigation",
+      main: "main",
+      img: "img",
+      form: "form",
+      ul: "list",
+      ol: "list",
+      li: "listitem",
     };
 
     return implicitRoles[tagName] || null;
   }
 
   private isInteractive(element: HTMLElement): boolean {
-    const role = element.getAttribute('role') || this.getImplicitRole(element);
+    const role = element.getAttribute("role") || this.getImplicitRole(element);
     if (
       role &&
       ARIA_RULES.roles[role as keyof typeof ARIA_RULES.roles]?.interactive
@@ -878,25 +880,25 @@ export class AccessibilityManager {
       return true;
     }
 
-    const interactiveTags = ['button', 'a', 'input', 'select', 'textarea'];
+    const interactiveTags = ["button", "a", "input", "select", "textarea"];
     return interactiveTags.includes(element.tagName.toLowerCase());
   }
 
   private hasAccessibleName(element: HTMLElement): boolean {
     return Boolean(
-      element.getAttribute('aria-label') ||
-        element.getAttribute('aria-labelledby') ||
+      element.getAttribute("aria-label") ||
+        element.getAttribute("aria-labelledby") ||
         element.textContent?.trim() ||
-        (element as HTMLInputElement).placeholder
+        (element as HTMLInputElement).placeholder,
     );
   }
 
   private generateAccessibleName(element: HTMLElement): string {
     const type = element.tagName.toLowerCase();
-    const role = element.getAttribute('role');
+    const role = element.getAttribute("role");
 
     if (element.className) {
-      const className = element.className.split(' ')[0];
+      const className = element.className.split(" ")[0];
       return `${role || type} ${className}`;
     }
 
@@ -905,20 +907,20 @@ export class AccessibilityManager {
 
   private getSuggestedARIAValue(
     attribute: string,
-    element: HTMLElement
+    element: HTMLElement,
   ): string {
     switch (attribute) {
-      case 'aria-label': {
+      case "aria-label": {
         return this.generateAccessibleName(element);
       }
-      case 'aria-expanded': {
-        return 'false';
+      case "aria-expanded": {
+        return "false";
       }
-      case 'aria-checked': {
-        return 'false';
+      case "aria-checked": {
+        return "false";
       }
       default: {
-        return '';
+        return "";
       }
     }
   }
@@ -940,8 +942,8 @@ export class AccessibilityManager {
   private handleMutations(mutations: Array<MutationRecord>): void {
     for (const mutation of mutations) {
       if (
-        mutation.type === 'attributes' &&
-        mutation.attributeName?.startsWith('aria-')
+        mutation.type === "attributes" &&
+        mutation.attributeName?.startsWith("aria-")
       ) {
         const element = mutation.target as HTMLElement;
         const validation = this.validateARIA(element, true);
@@ -966,7 +968,7 @@ class FocusTrap {
 
   constructor(
     container: HTMLElement,
-    options: FocusOptions & { onDeactivate?: () => void }
+    options: FocusOptions & { onDeactivate?: () => void },
   ) {
     this.container = container;
     this.options = options;
@@ -983,9 +985,9 @@ class FocusTrap {
     // Set initial focus
     if (this.options.initialFocus) {
       const initialElement =
-        typeof this.options.initialFocus === 'string'
+        typeof this.options.initialFocus === "string"
           ? (this.container.querySelector(
-              this.options.initialFocus
+              this.options.initialFocus,
             ) as HTMLElement)
           : this.options.initialFocus;
 
@@ -999,10 +1001,10 @@ class FocusTrap {
     }
 
     // Add event listeners
-    if (typeof document !== 'undefined') {
-      document.addEventListener('keydown', this.handleKeyDown);
+    if (typeof document !== "undefined") {
+      document.addEventListener("keydown", this.handleKeyDown);
       if (this.options.clickOutsideDeactivates) {
-        document.addEventListener('click', this.handleClickOutside);
+        document.addEventListener("click", this.handleClickOutside);
       }
     }
   }
@@ -1013,9 +1015,9 @@ class FocusTrap {
     }
 
     this.active = false;
-    if (typeof document !== 'undefined') {
-      document.removeEventListener('keydown', this.handleKeyDown);
-      document.removeEventListener('click', this.handleClickOutside);
+    if (typeof document !== "undefined") {
+      document.removeEventListener("keydown", this.handleKeyDown);
+      document.removeEventListener("click", this.handleClickOutside);
     }
 
     if (this.options.onDeactivate) {
@@ -1025,13 +1027,13 @@ class FocusTrap {
 
   private updateFocusableElements(): void {
     const focusableSelectors = [
-      'a[href]',
-      'button:not([disabled])',
-      'input:not([disabled])',
-      'select:not([disabled])',
-      'textarea:not([disabled])',
+      "a[href]",
+      "button:not([disabled])",
+      "input:not([disabled])",
+      "select:not([disabled])",
+      "textarea:not([disabled])",
       '[tabindex]:not([tabindex="-1"])',
-    ].join(', ');
+    ].join(", ");
 
     const focusableElements = [
       ...this.container.querySelectorAll(focusableSelectors),
@@ -1046,7 +1048,7 @@ class FocusTrap {
       return;
     }
 
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       this.updateFocusableElements();
 
       if (!this.firstFocusableElement || !this.lastFocusableElement) {
@@ -1066,7 +1068,7 @@ class FocusTrap {
         event.preventDefault();
         this.firstFocusableElement.focus();
       }
-    } else if (event.key === 'Escape' && this.options.escapeDeactivates) {
+    } else if (event.key === "Escape" && this.options.escapeDeactivates) {
       this.deactivate();
     }
   };

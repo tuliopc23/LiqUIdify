@@ -1,45 +1,45 @@
-import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
-import React from 'react';
-import { cn } from '@/core/utils/classname';
-import { createVariants as cva } from '../../lib/variant-system';
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
+import React from "react";
+import { cn } from "@/core/utils/classname";
+import { createVariants as cva } from "../../lib/variant-system";
 
 const paginationVariants = cva({
-  base: 'flex items-center justify-center space-x-1 rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-md',
+  base: "flex items-center justify-center space-x-1 rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-md",
   variants: {
     size: {
-      sm: 'p-1 text-xs',
-      md: 'p-2 text-sm',
-      lg: 'p-3 text-base',
+      sm: "p-1 text-xs",
+      md: "p-2 text-sm",
+      lg: "p-3 text-base",
     },
     variant: {
-      default: 'bg-white/5',
-      solid: 'bg-white/10',
-      ghost: 'border-transparent bg-transparent',
+      default: "bg-white/5",
+      solid: "bg-white/10",
+      ghost: "border-transparent bg-transparent",
     },
   },
   defaultVariants: {
-    size: 'md',
-    variant: 'default',
+    size: "md",
+    variant: "default",
   },
 });
 
 const pageButtonVariants = cva({
-  base: 'flex h-8 min-w-[32px] items-center justify-center rounded-md px-2 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white focus:bg-white/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+  base: "flex h-8 min-w-[32px] items-center justify-center rounded-md px-2 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white focus:bg-white/10 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
   variants: {
     isActive: {
-      true: 'border border-blue-400/30 bg-blue-500/20 text-blue-400',
-      false: 'hover:bg-white/5',
+      true: "border border-blue-400/30 bg-blue-500/20 text-blue-400",
+      false: "hover:bg-white/5",
     },
     size: {
-      sm: 'h-6 min-w-[24px] text-xs',
-      md: 'h-8 min-w-[32px] text-sm',
-      lg: 'h-10 min-w-[40px] text-base',
+      sm: "h-6 min-w-[24px] text-xs",
+      md: "h-8 min-w-[32px] text-sm",
+      lg: "h-10 min-w-[40px] text-base",
     },
   },
   defaultVariants: {
-    isActive: 'false',
-    size: 'md',
+    isActive: "false",
+    size: "md",
   },
 });
 
@@ -56,9 +56,9 @@ export interface GlassPaginationProps {
   className?: string;
   id?: string;
   role?: string;
-  'aria-label'?: string;
-  variant?: 'default' | 'solid' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+  "aria-label"?: string;
+  variant?: "default" | "solid" | "ghost";
+  size?: "sm" | "md" | "lg";
 }
 
 const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
@@ -78,10 +78,10 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       variant,
       ...props
     },
-    ref
+    ref,
   ) => {
     const generatePageNumbers = () => {
-      const pages: number | Array<'ellipsis'> = [];
+      const pages: number | Array<"ellipsis"> = [];
 
       // Always include first page(s)
 
@@ -96,17 +96,17 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       // Calculate start and end of sibling range
       const siblingStart = Math.max(
         currentPage - siblingCount,
-        boundaryCount + 1
+        boundaryCount + 1,
       );
       const siblingEnd = Math.min(
         currentPage + siblingCount,
-        totalPages - boundaryCount
+        totalPages - boundaryCount,
       );
 
       // Add ellipsis before siblings if needed
 
       if (siblingStart > boundaryCount + 1 && showEllipsis) {
-        pages.push('ellipsis');
+        pages.push("ellipsis");
       }
 
       // Add sibling pages
@@ -120,7 +120,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
       // Add ellipsis after siblings if needed
 
       if (siblingEnd < totalPages - boundaryCount && showEllipsis) {
-        pages.push('ellipsis');
+        pages.push("ellipsis");
       }
 
       // Always include last page(s)
@@ -148,34 +148,34 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
     };
 
     const PaginationButton: React.FC<{
-      page: number | 'ellipsis';
+      page: number | "ellipsis";
       isActive?: boolean;
       disabled?: boolean;
       children: React.ReactNode;
-      'aria-label'?: string;
+      "aria-label"?: string;
     }> = ({
       page,
       isActive = false,
       disabled: buttonDisabled = false,
       children,
-      'aria-label': ariaLabel,
+      "aria-label": ariaLabel,
     }) => (
       <motion.button
         whileHover={!buttonDisabled && !disabled ? { scale: 1.05 } : {}}
         whileTap={!buttonDisabled && !disabled ? { scale: 0.95 } : {}}
-        onClick={() => typeof page === 'number' && handlePageChange(page)}
+        onClick={() => typeof page === "number" && handlePageChange(page)}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            (() => typeof page === 'number' && handlePageChange(page))(e);
+            (() => typeof page === "number" && handlePageChange(page))(e);
           }
         }}
-        disabled={buttonDisabled || disabled || page === 'ellipsis'}
+        disabled={buttonDisabled || disabled || page === "ellipsis"}
         className={cn(
-          pageButtonVariants({ isActive: isActive ? 'true' : 'false', size })
+          pageButtonVariants({ isActive: isActive ? "true" : "false", size }),
         )}
         aria-label={ariaLabel}
-        aria-current={isActive ? 'page' : undefined}
+        aria-current={isActive ? "page" : undefined}
       >
         {children}
       </motion.button>
@@ -213,9 +213,9 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         {/* Page Numbers */}
         {pageNumbers.map((page, index) => (
           <React.Fragment
-            key={page === 'ellipsis' ? `ellipsis-${index}` : `page-${page}`}
+            key={page === "ellipsis" ? `ellipsis-${index}` : `page-${page}`}
           >
-            {page === 'ellipsis' ? (
+            {page === "ellipsis" ? (
               <span className="flex h-8 min-w-[32px] items-center justify-center text-white/40">
                 <MoreHorizontal className="h-4 w-4" />
               </span>
@@ -254,9 +254,9 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         )}
       </nav>
     );
-  }
+  },
 );
 
-GlassPagination.displayName = 'GlassPagination';
+GlassPagination.displayName = "GlassPagination";
 
 export { GlassPagination };

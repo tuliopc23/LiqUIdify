@@ -1,5 +1,5 @@
 // Bun Test Setup
-import { afterEach, beforeAll } from '@jest/globals';
+import { afterEach, beforeAll } from "@jest/globals";
 
 declare global {
   var IS_REACT_ACT_ENVIRONMENT: boolean;
@@ -17,7 +17,7 @@ afterEach(() => {
 });
 
 // Mock window.matchMedia
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string): MediaQueryList => ({
     matches: false,
@@ -34,7 +34,7 @@ Object.defineProperty(window, 'matchMedia', {
 // Mock IntersectionObserver
 class MockIntersectionObserver implements IntersectionObserver {
   readonly root: Element | Document | null = null;
-  readonly rootMargin: string = '';
+  readonly rootMargin: string = "";
   readonly thresholds: Array<Readonlynumber> = [];
 
   disconnect(): void {}

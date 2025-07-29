@@ -1,4 +1,4 @@
 export {
   GlassVisuallyHidden,
   type GlassVisuallyHiddenProps,
-} from './glass-visually-hidden';
+} from "./glass-visually-hidden";

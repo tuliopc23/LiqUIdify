@@ -14,10 +14,10 @@ export type {
   Violation,
   ViolationNode,
   Warning,
-} from './accessibility-manager-prod';
-export * from './accessibility-manager-prod';
+} from "./accessibility-manager-prod";
+export * from "./accessibility-manager-prod";
 
 export {
   AccessibilityManager,
   accessibilityManager,
-} from './accessibility-manager-prod';
+} from "./accessibility-manager-prod";

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   AlertCircle,
   Award,
@@ -6,35 +6,35 @@ import {
   Info,
   Star,
   XCircle,
-} from 'lucide-react';
-import { GlassBadge } from './glass-badge';
+} from "lucide-react";
+import { GlassBadge } from "./glass-badge";
 
 const meta = {
-  title: 'Components/Display/GlassBadge',
+  title: "Components/Display/GlassBadge",
   component: GlassBadge,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A lightweight badge component for displaying labels, status indicators, and small pieces of information with glassmorphism styling.',
+          "A lightweight badge component for displaying labels, status indicators, and small pieces of information with glassmorphism styling.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'success', 'warning', 'error'],
-      description: 'Visual style variant of the badge',
+      control: "select",
+      options: ["default", "success", "warning", "error"],
+      description: "Visual style variant of the badge",
     },
     children: {
-      control: 'text',
-      description: 'Badge content',
+      control: "text",
+      description: "Badge content",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
 } satisfies Meta<typeof GlassBadge>;
@@ -45,29 +45,29 @@ type Story = StoryObj<typeof meta>;
 // Basic variants
 export const Default: Story = {
   args: {
-    children: 'Default',
-    variant: 'default',
+    children: "Default",
+    variant: "default",
   },
 };
 
 export const Success: Story = {
   args: {
-    children: 'Success',
-    variant: 'success',
+    children: "Success",
+    variant: "success",
   },
 };
 
 export const Warning: Story = {
   args: {
-    children: 'Warning',
-    variant: 'warning',
+    children: "Warning",
+    variant: "warning",
   },
 };
 
 export const ErrorBadge: Story = {
   args: {
-    children: 'Error',
-    variant: 'error',
+    children: "Error",
+    variant: "error",
   },
 };
 
@@ -346,7 +346,7 @@ export const ThemeShowcase: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };

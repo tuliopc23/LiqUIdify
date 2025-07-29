@@ -1,7 +1,7 @@
 export const glassEffect = {
-  base: 'backdrop-blur-xl bg-white/10 border border-white/20',
-  hover: 'hover:bg-white/20 hover:border-white/30',
-  active: 'active:bg-white/30',
+  base: "backdrop-blur-xl bg-white/10 border border-white/20",
+  hover: "hover:bg-white/20 hover:border-white/30",
+  active: "active:bg-white/30",
 };
 
 export const applyGlassEffect = (intensity = 1) => ({

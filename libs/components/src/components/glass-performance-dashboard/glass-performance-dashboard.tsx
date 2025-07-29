@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { cn } from '@/core/utils/classname';
-import { performanceMonitor } from '../../core/performance-monitor';
+import { cn } from "@/core/utils/classname";
+import { performanceMonitor } from "../../core/performance-monitor";
 
-import { useRealtimePerformance } from '../../hooks/use-performance-monitoring';
-import { GlassCard } from '../glass-card-refactored';
+import { useRealtimePerformance } from "../../hooks/use-performance-monitoring";
+import { GlassCard } from "../glass-card-refactored";
 
 export interface GlassPerformanceDashboardProps {
   className?: string;
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+  position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   collapsed?: boolean;
   onClose?: () => void;
 }
 
 interface PerformanceMetric {
   value: number;
-  rating: 'good' | 'needs-improvement' | 'poor';
+  rating: "good" | "needs-improvement" | "poor";
 }
 
 interface ComponentMetric {
@@ -24,41 +24,41 @@ interface ComponentMetric {
 }
 
 const METRIC_LABELS = {
-  LCP: 'Largest Contentful Paint',
-  FID: 'First Input Delay',
-  CLS: 'Cumulative Layout Shift',
-  FCP: 'First Contentful Paint',
-  TTFB: 'Time to First Byte',
-  INP: 'Interaction to Next Paint',
-  TTI: 'Time to Interactive',
+  LCP: "Largest Contentful Paint",
+  FID: "First Input Delay",
+  CLS: "Cumulative Layout Shift",
+  FCP: "First Contentful Paint",
+  TTFB: "Time to First Byte",
+  INP: "Interaction to Next Paint",
+  TTI: "Time to Interactive",
 };
 
 const getMetricColor = (rating: string) => {
   switch (rating) {
-    case 'good': {
-      return 'text-green-500';
+    case "good": {
+      return "text-green-500";
     }
-    case 'needs-improvement': {
-      return 'text-yellow-500';
+    case "needs-improvement": {
+      return "text-yellow-500";
     }
-    case 'poor': {
-      return 'text-red-500';
+    case "poor": {
+      return "text-red-500";
     }
     default: {
-      return 'text-gray-500';
+      return "text-gray-500";
     }
   }
 };
 
 export function GlassPerformanceDashboard({
   className,
-  position = 'bottom-right',
+  position = "bottom-right",
   collapsed: initialCollapsed = false,
   onClose,
 }: GlassPerformanceDashboardProps) {
   const [collapsed, setCollapsed] = useState(initialCollapsed);
   const [metrics, setMetrics] = useState<Map<string, PerformanceMetric>>(
-    new Map()
+    new Map(),
   );
   const [componentMetrics, setComponentMetrics] = useState<
     Array<ComponentMetric>
@@ -72,8 +72,8 @@ export function GlassPerformanceDashboard({
         metricName as keyof typeof METRIC_LABELS,
         (metric) => {
           setMetrics((previous) => new Map(previous).set(metricName, metric));
-        }
-      )
+        },
+      ),
     );
 
     // Get initial metrics
@@ -95,15 +95,15 @@ export function GlassPerformanceDashboard({
   }, []);
 
   const positionClasses = {
-    'top-left': 'top-4 left-4',
-    'top-right': 'top-4 right-4',
-    'bottom-left': 'bottom-4 left-4',
-    'bottom-right': 'bottom-4 right-4',
+    "top-left": "top-4 left-4",
+    "top-right": "top-4 right-4",
+    "bottom-left": "bottom-4 left-4",
+    "bottom-right": "bottom-4 right-4",
   };
 
   if (collapsed) {
     return (
-      <div className={cn('fixed z-50', positionClasses[position], className)}>
+      <div className={cn("fixed z-50", positionClasses[position], className)}>
         <button
           type="button"
           onClick={() => setCollapsed(false)}
@@ -134,9 +134,9 @@ export function GlassPerformanceDashboard({
   return (
     <div
       className={cn(
-        'fixed z-50 max-h-[600px] w-96 overflow-hidden',
+        "fixed z-50 max-h-[600px] w-96 overflow-hidden",
         positionClasses[position],
-        className
+        className,
       )}
     >
       <GlassCard className="p-4">
@@ -203,12 +203,12 @@ export function GlassPerformanceDashboard({
 
             <div
               className={cn(
-                'font-mono text-xl',
+                "font-mono text-xl",
                 fps >= 55
-                  ? 'text-green-500'
+                  ? "text-green-500"
                   : fps >= 30
-                    ? 'text-yellow-500'
-                    : 'text-red-500'
+                    ? "text-yellow-500"
+                    : "text-red-500",
               )}
             >
               {fps}
@@ -241,16 +241,16 @@ export function GlassPerformanceDashboard({
 
                   <div
                     className={cn(
-                      'font-mono text-sm',
-                      getMetricColor(metric.rating)
+                      "font-mono text-sm",
+                      getMetricColor(metric.rating),
                     )}
                   >
-                    {metric.value.toFixed(name === 'CLS' ? 3 : 0)}
-                    {name === 'CLS' ? '' : 'ms'}
+                    {metric.value.toFixed(name === "CLS" ? 3 : 0)}
+                    {name === "CLS" ? "" : "ms"}
                   </div>
                 </div>
 
-                <div className={cn('text-xs', getMetricColor(metric.rating))}>
+                <div className={cn("text-xs", getMetricColor(metric.rating))}>
                   {metric.rating}
                 </div>
               </div>

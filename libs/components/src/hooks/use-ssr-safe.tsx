@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   getLocalStorageItem,
   getScrollPosition,
@@ -16,7 +16,7 @@ import {
   safeSessionStorage,
   safeWindow,
   setLocalStorageItem,
-} from '../utils/ssr-utils';
+} from "../utils/ssr-utils";
 
 /**
  * Hook for SSR-safe window dimensions
@@ -33,7 +33,7 @@ export const useWindowDimensions = () => {
       setDimensions(getWindowDimensions());
     };
 
-    const cleanup = safeAddEventListener('resize', handleResize);
+    const cleanup = safeAddEventListener("resize", handleResize);
     return cleanup;
   }, []);
 
@@ -56,7 +56,7 @@ export const useScrollPosition = () => {
       setPosition(getScrollPosition());
     };
 
-    const cleanup = safeAddEventListener('scroll', handleScroll, {
+    const cleanup = safeAddEventListener("scroll", handleScroll, {
       passive: true,
     });
     return cleanup;
@@ -92,8 +92,8 @@ export const useMediaQuery = (query: string): boolean => {
 
     // Modern browsers
     if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
     }
     // Legacy browsers
     if (mediaQuery.addListener) {
@@ -115,7 +115,7 @@ type UseLocalStorageReturnType<T> = [T, (value: T) => void, () => void];
  */
 export const useLocalStorage = <T,>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): UseLocalStorageReturnType<T> => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     return getLocalStorageItem(key, initialValue);
@@ -126,7 +126,7 @@ export const useLocalStorage = <T,>(
       setStoredValue(value);
       setLocalStorageItem(key, value);
     },
-    [key]
+    [key],
   );
 
   const removeValue = useCallback(() => {
@@ -154,8 +154,8 @@ export const useLocalStorage = <T,>(
     };
 
     const cleanup = safeAddEventListener(
-      'storage',
-      handleStorageChange as unknown
+      "storage",
+      handleStorageChange as unknown,
     );
     return cleanup;
   }, [key]);
@@ -171,7 +171,7 @@ export const useLocalStorage = <T,>(
  */
 export const useSessionStorage = <T,>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T) => void, () => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (!isBrowser()) {
@@ -203,7 +203,7 @@ export const useSessionStorage = <T,>(
         }
       }
     },
-    [key]
+    [key],
   );
 
   const removeValue = useCallback(() => {
@@ -225,7 +225,7 @@ export const useSessionStorage = <T,>(
  */
 export const useDynamicImport = <T,>(
   importFunction: () => Promise<T>,
-  deps: React.DependencyList = []
+  deps: React.DependencyList = [],
 ): { module: T | null; loading: boolean; error: Error | null } => {
   const [module, setModule] = useState<T | null>(undefined);
   const [loading, setLoading] = useState(false);
@@ -249,7 +249,7 @@ export const useDynamicImport = <T,>(
         }
       } catch (error) {
         if (!cancelled) {
-          setError(error instanceof Error ? error : new Error('Import failed'));
+          setError(error instanceof Error ? error : new Error("Import failed"));
         }
       } finally {
         if (!cancelled) {
@@ -294,8 +294,8 @@ export const useUserPreferences = () => {
       return;
     }
 
-    const motionQuery = win.matchMedia('(prefers-reduced-motion: reduce)');
-    const darkQuery = win.matchMedia('(prefers-color-scheme: dark)');
+    const motionQuery = win.matchMedia("(prefers-reduced-motion: reduce)");
+    const darkQuery = win.matchMedia("(prefers-color-scheme: dark)");
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
       setPreferences((previous) => ({
@@ -313,11 +313,11 @@ export const useUserPreferences = () => {
 
     // Modern browsers
     if (motionQuery.addEventListener) {
-      motionQuery.addEventListener('change', handleMotionChange);
-      darkQuery.addEventListener('change', handleDarkChange);
+      motionQuery.addEventListener("change", handleMotionChange);
+      darkQuery.addEventListener("change", handleDarkChange);
       return () => {
-        motionQuery.removeEventListener('change', handleMotionChange);
-        darkQuery.removeEventListener('change', handleDarkChange);
+        motionQuery.removeEventListener("change", handleMotionChange);
+        darkQuery.removeEventListener("change", handleDarkChange);
       };
     }
     // Legacy browsers
@@ -342,7 +342,7 @@ export const useUserPreferences = () => {
  */
 export const useIntersectionObserver = (
   callback: IntersectionObserverCallback,
-  options?: IntersectionObserverInit
+  options?: IntersectionObserverInit,
 ) => {
   const elementRef = useRef<Element>(null);
   const callbackRef = useRef(callback);
@@ -362,7 +362,7 @@ export const useIntersectionObserver = (
 
     const observer = safeIntersectionObserver(
       (...arguments_) => callbackRef.current(...arguments_),
-      options
+      options,
     );
 
     if (observer) {
@@ -397,7 +397,7 @@ export const useResizeObserver = (callback: ResizeObserverCallback) => {
     }
 
     const observer = safeResizeObserver((...arguments_) =>
-      callbackRef.current(...arguments_)
+      callbackRef.current(...arguments_),
     );
 
     if (observer) {
@@ -417,7 +417,7 @@ export const useResizeObserver = (callback: ResizeObserverCallback) => {
  */
 export const useMutationObserver = (
   callback: MutationCallback,
-  options: MutationObserverInit
+  options: MutationObserverInit,
 ) => {
   const elementRef = useRef<Element>(null);
   const callbackRef = useRef(callback);
@@ -436,7 +436,7 @@ export const useMutationObserver = (
     }
 
     const observer = safeMutationObserver((...arguments_) =>
-      callbackRef.current(...arguments_)
+      callbackRef.current(...arguments_),
     );
 
     if (observer) {
@@ -472,8 +472,8 @@ export const useDocumentVisibility = (): boolean => {
     setIsVisible(!document_.hidden);
 
     const cleanup = safeAddEventListener(
-      'visibilitychange',
-      handleVisibilityChange
+      "visibilitychange",
+      handleVisibilityChange,
     );
     return cleanup;
   }, []);
@@ -503,8 +503,8 @@ export const useOnlineStatus = (): boolean => {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
-    const cleanupOnline = safeAddEventListener('online', handleOnline);
-    const cleanupOffline = safeAddEventListener('offline', handleOffline);
+    const cleanupOnline = safeAddEventListener("online", handleOnline);
+    const cleanupOffline = safeAddEventListener("offline", handleOffline);
 
     return () => {
       cleanupOnline();

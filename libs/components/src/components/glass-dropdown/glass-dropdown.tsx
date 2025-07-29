@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
-import { cn, getGlassClass } from '@/core/utils/classname';
+import { cn, getGlassClass } from "@/core/utils/classname";
 
-import { useIsClient } from '@/hooks/use-ssr-safe';
+import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface DropdownItem {
   label: string;
@@ -18,7 +18,7 @@ export interface GlassDropdownProps {
   onSelect?: (value: string) => void;
   className?: string;
   contentClassName?: string;
-  align?: 'start' | 'center' | 'end';
+  align?: "start" | "center" | "end";
   sideOffset?: number;
 }
 
@@ -31,15 +31,15 @@ export const GlassDropdown = React.memo(
         onSelect,
         className,
         contentClassName,
-        align = 'start',
+        align = "start",
         sideOffset = 4,
         ...props
       },
-      ref
+      ref,
     ) => {
       const [isOpen, setIsOpen] = useState(false);
       const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>(
-        {}
+        {},
       );
       const triggerRef = useRef<HTMLButtonElement>(null);
       const dropdownRef = useRef<HTMLDivElement>(null);
@@ -63,19 +63,19 @@ export const GlassDropdown = React.memo(
         };
 
         const handleEscape = (event: KeyboardEvent) => {
-          if (isOpen && event.key === 'Escape') {
+          if (isOpen && event.key === "Escape") {
             setIsOpen(false);
           }
         };
 
         if (isOpen) {
-          document.addEventListener('mousedown', handleClickOutside);
-          document.addEventListener('keydown', handleEscape);
+          document.addEventListener("mousedown", handleClickOutside);
+          document.addEventListener("keydown", handleEscape);
         }
 
         return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-          document.removeEventListener('keydown', handleEscape);
+          document.removeEventListener("mousedown", handleClickOutside);
+          document.removeEventListener("keydown", handleEscape);
         };
       }, [isClient, isOpen]);
 
@@ -97,12 +97,12 @@ export const GlassDropdown = React.memo(
 
         // Align dropdown
         switch (align) {
-          case 'center': {
+          case "center": {
             left =
               triggerRect.left + (triggerRect.width - dropdownRect.width) / 2;
             break;
           }
-          case 'end': {
+          case "end": {
             left = triggerRect.right - dropdownRect.width;
             break;
           }
@@ -125,7 +125,7 @@ export const GlassDropdown = React.memo(
         }
 
         setDropdownStyle({
-          position: 'fixed',
+          position: "fixed",
           top: `${top}px`,
           left: `${left}px`,
           zIndex: 9999,
@@ -144,7 +144,7 @@ export const GlassDropdown = React.memo(
       return (
         <div
           ref={ref}
-          className={cn('relative inline-block', className)}
+          className={cn("relative inline-block", className)}
           {...props}
         >
           <button
@@ -152,7 +152,7 @@ export const GlassDropdown = React.memo(
             ref={triggerRef}
             onClick={() => setIsOpen(!isOpen)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
+              if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 setIsOpen(!isOpen);
               }
@@ -169,11 +169,11 @@ export const GlassDropdown = React.memo(
               ref={dropdownRef}
               style={dropdownStyle}
               className={cn(
-                getGlassClass('elevated'),
-                'rounded-xl border border-white/20 py-1 dark:border-white/10',
-                'min-w-[160px] max-w-[300px]',
-                'fade-in-0 zoom-in-95 animate-in duration-200',
-                contentClassName
+                getGlassClass("elevated"),
+                "rounded-xl border border-white/20 py-1 dark:border-white/10",
+                "min-w-[160px] max-w-[300px]",
+                "fade-in-0 zoom-in-95 animate-in duration-200",
+                contentClassName,
               )}
             >
               {items.map((item, index) => {
@@ -193,12 +193,12 @@ export const GlassDropdown = React.memo(
                     onClick={() => handleSelect(item)}
                     disabled={item.disabled}
                     className={cn(
-                      'w-full px-3 py-2 text-left transition-colors duration-200',
-                      'hover:bg-white/10 dark:hover:bg-white/5',
-                      'focus:bg-white/10 focus:outline-none dark:focus:bg-white/5',
-                      'flex items-center space-x-2',
-                      'text-gray-900 text-sm dark:text-white',
-                      item.disabled && 'cursor-not-allowed opacity-50'
+                      "w-full px-3 py-2 text-left transition-colors duration-200",
+                      "hover:bg-white/10 dark:hover:bg-white/5",
+                      "focus:bg-white/10 focus:outline-none dark:focus:bg-white/5",
+                      "flex items-center space-x-2",
+                      "text-gray-900 text-sm dark:text-white",
+                      item.disabled && "cursor-not-allowed opacity-50",
                     )}
                   >
                     {item.icon && (
@@ -213,8 +213,8 @@ export const GlassDropdown = React.memo(
           )}
         </div>
       );
-    }
-  )
+    },
+  ),
 );
 
-GlassDropdown.displayName = 'GlassDropdown';
+GlassDropdown.displayName = "GlassDropdown";

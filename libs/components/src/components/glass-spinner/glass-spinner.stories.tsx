@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useEffect, useState } from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useEffect, useState } from "react";
 import {
   DotsSpinner,
   GlassSpinner,
   PulseSpinner,
   RingSpinner,
   WaveSpinner,
-} from './glass-spinner';
+} from "./glass-spinner";
 
 const meta = {
-  title: 'Components/GlassSpinner',
+  title: "Components/GlassSpinner",
   component: GlassSpinner,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -31,51 +31,51 @@ It includes multiple spinner variants and customization options for different us
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      description: 'Visual variant of the spinner',
-      control: { type: 'select' },
+      description: "Visual variant of the spinner",
+      control: { type: "select" },
       options: [
-        'default',
-        'primary',
-        'secondary',
-        'success',
-        'warning',
-        'error',
-        'glass',
+        "default",
+        "primary",
+        "secondary",
+        "success",
+        "warning",
+        "error",
+        "glass",
       ],
     },
     size: {
-      description: 'Size of the spinner',
-      control: { type: 'select' },
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+      description: "Size of the spinner",
+      control: { type: "select" },
+      options: ["xs", "sm", "md", "lg", "xl", "2xl"],
     },
     speed: {
-      description: 'Animation speed',
-      control: { type: 'select' },
-      options: ['slow', 'normal', 'fast'],
+      description: "Animation speed",
+      control: { type: "select" },
+      options: ["slow", "normal", "fast"],
     },
     orientation: {
-      description: 'Layout orientation when showing label',
-      control: { type: 'select' },
-      options: ['horizontal', 'vertical'],
+      description: "Layout orientation when showing label",
+      control: { type: "select" },
+      options: ["horizontal", "vertical"],
     },
     label: {
-      description: 'Loading label text',
-      control: { type: 'text' },
+      description: "Loading label text",
+      control: { type: "text" },
     },
     showLabel: {
-      description: 'Show the loading label',
-      control: { type: 'boolean' },
+      description: "Show the loading label",
+      control: { type: "boolean" },
     },
     centered: {
-      description: 'Center the spinner with backdrop',
-      control: { type: 'boolean' },
+      description: "Center the spinner with backdrop",
+      control: { type: "boolean" },
     },
     className: {
-      description: 'Additional CSS classes',
-      control: { type: 'text' },
+      description: "Additional CSS classes",
+      control: { type: "text" },
     },
   },
 } satisfies Meta<typeof GlassSpinner>;
@@ -86,9 +86,9 @@ type Story = StoryObj<typeof meta>;
 // Default story
 export const Default: Story = {
   args: {
-    variant: 'default',
-    size: 'md',
-    speed: 'normal',
+    variant: "default",
+    size: "md",
+    speed: "normal",
   },
 };
 
@@ -298,32 +298,32 @@ export const ButtonLoading: Story = {
       <div className="space-y-4">
         <button
           type="button"
-          onClick={() => handleClick('save')}
+          onClick={() => handleClick("save")}
           disabled={loading.save}
           className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading.save && <GlassSpinner size="xs" />}
-          {loading.save ? 'Saving...' : 'Save Changes'}
+          {loading.save ? "Saving..." : "Save Changes"}
         </button>
 
         <button
           type="button"
-          onClick={() => handleClick('submit')}
+          onClick={() => handleClick("submit")}
           disabled={loading.submit}
           className="flex items-center gap-2 rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading.submit && <GlassSpinner size="xs" />}
-          {loading.submit ? 'Submitting...' : 'Submit Form'}
+          {loading.submit ? "Submitting..." : "Submit Form"}
         </button>
 
         <button
           type="button"
-          onClick={() => handleClick('delete')}
+          onClick={() => handleClick("delete")}
           disabled={loading.delete}
           className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading.delete && <GlassSpinner size="xs" />}
-          {loading.delete ? 'Deleting...' : 'Delete Item'}
+          {loading.delete ? "Deleting..." : "Delete Item"}
         </button>
       </div>
     );

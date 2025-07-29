@@ -1,6 +1,6 @@
-import React, { type ReactNode, useEffect, useState } from 'react';
+import React, { type ReactNode, useEffect, useState } from "react";
 
-import { ConfigProvider, type ConfigProviderProps } from './config-provider';
+import { ConfigProvider, type ConfigProviderProps } from "./config-provider";
 
 interface SSRConfigProviderProps extends ConfigProviderProps {
   children: ReactNode;
@@ -51,7 +51,7 @@ export function useIsClient() {
  */
 export function withSSRSafety<P extends object>(
   Component: React.ComponentType<P>,
-  fallback?: ReactNode
+  fallback?: ReactNode,
 ) {
   const SSRSafeComponent = (props: P) => {
     const isClient = useIsClient();

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   FileText,
   HelpCircle,
@@ -7,38 +7,38 @@ import {
   Menu,
   Settings,
   User,
-} from 'lucide-react';
-import React from 'react';
-import { GlassMobileNav } from '@/components/glass-mobile-nav/glass-mobile-nav';
+} from "lucide-react";
+import React from "react";
+import { GlassMobileNav } from "@/components/glass-mobile-nav/glass-mobile-nav";
 
 const meta = {
-  title: 'Components/Glass Mobile Nav',
+  title: "Components/Glass Mobile Nav",
   component: GlassMobileNav,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
         component:
-          'A responsive mobile navigation component with glassmorphism effects, gesture support, and smooth animations. Includes submenu support and accessibility features.',
+          "A responsive mobile navigation component with glassmorphism effects, gesture support, and smooth animations. Includes submenu support and accessibility features.",
       },
     },
     viewport: {
-      defaultViewport: 'mobile1',
+      defaultViewport: "mobile1",
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     items: {
-      description: 'Navigation items with optional nested children',
-      control: { type: 'object' },
+      description: "Navigation items with optional nested children",
+      control: { type: "object" },
     },
     onItemClick: {
-      description: 'Callback when a navigation item is clicked',
-      action: 'clicked',
+      description: "Callback when a navigation item is clicked",
+      action: "clicked",
     },
     className: {
-      description: 'Additional CSS classes for the menu trigger button',
-      control: { type: 'text' },
+      description: "Additional CSS classes for the menu trigger button",
+      control: { type: "text" },
     },
   },
 } satisfies Meta<typeof GlassMobileNav>;
@@ -49,56 +49,56 @@ type Story = StoryObj<typeof meta>;
 // Sample navigation items
 const navigationItems = [
   {
-    id: 'home',
-    label: 'Home',
-    href: '/',
+    id: "home",
+    label: "Home",
+    href: "/",
     icon: <Home className="h-5 w-5" />,
   },
   {
-    id: 'profile',
-    label: 'Profile',
+    id: "profile",
+    label: "Profile",
     icon: <User className="h-5 w-5" />,
     children: [
-      { id: 'profile-settings', label: 'Settings', href: '/profile/settings' },
+      { id: "profile-settings", label: "Settings", href: "/profile/settings" },
       {
-        id: 'profile-preferences',
-        label: 'Preferences',
-        href: '/profile/preferences',
+        id: "profile-preferences",
+        label: "Preferences",
+        href: "/profile/preferences",
       },
-      { id: 'profile-security', label: 'Security', href: '/profile/security' },
+      { id: "profile-security", label: "Security", href: "/profile/security" },
     ],
   },
   {
-    id: 'docs',
-    label: 'Documentation',
+    id: "docs",
+    label: "Documentation",
     icon: <FileText className="h-5 w-5" />,
     children: [
       {
-        id: 'getting-started',
-        label: 'Getting Started',
-        href: '/docs/getting-started',
+        id: "getting-started",
+        label: "Getting Started",
+        href: "/docs/getting-started",
       },
-      { id: 'api-reference', label: 'API Reference', href: '/docs/api' },
-      { id: 'examples', label: 'Examples', href: '/docs/examples' },
+      { id: "api-reference", label: "API Reference", href: "/docs/api" },
+      { id: "examples", label: "Examples", href: "/docs/examples" },
     ],
   },
   {
-    id: 'settings',
-    label: 'Settings',
-    href: '/settings',
+    id: "settings",
+    label: "Settings",
+    href: "/settings",
     icon: <Settings className="h-5 w-5" />,
   },
   {
-    id: 'help',
-    label: 'Help & Support',
+    id: "help",
+    label: "Help & Support",
     icon: <HelpCircle className="h-5 w-5" />,
-    action: () => alert('Help clicked!'),
+    action: () => alert("Help clicked!"),
   },
   {
-    id: 'logout',
-    label: 'Logout',
+    id: "logout",
+    label: "Logout",
     icon: <LogOut className="h-5 w-5" />,
-    action: () => alert('Logout clicked!'),
+    action: () => alert("Logout clicked!"),
   },
 ];
 
@@ -136,13 +136,13 @@ export const WithActiveState: Story = {
   args: {
     items: navigationItems.map((item) => ({
       ...item,
-      active: item.id === 'home',
+      active: item.id === "home",
     })),
   },
   parameters: {
     docs: {
       description: {
-        story: 'Navigation with an active item highlighted',
+        story: "Navigation with an active item highlighted",
       },
     },
   },
@@ -151,15 +151,15 @@ export const WithActiveState: Story = {
 export const SimpleMenu: Story = {
   args: {
     items: [
-      { id: 'home', label: 'Home', href: '/' },
-      { id: 'about', label: 'About', href: '/about' },
-      { id: 'contact', label: 'Contact', href: '/contact' },
+      { id: "home", label: "Home", href: "/" },
+      { id: "about", label: "About", href: "/about" },
+      { id: "contact", label: "Contact", href: "/contact" },
     ],
   },
   parameters: {
     docs: {
       description: {
-        story: 'A simple navigation menu without icons or nested items',
+        story: "A simple navigation menu without icons or nested items",
       },
     },
   },
@@ -169,26 +169,26 @@ export const DeeplyNested: Story = {
   args: {
     items: [
       {
-        id: 'products',
-        label: 'Products',
+        id: "products",
+        label: "Products",
         icon: <Menu className="h-5 w-5" />,
         children: [
           {
-            id: 'electronics',
-            label: 'Electronics',
+            id: "electronics",
+            label: "Electronics",
             children: [
-              { id: 'phones', label: 'Phones' },
-              { id: 'laptops', label: 'Laptops' },
-              { id: 'tablets', label: 'Tablets' },
+              { id: "phones", label: "Phones" },
+              { id: "laptops", label: "Laptops" },
+              { id: "tablets", label: "Tablets" },
             ],
           },
           {
-            id: 'clothing',
-            label: 'Clothing',
+            id: "clothing",
+            label: "Clothing",
             children: [
-              { id: 'mens', label: "Men's" },
-              { id: 'womens', label: "Women's" },
-              { id: 'kids', label: 'Kids' },
+              { id: "mens", label: "Men's" },
+              { id: "womens", label: "Women's" },
+              { id: "kids", label: "Kids" },
             ],
           },
         ],
@@ -198,7 +198,7 @@ export const DeeplyNested: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Demonstration of deeply nested menu structures',
+        story: "Demonstration of deeply nested menu structures",
       },
     },
   },
@@ -206,7 +206,7 @@ export const DeeplyNested: Story = {
 
 export const InteractiveDemo: Story = {
   render: () => {
-    const [lastAction, setLastAction] = React.useState<string>('No action yet');
+    const [lastAction, setLastAction] = React.useState<string>("No action yet");
 
     const items = navigationItems.map((item) => ({
       ...item,
@@ -221,7 +221,7 @@ export const InteractiveDemo: Story = {
           </h2>
           <GlassMobileNav
             items={items}
-            onItemClick={(item) => console.log('Item clicked:', item)}
+            onItemClick={(item) => console.log("Item clicked:", item)}
           />
         </div>
         <div className="glass-effect rounded-lg p-6">
@@ -235,7 +235,7 @@ export const InteractiveDemo: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Interactive demo showing menu item clicks and actions',
+        story: "Interactive demo showing menu item clicks and actions",
       },
     },
   },
@@ -245,13 +245,13 @@ export const CustomStyling: Story = {
   args: {
     items: navigationItems,
     className:
-      'bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30',
+      "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30",
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Mobile navigation with custom styling applied to the trigger button',
+          "Mobile navigation with custom styling applied to the trigger button",
       },
     },
   },

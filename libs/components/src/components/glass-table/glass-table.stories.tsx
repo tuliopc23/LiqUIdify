@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { GlassTable } from './glass-table';
+import type { Meta, StoryObj } from "@storybook/react";
+import { GlassTable } from "./glass-table";
 
 const meta = {
-  title: 'Components/GlassTable',
+  title: "Components/GlassTable",
   component: GlassTable,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A table component with glassmorphic styling for displaying structured data.',
+          "A table component with glassmorphic styling for displaying structured data.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
 } satisfies Meta<typeof GlassTable>;
@@ -31,7 +31,7 @@ interface User {
   name: string;
   email: string;
   role: string;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 }
 
 interface Product {
@@ -46,76 +46,76 @@ interface Product {
 const users: Array<User> = [
   {
     id: 1,
-    name: 'John Doe',
-    email: 'john@example.com',
-    role: 'Admin',
-    status: 'active',
+    name: "John Doe",
+    email: "john@example.com",
+    role: "Admin",
+    status: "active",
   },
   {
     id: 2,
-    name: 'Jane Smith',
-    email: 'jane@example.com',
-    role: 'User',
-    status: 'active',
+    name: "Jane Smith",
+    email: "jane@example.com",
+    role: "User",
+    status: "active",
   },
   {
     id: 3,
-    name: 'Bob Johnson',
-    email: 'bob@example.com',
-    role: 'Moderator',
-    status: 'inactive',
+    name: "Bob Johnson",
+    email: "bob@example.com",
+    role: "Moderator",
+    status: "inactive",
   },
   {
     id: 4,
-    name: 'Alice Brown',
-    email: 'alice@example.com',
-    role: 'User',
-    status: 'active',
+    name: "Alice Brown",
+    email: "alice@example.com",
+    role: "User",
+    status: "active",
   },
   {
     id: 5,
-    name: 'Charlie Wilson',
-    email: 'charlie@example.com',
-    role: 'User',
-    status: 'active',
+    name: "Charlie Wilson",
+    email: "charlie@example.com",
+    role: "User",
+    status: "active",
   },
 ];
 
 const products: Array<Product> = [
   {
     id: 1,
-    name: 'Laptop Pro',
+    name: "Laptop Pro",
     price: 1299.99,
     stock: 15,
-    category: 'Electronics',
+    category: "Electronics",
   },
   {
     id: 2,
-    name: 'Wireless Mouse',
+    name: "Wireless Mouse",
     price: 49.99,
     stock: 50,
-    category: 'Accessories',
+    category: "Accessories",
   },
   {
     id: 3,
-    name: 'USB-C Hub',
+    name: "USB-C Hub",
     price: 79.99,
     stock: 30,
-    category: 'Accessories',
+    category: "Accessories",
   },
   {
     id: 4,
-    name: 'Monitor 4K',
+    name: "Monitor 4K",
     price: 599.99,
     stock: 8,
-    category: 'Electronics',
+    category: "Electronics",
   },
   {
     id: 5,
-    name: 'Keyboard Mechanical',
+    name: "Keyboard Mechanical",
     price: 149.99,
     stock: 25,
-    category: 'Accessories',
+    category: "Accessories",
   },
 ];
 
@@ -124,10 +124,10 @@ export const Default: Story = {
   args: {
     data: users,
     columns: [
-      { key: 'id', header: 'ID' },
-      { key: 'name', header: 'Name' },
-      { key: 'email', header: 'Email' },
-      { key: 'role', header: 'Role' },
+      { key: "id", header: "ID" },
+      { key: "name", header: "Name" },
+      { key: "email", header: "Email" },
+      { key: "role", header: "Role" },
     ],
   },
 };
@@ -137,18 +137,18 @@ export const WithCustomRendering: Story = {
   args: {
     data: users,
     columns: [
-      { key: 'id', header: 'ID' },
-      { key: 'name', header: 'Name' },
-      { key: 'email', header: 'Email' },
+      { key: "id", header: "ID" },
+      { key: "name", header: "Name" },
+      { key: "email", header: "Email" },
       {
-        key: 'status',
-        header: 'Status',
+        key: "status",
+        header: "Status",
         render: (value) => (
           <span
             className={`rounded-full px-2 py-1 font-medium text-xs ${
-              value === 'active'
-                ? 'bg-green-500/20 text-green-400'
-                : 'bg-red-500/20 text-red-400'
+              value === "active"
+                ? "bg-green-500/20 text-green-400"
+                : "bg-red-500/20 text-red-400"
             }`}
           >
             {value}
@@ -156,8 +156,8 @@ export const WithCustomRendering: Story = {
         ),
       },
       {
-        key: 'role',
-        header: 'Role',
+        key: "role",
+        header: "Role",
         render: (value) => (
           <span className="font-medium text-primary">{value}</span>
         ),
@@ -171,29 +171,29 @@ export const ProductTable: Story = {
   args: {
     data: products,
     columns: [
-      { key: 'id', header: 'ID' },
-      { key: 'name', header: 'Product' },
+      { key: "id", header: "ID" },
+      { key: "name", header: "Product" },
       {
-        key: 'price',
-        header: 'Price',
+        key: "price",
+        header: "Price",
         render: (value) => (
           <span className="font-mono">${value.toFixed(2)}</span>
         ),
       },
       {
-        key: 'stock',
-        header: 'Stock',
+        key: "stock",
+        header: "Stock",
         render: (value) => (
           <span
             className={`font-medium ${
-              value < 10 ? 'text-red-400' : 'text-green-400'
+              value < 10 ? "text-red-400" : "text-green-400"
             }`}
           >
             {value} units
           </span>
         ),
       },
-      { key: 'category', header: 'Category' },
+      { key: "category", header: "Category" },
     ],
   },
 };
@@ -203,9 +203,9 @@ export const EmptyTable: Story = {
   args: {
     data: [],
     columns: [
-      { key: 'id', header: 'ID' },
-      { key: 'name', header: 'Name' },
-      { key: 'email', header: 'Email' },
+      { key: "id", header: "ID" },
+      { key: "name", header: "Name" },
+      { key: "email", header: "Email" },
     ],
   },
 };
@@ -215,7 +215,7 @@ const largeDataset = Array.from({ length: 50 }, (_, i) => ({
   id: i + 1,
   name: `User ${i + 1}`,
   email: `user${i + 1}@example.com`,
-  department: ['Sales', 'Engineering', 'Marketing', 'HR'][i % 4],
+  department: ["Sales", "Engineering", "Marketing", "HR"][i % 4],
   joinDate: new Date(2020 + Math.floor(i / 12), i % 12, 1).toLocaleDateString(),
 }));
 
@@ -223,13 +223,13 @@ export const LargeDataset: Story = {
   args: {
     data: largeDataset,
     columns: [
-      { key: 'id', header: 'ID' },
-      { key: 'name', header: 'Name' },
-      { key: 'email', header: 'Email' },
-      { key: 'department', header: 'Department' },
-      { key: 'joinDate', header: 'Join Date' },
+      { key: "id", header: "ID" },
+      { key: "name", header: "Name" },
+      { key: "email", header: "Email" },
+      { key: "department", header: "Department" },
+      { key: "joinDate", header: "Join Date" },
     ],
-    className: 'max-h-96',
+    className: "max-h-96",
   },
 };
 
@@ -239,8 +239,8 @@ export const StyledTable: Story = {
     data: users.slice(0, 3),
     columns: [
       {
-        key: 'name',
-        header: 'Name',
+        key: "name",
+        header: "Name",
         render: (value, item) => (
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary/30 to-secondary/30">
@@ -254,8 +254,8 @@ export const StyledTable: Story = {
         ),
       },
       {
-        key: 'role',
-        header: 'Role',
+        key: "role",
+        header: "Role",
         render: (value) => (
           <span className="rounded-lg bg-primary/10 px-3 py-1 text-primary text-sm">
             {value}
@@ -263,13 +263,13 @@ export const StyledTable: Story = {
         ),
       },
       {
-        key: 'status',
-        header: 'Status',
+        key: "status",
+        header: "Status",
         render: (value) => (
           <div className="flex items-center gap-2">
             <div
               className={`h-2 w-2 rounded-full ${
-                value === 'active' ? 'bg-green-400' : 'bg-red-400'
+                value === "active" ? "bg-green-400" : "bg-red-400"
               }`}
             />
             <span className="capitalize">{value}</span>
@@ -277,6 +277,6 @@ export const StyledTable: Story = {
         ),
       },
     ],
-    className: 'min-w-[600px]',
+    className: "min-w-[600px]",
   },
 };

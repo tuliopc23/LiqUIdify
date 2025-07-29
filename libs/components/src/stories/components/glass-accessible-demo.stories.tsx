@@ -1,25 +1,25 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-import { GlassAccessibleDemo } from '@/components/glass-accessible-demo/glass-accessible-demo';
-import { GlassCard } from '@/components/glass-card-refactored/glass-card';
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import { GlassAccessibleDemo } from "@/components/glass-accessible-demo/glass-accessible-demo";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
 
 const meta = {
-  title: 'Components/Glass Accessible Demo',
+  title: "Components/Glass Accessible Demo",
   component: GlassAccessibleDemo,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
         component:
-          'A comprehensive accessibility demonstration component showcasing WCAG compliance, ARIA validation, contrast checking, and real-time accessibility monitoring.',
+          "A comprehensive accessibility demonstration component showcasing WCAG compliance, ARIA validation, contrast checking, and real-time accessibility monitoring.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     className: {
-      description: 'Additional CSS classes',
-      control: { type: 'text' },
+      description: "Additional CSS classes",
+      control: { type: "text" },
     },
   },
 } satisfies Meta<typeof GlassAccessibleDemo>;
@@ -44,7 +44,7 @@ export const Default: Story = {
 
 export const WithCustomStyling: Story = {
   args: {
-    className: 'shadow-xl',
+    className: "shadow-xl",
   },
   render: (args) => (
     <div className="mx-auto min-h-screen max-w-4xl bg-gradient-to-br from-blue-50 to-purple-50 p-4 dark:from-gray-900 dark:to-gray-800">
@@ -54,7 +54,7 @@ export const WithCustomStyling: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Accessibility demo with custom styling and gradient background',
+        story: "Accessibility demo with custom styling and gradient background",
       },
     },
   },
@@ -121,7 +121,7 @@ export const FeatureShowcase: Story = {
     docs: {
       description: {
         story:
-          'Complete showcase of all accessibility features with detailed explanations',
+          "Complete showcase of all accessibility features with detailed explanations",
       },
     },
   },
@@ -130,7 +130,7 @@ export const FeatureShowcase: Story = {
 export const InteractiveGuide: Story = {
   render: () => {
     const [activeFeature, setActiveFeature] =
-      React.useState<string>('validation');
+      React.useState<string>("validation");
 
     return (
       <div className="mx-auto max-w-5xl p-8">
@@ -145,10 +145,10 @@ export const InteractiveGuide: Story = {
 
           <div className="mb-6 flex flex-wrap gap-2">
             {[
-              { id: 'validation', label: 'Validation' },
-              { id: 'contrast', label: 'Contrast' },
-              { id: 'aria', label: 'ARIA' },
-              { id: 'monitoring', label: 'Monitoring' },
+              { id: "validation", label: "Validation" },
+              { id: "contrast", label: "Contrast" },
+              { id: "aria", label: "ARIA" },
+              { id: "monitoring", label: "Monitoring" },
             ].map((tab) => (
               <button
                 type="button"
@@ -156,8 +156,8 @@ export const InteractiveGuide: Story = {
                 onClick={() => setActiveFeature(tab.id)}
                 className={`rounded-lg px-4 py-2 transition-all ${
                   activeFeature === tab.id
-                    ? 'bg-blue-500/20 font-medium text-blue-500'
-                    : 'hover:bg-white/10'
+                    ? "bg-blue-500/20 font-medium text-blue-500"
+                    : "hover:bg-white/10"
                 }`}
               >
                 {tab.label}
@@ -166,7 +166,7 @@ export const InteractiveGuide: Story = {
           </div>
 
           <div className="glass-effect rounded-lg p-4">
-            {activeFeature === 'validation' && (
+            {activeFeature === "validation" && (
               <div>
                 <h3 className="mb-2 font-semibold">Component Validation</h3>
                 <p className="text-[var(--text-secondary)] text-sm">
@@ -180,7 +180,7 @@ export const InteractiveGuide: Story = {
               </div>
             )}
 
-            {activeFeature === 'contrast' && (
+            {activeFeature === "contrast" && (
               <div>
                 <h3 className="mb-2 font-semibold">Color Contrast Checker</h3>
                 <p className="text-[var(--text-secondary)] text-sm">
@@ -194,7 +194,7 @@ export const InteractiveGuide: Story = {
               </div>
             )}
 
-            {activeFeature === 'aria' && (
+            {activeFeature === "aria" && (
               <div>
                 <h3 className="mb-2 font-semibold">ARIA Validation</h3>
                 <p className="text-[var(--text-secondary)] text-sm">
@@ -208,7 +208,7 @@ export const InteractiveGuide: Story = {
               </div>
             )}
 
-            {activeFeature === 'monitoring' && (
+            {activeFeature === "monitoring" && (
               <div>
                 <h3 className="mb-2 font-semibold">Real-time Monitoring</h3>
                 <p className="text-[var(--text-secondary)] text-sm">
@@ -231,7 +231,7 @@ export const InteractiveGuide: Story = {
     docs: {
       description: {
         story:
-          'Interactive guide explaining each accessibility feature in detail',
+          "Interactive guide explaining each accessibility feature in detail",
       },
     },
   },
@@ -253,11 +253,11 @@ export const DarkModeDemo: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { default: 'dark' },
+    backgrounds: { default: "dark" },
     docs: {
       description: {
         story:
-          'Accessibility demo in dark mode showing proper contrast maintenance',
+          "Accessibility demo in dark mode showing proper contrast maintenance",
       },
     },
   },
@@ -279,11 +279,11 @@ export const CompactView: Story = {
   ),
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1',
+      defaultViewport: "mobile1",
     },
     docs: {
       description: {
-        story: 'Responsive design demonstration on mobile devices',
+        story: "Responsive design demonstration on mobile devices",
       },
     },
   },

@@ -1,154 +1,154 @@
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { motion } from 'framer-motion';
-import { X } from 'lucide-react';
-import React from 'react';
-import { cn } from '@/core/utils/classname';
-import { createVariants as cva } from '../../lib/variant-system';
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { motion } from "framer-motion";
+import { X } from "lucide-react";
+import React from "react";
+import { cn } from "@/core/utils/classname";
+import { createVariants as cva } from "../../lib/variant-system";
 
 const drawerVariants = cva({
   base: [
-    'fixed z-50 gap-4 bg-black/80 backdrop-blur-sm',
-    'border border-white/10 shadow-lg',
-    'data-[state=closed]:animate-out data-[state=open]:animate-in',
-    'data-[state=closed]:duration-300 data-[state=open]:duration-500',
-  ].join(' '),
+    "fixed z-50 gap-4 bg-black/80 backdrop-blur-sm",
+    "border border-white/10 shadow-lg",
+    "data-[state=closed]:animate-out data-[state=open]:animate-in",
+    "data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  ].join(" "),
   variants: {
     side: {
-      top: 'data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 border-b',
+      top: "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 border-b",
       bottom:
-        'data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 border-t',
-      left: 'data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm',
+        "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 border-t",
+      left: "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
       right:
-        'data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm',
+        "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
     },
     size: {
-      sm: '',
-      md: '',
-      lg: '',
-      xl: '',
-      full: '',
+      sm: "",
+      md: "",
+      lg: "",
+      xl: "",
+      full: "",
     },
   },
   compoundVariants: [
     {
-      side: 'left' as const,
-      size: 'sm' as const,
-      class: 'max-w-xs',
+      side: "left" as const,
+      size: "sm" as const,
+      class: "max-w-xs",
     },
     {
-      side: 'right' as const,
-      size: 'sm' as const,
-      class: 'max-w-xs',
+      side: "right" as const,
+      size: "sm" as const,
+      class: "max-w-xs",
     },
     {
-      side: 'left' as const,
-      size: 'md' as const,
-      class: 'max-w-sm',
+      side: "left" as const,
+      size: "md" as const,
+      class: "max-w-sm",
     },
     {
-      side: 'right' as const,
-      size: 'md' as const,
-      class: 'max-w-sm',
+      side: "right" as const,
+      size: "md" as const,
+      class: "max-w-sm",
     },
     {
-      side: 'left' as const,
-      size: 'lg' as const,
-      class: 'max-w-md',
+      side: "left" as const,
+      size: "lg" as const,
+      class: "max-w-md",
     },
     {
-      side: 'right' as const,
-      size: 'lg' as const,
-      class: 'max-w-md',
+      side: "right" as const,
+      size: "lg" as const,
+      class: "max-w-md",
     },
     {
-      side: 'left' as const,
-      size: 'xl' as const,
-      class: 'max-w-lg',
+      side: "left" as const,
+      size: "xl" as const,
+      class: "max-w-lg",
     },
     {
-      side: 'right' as const,
-      size: 'xl' as const,
-      class: 'max-w-lg',
+      side: "right" as const,
+      size: "xl" as const,
+      class: "max-w-lg",
     },
     {
-      side: 'left' as const,
-      size: 'full' as const,
-      class: 'max-w-full',
+      side: "left" as const,
+      size: "full" as const,
+      class: "max-w-full",
     },
     {
-      side: 'right' as const,
-      size: 'full' as const,
-      class: 'max-w-full',
+      side: "right" as const,
+      size: "full" as const,
+      class: "max-w-full",
     },
     {
-      side: 'top' as const,
-      size: 'sm' as const,
-      class: 'max-h-32',
+      side: "top" as const,
+      size: "sm" as const,
+      class: "max-h-32",
     },
     {
-      side: 'bottom' as const,
-      size: 'sm' as const,
-      class: 'max-h-32',
+      side: "bottom" as const,
+      size: "sm" as const,
+      class: "max-h-32",
     },
     {
-      side: 'top' as const,
-      size: 'md' as const,
-      class: 'max-h-48',
+      side: "top" as const,
+      size: "md" as const,
+      class: "max-h-48",
     },
     {
-      side: 'bottom' as const,
-      size: 'md' as const,
-      class: 'max-h-48',
+      side: "bottom" as const,
+      size: "md" as const,
+      class: "max-h-48",
     },
     {
-      side: 'top' as const,
-      size: 'lg' as const,
-      class: 'max-h-64',
+      side: "top" as const,
+      size: "lg" as const,
+      class: "max-h-64",
     },
     {
-      side: 'bottom' as const,
-      size: 'lg' as const,
-      class: 'max-h-64',
+      side: "bottom" as const,
+      size: "lg" as const,
+      class: "max-h-64",
     },
     {
-      side: 'top' as const,
-      size: 'xl' as const,
-      class: 'max-h-80',
+      side: "top" as const,
+      size: "xl" as const,
+      class: "max-h-80",
     },
     {
-      side: 'bottom' as const,
-      size: 'xl' as const,
-      class: 'max-h-80',
+      side: "bottom" as const,
+      size: "xl" as const,
+      class: "max-h-80",
     },
     {
-      side: 'top' as const,
-      size: 'full' as const,
-      class: 'max-h-full',
+      side: "top" as const,
+      size: "full" as const,
+      class: "max-h-full",
     },
     {
-      side: 'bottom' as const,
-      size: 'full' as const,
-      class: 'max-h-full',
+      side: "bottom" as const,
+      size: "full" as const,
+      class: "max-h-full",
     },
   ],
   defaultVariants: {
-    side: 'right' as const,
-    size: 'md' as const,
+    side: "right" as const,
+    size: "md" as const,
   },
 });
 
 const drawerHeaderVariants = cva({
-  base: 'flex items-center justify-between border-white/10 border-b bg-white/5 p-4',
+  base: "flex items-center justify-between border-white/10 border-b bg-white/5 p-4",
   variants: {},
 });
 
 const drawerContentVariants = cva({
-  base: 'flex-1 overflow-y-auto p-4 text-white',
+  base: "flex-1 overflow-y-auto p-4 text-white",
   variants: {},
 });
 
 const drawerFooterVariants = cva({
-  base: 'flex items-center justify-end gap-2 border-white/10 border-t bg-white/5 p-4',
+  base: "flex items-center justify-end gap-2 border-white/10 border-t bg-white/5 p-4",
   variants: {},
 });
 
@@ -160,14 +160,14 @@ export interface GlassDrawerProps
 export interface GlassDrawerContentProps
   extends Omit<
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    'children'
+    "children"
   > {
   children: React.ReactNode;
   className?: string;
   showCloseButton?: boolean;
-  closeButtonPosition?: 'header' | 'overlay';
-  side?: 'top' | 'bottom' | 'left' | 'right';
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  closeButtonPosition?: "header" | "overlay";
+  side?: "top" | "bottom" | "left" | "right";
+  size?: "sm" | "md" | "lg" | "xl" | "full";
 }
 
 export interface GlassDrawerHeaderProps
@@ -212,10 +212,10 @@ const GlassDrawerOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'fixed inset-0 z-50 bg-black/50 backdrop-blur-sm',
-      'data-[state=closed]:animate-out data-[state=open]:animate-in',
-      'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
-      className
+      "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm",
+      "data-[state=closed]:animate-out data-[state=open]:animate-in",
+      "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      className,
     )}
     {...props}
   />
@@ -227,15 +227,15 @@ const GlassDrawerContent = React.forwardRef<
 >(
   (
     {
-      side = 'right',
-      size = 'md',
+      side = "right",
+      size = "md",
       className,
       children,
       showCloseButton = true,
-      closeButtonPosition = 'header',
+      closeButtonPosition = "header",
       ...props
     },
-    ref
+    ref,
   ) => (
     <GlassDrawerPortal>
       <GlassDrawerOverlay />
@@ -253,7 +253,7 @@ const GlassDrawerContent = React.forwardRef<
           className="flex h-full flex-col"
         >
           {children}
-          {showCloseButton && closeButtonPosition === 'overlay' && (
+          {showCloseButton && closeButtonPosition === "overlay" && (
             <GlassDrawerClose className="absolute top-4 right-4 rounded-md opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-white/10">
               <X className="h-4 w-4" />
 
@@ -263,7 +263,7 @@ const GlassDrawerContent = React.forwardRef<
         </motion.div>
       </DialogPrimitive.Content>
     </GlassDrawerPortal>
-  )
+  ),
 );
 
 const GlassDrawerHeader = React.forwardRef<
@@ -281,7 +281,7 @@ const GlassDrawerTitle = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn('font-semibold text-lg text-white', className)}
+    className={cn("font-semibold text-lg text-white", className)}
     {...props}
   >
     {children}
@@ -294,7 +294,7 @@ const GlassDrawerDescription = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn('text-sm text-white/70', className)}
+    className={cn("text-sm text-white/70", className)}
     {...props}
   >
     {children}
@@ -310,7 +310,7 @@ const GlassDrawerBody = React.forwardRef<HTMLDivElement, GlassDrawerBodyProps>(
     >
       {children}
     </div>
-  )
+  ),
 );
 
 const GlassDrawerFooter = React.forwardRef<
@@ -322,14 +322,14 @@ const GlassDrawerFooter = React.forwardRef<
   </div>
 ));
 
-GlassDrawer.displayName = 'GlassDrawer';
-GlassDrawerOverlay.displayName = 'GlassDrawerOverlay';
-GlassDrawerContent.displayName = 'GlassDrawerContent';
-GlassDrawerHeader.displayName = 'GlassDrawerHeader';
-GlassDrawerTitle.displayName = 'GlassDrawerTitle';
-GlassDrawerDescription.displayName = 'GlassDrawerDescription';
-GlassDrawerBody.displayName = 'GlassDrawerBody';
-GlassDrawerFooter.displayName = 'GlassDrawerFooter';
+GlassDrawer.displayName = "GlassDrawer";
+GlassDrawerOverlay.displayName = "GlassDrawerOverlay";
+GlassDrawerContent.displayName = "GlassDrawerContent";
+GlassDrawerHeader.displayName = "GlassDrawerHeader";
+GlassDrawerTitle.displayName = "GlassDrawerTitle";
+GlassDrawerDescription.displayName = "GlassDrawerDescription";
+GlassDrawerBody.displayName = "GlassDrawerBody";
+GlassDrawerFooter.displayName = "GlassDrawerFooter";
 
 // Compound component pattern
 const Drawer = Object.assign(GlassDrawer, {

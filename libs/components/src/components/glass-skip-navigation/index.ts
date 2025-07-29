@@ -3,4 +3,4 @@ export {
   type GlassSkipNavigationProps,
   type SkipLink,
   useSkipNavigation,
-} from './glass-skip-navigation';
+} from "./glass-skip-navigation";

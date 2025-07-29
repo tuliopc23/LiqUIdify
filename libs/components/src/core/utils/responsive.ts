@@ -6,16 +6,16 @@
  */
 
 // Breakpoint constants
-import { BREAKPOINTS, type BreakpointKey } from '../constants';
+import { BREAKPOINTS, type BreakpointKey } from "../constants";
 
 /**
  * Generate responsive size classes based on breakpoints
  */
 export function responsiveSize(
   size: string | number,
-  breakpoint?: BreakpointKey
+  breakpoint?: BreakpointKey,
 ): string {
-  if (typeof size === 'number') {
+  if (typeof size === "number") {
     size = `${size}px`;
   }
 
@@ -23,7 +23,7 @@ export function responsiveSize(
     return size;
   }
 
-  const breakpointPrefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
+  const breakpointPrefix = breakpoint === "xs" ? "" : `${breakpoint}:`;
   return `${breakpointPrefix}${size}`;
 }
 
@@ -44,31 +44,31 @@ export const touchTarget = Object.assign(createTouchTarget, {
  * Generate micro-interaction classes for smooth animations
  */
 function createMicroInteraction(
-  type: 'hover' | 'focus' | 'active' | 'press' = 'hover',
-  intensity: 'subtle' | 'medium' | 'strong' = 'medium'
+  type: "hover" | "focus" | "active" | "press" = "hover",
+  intensity: "subtle" | "medium" | "strong" = "medium",
 ): string {
   const intensityClasses = {
     subtle: {
-      hover: 'hover:scale-[1.02] hover:brightness-105',
-      focus: 'focus:scale-[1.02] focus:brightness-105',
-      active: 'active:scale-[0.98] active:brightness-95',
-      press: 'active:scale-[0.98]',
+      hover: "hover:scale-[1.02] hover:brightness-105",
+      focus: "focus:scale-[1.02] focus:brightness-105",
+      active: "active:scale-[0.98] active:brightness-95",
+      press: "active:scale-[0.98]",
     },
     medium: {
-      hover: 'hover:scale-105 hover:brightness-110',
-      focus: 'focus:scale-105 focus:brightness-110',
-      active: 'active:scale-95 active:brightness-90',
-      press: 'active:scale-95',
+      hover: "hover:scale-105 hover:brightness-110",
+      focus: "focus:scale-105 focus:brightness-110",
+      active: "active:scale-95 active:brightness-90",
+      press: "active:scale-95",
     },
     strong: {
-      hover: 'hover:scale-110 hover:brightness-125',
-      focus: 'focus:scale-110 focus:brightness-125',
-      active: 'active:scale-90 active:brightness-75',
-      press: 'active:scale-90',
+      hover: "hover:scale-110 hover:brightness-125",
+      focus: "focus:scale-110 focus:brightness-125",
+      active: "active:scale-90 active:brightness-75",
+      press: "active:scale-90",
     },
   };
 
-  const transitionClass = 'transition-all duration-150 ease-out';
+  const transitionClass = "transition-all duration-150 ease-out";
   const interactionClass = intensityClasses[intensity][type];
 
   return `${transitionClass} ${interactionClass}`;
@@ -76,24 +76,24 @@ function createMicroInteraction(
 
 // Create microInteraction object with both function and properties
 export const microInteraction = Object.assign(createMicroInteraction, {
-  gentle: createMicroInteraction('hover', 'subtle'),
-  interactive: createMicroInteraction('hover', 'medium'),
-  smooth: createMicroInteraction('hover', 'subtle'),
+  gentle: createMicroInteraction("hover", "subtle"),
+  interactive: createMicroInteraction("hover", "medium"),
+  smooth: createMicroInteraction("hover", "subtle"),
 });
 
 /**
  * Get current breakpoint based on window width
  */
 export function getCurrentBreakpoint(): BreakpointKey {
-  if (typeof window === 'undefined') {
-    return 'md'; // Default for SSR
+  if (typeof window === "undefined") {
+    return "md"; // Default for SSR
   }
 
-  const width = typeof window === 'undefined' ? 0 : window.innerWidth;
+  const width = typeof window === "undefined" ? 0 : window.innerWidth;
 
   // Convert string values to numbers for comparison
   const breakpoints = {
-    '2xl': Number.parseInt(BREAKPOINTS['2xl']),
+    "2xl": Number.parseInt(BREAKPOINTS["2xl"]),
     xl: Number.parseInt(BREAKPOINTS.xl),
     lg: Number.parseInt(BREAKPOINTS.lg),
     md: Number.parseInt(BREAKPOINTS.md),
@@ -101,46 +101,46 @@ export function getCurrentBreakpoint(): BreakpointKey {
     xs: Number.parseInt(BREAKPOINTS.xs),
   };
 
-  if (width >= breakpoints['2xl']) {
-    return '2xl';
+  if (width >= breakpoints["2xl"]) {
+    return "2xl";
   }
   if (width >= breakpoints.xl) {
-    return 'xl';
+    return "xl";
   }
   if (width >= breakpoints.lg) {
-    return 'lg';
+    return "lg";
   }
   if (width >= breakpoints.md) {
-    return 'md';
+    return "md";
   }
   if (width >= breakpoints.sm) {
-    return 'sm';
+    return "sm";
   }
-  return 'xs';
+  return "xs";
 }
 
 /**
  * Check if screen size matches a breakpoint condition
  */
 export function matchesBreakpoint(
-  condition: 'up' | 'down' | 'only',
-  breakpoint: BreakpointKey
+  condition: "up" | "down" | "only",
+  breakpoint: BreakpointKey,
 ): boolean {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return false;
   }
 
-  const width = typeof window === 'undefined' ? 0 : window.innerWidth;
+  const width = typeof window === "undefined" ? 0 : window.innerWidth;
   const breakpointValue = Number.parseInt(BREAKPOINTS[breakpoint]);
 
   switch (condition) {
-    case 'up': {
+    case "up": {
       return width >= breakpointValue;
     }
-    case 'down': {
+    case "down": {
       return width < breakpointValue;
     }
-    case 'only': {
+    case "only": {
       const breakpointKeys = Object.keys(BREAKPOINTS) as Array<BreakpointKey>;
       const currentIndex = breakpointKeys.indexOf(breakpoint);
       const nextBreakpoint = breakpointKeys[currentIndex + 1];
@@ -165,33 +165,33 @@ export function matchesBreakpoint(
  */
 export function createResponsiveClasses(
   baseClass: string,
-  breakpoints: Partial<Record<BreakpointKey, string>>
+  breakpoints: Partial<Record<BreakpointKey, string>>,
 ): string {
   const classes = [baseClass];
 
   for (const [breakpoint, className] of Object.entries(breakpoints)) {
     if (className) {
-      const prefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
+      const prefix = breakpoint === "xs" ? "" : `${breakpoint}:`;
       classes.push(`${prefix}${className}`);
     }
   }
 
-  return classes.join(' ');
+  return classes.join(" ");
 }
 
 /**
  * Container query utilities (for modern browsers)
  */
 export function containerQuery(
-  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
-  className: string
+  size: "xs" | "sm" | "md" | "lg" | "xl",
+  className: string,
 ): string {
   const containerSizes = {
-    xs: '@xs',
-    sm: '@sm',
-    md: '@md',
-    lg: '@lg',
-    xl: '@xl',
+    xs: "@xs",
+    sm: "@sm",
+    md: "@md",
+    lg: "@lg",
+    xl: "@xl",
   };
 
   return `${containerSizes[size]}:${className}`;
@@ -201,17 +201,17 @@ export function containerQuery(
  * Aspect ratio utilities
  */
 export function aspectRatio(ratio: string | number): string {
-  if (typeof ratio === 'number') {
+  if (typeof ratio === "number") {
     return `aspect-[${ratio}]`;
   }
 
   // Handle common ratios
   const commonRatios: Record<string, string> = {
-    square: 'aspect-square',
-    '16/9': 'aspect-video',
-    '4/3': 'aspect-[4/3]',
-    '3/2': 'aspect-[3/2]',
-    '2/1': 'aspect-[2/1]',
+    square: "aspect-square",
+    "16/9": "aspect-video",
+    "4/3": "aspect-[4/3]",
+    "3/2": "aspect-[3/2]",
+    "2/1": "aspect-[2/1]",
   };
 
   return commonRatios[ratio] || `aspect-[${ratio}]`;
@@ -224,7 +224,7 @@ export function fluidTypography(
   minSize: number,
   maxSize: number,
   minViewport = 320,
-  maxViewport = 1200
+  maxViewport = 1200,
 ): string {
   const slope = (maxSize - minSize) / (maxViewport - minViewport);
   const yAxisIntersection = -minViewport * slope + minSize;
@@ -236,18 +236,18 @@ export function fluidTypography(
  * Generate responsive grid classes
  */
 export function responsiveGrid(
-  columns: Partial<Record<BreakpointKey, number>>
+  columns: Partial<Record<BreakpointKey, number>>,
 ): string {
   const classes: Array<string> = [];
 
   for (const [breakpoint, cols] of Object.entries(columns)) {
     if (cols) {
-      const prefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
+      const prefix = breakpoint === "xs" ? "" : `${breakpoint}:`;
       classes.push(`${prefix}grid-cols-${cols}`);
     }
   }
 
-  return classes.join(' ');
+  return classes.join(" ");
 }
 
 /**
@@ -255,22 +255,22 @@ export function responsiveGrid(
  */
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = React.useState(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return false;
     }
     return window.matchMedia(query).matches;
   });
 
   React.useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
     const mediaQuery = window.matchMedia(query);
     const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
 
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
   }, [query]);
 
   return matches;
@@ -281,7 +281,7 @@ export function useMediaQuery(query: string): boolean {
  */
 export function useBreakpoint(): BreakpointKey {
   const [breakpoint, setBreakpoint] = React.useState<BreakpointKey>(() =>
-    getCurrentBreakpoint()
+    getCurrentBreakpoint(),
   );
 
   React.useEffect(() => {
@@ -289,12 +289,12 @@ export function useBreakpoint(): BreakpointKey {
       setBreakpoint(getCurrentBreakpoint());
     };
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', handleResize);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize);
     }
     return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('resize', handleResize);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
       }
     };
   }, []);
@@ -306,21 +306,21 @@ export function useBreakpoint(): BreakpointKey {
  * Responsive visibility utilities
  */
 export function responsiveVisibility(
-  show: Partial<Record<BreakpointKey, boolean>>
+  show: Partial<Record<BreakpointKey, boolean>>,
 ): string {
   const classes: Array<string> = [];
 
   for (const [breakpoint, isVisible] of Object.entries(show)) {
-    const prefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
-    const visibility = isVisible ? 'block' : 'hidden';
+    const prefix = breakpoint === "xs" ? "" : `${breakpoint}:`;
+    const visibility = isVisible ? "block" : "hidden";
     classes.push(`${prefix}${visibility}`);
   }
 
-  return classes.join(' ');
+  return classes.join(" ");
 }
 
 // Import React for hooks
-import * as React from 'react';
+import * as React from "react";
 
 // Type exports
 export type ResponsiveValue<T> = T | Partial<Record<BreakpointKey, T>>;

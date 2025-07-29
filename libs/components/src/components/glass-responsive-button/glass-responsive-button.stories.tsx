@@ -1,17 +1,17 @@
-import { ArrowRight, Heart, Star, Zap } from 'lucide-react';
-import { GlassResponsiveButton } from './glass-responsive-button';
-import '@/styles/apple-liquid-authentic.css';
+import { ArrowRight, Heart, Star, Zap } from "lucide-react";
+import { GlassResponsiveButton } from "./glass-responsive-button";
+import "@/styles/apple-liquid-authentic.css";
 
 export default {
-  title: 'Components/GlassResponsiveButton',
+  title: "Components/GlassResponsiveButton",
   component: GlassResponsiveButton,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A responsive button component with Liquid Glass styling for consistent Apple-inspired UI.',
+          "A responsive button component with Liquid Glass styling for consistent Apple-inspired UI.",
       },
     },
   },

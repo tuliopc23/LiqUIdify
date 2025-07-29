@@ -1,5 +1,8 @@
-import { render as rtlRender, type RenderOptions } from '@testing-library/react';
-import React, { type ReactElement } from 'react';
+import {
+  render as rtlRender,
+  type RenderOptions,
+} from "@testing-library/react";
+import React, { type ReactElement } from "react";
 
 // Add any providers here
 interface AllTheProvidersProps {
@@ -13,11 +16,11 @@ const AllTheProviders: React.FC<AllTheProvidersProps> = ({ children }) => {
 
 const customRender = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
+  options?: Omit<RenderOptions, "wrapper">,
 ) => rtlRender(ui, { wrapper: AllTheProviders, ...options });
 
 // Re-export everything
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 
 // Override render method
 export { customRender as render };

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Activity,
   Bookmark,
@@ -14,16 +14,16 @@ import {
   TrendingDown,
   TrendingUp,
   Users,
-} from 'lucide-react';
-import React from 'react';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { Card, GlassCard } from './glass-card';
+} from "lucide-react";
+import React from "react";
+import { GlassButton } from "../glass-button-refactored/glass-button";
+import { Card, GlassCard } from "./glass-card";
 
 const meta = {
-  title: 'Components/Layout/GlassCard',
+  title: "Components/Layout/GlassCard",
   component: GlassCard,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -93,196 +93,196 @@ The card component follows WAI-ARIA guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Content
     children: {
       control: false,
-      description: 'Card content using compound components',
+      description: "Card content using compound components",
       table: {
-        type: { summary: 'React.ReactNode' },
-        category: 'Content',
+        type: { summary: "React.ReactNode" },
+        category: "Content",
       },
     },
 
     // Appearance
     variant: {
-      control: 'select',
+      control: "select",
       options: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'ghost',
-        'destructive',
-        'apple',
+        "primary",
+        "secondary",
+        "tertiary",
+        "ghost",
+        "destructive",
+        "apple",
       ],
-      description: 'Visual style variant',
+      description: "Visual style variant",
       table: {
         type: {
           summary:
-            'primary | secondary | tertiary | ghost | destructive | apple',
+            "primary | secondary | tertiary | ghost | destructive | apple",
         },
-        defaultValue: { summary: 'primary' },
-        category: 'Appearance',
+        defaultValue: { summary: "primary" },
+        category: "Appearance",
       },
     },
     size: {
-      control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      description: 'Card size',
+      control: "select",
+      options: ["xs", "sm", "md", "lg", "xl"],
+      description: "Card size",
       table: {
-        type: { summary: 'xs | sm | md | lg | xl' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "xs | sm | md | lg | xl" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
     padding: {
-      control: 'select',
-      options: ['none', 'xs', 'sm', 'md', 'lg', 'xl'],
-      description: 'Internal padding',
+      control: "select",
+      options: ["none", "xs", "sm", "md", "lg", "xl"],
+      description: "Internal padding",
       table: {
-        type: { summary: 'none | xs | sm | md | lg | xl' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "none | xs | sm | md | lg | xl" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
     radius: {
-      control: 'select',
-      options: ['none', 'sm', 'md', 'lg', 'xl', 'full'],
-      description: 'Border radius',
+      control: "select",
+      options: ["none", "sm", "md", "lg", "xl", "full"],
+      description: "Border radius",
       table: {
-        type: { summary: 'none | sm | md | lg | xl | full' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "none | sm | md | lg | xl | full" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
     elevation: {
-      control: 'select',
-      options: ['none', 'sm', 'md', 'lg', 'xl'],
-      description: 'Shadow elevation',
+      control: "select",
+      options: ["none", "sm", "md", "lg", "xl"],
+      description: "Shadow elevation",
       table: {
-        type: { summary: 'none | sm | md | lg | xl' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "none | sm | md | lg | xl" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
     orientation: {
-      control: 'radio',
-      options: ['vertical', 'horizontal'],
-      description: 'Card layout orientation',
+      control: "radio",
+      options: ["vertical", "horizontal"],
+      description: "Card layout orientation",
       table: {
-        type: { summary: 'vertical | horizontal' },
-        defaultValue: { summary: 'vertical' },
-        category: 'Appearance',
+        type: { summary: "vertical | horizontal" },
+        defaultValue: { summary: "vertical" },
+        category: "Appearance",
       },
     },
     bordered: {
-      control: 'boolean',
-      description: 'Show card border',
+      control: "boolean",
+      description: "Show card border",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Appearance',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Appearance",
       },
     },
 
     // Interactive
     hover: {
-      control: 'boolean',
-      description: 'Enable hover effects',
+      control: "boolean",
+      description: "Enable hover effects",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Interactive',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Interactive",
       },
     },
     interactive: {
-      control: 'boolean',
-      description: 'Make card clickable',
+      control: "boolean",
+      description: "Make card clickable",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'Interactive',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "Interactive",
       },
     },
     selectable: {
-      control: 'boolean',
-      description: 'Make card selectable',
+      control: "boolean",
+      description: "Make card selectable",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'Interactive',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "Interactive",
       },
     },
     selected: {
-      control: 'boolean',
-      description: 'Selected state (when selectable)',
+      control: "boolean",
+      description: "Selected state (when selectable)",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'Interactive',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "Interactive",
       },
     },
 
     // Glass Effects
     glassEffect: {
-      control: 'object',
-      description: 'Glass effect configuration',
+      control: "object",
+      description: "Glass effect configuration",
       table: {
-        type: { summary: 'GlassEffect' },
+        type: { summary: "GlassEffect" },
         defaultValue: {
           summary: '{ intensity: "medium", blur: true, backdrop: true }',
         },
-        category: 'Glass Effects',
+        category: "Glass Effects",
       },
     },
 
     // Animation
     animation: {
-      control: 'select',
-      options: ['none', 'subtle', 'normal', 'energetic'],
-      description: 'Animation intensity',
+      control: "select",
+      options: ["none", "subtle", "normal", "energetic"],
+      description: "Animation intensity",
       table: {
-        type: { summary: 'none | subtle | normal | energetic' },
-        defaultValue: { summary: 'normal' },
-        category: 'Animation',
+        type: { summary: "none | subtle | normal | energetic" },
+        defaultValue: { summary: "normal" },
+        category: "Animation",
       },
     },
     disableAnimations: {
-      control: 'boolean',
-      description: 'Disable all animations',
+      control: "boolean",
+      description: "Disable all animations",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'Animation',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "Animation",
       },
     },
 
     // Events
     onCardClick: {
-      action: 'card clicked',
-      description: 'Card click handler',
+      action: "card clicked",
+      description: "Card click handler",
       table: {
-        type: { summary: '(event: MouseEvent) => void' },
-        category: 'Events',
+        type: { summary: "(event: MouseEvent) => void" },
+        category: "Events",
       },
     },
     onCardSelect: {
-      action: 'card selected',
-      description: 'Card selection handler',
+      action: "card selected",
+      description: "Card selection handler",
       table: {
-        type: { summary: '(selected: boolean) => void' },
-        category: 'Events',
+        type: { summary: "(selected: boolean) => void" },
+        category: "Events",
       },
     },
   },
   args: {
-    variant: 'primary',
-    size: 'md',
-    padding: 'md',
-    radius: 'md',
-    elevation: 'md',
-    orientation: 'vertical',
+    variant: "primary",
+    size: "md",
+    padding: "md",
+    radius: "md",
+    elevation: "md",
+    orientation: "vertical",
     bordered: true,
     hover: true,
     interactive: false,
@@ -480,7 +480,7 @@ export const InteractiveStates: Story = {
           </Card.Content>
         </Card>
 
-        <Card interactive onCardClick={() => alert('Card clicked!')}>
+        <Card interactive onCardClick={() => alert("Card clicked!")}>
           <Card.Header>
             <Card.Title>Clickable Card</Card.Title>
             <Card.Description>Click anywhere on the card</Card.Description>
@@ -503,8 +503,8 @@ export const InteractiveStates: Story = {
           </Card.Header>
           <Card.Content>
             <p className="text-sm">
-              This card can be selected.{' '}
-              {selected1 ? 'Selected!' : 'Not selected'}
+              This card can be selected.{" "}
+              {selected1 ? "Selected!" : "Not selected"}
             </p>
           </Card.Content>
         </Card>
@@ -521,8 +521,8 @@ export const InteractiveStates: Story = {
           </Card.Header>
           <Card.Content>
             <p className="text-sm">
-              Multiple cards can be selected.{' '}
-              {selected2 ? 'Selected!' : 'Not selected'}
+              Multiple cards can be selected.{" "}
+              {selected2 ? "Selected!" : "Not selected"}
             </p>
           </Card.Content>
         </Card>
@@ -535,7 +535,7 @@ export const InteractiveStates: Story = {
 export const GlassEffects: Story = {
   render: () => (
     <div className="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-      <Card glassEffect={{ intensity: 'weak', blur: true, backdrop: true }}>
+      <Card glassEffect={{ intensity: "weak", blur: true, backdrop: true }}>
         <Card.Header>
           <Card.Title>Weak Glass</Card.Title>
           <Card.Description>Subtle transparency</Card.Description>
@@ -547,7 +547,7 @@ export const GlassEffects: Story = {
         </Card.Content>
       </Card>
 
-      <Card glassEffect={{ intensity: 'medium', blur: true, backdrop: true }}>
+      <Card glassEffect={{ intensity: "medium", blur: true, backdrop: true }}>
         <Card.Header>
           <Card.Title>Medium Glass</Card.Title>
           <Card.Description>Balanced transparency</Card.Description>
@@ -557,7 +557,7 @@ export const GlassEffects: Story = {
         </Card.Content>
       </Card>
 
-      <Card glassEffect={{ intensity: 'strong', blur: true, backdrop: true }}>
+      <Card glassEffect={{ intensity: "strong", blur: true, backdrop: true }}>
         <Card.Header>
           <Card.Title>Strong Glass</Card.Title>
           <Card.Description>High transparency</Card.Description>
@@ -569,7 +569,7 @@ export const GlassEffects: Story = {
         </Card.Content>
       </Card>
 
-      <Card glassEffect={{ intensity: 'medium', blur: false, backdrop: true }}>
+      <Card glassEffect={{ intensity: "medium", blur: false, backdrop: true }}>
         <Card.Header>
           <Card.Title>No Blur</Card.Title>
           <Card.Description>Clear background</Card.Description>
@@ -582,7 +582,7 @@ export const GlassEffects: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };
@@ -1032,7 +1032,7 @@ export const ThemeShowcase: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };
@@ -1051,7 +1051,7 @@ export const AccessibilityShowcase: Story = {
             to focus cards.
           </p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Card interactive onCardClick={() => alert('Card 1 activated!')}>
+            <Card interactive onCardClick={() => alert("Card 1 activated!")}>
               <Card.Header>
                 <Card.Title>Interactive Card 1</Card.Title>
                 <Card.Description>
@@ -1065,7 +1065,7 @@ export const AccessibilityShowcase: Story = {
               </Card.Content>
             </Card>
 
-            <Card interactive onCardClick={() => alert('Card 2 activated!')}>
+            <Card interactive onCardClick={() => alert("Card 2 activated!")}>
               <Card.Header>
                 <Card.Title>Interactive Card 2</Card.Title>
                 <Card.Description>Tab navigation supported</Card.Description>
@@ -1089,7 +1089,7 @@ export const AccessibilityShowcase: Story = {
             <Card.Content>
               <p className="text-sm">
                 This card has role="button" and aria-pressed=
-                {selected ? 'true' : 'false'}. Screen readers will announce its
+                {selected ? "true" : "false"}. Screen readers will announce its
                 interactive state.
               </p>
             </Card.Content>

@@ -7,12 +7,12 @@ import {
   Settings,
   User,
   Zap,
-} from 'lucide-react';
-import type React from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+} from "lucide-react";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
-import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
+import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
 export interface CommandItem {
   id: string;
@@ -34,41 +34,41 @@ export interface CommandPaletteProps {
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({
   items,
-  placeholder = 'Type a command or search...',
-  shortcut = ['cmd', 'k'],
+  placeholder = "Type a command or search...",
+  shortcut = ["cmd", "k"],
   className,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Filter and categorize items
   const filteredItems = items.filter((item) => {
-    const searchTerms = query.toLowerCase().split(' ');
+    const searchTerms = query.toLowerCase().split(" ");
     const itemText =
-      `${item.label} ${item.description || ''} ${item.keywords?.join(' ') || ''}`.toLowerCase();
+      `${item.label} ${item.description || ""} ${item.keywords?.join(" ") || ""}`.toLowerCase();
     return searchTerms.every((term) => itemText.includes(term));
   });
 
   const categorizedItems = filteredItems.reduce(
     (accumulator, item) => {
-      const category = item.category || 'General';
+      const category = item.category || "General";
       if (!accumulator[category]) {
         accumulator[category] = [];
       }
       accumulator[category].push(item);
       return accumulator;
     },
-    {} as Record<string, Array<CommandItem>>
+    {} as Record<string, Array<CommandItem>>,
   );
 
   const allFilteredItems = Object.values(categorizedItems).flat();
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-    setQuery('');
+    setQuery("");
     setSelectedIndex(0);
   }, []);
 
@@ -76,7 +76,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Open command palette
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setIsOpen(true);
         return;
@@ -87,19 +87,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       }
 
       switch (e.key) {
-        case 'ArrowDown': {
+        case "ArrowDown": {
           e.preventDefault();
           setSelectedIndex((previous) =>
-            Math.min(previous + 1, allFilteredItems.length - 1)
+            Math.min(previous + 1, allFilteredItems.length - 1),
           );
           break;
         }
-        case 'ArrowUp': {
+        case "ArrowUp": {
           e.preventDefault();
           setSelectedIndex((previous) => Math.max(previous - 1, 0));
           break;
         }
-        case 'Enter': {
+        case "Enter": {
           e.preventDefault();
           if (allFilteredItems[selectedIndex]) {
             allFilteredItems[selectedIndex].action();
@@ -107,7 +107,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           }
           break;
         }
-        case 'Escape': {
+        case "Escape": {
           e.preventDefault();
           handleClose();
           break;
@@ -115,12 +115,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       }
     };
 
-    if (typeof document !== 'undefined') {
-      document.addEventListener('keydown', handleKeyDown);
+    if (typeof document !== "undefined") {
+      document.addEventListener("keydown", handleKeyDown);
     }
     return () => {
-      if (typeof document !== 'undefined') {
-        document.removeEventListener('keydown', handleKeyDown);
+      if (typeof document !== "undefined") {
+        document.removeEventListener("keydown", handleKeyDown);
       }
     };
   }, [isOpen, selectedIndex, allFilteredItems, handleClose]);
@@ -141,61 +141,61 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     return keys
       .map((key) => {
         switch (key.toLowerCase()) {
-          case 'cmd':
-          case 'command': {
-            return '⌘';
+          case "cmd":
+          case "command": {
+            return "⌘";
           }
-          case 'ctrl': {
-            return '^';
+          case "ctrl": {
+            return "^";
           }
-          case 'shift': {
-            return '⇧';
+          case "shift": {
+            return "⇧";
           }
-          case 'alt':
-          case 'option': {
-            return '⌥';
+          case "alt":
+          case "option": {
+            return "⌥";
           }
-          case 'enter': {
-            return '↵';
+          case "enter": {
+            return "↵";
           }
-          case 'escape': {
-            return '⎋';
+          case "escape": {
+            return "⎋";
           }
-          case 'backspace': {
-            return '⌫';
+          case "backspace": {
+            return "⌫";
           }
-          case 'delete': {
-            return '⌦';
+          case "delete": {
+            return "⌦";
           }
-          case 'tab': {
-            return '⇥';
+          case "tab": {
+            return "⇥";
           }
-          case 'space': {
-            return '␣';
+          case "space": {
+            return "␣";
           }
           default: {
             return key.toUpperCase();
           }
         }
       })
-      .join('');
+      .join("");
   };
 
   const getCategoryIcon = (category: string) => {
     switch (category.toLowerCase()) {
-      case 'navigation': {
+      case "navigation": {
         return <ArrowRight className="h-4 w-4" />;
       }
-      case 'user': {
+      case "user": {
         return <User className="h-4 w-4" />;
       }
-      case 'settings': {
+      case "settings": {
         return <Settings className="h-4 w-4" />;
       }
-      case 'content': {
+      case "content": {
         return <FileText className="h-4 w-4" />;
       }
-      case 'actions': {
+      case "actions": {
         return <Zap className="h-4 w-4" />;
       }
       default: {
@@ -210,12 +210,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         type="button"
         onClick={() => setIsOpen(true)}
         className={cn(
-          'flex items-center gap-2 rounded-lg px-3 py-2',
-          getGlassClass('default'),
-          'hover:bg-[var(--glass-bg-elevated)]',
-          'text-[var(--text-secondary)] text-sm',
+          "flex items-center gap-2 rounded-lg px-3 py-2",
+          getGlassClass("default"),
+          "hover:bg-[var(--glass-bg-elevated)]",
+          "text-[var(--text-secondary)] text-sm",
           microInteraction.gentle,
-          className
+          className,
         )}
       >
         <Search className="h-4 w-4" />
@@ -237,7 +237,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   }
 
   // SSR safety check
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -250,7 +250,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         className="absolute inset-0 bg-black/20 backdrop-blur-sm"
         onClick={handleClose}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             handleClose();
           }
@@ -263,10 +263,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       <div
         ref={containerRef}
         className={cn(
-          'relative mx-4 w-full max-w-2xl overflow-hidden rounded-2xl border',
-          getGlassClass('elevated'),
-          'border-[var(--glass-border)]',
-          'fade-in-0 zoom-in-95 animate-in duration-200'
+          "relative mx-4 w-full max-w-2xl overflow-hidden rounded-2xl border",
+          getGlassClass("elevated"),
+          "border-[var(--glass-border)]",
+          "fade-in-0 zoom-in-95 animate-in duration-200",
         )}
       >
         {/* Search Input */}
@@ -281,9 +281,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             onChange={(e) => setQuery(e.target.value)}
             placeholder={placeholder}
             className={cn(
-              'flex-1 border-none bg-transparent outline-none',
-              'text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]',
-              'text-lg'
+              "flex-1 border-none bg-transparent outline-none",
+              "text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
+              "text-lg",
             )}
           />
 
@@ -330,10 +330,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                           handleClose();
                         }}
                         className={cn(
-                          'flex w-full items-center gap-3 px-4 py-3 text-left',
-                          'hover:bg-[var(--glass-bg)]',
-                          isSelected && 'bg-[var(--glass-bg)]',
-                          microInteraction.gentle
+                          "flex w-full items-center gap-3 px-4 py-3 text-left",
+                          "hover:bg-[var(--glass-bg)]",
+                          isSelected && "bg-[var(--glass-bg)]",
+                          microInteraction.gentle,
                         )}
                       >
                         {/* Icon */}
@@ -377,7 +377,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     );
                   })}
                 </div>
-              )
+              ),
             )
           )}
         </div>
@@ -399,6 +399,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };

@@ -1,16 +1,16 @@
-import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react';
-import type React from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from "lucide-react";
+import type React from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
-import { cn, getGlassClass } from '@/core/utils/classname';
+import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface Toast {
   id: string;
   title?: string;
   description: string;
-  type?: 'success' | 'error' | 'warning' | 'info';
+  type?: "success" | "error" | "warning" | "info";
   duration?: number;
   action?: {
     label: string;
@@ -19,7 +19,7 @@ export interface Toast {
 }
 
 interface ToastContextType {
-  addToast: (toast: Omit<Toast, 'id'>) => void;
+  addToast: (toast: Omit<Toast, "id">) => void;
   removeToast: (id: string) => void;
 }
 
@@ -28,7 +28,7 @@ const ToastContext = createContext<ToastContextType | null>(undefined);
 export const useToast = () => {
   const context = useContext(ToastContext);
   if (!context) {
-    throw new Error('useToast must be used within a ToastProvider');
+    throw new Error("useToast must be used within a ToastProvider");
   }
   return context;
 };
@@ -36,21 +36,21 @@ export const useToast = () => {
 interface ToastProviderProps {
   children: React.ReactNode;
   position?:
-    | 'top-right'
-    | 'top-left'
-    | 'bottom-right'
-    | 'bottom-left'
-    | 'top-center'
-    | 'bottom-center';
+    | "top-right"
+    | "top-left"
+    | "bottom-right"
+    | "bottom-left"
+    | "top-center"
+    | "bottom-center";
 }
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({
   children,
-  position = 'top-right',
+  position = "top-right",
 }) => {
   const [toasts, setToasts] = useState<Array<Toast>>([]);
 
-  const addToast = (toast: Omit<Toast, 'id'>) => {
+  const addToast = (toast: Omit<Toast, "id">) => {
     const id = Math.random().toString(36).slice(2, 9);
     const newToast = { ...toast, id };
     setToasts((previous) => [...previous, newToast]);
@@ -66,32 +66,32 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
   };
 
   const positionClasses = {
-    'top-right': 'top-4 right-4',
-    'top-left': 'top-4 left-4',
-    'bottom-right': 'bottom-4 right-4',
-    'bottom-left': 'bottom-4 left-4',
-    'top-center': 'top-4 left-1/2 transform -translate-x-1/2',
-    'bottom-center': 'bottom-4 left-1/2 transform -translate-x-1/2',
+    "top-right": "top-4 right-4",
+    "top-left": "top-4 left-4",
+    "bottom-right": "bottom-4 right-4",
+    "bottom-left": "bottom-4 left-4",
+    "top-center": "top-4 left-1/2 transform -translate-x-1/2",
+    "bottom-center": "bottom-4 left-1/2 transform -translate-x-1/2",
   };
 
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
-      {typeof window !== 'undefined' &&
-        typeof document !== 'undefined' &&
+      {typeof window !== "undefined" &&
+        typeof document !== "undefined" &&
         document.body &&
         createPortal(
           <div
             className={cn(
-              'fixed z-50 flex flex-col space-y-2',
-              positionClasses[position]
+              "fixed z-50 flex flex-col space-y-2",
+              positionClasses[position],
             )}
           >
             {toasts.map((toast) => (
               <ToastItem key={toast.id} toast={toast} onRemove={removeToast} />
             ))}
           </div>,
-          document.body
+          document.body,
         )}
     </ToastContext.Provider>
   );
@@ -122,29 +122,29 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
   };
 
   const iconColors = {
-    success: 'text-green-500',
-    error: 'text-red-500',
-    warning: 'text-yellow-500',
-    info: 'text-blue-500',
+    success: "text-green-500",
+    error: "text-red-500",
+    warning: "text-yellow-500",
+    info: "text-blue-500",
   };
 
-  const Icon = icons[toast.type || 'info'];
+  const Icon = icons[toast.type || "info"];
 
   return (
     <div
       className={cn(
-        getGlassClass('elevated'),
-        'rounded-xl border border-white/20 p-4 dark:border-white/10',
-        'min-w-[300px] max-w-[400px]',
-        'transition-all duration-200 ease-out',
-        isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+        getGlassClass("elevated"),
+        "rounded-xl border border-white/20 p-4 dark:border-white/10",
+        "min-w-[300px] max-w-[400px]",
+        "transition-all duration-200 ease-out",
+        isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0",
       )}
     >
       <div className="flex items-start space-x-3">
         <Icon
           className={cn(
-            'mt-0.5 h-5 w-5 flex-shrink-0',
-            iconColors[toast.type || 'info']
+            "mt-0.5 h-5 w-5 flex-shrink-0",
+            iconColors[toast.type || "info"],
           )}
         />
 
@@ -184,13 +184,13 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
 
 // Simple GlassToast component for direct use
 interface GlassToastProps {
-  type?: 'success' | 'error' | 'warning' | 'info';
+  type?: "success" | "error" | "warning" | "info";
   message: string;
   onClose?: () => void;
 }
 
 export const GlassToast: React.FC<GlassToastProps> = ({
-  type = 'info',
+  type = "info",
   message,
   onClose,
 }) => {
@@ -202,10 +202,10 @@ export const GlassToast: React.FC<GlassToastProps> = ({
   };
 
   const iconColors = {
-    success: 'text-green-500',
-    error: 'text-red-500',
-    warning: 'text-yellow-500',
-    info: 'text-blue-500',
+    success: "text-green-500",
+    error: "text-red-500",
+    warning: "text-yellow-500",
+    info: "text-blue-500",
   };
 
   const Icon = icons[type];
@@ -213,15 +213,15 @@ export const GlassToast: React.FC<GlassToastProps> = ({
   return (
     <div
       className={cn(
-        getGlassClass('elevated'),
-        'rounded-xl border border-white/20 p-4 dark:border-white/10',
-        'min-w-[300px] max-w-[400px]',
-        'transition-all duration-200 ease-out'
+        getGlassClass("elevated"),
+        "rounded-xl border border-white/20 p-4 dark:border-white/10",
+        "min-w-[300px] max-w-[400px]",
+        "transition-all duration-200 ease-out",
       )}
     >
       <div className="flex items-start space-x-3">
         <Icon
-          className={cn('mt-0.5 h-5 w-5 flex-shrink-0', iconColors[type])}
+          className={cn("mt-0.5 h-5 w-5 flex-shrink-0", iconColors[type])}
         />
 
         <div className="min-w-0 flex-1">

@@ -5,8 +5,8 @@
  * components, ensuring clean architecture and better testability.
  */
 
-import React, { useCallback, useMemo, useRef } from 'react';
-import type { ComponentSize, ComponentVariant } from './base-component';
+import React, { useCallback, useMemo, useRef } from "react";
+import type { ComponentSize, ComponentVariant } from "./base-component";
 
 // Generic business logic hook type
 export type BusinessLogicHook<T = unknown, P = unknown> = (props: P) => T;
@@ -48,19 +48,19 @@ export function createBusinessLogicHook<
   actionsFactory: (
     state: TState,
     setState: (newState: TState | ((previousState: TState) => TState)) => void,
-    props: TProps
-  ) => TActions
+    props: TProps,
+  ) => TActions,
 ): BusinessLogicHook<{ state: TState; actions: TActions }, TProps> {
   return (props: TProps) => {
     const initialState = useMemo(
       () => initialStateFactory(props),
-      [props, initialStateFactory]
+      [props, initialStateFactory],
     );
     const [state, setState] = React.useState<TState>(initialState);
 
     const actions = useMemo(
       () => actionsFactory(state, setState, props),
-      [state, props, actionsFactory]
+      [state, props, actionsFactory],
     );
 
     return { state, actions };
@@ -80,8 +80,8 @@ export function createReducerBusinessLogic<
   effectsFactory?: (
     state: TState,
     dispatch: (action: TAction) => void,
-    props: TProps
-  ) => void
+    props: TProps,
+  ) => void,
 ): BusinessLogicHook<
   { state: TState; dispatch: (action: TAction) => void },
   TProps
@@ -89,7 +89,7 @@ export function createReducerBusinessLogic<
   return (props: TProps) => {
     const initialState = useMemo(
       () => initialStateFactory(props),
-      [props, initialStateFactory]
+      [props, initialStateFactory],
     );
     const [state, dispatch] = React.useReducer(reducer, initialState);
 
@@ -109,10 +109,10 @@ export function createReducerBusinessLogic<
 export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
   state: TState,
   setState: (newState: TState | ((previousState: TState) => TState)) => void,
-  props: TProps
+  props: TProps,
 ) {
   const handlersRef = useRef<Map<string, EventHandlerFactory<TElement>>>(
-    new Map()
+    new Map(),
   );
 
   const createHandler = useCallback(
@@ -122,24 +122,24 @@ export function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
         event: E & { currentTarget: TElement },
         state: TState,
         setState: (
-          newState: TState | ((previousState: TState) => TState)
+          newState: TState | ((previousState: TState) => TState),
         ) => void,
-        props: TProps
-      ) => void
+        props: TProps,
+      ) => void,
     ): EventHandlerFactory<TElement, E> => {
       const factory: EventHandlerFactory<TElement, E> = () => (event) => {
         handler(
           event as E & { currentTarget: TElement },
           state,
           setState,
-          props
+          props,
         );
       };
 
       handlersRef.current.set(name, factory as EventHandlerFactory<TElement>);
       return factory;
     },
-    [state, setState, props]
+    [state, setState, props],
   );
 
   return { createHandler, handlersRef };
@@ -170,7 +170,7 @@ export interface FormActions<T = Record<string, unknown>> {
 export function createFormBusinessLogic<T extends Record<string, unknown>>(
   initialValues: T,
   validationRules?: Record<keyof T, (value: unknown) => string | null>,
-  onSubmit?: (values: T) => void | Promise<void>
+  onSubmit?: (values: T) => void | Promise<void>,
 ): BusinessLogicHook<{ state: FormState<T>; actions: FormActions<T> }, {}> {
   return () => {
     const [state, setState] = React.useState<FormState<T>>({
@@ -275,7 +275,7 @@ export function createFormBusinessLogic<T extends Record<string, unknown>>(
           }
         },
       }),
-      [state, initialValues, onSubmit, validationRules]
+      [state, initialValues, onSubmit, validationRules],
     );
 
     return { state, actions };
@@ -289,7 +289,7 @@ export interface TableState<T = unknown> {
   items: Array<T>;
   selectedItems: Array<T>;
   sortBy: string | null;
-  sortDirection: 'asc' | 'desc';
+  sortDirection: "asc" | "desc";
   filterBy: string;
   currentPage: number;
   itemsPerPage: number;
@@ -310,15 +310,15 @@ export interface TableActions<T = unknown> {
 
 export function createTableBusinessLogic<T extends Record<string, unknown>>(
   initialItems: Array<T> = [],
-  itemsPerPage = 10
+  itemsPerPage = 10,
 ): BusinessLogicHook<{ state: TableState<T>; actions: TableActions<T> }, {}> {
   return () => {
     const [state, setState] = React.useState<TableState<T>>({
       items: initialItems,
       selectedItems: [],
       sortBy: null,
-      sortDirection: 'asc',
-      filterBy: '',
+      sortDirection: "asc",
+      filterBy: "",
       currentPage: 1,
       itemsPerPage,
       totalItems: initialItems.length,
@@ -364,9 +364,9 @@ export function createTableBusinessLogic<T extends Record<string, unknown>>(
             ...previous,
             sortBy: field,
             sortDirection:
-              previous.sortBy === field && previous.sortDirection === 'asc'
-                ? 'desc'
-                : 'asc',
+              previous.sortBy === field && previous.sortDirection === "asc"
+                ? "desc"
+                : "asc",
           }));
         },
 
@@ -393,7 +393,7 @@ export function createTableBusinessLogic<T extends Record<string, unknown>>(
           }));
         },
       }),
-      []
+      [],
     );
 
     return { state, actions };
@@ -424,15 +424,15 @@ export interface ModalActions {
 }
 
 export function createModalBusinessLogic(
-  initialState: Partial<ModalState> = {}
+  initialState: Partial<ModalState> = {},
 ): BusinessLogicHook<{ state: ModalState; actions: ModalActions }, {}> {
   return () => {
     const [state, setState] = React.useState<ModalState>({
       isOpen: false,
-      title: '',
+      title: "",
       content: null,
-      size: 'md',
-      variant: 'primary',
+      size: "md",
+      variant: "primary",
       closable: true,
       backdrop: true,
       ...initialState,
@@ -490,7 +490,7 @@ export function createModalBusinessLogic(
           }));
         },
       }),
-      []
+      [],
     );
 
     return { state, actions };
@@ -518,7 +518,7 @@ export interface AsyncDataActions<T = any> {
 
 export function createAsyncDataBusinessLogic<T>(
   fetchFunction: () => Promise<T>,
-  cacheTimeout: number = 5 * 60 * 1000 // 5 minutes
+  cacheTimeout: number = 5 * 60 * 1000, // 5 minutes
 ): BusinessLogicHook<
   { state: AsyncDataState<T>; actions: AsyncDataActions<T> },
   {}
@@ -548,7 +548,7 @@ export function createAsyncDataBusinessLogic<T>(
             setState((previous) => ({
               ...previous,
               error:
-                error instanceof Error ? error.message : 'An error occurred',
+                error instanceof Error ? error.message : "An error occurred",
               loading: false,
             }));
           }
@@ -589,7 +589,7 @@ export function createAsyncDataBusinessLogic<T>(
           });
         },
       }),
-      [fetchFunction]
+      [fetchFunction],
     );
 
     // Auto-fetch if cache is expired

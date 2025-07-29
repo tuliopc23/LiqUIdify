@@ -1,5 +1,5 @@
 // Test setup file for Bun
-import { expect } from 'bun:test';
+import { expect } from "bun:test";
 
 // Add custom matchers for React testing
 expect.extend({
@@ -14,7 +14,8 @@ expect.extend({
     };
   },
   toHaveClass(received: HTMLElement, className: string) {
-    const pass = received && received.classList && received.classList.contains(className);
+    const pass =
+      received && received.classList && received.classList.contains(className);
     return {
       pass,
       message: () =>
@@ -24,7 +25,7 @@ expect.extend({
     };
   },
   toBeDisabled(received: HTMLElement) {
-    const pass = received && received.hasAttribute('disabled');
+    const pass = received && received.hasAttribute("disabled");
     return {
       pass,
       message: () =>
@@ -39,7 +40,7 @@ expect.extend({
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 // Mock window.matchMedia
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string) => ({
     matches: false,

@@ -1,43 +1,43 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Download, Sparkles, Zap } from 'lucide-react';
-import React from 'react';
-import { GlassBanner } from '@/components/glass-banner/glass-banner';
-import { GlassButton } from '@/components/glass-button-refactored/glass-button';
-import { GlassCard } from '@/components/glass-card-refactored/glass-card';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Download, Sparkles, Zap } from "lucide-react";
+import React from "react";
+import { GlassBanner } from "@/components/glass-banner/glass-banner";
+import { GlassButton } from "@/components/glass-button-refactored/glass-button";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
 
 const meta = {
-  title: 'Components/Glass Banner',
+  title: "Components/Glass Banner",
   component: GlassBanner,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
         component:
-          'A banner component for displaying important messages, notifications, and alerts with glassmorphism styling. Supports different variants, dismissible behavior, and custom actions.',
+          "A banner component for displaying important messages, notifications, and alerts with glassmorphism styling. Supports different variants, dismissible behavior, and custom actions.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      description: 'The visual variant of the banner',
-      control: { type: 'select' },
-      options: ['info', 'success', 'warning', 'error'],
+      description: "The visual variant of the banner",
+      control: { type: "select" },
+      options: ["info", "success", "warning", "error"],
     },
     dismissible: {
-      description: 'Whether the banner can be dismissed',
-      control: { type: 'boolean' },
+      description: "Whether the banner can be dismissed",
+      control: { type: "boolean" },
     },
     onDismiss: {
-      description: 'Callback when banner is dismissed',
-      action: 'dismissed',
+      description: "Callback when banner is dismissed",
+      action: "dismissed",
     },
     icon: {
-      description: 'Custom icon to display',
+      description: "Custom icon to display",
       control: false,
     },
     action: {
-      description: 'Action element to display',
+      description: "Action element to display",
       control: false,
     },
   },
@@ -48,8 +48,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'This is an informational banner message.',
-    variant: 'info',
+    children: "This is an informational banner message.",
+    variant: "info",
   },
 };
 
@@ -88,7 +88,7 @@ export const AllVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All banner variants showcasing different severity levels',
+        story: "All banner variants showcasing different severity levels",
       },
     },
   },
@@ -134,7 +134,7 @@ export const WithActions: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Banners with action buttons for user interaction',
+        story: "Banners with action buttons for user interaction",
       },
     },
   },
@@ -145,18 +145,18 @@ export const Dismissible: Story = {
     const [banners, setBanners] = React.useState([
       {
         id: 1,
-        variant: 'info' as const,
-        message: 'This banner can be dismissed',
+        variant: "info" as const,
+        message: "This banner can be dismissed",
       },
       {
         id: 2,
-        variant: 'success' as const,
-        message: 'Operation completed successfully',
+        variant: "success" as const,
+        message: "Operation completed successfully",
       },
       {
         id: 3,
-        variant: 'warning' as const,
-        message: 'Your session will expire soon',
+        variant: "warning" as const,
+        message: "Your session will expire soon",
       },
     ]);
 
@@ -186,18 +186,18 @@ export const Dismissible: Story = {
                 setBanners([
                   {
                     id: 1,
-                    variant: 'info',
-                    message: 'This banner can be dismissed',
+                    variant: "info",
+                    message: "This banner can be dismissed",
                   },
                   {
                     id: 2,
-                    variant: 'success',
-                    message: 'Operation completed successfully',
+                    variant: "success",
+                    message: "Operation completed successfully",
                   },
                   {
                     id: 3,
-                    variant: 'warning',
-                    message: 'Your session will expire soon',
+                    variant: "warning",
+                    message: "Your session will expire soon",
                   },
                 ])
               }
@@ -212,7 +212,7 @@ export const Dismissible: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Dismissible banners that can be closed by users',
+        story: "Dismissible banners that can be closed by users",
       },
     },
   },
@@ -242,7 +242,7 @@ export const CustomIcons: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Banners with custom icons for better visual communication',
+        story: "Banners with custom icons for better visual communication",
       },
     },
   },
@@ -291,7 +291,7 @@ export const ComplexContent: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Banners with complex content layouts',
+        story: "Banners with complex content layouts",
       },
     },
   },
@@ -356,7 +356,7 @@ export const FixedPosition: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Banners with fixed positioning within containers',
+        story: "Banners with fixed positioning within containers",
       },
     },
   },
@@ -410,7 +410,7 @@ export const AnimatedAppearance: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Animated banner appearances with auto-dismiss functionality',
+        story: "Animated banner appearances with auto-dismiss functionality",
       },
     },
   },

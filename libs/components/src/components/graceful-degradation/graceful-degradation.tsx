@@ -3,12 +3,12 @@
  * Provides fallback components for browsers without JavaScript or modern features
  */
 
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from "react";
 import {
   useIsClient,
   useNetworkStatus,
   useSSRSafeFeatureDetection,
-} from '@/hooks/use-ssr-safe';
+} from "@/hooks/use-ssr-safe";
 
 // Types
 export interface GracefulDegradationProps {
@@ -39,7 +39,7 @@ export interface NetworkAwareProps {
 export interface PerformanceAwareProps {
   children: ReactNode;
   lowPerformanceFallback: ReactNode;
-  threshold?: 'low' | 'medium' | 'high';
+  threshold?: "low" | "medium" | "high";
 }
 
 /**
@@ -55,7 +55,7 @@ export function GracefulDegradation({
 }: GracefulDegradationProps) {
   // All hooks must be called at the top level
   const isClient = useIsClient();
-  const isSupported = useSSRSafeFeatureDetection(feature || '');
+  const isSupported = useSSRSafeFeatureDetection(feature || "");
   const { online, effectiveType } = useNetworkStatus();
   const isLowPerformance = useDevicePerformance();
 
@@ -73,7 +73,7 @@ export function GracefulDegradation({
   if (network) {
     if (
       !online ||
-      (effectiveType && ['slow-2g', '2g'].includes(effectiveType))
+      (effectiveType && ["slow-2g", "2g"].includes(effectiveType))
     ) {
       return <>{fallback}</>;
     }
@@ -142,7 +142,7 @@ export function NetworkAware({
   if (
     slowConnectionFallback &&
     effectiveType &&
-    ['slow-2g', '2g'].includes(effectiveType)
+    ["slow-2g", "2g"].includes(effectiveType)
   ) {
     return <>{slowConnectionFallback}</>;
   }
@@ -157,7 +157,7 @@ export function NetworkAware({
 export function PerformanceAware({
   children,
   lowPerformanceFallback,
-  threshold = 'low',
+  threshold = "low",
 }: PerformanceAwareProps) {
   const isLowPerformance = useDevicePerformance(threshold);
 
@@ -168,7 +168,7 @@ export function PerformanceAware({
  * Hook to detect device performance
  */
 function useDevicePerformance(
-  threshold: 'low' | 'medium' | 'high' = 'low'
+  threshold: "low" | "medium" | "high" = "low",
 ): boolean {
   const [isLowPerformance, setIsLowPerformance] = useState(false);
   const isClient = useIsClient();
@@ -213,9 +213,9 @@ function useDevicePerformance(
 
     // Add class to document for CSS targeting
     if (score < thresholdMap[threshold]) {
-      document.documentElement.classList.add('low-performance');
+      document.documentElement.classList.add("low-performance");
     } else {
-      document.documentElement.classList.remove('low-performance');
+      document.documentElement.classList.remove("low-performance");
     }
   }, [isClient, threshold]);
 
@@ -234,51 +234,51 @@ export function FeatureDetectionClasses() {
     }
 
     const features = [
-      'css-backdrop-filter',
-      'css-grid',
-      'intersection-observer',
-      'resize-observer',
-      'web-animations',
-      'local-storage',
-      'custom-properties',
+      "css-backdrop-filter",
+      "css-grid",
+      "intersection-observer",
+      "resize-observer",
+      "web-animations",
+      "local-storage",
+      "custom-properties",
     ];
 
     for (const feature of features) {
       let isSupported = false;
 
       switch (feature) {
-        case 'css-backdrop-filter': {
-          isSupported = CSS.supports('backdrop-filter', 'blur(1px)');
+        case "css-backdrop-filter": {
+          isSupported = CSS.supports("backdrop-filter", "blur(1px)");
           break;
         }
-        case 'css-grid': {
-          isSupported = CSS.supports('display', 'grid');
+        case "css-grid": {
+          isSupported = CSS.supports("display", "grid");
           break;
         }
-        case 'intersection-observer': {
-          isSupported = 'IntersectionObserver' in window;
+        case "intersection-observer": {
+          isSupported = "IntersectionObserver" in window;
           break;
         }
-        case 'resize-observer': {
-          isSupported = 'ResizeObserver' in window;
+        case "resize-observer": {
+          isSupported = "ResizeObserver" in window;
           break;
         }
-        case 'web-animations': {
-          isSupported = 'animate' in document.createElement('div');
+        case "web-animations": {
+          isSupported = "animate" in document.createElement("div");
           break;
         }
-        case 'local-storage': {
+        case "local-storage": {
           try {
-            localStorage.setItem('test', 'test');
-            localStorage.removeItem('test');
+            localStorage.setItem("test", "test");
+            localStorage.removeItem("test");
             isSupported = true;
           } catch {
             isSupported = false;
           }
           break;
         }
-        case 'custom-properties': {
-          isSupported = CSS.supports('--test', '0');
+        case "custom-properties": {
+          isSupported = CSS.supports("--test", "0");
           break;
         }
         default: {
@@ -296,30 +296,30 @@ export function FeatureDetectionClasses() {
     }
 
     // Check for JavaScript
-    document.documentElement.classList.remove('no-js');
-    document.documentElement.classList.add('js');
+    document.documentElement.classList.remove("no-js");
+    document.documentElement.classList.add("js");
 
     // Check for network status
     const updateNetworkStatus = () => {
       if (navigator.onLine) {
-        document.documentElement.classList.remove('offline');
-        document.documentElement.classList.add('online');
+        document.documentElement.classList.remove("offline");
+        document.documentElement.classList.add("online");
       } else {
-        document.documentElement.classList.add('offline');
-        document.documentElement.classList.remove('online');
+        document.documentElement.classList.add("offline");
+        document.documentElement.classList.remove("online");
       }
     };
 
     updateNetworkStatus();
-    if (typeof window !== 'undefined') {
-      window.addEventListener('online', updateNetworkStatus);
-      window.addEventListener('offline', updateNetworkStatus);
+    if (typeof window !== "undefined") {
+      window.addEventListener("online", updateNetworkStatus);
+      window.addEventListener("offline", updateNetworkStatus);
     }
 
     return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('online', updateNetworkStatus);
-        window.removeEventListener('offline', updateNetworkStatus);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("online", updateNetworkStatus);
+        window.removeEventListener("offline", updateNetworkStatus);
       }
     };
   }, [isClient]);
@@ -332,10 +332,10 @@ export function FeatureDetectionClasses() {
  */
 export function ProgressiveEnhancementProvider({
   children,
-  level = 'base',
+  level = "base",
 }: {
   children: ReactNode;
-  level?: 'base' | 'enhanced' | 'advanced';
+  level?: "base" | "enhanced" | "advanced";
 }) {
   const isClient = useIsClient();
 
@@ -346,9 +346,9 @@ export function ProgressiveEnhancementProvider({
 
     // Remove all experience classes
     document.documentElement.classList.remove(
-      'base-experience',
-      'enhanced-experience',
-      'advanced-experience'
+      "base-experience",
+      "enhanced-experience",
+      "advanced-experience",
     );
 
     // Add appropriate class

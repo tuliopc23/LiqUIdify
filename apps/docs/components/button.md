@@ -13,10 +13,10 @@ import { GlassButton } from 'liquidify'
 </div>
 
 ```tsx
-import { GlassButton } from 'liquidify'
+import { GlassButton } from "liquidify";
 
 function App() {
-  return <GlassButton>Click me</GlassButton>
+  return <GlassButton>Click me</GlassButton>;
 }
 ```
 
@@ -115,16 +115,16 @@ import { Download, Settings } from 'lucide-react'
 
 ### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'primary' \| 'secondary' \| 'ghost' \| 'outline' \| 'danger'` | `'primary'` | Visual style variant |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size |
-| `disabled` | `boolean` | `false` | Disable the button |
-| `isLoading` | `boolean` | `false` | Show loading state |
-| `fullWidth` | `boolean` | `false` | Make button full width |
-| `onClick` | `(event: MouseEvent) => void` | - | Click handler |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Button content |
+| Prop        | Type                                                           | Default     | Description            |
+| ----------- | -------------------------------------------------------------- | ----------- | ---------------------- |
+| `variant`   | `'primary' \| 'secondary' \| 'ghost' \| 'outline' \| 'danger'` | `'primary'` | Visual style variant   |
+| `size`      | `'sm' \| 'md' \| 'lg'`                                         | `'md'`      | Button size            |
+| `disabled`  | `boolean`                                                      | `false`     | Disable the button     |
+| `isLoading` | `boolean`                                                      | `false`     | Show loading state     |
+| `fullWidth` | `boolean`                                                      | `false`     | Make button full width |
+| `onClick`   | `(event: MouseEvent) => void`                                  | -           | Click handler          |
+| `className` | `string`                                                       | -           | Additional CSS classes |
+| `children`  | `ReactNode`                                                    | -           | Button content         |
 
 ### CSS Variables
 

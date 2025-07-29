@@ -74,7 +74,7 @@ export class PerformanceMonitor {
   private onMetricUpdate?: (
     metric: string,
     value: number,
-    status: 'good' | 'needs-improvement' | 'poor'
+    status: "good" | "needs-improvement" | "poor",
   ) => void;
 
   constructor(
@@ -82,8 +82,8 @@ export class PerformanceMonitor {
     onMetricUpdate?: (
       metric: string,
       value: number,
-      status: 'good' | 'needs-improvement' | 'poor'
-    ) => void
+      status: "good" | "needs-improvement" | "poor",
+    ) => void,
   ) {
     this.thresholds = thresholds;
     this.onMetricUpdate = onMetricUpdate;
@@ -91,7 +91,7 @@ export class PerformanceMonitor {
   }
 
   private initializeObservers(): void {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
@@ -106,7 +106,7 @@ export class PerformanceMonitor {
   }
 
   private observeLCP(): void {
-    if (!('PerformanceObserver' in window)) {
+    if (!("PerformanceObserver" in window)) {
       return;
     }
 
@@ -119,20 +119,20 @@ export class PerformanceMonitor {
 
       if (lastEntry) {
         const lcp = lastEntry.renderTime || lastEntry.loadTime || 0;
-        this.updateMetric('lcp', lcp);
+        this.updateMetric("lcp", lcp);
       }
     });
 
     try {
-      observer.observe({ type: 'largest-contentful-paint', buffered: true });
-      this.observers.set('lcp', observer);
+      observer.observe({ type: "largest-contentful-paint", buffered: true });
+      this.observers.set("lcp", observer);
     } catch {
       // LCP observer not supported in this environment
     }
   }
 
   private observeFID(): void {
-    if (!('PerformanceObserver' in window)) {
+    if (!("PerformanceObserver" in window)) {
       return;
     }
 
@@ -143,20 +143,20 @@ export class PerformanceMonitor {
         const fid = fidEntry.processingStart
           ? fidEntry.processingStart - fidEntry.startTime
           : 0;
-        this.updateMetric('fid', fid);
+        this.updateMetric("fid", fid);
       }
     });
 
     try {
-      observer.observe({ type: 'first-input', buffered: true });
-      this.observers.set('fid', observer);
+      observer.observe({ type: "first-input", buffered: true });
+      this.observers.set("fid", observer);
     } catch {
       // FID observer not supported in this environment
     }
   }
 
   private observeCLS(): void {
-    if (!('PerformanceObserver' in window)) {
+    if (!("PerformanceObserver" in window)) {
       return;
     }
 
@@ -186,41 +186,41 @@ export class PerformanceMonitor {
         }
       });
 
-      this.updateMetric('cls', clsValue);
+      this.updateMetric("cls", clsValue);
     });
 
     try {
-      observer.observe({ type: 'layout-shift', buffered: true });
-      this.observers.set('cls', observer);
+      observer.observe({ type: "layout-shift", buffered: true });
+      this.observers.set("cls", observer);
     } catch {
       // CLS observer not supported in this environment
     }
   }
 
   private observeFCP(): void {
-    if (!('PerformanceObserver' in window)) {
+    if (!("PerformanceObserver" in window)) {
       return;
     }
 
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       for (const entry of entries) {
-        if (entry.name === 'first-contentful-paint') {
-          this.updateMetric('fcp', entry.startTime);
+        if (entry.name === "first-contentful-paint") {
+          this.updateMetric("fcp", entry.startTime);
         }
       }
     });
 
     try {
-      observer.observe({ type: 'paint', buffered: true });
-      this.observers.set('fcp', observer);
+      observer.observe({ type: "paint", buffered: true });
+      this.observers.set("fcp", observer);
     } catch {
       // Logging disabled
     }
   }
 
   private observeMemoryUsage(): void {
-    if (typeof window === 'undefined' || !('performance' in window)) {
+    if (typeof window === "undefined" || !("performance" in window)) {
       return;
     }
 
@@ -228,8 +228,8 @@ export class PerformanceMonitor {
       const extendedPerformance = performance as ExtendedPerformance;
       if (extendedPerformance.memory) {
         this.updateMetric(
-          'memoryUsage',
-          extendedPerformance.memory.usedJSHeapSize
+          "memoryUsage",
+          extendedPerformance.memory.usedJSHeapSize,
         );
       }
     };
@@ -238,21 +238,21 @@ export class PerformanceMonitor {
     const interval = setInterval(checkMemory, 5000);
 
     // Store interval for cleanup
-    this.observers.set('memory', {
+    this.observers.set("memory", {
       disconnect: () => clearInterval(interval),
     } as PerformanceObserver);
   }
 
   public measureComponentRender<T>(
     componentName: string,
-    renderFunction: () => T
+    renderFunction: () => T,
   ): T {
     const startTime = performance.now();
     const result = renderFunction();
     const endTime = performance.now();
     const renderTime = endTime - startTime;
 
-    this.updateMetric('renderTime', renderTime);
+    this.updateMetric("renderTime", renderTime);
 
     // Store component-specific metrics
     this.metrics[`${componentName}_renderTime`] = renderTime;
@@ -261,7 +261,7 @@ export class PerformanceMonitor {
   }
 
   public measureAnimationPerformance(
-    callback: () => void
+    callback: () => void,
   ): Promise<{ frameRate: number; droppedFrames: number }> {
     return new Promise((resolve) => {
       let frameCount = 0;
@@ -288,8 +288,8 @@ export class PerformanceMonitor {
         } else {
           const frameRate = (frameCount / duration) * 1000;
 
-          this.updateMetric('animationFrameRate', frameRate);
-          this.updateMetric('animationDroppedFrames', droppedFrames);
+          this.updateMetric("animationFrameRate", frameRate);
+          this.updateMetric("animationDroppedFrames", droppedFrames);
 
           resolve({ frameRate, droppedFrames });
         }
@@ -302,21 +302,21 @@ export class PerformanceMonitor {
 
   public measureBundleSize(bundleName: string): Promise<number> {
     return new Promise((resolve) => {
-      if (typeof window === 'undefined') {
+      if (typeof window === "undefined") {
         resolve(0);
         return;
       }
 
       // Use Resource Timing API to get bundle size
       const resources = performance.getEntriesByType(
-        'resource'
+        "resource",
       ) as Array<PerformanceResourceTiming>;
       const bundle = resources.find((resource) =>
-        resource.name.includes(bundleName)
+        resource.name.includes(bundleName),
       );
 
       if (bundle?.transferSize) {
-        this.updateMetric('bundleSize', bundle.transferSize);
+        this.updateMetric("bundleSize", bundle.transferSize);
         resolve(bundle.transferSize);
       } else {
         resolve(0);
@@ -334,11 +334,11 @@ export class PerformanceMonitor {
   }
 
   public getMetricStatus(
-    metricName: string
-  ): 'good' | 'needs-improvement' | 'poor' | 'unknown' {
+    metricName: string,
+  ): "good" | "needs-improvement" | "poor" | "unknown" {
     const value = this.metrics[metricName];
     if (value === undefined) {
-      return 'unknown';
+      return "unknown";
     }
 
     return this.getMetricStatusByValue(metricName, value);
@@ -346,22 +346,22 @@ export class PerformanceMonitor {
 
   private getMetricStatusByValue(
     metricName: string,
-    value: number
-  ): 'good' | 'needs-improvement' | 'poor' {
+    value: number,
+  ): "good" | "needs-improvement" | "poor" {
     const threshold =
       this.thresholds[metricName as keyof PerformanceThresholds];
 
     if (!threshold) {
-      return 'good';
+      return "good";
     }
 
     if (value <= threshold.good) {
-      return 'good';
+      return "good";
     }
     if (value <= threshold.needsImprovement) {
-      return 'needs-improvement';
+      return "needs-improvement";
     }
-    return 'poor';
+    return "poor";
   }
 
   public getMetrics(): PerformanceMetrics {
@@ -383,17 +383,17 @@ export class PerformanceMonitor {
     let coreWebVitalsScore = 0;
     let coreWebVitalsCount = 0;
 
-    for (const metric of ['lcp', 'fid', 'cls']) {
+    for (const metric of ["lcp", "fid", "cls"]) {
       const value = metrics[metric as keyof PerformanceMetrics];
       if (value !== undefined) {
         const status = this.getMetricStatusByValue(metric, value);
         coreWebVitalsScore +=
-          status === 'good' ? 100 : status === 'needs-improvement' ? 50 : 0;
+          status === "good" ? 100 : status === "needs-improvement" ? 50 : 0;
         coreWebVitalsCount++;
 
-        if (status !== 'good') {
+        if (status !== "good") {
           recommendations.push(
-            `Improve ${metric.toUpperCase()}: Current value ${value}, target: ${this.thresholds[metric as keyof PerformanceThresholds]?.good}`
+            `Improve ${metric.toUpperCase()}: Current value ${value}, target: ${this.thresholds[metric as keyof PerformanceThresholds]?.good}`,
           );
         }
       }
@@ -410,7 +410,7 @@ export class PerformanceMonitor {
       metrics.renderTime > this.thresholds.renderTime.good
     ) {
       recommendations.push(
-        `Optimize component render time: ${metrics.renderTime.toFixed(2)}ms (target: <${this.thresholds.renderTime.good}ms)`
+        `Optimize component render time: ${metrics.renderTime.toFixed(2)}ms (target: <${this.thresholds.renderTime.good}ms)`,
       );
       overallScore -= 10;
     }
@@ -420,14 +420,14 @@ export class PerformanceMonitor {
       metrics.bundleSize > this.thresholds.bundleSize.good
     ) {
       recommendations.push(
-        `Reduce bundle size: ${(metrics.bundleSize / 1024).toFixed(2)}KB (target: <${(this.thresholds.bundleSize.good / 1024).toFixed(2)}KB)`
+        `Reduce bundle size: ${(metrics.bundleSize / 1024).toFixed(2)}KB (target: <${(this.thresholds.bundleSize.good / 1024).toFixed(2)}KB)`,
       );
       overallScore -= 15;
     }
 
     if (metrics.animationFrameRate && metrics.animationFrameRate < 55) {
       recommendations.push(
-        `Improve animation performance: ${metrics.animationFrameRate.toFixed(1)}fps (target: >55fps)`
+        `Improve animation performance: ${metrics.animationFrameRate.toFixed(1)}fps (target: >55fps)`,
       );
       overallScore -= 10;
     }
@@ -465,13 +465,13 @@ export function initializePerformanceMonitoring(
   onMetricUpdate?: (
     metric: string,
     value: number,
-    status: 'good' | 'needs-improvement' | 'poor'
-  ) => void
+    status: "good" | "needs-improvement" | "poor",
+  ) => void,
 ): PerformanceMonitor {
   const finalThresholds = { ...DEFAULT_THRESHOLDS, ...thresholds };
   globalPerformanceMonitor = new PerformanceMonitor(
     finalThresholds,
-    onMetricUpdate
+    onMetricUpdate,
   );
   return globalPerformanceMonitor;
 }

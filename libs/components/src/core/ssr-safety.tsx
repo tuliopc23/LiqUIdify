@@ -4,7 +4,7 @@
  * Provides utilities for safe server-side rendering and client-side hydration
  */
 
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from "react";
 
 /**
  * Hook to safely check if we're on the client side
@@ -53,7 +53,7 @@ export interface SSRSafeProps {
 export function SSRSafe({
   children,
   fallback = undefined,
-  component: Component = 'div',
+  component: Component = "div",
   ...props
 }: SSRSafeProps) {
   const isClient = useIsClient();
@@ -70,11 +70,11 @@ export function SSRSafe({
  */
 export function useSSRSafeWindow() {
   const [windowObject, setWindowObject] = useState<Window | undefined | null>(
-    undefined
+    undefined,
   );
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       setWindowObject(window);
     }
   }, []);
@@ -89,7 +89,7 @@ export function useSSRSafeLocalStorage() {
   const [storage, setStorage] = useState<Storage | undefined | null>(undefined);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.localStorage) {
+    if (typeof window !== "undefined" && window.localStorage) {
       setStorage(window.localStorage);
     }
   }, []);
@@ -101,7 +101,7 @@ export function useSSRSafeLocalStorage() {
  * Utility function to check if we're in a browser environment
  */
 export const isBrowser = (): boolean => {
-  return typeof window !== 'undefined' && typeof document !== 'undefined';
+  return typeof window !== "undefined" && typeof document !== "undefined";
 };
 
 /**

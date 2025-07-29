@@ -1,4 +1,4 @@
-import { useGlobalConfig } from './global-config-provider';
+import { useGlobalConfig } from "./global-config-provider";
 
 /**
  * Convenience hook that provides access to global configuration

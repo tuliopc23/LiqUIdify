@@ -1,10 +1,10 @@
-import { ChevronRight, Menu, X } from 'lucide-react';
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import { ChevronRight, Menu, X } from "lucide-react";
+import type React from "react";
+import { useEffect, useState } from "react";
 
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
-import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
+import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
 interface NavItem {
   id: string;
@@ -27,15 +27,13 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   onItemClick,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(
-    undefined
-  );
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(undefined);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    document.body.style.overflow = isOpen ? "hidden" : "";
 
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
@@ -56,13 +54,13 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
       type="button"
       onClick={() => setIsOpen(!isOpen)}
       className={cn(
-        'rounded-xl p-3',
-        getGlassClass('default'),
-        'hover:bg-[var(--glass-bg-elevated)]',
+        "rounded-xl p-3",
+        getGlassClass("default"),
+        "hover:bg-[var(--glass-bg-elevated)]",
         microInteraction.interactive,
-        'focus:outline-none focus:ring-2 focus:ring-blue-500/30',
-        'md:hidden', // Only show on mobile
-        className
+        "focus:outline-none focus:ring-2 focus:ring-blue-500/30",
+        "md:hidden", // Only show on mobile
+        className,
       )}
       aria-label="Toggle navigation menu"
     >
@@ -80,10 +78,10 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
         type="button"
         onClick={() => handleItemClick(item)}
         className={cn(
-          'flex w-full items-center justify-between p-4 text-left',
-          'hover:bg-[var(--glass-bg)] active:bg-[var(--glass-bg-pressed)]',
+          "flex w-full items-center justify-between p-4 text-left",
+          "hover:bg-[var(--glass-bg)] active:bg-[var(--glass-bg-pressed)]",
           microInteraction.gentle,
-          level > 0 && 'border-[var(--glass-border)] border-l-2 pl-8'
+          level > 0 && "border-[var(--glass-border)] border-l-2 pl-8",
         )}
       >
         <div className="flex items-center gap-3">
@@ -100,8 +98,8 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
         {item.children?.length && (
           <ChevronRight
             className={cn(
-              'h-4 w-4 text-[var(--text-secondary)] transition-transform duration-200',
-              activeSubmenu === item.id && 'rotate-90'
+              "h-4 w-4 text-[var(--text-secondary)] transition-transform duration-200",
+              activeSubmenu === item.id && "rotate-90",
             )}
           />
         )}
@@ -123,7 +121,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
   return (
     <>
       <MenuTrigger />
-      {typeof window !== 'undefined' &&
+      {typeof window !== "undefined" &&
         createPortal(
           <div className="fixed inset-0 z-50 md:hidden">
             {/* Backdrop */}
@@ -133,7 +131,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
               className="absolute inset-0 bg-black/20 backdrop-blur-sm"
               onClick={() => setIsOpen(false)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
                   setIsOpen(false);
                 }
@@ -145,10 +143,10 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
 
             <div
               className={cn(
-                'absolute top-0 right-0 h-full w-80 max-w-[85vw]',
-                getGlassClass('elevated'),
-                'border-[var(--glass-border)] border-l',
-                'slide-in-from-right animate-in duration-300'
+                "absolute top-0 right-0 h-full w-80 max-w-[85vw]",
+                getGlassClass("elevated"),
+                "border-[var(--glass-border)] border-l",
+                "slide-in-from-right animate-in duration-300",
               )}
             >
               {/* Header */}
@@ -174,7 +172,7 @@ export const GlassMobileNav: React.FC<GlassMobileNavProps> = ({
               </div>
             </div>
           </div>,
-          document.body
+          document.body,
         )}
     </>
   );

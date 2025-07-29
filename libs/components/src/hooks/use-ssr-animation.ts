@@ -1,13 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export const useSSRAnimation = (
-  _callback?: (element: HTMLElement) => undefined | (() => void)
+  _callback?: (element: HTMLElement) => undefined | (() => void),
 ) => {
   const _elementRef = useRef<HTMLDivElement>(null);
   const cleanupRef = useRef<(() => void) | undefined>(undefined);
 
   useEffect(() => {
-    const isServer = typeof window === 'undefined';
+    const isServer = typeof window === "undefined";
     if (isServer || !_elementRef.current || !_callback) {
       return;
     }

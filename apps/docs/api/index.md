@@ -24,16 +24,23 @@ Interactive button component with glassmorphism effects and advanced animations.
 #### Props
 
 ```typescript
-interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'destructive' | 'apple';
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+interface GlassButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?:
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "ghost"
+    | "destructive"
+    | "apple";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   loading?: boolean;
   loadingText?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   fullWidth?: boolean;
   glassEffect?: {
-    intensity?: 'light' | 'medium' | 'strong';
+    intensity?: "light" | "medium" | "strong";
     blur?: boolean;
     backdrop?: boolean;
   };
@@ -51,7 +58,7 @@ import { GlassButton } from 'liquidify';
 <GlassButton variant="primary">Click me</GlassButton>
 
 // With icons and loading
-<GlassButton 
+<GlassButton
   variant="secondary"
   loading={isLoading}
   loadingText="Processing..."
@@ -92,14 +99,14 @@ Container component with glassmorphism effects using compound component pattern.
 
 ```typescript
 interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'elevated' | 'outline' | 'ghost';
+  variant?: "default" | "elevated" | "outline" | "ghost";
   hover?: boolean;
   bordered?: boolean;
   interactive?: boolean;
   selectable?: boolean;
   selected?: boolean;
-  elevation?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  orientation?: 'vertical' | 'horizontal';
+  elevation?: "none" | "sm" | "md" | "lg" | "xl";
+  orientation?: "vertical" | "horizontal";
   onCardClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
   onCardSelect?: (selected: boolean) => void;
 }
@@ -153,7 +160,7 @@ Form input component with glassmorphism styling and validation states.
 
 ```typescript
 interface GlassInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  variant?: 'default' | 'search' | 'password' | 'email';
+  variant?: "default" | "search" | "password" | "email";
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   clearable?: boolean;
@@ -209,8 +216,8 @@ interface GlassFormFieldProps {
   warning?: string;
   required?: boolean;
   disabled?: boolean;
-  variant?: 'default' | 'card' | 'inline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "default" | "card" | "inline";
+  size?: "sm" | "md" | "lg";
   children: React.ReactNode;
   htmlFor?: string;
 }
@@ -219,7 +226,7 @@ interface GlassFormFieldProps {
 #### Usage
 
 ```tsx
-import { GlassFormField, GlassInput } from 'liquidify';
+import { GlassFormField, GlassInput } from "liquidify";
 
 <GlassFormField
   label="Email Address"
@@ -227,11 +234,8 @@ import { GlassFormField, GlassInput } from 'liquidify';
   error={errors.email}
   helperText="We'll never share your email"
 >
-  <GlassInput
-    type="email"
-    placeholder="john@example.com"
-  />
-</GlassFormField>
+  <GlassInput type="email" placeholder="john@example.com" />
+</GlassFormField>;
 ```
 
 ---
@@ -248,7 +252,7 @@ interface GlassCheckboxProps {
   onChange?: (checked: boolean) => void;
   disabled?: boolean;
   indeterminate?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   label?: string;
   description?: string;
   error?: boolean;
@@ -258,14 +262,14 @@ interface GlassCheckboxProps {
 #### Usage
 
 ```tsx
-import { GlassCheckbox } from 'liquidify';
+import { GlassCheckbox } from "liquidify";
 
 <GlassCheckbox
   checked={agreed}
   onChange={setAgreed}
   label="I agree to the terms"
   description="Please read our terms and conditions"
-/>
+/>;
 ```
 
 ---
@@ -296,19 +300,19 @@ interface GlassSelectProps {
 #### Usage
 
 ```tsx
-import { GlassSelect } from 'liquidify';
+import { GlassSelect } from "liquidify";
 
 <GlassSelect
   value={selectedCountry}
   onChange={setSelectedCountry}
   options={[
-    { value: 'us', label: 'United States' },
-    { value: 'ca', label: 'Canada' },
-    { value: 'uk', label: 'United Kingdom' },
+    { value: "us", label: "United States" },
+    { value: "ca", label: "Canada" },
+    { value: "uk", label: "United Kingdom" },
   ]}
   placeholder="Select country"
   searchable
-/>
+/>;
 ```
 
 ---
@@ -320,9 +324,10 @@ Multi-line text input with glassmorphism effects.
 #### Props
 
 ```typescript
-interface GlassTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface GlassTextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: boolean;
-  resize?: 'none' | 'vertical' | 'horizontal' | 'both';
+  resize?: "none" | "vertical" | "horizontal" | "both";
   autoGrow?: boolean;
   maxHeight?: number;
 }
@@ -331,14 +336,14 @@ interface GlassTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaEl
 #### Usage
 
 ```tsx
-import { GlassTextarea } from 'liquidify';
+import { GlassTextarea } from "liquidify";
 
 <GlassTextarea
   placeholder="Enter your message..."
   rows={4}
   autoGrow
   maxHeight={200}
-/>
+/>;
 ```
 
 ---
@@ -358,7 +363,7 @@ interface GlassModalProps {
   title?: string;
   description?: string;
   children: React.ReactNode;
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  size?: "sm" | "md" | "lg" | "xl" | "full";
   closeOnOverlayClick?: boolean;
   closeOnEscape?: boolean;
   preventScroll?: boolean;
@@ -369,7 +374,7 @@ interface GlassModalProps {
 #### Usage
 
 ```tsx
-import { GlassModal, GlassButton } from 'liquidify';
+import { GlassModal, GlassButton } from "liquidify";
 
 <GlassModal
   open={isModalOpen}
@@ -386,7 +391,7 @@ import { GlassModal, GlassButton } from 'liquidify';
       Confirm
     </GlassButton>
   </div>
-</GlassModal>
+</GlassModal>;
 ```
 
 ---
@@ -408,31 +413,31 @@ interface GlassAccordionProps {
   multiple?: boolean;
   defaultExpanded?: string[];
   onExpandedChange?: (expanded: string[]) => void;
-  variant?: 'default' | 'card' | 'minimal';
+  variant?: "default" | "card" | "minimal";
 }
 ```
 
 #### Usage
 
 ```tsx
-import { GlassAccordion } from 'liquidify';
+import { GlassAccordion } from "liquidify";
 
 <GlassAccordion
   items={[
     {
-      id: 'item1',
-      title: 'What is LiqUIdify?',
-      content: 'LiqUIdify is a React component library...'
+      id: "item1",
+      title: "What is LiqUIdify?",
+      content: "LiqUIdify is a React component library...",
     },
     {
-      id: 'item2',
-      title: 'How do I install it?',
-      content: 'You can install it using npm install liquidify'
-    }
+      id: "item2",
+      title: "How do I install it?",
+      content: "You can install it using npm install liquidify",
+    },
   ]}
   multiple
   variant="card"
-/>
+/>;
 ```
 
 ---
@@ -456,32 +461,32 @@ interface GlassTabsProps {
   defaultTab?: string;
   activeTab?: string;
   onTabChange?: (tabId: string) => void;
-  orientation?: 'horizontal' | 'vertical';
-  variant?: 'default' | 'pills' | 'underline';
+  orientation?: "horizontal" | "vertical";
+  variant?: "default" | "pills" | "underline";
 }
 ```
 
 #### Usage
 
 ```tsx
-import { GlassTabs } from 'liquidify';
+import { GlassTabs } from "liquidify";
 
 <GlassTabs
   tabs={[
     {
-      id: 'overview',
-      label: 'Overview',
-      content: <div>Overview content</div>
+      id: "overview",
+      label: "Overview",
+      content: <div>Overview content</div>,
     },
     {
-      id: 'details',
-      label: 'Details', 
-      content: <div>Details content</div>
-    }
+      id: "details",
+      label: "Details",
+      content: <div>Details content</div>,
+    },
   ]}
   variant="pills"
   onTabChange={setActiveTab}
-/>
+/>;
 ```
 
 ---
@@ -508,16 +513,16 @@ interface GlassBreadcrumbsProps {
 #### Usage
 
 ```tsx
-import { GlassBreadcrumbs } from 'liquidify';
+import { GlassBreadcrumbs } from "liquidify";
 
 <GlassBreadcrumbs
   items={[
-    { label: 'Home', href: '/' },
-    { label: 'Products', href: '/products' },
-    { label: 'Laptops', current: true }
+    { label: "Home", href: "/" },
+    { label: "Products", href: "/products" },
+    { label: "Laptops", current: true },
   ]}
   maxItems={4}
-/>
+/>;
 ```
 
 ---
@@ -534,35 +539,41 @@ Toast notification component with animations and positioning.
 interface GlassToastProps {
   title: string;
   description?: string;
-  variant?: 'default' | 'success' | 'error' | 'warning' | 'info';
+  variant?: "default" | "success" | "error" | "warning" | "info";
   duration?: number;
   action?: {
     label: string;
     onClick: () => void;
   };
   onDismiss?: () => void;
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center';
+  position?:
+    | "top-left"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-right"
+    | "top-center"
+    | "bottom-center";
 }
 ```
 
 #### Usage
 
 ```tsx
-import { GlassToast, useToast } from 'liquidify';
+import { GlassToast, useToast } from "liquidify";
 
 // Using the hook
 const { toast } = useToast();
 
 const showToast = () => {
   toast({
-    title: 'Success!',
-    description: 'Your changes have been saved.',
-    variant: 'success',
+    title: "Success!",
+    description: "Your changes have been saved.",
+    variant: "success",
     duration: 5000,
     action: {
-      label: 'Undo',
-      onClick: () => console.log('Undo clicked')
-    }
+      label: "Undo",
+      onClick: () => console.log("Undo clicked"),
+    },
   });
 };
 ```
@@ -579,9 +590,9 @@ Progress indicator component with multiple variants.
 interface GlassProgressProps {
   value: number;
   max?: number;
-  variant?: 'linear' | 'circular' | 'steps';
-  size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
+  variant?: "linear" | "circular" | "steps";
+  size?: "sm" | "md" | "lg";
+  color?: "primary" | "secondary" | "success" | "warning" | "error";
   showLabel?: boolean;
   label?: string;
   animated?: boolean;
@@ -620,8 +631,8 @@ Loading indicator component with multiple animation variants.
 
 ```typescript
 interface GlassLoadingProps {
-  variant?: 'spinner' | 'dots' | 'pulse' | 'bars';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  variant?: "spinner" | "dots" | "pulse" | "bars";
+  size?: "sm" | "md" | "lg" | "xl";
   text?: string;
   className?: string;
 }
@@ -656,7 +667,7 @@ Data visualization component with glassmorphism styling.
 ```typescript
 interface GlassChartProps {
   data: ChartDataPoint[];
-  type: 'line' | 'bar' | 'donut' | 'area';
+  type: "line" | "bar" | "donut" | "area";
   width?: number;
   height?: number;
   colors?: string[];
@@ -731,38 +742,38 @@ interface GlassTableProps<T> {
 #### Usage
 
 ```tsx
-import { GlassTable } from 'liquidify';
+import { GlassTable } from "liquidify";
 
 interface User {
   id: number;
   name: string;
   email: string;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 }
 
 const users: User[] = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' }
+  { id: 1, name: "John Doe", email: "john@example.com", status: "active" },
 ];
 
 <GlassTable
   data={users}
   columns={[
-    { key: 'name', header: 'Name', sortable: true },
-    { key: 'email', header: 'Email' },
+    { key: "name", header: "Name", sortable: true },
+    { key: "email", header: "Email" },
     {
-      key: 'status',
-      header: 'Status',
+      key: "status",
+      header: "Status",
       render: (status) => (
-        <GlassBadge variant={status === 'active' ? 'success' : 'secondary'}>
+        <GlassBadge variant={status === "active" ? "success" : "secondary"}>
           {status}
         </GlassBadge>
-      )
-    }
+      ),
+    },
   ]}
   sortable
   pagination
   pageSize={10}
-/>
+/>;
 ```
 
 ---
@@ -783,7 +794,7 @@ interface GlassPlaygroundProps {
   showPreview?: boolean;
   editable?: boolean;
   height?: string | number;
-  theme?: 'light' | 'dark';
+  theme?: "light" | "dark";
   autoRun?: boolean;
 }
 ```
@@ -791,7 +802,7 @@ interface GlassPlaygroundProps {
 #### Usage
 
 ```tsx
-import { GlassPlayground, PlaygroundTemplates } from 'liquidify';
+import { GlassPlayground, PlaygroundTemplates } from "liquidify";
 
 <GlassPlayground
   code={PlaygroundTemplates.button}
@@ -799,7 +810,7 @@ import { GlassPlayground, PlaygroundTemplates } from 'liquidify';
   description="Try different button variants"
   height={400}
   editable
-/>
+/>;
 ```
 
 ---
@@ -823,16 +834,16 @@ const useToast: () => UseToastReturn;
 #### Usage
 
 ```tsx
-import { useToast } from 'liquidify';
+import { useToast } from "liquidify";
 
 function MyComponent() {
   const { toast, dismiss } = useToast();
 
   const showSuccess = () => {
     toast({
-      title: 'Success!',
-      description: 'Operation completed',
-      variant: 'success'
+      title: "Success!",
+      description: "Operation completed",
+      variant: "success",
     });
   };
 
@@ -848,10 +859,10 @@ Hook for managing theme state and switching.
 
 ```typescript
 interface UseThemeReturn {
-  theme: 'light' | 'dark' | 'system';
-  setTheme: (theme: 'light' | 'dark' | 'system') => void;
-  resolvedTheme: 'light' | 'dark';
-  systemTheme: 'light' | 'dark';
+  theme: "light" | "dark" | "system";
+  setTheme: (theme: "light" | "dark" | "system") => void;
+  resolvedTheme: "light" | "dark";
+  systemTheme: "light" | "dark";
 }
 
 const useTheme: () => UseThemeReturn;
@@ -860,16 +871,16 @@ const useTheme: () => UseThemeReturn;
 #### Usage
 
 ```tsx
-import { useTheme } from 'liquidify';
+import { useTheme } from "liquidify";
 
 function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
 
   return (
     <GlassButton
-      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
-      Toggle to {resolvedTheme === 'dark' ? 'Light' : 'Dark'}
+      Toggle to {resolvedTheme === "dark" ? "Light" : "Dark"}
     </GlassButton>
   );
 }
@@ -883,13 +894,22 @@ Collection of SSR-safe hooks for client-side only operations.
 
 ```typescript
 // SSR-safe window access
-const useSSRSafeWindow: (selector?: (window: Window) => any, fallback?: any) => any;
+const useSSRSafeWindow: (
+  selector?: (window: Window) => any,
+  fallback?: any,
+) => any;
 
 // SSR-safe document access
-const useSSRSafeDocument: (selector?: (document: Document) => any, fallback?: any) => any;
+const useSSRSafeDocument: (
+  selector?: (document: Document) => any,
+  fallback?: any,
+) => any;
 
 // SSR-safe localStorage
-const useSSRSafeLocalStorage: (key: string, defaultValue?: any) => [any, (value: any) => void];
+const useSSRSafeLocalStorage: (
+  key: string,
+  defaultValue?: any,
+) => [any, (value: any) => void];
 
 // Client-side detection
 const useIsClient: () => boolean;
@@ -901,12 +921,12 @@ const useSSRSafeMediaQuery: (query: string) => boolean;
 #### Usage
 
 ```tsx
-import { useSSRSafeWindow, useIsClient, useSSRSafeMediaQuery } from 'liquidify';
+import { useSSRSafeWindow, useIsClient, useSSRSafeMediaQuery } from "liquidify";
 
 function MyComponent() {
   const isClient = useIsClient();
-  const isMobile = useSSRSafeMediaQuery('(max-width: 768px)');
-  const windowWidth = useSSRSafeWindow(w => w.innerWidth, 0);
+  const isMobile = useSSRSafeMediaQuery("(max-width: 768px)");
+  const windowWidth = useSSRSafeWindow((w) => w.innerWidth, 0);
 
   if (!isClient) {
     return <div>Loading...</div>;
@@ -914,7 +934,7 @@ function MyComponent() {
 
   return (
     <div>
-      Device: {isMobile ? 'Mobile' : 'Desktop'}
+      Device: {isMobile ? "Mobile" : "Desktop"}
       Width: {windowWidth}px
     </div>
   );
@@ -941,13 +961,13 @@ const usePerformanceMonitoring: (componentName: string) => PerformanceMetrics;
 #### Usage
 
 ```tsx
-import { usePerformanceMonitoring } from 'liquidify';
+import { usePerformanceMonitoring } from "liquidify";
 
 function MyComponent() {
-  const metrics = usePerformanceMonitoring('MyComponent');
+  const metrics = usePerformanceMonitoring("MyComponent");
 
-  console.log('Performance:', metrics);
-  
+  console.log("Performance:", metrics);
+
   return <div>Component content</div>;
 }
 ```
@@ -967,16 +987,16 @@ const cn: (...classes: (string | undefined | null | boolean)[]) => string;
 #### Usage
 
 ```tsx
-import { cn } from 'liquidify';
+import { cn } from "liquidify";
 
 function MyComponent({ className, variant, disabled }) {
   return (
     <div
       className={cn(
-        'base-classes',
-        variant === 'primary' && 'primary-classes',
-        disabled && 'disabled-classes',
-        className
+        "base-classes",
+        variant === "primary" && "primary-classes",
+        disabled && "disabled-classes",
+        className,
       )}
     >
       Content
@@ -1004,34 +1024,34 @@ interface VariantConfig {
 #### Usage
 
 ```tsx
-import { glassVariants } from 'liquidify';
+import { glassVariants } from "liquidify";
 
 const buttonVariants = glassVariants({
   base: [
-    'inline-flex items-center justify-center',
-    'backdrop-blur-md bg-white/10',
-    'border border-white/20',
-    'transition-all duration-200'
+    "inline-flex items-center justify-center",
+    "backdrop-blur-md bg-white/10",
+    "border border-white/20",
+    "transition-all duration-200",
   ],
   variants: {
     variant: {
-      primary: 'bg-blue-500/20 border-blue-400/30 text-blue-100',
-      secondary: 'bg-gray-500/20 border-gray-400/30 text-gray-100'
+      primary: "bg-blue-500/20 border-blue-400/30 text-blue-100",
+      secondary: "bg-gray-500/20 border-gray-400/30 text-gray-100",
     },
     size: {
-      sm: 'h-8 px-3 text-sm',
-      md: 'h-10 px-4 text-base',
-      lg: 'h-12 px-6 text-lg'
-    }
+      sm: "h-8 px-3 text-sm",
+      md: "h-10 px-4 text-base",
+      lg: "h-12 px-6 text-lg",
+    },
   },
   defaultVariants: {
-    variant: 'primary',
-    size: 'md'
-  }
+    variant: "primary",
+    size: "md",
+  },
 });
 
 // Usage
-const className = buttonVariants({ variant: 'secondary', size: 'lg' });
+const className = buttonVariants({ variant: "secondary", size: "lg" });
 ```
 
 ---
@@ -1045,14 +1065,15 @@ LiqUIdify provides pre-configured bundles for different use cases:
 Essential components for basic applications (~15KB).
 
 ```tsx
-import { CoreComponents } from 'liquidify/core';
+import { CoreComponents } from "liquidify/core";
 // or
-import { GlassButton, GlassCard, GlassInput } from 'liquidify/core';
+import { GlassButton, GlassCard, GlassInput } from "liquidify/core";
 ```
 
 **Includes:**
+
 - GlassButton
-- GlassCard  
+- GlassCard
 - GlassInput
 - GlassErrorBoundary
 - GlassFocusTrap
@@ -1066,12 +1087,13 @@ import { GlassButton, GlassCard, GlassInput } from 'liquidify/core';
 Complete form components and utilities (~8KB).
 
 ```tsx
-import { FormComponents } from 'liquidify/forms';
-// or  
-import { GlassCheckbox, GlassSelect, GlassTextarea } from 'liquidify/forms';
+import { FormComponents } from "liquidify/forms";
+// or
+import { GlassCheckbox, GlassSelect, GlassTextarea } from "liquidify/forms";
 ```
 
 **Includes:**
+
 - GlassFormField
 - GlassCheckbox
 - GlassCheckboxGroup
@@ -1092,10 +1114,11 @@ import { GlassCheckbox, GlassSelect, GlassTextarea } from 'liquidify/forms';
 Navigation and layout components (~6KB).
 
 ```tsx
-import { NavigationComponents } from 'liquidify/navigation';
+import { NavigationComponents } from "liquidify/navigation";
 ```
 
 **Includes:**
+
 - GlassTabs
 - GlassBreadcrumbs
 - GlassMobileNav
@@ -1109,10 +1132,11 @@ import { NavigationComponents } from 'liquidify/navigation';
 User feedback and notification components (~5KB).
 
 ```tsx
-import { FeedbackComponents } from 'liquidify/feedback';
+import { FeedbackComponents } from "liquidify/feedback";
 ```
 
 **Includes:**
+
 - GlassToast
 - GlassProgress
 - GlassLoading
@@ -1127,10 +1151,11 @@ import { FeedbackComponents } from 'liquidify/feedback';
 Complex components for data-heavy applications (~12KB).
 
 ```tsx
-import { AdvancedComponents } from 'liquidify/advanced';
+import { AdvancedComponents } from "liquidify/advanced";
 ```
 
 **Includes:**
+
 - GlassChart (Line, Bar, Donut)
 - GlassTable
 - GlassPlayground
@@ -1144,10 +1169,11 @@ import { AdvancedComponents } from 'liquidify/advanced';
 Accessibility-focused components and utilities (~4KB).
 
 ```tsx
-import { AccessibilityComponents } from 'liquidify/accessibility';
+import { AccessibilityComponents } from "liquidify/accessibility";
 ```
 
 **Includes:**
+
 - GlassAccessibleDemo
 - GlassFocusDemo
 - GlassFocusTrap
@@ -1202,7 +1228,7 @@ interface GlassComponentProps {
 }
 
 interface GlassEffectConfig {
-  intensity?: 'light' | 'medium' | 'strong';
+  intensity?: "light" | "medium" | "strong";
   blur?: boolean;
   backdrop?: boolean;
   opacity?: number;
@@ -1235,7 +1261,9 @@ type FocusHandler = (event: React.FocusEvent) => void;
 // Form-specific handlers
 type FormSubmitHandler = (event: React.FormEvent) => void;
 type InputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => void;
-type TextareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+type TextareaChangeHandler = (
+  event: React.ChangeEvent<HTMLTextAreaElement>,
+) => void;
 ```
 
 ---
@@ -1245,8 +1273,8 @@ type TextareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => 
 ### Provider Setup
 
 ```tsx
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return (
@@ -1262,22 +1290,22 @@ function App() {
 ### Custom Theme Creation
 
 ```tsx
-import { createTheme } from 'liquidify';
+import { createTheme } from "liquidify";
 
 const customTheme = createTheme({
   colors: {
-    primary: '#667eea',
-    secondary: '#764ba2',
+    primary: "#667eea",
+    secondary: "#764ba2",
     glass: {
-      background: 'rgba(255, 255, 255, 0.1)',
-      border: 'rgba(255, 255, 255, 0.2)',
-      blur: '10px'
-    }
+      background: "rgba(255, 255, 255, 0.1)",
+      border: "rgba(255, 255, 255, 0.2)",
+      blur: "10px",
+    },
   },
   animations: {
-    duration: '0.3s',
-    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-  }
+    duration: "0.3s",
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+  },
 });
 ```
 
@@ -1286,7 +1314,7 @@ const customTheme = createTheme({
 ## 📋 Version Compatibility
 
 | LiqUIdify | React | TypeScript | Node.js |
-|-----------|-------|------------|---------|
+| --------- | ----- | ---------- | ------- |
 | 1.x       | 18-19 | 5.0+       | 18+     |
 
 ---

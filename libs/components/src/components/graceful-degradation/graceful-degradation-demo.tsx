@@ -1,7 +1,7 @@
-import type React from 'react';
-import { useState } from 'react';
+import type React from "react";
+import { useState } from "react";
 
-import { useDegradationAware } from '../../utils/graceful-degradation';
+import { useDegradationAware } from "../../utils/graceful-degradation";
 import {
   CSSAccordion,
   CSSModal,
@@ -10,8 +10,8 @@ import {
   GracefulComponent,
   GracefulImage,
   GracefulInteractive,
-} from './graceful-component';
-import '../../styles/graceful-degradation.css';
+} from "./graceful-component";
+import "../../styles/graceful-degradation.css";
 
 export const GracefulDegradationDemo: React.FC = () => {
   const {
@@ -28,7 +28,7 @@ export const GracefulDegradationDemo: React.FC = () => {
   if (isLoading) {
     return (
       <div className="graceful-degradation-demo">
-        <div className="css-skeleton-fallback" style={{ height: '200px' }} />
+        <div className="css-skeleton-fallback" style={{ height: "200px" }} />
       </div>
     );
   }
@@ -46,7 +46,7 @@ export const GracefulDegradationDemo: React.FC = () => {
           <div>
             <h3 className="font-medium">Network</h3>
 
-            <p>Status: {networkStatus.online ? 'Online' : 'Offline'}</p>
+            <p>Status: {networkStatus.online ? "Online" : "Offline"}</p>
           </div>
 
           <div>
@@ -54,9 +54,9 @@ export const GracefulDegradationDemo: React.FC = () => {
 
             <p>Level: {performanceLevel}</p>
 
-            <p>Reduced Motion: {prefersReducedMotion ? 'Yes' : 'No'}</p>
+            <p>Reduced Motion: {prefersReducedMotion ? "Yes" : "No"}</p>
 
-            <p>Reduced Data: {prefersReducedData ? 'Yes' : 'No'}</p>
+            <p>Reduced Data: {prefersReducedData ? "Yes" : "No"}</p>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ export const GracefulDegradationDemo: React.FC = () => {
           onClick={() => setShowDetails(!showDetails)}
           className="mb-4 rounded bg-blue-500 px-4 py-2 text-white"
         >
-          {showDetails ? 'Hide' : 'Show'} Details
+          {showDetails ? "Hide" : "Show"} Details
         </button>
 
         {showDetails && featureSupport && (
@@ -80,10 +80,10 @@ export const GracefulDegradationDemo: React.FC = () => {
               <div
                 key={feature}
                 className={`rounded p-2 ${
-                  supported ? 'bg-green-100' : 'bg-red-100'
+                  supported ? "bg-green-100" : "bg-red-100"
                 }`}
               >
-                {feature}: {supported ? '✅' : '❌'}
+                {feature}: {supported ? "✅" : "❌"}
               </div>
             ))}
           </div>
@@ -183,13 +183,13 @@ export const GracefulDegradationDemo: React.FC = () => {
             <CSSAccordion
               items={[
                 {
-                  title: 'Section 1',
+                  title: "Section 1",
                   content: (
                     <p>This content is accessible even without JavaScript</p>
                   ),
                 },
                 {
-                  title: 'Section 2',
+                  title: "Section 2",
 
                   content: <p>Click the labels to expand/collapse sections</p>,
                 },
@@ -205,14 +205,14 @@ export const GracefulDegradationDemo: React.FC = () => {
             <CSSTabs
               tabs={[
                 {
-                  id: 'tab1',
-                  label: 'Tab 1',
+                  id: "tab1",
+                  label: "Tab 1",
 
                   content: <p>Content for tab 1 - works without JavaScript</p>,
                 },
                 {
-                  id: 'tab2',
-                  label: 'Tab 2',
+                  id: "tab2",
+                  label: "Tab 2",
 
                   content: <p>Content for tab 2 - uses CSS :target selector</p>,
                 },
@@ -315,7 +315,7 @@ export const GracefulDegradationDemo: React.FC = () => {
 
           <div
             className="css-skeleton-fallback"
-            style={{ height: '60px', width: '100%' }}
+            style={{ height: "60px", width: "100%" }}
           />
         </div>
       </section>

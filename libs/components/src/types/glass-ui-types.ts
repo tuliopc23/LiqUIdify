@@ -6,15 +6,15 @@
  * providing type safety, developer experience, and runtime validation.
  */
 
-import type { CSSProperties } from 'react';
+import type { CSSProperties } from "react";
 import type {
   AnimationDuration,
   GlassBlur,
   GlassColor,
   GlassOpacity,
   ThemeName,
-} from './branded';
-import { createGlassBlur, createGlassOpacity } from './branded';
+} from "./branded";
+import { createGlassBlur, createGlassOpacity } from "./branded";
 
 /**
  * Deep partial utility type
@@ -99,7 +99,7 @@ export interface GlassUIBaseProps {
   style?: CSSProperties;
 
   /** Glass effect intensity */
-  glassIntensity?: 'weak' | 'medium' | 'strong';
+  glassIntensity?: "weak" | "medium" | "strong";
 
   /** Disable glass effects */
   disableGlass?: boolean;
@@ -111,10 +111,10 @@ export interface GlassUIBaseProps {
   testId?: string;
 
   /** Accessibility label */
-  'aria-label'?: string;
+  "aria-label"?: string;
 
   /** Accessibility description */
-  'aria-describedby'?: string;
+  "aria-describedby"?: string;
 }
 
 /**
@@ -214,48 +214,48 @@ export interface GlassEffectConfig {
  * Consistent style variant definitions
  */
 export type ComponentVariant =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'ghost'
-  | 'outline'
-  | 'destructive'
-  | 'success'
-  | 'warning'
-  | 'info';
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "ghost"
+  | "outline"
+  | "destructive"
+  | "success"
+  | "warning"
+  | "info";
 
 /**
  * Component sizes
  * Consistent size definitions
  */
-export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 /**
  * Animation states
  * Common animation state types
  */
-export type AnimationState = 'entering' | 'entered' | 'exiting' | 'exited';
+export type AnimationState = "entering" | "entered" | "exiting" | "exited";
 
 /**
  * Layout direction
  */
-export type Direction = 'horizontal' | 'vertical';
+export type Direction = "horizontal" | "vertical";
 
 /**
  * Alignment options
  */
-export type Alignment = 'start' | 'center' | 'end' | 'stretch';
+export type Alignment = "start" | "center" | "end" | "stretch";
 
 /**
  * Justification options
  */
 export type Justification =
-  | 'start'
-  | 'center'
-  | 'end'
-  | 'between'
-  | 'around'
-  | 'evenly';
+  | "start"
+  | "center"
+  | "end"
+  | "between"
+  | "around"
+  | "evenly";
 
 /**
  * Responsive prop utility
@@ -279,13 +279,13 @@ export type Responsive<T> =
  * Type-safe CSS custom properties
  */
 export interface GlassCSSVariables {
-  '--glass-bg': GlassColor;
-  '--glass-border': GlassColor;
-  '--glass-blur': string;
-  '--glass-opacity': number;
-  '--glass-saturation': string;
-  '--glass-shadow': string;
-  '--glass-transition': string;
+  "--glass-bg": GlassColor;
+  "--glass-border": GlassColor;
+  "--glass-blur": string;
+  "--glass-opacity": number;
+  "--glass-saturation": string;
+  "--glass-shadow": string;
+  "--glass-transition": string;
 }
 
 /**
@@ -297,18 +297,18 @@ export const typeGuards = {
    */
   isComponentVariant: (value: unknown): value is ComponentVariant => {
     const variants: Array<ComponentVariant> = [
-      'primary',
-      'secondary',
-      'tertiary',
-      'ghost',
-      'outline',
-      'destructive',
-      'success',
-      'warning',
-      'info',
+      "primary",
+      "secondary",
+      "tertiary",
+      "ghost",
+      "outline",
+      "destructive",
+      "success",
+      "warning",
+      "info",
     ];
     return (
-      typeof value === 'string' && variants.includes(value as ComponentVariant)
+      typeof value === "string" && variants.includes(value as ComponentVariant)
     );
   },
 
@@ -316,17 +316,17 @@ export const typeGuards = {
    * Check if value is a valid component size
    */
   isComponentSize: (value: unknown): value is ComponentSize => {
-    const sizes: Array<ComponentSize> = ['xs', 'sm', 'md', 'lg', 'xl'];
-    return typeof value === 'string' && sizes.includes(value as ComponentSize);
+    const sizes: Array<ComponentSize> = ["xs", "sm", "md", "lg", "xl"];
+    return typeof value === "string" && sizes.includes(value as ComponentSize);
   },
 
   /**
    * Check if value is a responsive prop
    */
   isResponsiveProp: <T>(value: unknown): value is Responsive<T> => {
-    if (typeof value === 'object' && value !== null) {
+    if (typeof value === "object" && value !== null) {
       const keys = Object.keys(value);
-      const validKeys = new Set(['sm', 'md', 'lg', 'xl']);
+      const validKeys = new Set(["sm", "md", "lg", "xl"]);
       return keys.every((key) => validKeys.has(key));
     }
     return true; // Non-object values are valid (non-responsive)
@@ -336,13 +336,13 @@ export const typeGuards = {
    * Check if value has glass effect config
    */
   hasGlassEffect: (
-    value: unknown
+    value: unknown,
   ): value is { glassEffect: GlassEffectConfig } => {
     return (
-      typeof value === 'object' &&
+      typeof value === "object" &&
       value !== null &&
-      'glassEffect' in value &&
-      typeof (value as unknown).glassEffect === 'object'
+      "glassEffect" in value &&
+      typeof (value as unknown).glassEffect === "object"
     );
   },
 };
@@ -381,11 +381,11 @@ export const propValidators = {
    */
   validateResponsiveProp: <T>(
     property: Responsive<T>,
-    validator: (value: T) => boolean
+    validator: (value: T) => boolean,
   ): boolean => {
-    if (typeof property === 'object' && property !== null) {
+    if (typeof property === "object" && property !== null) {
       return Object.values(property).every(
-        (value) => value === undefined || validator(value as T)
+        (value) => value === undefined || validator(value as T),
       );
     }
     return validator(property as T);
@@ -400,20 +400,20 @@ export const styleGenerators = {
    * Generate CSS variables for glass effect
    */
   generateGlassVariables: (
-    config: Partial<GlassEffectConfig>
+    config: Partial<GlassEffectConfig>,
   ): Partial<GlassCSSVariables> => {
     const variables: Partial<GlassCSSVariables> = {};
 
     if (config.opacity) {
-      variables['--glass-opacity'] = config.opacity as number;
+      variables["--glass-opacity"] = config.opacity as number;
     }
 
     if (config.blur) {
-      variables['--glass-blur'] = `blur(${config.blur}px)`;
+      variables["--glass-blur"] = `blur(${config.blur}px)`;
     }
 
     if (config.saturation) {
-      variables['--glass-saturation'] = `saturate(${config.saturation}%)`;
+      variables["--glass-saturation"] = `saturate(${config.saturation}%)`;
     }
 
     return variables;
@@ -424,9 +424,9 @@ export const styleGenerators = {
    */
   generateResponsiveStyles: <T>(
     property: Responsive<T>,
-    generator: (value: T) => CSSProperties
+    generator: (value: T) => CSSProperties,
   ): CSSProperties => {
-    if (typeof property === 'object' && property !== null) {
+    if (typeof property === "object" && property !== null) {
       // This would typically integrate with a CSS-in-JS solution
       // For now, return base styles
       const baseValue = (property as unknown).sm || (property as unknown).md;

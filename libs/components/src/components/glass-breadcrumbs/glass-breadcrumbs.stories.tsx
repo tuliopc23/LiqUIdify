@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   CreditCard,
   File,
@@ -7,55 +7,55 @@ import {
   Settings,
   ShoppingCart,
   User,
-} from 'lucide-react';
-import React from 'react';
-import { type BreadcrumbItem, GlassBreadcrumbs } from './glass-breadcrumbs';
+} from "lucide-react";
+import React from "react";
+import { type BreadcrumbItem, GlassBreadcrumbs } from "./glass-breadcrumbs";
 
 const meta = {
-  title: 'Components/Navigation/GlassBreadcrumbs',
+  title: "Components/Navigation/GlassBreadcrumbs",
   component: GlassBreadcrumbs,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A flexible breadcrumb navigation component with glassmorphism styling, supporting icons, truncation, and smooth animations.',
+          "A flexible breadcrumb navigation component with glassmorphism styling, supporting icons, truncation, and smooth animations.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     items: {
-      control: 'object',
+      control: "object",
       description:
-        'Array of breadcrumb items with label, href, onClick, and optional icon',
+        "Array of breadcrumb items with label, href, onClick, and optional icon",
     },
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'Size variant affecting padding and text size',
+      control: "select",
+      options: ["sm", "md", "lg"],
+      description: "Size variant affecting padding and text size",
     },
     variant: {
-      control: 'select',
-      options: ['default', 'solid', 'ghost'],
-      description: 'Visual style variant of the breadcrumbs',
+      control: "select",
+      options: ["default", "solid", "ghost"],
+      description: "Visual style variant of the breadcrumbs",
     },
     separator: {
-      control: 'text',
-      description: 'Custom separator element between breadcrumb items',
+      control: "text",
+      description: "Custom separator element between breadcrumb items",
     },
     showHome: {
-      control: 'boolean',
-      description: 'Show home icon as first breadcrumb',
+      control: "boolean",
+      description: "Show home icon as first breadcrumb",
     },
     maxItems: {
-      control: 'number',
+      control: "number",
       description:
-        'Maximum number of items to display (truncates middle items)',
+        "Maximum number of items to display (truncates middle items)",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
 } satisfies Meta<typeof GlassBreadcrumbs>;
@@ -67,10 +67,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     items: [
-      { label: 'Products', href: '/products' },
-      { label: 'Electronics', href: '/products/electronics' },
-      { label: 'Laptops', href: '/products/electronics/laptops' },
-      { label: 'Gaming Laptops' },
+      { label: "Products", href: "/products" },
+      { label: "Electronics", href: "/products/electronics" },
+      { label: "Laptops", href: "/products/electronics/laptops" },
+      { label: "Gaming Laptops" },
     ],
   },
 };
@@ -80,20 +80,20 @@ export const WithClickHandlers: Story = {
   args: {
     items: [
       {
-        label: 'Dashboard',
-        onClick: () => console.log('Navigate to Dashboard'),
+        label: "Dashboard",
+        onClick: () => console.log("Navigate to Dashboard"),
       },
       {
-        label: 'Analytics',
-        onClick: () => console.log('Navigate to Analytics'),
+        label: "Analytics",
+        onClick: () => console.log("Navigate to Analytics"),
       },
       {
-        label: 'Reports',
-        onClick: () => console.log('Navigate to Reports'),
+        label: "Reports",
+        onClick: () => console.log("Navigate to Reports"),
       },
-      { label: 'Monthly Report' },
+      { label: "Monthly Report" },
     ],
-    onHomeClick: () => console.log('Navigate to Home'),
+    onHomeClick: () => console.log("Navigate to Home"),
   },
 };
 
@@ -102,18 +102,18 @@ export const WithIcons: Story = {
   args: {
     items: [
       {
-        label: 'Settings',
+        label: "Settings",
         icon: <Settings className="h-4 w-4" />,
-        href: '/settings',
+        href: "/settings",
       },
       {
-        label: 'Account',
+        label: "Account",
         icon: <User className="h-4 w-4" />,
-        href: '/settings/account',
+        href: "/settings/account",
       },
       {
-        label: 'Security',
-        href: '/settings/account/security',
+        label: "Security",
+        href: "/settings/account/security",
       },
     ],
   },
@@ -128,9 +128,9 @@ export const Sizes: Story = {
         <GlassBreadcrumbs
           size="sm"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Products', href: '/products' },
-            { label: 'Details' },
+            { label: "Home", href: "/" },
+            { label: "Products", href: "/products" },
+            { label: "Details" },
           ]}
         />
       </div>
@@ -141,9 +141,9 @@ export const Sizes: Story = {
         <GlassBreadcrumbs
           size="md"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Products', href: '/products' },
-            { label: 'Details' },
+            { label: "Home", href: "/" },
+            { label: "Products", href: "/products" },
+            { label: "Details" },
           ]}
         />
       </div>
@@ -152,9 +152,9 @@ export const Sizes: Story = {
         <GlassBreadcrumbs
           size="lg"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Products', href: '/products' },
-            { label: 'Details' },
+            { label: "Home", href: "/" },
+            { label: "Products", href: "/products" },
+            { label: "Details" },
           ]}
         />
       </div>
@@ -171,9 +171,9 @@ export const Variants: Story = {
         <GlassBreadcrumbs
           variant="default"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Documentation', href: '/docs' },
-            { label: 'Components' },
+            { label: "Home", href: "/" },
+            { label: "Documentation", href: "/docs" },
+            { label: "Components" },
           ]}
         />
       </div>
@@ -182,9 +182,9 @@ export const Variants: Story = {
         <GlassBreadcrumbs
           variant="solid"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Documentation', href: '/docs' },
-            { label: 'Components' },
+            { label: "Home", href: "/" },
+            { label: "Documentation", href: "/docs" },
+            { label: "Components" },
           ]}
         />
       </div>
@@ -193,9 +193,9 @@ export const Variants: Story = {
         <GlassBreadcrumbs
           variant="ghost"
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Documentation', href: '/docs' },
-            { label: 'Components' },
+            { label: "Home", href: "/" },
+            { label: "Documentation", href: "/docs" },
+            { label: "Components" },
           ]}
         />
       </div>
@@ -208,9 +208,9 @@ export const NoHomeIcon: Story = {
   args: {
     showHome: false,
     items: [
-      { label: 'Categories', href: '/categories' },
-      { label: 'Technology', href: '/categories/tech' },
-      { label: 'Programming' },
+      { label: "Categories", href: "/categories" },
+      { label: "Technology", href: "/categories/tech" },
+      { label: "Programming" },
     ],
   },
 };
@@ -221,25 +221,25 @@ export const CustomSeparator: Story = {
     <div className="w-[600px] space-y-4">
       <GlassBreadcrumbs
         items={[
-          { label: 'Step 1', href: '#' },
-          { label: 'Step 2', href: '#' },
-          { label: 'Step 3' },
+          { label: "Step 1", href: "#" },
+          { label: "Step 2", href: "#" },
+          { label: "Step 3" },
         ]}
         separator={<span className="mx-2 text-white/40">→</span>}
       />
       <GlassBreadcrumbs
         items={[
-          { label: 'Level 1', href: '#' },
-          { label: 'Level 2', href: '#' },
-          { label: 'Level 3' },
+          { label: "Level 1", href: "#" },
+          { label: "Level 2", href: "#" },
+          { label: "Level 3" },
         ]}
         separator={<span className="mx-2 text-white/40">/</span>}
       />
       <GlassBreadcrumbs
         items={[
-          { label: 'First', href: '#' },
-          { label: 'Second', href: '#' },
-          { label: 'Third' },
+          { label: "First", href: "#" },
+          { label: "Second", href: "#" },
+          { label: "Third" },
         ]}
         separator={<span className="mx-2 text-white/40">•</span>}
       />
@@ -251,17 +251,17 @@ export const CustomSeparator: Story = {
 export const WithTruncation: Story = {
   render: () => {
     const longPath = [
-      { label: 'Home', href: '/' },
-      { label: 'Documents', href: '/documents' },
-      { label: 'Projects', href: '/documents/projects' },
-      { label: '2024', href: '/documents/projects/2024' },
-      { label: 'Q1', href: '/documents/projects/2024/q1' },
-      { label: 'Reports', href: '/documents/projects/2024/q1/reports' },
+      { label: "Home", href: "/" },
+      { label: "Documents", href: "/documents" },
+      { label: "Projects", href: "/documents/projects" },
+      { label: "2024", href: "/documents/projects/2024" },
+      { label: "Q1", href: "/documents/projects/2024/q1" },
+      { label: "Reports", href: "/documents/projects/2024/q1/reports" },
       {
-        label: 'Financial',
-        href: '/documents/projects/2024/q1/reports/financial',
+        label: "Financial",
+        href: "/documents/projects/2024/q1/reports/financial",
       },
-      { label: 'Summary.pdf' },
+      { label: "Summary.pdf" },
     ];
 
     return (
@@ -299,13 +299,13 @@ export const RealWorldExamples: Story = {
         <GlassBreadcrumbs
           items={[
             {
-              label: 'Shop',
+              label: "Shop",
               icon: <ShoppingCart className="h-4 w-4" />,
-              href: '/shop',
+              href: "/shop",
             },
-            { label: "Men's Clothing", href: '/shop/mens' },
-            { label: 'Jackets', href: '/shop/mens/jackets' },
-            { label: 'Winter Collection' },
+            { label: "Men's Clothing", href: "/shop/mens" },
+            { label: "Jackets", href: "/shop/mens/jackets" },
+            { label: "Winter Collection" },
           ]}
         />
       </div>
@@ -315,18 +315,18 @@ export const RealWorldExamples: Story = {
         <h4 className="mb-3 font-semibold text-white">File System</h4>
         <GlassBreadcrumbs
           items={[
-            { label: 'Root', icon: <Folder className="h-4 w-4" />, href: '/' },
+            { label: "Root", icon: <Folder className="h-4 w-4" />, href: "/" },
             {
-              label: 'Documents',
+              label: "Documents",
               icon: <Folder className="h-4 w-4" />,
-              href: '/documents',
+              href: "/documents",
             },
             {
-              label: 'Reports',
+              label: "Reports",
               icon: <Folder className="h-4 w-4" />,
-              href: '/documents/reports',
+              href: "/documents/reports",
             },
-            { label: 'Q4-2024.pdf', icon: <File className="h-4 w-4" /> },
+            { label: "Q4-2024.pdf", icon: <File className="h-4 w-4" /> },
           ]}
           showHome={false}
         />
@@ -339,16 +339,16 @@ export const RealWorldExamples: Story = {
           variant="ghost"
           items={[
             {
-              label: 'Cart',
+              label: "Cart",
               icon: <ShoppingCart className="h-4 w-4" />,
-              href: '/cart',
+              href: "/cart",
             },
             {
-              label: 'Shipping',
+              label: "Shipping",
               icon: <Package className="h-4 w-4" />,
-              href: '/checkout/shipping',
+              href: "/checkout/shipping",
             },
-            { label: 'Payment', icon: <CreditCard className="h-4 w-4" /> },
+            { label: "Payment", icon: <CreditCard className="h-4 w-4" /> },
           ]}
           separator={<span className="mx-3 text-white/40">→</span>}
           showHome={false}
@@ -361,10 +361,10 @@ export const RealWorldExamples: Story = {
         <GlassBreadcrumbs
           size="sm"
           items={[
-            { label: 'Dashboard', href: '/admin' },
-            { label: 'Users', href: '/admin/users' },
-            { label: 'Permissions', href: '/admin/users/permissions' },
-            { label: 'Edit Role' },
+            { label: "Dashboard", href: "/admin" },
+            { label: "Users", href: "/admin/users" },
+            { label: "Permissions", href: "/admin/users/permissions" },
+            { label: "Edit Role" },
           ]}
         />
       </div>
@@ -375,7 +375,7 @@ export const RealWorldExamples: Story = {
 // Interactive demo
 export const InteractiveDemo: Story = {
   render: () => {
-    const [path, setPath] = React.useState<Array<string>>(['Home']);
+    const [path, setPath] = React.useState<Array<string>>(["Home"]);
 
     const items: Array<BreadcrumbItem> = path.map((label, index) => ({
       label,
@@ -396,28 +396,28 @@ export const InteractiveDemo: Story = {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => addLevel('Products')}
+            onClick={() => addLevel("Products")}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Add "Products"
           </button>
           <button
             type="button"
-            onClick={() => addLevel('Services')}
+            onClick={() => addLevel("Services")}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Add "Services"
           </button>
           <button
             type="button"
-            onClick={() => addLevel('About')}
+            onClick={() => addLevel("About")}
             className="rounded-lg bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/20"
           >
             Add "About"
           </button>
           <button
             type="button"
-            onClick={() => setPath(['Home'])}
+            onClick={() => setPath(["Home"])}
             className="rounded-lg bg-red-500/20 px-3 py-1 text-sm text-white hover:bg-red-500/30"
           >
             Reset
@@ -443,10 +443,10 @@ export const ThemeShowcase: Story = {
         </h3>
         <GlassBreadcrumbs
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Documentation', href: '/docs' },
-            { label: 'Components', href: '/docs/components' },
-            { label: 'Breadcrumbs' },
+            { label: "Home", href: "/" },
+            { label: "Documentation", href: "/docs" },
+            { label: "Components", href: "/docs/components" },
+            { label: "Breadcrumbs" },
           ]}
         />
       </div>
@@ -457,10 +457,10 @@ export const ThemeShowcase: Story = {
         </h3>
         <GlassBreadcrumbs
           items={[
-            { label: 'Home', href: '/' },
-            { label: 'Documentation', href: '/docs' },
-            { label: 'Components', href: '/docs/components' },
-            { label: 'Breadcrumbs' },
+            { label: "Home", href: "/" },
+            { label: "Documentation", href: "/docs" },
+            { label: "Components", href: "/docs/components" },
+            { label: "Breadcrumbs" },
           ]}
         />
       </div>
@@ -468,7 +468,7 @@ export const ThemeShowcase: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };
@@ -489,10 +489,10 @@ export const AccessibilityDemo: Story = {
           </h4>
           <GlassBreadcrumbs
             items={[
-              { label: 'Store', href: '/store' },
-              { label: 'Books', href: '/store/books' },
-              { label: 'Fiction', href: '/store/books/fiction' },
-              { label: 'Best Sellers' },
+              { label: "Store", href: "/store" },
+              { label: "Books", href: "/store/books" },
+              { label: "Fiction", href: "/store/books/fiction" },
+              { label: "Best Sellers" },
             ]}
           />
           <p className="mt-2 text-white/60 text-xs">
@@ -507,14 +507,14 @@ export const AccessibilityDemo: Story = {
           </h4>
           <GlassBreadcrumbs
             items={[
-              { label: 'Admin', onClick: () => alert('Navigate to Admin') },
+              { label: "Admin", onClick: () => alert("Navigate to Admin") },
               {
-                label: 'Settings',
-                onClick: () => alert('Navigate to Settings'),
+                label: "Settings",
+                onClick: () => alert("Navigate to Settings"),
               },
-              { label: 'Security' },
+              { label: "Security" },
             ]}
-            onHomeClick={() => alert('Navigate to Home')}
+            onHomeClick={() => alert("Navigate to Home")}
           />
           <p className="mt-2 text-white/60 text-xs">
             Try using Tab to navigate through items and Enter/Space to activate.

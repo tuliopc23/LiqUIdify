@@ -1,18 +1,18 @@
-import { ArrowRight, Clock, Search, TrendingUp, X } from 'lucide-react';
-import type React from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowRight, Clock, Search, TrendingUp, X } from "lucide-react";
+import type React from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   cn,
   focusRing,
   getGlassClass,
   microInteraction,
-} from '@/core/utils/classname';
+} from "@/core/utils/classname";
 
 export interface SearchSuggestion {
   id: string;
   text: string;
-  type: 'recent' | 'suggestion' | 'trending';
+  type: "recent" | "suggestion" | "trending";
   category?: string;
   count?: number;
 }
@@ -30,7 +30,7 @@ export interface GlassSearchProps {
 }
 
 export const GlassSearch: React.FC<GlassSearchProps> = ({
-  placeholder = 'Search...',
+  placeholder = "Search...",
   suggestions = [],
   recentSearches = [],
   onSearch,
@@ -38,7 +38,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
   className,
   maxSuggestions = 8,
 }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,7 +49,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       suggestions
         .filter((s) => s.text.toLowerCase().includes(query.toLowerCase()))
         .slice(0, maxSuggestions),
-    [suggestions, query, maxSuggestions]
+    [suggestions, query, maxSuggestions],
   );
 
   const recentFiltered = useMemo(
@@ -57,7 +57,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       recentSearches
         .filter((r) => r.toLowerCase().includes(query.toLowerCase()))
         .slice(0, 3),
-    [recentSearches, query]
+    [recentSearches, query],
   );
 
   const allResults = useMemo(
@@ -65,11 +65,11 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       ...recentFiltered.map((r) => ({
         id: r,
         text: r,
-        type: 'recent' as const,
+        type: "recent" as const,
       })),
       ...filteredSuggestions,
     ],
-    [recentFiltered, filteredSuggestions]
+    [recentFiltered, filteredSuggestions],
   );
 
   const handleSearch = useCallback(() => {
@@ -87,7 +87,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       setIsOpen(false);
       setSelectedIndex(-1);
     },
-    [onSuggestionClick]
+    [onSuggestionClick],
   );
 
   useEffect(() => {
@@ -107,19 +107,19 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       }
 
       switch (event.key) {
-        case 'ArrowDown': {
+        case "ArrowDown": {
           event.preventDefault();
           setSelectedIndex((previous) =>
-            Math.min(previous + 1, allResults.length - 1)
+            Math.min(previous + 1, allResults.length - 1),
           );
           break;
         }
-        case 'ArrowUp': {
+        case "ArrowUp": {
           event.preventDefault();
           setSelectedIndex((previous) => Math.max(previous - 1, -1));
           break;
         }
-        case 'Enter': {
+        case "Enter": {
           event.preventDefault();
           if (selectedIndex >= 0 && allResults[selectedIndex]) {
             handleSelect(allResults[selectedIndex]);
@@ -128,7 +128,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           }
           break;
         }
-        case 'Escape': {
+        case "Escape": {
           setIsOpen(false);
           setSelectedIndex(-1);
           inputRef.current?.blur();
@@ -137,25 +137,25 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       }
     };
 
-    if (typeof document !== 'undefined') {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleKeyDown);
+    if (typeof document !== "undefined") {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
     }
 
     return () => {
-      if (typeof document !== 'undefined') {
-        document.removeEventListener('mousedown', handleClickOutside);
-        document.removeEventListener('keydown', handleKeyDown);
+      if (typeof document !== "undefined") {
+        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("keydown", handleKeyDown);
       }
     };
   }, [isOpen, selectedIndex, allResults, query, handleSelect, handleSearch]);
 
-  const getIcon = (type: SearchSuggestion['type']) => {
+  const getIcon = (type: SearchSuggestion["type"]) => {
     switch (type) {
-      case 'recent': {
+      case "recent": {
         return <Clock className="h-4 w-4 text-[var(--text-tertiary)]" />;
       }
-      case 'trending': {
+      case "trending": {
         return <TrendingUp className="h-4 w-4 text-[var(--text-tertiary)]" />;
       }
       default: {
@@ -167,7 +167,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
   return (
     <div
       ref={containerRef}
-      className={cn('relative w-full max-w-md', className)}
+      className={cn("relative w-full max-w-md", className)}
     >
       {/* Search Input */}
 
@@ -187,26 +187,26 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
               e.preventDefault();
               handleSearch();
             }
           }}
           placeholder={placeholder}
           className={cn(
-            'w-full rounded-xl border py-3 pr-10 pl-10',
-            getGlassClass('default'),
+            "w-full rounded-xl border py-3 pr-10 pl-10",
+            getGlassClass("default"),
             focusRing,
-            'text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]',
-            'border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]',
-            microInteraction.gentle
+            "text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
+            "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
+            microInteraction.gentle,
           )}
         />
         {query && (
           <button
             type="button"
             onClick={() => {
-              setQuery('');
+              setQuery("");
               setIsOpen(false);
               inputRef.current?.focus();
             }}
@@ -221,9 +221,9 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
       {isOpen && (query || recentSearches.length > 0) && (
         <div
           className={cn(
-            'absolute top-full right-0 left-0 z-50 mt-2 rounded-xl border',
-            getGlassClass('elevated'),
-            'max-h-80 overflow-y-auto border-[var(--glass-border)]'
+            "absolute top-full right-0 left-0 z-50 mt-2 rounded-xl border",
+            getGlassClass("elevated"),
+            "max-h-80 overflow-y-auto border-[var(--glass-border)]",
           )}
         >
           {/* Recent Searches */}
@@ -237,12 +237,12 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
                   type="button"
                   key={recent}
                   onClick={() =>
-                    handleSelect({ id: recent, text: recent, type: 'recent' })
+                    handleSelect({ id: recent, text: recent, type: "recent" })
                   }
                   className={cn(
-                    'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left',
-                    'text-[var(--text-primary)] hover:bg-[var(--glass-bg)]',
-                    microInteraction.gentle
+                    "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left",
+                    "text-[var(--text-primary)] hover:bg-[var(--glass-bg)]",
+                    microInteraction.gentle,
                   )}
                 >
                   <Clock className="h-4 w-4 text-[var(--text-tertiary)]" />
@@ -267,10 +267,10 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
                   key={result.id}
                   onClick={() => handleSelect(result)}
                   className={cn(
-                    'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left',
-                    'text-[var(--text-primary)] hover:bg-[var(--glass-bg)]',
-                    selectedIndex === index && 'bg-[var(--glass-bg)]',
-                    microInteraction.gentle
+                    "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left",
+                    "text-[var(--text-primary)] hover:bg-[var(--glass-bg)]",
+                    selectedIndex === index && "bg-[var(--glass-bg)]",
+                    microInteraction.gentle,
                   )}
                 >
                   {getIcon(result.type)}
@@ -278,14 +278,14 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
                       <span className="truncate">{result.text}</span>
-                      {'count' in result && result.count && (
+                      {"count" in result && result.count && (
                         <span className="ml-2 text-[var(--text-tertiary)] text-xs">
                           {result.count.toLocaleString()}
                         </span>
                       )}
                     </div>
-                    {'category' in result &&
-                      typeof result.category === 'string' && (
+                    {"category" in result &&
+                      typeof result.category === "string" && (
                         <div className="mt-0.5 text-[var(--text-tertiary)] text-xs">
                           in {result.category}
                         </div>

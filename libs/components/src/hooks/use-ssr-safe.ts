@@ -3,7 +3,7 @@
  * Provides hooks for safely handling client-side functionality in SSR environments
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Hook to safely check if code is running on client side
@@ -23,13 +23,13 @@ export function useIsClient(): boolean {
  */
 export function useSSRSafeWindow<T = Window>(
   selector: (window: Window) => T,
-  fallback: T
+  fallback: T,
 ): T {
   const isClient = useIsClient();
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && typeof window !== 'undefined') {
+    if (isClient && typeof window !== "undefined") {
       try {
         setValue(selector(window));
       } catch {
@@ -46,13 +46,13 @@ export function useSSRSafeWindow<T = Window>(
  */
 export function useSSRSafeDocument<T = Document>(
   selector: (document: Document) => T,
-  fallback: T
+  fallback: T,
 ): T {
   const isClient = useIsClient();
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && typeof document !== 'undefined') {
+    if (isClient && typeof document !== "undefined") {
       try {
         setValue(selector(document));
       } catch {
@@ -69,13 +69,13 @@ export function useSSRSafeDocument<T = Document>(
  */
 export function useSSRSafeNavigator<T = Navigator>(
   selector: (navigator: Navigator) => T,
-  fallback: T
+  fallback: T,
 ): T {
   const isClient = useIsClient();
   const [value, setValue] = useState<T>(fallback);
 
   useEffect(() => {
-    if (isClient && typeof navigator !== 'undefined') {
+    if (isClient && typeof navigator !== "undefined") {
       try {
         setValue(selector(navigator));
       } catch {
@@ -92,14 +92,14 @@ export function useSSRSafeNavigator<T = Navigator>(
  */
 export function useSSRSafeLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T) => void] {
   const isClient = useIsClient();
   const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   // Initialize from localStorage if available
   useEffect(() => {
-    if (isClient && typeof window !== 'undefined') {
+    if (isClient && typeof window !== "undefined") {
       try {
         const item = localStorage.getItem(key);
         if (item) {
@@ -118,7 +118,7 @@ export function useSSRSafeLocalStorage<T>(
       setStoredValue(value);
 
       // Save to localStorage if client-side
-      if (isClient && typeof window !== 'undefined') {
+      if (isClient && typeof window !== "undefined") {
         localStorage.setItem(key, JSON.stringify(value));
       }
     } catch {
@@ -134,14 +134,14 @@ export function useSSRSafeLocalStorage<T>(
  */
 export function useSSRSafeSessionStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T) => void] {
   const isClient = useIsClient();
   const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   // Initialize from sessionStorage if available
   useEffect(() => {
-    if (isClient && typeof window !== 'undefined') {
+    if (isClient && typeof window !== "undefined") {
       try {
         const item = sessionStorage.getItem(key);
         if (item) {
@@ -160,7 +160,7 @@ export function useSSRSafeSessionStorage<T>(
       setStoredValue(value);
 
       // Save to sessionStorage if client-side
-      if (isClient && typeof window !== 'undefined') {
+      if (isClient && typeof window !== "undefined") {
         sessionStorage.setItem(key, JSON.stringify(value));
       }
     } catch {
@@ -177,13 +177,13 @@ export function useSSRSafeSessionStorage<T>(
 export function useHydrationSafe<T>(
   clientValue: T,
   serverValue: T,
-  options: { delay?: number; onMismatch?: (client: T, server: T) => void } = {}
+  options: { delay?: number; onMismatch?: (client: T, server: T) => void } = {},
 ): T {
   const { delay = 0, onMismatch } = options;
   const [value, setValue] = useState<T>(serverValue);
   const isClient = useIsClient();
   const _componentName = useRef(
-    `hydration-${Math.random().toString(36).slice(2, 9)}`
+    `hydration-${Math.random().toString(36).slice(2, 9)}`,
   ).current;
 
   useEffect(() => {
@@ -226,8 +226,8 @@ export function useSSRSafeMediaQuery(query: string): boolean {
       setMatches(event.matches);
     };
 
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
   }, [isClient, query]);
 
   return matches;
@@ -238,13 +238,13 @@ export function useSSRSafeMediaQuery(query: string): boolean {
  */
 export function useNetworkStatus(): {
   online: boolean;
-  effectiveType?: 'slow-2g' | '2g' | '3g' | '4g';
+  effectiveType?: "slow-2g" | "2g" | "3g" | "4g";
   saveData?: boolean;
 } {
   const isClient = useIsClient();
   const [online, setOnline] = useState(true);
   const [effectiveType, setEffectiveType] = useState<
-    'slow-2g' | '2g' | '3g' | '4g' | undefined
+    "slow-2g" | "2g" | "3g" | "4g" | undefined
   >(undefined);
   const [saveData, setSaveData] = useState<boolean | undefined>(undefined);
 
@@ -259,11 +259,11 @@ export function useNetworkStatus(): {
     const handleOnline = () => setOnline(true);
     const handleOffline = () => setOnline(false);
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
     // Update connection info if available
-    if ('connection' in navigator) {
+    if ("connection" in navigator) {
       const connection = (navigator as unknown).connection;
 
       if (connection) {
@@ -275,18 +275,18 @@ export function useNetworkStatus(): {
           setSaveData(connection.saveData);
         };
 
-        connection.addEventListener('change', handleConnectionChange);
+        connection.addEventListener("change", handleConnectionChange);
         return () => {
-          connection.removeEventListener('change', handleConnectionChange);
-          window.removeEventListener('online', handleOnline);
-          window.removeEventListener('offline', handleOffline);
+          connection.removeEventListener("change", handleConnectionChange);
+          window.removeEventListener("online", handleOnline);
+          window.removeEventListener("offline", handleOffline);
         };
       }
     }
 
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
     };
   }, [isClient]);
 
@@ -298,7 +298,7 @@ export function useNetworkStatus(): {
  */
 export function useSSRSafeAnimation(
   animationFunction: () => void,
-  options: { delay?: number; disabled?: boolean } = {}
+  options: { delay?: number; disabled?: boolean } = {},
 ): void {
   const { delay = 0, disabled = false } = options;
   const isClient = useIsClient();
@@ -329,7 +329,7 @@ export function useSSRSafeAnimation(
  */
 export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
   options: IntersectionObserverInit = {},
-  callback?: (entry: IntersectionObserverEntry) => void
+  callback?: (entry: IntersectionObserverEntry) => void,
 ): [(node: T | null) => void, boolean, IntersectionObserverEntry | null] {
   const isClient = useIsClient();
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
@@ -382,7 +382,7 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
  * Hook to safely handle resize observer in SSR environments
  */
 export function useSSRSafeResizeObserver<T extends HTMLElement>(
-  callback?: (entry: ResizeObserverEntry) => void
+  callback?: (entry: ResizeObserverEntry) => void,
 ): [(node: T | null) => void, DOMRectReadOnly | undefined] {
   const isClient = useIsClient();
   const [size, setSize] = useState<DOMRectReadOnly>();
@@ -433,13 +433,13 @@ export function useSSRSafeResizeObserver<T extends HTMLElement>(
  * Hook to safely handle document visibility in SSR environments
  */
 export function useSSRSafeDocumentVisibility():
-  | 'visible'
-  | 'hidden'
-  | 'prerender' {
+  | "visible"
+  | "hidden"
+  | "prerender" {
   const isClient = useIsClient();
   const [visibility, setVisibility] = useState<
-    'visible' | 'hidden' | 'prerender'
-  >('visible');
+    "visible" | "hidden" | "prerender"
+  >("visible");
 
   useEffect(() => {
     if (!isClient) {
@@ -448,15 +448,15 @@ export function useSSRSafeDocumentVisibility():
 
     const handleVisibilityChange = () => {
       setVisibility(
-        document.visibilityState as 'visible' | 'hidden' | 'prerender'
+        document.visibilityState as "visible" | "hidden" | "prerender",
       );
     };
 
     handleVisibilityChange();
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [isClient]);
 
@@ -479,30 +479,30 @@ export function useSSRSafeFeatureDetection(feature: string): boolean {
     let isSupported = false;
 
     switch (feature) {
-      case 'css-backdrop-filter': {
-        isSupported = CSS.supports('backdrop-filter', 'blur(1px)');
+      case "css-backdrop-filter": {
+        isSupported = CSS.supports("backdrop-filter", "blur(1px)");
         break;
       }
-      case 'css-grid': {
-        isSupported = CSS.supports('display', 'grid');
+      case "css-grid": {
+        isSupported = CSS.supports("display", "grid");
         break;
       }
-      case 'intersection-observer': {
-        isSupported = 'IntersectionObserver' in window;
+      case "intersection-observer": {
+        isSupported = "IntersectionObserver" in window;
         break;
       }
-      case 'resize-observer': {
-        isSupported = 'ResizeObserver' in window;
+      case "resize-observer": {
+        isSupported = "ResizeObserver" in window;
         break;
       }
-      case 'web-animations': {
-        isSupported = 'animate' in document.createElement('div');
+      case "web-animations": {
+        isSupported = "animate" in document.createElement("div");
         break;
       }
-      case 'local-storage': {
+      case "local-storage": {
         try {
-          localStorage.setItem('test', 'test');
-          localStorage.removeItem('test');
+          localStorage.setItem("test", "test");
+          localStorage.removeItem("test");
           isSupported = true;
         } catch {
           isSupported = false;

@@ -56,18 +56,16 @@ yarn add liquidify
 ## Basic Usage
 
 ```tsx
-import { GlassButton, GlassCard } from 'liquidify'
-import 'liquidify/styles'
+import { GlassButton, GlassCard } from "liquidify";
+import "liquidify/styles";
 
 function App() {
   return (
     <GlassCard>
       <h1>Welcome to LiqUIdify</h1>
-      <GlassButton variant="primary">
-        Get Started
-      </GlassButton>
+      <GlassButton variant="primary">Get Started</GlassButton>
     </GlassCard>
-  )
+  );
 }
 ```
 

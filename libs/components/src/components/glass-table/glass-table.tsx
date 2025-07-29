@@ -1,4 +1,4 @@
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
 interface TableColumn<T> {
   key: keyof T;
@@ -18,7 +18,7 @@ export function GlassTable<T>({
   className,
 }: GlassTableProps<T>) {
   return (
-    <div className={cn('overflow-x-auto', className)}>
+    <div className={cn("overflow-x-auto", className)}>
       <table className="w-full">
         <thead>
           <tr className="glass-effect">
@@ -35,7 +35,7 @@ export function GlassTable<T>({
 
         <tbody
           className="divide-y"
-          style={{ borderColor: 'var(--glass-border)' }}
+          style={{ borderColor: "var(--glass-border)" }}
         >
           {data.map((item, index) => (
             <tr key={index} className="glass-hover">

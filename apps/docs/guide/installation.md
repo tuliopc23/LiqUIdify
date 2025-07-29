@@ -40,26 +40,26 @@ LiqUIdify requires its CSS file to be imported for proper styling:
 
 ```tsx
 // In your main entry file (App.tsx, main.tsx, etc.)
-import 'liquidify/styles'
+import "liquidify/styles";
 ```
 
 ## Basic Setup
 
 ```tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { GlassProvider } from 'liquidify'
-import 'liquidify/styles'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { GlassProvider } from "liquidify";
+import "liquidify/styles";
 
-import App from './App'
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <GlassProvider>
       <App />
     </GlassProvider>
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+);
 ```
 
 ## TypeScript Configuration
@@ -83,15 +83,15 @@ If you're using Vite, LiqUIdify works out of the box. For optimal performance, y
 
 ```ts
 // vite.config.ts
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    include: ['liquidify']
-  }
-})
+    include: ["liquidify"],
+  },
+});
 ```
 
 ## Next Steps

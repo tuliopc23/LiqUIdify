@@ -13,12 +13,12 @@
 export interface ComponentConfig {
   name: string;
   category:
-    | 'core'
-    | 'forms'
-    | 'navigation'
-    | 'feedback'
-    | 'layout'
-    | 'advanced';
+    | "core"
+    | "forms"
+    | "navigation"
+    | "feedback"
+    | "layout"
+    | "advanced";
   description: string;
   props: Array<PropertyDefinition>;
   variants?: Array<VariantDefinition>;
@@ -32,14 +32,14 @@ export interface ComponentConfig {
 export interface PropertyDefinition {
   name: string;
   type:
-    | 'string'
-    | 'number'
-    | 'boolean'
-    | 'object'
-    | 'array'
-    | 'function'
-    | 'enum'
-    | 'React.ReactNode';
+    | "string"
+    | "number"
+    | "boolean"
+    | "object"
+    | "array"
+    | "function"
+    | "enum"
+    | "React.ReactNode";
   required?: boolean;
   defaultValue?: unknown;
   description: string;
@@ -56,7 +56,7 @@ export interface VariantDefinition {
 
 export interface AnimationDefinition {
   name: string;
-  type: 'spring' | 'tween' | 'gesture' | 'physics';
+  type: "spring" | "tween" | "gesture" | "physics";
   properties: Array<string>;
   defaultConfig: Record<string, unknown>;
 }
@@ -84,9 +84,9 @@ export interface GenerationOptions {
   includeTypes?: boolean;
   includeMigration?: boolean;
   targetVersion?: string;
-  framework?: 'react' | 'vue' | 'angular' | 'svelte';
-  styleFramework?: 'tailwind' | 'styled-components' | 'emotion' | 'css-modules';
-  bundleStrategy?: 'esm' | 'cjs' | 'umd' | 'all';
+  framework?: "react" | "vue" | "angular" | "svelte";
+  styleFramework?: "tailwind" | "styled-components" | "emotion" | "css-modules";
+  bundleStrategy?: "esm" | "cjs" | "umd" | "all";
 }
 
 class LiqUIdifyCodeGenerator {
@@ -101,10 +101,10 @@ class LiqUIdifyCodeGenerator {
       includeDocumentation: true,
       includeTypes: true,
       includeMigration: false,
-      targetVersion: '1.0.0',
-      framework: 'react',
-      styleFramework: 'tailwind',
-      bundleStrategy: 'all',
+      targetVersion: "1.0.0",
+      framework: "react",
+      styleFramework: "tailwind",
+      bundleStrategy: "all",
       ...options,
     };
   }
@@ -139,10 +139,10 @@ class LiqUIdifyCodeGenerator {
     }
 
     // Index file for exports
-    files['index.ts'] = this.generateIndexFile();
+    files["index.ts"] = this.generateIndexFile();
 
     // Package.json for standalone component
-    files['package.json'] = this.generatePackageJson();
+    files["package.json"] = this.generatePackageJson();
 
     return files;
   }
@@ -179,18 +179,18 @@ ${exportStatement}`;
 
     if (this.config.animations) {
       coreImports.push(
-        "import { motion, AnimatePresence } from 'framer-motion';"
+        "import { motion, AnimatePresence } from 'framer-motion';",
       );
       coreImports.push("import { usePhysics } from '../../lib/physics';");
     }
 
     if (this.config.dependencies) {
       coreImports.push(
-        ...this.config.dependencies.map((dep) => `import ${dep};`)
+        ...this.config.dependencies.map((dep) => `import ${dep};`),
       );
     }
 
-    return coreImports.join('\n');
+    return coreImports.join("\n");
   }
 
   /**
@@ -199,17 +199,17 @@ ${exportStatement}`;
   private generatePropsInterface(): string {
     const props = this.config.props
       .map((property) => {
-        const optional = property.required ? '' : '?';
-        const deprecated = property.deprecated ? '\n  /** @deprecated */' : '';
+        const optional = property.required ? "" : "?";
+        const deprecated = property.deprecated ? "\n  /** @deprecated */" : "";
         const since = property.since
           ? `\n  /** @since ${property.since} */`
-          : '';
+          : "";
 
         return `  ${deprecated}${since}
   /** ${property.description} */
   ${property.name}${optional}: ${this.getTypeScript(property)};`;
       })
-      .join('\n');
+      .join("\n");
 
     const baseProps = `
   /** Custom CSS class for styling */
@@ -258,7 +258,7 @@ export const ${componentName} = forwardRef<HTMLElement, ${componentName}Props>(
       glassMorphism = ${glassLevel},
       a11y = true,
       animation = true,
-      ${this.config.props.map((property) => `${property.name}${property.defaultValue === undefined ? '' : ` = ${JSON.stringify(property.defaultValue)}`}`).join(',\n      ')},
+      ${this.config.props.map((property) => `${property.name}${property.defaultValue === undefined ? "" : ` = ${JSON.stringify(property.defaultValue)}`}`).join(",\n      ")},
       ...props
     },
     ref
@@ -323,7 +323,7 @@ export const ${componentName} = forwardRef<HTMLElement, ${componentName}Props>(
 
       // Custom className
       className
-    ), [${this.getDependencies().join(', ')}]);
+    ), [${this.getDependencies().join(", ")}]);
 
     ${this.generateEventHandlers()}
 
@@ -339,7 +339,7 @@ ${componentName}.displayName = '${componentName}';`;
    */
   private generateAnimationLogic(): string {
     if (!this.config.animations) {
-      return '';
+      return "";
     }
 
     return `
@@ -380,12 +380,12 @@ ${componentName}.displayName = '${componentName}';`;
    */
   private generateVariantLogic(): string {
     if (!this.config.variants) {
-      return '';
+      return "";
     }
 
-    const variantProperty = this.config.props.find((p) => p.name === 'variant');
+    const variantProperty = this.config.props.find((p) => p.name === "variant");
     if (!variantProperty) {
-      return '';
+      return "";
     }
 
     return `
@@ -396,9 +396,9 @@ ${componentName}.displayName = '${componentName}';`;
           .map(
             (v) => `
         case '${v.name}':
-          return '${this.generateVariantClasses(v)}';`
+          return '${this.generateVariantClasses(v)}';`,
           )
-          .join('')}
+          .join("")}
         default:
           return '';
       }
@@ -818,9 +818,9 @@ function MyComponent() {
 ${this.config.props
   .map(
     (property) =>
-      `| \`${property.name}\` | \`${this.getTypeScript(property)}\` | \`${property.defaultValue || 'undefined'}\` | ${property.description} |`
+      `| \`${property.name}\` | \`${this.getTypeScript(property)}\` | \`${property.defaultValue || "undefined"}\` | ${property.description} |`,
   )
-  .join('\n')}
+  .join("\n")}
 
 ## Examples
 
@@ -830,7 +830,7 @@ ${this.generateDocumentationExamples()}
 
 This component follows WCAG 2.1 AA guidelines and includes:
 
-${this.config.accessibility ? this.generateAccessibilityDocs() : '- Basic accessibility support'}
+${this.config.accessibility ? this.generateAccessibilityDocs() : "- Basic accessibility support"}
 
 ## Performance
 
@@ -866,13 +866,13 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   // Helper methods for code generation
   private getTypeScript(property: PropertyDefinition): string {
     switch (property.type) {
-      case 'enum': {
+      case "enum": {
         return property.enumValues
-          ? property.enumValues.map((v) => `'${v}'`).join(' | ')
-          : 'string';
+          ? property.enumValues.map((v) => `'${v}'`).join(" | ")
+          : "string";
       }
-      case 'React.ReactNode': {
-        return 'React.ReactNode';
+      case "React.ReactNode": {
+        return "React.ReactNode";
       }
       default: {
         return property.type;
@@ -881,45 +881,45 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   }
 
   private getDefaultRole(): string {
-    return this.config.accessibility?.roles[0] || 'button';
+    return this.config.accessibility?.roles[0] || "button";
   }
 
   private getAriaLabelLogic(): string {
     const labelProperty = this.config.props.find(
-      (p) => p.name === 'children' || p.name === 'label'
+      (p) => p.name === "children" || p.name === "label",
     );
-    return labelProperty ? labelProperty.name : 'undefined';
+    return labelProperty ? labelProperty.name : "undefined";
   }
 
   private getElementType(): string {
-    if (this.config.name.toLowerCase().includes('button')) {
-      return 'button';
+    if (this.config.name.toLowerCase().includes("button")) {
+      return "button";
     }
-    if (this.config.name.toLowerCase().includes('input')) {
-      return 'input';
+    if (this.config.name.toLowerCase().includes("input")) {
+      return "input";
     }
-    if (this.config.name.toLowerCase().includes('link')) {
-      return 'a';
+    if (this.config.name.toLowerCase().includes("link")) {
+      return "a";
     }
-    return 'div';
+    return "div";
   }
 
   private generateBaseClasses(): string {
     // Generate base Tailwind classes based on component type
     const baseClasses = [
-      'relative',
-      'inline-flex',
-      'items-center',
-      'justify-center',
-      'rounded-lg',
-      'border',
-      'border-white/20',
-      'backdrop-blur-md',
-      'transition-all',
-      'duration-200',
+      "relative",
+      "inline-flex",
+      "items-center",
+      "justify-center",
+      "rounded-lg",
+      "border",
+      "border-white/20",
+      "backdrop-blur-md",
+      "transition-all",
+      "duration-200",
     ];
 
-    return baseClasses.join(' ');
+    return baseClasses.join(" ");
   }
 
   private generateVariantClasses(variant: VariantDefinition): string {
@@ -929,9 +929,9 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
   private generateVariantClassLogic(): string {
     if (!this.config.variants) {
-      return 'variantStyles,';
+      return "variantStyles,";
     }
-    return 'variantStyles,';
+    return "variantStyles,";
   }
 
   private generateAnimationClassLogic(): string {
@@ -939,36 +939,36 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
   }
 
   private getDependencies(): Array<string> {
-    const deps = ['className', 'glassMorphism'];
+    const deps = ["className", "glassMorphism"];
     if (this.config.variants) {
-      deps.push('variant', 'variantStyles');
+      deps.push("variant", "variantStyles");
     }
     if (this.config.animations) {
-      deps.push('animation', 'animationConfig');
+      deps.push("animation", "animationConfig");
     }
     return deps;
   }
 
   private generateChildrenLogic(): string {
     const childrenProperty = this.config.props.find(
-      (p) => p.name === 'children'
+      (p) => p.name === "children",
     );
-    return childrenProperty ? '{children}' : '';
+    return childrenProperty ? "{children}" : "";
   }
 
   private generateEnumTypes(): string {
-    const enumProps = this.config.props.filter((p) => p.type === 'enum');
+    const enumProps = this.config.props.filter((p) => p.type === "enum");
     return enumProps
       .map(
         (property) =>
-          `export type ${this.config.name}${property.name.charAt(0).toUpperCase() + property.name.slice(1)} = ${property.enumValues?.map((v) => `'${v}'`).join(' | ') || 'string'};`
+          `export type ${this.config.name}${property.name.charAt(0).toUpperCase() + property.name.slice(1)} = ${property.enumValues?.map((v) => `'${v}'`).join(" | ") || "string"};`,
       )
-      .join('\n');
+      .join("\n");
   }
 
   private generateAnimationTypes(): string {
     if (!this.config.animations) {
-      return '';
+      return "";
     }
 
     return `export interface AnimationConfig {
@@ -992,19 +992,19 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
   private generateVariantTypes(): string {
     if (!this.config.variants) {
-      return '';
+      return "";
     }
 
     const variantNames = this.config.variants
       .map((v) => `'${v.name}'`)
-      .join(' | ');
+      .join(" | ");
     return `export type ${this.config.name}Variant = ${variantNames};`;
   }
 
   private generatePropTests(): string {
     return this.config.props
       .map((property) => {
-        if (property.type === 'boolean') {
+        if (property.type === "boolean") {
           return `
     it('handles ${property.name} prop', () => {
       const { rerender } = render(<${this.config.name} ${property.name}={false} />);
@@ -1012,14 +1012,14 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
       // Should not crash with boolean changes
     });`;
         }
-        return '';
+        return "";
       })
-      .join('\n');
+      .join("\n");
   }
 
   private generateAccessibilityTests(): string {
     if (!this.config.accessibility) {
-      return '';
+      return "";
     }
 
     return this.config.accessibility.keyboardSupport
@@ -1032,9 +1032,9 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
       const element = screen.getByRole('${this.getDefaultRole()}');
       await user.type(element, '{${key}}');
       // Should handle ${key} key properly
-    });`
+    });`,
       )
-      .join('\n');
+      .join("\n");
   }
 
   private generateInteractionTests(): string {
@@ -1066,7 +1066,7 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
 
   private generateVariantTests(): string {
     if (!this.config.variants) {
-      return '';
+      return "";
     }
 
     return this.config.variants
@@ -1075,9 +1075,9 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
     it('renders ${variant.name} variant correctly', () => {
       render(<${this.config.name} variant="${variant.name}" />);
       // Should render ${variant.name} variant without errors
-    });`
+    });`,
       )
-      .join('\n');
+      .join("\n");
   }
 
   private generateStorybookArgTypes(): string {
@@ -1089,19 +1089,19 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
       ${control}
     }`;
       })
-      .join(',\n    ');
+      .join(",\n    ");
   }
 
   private getStorybookControl(property: PropertyDefinition): string {
     switch (property.type) {
-      case 'boolean': {
+      case "boolean": {
         return "control: 'boolean'";
       }
-      case 'number': {
+      case "number": {
         return "control: { type: 'range', min: 0, max: 100 }";
       }
-      case 'enum': {
-        return `control: 'select',\n      options: [${property.enumValues?.map((v) => `'${v}'`).join(', ')}]`;
+      case "enum": {
+        return `control: 'select',\n      options: [${property.enumValues?.map((v) => `'${v}'`).join(", ")}]`;
       }
       default: {
         return "control: 'text'";
@@ -1115,25 +1115,25 @@ MIT License - see [LICENSE](../../LICENSE) file.`;
         if (property.defaultValue !== undefined) {
           return `${property.name}: ${JSON.stringify(property.defaultValue)}`;
         }
-        return '';
+        return "";
       })
       .filter(Boolean)
-      .join(',\n    ');
+      .join(",\n    ");
   }
 
   private generateExampleStories(): string {
     if (!this.config.examples) {
-      return '';
+      return "";
     }
 
     return this.config.examples
       .map(
         (example) => `
-export const ${example.name.replaceAll(/\s+/g, '')}: Story = {
+export const ${example.name.replaceAll(/\s+/g, "")}: Story = {
   args: {
     ${Object.entries(example.props)
       .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
-      .join(',\n    ')}
+      .join(",\n    ")}
   },
   parameters: {
     docs: {
@@ -1142,14 +1142,14 @@ export const ${example.name.replaceAll(/\s+/g, '')}: Story = {
       }
     }
   }
-};`
+};`,
       )
-      .join('\n');
+      .join("\n");
   }
 
   private generateDocumentationExamples(): string {
     if (!this.config.examples) {
-      return '';
+      return "";
     }
 
     return this.config.examples
@@ -1162,14 +1162,14 @@ ${example.description}
 \`\`\`tsx
 ${example.code}
 \`\`\`
-`
+`,
       )
-      .join('\n');
+      .join("\n");
   }
 
   private generateAccessibilityDocs(): string {
     if (!this.config.accessibility) {
-      return '';
+      return "";
     }
 
     const {
@@ -1182,12 +1182,12 @@ ${example.code}
     } = this.config.accessibility;
 
     return `
-- **Roles**: ${roles.join(', ')}
-- **ARIA Attributes**: ${ariaAttributes.join(', ')}
-- **Keyboard Support**: ${keyboardSupport.join(', ')}
-- **Screen Reader**: ${screenReaderSupport ? 'Full support' : 'Basic support'}
-- **Color Contrast**: ${colorContrastCompliant ? 'WCAG AA compliant' : 'Needs review'}
-- **Focus Management**: ${focusManagement ? 'Automatic' : 'Manual'}`;
+- **Roles**: ${roles.join(", ")}
+- **ARIA Attributes**: ${ariaAttributes.join(", ")}
+- **Keyboard Support**: ${keyboardSupport.join(", ")}
+- **Screen Reader**: ${screenReaderSupport ? "Full support" : "Basic support"}
+- **Color Contrast**: ${colorContrastCompliant ? "WCAG AA compliant" : "Needs review"}
+- **Focus Management**: ${focusManagement ? "Automatic" : "Manual"}`;
   }
 
   private estimateBundleSize(): number {
@@ -1210,7 +1210,7 @@ ${example.code}
 
 export { ${this.config.name} } from './${this.config.name}';
 export type { ${this.config.name}Props } from './${this.config.name}';
-${this.options.includeTypes ? `export * from './${this.config.name}.types';` : ''}`;
+${this.options.includeTypes ? `export * from './${this.config.name}.types';` : ""}`;
   }
 
   private generatePackageJson(): string {
@@ -1219,30 +1219,30 @@ ${this.options.includeTypes ? `export * from './${this.config.name}.types';` : '
         name: `@liquidify/${this.config.name.toLowerCase()}`,
         version: this.options.targetVersion,
         description: this.config.description,
-        main: './index.js',
-        module: './index.mjs',
-        types: './index.d.ts',
+        main: "./index.js",
+        module: "./index.mjs",
+        types: "./index.d.ts",
         exports: {
-          '.': {
-            import: './index.mjs',
-            require: './index.js',
-            types: './index.d.ts',
+          ".": {
+            import: "./index.mjs",
+            require: "./index.js",
+            types: "./index.d.ts",
           },
         },
         keywords: [
-          'liquidify',
-          'react',
-          'component',
-          'glassmorphism',
+          "liquidify",
+          "react",
+          "component",
+          "glassmorphism",
           this.config.category,
         ],
         peerDependencies: {
-          react: '>=18.0.0',
-          'react-dom': '>=18.0.0',
+          react: ">=18.0.0",
+          "react-dom": ">=18.0.0",
         },
       },
       undefined,
-      2
+      2,
     );
   }
 
@@ -1260,7 +1260,7 @@ export default LiqUIdifyCodeGenerator;
 // Utility functions for common component patterns
 export const generateComponentFromConfig = (
   config: ComponentConfig,
-  options?: GenerationOptions
+  options?: GenerationOptions,
 ): GeneratedFiles => {
   const generator = new LiqUIdifyCodeGenerator(config, options);
   return generator.generateComponent();
@@ -1269,7 +1269,7 @@ export const generateComponentFromConfig = (
 export const generateMigrationCode = (
   fromVersion: string,
   toVersion: string,
-  componentName: string
+  componentName: string,
 ): string => {
   return `/**
  * Migration Guide: ${componentName} v${fromVersion} → v${toVersion}

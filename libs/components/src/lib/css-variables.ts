@@ -10,7 +10,7 @@ import type {
   GlassState,
   GlassTiming,
   GlassVariant,
-} from '@/types/tailwind';
+} from "@/types/tailwind";
 
 // Core CSS variable utilities
 export const cssVar = {
@@ -37,7 +37,7 @@ export const cssVar = {
    * @param value - The value to set
    */
   set: (element: HTMLElement, property: string, value: string): void => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       element.style.setProperty(`--${property}`, value);
     }
   },
@@ -48,7 +48,7 @@ export const cssVar = {
    * @param property - The property name (without -- prefix)
    */
   remove: (element: HTMLElement, property: string): void => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       element.style.removeProperty(`--${property}`);
     }
   },
@@ -60,10 +60,10 @@ export const cssVar = {
    * @returns The computed value as a string
    */
   getValue: (element: HTMLElement, property: string): string => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       return getComputedStyle(element).getPropertyValue(`--${property}`).trim();
     }
-    return '';
+    return "";
   },
 };
 
@@ -120,48 +120,48 @@ export const semanticVar = {
    * @param variant - Optional variant ('foreground' for foreground color)
    * @returns CSS var() function string
    */
-  primary: (variant?: 'foreground'): string =>
-    cssVar.get(variant ? `primary-${variant}` : 'primary'),
+  primary: (variant?: "foreground"): string =>
+    cssVar.get(variant ? `primary-${variant}` : "primary"),
 
   /**
    * Get secondary color CSS variable
    * @param variant - Optional variant ('foreground' for foreground color)
    * @returns CSS var() function string
    */
-  secondary: (variant?: 'foreground'): string =>
-    cssVar.get(variant ? `secondary-${variant}` : 'secondary'),
+  secondary: (variant?: "foreground"): string =>
+    cssVar.get(variant ? `secondary-${variant}` : "secondary"),
 
   /**
    * Get background color CSS variable
    * @returns CSS var() function string
    */
-  background: (): string => cssVar.get('background'),
+  background: (): string => cssVar.get("background"),
 
   /**
    * Get foreground color CSS variable
    * @returns CSS var() function string
    */
-  foreground: (): string => cssVar.get('foreground'),
+  foreground: (): string => cssVar.get("foreground"),
 
   /**
    * Get border color CSS variable
    * @returns CSS var() function string
    */
-  border: (): string => cssVar.get('border'),
+  border: (): string => cssVar.get("border"),
 
   /**
    * Get text color CSS variable
    * @param variant - The text variant ('primary' | 'secondary')
    * @returns CSS var() function string
    */
-  text: (variant: 'primary' | 'secondary'): string =>
+  text: (variant: "primary" | "secondary"): string =>
     cssVar.get(`text-${variant}`),
 
   /**
    * Get radius CSS variable
    * @returns CSS var() function string
    */
-  radius: (): string => cssVar.get('radius'),
+  radius: (): string => cssVar.get("radius"),
 };
 
 // Apple Liquid Glass system utilities
@@ -180,7 +180,7 @@ export const liquidVar = {
    * @returns CSS var() function string
    */
   state: (
-    state: 'hover' | 'pressed' | 'focused' | 'selected' | 'disabled'
+    state: "hover" | "pressed" | "focused" | "selected" | "disabled",
   ): string => cssVar.get(`liquid-${state}`),
 
   /**
@@ -188,7 +188,7 @@ export const liquidVar = {
    * @param variant - The border variant
    * @returns CSS var() function string
    */
-  border: (variant: 'thin' | 'medium' | 'thick' | 'focus'): string =>
+  border: (variant: "thin" | "medium" | "thick" | "focus"): string =>
     cssVar.get(`liquid-border-${variant}`),
 
   /**
@@ -197,24 +197,24 @@ export const liquidVar = {
    * @returns CSS var() function string
    */
   blur: (
-    level: 'ultra-thin' | 'thin' | 'regular' | 'thick' | 'ultra-thick'
+    level: "ultra-thin" | "thin" | "regular" | "thick" | "ultra-thick",
   ): string => cssVar.get(`liquid-blur-${level}`),
 };
 
 // Utility to check if CSS custom properties are supported
 export const isCSSCustomPropertiesSupported = (): boolean => {
   return (
-    typeof window !== 'undefined' &&
+    typeof window !== "undefined" &&
     window.CSS &&
     window.CSS.supports &&
-    window.CSS.supports('color', 'var(--fake-var, red)')
+    window.CSS.supports("color", "var(--fake-var, red)")
   );
 };
 
 // Helper to apply multiple CSS variables at once
 export const applyCSSVars = (
   element: HTMLElement,
-  variables: Record<string, string>
+  variables: Record<string, string>,
 ): void => {
   for (const [property, value] of Object.entries(variables)) {
     cssVar.set(element, property, value);
@@ -224,14 +224,14 @@ export const applyCSSVars = (
 // Helper to get multiple CSS variable values
 export const getCSSVars = (
   element: HTMLElement,
-  properties: Array<string>
+  properties: Array<string>,
 ): Record<string, string> => {
   return properties.reduce(
     (accumulator, property) => {
       accumulator[property] = cssVar.getValue(element, property);
       return accumulator;
     },
-    {} as Record<string, string>
+    {} as Record<string, string>,
   );
 };
 
@@ -253,8 +253,8 @@ export const createGlassStyle = (config: {
   if (config.backgroundState) {
     // Apply state-specific background on hover/focus/active
     style.transition = config.timing
-      ? `background-color ${glassVar.timing(config.timing)} ${config.easing ? glassVar.easing(config.easing) : ''}`
-      : 'background-color 0.2s ease';
+      ? `background-color ${glassVar.timing(config.timing)} ${config.easing ? glassVar.easing(config.easing) : ""}`
+      : "background-color 0.2s ease";
   }
 
   if (config.border) {

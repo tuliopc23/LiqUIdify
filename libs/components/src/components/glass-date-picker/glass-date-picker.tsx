@@ -1,59 +1,59 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { Calendar, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
-import type React from 'react';
-import { forwardRef, useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from "framer-motion";
+import { Calendar, ChevronLeft, ChevronRight, Clock } from "lucide-react";
+import type React from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 
-import { cn, focusRing } from '@/core/utils/classname';
+import { cn, focusRing } from "@/core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
-} from '../../lib/variant-system';
+} from "../../lib/variant-system";
 
 const datePickerVariants = cva({
-  base: 'relative w-full',
+  base: "relative w-full",
   variants: {
     size: {
-      sm: 'text-sm',
-      md: 'text-base',
-      lg: 'text-lg',
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: "md",
   },
 });
 
 const triggerVariants = cva({
   base: cn(
-    'flex w-full items-center justify-between px-4 py-3 text-left',
-    'rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm',
-    'hover:bg-white/10 focus:bg-white/10 focus:outline-none',
-    'transition-all duration-200',
-    'disabled:cursor-not-allowed disabled:opacity-50'
+    "flex w-full items-center justify-between px-4 py-3 text-left",
+    "rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm",
+    "hover:bg-white/10 focus:bg-white/10 focus:outline-none",
+    "transition-all duration-200",
+    "disabled:cursor-not-allowed disabled:opacity-50",
   ),
   variants: {
     isOpen: {
-      true: 'border-blue-400/50 bg-white/10',
-      false: 'border-white/10',
+      true: "border-blue-400/50 bg-white/10",
+      false: "border-white/10",
     },
     size: {
-      sm: 'px-3 py-2 text-sm',
-      md: 'px-4 py-3 text-base',
-      lg: 'px-5 py-4 text-lg',
+      sm: "px-3 py-2 text-sm",
+      md: "px-4 py-3 text-base",
+      lg: "px-5 py-4 text-lg",
     },
   },
   defaultVariants: {
-    isOpen: 'false',
-    size: 'md',
+    isOpen: "false",
+    size: "md",
   },
 });
 
 const calendarVariants = cva({
   base: cn(
-    'absolute z-50 mt-1 p-4',
-    'rounded-xl border border-white/10 bg-black/90 backdrop-blur-xl',
-    'shadow-black/20 shadow-xl',
-    'min-w-[280px]'
+    "absolute z-50 mt-1 p-4",
+    "rounded-xl border border-white/10 bg-black/90 backdrop-blur-xl",
+    "shadow-black/20 shadow-xl",
+    "min-w-[280px]",
   ),
   variants: {},
 });
@@ -61,7 +61,7 @@ const calendarVariants = cva({
 export interface GlassDatePickerProps
   extends Omit<
       Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
-      'onChange' | 'defaultValue'
+      "onChange" | "defaultValue"
     >,
     VariantProps<typeof datePickerVariants> {
   value?: Date;
@@ -94,22 +94,22 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
       value,
       defaultValue,
       onChange,
-      placeholder = 'Select date...',
+      placeholder = "Select date...",
       disabled = false,
       showTime = false,
       format,
-      locale = 'en-US',
+      locale = "en-US",
       minDate,
       maxDate,
       disabledDates = [],
       weekStartsOn = 0,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(
-      value || defaultValue
+      value || defaultValue,
     );
     const [viewDate, setViewDate] = useState<Date>(selectedDate || new Date());
     const [timeValue, setTimeValue] = useState({
@@ -123,14 +123,14 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
     // Format date for display
     const formatDate = (date: Date | null): string => {
       if (!date) {
-        return '';
+        return "";
       }
 
       const formatOptions: Intl.DateTimeFormatOptions = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        ...(showTime && { hour: '2-digit', minute: '2-digit' }),
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        ...(showTime && { hour: "2-digit", minute: "2-digit" }),
       };
 
       return new Intl.DateTimeFormat(locale, formatOptions).format(date);
@@ -179,7 +179,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 
       return disabledDates.some(
         (disabledDate) =>
-          date.toDateString() === (disabledDate as Date).toDateString()
+          date.toDateString() === (disabledDate as Date).toDateString(),
       );
     };
 
@@ -205,7 +205,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
     };
 
     // Handle time change
-    const handleTimeChange = (type: 'hours' | 'minutes', value: number) => {
+    const handleTimeChange = (type: "hours" | "minutes", value: number) => {
       const newTimeValue = { ...timeValue, [type]: value };
       setTimeValue(newTimeValue);
 
@@ -219,9 +219,9 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
     };
 
     // Navigate months
-    const navigateMonth = (direction: 'prev' | 'next') => {
+    const navigateMonth = (direction: "prev" | "next") => {
       const newDate = new Date(viewDate);
-      if (direction === 'prev') {
+      if (direction === "prev") {
         newDate.setMonth(newDate.getMonth() - 1);
       } else {
         newDate.setMonth(newDate.getMonth() + 1);
@@ -242,18 +242,18 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
         }
       };
 
-      if (typeof document !== 'undefined') {
-        document.addEventListener('mousedown', handleClickOutside);
+      if (typeof document !== "undefined") {
+        document.addEventListener("mousedown", handleClickOutside);
       }
       return () => {
-        if (typeof document !== 'undefined') {
-          document.removeEventListener('mousedown', handleClickOutside);
+        if (typeof document !== "undefined") {
+          document.removeEventListener("mousedown", handleClickOutside);
         }
       };
     }, []);
 
     const days = getDaysInMonth(viewDate);
-    const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const reorderedWeekDays = [
       ...weekDays.slice(weekStartsOn),
 
@@ -270,9 +270,9 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
           ref={triggerRef}
           type="button"
           className={cn(
-            triggerVariants({ isOpen: isOpen ? 'true' : 'false', size }),
+            triggerVariants({ isOpen: isOpen ? "true" : "false", size }),
             focusRing,
-            disabled && 'cursor-not-allowed'
+            disabled && "cursor-not-allowed",
           )}
           onClick={() => !disabled && setIsOpen(!isOpen)}
           disabled={disabled}
@@ -282,8 +282,8 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 
             <span
               className={cn(
-                'flex-1 text-left',
-                !selectedDate && 'text-white/60'
+                "flex-1 text-left",
+                !selectedDate && "text-white/60",
               )}
             >
               {formatDate(selectedDate ?? null) || placeholder}
@@ -306,7 +306,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                 <div className="flex items-center justify-between">
                   <button
                     type="button"
-                    onClick={() => navigateMonth('prev')}
+                    onClick={() => navigateMonth("prev")}
                     className="rounded-lg p-2 transition-colors hover:bg-white/10"
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -314,14 +314,14 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
 
                   <h2 className="font-semibold text-lg text-white">
                     {viewDate.toLocaleDateString(locale, {
-                      month: 'long',
-                      year: 'numeric',
+                      month: "long",
+                      year: "numeric",
                     })}
                   </h2>
 
                   <button
                     type="button"
-                    onClick={() => navigateMonth('next')}
+                    onClick={() => navigateMonth("next")}
                     className="rounded-lg p-2 transition-colors hover:bg-white/10"
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -359,12 +359,12 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                         onClick={() => handleDateSelect(date)}
                         disabled={disabled}
                         className={cn(
-                          'rounded-lg p-2 text-center text-sm transition-all duration-200',
-                          'hover:bg-white/10 focus:bg-white/10 focus:outline-none',
-                          !isCurrentMonth && 'text-white/30',
-                          isSelected && 'bg-blue-500/20 text-blue-400',
-                          isToday && !isSelected && 'bg-white/10 text-white',
-                          disabled && 'cursor-not-allowed opacity-50'
+                          "rounded-lg p-2 text-center text-sm transition-all duration-200",
+                          "hover:bg-white/10 focus:bg-white/10 focus:outline-none",
+                          !isCurrentMonth && "text-white/30",
+                          isSelected && "bg-blue-500/20 text-blue-400",
+                          isToday && !isSelected && "bg-white/10 text-white",
+                          disabled && "cursor-not-allowed opacity-50",
                         )}
                       >
                         {date.getDate()}
@@ -387,8 +387,8 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                           value={timeValue.hours}
                           onChange={(e) =>
                             handleTimeChange(
-                              'hours',
-                              Number.parseInt(e.target.value)
+                              "hours",
+                              Number.parseInt(e.target.value),
                             )
                           }
                           className="w-16 rounded border border-white/10 bg-white/5 px-2 py-1 text-center text-white"
@@ -403,8 +403,8 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
                           value={timeValue.minutes}
                           onChange={(e) =>
                             handleTimeChange(
-                              'minutes',
-                              Number.parseInt(e.target.value)
+                              "minutes",
+                              Number.parseInt(e.target.value),
                             )
                           }
                           className="w-16 rounded border border-white/10 bg-white/5 px-2 py-1 text-center text-white"
@@ -419,9 +419,9 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
         </AnimatePresence>
       </div>
     );
-  }
+  },
 );
 
-GlassDatePicker.displayName = 'GlassDatePicker';
+GlassDatePicker.displayName = "GlassDatePicker";
 
 export { GlassDatePicker };

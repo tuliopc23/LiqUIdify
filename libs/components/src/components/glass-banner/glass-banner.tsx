@@ -1,9 +1,9 @@
-import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react';
-import React from 'react';
-import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
+import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from "lucide-react";
+import React from "react";
+import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
 export interface GlassBannerProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'info' | 'success' | 'warning' | 'error';
+  variant?: "info" | "success" | "warning" | "error";
   dismissible?: boolean;
   onDismiss?: () => void;
   icon?: React.ReactNode;
@@ -13,24 +13,24 @@ export interface GlassBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 const variantConfig = {
   info: {
     icon: Info,
-    className: 'border-blue-500/20 bg-blue-500/10 text-blue-400',
+    className: "border-blue-500/20 bg-blue-500/10 text-blue-400",
   },
   success: {
     icon: CheckCircle,
-    className: 'border-green-500/20 bg-green-500/10 text-green-400',
+    className: "border-green-500/20 bg-green-500/10 text-green-400",
   },
   warning: {
     icon: AlertTriangle,
-    className: 'border-yellow-500/20 bg-yellow-500/10 text-yellow-400',
+    className: "border-yellow-500/20 bg-yellow-500/10 text-yellow-400",
   },
   error: {
     icon: AlertCircle,
-    className: 'border-red-500/20 bg-red-500/10 text-red-400',
+    className: "border-red-500/20 bg-red-500/10 text-red-400",
   },
 };
 
 export const GlassBanner: React.FC<GlassBannerProps> = ({
-  variant = 'info',
+  variant = "info",
   dismissible = false,
   onDismiss,
   icon,
@@ -55,12 +55,12 @@ export const GlassBanner: React.FC<GlassBannerProps> = ({
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-lg border p-4',
-        getGlassClass('default'),
+        "relative overflow-hidden rounded-lg border p-4",
+        getGlassClass("default"),
         config.className,
-        'slide-in-from-top-2 animate-in',
-        !isVisible && 'slide-out-to-top-2 animate-out',
-        className
+        "slide-in-from-top-2 animate-in",
+        !isVisible && "slide-out-to-top-2 animate-out",
+        className,
       )}
       role="alert"
       {...props}
@@ -77,9 +77,9 @@ export const GlassBanner: React.FC<GlassBannerProps> = ({
               type="button"
               onClick={handleDismiss}
               className={cn(
-                'rounded-lg p-1 hover:bg-white/10',
+                "rounded-lg p-1 hover:bg-white/10",
                 microInteraction.interactive,
-                'focus:outline-none focus:ring-2 focus:ring-white/20'
+                "focus:outline-none focus:ring-2 focus:ring-white/20",
               )}
               aria-label="Dismiss banner"
             >

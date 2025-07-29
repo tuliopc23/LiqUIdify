@@ -5,7 +5,7 @@
 
 // SSR environment check utilities
 export const isSSR = (): boolean => {
-  return typeof window === 'undefined' || typeof document === 'undefined';
+  return typeof window === "undefined" || typeof document === "undefined";
 };
 
 export const isClient = (): boolean => {
@@ -15,7 +15,7 @@ export const isClient = (): boolean => {
 // Safe DOM creation wrapper
 export const safeCreateElement = <T extends HTMLElement>(
   tagName: string,
-  options?: ElementCreationOptions
+  options?: ElementCreationOptions,
 ): T | null => {
   if (isSSR()) {
     // Logging disabled
@@ -41,7 +41,7 @@ export const safeGetDocumentBody = (): HTMLElement | null => {
 // Safe if (typeof document !== "undefined") { document.querySelector wrapper
 export const safeQuerySelector = <T extends Element = Element>(
   selector: string,
-  container?: Element | Document
+  container?: Element | Document,
 ): T | null => {
   if (isSSR()) {
     return null;
@@ -59,7 +59,7 @@ export const safeQuerySelector = <T extends Element = Element>(
 // Safe if (typeof document !== "undefined") { document.querySelectorAll wrapper
 export const safeQuerySelectorAll = <T extends Element = Element>(
   selector: string,
-  container?: Element | Document
+  container?: Element | Document,
 ): NodeListOf<T> | Array<T> => {
   if (isSSR()) {
     return [] as Array<T>;
@@ -76,14 +76,14 @@ export const safeQuerySelectorAll = <T extends Element = Element>(
 
 // Safe if (typeof document !== "undefined") { document.getElementById wrapper
 export const safeGetElementById = <T extends HTMLElement = HTMLElement>(
-  id: string
+  id: string,
 ): T | null => {
   if (isSSR()) {
     return null;
   }
 
   try {
-    return typeof document === 'undefined'
+    return typeof document === "undefined"
       ? null
       : (document.getElementById(id) as T | null);
   } catch {
@@ -97,7 +97,7 @@ export const safeAddEventListener = (
   element: Element | Window | Document,
   type: string,
   listener: EventListenerOrEventListenerObject,
-  options?: boolean | AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions,
 ): (() => void) => {
   if (isSSR()) {
     return () => {}; // Return empty cleanup function
@@ -123,7 +123,7 @@ export const safeAddEventListener = (
 // Safe window property access
 export const safeGetWindowProperty = <T>(
   property: keyof Window,
-  fallback: T
+  fallback: T,
 ): T => {
   if (isSSR()) {
     return fallback;
@@ -149,11 +149,11 @@ export const safeGetViewportDimensions = (): {
   try {
     return {
       width:
-        typeof window === 'undefined'
+        typeof window === "undefined"
           ? 1024
           : window.innerWidth || document.documentElement.clientWidth || 1024,
       height:
-        typeof window === 'undefined'
+        typeof window === "undefined"
           ? 768
           : window.innerHeight || document.documentElement.clientHeight || 768,
     };
@@ -209,7 +209,7 @@ export const safeGetBoundingClientRect = (element: Element | null): DOMRect => {
 // Safe computed style access
 export const safeGetComputedStyle = (
   element: Element | null,
-  pseudoElement?: string | null
+  pseudoElement?: string | null,
 ): CSSStyleDeclaration | Partial<CSSStyleDeclaration> => {
   if (isSSR() || !element) {
     return {} as Partial<CSSStyleDeclaration>;
@@ -335,7 +335,7 @@ export const safeSetBodyStyles = (styles: BodyStyleProps): (() => void) => {
     for (const property of Object.keys(styles)) {
       const value = styles[property];
       if (value !== undefined) {
-        originalStyles[property] = body.style.getPropertyValue(property) || '';
+        originalStyles[property] = body.style.getPropertyValue(property) || "";
         body.style.setProperty(property, value);
       }
     }
@@ -346,7 +346,7 @@ export const safeSetBodyStyles = (styles: BodyStyleProps): (() => void) => {
         for (const property of Object.keys(originalStyles)) {
           const originalValue = originalStyles[property];
           if (originalValue !== undefined) {
-            if (originalValue === '') {
+            if (originalValue === "") {
               body.style.removeProperty(property);
             } else {
               body.style.setProperty(property, originalValue);
@@ -366,7 +366,7 @@ export const safeSetBodyStyles = (styles: BodyStyleProps): (() => void) => {
 // Safe focus management
 export const safeFocus = (
   element: HTMLElement | null,
-  options?: FocusOptions
+  options?: FocusOptions,
 ): boolean => {
   if (isSSR() || !element) {
     return false;
@@ -392,9 +392,9 @@ export const safeIsElementVisible = (element: Element | null): boolean => {
     const rect = safeGetBoundingClientRect(element);
 
     return (
-      style.display !== 'none' &&
-      style.visibility !== 'hidden' &&
-      Number.parseFloat(style.opacity || '1') > 0 &&
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      Number.parseFloat(style.opacity || "1") > 0 &&
       rect.width > 0 &&
       rect.height > 0 &&
       (element as HTMLElement).offsetParent !== null
@@ -407,7 +407,7 @@ export const safeIsElementVisible = (element: Element | null): boolean => {
 
 // Safe media query matching
 export const safeMatchMedia = (
-  query: string
+  query: string,
 ): {
   matches: boolean;
   addListener: (listener: (event: MediaQueryListEvent) => void) => () => void;
@@ -425,11 +425,11 @@ export const safeMatchMedia = (
     return {
       matches: mediaQuery.matches,
       addListener: (listener: (event: MediaQueryListEvent) => void) => {
-        mediaQuery.addEventListener('change', listener);
+        mediaQuery.addEventListener("change", listener);
 
         return () => {
           try {
-            mediaQuery.removeEventListener('change', listener);
+            mediaQuery.removeEventListener("change", listener);
           } catch {
             // Logging disabled
           }

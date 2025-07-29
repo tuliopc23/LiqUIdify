@@ -1,9 +1,9 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
-import postcss from 'postcss';
-import { performanceMonitor } from './performance-monitor';
+import * as fs from "node:fs";
+import * as path from "node:path";
+import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
+import postcss from "postcss";
+import { performanceMonitor } from "./performance-monitor";
 
 // Types
 export interface CSSBundle {
@@ -52,32 +52,32 @@ export interface BundleResult {
 const DEFAULT_BUNDLE_CONFIG: CSSBundleConfig = {
   core: {
     files: [
-      'src/styles/glass-core.css',
-      'src/styles/glass-critical.css',
-      'src/styles/graceful-degradation.css',
+      "src/styles/glass-core.css",
+      "src/styles/glass-critical.css",
+      "src/styles/graceful-degradation.css",
     ],
     critical: true,
     maxSize: 15 * 1024, // 15KB
   },
   animations: {
     files: [
-      'src/styles/glass-animations.css',
-      'src/styles/apple-liquid-glass.css',
-      'src/styles/enhanced-apple-liquid-glass.css',
+      "src/styles/glass-animations.css",
+      "src/styles/apple-liquid-glass.css",
+      "src/styles/enhanced-apple-liquid-glass.css",
     ],
     critical: false,
     maxSize: 10 * 1024, // 10KB
     lazy: true,
   },
   utilities: {
-    files: ['src/styles/glass-utilities.css', 'src/styles/tailwind.css'],
+    files: ["src/styles/glass-utilities.css", "src/styles/tailwind.css"],
     critical: false,
     maxSize: 8 * 1024, // 8KB
   },
   themes: {
     files: [
-      'src/styles/glass-themes.css',
-      'src/styles/apple-liquid-authentic.css',
+      "src/styles/glass-themes.css",
+      "src/styles/apple-liquid-authentic.css",
     ],
     critical: false,
     maxSize: 5 * 1024, // 5KB
@@ -94,7 +94,7 @@ export class CSSBundler {
 
   constructor(
     config: CSSBundleConfig = DEFAULT_BUNDLE_CONFIG,
-    outputDir = 'dist/css'
+    outputDir = "dist/css",
   ) {
     this.config = config;
     this.outputDir = outputDir;
@@ -104,7 +104,7 @@ export class CSSBundler {
    * Build all CSS bundles
    */
   async buildBundles(): Promise<BundleResult> {
-    performanceMonitor.startTiming('css-bundle-build');
+    performanceMonitor.startTiming("css-bundle-build");
 
     const result: BundleResult = {
       bundles: [],
@@ -134,12 +134,12 @@ export class CSSBundler {
           // Check size limits
           if (bundle.size > bundleConfig.maxSize) {
             result.warnings.push(
-              `Bundle "${bundleName}" exceeds size limit: ${bundle.size} > ${bundleConfig.maxSize}`
+              `Bundle "${bundleName}" exceeds size limit: ${bundle.size} > ${bundleConfig.maxSize}`,
             );
           }
         } catch (error) {
           result.errors.push(
-            `Failed to build bundle "${bundleName}": ${error}`
+            `Failed to build bundle "${bundleName}": ${error}`,
           );
         }
       }
@@ -147,15 +147,15 @@ export class CSSBundler {
       // Validate total critical size (should be < 30KB)
       if (result.criticalSize > 30 * 1024) {
         result.warnings.push(
-          `Critical CSS exceeds 30KB limit: ${result.criticalSize / 1024}KB`
+          `Critical CSS exceeds 30KB limit: ${result.criticalSize / 1024}KB`,
         );
       }
 
-      performanceMonitor.endTiming('css-bundle-build');
+      performanceMonitor.endTiming("css-bundle-build");
       return result;
     } catch (error) {
       result.errors.push(`Bundle build failed: ${error}`);
-      performanceMonitor.endTiming('css-bundle-build');
+      performanceMonitor.endTiming("css-bundle-build");
       return result;
     }
   }
@@ -165,17 +165,17 @@ export class CSSBundler {
    */
   private async buildBundle(
     name: string,
-    config: { files: Array<string>; critical?: boolean }
+    config: { files: Array<string>; critical?: boolean },
   ): Promise<CSSBundle> {
     const startTime = performance.now();
 
     // Combine all CSS files
-    let combinedCSS = '';
+    let combinedCSS = "";
     const existingFiles: Array<string> = [];
 
     for (const filePath of config.files) {
       if (fs.existsSync(filePath)) {
-        const css = fs.readFileSync(filePath, 'utf8');
+        const css = fs.readFileSync(filePath, "utf8");
         combinedCSS += `\n/* ${path.basename(filePath)} */\n${css}\n`;
         existingFiles.push(filePath);
       }
@@ -193,13 +193,13 @@ export class CSSBundler {
     fs.writeFileSync(outputPath, processedCSS);
 
     // Calculate sizes
-    const size = Buffer.byteLength(processedCSS, 'utf8');
+    const size = Buffer.byteLength(processedCSS, "utf8");
     const gzipSize = await this.calculateGzipSize(processedCSS);
 
     const buildTime = performance.now() - startTime;
 
     console.log(
-      `Built CSS bundle "${name}": ${size} bytes (${gzipSize} gzipped) in ${buildTime.toFixed(2)}ms`
+      `Built CSS bundle "${name}": ${size} bytes (${gzipSize} gzipped) in ${buildTime.toFixed(2)}ms`,
     );
 
     return {
@@ -217,13 +217,13 @@ export class CSSBundler {
    */
   private async processCSS(
     css: string,
-    config: { critical?: boolean }
+    config: { critical?: boolean },
   ): Promise<string> {
     const plugins = [
       autoprefixer,
       cssnano({
         preset: [
-          'default',
+          "default",
           {
             discardComments: { removeAll: true },
             normalizeWhitespace: true,
@@ -240,9 +240,9 @@ export class CSSBundler {
     if (config.critical) {
       // Additional optimizations for critical CSS
       plugins.push(
-        require('postcss-critical-css')({
+        require("postcss-critical-css")({
           preserve: false,
-        })
+        }),
       );
     }
 
@@ -254,7 +254,7 @@ export class CSSBundler {
    * Calculate gzipped size
    */
   private async calculateGzipSize(content: string): Promise<number> {
-    const zlib = require('node:zlib');
+    const zlib = require("node:zlib");
     return new Promise((resolve, reject) => {
       zlib.gzip(content, (error: Error, compressed: Buffer) => {
         if (error) {
@@ -285,7 +285,7 @@ export class CSSBundler {
 
       if (config.critical) {
         strategy.critical.push(bundlePath);
-      } else if ('lazy' in config && config.lazy) {
+      } else if ("lazy" in config && config.lazy) {
         strategy.lazy.push(bundlePath);
       } else {
         strategy.preload.push(bundlePath);
@@ -307,18 +307,18 @@ export class CSSBundler {
 
     const critical = strategy.critical
       .map((bundle) => `<link rel="stylesheet" href="/css/${bundle}" />`)
-      .join('\n');
+      .join("\n");
 
     const preload = strategy.preload
       .map(
         (bundle) =>
-          `<link rel="preload" href="/css/${bundle}" as="style" onload="this.onload=null;this.rel='stylesheet'" />`
+          `<link rel="preload" href="/css/${bundle}" as="style" onload="this.onload=null;this.rel='stylesheet'" />`,
       )
-      .join('\n');
+      .join("\n");
 
     const lazy = strategy.lazy
       .map((bundle) => `<link rel="prefetch" href="/css/${bundle}" />`)
-      .join('\n');
+      .join("\n");
 
     return { critical, preload, lazy };
   }
@@ -327,7 +327,7 @@ export class CSSBundler {
    * Watch for changes and rebuild
    */
   watch(callback?: (result: BundleResult) => void): void {
-    const chokidar = require('chokidar');
+    const chokidar = require("chokidar");
 
     // Get all files to watch
     const filesToWatch: Array<string> = [];
@@ -340,7 +340,7 @@ export class CSSBundler {
       persistent: true,
     });
 
-    watcher.on('change', async (filePath: string) => {
+    watcher.on("change", async (filePath: string) => {
       console.log(`CSS file changed: ${filePath}`);
       try {
         const result = await this.buildBundles();
@@ -380,14 +380,14 @@ export class BundleSizeValidator {
       bundle: string;
       actual: number;
       limit: number;
-      severity: 'warning' | 'error';
+      severity: "warning" | "error";
     }>;
   } {
     const violations: Array<{
       bundle: string;
       actual: number;
       limit: number;
-      severity: 'warning' | 'error';
+      severity: "warning" | "error";
     }> = [];
 
     // Check individual bundle sizes
@@ -398,7 +398,7 @@ export class BundleSizeValidator {
           bundle: bundle.name,
           actual: bundle.size,
           limit,
-          severity: bundle.critical ? 'error' : 'warning',
+          severity: bundle.critical ? "error" : "warning",
         });
       }
     }
@@ -406,15 +406,15 @@ export class BundleSizeValidator {
     // Check total critical size
     if (this.thresholds.total && result.criticalSize > this.thresholds.total) {
       violations.push({
-        bundle: 'critical-total',
+        bundle: "critical-total",
         actual: result.criticalSize,
         limit: this.thresholds.total || 0,
-        severity: 'error',
+        severity: "error",
       });
     }
 
     return {
-      passed: violations.filter((v) => v.severity === 'error').length === 0,
+      passed: violations.filter((v) => v.severity === "error").length === 0,
       violations,
     };
   }
@@ -434,7 +434,7 @@ export class CSSPerformanceAnalyzer {
     complexSelectors: Array<string>;
     recommendations: Array<string>;
   }> {
-    const css = fs.readFileSync(bundlePath, 'utf8');
+    const css = fs.readFileSync(bundlePath, "utf8");
     const startTime = performance.now();
 
     // Parse CSS
@@ -450,10 +450,10 @@ export class CSSPerformanceAnalyzer {
 
       // Check for complex selectors
       if (
-        (rule.selector.includes(' ') && rule.selector.split(' ').length > 3) ||
-        rule.selector.includes('+') ||
-        rule.selector.includes('~') ||
-        rule.selector.includes('>')
+        (rule.selector.includes(" ") && rule.selector.split(" ").length > 3) ||
+        rule.selector.includes("+") ||
+        rule.selector.includes("~") ||
+        rule.selector.includes(">")
       ) {
         complexSelectors.push(rule.selector);
       }
@@ -464,13 +464,13 @@ export class CSSPerformanceAnalyzer {
 
     if (complexSelectors.length > selectors.length * 0.1) {
       recommendations.push(
-        'Consider simplifying complex selectors for better performance'
+        "Consider simplifying complex selectors for better performance",
       );
     }
 
     if (css.length > 50 * 1024) {
       recommendations.push(
-        'Bundle size is large, consider splitting into smaller chunks'
+        "Bundle size is large, consider splitting into smaller chunks",
       );
     }
 

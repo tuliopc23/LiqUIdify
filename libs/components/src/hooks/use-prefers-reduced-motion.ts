@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  * Hook to detect if the user prefers reduced motion
@@ -8,22 +8,22 @@ export function usePrefersReducedMotion(): boolean {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(
     () => {
       // Check if we're in a browser environment
-      if (typeof window === 'undefined' || !window.matchMedia) {
+      if (typeof window === "undefined" || !window.matchMedia) {
         return false;
       }
 
       // Check the initial preference
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    }
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    },
   );
 
   useEffect(() => {
     // Check if we're in a browser environment
-    if (typeof window === 'undefined' || !window.matchMedia) {
+    if (typeof window === "undefined" || !window.matchMedia) {
       return;
     }
 
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     // Update state when preference changes
     const handleChange = (event: MediaQueryListEvent) => {
@@ -32,8 +32,8 @@ export function usePrefersReducedMotion(): boolean {
 
     // Modern browsers
     if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
     }
 
     // Legacy browsers
@@ -52,7 +52,7 @@ export function usePrefersReducedMotion(): boolean {
  */
 export function useMotionSafeAnimations<T extends Record<string, unknown>>(
   animationProps: T,
-  reducedMotionProps: Partial<T> = {}
+  reducedMotionProps: Partial<T> = {},
 ): T {
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -82,7 +82,7 @@ export function useMotionSafeAnimations<T extends Record<string, unknown>>(
 export function getMotionSafeValue<T>(
   prefersReducedMotion: boolean,
   animation: T,
-  fallback?: T
+  fallback?: T,
 ): T | undefined {
   return prefersReducedMotion ? fallback : animation;
 }

@@ -10,7 +10,7 @@
  * - CI/CD integration for performance gates
  */
 
-import { PerformanceObserver, performance } from 'node:perf_hooks';
+import { PerformanceObserver, performance } from "node:perf_hooks";
 
 export interface BenchmarkConfig {
   name: string;
@@ -185,7 +185,7 @@ class LiqUIdifyBenchmarkRunner {
           final: finalMemory,
           leaked: memoryLeak,
         },
-        frameRateStats
+        frameRateStats,
       );
 
       const result: BenchmarkResult = {
@@ -215,7 +215,7 @@ class LiqUIdifyBenchmarkRunner {
       return result;
     } catch (error) {
       throw new Error(
-        `Benchmark failed: ${(error as Error).message || 'Unknown error'}`
+        `Benchmark failed: ${(error as Error).message || "Unknown error"}`,
       );
     } finally {
       await this.cleanupBenchmarkEnvironment();
@@ -226,7 +226,7 @@ class LiqUIdifyBenchmarkRunner {
    * Run multiple benchmarks in sequence
    */
   async runBenchmarkSuite(
-    configs: Array<BenchmarkConfig>
+    configs: Array<BenchmarkConfig>,
   ): Promise<Array<BenchmarkResult>> {
     console.log(`🚀 Running benchmark suite (${configs.length} benchmarks)`);
 
@@ -251,7 +251,7 @@ class LiqUIdifyBenchmarkRunner {
           bundleImpact: { size: 0, gzipped: 0, treeshakeable: false },
           passed: false,
           violations: [
-            `Benchmark execution failed: ${(error as Error).message || 'Unknown error'}`,
+            `Benchmark execution failed: ${(error as Error).message || "Unknown error"}`,
           ],
           timestamp: new Date().toISOString(),
         };
@@ -271,7 +271,7 @@ class LiqUIdifyBenchmarkRunner {
    */
   async detectMemoryLeaks(
     config: BenchmarkConfig,
-    cycles = 10
+    cycles = 10,
   ): Promise<{
     hasLeak: boolean;
     leakRate: number;
@@ -310,7 +310,7 @@ class LiqUIdifyBenchmarkRunner {
 
     // Analyze memory growth trend
     const memoryGrowth = memorySnapshots.map((memory, index) =>
-      index === 0 ? 0 : memory - (memorySnapshots[0] ?? 0)
+      index === 0 ? 0 : memory - (memorySnapshots[0] ?? 0),
     );
 
     // Calculate leak rate (bytes per cycle)
@@ -319,11 +319,11 @@ class LiqUIdifyBenchmarkRunner {
 
     const hasLeak = leakRate > this.thresholds.maxMemoryLeak / cycles;
 
-    let analysis = '';
+    let analysis = "";
     analysis = hasLeak
       ? `Memory leak detected: ${(leakRate / 1024).toFixed(2)}KB per cycle. ` +
         `Total growth: ${(totalGrowth / 1024 / 1024).toFixed(2)}MB`
-      : 'No significant memory leak detected. ' +
+      : "No significant memory leak detected. " +
         `Total growth: ${(totalGrowth / 1024).toFixed(2)}KB within acceptable range.`;
 
     return {
@@ -342,14 +342,14 @@ class LiqUIdifyBenchmarkRunner {
     overallScore: number;
     recommendations: Array<string>;
   }> {
-    console.log('🌍 Running real-world performance simulation');
+    console.log("🌍 Running real-world performance simulation");
 
     const scenarios = {
-      'mobile-3g': await this.runWithNetworkThrottling(config, 'slow-3g'),
-      'mobile-4g': await this.runWithNetworkThrottling(config, '4g'),
+      "mobile-3g": await this.runWithNetworkThrottling(config, "slow-3g"),
+      "mobile-4g": await this.runWithNetworkThrottling(config, "4g"),
       desktop: await this.runBenchmark(config),
-      'high-stress': await this.runHighStressTest(config),
-      'concurrent-users': await this.simulateConcurrentUsers(config, 10),
+      "high-stress": await this.runHighStressTest(config),
+      "concurrent-users": await this.simulateConcurrentUsers(config, 10),
     };
 
     // Calculate overall performance score (0-100)
@@ -394,7 +394,7 @@ class LiqUIdifyBenchmarkRunner {
    * Setup performance observers
    */
   private setupPerformanceObservers(): void {
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
@@ -402,14 +402,14 @@ class LiqUIdifyBenchmarkRunner {
     const frameObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       for (const entry of entries) {
-        if ((entry as unknown).entryType === 'frame') {
+        if ((entry as unknown).entryType === "frame") {
           this.frameMetrics.push(entry.duration);
         }
       }
     });
 
     try {
-      frameObserver.observe({ entryTypes: ['frame'] as unknown });
+      frameObserver.observe({ entryTypes: ["frame"] as unknown });
       this.observers.push(frameObserver);
     } catch {
       // Logging disabled
@@ -427,7 +427,7 @@ class LiqUIdifyBenchmarkRunner {
     });
 
     try {
-      longTaskObserver.observe({ entryTypes: ['longtask'] as unknown });
+      longTaskObserver.observe({ entryTypes: ["longtask"] as unknown });
       this.observers.push(longTaskObserver);
     } catch {
       // Logging disabled
@@ -439,7 +439,7 @@ class LiqUIdifyBenchmarkRunner {
    */
   private async renderComponent(
     Component: React.ComponentType<Record<string, unknown>>,
-    props: Record<string, unknown>
+    props: Record<string, unknown>,
   ): Promise<void> {
     // In a real implementation, this would use React's test renderer
     // or a headless browser to actually render the component
@@ -458,9 +458,9 @@ class LiqUIdifyBenchmarkRunner {
     }
 
     // Simulate DOM manipulation memory allocation
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const temporaryElements = Array.from({ length: 10 }, () =>
-        document.createElement('div')
+        document.createElement("div"),
       );
       // Clean up immediately to avoid affecting memory measurements
       for (const element of temporaryElements) {
@@ -482,7 +482,7 @@ class LiqUIdifyBenchmarkRunner {
    */
   private async waitForNextFrame(): Promise<void> {
     return new Promise((resolve) => {
-      if (typeof requestAnimationFrame === 'undefined') {
+      if (typeof requestAnimationFrame === "undefined") {
         setTimeout(resolve, 16); // Fallback for Node.js
       } else {
         requestAnimationFrame(() => resolve());
@@ -494,9 +494,9 @@ class LiqUIdifyBenchmarkRunner {
    * Force garbage collection (if available)
    */
   private async triggerGC(): Promise<void> {
-    if (typeof window !== 'undefined' && (window as unknown).gc) {
+    if (typeof window !== "undefined" && (window as unknown).gc) {
       (window as unknown).gc();
-    } else if (typeof global !== 'undefined' && (global as unknown).gc) {
+    } else if (typeof global !== "undefined" && (global as unknown).gc) {
       (global as unknown).gc();
     }
 
@@ -508,11 +508,11 @@ class LiqUIdifyBenchmarkRunner {
    * Get current memory usage
    */
   private getMemoryUsage(): number {
-    if (typeof performance !== 'undefined' && (performance as unknown).memory) {
+    if (typeof performance !== "undefined" && (performance as unknown).memory) {
       return (performance as unknown).memory.usedJSHeapSize;
     }
 
-    if (typeof process !== 'undefined' && process.memoryUsage) {
+    if (typeof process !== "undefined" && process.memoryUsage) {
       return process.memoryUsage().heapUsed;
     }
 
@@ -547,14 +547,14 @@ class LiqUIdifyBenchmarkRunner {
    * Analyze bundle impact (simplified simulation)
    */
   private async analyzeBundleImpact(
-    Component: React.ComponentType<any>
+    Component: React.ComponentType<any>,
   ): Promise<{
     size: number;
     gzipped: number;
     treeshakeable: boolean;
   }> {
     // In a real implementation, this would analyze the actual bundle
-    const componentName = Component.displayName || Component.name || 'Unknown';
+    const componentName = Component.displayName || Component.name || "Unknown";
     const estimatedSize = componentName.length * 100 + Math.random() * 1000; // Rough estimate
 
     return {
@@ -575,31 +575,31 @@ class LiqUIdifyBenchmarkRunner {
       final: number;
       leaked: number;
     },
-    frameStats: { average: number; drops: number }
+    frameStats: { average: number; drops: number },
   ): Array<string> {
     const violations: Array<string> = [];
 
     if (renderStats.average > this.thresholds.maxRenderTime) {
       violations.push(
-        `Average render time ${renderStats.average.toFixed(2)}ms exceeds threshold ${this.thresholds.maxRenderTime}ms`
+        `Average render time ${renderStats.average.toFixed(2)}ms exceeds threshold ${this.thresholds.maxRenderTime}ms`,
       );
     }
 
     if (renderStats.p95 > this.thresholds.maxP95RenderTime) {
       violations.push(
-        `P95 render time ${renderStats.p95.toFixed(2)}ms exceeds threshold ${this.thresholds.maxP95RenderTime}ms`
+        `P95 render time ${renderStats.p95.toFixed(2)}ms exceeds threshold ${this.thresholds.maxP95RenderTime}ms`,
       );
     }
 
     if (memoryStats.leaked > this.thresholds.maxMemoryLeak) {
       violations.push(
-        `Memory leak ${(memoryStats.leaked / 1024).toFixed(2)}KB exceeds threshold ${(this.thresholds.maxMemoryLeak / 1024).toFixed(2)}KB`
+        `Memory leak ${(memoryStats.leaked / 1024).toFixed(2)}KB exceeds threshold ${(this.thresholds.maxMemoryLeak / 1024).toFixed(2)}KB`,
       );
     }
 
     if (frameStats.average < this.thresholds.minFrameRate) {
       violations.push(
-        `Average frame rate ${frameStats.average.toFixed(1)}fps below threshold ${this.thresholds.minFrameRate}fps`
+        `Average frame rate ${frameStats.average.toFixed(1)}fps below threshold ${this.thresholds.minFrameRate}fps`,
       );
     }
 
@@ -620,11 +620,11 @@ class LiqUIdifyBenchmarkRunner {
     const sumY = memoryGrowth.reduce((sum, value) => sum + value, 0);
     const sumXY = memoryGrowth.reduce(
       (sum, value, index) => sum + index * value,
-      0
+      0,
     );
     const sumXX = memoryGrowth.reduce(
       (sum, _, index) => sum + index * index,
-      0
+      0,
     );
 
     const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
@@ -637,7 +637,7 @@ class LiqUIdifyBenchmarkRunner {
    */
   private estimateRenderComplexity(
     _Component: React.ComponentType<Record<string, unknown>>,
-    _props: Record<string, unknown>
+    _props: Record<string, unknown>,
   ): number {
     let complexity = 1;
 
@@ -649,7 +649,7 @@ class LiqUIdifyBenchmarkRunner {
     for (const value of Object.values(_props)) {
       if (Array.isArray(value)) {
         complexity += value.length * 0.01;
-      } else if (typeof value === 'object' && value !== null) {
+      } else if (typeof value === "object" && value !== null) {
         complexity += 0.2;
       }
     }
@@ -662,13 +662,13 @@ class LiqUIdifyBenchmarkRunner {
    */
   private async runWithNetworkThrottling(
     config: BenchmarkConfig,
-    speed: string
+    speed: string,
   ): Promise<BenchmarkResult> {
     // Simulate network delays for different speeds
     const delays = {
-      'slow-3g': 2000,
-      '3g': 800,
-      '4g': 200,
+      "slow-3g": 2000,
+      "3g": 800,
+      "4g": 200,
     };
 
     const delay = delays[speed as keyof typeof delays] || 0;
@@ -684,7 +684,7 @@ class LiqUIdifyBenchmarkRunner {
    * Run high stress test
    */
   private async runHighStressTest(
-    config: BenchmarkConfig
+    config: BenchmarkConfig,
   ): Promise<BenchmarkResult> {
     const stressConfig = {
       ...config,
@@ -700,14 +700,14 @@ class LiqUIdifyBenchmarkRunner {
    */
   private async simulateConcurrentUsers(
     config: BenchmarkConfig,
-    userCount: number
+    userCount: number,
   ): Promise<BenchmarkResult> {
     const promises = Array.from({ length: userCount }, () =>
       this.runBenchmark({
         ...config,
         name: `${config.name} (Concurrent User)`,
         iterations: Math.floor((config.iterations || 100) / userCount),
-      })
+      }),
     );
 
     const results = await Promise.all(promises);
@@ -757,24 +757,24 @@ class LiqUIdifyBenchmarkRunner {
    * Generate performance recommendations
    */
   private generatePerformanceRecommendations(
-    scenarios: Record<string, BenchmarkResult>
+    scenarios: Record<string, BenchmarkResult>,
   ): Array<string> {
     const recommendations: Array<string> = [];
 
     for (const [scenarioName, result] of Object.entries(scenarios)) {
       if (!result.passed) {
         for (const violation of result.violations) {
-          if (violation.includes('render time')) {
+          if (violation.includes("render time")) {
             recommendations.push(
-              `Optimize render performance for ${scenarioName}: consider memoization, virtual scrolling, or code splitting`
+              `Optimize render performance for ${scenarioName}: consider memoization, virtual scrolling, or code splitting`,
             );
-          } else if (violation.includes('memory leak')) {
+          } else if (violation.includes("memory leak")) {
             recommendations.push(
-              `Fix memory leak in ${scenarioName}: check for event listener cleanup and component unmounting`
+              `Fix memory leak in ${scenarioName}: check for event listener cleanup and component unmounting`,
             );
-          } else if (violation.includes('frame rate')) {
+          } else if (violation.includes("frame rate")) {
             recommendations.push(
-              `Improve frame rate for ${scenarioName}: reduce DOM manipulations and use CSS animations`
+              `Improve frame rate for ${scenarioName}: reduce DOM manipulations and use CSS animations`,
             );
           }
         }
@@ -817,20 +817,20 @@ class LiqUIdifyBenchmarkRunner {
    * Log benchmark result
    */
   private logBenchmarkResult(result: BenchmarkResult): void {
-    const status = result.passed ? '✅' : '❌';
+    const status = result.passed ? "✅" : "❌";
     const renderTime = result.renderTime.average.toFixed(2);
     const memoryLeak = (result.memoryUsage.leaked / 1024).toFixed(2);
     const frameRate = result.frameRate.average.toFixed(1);
 
     console.log(`${status} ${result.name}`);
     console.log(
-      `   Render: ${renderTime}ms avg (P95: ${result.renderTime.p95.toFixed(2)}ms)`
+      `   Render: ${renderTime}ms avg (P95: ${result.renderTime.p95.toFixed(2)}ms)`,
     );
     console.log(`   Memory: ${memoryLeak}KB leaked`);
     console.log(`   FPS: ${frameRate} avg (${result.frameRate.drops} drops)`);
 
     if (result.violations.length > 0) {
-      console.log('   Violations:');
+      console.log("   Violations:");
       for (const violation of result.violations) {
         console.log(`     - ${violation}`);
       }
@@ -841,20 +841,20 @@ class LiqUIdifyBenchmarkRunner {
    * Generate comprehensive suite report
    */
   private async generateSuiteReport(
-    results: Array<BenchmarkResult>
+    results: Array<BenchmarkResult>,
   ): Promise<void> {
     const passed = results.filter((r) => r.passed).length;
     const total = results.length;
     const passRate = ((passed / total) * 100).toFixed(1);
 
-    console.log('\n📊 Benchmark Suite Results:');
+    console.log("\n📊 Benchmark Suite Results:");
     console.log(`   Passed: ${passed}/${total} (${passRate}%)`);
 
     if (passed < total) {
-      console.log('   ❌ Performance requirements not met');
+      console.log("   ❌ Performance requirements not met");
       process.exit(1);
     } else {
-      console.log('   ✅ All performance requirements met');
+      console.log("   ✅ All performance requirements met");
     }
 
     // Generate detailed report file
@@ -879,7 +879,7 @@ class LiqUIdifyBenchmarkRunner {
 
     // In a real implementation, this would save to a file
     console.log(
-      `\n📄 Detailed report: ${JSON.stringify(report, undefined, 2)}`
+      `\n📄 Detailed report: ${JSON.stringify(report, undefined, 2)}`,
     );
   }
 
@@ -914,9 +914,9 @@ export default LiqUIdifyBenchmarkRunner;
 export const createComponentBenchmark = (
   component: React.ComponentType<any>,
   props: Record<string, unknown> = {},
-  options: Partial<BenchmarkConfig> = {}
+  options: Partial<BenchmarkConfig> = {},
 ): BenchmarkConfig => ({
-  name: component.displayName || component.name || 'Component',
+  name: component.displayName || component.name || "Component",
   description: `Performance benchmark for ${component.displayName || component.name}`,
   component,
   props,
@@ -928,7 +928,7 @@ export const createComponentBenchmark = (
 
 export const createMemoryLeakTest = (
   component: React.ComponentType<any>,
-  props: Record<string, unknown> = {}
+  props: Record<string, unknown> = {},
 ): BenchmarkConfig => ({
   name: `${component.displayName || component.name} Memory Leak Test`,
   description: `Memory leak detection for ${component.displayName || component.name}`,

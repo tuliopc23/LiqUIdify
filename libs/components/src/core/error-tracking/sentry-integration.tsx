@@ -9,14 +9,14 @@
  * - Privacy-first error collection
  */
 
-import * as Sentry from '@sentry/react';
-import type { Integration, SeverityLevel, User } from '@sentry/types';
-import React from 'react';
+import * as Sentry from "@sentry/react";
+import type { Integration, SeverityLevel, User } from "@sentry/types";
+import React from "react";
 
 // Environment detection utilities
-const isProduction = process.env.NODE_ENV === 'production';
-const isDevelopment = process.env.NODE_ENV === 'development';
-const isTest = process.env.NODE_ENV === 'test';
+const isProduction = process.env.NODE_ENV === "production";
+const isDevelopment = process.env.NODE_ENV === "development";
+const isTest = process.env.NODE_ENV === "test";
 
 // Sentry configuration for LiqUIdify
 export interface LiqUIdifySentryConfig {
@@ -38,9 +38,9 @@ export interface LiqUIdifySentryConfig {
 
 // Default configuration optimized for component library
 const DEFAULT_CONFIG: Required<LiqUIdifySentryConfig> = {
-  dsn: '', // Should be set via environment variable
-  environment: process.env.NODE_ENV || 'development',
-  release: process.env.npm_package_version || '1.0.0',
+  dsn: "", // Should be set via environment variable
+  environment: process.env.NODE_ENV || "development",
+  release: process.env.npm_package_version || "1.0.0",
   sampleRate: isProduction ? 0.1 : 1, // 10% sampling in production
   tracesSampleRate: isProduction ? 0.1 : 1,
   replaysSessionSampleRate: 0.01, // 1% of sessions
@@ -50,21 +50,21 @@ const DEFAULT_CONFIG: Required<LiqUIdifySentryConfig> = {
   enableSessionReplay: isProduction,
   enableErrorBoundaries: true,
   customTags: {
-    library: 'liquidify',
-    version: process.env.npm_package_version || '1.0.0',
-    bundle: 'unknown',
+    library: "liquidify",
+    version: process.env.npm_package_version || "1.0.0",
+    bundle: "unknown",
   },
   allowedUrls: [],
   denyUrls: [
     // Block common development and internal URLs
-    'localhost',
-    '127.0.0.1',
-    '192.168.',
-    '10.',
-    '172.16.',
-    'chrome-extension',
-    'moz-extension',
-    'safari-extension',
+    "localhost",
+    "127.0.0.1",
+    "192.168.",
+    "10.",
+    "172.16.",
+    "chrome-extension",
+    "moz-extension",
+    "safari-extension",
   ],
 };
 
@@ -85,16 +85,16 @@ export interface LiqUIdifyErrorContext {
 
 // Custom error types for better categorization
 export enum LiqUIdifyErrorType {
-  COMPONENT_RENDER_ERROR = 'component_render_error',
-  ANIMATION_ERROR = 'animation_error',
-  ACCESSIBILITY_ERROR = 'accessibility_error',
-  PERFORMANCE_ERROR = 'performance_error',
-  BUNDLE_ERROR = 'bundle_error',
-  SSR_ERROR = 'ssr_error',
-  API_ERROR = 'api_error',
-  USER_INPUT_ERROR = 'user_input_error',
-  CONFIGURATION_ERROR = 'configuration_error',
-  UNKNOWN_ERROR = 'unknown_error',
+  COMPONENT_RENDER_ERROR = "component_render_error",
+  ANIMATION_ERROR = "animation_error",
+  ACCESSIBILITY_ERROR = "accessibility_error",
+  PERFORMANCE_ERROR = "performance_error",
+  BUNDLE_ERROR = "bundle_error",
+  SSR_ERROR = "ssr_error",
+  API_ERROR = "api_error",
+  USER_INPUT_ERROR = "user_input_error",
+  CONFIGURATION_ERROR = "configuration_error",
+  UNKNOWN_ERROR = "unknown_error",
 }
 
 class LiqUIdifySentryIntegration {
@@ -112,7 +112,7 @@ class LiqUIdifySentryIntegration {
         process.env.LIQUIDIFY_SENTRY_DSN ||
         process.env.VITE_SENTRY_DSN ||
         process.env.REACT_APP_SENTRY_DSN ||
-        '';
+        "";
     }
   }
 
@@ -122,7 +122,7 @@ class LiqUIdifySentryIntegration {
   public async initialize(): Promise<void> {
     // Skip initialization in test environment
     if (isTest) {
-      console.log('[LiqUIdify] Sentry disabled in test environment');
+      console.log("[LiqUIdify] Sentry disabled in test environment");
       return;
     }
 
@@ -145,7 +145,7 @@ class LiqUIdifySentryIntegration {
       // Session replay for debugging using v9 API
       if (
         this.sentryConfig.enableSessionReplay &&
-        typeof window !== 'undefined'
+        typeof window !== "undefined"
       ) {
         integrations.push(
           Sentry.replayIntegration({
@@ -154,9 +154,9 @@ class LiqUIdifySentryIntegration {
             maskAllInputs: this.sentryConfig.enableUserPrivacy,
             blockAllMedia: this.sentryConfig.enableUserPrivacy,
             // Only capture LiqUIdify-related elements
-            mask: ['.liquidify-sensitive', '[data-liquidify-private]'],
-            block: ['.liquidify-block', '[data-liquidify-block]'],
-          })
+            mask: [".liquidify-sensitive", "[data-liquidify-private]"],
+            block: [".liquidify-block", "[data-liquidify-block]"],
+          }),
         );
       }
 
@@ -189,13 +189,13 @@ class LiqUIdifySentryIntegration {
       Sentry.withScope((scope) => {
         scope.setTags({
           ...this.sentryConfig.customTags,
-          'liquidify.environment': this.sentryConfig.environment,
-          'liquidify.version': this.sentryConfig.release,
+          "liquidify.environment": this.sentryConfig.environment,
+          "liquidify.version": this.sentryConfig.release,
         });
-        scope.setContext('library', {
-          name: 'liquidify',
+        scope.setContext("library", {
+          name: "liquidify",
           version: this.sentryConfig.release,
-          type: 'component-library',
+          type: "component-library",
         });
       });
 
@@ -208,7 +208,7 @@ class LiqUIdifySentryIntegration {
       this.initialized = true;
 
       if (isDevelopment) {
-        console.log('[LiqUIdify] Sentry error tracking initialized');
+        console.log("[LiqUIdify] Sentry error tracking initialized");
       }
 
       // Add performance observer for Core Web Vitals
@@ -226,7 +226,7 @@ class LiqUIdifySentryIntegration {
     error: Error,
     context: LiqUIdifyErrorContext = {},
     errorType: LiqUIdifyErrorType = LiqUIdifyErrorType.UNKNOWN_ERROR,
-    level: SeverityLevel = 'error'
+    level: SeverityLevel = "error",
   ): string | undefined {
     if (!this.initialized) {
       // Queue error for later processing
@@ -236,15 +236,15 @@ class LiqUIdifySentryIntegration {
 
     return Sentry.withScope((scope) => {
       // Set error type and context
-      scope.setTag('liquidify.error_type', errorType);
+      scope.setTag("liquidify.error_type", errorType);
       scope.setLevel(level);
 
       // Add component context
       if (context.componentName) {
-        scope.setTag('liquidify.component', context.componentName);
-        scope.setContext('component', {
+        scope.setTag("liquidify.component", context.componentName);
+        scope.setContext("component", {
           name: context.componentName,
-          version: context.componentVersion || 'unknown',
+          version: context.componentVersion || "unknown",
           glassMorphismLevel: context.glassMorphismLevel,
           animationState: context.animationState,
           accessibilityMode: context.accessibilityMode,
@@ -253,33 +253,33 @@ class LiqUIdifySentryIntegration {
 
       // Add user interaction context
       if (context.userInteraction) {
-        scope.setTag('liquidify.interaction', context.userInteraction);
+        scope.setTag("liquidify.interaction", context.userInteraction);
       }
 
       // Add performance metrics
       if (context.performanceMetrics) {
-        scope.setContext('performance', context.performanceMetrics);
+        scope.setContext("performance", context.performanceMetrics);
 
         // Add performance tags for filtering
         if (
           context.performanceMetrics.renderTime &&
           context.performanceMetrics.renderTime > 16
         ) {
-          scope.setTag('liquidify.slow_render', 'true');
+          scope.setTag("liquidify.slow_render", "true");
         }
 
         if (
           context.performanceMetrics.bundleSize &&
           context.performanceMetrics.bundleSize > 30_720
         ) {
-          scope.setTag('liquidify.large_bundle', 'true');
+          scope.setTag("liquidify.large_bundle", "true");
         }
       }
 
       // Enhance error with LiqUIdify-specific fingerprinting
       scope.setFingerprint([
         errorType,
-        context.componentName || 'unknown',
+        context.componentName || "unknown",
         error.name,
         this.sanitizeErrorMessage(error.message),
       ]);
@@ -299,29 +299,29 @@ class LiqUIdifySentryIntegration {
       memoryUsage?: number;
       componentCount?: number;
     },
-    context: LiqUIdifyErrorContext = {}
+    context: LiqUIdifyErrorContext = {},
   ): void {
     if (!this.initialized || !this.sentryConfig.enablePerformanceMonitoring) {
       return;
     }
 
     Sentry.withScope((scope) => {
-      scope.setTag('liquidify.performance_issue', 'true');
-      scope.setTag('liquidify.metric_name', name);
+      scope.setTag("liquidify.performance_issue", "true");
+      scope.setTag("liquidify.metric_name", name);
 
       // Set severity based on performance impact
-      let level: SeverityLevel = 'info';
+      let level: SeverityLevel = "info";
       if (metrics.duration > 100) {
-        level = 'warning';
+        level = "warning";
       }
       if (metrics.duration > 500) {
-        level = 'error';
+        level = "error";
       }
 
       scope.setLevel(level);
 
-      scope.setContext('performance_metrics', metrics);
-      scope.setContext('component_context', context as unknown);
+      scope.setContext("performance_metrics", metrics);
+      scope.setContext("component_context", context as unknown);
 
       // Create a custom performance event
       const performanceEvent = {
@@ -344,9 +344,9 @@ class LiqUIdifySentryIntegration {
    */
   public addBreadcrumb(
     message: string,
-    category = 'liquidify',
-    level: SeverityLevel = 'info',
-    data?: Record<string, unknown>
+    category = "liquidify",
+    level: SeverityLevel = "info",
+    data?: Record<string, unknown>,
   ): void {
     if (!this.initialized) {
       return;
@@ -407,69 +407,69 @@ class LiqUIdifySentryIntegration {
           resetError: () => void;
         }) =>
           React.createElement(
-            'div',
+            "div",
             {
               className:
-                'liquidify-error-boundary p-6 border border-red-200 rounded-lg bg-red-50',
+                "liquidify-error-boundary p-6 border border-red-200 rounded-lg bg-red-50",
             },
             [
               React.createElement(
-                'h2',
+                "h2",
                 {
-                  key: 'title',
-                  className: 'text-lg font-semibold text-red-800 mb-2',
+                  key: "title",
+                  className: "text-lg font-semibold text-red-800 mb-2",
                 },
-                'Something went wrong with this LiqUIdify component'
+                "Something went wrong with this LiqUIdify component",
               ),
               React.createElement(
-                'details',
+                "details",
                 {
-                  key: 'details',
-                  className: 'mb-4',
+                  key: "details",
+                  className: "mb-4",
                 },
                 [
                   React.createElement(
-                    'summary',
+                    "summary",
                     {
-                      key: 'summary',
-                      className: 'cursor-pointer text-sm text-red-600',
+                      key: "summary",
+                      className: "cursor-pointer text-sm text-red-600",
                     },
-                    'Error details'
+                    "Error details",
                   ),
                   React.createElement(
-                    'pre',
+                    "pre",
                     {
-                      key: 'error',
+                      key: "error",
                       className:
-                        'mt-2 text-xs text-red-700 whitespace-pre-wrap',
+                        "mt-2 text-xs text-red-700 whitespace-pre-wrap",
                     },
 
-                    error?.toString()
+                    error?.toString(),
                   ),
-                ]
+                ],
               ),
               React.createElement(
-                'button',
+                "button",
                 {
-                  key: 'button',
+                  key: "button",
                   onClick: resetError,
                   className:
-                    'px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors',
+                    "px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors",
                 },
-                'Try again'
+                "Try again",
               ),
-            ]
+            ],
           ),
         beforeCapture: (
           scope: unknown,
           _error: unknown,
-          componentStack: string
+          componentStack: string,
         ) => {
-          scope.setTag('liquidify.error_boundary', 'true');
-          scope.setContext('error_boundary', { componentStack } as unknown);
-          scope.setLevel('error');
+          scope.setTag("liquidify.error_boundary", "true");
+          scope.setContext("error_boundary", { componentStack } as unknown);
+          scope.setLevel("error");
         },
-      }
+      },
     );
   }
 
@@ -478,7 +478,7 @@ class LiqUIdifySentryIntegration {
    */
   private beforeSendFilter(
     event: Sentry.Event,
-    _hint?: Sentry.EventHint
+    _hint?: Sentry.EventHint,
   ): Sentry.Event | null {
     // Skip if in development and error is not LiqUIdify related
     if (isDevelopment && !this.isLiqUIdifyError(event)) {
@@ -503,10 +503,10 @@ class LiqUIdifySentryIntegration {
    * Filter transactions before sending to Sentry
    */
   private _beforeSendTransactionFilter(
-    event: Sentry.Event
+    event: Sentry.Event,
   ): Sentry.Event | null {
     // Only send performance data for LiqUIdify components
-    if (!event.transaction?.includes('liquidify')) {
+    if (!event.transaction?.includes("liquidify")) {
       return null;
     }
     return event;
@@ -516,18 +516,18 @@ class LiqUIdifySentryIntegration {
    * Check if error is related to LiqUIdify
    */
   private isLiqUIdifyError(event: Sentry.Event): boolean {
-    const errorMessage = event.exception?.values?.[0]?.value || '';
+    const errorMessage = event.exception?.values?.[0]?.value || "";
     const stackTrace = event.exception?.values?.[0]?.stacktrace?.frames || [];
 
     // Check for LiqUIdify in error message or stack trace
     return (
-      errorMessage.toLowerCase().includes('liquidify') ||
+      errorMessage.toLowerCase().includes("liquidify") ||
       stackTrace.some(
         (frame) =>
-          frame.filename?.includes('liquidify') ||
-          (frame as unknown).function?.includes('liquidify')
+          frame.filename?.includes("liquidify") ||
+          (frame as unknown).function?.includes("liquidify"),
       ) ||
-      event.tags?.['liquidify.component'] !== undefined
+      event.tags?.["liquidify.component"] !== undefined
     );
   }
 
@@ -538,9 +538,9 @@ class LiqUIdifySentryIntegration {
     const frames = event.exception?.values?.[0]?.stacktrace?.frames || [];
     return frames.some(
       (frame) =>
-        frame.filename?.includes('extension://') ||
-        frame.filename?.includes('moz-extension://') ||
-        frame.filename?.includes('safari-extension://')
+        frame.filename?.includes("extension://") ||
+        frame.filename?.includes("moz-extension://") ||
+        frame.filename?.includes("safari-extension://"),
     );
   }
 
@@ -548,7 +548,7 @@ class LiqUIdifySentryIntegration {
    * Check if error is a non-actionable network error
    */
   private isNetworkError(event: Sentry.Event): boolean {
-    const errorMessage = event.exception?.values?.[0]?.value || '';
+    const errorMessage = event.exception?.values?.[0]?.value || "";
     const networkErrorPatterns = [
       /network error/i,
       /failed to fetch/i,
@@ -592,26 +592,26 @@ class LiqUIdifySentryIntegration {
    * Sanitize object by removing sensitive keys
    */
   private sanitizeObject(
-    object: Record<string, unknown>
+    object: Record<string, unknown>,
   ): Record<string, unknown> {
     const sensitiveKeys = [
-      'password',
-      'token',
-      'secret',
-      'key',
-      'auth',
-      'session',
+      "password",
+      "token",
+      "secret",
+      "key",
+      "auth",
+      "session",
     ];
     const sanitized: Record<string, unknown> = {};
 
     for (const [key, value] of Object.entries(object)) {
       if (
         sensitiveKeys.some((sensitiveKey) =>
-          key.toLowerCase().includes(sensitiveKey)
+          key.toLowerCase().includes(sensitiveKey),
         )
       ) {
-        sanitized[key] = '[Filtered]';
-      } else if (typeof value === 'object' && value !== null) {
+        sanitized[key] = "[Filtered]";
+      } else if (typeof value === "object" && value !== null) {
         sanitized[key] = this.sanitizeObject(value);
       } else {
         sanitized[key] = value;
@@ -627,9 +627,9 @@ class LiqUIdifySentryIntegration {
   private sanitizeErrorMessage(message: string): string {
     // Replace dynamic values with placeholders for better grouping
     return message
-      .replaceAll(/\d+/g, 'NUMBER')
-      .replaceAll(/[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}/gi, 'UUID')
-      .replaceAll(/https?:\/\/\S+/g, 'URL')
+      .replaceAll(/\d+/g, "NUMBER")
+      .replaceAll(/[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}/gi, "UUID")
+      .replaceAll(/https?:\/\/\S+/g, "URL")
       .toLowerCase();
   }
 
@@ -637,11 +637,11 @@ class LiqUIdifySentryIntegration {
    * Generate anonymous user ID
    */
   private generateAnonymousId(): string {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      let id = localStorage.getItem('liquidify_anonymous_id');
+    if (typeof window !== "undefined" && window.localStorage) {
+      let id = localStorage.getItem("liquidify_anonymous_id");
       if (!id) {
         id = `anon_${Math.random().toString(36).slice(2, 11)}`;
-        localStorage.setItem('liquidify_anonymous_id', id);
+        localStorage.setItem("liquidify_anonymous_id", id);
       }
       return id;
     }
@@ -664,19 +664,19 @@ class LiqUIdifySentryIntegration {
   private setupPerformanceMonitoring(): void {
     if (
       !this.sentryConfig.enablePerformanceMonitoring ||
-      typeof window === 'undefined'
+      typeof window === "undefined"
     ) {
       return;
     }
 
     // Monitor LCP, FID, CLS for LiqUIdify components
     try {
-      import('web-vitals').then((webVitals) => {
+      import("web-vitals").then((webVitals) => {
         const { onCLS, onINP, onLCP } = webVitals;
         onCLS((metric: unknown) => {
           if (metric.value > 0.1) {
             // CLS threshold
-            this.capturePerformanceIssue('cumulative-layout-shift', {
+            this.capturePerformanceIssue("cumulative-layout-shift", {
               duration: metric.value * 1000,
             });
           }
@@ -685,7 +685,7 @@ class LiqUIdifySentryIntegration {
         onINP((metric: unknown) => {
           if (metric.value > 100) {
             // FID threshold
-            this.capturePerformanceIssue('first-input-delay', {
+            this.capturePerformanceIssue("first-input-delay", {
               duration: metric.value,
             });
           }
@@ -694,7 +694,7 @@ class LiqUIdifySentryIntegration {
         onLCP((metric: unknown) => {
           if (metric.value > 2500) {
             // LCP threshold
-            this.capturePerformanceIssue('largest-contentful-paint', {
+            this.capturePerformanceIssue("largest-contentful-paint", {
               duration: metric.value,
             });
           }
@@ -732,7 +732,7 @@ let sentryIntegration: LiqUIdifySentryIntegration | null;
  * Initialize LiqUIdify Sentry integration
  */
 export function initializeLiqUIdifySentry(
-  config?: LiqUIdifySentryConfig
+  config?: LiqUIdifySentryConfig,
 ): LiqUIdifySentryIntegration {
   if (!sentryIntegration) {
     sentryIntegration = new LiqUIdifySentryIntegration(config);
@@ -755,8 +755,8 @@ export function useLiqUIdifyErrorTracking(componentName: string) {
 
   const trackError = (
     error: Error,
-    context?: Omit<LiqUIdifyErrorContext, 'componentName'>,
-    errorType?: LiqUIdifyErrorType
+    context?: Omit<LiqUIdifyErrorContext, "componentName">,
+    errorType?: LiqUIdifyErrorType,
   ) => {
     sentry?.captureError(error, { ...context, componentName }, errorType);
   };
@@ -769,7 +769,7 @@ export function useLiqUIdifyErrorTracking(componentName: string) {
       memoryUsage?: number;
       componentCount?: number;
     },
-    context?: Omit<LiqUIdifyErrorContext, 'componentName'>
+    context?: Omit<LiqUIdifyErrorContext, "componentName">,
   ) => {
     sentry?.capturePerformanceIssue(name, metrics, {
       ...context,
@@ -781,13 +781,13 @@ export function useLiqUIdifyErrorTracking(componentName: string) {
     message: string,
     category?: string,
     level?: SeverityLevel,
-    data?: Record<string, unknown>
+    data?: Record<string, unknown>,
   ) => {
     sentry?.addBreadcrumb(
       `[${componentName}] ${message}`,
-      category || 'component',
+      category || "component",
       level,
-      { component: componentName, ...data }
+      { component: componentName, ...data },
     );
   };
 

@@ -7,6 +7,7 @@ This document outlines the complete integration plan for adding Nx to the LiqUId
 ## Current State Analysis
 
 ### Existing Architecture
+
 - **Package Manager**: Bun
 - **Build Tool**: Vite + Custom CSS processing
 - **Component Library**: 52 React components with TypeScript
@@ -15,6 +16,7 @@ This document outlines the complete integration plan for adding Nx to the LiqUId
 - **Deployment**: Vercel (Storybook at liquidify-storybook.vercel.app)
 
 ### Current Build Pipeline
+
 ```bash
 # Current build flow
 bun run clean
@@ -29,6 +31,7 @@ build-storybook + bun run post-storybook
 ### Phase 1: Nx Installation & Basic Setup (Week 1)
 
 #### 1.1 Install Nx
+
 ```bash
 # Add Nx to existing project
 npx nx@latest init
@@ -38,6 +41,7 @@ bun add -D @nx/vite @nx/react @nx/storybook @nx/playwright
 ```
 
 #### 1.2 Initial Workspace Structure
+
 ```
 LiqUIdify/
 ├── apps/
@@ -54,6 +58,7 @@ LiqUIdify/
 ```
 
 #### 1.3 Nx Configuration (`nx.json`)
+
 ```json
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
@@ -108,6 +113,7 @@ LiqUIdify/
 ### Phase 2: Library Migration (Week 2)
 
 #### 2.1 Component Library Configuration (`libs/components/project.json`)
+
 ```json
 {
   "name": "components",
@@ -151,40 +157,41 @@ LiqUIdify/
 ```
 
 #### 2.2 Vite Configuration (`libs/components/vite.config.ts`)
+
 ```typescript
 /// <reference types='vitest' />
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import dts from 'vite-plugin-dts';
-import * as path from 'path';
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
+import * as path from "path";
+import { nxViteTsPaths } from "@nx/vite/plugins/nx-tsconfig-paths.plugin";
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/libs/components',
+  cacheDir: "../../node_modules/.vite/libs/components",
   plugins: [
     react(),
     nxViteTsPaths(),
     dts({
-      entryRoot: 'src',
-      tsConfigFilePath: path.join(__dirname, 'tsconfig.lib.json'),
+      entryRoot: "src",
+      tsConfigFilePath: path.join(__dirname, "tsconfig.lib.json"),
       skipDiagnostics: true,
     }),
   ],
   build: {
-    outDir: '../../dist/libs/components',
+    outDir: "../../dist/libs/components",
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
     lib: {
-      entry: 'src/index.ts',
-      name: 'liquidify',
-      fileName: 'index',
-      formats: ['es', 'cjs'],
+      entry: "src/index.ts",
+      name: "liquidify",
+      fileName: "index",
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: ["react", "react-dom", "react/jsx-runtime"],
     },
   },
   // Note: Tests are run using Bun test, not Vitest
@@ -195,6 +202,7 @@ export default defineConfig({
 ### Phase 3: Storybook Migration (Week 3)
 
 #### 3.1 Storybook as Nx App (`apps/storybook/project.json`)
+
 ```json
 {
   "name": "storybook",
@@ -235,30 +243,31 @@ export default defineConfig({
 ```
 
 #### 3.2 Storybook Main Config (`apps/storybook/.storybook/main.ts`)
+
 ```typescript
-import type { StorybookConfig } from '@storybook/react-vite';
-import { mergeConfig } from 'vite';
+import type { StorybookConfig } from "@storybook/react-vite";
+import { mergeConfig } from "vite";
 
 const config: StorybookConfig = {
-  stories: ['../../../libs/components/src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ["../../../libs/components/src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-docs',
-    '@storybook/addon-a11y',
-    '@storybook/addon-themes',
+    "@storybook/addon-essentials",
+    "@storybook/addon-docs",
+    "@storybook/addon-a11y",
+    "@storybook/addon-themes",
   ],
   framework: {
-    name: '@storybook/react-vite',
+    name: "@storybook/react-vite",
     options: {
       builder: {
-        viteConfigPath: 'libs/components/vite.config.ts',
+        viteConfigPath: "libs/components/vite.config.ts",
       },
     },
   },
   async viteFinal(config) {
     return mergeConfig(config, {
       optimizeDeps: {
-        include: ['@storybook/blocks'],
+        include: ["@storybook/blocks"],
       },
     });
   },
@@ -270,6 +279,7 @@ export default config;
 ### Phase 4: Documentation Website Setup (Week 4)
 
 #### 4.1 VitePress Documentation App (`apps/docs/project.json`)
+
 ```json
 {
   "name": "docs",
@@ -306,55 +316,57 @@ export default config;
 ```
 
 #### 4.2 VitePress Config (`apps/docs/.vitepress/config.ts`)
+
 ```typescript
-import { defineConfig } from 'vitepress';
+import { defineConfig } from "vitepress";
 
 export default defineConfig({
-  title: 'LiqUIdify',
-  description: 'Production-ready React glassmorphism component library',
+  title: "LiqUIdify",
+  description: "Production-ready React glassmorphism component library",
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Components', link: '/components/' },
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Storybook', link: 'https://liquidify-storybook.vercel.app' }
+      { text: "Home", link: "/" },
+      { text: "Components", link: "/components/" },
+      { text: "Guide", link: "/guide/" },
+      { text: "Storybook", link: "https://liquidify-storybook.vercel.app" },
     ],
     sidebar: {
-      '/guide/': [
+      "/guide/": [
         {
-          text: 'Getting Started',
+          text: "Getting Started",
           items: [
-            { text: 'Installation', link: '/guide/installation' },
-            { text: 'Quick Start', link: '/guide/quick-start' },
-            { text: 'Theming', link: '/guide/theming' }
-          ]
-        }
+            { text: "Installation", link: "/guide/installation" },
+            { text: "Quick Start", link: "/guide/quick-start" },
+            { text: "Theming", link: "/guide/theming" },
+          ],
+        },
       ],
-      '/components/': [
+      "/components/": [
         {
-          text: 'Core Components',
+          text: "Core Components",
           items: [
-            { text: 'Button', link: '/components/button' },
-            { text: 'Card', link: '/components/card' },
-            { text: 'Input', link: '/components/input' }
-          ]
-        }
-      ]
-    }
+            { text: "Button", link: "/components/button" },
+            { text: "Card", link: "/components/card" },
+            { text: "Input", link: "/components/input" },
+          ],
+        },
+      ],
+    },
   },
   vite: {
     resolve: {
       alias: {
-        '@liquidify/components': '../../libs/components/src/index.ts'
-      }
-    }
-  }
+        "@liquidify/components": "../../libs/components/src/index.ts",
+      },
+    },
+  },
 });
 ```
 
 ### Phase 5: Build Optimization (Week 5)
 
 #### 5.1 Task Dependencies
+
 ```json
 {
   "targetDefaults": {
@@ -372,6 +384,7 @@ export default defineConfig({
 ```
 
 #### 5.2 Caching Strategy
+
 ```json
 {
   "tasksRunnerOptions": {
@@ -395,6 +408,7 @@ export default defineConfig({
 ## Package.json Updates
 
 ### Root Package.json Scripts
+
 ```json
 {
   "scripts": {
@@ -420,6 +434,7 @@ export default defineConfig({
 ## CI/CD Optimization
 
 ### GitHub Actions with Nx
+
 ```yaml
 name: CI
 on:
@@ -435,25 +450,26 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      
+
       - run: bun install --frozen-lockfile
-      
+
       - uses: nrwl/nx-set-shas@v4
-      
+
       - run: npx nx format:check
-      
+
       - run: npx nx affected -t lint test build
-      
+
       - run: npx nx affected -t build-storybook docs:build
 ```
 
 ## Deployment Strategy
 
 ### Vercel Configuration (`vercel.json`)
+
 ```json
 {
   "version": 2,
@@ -489,17 +505,20 @@ jobs:
 ## Expected Benefits
 
 ### Performance Improvements
+
 - **Build Time**: 40-60% faster with intelligent caching
 - **CI/CD**: 50-70% faster with affected detection
 - **Development**: Hot reloading optimization across apps
 
 ### Developer Experience
+
 - **Task Orchestration**: Clear dependency graph
 - **Parallel Execution**: Multiple targets simultaneously
 - **Affected Commands**: Only work on changed code
 - **Visualization**: `nx graph` for dependency insights
 
 ### Scalability
+
 - **Modular Architecture**: Clear separation of concerns
 - **Easy Extensibility**: Add new apps/libs easily
 - **Team Collaboration**: Better workspace organization
@@ -507,30 +526,35 @@ jobs:
 ## Migration Checklist
 
 ### Week 1: Setup
+
 - [ ] Install Nx and plugins
 - [ ] Configure `nx.json`
 - [ ] Set up basic workspace structure
 - [ ] Migrate existing scripts to Nx commands
 
 ### Week 2: Component Library
+
 - [ ] Move source code to `libs/components`
 - [ ] Configure Vite for library build
 - [ ] Set up TypeScript project references
 - [ ] Update import paths
 
 ### Week 3: Storybook
+
 - [ ] Move Storybook to `apps/storybook`
 - [ ] Configure Storybook with Nx
 - [ ] Update story imports
 - [ ] Test Storybook build
 
 ### Week 4: Documentation
+
 - [ ] Set up VitePress in `apps/docs`
 - [ ] Migrate existing docs
 - [ ] Configure cross-linking
 - [ ] Set up live component demos
 
 ### Week 5: Optimization
+
 - [ ] Fine-tune caching strategy
 - [ ] Optimize CI/CD pipeline
 - [ ] Set up deployment
@@ -548,11 +572,13 @@ jobs:
 ## Risk Mitigation
 
 ### Backup Strategy
+
 - Keep existing build scripts during migration
 - Use feature branches for each phase
 - Maintain current deployment until new setup is proven
 
 ### Rollback Plan
+
 - Document all changes for easy reversal
 - Keep original configuration files
 - Test thoroughly in staging environment
@@ -560,12 +586,14 @@ jobs:
 ## Post-Migration
 
 ### Maintenance
+
 - Regular Nx updates
 - Cache optimization monitoring
 - Performance metrics tracking
 - Documentation updates
 
 ### Future Enhancements
+
 - Add example applications
 - Set up automated releases
 - Implement design token packages

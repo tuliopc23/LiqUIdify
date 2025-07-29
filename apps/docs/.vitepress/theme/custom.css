@@ -4,12 +4,8 @@
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(
-    120deg,
-    #3b82f6 30%,
-    #8b5cf6
-  );
-  
+  --vp-home-hero-name-background: linear-gradient(120deg, #3b82f6 30%, #8b5cf6);
+
   /* Custom brand colors matching LiqUIdify */
   --vp-c-brand-1: #3b82f6;
   --vp-c-brand-2: #2563eb;
@@ -18,11 +14,7 @@
 }
 
 .dark {
-  --vp-home-hero-name-background: linear-gradient(
-    120deg,
-    #60a5fa 30%,
-    #a78bfa
-  );
+  --vp-home-hero-name-background: linear-gradient(120deg, #60a5fa 30%, #a78bfa);
 }
 
 /* Glassmorphism effects for documentation */
@@ -53,13 +45,13 @@
 }
 
 /* Code blocks with glass effect */
-.vp-doc div[class*='language-'] {
+.vp-doc div[class*="language-"] {
   backdrop-filter: blur(10px);
   background: rgba(0, 0, 0, 0.05) !important;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.dark .vp-doc div[class*='language-'] {
+.dark .vp-doc div[class*="language-"] {
   background: rgba(0, 0, 0, 0.5) !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }

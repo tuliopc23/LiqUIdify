@@ -3,11 +3,11 @@
  * Provides automatic recovery mechanisms and progressive enhancement
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
-import { isBrowser } from './ssr-utils';
+import React, { useCallback, useEffect, useState } from "react";
+import { isBrowser } from "./ssr-utils";
 
 export interface HydrationMismatch {
-  type: 'prop' | 'state' | 'style' | 'content' | 'structure';
+  type: "prop" | "state" | "style" | "content" | "structure";
   component: string;
   serverValue: unknown;
   clientValue: unknown;
@@ -22,10 +22,10 @@ export interface HydrationContext {
   retryCount: number;
   lastRetry: number;
   detectMismatch?: (
-    type: HydrationMismatch['type'],
+    type: HydrationMismatch["type"],
     serverValue: unknown,
     clientValue: unknown,
-    path?: string
+    path?: string,
   ) => void;
 }
 
@@ -74,7 +74,7 @@ export class HydrationManager {
       () => {
         this.attemptRecovery();
       },
-      this.retryDelay * 2 ** this.retryCount
+      this.retryDelay * 2 ** this.retryCount,
     ); // Exponential backoff
   }
 
@@ -142,7 +142,7 @@ export class HydrationManager {
  */
 export function useHydrationSafety(
   componentName: string,
-  options: HydrationOptions = {}
+  options: HydrationOptions = {},
 ): HydrationContext {
   const {
     maxRetries: _maxRetries = 3,
@@ -154,7 +154,7 @@ export function useHydrationSafety(
 
   const manager = HydrationManager.getInstance();
   const [context, setContext] = useState<HydrationContext>(
-    manager.getContext()
+    manager.getContext(),
   );
 
   useEffect(() => {
@@ -172,10 +172,10 @@ export function useHydrationSafety(
 
   const detectMismatch = useCallback(
     (
-      type: HydrationMismatch['type'],
+      type: HydrationMismatch["type"],
       serverValue: unknown,
       clientValue: unknown,
-      path = ''
+      path = "",
     ) => {
       if (serverValue !== clientValue) {
         const mismatch: HydrationMismatch = {
@@ -191,7 +191,7 @@ export function useHydrationSafety(
         onMismatch?.(mismatch);
       }
     },
-    [componentName, manager, onMismatch]
+    [componentName, manager, onMismatch],
   );
 
   return {
@@ -206,7 +206,7 @@ export function useHydrationSafety(
 export function useHydrationState<T>(
   _key: string,
   serverValue: T,
-  clientValue?: T
+  clientValue?: T,
 ): [T, (value: T | ((previous: T) => T)) => void] {
   const [state, setState] = useState<T>(() => {
     // During SSR, use server value
@@ -228,7 +228,7 @@ export function useHydrationState<T>(
       const newValue = value instanceof Function ? value(previous) : value;
 
       // Log potential hydration mismatches in development
-      if (process.env.NODE_ENV === 'development' && previous !== newValue) {
+      if (process.env.NODE_ENV === "development" && previous !== newValue) {
         // Logging disabled
       }
 
@@ -258,11 +258,11 @@ export function useProgressiveEnhancement() {
 
     const checks = {
       javascript: true,
-      animations: !window.matchMedia('(prefers-reduced-motion: reduce)')
+      animations: !window.matchMedia("(prefers-reduced-motion: reduce)")
         .matches,
-      webgl: Boolean(document.createElement('canvas').getContext('webgl')),
-      intersectionObserver: 'IntersectionObserver' in window,
-      resizeObserver: 'ResizeObserver' in window,
+      webgl: Boolean(document.createElement("canvas").getContext("webgl")),
+      intersectionObserver: "IntersectionObserver" in window,
+      resizeObserver: "ResizeObserver" in window,
     };
 
     setEnhancements(checks);
@@ -276,12 +276,12 @@ export function useProgressiveEnhancement() {
  */
 export function withHydrationSafety<P extends object>(
   Component: React.ComponentType<P>,
-  options: HydrationOptions = {}
+  options: HydrationOptions = {},
 ) {
   const HydrationSafeComponent = (props: P) => {
     const context = useHydrationSafety(
-      Component.displayName || Component.name || 'Unknown',
-      options
+      Component.displayName || Component.name || "Unknown",
+      options,
     );
 
     if (
@@ -290,16 +290,16 @@ export function withHydrationSafety<P extends object>(
     ) {
       // Render fallback when retries are exhausted
       return React.createElement(
-        'div',
-        { 'data-hydration-error': 'true' },
-        'Loading...'
+        "div",
+        { "data-hydration-error": "true" },
+        "Loading...",
       );
     }
 
     return React.createElement(Component, props);
   };
 
-  HydrationSafeComponent.displayName = `withHydrationSafety(${Component.displayName || Component.name || 'Unknown'})`;
+  HydrationSafeComponent.displayName = `withHydrationSafety(${Component.displayName || Component.name || "Unknown"})`;
 
   return HydrationSafeComponent;
 }
@@ -309,7 +309,7 @@ export function withHydrationSafety<P extends object>(
  */
 export function createSSRProps<T extends Record<string, unknown>>(
   serverProps: T,
-  clientProps?: Partial<T>
+  clientProps?: Partial<T>,
 ): T {
   if (!isBrowser()) {
     return serverProps;
@@ -339,7 +339,7 @@ export function useHydrationComplete() {
  */
 export function useClientOnly<T>(
   factory: () => T,
-  deps: Array<unknown> = []
+  deps: Array<unknown> = [],
 ): T | null {
   const [value, setValue] = useState<T | null>(undefined);
   const isHydrated = useHydrationComplete();
@@ -379,7 +379,7 @@ export class HydrationErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        this.props.fallback || React.createElement('div', {}, 'Loading...')
+        this.props.fallback || React.createElement("div", {}, "Loading...")
       );
     }
 

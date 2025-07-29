@@ -39,7 +39,7 @@ export type {
   StyleConfig,
   TextareaProps,
   UnifiedGlassProps,
-} from './base-component';
+} from "./base-component";
 
 // Export core types (primary source)
 export type {
@@ -61,35 +61,35 @@ export type {
   PropsWithChildren,
   ThemeConfig,
   TransitionDuration,
-} from './types';
+} from "./types";
 
 import {
   useGlassStateTransitions,
   useMagneticHover,
   useRippleEffect,
-} from './hooks';
+} from "./hooks";
 import {
   createBusinessLogicHook,
   createCompoundComponentWithContext,
-} from './patterns';
+} from "./patterns";
 // Re-export commonly used utilities for convenience
-import { cn } from './utils/classname';
+import { cn } from "./utils/classname";
 import {
   generateGlassClasses,
   generateGlassVariables,
   mapIntensity,
-} from './utils/glass-effects';
+} from "./utils/glass-effects";
 import {
   microInteraction,
   responsiveSize,
   touchTarget,
-} from './utils/responsive';
+} from "./utils/responsive";
 
-export * from './components';
-export * from './hooks';
-export * from './patterns';
+export * from "./components";
+export * from "./hooks";
+export * from "./patterns";
 // Re-export all modules
-export * from './utils';
+export * from "./utils";
 
 // Re-export specific named exports
 export {

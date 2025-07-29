@@ -1,54 +1,54 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { GlassAvatar } from './glass-avatar';
+import type { Meta, StoryObj } from "@storybook/react";
+import { GlassAvatar } from "./glass-avatar";
 
 const meta = {
-  title: 'Components/Display/GlassAvatar',
+  title: "Components/Display/GlassAvatar",
   component: GlassAvatar,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'A versatile avatar component supporting images, initials, and fallback icons with glassmorphism styling. Includes status indicators and multiple size/shape variants.',
+          "A versatile avatar component supporting images, initials, and fallback icons with glassmorphism styling. Includes status indicators and multiple size/shape variants.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     src: {
-      control: 'text',
-      description: 'Image source URL for the avatar',
+      control: "text",
+      description: "Image source URL for the avatar",
     },
     alt: {
-      control: 'text',
-      description: 'Alternative text for the avatar image',
+      control: "text",
+      description: "Alternative text for the avatar image",
     },
     size: {
-      control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-      description: 'Size of the avatar',
+      control: "select",
+      options: ["xs", "sm", "md", "lg", "xl", "2xl"],
+      description: "Size of the avatar",
     },
     variant: {
-      control: 'select',
-      options: ['circular', 'rounded', 'square'],
-      description: 'Shape variant of the avatar',
+      control: "select",
+      options: ["circular", "rounded", "square"],
+      description: "Shape variant of the avatar",
     },
     fallback: {
-      control: 'text',
-      description: 'Fallback text for initials when no image is provided',
+      control: "text",
+      description: "Fallback text for initials when no image is provided",
     },
     showBorder: {
-      control: 'boolean',
-      description: 'Show glassmorphism border around the avatar',
+      control: "boolean",
+      description: "Show glassmorphism border around the avatar",
     },
     status: {
-      control: 'select',
-      options: [undefined, 'online', 'offline', 'away', 'busy'],
-      description: 'Status indicator for the avatar',
+      control: "select",
+      options: [undefined, "online", "offline", "away", "busy"],
+      description: "Status indicator for the avatar",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
 } satisfies Meta<typeof GlassAvatar>;
@@ -59,24 +59,24 @@ type Story = StoryObj<typeof meta>;
 // Basic usage with image
 export const WithImage: Story = {
   args: {
-    src: 'https://i.pravatar.cc/150?img=1',
-    alt: 'User avatar',
-    size: 'md',
+    src: "https://i.pravatar.cc/150?img=1",
+    alt: "User avatar",
+    size: "md",
   },
 };
 
 // Fallback to initials
 export const WithInitials: Story = {
   args: {
-    fallback: 'John Doe',
-    size: 'md',
+    fallback: "John Doe",
+    size: "md",
   },
 };
 
 // Default icon fallback
 export const DefaultFallback: Story = {
   args: {
-    size: 'md',
+    size: "md",
   },
 };
 
@@ -476,7 +476,7 @@ export const ThemeShowcase: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };

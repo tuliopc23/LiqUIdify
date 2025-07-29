@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import type React from 'react';
-import { useState } from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import type React from "react";
+import { useState } from "react";
 
-import { GlassSelect, type GlassSelectOption } from './glass-select';
+import { GlassSelect, type GlassSelectOption } from "./glass-select";
 
 const meta = {
-  title: 'Glass UI/GlassSelect',
+  title: "Glass UI/GlassSelect",
   component: GlassSelect,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -51,36 +51,36 @@ function MyComponent() {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     options: {
-      control: 'object',
-      description: 'Array of select options',
+      control: "object",
+      description: "Array of select options",
     },
     value: {
-      control: 'text',
-      description: 'Currently selected value',
+      control: "text",
+      description: "Currently selected value",
     },
     onChange: {
-      action: 'changed',
-      description: 'Callback when selection changes',
+      action: "changed",
+      description: "Callback when selection changes",
     },
     placeholder: {
-      control: 'text',
-      description: 'Placeholder text when no value is selected',
+      control: "text",
+      description: "Placeholder text when no value is selected",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Whether the select is disabled',
+      control: "boolean",
+      description: "Whether the select is disabled",
     },
     variant: {
-      control: 'select',
-      options: ['default', 'search'],
-      description: 'Visual variant of the select',
+      control: "select",
+      options: ["default", "search"],
+      description: "Visual variant of the select",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
 } satisfies Meta<typeof GlassSelect>;
@@ -90,50 +90,50 @@ type Story = StoryObj<typeof meta>;
 
 // Basic options for examples
 const basicOptions: Array<GlassSelectOption> = [
-  { value: 'react', label: 'React' },
-  { value: 'vue', label: 'Vue' },
-  { value: 'angular', label: 'Angular' },
-  { value: 'svelte', label: 'Svelte' },
-  { value: 'solid', label: 'Solid' },
+  { value: "react", label: "React" },
+  { value: "vue", label: "Vue" },
+  { value: "angular", label: "Angular" },
+  { value: "svelte", label: "Svelte" },
+  { value: "solid", label: "Solid" },
 ];
 
 // Country options for examples
 const countryOptions: Array<GlassSelectOption> = [
-  { value: 'us', label: 'United States' },
-  { value: 'uk', label: 'United Kingdom' },
-  { value: 'ca', label: 'Canada' },
-  { value: 'au', label: 'Australia' },
-  { value: 'de', label: 'Germany' },
-  { value: 'fr', label: 'France' },
-  { value: 'jp', label: 'Japan' },
-  { value: 'kr', label: 'South Korea' },
+  { value: "us", label: "United States" },
+  { value: "uk", label: "United Kingdom" },
+  { value: "ca", label: "Canada" },
+  { value: "au", label: "Australia" },
+  { value: "de", label: "Germany" },
+  { value: "fr", label: "France" },
+  { value: "jp", label: "Japan" },
+  { value: "kr", label: "South Korea" },
 ];
 
 // Default Story
 export const Default: Story = {
   args: {
     options: basicOptions,
-    placeholder: 'Select a framework',
+    placeholder: "Select a framework",
   },
 };
 
 // Controlled Example
 export const Controlled: Story = {
   render: (args) => {
-    const [value, setValue] = useState('react');
+    const [value, setValue] = useState("react");
 
     return (
       <div className="space-y-4">
         <GlassSelect {...args} value={value} onChange={setValue} />
         <p className="text-gray-600 text-sm dark:text-gray-400">
-          Selected: <span className="font-semibold">{value || 'None'}</span>
+          Selected: <span className="font-semibold">{value || "None"}</span>
         </p>
       </div>
     );
   },
   args: {
     options: basicOptions,
-    placeholder: 'Select a framework',
+    placeholder: "Select a framework",
   },
 };
 
@@ -141,13 +141,13 @@ export const Controlled: Story = {
 export const WithDisabledOptions: Story = {
   args: {
     options: [
-      { value: 'active1', label: 'Active Option 1' },
-      { value: 'disabled1', label: 'Disabled Option 1', disabled: true },
-      { value: 'active2', label: 'Active Option 2' },
-      { value: 'disabled2', label: 'Disabled Option 2', disabled: true },
-      { value: 'active3', label: 'Active Option 3' },
+      { value: "active1", label: "Active Option 1" },
+      { value: "disabled1", label: "Disabled Option 1", disabled: true },
+      { value: "active2", label: "Active Option 2" },
+      { value: "disabled2", label: "Disabled Option 2", disabled: true },
+      { value: "active3", label: "Active Option 3" },
     ],
-    placeholder: 'Select an option',
+    placeholder: "Select an option",
   },
 };
 
@@ -155,7 +155,7 @@ export const WithDisabledOptions: Story = {
 export const Disabled: Story = {
   args: {
     options: basicOptions,
-    placeholder: 'Select is disabled',
+    placeholder: "Select is disabled",
     disabled: true,
   },
 };
@@ -168,7 +168,7 @@ export const LongOptionsList: Story = {
       label: `Option ${i + 1}`,
       disabled: i % 5 === 0,
     })),
-    placeholder: 'Select from many options',
+    placeholder: "Select from many options",
   },
 };
 
@@ -185,22 +185,22 @@ export const CustomWidth: Story = {
   },
   args: {
     options: basicOptions,
-    placeholder: 'Different widths',
+    placeholder: "Different widths",
   },
 };
 
 // Interactive Demo
 export const InteractiveDemo: Story = {
   render: () => {
-    const [country, setCountry] = useState('');
-    const [framework, setFramework] = useState('');
-    const [priority, setPriority] = useState('');
+    const [country, setCountry] = useState("");
+    const [framework, setFramework] = useState("");
+    const [priority, setPriority] = useState("");
 
     const priorityOptions: Array<GlassSelectOption> = [
-      { value: 'low', label: 'Low Priority' },
-      { value: 'medium', label: 'Medium Priority' },
-      { value: 'high', label: 'High Priority' },
-      { value: 'urgent', label: 'Urgent', disabled: true },
+      { value: "low", label: "Low Priority" },
+      { value: "medium", label: "Medium Priority" },
+      { value: "high", label: "High Priority" },
+      { value: "urgent", label: "Urgent", disabled: true },
     ];
 
     return (
@@ -263,16 +263,16 @@ export const InteractiveDemo: Story = {
             </h4>
             <div className="space-y-1 text-gray-600 text-sm dark:text-gray-400">
               <p>
-                Country:{' '}
-                <span className="font-medium">{country || 'None'}</span>
+                Country:{" "}
+                <span className="font-medium">{country || "None"}</span>
               </p>
               <p>
-                Framework:{' '}
-                <span className="font-medium">{framework || 'None'}</span>
+                Framework:{" "}
+                <span className="font-medium">{framework || "None"}</span>
               </p>
               <p>
-                Priority:{' '}
-                <span className="font-medium">{priority || 'None'}</span>
+                Priority:{" "}
+                <span className="font-medium">{priority || "None"}</span>
               </p>
             </div>
           </div>
@@ -286,31 +286,31 @@ export const InteractiveDemo: Story = {
 export const FormIntegration: Story = {
   render: () => {
     const [formData, setFormData] = useState({
-      role: '',
-      department: '',
-      experience: '',
+      role: "",
+      department: "",
+      experience: "",
     });
 
     const roleOptions: Array<GlassSelectOption> = [
-      { value: 'developer', label: 'Developer' },
-      { value: 'designer', label: 'Designer' },
-      { value: 'manager', label: 'Project Manager' },
-      { value: 'analyst', label: 'Business Analyst' },
+      { value: "developer", label: "Developer" },
+      { value: "designer", label: "Designer" },
+      { value: "manager", label: "Project Manager" },
+      { value: "analyst", label: "Business Analyst" },
     ];
 
     const departmentOptions: Array<GlassSelectOption> = [
-      { value: 'engineering', label: 'Engineering' },
-      { value: 'design', label: 'Design' },
-      { value: 'marketing', label: 'Marketing' },
-      { value: 'sales', label: 'Sales' },
-      { value: 'hr', label: 'Human Resources' },
+      { value: "engineering", label: "Engineering" },
+      { value: "design", label: "Design" },
+      { value: "marketing", label: "Marketing" },
+      { value: "sales", label: "Sales" },
+      { value: "hr", label: "Human Resources" },
     ];
 
     const experienceOptions: Array<GlassSelectOption> = [
-      { value: '0-2', label: '0-2 years' },
-      { value: '3-5', label: '3-5 years' },
-      { value: '6-10', label: '6-10 years' },
-      { value: '10+', label: '10+ years' },
+      { value: "0-2", label: "0-2 years" },
+      { value: "3-5", label: "3-5 years" },
+      { value: "6-10", label: "6-10 years" },
+      { value: "10+", label: "10+ years" },
     ];
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -392,13 +392,13 @@ export const FormIntegration: Story = {
 // Accessibility Demo
 export const AccessibilityDemo: Story = {
   render: () => {
-    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedValue, setSelectedValue] = useState("");
 
     const accessibilityOptions: Array<GlassSelectOption> = [
-      { value: 'screen-reader', label: 'Screen Reader Compatible' },
-      { value: 'keyboard-nav', label: 'Full Keyboard Navigation' },
-      { value: 'aria-labels', label: 'ARIA Labels Support' },
-      { value: 'focus-trap', label: 'Focus Management' },
+      { value: "screen-reader", label: "Screen Reader Compatible" },
+      { value: "keyboard-nav", label: "Full Keyboard Navigation" },
+      { value: "aria-labels", label: "ARIA Labels Support" },
+      { value: "focus-trap", label: "Focus Management" },
     ];
 
     return (
@@ -421,19 +421,19 @@ export const AccessibilityDemo: Story = {
                 <h4 className="mb-2 font-semibold text-blue-900 dark:text-blue-100">
                   {
                     accessibilityOptions.find(
-                      (opt) => opt.value === selectedValue
+                      (opt) => opt.value === selectedValue,
                     )?.label
                   }
                 </h4>
                 <p className="text-blue-800 text-sm dark:text-blue-200">
-                  {selectedValue === 'screen-reader' &&
-                    'The select component announces changes and states to screen readers using proper ARIA attributes.'}
-                  {selectedValue === 'keyboard-nav' &&
-                    'Navigate through options using arrow keys, select with Enter, and close with Escape.'}
-                  {selectedValue === 'aria-labels' &&
-                    'All interactive elements have appropriate ARIA labels for better accessibility.'}
-                  {selectedValue === 'focus-trap' &&
-                    'Focus is properly managed within the dropdown when open, preventing focus from escaping.'}
+                  {selectedValue === "screen-reader" &&
+                    "The select component announces changes and states to screen readers using proper ARIA attributes."}
+                  {selectedValue === "keyboard-nav" &&
+                    "Navigate through options using arrow keys, select with Enter, and close with Escape."}
+                  {selectedValue === "aria-labels" &&
+                    "All interactive elements have appropriate ARIA labels for better accessibility."}
+                  {selectedValue === "focus-trap" &&
+                    "Focus is properly managed within the dropdown when open, preventing focus from escaping."}
                 </p>
               </div>
             )}
@@ -470,14 +470,14 @@ export const AccessibilityDemo: Story = {
 // Theme Showcase
 export const ThemeShowcase: Story = {
   render: () => {
-    const [lightValue, setLightValue] = useState('');
-    const [darkValue, setDarkValue] = useState('');
+    const [lightValue, setLightValue] = useState("");
+    const [darkValue, setDarkValue] = useState("");
 
     const themeOptions: Array<GlassSelectOption> = [
-      { value: 'system', label: 'System Default' },
-      { value: 'light', label: 'Light Theme' },
-      { value: 'dark', label: 'Dark Theme' },
-      { value: 'auto', label: 'Auto (Time-based)' },
+      { value: "system", label: "System Default" },
+      { value: "light", label: "Light Theme" },
+      { value: "dark", label: "Dark Theme" },
+      { value: "auto", label: "Auto (Time-based)" },
     ];
 
     return (
@@ -507,6 +507,6 @@ export const ThemeShowcase: Story = {
     );
   },
   parameters: {
-    backgrounds: { default: 'light' },
+    backgrounds: { default: "light" },
   },
 };

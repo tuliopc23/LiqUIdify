@@ -1,19 +1,19 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { type BundleOptions, bundle } from 'lightningcss';
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { type BundleOptions, bundle } from "lightningcss";
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-const inputFile = join(__dirname, '../libs/components/src/styles/glass.css');
-const outputFile = join(__dirname, '../dist/liquidui.css');
+const inputFile = join(__dirname, "../libs/components/src/styles/glass.css");
+const outputFile = join(__dirname, "../dist/liquidui.css");
 
 // Ensure output directory exists
 mkdirSync(dirname(outputFile), { recursive: true });
 
 const options: BundleOptions<object> = {
   filename: inputFile,
-  minify: process.env.NODE_ENV === 'production',
+  minify: process.env.NODE_ENV === "production",
   sourceMap: true,
   targets: {
     chrome: 95 << 16,
@@ -38,10 +38,10 @@ async function buildCSS() {
       writeFileSync(`${outputFile}.map`, map.toString());
     }
 
-    console.log('✨ CSS built successfully with Lightning CSS!');
+    console.log("✨ CSS built successfully with Lightning CSS!");
     console.log(`📦 Output: ${outputFile}`);
   } catch (error) {
-    console.error('Error building CSS:', error);
+    console.error("Error building CSS:", error);
     process.exit(1);
   }
 }

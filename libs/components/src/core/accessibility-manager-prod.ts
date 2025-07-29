@@ -1,8 +1,8 @@
-import type { AxeResults } from 'axe-core';
+import type { AxeResults } from "axe-core";
 
-import { announcer } from '@/components/glass-live-region';
+import { announcer } from "@/components/glass-live-region";
 
-import { getContrastRatio } from '@/core/utils/color';
+import { getContrastRatio } from "@/core/utils/color";
 
 // Re-export types from the main accessibility manager
 export type {
@@ -18,7 +18,7 @@ export type {
   Violation,
   ViolationNode,
   Warning,
-} from './accessibility-manager';
+} from "./accessibility-manager";
 
 // Production stub for axe-core functionality
 const mockAxeResults: AxeResults = {
@@ -27,32 +27,32 @@ const mockAxeResults: AxeResults = {
   incomplete: [],
   inapplicable: [],
   timestamp: new Date().toISOString(),
-  url: '',
-  testEngine: { name: 'axe-core', version: '0.0.0' },
-  testRunner: { name: 'production-stub' },
+  url: "",
+  testEngine: { name: "axe-core", version: "0.0.0" },
+  testRunner: { name: "production-stub" },
   testEnvironment: {
-    userAgent: '',
+    userAgent: "",
     windowWidth: 0,
     windowHeight: 0,
     orientationAngle: 0,
-    orientationType: 'landscape-primary',
+    orientationType: "landscape-primary",
   },
   toolOptions: {},
 };
 
 // Lazy load axe-core only in development
-let axeInstance: typeof import('axe-core') | null;
+let axeInstance: typeof import("axe-core") | null;
 
 async function getAxe() {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === "production") {
     return;
   }
 
   if (!axeInstance) {
     try {
-      axeInstance = await import('axe-core');
+      axeInstance = await import("axe-core");
     } catch {
-      console.warn('axe-core not available');
+      console.warn("axe-core not available");
       return;
     }
   }
@@ -76,35 +76,35 @@ export class AccessibilityManager {
     return this.analyzeComponent(element);
   }
 
-  announce(message: string, priority = 'polite'): void {
-    if (typeof announcer !== 'undefined' && announcer.announce) {
+  announce(message: string, priority = "polite"): void {
+    if (typeof announcer !== "undefined" && announcer.announce) {
       announcer.announce(message, { priority: priority as unknown });
     }
   }
 
   ensureContrast(
     element: HTMLElement,
-    _options?: { level?: 'AA' | 'AAA'; largeText?: boolean; autoFix?: boolean }
+    _options?: { level?: "AA" | "AAA"; largeText?: boolean; autoFix?: boolean },
   ): { background: string; foreground: string } {
     const computedStyle = window.getComputedStyle(element);
-    const background = computedStyle.backgroundColor || '#ffffff';
-    const foreground = computedStyle.color || '#000000';
+    const background = computedStyle.backgroundColor || "#ffffff";
+    const foreground = computedStyle.color || "#000000";
     return { background, foreground };
   }
 
   enableRealTimeMonitoring(): void {
-    console.log('Real-time monitoring enabled');
+    console.log("Real-time monitoring enabled");
   }
 
   disableRealTimeMonitoring(): void {
-    console.log('Real-time monitoring disabled');
+    console.log("Real-time monitoring disabled");
   }
 
   async runAudit(
     element: HTMLElement,
-    options?: { runOnly?: { type: string; values: Array<string> } }
+    options?: { runOnly?: { type: string; values: Array<string> } },
   ): Promise<AxeResults> {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       return mockAxeResults;
     }
 
@@ -116,14 +116,14 @@ export class AccessibilityManager {
     try {
       return await axe.default.run(element, options);
     } catch (error) {
-      console.error('Accessibility audit failed:', error);
+      console.error("Accessibility audit failed:", error);
       return mockAxeResults;
     }
   }
 
   async analyzeComponent(
     element: HTMLElement,
-    componentInfo?: ComponentInfo
+    componentInfo?: ComponentInfo,
   ): Promise<AccessibilityReport> {
     // Check cache first
     const cached = this.cache.get(element);
@@ -142,7 +142,7 @@ export class AccessibilityManager {
       nodes: v.nodes.map((n) => ({
         html: n.html,
         target: n.target,
-        failureSummary: n.failureSummary || '',
+        failureSummary: n.failureSummary || "",
         fix: this.generateFix(v.id, n),
       })),
     }));
@@ -170,23 +170,23 @@ export class AccessibilityManager {
     const warnings: Array<Warning> = [];
 
     // Check for missing alt text on images
-    const images = element.querySelectorAll('img:not([alt])');
+    const images = element.querySelectorAll("img:not([alt])");
     if (images.length > 0) {
       warnings.push({
-        id: 'missing-alt-text',
-        description: 'Images without alt text',
-        suggestion: 'Add descriptive alt text to all images',
+        id: "missing-alt-text",
+        description: "Images without alt text",
+        suggestion: "Add descriptive alt text to all images",
         elements: [...images] as Array<HTMLElement>,
       });
     }
 
     // Check for empty buttons
-    const emptyButtons = element.querySelectorAll('button:empty');
+    const emptyButtons = element.querySelectorAll("button:empty");
     if (emptyButtons.length > 0) {
       warnings.push({
-        id: 'empty-buttons',
-        description: 'Buttons without text content',
-        suggestion: 'Add text or aria-label to buttons',
+        id: "empty-buttons",
+        description: "Buttons without text content",
+        suggestion: "Add text or aria-label to buttons",
         elements: [...emptyButtons] as Array<HTMLElement>,
       });
     }
@@ -196,7 +196,7 @@ export class AccessibilityManager {
 
   private generateSuggestions(
     element: HTMLElement,
-    _axeResults: AxeResults
+    _axeResults: AxeResults,
   ): Array<Suggestion> {
     const suggestions: Array<Suggestion> = [];
 
@@ -206,9 +206,9 @@ export class AccessibilityManager {
       const contrast = this.checkContrast(element_ as HTMLElement);
       if (contrast && !contrast.passes.aa.normal) {
         suggestions.push({
-          type: 'contrast',
+          type: "contrast",
           message: `Low contrast ratio (${contrast.ratio.toFixed(2)}:1). Consider adjusting colors.`,
-          priority: 'high',
+          priority: "high",
           autoFixAvailable: true,
           fix: () => this.autoFixContrast(element_ as HTMLElement, contrast),
         });
@@ -217,20 +217,20 @@ export class AccessibilityManager {
 
     // Keyboard navigation suggestions
     const interactiveElements = element.querySelectorAll(
-      'a, button, input, select, textarea, [tabindex]'
+      "a, button, input, select, textarea, [tabindex]",
     );
     const tabIndexes = [...interactiveElements]
       .map((element_) =>
-        Number.parseInt(element_.getAttribute('tabindex') || '0')
+        Number.parseInt(element_.getAttribute("tabindex") || "0"),
       )
       .filter((index) => index > 0);
 
     if (tabIndexes.length > 0) {
       suggestions.push({
-        type: 'keyboard',
+        type: "keyboard",
         message:
-          'Positive tabindex values detected. Consider using natural tab order.',
-        priority: 'medium',
+          "Positive tabindex values detected. Consider using natural tab order.",
+        priority: "medium",
         autoFixAvailable: false,
       });
     }
@@ -250,27 +250,27 @@ export class AccessibilityManager {
         serious: 5,
         moderate: 2,
         minor: 1,
-      }[v.impact || 'minor'];
+      }[v.impact || "minor"];
       return sum + impactWeight * v.nodes.length;
     }, 0);
 
     const maxPossibleWeight = totalTests * 10;
     const score = Math.max(
       0,
-      100 - (violationWeight / maxPossibleWeight) * 100
+      100 - (violationWeight / maxPossibleWeight) * 100,
     );
 
     return Math.round(score);
   }
 
-  private determineWCAGLevel(score: number): 'A' | 'AA' | 'AAA' {
+  private determineWCAGLevel(score: number): "A" | "AA" | "AAA" {
     if (score >= 95) {
-      return 'AAA';
+      return "AAA";
     }
     if (score >= 85) {
-      return 'AA';
+      return "AA";
     }
-    return 'A';
+    return "A";
   }
 
   checkContrast(element: HTMLElement): ContrastResult | null {
@@ -279,7 +279,7 @@ export class AccessibilityManager {
       const bg = computed.backgroundColor;
       const fg = computed.color;
 
-      if (!bg || !fg || bg === 'transparent' || fg === 'transparent') {
+      if (!bg || !fg || bg === "transparent" || fg === "transparent") {
         return;
       }
 
@@ -312,41 +312,41 @@ export class AccessibilityManager {
   private getContrastRecommendation(ratio: number, isLarge: boolean): string {
     if (isLarge) {
       if (ratio >= 4.5) {
-        return 'Excellent contrast for large text (AAA)';
+        return "Excellent contrast for large text (AAA)";
       }
       if (ratio >= 3) {
-        return 'Good contrast for large text (AA)';
+        return "Good contrast for large text (AA)";
       }
-      return 'Insufficient contrast for large text';
+      return "Insufficient contrast for large text";
     }
     if (ratio >= 7) {
-      return 'Excellent contrast (AAA)';
+      return "Excellent contrast (AAA)";
     }
     if (ratio >= 4.5) {
-      return 'Good contrast (AA)';
+      return "Good contrast (AA)";
     }
-    return 'Insufficient contrast';
+    return "Insufficient contrast";
   }
 
   private autoFixContrast(
     element: HTMLElement,
-    contrast: ContrastResult
+    contrast: ContrastResult,
   ): void {
     // Implementation would adjust colors to meet WCAG requirements
-    console.log('Auto-fixing contrast for element', element, contrast);
+    console.log("Auto-fixing contrast for element", element, contrast);
   }
 
   private generateFix(
     violationId: string,
-    _node: { html: string; target: Array<string> }
+    _node: { html: string; target: Array<string> },
   ): string | undefined {
     // Generate fix suggestions based on violation type
     const fixes: Record<string, string> = {
-      'color-contrast':
-        'Adjust foreground or background color to meet WCAG contrast requirements',
-      'image-alt': 'Add descriptive alt text to the image',
-      'button-name': 'Add text content or aria-label to the button',
-      label: 'Add a label element or aria-label attribute',
+      "color-contrast":
+        "Adjust foreground or background color to meet WCAG contrast requirements",
+      "image-alt": "Add descriptive alt text to the image",
+      "button-name": "Add text content or aria-label to the button",
+      label: "Add a label element or aria-label attribute",
     };
 
     return fixes[violationId];
@@ -359,15 +359,15 @@ export class AccessibilityManager {
 
     // Check ARIA attributes
     const ariaAttributes = [...element.attributes].filter((attribute) =>
-      attribute.name.startsWith('aria-')
+      attribute.name.startsWith("aria-"),
     );
 
     for (const attribute of ariaAttributes) {
       // Validate attribute values
       if (
-        attribute.name === 'aria-hidden' &&
-        attribute.value !== 'true' &&
-        attribute.value !== 'false'
+        attribute.name === "aria-hidden" &&
+        attribute.value !== "true" &&
+        attribute.value !== "false"
       ) {
         errors.push({
           attribute: attribute.name,
@@ -378,12 +378,12 @@ export class AccessibilityManager {
       }
 
       // Check for deprecated attributes
-      if (attribute.name === 'aria-grabbed') {
+      if (attribute.name === "aria-grabbed") {
         suggestions.push({
           attribute: attribute.name,
           currentValue: attribute.value,
-          suggestedValue: '',
-          reason: 'aria-grabbed is deprecated in ARIA 1.1',
+          suggestedValue: "",
+          reason: "aria-grabbed is deprecated in ARIA 1.1",
         });
       }
     }
@@ -398,24 +398,24 @@ export class AccessibilityManager {
 
   announceToScreenReader(
     message: string,
-    priority: 'polite' | 'assertive' = 'polite'
+    priority: "polite" | "assertive" = "polite",
   ): void {
     announcer.announce(message, priority);
   }
 
   async generateReport(elements: Array<HTMLElement>): Promise<string> {
     const reports = await Promise.all(
-      elements.map((element) => this.analyzeComponent(element))
+      elements.map((element) => this.analyzeComponent(element)),
     );
 
     const totalScore =
       reports.reduce((sum, r) => sum + r.score, 0) / reports.length;
     const allViolations = reports.flatMap((r) => r.violations);
     const criticalCount = allViolations.filter(
-      (v) => v.impact === 'critical'
+      (v) => v.impact === "critical",
     ).length;
     const seriousCount = allViolations.filter(
-      (v) => v.impact === 'serious'
+      (v) => v.impact === "serious",
     ).length;
 
     return `
@@ -445,7 +445,7 @@ ${this.generateRecommendations(reports)}
         accumulator[v.impact].push(v);
         return accumulator;
       },
-      {} as Record<string, Array<Violation>>
+      {} as Record<string, Array<Violation>>,
     );
 
     return Object.entries(grouped)
@@ -457,9 +457,9 @@ ${this.generateRecommendations(reports)}
         ([impact, violations]) =>
           `### ${impact.charAt(0).toUpperCase() + impact.slice(1)} (${violations.length})
 
-${violations.map((v: unknown) => `- ${v.help}`).join('\n')}`
+${violations.map((v: unknown) => `- ${v.help}`).join("\n")}`,
       )
-      .join('\n\n');
+      .join("\n\n");
   }
 
   private generateRecommendations(reports: Array<AccessibilityReport>): string {
@@ -468,22 +468,22 @@ ${violations.map((v: unknown) => `- ${v.help}`).join('\n')}`
     for (const report of reports) {
       if (report.score < 85) {
         recommendations.add(
-          'Focus on fixing critical and serious violations first'
+          "Focus on fixing critical and serious violations first",
         );
       }
 
-      if (report.suggestions.some((s: unknown) => s.type === 'contrast')) {
+      if (report.suggestions.some((s: unknown) => s.type === "contrast")) {
         recommendations.add(
-          'Review and adjust color contrast ratios across components'
+          "Review and adjust color contrast ratios across components",
         );
       }
 
-      if (report.warnings.some((w: unknown) => w.id === 'missing-alt-text')) {
-        recommendations.add('Ensure all images have descriptive alt text');
+      if (report.warnings.some((w: unknown) => w.id === "missing-alt-text")) {
+        recommendations.add("Ensure all images have descriptive alt text");
       }
     }
 
-    return [...recommendations].map((r) => `- ${r}`).join('\n');
+    return [...recommendations].map((r) => `- ${r}`).join("\n");
   }
 }
 
@@ -501,9 +501,9 @@ interface Warning {
 }
 
 interface Suggestion {
-  type: 'contrast' | 'aria' | 'keyboard' | 'structure';
+  type: "contrast" | "aria" | "keyboard" | "structure";
   message: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: "low" | "medium" | "high";
   autoFixAvailable: boolean;
   fix?: () => void;
 }

@@ -11,8 +11,8 @@
 
 // Note: jscodeshift is an optional dependency for advanced codemods
 // import { transform } from 'jscodeshift';
-import * as fs from 'node:fs/promises';
-import * as path from 'node:path';
+import * as fs from "node:fs/promises";
+import * as path from "node:path";
 
 // Migration configuration
 export interface MigrationConfig {
@@ -27,17 +27,17 @@ export interface MigrationConfig {
 
 export interface BreakingChange {
   type:
-    | 'prop-rename'
-    | 'prop-remove'
-    | 'component-rename'
-    | 'import-change'
-    | 'api-change';
+    | "prop-rename"
+    | "prop-remove"
+    | "component-rename"
+    | "import-change"
+    | "api-change";
   component?: string;
   oldName: string;
   newName?: string;
   reason: string;
   migrationPath: string;
-  severity: 'low' | 'medium' | 'high' | 'critical';
+  severity: "low" | "medium" | "high" | "critical";
 }
 
 export interface Codemod {
@@ -75,7 +75,7 @@ export interface MigrationError {
   line?: number;
   column?: number;
   message: string;
-  severity: 'error' | 'warning';
+  severity: "error" | "warning";
   suggestion?: string;
 }
 
@@ -87,63 +87,63 @@ export interface MigrationWarning {
 
 // Pre-defined migrations for LiqUIdify versions
 const LIQUIDIFY_MIGRATIONS: Record<string, MigrationConfig> = {
-  '1.0.0->1.1.0': {
-    fromVersion: '1.0.0',
-    toVersion: '1.1.0',
+  "1.0.0->1.1.0": {
+    fromVersion: "1.0.0",
+    toVersion: "1.1.0",
     description:
-      'Migration to enhanced glassmorphism API with performance optimizations',
+      "Migration to enhanced glassmorphism API with performance optimizations",
     breakingChanges: [
       {
-        type: 'prop-rename',
-        component: 'GlassButton',
-        oldName: 'glassEffect',
-        newName: 'glassMorphism',
-        reason: 'Standardized naming convention across all components',
-        migrationPath: 'Replace glassEffect prop with glassMorphism',
-        severity: 'medium',
+        type: "prop-rename",
+        component: "GlassButton",
+        oldName: "glassEffect",
+        newName: "glassMorphism",
+        reason: "Standardized naming convention across all components",
+        migrationPath: "Replace glassEffect prop with glassMorphism",
+        severity: "medium",
       },
       {
-        type: 'import-change',
-        oldName: 'liquidify/glass',
-        newName: 'liquidify/core',
-        reason: 'Consolidated imports for better tree-shaking',
-        migrationPath: 'Update import statements to use liquidify/core',
-        severity: 'low',
+        type: "import-change",
+        oldName: "liquidify/glass",
+        newName: "liquidify/core",
+        reason: "Consolidated imports for better tree-shaking",
+        migrationPath: "Update import statements to use liquidify/core",
+        severity: "low",
       },
     ],
     codemods: [
       {
-        name: 'glass-effect-to-glass-morphism',
-        description: 'Rename glassEffect prop to glassMorphism',
-        filePattern: ['**/*.tsx', '**/*.jsx'],
+        name: "glass-effect-to-glass-morphism",
+        description: "Rename glassEffect prop to glassMorphism",
+        filePattern: ["**/*.tsx", "**/*.jsx"],
         transform: (source: string) => {
-          return source.replaceAll('glassEffect=', 'glassMorphism=');
+          return source.replaceAll("glassEffect=", "glassMorphism=");
         },
       },
       {
-        name: 'update-imports',
-        description: 'Update import statements to use new paths',
-        filePattern: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+        name: "update-imports",
+        description: "Update import statements to use new paths",
+        filePattern: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
         transform: (source: string) => {
           return source.replaceAll(
             /from ["']liquidify\/glass["']/g,
-            'from "liquidify/core"'
+            'from "liquidify/core"',
           );
         },
       },
     ],
     validationRules: [
       {
-        name: 'no-deprecated-props',
+        name: "no-deprecated-props",
         check: (source: string) => {
           const hasDeprecatedProps = /glassEffect=/.test(source);
           return {
             passed: !hasDeprecatedProps,
             message: hasDeprecatedProps
-              ? 'File contains deprecated glassEffect prop'
-              : 'No deprecated props found',
+              ? "File contains deprecated glassEffect prop"
+              : "No deprecated props found",
             suggestions: hasDeprecatedProps
-              ? ['Run the glass-effect-to-glass-morphism codemod']
+              ? ["Run the glass-effect-to-glass-morphism codemod"]
               : null,
           };
         },
@@ -152,97 +152,97 @@ const LIQUIDIFY_MIGRATIONS: Record<string, MigrationConfig> = {
     rollbackSupported: true,
   },
 
-  '1.1.0->2.0.0': {
-    fromVersion: '1.1.0',
-    toVersion: '2.0.0',
+  "1.1.0->2.0.0": {
+    fromVersion: "1.1.0",
+    toVersion: "2.0.0",
     description:
-      'Major version upgrade with new animation system and TypeScript improvements',
+      "Major version upgrade with new animation system and TypeScript improvements",
     breakingChanges: [
       {
-        type: 'component-rename',
-        oldName: 'GlassContainer',
-        newName: 'GlassPanel',
-        reason: 'Better semantic naming and consistency',
-        migrationPath: 'Replace all GlassContainer components with GlassPanel',
-        severity: 'high',
+        type: "component-rename",
+        oldName: "GlassContainer",
+        newName: "GlassPanel",
+        reason: "Better semantic naming and consistency",
+        migrationPath: "Replace all GlassContainer components with GlassPanel",
+        severity: "high",
       },
       {
-        type: 'api-change',
-        oldName: 'useGlassEffect',
-        newName: 'useGlassMorphism',
-        reason: 'New hook API with better performance and TypeScript support',
-        migrationPath: 'Update hook usage and parameters',
-        severity: 'critical',
+        type: "api-change",
+        oldName: "useGlassEffect",
+        newName: "useGlassMorphism",
+        reason: "New hook API with better performance and TypeScript support",
+        migrationPath: "Update hook usage and parameters",
+        severity: "critical",
       },
       {
-        type: 'prop-remove',
-        component: 'GlassButton',
-        oldName: 'legacy',
-        reason: 'Legacy support removed for better bundle size',
-        migrationPath: 'Remove legacy prop and update component usage',
-        severity: 'medium',
+        type: "prop-remove",
+        component: "GlassButton",
+        oldName: "legacy",
+        reason: "Legacy support removed for better bundle size",
+        migrationPath: "Remove legacy prop and update component usage",
+        severity: "medium",
       },
     ],
     codemods: [
       {
-        name: 'glass-container-to-glass-panel',
-        description: 'Rename GlassContainer to GlassPanel',
-        filePattern: ['**/*.tsx', '**/*.jsx'],
+        name: "glass-container-to-glass-panel",
+        description: "Rename GlassContainer to GlassPanel",
+        filePattern: ["**/*.tsx", "**/*.jsx"],
         transform: (source: string) => {
           return source
-            .replaceAll('GlassContainer', 'GlassPanel')
-            .replaceAll('glass-container', 'glass-panel');
+            .replaceAll("GlassContainer", "GlassPanel")
+            .replaceAll("glass-container", "glass-panel");
         },
       },
       {
-        name: 'update-glass-hook',
-        description: 'Update useGlassEffect to useGlassMorphism',
-        filePattern: ['**/*.ts', '**/*.tsx'],
+        name: "update-glass-hook",
+        description: "Update useGlassEffect to useGlassMorphism",
+        filePattern: ["**/*.ts", "**/*.tsx"],
         transform: (source: string) => {
           return source
-            .replaceAll('useGlassEffect', 'useGlassMorphism')
-            .replaceAll(/glassEffect\s*:/g, 'glassMorphism:');
+            .replaceAll("useGlassEffect", "useGlassMorphism")
+            .replaceAll(/glassEffect\s*:/g, "glassMorphism:");
         },
       },
       {
-        name: 'remove-legacy-props',
-        description: 'Remove deprecated legacy props',
-        filePattern: ['**/*.tsx', '**/*.jsx'],
+        name: "remove-legacy-props",
+        description: "Remove deprecated legacy props",
+        filePattern: ["**/*.tsx", "**/*.jsx"],
         transform: (source: string) => {
           // Remove legacy prop from component props
           return source
-            .replaceAll(/\s*legacy={[^}]*}\s*/g, ' ')
-            .replaceAll(/\s*legacy\s*/g, ' ');
+            .replaceAll(/\s*legacy={[^}]*}\s*/g, " ")
+            .replaceAll(/\s*legacy\s*/g, " ");
         },
       },
     ],
     validationRules: [
       {
-        name: 'no-glass-container',
+        name: "no-glass-container",
         check: (source: string) => {
           const hasGlassContainer = /GlassContainer/.test(source);
           return {
             passed: !hasGlassContainer,
             message: hasGlassContainer
-              ? 'File contains deprecated GlassContainer component'
-              : 'No deprecated components found',
+              ? "File contains deprecated GlassContainer component"
+              : "No deprecated components found",
             suggestions: hasGlassContainer
-              ? ['Run the glass-container-to-glass-panel codemod']
+              ? ["Run the glass-container-to-glass-panel codemod"]
               : null,
           };
         },
       },
       {
-        name: 'no-legacy-hooks',
+        name: "no-legacy-hooks",
         check: (source: string) => {
           const hasLegacyHooks = /useGlassEffect/.test(source);
           return {
             passed: !hasLegacyHooks,
             message: hasLegacyHooks
-              ? 'File contains deprecated useGlassEffect hook'
-              : 'No deprecated hooks found',
+              ? "File contains deprecated useGlassEffect hook"
+              : "No deprecated hooks found",
             suggestions: hasLegacyHooks
-              ? ['Run the update-glass-hook codemod']
+              ? ["Run the update-glass-hook codemod"]
               : null,
           };
         },
@@ -254,7 +254,7 @@ const LIQUIDIFY_MIGRATIONS: Record<string, MigrationConfig> = {
 
 export class LiqUIdifyMigrationSystem {
   private migrations: Map<string, MigrationConfig> = new Map();
-  private backupDir = '.liquidify-migration-backup';
+  private backupDir = ".liquidify-migration-backup";
 
   constructor() {
     // Load pre-defined migrations
@@ -275,7 +275,7 @@ export class LiqUIdifyMigrationSystem {
    */
   public getAvailableMigrations(
     fromVersion: string,
-    toVersion: string
+    toVersion: string,
   ): Array<MigrationConfig> {
     const available: Array<MigrationConfig> = [];
 
@@ -285,7 +285,7 @@ export class LiqUIdifyMigrationSystem {
           config.fromVersion,
           config.toVersion,
           fromVersion,
-          toVersion
+          toVersion,
         )
       ) {
         available.push(config);
@@ -293,7 +293,7 @@ export class LiqUIdifyMigrationSystem {
     }
 
     return available.sort((a, b) =>
-      this.compareVersions(a.fromVersion, b.fromVersion)
+      this.compareVersions(a.fromVersion, b.fromVersion),
     );
   }
 
@@ -302,7 +302,7 @@ export class LiqUIdifyMigrationSystem {
    */
   public generateMigrationGuide(
     fromVersion: string,
-    toVersion: string
+    toVersion: string,
   ): string {
     const migrations = this.getAvailableMigrations(fromVersion, toVersion);
 
@@ -314,11 +314,11 @@ export class LiqUIdifyMigrationSystem {
     guide += `This guide will help you migrate your LiqUIdify components to version ${toVersion}.\n\n`;
 
     // Table of contents
-    guide += '## Table of Contents\n\n';
+    guide += "## Table of Contents\n\n";
     for (const [index, migration] of migrations.entries()) {
-      guide += `${index + 1}. [${migration.fromVersion} → ${migration.toVersion}](#migration-${migration.fromVersion.replaceAll('.', '')}-to-${migration.toVersion.replaceAll('.', '')})\n`;
+      guide += `${index + 1}. [${migration.fromVersion} → ${migration.toVersion}](#migration-${migration.fromVersion.replaceAll(".", "")}-to-${migration.toVersion.replaceAll(".", "")})\n`;
     }
-    guide += '\n';
+    guide += "\n";
 
     // Migration steps
     for (const [index, migration] of migrations.entries()) {
@@ -326,7 +326,7 @@ export class LiqUIdifyMigrationSystem {
       guide += `${migration.description}\n\n`;
 
       if (migration.breakingChanges.length > 0) {
-        guide += '### Breaking Changes\n\n';
+        guide += "### Breaking Changes\n\n";
 
         for (const [
           changeIndex,
@@ -343,61 +343,61 @@ export class LiqUIdifyMigrationSystem {
 
           // Add code examples
           guide += this.generateCodeExample(change);
-          guide += '\n';
+          guide += "\n";
         }
       }
 
       // Automated migration section
-      guide += '### Automated Migration\n\n';
+      guide += "### Automated Migration\n\n";
       guide +=
-        'Run the following command to automatically migrate your code:\n\n';
-      guide += '\`\`\`bash\n';
+        "Run the following command to automatically migrate your code:\n\n";
+      guide += "\`\`\`bash\n";
       guide += `npx @liquidify/migrate ${migration.fromVersion} ${migration.toVersion}\n`;
-      guide += '\`\`\`\n\n';
+      guide += "\`\`\`\n\n";
 
       // Manual steps if any
       const manualSteps = this.getManualMigrationSteps(migration);
       if (manualSteps.length > 0) {
-        guide += '### Manual Steps Required\n\n';
+        guide += "### Manual Steps Required\n\n";
         for (const [stepIndex, step] of manualSteps.entries()) {
           guide += `${stepIndex + 1}. ${step}\n`;
         }
-        guide += '\n';
+        guide += "\n";
       }
 
-      guide += '---\n\n';
+      guide += "---\n\n";
     }
 
     // Final steps
-    guide += '## Final Steps\n\n';
+    guide += "## Final Steps\n\n";
     guide += `1. **Update Dependencies:** Update your package.json to use LiqUIdify ${toVersion}\n`;
-    guide += '2. **Run Tests:** Ensure all your tests pass after migration\n';
+    guide += "2. **Run Tests:** Ensure all your tests pass after migration\n";
     guide +=
-      '3. **Check Performance:** Verify that performance meets your requirements\n';
+      "3. **Check Performance:** Verify that performance meets your requirements\n";
     guide +=
-      '4. **Update Documentation:** Update any component documentation that references the old API\n\n';
+      "4. **Update Documentation:** Update any component documentation that references the old API\n\n";
 
     // Rollback information
-    guide += '## Rollback\n\n';
+    guide += "## Rollback\n\n";
     const hasRollbackSupport = migrations.some((m) => m.rollbackSupported);
     if (hasRollbackSupport) {
       guide +=
-        'Some migrations support automatic rollback. If you need to rollback:\n\n';
-      guide += '\`\`\`bash\n';
+        "Some migrations support automatic rollback. If you need to rollback:\n\n";
+      guide += "\`\`\`bash\n";
       guide += `npx @liquidify/migrate --rollback ${toVersion} ${fromVersion}\n`;
-      guide += '\`\`\`\n\n';
+      guide += "\`\`\`\n\n";
     } else {
       guide +=
-        '⚠️ **Warning:** This migration does not support automatic rollback. Make sure to backup your code before proceeding.\n\n';
+        "⚠️ **Warning:** This migration does not support automatic rollback. Make sure to backup your code before proceeding.\n\n";
     }
 
     // Support section
-    guide += '## Need Help?\n\n';
-    guide += '- 📖 [Documentation](https://liquidify.dev/docs)\n';
-    guide += '- 💬 [Discord Community](https://discord.gg/liquidify)\n';
+    guide += "## Need Help?\n\n";
+    guide += "- 📖 [Documentation](https://liquidify.dev/docs)\n";
+    guide += "- 💬 [Discord Community](https://discord.gg/liquidify)\n";
     guide +=
-      '- 🐛 [Report Issues](https://github.com/liquidify/liquidify/issues)\n';
-    guide += '- 📧 [Email Support](mailto:support@liquidify.dev)\n\n';
+      "- 🐛 [Report Issues](https://github.com/liquidify/liquidify/issues)\n";
+    guide += "- 📧 [Email Support](mailto:support@liquidify.dev)\n\n";
 
     return guide;
   }
@@ -413,7 +413,7 @@ export class LiqUIdifyMigrationSystem {
       dryRun?: boolean;
       backup?: boolean;
       skipValidation?: boolean;
-    } = {}
+    } = {},
   ): Promise<MigrationReport> {
     const { dryRun = false, backup = true, skipValidation = false } = options;
 
@@ -427,7 +427,7 @@ export class LiqUIdifyMigrationSystem {
         componentsUpdated: 0,
         propsRenamed: 0,
         importsUpdated: 0,
-        estimatedTimeToComplete: '0 minutes',
+        estimatedTimeToComplete: "0 minutes",
       },
     };
 
@@ -452,9 +452,9 @@ export class LiqUIdifyMigrationSystem {
     } catch (error) {
       report.success = false;
       report.errors.push({
-        file: 'system',
-        message: `Migration failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        severity: 'error',
+        file: "system",
+        message: `Migration failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+        severity: "error",
       });
     }
 
@@ -467,7 +467,7 @@ export class LiqUIdifyMigrationSystem {
   public async rollbackMigration(
     projectPath: string,
     _fromVersion: string,
-    _toVersion: string
+    _toVersion: string,
   ): Promise<MigrationReport> {
     const backupPath = path.join(projectPath, this.backupDir);
 
@@ -480,7 +480,7 @@ export class LiqUIdifyMigrationSystem {
 
       if (!backupExists) {
         throw new Error(
-          'No backup found for rollback. Manual rollback required.'
+          "No backup found for rollback. Manual rollback required.",
         );
       }
 
@@ -493,8 +493,8 @@ export class LiqUIdifyMigrationSystem {
         errors: [],
         warnings: [
           {
-            file: 'system',
-            message: 'Project restored from backup',
+            file: "system",
+            message: "Project restored from backup",
             autoFixable: false,
           },
         ],
@@ -502,7 +502,7 @@ export class LiqUIdifyMigrationSystem {
           componentsUpdated: 0,
           propsRenamed: 0,
           importsUpdated: 0,
-          estimatedTimeToComplete: '0 minutes',
+          estimatedTimeToComplete: "0 minutes",
         },
       };
     } catch (error) {
@@ -511,9 +511,9 @@ export class LiqUIdifyMigrationSystem {
         filesModified: [],
         errors: [
           {
-            file: 'system',
-            message: `Rollback failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-            severity: 'error',
+            file: "system",
+            message: `Rollback failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+            severity: "error",
           },
         ],
         warnings: [],
@@ -521,7 +521,7 @@ export class LiqUIdifyMigrationSystem {
           componentsUpdated: 0,
           propsRenamed: 0,
           importsUpdated: 0,
-          estimatedTimeToComplete: '0 minutes',
+          estimatedTimeToComplete: "0 minutes",
         },
       };
     }
@@ -533,14 +533,14 @@ export class LiqUIdifyMigrationSystem {
     projectPath: string,
     migration: MigrationConfig,
     report: MigrationReport,
-    dryRun: boolean
+    dryRun: boolean,
   ): Promise<void> {
     for (const codemod of migration.codemods) {
       const files = await this.findFiles(projectPath, codemod.filePattern);
 
       for (const filePath of files) {
         try {
-          const source = await fs.readFile(filePath, 'utf8');
+          const source = await fs.readFile(filePath, "utf8");
 
           // Check run condition if specified
           if (codemod.runCondition && !codemod.runCondition(source)) {
@@ -551,15 +551,15 @@ export class LiqUIdifyMigrationSystem {
 
           if (transformed !== source) {
             if (!dryRun) {
-              await fs.writeFile(filePath, transformed, 'utf8');
+              await fs.writeFile(filePath, transformed, "utf8");
             }
 
             report.filesModified.push(filePath);
 
             // Update summary based on codemod type
-            if (codemod.name.includes('import')) {
+            if (codemod.name.includes("import")) {
               report.summary.importsUpdated++;
-            } else if (codemod.name.includes('prop')) {
+            } else if (codemod.name.includes("prop")) {
               report.summary.propsRenamed++;
             } else {
               report.summary.componentsUpdated++;
@@ -568,8 +568,8 @@ export class LiqUIdifyMigrationSystem {
         } catch (error) {
           report.errors.push({
             file: filePath,
-            message: `Failed to apply codemod ${codemod.name}: ${error instanceof Error ? error.message : 'Unknown error'}`,
-            severity: 'error',
+            message: `Failed to apply codemod ${codemod.name}: ${error instanceof Error ? error.message : "Unknown error"}`,
+            severity: "error",
           });
         }
       }
@@ -579,19 +579,19 @@ export class LiqUIdifyMigrationSystem {
   private async validateMigration(
     projectPath: string,
     migrations: Array<MigrationConfig>,
-    report: MigrationReport
+    report: MigrationReport,
   ): Promise<void> {
     const allValidationRules = migrations.flatMap((m) => m.validationRules);
     const files = await this.findFiles(projectPath, [
-      '**/*.ts',
-      '**/*.tsx',
-      '**/*.js',
-      '**/*.jsx',
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
     ]);
 
     for (const filePath of files) {
       try {
-        const source = await fs.readFile(filePath, 'utf8');
+        const source = await fs.readFile(filePath, "utf8");
 
         for (const rule of allValidationRules) {
           const result = rule.check(source);
@@ -607,8 +607,8 @@ export class LiqUIdifyMigrationSystem {
       } catch (error) {
         report.errors.push({
           file: filePath,
-          message: `Failed to validate: ${error instanceof Error ? error.message : 'Unknown error'}`,
-          severity: 'warning',
+          message: `Failed to validate: ${error instanceof Error ? error.message : "Unknown error"}`,
+          severity: "warning",
         });
       }
     }
@@ -616,7 +616,7 @@ export class LiqUIdifyMigrationSystem {
 
   private async findFiles(
     basePath: string,
-    patterns: Array<string>
+    patterns: Array<string>,
   ): Promise<Array<string>> {
     // Simple glob implementation - in production, use a proper glob library
     const files: Array<string> = [];
@@ -629,17 +629,17 @@ export class LiqUIdifyMigrationSystem {
 
         if (
           entry.isDirectory() &&
-          !entry.name.startsWith('.') &&
-          entry.name !== 'node_modules'
+          !entry.name.startsWith(".") &&
+          entry.name !== "node_modules"
         ) {
           await scanDir(fullPath);
         } else if (entry.isFile()) {
           const extension = path.extname(entry.name);
           if (
             patterns.some((pattern) => {
-              const patternExtension = pattern.split('.').pop();
+              const patternExtension = pattern.split(".").pop();
               return (
-                patternExtension === '*' || extension === `.${patternExtension}`
+                patternExtension === "*" || extension === `.${patternExtension}`
               );
             })
           ) {
@@ -666,8 +666,8 @@ export class LiqUIdifyMigrationSystem {
     // Create new backup (simplified - copy source files)
     await fs.mkdir(backupPath, { recursive: true });
 
-    const sourcePath = path.join(projectPath, 'src');
-    const backupSourcePath = path.join(backupPath, 'src');
+    const sourcePath = path.join(projectPath, "src");
+    const backupSourcePath = path.join(backupPath, "src");
 
     try {
       await this.copyDirectory(sourcePath, backupSourcePath);
@@ -678,8 +678,8 @@ export class LiqUIdifyMigrationSystem {
 
   private async restoreFromBackup(projectPath: string): Promise<void> {
     const backupPath = path.join(projectPath, this.backupDir);
-    const backupSourcePath = path.join(backupPath, 'src');
-    const sourcePath = path.join(projectPath, 'src');
+    const backupSourcePath = path.join(backupPath, "src");
+    const sourcePath = path.join(projectPath, "src");
 
     // Remove current src
     await fs.rm(sourcePath, { recursive: true, force: true });
@@ -693,7 +693,7 @@ export class LiqUIdifyMigrationSystem {
 
   private async copyDirectory(
     source: string,
-    destination: string
+    destination: string,
   ): Promise<void> {
     await fs.mkdir(destination, { recursive: true });
     const entries = await fs.readdir(source, { withFileTypes: true });
@@ -710,19 +710,19 @@ export class LiqUIdifyMigrationSystem {
 
   private formatBreakingChangeTitle(change: BreakingChange): string {
     switch (change.type) {
-      case 'prop-rename': {
+      case "prop-rename": {
         return `Prop renamed: \`${change.oldName}\` → \`${change.newName}\``;
       }
-      case 'prop-remove': {
+      case "prop-remove": {
         return `Prop removed: \`${change.oldName}\``;
       }
-      case 'component-rename': {
+      case "component-rename": {
         return `Component renamed: \`${change.oldName}\` → \`${change.newName}\``;
       }
-      case 'import-change': {
+      case "import-change": {
         return `Import path changed: \`${change.oldName}\` → \`${change.newName}\``;
       }
-      case 'api-change': {
+      case "api-change": {
         return `API changed: \`${change.oldName}\` → \`${change.newName}\``;
       }
       default: {
@@ -732,10 +732,10 @@ export class LiqUIdifyMigrationSystem {
   }
 
   private generateCodeExample(change: BreakingChange): string {
-    let example = '';
+    let example = "";
 
     switch (change.type) {
-      case 'prop-rename': {
+      case "prop-rename": {
         example = `**Before:**
 \`\`\`tsx
 <${change.component} ${change.oldName}={value} />
@@ -748,7 +748,7 @@ export class LiqUIdifyMigrationSystem {
         break;
       }
 
-      case 'component-rename': {
+      case "component-rename": {
         example = `**Before:**
 \`\`\`tsx
 import { ${change.oldName} } from 'liquidify';
@@ -765,7 +765,7 @@ import { ${change.newName} } from 'liquidify';
         break;
       }
 
-      case 'import-change': {
+      case "import-change": {
         example = `**Before:**
 \`\`\`tsx
 import { Component } from '${change.oldName}';
@@ -787,9 +787,9 @@ import { Component } from '${change.newName}';
 
     // Add manual steps based on breaking changes that can't be automated
     for (const change of migration.breakingChanges) {
-      if (change.severity === 'critical') {
+      if (change.severity === "critical") {
         steps.push(
-          `Review and update ${change.component || 'usage'} for ${change.reason}`
+          `Review and update ${change.component || "usage"} for ${change.reason}`,
         );
       }
     }
@@ -808,14 +808,14 @@ import { Component } from '${change.newName}';
     }
 
     report.summary.estimatedTimeToComplete =
-      estimatedMinutes === 1 ? '1 minute' : `${estimatedMinutes} minutes`;
+      estimatedMinutes === 1 ? "1 minute" : `${estimatedMinutes} minutes`;
   }
 
   private isVersionInRange(
     migrationFrom: string,
     migrationTo: string,
     targetFrom: string,
-    targetTo: string
+    targetTo: string,
   ): boolean {
     return (
       this.compareVersions(migrationFrom, targetFrom) >= 0 &&
@@ -824,8 +824,8 @@ import { Component } from '${change.newName}';
   }
 
   private compareVersions(a: string, b: string): number {
-    const aParts = a.split('.').map(Number);
-    const bParts = b.split('.').map(Number);
+    const aParts = a.split(".").map(Number);
+    const bParts = b.split(".").map(Number);
 
     for (
       let index = 0;
@@ -858,7 +858,7 @@ export function createMigrationCLI() {
       projectPath: string,
       from: string,
       to: string,
-      options: Record<string, unknown>
+      options: Record<string, unknown>,
     ) => {
       return await migrationSystem.runMigration(projectPath, from, to, options);
     },

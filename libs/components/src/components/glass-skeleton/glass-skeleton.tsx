@@ -1,32 +1,32 @@
-import { motion } from 'framer-motion';
-import React from 'react';
-import { cn } from '@/core/utils/classname';
-import { createVariants as cva } from '../../lib/variant-system';
+import { motion } from "framer-motion";
+import React from "react";
+import { cn } from "@/core/utils/classname";
+import { createVariants as cva } from "../../lib/variant-system";
 
 const skeletonVariants = cva({
-  base: 'relative animate-pulse overflow-hidden rounded-md bg-gradient-to-r from-white/10 via-white/20 to-white/10 backdrop-blur-sm',
+  base: "relative animate-pulse overflow-hidden rounded-md bg-gradient-to-r from-white/10 via-white/20 to-white/10 backdrop-blur-sm",
   variants: {
     variant: {
-      default: 'bg-gradient-to-r from-white/10 via-white/20 to-white/10',
-      shimmer: 'bg-white/10',
-      pulse: 'bg-white/15',
+      default: "bg-gradient-to-r from-white/10 via-white/20 to-white/10",
+      shimmer: "bg-white/10",
+      pulse: "bg-white/15",
     },
     size: {
-      sm: 'h-4',
-      md: 'h-6',
-      lg: 'h-8',
-      xl: 'h-10',
+      sm: "h-4",
+      md: "h-6",
+      lg: "h-8",
+      xl: "h-10",
     },
     shape: {
-      rectangle: 'rounded-md',
-      circle: 'aspect-square rounded-full',
-      line: 'h-2 rounded-full',
+      rectangle: "rounded-md",
+      circle: "aspect-square rounded-full",
+      line: "h-2 rounded-full",
     },
   },
   defaultVariants: {
-    variant: 'default',
-    size: 'md',
-    shape: 'rectangle',
+    variant: "default",
+    size: "md",
+    shape: "rectangle",
   },
 });
 
@@ -39,16 +39,16 @@ export interface GlassSkeletonProps {
   className?: string;
   id?: string;
   style?: React.CSSProperties;
-  variant?: 'default' | 'shimmer' | 'pulse';
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  shape?: 'rectangle' | 'circle' | 'line';
+  variant?: "default" | "shimmer" | "pulse";
+  size?: "sm" | "md" | "lg" | "xl";
+  shape?: "rectangle" | "circle" | "line";
 }
 
 const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
   (
     {
       className,
-      variant = 'default',
+      variant = "default",
       size,
       shape,
       width,
@@ -58,10 +58,10 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
       animated = true,
       style,
     },
-    ref
+    ref,
   ) => {
     const shimmerAnimation = {
-      x: ['-100%', '100%'],
+      x: ["-100%", "100%"],
     };
 
     const pulseAnimation = {
@@ -70,7 +70,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
 
     const skeletonStyle = {
       width: width || undefined,
-      height: height || (shape === 'circle' ? width : undefined),
+      height: height || (shape === "circle" ? width : undefined),
       ...style,
     };
 
@@ -83,7 +83,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
           initial={animated ? { opacity: 0.4 } : false}
           animate={
             animated
-              ? variant === 'pulse'
+              ? variant === "pulse"
                 ? pulseAnimation
                 : { opacity: [0.4, 0.8, 0.4] }
               : false
@@ -93,26 +93,26 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
               ? {
                   duration: 1.5,
                   repeat: Infinity,
-                  ease: 'easeInOut',
+                  ease: "easeInOut",
                   delay: index * 0.1,
                 }
               : undefined
           }
         >
-          {variant === 'shimmer' && animated && (
+          {variant === "shimmer" && animated && (
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
               animate={shimmerAnimation}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
-                ease: 'linear',
+                ease: "linear",
                 delay: index * 0.2,
               }}
             />
           )}
         </motion.div>
-      )
+      ),
     );
 
     if (count === 1) {
@@ -126,23 +126,23 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
         ))}
       </div>
     );
-  }
+  },
 );
 
-GlassSkeleton.displayName = 'GlassSkeleton';
+GlassSkeleton.displayName = "GlassSkeleton";
 
 // Pre-built skeleton patterns
 export const SkeletonText: React.FC<{
   lines?: number;
   className?: string;
   lastLineWidth?: string;
-}> = ({ lines = 3, className, lastLineWidth = '60%' }) => (
-  <div className={cn('space-y-2', className)}>
+}> = ({ lines = 3, className, lastLineWidth = "60%" }) => (
+  <div className={cn("space-y-2", className)}>
     {Array.from({ length: lines }, (_, index) => (
       <GlassSkeleton
         key={`text-${index}`}
         shape="line"
-        width={index === lines - 1 ? lastLineWidth : '100%'}
+        width={index === lines - 1 ? lastLineWidth : "100%"}
         variant="shimmer"
       />
     ))}
@@ -153,7 +153,7 @@ export const SkeletonCard: React.FC<{
   className?: string;
   showAvatar?: boolean;
 }> = ({ className, showAvatar = true }) => (
-  <div className={cn('space-y-3 p-4', className)}>
+  <div className={cn("space-y-3 p-4", className)}>
     {showAvatar && (
       <div className="flex items-center space-x-3">
         <GlassSkeleton
@@ -180,7 +180,7 @@ export const SkeletonTable: React.FC<{
   columns?: number;
   className?: string;
 }> = ({ rows = 5, columns = 4, className }) => (
-  <div className={cn('space-y-3', className)}>
+  <div className={cn("space-y-3", className)}>
     {/* Header */}
     <div
       className="grid gap-3"

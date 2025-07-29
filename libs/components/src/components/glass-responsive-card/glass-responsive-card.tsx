@@ -1,21 +1,21 @@
-import type React from 'react';
-import { forwardRef } from 'react';
+import type React from "react";
+import { forwardRef } from "react";
 
-import { cn, getGlassClass } from '@/core/utils/classname';
+import { cn, getGlassClass } from "@/core/utils/classname";
 
-import { microInteraction } from '@/core/utils/responsive';
+import { microInteraction } from "@/core/utils/responsive";
 
-import { type ComponentSize, createComponentSize } from '@/types/branded';
+import { type ComponentSize, createComponentSize } from "@/types/branded";
 
 export interface GlassResponsiveCardProps
   extends Omit<
     React.HTMLAttributes<HTMLDivElement>,
     keyof React.AriaAttributes
   > {
-  variant?: 'default' | 'elevated' | 'outlined' | 'pressed';
+  variant?: "default" | "elevated" | "outlined" | "pressed";
   hover?: boolean;
   bordered?: boolean;
-  padding?: ComponentSize | 'none';
+  padding?: ComponentSize | "none";
   responsive?: boolean;
   stackOnMobile?: boolean;
 }
@@ -27,59 +27,59 @@ const GlassResponsiveCard = forwardRef<
   (
     {
       className,
-      variant = 'default',
+      variant = "default",
       hover = true,
       bordered = true,
-      padding = createComponentSize('md'),
+      padding = createComponentSize("md"),
       responsive = true,
       stackOnMobile = false,
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const variantClasses = {
-      default: getGlassClass('default'),
-      elevated: getGlassClass('elevated'),
-      outlined: 'bg-transparent border-2 border-[var(--glass-border)]',
-      pressed: cn(getGlassClass('pressed'), 'shadow-inner'),
+      default: getGlassClass("default"),
+      elevated: getGlassClass("elevated"),
+      outlined: "bg-transparent border-2 border-[var(--glass-border)]",
+      pressed: cn(getGlassClass("pressed"), "shadow-inner"),
     };
 
     const paddingClasses = responsive
       ? {
-          none: '',
-          xs: 'p-2 sm:p-3',
-          sm: 'p-3 sm:p-4',
-          md: 'p-4 sm:p-6',
-          lg: 'p-6 sm:p-8',
-          xl: 'p-8 sm:p-12',
+          none: "",
+          xs: "p-2 sm:p-3",
+          sm: "p-3 sm:p-4",
+          md: "p-4 sm:p-6",
+          lg: "p-6 sm:p-8",
+          xl: "p-8 sm:p-12",
         }
       : {
-          none: '',
-          xs: 'p-2',
-          sm: 'p-3',
-          md: 'p-6',
-          lg: 'p-8',
-          xl: 'p-12',
+          none: "",
+          xs: "p-2",
+          sm: "p-3",
+          md: "p-6",
+          lg: "p-8",
+          xl: "p-12",
         };
 
     const baseClasses = cn(
-      'overflow-hidden rounded-xl',
+      "overflow-hidden rounded-xl",
       variantClasses[variant],
-      padding === 'none'
-        ? ''
+      padding === "none"
+        ? ""
         : paddingClasses[padding as keyof typeof paddingClasses],
       bordered &&
-        variant !== 'outlined' &&
-        'border border-[var(--glass-border)]',
-      hover && 'glass-interactive cursor-pointer',
+        variant !== "outlined" &&
+        "border border-[var(--glass-border)]",
+      hover && "glass-interactive cursor-pointer",
       microInteraction.smooth,
-      'will-change-transform',
+      "will-change-transform",
       // Mobile optimizations
       responsive && [
-        'text-sm sm:text-base', // Responsive text sizing
-        stackOnMobile && 'flex flex-col sm:flex-row sm:items-center',
-      ]
+        "text-sm sm:text-base", // Responsive text sizing
+        stackOnMobile && "flex flex-col sm:flex-row sm:items-center",
+      ],
     );
 
     return (
@@ -87,9 +87,9 @@ const GlassResponsiveCard = forwardRef<
         {children}
       </div>
     );
-  }
+  },
 );
 
-GlassResponsiveCard.displayName = 'GlassResponsiveCard';
+GlassResponsiveCard.displayName = "GlassResponsiveCard";
 
 export { GlassResponsiveCard };

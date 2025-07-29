@@ -1,11 +1,11 @@
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { accessibilityManager } from '@/core/accessibility-manager';
+import { accessibilityManager } from "@/core/accessibility-manager";
 
-import { cn } from '@/core/utils/classname';
-import { GlassButton } from '../glass-button-refactored';
-import { GlassCard } from '../glass-card-refactored';
+import { cn } from "@/core/utils/classname";
+import { GlassButton } from "../glass-button-refactored";
+import { GlassCard } from "../glass-card-refactored";
 
 interface AccessibilityViolation {
   id: string;
@@ -38,12 +38,12 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 }) => {
   const [report, setReport] = useState<AccessibilityReport | null>(null);
   const [contrastResult, setContrastResult] = useState<ContrastResult | null>(
-    null
+    null,
   );
   const [validating, setValidating] = useState(false);
   const demoRef = useRef<HTMLDivElement>(null);
-  const [fgColor, setFgColor] = useState('#333333');
-  const [bgColor, setBgColor] = useState('#f0f0f0');
+  const [fgColor, setFgColor] = useState("#333333");
+  const [bgColor, setBgColor] = useState("#f0f0f0");
 
   const validateAccessibility = async () => {
     if (!demoRef.current) {
@@ -55,17 +55,17 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
       const report = await accessibilityManager.validateComponent(
         demoRef.current,
         {
-          name: 'GlassAccessibleDemo',
-          type: 'demo',
+          name: "GlassAccessibleDemo",
+          type: "demo",
           props: { className },
-        }
+        },
       );
       setReport(report);
 
       // Announce the result
       accessibilityManager.announce(
         `Accessibility score: ${report.score}. ${report.violations.length} violations found.`,
-        report.violations.length > 0 ? 'assertive' : 'polite'
+        report.violations.length > 0 ? "assertive" : "polite",
       );
     } catch {
       // Logging disabled
@@ -76,7 +76,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
   const checkContrast = () => {
     const result = accessibilityManager.ensureContrast(fgColor, bgColor, {
-      level: 'AA',
+      level: "AA",
       autoFix: true,
     });
     setContrastResult(result);
@@ -94,7 +94,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
   }, []);
 
   return (
-    <div ref={demoRef} className={cn('space-y-6', className)}>
+    <div ref={demoRef} className={cn("space-y-6", className)}>
       <GlassCard className="p-6">
         <h2 className="mb-4 font-bold text-2xl">Accessibility Manager Demo</h2>
 
@@ -110,7 +110,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
               disabled={validating}
               aria-busy={validating}
             >
-              {validating ? 'Validating...' : 'Validate Accessibility'}
+              {validating ? "Validating..." : "Validate Accessibility"}
             </GlassButton>
 
             {report && (
@@ -124,12 +124,12 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                     <span
                       className={cn(
-                        'ml-2 font-bold',
+                        "ml-2 font-bold",
                         report.score >= 95
-                          ? 'text-green-500'
+                          ? "text-green-500"
                           : report.score >= 80
-                            ? 'text-yellow-500'
-                            : 'text-red-500'
+                            ? "text-yellow-500"
+                            : "text-red-500",
                       )}
                     >
                       {report.score}/100
@@ -165,10 +165,10 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
                       {report.violations.map(
                         (violation: AccessibilityViolation) => (
                           <li key={violation.id} className="text-sm">
-                            <strong>{violation.id}:</strong>{' '}
+                            <strong>{violation.id}:</strong>{" "}
                             {violation.description}
                           </li>
-                        )
+                        ),
                       )}
                     </ul>
                   </details>
@@ -239,13 +239,13 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                     <span
                       className={cn(
-                        'ml-2',
+                        "ml-2",
                         contrastResult.passes.aa.normal
-                          ? 'text-green-500'
-                          : 'text-red-500'
+                          ? "text-green-500"
+                          : "text-red-500",
                       )}
                     >
-                      {contrastResult.passes.aa.normal ? '✓ Pass' : '✗ Fail'}
+                      {contrastResult.passes.aa.normal ? "✓ Pass" : "✗ Fail"}
                     </span>
                   </div>
 
@@ -254,13 +254,13 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                     <span
                       className={cn(
-                        'ml-2',
+                        "ml-2",
                         contrastResult.passes.aaa.normal
-                          ? 'text-green-500'
-                          : 'text-red-500'
+                          ? "text-green-500"
+                          : "text-red-500",
                       )}
                     >
-                      {contrastResult.passes.aaa.normal ? '✓ Pass' : '✗ Fail'}
+                      {contrastResult.passes.aaa.normal ? "✓ Pass" : "✗ Fail"}
                     </span>
                   </div>
                   {contrastResult.suggestedForeground && (

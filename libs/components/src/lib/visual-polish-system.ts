@@ -4,7 +4,7 @@
  * Requirements: 6.5, 6.6 - Visual polish with industry-leading quality and micro-interactions
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ElementWithPolishData extends HTMLElement {
   _polishAnimation?: Animation;
@@ -26,7 +26,7 @@ export interface VisualQualityMetrics {
 
 export interface MicroInteraction {
   id: string;
-  trigger: 'hover' | 'focus' | 'active' | 'click' | 'touch';
+  trigger: "hover" | "focus" | "active" | "click" | "touch";
   element: HTMLElement;
   animation: {
     keyframes: Array<Keyframe>;
@@ -71,7 +71,7 @@ export interface PolishConfig {
   enableCrossBrowserTesting: boolean;
   enablePixelPerfectValidation: boolean;
   qualityThreshold: number;
-  animationQuality: 'low' | 'medium' | 'high' | 'ultra';
+  animationQuality: "low" | "medium" | "high" | "ultra";
   enableHapticFeedback: boolean;
   enableAudioFeedback: boolean;
 }
@@ -85,7 +85,7 @@ export const DEFAULT_POLISH_CONFIG: PolishConfig = {
   enableCrossBrowserTesting: true,
   enablePixelPerfectValidation: true,
   qualityThreshold: 0.95,
-  animationQuality: 'high',
+  animationQuality: "high",
   enableHapticFeedback: false,
   enableAudioFeedback: false,
 };
@@ -96,19 +96,19 @@ export const DEFAULT_POLISH_CONFIG: PolishConfig = {
  */
 export const MICRO_INTERACTION_PRESETS: Record<
   string,
-  Omit<MicroInteraction, 'id' | 'element'>
+  Omit<MicroInteraction, "id" | "element">
 > = {
   subtleHover: {
-    trigger: 'hover',
+    trigger: "hover",
     animation: {
       keyframes: [
-        { transform: 'translateY(0) scale(1)', opacity: 1 },
-        { transform: 'translateY(-2px) scale(1.02)', opacity: 1 },
+        { transform: "translateY(0) scale(1)", opacity: 1 },
+        { transform: "translateY(-2px) scale(1.02)", opacity: 1 },
       ],
       options: {
         duration: 200,
-        easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-        fill: 'both',
+        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        fill: "both",
       },
     },
     feedback: {
@@ -119,23 +119,23 @@ export const MICRO_INTERACTION_PRESETS: Record<
     timing: {
       delay: 0,
       duration: 200,
-      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
     },
   },
   magneticHover: {
-    trigger: 'hover',
+    trigger: "hover",
     animation: {
       keyframes: [
-        { transform: 'translate(0, 0) scale(1)' },
+        { transform: "translate(0, 0) scale(1)" },
         {
           transform:
-            'translate(var(--magnetic-x, 0), var(--magnetic-y, 0)) scale(1.05)',
+            "translate(var(--magnetic-x, 0), var(--magnetic-y, 0)) scale(1.05)",
         },
       ],
       options: {
         duration: 400,
-        easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-        fill: 'both',
+        easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        fill: "both",
       },
     },
     feedback: {
@@ -146,17 +146,17 @@ export const MICRO_INTERACTION_PRESETS: Record<
     timing: {
       delay: 0,
       duration: 400,
-      easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+      easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
     },
   },
   pressDown: {
-    trigger: 'active',
+    trigger: "active",
     animation: {
-      keyframes: [{ transform: 'scale(1)' }, { transform: 'scale(0.95)' }],
+      keyframes: [{ transform: "scale(1)" }, { transform: "scale(0.95)" }],
       options: {
         duration: 100,
-        easing: 'cubic-bezier(0.4, 0, 1, 1)',
-        fill: 'both',
+        easing: "cubic-bezier(0.4, 0, 1, 1)",
+        fill: "both",
       },
     },
     feedback: {
@@ -167,20 +167,20 @@ export const MICRO_INTERACTION_PRESETS: Record<
     timing: {
       delay: 0,
       duration: 100,
-      easing: 'cubic-bezier(0.4, 0, 1, 1)',
+      easing: "cubic-bezier(0.4, 0, 1, 1)",
     },
   },
   focusRing: {
-    trigger: 'focus',
+    trigger: "focus",
     animation: {
       keyframes: [
-        { boxShadow: '0 0 0 0 rgba(0, 122, 255, 0)' },
-        { boxShadow: '0 0 0 3px rgba(0, 122, 255, 0.3)' },
+        { boxShadow: "0 0 0 0 rgba(0, 122, 255, 0)" },
+        { boxShadow: "0 0 0 3px rgba(0, 122, 255, 0.3)" },
       ],
       options: {
         duration: 150,
-        easing: 'ease-out',
-        fill: 'both',
+        easing: "ease-out",
+        fill: "both",
       },
     },
     feedback: {
@@ -191,20 +191,20 @@ export const MICRO_INTERACTION_PRESETS: Record<
     timing: {
       delay: 0,
       duration: 150,
-      easing: 'ease-out',
+      easing: "ease-out",
     },
   },
   rippleEffect: {
-    trigger: 'click',
+    trigger: "click",
     animation: {
       keyframes: [
-        { transform: 'scale(0)', opacity: 0.6 },
-        { transform: 'scale(1)', opacity: 0 },
+        { transform: "scale(0)", opacity: 0.6 },
+        { transform: "scale(1)", opacity: 0 },
       ],
       options: {
         duration: 600,
-        easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-        fill: 'both',
+        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        fill: "both",
       },
     },
     feedback: {
@@ -215,20 +215,20 @@ export const MICRO_INTERACTION_PRESETS: Record<
     timing: {
       delay: 0,
       duration: 600,
-      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
     },
   },
   glowEffect: {
-    trigger: 'hover',
+    trigger: "hover",
     animation: {
       keyframes: [
-        { boxShadow: '0 0 0 rgba(255, 255, 255, 0)' },
-        { boxShadow: '0 0 20px rgba(255, 255, 255, 0.4)' },
+        { boxShadow: "0 0 0 rgba(255, 255, 255, 0)" },
+        { boxShadow: "0 0 20px rgba(255, 255, 255, 0.4)" },
       ],
       options: {
         duration: 300,
-        easing: 'ease-in-out',
-        fill: 'both',
+        easing: "ease-in-out",
+        fill: "both",
       },
     },
     feedback: {
@@ -239,7 +239,7 @@ export const MICRO_INTERACTION_PRESETS: Record<
     timing: {
       delay: 0,
       duration: 300,
-      easing: 'ease-in-out',
+      easing: "ease-in-out",
     },
   },
 };
@@ -274,13 +274,13 @@ export class VisualPolishManager {
   addMicroInteraction(
     id: string,
     element: HTMLElement,
-    preset: keyof typeof MICRO_INTERACTION_PRESETS | MicroInteraction
+    preset: keyof typeof MICRO_INTERACTION_PRESETS | MicroInteraction,
   ): void {
     if (!this.config.enableMicroInteractions) {
       return;
     }
 
-    if (typeof preset === 'string') {
+    if (typeof preset === "string") {
       const presetConfig = MICRO_INTERACTION_PRESETS[preset];
       if (!presetConfig) {
         return;
@@ -290,7 +290,7 @@ export class VisualPolishManager {
         id,
         element,
         ...presetConfig,
-        trigger: presetConfig.trigger || 'hover',
+        trigger: presetConfig.trigger || "hover",
       };
 
       this.microInteractions.set(id, interaction);
@@ -300,7 +300,7 @@ export class VisualPolishManager {
         ...preset,
         id,
         element,
-        trigger: preset.trigger || 'hover',
+        trigger: preset.trigger || "hover",
       };
 
       this.microInteractions.set(id, interaction);
@@ -327,7 +327,7 @@ export class VisualPolishManager {
 
     const handleInteraction = (event: Event) => {
       // Prevent default for certain triggers
-      if (trigger === 'click' && event.type === 'click') {
+      if (trigger === "click" && event.type === "click") {
         event.preventDefault();
       }
 
@@ -354,9 +354,9 @@ export class VisualPolishManager {
 
     // Add event listeners based on trigger
     switch (trigger) {
-      case 'hover': {
-        element.addEventListener('mouseenter', handleInteraction);
-        element.addEventListener('mouseleave', (_e) => {
+      case "hover": {
+        element.addEventListener("mouseenter", handleInteraction);
+        element.addEventListener("mouseleave", (_e) => {
           const animation = (element as ElementWithPolishData)._polishAnimation;
           if (animation) {
             animation.reverse();
@@ -364,9 +364,9 @@ export class VisualPolishManager {
         });
         break;
       }
-      case 'focus': {
-        element.addEventListener('focus', handleInteraction);
-        element.addEventListener('blur', (_e) => {
+      case "focus": {
+        element.addEventListener("focus", handleInteraction);
+        element.addEventListener("blur", (_e) => {
           const animation = (element as ElementWithPolishData)._polishAnimation;
           if (animation) {
             animation.reverse();
@@ -374,9 +374,9 @@ export class VisualPolishManager {
         });
         break;
       }
-      case 'active': {
-        element.addEventListener('mousedown', handleInteraction);
-        element.addEventListener('mouseup', () => {
+      case "active": {
+        element.addEventListener("mousedown", handleInteraction);
+        element.addEventListener("mouseup", () => {
           const animation = (element as ElementWithPolishData)._polishAnimation;
           if (animation) {
             animation.reverse();
@@ -384,12 +384,12 @@ export class VisualPolishManager {
         });
         break;
       }
-      case 'click': {
-        element.addEventListener('click', handleInteraction);
+      case "click": {
+        element.addEventListener("click", handleInteraction);
         break;
       }
-      case 'touch': {
-        element.addEventListener('touchstart', handleInteraction);
+      case "touch": {
+        element.addEventListener("touchstart", handleInteraction);
         break;
       }
     }
@@ -407,27 +407,27 @@ export class VisualPolishManager {
 
     if (handlers) {
       switch (trigger) {
-        case 'hover': {
-          element.removeEventListener('mouseenter', handlers.handleInteraction);
-          element.removeEventListener('mouseleave', handlers.handleInteraction);
+        case "hover": {
+          element.removeEventListener("mouseenter", handlers.handleInteraction);
+          element.removeEventListener("mouseleave", handlers.handleInteraction);
           break;
         }
-        case 'focus': {
-          element.removeEventListener('focus', handlers.handleInteraction);
-          element.removeEventListener('blur', handlers.handleInteraction);
+        case "focus": {
+          element.removeEventListener("focus", handlers.handleInteraction);
+          element.removeEventListener("blur", handlers.handleInteraction);
           break;
         }
-        case 'active': {
-          element.removeEventListener('mousedown', handlers.handleInteraction);
-          element.removeEventListener('mouseup', handlers.handleInteraction);
+        case "active": {
+          element.removeEventListener("mousedown", handlers.handleInteraction);
+          element.removeEventListener("mouseup", handlers.handleInteraction);
           break;
         }
-        case 'click': {
-          element.removeEventListener('click', handlers.handleInteraction);
+        case "click": {
+          element.removeEventListener("click", handlers.handleInteraction);
           break;
         }
-        case 'touch': {
-          element.removeEventListener('touchstart', handlers.handleInteraction);
+        case "touch": {
+          element.removeEventListener("touchstart", handlers.handleInteraction);
           break;
         }
       }
@@ -450,7 +450,7 @@ export class VisualPolishManager {
     id: string,
     name: string,
     element: HTMLElement,
-    threshold = 0.01
+    threshold = 0.01,
   ): void {
     if (!this.config.enableVisualRegression) {
       return;
@@ -474,8 +474,8 @@ export class VisualPolishManager {
    */
   private async captureBaseline(test: VisualRegressionTest): Promise<void> {
     try {
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
       if (!context) {
         return;
       }
@@ -527,7 +527,7 @@ export class VisualPolishManager {
   addCrossBrowserTest(
     id: string,
     property: string,
-    expectedValue: string
+    expectedValue: string,
   ): void {
     if (!this.config.enableCrossBrowserTesting) {
       return;
@@ -643,7 +643,7 @@ export class VisualPolishManager {
    * Trigger haptic feedback
    */
   private triggerHapticFeedback(): void {
-    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+    if (typeof navigator !== "undefined" && navigator.vibrate) {
       navigator.vibrate(10);
     }
   }
@@ -672,32 +672,32 @@ export class VisualPolishManager {
 
     if (qualityMetrics.pixelPerfectScore < 0.9) {
       recommendations.push(
-        'Improve pixel-perfect alignment and spacing consistency'
+        "Improve pixel-perfect alignment and spacing consistency",
       );
     }
 
     if (qualityMetrics.crossBrowserConsistency < 0.95) {
-      recommendations.push('Address cross-browser compatibility issues');
+      recommendations.push("Address cross-browser compatibility issues");
     }
 
     if (qualityMetrics.animationSmoothness < 0.9) {
       recommendations.push(
-        'Optimize animations for better performance and smoothness'
+        "Optimize animations for better performance and smoothness",
       );
     }
 
     if (qualityMetrics.microInteractionQuality < 0.85) {
       recommendations.push(
-        'Enhance micro-interactions for better user feedback'
+        "Enhance micro-interactions for better user feedback",
       );
     }
 
     if (qualityMetrics.colorContrast < 0.9) {
-      recommendations.push('Improve color contrast for better accessibility');
+      recommendations.push("Improve color contrast for better accessibility");
     }
 
     if (qualityMetrics.typographyQuality < 0.9) {
-      recommendations.push('Enhance typography consistency and hierarchy');
+      recommendations.push("Enhance typography consistency and hierarchy");
     }
 
     return recommendations;
@@ -768,11 +768,11 @@ export function useVisualPolish(config: Partial<PolishConfig> = {}) {
     (
       id: string,
       element: HTMLElement,
-      preset: keyof typeof MICRO_INTERACTION_PRESETS
+      preset: keyof typeof MICRO_INTERACTION_PRESETS,
     ) => {
       polishManagerRef.current?.addMicroInteraction(id, element, preset);
     },
-    []
+    [],
   );
 
   const removeMicroInteraction = useCallback((id: string) => {
@@ -785,10 +785,10 @@ export function useVisualPolish(config: Partial<PolishConfig> = {}) {
         id,
         name,
         element,
-        threshold
+        threshold,
       );
     },
-    []
+    [],
   );
 
   const runVisualRegressionTest = useCallback(async (id: string) => {
@@ -800,10 +800,10 @@ export function useVisualPolish(config: Partial<PolishConfig> = {}) {
       polishManagerRef.current?.addCrossBrowserTest(
         id,
         property,
-        expectedValue
+        expectedValue,
       );
     },
-    []
+    [],
   );
 
   const runCrossBrowserTest = useCallback(
@@ -812,7 +812,7 @@ export function useVisualPolish(config: Partial<PolishConfig> = {}) {
         polishManagerRef.current?.runCrossBrowserTest(id, element) || false
       );
     },
-    []
+    [],
   );
 
   const updateConfig = useCallback((newConfig: Partial<PolishConfig>) => {

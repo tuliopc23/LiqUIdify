@@ -2,14 +2,14 @@
  * Factory for creating type-safe polymorphic Glass UI components
  */
 
-import { type ElementType, forwardRef } from 'react';
+import { type ElementType, forwardRef } from "react";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 import type {
   PolymorphicComponent,
   PolymorphicComponentPropsWithRef,
-} from '../types/polymorphic';
-import { isInteractiveElement } from '../types/polymorphic';
+} from "../types/polymorphic";
+import { isInteractiveElement } from "../types/polymorphic";
 
 /**
  * Configuration for creating polymorphic components
@@ -82,14 +82,14 @@ export interface CreatePolymorphicComponentConfig<
  */
 export function createPolymorphicComponent<
   Props extends Record<string, unknown>,
-  DefaultElement extends ElementType = 'div',
+  DefaultElement extends ElementType = "div",
 >(
-  config: CreatePolymorphicComponentConfig<Props, DefaultElement>
+  config: CreatePolymorphicComponentConfig<Props, DefaultElement>,
 ): PolymorphicComponent<Props, DefaultElement> {
   const {
     defaultElement,
     displayName,
-    baseClassName = '',
+    baseClassName = "",
     getClassName,
     getDefaultProps,
     validateProps,
@@ -117,19 +117,19 @@ export function createPolymorphicComponent<
     const ElementComponent = Element as React.ElementType;
 
     // Validate props
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== "production") {
       validateProps?.(mergedProps as Props & { as?: ElementType });
 
       // Additional built-in validations
       if (
         isInteractiveElement(ElementComponent) &&
         restProps.disabled &&
-        !restProps['aria-disabled']
+        !restProps["aria-disabled"]
       ) {
         // Logging disabled
       }
 
-      if (ElementComponent === 'img' && !restProps.alt) {
+      if (ElementComponent === "img" && !restProps.alt) {
         // Logging disabled
       }
     }
@@ -140,7 +140,7 @@ export function createPolymorphicComponent<
       : restProps;
 
     // Generate class names
-    const componentClassName = getClassName?.(transformedProps as Props) || '';
+    const componentClassName = getClassName?.(transformedProps as Props) || "";
     const finalClassName = cn(baseClassName, componentClassName, className);
 
     // Type assertion for props spreading
@@ -185,7 +185,7 @@ export interface GlassPolymorphicConfig<
 > extends CreatePolymorphicComponentConfig<Props, DefaultElement> {
   /** Glass effect configuration */
   glassConfig?: {
-    intensity?: 'weak' | 'medium' | 'strong';
+    intensity?: "weak" | "medium" | "strong";
     blur?: boolean;
     borderGlow?: boolean;
     interactive?: boolean;
@@ -194,19 +194,19 @@ export interface GlassPolymorphicConfig<
 
 export function createGlassPolymorphicComponent<
   Props extends Record<string, unknown>,
-  DefaultElement extends ElementType = 'div',
+  DefaultElement extends ElementType = "div",
 >(
-  config: GlassPolymorphicConfig<Props, DefaultElement>
+  config: GlassPolymorphicConfig<Props, DefaultElement>,
 ): PolymorphicComponent<Props, DefaultElement> {
   const {
     glassConfig = {},
-    baseClassName = '',
+    baseClassName = "",
     getClassName,
     ...restConfig
   } = config;
 
   const {
-    intensity = 'medium',
+    intensity = "medium",
     blur = true,
     borderGlow = false,
     interactive = false,
@@ -219,15 +219,15 @@ export function createGlassPolymorphicComponent<
   > = {
     ...restConfig,
     baseClassName: cn(
-      'glass-effect',
+      "glass-effect",
       `glass-${intensity}`,
-      blur && 'glass-blur',
-      borderGlow && 'glass-border-glow',
-      interactive && 'glass-interactive',
-      baseClassName
+      blur && "glass-blur",
+      borderGlow && "glass-border-glow",
+      interactive && "glass-interactive",
+      baseClassName,
     ),
     getClassName: (props) => {
-      const customClassName = getClassName?.(props) || '';
+      const customClassName = getClassName?.(props) || "";
       return cn(customClassName);
     },
   };
@@ -258,11 +258,11 @@ export function createPolymorphicSlots<
     }
   >,
 >(
-  slots: Slots
+  slots: Slots,
 ): {
   [K in keyof Slots]: PolymorphicComponent<
-    Slots[K]['props'] extends Record<string, unknown> ? Slots[K]['props'] : {},
-    Slots[K]['defaultElement']
+    Slots[K]["props"] extends Record<string, unknown> ? Slots[K]["props"] : {},
+    Slots[K]["defaultElement"]
   >;
 } {
   const components = {} as unknown;

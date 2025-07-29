@@ -22,7 +22,7 @@ const defaultSpringConfig: SpringConfig = {
 
 const _createSpringAnimation = (config: SpringConfig = defaultSpringConfig) => {
   return {
-    type: 'spring',
+    type: "spring",
     stiffness: config.stiffness,
     damping: config.damping,
     mass: config.mass,
@@ -31,17 +31,17 @@ const _createSpringAnimation = (config: SpringConfig = defaultSpringConfig) => {
 
 // Dark mode toggle class generator
 const _createDarkModeClass = (isDarkMode: boolean): string => {
-  return isDarkMode ? 'dark-mode' : 'light-mode';
+  return isDarkMode ? "dark-mode" : "light-mode";
 };
 
 // Accessibility focus visibility states
-const focusVisibleClass = 'focus-visible';
+const focusVisibleClass = "focus-visible";
 const _createFocusVisibilityClass = (isVisible: boolean): string => {
-  return isVisible ? focusVisibleClass : '';
+  return isVisible ? focusVisibleClass : "";
 };
 
 // Breakpoint-aware responsive utilities
-type Breakpoint = 'sm' | 'md' | 'lg' | 'xl';
+type Breakpoint = "sm" | "md" | "lg" | "xl";
 
 interface ResponsiveClassConfig {
   baseClass: string;

@@ -4,14 +4,14 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from 'react';
+} from "react";
 
 import type {
   PerformanceMetrics,
   PerformanceMonitor,
   PerformanceThresholds,
-} from '../lib/performance-monitor';
-import { initializePerformanceMonitoring } from '../lib/performance-monitor';
+} from "../lib/performance-monitor";
+import { initializePerformanceMonitoring } from "../lib/performance-monitor";
 
 interface PerformanceContextValue {
   monitor: PerformanceMonitor | null;
@@ -19,7 +19,7 @@ interface PerformanceContextValue {
   isMonitoring: boolean;
   startMonitoring: () => void;
   stopMonitoring: () => void;
-  generateReport: () => ReturnType<PerformanceMonitor['generateReport']> | null;
+  generateReport: () => ReturnType<PerformanceMonitor["generateReport"]> | null;
 }
 
 const PerformanceContext = createContext<PerformanceContextValue | null>(null);
@@ -32,10 +32,10 @@ export interface GlassPerformanceProviderProps {
   onMetricUpdate?: (
     metric: string,
     value: number,
-    status: 'good' | 'needs-improvement' | 'poor'
+    status: "good" | "needs-improvement" | "poor",
   ) => void;
   onPerformanceIssue?: (
-    report: ReturnType<PerformanceMonitor['generateReport']>
+    report: ReturnType<PerformanceMonitor["generateReport"]>,
   ) => void;
 }
 
@@ -55,7 +55,7 @@ export function GlassPerformanceProvider({
   useEffect(() => {
     const performanceMonitor = initializePerformanceMonitoring(
       thresholds,
-      onMetricUpdate
+      onMetricUpdate,
     );
     setMonitor(performanceMonitor);
 
@@ -125,7 +125,7 @@ export function useGlassPerformance(): PerformanceContextValue {
 
   if (!context) {
     throw new Error(
-      'useGlassPerformance must be used within a GlassPerformanceProvider'
+      "useGlassPerformance must be used within a GlassPerformanceProvider",
     );
   }
 
@@ -135,12 +135,12 @@ export function useGlassPerformance(): PerformanceContextValue {
 // HOC for automatic performance monitoring of components
 export function withPerformanceMonitoring<P extends Record<string, unknown>>(
   Component: React.ComponentType<P>,
-  componentName?: string
+  componentName?: string,
 ): React.ComponentType<P> {
   const WrappedComponent: React.FC<P> = (props) => {
     const { monitor } = useGlassPerformance();
     const displayName =
-      componentName || Component.displayName || Component.name || 'Component';
+      componentName || Component.displayName || Component.name || "Component";
 
     useEffect(() => {
       if (!monitor) {

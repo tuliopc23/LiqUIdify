@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   AtSign,
   Building,
@@ -17,17 +17,17 @@ import {
   Search,
   Shield,
   User,
-} from 'lucide-react';
-import React from 'react';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { Card } from '../glass-card-refactored/glass-card';
-import { GlassInput } from './glass-input';
+} from "lucide-react";
+import React from "react";
+import { GlassButton } from "../glass-button-refactored/glass-button";
+import { Card } from "../glass-card-refactored/glass-card";
+import { GlassInput } from "./glass-input";
 
 const meta = {
-  title: 'Components/Forms/GlassInput',
+  title: "Components/Forms/GlassInput",
   component: GlassInput,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -93,181 +93,181 @@ The input component follows WAI-ARIA guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Variant
     variant: {
-      control: 'select',
-      options: ['default', 'search', 'password', 'email'],
-      description: 'Input variant',
+      control: "select",
+      options: ["default", "search", "password", "email"],
+      description: "Input variant",
       table: {
-        type: { summary: 'default | search | password | email' },
-        defaultValue: { summary: 'default' },
-        category: 'Variant',
+        type: { summary: "default | search | password | email" },
+        defaultValue: { summary: "default" },
+        category: "Variant",
       },
     },
 
     // Content
     placeholder: {
-      control: 'text',
-      description: 'Placeholder text',
+      control: "text",
+      description: "Placeholder text",
       table: {
-        type: { summary: 'string' },
-        category: 'Content',
+        type: { summary: "string" },
+        category: "Content",
       },
     },
     value: {
-      control: 'text',
-      description: 'Input value (controlled)',
+      control: "text",
+      description: "Input value (controlled)",
       table: {
-        type: { summary: 'string' },
-        category: 'Content',
+        type: { summary: "string" },
+        category: "Content",
       },
     },
     defaultValue: {
-      control: 'text',
-      description: 'Default value (uncontrolled)',
+      control: "text",
+      description: "Default value (uncontrolled)",
       table: {
-        type: { summary: 'string' },
-        category: 'Content',
+        type: { summary: "string" },
+        category: "Content",
       },
     },
     helperText: {
-      control: 'text',
-      description: 'Helper text below input',
+      control: "text",
+      description: "Helper text below input",
       table: {
-        type: { summary: 'string' },
-        category: 'Content',
+        type: { summary: "string" },
+        category: "Content",
       },
     },
 
     // Icons
     leftIcon: {
       control: false,
-      description: 'Icon on the left side',
+      description: "Icon on the left side",
       table: {
-        type: { summary: 'React.ReactNode' },
-        category: 'Icons',
+        type: { summary: "React.ReactNode" },
+        category: "Icons",
       },
     },
     rightIcon: {
       control: false,
-      description: 'Icon on the right side',
+      description: "Icon on the right side",
       table: {
-        type: { summary: 'React.ReactNode' },
-        category: 'Icons',
+        type: { summary: "React.ReactNode" },
+        category: "Icons",
       },
     },
 
     // Features
     clearable: {
-      control: 'boolean',
-      description: 'Show clear button when input has value',
+      control: "boolean",
+      description: "Show clear button when input has value",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'Features',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "Features",
       },
     },
     error: {
-      control: 'boolean',
-      description: 'Error state',
+      control: "boolean",
+      description: "Error state",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'Features',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "Features",
       },
     },
 
     // HTML Props
     type: {
-      control: 'select',
+      control: "select",
       options: [
-        'text',
-        'email',
-        'tel',
-        'url',
-        'number',
-        'date',
-        'time',
-        'datetime-local',
+        "text",
+        "email",
+        "tel",
+        "url",
+        "number",
+        "date",
+        "time",
+        "datetime-local",
       ],
-      description: 'HTML input type',
+      description: "HTML input type",
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'text' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        defaultValue: { summary: "text" },
+        category: "HTML Props",
       },
     },
     disabled: {
-      control: 'boolean',
-      description: 'Disabled state',
+      control: "boolean",
+      description: "Disabled state",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'HTML Props',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "HTML Props",
       },
     },
     required: {
-      control: 'boolean',
-      description: 'Required field',
+      control: "boolean",
+      description: "Required field",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'HTML Props',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "HTML Props",
       },
     },
     readOnly: {
-      control: 'boolean',
-      description: 'Read-only state',
+      control: "boolean",
+      description: "Read-only state",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'HTML Props',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "HTML Props",
       },
     },
     autoFocus: {
-      control: 'boolean',
-      description: 'Auto-focus on mount',
+      control: "boolean",
+      description: "Auto-focus on mount",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'HTML Props',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "HTML Props",
       },
     },
     autoComplete: {
-      control: 'text',
-      description: 'Autocomplete attribute',
+      control: "text",
+      description: "Autocomplete attribute",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
 
     // Events
     onChange: {
-      action: 'changed',
-      description: 'Change event handler',
+      action: "changed",
+      description: "Change event handler",
       table: {
-        type: { summary: '(event: ChangeEvent<HTMLInputElement>) => void' },
-        category: 'Events',
+        type: { summary: "(event: ChangeEvent<HTMLInputElement>) => void" },
+        category: "Events",
       },
     },
     onFocus: {
-      action: 'focused',
+      action: "focused",
       table: {
-        category: 'Events',
+        category: "Events",
       },
     },
     onBlur: {
-      action: 'blurred',
+      action: "blurred",
       table: {
-        category: 'Events',
+        category: "Events",
       },
     },
   },
   args: {
-    variant: 'default',
+    variant: "default",
     clearable: false,
     error: false,
     disabled: false,
@@ -283,7 +283,7 @@ type Story = StoryObj<typeof meta>;
 // Default story - Interactive playground
 export const Playground: Story = {
   args: {
-    placeholder: 'Enter text...',
+    placeholder: "Enter text...",
   },
 };
 
@@ -438,10 +438,10 @@ export const Features: Story = {
 export const FormExample: Story = {
   render: () => {
     const [formData, setFormData] = React.useState({
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     });
 
     const [errors, setErrors] = React.useState<Record<string, string>>({});
@@ -450,17 +450,17 @@ export const FormExample: Story = {
       e.preventDefault();
       const newErrors: Record<string, string> = {};
 
-      if (!formData.username) newErrors.username = 'Username is required';
-      if (!formData.email) newErrors.email = 'Email is required';
-      if (!formData.password) newErrors.password = 'Password is required';
+      if (!formData.username) newErrors.username = "Username is required";
+      if (!formData.email) newErrors.email = "Email is required";
+      if (!formData.password) newErrors.password = "Password is required";
       if (formData.password !== formData.confirmPassword) {
-        newErrors.confirmPassword = 'Passwords do not match';
+        newErrors.confirmPassword = "Passwords do not match";
       }
 
       setErrors(newErrors);
 
       if (Object.keys(newErrors).length === 0) {
-        alert('Form submitted successfully!');
+        alert("Form submitted successfully!");
       }
     };
 
@@ -470,7 +470,7 @@ export const FormExample: Story = {
         setFormData((prev) => ({ ...prev, [field]: e.target.value }));
         // Clear error when user types
         if (errors[field]) {
-          setErrors((prev) => ({ ...prev, [field]: '' }));
+          setErrors((prev) => ({ ...prev, [field]: "" }));
         }
       };
 
@@ -493,7 +493,7 @@ export const FormExample: Story = {
                 placeholder="johndoe"
                 leftIcon={<User className="h-4 w-4" />}
                 value={formData.username}
-                onChange={handleChange('username')}
+                onChange={handleChange("username")}
                 error={Boolean(errors.username)}
                 helperText={errors.username}
                 required
@@ -510,7 +510,7 @@ export const FormExample: Story = {
                 placeholder="john@example.com"
                 leftIcon={<Mail className="h-4 w-4" />}
                 value={formData.email}
-                onChange={handleChange('email')}
+                onChange={handleChange("email")}
                 error={Boolean(errors.email)}
                 helperText={errors.email}
                 required
@@ -527,9 +527,9 @@ export const FormExample: Story = {
                 variant="password"
                 placeholder="Enter password"
                 value={formData.password}
-                onChange={handleChange('password')}
+                onChange={handleChange("password")}
                 error={Boolean(errors.password)}
-                helperText={errors.password || 'Must be at least 8 characters'}
+                helperText={errors.password || "Must be at least 8 characters"}
                 required
                 autoComplete="new-password"
               />
@@ -544,7 +544,7 @@ export const FormExample: Story = {
                 variant="password"
                 placeholder="Confirm password"
                 value={formData.confirmPassword}
-                onChange={handleChange('confirmPassword')}
+                onChange={handleChange("confirmPassword")}
                 error={Boolean(errors.confirmPassword)}
                 helperText={errors.confirmPassword}
                 required
@@ -706,15 +706,15 @@ export const RealWorldExamples: Story = {
 // Interactive demo
 export const InteractiveDemo: Story = {
   render: () => {
-    const [value, setValue] = React.useState('');
-    const [searchTerm, setSearchTerm] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [value, setValue] = React.useState("");
+    const [searchTerm, setSearchTerm] = React.useState("");
+    const [password, setPassword] = React.useState("");
 
     const passwordStrength = React.useMemo(() => {
-      if (!password) return { strength: 0, label: '' };
-      if (password.length < 6) return { strength: 1, label: 'Weak' };
-      if (password.length < 10) return { strength: 2, label: 'Medium' };
-      return { strength: 3, label: 'Strong' };
+      if (!password) return { strength: 0, label: "" };
+      if (password.length < 6) return { strength: 1, label: "Weak" };
+      if (password.length < 10) return { strength: 2, label: "Medium" };
+      return { strength: 3, label: "Strong" };
     }, [password]);
 
     return (
@@ -757,9 +757,9 @@ export const InteractiveDemo: Story = {
                   Searching for: "{searchTerm}"
                 </p>
                 <div className="space-y-1">
-                  {['Apple', 'Banana', 'Orange', 'Grape', 'Mango']
+                  {["Apple", "Banana", "Orange", "Grape", "Mango"]
                     .filter((item) =>
-                      item.toLowerCase().includes(searchTerm.toLowerCase())
+                      item.toLowerCase().includes(searchTerm.toLowerCase()),
                     )
                     .map((item) => (
                       <div
@@ -794,14 +794,14 @@ export const InteractiveDemo: Story = {
                     <div
                       key={level}
                       className={cn(
-                        'h-2 flex-1 rounded transition-colors',
+                        "h-2 flex-1 rounded transition-colors",
                         level <= passwordStrength.strength
                           ? level === 1
-                            ? 'bg-red-500'
+                            ? "bg-red-500"
                             : level === 2
-                              ? 'bg-yellow-500'
-                              : 'bg-green-500'
-                          : 'bg-gray-200 dark:bg-gray-700'
+                              ? "bg-yellow-500"
+                              : "bg-green-500"
+                          : "bg-gray-200 dark:bg-gray-700",
                       )}
                     />
                   ))}
@@ -860,7 +860,7 @@ export const ThemeShowcase: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'liquid-gradient',
+      default: "liquid-gradient",
     },
   },
 };

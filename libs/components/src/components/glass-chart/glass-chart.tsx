@@ -1,7 +1,7 @@
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { cn, getGlassClass } from '@/core/utils/classname';
+import { cn, getGlassClass } from "@/core/utils/classname";
 
 export interface ChartDataPoint {
   label: string;
@@ -26,7 +26,7 @@ export interface LineChartProps extends BaseChartProps {
 }
 
 export interface BarChartProps extends BaseChartProps {
-  orientation?: 'vertical' | 'horizontal';
+  orientation?: "vertical" | "horizontal";
   showValues?: boolean;
 }
 
@@ -74,14 +74,14 @@ export const LineChart: React.FC<LineChartProps> = ({
   }));
 
   const pathData = points.reduce((path, point, index) => {
-    const command = index === 0 ? 'M' : 'L';
+    const command = index === 0 ? "M" : "L";
     return `${path} ${command} ${point.x} ${point.y}`;
-  }, '');
+  }, "");
 
   const gradientId = `gradient-${Math.random().toString(36).slice(2, 11)}`;
 
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn("relative", className)}>
       <svg
         ref={svgRef}
         width={width}
@@ -132,7 +132,7 @@ export const LineChart: React.FC<LineChartProps> = ({
           <path
             d={`${pathData} L ${points.at(-1)?.x} ${height - padding} L ${padding} ${height - padding} Z`}
             fill={`url(#${gradientId})`}
-            className={cn(animated && 'transition-all duration-1000 ease-out')}
+            className={cn(animated && "transition-all duration-1000 ease-out")}
             style={{
               opacity: mounted ? 1 : 0,
             }}
@@ -148,10 +148,10 @@ export const LineChart: React.FC<LineChartProps> = ({
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={cn(animated && 'transition-all duration-1000 ease-out')}
+          className={cn(animated && "transition-all duration-1000 ease-out")}
           style={{
-            strokeDasharray: animated ? (mounted ? 'none' : '1000') : 'none',
-            strokeDashoffset: animated ? (mounted ? '0' : '1000') : '0',
+            strokeDasharray: animated ? (mounted ? "none" : "1000") : "none",
+            strokeDashoffset: animated ? (mounted ? "0" : "1000") : "0",
           }}
         />
 
@@ -167,12 +167,12 @@ export const LineChart: React.FC<LineChartProps> = ({
               stroke="white"
               strokeWidth="2"
               className={cn(
-                'cursor-pointer transition-all duration-200',
-                animated && 'zoom-in-0 animate-in duration-500',
-                hoveredPoint === index && 'shadow-lg'
+                "cursor-pointer transition-all duration-200",
+                animated && "zoom-in-0 animate-in duration-500",
+                hoveredPoint === index && "shadow-lg",
               )}
               style={{
-                animationDelay: animated ? `${index * 100}ms` : '0ms',
+                animationDelay: animated ? `${index * 100}ms` : "0ms",
               }}
               onMouseEnter={() => setHoveredPoint(index)}
               onMouseLeave={() => setHoveredPoint(null)}
@@ -184,14 +184,14 @@ export const LineChart: React.FC<LineChartProps> = ({
       {showTooltip && hoveredPoint !== null && points[hoveredPoint] && (
         <div
           className={cn(
-            'pointer-events-none absolute z-10 rounded-lg px-3 py-2 text-sm',
-            getGlassClass('elevated'),
-            'border border-[var(--glass-border)]'
+            "pointer-events-none absolute z-10 rounded-lg px-3 py-2 text-sm",
+            getGlassClass("elevated"),
+            "border border-[var(--glass-border)]",
           )}
           style={{
             left: points[hoveredPoint]?.x - 40,
             top: points[hoveredPoint]?.y - 60,
-            transform: 'translateX(-50%)',
+            transform: "translateX(-50%)",
           }}
         >
           <div className="font-medium text-[var(--text-primary)]">
@@ -213,7 +213,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   height = 200,
   className,
   animated = true,
-  orientation = 'vertical',
+  orientation = "vertical",
   showValues = true,
 }) => {
   const [mounted, setMounted] = useState(false);
@@ -232,13 +232,13 @@ export const BarChart: React.FC<BarChartProps> = ({
   const chartHeight = height - padding * 2;
 
   const barThickness = Math.min(
-    ((orientation === 'vertical' ? chartWidth : chartHeight) / data.length) *
+    ((orientation === "vertical" ? chartWidth : chartHeight) / data.length) *
       0.6,
-    40
+    40,
   );
 
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn("relative", className)}>
       <svg
         width={width}
         height={height}
@@ -249,23 +249,23 @@ export const BarChart: React.FC<BarChartProps> = ({
         {data.map((item, index) => {
           const barLength =
             (item.value / maxValue) *
-            (orientation === 'vertical' ? chartHeight : chartWidth);
+            (orientation === "vertical" ? chartHeight : chartWidth);
           const x =
-            orientation === 'vertical'
+            orientation === "vertical"
               ? padding +
                 (index / data.length) * chartWidth +
                 (chartWidth / data.length - barThickness) / 2
               : padding;
           const y =
-            orientation === 'vertical'
+            orientation === "vertical"
               ? height - padding - barLength
               : padding +
                 (index / data.length) * chartHeight +
                 (chartHeight / data.length - barThickness) / 2;
           const barWidth =
-            orientation === 'vertical' ? barThickness : barLength;
+            orientation === "vertical" ? barThickness : barLength;
           const barHeight =
-            orientation === 'vertical' ? barLength : barThickness;
+            orientation === "vertical" ? barLength : barThickness;
 
           return (
             <g key={`bar-${item.label}-${index}`}>
@@ -274,16 +274,16 @@ export const BarChart: React.FC<BarChartProps> = ({
                 y={y}
                 width={barWidth}
                 height={barHeight}
-                fill={item.color || 'var(--glass-primary)'}
+                fill={item.color || "var(--glass-primary)"}
                 rx="4"
                 className={cn(
-                  'transition-all duration-500 ease-out',
-                  animated && 'fade-in-0 slide-in-from-bottom-4 animate-in'
+                  "transition-all duration-500 ease-out",
+                  animated && "fade-in-0 slide-in-from-bottom-4 animate-in",
                 )}
                 style={{
-                  animationDelay: animated ? `${index * 100}ms` : '0ms',
-                  transform: mounted ? 'scaleY(1)' : 'scaleY(0)',
-                  transformOrigin: 'bottom',
+                  animationDelay: animated ? `${index * 100}ms` : "0ms",
+                  transform: mounted ? "scaleY(1)" : "scaleY(0)",
+                  transformOrigin: "bottom",
                 }}
               />
               {showValues && (
@@ -354,8 +354,8 @@ export const DonutChart: React.FC<DonutChartProps> = ({
       `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
       `L ${innerX2} ${innerY2}`,
       `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerX1} ${innerY1}`,
-      'Z',
-    ].join(' ');
+      "Z",
+    ].join(" ");
 
     cumulativePercentage += percentage;
 
@@ -368,7 +368,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
   });
 
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn("relative", className)}>
       <svg width={width} height={height} aria-hidden="true">
         <title>Icon</title>
         {segments.map((segment, index) => (
@@ -377,12 +377,12 @@ export const DonutChart: React.FC<DonutChartProps> = ({
             d={segment.path}
             fill={segment.color}
             className={cn(
-              'transition-all duration-500 ease-out hover:opacity-80',
-              animated && 'fade-in-0 animate-in'
+              "transition-all duration-500 ease-out hover:opacity-80",
+              animated && "fade-in-0 animate-in",
             )}
             style={{
-              animationDelay: animated ? `${index * 150}ms` : '0ms',
-              transform: mounted ? 'scale(1)' : 'scale(0)',
+              animationDelay: animated ? `${index * 150}ms` : "0ms",
+              transform: mounted ? "scale(1)" : "scale(0)",
               transformOrigin: `${centerX}px ${centerY}px`,
             }}
           />

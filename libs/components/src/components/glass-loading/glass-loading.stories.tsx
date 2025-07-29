@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   CheckCircle,
   Download,
@@ -6,17 +6,17 @@ import {
   Save,
   Send,
   Upload,
-} from 'lucide-react';
-import { useState } from 'react';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { GlassCard } from '../glass-card-refactored/glass-card';
-import { GlassLoading } from './glass-loading';
+} from "lucide-react";
+import { useState } from "react";
+import { GlassButton } from "../glass-button-refactored/glass-button";
+import { GlassCard } from "../glass-card-refactored/glass-card";
+import { GlassLoading } from "./glass-loading";
 
 const meta = {
-  title: 'Components/Feedback/GlassLoading',
+  title: "Components/Feedback/GlassLoading",
   component: GlassLoading,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -83,36 +83,36 @@ The loading component includes:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Appearance
     variant: {
-      control: 'select',
-      options: ['spinner', 'dots', 'pulse', 'bars'],
-      description: 'Loading animation variant',
+      control: "select",
+      options: ["spinner", "dots", "pulse", "bars"],
+      description: "Loading animation variant",
       table: {
-        defaultValue: { summary: 'spinner' },
+        defaultValue: { summary: "spinner" },
       },
     },
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg', 'xl'],
-      description: 'Size of the loading indicator',
+      control: "select",
+      options: ["sm", "md", "lg", "xl"],
+      description: "Size of the loading indicator",
       table: {
-        defaultValue: { summary: 'md' },
+        defaultValue: { summary: "md" },
       },
     },
 
     // Content
     text: {
-      control: 'text',
-      description: 'Optional loading text to display below the indicator',
+      control: "text",
+      description: "Optional loading text to display below the indicator",
     },
 
     // Styling
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
 } satisfies Meta<typeof GlassLoading>;
@@ -123,9 +123,9 @@ type Story = StoryObj<typeof meta>;
 // Basic playground story
 export const Playground: Story = {
   args: {
-    variant: 'spinner',
-    size: 'md',
-    text: 'Loading...',
+    variant: "spinner",
+    size: "md",
+    text: "Loading...",
   },
 };
 
@@ -160,7 +160,7 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="space-y-8">
-      {(['sm', 'md', 'lg', 'xl'] as const).map((size) => (
+      {(["sm", "md", "lg", "xl"] as const).map((size) => (
         <div key={size} className="text-center">
           <h3 className="mb-4 font-medium text-white/90">Size: {size}</h3>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -225,11 +225,11 @@ export const RealWorldExamples: Story = {
             <GlassButton
               type="button"
               variant="primary"
-              onClick={() => simulateLoading('save')}
+              onClick={() => simulateLoading("save")}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  (() => simulateLoading('save'))(e);
+                  (() => simulateLoading("save"))(e);
                 }
               }}
               disabled={loadingStates.save}
@@ -240,18 +240,18 @@ export const RealWorldExamples: Story = {
               {loadingStates.save ? (
                 <GlassLoading variant="spinner" size="sm" />
               ) : (
-                'Save'
+                "Save"
               )}
             </GlassButton>
 
             <GlassButton
               type="button"
               variant="secondary"
-              onClick={() => simulateLoading('upload')}
+              onClick={() => simulateLoading("upload")}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  (() => simulateLoading('upload'))(e);
+                  (() => simulateLoading("upload"))(e);
                 }
               }}
               disabled={loadingStates.upload}
@@ -264,18 +264,18 @@ export const RealWorldExamples: Story = {
               {loadingStates.upload ? (
                 <GlassLoading variant="dots" size="sm" />
               ) : (
-                'Upload'
+                "Upload"
               )}
             </GlassButton>
 
             <GlassButton
               type="button"
               variant="tertiary"
-              onClick={() => simulateLoading('download')}
+              onClick={() => simulateLoading("download")}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  (() => simulateLoading('download'))(e);
+                  (() => simulateLoading("download"))(e);
                 }
               }}
               disabled={loadingStates.download}
@@ -288,18 +288,18 @@ export const RealWorldExamples: Story = {
               {loadingStates.download ? (
                 <GlassLoading variant="pulse" size="sm" />
               ) : (
-                'Download'
+                "Download"
               )}
             </GlassButton>
 
             <GlassButton
               type="button"
               variant="ghost"
-              onClick={() => simulateLoading('send')}
+              onClick={() => simulateLoading("send")}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  (() => simulateLoading('send'))(e);
+                  (() => simulateLoading("send"))(e);
                 }
               }}
               disabled={loadingStates.send}
@@ -310,7 +310,7 @@ export const RealWorldExamples: Story = {
               {loadingStates.send ? (
                 <GlassLoading variant="bars" size="sm" />
               ) : (
-                'Send'
+                "Send"
               )}
             </GlassButton>
           </div>
@@ -366,11 +366,11 @@ export const RealWorldExamples: Story = {
 export const InteractiveDemo: Story = {
   render: () => {
     const [variant, setVariant] = useState<
-      'spinner' | 'dots' | 'pulse' | 'bars'
-    >('spinner');
-    const [size, setSize] = useState<'sm' | 'md' | 'lg' | 'xl'>('md');
+      "spinner" | "dots" | "pulse" | "bars"
+    >("spinner");
+    const [size, setSize] = useState<"sm" | "md" | "lg" | "xl">("md");
     const [showText, setShowText] = useState(true);
-    const [customText, setCustomText] = useState('Loading...');
+    const [customText, setCustomText] = useState("Loading...");
     const [isLoading, setIsLoading] = useState(true);
 
     return (
@@ -392,7 +392,7 @@ export const InteractiveDemo: Story = {
                 value={variant}
                 onChange={(e) =>
                   setVariant(
-                    e.target.value as 'spinner' | 'dots' | 'pulse' | 'bars'
+                    e.target.value as "spinner" | "dots" | "pulse" | "bars",
                   )
                 }
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
@@ -415,7 +415,7 @@ export const InteractiveDemo: Story = {
                 id="size-select"
                 value={size}
                 onChange={(e) =>
-                  setSize(e.target.value as 'sm' | 'md' | 'lg' | 'xl')
+                  setSize(e.target.value as "sm" | "md" | "lg" | "xl")
                 }
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
               >
@@ -514,14 +514,14 @@ export const PerformanceShowcase: Story = {
               variant="secondary"
               onClick={() => setShowMany(!showMany)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
                   (() => setShowMany(!showMany))(e);
                 }
               }}
               leftIcon={<RefreshCw className="h-4 w-4" />}
             >
-              {showMany ? 'Hide' : 'Show'} Multiple Loaders
+              {showMany ? "Hide" : "Show"} Multiple Loaders
             </GlassButton>
           </div>
 
@@ -531,11 +531,11 @@ export const PerformanceShowcase: Story = {
                 <GlassLoading
                   key={`loader-${i}`}
                   variant={
-                    ['spinner', 'dots', 'pulse', 'bars'][i % 4] as
-                      | 'spinner'
-                      | 'dots'
-                      | 'pulse'
-                      | 'bars'
+                    ["spinner", "dots", "pulse", "bars"][i % 4] as
+                      | "spinner"
+                      | "dots"
+                      | "pulse"
+                      | "bars"
                   }
                   size="sm"
                 />

@@ -1,9 +1,9 @@
-import type React from 'react';
-import { useEffect, useState } from 'react';
+import type React from "react";
+import { useEffect, useState } from "react";
 
-import { createPortal } from 'react-dom';
+import { createPortal } from "react-dom";
 
-import { useIsClient } from '@/hooks/use-ssr-safe';
+import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface GlassPortalProps {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
   key,
 }) => {
   const [mountNode, setMountNode] = useState<Element | DocumentFragment | null>(
-    undefined
+    undefined,
   );
   const isClient = useIsClient();
 
@@ -54,6 +54,6 @@ const GlassPortal: React.FC<GlassPortalProps> = ({
   return createPortal(children, mountNode, key);
 };
 
-GlassPortal.displayName = 'GlassPortal';
+GlassPortal.displayName = "GlassPortal";
 
 export { GlassPortal };

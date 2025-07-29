@@ -1,5 +1,5 @@
 /* Tailwind v4 Configuration */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Apple Liquid Glass Design System */
 @theme {
@@ -245,7 +245,7 @@
 }
 
 /* Tailwind v4 Configuration */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Apple Liquid Glass Design System */
 @theme {

@@ -4,10 +4,10 @@
  * Requirements: 5.2, 5.4 - Gesture recognition with haptic feedback simulation
  */
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from "react";
 
 export interface GestureEvent {
-  type: 'start' | 'move' | 'end' | 'cancel';
+  type: "start" | "move" | "end" | "cancel";
   position: { x: number; y: number };
   velocity: { x: number; y: number };
   distance: number;
@@ -17,7 +17,7 @@ export interface GestureEvent {
 }
 
 export interface SwipeGesture {
-  direction: 'left' | 'right' | 'up' | 'down';
+  direction: "left" | "right" | "up" | "down";
   velocity: number;
   distance: number;
   duration: number;
@@ -62,7 +62,7 @@ export interface GestureConfig {
     decay: number;
   };
   haptics: {
-    intensity: 'light' | 'medium' | 'heavy';
+    intensity: "light" | "medium" | "heavy";
     duration: number;
   };
 }
@@ -101,7 +101,7 @@ export const DEFAULT_GESTURE_CONFIG: GestureConfig = {
     decay: 0.6,
   },
   haptics: {
-    intensity: 'light',
+    intensity: "light",
     duration: 10,
   },
 };
@@ -132,7 +132,7 @@ export class GlassGestureRecognizer {
   constructor(
     element: HTMLElement,
     config: GestureConfig,
-    callbacks: GestureCallbacks
+    callbacks: GestureCallbacks,
   ) {
     this.element = element;
     this.config = { ...DEFAULT_GESTURE_CONFIG, ...config };
@@ -143,41 +143,41 @@ export class GlassGestureRecognizer {
   private setupEventListeners(): void {
     // Mouse events
     if (this.config.enableMouse) {
-      this.element.addEventListener('mousedown', this.handleMouseDown);
-      this.element.addEventListener('mousemove', this.handleMouseMove);
-      this.element.addEventListener('mouseup', this.handleMouseUp);
-      this.element.addEventListener('mouseleave', this.handleMouseLeave);
+      this.element.addEventListener("mousedown", this.handleMouseDown);
+      this.element.addEventListener("mousemove", this.handleMouseMove);
+      this.element.addEventListener("mouseup", this.handleMouseUp);
+      this.element.addEventListener("mouseleave", this.handleMouseLeave);
 
       if (this.config.enableHover) {
-        this.element.addEventListener('mouseenter', this.handleMouseEnter);
+        this.element.addEventListener("mouseenter", this.handleMouseEnter);
       }
     }
 
     // Touch events
     if (this.config.enableTouch) {
-      this.element.addEventListener('touchstart', this.handleTouchStart, {
+      this.element.addEventListener("touchstart", this.handleTouchStart, {
         passive: false,
       });
-      this.element.addEventListener('touchmove', this.handleTouchMove, {
+      this.element.addEventListener("touchmove", this.handleTouchMove, {
         passive: false,
       });
-      this.element.addEventListener('touchend', this.handleTouchEnd);
-      this.element.addEventListener('touchcancel', this.handleTouchCancel);
+      this.element.addEventListener("touchend", this.handleTouchEnd);
+      this.element.addEventListener("touchcancel", this.handleTouchCancel);
     }
 
     // Keyboard events
     if (this.config.enableKeyboard) {
-      this.element.addEventListener('keydown', this.handleKeyDown);
-      this.element.addEventListener('keyup', this.handleKeyUp);
+      this.element.addEventListener("keydown", this.handleKeyDown);
+      this.element.addEventListener("keyup", this.handleKeyUp);
     }
 
     // Prevent context menu on long press
-    this.element.addEventListener('contextmenu', (e) => e.preventDefault());
+    this.element.addEventListener("contextmenu", (e) => e.preventDefault());
   }
 
   private handleMouseDown = (e: MouseEvent): void => {
     this.startGesture(e.clientX, e.clientY, e.target as HTMLElement);
-    this.triggerHaptic('light');
+    this.triggerHaptic("light");
   };
 
   private handleMouseMove = (e: MouseEvent): void => {
@@ -226,9 +226,9 @@ export class GlassGestureRecognizer {
         this.startGesture(
           touch.clientX,
           touch.clientY,
-          e.target as HTMLElement
+          e.target as HTMLElement,
         );
-        this.triggerHaptic('light');
+        this.triggerHaptic("light");
       }
     } else if (e.touches.length === 2) {
       // Handle multi-touch gestures
@@ -271,25 +271,25 @@ export class GlassGestureRecognizer {
     let deltaY = 0;
 
     switch (e.key) {
-      case 'ArrowLeft': {
+      case "ArrowLeft": {
         deltaX = -step;
         break;
       }
-      case 'ArrowRight': {
+      case "ArrowRight": {
         deltaX = step;
         break;
       }
-      case 'ArrowUp': {
+      case "ArrowUp": {
         deltaY = -step;
         break;
       }
-      case 'ArrowDown': {
+      case "ArrowDown": {
         deltaY = step;
         break;
       }
-      case 'Enter':
-      case ' ': {
-        this.triggerHaptic('medium');
+      case "Enter":
+      case " ": {
+        this.triggerHaptic("medium");
         break;
       }
       default: {
@@ -308,7 +308,7 @@ export class GlassGestureRecognizer {
   };
 
   private handleKeyUp = (e: KeyboardEvent): void => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
     }
   };
@@ -323,7 +323,7 @@ export class GlassGestureRecognizer {
     this.velocity = { x: 0, y: 0 };
 
     const gestureEvent: GestureEvent = {
-      type: 'start',
+      type: "start",
       position: { x, y },
       velocity: { x: 0, y: 0 },
       distance: 0,
@@ -359,7 +359,7 @@ export class GlassGestureRecognizer {
 
     const distance = Math.hypot(
       x - this.startPosition.x,
-      y - this.startPosition.y
+      y - this.startPosition.y,
     );
 
     const direction =
@@ -371,7 +371,7 @@ export class GlassGestureRecognizer {
         : { x: 0, y: 0 };
 
     const gestureEvent: GestureEvent = {
-      type: 'move',
+      type: "move",
       position: { x, y },
       velocity: this.velocity,
       distance,
@@ -392,7 +392,7 @@ export class GlassGestureRecognizer {
     const duration = now - this.startTime;
     const distance = Math.hypot(
       x - this.startPosition.x,
-      y - this.startPosition.y
+      y - this.startPosition.y,
     );
 
     const direction =
@@ -404,7 +404,7 @@ export class GlassGestureRecognizer {
         : { x: 0, y: 0 };
 
     const gestureEvent: GestureEvent = {
-      type: 'end',
+      type: "end",
       position: { x, y },
       velocity: this.velocity,
       distance,
@@ -421,7 +421,7 @@ export class GlassGestureRecognizer {
     }
 
     this.isTracking = false;
-    this.triggerHaptic('light');
+    this.triggerHaptic("light");
   }
 
   private cancelGesture(): void {
@@ -430,7 +430,7 @@ export class GlassGestureRecognizer {
     }
 
     const gestureEvent: GestureEvent = {
-      type: 'cancel',
+      type: "cancel",
       position: this.currentPosition,
       velocity: { x: 0, y: 0 },
       distance: 0,
@@ -449,12 +449,12 @@ export class GlassGestureRecognizer {
     const distance = Math.hypot(deltaX, deltaY);
     const velocity = distance / duration;
 
-    let direction: 'left' | 'right' | 'up' | 'down';
+    let direction: "left" | "right" | "up" | "down";
 
     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      direction = deltaX > 0 ? 'right' : 'left';
+      direction = deltaX > 0 ? "right" : "left";
     } else {
-      direction = deltaY > 0 ? 'down' : 'up';
+      direction = deltaY > 0 ? "down" : "up";
     }
 
     const swipeGesture: SwipeGesture = {
@@ -465,7 +465,7 @@ export class GlassGestureRecognizer {
     };
 
     this.callbacks.onSwipe?.(swipeGesture);
-    this.triggerHaptic('medium');
+    this.triggerHaptic("medium");
   }
 
   private handleMultiTouch(touches: TouchList): void {
@@ -491,7 +491,7 @@ export class GlassGestureRecognizer {
       if (touch1 && touch2) {
         const currentDistance = Math.hypot(
           touch2.clientX - touch1.clientX,
-          touch2.clientY - touch1.clientY
+          touch2.clientY - touch1.clientY,
         );
 
         const storedTouch1 = this.touches.get(touch1.identifier);
@@ -500,7 +500,7 @@ export class GlassGestureRecognizer {
         if (storedTouch1 && storedTouch2) {
           const initialDistance = Math.hypot(
             storedTouch2.clientX - storedTouch1.clientX,
-            storedTouch2.clientY - storedTouch1.clientY
+            storedTouch2.clientY - storedTouch1.clientY,
           );
 
           if (initialDistance > 0) {
@@ -537,7 +537,7 @@ export class GlassGestureRecognizer {
     this.hoverState.position = { x, y };
     this.hoverState.intensity = Math.max(
       0,
-      1 - distance / this.config.threshold.magnetic
+      1 - distance / this.config.threshold.magnetic,
     );
 
     // Calculate magnetic force
@@ -547,7 +547,7 @@ export class GlassGestureRecognizer {
         y,
         centerX,
         centerY,
-        distance
+        distance,
       );
       this.hoverState.magneticForce = force;
       this.callbacks.onMagneticAttraction?.(force);
@@ -563,7 +563,7 @@ export class GlassGestureRecognizer {
     cursorY: number,
     centerX: number,
     centerY: number,
-    distance: number
+    distance: number,
   ): { x: number; y: number } {
     const { strength, range, decay } = this.config.magnetic;
 
@@ -583,10 +583,10 @@ export class GlassGestureRecognizer {
     };
   }
 
-  private triggerHaptic(intensity: 'light' | 'medium' | 'heavy'): void {
+  private triggerHaptic(intensity: "light" | "medium" | "heavy"): void {
     if (
       !this.config.enableHaptics ||
-      typeof navigator === 'undefined' ||
+      typeof navigator === "undefined" ||
       !navigator.vibrate
     ) {
       return;
@@ -608,23 +608,23 @@ export class GlassGestureRecognizer {
   destroy(): void {
     // Remove all event listeners
     if (this.config.enableMouse) {
-      this.element.removeEventListener('mousedown', this.handleMouseDown);
-      this.element.removeEventListener('mousemove', this.handleMouseMove);
-      this.element.removeEventListener('mouseup', this.handleMouseUp);
-      this.element.removeEventListener('mouseleave', this.handleMouseLeave);
-      this.element.removeEventListener('mouseenter', this.handleMouseEnter);
+      this.element.removeEventListener("mousedown", this.handleMouseDown);
+      this.element.removeEventListener("mousemove", this.handleMouseMove);
+      this.element.removeEventListener("mouseup", this.handleMouseUp);
+      this.element.removeEventListener("mouseleave", this.handleMouseLeave);
+      this.element.removeEventListener("mouseenter", this.handleMouseEnter);
     }
 
     if (this.config.enableTouch) {
-      this.element.removeEventListener('touchstart', this.handleTouchStart);
-      this.element.removeEventListener('touchmove', this.handleTouchMove);
-      this.element.removeEventListener('touchend', this.handleTouchEnd);
-      this.element.removeEventListener('touchcancel', this.handleTouchCancel);
+      this.element.removeEventListener("touchstart", this.handleTouchStart);
+      this.element.removeEventListener("touchmove", this.handleTouchMove);
+      this.element.removeEventListener("touchend", this.handleTouchEnd);
+      this.element.removeEventListener("touchcancel", this.handleTouchCancel);
     }
 
     if (this.config.enableKeyboard) {
-      this.element.removeEventListener('keydown', this.handleKeyDown);
-      this.element.removeEventListener('keyup', this.handleKeyUp);
+      this.element.removeEventListener("keydown", this.handleKeyDown);
+      this.element.removeEventListener("keyup", this.handleKeyUp);
     }
 
     this.touches.clear();
@@ -637,7 +637,7 @@ export class GlassGestureRecognizer {
  */
 export function useGlassGestures(
   config: Partial<GestureConfig> = {},
-  callbacks: GestureCallbacks = {}
+  callbacks: GestureCallbacks = {},
 ) {
   const elementRef = useRef<HTMLElement>(null);
   const gestureRecognizerRef = useRef<GlassGestureRecognizer | null>(null);
@@ -656,7 +656,7 @@ export function useGlassGestures(
     gestureRecognizerRef.current = new GlassGestureRecognizer(
       elementRef.current,
       { ...DEFAULT_GESTURE_CONFIG, ...config },
-      callbacks
+      callbacks,
     );
   }, [config, callbacks]);
 

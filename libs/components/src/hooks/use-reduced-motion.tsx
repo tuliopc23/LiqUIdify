@@ -3,10 +3,10 @@
  * Provides animation control based on user preferences
  */
 
-import type React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import type React from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { isClient } from '@/core/ssr-safety';
+import { isClient } from "@/core/ssr-safety";
 
 // Type definitions
 export interface ReducedMotionConfig {
@@ -46,7 +46,7 @@ export interface AdjustedAnimation {
  * Hook for detecting prefers-reduced-motion
  */
 export const usePrefersReducedMotion = (
-  config: ReducedMotionConfig = {}
+  config: ReducedMotionConfig = {},
 ): boolean => {
   const { forceReduced = false, onChange } = config;
 
@@ -58,7 +58,7 @@ export const usePrefersReducedMotion = (
       return false;
     }
 
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export const usePrefersReducedMotion = (
       return;
     }
 
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const handleChange = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(event.matches);
@@ -81,8 +81,8 @@ export const usePrefersReducedMotion = (
 
     // Check if addEventListener is supported (older browsers use addListener)
     if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
     }
     if (mediaQuery.addListener) {
       // Fallback for older browsers
@@ -110,7 +110,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
       if (!prefersReducedMotion) {
         return {
           duration: animation.duration,
-          easing: animation.easing || 'ease',
+          easing: animation.easing || "ease",
           delay: animation.delay || 0,
           shouldAnimate: true,
         };
@@ -120,7 +120,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
       if (disableAnimations && !animation.essential) {
         return {
           duration: 0,
-          easing: 'linear',
+          easing: "linear",
           delay: 0,
           shouldAnimate: false,
         };
@@ -131,12 +131,12 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
         duration: animation.essential
           ? animation.duration * 0.5
           : animation.duration * durationMultiplier,
-        easing: 'ease', // Simplify easing
+        easing: "ease", // Simplify easing
         delay: animation.delay ? animation.delay * 0.5 : 0,
         shouldAnimate: true,
       };
     },
-    [prefersReducedMotion, disableAnimations, durationMultiplier]
+    [prefersReducedMotion, disableAnimations, durationMultiplier],
   );
 
   /**
@@ -146,18 +146,18 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
     (
       property: string,
       duration: number,
-      easing = 'ease',
-      delay = 0
+      easing = "ease",
+      delay = 0,
     ): string => {
       const adjusted = adjustAnimation({ duration, easing, delay });
 
       if (!adjusted.shouldAnimate) {
-        return 'none';
+        return "none";
       }
 
       return `${property} ${adjusted.duration}ms ${adjusted.easing} ${adjusted.delay}ms`;
     },
-    [adjustAnimation]
+    [adjustAnimation],
   );
 
   /**
@@ -170,17 +170,17 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
         duration: number;
         easing?: string;
         delay?: number;
-      }>
+      }>,
     ): string => {
       const adjustedTransitions = transitions
         .map((t) => createTransition(t.property, t.duration, t.easing, t.delay))
-        .filter((t) => t !== 'none');
+        .filter((t) => t !== "none");
 
       return adjustedTransitions.length > 0
-        ? adjustedTransitions.join(', ')
-        : 'none';
+        ? adjustedTransitions.join(", ")
+        : "none";
     },
-    [createTransition]
+    [createTransition],
   );
 
   /**
@@ -191,7 +191,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
       const adjusted = adjustAnimation({ duration, essential });
       return adjusted.duration;
     },
-    [adjustAnimation]
+    [adjustAnimation],
   );
 
   /**
@@ -203,7 +203,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
       options: {
         essential?: boolean;
         disableExit?: boolean;
-      } = {}
+      } = {},
     ): T => {
       if (!prefersReducedMotion) {
         return variants;
@@ -212,9 +212,9 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
       const adjusted: Record<string, unknown> = {};
 
       for (const [key, value] of Object.entries(variants)) {
-        if (typeof value === 'object' && value !== null) {
+        if (typeof value === "object" && value !== null) {
           // Handle animation objects
-          if ('transition' in value && value.transition) {
+          if ("transition" in value && value.transition) {
             const adjustedTransition = adjustAnimation({
               duration: value.transition.duration || 0.3,
               easing: value.transition.ease,
@@ -238,7 +238,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
           }
 
           // Disable exit animations if requested
-          if (options.disableExit && key === 'exit') {
+          if (options.disableExit && key === "exit") {
             adjusted[key] = { opacity: 1 };
           }
         } else {
@@ -248,20 +248,20 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
 
       return adjusted as T;
     },
-    [prefersReducedMotion, adjustAnimation]
+    [prefersReducedMotion, adjustAnimation],
   );
 
   /**
    * Conditionally applies animation classes
    */
   const getAnimationClass = useCallback(
-    (animatedClass: string, staticClass = ''): string => {
+    (animatedClass: string, staticClass = ""): string => {
       if (prefersReducedMotion && disableAnimations) {
         return staticClass;
       }
       return animatedClass;
     },
-    [prefersReducedMotion, disableAnimations]
+    [prefersReducedMotion, disableAnimations],
   );
 
   return {
@@ -280,7 +280,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
  */
 export const withReducedMotion = <P extends object>(
   Component: React.ComponentType<P & { prefersReducedMotion?: boolean }>,
-  config?: ReducedMotionConfig
+  config?: ReducedMotionConfig,
 ): React.ComponentType<P> => {
   return function ReducedMotionComponent(props: P) {
     const prefersReducedMotion = usePrefersReducedMotion(config);
@@ -299,9 +299,9 @@ export const createAccessibleAnimation = (
     duration?: number;
     easing?: string;
     essential?: boolean;
-  } = {}
+  } = {},
 ): string => {
-  const { duration = 300, easing = 'ease', essential = false } = options;
+  const { duration = 300, easing = "ease", essential = false } = options;
 
   return `
     @keyframes ${name} {
@@ -319,7 +319,7 @@ export const createAccessibleAnimation = (
         ${
           essential
             ? `animation: ${name} ${duration * 0.5}ms ease;`
-            : 'animation: none;'
+            : "animation: none;"
         }
       }
     }

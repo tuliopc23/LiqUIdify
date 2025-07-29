@@ -7,9 +7,9 @@
 
 // Re-export components from other core modules
 
-export { SSRErrorBoundary as ErrorBoundary } from '../error-recovery';
+export { SSRErrorBoundary as ErrorBoundary } from "../error-recovery";
 
-export { gracefulDegradation as GracefulDegradation } from '../graceful-degradation';
+export { gracefulDegradation as GracefulDegradation } from "../graceful-degradation";
 // export { CompoundComponent } from '../compound-component';
 
 // Placeholder exports for components that may be implemented later
@@ -21,7 +21,7 @@ export const GlassContainer = () => undefined;
 export {
   createGlassPolymorphicComponent,
   createPolymorphicComponent,
-} from '../create-polymorphic-component';
+} from "../create-polymorphic-component";
 
 // Types for component development
 export type {
@@ -31,4 +31,4 @@ export type {
   GlassConfig,
   GlassIntensity,
   GlassVariant,
-} from '../types';
+} from "../types";

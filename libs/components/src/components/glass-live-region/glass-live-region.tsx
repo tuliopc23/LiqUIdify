@@ -1,30 +1,30 @@
-import type React from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type React from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
-export type AriaLivePriority = 'polite' | 'assertive' | 'off';
+export type AriaLivePriority = "polite" | "assertive" | "off";
 export type AriaRelevant =
-  | 'additions'
-  | 'removals'
-  | 'text'
-  | 'all'
-  | 'additions removals'
-  | 'additions text'
-  | 'removals additions'
-  | 'removals text'
-  | 'text additions'
-  | 'text removals';
+  | "additions"
+  | "removals"
+  | "text"
+  | "all"
+  | "additions removals"
+  | "additions text"
+  | "removals additions"
+  | "removals text"
+  | "text additions"
+  | "text removals";
 
-export type AnnouncementPriority = 'low' | 'medium' | 'high' | 'critical';
+export type AnnouncementPriority = "low" | "medium" | "high" | "critical";
 export type AnnouncementContext =
-  | 'navigation'
-  | 'form'
-  | 'notification'
-  | 'error'
-  | 'success'
-  | 'loading'
-  | 'general';
+  | "navigation"
+  | "form"
+  | "notification"
+  | "error"
+  | "success"
+  | "loading"
+  | "general";
 
 interface QueuedAnnouncement {
   id: string;
@@ -53,17 +53,17 @@ export interface GlassLiveRegionProps {
   className?: string;
   clearDelay?: number;
   visuallyHidden?: boolean;
-  role?: 'status' | 'alert' | 'log';
+  role?: "status" | "alert" | "log";
   queueingEnabled?: boolean;
   maxQueueSize?: number;
   contextualPrefix?: boolean;
 }
 
 const PRIORITY_MAP: Record<AnnouncementPriority, AriaLivePriority> = {
-  low: 'polite',
-  medium: 'polite',
-  high: 'assertive',
-  critical: 'assertive',
+  low: "polite",
+  medium: "polite",
+  high: "assertive",
+  critical: "assertive",
 };
 
 const PRIORITY_DELAYS: Record<AnnouncementPriority, number> = {
@@ -74,30 +74,30 @@ const PRIORITY_DELAYS: Record<AnnouncementPriority, number> = {
 };
 
 const CONTEXT_PREFIXES: Record<AnnouncementContext, string> = {
-  navigation: 'Navigation: ',
-  form: 'Form update: ',
-  notification: 'Notification: ',
-  error: 'Error: ',
-  success: 'Success: ',
-  loading: 'Loading: ',
-  general: '',
+  navigation: "Navigation: ",
+  form: "Form update: ",
+  notification: "Notification: ",
+  error: "Error: ",
+  success: "Success: ",
+  loading: "Loading: ",
+  general: "",
 };
 
 export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
   message,
-  priority = 'polite',
+  priority = "polite",
   atomic = true,
-  relevant = 'additions text',
+  relevant = "additions text",
   className,
   clearDelay = 0,
   visuallyHidden = true,
-  role = 'status',
+  role = "status",
   queueingEnabled = false,
   maxQueueSize = 10,
   contextualPrefix = true,
 }) => {
   const [currentMessage, setCurrentMessage] = useState<string | undefined>(
-    message
+    message,
   );
   const [announcementQueue, setAnnouncementQueue] = useState<
     Array<QueuedAnnouncement>
@@ -122,7 +122,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 
     // Apply contextual prefix if enabled
     const messageToAnnounce =
-      contextualPrefix && announcement.context !== 'general'
+      contextualPrefix && announcement.context !== "general"
         ? `${CONTEXT_PREFIXES[announcement.context]}${announcement.message}`
         : announcement.message;
 
@@ -146,9 +146,9 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
   const queueAnnouncement = useCallback(
     (message_: string, options: AnnouncementOptions = {}) => {
       const {
-        priority: announcementPriority = 'medium',
-        context = 'general',
-        delay = PRIORITY_DELAYS[announcementPriority || 'medium'],
+        priority: announcementPriority = "medium",
+        context = "general",
+        delay = PRIORITY_DELAYS[announcementPriority || "medium"],
         clearDelay: announcementClearDelay,
         dedupKey,
       } = options;
@@ -192,7 +192,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
         return newQueue;
       });
     },
-    [maxQueueSize]
+    [maxQueueSize],
   );
 
   // Handle direct message updates
@@ -243,7 +243,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
   }, []);
 
   const relevantString = Array.isArray(relevant)
-    ? relevant.join(' ')
+    ? relevant.join(" ")
     : relevant;
 
   return (
@@ -253,12 +253,12 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
       aria-atomic={atomic}
       aria-relevant={relevantString as unknown}
       className={cn(
-        'glass-live-region',
+        "glass-live-region",
         {
-          'sr-only': visuallyHidden,
-          'glass-live-region-visible': !visuallyHidden,
+          "sr-only": visuallyHidden,
+          "glass-live-region-visible": !visuallyHidden,
         },
-        className
+        className,
       )}
     >
       {currentMessage}
@@ -268,7 +268,7 @@ export const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 
 // Enhanced hook for managing live region announcements
 export function useAnnouncement() {
-  const [announcement, setAnnouncement] = useState<string>('');
+  const [announcement, setAnnouncement] = useState<string>("");
   const [announcementOptions, setAnnouncementOptions] =
     useState<AnnouncementOptions>({});
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
@@ -278,8 +278,8 @@ export function useAnnouncement() {
   const announce = useCallback(
     (message: string, options: AnnouncementOptions = {}) => {
       const {
-        priority = 'medium',
-        context: _context = 'general',
+        priority = "medium",
+        context: _context = "general",
         delay = PRIORITY_DELAYS[priority],
         clearDelay = 5000,
         dedupKey,
@@ -308,65 +308,65 @@ export function useAnnouncement() {
         // Clear after delay if specified
         if (clearDelay > 0) {
           timeoutRef.current = setTimeout(() => {
-            setAnnouncement('');
+            setAnnouncement("");
           }, clearDelay);
         }
       }, delay);
     },
-    []
+    [],
   );
 
   const clear = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    setAnnouncement('');
+    setAnnouncement("");
     queueRef.current = [];
   }, []);
 
   // Context-aware announce helpers
   const announceError = useCallback(
-    (message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
+    (message: string, options?: Omit<AnnouncementOptions, "context">) => {
       announce(message, {
         ...options,
-        context: 'error',
-        priority: options?.priority || 'high',
+        context: "error",
+        priority: options?.priority || "high",
       });
     },
-    [announce]
+    [announce],
   );
 
   const announceSuccess = useCallback(
-    (message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
+    (message: string, options?: Omit<AnnouncementOptions, "context">) => {
       announce(message, {
         ...options,
-        context: 'success',
-        priority: options?.priority || 'medium',
+        context: "success",
+        priority: options?.priority || "medium",
       });
     },
-    [announce]
+    [announce],
   );
 
   const announceNavigation = useCallback(
-    (message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
+    (message: string, options?: Omit<AnnouncementOptions, "context">) => {
       announce(message, {
         ...options,
-        context: 'navigation',
-        priority: options?.priority || 'low',
+        context: "navigation",
+        priority: options?.priority || "low",
       });
     },
-    [announce]
+    [announce],
   );
 
   const announceLoading = useCallback(
-    (message: string, options?: Omit<AnnouncementOptions, 'context'>) => {
+    (message: string, options?: Omit<AnnouncementOptions, "context">) => {
       announce(message, {
         ...options,
-        context: 'loading',
-        priority: options?.priority || 'low',
+        context: "loading",
+        priority: options?.priority || "low",
       });
     },
-    [announce]
+    [announce],
   );
 
   useEffect(() => {
@@ -400,8 +400,8 @@ class AnnouncementManager {
 
   announce(message: string, options: AnnouncementOptions = {}) {
     const {
-      priority = 'medium',
-      context = 'general',
+      priority = "medium",
+      context = "general",
       delay = PRIORITY_DELAYS[priority],
       dedupKey,
     } = options;
@@ -470,35 +470,35 @@ class AnnouncementManager {
   }
 
   // Context-aware methods
-  error(message: string, options?: Omit<AnnouncementOptions, 'context'>) {
+  error(message: string, options?: Omit<AnnouncementOptions, "context">) {
     this.announce(message, {
       ...options,
-      context: 'error',
-      priority: options?.priority || 'high',
+      context: "error",
+      priority: options?.priority || "high",
     });
   }
 
-  success(message: string, options?: Omit<AnnouncementOptions, 'context'>) {
+  success(message: string, options?: Omit<AnnouncementOptions, "context">) {
     this.announce(message, {
       ...options,
-      context: 'success',
-      priority: options?.priority || 'medium',
+      context: "success",
+      priority: options?.priority || "medium",
     });
   }
 
-  navigation(message: string, options?: Omit<AnnouncementOptions, 'context'>) {
+  navigation(message: string, options?: Omit<AnnouncementOptions, "context">) {
     this.announce(message, {
       ...options,
-      context: 'navigation',
-      priority: options?.priority || 'low',
+      context: "navigation",
+      priority: options?.priority || "low",
     });
   }
 
-  loading(message: string, options?: Omit<AnnouncementOptions, 'context'>) {
+  loading(message: string, options?: Omit<AnnouncementOptions, "context">) {
     this.announce(message, {
       ...options,
-      context: 'loading',
-      priority: options?.priority || 'low',
+      context: "loading",
+      priority: options?.priority || "low",
     });
   }
 }
@@ -534,17 +534,17 @@ export const GlassLiveRegionProvider: React.FC<{
   const politeAnnouncements = useMemo(
     () =>
       announcements.filter(
-        (a) => PRIORITY_MAP[a.options.priority || 'medium'] === 'polite'
+        (a) => PRIORITY_MAP[a.options.priority || "medium"] === "polite",
       ),
-    [announcements]
+    [announcements],
   );
 
   const assertiveAnnouncements = useMemo(
     () =>
       announcements.filter(
-        (a) => PRIORITY_MAP[a.options.priority || 'medium'] === 'assertive'
+        (a) => PRIORITY_MAP[a.options.priority || "medium"] === "assertive",
       ),
-    [announcements]
+    [announcements],
   );
 
   return (
@@ -555,7 +555,7 @@ export const GlassLiveRegionProvider: React.FC<{
         {/* Polite announcements with queue support */}
 
         <GlassLiveRegion
-          message={politeAnnouncements.map((a) => a.message).join('. ')}
+          message={politeAnnouncements.map((a) => a.message).join(". ")}
           priority="polite"
           role="status"
           queueingEnabled
@@ -564,7 +564,7 @@ export const GlassLiveRegionProvider: React.FC<{
         {/* Assertive announcements with queue support */}
 
         <GlassLiveRegion
-          message={assertiveAnnouncements.map((a) => a.message).join('. ')}
+          message={assertiveAnnouncements.map((a) => a.message).join(". ")}
           priority="assertive"
           role="alert"
           queueingEnabled

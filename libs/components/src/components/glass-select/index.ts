@@ -2,4 +2,4 @@ export {
   GlassSelect,
   type GlassSelectOption,
   type GlassSelectProps,
-} from './glass-select';
+} from "./glass-select";

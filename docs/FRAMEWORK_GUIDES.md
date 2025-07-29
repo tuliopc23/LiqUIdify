@@ -34,14 +34,14 @@ bun add liquidify
 
 ```tsx
 // app/layout.tsx
-import type { Metadata } from 'next';
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
-import './globals.css';
+import type { Metadata } from "next";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'My App with LiqUIdify',
-  description: 'Beautiful glassmorphism UI',
+  title: "My App with LiqUIdify",
+  description: "Beautiful glassmorphism UI",
 };
 
 export default function RootLayout({
@@ -76,7 +76,7 @@ export default function RootLayout({
 @tailwind utilities;
 
 /* Import LiqUIdify styles after Tailwind */
-@import 'liquidify/styles';
+@import "liquidify/styles";
 
 /* Custom glass background */
 body {
@@ -89,8 +89,8 @@ body {
 
 ```tsx
 // app/page.tsx
-import { GlassCard, GlassButton } from 'liquidify';
-import { Sparkles } from 'lucide-react';
+import { GlassCard, GlassButton } from "liquidify";
+import { Sparkles } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -102,11 +102,11 @@ export default function HomePage() {
             Welcome to LiqUIdify
           </h1>
         </div>
-        
+
         <p className="text-white/70 mb-6">
           Start building beautiful interfaces with glassmorphism effects.
         </p>
-        
+
         <GlassButton variant="primary" className="w-full">
           Get Started
         </GlassButton>
@@ -120,9 +120,9 @@ export default function HomePage() {
 
 ```tsx
 // components/ClientOnly.tsx
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface ClientOnlyProps {
   children: React.ReactNode;
@@ -146,14 +146,16 @@ export function ClientOnly({ children, fallback = null }: ClientOnlyProps) {
 
 ```tsx
 // components/GlassComponents.tsx
-'use client';
+"use client";
 
-import { GlassChart, GlassPlayground } from 'liquidify';
-import { ClientOnly } from './ClientOnly';
+import { GlassChart, GlassPlayground } from "liquidify";
+import { ClientOnly } from "./ClientOnly";
 
 export function SSRSafeChart({ data }: { data: any[] }) {
   return (
-    <ClientOnly fallback={<div className="h-64 bg-white/5 rounded-lg animate-pulse" />}>
+    <ClientOnly
+      fallback={<div className="h-64 bg-white/5 rounded-lg animate-pulse" />}
+    >
       <GlassChart data={data} type="line" height={300} />
     </ClientOnly>
   );
@@ -167,13 +169,13 @@ export function SSRSafeChart({ data }: { data: any[] }) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    optimizePackageImports: ['liquidify'],
+    optimizePackageImports: ["liquidify"],
   },
-  transpilePackages: ['liquidify'],
+  transpilePackages: ["liquidify"],
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      'liquidify$': 'liquidify/core', // Default to core bundle
+      liquidify$: "liquidify/core", // Default to core bundle
     };
     return config;
   },
@@ -189,28 +191,28 @@ module.exports = nextConfig;
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/liquidify/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/liquidify/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       // Extend with LiqUIdify design tokens
       colors: {
         glass: {
-          background: 'rgba(255, 255, 255, 0.1)',
-          border: 'rgba(255, 255, 255, 0.2)',
+          background: "rgba(255, 255, 255, 0.1)",
+          border: "rgba(255, 255, 255, 0.2)",
         },
       },
       backdropBlur: {
-        xs: '2px',
-        '4xl': '72px',
+        xs: "2px",
+        "4xl": "72px",
       },
     },
   },
   plugins: [],
-  darkMode: ['class'],
+  darkMode: ["class"],
 };
 ```
 
@@ -218,10 +220,10 @@ module.exports = {
 
 ```tsx
 // pages/_app.tsx
-import type { AppProps } from 'next/app';
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
-import '../styles/globals.css';
+import type { AppProps } from "next/app";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
+import "../styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -250,26 +252,26 @@ npm install liquidify
 
 ```ts
 // vite.config.ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      'liquidify': 'liquidify/core', // Default to core bundle
+      "@": path.resolve(__dirname, "./src"),
+      liquidify: "liquidify/core", // Default to core bundle
     },
   },
   optimizeDeps: {
-    include: ['liquidify/core', 'liquidify/forms'],
+    include: ["liquidify/core", "liquidify/forms"],
   },
   build: {
     rollupOptions: {
       external: (id) => {
         // Externalize heavy components for code splitting
-        return id.includes('liquidify/advanced');
+        return id.includes("liquidify/advanced");
       },
     },
   },
@@ -280,14 +282,14 @@ export default defineConfig({
 
 ```tsx
 // src/main.tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
+import "./index.css";
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <GlassUIProvider>
       <ThemeProvider defaultTheme="system" storageKey="vite-app-theme">
@@ -302,16 +304,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 ```css
 /* src/index.css */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import 'liquidify/styles';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "liquidify/styles";
 
 body {
   margin: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
 }
 ```
 
@@ -325,8 +328,8 @@ VITE_ENABLE_GLASS_EFFECTS=true
 
 ```tsx
 // src/App.tsx
-import { GlassCard, GlassButton, useTheme } from 'liquidify';
-import { Moon, Sun } from 'lucide-react';
+import { GlassCard, GlassButton, useTheme } from "liquidify";
+import { Moon, Sun } from "lucide-react";
 
 function App() {
   const { theme, setTheme } = useTheme();
@@ -341,16 +344,20 @@ function App() {
           <GlassButton
             variant="ghost"
             size="sm"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
-            {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {theme === "dark" ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
           </GlassButton>
         </div>
-        
+
         <p className="text-white/70 mb-6">
           Beautiful glassmorphism components powered by Vite.
         </p>
-        
+
         <GlassButton variant="primary" className="w-full">
           Explore Components
         </GlassButton>
@@ -378,7 +385,7 @@ npm install liquidify
 
 ```tsx
 // app/root.tsx
-import type { LinksFunction, MetaFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -386,20 +393,20 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from '@remix-run/react';
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
-import liquidifyStyles from 'liquidify/styles';
-import stylesheet from './tailwind.css';
+} from "@remix-run/react";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import liquidifyStyles from "liquidify/styles";
+import stylesheet from "./tailwind.css";
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: stylesheet },
-  { rel: 'stylesheet', href: liquidifyStyles },
+  { rel: "stylesheet", href: stylesheet },
+  { rel: "stylesheet", href: liquidifyStyles },
 ];
 
 export const meta: MetaFunction = () => ({
-  charset: 'utf-8',
-  title: 'LiqUIdify Remix App',
-  viewport: 'width=device-width,initial-scale=1',
+  charset: "utf-8",
+  title: "LiqUIdify Remix App",
+  viewport: "width=device-width,initial-scale=1",
 });
 
 export default function App() {
@@ -428,14 +435,17 @@ export default function App() {
 
 ```tsx
 // app/routes/_index.tsx
-import type { V2_MetaFunction } from '@remix-run/node';
-import { GlassCard, GlassButton, GlassInput } from 'liquidify';
-import { Search, Sparkles } from 'lucide-react';
+import type { V2_MetaFunction } from "@remix-run/node";
+import { GlassCard, GlassButton, GlassInput } from "liquidify";
+import { Search, Sparkles } from "lucide-react";
 
 export const meta: V2_MetaFunction = () => {
   return [
-    { title: 'LiqUIdify Remix Demo' },
-    { name: 'description', content: 'Beautiful glassmorphism components in Remix!' },
+    { title: "LiqUIdify Remix Demo" },
+    {
+      name: "description",
+      content: "Beautiful glassmorphism components in Remix!",
+    },
   ];
 };
 
@@ -450,19 +460,19 @@ export default function Index() {
               LiqUIdify + Remix
             </h1>
           </div>
-          
+
           <p className="text-white/70 mb-8 text-lg">
             Experience the power of glassmorphism components with Remix's
             full-stack capabilities.
           </p>
-          
+
           <div className="space-y-4">
             <GlassInput
               placeholder="Search components..."
               leftIcon={<Search className="h-4 w-4" />}
               className="w-full"
             />
-            
+
             <div className="flex gap-4">
               <GlassButton variant="primary" className="flex-1">
                 Get Started
@@ -483,8 +493,8 @@ export default function Index() {
 
 ```tsx
 // app/components/ErrorBoundary.tsx
-import { GlassCard, GlassButton } from 'liquidify';
-import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { GlassCard, GlassButton } from "liquidify";
+import { AlertTriangle, RefreshCw } from "lucide-react";
 
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
@@ -494,9 +504,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
         <h2 className="text-xl font-semibold text-white/90 mb-2">
           Oops! Something went wrong
         </h2>
-        <p className="text-white/70 mb-6">
-          {error.message}
-        </p>
+        <p className="text-white/70 mb-6">{error.message}</p>
         <GlassButton
           variant="primary"
           onClick={() => window.location.reload()}
@@ -528,21 +536,21 @@ npm install liquidify
 // gatsby-config.js
 module.exports = {
   siteMetadata: {
-    title: 'LiqUIdify Gatsby Site',
-    description: 'Beautiful glassmorphism components with Gatsby',
+    title: "LiqUIdify Gatsby Site",
+    description: "Beautiful glassmorphism components with Gatsby",
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-postcss',
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-postcss",
     {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: "gatsby-plugin-manifest",
       options: {
-        name: 'LiqUIdify Gatsby App',
-        short_name: 'LiqUIdify',
-        start_url: '/',
-        background_color: '#667eea',
-        theme_color: '#764ba2',
-        display: 'minimal-ui',
+        name: "LiqUIdify Gatsby App",
+        short_name: "LiqUIdify",
+        start_url: "/",
+        background_color: "#667eea",
+        theme_color: "#764ba2",
+        display: "minimal-ui",
       },
     },
   ],
@@ -553,10 +561,10 @@ module.exports = {
 
 ```tsx
 // gatsby-browser.js and gatsby-ssr.js
-import React from 'react';
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
-import './src/styles/global.css';
+import React from "react";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
+import "./src/styles/global.css";
 
 export const wrapRootElement = ({ element }) => (
   <GlassUIProvider>
@@ -571,9 +579,9 @@ export const wrapRootElement = ({ element }) => (
 
 ```tsx
 // src/components/Layout.tsx
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { GlassCard } from 'liquidify';
+import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
+import { GlassCard } from "liquidify";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -599,10 +607,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </h1>
         </GlassCard>
       </header>
-      
-      <main className="p-6">
-        {children}
-      </main>
+
+      <main className="p-6">{children}</main>
     </div>
   );
 };
@@ -626,15 +632,15 @@ npm install liquidify
 
 ```tsx
 // src/index.tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
-import 'liquidify/styles';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
+import "liquidify/styles";
+import "./index.css";
+import App from "./App";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
 root.render(
@@ -644,7 +650,7 @@ root.render(
         <App />
       </ThemeProvider>
     </GlassUIProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 ```
 
@@ -659,15 +665,12 @@ npm install @craco/craco
 module.exports = {
   style: {
     postcss: {
-      plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
-      ],
+      plugins: [require("tailwindcss"), require("autoprefixer")],
     },
   },
   webpack: {
     alias: {
-      'liquidify': 'liquidify/core',
+      liquidify: "liquidify/core",
     },
   },
 };
@@ -700,23 +703,23 @@ npm install liquidify @astrojs/react @astrojs/tailwind
 
 ```js
 // astro.config.mjs
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
+import { defineConfig } from "astro/config";
+import react from "@astrojs/react";
+import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
   integrations: [
     react(),
     tailwind({
       config: {
-        content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+        content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
       },
     }),
   ],
   vite: {
     resolve: {
       alias: {
-        'liquidify': 'liquidify/core',
+        liquidify: "liquidify/core",
       },
     },
   },
@@ -760,8 +763,13 @@ const { title } = Astro.props;
 
 ```tsx
 // src/components/GlassDemo.tsx
-import { GlassCard, GlassButton, GlassUIProvider, ThemeProvider } from 'liquidify';
-import { Sparkles } from 'lucide-react';
+import {
+  GlassCard,
+  GlassButton,
+  GlassUIProvider,
+  ThemeProvider,
+} from "liquidify";
+import { Sparkles } from "lucide-react";
 
 export default function GlassDemo() {
   return (
@@ -775,11 +783,11 @@ export default function GlassDemo() {
                 LiqUIdify + Astro
               </h1>
             </div>
-            
+
             <p className="text-white/70 mb-6">
               Beautiful glassmorphism components in Astro's island architecture.
             </p>
-            
+
             <GlassButton variant="primary" className="w-full">
               Explore Islands
             </GlassButton>
@@ -822,22 +830,22 @@ npm install @storybook/addon-docs @storybook/addon-themes
 
 ```ts
 // .storybook/main.ts
-import type { StorybookConfig } from '@storybook/react-vite';
+import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-docs',
-    '@storybook/addon-themes',
-    '@storybook/addon-a11y',
+    "@storybook/addon-essentials",
+    "@storybook/addon-docs",
+    "@storybook/addon-themes",
+    "@storybook/addon-a11y",
   ],
   framework: {
-    name: '@storybook/react-vite',
+    name: "@storybook/react-vite",
     options: {},
   },
   typescript: {
-    reactDocgen: 'react-docgen-typescript',
+    reactDocgen: "react-docgen-typescript",
   },
 };
 
@@ -895,24 +903,24 @@ export default preview;
 
 ```tsx
 // src/components/Button.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react';
-import { GlassButton } from 'liquidify';
-import { Heart, Download } from 'lucide-react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { GlassButton } from "liquidify";
+import { Heart, Download } from "lucide-react";
 
 const meta: Meta<typeof GlassButton> = {
-  title: 'Components/GlassButton',
+  title: "Components/GlassButton",
   component: GlassButton,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
   argTypes: {
     variant: {
-      control: { type: 'select' },
-      options: ['primary', 'secondary', 'ghost', 'destructive'],
+      control: { type: "select" },
+      options: ["primary", "secondary", "ghost", "destructive"],
     },
     size: {
-      control: { type: 'select' },
-      options: ['sm', 'md', 'lg'],
+      control: { type: "select" },
+      options: ["sm", "md", "lg"],
     },
   },
 };
@@ -922,25 +930,25 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    children: 'Primary Button',
-    variant: 'primary',
+    children: "Primary Button",
+    variant: "primary",
   },
 };
 
 export const WithIcon: Story = {
   args: {
-    children: 'Like',
-    variant: 'secondary',
+    children: "Like",
+    variant: "secondary",
     leftIcon: <Heart className="h-4 w-4" />,
   },
 };
 
 export const Loading: Story = {
   args: {
-    children: 'Download',
-    variant: 'primary',
+    children: "Download",
+    variant: "primary",
     loading: true,
-    loadingText: 'Downloading...',
+    loadingText: "Downloading...",
     leftIcon: <Download className="h-4 w-4" />,
   },
 };
@@ -960,8 +968,8 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom jest-env
 
 ```ts
 // src/setupTests.ts
-import '@testing-library/jest-dom';
-import 'jest-canvas-mock';
+import "@testing-library/jest-dom";
+import "jest-canvas-mock";
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
@@ -984,9 +992,9 @@ global.ResizeObserver = class ResizeObserver {
 
 ```tsx
 // src/test-utils.tsx
-import React from 'react';
-import { render, RenderOptions } from '@testing-library/react';
-import { GlassUIProvider, ThemeProvider } from 'liquidify';
+import React from "react";
+import { render, RenderOptions } from "@testing-library/react";
+import { GlassUIProvider, ThemeProvider } from "liquidify";
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -1000,10 +1008,10 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
 
 const customRender = (
   ui: React.ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>,
+  options?: Omit<RenderOptions, "wrapper">,
 ) => render(ui, { wrapper: AllTheProviders, ...options });
 
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 export { customRender as render };
 ```
 
@@ -1011,32 +1019,34 @@ export { customRender as render };
 
 ```tsx
 // src/components/__tests__/GlassButton.test.tsx
-import { render, screen, fireEvent } from '../test-utils';
-import { GlassButton } from 'liquidify';
+import { render, screen, fireEvent } from "../test-utils";
+import { GlassButton } from "liquidify";
 
-describe('GlassButton', () => {
-  test('renders button with text', () => {
+describe("GlassButton", () => {
+  test("renders button with text", () => {
     render(<GlassButton>Click me</GlassButton>);
-    expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /click me/i }),
+    ).toBeInTheDocument();
   });
 
-  test('handles click events', () => {
+  test("handles click events", () => {
     const handleClick = jest.fn();
     render(<GlassButton onClick={handleClick}>Click me</GlassButton>);
-    
-    fireEvent.click(screen.getByRole('button'));
+
+    fireEvent.click(screen.getByRole("button"));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  test('shows loading state', () => {
+  test("shows loading state", () => {
     render(
       <GlassButton loading loadingText="Loading...">
         Submit
-      </GlassButton>
+      </GlassButton>,
     );
-    
+
     expect(screen.getByText(/loading.../i)).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(screen.getByRole("button")).toBeDisabled();
   });
 });
 ```
@@ -1049,27 +1059,27 @@ npm install --save-dev cypress
 
 ```ts
 // cypress/e2e/glassmorphism.cy.ts
-describe('Glassmorphism Components', () => {
+describe("Glassmorphism Components", () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit("/");
   });
 
-  it('should render glass card with proper styling', () => {
+  it("should render glass card with proper styling", () => {
     cy.get('[data-testid="glass-card"]')
-      .should('be.visible')
-      .should('have.css', 'backdrop-filter');
+      .should("be.visible")
+      .should("have.css", "backdrop-filter");
   });
 
-  it('should handle theme switching', () => {
+  it("should handle theme switching", () => {
     cy.get('[data-testid="theme-toggle"]').click();
-    cy.get('html').should('have.class', 'dark');
+    cy.get("html").should("have.class", "dark");
   });
 
-  it('should show toast notifications', () => {
+  it("should show toast notifications", () => {
     cy.get('[data-testid="show-toast"]').click();
     cy.get('[data-testid="toast"]')
-      .should('be.visible')
-      .should('contain', 'Success!');
+      .should("be.visible")
+      .should("contain", "Success!");
   });
 });
 ```
@@ -1140,7 +1150,7 @@ export const buildOptimization = {
   webpack: {
     plugins: [
       new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
+        analyzerMode: "static",
         openAnalyzer: false,
       }),
     ],
@@ -1152,9 +1162,9 @@ export const buildOptimization = {
       rollupOptions: {
         output: {
           manualChunks: {
-            'liquidify-core': ['liquidify/core'],
-            'liquidify-forms': ['liquidify/forms'],
-            'liquidify-charts': ['liquidify/advanced'],
+            "liquidify-core": ["liquidify/core"],
+            "liquidify-forms": ["liquidify/forms"],
+            "liquidify-charts": ["liquidify/advanced"],
           },
         },
       },
@@ -1166,9 +1176,9 @@ export const buildOptimization = {
     runtimeCaching: [
       {
         urlPattern: /^https:\/\/fonts\.googleapis\.com/,
-        handler: 'StaleWhileRevalidate',
+        handler: "StaleWhileRevalidate",
         options: {
-          cacheName: 'google-fonts-stylesheets',
+          cacheName: "google-fonts-stylesheets",
         },
       },
     ],
@@ -1184,27 +1194,31 @@ export const buildOptimization = {
 
 ```tsx
 // ❌ Avoid - imports entire library
-import { GlassButton, GlassCard, GlassChart } from 'liquidify';
+import { GlassButton, GlassCard, GlassChart } from "liquidify";
 
 // ✅ Recommended - import from bundles
-import { GlassButton, GlassCard } from 'liquidify/core';      // ~15KB
-import { GlassInput } from 'liquidify/forms';               // ~8KB
-import { LineChart } from 'liquidify/advanced';             // ~12KB (lazy load)
+import { GlassButton, GlassCard } from "liquidify/core"; // ~15KB
+import { GlassInput } from "liquidify/forms"; // ~8KB
+import { LineChart } from "liquidify/advanced"; // ~12KB (lazy load)
 
 // ✅ Best - import individual components
-import { GlassButton } from 'liquidify/button';             // ~3KB
-import { GlassCard } from 'liquidify/card';                 // ~4KB
+import { GlassButton } from "liquidify/button"; // ~3KB
+import { GlassCard } from "liquidify/card"; // ~4KB
 ```
 
 ### Code Splitting Example
 
 ```tsx
 // Lazy load heavy components
-import { lazy, Suspense } from 'react';
-import { GlassLoading } from 'liquidify/core';
+import { lazy, Suspense } from "react";
+import { GlassLoading } from "liquidify/core";
 
-const GlassChart = lazy(() => import('liquidify/advanced').then(m => ({ default: m.LineChart })));
-const GlassTable = lazy(() => import('liquidify/advanced').then(m => ({ default: m.GlassTable })));
+const GlassChart = lazy(() =>
+  import("liquidify/advanced").then((m) => ({ default: m.LineChart })),
+);
+const GlassTable = lazy(() =>
+  import("liquidify/advanced").then((m) => ({ default: m.GlassTable })),
+);
 
 function Dashboard() {
   return (
@@ -1212,7 +1226,7 @@ function Dashboard() {
       <Suspense fallback={<GlassLoading text="Loading chart..." />}>
         <GlassChart data={chartData} />
       </Suspense>
-      
+
       <Suspense fallback={<GlassLoading text="Loading table..." />}>
         <GlassTable data={tableData} />
       </Suspense>

@@ -8,7 +8,7 @@
  * - Strict typing for component props
  */
 
-import type { ComponentProps, ElementType, ReactNode } from 'react';
+import type { ComponentProps, ElementType, ReactNode } from "react";
 
 // ==============================
 // Branded Types
@@ -20,39 +20,39 @@ import type { ComponentProps, ElementType, ReactNode } from 'react';
 export type Brand<K, T> = K & { __brand: T };
 
 // Color types
-export type GlassColor = Brand<string, 'GlassColor'>;
-export type AccessibleContrast = Brand<number, 'AccessibleContrast'>;
-export type CSSVariable = Brand<string, 'CSSVariable'>;
-export type HexColor = Brand<string, 'HexColor'>;
-export type RGBColor = Brand<string, 'RGBColor'>;
-export type HSLColor = Brand<string, 'HSLColor'>;
+export type GlassColor = Brand<string, "GlassColor">;
+export type AccessibleContrast = Brand<number, "AccessibleContrast">;
+export type CSSVariable = Brand<string, "CSSVariable">;
+export type HexColor = Brand<string, "HexColor">;
+export type RGBColor = Brand<string, "RGBColor">;
+export type HSLColor = Brand<string, "HSLColor">;
 
 // Size types
-export type Spacing = Brand<number, 'Spacing'>;
-export type Radius = Brand<number, 'Radius'>;
-export type FontSize = Brand<number, 'FontSize'>;
-export type LineHeight = Brand<number, 'LineHeight'>;
+export type Spacing = Brand<number, "Spacing">;
+export type Radius = Brand<number, "Radius">;
+export type FontSize = Brand<number, "FontSize">;
+export type LineHeight = Brand<number, "LineHeight">;
 
 // ID types
-export type ComponentId = Brand<string, 'ComponentId'>;
-export type AnimationId = Brand<string, 'AnimationId'>;
-export type ThemeId = Brand<string, 'ThemeId'>;
+export type ComponentId = Brand<string, "ComponentId">;
+export type AnimationId = Brand<string, "AnimationId">;
+export type ThemeId = Brand<string, "ThemeId">;
 
 // Type guards for branded types
 export const isGlassColor = (value: unknown): value is GlassColor => {
   return (
-    typeof value === 'string' && /^(#|rgb|hsl|var\()/.test(value as string)
+    typeof value === "string" && /^(#|rgb|hsl|var\()/.test(value as string)
   );
 };
 
 export const isHexColor = (value: unknown): value is HexColor => {
   return (
-    typeof value === 'string' && /^#([\da-f]{3}){1,2}$/i.test(value as string)
+    typeof value === "string" && /^#([\da-f]{3}){1,2}$/i.test(value as string)
   );
 };
 
 export const isCSSVariable = (value: unknown): value is CSSVariable => {
-  return typeof value === 'string' && /^var\(--[\w-]+\)$/.test(value as string);
+  return typeof value === "string" && /^var\(--[\w-]+\)$/.test(value as string);
 };
 
 // Type constructors for branded types
@@ -85,39 +85,39 @@ export const createCSSVariable = (value: string): CSSVariable => {
  * Component state with discriminated union for type-safe state handling
  */
 export type ComponentState<T = unknown> =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'success'; data: T }
-  | { status: 'error'; error: Error };
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: Error };
 
 /**
  * Animation state with discriminated union
  */
 export type AnimationState =
-  | { status: 'initial' }
-  | { status: 'running'; progress: number }
-  | { status: 'paused'; progress: number }
-  | { status: 'finished' }
-  | { status: 'cancelled' };
+  | { status: "initial" }
+  | { status: "running"; progress: number }
+  | { status: "paused"; progress: number }
+  | { status: "finished" }
+  | { status: "cancelled" };
 
 /**
  * Form field state with discriminated union
  */
 export type FormFieldState<T = string> =
-  | { status: 'untouched'; value: T }
-  | { status: 'touched'; value: T }
-  | { status: 'valid'; value: T }
-  | { status: 'invalid'; value: T; errors: Array<string> };
+  | { status: "untouched"; value: T }
+  | { status: "touched"; value: T }
+  | { status: "valid"; value: T }
+  | { status: "invalid"; value: T; errors: Array<string> };
 
 /**
  * Network request state with discriminated union
  */
 export type RequestState<T = unknown> =
-  | { status: 'idle' }
-  | { status: 'pending' }
-  | { status: 'success'; data: T; timestamp: number }
-  | { status: 'error'; error: Error; timestamp: number }
-  | { status: 'cancelled'; timestamp: number };
+  | { status: "idle" }
+  | { status: "pending" }
+  | { status: "success"; data: T; timestamp: number }
+  | { status: "error"; error: Error; timestamp: number }
+  | { status: "cancelled"; timestamp: number };
 
 // ==============================
 // Polymorphic Component Types
@@ -126,20 +126,20 @@ export type RequestState<T = unknown> =
 /**
  * Polymorphic component type that correctly handles the 'as' prop
  */
-export type PolymorphicRef<C extends ElementType> = ComponentProps<C>['ref'];
+export type PolymorphicRef<C extends ElementType> = ComponentProps<C>["ref"];
 
 export type PolymorphicComponentProps<C extends ElementType, Props = {}> = {
   as?: C;
   ref?: PolymorphicRef<C>;
 } & Props &
-  Omit<ComponentProps<C>, 'as' | 'ref' | keyof Props>;
+  Omit<ComponentProps<C>, "as" | "ref" | keyof Props>;
 
 export interface PolymorphicComponent<
   DefaultElement extends ElementType,
   Props = {},
 > {
   <C extends ElementType = DefaultElement>(
-    props: PolymorphicComponentProps<C, Props>
+    props: PolymorphicComponentProps<C, Props>,
   ): ReactNode;
   displayName?: string;
 }
@@ -205,26 +205,26 @@ export type MutableProps<T> = { -readonly [P in keyof T]: T[P] };
  * Glass component base props
  */
 export interface GlassComponentBaseProps {
-  variant?: 'light' | 'dark' | 'colored';
-  intensity?: 'subtle' | 'medium' | 'strong' | number;
+  variant?: "light" | "dark" | "colored";
+  intensity?: "subtle" | "medium" | "strong" | number;
   className?: string;
   style?: React.CSSProperties;
   children?: ReactNode;
-  'data-testid'?: string;
+  "data-testid"?: string;
 }
 
 /**
  * Glass button props
  */
 export interface GlassButtonProps extends GlassComponentBaseProps {
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   disabled?: boolean;
   loading?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   fullWidth?: boolean;
   icon?: ReactNode;
-  iconPosition?: 'left' | 'right';
+  iconPosition?: "left" | "right";
   ariaLabel?: string;
 }
 
@@ -232,7 +232,7 @@ export interface GlassButtonProps extends GlassComponentBaseProps {
  * Glass input props
  */
 export interface GlassInputProps extends GlassComponentBaseProps {
-  type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'search';
+  type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search";
   value?: string;
   defaultValue?: string;
   placeholder?: string;
@@ -248,27 +248,27 @@ export interface GlassInputProps extends GlassComponentBaseProps {
   id?: string;
   autoComplete?: string;
   autoFocus?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   fullWidth?: boolean;
   prefix?: ReactNode;
   suffix?: ReactNode;
   label?: string;
-  labelPosition?: 'top' | 'left' | 'inside';
+  labelPosition?: "top" | "left" | "inside";
 }
 
 /**
  * Glass card props
  */
 export interface GlassCardProps extends GlassComponentBaseProps {
-  padding?: 'none' | 'small' | 'medium' | 'large';
-  elevation?: 'flat' | 'low' | 'medium' | 'high';
+  padding?: "none" | "small" | "medium" | "large";
+  elevation?: "flat" | "low" | "medium" | "high";
   interactive?: boolean;
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
   header?: ReactNode;
   footer?: ReactNode;
   bordered?: boolean;
   borderColor?: GlassColor;
-  radius?: 'none' | 'small' | 'medium' | 'large' | 'full';
+  radius?: "none" | "small" | "medium" | "large" | "full";
   aspectRatio?: number | string;
   maxWidth?: string | number;
   maxHeight?: string | number;
@@ -285,9 +285,9 @@ export interface GlassModalProps extends GlassComponentBaseProps {
   closeOnEsc?: boolean;
   closeOnOverlayClick?: boolean;
   centered?: boolean;
-  size?: 'small' | 'medium' | 'large' | 'full';
+  size?: "small" | "medium" | "large" | "full";
   overlayBlur?: boolean | number;
-  animation?: 'fade' | 'scale' | 'slide' | 'none';
+  animation?: "fade" | "scale" | "slide" | "none";
   preventScroll?: boolean;
   initialFocus?: string | React.RefObject<HTMLElement>;
   returnFocus?: boolean;
@@ -302,11 +302,11 @@ export interface GlassTabsProps extends GlassComponentBaseProps {
   defaultValue?: string;
   value?: string;
   onValueChange?: (value: string) => void;
-  orientation?: 'horizontal' | 'vertical';
-  activationMode?: 'automatic' | 'manual';
+  orientation?: "horizontal" | "vertical";
+  activationMode?: "automatic" | "manual";
   loop?: boolean;
   disabled?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
 }
 
 // ==============================
@@ -349,8 +349,8 @@ export interface ThemeTypography {
     md: FontSize;
     lg: FontSize;
     xl: FontSize;
-    '2xl': FontSize;
-    '3xl': FontSize;
+    "2xl": FontSize;
+    "3xl": FontSize;
   };
   fontWeight: {
     light: number;
@@ -377,8 +377,8 @@ export interface ThemeSpacing {
   md: Spacing;
   lg: Spacing;
   xl: Spacing;
-  '2xl': Spacing;
-  '3xl': Spacing;
+  "2xl": Spacing;
+  "3xl": Spacing;
 }
 
 /**

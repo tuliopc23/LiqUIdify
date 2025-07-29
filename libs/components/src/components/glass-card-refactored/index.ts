@@ -2,7 +2,7 @@
  * Refactored Glass Card Component Export
  */
 
-export type { GlassCardRefactoredProps as GlassCardProps } from './glass-card';
+export type { GlassCardRefactoredProps as GlassCardProps } from "./glass-card";
 export {
   Card,
   CardActions,
@@ -19,4 +19,4 @@ export {
   CardTitle as GlassCardTitle,
   GlassCard as default,
   GlassCard,
-} from './glass-card';
+} from "./glass-card";

@@ -1,11 +1,11 @@
-import type React from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import { accessibilityManager } from '@/core/accessibility-manager';
+import { accessibilityManager } from "@/core/accessibility-manager";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
-import { useIsClient } from '@/hooks/use-ssr-safe';
+import { useIsClient } from "@/hooks/use-ssr-safe";
 
 export interface GlassFocusTrapProps {
   children: React.ReactNode;
@@ -91,11 +91,11 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       'select:not([disabled]):not([tabindex="-1"])',
       '[tabindex]:not([tabindex="-1"]):not([disabled])',
       '[contenteditable="true"]:not([disabled])',
-      'audio[controls]:not([disabled])',
-      'video[controls]:not([disabled])',
-      'details > summary:not([disabled])',
-      'iframe:not([disabled])',
-    ].join(',');
+      "audio[controls]:not([disabled])",
+      "video[controls]:not([disabled])",
+      "details > summary:not([disabled])",
+      "iframe:not([disabled])",
+    ].join(",");
 
     return [
       ...containerRef.current.querySelectorAll<HTMLElement>(focusableSelectors),
@@ -105,14 +105,14 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       const rect = element.getBoundingClientRect();
 
       return (
-        style.display !== 'none' &&
-        style.visibility !== 'hidden' &&
-        style.opacity !== '0' &&
+        style.display !== "none" &&
+        style.visibility !== "hidden" &&
+        style.opacity !== "0" &&
         element.offsetParent !== null &&
         rect.width > 0 &&
         rect.height > 0 &&
-        !element.hasAttribute('inert') &&
-        !element.closest('[inert]')
+        !element.hasAttribute("inert") &&
+        !element.closest("[inert]")
       );
     });
   }, [isClient]);
@@ -139,7 +139,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         focusHistory.current.shift();
       }
     },
-    [isClient]
+    [isClient],
   );
 
   const restoreFocusFromHistory = useCallback(() => {
@@ -154,7 +154,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
       if (
         document.body.contains(element) &&
-        !element.hasAttribute('disabled')
+        !element.hasAttribute("disabled")
       ) {
         try {
           element.focus({ preventScroll: true });
@@ -189,14 +189,14 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         }
       }
 
-      if (event.key === 'Escape' && onEscape) {
+      if (event.key === "Escape" && onEscape) {
         event.preventDefault();
         event.stopPropagation();
         onEscape();
         return;
       }
 
-      if (event.key !== 'Tab') {
+      if (event.key !== "Tab") {
         return;
       }
 
@@ -245,7 +245,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       focusOptions,
       saveFocusHistory,
       trapStack,
-    ]
+    ],
   );
 
   const handleFocusIn = useCallback(
@@ -298,7 +298,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       focusOptions,
       saveFocusHistory,
       trapStack,
-    ]
+    ],
   );
 
   const handleMouseDown = useCallback(
@@ -322,7 +322,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         }
       }
     },
-    [isActive, paused, allowOutsideClick, focusOptions]
+    [isActive, paused, allowOutsideClick, focusOptions],
   );
 
   // Set up focus trap
@@ -349,7 +349,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
         return;
       }
 
-      if (typeof initialFocus === 'string') {
+      if (typeof initialFocus === "string") {
         const element =
           containerRef.current?.querySelector<HTMLElement>(initialFocus);
         if (element) {
@@ -372,8 +372,8 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
 
       // Announce focus trap activation for screen readers
       accessibilityManager.announce(
-        'Focus trapped. Press Escape to exit.',
-        'polite'
+        "Focus trapped. Press Escape to exit.",
+        "polite",
       );
     };
 
@@ -385,10 +385,10 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
     }
 
     // Add event listeners
-    if (typeof document !== 'undefined') {
-      document.addEventListener('keydown', handleKeyDown, true);
-      document.addEventListener('focusin', handleFocusIn, true);
-      document.addEventListener('mousedown', handleMouseDown, true);
+    if (typeof document !== "undefined") {
+      document.addEventListener("keydown", handleKeyDown, true);
+      document.addEventListener("focusin", handleFocusIn, true);
+      document.addEventListener("mousedown", handleMouseDown, true);
     }
 
     return () => {
@@ -400,17 +400,17 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       // Remove from stack
       if (trapStack && instanceRef.current) {
         const index = focusTrapStack.indexOf(
-          instanceRef.current as FocusTrapInstance
+          instanceRef.current as FocusTrapInstance,
         );
         if (index > -1) {
           focusTrapStack.splice(index, 1);
         }
       }
 
-      if (typeof document !== 'undefined') {
-        document.removeEventListener('keydown', handleKeyDown, true);
-        document.removeEventListener('focusin', handleFocusIn, true);
-        document.removeEventListener('mousedown', handleMouseDown, true);
+      if (typeof document !== "undefined") {
+        document.removeEventListener("keydown", handleKeyDown, true);
+        document.removeEventListener("focusin", handleFocusIn, true);
+        document.removeEventListener("mousedown", handleMouseDown, true);
       }
 
       // Call deactivate callback
@@ -433,7 +433,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       }
 
       // Announce focus trap deactivation
-      accessibilityManager.announce('Focus trap deactivated', 'polite');
+      accessibilityManager.announce("Focus trap deactivated", "polite");
     };
   }, [
     isClient,
@@ -458,10 +458,10 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   return (
     <div
       ref={containerRef}
-      className={cn('glass-focus-trap', className)}
+      className={cn("glass-focus-trap", className)}
       data-focus-trap-active={isActive}
-      aria-modal={isActive ? 'true' : undefined}
-      role={isActive ? 'dialog' : undefined}
+      aria-modal={isActive ? "true" : undefined}
+      role={isActive ? "dialog" : undefined}
     >
       {children}
     </div>

@@ -25,7 +25,7 @@
 
     <style>
       body {
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         background: #0a0a0a;
         color: #ffffff;
         overflow-x: hidden;
@@ -146,7 +146,7 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 8px;
         padding: 1rem;
-        font-family: 'Courier New', monospace;
+        font-family: "Courier New", monospace;
         font-size: 0.875rem;
         overflow-x: auto;
       }
@@ -654,18 +654,18 @@
 
     <script>
       // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
           e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
+          const target = document.querySelector(this.getAttribute("href"));
           if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
+            target.scrollIntoView({ behavior: "smooth" });
           }
         });
       });
 
       // Simple physics demo
-      const physicsCanvas = document.getElementById('physics-canvas');
+      const physicsCanvas = document.getElementById("physics-canvas");
       const particles = [];
 
       class Particle {
@@ -675,11 +675,11 @@
           this.vx = (Math.random() - 0.5) * 2;
           this.vy = (Math.random() - 0.5) * 2;
           this.radius = Math.random() * 20 + 10;
-          this.element = document.createElement('div');
+          this.element = document.createElement("div");
           this.element.className =
-            'absolute liquid-glass liquid-glass-crystal rounded-full';
-          this.element.style.width = this.radius * 2 + 'px';
-          this.element.style.height = this.radius * 2 + 'px';
+            "absolute liquid-glass liquid-glass-crystal rounded-full";
+          this.element.style.width = this.radius * 2 + "px";
+          this.element.style.height = this.radius * 2 + "px";
           physicsCanvas.appendChild(this.element);
         }
 
@@ -697,7 +697,7 @@
             this.vx *= -0.8;
             this.x = Math.max(
               this.radius,
-              Math.min(rect.width - this.radius, this.x)
+              Math.min(rect.width - this.radius, this.x),
             );
           }
           if (this.y + this.radius > rect.height) {
@@ -719,20 +719,20 @@
         particles.push(
           new Particle(
             Math.random() * physicsCanvas.offsetWidth,
-            (Math.random() * physicsCanvas.offsetHeight) / 2
-          )
+            (Math.random() * physicsCanvas.offsetHeight) / 2,
+          ),
         );
       }
 
       // Animation loop
       function animate() {
-        particles.forEach(particle => particle.update());
+        particles.forEach((particle) => particle.update());
         requestAnimationFrame(animate);
       }
       animate();
 
       // Add particles on click
-      physicsCanvas.addEventListener('click', e => {
+      physicsCanvas.addEventListener("click", (e) => {
         const rect = physicsCanvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;

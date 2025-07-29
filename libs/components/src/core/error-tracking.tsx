@@ -3,7 +3,7 @@
  * Production-grade error monitoring with Sentry integration
  */
 
-import type { ErrorInfo, ReactNode } from 'react';
+import type { ErrorInfo, ReactNode } from "react";
 
 export interface ErrorMetadata {
   component?: string;
@@ -11,7 +11,7 @@ export interface ErrorMetadata {
   userId?: string;
   sessionId?: string;
   buildVersion?: string;
-  environment?: 'development' | 'staging' | 'production';
+  environment?: "development" | "staging" | "production";
   tags?: Record<string, string>;
   extra?: Record<string, unknown>;
 }
@@ -32,14 +32,14 @@ export interface ErrorTrackingConfig {
   tracesSampleRate?: number;
   beforeSend?: (
     event: Sentry.Event,
-    hint: Sentry.EventHint
+    hint: Sentry.EventHint,
   ) => Sentry.Event | null;
   integrations?: Array<Sentry.Integration>;
 }
 
 class ErrorTrackingSystem {
   private static instance: ErrorTrackingSystem;
-  private sentry: typeof import('@sentry/react') | null = null;
+  private sentry: typeof import("@sentry/react") | null = null;
   private __config: ErrorTrackingConfig = {};
   private errorQueue: Array<ErrorReport> = [];
   private isInitialized = false;
@@ -61,14 +61,14 @@ class ErrorTrackingSystem {
 
     if (!_config.enabled || !_config.dsn) {
       console.info(
-        '[ErrorTracking] Error tracking disabled or no DSN provided'
+        "[ErrorTracking] Error tracking disabled or no DSN provided",
       );
       return;
     }
 
     try {
       // Dynamically import Sentry to avoid bundle bloat
-      const Sentry = await import('@sentry/react');
+      const Sentry = await import("@sentry/react");
 
       const integrations = [...(_config.integrations || [])];
 
@@ -79,7 +79,7 @@ class ErrorTrackingSystem {
 
       Sentry.init({
         dsn: _config.dsn,
-        environment: _config.environment || 'production',
+        environment: _config.environment || "production",
         sampleRate: _config.sampleRate || 1,
         tracesSampleRate: _config.tracesSampleRate || 0.1,
 
@@ -89,7 +89,7 @@ class ErrorTrackingSystem {
           _config.beforeSend ||
           ((event, _hint) => {
             // Filter out known non-critical errors
-            if (event.exception?.values?.[0]?.type === 'NetworkError') {
+            if (event.exception?.values?.[0]?.type === "NetworkError") {
               return;
             }
 
@@ -98,7 +98,7 @@ class ErrorTrackingSystem {
               delete event.request.cookies;
             }
             if (event.user?.email) {
-              event.user.email = '[REDACTED]';
+              event.user.email = "[REDACTED]";
             }
 
             return event;
@@ -107,15 +107,15 @@ class ErrorTrackingSystem {
         // S-tier error filtering
         ignoreErrors: [
           // Browser extensions
-          'top.GLOBALS',
-          'ResizeObserver loop limit exceeded',
-          'Non-Error promise rejection captured',
+          "top.GLOBALS",
+          "ResizeObserver loop limit exceeded",
+          "Non-Error promise rejection captured",
           // Network errors
-          'NetworkError',
-          'Failed to fetch',
+          "NetworkError",
+          "Failed to fetch",
           // User-caused errors
-          'User cancelled',
-          'user aborted',
+          "User cancelled",
+          "user aborted",
         ],
       });
 
@@ -125,7 +125,7 @@ class ErrorTrackingSystem {
       // Process queued errors
       this.processErrorQueue();
 
-      console.info('[ErrorTracking] Initialized successfully');
+      console.info("[ErrorTracking] Initialized successfully");
     } catch {
       // Logging disabled
     }
@@ -137,7 +137,7 @@ class ErrorTrackingSystem {
   trackError(
     error: Error,
     errorInfo?: ErrorInfo,
-    metadata?: ErrorMetadata
+    metadata?: ErrorMetadata,
   ): string {
     const errorReport: ErrorReport = {
       error,
@@ -165,8 +165,8 @@ class ErrorTrackingSystem {
 
     this.sentry.addBreadcrumb({
       message: eventName,
-      category: 'custom',
-      level: 'info',
+      category: "custom",
+      level: "info",
       data,
       timestamp: Date.now() / 1000,
     });
@@ -176,7 +176,7 @@ class ErrorTrackingSystem {
    * Set user context for error tracking
    */
   setUser(
-    user: { id?: string; email?: string; username?: string } | null
+    user: { id?: string; email?: string; username?: string } | null,
   ): void {
     if (!this.isInitialized || !this.sentry) {
       return;
@@ -185,7 +185,7 @@ class ErrorTrackingSystem {
     if (user) {
       this.sentry.setUser({
         id: user.id,
-        email: user.email ? '[REDACTED]' : null,
+        email: user.email ? "[REDACTED]" : null,
         username: user.username,
       });
     } else {
@@ -224,7 +224,7 @@ class ErrorTrackingSystem {
    * Create an error boundary component
    */
   createErrorBoundary(
-    _fallback?: ReactNode
+    _fallback?: ReactNode,
   ): React.ComponentType<{ children: ReactNode }> {
     if (!this.isInitialized || !this.sentry) {
       // Return a basic error boundary if Sentry isn't loaded
@@ -268,10 +268,10 @@ class ErrorTrackingSystem {
           </div>
         ),
         beforeCapture: (scope: unknown) => {
-          scope.setTag('errorBoundary', true);
-          scope.setLevel('error');
+          scope.setTag("errorBoundary", true);
+          scope.setLevel("error");
         },
-      }
+      },
     );
   }
 
@@ -280,14 +280,14 @@ class ErrorTrackingSystem {
    */
   withErrorTracking<P extends object>(
     Component: React.ComponentType<P>,
-    componentName?: string
+    componentName?: string,
   ): React.ComponentType<P> {
     if (!this.isInitialized || !this.sentry) {
       return Component;
     }
 
     return this.sentry.withProfiler(Component, {
-      name: componentName || Component.displayName || 'Unknown',
+      name: componentName || Component.displayName || "Unknown",
     });
   }
 
@@ -323,23 +323,23 @@ class ErrorTrackingSystem {
     // Set context
     if (metadata) {
       if (metadata.component) {
-        this.sentry.setTag('component', metadata.component);
+        this.sentry.setTag("component", metadata.component);
       }
       if (metadata.action) {
-        this.sentry.setTag('action', metadata.action);
+        this.sentry.setTag("action", metadata.action);
       }
       if (metadata.tags) {
         this.sentry.setTags(metadata.tags);
       }
       if (metadata.extra) {
-        this.sentry.setContext('extra', metadata.extra);
+        this.sentry.setContext("extra", metadata.extra);
       }
     }
 
     // Capture the error
     if (errorInfo) {
       this.sentry.withScope((scope: unknown) => {
-        scope.setContext('errorInfo', {
+        scope.setContext("errorInfo", {
           componentStack: errorInfo.componentStack,
         });
         this.sentry.captureException(error);
@@ -382,7 +382,7 @@ export function useErrorTracking() {
     trackEvent: (eventName: string, data?: Record<string, unknown>) =>
       errorTracking.trackEvent(eventName, data),
     setUser: (
-      user: { id?: string; email?: string; username?: string } | null
+      user: { id?: string; email?: string; username?: string } | null,
     ) => errorTracking.setUser(user),
     setContext: (key: string, context: Record<string, unknown>) =>
       errorTracking.setContext(key, context),
@@ -400,7 +400,7 @@ export function ErrorTrackingProvider({
   config,
 }: ErrorTrackingProviderProps) {
   // Initialize on mount
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     errorTracking.initialize(config);
   }
 

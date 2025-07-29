@@ -10,25 +10,25 @@ import type {
   ForwardRefExoticComponent,
   HTMLAttributes,
   RefAttributes,
-} from 'react';
+} from "react";
 
 // Core component size variants
-export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 // Core component variants
 export type ComponentVariant =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'ghost'
-  | 'destructive'
-  | 'apple';
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "ghost"
+  | "destructive"
+  | "apple";
 
 // Glass effect intensity levels
-export type GlassIntensity = 'subtle' | 'medium' | 'strong';
+export type GlassIntensity = "subtle" | "medium" | "strong";
 
 // Animation timing presets
-export type AnimationTiming = 'instant' | 'fast' | 'normal' | 'slow' | 'slower';
+export type AnimationTiming = "instant" | "fast" | "normal" | "slow" | "slower";
 
 // Glass visual effects configuration
 export interface GlassEffectConfig {
@@ -67,7 +67,7 @@ export interface BaseGlassProps {
   /** Custom CSS class name */
   className?: string;
   /** Custom data attributes */
-  'data-testid'?: string;
+  "data-testid"?: string;
 }
 
 // Interactive component props
@@ -95,11 +95,11 @@ export interface CompoundComponentProps {
 // Layout component props
 export interface LayoutGlassProps extends BaseGlassProps {
   /** Padding size */
-  padding?: ComponentSize | 'none';
+  padding?: ComponentSize | "none";
   /** Margin size */
-  margin?: ComponentSize | 'none';
+  margin?: ComponentSize | "none";
   /** Border radius */
-  radius?: ComponentSize | 'none' | 'full';
+  radius?: ComponentSize | "none" | "full";
   /** Enable responsive behavior */
   responsive?: boolean;
 }
@@ -133,15 +133,15 @@ export type ComponentRef<T extends HTMLElement = HTMLElement> =
   React.RefObject<T>;
 
 // Component prop types for different HTML elements
-export type ButtonProps = ComponentPropsWithoutRef<'button'>;
-export type DivProps = ComponentPropsWithoutRef<'div'>;
-export type InputProps = ComponentPropsWithoutRef<'input'>;
-export type TextareaProps = ComponentPropsWithoutRef<'textarea'>;
-export type SelectProps = ComponentPropsWithoutRef<'select'>;
-export type LabelProps = ComponentPropsWithoutRef<'label'>;
-export type SpanProps = ComponentPropsWithoutRef<'span'>;
-export type HeadingProps = ComponentPropsWithoutRef<'h1'>;
-export type ParagraphProps = ComponentPropsWithoutRef<'p'>;
+export type ButtonProps = ComponentPropsWithoutRef<"button">;
+export type DivProps = ComponentPropsWithoutRef<"div">;
+export type InputProps = ComponentPropsWithoutRef<"input">;
+export type TextareaProps = ComponentPropsWithoutRef<"textarea">;
+export type SelectProps = ComponentPropsWithoutRef<"select">;
+export type LabelProps = ComponentPropsWithoutRef<"label">;
+export type SpanProps = ComponentPropsWithoutRef<"span">;
+export type HeadingProps = ComponentPropsWithoutRef<"h1">;
+export type ParagraphProps = ComponentPropsWithoutRef<"p">;
 
 // Polymorphic component props
 export type PolymorphicProps<T extends React.ElementType> = {
@@ -175,19 +175,19 @@ export type ChangeHandler = GlassEventHandler<HTMLInputElement, Event>;
 // Accessibility props
 export interface AccessibilityProps {
   /** ARIA label */
-  'aria-label'?: string;
+  "aria-label"?: string;
   /** ARIA labelled by */
-  'aria-labelledby'?: string;
+  "aria-labelledby"?: string;
   /** ARIA described by */
-  'aria-describedby'?: string;
+  "aria-describedby"?: string;
   /** ARIA expanded */
-  'aria-expanded'?: boolean;
+  "aria-expanded"?: boolean;
   /** ARIA controls */
-  'aria-controls'?: string;
+  "aria-controls"?: string;
   /** ARIA hidden */
-  'aria-hidden'?: boolean;
+  "aria-hidden"?: boolean;
   /** ARIA live region */
-  'aria-live'?: 'polite' | 'assertive' | 'off';
+  "aria-live"?: "polite" | "assertive" | "off";
   /** ARIA role */
   role?: string;
   /** Tab index */
@@ -201,7 +201,7 @@ export interface StyleConfig {
   /** CSS variables */
   cssVariables?: Record<string, string | number>;
   /** Theme variant */
-  theme?: 'light' | 'dark' | 'auto';
+  theme?: "light" | "dark" | "auto";
 }
 
 // Performance optimization props

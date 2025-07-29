@@ -7,7 +7,7 @@ import type {
   ComponentPropsWithoutRef,
   ElementType,
   ReactElement,
-} from 'react';
+} from "react";
 
 /**
  * Utility type to extract ref type from element
@@ -16,9 +16,7 @@ type ElementRef<T extends ElementType> = T extends keyof JSX.IntrinsicElements
   ? JSX.IntrinsicElements[T] extends { ref?: infer R }
     ? R
     : never
-  : T extends new (
-        ...arguments_: Array<unknown>
-      ) => infer Instance
+  : T extends new (...arguments_: Array<unknown>) => infer Instance
     ? Instance
     : never;
 
@@ -70,7 +68,7 @@ export type PolymorphicComponentPropsWithRef<
 export type PolymorphicComponent<Props, DefaultElement extends ElementType> = <
   T extends ElementType = DefaultElement,
 >(
-  props: PolymorphicComponentPropsWithRef<T, Props>
+  props: PolymorphicComponentPropsWithRef<T, Props>,
 ) => ReactElement | null;
 
 /**
@@ -78,7 +76,7 @@ export type PolymorphicComponent<Props, DefaultElement extends ElementType> = <
  */
 export type ValidHTMLAttributes<T extends ElementType> =
   T extends keyof JSX.IntrinsicElements
-    ? Omit<JSX.IntrinsicElements[T], 'ref' | 'key'>
+    ? Omit<JSX.IntrinsicElements[T], "ref" | "key">
     : {};
 
 /**
@@ -91,7 +89,7 @@ export type ValidHTMLAttributes<T extends ElementType> =
  */
 export type CreatePolymorphicComponent = <
   Props extends Record<string, unknown>,
-  DefaultElement extends ElementType = 'div',
+  DefaultElement extends ElementType = "div",
 >(config: {
   defaultElement: DefaultElement;
   displayName: string;
@@ -108,20 +106,20 @@ export type CreatePolymorphicComponent = <
  */
 export type PolymorphicSlot<
   Props = {},
-  DefaultElement extends ElementType = 'div',
+  DefaultElement extends ElementType = "div",
 > = PolymorphicComponent<Props, DefaultElement>;
 
 /**
  * Constraint for components that must be interactive
  */
 export type InteractiveElement =
-  | 'button'
-  | 'a'
-  | 'input'
-  | 'select'
-  | 'textarea'
-  | 'details'
-  | 'dialog';
+  | "button"
+  | "a"
+  | "input"
+  | "select"
+  | "textarea"
+  | "details"
+  | "dialog";
 
 /**
  * Props for interactive polymorphic components
@@ -135,13 +133,13 @@ export type InteractivePolymorphicProps<
  * Type for components that must be semantic HTML
  */
 export type SemanticElement =
-  | 'article'
-  | 'aside'
-  | 'footer'
-  | 'header'
-  | 'main'
-  | 'nav'
-  | 'section';
+  | "article"
+  | "aside"
+  | "footer"
+  | "header"
+  | "main"
+  | "nav"
+  | "section";
 
 /**
  * Props for semantic polymorphic components
@@ -151,27 +149,19 @@ export type SemanticPolymorphicProps<
   Props = {},
 > = T extends SemanticElement
   ? PolymorphicComponentProps<T, Props>
-  : PolymorphicComponentProps<'div', Props>;
+  : PolymorphicComponentProps<"div", Props>;
 
 /**
  * Extract the element type from a polymorphic component
  */
-export type ExtractPolymorphicElement<T> = T extends PolymorphicComponent<
-  unknown,
-  infer E
->
-  ? E
-  : never;
+export type ExtractPolymorphicElement<T> =
+  T extends PolymorphicComponent<unknown, infer E> ? E : never;
 
 /**
  * Extract the props type from a polymorphic component
  */
-export type ExtractPolymorphicProps<T> = T extends PolymorphicComponent<
-  infer P,
-  unknown
->
-  ? P
-  : never;
+export type ExtractPolymorphicProps<T> =
+  T extends PolymorphicComponent<infer P, unknown> ? P : never;
 
 /**
  * Type-safe event handler props for polymorphic components
@@ -213,16 +203,16 @@ export type CompletePolymorphicProps<
  * Type guard to check if element is interactive
  */
 export function isInteractiveElement(
-  element: ElementType
+  element: ElementType,
 ): element is InteractiveElement {
   const interactiveElements: Array<InteractiveElement> = [
-    'button',
-    'a',
-    'input',
-    'select',
-    'textarea',
-    'details',
-    'dialog',
+    "button",
+    "a",
+    "input",
+    "select",
+    "textarea",
+    "details",
+    "dialog",
   ];
   return interactiveElements.includes(element as unknown);
 }
@@ -231,16 +221,16 @@ export function isInteractiveElement(
  * Type guard to check if element is semantic
  */
 export function isSemanticElement(
-  element: ElementType
+  element: ElementType,
 ): element is SemanticElement {
   const semanticElements: Array<SemanticElement> = [
-    'article',
-    'aside',
-    'footer',
-    'header',
-    'main',
-    'nav',
-    'section',
+    "article",
+    "aside",
+    "footer",
+    "header",
+    "main",
+    "nav",
+    "section",
   ];
   return semanticElements.includes(element as unknown);
 }

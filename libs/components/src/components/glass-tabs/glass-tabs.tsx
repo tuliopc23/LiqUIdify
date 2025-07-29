@@ -1,6 +1,6 @@
-import { useId, useState } from 'react';
+import { useId, useState } from "react";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
 export interface GlassTabItem {
   // Renamed for clarity
@@ -19,7 +19,7 @@ export interface GlassTabsProps {
   activeTabButtonClassName?: string;
   inactiveTabButtonClassName?: string;
   tabPanelClassName?: string;
-  orientation?: 'horizontal' | 'vertical'; // For future enhancement
+  orientation?: "horizontal" | "vertical"; // For future enhancement
 }
 
 export function GlassTabs({
@@ -28,24 +28,24 @@ export function GlassTabs({
   className,
   tabListClassName,
   tabButtonClassName,
-  activeTabButtonClassName = 'bg-primary text-white', // Default active class
-  inactiveTabButtonClassName = 'text-secondary hover:text-primary', // Default inactive class
+  activeTabButtonClassName = "bg-primary text-white", // Default active class
+  inactiveTabButtonClassName = "text-secondary hover:text-primary", // Default inactive class
   tabPanelClassName,
   // orientation = 'horizontal', // For future enhancement
 }: GlassTabsProps) {
   const [activeTab, setActiveTab] = useState(
-    defaultTab || tabs.find((tab) => !tab.disabled)?.id || tabs[0]?.id
+    defaultTab || tabs.find((tab) => !tab.disabled)?.id || tabs[0]?.id,
   );
   const baseId = useId();
 
   return (
-    <div className={cn('w-full', className)}>
+    <div className={cn("w-full", className)}>
       <div
         role="tablist"
         aria-orientation="horizontal" // Change to 'vertical' if orientation prop is implemented
         className={cn(
-          'glass-effect mb-6 flex space-x-1 rounded-lg p-1',
-          tabListClassName
+          "glass-effect mb-6 flex space-x-1 rounded-lg p-1",
+          tabListClassName,
         )}
       >
         {tabs.map((tab) => (
@@ -60,12 +60,12 @@ export function GlassTabs({
             onClick={() => !tab.disabled && setActiveTab(tab.id)}
             disabled={tab.disabled}
             className={cn(
-              'btn-scale flex-1 rounded-md px-4 py-2 font-medium text-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500',
+              "btn-scale flex-1 rounded-md px-4 py-2 font-medium text-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500",
               tabButtonClassName,
               activeTab === tab.id
                 ? activeTabButtonClassName
                 : inactiveTabButtonClassName,
-              tab.disabled && 'cursor-not-allowed opacity-50'
+              tab.disabled && "cursor-not-allowed opacity-50",
             )}
           >
             {tab.label}
@@ -80,7 +80,7 @@ export function GlassTabs({
           role="tabpanel"
           aria-labelledby={`${baseId}-tab-${tab.id}`}
           hidden={activeTab !== tab.id}
-          className={cn('tab-content focus:outline-none', tabPanelClassName)} // Added focus:outline-none for potential programmatic focus
+          className={cn("tab-content focus:outline-none", tabPanelClassName)} // Added focus:outline-none for potential programmatic focus
         >
           {activeTab === tab.id && (
             <div className="glass-effect rounded-lg p-6">{tab.content}</div>

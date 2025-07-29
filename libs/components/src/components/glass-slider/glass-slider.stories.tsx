@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { DollarSign, Gauge, Sun, Volume2 } from 'lucide-react';
-import type React from 'react';
-import { useState } from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { DollarSign, Gauge, Sun, Volume2 } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
 
-import { GlassSlider } from './glass-slider';
+import { GlassSlider } from "./glass-slider";
 
 const meta = {
-  title: 'Glass UI/GlassSlider',
+  title: "Glass UI/GlassSlider",
   component: GlassSlider,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -48,44 +48,44 @@ function MyComponent() {
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     min: {
-      control: 'number',
-      description: 'Minimum value',
+      control: "number",
+      description: "Minimum value",
     },
     max: {
-      control: 'number',
-      description: 'Maximum value',
+      control: "number",
+      description: "Maximum value",
     },
     step: {
-      control: 'number',
-      description: 'Step interval',
+      control: "number",
+      description: "Step interval",
     },
     value: {
-      control: 'number',
-      description: 'Current value',
+      control: "number",
+      description: "Current value",
     },
     onChange: {
-      action: 'changed',
-      description: 'Callback when value changes',
+      action: "changed",
+      description: "Callback when value changes",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Whether the slider is disabled',
+      control: "boolean",
+      description: "Whether the slider is disabled",
     },
     showValue: {
-      control: 'boolean',
-      description: 'Show value label',
+      control: "boolean",
+      description: "Show value label",
     },
     variant: {
-      control: 'select',
-      options: ['default', 'minimal'],
-      description: 'Visual variant',
+      control: "select",
+      options: ["default", "minimal"],
+      description: "Visual variant",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
     },
   },
 } satisfies Meta<typeof GlassSlider>;
@@ -229,10 +229,10 @@ export const VolumeControl: Story = {
     const [volume, setVolume] = useState(30);
 
     const getVolumeIcon = () => {
-      if (volume === 0) return '🔇';
-      if (volume < 33) return '🔈';
-      if (volume < 66) return '🔉';
-      return '🔊';
+      if (volume === 0) return "🔇";
+      if (volume < 33) return "🔈";
+      if (volume < 66) return "🔉";
+      return "🔊";
     };
 
     return (

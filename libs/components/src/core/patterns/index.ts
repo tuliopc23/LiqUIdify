@@ -5,15 +5,15 @@
  * These patterns provide reusable solutions for common component composition and state management needs.
  */
 
-import React from 'react';
+import React from "react";
 
-export { CompoundComponent } from '../compound-component';
+export { CompoundComponent } from "../compound-component";
 // Re-export from other pattern modules
 export {
   createGlassPolymorphicComponent,
   createPolymorphicComponent,
   createPolymorphicSlots,
-} from '../create-polymorphic-component';
+} from "../create-polymorphic-component";
 
 // Business logic patterns
 export const createBusinessLogicHook = <T extends Record<string, unknown>>(
@@ -21,17 +21,17 @@ export const createBusinessLogicHook = <T extends Record<string, unknown>>(
   actionsFactory: (
     state: T,
     setState: React.Dispatch<React.SetStateAction<T>>,
-    props: Record<string, unknown>
-  ) => Record<string, (...arguments_: Array<unknown>) => void>
+    props: Record<string, unknown>,
+  ) => Record<string, (...arguments_: Array<unknown>) => void>,
 ) => {
   return (props: Record<string, unknown>) => {
     const [state, setState] = React.useState<T>(() =>
-      initialStateFactory(props)
+      initialStateFactory(props),
     );
 
     const actions = React.useMemo(
       () => actionsFactory(state, setState, props),
-      [state, props, actionsFactory]
+      [state, props, actionsFactory],
     );
 
     const reset = React.useCallback(() => {
@@ -51,7 +51,7 @@ export const createCompoundComponentWithContext = <
   T extends Record<string, unknown>,
 >(
   _contextName: string,
-  defaultValue: T
+  defaultValue: T,
 ) => {
   return {
     Provider: undefined as unknown,
@@ -66,7 +66,7 @@ export interface RenderPropertyPattern<T> {
 }
 
 export const createRenderPropComponent = <T extends Record<string, unknown>>(
-  _useLogic: () => T
+  _useLogic: () => T,
 ) => {
   // Type-only export for patterns
   return;
@@ -76,10 +76,10 @@ export const createRenderPropComponent = <T extends Record<string, unknown>>(
 export const withGlassEffect = <P extends Record<string, unknown>>(
   WrappedComponent: React.ComponentType<P>,
   _glassConfig?: {
-    variant?: 'light' | 'dark' | 'neutral';
-    intensity?: 'weak' | 'medium' | 'strong';
+    variant?: "light" | "dark" | "neutral";
+    intensity?: "weak" | "medium" | "strong";
     blur?: boolean;
-  }
+  },
 ) => {
   // Type-only export for patterns
   return WrappedComponent;
@@ -92,7 +92,7 @@ export interface SlotProps {
 }
 
 export const createSlotComponent = (
-  _slots: Record<string, React.ComponentType<unknown>>
+  _slots: Record<string, React.ComponentType<unknown>>,
 ) => {
   // Type-only export for patterns
   return;
@@ -106,7 +106,7 @@ export interface StateAction<T = unknown> {
 
 export const createStateReducer = <T extends Record<string, unknown>>(
   initialState: T,
-  actionCreators: Record<string, (state: T, payload?: unknown) => T>
+  actionCreators: Record<string, (state: T, payload?: unknown) => T>,
 ) => {
   const reducer = (state: T, action: StateAction): T => {
     const actionCreator = actionCreators[action.type];
@@ -128,7 +128,7 @@ export const createStateReducer = <T extends Record<string, unknown>>(
         });
         return accumulator;
       },
-      {} as Record<string, (payload?: unknown) => StateAction>
+      {} as Record<string, (payload?: unknown) => StateAction>,
     ),
   };
 };
@@ -174,7 +174,7 @@ export class ComponentEventBus {
 // Factory pattern for creating themed components
 export const createThemedComponentFactory = <T extends Record<string, unknown>>(
   baseComponent: React.ComponentType<T>,
-  themeConfig: Record<string, Partial<T>>
+  themeConfig: Record<string, Partial<T>>,
 ) => {
   return (themeName: string) => {
     const theme = themeConfig[themeName];

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Calculator,
   DollarSign,
@@ -6,15 +6,15 @@ import {
   Percent,
   Target,
   Timer,
-} from 'lucide-react';
-import { useState } from 'react';
-import { GlassNumberInput } from './glass-number-input';
+} from "lucide-react";
+import { useState } from "react";
+import { GlassNumberInput } from "./glass-number-input";
 
 const meta = {
-  title: 'Components/Forms/GlassNumberInput',
+  title: "Components/Forms/GlassNumberInput",
   component: GlassNumberInput,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -88,178 +88,178 @@ The number input component follows WAI-ARIA guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Core Props
     value: {
-      control: { type: 'number' },
-      description: 'Current value of the input',
+      control: { type: "number" },
+      description: "Current value of the input",
       table: {
-        type: { summary: 'number' },
-        category: 'Core',
+        type: { summary: "number" },
+        category: "Core",
       },
     },
     defaultValue: {
-      control: { type: 'number' },
-      description: 'Default value when uncontrolled',
+      control: { type: "number" },
+      description: "Default value when uncontrolled",
       table: {
-        type: { summary: 'number' },
-        category: 'Core',
+        type: { summary: "number" },
+        category: "Core",
       },
     },
     onChange: {
-      action: 'value changed',
-      description: 'Callback fired when value changes',
+      action: "value changed",
+      description: "Callback fired when value changes",
       table: {
-        type: { summary: '(value: number | null) => void' },
-        category: 'Core',
+        type: { summary: "(value: number | null) => void" },
+        category: "Core",
       },
     },
 
     // Validation
     min: {
-      control: { type: 'number' },
-      description: 'Minimum allowed value',
+      control: { type: "number" },
+      description: "Minimum allowed value",
       table: {
-        type: { summary: 'number' },
-        category: 'Validation',
+        type: { summary: "number" },
+        category: "Validation",
       },
     },
     max: {
-      control: { type: 'number' },
-      description: 'Maximum allowed value',
+      control: { type: "number" },
+      description: "Maximum allowed value",
       table: {
-        type: { summary: 'number' },
-        category: 'Validation',
+        type: { summary: "number" },
+        category: "Validation",
       },
     },
     step: {
-      control: { type: 'number', min: 0.01, max: 100, step: 0.01 },
-      description: 'Step value for increment/decrement',
+      control: { type: "number", min: 0.01, max: 100, step: 0.01 },
+      description: "Step value for increment/decrement",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '1' },
-        category: 'Validation',
+        type: { summary: "number" },
+        defaultValue: { summary: "1" },
+        category: "Validation",
       },
     },
 
     // Formatting
     precision: {
-      control: { type: 'number', min: 0, max: 10, step: 1 },
-      description: 'Number of decimal places',
+      control: { type: "number", min: 0, max: 10, step: 1 },
+      description: "Number of decimal places",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '0' },
-        category: 'Formatting',
+        type: { summary: "number" },
+        defaultValue: { summary: "0" },
+        category: "Formatting",
       },
     },
     formatOptions: {
-      control: 'object',
-      description: 'Intl.NumberFormat options for display formatting',
+      control: "object",
+      description: "Intl.NumberFormat options for display formatting",
       table: {
-        type: { summary: 'Intl.NumberFormatOptions' },
-        category: 'Formatting',
+        type: { summary: "Intl.NumberFormatOptions" },
+        category: "Formatting",
       },
     },
     locale: {
-      control: 'text',
-      description: 'Locale for number formatting',
+      control: "text",
+      description: "Locale for number formatting",
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'en-US' },
-        category: 'Formatting',
+        type: { summary: "string" },
+        defaultValue: { summary: "en-US" },
+        category: "Formatting",
       },
     },
 
     // Behavior
     allowDecimals: {
-      control: 'boolean',
-      description: 'Allow decimal input',
+      control: "boolean",
+      description: "Allow decimal input",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'Behavior',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "Behavior",
       },
     },
     allowNegative: {
-      control: 'boolean',
-      description: 'Allow negative values',
+      control: "boolean",
+      description: "Allow negative values",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Behavior',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Behavior",
       },
     },
     showButtons: {
-      control: 'boolean',
-      description: 'Show increment/decrement buttons',
+      control: "boolean",
+      description: "Show increment/decrement buttons",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Behavior',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Behavior",
       },
     },
 
     // Appearance
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'Size of the input',
+      control: "select",
+      options: ["sm", "md", "lg"],
+      description: "Size of the input",
       table: {
-        type: { summary: 'sm | md | lg' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "sm | md | lg" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
     placeholder: {
-      control: 'text',
-      description: 'Placeholder text',
+      control: "text",
+      description: "Placeholder text",
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: '0' },
-        category: 'Appearance',
+        type: { summary: "string" },
+        defaultValue: { summary: "0" },
+        category: "Appearance",
       },
     },
 
     // State
     error: {
-      control: 'boolean',
-      description: 'Whether the input has an error',
+      control: "boolean",
+      description: "Whether the input has an error",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'State',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "State",
       },
     },
     disabled: {
-      control: 'boolean',
-      description: 'Whether the input is disabled',
+      control: "boolean",
+      description: "Whether the input is disabled",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'State',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "State",
       },
     },
 
     // HTML Props
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
   },
   args: {
     step: 1,
     precision: 0,
-    locale: 'en-US',
+    locale: "en-US",
     allowDecimals: false,
     allowNegative: true,
     showButtons: true,
-    size: 'md',
-    placeholder: '0',
+    size: "md",
+    placeholder: "0",
     error: false,
     disabled: false,
   },
@@ -334,11 +334,11 @@ export const BasicUsage: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -388,11 +388,11 @@ export const Sizes: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -452,11 +452,11 @@ export const States: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -493,8 +493,8 @@ export const FormattingExamples: Story = {
               precision={2}
               allowDecimals
               formatOptions={{
-                style: 'currency',
-                currency: 'USD',
+                style: "currency",
+                currency: "USD",
               }}
               placeholder="$0.00"
             />
@@ -524,7 +524,7 @@ export const FormattingExamples: Story = {
               precision={2}
               allowDecimals
               formatOptions={{
-                style: 'percent',
+                style: "percent",
                 minimumFractionDigits: 1,
                 maximumFractionDigits: 1,
               }}
@@ -588,11 +588,11 @@ export const FormattingExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -648,8 +648,8 @@ export const RealWorldExamples: Story = {
                   precision={2}
                   allowDecimals
                   formatOptions={{
-                    style: 'currency',
-                    currency: 'USD',
+                    style: "currency",
+                    currency: "USD",
                   }}
                 />
               </div>
@@ -670,7 +670,7 @@ export const RealWorldExamples: Story = {
                   precision={2}
                   allowDecimals
                   formatOptions={{
-                    style: 'percent',
+                    style: "percent",
                   }}
                 />
               </div>
@@ -728,8 +728,8 @@ export const RealWorldExamples: Story = {
                     step={5}
                     size="sm"
                     formatOptions={{
-                      style: 'unit',
-                      unit: 'second',
+                      style: "unit",
+                      unit: "second",
                     }}
                   />
                 </div>
@@ -764,8 +764,8 @@ export const RealWorldExamples: Story = {
                   min={0}
                   step={100}
                   formatOptions={{
-                    style: 'currency',
-                    currency: 'USD',
+                    style: "currency",
+                    currency: "USD",
                   }}
                   allowDecimals
                   precision={2}
@@ -787,7 +787,7 @@ export const RealWorldExamples: Story = {
                   precision={4}
                   allowDecimals
                   formatOptions={{
-                    style: 'percent',
+                    style: "percent",
                     minimumFractionDigits: 2,
                   }}
                 />
@@ -820,11 +820,11 @@ export const RealWorldExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -872,7 +872,7 @@ export const AccessibilityShowcase: Story = {
             Current Value
           </h4>
           <p className="text-green-800 text-sm dark:text-green-200">
-            Value: {value !== null ? value : 'None'} (Range: 0-100)
+            Value: {value !== null ? value : "None"} (Range: 0-100)
           </p>
         </div>
 
@@ -895,11 +895,11 @@ export const AccessibilityShowcase: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -938,8 +938,8 @@ export const ThemeShowcase: Story = {
               precision={2}
               allowDecimals
               formatOptions={{
-                style: 'currency',
-                currency: 'USD',
+                style: "currency",
+                currency: "USD",
               }}
               placeholder="$0.00"
             />
@@ -956,7 +956,7 @@ export const ThemeShowcase: Story = {
               max={100}
               step={5}
               formatOptions={{
-                style: 'percent',
+                style: "percent",
                 minimumFractionDigits: 0,
               }}
               placeholder="0%"

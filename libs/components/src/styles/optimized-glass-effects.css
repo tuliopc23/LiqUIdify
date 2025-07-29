@@ -261,7 +261,7 @@
 }
 
 .glass-debug-performance::after {
-  content: attr(data-render-time) 'ms';
+  content: attr(data-render-time) "ms";
   position: absolute;
   top: 0;
   right: 0;

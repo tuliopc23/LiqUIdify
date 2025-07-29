@@ -4,7 +4,7 @@
  * Provides centralized accessibility management for glass components
  */
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from "react";
 
 export interface AccessibilityOptions {
   autoAnnounce?: boolean;
@@ -42,20 +42,20 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
   // Detect user preferences
   useEffect(() => {
-    if (!respectPreferences || typeof window === 'undefined') {
+    if (!respectPreferences || typeof window === "undefined") {
       return;
     }
 
     const checkPreferences = () => {
       const reducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
+        "(prefers-reduced-motion: reduce)",
       ).matches;
       const highContrastMedia = window.matchMedia(
-        '(prefers-contrast: high)'
+        "(prefers-contrast: high)",
       ).matches;
       const screenReader =
-        navigator.userAgent.includes('NVDA') ||
-        navigator.userAgent.includes('JAWS') ||
+        navigator.userAgent.includes("NVDA") ||
+        navigator.userAgent.includes("JAWS") ||
         window.speechSynthesis?.speaking;
 
       setState((previous) => ({
@@ -69,16 +69,16 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
     checkPreferences();
 
     const motionMediaQuery = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
+      "(prefers-reduced-motion: reduce)",
     );
-    const contrastMediaQuery = window.matchMedia('(prefers-contrast: high)');
+    const contrastMediaQuery = window.matchMedia("(prefers-contrast: high)");
 
-    motionMediaQuery.addEventListener('change', checkPreferences);
-    contrastMediaQuery.addEventListener('change', checkPreferences);
+    motionMediaQuery.addEventListener("change", checkPreferences);
+    contrastMediaQuery.addEventListener("change", checkPreferences);
 
     return () => {
-      motionMediaQuery.removeEventListener('change', checkPreferences);
-      contrastMediaQuery.removeEventListener('change', checkPreferences);
+      motionMediaQuery.removeEventListener("change", checkPreferences);
+      contrastMediaQuery.removeEventListener("change", checkPreferences);
     };
   }, [respectPreferences, highContrast]);
 
@@ -89,7 +89,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Tab') {
+      if (e.key === "Tab") {
         setState((previous) => ({ ...previous, keyboardNavigation: true }));
       }
     };
@@ -98,37 +98,37 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
       setState((previous) => ({ ...previous, keyboardNavigation: false }));
     };
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('keydown', handleKeyDown);
-      window.addEventListener('mousedown', handleMouseDown);
+    if (typeof window !== "undefined") {
+      window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("mousedown", handleMouseDown);
     }
 
     return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('keydown', handleKeyDown);
-        window.removeEventListener('mousedown', handleMouseDown);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("keydown", handleKeyDown);
+        window.removeEventListener("mousedown", handleMouseDown);
       }
     };
   }, [focusManagement]);
 
   // Announce function for screen readers
   const announce = useCallback(
-    (message: string, priority: 'polite' | 'assertive' = 'polite') => {
+    (message: string, priority: "polite" | "assertive" = "polite") => {
       if (!autoAnnounce || !announcer.current) {
         return;
       }
 
-      announcer.current.setAttribute('aria-live', priority);
+      announcer.current.setAttribute("aria-live", priority);
       announcer.current.textContent = message;
 
       // Clear after announcement
       setTimeout(() => {
         if (announcer.current) {
-          announcer.current.textContent = '';
+          announcer.current.textContent = "";
         }
       }, 1000);
     },
-    [autoAnnounce]
+    [autoAnnounce],
   );
 
   // Focus management utilities
@@ -140,7 +140,7 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
       element.focus({ preventScroll: state.reducedMotion });
     },
-    [focusManagement, state.reducedMotion]
+    [focusManagement, state.reducedMotion],
   );
 
   const trapFocus = useCallback(
@@ -150,13 +150,13 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
       }
 
       const focusableElements = container.querySelectorAll(
-        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',
       );
       const firstElement = focusableElements[0] as HTMLElement;
       const lastElement = focusableElements.at(-1) as HTMLElement;
 
       const handleTabKey = (e: KeyboardEvent) => {
-        if (e.key !== 'Tab') {
+        if (e.key !== "Tab") {
           return;
         }
 
@@ -173,13 +173,13 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
         }
       };
 
-      container.addEventListener('keydown', handleTabKey);
+      container.addEventListener("keydown", handleTabKey);
 
       return () => {
-        container.removeEventListener('keydown', handleTabKey);
+        container.removeEventListener("keydown", handleTabKey);
       };
     },
-    [focusManagement]
+    [focusManagement],
   );
 
   // Create announcer element
@@ -204,15 +204,15 @@ export function useAccessibilityManager(options: AccessibilityOptions = {}) {
 
       if (state.reducedMotion) {
         classes +=
-          ' motion-reduce:transition-none motion-reduce:transform-none';
+          " motion-reduce:transition-none motion-reduce:transform-none";
       }
 
       if (state.highContrast) {
-        classes += ' contrast-more:border-2 contrast-more:border-solid';
+        classes += " contrast-more:border-2 contrast-more:border-solid";
       }
 
       if (state.keyboardNavigation) {
-        classes += ' focus-visible:ring-2 focus-visible:ring-blue-500';
+        classes += " focus-visible:ring-2 focus-visible:ring-blue-500";
       }
 
       return classes;

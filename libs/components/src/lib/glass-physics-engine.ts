@@ -4,7 +4,7 @@
  * Requirements: 5.1, 5.2, 5.4 - Advanced animation choreography with Apple-quality motion
  */
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from "react";
 
 // Extended Navigator interface for haptic feedback
 interface NavigatorWithVibrate {
@@ -145,28 +145,28 @@ export const CHOREOGRAPHY_PRESETS: Record<string, AnimationChoreography> = {
     stagger: 0.1,
     sequence: 0.2,
     parallel: 0,
-    easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+    easing: "cubic-bezier(0.25, 0.1, 0.25, 1)",
     duration: 0.6,
   },
   staggered: {
     stagger: 0.05,
     sequence: 0,
     parallel: 0.1,
-    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
     duration: 0.8,
   },
   parallel: {
     stagger: 0,
     sequence: 0,
     parallel: 0,
-    easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+    easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
     duration: 0.5,
   },
   cascade: {
     stagger: 0.08,
     sequence: 0.15,
     parallel: 0.05,
-    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     duration: 1,
   },
 };
@@ -256,7 +256,7 @@ export class SpringPhysics {
     // Check if animation should continue
     const distanceToTarget = Math.hypot(
       position.x - target.x,
-      position.y - target.y
+      position.y - target.y,
     );
     const velocityMagnitude = Math.hypot(velocity.x, velocity.y);
 
@@ -330,7 +330,7 @@ export class MagneticField {
   calculateForce(
     cursorX: number,
     cursorY: number,
-    targetId: string
+    targetId: string,
   ): { x: number; y: number } {
     const target = this.elements.get(targetId);
     if (!target) {
@@ -406,7 +406,7 @@ export class AnimationChoreographer {
     id: string,
     element: HTMLElement,
     keyframes: Array<Keyframe>,
-    options: KeyframeAnimationOptions = {}
+    options: KeyframeAnimationOptions = {},
   ): void {
     const animationCount = this.animations.size;
     const delay = this.calculateDelay(animationCount);
@@ -417,7 +417,7 @@ export class AnimationChoreographer {
       duration,
       delay,
       easing: options.easing || this.config.easing,
-      fill: 'both',
+      fill: "both",
     });
 
     this.animations.set(id, {
@@ -488,11 +488,11 @@ export class GestureRecognizer {
     onStart?: (position: { x: number; y: number }) => void;
     onMove?: (
       position: { x: number; y: number },
-      velocity: { x: number; y: number }
+      velocity: { x: number; y: number },
     ) => void;
     onEnd?: (
       position: { x: number; y: number },
-      velocity: { x: number; y: number }
+      velocity: { x: number; y: number },
     ) => void;
   } = {};
 
@@ -504,19 +504,19 @@ export class GestureRecognizer {
 
   private setupEventListeners(): void {
     if (this.config.enableMouse) {
-      this.element.addEventListener('mousedown', this.handleStart);
-      document.addEventListener('mousemove', this.handleMove);
-      document.addEventListener('mouseup', this.handleEnd);
+      this.element.addEventListener("mousedown", this.handleStart);
+      document.addEventListener("mousemove", this.handleMove);
+      document.addEventListener("mouseup", this.handleEnd);
     }
 
     if (this.config.enableTouch) {
-      this.element.addEventListener('touchstart', this.handleTouchStart);
-      document.addEventListener('touchmove', this.handleTouchMove);
-      document.addEventListener('touchend', this.handleTouchEnd);
+      this.element.addEventListener("touchstart", this.handleTouchStart);
+      document.addEventListener("touchmove", this.handleTouchMove);
+      document.addEventListener("touchend", this.handleTouchEnd);
     }
 
     if (this.config.enableKeyboard) {
-      this.element.addEventListener('keydown', this.handleKeyDown);
+      this.element.addEventListener("keydown", this.handleKeyDown);
     }
   }
 
@@ -611,19 +611,19 @@ export class GestureRecognizer {
     let deltaY = 0;
 
     switch (e.key) {
-      case 'ArrowLeft': {
+      case "ArrowLeft": {
         deltaX = -step;
         break;
       }
-      case 'ArrowRight': {
+      case "ArrowRight": {
         deltaX = step;
         break;
       }
-      case 'ArrowUp': {
+      case "ArrowUp": {
         deltaY = -step;
         break;
       }
-      case 'ArrowDown': {
+      case "ArrowDown": {
         deltaY = step;
         break;
       }
@@ -654,8 +654,8 @@ export class GestureRecognizer {
   setOnMove(
     callback: (
       position: { x: number; y: number },
-      velocity: { x: number; y: number }
-    ) => void
+      velocity: { x: number; y: number },
+    ) => void,
   ): void {
     this.callbacks.onMove = callback;
   }
@@ -663,27 +663,27 @@ export class GestureRecognizer {
   setOnEnd(
     callback: (
       position: { x: number; y: number },
-      velocity: { x: number; y: number }
-    ) => void
+      velocity: { x: number; y: number },
+    ) => void,
   ): void {
     this.callbacks.onEnd = callback;
   }
 
   destroy(): void {
     if (this.config.enableMouse) {
-      this.element.removeEventListener('mousedown', this.handleStart);
-      document.removeEventListener('mousemove', this.handleMove);
-      document.removeEventListener('mouseup', this.handleEnd);
+      this.element.removeEventListener("mousedown", this.handleStart);
+      document.removeEventListener("mousemove", this.handleMove);
+      document.removeEventListener("mouseup", this.handleEnd);
     }
 
     if (this.config.enableTouch) {
-      this.element.removeEventListener('touchstart', this.handleTouchStart);
-      document.removeEventListener('touchmove', this.handleTouchMove);
-      document.removeEventListener('touchend', this.handleTouchEnd);
+      this.element.removeEventListener("touchstart", this.handleTouchStart);
+      document.removeEventListener("touchmove", this.handleTouchMove);
+      document.removeEventListener("touchend", this.handleTouchEnd);
     }
 
     if (this.config.enableKeyboard) {
-      this.element.removeEventListener('keydown', this.handleKeyDown);
+      this.element.removeEventListener("keydown", this.handleKeyDown);
     }
 
     this.callbacks = {};
@@ -704,7 +704,7 @@ export function useAdvancedPhysics(
     enableMagnetic?: boolean;
     enableGestures?: boolean;
     enableHaptics?: boolean;
-  } = {}
+  } = {},
 ) {
   const {
     springConfig = SPRING_PRESETS.default,
@@ -761,7 +761,7 @@ export function useAdvancedPhysics(
 
     gestureRef.current = new GestureRecognizer(
       elementRef.current,
-      gestureConfig
+      gestureConfig,
     );
 
     return () => {
@@ -771,8 +771,8 @@ export function useAdvancedPhysics(
 
   // Haptic feedback
   const triggerHaptic = useCallback(
-    (intensity: 'light' | 'medium' | 'heavy' = 'light') => {
-      if (!enableHaptics || typeof navigator === 'undefined') {
+    (intensity: "light" | "medium" | "heavy" = "light") => {
+      if (!enableHaptics || typeof navigator === "undefined") {
         return;
       }
 
@@ -790,7 +790,7 @@ export function useAdvancedPhysics(
 
       navigatorWithVibrate.vibrate(patterns[intensity]);
     },
-    [enableHaptics]
+    [enableHaptics],
   );
 
   // Animation methods
@@ -823,7 +823,7 @@ export function useAdvancedPhysics(
         element: HTMLElement;
         keyframes: Array<Keyframe>;
         options?: KeyframeAnimationOptions;
-      }>
+      }>,
     ) => {
       if (!choreographerRef.current) {
         return;
@@ -835,7 +835,7 @@ export function useAdvancedPhysics(
 
       choreographerRef.current.play();
     },
-    []
+    [],
   );
 
   return {

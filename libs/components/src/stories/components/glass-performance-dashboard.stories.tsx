@@ -1,40 +1,40 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-import { GlassButton } from '@/components/glass-button-refactored/glass-button';
-import { GlassCard } from '@/components/glass-card-refactored/glass-card';
-import { GlassPerformanceDashboard } from '@/components/glass-performance-dashboard/glass-performance-dashboard';
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import { GlassButton } from "@/components/glass-button-refactored/glass-button";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
+import { GlassPerformanceDashboard } from "@/components/glass-performance-dashboard/glass-performance-dashboard";
 
 const meta = {
-  title: 'Components/Glass Performance Dashboard',
+  title: "Components/Glass Performance Dashboard",
   component: GlassPerformanceDashboard,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
         component:
-          'A comprehensive performance monitoring dashboard with real-time metrics, charts, and responsive grid layouts. Features glassmorphism design and smooth animations.',
+          "A comprehensive performance monitoring dashboard with real-time metrics, charts, and responsive grid layouts. Features glassmorphism design and smooth animations.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     refreshInterval: {
-      description: 'Interval for updating metrics (in milliseconds)',
-      control: { type: 'number', min: 1000, max: 10000, step: 1000 },
+      description: "Interval for updating metrics (in milliseconds)",
+      control: { type: "number", min: 1000, max: 10000, step: 1000 },
     },
     showDetails: {
-      description: 'Show detailed performance breakdowns',
-      control: { type: 'boolean' },
+      description: "Show detailed performance breakdowns",
+      control: { type: "boolean" },
     },
     theme: {
-      description: 'Dashboard color theme',
-      control: { type: 'select' },
-      options: ['blue', 'green', 'purple', 'orange'],
+      description: "Dashboard color theme",
+      control: { type: "select" },
+      options: ["blue", "green", "purple", "orange"],
     },
     layout: {
-      description: 'Dashboard layout mode',
-      control: { type: 'select' },
-      options: ['grid', 'list', 'compact'],
+      description: "Dashboard layout mode",
+      control: { type: "select" },
+      options: ["grid", "list", "compact"],
     },
   },
 } satisfies Meta<typeof GlassPerformanceDashboard>;
@@ -46,8 +46,8 @@ export const Default: Story = {
   args: {
     refreshInterval: 3000,
     showDetails: true,
-    theme: 'blue',
-    layout: 'grid',
+    theme: "blue",
+    layout: "grid",
   },
   render: (args) => (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4">
@@ -69,16 +69,16 @@ export const LiveMetrics: Story = {
             </h1>
             <GlassButton
               type="button"
-              variant={isLive ? 'primary' : 'ghost'}
+              variant={isLive ? "primary" : "ghost"}
               onClick={() => setIsLive(!isLive)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
                   (() => setIsLive(!isLive))(e);
                 }
               }}
             >
-              {isLive ? '🔴 Live' : '⏸ Paused'}
+              {isLive ? "🔴 Live" : "⏸ Paused"}
             </GlassButton>
           </div>
           <GlassPerformanceDashboard
@@ -92,7 +92,7 @@ export const LiveMetrics: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Real-time performance monitoring with live updates',
+        story: "Real-time performance monitoring with live updates",
       },
     },
   },
@@ -100,7 +100,7 @@ export const LiveMetrics: Story = {
 
 export const CompactView: Story = {
   args: {
-    layout: 'compact',
+    layout: "compact",
     showDetails: false,
   },
   render: (args) => (
@@ -121,7 +121,7 @@ export const CompactView: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Compact layout for limited screen space',
+        story: "Compact layout for limited screen space",
       },
     },
   },
@@ -129,13 +129,13 @@ export const CompactView: Story = {
 
 export const DetailedAnalytics: Story = {
   render: () => {
-    const [selectedMetric, setSelectedMetric] = React.useState<string>('cpu');
+    const [selectedMetric, setSelectedMetric] = React.useState<string>("cpu");
 
     const metrics = [
-      { id: 'cpu', label: 'CPU Usage', color: 'blue' },
-      { id: 'memory', label: 'Memory', color: 'green' },
-      { id: 'network', label: 'Network I/O', color: 'purple' },
-      { id: 'disk', label: 'Disk Usage', color: 'orange' },
+      { id: "cpu", label: "CPU Usage", color: "blue" },
+      { id: "memory", label: "Memory", color: "green" },
+      { id: "network", label: "Network I/O", color: "purple" },
+      { id: "disk", label: "Disk Usage", color: "orange" },
     ];
 
     return (
@@ -154,7 +154,7 @@ export const DetailedAnalytics: Story = {
                   className={`rounded-lg px-4 py-2 transition-all ${
                     selectedMetric === metric.id
                       ? `bg-${metric.color}-500/20 text-${metric.color}-400 border border-${metric.color}-500/50`
-                      : 'bg-white/5 text-white/70 hover:bg-white/10'
+                      : "bg-white/5 text-white/70 hover:bg-white/10"
                   }`}
                 >
                   {metric.label}
@@ -166,7 +166,7 @@ export const DetailedAnalytics: Story = {
           <GlassPerformanceDashboard
             showDetails
             theme={
-              metrics.find((m) => m.id === selectedMetric)?.color || 'blue'
+              metrics.find((m) => m.id === selectedMetric)?.color || "blue"
             }
           />
 
@@ -196,7 +196,7 @@ export const DetailedAnalytics: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Detailed analytics view with metric selection',
+        story: "Detailed analytics view with metric selection",
       },
     },
   },
@@ -205,8 +205,8 @@ export const DetailedAnalytics: Story = {
 export const MultipleChartTypes: Story = {
   render: () => {
     const [chartType, setChartType] = React.useState<
-      'line' | 'bar' | 'area' | 'radar'
-    >('line');
+      "line" | "bar" | "area" | "radar"
+    >("line");
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-900 to-purple-900 p-6">
@@ -216,15 +216,15 @@ export const MultipleChartTypes: Story = {
               Chart Visualization Options
             </h2>
             <div className="flex flex-wrap gap-2">
-              {(['line', 'bar', 'area', 'radar'] as const).map((type) => (
+              {(["line", "bar", "area", "radar"] as const).map((type) => (
                 <GlassButton
                   type="button"
                   key={type}
-                  variant={chartType === type ? 'primary' : 'ghost'}
+                  variant={chartType === type ? "primary" : "ghost"}
                   size="sm"
                   onClick={() => setChartType(type)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
                       (() => setChartType(type))(e);
                     }
@@ -244,7 +244,7 @@ export const MultipleChartTypes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Different chart visualization options for performance data',
+        story: "Different chart visualization options for performance data",
       },
     },
   },
@@ -279,7 +279,7 @@ export const ResponsiveGrid: Story = {
             className="grid gap-4"
             style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
           >
-            {['CPU', 'Memory', 'Network', 'Disk', 'GPU', 'Temperature'].map(
+            {["CPU", "Memory", "Network", "Disk", "GPU", "Temperature"].map(
               (metric) => (
                 <GlassCard key={metric} className="p-6">
                   <h3 className="mb-4 font-semibold text-lg text-white">
@@ -291,7 +291,7 @@ export const ResponsiveGrid: Story = {
                     </span>
                   </div>
                 </GlassCard>
-              )
+              ),
             )}
           </div>
         </div>
@@ -301,7 +301,7 @@ export const ResponsiveGrid: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Responsive grid layout that adapts to different screen sizes',
+        story: "Responsive grid layout that adapts to different screen sizes",
       },
     },
   },
@@ -315,7 +315,7 @@ export const AlertsAndThresholds: Story = {
         metric: string;
         value: number;
         threshold: number;
-        severity: 'warning' | 'critical';
+        severity: "warning" | "critical";
       }>
     >([]);
 
@@ -323,13 +323,13 @@ export const AlertsAndThresholds: Story = {
       const interval = setInterval(() => {
         const newAlert = {
           id: Date.now(),
-          metric: ['CPU', 'Memory', 'Disk', 'Network'][
+          metric: ["CPU", "Memory", "Disk", "Network"][
             Math.floor(Math.random() * 4)
           ],
           value: Math.floor(Math.random() * 30 + 70),
           threshold: 70,
           severity:
-            Math.random() > 0.5 ? ('warning' as const) : ('critical' as const),
+            Math.random() > 0.5 ? ("warning" as const) : ("critical" as const),
         };
 
         if (newAlert.value > newAlert.threshold) {
@@ -358,21 +358,21 @@ export const AlertsAndThresholds: Story = {
                 <div
                   key={alert.id}
                   className={`glass-effect slide-in-from-right animate-in rounded-lg border p-4 ${
-                    alert.severity === 'critical'
-                      ? 'border-red-500/50 bg-red-500/10'
-                      : 'border-yellow-500/50 bg-yellow-500/10'
+                    alert.severity === "critical"
+                      ? "border-red-500/50 bg-red-500/10"
+                      : "border-yellow-500/50 bg-yellow-500/10"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
                       <span
                         className={`font-semibold ${
-                          alert.severity === 'critical'
-                            ? 'text-red-400'
-                            : 'text-yellow-400'
+                          alert.severity === "critical"
+                            ? "text-red-400"
+                            : "text-yellow-400"
                         }`}
                       >
-                        {alert.severity === 'critical' ? '⚠️' : '⚠️'}{' '}
+                        {alert.severity === "critical" ? "⚠️" : "⚠️"}{" "}
                         {alert.metric} Alert
                       </span>
                       <p className="mt-1 text-sm text-white/70">
@@ -383,7 +383,7 @@ export const AlertsAndThresholds: Story = {
                       type="button"
                       onClick={() =>
                         setAlerts((prev) =>
-                          prev.filter((a) => a.id !== alert.id)
+                          prev.filter((a) => a.id !== alert.id),
                         )
                       }
                       className="text-white/50 hover:text-white"
@@ -404,7 +404,7 @@ export const AlertsAndThresholds: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Performance monitoring with alerts and threshold warnings',
+        story: "Performance monitoring with alerts and threshold warnings",
       },
     },
   },
@@ -425,10 +425,10 @@ export const DarkModeOptimized: Story = {
     </div>
   ),
   parameters: {
-    backgrounds: { default: 'dark' },
+    backgrounds: { default: "dark" },
     docs: {
       description: {
-        story: 'Performance dashboard optimized for dark mode viewing',
+        story: "Performance dashboard optimized for dark mode viewing",
       },
     },
   },
@@ -436,7 +436,7 @@ export const DarkModeOptimized: Story = {
 
 export const MobileResponsive: Story = {
   args: {
-    layout: 'compact',
+    layout: "compact",
     showDetails: false,
   },
   render: (args) => (
@@ -451,11 +451,11 @@ export const MobileResponsive: Story = {
   ),
   parameters: {
     viewport: {
-      defaultViewport: 'mobile1',
+      defaultViewport: "mobile1",
     },
     docs: {
       description: {
-        story: 'Mobile-optimized performance dashboard',
+        story: "Mobile-optimized performance dashboard",
       },
     },
   },

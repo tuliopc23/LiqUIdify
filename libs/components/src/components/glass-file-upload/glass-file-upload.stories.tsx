@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   AlertCircle,
   Archive,
@@ -6,15 +6,15 @@ import {
   FileText,
   Image,
   Video,
-} from 'lucide-react';
-import { useState } from 'react';
-import { type FileUploadItem, GlassFileUpload } from './glass-file-upload';
+} from "lucide-react";
+import { useState } from "react";
+import { type FileUploadItem, GlassFileUpload } from "./glass-file-upload";
 
 const meta = {
-  title: 'Components/Forms/GlassFileUpload',
+  title: "Components/Forms/GlassFileUpload",
   component: GlassFileUpload,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -73,158 +73,158 @@ The file upload component follows WAI-ARIA guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Core Props
     onFilesChange: {
-      action: 'files changed',
-      description: 'Callback fired when files are added or removed',
+      action: "files changed",
+      description: "Callback fired when files are added or removed",
       table: {
-        type: { summary: '(files: Array<FileUploadItem>) => void' },
-        category: 'Core',
+        type: { summary: "(files: Array<FileUploadItem>) => void" },
+        category: "Core",
       },
     },
     onUpload: {
-      action: 'upload started',
-      description: 'Callback for handling file uploads',
+      action: "upload started",
+      description: "Callback for handling file uploads",
       table: {
-        type: { summary: '(files: Array<File>) => Promise<void>' },
-        category: 'Core',
+        type: { summary: "(files: Array<File>) => Promise<void>" },
+        category: "Core",
       },
     },
 
     // Configuration
     accept: {
-      control: 'text',
-      description: 'Accepted file types (MIME types)',
+      control: "text",
+      description: "Accepted file types (MIME types)",
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: '*/*' },
-        category: 'Configuration',
+        type: { summary: "string" },
+        defaultValue: { summary: "*/*" },
+        category: "Configuration",
       },
     },
     multiple: {
-      control: 'boolean',
-      description: 'Allow multiple file selection',
+      control: "boolean",
+      description: "Allow multiple file selection",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Configuration',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Configuration",
       },
     },
     maxFiles: {
-      control: { type: 'number', min: 1, max: 20, step: 1 },
-      description: 'Maximum number of files allowed',
+      control: { type: "number", min: 1, max: 20, step: 1 },
+      description: "Maximum number of files allowed",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '5' },
-        category: 'Configuration',
+        type: { summary: "number" },
+        defaultValue: { summary: "5" },
+        category: "Configuration",
       },
     },
     maxFileSize: {
       control: {
-        type: 'number',
+        type: "number",
         min: 1024,
         max: 100 * 1024 * 1024,
         step: 1024,
       },
-      description: 'Maximum file size in bytes',
+      description: "Maximum file size in bytes",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '10MB' },
-        category: 'Configuration',
+        type: { summary: "number" },
+        defaultValue: { summary: "10MB" },
+        category: "Configuration",
       },
     },
     allowedTypes: {
-      control: 'object',
-      description: 'Array of allowed MIME types',
+      control: "object",
+      description: "Array of allowed MIME types",
       table: {
-        type: { summary: 'Array<string>' },
-        category: 'Configuration',
+        type: { summary: "Array<string>" },
+        category: "Configuration",
       },
     },
 
     // Appearance
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'Size of the upload area',
+      control: "select",
+      options: ["sm", "md", "lg"],
+      description: "Size of the upload area",
       table: {
-        type: { summary: 'sm | md | lg' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "sm | md | lg" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
     dropzoneText: {
-      control: 'text',
-      description: 'Text displayed in the dropzone',
+      control: "text",
+      description: "Text displayed in the dropzone",
       table: {
-        type: { summary: 'string' },
+        type: { summary: "string" },
         defaultValue: {
-          summary: 'Drag and drop files here, or click to browse',
+          summary: "Drag and drop files here, or click to browse",
         },
-        category: 'Appearance',
+        category: "Appearance",
       },
     },
     browseText: {
-      control: 'text',
-      description: 'Text for the browse button',
+      control: "text",
+      description: "Text for the browse button",
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'Browse files' },
-        category: 'Appearance',
+        type: { summary: "string" },
+        defaultValue: { summary: "Browse files" },
+        category: "Appearance",
       },
     },
 
     // Features
     showPreview: {
-      control: 'boolean',
-      description: 'Show image previews',
+      control: "boolean",
+      description: "Show image previews",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Features',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Features",
       },
     },
     showProgress: {
-      control: 'boolean',
-      description: 'Show upload progress bars',
+      control: "boolean",
+      description: "Show upload progress bars",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Features',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Features",
       },
     },
 
     // State
     disabled: {
-      control: 'boolean',
-      description: 'Whether the upload is disabled',
+      control: "boolean",
+      description: "Whether the upload is disabled",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'State',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "State",
       },
     },
 
     // HTML Props
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
   },
   args: {
-    accept: '*/*',
+    accept: "*/*",
     multiple: true,
     maxFiles: 5,
     maxFileSize: 10 * 1024 * 1024,
-    size: 'md',
-    dropzoneText: 'Drag and drop files here, or click to browse',
-    browseText: 'Browse files',
+    size: "md",
+    dropzoneText: "Drag and drop files here, or click to browse",
+    browseText: "Browse files",
     showPreview: true,
     showProgress: true,
     disabled: false,
@@ -253,7 +253,7 @@ export const BasicUsage: Story = {
           Simple File Upload
         </h3>
         <GlassFileUpload
-          onFilesChange={(files) => console.log('Files:', files)}
+          onFilesChange={(files) => console.log("Files:", files)}
         />
       </div>
 
@@ -262,7 +262,7 @@ export const BasicUsage: Story = {
           Single File Upload
         </h3>
         <GlassFileUpload
-          onFilesChange={(files) => console.log('Files:', files)}
+          onFilesChange={(files) => console.log("Files:", files)}
           multiple={false}
           maxFiles={1}
           dropzoneText="Drop a single file here"
@@ -275,7 +275,7 @@ export const BasicUsage: Story = {
           With File Restrictions
         </h3>
         <GlassFileUpload
-          onFilesChange={(files) => console.log('Files:', files)}
+          onFilesChange={(files) => console.log("Files:", files)}
           accept="image/*"
           maxFiles={3}
           maxFileSize={5 * 1024 * 1024} // 5MB
@@ -286,11 +286,11 @@ export const BasicUsage: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -307,7 +307,7 @@ export const Sizes: Story = {
           size="sm"
           dropzoneText="Drop files here"
           browseText="Browse"
-          onFilesChange={(files) => console.log('Small upload:', files)}
+          onFilesChange={(files) => console.log("Small upload:", files)}
         />
       </div>
 
@@ -315,7 +315,7 @@ export const Sizes: Story = {
         <h3 className="font-medium text-sm text-white/80">Medium Size</h3>
         <GlassFileUpload
           size="md"
-          onFilesChange={(files) => console.log('Medium upload:', files)}
+          onFilesChange={(files) => console.log("Medium upload:", files)}
         />
       </div>
 
@@ -323,18 +323,18 @@ export const Sizes: Story = {
         <h3 className="font-medium text-sm text-white/80">Large Size</h3>
         <GlassFileUpload
           size="lg"
-          onFilesChange={(files) => console.log('Large upload:', files)}
+          onFilesChange={(files) => console.log("Large upload:", files)}
         />
       </div>
     </div>
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -360,10 +360,10 @@ export const FileTypeExamples: Story = {
           <GlassFileUpload
             accept="image/*"
             allowedTypes={[
-              'image/jpeg',
-              'image/png',
-              'image/gif',
-              'image/webp',
+              "image/jpeg",
+              "image/png",
+              "image/gif",
+              "image/webp",
             ]}
             maxFiles={10}
             maxFileSize={5 * 1024 * 1024}
@@ -388,9 +388,9 @@ export const FileTypeExamples: Story = {
           <GlassFileUpload
             accept=".pdf,.doc,.docx,.txt"
             allowedTypes={[
-              'application/pdf',
-              'application/msword',
-              'text/plain',
+              "application/pdf",
+              "application/msword",
+              "text/plain",
             ]}
             maxFiles={5}
             maxFileSize={20 * 1024 * 1024}
@@ -414,7 +414,7 @@ export const FileTypeExamples: Story = {
           </div>
           <GlassFileUpload
             accept="video/*,audio/*"
-            allowedTypes={['video/mp4', 'video/webm', 'audio/mp3', 'audio/wav']}
+            allowedTypes={["video/mp4", "video/webm", "audio/mp3", "audio/wav"]}
             maxFiles={3}
             maxFileSize={100 * 1024 * 1024} // 100MB
             dropzoneText="Drop media files here (Video, Audio)"
@@ -426,11 +426,11 @@ export const FileTypeExamples: Story = {
   ),
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -452,8 +452,8 @@ export const UploadStates: Story = {
           current.map((file) => ({
             ...file,
             progress: i,
-            status: i === 100 ? 'success' : 'uploading',
-          }))
+            status: i === 100 ? "success" : "uploading",
+          })),
         );
       }
     };
@@ -477,7 +477,7 @@ export const UploadStates: Story = {
             Error State Example
           </h3>
           <GlassFileUpload
-            onFilesChange={(files) => console.log('Files with errors:', files)}
+            onFilesChange={(files) => console.log("Files with errors:", files)}
             maxFileSize={1024} // Very small limit to trigger errors
             dropzoneText="Drop files here (1KB limit to demo errors)"
           />
@@ -492,11 +492,11 @@ export const UploadStates: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -508,10 +508,10 @@ export const RealWorldExamples: Story = {
   render: () => {
     const [profileFiles, setProfileFiles] = useState<Array<FileUploadItem>>([]);
     const [portfolioFiles, setPortfolioFiles] = useState<Array<FileUploadItem>>(
-      []
+      [],
     );
     const [_documentFiles, setDocumentFiles] = useState<Array<FileUploadItem>>(
-      []
+      [],
     );
 
     return (
@@ -616,7 +616,7 @@ export const RealWorldExamples: Story = {
             </div>
             <GlassFileUpload
               accept=".pdf"
-              allowedTypes={['application/pdf']}
+              allowedTypes={["application/pdf"]}
               maxFiles={5}
               maxFileSize={25 * 1024 * 1024}
               dropzoneText="Drop PDF documents here"
@@ -645,11 +645,11 @@ export const RealWorldExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -729,11 +729,11 @@ export const AccessibilityShowcase: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },

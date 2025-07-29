@@ -1,81 +1,81 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { Check, ChevronDown, Search, X } from 'lucide-react';
-import type React from 'react';
-import { forwardRef, useEffect, useId, useRef, useState } from 'react';
-import { cn, focusRing } from '@/core/utils/classname';
+import { AnimatePresence, motion } from "framer-motion";
+import { Check, ChevronDown, Search, X } from "lucide-react";
+import type React from "react";
+import { forwardRef, useEffect, useId, useRef, useState } from "react";
+import { cn, focusRing } from "@/core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
-} from '../../lib/variant-system';
+} from "../../lib/variant-system";
 
 const comboboxVariants = cva({
-  base: 'relative w-full',
+  base: "relative w-full",
   variants: {
     size: {
-      sm: 'text-sm',
-      md: 'text-base',
-      lg: 'text-lg',
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: "md",
   },
 });
 
 const triggerVariants = cva({
   base: cn(
-    'flex w-full items-center justify-between px-4 py-3 text-left',
-    'rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm',
-    'hover:bg-white/10 focus:bg-white/10 focus:outline-none',
-    'transition-all duration-200',
-    'disabled:cursor-not-allowed disabled:opacity-50'
+    "flex w-full items-center justify-between px-4 py-3 text-left",
+    "rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm",
+    "hover:bg-white/10 focus:bg-white/10 focus:outline-none",
+    "transition-all duration-200",
+    "disabled:cursor-not-allowed disabled:opacity-50",
   ),
   variants: {
     isOpen: {
-      true: 'border-blue-400/50 bg-white/10',
-      false: 'border-white/10',
+      true: "border-blue-400/50 bg-white/10",
+      false: "border-white/10",
     },
     size: {
-      sm: 'px-3 py-2 text-sm',
-      md: 'px-4 py-3 text-base',
-      lg: 'px-5 py-4 text-lg',
+      sm: "px-3 py-2 text-sm",
+      md: "px-4 py-3 text-base",
+      lg: "px-5 py-4 text-lg",
     },
   },
   defaultVariants: {
-    isOpen: 'false',
-    size: 'md',
+    isOpen: "false",
+    size: "md",
   },
 });
 
 const listboxVariants = cva({
   base: cn(
-    'absolute z-50 mt-1 max-h-60 w-full overflow-auto',
-    'rounded-xl border border-white/10 bg-black/90 backdrop-blur-xl',
-    'shadow-black/20 shadow-xl'
+    "absolute z-50 mt-1 max-h-60 w-full overflow-auto",
+    "rounded-xl border border-white/10 bg-black/90 backdrop-blur-xl",
+    "shadow-black/20 shadow-xl",
   ),
   variants: {},
 });
 
 const optionVariants = cva({
   base: cn(
-    'flex cursor-pointer items-center justify-between px-4 py-3 text-left',
-    'hover:bg-white/10 focus:bg-white/10 focus:outline-none',
-    'transition-all duration-200',
-    'text-white/90'
+    "flex cursor-pointer items-center justify-between px-4 py-3 text-left",
+    "hover:bg-white/10 focus:bg-white/10 focus:outline-none",
+    "transition-all duration-200",
+    "text-white/90",
   ),
   variants: {
     selected: {
-      true: 'bg-blue-500/20 text-blue-400',
-      false: 'text-white/90',
+      true: "bg-blue-500/20 text-blue-400",
+      false: "text-white/90",
     },
     highlighted: {
-      true: 'bg-white/10',
-      false: '',
+      true: "bg-white/10",
+      false: "",
     },
   },
   defaultVariants: {
-    selected: 'false',
-    highlighted: 'false',
+    selected: "false",
+    highlighted: "false",
   },
 });
 
@@ -89,7 +89,7 @@ export interface ComboboxOption {
 export interface GlassComboboxProps
   extends Omit<
       Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
-      'onChange'
+      "onChange"
     >,
     VariantProps<typeof comboboxVariants> {
   options: Array<ComboboxOption>;
@@ -123,21 +123,21 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
       defaultValue,
       onChange,
       onSearch,
-      placeholder = 'Select option...',
+      placeholder = "Select option...",
       disabled = false,
       clearable = false,
       searchable = true,
       loading = false,
-      emptyMessage = 'No options found',
+      emptyMessage = "No options found",
       maxOptions = 100,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState("");
     const [selectedValue, setSelectedValue] = useState(
-      value || defaultValue || ''
+      value || defaultValue || "",
     );
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
@@ -164,7 +164,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
     // Find selected option
 
     const selectedOption = options.find(
-      (option) => option.value === selectedValue
+      (option) => option.value === selectedValue,
     );
 
     // Handle option selection
@@ -177,17 +177,17 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
       onChange?.(option.value);
       setIsOpen(false);
-      setSearchQuery('');
+      setSearchQuery("");
       setHighlightedIndex(-1);
     };
 
     // Handle clear
     const handleClear = (e: React.MouseEvent) => {
       e.stopPropagation();
-      setSelectedValue('');
+      setSelectedValue("");
 
-      onChange?.('');
-      setSearchQuery('');
+      onChange?.("");
+      setSearchQuery("");
     };
 
     // Handle keyboard navigation
@@ -197,27 +197,27 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
       }
 
       switch (e.key) {
-        case 'ArrowDown': {
+        case "ArrowDown": {
           e.preventDefault();
           if (isOpen) {
             setHighlightedIndex((previous) =>
-              previous < filteredOptions.length - 1 ? previous + 1 : previous
+              previous < filteredOptions.length - 1 ? previous + 1 : previous,
             );
           } else {
             setIsOpen(true);
           }
           break;
         }
-        case 'ArrowUp': {
+        case "ArrowUp": {
           e.preventDefault();
           if (isOpen) {
             setHighlightedIndex((previous) =>
-              previous > 0 ? previous - 1 : previous
+              previous > 0 ? previous - 1 : previous,
             );
           }
           break;
         }
-        case 'Enter': {
+        case "Enter": {
           e.preventDefault();
           if (isOpen && highlightedIndex >= 0) {
             const option = filteredOptions[highlightedIndex];
@@ -229,14 +229,14 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
           }
           break;
         }
-        case 'Escape': {
+        case "Escape": {
           setIsOpen(false);
-          setSearchQuery('');
+          setSearchQuery("");
           setHighlightedIndex(-1);
           triggerRef.current?.focus();
           break;
         }
-        case 'Tab': {
+        case "Tab": {
           setIsOpen(false);
           break;
         }
@@ -262,17 +262,17 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
           !listboxRef.current.contains(event.target as Node)
         ) {
           setIsOpen(false);
-          setSearchQuery('');
+          setSearchQuery("");
           setHighlightedIndex(-1);
         }
       };
 
-      if (typeof document !== 'undefined') {
-        document.addEventListener('mousedown', handleClickOutside);
+      if (typeof document !== "undefined") {
+        document.addEventListener("mousedown", handleClickOutside);
       }
       return () => {
-        if (typeof document !== 'undefined') {
-          document.removeEventListener('mousedown', handleClickOutside);
+        if (typeof document !== "undefined") {
+          document.removeEventListener("mousedown", handleClickOutside);
         }
       };
     }, []);
@@ -281,8 +281,8 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
     useEffect(() => {
       if (highlightedIndex >= 0 && optionsRef.current[highlightedIndex]) {
         optionsRef.current[highlightedIndex].scrollIntoView({
-          block: 'nearest',
-          behavior: 'smooth',
+          block: "nearest",
+          behavior: "smooth",
         });
       }
     }, [highlightedIndex]);
@@ -298,9 +298,9 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
           type="button"
           role="combobox"
           className={cn(
-            triggerVariants({ isOpen: isOpen ? 'true' : 'false', size }),
+            triggerVariants({ isOpen: isOpen ? "true" : "false", size }),
             focusRing,
-            disabled && 'cursor-not-allowed'
+            disabled && "cursor-not-allowed",
           )}
           onClick={() => !disabled && setIsOpen(!isOpen)}
           onKeyDown={handleKeyDown}
@@ -312,7 +312,7 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
             {selectedOption?.icon}
 
             <span
-              className={cn('truncate', !selectedOption && 'text-white/60')}
+              className={cn("truncate", !selectedOption && "text-white/60")}
             >
               {selectedOption?.label || placeholder}
             </span>
@@ -333,8 +333,8 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
             <ChevronDown
               className={cn(
-                'h-4 w-4 text-white/60 transition-transform duration-200',
-                isOpen && 'rotate-180'
+                "h-4 w-4 text-white/60 transition-transform duration-200",
+                isOpen && "rotate-180",
               )}
             />
           </div>
@@ -397,15 +397,15 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
                         className={cn(
                           optionVariants({
                             selected:
-                              option.value === selectedValue ? 'true' : 'false',
+                              option.value === selectedValue ? "true" : "false",
                             highlighted:
-                              index === highlightedIndex ? 'true' : 'false',
+                              index === highlightedIndex ? "true" : "false",
                           }),
-                          option.disabled && 'cursor-not-allowed opacity-50'
+                          option.disabled && "cursor-not-allowed opacity-50",
                         )}
                         onClick={() => handleSelect(option)}
                         onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
+                          if (e.key === "Enter" || e.key === " ") {
                             e.preventDefault();
                             handleSelect(option);
                           }
@@ -431,9 +431,9 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
         </AnimatePresence>
       </div>
     );
-  }
+  },
 );
 
-GlassCombobox.displayName = 'GlassCombobox';
+GlassCombobox.displayName = "GlassCombobox";
 
 export { GlassCombobox };

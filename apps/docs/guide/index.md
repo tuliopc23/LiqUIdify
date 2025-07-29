@@ -13,24 +13,28 @@ LiqUIdify combines three core concepts:
 ## Features
 
 ### 🎨 Beautiful Design
+
 - Stunning glassmorphism effects
 - Customizable themes and design tokens
 - Dark mode support out of the box
 - Consistent design language
 
 ### ⚡ Performance First
+
 - Tree-shakeable architecture
 - Lazy loading support
 - Optimized bundle sizes
 - CSS-in-JS with zero runtime
 
 ### 🛠️ Developer Experience
+
 - Full TypeScript support
 - Comprehensive documentation
 - Storybook playground
 - Easy integration with existing projects
 
 ### ♿ Accessibility
+
 - WCAG 2.1 AA compliant
 - Keyboard navigation
 - Screen reader support

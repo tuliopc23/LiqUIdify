@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import { GlassPagination } from './glass-pagination';
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { GlassPagination } from "./glass-pagination";
 
 const meta = {
-  title: 'Components/Navigation/GlassPagination',
+  title: "Components/Navigation/GlassPagination",
   component: GlassPagination,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component: `
@@ -62,129 +62,129 @@ The pagination component follows WAI-ARIA guidelines:
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // Core Props
     currentPage: {
-      control: { type: 'number', min: 1, max: 100, step: 1 },
-      description: 'Currently active page number',
+      control: { type: "number", min: 1, max: 100, step: 1 },
+      description: "Currently active page number",
       table: {
-        type: { summary: 'number' },
-        category: 'Core',
+        type: { summary: "number" },
+        category: "Core",
       },
     },
     totalPages: {
-      control: { type: 'number', min: 1, max: 100, step: 1 },
-      description: 'Total number of pages',
+      control: { type: "number", min: 1, max: 100, step: 1 },
+      description: "Total number of pages",
       table: {
-        type: { summary: 'number' },
-        category: 'Core',
+        type: { summary: "number" },
+        category: "Core",
       },
     },
     onPageChange: {
-      action: 'page changed',
-      description: 'Callback fired when page changes',
+      action: "page changed",
+      description: "Callback fired when page changes",
       table: {
-        type: { summary: '(page: number) => void' },
-        category: 'Core',
+        type: { summary: "(page: number) => void" },
+        category: "Core",
       },
     },
 
     // Appearance
     variant: {
-      control: 'select',
-      options: ['default', 'solid', 'ghost'],
-      description: 'Visual style variant of the pagination',
+      control: "select",
+      options: ["default", "solid", "ghost"],
+      description: "Visual style variant of the pagination",
       table: {
-        type: { summary: 'default | solid | ghost' },
-        defaultValue: { summary: 'default' },
-        category: 'Appearance',
+        type: { summary: "default | solid | ghost" },
+        defaultValue: { summary: "default" },
+        category: "Appearance",
       },
     },
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg'],
-      description: 'Size of the pagination component',
+      control: "select",
+      options: ["sm", "md", "lg"],
+      description: "Size of the pagination component",
       table: {
-        type: { summary: 'sm | md | lg' },
-        defaultValue: { summary: 'md' },
-        category: 'Appearance',
+        type: { summary: "sm | md | lg" },
+        defaultValue: { summary: "md" },
+        category: "Appearance",
       },
     },
 
     // Configuration
     showFirstLast: {
-      control: 'boolean',
-      description: 'Show first/last page buttons for large page counts',
+      control: "boolean",
+      description: "Show first/last page buttons for large page counts",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Configuration',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Configuration",
       },
     },
     showPrevNext: {
-      control: 'boolean',
-      description: 'Show previous/next navigation buttons',
+      control: "boolean",
+      description: "Show previous/next navigation buttons",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Configuration',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Configuration",
       },
     },
     showEllipsis: {
-      control: 'boolean',
-      description: 'Show ellipsis for page number gaps',
+      control: "boolean",
+      description: "Show ellipsis for page number gaps",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'true' },
-        category: 'Configuration',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "true" },
+        category: "Configuration",
       },
     },
     siblingCount: {
-      control: { type: 'number', min: 0, max: 5, step: 1 },
-      description: 'Number of sibling pages around current page',
+      control: { type: "number", min: 0, max: 5, step: 1 },
+      description: "Number of sibling pages around current page",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '1' },
-        category: 'Configuration',
+        type: { summary: "number" },
+        defaultValue: { summary: "1" },
+        category: "Configuration",
       },
     },
     boundaryCount: {
-      control: { type: 'number', min: 1, max: 3, step: 1 },
-      description: 'Number of pages at start and end',
+      control: { type: "number", min: 1, max: 3, step: 1 },
+      description: "Number of pages at start and end",
       table: {
-        type: { summary: 'number' },
-        defaultValue: { summary: '1' },
-        category: 'Configuration',
+        type: { summary: "number" },
+        defaultValue: { summary: "1" },
+        category: "Configuration",
       },
     },
 
     // State
     disabled: {
-      control: 'boolean',
-      description: 'Whether the pagination is disabled',
+      control: "boolean",
+      description: "Whether the pagination is disabled",
       table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'State',
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+        category: "State",
       },
     },
 
     // HTML Props
     className: {
-      control: 'text',
-      description: 'Additional CSS classes',
+      control: "text",
+      description: "Additional CSS classes",
       table: {
-        type: { summary: 'string' },
-        category: 'HTML Props',
+        type: { summary: "string" },
+        category: "HTML Props",
       },
     },
   },
   args: {
     currentPage: 1,
     totalPages: 10,
-    variant: 'default',
-    size: 'md',
+    variant: "default",
+    size: "md",
     showFirstLast: true,
     showPrevNext: true,
     showEllipsis: true,
@@ -257,11 +257,11 @@ export const Variants: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -311,11 +311,11 @@ export const Sizes: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -373,11 +373,11 @@ export const States: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -436,11 +436,11 @@ export const ConfigurationExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -575,11 +575,11 @@ export const RealWorldExamples: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -634,11 +634,11 @@ export const AccessibilityShowcase: Story = {
   },
   parameters: {
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },

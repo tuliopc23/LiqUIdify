@@ -21,7 +21,7 @@
 }
 
 /* Dark Theme */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --theme-bg: #0f172a;
   --theme-fg: #f8fafc;
   --theme-muted: #94a3b8;
@@ -36,7 +36,7 @@
 
 /* Auto Theme (System Preference) */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
+  :root:not([data-theme="light"]) {
     --theme-bg: #0f172a;
     --theme-fg: #f8fafc;
     --theme-muted: #94a3b8;
@@ -53,7 +53,7 @@
 /* Theme Variations */
 
 /* Ocean Theme */
-[data-theme='ocean'] {
+[data-theme="ocean"] {
   --theme-bg: #001e3c;
   --theme-fg: #e3f2fd;
   --theme-muted: #90caf9;
@@ -67,7 +67,7 @@
 }
 
 /* Forest Theme */
-[data-theme='forest'] {
+[data-theme="forest"] {
   --theme-bg: #0a2e0a;
   --theme-fg: #e8f5e9;
   --theme-muted: #81c784;
@@ -81,7 +81,7 @@
 }
 
 /* Sunset Theme */
-[data-theme='sunset'] {
+[data-theme="sunset"] {
   --theme-bg: #3c1810;
   --theme-fg: #fff3e0;
   --theme-muted: #ffab91;
@@ -97,7 +97,7 @@
 /* Theme-specific Glass Variations */
 
 /* Ocean Glass */
-[data-theme='ocean'] .glass-effect {
+[data-theme="ocean"] .glass-effect {
   background: linear-gradient(
     135deg,
     rgba(33, 150, 243, var(--glass-theme-intensity)) 0%,
@@ -106,7 +106,7 @@
 }
 
 /* Forest Glass */
-[data-theme='forest'] .glass-effect {
+[data-theme="forest"] .glass-effect {
   background: linear-gradient(
     135deg,
     rgba(76, 175, 80, var(--glass-theme-intensity)) 0%,
@@ -115,7 +115,7 @@
 }
 
 /* Sunset Glass */
-[data-theme='sunset'] .glass-effect {
+[data-theme="sunset"] .glass-effect {
   background: linear-gradient(
     135deg,
     rgba(255, 87, 34, var(--glass-theme-intensity)) 0%,

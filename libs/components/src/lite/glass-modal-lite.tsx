@@ -1,10 +1,10 @@
-import { X } from 'lucide-react';
-import type React from 'react';
-import { useEffect, useRef } from 'react';
+import { X } from "lucide-react";
+import type React from "react";
+import { useEffect, useRef } from "react";
 
-import { GlassPortal } from '@/components/glass-portal';
+import { GlassPortal } from "@/components/glass-portal";
 
-import { cn } from '@/core/utils/classname';
+import { cn } from "@/core/utils/classname";
 
 export interface GlassModalLiteProps {
   isOpen: boolean;
@@ -12,7 +12,7 @@ export interface GlassModalLiteProps {
   title?: string;
   children: React.ReactNode;
   className?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 /**
@@ -26,26 +26,26 @@ export function GlassModalLite({
   title,
   children,
   className,
-  size = 'md',
+  size = "md",
 }: GlassModalLiteProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         onClose();
       }
     };
 
-    if (isOpen && typeof document !== 'undefined') {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+    if (isOpen && typeof document !== "undefined") {
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      if (typeof document !== 'undefined') {
-        document.removeEventListener('keydown', handleEscape);
-        document.body.style.overflow = '';
+      if (typeof document !== "undefined") {
+        document.removeEventListener("keydown", handleEscape);
+        document.body.style.overflow = "";
       }
     };
   }, [isOpen, onClose]);
@@ -55,10 +55,10 @@ export function GlassModalLite({
   }
 
   const sizeClasses = {
-    sm: 'max-w-sm',
-    md: 'max-w-md',
-    lg: 'max-w-lg',
-    xl: 'max-w-xl',
+    sm: "max-w-sm",
+    md: "max-w-md",
+    lg: "max-w-lg",
+    xl: "max-w-xl",
   };
 
   return (
@@ -66,16 +66,16 @@ export function GlassModalLite({
       <button
         type="button"
         className={cn(
-          'glass-modal-lite-backdrop',
-          'fixed inset-0 z-50',
-          'flex items-center justify-center p-4',
-          'bg-black/50 backdrop-blur-sm',
-          'transition-opacity duration-200',
-          isOpen ? 'opacity-100' : 'opacity-0'
+          "glass-modal-lite-backdrop",
+          "fixed inset-0 z-50",
+          "flex items-center justify-center p-4",
+          "bg-black/50 backdrop-blur-sm",
+          "transition-opacity duration-200",
+          isOpen ? "opacity-100" : "opacity-0",
         )}
         onClick={onClose}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             onClose();
           }
@@ -85,20 +85,20 @@ export function GlassModalLite({
         <div
           ref={modalRef}
           className={cn(
-            'glass-modal-lite',
-            'glass-effect rounded-2xl p-6',
-            'w-full',
-            'transition-transform duration-200',
-            'transform',
-            isOpen ? 'scale-100' : 'scale-95',
+            "glass-modal-lite",
+            "glass-effect rounded-2xl p-6",
+            "w-full",
+            "transition-transform duration-200",
+            "transform",
+            isOpen ? "scale-100" : "scale-95",
             sizeClasses[size],
-            className
+            className,
           )}
           onClick={(e) => e.stopPropagation()}
           onKeyDown={(e) => e.stopPropagation()}
           role="dialog"
           aria-modal="true"
-          aria-labelledby={title ? 'modal-title' : undefined}
+          aria-labelledby={title ? "modal-title" : undefined}
         >
           {title && (
             <div className="mb-4 flex items-center justify-between">

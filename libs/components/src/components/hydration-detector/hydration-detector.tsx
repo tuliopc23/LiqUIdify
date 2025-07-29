@@ -3,13 +3,13 @@
  * Detects and handles hydration mismatches with automatic recovery
  */
 
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from "react";
 
 import {
   HydrationManager,
   type HydrationMismatch,
-} from '../../utils/hydration-utils';
-import { isBrowser } from '../../utils/ssr-utils';
+} from "../../utils/hydration-utils";
+import { isBrowser } from "../../utils/ssr-utils";
 
 export interface HydrationDetectorProps {
   children: ReactNode;
@@ -53,12 +53,12 @@ export function HydrationDetector({
 
     // Set up error handling
     const handleError = (event: ErrorEvent) => {
-      if (event.message.includes('hydration')) {
+      if (event.message.includes("hydration")) {
         const mismatch: HydrationMismatch = {
-          type: 'content',
-          component: 'HydrationDetector',
-          serverValue: 'server-rendered',
-          clientValue: 'client-rendered',
+          type: "content",
+          component: "HydrationDetector",
+          serverValue: "server-rendered",
+          clientValue: "client-rendered",
           path: window.location.pathname,
           timestamp: Date.now(),
         };
@@ -102,7 +102,7 @@ export function HydrationDetector({
     const removeRecoveryCallback = manager.addRecoveryCallback(handleRecovery);
 
     // Add global error listener
-    window.addEventListener('error', handleError);
+    window.addEventListener("error", handleError);
 
     // Mark as ready after initial setup
     setTimeout(() => {
@@ -112,7 +112,7 @@ export function HydrationDetector({
     return () => {
       unsubscribe();
       removeRecoveryCallback();
-      window.removeEventListener('error', handleError);
+      window.removeEventListener("error", handleError);
     };
   }, [onMismatch, onRecovery, debug]);
 
@@ -142,7 +142,7 @@ export function HydrationDetector({
   return (
     <div
       data-hydration-state={
-        hydrationState.isHydrating ? 'hydrating' : 'hydrated'
+        hydrationState.isHydrating ? "hydrating" : "hydrated"
       }
       data-mismatch-count={hydrationState.mismatches.length}
       data-retry-count={hydrationState.retryCount}
@@ -169,7 +169,7 @@ export function HydrationBoundary({
  */
 export function HydrationSafe({
   children,
-  componentName = 'Unknown',
+  componentName = "Unknown",
   ...props
 }: HydrationDetectorProps & { componentName?: string }) {
   return (
@@ -222,13 +222,13 @@ export function HydrationMetrics({ debug = false }: { debug?: boolean }) {
   return (
     <div
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         right: 0,
-        background: 'rgba(0,0,0,0.8)',
-        color: 'white',
-        padding: '10px',
-        fontSize: '12px',
+        background: "rgba(0,0,0,0.8)",
+        color: "white",
+        padding: "10px",
+        fontSize: "12px",
         zIndex: 9999,
       }}
     >
@@ -261,8 +261,8 @@ export function HydrationRecovery({
       setShowRecovery(true);
     };
 
-    window.addEventListener('error', handleError);
-    return () => window.removeEventListener('error', handleError);
+    window.addEventListener("error", handleError);
+    return () => window.removeEventListener("error", handleError);
   }, []);
 
   if (!showRecovery) {
@@ -273,10 +273,10 @@ export function HydrationRecovery({
     <div>
       <div
         style={{
-          background: 'red',
-          color: 'white',
-          padding: '10px',
-          margin: '10px',
+          background: "red",
+          color: "white",
+          padding: "10px",
+          margin: "10px",
         }}
       >
         <p>Hydration error detected</p>

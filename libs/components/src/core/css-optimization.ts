@@ -3,8 +3,8 @@
  * Implements modular CSS chunks, critical CSS extraction, and PostCSS optimizations
  */
 
-import { promises as fs } from 'node:fs';
-import path from 'node:path';
+import { promises as fs } from "node:fs";
+import path from "node:path";
 
 // CSS Bundle Configuration
 export interface CSSBundleConfig {
@@ -34,28 +34,28 @@ export interface CSSBundleConfig {
 export const DEFAULT_CSS_CONFIG: CSSBundleConfig = {
   core: {
     files: [
-      'src/styles/glass-core.css',
-      'src/styles/glass-critical.css',
-      'src/styles/graceful-degradation.css',
+      "src/styles/glass-core.css",
+      "src/styles/glass-critical.css",
+      "src/styles/graceful-degradation.css",
     ],
     maxSize: 15, // 15KB max for core
     critical: true,
   },
   animations: {
     files: [
-      'src/styles/glass-animations.css',
-      'src/styles/apple-liquid-glass.css',
+      "src/styles/glass-animations.css",
+      "src/styles/apple-liquid-glass.css",
     ],
     maxSize: 10, // 10KB max for animations
     lazyLoad: true,
   },
   utilities: {
-    files: ['src/styles/glass-utilities.css', 'src/styles/tailwind.css'],
+    files: ["src/styles/glass-utilities.css", "src/styles/tailwind.css"],
     maxSize: 8, // 8KB max for utilities
     treeshake: true,
   },
   themes: {
-    files: ['src/styles/glass-themes.css'],
+    files: ["src/styles/glass-themes.css"],
     maxSize: 5, // 5KB max for themes
     dynamic: true,
   },
@@ -87,7 +87,7 @@ export class CSSBundleAnalyzer {
   async analyzeBundles(): Promise<{
     bundles: Record<
       string,
-      { size: number; maxSize: number; status: 'ok' | 'warning' | 'error' }
+      { size: number; maxSize: number; status: "ok" | "warning" | "error" }
     >;
     totalSize: number;
     recommendations: Array<string>;
@@ -95,7 +95,7 @@ export class CSSBundleAnalyzer {
     const results: {
       bundles: Record<
         string,
-        { size: number; maxSize: number; status: 'ok' | 'warning' | 'error' }
+        { size: number; maxSize: number; status: "ok" | "warning" | "error" }
       >;
       totalSize: number;
       recommendations: Array<string>;
@@ -120,10 +120,10 @@ export class CSSBundleAnalyzer {
 
       const status =
         sizeKB <= bundleConfig.maxSize
-          ? 'ok'
+          ? "ok"
           : sizeKB <= bundleConfig.maxSize * 1.2
-            ? 'warning'
-            : 'error';
+            ? "warning"
+            : "error";
 
       results.bundles[bundleName] = {
         size: sizeKB,
@@ -134,13 +134,13 @@ export class CSSBundleAnalyzer {
       results.totalSize += sizeKB;
 
       // Generate recommendations
-      if (status === 'warning') {
+      if (status === "warning") {
         results.recommendations.push(
-          `${bundleName} bundle is approaching size limit (${sizeKB}KB/${bundleConfig.maxSize}KB)`
+          `${bundleName} bundle is approaching size limit (${sizeKB}KB/${bundleConfig.maxSize}KB)`,
         );
-      } else if (status === 'error') {
+      } else if (status === "error") {
         results.recommendations.push(
-          `${bundleName} bundle exceeds size limit (${sizeKB}KB/${bundleConfig.maxSize}KB) - optimization required`
+          `${bundleName} bundle exceeds size limit (${sizeKB}KB/${bundleConfig.maxSize}KB) - optimization required`,
         );
       }
     }
@@ -148,7 +148,7 @@ export class CSSBundleAnalyzer {
     // Overall bundle size check
     if (results.totalSize > 30) {
       results.recommendations.push(
-        `Total bundle size (${results.totalSize}KB) exceeds 30KB target - critical optimization needed`
+        `Total bundle size (${results.totalSize}KB) exceeds 30KB target - critical optimization needed`,
       );
     }
 
@@ -179,13 +179,13 @@ export class CSSBundleAnalyzer {
       }
     }
 
-    const critical = criticalRules.join('\n');
-    const remaining = remainingRules.join('\n');
+    const critical = criticalRules.join("\n");
+    const remaining = remainingRules.join("\n");
 
     const criticalSize = new Blob([critical]).size;
     const remainingSize = new Blob([remaining]).size;
     const reduction = Math.round(
-      (remainingSize / (criticalSize + remainingSize)) * 100
+      (remainingSize / (criticalSize + remainingSize)) * 100,
     );
 
     return {
@@ -209,7 +209,7 @@ export class CSSBundleAnalyzer {
       minify: boolean;
       autoprefixer: boolean;
       purgeSelectors?: Array<string>;
-    }
+    },
   ): Promise<{
     optimized: string;
     stats: { originalSize: number; optimizedSize: number; reduction: number };
@@ -234,7 +234,7 @@ export class CSSBundleAnalyzer {
 
     const optimizedSize = new Blob([optimized]).size;
     const reduction = Math.round(
-      ((originalSize - optimizedSize) / originalSize) * 100
+      ((originalSize - optimizedSize) / originalSize) * 100,
     );
 
     return {
@@ -254,19 +254,19 @@ export class CSSBundleAnalyzer {
     timestamp: Date;
     bundles: Record<
       string,
-      { size: number; maxSize: number; status: 'ok' | 'warning' | 'error' }
+      { size: number; maxSize: number; status: "ok" | "warning" | "error" }
     >;
     totalSize: number;
     recommendations: Array<string>;
-    status: 'pass' | 'warning' | 'fail';
+    status: "pass" | "warning" | "fail";
   }> {
     const analysis = await this.analyzeBundles();
 
-    let status: 'pass' | 'warning' | 'fail' = 'pass';
+    let status: "pass" | "warning" | "fail" = "pass";
     if (analysis.totalSize > 30) {
-      status = 'fail';
+      status = "fail";
     } else if (analysis.recommendations.length > 0) {
-      status = 'warning';
+      status = "warning";
     }
 
     return {
@@ -280,7 +280,7 @@ export class CSSBundleAnalyzer {
   private parseCSSRules(css: string): Array<string> {
     // Simple CSS rule parser - in production, use a proper CSS parser
     return css
-      .split('}')
+      .split("}")
       .filter((rule) => rule.trim())
       .map((rule) => `${rule.trim()}}`);
   }
@@ -303,14 +303,14 @@ export class CSSBundleAnalyzer {
     // Check if selector matches elements in HTML
     // For glass components, prioritize core glass effects
     const criticalSelectors = [
-      '.liquid-glass',
-      '.glass-button',
-      '.glass-card',
-      '.glass-modal',
-      '.glass-input',
-      'body',
-      'html',
-      '*',
+      ".liquid-glass",
+      ".glass-button",
+      ".glass-card",
+      ".glass-modal",
+      ".glass-input",
+      "body",
+      "html",
+      "*",
     ];
 
     return criticalSelectors.some((critical) => selector?.includes(critical));
@@ -331,44 +331,44 @@ export class CSSBundleAnalyzer {
         : false;
     });
 
-    return usedRules.join('\n');
+    return usedRules.join("\n");
   }
 
   private minifyCSS(css: string): string {
     // Basic CSS minification
     return css
-      .replaceAll(/\/\*[\S\s]*?\*\//g, '') // Remove comments
-      .replaceAll(/\s+/g, ' ') // Collapse whitespace
-      .replaceAll(/;\s*}/g, '}') // Remove last semicolon in blocks
-      .replaceAll(/\s*{\s*/g, '{') // Clean up braces
-      .replaceAll(/\s*}\s*/g, '}')
-      .replaceAll(/\s*,\s*/g, ',') // Clean up commas
-      .replaceAll(/\s*:\s*/g, ':') // Clean up colons
-      .replaceAll(/\s*;\s*/g, ';') // Clean up semicolons
+      .replaceAll(/\/\*[\S\s]*?\*\//g, "") // Remove comments
+      .replaceAll(/\s+/g, " ") // Collapse whitespace
+      .replaceAll(/;\s*}/g, "}") // Remove last semicolon in blocks
+      .replaceAll(/\s*{\s*/g, "{") // Clean up braces
+      .replaceAll(/\s*}\s*/g, "}")
+      .replaceAll(/\s*,\s*/g, ",") // Clean up commas
+      .replaceAll(/\s*:\s*/g, ":") // Clean up colons
+      .replaceAll(/\s*;\s*/g, ";") // Clean up semicolons
       .trim();
   }
 
   private addVendorPrefixes(css: string): string {
     // Basic vendor prefix addition for common properties
     const prefixMap: Record<string, Array<string>> = {
-      transform: ['-webkit-transform', '-moz-transform', '-ms-transform'],
-      transition: ['-webkit-transition', '-moz-transition', '-ms-transition'],
-      'backdrop-filter': ['-webkit-backdrop-filter'],
-      'user-select': [
-        '-webkit-user-select',
-        '-moz-user-select',
-        '-ms-user-select',
+      transform: ["-webkit-transform", "-moz-transform", "-ms-transform"],
+      transition: ["-webkit-transition", "-moz-transition", "-ms-transition"],
+      "backdrop-filter": ["-webkit-backdrop-filter"],
+      "user-select": [
+        "-webkit-user-select",
+        "-moz-user-select",
+        "-ms-user-select",
       ],
     };
 
     let prefixed = css;
 
     for (const [property, prefixes] of Object.entries(prefixMap)) {
-      const regex = new RegExp(`(\\s|^)${property}\\s*:`, 'g');
+      const regex = new RegExp(`(\\s|^)${property}\\s*:`, "g");
       prefixed = prefixed.replace(regex, (match, whitespace) => {
         const prefixedProps = prefixes
           .map((prefix) => `${whitespace}${prefix}:`)
-          .join('');
+          .join("");
         return prefixedProps + match;
       });
     }
@@ -393,7 +393,7 @@ export class CSSBundleManager {
   async buildBundles(outputDir: string): Promise<{
     bundles: Record<string, string>;
     manifest: Record<string, { path: string; size: number; hash: string }>;
-    report: { totalSize: number; status: 'pass' | 'warning' | 'fail' };
+    report: { totalSize: number; status: "pass" | "warning" | "fail" };
   }> {
     const bundles: Record<string, string> = {};
     const manifest: Record<
@@ -402,13 +402,13 @@ export class CSSBundleManager {
     > = {};
 
     for (const [bundleName, bundleConfig] of Object.entries(this.config)) {
-      let combinedCSS = '';
+      let combinedCSS = "";
 
       // Combine CSS files
       for (const file of bundleConfig.files) {
         try {
           const filePath = path.resolve(file);
-          const content = await fs.readFile(filePath, 'utf8');
+          const content = await fs.readFile(filePath, "utf8");
           combinedCSS += `\n/* ${file} */\n${content}`;
         } catch {
           // Logging disabled
@@ -431,7 +431,7 @@ export class CSSBundleManager {
       manifest[bundleName] = {
         path: `${bundleName}.css`,
         size: optimized.stats.optimizedSize,
-        hash: 'TODO: Add hash generation', // Placeholder for hash
+        hash: "TODO: Add hash generation", // Placeholder for hash
       };
     }
 
@@ -446,14 +446,14 @@ export class CSSBundleManager {
   async validateBundles(): Promise<boolean> {
     const report = await this.analyzer.generateReport();
 
-    if (report.status === 'fail') {
+    if (report.status === "fail") {
       // Logging disabled
       // Logging disabled
       // report.recommendations.forEach((rec) => // Logging disabled
       return false;
     }
 
-    if (report.status === 'warning') {
+    if (report.status === "warning") {
       // Logging disabled
       // report.recommendations.forEach((rec) => // Logging disabled
     }

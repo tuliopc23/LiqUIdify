@@ -19,7 +19,7 @@
 /* Fallbacks for browsers without backdrop-filter support */
 .no-backdrop-filter .glass-effect,
 .no-backdrop-filter .liquid-glass,
-.no-backdrop-filter [class*='glass-'] {
+.no-backdrop-filter [class*="glass-"] {
   background-color: rgba(255, 255, 255, 0.9) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -27,7 +27,7 @@
 
 .no-backdrop-filter.dark .glass-effect,
 .no-backdrop-filter.dark .liquid-glass,
-.no-backdrop-filter.dark [class*='glass-'] {
+.no-backdrop-filter.dark [class*="glass-"] {
   background-color: rgba(30, 30, 30, 0.9) !important;
 }
 
@@ -48,7 +48,7 @@
 .no-animations .animate-fade,
 .no-animations .animate-scale,
 .no-animations .animate-slide,
-.no-animations [class*='animate-'] {
+.no-animations [class*="animate-"] {
   animation: none !important;
   transition: none !important;
   transform: none !important;
@@ -71,14 +71,14 @@
   .animate-fade,
   .animate-scale,
   .animate-slide,
-  [class*='animate-'] {
+  [class*="animate-"] {
     animation: none !important;
     transition: none !important;
   }
 
   .glass-magnetic,
   .liquid-magnetic,
-  [class*='-magnetic'] {
+  [class*="-magnetic"] {
     transform: none !important;
     transition: none !important;
   }
@@ -178,7 +178,7 @@
 @media print {
   .glass-effect,
   .liquid-glass,
-  [class*='glass-'] {
+  [class*="glass-"] {
     background-color: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
@@ -207,7 +207,7 @@
 @media (prefers-contrast: high) {
   .glass-effect,
   .liquid-glass,
-  [class*='glass-'] {
+  [class*="glass-"] {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background-color: #fff !important;
@@ -217,7 +217,7 @@
 
   .dark .glass-effect,
   .dark .liquid-glass,
-  .dark [class*='glass-'] {
+  .dark [class*="glass-"] {
     background-color: #000 !important;
     border: 2px solid #fff !important;
   }

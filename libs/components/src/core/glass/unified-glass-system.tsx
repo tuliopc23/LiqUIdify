@@ -19,22 +19,22 @@ import React, {
   useCallback,
   useRef,
   useState,
-} from 'react';
+} from "react";
 
 // Types
 export type GlassIntensity =
-  | 'none'
-  | 'subtle'
-  | 'medium'
-  | 'strong'
-  | 'intense';
+  | "none"
+  | "subtle"
+  | "medium"
+  | "strong"
+  | "intense";
 export type GlassVariant =
-  | 'default'
-  | 'elevated'
-  | 'floating'
-  | 'card'
-  | 'modal';
-export type GlassAnimation = 'none' | 'subtle' | 'smooth' | 'bouncy' | 'liquid';
+  | "default"
+  | "elevated"
+  | "floating"
+  | "card"
+  | "modal";
+export type GlassAnimation = "none" | "subtle" | "smooth" | "bouncy" | "liquid";
 
 export interface GlassEffectConfig {
   intensity: GlassIntensity;
@@ -63,7 +63,7 @@ const GLASS_INTENSITY_CONFIG: Record<
   Required<
     Pick<
       GlassEffectConfig,
-      'blur' | 'opacity' | 'saturation' | 'brightness' | 'contrast'
+      "blur" | "opacity" | "saturation" | "brightness" | "contrast"
     >
   >
 > = {
@@ -100,30 +100,30 @@ const GLASS_INTENSITY_CONFIG: Record<
 
 const GLASS_VARIANT_STYLES: Record<GlassVariant, CSSProperties> = {
   default: {
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
   },
   elevated: {
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    border: "1px solid rgba(255, 255, 255, 0.15)",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
   },
   floating: {
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+    border: "1px solid rgba(255, 255, 255, 0.2)",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
   },
   card: {
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
   },
   modal: {
-    border: '1px solid rgba(255, 255, 255, 0.05)',
-    boxShadow: '0 16px 64px rgba(0, 0, 0, 0.25)',
+    border: "1px solid rgba(255, 255, 255, 0.05)",
+    boxShadow: "0 16px 64px rgba(0, 0, 0, 0.25)",
   },
 };
 
 // Hook for unified glass effects
 export function useUnifiedGlass(
-  config: GlassEffectConfig = { intensity: 'medium', variant: 'default' }
+  config: GlassEffectConfig = { intensity: "medium", variant: "default" },
 ) {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -137,13 +137,13 @@ export function useUnifiedGlass(
   const glassStyles: CSSProperties = {
     backdropFilter: `blur(${mergedConfig.blur}px) saturate(${mergedConfig.saturation}) brightness(${mergedConfig.brightness}) contrast(${mergedConfig.contrast})`,
     backgroundColor: `rgba(255, 255, 255, ${mergedConfig.opacity})`,
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     ...GLASS_VARIANT_STYLES[mergedConfig.variant],
   };
 
   if (config.interactive && isHovered) {
-    glassStyles.transform = 'translateY(-2px)';
-    glassStyles.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
+    glassStyles.transform = "translateY(-2px)";
+    glassStyles.boxShadow = "0 8px 32px rgba(0, 0, 0, 0.2)";
   }
 
   if (config.magnetic && elementRef.current) {
@@ -165,7 +165,7 @@ export function useUnifiedGlass(
         });
       }
     },
-    [config.magnetic]
+    [config.magnetic],
   );
 
   const handleMouseEnter = useCallback(() => {
@@ -200,7 +200,7 @@ export const createGlassEffect = (config: GlassEffectConfig) => ({
 
 // Legacy system compatibility - backward compatible components
 
-export interface AppleLiquidGlassProps extends ComponentProps<'div'> {
+export interface AppleLiquidGlassProps extends ComponentProps<"div"> {
   intensity?: GlassIntensity;
   variant?: GlassVariant;
   interactive?: boolean;
@@ -209,8 +209,8 @@ export interface AppleLiquidGlassProps extends ComponentProps<'div'> {
 
 export const AppleLiquidGlass: React.FC<AppleLiquidGlassProps> = ({
   children,
-  intensity = 'medium',
-  variant = 'default',
+  intensity = "medium",
+  variant = "default",
   interactive = false,
   magnetic = false,
   ...props
@@ -235,7 +235,7 @@ export const EnhancedAppleLiquidGlass = AppleLiquidGlass;
 export {
   generateGlassClasses,
   generateGlassVariables,
-} from '../utils/glass-effects';
+} from "../utils/glass-effects";
 
 // Export for tree-shaking
 export default useUnifiedGlass;
