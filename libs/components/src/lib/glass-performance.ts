@@ -138,7 +138,7 @@ export const QUALITY_PRESETS: Record<string, Partial<OptimizationConfig>> = {
  * Tracks animation performance and provides optimization recommendations
  */
 export class GlassPerformanceMonitor {
-  frameCount: number = 0;
+  frameCount = 0;
   private metrics: PerformanceMetrics = {
     fps: 0,
     frameTime: 0,
