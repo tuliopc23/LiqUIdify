@@ -85,7 +85,7 @@ export interface ThemeConfig {
 
 // Event handler types
 export type ClickHandler = (event: React.MouseEvent) => void;
-export type ChangeHandler<T = any> = (value: T) => void;
+export type ChangeHandler<T = unknown> = (value: T) => void;
 export type FocusHandler = (event: React.FocusEvent) => void;
 
 // Utility types

@@ -12,7 +12,7 @@ export interface ValidationResult {
   warnings: Array<string>;
 }
 
-export type Validator<T = any> = (value: T) => ValidationResult;
+export type Validator<T = unknown> = (value: T) => ValidationResult;
 
 /**
  * Create a validation result
@@ -156,14 +156,14 @@ export const numberValidators = {
  */
 export const arrayValidators = {
   required:
-    (message = 'At least one item is required'): Validator<Array<any>> =>
+    <T>(message = 'At least one item is required'): Validator<Array<T>> =>
     (value) => {
       const isValid = Array.isArray(value) && value.length > 0;
       return createValidationResult(isValid, isValid ? [] : [message]);
     },
 
   minLength:
-    (min: number, message?: string): Validator<Array<any>> =>
+    <T>(min: number, message?: string): Validator<Array<T>> =>
     (value) => {
       const actualMessage = message || `Must have at least ${min} items`;
       const isValid = Array.isArray(value) && value.length >= min;
@@ -171,7 +171,7 @@ export const arrayValidators = {
     },
 
   maxLength:
-    (max: number, message?: string): Validator<Array<any>> =>
+    <T>(max: number, message?: string): Validator<Array<T>> =>
     (value) => {
       const actualMessage = message || `Must have no more than ${max} items`;
       const isValid = Array.isArray(value) && value.length <= max;
@@ -179,7 +179,7 @@ export const arrayValidators = {
     },
 
   unique:
-    (message = 'All items must be unique'): Validator<Array<any>> =>
+    <T>(message = 'All items must be unique'): Validator<Array<T>> =>
     (value) => {
       if (!Array.isArray(value)) {
         return createValidationResult(false, ['Value must be an array']);
@@ -220,7 +220,7 @@ export const objectValidators = {
       }
 
       const results = Object.entries(schema).map(([key, validator]) => {
-        const fieldValue = (value as unknown)[key];
+        const fieldValue = (value as Record<string, unknown>)[key];
         const result = validator(fieldValue);
 
         // Prefix field name to errors
@@ -285,7 +285,7 @@ export function chain<T>(...validators: Array<Validator<T>>): Validator<T> {
  * Component prop validation
  */
 export interface PropertyValidationSchema {
-  [key: string]: Validator<any>;
+  [key: string]: Validator<unknown>;
 }
 
 export function validateProps<T extends Record<string, unknown>>(
@@ -319,7 +319,9 @@ export function validateProps<T extends Record<string, unknown>>(
  */
 export const a11yValidators = {
   ariaLabel:
-    (message = 'aria-label or aria-labelledby is required'): Validator<any> =>
+    (
+      message = 'aria-label or aria-labelledby is required'
+    ): Validator<Record<string, unknown>> =>
     (props) => {
       const hasAriaLabel = props['aria-label'] || props['aria-labelledby'];
       return createValidationResult(
@@ -329,7 +331,9 @@ export const a11yValidators = {
     },
 
   altText:
-    (message = 'alt attribute is required for images'): Validator<any> =>
+    (
+      message = 'alt attribute is required for images'
+    ): Validator<Record<string, unknown>> =>
     (props) => {
       if (props.as === 'img' || props.role === 'img') {
         const hasAlt = typeof props.alt === 'string';
@@ -361,7 +365,7 @@ export const a11yValidators = {
   keyboardAccessible:
     (
       message = 'Interactive elements must be keyboard accessible'
-    ): Validator<any> =>
+    ): Validator<Record<string, unknown>> =>
     (props) => {
       const isInteractive =
         props.onClick || props.onKeyDown || props.tabIndex !== null;

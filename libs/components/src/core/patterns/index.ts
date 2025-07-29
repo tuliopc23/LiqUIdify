@@ -92,7 +92,7 @@ export interface SlotProps {
 }
 
 export const createSlotComponent = (
-  _slots: Record<string, React.ComponentType<any>>
+  _slots: Record<string, React.ComponentType<unknown>>
 ) => {
   // Type-only export for patterns
   return;
@@ -128,7 +128,7 @@ export const createStateReducer = <T extends Record<string, unknown>>(
         });
         return accumulator;
       },
-      {} as Record<string, (payload?: any) => StateAction>
+      {} as Record<string, (payload?: unknown) => StateAction>
     ),
   };
 };
@@ -157,7 +157,7 @@ export class ComponentEventBus {
     }
   }
 
-  emit(event: string, ...arguments_: Array<any>) {
+  emit(event: string, ...arguments_: Array<unknown>) {
     const eventListeners = this.listeners.get(event);
     if (eventListeners) {
       for (const callback of eventListeners) {

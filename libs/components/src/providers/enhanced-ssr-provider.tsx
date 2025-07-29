@@ -146,7 +146,7 @@ export function withEnhancedSSR<P extends object>(
  */
 export function useClientOnly<T>(
   factory: () => T,
-  deps: Array<any> = []
+  deps: Array<unknown> = []
 ): { value: T | null; isReady: boolean } {
   const [value, setValue] = useState<T | null>(null);
   const [isReady, setIsReady] = useState(false);
@@ -184,7 +184,7 @@ export function useHydrationSafeState<T>(
  * Utility for creating SSR-safe event handlers
  */
 export function createSSREventHandler<
-  T extends (...arguments_: Array<any>) => any,
+  T extends (...arguments_: Array<unknown>) => unknown,
 >(handler: T): T | (() => void) {
   return isBrowser() ? handler : () => {};
 }
