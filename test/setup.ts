@@ -14,7 +14,7 @@ expect.extend({
     };
   },
   toHaveClass(received: HTMLElement, className: string) {
-    const pass = received && received.classList && received.classList.contains(className);
+    const pass = received?.classList && received.classList.contains(className);
     return {
       pass,
       message: () =>
@@ -24,7 +24,7 @@ expect.extend({
     };
   },
   toBeDisabled(received: HTMLElement) {
-    const pass = received && received.hasAttribute('disabled');
+    const pass = received?.hasAttribute('disabled');
     return {
       pass,
       message: () =>
