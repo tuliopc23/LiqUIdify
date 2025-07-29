@@ -277,7 +277,7 @@ export function withFeatureDetection(
 export function withCSSFallback(
   jsComponent: ReactNode,
   cssComponent: ReactNode,
-  _delay: number = 100
+  _delay = 100
 ) {
   return function CSSFallbackWrapper() {
     return <ClientOnly fallback={cssComponent}>{jsComponent}</ClientOnly>;

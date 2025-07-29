@@ -4,7 +4,7 @@ export const glassEffect = {
   active: 'active:bg-white/30',
 };
 
-export const applyGlassEffect = (intensity: number = 1) => ({
+export const applyGlassEffect = (intensity = 1) => ({
   backdropFilter: `blur(${12 * intensity}px)`,
   backgroundColor: `rgba(255, 255, 255, ${0.1 * intensity})`,
   border: `1px solid rgba(255, 255, 255, ${0.2 * intensity})`,

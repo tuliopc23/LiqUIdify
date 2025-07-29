@@ -310,7 +310,7 @@ export interface TableActions<T = unknown> {
 
 export function createTableBusinessLogic<T extends Record<string, unknown>>(
   initialItems: Array<T> = [],
-  itemsPerPage: number = 10
+  itemsPerPage = 10
 ): BusinessLogicHook<{ state: TableState<T>; actions: TableActions<T> }, {}> {
   return () => {
     const [state, setState] = React.useState<TableState<T>>({

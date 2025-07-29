@@ -404,7 +404,7 @@ export const useMagneticHover = (
 // Repulsion effect between elements
 export const useRepulsionEffect = (
   elements: Array<HTMLElement>,
-  repulsionStrength: number = 50
+  repulsionStrength = 50
 ) => {
   const [positions, setPositions] = useState<Array<Vector2D>>([]);
 
@@ -467,7 +467,7 @@ export const useRepulsionEffect = (
 export const createFluidMorph = (
   fromElement: HTMLElement,
   toElement: HTMLElement,
-  duration: number = 500
+  duration = 500
 ) => {
   const fromRect = safeGetBoundingClientRect(fromElement);
   const toRect = safeGetBoundingClientRect(toElement);
@@ -507,7 +507,7 @@ export const createGlassRipple = (
   element: HTMLElement,
   x: number,
   y: number,
-  color: string = 'rgba(255, 255, 255, 0.3)'
+  color = 'rgba(255, 255, 255, 0.3)'
 ) => {
   try {
     // Check for SSR environment
@@ -867,7 +867,7 @@ export interface EmitterConfig {
 export class ParticleEmitter {
   private config: EmitterConfig;
   private particles: Array<Particle> = [];
-  private emitAccumulator: number = 0;
+  private emitAccumulator = 0;
   private forces: Array<Vector2D> = [];
 
   constructor(config: EmitterConfig) {
@@ -968,8 +968,8 @@ export class PhysicsWorld {
   private springs: Map<string, SpringPhysics | Spring2D> = new Map();
   private emitters: Map<string, ParticleEmitter> = new Map();
   private fluids: Map<string, FluidSimulation> = new Map();
-  private lastTime: number = 0;
-  private running: boolean = false;
+  private lastTime = 0;
+  private running = false;
   private rafId: number | null = null;
 
   // Global forces

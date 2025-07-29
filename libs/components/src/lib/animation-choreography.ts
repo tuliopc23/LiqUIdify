@@ -167,7 +167,7 @@ export const ChoreographyTiming = {
   calculateOptimalDuration(
     distance: number,
     elementSize: number,
-    baseSpeed: number = 1000
+    baseSpeed = 1000
   ): number {
     // Larger elements and longer distances need more time
     const sizeFactor = Math.log(elementSize / 100 + 1);

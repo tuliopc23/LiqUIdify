@@ -450,7 +450,7 @@ export class VisualPolishManager {
     id: string,
     name: string,
     element: HTMLElement,
-    threshold: number = 0.01
+    threshold = 0.01
   ): void {
     if (!this.config.enableVisualRegression) {
       return;

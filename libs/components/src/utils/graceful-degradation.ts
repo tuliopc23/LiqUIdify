@@ -273,7 +273,7 @@ export class GracefulDegradationManager {
     return !this.featureSupport[feature];
   }
 
-  public getFallbackClass(feature: string, baseClass: string = ''): string {
+  public getFallbackClass(feature: string, baseClass = ''): string {
     if (!this.config.enableCSSFallbacks) {
       return baseClass;
     }
@@ -377,7 +377,7 @@ export function useGracefulDegradation() {
   );
 
   const getFallbackClass = useCallback(
-    (feature: string, baseClass: string = '') => {
+    (feature: string, baseClass = '') => {
       return manager.getFallbackClass(feature, baseClass);
     },
     [manager]
@@ -516,7 +516,7 @@ export function useDegradationAware() {
         accessibility.shouldUseStaticFallbacks
       );
     },
-    getDegradationClass: (feature: string, baseClass: string = '') => {
+    getDegradationClass: (feature: string, baseClass = '') => {
       const classes = [baseClass];
 
       if (graceful.shouldUseFallback(feature as keyof FeatureSupport)) {

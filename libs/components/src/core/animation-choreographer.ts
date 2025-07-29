@@ -84,7 +84,7 @@ export interface MagneticOptions {
 export class AnimationSequence {
   private steps: Array<AnimationStep> = [];
   private animations: Array<Animation> = [];
-  private isPlaying: boolean = false;
+  private isPlaying = false;
   private options: AnimationSequenceOptions;
   private prefersReducedMotion: boolean;
 
