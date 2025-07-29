@@ -260,7 +260,7 @@ export function useProgressiveEnhancement() {
       javascript: true,
       animations: !window.matchMedia('(prefers-reduced-motion: reduce)')
         .matches,
-      webgl: !!document.createElement('canvas').getContext('webgl'),
+      webgl: Boolean(document.createElement('canvas').getContext('webgl')),
       intersectionObserver: 'IntersectionObserver' in window,
       resizeObserver: 'ResizeObserver' in window,
     };

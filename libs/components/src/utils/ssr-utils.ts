@@ -324,7 +324,7 @@ export const isTouchDevice = (): boolean => {
   const win = safeWindow();
   const nav = safeNavigator();
 
-  return !!(win && ('ontouchstart' in win || (nav && 0 < nav.maxTouchPoints)));
+  return Boolean(win && ('ontouchstart' in win || (nav && 0 < nav.maxTouchPoints)));
 };
 
 /**

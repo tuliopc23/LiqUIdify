@@ -106,7 +106,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
       }
     };
 
-    const hasValue = !!currentValue;
+    const hasValue = Boolean(currentValue);
 
     const baseClasses = cn(
       'w-full rounded-xl border px-4 py-3 transition-all duration-200',
