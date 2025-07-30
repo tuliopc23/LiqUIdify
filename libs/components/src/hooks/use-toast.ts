@@ -1,17 +1,19 @@
 import * as React from 'react';
 
 const TOAST_LIMIT = 1;
-const _TOAST_REMOVE_DELAY = 1_000_000;
+const TOAST_REMOVE_DELAY = 1_000_000;
 
-interface ToasterToast { id: string;
+interface ToasterToast {
+  id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
   action?: React.ReactElement;
   variant?: 'default' | 'destructive';
-  onOpenChange?: (open: boolean) => void; }
+  onOpenChange?: (open: boolean) => void;
 }
 
-const actionTypes = { ADD_TOAST: 'ADD_TOAST' }
+const actionTypes = {
+  ADD_TOAST: 'ADD_TOAST',
   UPDATE_TOAST: 'UPDATE_TOAST',
   DISMISS_TOAST: 'DISMISS_TOAST',
   REMOVE_TOAST: 'REMOVE_TOAST',
@@ -27,19 +29,14 @@ function genId() {
 type Action =
   | { type: typeof actionTypes.ADD_TOAST;
       toast: ToasterToast; }
-    }
   | { type: typeof actionTypes.UPDATE_TOAST;
       toast: Partial<ToasterToast>; }
-    }
   | { type: typeof actionTypes.DISMISS_TOAST;
       toastId?: ToasterToast['id']; }
-    }
   | { type: typeof actionTypes.REMOVE_TOAST;
-      toastId?: ToasterToast.id; }
-    };
+      toastId?: ToasterToast['id']; };
 
 interface State { toasts: Array<ToasterToast>; }
-}
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
@@ -48,13 +45,12 @@ const addToRemoveQueue = (toastId: string) => {
     return;
   }
 
-  const _timeout = setTimeout(() => {
+  const timeout = setTimeout(() => {
     toastTimeouts.delete(toastId);
-    dispatch({ type: actionTypes.REMOVE_TOAST }
+    dispatch({ type: actionTypes.REMOVE_TOAST,
       toastId: toastId,
     });
-  }
-const TOAST_REMOVE_DELAY);
+  }, TOAST_REMOVE_DELAY);
 
   toastTimeouts.set(toastId, timeout);
 };

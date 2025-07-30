@@ -14,12 +14,19 @@
     "url": "https://github.com/tuliopc23/LiqUIdify/issues"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
     "tsc": "^2.0.4"
   },
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
     "@playwright/test": "^1.54.1",
+    "@storybook/addon-a11y": "^9.0.18",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-links": "^9.0.18",
+    "@storybook/builder-vite": "^9.0.18",
     "@storybook/react": "^9.0.18",
+    "@storybook/react-vite": "^9.0.18",
     "@swc-node/register": "~1.9.2",
     "@swc/core": "~1.5.29",
     "@testing-library/dom": "^10.4.1",

@@ -3,9 +3,8 @@
  * Provides vibration patterns, audio feedback, and visual feedback coordination
  */
 
-import type React, {
- cfrom "react";
-import reateContext,
+import React, {
+  createContext,
   type ReactNode,
   useCallback,
   useContext,
