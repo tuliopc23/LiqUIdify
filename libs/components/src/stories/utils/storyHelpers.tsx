@@ -1,7 +1,7 @@
 // Shared utilities for Storybook stories in Liquidify
 // Use these helpers to DRY up meta, argTypes, demo data, and render logic across stories
 
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 import React from "react";
 
 // Standard meta generator

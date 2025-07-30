@@ -64,13 +64,28 @@ describe("Type Guards", () => {
 
   describe("isGlassComponent", () => {
     it("should identify glass components", () => {
-      const element = document.createElement("div");
-      element.classList.add("glass-button");
+      // Mock a DOM element with glass class
+      const element = {
+        classList: {
+          contains: (className: string) => className === "glass-button",
+          [Symbol.iterator]: function* () {
+            yield "glass-button";
+          },
+        },
+      };
       expect(isGlassComponent(element)).toBe(true);
     });
 
     it("should return false for non-glass components", () => {
-      const element = document.createElement("div");
+      // Mock a DOM element without glass class
+      const element = {
+        classList: {
+          contains: (className: string) => false,
+          [Symbol.iterator]: function* () {
+            yield "regular-button";
+          },
+        },
+      };
       expect(isGlassComponent(element)).toBe(false);
       expect(isGlassComponent("not an element")).toBe(false);
     });
