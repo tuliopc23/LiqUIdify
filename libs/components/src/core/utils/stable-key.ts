@@ -15,7 +15,7 @@
 export function getItemKey<T extends Record<string, any>>(
   item: T,
   prefix: string = "item",
-  index: number = 0,
+  index = 0,
 ): string {
   // Try to find a stable identifier property
   const stableProps = ["id", "key", "href", "label", "name", "value"];
@@ -58,10 +58,7 @@ function _generateNestedKey(...parts: Array<string | number>): string {
  * @param useTimestamp - Whether to include timestamp for uniqueness
  * @returns A stable or unique string key
  */
-function _generateTimestampKey(
-  prefix: string,
-  useTimestamp: boolean = false,
-): string {
+function _generateTimestampKey(prefix: string, useTimestamp = false): string {
   if (useTimestamp) {
     return `${prefix}-${Date.now()}`;
   }

@@ -23,8 +23,8 @@ const PHYSICS_CONSTANTS = {
 // Vector 2D class for physics calculations
 export class Vector2D {
   constructor(
-    public x: number = 0,
-    public y: number = 0,
+    public x = 0,
+    public y = 0,
   ) {}
 
   // Static helper methods for backward compatibility

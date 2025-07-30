@@ -12,8 +12,9 @@
  * - Tree-shakeable exports
  */
 
-import React, {
-  type ComponentProps,
+import type React, {
+ from "react";
+import type ComponentProps,
   type CSSProperties,
   type ReactNode,
   useCallback,

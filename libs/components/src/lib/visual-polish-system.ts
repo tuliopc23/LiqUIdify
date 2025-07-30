@@ -437,8 +437,8 @@ class VisualPolishManager {
       animation.cancel();
     }
 
-    delete (element as ElementWithPolishData)._polishHandlers;
-    delete (element as ElementWithPolishData)._polishAnimation;
+    (element as ElementWithPolishData)._polishHandlers = undefined;
+    (element as ElementWithPolishData)._polishAnimation = undefined;
   }
 
   /**

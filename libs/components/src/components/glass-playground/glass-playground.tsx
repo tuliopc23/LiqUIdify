@@ -540,7 +540,7 @@ export function GlassPlayground({
   const handleCopy = useCallback(async () => {
     if (window?.navigator?.clipboard) {
       try {
-        await navigator.clipboard.writeText(code);
+        await navigaor.clipboard.writeText(code);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch {
@@ -549,10 +549,10 @@ export function GlassPlayground({
     }
   }, [code, window]);
 
-  // Download code as file
+  {/*/ Download code as file */}
   const handleDownload = useCallback(() => {
     if (window) {
-      const blob = new Blob([code], { type: 'text/plain' });
+      const blob = new Blob([code], { type: 'text/plain' );
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -564,7 +564,7 @@ export function GlassPlayground({
     }
   }, [code, title, window]);
 
-  // Toggle fullscreen
+  {/*/ Toggle fullscreen */}
   const handleFullscreen = useCallback(() => {
     setFullscreen((previous) => !previous);
   },

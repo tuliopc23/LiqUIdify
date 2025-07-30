@@ -75,9 +75,9 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
     }
 
     onNodeExpand?.(node, !isExpanded);
-  };
+   };
 
-  const renderNode = (node: TreeNode, level: number = 0): React.ReactNode => {
+  const renderNode = (node: TreeNode, level= 0): React.ReactNode => {
     const hasChildren = node.children && node.children.length > 0;
     const isExpanded = expandedIds.has(node.id);
     const isSelected = selectedNodeId === node.id;
@@ -143,7 +143,7 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
 
         {hasChildren && isExpanded && (
           <div className="slide-in-from-top-1 animate-in">
-            {node.children!.map((child) => renderNode(child, level + 1))}
+            {node.children?.map((child) => renderNode(child, level + 1))}
           </div>
         )}
       </div>

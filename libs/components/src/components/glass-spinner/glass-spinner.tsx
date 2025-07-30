@@ -213,7 +213,7 @@ export const RingSpinner: React.FC<{
       animate={{ rotate: 360 }}
       transition={{
         duration: 1,
-        repeat: Infinity,
+        repeat: Number.POSITIVE_INFINITY,
         ease: "linear",
       }}
     />
@@ -236,7 +236,7 @@ export const WaveSpinner: React.FC<{
           }}
           transition={{
             duration: 1,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             delay: index * 0.1,
             ease: "easeInOut",
           }}

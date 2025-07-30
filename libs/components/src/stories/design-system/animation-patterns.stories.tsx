@@ -128,7 +128,7 @@ export const LoadingStates: Story = { render: () => (
           <div className="flex justify-center py-8">
             <motion.div
               animate={{ rotate: 360 }
-              transition={{ repeat: Infinity, duration: 1, ease: 'linear'>
+              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1, ease: 'linear'>
               <RefreshCw className="h-8 w-8 text-blue-500" />
             </motion.div>
           </div>

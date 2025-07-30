@@ -8,7 +8,6 @@ const _useSSRSafe = (callback: () => void, deps: Array<unknown>) => {
     if (typeof window !== "undefined") {
       callback();
     }
-    // biome-ignore lint/correctness/useExhaustiveDependencies: Custom hook with dynamic deps
   }, deps);
 };
 

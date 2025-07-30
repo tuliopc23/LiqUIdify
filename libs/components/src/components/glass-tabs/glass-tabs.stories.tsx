@@ -504,9 +504,9 @@ const tabs = [
                 </tr>
               </thead>
               <tbody className="text-gray-600 dark:text-gray-400">
-                <tr className="border-b">
+                 <tr className="border-b">
                   <td className="py-2">tabs</td>
-                  <td className="py-2">Array<GlassTabItem></td>
+                  <td className="py-2">Array<GlassTabItem/>
                   <td className="py-2">required</td>
                 </tr>
                 <tr className="border-b">

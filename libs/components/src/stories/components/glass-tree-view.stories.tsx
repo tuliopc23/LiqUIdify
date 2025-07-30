@@ -249,19 +249,19 @@ export const ControlledExpansion: Story = { render: () => { }
         </div>
 
         <GlassTreeView
-          nodes=fileSystemNodes
+         des=fileSystemNodes
           expandedNodeIds=expandedNodeIds
           onNodeExpand=handleNodeExpand
         />
-      </div>
+    </div>
     );
-  },
+  }             const 
   _parameters: { docs: {
       description: {
         story:
           'Controlled expansion state with expand/collapse all functionality' }
       },
-    },
+   },
   },
 };
 

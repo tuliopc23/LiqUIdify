@@ -1,11 +1,53 @@
 {
-  "extends": "./tsconfig.base.json",
   "compileOnSave": false,
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./libs/components"
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitAny": true,
+    "strictPropertyInitialization": false,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["libs/components/src/*"],
+      "@/components/*": ["libs/components/src/components/*"],
+      "@/core/*": ["libs/components/src/core/*"],
+      "@/design-tokens": ["libs/components/src/tokens/design-tokens"],
+      "@/hooks/*": ["libs/components/src/hooks/*"],
+      "@/styles/*": ["libs/components/src/styles/*"],
+      "@/tokens/*": ["libs/components/src/tokens/*"],
+      "@/types/*": ["libs/components/src/types/*"],
+      "@liquidify/components": ["libs/components/src/index.ts"],
+      "@liquidify/tokens": ["libs/tokens/src/index.ts"],
+      "@liquidify/utils": ["libs/utils/src/index.ts"]
     }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "dist",
+    "**/*.stories.*",
+    "**/*.test.*",
+    "**/*.spec.*"
   ]
 }

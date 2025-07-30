@@ -537,4 +537,4 @@ const CompoundCard = Object.assign(GlassCard, {
   Actions: CardActions,
 });
 
-export { CompoundCard as Card };;
+export { CompoundCard as Card };

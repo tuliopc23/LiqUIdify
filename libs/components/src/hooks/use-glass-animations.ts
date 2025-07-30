@@ -340,7 +340,7 @@ function _useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
 
       animate(element, keyframes, {
         duration,
-        iterations: Infinity,
+        iterations: Number.POSITIVE_INFINITY,
         easing: "linear",
       });
     },

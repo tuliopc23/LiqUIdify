@@ -1,100 +1,100 @@
-import type React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { accessibilityManager } from '@/core/accessibility-manager'
+import { accessibilityManager } from "@/core/accessibility-manager";
 
-import { cn } from '@/core/utils/classname'
-import { GlassButton } from '../glass-button-refactored'
-import { GlassCard } from '../glass-card-refactored'
+import { cn } from "@/core/utils/classname";
+import { GlassButton } from "../glass-button-refactored";
+import { GlassCard } from "../glass-card-refactored";
 
 interface AccessibilityViolation {
-  id: string
-  description: string
+  id: string;
+  description: string;
 }
 
 interface AccessibilityReport {
-  score: number
-  wcagLevel: string
-  violations: Array<AccessibilityViolation>
-  warnings: Array<{ id: string; description: string }>
+  score: number;
+  wcagLevel: string;
+  violations: Array<AccessibilityViolation>;
+  warnings: Array<{ id: string; description: string }>;
 }
 
 interface ContrastResult {
-  ratio: number
+  ratio: number;
   passes: {
-    aa: { normal: boolean; large: boolean }
-    aaa: { normal: boolean; large: boolean }
-  }
-  suggestedForeground?: string
-  suggestedBackground?: string
+    aa: { normal: boolean; large: boolean };
+    aaa: { normal: boolean; large: boolean };
+  };
+  suggestedForeground?: string;
+  suggestedBackground?: string;
 }
 
 interface AccessibilityDemoProps {
-  className?: string
+  className?: string;
 }
 
 export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
   className,
 }) => {
-  const [report, setReport] = useState<AccessibilityReport | null>(null)
+  const [report, setReport] = useState<AccessibilityReport | null>(null);
   const [contrastResult, setContrastResult] = useState<ContrastResult | null>(
-    null
-  )
-  const [validating, setValidating] = useState(false)
-  const demoRef = useRef<HTMLDivElement>(null)
-  const [fgColor, setFgColor] = useState('#333333')
-  const [bgColor, setBgColor] = useState('#f0f0f0')
+    null,
+  );
+  const [validating, setValidating] = useState(false);
+  const demoRef = useRef<HTMLDivElement>(null);
+  const [fgColor, setFgColor] = useState("#333333");
+  const [bgColor, setBgColor] = useState("#f0f0f0");
 
   const validateAccessibility = async () => {
     if (!demoRef.current) {
-      return
+      return;
     }
 
-    setValidating(true)
+    setValidating(true);
     try {
       const report = await accessibilityManager.validateComponent(
         demoRef.current,
         {
-          name: 'GlassAccessibleDemo',
-          type: 'demo',
+          name: "GlassAccessibleDemo",
+          type: "demo",
           props: { className },
-        }
-      )
-      setReport(report)
+        },
+      );
+      setReport(report);
 
       // Announce the result
       accessibilityManager.announce(
         `Accessibility score: ${report.score}. ${report.violations.length} violations found.`,
-        report.violations.length > 0 ? 'assertive' : 'polite'
-      )
+        report.violations.length > 0 ? "assertive" : "polite",
+      );
     } catch {
       // Logging disabled
     } finally {
-      setValidating(false)
+      setValidating(false);
     }
-  }
+  };
 
   const checkContrast = () => {
     const result = accessibilityManager.ensureContrast(fgColor, bgColor, {
-      level: 'AA',
+      level: "AA",
       autoFix: true,
-    })
-    setContrastResult(result)
-  }
+    });
+    setContrastResult(result);
+  };
 
   useEffect(() => {
     // Enable real-time monitoring for this demo
     if (demoRef.current) {
-      accessibilityManager.enableRealTimeMonitoring(demoRef.current)
+      accessibilityManager.enableRealTimeMonitoring(demoRef.current);
     }
 
     return () => {
-      accessibilityManager.disableRealTimeMonitoring()
-    }
-  }, [])
+      accessibilityManager.disableRealTimeMonitoring();
+    };
+  }, []);
 
   return (
-    <div ref={demoRef} className={cn('space-y-6', className)}>
+    <div ref={demoRef} className={cn("space-y-6", className)}>
       <GlassCard className="p-6">
         <h2 className="mb-4 font-bold text-2xl">Accessibility Manager Demo</h2>
 
@@ -110,7 +110,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
               disabled={validating}
               aria-busy={validating}
             >
-              {validating ? 'Validating...' : 'Validate Accessibility'}
+              {validating ? "Validating..." : "Validate Accessibility"}
             </GlassButton>
 
             {report && (
@@ -124,12 +124,12 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                     <span
                       className={cn(
-                        'ml-2 font-bold',
+                        "ml-2 font-bold",
                         report.score >= 95
-                          ? 'text-green-500'
+                          ? "text-green-500"
                           : report.score >= 80
-                            ? 'text-yellow-500'
-                            : 'text-red-500'
+                            ? "text-yellow-500"
+                            : "text-red-500",
                       )}
                     >
                       {report.score}/100
@@ -165,10 +165,10 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
                       {report.violations.map(
                         (violation: AccessibilityViolation) => (
                           <li key={violation.id} className="text-sm">
-                            <strong>{violation.id}:</strong>{' '}
+                            <strong>{violation.id}:</strong>{" "}
                             {violation.description}
                           </li>
-                        )
+                        ),
                       )}
                     </ul>
                   </details>
@@ -239,13 +239,13 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                     <span
                       className={cn(
-                        'ml-2',
+                        "ml-2",
                         contrastResult.passes.aa.normal
-                          ? 'text-green-500'
-                          : 'text-red-500'
+                          ? "text-green-500"
+                          : "text-red-500",
                       )}
                     >
-                      {contrastResult.passes.aa.normal ? '✓ Pass' : '✗ Fail'}
+                      {contrastResult.passes.aa.normal ? "✓ Pass" : "✗ Fail"}
                     </span>
                   </div>
 
@@ -254,13 +254,13 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
                     <span
                       className={cn(
-                        'ml-2',
+                        "ml-2",
                         contrastResult.passes.aaa.normal
-                          ? 'text-green-500'
-                          : 'text-red-500'
+                          ? "text-green-500"
+                          : "text-red-500",
                       )}
                     >
-                      {contrastResult.passes.aaa.normal ? '✓ Pass' : '✗ Fail'}
+                      {contrastResult.passes.aaa.normal ? "✓ Pass" : "✗ Fail"}
                     </span>
                   </div>
                   {contrastResult.suggestedForeground && (
@@ -328,5 +328,5 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
         </section>
       </GlassCard>
     </div>
-  )
-}
+  );
+};

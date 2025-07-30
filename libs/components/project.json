@@ -52,7 +52,7 @@
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "biome check libs/components/src",
+        "command": "qlty check libs/components/src",
         "cwd": "{workspaceRoot}"
       },
       "cache": true

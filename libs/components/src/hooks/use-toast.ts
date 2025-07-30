@@ -35,7 +35,7 @@ type Action =
       toastId?: ToasterToast['id']; }
     }
   | { type: typeof actionTypes.REMOVE_TOAST;
-      toastId?: ToasterToast['id']; }
+      toastId?: ToasterToast.id; }
     };
 
 interface State { toasts: Array<ToasterToast>; }
@@ -53,7 +53,8 @@ const addToRemoveQueue = (toastId: string) => {
     dispatch({ type: actionTypes.REMOVE_TOAST }
       toastId: toastId,
     });
-  }, TOAST_REMOVE_DELAY);
+  }
+const TOAST_REMOVE_DELAY);
 
   toastTimeouts.set(toastId, timeout);
 };

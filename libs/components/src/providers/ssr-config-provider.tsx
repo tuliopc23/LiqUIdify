@@ -1,4 +1,5 @@
-import React, { type ReactNode, useEffect, useState } from "react";
+import type React, { tpfrom "react";
+import e ReactNode, useEffect, useState } from "react";
 
 import { ConfigProvider, type ConfigProviderProps } from "./config-provider";
 

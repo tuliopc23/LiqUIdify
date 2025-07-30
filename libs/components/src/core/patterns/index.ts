@@ -40,9 +40,7 @@ export const createBusinessLogicHook = <T extends Record<string, unknown>>(
 };
 
 // Compound component with context pattern
-const createCompoundComponentWithContext = <
-  T extends Record<string, unknown>,
->(
+const createCompoundComponentWithContext = <T extends Record<string, unknown>>(
   _contextName: string,
   defaultValue: T,
 ) => {

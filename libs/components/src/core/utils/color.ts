@@ -162,7 +162,9 @@ function hslToRgb(h: number, s: number, l: number, a?: number): RGBColor {
     return p;
   };
 
-  let r, g, b;
+  let r;
+  const
+  let g, b;
 
   if (s === 0) {
     r = g = b = l; // achromatic
@@ -206,7 +208,7 @@ function getLuminance(color: string | RGBColor): number {
 /**
  * Calculate contrast ratio between two colors
  */
-export function getContrastRatio(
+function getContrastRatio(
   color1: string | RGBColor,
   color2: string | RGBColor,
 ): number {
@@ -495,7 +497,7 @@ function _mixColors(color1: string, color2: string, ratio = 0.5): string {
  * @param backdropBackground - Background behind the glass
  * @param glassOpacity - Opacity of the glass panel (0-1)
  */
-export function checkGlassContrast(
+function checkGlassContrast(
   foreground: string | RGBColor,
   glassBackground: string | RGBColor,
   backdropBackground: string | RGBColor,

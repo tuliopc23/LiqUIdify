@@ -14,7 +14,6 @@
     ],
     "sharedGlobals": [
       "{workspaceRoot}/babel.config.json",
-      "{workspaceRoot}/.biome.json",
       "{workspaceRoot}/tailwind.config.ts",
       "{workspaceRoot}/tsconfig.json",
       "{workspaceRoot}/tsconfig.base.json"
@@ -50,7 +49,7 @@
       "inputs": [
         "default",
         "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.biome.json"
+        "{workspaceRoot}/.qlty/qlty.toml"
       ],
       "cache": true
     },
@@ -159,7 +158,7 @@
       "application": {
         "babel": true,
         "style": "css",
-        "linter": "biome",
+        "linter": "none",
         "bundler": "vite",
         "unitTestRunner": "none"
       },
@@ -168,7 +167,7 @@
       },
       "library": {
         "style": "css",
-        "linter": "biome",
+        "linter": "none",
         "bundler": "vite",
         "unitTestRunner": "none"
       }
@@ -195,5 +194,5 @@
       }
     }
   },
-  "nxCloudId": "68843f77acc449057a21a7e3"
+  "nxCloudId": "6889a98850b6087444aca078"
 }
