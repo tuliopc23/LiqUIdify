@@ -3,7 +3,7 @@
  * WCAG-compliant color contrast checking for accessibility
  */
 
-export interface ContrastResult {
+interface ContrastResult {
   ratio: number;
   level: "AAA" | "AA" | "A" | "FAIL";
   passes: {
@@ -13,7 +13,7 @@ export interface ContrastResult {
   };
 }
 
-export interface ColorRGB {
+interface ColorRGB {
   r: number;
   g: number;
   b: number;
@@ -22,7 +22,7 @@ export interface ColorRGB {
 /**
  * Convert hex color to RGB
  */
-export function hexToRgb(hex: string): ColorRGB | null {
+function hexToRgb(hex: string): ColorRGB | null {
   const result = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(hex);
   return result
     ? {
@@ -36,7 +36,7 @@ export function hexToRgb(hex: string): ColorRGB | null {
 /**
  * Calculate relative luminance of a color
  */
-export function getLuminance(rgb: ColorRGB): number {
+function getLuminance(rgb: ColorRGB): number {
   const { r, g, b } = rgb;
 
   const [rs, gs, bs] = [r, g, b].map((c) => {
@@ -50,7 +50,7 @@ export function getLuminance(rgb: ColorRGB): number {
 /**
  * Calculate contrast ratio between two colors
  */
-export function getContrastRatio(color1: ColorRGB, color2: ColorRGB): number {
+function getContrastRatio(color1: ColorRGB, color2: ColorRGB): number {
   const lum1 = getLuminance(color1);
   const lum2 = getLuminance(color2);
 
@@ -63,10 +63,7 @@ export function getContrastRatio(color1: ColorRGB, color2: ColorRGB): number {
 /**
  * Check if contrast ratio meets WCAG standards
  */
-export function checkContrast(
-  foreground: string,
-  background: string,
-): ContrastResult {
+function checkContrast(foreground: string, background: string): ContrastResult {
   const fgRgb = hexToRgb(foreground);
   const bgRgb = hexToRgb(background);
 
@@ -104,7 +101,7 @@ export function checkContrast(
 /**
  * Get accessible color suggestions
  */
-export function getAccessibleColors(
+function _getAccessibleColors(
   baseColor: string,
   targetRatio = 4.5,
 ): Array<string> {
@@ -136,7 +133,7 @@ export function getAccessibleColors(
 /**
  * Check if a color is considered "light" or "dark"
  */
-export function isLightColor(color: string): boolean {
+function _isLightColor(color: string): boolean {
   const rgb = hexToRgb(color);
   if (!rgb) {
     return false;
@@ -149,7 +146,7 @@ export function isLightColor(color: string): boolean {
 /**
  * Get the best contrasting color (black or white) for a given background
  */
-export function getBestContrastColor(backgroundColor: string): string {
+function _getBestContrastColor(backgroundColor: string): string {
   const whiteContrast = checkContrast("#ffffff", backgroundColor);
   const blackContrast = checkContrast("#000000", backgroundColor);
 
@@ -159,7 +156,7 @@ export function getBestContrastColor(backgroundColor: string): string {
 /**
  * Validate if a color palette meets accessibility standards
  */
-export function validateColorPalette(
+function _validateColorPalette(
   palette: Record<string, string>,
 ): Record<string, Array<ContrastResult>> {
   const results: Record<string, Array<ContrastResult>> = {};
@@ -184,4 +181,3 @@ export function validateColorPalette(
 }
 
 // Export default checker function
-export default checkContrast;

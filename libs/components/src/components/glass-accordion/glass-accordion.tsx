@@ -100,25 +100,25 @@ interface GlassAccordionMultipleProps
 }
 
 // Union type for all accordion props
-export type GlassAccordionProps =
+type GlassAccordionProps =
   | GlassAccordionSingleProps
   | GlassAccordionMultipleProps;
 
-export interface GlassAccordionItemProps
+interface GlassAccordionItemProps
   extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>,
     VariantProps<typeof accordionItemVariants> {
   children: React.ReactNode;
   value: string;
 }
 
-export interface GlassAccordionTriggerProps
+interface GlassAccordionTriggerProps
   extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>,
     VariantProps<typeof accordionTriggerVariants> {
   children: React.ReactNode;
   showIcon?: boolean;
 }
 
-export interface GlassAccordionContentProps
+interface GlassAccordionContentProps
   extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>,
     VariantProps<typeof accordionContentVariants> {
   children: React.ReactNode;

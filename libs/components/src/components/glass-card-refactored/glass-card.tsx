@@ -38,7 +38,7 @@ interface CardState extends Record<string, boolean> {
 }
 
 // Card-specific props (moved here to be used by business logic hook)
-export interface GlassCardRefactoredProps
+interface GlassCardRefactoredProps
   extends LayoutGlassProps,
     ComponentPropsBuilder<HTMLDivElement> {
   /** Card hover effects */
@@ -385,7 +385,7 @@ GlassCard.displayName = "GlassCard";
 /**
  * Card Header Component
  */
-export const CardHeader = forwardRef<
+const CardHeader = forwardRef<
   HTMLDivElement,
   ComponentPropsBuilder<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
@@ -411,7 +411,7 @@ CardHeader.displayName = "CardHeader";
 /**
  * Card Title Component
  */
-export const CardTitle = forwardRef<HTMLHeadingElement, HeadingProps>(
+const CardTitle = forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ className, children, ...props }, ref) => {
     const { variant } = useCardContext();
 
@@ -437,7 +437,7 @@ CardTitle.displayName = "CardTitle";
 /**
  * Card Description Component
  */
-export const CardDescription = forwardRef<HTMLParagraphElement, ParagraphProps>(
+const CardDescription = forwardRef<HTMLParagraphElement, ParagraphProps>(
   ({ className, children, ...props }, ref) => {
     const { variant } = useCardContext();
 
@@ -462,7 +462,7 @@ CardDescription.displayName = "CardDescription";
 /**
  * Card Content Component
  */
-export const CardContent = forwardRef<
+const CardContent = forwardRef<
   HTMLDivElement,
   ComponentPropsBuilder<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
@@ -484,7 +484,7 @@ CardContent.displayName = "CardContent";
 /**
  * Card Footer Component
  */
-export const CardFooter = forwardRef<
+const CardFooter = forwardRef<
   HTMLDivElement,
   ComponentPropsBuilder<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
@@ -510,7 +510,7 @@ CardFooter.displayName = "CardFooter";
 /**
  * Card Actions Component
  */
-export const CardActions = forwardRef<
+const CardActions = forwardRef<
   HTMLDivElement,
   ComponentPropsBuilder<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
@@ -537,5 +537,4 @@ const CompoundCard = Object.assign(GlassCard, {
   Actions: CardActions,
 });
 
-export { CompoundCard as Card };
-export type { GlassCardRefactoredProps as GlassCardProps };
+export { CompoundCard as Card };;

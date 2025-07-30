@@ -41,4 +41,4 @@ export function ConfigProvider({
 }
 
 // Alias for backward compatibility
-export const LiquidifyProvider = ConfigProvider;
+const LiquidifyProvider = ConfigProvider;

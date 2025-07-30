@@ -101,7 +101,6 @@ export * from "./lib/liquid-glass-tokens";
 export * from "./lib/visual-polish-system";
 export * from "./providers";
 // Main Provider Export
-export { GlassUIProvider } from "./providers";
 // Tokens
 export * from "./tokens";
 // Types

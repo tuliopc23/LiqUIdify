@@ -1,1 +1,1 @@
-export { GlassBadge, type GlassBadgeProps } from "./glass-badge";
+export { GlassBadge } from "./glass-badge";

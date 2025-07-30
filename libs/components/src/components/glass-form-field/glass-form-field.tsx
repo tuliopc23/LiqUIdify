@@ -60,7 +60,7 @@ const helperTextVariants = cva({
   },
 });
 
-export interface GlassFormFieldProps
+interface GlassFormFieldProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof formFieldVariants> {
   label?: string;

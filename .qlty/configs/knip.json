@@ -22,7 +22,8 @@
     "**/static-export/**",
     "**/.nx/**",
     "**/coverage/**",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "**/storybook/.storybook/main.ts"
   ],
   "storybook": {
     "config": ["apps/storybook/.storybook/main.ts"],

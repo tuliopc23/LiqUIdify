@@ -4,7 +4,7 @@ import { cn, getGlassClass } from "@/core/utils/classname";
 
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
-export interface DropdownItem {
+interface DropdownItem {
   label: string;
   value: string;
   disabled?: boolean;
@@ -12,7 +12,7 @@ export interface DropdownItem {
   separator?: boolean;
 }
 
-export interface GlassDropdownProps {
+interface GlassDropdownProps {
   trigger: React.ReactNode;
   items: Array<DropdownItem>;
   onSelect?: (value: string) => void;

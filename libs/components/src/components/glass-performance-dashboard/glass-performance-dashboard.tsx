@@ -6,7 +6,7 @@ import { performanceMonitor } from "../../core/performance-monitor";
 import { useRealtimePerformance } from "../../hooks/use-performance-monitoring";
 import { GlassCard } from "../glass-card-refactored";
 
-export interface GlassPerformanceDashboardProps {
+interface GlassPerformanceDashboardProps {
   className?: string;
   position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   collapsed?: boolean;

@@ -12,6 +12,3 @@ export * from "../components/glass-skeleton";
 export * from "../components/glass-spinner";
 export * from "../components/glass-toast";
 export * from "../components/glass-tooltip";
-
-// Tree-shaking marker
-export const FEEDBACK_BUNDLE_MARKER = "liquidui-feedback" as const;

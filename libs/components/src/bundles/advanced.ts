@@ -39,6 +39,3 @@ export * from "../components/sidebar";
 export * from "../providers/glass-performance-provider";
 
 export * from "../providers/ssr-config-provider";
-
-// Tree-shaking markers
-export const ADVANCED_BUNDLE_MARKER = "liquidui-advanced" as const;

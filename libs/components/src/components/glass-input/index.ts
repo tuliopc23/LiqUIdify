@@ -1,1 +1,1 @@
-export { GlassInput, type GlassInputProps } from "./glass-input";
+export { GlassInput } from "./glass-input";

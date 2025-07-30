@@ -52,7 +52,7 @@ const buttonVariants = cva({
   },
 });
 
-export interface GlassNumberInputProps {
+interface GlassNumberInputProps {
   value?: number;
   defaultValue?: number;
   onChange?: (value: number | null) => void;

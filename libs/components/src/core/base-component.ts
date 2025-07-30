@@ -85,7 +85,7 @@ export interface InteractiveGlassProps extends BaseGlassProps {
 }
 
 // Compound component props
-export interface CompoundComponentProps {
+interface CompoundComponentProps {
   /** Render as child element */
   asChild?: boolean;
   /** Component children */
@@ -214,7 +214,7 @@ interface PerformanceProps {
 }
 
 // Combined base props for all components
-export interface UnifiedGlassProps
+interface UnifiedGlassProps
   extends BaseGlassProps,
     CompoundComponentProps,
     AccessibilityProps,
@@ -233,7 +233,7 @@ type RequiredGlassProps<T> = Required<T>;
 type PartialGlassProps<T> = Partial<T>;
 
 // Generic component props builder
-export type ComponentPropsBuilder<
+type ComponentPropsBuilder<
   T extends HTMLElement,
   P extends Record<string, unknown> = {},
 > = UnifiedGlassProps & HTMLAttributes<T> & P;

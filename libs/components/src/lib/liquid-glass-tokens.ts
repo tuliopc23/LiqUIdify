@@ -196,7 +196,7 @@ export const liquidGlassTokens = {
 } as const;
 
 // Theme Configuration
-export const glassThemes = {
+const glassThemes = {
   light: {
     background: {
       primary: "rgba(255, 255, 255, 0.12)",
@@ -240,7 +240,7 @@ export const glassThemes = {
 } as const;
 
 // Component-specific tokens
-export const componentTokens = {
+const componentTokens = {
   button: {
     height: {
       xs: "28px",
@@ -280,7 +280,7 @@ export const componentTokens = {
 } as const;
 
 // Utility functions for token access
-export const getToken = (path: string) => {
+const _getToken = (path: string) => {
   const keys = path.split(".");
   let current: unknown = liquidGlassTokens;
 
@@ -295,7 +295,7 @@ export const getToken = (path: string) => {
   return current;
 };
 
-export const getThemeToken = (theme: "light" | "dark", path: string) => {
+const _getThemeToken = (theme: "light" | "dark", path: string) => {
   const keys = path.split(".");
   let current: unknown = glassThemes[theme];
 
@@ -311,9 +311,7 @@ export const getThemeToken = (theme: "light" | "dark", path: string) => {
 };
 
 // CSS Custom Properties Generator
-export const generateCSSCustomProperties = (
-  theme: "light" | "dark" = "light",
-) => {
+const _generateCSSCustomProperties = (theme: "light" | "dark" = "light") => {
   const themeTokens = glassThemes[theme];
   const cssVariables: Record<string, string> = {};
 
@@ -338,7 +336,7 @@ export const generateCSSCustomProperties = (
 };
 
 // Export types for TypeScript support
-export type LiquidGlassTokens = typeof liquidGlassTokens;
-export type GlassThemes = typeof glassThemes;
-export type ComponentTokens = typeof componentTokens;
-export type ThemeMode = keyof typeof glassThemes;
+type LiquidGlassTokens = typeof liquidGlassTokens;
+type GlassThemes = typeof glassThemes;
+type ComponentTokens = typeof componentTokens;
+type ThemeMode = keyof typeof glassThemes;

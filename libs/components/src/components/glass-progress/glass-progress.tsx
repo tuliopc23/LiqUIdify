@@ -2,7 +2,7 @@ import React from "react";
 
 import { cn, getGlassClass } from "@/core/utils/classname";
 
-export interface GlassProgressProps {
+interface GlassProgressProps {
   value: number;
   max?: number;
   size?: "sm" | "md" | "lg";

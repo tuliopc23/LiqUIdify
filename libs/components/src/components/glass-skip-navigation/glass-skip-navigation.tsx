@@ -7,14 +7,14 @@ import { cn } from "@/core/utils/classname";
 
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
-export interface SkipLink {
+interface SkipLink {
   id: string;
   label: string;
   target: string | HTMLElement;
   shortcut?: string;
 }
 
-export interface GlassSkipNavigationProps {
+interface GlassSkipNavigationProps {
   links?: Array<SkipLink>;
   autoGenerate?: boolean;
   position?: "top" | "left" | "right";
@@ -338,7 +338,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
 /**
  * Hook for programmatically managing skip navigation
  */
-export function useSkipNavigation() {
+function _useSkipNavigation() {
   const [skipLinks, setSkipLinks] = useState<Array<SkipLink>>([]);
 
   const addSkipLink = (link: SkipLink) => {

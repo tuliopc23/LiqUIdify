@@ -122,7 +122,7 @@ function getCurrentBreakpoint(): BreakpointKey {
 /**
  * Check if screen size matches a breakpoint condition
  */
-function matchesBreakpoint(
+function _matchesBreakpoint(
   condition: "up" | "down" | "only",
   breakpoint: BreakpointKey,
 ): boolean {
@@ -163,7 +163,7 @@ function matchesBreakpoint(
 /**
  * Create responsive utility classes
  */
-function createResponsiveClasses(
+function _createResponsiveClasses(
   baseClass: string,
   breakpoints: Partial<Record<BreakpointKey, string>>,
 ): string {
@@ -182,7 +182,7 @@ function createResponsiveClasses(
 /**
  * Container query utilities (for modern browsers)
  */
-function containerQuery(
+function _containerQuery(
   size: "xs" | "sm" | "md" | "lg" | "xl",
   className: string,
 ): string {
@@ -200,7 +200,7 @@ function containerQuery(
 /**
  * Aspect ratio utilities
  */
-function aspectRatio(ratio: string | number): string {
+function _aspectRatio(ratio: string | number): string {
   if (typeof ratio === "number") {
     return `aspect-[${ratio}]`;
   }
@@ -220,7 +220,7 @@ function aspectRatio(ratio: string | number): string {
 /**
  * Fluid typography utilities
  */
-function fluidTypography(
+function _fluidTypography(
   minSize: number,
   maxSize: number,
   minViewport = 320,
@@ -235,7 +235,7 @@ function fluidTypography(
 /**
  * Generate responsive grid classes
  */
-function responsiveGrid(
+function _responsiveGrid(
   columns: Partial<Record<BreakpointKey, number>>,
 ): string {
   const classes: Array<string> = [];
@@ -253,7 +253,7 @@ function responsiveGrid(
 /**
  * Media query hook for React components
  */
-function useMediaQuery(query: string): boolean {
+function _useMediaQuery(query: string): boolean {
   const [matches, setMatches] = React.useState(() => {
     if (typeof window === "undefined") {
       return false;
@@ -279,7 +279,7 @@ function useMediaQuery(query: string): boolean {
 /**
  * Responsive breakpoint hook
  */
-function useBreakpoint(): BreakpointKey {
+function _useBreakpoint(): BreakpointKey {
   const [breakpoint, setBreakpoint] = React.useState<BreakpointKey>(() =>
     getCurrentBreakpoint(),
   );
@@ -305,7 +305,7 @@ function useBreakpoint(): BreakpointKey {
 /**
  * Responsive visibility utilities
  */
-function responsiveVisibility(
+function _responsiveVisibility(
   show: Partial<Record<BreakpointKey, boolean>>,
 ): string {
   const classes: Array<string> = [];

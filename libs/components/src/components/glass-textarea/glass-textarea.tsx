@@ -2,7 +2,7 @@ import React from "react";
 
 import { cn, getGlassClass } from "@/core/utils/classname";
 
-export interface GlassTextareaProps
+interface GlassTextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: "default" | "minimal";
   resize?: "none" | "vertical" | "horizontal" | "both";

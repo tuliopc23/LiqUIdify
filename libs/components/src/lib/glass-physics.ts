@@ -11,7 +11,7 @@ import {
  */
 
 // Physics constants
-export const PHYSICS_CONSTANTS = {
+const PHYSICS_CONSTANTS = {
   SPRING_TENSION: 170,
   SPRING_FRICTION: 0.9,
   MAGNETIC_STRENGTH: 0.15,
@@ -147,7 +147,7 @@ class LegacySpringPhysics {
 }
 
 // Spring physics configuration
-export interface SpringConfig {
+interface SpringConfig {
   tension: number;
   friction: number;
   mass?: number;
@@ -156,7 +156,7 @@ export interface SpringConfig {
 }
 
 // Spring physics defaults
-export const SPRING_PRESETS = {
+const _SPRING_PRESETS = {
   noWobble: { tension: 170, friction: 26 },
   gentle: { tension: 120, friction: 14 },
   wobbly: { tension: 180, friction: 12 },
@@ -169,9 +169,7 @@ export const SPRING_PRESETS = {
  * Haptic feedback simulation for animations
  * Provides tactile feedback when animations are triggered
  */
-export function hapticFeedback(
-  intensity: "light" | "medium" | "heavy" = "medium",
-) {
+function _hapticFeedback(intensity: "light" | "medium" | "heavy" = "medium") {
   try {
     // Check for SSR environment
     if (typeof window === "undefined" || typeof navigator === "undefined") {
@@ -204,7 +202,7 @@ export function hapticFeedback(
 }
 
 // Enhanced spring physics class
-export class SpringPhysics {
+class SpringPhysics {
   private position: number;
   private velocity: number;
   private tension: number;
@@ -258,7 +256,7 @@ export class SpringPhysics {
 }
 
 // 2D Spring physics
-export class Spring2D {
+class Spring2D {
   private springX: SpringPhysics;
   private springY: SpringPhysics;
 
@@ -290,7 +288,7 @@ export class Spring2D {
 }
 
 // Magnetic hover effect hook
-export const useMagneticHover = (
+const _useMagneticHover = (
   strength: number = PHYSICS_CONSTANTS.MAGNETIC_STRENGTH,
   radius: number = PHYSICS_CONSTANTS.MAGNETIC_RADIUS,
 ) => {
@@ -402,7 +400,7 @@ export const useMagneticHover = (
 };
 
 // Repulsion effect between elements
-export const useRepulsionEffect = (
+const _useRepulsionEffect = (
   elements: Array<HTMLElement>,
   repulsionStrength = 50,
 ) => {
@@ -464,7 +462,7 @@ export const useRepulsionEffect = (
 };
 
 // Fluid morphing transition utility
-export const createFluidMorph = (
+const _createFluidMorph = (
   fromElement: HTMLElement,
   toElement: HTMLElement,
   duration = 500,
@@ -503,7 +501,7 @@ export const createFluidMorph = (
 };
 
 // Glass ripple effect
-export const createGlassRipple = (
+const _createGlassRipple = (
   element: HTMLElement,
   x: number,
   y: number,
@@ -570,7 +568,7 @@ export const createGlassRipple = (
 };
 
 // Fluid dynamics configuration
-export interface FluidConfig {
+interface FluidConfig {
   viscosity: number;
   density: number;
   pressure: number;
@@ -578,7 +576,7 @@ export interface FluidConfig {
 }
 
 // Fluid particle
-export class FluidParticle {
+class FluidParticle {
   position: Vector2D;
   velocity: Vector2D;
   density: number;
@@ -593,7 +591,7 @@ export class FluidParticle {
 }
 
 // Simplified fluid simulation
-export class FluidSimulation {
+class FluidSimulation {
   private particles: Array<FluidParticle> = [];
   private config: FluidConfig;
   private smoothingRadius: number;
@@ -795,7 +793,7 @@ export class FluidSimulation {
 }
 
 // Particle system configuration
-export interface ParticleConfig {
+interface ParticleConfig {
   position: Vector2D;
   velocity?: Vector2D;
   acceleration?: Vector2D;
@@ -806,7 +804,7 @@ export interface ParticleConfig {
 }
 
 // Particle class
-export class Particle {
+class Particle {
   position: Vector2D;
   velocity: Vector2D;
   acceleration: Vector2D;
@@ -853,7 +851,7 @@ export class Particle {
 }
 
 // Particle emitter configuration
-export interface EmitterConfig {
+interface EmitterConfig {
   position: Vector2D;
   rate: number;
   particleConfig: Partial<ParticleConfig>;
@@ -864,7 +862,7 @@ export interface EmitterConfig {
 }
 
 // Particle emitter
-export class ParticleEmitter {
+class ParticleEmitter {
   private config: EmitterConfig;
   private particles: Array<Particle> = [];
   private emitAccumulator = 0;
@@ -964,7 +962,7 @@ export class ParticleEmitter {
 }
 
 // Physics world for managing multiple systems
-export class PhysicsWorld {
+class PhysicsWorld {
   private springs: Map<string, SpringPhysics | Spring2D> = new Map();
   private emitters: Map<string, ParticleEmitter> = new Map();
   private fluids: Map<string, FluidSimulation> = new Map();
@@ -1072,4 +1070,4 @@ export class PhysicsWorld {
 }
 
 // Global physics world instance
-export const physicsWorld = new PhysicsWorld();
+const _physicsWorld = new PhysicsWorld();

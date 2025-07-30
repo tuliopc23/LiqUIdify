@@ -270,7 +270,7 @@ export const InteractiveDemo: Story = {
     });
 
     const allChecked = Object.values(checkedItems).every(Boolean);
-    const someChecked = Object.values(checkedItems).some(Boolean);
+    const _someChecked = Object.values(checkedItems).some(Boolean);
 
     const handleParentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.checked;
@@ -301,7 +301,7 @@ export const InteractiveDemo: Story = {
               onChange={handleParentChange}
               ref={(el) => {
                 if (el) {
-                  el.indeterminate = someChecked && !allChecked;
+                  el.indeterminate = _someChecked && !allChecked;
                 }
               }}
             />

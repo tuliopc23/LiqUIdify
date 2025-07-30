@@ -79,14 +79,14 @@ const optionVariants = cva({
   },
 });
 
-export interface ComboboxOption {
+interface ComboboxOption {
   value: string;
   label: string;
   disabled?: boolean;
   icon?: React.ReactNode;
 }
 
-export interface GlassComboboxProps
+interface GlassComboboxProps
   extends Omit<
       Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
       "onChange"

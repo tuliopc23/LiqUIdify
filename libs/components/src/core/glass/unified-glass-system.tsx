@@ -36,7 +36,7 @@ export type GlassVariant =
   | "modal";
 type GlassAnimation = "none" | "subtle" | "smooth" | "bouncy" | "liquid";
 
-export interface GlassEffectConfig {
+interface GlassEffectConfig {
   intensity: GlassIntensity;
   variant: GlassVariant;
   animation?: GlassAnimation;
@@ -193,7 +193,7 @@ export function useUnifiedGlass(
 }
 
 // Backward compatibility utilities
-const createGlassEffect = (config: GlassEffectConfig) => ({
+const _createGlassEffect = (config: GlassEffectConfig) => ({
   className: `glass-effect glass-effect--${config.intensity}`,
   style: useUnifiedGlass(config).glassStyles,
 });
@@ -229,7 +229,7 @@ const AppleLiquidGlass: React.FC<AppleLiquidGlassProps> = ({
   );
 };
 
-const EnhancedAppleLiquidGlass = AppleLiquidGlass;
+const _EnhancedAppleLiquidGlass = AppleLiquidGlass;
 
 // Additional utility exports for backward compatibility
 export {

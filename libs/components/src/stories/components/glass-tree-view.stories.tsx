@@ -212,7 +212,7 @@ export const ControlledExpansion: Story = { render: () => { }
       ['src']
     );
 
-    const handleNodeExpand = (node: TreeNode, expanded: boolean) => {
+    const _handleNodeExpand = (node: TreeNode, expanded: boolean) => {
       setExpandedNodeIds((prev) => {
         if (expanded) {
           return [...prev, node.id];

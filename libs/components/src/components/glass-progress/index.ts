@@ -1,1 +1,1 @@
-export { GlassProgress, type GlassProgressProps } from "./glass-progress";
+export { GlassProgress } from "./glass-progress";

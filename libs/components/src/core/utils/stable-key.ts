@@ -48,7 +48,7 @@ export function generateStaticKey(
  * @param parts - Array of key parts to join
  * @returns A stable string key
  */
-export function generateNestedKey(...parts: (string | number)[]): string {
+function _generateNestedKey(...parts: Array<string | number>): string {
   return parts.join("-");
 }
 
@@ -58,7 +58,7 @@ export function generateNestedKey(...parts: (string | number)[]): string {
  * @param useTimestamp - Whether to include timestamp for uniqueness
  * @returns A stable or unique string key
  */
-export function generateTimestampKey(
+function _generateTimestampKey(
   prefix: string,
   useTimestamp: boolean = false,
 ): string {

@@ -306,3 +306,23 @@ mode = "disabled"
 name = "knip"
 config_file = ".qlty/configs/knip.json"
 mode = "comment"
+# Align with biome file patterns
+include_patterns = [
+  "**/*.ts",
+  "**/*.tsx",
+  "**/*.js",
+  "**/*.jsx",
+  "**/*.mts",
+  "**/*.cts",
+  "**/*.mjs",
+  "**/*.cjs"
+]
+exclude_patterns = [
+  "**/*.d.ts",
+  "**/dist/**",
+  "**/build/**",
+  "**/node_modules/**",
+  "**/.turbo/**",
+  "**/.next/**",
+  "**/coverage/**"
+]

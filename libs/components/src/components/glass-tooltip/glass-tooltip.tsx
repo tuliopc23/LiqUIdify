@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 import { cn, getGlassClass } from "@/core/utils/classname";
 
-export interface GlassTooltipProps {
+interface GlassTooltipProps {
   content: React.ReactNode;
   children: React.ReactNode;
   position?: "top" | "bottom" | "left" | "right";

@@ -1,6 +1,6 @@
 import { createContext, type ReactNode, useContext } from "react";
 
-export interface GlobalConfig {
+interface GlobalConfig {
   defaultVariant?: "default" | "glass" | "frosted" | "liquid";
   defaultSize?: "sm" | "md" | "lg";
   enableAnimations?: boolean;
@@ -20,7 +20,7 @@ const defaultConfig: GlobalConfig = {
   highContrast: false,
 };
 
-export const GlobalConfigContext = createContext<GlobalConfig>(defaultConfig);
+const GlobalConfigContext = createContext<GlobalConfig>(defaultConfig);
 
 export interface GlobalConfigProviderProps {
   children: ReactNode;
@@ -40,7 +40,7 @@ export function GlobalConfigProvider({
   );
 }
 
-export function useGlobalConfig() {
+function useGlobalConfig() {
   const context = useContext(GlobalConfigContext);
   if (!context) {
     throw new Error(

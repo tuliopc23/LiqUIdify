@@ -7,7 +7,6 @@ import {
   Copy,
   Download,
   Eye,
-  Gift,
   Github,
   Globe,
   Heart,

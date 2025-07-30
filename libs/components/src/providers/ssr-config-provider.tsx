@@ -11,7 +11,7 @@ interface SSRConfigProviderProps extends ConfigProviderProps {
  * SSR-safe configuration provider that handles hydration mismatches
  * and provides proper server-side rendering support
  */
-export function SSRConfigProvider({
+function SSRConfigProvider({
   children,
   fallback = undefined,
   ...configProps
@@ -36,7 +36,7 @@ export function SSRConfigProvider({
  * Hook to check if we're running on the client side
  * Useful for conditional rendering of client-only features
  */
-export function useIsClient() {
+function useIsClient() {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export function useIsClient() {
 /**
  * Higher-order component that adds SSR safety to any component
  */
-export function withSSRSafety<P extends object>(
+function withSSRSafety<P extends object>(
   Component: React.ComponentType<P>,
   fallback?: ReactNode,
 ) {

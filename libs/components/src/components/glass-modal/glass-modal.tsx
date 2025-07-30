@@ -11,7 +11,7 @@ import { cn } from "@/core/utils/classname";
 
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
-export interface GlassModalProps {
+interface GlassModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;

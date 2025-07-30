@@ -44,7 +44,7 @@ export function useSSRSafeWindow<T = Window>(
 /**
  * Hook to safely access document object in SSR environments
  */
-export function useSSRSafeDocument<T = Document>(
+function useSSRSafeDocument<T = Document>(
   selector: (document: Document) => T,
   fallback: T,
 ): T {
@@ -67,7 +67,7 @@ export function useSSRSafeDocument<T = Document>(
 /**
  * Hook to safely access navigator object in SSR environments
  */
-export function useSSRSafeNavigator<T = Navigator>(
+function useSSRSafeNavigator<T = Navigator>(
   selector: (navigator: Navigator) => T,
   fallback: T,
 ): T {
@@ -90,7 +90,7 @@ export function useSSRSafeNavigator<T = Navigator>(
 /**
  * Hook to safely use localStorage in SSR environments
  */
-export function useSSRSafeLocalStorage<T>(
+function useSSRSafeLocalStorage<T>(
   key: string,
   initialValue: T,
 ): [T, (value: T) => void] {
@@ -132,7 +132,7 @@ export function useSSRSafeLocalStorage<T>(
 /**
  * Hook to safely use sessionStorage in SSR environments
  */
-export function useSSRSafeSessionStorage<T>(
+function useSSRSafeSessionStorage<T>(
   key: string,
   initialValue: T,
 ): [T, (value: T) => void] {
@@ -174,7 +174,7 @@ export function useSSRSafeSessionStorage<T>(
 /**
  * Hook to safely handle hydration mismatches
  */
-export function useHydrationSafe<T>(
+function useHydrationSafe<T>(
   clientValue: T,
   serverValue: T,
   options: { delay?: number; onMismatch?: (client: T, server: T) => void } = {},
@@ -210,7 +210,7 @@ export function useHydrationSafe<T>(
 /**
  * Hook to safely handle media queries in SSR environments
  */
-export function useSSRSafeMediaQuery(query: string): boolean {
+function useSSRSafeMediaQuery(query: string): boolean {
   const isClient = useIsClient();
   const [matches, setMatches] = useState(false);
 
@@ -236,7 +236,7 @@ export function useSSRSafeMediaQuery(query: string): boolean {
 /**
  * Hook to safely handle network status in SSR environments
  */
-export function useNetworkStatus(): {
+function useNetworkStatus(): {
   online: boolean;
   effectiveType?: "slow-2g" | "2g" | "3g" | "4g";
   saveData?: boolean;
@@ -296,7 +296,7 @@ export function useNetworkStatus(): {
 /**
  * Hook to safely handle animations in SSR environments
  */
-export function useSSRSafeAnimation(
+function useSSRSafeAnimation(
   animationFunction: () => void,
   options: { delay?: number; disabled?: boolean } = {},
 ): void {
@@ -327,7 +327,7 @@ export function useSSRSafeAnimation(
 /**
  * Hook to safely handle intersection observer in SSR environments
  */
-export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
+function _useSSRSafeIntersectionObserver<T extends HTMLElement>(
   options: IntersectionObserverInit = {},
   callback?: (entry: IntersectionObserverEntry) => void,
 ): [(node: T | null) => void, boolean, IntersectionObserverEntry | null] {
@@ -381,7 +381,7 @@ export function useSSRSafeIntersectionObserver<T extends HTMLElement>(
 /**
  * Hook to safely handle resize observer in SSR environments
  */
-export function useSSRSafeResizeObserver<T extends HTMLElement>(
+function _useSSRSafeResizeObserver<T extends HTMLElement>(
   callback?: (entry: ResizeObserverEntry) => void,
 ): [(node: T | null) => void, DOMRectReadOnly | undefined] {
   const isClient = useIsClient();
@@ -432,10 +432,7 @@ export function useSSRSafeResizeObserver<T extends HTMLElement>(
 /**
  * Hook to safely handle document visibility in SSR environments
  */
-export function useSSRSafeDocumentVisibility():
-  | "visible"
-  | "hidden"
-  | "prerender" {
+function _useSSRSafeDocumentVisibility(): "visible" | "hidden" | "prerender" {
   const isClient = useIsClient();
   const [visibility, setVisibility] = useState<
     "visible" | "hidden" | "prerender"
@@ -466,7 +463,7 @@ export function useSSRSafeDocumentVisibility():
 /**
  * Hook to safely handle browser features detection in SSR environments
  */
-export function useSSRSafeFeatureDetection(feature: string): boolean {
+function _useSSRSafeFeatureDetection(feature: string): boolean {
   const isClient = useIsClient();
   const [supported, setSupported] = useState(false);
 

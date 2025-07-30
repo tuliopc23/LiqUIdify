@@ -67,7 +67,7 @@ export function createBusinessLogicHook<
 /**
  * Create a reducer-based business logic hook
  */
-function createReducerBusinessLogic<TState, TAction extends Action, TProps>(
+function _createReducerBusinessLogic<TState, TAction extends Action, TProps>(
   initialStateFactory: (props: TProps) => TState,
   reducer: Reducer<TState, TAction>,
   effectsFactory?: (
@@ -99,7 +99,7 @@ function createReducerBusinessLogic<TState, TAction extends Action, TProps>(
 /**
  * Create event handlers with business logic separation
  */
-function useEventHandlers<TElement extends HTMLElement, TState, TProps>(
+function _useEventHandlers<TElement extends HTMLElement, TState, TProps>(
   state: TState,
   setState: (newState: TState | ((previousState: TState) => TState)) => void,
   props: TProps,
@@ -302,7 +302,7 @@ function createFormSubmitter<T extends Record<string, unknown>>(
   };
 }
 
-function createFormBusinessLogic<T extends Record<string, unknown>>(
+function _createFormBusinessLogic<T extends Record<string, unknown>>(
   initialValues: T,
   validationRules?: Record<keyof T, (value: unknown) => string | null>,
   onSubmit?: (values: T) => void | Promise<void>,
@@ -487,7 +487,7 @@ function createTableItemsPerPageSetter<T extends Record<string, unknown>>(
   };
 }
 
-function createTableBusinessLogic<T extends Record<string, unknown>>(
+function _createTableBusinessLogic<T extends Record<string, unknown>>(
   initialItems: Array<T> = [],
   itemsPerPage = 10,
 ): BusinessLogicHook<{ state: TableState<T>; actions: TableActions<T> }, {}> {
@@ -553,7 +553,7 @@ interface ModalActions {
   setVariant: (variant: ComponentVariant) => void;
 }
 
-function createModalBusinessLogic(
+function _createModalBusinessLogic(
   initialState: Partial<ModalState> = {},
 ): BusinessLogicHook<{ state: ModalState; actions: ModalActions }, {}> {
   return () => {
@@ -732,7 +732,7 @@ function shouldAutoFetch<T>(
   );
 }
 
-function createAsyncDataBusinessLogic<T>(
+function _createAsyncDataBusinessLogic<T>(
   fetchFunction: () => Promise<T>,
   cacheTimeout: number = 5 * 60 * 1000, // 5 minutes
 ): BusinessLogicHook<
@@ -773,7 +773,14 @@ function createAsyncDataBusinessLogic<T>(
       if (shouldAutoFetch(state, cacheTimeout)) {
         actions.fetchData();
       }
-    }, [state.data, state.loading, state.lastFetch, actions, cacheTimeout]);
+    }, [
+      state.data,
+      state.loading,
+      state.lastFetch,
+      actions,
+      cacheTimeout,
+      state,
+    ]);
 
     return { state, actions };
   };

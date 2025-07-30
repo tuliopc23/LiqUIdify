@@ -267,7 +267,7 @@ const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 };
 
 // Enhanced hook for managing live region announcements
-function useAnnouncement() {
+function _useAnnouncement() {
   const [announcement, setAnnouncement] = useState<string>("");
   const [announcementOptions, setAnnouncementOptions] =
     useState<AnnouncementOptions>({});
@@ -506,7 +506,7 @@ class AnnouncementManager {
 export const announcer = new AnnouncementManager();
 
 // Enhanced global live region provider
-const GlassLiveRegionProvider: React.FC<{
+const _GlassLiveRegionProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [announcements, setAnnouncements] = useState<

@@ -28,7 +28,7 @@ export function cn(...inputs: Array<ClassValue>): string {
  * @param variants - Object of variant classes
  * @returns Function that applies variants based on props
  */
-function createVariantClass<T extends Record<string, string>>(
+function _createVariantClass<T extends Record<string, string>>(
   base: string,
   variants: T,
 ) {
@@ -47,7 +47,7 @@ function createVariantClass<T extends Record<string, string>>(
  * @param sizeMap - Object mapping size keys to class strings
  * @returns Function that returns class based on size prop
  */
-function createSizeClass<T extends Record<string, string>>(sizeMap: T) {
+function _createSizeClass<T extends Record<string, string>>(sizeMap: T) {
   return (size: keyof T): string => sizeMap[size] || "";
 }
 
@@ -91,7 +91,7 @@ export function getGlassClass(
  * Focus ring utility for accessibility
  * Provides consistent focus ring styling across components
  */
-function focusRing(visible = true): string {
+function _focusRing(visible = true): string {
   if (!visible) {
     return "";
   }
@@ -132,7 +132,7 @@ export const microInteraction = Object.assign(createMicroInteraction, {
 /**
  * Animation duration utilities
  */
-export const ANIMATION_DURATIONS = {
+const ANIMATION_DURATIONS = {
   fast: "duration-150",
   normal: "duration-300",
   slow: "duration-500",
@@ -140,7 +140,7 @@ export const ANIMATION_DURATIONS = {
   "glass-fast": "duration-150",
 } as const;
 
-function animationDuration(
+function _animationDuration(
   speed: keyof typeof ANIMATION_DURATIONS = "normal",
 ): string {
   return ANIMATION_DURATIONS[speed];

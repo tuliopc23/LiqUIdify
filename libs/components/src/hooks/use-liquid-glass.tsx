@@ -9,7 +9,7 @@ import {
 } from "react";
 import { liquidGlassTokens } from "../lib/liquid-glass-tokens";
 
-export interface LiquidGlassConfig {
+interface LiquidGlassConfig {
   color?: string; // rgb string e.g. "255,255,255"
   blur?: number; // px
   saturation?: number; // percentage
@@ -19,7 +19,7 @@ export interface LiquidGlassConfig {
   magneticHover?: boolean; // Enable magnetic hover effects
 }
 
-export interface ContentAnalysis {
+interface ContentAnalysis {
   averageColor: string;
   brightness: number;
   contrast: number;
@@ -137,12 +137,10 @@ export function LiquidGlassProvider({
   );
 }
 
-export const useLiquidGlass = () => useContext(LiquidGlassContext);
+const useLiquidGlass = () => useContext(LiquidGlassContext);
 
 // Content-aware glass hook
-export const useContentAwareGlass = (
-  contentRef: React.RefObject<HTMLElement>,
-) => {
+const _useContentAwareGlass = (contentRef: React.RefObject<HTMLElement>) => {
   const { updateGlassStyle, adaptToContent } = useLiquidGlass();
   const analysisRef = useRef<ContentAnalysis | null>(null);
 

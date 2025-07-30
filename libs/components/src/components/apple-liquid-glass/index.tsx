@@ -23,15 +23,14 @@ import { cn } from "@/core/utils/classname";
 //   type AppleLiquidGlassProps,
 // } from '@/lib/enhanced-apple-liquid-glass';
 
-export interface AppleLiquidGlassNavProps
-  extends Omit<UnifiedGlassProps, "config"> {
+interface AppleLiquidGlassNavProps extends Omit<UnifiedGlassProps, "config"> {
   intensity?: GlassIntensity;
   magnetic?: boolean;
   animated?: boolean;
   interactive?: boolean;
 }
 
-export function AppleLiquidGlassNav({
+function _AppleLiquidGlassNav({
   children,
   className,
   style,
@@ -73,12 +72,11 @@ export function AppleLiquidGlassNav({
 }
 
 // Base Apple Liquid Glass component
-export interface AppleLiquidGlassComponentProps
-  extends AppleLiquidGlassNavProps {
+interface AppleLiquidGlassComponentProps extends AppleLiquidGlassNavProps {
   as?: "div" | "section" | "article" | "nav";
 }
 
-export function AppleLiquidGlass({
+function AppleLiquidGlass({
   children,
   className,
   style,
@@ -121,14 +119,13 @@ export function AppleLiquidGlass({
 }
 
 // Apple Liquid Glass Card component
-export interface AppleLiquidGlassCardProps
-  extends AppleLiquidGlassComponentProps {
+interface AppleLiquidGlassCardProps extends AppleLiquidGlassComponentProps {
   padding?: "none" | "sm" | "md" | "lg";
   rounded?: boolean;
   multiLayer?: boolean;
 }
 
-export function AppleLiquidGlassCard({
+function _AppleLiquidGlassCard({
   children,
   className,
   padding = "md",
@@ -158,7 +155,7 @@ export function AppleLiquidGlassCard({
 }
 
 // Apple Liquid Glass Button component
-export interface AppleLiquidGlassButtonProps
+interface AppleLiquidGlassButtonProps
   extends Omit<
     React.ComponentPropsWithoutRef<"button">,
     "className" | "style" | "children"
@@ -176,7 +173,7 @@ export interface AppleLiquidGlassButtonProps
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export function AppleLiquidGlassButton({
+function _AppleLiquidGlassButton({
   children,
   className,
   variant = "primary",
@@ -234,6 +231,3 @@ export function AppleLiquidGlassButton({
     </button>
   );
 }
-
-// Export default for backward compatibility
-export default AppleLiquidGlassNav;

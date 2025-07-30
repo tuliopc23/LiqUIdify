@@ -1213,4 +1213,4 @@ class FocusTrap {
 }
 
 // Export singleton instance getter
-const accessibilityManager = AccessibilityManager.getInstance();
+const _accessibilityManager = AccessibilityManager.getInstance();

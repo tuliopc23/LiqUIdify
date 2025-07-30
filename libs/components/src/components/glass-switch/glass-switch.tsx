@@ -2,7 +2,7 @@ import { forwardRef, useState } from "react";
 
 import { cn } from "@/core/utils/classname";
 
-export interface GlassSwitchProps
+interface GlassSwitchProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label?: string;
   onChange?: (checked: boolean) => void;

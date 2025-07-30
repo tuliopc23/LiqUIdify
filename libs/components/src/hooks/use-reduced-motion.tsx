@@ -9,7 +9,7 @@ import { useCallback, useEffect, useState } from "react";
 import { isClient } from "@/core/ssr-safety";
 
 // Type definitions
-export interface ReducedMotionConfig {
+interface ReducedMotionConfig {
   /** Whether to force reduced motion regardless of system preference */
   forceReduced?: boolean;
   /** Whether to disable animations entirely when reduced motion is preferred */
@@ -20,7 +20,7 @@ export interface ReducedMotionConfig {
   onChange?: (prefersReduced: boolean) => void;
 }
 
-export interface AnimationConfig {
+interface AnimationConfig {
   /** Original animation duration */
   duration: number;
   /** Original animation easing */
@@ -31,7 +31,7 @@ export interface AnimationConfig {
   essential?: boolean;
 }
 
-export interface AdjustedAnimation {
+interface AdjustedAnimation {
   /** Adjusted duration based on reduced motion preference */
   duration: number;
   /** Adjusted easing (may be simplified) */
@@ -45,9 +45,7 @@ export interface AdjustedAnimation {
 /**
  * Hook for detecting prefers-reduced-motion
  */
-export const usePrefersReducedMotion = (
-  config: ReducedMotionConfig = {},
-): boolean => {
+const usePrefersReducedMotion = (config: ReducedMotionConfig = {}): boolean => {
   const { forceReduced = false, onChange } = config;
 
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
@@ -97,7 +95,7 @@ export const usePrefersReducedMotion = (
 /**
  * Hook for adjusting animations based on reduced motion preference
  */
-export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
+const _useReducedMotion = (config: ReducedMotionConfig = {}) => {
   const { disableAnimations = false, durationMultiplier = 0.1 } = config;
 
   const prefersReducedMotion = usePrefersReducedMotion(config);
@@ -278,7 +276,7 @@ export const useReducedMotion = (config: ReducedMotionConfig = {}) => {
 /**
  * HOC to wrap components with reduced motion support
  */
-export const withReducedMotion = <P extends object>(
+const _withReducedMotion = <P extends object>(
   Component: React.ComponentType<P & { prefersReducedMotion?: boolean }>,
   config?: ReducedMotionConfig,
 ): React.ComponentType<P> => {
@@ -292,7 +290,7 @@ export const withReducedMotion = <P extends object>(
 /**
  * Utility to create accessible animation styles
  */
-export const createAccessibleAnimation = (
+const _createAccessibleAnimation = (
   name: string,
   keyframes: string,
   options: {
@@ -327,9 +325,3 @@ export const createAccessibleAnimation = (
 };
 
 // Export all utilities
-export default {
-  usePrefersReducedMotion,
-  useReducedMotion,
-  withReducedMotion,
-  createAccessibleAnimation,
-};

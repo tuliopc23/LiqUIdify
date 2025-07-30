@@ -222,7 +222,7 @@ export function getContrastRatio(
 /**
  * Check if a color meets WCAG contrast requirements
  */
-function meetsContrastRequirement(
+function _meetsContrastRequirement(
   foreground: string | RGBColor,
   background: string | RGBColor,
   level: "AA" | "AAA" = "AA",
@@ -240,14 +240,14 @@ function meetsContrastRequirement(
 /**
  * Determine if a color is light or dark
  */
-function isLightColor(color: string | RGBColor): boolean {
+function _isLightColor(color: string | RGBColor): boolean {
   return getLuminance(color) > 0.5;
 }
 
 /**
  * Get complementary color
  */
-function getComplementaryColor(color: string): string {
+function _getComplementaryColor(color: string): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -263,7 +263,7 @@ function getComplementaryColor(color: string): string {
 /**
  * Lighten a color by a percentage
  */
-function lighten(color: string, amount: number): string {
+function _lighten(color: string, amount: number): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -279,7 +279,7 @@ function lighten(color: string, amount: number): string {
 /**
  * Darken a color by a percentage
  */
-function darken(color: string, amount: number): string {
+function _darken(color: string, amount: number): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -308,7 +308,7 @@ function setOpacity(color: string, opacity: number): string {
 /**
  * Generate a color palette from a base color
  */
-function generatePalette(baseColor: string, steps = 9): Array<string> {
+function _generatePalette(baseColor: string, steps = 9): Array<string> {
   const palette: Array<string> = [];
   const stepSize = 100 / (steps - 1);
 
@@ -330,7 +330,7 @@ function generatePalette(baseColor: string, steps = 9): Array<string> {
 /**
  * Glass effect color utilities
  */
-const glassColors = {
+const _glassColors = {
   /**
    * Generate backdrop color for glass effect
    */
@@ -406,7 +406,7 @@ const glassColors = {
 /**
  * Get comprehensive color information
  */
-function getColorInfo(color: string): ColorInfo | null {
+function _getColorInfo(color: string): ColorInfo | null {
   const rgb = parseColor(color);
   if (!rgb) {
     return null;
@@ -430,7 +430,7 @@ function getColorInfo(color: string): ColorInfo | null {
 /**
  * Validate color format
  */
-function isValidColor(color: string): boolean {
+function _isValidColor(color: string): boolean {
   const rgb = parseColor(color);
   return rgb !== null;
 }
@@ -438,7 +438,7 @@ function isValidColor(color: string): boolean {
 /**
  * Format color to specific format
  */
-function formatColor(color: string, format: ColorFormat): string {
+function _formatColor(color: string, format: ColorFormat): string {
   const rgb = parseColor(color);
   if (!rgb) {
     return color;
@@ -471,7 +471,7 @@ function formatColor(color: string, format: ColorFormat): string {
 /**
  * Mix two colors
  */
-function mixColors(color1: string, color2: string, ratio = 0.5): string {
+function _mixColors(color1: string, color2: string, ratio = 0.5): string {
   const rgb1 = parseColor(color1);
   const rgb2 = parseColor(color2);
 
@@ -571,7 +571,7 @@ export function checkGlassContrast(
  * @param glassOpacity - Opacity of the glass effect
  * @returns Whether the color is safe for glass effects
  */
-function isGlassSafe(foreground: string, glassOpacity = 0.25): boolean {
+function _isGlassSafe(foreground: string, glassOpacity = 0.25): boolean {
   // Test against common backgrounds
   const testBackgrounds = ["#ffffff", "#000000", "#f0f0f0", "#1a1a1a"];
 

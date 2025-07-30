@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
  * Hook to detect if the user prefers reduced motion
  * @returns {boolean} true if the user prefers reduced motion
  */
-export function usePrefersReducedMotion(): boolean {
+function usePrefersReducedMotion(): boolean {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(
     () => {
       // Check if we're in a browser environment
@@ -50,7 +50,7 @@ export function usePrefersReducedMotion(): boolean {
  * @param reducedMotionProps - The props to apply when reduced motion is preferred
  * @returns The appropriate props based on user preference
  */
-export function useMotionSafeAnimations<T extends Record<string, unknown>>(
+function _useMotionSafeAnimations<T extends Record<string, unknown>>(
   animationProps: T,
   reducedMotionProps: Partial<T> = {},
 ): T {
@@ -79,7 +79,7 @@ export function useMotionSafeAnimations<T extends Record<string, unknown>>(
  * @param fallback - The fallback when reduced motion is preferred
  * @returns The appropriate animation value
  */
-export function getMotionSafeValue<T>(
+function _getMotionSafeValue<T>(
   prefersReducedMotion: boolean,
   animation: T,
   fallback?: T,

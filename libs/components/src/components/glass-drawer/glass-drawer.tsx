@@ -152,12 +152,12 @@ const drawerFooterVariants = cva({
   variants: {},
 });
 
-export interface GlassDrawerProps
+interface GlassDrawerProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root> {
   children: React.ReactNode;
 }
 
-export interface GlassDrawerContentProps
+interface GlassDrawerContentProps
   extends Omit<
     React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
     "children"
@@ -170,28 +170,25 @@ export interface GlassDrawerContentProps
   size?: "sm" | "md" | "lg" | "xl" | "full";
 }
 
-export interface GlassDrawerHeaderProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassDrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export interface GlassDrawerTitleProps
+interface GlassDrawerTitleProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> {
   children: React.ReactNode;
 }
 
-export interface GlassDrawerDescriptionProps
+interface GlassDrawerDescriptionProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description> {
   children: React.ReactNode;
 }
 
-export interface GlassDrawerBodyProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassDrawerBodyProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export interface GlassDrawerFooterProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassDrawerFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
@@ -345,17 +342,4 @@ const Drawer = Object.assign(GlassDrawer, {
   Footer: GlassDrawerFooter,
 });
 
-export {
-  Drawer,
-  GlassDrawer,
-  GlassDrawerTrigger,
-  GlassDrawerClose,
-  GlassDrawerPortal,
-  GlassDrawerOverlay,
-  GlassDrawerContent,
-  GlassDrawerHeader,
-  GlassDrawerTitle,
-  GlassDrawerDescription,
-  GlassDrawerBody,
-  GlassDrawerFooter,
-};
+export { Drawer };

@@ -14,13 +14,13 @@ export const useGlassStateTransitions = () => ({
   currentState: "default",
 });
 
-export const useMagneticHover = () => ({
+const useMagneticHover = () => ({
   // Placeholder implementation
   magneticProps: {},
   isHovering: false,
 });
 
-export const useRippleEffect = () => ({
+const useRippleEffect = () => ({
   // Placeholder implementation
   rippleProps: {},
   triggerRipple: () => {},

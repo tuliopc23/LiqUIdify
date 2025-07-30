@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const useSSRAnimation = (
+const _useSSRAnimation = (
   _callback?: (element: HTMLElement) => undefined | (() => void),
 ) => {
   const _elementRef = useRef<HTMLDivElement>(null);

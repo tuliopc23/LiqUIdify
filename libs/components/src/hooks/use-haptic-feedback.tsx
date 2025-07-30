@@ -19,7 +19,7 @@ import {
 } from "../utils/safe-dom";
 
 // Haptic feedback types
-export type HapticType =
+type HapticType =
   | "light"
   | "medium"
   | "heavy"
@@ -31,7 +31,7 @@ export type HapticType =
   | "notification";
 
 // Vibration patterns (in milliseconds)
-export const HAPTIC_PATTERNS = {
+const HAPTIC_PATTERNS = {
   light: [10],
   medium: [20],
   heavy: [30],
@@ -44,7 +44,7 @@ export const HAPTIC_PATTERNS = {
 };
 
 // Audio feedback configuration
-export interface AudioFeedbackConfig {
+interface AudioFeedbackConfig {
   enabled?: boolean;
   volume?: number;
   sounds?: {
@@ -53,7 +53,7 @@ export interface AudioFeedbackConfig {
 }
 
 // Visual feedback configuration
-export interface VisualFeedbackConfig {
+interface VisualFeedbackConfig {
   enabled?: boolean;
   duration?: number;
   scale?: number;
@@ -63,7 +63,7 @@ export interface VisualFeedbackConfig {
 }
 
 // Haptic feedback configuration
-export interface HapticFeedbackConfig {
+interface HapticFeedbackConfig {
   vibration?: boolean;
   audio?: AudioFeedbackConfig;
   visual?: VisualFeedbackConfig;
@@ -264,7 +264,7 @@ function applyVisualFeedback(
 }
 
 // Haptic feedback hook
-export function useHapticFeedback(config: HapticFeedbackConfig = {}) {
+function useHapticFeedback(config: HapticFeedbackConfig = {}) {
   const configRef = useRef<HapticFeedbackConfig>({
     ...DEFAULT_CONFIG,
     ...config,
@@ -488,7 +488,7 @@ export function HapticProvider({
   );
 }
 
-export function useHaptic() {
+function _useHaptic() {
   const context = useContext(HapticContext);
   if (!context) {
     throw new Error("useHaptic must be used within HapticProvider");
@@ -497,9 +497,7 @@ export function useHaptic() {
 }
 
 // Haptic feedback directive (for easy integration)
-export function useHapticFeedbackIntegration<
-  T extends HTMLElement = HTMLElement,
->(
+function _useHapticFeedbackIntegration<T extends HTMLElement = HTMLElement>(
   ref: React.RefObject<T>,
   type: HapticType = "light",
   config?: HapticFeedbackConfig,

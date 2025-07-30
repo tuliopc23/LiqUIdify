@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
-export interface GlassPortalProps {
+interface GlassPortalProps {
   children: React.ReactNode;
   container?: Element | DocumentFragment;
   key?: string;

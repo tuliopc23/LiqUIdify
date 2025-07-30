@@ -17,7 +17,7 @@ export interface TreeNode { id: string;
   data?: unknown; }
 }
 
-export interface GlassTreeViewProps
+interface GlassTreeViewProps
   extends React.HTMLAttributes<HTMLDivElement> { nodes: Array<TreeNode>;
   onNodeSelect?: (node: TreeNode) => void; }
   onNodeExpand?: (_node: TreeNode, _expanded: boolean) => void;

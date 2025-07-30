@@ -40,7 +40,7 @@ export const createBusinessLogicHook = <T extends Record<string, unknown>>(
 };
 
 // Compound component with context pattern
-export const createCompoundComponentWithContext = <
+const createCompoundComponentWithContext = <
   T extends Record<string, unknown>,
 >(
   _contextName: string,
@@ -184,7 +184,7 @@ const createThemedComponentFactory = <T extends Record<string, unknown>>(
 // Type exports are handled by interface declarations above
 
 // Pattern utilities
-const patternUtils = {
+const _patternUtils = {
   createBusinessLogicHook,
   createCompoundComponentWithContext,
   createRenderPropComponent,

@@ -1,10 +1,7 @@
 import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   plugins: [
@@ -23,17 +20,14 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "@liquidify/components": resolve(
-        __dirname,
-        "libs/components/src/index.ts",
-      ),
-      "@": resolve(__dirname, "libs/components/src"),
+      "@liquidify/components": resolve("libs/components/src/index.ts"),
+      "@": resolve("libs/components/src"),
     },
   },
 
   build: {
     lib: {
-      entry: resolve(__dirname, "libs/components/src/index.ts"),
+      entry: resolve("libs/components/src/index.ts"),
       name: "LiquidUI",
       formats: ["es", "cjs"],
       fileName: (format) => `index.${format === "es" ? "mjs" : "cjs"}`,
@@ -61,6 +55,6 @@ export default defineConfig({
   },
 
   // Root configuration for Nx workspace
-  root: __dirname,
+  root: process.cwd(),
   cacheDir: "node_modules/.vite",
 });

@@ -56,7 +56,7 @@ const containerVariants = cva({
   },
 });
 
-export interface GlassSpinnerProps
+interface GlassSpinnerProps
   extends Omit<
       React.HTMLAttributes<HTMLDivElement>,
       keyof React.AriaAttributes

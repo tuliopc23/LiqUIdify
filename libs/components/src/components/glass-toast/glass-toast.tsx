@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 
 import { cn, getGlassClass } from "@/core/utils/classname";
 
-export interface Toast {
+interface Toast {
   id: string;
   title?: string;
   description: string;
@@ -189,7 +189,7 @@ interface GlassToastProps {
   onClose?: () => void;
 }
 
-const GlassToast: React.FC<GlassToastProps> = ({
+const _GlassToast: React.FC<GlassToastProps> = ({
   type = "info",
   message,
   onClose,

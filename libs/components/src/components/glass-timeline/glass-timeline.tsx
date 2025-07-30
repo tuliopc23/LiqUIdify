@@ -12,8 +12,7 @@ export interface TimelineItem {
   content?: React.ReactNode;
 }
 
-export interface GlassTimelineProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassTimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   items: Array<TimelineItem>;
   orientation?: "vertical" | "horizontal";
   alternating?: boolean;

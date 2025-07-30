@@ -9,7 +9,7 @@ export interface GlassSelectOption {
   disabled?: boolean;
 }
 
-export interface GlassSelectProps {
+interface GlassSelectProps {
   options: Array<GlassSelectOption>;
   value?: string;
   onChange?: (value: string) => void;

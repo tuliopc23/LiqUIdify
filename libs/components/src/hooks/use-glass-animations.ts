@@ -46,7 +46,7 @@ const TIMING_PRESETS: Record<AnimationTiming, AnimationConfig> = {
 };
 
 // Glass-specific animation presets
-const GLASS_ANIMATION_PRESETS = {
+const _GLASS_ANIMATION_PRESETS = {
   "glass-in": { duration: 300, easing: "cubic-bezier(0.32, 0, 0.67, 0)" },
   "glass-out": { duration: 300, easing: "cubic-bezier(0.33, 1, 0.68, 1)" },
   "liquid-flow": { duration: 600, easing: "cubic-bezier(0.36, 0.66, 0.04, 1)" },
@@ -299,7 +299,7 @@ export function useRippleEffect(
 /**
  * Hook for spring animations
  */
-function useSpringAnimation() {
+function _useSpringAnimation() {
   const { animate } = useGlassAnimation("normal");
 
   const springTo = useCallback(
@@ -321,7 +321,7 @@ function useSpringAnimation() {
 /**
  * Hook for liquid flow animations
  */
-function useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
+function _useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
   const { animate } = useGlassAnimation("normal");
 
   const startFlow = useCallback(

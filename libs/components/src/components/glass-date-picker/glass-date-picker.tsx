@@ -58,7 +58,7 @@ const calendarVariants = cva({
   variants: {},
 });
 
-export interface GlassDatePickerProps
+interface GlassDatePickerProps
   extends Omit<
       Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
       "onChange" | "defaultValue"

@@ -5,7 +5,7 @@ import { announcer } from "@/components/glass-live-region";
 
 import { cn } from "@/core/utils/classname";
 
-export interface GlassErrorBoundaryProps {
+interface GlassErrorBoundaryProps {
   children: ReactNode;
   fallback?: (error: Error, errorInfo: ErrorInfo) => ReactNode;
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
@@ -252,7 +252,7 @@ export class GlassErrorBoundary extends Component<
 }
 
 // Hook for error handling in functional components
-export function useErrorHandler() {
+function useErrorHandler() {
   const [error, setError] = React.useState<Error | null>(null);
 
   const resetError = React.useCallback(() => {

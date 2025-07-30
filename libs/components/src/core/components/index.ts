@@ -10,7 +10,7 @@
 // export { CompoundComponent } from '../compound-component';
 
 // Placeholder exports for components that may be implemented later
-const GlassContainer = () => unknown;
+const _GlassContainer = () => unknown;
 // Note: GlassCard, GlassButton, GlassInput, and GlassModal are now implemented
 // and exported from their respective component files
 

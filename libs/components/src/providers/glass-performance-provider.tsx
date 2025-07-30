@@ -24,7 +24,7 @@ interface PerformanceContextValue {
 
 const PerformanceContext = createContext<PerformanceContextValue | null>(null);
 
-export interface GlassPerformanceProviderProps {
+interface GlassPerformanceProviderProps {
   children: ReactNode;
   thresholds?: Partial<PerformanceThresholds>;
   enableAutoMonitoring?: boolean;
@@ -39,7 +39,7 @@ export interface GlassPerformanceProviderProps {
   ) => void;
 }
 
-export function GlassPerformanceProvider({
+function _GlassPerformanceProvider({
   children,
   thresholds,
   enableAutoMonitoring = false,
@@ -120,7 +120,7 @@ export function GlassPerformanceProvider({
   );
 }
 
-export function useGlassPerformance(): PerformanceContextValue {
+function useGlassPerformance(): PerformanceContextValue {
   const context = useContext(PerformanceContext);
 
   if (!context) {
@@ -133,7 +133,7 @@ export function useGlassPerformance(): PerformanceContextValue {
 }
 
 // HOC for automatic performance monitoring of components
-export function withPerformanceMonitoring<P extends Record<string, unknown>>(
+function _withPerformanceMonitoring<P extends Record<string, unknown>>(
   Component: React.ComponentType<P>,
   componentName?: string,
 ): React.ComponentType<P> {

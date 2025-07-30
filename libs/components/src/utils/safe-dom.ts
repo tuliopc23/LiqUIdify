@@ -14,7 +14,7 @@ export function safeRefAccess<T>(ref: React.RefObject<T>): T | null {
 /**
  * Safe ref access with callback execution
  */
-export function withSafeRef<T, R>(
+function _withSafeRef<T, R>(
   ref: React.RefObject<T>,
   callback: (element: T) => R,
   fallback?: R,
@@ -34,7 +34,7 @@ export function withSafeRef<T, R>(
 /**
  * Safe DOM element selector with null checking
  */
-export function safeQuerySelector<T extends Element = Element>(
+function _safeQuerySelector<T extends Element = Element>(
   selector: string,
   parent: Document | Element = document,
 ): T | null {
@@ -49,7 +49,7 @@ export function safeQuerySelector<T extends Element = Element>(
 /**
  * Safe DOM element selector all with null checking
  */
-export function safeQuerySelectorAll<T extends Element = Element>(
+function _safeQuerySelectorAll<T extends Element = Element>(
   selector: string,
   parent: Document | Element = document,
 ): Array<T> {
@@ -64,7 +64,7 @@ export function safeQuerySelectorAll<T extends Element = Element>(
 /**
  * Safe style property access
  */
-export function safeGetComputedStyle(
+function _safeGetComputedStyle(
   element: Element,
   property?: string,
 ): string | CSSStyleDeclaration | null {
@@ -112,7 +112,7 @@ export function safeGetBoundingClientRect(element: Element | null): DOMRect {
 /**
  * Safe array access with bounds checking
  */
-export function safeArrayAccess<T>(
+function _safeArrayAccess<T>(
   array: Array<T>,
   index: number,
   fallback?: T,
@@ -151,7 +151,7 @@ export function safeMapGet<K, V>(
 /**
  * Safe addEventListener with cleanup
  */
-export function safeAddEventListener<K extends keyof HTMLElementEventMap>(
+function _safeAddEventListener<K extends keyof HTMLElementEventMap>(
   element: Element | null,
   type: K,
   listener: (this: HTMLElement, event_: HTMLElementEventMap[K]) => void,
@@ -222,7 +222,7 @@ export function safeCreateAudioContext(): AudioContext | null {
 /**
  * Safe element attribute access
  */
-export function safeGetAttribute(
+function _safeGetAttribute(
   element: Element | null,
   name: string,
   fallback?: string,
@@ -242,7 +242,7 @@ export function safeGetAttribute(
 /**
  * Safe element attribute setting
  */
-export function safeSetAttribute(
+function _safeSetAttribute(
   element: Element | null,
   name: string,
   value: string,
@@ -263,7 +263,7 @@ export function safeSetAttribute(
 /**
  * Safe element style access with fallback
  */
-export function safeGetStyle(
+function _safeGetStyle(
   element: HTMLElement | null,
   property: string,
   fallback?: string,
@@ -283,7 +283,7 @@ export function safeGetStyle(
 /**
  * Safe element style setting
  */
-export function safeSetStyle(
+function _safeSetStyle(
   element: HTMLElement | null,
   property: string,
   value: string,

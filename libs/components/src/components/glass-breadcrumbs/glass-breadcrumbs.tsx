@@ -53,7 +53,7 @@ export interface BreadcrumbItem {
   icon?: React.ReactNode;
 }
 
-export interface GlassBreadcrumbsProps
+interface GlassBreadcrumbsProps
   extends Omit<React.HTMLAttributes<HTMLElement>, keyof React.AriaAttributes>,
     VariantProps<typeof breadcrumbsVariants> {
   items: Array<BreadcrumbItem>;

@@ -9,7 +9,7 @@ import { useCallback, useMemo, useRef } from "react";
 
 import type { GlassIntensity } from "@/core/base-component";
 
-export interface OptimizedGlassConfig {
+interface OptimizedGlassConfig {
   intensity: GlassIntensity;
   blur?: number;
   opacity?: number;
@@ -22,7 +22,7 @@ export interface OptimizedGlassConfig {
 // Memoized glass effect calculations
 const GLASS_EFFECT_CACHE = new Map<string, any>();
 
-export function useOptimizedGlassEffects(config: OptimizedGlassConfig) {
+function _useOptimizedGlassEffects(config: OptimizedGlassConfig) {
   const _cacheKeyRef = useRef<string>("");
 
   // Generate cache key based on config
@@ -173,7 +173,7 @@ function generateOptimizedGlassVariables(
 }
 
 // Hook for optimized animations
-export function useOptimizedAnimations(enabled = true) {
+function _useOptimizedAnimations(enabled = true) {
   const prefersReducedMotion = useMemo(() => {
     if (typeof window === "undefined") {
       return false;
@@ -200,7 +200,7 @@ export function useOptimizedAnimations(enabled = true) {
 }
 
 // Performance monitoring hook
-export function usePerformanceMonitoring(_componentName: string) {
+function _usePerformanceMonitoring(_componentName: string) {
   const renderCountRef = useRef(0);
   const lastRenderTime = useRef(0);
 
@@ -229,5 +229,3 @@ export function usePerformanceMonitoring(_componentName: string) {
     measureRender,
   };
 }
-
-export default useOptimizedGlassEffects;

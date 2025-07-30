@@ -1,51 +1,51 @@
 import type { Transition, Variants } from "framer-motion";
 
 // Reusable transition constants typed as Transition
-export const springFast: Transition = {
+const _springFast: Transition = {
   type: "spring",
   stiffness: 400,
   damping: 30,
 };
 
-export const easeOutExpo: Transition = {
+const easeOutExpo: Transition = {
   duration: 0.6,
   ease: [0.4, 0, 0.2, 1],
 };
 
-export const easeOutQuart: Transition = {
+const _easeOutQuart: Transition = {
   duration: 0.5,
   ease: [0.25, 1, 0.5, 1],
 };
 
-export const easeInOut: Transition = {
+const _easeInOut: Transition = {
   duration: 0.3,
   ease: "easeInOut",
 };
 
-export const smoothTransition: Transition = {
+const _smoothTransition: Transition = {
   duration: 0.8,
   ease: "easeInOut",
 };
 
-export const bounceTransition: Transition = {
+const _bounceTransition: Transition = {
   type: "spring",
   stiffness: 300,
   damping: 20,
   mass: 0.8,
 };
 
-export const staggeredContainer: Transition = {
+const staggeredContainer: Transition = {
   duration: 0.6,
   staggerChildren: 0.1,
 };
 
-export const fastStaggeredContainer: Transition = {
+const fastStaggeredContainer: Transition = {
   duration: 0.8,
   staggerChildren: 0.2,
 };
 
 // Common variants typed as Variants
-export const fadeInUp: Variants = {
+const _fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -54,7 +54,7 @@ export const fadeInUp: Variants = {
   },
 };
 
-export const fadeInUpLarge: Variants = {
+const _fadeInUpLarge: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -63,7 +63,7 @@ export const fadeInUpLarge: Variants = {
   },
 };
 
-export const containerFadeIn: Variants = {
+const _containerFadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -71,7 +71,7 @@ export const containerFadeIn: Variants = {
   },
 };
 
-export const containerFadeInFast: Variants = {
+const _containerFadeInFast: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,

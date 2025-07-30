@@ -8,27 +8,27 @@
  * Check if code is running in a browser environment
  * @returns {boolean} true if running in browser, false if server-side
  */
-export const isBrowser = (): boolean => typeof window !== "undefined";
-export const isClient = isBrowser;
-export const isServer = (): boolean => !isBrowser();
+const isBrowser = (): boolean => typeof window !== "undefined";
+const _isClient = isBrowser;
+const _isServer = (): boolean => !isBrowser();
 
 /**
  * Check if document object is available
  * @returns {boolean} true if document is available
  */
-export const isDocument = (): boolean => typeof document !== "undefined";
+const isDocument = (): boolean => typeof document !== "undefined";
 
 /**
  * Check if navigator object is available
  * @returns {boolean} true if navigator is available
  */
-export const isNavigator = (): boolean => typeof navigator !== "undefined";
+const isNavigator = (): boolean => typeof navigator !== "undefined";
 
 /**
  * Safe window object with SSR fallback
  * @returns {Window | undefined} window object or undefined
  */
-export const safeWindow = (): Window | _undefined => {
+const safeWindow = (): Window | _undefined => {
   return isBrowser() ? window : undefined;
 };
 
@@ -36,7 +36,7 @@ export const safeWindow = (): Window | _undefined => {
  * Safe document object with SSR fallback
  * @returns {Document | undefined} document object or undefined
  */
-export const safeDocument = (): Document | _undefined => {
+const safeDocument = (): Document | _undefined => {
   return isDocument() ? document : undefined;
 };
 
@@ -44,7 +44,7 @@ export const safeDocument = (): Document | _undefined => {
  * Safe navigator object with SSR fallback
  * @returns {Navigator | undefined} navigator object or undefined
  */
-export const safeNavigator = (): Navigator | _undefined => {
+const safeNavigator = (): Navigator | _undefined => {
   return isNavigator() ? navigator : undefined;
 };
 
@@ -52,7 +52,7 @@ export const safeNavigator = (): Navigator | _undefined => {
  * Safe localStorage with SSR fallback
  * @returns {Storage | null} localStorage object or null
  */
-export const safeLocalStorage = (): Storage | null => {
+const safeLocalStorage = (): Storage | null => {
   try {
     return isBrowser() && window.localStorage ? window.localStorage : undefined;
   } catch {
@@ -64,7 +64,7 @@ export const safeLocalStorage = (): Storage | null => {
  * Safe sessionStorage with SSR fallback
  * @returns {Storage | null} sessionStorage object or null
  */
-export const safeSessionStorage = (): Storage | null => {
+const safeSessionStorage = (): Storage | null => {
   try {
     return isBrowser() && window.sessionStorage
       ? window.sessionStorage
@@ -80,7 +80,7 @@ export const safeSessionStorage = (): Storage | null => {
  * @param {T} fallback - fallback value if not available
  * @returns {T} stored value or fallback
  */
-export const getLocalStorageItem = <T>(key: string, fallback: T): T => {
+const _getLocalStorageItem = <T>(key: string, fallback: T): T => {
   const storage = safeLocalStorage();
   if (!storage) {
     return fallback;
@@ -100,7 +100,7 @@ export const getLocalStorageItem = <T>(key: string, fallback: T): T => {
  * @param {T} value - value to store
  * @returns {boolean} true if successful, false otherwise
  */
-export const setLocalStorageItem = <T>(key: string, value: T): boolean => {
+const _setLocalStorageItem = <T>(key: string, value: T): boolean => {
   const storage = safeLocalStorage();
   if (!storage) {
     return false;
@@ -120,7 +120,7 @@ export const setLocalStorageItem = <T>(key: string, value: T): boolean => {
  * @param {T} fallback - fallback value if not available
  * @returns {T} stored value or fallback
  */
-export const getSessionStorageItem = <T>(key: string, fallback: T): T => {
+const _getSessionStorageItem = <T>(key: string, fallback: T): T => {
   const storage = safeSessionStorage();
   if (!storage) {
     return fallback;
@@ -140,7 +140,7 @@ export const getSessionStorageItem = <T>(key: string, fallback: T): T => {
  * @param {T} value - value to store
  * @returns {boolean} true if successful, false otherwise
  */
-export const setSessionStorageItem = <T>(key: string, value: T): boolean => {
+const _setSessionStorageItem = <T>(key: string, value: T): boolean => {
   const storage = safeSessionStorage();
   if (!storage) {
     return false;
@@ -159,7 +159,7 @@ export const setSessionStorageItem = <T>(key: string, value: T): boolean => {
  * @param {string} query - media query string
  * @returns {MediaQueryList | null} MediaQueryList or null
  */
-export const safeMatchMedia = (query: string): MediaQueryList | null => {
+const safeMatchMedia = (query: string): MediaQueryList | null => {
   const win = safeWindow();
   return win?.matchMedia ? win.matchMedia(query) : undefined;
 };
@@ -169,7 +169,7 @@ export const safeMatchMedia = (query: string): MediaQueryList | null => {
  * @param {FrameRequestCallback} callback - animation frame callback
  * @returns {number | null} request ID or null
  */
-export const safeRequestAnimationFrame = (
+const _safeRequestAnimationFrame = (
   callback: FrameRequestCallback,
 ): number | null => {
   const win = safeWindow();
@@ -182,7 +182,7 @@ export const safeRequestAnimationFrame = (
  * Safe cancelAnimationFrame with SSR fallback
  * @param {number | null} id - request ID to cancel
  */
-export const safeCancelAnimationFrame = (id: number | null): void => {
+const _safeCancelAnimationFrame = (id: number | null): void => {
   const win = safeWindow();
   if (win?.cancelAnimationFrame && id !== null) {
     win.cancelAnimationFrame(id);
@@ -195,7 +195,7 @@ export const safeCancelAnimationFrame = (id: number | null): void => {
  * @param {number} delay - delay in milliseconds
  * @returns {NodeJS.Timeout | number | null} timeout ID or null
  */
-export const safeSetTimeout = (
+const _safeSetTimeout = (
   callback: () => void,
   delay: number,
 ): NodeJS.Timeout | number | null => {
@@ -209,7 +209,7 @@ export const safeSetTimeout = (
  * Safe clearTimeout with SSR fallback
  * @param {NodeJS.Timeout | number | null} id - timeout ID to clear
  */
-export const safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
+const _safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
   if (typeof clearTimeout !== "undefined" && id !== null) {
     clearTimeout(id as unknown);
   }
@@ -221,7 +221,7 @@ export const safeClearTimeout = (id: NodeJS.Timeout | number | null): void => {
  * @param {number} delay - delay in milliseconds
  * @returns {NodeJS.Timeout | number | null} interval ID or null
  */
-export const safeSetInterval = (
+const _safeSetInterval = (
   callback: () => void,
   delay: number,
 ): NodeJS.Timeout | number | null => {
@@ -235,7 +235,7 @@ export const safeSetInterval = (
  * Safe clearInterval with SSR fallback
  * @param {NodeJS.Timeout | number | null} id - interval ID to clear
  */
-export const safeClearInterval = (id: NodeJS.Timeout | number | null): void => {
+const _safeClearInterval = (id: NodeJS.Timeout | number | null): void => {
   if (typeof clearInterval !== "undefined" && id !== null) {
     clearInterval(id as unknown);
   }
@@ -245,7 +245,7 @@ export const safeClearInterval = (id: NodeJS.Timeout | number | null): void => {
  * Get window dimensions with SSR fallback
  * @returns {{ width: number, height: number }} window dimensions or default
  */
-export const getWindowDimensions = (): { width: number; height: number } => {
+const _getWindowDimensions = (): { width: number; height: number } => {
   const win = safeWindow();
   return {
     width: win?.innerWidth || 0,
@@ -257,7 +257,7 @@ export const getWindowDimensions = (): { width: number; height: number } => {
  * Get document scroll position with SSR fallback
  * @returns {{ x: number, y: number }} scroll position or default
  */
-export const getScrollPosition = (): { x: number; y: number } => {
+const _getScrollPosition = (): { x: number; y: number } => {
   const win = safeWindow();
   const document_ = safeDocument();
 
@@ -274,7 +274,7 @@ export const getScrollPosition = (): { x: number; y: number } => {
  * @param {AddEventListenerOptions} options - event options
  * @returns {() => void} cleanup function
  */
-export const safeAddEventListener = (
+const _safeAddEventListener = (
   event: string,
   handler: EventListener,
   options?: AddEventListenerOptions,
@@ -293,7 +293,7 @@ export const safeAddEventListener = (
  * Check if user prefers reduced motion
  * @returns {boolean} true if user prefers reduced motion
  */
-export const prefersReducedMotion = (): boolean => {
+const _prefersReducedMotion = (): boolean => {
   const mediaQuery = safeMatchMedia("(prefers-reduced-motion: reduce)");
   return mediaQuery?.matches ?? false;
 };
@@ -302,7 +302,7 @@ export const prefersReducedMotion = (): boolean => {
  * Check if user prefers dark color scheme
  * @returns {boolean} true if user prefers dark scheme
  */
-export const prefersDarkScheme = (): boolean => {
+const _prefersDarkScheme = (): boolean => {
   const mediaQuery = safeMatchMedia("(prefers-color-scheme: dark)");
   return mediaQuery?.matches ?? false;
 };
@@ -311,7 +311,7 @@ export const prefersDarkScheme = (): boolean => {
  * Get user agent string with SSR fallback
  * @returns {string} user agent string or empty string
  */
-export const getUserAgent = (): string => {
+const _getUserAgent = (): string => {
   const nav = safeNavigator();
   return nav?.userAgent || "";
 };
@@ -320,7 +320,7 @@ export const getUserAgent = (): string => {
  * Check if device has touch support
  * @returns {boolean} true if touch is supported
  */
-export const isTouchDevice = (): boolean => {
+const _isTouchDevice = (): boolean => {
   const win = safeWindow();
   const nav = safeNavigator();
 
@@ -335,7 +335,7 @@ export const isTouchDevice = (): boolean => {
  * @param {() => Promise<T>} importFn - dynamic import function
  * @returns {Promise<T | null>} imported module or null
  */
-export const safeDynamicImport = async <T>(
+const _safeDynamicImport = async <T>(
   importFunction: () => Promise<T>,
 ): Promise<T | null> => {
   if (!isBrowser()) {
@@ -354,7 +354,7 @@ export const safeDynamicImport = async <T>(
  * Create a no-op function for SSR environments
  * @returns {Function} no-op function
  */
-export const createNoOp = (): (() => void) => {
+const _createNoOp = (): (() => void) => {
   return () => {};
 };
 
@@ -364,7 +364,7 @@ export const createNoOp = (): (() => void) => {
  * @param {IntersectionObserverInit} options - observer options
  * @returns {IntersectionObserver | null} observer instance or null
  */
-export const safeIntersectionObserver = (
+const _safeIntersectionObserver = (
   callback: IntersectionObserverCallback,
   options?: IntersectionObserverInit,
 ): IntersectionObserver | null => {
@@ -382,7 +382,7 @@ export const safeIntersectionObserver = (
  * @param {ResizeObserverCallback} callback - observer callback
  * @returns {ResizeObserver | null} observer instance or null
  */
-export const safeResizeObserver = (
+const _safeResizeObserver = (
   callback: ResizeObserverCallback,
 ): ResizeObserver | null => {
   const win = safeWindow();
@@ -399,7 +399,7 @@ export const safeResizeObserver = (
  * @param {MutationCallback} callback - observer callback
  * @returns {MutationObserver | null} observer instance or null
  */
-export const safeMutationObserver = (
+const _safeMutationObserver = (
   callback: MutationCallback,
 ): MutationObserver | null => {
   const win = safeWindow();
@@ -416,7 +416,7 @@ export const safeMutationObserver = (
  * @param {Function} callback - function to execute
  * @param {Array<any>} deps - dependencies for the callback
  */
-export const clientOnly = (
+const _clientOnly = (
   callback: () => void,
   _deps: Array<unknown> = [],
 ): void => {
@@ -430,7 +430,7 @@ export const clientOnly = (
  * @param {Element} element - target element
  * @returns {CSSStyleDeclaration | null} computed style or null
  */
-export const safeGetComputedStyle = (
+const _safeGetComputedStyle = (
   element: Element,
 ): CSSStyleDeclaration | null => {
   const win = safeWindow();
@@ -442,7 +442,7 @@ export const safeGetComputedStyle = (
  * @param {K} tagName - HTML tag name
  * @returns {HTMLElementTagNameMap[K] | null} created element or null
  */
-export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
+const _safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
   tagName: K,
 ): HTMLElementTagNameMap[K] | null => {
   const document_ = safeDocument();
@@ -456,7 +456,7 @@ export const safeCreateElement = <K extends keyof HTMLElementTagNameMap>(
  * @param {string} selector - CSS selector
  * @returns {Element | null} matched element or null
  */
-export const safeQuerySelector = (selector: string): Element | null => {
+const _safeQuerySelector = (selector: string): Element | null => {
   const document_ = safeDocument();
   return document_?.querySelector
     ? document_.querySelector(selector)
@@ -468,9 +468,7 @@ export const safeQuerySelector = (selector: string): Element | null => {
  * @param {string} selector - CSS selector
  * @returns {NodeListOf<Element> | []} matched elements or empty array
  */
-export const safeQuerySelectorAll = (
-  selector: string,
-): NodeListOf<Element> | [] => {
+const _safeQuerySelectorAll = (selector: string): NodeListOf<Element> | [] => {
   const document_ = safeDocument();
   return document_?.querySelectorAll
     ? document_.querySelectorAll(selector)
@@ -482,7 +480,7 @@ export const safeQuerySelectorAll = (
  * @param {string} id - element ID
  * @returns {HTMLElement | null} matched element or null
  */
-export const safeGetElementById = (id: string): HTMLElement | null => {
+const _safeGetElementById = (id: string): HTMLElement | null => {
   const document_ = safeDocument();
   return document_?.getElementById ? document_.getElementById(id) : undefined;
 };

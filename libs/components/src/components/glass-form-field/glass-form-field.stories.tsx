@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 import {
   CheckCircle,
   CreditCard,
@@ -9,7 +9,6 @@ import {
   Phone,
   User,
 } from 'lucide-react';
-import { useState } from 'react';
 import { GlassButton } from '../glass-button-refactored/glass-button';
 import { GlassInput } from '../glass-input/glass-input';
 import { GlassSelect } from '../glass-select/glass-select';
@@ -158,12 +157,12 @@ export const Playground: Story = { args: {
     size: 'md',
   },
   render: (args) => (
-    <div className="w-80">
-      <GlassFormField {...args}>
-        <GlassInput
-          type="email"
-          placeholder="Enter your email"
-          leftIcon={<Mail className="h-4 w-4" />} />
+    <_div _className="w-80">
+      <_GlassFormField {..._args}>
+        <_GlassInput
+          _type="email"
+          _placeholder="Enter your email"
+          _leftIcon={<_Mail className="h-4 w-4" />} />
       </GlassFormField>
     </div>
   ),

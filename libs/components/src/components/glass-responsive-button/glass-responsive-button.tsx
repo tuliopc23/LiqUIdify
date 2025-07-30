@@ -4,7 +4,7 @@ import { forwardRef, useEffect, useState } from "react";
 
 import { cn, getGlassClass } from "@/core/utils/classname";
 
-export interface GlassResponsiveButtonProps
+interface GlassResponsiveButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "tertiary" | "ghost" | "destructive";
   size?: "xs" | "sm" | "md" | "lg" | "xl";

@@ -58,7 +58,7 @@ function mapComponentVariantToGlassVariant(
 /**
  * Maps intensity levels to numeric values for calculations
  */
-export function mapIntensity(intensity: GlassIntensity): number {
+function mapIntensity(intensity: GlassIntensity): number {
   switch (intensity) {
     case "none": {
       return 0;
@@ -194,6 +194,6 @@ type GlassPreset = keyof typeof GLASS_PRESETS;
 /**
  * Apply a preset glass effect configuration
  */
-function applyGlassPreset(preset: GlassPreset) {
+function _applyGlassPreset(preset: GlassPreset) {
   return createGlassStyle(GLASS_PRESETS[preset]);
 }

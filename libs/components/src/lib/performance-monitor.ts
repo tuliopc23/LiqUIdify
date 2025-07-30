@@ -453,7 +453,7 @@ export class PerformanceMonitor {
 // Singleton instance for global performance monitoring
 let globalPerformanceMonitor: PerformanceMonitor | null;
 
-function getPerformanceMonitor(): PerformanceMonitor {
+function _getPerformanceMonitor(): PerformanceMonitor {
   if (!globalPerformanceMonitor) {
     globalPerformanceMonitor = new PerformanceMonitor();
   }

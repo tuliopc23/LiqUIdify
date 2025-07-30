@@ -11,7 +11,7 @@ import { performanceMonitor } from "../core/performance-monitor";
 /**
  * Hook for component-level performance monitoring
  */
-export function usePerformanceMonitoring(
+function usePerformanceMonitoring(
   componentName: string,
   props?: Record<string, unknown>,
 ) {
@@ -87,7 +87,7 @@ export function usePerformanceMonitoring(
 /**
  * HOC for automatic performance monitoring
  */
-export function withPerformanceMonitoring<P extends object>(
+function _withPerformanceMonitoring<P extends object>(
   Component: ComponentType<P>,
   componentName?: string,
 ): ComponentType<P> {
@@ -108,7 +108,7 @@ export function withPerformanceMonitoring<P extends object>(
 /**
  * Hook for Core Web Vitals monitoring
  */
-export function useWebVitals(
+function _useWebVitals(
   callback?: (metric: {
     webVitals: Array<{ name: string; value: number }>;
   }) => void,

@@ -2,7 +2,7 @@ import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from "lucide-react";
 import React from "react";
 import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
-export interface GlassBannerProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassBannerProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "info" | "success" | "warning" | "error";
   dismissible?: boolean;
   onDismiss?: () => void;

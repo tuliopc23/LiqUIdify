@@ -61,7 +61,7 @@ const radioIndicatorVariants = cva([
   "group-hover:border-white/40 group-focus:border-blue-400",
 ]);
 
-export interface GlassRadioGroupProps
+interface GlassRadioGroupProps
   extends Omit<
       React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
       "orientation"
@@ -70,7 +70,7 @@ export interface GlassRadioGroupProps
   children: React.ReactNode;
 }
 
-export interface GlassRadioItemProps
+interface GlassRadioItemProps
   extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>,
     VariantProps<typeof radioItemVariants> {
   children: React.ReactNode;
@@ -132,4 +132,4 @@ const RadioGroup = Object.assign(GlassRadioGroup, {
   Item: GlassRadioItem,
 });
 
-export { RadioGroup, GlassRadioGroup, GlassRadioItem };
+export { RadioGroup, GlassRadioGroup };

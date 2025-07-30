@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 import { cn, getGlassClass } from "@/core/utils/classname";
 
-export interface GlassPopoverProps {
+interface GlassPopoverProps {
   trigger: React.ReactNode;
   content: React.ReactNode;
   position?: "top" | "bottom" | "left" | "right";

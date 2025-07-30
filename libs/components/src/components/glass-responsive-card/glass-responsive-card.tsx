@@ -7,7 +7,7 @@ import { microInteraction } from "@/core/utils/responsive";
 
 import { type ComponentSize, createComponentSize } from "@/types/branded";
 
-export interface GlassResponsiveCardProps
+interface GlassResponsiveCardProps
   extends Omit<
     React.HTMLAttributes<HTMLDivElement>,
     keyof React.AriaAttributes

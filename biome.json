@@ -100,7 +100,7 @@
     ]
   },
   "files": {
-    "includes": [
+    "include": [
       "src/**/*.ts",
       "src/**/*.tsx",
       "src/**/*.js",
@@ -120,7 +120,7 @@
       "scripts/**/*.ts",
       "scripts/**/*.js"
     ],
-    "experimentalScannerIgnores": [
+    "ignore": [
       "**/*.d.ts",
       "**/dist/**",
       "**/build/**",
@@ -141,7 +141,7 @@
   },
   "overrides": [
     {
-      "includes": [
+      "include": [
         "**/*.test.ts",
         "**/*.test.tsx",
         "**/*.spec.ts",
@@ -156,7 +156,7 @@
       }
     },
     {
-      "includes": ["**/*.stories.tsx"],
+      "include": ["**/*.stories.tsx"],
       "linter": {
         "rules": {
           "correctness": {
@@ -166,7 +166,7 @@
       }
     },
     {
-      "includes": ["**/*.tsx"],
+      "include": ["**/*.tsx"],
       "linter": {
         "rules": {
           "correctness": {
@@ -180,7 +180,7 @@
       }
     },
     {
-      "includes": ["scripts/**/*.ts"],
+      "include": ["scripts/**/*.ts"],
       "linter": {
         "rules": {
           "suspicious": {

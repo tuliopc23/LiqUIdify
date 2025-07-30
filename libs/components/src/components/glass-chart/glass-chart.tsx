@@ -19,18 +19,18 @@ interface BaseChartProps {
   showTooltip?: boolean;
 }
 
-export interface LineChartProps extends BaseChartProps {
+interface LineChartProps extends BaseChartProps {
   strokeWidth?: number;
   showDots?: boolean;
   gradient?: boolean;
 }
 
-export interface BarChartProps extends BaseChartProps {
+interface BarChartProps extends BaseChartProps {
   orientation?: "vertical" | "horizontal";
   showValues?: boolean;
 }
 
-export interface DonutChartProps extends BaseChartProps {
+interface DonutChartProps extends BaseChartProps {
   innerRadius?: number;
   showLabels?: boolean;
   centerContent?: React.ReactNode;

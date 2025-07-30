@@ -79,7 +79,7 @@ export const validateGlassProps = (props: unknown) => {
 };
 
 // Type-safe event handler creator
-const createEventHandler = <T extends HTMLElement, E extends Event>(
+const _createEventHandler = <T extends HTMLElement, E extends Event>(
   handler: (event: E, element: T) => void,
 ) => {
   return (event: E) => {

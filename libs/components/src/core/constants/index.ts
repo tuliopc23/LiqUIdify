@@ -13,7 +13,7 @@ const GLASS_INTENSITY_VALUES = {
   extreme: 1,
 } as const;
 
-const GLASS_BLUR_VALUES = {
+const _GLASS_BLUR_VALUES = {
   weak: 4,
   medium: 8,
   strong: 12,
@@ -28,7 +28,7 @@ const ANIMATION_DURATIONS = {
   slower: 750,
 } as const;
 
-const SPRING_CONFIGS = {
+const _SPRING_CONFIGS = {
   subtle: { tension: 300, friction: 30 },
   smooth: { tension: 280, friction: 25 },
   bouncy: { tension: 400, friction: 20 },
@@ -44,7 +44,7 @@ const SIZE_VALUES = {
   xl: "1.5rem",
 } as const;
 
-const PADDING_VALUES = {
+const _PADDING_VALUES = {
   xs: "0.25rem 0.5rem",
   sm: "0.5rem 0.75rem",
   md: "0.75rem 1rem",
@@ -63,7 +63,7 @@ const BORDER_RADIUS_VALUES = {
 } as const;
 
 // Z-index constants
-const Z_INDEX = {
+const _Z_INDEX = {
   hide: -1,
   auto: "auto",
   base: 0,
@@ -112,7 +112,7 @@ const GLASS_COLORS = {
 } as const;
 
 // Performance constants
-const PERFORMANCE_BUDGETS = {
+const _PERFORMANCE_BUDGETS = {
   maxBundleSize: 30 * 1024, // 30KB
   maxComponentSize: 5 * 1024, // 5KB
   maxRenderTime: 16, // 16ms (60fps)
@@ -120,7 +120,7 @@ const PERFORMANCE_BUDGETS = {
 } as const;
 
 // Accessibility constants
-const A11Y_CONSTANTS = {
+const _A11Y_CONSTANTS = {
   minContrastRatio: 4.5,
   minTouchTarget: 44, // pixels
   maxLineHeight: 1.5,
@@ -138,7 +138,7 @@ const ERROR_TYPES = {
 } as const;
 
 // Development constants
-const DEV_CONSTANTS = {
+const _DEV_CONSTANTS = {
   debugMode: process.env.NODE_ENV === "development",
   verbose: process.env.VERBOSE === "true",
   enablePerformanceMonitoring: process.env.PERF_MONITORING === "true",

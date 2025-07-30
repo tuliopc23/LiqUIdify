@@ -13,7 +13,7 @@ interface ElementWithPolishData extends HTMLElement {
   };
 }
 
-export interface VisualQualityMetrics {
+interface VisualQualityMetrics {
   pixelPerfectScore: number;
   crossBrowserConsistency: number;
   animationSmoothness: number;
@@ -24,7 +24,7 @@ export interface VisualQualityMetrics {
   overallScore: number;
 }
 
-export interface MicroInteraction {
+interface MicroInteraction {
   id: string;
   trigger: "hover" | "focus" | "active" | "click" | "touch";
   element: HTMLElement;
@@ -44,7 +44,7 @@ export interface MicroInteraction {
   };
 }
 
-export interface VisualRegressionTest {
+interface VisualRegressionTest {
   id: string;
   name: string;
   element: HTMLElement;
@@ -57,7 +57,7 @@ export interface VisualRegressionTest {
   } | null;
 }
 
-export interface CrossBrowserTest {
+interface CrossBrowserTest {
   id: string;
   property: string;
   expectedValue: string;
@@ -65,7 +65,7 @@ export interface CrossBrowserTest {
   isConsistent: boolean;
 }
 
-export interface PolishConfig {
+interface PolishConfig {
   enableMicroInteractions: boolean;
   enableVisualRegression: boolean;
   enableCrossBrowserTesting: boolean;
@@ -79,7 +79,7 @@ export interface PolishConfig {
 /**
  * Default Polish Configuration
  */
-export const DEFAULT_POLISH_CONFIG: PolishConfig = {
+const DEFAULT_POLISH_CONFIG: PolishConfig = {
   enableMicroInteractions: true,
   enableVisualRegression: false, // Disabled by default for performance
   enableCrossBrowserTesting: true,
@@ -94,7 +94,7 @@ export const DEFAULT_POLISH_CONFIG: PolishConfig = {
  * Micro-Interaction Presets
  * Delightful interaction patterns following Apple HIG
  */
-export const MICRO_INTERACTION_PRESETS: Record<
+const MICRO_INTERACTION_PRESETS: Record<
   string,
   Omit<MicroInteraction, "id" | "element">
 > = {
@@ -248,7 +248,7 @@ export const MICRO_INTERACTION_PRESETS: Record<
  * Visual Polish Manager
  * Manages micro-interactions, visual regression testing, and quality metrics
  */
-export class VisualPolishManager {
+class VisualPolishManager {
   private config: PolishConfig;
   private microInteractions: Map<string, MicroInteraction> = new Map();
   private regressionTests: Map<string, VisualRegressionTest> = new Map();
@@ -347,7 +347,6 @@ export class VisualPolishManager {
       if (feedback.audio && this.config.enableAudioFeedback) {
         this.triggerAudioFeedback();
       }
-
       // Store animation reference for cleanup
       (element as ElementWithPolishData)._polishAnimation = animationInstance;
     };
@@ -393,7 +392,6 @@ export class VisualPolishManager {
         break;
       }
     }
-
     // Store event handlers for cleanup
     (element as ElementWithPolishData)._polishHandlers = { handleInteraction };
   }
@@ -729,7 +727,7 @@ export class VisualPolishManager {
  * React Hook for Visual Polish System
  * Provides easy access to visual polish and quality tools
  */
-export function useVisualPolish(config: Partial<PolishConfig> = {}) {
+function _useVisualPolish(config: Partial<PolishConfig> = {}) {
   const [qualityMetrics, setQualityMetrics] =
     useState<VisualQualityMetrics | null>(null);
   const [recommendations, setRecommendations] = useState<Array<string>>([]);

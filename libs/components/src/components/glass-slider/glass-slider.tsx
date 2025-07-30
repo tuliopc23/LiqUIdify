@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { cn, getGlassClass } from "@/core/utils/classname";
 
-export interface GlassSliderProps {
+interface GlassSliderProps {
   min?: number;
   max?: number;
   step?: number;

@@ -60,7 +60,7 @@ export interface FileUploadItem {
   preview?: string;
 }
 
-export interface GlassFileUploadProps {
+interface GlassFileUploadProps {
   onFilesChange?: (files: Array<FileUploadItem>) => void;
   onUpload?: (files: Array<File>) => Promise<void>;
   accept?: string;

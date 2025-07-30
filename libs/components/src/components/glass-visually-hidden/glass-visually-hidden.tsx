@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 
 import { cn } from "@/core/utils/classname";
 
-export interface GlassVisuallyHiddenProps
+interface GlassVisuallyHiddenProps
   extends Omit<
     React.HTMLAttributes<HTMLSpanElement>,
     keyof React.AriaAttributes

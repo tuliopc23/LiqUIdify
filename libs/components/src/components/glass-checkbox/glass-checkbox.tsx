@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 
 import { cn } from "@/core/utils/classname";
 
-export interface GlassCheckboxProps
+interface GlassCheckboxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }

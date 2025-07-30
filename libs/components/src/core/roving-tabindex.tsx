@@ -397,7 +397,7 @@ interface GridRovingTabindexOptions
   onCellChange?: (element: HTMLElement, row: number, col: number) => void;
 }
 
-function useGridRovingTabindex(options: GridRovingTabindexOptions) {
+function _useGridRovingTabindex(options: GridRovingTabindexOptions) {
   const {
     items,
     wrap = true,

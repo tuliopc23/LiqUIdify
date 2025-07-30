@@ -1,6 +1,6 @@
 import type React from "react";
 
-export interface CheckboxGroupProps {
+interface CheckboxGroupProps {
   children: React.ReactNode;
   name: string;
 }

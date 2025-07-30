@@ -3,7 +3,7 @@ import React from "react";
 import { cn } from "@/core/utils/classname";
 import { generateStaticKey } from "@/core/utils/stable-key";
 
-export interface GlassLoadingProps {
+interface GlassLoadingProps {
   size?: "sm" | "md" | "lg" | "xl";
   variant?: "dots" | "spinner" | "pulse" | "bars";
   className?: string;

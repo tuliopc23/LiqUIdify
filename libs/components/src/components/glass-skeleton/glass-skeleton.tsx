@@ -30,7 +30,7 @@ const skeletonVariants = cva({
   },
 });
 
-export interface GlassSkeletonProps {
+interface GlassSkeletonProps {
   width?: string | number;
   height?: string | number;
   count?: number;

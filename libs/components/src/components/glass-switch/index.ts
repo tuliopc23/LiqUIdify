@@ -1,1 +1,1 @@
-export { GlassSwitch, type GlassSwitchProps } from "./glass-switch";
+export { GlassSwitch } from "./glass-switch";

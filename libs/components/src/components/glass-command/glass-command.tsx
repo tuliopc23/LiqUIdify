@@ -14,7 +14,7 @@ import { createPortal } from "react-dom";
 
 import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
-export interface CommandItem {
+interface CommandItem {
   id: string;
   label: string;
   description?: string;
@@ -25,7 +25,7 @@ export interface CommandItem {
   keywords?: Array<string>;
 }
 
-export interface CommandPaletteProps {
+interface CommandPaletteProps {
   items: Array<CommandItem>;
   placeholder?: string;
   shortcut?: Array<string>;

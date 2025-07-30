@@ -41,7 +41,7 @@ function combineValidationResults(
 /**
  * String validation utilities
  */
-const stringValidators = {
+const _stringValidators = {
   required:
     (message = "This field is required"): Validator<string> =>
     (value) => {
@@ -104,7 +104,7 @@ const stringValidators = {
 /**
  * Number validation utilities
  */
-const numberValidators = {
+const _numberValidators = {
   required:
     (message = "Number is required"): Validator<number> =>
     (value) => {
@@ -154,7 +154,7 @@ const numberValidators = {
 /**
  * Array validation utilities
  */
-const arrayValidators = {
+const _arrayValidators = {
   required:
     <T>(message = "At least one item is required"): Validator<Array<T>> =>
     (value) => {
@@ -192,7 +192,7 @@ const arrayValidators = {
 /**
  * Object validation utilities
  */
-const objectValidators = {
+const _objectValidators = {
   required:
     (message = "Object is required"): Validator<object> =>
     (value) => {
@@ -245,7 +245,7 @@ const objectValidators = {
 /**
  * Conditional validation
  */
-function conditional<T>(
+function _conditional<T>(
   condition: (value: T) => boolean,
   validator: Validator<T>,
 ): Validator<T> {
@@ -260,7 +260,9 @@ function conditional<T>(
 /**
  * Optional validation (only validates if value is not null/undefined)
  */
-function optional<T>(validator: Validator<T>): Validator<T | null | undefined> {
+function _optional<T>(
+  validator: Validator<T>,
+): Validator<T | null | undefined> {
   return (value) => {
     if (value === null || value === undefined) {
       return createValidationResult(true);
@@ -272,7 +274,7 @@ function optional<T>(validator: Validator<T>): Validator<T | null | undefined> {
 /**
  * Chain multiple validators
  */
-function chain<T>(...validators: Array<Validator<T>>): Validator<T> {
+function _chain<T>(...validators: Array<Validator<T>>): Validator<T> {
   return (value) => {
     const results = validators.map((validator) => validator(value));
     return combineValidationResults(...results);
@@ -286,7 +288,7 @@ interface PropertyValidationSchema {
   [key: string]: Validator<unknown>;
 }
 
-function validateProps<T extends Record<string, unknown>>(
+function _validateProps<T extends Record<string, unknown>>(
   props: T,
   schema: PropertyValidationSchema,
 ): ValidationResult {
@@ -315,7 +317,7 @@ function validateProps<T extends Record<string, unknown>>(
 /**
  * Accessibility validation utilities
  */
-const a11yValidators = {
+const _a11yValidators = {
   ariaLabel:
     (
       message = "aria-label or aria-labelledby is required",
@@ -401,7 +403,7 @@ function getLuminance(color: string): number {
 /**
  * Performance validation utilities
  */
-const performanceValidators = {
+const _performanceValidators = {
   bundleSize:
     (maxSize: number, message?: string): Validator<number> =>
     (size) => {
@@ -433,7 +435,7 @@ const performanceValidators = {
 /**
  * Custom validator creation utility
  */
-function createValidator<T>(
+function _createValidator<T>(
   validationFunction: (value: T) => boolean,
   errorMessage: string,
   warningMessage?: string,

@@ -1,1 +1,1 @@
-export { GlassTooltip, type GlassTooltipProps } from "./glass-tooltip";
+export { GlassTooltip } from "./glass-tooltip";

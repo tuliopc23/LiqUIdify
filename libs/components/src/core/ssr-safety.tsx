@@ -27,7 +27,7 @@ interface ClientOnlyProps {
   fallback?: ReactNode;
 }
 
-function ClientOnly({ children, fallback = undefined }: ClientOnlyProps) {
+function _ClientOnly({ children, fallback = undefined }: ClientOnlyProps) {
   const isClient = useIsClient();
 
   if (!isClient) {
@@ -47,7 +47,7 @@ interface SSRSafeProps {
   [key: string]: unknown;
 }
 
-function SSRSafe({
+function _SSRSafe({
   children,
   fallback = undefined,
   component: Component = "div",
@@ -65,7 +65,7 @@ function SSRSafe({
 /**
  * Hook for SSR-safe access to window and document objects
  */
-function useSSRSafeWindow() {
+function _useSSRSafeWindow() {
   const [windowObject, setWindowObject] = useState<Window | undefined | null>(
     undefined,
   );
@@ -82,7 +82,7 @@ function useSSRSafeWindow() {
 /**
  * Hook for SSR-safe localStorage access
  */
-function useSSRSafeLocalStorage() {
+function _useSSRSafeLocalStorage() {
   const [storage, setStorage] = useState<Storage | undefined | null>(undefined);
 
   useEffect(() => {
@@ -104,12 +104,12 @@ const isBrowser = (): boolean => {
 /**
  * Alias for isBrowser for backward compatibility
  */
-const isClient = isBrowser;
+const _isClient = isBrowser;
 
 /**
  * Utility function to safely access browser APIs
  */
-function safelyAccessBrowserAPI<T>(function_: () => T, fallback: T): T {
+function _safelyAccessBrowserAPI<T>(function_: () => T, fallback: T): T {
   if (!isBrowser()) {
     return fallback;
   }

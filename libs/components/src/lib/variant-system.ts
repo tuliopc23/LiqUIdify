@@ -88,7 +88,7 @@ export function createVariants<
 }
 
 // Simple variant system for basic functionality
-export const glassVariants = createVariants({
+const glassVariants = createVariants({
   base: "relative overflow-hidden transition-all duration-300 ease-out",
   variants: {
     variant: {

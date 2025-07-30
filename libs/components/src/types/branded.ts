@@ -13,7 +13,7 @@ type Brand<T, TBrand> = T & { [brand]: TBrand };
  * const color: GlassColor = createGlassColor('#3b82f6');
  * const invalid: GlassColor = '#xyz'; // Type error
  */
-export type GlassColor = Brand<string, "GlassColor">;
+type GlassColor = Brand<string, "GlassColor">;
 
 const createGlassColor = (color: string): GlassColor => {
   if (!isValidGlassColor(color)) {
@@ -43,7 +43,7 @@ function isValidGlassColor(color: string): boolean {
  * const ratio: AccessibleContrast = createAccessibleContrast(4.5);
  * const invalid: AccessibleContrast = createAccessibleContrast(1.5); // Throws error
  */
-export type AccessibleContrast = Brand<number, "AccessibleContrast">;
+type AccessibleContrast = Brand<number, "AccessibleContrast">;
 
 const createAccessibleContrast = (ratio: number): AccessibleContrast => {
   if (!isValidContrastRatio(ratio)) {
@@ -65,7 +65,7 @@ function isValidContrastRatio(ratio: number): boolean {
  * const opacity: GlassOpacity = createGlassOpacity(0.25);
  * const invalid: GlassOpacity = createGlassOpacity(1.5); // Throws error
  */
-export type GlassOpacity = Brand<number, "GlassOpacity">;
+type GlassOpacity = Brand<number, "GlassOpacity">;
 
 const createGlassOpacity = (opacity: number): GlassOpacity => {
   if (opacity < 0 || opacity > 1) {
@@ -80,7 +80,7 @@ const createGlassOpacity = (opacity: number): GlassOpacity => {
  * const blur: GlassBlur = createGlassBlur(16);
  * const invalid: GlassBlur = createGlassBlur(-5); // Throws error
  */
-export type GlassBlur = Brand<number, "GlassBlur">;
+type GlassBlur = Brand<number, "GlassBlur">;
 
 const createGlassBlur = (pixels: number): GlassBlur => {
   if (pixels < 0 || pixels > 100) {
@@ -98,7 +98,7 @@ const createGlassBlur = (pixels: number): GlassBlur => {
  */
 type CSSUnit = Brand<string, "CSSUnit">;
 
-const createCSSUnit = (value: string): CSSUnit => {
+const _createCSSUnit = (value: string): CSSUnit => {
   if (!isValidCSSUnit(value)) {
     throw new Error(`Invalid CSS unit: ${value}`);
   }
@@ -117,9 +117,9 @@ function isValidCSSUnit(value: string): boolean {
  * const duration: AnimationDuration = createAnimationDuration(300);
  * const invalid: AnimationDuration = createAnimationDuration(-100); // Throws error
  */
-export type AnimationDuration = Brand<number, "AnimationDuration">;
+type AnimationDuration = Brand<number, "AnimationDuration">;
 
-const createAnimationDuration = (ms: number): AnimationDuration => {
+const _createAnimationDuration = (ms: number): AnimationDuration => {
   if (ms < 0 || ms > 10_000) {
     throw new Error(
       `Animation duration must be between 0 and 10000ms, got ${ms}`,
@@ -136,7 +136,7 @@ const createAnimationDuration = (ms: number): AnimationDuration => {
  */
 type ZIndex = Brand<number, "ZIndex">;
 
-const createZIndex = (value: number): ZIndex => {
+const _createZIndex = (value: number): ZIndex => {
   if (value < -999 || value > 9999) {
     throw new Error(`Z-index should be between -999 and 9999, got ${value}`);
   }
@@ -149,7 +149,7 @@ const createZIndex = (value: number): ZIndex => {
  * const theme: ThemeName = createThemeName('dark');
  * const invalid: ThemeName = createThemeName('random'); // Throws error
  */
-export type ThemeName = Brand<string, "ThemeName">;
+type ThemeName = Brand<string, "ThemeName">;
 
 const VALID_THEMES = [
   "light",
@@ -160,7 +160,7 @@ const VALID_THEMES = [
   "sunset",
 ] as const;
 
-const createThemeName = (name: string): ThemeName => {
+const _createThemeName = (name: string): ThemeName => {
   if (!VALID_THEMES.includes(name as unknown)) {
     throw new Error(
       `Invalid theme name: ${name}. Valid themes: ${VALID_THEMES.join(", ")}`,
@@ -191,7 +191,7 @@ export const createComponentSize = (size: string): ComponentSize => {
 /**
  * Type guards for branded types
  */
-const isBrandedType = {
+const _isBrandedType = {
   isGlassColor: (value: unknown): value is GlassColor =>
     typeof value === "string" && isValidGlassColor(value),
 
@@ -223,7 +223,7 @@ const isBrandedType = {
 /**
  * Utility functions for working with branded types
  */
-const brandedUtils = {
+const _brandedUtils = {
   /**
    * Parse color and return branded type if valid
    */

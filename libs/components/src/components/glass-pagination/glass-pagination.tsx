@@ -43,7 +43,7 @@ const pageButtonVariants = cva({
   },
 });
 
-export interface GlassPaginationProps {
+interface GlassPaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;

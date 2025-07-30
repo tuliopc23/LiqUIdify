@@ -10,7 +10,7 @@ interface GlassTabItem {
   disabled?: boolean;
 }
 
-export interface GlassTabsProps {
+interface GlassTabsProps {
   tabs: Array<GlassTabItem>;
   defaultTab?: string;
   className?: string;
