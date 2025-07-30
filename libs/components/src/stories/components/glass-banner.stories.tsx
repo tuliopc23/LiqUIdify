@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Download, Sparkles, Zap } from "lucide-react";
+// Uses shared story helpers from utils/storyHelpers.tsx for DRY meta and render logic
+import { createMeta, renderVariants } from '../utils/storyHelpers';
+import type { StoryObj } from "@storybook/react";
 import React from "react";
 import { GlassBanner } from "@/components/glass-banner/glass-banner";
 import { GlassButton } from "@/components/glass-button-refactored/glass-button";
 import { GlassCard } from "@/components/glass-card-refactored/glass-card";
 
-const meta = {
+const meta = createMeta({
   title: "Components/Glass Banner",
   component: GlassBanner,
   parameters: {
@@ -17,31 +18,8 @@ const meta = {
       },
     },
   },
-  tags: ["autodocs"],
-  argTypes: {
-    variant: {
-      description: "The visual variant of the banner",
-      control: { type: "select" },
-      options: ["info", "success", "warning", "error"],
-    },
-    dismissible: {
-      description: "Whether the banner can be dismissed",
-      control: { type: "boolean" },
-    },
-    onDismiss: {
-      description: "Callback when banner is dismissed",
-      action: "dismissed",
-    },
-    icon: {
-      description: "Custom icon to display",
-      control: false,
-    },
-    action: {
-      description: "Action element to display",
-      control: false,
-    },
-  },
-} satisfies Meta<typeof GlassBanner>;
+  // You can add argTypes here if you want to extend/override the shared ones
+});
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -54,37 +32,7 @@ export const Default: Story = {
 };
 
 export const AllVariants: Story = {
-  render: () => (
-    <div className="space-y-4">
-      <GlassBanner variant="info">
-        <p className="font-medium">Information</p>
-        <p className="mt-1 text-sm">
-          This is an informational message to keep users updated.
-        </p>
-      </GlassBanner>
-
-      <GlassBanner variant="success">
-        <p className="font-medium">Success!</p>
-        <p className="mt-1 text-sm">
-          Your changes have been saved successfully.
-        </p>
-      </GlassBanner>
-
-      <GlassBanner variant="warning">
-        <p className="font-medium">Warning</p>
-        <p className="mt-1 text-sm">
-          Please review your settings before continuing.
-        </p>
-      </GlassBanner>
-
-      <GlassBanner variant="error">
-        <p className="font-medium">Error</p>
-        <p className="mt-1 text-sm">
-          There was a problem processing your request.
-        </p>
-      </GlassBanner>
-    </div>
-  ),
+  render: () => renderVariants(GlassBanner, { children: "Banner message" }),
   parameters: {
     docs: {
       description: {
