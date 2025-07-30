@@ -16,5 +16,6 @@ export const version = "1.2.4";
 export const metadata = {
   name: "LiquidUI",
   version: "1.2.4",
-  description: "Production-ready React component library with glassmorphism design and physics-based interactions",
+  description:
+    "Production-ready React component library with glassmorphism design and physics-based interactions",
 } as const;
