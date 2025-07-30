@@ -19,13 +19,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@liquidify/components': resolve(__dirname, 'libs/components/src/index.ts'),
-      '@': resolve(__dirname, 'libs/components/src'),
+      '@liquidify/components': resolve(currentDir, 'libs/components/src/index.ts'),
+      '@': resolve(currentDir, 'libs/components/src'),
     },
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'libs/components/src/index.ts'),
+      entry: resolve(currentDir, 'libs/components/src/index.ts'),
       name: 'LiquidUI',
       formats: ['es', 'cjs'],
       fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`,
