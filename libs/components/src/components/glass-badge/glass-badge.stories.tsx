@@ -7,7 +7,7 @@ import {
   Star,
   XCircle,
 } from "lucide-react";
-import { GlassBadge } from "./glass-badge";
+import { GlassBadge } from "@/components/glass-badge";
 
 const meta = {
   title: "Components/Display/GlassBadge",

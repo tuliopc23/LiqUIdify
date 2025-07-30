@@ -7,32 +7,31 @@ import { GlassFocusTrap } from '@/components/glass-focus-trap/glass-focus-trap';
 import { GlassInput } from '@/components/glass-input/glass-input';
 
 const meta = { title: 'Components/Glass Focus Trap' }
-  component: GlassFocusTrap,
-  parameters: { layout: 'centered' }
+  GlassFocusTrap,
+  parameters: { 'centered' }
     { 
-        component: 
-          'A focus trap component that constrains keyboard navigation within a specific area. Essential for modals, dropdowns, and other overlay components to ensure accessibility.',
+        'A focus trap component that constrains keyboard navigation within a specific area. Essential for modals, dropdowns, and other overlay components to ensure accessibility.',
       },
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      description: 'Whether the focus trap is active' type: 'boolean' ,
+      'Whether the focus trap is active' 'boolean' ,
     },
-    returnFocus: { description: 'Return focus to the trigger element when deactivated' }
-      { type: 'boolean' },
+    { 'Return focus to the trigger element when deactivated' }
+      { 'boolean' },
     },
-    initialFocus: { description: 'Selector or element to focus when activated' }
-      control: false,
+    { 'Selector or element to focus when activated' }
+      false,
     },
-    allowOutsideClick: { description: 'Allow clicks outside the trap' }
-      { type: 'boolean' },
+    { 'Allow clicks outside the trap' }
+      { 'boolean' },
     },
-    escapeDeactivates: { description: 'Deactivate trap when Escape key is pressed' }
-      { type: 'boolean' },
+    { 'Deactivate trap when Escape key is pressed' }
+      { 'boolean' },
     },
-    onDeactivate: { description: 'Callback when focus trap is deactivated' }
-      action: 'deactivated',
+    { 'Callback when focus trap is deactivated' }
+      'deactivated',
     },
   },
 } satisfies Meta<typeof GlassFocusTrap>;
@@ -92,9 +91,9 @@ export const Default: Story = { render: () => { }
           </GlassFocusTrap>
         )}
       </div>
-    );
+    )
   },
-};
+}
 
 export const ModalExample: Story = { render: () => { }
     const [showModal, setShowModal] = React.useState(false);

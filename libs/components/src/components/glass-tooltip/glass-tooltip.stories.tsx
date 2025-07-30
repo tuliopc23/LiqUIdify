@@ -14,10 +14,10 @@ import {
 import { GlassTooltip } from './glass-tooltip';
 
 const meta = { title: 'Components/GlassTooltip' }
-  component: GlassTooltip,
-  parameters: { layout: 'centered' }
+  GlassTooltip,
+  parameters: { 'centered' }
     { 
-        component: `
+        `
 The GlassTooltip component displays helpful information on hover with glassmorphic styling. It automatically 
 positions itself to stay within the viewport and includes a directional arrow.
 
@@ -32,7 +32,7 @@ positions itself to stay within the viewport and includes a directional arrow.
         `,,
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   decorators: [
     (Story) => (
       <div className="p-20">
@@ -41,20 +41,20 @@ positions itself to stay within the viewport and includes a directional arrow.
     ),
   ],
   argTypes: { 
-      description: 'Content to display in the tooltip' type: 'text' ,
+      'Content to display in the tooltip' 'text' ,
     },
-    position: { description: 'Position of the tooltip relative to the trigger' }
-      { type: 'select' },
-      options: ['top', 'bottom', 'left', 'right'],
+    { 'Position of the tooltip relative to the trigger' }
+      { 'select' },
+      ['top', 'bottom', 'left', 'right'],
     },
-    delay: { description: 'Delay in milliseconds before showing tooltip' }
-      { type: 'range', min: 0, max: 2000, step: 100 },
+    { 'Delay in milliseconds before showing tooltip' }
+      { 'range', min: 0, max: 2000, step: 100 },
     },
-    disabled: { description: 'Disable the tooltip' }
-      { type: 'boolean' },
+    { 'Disable the tooltip' }
+      { 'boolean' },
     },
-    className: { description: 'Additional CSS classes for the tooltip' }
-      { type: 'text' },
+    { 'Additional CSS classes for the tooltip' }
+      { 'text' },
     },
   },
 } satisfies Meta<typeof GlassTooltip>;
@@ -78,7 +78,7 @@ export const Default: Story = { args: {
       </button>
     </GlassTooltip>
   ),
-};
+}
 
 {/* Different positions  */}
 export const Positions: Story = { render: () => (
@@ -120,7 +120,7 @@ export const Positions: Story = { render: () => (
       </GlassTooltip>
     </div>
   ) }
-};
+}
 
 {/* Different delays  */}
 export const Delays: Story = { render: () => (
@@ -204,7 +204,7 @@ export const WithIcons: Story = { render: () => (
       </GlassTooltip>
     </div>
   ) }
-};
+}
 
 {/* Rich content  */}
 export const RichContent: Story = { render: () => (
@@ -343,7 +343,7 @@ export const ActionButtons: Story = { render: () => (
       </GlassTooltip>
     </div>
   ) }
-};
+}
 
 {/* Form field tooltips  */}
 export const FormFieldTooltips: Story = { render: () => (
@@ -451,7 +451,7 @@ export const ViewportAwareness: Story = { render: () => (
       </div>
     </div>
   ) }
-};
+}
 
 {/* Long content  */}
 export const LongContent: Story = { render: () => (
@@ -522,7 +522,7 @@ export const ThemeVariations: Story = { render: () => (
       </div>
     </div>
   ) }
-};
+}
 
 {/* Custom styling  */}
 export const CustomStyling: Story = { render: () => (
@@ -561,7 +561,7 @@ export const CustomStyling: Story = { render: () => (
       </GlassTooltip>
     </div>
   ) }
-};
+}
 
 {/* Interactive elements  */}
 export const InteractiveElements: Story = { render: () => (
@@ -592,4 +592,4 @@ export const InteractiveElements: Story = { render: () => (
       </div>
     </div>
   ) }
-};
+}

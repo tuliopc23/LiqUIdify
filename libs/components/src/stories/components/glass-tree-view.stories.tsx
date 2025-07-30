@@ -1,5 +1,4 @@
 import type { StoryObj } from '@storybook/react';
-import { Settings, } from 'lucide-react';
 import React from 'react';
 import { GlassButton } from '@/components/glass-button-refactored/glass-button';
 import { GlassCard } from '@/components/glass-card-refactored/glass-card';
@@ -9,36 +8,35 @@ import {
 } from '@/components/glass-tree-view/glass-tree-view';
 
 const meta = { title: 'Components/Glass Tree View' }
-  component: GlassTreeView,
-  parameters: { layout: 'padded' }
+  GlassTreeView,
+  parameters: { 'padded' }
     { 
-        component: 
-          'A hierarchical tree view component with glassmorphism styling. Supports nested structures, custom icons, selection states, and expand/collapse animations.',
+        'A hierarchical tree view component with glassmorphism styling. Supports nested structures, custom icons, selection states, and expand/collapse animations.',
       },
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      description: 'Tree nodes to display' 
-      control: false,
+      'Tree nodes to display'
+      false,
     },
-    onNodeSelect: { description: 'Callback when a node is selected' }
-      action: 'node selected',
+    { 'Callback when a node is selected' }
+      'node selected',
     },
-    onNodeExpand: { description: 'Callback when a node is expanded/collapsed' }
-      action: 'node toggled',
+    { 'Callback when a node is expanded/collapsed' }
+      'node toggled',
     },
-    selectedNodeId: { description: 'ID of the selected node' }
-      { type: 'text' },
+    { 'ID of the selected node' }
+      { 'text' },
     },
-    expandedNodeIds: { description: 'IDs of expanded nodes' }
-      control: false,
+    { 'IDs of expanded nodes' }
+      false,
     },
-    showIcons: { description: 'Show node icons' }
-      { type: 'boolean' },
+    { 'Show node icons' }
+      { 'boolean' },
     },
-    indentSize: { description: 'Indentation size in pixels' }
-      { type: 'number', min: 10, max: 40, step: 5 },
+    { 'Indentation size in pixels' }
+      { 'number', min: 10, max: 40, step: 5 },
     },
   },
 } satisfies Meta<typeof GlassTreeView>;
@@ -60,27 +58,27 @@ const fileSystemNodes: Array<TreeNode> = [
           { id: 'Modal.tsx', label: 'Modal.tsx' },
         ],
       },
-      { id: 'utils' }
-        label: 'utils',
+      { 'utils' }
+        'utils',
         children: [
           { id: 'helpers.ts', label: 'helpers.ts' },
           { id: 'constants.ts', label: 'constants.ts' },
         ],
       },
-      { id: 'App.tsx', label: 'App.tsx' },
-      { id: 'index.tsx', label: 'index.tsx' },
+      { 'App.tsx', label: 'App.tsx' },
+      { 'index.tsx', label: 'index.tsx' },
     ],
   },
-  { id: 'public' }
-    label: 'public',
+  { 'public' }
+    'public',
     children: [
       { id: 'index.html', label: 'index.html' },
       { id: 'favicon.ico', label: 'favicon.ico' },
     ],
   },
-  { id: 'package.json', label: 'package.json' },
-  { id: 'README.md', label: 'README.md' },
-];
+  { 'package.json', label: 'package.json' },
+  { 'README.md', label: 'README.md' },
+]
 
 export const Default: Story = { args: {
     nodes: fileSystemNodes }
@@ -113,13 +111,13 @@ export const WithSelection: Story = { render: () => { }
           </GlassCard>
         </div>
       </div>
-    );
+    )
   },
-  parameters: { 
-        story: 'Tree view with selection state management' ,
+  {
+        'Tree view with selection state management' ,
     },
   },
-};
+}
 
 export const DatabaseSchema: Story = { args: {
     nodes: [
@@ -137,60 +135,60 @@ export const DatabaseSchema: Story = { args: {
                 label: 'id',
                 icon: <Key className="h-4 w-4" />,
               },
-              { id: 'users-name' }
-                label: 'name',
+              { 'users-name' }
+                'name',
                 icon: <Type className="h-4 w-4" />,
               },
-              { id: 'users-email' }
-                label: 'email',
+              { 'users-email' }
+                'email',
                 icon: <Type className="h-4 w-4" />,
               },
-              { id: 'users-created' }
-                label: 'created_at',
+              { 'users-created' }
+                'created_at',
                 icon: <Type className="h-4 w-4" />,
               },
             ],
           },
-          { id: 'posts-table' }
-            label: 'posts',
+          { 'posts-table' }
+            'posts',
             icon: <Table className="h-4 w-4" />,
             children: [
               { id: 'posts-id' }
                 label: 'id',
                 icon: <Key className="h-4 w-4" />,
               },
-              { id: 'posts-title' }
-                label: 'title',
+              { 'posts-title' }
+                'title',
                 icon: <Type className="h-4 w-4" />,
               },
-              { id: 'posts-content' }
-                label: 'content',
+              { 'posts-content' }
+                'content',
                 icon: <Type className="h-4 w-4" />,
               },
-              { id: 'posts-user-id' }
-                label: 'user_id',
+              { 'posts-user-id' }
+                'user_id',
                 icon: <Columns className="h-4 w-4" />,
               },
             ],
           },
-          { id: 'comments-table' }
-            label: 'comments',
+          { 'comments-table' }
+            'comments',
             icon: <Table className="h-4 w-4" />,
             children: [
               { id: 'comments-id' }
                 label: 'id',
                 icon: <Key className="h-4 w-4" />,
               },
-              { id: 'comments-text' }
-                label: 'text',
+              { 'comments-text' }
+                'text',
                 icon: <Type className="h-4 w-4" />,
               },
-              { id: 'comments-post-id' }
-                label: 'post_id',
+              { 'comments-post-id' }
+                'post_id',
                 icon: <Columns className="h-4 w-4" />,
               },
-              { id: 'comments-user-id' }
-                label: 'user_id',
+              { 'comments-user-id' }
+                'user_id',
                 icon: <Columns className="h-4 w-4" />,
               },
             ],
@@ -199,13 +197,13 @@ export const DatabaseSchema: Story = { args: {
       },
     ],
   },
-  parameters: { docs: {
-      description: {
-        story: 'Database schema visualization with custom icons' }
+  { {
+      {
+        'Database schema visualization with custom icons' }
       },
     },
   },
-};
+}
 
 export const ControlledExpansion: Story = { render: () => { }
     const [expandedNodeIds, setExpandedNodeIds] = React.useState<Array<string>>(
@@ -233,7 +231,7 @@ export const ControlledExpansion: Story = { render: () => { }
                   if (node.children) {
                     allNodeIds.push(node.id);
                     _collectIds(node.children);
-                  };
+                  }
               };
               _collectIds(fileSystemNodes);
               setExpandedNodeIds(allNodeIds);>
@@ -254,7 +252,7 @@ export const ControlledExpansion: Story = { render: () => { }
           onNodeExpand=handleNodeExpand
         />
     </div>
-    );
+    )
   }             const 
   _parameters: { docs: {
       description: {

@@ -1,28 +1,119 @@
-import type { StoryObj } from '@storybook/react';
-import { motion } from 'framer-motion';
-import { RefreshCw, Zap } from 'lucide-react';
-import { GlassButton, GlassCard } from '../..';
+import type { Meta, StoryObj } from "@storybook/react";
+import { motion } from "framer-motion";
+import { ChevronRight, RefreshCw, Sparkles, Zap } from "lucide-react";
+import { GlassButton, GlassCard } from "../..";
+import React from "react";
 
-const meta = { title: 'Design System/Animation Patterns' }
-  { layout: 'centered' }
-    { 
+// Extract animation configuration interfaces
+interface SpringConfig {
+  stiffness: number;
+  damping: number;
+}
+
+interface AnimationVariants {
+  visible: {
+    opacity: number;
+    y: number;
+    scale: number;
+    transition?: {
+      staggerChildren?: number;
+    };
+  };
+  hidden: {
+    opacity: number;
+    y: number;
+    scale: number;
+    transition?: {
+      staggerChildren?: number;
+      staggerDirection?: number;
+    };
+  };
+}
+
+// Extract common animation configurations
+const SPRING_CONFIGS: Record<string, SpringConfig> = {
+  gentle: { stiffness: 100, damping: 15 },
+  bouncy: {
+    stiffness: 300,
+    damping: 10,
+  },
+  quick: { stiffness: 400, damping: 25 },
+};
+
+const STAGGER_VARIANTS: AnimationVariants = {
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    y: 20,
+    scale: 0.8,
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
+  },
+};
+
+// Extract common animation utility functions
+const createHoverAnimation = (type: "scale" | "lift" | "rotate" | "glow") => {
+  switch (type) {
+    case "scale":
+      return { whileHover: { scale: 1.05 }, whileTap: { scale: 0.95 } };
+    case "lift":
+      return {
+        whileHover: {
+          y: -4,
+        },
+        whileTap: { y: 0 },
+      };
+    case "rotate":
+      return {
+        whileHover: { rotate: 5 },
+        whileTap: {
+          rotate: -5,
+        },
+      };
+    case "glow":
+      return {
+        whileHover: {
+          boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.3)",
+          borderColor: "rgba(99, 102, 241, 0.5)",
+        },
+      };
+    default:
+      return {};
+  }
+};
+
+const meta: Meta = {
+  title: "Design System/Animation Patterns",
+  parameters: {
+    layout: "centered",
+    docs: {
+      description: {
         component:
-          'Consistent animation patterns and microinteractions used throughout the LiquidUI library.' 
+          "Consistent animation patterns and microinteractions used throughout the LiquidUI library.",
       },
     },
   },
-  tags: ['autodocs'],
-} satisfies Meta;
+  tags: ["autodocs"],
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-{/* Spring Animations  */}
-export const SpringAnimations: Story = { render: () => (
+export const SpringAnimations: Story = {
+  render: () => (
     <div className="w-full max-w-4xl space-y-8">
       <div className="space-y-2 text-center">
         <h2 className="font-bold text-2xl">Spring Physics</h2>
-        <p className="text-gray-600 dark:text-gray-400"> }
+        <p className="text-gray-600 dark:text-gray-400">
           Natural, fluid animations using spring physics
         </p>
       </div>
@@ -30,26 +121,26 @@ export const SpringAnimations: Story = { render: () => (
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <AnimationCard
           title="Gentle Spring"
-          spring={{ stiffness: 100, damping: 15
+          spring={SPRING_CONFIGS.gentle}
           description="Smooth and elegant"
         />
         <AnimationCard
           title="Bouncy Spring"
-          spring={{ stiffness: 300, damping: 10
+          spring={SPRING_CONFIGS.bouncy}
           description="Playful and energetic"
         />
         <AnimationCard
           title="Quick Spring"
-          spring={{ stiffness: 400, damping: 25
+          spring={SPRING_CONFIGS.quick}
           description="Snappy and responsive"
         />
-      </_div>
+      </div>
     </div>
   ),
 };
 
-{/* Hover Effects  */}
-export const HoverEffects: Story = { render: () => (
+export const HoverEffects: Story = {
+  render: () => (
     <div className="w-full max-w-4xl space-y-8">
       <div className="space-y-2 text-center">
         <h2 className="font-bold text-2xl">Hover Interactions</h2>
@@ -59,52 +150,30 @@ export const HoverEffects: Story = { render: () => (
       </div>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <motion.div }
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95
-          className="aspect-square"
-        >
-          <GlassCard className="flex h-full cursor-pointer items-center justify-center">
-            <span className="font-medium text-sm">Scale</span>
-          </GlassCard>
-        </_motion.div>
-
-        <motion.div
-          _whileHover={{ y: -4
-          whileTap={{ y: 0
-          className="aspect-square"
-        >
-          <_GlassCard _className="flex h-full cursor-pointer items-center justify-center">
-            <_span _className="font-medium text-sm">Lift</_span>
-          </_GlassCard>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ rotate: 5
-          whileTap={{ rotate: -5
-          className="aspect-square"
-        >
-          <_GlassCard _className="flex h-full cursor-pointer items-center justify-center">
-            <_span _className="font-medium text-sm">Rotate</span>
-          </GlassCard>
-        </motion.div>
-
-        <motion.div
-          _className="aspect-square"
-          whileHover={{ }
-            _boxShadow: '0 20px 40px -15px rgba(0, 0, 0, 0.3)',
-            _borderColor: 'rgba(99, 102, 241, 0.5)',>
-          <_GlassCard _className="flex h-full cursor-pointer items-center justify-center border-2 border-transparent transition-colors">
-            <_span _className="font-medium text-sm">Glow</span>
-          </GlassCard>
-        </motion.div>
+        {(["scale", "lift", "rotate", "glow"] as const).map((type) => (
+          <motion.div
+            key={type}
+            {...createHoverAnimation(type)}
+            className="aspect-square"
+          >
+            <GlassCard
+              className={`flex h-full cursor-pointer items-center justify-center ${
+                type === "glow"
+                  ? "border-2 border-transparent transition-colors"
+                  : ""
+              }`}
+            >
+              <span className="font-medium text-sm capitalize">{type}</span>
+            </GlassCard>
+          </motion.div>
+        ))}
       </div>
     </div>
   ),
 };
 
-{/* Loading States  */}
-export const LoadingStates: Story = { render: () => (
+export const LoadingStates: Story = {
+  render: () => (
     <div className="w-full max-w-4xl space-y-8">
       <div className="space-y-2 text-center">
         <h2 className="font-bold text-2xl">Loading Patterns</h2>
@@ -127,21 +196,30 @@ export const LoadingStates: Story = { render: () => (
           <h3 className="font-semibold">Spinner</h3>
           <div className="flex justify-center py-8">
             <motion.div
-              animate={{ rotate: 360 }
-              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1, ease: 'linear'>
+              animate={{ rotate: 360 }}
+              transition={{
+                repeat: Infinity,
+                duration: 1,
+                ease: "linear",
+              }}
+            >
               <RefreshCw className="h-8 w-8 text-blue-500" />
             </motion.div>
           </div>
         </GlassCard>
 
-        <_GlassCard _className="space-y-4 p-6">
-          <_h3 _className="font-semibold">Progress</_h3>
-          <_div _className="relative h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+        <GlassCard className="space-y-4 p-6">
+          <h3 className="font-semibold">Progress</h3>
+          <div className="relative h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
             <motion.div
               className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-purple-500"
-              _initial={{ width: '0%'
-              animate={{ width: '100%' }
-              _transition={{ repeat: Infinity, _duration: 2, _ease: 'easeInOut'
+              initial={{
+                width: "0%",
+              }}
+              animate={{
+                width: "100%",
+              }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
             />
           </div>
           <p className="text-gray-600 text-sm dark:text-gray-400">
@@ -153,10 +231,15 @@ export const LoadingStates: Story = { render: () => (
   ),
 };
 
-{/* Micro-interactions  */}
-export const MicroInteractions: Story = { render: () => { }
+export const MicroInteractions: Story = {
+  render: () => {
     const [liked, setLiked] = React.useState(false);
     const [sparkles, setSparkles] = React.useState(false);
+
+    const handleSparkleClick = () => {
+      setSparkles(true);
+      setTimeout(() => setSparkles(false), 1000);
+    };
 
     return (
       <div className="w-full max-w-4xl space-y-8">
@@ -171,60 +254,56 @@ export const MicroInteractions: Story = { render: () => { }
           <GlassCard className="space-y-4 p-6">
             <h3 className="font-semibold">Heart Animation</h3>
             <div className="flex justify-center">
-              <motion.button onClick={() => setLiked(!liked)}
-                whileTap={{ scale: 0.8
+              <motion.button
+                onClick={() => setLiked(!liked)}
+                whileTap={{
+                  scale: 0.8,
+                }}
                 className="p-4"
               >
                 <motion.svg
                   width="48"
                   height="48"
-                  viewBox="0 0 24 24" }
-                  fill={liked ? 'currentColor' : 'none'}
+                  viewBox="0 0 24 24"
+                  fill={liked ? "currentColor" : "none"}
                   stroke="currentColor"
                   strokeWidth="2"
-                  className={liked ? 'text-red-500' : 'text-gray-400'}
+                  className={liked ? "text-red-500" : "text-gray-400"}
                   animate={
                     liked
                       ? {
                           scale: [1, 1.2, 1],
                           rotate: [0, -10, 10, 0],
                         }
-                      : {
-                  transition={{ duration: 0.4>
+                      : {}
+                  }
+                  transition={{
+                    duration: 0.4,
+                  }}
+                >
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                </motion._svg>
-              </motion._button>
+                </motion.svg>
+              </motion.button>
             </div>
-            <_p _className="text-center text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-center text-gray-600 text-sm dark:text-gray-400">
               Click to like
-            </_p>
+            </p>
           </GlassCard>
 
-          <_GlassCard _className="space-y-4 p-6">
-            <_h3 _className="font-semibold">Success Feedback</h3>
-            <_div _className="flex justify-center">
-              <_GlassButton
-                _type="button"
-              _onClick={() => {
-                  setSparkles(true); }
-                  _setTimeout(() => _setSparkles(false), 1000);
-                } onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (() => {
-                  setSparkles(true);
-                  setTimeout(() => setSparkles(false), 1000);
-                )(e);
+          <GlassCard className="space-y-4 p-6">
+            <h3 className="font-semibold">Success Feedback</h3>
+            <div className="flex justify-center">
+              <GlassButton
+                type="button"
+                onClick={handleSparkleClick}
                 variant="primary"
               >
                 <motion.span
-                  animate={
-                    sparkles
-                      ? {
-                          scale: [1, 1.1, 1],
-                        }
-                      : {
+                  animate={sparkles ? { scale: [1, 1.1, 1] } : {}}
                   className="flex items-center gap-2"
                 >
                   {sparkles ? (
-                    <_Sparkles className="h-4 w-4" />
+                    <Sparkles className="h-4 w-4" />
                   ) : (
                     <Zap className="h-4 w-4" />
                   )}
@@ -232,7 +311,7 @@ export const MicroInteractions: Story = { render: () => { }
                 </motion.span>
               </GlassButton>
             </div>
-            <_p _className="text-center text-gray-600 text-sm dark:text-gray-400">
+            <p className="text-center text-gray-600 text-sm dark:text-gray-400">
               Button with success animation
             </p>
           </GlassCard>
@@ -242,8 +321,8 @@ export const MicroInteractions: Story = { render: () => { }
   },
 };
 
-{/* Stagger Animations  */}
-export const StaggerAnimations: Story = { render: () => { }
+export const StaggerAnimations: Story = {
+  render: () => {
     const [show, setShow] = React.useState(true);
 
     return (
@@ -256,41 +335,34 @@ export const StaggerAnimations: Story = { render: () => { }
         </div>
 
         <div className="text-center">
-          <GlassButton type="button"
-              onClick={() => setShow(!show)}>
-            {show ? 'Hide' : 'Show'} Items
+          <GlassButton type="button" onClick={() => setShow(!show)}>
+            {show ? "Hide" : "Show"} Items
           </GlassButton>
         </div>
 
         <motion.div
           className="grid grid-cols-2 gap-4 md:grid-cols-4"
           initial="hidden"
-          animate={show ? 'visible' : 'hidden'}
-          variants={{ visible: {
-              transition: {
-                staggerChildren: 0.1 }
-              },
-            },
-            hidden: { transition: {
-                staggerChildren: 0.05 }
-                staggerDirection: -1,
-              },
-            },>
+          animate={show ? "visible" : "hidden"}
+          variants={STAGGER_VARIANTS}
+        >
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <motion.div
               key={i}
-              variants={{ visible: {
-                  opacity: 1 }
+              variants={{
+                visible: {
+                  opacity: 1,
                   y: 0,
                   scale: 1,
                 },
-                hidden: { opacity: 0 }
+                hidden: {
+                  opacity: 0,
                   y: 20,
                   scale: 0.8,
                 },
-              transition={{ type: 'spring' }
-                stiffness: 100,
-                damping: 12,>
+              }}
+              transition={{ type: "spring", stiffness: 100, damping: 12 }}
+            >
               <GlassCard className="flex aspect-square items-center justify-center">
                 <span className="font-bold text-2xl">{i}</span>
               </GlassCard>
@@ -302,10 +374,10 @@ export const StaggerAnimations: Story = { render: () => { }
   },
 };
 
-{/* Page Transitions  */}
-export const PageTransitions: Story = { render: () => { }
+export const PageTransitions: Story = {
+  render: () => {
     const [page, setPage] = React.useState(0);
-    const pages = ['Home', 'About', 'Services', 'Contact'];
+    const pages = ["Home", "About", "Services", "Contact"];
 
     return (
       <div className="w-full max-w-4xl space-y-8">
@@ -321,8 +393,9 @@ export const PageTransitions: Story = { render: () => { }
             <GlassButton
               type="button"
               key={name}
-              variant={page === index ? 'primary' : 'ghost'}
-              size="sm" onClick={() => setPage(index)}
+              variant={page === index ? "primary" : "ghost"}
+              size="sm"
+              onClick={() => setPage(index)}
             >
               {name}
             </GlassButton>
@@ -332,10 +405,13 @@ export const PageTransitions: Story = { render: () => { }
         <div className="relative h-64 overflow-hidden">
           <motion.div
             key={page}
-            initial={{ opacity: 0, x: 300
-            animate={{ opacity: 1, x: 0
-            exit={{ opacity: 0, x: -300
-            transition={{ type: 'spring', stiffness: 100, damping: 20
+            initial={{ opacity: 0, x: 300 }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            exit={{ opacity: 0, x: -300 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
             className="absolute inset-0"
           >
             <GlassCard className="flex h-full items-center justify-center">
@@ -353,13 +429,14 @@ export const PageTransitions: Story = { render: () => { }
   },
 };
 
-{/* Helper Components  */}
+// Extract AnimationCard component with proper TypeScript annotations
 function AnimationCard({
   title,
   spring,
   description,
-}: { title: string; }
-  spring: { stiffness: number; damping: number };
+}: {
+  title: string;
+  spring: SpringConfig;
   description: string;
 }) {
   const [isAnimating, setIsAnimating] = React.useState(false);
@@ -369,30 +446,42 @@ function AnimationCard({
       <h3 className="text-center font-semibold">{title}</h3>
       <div className="relative flex h-32 items-center justify-center">
         <motion.div
-          animate={isAnimating ? { x: 80 } : { x: -80 }
-          transition={{ type: 'spring', ...spring
+          animate={
+            isAnimating
+              ? {
+                  x: 80,
+                }
+              : { x: -80 }
+          }
+          transition={{
+            type: "spring",
+            ...spring,
+          }}
           className="absolute"
         >
           <div className="h-4 w-4 rounded-full bg-blue-500" />
         </motion.div>
       </div>
-      <_p _className="text-center text-gray-600 text-sm dark:text-gray-400">
+      <p className="text-center text-gray-600 text-sm dark:text-gray-400">
         {description}
       </p>
-      <_GlassButton
-        _type="button"
-        _size="sm"
-        _fullWidth _onClick={() => setIsAnimating(!isAnimating)}
+      <GlassButton
+        type="button"
+        size="sm"
+        fullWidth
+        onClick={() => setIsAnimating(!isAnimating)}
       >
         <motion.span
-          _animate={{ rotate: isAnimating ? 180 : 0
-          transition={{ duration: 0.3
+          animate={{ rotate: isAnimating ? 180 : 0 }}
+          transition={{
+            duration: 0.3,
+          }}
           className="mr-2 inline-block"
         >
-          <_ChevronRight className="h-4 w-4" />
+          <ChevronRight className="h-4 w-4" />
         </motion.span>
         Animate
       </GlassButton>
     </GlassCard>
-  ); }
+  );
 }

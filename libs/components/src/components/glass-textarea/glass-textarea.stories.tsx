@@ -1,13 +1,13 @@
 import type { StoryObj } from '@storybook/react';
 import { Code, FileText, Mail, MessageSquare } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { GlassTextarea } from './glass-textarea';
 
 const meta = { title: 'Glass UI/GlassTextarea' }
-  component: GlassTextarea,
-  parameters: { layout: 'centered' }
+  GlassTextarea,
+  parameters: { 'centered' }
     { 
-        component: `
+        `
 ## GlassTextarea Component
  }
 A sophisticated textarea component with glassmorphic styling, customizable resize behavior, and comprehensive form support. Perfect for multi-line text input with elegant visual design.
@@ -40,39 +40,39 @@ function MyComponent() {
         `,,
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      control: 'text' 
-      description: 'Placeholder text',
+      'text'
+      'Placeholder text',
     },
-    value: { control: 'text' }
-      description: 'Textarea value',
+    { 'text' }
+      'Textarea value',
     },
-    onChange: { action: 'changed' }
-      description: 'Change event handler',
+    { 'changed' }
+      'Change event handler',
     },
-    disabled: { control: 'boolean' }
-      description: 'Whether the textarea is disabled',
+    { 'boolean' }
+      'Whether the textarea is disabled',
     },
-    variant: { control: 'select' }
-      options: ['default', 'minimal'],
+    { 'select' }
+      ['default', 'minimal'],
       description: 'Visual variant',
     },
-    resize: { control: 'select' }
-      options: ['none', 'vertical', 'horizontal', 'both'],
+    { 'select' }
+      ['none', 'vertical', 'horizontal', 'both'],
       description: 'Resize behavior',
     },
-    rows: { control: 'number' }
-      description: 'Number of visible text rows',
+    { 'number' }
+      'Number of visible text rows',
     },
-    cols: { control: 'number' }
-      description: 'Number of visible text columns',
+    { 'number' }
+      'Number of visible text columns',
     },
-    maxLength: { control: 'number' }
-      description: 'Maximum character length',
+    { 'number' }
+      'Maximum character length',
     },
-    className: { control: 'text' }
-      description: 'Additional CSS classes',
+    { 'text' }
+      'Additional CSS classes',
     },
   },
 } satisfies Meta<typeof GlassTextarea>;
@@ -102,9 +102,9 @@ export const Controlled: Story = { render: (_args) => { }
           Character count: {value.length}
         </div>
       </div>
-    );
+    )
   },
-};
+}
 
 {/* Variants  */}
 export const Variants: Story = { render: () => {
@@ -242,9 +242,9 @@ export const WithCharacterLimit: Story = { render: () => { }
           </span>
         </div>
       </div>
-    );
+    )
   },
-};
+}
 
 {/* Interactive Demo  */}
 export const InteractiveDemo: Story = { render: () => { }
@@ -309,16 +309,16 @@ export const InteractiveDemo: Story = { render: () => { }
           </div>
         </div>
       </div>
-    );
+    )
   },
-};
+}
 
 {/* Form Integration  */}
 export const FormIntegration: Story = { render: () => { }
     const [formData, setFormData] = useState({ message: '' }
       description: '',
       notes: '',
-    });
+    })
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -382,7 +382,7 @@ export const FormIntegration: Story = { render: () => { }
       </form>
     );
   },
-};
+}
 
 {/* Real-world Examples  */}
 export const RealWorldExamples: Story = { render: () => { }
@@ -448,9 +448,9 @@ export const RealWorldExamples: Story = { render: () => { }
           </div>
         </div>
       </div>
-    );
+    )
   },
-};
+}
 
 {/* Accessibility Demo  */}
 export const AccessibilityDemo: Story = { render: () => { }
@@ -518,16 +518,16 @@ export const AccessibilityDemo: Story = { render: () => { }
           </div>
         </div>
       </div>
-    );
+    )
   },
-};
+}
 
 {/* Email Composer Example  */}
 export const EmailComposer: Story = { render: () => { }
     const [email, setEmail] = useState({ to: 'john@example.com' }
       subject: 'Project Update',
       body: '',
-    });
+    })
 
     return (
       <div className="w-[500px] space-y-4">
@@ -602,4 +602,4 @@ export const EmailComposer: Story = { render: () => { }
       </div>
     );
   },
-};
+}

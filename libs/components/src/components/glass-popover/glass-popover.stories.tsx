@@ -9,10 +9,10 @@ import {
 import { GlassPopover } from './glass-popover';
 
 const meta = { title: 'Components/GlassPopover' }
-  component: GlassPopover,
-  parameters: { layout: 'centered' }
+  GlassPopover,
+  parameters: { 'centered' }
     { 
-        component: `
+        `
 The GlassPopover component provides a floating panel that appears near a trigger element. It supports multiple  }
 positioning options, automatic viewport adjustment, and can be controlled or uncontrolled.
 
@@ -26,38 +26,38 @@ positioning options, automatic viewport adjustment, and can be controlled or unc
         `,,
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      description: 'The element that triggers the popover' type: 'text' ,
+      'The element that triggers the popover' 'text' ,
     },
-    content: { description: 'The content to display in the popover' }
-      { type: 'text' },
+    { 'The content to display in the popover' }
+      { 'text' },
     },
-    position: { description: 'Position of the popover relative to the trigger' }
-      { type: 'select' },
-      options: ['top', 'bottom', 'left', 'right'],
+    { 'Position of the popover relative to the trigger' }
+      { 'select' },
+      ['top', 'bottom', 'left', 'right'],
     },
-    align: { description: 'Alignment of the popover relative to the trigger' }
-      { type: 'select' },
-      options: ['start', 'center', 'end'],
+    { 'Alignment of the popover relative to the trigger' }
+      { 'select' },
+      ['start', 'center', 'end'],
     },
-    open: { description: 'Controlled open state' }
-      { type: 'boolean' },
+    { 'Controlled open state' }
+      { 'boolean' },
     },
-    onOpenChange: { description: 'Callback when open state changes' }
-      action: 'openChanged',
+    { 'Callback when open state changes' }
+      'openChanged',
     },
-    closeOnClickOutside: { description: 'Close when clicking outside the popover' }
-      { type: 'boolean' },
+    { 'Close when clicking outside the popover' }
+      { 'boolean' },
     },
-    closeOnEscape: { description: 'Close when pressing Escape key' }
-      { type: 'boolean' },
+    { 'Close when pressing Escape key' }
+      { 'boolean' },
     },
-    className: { description: 'Additional CSS classes for the trigger' }
-      { type: 'text' },
+    { 'Additional CSS classes for the trigger' }
+      { 'text' },
     },
-    contentClassName: { description: 'Additional CSS classes for the content' }
-      { type: 'text' },
+    { 'Additional CSS classes for the content' }
+      { 'text' },
     },
   },
 } satisfies Meta<typeof GlassPopover>;
@@ -294,9 +294,9 @@ export const Controlled: Story = { render: () => { }
           onOpenChange={setOpen}
         />
       </div>
-    );
+    )
   },
-};
+}
 
 {/* Interactive form example  */}
 export const InteractiveForm: Story = { render: () => { }
@@ -366,9 +366,9 @@ export const InteractiveForm: Story = { render: () => { }
         }
         closeOnClickOutside={false}
       />
-    );
+    )
   },
-};
+}
 
 {/* Multiple popovers  */}
 export const MultiplePopovers: Story = { render: () => (
@@ -549,7 +549,7 @@ export const NestedPopovers: Story = { render: () => (
       closeOnClickOutside={false}
     />
   ),
-};
+}
 
 {/* Loading state example  */}
 export const LoadingContent: Story = { render: () => { }
@@ -588,6 +588,6 @@ export const LoadingContent: Story = { render: () => { }
           </div>
         }
       />
-    );
+    )
   },
-};
+}

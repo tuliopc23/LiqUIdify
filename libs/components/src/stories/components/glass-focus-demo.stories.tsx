@@ -5,17 +5,16 @@ import { GlassCard } from '@/components/glass-card-refactored/glass-card';
 import { GlassFocusDemo } from '@/components/glass-focus-demo/glass-focus-demo';
 
 const meta = { title: 'Components/Glass Focus Demo' }
-  component: GlassFocusDemo,
-  parameters: { layout: 'centered' }
+  GlassFocusDemo,
+  parameters: { 'centered' }
     { 
-        component: 
-          'An interactive demonstration of focus management patterns, keyboard navigation, and focus indicators with glassmorphism styling.',
+        'An interactive demonstration of focus management patterns, keyboard navigation, and focus indicators with glassmorphism styling.',
       },
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      description: 'Additional CSS classes' type: 'text' ,
+      'Additional CSS classes' 'text' ,
     },
   },
 } satisfies Meta<typeof GlassFocusDemo>;
@@ -35,7 +34,7 @@ export const Default: Story = { render: () => (
       <GlassFocusDemo />
     </div>
   ) }
-};
+}
 
 export const KeyboardNavigationGuide: Story = { render: () => (
     <div className="max-w-4xl space-y-6 p-8">
@@ -110,10 +109,10 @@ export const KeyboardNavigationGuide: Story = { render: () => (
     </div>
   ) }
   { 
-        story: 'Complete keyboard navigation guide with the focus demo' ,
+        'Complete keyboard navigation guide with the focus demo' ,
     },
   },
-};
+}
 
 export const FocusPatterns: Story = { render: () => { }
     const [pattern, setPattern] = React.useState<'ring' | 'outline' | 'glow'>(
@@ -222,13 +221,13 @@ export const FocusPatterns: Story = { render: () => { }
 
         <GlassFocusDemo />
       </div>
-    );
+    )
   },
-  parameters: { 
-        story: 'Different focus indicator styles and patterns demonstration' ,
+  {
+        'Different focus indicator styles and patterns demonstration' ,
     },
   },
-};
+}
 
 export const FocusTraversalDemo: Story = { render: () => { }
     const [focusPath, setFocusPath] = React.useState<Array<string>>([]);
@@ -338,14 +337,13 @@ export const FocusTraversalDemo: Story = { render: () => { }
           </div>
         </GlassCard>
       </div>
-    );
+    )
   },
-  parameters: { 
-        story:
-          'Track and visualize focus movement through interactive elements' ,
+  {
+        'Track and visualize focus movement through interactive elements' ,
     },
   },
-};
+}
 
 export const AccessibilityCompliant: Story = { render: () => (
     <div className="max-w-4xl space-y-6 p-8">
@@ -486,7 +484,7 @@ export const FocusWithinDemo: Story = { render: () => { }
           )
         </div>
       </div>
-    );
+    )
   },
   parameters: { docs: {
       description: {

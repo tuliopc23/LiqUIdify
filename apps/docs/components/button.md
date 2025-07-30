@@ -3,7 +3,6 @@
 The GlassButton component is a versatile, accessible button with glassmorphism effects and multiple variants.
 
 <script setup>
-import { GlassButton } from 'liquidify'
 </script>
 
 ## Basic Usage

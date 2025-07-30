@@ -14,12 +14,13 @@ import { GlassInput } from '../glass-input/glass-input';
 import { GlassSelect } from '../glass-select/glass-select';
 import { GlassTextarea } from '../glass-textarea/glass-textarea';
 import { GlassFormField } from './glass-form-field';
+import React from "react";
 
 const meta = { title: 'Components/Forms/GlassFormField' }
-  component: GlassFormField,
-  parameters: { layout: 'centered' }
+  GlassFormField,
+  parameters: { 'centered' }
     { 
-        component: ` }
+        ` }
 A comprehensive form field wrapper component with advanced glassmorphism effects, comprehensive validation states, and accessibility features.
 
 ## Features
@@ -89,57 +90,56 @@ The form field component follows WAI-ARIA guidelines:
         `,,
     },
   },
-  tags: ['autodocs'],
-  argTypes: {control: 'select' 
-      options: ['default', 'card', 'inline'],
+  ['autodocs'],
+  argTypes: {'select'
+      ['default', 'card', 'inline'],
       description: 'Visual variant of the form field',
-      table: summary: 'default' ,,
+      table: 'default' ,,
     },
-    size: { control: 'select' }
-      options: ['sm', 'md', 'lg'],
+    { 'select' }
+      ['sm', 'md', 'lg'],
       description: 'Size of the form field',
-      table: {summary: 'md' ,
+      table: {'md' ,
       },
     },
 
     {/* Content  */}
-    { control: 'text' }
-      description: 'Label text for the form field',
+    { 'text' }
+      'Label text for the form field',
     },
-    helperText: { control: 'text' }
-      description: 'Helper text displayed below the input',
+    { 'text' }
+      'Helper text displayed below the input',
     },
 
     {/* Validation States  */}
-    { control: 'text' }
-      description: 'Error message (displays in red with alert icon)',
+    { 'text' }
+      'Error message (displays in red with alert icon)',
     },
-    success: { control: 'text' }
-      description: 'Success message (displays in green with check icon)',
+    { 'text' }
+      'Success message (displays in green with check icon)',
     },
-    warning: { control: 'text' }
-      description: 'Warning message (displays in yellow with info icon)',
+    { 'text' }
+      'Warning message (displays in yellow with info icon)',
     },
 
     {/* Behavior  */}
-    { control: 'boolean' }
-      description: 'Whether the field is required (adds asterisk to label)',
-      table: {summary: 'false' ,
+    { 'boolean' }
+      'Whether the field is required (adds asterisk to label)',
+      table: {'false' ,
       },
     },
-    disabled: { control: 'boolean' }
-      description: 'Whether the field is disabled',
-      table: {summary: 'false' ,
+    { 'boolean' }
+      'Whether the field is disabled',
+      table: {'false' ,
       },
     },
 
     {/* Advanced  */}
-    { control: 'text' }
-      description:
-        'Custom ID for the form control (auto-generated if not provided)',
+    { 'text' }
+      'Custom ID for the form control (auto-generated if not provided)',
     },
-    className: { control: 'text' }
-      description: 'Additional CSS classes',
+    { 'text' }
+      'Additional CSS classes',
     },
   },
 } satisfies Meta<typeof GlassFormField>;
@@ -166,7 +166,7 @@ export const Playground: Story = { args: {
       </GlassFormField>
     </div>
   ),
-};
+}
 
 {/* Variants showcase  */}
 export const Variants: Story = { render: () => (
@@ -294,7 +294,7 @@ export const ValidationStates: Story = { render: () => (
       </div>
     </div>
   ) }
-};
+}
 
 {/* Different input types  */}
 export const InputTypes: Story = { render: () => (
@@ -347,7 +347,7 @@ export const RealWorldExamples: Story = { render: () => { }
       firstName: '',
       lastName: '',
       country: '',
-    });
+    })
 
     const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
@@ -367,7 +367,7 @@ export const RealWorldExamples: Story = { render: () => { }
       {/* Clear error when user starts typing  */}
       if (errors[field]) {
         setErrors((prev) => ({ ...prev, [field]: '' }));
-      };
+      }
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -394,7 +394,7 @@ export const RealWorldExamples: Story = { render: () => { }
 
       if (Object.keys(newErrors).length === 0) {
         alert('Form submitted successfully!');
-      };
+      }
 
     return (
       <div className="w-full max-w-md">
@@ -535,7 +535,7 @@ export const InteractiveDemo: Story = { render: () => { }
           return { warning: 'This field has a warning' };
         default:
           return { helperText: 'This is helper text' };
-      };
+      }
 
     return (
       <div className="space-y-8">

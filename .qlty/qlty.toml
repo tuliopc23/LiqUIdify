@@ -102,3 +102,7 @@ name = "knip"
 
 [[plugin]]
 name = "oxc"
+
+[[plugin]]
+name = "ast-grep"
+mode = "disabled"

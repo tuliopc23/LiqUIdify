@@ -12,10 +12,10 @@ import { useState } from 'react';
 import { type GlassTabItem, GlassTabs } from './glass-tabs';
 
 const meta = { title: 'Glass UI/GlassTabs' }
-  component: GlassTabs,
-  parameters: { layout: 'centered' }
+  GlassTabs,
+  parameters: { 'centered' }
     { 
-        component: `
+        `
 ## GlassTabs Component
  }
 A sophisticated tab component with glassmorphic design, smooth transitions, and full accessibility support. Perfect for organizing content into logical sections with elegant visual separation.
@@ -55,34 +55,34 @@ function MyComponent() {
         `,,
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      control: 'object' 
-      description: 'Array of tab items',
+      'object'
+      'Array of tab items',
     },
-    defaultTab: { control: 'text' }
-      description: 'ID of the default active tab',
+    { 'text' }
+      'ID of the default active tab',
     },
-    className: { control: 'text' }
-      description: 'Additional CSS classes for container',
+    { 'text' }
+      'Additional CSS classes for container',
     },
-    tabListClassName: { control: 'text' }
-      description: 'Additional CSS classes for tab list',
+    { 'text' }
+      'Additional CSS classes for tab list',
     },
-    tabButtonClassName: { control: 'text' }
-      description: 'Additional CSS classes for tab buttons',
+    { 'text' }
+      'Additional CSS classes for tab buttons',
     },
-    activeTabButtonClassName: { control: 'text' }
-      description: 'CSS classes for active tab button',
+    { 'text' }
+      'CSS classes for active tab button',
     },
-    inactiveTabButtonClassName: { control: 'text' }
-      description: 'CSS classes for inactive tab buttons',
+    { 'text' }
+      'CSS classes for inactive tab buttons',
     },
-    tabPanelClassName: { control: 'text' }
-      description: 'Additional CSS classes for tab panels',
+    { 'text' }
+      'Additional CSS classes for tab panels',
     },
-    orientation: { control: 'select' }
-      options: ['horizontal', 'vertical'],
+    { 'select' }
+      ['horizontal', 'vertical'],
       description: 'Tab orientation (future enhancement)',
     },
   },
@@ -107,8 +107,8 @@ const basicTabs: Array<GlassTabItem> = [
       </div>
     ),
   },
-  { id: 'details' }
-    label: 'Details',
+  { 'details' }
+    'Details',
     content: (
       <div className="space-y-4">
         <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -120,8 +120,8 @@ const basicTabs: Array<GlassTabItem> = [
       </div>
     ),
   },
-  { id: 'resources' }
-    label: 'Resources',
+  { 'resources' }
+    'Resources',
     content: (
       <div className="space-y-4">
         <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -133,7 +133,7 @@ const basicTabs: Array<GlassTabItem> = [
       </div>
     ),
   },
-];
+]
 
 {/* Default Story  */}
 export const Default: Story = { args: {
@@ -170,8 +170,8 @@ export const WithIcons: Story = { args: {
           </div>
         ),
       },
-      { id: 'notifications' }
-        label: (
+      { 'notifications' }
+        (
           <span className="flex items-center gap-2">
             <Bell className="h-4 w-4" />
             Notifications
@@ -188,8 +188,8 @@ export const WithIcons: Story = { args: {
           </div>
         ),
       },
-      { id: 'security' }
-        label: (
+      { 'security' }
+        (
           <span className="flex items-center gap-2">
             <Shield className="h-4 w-4" />
             Security
@@ -208,7 +208,7 @@ export const WithIcons: Story = { args: {
       },
     ],
   },
-};
+}
 
 {/* With Disabled Tabs  */}
 export const WithDisabledTabs: Story = { args: {
@@ -218,23 +218,23 @@ export const WithDisabledTabs: Story = { args: {
         label: 'Active Tab 1',
         content: <div>This tab is active and clickable.</div>,
       },
-      { id: 'disabled1' }
-        label: 'Disabled Tab',
+      { 'disabled1' }
+        'Disabled Tab',
         content: <div>This content is not accessible.</div>,
         disabled: true,
       },
-      { id: 'active2' }
-        label: 'Active Tab 2',
+      { 'active2' }
+        'Active Tab 2',
         content: <div>Another active tab.</div>,
       },
-      { id: 'disabled2' }
-        label: 'Another Disabled',
+      { 'disabled2' }
+        'Another Disabled',
         content: <div>This content is also not accessible.</div>,
         disabled: true,
       },
     ],
   },
-};
+}
 
 {/* Interactive Demo  */}
 export const InteractiveDemo: Story = { render: () => { }
@@ -274,8 +274,8 @@ export const InteractiveDemo: Story = { render: () => { }
           </div>
         ),
       },
-      { id: 'backend' }
-        label: (
+      { 'backend' }
+        (
           <span className="flex items-center gap-2">
             <Database className="h-4 w-4" />
             Backend
@@ -307,8 +307,8 @@ export const InteractiveDemo: Story = { render: () => { }
           </div>
         ),
       },
-      { id: 'devops' }
-        label: (
+      { 'devops' }
+        (
           <span className="flex items-center gap-2">
             <Terminal className="h-4 w-4" />
             DevOps
@@ -340,7 +340,7 @@ export const InteractiveDemo: Story = { render: () => { }
           </div>
         ),
       },
-    ];
+    ]
 
     return (
       <div className="w-[600px]">
@@ -348,7 +348,7 @@ export const InteractiveDemo: Story = { render: () => { }
       </div>
     );
   },
-};
+}
 
 {/* Settings Example  */}
 export const SettingsExample: Story = { render: () => {
@@ -388,8 +388,8 @@ export const SettingsExample: Story = { render: () => {
           </div>
         ),
       },
-      { id: 'privacy' }
-        label: 'Privacy',
+      { 'privacy' }
+        'Privacy',
         content: (
           <div className="space-y-6">
             <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
@@ -412,8 +412,8 @@ export const SettingsExample: Story = { render: () => {
           </div>
         ),
       },
-      { id: 'billing' }
-        label: 'Billing',
+      { 'billing' }
+        'Billing',
         content: (
           <div className="space-y-6">
             <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
@@ -437,7 +437,7 @@ export const SettingsExample: Story = { render: () => {
           </div>
         ),
       },
-    ];
+    ]
 
     return (
       <div className="w-[500px]">
@@ -445,7 +445,7 @@ export const SettingsExample: Story = { render: () => {
       </div>
     );
   },
-};
+}
 
 {/* Documentation Example  */}
 export const DocumentationExample: Story = { render: () => {
@@ -468,8 +468,8 @@ export const DocumentationExample: Story = { render: () => {
           </div>
         ),
       },
-      { id: 'usage' }
-        label: 'Usage',
+      { 'usage' }
+        'Usage',
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -488,8 +488,8 @@ const tabs = [
           </div>
         ),
       },
-      { id: 'api' }
-        label: 'API',
+      { 'api' }
+        'API',
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -535,18 +535,18 @@ const tabs = [
 };
 
 {/* Custom Styling  */}
-export const CustomStyling: Story = { args: {
-    tabs: [
+export const CustomStyling: Story = { {
+    [
       {
         id: 'custom1' }
         label: 'Custom Tab 1',
         content: <div>Custom styled content 1</div>,
       },
-      { id: 'custom2' }
-        label: 'Custom Tab 2',
+      { 'custom2' }
+        'Custom Tab 2',
         content: <div>Custom styled content 2</div>,
       },
-      { id: 'custom3' }
+      { 'custom3' }
         label: 'Custom Tab 3',
         content: <div>Custom styled content 3</div>,
       },
@@ -559,7 +559,7 @@ export const CustomStyling: Story = { args: {
 };
 
 {/* Accessibility Demo  */}
-export const AccessibilityDemo: Story = { render: () => {
+export const AccessibilityDemo: Story = { () => {
     const accessibilityTabs: Array<GlassTabItem> = [
       {
         id: 'keyboard' }
@@ -593,7 +593,7 @@ export const AccessibilityDemo: Story = { render: () => {
         ),
       },
       { id: 'aria' }
-        label: 'ARIA Support',
+        'ARIA Support',
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -625,7 +625,7 @@ export const AccessibilityDemo: Story = { render: () => {
           </div>
         ),
       },
-      { id: 'screen-reader' }
+      { 'screen-reader' }
         label: 'Screen Readers',
         content: (
           <div className="space-y-4">

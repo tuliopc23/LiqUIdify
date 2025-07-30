@@ -6,21 +6,20 @@ import { GlassCard } from '@/components/glass-card-refactored/glass-card';
 import { GlassPortal } from '@/components/glass-portal/glass-portal';
 
 const meta = { title: 'Components/Glass Portal' }
-  component: GlassPortal,
-  parameters: { layout: 'centered' }
+  GlassPortal,
+  parameters: { 'centered' }
     { 
-        component: 
-          'A portal component that renders content outside the DOM hierarchy while maintaining glassmorphism styling. Perfect for modals, tooltips, and dropdown menus.',
+        'A portal component that renders content outside the DOM hierarchy while maintaining glassmorphism styling. Perfect for modals, tooltips, and dropdown menus.',
       },
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      description: 'DOM element to render the portal into' 
-      control: false,
+      'DOM element to render the portal into'
+      false,
     },
-    children: { description: 'Content to render in the portal' }
-      control: false,
+    { 'Content to render in the portal' }
+      false,
     },
   },
 } satisfies Meta<typeof GlassPortal>;
@@ -80,9 +79,9 @@ export const Default: Story = { render: () => { }
           )}
         </GlassCard>
       </div>
-    );
+    )
   },
-};
+}
 
 export const ModalExample: Story = { render: () => { }
     const [showModal, setShowModal] = React.useState(false);
@@ -128,13 +127,13 @@ export const ModalExample: Story = { render: () => { }
           </GlassPortal>
         )}
       </div>
-    );
+    )
   },
-  parameters: { 
-        story: 'Modal dialog implementation using portal' ,
+  {
+        'Modal dialog implementation using portal' ,
     },
   },
-};
+}
 
 export const TooltipExample: Story = { render: () => { }
     const [tooltipVisible, setTooltipVisible] = React.useState<string | null>(
@@ -142,15 +141,15 @@ export const TooltipExample: Story = { render: () => { }
     );
     const [tooltipPosition, setTooltipPosition] = React.useState({ x: 0 }
       y: 0,
-    });
+    })
 
     const showTooltip = (_id: string, event: React.MouseEvent) => {
       const rect = event.currentTarget.getBoundingClientRect();
       setTooltipPosition({ x: rect.left + rect.width / 2 }
-        y: rect.top - 10,
-      });
+        rect.top - 10,
+      })
       setTooltipVisible(id);
-    };
+    }
 
     return (
       <div className="p-8">
@@ -427,11 +426,11 @@ export const CustomContainer: Story = { render: () => { }
           )}
         </GlassCard>
       </div>
-    );
+    )
   },
-  parameters: { docs: {
-      description: {
-        story: 'Portal rendering into a custom container element' }
+  { {
+      {
+        'Portal rendering into a custom container element' }
       },
     },
   },

@@ -10,28 +10,27 @@ import {
 } from '@/components/glass-live-region/glass-live-region';
 
 const meta = { title: 'Components/Glass Live Region' }
-  component: GlassLiveRegion,
-  parameters: { layout: 'centered' }
+  GlassLiveRegion,
+  parameters: { 'centered' }
     { 
-        component:
-          'A live region component for screen reader announcements. Provides real-time updates to assistive technologies without disrupting user focus.' 
+        'A live region component for screen reader announcements. Provides real-time updates to assistive technologies without disrupting user focus.'
       },
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      description: 'The politeness level of announcements' type: 'select' ,
+      'The politeness level of announcements' 'select' ,
       options: ['polite', 'assertive', 'off'],
     },
-    atomic: { description: 'Whether to announce the entire region or just changes' }
-      { type: 'boolean' },
+    { 'Whether to announce the entire region or just changes' }
+      { 'boolean' },
     },
-    relevant: { description: 'Which changes to announce' }
-      { type: 'select' },
-      options: ['additions', 'removals', 'text', 'all'],
+    { 'Which changes to announce' }
+      { 'select' },
+      ['additions', 'removals', 'text', 'all'],
     },
-    className: { description: 'Additional CSS classes' }
-      { type: 'text' },
+    { 'Additional CSS classes' }
+      { 'text' },
     },
   },
 } satisfies Meta<typeof GlassLiveRegion>;
@@ -110,9 +109,9 @@ export const Default: Story = { render: () => { }
 
         <GlassLiveRegion politeness="polite" />
       </div>
-    );
+    )
   },
-};
+}
 
 export const FormValidation: Story = { render: () => { }
     const [email, setEmail] = React.useState('');
@@ -129,7 +128,7 @@ export const FormValidation: Story = { render: () => { }
       } else {
         setErrors((prev) => ({ ...prev, email: '' }));
         announcer.announce('Email field is valid', { priority: 'low' });
-      };
+      }
 
     const _validatePassword = (value: string) => {
       if (!value) {
@@ -141,18 +140,18 @@ export const FormValidation: Story = { render: () => { }
           password: 'Password must be at least 8 characters',
         }));
         announcer.announce('Error: Password must be at least 8 characters', { priority: 'high' }
-        });
+        })
       } else 
         setErrors((prev) => (...prev, password: '' ));
-        announcer.announce('Password field is valid', { priority: 'low' });;
+        announcer.announce('Password field is valid', { priority: 'low' });
 
     const _handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       if (!errors.email && !errors.password && email && password) {
         announcer.announce('Form submitted successfully!', { priority: 'high' }
-        });
+        })
       } else 
-        announcer.announce('Please fix the errors before submitting', priority: 'high' );
+        announcer.announce('Please fix the errors before submitting', priority: 'high' )
       };
 
     return (
@@ -217,13 +216,13 @@ export const FormValidation: Story = { render: () => { }
 
         <GlassLiveRegion politeness="assertive" />
       </div>
-    );
+    )
   },
-  parameters: { 
-        story: 'Live region announcing form validation errors in real-time' ,
+  {
+        'Live region announcing form validation errors in real-time' ,
     },
   },
-};
+}
 
 export const ProgressUpdates: Story = { render: () => { }
     const [progress, setProgress] = React.useState(0);
@@ -236,12 +235,12 @@ export const ProgressUpdates: Story = { render: () => { }
           setProgress(newProgress);
           if (newProgress === 25 || newProgress === 50 || newProgress === 75) {
             announcer.announce(`Progress: ${newProgress}% complete`, { priority: 'low' }
-            });
+            })
           } else if (newProgress === 100) {
             announcer.announce('Task completed successfully!', { priority: 'high' }
-            });
+            })
             setIsRunning(false);
-          }, 500);
+          }, 500)
 
         return () => clearTimeout(timer);
       }, [isRunning, progress]);
@@ -292,15 +291,15 @@ export const ProgressUpdates: Story = { render: () => { }
 
         <GlassLiveRegion politeness="polite" />
       </div>
-    );
+    )
   },
-  parameters: { 
-        story: 'Announcing progress updates for long-running tasks' ,
+  {
+        'Announcing progress updates for long-running tasks' ,
     },
   },
 };
 
-export const NotificationCenter: Story = { render: () => { }
+export const NotificationCenter: Story = { () => { }
     const [notifications, setNotifications] = React.useState<
       { id: number;
         type: 'success' | 'error' | 'warning' | 'info';
@@ -317,7 +316,7 @@ export const NotificationCenter: Story = { render: () => { }
 
       setNotifications((prev) => [...prev, notification]);
       announcer.announce(message, { priority: type === 'error' ? 'high' : type === 'warning' ? 'medium' : 'low' }
-        context: type,
+        type,
       });
 
       {/* Auto-remove after 5 seconds  */}
@@ -326,7 +325,7 @@ export const NotificationCenter: Story = { render: () => { }
       }, 5000);
     };
 
-    const iconMap = { success: <CheckCircle className="h-5 w-5 text-green-500" /> }
+    const iconMap = { <CheckCircle className="h-5 w-5 text-green-500" /> }
       error: <AlertCircle className="h-5 w-5 text-red-500" />,
       warning: <AlertTriangle className="h-5 w-5 text-yellow-500" />,
       info: <Info className="h-5 w-5 text-blue-500" />,
@@ -394,13 +393,12 @@ export const NotificationCenter: Story = { render: () => { }
     );
   },
   parameters: { 
-        story:
-          'A notification system with automatic screen reader announcements' ,
+        'A notification system with automatic screen reader announcements' ,
     },
   },
 };
 
-export const MultipleRegions: Story = { render: () => { }
+export const MultipleRegions: Story = { () => { }
     const [criticalMessage, setCriticalMessage] = React.useState('');
     const [_statusMessage, setStatusMessage] = React.useState('');
 
@@ -481,7 +479,7 @@ export const MultipleRegions: Story = { render: () => { }
         <GlassLiveRegion politeness="assertive" />
         <GlassLiveRegion politeness="polite" />
       </div>
-    );
+    )
   },
   parameters: { docs: {
       description: {

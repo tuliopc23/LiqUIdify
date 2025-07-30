@@ -8,37 +8,36 @@ import {
 } from '@/components/glass-error-boundary/glass-error-boundary';
 
 const meta = { title: 'Components/Glass Error Boundary' }
-  component: GlassErrorBoundary,
-  parameters: { layout: 'padded' }
+  GlassErrorBoundary,
+  parameters: { 'padded' }
     { 
-        component: 
-          'An error boundary component that gracefully handles JavaScript errors in React components. Features glassmorphism design, automatic recovery, and accessibility support.',
+        'An error boundary component that gracefully handles JavaScript errors in React components. Features glassmorphism design, automatic recovery, and accessibility support.',
       },
     },
   },
-  tags: ['autodocs'],
+  ['autodocs'],
   argTypes: { 
-      description: 'Custom fallback UI renderer function' 
-      control: false,
+      'Custom fallback UI renderer function'
+      false,
     },
-    onError: { description: 'Callback when an error is caught' }
-      action: 'error caught',
+    { 'Callback when an error is caught' }
+      'error caught',
     },
-    resetKeys: { description: 'Keys that trigger error boundary reset when changed' }
-      { type: 'object' },
+    { 'Keys that trigger error boundary reset when changed' }
+      { 'object' },
     },
-    resetOnPropsChange: { description: 'Reset error boundary when props change' }
-      { type: 'boolean' },
+    { 'Reset error boundary when props change' }
+      { 'boolean' },
     },
-    isolate: { description: 'Isolate children in a container' }
-      { type: 'boolean' },
+    { 'Isolate children in a container' }
+      { 'boolean' },
     },
-    level: { description: 'Error boundary level for UI styling' }
-      { type: 'select' },
-      options: ['page', 'section', 'component'],
+    { 'Error boundary level for UI styling' }
+      { 'select' },
+      ['page', 'section', 'component'],
     },
-    trackErrors: { description: 'Track errors in production' }
-      { type: 'boolean' },
+    { 'Track errors in production' }
+      { 'boolean' },
     },
   },
 } satisfies Meta<typeof GlassErrorBoundary>;
@@ -156,12 +155,11 @@ export const _CustomFallback: Story = { render: () => { }
           </GlassErrorBoundary>
         </GlassCard>
       </div>
-    );
+    )
   },
-  parameters: 
-        story: 'Error boundary with custom fallback UI component' ,,
+  'Error boundary with custom fallback UI component' ,,
   },
-};
+}
 
 export const DifferentLevels: Story = { render: () => { }
     const [crashLevel, setCrashLevel] = React.useState<string | null>(null);
@@ -221,15 +219,15 @@ export const DifferentLevels: Story = { render: () => { }
           </GlassErrorBoundary>
         </div>
       </div>
-    );
+    )
   },
-  parameters: { docs: {
-      description: {
-        story: 'Different error boundary levels with varying UI treatments' }
+  { {
+      {
+        'Different error boundary levels with varying UI treatments' }
       },
     },
   },
-};
+}
 
 export const AsyncErrors: Story = { render: () => { }
     const [showAsync, setShowAsync] = React.useState(false);
@@ -260,17 +258,17 @@ export const AsyncErrors: Story = { render: () => { }
           )}
         </GlassCard>
       </div>
-    );
+    )
   },
-  parameters: { docs: {
-      description: {
-        story: 'Handling asynchronous errors and promise rejections' }
+  { {
+      {
+        'Handling asynchronous errors and promise rejections' }
       },
     },
   },
 };
 
-export const ErrorRecovery: Story = { render: () => { }
+export const ErrorRecovery: Story = { () => { }
     const { captureError, resetError } = useErrorHandler();
     const [errorCount, setErrorCount] = React.useState(0);
 
@@ -304,7 +302,7 @@ export const ErrorRecovery: Story = { render: () => { }
           </div>
         </GlassCard>
       </div>
-    );
+    )
   },
   parameters: { docs: {
       description: {
@@ -360,11 +358,11 @@ export const MultipleErrorBoundaries: Story = { render: () => { }
           )}
         </div>
       </div>
-    );
+    )
   },
-  parameters: { docs: {
-      description: {
-        story: 'Multiple isolated error boundaries prevent cascading failures' }
+  parameters: { {
+      {
+        'Multiple isolated error boundaries prevent cascading failures' }
       },
     },
   },

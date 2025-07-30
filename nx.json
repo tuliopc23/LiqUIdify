@@ -17,6 +17,20 @@
       "{workspaceRoot}/tailwind.config.ts",
       "{workspaceRoot}/tsconfig.json",
       "{workspaceRoot}/tsconfig.base.json"
+    ],
+    "cssFiles": [
+      "{projectRoot}/src/**/*.{css,scss,less}",
+      "{workspaceRoot}/tailwind.config.ts"
+    ],
+    "lintFiles": [
+      "default",
+      "{workspaceRoot}/.eslintrc.json",
+      "{workspaceRoot}/.qlty/qlty.toml"
+    ],
+    "storybookFiles": [
+      "default",
+      "^production",
+      "{workspaceRoot}/.storybook/**/*"
     ]
   },
   "targetDefaults": {
@@ -27,11 +41,21 @@
     },
     "build:css": {
       "cache": true,
-      "inputs": [
-        "{projectRoot}/src/**/*.{css,scss,less}",
-        "{workspaceRoot}/tailwind.config.ts",
-        "{workspaceRoot}/scripts/build-css-lightning.ts"
-      ]
+      "inputs": ["cssFiles", "{workspaceRoot}/scripts/build-css-lightning.ts"]
+    },
+    "build:modern": {
+      "cache": true
+    },
+    "build:watch": {
+      "cache": true
+    },
+    "build:all": {
+      "cache": true
+    },
+    "build-storybook": {
+      "dependsOn": ["^build"],
+      "cache": true,
+      "inputs": ["storybookFiles"]
     },
     "test": {
       "executor": "nx:run-commands",
@@ -45,45 +69,17 @@
       "inputs": ["default", "^production"],
       "cache": true
     },
+    "test:ci": {
+      "cache": true
+    },
+    "test:affected": {
+      "cache": true
+    },
+    "test:e2e:ui": {
+      "cache": true
+    },
     "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.qlty/qlty.toml"
-      ],
-      "cache": true
-    },
-    "storybook": {
-      "cache": true,
-      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
-    },
-    "build-storybook": {
-      "dependsOn": ["^build"],
-      "cache": true,
-      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
-    },
-    "build:modern": {
-      "cache": true
-    },
-    "build:watch": {
-      "cache": true
-    },
-    "build:all": {
-      "cache": true
-    },
-    "clean": {
-      "cache": true
-    },
-    "clean:node": {
-      "cache": true
-    },
-    "dev": {
-      "cache": true
-    },
-    "dev:storybook": {
-      "cache": true
-    },
-    "format": {
+      "inputs": ["lintFiles"],
       "cache": true
     },
     "lint:fix": {
@@ -92,19 +88,29 @@
     "lint:affected": {
       "cache": true
     },
+    "storybook": {
+      "cache": true,
+      "inputs": ["storybookFiles"]
+    },
+    "dev": {
+      "cache": true
+    },
+    "dev:storybook": {
+      "cache": true
+    },
+    "clean": {
+      "cache": true
+    },
+    "clean:node": {
+      "cache": true
+    },
+    "format": {
+      "cache": true
+    },
     "release": {
       "cache": true
     },
     "release:dry": {
-      "cache": true
-    },
-    "test:ci": {
-      "cache": true
-    },
-    "test:affected": {
-      "cache": true
-    },
-    "test:e2e:ui": {
       "cache": true
     },
     "type-check": {
@@ -178,5 +184,7 @@
       }
     }
   },
-  "nxCloudId": "6889a98850b6087444aca078"
+  "nxCloudId": "6889a98850b6087444aca078",
+  "useInferencePlugins": false,
+  "neverConnectToCloud": false
 }
