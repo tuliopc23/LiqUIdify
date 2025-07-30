@@ -2,6 +2,19 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { GlassPagination } from "./glass-pagination";
 
+// Shared parameters for stories with dark background
+const darkBackgroundParameters = {
+  backgrounds: {
+    default: "dark",
+    values: [
+      {
+        name: "dark",
+        value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      },
+    ],
+  },
+};
+
 const meta = {
   title: "Components/Navigation/GlassPagination",
   component: GlassPagination,
@@ -255,17 +268,7 @@ export const Variants: Story = {
       </div>
     );
   },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
+  parameters: darkBackgroundParameters,
 };
 
 // Sizes showcase
@@ -309,17 +312,7 @@ export const Sizes: Story = {
       </div>
     );
   },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
+  parameters: darkBackgroundParameters,
 };
 
 // States showcase
@@ -371,17 +364,7 @@ export const States: Story = {
       </div>
     );
   },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
+  parameters: darkBackgroundParameters,
 };
 
 // Configuration examples
@@ -434,17 +417,7 @@ export const ConfigurationExamples: Story = {
       </div>
     );
   },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
+  parameters: darkBackgroundParameters,
 };
 
 // Real-world examples
@@ -573,17 +546,7 @@ export const RealWorldExamples: Story = {
       </div>
     );
   },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
+  parameters: darkBackgroundParameters,
 };
 
 // Accessibility showcase
@@ -632,17 +595,7 @@ export const AccessibilityShowcase: Story = {
       </div>
     );
   },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
+  parameters: darkBackgroundParameters,
 };
 
 // Theme showcase
