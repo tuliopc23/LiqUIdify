@@ -1,10 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { resolve } from "path";
 
 export default defineConfig({
   plugins: [
@@ -22,16 +19,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@liquidify/components": resolve(
-        __dirname,
-        "libs/components/src/index.ts",
-      ),
-      "@": resolve(__dirname, "libs/components/src"),
+      "@liquidify/components": resolve("libs/components/src/index.ts"),
+      "@": resolve("libs/components/src"),
     },
   },
   build: {
     lib: {
-      entry: resolve(__dirname, "libs/components/src/index.ts"),
+      entry: resolve("libs/components/src/index.ts"),
       name: "LiquidUI",
       formats: ["es", "cjs"],
       fileName: (format) => `index.${format === "es" ? "mjs" : "cjs"}`,
