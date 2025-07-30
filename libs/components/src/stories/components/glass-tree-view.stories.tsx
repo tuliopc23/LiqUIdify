@@ -1,4 +1,5 @@
-import type { StoryObj } from '@storybook/react';
+// Uses shared story helpers from utils/storyHelpers.tsx for DRY meta and render logic
+import { createMeta } from '../utils/storyHelpers';
 import React from 'react';
 import { GlassButton } from '@/components/glass-button-refactored/glass-button';
 import { GlassCard } from '@/components/glass-card-refactored/glass-card';
@@ -7,42 +8,22 @@ import {
   type TreeNode,
 } from '@/components/glass-tree-view/glass-tree-view';
 
-const meta = { title: 'Components/Glass Tree View' }
-  GlassTreeView,
-  parameters: { 'padded' }
-    { 
-        'A hierarchical tree view component with glassmorphism styling. Supports nested structures, custom icons, selection states, and expand/collapse animations.',
+const meta = createMeta({
+  title: 'Components/Glass Tree View',
+  component: GlassTreeView,
+  parameters: {
+    padded: true,
+    docs: {
+      description: {
+        component:
+          'A hierarchical tree view component with glassmorphism styling. Supports nested structures, custom icons, selection states, and expand/collapse animations.',
       },
     },
   },
-  ['autodocs'],
-  argTypes: { 
-      'Tree nodes to display'
-      false,
-    },
-    { 'Callback when a node is selected' }
-      'node selected',
-    },
-    { 'Callback when a node is expanded/collapsed' }
-      'node toggled',
-    },
-    { 'ID of the selected node' }
-      { 'text' },
-    },
-    { 'IDs of expanded nodes' }
-      false,
-    },
-    { 'Show node icons' }
-      { 'boolean' },
-    },
-    { 'Indentation size in pixels' }
-      { 'number', min: 10, max: 40, step: 5 },
-    },
-  },
-} satisfies Meta<typeof GlassTreeView>;
+});
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = typeof meta;
 
 const fileSystemNodes: Array<TreeNode> = [
   { id: 'src' }
