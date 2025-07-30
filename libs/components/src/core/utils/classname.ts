@@ -91,7 +91,7 @@ export function getGlassClass(
  * Focus ring utility for accessibility
  * Provides consistent focus ring styling across components
  */
-function _focusRing(visible = true): string {
+export function focusRing(visible = true): string {
   if (!visible) {
     return "";
   }

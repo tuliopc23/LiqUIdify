@@ -1,4 +1,5 @@
-import { cn } from "@/core/utils/classname";
+import type React from "react";
+import { useState, useMemo } from "react";
 
 interface TableColumn<T> {
   key: keyof T;
@@ -12,13 +13,13 @@ interface GlassTableProps<T> {
   className?: string;
 }
 
-export function GlassTable<T>({
+const GlassTable = <T,>({
   data,
   columns,
   className,
-}: GlassTableProps<T>) {
+}: GlassTableProps<T>) => {
   return (
-    <div className={cn("overflow-x-auto", className)}>
+    <div className={`overflow-x-auto ${className || ""}`}>
       <table className="w-full">
         <thead>
           <tr className="glass-effect">
@@ -55,4 +56,6 @@ export function GlassTable<T>({
       </table>
     </div>
   );
-}
+};
+
+export { GlassTable };

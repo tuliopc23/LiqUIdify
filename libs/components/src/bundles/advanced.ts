@@ -31,8 +31,6 @@ export * from "../components/glass-table";
 export * from "../components/glass-tabs";
 // Advanced feedback components
 export * from "../components/glass-toast";
-export * from "../components/navbar";
-export * from "../components/sidebar";
 
 // Advanced providers
 

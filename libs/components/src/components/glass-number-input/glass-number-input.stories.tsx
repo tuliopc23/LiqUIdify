@@ -1,16 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Calculator,
-  DollarSign,
-  Hash,
-  Percent,
-  Target,
-  Timer,
-} from "lucide-react";
 import { useState } from "react";
+import { Calculator, DollarSign, Percent } from "lucide-react";
 import { GlassNumberInput } from "./glass-number-input";
 
-const meta = {
+const meta: Meta<typeof GlassNumberInput> = {
   title: "Components/Forms/GlassNumberInput",
   component: GlassNumberInput,
   parameters: {
@@ -18,17 +11,15 @@ const meta = {
     docs: {
       description: {
         component: `
-A premium number input component with advanced glassmorphism effects, intelligent formatting, and comprehensive validation.
+A number input component with increment/decrement controls, validation, and glassmorphism styling.
 
 ## Features
-
-- **Smart Formatting**: Automatic number formatting with locale support
-- **Precision Control**: Configurable decimal places and step values
-- **Validation**: Built-in min/max validation with visual feedback
-- **Increment/Decrement**: Convenient +/- buttons with keyboard shortcuts
-- **Glass Effects**: Beautiful backdrop blur and glassmorphism design
-- **Accessibility**: Full keyboard navigation and screen reader support
-- **Flexible Configuration**: Currency, percentage, and custom formatting
+- Increment/decrement buttons
+- Min/max value validation
+- Step controls and precision
+- Custom formatting
+- Keyboard navigation (Arrow up/down)
+- Accessibility compliant
 
 ## Usage
 
@@ -37,931 +28,262 @@ import { GlassNumberInput } from '@/components/glass-number-input';
 
 // Basic usage
 <GlassNumberInput
-  value={42}
-  onChange={(value) => setValue(value)}
-  placeholder="Enter a number" />
-
-// With validation and formatting
-<GlassNumberInput
-  value={price}
-  onChange={setPrice}
-  min={0}
-  max={1000}
-  step={0.01}
-  precision={2}
-  formatOptions={{
-    style: 'currency',
-    currency: 'USD'
-  }}
-  showButtons />
-
-// Percentage input
-<GlassNumberInput
-  value={percentage}
-  onChange={setPercentage}
+  label="Quantity"
+  value={quantity}
+  onChange={setQuantity}
   min={0}
   max={100}
-  step={1}
-  formatOptions={{
-    style: 'percent',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 1
-  }} />
+/>
+
+// With custom formatting
+<GlassNumberInput
+  label="Price"
+  value={price}
+  onChange={setPrice}
+  formatValue={(value) => \`$\${value.toFixed(2)}\`}
+  step={0.01}
+  precision={2}
+/>
 \`\`\`
-
-## Keyboard Shortcuts
-
-- **Arrow Up/Down**: Increment/decrement by step value
-- **Page Up/Down**: Increment/decrement by larger amounts
-- **Enter**: Apply current value and blur
-- **Escape**: Cancel changes and blur
-
-## Accessibility
-
-The number input component follows WAI-ARIA guidelines:
-- Proper ARIA labels and roles
-- Keyboard navigation support
-- Screen reader value announcements
-- Focus management and visual indicators
-- Error state descriptions
         `,
       },
     },
   },
-  tags: ["autodocs"],
   argTypes: {
-    // Core Props
+    size: {
+      control: { type: "select" },
+      options: ["sm", "md", "lg"],
+    },
     value: {
       control: { type: "number" },
-      description: "Current value of the input",
-      table: {
-        type: { summary: "number" },
-        category: "Core",
-      },
     },
-    defaultValue: {
-      control: { type: "number" },
-      description: "Default value when uncontrolled",
-      table: {
-        type: { summary: "number" },
-        category: "Core",
-      },
-    },
-    onChange: {
-      action: "value changed",
-      description: "Callback fired when value changes",
-      table: {
-        type: { summary: "(value: number | null) => void" },
-        category: "Core",
-      },
-    },
-
-    // Validation
     min: {
       control: { type: "number" },
-      description: "Minimum allowed value",
-      table: {
-        type: { summary: "number" },
-        category: "Validation",
-      },
     },
     max: {
       control: { type: "number" },
-      description: "Maximum allowed value",
-      table: {
-        type: { summary: "number" },
-        category: "Validation",
-      },
     },
     step: {
-      control: { type: "number", min: 0.01, max: 100, step: 0.01 },
-      description: "Step value for increment/decrement",
-      table: {
-        type: { summary: "number" },
-        defaultValue: { summary: "1" },
-        category: "Validation",
-      },
+      control: { type: "number" },
     },
-
-    // Formatting
     precision: {
-      control: { type: "number", min: 0, max: 10, step: 1 },
-      description: "Number of decimal places",
-      table: {
-        type: { summary: "number" },
-        defaultValue: { summary: "0" },
-        category: "Formatting",
-      },
+      control: { type: "number" },
     },
-    formatOptions: {
-      control: "object",
-      description: "Intl.NumberFormat options for display formatting",
-      table: {
-        type: { summary: "Intl.NumberFormatOptions" },
-        category: "Formatting",
-      },
-    },
-    locale: {
-      control: "text",
-      description: "Locale for number formatting",
-      table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "en-US" },
-        category: "Formatting",
-      },
-    },
-
-    // Behavior
-    allowDecimals: {
-      control: "boolean",
-      description: "Allow decimal input",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "Behavior",
-      },
-    },
-    allowNegative: {
-      control: "boolean",
-      description: "Allow negative values",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
-        category: "Behavior",
-      },
-    },
-    showButtons: {
-      control: "boolean",
-      description: "Show increment/decrement buttons",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" },
-        category: "Behavior",
-      },
-    },
-
-    // Appearance
-    size: {
-      control: "select",
-      options: ["sm", "md", "lg"],
-      description: "Size of the input",
-      table: {
-        type: { summary: "sm | md | lg" },
-        defaultValue: { summary: "md" },
-        category: "Appearance",
-      },
-    },
-    placeholder: {
-      control: "text",
-      description: "Placeholder text",
-      table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "0" },
-        category: "Appearance",
-      },
-    },
-
-    // State
-    error: {
-      control: "boolean",
-      description: "Whether the input has an error",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "State",
-      },
+    showControls: {
+      control: { type: "boolean" },
     },
     disabled: {
-      control: "boolean",
-      description: "Whether the input is disabled",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "State",
-      },
+      control: { type: "boolean" },
     },
-
-    // HTML Props
-    className: {
-      control: "text",
-      description: "Additional CSS classes",
-      table: {
-        type: { summary: "string" },
-        category: "HTML Props",
-      },
+    error: {
+      control: { type: "boolean" },
     },
   },
-  args: {
-    step: 1,
-    precision: 0,
-    locale: "en-US",
-    allowDecimals: false,
-    allowNegative: true,
-    showButtons: true,
-    size: "md",
-    placeholder: "0",
-    error: false,
-    disabled: false,
-  },
-} satisfies Meta<typeof GlassNumberInput>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default story - Interactive playground
-export const Playground: Story = {
-  render: (args) => {
-    const [value, setValue] = useState<number | null>(args.value || null);
+// Basic Stories
+export const Default: Story = {
+  args: {
+    label: "Quantity",
+    placeholder: "Enter quantity",
+    defaultValue: 5,
+    min: 0,
+    max: 100,
+  },
+};
+
+export const WithDescription: Story = {
+  args: {
+    label: "Items",
+    description: "Number of items to purchase",
+    defaultValue: 1,
+    min: 1,
+    max: 10,
+  },
+};
+
+export const WithError: Story = {
+  args: {
+    label: "Age",
+    defaultValue: 150,
+    min: 0,
+    max: 120,
+    error: true,
+    helperText: "Age must be between 0 and 120",
+  },
+};
+
+// Size Variants
+export const Small: Story = {
+  args: {
+    size: "sm",
+    label: "Small Input",
+    defaultValue: 42,
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: "lg",
+    label: "Large Input",
+    defaultValue: 42,
+  },
+};
+
+// Functional Examples
+export const PriceInput: Story = {
+  render: () => {
+    const [price, setPrice] = useState(29.99);
 
     return (
-      <div className="flex min-h-[200px] w-full max-w-md items-center justify-center">
+      <GlassNumberInput
+        label="Price"
+        value={price}
+        onChange={(value) => setPrice(value || 0)}
+        formatValue={(value) => `$${value.toFixed(2)}`}
+        step={0.01}
+        precision={2}
+        min={0}
+        max={9999.99}
+        helperText="Enter price in USD"
+      />
+    );
+  },
+};
+
+export const PercentageInput: Story = {
+  render: () => {
+    const [percentage, setPercentage] = useState(75);
+
+    return (
+      <GlassNumberInput
+        label="Completion"
+        value={percentage}
+        onChange={(value) => setPercentage(value || 0)}
+        formatValue={(value) => `${value}%`}
+        min={0}
+        max={100}
+        step={5}
+        helperText="Percentage complete"
+      />
+    );
+  },
+};
+
+export const WithoutControls: Story = {
+  args: {
+    label: "Manual Entry",
+    showControls: false,
+    defaultValue: 100,
+    helperText: "Type numbers directly",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: "Disabled Input",
+    defaultValue: 42,
+    disabled: true,
+    helperText: "This input is disabled",
+  },
+};
+
+export const Required: Story = {
+  args: {
+    label: "Required Field",
+    required: true,
+    min: 1,
+    helperText: "This field is required",
+  },
+};
+
+// Interactive Examples
+export const ControlledExample: Story = {
+  render: () => {
+    const [value, setValue] = useState<number | undefined>(10);
+
+    return (
+      <div className="space-y-4">
         <GlassNumberInput
-          {...args}
-          value={value || undefined}
+          label="Controlled Input"
+          value={value}
           onChange={setValue}
+          min={0}
+          max={100}
+          step={5}
+          helperText={`Current value: ${value || 'empty'}`}
         />
+        <div className="flex gap-2">
+          <button
+            onClick={() => setValue(0)}
+            className="px-3 py-1 bg-blue-500 text-white rounded text-sm"
+          >
+            Reset to 0
+          </button>
+          <button
+            onClick={() => setValue(50)}
+            className="px-3 py-1 bg-blue-500 text-white rounded text-sm"
+          >
+            Set to 50
+          </button>
+          <button
+            onClick={() => setValue(undefined)}
+            className="px-3 py-1 bg-gray-500 text-white rounded text-sm"
+          >
+            Clear
+          </button>
+        </div>
       </div>
     );
   },
 };
 
-// Basic usage examples
-export const BasicUsage: Story = {
+export const MultipleInputs: Story = {
   render: () => {
-    const [integerValue, setIntegerValue] = useState<number | null>(42);
-    const [decimalValue, setDecimalValue] = useState<number | null>(3.14);
-    const [rangeValue, setRangeValue] = useState<number | null>(50);
+    const [width, setWidth] = useState(100);
+    const [height, setHeight] = useState(50);
+    const [depth, setDepth] = useState(25);
+
+    const volume = width * height * depth;
 
     return (
-      <div className="space-y-8">
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Integer Input</h3>
-          <GlassNumberInput
-            value={integerValue || undefined}
-            onChange={setIntegerValue}
-            placeholder="Enter whole number"
-            step={1}
-          />
-        </div>
+      <div className="space-y-4 w-80">
+        <h3 className="text-lg font-semibold text-white">Box Dimensions</h3>
 
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Decimal Input</h3>
-          <GlassNumberInput
-            value={decimalValue || undefined}
-            onChange={setDecimalValue}
-            placeholder="Enter decimal"
-            step={0.01}
-            precision={2}
-            allowDecimals
-          />
-        </div>
+        <GlassNumberInput
+          label="Width (cm)"
+          value={width}
+          onChange={(value) => setWidth(value || 0)}
+          min={1}
+          max={1000}
+          step={1}
+        />
 
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">
-            Range Input (0-100)
-          </h3>
-          <GlassNumberInput
-            value={rangeValue || undefined}
-            onChange={setRangeValue}
-            min={0}
-            max={100}
-            step={5}
-            placeholder="0-100"
-          />
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
-};
+        <GlassNumberInput
+          label="Height (cm)"
+          value={height}
+          onChange={(value) => setHeight(value || 0)}
+          min={1}
+          max={1000}
+          step={1}
+        />
 
-// Different sizes
-export const Sizes: Story = {
-  render: () => {
-    const [value1, setValue1] = useState<number | null>(123);
-    const [value2, setValue2] = useState<number | null>(456);
-    const [value3, setValue3] = useState<number | null>(789);
+        <GlassNumberInput
+          label="Depth (cm)"
+          value={depth}
+          onChange={(value) => setDepth(value || 0)}
+          min={1}
+          max={1000}
+          step={1}
+        />
 
-    return (
-      <div className="space-y-8">
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Small Size</h3>
-          <GlassNumberInput
-            value={value1 || undefined}
-            onChange={setValue1}
-            size="sm"
-            placeholder="Small input"
-          />
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Medium Size</h3>
-          <GlassNumberInput
-            value={value2 || undefined}
-            onChange={setValue2}
-            size="md"
-            placeholder="Medium input"
-          />
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Large Size</h3>
-          <GlassNumberInput
-            value={value3 || undefined}
-            onChange={setValue3}
-            size="lg"
-            placeholder="Large input"
-          />
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
-};
-
-// States showcase
-export const States: Story = {
-  render: () => {
-    const [normalValue, setNormalValue] = useState<number | null>(100);
-    const [errorValue, setErrorValue] = useState<number | null>(150);
-    const [disabledValue] = useState<number | null>(75);
-
-    return (
-      <div className="space-y-8">
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Normal State</h3>
-          <GlassNumberInput
-            value={normalValue || undefined}
-            onChange={setNormalValue}
-            placeholder="Normal input"
-          />
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Error State</h3>
-          <GlassNumberInput
-            value={errorValue || undefined}
-            onChange={setErrorValue}
-            error
-            min={0}
-            max={100}
-            placeholder="Value exceeds max"
-          />
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Disabled State</h3>
-          <GlassNumberInput
-            value={disabledValue || undefined}
-            disabled
-            placeholder="Disabled input"
-          />
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Without Buttons</h3>
-          <GlassNumberInput
-            value={normalValue || undefined}
-            onChange={setNormalValue}
-            showButtons={false}
-            placeholder="No buttons"
-          />
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
-};
-
-// Formatting examples
-export const FormattingExamples: Story = {
-  render: () => {
-    const [currency, setCurrency] = useState<number | null>(1299.99);
-    const [percentage, setPercentage] = useState<number | null>(0.15);
-    const [decimal, setDecimal] = useState<number | null>(Math.PI);
-    const [scientific, setScientific] = useState<number | null>(1000000);
-
-    return (
-      <div className="space-y-8">
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Currency Format</h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <div className="mb-4 flex items-center gap-3">
-              <DollarSign className="h-5 w-5 text-green-400" />
-              <div>
-                <div className="font-medium text-white/90">Price Input</div>
-                <div className="text-sm text-white/60">
-                  USD currency formatting
-                </div>
-              </div>
-            </div>
-            <GlassNumberInput
-              value={currency || undefined}
-              onChange={setCurrency}
-              min={0}
-              step={0.01}
-              precision={2}
-              allowDecimals
-              formatOptions={{
-                style: "currency",
-                currency: "USD",
-              }}
-              placeholder="$0.00"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">
-            Percentage Format
-          </h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <div className="mb-4 flex items-center gap-3">
-              <Percent className="h-5 w-5 text-blue-400" />
-              <div>
-                <div className="font-medium text-white/90">Rate Input</div>
-                <div className="text-sm text-white/60">
-                  Percentage formatting (0-1 range)
-                </div>
-              </div>
-            </div>
-            <GlassNumberInput
-              value={percentage || undefined}
-              onChange={setPercentage}
-              min={0}
-              max={1}
-              step={0.01}
-              precision={2}
-              allowDecimals
-              formatOptions={{
-                style: "percent",
-                minimumFractionDigits: 1,
-                maximumFractionDigits: 1,
-              }}
-              placeholder="0%"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">
-            Decimal Precision
-          </h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <div className="mb-4 flex items-center gap-3">
-              <Calculator className="h-5 w-5 text-purple-400" />
-              <div>
-                <div className="font-medium text-white/90">Pi Value</div>
-                <div className="text-sm text-white/60">5 decimal places</div>
-              </div>
-            </div>
-            <GlassNumberInput
-              value={decimal || undefined}
-              onChange={setDecimal}
-              step={0.00001}
-              precision={5}
-              allowDecimals
-              formatOptions={{
-                minimumFractionDigits: 5,
-                maximumFractionDigits: 5,
-              }}
-              placeholder="3.14159"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Large Numbers</h3>
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <div className="mb-4 flex items-center gap-3">
-              <Hash className="h-5 w-5 text-orange-400" />
-              <div>
-                <div className="font-medium text-white/90">Population</div>
-                <div className="text-sm text-white/60">
-                  Number with thousand separators
-                </div>
-              </div>
-            </div>
-            <GlassNumberInput
-              value={scientific || undefined}
-              onChange={setScientific}
-              step={1000}
-              formatOptions={{
-                useGrouping: true,
-              }}
-              placeholder="1,000,000"
-            />
-          </div>
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
-};
-
-// Real-world examples
-export const RealWorldExamples: Story = {
-  render: () => {
-    const [quantity, setQuantity] = useState<number | null>(1);
-    const [price, setPrice] = useState<number | null>(49.99);
-    const [discount, setDiscount] = useState<number | null>(0.1);
-    const [score, setScore] = useState<number | null>(85);
-    const [timer, setTimer] = useState<number | null>(30);
-
-    const total = (quantity || 0) * (price || 0) * (1 - (discount || 0));
-
-    return (
-      <div className="space-y-12">
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Shopping Cart</h3>
-          <div className="max-w-md rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <div className="space-y-4">
-              <div>
-                <label
-                  htmlFor="quantity-oc2sl5"
-                  className="mb-2 block font-medium text-sm text-white/80"
-                >
-                  Quantity
-                </label>
-                <GlassNumberInput
-                  value={quantity || undefined}
-                  onChange={setQuantity}
-                  min={1}
-                  max={99}
-                  step={1}
-                  size="sm"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="unit-price-kx66zx"
-                  className="mb-2 block font-medium text-sm text-white/80"
-                >
-                  Unit Price
-                </label>
-                <GlassNumberInput
-                  value={price || undefined}
-                  onChange={setPrice}
-                  min={0}
-                  step={0.01}
-                  precision={2}
-                  allowDecimals
-                  formatOptions={{
-                    style: "currency",
-                    currency: "USD",
-                  }}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="discount-rate-wg4715"
-                  className="mb-2 block font-medium text-sm text-white/80"
-                >
-                  Discount Rate
-                </label>
-                <GlassNumberInput
-                  value={discount || undefined}
-                  onChange={setDiscount}
-                  min={0}
-                  max={1}
-                  step={0.01}
-                  precision={2}
-                  allowDecimals
-                  formatOptions={{
-                    style: "percent",
-                  }}
-                />
-              </div>
-
-              <div className="border-white/10 border-t pt-4">
-                <div className="flex items-center justify-between">
-                  <span className="font-medium text-white/80">Total:</span>
-                  <span className="font-bold text-lg text-white/90">
-                    ${total.toFixed(2)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Game Settings</h3>
-          <div className="max-w-md rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <Target className="h-5 w-5 text-green-400" />
-                <div className="flex-1">
-                  <label
-                    htmlFor="target-score-0-100-h9w5n2"
-                    className="mb-2 block font-medium text-sm text-white/80"
-                  >
-                    Target Score (0-100)
-                  </label>
-                  <GlassNumberInput
-                    value={score || undefined}
-                    onChange={setScore}
-                    min={0}
-                    max={100}
-                    step={5}
-                    size="sm"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <Timer className="h-5 w-5 text-blue-400" />
-                <div className="flex-1">
-                  <label
-                    htmlFor="timer-seconds-s80rc3"
-                    className="mb-2 block font-medium text-sm text-white/80"
-                  >
-                    Timer (seconds)
-                  </label>
-                  <GlassNumberInput
-                    value={timer || undefined}
-                    onChange={setTimer}
-                    min={10}
-                    max={300}
-                    step={5}
-                    size="sm"
-                    formatOptions={{
-                      style: "unit",
-                      unit: "second",
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="rounded-lg border border-blue-400/20 bg-blue-400/10 p-3">
-                <div className="text-blue-200 text-sm">
-                  <div className="font-medium">Game Configuration:</div>
-                  <div>Target: {score} points</div>
-                  <div>Time Limit: {timer} seconds</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">
-            Financial Calculator
-          </h3>
-          <div className="max-w-lg rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div>
-                <label
-                  htmlFor="principal-amount-a01eqo"
-                  className="mb-2 block font-medium text-sm text-white/80"
-                >
-                  Principal Amount
-                </label>
-                <GlassNumberInput
-                  defaultValue={10000}
-                  min={0}
-                  step={100}
-                  formatOptions={{
-                    style: "currency",
-                    currency: "USD",
-                  }}
-                  allowDecimals
-                  precision={2}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="interest-rate-annual--jr0f3k"
-                  className="mb-2 block font-medium text-sm text-white/80"
-                >
-                  Interest Rate (Annual %)
-                </label>
-                <GlassNumberInput
-                  defaultValue={0.05}
-                  min={0}
-                  max={1}
-                  step={0.0001}
-                  precision={4}
-                  allowDecimals
-                  formatOptions={{
-                    style: "percent",
-                    minimumFractionDigits: 2,
-                  }}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="term-years-bqs663"
-                  className="mb-2 block font-medium text-sm text-white/80"
-                >
-                  Term (Years)
-                </label>
-                <GlassNumberInput defaultValue={5} min={1} max={30} step={1} />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="payments-per-year-mklh98"
-                  className="mb-2 block font-medium text-sm text-white/80"
-                >
-                  Payments per Year
-                </label>
-                <GlassNumberInput defaultValue={12} min={1} max={52} step={1} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
-};
-
-// Accessibility showcase
-export const AccessibilityShowcase: Story = {
-  render: () => {
-    const [value, setValue] = useState<number | null>(50);
-
-    return (
-      <div className="space-y-6">
-        <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
-          <h4 className="mb-2 font-medium text-blue-900 dark:text-blue-100">
-            Accessibility Features
-          </h4>
-          <ul className="space-y-1 text-blue-800 text-sm dark:text-blue-200">
-            <li>• Full keyboard navigation (Arrow keys, Page Up/Down)</li>
-            <li>• ARIA labels and value announcements</li>
-            <li>• Screen reader support for min/max values</li>
-            <li>• Focus management and visual indicators</li>
-            <li>• Error state descriptions</li>
-            <li>• Button labels for increment/decrement</li>
-          </ul>
-        </div>
-
-        <div className="space-y-4">
-          <p className="text-sm text-white/60">
-            Try keyboard navigation: Tab to focus, Arrow keys to adjust, Enter
-            to confirm
+        <div className="p-4 bg-white/10 rounded-lg backdrop-blur-sm">
+          <p className="text-white">
+            <strong>Volume:</strong> {volume.toLocaleString()} cm³
           </p>
-          <GlassNumberInput
-            value={value || undefined}
-            onChange={setValue}
-            min={0}
-            max={100}
-            step={5}
-            placeholder="Use keyboard to adjust"
-          />
-        </div>
-
-        <div className="rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-900/20">
-          <h4 className="mb-2 font-medium text-green-900 dark:text-green-100">
-            Current Value
-          </h4>
-          <p className="text-green-800 text-sm dark:text-green-200">
-            Value: {value !== null ? value : "None"} (Range: 0-100)
-          </p>
-        </div>
-
-        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-          <h4 className="mb-2 font-medium text-gray-900 dark:text-gray-100">
-            Screen Reader Announcements
-          </h4>
-          <div className="space-y-2 text-gray-700 text-sm dark:text-gray-300">
-            <p>
-              Focus: "Number input, value [current value], minimum 0, maximum
-              100"
-            </p>
-            <p>Increment: "Value increased to [new value]"</p>
-            <p>Decrement: "Value decreased to [new value]"</p>
-            <p>Error: "Value exceeds maximum allowed"</p>
-          </div>
-        </div>
-      </div>
-    );
-  },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-      values: [
-        {
-          name: "dark",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        },
-      ],
-    },
-  },
-};
-
-// Theme showcase
-export const ThemeShowcase: Story = {
-  render: () => {
-    const [value1, setValue1] = useState<number | null>(42);
-    const [value2, setValue2] = useState<number | null>(99.99);
-    const [value3, setValue3] = useState<number | null>(75);
-
-    return (
-      <div className="space-y-8">
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Ocean Theme</h3>
-          <div className="rounded-xl bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-500 p-8">
-            <GlassNumberInput
-              value={value1 || undefined}
-              onChange={setValue1}
-              placeholder="Ocean depths..."
-              min={0}
-              max={100}
-            />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Sunset Theme</h3>
-          <div className="rounded-xl bg-gradient-to-r from-orange-400 via-red-400 to-pink-500 p-8">
-            <GlassNumberInput
-              value={value2 || undefined}
-              onChange={setValue2}
-              step={0.01}
-              precision={2}
-              allowDecimals
-              formatOptions={{
-                style: "currency",
-                currency: "USD",
-              }}
-              placeholder="$0.00"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-medium text-sm text-white/80">Forest Theme</h3>
-          <div className="rounded-xl bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 p-8">
-            <GlassNumberInput
-              value={value3 || undefined}
-              onChange={setValue3}
-              min={0}
-              max={100}
-              step={5}
-              formatOptions={{
-                style: "percent",
-                minimumFractionDigits: 0,
-              }}
-              placeholder="0%"
-            />
-          </div>
         </div>
       </div>
     );

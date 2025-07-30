@@ -1,46 +1,320 @@
-import React from "react";
+import {
+	forwardRef,
+	useCallback,
+	useEffect,
+	useId,
+	useRef,
+	useState,
+} from "react";
+import {
+	cn,
+	focusRing,
+	getGlassClass,
+	microInteraction,
+} from "@/core/utils/classname";
+import {
+	createVariants as cva,
+	type InferVariantProps as VariantProps,
+} from "../../lib/variant-system";
 
-import { cn, getGlassClass } from "@/core/utils/classname";
+const textareaVariants = cva({
+	base: "relative w-full",
+	variants: {
+		size: {
+			sm: "text-sm",
+			md: "text-base",
+			lg: "text-lg",
+		},
+	},
+	defaultVariants: {
+		size: "md",
+	},
+});
+
+const textareaInputVariants = cva({
+	base: cn(
+		"w-full rounded-xl border px-4 py-3 transition-all duration-200 resize-none",
+		"text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
+		getGlassClass("default"),
+		focusRing,
+		"disabled:cursor-not-allowed disabled:opacity-50",
+		microInteraction.gentle,
+	),
+	variants: {
+		size: {
+			sm: "px-3 py-2 text-sm",
+			md: "px-4 py-3 text-base",
+			lg: "px-5 py-4 text-lg",
+		},
+		error: {
+			true: "border-red-400/50 focus:border-red-500",
+			false: "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
+		},
+	},
+	defaultVariants: {
+		size: "md",
+		error: "false",
+	},
+});
 
 interface GlassTextareaProps
-	extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-	variant?: "default" | "minimal";
-	resize?: "none" | "vertical" | "horizontal" | "both";
+	extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange">,
+	VariantProps<typeof textareaVariants> {
+	value?: string;
+	defaultValue?: string;
+	onChange?: (value: string) => void;
+	error?: boolean;
+	helperText?: string;
+	label?: string;
+	description?: string;
+	autoResize?: boolean;
+	minRows?: number;
+	maxRows?: number;
+	maxLength?: number;
+	showCharacterCount?: boolean;
+	characterCountPosition?: "bottom-right" | "bottom-left";
 }
 
-export const GlassTextarea = React.memo(
-	React.forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
-		(
-			{ className, variant = "default", resize = "vertical", ...props },
-			ref,
-		) => {
-			return (
-				<textarea
-					ref={ref}
-					className={cn(
-						getGlassClass("default"),
-						"w-full rounded-xl px-4 py-3",
-						"transition-all duration-200 ease-out",
-						"border border-white/20 dark:border-white/10",
-						"text-gray-900 dark:text-white",
-						"placeholder:text-gray-500 dark:placeholder:text-gray-400",
-						"focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500/50",
-						"hover:bg-white/10 dark:hover:bg-white/5",
-						"disabled:cursor-not-allowed disabled:opacity-50",
-						"min-h-[100px]",
-						resize === "none" && "resize-none",
-						resize === "vertical" && "resize-y",
-						resize === "horizontal" && "resize-x",
-						resize === "both" && "resize",
-						variant === "minimal" &&
-							"rounded-none border-0 border-white/30 border-b bg-transparent focus:border-blue-500/50 dark:border-white/20",
-						className,
-					)}
-					{...props}
-				/>
-			);
+const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
+	(
+		{
+			className,
+			size,
+			value,
+			defaultValue,
+			onChange,
+			error = false,
+			helperText,
+			label,
+			description,
+			autoResize = true,
+			minRows = 3,
+			maxRows = 10,
+			maxLength,
+			showCharacterCount = false,
+			characterCountPosition = "bottom-right",
+			disabled,
+			...props
 		},
-	),
+		ref,
+	) => {
+		const [internalValue, setInternalValue] = useState(
+			value !== undefined ? value : defaultValue || "",
+		);
+		const [textareaHeight, setTextareaHeight] = useState<string>("auto");
+
+		const textareaRef = useRef<HTMLTextAreaElement>(null);
+		const hiddenTextareaRef = useRef<HTMLTextAreaElement>(null);
+		const labelId = useId();
+		const descriptionId = useId();
+		const helperTextId = useId();
+
+		const currentValue = value !== undefined ? value : internalValue;
+		const characterCount = currentValue.length;
+		const isOverLimit = maxLength ? characterCount > maxLength : false;
+
+		// Calculate textarea height for auto-resize
+		const calculateHeight = useCallback(() => {
+			if (!autoResize || !textareaRef.current) return;
+
+			const textarea = textareaRef.current;
+			const hiddenTextarea = hiddenTextareaRef.current;
+
+			if (!hiddenTextarea) return;
+
+			// Copy styles to hidden textarea
+			const computedStyle = window.getComputedStyle(textarea);
+			hiddenTextarea.style.width = computedStyle.width;
+			hiddenTextarea.style.fontSize = computedStyle.fontSize;
+			hiddenTextarea.style.fontFamily = computedStyle.fontFamily;
+			hiddenTextarea.style.fontWeight = computedStyle.fontWeight;
+			hiddenTextarea.style.lineHeight = computedStyle.lineHeight;
+			hiddenTextarea.style.padding = computedStyle.padding;
+			hiddenTextarea.style.border = computedStyle.border;
+			hiddenTextarea.style.boxSizing = computedStyle.boxSizing;
+
+			// Set content and measure height
+			hiddenTextarea.value = currentValue || " ";
+
+			const scrollHeight = hiddenTextarea.scrollHeight;
+			const lineHeight = parseInt(computedStyle.lineHeight, 10) || 20;
+			const paddingTop = parseInt(computedStyle.paddingTop, 10) || 0;
+			const paddingBottom = parseInt(computedStyle.paddingBottom, 10) || 0;
+			const borderTop = parseInt(computedStyle.borderTopWidth, 10) || 0;
+			const borderBottom = parseInt(computedStyle.borderBottomWidth, 10) || 0;
+
+			const minHeight = minRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom;
+			const maxHeight = maxRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom;
+
+			const newHeight = Math.min(Math.max(scrollHeight, minHeight), maxHeight);
+			setTextareaHeight(`${newHeight}px`);
+		}, [autoResize, currentValue, minRows, maxRows]);
+
+		// Update height when value changes
+		useEffect(() => {
+			calculateHeight();
+		}, [calculateHeight]);
+
+		// Update height on window resize
+		useEffect(() => {
+			if (!autoResize) return;
+
+			const handleResize = () => {
+				setTimeout(calculateHeight, 0);
+			};
+
+			window.addEventListener("resize", handleResize);
+			return () => window.removeEventListener("resize", handleResize);
+		}, [autoResize, calculateHeight]);
+
+		// Handle value change
+		const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+			const newValue = e.target.value;
+
+			// Enforce max length if specified
+			if (maxLength && newValue.length > maxLength) {
+				return;
+			}
+
+			if (value === undefined) {
+				setInternalValue(newValue);
+			}
+
+			onChange?.(newValue);
+		};
+
+		// Handle key down for accessibility
+		const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+			// Allow Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X, Ctrl+Z
+			if (e.ctrlKey || e.metaKey) {
+				props.onKeyDown?.(e);
+				return;
+			}
+
+			// Prevent input if at max length (except for deletion keys)
+			if (
+				maxLength &&
+				currentValue.length >= maxLength &&
+				!["Backspace", "Delete", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Tab"].includes(e.key)
+			) {
+				e.preventDefault();
+				return;
+			}
+
+			props.onKeyDown?.(e);
+		};
+
+		// Combine refs
+		const setRefs = useCallback(
+			(node: HTMLTextAreaElement | null) => {
+				textareaRef.current = node;
+				if (typeof ref === "function") {
+					ref(node);
+				} else if (ref) {
+					ref.current = node;
+				}
+			},
+			[ref],
+		);
+
+		return (
+			<div className={cn(textareaVariants({ size }), className)}>
+				{/* Label */}
+				{label && (
+					<label
+						id={labelId}
+						htmlFor={props.id}
+						className={cn(
+							"mb-2 block font-medium text-white",
+							size === "sm" && "text-sm",
+							size === "lg" && "text-lg",
+						)}
+					>
+						{label}
+						{props.required && <span className="ml-1 text-red-400">*</span>}
+					</label>
+				)}
+
+				{/* Description */}
+				{description && (
+					<p
+						id={descriptionId}
+						className={cn(
+							"mb-2 text-white/70",
+							size === "sm" && "text-xs",
+							size === "md" && "text-sm",
+							size === "lg" && "text-base",
+						)}
+					>
+						{description}
+					</p>
+				)}
+
+				{/* Textarea Container */}
+				<div className="relative">
+					<textarea
+						{...props}
+						ref={setRefs}
+						value={currentValue}
+						onChange={handleChange}
+						onKeyDown={handleKeyDown}
+						disabled={disabled}
+						className={cn(
+							textareaInputVariants({ size, error: error ? "true" : "false" }),
+						)}
+						style={{
+							height: autoResize ? textareaHeight : undefined,
+							minHeight: autoResize ? undefined : `${minRows * 1.5}em`,
+						}}
+						aria-invalid={error}
+						aria-labelledby={label ? labelId : undefined}
+						aria-describedby={cn(
+							description && descriptionId,
+							helperText && helperTextId,
+						)}
+					/>
+
+					{/* Character Count */}
+					{showCharacterCount && (
+						<div
+							className={cn(
+								"absolute bottom-2 text-xs",
+								characterCountPosition === "bottom-right" ? "right-3" : "left-3",
+								isOverLimit ? "text-red-400" : "text-white/60",
+							)}
+						>
+							{maxLength ? `${characterCount}/${maxLength}` : characterCount}
+						</div>
+					)}
+				</div>
+
+				{/* Helper Text */}
+				{helperText && (
+					<p
+						id={helperTextId}
+						className={cn(
+							"mt-1.5 text-xs",
+							error ? "text-red-400" : "text-white/60",
+						)}
+					>
+						{helperText}
+					</p>
+				)}
+
+				{/* Hidden textarea for height calculation */}
+				{autoResize && (
+					<textarea
+						ref={hiddenTextareaRef}
+						tabIndex={-1}
+						className="absolute left-0 top-0 -z-10 h-0 overflow-hidden opacity-0 pointer-events-none"
+						aria-hidden="true"
+					/>
+				)}
+			</div>
+		);
+	},
 );
 
 GlassTextarea.displayName = "GlassTextarea";
+
+export { GlassTextarea };

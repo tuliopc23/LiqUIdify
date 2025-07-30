@@ -180,4 +180,20 @@ function _validateColorPalette(
   return results;
 }
 
+// Export functions
+export {
+  checkContrast,
+  hexToRgb,
+  getLuminance,
+  getContrastRatio,
+  _getAccessibleColors as getAccessibleColors,
+  _isLightColor as isLightColor,
+  _getBestContrastColor as getBestContrastColor,
+  _validateColorPalette as validateColorPalette,
+};
+
+// Export types
+export type { ContrastResult, ColorRGB };
+
 // Export default checker function
+export default checkContrast;

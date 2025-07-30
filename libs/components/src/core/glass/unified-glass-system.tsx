@@ -12,14 +12,13 @@
  * - Tree-shakeable exports
  */
 
-import type React, {
- from "react";
-import type ComponentProps,
-  type CSSProperties,
-  type ReactNode,
+import React, {
   useCallback,
   useRef,
   useState,
+  type ComponentProps,
+  type CSSProperties,
+  type ReactNode,
 } from "react";
 
 // Types

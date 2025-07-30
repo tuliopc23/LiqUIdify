@@ -162,9 +162,7 @@ function hslToRgb(h: number, s: number, l: number, a?: number): RGBColor {
     return p;
   };
 
-  let r;
-  const
-  let g, b;
+  let r, g, b;
 
   if (s === 0) {
     r = g = b = l; // achromatic

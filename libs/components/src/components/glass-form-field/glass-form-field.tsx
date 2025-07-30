@@ -1,10 +1,20 @@
 import { AlertCircle, CheckCircle, Info } from "lucide-react";
-import React, { forwardRef, useId } from "react";
+import React, { forwardRef, useId, useRef, useEffect, useCallback } from "react";
 import { cn } from "@/core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
 } from "../../lib/variant-system";
+import { AccessibilityManager } from "@/core/accessibility-manager";
+import { useGlassStateTransitions } from "@/hooks/use-glass-animations";
+import { 
+  generateGlassClasses, 
+  generateGlassVariables 
+} from "@/core/glass/unified-glass-system";
+import type { 
+  ComponentPropsBuilder,
+  FormGlassProps 
+} from "@/core/base-component";
 
 const formFieldVariants = cva({
   base: "space-y-2 transition-all duration-200",
@@ -21,8 +31,8 @@ const formFieldVariants = cva({
     },
   },
   defaultVariants: {
-    variant: "default" as const,
-    size: "md" as const,
+    variant: "default",
+    size: "md",
   },
 });
 
@@ -40,8 +50,8 @@ const labelVariants = cva({
     },
   },
   defaultVariants: {
-    required: false as const,
-    size: "md" as const,
+    required: false,
+    size: "md",
   },
 });
 
@@ -56,70 +66,189 @@ const helperTextVariants = cva({
     },
   },
   defaultVariants: {
-    state: "default" as const,
+    state: "default",
   },
 });
 
 interface GlassFormFieldProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof formFieldVariants> {
-  label?: string;
+  extends ComponentPropsBuilder<HTMLDivElement>,
+    VariantProps<typeof formFieldVariants>,
+    Pick<FormGlassProps, 
+      "glassEffect" | "animation" | "disableAnimations" | "variant" | "size" |
+      "required" | "error" | "errorMessage" | "helperText" | "label" | "disabled" |
+      "hapticFeedback" | "hover" | "ripple"
+    > {
+  /** Helper text to display below the field */
   helperText?: string;
-  error?: string;
+  /** Success message to display */
   success?: string;
+  /** Warning message to display */
   warning?: string;
-
-  required?: boolean;
-
+  /** Form field children */
   children: React.ReactNode;
+  /** HTML for attribute - will be auto-generated if not provided */
   htmlFor?: string;
-
-  disabled?: boolean;
+  /** Enable live validation announcements */
+  liveValidation?: boolean;
+  /** Custom validation state */
+  validationState?: "default" | "error" | "success" | "warning";
+  /** Enable glass physics animations */
+  physics?: boolean;
+  /** Enable magnetic hover effects */
+  magnetic?: boolean;
+  /** Focus management options */
+  focusOptions?: {
+    /** Auto-focus on mount */
+    autoFocus?: boolean;
+    /** Focus on error */
+    focusOnError?: boolean;
+    /** Prevent scroll on focus */
+    preventScroll?: boolean;
+  };
 }
 
 const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
   (
     {
       className,
-      variant,
-      size,
+      variant = "default",
+      size = "md",
       label,
       helperText,
       error,
+      errorMessage,
       success,
       warning,
       required = false,
       children,
       htmlFor,
       disabled = false,
+      glassEffect = { intensity: "medium", blur: true, backdrop: true },
+      animation = "normal",
+      disableAnimations = false,
+      liveValidation = true,
+      validationState,
+      physics = false,
+      magnetic = false,
+      focusOptions = {},
+      hapticFeedback = false,
+      hover = true,
+      ripple = false,
       ...props
     },
     ref,
   ) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const fieldRef = useRef<HTMLElement>(null);
+    const accessibilityManager = AccessibilityManager.getInstance();
+    const { transitionToState, currentState } = useGlassStateTransitions(animation);
+    
     const fieldId = useId();
+    const messageId = useId();
+    const descriptionId = useId();
     const finalId = htmlFor || fieldId;
 
-    // Determine state and message
-    const state = error
+    // Determine state and message with priority: error > warning > success > default
+    const state = validationState || (error || errorMessage
       ? "error"
-      : success
-        ? "success"
-        : warning
-          ? "warning"
-          : "default";
-    const message = error || success || warning || helperText;
+      : warning
+        ? "warning"
+        : success
+          ? "success"
+          : "default");
+    const message = error || errorMessage || warning || success || helperText;
+
+    // Accessibility and validation effects
+    useEffect(() => {
+      if (!containerRef.current) return;
+      
+      // Validate accessibility when component mounts or updates
+      const validateAccessibility = async () => {
+        try {
+          const report = await accessibilityManager.validateComponent(
+            containerRef.current!,
+            {
+              name: "GlassFormField",
+              type: "form-field",
+              props: { label, required, error: !!error, disabled }
+            }
+          );
+          
+          // Announce validation errors for screen readers
+          if (liveValidation && report.violations.length > 0) {
+            accessibilityManager.announce(
+              `Form field has ${report.violations.length} accessibility issues`,
+              "polite"
+            );
+          }
+        } catch (err) {
+          // Accessibility validation failed, but don't break the component
+          console.warn('Accessibility validation failed:', err);
+        }
+      };
+      
+      validateAccessibility();
+    }, [error, errorMessage, label, required, disabled, liveValidation]);
+    
+    // Error announcement for screen readers
+    useEffect(() => {
+      if (liveValidation && (error || errorMessage) && state === "error") {
+        accessibilityManager.announce(
+          `Error: ${error || errorMessage}`,
+          "assertive"
+        );
+      }
+    }, [error, errorMessage, state, liveValidation]);
+    
+    // Focus management
+    useEffect(() => {
+      if (focusOptions.focusOnError && (error || errorMessage) && fieldRef.current) {
+        fieldRef.current.focus({ 
+          preventScroll: focusOptions.preventScroll 
+        });
+      }
+    }, [error, errorMessage, focusOptions.focusOnError, focusOptions.preventScroll]);
+    
+    // Glass effect generation
+    const glassClasses = generateGlassClasses({
+      variant: variant as any,
+      intensity: glassEffect?.intensity,
+      state: currentState,
+      glassEffect,
+    });
+    
+    const glassVariables = generateGlassVariables({
+      intensity: glassEffect?.intensity,
+      config: {
+        animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+        ...glassEffect,
+      },
+    });
+    
+    // Event handlers for glass effects
+    const handleMouseEnter = useCallback(() => {
+      if (hover && !disabled && !disableAnimations) {
+        transitionToState("hover");
+      }
+    }, [hover, disabled, disableAnimations, transitionToState]);
+    
+    const handleMouseLeave = useCallback(() => {
+      if (hover && !disabled && !disableAnimations) {
+        transitionToState("idle");
+      }
+    }, [hover, disabled, disableAnimations, transitionToState]);
 
     // Get appropriate icon
     const getIcon = () => {
       switch (state) {
         case "error": {
-          return <AlertCircle className="h-3 w-3 flex-shrink-0" />;
+          return <AlertCircle className="h-3 w-3 flex-shrink-0" aria-hidden="true" />;
         }
         case "success": {
-          return <CheckCircle className="h-3 w-3 flex-shrink-0" />;
+          return <CheckCircle className="h-3 w-3 flex-shrink-0" aria-hidden="true" />;
         }
         case "warning": {
-          return <Info className="h-3 w-3 flex-shrink-0" />;
+          return <Info className="h-3 w-3 flex-shrink-0" aria-hidden="true" />;
         }
         default: {
           return;
@@ -142,14 +271,35 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
       return child;
     });
 
+    // Combine refs for proper forwarding
+    const combinedRef = useCallback((node: HTMLDivElement | null) => {
+      if (containerRef.current !== node) {
+        containerRef.current = node;
+      }
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    }, [ref]);
+
     return (
       <div
-        ref={ref}
+        ref={combinedRef}
         className={cn(
           formFieldVariants({ variant, size }),
+          glassClasses,
           disabled && "cursor-not-allowed opacity-50",
+          !disableAnimations && "will-change-transform",
           className,
         )}
+        style={{
+          ...glassVariables,
+          ...props.style,
+        } as React.CSSProperties}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        data-testid={props["data-testid"] || "glass-form-field"}
         {...props}
       >
         {label && (
@@ -190,3 +340,4 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
 GlassFormField.displayName = "GlassFormField";
 
 export { GlassFormField };
+export type { GlassFormFieldProps };

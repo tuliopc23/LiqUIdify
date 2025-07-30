@@ -132,4 +132,5 @@ const RadioGroup = Object.assign(GlassRadioGroup, {
   Item: GlassRadioItem,
 });
 
-export { RadioGroup, GlassRadioGroup };
+export { RadioGroup, GlassRadioGroup, GlassRadioItem };
+export type { GlassRadioGroupProps, GlassRadioItemProps };

@@ -12,7 +12,6 @@ import type * as FramerMotion from "framer-motion";
 const _loadFramerMotion = (): Promise<typeof FramerMotion> =>
   import("framer-motion");
 
-export * from "../components/apple-liquid-glass";
 // Advanced visual components
 
 // Removed deleted components

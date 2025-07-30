@@ -1,21 +1,22 @@
-/**
- * Layout Components Bundle
- * Layout and container components
- */
+// Layout Components Bundle
+// Optimized bundle for layout and container components
 
-export * from "../components/glass-accordion";
-export * from "../components/glass-breadcrumbs";
+// Container Components
+export * from "../components/glass-card-refactored";
+export * from "../components/glass-modal";
 export * from "../components/glass-drawer";
-
-// Removed deleted components
-// export * from "../components/glass-footer";
-// export * from "../components/glass-header";
-// export * from "../components/glass-hero";
-export * from "../components/glass-pagination";
 export * from "../components/glass-popover";
-export * from "../components/glass-portal";
+
+// Responsive Components
 export * from "../components/glass-responsive-button";
 export * from "../components/glass-responsive-card";
+
+// Layout Utilities
+export * from "../components/glass-dropdown";
+export * from "../components/glass-portal";
+
+// Data Display
 export * from "../components/glass-table";
-export * from "../components/glass-tabs";
-export * from "../components/glass-visually-hidden";
+
+// Re-export drawer components
+export { Drawer } from "../components/glass-drawer";
