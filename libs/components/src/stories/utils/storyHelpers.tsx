@@ -1,8 +1,8 @@
 // Shared utilities for Storybook stories in Liquidify
 // Use these helpers to DRY up meta, argTypes, demo data, and render logic across stories
 
-import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 
 // Standard meta generator
 export function createMeta<T>(options: {
@@ -16,35 +16,52 @@ export function createMeta<T>(options: {
     title: options.title,
     component: options.component,
     parameters: options.parameters || {},
-    tags: options.tags || ['autodocs'],
+    tags: options.tags || ["autodocs"],
     argTypes: options.argTypes || {},
   } as Meta<T>;
 }
 
 // Common argTypes
 export const variantArgType = {
-  control: 'select',
-  options: ['primary', 'secondary', 'tertiary', 'ghost', 'destructive', 'apple'],
-  description: 'Visual style variant',
+  control: "select",
+  options: [
+    "primary",
+    "secondary",
+    "tertiary",
+    "ghost",
+    "destructive",
+    "apple",
+  ],
+  description: "Visual style variant",
 };
 
 export const sizeArgType = {
-  control: 'select',
-  options: ['xs', 'sm', 'md', 'lg', 'xl'],
-  description: 'Component size',
+  control: "select",
+  options: ["xs", "sm", "md", "lg", "xl"],
+  description: "Component size",
 };
 
 export const booleanArgType = (desc: string) => ({
-  control: 'boolean',
+  control: "boolean",
   description: desc,
 });
 
 // Demo data
-export const demoVariants = ['primary', 'secondary', 'tertiary', 'ghost', 'destructive', 'apple'];
-export const demoSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
+export const demoVariants = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "ghost",
+  "destructive",
+  "apple",
+];
+export const demoSizes = ["xs", "sm", "md", "lg", "xl"];
 
 // Reusable render helpers
-export function renderVariants(Component: React.ComponentType<any>, extraProps: any = {}) {
+export function renderVariants(
+  Component: React.ComponentType<any>,
+  extraProps: any = {},
+) {
   return (
     <div className="flex flex-wrap gap-4">
       {demoVariants.map((variant) => (
@@ -56,7 +73,10 @@ export function renderVariants(Component: React.ComponentType<any>, extraProps: 
   );
 }
 
-export function renderSizes(Component: React.ComponentType<any>, extraProps: any = {}) {
+export function renderSizes(
+  Component: React.ComponentType<any>,
+  extraProps: any = {},
+) {
   return (
     <div className="flex flex-wrap gap-4 items-end">
       {demoSizes.map((size) => (
