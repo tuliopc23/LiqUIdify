@@ -46,19 +46,24 @@ export function isGlassComponent(element: unknown): boolean {
   // Check if it's a DOM element with glass-related classes
   if ("classList" in element && element.classList) {
     const classList = element.classList as any;
-    
+
     // Handle both real DOM classList and mock objects
     if (typeof classList[Symbol.iterator] === "function") {
-      return Array.from(classList as Iterable<string>).some((className: string) => 
-        className.startsWith("glass-")
+      return Array.from(classList as Iterable<string>).some(
+        (className: string) => className.startsWith("glass-"),
       );
     }
-    
+
     // Fallback for simple mock objects
     if (typeof classList.contains === "function") {
       // Check common glass class names
-      const glassClasses = ["glass-button", "glass-card", "glass-input", "glass-modal"];
-      return glassClasses.some(className => classList.contains(className));
+      const glassClasses = [
+        "glass-button",
+        "glass-card",
+        "glass-input",
+        "glass-modal",
+      ];
+      return glassClasses.some((className) => classList.contains(className));
     }
   }
 
