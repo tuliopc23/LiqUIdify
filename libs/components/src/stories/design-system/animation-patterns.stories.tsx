@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
+// Uses shared story helpers from utils/storyHelpers.tsx for DRY meta and render logic
+import { createMeta } from '../utils/storyHelpers';
 import { motion } from "framer-motion";
 import { ChevronRight, RefreshCw, Sparkles, Zap } from "lucide-react";
 import { GlassButton, GlassCard } from "../..";
@@ -91,22 +92,21 @@ const createHoverAnimation = (type: "scale" | "lift" | "rotate" | "glow") => {
   }
 };
 
-const meta: Meta = {
+const meta = createMeta({
   title: "Design System/Animation Patterns",
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component:
-          "Consistent animation patterns and microinteractions used throughout the LiquidUI library.",
+          "Animation patterns and spring configs for the design system.",
       },
     },
   },
-  tags: ["autodocs"],
-};
+});
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = typeof meta;
 
 export const SpringAnimations: Story = {
   render: () => (
