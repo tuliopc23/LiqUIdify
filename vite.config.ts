@@ -1,7 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
-import { resolve } from 'node:path';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [
@@ -19,13 +22,13 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@liquidify/components': resolve(currentDir, 'libs/components/src/index.ts'),
-      '@': resolve(currentDir, 'libs/components/src'),
+      '@liquidify/components': resolve(__dirname, 'libs/components/src/index.ts'),
+      '@': resolve(__dirname, 'libs/components/src'),
     },
   },
   build: {
     lib: {
-      entry: resolve(currentDir, 'libs/components/src/index.ts'),
+      entry: resolve(__dirname, 'libs/components/src/index.ts'),
       name: 'LiquidUI',
       formats: ['es', 'cjs'],
       fileName: (format) => `index.${format === 'es' ? 'mjs' : 'cjs'}`,
@@ -36,7 +39,7 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          'react/jsx-runtime': 'ReactJSXRuntime',
+          'react/jsx-runtime': 'react/jsx/runtime',
         },
       },
     },
