@@ -270,22 +270,79 @@ npm run test:visual
 
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
 
-### Development Setup
+## Monorepo Structure
 
-```bash
-# Clone the repository
-git clone https://github.com/tuliopc23/LiqUIdify.git
-cd LiqUIdify
+- `apps/` — Applications (Storybook, docs, etc.)
+- `libs/` — Libraries (component library, shared code)
 
-# Install dependencies
+## Getting Started
+
+Install dependencies:
+
+```sh
 bun install
-
-# Start development server
-bun dev
-
-# Run Storybook
-bun storybook
 ```
+
+## Scripts (Bun-powered)
+
+- **Build everything:**
+  ```sh
+  bun run build
+  ```
+- **Build component library:**
+  ```sh
+  bun run build:lib
+  ```
+- **Run Storybook:**
+  ```sh
+  bun run storybook
+  ```
+- **Build Storybook static site:**
+  ```sh
+  bun run build:storybook
+  ```
+- **Run VitePress docs (dev):**
+  ```sh
+  bun run docs:dev
+  ```
+- **Build VitePress docs:**
+  ```sh
+  bun run docs:build
+  ```
+- **Preview VitePress docs:**
+  ```sh
+  bun run docs:preview
+  ```
+- **Lint all code:**
+  ```sh
+  bun run lint
+  ```
+- **Format all code:**
+  ```sh
+  bun run format
+  ```
+- **Format and fix:**
+  ```sh
+  bun run format:fix
+  ```
+- **Run tests:**
+  ```sh
+  bun run test
+  ```
+- **Type-check:**
+  ```sh
+  bun run type-check
+  ```
+
+## Adding New Packages/Apps
+
+- Add new apps to `apps/` and new libraries to `libs/`.
+- Use Vite, Bun, and qlty for all new projects.
+- Update `vite.config.ts` and `package.json` workspaces if needed.
+
+## No Nx Required
+
+This monorepo is powered by Bun workspaces and Vite. Nx is no longer required or used.
 
 ## 📄 License
 
