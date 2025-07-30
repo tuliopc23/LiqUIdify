@@ -42,94 +42,94 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/libs/components/index.d.ts",
       "import": "./dist/libs/components/index.mjs",
       "require": "./dist/libs/components/index.cjs",
-      "style": "./dist/libs/components/liquidui.css",
-      "types": "./dist/libs/components/index.d.ts"
+      "style": "./dist/libs/components/liquidui.css"
     },
     "./accessibility": {
+      "types": "./dist/libs/components/bundles/accessibility.d.ts",
       "import": "./dist/libs/components/accessibility.mjs",
-      "require": "./dist/libs/components/cjs/accessibility.cjs",
-      "types": "./dist/libs/components/bundles/accessibility.d.ts"
+      "require": "./dist/libs/components/cjs/accessibility.cjs"
     },
     "./advanced": {
+      "types": "./dist/libs/components/bundles/advanced.d.ts",
       "import": "./dist/libs/components/advanced.mjs",
-      "require": "./dist/libs/components/cjs/advanced.cjs",
-      "types": "./dist/libs/components/bundles/advanced.d.ts"
+      "require": "./dist/libs/components/cjs/advanced.cjs"
     },
     "./animations": {
+      "types": "./dist/libs/components/bundles/animations.d.ts",
       "import": "./dist/libs/components/animations.mjs",
-      "require": "./dist/libs/components/cjs/animations.cjs",
-      "types": "./dist/libs/components/bundles/animations.d.ts"
+      "require": "./dist/libs/components/cjs/animations.cjs"
     },
     "./button": {
+      "types": "./dist/libs/components/components/glass-button/index.d.ts",
       "import": "./dist/libs/components/components/button.mjs",
-      "require": "./dist/libs/components/cjs/components/button.cjs",
-      "types": "./dist/libs/components/components/glass-button/index.d.ts"
+      "require": "./dist/libs/components/cjs/components/button.cjs"
     },
     "./card": {
+      "types": "./dist/libs/components/components/glass-card/index.d.ts",
       "import": "./dist/libs/components/components/card.mjs",
-      "require": "./dist/libs/components/cjs/components/card.cjs",
-      "types": "./dist/libs/components/components/glass-card/index.d.ts"
+      "require": "./dist/libs/components/cjs/components/card.cjs"
     },
     "./context": {
+      "types": "./dist/libs/components/providers/index.d.ts",
       "import": "./dist/libs/components/providers.mjs",
-      "require": "./dist/libs/components/cjs/providers.cjs",
-      "types": "./dist/libs/components/providers/index.d.ts"
+      "require": "./dist/libs/components/cjs/providers.cjs"
     },
     "./core": {
+      "types": "./dist/libs/components/bundles/core.d.ts",
       "import": "./dist/libs/components/core.mjs",
       "modern": "./dist/libs/components/core.mjs",
-      "require": "./dist/libs/components/cjs/core.cjs",
-      "types": "./dist/libs/components/bundles/core.d.ts"
+      "require": "./dist/libs/components/cjs/core.cjs"
     },
     "./css": "./dist/libs/components/liquidui.css",
     "./feedback": {
+      "types": "./dist/libs/components/bundles/feedback.d.ts",
       "import": "./dist/libs/components/feedback.mjs",
-      "require": "./dist/libs/components/cjs/feedback.cjs",
-      "types": "./dist/libs/components/bundles/feedback.d.ts"
+      "require": "./dist/libs/components/cjs/feedback.cjs"
     },
     "./forms": {
+      "types": "./dist/libs/components/bundles/forms.d.ts",
       "import": "./dist/libs/components/forms.mjs",
-      "require": "./dist/libs/components/cjs/forms.cjs",
-      "types": "./dist/libs/components/bundles/forms.d.ts"
+      "require": "./dist/libs/components/cjs/forms.cjs"
     },
     "./input": {
+      "types": "./dist/libs/components/components/glass-input/index.d.ts",
       "import": "./dist/libs/components/components/input.mjs",
-      "require": "./dist/libs/components/cjs/components/input.cjs",
-      "types": "./dist/libs/components/components/glass-input/index.d.ts"
+      "require": "./dist/libs/components/cjs/components/input.cjs"
     },
     "./layout": {
+      "types": "./dist/libs/components/bundles/layout.d.ts",
       "import": "./dist/libs/components/layout.mjs",
-      "require": "./dist/libs/components/cjs/layout.cjs",
-      "types": "./dist/libs/components/bundles/layout.d.ts"
+      "require": "./dist/libs/components/cjs/layout.cjs"
     },
     "./modal": {
+      "types": "./dist/libs/components/components/glass-modal/index.d.ts",
       "import": "./dist/libs/components/components/modal.mjs",
-      "require": "./dist/libs/components/cjs/components/modal.cjs",
-      "types": "./dist/libs/components/components/glass-modal/index.d.ts"
+      "require": "./dist/libs/components/cjs/components/modal.cjs"
     },
     "./navigation": {
+      "types": "./dist/libs/components/bundles/navigation.d.ts",
       "import": "./dist/libs/components/navigation.mjs",
-      "require": "./dist/libs/components/cjs/navigation.cjs",
-      "types": "./dist/libs/components/bundles/navigation.d.ts"
+      "require": "./dist/libs/components/cjs/navigation.cjs"
     },
     "./package.json": "./package.json",
     "./physics": {
+      "types": "./dist/libs/components/bundles/physics.d.ts",
       "import": "./dist/libs/components/physics.mjs",
-      "require": "./dist/libs/components/cjs/physics.cjs",
-      "types": "./dist/libs/components/bundles/physics.d.ts"
+      "require": "./dist/libs/components/cjs/physics.cjs"
     },
     "./ssr": {
+      "types": "./dist/libs/components/bundles/ssr.d.ts",
       "import": "./dist/libs/components/ssr.mjs",
-      "require": "./dist/libs/components/cjs/ssr.cjs",
-      "types": "./dist/libs/components/bundles/ssr.d.ts"
+      "require": "./dist/libs/components/cjs/ssr.cjs"
     },
     "./styles": "./dist/libs/components/liquidui.css",
     "./tokens": {
+      "types": "./dist/libs/components/tokens/index.d.ts",
       "import": "./dist/libs/components/tokens.mjs",
-      "require": "./dist/libs/components/cjs/tokens.cjs",
-      "types": "./dist/libs/components/tokens/index.d.ts"
+      "require": "./dist/libs/components/cjs/tokens.cjs"
     }
   },
   "files": [
