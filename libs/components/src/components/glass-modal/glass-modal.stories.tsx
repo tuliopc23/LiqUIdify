@@ -25,10 +25,10 @@ import { GlassInput } from '../glass-input/glass-input';
 import { GlassModal } from './glass-modal';
 
 const meta = { title: 'Components/Overlays/GlassModal' }
-  GlassModal,
-  parameters: { 'centered' }
+  component: GlassModal,
+  parameters: { layout: 'centered' }
     { 
-        ` }
+        component: ` }
 A glassmorphic modal dialog component with focus management, animations, and comprehensive accessibility features.
 
 ## Features
@@ -96,78 +96,78 @@ The modal follows WAI-ARIA dialog pattern:
         `,,
     },
   },
-  ['autodocs'],
+  tags: ['autodocs'],
   argTypes: { 
-      'boolean'
-      'Whether the modal is open',
-      table: 'boolean' ,
+      control: 'boolean' 
+      description: 'Whether the modal is open',
+      table: summary: 'boolean' ,
         category: 'State',,
     },
-    { 'closed' }
-      'Callback when modal should close',
-      table: {'() => void' ,
+    onClose: { action: 'closed' }
+      description: 'Callback when modal should close',
+      table: {summary: '() => void' ,
         category: 'Events',
       },
     },
-    { 'text' }
-      'Modal title',
-      table: {'string' ,
+    title: { control: 'text' }
+      description: 'Modal title',
+      table: {summary: 'string' ,
         category: 'Content',
       },
     },
-    { false }
-      'Modal content',
-      table: {'React.ReactNode' ,
+    children: { control: false }
+      description: 'Modal content',
+      table: {summary: 'React.ReactNode' ,
         category: 'Content',
       },
     },
-    { 'boolean' }
-      'Close when clicking outside the modal',
-      table: {'boolean' ,
-        defaultValue: 'true' ,
+    closeOnBackdropClick: { control: 'boolean' }
+      description: 'Close when clicking outside the modal',
+      table: {summary: 'boolean' ,
+        defaultValue: summary: 'true' ,
         category: 'Behavior',
       },
     },
-    { 'boolean' }
-      'Close when pressing Escape key',
-      table: {'boolean' ,
-        defaultValue: 'true' ,
+    closeOnEscape: { control: 'boolean' }
+      description: 'Close when pressing Escape key',
+      table: {summary: 'boolean' ,
+        defaultValue: summary: 'true' ,
         category: 'Behavior',
       },
     },
-    { 'text' }
-      'Additional CSS classes for the modal',
-      table: {'string' ,
+    className: { control: 'text' }
+      description: 'Additional CSS classes for the modal',
+      table: {summary: 'string' ,
         category: 'Styling',
       },
     },
-    { 'text' }
-      'Additional CSS classes for the title',
-      table: {'string' ,
+    titleClassName: { control: 'text' }
+      description: 'Additional CSS classes for the title',
+      table: {summary: 'string' ,
         category: 'Styling',
       },
     },
-    { 'text' }
-      'Additional CSS classes for the content',
-      table: {'string' ,
+    contentClassName: { control: 'text' }
+      description: 'Additional CSS classes for the content',
+      table: {summary: 'string' ,
         category: 'Styling',
       },
     },
-    { false }
-      'Element to focus when modal opens',
-      table: {'React.RefObject<HTMLElement>' ,
+    initialFocus: { control: false }
+      description: 'Element to focus when modal opens',
+      table: {summary: 'React.RefObject<HTMLElement>' ,
         category: 'Behavior',
       },
     },
-    { false }
-      'Custom portal target element',
-      table: {'HTMLElement' ,
+    portalTarget: { control: false }
+      description: 'Custom portal target element',
+      table: {summary: 'HTMLElement' ,
         category: 'Advanced',
       },
     },
   },
-  { true }
-    true,
+  args: { closeOnBackdropClick: true }
+    closeOnEscape: true,
   },
 } satisfies Meta<typeof GlassModal>;
 
@@ -199,9 +199,9 @@ export const Playground: Story = { render: (_args) => { }
           </div>
         </GlassModal>
       </>
-    )
+    );
   },
-}
+};
 
 {/* Basic examples  */}
 export const BasicExamples: Story = { render: () => { }
@@ -284,9 +284,9 @@ export const BasicExamples: Story = { render: () => { }
           </div>
         </GlassModal>
       </div>
-    )
+    );
   },
-}
+};
 
 {/* Dialog types  */}
 export const DialogTypes: Story = { render: () => { }
@@ -456,7 +456,7 @@ export const DialogTypes: Story = { render: () => { }
           </div>
         </GlassModal>
       </div>
-    )
+    );
   },
 };
 export const _FormModal: Story = { render: () => { }
@@ -465,7 +465,7 @@ export const _FormModal: Story = { render: () => { }
       email: '',
       message: '',
       subscribe: false,
-    })
+    });
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -560,7 +560,7 @@ export const _FormModal: Story = { render: () => { }
       </>
     );
   },
-}
+};
 
 {/* Real-world examples  */}
 export const RealWorldExamples: Story = { render: () => { }
@@ -814,9 +814,9 @@ export const RealWorldExamples: Story = { render: () => { }
           </div>
         </GlassModal>
       </div>
-    )
+    );
   },
-}
+};
 
 {/* Nested modals  */}
 export const NestedModals: Story = { render: () => { }
@@ -1200,6 +1200,6 @@ export const CustomStyling: Story = { render: () => { }
           </div>
         </GlassModal>
       </div>
-    )
+    );
   },
 };
