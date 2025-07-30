@@ -53,4 +53,5 @@
 
 .dark .vp-doc div[class*="language-"] {
   background: rgba(0, 0, 0, 0.5) !important;
-  border: 1px solid rg}
+  border: 1px solid rg;
+}

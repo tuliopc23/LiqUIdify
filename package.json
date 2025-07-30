@@ -1,199 +1,22 @@
 {
-  "name": "liquidify",
-  "version": "1.2.4",
-  "type": "module",
-  "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
-  "main": "./dist/libs/components/index.cjs",
-  "module": "./dist/libs/components/index.mjs",
-  "types": "./dist/libs/components/index.d.ts",
-  "style": "./dist/libs/components/liquidui.css",
-  "exports": {
-    ".": {
-      "types": "./dist/libs/components/index.d.ts",
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs",
-      "style": "./dist/libs/components/liquidui.css"
-    },
-    "./core": {
-      "types": "./dist/libs/components/bundles/core.d.ts",
-      "modern": "./dist/libs/components/core.mjs",
-      "import": "./dist/libs/components/core.mjs",
-      "require": "./dist/libs/components/cjs/core.cjs"
-    },
-    "./animations": {
-      "types": "./dist/libs/components/bundles/animations.d.ts",
-      "import": "./dist/libs/components/animations.mjs",
-      "require": "./dist/libs/components/cjs/animations.cjs"
-    },
-    "./advanced": {
-      "types": "./dist/libs/components/bundles/advanced.d.ts",
-      "import": "./dist/libs/components/advanced.mjs",
-      "require": "./dist/libs/components/cjs/advanced.cjs"
-    },
-    "./forms": {
-      "types": "./dist/libs/components/bundles/forms.d.ts",
-      "import": "./dist/libs/components/forms.mjs",
-      "require": "./dist/libs/components/cjs/forms.cjs"
-    },
-    "./layout": {
-      "types": "./dist/libs/components/bundles/layout.d.ts",
-      "import": "./dist/libs/components/layout.mjs",
-      "require": "./dist/libs/components/cjs/layout.cjs"
-    },
-    "./accessibility": {
-      "types": "./dist/libs/components/bundles/accessibility.d.ts",
-      "import": "./dist/libs/components/accessibility.mjs",
-      "require": "./dist/libs/components/cjs/accessibility.cjs"
-    },
-    "./feedback": {
-      "types": "./dist/libs/components/bundles/feedback.d.ts",
-      "import": "./dist/libs/components/feedback.mjs",
-      "require": "./dist/libs/components/cjs/feedback.cjs"
-    },
-    "./navigation": {
-      "types": "./dist/libs/components/bundles/navigation.d.ts",
-      "import": "./dist/libs/components/navigation.mjs",
-      "require": "./dist/libs/components/cjs/navigation.cjs"
-    },
-    "./physics": {
-      "types": "./dist/libs/components/bundles/physics.d.ts",
-      "import": "./dist/libs/components/physics.mjs",
-      "require": "./dist/libs/components/cjs/physics.cjs"
-    },
-    "./ssr": {
-      "types": "./dist/libs/components/bundles/ssr.d.ts",
-      "import": "./dist/libs/components/ssr.mjs",
-      "require": "./dist/libs/components/cjs/ssr.cjs"
-    },
-    "./button": {
-      "types": "./dist/libs/components/components/glass-button/index.d.ts",
-      "import": "./dist/libs/components/components/button.mjs",
-      "require": "./dist/libs/components/cjs/components/button.cjs"
-    },
-    "./card": {
-      "types": "./dist/libs/components/components/glass-card/index.d.ts",
-      "import": "./dist/libs/components/components/card.mjs",
-      "require": "./dist/libs/components/cjs/components/card.cjs"
-    },
-    "./input": {
-      "types": "./dist/libs/components/components/glass-input/index.d.ts",
-      "import": "./dist/libs/components/components/input.mjs",
-      "require": "./dist/libs/components/cjs/components/input.cjs"
-    },
-    "./modal": {
-      "types": "./dist/libs/components/components/glass-modal/index.d.ts",
-      "import": "./dist/libs/components/components/modal.mjs",
-      "require": "./dist/libs/components/cjs/components/modal.cjs"
-    },
-    "./tokens": {
-      "types": "./dist/libs/components/tokens/index.d.ts",
-      "import": "./dist/libs/components/tokens.mjs",
-      "require": "./dist/libs/components/cjs/tokens.cjs"
-    },
-    "./context": {
-      "types": "./dist/libs/components/providers/index.d.ts",
-      "import": "./dist/libs/components/providers.mjs",
-      "require": "./dist/libs/components/cjs/providers.cjs"
-    },
-    "./styles": "./dist/libs/components/liquidui.css",
-    "./css": "./dist/libs/components/liquidui.css",
-    "./package.json": "./package.json"
-  },
-  "scripts": {
-    "build": "bun run build:lib",
-    "build:lib": "nx build components && bun run post-build",
-    "build:storybook": "nx build-storybook storybook",
-    "build:css": "nx build:css components",
-    "build:modern": "nx build components --target es2018",
-    "build:watch": "nx build components --watch",
-    "build:all": "nx run-many -t build --parallel=3",
-    "clean": "rm -rf dist",
-    "clean:node": "rm -rf node_modules package-lock.json && bun install",
-    "dev": "nx serve components",
-    "dev:storybook": "nx storybook storybook",
-    "format": "qlty fmt",
-    "lint": "qlty check",
-    "lint:fix": "qlty fmt --fix",
-    "lint:affected": "nx affected -t lint",
-    "post-build": "bun scripts/post-build.ts",
-    "release": "semantic-release",
-    "release:dry": "semantic-release --dry-run",
-    "storybook": "nx storybook storybook",
-    "test": "bun test",
-    "test:ci": "bun test --coverage",
-    "test:affected": "nx affected -t test",
-    "test:e2e": "nx e2e storybook",
-    "test:e2e:ui": "playwright test --ui",
-    "type-check": "nx type-check components",
-    "type-check:strict": "tsc --noEmit --strict --noImplicitAny --strictNullChecks",
-    "graph": "nx graph",
-    "affected:graph": "nx affected:graph",
-    "docs:dev": "nx dev docs",
-    "docs:build": "nx build docs",
-    "docs:preview": "nx preview docs"
-  },
-  "keywords": [
-    "glassmorphism",
-    "liquidui",
-    "liquid-glass",
-    "ui-library",
-    "physics",
-    "content-aware",
-    "magnetic-hover",
-    "spring-animations",
-    "accessibility",
-    "typescript",
-    "react",
-    "webgl",
-    "design-system",
-    "components",
-    "tailwind"
-  ],
   "author": {
-    "name": "Tulio Pinheiro Cunha",
     "email": "contact@tuliocunha.dev",
+    "name": "Tulio Pinheiro Cunha",
     "url": "https://tuliocunha.dev"
   },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tuliopc23/LiqUIdify.git"
-  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not IE 11"
+  ],
   "bugs": {
     "url": "https://github.com/tuliopc23/LiqUIdify/issues"
   },
-  "homepage": "https://liquidify-storybook.vercel.app",
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/tuliopc23"
-  },
-  "files": [
-    "dist/libs/components/**/*.{js,mjs,cjs,d.ts,css}",
-    "README.md",
-    "LICENSE"
-  ],
-  "sideEffects": [
-    "*.css",
-    "src/styles/**"
-  ],
-  "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
-  },
   "dependencies": {
-    "@radix-ui/react-accordion": "^1.2.11",
-    "@radix-ui/react-dialog": "^1.1.14",
-    "@radix-ui/react-radio-group": "^1.3.7",
-    "@radix-ui/react-slot": "^1.2.3",
-    "@sindresorhus/is": "^7.0.2",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.23.11",
-    "knip": "^5.62.0",
-    "lucide-react": "^0.534.0",
-    "tailwind-merge": "^3.3.1",
-    "type-fest": "^4.41.0",
-    "web-vitals": "^5.0.3"
+    "tsc": "^2.0.4"
   },
+  "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
     "@nx/playwright": "^21.3.9",
     "@nx/react": "^21.3.9",
@@ -210,7 +33,6 @@
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.7.0",
-    "axe-core": "^4.10.3",
     "jiti": "2.4.2",
     "lightningcss": "^1.30.1",
     "nx": "21.3.9",
@@ -231,11 +53,177 @@
   "engines": {
     "bun": ">=1.0.0"
   },
-  "browserslist": [
-    "> 0.5%",
-    "last 2 versions",
-    "not dead",
-    "not IE 11"
+  "exports": {
+    ".": {
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs",
+      "style": "./dist/libs/components/liquidui.css",
+      "types": "./dist/libs/components/index.d.ts"
+    },
+    "./accessibility": {
+      "import": "./dist/libs/components/accessibility.mjs",
+      "require": "./dist/libs/components/cjs/accessibility.cjs",
+      "types": "./dist/libs/components/bundles/accessibility.d.ts"
+    },
+    "./advanced": {
+      "import": "./dist/libs/components/advanced.mjs",
+      "require": "./dist/libs/components/cjs/advanced.cjs",
+      "types": "./dist/libs/components/bundles/advanced.d.ts"
+    },
+    "./animations": {
+      "import": "./dist/libs/components/animations.mjs",
+      "require": "./dist/libs/components/cjs/animations.cjs",
+      "types": "./dist/libs/components/bundles/animations.d.ts"
+    },
+    "./button": {
+      "import": "./dist/libs/components/components/button.mjs",
+      "require": "./dist/libs/components/cjs/components/button.cjs",
+      "types": "./dist/libs/components/components/glass-button/index.d.ts"
+    },
+    "./card": {
+      "import": "./dist/libs/components/components/card.mjs",
+      "require": "./dist/libs/components/cjs/components/card.cjs",
+      "types": "./dist/libs/components/components/glass-card/index.d.ts"
+    },
+    "./context": {
+      "import": "./dist/libs/components/providers.mjs",
+      "require": "./dist/libs/components/cjs/providers.cjs",
+      "types": "./dist/libs/components/providers/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/libs/components/core.mjs",
+      "modern": "./dist/libs/components/core.mjs",
+      "require": "./dist/libs/components/cjs/core.cjs",
+      "types": "./dist/libs/components/bundles/core.d.ts"
+    },
+    "./css": "./dist/libs/components/liquidui.css",
+    "./feedback": {
+      "import": "./dist/libs/components/feedback.mjs",
+      "require": "./dist/libs/components/cjs/feedback.cjs",
+      "types": "./dist/libs/components/bundles/feedback.d.ts"
+    },
+    "./forms": {
+      "import": "./dist/libs/components/forms.mjs",
+      "require": "./dist/libs/components/cjs/forms.cjs",
+      "types": "./dist/libs/components/bundles/forms.d.ts"
+    },
+    "./input": {
+      "import": "./dist/libs/components/components/input.mjs",
+      "require": "./dist/libs/components/cjs/components/input.cjs",
+      "types": "./dist/libs/components/components/glass-input/index.d.ts"
+    },
+    "./layout": {
+      "import": "./dist/libs/components/layout.mjs",
+      "require": "./dist/libs/components/cjs/layout.cjs",
+      "types": "./dist/libs/components/bundles/layout.d.ts"
+    },
+    "./modal": {
+      "import": "./dist/libs/components/components/modal.mjs",
+      "require": "./dist/libs/components/cjs/components/modal.cjs",
+      "types": "./dist/libs/components/components/glass-modal/index.d.ts"
+    },
+    "./navigation": {
+      "import": "./dist/libs/components/navigation.mjs",
+      "require": "./dist/libs/components/cjs/navigation.cjs",
+      "types": "./dist/libs/components/bundles/navigation.d.ts"
+    },
+    "./package.json": "./package.json",
+    "./physics": {
+      "import": "./dist/libs/components/physics.mjs",
+      "require": "./dist/libs/components/cjs/physics.cjs",
+      "types": "./dist/libs/components/bundles/physics.d.ts"
+    },
+    "./ssr": {
+      "import": "./dist/libs/components/ssr.mjs",
+      "require": "./dist/libs/components/cjs/ssr.cjs",
+      "types": "./dist/libs/components/bundles/ssr.d.ts"
+    },
+    "./styles": "./dist/libs/components/liquidui.css",
+    "./tokens": {
+      "import": "./dist/libs/components/tokens.mjs",
+      "require": "./dist/libs/components/cjs/tokens.cjs",
+      "types": "./dist/libs/components/tokens/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/libs/components/**/*.{js,mjs,cjs,d.ts,css}",
+    "README.md",
+    "LICENSE"
   ],
-  "nx": {}
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/tuliopc23"
+  },
+  "homepage": "https://liquidify-storybook.vercel.app",
+  "keywords": [
+    "glassmorphism",
+    "liquidui",
+    "liquid-glass",
+    "ui-library",
+    "physics",
+    "content-aware",
+    "magnetic-hover",
+    "spring-animations",
+    "accessibility",
+    "typescript",
+    "react",
+    "webgl",
+    "design-system",
+    "components",
+    "tailwind"
+  ],
+  "license": "MIT",
+  "main": "./dist/libs/components/index.cjs",
+  "module": "./dist/libs/components/index.mjs",
+  "name": "liquidify",
+  "nx": {},
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuliopc23/LiqUIdify.git"
+  },
+  "scripts": {
+    "affected:graph": "nx affected:graph",
+    "build": "bun run build:lib",
+    "build:all": "nx run-many -t build --parallel=3",
+    "build:css": "nx build:css components",
+    "build:lib": "nx build components && bun run post-build",
+    "build:modern": "nx build components --target es2018",
+    "build:storybook": "nx build-storybook storybook",
+    "build:watch": "nx build components --watch",
+    "clean": "rm -rf dist",
+    "clean:node": "rm -rf node_modules package-lock.json && bun install",
+    "dev": "nx serve components",
+    "dev:storybook": "nx storybook storybook",
+    "docs:build": "nx build docs",
+    "docs:dev": "nx dev docs",
+    "docs:preview": "nx preview docs",
+    "format": "qlty fmt -a",
+    "graph": "nx graph",
+    "lint": "qlty check  -a",
+    "lint:affected": "nx affected -t lint",
+    "lint:fix": "qlty fmt --fix",
+    "post-build": "bun scripts/post-build.ts",
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
+    "storybook": "nx storybook storybook",
+    "test": "bun test",
+    "test:affected": "nx affected -t test",
+    "test:ci": "bun test --coverage",
+    "test:e2e": "nx e2e storybook",
+    "test:e2e:ui": "playwright test --ui",
+    "type-check": "nx type-check components",
+    "type-check:strict": "tsc --noEmit --strict --noImplicitAny --strictNullChecks"
+  },
+  "sideEffects": [
+    "*.css",
+    "src/styles/**"
+  ],
+  "style": "./dist/libs/components/liquidui.css",
+  "type": "module",
+  "types": "./dist/libs/components/index.d.ts",
+  "version": "1.2.4"
 }

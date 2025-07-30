@@ -178,21 +178,5 @@
       }
     }
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "build:css",
-          "test",
-          "test:e2e",
-          "lint",
-          "storybook",
-          "build-storybook"
-        ]
-      }
-    }
-  },
   "nxCloudId": "6889a98850b6087444aca078"
 }

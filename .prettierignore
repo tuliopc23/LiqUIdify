@@ -3,3 +3,5 @@ dist
 storybook-static
 coverage
 *.md
+/.nx/cache
+/.nx/workspace-data

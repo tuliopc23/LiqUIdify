@@ -1,3 +1,0 @@
-/**
- * Hydration Detector exports
- */

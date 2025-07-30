@@ -13,58 +13,6 @@
 # Or for a full reference, visit https://qlty.sh/d/qlty-toml
 config_version = "0"
 
-# Include patterns to ensure qlty only checks source files and documentation
-include_patterns = [
-  # Source code files
-  "**/*.ts",
-  "**/*.tsx",
-  "**/*.js",
-  "**/*.jsx",
-  "**/*.mts",
-  "**/*.cts",
-  "**/*.mjs",
-  "**/*.cjs",
-  "**/*.vue",
-  "**/*.svelte",
-  # Configuration files
-  "**/*.json",
-  "**/*.yaml",
-  "**/*.yml",
-  "**/*.toml",
-  "**/*.config.*",
-  # Documentation files
-  "**/*.md",
-  "**/*.mdx",
-  "**/*.rst",
-  # Style files
-  "**/*.css",
-  "**/*.scss",
-  "**/*.sass",
-  "**/*.less",
-  # Shell scripts
-  "**/*.sh",
-  "**/*.bash",
-  "**/*.zsh",
-  # Environment files
-  "**/.env*",
-  # Docker files
-  "**/Dockerfile*",
-  "**/.dockerignore",
-  # Git files
-  "**/.gitignore",
-  "**/.gitmodules",
-  # Other important files
-  "**/package.json",
-  "**/tsconfig*.json",
-  "**/vite.config.*",
-  "**/tailwind.config.*",
-  "**/biome.json",
-  "**/LICENSE",
-  "**/README*",
-  "**/CHANGELOG*",
-]
-
-# Comprehensive exclusion patterns for build artifacts, caches, and problematic files
 exclude_patterns = [
   "*_min.*",
   "*-min.*",
@@ -92,59 +40,6 @@ exclude_patterns = [
   "**/templates/**",
   "**/testdata/**",
   "**/vendor/**",
-  # Additional excludes for generated/build files that may cause EOF errors
-  "**/.turbo/**",
-  "**/.next/**",
-  "**/.nuxt/**",
-  "**/.output/**",
-  "**/.vite/**",
-  "**/.rollup.cache/**",
-  "**/.parcel-cache/**",
-  "**/storybook-static/**",
-  "**/coverage/**",
-  "**/.nyc_output/**",
-  "**/lib/**/*.js",
-  "**/lib/**/*.js.map",
-  "**/esm/**/*.js",
-  "**/esm/**/*.js.map",
-  "**/cjs/**/*.js",
-  "**/cjs/**/*.js.map",
-  "**/*.log",
-  "**/.cache/**",
-  "**/.tmp/**",
-  "**/.temp/**",
-  "**/npm-debug.log*",
-  "**/yarn-debug.log*",
-  "**/yarn-error.log*",
-  # NX specific cache and data files
-  "**/.nx/cache/**",
-  "**/.nx/workspace-data/**",
-  # Vite timestamp files that can cause EOF errors
-  "**/vite.config.*.timestamp*",
-  "**/vitest.config.*.timestamp*",
-  # IDE and OS files
-  "**/.vscode/**",
-  "**/.idea/**",
-  "**/.DS_Store",
-  "**/Thumbs.db",
-  "**/*.swp",
-  "**/*.swo",
-  # Package lockfiles and archives that might cause issues
-  "**/bun.lock",
-  "**/package-lock.json",
-  "**/yarn.lock",
-  "**/pnpm-lock.yaml",
-  "**/*.tgz",
-  "**/*.tar.gz",
-  # Deployment and cloud files
-  "**/.vercel/**",
-  "**/.netlify/**",
-  # Additional temporary and cache patterns
-  "**/.pnpm-cache/**",
-  "**/.pnpm-store/**",
-  "**/tsconfig.tsbuildinfo",
-  # Static export files that might be generated
-  "**/static-export/**",
 ]
 
 test_patterns = [
@@ -165,102 +60,6 @@ mode = "comment"
 name = "default"
 default = true
 
-
-[[plugin]]
-name = "biome"
-# Configure Biome for TypeScript and JSX parsing with proper file associations
-include_patterns = [
-  # TypeScript files
-  "**/*.ts",
-  "**/*.tsx",
-  "**/*.mts",
-  "**/*.cts",
-  # JavaScript files (including modern extensions)
-  "**/*.js",
-  "**/*.jsx",
-  "**/*.mjs",
-  "**/*.cjs",
-  # Configuration files that should be linted
-  "**/vite.config.ts",
-  "**/tailwind.config.ts",
-  "**/*.config.ts",
-  "**/*.config.js",
-]
-# Exclude files that might cause parsing errors or EOF issues
-exclude_patterns = [
-  # TypeScript declaration files
-  "**/*.d.ts",
-  # Minified files
-  "**/*.min.js",
-  "**/*.min.ts",
-  "*_min.*",
-  "*-min.*",
-  "*.min.*",
-  # Build and distribution directories
-  "**/dist/**",
-  "**/build/**",
-  "**/lib/**/*.js",
-  "**/lib/**/*.js.map",
-  "**/esm/**/*.js",
-  "**/esm/**/*.js.map",
-  "**/cjs/**/*.js",
-  "**/cjs/**/*.js.map",
-  "**/storybook-static/**",
-  # Package managers and caches
-  "**/node_modules/**",
-  "**/.yarn/**",
-  "**/.pnpm-cache/**",
-  "**/.pnpm-store/**",
-  # Build tool caches and outputs
-  "**/.turbo/**",
-  "**/.next/**",
-  "**/.nuxt/**",
-  "**/.output/**",
-  "**/.vite/**",
-  "**/.rollup.cache/**",
-  "**/.parcel-cache/**",
-  "**/.cache/**",
-  "**/.tmp/**",
-  "**/.temp/**",
-  "**/.nx/cache/**",
-  "**/.nx/workspace-data/**",
-  # Testing and coverage
-  "**/coverage/**",
-  "**/.nyc_output/**",
-  # Generated files that may have EOF issues
-  "**/generated/**",
-  "**/assets/**",
-  "**/templates/**",
-  # Timestamp files from Vite
-  "**/vite.config.*.timestamp*",
-  "**/vitest.config.*.timestamp*",
-  # IDE and OS files
-  "**/.vscode/**",
-  "**/.idea/**",
-  "**/.DS_Store",
-  "**/Thumbs.db",
-  "**/*.swp",
-  "**/*.swo",
-  # Log files
-  "**/*.log",
-  "**/npm-debug.log*",
-  "**/yarn-debug.log*",
-  "**/yarn-error.log*",
-  # Package lockfiles and archives that might cause issues
-  "**/bun.lock",
-  "**/package-lock.json",
-  "**/yarn.lock",
-  "**/pnpm-lock.yaml",
-  "**/*.tgz",
-  "**/*.tar.gz",
-  # Deployment
-  "**/.vercel/**",
-  "**/.netlify/**",
-  # Build info files
-  "**/tsconfig.tsbuildinfo",
-  # Static export files that might be generated
-  "**/static-export/**",
-]
 
 [[plugin]]
 name = "checkov"
@@ -284,45 +83,22 @@ name = "ripgrep"
 mode = "comment"
 
 [[plugin]]
-name = "trufflehog"
-
-[[plugin]]
-name = "shellcheck"
-
-[[plugin]]
 name = "stylelint"
+
+[[plugin]]
+name = "trivy"
+drivers = [
+  "config",
+]
+
+[[plugin]]
+name = "trufflehog"
 
 [[plugin]]
 name = "yamllint"
 
 [[plugin]]
-name = "stringslint"
+name = "knip"
 
 [[plugin]]
 name = "oxc"
-mode = "disabled"
-
-[[plugin]]
-name = "knip"
-config_file = ".qlty/configs/knip.json"
-mode = "comment"
-# Align with biome file patterns
-include_patterns = [
-  "**/*.ts",
-  "**/*.tsx",
-  "**/*.js",
-  "**/*.jsx",
-  "**/*.mts",
-  "**/*.cts",
-  "**/*.mjs",
-  "**/*.cjs"
-]
-exclude_patterns = [
-  "**/*.d.ts",
-  "**/dist/**",
-  "**/build/**",
-  "**/node_modules/**",
-  "**/.turbo/**",
-  "**/.next/**",
-  "**/coverage/**"
-]
