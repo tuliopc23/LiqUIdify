@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "LiqUIdify"
   text: "Glassmorphism React Components"
-  tagline: "Production-ready UI library with physics-based interactions and stunning glass effects"
+  tagline: "Production-ready UI library with 52+ components, WCAG 2.1 AA compliant, and tree-shakeable architecture"
   image:
     src: /logo.svg
     alt: LiqUIdify
@@ -21,50 +21,57 @@ hero:
 
 features:
   - icon: 🎨
-    title: Glassmorphism Design
-    details: Beautiful frosted glass effects with customizable blur, opacity, and color overlays
-  - icon: ⚛️
-    title: Physics-Based Interactions
-    details: Realistic spring animations and magnetic hover effects powered by Framer Motion
-  - icon: 🚀
-    title: Production Ready
-    details: TypeScript-first, tree-shakeable, with comprehensive testing and documentation
+    title: 52+ Glassmorphism Components
+    details: Beautiful frosted glass effects with customizable blur, opacity, and saturation
+  - icon: ⚡
+    title: Optimized Performance
+    details: Core bundle < 30KB, full bundle < 60KB with tree-shaking support
   - icon: ♿
-    title: Accessibility First
-    details: WCAG 2.1 AA compliant components with full keyboard navigation and screen reader support
+    title: WCAG 2.1 AA Compliant
+    details: Full keyboard navigation, screen reader support, and focus management
   - icon: 📦
     title: Modular Architecture
-    details: Import only what you need with optimized bundle splitting and lazy loading
+    details: Multiple entry points - core, forms, navigation, feedback bundles
+  - icon: 🔧
+    title: TypeScript First
+    details: Complete type safety with IntelliSense and comprehensive API docs
   - icon: 🎯
-    title: Developer Experience
-    details: Intuitive API, comprehensive TypeScript support, and extensive documentation
+    title: Framework Agnostic
+    details: Works with Next.js, Remix, Vite, Create React App, and more
 ---
 
 ## Quick Installation
 
 ```bash
-# Using bun (recommended)
-bun add liquidify
-
 # Using npm
-npm install liquidify
+npm install @liquidify/components
 
 # Using yarn
-yarn add liquidify
+yarn add @liquidify/components
+
+# Using pnpm
+pnpm add @liquidify/components
+
+# Using bun
+bun add @liquidify/components
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassButton, GlassCard } from "liquidify";
-import "liquidify/styles";
+import { GlassButton, GlassCard, UnifiedGlassProvider } from '@liquidify/components';
+import '@liquidify/components/css';
 
 function App() {
   return (
-    <GlassCard>
-      <h1>Welcome to LiqUIdify</h1>
-      <GlassButton variant="primary">Get Started</GlassButton>
-    </GlassCard>
+    <UnifiedGlassProvider>
+      <GlassCard variant="elevated">
+        <h1>Welcome to LiqUIdify</h1>
+        <GlassButton variant="primary" size="large">
+          Get Started
+        </GlassButton>
+      </GlassCard>
+    </UnifiedGlassProvider>
   );
 }
 ```
@@ -75,11 +82,11 @@ LiqUIdify combines the elegance of glassmorphism design with the power of modern
 
 ### Key Features
 
-- **40+ Components**: From basic buttons to complex data tables
-- **Physics Engine**: Realistic animations and interactions
-- **Theme System**: Full customization with CSS variables
-- **TypeScript**: Complete type safety and IntelliSense
-- **Tree Shaking**: Optimal bundle size with modular imports
-- **Dark Mode**: Built-in support for light and dark themes
+- **52+ Components**: Complete UI toolkit with glassmorphism design
+- **Bundle Sizes**: Core < 30KB, Full < 60KB with tree-shaking
+- **Accessibility**: WCAG 2.1 AA compliant with aria-live regions
+- **TypeScript**: Full type safety and IntelliSense support
+- **Performance**: 60fps animations with GPU acceleration
+- **Testing**: 100% coverage with unit, integration, and E2E tests
 
 Ready to build something amazing? [Get started →](/guide/)

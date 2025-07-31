@@ -1,2 +1,2 @@
-export * from './branded';
-export * from './component-props';
+export * from "./branded";
+export * from "./component-props";

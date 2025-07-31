@@ -1,28 +1,30 @@
 # 🌊 LiqUIdify
 
-[![npm version](https://badge.fury.io/js/liquidify.svg)](https://badge.fury.io/js/liquidify)
+[![npm version](https://img.shields.io/npm/v/@liquidify/components)](https://www.npmjs.com/package/@liquidify/components)
+[![npm downloads](https://img.shields.io/npm/dm/@liquidify/components)](https://www.npmjs.com/package/@liquidify/components)
+[![Build Status](https://github.com/liquidify/components/actions/workflows/ci.yml/badge.svg)](https://github.com/liquidify/components/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/liquidify)](https://bundlephobia.com/package/liquidify)
-[![Performance](https://img.shields.io/badge/Performance-S--Tier-brightgreen)](https://github.com/tuliopc23/LiqUIdify)
-[![Storybook](https://img.shields.io/badge/Storybook-52%20Components-ff4785)](https://liquidify-storybook.vercel.app)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@liquidify/components)](https://bundlephobia.com/package/@liquidify/components)
+[![WCAG 2.1 AA](https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-green)](https://www.w3.org/WAI/WCAG21/quickref/)
+[![Storybook](https://img.shields.io/badge/Storybook-52%2B%20Components-ff4785)](https://storybook.liquidify.dev)
 
-> 🚀 **Production-ready React component library** with glassmorphism design and physics-based interactions. 52+ components, TypeScript-first, accessibility-ready, 100% Storybook coverage.
+> 🚀 **Production-ready React component library** with glassmorphism design. 52+ components, TypeScript-first, WCAG 2.1 AA compliant, tree-shakeable, and framework agnostic.
 
 ## ✨ Features
 
 - 🎨 **52+ Glassmorphism Components** - Beautiful, modern UI components with glass effects
-- ⚡ **S-Tier Performance** - Bundle size < 30KB, 60fps animations
-- 🔧 **TypeScript First** - Full type safety and excellent DX
-- ♿ **Accessibility Ready** - WCAG 2.1 AA compliant with screen reader support
-- 🎭 **Physics-Based Animations** - Smooth, natural interactions with Framer Motion
-- 🌙 **Dark Mode Support** - Built-in theme switching
-- 📱 **Responsive Design** - Mobile-first approach
-- 🔄 **SSR Compatible** - Works with Next.js, Remix, and other SSR frameworks
-- 🎯 **Tree Shakeable** - Import only what you need
-- 📦 **Modular Architecture** - Use individual components or complete bundles
-- 📚 **100% Storybook Coverage** - Comprehensive documentation and examples
-- 🎮 **Interactive Playground** - Live code editing and component testing
+- ⚡ **Optimized Performance** - Core bundle < 30KB, full bundle < 60KB
+- 🔧 **TypeScript First** - Full type safety and IntelliSense support
+- ♿ **WCAG 2.1 AA Compliant** - Keyboard navigation, screen reader support, focus management
+- 🎯 **Tree Shakeable** - Import only what you need with modular architecture
+- 📱 **Responsive & Adaptive** - Mobile-first with touch gesture support
+- 🌙 **Theme System** - Dark mode, custom themes, CSS variables
+- 🔄 **Framework Agnostic** - Works with Next.js, Remix, Vite, CRA
+- 📦 **Multiple Entry Points** - Core, forms, navigation, feedback bundles
+- 🎭 **Smooth Animations** - 60fps with GPU acceleration
+- 🛡️ **Enterprise Ready** - Security audited, fully tested
+- 📚 **Comprehensive Docs** - Storybook, API docs, migration guides
 
 ## 🚀 Quick Start
 
@@ -30,37 +32,35 @@
 
 ```bash
 # npm
-npm install liquidify
+npm install @liquidify/components
 
 # yarn
-yarn add liquidify
+yarn add @liquidify/components
 
 # pnpm
-pnpm add liquidify
+pnpm add @liquidify/components
 
 # bun
-bun add liquidify
+bun add @liquidify/components
 ```
 
 ### Basic Usage
 
 ```tsx
-import { GlassButton, GlassCard, ThemeProvider } from "liquidify";
-import "liquidify/styles";
+import { GlassButton, GlassCard, UnifiedGlassProvider } from '@liquidify/components';
+import '@liquidify/components/css';
 
 function App() {
   return (
-    <ThemeProvider>
-      <GlassCard className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Welcome to LiqUIdify</h1>
-        <p className="text-gray-600 mb-4">
-          Beautiful glassmorphism components for modern React apps.
-        </p>
-        <GlassButton variant="primary" size="lg">
+    <UnifiedGlassProvider>
+      <GlassCard variant="elevated">
+        <h1>Welcome to LiqUIdify</h1>
+        <p>Beautiful glassmorphism components for modern React apps.</p>
+        <GlassButton variant="primary" size="large">
           Get Started
         </GlassButton>
       </GlassCard>
-    </ThemeProvider>
+    </UnifiedGlassProvider>
   );
 }
 ```
@@ -68,23 +68,33 @@ function App() {
 ### Modular Imports
 
 ```tsx
-// Import specific components
-import { GlassButton } from "liquidify/button";
-import { GlassCard } from "liquidify/card";
+// Import specific components for smaller bundle size
+import { GlassButton } from '@liquidify/components/button';
+import { GlassCard } from '@liquidify/components/card';
+import { GlassModal } from '@liquidify/components/modal';
 
-// Import component bundles
-import { CoreComponents } from "liquidify/core";
-import { FormComponents } from "liquidify/forms";
-import { AnimationComponents } from "liquidify/animations";
+// Import component bundles by category
+import * as Core from '@liquidify/components/core';
+import * as Forms from '@liquidify/components/forms';
+import * as Navigation from '@liquidify/components/navigation';
+import * as Feedback from '@liquidify/components/feedback';
+
+// Import just the CSS you need
+import '@liquidify/components/css'; // All styles
+// OR import specific style bundles
+import '@liquidify/components/styles/core.css';
+import '@liquidify/components/styles/forms.css';
 ```
 
 ## 📚 Documentation
 
-- 📖 **[Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground with 52 components
-- 📋 **[API Reference](./docs/API_REFERENCE.md)** - Complete component documentation and props
-- 🎯 **[Usage Examples](./docs/USAGE_EXAMPLES.md)** - Real-world implementation patterns and demos
-- 🚀 **[Framework Guides](./docs/FRAMEWORK_GUIDES.md)** - Integration with Next.js, Vite, Remix, and more
-- 🎨 **[Design System](https://liquidify-storybook.vercel.app/?path=/docs/design-system-overview--docs)** - Design tokens, principles, and guidelines
+- 📖 **[Storybook](https://storybook.liquidify.dev)** - Live component playground with 52+ interactive examples
+- 📘 **[Documentation Site](https://docs.liquidify.dev)** - Comprehensive guides and API reference
+- 🚀 **[Getting Started](https://docs.liquidify.dev/getting-started)** - Quick setup and basic usage
+- ♿ **[Accessibility Guide](./docs/ACCESSIBILITY_GUIDE.md)** - WCAG compliance and best practices
+- 📊 **[Performance Guide](./docs/PERFORMANCE_GUIDE.md)** - Optimization tips and benchmarks
+- 🔄 **[Migration Guide](./docs/MIGRATION_GUIDE.md)** - Migrate from other UI libraries
+- 🛡️ **[Security](./SECURITY.md)** - Security policies and reporting
 
 ## 🎨 Component Categories
 

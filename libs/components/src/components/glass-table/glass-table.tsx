@@ -13,11 +13,7 @@ interface GlassTableProps<T> {
   className?: string;
 }
 
-const GlassTable = <T,>({
-  data,
-  columns,
-  className,
-}: GlassTableProps<T>) => {
+const GlassTable = <T,>({ data, columns, className }: GlassTableProps<T>) => {
   return (
     <div className={`overflow-x-auto ${className || ""}`}>
       <table className="w-full">

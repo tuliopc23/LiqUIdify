@@ -1,1 +1,7 @@
-export { GlassSpinner, PulseSpinner, DotsSpinner, RingSpinner, WaveSpinner } from "./glass-spinner";
+export {
+  GlassSpinner,
+  PulseSpinner,
+  DotsSpinner,
+  RingSpinner,
+  WaveSpinner,
+} from "./glass-spinner";

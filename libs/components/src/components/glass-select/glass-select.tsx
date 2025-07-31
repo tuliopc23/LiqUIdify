@@ -1,7 +1,12 @@
 import { Check, ChevronDown, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
-import { cn, focusRing, getGlassClass, microInteraction } from "@/core/utils/classname";
+import {
+  cn,
+  focusRing,
+  getGlassClass,
+  microInteraction,
+} from "@/core/utils/classname";
 
 export interface GlassSelectOption {
   value: string;
@@ -59,7 +64,9 @@ export const GlassSelect = React.memo(
       // Update selected values when value prop changes
       useEffect(() => {
         if (value !== undefined) {
-          setSelectedValues(Array.isArray(value) ? value : value ? [value] : []);
+          setSelectedValues(
+            Array.isArray(value) ? value : value ? [value] : [],
+          );
         }
       }, [value]);
 
@@ -157,15 +164,22 @@ export const GlassSelect = React.memo(
       };
 
       // Handle remove selection (for multi-select)
-      const handleRemoveSelection = (valueToRemove: string, e: React.MouseEvent) => {
+      const handleRemoveSelection = (
+        valueToRemove: string,
+        e: React.MouseEvent,
+      ) => {
         e.stopPropagation();
-        const newSelectedValues = selectedValues.filter((v) => v !== valueToRemove);
+        const newSelectedValues = selectedValues.filter(
+          (v) => v !== valueToRemove,
+        );
         setSelectedValues(newSelectedValues);
         onChange?.(multiple ? newSelectedValues : newSelectedValues[0] || "");
       };
 
       // Get selected options for display
-      const selectedOptions = options.filter((opt) => selectedValues.includes(opt.value));
+      const selectedOptions = options.filter((opt) =>
+        selectedValues.includes(opt.value),
+      );
 
       // Focus input when dropdown opens
       useEffect(() => {
@@ -237,7 +251,9 @@ export const GlassSelect = React.memo(
                   {selectedOptions[0].label}
                 </span>
               ) : (
-                <span className="text-gray-500 dark:text-gray-400">{placeholder}</span>
+                <span className="text-gray-500 dark:text-gray-400">
+                  {placeholder}
+                </span>
               )}
 
               {/* Search input for searchable variant */}
@@ -293,7 +309,9 @@ export const GlassSelect = React.memo(
                     <button
                       key={option.value}
                       type="button"
-                      onClick={() => !option.disabled && handleSelect(option.value)}
+                      onClick={() =>
+                        !option.disabled && handleSelect(option.value)
+                      }
                       disabled={option.disabled}
                       className={cn(
                         "w-full px-4 py-3 text-left transition-colors duration-200",

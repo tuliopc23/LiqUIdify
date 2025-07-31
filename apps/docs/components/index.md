@@ -1,6 +1,6 @@
 # Components Overview
 
-LiqUIdify provides over 40 production-ready React components, each designed with glassmorphism aesthetics and accessibility in mind.
+LiqUIdify provides 52+ production-ready React components, each designed with glassmorphism aesthetics and WCAG 2.1 AA accessibility compliance.
 
 ## Component Categories
 
@@ -115,13 +115,14 @@ All LiqUIdify components share these common features:
 4. Build amazing interfaces!
 
 ```tsx
-import { GlassButton, GlassCard } from "liquidify";
+import { GlassButton, GlassCard } from '@liquidify/components';
+import '@liquidify/components/css';
 
 function MyComponent() {
   return (
-    <GlassCard>
+    <GlassCard variant="elevated">
       <h2>Welcome to LiqUIdify</h2>
-      <GlassButton>Click me</GlassButton>
+      <GlassButton variant="primary">Click me</GlassButton>
     </GlassCard>
   );
 }

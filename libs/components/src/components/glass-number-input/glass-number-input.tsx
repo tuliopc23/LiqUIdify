@@ -50,7 +50,8 @@ const inputVariants = cva({
     },
     error: {
       true: "border-red-400/50 focus:border-red-500",
-      false: "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
+      false:
+        "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
     },
   },
   defaultVariants: {
@@ -87,8 +88,11 @@ const buttonVariants = cva({
 });
 
 interface GlassNumberInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "onChange">,
-  VariantProps<typeof numberInputVariants> {
+  extends Omit<
+      React.InputHTMLAttributes<HTMLInputElement>,
+      "type" | "onChange"
+    >,
+    VariantProps<typeof numberInputVariants> {
   value?: number;
   defaultValue?: number;
   onChange?: (value: number | undefined) => void;
@@ -285,8 +289,10 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     };
 
     // Check if increment/decrement should be disabled
-    const canIncrement = !disabled && (max === undefined || (currentValue || 0) < max);
-    const canDecrement = !disabled && (min === undefined || (currentValue || 0) > min);
+    const canIncrement =
+      !disabled && (max === undefined || (currentValue || 0) < max);
+    const canDecrement =
+      !disabled && (min === undefined || (currentValue || 0) > min);
 
     // Combine refs
     const setRefs = useCallback(
@@ -370,9 +376,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
                 type="button"
                 onClick={handleDecrement}
                 disabled={!canDecrement}
-                className={cn(
-                  buttonVariants({ size, position: "left" }),
-                )}
+                className={cn(buttonVariants({ size, position: "left" }))}
                 aria-label="Decrease value"
                 tabIndex={-1}
               >
@@ -383,9 +387,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
                 type="button"
                 onClick={handleIncrement}
                 disabled={!canIncrement}
-                className={cn(
-                  buttonVariants({ size, position: "right" }),
-                )}
+                className={cn(buttonVariants({ size, position: "right" }))}
                 aria-label="Increase value"
                 tabIndex={-1}
               >

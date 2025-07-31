@@ -1,0 +1,370 @@
+name: Security Audit
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: "0 9 * * 1"
+  push:
+    branches: [main]
+    paths:
+      - "package.json"
+      - "bun.lockb"
+      - "yarn.lock"
+      - "package-lock.json"
+  pull_request:
+    paths:
+      - "package.json"
+      - "bun.lockb"
+      - "yarn.lock"
+      - "package-lock.json"
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: "20.x"
+  BUN_VERSION: "latest"
+
+permissions:
+  contents: read
+  security-events: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  dependency-audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run Bun audit
+        id: bun_audit
+        run: |
+          bun audit 2>&1 | tee audit-report.txt
+          echo "audit_output<<EOF" >> $GITHUB_OUTPUT
+          cat audit-report.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Run npm audit
+        id: npm_audit
+        run: |
+          npm audit --production 2>&1 | tee npm-audit-report.txt
+          echo "npm_audit_output<<EOF" >> $GITHUB_OUTPUT
+          cat npm-audit-report.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Create audit summary
+        if: failure() || steps.bun_audit.outcome == 'failure' || steps.npm_audit.outcome == 'failure'
+        run: |
+          echo "## Security Audit Summary" > audit-summary.md
+          echo "" >> audit-summary.md
+          echo "### Bun Audit Results" >> audit-summary.md
+          echo '```' >> audit-summary.md
+          cat audit-report.txt >> audit-summary.md
+          echo '```' >> audit-summary.md
+          echo "" >> audit-summary.md
+          echo "### NPM Audit Results" >> audit-summary.md
+          echo '```' >> audit-summary.md
+          cat npm-audit-report.txt >> audit-summary.md
+          echo '```' >> audit-summary.md
+
+      - name: Upload audit reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-reports
+          path: |
+            audit-report.txt
+            npm-audit-report.txt
+            audit-summary.md
+
+  snyk-scan:
+    name: Snyk Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high --json-file-output=snyk-report.json
+        continue-on-error: true
+
+      - name: Upload Snyk report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: snyk-report
+          path: snyk-report.json
+
+      - name: Monitor project with Snyk
+        uses: snyk/actions/node@master
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
+
+  codeql-analysis:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["javascript", "typescript"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: +security-extended,security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
+
+  license-check:
+    name: License Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Check licenses
+        run: |
+          bunx license-checker --production --summary --out licenses-summary.txt
+          bunx license-checker --production --csv --out licenses.csv
+
+          # Check for problematic licenses
+          PROBLEMATIC_LICENSES="GPL|AGPL|LGPL|SSPL|CC-BY-NC"
+          if grep -E "$PROBLEMATIC_LICENSES" licenses.csv; then
+            echo "❌ Found packages with problematic licenses!"
+            exit 1
+          else
+            echo "✅ All licenses are compatible"
+          fi
+
+      - name: Upload license report
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-report
+          path: |
+            licenses-summary.txt
+            licenses.csv
+
+  trivy-scan:
+    name: Trivy Container Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          trivy-config: trivy.yaml
+          format: "sarif"
+          output: "trivy-results.sarif"
+          severity: "CRITICAL,HIGH"
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-results.sarif"
+
+  secrets-scan:
+    name: Secrets Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: TruffleHog OSS
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
+
+  supply-chain-security:
+    name: Supply Chain Security
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          format: spdx-json
+          output-file: sbom.spdx.json
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.spdx.json
+
+      - name: SBOM upload to Dependency Track
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "Would upload SBOM to Dependency Track here"
+          # curl -X POST ${{ secrets.DEPENDENCY_TRACK_URL }}/api/v1/bom \
+          #   -H "X-Api-Key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}" \
+          #   -F "bom=@sbom.spdx.json"
+
+  create-security-report:
+    name: Create Security Report
+    needs:
+      [
+        dependency-audit,
+        snyk-scan,
+        codeql-analysis,
+        license-check,
+        trivy-scan,
+        secrets-scan,
+      ]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create consolidated security report
+        run: |
+          echo "# Security Audit Report" > security-report.md
+          echo "Date: $(date)" >> security-report.md
+          echo "" >> security-report.md
+
+          # Add audit results if they exist
+          if [ -f audit-reports/audit-summary.md ]; then
+            cat audit-reports/audit-summary.md >> security-report.md
+            echo "" >> security-report.md
+          fi
+
+          # Add license summary
+          if [ -f license-report/licenses-summary.txt ]; then
+            echo "## License Compliance" >> security-report.md
+            echo '```' >> security-report.md
+            cat license-report/licenses-summary.txt >> security-report.md
+            echo '```' >> security-report.md
+            echo "" >> security-report.md
+          fi
+
+          # Add job status
+          echo "## Scan Results" >> security-report.md
+          echo "- Dependency Audit: ${{ needs.dependency-audit.result }}" >> security-report.md
+          echo "- Snyk Scan: ${{ needs.snyk-scan.result }}" >> security-report.md
+          echo "- CodeQL Analysis: ${{ needs.codeql-analysis.result }}" >> security-report.md
+          echo "- License Check: ${{ needs.license-check.result }}" >> security-report.md
+          echo "- Trivy Scan: ${{ needs.trivy-scan.result }}" >> security-report.md
+          echo "- Secrets Scan: ${{ needs.secrets-scan.result }}" >> security-report.md
+
+      - name: Upload security report
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-report
+          path: security-report.md
+
+      - name: Comment PR with security summary
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('security-report.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🔒 Security Audit Summary\n\n${report}`
+            })
+
+      - name: Create issue for critical vulnerabilities
+        if: |
+          github.ref == 'refs/heads/main' && 
+          (needs.dependency-audit.result == 'failure' || 
+           needs.snyk-scan.result == 'failure' ||
+           needs.secrets-scan.result == 'failure')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '🚨 Critical Security Vulnerabilities Detected';
+            const body = `Critical security vulnerabilities were detected in the latest security audit.
+
+            **Workflow Run:** ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}
+
+            Please review the security report and address the vulnerabilities immediately.
+
+            cc @${context.repo.owner}/security-team`;
+
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['security', 'critical', 'automated']
+            });
+
+  notify-security-status:
+    name: Notify Security Status
+    needs: [create-security-report]
+    runs-on: ubuntu-latest
+    if: always() && github.ref == 'refs/heads/main'
+    steps:
+      - name: Send Discord notification
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          message: |
+            🔒 **Security Audit Complete**
+
+            Repository: ${{ github.repository }}
+            Status: ${{ needs.create-security-report.result }}
+            Workflow: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Please review the security report for details.

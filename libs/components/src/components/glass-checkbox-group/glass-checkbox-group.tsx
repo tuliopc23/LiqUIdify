@@ -1,4 +1,11 @@
-import { forwardRef, useCallback, useId, useState, useRef, useEffect } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useId,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
 import type React from "react";
 import { cn } from "@/core/utils/classname";
 import {
@@ -7,13 +14,13 @@ import {
 } from "../../lib/variant-system";
 import { AccessibilityManager } from "@/core/accessibility-manager";
 import { useGlassStateTransitions } from "@/hooks/use-glass-animations";
-import { 
-  generateGlassClasses, 
-  generateGlassVariables 
+import {
+  generateGlassClasses,
+  generateGlassVariables,
 } from "@/core/glass/unified-glass-system";
-import type { 
+import type {
   ComponentPropsBuilder,
-  FormGlassProps 
+  FormGlassProps,
 } from "@/core/base-component";
 
 const checkboxGroupVariants = cva({
@@ -77,12 +84,22 @@ export interface CheckboxOption {
 
 interface GlassCheckboxGroupProps
   extends Omit<ComponentPropsBuilder<HTMLDivElement>, "onChange">,
-  VariantProps<typeof checkboxGroupVariants>,
-  Pick<FormGlassProps, 
-    "glassEffect" | "animation" | "disableAnimations" | "variant" | "size" |
-    "name" | "required" | "error" | "errorMessage" | "helperText" | "label" |
-    "disabled"
-  > {
+    VariantProps<typeof checkboxGroupVariants>,
+    Pick<
+      FormGlassProps,
+      | "glassEffect"
+      | "animation"
+      | "disableAnimations"
+      | "variant"
+      | "size"
+      | "name"
+      | "required"
+      | "error"
+      | "errorMessage"
+      | "helperText"
+      | "label"
+      | "disabled"
+    > {
   /** Checkbox options to display */
   options: Array<CheckboxOption>;
   /** Controlled value */

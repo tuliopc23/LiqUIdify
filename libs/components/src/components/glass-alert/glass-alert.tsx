@@ -24,7 +24,7 @@ const GlassAlert = React.forwardRef<HTMLDivElement, GlassAlertProps>(
           "glass-effect rounded-lg border p-4",
           "backdrop-blur-md backdrop-saturate-150",
           variantStyles[variant],
-          className
+          className,
         )}
         {...props}
       >
@@ -32,7 +32,7 @@ const GlassAlert = React.forwardRef<HTMLDivElement, GlassAlertProps>(
         <div className="text-sm">{children}</div>
       </div>
     );
-  }
+  },
 );
 
 GlassAlert.displayName = "GlassAlert";

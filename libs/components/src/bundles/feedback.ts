@@ -20,15 +20,15 @@ export { NotificationCenter } from "../components/glass-notification";
 
 // Skeleton patterns
 export {
-    SkeletonText,
-    SkeletonCard,
-    SkeletonTable
+  SkeletonText,
+  SkeletonCard,
+  SkeletonTable,
 } from "../components/glass-skeleton";
 
 // Spinner variants
 export {
-    PulseSpinner,
-    DotsSpinner,
-    RingSpinner,
-    WaveSpinner
+  PulseSpinner,
+  DotsSpinner,
+  RingSpinner,
+  WaveSpinner,
 } from "../components/glass-spinner";

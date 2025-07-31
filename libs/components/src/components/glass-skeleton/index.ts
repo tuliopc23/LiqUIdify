@@ -1,1 +1,6 @@
-export { GlassSkeleton, SkeletonText, SkeletonCard, SkeletonTable } from "./glass-skeleton";
+export {
+  GlassSkeleton,
+  SkeletonText,
+  SkeletonCard,
+  SkeletonTable,
+} from "./glass-skeleton";

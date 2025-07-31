@@ -214,7 +214,7 @@ export const ControlledExample: Story = {
           min={0}
           max={100}
           step={5}
-          helperText={`Current value: ${value || 'empty'}`}
+          helperText={`Current value: ${value || "empty"}`}
         />
         <div className="flex gap-2">
           <button
