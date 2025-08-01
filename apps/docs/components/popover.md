@@ -16,47 +16,46 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassPopover } from '@liquidify/ui'
+import { GlassPopover } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassPopover } from '@liquidify/ui/popover'
+import { GlassPopover } from "@liquidify/ui/popover";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassPopover } from '@liquidify/ui'
+import { GlassPopover } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPopover />
+  return <GlassPopover />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| trigger | `React.ReactNode` | - | - |
-| content | `React.ReactNode` | - | - |
-| position? | `"top" \| "bottom" \| "left" \| "right"` | - | - |
-| align? | `"start" \| "center" \| "end"` | - | - |
-| className? | `string` | - | - |
-| contentClassName? | `string` | - | - |
-| open? | `boolean` | - | - |
-| onOpenChange? | `(open: boolean) => void` | - | - |
-| closeOnClickOutside? | `boolean` | - | - |
-| closeOnEscape? | `boolean` | - | - |
-
+| Prop                 | Type                                     | Default | Description |
+| -------------------- | ---------------------------------------- | ------- | ----------- |
+| trigger              | `React.ReactNode`                        | -       | -           |
+| content              | `React.ReactNode`                        | -       | -           |
+| position?            | `"top" \| "bottom" \| "left" \| "right"` | -       | -           |
+| align?               | `"start" \| "center" \| "end"`           | -       | -           |
+| className?           | `string`                                 | -       | -           |
+| contentClassName?    | `string`                                 | -       | -           |
+| open?                | `boolean`                                | -       | -           |
+| onOpenChange?        | `(open: boolean) => void`                | -       | -           |
+| closeOnClickOutside? | `boolean`                                | -       | -           |
+| closeOnEscape?       | `boolean`                                | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassPopover } from '@liquidify/ui'
+import { GlassPopover } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPopover />
+  return <GlassPopover />;
 }
 ```
 
@@ -65,64 +64,62 @@ export default function Example() {
 #### Positions
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### Alignments
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### RichContent
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### Controlled
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### InteractiveForm
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### MultiplePopovers
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### ViewportAwareness
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### NestedPopovers
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
 
 #### LoadingContent
 
 ```tsx
-<GlassPopover  />
+<GlassPopover />
 ```
-
-
 
 ## Accessibility
 

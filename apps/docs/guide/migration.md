@@ -5,6 +5,7 @@ This guide helps you migrate between versions of LiqUIdify and provides compatib
 ## Overview
 
 Migration topics covered:
+
 - Version upgrade paths
 - Breaking changes by version
 - Component API changes
@@ -21,18 +22,19 @@ Migration topics covered:
 The theme system has been completely redesigned for better performance and type safety.
 
 **Before (v2.x):**
+
 ```tsx
-import { ThemeProvider, createTheme } from 'liquidify';
+import { ThemeProvider, createTheme } from "liquidify";
 
 const theme = createTheme({
   colors: {
-    primary: '#3b82f6',
-    secondary: '#64748b',
+    primary: "#3b82f6",
+    secondary: "#64748b",
   },
   spacing: {
-    sm: '0.5rem',
-    md: '1rem',
-    lg: '1.5rem',
+    sm: "0.5rem",
+    md: "1rem",
+    lg: "1.5rem",
   },
 });
 
@@ -46,31 +48,32 @@ function App() {
 ```
 
 **After (v3.x):**
+
 ```tsx
-import { ThemeProvider, defineTheme } from 'liquidify';
+import { ThemeProvider, defineTheme } from "liquidify";
 
 const theme = defineTheme({
   colors: {
     primary: {
-      50: '#eff6ff',
-      500: '#3b82f6',
-      900: '#1e3a8a',
+      50: "#eff6ff",
+      500: "#3b82f6",
+      900: "#1e3a8a",
     },
     secondary: {
-      50: '#f8fafc',
-      500: '#64748b',
-      900: '#0f172a',
+      50: "#f8fafc",
+      500: "#64748b",
+      900: "#0f172a",
     },
   },
   spacing: {
-    xs: '0.25rem',
-    sm: '0.5rem',
-    md: '1rem',
-    lg: '1.5rem',
-    xl: '2rem',
+    xs: "0.25rem",
+    sm: "0.5rem",
+    md: "1rem",
+    lg: "1.5rem",
+    xl: "2rem",
   },
   glass: {
-    blur: '12px',
+    blur: "12px",
     opacity: 0.1,
     border: 0.2,
   },
@@ -90,10 +93,11 @@ function App() {
 Several components have updated APIs for better consistency:
 
 **GlassButton Changes:**
+
 ```tsx
 // Before (v2.x)
-<GlassButton 
-  variant="primary" 
+<GlassButton
+  variant="primary"
   size="medium"
   loading={true}
   loadingText="Processing..."
@@ -102,8 +106,8 @@ Several components have updated APIs for better consistency:
 </GlassButton>
 
 // After (v3.x)
-<GlassButton 
-  variant="solid" 
+<GlassButton
+  variant="solid"
   size="md"
   loading={true}
   loadingChildren="Processing..."
@@ -113,9 +117,10 @@ Several components have updated APIs for better consistency:
 ```
 
 **GlassInput Changes:**
+
 ```tsx
 // Before (v2.x)
-<GlassInput 
+<GlassInput
   label="Email"
   error="Invalid email"
   helperText="Enter your email address"
@@ -123,7 +128,7 @@ Several components have updated APIs for better consistency:
 />
 
 // After (v3.x)
-<GlassInput 
+<GlassInput
   label="Email"
   error="Invalid email"
   description="Enter your email address"
@@ -136,29 +141,31 @@ Several components have updated APIs for better consistency:
 Import paths have been updated for better tree shaking:
 
 **Before (v2.x):**
+
 ```tsx
-import { GlassButton, GlassInput, GlassCard } from 'liquidify';
-import { useTheme, useGlass } from 'liquidify/hooks';
-import { ThemeProvider } from 'liquidify/providers';
+import { GlassButton, GlassInput, GlassCard } from "liquidify";
+import { useTheme, useGlass } from "liquidify/hooks";
+import { ThemeProvider } from "liquidify/providers";
 ```
 
 **After (v3.x):**
+
 ```tsx
 // Main bundle (tree-shakeable)
-import { GlassButton, GlassInput, GlassCard } from 'liquidify';
+import { GlassButton, GlassInput, GlassCard } from "liquidify";
 
 // Individual imports (recommended)
-import { GlassButton } from 'liquidify/button';
-import { GlassInput } from 'liquidify/input';
-import { GlassCard } from 'liquidify/card';
+import { GlassButton } from "liquidify/button";
+import { GlassInput } from "liquidify/input";
+import { GlassCard } from "liquidify/card";
 
 // Bundle-specific imports
-import { GlassButton, GlassCard } from 'liquidify/core';
-import { GlassInput } from 'liquidify/forms';
+import { GlassButton, GlassCard } from "liquidify/core";
+import { GlassInput } from "liquidify/forms";
 
 // Hooks and providers
-import { useTheme, useGlass } from 'liquidify/hooks';
-import { ThemeProvider } from 'liquidify/theme';
+import { useTheme, useGlass } from "liquidify/hooks";
+import { ThemeProvider } from "liquidify/theme";
 ```
 
 ### Migration Steps
@@ -192,40 +199,40 @@ Create a new theme configuration file:
 
 ```tsx
 // theme.config.ts
-import { defineTheme } from 'liquidify';
+import { defineTheme } from "liquidify";
 
 export const theme = defineTheme({
   colors: {
     // Update color system to use scales
     primary: {
-      50: '#eff6ff',
-      100: '#dbeafe',
-      200: '#bfdbfe',
-      300: '#93c5fd',
-      400: '#60a5fa',
-      500: '#3b82f6', // Your old primary color
-      600: '#2563eb',
-      700: '#1d4ed8',
-      800: '#1e40af',
-      900: '#1e3a8a',
+      50: "#eff6ff",
+      100: "#dbeafe",
+      200: "#bfdbfe",
+      300: "#93c5fd",
+      400: "#60a5fa",
+      500: "#3b82f6", // Your old primary color
+      600: "#2563eb",
+      700: "#1d4ed8",
+      800: "#1e40af",
+      900: "#1e3a8a",
     },
     // Convert other colors...
   },
   spacing: {
     // Add new spacing tokens
-    xs: '0.25rem',
-    sm: '0.5rem',    // Your old sm
-    md: '1rem',      // Your old md
-    lg: '1.5rem',    // Your old lg
-    xl: '2rem',
-    '2xl': '3rem',
+    xs: "0.25rem",
+    sm: "0.5rem", // Your old sm
+    md: "1rem", // Your old md
+    lg: "1.5rem", // Your old lg
+    xl: "2rem",
+    "2xl": "3rem",
   },
   glass: {
     // New glass configuration
-    blur: '12px',
+    blur: "12px",
     opacity: 0.1,
     border: 0.2,
-    shadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+    shadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
   },
 });
 ```
@@ -288,18 +295,14 @@ Several components were renamed for consistency:
 
 ```tsx
 // Before (v1.x)
-import { 
-  GlassModal, 
-  GlassTooltip, 
-  GlassDropdown 
-} from 'liquidify';
+import { GlassModal, GlassTooltip, GlassDropdown } from "liquidify";
 
 // After (v2.x)
-import { 
-  GlassDialog,    // GlassModal → GlassDialog
-  GlassPopover,   // GlassTooltip → GlassPopover
-  GlassSelect     // GlassDropdown → GlassSelect
-} from 'liquidify';
+import {
+  GlassDialog, // GlassModal → GlassDialog
+  GlassPopover, // GlassTooltip → GlassPopover
+  GlassSelect, // GlassDropdown → GlassSelect
+} from "liquidify";
 ```
 
 #### Updated Props
@@ -401,6 +404,7 @@ code --install-extension liquidify.liquidify-migration-helper
 ```
 
 Features:
+
 - Automatic prop renaming suggestions
 - Component migration warnings
 - Theme configuration helpers
@@ -417,11 +421,11 @@ npm install --save-dev @liquidify/eslint-plugin-migration
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['@liquidify/migration'],
+  plugins: ["@liquidify/migration"],
   rules: {
-    '@liquidify/migration/no-deprecated-components': 'error',
-    '@liquidify/migration/no-deprecated-props': 'error',
-    '@liquidify/migration/prefer-new-imports': 'warn',
+    "@liquidify/migration/no-deprecated-components": "error",
+    "@liquidify/migration/no-deprecated-props": "error",
+    "@liquidify/migration/prefer-new-imports": "warn",
   },
 };
 ```
@@ -448,7 +452,7 @@ npx @liquidify/codemods v2-to-v3 src/
 
 ```javascript
 // liquidify-v3-transform.js
-const { transform } = require('@liquidify/codemods');
+const { transform } = require("@liquidify/codemods");
 
 module.exports = function transformer(fileInfo, api) {
   const j = api.jscodeshift;
@@ -458,18 +462,18 @@ module.exports = function transformer(fileInfo, api) {
   root
     .find(j.JSXElement, {
       openingElement: {
-        name: { name: 'GlassButton' }
-      }
+        name: { name: "GlassButton" },
+      },
     })
     .find(j.JSXAttribute, {
-      name: { name: 'variant' },
-      value: { value: 'primary' }
+      name: { name: "variant" },
+      value: { value: "primary" },
     })
-    .forEach(path => {
-      path.value.value.value = 'solid';
+    .forEach((path) => {
+      path.value.value.value = "solid";
     });
 
-  return root.toSource({ quote: 'single' });
+  return root.toSource({ quote: "single" });
 };
 ```
 
@@ -481,21 +485,21 @@ Update your unit tests for new APIs:
 
 ```tsx
 // Before (v2.x)
-import { render, screen } from '@testing-library/react';
-import { GlassButton } from 'liquidify';
+import { render, screen } from "@testing-library/react";
+import { GlassButton } from "liquidify";
 
-test('renders button with primary variant', () => {
+test("renders button with primary variant", () => {
   render(<GlassButton variant="primary">Click me</GlassButton>);
-  expect(screen.getByRole('button')).toHaveClass('glass-button-primary');
+  expect(screen.getByRole("button")).toHaveClass("glass-button-primary");
 });
 
 // After (v3.x)
-import { render, screen } from '@testing-library/react';
-import { GlassButton } from 'liquidify';
+import { render, screen } from "@testing-library/react";
+import { GlassButton } from "liquidify";
 
-test('renders button with solid variant', () => {
+test("renders button with solid variant", () => {
   render(<GlassButton variant="solid">Click me</GlassButton>);
-  expect(screen.getByRole('button')).toHaveClass('glass-button-solid');
+  expect(screen.getByRole("button")).toHaveClass("glass-button-solid");
 });
 ```
 
@@ -517,23 +521,23 @@ Verify theme and component integration:
 
 ```tsx
 // test/migration.integration.test.tsx
-import { render } from '@testing-library/react';
-import { ThemeProvider, defineTheme } from 'liquidify';
-import { App } from '../src/App';
+import { render } from "@testing-library/react";
+import { ThemeProvider, defineTheme } from "liquidify";
+import { App } from "../src/App";
 
 const theme = defineTheme({
   colors: {
     primary: {
-      500: '#3b82f6',
+      500: "#3b82f6",
     },
   },
 });
 
-test('app renders correctly with v3 theme', () => {
+test("app renders correctly with v3 theme", () => {
   render(
     <ThemeProvider theme={theme}>
       <App />
-    </ThemeProvider>
+    </ThemeProvider>,
   );
   // Add assertions
 });
@@ -544,26 +548,30 @@ test('app renders correctly with v3 theme', () => {
 ### 1. Import Errors
 
 **Issue**: Components not found after upgrade
+
 ```bash
 Module not found: Can't resolve 'liquidify/GlassButton'
 ```
 
 **Solution**: Update import paths
+
 ```tsx
 // Fix import path
-import { GlassButton } from 'liquidify/button';
+import { GlassButton } from "liquidify/button";
 // or
-import { GlassButton } from 'liquidify';
+import { GlassButton } from "liquidify";
 ```
 
 ### 2. Theme Provider Errors
 
 **Issue**: Theme shape doesn't match
+
 ```bash
 Type 'OldTheme' is not assignable to type 'Theme'
 ```
 
 **Solution**: Update theme structure
+
 ```tsx
 // Use defineTheme helper
 const theme = defineTheme({
@@ -574,12 +582,14 @@ const theme = defineTheme({
 ### 3. CSS Variable Issues
 
 **Issue**: Custom CSS no longer applies
+
 ```css
 /* Old variables don't exist */
 --glass-primary-color: #3b82f6;
 ```
 
 **Solution**: Update variable names
+
 ```css
 /* Use new variable names */
 --liquidify-color-primary-500: #3b82f6;
@@ -588,11 +598,13 @@ const theme = defineTheme({
 ### 4. TypeScript Errors
 
 **Issue**: Type errors after upgrade
+
 ```bash
 Property 'helperText' does not exist on type 'GlassInputProps'
 ```
 
 **Solution**: Update prop names
+
 ```tsx
 // Change helperText to description
 <GlassInput description="Helper text" />
@@ -630,24 +642,26 @@ Migrate incrementally by aliasing old imports:
 ```tsx
 // Create compatibility layer
 // compat.ts
-export { 
+export {
   GlassDialog as GlassModal,
-  GlassPopover as GlassTooltip 
-} from 'liquidify';
+  GlassPopover as GlassTooltip,
+} from "liquidify";
 
 // Use in components during transition
-import { GlassModal } from './compat';
+import { GlassModal } from "./compat";
 ```
 
 ## Migration Checklist
 
 ### Pre-Migration
+
 - [ ] Create backup branch
 - [ ] Update dependencies
 - [ ] Run current test suite
 - [ ] Document custom implementations
 
 ### During Migration
+
 - [ ] Run migration tools
 - [ ] Update theme configuration
 - [ ] Fix import paths
@@ -656,6 +670,7 @@ import { GlassModal } from './compat';
 - [ ] Update tests
 
 ### Post-Migration
+
 - [ ] Run full test suite
 - [ ] Check bundle size
 - [ ] Verify accessibility

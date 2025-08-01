@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassSpinner } from '@liquidify/ui'
+import { GlassSpinner } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassSpinner } from '@liquidify/ui/spinner'
+import { GlassSpinner } from "@liquidify/ui/spinner";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassSpinner } from '@liquidify/ui'
+import { GlassSpinner } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSpinner />
+  return <GlassSpinner />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassSpinner } from '@liquidify/ui'
+import { GlassSpinner } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSpinner />
+  return <GlassSpinner />;
 }
 ```
 
@@ -55,76 +55,74 @@ export default function Example() {
 #### Variants
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### Speeds
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### WithLabels
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### CenteredOverlay
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### CustomSpinners
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### ButtonLoading
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### LoadingCards
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### DataTableLoading
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### InlineLoading
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### ThemeVariations
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassSpinner  />
+<GlassSpinner />
 ```
-
-
 
 ## Accessibility
 

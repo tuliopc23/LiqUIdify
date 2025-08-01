@@ -46,19 +46,20 @@ All LiqUIdify components meet WCAG 2.1 Level AA standards:
 
 All interactive components support keyboard navigation:
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Move focus forward |
-| `Shift + Tab` | Move focus backward |
-| `Enter` | Activate buttons, links, submit forms |
-| `Space` | Toggle checkboxes, activate buttons |
-| `Arrow Keys` | Navigate within components |
-| `Escape` | Close modals, cancel operations |
-| `Home/End` | Jump to first/last item |
+| Key           | Action                                |
+| ------------- | ------------------------------------- |
+| `Tab`         | Move focus forward                    |
+| `Shift + Tab` | Move focus backward                   |
+| `Enter`       | Activate buttons, links, submit forms |
+| `Space`       | Toggle checkboxes, activate buttons   |
+| `Arrow Keys`  | Navigate within components            |
+| `Escape`      | Close modals, cancel operations       |
+| `Home/End`    | Jump to first/last item               |
 
 ### Component Navigation Patterns
 
 #### Tabs
+
 ```javascript
 <GlassTabs>
   {/* Arrow keys navigate between tabs */}
@@ -68,6 +69,7 @@ All interactive components support keyboard navigation:
 ```
 
 #### Modal/Dialog
+
 ```javascript
 <GlassModal>
   {/* Focus trapped within modal */}
@@ -77,6 +79,7 @@ All interactive components support keyboard navigation:
 ```
 
 #### Combobox
+
 ```javascript
 <GlassCombobox>
   {/* Arrow keys navigate options */}
@@ -152,13 +155,11 @@ Use live regions for dynamic content updates:
 Use focus trap for overlays and modals:
 
 ```javascript
-import { GlassFocusTrap } from '@liquidify/components';
+import { GlassFocusTrap } from "@liquidify/components";
 
 <GlassFocusTrap active={isModalOpen}>
-  <GlassModal>
-    {/* Focus stays within modal */}
-  </GlassModal>
-</GlassFocusTrap>
+  <GlassModal>{/* Focus stays within modal */}</GlassModal>
+</GlassFocusTrap>;
 ```
 
 ### Focus Restoration
@@ -175,7 +176,7 @@ function Example() {
       <GlassButton ref={triggerRef} onClick={() => setOpen(true)}>
         Open Modal
       </GlassButton>
-      
+
       <GlassModal
         isOpen={open}
         onClose={() => setOpen(false)}
@@ -193,19 +194,15 @@ function Example() {
 Implement skip navigation:
 
 ```javascript
-import { GlassSkipLink } from '@liquidify/components';
+import { GlassSkipLink } from "@liquidify/components";
 
 <>
-  <GlassSkipLink href="#main-content">
-    Skip to main content
-  </GlassSkipLink>
-  
+  <GlassSkipLink href="#main-content">Skip to main content</GlassSkipLink>
+
   <nav>{/* Navigation */}</nav>
-  
-  <main id="main-content">
-    {/* Main content */}
-  </main>
-</>
+
+  <main id="main-content">{/* Main content */}</main>
+</>;
 ```
 
 ## Color and Contrast
@@ -257,19 +254,13 @@ Components adapt to high contrast mode:
 ```javascript
 // Accessible form example
 <form aria-label="User registration">
-  <GlassFormField
-    label="Username"
-    required
-    error={errors.username}
-  >
+  <GlassFormField label="Username" required error={errors.username}>
     <GlassInput
       id="username"
       name="username"
       aria-required="true"
       aria-invalid={!!errors.username}
-      aria-describedby={
-        errors.username ? "username-error" : "username-hint"
-      }
+      aria-describedby={errors.username ? "username-error" : "username-hint"}
     />
     <span id="username-hint" className="hint">
       3-20 characters, letters and numbers only
@@ -300,16 +291,13 @@ Components adapt to high contrast mode:
     </tr>
   </thead>
   <tbody>
-    {users.map(user => (
+    {users.map((user) => (
       <tr key={user.id}>
         <th scope="row">{user.name}</th>
         <td>{user.email}</td>
         <td>{user.role}</td>
         <td>
-          <GlassButton
-            aria-label={`Edit ${user.name}`}
-            size="small"
-          >
+          <GlassButton aria-label={`Edit ${user.name}`} size="small">
             Edit
           </GlassButton>
         </td>
@@ -344,11 +332,11 @@ Components adapt to high contrast mode:
 
 ```javascript
 // Jest + jest-axe
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe, toHaveNoViolations } from "jest-axe";
 
 expect.extend(toHaveNoViolations);
 
-test('component is accessible', async () => {
+test("component is accessible", async () => {
   const { container } = render(<GlassButton>Click me</GlassButton>);
   const results = await axe(container);
   expect(results).toHaveNoViolations();
@@ -358,12 +346,14 @@ test('component is accessible', async () => {
 ### Manual Testing Checklist
 
 1. **Keyboard Navigation**
+
    - [ ] Tab through all interactive elements
    - [ ] Verify focus indicators are visible
    - [ ] Check focus order is logical
    - [ ] Ensure no keyboard traps
 
 2. **Screen Reader Testing**
+
    - [ ] Test with NVDA (Windows)
    - [ ] Test with JAWS (Windows)
    - [ ] Test with VoiceOver (macOS/iOS)
@@ -381,7 +371,7 @@ test('component is accessible', async () => {
 // Chrome DevTools Lighthouse
 // 1. Open DevTools (F12)
 // 2. Go to Lighthouse tab
-// 3. Check "Accessibility" 
+// 3. Check "Accessibility"
 // 4. Generate report
 
 // Chrome Accessibility Inspector
@@ -429,17 +419,12 @@ function AccessibleAccordion() {
     <GlassAccordion>
       <GlassAccordionItem
         trigger={
-          <button
-            aria-expanded={isExpanded}
-            aria-controls="panel-1"
-          >
+          <button aria-expanded={isExpanded} aria-controls="panel-1">
             Settings
           </button>
         }
       >
-        <div id="panel-1">
-          {/* Panel content */}
-        </div>
+        <div id="panel-1">{/* Panel content */}</div>
       </GlassAccordionItem>
     </GlassAccordion>
   );
@@ -473,17 +458,20 @@ function AccessibleAccordion() {
 ## Resources
 
 ### Documentation
+
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [WebAIM Resources](https://webaim.org/resources/)
 
 ### Tools
+
 - [axe DevTools](https://www.deque.com/axe/devtools/)
 - [WAVE Browser Extension](https://wave.webaim.org/extension/)
 - [Contrast Ratio Checker](https://webaim.org/resources/contrastchecker/)
 - [NVDA Screen Reader](https://www.nvaccess.org/)
 
 ### React-Specific
+
 - [React Accessibility Docs](https://react.dev/reference/react-dom/components/common#accessibility-attributes)
 - [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 - [Reach UI](https://reach.tech/) (Accessible component patterns)

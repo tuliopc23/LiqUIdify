@@ -16,65 +16,64 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassPlayground } from '@liquidify/ui'
+import { GlassPlayground } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassPlayground } from '@liquidify/ui/playground'
+import { GlassPlayground } from "@liquidify/ui/playground";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassPlayground } from '@liquidify/ui'
+import { GlassPlayground } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPlayground />
+  return <GlassPlayground />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| code | `string` | - | - |
-| scope? | `Record<string, unknown>` | - | - |
-| title? | `string` | - | - |
-| description? | `string` | - | - |
-| showEditor? | `boolean` | - | - |
-| showPreview? | `boolean` | - | - |
-| editable? | `boolean` | - | - |
-| className? | `string` | - | - |
-| height? | `string \| number` | - | - |
-| theme? | `'light' \| 'dark'` | - | - |
-| autoRun? | `boolean` | - | - |
-| editable? | `boolean` | - | - |
-| onChange? | `(code: string) => void` | - | - |
-| className? | `string` | - | - |
-| code | `string` | - | - |
-| scope? | `Record<string, unknown>` | - | - |
-| title? | `string` | - | - |
-| description? | `string` | - | - |
-| showEditor? | `boolean` | - | - |
-| showPreview? | `boolean` | - | - |
-| editable? | `boolean` | - | - |
-| className? | `string` | - | - |
-| height? | `string \| number` | - | - |
-| theme? | `'light' \| 'dark'` | - | - |
-| autoRun? | `boolean` | - | - |
-| editable? | `boolean` | - | - |
-| onChange? | `(code: string) => void` | - | - |
-| className? | `string` | - | - |
-
+| Prop         | Type                      | Default | Description |
+| ------------ | ------------------------- | ------- | ----------- |
+| code         | `string`                  | -       | -           |
+| scope?       | `Record<string, unknown>` | -       | -           |
+| title?       | `string`                  | -       | -           |
+| description? | `string`                  | -       | -           |
+| showEditor?  | `boolean`                 | -       | -           |
+| showPreview? | `boolean`                 | -       | -           |
+| editable?    | `boolean`                 | -       | -           |
+| className?   | `string`                  | -       | -           |
+| height?      | `string \| number`        | -       | -           |
+| theme?       | `'light' \| 'dark'`       | -       | -           |
+| autoRun?     | `boolean`                 | -       | -           |
+| editable?    | `boolean`                 | -       | -           |
+| onChange?    | `(code: string) => void`  | -       | -           |
+| className?   | `string`                  | -       | -           |
+| code         | `string`                  | -       | -           |
+| scope?       | `Record<string, unknown>` | -       | -           |
+| title?       | `string`                  | -       | -           |
+| description? | `string`                  | -       | -           |
+| showEditor?  | `boolean`                 | -       | -           |
+| showPreview? | `boolean`                 | -       | -           |
+| editable?    | `boolean`                 | -       | -           |
+| className?   | `string`                  | -       | -           |
+| height?      | `string \| number`        | -       | -           |
+| theme?       | `'light' \| 'dark'`       | -       | -           |
+| autoRun?     | `boolean`                 | -       | -           |
+| editable?    | `boolean`                 | -       | -           |
+| onChange?    | `(code: string) => void`  | -       | -           |
+| className?   | `string`                  | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassPlayground } from '@liquidify/ui'
+import { GlassPlayground } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPlayground />
+  return <GlassPlayground />;
 }
 ```
 
@@ -83,52 +82,50 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassPlayground  />
+<GlassPlayground />
 ```
 
 #### Templates
 
 ```tsx
-<GlassPlayground  />
+<GlassPlayground />
 ```
 
 #### LayoutVariations
 
 ```tsx
-<GlassPlayground  />
+<GlassPlayground />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassPlayground  />
+<GlassPlayground />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassPlayground  />
+<GlassPlayground />
 ```
 
 #### AdvancedFeatures
 
 ```tsx
-<GlassPlayground  />
+<GlassPlayground />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassPlayground  />
+<GlassPlayground />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassPlayground  />
+<GlassPlayground />
 ```
-
-
 
 ## Accessibility
 

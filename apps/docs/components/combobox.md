@@ -16,41 +16,39 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassCombobox } from '@liquidify/ui'
+import { GlassCombobox } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassCombobox } from '@liquidify/ui/combobox'
+import { GlassCombobox } from "@liquidify/ui/combobox";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassCombobox } from '@liquidify/ui'
+import { GlassCombobox } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCombobox />
+  return <GlassCombobox />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassCombobox } from '@liquidify/ui'
+import { GlassCombobox } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCombobox />
+  return <GlassCombobox />;
 }
 ```
-
-
 
 ## Accessibility
 

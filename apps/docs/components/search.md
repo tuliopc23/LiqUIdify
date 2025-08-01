@@ -16,46 +16,45 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassSearch } from '@liquidify/ui'
+import { GlassSearch } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassSearch } from '@liquidify/ui/search'
+import { GlassSearch } from "@liquidify/ui/search";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassSearch } from '@liquidify/ui'
+import { GlassSearch } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSearch />
+  return <GlassSearch />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| placeholder? | `string` | - | - |
-| suggestions? | `Array<SearchSuggestion>` | - | - |
-| recentSearches? | `Array<string>` | - | - |
-| onSearch? | `(query: string) => void` | - | - |
-| onSuggestionClick? | `(suggestion: SearchSuggestion) => void` | - | - |
-| showTrending? | `boolean` | - | - |
-| maxSuggestions? | `number` | - | - |
-| className? | `string` | - | - |
-| id? | `string` | - | - |
-
+| Prop               | Type                                     | Default | Description |
+| ------------------ | ---------------------------------------- | ------- | ----------- |
+| placeholder?       | `string`                                 | -       | -           |
+| suggestions?       | `Array<SearchSuggestion>`                | -       | -           |
+| recentSearches?    | `Array<string>`                          | -       | -           |
+| onSearch?          | `(query: string) => void`                | -       | -           |
+| onSuggestionClick? | `(suggestion: SearchSuggestion) => void` | -       | -           |
+| showTrending?      | `boolean`                                | -       | -           |
+| maxSuggestions?    | `number`                                 | -       | -           |
+| className?         | `string`                                 | -       | -           |
+| id?                | `string`                                 | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassSearch } from '@liquidify/ui'
+import { GlassSearch } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSearch />
+  return <GlassSearch />;
 }
 ```
 
@@ -64,46 +63,44 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassSearch  />
+<GlassSearch />
 ```
 
 #### BasicUsage
 
 ```tsx
-<GlassSearch  />
+<GlassSearch />
 ```
 
 #### SuggestionTypes
 
 ```tsx
-<GlassSearch  />
+<GlassSearch />
 ```
 
 #### LoadingAndEmptyStates
 
 ```tsx
-<GlassSearch  />
+<GlassSearch />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassSearch  />
+<GlassSearch />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassSearch  />
+<GlassSearch />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassSearch  />
+<GlassSearch />
 ```
-
-
 
 ## Accessibility
 

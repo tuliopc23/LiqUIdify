@@ -21,7 +21,7 @@ Enable GPU acceleration for smooth animations:
 
 ```tsx
 // ✅ Enable hardware acceleration
-<GlassButton 
+<GlassButton
   className="transform-gpu will-change-transform"
   style={{ transform: 'translateZ(0)' }}
 >
@@ -69,31 +69,30 @@ Reduce blur intensity for better performance:
 Use conditional blur based on device capabilities:
 
 ```tsx
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 function usePerformanceMode() {
-  const [isLowPerformance, setIsLowPerformance] = useState(false)
+  const [isLowPerformance, setIsLowPerformance] = useState(false);
 
   useEffect(() => {
     // Detect low-performance devices
-    const isLowEnd = navigator.hardwareConcurrency <= 4 || 
-                     /Android.*Mobile/.test(navigator.userAgent)
-    setIsLowPerformance(isLowEnd)
-  }, [])
+    const isLowEnd =
+      navigator.hardwareConcurrency <= 4 ||
+      /Android.*Mobile/.test(navigator.userAgent);
+    setIsLowPerformance(isLowEnd);
+  }, []);
 
-  return isLowPerformance
+  return isLowPerformance;
 }
 
 function OptimizedGlassCard({ children }) {
-  const isLowPerformance = usePerformanceMode()
-  
+  const isLowPerformance = usePerformanceMode();
+
   return (
-    <GlassCard 
-      className={isLowPerformance ? 'glass-fallback' : 'glass-full'}
-    >
+    <GlassCard className={isLowPerformance ? "glass-fallback" : "glass-full"}>
       {children}
     </GlassCard>
-  )
+  );
 }
 ```
 
@@ -115,16 +114,16 @@ Use tree shaking to reduce bundle size:
 
 ```tsx
 // ❌ Imports entire library (~60KB)
-import { GlassButton, GlassCard, GlassInput } from '@liquidify/ui'
+import { GlassButton, GlassCard, GlassInput } from "@liquidify/ui";
 
 // ✅ Individual imports for optimal tree shaking (~5KB each)
-import { GlassButton } from '@liquidify/ui/button'
-import { GlassCard } from '@liquidify/ui/card'
-import { GlassInput } from '@liquidify/ui/input'
+import { GlassButton } from "@liquidify/ui/button";
+import { GlassCard } from "@liquidify/ui/card";
+import { GlassInput } from "@liquidify/ui/input";
 
 // ✅ Bundle imports by category (~15-25KB per bundle)
-import { GlassButton, GlassInput } from '@liquidify/ui/forms'
-import { GlassCard } from '@liquidify/ui/core'
+import { GlassButton, GlassInput } from "@liquidify/ui/forms";
+import { GlassCard } from "@liquidify/ui/core";
 ```
 
 Configure your bundler for optimal tree shaking:
@@ -134,21 +133,21 @@ Configure your bundler for optimal tree shaking:
 module.exports = {
   optimization: {
     usedExports: true,
-    sideEffects: false
+    sideEffects: false,
   },
   resolve: {
-    mainFields: ['module', 'main']
-  }
-}
+    mainFields: ["module", "main"],
+  },
+};
 
 // vite.config.js
 export default {
   build: {
     rollupOptions: {
-      treeshake: true
-    }
-  }
-}
+      treeshake: true,
+    },
+  },
+};
 ```
 
 ### 4. Animation Performance
@@ -157,9 +156,9 @@ Optimize animations for 60fps performance:
 
 ```tsx
 // ✅ Use transform instead of changing layout properties
-<GlassButton 
+<GlassButton
   className="transition-transform hover:scale-105"
-  style={{ 
+  style={{
     transform: 'translateZ(0)',
     willChange: 'transform'
   }}
@@ -168,7 +167,7 @@ Optimize animations for 60fps performance:
 </GlassButton>
 
 // ❌ Avoid animating layout properties
-<GlassButton 
+<GlassButton
   className="transition-all hover:w-32 hover:h-16"
 >
   Slow animation
@@ -194,28 +193,28 @@ Use CSS custom properties for smooth color transitions:
 Prevent memory leaks with proper cleanup:
 
 ```tsx
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react";
 
 function AnimatedGlassCard() {
-  const animationRef = useRef<number>()
-  
+  const animationRef = useRef<number>();
+
   useEffect(() => {
     const animate = () => {
       // Animation logic
-      animationRef.current = requestAnimationFrame(animate)
-    }
-    
-    animate()
-    
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
     // Cleanup animation on unmount
     return () => {
       if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
+        cancelAnimationFrame(animationRef.current);
       }
-    }
-  }, [])
-  
-  return <GlassCard>Animated content</GlassCard>
+    };
+  }, []);
+
+  return <GlassCard>Animated content</GlassCard>;
 }
 ```
 
@@ -229,19 +228,19 @@ Use Chrome DevTools Performance tab:
 // Add performance marks for profiling
 function ProfiledComponent() {
   useEffect(() => {
-    performance.mark('glass-component-start')
-    
+    performance.mark("glass-component-start");
+
     return () => {
-      performance.mark('glass-component-end')
+      performance.mark("glass-component-end");
       performance.measure(
-        'glass-component-render',
-        'glass-component-start',
-        'glass-component-end'
-      )
-    }
-  }, [])
-  
-  return <GlassCard>Profiled content</GlassCard>
+        "glass-component-render",
+        "glass-component-start",
+        "glass-component-end",
+      );
+    };
+  }, []);
+
+  return <GlassCard>Profiled content</GlassCard>;
 }
 ```
 
@@ -250,26 +249,26 @@ function ProfiledComponent() {
 Set up automated performance monitoring:
 
 ```tsx
-import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals'
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from "web-vitals";
 
 // Monitor Core Web Vitals
-getCLS(console.log)
-getFID(console.log)
-getFCP(console.log)
-getLCP(console.log)
-getTTFB(console.log)
+getCLS(console.log);
+getFID(console.log);
+getFCP(console.log);
+getLCP(console.log);
+getTTFB(console.log);
 
 // Custom glass effect performance metric
 function measureGlassRenderTime() {
   const observer = new PerformanceObserver((list) => {
     for (const entry of list.getEntries()) {
-      if (entry.name.includes('glass')) {
-        console.log(`${entry.name}: ${entry.duration}ms`)
+      if (entry.name.includes("glass")) {
+        console.log(`${entry.name}: ${entry.duration}ms`);
       }
     }
-  })
-  
-  observer.observe({ entryTypes: ['measure'] })
+  });
+
+  observer.observe({ entryTypes: ["measure"] });
 }
 ```
 
@@ -287,16 +286,17 @@ npm run build -- --analyze
 
 ```js
 // webpack.config.js
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
   plugins: [
     new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false
-    })
-  ]
-}
+      analyzerMode: "static",
+      openAnalyzer: false,
+    }),
+  ],
+};
 ```
 
 ## Platform-Specific Optimizations
@@ -306,35 +306,35 @@ module.exports = {
 Optimize for mobile performance:
 
 ```tsx
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 function useMobileOptimizations() {
-  const [isMobile, setIsMobile] = useState(false)
-  
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent))
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-  
-  return isMobile
+      setIsMobile(
+        window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent),
+      );
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return isMobile;
 }
 
 function MobileOptimizedCard() {
-  const isMobile = useMobileOptimizations()
-  
+  const isMobile = useMobileOptimizations();
+
   return (
-    <GlassCard 
-      className={isMobile ? 'glass-mobile' : 'glass-desktop'}
-    >
+    <GlassCard className={isMobile ? "glass-mobile" : "glass-desktop"}>
       Content
     </GlassCard>
-  )
+  );
 }
 ```
 
@@ -382,25 +382,25 @@ Provide fallbacks for low-performance devices:
 
 ```tsx
 function PerformanceAwareGlass({ children }) {
-  const [canUseGlass, setCanUseGlass] = useState(true)
-  
+  const [canUseGlass, setCanUseGlass] = useState(true);
+
   useEffect(() => {
     // Feature detection
-    const supportsBackdropFilter = CSS.supports('backdrop-filter', 'blur(1px)')
-    const isLowEnd = navigator.hardwareConcurrency <= 2
-    
-    setCanUseGlass(supportsBackdropFilter && !isLowEnd)
-  }, [])
-  
+    const supportsBackdropFilter = CSS.supports("backdrop-filter", "blur(1px)");
+    const isLowEnd = navigator.hardwareConcurrency <= 2;
+
+    setCanUseGlass(supportsBackdropFilter && !isLowEnd);
+  }, []);
+
   if (!canUseGlass) {
     return (
       <div className="fallback-card bg-white/90 rounded-lg border">
         {children}
       </div>
-    )
+    );
   }
-  
-  return <GlassCard>{children}</GlassCard>
+
+  return <GlassCard>{children}</GlassCard>;
 }
 ```
 
@@ -411,26 +411,20 @@ function PerformanceAwareGlass({ children }) {
 Optimize large lists with glass components:
 
 ```tsx
-import { FixedSizeList as List } from 'react-window'
+import { FixedSizeList as List } from "react-window";
 
 function VirtualizedGlassList({ items }) {
   const renderItem = ({ index, style }) => (
     <div style={style}>
-      <GlassCard className="m-2">
-        {items[index]}
-      </GlassCard>
+      <GlassCard className="m-2">{items[index]}</GlassCard>
     </div>
-  )
-  
+  );
+
   return (
-    <List
-      height={600}
-      itemCount={items.length}
-      itemSize={120}
-    >
+    <List height={600} itemCount={items.length} itemSize={120}>
       {renderItem}
     </List>
-  )
+  );
 }
 ```
 
@@ -439,38 +433,38 @@ function VirtualizedGlassList({ items }) {
 Load glass effects only when visible:
 
 ```tsx
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from "react";
 
 function LazyGlassCard({ children }) {
-  const [isVisible, setIsVisible] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
-  
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect()
+          setIsVisible(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.1 }
-    )
-    
+      { threshold: 0.1 },
+    );
+
     if (cardRef.current) {
-      observer.observe(cardRef.current)
+      observer.observe(cardRef.current);
     }
-    
-    return () => observer.disconnect()
-  }, [])
-  
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div 
+    <div
       ref={cardRef}
-      className={isVisible ? 'glass-card' : 'placeholder-card'}
+      className={isVisible ? "glass-card" : "placeholder-card"}
     >
       {children}
     </div>
-  )
+  );
 }
 ```
 
@@ -479,39 +473,36 @@ function LazyGlassCard({ children }) {
 Prevent unnecessary re-renders:
 
 ```tsx
-import { memo, useMemo } from 'react'
+import { memo, useMemo } from "react";
 
 // Memoize expensive glass components
-const MemoizedGlassCard = memo(function GlassCard({ 
-  children, 
+const MemoizedGlassCard = memo(function GlassCard({
+  children,
   variant,
-  ...props 
+  ...props
 }) {
   const cardClassName = useMemo(() => {
-    return `glass-card glass-${variant} ${props.className || ''}`
-  }, [variant, props.className])
-  
+    return `glass-card glass-${variant} ${props.className || ""}`;
+  }, [variant, props.className]);
+
   return (
     <div className={cardClassName} {...props}>
       {children}
     </div>
-  )
-})
+  );
+});
 
 // Use with stable props
 function OptimizedList({ items }) {
   return (
     <div>
-      {items.map(item => (
-        <MemoizedGlassCard 
-          key={item.id}
-          variant="primary"
-        >
+      {items.map((item) => (
+        <MemoizedGlassCard key={item.id} variant="primary">
           {item.content}
         </MemoizedGlassCard>
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -520,49 +511,50 @@ function OptimizedList({ items }) {
 Create a performance monitoring component:
 
 ```tsx
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 interface PerformanceMetrics {
-  fps: number
-  memoryUsage: number
-  glassEffectCount: number
+  fps: number;
+  memoryUsage: number;
+  glassEffectCount: number;
 }
 
 function PerformanceDashboard() {
   const [metrics, setMetrics] = useState<PerformanceMetrics>({
     fps: 0,
     memoryUsage: 0,
-    glassEffectCount: 0
-  })
-  
+    glassEffectCount: 0,
+  });
+
   useEffect(() => {
-    let frameCount = 0
-    let lastTime = performance.now()
-    
+    let frameCount = 0;
+    let lastTime = performance.now();
+
     const measureFPS = () => {
-      frameCount++
-      const currentTime = performance.now()
-      
+      frameCount++;
+      const currentTime = performance.now();
+
       if (currentTime - lastTime >= 1000) {
-        const fps = Math.round((frameCount * 1000) / (currentTime - lastTime))
-        
-        setMetrics(prev => ({
+        const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
+
+        setMetrics((prev) => ({
           ...prev,
           fps,
           memoryUsage: (performance as any).memory?.usedJSHeapSize || 0,
-          glassEffectCount: document.querySelectorAll('[class*="glass"]').length
-        }))
-        
-        frameCount = 0
-        lastTime = currentTime
+          glassEffectCount:
+            document.querySelectorAll('[class*="glass"]').length,
+        }));
+
+        frameCount = 0;
+        lastTime = currentTime;
       }
-      
-      requestAnimationFrame(measureFPS)
-    }
-    
-    measureFPS()
-  }, [])
-  
+
+      requestAnimationFrame(measureFPS);
+    };
+
+    measureFPS();
+  }, []);
+
   return (
     <GlassCard className="fixed top-4 right-4 p-4 text-sm">
       <h3 className="font-semibold mb-2">Performance</h3>
@@ -570,7 +562,7 @@ function PerformanceDashboard() {
       <div>Memory: {Math.round(metrics.memoryUsage / 1024 / 1024)}MB</div>
       <div>Glass Elements: {metrics.glassEffectCount}</div>
     </GlassCard>
-  )
+  );
 }
 ```
 
@@ -579,6 +571,7 @@ function PerformanceDashboard() {
 Use this checklist to ensure optimal performance:
 
 ### Development
+
 - [ ] Use individual component imports
 - [ ] Enable hardware acceleration with `transform-gpu`
 - [ ] Set appropriate `will-change` properties
@@ -586,6 +579,7 @@ Use this checklist to ensure optimal performance:
 - [ ] Implement proper cleanup in useEffect hooks
 
 ### Styling
+
 - [ ] Optimize backdrop-filter blur values (4-10px)
 - [ ] Use CSS custom properties for smooth transitions
 - [ ] Implement mobile-specific optimizations
@@ -593,18 +587,21 @@ Use this checklist to ensure optimal performance:
 - [ ] Provide fallbacks for unsupported browsers
 
 ### Bundle
+
 - [ ] Configure tree shaking in bundler
 - [ ] Analyze bundle size regularly
 - [ ] Use code splitting for large applications
 - [ ] Implement lazy loading for non-critical components
 
 ### Monitoring
+
 - [ ] Set up Core Web Vitals monitoring
 - [ ] Profile components with browser DevTools
 - [ ] Monitor memory usage and cleanup
 - [ ] Test on various devices and browsers
 
 ### Production
+
 - [ ] Enable production build optimizations
 - [ ] Use CDN for static assets
 - [ ] Implement proper caching strategies
@@ -621,7 +618,7 @@ Avoid these common performance mistakes:
 </GlassCard>
 
 // ✅ DO: Use CSS custom properties
-<GlassCard 
+<GlassCard
   style={{ '--opacity': opacity }}
   className="glass-dynamic"
 >
@@ -631,15 +628,15 @@ Avoid these common performance mistakes:
 // ❌ DON'T: Complex animations on every frame
 const AnimatedCard = () => {
   const [rotation, setRotation] = useState(0)
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setRotation(prev => prev + 1)
     }, 16) // 60fps
-    
+
     return () => clearInterval(interval)
   }, [])
-  
+
   return (
     <GlassCard style={{ transform: `rotate(${rotation}deg)` }}>
       Expensive animation

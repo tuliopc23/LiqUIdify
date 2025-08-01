@@ -13,7 +13,6 @@ Generated: 7/31/2025, 8:03:54 PM
 ## Bundle Sizes
 
 | Bundle | Size | Gzip | Compression | Limit | Status |
-|--------|------|------|-------------|-------|--------|
+| ------ | ---- | ---- | ----------- | ----- | ------ |
 
 ## Largest Bundles
-

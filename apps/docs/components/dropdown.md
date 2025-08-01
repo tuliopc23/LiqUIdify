@@ -16,44 +16,43 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassDropdown } from '@liquidify/ui'
+import { GlassDropdown } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassDropdown } from '@liquidify/ui/dropdown'
+import { GlassDropdown } from "@liquidify/ui/dropdown";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassDropdown } from '@liquidify/ui'
+import { GlassDropdown } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassDropdown />
+  return <GlassDropdown />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| trigger | `React.ReactNode` | - | - |
-| items | `Array<DropdownItem>` | - | - |
-| onSelect? | `(value: string) => void` | - | - |
-| className? | `string` | - | - |
-| contentClassName? | `string` | - | - |
-| align? | `"start" \| "center" \| "end"` | - | - |
-| sideOffset? | `number` | - | - |
-
+| Prop              | Type                           | Default | Description |
+| ----------------- | ------------------------------ | ------- | ----------- |
+| trigger           | `React.ReactNode`              | -       | -           |
+| items             | `Array<DropdownItem>`          | -       | -           |
+| onSelect?         | `(value: string) => void`      | -       | -           |
+| className?        | `string`                       | -       | -           |
+| contentClassName? | `string`                       | -       | -           |
+| align?            | `"start" \| "center" \| "end"` | -       | -           |
+| sideOffset?       | `number`                       | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassDropdown } from '@liquidify/ui'
+import { GlassDropdown } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassDropdown />
+  return <GlassDropdown />;
 }
 ```
 
@@ -62,58 +61,56 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
 
 #### BasicExamples
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
 
 #### AlignmentOptions
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
 
 #### ItemStates
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
 
 #### NavigationDropdown
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassDropdown  />
+<GlassDropdown />
 ```
-
-
 
 ## Accessibility
 

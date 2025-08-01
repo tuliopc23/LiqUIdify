@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassBanner } from '@liquidify/ui'
+import { GlassBanner } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassBanner } from '@liquidify/ui/banner'
+import { GlassBanner } from "@liquidify/ui/banner";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassBanner } from '@liquidify/ui'
+import { GlassBanner } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassBanner />
+  return <GlassBanner />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassBanner } from '@liquidify/ui'
+import { GlassBanner } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassBanner />
+  return <GlassBanner />;
 }
 ```
 
@@ -55,46 +55,44 @@ export default function Example() {
 #### AllVariants
 
 ```tsx
-<GlassBanner  />
+<GlassBanner />
 ```
 
 #### WithActions
 
 ```tsx
-<GlassBanner  />
+<GlassBanner />
 ```
 
 #### Dismissible
 
 ```tsx
-<GlassBanner  />
+<GlassBanner />
 ```
 
 #### CustomIcons
 
 ```tsx
-<GlassBanner  />
+<GlassBanner />
 ```
 
 #### ComplexContent
 
 ```tsx
-<GlassBanner  />
+<GlassBanner />
 ```
 
 #### FixedPosition
 
 ```tsx
-<GlassBanner  />
+<GlassBanner />
 ```
 
 #### AnimatedAppearance
 
 ```tsx
-<GlassBanner  />
+<GlassBanner />
 ```
-
-
 
 ## Accessibility
 

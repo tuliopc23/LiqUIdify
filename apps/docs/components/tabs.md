@@ -16,46 +16,45 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassTabs } from '@liquidify/ui'
+import { GlassTabs } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassTabs } from '@liquidify/ui/tabs'
+import { GlassTabs } from "@liquidify/ui/tabs";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassTabs } from '@liquidify/ui'
+import { GlassTabs } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTabs />
+  return <GlassTabs />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| tabs | `Array<GlassTabItem>` | - | - |
-| defaultTab? | `string` | - | - |
-| className? | `string` | - | - |
-| tabListClassName? | `string` | - | - |
-| tabButtonClassName? | `string` | - | - |
-| activeTabButtonClassName? | `string` | - | - |
-| inactiveTabButtonClassName? | `string` | - | - |
-| tabPanelClassName? | `string` | - | - |
-| orientation? | `"horizontal" \| "vertical"` | - | - |
-
+| Prop                        | Type                         | Default | Description |
+| --------------------------- | ---------------------------- | ------- | ----------- |
+| tabs                        | `Array<GlassTabItem>`        | -       | -           |
+| defaultTab?                 | `string`                     | -       | -           |
+| className?                  | `string`                     | -       | -           |
+| tabListClassName?           | `string`                     | -       | -           |
+| tabButtonClassName?         | `string`                     | -       | -           |
+| activeTabButtonClassName?   | `string`                     | -       | -           |
+| inactiveTabButtonClassName? | `string`                     | -       | -           |
+| tabPanelClassName?          | `string`                     | -       | -           |
+| orientation?                | `"horizontal" \| "vertical"` | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassTabs } from '@liquidify/ui'
+import { GlassTabs } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTabs />
+  return <GlassTabs />;
 }
 ```
 
@@ -64,52 +63,50 @@ export default function Example() {
 #### WithDefaultTab
 
 ```tsx
-<GlassTabs  />
+<GlassTabs />
 ```
 
 #### WithIcons
 
 ```tsx
-<GlassTabs  />
+<GlassTabs />
 ```
 
 #### WithDisabledTabs
 
 ```tsx
-<GlassTabs  />
+<GlassTabs />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassTabs  />
+<GlassTabs />
 ```
 
 #### SettingsExample
 
 ```tsx
-<GlassTabs  />
+<GlassTabs />
 ```
 
 #### DocumentationExample
 
 ```tsx
-<GlassTabs  />
+<GlassTabs />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassTabs  />
+<GlassTabs />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassTabs  />
+<GlassTabs />
 ```
-
-
 
 ## Accessibility
 

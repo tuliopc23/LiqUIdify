@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassRadioGroup } from '@liquidify/ui'
+import { GlassRadioGroup } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassRadioGroup } from '@liquidify/ui/radio-group'
+import { GlassRadioGroup } from "@liquidify/ui/radio-group";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassRadioGroup } from '@liquidify/ui'
+import { GlassRadioGroup } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassRadioGroup />
+  return <GlassRadioGroup />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassRadioGroup } from '@liquidify/ui'
+import { GlassRadioGroup } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassRadioGroup />
+  return <GlassRadioGroup />;
 }
 ```
 
@@ -55,76 +55,74 @@ export default function Example() {
 #### Sizes
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### Orientations
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### Variants
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### Controlled
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### WithIcons
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### PaymentMethod
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### DeviceSelection
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### ThemeSelection
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### Survey
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### DisabledState
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassRadioGroup  />
+<GlassRadioGroup />
 ```
-
-
 
 ## Accessibility
 

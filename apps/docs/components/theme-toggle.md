@@ -11,14 +11,14 @@ npm install @liquidify/ui
 Or import just this component:
 
 ```tsx
-import { ThemeToggle } from '@liquidify/ui'
+import { ThemeToggle } from "@liquidify/ui";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { ThemeProvider, ThemeToggle, GlassCard } from '@liquidify/ui'
-import '@liquidify/ui/styles'
+import { ThemeProvider, ThemeToggle, GlassCard } from "@liquidify/ui";
+import "@liquidify/ui/styles";
 
 function App() {
   return (
@@ -33,53 +33,51 @@ function App() {
         </div>
       </ThemeProvider>
     </div>
-  )
+  );
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | `'button' \| 'dropdown' \| 'tabs' \| 'switch'` | `'button'` | The visual style of the theme toggle |
-| themes | `ThemeOption[]` | `defaultThemes` | Array of available theme options |
-| size | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the toggle component |
-| position | `'top-left' \| 'top-right' \| 'bottom-left' \| 'bottom-right'` | - | Fixed position on screen |
-| showLabels | `boolean` | `true` | Whether to show theme labels |
-| icon | `ReactNode` | `<PaletteIcon />` | Custom icon for the toggle |
-| onChange | `(theme: string) => void` | - | Callback when theme changes |
-| className | `string` | - | Additional CSS classes |
+| Prop       | Type                                                           | Default           | Description                          |
+| ---------- | -------------------------------------------------------------- | ----------------- | ------------------------------------ |
+| variant    | `'button' \| 'dropdown' \| 'tabs' \| 'switch'`                 | `'button'`        | The visual style of the theme toggle |
+| themes     | `ThemeOption[]`                                                | `defaultThemes`   | Array of available theme options     |
+| size       | `'sm' \| 'md' \| 'lg'`                                         | `'md'`            | Size of the toggle component         |
+| position   | `'top-left' \| 'top-right' \| 'bottom-left' \| 'bottom-right'` | -                 | Fixed position on screen             |
+| showLabels | `boolean`                                                      | `true`            | Whether to show theme labels         |
+| icon       | `ReactNode`                                                    | `<PaletteIcon />` | Custom icon for the toggle           |
+| onChange   | `(theme: string) => void`                                      | -                 | Callback when theme changes          |
+| className  | `string`                                                       | -                 | Additional CSS classes               |
 
 ## Variants
 
 ### Button Variant (Default)
+
 ```tsx
 <ThemeToggle variant="button" />
 ```
 
 ### Dropdown Variant
+
 ```tsx
-<ThemeToggle 
-  variant="dropdown"
-  showLabels={true}
-/>
+<ThemeToggle variant="dropdown" showLabels={true} />
 ```
 
 ### Tabs Variant
+
 ```tsx
-<ThemeToggle 
-  variant="tabs"
-  size="lg"
-/>
+<ThemeToggle variant="tabs" size="lg" />
 ```
 
 ### Switch Variant
+
 ```tsx
-<ThemeToggle 
+<ThemeToggle
   variant="switch"
   themes={[
-    { value: 'glass', label: 'Light' },
-    { value: 'glass-dark', label: 'Dark' }
+    { value: "glass", label: "Light" },
+    { value: "glass-dark", label: "Dark" },
   ]}
 />
 ```
@@ -89,43 +87,43 @@ function App() {
 Define your own theme options:
 
 ```tsx
-import { ThemeToggle, ThemeOption } from '@liquidify/ui'
+import { ThemeToggle, ThemeOption } from "@liquidify/ui";
 
 const customThemes: ThemeOption[] = [
   {
-    value: 'glass',
-    label: 'Default Glass',
-    icon: '✨',
-    description: 'Standard glassmorphism effects'
+    value: "glass",
+    label: "Default Glass",
+    icon: "✨",
+    description: "Standard glassmorphism effects",
   },
   {
-    value: 'glass-dark',
-    label: 'Dark Glass',
-    icon: '🌙',
-    description: 'Dark theme with enhanced contrast'
+    value: "glass-dark",
+    label: "Dark Glass",
+    icon: "🌙",
+    description: "Dark theme with enhanced contrast",
   },
   {
-    value: 'glass-light',
-    label: 'Light Glass',
-    icon: '☀️',
-    description: 'Light theme with subtle effects'
+    value: "glass-light",
+    label: "Light Glass",
+    icon: "☀️",
+    description: "Light theme with subtle effects",
   },
   {
-    value: 'minimal',
-    label: 'Minimal',
-    icon: '⚪',
-    description: 'Clean minimal design'
-  }
-]
+    value: "minimal",
+    label: "Minimal",
+    icon: "⚪",
+    description: "Clean minimal design",
+  },
+];
 
 function CustomThemeToggle() {
   return (
-    <ThemeToggle 
+    <ThemeToggle
       themes={customThemes}
       variant="dropdown"
-      onChange={(theme) => console.log('Theme changed to:', theme)}
+      onChange={(theme) => console.log("Theme changed to:", theme)}
     />
-  )
+  );
 }
 ```
 
@@ -135,14 +133,14 @@ Position the toggle at screen corners:
 
 ```tsx
 // Top-right corner
-<ThemeToggle 
+<ThemeToggle
   position="top-right"
   variant="button"
   size="sm"
 />
 
 // Bottom-left corner
-<ThemeToggle 
+<ThemeToggle
   position="bottom-left"
   variant="dropdown"
 />
@@ -153,26 +151,23 @@ Position the toggle at screen corners:
 Control the theme toggle with external state:
 
 ```tsx
-import { useState } from 'react'
-import { ThemeProvider, ThemeToggle } from '@liquidify/ui'
+import { useState } from "react";
+import { ThemeProvider, ThemeToggle } from "@liquidify/ui";
 
 function ControlledThemeApp() {
-  const [currentTheme, setCurrentTheme] = useState('glass')
-  
+  const [currentTheme, setCurrentTheme] = useState("glass");
+
   const handleThemeChange = (newTheme: string) => {
-    setCurrentTheme(newTheme)
+    setCurrentTheme(newTheme);
     // Save to localStorage
-    localStorage.setItem('preferred-theme', newTheme)
-  }
-  
+    localStorage.setItem("preferred-theme", newTheme);
+  };
+
   return (
     <ThemeProvider theme={currentTheme}>
-      <ThemeToggle 
-        onChange={handleThemeChange}
-        variant="tabs"
-      />
+      <ThemeToggle onChange={handleThemeChange} variant="tabs" />
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -181,39 +176,36 @@ function ControlledThemeApp() {
 Save user's theme preference:
 
 ```tsx
-import { useEffect, useState } from 'react'
-import { ThemeProvider, ThemeToggle } from '@liquidify/ui'
+import { useEffect, useState } from "react";
+import { ThemeProvider, ThemeToggle } from "@liquidify/ui";
 
 function PersistentThemeApp() {
-  const [theme, setTheme] = useState('glass')
-  
+  const [theme, setTheme] = useState("glass");
+
   // Load saved theme on mount
   useEffect(() => {
-    const savedTheme = localStorage.getItem('liquidify-theme')
+    const savedTheme = localStorage.getItem("liquidify-theme");
     if (savedTheme) {
-      setTheme(savedTheme)
+      setTheme(savedTheme);
     }
-  }, [])
-  
+  }, []);
+
   // Save theme when it changes
   const handleThemeChange = (newTheme: string) => {
-    setTheme(newTheme)
-    localStorage.setItem('liquidify-theme', newTheme)
-  }
-  
+    setTheme(newTheme);
+    localStorage.setItem("liquidify-theme", newTheme);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className="min-h-screen bg-gradient-to-br from-purple-400 to-pink-600">
-        <ThemeToggle 
-          onChange={handleThemeChange}
-          position="top-right"
-        />
+        <ThemeToggle onChange={handleThemeChange} position="top-right" />
         <div className="p-6">
           <h1>Your theme preference is saved!</h1>
         </div>
       </div>
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -222,50 +214,53 @@ function PersistentThemeApp() {
 Respect user's system theme preference:
 
 ```tsx
-import { useEffect, useState } from 'react'
-import { ThemeToggle } from '@liquidify/ui'
+import { useEffect, useState } from "react";
+import { ThemeToggle } from "@liquidify/ui";
 
 function useSystemTheme() {
-  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light')
-  
+  const [systemTheme, setSystemTheme] = useState<"light" | "dark">("light");
+
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    setSystemTheme(mediaQuery.matches ? 'dark' : 'light')
-    
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setSystemTheme(mediaQuery.matches ? "dark" : "light");
+
     const handleChange = (e: MediaQueryListEvent) => {
-      setSystemTheme(e.matches ? 'dark' : 'light')
-    }
-    
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
-  
-  return systemTheme
+      setSystemTheme(e.matches ? "dark" : "light");
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  return systemTheme;
 }
 
 function SystemThemeApp() {
-  const systemTheme = useSystemTheme()
-  const [userTheme, setUserTheme] = useState<string>('auto')
-  
-  const effectiveTheme = userTheme === 'auto' 
-    ? (systemTheme === 'dark' ? 'glass-dark' : 'glass')
-    : userTheme
-  
+  const systemTheme = useSystemTheme();
+  const [userTheme, setUserTheme] = useState<string>("auto");
+
+  const effectiveTheme =
+    userTheme === "auto"
+      ? systemTheme === "dark"
+        ? "glass-dark"
+        : "glass"
+      : userTheme;
+
   const themeOptions = [
-    { value: 'auto', label: 'Auto', icon: '🔄' },
-    { value: 'glass', label: 'Light', icon: '☀️' },
-    { value: 'glass-dark', label: 'Dark', icon: '🌙' }
-  ]
-  
+    { value: "auto", label: "Auto", icon: "🔄" },
+    { value: "glass", label: "Light", icon: "☀️" },
+    { value: "glass-dark", label: "Dark", icon: "🌙" },
+  ];
+
   return (
     <ThemeProvider theme={effectiveTheme}>
-      <ThemeToggle 
+      <ThemeToggle
         themes={themeOptions}
         onChange={setUserTheme}
         variant="dropdown"
       />
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -274,10 +269,7 @@ function SystemThemeApp() {
 Customize the appearance with CSS:
 
 ```tsx
-<ThemeToggle 
-  className="custom-theme-toggle"
-  variant="button"
-/>
+<ThemeToggle className="custom-theme-toggle" variant="button" />
 ```
 
 ```css
@@ -310,10 +302,7 @@ ThemeToggle supports full keyboard accessibility:
 - **Tab**: Navigate to next focusable element
 
 ```tsx
-<ThemeToggle 
-  variant="dropdown"
-  aria-label="Switch application theme"
-/>
+<ThemeToggle variant="dropdown" aria-label="Switch application theme" />
 ```
 
 ## Animation Options
@@ -321,11 +310,7 @@ ThemeToggle supports full keyboard accessibility:
 Control animations and transitions:
 
 ```tsx
-<ThemeToggle 
-  variant="tabs"
-  animationDuration={300}
-  animationType="slide"
-/>
+<ThemeToggle variant="tabs" animationDuration={300} animationType="slide" />
 ```
 
 ## Integration with Theme Provider
@@ -333,17 +318,17 @@ Control animations and transitions:
 ThemeToggle automatically integrates with ThemeProvider:
 
 ```tsx
-import { ThemeProvider, ThemeToggle, useTheme } from '@liquidify/ui'
+import { ThemeProvider, ThemeToggle, useTheme } from "@liquidify/ui";
 
 function ThemeStatus() {
-  const { theme } = useTheme()
-  
+  const { theme } = useTheme();
+
   return (
     <div className="p-4">
       <p>Current theme: {theme}</p>
       <ThemeToggle variant="button" />
     </div>
-  )
+  );
 }
 
 function App() {
@@ -351,13 +336,14 @@ function App() {
     <ThemeProvider theme="glass">
       <ThemeStatus />
     </ThemeProvider>
-  )
+  );
 }
 ```
 
 ## Examples
 
 ### Navigation Bar with Theme Toggle
+
 ```tsx
 function NavigationWithTheme() {
   return (
@@ -367,40 +353,33 @@ function NavigationWithTheme() {
         <a href="/home">Home</a>
         <a href="/about">About</a>
       </div>
-      
-      <ThemeToggle 
-        variant="button"
-        size="sm"
-        showLabels={false}
-      />
+
+      <ThemeToggle variant="button" size="sm" showLabels={false} />
     </nav>
-  )
+  );
 }
 ```
 
 ### Settings Panel with Theme Options
+
 ```tsx
 function SettingsPanel() {
   return (
     <div className="p-6">
       <h2 className="text-xl font-semibold mb-4">Appearance</h2>
-      
+
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">
           Theme Preference
         </label>
-        <ThemeToggle 
-          variant="tabs"
-          size="lg"
-          showLabels={true}
-        />
+        <ThemeToggle variant="tabs" size="lg" showLabels={true} />
       </div>
-      
+
       <p className="text-sm text-gray-600">
         Choose your preferred theme. Your selection will be saved automatically.
       </p>
     </div>
-  )
+  );
 }
 ```
 
@@ -433,22 +412,22 @@ ThemeToggle follows WCAG 2.1 guidelines:
 Full TypeScript support with proper interfaces:
 
 ```tsx
-import { ThemeToggle, ThemeOption, ThemeToggleProps } from '@liquidify/ui'
+import { ThemeToggle, ThemeOption, ThemeToggleProps } from "@liquidify/ui";
 
 const themes: ThemeOption[] = [
-  { value: 'glass', label: 'Glass', icon: '✨' },
-  { value: 'glass-dark', label: 'Dark', icon: '🌙' }
-]
+  { value: "glass", label: "Glass", icon: "✨" },
+  { value: "glass-dark", label: "Dark", icon: "🌙" },
+];
 
 const toggleProps: ThemeToggleProps = {
   themes,
-  variant: 'dropdown',
-  size: 'md',
-  onChange: (theme: string) => console.log(theme)
-}
+  variant: "dropdown",
+  size: "md",
+  onChange: (theme: string) => console.log(theme),
+};
 
 function TypedThemeToggle() {
-  return <ThemeToggle {...toggleProps} />
+  return <ThemeToggle {...toggleProps} />;
 }
 ```
 

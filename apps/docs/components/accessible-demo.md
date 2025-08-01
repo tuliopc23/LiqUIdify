@@ -16,38 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassAccessibleDemo } from '@liquidify/ui'
+import { GlassAccessibleDemo } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassAccessibleDemo } from '@liquidify/ui/accessible-demo'
+import { GlassAccessibleDemo } from "@liquidify/ui/accessible-demo";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassAccessibleDemo } from '@liquidify/ui'
+import { GlassAccessibleDemo } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassAccessibleDemo />
+  return <GlassAccessibleDemo />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| className? | `string` | - | - |
-
+| Prop       | Type     | Default | Description |
+| ---------- | -------- | ------- | ----------- |
+| className? | `string` | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassAccessibleDemo } from '@liquidify/ui'
+import { GlassAccessibleDemo } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassAccessibleDemo />
+  return <GlassAccessibleDemo />;
 }
 ```
 
@@ -56,34 +55,32 @@ export default function Example() {
 #### WithCustomStyling
 
 ```tsx
-<GlassAccessibleDemo  />
+<GlassAccessibleDemo />
 ```
 
 #### FeatureShowcase
 
 ```tsx
-<GlassAccessibleDemo  />
+<GlassAccessibleDemo />
 ```
 
 #### InteractiveGuide
 
 ```tsx
-<GlassAccessibleDemo  />
+<GlassAccessibleDemo />
 ```
 
 #### DarkModeDemo
 
 ```tsx
-<GlassAccessibleDemo  />
+<GlassAccessibleDemo />
 ```
 
 #### CompactView
 
 ```tsx
-<GlassAccessibleDemo  />
+<GlassAccessibleDemo />
 ```
-
-
 
 ## Accessibility
 

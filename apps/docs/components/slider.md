@@ -16,46 +16,45 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassSlider } from '@liquidify/ui'
+import { GlassSlider } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassSlider } from '@liquidify/ui/slider'
+import { GlassSlider } from "@liquidify/ui/slider";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassSlider } from '@liquidify/ui'
+import { GlassSlider } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSlider />
+  return <GlassSlider />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| min? | `number` | - | - |
-| max? | `number` | - | - |
-| step? | `number` | - | - |
-| value? | `number` | - | - |
-| onChange? | `(value: number) => void` | - | - |
-| disabled? | `boolean` | - | - |
-| className? | `string` | - | - |
-| showValue? | `boolean` | - | - |
-| variant? | `"default" \| "minimal"` | - | - |
-
+| Prop       | Type                      | Default | Description |
+| ---------- | ------------------------- | ------- | ----------- |
+| min?       | `number`                  | -       | -           |
+| max?       | `number`                  | -       | -           |
+| step?      | `number`                  | -       | -           |
+| value?     | `number`                  | -       | -           |
+| onChange?  | `(value: number) => void` | -       | -           |
+| disabled?  | `boolean`                 | -       | -           |
+| className? | `string`                  | -       | -           |
+| showValue? | `boolean`                 | -       | -           |
+| variant?   | `"default" \| "minimal"`  | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassSlider } from '@liquidify/ui'
+import { GlassSlider } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSlider />
+  return <GlassSlider />;
 }
 ```
 
@@ -64,64 +63,62 @@ export default function Example() {
 #### Controlled
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### CustomRange
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### StepIntervals
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### Disabled
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### MinimalVariant
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### VolumeControl
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### FormIntegration
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
 
 #### RealTimePreview
 
 ```tsx
-<GlassSlider  />
+<GlassSlider />
 ```
-
-
 
 ## Accessibility
 

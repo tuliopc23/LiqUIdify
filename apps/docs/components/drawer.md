@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassDrawer } from '@liquidify/ui'
+import { GlassDrawer } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassDrawer } from '@liquidify/ui/drawer'
+import { GlassDrawer } from "@liquidify/ui/drawer";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassDrawer } from '@liquidify/ui'
+import { GlassDrawer } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassDrawer />
+  return <GlassDrawer />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassDrawer } from '@liquidify/ui'
+import { GlassDrawer } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassDrawer />
+  return <GlassDrawer />;
 }
 ```
 
@@ -55,58 +55,56 @@ export default function Example() {
 #### LeftSide
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
 
 #### TopSide
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
 
 #### BottomSide
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
 
 #### SmallSize
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
 
 #### LargeSize
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
 
 #### FullSize
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
 
 #### WithForm
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
 
 #### WithoutCloseButton
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
 
 #### ScrollableContent
 
 ```tsx
-<GlassDrawer  />
+<GlassDrawer />
 ```
-
-
 
 ## Accessibility
 

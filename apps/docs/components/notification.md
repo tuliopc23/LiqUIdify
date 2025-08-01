@@ -16,42 +16,41 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassNotification } from '@liquidify/ui'
+import { GlassNotification } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassNotification } from '@liquidify/ui/notification'
+import { GlassNotification } from "@liquidify/ui/notification";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassNotification } from '@liquidify/ui'
+import { GlassNotification } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassNotification />
+  return <GlassNotification />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| notifications | `Array<NotificationItem>` | - | - |
-| onMarkAsRead? | `(id: string) => void` | - | - |
-| onMarkAllAsRead? | `() => void` | - | - |
-| onDismiss? | `(id: string) => void` | - | - |
-| className? | `string` | - | - |
-
+| Prop             | Type                      | Default | Description |
+| ---------------- | ------------------------- | ------- | ----------- |
+| notifications    | `Array<NotificationItem>` | -       | -           |
+| onMarkAsRead?    | `(id: string) => void`    | -       | -           |
+| onMarkAllAsRead? | `() => void`              | -       | -           |
+| onDismiss?       | `(id: string) => void`    | -       | -           |
+| className?       | `string`                  | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassNotification } from '@liquidify/ui'
+import { GlassNotification } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassNotification />
+  return <GlassNotification />;
 }
 ```
 
@@ -60,64 +59,62 @@ export default function Example() {
 #### EmptyState
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### AllRead
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### OnlyUnread
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### Interactive
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### NotificationTypes
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### LongContent
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### ManyNotifications
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### RealTimeUpdates
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### DarkTheme
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassNotification  />
+<GlassNotification />
 ```
-
-
 
 ## Accessibility
 

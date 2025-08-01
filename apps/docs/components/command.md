@@ -16,45 +16,42 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassCommand } from '@liquidify/ui'
+import { GlassCommand } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassCommand } from '@liquidify/ui/command'
+import { GlassCommand } from "@liquidify/ui/command";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassCommand } from '@liquidify/ui'
+import { GlassCommand } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCommand />
+  return <GlassCommand />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| items | `Array<CommandItem>` | - | - |
-| placeholder? | `string` | - | - |
-| shortcut? | `Array<string>` | - | - |
-| className? | `string` | - | - |
-
+| Prop         | Type                 | Default | Description |
+| ------------ | -------------------- | ------- | ----------- |
+| items        | `Array<CommandItem>` | -       | -           |
+| placeholder? | `string`             | -       | -           |
+| shortcut?    | `Array<string>`      | -       | -           |
+| className?   | `string`             | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassCommand } from '@liquidify/ui'
+import { GlassCommand } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCommand />
+  return <GlassCommand />;
 }
 ```
-
-
 
 ## Accessibility
 

@@ -16,41 +16,39 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassDatePicker } from '@liquidify/ui'
+import { GlassDatePicker } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassDatePicker } from '@liquidify/ui/date-picker'
+import { GlassDatePicker } from "@liquidify/ui/date-picker";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassDatePicker } from '@liquidify/ui'
+import { GlassDatePicker } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassDatePicker />
+  return <GlassDatePicker />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassDatePicker } from '@liquidify/ui'
+import { GlassDatePicker } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassDatePicker />
+  return <GlassDatePicker />;
 }
 ```
-
-
 
 ## Accessibility
 

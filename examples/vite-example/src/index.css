@@ -60,8 +60,9 @@
 
 /* Custom glassmorphism styles */
 body {
-  background: linear-gradient(135deg, 
-    #667eea 0%, 
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
     #764ba2 25%,
     #f093fb 50%,
     #f5576c 75%,
@@ -73,9 +74,15 @@ body {
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Glass effect utilities */
@@ -101,8 +108,13 @@ body {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .animate-pulse-soft {
@@ -110,8 +122,13 @@ body {
 }
 
 @keyframes pulseSoft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 /* Scrollbar styling */

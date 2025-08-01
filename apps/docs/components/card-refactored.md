@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassCardRefactored } from '@liquidify/ui'
+import { GlassCardRefactored } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassCardRefactored } from '@liquidify/ui/card-refactored'
+import { GlassCardRefactored } from "@liquidify/ui/card-refactored";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassCardRefactored } from '@liquidify/ui'
+import { GlassCardRefactored } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCardRefactored />
+  return <GlassCardRefactored />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassCardRefactored } from '@liquidify/ui'
+import { GlassCardRefactored } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCardRefactored />
+  return <GlassCardRefactored />;
 }
 ```
 
@@ -55,64 +55,62 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### Variants
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### InteractiveStates
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### GlassEffects
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### Elevations
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### CompoundComponents
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassCardRefactored  />
+<GlassCardRefactored />
 ```
-
-
 
 ## Accessibility
 

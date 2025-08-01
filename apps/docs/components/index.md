@@ -5,6 +5,7 @@ LiquidUI provides 52+ production-ready React components with glassmorphism desig
 ## Component Categories
 
 ### Core Components
+
 Essential building blocks for any application.
 
 - [GlassButton](/components/button) - Interactive button with multiple variants
@@ -16,6 +17,7 @@ Essential building blocks for any application.
 - [GlassAvatar](/components/avatar) - User avatars
 
 ### Form Components
+
 Complete form building blocks with validation support.
 
 - [GlassCheckbox](/components/checkbox) - Checkbox input
@@ -32,6 +34,7 @@ Complete form building blocks with validation support.
 - [GlassCheckboxGroup](/components/checkbox-group) - Multiple checkbox group
 
 ### Navigation Components
+
 Components for app navigation and wayfinding.
 
 - [GlassBreadcrumbs](/components/breadcrumbs) - Navigation trail
@@ -42,6 +45,7 @@ Components for app navigation and wayfinding.
 - [GlassMobileNav](/components/mobile-nav) - Mobile navigation menu
 
 ### Feedback Components
+
 User feedback and notification components.
 
 - [GlassAlert](/components/alert) - Alert messages
@@ -54,6 +58,7 @@ User feedback and notification components.
 - [GlassSkeleton](/components/skeleton) - Content placeholders
 
 ### Data Display
+
 Components for presenting data and content.
 
 - [GlassTable](/components/table) - Data table
@@ -64,6 +69,7 @@ Components for presenting data and content.
 - [GlassPerformanceDashboard](/components/performance-dashboard) - Performance metrics
 
 ### Layout Components
+
 Structural components for page layouts.
 
 - [GlassDrawer](/components/drawer) - Slide-out panel
@@ -72,6 +78,7 @@ Structural components for page layouts.
 - [GlassPortal](/components/portal) - Portal rendering
 
 ### Utility Components
+
 Helper components for common patterns.
 
 - [GlassCommand](/components/command) - Command palette
@@ -82,6 +89,7 @@ Helper components for common patterns.
 - [GlassPlayground](/components/playground) - Component playground
 
 ### Accessibility Components
+
 Components focused on accessibility.
 
 - [GlassFocusTrap](/components/focus-trap) - Focus management
@@ -92,6 +100,7 @@ Components focused on accessibility.
 - [GlassFocusDemo](/components/focus-demo) - Focus management demo
 
 ### Responsive Components
+
 Components with enhanced responsive behavior.
 
 - [GlassResponsiveButton](/components/responsive-button) - Adaptive button
@@ -141,8 +150,8 @@ All LiqUIdify components share these common features:
 4. Build amazing interfaces!
 
 ```tsx
-import { GlassButton, GlassCard } from '@liquidify/components';
-import '@liquidify/components/css';
+import { GlassButton, GlassCard } from "@liquidify/components";
+import "@liquidify/components/css";
 
 function MyComponent() {
   return (

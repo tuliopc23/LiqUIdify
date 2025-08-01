@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassInput } from '@liquidify/ui'
+import { GlassInput } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassInput } from '@liquidify/ui/input'
+import { GlassInput } from "@liquidify/ui/input";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassInput } from '@liquidify/ui'
+import { GlassInput } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassInput />
+  return <GlassInput />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassInput } from '@liquidify/ui'
+import { GlassInput } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassInput />
+  return <GlassInput />;
 }
 ```
 
@@ -55,58 +55,56 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
 
 #### Variants
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
 
 #### WithIcons
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
 
 #### Features
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
 
 #### FormExample
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassInput  />
+<GlassInput />
 ```
-
-
 
 ## Accessibility
 

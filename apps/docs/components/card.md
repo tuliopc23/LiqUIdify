@@ -5,9 +5,9 @@ A versatile container component with glassmorphism design, perfect for grouping 
 ## Import
 
 ```tsx
-import { GlassCard } from '@liquidify/components';
+import { GlassCard } from "@liquidify/components";
 // or
-import { GlassCard } from '@liquidify/components/card';
+import { GlassCard } from "@liquidify/components/card";
 ```
 
 ## Basic Usage
@@ -21,16 +21,16 @@ import { GlassCard } from '@liquidify/components/card';
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'default' \| 'elevated' \| 'outlined' \| 'filled'` | `'default'` | Visual style variant |
-| `padding` | `'none' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Padding size |
-| `hover` | `boolean` | `false` | Enable hover effects |
-| `clickable` | `boolean` | `false` | Make card clickable |
-| `disabled` | `boolean` | `false` | Disable interactions |
-| `className` | `string` | `''` | Additional CSS classes |
-| `onClick` | `() => void` | - | Click handler |
-| `as` | `ElementType` | `'div'` | HTML element to render |
+| Prop        | Type                                                | Default     | Description            |
+| ----------- | --------------------------------------------------- | ----------- | ---------------------- |
+| `variant`   | `'default' \| 'elevated' \| 'outlined' \| 'filled'` | `'default'` | Visual style variant   |
+| `padding`   | `'none' \| 'sm' \| 'md' \| 'lg' \| 'xl'`            | `'md'`      | Padding size           |
+| `hover`     | `boolean`                                           | `false`     | Enable hover effects   |
+| `clickable` | `boolean`                                           | `false`     | Make card clickable    |
+| `disabled`  | `boolean`                                           | `false`     | Disable interactions   |
+| `className` | `string`                                            | `''`        | Additional CSS classes |
+| `onClick`   | `() => void`                                        | -           | Click handler          |
+| `as`        | `ElementType`                                       | `'div'`     | HTML element to render |
 
 ## Examples
 
@@ -66,7 +66,7 @@ import { GlassCard } from '@liquidify/components/card';
 <GlassCard
   hover
   clickable
-  onClick={() => console.log('Card clicked')}
+  onClick={() => console.log("Card clicked")}
   className="cursor-pointer"
 >
   <h3>Interactive Card</h3>
@@ -81,15 +81,19 @@ import { GlassCard } from '@liquidify/components/card';
   <div className="p-4 border-b border-white/10">
     <h3 className="font-semibold">Card Header</h3>
   </div>
-  
+
   <div className="p-4">
     <p>Main content area with custom sections</p>
   </div>
-  
+
   <div className="p-4 border-t border-white/10">
     <div className="flex justify-end gap-2">
-      <GlassButton size="sm" variant="secondary">Cancel</GlassButton>
-      <GlassButton size="sm" variant="primary">Save</GlassButton>
+      <GlassButton size="sm" variant="secondary">
+        Cancel
+      </GlassButton>
+      <GlassButton size="sm" variant="primary">
+        Save
+      </GlassButton>
     </div>
   </div>
 </GlassCard>
@@ -99,11 +103,7 @@ import { GlassCard } from '@liquidify/components/card';
 
 ```tsx
 <GlassCard padding="none" className="overflow-hidden">
-  <img 
-    src="/image.jpg" 
-    alt="Card media"
-    className="w-full h-48 object-cover"
-  />
+  <img src="/image.jpg" alt="Card media" className="w-full h-48 object-cover" />
   <div className="p-4">
     <h3 className="font-semibold mb-2">Beautiful Landscape</h3>
     <p className="text-sm text-gray-600">
@@ -144,9 +144,7 @@ import { GlassCard } from '@liquidify/components/card';
 ### Custom Colors
 
 ```tsx
-<GlassCard 
-  className="bg-gradient-to-br from-purple-500/10 to-pink-500/10"
->
+<GlassCard className="bg-gradient-to-br from-purple-500/10 to-pink-500/10">
   <h3>Gradient Card</h3>
   <p>With custom gradient background</p>
 </GlassCard>

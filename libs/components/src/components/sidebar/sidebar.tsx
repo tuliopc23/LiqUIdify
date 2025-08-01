@@ -65,7 +65,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
       closeOnOverlayClick = true,
       closeOnEsc = true,
     },
-    ref
+    ref,
   ) => {
     const [internalOpen, setInternalOpen] = useState(defaultOpen);
     const isControlled = controlledOpen !== undefined;
@@ -124,7 +124,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
         className={cn(
           "h-full flex flex-col",
           positionClasses[position].rounded,
-          className
+          className,
         )}
         variant="default"
         blur="md"
@@ -163,9 +163,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
         <div className="flex-1 overflow-y-auto p-4">{children}</div>
 
         {/* Footer */}
-        {footer && (
-          <div className="p-4 border-t border-white/10">{footer}</div>
-        )}
+        {footer && <div className="p-4 border-t border-white/10">{footer}</div>}
       </UnifiedGlassEffect>
     );
 
@@ -178,7 +176,9 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
             widthMap[width],
             positionClasses[position].sidebar,
             !open && positionClasses[position].translate,
-            collapsible && !open && `${widthMap[width]} md:w-[${collapsedWidth}]`
+            collapsible &&
+              !open &&
+              `${widthMap[width]} md:w-[${collapsedWidth}]`,
           )}
           style={{ zIndex }}
         >
@@ -195,7 +195,9 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
           <div
             className="fixed inset-0 bg-black/50 transition-opacity md:hidden"
             style={{ zIndex: zIndex - 1 }}
-            onClick={closeOnOverlayClick ? () => handleOpenChange(false) : undefined}
+            onClick={
+              closeOnOverlayClick ? () => handleOpenChange(false) : undefined
+            }
           />
         )}
 
@@ -206,7 +208,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
             widthMap[width],
             positionClasses[position].sidebar,
             !open && positionClasses[position].translate,
-            overlay && "md:sticky md:translate-x-0"
+            overlay && "md:sticky md:translate-x-0",
           )}
           style={{ zIndex }}
         >
@@ -214,7 +216,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
         </div>
       </>
     );
-  }
+  },
 );
 
 Sidebar.displayName = "Sidebar";
@@ -260,7 +262,7 @@ export const SidebarItem = React.forwardRef<
       disabled,
       badge,
     },
-    ref
+    ref,
   ) => {
     const Component = href ? "a" : "button";
 
@@ -277,7 +279,7 @@ export const SidebarItem = React.forwardRef<
             active && "bg-white/15 text-primary font-medium",
             disabled && "opacity-50 cursor-not-allowed",
             !active && !disabled && "text-gray-700 dark:text-gray-300",
-            className
+            className,
           )}
         >
           {icon && <span className="flex-shrink-0">{icon}</span>}
@@ -287,7 +289,7 @@ export const SidebarItem = React.forwardRef<
             <svg
               className={cn(
                 "w-4 h-4 transition-transform",
-                !collapsed && "rotate-90"
+                !collapsed && "rotate-90",
               )}
               fill="none"
               viewBox="0 0 24 24"
@@ -307,7 +309,7 @@ export const SidebarItem = React.forwardRef<
         )}
       </div>
     );
-  }
+  },
 );
 
 SidebarItem.displayName = "SidebarItem";
@@ -338,6 +340,6 @@ export const SidebarSection: React.FC<SidebarSectionProps> = ({
 );
 
 // SidebarDivider for visual separation
-export const SidebarDivider: React.FC<{ className?: string }> = ({ className }) => (
-  <hr className={cn("my-4 border-white/10", className)} />
-);
+export const SidebarDivider: React.FC<{ className?: string }> = ({
+  className,
+}) => <hr className={cn("my-4 border-white/10", className)} />;

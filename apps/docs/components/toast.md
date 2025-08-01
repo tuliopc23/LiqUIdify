@@ -16,49 +16,50 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassToast } from '@liquidify/ui'
+import { GlassToast } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassToast } from '@liquidify/ui/toast'
+import { GlassToast } from "@liquidify/ui/toast";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassToast } from '@liquidify/ui'
+import { GlassToast } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassToast />
+  return <GlassToast />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `React.ReactNode` | - | - |
-| position? | `\| "top-right"
+| Prop      | Type              | Default | Description |
+| --------- | ----------------- | ------- | ----------- |
+| children  | `React.ReactNode` | -       | -           |
+| position? | `\| "top-right"   |
+
     \| "top-left"
     \| "bottom-right"
     \| "bottom-left"
     \| "top-center"
     \| "bottom-center"` | - | - |
+
 | toast | `Toast` | - | - |
 | onRemove | `(id: string) => void` | - | - |
 | type? | `"success" \| "error" \| "warning" \| "info"` | - | - |
 | message | `string` | - | - |
 | onClose? | `() => void` | - | - |
 
-
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassToast } from '@liquidify/ui'
+import { GlassToast } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassToast />
+  return <GlassToast />;
 }
 ```
 
@@ -67,58 +68,56 @@ export default function Example() {
 #### Types
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
 
 #### WithToastProvider
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
 
 #### Positions
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
 
 #### WithActions
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
 
 #### CustomDuration
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
 
 #### MultipleToasts
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
 
 #### FormValidation
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
 
 #### ThemeVariations
 
 ```tsx
-<GlassToast  />
+<GlassToast />
 ```
-
-
 
 ## Accessibility
 

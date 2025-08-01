@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassFormField } from '@liquidify/ui'
+import { GlassFormField } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassFormField } from '@liquidify/ui/form-field'
+import { GlassFormField } from "@liquidify/ui/form-field";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassFormField } from '@liquidify/ui'
+import { GlassFormField } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassFormField />
+  return <GlassFormField />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassFormField } from '@liquidify/ui'
+import { GlassFormField } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassFormField />
+  return <GlassFormField />;
 }
 ```
 
@@ -55,58 +55,56 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
 
 #### Variants
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
 
 #### ValidationStates
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
 
 #### InputTypes
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassFormField  />
+<GlassFormField />
 ```
-
-
 
 ## Accessibility
 

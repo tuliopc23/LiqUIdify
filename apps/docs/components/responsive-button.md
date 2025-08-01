@@ -16,41 +16,39 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassResponsiveButton } from '@liquidify/ui'
+import { GlassResponsiveButton } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassResponsiveButton } from '@liquidify/ui/responsive-button'
+import { GlassResponsiveButton } from "@liquidify/ui/responsive-button";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassResponsiveButton } from '@liquidify/ui'
+import { GlassResponsiveButton } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassResponsiveButton />
+  return <GlassResponsiveButton />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassResponsiveButton } from '@liquidify/ui'
+import { GlassResponsiveButton } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassResponsiveButton />
+  return <GlassResponsiveButton />;
 }
 ```
-
-
 
 ## Accessibility
 

@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassAccordion } from '@liquidify/ui'
+import { GlassAccordion } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassAccordion } from '@liquidify/ui/accordion'
+import { GlassAccordion } from "@liquidify/ui/accordion";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassAccordion } from '@liquidify/ui'
+import { GlassAccordion } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassAccordion />
+  return <GlassAccordion />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassAccordion } from '@liquidify/ui'
+import { GlassAccordion } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassAccordion />
+  return <GlassAccordion />;
 }
 ```
 
@@ -55,58 +55,56 @@ export default function Example() {
 #### Single
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
 
 #### Multiple
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
 
 #### Variants
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
 
 #### NoIcon
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
 
 #### Controlled
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
 
 #### ComplexContent
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
 
 #### CompoundPattern
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassAccordion  />
+<GlassAccordion />
 ```
-
-
 
 ## Accessibility
 

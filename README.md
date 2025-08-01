@@ -47,8 +47,12 @@ bun add @liquidify/components
 ### Basic Usage
 
 ```tsx
-import { GlassButton, GlassCard, UnifiedGlassProvider } from '@liquidify/components';
-import '@liquidify/components/css';
+import {
+  GlassButton,
+  GlassCard,
+  UnifiedGlassProvider,
+} from "@liquidify/components";
+import "@liquidify/components/css";
 
 function App() {
   return (
@@ -69,21 +73,21 @@ function App() {
 
 ```tsx
 // Import specific components for smaller bundle size
-import { GlassButton } from '@liquidify/components/button';
-import { GlassCard } from '@liquidify/components/card';
-import { GlassModal } from '@liquidify/components/modal';
+import { GlassButton } from "@liquidify/components/button";
+import { GlassCard } from "@liquidify/components/card";
+import { GlassModal } from "@liquidify/components/modal";
 
 // Import component bundles by category
-import * as Core from '@liquidify/components/core';
-import * as Forms from '@liquidify/components/forms';
-import * as Navigation from '@liquidify/components/navigation';
-import * as Feedback from '@liquidify/components/feedback';
+import * as Core from "@liquidify/components/core";
+import * as Forms from "@liquidify/components/forms";
+import * as Navigation from "@liquidify/components/navigation";
+import * as Feedback from "@liquidify/components/feedback";
 
 // Import just the CSS you need
-import '@liquidify/components/css'; // All styles
+import "@liquidify/components/css"; // All styles
 // OR import specific style bundles
-import '@liquidify/components/styles/core.css';
-import '@liquidify/components/styles/forms.css';
+import "@liquidify/components/styles/core.css";
+import "@liquidify/components/styles/forms.css";
 ```
 
 ## 📚 Documentation

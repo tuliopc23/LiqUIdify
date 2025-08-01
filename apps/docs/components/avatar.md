@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassAvatar } from '@liquidify/ui'
+import { GlassAvatar } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassAvatar } from '@liquidify/ui/avatar'
+import { GlassAvatar } from "@liquidify/ui/avatar";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassAvatar } from '@liquidify/ui'
+import { GlassAvatar } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassAvatar />
+  return <GlassAvatar />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassAvatar } from '@liquidify/ui'
+import { GlassAvatar } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassAvatar />
+  return <GlassAvatar />;
 }
 ```
 
@@ -55,88 +55,86 @@ export default function Example() {
 #### WithImage
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### WithInitials
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### DefaultFallback
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### Variants
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### WithBorders
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### StatusIndicators
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### FallbackExamples
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### AvatarGroups
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### ErrorHandling
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassAvatar  />
+<GlassAvatar />
 ```
-
-
 
 ## Accessibility
 

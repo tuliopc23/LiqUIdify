@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassTable } from '@liquidify/ui'
+import { GlassTable } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassTable } from '@liquidify/ui/table'
+import { GlassTable } from "@liquidify/ui/table";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassTable } from '@liquidify/ui'
+import { GlassTable } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTable />
+  return <GlassTable />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassTable } from '@liquidify/ui'
+import { GlassTable } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTable />
+  return <GlassTable />;
 }
 ```
 
@@ -55,34 +55,32 @@ export default function Example() {
 #### WithCustomRendering
 
 ```tsx
-<GlassTable  />
+<GlassTable />
 ```
 
 #### ProductTable
 
 ```tsx
-<GlassTable  />
+<GlassTable />
 ```
 
 #### EmptyTable
 
 ```tsx
-<GlassTable  />
+<GlassTable />
 ```
 
 #### LargeDataset
 
 ```tsx
-<GlassTable  />
+<GlassTable />
 ```
 
 #### StyledTable
 
 ```tsx
-<GlassTable  />
+<GlassTable />
 ```
-
-
 
 ## Accessibility
 

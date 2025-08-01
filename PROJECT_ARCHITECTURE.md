@@ -67,17 +67,20 @@ The main library is built using Vite with the following configuration:
 ## Scripts
 
 ### Development
+
 - `bun run dev` - Start Vite dev server for library development
 - `bun run storybook` - Start Storybook dev server
 - `bun run docs:dev` - Start VitePress dev server
 
 ### Building
+
 - `bun run build` - Build all (library + Storybook + docs)
 - `bun run build:lib` - Build component library only
 - `bun run build:storybook` - Build Storybook static site
 - `bun run docs:build` - Build VitePress documentation
 
 ### Quality
+
 - `bun run lint` - Run quality checks
 - `bun run format` - Format code
 - `bun run test` - Run tests
@@ -106,11 +109,13 @@ The library provides multiple entry points:
 ## Current Status
 
 ✅ **Build Configuration Verified**: The monorepo is properly configured with:
+
 - Vite for library bundling (ESM and CJS outputs)
 - Storybook for component showcase
 - VitePress for documentation
 
-⚠️ **Component Implementation Status**: 
+⚠️ **Component Implementation Status**:
+
 - Most component implementations are missing from the repository
 - Only Storybook stories and test files exist for most components
 - Created a sample GlassButton component to verify the build process works

@@ -16,56 +16,55 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassFileUpload } from '@liquidify/ui'
+import { GlassFileUpload } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassFileUpload } from '@liquidify/ui/file-upload'
+import { GlassFileUpload } from "@liquidify/ui/file-upload";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassFileUpload } from '@liquidify/ui'
+import { GlassFileUpload } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassFileUpload />
+  return <GlassFileUpload />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| onFilesChange? | `(files: Array<FileUploadItem>) => void` | - | - |
-| onUpload? | `(files: Array<File>) => Promise<void>` | - | - |
-| accept? | `string` | - | - |
-| multiple? | `boolean` | - | - |
-| maxFiles? | `number` | - | - |
-| maxFileSize? | `number` | - | - |
-| disabled? | `boolean` | - | - |
-| showPreview? | `boolean` | - | - |
-| showProgress? | `boolean` | - | - |
-| allowedTypes? | `Array<string>` | - | - |
-| dropzoneText? | `string` | - | - |
-| browseText? | `string` | - | - |
-| className? | `string` | - | - |
-| id? | `string` | - | - |
-| onDragEnter? | `React.DragEventHandler<HTMLDivElement>` | - | - |
-| onDragLeave? | `React.DragEventHandler<HTMLDivElement>` | - | - |
-| onDragOver? | `React.DragEventHandler<HTMLDivElement>` | - | - |
-| onDrop? | `React.DragEventHandler<HTMLDivElement>` | - | - |
-| size? | `"sm" \| "md" \| "lg"` | - | - |
-
+| Prop           | Type                                     | Default | Description |
+| -------------- | ---------------------------------------- | ------- | ----------- |
+| onFilesChange? | `(files: Array<FileUploadItem>) => void` | -       | -           |
+| onUpload?      | `(files: Array<File>) => Promise<void>`  | -       | -           |
+| accept?        | `string`                                 | -       | -           |
+| multiple?      | `boolean`                                | -       | -           |
+| maxFiles?      | `number`                                 | -       | -           |
+| maxFileSize?   | `number`                                 | -       | -           |
+| disabled?      | `boolean`                                | -       | -           |
+| showPreview?   | `boolean`                                | -       | -           |
+| showProgress?  | `boolean`                                | -       | -           |
+| allowedTypes?  | `Array<string>`                          | -       | -           |
+| dropzoneText?  | `string`                                 | -       | -           |
+| browseText?    | `string`                                 | -       | -           |
+| className?     | `string`                                 | -       | -           |
+| id?            | `string`                                 | -       | -           |
+| onDragEnter?   | `React.DragEventHandler<HTMLDivElement>` | -       | -           |
+| onDragLeave?   | `React.DragEventHandler<HTMLDivElement>` | -       | -           |
+| onDragOver?    | `React.DragEventHandler<HTMLDivElement>` | -       | -           |
+| onDrop?        | `React.DragEventHandler<HTMLDivElement>` | -       | -           |
+| size?          | `"sm" \| "md" \| "lg"`                   | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassFileUpload } from '@liquidify/ui'
+import { GlassFileUpload } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassFileUpload />
+  return <GlassFileUpload />;
 }
 ```
 
@@ -74,52 +73,50 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassFileUpload  />
+<GlassFileUpload />
 ```
 
 #### BasicUsage
 
 ```tsx
-<GlassFileUpload  />
+<GlassFileUpload />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassFileUpload  />
+<GlassFileUpload />
 ```
 
 #### FileTypeExamples
 
 ```tsx
-<GlassFileUpload  />
+<GlassFileUpload />
 ```
 
 #### UploadStates
 
 ```tsx
-<GlassFileUpload  />
+<GlassFileUpload />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassFileUpload  />
+<GlassFileUpload />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassFileUpload  />
+<GlassFileUpload />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassFileUpload  />
+<GlassFileUpload />
 ```
-
-
 
 ## Accessibility
 

@@ -20,11 +20,11 @@ Instead of importing the entire library, import individual components:
 
 ```javascript
 // ❌ Bad - imports entire library
-import { GlassButton, GlassCard } from '@liquidify/components';
+import { GlassButton, GlassCard } from "@liquidify/components";
 
 // ✅ Good - imports only needed components
-import { GlassButton } from '@liquidify/components/button';
-import { GlassCard } from '@liquidify/components/card';
+import { GlassButton } from "@liquidify/components/button";
+import { GlassCard } from "@liquidify/components/card";
 ```
 
 ### Use Bundle Imports for Related Components
@@ -33,10 +33,14 @@ When using multiple components from the same category:
 
 ```javascript
 // ✅ Import entire navigation bundle if using multiple nav components
-import { GlassBreadcrumbs, GlassPagination, GlassTabs } from '@liquidify/components/navigation';
+import {
+  GlassBreadcrumbs,
+  GlassPagination,
+  GlassTabs,
+} from "@liquidify/components/navigation";
 
 // ✅ Import individual components if using only one
-import { GlassTabs } from '@liquidify/components/tabs';
+import { GlassTabs } from "@liquidify/components/tabs";
 ```
 
 ### Lazy Load Heavy Components
@@ -44,10 +48,10 @@ import { GlassTabs } from '@liquidify/components/tabs';
 For components used conditionally or on specific routes:
 
 ```javascript
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from "react";
 
 // Lazy load modal component
-const GlassModal = lazy(() => import('@liquidify/components/modal'));
+const GlassModal = lazy(() => import("@liquidify/components/modal"));
 
 function App() {
   return (
@@ -66,7 +70,7 @@ Ensure your webpack config supports tree shaking:
 
 ```javascript
 module.exports = {
-  mode: 'production',
+  mode: "production",
   optimization: {
     usedExports: true,
     sideEffects: false,
@@ -85,8 +89,8 @@ export default {
     rollupOptions: {
       output: {
         manualChunks: {
-          'liquidify-core': ['@liquidify/components/core'],
-          'liquidify-forms': ['@liquidify/components/forms'],
+          "liquidify-core": ["@liquidify/components/core"],
+          "liquidify-forms": ["@liquidify/components/forms"],
         },
       },
     },
@@ -129,16 +133,17 @@ Glass effects use CSS transforms for optimal performance:
 For components with hover animations:
 
 ```javascript
-import { GlassCard } from '@liquidify/components/card';
-import { useMemo } from 'react';
-import { debounce } from 'lodash';
+import { GlassCard } from "@liquidify/components/card";
+import { useMemo } from "react";
+import { debounce } from "lodash";
 
 function OptimizedCard() {
   const handleHover = useMemo(
-    () => debounce((e) => {
-      // Handle hover effect
-    }, 50),
-    []
+    () =>
+      debounce((e) => {
+        // Handle hover effect
+      }, 50),
+    [],
   );
 
   return <GlassCard onMouseMove={handleHover} />;
@@ -165,7 +170,7 @@ Respect user preferences for reduced motion:
 For tables with thousands of rows:
 
 ```javascript
-import { GlassTable } from '@liquidify/components/table';
+import { GlassTable } from "@liquidify/components/table";
 
 function LargeDataTable({ data }) {
   return (
@@ -185,13 +190,13 @@ function LargeDataTable({ data }) {
 Use pagination for better performance:
 
 ```javascript
-import { GlassTable, GlassPagination } from '@liquidify/components';
-import { useState, useMemo } from 'react';
+import { GlassTable, GlassPagination } from "@liquidify/components";
+import { useState, useMemo } from "react";
 
 function PaginatedTable({ data }) {
   const [page, setPage] = useState(1);
   const pageSize = 50;
-  
+
   const paginatedData = useMemo(() => {
     const start = (page - 1) * pageSize;
     return data.slice(start, start + pageSize);
@@ -215,8 +220,8 @@ function PaginatedTable({ data }) {
 For continuous data loading:
 
 ```javascript
-import { GlassList } from '@liquidify/components/list';
-import { useInfiniteScroll } from './hooks';
+import { GlassList } from "@liquidify/components/list";
+import { useInfiniteScroll } from "./hooks";
 
 function InfiniteList() {
   const { data, loading, hasMore, loadMore } = useInfiniteScroll();
@@ -238,7 +243,7 @@ function InfiniteList() {
 Components automatically clean up, but for custom implementations:
 
 ```javascript
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 function CustomGlassComponent() {
   const ref = useRef(null);
@@ -249,8 +254,8 @@ function CustomGlassComponent() {
       // Handle resize
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return <div ref={ref} className="glass-custom" />;
@@ -262,12 +267,12 @@ function CustomGlassComponent() {
 Use React.memo and useMemo for optimization:
 
 ```javascript
-import { memo, useMemo } from 'react';
-import { GlassCard } from '@liquidify/components/card';
+import { memo, useMemo } from "react";
+import { GlassCard } from "@liquidify/components/card";
 
 const ExpensiveComponent = memo(({ data }) => {
   const processedData = useMemo(() => {
-    return data.map(item => ({
+    return data.map((item) => ({
       ...item,
       computed: expensiveComputation(item),
     }));
@@ -275,7 +280,7 @@ const ExpensiveComponent = memo(({ data }) => {
 
   return (
     <GlassCard>
-      {processedData.map(item => (
+      {processedData.map((item) => (
         <div key={item.id}>{item.computed}</div>
       ))}
     </GlassCard>
@@ -288,7 +293,7 @@ const ExpensiveComponent = memo(({ data }) => {
 Clean up refs properly:
 
 ```javascript
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 function GlassVideoPlayer() {
   const videoRef = useRef(null);
@@ -298,7 +303,7 @@ function GlassVideoPlayer() {
     return () => {
       // Clean up media stream
       if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
   }, []);
@@ -353,7 +358,7 @@ Reduce the number of glass layers:
 Disable effects on low-end devices:
 
 ```javascript
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 function useHighPerformanceDevice() {
   const [isHighPerf, setIsHighPerf] = useState(true);
@@ -361,12 +366,12 @@ function useHighPerformanceDevice() {
   useEffect(() => {
     // Check device capabilities
     const checkPerformance = async () => {
-      if ('gpu' in navigator) {
+      if ("gpu" in navigator) {
         const gpu = await navigator.gpu.requestAdapter();
         setIsHighPerf(gpu?.features.size > 10);
       }
     };
-    
+
     checkPerformance();
   }, []);
 
@@ -375,10 +380,10 @@ function useHighPerformanceDevice() {
 
 function AdaptiveGlassCard({ children }) {
   const isHighPerf = useHighPerformanceDevice();
-  
+
   return (
-    <GlassCard 
-      variant={isHighPerf ? 'full' : 'simple'}
+    <GlassCard
+      variant={isHighPerf ? "full" : "simple"}
       blur={isHighPerf ? 20 : 0}
     >
       {children}
@@ -404,7 +409,7 @@ Use React DevTools to identify performance bottlenecks:
 Create a custom hook for monitoring:
 
 ```javascript
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 function usePerformanceMonitor(componentName) {
   const renderCount = useRef(0);
@@ -416,11 +421,12 @@ function usePerformanceMonitor(componentName) {
 
     return () => {
       renderTime.current = performance.now() - startTime;
-      
-      if (renderTime.current > 16.67) { // Slower than 60fps
+
+      if (renderTime.current > 16.67) {
+        // Slower than 60fps
         console.warn(
           `${componentName} render took ${renderTime.current.toFixed(2)}ms`,
-          `(${renderCount.current} renders)`
+          `(${renderCount.current} renders)`,
         );
       }
     };
@@ -429,7 +435,7 @@ function usePerformanceMonitor(componentName) {
 
 // Usage
 function MyComponent() {
-  usePerformanceMonitor('MyComponent');
+  usePerformanceMonitor("MyComponent");
   return <GlassCard>Content</GlassCard>;
 }
 ```
@@ -460,6 +466,7 @@ Add size monitoring to your CI/CD:
 ## Performance Checklist
 
 ### Development
+
 - [ ] Import components individually
 - [ ] Use React.memo for expensive components
 - [ ] Implement virtual scrolling for large lists
@@ -467,6 +474,7 @@ Add size monitoring to your CI/CD:
 - [ ] Clean up event listeners and timers
 
 ### Build Time
+
 - [ ] Enable tree shaking
 - [ ] Analyze bundle size
 - [ ] Split code by routes
@@ -474,6 +482,7 @@ Add size monitoring to your CI/CD:
 - [ ] Generate source maps for debugging
 
 ### Runtime
+
 - [ ] Monitor render performance
 - [ ] Track memory usage
 - [ ] Profile with React DevTools
@@ -481,6 +490,7 @@ Add size monitoring to your CI/CD:
 - [ ] Measure Core Web Vitals
 
 ### Glass Effects
+
 - [ ] Limit backdrop-filter usage
 - [ ] Reduce glass layer nesting
 - [ ] Disable effects on low-end devices

@@ -16,47 +16,44 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassChart } from '@liquidify/ui'
+import { GlassChart } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassChart } from '@liquidify/ui/chart'
+import { GlassChart } from "@liquidify/ui/chart";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassChart } from '@liquidify/ui'
+import { GlassChart } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassChart />
+  return <GlassChart />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| data | `Array<ChartDataPoint>` | - | - |
-| width? | `number` | - | - |
-| height? | `number` | - | - |
-| className? | `string` | - | - |
-| animated? | `boolean` | - | - |
-| showTooltip? | `boolean` | - | - |
-
+| Prop         | Type                    | Default | Description |
+| ------------ | ----------------------- | ------- | ----------- |
+| data         | `Array<ChartDataPoint>` | -       | -           |
+| width?       | `number`                | -       | -           |
+| height?      | `number`                | -       | -           |
+| className?   | `string`                | -       | -           |
+| animated?    | `boolean`               | -       | -           |
+| showTooltip? | `boolean`               | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassChart } from '@liquidify/ui'
+import { GlassChart } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassChart />
+  return <GlassChart />;
 }
 ```
-
-
 
 ## Accessibility
 

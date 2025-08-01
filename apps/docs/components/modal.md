@@ -16,48 +16,47 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassModal } from '@liquidify/ui'
+import { GlassModal } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassModal } from '@liquidify/ui/modal'
+import { GlassModal } from "@liquidify/ui/modal";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassModal } from '@liquidify/ui'
+import { GlassModal } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassModal />
+  return <GlassModal />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| isOpen | `boolean` | - | - |
-| onClose | `() => void` | - | - |
-| title? | `string` | - | - |
-| children | `React.ReactNode` | - | - |
-| className? | `string` | - | - |
-| titleClassName? | `string` | - | - |
-| contentClassName? | `string` | - | - |
-| closeOnBackdropClick? | `boolean` | - | - |
-| closeOnEscape? | `boolean` | - | - |
-| initialFocus? | `React.RefObject<HTMLElement>` | - | - |
-| portalTarget? | `HTMLElement` | - | - |
-
+| Prop                  | Type                           | Default | Description |
+| --------------------- | ------------------------------ | ------- | ----------- |
+| isOpen                | `boolean`                      | -       | -           |
+| onClose               | `() => void`                   | -       | -           |
+| title?                | `string`                       | -       | -           |
+| children              | `React.ReactNode`              | -       | -           |
+| className?            | `string`                       | -       | -           |
+| titleClassName?       | `string`                       | -       | -           |
+| contentClassName?     | `string`                       | -       | -           |
+| closeOnBackdropClick? | `boolean`                      | -       | -           |
+| closeOnEscape?        | `boolean`                      | -       | -           |
+| initialFocus?         | `React.RefObject<HTMLElement>` | -       | -           |
+| portalTarget?         | `HTMLElement`                  | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassModal } from '@liquidify/ui'
+import { GlassModal } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassModal />
+  return <GlassModal />;
 }
 ```
 
@@ -66,58 +65,56 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
 
 #### BasicExamples
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
 
 #### DialogTypes
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
 
-#### _FormModal
+#### \_FormModal
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
 
 #### NestedModals
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
 
-#### _ThemeShowcase
+#### \_ThemeShowcase
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassModal  />
+<GlassModal />
 ```
-
-
 
 ## Accessibility
 

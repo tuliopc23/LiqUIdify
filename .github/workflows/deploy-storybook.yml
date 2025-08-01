@@ -4,9 +4,9 @@ on:
   push:
     branches: [main]
     paths:
-      - 'libs/components/src/**'
-      - 'apps/storybook/**'
-      - '.storybook/**'
+      - "libs/components/src/**"
+      - "apps/storybook/**"
+      - ".storybook/**"
   workflow_dispatch:
 
 env:
@@ -60,7 +60,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_STORYBOOK_PROJECT_ID }}
           working-directory: ./dist/storybook
-          vercel-args: '--prod'
+          vercel-args: "--prod"
 
       - name: Update deployment status
         run: |
@@ -72,11 +72,11 @@ jobs:
         run: |
           # Wait for deployment to be ready
           sleep 30
-          
+
           # Test main Storybook page
           curl -f -s "${{ steps.deploy.outputs.preview-url }}" > /dev/null
           echo "✅ Main page accessible"
-          
+
           # Test iframe page (stories)
           curl -f -s "${{ steps.deploy.outputs.preview-url }}/iframe.html" > /dev/null
           echo "✅ Stories iframe accessible"
@@ -89,7 +89,7 @@ jobs:
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           message: |
             📚 **Storybook Updated!**
-            
+
             🔗 Live: ${{ steps.deploy.outputs.preview-url }}
             📝 Commit: ${{ github.event.head_commit.message }}
             👤 Author: @${{ github.actor }}
@@ -102,7 +102,7 @@ jobs:
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           message: |
             ❌ **Storybook Deployment Failed**
-            
+
             🔗 Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
             📝 Commit: ${{ github.event.head_commit.message }}
             👤 Author: @${{ github.actor }}

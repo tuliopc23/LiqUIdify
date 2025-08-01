@@ -73,15 +73,13 @@ nextjs-example/
 The application uses LiqUIdify's `ThemeProvider` in the root layout:
 
 ```tsx
-import { ThemeProvider } from 'liquidify';
+import { ThemeProvider } from "liquidify";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
@@ -93,13 +91,13 @@ export default function RootLayout({ children }) {
 Components are imported from the main package with tree shaking:
 
 ```tsx
-import { 
-  GlassButton, 
-  GlassCard, 
+import {
+  GlassButton,
+  GlassCard,
   GlassInput,
   GlassModal,
   // ... other components
-} from 'liquidify';
+} from "liquidify";
 ```
 
 ### Styling Integration
@@ -161,23 +159,23 @@ The layout adapts to different screen sizes using responsive design patterns:
 You can customize the theme by extending the default configuration:
 
 ```tsx
-import { ThemeProvider, createTheme } from 'liquidify';
+import { ThemeProvider, createTheme } from "liquidify";
 
 const customTheme = createTheme({
   colors: {
     primary: {
-      500: '#your-color',
+      500: "#your-color",
     },
   },
   glass: {
-    blur: '16px',
+    blur: "16px",
     opacity: 0.15,
   },
 });
 
 <ThemeProvider theme={customTheme}>
   <App />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ### CSS Variables
@@ -200,11 +198,11 @@ Import individual components for better tree shaking:
 
 ```tsx
 // Better for bundle size
-import { GlassButton } from 'liquidify/button';
-import { GlassCard } from 'liquidify/card';
+import { GlassButton } from "liquidify/button";
+import { GlassCard } from "liquidify/card";
 
 // Or use feature bundles
-import { GlassButton, GlassCard } from 'liquidify/core';
+import { GlassButton, GlassCard } from "liquidify/core";
 ```
 
 ### Dynamic Imports
@@ -212,8 +210,8 @@ import { GlassButton, GlassCard } from 'liquidify/core';
 For heavy components, consider dynamic imports:
 
 ```tsx
-const GlassDataTable = dynamic(() => 
-  import('liquidify').then(mod => ({ default: mod.GlassDataTable }))
+const GlassDataTable = dynamic(() =>
+  import("liquidify").then((mod) => ({ default: mod.GlassDataTable })),
 );
 ```
 
@@ -266,16 +264,19 @@ This Next.js application can be deployed to any platform that supports Node.js:
 ### Common Issues
 
 **Components not rendering properly:**
+
 - Ensure LiqUIdify is properly installed
 - Check that ThemeProvider wraps your app
 - Verify CSS imports are included
 
 **Styling conflicts:**
+
 - Check Tailwind CSS configuration
 - Ensure proper CSS variable definitions
 - Verify component prop combinations
 
 **TypeScript errors:**
+
 - Update to latest TypeScript version
 - Check component prop types
 - Ensure proper imports

@@ -11,7 +11,7 @@ npm install @liquidify/ui
 Or import just this component:
 
 ```tsx
-import { ThemeProvider } from '@liquidify/ui'
+import { ThemeProvider } from "@liquidify/ui";
 ```
 
 ## Basic Usage
@@ -19,8 +19,8 @@ import { ThemeProvider } from '@liquidify/ui'
 Wrap your application with ThemeProvider to enable glassmorphism effects:
 
 ```tsx
-import { ThemeProvider, GlassButton, GlassCard } from '@liquidify/ui'
-import '@liquidify/ui/styles'
+import { ThemeProvider, GlassButton, GlassCard } from "@liquidify/ui";
+import "@liquidify/ui/styles";
 
 function App() {
   return (
@@ -28,28 +28,27 @@ function App() {
       <ThemeProvider theme="glass">
         <GlassCard className="p-6 max-w-sm mx-auto">
           <h1 className="text-xl font-bold mb-4">Hello LiqUIdify!</h1>
-          <GlassButton variant="primary">
-            Click me
-          </GlassButton>
+          <GlassButton variant="primary">Click me</GlassButton>
         </GlassCard>
       </ThemeProvider>
     </div>
-  )
+  );
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| theme | `'glass' \| 'glass-dark' \| 'glass-light' \| 'minimal'` | `'glass'` | The theme variant to apply |
-| children | `ReactNode` | - | Child components that will receive theme context |
-| customTheme | `ThemeConfig` | - | Custom theme configuration object |
-| debug | `boolean` | `false` | Enable debug mode to visualize component boundaries |
+| Prop        | Type                                                    | Default   | Description                                         |
+| ----------- | ------------------------------------------------------- | --------- | --------------------------------------------------- |
+| theme       | `'glass' \| 'glass-dark' \| 'glass-light' \| 'minimal'` | `'glass'` | The theme variant to apply                          |
+| children    | `ReactNode`                                             | -         | Child components that will receive theme context    |
+| customTheme | `ThemeConfig`                                           | -         | Custom theme configuration object                   |
+| debug       | `boolean`                                               | `false`   | Enable debug mode to visualize component boundaries |
 
 ## Theme Variants
 
 ### Glass Theme (Default)
+
 ```tsx
 <ThemeProvider theme="glass">
   <GlassCard>Standard glassmorphism with balanced opacity</GlassCard>
@@ -57,6 +56,7 @@ function App() {
 ```
 
 ### Glass Dark Theme
+
 ```tsx
 <ThemeProvider theme="glass-dark">
   <GlassCard>Darker glass effects, ideal for dark backgrounds</GlassCard>
@@ -64,6 +64,7 @@ function App() {
 ```
 
 ### Glass Light Theme
+
 ```tsx
 <ThemeProvider theme="glass-light">
   <GlassCard>Lighter glass effects, perfect for bright backgrounds</GlassCard>
@@ -71,6 +72,7 @@ function App() {
 ```
 
 ### Minimal Theme
+
 ```tsx
 <ThemeProvider theme="minimal">
   <GlassCard>Subtle glass effects with minimal blur</GlassCard>
@@ -82,30 +84,30 @@ function App() {
 Create custom themes by passing a theme configuration object:
 
 ```tsx
-import { ThemeProvider } from '@liquidify/ui'
+import { ThemeProvider } from "@liquidify/ui";
 
 const customTheme = {
   glass: {
-    background: 'rgba(255, 255, 255, 0.15)',
-    border: 'rgba(255, 255, 255, 0.25)',
-    blur: '12px',
-    shadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+    background: "rgba(255, 255, 255, 0.15)",
+    border: "rgba(255, 255, 255, 0.25)",
+    blur: "12px",
+    shadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
   },
   colors: {
-    primary: '#3b82f6',
-    secondary: '#8b5cf6',
-    success: '#10b981',
-    warning: '#f59e0b',
-    danger: '#ef4444'
-  }
-}
+    primary: "#3b82f6",
+    secondary: "#8b5cf6",
+    success: "#10b981",
+    warning: "#f59e0b",
+    danger: "#ef4444",
+  },
+};
 
 function App() {
   return (
     <ThemeProvider customTheme={customTheme}>
       <YourApp />
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -114,27 +116,27 @@ function App() {
 Access theme values in your components using the `useTheme` hook:
 
 ```tsx
-import { useTheme } from '@liquidify/ui'
+import { useTheme } from "@liquidify/ui";
 
 function CustomComponent() {
-  const { theme, colors, updateTheme } = useTheme()
-  
+  const { theme, colors, updateTheme } = useTheme();
+
   return (
-    <div 
-      style={{ 
+    <div
+      style={{
         background: theme.glass.background,
         border: `1px solid ${theme.glass.border}`,
-        backdropFilter: `blur(${theme.glass.blur})`
+        backdropFilter: `blur(${theme.glass.blur})`,
       }}
     >
-      <button 
+      <button
         style={{ color: colors.primary }}
-        onClick={() => updateTheme('glass-dark')}
+        onClick={() => updateTheme("glass-dark")}
       >
         Switch to Dark Theme
       </button>
     </div>
-  )
+  );
 }
 ```
 
@@ -143,40 +145,42 @@ function CustomComponent() {
 Implement theme switching functionality:
 
 ```tsx
-import { useState } from 'react'
-import { ThemeProvider, GlassButton } from '@liquidify/ui'
+import { useState } from "react";
+import { ThemeProvider, GlassButton } from "@liquidify/ui";
 
 function AppWithThemeSwitcher() {
-  const [currentTheme, setCurrentTheme] = useState<'glass' | 'glass-dark' | 'glass-light'>('glass')
-  
+  const [currentTheme, setCurrentTheme] = useState<
+    "glass" | "glass-dark" | "glass-light"
+  >("glass");
+
   const themes = [
-    { value: 'glass', label: 'Glass' },
-    { value: 'glass-dark', label: 'Dark Glass' },
-    { value: 'glass-light', label: 'Light Glass' }
-  ]
-  
+    { value: "glass", label: "Glass" },
+    { value: "glass-dark", label: "Dark Glass" },
+    { value: "glass-light", label: "Light Glass" },
+  ];
+
   return (
     <ThemeProvider theme={currentTheme}>
       <div className="p-6">
         <div className="mb-4 space-x-2">
-          {themes.map(theme => (
+          {themes.map((theme) => (
             <GlassButton
               key={theme.value}
-              variant={currentTheme === theme.value ? 'primary' : 'secondary'}
+              variant={currentTheme === theme.value ? "primary" : "secondary"}
               onClick={() => setCurrentTheme(theme.value as any)}
             >
               {theme.label}
             </GlassButton>
           ))}
         </div>
-        
+
         <GlassCard className="p-6">
           <h2 className="text-xl font-bold">Current Theme: {currentTheme}</h2>
           <p>This card adapts to the selected theme automatically.</p>
         </GlassCard>
       </div>
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -213,16 +217,16 @@ ThemeProvider works seamlessly with Next.js and other SSR frameworks:
 
 ```tsx
 // pages/_app.tsx (Next.js)
-import type { AppProps } from 'next/app'
-import { ThemeProvider } from '@liquidify/ui'
-import '@liquidify/ui/styles'
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "@liquidify/ui";
+import "@liquidify/ui/styles";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme="glass">
       <Component {...pageProps} />
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -242,11 +246,11 @@ function OptimizedApp() {
       {/* These components won't re-render on theme changes unless they use theme context */}
       <StaticHeader />
       <StaticSidebar />
-      
+
       {/* Only components using theme context will re-render */}
       <ThemedContent />
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -261,6 +265,7 @@ Enable debug mode to visualize theme boundaries and component states:
 ```
 
 Debug mode provides:
+
 - Visual boundaries around themed components
 - Theme state information in browser console
 - Performance metrics for theme operations
@@ -277,7 +282,7 @@ ThemeProvider ensures accessibility across all themes:
 
 ```tsx
 // Theme automatically adapts to user preferences
-<ThemeProvider 
+<ThemeProvider
   theme="glass"
   respectsUserPreferences={true} // Default: true
 >
@@ -290,34 +295,34 @@ ThemeProvider ensures accessibility across all themes:
 Full TypeScript support with proper type inference:
 
 ```tsx
-import { ThemeProvider, ThemeConfig, ThemeVariant } from '@liquidify/ui'
+import { ThemeProvider, ThemeConfig, ThemeVariant } from "@liquidify/ui";
 
 // Custom theme with full type safety
 const myTheme: ThemeConfig = {
   glass: {
-    background: 'rgba(255, 255, 255, 0.1)',
-    border: 'rgba(255, 255, 255, 0.2)',
-    blur: '10px',
-    shadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+    background: "rgba(255, 255, 255, 0.1)",
+    border: "rgba(255, 255, 255, 0.2)",
+    blur: "10px",
+    shadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
   },
   colors: {
-    primary: '#3b82f6',
-    secondary: '#8b5cf6',
-    success: '#10b981',
-    warning: '#f59e0b',
-    danger: '#ef4444'
-  }
-}
+    primary: "#3b82f6",
+    secondary: "#8b5cf6",
+    success: "#10b981",
+    warning: "#f59e0b",
+    danger: "#ef4444",
+  },
+};
 
 // Type-safe theme variant
-const themeVariant: ThemeVariant = 'glass-dark'
+const themeVariant: ThemeVariant = "glass-dark";
 
 function TypedApp() {
   return (
     <ThemeProvider theme={themeVariant} customTheme={myTheme}>
       <App />
     </ThemeProvider>
-  )
+  );
 }
 ```
 

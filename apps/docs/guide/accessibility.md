@@ -5,6 +5,7 @@ LiqUIdify is built with accessibility as a core principle, ensuring all componen
 ## Overview
 
 This guide covers:
+
 - Accessibility standards and compliance
 - Built-in accessibility features
 - Best practices for implementation
@@ -47,6 +48,7 @@ All interactive components support full keyboard navigation:
 ```
 
 **Keyboard Shortcuts:**
+
 - `Tab` / `Shift+Tab`: Navigate between focusable elements
 - `Enter` / `Space`: Activate buttons and links
 - `Arrow Keys`: Navigate within components (tabs, menus, etc.)
@@ -249,23 +251,19 @@ Provide clear, actionable error messages:
 <GlassForm>
   <fieldset>
     <legend>Personal Information</legend>
-    
-    <GlassInput
-      label="First Name"
-      required
-      aria-required="true"
-    />
-    
+
+    <GlassInput label="First Name" required aria-required="true" />
+
     <GlassRadioGroup
       legend="Preferred Contact Method"
       name="contact-method"
       options={[
-        { value: 'email', label: 'Email' },
-        { value: 'phone', label: 'Phone' },
-        { value: 'mail', label: 'Mail' }
+        { value: "email", label: "Email" },
+        { value: "phone", label: "Phone" },
+        { value: "mail", label: "Mail" },
       ]}
     />
-    
+
     <GlassCheckbox
       label="I agree to the terms and conditions"
       required
@@ -276,7 +274,7 @@ Provide clear, actionable error messages:
       Please read our terms before proceeding
     </div>
   </fieldset>
-  
+
   <GlassButton type="submit">Submit Form</GlassButton>
 </GlassForm>
 ```
@@ -288,8 +286,8 @@ Provide clear, actionable error messages:
 <nav aria-label="Main navigation">
   <ul>
     <li>
-      <a 
-        href="/dashboard" 
+      <a
+        href="/dashboard"
         aria-current={currentPage === 'dashboard' ? 'page' : undefined}
       >
         Dashboard
@@ -311,8 +309,8 @@ Provide clear, actionable error messages:
 </nav>
 
 // Skip links
-<a 
-  href="#main-content" 
+<a
+  href="#main-content"
   className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0"
 >
   Skip to main content
@@ -377,33 +375,22 @@ Provide clear, actionable error messages:
 >
   <GlassModal.Header>
     <h2 id="modal-title">Confirm Delete</h2>
-    <GlassButton
-      variant="ghost"
-      onClick={onClose}
-      aria-label="Close dialog"
-    >
+    <GlassButton variant="ghost" onClick={onClose} aria-label="Close dialog">
       <XIcon className="h-4 w-4" />
     </GlassButton>
   </GlassModal.Header>
-  
+
   <GlassModal.Body>
     <p id="modal-description">
       This action cannot be undone. Are you sure you want to delete this item?
     </p>
   </GlassModal.Body>
-  
+
   <GlassModal.Footer>
-    <GlassButton
-      ref={cancelButtonRef}
-      variant="outline"
-      onClick={onClose}
-    >
+    <GlassButton ref={cancelButtonRef} variant="outline" onClick={onClose}>
       Cancel
     </GlassButton>
-    <GlassButton
-      variant="danger"
-      onClick={handleDelete}
-    >
+    <GlassButton variant="danger" onClick={handleDelete}>
       Delete
     </GlassButton>
   </GlassModal.Footer>
@@ -418,24 +405,24 @@ Use automated tools to catch common accessibility issues:
 
 ```tsx
 // Jest + Testing Library
-import { render, screen } from '@testing-library/react';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { render, screen } from "@testing-library/react";
+import { axe, toHaveNoViolations } from "jest-axe";
 
 expect.extend(toHaveNoViolations);
 
-test('should not have accessibility violations', async () => {
+test("should not have accessibility violations", async () => {
   const { container } = render(<MyComponent />);
   const results = await axe(container);
   expect(results).toHaveNoViolations();
 });
 
 // Screen reader testing
-test('should be accessible to screen readers', () => {
+test("should be accessible to screen readers", () => {
   render(<GlassButton>Click me</GlassButton>);
-  
-  const button = screen.getByRole('button', { name: 'Click me' });
+
+  const button = screen.getByRole("button", { name: "Click me" });
   expect(button).toBeInTheDocument();
-  expect(button).toHaveAccessibleName('Click me');
+  expect(button).toHaveAccessibleName("Click me");
 });
 ```
 
@@ -451,6 +438,7 @@ test('should be accessible to screen readers', () => {
 #### Screen Reader Testing
 
 Test with popular screen readers:
+
 - **Windows**: NVDA (free), JAWS
 - **macOS**: VoiceOver (built-in)
 - **Linux**: Orca
@@ -472,14 +460,14 @@ npm install --save-dev eslint-plugin-jsx-a11y
 
 ```tsx
 // React axe in development
-import { axe } from '@axe-core/react';
+import { axe } from "@axe-core/react";
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== "production") {
   axe(React, ReactDOM, 1000, {
     rules: {
-      'color-contrast': { enabled: true },
-      'keyboard-tab-order': { enabled: true }
-    }
+      "color-contrast": { enabled: true },
+      "keyboard-tab-order": { enabled: true },
+    },
   });
 }
 ```
@@ -512,12 +500,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 ```tsx
 // Announcing dynamic changes
-const [message, setMessage] = useState('');
+const [message, setMessage] = useState("");
 
 const announceMessage = (text) => {
   setMessage(text);
   // Clear after announcement
-  setTimeout(() => setMessage(''), 1000);
+  setTimeout(() => setMessage(""), 1000);
 };
 
 return (
@@ -525,8 +513,8 @@ return (
     <div role="status" aria-live="polite" className="sr-only">
       {message}
     </div>
-    
-    <GlassButton onClick={() => announceMessage('Item added to cart')}>
+
+    <GlassButton onClick={() => announceMessage("Item added to cart")}>
       Add to Cart
     </GlassButton>
   </div>
@@ -542,11 +530,11 @@ return (
   aria-label="Drop files here"
   keyboard={{
     onKeyDown: (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === "Enter" || e.key === " ") {
         // Trigger file picker
         fileInputRef.current?.click();
       }
-    }
+    },
   }}
 >
   <input
@@ -562,17 +550,20 @@ return (
 ## Resources
 
 ### Documentation
+
 - [Web Content Accessibility Guidelines (WCAG) 2.1](https://www.w3.org/WAI/WCAG21/quickref/)
 - [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
 - [MDN Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
 
 ### Testing Tools
+
 - [axe-core](https://github.com/dequelabs/axe-core) - Automated accessibility testing
 - [WAVE](https://wave.webaim.org/) - Web accessibility evaluation
 - [Pa11y](https://pa11y.org/) - Command line accessibility tester
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse) - Accessibility audits
 
 ### Screen Readers
+
 - [NVDA](https://www.nvaccess.org/) - Free Windows screen reader
 - [VoiceOver](https://support.apple.com/guide/voiceover/) - macOS screen reader
 - [JAWS](https://www.freedomscientific.com/products/software/jaws/) - Popular Windows screen reader

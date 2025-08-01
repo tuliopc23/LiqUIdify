@@ -177,18 +177,21 @@ npm dist-tag add @liquidify/components@[prev-version] latest
 ## Success Criteria
 
 ### Week 1
+
 - ✅ 1,000+ npm downloads
 - ✅ Zero critical bugs
 - ✅ <24h response time
 - ✅ 95% positive feedback
 
 ### Month 1
+
 - ✅ 10,000+ npm downloads
 - ✅ 500+ GitHub stars
 - ✅ 10+ production implementations
 - ✅ Active community (100+ Discord members)
 
 ### Quarter 1
+
 - ✅ 50,000+ npm downloads
 - ✅ 1,000+ GitHub stars
 - ✅ Major company adoption
@@ -196,13 +199,13 @@ npm dist-tag add @liquidify/components@[prev-version] latest
 
 ## Team Contacts
 
-| Role | Name | Contact | Responsibility |
-|------|------|---------|----------------|
-| Project Lead | [Name] | [Email] | Go/no-go decisions |
-| Tech Lead | [Name] | [Email] | Technical issues |
-| DevOps Lead | [Name] | [Email] | Deployment/infrastructure |
-| Community Manager | [Name] | [Email] | User communication |
-| On-Call Engineer | [Name] | [Phone] | Emergency response |
+| Role              | Name   | Contact | Responsibility            |
+| ----------------- | ------ | ------- | ------------------------- |
+| Project Lead      | [Name] | [Email] | Go/no-go decisions        |
+| Tech Lead         | [Name] | [Email] | Technical issues          |
+| DevOps Lead       | [Name] | [Email] | Deployment/infrastructure |
+| Community Manager | [Name] | [Email] | User communication        |
+| On-Call Engineer  | [Name] | [Phone] | Emergency response        |
 
 ## Important Links
 

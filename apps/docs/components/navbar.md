@@ -17,7 +17,7 @@ bun add liquidify
 ## Basic Usage
 
 ```tsx
-import { GlassNavbar } from 'liquidify';
+import { GlassNavbar } from "liquidify";
 
 function App() {
   return (
@@ -26,13 +26,13 @@ function App() {
         <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
         <span className="font-semibold">LiqUIdify</span>
       </GlassNavbar.Brand>
-      
+
       <GlassNavbar.Menu>
         <GlassNavbar.Item href="/about">About</GlassNavbar.Item>
         <GlassNavbar.Item href="/services">Services</GlassNavbar.Item>
         <GlassNavbar.Item href="/contact">Contact</GlassNavbar.Item>
       </GlassNavbar.Menu>
-      
+
       <GlassNavbar.Actions>
         <GlassButton variant="ghost">Sign In</GlassButton>
         <GlassButton>Get Started</GlassButton>
@@ -45,8 +45,8 @@ function App() {
 ## Responsive Mobile Navigation
 
 ```tsx
-import { GlassNavbar, GlassButton } from 'liquidify';
-import { useState } from 'react';
+import { GlassNavbar, GlassButton } from "liquidify";
+import { useState } from "react";
 
 function ResponsiveNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,13 +56,13 @@ function ResponsiveNavbar() {
       <GlassNavbar.Brand href="/">
         <span className="font-bold text-xl">Brand</span>
       </GlassNavbar.Brand>
-      
-      <GlassNavbar.Toggle 
+
+      <GlassNavbar.Toggle
         isOpen={isOpen}
         onToggle={() => setIsOpen(!isOpen)}
         aria-label="Toggle navigation menu"
       />
-      
+
       <GlassNavbar.Collapse isOpen={isOpen}>
         <GlassNavbar.Menu direction="vertical">
           <GlassNavbar.Item href="/home">Home</GlassNavbar.Item>
@@ -79,16 +79,16 @@ function ResponsiveNavbar() {
 ## With Dropdown Menus
 
 ```tsx
-import { GlassNavbar, GlassDropdown } from 'liquidify';
+import { GlassNavbar, GlassDropdown } from "liquidify";
 
 function NavbarWithDropdowns() {
   return (
     <GlassNavbar>
       <GlassNavbar.Brand href="/">Brand</GlassNavbar.Brand>
-      
+
       <GlassNavbar.Menu>
         <GlassNavbar.Item href="/home">Home</GlassNavbar.Item>
-        
+
         <GlassDropdown>
           <GlassDropdown.Trigger>
             <GlassNavbar.Item as="button">
@@ -96,14 +96,20 @@ function NavbarWithDropdowns() {
               <ChevronDownIcon className="ml-1 h-4 w-4" />
             </GlassNavbar.Item>
           </GlassDropdown.Trigger>
-          
+
           <GlassDropdown.Content>
-            <GlassDropdown.Item href="/products/web">Web Apps</GlassDropdown.Item>
-            <GlassDropdown.Item href="/products/mobile">Mobile Apps</GlassDropdown.Item>
-            <GlassDropdown.Item href="/products/desktop">Desktop Apps</GlassDropdown.Item>
+            <GlassDropdown.Item href="/products/web">
+              Web Apps
+            </GlassDropdown.Item>
+            <GlassDropdown.Item href="/products/mobile">
+              Mobile Apps
+            </GlassDropdown.Item>
+            <GlassDropdown.Item href="/products/desktop">
+              Desktop Apps
+            </GlassDropdown.Item>
           </GlassDropdown.Content>
         </GlassDropdown>
-        
+
         <GlassNavbar.Item href="/pricing">Pricing</GlassNavbar.Item>
       </GlassNavbar.Menu>
     </GlassNavbar>
@@ -114,18 +120,15 @@ function NavbarWithDropdowns() {
 ## Sticky Navigation
 
 ```tsx
-import { GlassNavbar } from 'liquidify';
+import { GlassNavbar } from "liquidify";
 
 function StickyNavbar() {
   return (
-    <GlassNavbar 
-      position="sticky"
-      className="top-0 z-50 backdrop-blur-lg"
-    >
+    <GlassNavbar position="sticky" className="top-0 z-50 backdrop-blur-lg">
       <GlassNavbar.Brand href="/">
         <span className="font-bold">Sticky Brand</span>
       </GlassNavbar.Brand>
-      
+
       <GlassNavbar.Menu>
         <GlassNavbar.Item href="#section1">Section 1</GlassNavbar.Item>
         <GlassNavbar.Item href="#section2">Section 2</GlassNavbar.Item>
@@ -142,80 +145,80 @@ function StickyNavbar() {
 
 The main navbar container component.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Navbar content |
-| `className` | `string` | - | Additional CSS classes |
-| `position` | `'static' \| 'sticky' \| 'fixed'` | `'static'` | Navbar positioning |
-| `variant` | `'default' \| 'transparent' \| 'solid'` | `'default'` | Visual variant |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Navbar height |
-| `bordered` | `boolean` | `false` | Show bottom border |
+| Prop        | Type                                    | Default     | Description            |
+| ----------- | --------------------------------------- | ----------- | ---------------------- |
+| `children`  | `ReactNode`                             | -           | Navbar content         |
+| `className` | `string`                                | -           | Additional CSS classes |
+| `position`  | `'static' \| 'sticky' \| 'fixed'`       | `'static'`  | Navbar positioning     |
+| `variant`   | `'default' \| 'transparent' \| 'solid'` | `'default'` | Visual variant         |
+| `size`      | `'sm' \| 'md' \| 'lg'`                  | `'md'`      | Navbar height          |
+| `bordered`  | `boolean`                               | `false`     | Show bottom border     |
 
 ### GlassNavbar.Brand
 
 Brand/logo section of the navbar.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Brand content |
-| `href` | `string` | - | Brand link URL |
-| `as` | `ElementType` | `'div'` | Component element type |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type          | Default | Description            |
+| ----------- | ------------- | ------- | ---------------------- |
+| `children`  | `ReactNode`   | -       | Brand content          |
+| `href`      | `string`      | -       | Brand link URL         |
+| `as`        | `ElementType` | `'div'` | Component element type |
+| `className` | `string`      | -       | Additional CSS classes |
 
 ### GlassNavbar.Menu
 
 Container for navigation menu items.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Menu items |
-| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Menu layout direction |
-| `spacing` | `'sm' \| 'md' \| 'lg'` | `'md'` | Space between items |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type                         | Default        | Description            |
+| ----------- | ---------------------------- | -------------- | ---------------------- |
+| `children`  | `ReactNode`                  | -              | Menu items             |
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Menu layout direction  |
+| `spacing`   | `'sm' \| 'md' \| 'lg'`       | `'md'`         | Space between items    |
+| `className` | `string`                     | -              | Additional CSS classes |
 
 ### GlassNavbar.Item
 
 Individual navigation menu item.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Item content |
-| `href` | `string` | - | Link URL |
-| `as` | `ElementType` | `'a'` | Component element type |
-| `active` | `boolean` | `false` | Active state |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `className` | `string` | - | Additional CSS classes |
-| `onClick` | `() => void` | - | Click handler |
+| Prop        | Type          | Default | Description            |
+| ----------- | ------------- | ------- | ---------------------- |
+| `children`  | `ReactNode`   | -       | Item content           |
+| `href`      | `string`      | -       | Link URL               |
+| `as`        | `ElementType` | `'a'`   | Component element type |
+| `active`    | `boolean`     | `false` | Active state           |
+| `disabled`  | `boolean`     | `false` | Disabled state         |
+| `className` | `string`      | -       | Additional CSS classes |
+| `onClick`   | `() => void`  | -       | Click handler          |
 
 ### GlassNavbar.Toggle
 
 Mobile menu toggle button.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `isOpen` | `boolean` | `false` | Toggle state |
-| `onToggle` | `() => void` | - | Toggle handler |
-| `className` | `string` | - | Additional CSS classes |
-| `aria-label` | `string` | `'Toggle menu'` | Accessibility label |
+| Prop         | Type         | Default         | Description            |
+| ------------ | ------------ | --------------- | ---------------------- |
+| `isOpen`     | `boolean`    | `false`         | Toggle state           |
+| `onToggle`   | `() => void` | -               | Toggle handler         |
+| `className`  | `string`     | -               | Additional CSS classes |
+| `aria-label` | `string`     | `'Toggle menu'` | Accessibility label    |
 
 ### GlassNavbar.Collapse
 
 Collapsible container for mobile navigation.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Collapsible content |
-| `isOpen` | `boolean` | `false` | Collapse state |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Collapsible content    |
+| `isOpen`    | `boolean`   | `false` | Collapse state         |
+| `className` | `string`    | -       | Additional CSS classes |
 
 ### GlassNavbar.Actions
 
 Container for action buttons (login, search, etc.).
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Action elements |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Action elements        |
+| `className` | `string`    | -       | Additional CSS classes |
 
 ## Styling
 
@@ -244,7 +247,7 @@ Container for action buttons (login, search, etc.).
 
 ```tsx
 // Custom variant
-<GlassNavbar 
+<GlassNavbar
   className="bg-gradient-to-r from-purple-500/10 to-pink-500/10"
   variant="transparent"
 >
@@ -252,7 +255,7 @@ Container for action buttons (login, search, etc.).
 </GlassNavbar>
 
 // Custom spacing
-<GlassNavbar.Menu 
+<GlassNavbar.Menu
   spacing="lg"
   className="gap-8"
 >
@@ -271,19 +274,19 @@ The GlassNavbar component follows WAI-ARIA guidelines:
 
 ### Keyboard Shortcuts
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Navigate between navbar elements |
-| `Enter` / `Space` | Activate focused item |
-| `Escape` | Close mobile menu if open |
-| `Arrow Keys` | Navigate within dropdown menus |
+| Key               | Action                           |
+| ----------------- | -------------------------------- |
+| `Tab`             | Navigate between navbar elements |
+| `Enter` / `Space` | Activate focused item            |
+| `Escape`          | Close mobile menu if open        |
+| `Arrow Keys`      | Navigate within dropdown menus   |
 
 ## Examples
 
 ### Dashboard Navigation
 
 ```tsx
-import { GlassNavbar, GlassAvatar, GlassDropdown } from 'liquidify';
+import { GlassNavbar, GlassAvatar, GlassDropdown } from "liquidify";
 
 function DashboardNavbar({ user }) {
   return (
@@ -291,24 +294,26 @@ function DashboardNavbar({ user }) {
       <GlassNavbar.Brand href="/dashboard">
         <span className="font-bold text-xl">Dashboard</span>
       </GlassNavbar.Brand>
-      
+
       <GlassNavbar.Menu>
-        <GlassNavbar.Item href="/dashboard" active>Overview</GlassNavbar.Item>
+        <GlassNavbar.Item href="/dashboard" active>
+          Overview
+        </GlassNavbar.Item>
         <GlassNavbar.Item href="/analytics">Analytics</GlassNavbar.Item>
         <GlassNavbar.Item href="/projects">Projects</GlassNavbar.Item>
         <GlassNavbar.Item href="/team">Team</GlassNavbar.Item>
       </GlassNavbar.Menu>
-      
+
       <GlassNavbar.Actions>
         <GlassButton variant="ghost" size="sm">
           <BellIcon className="h-5 w-5" />
         </GlassButton>
-        
+
         <GlassDropdown>
           <GlassDropdown.Trigger>
             <GlassAvatar src={user.avatar} alt={user.name} size="sm" />
           </GlassDropdown.Trigger>
-          
+
           <GlassDropdown.Content>
             <GlassDropdown.Item>Profile</GlassDropdown.Item>
             <GlassDropdown.Item>Settings</GlassDropdown.Item>
@@ -325,7 +330,7 @@ function DashboardNavbar({ user }) {
 ### E-commerce Navigation
 
 ```tsx
-import { GlassNavbar, GlassInput, GlassBadge } from 'liquidify';
+import { GlassNavbar, GlassInput, GlassBadge } from "liquidify";
 
 function EcommerceNavbar({ cartItems }) {
   return (
@@ -334,7 +339,7 @@ function EcommerceNavbar({ cartItems }) {
         <img src="/logo.svg" alt="Store" className="h-8 w-8" />
         <span className="font-bold text-xl">Store</span>
       </GlassNavbar.Brand>
-      
+
       <div className="flex-1 max-w-xl mx-8">
         <GlassInput
           placeholder="Search products..."
@@ -343,18 +348,18 @@ function EcommerceNavbar({ cartItems }) {
           leftIcon={<SearchIcon className="h-5 w-5" />}
         />
       </div>
-      
+
       <GlassNavbar.Menu>
         <GlassNavbar.Item href="/categories">Categories</GlassNavbar.Item>
         <GlassNavbar.Item href="/deals">Deals</GlassNavbar.Item>
         <GlassNavbar.Item href="/new">New</GlassNavbar.Item>
       </GlassNavbar.Menu>
-      
+
       <GlassNavbar.Actions>
         <GlassButton variant="ghost" className="relative">
           <ShoppingCartIcon className="h-6 w-6" />
           {cartItems > 0 && (
-            <GlassBadge 
+            <GlassBadge
               className="absolute -top-2 -right-2"
               variant="solid"
               color="red"
@@ -363,7 +368,7 @@ function EcommerceNavbar({ cartItems }) {
             </GlassBadge>
           )}
         </GlassButton>
-        
+
         <GlassButton variant="outline">Sign In</GlassButton>
       </GlassNavbar.Actions>
     </GlassNavbar>

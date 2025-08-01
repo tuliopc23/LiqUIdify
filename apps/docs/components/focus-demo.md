@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassFocusDemo } from '@liquidify/ui'
+import { GlassFocusDemo } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassFocusDemo } from '@liquidify/ui/focus-demo'
+import { GlassFocusDemo } from "@liquidify/ui/focus-demo";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassFocusDemo } from '@liquidify/ui'
+import { GlassFocusDemo } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassFocusDemo />
+  return <GlassFocusDemo />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassFocusDemo } from '@liquidify/ui'
+import { GlassFocusDemo } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassFocusDemo />
+  return <GlassFocusDemo />;
 }
 ```
 
@@ -55,34 +55,32 @@ export default function Example() {
 #### KeyboardNavigationGuide
 
 ```tsx
-<GlassFocusDemo  />
+<GlassFocusDemo />
 ```
 
 #### FocusPatterns
 
 ```tsx
-<GlassFocusDemo  />
+<GlassFocusDemo />
 ```
 
 #### FocusTraversalDemo
 
 ```tsx
-<GlassFocusDemo  />
+<GlassFocusDemo />
 ```
 
 #### AccessibilityCompliant
 
 ```tsx
-<GlassFocusDemo  />
+<GlassFocusDemo />
 ```
 
 #### FocusWithinDemo
 
 ```tsx
-<GlassFocusDemo  />
+<GlassFocusDemo />
 ```
-
-
 
 ## Accessibility
 

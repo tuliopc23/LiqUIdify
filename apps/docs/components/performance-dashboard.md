@@ -16,41 +16,40 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassPerformanceDashboard } from '@liquidify/ui'
+import { GlassPerformanceDashboard } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassPerformanceDashboard } from '@liquidify/ui/performance-dashboard'
+import { GlassPerformanceDashboard } from "@liquidify/ui/performance-dashboard";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassPerformanceDashboard } from '@liquidify/ui'
+import { GlassPerformanceDashboard } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPerformanceDashboard />
+  return <GlassPerformanceDashboard />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| className? | `string` | - | - |
-| position? | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | - | - |
-| collapsed? | `boolean` | - | - |
-| onClose? | `() => void` | - | - |
-
+| Prop       | Type                                                           | Default | Description |
+| ---------- | -------------------------------------------------------------- | ------- | ----------- |
+| className? | `string`                                                       | -       | -           |
+| position?  | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | -       | -           |
+| collapsed? | `boolean`                                                      | -       | -           |
+| onClose?   | `() => void`                                                   | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassPerformanceDashboard } from '@liquidify/ui'
+import { GlassPerformanceDashboard } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPerformanceDashboard />
+  return <GlassPerformanceDashboard />;
 }
 ```
 
@@ -59,52 +58,50 @@ export default function Example() {
 #### LiveMetrics
 
 ```tsx
-<GlassPerformanceDashboard  />
+<GlassPerformanceDashboard />
 ```
 
 #### CompactView
 
 ```tsx
-<GlassPerformanceDashboard  />
+<GlassPerformanceDashboard />
 ```
 
 #### DetailedAnalytics
 
 ```tsx
-<GlassPerformanceDashboard  />
+<GlassPerformanceDashboard />
 ```
 
 #### MultipleChartTypes
 
 ```tsx
-<GlassPerformanceDashboard  />
+<GlassPerformanceDashboard />
 ```
 
 #### ResponsiveGrid
 
 ```tsx
-<GlassPerformanceDashboard  />
+<GlassPerformanceDashboard />
 ```
 
 #### AlertsAndThresholds
 
 ```tsx
-<GlassPerformanceDashboard  />
+<GlassPerformanceDashboard />
 ```
 
 #### DarkModeOptimized
 
 ```tsx
-<GlassPerformanceDashboard  />
+<GlassPerformanceDashboard />
 ```
 
 #### MobileResponsive
 
 ```tsx
-<GlassPerformanceDashboard  />
+<GlassPerformanceDashboard />
 ```
-
-
 
 ## Accessibility
 

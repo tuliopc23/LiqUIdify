@@ -16,41 +16,40 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassLoading } from '@liquidify/ui'
+import { GlassLoading } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassLoading } from '@liquidify/ui/loading'
+import { GlassLoading } from "@liquidify/ui/loading";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassLoading } from '@liquidify/ui'
+import { GlassLoading } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassLoading />
+  return <GlassLoading />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| size? | `"sm" \| "md" \| "lg" \| "xl"` | - | - |
-| variant? | `"dots" \| "spinner" \| "pulse" \| "bars"` | - | - |
-| className? | `string` | - | - |
-| text? | `string` | - | - |
-
+| Prop       | Type                                       | Default | Description |
+| ---------- | ------------------------------------------ | ------- | ----------- |
+| size?      | `"sm" \| "md" \| "lg" \| "xl"`             | -       | -           |
+| variant?   | `"dots" \| "spinner" \| "pulse" \| "bars"` | -       | -           |
+| className? | `string`                                   | -       | -           |
+| text?      | `string`                                   | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassLoading } from '@liquidify/ui'
+import { GlassLoading } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassLoading />
+  return <GlassLoading />;
 }
 ```
 
@@ -59,58 +58,56 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
 
 #### Variants
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
 
 #### WithText
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
 
 #### PerformanceShowcase
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassLoading  />
+<GlassLoading />
 ```
-
-
 
 ## Accessibility
 

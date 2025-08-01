@@ -68,8 +68,12 @@ bun add @liquidify/components
 ## Basic Usage
 
 ```tsx
-import { GlassButton, GlassCard, UnifiedGlassProvider } from '@liquidify/components';
-import '@liquidify/components/css';
+import {
+  GlassButton,
+  GlassCard,
+  UnifiedGlassProvider,
+} from "@liquidify/components";
+import "@liquidify/components/css";
 
 function App() {
   return (

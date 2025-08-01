@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassVisuallyHidden } from '@liquidify/ui'
+import { GlassVisuallyHidden } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassVisuallyHidden } from '@liquidify/ui/visually-hidden'
+import { GlassVisuallyHidden } from "@liquidify/ui/visually-hidden";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassVisuallyHidden } from '@liquidify/ui'
+import { GlassVisuallyHidden } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassVisuallyHidden />
+  return <GlassVisuallyHidden />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassVisuallyHidden } from '@liquidify/ui'
+import { GlassVisuallyHidden } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassVisuallyHidden />
+  return <GlassVisuallyHidden />;
 }
 ```
 
@@ -55,28 +55,26 @@ export default function Example() {
 #### FormAccessibility
 
 ```tsx
-<GlassVisuallyHidden  />
+<GlassVisuallyHidden />
 ```
 
 #### DataTable
 
 ```tsx
-<GlassVisuallyHidden  />
+<GlassVisuallyHidden />
 ```
 
 #### NavigationContext
 
 ```tsx
-<GlassVisuallyHidden  />
+<GlassVisuallyHidden />
 ```
 
 #### ComplexInteractions
 
 ```tsx
-<GlassVisuallyHidden  />
+<GlassVisuallyHidden />
 ```
-
-
 
 ## Accessibility
 

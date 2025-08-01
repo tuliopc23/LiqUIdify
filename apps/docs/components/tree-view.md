@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassTreeView } from '@liquidify/ui'
+import { GlassTreeView } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassTreeView } from '@liquidify/ui/tree-view'
+import { GlassTreeView } from "@liquidify/ui/tree-view";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassTreeView } from '@liquidify/ui'
+import { GlassTreeView } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTreeView />
+  return <GlassTreeView />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassTreeView } from '@liquidify/ui'
+import { GlassTreeView } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTreeView />
+  return <GlassTreeView />;
 }
 ```
 
@@ -55,46 +55,44 @@ export default function Example() {
 #### WithSelection
 
 ```tsx
-<GlassTreeView  />
+<GlassTreeView />
 ```
 
 #### DatabaseSchema
 
 ```tsx
-<GlassTreeView  />
+<GlassTreeView />
 ```
 
 #### ControlledExpansion
 
 ```tsx
-<GlassTreeView  />
+<GlassTreeView />
 ```
 
 #### SettingsMenu
 
 ```tsx
-<GlassTreeView  />
+<GlassTreeView />
 ```
 
 #### WithDataBinding
 
 ```tsx
-<GlassTreeView  />
+<GlassTreeView />
 ```
 
 #### CompactTree
 
 ```tsx
-<GlassTreeView  />
+<GlassTreeView />
 ```
 
 #### NonSelectableNodes
 
 ```tsx
-<GlassTreeView  />
+<GlassTreeView />
 ```
-
-
 
 ## Accessibility
 

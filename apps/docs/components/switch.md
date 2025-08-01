@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassSwitch } from '@liquidify/ui'
+import { GlassSwitch } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassSwitch } from '@liquidify/ui/switch'
+import { GlassSwitch } from "@liquidify/ui/switch";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassSwitch } from '@liquidify/ui'
+import { GlassSwitch } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSwitch />
+  return <GlassSwitch />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassSwitch } from '@liquidify/ui'
+import { GlassSwitch } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSwitch />
+  return <GlassSwitch />;
 }
 ```
 
@@ -55,64 +55,62 @@ export default function Example() {
 #### Controlled
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### WithLabel
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### WithoutLabel
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### DisabledStates
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### MultipleSwitches
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### FormIntegration
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### StatusIndicators
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassSwitch  />
+<GlassSwitch />
 ```
-
-
 
 ## Accessibility
 

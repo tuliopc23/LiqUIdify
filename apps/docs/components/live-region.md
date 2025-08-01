@@ -16,48 +16,47 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassLiveRegion } from '@liquidify/ui'
+import { GlassLiveRegion } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassLiveRegion } from '@liquidify/ui/live-region'
+import { GlassLiveRegion } from "@liquidify/ui/live-region";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassLiveRegion } from '@liquidify/ui'
+import { GlassLiveRegion } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassLiveRegion />
+  return <GlassLiveRegion />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| message? | `string` | - | - |
-| priority? | `AriaLivePriority` | - | - |
-| atomic? | `boolean` | - | - |
-| relevant? | `AriaRelevant \| Array<AriaRelevant>` | - | - |
-| className? | `string` | - | - |
-| clearDelay? | `number` | - | - |
-| visuallyHidden? | `boolean` | - | - |
-| role? | `"status" \| "alert" \| "log"` | - | - |
-| queueingEnabled? | `boolean` | - | - |
-| maxQueueSize? | `number` | - | - |
-| contextualPrefix? | `boolean` | - | - |
-
+| Prop              | Type                                  | Default | Description |
+| ----------------- | ------------------------------------- | ------- | ----------- |
+| message?          | `string`                              | -       | -           |
+| priority?         | `AriaLivePriority`                    | -       | -           |
+| atomic?           | `boolean`                             | -       | -           |
+| relevant?         | `AriaRelevant \| Array<AriaRelevant>` | -       | -           |
+| className?        | `string`                              | -       | -           |
+| clearDelay?       | `number`                              | -       | -           |
+| visuallyHidden?   | `boolean`                             | -       | -           |
+| role?             | `"status" \| "alert" \| "log"`        | -       | -           |
+| queueingEnabled?  | `boolean`                             | -       | -           |
+| maxQueueSize?     | `number`                              | -       | -           |
+| contextualPrefix? | `boolean`                             | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassLiveRegion } from '@liquidify/ui'
+import { GlassLiveRegion } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassLiveRegion />
+  return <GlassLiveRegion />;
 }
 ```
 
@@ -66,28 +65,26 @@ export default function Example() {
 #### FormValidation
 
 ```tsx
-<GlassLiveRegion  />
+<GlassLiveRegion />
 ```
 
 #### ProgressUpdates
 
 ```tsx
-<GlassLiveRegion  />
+<GlassLiveRegion />
 ```
 
 #### NotificationCenter
 
 ```tsx
-<GlassLiveRegion  />
+<GlassLiveRegion />
 ```
 
 #### MultipleRegions
 
 ```tsx
-<GlassLiveRegion  />
+<GlassLiveRegion />
 ```
-
-
 
 ## Accessibility
 

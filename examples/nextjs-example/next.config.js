@@ -3,16 +3,16 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  transpilePackages: ['liquidify'],
+  transpilePackages: ["liquidify"],
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
       {
-        protocol: 'https',
-        hostname: 'via.placeholder.com',
+        protocol: "https",
+        hostname: "via.placeholder.com",
       },
     ],
   },

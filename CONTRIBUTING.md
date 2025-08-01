@@ -100,6 +100,7 @@ bun run generate:component GlassNewComponent
 ```
 
 This creates:
+
 ```
 libs/components/src/components/glass-new-component/
 ├── glass-new-component.tsx
@@ -181,10 +182,10 @@ describe('GlassNewComponent', () => {
   it('handles user interactions', async () => {
     const user = userEvent.setup();
     const onClick = jest.fn();
-    
+
     render(<GlassNewComponent onClick={onClick}>Click me</GlassNewComponent>);
     await user.click(screen.getByText('Click me'));
-    
+
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
@@ -282,6 +283,7 @@ bun run build
 ### 2. PR Guidelines
 
 **Title Format:**
+
 ```
 feat(component): add GlassNewComponent
 fix(button): resolve focus issue
@@ -289,26 +291,32 @@ docs(readme): update installation guide
 ```
 
 **Description Template:**
+
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Unit tests pass
 - [ ] Integration tests pass
 - [ ] Manual testing completed
 - [ ] Accessibility tested
 
 ## Screenshots
+
 (if applicable)
 
 ## Checklist
+
 - [ ] Code follows style guidelines
 - [ ] Self-review completed
 - [ ] Comments added for complex code
@@ -335,8 +343,8 @@ interface Props {
 }
 
 // Use const assertions
-const VARIANTS = ['default', 'primary', 'danger'] as const;
-type Variant = typeof VARIANTS[number];
+const VARIANTS = ["default", "primary", "danger"] as const;
+type Variant = (typeof VARIANTS)[number];
 
 // Document complex types
 /**
@@ -356,11 +364,11 @@ interface GlassConfig {
 // Use function components with hooks
 export const Component: React.FC<Props> = ({ value, onChange }) => {
   const [state, setState] = useState(value);
-  
+
   useEffect(() => {
     setState(value);
   }, [value]);
-  
+
   return <div>{state}</div>;
 };
 
@@ -379,7 +387,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  
+
   /* Responsive design */
   @media (max-width: 768px) {
     padding: 1rem;
@@ -398,22 +406,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 ### Glassmorphism Design
 
 1. **Consistent glass effects:**
+
 ```typescript
-import { useGlassEffect } from '../../hooks';
+import { useGlassEffect } from "../../hooks";
 
 const glassClasses = useGlassEffect({
   blur: 20,
   opacity: 0.8,
-  variant: 'elevated',
+  variant: "elevated",
 });
 ```
 
 2. **Proper contrast:**
+
 - Ensure text is readable on glass backgrounds
 - Test with different backgrounds
 - Provide fallbacks for unsupported browsers
 
 3. **Performance:**
+
 - Limit backdrop-filter usage
 - Use will-change sparingly
 - Test on low-end devices
@@ -421,6 +432,7 @@ const glassClasses = useGlassEffect({
 ### Accessibility Requirements
 
 1. **Keyboard Navigation:**
+
 ```typescript
 <button
   onKeyDown={(e) => {
@@ -432,6 +444,7 @@ const glassClasses = useGlassEffect({
 ```
 
 2. **ARIA Attributes:**
+
 ```typescript
 <div
   role="button"
@@ -442,6 +455,7 @@ const glassClasses = useGlassEffect({
 ```
 
 3. **Focus Management:**
+
 ```typescript
 const { focusProps } = useFocusRing();
 return <button {...focusProps} />;
@@ -454,7 +468,8 @@ return <button {...focusProps} />;
 Each component needs:
 
 1. **README.md:**
-```markdown
+
+````markdown
 # GlassNewComponent
 
 Brief description of the component.
@@ -471,8 +486,8 @@ import { GlassNewComponent } from '@liquidify/components';
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+| Prop    | Type   | Default   | Description    |
+| ------- | ------ | --------- | -------------- |
 | variant | string | 'default' | Visual variant |
 
 ## Accessibility
@@ -480,13 +495,14 @@ import { GlassNewComponent } from '@liquidify/components';
 - Keyboard navigable
 - Screen reader friendly
 - WCAG 2.1 AA compliant
-```
+````
 
 2. **JSDoc Comments:**
+
 ```typescript
 /**
  * A glassmorphic component for displaying content
- * 
+ *
  * @example
  * <GlassNewComponent variant="elevated">
  *   Content
@@ -494,7 +510,7 @@ import { GlassNewComponent } from '@liquidify/components';
  */
 export interface GlassNewComponentProps {
   /** Visual variant of the component */
-  variant?: 'default' | 'elevated' | 'inset';
+  variant?: "default" | "elevated" | "inset";
 }
 ```
 
@@ -510,6 +526,7 @@ export interface GlassNewComponentProps {
 ### Ways to Contribute
 
 1. **Code Contributions**
+
    - Fix bugs
    - Add features
    - Improve performance
@@ -527,6 +544,7 @@ export interface GlassNewComponentProps {
 ### Recognition
 
 Contributors are recognized in:
+
 - [Contributors list](https://github.com/liquidify/components/contributors)
 - Release notes
 - Annual contributor spotlight

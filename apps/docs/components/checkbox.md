@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassCheckbox } from '@liquidify/ui'
+import { GlassCheckbox } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassCheckbox } from '@liquidify/ui/checkbox'
+import { GlassCheckbox } from "@liquidify/ui/checkbox";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassCheckbox } from '@liquidify/ui'
+import { GlassCheckbox } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCheckbox />
+  return <GlassCheckbox />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassCheckbox } from '@liquidify/ui'
+import { GlassCheckbox } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCheckbox />
+  return <GlassCheckbox />;
 }
 ```
 
@@ -55,58 +55,56 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
 
 #### BasicExamples
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
 
 #### SizeVariants
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
 
 #### FormExamples
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassCheckbox  />
+<GlassCheckbox />
 ```
-
-
 
 ## Accessibility
 

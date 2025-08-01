@@ -16,51 +16,50 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassPagination } from '@liquidify/ui'
+import { GlassPagination } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassPagination } from '@liquidify/ui/pagination'
+import { GlassPagination } from "@liquidify/ui/pagination";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassPagination } from '@liquidify/ui'
+import { GlassPagination } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPagination />
+  return <GlassPagination />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| currentPage | `number` | - | - |
-| totalPages | `number` | - | - |
-| onPageChange | `(page: number) => void` | - | - |
-| showFirstLast? | `boolean` | - | - |
-| showPrevNext? | `boolean` | - | - |
-| showEllipsis? | `boolean` | - | - |
-| siblingCount? | `number` | - | - |
-| boundaryCount? | `number` | - | - |
-| disabled? | `boolean` | - | - |
-| className? | `string` | - | - |
-| id? | `string` | - | - |
-| role? | `string` | - | - |
-| variant? | `"default" \| "solid" \| "ghost"` | - | - |
-| size? | `"sm" \| "md" \| "lg"` | - | - |
-
+| Prop           | Type                              | Default | Description |
+| -------------- | --------------------------------- | ------- | ----------- |
+| currentPage    | `number`                          | -       | -           |
+| totalPages     | `number`                          | -       | -           |
+| onPageChange   | `(page: number) => void`          | -       | -           |
+| showFirstLast? | `boolean`                         | -       | -           |
+| showPrevNext?  | `boolean`                         | -       | -           |
+| showEllipsis?  | `boolean`                         | -       | -           |
+| siblingCount?  | `number`                          | -       | -           |
+| boundaryCount? | `number`                          | -       | -           |
+| disabled?      | `boolean`                         | -       | -           |
+| className?     | `string`                          | -       | -           |
+| id?            | `string`                          | -       | -           |
+| role?          | `string`                          | -       | -           |
+| variant?       | `"default" \| "solid" \| "ghost"` | -       | -           |
+| size?          | `"sm" \| "md" \| "lg"`            | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassPagination } from '@liquidify/ui'
+import { GlassPagination } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPagination />
+  return <GlassPagination />;
 }
 ```
 
@@ -69,52 +68,50 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassPagination  />
+<GlassPagination />
 ```
 
 #### Variants
 
 ```tsx
-<GlassPagination  />
+<GlassPagination />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassPagination  />
+<GlassPagination />
 ```
 
 #### States
 
 ```tsx
-<GlassPagination  />
+<GlassPagination />
 ```
 
 #### ConfigurationExamples
 
 ```tsx
-<GlassPagination  />
+<GlassPagination />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassPagination  />
+<GlassPagination />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassPagination  />
+<GlassPagination />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassPagination  />
+<GlassPagination />
 ```
-
-
 
 ## Accessibility
 

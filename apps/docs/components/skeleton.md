@@ -16,48 +16,47 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassSkeleton } from '@liquidify/ui'
+import { GlassSkeleton } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassSkeleton } from '@liquidify/ui/skeleton'
+import { GlassSkeleton } from "@liquidify/ui/skeleton";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassSkeleton } from '@liquidify/ui'
+import { GlassSkeleton } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSkeleton />
+  return <GlassSkeleton />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| width? | `string \| number` | - | - |
-| height? | `string \| number` | - | - |
-| count? | `number` | - | - |
-| spacing? | `number` | - | - |
-| animated? | `boolean` | - | - |
-| className? | `string` | - | - |
-| id? | `string` | - | - |
-| style? | `React.CSSProperties` | - | - |
-| variant? | `"default" \| "shimmer" \| "pulse"` | - | - |
-| size? | `"sm" \| "md" \| "lg" \| "xl"` | - | - |
-| shape? | `"rectangle" \| "circle" \| "line"` | - | - |
-
+| Prop       | Type                                | Default | Description |
+| ---------- | ----------------------------------- | ------- | ----------- |
+| width?     | `string \| number`                  | -       | -           |
+| height?    | `string \| number`                  | -       | -           |
+| count?     | `number`                            | -       | -           |
+| spacing?   | `number`                            | -       | -           |
+| animated?  | `boolean`                           | -       | -           |
+| className? | `string`                            | -       | -           |
+| id?        | `string`                            | -       | -           |
+| style?     | `React.CSSProperties`               | -       | -           |
+| variant?   | `"default" \| "shimmer" \| "pulse"` | -       | -           |
+| size?      | `"sm" \| "md" \| "lg" \| "xl"`      | -       | -           |
+| shape?     | `"rectangle" \| "circle" \| "line"` | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassSkeleton } from '@liquidify/ui'
+import { GlassSkeleton } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSkeleton />
+  return <GlassSkeleton />;
 }
 ```
 
@@ -66,52 +65,50 @@ export default function Example() {
 #### Playground
 
 ```tsx
-<GlassSkeleton  />
+<GlassSkeleton />
 ```
 
 #### Variants
 
 ```tsx
-<GlassSkeleton  />
+<GlassSkeleton />
 ```
 
 #### Shapes
 
 ```tsx
-<GlassSkeleton  />
+<GlassSkeleton />
 ```
 
 #### PreBuiltPatterns
 
 ```tsx
-<GlassSkeleton  />
+<GlassSkeleton />
 ```
 
 #### ContentTypeExamples
 
 ```tsx
-<GlassSkeleton  />
+<GlassSkeleton />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassSkeleton  />
+<GlassSkeleton />
 ```
 
 #### LoadingStatesComparison
 
 ```tsx
-<GlassSkeleton  />
+<GlassSkeleton />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassSkeleton  />
+<GlassSkeleton />
 ```
-
-
 
 ## Accessibility
 

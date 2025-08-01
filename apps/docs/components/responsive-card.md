@@ -16,41 +16,39 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassResponsiveCard } from '@liquidify/ui'
+import { GlassResponsiveCard } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassResponsiveCard } from '@liquidify/ui/responsive-card'
+import { GlassResponsiveCard } from "@liquidify/ui/responsive-card";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassResponsiveCard } from '@liquidify/ui'
+import { GlassResponsiveCard } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassResponsiveCard />
+  return <GlassResponsiveCard />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassResponsiveCard } from '@liquidify/ui'
+import { GlassResponsiveCard } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassResponsiveCard />
+  return <GlassResponsiveCard />;
 }
 ```
-
-
 
 ## Accessibility
 

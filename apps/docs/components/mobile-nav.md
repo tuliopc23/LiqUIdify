@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassMobileNav } from '@liquidify/ui'
+import { GlassMobileNav } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassMobileNav } from '@liquidify/ui/mobile-nav'
+import { GlassMobileNav } from "@liquidify/ui/mobile-nav";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassMobileNav } from '@liquidify/ui'
+import { GlassMobileNav } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassMobileNav />
+  return <GlassMobileNav />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassMobileNav } from '@liquidify/ui'
+import { GlassMobileNav } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassMobileNav />
+  return <GlassMobileNav />;
 }
 ```
 
@@ -55,34 +55,32 @@ export default function Example() {
 #### WithActiveState
 
 ```tsx
-<GlassMobileNav  />
+<GlassMobileNav />
 ```
 
 #### SimpleMenu
 
 ```tsx
-<GlassMobileNav  />
+<GlassMobileNav />
 ```
 
 #### DeeplyNested
 
 ```tsx
-<GlassMobileNav  />
+<GlassMobileNav />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassMobileNav  />
+<GlassMobileNav />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassMobileNav  />
+<GlassMobileNav />
 ```
-
-
 
 ## Accessibility
 

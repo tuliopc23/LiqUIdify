@@ -3,11 +3,11 @@ import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import { resolve } from "path";
 import { visualizer } from "rollup-plugin-visualizer";
-import { compression } from 'vite-plugin-compression2';
+import { compression } from "vite-plugin-compression2";
 
 export default defineConfig(({ mode }) => {
-  const isProduction = mode === 'production';
-  
+  const isProduction = mode === "production";
+
   return {
     plugins: [
       react(),
@@ -26,18 +26,20 @@ export default defineConfig(({ mode }) => {
         rollupTypes: isProduction,
       }),
       // Bundle analyzer in production
-      isProduction && visualizer({
-        filename: 'reports/bundle/stats.html',
-        open: false,
-        gzipSize: true,
-        brotliSize: true,
-      }),
+      isProduction &&
+        visualizer({
+          filename: "reports/bundle/stats.html",
+          open: false,
+          gzipSize: true,
+          brotliSize: true,
+        }),
       // Gzip compression for analysis
-      isProduction && compression({
-        algorithm: 'gzip',
-        exclude: [/\.(br)$/, /\.(gz)$/],
-        deleteOriginalAssets: false,
-      }),
+      isProduction &&
+        compression({
+          algorithm: "gzip",
+          exclude: [/\.(br)$/, /\.(gz)$/],
+          deleteOriginalAssets: false,
+        }),
     ].filter(Boolean),
     resolve: {
       alias: {
@@ -56,13 +58,25 @@ export default defineConfig(({ mode }) => {
           navigation: resolve("libs/components/src/bundles/navigation.ts"),
           feedback: resolve("libs/components/src/bundles/feedback.ts"),
           layout: resolve("libs/components/src/bundles/layout.ts"),
-          "data-display": resolve("libs/components/src/bundles/data-display.ts"),
-          accessibility: resolve("libs/components/src/bundles/accessibility.ts"),
+          "data-display": resolve(
+            "libs/components/src/bundles/data-display.ts",
+          ),
+          accessibility: resolve(
+            "libs/components/src/bundles/accessibility.ts",
+          ),
           // Individual component entries
-          "components/button": resolve("libs/components/src/components/glass-button-refactored/index.ts"),
-          "components/card": resolve("libs/components/src/components/glass-card-refactored/index.ts"),
-          "components/modal": resolve("libs/components/src/components/glass-modal/index.ts"),
-          "components/input": resolve("libs/components/src/components/glass-input/index.ts"),
+          "components/button": resolve(
+            "libs/components/src/components/glass-button-refactored/index.ts",
+          ),
+          "components/card": resolve(
+            "libs/components/src/components/glass-card-refactored/index.ts",
+          ),
+          "components/modal": resolve(
+            "libs/components/src/components/glass-modal/index.ts",
+          ),
+          "components/input": resolve(
+            "libs/components/src/components/glass-input/index.ts",
+          ),
         },
         name: "LiqUIdify",
         formats: ["es", "cjs"],
@@ -89,16 +103,18 @@ export default defineConfig(({ mode }) => {
           },
           // Asset naming
           assetFileNames: (assetInfo) => {
-            if (assetInfo.name === 'style.css') {
-              return 'liquidui.css';
+            if (assetInfo.name === "style.css") {
+              return "liquidui.css";
             }
             return assetInfo.name;
           },
           // Manual chunks for optimal splitting
           manualChunks: {
-            'utils': ['libs/components/src/utils/index.ts'],
-            'hooks': ['libs/components/src/hooks/index.ts'],
-            'core/glass': ['libs/components/src/core/glass/unified-glass-system.tsx'],
+            utils: ["libs/components/src/utils/index.ts"],
+            hooks: ["libs/components/src/hooks/index.ts"],
+            "core/glass": [
+              "libs/components/src/core/glass/unified-glass-system.tsx",
+            ],
           },
         },
         // Tree shaking
@@ -109,28 +125,30 @@ export default defineConfig(({ mode }) => {
         },
       },
       // Source maps for debugging
-      sourcemap: isProduction ? 'hidden' : true,
+      sourcemap: isProduction ? "hidden" : true,
       // Empty output directory
       emptyOutDir: true,
       // Build target
       target: "es2020",
       // Minification
-      minify: isProduction ? 'terser' : false,
-      terserOptions: isProduction ? {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          pure_funcs: ['console.log', 'console.info', 'console.debug'],
-          passes: 2,
-        },
-        mangle: {
-          safari10: true,
-        },
-        format: {
-          comments: false,
-          ascii_only: true,
-        },
-      } : undefined,
+      minify: isProduction ? "terser" : false,
+      terserOptions: isProduction
+        ? {
+            compress: {
+              drop_console: true,
+              drop_debugger: true,
+              pure_funcs: ["console.log", "console.info", "console.debug"],
+              passes: 2,
+            },
+            mangle: {
+              safari10: true,
+            },
+            format: {
+              comments: false,
+              ascii_only: true,
+            },
+          }
+        : undefined,
       // Output directory
       outDir: "dist/libs/components",
       // Chunk size warnings
@@ -138,7 +156,7 @@ export default defineConfig(({ mode }) => {
       // CSS code splitting
       cssCodeSplit: true,
       // CSS minification
-      cssMinify: isProduction ? 'lightningcss' : false,
+      cssMinify: isProduction ? "lightningcss" : false,
       // Asset inlining threshold
       assetsInlineLimit: 4096,
       // Report compressed size
@@ -148,19 +166,21 @@ export default defineConfig(({ mode }) => {
       target: "es2020",
       jsx: "automatic",
       // Remove comments in production
-      legalComments: isProduction ? 'none' : 'inline',
+      legalComments: isProduction ? "none" : "inline",
       // Pure functions for tree shaking
-      pure: isProduction ? ['console.log', 'console.info', 'console.debug'] : [],
+      pure: isProduction
+        ? ["console.log", "console.info", "console.debug"]
+        : [],
       // Drop debugger statements
-      drop: isProduction ? ['debugger'] : [],
+      drop: isProduction ? ["debugger"] : [],
     },
     css: {
       // CSS modules
       modules: {
-        localsConvention: 'camelCase',
-        generateScopedName: isProduction 
-          ? '[hash:base64:5]' 
-          : '[name]__[local]__[hash:base64:5]',
+        localsConvention: "camelCase",
+        generateScopedName: isProduction
+          ? "[hash:base64:5]"
+          : "[name]__[local]__[hash:base64:5]",
       },
       // PostCSS config
       postcss: {
@@ -177,10 +197,10 @@ export default defineConfig(({ mode }) => {
     },
     // Performance optimizations
     optimizeDeps: {
-      include: ['react', 'react-dom'],
-      exclude: ['@liquidify/components'],
+      include: ["react", "react-dom"],
+      exclude: ["@liquidify/components"],
       esbuildOptions: {
-        target: 'es2020',
+        target: "es2020",
       },
     },
     // Server config for development

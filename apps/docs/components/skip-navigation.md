@@ -16,44 +16,43 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassSkipNavigation } from '@liquidify/ui'
+import { GlassSkipNavigation } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassSkipNavigation } from '@liquidify/ui/skip-navigation'
+import { GlassSkipNavigation } from "@liquidify/ui/skip-navigation";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassSkipNavigation } from '@liquidify/ui'
+import { GlassSkipNavigation } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSkipNavigation />
+  return <GlassSkipNavigation />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| links? | `Array<SkipLink>` | - | - |
-| autoGenerate? | `boolean` | - | - |
-| position? | `"top" \| "left" \| "right"` | - | - |
-| className? | `string` | - | - |
-| visibleOnFocus? | `boolean` | - | - |
-| announceOnFocus? | `boolean` | - | - |
-| customStyles? | `React.CSSProperties` | - | - |
-
+| Prop             | Type                         | Default | Description |
+| ---------------- | ---------------------------- | ------- | ----------- |
+| links?           | `Array<SkipLink>`            | -       | -           |
+| autoGenerate?    | `boolean`                    | -       | -           |
+| position?        | `"top" \| "left" \| "right"` | -       | -           |
+| className?       | `string`                     | -       | -           |
+| visibleOnFocus?  | `boolean`                    | -       | -           |
+| announceOnFocus? | `boolean`                    | -       | -           |
+| customStyles?    | `React.CSSProperties`        | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassSkipNavigation } from '@liquidify/ui'
+import { GlassSkipNavigation } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSkipNavigation />
+  return <GlassSkipNavigation />;
 }
 ```
 
@@ -62,46 +61,44 @@ export default function Example() {
 #### CustomLinks
 
 ```tsx
-<GlassSkipNavigation  />
+<GlassSkipNavigation />
 ```
 
 #### AlwaysVisible
 
 ```tsx
-<GlassSkipNavigation  />
+<GlassSkipNavigation />
 ```
 
 #### Positions
 
 ```tsx
-<GlassSkipNavigation  />
+<GlassSkipNavigation />
 ```
 
 #### WithInstructions
 
 ```tsx
-<GlassSkipNavigation  />
+<GlassSkipNavigation />
 ```
 
 #### RealWorldExample
 
 ```tsx
-<GlassSkipNavigation  />
+<GlassSkipNavigation />
 ```
 
 #### StylingVariations
 
 ```tsx
-<GlassSkipNavigation  />
+<GlassSkipNavigation />
 ```
 
 #### AccessibilityTesting
 
 ```tsx
-<GlassSkipNavigation  />
+<GlassSkipNavigation />
 ```
-
-
 
 ## Accessibility
 

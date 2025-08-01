@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassBreadcrumbs } from '@liquidify/ui'
+import { GlassBreadcrumbs } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassBreadcrumbs } from '@liquidify/ui/breadcrumbs'
+import { GlassBreadcrumbs } from "@liquidify/ui/breadcrumbs";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassBreadcrumbs } from '@liquidify/ui'
+import { GlassBreadcrumbs } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassBreadcrumbs />
+  return <GlassBreadcrumbs />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassBreadcrumbs } from '@liquidify/ui'
+import { GlassBreadcrumbs } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassBreadcrumbs />
+  return <GlassBreadcrumbs />;
 }
 ```
 
@@ -55,70 +55,68 @@ export default function Example() {
 #### WithClickHandlers
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### WithIcons
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### Variants
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### NoHomeIcon
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### CustomSeparator
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### WithTruncation
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassBreadcrumbs  />
+<GlassBreadcrumbs />
 ```
-
-
 
 ## Accessibility
 

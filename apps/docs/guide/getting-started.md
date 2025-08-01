@@ -2,7 +2,7 @@
 
 Welcome to **LiqUIdify** - a production-ready React component library with stunning glassmorphism design and physics-based interactions. This guide will help you get up and running quickly.
 
-## What is LiqUIdify?
+## What is LiqUIdify
 
 LiqUIdify is a modern React component library that brings the beauty of glassmorphism design to your applications with:
 
@@ -18,21 +18,18 @@ LiqUIdify is a modern React component library that brings the beauty of glassmor
 Here's what LiqUIdify components look like in action:
 
 ```tsx
-import { GlassCard, GlassButton, GlassInput } from '@liquidify/ui'
+import { GlassCard, GlassButton, GlassInput } from "@liquidify/ui";
 
 function App() {
   return (
     <GlassCard className="p-6 max-w-md mx-auto">
       <h2 className="text-xl font-semibold mb-4">Welcome to LiqUIdify</h2>
-      <GlassInput 
-        placeholder="Enter your name" 
-        className="mb-4" 
-      />
+      <GlassInput placeholder="Enter your name" className="mb-4" />
       <GlassButton variant="primary" size="lg">
         Get Started
       </GlassButton>
     </GlassCard>
-  )
+  );
 }
 ```
 
@@ -86,14 +83,14 @@ Add the LiqUIdify CSS to your main CSS file or entry point:
 
 ```css
 /* In your main CSS file (e.g., globals.css, index.css) */
-@import '@liquidify/ui/styles';
+@import "@liquidify/ui/styles";
 ```
 
 Or import directly in your JavaScript/TypeScript entry point:
 
 ```tsx
 // In your main.tsx, index.tsx, or App.tsx
-import '@liquidify/ui/styles'
+import "@liquidify/ui/styles";
 ```
 
 ### 2. Set Up Theme Provider
@@ -101,18 +98,14 @@ import '@liquidify/ui/styles'
 Wrap your application with the `ThemeProvider` for optimal glassmorphism effects:
 
 ```tsx
-import { ThemeProvider } from '@liquidify/ui'
-import '@liquidify/ui/styles'
+import { ThemeProvider } from "@liquidify/ui";
+import "@liquidify/ui/styles";
 
 function App() {
-  return (
-    <ThemeProvider theme="glass">
-      {/* Your app content */}
-    </ThemeProvider>
-  )
+  return <ThemeProvider theme="glass">{/* Your app content */}</ThemeProvider>;
 }
 
-export default App
+export default App;
 ```
 
 ### 3. Use Your First Component
@@ -120,22 +113,22 @@ export default App
 Now you can start using LiqUIdify components:
 
 ```tsx
-import { GlassButton, GlassCard } from '@liquidify/ui'
+import { GlassButton, GlassCard } from "@liquidify/ui";
 
 function MyComponent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 to-purple-600 p-8">
       <GlassCard className="p-6 max-w-sm mx-auto">
         <h1 className="text-xl font-bold mb-4">Hello LiqUIdify!</h1>
-        <GlassButton 
-          onClick={() => alert('Welcome to LiqUIdify!')}
+        <GlassButton
+          onClick={() => alert("Welcome to LiqUIdify!")}
           variant="primary"
         >
           Click me
         </GlassButton>
       </GlassCard>
     </div>
-  )
+  );
 }
 ```
 
@@ -144,21 +137,24 @@ function MyComponent() {
 LiqUIdify is built with tree shaking in mind. You can import components in several ways:
 
 ### Full Import (Convenient)
+
 ```tsx
-import { GlassButton, GlassCard, GlassInput } from '@liquidify/ui'
+import { GlassButton, GlassCard, GlassInput } from "@liquidify/ui";
 ```
 
 ### Individual Imports (Optimal Bundle Size)
+
 ```tsx
-import { GlassButton } from '@liquidify/ui/button'
-import { GlassCard } from '@liquidify/ui/card'
-import { GlassInput } from '@liquidify/ui/input'
+import { GlassButton } from "@liquidify/ui/button";
+import { GlassCard } from "@liquidify/ui/card";
+import { GlassInput } from "@liquidify/ui/input";
 ```
 
 ### Bundle Imports (Category-Based)
+
 ```tsx
-import { GlassButton, GlassInput } from '@liquidify/ui/forms'
-import { GlassCard } from '@liquidify/ui/core'
+import { GlassButton, GlassInput } from "@liquidify/ui/forms";
+import { GlassCard } from "@liquidify/ui/core";
 ```
 
 ## Framework Integration
@@ -166,82 +162,89 @@ import { GlassCard } from '@liquidify/ui/core'
 ### Next.js Setup
 
 1. Install LiqUIdify:
+
 ```bash
 npm install @liquidify/ui
 ```
 
 2. Create a `globals.css` file:
+
 ```css
-@import '@liquidify/ui/styles';
+@import "@liquidify/ui/styles";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
 
 3. Set up your `_app.tsx`:
+
 ```tsx
-import type { AppProps } from 'next/app'
-import { ThemeProvider } from '@liquidify/ui'
-import '../styles/globals.css'
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "@liquidify/ui";
+import "../styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme="glass">
       <Component {...pageProps} />
     </ThemeProvider>
-  )
+  );
 }
 ```
 
 ### Vite Setup
 
 1. Install LiqUIdify:
+
 ```bash
 npm install @liquidify/ui
 ```
 
 2. Update your `main.tsx`:
-```tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { ThemeProvider } from '@liquidify/ui'
-import '@liquidify/ui/styles'
-import './index.css'
-import App from './App'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+```tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ThemeProvider } from "@liquidify/ui";
+import "@liquidify/ui/styles";
+import "./index.css";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme="glass">
       <App />
     </ThemeProvider>
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+);
 ```
 
 ### Create React App Setup
 
 1. Install LiqUIdify:
+
 ```bash
 npm install @liquidify/ui
 ```
 
 2. Update your `src/index.tsx`:
-```tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { ThemeProvider } from '@liquidify/ui'
-import '@liquidify/ui/styles'
-import './index.css'
-import App from './App'
 
-const root = ReactDOM.createRoot(document.getElementById('root')!)
+```tsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ThemeProvider } from "@liquidify/ui";
+import "@liquidify/ui/styles";
+import "./index.css";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
   <React.StrictMode>
     <ThemeProvider theme="glass">
       <App />
     </ThemeProvider>
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+);
 ```
 
 ## Background Setup for Best Results
@@ -249,6 +252,7 @@ root.render(
 LiqUIdify components look best with gradient backgrounds. Here are some recommended setups:
 
 ### CSS Gradients
+
 ```css
 .app-background {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -257,6 +261,7 @@ LiqUIdify components look best with gradient backgrounds. Here are some recommen
 ```
 
 ### Tailwind CSS Classes
+
 ```tsx
 <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500">
   {/* Your content */}
@@ -264,84 +269,89 @@ LiqUIdify components look best with gradient backgrounds. Here are some recommen
 ```
 
 ### Dynamic Backgrounds
+
 ```tsx
-import { useState } from 'react'
+import { useState } from "react";
 
 const backgrounds = [
-  'bg-gradient-to-br from-blue-400 to-purple-600',
-  'bg-gradient-to-br from-green-400 to-teal-600',
-  'bg-gradient-to-br from-pink-400 to-red-600',
-]
+  "bg-gradient-to-br from-blue-400 to-purple-600",
+  "bg-gradient-to-br from-green-400 to-teal-600",
+  "bg-gradient-to-br from-pink-400 to-red-600",
+];
 
 function App() {
-  const [bgIndex, setBgIndex] = useState(0)
-  
+  const [bgIndex, setBgIndex] = useState(0);
+
   return (
-    <div className={`min-h-screen ${backgrounds[bgIndex]} transition-all duration-1000`}>
+    <div
+      className={`min-h-screen ${backgrounds[bgIndex]} transition-all duration-1000`}
+    >
       {/* Your content */}
     </div>
-  )
+  );
 }
 ```
 
 ## Common Patterns
 
 ### Form with Glass Components
+
 ```tsx
-import { GlassCard, GlassInput, GlassButton, GlassSelect } from '@liquidify/ui'
+import { GlassCard, GlassInput, GlassButton, GlassSelect } from "@liquidify/ui";
 
 function ContactForm() {
   return (
     <GlassCard className="p-8 max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
-      
+
       <form className="space-y-4">
-        <GlassInput 
-          label="Full Name"
-          placeholder="Enter your name"
-          required
-        />
-        
-        <GlassInput 
+        <GlassInput label="Full Name" placeholder="Enter your name" required />
+
+        <GlassInput
           label="Email"
           type="email"
           placeholder="your@email.com"
           required
         />
-        
-        <GlassSelect 
+
+        <GlassSelect
           label="Subject"
           options={[
-            { value: 'support', label: 'Support' },
-            { value: 'sales', label: 'Sales' },
-            { value: 'feedback', label: 'Feedback' }
+            { value: "support", label: "Support" },
+            { value: "sales", label: "Sales" },
+            { value: "feedback", label: "Feedback" },
           ]}
         />
-        
-        <GlassButton type="submit" variant="primary" size="lg" className="w-full">
+
+        <GlassButton
+          type="submit"
+          variant="primary"
+          size="lg"
+          className="w-full"
+        >
           Send Message
         </GlassButton>
       </form>
     </GlassCard>
-  )
+  );
 }
 ```
 
 ### Dashboard Layout
+
 ```tsx
-import { 
-  GlassCard, 
-  GlassButton, 
-  GlassBadge, 
+import {
+  GlassCard,
+  GlassButton,
+  GlassBadge,
   GlassProgress,
-  GlassChart 
-} from '@liquidify/ui'
+  GlassChart,
+} from "@liquidify/ui";
 
 function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
         {/* Stats Card */}
         <GlassCard className="p-6">
           <div className="flex items-center justify-between">
@@ -350,49 +360,50 @@ function Dashboard() {
           </div>
           <p className="text-3xl font-bold mt-2">12,458</p>
         </GlassCard>
-        
+
         {/* Progress Card */}
         <GlassCard className="p-6">
           <h3 className="text-lg font-semibold mb-4">Project Progress</h3>
           <GlassProgress value={75} className="mb-2" />
           <p className="text-sm text-gray-600">75% Complete</p>
         </GlassCard>
-        
+
         {/* Chart Card */}
         <GlassCard className="p-6 lg:col-span-3">
           <h3 className="text-lg font-semibold mb-4">Analytics</h3>
-          <GlassChart 
+          <GlassChart
             data={[
-              { name: 'Jan', value: 400 },
-              { name: 'Feb', value: 300 },
-              { name: 'Mar', value: 600 },
-              { name: 'Apr', value: 800 },
+              { name: "Jan", value: 400 },
+              { name: "Feb", value: 300 },
+              { name: "Mar", value: 600 },
+              { name: "Apr", value: 800 },
             ]}
             type="line"
           />
         </GlassCard>
-        
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ## Development Tips
 
 ### 1. Use TypeScript for Better DX
+
 LiqUIdify is built with TypeScript and provides excellent type safety:
 
 ```tsx
-import { GlassButtonProps } from '@liquidify/ui'
+import { GlassButtonProps } from "@liquidify/ui";
 
 // Props are fully typed
 const MyButton: React.FC<GlassButtonProps> = (props) => {
-  return <GlassButton {...props} />
-}
+  return <GlassButton {...props} />;
+};
 ```
 
 ### 2. Customize with CSS Variables
+
 Override the default glass effect variables:
 
 ```css
@@ -404,13 +415,11 @@ Override the default glass effect variables:
 ```
 
 ### 3. Test Accessibility
+
 Use screen readers and keyboard navigation to test your components:
 
 ```tsx
-<GlassButton
-  aria-label="Close dialog"
-  onClick={handleClose}
->
+<GlassButton aria-label="Close dialog" onClick={handleClose}>
   ×
 </GlassButton>
 ```
@@ -425,7 +434,7 @@ Now that you have LiqUIdify set up, explore these resources:
 4. **[Framework Integration](/guide/framework-guides)** - Detailed setup for your framework
 5. **[Examples](/guide/usage-examples)** - Real-world usage patterns
 
-## Need Help?
+## Need Help
 
 - **Documentation**: Browse our comprehensive [component docs](/components/)
 - **GitHub Issues**: Report bugs or request features on [GitHub](https://github.com/tuliopc23/LiqUIdify/issues)

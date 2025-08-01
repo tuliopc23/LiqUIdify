@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassButtonRefactored } from '@liquidify/ui'
+import { GlassButtonRefactored } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassButtonRefactored } from '@liquidify/ui/button-refactored'
+import { GlassButtonRefactored } from "@liquidify/ui/button-refactored";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassButtonRefactored } from '@liquidify/ui'
+import { GlassButtonRefactored } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassButtonRefactored />
+  return <GlassButtonRefactored />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassButtonRefactored } from '@liquidify/ui'
+import { GlassButtonRefactored } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassButtonRefactored />
+  return <GlassButtonRefactored />;
 }
 ```
 
@@ -55,142 +55,140 @@ export default function Example() {
 #### Primary
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### Secondary
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### Tertiary
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### Ghost
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### Destructive
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### Apple
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### Sizes
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### WithLeftIcon
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### WithRightIcon
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### WithBothIcons
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### IconOnly
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### Loading
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### Disabled
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### LoadingWithIcon
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### AllVariants
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### ButtonGroup
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### LoadingStates
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### FormButtons
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### AccessibilityShowcase
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### ThemeDemo
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
 
 #### PerformanceTest
 
 ```tsx
-<GlassButtonRefactored  />
+<GlassButtonRefactored />
 ```
-
-
 
 ## Accessibility
 

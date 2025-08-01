@@ -16,48 +16,47 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassSelect } from '@liquidify/ui'
+import { GlassSelect } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassSelect } from '@liquidify/ui/select'
+import { GlassSelect } from "@liquidify/ui/select";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassSelect } from '@liquidify/ui'
+import { GlassSelect } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSelect />
+  return <GlassSelect />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| options | `Array<GlassSelectOption>` | - | - |
-| value? | `string \| Array<string>` | - | - |
-| onChange? | `(value: string \| Array<string>) => void` | - | - |
-| placeholder? | `string` | - | - |
-| disabled? | `boolean` | - | - |
-| className? | `string` | - | - |
-| variant? | `"default" \| "search" \| "multi"` | - | - |
-| multiple? | `boolean` | - | - |
-| searchable? | `boolean` | - | - |
-| maxSelections? | `number` | - | - |
-| id? | `string` | - | - |
-
+| Prop           | Type                                       | Default | Description |
+| -------------- | ------------------------------------------ | ------- | ----------- |
+| options        | `Array<GlassSelectOption>`                 | -       | -           |
+| value?         | `string \| Array<string>`                  | -       | -           |
+| onChange?      | `(value: string \| Array<string>) => void` | -       | -           |
+| placeholder?   | `string`                                   | -       | -           |
+| disabled?      | `boolean`                                  | -       | -           |
+| className?     | `string`                                   | -       | -           |
+| variant?       | `"default" \| "search" \| "multi"`         | -       | -           |
+| multiple?      | `boolean`                                  | -       | -           |
+| searchable?    | `boolean`                                  | -       | -           |
+| maxSelections? | `number`                                   | -       | -           |
+| id?            | `string`                                   | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassSelect } from '@liquidify/ui'
+import { GlassSelect } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassSelect />
+  return <GlassSelect />;
 }
 ```
 
@@ -66,58 +65,56 @@ export default function Example() {
 #### Controlled
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
 
 #### WithDisabledOptions
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
 
 #### Disabled
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
 
 #### LongOptionsList
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
 
 #### CustomWidth
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
 
 #### InteractiveDemo
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
 
 #### FormIntegration
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassSelect  />
+<GlassSelect />
 ```
-
-
 
 ## Accessibility
 

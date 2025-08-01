@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassTimeline } from '@liquidify/ui'
+import { GlassTimeline } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassTimeline } from '@liquidify/ui/timeline'
+import { GlassTimeline } from "@liquidify/ui/timeline";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassTimeline } from '@liquidify/ui'
+import { GlassTimeline } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTimeline />
+  return <GlassTimeline />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassTimeline } from '@liquidify/ui'
+import { GlassTimeline } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTimeline />
+  return <GlassTimeline />;
 }
 ```
 
@@ -55,52 +55,50 @@ export default function Example() {
 #### HorizontalTimeline
 
 ```tsx
-<GlassTimeline  />
+<GlassTimeline />
 ```
 
 #### AlternatingLayout
 
 ```tsx
-<GlassTimeline  />
+<GlassTimeline />
 ```
 
 #### WithCustomIcons
 
 ```tsx
-<GlassTimeline  />
+<GlassTimeline />
 ```
 
 #### WithRichContent
 
 ```tsx
-<GlassTimeline  />
+<GlassTimeline />
 ```
 
 #### ProjectRoadmap
 
 ```tsx
-<GlassTimeline  />
+<GlassTimeline />
 ```
 
 #### InteractiveTimeline
 
 ```tsx
-<GlassTimeline  />
+<GlassTimeline />
 ```
 
 #### CompactTimeline
 
 ```tsx
-<GlassTimeline  />
+<GlassTimeline />
 ```
 
 #### DarkModeTimeline
 
 ```tsx
-<GlassTimeline  />
+<GlassTimeline />
 ```
-
-
 
 ## Accessibility
 

@@ -16,40 +16,39 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassPortal } from '@liquidify/ui'
+import { GlassPortal } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassPortal } from '@liquidify/ui/portal'
+import { GlassPortal } from "@liquidify/ui/portal";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassPortal } from '@liquidify/ui'
+import { GlassPortal } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPortal />
+  return <GlassPortal />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `React.ReactNode` | - | - |
-| container? | `Element \| DocumentFragment` | - | - |
-| key? | `string` | - | - |
-
+| Prop       | Type                          | Default | Description |
+| ---------- | ----------------------------- | ------- | ----------- |
+| children   | `React.ReactNode`             | -       | -           |
+| container? | `Element \| DocumentFragment` | -       | -           |
+| key?       | `string`                      | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassPortal } from '@liquidify/ui'
+import { GlassPortal } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassPortal />
+  return <GlassPortal />;
 }
 ```
 
@@ -58,34 +57,32 @@ export default function Example() {
 #### ModalExample
 
 ```tsx
-<GlassPortal  />
+<GlassPortal />
 ```
 
 #### TooltipExample
 
 ```tsx
-<GlassPortal  />
+<GlassPortal />
 ```
 
 #### DropdownExample
 
 ```tsx
-<GlassPortal  />
+<GlassPortal />
 ```
 
 #### NestedPortals
 
 ```tsx
-<GlassPortal  />
+<GlassPortal />
 ```
 
 #### CustomContainer
 
 ```tsx
-<GlassPortal  />
+<GlassPortal />
 ```
-
-
 
 ## Accessibility
 

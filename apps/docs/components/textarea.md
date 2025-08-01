@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassTextarea } from '@liquidify/ui'
+import { GlassTextarea } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassTextarea } from '@liquidify/ui/textarea'
+import { GlassTextarea } from "@liquidify/ui/textarea";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassTextarea } from '@liquidify/ui'
+import { GlassTextarea } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTextarea />
+  return <GlassTextarea />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassTextarea } from '@liquidify/ui'
+import { GlassTextarea } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTextarea />
+  return <GlassTextarea />;
 }
 ```
 
@@ -55,64 +55,62 @@ export default function Example() {
 #### WithCharacterCount
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### WithError
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### Small
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### Large
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### NoAutoResize
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### Disabled
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### Required
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### CharacterLimitExample
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### AutoResizeDemo
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
 
 #### FormExample
 
 ```tsx
-<GlassTextarea  />
+<GlassTextarea />
 ```
-
-
 
 ## Accessibility
 

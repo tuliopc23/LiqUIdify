@@ -16,43 +16,42 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassTooltip } from '@liquidify/ui'
+import { GlassTooltip } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassTooltip } from '@liquidify/ui/tooltip'
+import { GlassTooltip } from "@liquidify/ui/tooltip";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassTooltip } from '@liquidify/ui'
+import { GlassTooltip } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTooltip />
+  return <GlassTooltip />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| content | `React.ReactNode` | - | - |
-| children | `React.ReactNode` | - | - |
-| position? | `"top" \| "bottom" \| "left" \| "right"` | - | - |
-| delay? | `number` | - | - |
-| className? | `string` | - | - |
-| disabled? | `boolean` | - | - |
-
+| Prop       | Type                                     | Default | Description |
+| ---------- | ---------------------------------------- | ------- | ----------- |
+| content    | `React.ReactNode`                        | -       | -           |
+| children   | `React.ReactNode`                        | -       | -           |
+| position?  | `"top" \| "bottom" \| "left" \| "right"` | -       | -           |
+| delay?     | `number`                                 | -       | -           |
+| className? | `string`                                 | -       | -           |
+| disabled?  | `boolean`                                | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassTooltip } from '@liquidify/ui'
+import { GlassTooltip } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassTooltip />
+  return <GlassTooltip />;
 }
 ```
 
@@ -61,76 +60,74 @@ export default function Example() {
 #### Positions
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### Delays
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### WithIcons
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### RichContent
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### DisabledState
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### ActionButtons
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### FormFieldTooltips
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### ViewportAwareness
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### LongContent
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### ThemeVariations
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
 
 #### InteractiveElements
 
 ```tsx
-<GlassTooltip  />
+<GlassTooltip />
 ```
-
-
 
 ## Accessibility
 

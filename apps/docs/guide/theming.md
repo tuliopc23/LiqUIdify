@@ -14,7 +14,7 @@ The simplest way to customize LiquidUI is through CSS variables:
   --glass-primary: rgba(139, 92, 246, 0.2);
   --glass-primary-hover: rgba(139, 92, 246, 0.3);
   --glass-primary-active: rgba(139, 92, 246, 0.4);
-  
+
   /* Adjust glass effect intensity */
   --glass-blur: 16px;
   --glass-bg: rgba(255, 255, 255, 0.08);
@@ -27,21 +27,21 @@ The simplest way to customize LiquidUI is through CSS variables:
 For React applications, use the `ThemeProvider` component:
 
 ```tsx
-import { ThemeProvider } from '@liquidify/components';
+import { ThemeProvider } from "@liquidify/components";
 
 const customTheme = {
   colors: {
-    primary: 'rgba(139, 92, 246, 0.2)',
-    secondary: 'rgba(236, 72, 153, 0.2)',
-    success: 'rgba(34, 197, 94, 0.2)',
-    warning: 'rgba(251, 146, 60, 0.2)',
-    error: 'rgba(239, 68, 68, 0.2)',
+    primary: "rgba(139, 92, 246, 0.2)",
+    secondary: "rgba(236, 72, 153, 0.2)",
+    success: "rgba(34, 197, 94, 0.2)",
+    warning: "rgba(251, 146, 60, 0.2)",
+    error: "rgba(239, 68, 68, 0.2)",
   },
   glass: {
-    blur: '16px',
-    bg: 'rgba(255, 255, 255, 0.08)',
-    border: 'rgba(255, 255, 255, 0.15)',
-    shadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+    blur: "16px",
+    bg: "rgba(255, 255, 255, 0.08)",
+    border: "rgba(255, 255, 255, 0.15)",
+    shadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
   },
 };
 
@@ -68,7 +68,7 @@ interface Theme {
     warning: string;
     error: string;
     info: string;
-    
+
     // Text colors
     text: {
       primary: string;
@@ -76,7 +76,7 @@ interface Theme {
       disabled: string;
       inverse: string;
     };
-    
+
     // Background colors
     background: {
       primary: string;
@@ -85,7 +85,7 @@ interface Theme {
       overlay: string;
     };
   };
-  
+
   // Glass effects
   glass: {
     blur: string;
@@ -97,7 +97,7 @@ interface Theme {
     shadow: string;
     shadowHover: string;
   };
-  
+
   // Typography
   typography: {
     fontFamily: string;
@@ -121,7 +121,7 @@ interface Theme {
       relaxed: number;
     };
   };
-  
+
   // Spacing
   spacing: {
     unit: number;
@@ -131,7 +131,7 @@ interface Theme {
     lg: string;
     xl: string;
   };
-  
+
   // Border radius
   borderRadius: {
     none: string;
@@ -141,7 +141,7 @@ interface Theme {
     xl: string;
     full: string;
   };
-  
+
   // Transitions
   transitions: {
     duration: {
@@ -156,14 +156,14 @@ interface Theme {
       bounce: string;
     };
   };
-  
+
   // Breakpoints
   breakpoints: {
     sm: string;
     md: string;
     lg: string;
     xl: string;
-    '2xl': string;
+    "2xl": string;
   };
 }
 ```
@@ -195,11 +195,11 @@ LiquidUI automatically adapts to system dark mode preferences:
 ### Manual Dark Mode Toggle
 
 ```tsx
-import { ThemeToggle, useTheme } from '@liquidify/components';
+import { ThemeToggle, useTheme } from "@liquidify/components";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
-  
+
   return (
     <div data-theme={theme}>
       <ThemeToggle onToggle={toggleTheme} />
@@ -268,22 +268,23 @@ function App() {
 const buttonTheme = {
   variants: {
     primary: {
-      bg: 'rgba(99, 102, 241, 0.2)',
-      hover: 'rgba(99, 102, 241, 0.3)',
-      active: 'rgba(99, 102, 241, 0.4)',
-      text: 'rgb(99, 102, 241)',
+      bg: "rgba(99, 102, 241, 0.2)",
+      hover: "rgba(99, 102, 241, 0.3)",
+      active: "rgba(99, 102, 241, 0.4)",
+      text: "rgb(99, 102, 241)",
     },
     gradient: {
-      bg: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2))',
-      hover: 'linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.3))',
-      text: 'white',
+      bg: "linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2))",
+      hover:
+        "linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.3))",
+      text: "white",
     },
   },
 };
 
 <GlassButton theme={buttonTheme} variant="gradient">
   Gradient Button
-</GlassButton>
+</GlassButton>;
 ```
 
 ### Input Styling
@@ -308,18 +309,18 @@ Control the glass effect intensity across your application:
 // Minimal glass effect
 const minimalGlass = {
   glass: {
-    blur: '4px',
-    bg: 'rgba(255, 255, 255, 0.02)',
-    border: 'rgba(255, 255, 255, 0.05)',
+    blur: "4px",
+    bg: "rgba(255, 255, 255, 0.02)",
+    border: "rgba(255, 255, 255, 0.05)",
   },
 };
 
 // Intense glass effect
 const intenseGlass = {
   glass: {
-    blur: '24px',
-    bg: 'rgba(255, 255, 255, 0.15)',
-    border: 'rgba(255, 255, 255, 0.3)',
+    blur: "24px",
+    bg: "rgba(255, 255, 255, 0.15)",
+    border: "rgba(255, 255, 255, 0.3)",
   },
 };
 ```
@@ -329,14 +330,14 @@ const intenseGlass = {
 ```tsx
 function DynamicThemeExample() {
   const [hue, setHue] = useState(240);
-  
+
   const dynamicTheme = {
     colors: {
       primary: `hsla(${hue}, 70%, 60%, 0.2)`,
       secondary: `hsla(${hue + 30}, 70%, 60%, 0.2)`,
     },
   };
-  
+
   return (
     <ThemeProvider theme={dynamicTheme}>
       <input
@@ -364,10 +365,11 @@ function DynamicThemeExample() {
   );
   border: 1px solid transparent;
   border-image: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.1)
-  ) 1;
+      135deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.1)
+    )
+    1;
 }
 ```
 
@@ -384,7 +386,7 @@ Respect user preferences for reduced motion:
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   /* Reduce blur for performance */
   :root {
     --glass-blur: 4px;
@@ -398,16 +400,16 @@ Respect user preferences for reduced motion:
 // Cache theme in localStorage
 const ThemeManager = {
   save: (theme: Theme) => {
-    localStorage.setItem('liquidui-theme', JSON.stringify(theme));
+    localStorage.setItem("liquidui-theme", JSON.stringify(theme));
   },
-  
+
   load: (): Theme | null => {
-    const saved = localStorage.getItem('liquidui-theme');
+    const saved = localStorage.getItem("liquidui-theme");
     return saved ? JSON.parse(saved) : null;
   },
-  
+
   clear: () => {
-    localStorage.removeItem('liquidui-theme');
+    localStorage.removeItem("liquidui-theme");
   },
 };
 ```
@@ -455,16 +457,16 @@ const ThemeManager = {
 ### Theme Hook
 
 ```tsx
-import { useTheme } from '@liquidify/components';
+import { useTheme } from "@liquidify/components";
 
 function Component() {
   const { theme, isDark, toggleTheme, setTheme } = useTheme();
-  
+
   return (
     <div>
-      <p>Current theme: {isDark ? 'dark' : 'light'}</p>
+      <p>Current theme: {isDark ? "dark" : "light"}</p>
       <button onClick={toggleTheme}>Toggle</button>
-      <button onClick={() => setTheme('ocean')}>Ocean Theme</button>
+      <button onClick={() => setTheme("ocean")}>Ocean Theme</button>
     </div>
   );
 }
@@ -473,11 +475,11 @@ function Component() {
 ### Theme Context
 
 ```tsx
-import { ThemeContext } from '@liquidify/components';
+import { ThemeContext } from "@liquidify/components";
 
 class Component extends React.Component {
   static contextType = ThemeContext;
-  
+
   render() {
     const theme = this.context;
     return <div style={{ color: theme.colors.primary }}>Themed</div>;

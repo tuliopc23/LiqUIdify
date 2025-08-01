@@ -1,25 +1,20 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { 
-  GlassNavbar, 
-  GlassButton, 
-  GlassDropdown,
-  GlassToast
-} from 'liquidify';
-import { 
-  Home, 
-  Layers, 
-  Gamepad2, 
-  Info, 
-  Menu, 
-  X, 
-  Github, 
-  Moon, 
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { GlassNavbar, GlassButton, GlassDropdown, GlassToast } from "liquidify";
+import {
+  Home,
+  Layers,
+  Gamepad2,
+  Info,
+  Menu,
+  X,
+  Github,
+  Moon,
   Sun,
   Settings,
-  User
-} from 'lucide-react';
+  User,
+} from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -32,22 +27,22 @@ export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'Components', href: '/components', icon: Layers },
-    { name: 'Playground', href: '/playground', icon: Gamepad2 },
-    { name: 'About', href: '/about', icon: Info },
+    { name: "Home", href: "/", icon: Home },
+    { name: "Components", href: "/components", icon: Layers },
+    { name: "Playground", href: "/playground", icon: Gamepad2 },
+    { name: "About", href: "/about", icon: Info },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle("dark");
     setShowToast(true);
   };
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen ${darkMode ? "dark" : ""}`}>
       {/* Navigation */}
       <GlassNavbar className="sticky top-0 z-50 backdrop-blur-xl">
         <GlassNavbar.Brand>
@@ -87,7 +82,11 @@ export default function Layout({ children }: LayoutProps) {
             onClick={toggleDarkMode}
             className="hidden sm:flex"
           >
-            {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {darkMode ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
           </GlassButton>
 
           {/* GitHub Link */}
@@ -116,8 +115,12 @@ export default function Layout({ children }: LayoutProps) {
                 Settings
               </GlassDropdown.Item>
               <GlassDropdown.Item onClick={toggleDarkMode}>
-                {darkMode ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
-                {darkMode ? 'Light Mode' : 'Dark Mode'}
+                {darkMode ? (
+                  <Sun className="mr-2 h-4 w-4" />
+                ) : (
+                  <Moon className="mr-2 h-4 w-4" />
+                )}
+                {darkMode ? "Light Mode" : "Dark Mode"}
               </GlassDropdown.Item>
               <GlassDropdown.Separator />
               <GlassDropdown.Item
@@ -139,7 +142,11 @@ export default function Layout({ children }: LayoutProps) {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden"
           >
-            {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {mobileMenuOpen ? (
+              <X className="h-4 w-4" />
+            ) : (
+              <Menu className="h-4 w-4" />
+            )}
           </GlassButton>
         </GlassNavbar.Actions>
 
@@ -159,7 +166,7 @@ export default function Layout({ children }: LayoutProps) {
                 <span>{item.name}</span>
               </GlassNavbar.Item>
             ))}
-            
+
             <div className="border-t border-white/20 pt-4 mt-4">
               <GlassButton
                 variant="ghost"
@@ -167,10 +174,14 @@ export default function Layout({ children }: LayoutProps) {
                 onClick={toggleDarkMode}
                 className="w-full justify-start"
               >
-                {darkMode ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />}
-                {darkMode ? 'Light Mode' : 'Dark Mode'}
+                {darkMode ? (
+                  <Sun className="mr-2 h-4 w-4" />
+                ) : (
+                  <Moon className="mr-2 h-4 w-4" />
+                )}
+                {darkMode ? "Light Mode" : "Dark Mode"}
               </GlassButton>
-              
+
               <GlassButton
                 variant="ghost"
                 size="sm"
@@ -208,18 +219,18 @@ export default function Layout({ children }: LayoutProps) {
               <div className="w-6 h-6 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded"></div>
               <span className="font-semibold text-white">LiqUIdify</span>
             </div>
-            
+
             <div className="flex items-center space-x-6 text-sm text-white/70">
-              <a 
-                href="https://liquidify.dev" 
+              <a
+                href="https://liquidify.dev"
                 className="hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Documentation
               </a>
-              <a 
-                href="https://github.com/liquidify/liquidify" 
+              <a
+                href="https://github.com/liquidify/liquidify"
                 className="hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -235,7 +246,7 @@ export default function Layout({ children }: LayoutProps) {
       {/* Toast */}
       {showToast && (
         <GlassToast
-          title={`${darkMode ? 'Dark' : 'Light'} mode activated`}
+          title={`${darkMode ? "Dark" : "Light"} mode activated`}
           description="Theme preference saved"
           type="success"
           onClose={() => setShowToast(false)}

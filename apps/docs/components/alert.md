@@ -16,41 +16,39 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassAlert } from '@liquidify/ui'
+import { GlassAlert } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassAlert } from '@liquidify/ui/alert'
+import { GlassAlert } from "@liquidify/ui/alert";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassAlert } from '@liquidify/ui'
+import { GlassAlert } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassAlert />
+  return <GlassAlert />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassAlert } from '@liquidify/ui'
+import { GlassAlert } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassAlert />
+  return <GlassAlert />;
 }
 ```
-
-
 
 ## Accessibility
 

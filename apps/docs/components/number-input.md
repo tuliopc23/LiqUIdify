@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassNumberInput } from '@liquidify/ui'
+import { GlassNumberInput } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassNumberInput } from '@liquidify/ui/number-input'
+import { GlassNumberInput } from "@liquidify/ui/number-input";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassNumberInput } from '@liquidify/ui'
+import { GlassNumberInput } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassNumberInput />
+  return <GlassNumberInput />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassNumberInput } from '@liquidify/ui'
+import { GlassNumberInput } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassNumberInput />
+  return <GlassNumberInput />;
 }
 ```
 
@@ -55,70 +55,68 @@ export default function Example() {
 #### WithDescription
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### WithError
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### Small
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### Large
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### PriceInput
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### PercentageInput
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### WithoutControls
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### Disabled
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### Required
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### ControlledExample
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
 
 #### MultipleInputs
 
 ```tsx
-<GlassNumberInput  />
+<GlassNumberInput />
 ```
-
-
 
 ## Accessibility
 

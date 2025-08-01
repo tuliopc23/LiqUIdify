@@ -16,37 +16,37 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassBadge } from '@liquidify/ui'
+import { GlassBadge } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassBadge } from '@liquidify/ui/badge'
+import { GlassBadge } from "@liquidify/ui/badge";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassBadge } from '@liquidify/ui'
+import { GlassBadge } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassBadge />
+  return <GlassBadge />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassBadge } from '@liquidify/ui'
+import { GlassBadge } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassBadge />
+  return <GlassBadge />;
 }
 ```
 
@@ -55,82 +55,80 @@ export default function Example() {
 #### Success
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### Warning
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### ErrorBadge
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### AllVariants
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### WithIcons
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### StatusIndicators
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### CountBadges
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### TagsAndLabels
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### AchievementBadges
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### CustomStyling
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### ThemeShowcase
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassBadge  />
+<GlassBadge />
 ```
-
-
 
 ## Accessibility
 

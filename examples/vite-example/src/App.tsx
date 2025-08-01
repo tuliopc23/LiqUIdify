@@ -1,10 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import Layout from './components/Layout';
-import Home from './pages/Home';
-import Components from './pages/Components';
-import Playground from './pages/Playground';
-import About from './pages/About';
+import { Routes, Route } from "react-router-dom";
+import { motion } from "framer-motion";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Components from "./pages/Components";
+import Playground from "./pages/Playground";
+import About from "./pages/About";
 
 function App() {
   return (

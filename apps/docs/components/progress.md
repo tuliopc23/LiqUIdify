@@ -16,44 +16,43 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassProgress } from '@liquidify/ui'
+import { GlassProgress } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassProgress } from '@liquidify/ui/progress'
+import { GlassProgress } from "@liquidify/ui/progress";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassProgress } from '@liquidify/ui'
+import { GlassProgress } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassProgress />
+  return <GlassProgress />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | `number` | - | - |
-| max? | `number` | - | - |
-| size? | `"sm" \| "md" \| "lg"` | - | - |
-| variant? | `"default" \| "gradient" \| "minimal"` | - | - |
-| showValue? | `boolean` | - | - |
-| className? | `string` | - | - |
-| color? | `"blue" \| "green" \| "purple" \| "red" \| "yellow"` | - | - |
-
+| Prop       | Type                                                 | Default | Description |
+| ---------- | ---------------------------------------------------- | ------- | ----------- |
+| value      | `number`                                             | -       | -           |
+| max?       | `number`                                             | -       | -           |
+| size?      | `"sm" \| "md" \| "lg"`                               | -       | -           |
+| variant?   | `"default" \| "gradient" \| "minimal"`               | -       | -           |
+| showValue? | `boolean`                                            | -       | -           |
+| className? | `string`                                             | -       | -           |
+| color?     | `"blue" \| "green" \| "purple" \| "red" \| "yellow"` | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassProgress } from '@liquidify/ui'
+import { GlassProgress } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassProgress />
+  return <GlassProgress />;
 }
 ```
 
@@ -62,76 +61,74 @@ export default function Example() {
 #### Sizes
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### Colors
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### Variants
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### WithValue
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### Animated
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### LoadingSimulation
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### MultipleProgress
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### CustomMaxValue
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### RealWorldExamples
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### IndeterminateLoading
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### StackedProgress
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
 
 #### ThemeVariations
 
 ```tsx
-<GlassProgress  />
+<GlassProgress />
 ```
-
-
 
 ## Accessibility
 

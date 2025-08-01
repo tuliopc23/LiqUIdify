@@ -16,41 +16,39 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassCheckboxGroup } from '@liquidify/ui'
+import { GlassCheckboxGroup } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassCheckboxGroup } from '@liquidify/ui/checkbox-group'
+import { GlassCheckboxGroup } from "@liquidify/ui/checkbox-group";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassCheckboxGroup } from '@liquidify/ui'
+import { GlassCheckboxGroup } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCheckboxGroup />
+  return <GlassCheckboxGroup />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| No props documented | - | - | - |
+| Prop                | Type | Default | Description |
+| ------------------- | ---- | ------- | ----------- |
+| No props documented | -    | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassCheckboxGroup } from '@liquidify/ui'
+import { GlassCheckboxGroup } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassCheckboxGroup />
+  return <GlassCheckboxGroup />;
 }
 ```
-
-
 
 ## Accessibility
 

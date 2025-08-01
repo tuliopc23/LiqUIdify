@@ -13,16 +13,17 @@ We release patches for security vulnerabilities for the following versions:
 
 We take the security of LiqUIdify seriously. If you believe you have found a security vulnerability, please report it to us as described below.
 
-### Please DO NOT:
+### Please DO NOT
 
 - Open a public GitHub issue
 - Discuss the vulnerability publicly
 - Exploit the vulnerability
 
-### Please DO:
+### Please DO
 
 1. **Email us directly** at: security@liquidify.dev
 2. **Include the following information:**
+
    - Type of vulnerability (XSS, CSRF, SQL Injection, etc.)
    - Component(s) affected
    - Steps to reproduce
@@ -30,6 +31,7 @@ We take the security of LiqUIdify seriously. If you believe you have found a sec
    - Suggested fix (if any)
 
 3. **Use our PGP key** (optional but recommended):
+
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 [PGP KEY WOULD BE HERE]
@@ -41,7 +43,7 @@ We take the security of LiqUIdify seriously. If you believe you have found a sec
 - **Acknowledgment**: Within 24 hours
 - **Initial Assessment**: Within 72 hours
 - **Status Updates**: Every 72 hours
-- **Resolution Timeline**: 
+- **Resolution Timeline**:
   - Critical: 7 days
   - High: 14 days
   - Medium: 30 days
@@ -59,37 +61,40 @@ We take the security of LiqUIdify seriously. If you believe you have found a sec
 ### Component Security
 
 #### Input Sanitization
+
 All user inputs are sanitized:
 
 ```javascript
 // Example: GlassInput sanitization
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 
 function sanitizeInput(value) {
   return DOMPurify.sanitize(value, {
     ALLOWED_TAGS: [],
-    ALLOWED_ATTR: []
+    ALLOWED_ATTR: [],
   });
 }
 ```
 
 #### XSS Prevention
+
 React's built-in protections plus:
 
 ```javascript
 // Safe HTML rendering
-<GlassCard 
+<GlassCard
   dangerouslySetInnerHTML={{
-    __html: DOMPurify.sanitize(htmlContent)
+    __html: DOMPurify.sanitize(htmlContent),
   }}
 />
 ```
 
 #### Content Security Policy
+
 Recommended CSP headers:
 
 ```
-Content-Security-Policy: 
+Content-Security-Policy:
   default-src 'self';
   script-src 'self' 'unsafe-inline';
   style-src 'self' 'unsafe-inline';
@@ -143,6 +148,7 @@ If using authentication-related components:
 ## Known Security Considerations
 
 ### Glass Effects
+
 The glassmorphism effects use CSS backdrop-filter which can potentially expose underlying content. Ensure sensitive information is not placed behind glass components.
 
 ```javascript
@@ -163,16 +169,17 @@ The glassmorphism effects use CSS backdrop-filter which can potentially expose u
 ```
 
 ### Third-Party Integrations
+
 When integrating with third-party services:
 
 ```javascript
 // Sanitize external content
 const ExternalContent = ({ htmlContent }) => {
   const sanitized = DOMPurify.sanitize(htmlContent, {
-    ADD_TAGS: ['iframe'],
-    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
+    ADD_TAGS: ["iframe"],
+    ADD_ATTR: ["allow", "allowfullscreen", "frameborder", "scrolling"],
   });
-  
+
   return <div dangerouslySetInnerHTML={{ __html: sanitized }} />;
 };
 ```
@@ -212,6 +219,7 @@ updates:
 ## Response Team
 
 ### Security Team Members
+
 - **Security Lead**: security@liquidify.dev
 - **Engineering Lead**: engineering@liquidify.dev
 - **Community Manager**: community@liquidify.dev
@@ -227,24 +235,27 @@ updates:
 
 We thank the following security researchers:
 
-| Researcher | Vulnerability | Date |
-|------------|---------------|------|
-| [Name] | [Type] | [Date] |
+| Researcher | Vulnerability | Date   |
+| ---------- | ------------- | ------ |
+| [Name]     | [Type]        | [Date] |
 
 ## Resources
 
 ### Security Tools
+
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [npm audit](https://docs.npmjs.com/cli/v8/commands/npm-audit)
 - [Snyk](https://snyk.io/)
 - [CodeQL](https://codeql.github.com/)
 
 ### Best Practices
+
 - [OWASP Secure Coding](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)
 - [React Security](https://react.dev/learn/security)
 - [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
 
 ### Contact
+
 - **Email**: security@liquidify.dev
 - **PGP Key**: [Link to key]
 - **Security Page**: https://liquidify.dev/security

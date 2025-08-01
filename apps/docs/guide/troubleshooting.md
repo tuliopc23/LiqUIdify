@@ -9,6 +9,7 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Problem**: Components appear as regular elements without glassmorphism effects.
 
 **Symptoms**:
+
 - Components look flat or have solid backgrounds
 - No blur or transparency effects
 - Missing glass borders
@@ -16,12 +17,13 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Solutions**:
 
 1. **Add Gradient Background**
+
    ```tsx
    // ❌ Wrong - No background for glass to show against
    <div>
      <GlassCard>Content</GlassCard>
    </div>
-   
+
    // ✅ Correct - Gradient background reveals glass effects
    <div className="min-h-screen bg-gradient-to-br from-blue-400 to-purple-600">
      <GlassCard>Content</GlassCard>
@@ -29,40 +31,43 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    ```
 
 2. **Check CSS Import Order**
+
    ```tsx
    // ❌ Wrong - LiqUIdify styles imported after custom styles
-   import './my-styles.css'
-   import '@liquidify/ui/styles'
-   
+   import "./my-styles.css";
+   import "@liquidify/ui/styles";
+
    // ✅ Correct - LiqUIdify styles imported first
-   import '@liquidify/ui/styles'
-   import './my-styles.css'
+   import "@liquidify/ui/styles";
+   import "./my-styles.css";
    ```
 
 3. **Verify ThemeProvider**
+
    ```tsx
    // ❌ Wrong - Missing ThemeProvider
    function App() {
-     return <GlassButton>Click me</GlassButton>
+     return <GlassButton>Click me</GlassButton>;
    }
-   
+
    // ✅ Correct - ThemeProvider wraps components
    function App() {
      return (
        <ThemeProvider theme="glass">
          <GlassButton>Click me</GlassButton>
        </ThemeProvider>
-     )
+     );
    }
    ```
 
 4. **Check Browser Support**
+
    ```css
    /* Add fallback for older browsers */
    .glass-fallback {
      background: rgba(255, 255, 255, 0.9);
    }
-   
+
    @supports (backdrop-filter: blur(10px)) {
      .glass-fallback {
        background: rgba(255, 255, 255, 0.1);
@@ -78,6 +83,7 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Common Errors**:
 
 1. **"Cannot find module '@liquidify/ui'"**
+
    ```bash
    # Solution: Reinstall and restart TypeScript server
    npm install @liquidify/ui
@@ -85,30 +91,33 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    ```
 
 2. **"Property 'variant' does not exist"**
+
    ```tsx
    // ❌ Wrong - Using old prop names
    <GlassButton color="primary">Click</GlassButton>
-   
+
    // ✅ Correct - Use updated prop names
    <GlassButton variant="primary">Click</GlassButton>
    ```
 
 3. **"Type 'string' is not assignable to type..."**
+
    ```tsx
    // ❌ Wrong - Invalid variant value
    <GlassButton variant="blue">Click</GlassButton>
-   
+
    // ✅ Correct - Use valid variant values
    <GlassButton variant="primary">Click</GlassButton>
    ```
 
 4. **"JSX element type does not have any construct signatures"**
+
    ```tsx
    // ❌ Wrong - Incorrect import
-   import GlassButton from '@liquidify/ui'
-   
+   import GlassButton from "@liquidify/ui";
+
    // ✅ Correct - Named import
-   import { GlassButton } from '@liquidify/ui'
+   import { GlassButton } from "@liquidify/ui";
    ```
 
 ### Performance Issues
@@ -116,6 +125,7 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Problem**: Slow animations, high CPU usage, or poor performance.
 
 **Symptoms**:
+
 - Laggy hover effects
 - Choppy animations
 - High memory usage
@@ -124,16 +134,18 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Solutions**:
 
 1. **Enable Hardware Acceleration**
+
    ```tsx
-   <GlassButton 
+   <GlassButton
      className="transform-gpu will-change-transform"
-     style={{ transform: 'translateZ(0)' }}
+     style={{ transform: "translateZ(0)" }}
    >
      Optimized Button
    </GlassButton>
    ```
 
 2. **Optimize Backdrop Filter**
+
    ```css
    /* Reduce blur intensity for better performance */
    :root {
@@ -142,13 +154,14 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    ```
 
 3. **Use Individual Imports**
+
    ```tsx
    // ❌ Slower - Imports entire library
-   import { GlassButton, GlassCard } from '@liquidify/ui'
-   
+   import { GlassButton, GlassCard } from "@liquidify/ui";
+
    // ✅ Faster - Tree-shaken imports
-   import { GlassButton } from '@liquidify/ui/button'
-   import { GlassCard } from '@liquidify/ui/card'
+   import { GlassButton } from "@liquidify/ui/button";
+   import { GlassCard } from "@liquidify/ui/card";
    ```
 
 4. **Enable Production Build**
@@ -163,6 +176,7 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Problem**: LiqUIdify styles conflict with existing CSS or other libraries.
 
 **Symptoms**:
+
 - Components don't look as expected
 - Styles being overridden
 - CSS specificity issues
@@ -170,12 +184,13 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Solutions**:
 
 1. **CSS Specificity**
+
    ```css
    /* ❌ Wrong - Too generic, may conflict */
    .card {
      background: white;
    }
-   
+
    /* ✅ Correct - More specific selectors */
    .my-app .card {
      background: white;
@@ -183,14 +198,15 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    ```
 
 2. **CSS Modules Conflicts**
+
    ```tsx
    // ❌ Wrong - CSS modules overriding LiqUIdify
    import styles from './Component.module.css'
-   
+
    <GlassCard className={styles.card}>
      Content
    </GlassCard>
-   
+
    // ✅ Correct - Combine classes properly
    <GlassCard className={`${styles.card} my-custom-card`}>
      Content
@@ -198,12 +214,13 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    ```
 
 3. **Tailwind CSS Conflicts**
+
    ```tsx
    // ❌ Wrong - Tailwind overriding glass effects
    <GlassCard className="bg-white border-gray-200">
      Content
    </GlassCard>
-   
+
    // ✅ Correct - Use Tailwind for layout only
    <GlassCard className="p-6 m-4 max-w-sm">
      Content
@@ -217,6 +234,7 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Common Issues**:
 
 1. **"Module not found" during build**
+
    ```bash
    # Clear node_modules and reinstall
    rm -rf node_modules package-lock.json
@@ -224,21 +242,22 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    ```
 
 2. **Large bundle size**
+
    ```js
    // webpack.config.js - Enable tree shaking
    module.exports = {
      optimization: {
        usedExports: true,
-       sideEffects: false
-     }
-   }
+       sideEffects: false,
+     },
+   };
    ```
 
 3. **CSS not loading in production**
    ```tsx
    // Ensure CSS is imported in your entry file
    // main.tsx or index.tsx
-   import '@liquidify/ui/styles'
+   import "@liquidify/ui/styles";
    ```
 
 ### Server-Side Rendering (SSR) Issues
@@ -248,40 +267,43 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Solutions**:
 
 1. **Next.js Configuration**
+
    ```js
    // next.config.js
    module.exports = {
-     transpilePackages: ['@liquidify/ui'],
+     transpilePackages: ["@liquidify/ui"],
      experimental: {
-       esmExternals: 'loose'
-     }
-   }
+       esmExternals: "loose",
+     },
+   };
    ```
 
 2. **Dynamic Imports for Client-Only Components**
+
    ```tsx
-   import dynamic from 'next/dynamic'
-   
+   import dynamic from "next/dynamic";
+
    const GlassChart = dynamic(
-     () => import('@liquidify/ui').then(mod => ({ default: mod.GlassChart })),
-     { ssr: false }
-   )
+     () => import("@liquidify/ui").then((mod) => ({ default: mod.GlassChart })),
+     { ssr: false },
+   );
    ```
 
 3. **Hydration Mismatch**
+
    ```tsx
-   import { useEffect, useState } from 'react'
-   
+   import { useEffect, useState } from "react";
+
    function ClientOnlyComponent() {
-     const [mounted, setMounted] = useState(false)
-     
+     const [mounted, setMounted] = useState(false);
+
      useEffect(() => {
-       setMounted(true)
-     }, [])
-     
-     if (!mounted) return null
-     
-     return <GlassButton>Client Only</GlassButton>
+       setMounted(true);
+     }, []);
+
+     if (!mounted) return null;
+
+     return <GlassButton>Client Only</GlassButton>;
    }
    ```
 
@@ -292,12 +314,13 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Solutions**:
 
 1. **Missing ARIA Labels**
+
    ```tsx
    // ❌ Wrong - No accessible name
    <GlassButton onClick={handleClose}>×</GlassButton>
-   
+
    // ✅ Correct - Proper ARIA label
-   <GlassButton 
+   <GlassButton
      onClick={handleClose}
      aria-label="Close dialog"
    >
@@ -306,23 +329,24 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    ```
 
 2. **Focus Management**
+
    ```tsx
-   import { useRef, useEffect } from 'react'
-   
+   import { useRef, useEffect } from "react";
+
    function Modal({ isOpen }) {
-     const modalRef = useRef<HTMLDivElement>(null)
-     
+     const modalRef = useRef<HTMLDivElement>(null);
+
      useEffect(() => {
        if (isOpen && modalRef.current) {
-         modalRef.current.focus()
+         modalRef.current.focus();
        }
-     }, [isOpen])
-     
+     }, [isOpen]);
+
      return (
        <GlassModal ref={modalRef} tabIndex={-1}>
          Content
        </GlassModal>
-     )
+     );
    }
    ```
 
@@ -342,10 +366,11 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 **Solutions**:
 
 1. **Touch Target Size**
+
    ```tsx
    // ❌ Wrong - Button too small for touch
    <GlassButton size="xs">Tap</GlassButton>
-   
+
    // ✅ Correct - Adequate touch target
    <GlassButton size="md" className="min-h-[44px] min-w-[44px]">
      Tap
@@ -353,6 +378,7 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    ```
 
 2. **Responsive Breakpoints**
+
    ```tsx
    <GlassCard className="p-4 md:p-6 lg:p-8 max-w-sm md:max-w-md lg:max-w-lg">
      Responsive content
@@ -373,21 +399,20 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 ### Next.js
 
 1. **"ReferenceError: document is not defined"**
+
    ```tsx
    // Use dynamic imports for client-only components
-   import dynamic from 'next/dynamic'
-   
-   const GlassComponent = dynamic(() => import('@liquidify/ui/component'), {
-     ssr: false
-   })
+   import dynamic from "next/dynamic";
+
+   const GlassComponent = dynamic(() => import("@liquidify/ui/component"), {
+     ssr: false,
+   });
    ```
 
 2. **Hydration errors**
    ```tsx
    // Use suppressHydrationWarning for animations
-   <GlassButton suppressHydrationWarning>
-     Animated Button
-   </GlassButton>
+   <GlassButton suppressHydrationWarning>Animated Button</GlassButton>
    ```
 
 ### Vite
@@ -397,9 +422,9 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
    // vite.config.js
    export default {
      optimizeDeps: {
-       include: ['@liquidify/ui']
-     }
-   }
+       include: ["@liquidify/ui"],
+     },
+   };
    ```
 
 ### Create React App
@@ -412,13 +437,13 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
        configure: (webpackConfig) => {
          webpackConfig.resolve.fallback = {
            ...webpackConfig.resolve.fallback,
-           "stream": false,
-           "crypto": false
-         }
-         return webpackConfig
-       }
-     }
-   }
+           stream: false,
+           crypto: false,
+         };
+         return webpackConfig;
+       },
+     },
+   };
    ```
 
 ## Development Tools
@@ -426,6 +451,7 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 ### Browser DevTools
 
 1. **Inspect Glass Effects**
+
    ```css
    /* Temporarily disable backdrop-filter to see layering */
    .glass-debug * {
@@ -444,11 +470,11 @@ This guide helps you resolve common issues when using LiqUIdify. Find quick solu
 Enable debug mode to see component boundaries and states:
 
 ```tsx
-import { ThemeProvider } from '@liquidify/ui'
+import { ThemeProvider } from "@liquidify/ui";
 
 <ThemeProvider theme="glass" debug={true}>
   <App />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ## Getting Additional Help
@@ -456,16 +482,18 @@ import { ThemeProvider } from '@liquidify/ui'
 ### Before Asking for Help
 
 1. **Check the Console**
+
    - Open browser developer tools
    - Look for error messages in Console tab
    - Check Network tab for failed requests
 
 2. **Minimal Reproduction**
    Create a minimal example that reproduces the issue:
+
    ```tsx
-   import { GlassButton, ThemeProvider } from '@liquidify/ui'
-   import '@liquidify/ui/styles'
-   
+   import { GlassButton, ThemeProvider } from "@liquidify/ui";
+   import "@liquidify/ui/styles";
+
    function MinimalExample() {
      return (
        <div className="min-h-screen bg-gradient-to-br from-blue-400 to-purple-600 p-8">
@@ -473,7 +501,7 @@ import { ThemeProvider } from '@liquidify/ui'
            <GlassButton>Not working as expected</GlassButton>
          </ThemeProvider>
        </div>
-     )
+     );
    }
    ```
 
@@ -503,6 +531,7 @@ A clear description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. See error
@@ -511,6 +540,7 @@ Steps to reproduce the behavior:
 What you expected to happen.
 
 **Environment:**
+
 - LiqUIdify version: [e.g. 1.2.4]
 - React version: [e.g. 18.2.0]
 - Browser: [e.g. Chrome 91]

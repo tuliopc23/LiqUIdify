@@ -16,53 +16,52 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassFocusTrap } from '@liquidify/ui'
+import { GlassFocusTrap } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassFocusTrap } from '@liquidify/ui/focus-trap'
+import { GlassFocusTrap } from "@liquidify/ui/focus-trap";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassFocusTrap } from '@liquidify/ui'
+import { GlassFocusTrap } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassFocusTrap />
+  return <GlassFocusTrap />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `React.ReactNode` | - | - |
-| active? | `boolean` | - | - |
-| paused? | `boolean` | - | - |
-| onEscape? | `() => void` | - | - |
-| onDeactivate? | `() => void` | - | - |
-| initialFocus? | `React.RefObject<HTMLElement> \| string` | - | - |
-| returnFocus? | `boolean` | - | - |
-| className? | `string` | - | - |
-| preventScroll? | `boolean` | - | - |
-| fallbackFocus? | `React.RefObject<HTMLElement>` | - | - |
-| delayInitialFocus? | `boolean` | - | - |
-| allowOutsideClick? | `boolean` | - | - |
-| autoFocus? | `boolean` | - | - |
-| restoreFocus? | `boolean` | - | - |
-| focusOptions? | `FocusOptions` | - | - |
-| trapStack? | `boolean` | - | - |
-
+| Prop               | Type                                     | Default | Description |
+| ------------------ | ---------------------------------------- | ------- | ----------- |
+| children           | `React.ReactNode`                        | -       | -           |
+| active?            | `boolean`                                | -       | -           |
+| paused?            | `boolean`                                | -       | -           |
+| onEscape?          | `() => void`                             | -       | -           |
+| onDeactivate?      | `() => void`                             | -       | -           |
+| initialFocus?      | `React.RefObject<HTMLElement> \| string` | -       | -           |
+| returnFocus?       | `boolean`                                | -       | -           |
+| className?         | `string`                                 | -       | -           |
+| preventScroll?     | `boolean`                                | -       | -           |
+| fallbackFocus?     | `React.RefObject<HTMLElement>`           | -       | -           |
+| delayInitialFocus? | `boolean`                                | -       | -           |
+| allowOutsideClick? | `boolean`                                | -       | -           |
+| autoFocus?         | `boolean`                                | -       | -           |
+| restoreFocus?      | `boolean`                                | -       | -           |
+| focusOptions?      | `FocusOptions`                           | -       | -           |
+| trapStack?         | `boolean`                                | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassFocusTrap } from '@liquidify/ui'
+import { GlassFocusTrap } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassFocusTrap />
+  return <GlassFocusTrap />;
 }
 ```
 
@@ -71,28 +70,26 @@ export default function Example() {
 #### ModalExample
 
 ```tsx
-<GlassFocusTrap  />
+<GlassFocusTrap />
 ```
 
 #### InitialFocusExample
 
 ```tsx
-<GlassFocusTrap  />
+<GlassFocusTrap />
 ```
 
 #### NestedFocusTraps
 
 ```tsx
-<GlassFocusTrap  />
+<GlassFocusTrap />
 ```
 
 #### AccessibilityDemo
 
 ```tsx
-<GlassFocusTrap  />
+<GlassFocusTrap />
 ```
-
-
 
 ## Accessibility
 

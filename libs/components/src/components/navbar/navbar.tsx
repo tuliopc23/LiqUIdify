@@ -51,7 +51,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
       bgColor,
       zIndex = 50,
     },
-    ref
+    ref,
   ) => {
     const [scrolled, setScrolled] = useState(false);
     const [hidden, setHidden] = useState(false);
@@ -62,7 +62,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
 
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
-        
+
         // Handle blur on scroll
         if (blurOnScroll) {
           setScrolled(currentScrollY > 10);
@@ -98,27 +98,25 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
           heightMap[height],
           positionClasses[position],
           hidden && "-translate-y-full",
-          className
+          className,
         )}
         style={{ zIndex }}
       >
         <UnifiedGlassEffect
           className={cn(
             "h-full flex items-center justify-between px-4 md:px-6 lg:px-8",
-            transparent && !scrolled 
-              ? "bg-transparent backdrop-blur-none border-transparent" 
+            transparent && !scrolled
+              ? "bg-transparent backdrop-blur-none border-transparent"
               : "",
             shadow && scrolled && "shadow-lg",
-            bgColor && !transparent && `bg-${bgColor}`
+            bgColor && !transparent && `bg-${bgColor}`,
           )}
           variant={transparent && !scrolled ? "transparent" : "default"}
           blur={scrolled ? "md" : "none"}
         >
           {/* Brand Section */}
           {brand && (
-            <div className="flex items-center flex-shrink-0">
-              {brand}
-            </div>
+            <div className="flex items-center flex-shrink-0">{brand}</div>
           )}
 
           {/* Navigation Items */}
@@ -137,7 +135,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
         </UnifiedGlassEffect>
       </nav>
     );
-  }
+  },
 );
 
 Navbar.displayName = "Navbar";
@@ -163,7 +161,7 @@ export const NavbarItem = React.forwardRef<
   NavbarItemProps
 >(({ href, active, onClick, children, className, disabled }, ref) => {
   const Component = href ? "a" : "button";
-  
+
   return (
     <Component
       ref={ref as any}
@@ -176,7 +174,7 @@ export const NavbarItem = React.forwardRef<
         active && "bg-white/15 text-primary",
         disabled && "opacity-50 cursor-not-allowed",
         !active && !disabled && "text-gray-700 dark:text-gray-300",
-        className
+        className,
       )}
     >
       {children}
@@ -187,6 +185,8 @@ export const NavbarItem = React.forwardRef<
 NavbarItem.displayName = "NavbarItem";
 
 // NavbarDivider for visual separation
-export const NavbarDivider: React.FC<{ className?: string }> = ({ className }) => (
+export const NavbarDivider: React.FC<{ className?: string }> = ({
+  className,
+}) => (
   <div className={cn("h-6 w-px bg-gray-300 dark:bg-gray-700", className)} />
 );

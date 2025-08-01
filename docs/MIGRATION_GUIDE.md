@@ -16,45 +16,31 @@ This guide helps you migrate to LiqUIdify from other popular UI libraries or upg
 
 ### Component Mapping
 
-| Material-UI | LiqUIdify | Notes |
-|-------------|-----------|-------|
-| `Button` | `GlassButton` | Similar API, different styling |
-| `Card` | `GlassCard` | Glass effect instead of elevation |
-| `Dialog` | `GlassModal` | Built-in focus management |
-| `TextField` | `GlassInput` + `GlassFormField` | Separated for flexibility |
-| `Select` | `GlassSelect` | Native select with styling |
-| `Tabs` | `GlassTabs` | Keyboard navigation included |
-| `CircularProgress` | `GlassSpinner` | Multiple size options |
-| `Alert` | `GlassAlert` | Live region support |
-| `Snackbar` | `GlassToast` | Auto-dismiss functionality |
+| Material-UI        | LiqUIdify                       | Notes                             |
+| ------------------ | ------------------------------- | --------------------------------- |
+| `Button`           | `GlassButton`                   | Similar API, different styling    |
+| `Card`             | `GlassCard`                     | Glass effect instead of elevation |
+| `Dialog`           | `GlassModal`                    | Built-in focus management         |
+| `TextField`        | `GlassInput` + `GlassFormField` | Separated for flexibility         |
+| `Select`           | `GlassSelect`                   | Native select with styling        |
+| `Tabs`             | `GlassTabs`                     | Keyboard navigation included      |
+| `CircularProgress` | `GlassSpinner`                  | Multiple size options             |
+| `Alert`            | `GlassAlert`                    | Live region support               |
+| `Snackbar`         | `GlassToast`                    | Auto-dismiss functionality        |
 
 ### Code Examples
 
 #### Before (Material-UI)
+
 ```javascript
-import { 
-  Button, 
-  Card, 
-  CardContent, 
-  TextField,
-  Dialog 
-} from '@mui/material';
+import { Button, Card, CardContent, TextField, Dialog } from "@mui/material";
 
 function LoginForm() {
   return (
     <Card elevation={3}>
       <CardContent>
-        <TextField
-          label="Email"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-        />
-        <Button 
-          variant="contained" 
-          color="primary"
-          fullWidth
-        >
+        <TextField label="Email" variant="outlined" fullWidth margin="normal" />
+        <Button variant="contained" color="primary" fullWidth>
           Login
         </Button>
       </CardContent>
@@ -64,28 +50,23 @@ function LoginForm() {
 ```
 
 #### After (LiqUIdify)
+
 ```javascript
-import { 
-  GlassButton, 
-  GlassCard, 
+import {
+  GlassButton,
+  GlassCard,
   GlassInput,
-  GlassFormField 
-} from '@liquidify/components';
+  GlassFormField,
+} from "@liquidify/components";
 
 function LoginForm() {
   return (
     <GlassCard variant="elevated">
       <div className="card-content">
         <GlassFormField label="Email">
-          <GlassInput
-            type="email"
-            fullWidth
-          />
+          <GlassInput type="email" fullWidth />
         </GlassFormField>
-        <GlassButton 
-          variant="primary"
-          fullWidth
-        >
+        <GlassButton variant="primary" fullWidth>
           Login
         </GlassButton>
       </div>
@@ -97,32 +78,34 @@ function LoginForm() {
 ### Theme Migration
 
 #### Material-UI Theme
+
 ```javascript
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2',
+      main: "#1976d2",
     },
     secondary: {
-      main: '#dc004e',
+      main: "#dc004e",
     },
   },
   typography: {
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: "Roboto, sans-serif",
   },
 });
 ```
 
 #### LiqUIdify Theme
+
 ```javascript
-import { UnifiedGlassProvider } from '@liquidify/components';
+import { UnifiedGlassProvider } from "@liquidify/components";
 
 const glassTheme = {
   colors: {
-    primary: '#1976d2',
-    secondary: '#dc004e',
+    primary: "#1976d2",
+    secondary: "#dc004e",
   },
   glass: {
     blur: 20,
@@ -130,37 +113,38 @@ const glassTheme = {
     saturation: 1.5,
   },
   typography: {
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: "Roboto, sans-serif",
   },
 };
 
 <UnifiedGlassProvider theme={glassTheme}>
   <App />
-</UnifiedGlassProvider>
+</UnifiedGlassProvider>;
 ```
 
 ## Migration from Ant Design
 
 ### Component Mapping
 
-| Ant Design | LiqUIdify | Notes |
-|------------|-----------|-------|
-| `Button` | `GlassButton` | Similar props |
-| `Card` | `GlassCard` | Glass effects |
-| `Modal` | `GlassModal` | Better accessibility |
-| `Input` | `GlassInput` | Native input enhanced |
-| `Select` | `GlassSelect` or `GlassCombobox` | Combobox for search |
-| `Table` | `GlassTable` | Virtual scrolling support |
-| `Tabs` | `GlassTabs` | Simpler API |
-| `Spin` | `GlassSpinner` | Multiple variants |
-| `Alert` | `GlassAlert` | ARIA compliant |
-| `Notification` | `GlassNotification` | Queue management |
+| Ant Design     | LiqUIdify                        | Notes                     |
+| -------------- | -------------------------------- | ------------------------- |
+| `Button`       | `GlassButton`                    | Similar props             |
+| `Card`         | `GlassCard`                      | Glass effects             |
+| `Modal`        | `GlassModal`                     | Better accessibility      |
+| `Input`        | `GlassInput`                     | Native input enhanced     |
+| `Select`       | `GlassSelect` or `GlassCombobox` | Combobox for search       |
+| `Table`        | `GlassTable`                     | Virtual scrolling support |
+| `Tabs`         | `GlassTabs`                      | Simpler API               |
+| `Spin`         | `GlassSpinner`                   | Multiple variants         |
+| `Alert`        | `GlassAlert`                     | ARIA compliant            |
+| `Notification` | `GlassNotification`              | Queue management          |
 
 ### Form Migration
 
 #### Before (Ant Design)
+
 ```javascript
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button } from "antd";
 
 function ContactForm() {
   const [form] = Form.useForm();
@@ -170,16 +154,8 @@ function ContactForm() {
   };
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      onFinish={onFinish}
-    >
-      <Form.Item
-        label="Name"
-        name="name"
-        rules={[{ required: true }]}
-      >
+    <Form form={form} layout="vertical" onFinish={onFinish}>
+      <Form.Item label="Name" name="name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item>
@@ -193,21 +169,18 @@ function ContactForm() {
 ```
 
 #### After (LiqUIdify)
+
 ```javascript
-import { 
-  GlassFormField, 
-  GlassInput, 
-  GlassButton 
-} from '@liquidify/components';
+import { GlassFormField, GlassInput, GlassButton } from "@liquidify/components";
 
 function ContactForm() {
-  const [values, setValues] = useState({ name: '' });
+  const [values, setValues] = useState({ name: "" });
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!values.name) {
-      setErrors({ name: 'Required' });
+      setErrors({ name: "Required" });
       return;
     }
     console.log(values);
@@ -215,11 +188,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <GlassFormField
-        label="Name"
-        required
-        error={errors.name}
-      >
+      <GlassFormField label="Name" required error={errors.name}>
         <GlassInput
           value={values.name}
           onChange={(e) => setValues({ name: e.target.value })}
@@ -237,33 +206,29 @@ function ContactForm() {
 
 ### Component Mapping
 
-| Chakra UI | LiqUIdify | Notes |
-|-----------|-----------|-------|
-| `Button` | `GlassButton` | Similar props |
-| `Box` | `GlassContainer` | Glass styling |
-| `Card` | `GlassCard` | Built-in glass |
-| `Modal` | `GlassModal` | Focus trap included |
-| `Input` | `GlassInput` | Simpler API |
-| `Tabs` | `GlassTabs` | Controlled/uncontrolled |
-| `Spinner` | `GlassSpinner` | Multiple sizes |
-| `Alert` | `GlassAlert` | Accessibility built-in |
-| `Skeleton` | `GlassSkeleton` | Loading states |
-| `Divider` | `GlassDivider` | Glass variant |
+| Chakra UI  | LiqUIdify        | Notes                   |
+| ---------- | ---------------- | ----------------------- |
+| `Button`   | `GlassButton`    | Similar props           |
+| `Box`      | `GlassContainer` | Glass styling           |
+| `Card`     | `GlassCard`      | Built-in glass          |
+| `Modal`    | `GlassModal`     | Focus trap included     |
+| `Input`    | `GlassInput`     | Simpler API             |
+| `Tabs`     | `GlassTabs`      | Controlled/uncontrolled |
+| `Spinner`  | `GlassSpinner`   | Multiple sizes          |
+| `Alert`    | `GlassAlert`     | Accessibility built-in  |
+| `Skeleton` | `GlassSkeleton`  | Loading states          |
+| `Divider`  | `GlassDivider`   | Glass variant           |
 
 ### Style Props Migration
 
 #### Before (Chakra UI)
+
 ```javascript
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Button, Text } from "@chakra-ui/react";
 
 function Hero() {
   return (
-    <Box
-      bg="gray.100"
-      p={8}
-      borderRadius="lg"
-      boxShadow="xl"
-    >
+    <Box bg="gray.100" p={8} borderRadius="lg" boxShadow="xl">
       <Text fontSize="2xl" fontWeight="bold" mb={4}>
         Welcome
       </Text>
@@ -276,6 +241,7 @@ function Hero() {
 ```
 
 #### After (LiqUIdify)
+
 ```javascript
 import { GlassContainer, GlassButton } from '@liquidify/components';
 
@@ -310,45 +276,43 @@ function Hero() {
 
 ### Component Mapping
 
-| Bootstrap | LiqUIdify | Notes |
-|-----------|-----------|-------|
-| `btn` | `GlassButton` | Component-based |
-| `card` | `GlassCard` | Glass effects |
-| `modal` | `GlassModal` | Better accessibility |
-| `form-control` | `GlassInput` | Consistent styling |
-| `nav-tabs` | `GlassTabs` | React controlled |
-| `spinner-border` | `GlassSpinner` | Multiple variants |
-| `alert` | `GlassAlert` | Live regions |
-| `toast` | `GlassToast` | Auto-dismiss |
-| `breadcrumb` | `GlassBreadcrumbs` | Route aware |
+| Bootstrap        | LiqUIdify          | Notes                |
+| ---------------- | ------------------ | -------------------- |
+| `btn`            | `GlassButton`      | Component-based      |
+| `card`           | `GlassCard`        | Glass effects        |
+| `modal`          | `GlassModal`       | Better accessibility |
+| `form-control`   | `GlassInput`       | Consistent styling   |
+| `nav-tabs`       | `GlassTabs`        | React controlled     |
+| `spinner-border` | `GlassSpinner`     | Multiple variants    |
+| `alert`          | `GlassAlert`       | Live regions         |
+| `toast`          | `GlassToast`       | Auto-dismiss         |
+| `breadcrumb`     | `GlassBreadcrumbs` | Route aware          |
 
 ### HTML to React Migration
 
 #### Before (Bootstrap)
+
 ```html
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Card Title</h5>
     <p class="card-text">Card content</p>
-    <button class="btn btn-primary">
-      Action
-    </button>
+    <button class="btn btn-primary">Action</button>
   </div>
 </div>
 ```
 
 #### After (LiqUIdify)
+
 ```javascript
-import { GlassCard, GlassButton } from '@liquidify/components';
+import { GlassCard, GlassButton } from "@liquidify/components";
 
 function CardExample() {
   return (
     <GlassCard>
       <h5>Card Title</h5>
       <p>Card content</p>
-      <GlassButton variant="primary">
-        Action
-      </GlassButton>
+      <GlassButton variant="primary">Action</GlassButton>
     </GlassCard>
   );
 }
@@ -361,24 +325,27 @@ function CardExample() {
 #### Breaking Changes
 
 1. **Import paths changed**
+
 ```javascript
 // Before
-import { Button } from '@liquidify/components/lib/Button';
+import { Button } from "@liquidify/components/lib/Button";
 
 // After
-import { GlassButton } from '@liquidify/components/button';
+import { GlassButton } from "@liquidify/components/button";
 ```
 
 2. **Component prefix added**
+
 ```javascript
 // Before
-import { Button, Card, Modal } from '@liquidify/components';
+import { Button, Card, Modal } from "@liquidify/components";
 
 // After
-import { GlassButton, GlassCard, GlassModal } from '@liquidify/components';
+import { GlassButton, GlassCard, GlassModal } from "@liquidify/components";
 ```
 
 3. **Props standardized**
+
 ```javascript
 // Before
 <Button type="primary" block />
@@ -388,20 +355,21 @@ import { GlassButton, GlassCard, GlassModal } from '@liquidify/components';
 ```
 
 4. **Theme structure updated**
+
 ```javascript
 // Before
 const theme = {
-  primaryColor: '#1890ff',
+  primaryColor: "#1890ff",
   borderRadius: 4,
 };
 
 // After
 const theme = {
   colors: {
-    primary: '#1890ff',
+    primary: "#1890ff",
   },
   radius: {
-    default: '4px',
+    default: "4px",
   },
   glass: {
     blur: 20,
@@ -413,16 +381,19 @@ const theme = {
 ### Migration Steps
 
 1. **Update package**
+
 ```bash
 npm update @liquidify/components@latest
 ```
 
 2. **Run codemod**
+
 ```bash
 npx @liquidify/codemods v0-to-v1
 ```
 
 3. **Update imports**
+
 ```bash
 # Find and replace old imports
 find . -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" | \
@@ -430,6 +401,7 @@ find . -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" | \
 ```
 
 4. **Test thoroughly**
+
 ```bash
 npm test
 npm run type-check
@@ -440,10 +412,12 @@ npm run type-check
 ### Removed Features
 
 1. **Inline styles removed**
+
    - Use className and CSS instead
    - Better performance and CSP compliance
 
 2. **jQuery dependency removed**
+
    - All components use React hooks
    - No external dependencies
 
@@ -454,6 +428,7 @@ npm run type-check
 ### API Changes
 
 #### Button
+
 ```javascript
 // Before
 <Button type="primary" danger loading />
@@ -463,6 +438,7 @@ npm run type-check
 ```
 
 #### Modal
+
 ```javascript
 // Before
 <Modal visible={open} onCancel={close} />
@@ -472,6 +448,7 @@ npm run type-check
 ```
 
 #### Form
+
 ```javascript
 // Before
 <Form.Item label="Name" validateStatus="error" />
@@ -508,10 +485,10 @@ Add migration hints with ESLint:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['@liquidify/migration'],
+  plugins: ["@liquidify/migration"],
   rules: {
-    '@liquidify/migration/no-deprecated': 'warn',
-    '@liquidify/migration/suggest-replacement': 'warn',
+    "@liquidify/migration/no-deprecated": "warn",
+    "@liquidify/migration/suggest-replacement": "warn",
   },
 };
 ```
@@ -545,12 +522,12 @@ module.exports = {
 
 ```javascript
 // Ensure provider wraps app
-import { UnifiedGlassProvider } from '@liquidify/components';
+import { UnifiedGlassProvider } from "@liquidify/components";
 
 root.render(
   <UnifiedGlassProvider>
     <App />
-  </UnifiedGlassProvider>
+  </UnifiedGlassProvider>,
 );
 ```
 

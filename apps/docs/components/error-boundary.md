@@ -16,83 +16,80 @@ npm install @liquidify/ui
 
 ```tsx
 // Import the full library
-import { GlassErrorBoundary } from '@liquidify/ui'
+import { GlassErrorBoundary } from "@liquidify/ui";
 
 // Or import individual component (better for tree-shaking)
-import { GlassErrorBoundary } from '@liquidify/ui/error-boundary'
+import { GlassErrorBoundary } from "@liquidify/ui/error-boundary";
 ```
 
 ## Basic Usage
 
 ```tsx
-import { GlassErrorBoundary } from '@liquidify/ui'
+import { GlassErrorBoundary } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassErrorBoundary />
+  return <GlassErrorBoundary />;
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| children | `ReactNode` | - | - |
-| fallback? | `(error: Error, errorInfo: ErrorInfo) => ReactNode` | - | - |
-| onError? | `(error: Error, errorInfo: ErrorInfo) => void` | - | - |
-| resetKeys? | `string \| Array<number>` | - | - |
-| resetOnPropsChange? | `boolean` | - | - |
-| isolate? | `boolean` | - | - |
-| level? | `"page" \| "section" \| "component"` | - | - |
-| className? | `string` | - | - |
-| componentName? | `string` | - | - |
-| trackErrors? | `boolean` | - | - |
-
+| Prop                | Type                                                | Default | Description |
+| ------------------- | --------------------------------------------------- | ------- | ----------- |
+| children            | `ReactNode`                                         | -       | -           |
+| fallback?           | `(error: Error, errorInfo: ErrorInfo) => ReactNode` | -       | -           |
+| onError?            | `(error: Error, errorInfo: ErrorInfo) => void`      | -       | -           |
+| resetKeys?          | `string \| Array<number>`                           | -       | -           |
+| resetOnPropsChange? | `boolean`                                           | -       | -           |
+| isolate?            | `boolean`                                           | -       | -           |
+| level?              | `"page" \| "section" \| "component"`                | -       | -           |
+| className?          | `string`                                            | -       | -           |
+| componentName?      | `string`                                            | -       | -           |
+| trackErrors?        | `boolean`                                           | -       | -           |
 
 ## Examples
 
 ### Basic Example
 
 ```tsx
-import { GlassErrorBoundary } from '@liquidify/ui'
+import { GlassErrorBoundary } from "@liquidify/ui";
 
 export default function Example() {
-  return <GlassErrorBoundary />
+  return <GlassErrorBoundary />;
 }
 ```
 
 ### Variants
 
-#### _CustomFallback
+#### \_CustomFallback
 
 ```tsx
-<GlassErrorBoundary  />
+<GlassErrorBoundary />
 ```
 
 #### DifferentLevels
 
 ```tsx
-<GlassErrorBoundary  />
+<GlassErrorBoundary />
 ```
 
 #### AsyncErrors
 
 ```tsx
-<GlassErrorBoundary  />
+<GlassErrorBoundary />
 ```
 
 #### ErrorRecovery
 
 ```tsx
-<GlassErrorBoundary  />
+<GlassErrorBoundary />
 ```
 
 #### MultipleErrorBoundaries
 
 ```tsx
-<GlassErrorBoundary  />
+<GlassErrorBoundary />
 ```
-
-
 
 ## Accessibility
 
