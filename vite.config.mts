@@ -4,6 +4,7 @@ import dts from "vite-plugin-dts";
 import { resolve } from "path";
 import { visualizer } from "rollup-plugin-visualizer";
 import { compression } from "vite-plugin-compression2";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ mode }) => {
   const isProduction = mode === "production";
@@ -11,6 +12,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react(),
+      tsconfigPaths(),
       dts({
         insertTypesEntry: true,
         include: ["libs/components/src/**/*"],
@@ -20,11 +22,13 @@ export default defineConfig(({ mode }) => {
           "libs/components/src/**/*.stories.*",
           "libs/components/src/components/glass-playground/**",
         ],
-        outDirs: "dist/libs/components",
+        outDir: "dist/libs/components",
         entryRoot: "libs/components/src",
         skipDiagnostics: true,
         staticImport: true,
         rollupTypes: isProduction,
+        // Generate separate type files for bundles
+        bundledPackages: ["@liquidify/components"],
         // Suppress TypeScript version warnings
         logLevel: "warn",
         // Add TypeScript compiler options for better type checking
@@ -35,7 +39,15 @@ export default defineConfig(({ mode }) => {
           strictFunctionTypes: true,
           noImplicitReturns: true,
           noFallthroughCasesInSwitch: true,
+          // Ensure proper module resolution
+          moduleResolution: "node",
+          // Enable declaration map for better debugging
+          declarationMap: true,
+          // Ensure proper source map generation
+          sourceMap: true,
         },
+        // Ensure proper type generation for bundles
+        copyDtsFiles: true,
       }),
       // Bundle analyzer in production
       isProduction &&
@@ -57,12 +69,6 @@ export default defineConfig(({ mode }) => {
       alias: {
         "@liquidify/components": resolve("libs/components/src/index.ts"),
         "@": resolve("libs/components/src"),
-        "@/components/*": resolve("libs/components/src/components/*"),
-        "@/core/*": resolve("libs/components/src/core/*"),
-        "@/hooks/*": resolve("libs/components/src/hooks/*"),
-        "@/styles/*": resolve("libs/components/src/styles/*"),
-        "@/tokens/*": resolve("libs/components/src/tokens/*"),
-        "@/types/*": resolve("libs/components/src/types/*"),
       },
     },
     build: {

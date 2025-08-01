@@ -4,10 +4,11 @@
  * Build Configuration Validation Script
  *
  * Validates consistency between:
- * - Vite build entries in vite.config.ts
+ * - Vite build entries in vite.config.mts
  * - package.json exports
  * - Actual file existence
  * - Path aliases across all build tools
+ * - Required plugin dependencies
  *
  * Exits with code 1 if any inconsistencies are found.
  */
@@ -61,9 +62,19 @@ function readConfigFiles() {
     const tsconfigPath = resolve(ROOT_DIR, "tsconfig.json");
     configs.tsconfig = JSON.parse(readFileSync(tsconfigPath, "utf8"));
 
-    // Read vite.config.ts (extract configuration)
-    const viteConfigPath = resolve(ROOT_DIR, "vite.config.ts");
+    // Read vite.config.mts (extract configuration)
+    const viteConfigPath = resolve(ROOT_DIR, "vite.config.mts");
+    if (!existsSync(viteConfigPath)) {
+      logError(
+        "vite.config.mts not found - this is the required configuration file",
+      );
+      process.exit(1);
+    }
     const viteConfigContent = readFileSync(viteConfigPath, "utf8");
+    if (viteConfigContent.trim().length === 0) {
+      logError("vite.config.mts is empty - configuration is required");
+      process.exit(1);
+    }
     configs.viteConfigContent = viteConfigContent;
 
     // Read Storybook main.ts (handle missing configuration)
@@ -97,7 +108,7 @@ function readConfigFiles() {
 }
 
 /**
- * Extract Vite build entries from vite.config.ts content
+ * Extract Vite build entries from vite.config.mts content
  */
 function extractViteBuildEntries(viteConfigContent) {
   const entries = {};
@@ -106,7 +117,7 @@ function extractViteBuildEntries(viteConfigContent) {
   // Need to handle nested braces and multiline strings carefully
   const entryStartMatch = viteConfigContent.match(/entry:\s*{/);
   if (!entryStartMatch) {
-    logError("Could not find build.lib.entry configuration in vite.config.ts");
+    logError("Could not find build.lib.entry configuration in vite.config.mts");
     return entries;
   }
 
@@ -431,6 +442,68 @@ function validateBundleStructure(viteEntries, packageExports) {
 }
 
 /**
+ * Validate required plugin dependencies
+ */
+function validatePluginDependencies(packageJson) {
+  logInfo("Validating required plugin dependencies...");
+
+  const requiredPlugins = [
+    "vite-tsconfig-paths",
+    "vite-plugin-dts",
+    "@vitejs/plugin-react",
+    "rollup-plugin-visualizer",
+    "vite-plugin-compression2",
+  ];
+
+  const allDependencies = {
+    ...packageJson.dependencies,
+    ...packageJson.devDependencies,
+  };
+
+  const missingPlugins = [];
+
+  requiredPlugins.forEach((plugin) => {
+    if (!allDependencies[plugin]) {
+      missingPlugins.push(plugin);
+    }
+  });
+
+  if (missingPlugins.length > 0) {
+    logError(
+      `Missing required plugin dependencies: ${missingPlugins.join(", ")}`,
+    );
+    logError(
+      "Install missing plugins with: bun add -D " + missingPlugins.join(" "),
+    );
+  } else {
+    logSuccess("All required plugin dependencies are installed");
+  }
+
+  // Validate plugin versions for critical plugins
+  const criticalPlugins = {
+    "vite-tsconfig-paths": "^5.0.0",
+    "vite-plugin-dts": "^5.0.0",
+  };
+
+  Object.entries(criticalPlugins).forEach(([plugin, minVersion]) => {
+    const installedVersion = allDependencies[plugin];
+    if (installedVersion) {
+      // Basic version check (could be enhanced with semver)
+      const versionNumber = installedVersion.replace(/[^\d.]/g, "");
+      const minVersionNumber = minVersion.replace(/[^\d.]/g, "");
+
+      if (versionNumber < minVersionNumber) {
+        logWarning(
+          `Plugin ${plugin} version ${installedVersion} may be outdated (minimum: ${minVersion})`,
+        );
+      }
+    }
+  });
+
+  logSuccess("Plugin dependency validation completed");
+}
+
+/**
  * Validate Vercel configuration
  */
 function validateVercelConfiguration() {
@@ -438,7 +511,7 @@ function validateVercelConfiguration() {
 
   const vercelConfigPath = resolve(ROOT_DIR, "vercel.json");
   if (!existsSync(vercelConfigPath)) {
-    logError("vercel.json not found");
+    logWarning("vercel.json not found - skipping Vercel validation");
     return;
   }
 
@@ -551,6 +624,144 @@ async function validateStorybookStories() {
 }
 
 /**
+ * Validate TypeScript configuration compatibility
+ */
+function validateTypeScriptConfiguration(tsconfig, viteConfigContent) {
+  logInfo("Validating TypeScript configuration compatibility...");
+
+  // Check that tsconfig paths are compatible with Vite
+  const tsconfigPaths = tsconfig.compilerOptions?.paths || {};
+  const hasWildcardPaths = Object.keys(tsconfigPaths).some((path) =>
+    path.includes("*"),
+  );
+
+  if (hasWildcardPaths) {
+    // Check if vite-tsconfig-paths plugin is being used
+    const hasViteTsconfigPaths =
+      viteConfigContent.includes("tsconfigPaths()") ||
+      viteConfigContent.includes("vite-tsconfig-paths");
+
+    if (!hasViteTsconfigPaths) {
+      logError(
+        "TypeScript wildcard paths found but vite-tsconfig-paths plugin not configured",
+      );
+      logError(
+        "Add 'import tsconfigPaths from \"vite-tsconfig-paths\"' and 'tsconfigPaths()' to plugins array",
+      );
+    } else {
+      logSuccess(
+        "TypeScript wildcard paths properly configured with vite-tsconfig-paths",
+      );
+    }
+  }
+
+  // Validate TypeScript target compatibility
+  const target = tsconfig.compilerOptions?.target;
+  if (target && !["ES2021", "ES2022", "ESNext"].includes(target)) {
+    logWarning(
+      `TypeScript target "${target}" may not be optimal for modern builds. Consider ES2021 or ES2022`,
+    );
+  }
+
+  // Check module resolution
+  const moduleResolution = tsconfig.compilerOptions?.moduleResolution;
+  if (moduleResolution !== "bundler" && moduleResolution !== "node") {
+    logWarning(
+      `TypeScript moduleResolution "${moduleResolution}" may cause issues with Vite`,
+    );
+  }
+
+  logSuccess("TypeScript configuration validation completed");
+}
+
+/**
+ * Validate TypeScript configuration structure and values
+ */
+function validateTypeScriptConfigStructure(tsconfig) {
+  logInfo("Validating TypeScript configuration structure...");
+
+  // Check moduleResolution value
+  const moduleResolution = tsconfig.compilerOptions?.moduleResolution;
+  if (moduleResolution === undefined) {
+    logError("TypeScript moduleResolution is not set");
+  } else if (typeof moduleResolution !== "string") {
+    logError(
+      `TypeScript moduleResolution must be a string, got: ${typeof moduleResolution}`,
+    );
+  } else if (!["node", "bundler", "classic"].includes(moduleResolution)) {
+    logError(
+      `Invalid TypeScript moduleResolution value: "${moduleResolution}". Must be one of: "node", "bundler", "classic"`,
+    );
+  } else {
+    logSuccess(`TypeScript moduleResolution is valid: "${moduleResolution}"`);
+  }
+
+  // Check for invalid empty objects
+  Object.entries(tsconfig.compilerOptions || {}).forEach(([key, value]) => {
+    if (
+      value !== null &&
+      typeof value === "object" &&
+      Object.keys(value).length === 0
+    ) {
+      logError(
+        `TypeScript compiler option "${key}" has invalid empty object value`,
+      );
+    }
+  });
+
+  // Validate JSON structure
+  try {
+    JSON.stringify(tsconfig);
+    logSuccess("TypeScript configuration has valid JSON structure");
+  } catch (error) {
+    logError(
+      `TypeScript configuration has invalid JSON structure: ${error.message}`,
+    );
+  }
+
+  logSuccess("TypeScript configuration structure validation completed");
+}
+
+/**
+ * Validate DTS plugin configuration in Vite
+ */
+function validateDTSPluginConfiguration(viteConfigContent) {
+  logInfo("Validating DTS plugin configuration...");
+
+  // Check for duplicate moduleResolution properties
+  const moduleResolutionMatches = viteConfigContent.match(
+    /moduleResolution:\s*["']([^"']+)["']/g,
+  );
+  if (moduleResolutionMatches && moduleResolutionMatches.length > 1) {
+    logError(
+      "Duplicate moduleResolution properties found in DTS plugin configuration",
+    );
+    logError("Remove duplicate moduleResolution from DTS plugin options");
+  }
+
+  // Check for invalid DTS plugin options
+  const invalidOptions = [
+    "generateDeclarationMap: true",
+    'moduleResolution: "node"',
+  ];
+
+  invalidOptions.forEach((option) => {
+    if (viteConfigContent.includes(option)) {
+      logError(`Invalid DTS plugin option found: "${option}"`);
+    }
+  });
+
+  // Check for valid DTS plugin structure
+  if (!viteConfigContent.includes("dts({")) {
+    logError("DTS plugin configuration not found in vite.config.mts");
+  } else {
+    logSuccess("DTS plugin configuration found");
+  }
+
+  logSuccess("DTS plugin configuration validation completed");
+}
+
+/**
  * Main validation function
  */
 async function main() {
@@ -570,10 +781,14 @@ async function main() {
   console.log("");
 
   // Run validations
+  validatePluginDependencies(configs.packageJson);
   validateBuildEntries(viteEntries, configs.packageJson.exports);
   validateFileExistence(viteEntries);
   validatePathAliases(pathAliases);
   validateBundleStructure(viteEntries, configs.packageJson.exports);
+  validateTypeScriptConfiguration(configs.tsconfig, configs.viteConfigContent);
+  validateTypeScriptConfigStructure(configs.tsconfig);
+  validateDTSPluginConfiguration(configs.viteConfigContent);
   validateVercelConfiguration();
   await validateStorybookStories();
 

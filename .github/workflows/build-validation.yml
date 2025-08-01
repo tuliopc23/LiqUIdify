@@ -5,7 +5,7 @@ on:
     branches: [main, develop]
     paths:
       - "package.json"
-      - "vite.config.ts"
+      - "vite.config.mts"
       - "tsconfig*.json"
       - "apps/storybook/.storybook/main.ts"
       - "apps/docs/.vitepress/config.ts"
@@ -15,7 +15,7 @@ on:
     branches: [main, develop]
     paths:
       - "package.json"
-      - "vite.config.ts"
+      - "vite.config.mts"
       - "tsconfig*.json"
       - "apps/storybook/.storybook/main.ts"
       - "apps/docs/.vitepress/config.ts"
@@ -36,11 +36,32 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            dist
+            .vitepress/cache
+            apps/storybook/storybook-static
+          key: ${{ runner.os }}-build-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
       - name: Run configuration validation
-        run: node scripts/validate-build-config.js
+        run: bun run validate:build-config
 
       - name: TypeScript type checking
         run: bun run type-check
@@ -113,7 +134,51 @@ jobs:
           fi
 
       - name: Export validation
-        run: node scripts/validate-exports.js
+        run: |
+          echo "Validating package.json exports..."
+
+          # Create a simple export validation script inline
+          cat > validate-exports.js << 'EOF'
+          import { readFileSync, existsSync } from 'fs';
+          import { resolve } from 'path';
+
+          const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
+          const exports = packageJson.exports;
+          let hasErrors = false;
+
+          console.log('🔍 Validating package.json exports...');
+
+          Object.entries(exports).forEach(([exportName, exportConfig]) => {
+            if (typeof exportConfig === 'string') {
+              // Simple string export (like CSS files)
+              const filePath = exportConfig.replace('./', '');
+              if (!existsSync(filePath)) {
+                console.error(`❌ Export "${exportName}" points to missing file: ${filePath}`);
+                hasErrors = true;
+              }
+            } else if (typeof exportConfig === 'object') {
+              // Object export with types, import, require
+              ['types', 'import', 'require'].forEach(key => {
+                if (exportConfig[key]) {
+                  const filePath = exportConfig[key].replace('./', '');
+                  if (!existsSync(filePath)) {
+                    console.error(`❌ Export "${exportName}.${key}" points to missing file: ${filePath}`);
+                    hasErrors = true;
+                  }
+                }
+              });
+            }
+          });
+
+          if (hasErrors) {
+            console.log('💥 Export validation failed!');
+            process.exit(1);
+          } else {
+            console.log('✅ All exports point to existing files');
+          }
+          EOF
+
+          node validate-exports.js
 
       - name: Archive build artifacts
         if: failure()
@@ -213,6 +278,17 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+
+      - name: Cache dependencies
+        if: ${{ env.SKIP_BUILD != 'true' }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
       - name: Install root dependencies
         if: ${{ env.SKIP_BUILD != 'true' }}

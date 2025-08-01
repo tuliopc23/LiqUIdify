@@ -10,7 +10,7 @@ import {
 import { GlassPopover } from "./glass-popover";
 
 const meta: Meta<typeof GlassPopover> = {
-  title: "Components/GlassPopover",
+  title: "Components/Overlays/GlassPopover",
   component: GlassPopover,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

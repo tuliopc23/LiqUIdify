@@ -1,22 +1,118 @@
-<link rel="stylesheet" href="/liquidui.css" />
+<!-- Optimized Glass UI Storybook Preview Head -->
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+<meta
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  name="viewport"
+/>
+<meta content="light dark" name="color-scheme" />
+
 <style>
-  /* Fallback styles for component rendering */
-  .glass-ui {
+  /* Performance optimizations */
+  * {
+    will-change: auto;
+  }
+
+  /* Glass UI Theme Variables */
+  :root {
     --glass-bg: rgba(255, 255, 255, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
     --glass-text: rgba(0, 0, 0, 0.8);
     --glass-blur: 10px;
     --glass-saturation: 180%;
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.3);
   }
 
-  [data-theme="dark"] .glass-ui {
+  [data-theme="dark"] {
     --glass-bg: rgba(0, 0, 0, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
     --glass-text: rgba(255, 255, 255, 0.9);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --glass-highlight: rgba(255, 255, 255, 0.1);
   }
 
-  /* Ensure Tailwind utilities are available */
-  @import "tailwindcss/base";
-  @import "tailwindcss/components";
-  @import "tailwindcss/utilities";
+  /* Glass effect base styles */
+  .glass-ui {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--glass-text);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+    -webkit-backdrop-filter: blur(var(--glass-blur))
+      saturate(var(--glass-saturation));
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-effect {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* Font loading optimization */
+  @font-face {
+    font-family: "Inter";
+    font-display: swap;
+  }
+
+  body {
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      "Roboto",
+      sans-serif;
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (forced-colors: active) {
+    .glass-effect,
+    .glass-ui {
+      border-width: 2px;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: Canvas;
+      color: CanvasText;
+      border-color: ButtonText;
+    }
+  }
+
+  /* Error display styles */
+  .sb-errordisplay {
+    background: var(--glass-bg) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .sb-show-main {
+      padding: 0.5rem !important;
+    }
+
+    .glass-effect,
+    .glass-ui {
+      border-radius: 8px;
+    }
+  }
 </style>

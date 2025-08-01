@@ -1,12 +1,11 @@
-// Uses shared story helpers from utils/storyHelpers.tsx for DRY meta and render logic
-import { createMeta, renderVariants } from "../utils/storyHelpers";
-import type { StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { GlassBanner } from "@/components/glass-banner/glass-banner";
 import { GlassButton } from "@/components/glass-button-refactored/glass-button";
 import { GlassCard } from "@/components/glass-card-refactored/glass-card";
+import { Download, Sparkles, Zap } from "lucide-react";
 
-const meta = createMeta({
+const meta: Meta<typeof GlassBanner> = {
   title: "Components/Glass Banner",
   component: GlassBanner,
   parameters: {
@@ -18,11 +17,11 @@ const meta = createMeta({
       },
     },
   },
-  // You can add argTypes here if you want to extend/override the shared ones
-});
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+
+type Story = StoryObj<typeof GlassBanner>;
 
 export const Default: Story = {
   args: {
@@ -32,7 +31,15 @@ export const Default: Story = {
 };
 
 export const AllVariants: Story = {
-  render: () => renderVariants(GlassBanner, { children: "Banner message" }),
+  render: () => (
+    <div className="space-y-2">
+      {(["info", "success", "warning", "error"] as const).map((v) => (
+        <GlassBanner key={v} variant={v}>
+          Banner message
+        </GlassBanner>
+      ))}
+    </div>
+  ),
   parameters: {
     docs: {
       description: {
@@ -58,7 +65,6 @@ export const WithActions: Story = {
           Check out our latest updates and improvements.
         </p>
       </GlassBanner>
-
       <GlassBanner
         variant="warning"
         action={
@@ -107,7 +113,6 @@ export const Dismissible: Story = {
         message: "Your session will expire soon",
       },
     ]);
-
     return (
       <div className="space-y-4">
         {banners.map((banner) => (
@@ -122,7 +127,6 @@ export const Dismissible: Story = {
             {banner.message}
           </GlassBanner>
         ))}
-
         {banners.length === 0 && (
           <div className="py-8 text-center">
             <p className="mb-4 text-[var(--text-secondary)]">
@@ -159,9 +163,7 @@ export const Dismissible: Story = {
   },
   parameters: {
     docs: {
-      description: {
-        story: "Dismissible banners that can be closed by users",
-      },
+      description: { story: "Dismissible banners that can be closed by users" },
     },
   },
 };
@@ -171,19 +173,17 @@ export const CustomIcons: Story = {
     <div className="space-y-4">
       <GlassBanner variant="info" icon={<Sparkles className="h-5 w-5" />}>
         <p className="font-medium">New Features Released!</p>
-        <p className="mt-1 text-sm">Discover what\'s new in this version.</p>
+        <p className="mt-1 text-sm">Discover what's new in this version.</p>
       </GlassBanner>
-
       <GlassBanner variant="success" icon={<Download className="h-5 w-5" />}>
         <p className="font-medium">Download Complete</p>
         <p className="mt-1 text-sm">
           Your file has been downloaded successfully.
         </p>
       </GlassBanner>
-
       <GlassBanner variant="warning" icon={<Zap className="h-5 w-5" />}>
         <p className="font-medium">High Usage Detected</p>
-        <p className="mt-1 text-sm">You\'re approaching your usage limit.</p>
+        <p className="mt-1 text-sm">You're approaching your usage limit.</p>
       </GlassBanner>
     </div>
   ),
@@ -221,12 +221,11 @@ export const ComplexContent: Story = {
           </ul>
         </div>
       </GlassBanner>
-
       <GlassBanner variant="success">
         <div className="flex items-center justify-between">
           <div>
             <p className="font-medium">Payment Successful</p>
-            <p className="mt-1 text-sm">Transaction ID: #TXN-2024-001234</p>
+            <p className="text-sm">Transaction ID: #TXN-2024-001234</p>
           </div>
           <div className="text-right">
             <p className="font-bold text-2xl">$99.00</p>
@@ -237,11 +236,7 @@ export const ComplexContent: Story = {
     </div>
   ),
   parameters: {
-    docs: {
-      description: {
-        story: "Banners with complex content layouts",
-      },
-    },
+    docs: { description: { story: "Banners with complex content layouts" } },
   },
 };
 
@@ -249,7 +244,6 @@ export const FixedPosition: Story = {
   render: () => {
     const [showTopBanner, setShowTopBanner] = React.useState(true);
     const [showBottomBanner, setShowBottomBanner] = React.useState(true);
-
     return (
       <div className="relative h-[400px] overflow-hidden">
         <GlassCard className="h-full p-6">
@@ -274,7 +268,6 @@ export const FixedPosition: Story = {
             </GlassButton>
           </div>
         </GlassCard>
-
         {showTopBanner && (
           <div className="absolute top-0 right-0 left-0 p-4">
             <GlassBanner
@@ -286,7 +279,6 @@ export const FixedPosition: Story = {
             </GlassBanner>
           </div>
         )}
-
         {showBottomBanner && (
           <div className="absolute right-0 bottom-0 left-0 p-4">
             <GlassBanner
@@ -316,17 +308,13 @@ export const AnimatedAppearance: Story = {
       Array<{ id: number; message: string }>
     >([]);
     const nextId = React.useRef(1);
-
     const addBanner = () => {
       const id = nextId.current++;
       setBanners((prev) => [...prev, { id, message: `Dynamic banner #${id}` }]);
-
-      // Auto-remove after 5 seconds
       setTimeout(() => {
         setBanners((prev) => prev.filter((b) => b.id !== id));
       }, 5000);
     };
-
     return (
       <div className="space-y-4">
         <div className="text-center">
@@ -337,7 +325,6 @@ export const AnimatedAppearance: Story = {
             Banners auto-dismiss after 5 seconds
           </p>
         </div>
-
         <div className="space-y-2">
           {banners.map((banner) => (
             <GlassBanner

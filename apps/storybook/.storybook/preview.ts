@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
-import { GlassUIProvider } from "../../../libs/components/src/providers/glass-ui-provider";
-import { ThemeProvider } from "../../../libs/components/src/components/theme-provider/theme-provider";
 import React from "react";
+import { GlassUIProvider } from "../../../libs/components/src/providers/glass-ui-provider";
+import { ThemeProvider } from "../../../libs/components/src/hooks/use-theme";
 
 // Import CSS styles
 import "../../../libs/components/src/styles/glass.css";
@@ -98,42 +98,73 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme;
+      const theme = context.globals.theme as "light" | "dark";
 
       // Apply theme to document element
       React.useEffect(() => {
-        document.documentElement.setAttribute("data-theme", theme);
-        document.body.className = `theme-${theme}`;
+        if (typeof document !== "undefined") {
+          document.documentElement.setAttribute("data-theme", theme);
+          document.body.className =
+            document.body.className.replace(/theme-(light|dark)/g, "") +
+            ` theme-${theme}`;
+        }
       }, [theme]);
 
-      return React.createElement(
-        ThemeProvider,
-        { theme },
-        React.createElement(
-          GlassUIProvider,
-          {
-            config: {
-              enableAnimations: true,
-              enableGlassEffects: true,
-              reducedMotion: false,
-            },
-          },
+      try {
+        return React.createElement(
+          ThemeProvider,
+          { defaultTheme: theme },
           React.createElement(
-            "div",
+            GlassUIProvider,
             {
-              style: {
-                padding: "1rem",
-                minHeight: "100vh",
-                background:
-                  theme === "dark"
-                    ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
-                    : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+              config: {
+                enableAnimations: true,
+                enableGlassEffects: true,
+                reducedMotion: false,
               },
             },
-            React.createElement(Story),
+            React.createElement(
+              "div",
+              {
+                style: {
+                  padding: "1rem",
+                  minHeight: "100vh",
+                  background:
+                    theme === "dark"
+                      ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
+                      : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                },
+              },
+              React.createElement(Story),
+            ),
           ),
-        ),
-      );
+        );
+      } catch (error) {
+        console.error("Storybook decorator error:", error);
+        return React.createElement(
+          "div",
+          { style: { padding: "1rem", color: "red" } },
+          React.createElement("h3", null, "Story Error"),
+          React.createElement(
+            "p",
+            null,
+            "Failed to render story: ",
+            error instanceof Error ? error.message : "Unknown error",
+          ),
+          React.createElement(
+            "details",
+            null,
+            React.createElement("summary", null, "Error Details"),
+            React.createElement(
+              "pre",
+              null,
+              error instanceof Error ? error.stack : String(error),
+            ),
+          ),
+        );
+      }
     },
   ],
 };
+
+export default preview;

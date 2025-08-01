@@ -1,77 +1,152 @@
-// Uses shared story helpers from utils/storyHelpers.tsx for DRY meta and render logic
-import { createMeta } from '../utils/storyHelpers';
-import React from 'react';
-import { GlassButton } from '@/components/glass-button-refactored/glass-button';
-import { GlassCard } from '@/components/glass-card-refactored/glass-card';
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import { Database, Folder, File, Key, Type, Table } from "lucide-react";
+import { GlassButton } from "@/components/glass-button-refactored/glass-button";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
 import {
   GlassTreeView,
   type TreeNode,
-} from '@/components/glass-tree-view/glass-tree-view';
+} from "@/components/glass-tree-view/glass-tree-view";
 
-const meta = createMeta({
-  title: 'Components/Glass Tree View',
+const meta = {
+  title: "Components/Glass Tree View",
   component: GlassTreeView,
   parameters: {
-    padded: true,
+    layout: "padded",
     docs: {
       description: {
         component:
-          'A hierarchical tree view component with glassmorphism styling. Supports nested structures, custom icons, selection states, and expand/collapse animations.',
+          "A hierarchical tree view component with glassmorphism styling. Supports nested structures, custom icons, selection states, and expand/collapse animations.",
       },
     },
   },
-});
+  tags: ["autodocs"],
+  argTypes: {
+    nodes: {
+      description: "Array of tree nodes to display",
+      control: false,
+    },
+    selectedNodeId: {
+      description: "ID of the currently selected node",
+      control: { type: "text" },
+    },
+    onNodeSelect: {
+      description: "Callback when a node is selected",
+      action: "node selected",
+    },
+    onNodeExpand: {
+      description: "Callback when a node is expanded",
+      action: "node expanded",
+    },
+    onNodeCollapse: {
+      description: "Callback when a node is collapsed",
+      action: "node collapsed",
+    },
+    showIcons: {
+      description: "Whether to show node icons",
+      control: { type: "boolean" },
+    },
+    className: {
+      description: "Additional CSS classes",
+      control: { type: "text" },
+    },
+  },
+} satisfies Meta<typeof GlassTreeView>;
 
 export default meta;
-type Story = typeof meta;
+type Story = StoryObj<typeof meta>;
 
 const fileSystemNodes: Array<TreeNode> = [
   {
-    id: 'src',
-    label: 'src',
+    id: "src",
+    label: "src",
+    icon: <Folder className="h-4 w-4" />,
     defaultExpanded: true,
     children: [
       {
-        id: 'components',
-        label: 'components',
+        id: "components",
+        label: "components",
+        icon: <Folder className="h-4 w-4" />,
         defaultExpanded: true,
         children: [
-          { id: 'Button.tsx', label: 'Button.tsx' },
-          { id: 'Card.tsx', label: 'Card.tsx' },
-          { id: 'Modal.tsx', label: 'Modal.tsx' },
+          {
+            id: "Button.tsx",
+            label: "Button.tsx",
+            icon: <File className="h-4 w-4" />,
+          },
+          {
+            id: "Card.tsx",
+            label: "Card.tsx",
+            icon: <File className="h-4 w-4" />,
+          },
+          {
+            id: "Modal.tsx",
+            label: "Modal.tsx",
+            icon: <File className="h-4 w-4" />,
+          },
         ],
       },
-      { 'utils' }
-        'utils',
+      {
+        id: "utils",
+        label: "utils",
+        icon: <Folder className="h-4 w-4" />,
         children: [
-          { id: 'helpers.ts', label: 'helpers.ts' },
-          { id: 'constants.ts', label: 'constants.ts' },
+          {
+            id: "helpers.ts",
+            label: "helpers.ts",
+            icon: <File className="h-4 w-4" />,
+          },
+          {
+            id: "constants.ts",
+            label: "constants.ts",
+            icon: <File className="h-4 w-4" />,
+          },
         ],
       },
-      { 'App.tsx', label: 'App.tsx' },
-      { 'index.tsx', label: 'index.tsx' },
+      { id: "App.tsx", label: "App.tsx", icon: <File className="h-4 w-4" /> },
+      {
+        id: "index.tsx",
+        label: "index.tsx",
+        icon: <File className="h-4 w-4" />,
+      },
     ],
   },
-  { 'public' }
-    'public',
+  {
+    id: "public",
+    label: "public",
+    icon: <Folder className="h-4 w-4" />,
     children: [
-      { id: 'index.html', label: 'index.html' },
-      { id: 'favicon.ico', label: 'favicon.ico' },
+      {
+        id: "index.html",
+        label: "index.html",
+        icon: <File className="h-4 w-4" />,
+      },
+      {
+        id: "favicon.ico",
+        label: "favicon.ico",
+        icon: <File className="h-4 w-4" />,
+      },
     ],
   },
-  { 'package.json', label: 'package.json' },
-  { 'README.md', label: 'README.md' },
-]
+  {
+    id: "package.json",
+    label: "package.json",
+    icon: <File className="h-4 w-4" />,
+  },
+  { id: "README.md", label: "README.md", icon: <File className="h-4 w-4" /> },
+];
 
-export const Default: Story = { args: {
-    nodes: fileSystemNodes }
+export const Default: Story = {
+  args: {
+    nodes: fileSystemNodes,
     showIcons: true,
   },
 };
 
-export const WithSelection: Story = { render: () => { }
+export const WithSelection: Story = {
+  render: () => {
     const [selectedNodeId, setSelectedNodeId] =
-      React.useState<string>('Button.tsx');
+      React.useState<string>("Button.tsx");
 
     return (
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -89,367 +164,251 @@ export const WithSelection: Story = { render: () => { }
             <p className="text-[var(--text-secondary)]">
               {selectedNodeId
                 ? `Selected: ${selectedNodeId}`
-                : 'No file selected'}
+                : "No file selected"}
             </p>
           </GlassCard>
         </div>
       </div>
-    )
-  },
-  {
-        'Tree view with selection state management' ,
-    },
-  },
-}
-
-export const DatabaseSchema: Story = { args: {
-    nodes: [
-      {
-        id: 'database' }
-        label: 'Production Database',
-        icon: <Database className="h-4 w-4" />,
-        defaultExpanded: true,
-        children: [
-          { id: 'users-table' }
-            label: 'users',
-            icon: <Table className="h-4 w-4" />,
-            children: [
-              { id: 'users-id' }
-                label: 'id',
-                icon: <Key className="h-4 w-4" />,
-              },
-              { 'users-name' }
-                'name',
-                icon: <Type className="h-4 w-4" />,
-              },
-              { 'users-email' }
-                'email',
-                icon: <Type className="h-4 w-4" />,
-              },
-              { 'users-created' }
-                'created_at',
-                icon: <Type className="h-4 w-4" />,
-              },
-            ],
-          },
-          { 'posts-table' }
-            'posts',
-            icon: <Table className="h-4 w-4" />,
-            children: [
-              { id: 'posts-id' }
-                label: 'id',
-                icon: <Key className="h-4 w-4" />,
-              },
-              { 'posts-title' }
-                'title',
-                icon: <Type className="h-4 w-4" />,
-              },
-              { 'posts-content' }
-                'content',
-                icon: <Type className="h-4 w-4" />,
-              },
-              { 'posts-user-id' }
-                'user_id',
-                icon: <Columns className="h-4 w-4" />,
-              },
-            ],
-          },
-          { 'comments-table' }
-            'comments',
-            icon: <Table className="h-4 w-4" />,
-            children: [
-              { id: 'comments-id' }
-                label: 'id',
-                icon: <Key className="h-4 w-4" />,
-              },
-              { 'comments-text' }
-                'text',
-                icon: <Type className="h-4 w-4" />,
-              },
-              { 'comments-post-id' }
-                'post_id',
-                icon: <Columns className="h-4 w-4" />,
-              },
-              { 'comments-user-id' }
-                'user_id',
-                icon: <Columns className="h-4 w-4" />,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  { {
-      {
-        'Database schema visualization with custom icons' }
-      },
-    },
-  },
-}
-
-export const ControlledExpansion: Story = { render: () => { }
-    const [expandedNodeIds, setExpandedNodeIds] = React.useState<Array<string>>(
-      ['src']
     );
-
-    const _handleNodeExpand = (node: TreeNode, expanded: boolean) => {
-      setExpandedNodeIds((prev) => {
-        if (expanded) {
-          return [...prev, node.id];
-        }
-        return prev.filter((id) => id !== node.id);
-      });
-    };
-
-    return (
-      <div className="space-y-4">
-        <div className="flex gap-2">
-          <GlassButton
-            type="button"
-            size="sm" onClick={() => {
-              const allNodeIds: Array<string> = [];
-              const _collectIds = (nodes: Array<TreeNode>) => {
-                nodes.forEach((node) => {
-                  if (node.children) {
-                    allNodeIds.push(node.id);
-                    _collectIds(node.children);
-                  }
-              };
-              _collectIds(fileSystemNodes);
-              setExpandedNodeIds(allNodeIds);>
-            Expand All
-          </GlassButton>
-          <GlassButton
-            type="button"
-            size="sm"
-            variant="ghost" onClick={() => setExpandedNodeIds([])}
-          >
-            Collapse All
-          </GlassButton>
-        </div>
-
-        <GlassTreeView
-         des=fileSystemNodes
-          expandedNodeIds=expandedNodeIds
-          onNodeExpand=handleNodeExpand
-        />
-    </div>
-    )
-  }             const
-  _parameters: { docs: {
+  },
+  parameters: {
+    docs: {
       description: {
-        story:
-          'Controlled expansion state with expand/collapse all functionality' }
+        story: "Tree view with selection state management",
       },
-   },
+    },
   },
 };
 
-export const SettingsMenu: Story = { args: {
+export const DatabaseSchema: Story = {
+  args: {
     nodes: [
       {
-        id: 'general' }
-        label: 'General',
-        icon: <Settings className="h-4 w-4" />,
+        id: "database",
+        label: "Production Database",
+        icon: <Database className="h-4 w-4" />,
         defaultExpanded: true,
         children: [
-          { id: 'appearance', label: 'Appearance' },
-          { id: 'language', label: 'Language & Region' },
-          { id: 'accessibility', label: 'Accessibility' },
-        ],
-      },
-      { id: 'privacy' }
-        label: 'Privacy & Security',
-        children: [
-          { id: 'passwords', label: 'Passwords' },
-          { id: 'two-factor', label: 'Two-Factor Auth' },
-          { id: 'privacy-settings', label: 'Privacy Settings' },
-        ],
-      },
-      { id: 'notifications' }
-        label: 'Notifications',
-        children: [
-          { id: 'email-notif', label: 'Email' },
-          { id: 'push-notif', label: 'Push Notifications' },
-          { id: 'sms-notif', label: 'SMS' },
-        ],
-      },
-      { id: 'advanced' }
-        label: 'Advanced',
-        children: [
-          { id: 'developer', label: 'Developer Options' },
-          { id: 'experimental', label: 'Experimental Features' },
-          { id: 'data-export', label: 'Data Export' },
+          {
+            id: "users-table",
+            label: "users",
+            icon: <Table className="h-4 w-4" />,
+            children: [
+              {
+                id: "users-id",
+                label: "id",
+                icon: <Key className="h-4 w-4" />,
+              },
+              {
+                id: "users-name",
+                label: "name",
+                icon: <Type className="h-4 w-4" />,
+              },
+              {
+                id: "users-email",
+                label: "email",
+                icon: <Type className="h-4 w-4" />,
+              },
+              {
+                id: "users-created",
+                label: "created_at",
+                icon: <Type className="h-4 w-4" />,
+              },
+            ],
+          },
+          {
+            id: "posts-table",
+            label: "posts",
+            icon: <Table className="h-4 w-4" />,
+            children: [
+              {
+                id: "posts-id",
+                label: "id",
+                icon: <Key className="h-4 w-4" />,
+              },
+              {
+                id: "posts-title",
+                label: "title",
+                icon: <Type className="h-4 w-4" />,
+              },
+              {
+                id: "posts-content",
+                label: "content",
+                icon: <Type className="h-4 w-4" />,
+              },
+              {
+                id: "posts-user-id",
+                label: "user_id",
+                icon: <Key className="h-4 w-4" />,
+              },
+              {
+                id: "posts-created",
+                label: "created_at",
+                icon: <Type className="h-4 w-4" />,
+              },
+            ],
+          },
+          {
+            id: "comments-table",
+            label: "comments",
+            icon: <Table className="h-4 w-4" />,
+            children: [
+              {
+                id: "comments-id",
+                label: "id",
+                icon: <Key className="h-4 w-4" />,
+              },
+              {
+                id: "comments-content",
+                label: "content",
+                icon: <Type className="h-4 w-4" />,
+              },
+              {
+                id: "comments-post-id",
+                label: "post_id",
+                icon: <Key className="h-4 w-4" />,
+              },
+              {
+                id: "comments-user-id",
+                label: "user_id",
+                icon: <Key className="h-4 w-4" />,
+              },
+            ],
+          },
         ],
       },
     ],
     showIcons: true,
   },
-  parameters: { docs: {
+  parameters: {
+    docs: {
       description: {
-        story: 'Settings menu structure using tree view' }
+        story: "Tree view displaying a database schema with tables and columns",
       },
     },
   },
 };
 
-export const WithDataBinding: Story = { render: () => { }
-    const [selectedNode, setSelectedNode] = React.useState<TreeNode | null>(
-      null
-    );
+export const InteractiveExample: Story = {
+  render: () => {
+    const [nodes, setNodes] = React.useState<TreeNode[]>(fileSystemNodes);
+    const [selectedNodeId, setSelectedNodeId] = React.useState<
+      string | undefined
+    >();
 
-    const nodesWithData: Array<TreeNode> = [
-      { id: 'products' }
-        label: 'Products',
-        defaultExpanded: true,
-        children: [
-          { id: 'electronics' }
-            label: 'Electronics',
-            data: { category: 'electronics', itemCount: 152 },
-            children: [
-              { id: 'phones' }
-                label: 'Phones',
-                data: { subcategory: 'phones', itemCount: 45 },
-              },
-              { id: 'laptops' }
-                label: 'Laptops',
-                data: { subcategory: 'laptops', itemCount: 32 },
-              },
-              { id: 'tablets' }
-                label: 'Tablets',
-                data: { subcategory: 'tablets', itemCount: 28 },
-              },
-            ],
-          },
-          { id: 'clothing' }
-            label: 'Clothing',
-            data: { category: 'clothing', itemCount: 324 },
-            children: [
-              { id: 'mens' }
-                label: "Men's",
-                data: { subcategory: 'mens', itemCount: 156 },
-              },
-              { id: 'womens' }
-                label: "Women's",
-                data: { subcategory: 'womens', itemCount: 168 },
-              },
-            ],
-          },
-        ],
-      },
-    ];
+    const addNode = () => {
+      const newNode: TreeNode = {
+        id: `new-file-${Date.now()}`,
+        label: `new-file-${nodes.length + 1}.tsx`,
+        icon: <File className="h-4 w-4" />,
+      };
+
+      setNodes([...nodes, newNode]);
+    };
+
+    const removeSelectedNode = () => {
+      if (!selectedNodeId) return;
+
+      const removeNodeRecursively = (nodeList: TreeNode[]): TreeNode[] => {
+        return nodeList
+          .filter((node) => node.id !== selectedNodeId)
+          .map((node) => ({
+            ...node,
+            children: node.children
+              ? removeNodeRecursively(node.children)
+              : undefined,
+          }));
+      };
+
+      setNodes(removeNodeRecursively(nodes));
+      setSelectedNodeId(undefined);
+    };
 
     return (
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div>
-          <h3 className="mb-4 font-bold text-lg">Product Categories</h3>
-          <GlassTreeView
-            nodes={nodesWithData}
-            onNodeSelect={setSelectedNode}
-            selectedNodeId={selectedNode?.id}
-          />
-        </div>
-        <div>
-          <h3 className="mb-4 font-bold text-lg">Category Details</h3>
-          <GlassCard className="p-6">
-            {selectedNode?.data ? (
-              <div className="space-y-3">
-                <h4 className="font-semibold">{selectedNode.label}</h4>
-                <div className="space-y-2 text-sm">
-                  {Object.entries(selectedNode.data).map(([key, value]) => (
-                    <div key={key} className="flex justify-between">
-                      <span className="text-[var(--text-secondary)]">
-                        {key.replace(/([A-Z])/g, ' $1').trim()}:
-                      </span>
-                      <span className="font-medium">{String(value)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <p className="text-[var(--text-secondary)]">
-                Select a category to view details
+      <div className="space-y-6">
+        <GlassCard className="p-6">
+          <h3 className="mb-4 font-bold text-lg">Interactive Tree View</h3>
+          <p className="mb-4 text-[var(--text-secondary)] text-sm">
+            Select nodes and use the buttons below to add or remove items from
+            the tree.
+          </p>
+
+          <div className="mb-4 flex gap-2">
+            <GlassButton type="button" onClick={addNode} size="sm">
+              Add File
+            </GlassButton>
+            <GlassButton
+              type="button"
+              variant="danger"
+              onClick={removeSelectedNode}
+              disabled={!selectedNodeId}
+              size="sm"
+            >
+              Remove Selected
+            </GlassButton>
+          </div>
+
+          {selectedNodeId && (
+            <div className="mb-4 rounded-lg bg-blue-500/10 p-3">
+              <p className="text-sm">
+                <strong>Selected:</strong> {selectedNodeId}
               </p>
-            )}
-          </GlassCard>
-        </div>
+            </div>
+          )}
+        </GlassCard>
+
+        <GlassTreeView
+          nodes={nodes}
+          selectedNodeId={selectedNodeId}
+          onNodeSelect={(node) => setSelectedNodeId(node.id)}
+          showIcons
+        />
       </div>
     );
   },
-  parameters: { docs: {
+  parameters: {
+    docs: {
       description: {
-        story: 'Tree nodes with custom data binding' }
+        story: "Interactive tree view with add/remove functionality",
       },
     },
   },
 };
 
-export const CompactTree: Story = { args: {
+export const WithoutIcons: Story = {
+  args: {
     nodes: [
       {
-        id: 'root' }
-        label: 'Root',
+        id: "root",
+        label: "Root Folder",
+        defaultExpanded: true,
         children: [
-          { id: 'child1', label: 'Child 1' },
-          { id: 'child2', label: 'Child 2' },
-          { id: 'child3' }
-            label: 'Child 3',
+          {
+            id: "documents",
+            label: "Documents",
             children: [
-              { id: 'grandchild1', label: 'Grandchild 1' },
-              { id: 'grandchild2', label: 'Grandchild 2' },
+              { id: "doc1", label: "Document 1.pdf" },
+              { id: "doc2", label: "Document 2.docx" },
             ],
           },
+          {
+            id: "images",
+            label: "Images",
+            children: [
+              { id: "img1", label: "photo1.jpg" },
+              { id: "img2", label: "photo2.png" },
+            ],
+          },
+          { id: "readme", label: "README.txt" },
         ],
       },
     ],
     showIcons: false,
-    indentSize: 15,
   },
-  render: (args) => (
-    <div className="max-w-xs">
-      <GlassTreeView {...args} />
-    </div>
-  ),
-  parameters: { docs: {
+  parameters: {
+    docs: {
       description: {
-        story: 'Compact tree view without icons and smaller indentation' }
-      },
-    },
-  },
-};
-
-export const NonSelectableNodes: Story = { args: {
-    nodes: [
-      {
-        id: 'categories' }
-        label: 'Categories',
-        selectable: false,
-        defaultExpanded: true,
-        children: [
-          { id: 'active' }
-            label: 'Active Items',
-            selectable: false,
-            children: [
-              { id: 'item1', label: 'Item 1' },
-              { id: 'item2', label: 'Item 2' },
-            ],
-          },
-          { id: 'archived' }
-            label: 'Archived Items',
-            selectable: false,
-            children: [
-              { id: 'item3', label: 'Item 3' },
-              { id: 'item4', label: 'Item 4' },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  parameters: { docs: {
-      description: {
-        story: 'Tree with non-selectable parent nodes' }
+        story: "Tree view without icons for a cleaner, text-only appearance",
       },
     },
   },

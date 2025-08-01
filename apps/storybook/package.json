@@ -7,7 +7,10 @@
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
     "preview": "serve storybook-static",
-    "clean": "rm -rf storybook-static"
+    "clean": "rm -rf storybook-static",
+    "validate": "node ../../scripts/storybook-build-validator.cjs",
+    "check-stories": "node ../../scripts/check-stories.cjs",
+    "debug": "node ../../scripts/fix-storybook-build.cjs"
   },
   "dependencies": {},
   "devDependencies": {

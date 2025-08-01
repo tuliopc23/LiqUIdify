@@ -15,7 +15,7 @@ import {
 import { GlassTooltip } from "./glass-tooltip";
 
 const meta: Meta<typeof GlassTooltip> = {
-  title: "Components/GlassTooltip",
+  title: "Components/Feedback/GlassTooltip",
   component: GlassTooltip,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

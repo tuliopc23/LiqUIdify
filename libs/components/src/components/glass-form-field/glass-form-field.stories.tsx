@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
+import type { Meta, StoryObj } from "@storybook/react";
+import React, { useState } from "react";
 import {
   CheckCircle,
   CreditCard,
@@ -9,173 +9,48 @@ import {
   Mail,
   Phone,
   User,
-} from 'lucide-react';
-import { GlassButton } from '../glass-button-refactored/glass-button';
-import { GlassInput } from '../glass-input/glass-input';
-import { GlassSelect } from '../glass-select/glass-select';
-import { GlassTextarea } from '../glass-textarea/glass-textarea';
-import { GlassFormField } from './glass-form-field';
+} from "lucide-react";
+import { GlassButton } from "../glass-button-refactored/glass-button";
+import { GlassInput } from "../glass-input/glass-input";
+import { GlassSelect } from "../glass-select/glass-select";
+import { GlassTextarea } from "../glass-textarea/glass-textarea";
+import { GlassFormField } from "./glass-form-field";
 
-const meta = {
-  title: 'Components/Forms/GlassFormField',
+const meta: Meta<typeof GlassFormField> = {
+  title: "Components/Forms/GlassFormField",
   component: GlassFormField,
-  parameters: { layout: 'centered' },
-  tags: ['autodocs'],
+  parameters: { layout: "centered" },
+  tags: ["autodocs"],
 };
 
 export default meta;
 
 type Story = StoryObj<typeof GlassFormField>;
 
-// A comprehensive form field wrapper component with advanced glassmorphism effects, comprehensive validation states, and accessibility features.
-
-## Features
-
-- **Field Wrapper**: Complete form field with label, input, and helper text
-- **Validation States**: Error, success, warning, and default states with visual feedback
-- **Required Field Support**: Automatic asterisk display for required fields
-- **Accessibility**: Full ARIA attributes, proper labeling, and screen reader support
-- **Multiple Variants**: Default, card, and inline layouts
-- **Flexible Sizing**: Small, medium, and large sizes
-- **Glass Effects**: Beautiful backdrop blur and glassmorphism design
-- **Auto Enhancement**: Automatically adds proper IDs and ARIA attributes to children
-
-## Usage
-
-\`\`\`tsx
-import { GlassFormField } from '@/components/glass-form-field';
-import { GlassInput } from '@/components/glass-input';
-
-{/* Basic usage  */}
-<GlassFormField label="Email" required>
-  <GlassInput type="email" placeholder="Enter your email" />
-</GlassFormField>
-
-{/* With validation states  */}
-<GlassFormField
-  label="Password"
-  error="Password must be at least 8 characters"
-  required
->
-  <GlassInput type="password" placeholder="Enter password" />
-</GlassFormField>
-
-{/* Card variant  */}
-<GlassFormField
-  variant="card"
-  label="Description"
-  helperText="Provide a detailed description"
->
-  <GlassTextarea placeholder="Enter description..." />
-</GlassFormField>
-
-{/* Inline variant  */}
-<GlassFormField
-  variant="inline"
-  label="Subscribe"
->
-  <GlassCheckbox />
-</GlassFormField>
-\`\`\`
-
-## Accessibility
-
-The form field component follows WAI-ARIA guidelines:
-- Proper label association with form controls
-- Descriptive helper text and error messages
-- Required field indication for screen readers
-- Proper focus management and keyboard navigation
-- ARIA live regions for dynamic state changes
-
-## Validation States
-
-- **Default**: Normal state with optional helper text
-- **Error**: Red styling with error message and alert icon
-- **Success**: Green styling with success message and check icon
-- **Warning**: Yellow/orange styling with warning message and info icon
-        `,,
-    },
-  },
-  ['autodocs'],
-  argTypes: {'select'
-      ['default', 'card', 'inline'],
-      description: 'Visual variant of the form field',
-      table: 'default' ,,
-    },
-    { 'select' }
-      ['sm', 'md', 'lg'],
-      description: 'Size of the form field',
-      table: {'md' ,
-      },
-    },
-
-    {/* Content  */}
-    { 'text' }
-      'Label text for the form field',
-    },
-    { 'text' }
-      'Helper text displayed below the input',
-    },
-
-    {/* Validation States  */}
-    { 'text' }
-      'Error message (displays in red with alert icon)',
-    },
-    { 'text' }
-      'Success message (displays in green with check icon)',
-    },
-    { 'text' }
-      'Warning message (displays in yellow with info icon)',
-    },
-
-    {/* Behavior  */}
-    { 'boolean' }
-      'Whether the field is required (adds asterisk to label)',
-      table: {'false' ,
-      },
-    },
-    { 'boolean' }
-      'Whether the field is disabled',
-      table: {'false' ,
-      },
-    },
-
-    {/* Advanced  */}
-    { 'text' }
-      'Custom ID for the form control (auto-generated if not provided)',
-    },
-    { 'text' }
-      'Additional CSS classes',
-    },
-  },
-} satisfies Meta<typeof GlassFormField>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-{/* Basic playground story  */}
-export const Playground: Story = { args: {
-    label: 'Email Address' }
-    helperText: 'We will never share your email with anyone',
+export const Playground: Story = {
+  args: {
+    label: "Email Address",
+    helperText: "We will never share your email with anyone",
     required: false,
     disabled: false,
-    variant: 'default',
-    size: 'md',
+    variant: "default",
+    size: "md",
   },
   render: (args) => (
-    <_div _className="w-80">
-      <_GlassFormField {..._args}>
-        <_GlassInput
-          _type="email"
-          _placeholder="Enter your email"
-          _leftIcon={<_Mail className="h-4 w-4" />} />
+    <div className="w-80">
+      <GlassFormField {...args}>
+        <GlassInput
+          type="email"
+          placeholder="Enter your email"
+          leftIcon={<Mail className="h-4 w-4" />}
+        />
       </GlassFormField>
     </div>
   ),
-}
+};
 
-{/* Variants showcase  */}
-export const Variants: Story = { render: () => (
+export const Variants: Story = {
+  render: () => (
     <div className="space-y-8">
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
@@ -191,7 +66,6 @@ export const Variants: Story = { render: () => (
           </GlassFormField>
         </div>
       </div>
-
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
           Card Variant
@@ -201,12 +75,11 @@ export const Variants: Story = { render: () => (
             variant="card"
             label="Bio"
             helperText="Tell us about yourself"
-          > }
+          >
             <GlassTextarea placeholder="Write your bio here..." rows={3} />
           </GlassFormField>
         </div>
       </div>
-
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
           Inline Variant
@@ -214,7 +87,7 @@ export const Variants: Story = { render: () => (
         <div className="w-80">
           <GlassFormField variant="inline" label="Newsletter">
             <div className="flex items-center">
-              <input id="input-236" type="checkbox" className="mr-2" / />
+              <input type="checkbox" className="mr-2" />
               <span className="text-sm text-white/70">
                 Subscribe to updates
               </span>
@@ -226,10 +99,10 @@ export const Variants: Story = { render: () => (
   ),
 };
 
-{/* Sizes showcase  */}
-export const Sizes: Story = { render: () => (
-    <div className="space-y-6"> }
-      {(['sm', 'md', 'lg'] as const).map((size) => (
+export const Sizes: Story = {
+  render: () => (
+    <div className="space-y-6">
+      {(["sm", "md", "lg"] as const).map((size) => (
         <div key={size} className="w-80">
           <h3 className="mb-3 font-medium text-white/90">Size: {size}</h3>
           <GlassFormField
@@ -246,8 +119,8 @@ export const Sizes: Story = { render: () => (
   ),
 };
 
-{/* Validation states showcase  */}
-export const ValidationStates: Story = { render: () => (
+export const ValidationStates: Story = {
+  render: () => (
     <div className="space-y-6">
       <div className="w-80">
         <h3 className="mb-3 font-medium text-white/90">Default State</h3>
@@ -255,7 +128,6 @@ export const ValidationStates: Story = { render: () => (
           <GlassInput placeholder="username" />
         </GlassFormField>
       </div>
-
       <div className="w-80">
         <h3 className="mb-3 font-medium text-white/90">Error State</h3>
         <GlassFormField
@@ -266,7 +138,6 @@ export const ValidationStates: Story = { render: () => (
           <GlassInput type="password" placeholder="password" />
         </GlassFormField>
       </div>
-
       <div className="w-80">
         <h3 className="mb-3 font-medium text-white/90">Success State</h3>
         <GlassFormField
@@ -277,7 +148,6 @@ export const ValidationStates: Story = { render: () => (
           <GlassInput type="email" placeholder="john@example.com" />
         </GlassFormField>
       </div>
-
       <div className="w-80">
         <h3 className="mb-3 font-medium text-white/90">Warning State</h3>
         <GlassFormField
@@ -287,7 +157,6 @@ export const ValidationStates: Story = { render: () => (
           <GlassInput type="tel" placeholder="123-456-7890" />
         </GlassFormField>
       </div>
-
       <div className="w-80">
         <h3 className="mb-3 font-medium text-white/90">Disabled State</h3>
         <GlassFormField
@@ -299,11 +168,11 @@ export const ValidationStates: Story = { render: () => (
         </GlassFormField>
       </div>
     </div>
-  ) }
-}
+  ),
+};
 
-{/* Different input types  */}
-export const InputTypes: Story = { render: () => (
+export const InputTypes: Story = {
+  render: () => (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       <GlassFormField
         label="Email"
@@ -312,28 +181,28 @@ export const InputTypes: Story = { render: () => (
       >
         <GlassInput
           type="email"
-          placeholder="john@example.com" }
-          leftIcon={<Mail className="h-4 w-4" />} />
+          placeholder="john@example.com"
+          leftIcon={<Mail className="h-4 w-4" />}
+        />
       </GlassFormField>
-
       <GlassFormField label="Phone Number" helperText="Include country code">
         <GlassInput
           type="tel"
           placeholder="+1 (555) 123-4567"
-          leftIcon={<Phone className="h-4 w-4" />} />
+          leftIcon={<Phone className="h-4 w-4" />}
+        />
       </GlassFormField>
-
       <GlassFormField label="Country" required>
         <GlassSelect
           options={[
-            { value: 'us', label: 'United States' },
-            { value: 'ca', label: 'Canada' },
-            { value: 'uk', label: 'United Kingdom' },
-            { value: 'de', label: 'Germany' },
+            { value: "us", label: "United States" },
+            { value: "ca", label: "Canada" },
+            { value: "uk", label: "United Kingdom" },
+            { value: "de", label: "Germany" },
           ]}
-          placeholder="Select country" />
+          placeholder="Select country"
+        />
       </GlassFormField>
-
       <GlassFormField
         variant="card"
         label="Additional Notes"
@@ -345,67 +214,46 @@ export const InputTypes: Story = { render: () => (
   ),
 };
 
-{/* Real-world examples  */}
-export const RealWorldExamples: Story = { render: () => { }
-    const [formData, setFormData] = useState({ email: '' }
-      password: '',
-      confirmPassword: '',
-      firstName: '',
-      lastName: '',
-      country: '',
-    })
-
+export const RealWorldExamples: Story = {
+  render: () => {
+    const [formData, setFormData] = useState({
+      email: "",
+      password: "",
+      confirmPassword: "",
+      firstName: "",
+      lastName: "",
+      country: "",
+    });
     const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
-
-    const validateEmail = (email: string) => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    };
-
-    const validatePassword = (password: string) => {
-      return password.length >= 8;
-    };
-
+    const validateEmail = (email: string) =>
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const validatePassword = (password: string) => password.length >= 8;
     const handleInputChange = (field: string, value: string) => {
       setFormData((prev) => ({ ...prev, [field]: value }));
-
-      {/* Clear error when user starts typing  */}
-      if (errors[field]) {
-        setErrors((prev) => ({ ...prev, [field]: '' }));
-      }
-
+      if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
+    };
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       const newErrors: Record<string, string> = {};
-
-      if (!formData.firstName) newErrors.firstName = 'First name is required';
-      if (!formData.lastName) newErrors.lastName = 'Last name is required';
-      if (!formData.email) {
-        newErrors.email = 'Email is required';
-      } else if (!validateEmail(formData.email)) {
-        newErrors.email = 'Please enter a valid email';
-      }
-      if (!formData.password) {
-        newErrors.password = 'Password is required';
-      } else if (!validatePassword(formData.password)) {
-        newErrors.password = 'Password must be at least 8 characters';
-      }
-      if (formData.password !== formData.confirmPassword) {
-        newErrors.confirmPassword = 'Passwords do not match';
-      }
-      if (!formData.country) newErrors.country = 'Please select a country';
-
+      if (!formData.firstName) newErrors.firstName = "First name is required";
+      if (!formData.lastName) newErrors.lastName = "Last name is required";
+      if (!formData.email) newErrors.email = "Email is required";
+      else if (!validateEmail(formData.email))
+        newErrors.email = "Please enter a valid email";
+      if (!formData.password) newErrors.password = "Password is required";
+      else if (!validatePassword(formData.password))
+        newErrors.password = "Password must be at least 8 characters";
+      if (formData.password !== formData.confirmPassword)
+        newErrors.confirmPassword = "Passwords do not match";
+      if (!formData.country) newErrors.country = "Please select a country";
       setErrors(newErrors);
-
-      if (Object.keys(newErrors).length === 0) {
-        alert('Form submitted successfully!');
-      }
-
+      if (Object.keys(newErrors).length === 0)
+        alert("Form submitted successfully!");
+    };
     return (
       <div className="w-full max-w-md">
         <h3 className="mb-6 font-bold text-white/90 text-xl">Create Account</h3>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <GlassFormField
@@ -416,25 +264,25 @@ export const RealWorldExamples: Story = { render: () => { }
               <GlassInput
                 placeholder="John"
                 value={formData.firstName}
-                onChange={(e) => handleInputChange('firstName', e.target.value)}
-                leftIcon={<User className="h-4 w-4" />} />
+                onChange={(e) => handleInputChange("firstName", e.target.value)}
+                leftIcon={<User className="h-4 w-4" />}
+              />
             </GlassFormField>
-
             <GlassFormField label="Last Name" required error={errors.lastName}>
               <GlassInput
                 placeholder="Doe"
                 value={formData.lastName}
-                onChange={(e) => handleInputChange('lastName', e.target.value)} />
+                onChange={(e) => handleInputChange("lastName", e.target.value)}
+              />
             </GlassFormField>
           </div>
-
           <GlassFormField
             label="Email"
             required
             error={errors.email}
             success={
               formData.email && validateEmail(formData.email)
-                ? 'Email looks good!'
+                ? "Email looks good!"
                 : undefined
             }
           >
@@ -442,10 +290,10 @@ export const RealWorldExamples: Story = { render: () => { }
               type="email"
               placeholder="john@example.com"
               value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
-              leftIcon={<Mail className="h-4 w-4" />} />
+              onChange={(e) => handleInputChange("email", e.target.value)}
+              leftIcon={<Mail className="h-4 w-4" />}
+            />
           </GlassFormField>
-
           <GlassFormField
             label="Password"
             required
@@ -453,15 +301,15 @@ export const RealWorldExamples: Story = { render: () => { }
             helperText="Must be at least 8 characters"
           >
             <GlassInput
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               placeholder="••••••••"
               value={formData.password}
-              onChange={(e) => handleInputChange('password', e.target.value)}
+              onChange={(e) => handleInputChange("password", e.target.value)}
               leftIcon={<Lock className="h-4 w-4" />}
               rightIcon={
                 <button
                   type="button"
-              onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword(!showPassword)}
                   className="text-white/60 hover:text-white/90"
                 >
                   {showPassword ? (
@@ -470,9 +318,9 @@ export const RealWorldExamples: Story = { render: () => { }
                     <Eye className="h-4 w-4" />
                   )}
                 </button>
-              } />
+              }
+            />
           </GlassFormField>
-
           <GlassFormField
             label="Confirm Password"
             required
@@ -483,26 +331,26 @@ export const RealWorldExamples: Story = { render: () => { }
               placeholder="••••••••"
               value={formData.confirmPassword}
               onChange={(e) =>
-                handleInputChange('confirmPassword', e.target.value)
+                handleInputChange("confirmPassword", e.target.value)
               }
-              leftIcon={<Lock className="h-4 w-4" />} />
+              leftIcon={<Lock className="h-4 w-4" />}
+            />
           </GlassFormField>
-
           <GlassFormField label="Country" required error={errors.country}>
             <GlassSelect
               value={formData.country}
-              onChange={(value) => handleInputChange('country', value)}
+              onChange={(value) => handleInputChange("country", value)}
               options={[
-                { value: 'us', label: 'United States' },
-                { value: 'ca', label: 'Canada' },
-                { value: 'uk', label: 'United Kingdom' },
-                { value: 'de', label: 'Germany' },
-                { value: 'fr', label: 'France' },
-                { value: 'jp', label: 'Japan' },
+                { value: "us", label: "United States" },
+                { value: "ca", label: "Canada" },
+                { value: "uk", label: "United Kingdom" },
+                { value: "de", label: "Germany" },
+                { value: "fr", label: "France" },
+                { value: "jp", label: "Japan" },
               ]}
-              placeholder="Select your country" />
+              placeholder="Select your country"
+            />
           </GlassFormField>
-
           <div className="pt-4">
             <GlassButton
               type="submit"
@@ -519,30 +367,29 @@ export const RealWorldExamples: Story = { render: () => { }
   },
 };
 
-{/* Interactive playground  */}
-export const InteractiveDemo: Story = { render: () => { }
+export const InteractiveDemo: Story = {
+  render: () => {
     const [fieldState, setFieldState] = useState<
-      'default' | 'error' | 'success' | 'warning'
-    >('default');
+      "default" | "error" | "success" | "warning"
+    >("default");
     const [isRequired, setIsRequired] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
-    const [variant, setVariant] = useState<'default' | 'card' | 'inline'>(
-      'default'
+    const [variant, setVariant] = useState<"default" | "card" | "inline">(
+      "default",
     );
-    const [size, setSize] = useState<'sm' | 'md' | 'lg'>('md');
-
+    const [size, setSize] = useState<"sm" | "md" | "lg">("md");
     const getStateProps = () => {
       switch (fieldState) {
-        case 'error':
-          return { error: 'This field has an error' };
-        case 'success':
-          return { success: 'This field is valid' };
-        case 'warning':
-          return { warning: 'This field has a warning' };
+        case "error":
+          return { error: "This field has an error" };
+        case "success":
+          return { success: "This field is valid" };
+        case "warning":
+          return { warning: "This field has a warning" };
         default:
-          return { helperText: 'This is helper text' };
+          return { helperText: "This is helper text" };
       }
-
+    };
     return (
       <div className="space-y-8">
         <div>
@@ -551,20 +398,12 @@ export const InteractiveDemo: Story = { render: () => { }
           </h3>
           <div className="grid grid-cols-2 gap-4 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm md:grid-cols-4">
             <div>
-              <label htmlFor="state-dvqv2f" className="mb-2 block font-medium text-sm text-white/90">
+              <label className="mb-2 block font-medium text-sm text-white/90">
                 State
               </label>
-              <select id="select-1-s6d1zt"
+              <select
                 value={fieldState}
-                onChange={(e) =>
-                  setFieldState(
-                    e.target.value as
-                      | 'default'
-                      | 'error'
-                      | 'success'
-                      | 'warning'
-                  )
-                }
+                onChange={(e) => setFieldState(e.target.value as any)}
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
               >
                 <option value="default">Default</option>
@@ -573,16 +412,13 @@ export const InteractiveDemo: Story = { render: () => { }
                 <option value="warning">Warning</option>
               </select>
             </div>
-
             <div>
-              <label htmlFor="variant-yqlnr8" className="mb-2 block font-medium text-sm text-white/90">
+              <label className="mb-2 block font-medium text-sm text-white/90">
                 Variant
               </label>
-              <select id="select-2-g1he0o"
+              <select
                 value={variant}
-                onChange={(e) =>
-                  setVariant(e.target.value as 'default' | 'card' | 'inline')
-                }
+                onChange={(e) => setVariant(e.target.value as any)}
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
               >
                 <option value="default">Default</option>
@@ -590,14 +426,13 @@ export const InteractiveDemo: Story = { render: () => { }
                 <option value="inline">Inline</option>
               </select>
             </div>
-
             <div>
-              <label htmlFor="size-gc5vu1" className="mb-2 block font-medium text-sm text-white/90">
+              <label className="mb-2 block font-medium text-sm text-white/90">
                 Size
               </label>
-              <select id="select-3-e4wrh6"
+              <select
                 value={size}
-                onChange={(e) => setSize(e.target.value as 'sm' | 'md' | 'lg')}
+                onChange={(e) => setSize(e.target.value as any)}
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
               >
                 <option value="sm">Small</option>
@@ -605,27 +440,26 @@ export const InteractiveDemo: Story = { render: () => { }
                 <option value="lg">Large</option>
               </select>
             </div>
-
             <div className="space-y-2">
-              <label htmlFor="form-field" className="flex items-center gap-2">
-                <input id="input-636"
+              <label className="flex items-center gap-2">
+                <input
                   type="checkbox"
                   checked={isRequired}
-                  onChange={(e) => setIsRequired(e.target.checked)} />
+                  onChange={(e) => setIsRequired(e.target.checked)}
+                />
                 <span className="text-sm text-white/90">Required</span>
               </label>
-
-              <label htmlFor="form-field" className="flex items-center gap-2">
-                <input id="input-644"
+              <label className="flex items-center gap-2">
+                <input
                   type="checkbox"
                   checked={isDisabled}
-                  onChange={(e) => setIsDisabled(e.target.checked)} />
+                  onChange={(e) => setIsDisabled(e.target.checked)}
+                />
                 <span className="text-sm text-white/90">Disabled</span>
               </label>
             </div>
           </div>
         </div>
-
         <div>
           <h3 className="mb-4 font-semibold text-lg text-white/90">
             Live Preview
@@ -641,7 +475,8 @@ export const InteractiveDemo: Story = { render: () => { }
             >
               <GlassInput
                 placeholder="Type something..."
-                leftIcon={<CreditCard className="h-4 w-4" />} />
+                leftIcon={<CreditCard className="h-4 w-4" />}
+              />
             </GlassFormField>
           </div>
         </div>
@@ -650,8 +485,8 @@ export const InteractiveDemo: Story = { render: () => { }
   },
 };
 
-{/* Theme showcase  */}
-export const ThemeShowcase: Story = { render: () => (
+export const ThemeShowcase: Story = {
+  render: () => (
     <div className="space-y-8">
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
@@ -666,13 +501,13 @@ export const ThemeShowcase: Story = { render: () => (
             >
               <GlassInput
                 type="email"
-                placeholder="john@example.com" }
-                leftIcon={<Mail className="h-4 w-4" />} />
+                placeholder="john@example.com"
+                leftIcon={<Mail className="h-4 w-4" />}
+              />
             </GlassFormField>
           </div>
         </div>
       </div>
-
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
           Dark Theme (Current)
@@ -687,12 +522,12 @@ export const ThemeShowcase: Story = { render: () => (
               <GlassInput
                 type="email"
                 placeholder="john@example.com"
-                leftIcon={<Mail className="h-4 w-4" />} />
+                leftIcon={<Mail className="h-4 w-4" />}
+              />
             </GlassFormField>
           </div>
         </div>
       </div>
-
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
           Gradient Background
@@ -707,7 +542,8 @@ export const ThemeShowcase: Story = { render: () => (
               <GlassInput
                 type="email"
                 placeholder="john@example.com"
-                leftIcon={<Mail className="h-4 w-4" />} />
+                leftIcon={<Mail className="h-4 w-4" />}
+              />
             </GlassFormField>
           </div>
         </div>
@@ -716,8 +552,8 @@ export const ThemeShowcase: Story = { render: () => (
   ),
 };
 
-{/* Accessibility showcase  */}
-export const AccessibilityShowcase: Story = { render: () => (
+export const AccessibilityShowcase: Story = {
+  render: () => (
     <div className="space-y-8">
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
@@ -752,7 +588,6 @@ export const AccessibilityShowcase: Story = { render: () => (
           </ul>
         </div>
       </div>
-
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
           Keyboard Navigation Test
@@ -765,11 +600,9 @@ export const AccessibilityShowcase: Story = { render: () => (
           >
             <GlassInput placeholder="Focus me with Tab" />
           </GlassFormField>
-
           <GlassFormField label="Last Name" required>
             <GlassInput placeholder="Continue with Tab" />
           </GlassFormField>
-
           <GlassFormField
             label="Email"
             error="This field has an error announcement"
@@ -777,17 +610,17 @@ export const AccessibilityShowcase: Story = { render: () => (
           >
             <GlassInput
               type="email"
-              placeholder="Error state for screen readers" />
+              placeholder="Error state for screen readers"
+            />
           </GlassFormField>
-
           <GlassFormField label="Comments" helperText="Shift+Tab to go back">
             <GlassTextarea
-              placeholder="Test keyboard navigation here..." }
-              rows={3} />
+              placeholder="Test keyboard navigation here..."
+              rows={3}
+            />
           </GlassFormField>
         </div>
       </div>
-
       <div>
         <h3 className="mb-4 font-semibold text-lg text-white/90">
           Screen Reader Test
@@ -800,7 +633,8 @@ export const AccessibilityShowcase: Story = { render: () => (
           >
             <GlassInput
               placeholder="Try with a screen reader"
-              aria-label="Screen reader friendly input field" />
+              aria-label="Screen reader friendly input field"
+            />
           </GlassFormField>
         </div>
       </div>

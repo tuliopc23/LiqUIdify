@@ -383,26 +383,6 @@ function PlaygroundPreview() {
   );
 }
 
-import { Check, Code, Copy, Download, Eye, Maximize2 } from "lucide-react";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { cn } from "@/core/utils/classname";
-import { useSSRSafeWindow } from "@/hooks/use-ssr-safe";
-
-// Import specific components instead of wildcard
-
-import {
-  GlassBadge,
-  GlassButton,
-  GlassCard,
-  GlassCheckbox,
-  GlassInput,
-  GlassModal,
-  GlassProgress,
-  GlassSwitch,
-  GlassTooltip,
-} from "@/index";
-import { GlassTabs } from "../glass-tabs";
-
 interface PlaygroundProps {
   code: string;
   scope?: Record<string, unknown>;

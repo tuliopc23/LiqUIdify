@@ -54,6 +54,7 @@
     "vite": "^7.0.6",
     "vite-plugin-compression2": "^2.2.0",
     "vite-plugin-dts": "^5.0.0-beta.6",
+    "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^3.2.4"
   },
   "engines": {
@@ -64,7 +65,7 @@
       "types": "./dist/libs/components/index.d.ts",
       "style": "./dist/libs/components/liquidui.css",
       "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs"
+      "require": "./dist/libs/components/cjs/index.cjs"
     },
     "./accessibility": {
       "types": "./dist/libs/components/bundles/accessibility.d.ts",
@@ -82,12 +83,12 @@
       "require": "./dist/libs/components/cjs/animations.cjs"
     },
     "./button": {
-      "types": "./dist/libs/components/components/glass-button-refactored/index.d.ts",
+      "types": "./dist/libs/components/components/button.d.ts",
       "import": "./dist/libs/components/components/button.mjs",
       "require": "./dist/libs/components/cjs/components/button.cjs"
     },
     "./card": {
-      "types": "./dist/libs/components/components/glass-card-refactored/index.d.ts",
+      "types": "./dist/libs/components/components/card.d.ts",
       "import": "./dist/libs/components/components/card.mjs",
       "require": "./dist/libs/components/cjs/components/card.cjs"
     },
@@ -119,12 +120,12 @@
       "require": "./dist/libs/components/cjs/forms.cjs"
     },
     "./input": {
-      "types": "./dist/libs/components/components/glass-input/index.d.ts",
+      "types": "./dist/libs/components/components/input.d.ts",
       "import": "./dist/libs/components/components/input.mjs",
       "require": "./dist/libs/components/cjs/components/input.cjs"
     },
     "./avatar": {
-      "types": "./dist/libs/components/components/glass-avatar/index.d.ts",
+      "types": "./dist/libs/components/components/avatar.d.ts",
       "import": "./dist/libs/components/components/avatar.mjs",
       "require": "./dist/libs/components/cjs/components/avatar.cjs"
     },
@@ -134,7 +135,7 @@
       "require": "./dist/libs/components/cjs/layout.cjs"
     },
     "./modal": {
-      "types": "./dist/libs/components/components/glass-modal/index.d.ts",
+      "types": "./dist/libs/components/components/modal.d.ts",
       "import": "./dist/libs/components/components/modal.mjs",
       "require": "./dist/libs/components/cjs/components/modal.cjs"
     },
@@ -191,7 +192,7 @@
     "production-ready"
   ],
   "license": "MIT",
-  "main": "./dist/libs/components/index.cjs",
+  "main": "./dist/libs/components/cjs/index.cjs",
   "module": "./dist/libs/components/index.mjs",
   "name": "@liquidify/components",
   "peerDependencies": {
@@ -204,10 +205,10 @@
   },
   "scripts": {
     "build": "bun run build:lib && bun run build:storybook && bun run docs:build",
-    "build:lib": "vite build --config vite.config.ts --mode production",
+    "build:lib": "vite build --config vite.config.mts --mode production",
     "build:storybook": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static",
-    "build:watch": "vite build --config vite.config.ts --watch",
-    "dev": "vite --config vite.config.ts",
+    "build:watch": "vite build --config vite.config.mts --watch",
+    "dev": "vite --config vite.config.mts",
     "storybook": "storybook dev -p 6006 -c apps/storybook/.storybook",
     "docs:dev": "mintlify dev apps/docs",
     "docs:build": "mintlify build apps/docs",
@@ -225,7 +226,13 @@
     "test:all": "bun run test && bun run test:integration && bun run test:build && bun run test:e2e && bun run test:performance && bun run test:a11y",
     "type-check": "bunx tsc --noEmit --project tsconfig.json",
     "analyze:bundle": "node scripts/bundle-analysis.js",
+    "validate:config": "test -f vite.config.mts || (echo 'vite.config.mts not found' && exit 1)",
     "validate:build-config": "node scripts/validate-build-config.js",
+    "validate:exports": "node scripts/validate-exports.js",
+    "fix:typescript": "node scripts/fix-typescript-config.js",
+    "debug:typescript": "tsc --noEmit --listFiles",
+    "check:tsconfig": "tsc --noEmit --project tsconfig.json",
+    "prebuild:lib": "bun run validate:config && bun run fix:typescript",
     "deploy:validate": "node scripts/pre-deployment-check.js",
     "deploy:preview": "bun run deploy:validate && echo 'Ready for deployment preview'",
     "deploy:production": "bun run deploy:validate && echo 'Ready for production deployment'",
@@ -234,7 +241,7 @@
     "audit:security": "node scripts/security-audit.js",
     "audit:accessibility": "node scripts/accessibility-audit.js",
     "audit:all": "bun run audit:security && bun run audit:components && bun run audit:accessibility",
-    "ci": "bun run type-check && bun run lint && bun run test:all && bun run build && bun run audit:all",
+    "ci": "bun run type-check && bun run lint && bun run test:all && bun run build && bun run validate:exports && bun run audit:all",
     "ci:quick": "bun run type-check && bun run lint && bun run test",
     "release:prepare": "bun run ci && bun run analyze:bundle && bun run analyze:performance",
     "launch:final-check": "bun run audit:all && bun run analyze:bundle && bun run analyze:performance",

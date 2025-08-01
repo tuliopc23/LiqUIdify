@@ -1,4 +1,5 @@
-import type { StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 import {
   Bell,
   Code,
@@ -7,102 +8,24 @@ import {
   Shield,
   Terminal,
   User,
-} from 'lucide-react';
-import { useState } from 'react';
-import { type GlassTabItem, GlassTabs } from './glass-tabs';
+} from "lucide-react";
+import { type GlassTabItem, GlassTabs } from "./glass-tabs";
 
-const meta = {
-  title: 'Glass UI/GlassTabs',
+const meta: Meta<typeof GlassTabs> = {
+  title: "Components/Navigation/GlassTabs",
   component: GlassTabs,
-  parameters: { layout: 'centered' },
-  tags: ['autodocs'],
+  parameters: { layout: "centered" },
+  tags: ["autodocs"],
 };
 
 export default meta;
 
 type Story = StoryObj<typeof GlassTabs>;
 
-export const Default: Story = {
-        `
-## GlassTabs Component
- }
-A sophisticated tab component with glassmorphic design, smooth transitions, and full accessibility support. Perfect for organizing content into logical sections with elegant visual separation.
-
-### Key Features
-- **Glassmorphic Design**: Beautiful translucent tab panels with blur effects
-- **Smooth Transitions**: Elegant animations when switching tabs
-- **Fully Accessible**: ARIA compliant with keyboard navigation
-- **Flexible Content**: Support for any React content in tabs
-- **Disabled Support**: Individual tabs can be disabled
-- **Customizable Styling**: Override classes for tabs and panels
-
-### Usage
-
-\`\`\`tsx
-import { GlassTabs, GlassTabItem } from '@/components/glass-tabs';
-
-const tabs: Array<GlassTabItem> = [
-  { id: 'tab1' }
-    label: 'Profile',
-    content: <ProfileContent />
-  },
-  { id: 'tab2' }
-    label: 'Settings',
-    content: <SettingsContent />
-  }
-];
-
-function MyComponent() {
-  return (
-    <GlassTabs
-      tabs={tabs}
-      defaultTab="tab1" />
-  );
-}
-\`\`\`
-        `,,
-    },
-  },
-  ['autodocs'],
-  argTypes: {
-      'object'
-      'Array of tab items',
-    },
-    { 'text' }
-      'ID of the default active tab',
-    },
-    { 'text' }
-      'Additional CSS classes for container',
-    },
-    { 'text' }
-      'Additional CSS classes for tab list',
-    },
-    { 'text' }
-      'Additional CSS classes for tab buttons',
-    },
-    { 'text' }
-      'CSS classes for active tab button',
-    },
-    { 'text' }
-      'CSS classes for inactive tab buttons',
-    },
-    { 'text' }
-      'Additional CSS classes for tab panels',
-    },
-    { 'select' }
-      ['horizontal', 'vertical'],
-      description: 'Tab orientation (future enhancement)',
-    },
-  },
-} satisfies Meta<typeof GlassTabs>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-{/* Basic tabs for examples  */}
 const basicTabs: Array<GlassTabItem> = [
-  { id: 'overview' }
-    label: 'Overview',
+  {
+    id: "overview",
+    label: "Overview",
     content: (
       <div className="space-y-4">
         <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -115,8 +38,9 @@ const basicTabs: Array<GlassTabItem> = [
       </div>
     ),
   },
-  { 'details' }
-    'Details',
+  {
+    id: "details",
+    label: "Details",
     content: (
       <div className="space-y-4">
         <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -128,8 +52,9 @@ const basicTabs: Array<GlassTabItem> = [
       </div>
     ),
   },
-  { 'resources' }
-    'Resources',
+  {
+    id: "resources",
+    label: "Resources",
     content: (
       <div className="space-y-4">
         <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -141,26 +66,18 @@ const basicTabs: Array<GlassTabItem> = [
       </div>
     ),
   },
-]
+];
 
-{/* Default Story  */}
-export const Default: Story = { args: {
-    tabs: basicTabs }
-  },
+export const Default: Story = { args: { tabs: basicTabs } };
+export const WithDefaultTab: Story = {
+  args: { tabs: basicTabs, defaultTab: "details" },
 };
 
-{/* With Default Tab  */}
-export const WithDefaultTab: Story = { args: {
-    tabs: basicTabs }
-    defaultTab: 'details',
-  },
-};
-
-{/* With Icons  */}
-export const WithIcons: Story = { args: {
+export const WithIcons: Story = {
+  args: {
     tabs: [
       {
-        id: 'profile' }
+        id: "profile",
         label: (
           <span className="flex items-center gap-2">
             <User className="h-4 w-4" />
@@ -178,8 +95,9 @@ export const WithIcons: Story = { args: {
           </div>
         ),
       },
-      { 'notifications' }
-        (
+      {
+        id: "notifications",
+        label: (
           <span className="flex items-center gap-2">
             <Bell className="h-4 w-4" />
             Notifications
@@ -196,8 +114,9 @@ export const WithIcons: Story = { args: {
           </div>
         ),
       },
-      { 'security' }
-        (
+      {
+        id: "security",
+        label: (
           <span className="flex items-center gap-2">
             <Shield className="h-4 w-4" />
             Security
@@ -216,40 +135,42 @@ export const WithIcons: Story = { args: {
       },
     ],
   },
-}
+};
 
-{/* With Disabled Tabs  */}
-export const WithDisabledTabs: Story = { args: {
+export const WithDisabledTabs: Story = {
+  args: {
     tabs: [
       {
-        id: 'active1' }
-        label: 'Active Tab 1',
+        id: "active1",
+        label: "Active Tab 1",
         content: <div>This tab is active and clickable.</div>,
       },
-      { 'disabled1' }
-        'Disabled Tab',
+      {
+        id: "disabled1",
+        label: "Disabled Tab",
         content: <div>This content is not accessible.</div>,
         disabled: true,
       },
-      { 'active2' }
-        'Active Tab 2',
+      {
+        id: "active2",
+        label: "Active Tab 2",
         content: <div>Another active tab.</div>,
       },
-      { 'disabled2' }
-        'Another Disabled',
+      {
+        id: "disabled2",
+        label: "Another Disabled",
         content: <div>This content is also not accessible.</div>,
         disabled: true,
       },
     ],
   },
-}
+};
 
-{/* Interactive Demo  */}
-export const InteractiveDemo: Story = { render: () => { }
-    const [_activeSection, _setActiveSection] = useState<string>('');
-
+export const InteractiveDemo: Story = {
+  render: () => {
     const demoTabs: Array<GlassTabItem> = [
-      { id: 'frontend' }
+      {
+        id: "frontend",
         label: (
           <span className="flex items-center gap-2">
             <Code className="h-4 w-4" />
@@ -282,8 +203,9 @@ export const InteractiveDemo: Story = { render: () => { }
           </div>
         ),
       },
-      { 'backend' }
-        (
+      {
+        id: "backend",
+        label: (
           <span className="flex items-center gap-2">
             <Database className="h-4 w-4" />
             Backend
@@ -315,8 +237,9 @@ export const InteractiveDemo: Story = { render: () => { }
           </div>
         ),
       },
-      { 'devops' }
-        (
+      {
+        id: "devops",
+        label: (
           <span className="flex items-center gap-2">
             <Terminal className="h-4 w-4" />
             DevOps
@@ -348,22 +271,21 @@ export const InteractiveDemo: Story = { render: () => { }
           </div>
         ),
       },
-    ]
-
+    ];
     return (
       <div className="w-[600px]">
         <GlassTabs tabs={demoTabs} />
       </div>
     );
   },
-}
+};
 
-{/* Settings Example  */}
-export const SettingsExample: Story = { render: () => {
+export const SettingsExample: Story = {
+  render: () => {
     const settingsTabs: Array<GlassTabItem> = [
       {
-        id: 'account' }
-        label: 'Account',
+        id: "account",
+        label: "Account",
         content: (
           <div className="space-y-6">
             <div>
@@ -372,56 +294,66 @@ export const SettingsExample: Story = { render: () => {
               </h3>
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="username-x1hayd" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+                  <label
+                    htmlFor="username-settings"
+                    className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+                  >
                     Username
                   </label>
-                  <input id="input-402"
+                  <input
+                    id="username-settings"
                     type="text"
                     className="w-full rounded-lg border border-gray-300 px-4 py-2 dark:border-gray-600"
                     placeholder="john_doe"
-                  / />
+                  />
                 </div>
                 <div>
-                  <label htmlFor="email-llg1wu" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
+                  <label
+                    htmlFor="email-settings"
+                    className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300"
+                  >
                     Email
                   </label>
-                  <input id="input-412"
+                  <input
+                    id="email-settings"
                     type="email"
                     className="w-full rounded-lg border border-gray-300 px-4 py-2 dark:border-gray-600"
                     placeholder="john@example.com"
-                  / />
+                  />
                 </div>
               </div>
             </div>
           </div>
         ),
       },
-      { 'privacy' }
-        'Privacy',
+      {
+        id: "privacy",
+        label: "Privacy",
         content: (
           <div className="space-y-6">
             <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
               Privacy Settings
             </h3>
             <div className="space-y-4">
-              <label htmlFor="form-field" className="flex items-center gap-3">
-                <input id="input-433" type="checkbox" className="rounded" / />
+              <label className="flex items-center gap-3">
+                <input type="checkbox" className="rounded" />
                 <span className="text-sm">Make profile public</span>
               </label>
-              <label htmlFor="form-field" className="flex items-center gap-3">
-                <input id="input-437" type="checkbox" className="rounded" / />
+              <label className="flex items-center gap-3">
+                <input type="checkbox" className="rounded" />
                 <span className="text-sm">Show email address</span>
               </label>
-              <label htmlFor="form-field" className="flex items-center gap-3">
-                <input id="input-441" type="checkbox" className="rounded" / />
+              <label className="flex items-center gap-3">
+                <input type="checkbox" className="rounded" />
                 <span className="text-sm">Allow direct messages</span>
               </label>
             </div>
           </div>
         ),
       },
-      { 'billing' }
-        'Billing',
+      {
+        id: "billing",
+        label: "Billing",
         content: (
           <div className="space-y-6">
             <h3 className="mb-4 font-semibold text-gray-900 text-lg dark:text-white">
@@ -445,22 +377,21 @@ export const SettingsExample: Story = { render: () => {
           </div>
         ),
       },
-    ]
-
+    ];
     return (
       <div className="w-[500px]">
         <GlassTabs tabs={settingsTabs} />
       </div>
     );
   },
-}
+};
 
-{/* Documentation Example  */}
-export const DocumentationExample: Story = { render: () => {
-    const _docsTabs: Array<GlassTabItem> = [
+export const DocumentationExample: Story = {
+  render: () => {
+    const docsTabs: Array<GlassTabItem> = [
       {
-        id: 'installation' }
-        label: 'Installation',
+        id: "installation",
+        label: "Installation",
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -476,28 +407,23 @@ export const DocumentationExample: Story = { render: () => {
           </div>
         ),
       },
-      { 'usage' }
-        'Usage',
+      {
+        id: "usage",
+        label: "Usage",
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
               Basic Usage
             </h3>
             <pre className="overflow-x-auto rounded-lg bg-gray-900 p-4 text-gray-100">
-              <code>{`import { GlassTabs } from 'glass-ui-components';
-
-const tabs = [
-  { id: 'tab1', label: 'Tab 1', content: <div>Content 1</div> },
-  { id: 'tab2', label: 'Tab 2', content: <div>Content 2</div> }
-];
-
-<GlassTabs tabs={tabs} />`}</code>
+              <code>{`import { GlassTabs } from 'glass-ui-components';\n\nconst tabs = [\n  { id: 'tab1', label: 'Tab 1', content: <div>Content 1</div> },\n  { id: 'tab2', label: 'Tab 2', content: <div>Content 2</div> }\n];\n\n<GlassTabs tabs={tabs} />`}</code>
             </pre>
           </div>
         ),
       },
-      { 'api' }
-        'API',
+      {
+        id: "api",
+        label: "API",
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -512,9 +438,9 @@ const tabs = [
                 </tr>
               </thead>
               <tbody className="text-gray-600 dark:text-gray-400">
-                 <tr className="border-b">
+                <tr className="border-b">
                   <td className="py-2">tabs</td>
-                  <td className="py-2">Array<GlassTabItem/>
+                  <td className="py-2">Array&lt;GlassTabItem&gt;</td>
                   <td className="py-2">required</td>
                 </tr>
                 <tr className="border-b">
@@ -533,45 +459,46 @@ const tabs = [
         ),
       },
     ];
-
     return (
       <div className="w-[600px]">
-        <GlassTabs tabs={_docsTabs} />
+        <GlassTabs tabs={docsTabs} />
       </div>
     );
   },
 };
 
-{/* Custom Styling  */}
-export const CustomStyling: Story = { {
-    [
+export const CustomStyling: Story = {
+  args: {
+    tabs: [
       {
-        id: 'custom1' }
-        label: 'Custom Tab 1',
+        id: "custom1",
+        label: "Custom Tab 1",
         content: <div>Custom styled content 1</div>,
       },
-      { 'custom2' }
-        'Custom Tab 2',
+      {
+        id: "custom2",
+        label: "Custom Tab 2",
         content: <div>Custom styled content 2</div>,
       },
-      { 'custom3' }
-        label: 'Custom Tab 3',
+      {
+        id: "custom3",
+        label: "Custom Tab 3",
         content: <div>Custom styled content 3</div>,
       },
     ],
-    tabListClassName: 'bg-gradient-to-r from-purple-500/20 to-blue-500/20',
+    tabListClassName: "bg-gradient-to-r from-purple-500/20 to-blue-500/20",
     activeTabButtonClassName:
-      'bg-gradient-to-r from-purple-500 to-blue-500 text-white',
-    inactiveTabButtonClassName: 'text-gray-600 hover:text-purple-600',
+      "bg-gradient-to-r from-purple-500 to-blue-500 text-white",
+    inactiveTabButtonClassName: "text-gray-600 hover:text-purple-600",
   },
 };
 
-{/* Accessibility Demo  */}
-export const AccessibilityDemo: Story = { () => {
+export const AccessibilityDemo: Story = {
+  render: () => {
     const accessibilityTabs: Array<GlassTabItem> = [
       {
-        id: 'keyboard' }
-        label: 'Keyboard Nav',
+        id: "keyboard",
+        label: "Keyboard Nav",
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -600,8 +527,9 @@ export const AccessibilityDemo: Story = { () => {
           </div>
         ),
       },
-      { id: 'aria' }
-        'ARIA Support',
+      {
+        id: "aria",
+        label: "ARIA Support",
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -633,8 +561,9 @@ export const AccessibilityDemo: Story = { () => {
           </div>
         ),
       },
-      { 'screen-reader' }
-        label: 'Screen Readers',
+      {
+        id: "screen-reader",
+        label: "Screen Readers",
         content: (
           <div className="space-y-4">
             <h3 className="font-semibold text-gray-900 text-lg dark:text-white">
@@ -653,7 +582,6 @@ export const AccessibilityDemo: Story = { () => {
         ),
       },
     ];
-
     return (
       <div className="w-[500px]">
         <GlassTabs tabs={accessibilityTabs} />
