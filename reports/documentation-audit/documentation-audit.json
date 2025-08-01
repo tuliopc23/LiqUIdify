@@ -1,0 +1,208 @@
+{
+  "timestamp": "2025-08-01T00:39:49.414Z",
+  "summary": {
+    "components": {
+      "total": 53,
+      "documented": 59,
+      "missing": [],
+      "incomplete": [],
+      "highQuality": [
+        "accessible-demo",
+        "accordion",
+        "alert",
+        "avatar",
+        "badge",
+        "banner",
+        "breadcrumbs",
+        "button-refactored",
+        "card-refactored",
+        "chart",
+        "checkbox",
+        "checkbox-group",
+        "combobox",
+        "command",
+        "date-picker",
+        "drawer",
+        "dropdown",
+        "error-boundary",
+        "file-upload",
+        "focus-demo",
+        "focus-trap",
+        "form-field",
+        "input",
+        "live-region",
+        "loading",
+        "mobile-nav",
+        "modal",
+        "notification",
+        "number-input",
+        "pagination",
+        "performance-dashboard",
+        "playground",
+        "popover",
+        "portal",
+        "progress",
+        "radio-group",
+        "responsive-button",
+        "responsive-card",
+        "search",
+        "select",
+        "skeleton",
+        "skip-navigation",
+        "slider",
+        "spinner",
+        "switch",
+        "table",
+        "tabs",
+        "textarea",
+        "timeline",
+        "toast",
+        "tooltip",
+        "tree-view",
+        "visually-hidden"
+      ]
+    },
+    "guides": {
+      "total": 8,
+      "existing": 16,
+      "missing": [],
+      "incomplete": []
+    },
+    "stories": {
+      "total": 53,
+      "complete": 56,
+      "missing": [
+        "accessible-demo",
+        "alert",
+        "banner",
+        "error-boundary",
+        "focus-demo",
+        "focus-trap",
+        "live-region",
+        "performance-dashboard",
+        "portal",
+        "timeline",
+        "tree-view",
+        "visually-hidden"
+      ]
+    },
+    "coverage": {
+      "overall": 111,
+      "byCategory": {
+        "core": {
+          "total": 5,
+          "documented": 5,
+          "percentage": 100
+        },
+        "forms": {
+          "total": 11,
+          "documented": 11,
+          "percentage": 100
+        },
+        "navigation": {
+          "total": 5,
+          "documented": 5,
+          "percentage": 100
+        },
+        "feedback": {
+          "total": 8,
+          "documented": 8,
+          "percentage": 100
+        },
+        "data": {
+          "total": 5,
+          "documented": 5,
+          "percentage": 100
+        },
+        "layout": {
+          "total": 3,
+          "documented": 3,
+          "percentage": 100
+        },
+        "utility": {
+          "total": 3,
+          "documented": 3,
+          "percentage": 100
+        },
+        "accessibility": {
+          "total": 4,
+          "documented": 4,
+          "percentage": 100
+        }
+      }
+    }
+  },
+  "priorities": {
+    "critical": [],
+    "high": [],
+    "medium": [],
+    "low": [
+      {
+        "type": "story",
+        "component": "accessible-demo",
+        "action": "Create Storybook story for accessible-demo"
+      },
+      {
+        "type": "story",
+        "component": "alert",
+        "action": "Create Storybook story for alert"
+      },
+      {
+        "type": "story",
+        "component": "banner",
+        "action": "Create Storybook story for banner"
+      },
+      {
+        "type": "story",
+        "component": "error-boundary",
+        "action": "Create Storybook story for error-boundary"
+      },
+      {
+        "type": "story",
+        "component": "focus-demo",
+        "action": "Create Storybook story for focus-demo"
+      },
+      {
+        "type": "story",
+        "component": "focus-trap",
+        "action": "Create Storybook story for focus-trap"
+      },
+      {
+        "type": "story",
+        "component": "live-region",
+        "action": "Create Storybook story for live-region"
+      },
+      {
+        "type": "story",
+        "component": "performance-dashboard",
+        "action": "Create Storybook story for performance-dashboard"
+      },
+      {
+        "type": "story",
+        "component": "portal",
+        "action": "Create Storybook story for portal"
+      },
+      {
+        "type": "story",
+        "component": "timeline",
+        "action": "Create Storybook story for timeline"
+      },
+      {
+        "type": "story",
+        "component": "tree-view",
+        "action": "Create Storybook story for tree-view"
+      },
+      {
+        "type": "story",
+        "component": "visually-hidden",
+        "action": "Create Storybook story for visually-hidden"
+      }
+    ]
+  },
+  "recommendations": [],
+  "launchReadiness": {
+    "status": "ready",
+    "blockers": [],
+    "estimatedDays": 0
+  }
+}

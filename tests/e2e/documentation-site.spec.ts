@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 
 test.describe('Documentation Site', () => {
   test.use({
@@ -239,5 +240,35 @@ test.describe('Documentation Site', () => {
     
     // First Contentful Paint should be fast
     expect(navTiming.loadEventEnd - navTiming.fetchStart).toBeLessThan(3000);
+  });
+
+  test('should meet accessibility standards', async ({ page }) => {
+    // Test homepage accessibility
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+      .analyze();
+    
+    expect(accessibilityScanResults.violations).toEqual([]);
+    
+    // Test component page accessibility
+    await page.goto('/components/glass-button');
+    const componentPageResults = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+      .analyze();
+    
+    expect(componentPageResults.violations).toEqual([]);
+  });
+
+  test('should handle keyboard navigation', async ({ page }) => {
+    // Test tab navigation through header
+    await page.keyboard.press('Tab');
+    await expect(page.locator(':focus')).toBeVisible();
+    
+    // Test skip link if present
+    const skipLink = page.locator('a:has-text("Skip to content")');
+    if (await skipLink.isVisible()) {
+      await skipLink.click();
+      await expect(page.locator('main')).toBeFocused();
+    }
   });
 });

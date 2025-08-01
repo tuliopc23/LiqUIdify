@@ -81,9 +81,9 @@ import { AnimationComponents } from "liquidify/animations";
 ## 📚 Documentation
 
 - 📖 **[Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground with 52 components
-- 📋 **[API Reference](./docs/API_REFERENCE.md)** - Complete component documentation and props
-- 🎯 **[Usage Examples](./docs/USAGE_EXAMPLES.md)** - Real-world implementation patterns and demos
-- 🚀 **[Framework Guides](./docs/FRAMEWORK_GUIDES.md)** - Integration with Next.js, Vite, Remix, and more
+- 📋 **[API Reference](/api/)** - Complete component documentation and props
+- 🎯 **[Usage Examples](/guide/usage-examples)** - Real-world implementation patterns and demos
+- 🚀 **[Framework Guides](/guide/framework-integration)** - Integration with Next.js, Vite, Remix, and more
 - 🎨 **[Design System](https://liquidify-storybook.vercel.app/?path=/docs/design-system-overview--docs)** - Design tokens, principles, and guidelines
 
 ## 🎨 Component Categories
@@ -268,7 +268,7 @@ npm run test:visual
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
+We welcome contributions! Please see our [Contributing Guide](https://github.com/tuliopc23/LiqUIdify/blob/main/CONTRIBUTING.md) for details.
 
 ### Development Setup
 
@@ -328,7 +328,7 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 - **Discord** - [Join our community](https://discord.gg/liquidify) (coming soon)
 - **Twitter** - [@liquidify_ui](https://twitter.com/liquidify_ui) for updates
-- **Contributing** - See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines
+- **Contributing** - See [CONTRIBUTING.md](https://github.com/tuliopc23/LiqUIdify/blob/main/CONTRIBUTING.md) for guidelines
 
 ---
 
@@ -338,7 +338,7 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
     <a href="https://liquidify-storybook.vercel.app">📖 Storybook</a> •
     <a href="https://github.com/tuliopc23/LiqUIdify">🔗 GitHub</a> •
     <a href="https://www.npmjs.com/package/liquidify">📦 NPM</a> •
-    <a href="./docs/API_REFERENCE.md">📋 API Docs</a>
+    <a href="/api/">📋 API Docs</a>
   </p>
   <p>
     <strong>52 components • 100% TypeScript • WCAG 2.1 AA • MIT License</strong>

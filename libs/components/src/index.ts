@@ -76,6 +76,6 @@ export * from "./components/theme-provider";
 export * from "./components/theme-toggle";
 
 // Showcase and demo components
-export * from "./components/component-showcase";
+// export * from "./components/component-showcase"; // Component not implemented
 export * from "./components/enhanced-apple-liquid-glass";
 export * from "./components/hydration-detector";

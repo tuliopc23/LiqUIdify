@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { injectAxe, checkA11y } from 'axe-playwright';
+import AxeBuilder from '@axe-core/playwright';
 
 test.describe('Component Showcase', () => {
   test.beforeEach(async ({ page }) => {
@@ -74,17 +74,17 @@ test.describe('Component Showcase', () => {
     // Navigate to a component story
     await page.goto('/?path=/story/components-glass-button--default');
     
-    // Inject axe-core
+    // Wait for component to load
     const iframe = page.frameLocator('#storybook-preview-iframe');
-    await injectAxe(page);
+    await expect(iframe.locator('button')).toBeVisible();
     
-    // Run accessibility checks
-    await checkA11y(page, '#storybook-preview-iframe', {
-      detailedReport: true,
-      detailedReportOptions: {
-        html: true,
-      },
-    });
+    // Run accessibility checks with axe-core
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .include('#storybook-preview-iframe')
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+      .analyze();
+    
+    expect(accessibilityScanResults.violations).toEqual([]);
   });
 
   test('should handle keyboard navigation', async ({ page }) => {

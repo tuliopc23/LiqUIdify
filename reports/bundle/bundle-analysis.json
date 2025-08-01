@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-07-31T23:03:54.804Z",
+  "totalFiles": 189,
+  "jsFiles": 0,
+  "cssFiles": 0,
+  "typeDefinitions": 185,
+  "analyses": [],
+  "summary": {
+    "totalSize": 0,
+    "totalGzipSize": 0,
+    "totalSizeFormatted": "0 B",
+    "totalGzipSizeFormatted": "0 B",
+    "averageCompressionRatio": "NaN",
+    "violations": 0,
+    "criticalViolations": 0,
+    "status": "pass"
+  }
+}

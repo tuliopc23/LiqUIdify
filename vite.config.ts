@@ -59,8 +59,8 @@ export default defineConfig(({ mode }) => {
           "data-display": resolve("libs/components/src/bundles/data-display.ts"),
           accessibility: resolve("libs/components/src/bundles/accessibility.ts"),
           // Individual component entries
-          "components/button": resolve("libs/components/src/components/glass-button/index.ts"),
-          "components/card": resolve("libs/components/src/components/glass-card/index.ts"),
+          "components/button": resolve("libs/components/src/components/glass-button-refactored/index.ts"),
+          "components/card": resolve("libs/components/src/components/glass-card-refactored/index.ts"),
           "components/modal": resolve("libs/components/src/components/glass-modal/index.ts"),
           "components/input": resolve("libs/components/src/components/glass-input/index.ts"),
         },

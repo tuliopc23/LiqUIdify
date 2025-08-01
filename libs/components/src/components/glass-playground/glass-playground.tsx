@@ -34,20 +34,20 @@ import {
 import { GlassAlert } from '../glass-alert';
 import { GlassTabs } from '../glass-tabs';
 
-{/* Fallback components for react-live (removed for production)  */}
+// Fallback components for react-live (removed for production)
 const LiveProvider = ({ children }: { children: React.ReactNode }) => (
-  <div data-playground=\'fallback\'>{children}</div>
+  <div data-playground="fallback">{children}</div>
 );
 const LiveEditor = (props: any) => (
   <div className={cn('rounded bg-gray-100 p-4', props.className)}>
-    <p className=\'text-gray-600 text-sm\'>
+    <p className="text-gray-600 text-sm">
       Live editor disabled in production build
     </p>
   </div>
 );
 const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
-  <div className=\'rounded border bg-white p-4\' {...props}>
-    <p className=\'text-gray-600 text-sm\'>
+  <div className="rounded border bg-white p-4" {...props}>
+    <p className="text-gray-600 text-sm">
       Live preview disabled in production build
     </p>
   </div>
@@ -161,47 +161,47 @@ export function GlassPlayground({
       )}
     >
       {/* Header  */}
-      <div className=\'glass-header border-white/10 border-b px-4 py-3\'>
-        <div className=\'flex items-center justify-between\'>
+      <div className="glass-header border-white/10 border-b px-4 py-3">
+        <div className="flex items-center justify-between">
           <div>
             {title && (
-              <h3 className=\'font-semibold text-lg text-primary\'>{title}</h3>
+              <h3 className="font-semibold text-lg text-primary">{title}</h3>
             )}
             {description && (
-              <p className=\'mt-1 text-secondary text-sm\'>{description}</p>
+              <p className="mt-1 text-secondary text-sm">{description}</p>
             )}
           </div>
 
-          <div className=\'flex items-center gap-2\'>
+          <div className="flex items-center gap-2">
             <GlassButton
-              type=\'button\'
-              variant=\'ghost\'
+              type="button"
+              variant="ghost"
               size={'sm'} onClick={handleCopy}
-              aria-label=\'Copy code\'
+              aria-label="Copy code"
             >
               {copied ? (
-                <Check className=\'h-4 w-4 text-green-500\' />
+                <Check className="h-4 w-4 text-green-500" />
               ) : (
-                <Copy className=\'h-4 w-4\' />
+                <Copy className="h-4 w-4" />
               )}
             </GlassButton>
 
             <GlassButton
-              type=\'button\'
-              variant=\'ghost\'
+              type="button"
+              variant="ghost"
               size={'sm'} onClick={handleDownload}
-              aria-label=\'Download code\'
+              aria-label="Download code"
             >
-              <Download className=\'h-4 w-4\' />
+              <Download className="h-4 w-4" />
             </GlassButton>
 
             <GlassButton
-              type=\'button\'
-              variant=\'ghost\'
+              type="button"
+              variant="ghost"
               size={'sm'} onClick={handleFullscreen}
               aria-label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
             >
-              <Maximize2 className=\'h-4 w-4\' />
+              <Maximize2 className="h-4 w-4" />
             </GlassButton>
           </div>
         </div>
@@ -209,7 +209,7 @@ export function GlassPlayground({
 
       {/* Content  */}
       <div
-        className=\'relative\'
+        className="relative"
         style={{ height: typeof height === 'number' ? `${height}px` : height }}>
         <LiveProvider
           code={code}
@@ -224,8 +224,8 @@ export function GlassPlayground({
                 {
                   id: 'preview',
                   label: (
-                    <div className=\'flex items-center gap-2\'>
-                      <Eye className=\'h-4 w-4\' />
+                    <div className="flex items-center gap-2">
+                      <Eye className="h-4 w-4" />
                       Preview
                     </div>
                   ),
@@ -234,8 +234,8 @@ export function GlassPlayground({
                 {
                   id: 'code',
                   label: (
-                    <div className=\'flex items-center gap-2\'>
-                      <Code className=\'h-4 w-4\' />
+                    <div className="flex items-center gap-2">
+                      <Code className="h-4 w-4" />
                       Code
                     </div>
                   ),
@@ -243,19 +243,19 @@ export function GlassPlayground({
                     <PlaygroundEditor
                       editable={editable}
                       onChange={setCode}
-                      className=\'h-full\'
+                      className="h-full"
                     />
                   ),
                 },
               ]}
               defaultTab={activeTab}
               onTabChange={(tabId) => setActiveTab(tabId as any)}
-              className=\'h-full\'
-              tabListClassName=\'px-4 pt-2\'
-              tabPanelClassName=\'h-full\'
+              className="h-full"
+              tabListClassName="px-4 pt-2"
+              tabPanelClassName="h-full"
             />
           ) : (
-            <div className=\'flex h-full\'>
+            <div className="flex h-full">
               {showEditor && (
                 <div
                   className={cn(
@@ -266,13 +266,13 @@ export function GlassPlayground({
                   <PlaygroundEditor
                     editable={editable}
                     onChange={setCode}
-                    className=\'h-full\'
+                    className="h-full"
                   />
                 </div>
               )}
 
               {showPreview && (
-                <div className=\'flex-1 p-6\'>
+                <div className="flex-1 p-6">
                   <PlaygroundPreview />
                 </div>
               )}
@@ -302,7 +302,7 @@ function PlaygroundEditor({
   return (
     <div className={cn('relative h-full', className)}>
       <LiveEditor
-        className=\'playground-editor h-full overflow-auto p-4 font-mono text-sm\'
+        className="playground-editor h-full overflow-auto p-4 font-mono text-sm"
         disabled={!editable}
         onChange={onChange}
         style={{
@@ -314,7 +314,7 @@ function PlaygroundEditor({
       />
 
       {!editable && (
-        <div className=\'absolute top-2 right-2 rounded bg-glass px-2 py-1 text-secondary text-xs\'>
+        <div className="absolute top-2 right-2 rounded bg-glass px-2 py-1 text-secondary text-xs">
           Read-only
         </div>
       )}
@@ -325,10 +325,10 @@ function PlaygroundEditor({
 {/* Playground Preview Component  */}
 function PlaygroundPreview() {
   return (
-    <div className=\'playground-preview flex h-full items-center justify-center\'>
+    <div className="playground-preview flex h-full items-center justify-center">
       <LivePreview
         Component={({ children, ...props }: Record<string, unknown>) => (
-          <div className=\'mx-auto w-full max-w-2xl\' {...props}>
+          <div className="mx-auto w-full max-w-2xl" {...props}>
             {children}
           </div>
         )}
@@ -340,7 +340,7 @@ function PlaygroundPreview() {
 {/* Playground Error Component  */}
 function PlaygroundError() {
   return (
-    <LiveError className=\'absolute right-0 bottom-0 left-0 border-red-500/20 border-t bg-red-500/10 p-4 font-mono text-red-600 text-sm backdrop-blur-md\' />
+    <LiveError className="absolute right-0 bottom-0 left-0 border-red-500/20 border-t bg-red-500/10 p-4 font-mono text-red-600 text-sm backdrop-blur-md" />
   );
 }
 
@@ -375,20 +375,20 @@ if (typeof document !== 'undefined') {
 {/* Export example templates  */}
 export const PlaygroundTemplates = {
   button: `
-<div className=\'flex gap-4 items-center\'>
-  <GlassButton type=\'button\' variant=\'primary\'>
+<div className="flex gap-4 items-center">
+  <GlassButton type="button" variant="primary">
     Primary Button
   </GlassButton>
-  <GlassButton type=\'button\' variant=\'secondary\'>
+  <GlassButton type="button" variant="secondary">
     Secondary Button
   </GlassButton>
-  <GlassButton type=\'button\' variant=\'ghost\'>
+  <GlassButton type="button" variant="ghost">
     Ghost Button
   </GlassButton>
 </div>
 `,
   card: `
-<GlassCard className=\'max-w-md\'>
+<GlassCard className="max-w-md">
   <GlassCardHeader>
     <GlassCardTitle>Interactive Card</GlassCardTitle>
     <GlassCardDescription>
@@ -399,7 +399,7 @@ export const PlaygroundTemplates = {
     <p>This is an interactive playground where you can experiment with LiqUIdify components.</p>
   </GlassCardContent>
   <GlassCardFooter>
-    <GlassButton type=\'button\' variant=\'primary\'>Action</GlassButton>
+    <GlassButton type="button" variant="primary">Action</GlassButton>
   </GlassCardFooter>
 </GlassCard>
 `,
@@ -412,18 +412,18 @@ function FormExample() {
     setSubmitted(true);
   };
   return (
-    <form onSubmit={handleSubmit} className=\'space-y-4 max-w-md\'>
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
       <GlassInput
-        type=\'email\'
-        placeholder=\'Enter your email\'
+        type="email"
+        placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required />
-      <GlassButton type=\'submit\' variant=\'primary\' className=\'w-full\'>
+      <GlassButton type="submit" variant="primary" className="w-full">
         Submit
       </GlassButton>
       {submitted && (
-        <GlassAlert variant=\'success\' className=\'mt-4\'>
+        <GlassAlert variant="success" className="mt-4">
           Form submitted successfully!
         </GlassAlert>
       )}
@@ -464,7 +464,7 @@ import {
 } from '@/index';
 import { GlassTabs } from '../glass-tabs';
 
-{/* Fallback components for react-live (removed for production)  */}
+// Fallback components for react-live (removed for production)
 const LiveProvider = ({ children }: React.ReactNode) => (
   <div data-playground="fallback">{children}</div>
 );

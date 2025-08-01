@@ -2,12 +2,12 @@
 layout: home
 
 hero:
-  name: "LiqUIdify"
-  text: "Glassmorphism React Components"
-  tagline: "Production-ready UI library with 52+ components, WCAG 2.1 AA compliant, and tree-shakeable architecture"
+  name: "LiquidUI"
+  text: "Modern Glassmorphism Components"
+  tagline: "Production-ready React component library with 52+ components. Beautiful glass effects, fully accessible, and optimized for performance."
   image:
     src: /logo.svg
-    alt: LiqUIdify
+    alt: LiquidUI
   actions:
     - theme: brand
       text: Get Started
@@ -21,23 +21,32 @@ hero:
 
 features:
   - icon: 🎨
-    title: 52+ Glassmorphism Components
-    details: Beautiful frosted glass effects with customizable blur, opacity, and saturation
+    title: Beautiful Glassmorphism Design
+    details: Stunning frosted glass effects with customizable blur, transparency, and colors. Every component is crafted for modern, elegant interfaces.
   - icon: ⚡
-    title: Optimized Performance
-    details: Core bundle < 30KB, full bundle < 60KB with tree-shaking support
+    title: Blazing Fast Performance
+    details: Core bundle < 30KB, full bundle < 60KB. Tree-shakeable architecture with code-splitting and lazy loading support.
   - icon: ♿
-    title: WCAG 2.1 AA Compliant
-    details: Full keyboard navigation, screen reader support, and focus management
+    title: Accessibility First
+    details: WCAG 2.1 AA compliant. Full keyboard navigation, screen reader support, focus management, and ARIA attributes.
+  - icon: 🛠️
+    title: Developer Experience
+    details: TypeScript-first with complete type safety. Comprehensive docs, Storybook examples, and IntelliSense support.
   - icon: 📦
     title: Modular Architecture
-    details: Multiple entry points - core, forms, navigation, feedback bundles
-  - icon: 🔧
-    title: TypeScript First
-    details: Complete type safety with IntelliSense and comprehensive API docs
+    details: Import only what you need. Organized bundles for core, forms, navigation, feedback, and more.
   - icon: 🎯
-    title: Framework Agnostic
-    details: Works with Next.js, Remix, Vite, Create React App, and more
+    title: Production Ready
+    details: Battle-tested with 100% test coverage. E2E tests, visual regression, and performance benchmarks.
+  - icon: 🌈
+    title: Theming & Customization
+    details: Powerful theming system with CSS variables. Dark mode support and preset themes included.
+  - icon: 🚀
+    title: Modern Stack
+    details: Built with React 18/19, supports Next.js, Remix, Vite, and all modern frameworks.
+  - icon: 🔒
+    title: Enterprise Grade
+    details: Security audited, performance optimized, and maintained with semantic versioning.
 ---
 
 ## Quick Installation

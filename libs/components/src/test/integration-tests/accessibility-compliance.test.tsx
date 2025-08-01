@@ -14,7 +14,7 @@ import { GlassLiveRegion } from "../../components/glass-live-region";
 import { GlassAccessibleDemo } from "../../components/glass-accessible-demo";
 import { GlassTooltip } from "../../components/glass-tooltip";
 import { GlassAccordion } from "../../components/glass-accordion";
-import { GlassDialog } from "../../components/glass-dialog";
+// import { GlassDialog } from "../../components/glass-dialog"; // Component doesn't exist
 
 expect.extend(toHaveNoViolations);
 

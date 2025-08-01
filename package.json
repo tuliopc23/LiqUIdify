@@ -26,6 +26,7 @@
   },
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "^1.54.1",
     "@storybook/addon-a11y": "^9.0.18",
     "@storybook/addon-essentials": "^8.6.14",
@@ -39,15 +40,21 @@
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
     "@types/bun": "^1.2.19",
+    "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.19.9",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.7.0",
+    "axe-playwright": "^2.1.0",
+    "jest-axe": "^10.0.0",
     "jiti": "2.4.2",
     "lightningcss": "^1.30.1",
+    "pa11y": "^9.0.0",
     "prettier": "^3.6.2",
+    "rollup-plugin-visualizer": "^6.0.3",
     "typescript": "^5.9.2",
     "vite": "^7.0.6",
+    "vite-plugin-compression2": "^2.2.0",
     "vite-plugin-dts": "^4.5.4",
     "vitepress": "^1.6.3",
     "vitest": "^3.2.4"
@@ -80,12 +87,12 @@
     "./button": {
       "import": "./dist/libs/components/components/button.mjs",
       "require": "./dist/libs/components/cjs/components/button.cjs",
-      "types": "./dist/libs/components/components/glass-button/index.d.ts"
+      "types": "./dist/libs/components/components/glass-button-refactored/index.d.ts"
     },
     "./card": {
       "import": "./dist/libs/components/components/card.mjs",
       "require": "./dist/libs/components/cjs/components/card.cjs",
-      "types": "./dist/libs/components/components/glass-card/index.d.ts"
+      "types": "./dist/libs/components/components/glass-card-refactored/index.d.ts"
     },
     "./context": {
       "import": "./dist/libs/components/providers.mjs",
@@ -204,12 +211,23 @@
     "test:e2e": "playwright test",
     "test:a11y": "node scripts/accessibility-audit.js",
     "test:coverage": "bun test --coverage",
+    "test:all": "bun run test && bun run test:integration && bun run test:e2e && bun run test:a11y",
     "type-check": "bunx tsc --noEmit --project tsconfig.json",
     "analyze:bundle": "node scripts/bundle-analysis.js",
+    "audit:components": "node scripts/component-audit.js",
     "audit:security": "bun audit && bunx snyk test",
+    "audit:all": "bun run audit:security && bun run audit:components && bun run test:a11y",
+    "ci": "bun run type-check && bun run lint && bun run test:all && bun run build && bun run audit:all",
+    "ci:quick": "bun run type-check && bun run lint && bun run test",
+    "release:prepare": "bun run ci && bun run analyze:bundle",
+    "release:dry": "npm publish --dry-run",
     "prepublishOnly": "node scripts/pre-publish.js",
+    "postpublish": "echo '🎉 Package published successfully!'",
     "clean": "rm -rf dist",
-    "clean:node": "rm -rf node_modules bun.lock && bun install"
+    "clean:node": "rm -rf node_modules bun.lock && bun install",
+    "clean:all": "bun run clean && bun run clean:node",
+    "preview": "bun run build && bun run docs:preview",
+    "health-check": "bun run type-check && bun run build:lib"
   },
   "sideEffects": [
     "*.css",

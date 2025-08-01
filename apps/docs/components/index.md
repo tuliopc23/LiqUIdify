@@ -1,75 +1,101 @@
-# Components Overview
+# Components
 
-LiqUIdify provides 52+ production-ready React components, each designed with glassmorphism aesthetics and WCAG 2.1 AA accessibility compliance.
+LiquidUI provides 52+ production-ready React components with glassmorphism design. All components are accessible, performant, and fully typed with TypeScript.
 
 ## Component Categories
 
 ### Core Components
+Essential building blocks for any application.
 
-Essential building blocks for any application:
-
-- [Button](/components/button) - Interactive button with variants
-- [Card](/components/card) - Content container with glass effect
-- [Input](/components/input) - Text input with validation
-- [Badge](/components/badge) - Status indicators
-- [Avatar](/components/avatar) - User profile images
+- [GlassButton](/components/button) - Interactive button with multiple variants
+- [GlassCard](/components/card) - Container with glassmorphism effect
+- [GlassInput](/components/input) - Text input field
+- [GlassModal](/components/modal) - Overlay dialog component
+- [GlassTooltip](/components/tooltip) - Contextual information on hover
+- [GlassBadge](/components/badge) - Status badges
+- [GlassAvatar](/components/avatar) - User avatars
 
 ### Form Components
+Complete form building blocks with validation support.
 
-Complete form building blocks:
-
-- [Select](/components/select) - Dropdown selection
-- [Switch](/components/switch) - Toggle switches
-- [Checkbox](/components/checkbox) - Multi-selection
-- [Radio](/components/radio) - Single selection
-- [Slider](/components/slider) - Value selection
-- [Textarea](/components/textarea) - Multi-line input
-
-### Layout Components
-
-Structure your application:
-
-- [Container](/components/container) - Responsive container
-- [Grid](/components/grid) - Grid layout system
-- [Stack](/components/stack) - Flexbox utilities
-- [Divider](/components/divider) - Visual separators
-
-### Feedback Components
-
-User feedback and notifications:
-
-- [Toast](/components/toast) - Notification messages
-- [Alert](/components/alert) - Inline alerts
-- [Progress](/components/progress) - Progress indicators
-- [Skeleton](/components/skeleton) - Loading placeholders
-- [Spinner](/components/spinner) - Loading spinners
+- [GlassCheckbox](/components/checkbox) - Checkbox input
+- [GlassRadioGroup](/components/radio-group) - Radio button group
+- [GlassSelect](/components/select) - Dropdown selection
+- [GlassTextarea](/components/textarea) - Multi-line text input
+- [GlassSwitch](/components/switch) - Toggle switch
+- [GlassSlider](/components/slider) - Range slider input
+- [GlassDatePicker](/components/date-picker) - Date selection
+- [GlassFileUpload](/components/file-upload) - File upload interface
+- [GlassCombobox](/components/combobox) - Searchable dropdown
+- [GlassNumberInput](/components/number-input) - Numeric input with controls
+- [GlassFormField](/components/form-field) - Form field wrapper
+- [GlassCheckboxGroup](/components/checkbox-group) - Multiple checkbox group
 
 ### Navigation Components
+Components for app navigation and wayfinding.
 
-Navigation and organization:
+- [GlassBreadcrumbs](/components/breadcrumbs) - Navigation trail
+- [GlassTabs](/components/tabs) - Tabbed interface
+- [GlassPagination](/components/pagination) - Page navigation
+- [Navbar](/components/navbar) - Top navigation bar
+- [Sidebar](/components/sidebar) - Side navigation
+- [GlassMobileNav](/components/mobile-nav) - Mobile navigation menu
 
-- [Tabs](/components/tabs) - Tabbed interfaces
-- [Breadcrumb](/components/breadcrumb) - Navigation trails
-- [Pagination](/components/pagination) - Page navigation
-- [Navigation](/components/navigation) - Nav menus
+### Feedback Components
+User feedback and notification components.
 
-### Overlay Components
-
-Modal and overlay elements:
-
-- [Modal](/components/modal) - Dialog windows
-- [Popover](/components/popover) - Contextual overlays
-- [Tooltip](/components/tooltip) - Hover tooltips
-- [Drawer](/components/drawer) - Slide-out panels
+- [GlassAlert](/components/alert) - Alert messages
+- [GlassToast](/components/toast) - Toast notifications
+- [GlassNotification](/components/notification) - In-app notifications
+- [GlassBanner](/components/banner) - Page-wide announcements
+- [GlassProgress](/components/progress) - Progress indicators
+- [GlassSpinner](/components/spinner) - Loading spinner
+- [GlassLoading](/components/loading) - Loading states
+- [GlassSkeleton](/components/skeleton) - Content placeholders
 
 ### Data Display
+Components for presenting data and content.
 
-Present data effectively:
+- [GlassTable](/components/table) - Data table
+- [GlassAccordion](/components/accordion) - Collapsible sections
+- [GlassTimeline](/components/timeline) - Timeline display
+- [GlassTreeView](/components/tree-view) - Hierarchical data
+- [GlassChart](/components/chart) - Data visualization
+- [GlassPerformanceDashboard](/components/performance-dashboard) - Performance metrics
 
-- [Table](/components/table) - Data tables
-- [DataTable](/components/data-table) - Advanced tables
-- [Chart](/components/chart) - Data visualization
-- [Timeline](/components/timeline) - Event timelines
+### Layout Components
+Structural components for page layouts.
+
+- [GlassDrawer](/components/drawer) - Slide-out panel
+- [GlassDropdown](/components/dropdown) - Dropdown menu
+- [GlassPopover](/components/popover) - Popover container
+- [GlassPortal](/components/portal) - Portal rendering
+
+### Utility Components
+Helper components for common patterns.
+
+- [GlassCommand](/components/command) - Command palette
+- [GlassSearch](/components/search) - Search interface
+- [GlassErrorBoundary](/components/error-boundary) - Error handling
+- [ThemeProvider](/components/theme-provider) - Theme context
+- [ThemeToggle](/components/theme-toggle) - Dark mode toggle
+- [GlassPlayground](/components/playground) - Component playground
+
+### Accessibility Components
+Components focused on accessibility.
+
+- [GlassFocusTrap](/components/focus-trap) - Focus management
+- [GlassLiveRegion](/components/live-region) - Screen reader announcements
+- [GlassSkipNavigation](/components/skip-navigation) - Skip links
+- [GlassVisuallyHidden](/components/visually-hidden) - Screen reader only content
+- [GlassAccessibleDemo](/components/accessible-demo) - Accessibility examples
+- [GlassFocusDemo](/components/focus-demo) - Focus management demo
+
+### Responsive Components
+Components with enhanced responsive behavior.
+
+- [GlassResponsiveButton](/components/responsive-button) - Adaptive button
+- [GlassResponsiveCard](/components/responsive-card) - Adaptive card layout
 
 ## Component Features
 
