@@ -13,17 +13,17 @@ export const GlassFocusDemo: React.FC = () => {
   const [trapActive, setTrapActive] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
   const menuRef = useRef<HTMLDivElement>(null);
-  const menuItemReferences = useRef<HTMLButtonElement | Array<null>>([]);
+  const menuItemReferences = useRef<Array<HTMLButtonElement | null>>([]);
 
   // Setup roving tabindex for menu
-  const menuItems = menuItemReferences.current.filter(
-    Boolean,
-  ) as Array<HTMLElement>;
+  const menuItems = (
+    menuItemReferences.current as Array<HTMLButtonElement | null>
+  ).filter(Boolean) as Array<HTMLElement>;
   const roving = useRovingTabindex({
     items: menuItems,
     orientation: "vertical",
     loop: true,
-    onActiveChange: (_, index) => setSelectedMenuItem(index),
+    onActiveChange: (_: any, index: number) => setSelectedMenuItem(index),
   });
 
   const menuOptions = [
@@ -218,11 +218,17 @@ export const GlassFocusDemo: React.FC = () => {
                     type="button"
                     key={option.label}
                     ref={(element) => {
-                      menuItemReferences.current[index] = element;
+                      (
+                        menuItemReferences.current as Array<HTMLButtonElement | null>
+                      )[index] = element;
                     }}
                     role="menuitem"
                     {...roving.getRovingProps(index)}
-                    onClick={() => option.action?.()}
+                    onClick={() => {
+                      if (typeof option.action === "function") {
+                        option.action();
+                      }
+                    }}
                     className={cn(
                       "flex w-full items-center gap-3 px-4 py-3",
                       "hover:bg-gray-100 dark:hover:bg-gray-800",

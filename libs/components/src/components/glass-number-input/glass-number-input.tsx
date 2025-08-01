@@ -13,10 +13,7 @@ import {
   getGlassClass,
   microInteraction,
 } from "@/core/utils/classname";
-import {
-  createVariants as cva,
-  type InferVariantProps as VariantProps,
-} from "../../lib/variant-system";
+import { createVariants as cva } from "../../lib/variant-system";
 
 const numberInputVariants = cva({
   base: "relative w-full",
@@ -89,10 +86,10 @@ const buttonVariants = cva({
 
 interface GlassNumberInputProps
   extends Omit<
-      React.InputHTMLAttributes<HTMLInputElement>,
-      "type" | "onChange"
-    >,
-    VariantProps<typeof numberInputVariants> {
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "type" | "onChange" | "size"
+  > {
+  size?: "sm" | "md" | "lg";
   value?: number;
   defaultValue?: number;
   onChange?: (value: number | undefined) => void;
@@ -297,7 +294,8 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     // Combine refs
     const setRefs = useCallback(
       (node: HTMLInputElement | null) => {
-        inputRef.current = node;
+        (inputRef as React.MutableRefObject<HTMLInputElement | null>).current =
+          node;
         if (typeof ref === "function") {
           ref(node);
         } else if (ref) {
@@ -308,7 +306,12 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     );
 
     return (
-      <div className={cn(numberInputVariants({ size }), className)}>
+      <div
+        className={cn(
+          numberInputVariants({ size: size as "sm" | "md" | "lg" }),
+          className,
+        )}
+      >
         {/* Label */}
         {label && (
           <label
@@ -354,7 +357,10 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
             onKeyDown={handleKeyDown}
             disabled={disabled}
             className={cn(
-              inputVariants({ size, error: error ? "true" : "false" }),
+              inputVariants({
+                size: size as "sm" | "md" | "lg",
+                error: error ? "true" : "false",
+              }),
               showControls && "px-12",
             )}
             aria-invalid={error}
@@ -376,7 +382,12 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
                 type="button"
                 onClick={handleDecrement}
                 disabled={!canDecrement}
-                className={cn(buttonVariants({ size, position: "left" }))}
+                className={cn(
+                  buttonVariants({
+                    size: size as "sm" | "md" | "lg",
+                    position: "left",
+                  }),
+                )}
                 aria-label="Decrease value"
                 tabIndex={-1}
               >
@@ -387,7 +398,12 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
                 type="button"
                 onClick={handleIncrement}
                 disabled={!canIncrement}
-                className={cn(buttonVariants({ size, position: "right" }))}
+                className={cn(
+                  buttonVariants({
+                    size: size as "sm" | "md" | "lg",
+                    position: "right",
+                  }),
+                )}
                 aria-label="Increase value"
                 tabIndex={-1}
               >

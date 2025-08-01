@@ -69,7 +69,7 @@ export function GlassPerformanceDashboard({
     // Subscribe to metric updates
     const unsubscribers = Object.keys(METRIC_LABELS).map((metricName) =>
       performanceMonitor.subscribe(
-        metricName as keyof typeof METRIC_LABELS,
+        metricName as "LCP" | "CLS" | "FCP" | "TTFB" | "INP" | "TTI",
         (metric) => {
           setMetrics((previous) => new Map(previous).set(metricName, metric));
         },

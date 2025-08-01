@@ -122,7 +122,7 @@ export function GlassModal({
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          handleBackdropClick(e as unknown);
+          handleBackdropClick(e as React.MouseEvent<HTMLButtonElement>);
         }
       }}
       tabIndex={-1}
@@ -140,7 +140,7 @@ export function GlassModal({
           ref={modalRef}
           role="dialog"
           aria-modal="true"
-          aria-labelledby={title ? titleId : null}
+          aria-labelledby={title ? titleId : undefined}
           aria-describedby={descriptionId}
           className={cn(
             "glass-modal",

@@ -161,8 +161,8 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
               ? { defaultValue: props.defaultValue }
               : { value: currentValue })}
             onChange={handleInputChange}
-            aria-invalid={error ? true : null}
-            aria-describedby={error && helperText ? helperTextId : null}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={error && helperText ? helperTextId : undefined}
             {...props}
           />
 

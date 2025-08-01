@@ -88,7 +88,7 @@ export class GlassErrorBoundary extends Component<
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: any) {
     const { resetKeys, resetOnPropsChange } = this.props;
     const { hasError } = this.state;
 
@@ -121,7 +121,8 @@ export class GlassErrorBoundary extends Component<
 
   arraysEqual(a: string | Array<number>, b: string | Array<number>): boolean {
     return (
-      a.length === b.length && a.every((value, index) => value === b[index])
+      a.length === b.length &&
+      (a as any[]).every((value: any, index: number) => value === b[index])
     );
   }
 

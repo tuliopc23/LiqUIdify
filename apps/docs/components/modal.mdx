@@ -318,6 +318,9 @@ function ConfirmationDialog({ onConfirm, onCancel }) {
 ### Form Modal
 
 ```tsx
+import React, { useState } from "react";
+import { GlassModal, GlassInput, GlassButton } from "@liquidify/components";
+
 function FormModal({ isOpen, onClose, onSubmit }) {
   const [formData, setFormData] = useState({ name: "", email: "" });
 

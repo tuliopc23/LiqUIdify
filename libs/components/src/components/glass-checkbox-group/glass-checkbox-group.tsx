@@ -1,10 +1,7 @@
 import { forwardRef, useCallback, useId, useState } from "react";
 import type React from "react";
 import { cn } from "../../core/utils/classname";
-import {
-  createVariants as cva,
-  type InferVariantProps as VariantProps,
-} from "../../lib/variant-system";
+import { createVariants as cva } from "../../lib/variant-system";
 import type {
   ComponentPropsBuilder,
   FormGlassProps,

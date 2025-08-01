@@ -249,7 +249,7 @@ export const GlassButton = React.memo(
             return;
           }
 
-          transitionToState("idle");
+          transitionToState("default");
           onMouseLeave?.(event);
         },
         [disabled, transitionToState, onMouseLeave],
@@ -331,21 +331,21 @@ export const GlassButton = React.memo(
       // Render component
       const Component = asChild ? Slot : "button";
 
-      return (
-        <Component
-          ref={combinedRef as any}
-          type={asChild ? undefined : type}
-          disabled={disabled || loading}
-          className={componentClasses}
-          onClick={handleClick}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          {...props}
-          {...(magnetic ? magneticProps : {})}
-        >
-          {buttonContent}
-        </Component>
-      );
+      const componentProps = {
+        ref: combinedRef as any,
+        type: asChild ? undefined : type,
+        disabled: disabled || loading,
+        className: componentClasses,
+        onClick: handleClick,
+        onMouseEnter: handleMouseEnter,
+        onMouseLeave: handleMouseLeave,
+        onFocus: handleFocus,
+        onBlur: handleBlur,
+        ...props,
+        ...(magnetic ? magneticProps : {}),
+      };
+
+      return <Component {...componentProps}>{buttonContent}</Component>;
     },
   ),
 );

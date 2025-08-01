@@ -2,12 +2,10 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { motion } from "framer-motion";
 import React from "react";
 import { cn } from "@/core/utils/classname";
-import {
-  createVariants as cva,
-  type InferVariantProps as VariantProps,
-} from "../../lib/variant-system";
+import { createVariants as cva } from "../../lib/variant-system";
 
-const radioGroupVariants = cva(["grid gap-2"], {
+const radioGroupVariants = cva({
+  base: "grid gap-2",
   variants: {
     orientation: {
       horizontal: "grid-flow-col",
@@ -18,61 +16,58 @@ const radioGroupVariants = cva(["grid gap-2"], {
       md: "gap-2",
       lg: "gap-3",
     },
+    disabled: {
+      true: "opacity-50 cursor-not-allowed",
+      false: "",
+    },
   },
   defaultVariants: {
     orientation: "vertical",
     size: "md",
+    disabled: "false",
   },
 });
 
-const radioItemVariants = cva(
-  [
-    "group flex cursor-pointer items-center gap-2 rounded-lg p-2 transition-all duration-200",
-    "hover:bg-white/5 focus:bg-white/10 focus:outline-none",
-    "data-[state=checked]:bg-white/10 data-[state=checked]:shadow-lg",
-    "border border-white/10 backdrop-blur-md",
-  ],
-
-  {
-    variants: {
-      size: {
-        sm: "gap-1.5 p-1.5 text-sm",
-        md: "gap-2 p-2 text-base",
-        lg: "gap-3 p-3 text-lg",
-      },
-      variant: {
-        default: "bg-white/5 hover:bg-white/10",
-        solid: "bg-white/10 hover:bg-white/15",
-        ghost: "bg-transparent hover:bg-white/5",
-      },
+const radioItemVariants = cva({
+  base: "group flex cursor-pointer items-center gap-2 rounded-lg p-2 transition-all duration-200 hover:bg-white/5 focus:bg-white/10 focus:outline-none data-[state=checked]:bg-white/10 data-[state=checked]:shadow-lg border border-white/10 backdrop-blur-md",
+  variants: {
+    size: {
+      sm: "gap-1.5 p-1.5 text-sm",
+      md: "gap-2 p-2 text-base",
+      lg: "gap-3 p-3 text-lg",
     },
-    defaultVariants: {
-      size: "md",
-      variant: "default",
+    variant: {
+      default: "bg-white/5 hover:bg-white/10",
+      solid: "bg-white/10 hover:bg-white/15",
+      ghost: "bg-transparent hover:bg-white/5",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+    variant: "default",
+  },
+});
 
-const radioIndicatorVariants = cva([
-  "relative h-5 w-5 rounded-full border-2 border-white/20",
-  "group-data-[state=checked]:border-blue-400",
-  "group-data-[state=checked]:bg-gradient-to-br group-data-[state=checked]:from-blue-400/20 group-data-[state=checked]:to-purple-400/20",
-  "backdrop-blur-sm transition-all duration-200",
-  "group-hover:border-white/40 group-focus:border-blue-400",
-]);
+const radioIndicatorVariants = cva({
+  base: "relative h-5 w-5 rounded-full border-2 border-white/20 group-data-[state=checked]:border-blue-400 group-data-[state=checked]:bg-gradient-to-br group-data-[state=checked]:from-blue-400/20 group-data-[state=checked]:to-purple-400/20 backdrop-blur-sm transition-all duration-200 group-hover:border-white/40 group-focus:border-blue-400",
+  variants: {},
+});
 
 interface GlassRadioGroupProps
   extends Omit<
-      React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
-      "orientation"
-    >,
-    VariantProps<typeof radioGroupVariants> {
+    React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
+    "orientation"
+  > {
   children: React.ReactNode;
+  orientation?: "horizontal" | "vertical";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
 }
 
 interface GlassRadioItemProps
-  extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>,
-    VariantProps<typeof radioItemVariants> {
+  extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {
+  size?: "sm" | "md" | "lg";
+  variant?: "default" | "solid" | "ghost";
   children: React.ReactNode;
   value: string;
   id?: string;

@@ -56,7 +56,7 @@ const labelVariants = cva({
     },
   },
   defaultVariants: {
-    required: false,
+    required: "false",
     size: "md",
   },
 });
@@ -77,27 +77,21 @@ const helperTextVariants = cva({
 });
 
 interface GlassFormFieldProps
-  extends ComponentPropsBuilder<HTMLDivElement>,
-    VariantProps<typeof formFieldVariants>,
-    Pick<
-      FormGlassProps,
-      | "glassEffect"
-      | "animation"
-      | "disableAnimations"
-      | "variant"
-      | "size"
-      | "required"
-      | "error"
-      | "errorMessage"
-      | "helperText"
-      | "label"
-      | "disabled"
-      | "hapticFeedback"
-      | "hover"
-      | "ripple"
-    > {
-  /** Helper text to display below the field */
+  extends Omit<ComponentPropsBuilder<HTMLDivElement>, "size" | "variant">,
+    Omit<VariantProps<typeof formFieldVariants>, "size" | "variant"> {
+  size?: "sm" | "md" | "lg";
+  variant?: "default" | "inline" | "card";
+  glassEffect?: any;
+  animation?: any;
+  disableAnimations?: boolean;
+  required?: boolean;
+  error?: boolean | string;
+  errorMessage?: string;
   helperText?: string;
+  label?: string;
+  disabled?: boolean;
+  hover?: boolean;
+  ripple?: boolean;
   /** Success message to display */
   success?: string;
   /** Warning message to display */
@@ -163,8 +157,8 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
       useGlassStateTransitions(animation);
 
     const fieldId = useId();
-    const messageId = useId();
-    const descriptionId = useId();
+    // const messageId = useId();
+    // const descriptionId = useId();
     const finalId = htmlFor || fieldId;
 
     // Determine state and message with priority: error > warning > success > default
@@ -187,7 +181,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
       const validateAccessibility = async () => {
         try {
           const report = await accessibilityManager.validateComponent(
-            containerRef.current!,
+            containerRef.current,
             {
               name: "GlassFormField",
               type: "form-field",
@@ -209,7 +203,14 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
       };
 
       validateAccessibility();
-    }, [error, errorMessage, label, required, disabled, liveValidation]);
+    }, [
+      error,
+      label,
+      required,
+      disabled,
+      liveValidation,
+      accessibilityManager,
+    ]);
 
     // Error announcement for screen readers
     useEffect(() => {
@@ -219,7 +220,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
           "assertive",
         );
       }
-    }, [error, errorMessage, state, liveValidation]);
+    }, [error, errorMessage, state, liveValidation, accessibilityManager]);
 
     // Focus management
     useEffect(() => {
@@ -241,10 +242,10 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
 
     // Glass effect generation
     const glassClasses = generateGlassClasses({
-      variant: variant as any,
+      variant: variant,
       intensity: glassEffect?.intensity,
       state: currentState,
-      glassEffect,
+      glassEffect: glassEffect,
     });
 
     const glassVariables = generateGlassVariables({
@@ -309,7 +310,9 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
     const combinedRef = useCallback(
       (node: HTMLDivElement | null) => {
         if (containerRef.current !== node) {
-          containerRef.current = node;
+          (
+            containerRef as React.MutableRefObject<HTMLDivElement | null>
+          ).current = node;
         }
         if (typeof ref === "function") {
           ref(node);
@@ -324,7 +327,10 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
       <div
         ref={combinedRef}
         className={cn(
-          formFieldVariants({ variant, size }),
+          formFieldVariants({
+            variant: variant as "default" | "inline" | "card",
+            size: size as "sm" | "md" | "lg",
+          }),
           glassClasses,
           disabled && "cursor-not-allowed opacity-50",
           !disableAnimations && "will-change-transform",
@@ -345,7 +351,10 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
           <label
             htmlFor={finalId}
             className={cn(
-              labelVariants({ required, size }),
+              labelVariants({
+                required: required ? "true" : "false",
+                size: size as "sm" | "md" | "lg",
+              }),
               disabled && "cursor-not-allowed",
             )}
           >

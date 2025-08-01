@@ -251,7 +251,20 @@ const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
       role={role}
       aria-live={priority}
       aria-atomic={atomic}
-      aria-relevant={relevantString as unknown}
+      aria-relevant={
+        relevantString as
+          | "text"
+          | "additions"
+          | "additions removals"
+          | "additions text"
+          | "all"
+          | "removals"
+          | "removals additions"
+          | "removals text"
+          | "text additions"
+          | "text removals"
+          | undefined
+      }
       className={cn(
         "glass-live-region",
         {
@@ -267,7 +280,7 @@ const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
 };
 
 // Enhanced hook for managing live region announcements
-function _useAnnouncement() {
+function useAnnouncement() {
   const [announcement, setAnnouncement] = useState<string>("");
   const [announcementOptions, setAnnouncementOptions] =
     useState<AnnouncementOptions>({});

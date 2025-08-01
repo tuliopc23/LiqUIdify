@@ -81,7 +81,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
     ref,
   ) => {
     const generatePageNumbers = () => {
-      const pages: number | Array<"ellipsis"> = [];
+      const pages: Array<number | "ellipsis"> = [];
 
       // Always include first page(s)
 
@@ -167,7 +167,9 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            (() => typeof page === "number" && handlePageChange(page))(e);
+            if (typeof page === "number") {
+              handlePageChange(page);
+            }
           }
         }}
         disabled={buttonDisabled || disabled || page === "ellipsis"}
