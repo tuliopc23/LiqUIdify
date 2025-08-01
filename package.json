@@ -18,43 +18,50 @@
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-radio-group": "^1.3.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@stoplight/spectral-core": "1.18.3",
+    "@stoplight/spectral-functions": "1.7.2",
+    "ajv": "8.12.0",
+    "ajv-draft-04": "1.0.0",
     "clsx": "^2.1.1",
     "esbuild": "^0.25.8",
+    "fast-deep-equal": "^3.1.3",
     "framer-motion": "^12.23.12",
+    "json-schema-traverse": "1.0.0",
     "tailwind-merge": "^3.3.1",
     "tsc": "^2.0.4",
-    "web-vitals": "^5.0.3"
+    "web-vitals": "^5.1.0"
   },
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
-    "@playwright/test": "^1.54.1",
-    "@storybook/react": "^8.4.1",
+    "@playwright/test": "^1.54.2",
+    "@storybook/react": "^8.6.14",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
     "@types/bun": "^1.2.19",
     "@types/jest-axe": "^3.5.9",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^20.19.9",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
     "axe-playwright": "^2.1.0",
     "jest-axe": "^10.0.0",
     "jiti": "2.4.2",
     "jsdom": "^26.1.0",
     "lightningcss": "^1.30.1",
-    "mintlify": "^4.0.0",
+    "mintlify": "^4.2.45",
     "pa11y": "^9.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rollup-plugin-visualizer": "^6.0.3",
-    "storybook": "^8.4.1",
+    "storybook": "^8.6.14",
+    "tar-mini": "^0.2.0",
     "typescript": "^5.9.2",
     "vite": "^7.0.6",
     "vite-plugin-compression2": "^2.2.0",
-    "vite-plugin-dts": "^5.0.0-beta.6",
-    "vite-tsconfig-paths": "^5.0.1",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
   "engines": {
@@ -68,17 +75,17 @@
       "require": "./dist/libs/components/cjs/index.cjs"
     },
     "./accessibility": {
-      "types": "./dist/libs/components/bundles/accessibility.d.ts",
+      "types": "./dist/libs/components/accessibility.d.ts",
       "import": "./dist/libs/components/accessibility.mjs",
       "require": "./dist/libs/components/cjs/accessibility.cjs"
     },
     "./advanced": {
-      "types": "./dist/libs/components/bundles/advanced.d.ts",
+      "types": "./dist/libs/components/advanced.d.ts",
       "import": "./dist/libs/components/advanced.mjs",
       "require": "./dist/libs/components/cjs/advanced.cjs"
     },
     "./animations": {
-      "types": "./dist/libs/components/bundles/animations.d.ts",
+      "types": "./dist/libs/components/animations.d.ts",
       "import": "./dist/libs/components/animations.mjs",
       "require": "./dist/libs/components/cjs/animations.cjs"
     },
@@ -93,29 +100,29 @@
       "require": "./dist/libs/components/cjs/components/card.cjs"
     },
     "./context": {
-      "types": "./dist/libs/components/bundles/providers.d.ts",
+      "types": "./dist/libs/components/providers.d.ts",
       "import": "./dist/libs/components/providers.mjs",
       "require": "./dist/libs/components/cjs/providers.cjs"
     },
     "./data-display": {
-      "types": "./dist/libs/components/bundles/data-display.d.ts",
+      "types": "./dist/libs/components/data-display.d.ts",
       "import": "./dist/libs/components/data-display.mjs",
       "require": "./dist/libs/components/cjs/data-display.cjs"
     },
     "./core": {
-      "types": "./dist/libs/components/bundles/core.d.ts",
+      "types": "./dist/libs/components/core.d.ts",
       "import": "./dist/libs/components/core.mjs",
       "modern": "./dist/libs/components/core.mjs",
       "require": "./dist/libs/components/cjs/core.cjs"
     },
     "./css": "./dist/libs/components/liquidui.css",
     "./feedback": {
-      "types": "./dist/libs/components/bundles/feedback.d.ts",
+      "types": "./dist/libs/components/feedback.d.ts",
       "import": "./dist/libs/components/feedback.mjs",
       "require": "./dist/libs/components/cjs/feedback.cjs"
     },
     "./forms": {
-      "types": "./dist/libs/components/bundles/forms.d.ts",
+      "types": "./dist/libs/components/forms.d.ts",
       "import": "./dist/libs/components/forms.mjs",
       "require": "./dist/libs/components/cjs/forms.cjs"
     },
@@ -130,7 +137,7 @@
       "require": "./dist/libs/components/cjs/components/avatar.cjs"
     },
     "./layout": {
-      "types": "./dist/libs/components/bundles/layout.d.ts",
+      "types": "./dist/libs/components/layout.d.ts",
       "import": "./dist/libs/components/layout.mjs",
       "require": "./dist/libs/components/cjs/layout.cjs"
     },
@@ -140,24 +147,24 @@
       "require": "./dist/libs/components/cjs/components/modal.cjs"
     },
     "./navigation": {
-      "types": "./dist/libs/components/bundles/navigation.d.ts",
+      "types": "./dist/libs/components/navigation.d.ts",
       "import": "./dist/libs/components/navigation.mjs",
       "require": "./dist/libs/components/cjs/navigation.cjs"
     },
     "./package.json": "./package.json",
     "./physics": {
-      "types": "./dist/libs/components/bundles/physics.d.ts",
+      "types": "./dist/libs/components/physics.d.ts",
       "import": "./dist/libs/components/physics.mjs",
       "require": "./dist/libs/components/cjs/physics.cjs"
     },
     "./ssr": {
-      "types": "./dist/libs/components/bundles/ssr.d.ts",
+      "types": "./dist/libs/components/ssr.d.ts",
       "import": "./dist/libs/components/ssr.mjs",
       "require": "./dist/libs/components/cjs/ssr.cjs"
     },
     "./styles": "./dist/libs/components/liquidui.css",
     "./tokens": {
-      "types": "./dist/libs/components/bundles/tokens.d.ts",
+      "types": "./dist/libs/components/tokens.d.ts",
       "import": "./dist/libs/components/tokens.mjs",
       "require": "./dist/libs/components/cjs/tokens.cjs"
     }
@@ -266,5 +273,9 @@
     "apps/*",
     "examples/*",
     "libs/*"
-  ]
+  ],
+  "resolutions": {
+    "ajv": "8.12.0",
+    "ajv-draft-04": "1.0.0"
+  }
 }

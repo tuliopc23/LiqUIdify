@@ -40,6 +40,7 @@ export default defineConfig(({ mode }) => {
           noImplicitReturns: true,
           noFallthroughCasesInSwitch: true,
           // Ensure proper module resolution
+          moduleResolution: "node",
           // Enable declaration map for better debugging
           declarationMap: true,
           // Ensure proper source map generation

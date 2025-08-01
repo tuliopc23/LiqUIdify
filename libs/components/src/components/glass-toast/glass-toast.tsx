@@ -241,3 +241,5 @@ const _GlassToast: React.FC<GlassToastProps> = ({
     </div>
   );
 };
+
+export { _GlassToast as GlassToast };

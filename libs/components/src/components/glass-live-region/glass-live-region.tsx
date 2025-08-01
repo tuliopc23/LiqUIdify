@@ -279,6 +279,8 @@ const GlassLiveRegion: React.FC<GlassLiveRegionProps> = ({
   );
 };
 
+export { GlassLiveRegion };
+
 // Enhanced hook for managing live region announcements
 function useAnnouncement() {
   const [announcement, setAnnouncement] = useState<string>("");

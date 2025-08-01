@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { motion } from "framer-motion";
 import { ChevronRight, RefreshCw, Sparkles, Zap } from "lucide-react";
-import { GlassButton } from "../..";
-import { GlassCard } from "../..";
+import { GlassButton } from "@/components/glass-button-refactored/glass-button";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
 
 interface SpringConfig {
   stiffness: number;
@@ -39,6 +39,67 @@ const STAGGER_VARIANTS: AnimationVariants = {
     scale: 0.8,
     transition: { staggerChildren: 0.05, staggerDirection: -1 },
   },
+};
+
+// Helper function for hover animations
+const createHoverAnimation = (type: "scale" | "lift" | "rotate" | "glow") => {
+  const animations = {
+    scale: {
+      whileHover: { scale: 1.05 },
+      transition: { type: "spring", stiffness: 300, damping: 20 },
+    },
+    lift: {
+      whileHover: { y: -8, boxShadow: "0 10px 25px rgba(0,0,0,0.2)" },
+      transition: { type: "spring", stiffness: 300, damping: 20 },
+    },
+    rotate: {
+      whileHover: { rotate: 5 },
+      transition: { type: "spring", stiffness: 300, damping: 20 },
+    },
+    glow: {
+      whileHover: { 
+        boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
+        borderColor: "rgb(59, 130, 246)",
+      },
+      transition: { duration: 0.3 },
+    },
+  };
+  return animations[type];
+};
+
+// Animation card component
+const AnimationCard: React.FC<{
+  title: string;
+  spring: SpringConfig;
+  description: string;
+}> = ({ title, spring, description }) => {
+  const [isAnimating, setIsAnimating] = React.useState(false);
+
+  const handleClick = () => {
+    setIsAnimating(true);
+    setTimeout(() => setIsAnimating(false), 1000);
+  };
+
+  return (
+    <GlassCard className="p-6">
+      <h3 className="mb-4 font-semibold">{title}</h3>
+      <div className="mb-4 flex justify-center">
+        <motion.div
+          className="h-16 w-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 cursor-pointer"
+          animate={isAnimating ? { scale: [1, 1.2, 1], rotate: [0, 180, 360] } : {}}
+          transition={{ type: "spring", ...spring }}
+          onClick={handleClick}
+        />
+      </div>
+      <p className="mb-2 text-center text-sm text-gray-600 dark:text-gray-400">
+        {description}
+      </p>
+      <div className="text-center text-xs text-gray-500">
+        <div>Stiffness: {spring.stiffness}</div>
+        <div>Damping: {spring.damping}</div>
+      </div>
+    </GlassCard>
+  );
 };
 
 const meta: Meta = {
@@ -310,15 +371,15 @@ export const PageTransitions: Story = {
         <div className="relative h-64 overflow-hidden">
           <motion.div
             key={page}
-            initial={{ opacity: 0, x: 300 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -300 }}
-            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            initial={{ x: 300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="absolute inset-0"
           >
             <GlassCard className="flex h-full items-center justify-center">
               <div className="text-center">
-                <h3 className="mb-2 font-bold text-3xl">{pages[page]}</h3>
+                <h3 className="mb-4 font-bold text-3xl">{pages[page]}</h3>
                 <p className="text-gray-600 dark:text-gray-400">
                   This is the {pages[page].toLowerCase()} page content
                 </p>
@@ -330,67 +391,3 @@ export const PageTransitions: Story = {
     );
   },
 };
-
-function createHoverAnimation(type: "scale" | "lift" | "rotate" | "glow") {
-  switch (type) {
-    case "scale":
-      return { whileHover: { scale: 1.05 }, whileTap: { scale: 0.95 } };
-    case "lift":
-      return { whileHover: { y: -4 }, whileTap: { y: 0 } };
-    case "rotate":
-      return { whileHover: { rotate: 5 }, whileTap: { rotate: -5 } };
-    case "glow":
-      return {
-        whileHover: {
-          boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.3)",
-          borderColor: "rgba(99, 102, 241, 0.5)",
-        },
-      };
-    default:
-      return {};
-  }
-}
-
-function AnimationCard({
-  title,
-  spring,
-  description,
-}: {
-  title: string;
-  spring: SpringConfig;
-  description: string;
-}) {
-  const [isAnimating, setIsAnimating] = React.useState(false);
-  return (
-    <GlassCard className="space-y-4 p-6">
-      <h3 className="text-center font-semibold">{title}</h3>
-      <div className="relative flex h-32 items-center justify-center">
-        <motion.div
-          animate={isAnimating ? { x: 80 } : { x: -80 }}
-          transition={{ type: "spring", ...spring }}
-          className="absolute"
-        >
-          <div className="h-4 w-4 rounded-full bg-blue-500" />
-        </motion.div>
-      </div>
-      <p className="text-center text-gray-600 text-sm dark:text-gray-400">
-        {description}
-      </p>
-      <GlassButton
-        type="button"
-        size="sm"
-        fullWidth
-        onClick={() => setIsAnimating(!isAnimating)}
-      >
-        <motion.span
-          animate={{ rotate: isAnimating ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="mr-2 inline-block"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </motion.span>
-        Animate
-      </GlassButton>
-    </GlassCard>
-  );
-}

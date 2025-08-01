@@ -92,13 +92,15 @@ function readConfigFiles() {
       configs.storybookContent = null;
     }
 
-    // Read VitePress config.ts
-    const vitepressConfigPath = resolve(
-      ROOT_DIR,
-      "apps/docs/.vitepress/config.ts",
-    );
-    const vitepressContent = readFileSync(vitepressConfigPath, "utf8");
-    configs.vitepressContent = vitepressContent;
+    // Read Mintlify docs.json (instead of VitePress)
+    const mintlifyConfigPath = resolve(ROOT_DIR, "apps/docs/docs.json");
+    if (existsSync(mintlifyConfigPath)) {
+      const mintlifyContent = readFileSync(mintlifyConfigPath, "utf8");
+      configs.mintlifyContent = mintlifyContent;
+    } else {
+      logWarning("Mintlify docs.json not found - skipping documentation validation");
+      configs.mintlifyContent = null;
+    }
 
     return configs;
   } catch (error) {
@@ -231,27 +233,16 @@ function extractPathAliases(configs) {
     logWarning("Skipping Storybook alias extraction - configuration not found");
   }
 
-  // Extract from VitePress config - handle relative paths
-  const vitepressViteMatch = configs.vitepressContent.match(
-    /vite:\s*{[\s\S]*?resolve:\s*{[\s\S]*?alias:\s*{([\s\S]*?)}/,
-  );
-  if (vitepressViteMatch) {
-    const aliasContent = vitepressViteMatch[1];
-    const lines = aliasContent.split("\n");
-
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-      if (trimmedLine.startsWith("//") || !trimmedLine.includes(":")) {
-        continue;
+  // Extract from Mintlify config - handle relative paths
+  if (configs.mintlifyContent) {
+    try {
+      const mintlifyConfig = JSON.parse(configs.mintlifyContent);
+      // Mintlify doesn't typically have Vite aliases, but we can check for any path configurations
+      if (mintlifyConfig.navigation) {
+        logInfo("Mintlify navigation configuration found");
       }
-
-      const match = trimmedLine.match(
-        /["'`]([^"'`]+)["'`]\s*:\s*["'`]([^"'`]+)["'`]/,
-      );
-      if (match) {
-        const [, alias, path] = match;
-        aliases.vitepress[alias] = path;
-      }
+    } catch (error) {
+      logWarning("Failed to parse Mintlify config: " + error.message);
     }
   }
 
@@ -417,7 +408,7 @@ function validateBundleStructure(viteEntries, packageExports) {
     // Check that export paths follow expected pattern
     const expectedImportPath = `./dist/libs/components/${bundleName}.mjs`;
     const expectedRequirePath = `./dist/libs/components/cjs/${bundleName}.cjs`;
-    const expectedTypesPath = `./dist/libs/components/bundles/${bundleName}.d.ts`;
+    const expectedTypesPath = `./dist/libs/components/${bundleName}.d.ts`;
 
     if (packageExport.import !== expectedImportPath) {
       logError(

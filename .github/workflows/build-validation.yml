@@ -63,6 +63,12 @@ jobs:
       - name: Run configuration validation
         run: bun run validate:build-config
 
+      - name: TypeScript configuration validation
+        run: bun run check:tsconfig
+
+      - name: Auto-fix TypeScript configuration issues
+        run: bun run fix:typescript
+
       - name: TypeScript type checking
         run: bun run type-check
 
@@ -200,11 +206,12 @@ jobs:
           if [ "${{ job.status }}" = "success" ]; then
             echo "✅ All build validation checks passed!" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "- Configuration consistency: ✅" >> $GITHUB_STEP_SUMMARY
-            echo "- TypeScript compilation: ✅" >> $GITHUB_STEP_SUMMARY
-            echo "- Library build: ✅" >> $GITHUB_STEP_SUMMARY
-            echo "- Storybook build: ✅" >> $GITHUB_STEP_SUMMARY
-            echo "- Bundle validation: ✅" >> $GITHUB_STEP_SUMMARY
+                      echo "- Configuration consistency: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- TypeScript configuration: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- TypeScript compilation: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Library build: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Storybook build: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Bundle validation: ✅" >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ Build validation failed" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
@@ -214,6 +221,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
           echo "- Review any configuration mismatches" >> $GITHUB_STEP_SUMMARY
+          echo "- Fix TypeScript configuration issues if any" >> $GITHUB_STEP_SUMMARY
           echo "- Fix TypeScript errors if any" >> $GITHUB_STEP_SUMMARY
           echo "- Ensure all bundle entries have corresponding exports" >> $GITHUB_STEP_SUMMARY
           echo "- **Architecture Decision**: Choose documentation strategy (see ARCHITECTURE_DECISION.md)" >> $GITHUB_STEP_SUMMARY

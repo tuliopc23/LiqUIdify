@@ -122,7 +122,7 @@ Type definitions follow the source structure:
 **Examples:**
 
 - Main: `./dist/libs/components/index.d.ts`
-- Bundles: `./dist/libs/components/bundles/accessibility.d.ts`
+- Bundles: `./dist/libs/components/accessibility.d.ts`
 - Components: `./dist/libs/components/components/button.d.ts`
 
 ## Build Output Structure
@@ -134,10 +134,18 @@ dist/libs/components/
 ├── index.d.ts                    # Main type definitions
 ├── index.mjs                     # Main ESM bundle
 ├── liquidui.css                  # CSS styles
-├── bundles/                      # Bundle type definitions
-│   ├── accessibility.d.ts
-│   ├── advanced.d.ts
-│   └── ...
+├── accessibility.d.ts            # Bundle type definitions
+├── advanced.d.ts
+├── animations.d.ts
+├── core.d.ts
+├── data-display.d.ts
+├── feedback.d.ts
+├── forms.d.ts
+├── layout.d.ts
+├── navigation.d.ts
+├── physics.d.ts
+├── ssr.d.ts
+├── tokens.d.ts
 ├── components/                   # Component files
 │   ├── button.d.ts
 │   ├── button.mjs

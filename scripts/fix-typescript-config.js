@@ -272,12 +272,12 @@ function fixViteConfig() {
 /**
  * Validate configuration after fixes
  */
-function validateAfterFix() {
+async function validateAfterFix() {
   logInfo("Validating configuration after fixes...");
 
   try {
     // Test TypeScript compilation
-    const { execSync } = require("child_process");
+    const { execSync } = await import("child_process");
     execSync("npx tsc --noEmit --project tsconfig.json", {
       cwd: ROOT_DIR,
       stdio: "pipe",
@@ -293,7 +293,7 @@ function validateAfterFix() {
 /**
  * Main function
  */
-function main() {
+async function main() {
   console.log("🔧 Starting TypeScript configuration auto-fix...\n");
 
   let success = true;
@@ -306,7 +306,7 @@ function main() {
 
   // Validate after fixes
   if (success) {
-    success = validateAfterFix() && success;
+    success = await validateAfterFix() && success;
   }
 
   // Report changes
@@ -336,4 +336,7 @@ function main() {
 }
 
 // Run the script
-main();
+main().catch(error => {
+  console.error("Script failed:", error);
+  process.exit(1);
+});
