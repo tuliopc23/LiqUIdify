@@ -1,23 +1,20 @@
 // Test setup file for LiqUIdify components
 import { vi, beforeEach, afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
-import { JSDOM } from "jsdom";
 
-// Set up JSDOM environment for React Testing Library
-const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', {
-  url: 'http://localhost',
-  pretendToBeVisual: true,
-  resources: 'usable'
-});
+if (typeof global.window === 'undefined') {
+  Object.defineProperty(global, 'window', {
+    value: globalThis.window,
+    writable: true
+  });
+}
 
-// Ensure DOM globals are available
-global.window = dom.window as any;
-global.document = dom.window.document as any;
-global.navigator = dom.window.navigator as any;
-global.HTMLElement = dom.window.HTMLElement as any;
-global.HTMLButtonElement = dom.window.HTMLButtonElement as any;
-global.Element = dom.window.Element as any;
-global.Node = dom.window.Node as any;
+if (typeof global.document === 'undefined') {
+  Object.defineProperty(global, 'document', {
+    value: globalThis.document,
+    writable: true
+  });
+}
 
 // Clean up after each test
 afterEach(() => {
