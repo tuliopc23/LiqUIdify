@@ -2,17 +2,17 @@
 import { vi, beforeEach, afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
 
-if (typeof global.window === 'undefined') {
-  Object.defineProperty(global, 'window', {
+if (typeof global.window === "undefined") {
+  Object.defineProperty(global, "window", {
     value: globalThis.window,
-    writable: true
+    writable: true,
   });
 }
 
-if (typeof global.document === 'undefined') {
-  Object.defineProperty(global, 'document', {
+if (typeof global.document === "undefined") {
+  Object.defineProperty(global, "document", {
     value: globalThis.document,
-    writable: true
+    writable: true,
   });
 }
 
@@ -21,7 +21,7 @@ afterEach(() => {
   cleanup();
 });
 
-if (typeof Element !== 'undefined') {
+if (typeof Element !== "undefined") {
   Element.prototype.animate = vi.fn().mockReturnValue({
     finished: Promise.resolve(),
     cancel: vi.fn(),
@@ -147,7 +147,11 @@ const customMatchers = {
 };
 
 // Extend the global expect if available
-if (typeof globalThis !== "undefined" && (globalThis as any).expect && (globalThis as any).expect.extend) {
+if (
+  typeof globalThis !== "undefined" &&
+  (globalThis as any).expect &&
+  (globalThis as any).expect.extend
+) {
   (globalThis as any).expect.extend(customMatchers);
 }
 

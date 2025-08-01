@@ -203,7 +203,8 @@ export const GlassButton = React.memo(
           if (typeof ref === "function") {
             ref(node);
           } else if (ref) {
-            (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
+            (ref as React.MutableRefObject<HTMLButtonElement | null>).current =
+              node;
           }
         },
         [ref],

@@ -67,7 +67,7 @@ describe("Accessibility Compliance Integration Tests", () => {
       const { container } = render(<ButtonTest />);
 
       const buttons = screen.getAllByRole("button");
-      
+
       // Test tab navigation
       buttons[0].focus();
       expect(buttons[0]).toHaveFocus();
@@ -79,7 +79,7 @@ describe("Accessibility Compliance Integration Tests", () => {
       expect(buttons[2]).toHaveFocus();
 
       await user.keyboard(" ");
-      
+
       // Accessibility test
       const results = await axe(container);
       expect(results).toHaveNoViolations();
@@ -102,7 +102,9 @@ describe("Accessibility Compliance Integration Tests", () => {
               id="name"
               type="text"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               aria-required="true"
               aria-describedby="name-hint"
             />
@@ -115,7 +117,9 @@ describe("Accessibility Compliance Integration Tests", () => {
               id="email"
               type="email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               aria-required="true"
             />
           </div>
@@ -125,7 +129,9 @@ describe("Accessibility Compliance Integration Tests", () => {
               <input
                 type="checkbox"
                 checked={formData.subscribe}
-                onChange={(e) => setFormData({ ...formData, subscribe: e.target.checked })}
+                onChange={(e) =>
+                  setFormData({ ...formData, subscribe: e.target.checked })
+                }
               />
               Subscribe to newsletter
             </label>
@@ -244,7 +250,9 @@ describe("Accessibility Compliance Integration Tests", () => {
 
       const summary = screen.getByText("Expandable Section");
       await user.click(summary);
-      expect(screen.getByText("This content can be expanded or collapsed.")).toBeVisible();
+      expect(
+        screen.getByText("This content can be expanded or collapsed."),
+      ).toBeVisible();
 
       // Accessibility test
       const results = await axe(container);
@@ -272,12 +280,12 @@ describe("Accessibility Compliance Integration Tests", () => {
             >
               <h2 id="modal-title">Confirmation</h2>
               <p id="modal-desc">Are you sure you want to continue?</p>
-              
+
               <GlassButton onClick={() => setShowModal(false)}>
                 Cancel
               </GlassButton>
-              <GlassButton 
-                variant="primary" 
+              <GlassButton
+                variant="primary"
                 onClick={() => setShowModal(false)}
               >
                 Confirm
@@ -294,7 +302,7 @@ describe("Accessibility Compliance Integration Tests", () => {
       const { container } = render(<FocusTest />);
 
       const trigger = screen.getByText("Open Modal");
-      
+
       // Open modal
       await user.click(trigger);
 
@@ -488,15 +496,21 @@ describe("Accessibility Compliance Integration Tests", () => {
 
             <section aria-labelledby="faq-heading">
               <h2 id="faq-heading">Frequently Asked Questions</h2>
-              
+
               <details>
                 <summary>What is accessibility?</summary>
-                <p>Accessibility ensures that people with disabilities can use your website.</p>
+                <p>
+                  Accessibility ensures that people with disabilities can use
+                  your website.
+                </p>
               </details>
-              
+
               <details>
                 <summary>Why is it important?</summary>
-                <p>It provides equal access to information and functionality for all users.</p>
+                <p>
+                  It provides equal access to information and functionality for
+                  all users.
+                </p>
               </details>
             </section>
           </main>
@@ -543,12 +557,16 @@ describe("Accessibility Compliance Integration Tests", () => {
       // Check details/summary keyboard support
       const summaries = screen.getAllByText(/What is|Why is/);
       expect(summaries).toHaveLength(2);
-      
+
       const firstSummary = summaries[0];
       fireEvent.click(firstSummary);
-      
+
       await waitFor(() => {
-        expect(screen.getByText("Accessibility ensures that people with disabilities can use your website.")).toBeVisible();
+        expect(
+          screen.getByText(
+            "Accessibility ensures that people with disabilities can use your website.",
+          ),
+        ).toBeVisible();
       });
     });
   });
