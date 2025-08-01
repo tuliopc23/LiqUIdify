@@ -15,7 +15,7 @@ export * from "./components/glass-loading";
 export * from "./components/glass-modal";
 export * from "./components/glass-notification";
 export * from "./components/glass-pagination";
-export * from "./components/glass-playground";
+// export * from "./components/glass-playground"; // Temporarily disabled due to build issues
 export * from "./components/glass-popover";
 export * from "./components/glass-portal";
 export * from "./components/glass-progress";
@@ -50,11 +50,9 @@ export * from "./components/glass-file-upload";
 export * from "./components/glass-number-input";
 export * from "./components/glass-textarea";
 export * from "./components/glass-form-field";
-export * from "./components/glass-number-input";
 export * from "./components/glass-radio-group";
 export * from "./components/glass-search";
 export * from "./components/glass-select";
-export * from "./components/glass-textarea";
 
 // Layout components
 export * from "./components/glass-drawer";
@@ -77,5 +75,5 @@ export * from "./components/theme-toggle";
 
 // Showcase and demo components
 // export * from "./components/component-showcase"; // Component not implemented
-export * from "./components/enhanced-apple-liquid-glass";
+
 export * from "./components/hydration-detector";

@@ -2,51 +2,44 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "installCommand": "bun install --frozen-lockfile",
-  "buildCommand": "bun run build",
-  "outputDirectory": "dist",
+  "buildCommand": "bun run build:storybook",
+  "outputDirectory": "apps/storybook/storybook-static",
   "framework": null,
+  "functions": {
+    "apps/api/**": {
+      "runtime": "vercel@edge"
+    }
+  },
   "builds": [
     {
-      "src": "libs/components/package.json",
+      "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "cd ../.. && bun run build:lib",
-        "outputDirectory": "../../dist/libs/components"
-      }
-    },
-    {
-      "src": "apps/storybook/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "cd ../.. && bun run build:storybook",
-        "outputDirectory": "../../dist/storybook"
-      }
-    },
-    {
-      "src": "apps/docs/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "cd ../.. && bun run docs:build",
-        "outputDirectory": "../../dist/docs"
+        "buildCommand": "bun run build:storybook",
+        "outputDirectory": "apps/storybook/storybook-static",
+        "installCommand": "bun install --frozen-lockfile"
       }
     }
   ],
   "routes": [
     {
-      "src": "/storybook/(.*)",
-      "dest": "/storybook/$1"
-    },
-    {
-      "src": "/docs/(.*)",
-      "dest": "/docs/$1"
+      "src": "/health",
+      "dest": "/health.json"
     },
     {
       "src": "/api/(.*)",
-      "status": 404
+      "status": 404,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    {
+      "src": "/storybook/(.*)",
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/storybook/$1"
+      "dest": "/$1"
     }
   ],
   "headers": [
@@ -59,7 +52,7 @@
         },
         {
           "key": "X-Frame-Options",
-          "value": "DENY"
+          "value": "SAMEORIGIN"
         },
         {
           "key": "X-XSS-Protection",
@@ -72,6 +65,10 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self'"
         }
       ]
     },
@@ -81,29 +78,52 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "cross-origin"
         }
       ]
     },
     {
-      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2))",
+      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|eot|ttf|otf))",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.html)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, s-maxage=3600"
         }
       ]
     }
   ],
   "redirects": [
     {
-      "source": "/",
-      "destination": "/storybook",
+      "source": "/components/:path*",
+      "destination": "/?path=/story/components-:path*",
       "permanent": false
     },
     {
-      "source": "/components/:path*",
-      "destination": "/storybook/?path=/story/:path*",
+      "source": "/docs/(.*)",
+      "destination": "/?path=/docs/$1",
       "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/iframe.html",
+      "destination": "/iframe.html"
     }
   ],
   "trailingSlash": false,
@@ -111,16 +131,9 @@
   "github": {
     "enabled": false
   },
-  "functions": {
-    "apps/docs/.vitepress/config.ts": {
-      "memory": 1024,
-      "maxDuration": 30
-    }
-  },
-  "crons": [
-    {
-      "path": "/api/health-check",
-      "schedule": "0 */6 * * *"
-    }
-  ]
+  "crons": [],
+  "env": {
+    "NODE_ENV": "production",
+    "CI": "true"
+  }
 }

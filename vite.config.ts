@@ -21,9 +21,18 @@ export default defineConfig(({ mode }) => {
         ],
         outDir: "dist/libs/components",
         entryRoot: "libs/components/src",
-        skipDiagnostics: true,
+        skipDiagnostics: false,
         staticImport: true,
         rollupTypes: isProduction,
+        // Add TypeScript compiler options for better type checking
+        compilerOptions: {
+          strict: true,
+          noImplicitAny: true,
+          strictNullChecks: true,
+          strictFunctionTypes: true,
+          noImplicitReturns: true,
+          noFallthroughCasesInSwitch: true,
+        },
       }),
       // Bundle analyzer in production
       isProduction &&
@@ -45,6 +54,12 @@ export default defineConfig(({ mode }) => {
       alias: {
         "@liquidify/components": resolve("libs/components/src/index.ts"),
         "@": resolve("libs/components/src"),
+        "@/components/*": resolve("libs/components/src/components/*"),
+        "@/core/*": resolve("libs/components/src/core/*"),
+        "@/hooks/*": resolve("libs/components/src/hooks/*"),
+        "@/styles/*": resolve("libs/components/src/styles/*"),
+        "@/tokens/*": resolve("libs/components/src/tokens/*"),
+        "@/types/*": resolve("libs/components/src/types/*"),
       },
     },
     build: {
@@ -64,6 +79,12 @@ export default defineConfig(({ mode }) => {
           accessibility: resolve(
             "libs/components/src/bundles/accessibility.ts",
           ),
+          advanced: resolve("libs/components/src/bundles/advanced.ts"),
+          animations: resolve("libs/components/src/bundles/animations.ts"),
+          physics: resolve("libs/components/src/bundles/physics.ts"),
+          ssr: resolve("libs/components/src/bundles/ssr.ts"),
+          providers: resolve("libs/components/src/bundles/providers.ts"),
+          tokens: resolve("libs/components/src/bundles/tokens.ts"),
           // Individual component entries
           "components/button": resolve(
             "libs/components/src/components/glass-button-refactored/index.ts",
@@ -95,6 +116,9 @@ export default defineConfig(({ mode }) => {
           preserveModules: false,
           // Exports
           exports: "named",
+          // CommonJS compatibility
+          interop: "auto",
+          esModule: false,
           // Globals for UMD builds
           globals: {
             react: "React",
@@ -109,12 +133,19 @@ export default defineConfig(({ mode }) => {
             return assetInfo.name;
           },
           // Manual chunks for optimal splitting
-          manualChunks: {
-            utils: ["libs/components/src/utils/index.ts"],
-            hooks: ["libs/components/src/hooks/index.ts"],
-            "core/glass": [
-              "libs/components/src/core/glass/unified-glass-system.tsx",
-            ],
+          manualChunks: (id) => {
+            // Handle manual chunks dynamically
+            if (id.includes("/utils/") && !id.includes("node_modules")) {
+              return "utils";
+            }
+            if (id.includes("/hooks/") && !id.includes("node_modules")) {
+              return "hooks";
+            }
+            if (id.includes("/core/glass/") && !id.includes("node_modules")) {
+              return "core-glass";
+            }
+            // Default behavior
+            return undefined;
           },
         },
         // Tree shaking
@@ -129,7 +160,7 @@ export default defineConfig(({ mode }) => {
       // Empty output directory
       emptyOutDir: true,
       // Build target
-      target: "es2020",
+      target: "es2021",
       // Minification
       minify: isProduction ? "terser" : false,
       terserOptions: isProduction
@@ -154,16 +185,16 @@ export default defineConfig(({ mode }) => {
       // Chunk size warnings
       chunkSizeWarningLimit: 30,
       // CSS code splitting
-      cssCodeSplit: true,
+      cssCodeSplit: false,
       // CSS minification
-      cssMinify: isProduction ? "lightningcss" : false,
+      cssMinify: isProduction,
       // Asset inlining threshold
       assetsInlineLimit: 4096,
       // Report compressed size
       reportCompressedSize: isProduction,
     },
     esbuild: {
-      target: "es2020",
+      target: "es2021",
       jsx: "automatic",
       // Remove comments in production
       legalComments: isProduction ? "none" : "inline",
@@ -191,7 +222,8 @@ export default defineConfig(({ mode }) => {
       // Preprocessor options
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "@/styles/variables.scss";`,
+          // Remove the import that doesn't exist
+          additionalData: "",
         },
       },
     },
@@ -200,7 +232,7 @@ export default defineConfig(({ mode }) => {
       include: ["react", "react-dom"],
       exclude: ["@liquidify/components"],
       esbuildOptions: {
-        target: "es2020",
+        target: "es2021",
       },
     },
     // Server config for development

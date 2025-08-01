@@ -29,9 +29,10 @@
     "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "^1.54.1",
     "@storybook/addon-a11y": "^9.0.18",
-    "@storybook/addon-essentials": "^8.6.14",
-    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-essentials": "^9.0.18",
+    "@storybook/addon-interactions": "^9.0.18",
     "@storybook/addon-links": "^9.0.18",
+    "@storybook/addon-storysource": "^9.0.18",
     "@storybook/builder-vite": "^9.0.18",
     "@storybook/react": "^9.0.18",
     "@storybook/react-vite": "^9.0.18",
@@ -95,63 +96,68 @@
       "types": "./dist/libs/components/components/glass-card-refactored/index.d.ts"
     },
     "./context": {
+      "types": "./dist/libs/components/bundles/providers.d.ts",
       "import": "./dist/libs/components/providers.mjs",
-      "require": "./dist/libs/components/cjs/providers.cjs",
-      "types": "./dist/libs/components/providers/index.d.ts"
+      "require": "./dist/libs/components/cjs/providers.cjs"
+    },
+    "./data-display": {
+      "types": "./dist/libs/components/bundles/data-display.d.ts",
+      "import": "./dist/libs/components/data-display.mjs",
+      "require": "./dist/libs/components/cjs/data-display.cjs"
     },
     "./core": {
+      "types": "./dist/libs/components/bundles/core.d.ts",
       "import": "./dist/libs/components/core.mjs",
       "modern": "./dist/libs/components/core.mjs",
-      "require": "./dist/libs/components/cjs/core.cjs",
-      "types": "./dist/libs/components/bundles/core.d.ts"
+      "require": "./dist/libs/components/cjs/core.cjs"
     },
     "./css": "./dist/libs/components/liquidui.css",
     "./feedback": {
+      "types": "./dist/libs/components/bundles/feedback.d.ts",
       "import": "./dist/libs/components/feedback.mjs",
-      "require": "./dist/libs/components/cjs/feedback.cjs",
-      "types": "./dist/libs/components/bundles/feedback.d.ts"
+      "require": "./dist/libs/components/cjs/feedback.cjs"
     },
     "./forms": {
+      "types": "./dist/libs/components/bundles/forms.d.ts",
       "import": "./dist/libs/components/forms.mjs",
-      "require": "./dist/libs/components/cjs/forms.cjs",
-      "types": "./dist/libs/components/bundles/forms.d.ts"
+      "require": "./dist/libs/components/cjs/forms.cjs"
     },
     "./input": {
+      "types": "./dist/libs/components/components/glass-input/index.d.ts",
       "import": "./dist/libs/components/components/input.mjs",
-      "require": "./dist/libs/components/cjs/components/input.cjs",
-      "types": "./dist/libs/components/components/glass-input/index.d.ts"
+      "require": "./dist/libs/components/cjs/components/input.cjs"
     },
     "./layout": {
+      "types": "./dist/libs/components/bundles/layout.d.ts",
       "import": "./dist/libs/components/layout.mjs",
-      "require": "./dist/libs/components/cjs/layout.cjs",
-      "types": "./dist/libs/components/bundles/layout.d.ts"
+      "require": "./dist/libs/components/cjs/layout.cjs"
     },
     "./modal": {
+      "types": "./dist/libs/components/components/glass-modal/index.d.ts",
       "import": "./dist/libs/components/components/modal.mjs",
-      "require": "./dist/libs/components/cjs/components/modal.cjs",
-      "types": "./dist/libs/components/components/glass-modal/index.d.ts"
+      "require": "./dist/libs/components/cjs/components/modal.cjs"
     },
     "./navigation": {
+      "types": "./dist/libs/components/bundles/navigation.d.ts",
       "import": "./dist/libs/components/navigation.mjs",
-      "require": "./dist/libs/components/cjs/navigation.cjs",
-      "types": "./dist/libs/components/bundles/navigation.d.ts"
+      "require": "./dist/libs/components/cjs/navigation.cjs"
     },
     "./package.json": "./package.json",
     "./physics": {
+      "types": "./dist/libs/components/bundles/physics.d.ts",
       "import": "./dist/libs/components/physics.mjs",
-      "require": "./dist/libs/components/cjs/physics.cjs",
-      "types": "./dist/libs/components/bundles/physics.d.ts"
+      "require": "./dist/libs/components/cjs/physics.cjs"
     },
     "./ssr": {
+      "types": "./dist/libs/components/bundles/ssr.d.ts",
       "import": "./dist/libs/components/ssr.mjs",
-      "require": "./dist/libs/components/cjs/ssr.cjs",
-      "types": "./dist/libs/components/bundles/ssr.d.ts"
+      "require": "./dist/libs/components/cjs/ssr.cjs"
     },
     "./styles": "./dist/libs/components/liquidui.css",
     "./tokens": {
+      "types": "./dist/libs/components/bundles/tokens.d.ts",
       "import": "./dist/libs/components/tokens.mjs",
-      "require": "./dist/libs/components/cjs/tokens.cjs",
-      "types": "./dist/libs/components/tokens/index.d.ts"
+      "require": "./dist/libs/components/cjs/tokens.cjs"
     }
   },
   "files": [
@@ -163,28 +169,30 @@
     "type": "github",
     "url": "https://github.com/sponsors/tuliopc23"
   },
-  "homepage": "https://liquidify-storybook.vercel.app",
+  "homepage": "https://liquidify.dev",
   "keywords": [
+    "react",
+    "typescript",
+    "components",
     "glassmorphism",
-    "liquidui",
-    "liquid-glass",
     "ui-library",
+    "design-system",
+    "accessibility",
+    "wcag",
+    "liquid-glass",
     "physics",
-    "content-aware",
+    "animations",
     "magnetic-hover",
     "spring-animations",
-    "accessibility",
-    "typescript",
-    "react",
-    "webgl",
-    "design-system",
-    "components",
-    "tailwind"
+    "tailwind",
+    "storybook",
+    "premium",
+    "production-ready"
   ],
   "license": "MIT",
   "main": "./dist/libs/components/index.cjs",
   "module": "./dist/libs/components/index.mjs",
-  "name": "liquidify",
+  "name": "@liquidify/components",
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19"
@@ -196,7 +204,7 @@
   "scripts": {
     "build": "bun run build:lib && bun run build:storybook && bun run docs:build",
     "build:lib": "vite build --config vite.config.ts --mode production",
-    "build:storybook": "storybook build -c apps/storybook/.storybook -o dist/storybook",
+    "build:storybook": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static",
     "build:watch": "vite build --config vite.config.ts --watch",
     "dev": "vite --config vite.config.ts",
     "storybook": "storybook dev -p 6006 -c apps/storybook/.storybook",
@@ -214,12 +222,19 @@
     "test:all": "bun run test && bun run test:integration && bun run test:e2e && bun run test:a11y",
     "type-check": "bunx tsc --noEmit --project tsconfig.json",
     "analyze:bundle": "node scripts/bundle-analysis.js",
+    "validate:build-config": "node scripts/validate-build-config.js",
+    "deploy:validate": "node scripts/pre-deployment-check.js",
+    "deploy:preview": "bun run deploy:validate && echo 'Ready for deployment preview'",
+    "deploy:production": "bun run deploy:validate && echo 'Ready for production deployment'",
+    "analyze:performance": "node scripts/performance-benchmark.js",
     "audit:components": "node scripts/component-audit.js",
-    "audit:security": "bun audit && bunx snyk test",
-    "audit:all": "bun run audit:security && bun run audit:components && bun run test:a11y",
+    "audit:security": "node scripts/security-audit.js",
+    "audit:accessibility": "node scripts/accessibility-audit.js",
+    "audit:all": "bun run audit:security && bun run audit:components && bun run audit:accessibility",
     "ci": "bun run type-check && bun run lint && bun run test:all && bun run build && bun run audit:all",
     "ci:quick": "bun run type-check && bun run lint && bun run test",
-    "release:prepare": "bun run ci && bun run analyze:bundle",
+    "release:prepare": "bun run ci && bun run analyze:bundle && bun run analyze:performance",
+    "launch:final-check": "bun run audit:all && bun run analyze:bundle && bun run analyze:performance",
     "release:dry": "npm publish --dry-run",
     "prepublishOnly": "node scripts/pre-publish.js",
     "postpublish": "echo '🎉 Package published successfully!'",
@@ -236,5 +251,10 @@
   "style": "./dist/libs/components/liquidui.css",
   "type": "module",
   "types": "./dist/libs/components/index.d.ts",
-  "version": "1.2.4"
+  "version": "1.3.0",
+  "workspaces": [
+    "apps/*",
+    "examples/*",
+    "libs/*"
+  ]
 }

@@ -37,9 +37,7 @@
       "@/styles/*": ["libs/components/src/styles/*"],
       "@/tokens/*": ["libs/components/src/tokens/*"],
       "@/types/*": ["libs/components/src/types/*"],
-      "@liquidify/components": ["libs/components/src/index.ts"],
-      "@liquidify/tokens": ["libs/tokens/src/index.ts"],
-      "@liquidify/utils": ["libs/utils/src/index.ts"]
+      "@liquidify/components": ["libs/components/src/index.ts"]
     }
   },
   "exclude": [

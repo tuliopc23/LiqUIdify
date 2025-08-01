@@ -1,0 +1,35 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "lib": ["dom", "dom.iterable", "es6"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2017",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../../libs/components/src/*"],
+      "@liquidify/components": ["../../libs/components/src/index.ts"],
+      "@/components/*": ["../../libs/components/src/components/*"],
+      "@/core/*": ["../../libs/components/src/core/*"],
+      "@/hooks/*": ["../../libs/components/src/hooks/*"],
+      "@/styles/*": ["../../libs/components/src/styles/*"],
+      "@/tokens/*": ["../../libs/components/src/tokens/*"],
+      "@/types/*": ["../../libs/components/src/types/*"]
+    }
+  },
+  "include": [
+    ".storybook/**/*",
+    "../../libs/components/src/**/*",
+    "../../libs/components/src/stories/**/*"
+  ],
+  "exclude": ["node_modules", "storybook-static"]
+}

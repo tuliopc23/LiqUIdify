@@ -8,9 +8,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ElementWithPolishData extends HTMLElement {
   _polishAnimation?: Animation;
-  _polishHandlers?: {
-    handleInteraction: (event: Event) => void;
-  };
+  _polishHandlers?: Record<string, (event: Event) => void>;
 }
 
 interface VisualQualityMetrics {
@@ -351,49 +349,51 @@ class VisualPolishManager {
       (element as ElementWithPolishData)._polishAnimation = animationInstance;
     };
 
+    const handleReverseAnimation = (_event: Event) => {
+      const animation = (element as ElementWithPolishData)._polishAnimation;
+      if (animation) {
+        animation.reverse();
+      }
+    };
+
+    const handlers: Record<string, (event: Event) => void> = {};
+
     // Add event listeners based on trigger
     switch (trigger) {
       case "hover": {
-        element.addEventListener("mouseenter", handleInteraction);
-        element.addEventListener("mouseleave", (_e) => {
-          const animation = (element as ElementWithPolishData)._polishAnimation;
-          if (animation) {
-            animation.reverse();
-          }
-        });
+        handlers.mouseenter = handleInteraction;
+        handlers.mouseleave = handleReverseAnimation;
+        element.addEventListener("mouseenter", handlers.mouseenter);
+        element.addEventListener("mouseleave", handlers.mouseleave);
         break;
       }
       case "focus": {
-        element.addEventListener("focus", handleInteraction);
-        element.addEventListener("blur", (_e) => {
-          const animation = (element as ElementWithPolishData)._polishAnimation;
-          if (animation) {
-            animation.reverse();
-          }
-        });
+        handlers.focus = handleInteraction;
+        handlers.blur = handleReverseAnimation;
+        element.addEventListener("focus", handlers.focus);
+        element.addEventListener("blur", handlers.blur);
         break;
       }
       case "active": {
-        element.addEventListener("mousedown", handleInteraction);
-        element.addEventListener("mouseup", () => {
-          const animation = (element as ElementWithPolishData)._polishAnimation;
-          if (animation) {
-            animation.reverse();
-          }
-        });
+        handlers.mousedown = handleInteraction;
+        handlers.mouseup = handleReverseAnimation;
+        element.addEventListener("mousedown", handlers.mousedown);
+        element.addEventListener("mouseup", handlers.mouseup);
         break;
       }
       case "click": {
-        element.addEventListener("click", handleInteraction);
+        handlers.click = handleInteraction;
+        element.addEventListener("click", handlers.click);
         break;
       }
       case "touch": {
-        element.addEventListener("touchstart", handleInteraction);
+        handlers.touchstart = handleInteraction;
+        element.addEventListener("touchstart", handlers.touchstart);
         break;
       }
     }
     // Store event handlers for cleanup
-    (element as ElementWithPolishData)._polishHandlers = { handleInteraction };
+    (element as ElementWithPolishData)._polishHandlers = handlers;
   }
 
   /**
@@ -406,26 +406,42 @@ class VisualPolishManager {
     if (handlers) {
       switch (trigger) {
         case "hover": {
-          element.removeEventListener("mouseenter", handlers.handleInteraction);
-          element.removeEventListener("mouseleave", handlers.handleInteraction);
+          if (handlers.mouseenter) {
+            element.removeEventListener("mouseenter", handlers.mouseenter);
+          }
+          if (handlers.mouseleave) {
+            element.removeEventListener("mouseleave", handlers.mouseleave);
+          }
           break;
         }
         case "focus": {
-          element.removeEventListener("focus", handlers.handleInteraction);
-          element.removeEventListener("blur", handlers.handleInteraction);
+          if (handlers.focus) {
+            element.removeEventListener("focus", handlers.focus);
+          }
+          if (handlers.blur) {
+            element.removeEventListener("blur", handlers.blur);
+          }
           break;
         }
         case "active": {
-          element.removeEventListener("mousedown", handlers.handleInteraction);
-          element.removeEventListener("mouseup", handlers.handleInteraction);
+          if (handlers.mousedown) {
+            element.removeEventListener("mousedown", handlers.mousedown);
+          }
+          if (handlers.mouseup) {
+            element.removeEventListener("mouseup", handlers.mouseup);
+          }
           break;
         }
         case "click": {
-          element.removeEventListener("click", handlers.handleInteraction);
+          if (handlers.click) {
+            element.removeEventListener("click", handlers.click);
+          }
           break;
         }
         case "touch": {
-          element.removeEventListener("touchstart", handlers.handleInteraction);
+          if (handlers.touchstart) {
+            element.removeEventListener("touchstart", handlers.touchstart);
+          }
           break;
         }
       }
@@ -482,10 +498,63 @@ class VisualPolishManager {
       canvas.width = rect.width;
       canvas.height = rect.height;
 
-      // Use html2canvas or similar library in real implementation
-      // For now, we'll simulate with a placeholder
-      const imageData = context.createImageData(canvas.width, canvas.height);
-      test.baseline = imageData;
+      // Capture element's visual state using DOM-to-Canvas approach
+      const computedStyle = window.getComputedStyle(test.element);
+
+      // Fill background
+      context.fillStyle = computedStyle.backgroundColor || "transparent";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      // If element has backgroundImage, try to capture it
+      const bgImage = computedStyle.backgroundImage;
+      if (bgImage && bgImage !== "none") {
+        const img = new Image();
+        const match = bgImage.match(/url\(["']?(.+?)["']?\)/);
+        if (match && match[1]) {
+          img.src = match[1];
+          await new Promise((resolve) => {
+            img.onload = () => {
+              context.drawImage(img, 0, 0, canvas.width, canvas.height);
+              resolve(undefined);
+            };
+            img.onerror = resolve;
+          });
+        }
+      }
+
+      // Capture border and box-shadow
+      const borderWidth = parseFloat(computedStyle.borderWidth) || 0;
+      if (borderWidth > 0) {
+        context.strokeStyle = computedStyle.borderColor || "transparent";
+        context.lineWidth = borderWidth;
+        context.strokeRect(
+          borderWidth / 2,
+          borderWidth / 2,
+          canvas.width - borderWidth,
+          canvas.height - borderWidth,
+        );
+      }
+
+      // For text elements, capture text content
+      if (test.element.textContent) {
+        context.font = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+        context.fillStyle = computedStyle.color || "black";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+
+        // Simple text rendering (for more complex layouts, would need better implementation)
+        const lines = test.element.textContent.split("\n");
+        const lineHeight =
+          parseFloat(computedStyle.lineHeight) ||
+          parseFloat(computedStyle.fontSize) * 1.2;
+        lines.forEach((line, index) => {
+          const y = canvas.height / 2 + (index - lines.length / 2) * lineHeight;
+          context.fillText(line, canvas.width / 2, y);
+        });
+      }
+
+      // Get image data as baseline
+      test.baseline = context.getImageData(0, 0, canvas.width, canvas.height);
     } catch {
       // Logging disabled
     }
@@ -501,9 +570,98 @@ class VisualPolishManager {
     }
 
     try {
-      // Capture current state and compare with baseline
-      // This would use actual screenshot comparison in real implementation
-      const difference = Math.random() * 0.02; // Simulated difference
+      // Capture current state
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      if (!context) {
+        return false;
+      }
+
+      const rect = test.element.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      // Capture current visual state (same process as baseline)
+      const computedStyle = window.getComputedStyle(test.element);
+
+      context.fillStyle = computedStyle.backgroundColor || "transparent";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      const bgImage = computedStyle.backgroundImage;
+      if (bgImage && bgImage !== "none") {
+        const img = new Image();
+        const match = bgImage.match(/url\(["']?(.+?)["']?\)/);
+        if (match && match[1]) {
+          img.src = match[1];
+          await new Promise((resolve) => {
+            img.onload = () => {
+              context.drawImage(img, 0, 0, canvas.width, canvas.height);
+              resolve(undefined);
+            };
+            img.onerror = resolve;
+          });
+        }
+      }
+
+      const borderWidth = parseFloat(computedStyle.borderWidth) || 0;
+      if (borderWidth > 0) {
+        context.strokeStyle = computedStyle.borderColor || "transparent";
+        context.lineWidth = borderWidth;
+        context.strokeRect(
+          borderWidth / 2,
+          borderWidth / 2,
+          canvas.width - borderWidth,
+          canvas.height - borderWidth,
+        );
+      }
+
+      if (test.element.textContent) {
+        context.font = `${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+        context.fillStyle = computedStyle.color || "black";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+
+        const lines = test.element.textContent.split("\n");
+        const lineHeight =
+          parseFloat(computedStyle.lineHeight) ||
+          parseFloat(computedStyle.fontSize) * 1.2;
+        lines.forEach((line, index) => {
+          const y = canvas.height / 2 + (index - lines.length / 2) * lineHeight;
+          context.fillText(line, canvas.width / 2, y);
+        });
+      }
+
+      // Get current image data
+      const currentData = context.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height,
+      );
+
+      // Compare with baseline
+      let diffPixels = 0;
+      const totalPixels = currentData.data.length / 4; // 4 channels per pixel
+
+      for (let i = 0; i < currentData.data.length; i += 4) {
+        const rDiff = Math.abs(currentData.data[i] - test.baseline.data[i]);
+        const gDiff = Math.abs(
+          currentData.data[i + 1] - test.baseline.data[i + 1],
+        );
+        const bDiff = Math.abs(
+          currentData.data[i + 2] - test.baseline.data[i + 2],
+        );
+        const aDiff = Math.abs(
+          currentData.data[i + 3] - test.baseline.data[i + 3],
+        );
+
+        // If any channel differs by more than 5 (out of 255), count as different pixel
+        if (rDiff > 5 || gDiff > 5 || bDiff > 5 || aDiff > 5) {
+          diffPixels++;
+        }
+      }
+
+      const difference = diffPixels / totalPixels;
       const passed = difference <= test.threshold;
 
       test.lastResult = {

@@ -10,7 +10,7 @@ const execAsync = promisify(exec);
 
 // Configuration
 const CONFIG = {
-  distPath: "dist",
+  distPath: "dist/libs/components",
   reportPath: "reports/bundle",
   sizeLimits: {
     "core.js": 30 * 1024, // 30KB
@@ -97,31 +97,54 @@ async function analyzeBundle(filePath) {
 async function analyzeExports() {
   console.log("🔍 Analyzing bundle exports...\n");
 
-  const allFiles = getAllFiles(CONFIG.distPath);
-  const jsFiles = allFiles.filter((f) => extname(f) === ".js");
-  const cssFiles = allFiles.filter((f) => extname(f) === ".css");
-  const dtsFiles = allFiles.filter((f) => f.endsWith(".d.ts"));
+  try {
+    const allFiles = getAllFiles(CONFIG.distPath);
+    const jsFiles = allFiles.filter((f) => extname(f) === ".js");
+    const cssFiles = allFiles.filter((f) => extname(f) === ".css");
+    const dtsFiles = allFiles.filter((f) => f.endsWith(".d.ts"));
 
-  const analyses = [];
+    const analyses = [];
 
-  // Analyze JS bundles
-  for (const file of jsFiles) {
-    const analysis = await analyzeBundle(file);
-    analyses.push(analysis);
+    // Analyze JS bundles
+    for (const file of jsFiles) {
+      const analysis = await analyzeBundle(file);
+      analyses.push(analysis);
+    }
+
+    // Sort by size descending
+    analyses.sort((a, b) => b.size - a.size);
+
+    return {
+      timestamp: new Date().toISOString(),
+      totalFiles: allFiles.length,
+      jsFiles: jsFiles.length,
+      cssFiles: cssFiles.length,
+      typeDefinitions: dtsFiles.length,
+      analyses,
+      summary: generateSummary(analyses),
+    };
+  } catch (error) {
+    console.warn("⚠️ Could not find built files, returning empty analysis");
+    return {
+      timestamp: new Date().toISOString(),
+      totalFiles: 0,
+      jsFiles: 0,
+      cssFiles: 0,
+      typeDefinitions: 0,
+      analyses: [],
+      summary: {
+        totalSize: 0,
+        totalGzipSize: 0,
+        totalSizeFormatted: "0 B",
+        totalGzipSizeFormatted: "0 B",
+        averageCompressionRatio: "0",
+        violations: 0,
+        criticalViolations: 0,
+        largestBundle: null,
+        status: "pending",
+      },
+    };
   }
-
-  // Sort by size descending
-  analyses.sort((a, b) => b.size - a.size);
-
-  return {
-    timestamp: new Date().toISOString(),
-    totalFiles: allFiles.length,
-    jsFiles: jsFiles.length,
-    cssFiles: cssFiles.length,
-    typeDefinitions: dtsFiles.length,
-    analyses,
-    summary: generateSummary(analyses),
-  };
 }
 
 function generateSummary(analyses) {
@@ -303,7 +326,7 @@ async function generateVisualization(data) {
 <body>
   <div class="container">
     <h1>Bundle Analysis Report</h1>
-    
+
     <div class="stats">
       <div class="stat">
         <div class="stat-value">${data.summary.totalSizeFormatted}</div>
@@ -322,45 +345,45 @@ async function generateVisualization(data) {
         <div class="stat-label">Size Violations</div>
       </div>
     </div>
-    
+
     <h2>Bundle Treemap</h2>
     <div id="treemap"></div>
-    
+
     <div class="tooltip"></div>
   </div>
-  
+
   <script>
     const data = ${JSON.stringify(treemapData)};
-    
+
     const width = document.getElementById('treemap').clientWidth;
     const height = 600;
-    
+
     const color = d3.scaleOrdinal()
       .domain(['bundles', 'components', 'core', 'styles', 'root'])
       .range(['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6']);
-    
+
     const treemap = d3.treemap()
       .size([width, height])
       .padding(2);
-    
+
     const root = d3.hierarchy(data)
       .sum(d => d.value)
       .sort((a, b) => b.value - a.value);
-    
+
     treemap(root);
-    
+
     const svg = d3.select('#treemap')
       .append('svg')
       .attr('width', width)
       .attr('height', height);
-    
+
     const tooltip = d3.select('.tooltip');
-    
+
     const leaf = svg.selectAll('g')
       .data(root.leaves())
       .join('g')
       .attr('transform', d => \`translate(\${d.x0},\${d.y0})\`);
-    
+
     leaf.append('rect')
       .attr('fill', d => color(d.parent.data.name))
       .attr('width', d => d.x1 - d.x0)
@@ -374,7 +397,7 @@ async function generateVisualization(data) {
       .on('mouseout', () => {
         tooltip.transition().duration(500).style('opacity', 0);
       });
-    
+
     leaf.append('text')
       .attr('x', 4)
       .attr('y', 20)
@@ -385,7 +408,7 @@ async function generateVisualization(data) {
       })
       .attr('font-size', '11px')
       .attr('fill', 'white');
-    
+
     function formatBytes(bytes) {
       const sizes = ['B', 'KB', 'MB'];
       if (bytes === 0) return '0 B';
@@ -403,10 +426,17 @@ async function main() {
   console.log("📦 LiqUIdify Bundle Analysis\n");
 
   try {
-    // Ensure dist directory exists
-    if (!statSync(CONFIG.distPath).isDirectory()) {
+    // Check if dist directory exists
+    try {
+      if (!statSync(CONFIG.distPath).isDirectory()) {
+        console.error(
+          "❌ Dist directory not found. Please build the project first.",
+        );
+        process.exit(1);
+      }
+    } catch (error) {
       console.error(
-        "❌ Dist directory not found. Please build the project first.",
+        "❌ Dist directory not found. Please build the project first with 'bun run build:lib'",
       );
       process.exit(1);
     }

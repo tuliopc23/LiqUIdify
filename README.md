@@ -2,12 +2,12 @@
 
 [![npm version](https://img.shields.io/npm/v/@liquidify/components)](https://www.npmjs.com/package/@liquidify/components)
 [![npm downloads](https://img.shields.io/npm/dm/@liquidify/components)](https://www.npmjs.com/package/@liquidify/components)
-[![Build Status](https://github.com/liquidify/components/actions/workflows/ci.yml/badge.svg)](https://github.com/liquidify/components/actions)
+[![Build Status](https://github.com/tuliopc23/LiqUIdify/actions/workflows/ci.yml/badge.svg)](https://github.com/tuliopc23/LiqUIdify/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@liquidify/components)](https://bundlephobia.com/package/@liquidify/components)
 [![WCAG 2.1 AA](https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-green)](https://www.w3.org/WAI/WCAG21/quickref/)
-[![Storybook](https://img.shields.io/badge/Storybook-52%2B%20Components-ff4785)](https://storybook.liquidify.dev)
+[![Storybook](https://img.shields.io/badge/Storybook-52%2B%20Components-ff4785)](https://liquidify-storybook.vercel.app)
 
 > 🚀 **Production-ready React component library** with glassmorphism design. 52+ components, TypeScript-first, WCAG 2.1 AA compliant, tree-shakeable, and framework agnostic.
 
@@ -92,9 +92,9 @@ import "@liquidify/components/styles/forms.css";
 
 ## 📚 Documentation
 
-- 📖 **[Storybook](https://storybook.liquidify.dev)** - Live component playground with 52+ interactive examples
-- 📘 **[Documentation Site](https://docs.liquidify.dev)** - Comprehensive guides and API reference
-- 🚀 **[Getting Started](https://docs.liquidify.dev/getting-started)** - Quick setup and basic usage
+- 📚 **[Storybook](https://liquidify-storybook.vercel.app)** - Live component playground with 52+ interactive examples
+- 📘 **[Documentation Site](https://liquidify-docs.vercel.app)** - Comprehensive guides and API reference
+- 🚀 **[Getting Started](https://liquidify-docs.vercel.app/guide/)** - Quick setup and basic usage
 - ♿ **[Accessibility Guide](./docs/ACCESSIBILITY_GUIDE.md)** - WCAG compliance and best practices
 - 📊 **[Performance Guide](./docs/PERFORMANCE_GUIDE.md)** - Optimization tips and benchmarks
 - 🔄 **[Migration Guide](./docs/MIGRATION_GUIDE.md)** - Migrate from other UI libraries
@@ -391,13 +391,13 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 - **[📖 Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground
 - **[🔗 GitHub](https://github.com/tuliopc23/LiqUIdify)** - Source code and issues
-- **[📦 NPM](https://www.npmjs.com/package/liquidify)** - Package registry
+- **[📦 NPM](https://www.npmjs.com/package/@liquidify/components)** - Package registry
 - **[💬 Discussions](https://github.com/tuliopc23/LiqUIdify/discussions)** - Community discussions
 - **[🐛 Issues](https://github.com/tuliopc23/LiqUIdify/issues)** - Bug reports and feature requests
 
 ## 🤝 Community
 
-- **Discord** - [Join our community](https://discord.gg/liquidify) (coming soon)
+- **Discord** - [Join our community](https://discord.gg/liquidify)
 - **Twitter** - [@liquidify_ui](https://twitter.com/liquidify_ui) for updates
 - **Contributing** - See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines
 
@@ -408,8 +408,8 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
   <p>
     <a href="https://liquidify-storybook.vercel.app">📖 Storybook</a> •
     <a href="https://github.com/tuliopc23/LiqUIdify">🔗 GitHub</a> •
-    <a href="https://www.npmjs.com/package/liquidify">📦 NPM</a> •
-    <a href="./docs/API_REFERENCE.md">📋 API Docs</a>
+    <a href="https://www.npmjs.com/package/@liquidify/components">📦 NPM</a> •
+    <a href="https://liquidify-docs.vercel.app/api/">📋 API Docs</a>
   </p>
   <p>
     <strong>52 components • 100% TypeScript • WCAG 2.1 AA • MIT License</strong>

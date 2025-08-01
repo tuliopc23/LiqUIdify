@@ -8,13 +8,9 @@ import "@testing-library/jest-dom";
 import { GlassModal } from "../../components/glass-modal";
 import { GlassPopover } from "../../components/glass-popover";
 import { GlassCombobox } from "../../components/glass-combobox";
-import { GlassCommand } from "../../components/glass-command";
 import { GlassFocusTrap } from "../../components/glass-focus-trap";
-import { GlassLiveRegion } from "../../components/glass-live-region";
-import { GlassAccessibleDemo } from "../../components/glass-accessible-demo";
 import { GlassTooltip } from "../../components/glass-tooltip";
 import { GlassAccordion } from "../../components/glass-accordion";
-// import { GlassDialog } from "../../components/glass-dialog"; // Component doesn't exist
 
 expect.extend(toHaveNoViolations);
 
@@ -29,7 +25,11 @@ describe("Accessibility Compliance Integration Tests", () => {
 
       return (
         <>
-          <button ref={triggerRef} onClick={() => setIsOpen(true)}>
+          <button
+            type="button"
+            ref={triggerRef}
+            onClick={() => setIsOpen(true)}
+          >
             Open Modal
           </button>
 
@@ -37,7 +37,6 @@ describe("Accessibility Compliance Integration Tests", () => {
             isOpen={isOpen}
             onClose={() => setIsOpen(false)}
             title="Terms and Conditions"
-            returnFocusRef={triggerRef}
           >
             <div>
               <h2 id="modal-heading">Terms of Service</h2>
@@ -55,7 +54,9 @@ describe("Accessibility Compliance Integration Tests", () => {
               </label>
 
               <div className="modal-actions">
-                <button onClick={() => setIsOpen(false)}>Cancel</button>
+                <button type="button" onClick={() => setIsOpen(false)}>
+                  Close
+                </button>
                 <button disabled={!agreed}>Accept</button>
               </div>
             </div>
@@ -374,14 +375,19 @@ describe("Accessibility Compliance Integration Tests", () => {
               </button>
 
               {showDialog && (
-                <GlassDialog
+                <GlassModal
+                  isOpen={showDialog}
                   title="Confirmation"
                   onClose={() => setShowDialog(false)}
                 >
                   <p>Are you sure you want to continue?</p>
-                  <button onClick={() => setShowDialog(false)}>Cancel</button>
-                  <button onClick={() => setShowDialog(false)}>Confirm</button>
-                </GlassDialog>
+                  <button type="button" onClick={() => setShowDialog(false)}>
+                    Cancel
+                  </button>
+                  <button type="button" onClick={() => setShowDialog(false)}>
+                    Confirm
+                  </button>
+                </GlassModal>
               )}
 
               {showPopover && (

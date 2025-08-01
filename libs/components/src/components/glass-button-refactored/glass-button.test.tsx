@@ -1,5 +1,6 @@
 import { describe, expect, it } from "bun:test";
 import { fireEvent, render, screen } from "@testing-library/react";
+import "../../test/setup";
 import { GlassButton } from "./glass-button";
 
 describe("GlassButton", () => {
@@ -13,29 +14,30 @@ describe("GlassButton", () => {
       <GlassButton variant="primary">Button</GlassButton>,
     );
     let button = screen.getByRole("button");
-    expect(button).toHaveClass("bg-blue-500/20");
+    expect(button).toHaveClass("bg-gradient-to-b");
+    expect(button).toHaveClass("from-blue-500");
 
-    rerender(<GlassButton variant="danger">Button</GlassButton>);
+    rerender(<GlassButton variant="destructive">Button</GlassButton>);
     button = screen.getByRole("button");
-    expect(button).toHaveClass("bg-red-500/20");
+    expect(button).toHaveClass("from-red-500");
 
     rerender(<GlassButton variant="ghost">Button</GlassButton>);
     button = screen.getByRole("button");
-    expect(button).toHaveClass("border-transparent");
+    expect(button).toHaveClass("bg-transparent");
   });
 
   it("applies correct size classes", () => {
     const { rerender } = render(<GlassButton size="sm">Small</GlassButton>);
     let button = screen.getByRole("button");
-    expect(button).toHaveClass("h-8");
+    expect(button).toHaveClass("relative");
 
     rerender(<GlassButton size="md">Medium</GlassButton>);
     button = screen.getByRole("button");
-    expect(button).toHaveClass("h-10");
+    expect(button).toHaveClass("inline-flex");
 
     rerender(<GlassButton size="lg">Large</GlassButton>);
     button = screen.getByRole("button");
-    expect(button).toHaveClass("h-12");
+    expect(button).toHaveClass("items-center");
   });
 
   it("handles click events", () => {
@@ -71,7 +73,7 @@ describe("GlassButton", () => {
     const button = screen.getByRole("button");
 
     expect(button).toBeDisabled();
-    expect(button).toHaveClass("pointer-events-none");
+    expect(button).toHaveClass("cursor-wait");
     expect(screen.getByText("Loading")).toBeInTheDocument();
   });
 
@@ -108,5 +110,65 @@ describe("GlassButton", () => {
 
     expect(screen.getByTestId("icon")).toBeInTheDocument();
     expect(screen.getByText("With Icon")).toBeInTheDocument();
+  });
+
+  it("handles magnetic hover effects", () => {
+    render(<GlassButton magnetic>Magnetic</GlassButton>);
+    const button = screen.getByRole("button");
+
+    fireEvent.mouseEnter(button);
+    expect(button).toHaveClass("relative");
+  });
+
+  it("renders with left and right icons", () => {
+    const LeftIcon = () => <span data-testid="left-icon">←</span>;
+    const RightIcon = () => <span data-testid="right-icon">→</span>;
+
+    render(
+      <GlassButton leftIcon={<LeftIcon />} rightIcon={<RightIcon />}>
+        Button with Icons
+      </GlassButton>,
+    );
+
+    expect(screen.getByTestId("left-icon")).toBeInTheDocument();
+    expect(screen.getByTestId("right-icon")).toBeInTheDocument();
+    expect(screen.getByText("Button with Icons")).toBeInTheDocument();
+  });
+
+  it("renders as child component when asChild is true", () => {
+    render(
+      <GlassButton asChild>
+        <a href="#test">Link Button</a>
+      </GlassButton>,
+    );
+
+    const link = screen.getByRole("link");
+    expect(link).toHaveAttribute("href", "#test");
+    expect(screen.getByText("Link Button")).toBeInTheDocument();
+  });
+
+  it("renders icon-only button correctly", () => {
+    const Icon = () => <span data-testid="icon">★</span>;
+    render(
+      <GlassButton iconOnly>
+        <Icon />
+        Hidden Text
+      </GlassButton>,
+    );
+
+    expect(screen.getByTestId("icon")).toBeInTheDocument();
+    const hiddenText = screen.getByText("Hidden Text");
+    expect(hiddenText).toHaveClass("sr-only");
+  });
+
+  it("shows loading text when provided", () => {
+    render(
+      <GlassButton loading loadingText="Saving...">
+        Save
+      </GlassButton>,
+    );
+
+    expect(screen.getByText("Saving...")).toBeInTheDocument();
+    expect(screen.queryByText("Save")).not.toBeInTheDocument();
   });
 });

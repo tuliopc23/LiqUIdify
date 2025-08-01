@@ -476,7 +476,7 @@ function generateHTMLReport(results) {
   </div>
 
   <h2>Component Results</h2>
-  
+
   ${Object.entries(results.components)
     .map(
       ([name, component]) => `
@@ -487,7 +487,7 @@ function generateHTMLReport(results) {
           ${component.passed ? "PASS" : "FAIL"}
         </span>
       </div>
-      
+
       ${
         component.violations.length > 0
           ? `
@@ -528,7 +528,7 @@ function generateHTMLReport(results) {
     // Create impact chart
     const ctx = document.getElementById('impactChart').getContext('2d');
     const impactData = ${JSON.stringify(results.summary.violationsByImpact)};
-    
+
     new Chart(ctx, {
       type: 'doughnut',
       data: {

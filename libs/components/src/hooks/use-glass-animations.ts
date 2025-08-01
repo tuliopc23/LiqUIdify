@@ -7,15 +7,9 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import type { AnimationTiming, GlassIntensity } from "@/core/base-component";
-
-// Define GlassEffectState locally since it's not exported
-interface GlassEffectState {
-  intensity: number;
-  blur: number;
-  opacity: number;
-  scale: number;
-}
+// Define types locally
+type AnimationTiming = "instant" | "fast" | "normal" | "slow" | "slower";
+type GlassIntensity = "low" | "medium" | "high" | "ultra";
 
 // Animation state management
 interface AnimationState {
@@ -43,16 +37,6 @@ const TIMING_PRESETS: Record<AnimationTiming, AnimationConfig> = {
   normal: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
   slow: { duration: 500, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
   slower: { duration: 750, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
-};
-
-// Glass-specific animation presets
-const _GLASS_ANIMATION_PRESETS = {
-  "glass-in": { duration: 300, easing: "cubic-bezier(0.32, 0, 0.67, 0)" },
-  "glass-out": { duration: 300, easing: "cubic-bezier(0.33, 1, 0.68, 1)" },
-  "liquid-flow": { duration: 600, easing: "cubic-bezier(0.36, 0.66, 0.04, 1)" },
-  magnetic: { duration: 200, easing: "cubic-bezier(0.2, 0, 0, 1.2)" },
-  spring: { duration: 400, easing: "cubic-bezier(0.68, -0.55, 0.265, 1.55)" },
-  bounce: { duration: 500, easing: "cubic-bezier(0.87, -0.41, 0.19, 1.44)" },
 };
 
 /**
@@ -208,8 +192,6 @@ export function useMagneticHover(
   const { animate } = useGlassAnimation(timing);
   const [isHovering, setIsHovering] = useState(false);
 
-  const magneticProps = {};
-
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
       if (!elementRef.current) {
@@ -275,6 +257,12 @@ export function useMagneticHover(
     };
   }, [handleMouseEnter, handleMouseLeave, handleMouseMove]);
 
+  const magneticProps = {
+    ref: elementRef,
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+  };
+
   return { magneticProps, isHovering };
 }
 
@@ -287,67 +275,64 @@ export function useRippleEffect(
 ) {
   const { animate } = useGlassAnimation(timing);
 
-  const triggerRipple = useCallback(() => {
-    // Ripple effect implementation
-  }, []);
+  const triggerRipple = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      const element = event.currentTarget;
+      const rect = element.getBoundingClientRect();
 
-  const rippleProps = {};
+      // Calculate ripple position
+      const rippleX = event.clientX - rect.left;
+      const rippleY = event.clientY - rect.top;
+      const rippleSize = Math.max(rect.width, rect.height) * 2;
 
-  return { rippleProps, triggerRipple };
-}
+      // Create ripple element
+      const ripple = document.createElement("div");
+      ripple.style.position = "absolute";
+      ripple.style.borderRadius = "50%";
+      ripple.style.background = "rgba(255, 255, 255, 0.3)";
+      ripple.style.transform = "scale(0)";
+      ripple.style.left = `${rippleX - rippleSize / 2}px`;
+      ripple.style.top = `${rippleY - rippleSize / 2}px`;
+      ripple.style.width = `${rippleSize}px`;
+      ripple.style.height = `${rippleSize}px`;
+      ripple.style.pointerEvents = "none";
+      ripple.style.zIndex = "10";
 
-/**
- * Hook for spring animations
- */
-function _useSpringAnimation() {
-  const { animate } = useGlassAnimation("normal");
-
-  const springTo = useCallback(
-    (element: HTMLElement, targetValue: number, property = "transform") => {
-      const springEasing = "cubic-bezier(0.34, 1.56, 0.64, 1)";
-
-      animate(element, [{ [property]: `${targetValue}` }], {
-        duration: 500,
-        easing: springEasing,
-        fill: "forwards",
-      });
-    },
-    [animate],
-  );
-
-  return { springTo };
-}
-
-/**
- * Hook for liquid flow animations
- */
-function _useLiquidFlow(amplitude = 20, frequency = 2, duration = 2000) {
-  const { animate } = useGlassAnimation("normal");
-
-  const startFlow = useCallback(
-    (element: HTMLElement) => {
-      const keyframes = [];
-      const steps = 60; // 60 fps
-
-      for (let index = 0; index <= steps; index++) {
-        const progress = index / steps;
-        const y = amplitude * Math.sin(progress * frequency * Math.PI * 2);
-        keyframes.push({
-          transform: `translateY(${y}px)`,
-          offset: progress,
-        });
+      // Ensure element has relative positioning
+      const computedStyle = getComputedStyle(element);
+      if (computedStyle.position === "static") {
+        element.style.position = "relative";
       }
 
-      animate(element, keyframes, {
-        duration,
-        iterations: Number.POSITIVE_INFINITY,
-        easing: "linear",
+      element.appendChild(ripple);
+
+      // Animate ripple
+      animate(
+        ripple,
+        [
+          { transform: "scale(0)", opacity: "0.7" },
+          { transform: "scale(1)", opacity: "0" },
+        ],
+        {
+          duration: TIMING_PRESETS[timing].duration,
+          easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+          fill: "forwards",
+        },
+      )?.addEventListener("finish", () => {
+        if (ripple.parentNode) {
+          ripple.parentNode.removeChild(ripple);
+        }
       });
     },
-    [animate, amplitude, frequency, duration],
+    [animate, timing],
   );
 
-  return { startFlow };
+  const rippleProps = {
+    onClick: triggerRipple,
+    style: { overflow: "hidden" },
+  };
+
+  return { rippleProps, triggerRipple };
 }
 
 // Export all hooks and utilities

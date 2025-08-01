@@ -9,6 +9,13 @@
  * - Proper component composition with forwardRef
  * - Separated business logic from presentation
  */
+// JSDoc documentation for the Glass Button component
+/**
+ * @fileoverview Glass Button Component - A premium glassmorphism button with advanced effects
+ * @version 2.0.0
+ * @author Glass UI Team
+ * @since 1.0.0
+ */
 
 import { Slot } from "@radix-ui/react-slot";
 // External dependencies
@@ -16,104 +23,39 @@ import React, { forwardRef, useCallback, useRef } from "react";
 
 // Internal dependencies
 
-import type { InteractiveGlassProps } from "@/core";
-
-import { createBusinessLogicHook } from "@/core/business-logic";
-import {
-  generateGlassClasses,
-  generateGlassVariables,
-} from "@/core/glass/unified-glass-system";
-
-import { cn } from "@/core/utils/classname";
-import {
-  microInteraction,
-  responsiveSize,
-  touchTarget,
-} from "@/core/utils/responsive";
+import { cn } from "../../core/utils/classname";
 import {
   useGlassStateTransitions,
   useMagneticHover,
   useRippleEffect,
-} from "@/hooks/use-glass-animations";
+} from "../../hooks/use-glass-animations";
 
-// Button state type
-interface ButtonState {
-  isPressed: boolean;
-  isHovered: boolean;
-  isFocused: boolean;
-  rippleCount: number;
+// Simple type definitions
+type Size = "xs" | "sm" | "md" | "lg" | "xl";
+type Variant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "ghost"
+  | "destructive"
+  | "apple";
+type AnimationTiming = "instant" | "fast" | "normal" | "slow" | "slower";
+
+interface GlassEffect {
+  intensity?: "low" | "medium" | "high" | "ultra";
+  blur?: boolean;
+  backdrop?: boolean;
 }
 
-// Business logic for button interactions
-const useButtonBusinessLogic = createBusinessLogicHook<
-  ButtonState,
-  GlassButtonProps,
-  Record<string, unknown>
->(
-  // Initial state factory
-  (_props: GlassButtonProps) => ({
-    isPressed: false,
-    isHovered: false,
-    isFocused: false,
-    rippleCount: 0,
-  }),
-  // Actions factory
-  (
-    _state: ButtonState,
-    setState: React.Dispatch<React.SetStateAction<ButtonState>>,
-    props: GlassButtonProps,
-  ) => ({
-    handlePress: () => {
-      if (props.disabled || props.loading) {
-        return;
-      }
-      setState((previous: ButtonState) => ({ ...previous, isPressed: true }));
-      setTimeout(
-        () =>
-          setState((previous: ButtonState) => ({
-            ...previous,
-            isPressed: false,
-          })),
-        150,
-      );
-    },
-
-    handleHover: (isHovered: boolean) => {
-      if (props.disabled) {
-        return;
-      }
-      setState((previous: ButtonState) => ({ ...previous, isHovered }));
-    },
-
-    handleFocus: (isFocused: boolean) => {
-      if (props.disabled) {
-        return;
-      }
-      setState((previous: ButtonState) => ({ ...previous, isFocused }));
-    },
-
-    handleRipple: () => {
-      if (props.disabled || props.loading) {
-        return;
-      }
-      setState((previous: ButtonState) => ({
-        ...previous,
-        rippleCount: previous.rippleCount + 1,
-      }));
-    },
-  }),
-);
-
-// Import the ComponentPropsBuilder type
-
-import type { ComponentPropsBuilder } from "@/types/component-props";
-
-// Button-specific props extending the base interactive props
+// Button-specific props
 interface GlassButtonProps
-  extends InteractiveGlassProps,
-    Omit<ComponentPropsBuilder<HTMLButtonElement>, "size" | "type"> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Button content */
   children?: React.ReactNode;
+  /** Button variant */
+  variant?: Variant;
+  /** Button size */
+  size?: Size;
   /** Button type */
   type?: "button" | "submit" | "reset";
   /** Icon to display on the left side */
@@ -130,6 +72,16 @@ interface GlassButtonProps
   fullWidth?: boolean;
   /** Icon only button */
   iconOnly?: boolean;
+  /** Enable magnetic hover effect */
+  magnetic?: boolean;
+  /** Enable ripple effect */
+  ripple?: boolean;
+  /** Glass effect configuration */
+  glassEffect?: GlassEffect;
+  /** Animation timing */
+  animation?: AnimationTiming;
+  /** Disable animations */
+  disableAnimations?: boolean;
 }
 
 // Variant class mappings
@@ -241,23 +193,10 @@ export const GlassButton = React.memo(
       ref,
     ) => {
       const buttonRef = useRef<HTMLButtonElement>(null);
-      const { actions } = useButtonBusinessLogic({
-        disabled,
-        loading,
-        magnetic,
-        ripple,
-        size,
-        variant,
-        glassEffect,
-        animation,
-        disableAnimations,
-      });
 
       // Animation hooks
       const { transitionToState, currentState } = useGlassStateTransitions();
       const { magneticProps } = useMagneticHover();
-      // Remove unused variable warning
-      void magneticProps;
       const { triggerRipple } = useRippleEffect();
 
       // Combined ref handling
@@ -275,19 +214,16 @@ export const GlassButton = React.memo(
         [ref],
       );
 
-      // Event handlers with business logic
+      // Event handlers
       const handleClick = useCallback(
         (event: React.MouseEvent<HTMLButtonElement>) => {
           if (disabled || loading) {
             return;
           }
 
-          actions.handlePress();
-          actions.handleRipple();
-
           // Create ripple effect
           if (ripple) {
-            triggerRipple();
+            triggerRipple(event);
           }
 
           // Trigger state transition
@@ -296,15 +232,7 @@ export const GlassButton = React.memo(
 
           onClick?.(event);
         },
-        [
-          disabled,
-          loading,
-          actions,
-          ripple,
-          triggerRipple,
-          transitionToState,
-          onClick,
-        ],
+        [disabled, loading, ripple, triggerRipple, transitionToState, onClick],
       );
 
       const handleMouseEnter = useCallback(
@@ -313,13 +241,10 @@ export const GlassButton = React.memo(
             return;
           }
 
-          actions.handleHover(true);
-
           transitionToState("hover");
-
           onMouseEnter?.(event);
         },
-        [disabled, actions, transitionToState, onMouseEnter],
+        [disabled, transitionToState, onMouseEnter],
       );
 
       const handleMouseLeave = useCallback(
@@ -328,13 +253,10 @@ export const GlassButton = React.memo(
             return;
           }
 
-          actions.handleHover(false);
-
           transitionToState("idle");
-
           onMouseLeave?.(event);
         },
-        [disabled, actions, transitionToState, onMouseLeave],
+        [disabled, transitionToState, onMouseLeave],
       );
 
       const handleFocus = useCallback(
@@ -343,13 +265,10 @@ export const GlassButton = React.memo(
             return;
           }
 
-          actions.handleFocus(true);
-
           transitionToState("focus");
-
           onFocus?.(event);
         },
-        [disabled, actions, transitionToState, onFocus],
+        [disabled, transitionToState, onFocus],
       );
 
       const handleBlur = useCallback(
@@ -358,30 +277,11 @@ export const GlassButton = React.memo(
             return;
           }
 
-          actions.handleFocus(false);
-
           transitionToState("idle");
-
           onBlur?.(event);
         },
-        [disabled, actions, transitionToState, onBlur],
+        [disabled, transitionToState, onBlur],
       );
-
-      // Generate glass classes and variables
-      const glassClasses = generateGlassClasses({
-        variant,
-        intensity: glassEffect?.intensity,
-        state: currentState,
-        glassEffect,
-      });
-
-      const glassVariables = generateGlassVariables({
-        intensity: glassEffect?.intensity,
-        config: {
-          animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
-          ...glassEffect,
-        },
-      });
 
       // Build component classes
       const componentClasses = cn(
@@ -392,15 +292,7 @@ export const GlassButton = React.memo(
         "transition-all duration-300 ease-out",
         "will-change-transform",
 
-        // Glass effect classes
-        glassClasses,
-
-        // Size classes
-        size ? responsiveSize(size) : "",
-        touchTarget.comfortable,
-
         // Variant classes
-
         VARIANT_CLASSES[variant],
 
         // State classes
@@ -410,9 +302,6 @@ export const GlassButton = React.memo(
           "w-full": fullWidth,
           "aspect-square": iconOnly,
         },
-
-        // Animation classes
-        !disableAnimations && microInteraction(),
 
         // Custom classes
         className,
@@ -452,12 +341,12 @@ export const GlassButton = React.memo(
           type={asChild ? undefined : type}
           disabled={disabled || loading}
           className={componentClasses}
-          style={glassVariables as React.CSSProperties}
           onClick={handleClick}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          {...(magnetic ? magneticProps : {})}
           {...props}
         >
           {buttonContent}

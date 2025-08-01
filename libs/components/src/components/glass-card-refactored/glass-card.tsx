@@ -370,6 +370,7 @@ export const GlassCard = React.memo(
             aria-label={
               interactive || selectable ? "Interactive card" : undefined
             }
+            data-testid="glass-card"
             {...props}
           >
             {children}
@@ -518,6 +519,7 @@ const CardActions = forwardRef<
     <div
       ref={ref}
       className={cn("flex items-center gap-2 p-6 pt-0", className)}
+      data-testid="glass-card-actions"
       {...props}
     >
       {children}

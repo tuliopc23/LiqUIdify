@@ -1,6 +1,5 @@
-import type React, {
- cfrom "react";
-import reateContext,
+import React, {
+  createContext,
   type ReactNode,
   useContext,
   useEffect,

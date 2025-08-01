@@ -4,9 +4,9 @@ import {
   File,
   Folder,
   FolderOpen,
-} from 'lucide-react';
-import React from 'react';
-import { cn, getGlassClass, microInteraction } from '@/core/utils/classname';
+} from "lucide-react";
+import React from "react";
+import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
 
 export interface TreeNode {
   id: string;
@@ -77,9 +77,9 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
     }
 
     onNodeExpand?.(node, !isExpanded);
-   };
+  };
 
-  const renderNode = (node: TreeNode, level= 0): React.ReactNode => {
+  const renderNode = (node: TreeNode, level = 0): React.ReactNode => {
     const hasChildren = node.children && node.children.length > 0;
     const isExpanded = expandedIds.has(node.id);
     const isSelected = selectedNodeId === node.id;
@@ -102,14 +102,14 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
       <div key={node.id}>
         <div
           className={cn(
-            'flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1',
-            'hover:bg-white/5',
+            "flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1",
+            "hover:bg-white/5",
             microInteraction.interactive,
             isSelected &&
               cn(
-                getGlassClass('default'),
-                'border border-blue-500/30 bg-blue-500/10'
-              )
+                getGlassClass("default"),
+                "border border-blue-500/30 bg-blue-500/10",
+              ),
           )}
           style={{ paddingLeft: `${level * indentSize + 8}px` }}
           onClick={() => {
@@ -119,6 +119,7 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
             if (node.selectable !== false) {
               onNodeSelect?.(node);
             }
+          }}
           role="treeitem"
           aria-expanded={hasChildren ? isExpanded : undefined}
           aria-selected={isSelected}
@@ -155,7 +156,7 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
 
   return (
     <div
-      className={cn('rounded-lg p-2', getGlassClass('default'), className)}
+      className={cn("rounded-lg p-2", getGlassClass("default"), className)}
       role="tree"
       {...props}
     >
