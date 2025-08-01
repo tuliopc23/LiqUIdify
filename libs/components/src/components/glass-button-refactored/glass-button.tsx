@@ -19,7 +19,7 @@
 
 import { Slot } from "@radix-ui/react-slot";
 // External dependencies
-import React, { forwardRef, useCallback, useRef } from "react";
+import React, { forwardRef, useCallback } from "react";
 
 // Internal dependencies
 
@@ -192,23 +192,18 @@ export const GlassButton = React.memo(
       },
       ref,
     ) => {
-      const buttonRef = useRef<HTMLButtonElement>(null);
-
       // Animation hooks
-      const { transitionToState, currentState } = useGlassStateTransitions();
+      const { transitionToState } = useGlassStateTransitions();
       const { magneticProps } = useMagneticHover();
       const { triggerRipple } = useRippleEffect();
 
       // Combined ref handling
       const combinedRef = useCallback(
         (node: HTMLButtonElement | null) => {
-          if (buttonRef.current !== node) {
-            buttonRef.current = node;
-          }
           if (typeof ref === "function") {
             ref(node);
           } else if (ref) {
-            ref.current = node;
+            (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node;
           }
         },
         [ref],
@@ -337,7 +332,7 @@ export const GlassButton = React.memo(
 
       return (
         <Component
-          ref={combinedRef}
+          ref={combinedRef as any}
           type={asChild ? undefined : type}
           disabled={disabled || loading}
           className={componentClasses}
@@ -346,8 +341,8 @@ export const GlassButton = React.memo(
           onMouseLeave={handleMouseLeave}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          {...(magnetic ? magneticProps : {})}
           {...props}
+          {...(magnetic ? magneticProps : {})}
         >
           {buttonContent}
         </Component>

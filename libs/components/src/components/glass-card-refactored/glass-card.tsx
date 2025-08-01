@@ -293,7 +293,7 @@ export const GlassCard = React.memo(
                 y: 0,
                 getModifierState: event.getModifierState,
                 relatedTarget: null,
-              } as React.MouseEvent<HTMLDivElement>;
+              } as unknown as React.MouseEvent<HTMLDivElement>;
               onCardClick(syntheticEvent);
             }
           }
@@ -306,7 +306,7 @@ export const GlassCard = React.memo(
         variant: variant as any,
         intensity: glassEffect?.intensity,
         state: currentState,
-        glassEffect,
+        glassEffect: glassEffect as Record<string, unknown>,
       });
 
       const glassVariables = generateGlassVariables({

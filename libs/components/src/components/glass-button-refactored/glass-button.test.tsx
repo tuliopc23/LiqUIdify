@@ -32,14 +32,20 @@ describe("GlassButton", () => {
     let button = screen.getByRole("button");
     expect(button).toHaveClass("relative");
     expect(button).toHaveClass("inline-flex");
+    expect(button).toHaveClass("items-center");
+    expect(button).toHaveClass("justify-center");
 
     rerender(<GlassButton size="md">Medium</GlassButton>);
     button = screen.getByRole("button");
+    expect(button).toHaveClass("relative");
     expect(button).toHaveClass("inline-flex");
     expect(button).toHaveClass("items-center");
+    expect(button).toHaveClass("justify-center");
 
     rerender(<GlassButton size="lg">Large</GlassButton>);
     button = screen.getByRole("button");
+    expect(button).toHaveClass("relative");
+    expect(button).toHaveClass("inline-flex");
     expect(button).toHaveClass("items-center");
     expect(button).toHaveClass("justify-center");
   });

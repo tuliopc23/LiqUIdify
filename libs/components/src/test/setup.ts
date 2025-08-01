@@ -1,39 +1,26 @@
 // Test setup file for LiqUIdify components
-import { vi, beforeEach } from "vitest";
-import { JSDOM } from "jsdom";
+import { vi, beforeEach, afterEach } from "vitest";
+import { cleanup } from "@testing-library/react";
 
-const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', {
-  url: 'http://localhost',
-  pretendToBeVisual: true,
-  resources: 'usable'
+// Clean up after each test
+afterEach(() => {
+  cleanup();
 });
 
-global.window = dom.window as any;
-global.document = dom.window.document;
-global.navigator = dom.window.navigator;
-global.HTMLElement = dom.window.HTMLElement;
-global.HTMLButtonElement = dom.window.HTMLButtonElement;
-global.Element = dom.window.Element;
-global.Node = dom.window.Node;
-
-global.Element.prototype.animate = vi.fn().mockReturnValue({
-  finished: Promise.resolve(),
-  cancel: vi.fn(),
-  finish: vi.fn(),
-  pause: vi.fn(),
-  play: vi.fn(),
-  reverse: vi.fn(),
-  updatePlaybackRate: vi.fn(),
-  addEventListener: vi.fn(),
-  removeEventListener: vi.fn(),
-  dispatchEvent: vi.fn(),
-});
-
-// Ensure document is available for React Testing Library
-Object.defineProperty(global, 'document', {
-  value: dom.window.document,
-  writable: true
-});
+if (typeof Element !== 'undefined') {
+  Element.prototype.animate = vi.fn().mockReturnValue({
+    finished: Promise.resolve(),
+    cancel: vi.fn(),
+    finish: vi.fn(),
+    pause: vi.fn(),
+    play: vi.fn(),
+    reverse: vi.fn(),
+    updatePlaybackRate: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  });
+}
 
 // Mock IntersectionObserver
 global.IntersectionObserver = vi.fn().mockImplementation(() => ({
@@ -54,14 +41,14 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 }));
 
 // Mock matchMedia
-Object.defineProperty(global.window, "matchMedia", {
+Object.defineProperty(globalThis, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(), // Deprecated
-    removeListener: vi.fn(), // Deprecated
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
@@ -146,8 +133,8 @@ const customMatchers = {
 };
 
 // Extend the global expect if available
-if (typeof globalThis !== "undefined" && globalThis.expect && globalThis.expect.extend) {
-  globalThis.expect.extend(customMatchers);
+if (typeof globalThis !== "undefined" && (globalThis as any).expect && (globalThis as any).expect.extend) {
+  (globalThis as any).expect.extend(customMatchers);
 }
 
 // Setup React Testing Library
