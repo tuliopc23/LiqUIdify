@@ -9,25 +9,14 @@
     "preview": "serve storybook-static",
     "clean": "rm -rf storybook-static"
   },
-  "dependencies": {
-    "@liquidify/components": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@storybook/react": "^8.0.0",
-    "@storybook/react-vite": "^8.0.0",
-    "@storybook/addon-essentials": "^8.0.0",
-    "@storybook/addon-interactions": "^8.0.0",
-    "@storybook/addon-links": "^8.0.0",
-    "@storybook/addon-a11y": "^8.0.0",
-    "@storybook/addon-docs": "^8.0.0",
-    "@storybook/addon-controls": "^8.0.0",
-    "@storybook/addon-viewport": "^8.0.0",
-    "@storybook/addon-backgrounds": "^8.0.0",
-    "@storybook/addon-measure": "^8.0.0",
-    "@storybook/addon-outline": "^8.0.0",
-    "@storybook/addon-storysource": "^8.0.0",
-    "@storybook/builder-vite": "^8.0.0",
-    "storybook": "^8.0.0",
-    "serve": "^14.2.0"
+    "@storybook/react": "^8.4.1",
+    "@storybook/react-vite": "^8.4.1",
+    "@storybook/addon-essentials": "^8.4.1",
+    "@storybook/addon-links": "^8.4.1",
+    "@storybook/addon-a11y": "^8.4.1",
+    "@storybook/builder-vite": "^8.4.1",
+    "storybook": "^8.4.1"
   }
 }

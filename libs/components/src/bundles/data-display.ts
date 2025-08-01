@@ -1,20 +1,20 @@
-// Data Display Components Bundle
-// Optimized bundle for data visualization and display components
+/**
+ * Data Display Bundle - Data Visualization Components (<10KB)
+ * Optimized bundle for data visualization, display, and presentation components
+ */
 
-// Chart Components
-export * from "../components/glass-chart";
+// External dependencies (none)
 
-// Table Components
-export * from "../components/glass-table";
-
-// Badge and Status
-export * from "../components/glass-badge";
+// Internal imports sorted alphabetically by type
+// Identity and Status Components
 export * from "../components/glass-avatar";
+export * from "../components/glass-badge";
 
-// Timeline and Progress
-export * from "../components/glass-timeline";
+// Data Visualization Components
+export * from "../components/glass-chart";
 export * from "../components/glass-progress";
+export * from "../components/glass-table";
+export * from "../components/glass-timeline";
+export * from "../components/glass-tree-view";
 
-// Re-export chart types and components
-export type { ChartDataPoint } from "../components/glass-chart";
-export { LineChart, BarChart, DonutChart } from "../components/glass-chart";
+// Type exports

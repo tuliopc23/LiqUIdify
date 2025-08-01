@@ -1,2 +1,6 @@
-export { GlassBreadcrumbs } from "./glass-breadcrumbs";
-export type { BreadcrumbItem } from "./glass-breadcrumbs";
+/**
+ * glass-breadcrumbs Component Export
+ */;
+
+// Re-export everything for compatibility
+export * from "./glass-breadcrumbs";

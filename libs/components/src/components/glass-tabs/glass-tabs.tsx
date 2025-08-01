@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 
 import { cn } from "@/core/utils/classname";
 
-interface GlassTabItem {
+export interface GlassTabItem {
   // Renamed for clarity
   id: string;
   label: React.ReactNode;

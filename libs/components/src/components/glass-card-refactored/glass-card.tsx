@@ -14,30 +14,30 @@ import React, {
   forwardRef,
   useCallback,
   useContext,
+  useMemo,
+  useState,
 } from "react";
 import type {
   ComponentPropsBuilder,
   HeadingProps,
   LayoutGlassProps,
   ParagraphProps,
-} from "@/core";
+} from "../../core/base-component";
+import { cn } from "../../core/utils/classname";
+import { useGlassStateTransitions } from "../../hooks/use-glass-animations";
 import {
-  cn,
-  createBusinessLogicHook,
   generateGlassClasses,
   generateGlassVariables,
-  microInteraction,
-  useGlassStateTransitions,
-} from "@/core";
+} from "../../core/glass/unified-glass-system";
 
 // Card state type
-interface CardState extends Record<string, boolean> {
+interface CardState {
   isHovered: boolean;
   isPressed: boolean;
   isSelected: boolean;
 }
 
-// Card-specific props (moved here to be used by business logic hook)
+// Card-specific props
 interface GlassCardRefactoredProps
   extends LayoutGlassProps,
     ComponentPropsBuilder<HTMLDivElement> {
@@ -62,49 +62,39 @@ interface GlassCardRefactoredProps
 }
 
 // Business logic for card interactions
-const useCardBusinessLogic = createBusinessLogicHook<CardState>(
-  // Initial state factory
-  (_props: GlassCardRefactoredProps) => ({
+const useCardBusinessLogic = (props: GlassCardRefactoredProps) => {
+  const [state, setState] = useState<CardState>({
     isHovered: false,
     isPressed: false,
-    isSelected: false,
-  }),
-  // Actions factory
-  (
-    _state: CardState,
-    setState: React.Dispatch<React.SetStateAction<CardState>>,
-    props: GlassCardRefactoredProps,
-  ) => ({
-    handleHover: (isHovered: boolean) => {
-      if (!props.hover) {
-        return;
-      }
-      setState((previous: CardState) => ({ ...previous, isHovered }));
-    },
+    isSelected: props.selected || false,
+  });
 
-    handlePress: () => {
-      if (!props.interactive) {
-        return;
-      }
-      setState((previous: CardState) => ({ ...previous, isPressed: true }));
-      setTimeout(
-        () =>
-          setState((previous: CardState) => ({
-            ...previous,
-            isPressed: false,
-          })),
-        150,
-      );
-    },
+  const actions = useMemo(
+    () => ({
+      handleHover: (isHovered: boolean) => {
+        if (!props.hover) return;
+        setState((prev) => ({ ...prev, isHovered }));
+      },
 
-    handleSelect: (isSelected: boolean) => {
-      if (!props.selectable) {
-        return;
-      }
-      setState((previous: CardState) => ({ ...previous, isSelected }));
-    },
-  }),
-);
+      handlePress: () => {
+        if (!props.interactive) return;
+        setState((prev) => ({ ...prev, isPressed: true }));
+        setTimeout(
+          () => setState((prev) => ({ ...prev, isPressed: false })),
+          150,
+        );
+      },
+
+      handleSelect: (isSelected: boolean) => {
+        if (!props.selectable) return;
+        setState((prev) => ({ ...prev, isSelected }));
+      },
+    }),
+    [props.hover, props.interactive, props.selectable],
+  );
+
+  return { state, actions };
+};
 
 // Card context for sharing state between compound components
 interface CardContextValue {
@@ -168,19 +158,13 @@ export const GlassCard = React.memo(
     (
       {
         // Base props
-
         size = "md",
-
         variant = "primary",
-
         className,
-
         children,
 
         // Layout props
-
         padding = "md",
-
         radius = "md",
 
         // Card-specific props
@@ -193,21 +177,15 @@ export const GlassCard = React.memo(
         orientation = "vertical",
 
         // Glass effect props
-
         glassEffect = { intensity: "medium", blur: true, backdrop: true },
 
         // Animation props
-
         animation = "normal",
-
         disableAnimations = false,
 
         // Event handlers
-
         onClick,
-
         onMouseEnter,
-
         onMouseLeave,
         onCardClick,
         onCardSelect,
@@ -226,22 +204,30 @@ export const GlassCard = React.memo(
         glassEffect,
         animation,
         disableAnimations,
+        padding,
+        radius,
+        bordered,
+        elevation,
+        orientation,
+        onCardClick,
+        onCardSelect,
+        ...props,
       });
 
       // Animation hooks
-      const { currentState } = useGlassStateTransitions();
+      const { currentState } = useGlassStateTransitions(animation);
 
       // Event handlers with business logic
       const handleClick = useCallback(
         (event: React.MouseEvent<HTMLDivElement>) => {
           if (interactive) {
-            actions.handlePress?.();
+            actions.handlePress();
             onCardClick?.(event);
           }
 
           if (selectable) {
             const newSelected = !state.isSelected;
-            actions.handleSelect?.(newSelected);
+            actions.handleSelect(newSelected);
             onCardSelect?.(newSelected);
           }
 
@@ -261,9 +247,9 @@ export const GlassCard = React.memo(
       const handleMouseEnter = useCallback(
         (event: React.MouseEvent<HTMLDivElement>) => {
           if (hover) {
-            actions.handleHover?.(true);
-            onMouseEnter?.(event);
+            actions.handleHover(true);
           }
+          onMouseEnter?.(event);
         },
         [hover, actions, onMouseEnter],
       );
@@ -271,16 +257,53 @@ export const GlassCard = React.memo(
       const handleMouseLeave = useCallback(
         (event: React.MouseEvent<HTMLDivElement>) => {
           if (hover) {
-            actions.handleHover?.(false);
-            onMouseLeave?.(event);
+            actions.handleHover(false);
           }
+          onMouseLeave?.(event);
         },
         [hover, actions, onMouseLeave],
       );
 
+      const handleKeyDown = useCallback(
+        (event: React.KeyboardEvent<HTMLDivElement>) => {
+          if (
+            (interactive || selectable) &&
+            (event.key === "Enter" || event.key === " ")
+          ) {
+            event.preventDefault();
+            actions.handlePress();
+            if (onCardClick) {
+              // Create a synthetic mouse event for consistency
+              const syntheticEvent = {
+                ...event,
+                type: "click",
+                button: 0,
+                buttons: 0,
+                clientX: 0,
+                clientY: 0,
+                pageX: 0,
+                pageY: 0,
+                screenX: 0,
+                screenY: 0,
+                movementX: 0,
+                movementY: 0,
+                offsetX: 0,
+                offsetY: 0,
+                x: 0,
+                y: 0,
+                getModifierState: event.getModifierState,
+                relatedTarget: null,
+              } as React.MouseEvent<HTMLDivElement>;
+              onCardClick(syntheticEvent);
+            }
+          }
+        },
+        [interactive, selectable, actions, onCardClick],
+      );
+
       // Generate glass classes and variables
       const glassClasses = generateGlassClasses({
-        variant,
+        variant: variant as any,
         intensity: glassEffect?.intensity,
         state: currentState,
         glassEffect,
@@ -288,8 +311,10 @@ export const GlassCard = React.memo(
 
       const glassVariables = generateGlassVariables({
         intensity: glassEffect?.intensity,
-        animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
-        ...glassEffect,
+        config: {
+          animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
+          ...glassEffect,
+        },
       });
 
       // Build component classes
@@ -303,12 +328,10 @@ export const GlassCard = React.memo(
         glassClasses,
 
         // Variant classes
-
-        VARIANT_CLASSES[variant],
+        VARIANT_CLASSES[variant as keyof typeof VARIANT_CLASSES],
 
         // Layout classes
-
-        PADDING_CLASSES[padding],
+        PADDING_CLASSES[padding as keyof typeof PADDING_CLASSES],
 
         // State classes
         {
@@ -325,7 +348,7 @@ export const GlassCard = React.memo(
         ELEVATION_CLASSES[elevation],
 
         // Animation classes
-        !disableAnimations && microInteraction(),
+        !disableAnimations && "transition-all duration-300 ease-out",
 
         // Custom classes
         className,
@@ -333,9 +356,9 @@ export const GlassCard = React.memo(
 
       // Context value for compound components
       const contextValue: CardContextValue = {
-        variant,
-        size,
-        padding,
+        variant: variant || "primary",
+        size: size || "md",
+        padding: padding || "md",
         interactive,
         selectable,
       };
@@ -346,22 +369,8 @@ export const GlassCard = React.memo(
             ref={ref}
             className={componentClasses}
             style={glassVariables as React.CSSProperties}
-            onClick={(onClick = { handleClick })}
-            onKeyDown={(e) => {
-              if (
-                (interactive || selectable) &&
-                (e.key === "Enter" || e.key === " ")
-              ) {
-                e.preventDefault();
-                actions.handlePress?.();
-                if (onCardClick) {
-                  onCardClick({
-                    ...e,
-                    currentTarget: e.currentTarget as HTMLDivElement,
-                  } as React.MouseEvent<HTMLDivElement>);
-                }
-              }
-            }}
+            onClick={handleClick}
+            onKeyDown={handleKeyDown}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             role={interactive || selectable ? "button" : undefined}

@@ -1,1 +1,6 @@
-export { GlassBadge } from "./glass-badge";
+/**
+ * glass-badge Component Export
+ */;
+
+// Re-export everything for compatibility
+export * from "./glass-badge";

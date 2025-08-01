@@ -11,7 +11,7 @@ import { BREAKPOINTS, type BreakpointKey } from "../constants";
 /**
  * Generate responsive size classes based on breakpoints
  */
-export function responsiveSize(
+function responsiveSize(
   size: string | number,
   breakpoint?: BreakpointKey,
 ): string {
@@ -36,7 +36,7 @@ function createTouchTarget(size = 44): string {
 }
 
 // Create touchTarget object with both function and properties
-export const touchTarget = Object.assign(createTouchTarget, {
+const touchTarget = Object.assign(createTouchTarget, {
   comfortable: createTouchTarget(48), // Comfortable touch target size
 });
 

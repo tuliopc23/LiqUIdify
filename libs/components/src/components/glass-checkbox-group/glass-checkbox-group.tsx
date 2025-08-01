@@ -1,32 +1,19 @@
-import {
-  forwardRef,
-  useCallback,
-  useId,
-  useState,
-  useRef,
-  useEffect,
-} from "react";
+import { forwardRef, useCallback, useId, useState } from "react";
 import type React from "react";
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
 } from "../../lib/variant-system";
-import { AccessibilityManager } from "@/core/accessibility-manager";
-import { useGlassStateTransitions } from "@/hooks/use-glass-animations";
-import {
-  generateGlassClasses,
-  generateGlassVariables,
-} from "@/core/glass/unified-glass-system";
 import type {
   ComponentPropsBuilder,
   FormGlassProps,
-} from "@/core/base-component";
+} from "../../core/base-component";
 
 const checkboxGroupVariants = cva({
   base: "space-y-3",
   variants: {
-    size: {
+    groupSize: {
       sm: "space-y-2",
       md: "space-y-3",
       lg: "space-y-4",
@@ -37,7 +24,7 @@ const checkboxGroupVariants = cva({
     },
   },
   defaultVariants: {
-    size: "md",
+    groupSize: "md",
     orientation: "vertical",
   },
 });
@@ -45,7 +32,7 @@ const checkboxGroupVariants = cva({
 const checkboxItemVariants = cva({
   base: "flex cursor-pointer items-center space-x-3 rounded-lg p-2 transition-all duration-200 hover:bg-white/5",
   variants: {
-    size: {
+    itemSize: {
       sm: "p-1.5 space-x-2",
       md: "p-2 space-x-3",
       lg: "p-3 space-x-4",
@@ -56,7 +43,7 @@ const checkboxItemVariants = cva({
     },
   },
   defaultVariants: {
-    size: "md",
+    itemSize: "md",
     disabled: "false",
   },
 });
@@ -64,34 +51,34 @@ const checkboxItemVariants = cva({
 const checkboxInputVariants = cva({
   base: "rounded border-2 border-white/20 bg-white/5 backdrop-blur-sm transition-all duration-200 focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-0 checked:border-blue-400 checked:bg-blue-500/20",
   variants: {
-    size: {
+    inputSize: {
       sm: "h-4 w-4",
       md: "h-5 w-5",
       lg: "h-6 w-6",
     },
   },
   defaultVariants: {
-    size: "md",
+    inputSize: "md",
   },
 });
 
-export interface CheckboxOption {
+interface CheckboxOption {
   value: string;
   label: string;
   disabled?: boolean;
   description?: string;
 }
 
+type CheckboxGroupSize = "sm" | "md" | "lg";
+
 interface GlassCheckboxGroupProps
   extends Omit<ComponentPropsBuilder<HTMLDivElement>, "onChange">,
-    VariantProps<typeof checkboxGroupVariants>,
     Pick<
       FormGlassProps,
       | "glassEffect"
       | "animation"
       | "disableAnimations"
       | "variant"
-      | "size"
       | "name"
       | "required"
       | "error"
@@ -100,6 +87,10 @@ interface GlassCheckboxGroupProps
       | "label"
       | "disabled"
     > {
+  /** Component size */
+  size?: CheckboxGroupSize;
+  /** Orientation of the checkbox group */
+  orientation?: "vertical" | "horizontal";
   /** Checkbox options to display */
   options: Array<CheckboxOption>;
   /** Controlled value */
@@ -142,8 +133,8 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
       error,
       required = false,
       disabled = false,
-      size,
-      orientation,
+      size = "md",
+      orientation = "vertical",
       ...props
     },
     ref,
@@ -225,7 +216,9 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
           }
           aria-required={required}
           aria-invalid={!!error}
-          className={cn(checkboxGroupVariants({ size, orientation }))}
+          className={cn(
+            checkboxGroupVariants({ groupSize: size, orientation }),
+          )}
         >
           {options.map((option) => {
             const isChecked = currentValue.includes(option.value);
@@ -238,7 +231,7 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
                 htmlFor={checkboxId}
                 className={cn(
                   checkboxItemVariants({
-                    size,
+                    itemSize: size,
                     disabled: isDisabled ? "true" : "false",
                   }),
                 )}
@@ -252,7 +245,7 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
                   disabled={isDisabled}
                   onChange={(e) => handleChange(option.value, e.target.checked)}
                   onKeyDown={(e) => handleKeyDown(e, option.value)}
-                  className={cn(checkboxInputVariants({ size }))}
+                  className={cn(checkboxInputVariants({ inputSize: size }))}
                   aria-describedby={
                     option.description ? `${checkboxId}-desc` : undefined
                   }
@@ -312,4 +305,3 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
 GlassCheckboxGroup.displayName = "GlassCheckboxGroup";
 
 export { GlassCheckboxGroup };
-export type { CheckboxOption };

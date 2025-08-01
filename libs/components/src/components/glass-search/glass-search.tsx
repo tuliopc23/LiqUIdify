@@ -17,7 +17,7 @@ export interface SearchSuggestion {
   count?: number;
 }
 
-export interface GlassSearchProps {
+interface GlassSearchProps {
   placeholder?: string;
   suggestions?: Array<SearchSuggestion>;
   recentSearches?: Array<string>;

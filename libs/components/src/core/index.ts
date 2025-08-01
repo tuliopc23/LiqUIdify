@@ -6,10 +6,10 @@
  * across all components while maintaining modularity and scalability.
  */
 
-// Export base component types and interfaces (avoiding duplicates)
-export type { InteractiveGlassProps } from "./base-component";
+// Export base component types and interfaces (avoiding duplicates);
 
 // Export core types (primary source);
+export * from "./base-component";
 
 export * from "./components";
 export * from "./hooks";

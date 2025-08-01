@@ -1,2 +1,7 @@
-export { LineChart, BarChart, DonutChart } from "./glass-chart";
-export type { ChartDataPoint } from "./glass-chart";
+/**
+ * glass-chart Component Export
+ */
+;;
+
+// Re-export everything for compatibility
+export * from "./glass-chart";

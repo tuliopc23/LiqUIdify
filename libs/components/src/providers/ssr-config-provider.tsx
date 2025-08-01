@@ -1,6 +1,6 @@
 import React, { type ReactNode, useEffect, useState } from "react";
 
-import { ConfigProvider, type ConfigProviderProps } from "./config-provider";
+import ConfigProvider, { type ConfigProviderProps } from "./config-provider";
 
 interface SSRConfigProviderProps extends ConfigProviderProps {
   children: ReactNode;

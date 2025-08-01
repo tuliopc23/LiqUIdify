@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { cn } from "../../utils/cn";
+import { cn } from "@/core/utils/classname";
 import { UnifiedGlassEffect } from "../../core/glass/unified-glass-system";
 
-export interface NavbarProps {
+interface NavbarProps {
   /** Content for the left side (logo/brand) */
   brand?: React.ReactNode;
   /** Navigation items */
@@ -35,7 +35,7 @@ const heightMap = {
   lg: "h-20",
 };
 
-export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
+const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
   (
     {
       brand,
@@ -141,7 +141,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
 Navbar.displayName = "Navbar";
 
 // NavbarItem component for consistent navigation items
-export interface NavbarItemProps {
+interface NavbarItemProps {
   /** Link href */
   href?: string;
   /** Active state */
@@ -156,7 +156,7 @@ export interface NavbarItemProps {
   disabled?: boolean;
 }
 
-export const NavbarItem = React.forwardRef<
+const NavbarItem = React.forwardRef<
   HTMLAnchorElement | HTMLButtonElement,
   NavbarItemProps
 >(({ href, active, onClick, children, className, disabled }, ref) => {
@@ -185,8 +185,6 @@ export const NavbarItem = React.forwardRef<
 NavbarItem.displayName = "NavbarItem";
 
 // NavbarDivider for visual separation
-export const NavbarDivider: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+const NavbarDivider: React.FC<{ className?: string }> = ({ className }) => (
   <div className={cn("h-6 w-px bg-gray-300 dark:bg-gray-700", className)} />
 );

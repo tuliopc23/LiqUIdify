@@ -1,2 +1,7 @@
-export { default as GlassTreeView } from "./glass-tree-view";
-export type { GlassTreeViewProps } from "./glass-tree-view";
+/**
+ * glass-tree-view Component Export
+ */
+;;
+
+// Re-export everything for compatibility
+export * from "./glass-tree-view";

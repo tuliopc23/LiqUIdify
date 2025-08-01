@@ -170,7 +170,8 @@ interface GlassDrawerContentProps
   size?: "sm" | "md" | "lg" | "xl" | "full";
 }
 
-interface GlassDrawerHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassDrawerHeaderProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
@@ -184,11 +185,13 @@ interface GlassDrawerDescriptionProps
   children: React.ReactNode;
 }
 
-interface GlassDrawerBodyProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassDrawerBodyProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-interface GlassDrawerFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassDrawerFooterProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 

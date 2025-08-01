@@ -23,7 +23,8 @@ import { cn } from "@/core/utils/classname";
 //   type AppleLiquidGlassProps,
 // } from '@/lib/enhanced-apple-liquid-glass';
 
-interface AppleLiquidGlassNavProps extends Omit<UnifiedGlassProps, "config"> {
+export interface AppleLiquidGlassNavProps
+  extends Omit<UnifiedGlassProps, "config"> {
   intensity?: GlassIntensity;
   magnetic?: boolean;
   animated?: boolean;
@@ -72,7 +73,8 @@ function _AppleLiquidGlassNav({
 }
 
 // Base Apple Liquid Glass component
-interface AppleLiquidGlassComponentProps extends AppleLiquidGlassNavProps {
+export interface AppleLiquidGlassComponentProps
+  extends AppleLiquidGlassNavProps {
   as?: "div" | "section" | "article" | "nav";
 }
 
@@ -119,7 +121,8 @@ function AppleLiquidGlass({
 }
 
 // Apple Liquid Glass Card component
-interface AppleLiquidGlassCardProps extends AppleLiquidGlassComponentProps {
+export interface AppleLiquidGlassCardProps
+  extends AppleLiquidGlassComponentProps {
   padding?: "none" | "sm" | "md" | "lg";
   rounded?: boolean;
   multiLayer?: boolean;
@@ -155,7 +158,7 @@ function _AppleLiquidGlassCard({
 }
 
 // Apple Liquid Glass Button component
-interface AppleLiquidGlassButtonProps
+export interface AppleLiquidGlassButtonProps
   extends Omit<
     React.ComponentPropsWithoutRef<"button">,
     "className" | "style" | "children"

@@ -3,7 +3,8 @@ import React from "react";
 
 import { cn, getGlassClass } from "@/core/utils/classname";
 
-interface GlassAvatarProps extends React.ComponentPropsWithoutRef<"div"> {
+interface GlassAvatarProps
+  extends React.ComponentPropsWithoutRef<"div"> {
   src?: string;
   alt?: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl";

@@ -8,7 +8,7 @@ import {
   type GlobalConfigProviderProps,
 } from "./global-config-provider";
 
-export interface ConfigProviderProps {
+interface ConfigProviderProps {
   children: ReactNode;
   glassConfig?: GlassUIProviderProps["glassConfig"];
   hapticConfig?: GlassUIProviderProps["hapticConfig"];
@@ -20,7 +20,7 @@ export interface ConfigProviderProps {
  * Combined configuration provider that wraps both GlassUIProvider and GlobalConfigProvider
  * for easier setup and SSR safety
  */
-export function ConfigProvider({
+function ConfigProvider({
   children,
   glassConfig,
   hapticConfig,
@@ -40,5 +40,9 @@ export function ConfigProvider({
   );
 }
 
+// Export the main provider
+export { ConfigProvider as default };;
+
 // Alias for backward compatibility
 const LiquidifyProvider = ConfigProvider;
+;

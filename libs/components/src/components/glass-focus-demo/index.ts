@@ -1,2 +1,7 @@
-export { GlassFocusDemo } from "./glass-focus-demo";
-export type { GlassFocusDemoProps } from "./glass-focus-demo";
+/**
+ * glass-focus-demo Component Export
+ */
+;
+
+// Re-export everything for compatibility
+export * from "./glass-focus-demo";

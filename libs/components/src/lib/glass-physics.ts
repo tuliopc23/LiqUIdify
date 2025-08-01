@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   safeGetBoundingClientRect,
-  safeRefAccess,
   safeRequestAnimationFrame,
 } from "../utils/safe-dom";
 
@@ -322,7 +321,7 @@ const _useMagneticHover = (
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       try {
-        const element = safeRefAccess(elementRef);
+        const element = elementRef.current;
         if (!element) {
           return;
         }
@@ -379,7 +378,7 @@ const _useMagneticHover = (
   }, [animate]);
 
   useEffect(() => {
-    const element = safeRefAccess(elementRef);
+    const element = elementRef.current;
     if (!element) {
       return;
     }

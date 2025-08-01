@@ -9,3 +9,6 @@ const _applyGlassEffect = (intensity = 1) => ({
   backgroundColor: `rgba(255, 255, 255, ${0.1 * intensity})`,
   border: `1px solid rgba(255, 255, 255, ${0.2 * intensity})`,
 });
+
+// Export for module resolution
+export { _glassEffect, _applyGlassEffect };

@@ -7,8 +7,8 @@
 /**
  * Safe reference access with null checking
  */
-export function safeRefAccess<T>(ref: React.RefObject<T>): T | null {
-  return ref.current || undefined;
+function safeRefAccess<T>(ref: React.RefObject<T>): T | null {
+  return ref.current || null;
 }
 
 /**
@@ -84,7 +84,7 @@ function _safeGetComputedStyle(
 /**
  * Safe getBoundingClientRect with fallback
  */
-export function safeGetBoundingClientRect(element: Element | null): DOMRect {
+function safeGetBoundingClientRect(element: Element | null): DOMRect {
   const fallbackRect = {
     x: 0,
     y: 0,
@@ -180,7 +180,7 @@ function _safeAddEventListener<K extends keyof HTMLElementEventMap>(
 /**
  * Safe requestAnimationFrame with cancellation
  */
-export function safeRequestAnimationFrame(
+function safeRequestAnimationFrame(
   callback: FrameRequestCallback,
 ): (() => void) | null {
   if (typeof window === "undefined" || !window.requestAnimationFrame) {

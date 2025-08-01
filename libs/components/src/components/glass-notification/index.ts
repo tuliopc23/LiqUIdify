@@ -1,2 +1,7 @@
-export { NotificationCenter } from "./glass-notification";
-export type { NotificationItem } from "./glass-notification";
+/**
+ * glass-notification Component Export
+ */
+;;
+
+// Re-export everything for compatibility
+export * from "./glass-notification";

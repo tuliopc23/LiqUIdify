@@ -14,7 +14,7 @@ export interface GlassSelectOption {
   disabled?: boolean;
 }
 
-export interface GlassSelectProps {
+interface GlassSelectProps {
   options: Array<GlassSelectOption>;
   value?: string | Array<string>;
   onChange?: (value: string | Array<string>) => void;

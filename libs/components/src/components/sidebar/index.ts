@@ -1,11 +1,6 @@
-export {
-  Sidebar,
-  SidebarItem,
-  SidebarSection,
-  SidebarDivider,
-} from "./sidebar";
-export type {
-  SidebarProps,
-  SidebarItemProps,
-  SidebarSectionProps,
-} from "./sidebar";
+/**
+ * sidebar Component Export
+ */
+
+// Re-export everything for compatibility
+export * from "./sidebar";

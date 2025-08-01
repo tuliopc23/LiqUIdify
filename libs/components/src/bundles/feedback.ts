@@ -1,34 +1,22 @@
-// Feedback Components Bundle
-// Optimized bundle for feedback and status components
+/**
+ * Feedback Bundle - Feedback and Status Components (<8KB)
+ * Optimized bundle for loading states, notifications, and user feedback components
+ */
 
-// Loading Components
+// External dependencies (none)
+
+// Internal imports sorted alphabetically by type
+// Loading and Status Components
 export * from "../components/glass-loading";
-export * from "../components/glass-spinner";
+export * from "../components/glass-progress";
 export * from "../components/glass-skeleton";
+export * from "../components/glass-spinner";
 
 // Notification Components
-export * from "../components/glass-toast";
+export * from "../components/glass-alert";
+export * from "../components/glass-banner";
 export * from "../components/glass-notification";
+export * from "../components/glass-toast";
+export * from "../components/glass-tooltip";
 
-// Progress Components
-export * from "../components/glass-progress";
-
-// Re-export types and utilities
-export type { NotificationItem } from "../components/glass-notification";
-export { useToast, ToastProvider } from "../components/glass-toast";
-export { NotificationCenter } from "../components/glass-notification";
-
-// Skeleton patterns
-export {
-  SkeletonText,
-  SkeletonCard,
-  SkeletonTable,
-} from "../components/glass-skeleton";
-
-// Spinner variants
-export {
-  PulseSpinner,
-  DotsSpinner,
-  RingSpinner,
-  WaveSpinner,
-} from "../components/glass-spinner";
+// Type exports

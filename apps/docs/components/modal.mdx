@@ -1,0 +1,379 @@
+---
+title: "GlassModal"
+description: "An accessible modal component with glassmorphism effects and focus management"
+---
+
+# GlassModal
+
+The `GlassModal` component provides a beautiful modal dialog with glassmorphism effects, complete accessibility features, and smooth animations.
+
+## Import
+
+```tsx
+import { GlassModal } from "@liquidify/components";
+```
+
+## Basic Usage
+
+<CodeGroup>
+
+```tsx Basic Modal
+<GlassModal open={isOpen} onOpenChange={setIsOpen}>
+  <GlassModal.Content>
+    <GlassModal.Header>
+      <GlassModal.Title>Modal Title</GlassModal.Title>
+      <GlassModal.Description>
+        This is a modal description
+      </GlassModal.Description>
+    </GlassModal.Header>
+    <GlassModal.Body>Modal content goes here</GlassModal.Body>
+    <GlassModal.Footer>
+      <GlassButton variant="secondary" onClick={() => setIsOpen(false)}>
+        Cancel
+      </GlassButton>
+      <GlassButton variant="primary">Confirm</GlassButton>
+    </GlassModal.Footer>
+  </GlassModal.Content>
+</GlassModal>
+```
+
+```tsx With Trigger
+<GlassModal>
+  <GlassModal.Trigger asChild>
+    <GlassButton>Open Modal</GlassButton>
+  </GlassModal.Trigger>
+
+  <GlassModal.Content>
+    <GlassModal.Header>
+      <GlassModal.Title>Confirmation</GlassModal.Title>
+    </GlassModal.Header>
+    <GlassModal.Body>Are you sure you want to continue?</GlassModal.Body>
+    <GlassModal.Footer>
+      <GlassModal.Close asChild>
+        <GlassButton variant="secondary">Cancel</GlassButton>
+      </GlassModal.Close>
+      <GlassButton variant="primary">Confirm</GlassButton>
+    </GlassModal.Footer>
+  </GlassModal.Content>
+</GlassModal>
+```
+
+</CodeGroup>
+
+## Sizes
+
+<CardGroup cols={2}>
+
+<Card title="Small Modal">
+  ```tsx
+  <GlassModal>
+    <GlassModal.Content size="sm">
+      <GlassModal.Header>
+        <GlassModal.Title>Small Modal</GlassModal.Title>
+      </GlassModal.Header>
+      <GlassModal.Body>Compact content</GlassModal.Body>
+    </GlassModal.Content>
+  </GlassModal>
+  ```
+</Card>
+
+<Card title="Large Modal">
+  ```tsx
+  <GlassModal>
+    <GlassModal.Content size="lg">
+      <GlassModal.Header>
+        <GlassModal.Title>Large Modal</GlassModal.Title>
+      </GlassModal.Header>
+      <GlassModal.Body>Extensive content with more space</GlassModal.Body>
+    </GlassModal.Content>
+  </GlassModal>
+  ```
+</Card>
+
+<Card title="Full Screen">
+  ```tsx
+  <GlassModal>
+    <GlassModal.Content size="full">
+      <GlassModal.Header>
+        <GlassModal.Title>Full Screen Modal</GlassModal.Title>
+      </GlassModal.Header>
+      <GlassModal.Body>Full screen content</GlassModal.Body>
+    </GlassModal.Content>
+  </GlassModal>
+  ```
+</Card>
+
+</CardGroup>
+
+## Variants
+
+<CardGroup cols={2}>
+
+<Card title="Default">
+  ```tsx
+  <GlassModal>
+    <GlassModal.Content variant="default">
+      Standard modal appearance
+    </GlassModal.Content>
+  </GlassModal>
+  ```
+</Card>
+
+<Card title="Destructive">
+  ```tsx
+  <GlassModal>
+    <GlassModal.Content variant="destructive">
+      <GlassModal.Header>
+        <GlassModal.Title>Delete Item</GlassModal.Title>
+        <GlassModal.Description>
+          This action cannot be undone
+        </GlassModal.Description>
+      </GlassModal.Header>
+    </GlassModal.Content>
+  </GlassModal>
+  ```
+</Card>
+
+</CardGroup>
+
+## Advanced Features
+
+### Custom Close Behavior
+
+```tsx
+<GlassModal
+  closeOnClickOutside={false}
+  closeOnEscape={false}
+  onOpenChange={(open) => {
+    if (!open && hasUnsavedChanges) {
+      // Show confirmation dialog
+      return;
+    }
+    setIsOpen(open);
+  }}
+>
+  <GlassModal.Content>{/* Modal content */}</GlassModal.Content>
+</GlassModal>
+```
+
+### Custom Animations
+
+```tsx
+<GlassModal>
+  <GlassModal.Content
+    enterAnimation="slideUp"
+    exitAnimation="fadeOut"
+    animationDuration={300}
+  >
+    {/* Modal content */}
+  </GlassModal.Content>
+</GlassModal>
+```
+
+### Nested Modals
+
+```tsx
+<GlassModal>
+  <GlassModal.Content>
+    <GlassModal.Header>
+      <GlassModal.Title>Parent Modal</GlassModal.Title>
+    </GlassModal.Header>
+    <GlassModal.Body>
+      <GlassModal>
+        <GlassModal.Trigger asChild>
+          <GlassButton>Open Nested Modal</GlassButton>
+        </GlassModal.Trigger>
+        <GlassModal.Content>
+          <GlassModal.Header>
+            <GlassModal.Title>Nested Modal</GlassModal.Title>
+          </GlassModal.Header>
+        </GlassModal.Content>
+      </GlassModal>
+    </GlassModal.Body>
+  </GlassModal.Content>
+</GlassModal>
+```
+
+## Component API
+
+### GlassModal
+
+| Prop           | Type                      | Default | Description               |
+| -------------- | ------------------------- | ------- | ------------------------- |
+| `open`         | `boolean`                 | -       | Controlled open state     |
+| `defaultOpen`  | `boolean`                 | `false` | Default open state        |
+| `onOpenChange` | `(open: boolean) => void` | -       | Open state change handler |
+
+### GlassModal.Content
+
+| Prop                  | Type                                     | Default     | Description             |
+| --------------------- | ---------------------------------------- | ----------- | ----------------------- |
+| `size`                | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'md'`      | Modal size              |
+| `variant`             | `'default' \| 'destructive'`             | `'default'` | Modal variant           |
+| `closeOnClickOutside` | `boolean`                                | `true`      | Close on backdrop click |
+| `closeOnEscape`       | `boolean`                                | `true`      | Close on Escape key     |
+| `showCloseButton`     | `boolean`                                | `true`      | Show close button       |
+| `preventScroll`       | `boolean`                                | `true`      | Prevent body scroll     |
+| `enterAnimation`      | `string`                                 | `'fadeIn'`  | Enter animation         |
+| `exitAnimation`       | `string`                                 | `'fadeOut'` | Exit animation          |
+| `animationDuration`   | `number`                                 | `200`       | Animation duration (ms) |
+
+### GlassModal.Header
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+### GlassModal.Title
+
+| Prop        | Type          | Default | Description            |
+| ----------- | ------------- | ------- | ---------------------- |
+| `as`        | `ElementType` | `'h2'`  | Title element type     |
+| `className` | `string`      | -       | Additional CSS classes |
+
+### GlassModal.Description
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+### GlassModal.Body
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+### GlassModal.Footer
+
+| Prop        | Type                                         | Default   | Description            |
+| ----------- | -------------------------------------------- | --------- | ---------------------- |
+| `className` | `string`                                     | -         | Additional CSS classes |
+| `alignment` | `'left' \| 'center' \| 'right' \| 'between'` | `'right'` | Footer alignment       |
+
+### GlassModal.Trigger
+
+| Prop      | Type      | Default | Description             |
+| --------- | --------- | ------- | ----------------------- |
+| `asChild` | `boolean` | `false` | Render as child element |
+
+### GlassModal.Close
+
+| Prop      | Type      | Default | Description             |
+| --------- | --------- | ------- | ----------------------- |
+| `asChild` | `boolean` | `false` | Render as child element |
+
+## Accessibility
+
+The `GlassModal` component follows WAI-ARIA guidelines:
+
+- **Focus Management**: Focus is trapped within the modal and restored when closed
+- **Keyboard Navigation**: Supports Escape to close and Tab navigation
+- **Screen Readers**: Proper ARIA labels and descriptions
+- **Color Contrast**: Meets WCAG AA standards
+
+### Required ARIA Attributes
+
+```tsx
+<GlassModal>
+  <GlassModal.Content>
+    <GlassModal.Header>
+      <GlassModal.Title id="modal-title">Accessible Modal</GlassModal.Title>
+      <GlassModal.Description id="modal-description">
+        This modal has proper ARIA attributes
+      </GlassModal.Description>
+    </GlassModal.Header>
+  </GlassModal.Content>
+</GlassModal>
+```
+
+## Examples
+
+### Confirmation Dialog
+
+```tsx
+function ConfirmationDialog({ onConfirm, onCancel }) {
+  return (
+    <GlassModal open onOpenChange={onCancel}>
+      <GlassModal.Content variant="destructive" size="sm">
+        <GlassModal.Header>
+          <GlassModal.Title>Confirm Action</GlassModal.Title>
+          <GlassModal.Description>
+            This action cannot be undone. Are you sure you want to continue?
+          </GlassModal.Description>
+        </GlassModal.Header>
+        <GlassModal.Footer>
+          <GlassButton variant="secondary" onClick={onCancel}>
+            Cancel
+          </GlassButton>
+          <GlassButton variant="destructive" onClick={onConfirm}>
+            Delete
+          </GlassButton>
+        </GlassModal.Footer>
+      </GlassModal.Content>
+    </GlassModal>
+  );
+}
+```
+
+### Form Modal
+
+```tsx
+function FormModal({ isOpen, onClose, onSubmit }) {
+  const [formData, setFormData] = useState({ name: "", email: "" });
+
+  return (
+    <GlassModal open={isOpen} onOpenChange={onClose}>
+      <GlassModal.Content size="md">
+        <GlassModal.Header>
+          <GlassModal.Title>Add User</GlassModal.Title>
+          <GlassModal.Description>
+            Enter the user information below
+          </GlassModal.Description>
+        </GlassModal.Header>
+        <GlassModal.Body>
+          <form onSubmit={onSubmit} className="space-y-4">
+            <GlassInput
+              label="Name"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, name: e.target.value }))
+              }
+            />
+            <GlassInput
+              label="Email"
+              type="email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, email: e.target.value }))
+              }
+            />
+          </form>
+        </GlassModal.Body>
+        <GlassModal.Footer>
+          <GlassModal.Close asChild>
+            <GlassButton variant="secondary">Cancel</GlassButton>
+          </GlassModal.Close>
+          <GlassButton type="submit">Save User</GlassButton>
+        </GlassModal.Footer>
+      </GlassModal.Content>
+    </GlassModal>
+  );
+}
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+
+<Card title="Content Guidelines">
+  - Keep modal content focused and concise - Use clear, actionable button labels
+  - Provide context with titles and descriptions - Avoid nested scrolling areas
+</Card>
+
+<Card title="UX Considerations">
+  - Use modals sparingly to avoid interrupting user flow - Provide clear ways to
+  close the modal - Consider using drawers or popovers for less critical content
+  - Test keyboard navigation thoroughly
+</Card>
+
+</CardGroup>

@@ -1,2 +1,6 @@
-export { Navbar, NavbarItem, NavbarDivider } from "./navbar";
-export type { NavbarProps, NavbarItemProps } from "./navbar";
+/**
+ * navbar Component Export
+ */
+
+// Re-export everything for compatibility
+export * from "./navbar";

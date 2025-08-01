@@ -1,2 +1,7 @@
-export { GlassSearch } from "./glass-search";
-export type { GlassSearchProps, SearchSuggestion } from "./glass-search";
+/**
+ * glass-search Component Export
+ */
+;;
+
+// Re-export everything for compatibility
+export * from "./glass-search";

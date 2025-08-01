@@ -574,3 +574,6 @@ const _GlassLiveRegionProvider: React.FC<{
     </>
   );
 };
+
+// Export the provider component
+export { _GlassLiveRegionProvider };

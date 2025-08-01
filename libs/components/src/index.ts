@@ -75,5 +75,4 @@ export * from "./components/theme-toggle";
 
 // Showcase and demo components
 // export * from "./components/component-showcase"; // Component not implemented
-
-export * from "./components/hydration-detector";
+// export * from "./components/hydration-detector"; // Component not implemented

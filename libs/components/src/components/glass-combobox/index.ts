@@ -1,1 +1,6 @@
-export { GlassCombobox } from "./glass-combobox";
+/**
+ * glass-combobox Component Export
+ */;
+
+// Re-export everything for compatibility
+export * from "./glass-combobox";

@@ -1,2 +1,6 @@
-export { GlassCheckboxGroup } from "./glass-checkbox-group";
-export type { CheckboxOption } from "./glass-checkbox-group";
+/**
+ * glass-checkbox-group Component Export
+ */
+
+// Re-export everything for compatibility
+export * from "./glass-checkbox-group";

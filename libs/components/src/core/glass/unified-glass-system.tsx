@@ -122,7 +122,7 @@ const GLASS_VARIANT_STYLES: Record<GlassVariant, CSSProperties> = {
 };
 
 // Hook for unified glass effects
-export function useUnifiedGlass(
+function useUnifiedGlass(
   config: GlassEffectConfig = { intensity: "medium", variant: "default" },
 ) {
   const [isHovered, setIsHovered] = useState(false);
@@ -236,5 +236,8 @@ export {
   generateGlassClasses,
   generateGlassVariables,
 } from "../utils/glass-effects";
+
+// Export main component as UnifiedGlassEffect for compatibility
+export { AppleLiquidGlass as UnifiedGlassEffect };
 
 // Export for tree-shaking

@@ -1,1 +1,6 @@
-export { GlassPagination } from "./glass-pagination";
+/**
+ * glass-pagination Component Export
+ */;
+
+// Re-export everything for compatibility
+export * from "./glass-pagination";

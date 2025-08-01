@@ -17,7 +17,8 @@ import {
 // Type definitions for enhanced TypeScript support
 type ComponentVariant = "default" | "search" | "password" | "email";
 
-interface GlassInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface GlassInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: ComponentVariant;
   /**
    * Icon to display on the left side of the input.

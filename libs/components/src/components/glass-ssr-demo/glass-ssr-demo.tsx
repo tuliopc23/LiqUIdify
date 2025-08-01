@@ -7,9 +7,8 @@ import {
   _isSSR,
   _useSSRSafe,
 } from "../../hooks/use-ssr-safe-hooks";
-import { Box } from "../../core/Box";
 
-interface SSRDemoProps {
+export interface SSRDemoProps {
   title?: string;
   showDebugInfo?: boolean;
 }
@@ -91,7 +90,7 @@ export const GlassSSRDemo: React.FC<SSRDemoProps> = ({
   ]);
 
   return (
-    <Box className="glass-ssr-demo p-6 space-y-4">
+    <div className="glass-ssr-demo p-6 space-y-4">
       <h2 className="text-2xl font-bold">{title}</h2>
 
       {/* Intersection observer target */}
@@ -157,7 +156,7 @@ export const GlassSSRDemo: React.FC<SSRDemoProps> = ({
           </ul>
         </div>
       )}
-    </Box>
+    </div>
   );
 };
 

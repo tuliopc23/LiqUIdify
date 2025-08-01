@@ -56,8 +56,8 @@ export class GlassErrorBoundary extends Component<
     const {
       onError,
       level = "component",
-      componentName,
-      trackErrors = true,
+      // componentName,
+      // trackErrors = true,
     } = this.props;
 
     // Update state with error info
@@ -96,7 +96,7 @@ export class GlassErrorBoundary extends Component<
     if (
       hasError &&
       resetOnPropsChange &&
-      previousProps.children !== this.props.children
+      prevProps.children !== this.props.children
     ) {
       this.resetErrorBoundary();
     }

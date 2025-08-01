@@ -1,2 +1,7 @@
-export { default as GlassBanner } from "./glass-banner";
-export type { GlassBannerProps } from "./glass-banner";
+/**
+ * Glass Banner Component Export
+ */
+;;
+
+// Re-export everything for compatibility
+export * from "./glass-banner";

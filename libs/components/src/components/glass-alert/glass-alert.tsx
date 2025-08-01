@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "../../core/utils/classname";
 
-export interface GlassAlertProps extends React.HTMLAttributes<HTMLDivElement> {
+interface GlassAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "info" | "success" | "warning" | "error";
   title?: string;
   children: React.ReactNode;

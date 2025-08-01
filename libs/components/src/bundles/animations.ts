@@ -9,7 +9,7 @@
 // export const loadGSAP = () => import('gsap').then(gsap => gsap.default || gsap);
 import type * as FramerMotion from "framer-motion";
 
-const _loadFramerMotion = (): Promise<typeof FramerMotion> =>
+export const loadFramerMotion = (): Promise<typeof FramerMotion> =>
   import("framer-motion");
 
 // Advanced visual components

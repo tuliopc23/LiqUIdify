@@ -1,0 +1,195 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "LiqUIdify",
+  "logo": {
+    "dark": "/logo-dark.svg",
+    "light": "/logo-light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#3b82f6",
+    "light": "#60a5fa",
+    "dark": "#1e40af",
+    "anchors": {
+      "from": "#3b82f6",
+      "to": "#1e40af"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "https://github.com/liquidify/liquidify/issues"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://dashboard.mintlify.com"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    },
+    {
+      "name": "Components",
+      "url": "components"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "https://docs.liquidify.dev"
+    },
+    {
+      "name": "Community",
+      "icon": "slack",
+      "url": "https://liquidify.dev/discord"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://liquidify.dev/blog"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": ["introduction", "quickstart", "installation", "theming"]
+    },
+    {
+      "group": "Core Components",
+      "pages": [
+        "components/button",
+        "components/card",
+        "components/input",
+        "components/modal"
+      ]
+    },
+    {
+      "group": "Layout Components",
+      "pages": [
+        "components/accordion",
+        "components/banner",
+        "components/breadcrumbs",
+        "components/tabs"
+      ]
+    },
+    {
+      "group": "Form Components",
+      "pages": [
+        "components/checkbox",
+        "components/radio-group",
+        "components/select",
+        "components/textarea",
+        "components/file-upload"
+      ]
+    },
+    {
+      "group": "Feedback Components",
+      "pages": [
+        "components/alert",
+        "components/toast",
+        "components/notification",
+        "components/progress",
+        "components/loading"
+      ]
+    },
+    {
+      "group": "Navigation Components",
+      "pages": [
+        "components/navbar",
+        "components/sidebar",
+        "components/pagination",
+        "components/dropdown"
+      ]
+    },
+    {
+      "group": "Data Display",
+      "pages": [
+        "components/avatar",
+        "components/badge",
+        "components/table",
+        "components/chart",
+        "components/skeleton"
+      ]
+    },
+    {
+      "group": "Advanced Components",
+      "pages": [
+        "components/command",
+        "components/combobox",
+        "components/date-picker",
+        "components/popover",
+        "components/tooltip"
+      ]
+    },
+    {
+      "group": "Accessibility",
+      "pages": [
+        "guides/accessibility",
+        "components/focus-trap",
+        "components/visually-hidden",
+        "components/skip-navigation",
+        "components/live-region"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/components",
+        "api-reference/hooks",
+        "api-reference/utilities"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "x": "https://x.com/liquidify",
+    "github": "https://github.com/liquidify/liquidify",
+    "linkedin": "https://www.linkedin.com/company/liquidify"
+  },
+  "backgroundImage": "/images/background.png",
+  "theme": "quill",
+  "layout": "topnav",
+  "search": {
+    "prompt": "Search LiqUIdify docs..."
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true,
+    "raiseIssue": true
+  },
+  "analytics": {
+    "ga4": {
+      "measurementId": "G-XXXXXXXXXX"
+    }
+  },
+  "seo": {
+    "indexHiddenPages": false
+  },
+  "redirects": [
+    {
+      "source": "/old-path",
+      "destination": "/new-path"
+    }
+  ],
+  "openapi": [
+    {
+      "url": "https://api.liquidify.dev/openapi.json",
+      "root": "api-reference"
+    }
+  ],
+  "integrations": {
+    "intercom": "YOUR_INTERCOM_APP_ID"
+  },
+  "api": {
+    "playground": {
+      "mode": "show"
+    }
+  },
+  "modeToggle": {
+    "default": "light",
+    "isHidden": false
+  }
+}

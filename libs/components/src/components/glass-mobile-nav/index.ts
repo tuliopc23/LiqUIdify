@@ -1,2 +1,6 @@
-export { GlassMobileNav } from "./glass-mobile-nav";
-export type { NavItem } from "./glass-mobile-nav";
+/**
+ * glass-mobile-nav Component Export
+ */;
+
+// Re-export everything for compatibility
+export * from "./glass-mobile-nav";

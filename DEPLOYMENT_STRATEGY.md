@@ -1,210 +1,228 @@
 # Deployment Strategy
 
-This document outlines the comprehensive deployment strategy for LiqUIdify, a React component library with integrated Storybook showcase and VitePress documentation.
+This document outlines the deployment strategy for LiqUIdify, including the current Storybook-focused approach and the three-project architecture (component library, Storybook, and documentation).
 
-## Architecture Overview
+## Current Architecture
 
-The project uses a simplified single-build deployment approach optimized for component library showcasing:
+### Three-Project Structure
 
-```
-LiqUIdify Project
-├── Component Library (libs/components/) - Core React components
-├── Storybook (apps/storybook/) - Interactive component showcase
-└── VitePress Docs (apps/docs/) - User documentation (development-focused)
-```
+1. **Component Library** (`libs/components/`)
 
-## Deployment Configuration
+   - Core React components with TypeScript
+   - Multiple bundle exports (core, forms, navigation, etc.)
+   - Built with Vite and distributed via npm
+
+2. **Storybook** (`apps/storybook/`)
+
+   - Interactive component documentation
+   - Currently deployed to Vercel
+   - 49+ story files for comprehensive coverage
+
+3. **VitePress Documentation** (`apps/docs/`)
+   - Markdown-based documentation
+   - Currently for development use
+   - Vue-based with React component integration challenges
+
+## Current Deployment Configuration
 
 ### Vercel Setup
 
-The project is configured for Vercel deployment with the following structure:
+The project is currently configured for **Storybook-only deployment** to Vercel with the following configuration:
 
-**Primary Deployment**: Storybook (Main Site)
-
-- **URL**: https://liquidify.dev
-- **Build Command**: `bun run build:storybook`
-- **Output Directory**: `apps/storybook/storybook-static`
-- **Purpose**: Interactive component showcase for developers and designers
-
-**Development Documentation**: VitePress (Development Only)
-
-- **URL**: Local development only
-- **Build Command**: `bun run docs:dev`
-- **Purpose**: Technical documentation and API reference
-- **Status**: Not deployed (development-focused)
-
-### Build Process
-
-1. **Library Build**: Component library is built and bundled
-2. **Storybook Build**: Discovers 47+ story files and generates static site
-3. **Asset Optimization**: CSS, JS, and image assets are optimized
-4. **Deployment**: Single static site deployed to Vercel
-
-## File Structure Impact
-
-### Created Infrastructure
-
-```
-apps/storybook/
-├── .storybook/
-│   ├── main.ts          # Storybook configuration with Vite builder
-│   └── preview.ts       # Theme providers and accessibility setup
-├── package.json         # Workspace member configuration
-└── tsconfig.json        # TypeScript configuration
+```json
+{
+  "buildCommand": "bun run build:storybook",
+  "outputDirectory": "apps/storybook/storybook-static",
+  "installCommand": "bun install --frozen-lockfile"
+}
 ```
 
-### Updated Configuration
+#### Build Process
 
-- **vercel.json**: Simplified for single-build deployment
-- **apps/docs/.vitepress/config.ts**: Enhanced React integration handling
-- **scripts/**: Validation and pre-deployment checks
+1. Install dependencies with Bun
+2. Build component library first (`bun run build:lib`)
+3. Build Storybook with component library as dependency
+4. Deploy static Storybook build to Vercel
 
-## Deployment Workflow
+#### Routes and Headers
 
-### Pre-deployment Validation
+- **Primary Route**: All traffic serves Storybook content
+- **API Routes**: Return 404 (no backend API currently)
+- **Security Headers**: CSP, CORS, and security-focused headers configured
+- **Caching**: Long-term caching for static assets, short-term for HTML
 
-1. **Configuration Check**: Validate Storybook configuration exists
-2. **Story Discovery**: Verify all 47+ story files are discoverable
-3. **Build Test**: Test Storybook build process
-4. **Asset Validation**: Ensure all assets are properly referenced
+### Component Library Distribution
 
-### Build Process
+The component library is built and packaged for npm distribution:
+
+- **Bundle Exports**: 13 specialized bundle files (core, forms, navigation, etc.)
+- **Build Targets**: ESM, CJS, and TypeScript declarations
+- **Package Exports**: Modern package.json exports for tree-shaking
+
+## Bundle File Structure
+
+All bundle files are located in `libs/components/src/bundles/`:
+
+1. **core.ts** - Essential components (<15KB)
+2. **forms.ts** - Form-related components
+3. **navigation.ts** - Navigation components
+4. **feedback.ts** - Feedback and status components
+5. **layout.ts** - Layout and container components
+6. **data-display.ts** - Data visualization components
+7. **accessibility.ts** - Accessibility utilities
+8. **advanced.ts** - Complex components
+9. **animations.ts** - Animation utilities
+10. **physics.ts** - Physics-based interactions
+11. **ssr.ts** - Server-side rendering utilities
+12. **providers.ts** - Context providers
+13. **tokens.ts** - Design tokens
+
+## Validation and Quality Assurance
+
+### Pre-deployment Checks
+
+- **Configuration validation** via `validate-build-config.js`
+- **Build verification** via `pre-deployment-check.js`
+- **Story discovery validation** (ensures 49+ stories are discoverable)
+- **Bundle size analysis** and performance metrics
+- **TypeScript compilation** and type checking
+
+### GitHub Actions Workflows
+
+- **Build Validation** (`build-validation.yml`)
+- **Deploy Validation** (`deploy-validation.yml`)
+- **Dependency auditing** and security checks
+- **Bundle size monitoring**
+
+## Build Commands
+
+### Development
 
 ```bash
-# Development
-bun run storybook              # Start Storybook dev server
-bun run docs:dev              # Start VitePress dev server
-
-# Production Build
-bun run build:storybook       # Build Storybook for deployment
-bun run docs:build            # Build docs (development only)
+bun run dev:storybook    # Start Storybook development server
+bun run dev:docs         # Start VitePress development server
+bun run dev:lib          # Watch mode for library development
 ```
 
-### Deployment Steps
+### Building
 
-1. **Code Push**: Push changes to main branch
-2. **Vercel Build**: Automated build triggers
-3. **Storybook Generation**: Static site generated from stories
-4. **Asset Optimization**: Files optimized for production
-5. **Deployment**: Site deployed to production URL
+```bash
+bun run build:lib       # Build component library
+bun run build:storybook # Build Storybook for production
+bun run build:docs      # Build VitePress documentation
+bun run build           # Build all projects
+```
+
+### Validation
+
+```bash
+bun run validate:build-config  # Validate build configuration
+bun run deploy:validate        # Run pre-deployment checks
+bun run type-check             # TypeScript validation
+bun run lint                   # Code quality checks
+```
+
+## Story File Discovery
+
+The Storybook configuration automatically discovers story files from:
+
+- `libs/components/src/**/*.stories.@(js|jsx|ts|tsx|mdx)`
+- `libs/components/src/stories/**/*.stories.@(js|jsx|ts|tsx|mdx)`
+
+Currently maintains 49+ story files for comprehensive component coverage.
 
 ## Performance Considerations
 
 ### Bundle Optimization
 
-- **Manual Chunking**: React/Storybook vendors separated
-- **Asset Caching**: Long-term caching for static assets
-- **Lazy Loading**: Stories loaded on demand
-- **CSS Optimization**: Glass effect styles optimized
+- **Tree-shaking**: Modern ESM builds with proper exports
+- **Code splitting**: Separate bundles for different component categories
+- **CSS bundling**: Consolidated styles with theme support
+- **Size targets**: <100KB for main library bundle, <50KB for CSS
 
-### Core Web Vitals
+### Storybook Optimization
 
-- **LCP**: Optimized through asset preloading
-- **FID**: Reduced through code splitting
-- **CLS**: Prevented through consistent layout
+- **Chunk splitting**: Separate vendor and story chunks
+- **Asset optimization**: Long-term caching for static assets
+- **Build size monitoring**: Automated size analysis in CI
 
-## Security Configuration
+## Troubleshooting Common Issues
 
-### Headers
+### Build Configuration Mismatches
 
-```json
-{
-  "X-Content-Type-Options": "nosniff",
-  "X-Frame-Options": "DENY",
-  "X-XSS-Protection": "1; mode=block",
-  "Referrer-Policy": "strict-origin-when-cross-origin",
-  "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
-}
-```
+1. **Bundle file references**: Ensure all referenced bundle files exist
+2. **Path alias consistency**: Verify aliases match across all config files
+3. **TypeScript configuration**: Ensure base config is consistent
 
-### Content Security
+### Story Discovery Issues
 
-- Static assets cached with immutable headers
-- No dynamic server-side functionality
-- All content served from CDN
+1. **File patterns**: Check that story files match expected patterns
+2. **Import paths**: Verify component imports are resolvable
+3. **Storybook configuration**: Ensure story discovery patterns are correct
 
-## Monitoring and Maintenance
+### Deployment Failures
 
-### Health Checks
+1. **Build validation**: Run pre-deployment checks locally
+2. **Dependency issues**: Verify all dependencies are correctly installed
+3. **Bundle validation**: Ensure all expected outputs are generated
 
-- **Build Validation**: Pre-deployment build testing
-- **Story Validation**: Ensure all stories render correctly
-- **Accessibility**: A11y addon validation in Storybook
-- **Performance**: Bundle size monitoring
+## Future Multi-Project Deployment Strategy
 
-### Rollback Strategy
+### Potential Approaches
 
-1. **Immediate**: Vercel instant rollback to previous deployment
-2. **Code Revert**: Git revert for code-level issues
-3. **Configuration Fix**: Quick configuration updates
+1. **Multi-site Vercel**: Deploy Storybook and docs to separate Vercel projects
+2. **Subdomain routing**: Use subdomains for different applications
+3. **Monorepo deployment**: Single deployment with routing to different builds
+4. **CDN distribution**: Distribute library via CDN with separate docs sites
 
-## Troubleshooting
+### Recommendations
 
-### Common Issues
+- **Short-term**: Continue with Storybook-focused deployment
+- **Medium-term**: Add documentation deployment to separate subdomain
+- **Long-term**: Consider full multi-project deployment strategy
 
-**Storybook Build Fails**
+## Architecture Decision: Documentation Strategy
 
-```bash
-# Check configuration
-bun run validate:storybook
+The current architecture includes VitePress documentation, but React/Vue integration presents challenges. Options:
 
-# Verify story discovery
-bun run storybook --debug
-```
+1. **Storybook Documentation**: Use Storybook as primary docs (current approach)
+2. **Static Examples**: Generate static HTML examples for VitePress
+3. **Separate React Docs**: Build documentation with React-based static site generator
+4. **Hybrid Approach**: Use VitePress for guides, Storybook for component docs
 
-**Missing Stories**
+**Current Status**: Storybook serves as both interactive playground and primary documentation.
 
-```bash
-# Check story file patterns
-find libs/components/src -name "*.stories.*"
+## Security and Performance
 
-# Validate Storybook configuration
-cat apps/storybook/.storybook/main.ts
-```
+### Security Headers
 
-**Deployment Failures**
+- Content Security Policy (CSP)
+- Cross-Origin Resource Policy (CORP)
+- X-Frame-Options, X-Content-Type-Options
+- XSS Protection and Referrer Policy
 
-```bash
-# Run pre-deployment checks
-bun run deploy:validate
+### Performance Optimization
 
-# Test build locally
-bun run build:storybook
-```
+- Asset compression and minification
+- Long-term caching for immutable assets
+- CDN delivery through Vercel Edge Network
+- Optimized bundle splitting and lazy loading
 
-### VitePress + React Integration
+## Monitoring and Analytics
 
-The VitePress documentation has been configured with fallback mechanisms for React component integration:
+### Built-in Monitoring
 
-- **SSR Handling**: React components excluded from SSR optimization
-- **Error Boundaries**: Graceful handling of component rendering issues
-- **Development Mode**: Enhanced error reporting for React integration problems
-- **Fallback System**: Alternative documentation approaches when React components can't render
+- Bundle size tracking in CI
+- Build time monitoring
+- Story coverage analysis
+- Accessibility compliance checking
 
-## Future Considerations
+### Analytics Integration
 
-### Multi-site Deployment (Future)
+- Google Analytics placeholder in VitePress config
+- Vercel Analytics (optional)
+- Performance monitoring via Web Vitals
 
-If needed in the future, the architecture can be extended to support:
+---
 
-1. **Storybook**: Component showcase (primary)
-2. **Documentation**: User-facing guides and API reference
-3. **Library CDN**: Direct component library access
-
-This would require:
-
-- Enhanced Vercel configuration with multiple builds
-- Subdomain routing setup
-- Cross-site linking strategy
-- Unified navigation system
-
-### Automation Enhancements
-
-- **Automated Testing**: E2E tests for story rendering
-- **Performance Monitoring**: Core Web Vitals tracking
-- **Bundle Analysis**: Automated bundle size reporting
-- **Accessibility Auditing**: Automated a11y compliance checking
-
-## Conclusion
-
-This deployment strategy focuses on providing an excellent developer experience through Storybook while maintaining simplicity and performance. The single-build approach ensures fast deployments and optimal user experience while providing comprehensive component documentation and interactive examples.
+This deployment strategy balances current needs with future scalability, focusing on the Storybook deployment while maintaining flexibility for multi-project deployment in the future.

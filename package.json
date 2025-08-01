@@ -28,36 +28,29 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "^1.54.1",
-    "@storybook/addon-a11y": "^9.0.18",
-    "@storybook/addon-essentials": "^9.0.18",
-    "@storybook/addon-interactions": "^9.0.18",
-    "@storybook/addon-links": "^9.0.18",
-    "@storybook/addon-storysource": "^9.0.18",
-    "@storybook/builder-vite": "^9.0.18",
-    "@storybook/react": "^9.0.18",
-    "@storybook/react-vite": "^9.0.18",
-    "@swc-node/register": "~1.9.2",
-    "@swc/core": "~1.5.29",
+    "@storybook/react": "^8.4.1",
+    "storybook": "^8.4.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
     "@types/bun": "^1.2.19",
     "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.19.9",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
     "@vitejs/plugin-react": "^4.7.0",
     "axe-playwright": "^2.1.0",
     "jest-axe": "^10.0.0",
     "jiti": "2.4.2",
     "lightningcss": "^1.30.1",
     "pa11y": "^9.0.0",
-    "prettier": "^3.6.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rollup-plugin-visualizer": "^6.0.3",
     "typescript": "^5.9.2",
     "vite": "^7.0.6",
     "vite-plugin-compression2": "^2.2.0",
     "vite-plugin-dts": "^4.5.4",
-    "vitepress": "^1.6.3",
+    "mintlify": "^4.0.0",
     "vitest": "^3.2.4"
   },
   "engines": {
@@ -65,35 +58,35 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/index.cjs",
+      "types": "./dist/libs/components/index.d.ts",
       "style": "./dist/libs/components/liquidui.css",
-      "types": "./dist/libs/components/index.d.ts"
+      "import": "./dist/libs/components/index.mjs",
+      "require": "./dist/libs/components/index.cjs"
     },
     "./accessibility": {
+      "types": "./dist/libs/components/bundles/accessibility.d.ts",
       "import": "./dist/libs/components/accessibility.mjs",
-      "require": "./dist/libs/components/cjs/accessibility.cjs",
-      "types": "./dist/libs/components/bundles/accessibility.d.ts"
+      "require": "./dist/libs/components/cjs/accessibility.cjs"
     },
     "./advanced": {
+      "types": "./dist/libs/components/bundles/advanced.d.ts",
       "import": "./dist/libs/components/advanced.mjs",
-      "require": "./dist/libs/components/cjs/advanced.cjs",
-      "types": "./dist/libs/components/bundles/advanced.d.ts"
+      "require": "./dist/libs/components/cjs/advanced.cjs"
     },
     "./animations": {
+      "types": "./dist/libs/components/bundles/animations.d.ts",
       "import": "./dist/libs/components/animations.mjs",
-      "require": "./dist/libs/components/cjs/animations.cjs",
-      "types": "./dist/libs/components/bundles/animations.d.ts"
+      "require": "./dist/libs/components/cjs/animations.cjs"
     },
     "./button": {
+      "types": "./dist/libs/components/components/glass-button-refactored/index.d.ts",
       "import": "./dist/libs/components/components/button.mjs",
-      "require": "./dist/libs/components/cjs/components/button.cjs",
-      "types": "./dist/libs/components/components/glass-button-refactored/index.d.ts"
+      "require": "./dist/libs/components/cjs/components/button.cjs"
     },
     "./card": {
+      "types": "./dist/libs/components/components/glass-card-refactored/index.d.ts",
       "import": "./dist/libs/components/components/card.mjs",
-      "require": "./dist/libs/components/cjs/components/card.cjs",
-      "types": "./dist/libs/components/components/glass-card-refactored/index.d.ts"
+      "require": "./dist/libs/components/cjs/components/card.cjs"
     },
     "./context": {
       "types": "./dist/libs/components/bundles/providers.d.ts",
@@ -126,6 +119,11 @@
       "types": "./dist/libs/components/components/glass-input/index.d.ts",
       "import": "./dist/libs/components/components/input.mjs",
       "require": "./dist/libs/components/cjs/components/input.cjs"
+    },
+    "./avatar": {
+      "types": "./dist/libs/components/components/glass-avatar/index.d.ts",
+      "import": "./dist/libs/components/components/avatar.mjs",
+      "require": "./dist/libs/components/cjs/components/avatar.cjs"
     },
     "./layout": {
       "types": "./dist/libs/components/bundles/layout.d.ts",
@@ -208,9 +206,9 @@
     "build:watch": "vite build --config vite.config.ts --watch",
     "dev": "vite --config vite.config.ts",
     "storybook": "storybook dev -p 6006 -c apps/storybook/.storybook",
-    "docs:dev": "vitepress dev apps/docs",
-    "docs:build": "vitepress build apps/docs",
-    "docs:preview": "vitepress preview apps/docs",
+    "docs:dev": "mintlify dev apps/docs",
+    "docs:build": "mintlify build apps/docs",
+    "docs:preview": "mintlify preview apps/docs",
     "lint": "qlty check -a",
     "format": "qlty fmt -a",
     "format:fix": "qlty fmt -- --fix",

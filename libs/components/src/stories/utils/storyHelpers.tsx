@@ -22,7 +22,7 @@ export function createMeta<T>(options: {
 }
 
 // Common argTypes
-export const variantArgType = {
+const variantArgType = {
   control: "select",
   options: [
     "primary",
@@ -35,19 +35,19 @@ export const variantArgType = {
   description: "Visual style variant",
 };
 
-export const sizeArgType = {
+const sizeArgType = {
   control: "select",
   options: ["xs", "sm", "md", "lg", "xl"],
   description: "Component size",
 };
 
-export const booleanArgType = (desc: string) => ({
+const booleanArgType = (desc: string) => ({
   control: "boolean",
   description: desc,
 });
 
 // Demo data
-export const demoVariants = [
+const demoVariants = [
   "primary",
   "secondary",
   "tertiary",
@@ -55,7 +55,7 @@ export const demoVariants = [
   "destructive",
   "apple",
 ];
-export const demoSizes = ["xs", "sm", "md", "lg", "xl"];
+const demoSizes = ["xs", "sm", "md", "lg", "xl"];
 
 // Reusable render helpers
 export function renderVariants(
@@ -73,7 +73,7 @@ export function renderVariants(
   );
 }
 
-export function renderSizes(
+function renderSizes(
   Component: React.ComponentType<any>,
   extraProps: any = {},
 ) {
@@ -91,13 +91,3 @@ export function renderSizes(
 // Example: renderInteractiveStates, renderWithIcons, etc. can be added as needed
 
 // Export all helpers
-export default {
-  createMeta,
-  variantArgType,
-  sizeArgType,
-  booleanArgType,
-  demoVariants,
-  demoSizes,
-  renderVariants,
-  renderSizes,
-};

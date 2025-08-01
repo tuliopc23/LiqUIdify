@@ -1,2 +1,7 @@
-export { default as GlassTimeline } from "./glass-timeline";
-export type { GlassTimelineProps } from "./glass-timeline";
+/**
+ * glass-timeline Component Export
+ */
+;;
+
+// Re-export everything for compatibility
+export * from "./glass-timeline";

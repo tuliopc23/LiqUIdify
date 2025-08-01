@@ -21,8 +21,8 @@ export * from "../components/glass-mobile-nav";
 export * from "../components/glass-notification";
 export * from "../components/glass-pagination";
 // Developer tools
-
-export * from "../components/glass-playground/glass-playground";
+export * from "../components/glass-performance-dashboard";
+// export * from "../components/glass-playground/glass-playground"; // Temporarily disabled due to circular dependency
 // Specialized components
 export * from "../components/glass-responsive-button";
 export * from "../components/glass-responsive-card";

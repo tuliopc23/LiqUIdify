@@ -312,14 +312,10 @@ const _useWindowSize = () => {
 
 // Export all hooks for testing
 export {
-  _useSSRSafeLayoutEffect,
   _useSSRSafe,
   _isSSR,
   _useIntersectionObserver,
   _useMediaQuery,
   _useNetworkStatus,
-  _useOnlineStatus,
-  _usePageVisibility,
-  _usePerformanceMetrics,
   _useWindowSize,
 };

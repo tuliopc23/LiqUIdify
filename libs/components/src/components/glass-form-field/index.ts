@@ -1,2 +1,6 @@
-export { GlassFormField } from "./glass-form-field";
-export type { GlassFormFieldProps } from "./glass-form-field";
+/**
+ * glass-form-field Component Export
+ */
+
+// Re-export everything for compatibility
+export * from "./glass-form-field";

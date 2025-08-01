@@ -13,7 +13,7 @@ import type {
 } from "react";
 
 // Core component size variants
-export type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
+type ComponentSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 // Core component variants
 export type ComponentVariant =
@@ -25,10 +25,10 @@ export type ComponentVariant =
   | "apple";
 
 // Glass effect intensity levels
-export type GlassIntensity = "subtle" | "medium" | "strong";
+type GlassIntensity = "subtle" | "medium" | "strong";
 
 // Animation timing presets
-export type AnimationTiming = "instant" | "fast" | "normal" | "slow" | "slower";
+type AnimationTiming = "instant" | "fast" | "normal" | "slow" | "slower";
 
 // Glass visual effects configuration
 interface GlassEffectConfig {
@@ -71,7 +71,7 @@ interface BaseGlassProps {
 }
 
 // Interactive component props
-export interface InteractiveGlassProps extends BaseGlassProps {
+interface InteractiveGlassProps extends BaseGlassProps {
   /** Disable the component */
   disabled?: boolean;
   /** Loading state */
@@ -93,7 +93,7 @@ interface CompoundComponentProps {
 }
 
 // Layout component props
-interface LayoutGlassProps extends BaseGlassProps {
+export interface LayoutGlassProps extends BaseGlassProps {
   /** Padding size */
   padding?: ComponentSize | "none";
   /** Margin size */
@@ -105,7 +105,7 @@ interface LayoutGlassProps extends BaseGlassProps {
 }
 
 // Form component props
-interface FormGlassProps extends InteractiveGlassProps {
+export interface FormGlassProps extends InteractiveGlassProps {
   /** Form field name */
   name?: string;
   /** Form field value */
@@ -139,8 +139,8 @@ type TextareaProps = ComponentPropsWithoutRef<"textarea">;
 type SelectProps = ComponentPropsWithoutRef<"select">;
 type LabelProps = ComponentPropsWithoutRef<"label">;
 type SpanProps = ComponentPropsWithoutRef<"span">;
-type HeadingProps = ComponentPropsWithoutRef<"h1">;
-type ParagraphProps = ComponentPropsWithoutRef<"p">;
+export type HeadingProps = ComponentPropsWithoutRef<"h1">;
+export type ParagraphProps = ComponentPropsWithoutRef<"p">;
 
 // Polymorphic component props
 type PolymorphicProps<T extends React.ElementType> = {
@@ -233,7 +233,7 @@ type RequiredGlassProps<T> = Required<T>;
 type PartialGlassProps<T> = Partial<T>;
 
 // Generic component props builder
-type ComponentPropsBuilder<
+export type ComponentPropsBuilder<
   T extends HTMLElement,
   P extends Record<string, unknown> = {},
 > = UnifiedGlassProps & HTMLAttributes<T> & P;

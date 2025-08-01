@@ -1,2 +1,7 @@
-export { GlassSelect } from "./glass-select";
-export type { GlassSelectProps, GlassSelectOption } from "./glass-select";
+/**
+ * glass-select Component Export
+ */
+;;
+
+// Re-export everything for compatibility
+export * from "./glass-select";

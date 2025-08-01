@@ -18,7 +18,7 @@ import { GlassFormField } from './glass-form-field';
 
 const meta = { title: 'Components/Forms/GlassFormField' }
   GlassFormField,
-  parameters: { 'centered' }
+  parameters: { layout: 'centered' },
     { 
         ` }
 A comprehensive form field wrapper component with advanced glassmorphism effects, comprehensive validation states, and accessibility features.

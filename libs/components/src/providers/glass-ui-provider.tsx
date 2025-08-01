@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { GlassErrorBoundary } from "../components/glass-error-boundary";
-import { GlassLiveRegionProvider } from "../components/glass-live-region";
+import { _GlassLiveRegionProvider } from "../components/glass-live-region";
 
 import { ToastProvider } from "../components/glass-toast/glass-toast";
 
@@ -38,9 +38,9 @@ export function GlassUIProvider({
       <ThemeProvider defaultTheme={theme} storageKey="glass-ui-theme">
         <LiquidGlassProvider {...glassConfig}>
           <HapticProvider {...hapticConfig}>
-            <GlassLiveRegionProvider>
+            <_GlassLiveRegionProvider>
               <ToastProvider>{children}</ToastProvider>
-            </GlassLiveRegionProvider>
+            </_GlassLiveRegionProvider>
           </HapticProvider>
         </LiquidGlassProvider>
       </ThemeProvider>

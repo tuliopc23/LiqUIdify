@@ -1,9 +1,6 @@
-export {
-  RadioGroup,
-  GlassRadioGroup,
-  GlassRadioItem,
-} from "./glass-radio-group";
-export type {
-  GlassRadioGroupProps,
-  GlassRadioItemProps,
-} from "./glass-radio-group";
+/**
+ * glass-radio-group Component Export
+ */
+
+// Re-export everything for compatibility
+export * from "./glass-radio-group";

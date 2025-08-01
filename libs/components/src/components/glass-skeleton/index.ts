@@ -1,6 +1,7 @@
-export {
-  GlassSkeleton,
-  SkeletonText,
-  SkeletonCard,
-  SkeletonTable,
-} from "./glass-skeleton";
+/**
+ * glass-skeleton Component Export
+ */
+;;
+
+// Re-export everything for compatibility
+export * from "./glass-skeleton";

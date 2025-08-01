@@ -3,7 +3,7 @@ import { cn } from "../../core/utils/classname";
 import { UnifiedGlassEffect } from "../../core/glass/unified-glass-system";
 import { GlassButton } from "../glass-button-refactored";
 
-export interface SidebarProps {
+interface SidebarProps {
   /** Sidebar content */
   children: React.ReactNode;
   /** Open state (controlled) */
@@ -45,7 +45,7 @@ const widthMap = {
   full: "w-full max-w-md",
 };
 
-export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
+const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
   (
     {
       children,
@@ -222,7 +222,7 @@ export const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 Sidebar.displayName = "Sidebar";
 
 // SidebarItem component for consistent navigation items
-export interface SidebarItemProps {
+interface SidebarItemProps {
   /** Icon */
   icon?: React.ReactNode;
   /** Label */
@@ -245,7 +245,7 @@ export interface SidebarItemProps {
   badge?: React.ReactNode;
 }
 
-export const SidebarItem = React.forwardRef<
+const SidebarItem = React.forwardRef<
   HTMLAnchorElement | HTMLButtonElement,
   SidebarItemProps
 >(
@@ -315,7 +315,7 @@ export const SidebarItem = React.forwardRef<
 SidebarItem.displayName = "SidebarItem";
 
 // SidebarSection for grouping items
-export interface SidebarSectionProps {
+interface SidebarSectionProps {
   /** Section title */
   title?: string;
   /** Section content */
@@ -324,7 +324,7 @@ export interface SidebarSectionProps {
   className?: string;
 }
 
-export const SidebarSection: React.FC<SidebarSectionProps> = ({
+const SidebarSection: React.FC<SidebarSectionProps> = ({
   title,
   children,
   className,
@@ -340,6 +340,6 @@ export const SidebarSection: React.FC<SidebarSectionProps> = ({
 );
 
 // SidebarDivider for visual separation
-export const SidebarDivider: React.FC<{ className?: string }> = ({
-  className,
-}) => <hr className={cn("my-4 border-white/10", className)} />;
+const SidebarDivider: React.FC<{ className?: string }> = ({ className }) => (
+  <hr className={cn("my-4 border-white/10", className)} />
+);

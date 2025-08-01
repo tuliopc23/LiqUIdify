@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
           "libs/components/src/**/*.test.*",
           "libs/components/src/**/*.spec.*",
           "libs/components/src/**/*.stories.*",
+          "libs/components/src/components/glass-playground/**",
         ],
         outDir: "dist/libs/components",
         entryRoot: "libs/components/src",
@@ -97,6 +98,9 @@ export default defineConfig(({ mode }) => {
           ),
           "components/input": resolve(
             "libs/components/src/components/glass-input/index.ts",
+          ),
+          "components/avatar": resolve(
+            "libs/components/src/components/glass-avatar/index.ts",
           ),
         },
         name: "LiqUIdify",

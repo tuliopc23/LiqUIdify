@@ -1,7 +1,6 @@
-export {
-  Accordion,
-  GlassAccordion,
-  GlassAccordionItem,
-  GlassAccordionTrigger,
-  GlassAccordionContent,
-} from "./glass-accordion";
+/**
+ * glass-accordion Component Export
+ */;
+
+// Re-export everything for compatibility
+export * from "./glass-accordion";

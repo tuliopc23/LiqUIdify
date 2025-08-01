@@ -1,1 +1,6 @@
-export { GlassPortal } from "./glass-portal";
+/**
+ * glass-portal Component Export
+ */;
+
+// Re-export everything for compatibility
+export * from "./glass-portal";

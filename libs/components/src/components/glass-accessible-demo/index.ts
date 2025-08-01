@@ -1,2 +1,7 @@
-export { GlassAccessibleDemo } from "./glass-accessible-demo";
-export type { GlassAccessibleDemoProps } from "./glass-accessible-demo";
+/**
+ * glass-accessible-demo Component Export
+ */
+;
+
+// Re-export everything for compatibility
+export * from "./glass-accessible-demo";

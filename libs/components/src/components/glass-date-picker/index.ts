@@ -1,1 +1,6 @@
-export { GlassDatePicker } from "./glass-date-picker";
+/**
+ * glass-date-picker Component Export
+ */
+
+// Re-export everything for compatibility
+export * from "./glass-date-picker";

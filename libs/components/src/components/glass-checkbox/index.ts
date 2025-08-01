@@ -1,1 +1,6 @@
-export { GlassCheckbox } from "./glass-checkbox";
+/**
+ * glass-checkbox Component Export
+ */;
+
+// Re-export everything for compatibility
+export * from "./glass-checkbox";

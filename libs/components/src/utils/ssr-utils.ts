@@ -28,7 +28,7 @@ const isNavigator = (): boolean => typeof navigator !== "undefined";
  * Safe window object with SSR fallback
  * @returns {Window | undefined} window object or undefined
  */
-const safeWindow = (): Window | _undefined => {
+const safeWindow = (): Window | undefined => {
   return isBrowser() ? window : undefined;
 };
 
@@ -36,7 +36,7 @@ const safeWindow = (): Window | _undefined => {
  * Safe document object with SSR fallback
  * @returns {Document | undefined} document object or undefined
  */
-const safeDocument = (): Document | _undefined => {
+const safeDocument = (): Document | undefined => {
   return isDocument() ? document : undefined;
 };
 
@@ -44,7 +44,7 @@ const safeDocument = (): Document | _undefined => {
  * Safe navigator object with SSR fallback
  * @returns {Navigator | undefined} navigator object or undefined
  */
-const safeNavigator = (): Navigator | _undefined => {
+const safeNavigator = (): Navigator | undefined => {
   return isNavigator() ? navigator : undefined;
 };
 
@@ -482,5 +482,15 @@ const _safeQuerySelectorAll = (selector: string): NodeListOf<Element> | [] => {
  */
 const _safeGetElementById = (id: string): HTMLElement | null => {
   const document_ = safeDocument();
-  return document_?.getElementById ? document_.getElementById(id) : undefined;
+  return document_?.getElementById ? document_.getElementById(id) : null;
+};
+
+// Export main functions for module resolution
+export {
+  isBrowser,
+  isDocument,
+  isNavigator,
+  safeWindow,
+  safeDocument,
+  safeNavigator,
 };
