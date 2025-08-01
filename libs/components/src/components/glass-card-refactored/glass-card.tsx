@@ -397,7 +397,7 @@ GlassCard.displayName = "GlassCard";
  */
 const CardHeader = forwardRef<
   HTMLDivElement,
-  ComponentPropsBuilder<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   const { variant } = useCardContext();
 
@@ -474,7 +474,7 @@ CardDescription.displayName = "CardDescription";
  */
 const CardContent = forwardRef<
   HTMLDivElement,
-  ComponentPropsBuilder<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   const { padding } = useCardContext();
 
@@ -496,7 +496,7 @@ CardContent.displayName = "CardContent";
  */
 const CardFooter = forwardRef<
   HTMLDivElement,
-  ComponentPropsBuilder<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   const { variant } = useCardContext();
 
@@ -522,7 +522,7 @@ CardFooter.displayName = "CardFooter";
  */
 const CardActions = forwardRef<
   HTMLDivElement,
-  ComponentPropsBuilder<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   return (
     <div
