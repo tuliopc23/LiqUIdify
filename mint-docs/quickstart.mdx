@@ -1,0 +1,219 @@
+---
+title: "Quick Start"
+description: "Get up and running with LiqUIdify in minutes"
+---
+
+# Quick Start
+
+Get LiqUIdify set up in your React project in just a few minutes.
+
+## Installation
+
+<CodeGroup>
+
+```bash npm
+npm install @liquidify/components
+```
+
+```bash yarn
+yarn add @liquidify/components
+```
+
+```bash pnpm
+pnpm add @liquidify/components
+```
+
+```bash bun
+bun add @liquidify/components
+```
+
+</CodeGroup>
+
+## Setup Provider
+
+Wrap your application with the `UnifiedGlassProvider` to enable theme management and glass effects:
+
+<CodeGroup>
+
+```tsx React
+import { UnifiedGlassProvider } from "@liquidify/components";
+import "@liquidify/components/css";
+
+function App() {
+  return <UnifiedGlassProvider>{/* Your app content */}</UnifiedGlassProvider>;
+}
+```
+
+```tsx Next.js App Router
+// app/layout.tsx
+import { UnifiedGlassProvider } from "@liquidify/components";
+import "@liquidify/components/css";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <UnifiedGlassProvider>{children}</UnifiedGlassProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+```tsx Next.js Pages Router
+// pages/_app.tsx
+import { UnifiedGlassProvider } from "@liquidify/components";
+import "@liquidify/components/css";
+
+export default function App({ Component, pageProps }) {
+  return (
+    <UnifiedGlassProvider>
+      <Component {...pageProps} />
+    </UnifiedGlassProvider>
+  );
+}
+```
+
+</CodeGroup>
+
+## Your First Component
+
+Let's create a simple glass card with a button:
+
+```tsx
+import { GlassCard, GlassButton } from "@liquidify/components";
+
+export default function MyComponent() {
+  return (
+    <GlassCard variant="elevated" className="p-6 max-w-md">
+      <GlassCard.Header>
+        <GlassCard.Title>Welcome to LiqUIdify</GlassCard.Title>
+        <GlassCard.Description>
+          Beautiful glassmorphism components for React
+        </GlassCard.Description>
+      </GlassCard.Header>
+
+      <GlassCard.Content>
+        <p>Start building amazing interfaces with our glass components.</p>
+      </GlassCard.Content>
+
+      <GlassCard.Actions>
+        <GlassButton variant="primary">Get Started</GlassButton>
+        <GlassButton variant="ghost">Learn More</GlassButton>
+      </GlassCard.Actions>
+    </GlassCard>
+  );
+}
+```
+
+<Note>
+  The card will automatically render with beautiful glass effects including
+  backdrop blur, transparency, and smooth animations.
+</Note>
+
+## Core Bundle (Recommended)
+
+For optimal performance, import only the components you need from the core bundle:
+
+```tsx
+// Core bundle includes: Button, Card, Input, Modal
+import { core } from "@liquidify/components/bundles";
+import "@liquidify/components/css";
+
+const { GlassButton, GlassCard, GlassInput, GlassModal } = core;
+
+export default function App() {
+  return (
+    <UnifiedGlassProvider>
+      <GlassCard>
+        <GlassInput placeholder="Enter your name" />
+        <GlassButton>Submit</GlassButton>
+      </GlassCard>
+    </UnifiedGlassProvider>
+  );
+}
+```
+
+## Bundle Options
+
+Choose the right bundle for your needs:
+
+<CardGroup cols={2}>
+
+<Card title="Core Bundle" icon="circle">
+  **Size**: ~15KB gzipped Essential components: Button, Card, Input, Modal
+  ```tsx import {core} from "@liquidify/components/bundles"; ```
+</Card>
+
+<Card title="Forms Bundle" icon="square">
+  **Size**: ~25KB gzipped Form components: Checkbox, RadioGroup, Select,
+  Textarea ```tsx import {forms} from "@liquidify/components/bundles"; ```
+</Card>
+
+<Card title="Navigation Bundle" icon="compass">
+  **Size**: ~20KB gzipped Navigation: Navbar, Sidebar, Breadcrumbs, Tabs ```tsx
+  import {navigation} from "@liquidify/components/bundles"; ```
+</Card>
+
+<Card title="Full Bundle" icon="grid-3x3">
+  **Size**: ~60KB gzipped All 52+ components included ```tsx import * from
+  "@liquidify/components"; ```
+</Card>
+
+</CardGroup>
+
+## TypeScript Support
+
+LiqUIdify is built with TypeScript and provides excellent IntelliSense support:
+
+```tsx
+import { GlassButton, type GlassButtonProps } from "@liquidify/components";
+
+// Full type safety with IntelliSense
+const ButtonExample: React.FC<GlassButtonProps> = (props) => {
+  return (
+    <GlassButton
+      variant="primary" // ✅ Autocomplete: primary | secondary | ghost | destructive
+      size="lg" // ✅ Autocomplete: xs | sm | md | lg | xl
+      disabled={false} // ✅ Type-checked boolean
+      {...props}
+    >
+      Click me
+    </GlassButton>
+  );
+};
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+
+<Card title="Browse Components" icon="grid-3x3" href="/components/button">
+  Explore our complete component library
+</Card>
+
+<Card title="Theming Guide" icon="palette" href="/theming">
+  Learn how to customize colors and styles
+</Card>
+
+<Card
+  title="Accessibility"
+  icon="universal-access"
+  href="/guides/accessibility"
+>
+  Understand our accessibility features
+</Card>
+
+<Card title="Examples" icon="code" href="https://storybook.liquidify.dev">
+  View interactive component examples
+</Card>
+
+</CardGroup>
+
+---
+
+That's it! You're ready to start building with LiqUIdify. Check out our [component gallery](/components/button) to see what's available.

@@ -1,0 +1,464 @@
+---
+title: "GlassTextarea"
+description: "A multi-line text input component with glassmorphism effects and rich features"
+---
+
+# GlassTextarea
+
+The `GlassTextarea` component provides a beautiful multi-line text input with glassmorphism effects, auto-resize capabilities, and comprehensive form integration.
+
+## Import
+
+```tsx
+import { GlassTextarea } from "@liquidify/components";
+```
+
+## Basic Usage
+
+<CodeGroup>
+
+```tsx Basic Textarea
+<GlassTextarea placeholder="Enter your message..." rows={4} />
+```
+
+```tsx With Label
+<div className="space-y-2">
+  <label htmlFor="message" className="text-sm font-medium">
+    Message
+  </label>
+  <GlassTextarea
+    id="message"
+    placeholder="Type your message here..."
+    rows={4}
+  />
+</div>
+```
+
+```tsx With Helper Text
+<GlassTextarea
+  placeholder="Enter feedback..."
+  helperText="Please provide detailed feedback to help us improve"
+  rows={3}
+/>
+```
+
+</CodeGroup>
+
+## Variants
+
+<CardGroup cols={2}>
+
+<Card title="Default">
+  ```tsx
+  <GlassTextarea variant="default" placeholder="Default textarea" />
+  ```
+</Card>
+
+<Card title="Filled">
+  ```tsx
+  <GlassTextarea variant="filled" placeholder="Filled textarea" />
+  ```
+</Card>
+
+<Card title="Outlined">
+  ```tsx
+  <GlassTextarea variant="outlined" placeholder="Outlined textarea" />
+  ```
+</Card>
+
+</CardGroup>
+
+## States
+
+<CardGroup cols={2}>
+
+<Card title="Success">
+  ```tsx
+  <GlassTextarea
+    state="success"
+    value="Message sent successfully!"
+    helperText="Your message has been delivered"
+  />
+  ```
+</Card>
+
+<Card title="Error">
+  ```tsx
+  <GlassTextarea
+    state="error"
+    placeholder="Enter valid text..."
+    error="This field is required"
+  />
+  ```
+</Card>
+
+<Card title="Warning">
+  ```tsx
+  <GlassTextarea
+    state="warning"
+    placeholder="Enter description..."
+    helperText="Consider adding more details"
+  />
+  ```
+</Card>
+
+<Card title="Disabled">
+  ```tsx
+  <GlassTextarea disabled value="This textarea is disabled" />
+  ```
+</Card>
+
+</CardGroup>
+
+## Component API
+
+### GlassTextarea
+
+| Prop            | Type                                             | Default      | Description                |
+| --------------- | ------------------------------------------------ | ------------ | -------------------------- |
+| `variant`       | `'default' \| 'filled' \| 'outlined'`            | `'default'`  | Visual variant             |
+| `size`          | `'sm' \| 'md' \| 'lg'`                           | `'md'`       | Textarea size              |
+| `state`         | `'default' \| 'error' \| 'success' \| 'warning'` | `'default'`  | Validation state           |
+| `resize`        | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | Resize behavior            |
+| `autoResize`    | `boolean`                                        | `false`      | Auto-resize to content     |
+| `minRows`       | `number`                                         | `2`          | Minimum rows (auto-resize) |
+| `maxRows`       | `number`                                         | `10`         | Maximum rows (auto-resize) |
+| `maxLength`     | `number`                                         | -            | Maximum character count    |
+| `showCharCount` | `boolean`                                        | `false`      | Show character counter     |
+| `error`         | `string`                                         | -            | Error message              |
+| `helperText`    | `string`                                         | -            | Helper text                |
+| `required`      | `boolean`                                        | `false`      | Required field             |
+| `disabled`      | `boolean`                                        | `false`      | Disable textarea           |
+| `readOnly`      | `boolean`                                        | `false`      | Read-only state            |
+
+## Examples
+
+### Auto-Resize Textarea
+
+```tsx
+function AutoResizeExample() {
+  const [content, setContent] = useState("");
+
+  return (
+    <GlassTextarea
+      value={content}
+      onChange={(e) => setContent(e.target.value)}
+      placeholder="Start typing and watch the textarea grow..."
+      autoResize
+      minRows={3}
+      maxRows={8}
+      maxLength={500}
+      showCharCount
+    />
+  );
+}
+```
+
+### Form Integration
+
+```tsx
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    subject: "",
+    message: "",
+    feedback: "",
+  });
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.subject.trim()) {
+      newErrors.subject = "Subject is required";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Form submitted:", formData);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label htmlFor="subject" className="text-sm font-medium mb-2 block">
+          Subject *
+        </label>
+        <GlassInput
+          id="subject"
+          value={formData.subject}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, subject: e.target.value }))
+          }
+          placeholder="Brief description of your inquiry"
+          state={errors.subject ? "error" : "default"}
+          error={errors.subject}
+          required
+        />
+      </div>
+
+      <div>
+        <label htmlFor="message" className="text-sm font-medium mb-2 block">
+          Message *
+        </label>
+        <GlassTextarea
+          id="message"
+          value={formData.message}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, message: e.target.value }))
+          }
+          placeholder="Please provide detailed information about your inquiry..."
+          rows={5}
+          maxLength={1000}
+          showCharCount
+          state={errors.message ? "error" : "default"}
+          error={errors.message}
+          helperText="Minimum 10 characters required"
+          required
+        />
+      </div>
+
+      <div>
+        <label htmlFor="feedback" className="text-sm font-medium mb-2 block">
+          Additional Feedback
+        </label>
+        <GlassTextarea
+          id="feedback"
+          value={formData.feedback}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, feedback: e.target.value }))
+          }
+          placeholder="Any additional comments or suggestions (optional)"
+          autoResize
+          minRows={2}
+          maxRows={6}
+          helperText="Optional: Help us improve our service"
+        />
+      </div>
+
+      <GlassButton type="submit" size="lg">
+        Send Message
+      </GlassButton>
+    </form>
+  );
+}
+```
+
+### Rich Text Preview
+
+```tsx
+function RichTextPreview() {
+  const [content, setContent] = useState("");
+  const [preview, setPreview] = useState(false);
+
+  const formatContent = (text: string) => {
+    // Simple markdown-like formatting
+    return text
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(.*?)\*/g, "<em>$1</em>")
+      .replace(/\n/g, "<br />");
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-2">
+        <GlassButton
+          variant={!preview ? "primary" : "secondary"}
+          size="sm"
+          onClick={() => setPreview(false)}
+        >
+          Write
+        </GlassButton>
+        <GlassButton
+          variant={preview ? "primary" : "secondary"}
+          size="sm"
+          onClick={() => setPreview(true)}
+        >
+          Preview
+        </GlassButton>
+      </div>
+
+      {!preview ? (
+        <GlassTextarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Write your content here... Use **bold** and *italic* formatting"
+          autoResize
+          minRows={6}
+          maxRows={15}
+          maxLength={2000}
+          showCharCount
+          helperText="Supports basic markdown formatting: **bold**, *italic*"
+        />
+      ) : (
+        <GlassCard>
+          <GlassCard.Header>
+            <GlassCard.Title>Preview</GlassCard.Title>
+          </GlassCard.Header>
+          <GlassCard.Content>
+            {content ? (
+              <div
+                className="prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{ __html: formatContent(content) }}
+              />
+            ) : (
+              <p className="text-muted-foreground">Nothing to preview yet...</p>
+            )}
+          </GlassCard.Content>
+        </GlassCard>
+      )}
+    </div>
+  );
+}
+```
+
+### Comment System
+
+```tsx
+function CommentSystem() {
+  const [comments, setComments] = useState([
+    {
+      id: 1,
+      author: "John Doe",
+      content: "Great article! Very informative.",
+      timestamp: "2 hours ago",
+    },
+    {
+      id: 2,
+      author: "Jane Smith",
+      content: "I have a question about the implementation details...",
+      timestamp: "1 hour ago",
+    },
+  ]);
+
+  const [newComment, setNewComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!newComment.trim()) return;
+
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const comment = {
+      id: comments.length + 1,
+      author: "Current User",
+      content: newComment,
+      timestamp: "Just now",
+    };
+
+    setComments((prev) => [...prev, comment]);
+    setNewComment("");
+    setIsSubmitting(false);
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="space-y-4">
+        <h3>Comments ({comments.length})</h3>
+
+        {comments.map((comment) => (
+          <GlassCard key={comment.id}>
+            <GlassCard.Header>
+              <div className="flex items-center justify-between">
+                <GlassCard.Title className="text-sm">
+                  {comment.author}
+                </GlassCard.Title>
+                <span className="text-xs text-muted-foreground">
+                  {comment.timestamp}
+                </span>
+              </div>
+            </GlassCard.Header>
+            <GlassCard.Content>
+              <p className="text-sm">{comment.content}</p>
+            </GlassCard.Content>
+          </GlassCard>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="comment" className="text-sm font-medium mb-2 block">
+            Add a comment
+          </label>
+          <GlassTextarea
+            id="comment"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Share your thoughts..."
+            autoResize
+            minRows={3}
+            maxRows={8}
+            maxLength={500}
+            showCharCount
+            disabled={isSubmitting}
+          />
+        </div>
+
+        <div className="flex justify-end">
+          <GlassButton
+            type="submit"
+            disabled={!newComment.trim() || isSubmitting}
+            loading={isSubmitting}
+          >
+            Post Comment
+          </GlassButton>
+        </div>
+      </form>
+    </div>
+  );
+}
+```
+
+## Accessibility
+
+The `GlassTextarea` component follows accessibility best practices:
+
+- **Keyboard Navigation**: Standard textarea keyboard shortcuts work as expected
+- **ARIA Attributes**: Proper `aria-describedby`, `aria-invalid`, and `aria-required`
+- **Focus Management**: Clear focus indicators and proper tab order
+- **Screen Readers**: Associated labels, errors, and helper text are announced
+
+## Styling
+
+Customize the textarea appearance:
+
+```css
+.glass-textarea {
+  --textarea-min-height: 80px;
+  --textarea-border-radius: 6px;
+  --textarea-padding: 0.75rem;
+  --textarea-line-height: 1.5;
+}
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+
+<Card title="Content Guidelines">
+  - Provide clear placeholder text - Use appropriate labels and helper text -
+  Set reasonable character limits - Show character counters for limited fields
+</Card>
+
+<Card title="UX Considerations">
+  - Use auto-resize for better user experience - Provide visual feedback for
+  different states - Consider preview functionality for formatted content -
+  Implement proper validation and error handling
+</Card>
+
+</CardGroup>

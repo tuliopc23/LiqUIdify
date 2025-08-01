@@ -1,0 +1,191 @@
+---
+title: "Accessibility"
+description: "Comprehensive accessibility guidelines and features in LiqUIdify"
+---
+
+# Accessibility
+
+LiqUIdify is designed with accessibility as a core principle, ensuring all components are usable by everyone, including users with disabilities.
+
+## Key Features
+
+<CardGroup cols={2}>
+
+<Card title="Keyboard Navigation" icon="keyboard">
+  Full keyboard support for all interactive components with proper focus
+  management
+</Card>
+
+<Card title="Screen Readers" icon="volume-2">
+  Comprehensive ARIA labels, roles, and properties for screen reader
+  compatibility
+</Card>
+
+<Card title="High Contrast" icon="eye">
+  Automatic adaptation to high contrast modes and customizable color schemes
+</Card>
+
+<Card title="Focus Management" icon="target">
+  Advanced focus trapping and restoration for modals and overlays
+</Card>
+
+</CardGroup>
+
+## WCAG Compliance
+
+LiqUIdify components are designed to meet WCAG 2.1 AA standards:
+
+### Level A Requirements
+
+- **Alt Text**: All decorative images use appropriate alt attributes
+- **Keyboard Access**: All functionality available via keyboard
+- **Focus Indicators**: Clear visual focus indicators on all interactive elements
+
+### Level AA Requirements
+
+- **Color Contrast**: Minimum 4.5:1 contrast ratio for normal text
+- **Text Resize**: Text scalable up to 200% without horizontal scrolling
+- **Focus Order**: Logical tab order throughout interfaces
+
+## Built-in Accessibility Features
+
+### Automatic ARIA
+
+Components automatically include appropriate ARIA attributes:
+
+```tsx
+<GlassButton aria-pressed={isPressed}>
+  Toggle Button
+</GlassButton>
+
+<GlassModal aria-labelledby="modal-title" aria-describedby="modal-description">
+  <h2 id="modal-title">Modal Title</h2>
+  <p id="modal-description">Modal description</p>
+</GlassModal>
+```
+
+### Focus Management
+
+Advanced focus management for complex components:
+
+```tsx
+import { GlassFocusTrap } from "@liquidify/components";
+
+<GlassFocusTrap>
+  <GlassModal>{/* Focus automatically trapped within modal */}</GlassModal>
+</GlassFocusTrap>;
+```
+
+### Screen Reader Support
+
+Components provide rich semantic information:
+
+```tsx
+<GlassProgress
+  value={75}
+  max={100}
+  aria-label="Upload progress"
+  aria-describedby="progress-description"
+>
+  <span id="progress-description">Uploading file: 75% complete</span>
+</GlassProgress>
+```
+
+## Testing Accessibility
+
+### Automated Testing
+
+Use the built-in accessibility testing utilities:
+
+```tsx
+import { testAccessibility } from "@liquidify/testing";
+
+test("component is accessible", async () => {
+  const { container } = render(<MyComponent />);
+  const results = await testAccessibility(container);
+  expect(results).toHaveNoViolations();
+});
+```
+
+### Manual Testing Checklist
+
+<Steps>
+  <Step title="Keyboard Navigation">
+    Test all interactive elements using only the keyboard (Tab, Enter, Space,
+    Arrow keys)
+  </Step>
+  <Step title="Screen Reader">
+    Test with a screen reader (VoiceOver, NVDA, or JAWS) to ensure proper
+    announcements
+  </Step>
+  <Step title="High Contrast">
+    Enable high contrast mode to verify component visibility
+  </Step>
+  <Step title="Zoom Testing">
+    Test at 200% zoom to ensure content remains accessible
+  </Step>
+</Steps>
+
+## Component-Specific Guidelines
+
+### Forms
+
+- Use proper labels and descriptions
+- Provide clear error messages
+- Group related inputs with fieldsets
+
+```tsx
+<GlassFormField>
+  <GlassLabel htmlFor="email">Email Address</GlassLabel>
+  <GlassInput
+    id="email"
+    type="email"
+    aria-describedby="email-error"
+    aria-invalid={hasError}
+  />
+  {hasError && (
+    <GlassErrorMessage id="email-error">
+      Please enter a valid email address
+    </GlassErrorMessage>
+  )}
+</GlassFormField>
+```
+
+### Navigation
+
+- Provide skip links for main content
+- Use semantic navigation landmarks
+- Implement proper heading hierarchy
+
+### Interactive Elements
+
+- Ensure minimum touch target size (44px)
+- Provide loading states and feedback
+- Use appropriate ARIA live regions for dynamic content
+
+## Resources
+
+<CardGroup cols={3}>
+
+<Card title="WCAG Guidelines" href="https://www.w3.org/WAG/WCAG21/quickref/">
+  Official WCAG 2.1 quick reference guide
+</Card>
+
+<Card title="ARIA Authoring Practices" href="https://www.w3.org/WAI/ARIA/apg/">
+  WAI-ARIA design patterns and examples
+</Card>
+
+<Card title="WebAIM" href="https://webaim.org/">
+  Accessibility evaluation and training resources
+</Card>
+
+</CardGroup>
+
+## Getting Help
+
+If you need assistance with accessibility implementation:
+
+- Check component-specific accessibility documentation
+- Use the built-in accessibility testing tools
+- Review the [accessibility components](/components/focus-trap) for advanced features
+- Open an issue on GitHub for accessibility-related bugs or questions

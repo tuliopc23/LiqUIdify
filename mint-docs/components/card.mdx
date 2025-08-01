@@ -1,0 +1,99 @@
+---
+title: "GlassCard"
+description: "A versatile glassmorphism card component with compound components"
+---
+
+# GlassCard
+
+The `GlassCard` component provides a flexible container with beautiful glass effects. It follows the compound components pattern for maximum flexibility.
+
+## Import
+
+```tsx
+import { GlassCard } from "@liquidify/components";
+```
+
+## Basic Usage
+
+```tsx
+<GlassCard>
+  <GlassCard.Header>
+    <GlassCard.Title>Card Title</GlassCard.Title>
+    <GlassCard.Description>Card description text</GlassCard.Description>
+  </GlassCard.Header>
+
+  <GlassCard.Content>
+    <p>Card content goes here</p>
+  </GlassCard.Content>
+
+  <GlassCard.Footer>
+    <GlassButton>Action</GlassButton>
+  </GlassCard.Footer>
+</GlassCard>
+```
+
+## Compound Components
+
+<CardGroup cols={2}>
+
+<Card title="Header">
+  ```tsx
+  <GlassCard.Header>
+    <GlassCard.Title>Title</GlassCard.Title>
+    <GlassCard.Description>Description</GlassCard.Description>
+  </GlassCard.Header>
+  ```
+</Card>
+
+<Card title="Content">
+  ```tsx
+  <GlassCard.Content>
+    <p>Your content here</p>
+  </GlassCard.Content>
+  ```
+</Card>
+
+<Card title="Footer">
+  ```tsx
+  <GlassCard.Footer>
+    <GlassButton>Action</GlassButton>
+  </GlassCard.Footer>
+  ```
+</Card>
+
+<Card title="Actions">
+  ```tsx
+  <GlassCard.Actions>
+    <GlassButton variant="ghost">Cancel</GlassButton>
+    <GlassButton variant="primary">Confirm</GlassButton>
+  </GlassCard.Actions>
+  ```
+</Card>
+
+</CardGroup>
+
+## Variants
+
+```tsx
+<GlassCard variant="elevated">Elevated Card</GlassCard>
+<GlassCard variant="flat">Flat Card</GlassCard>
+<GlassCard variant="interactive">Interactive Card</GlassCard>
+```
+
+## API Reference
+
+<ResponseField name="variant" type="string" default="elevated">
+  Visual style of the card Options: `elevated` | `flat` | `interactive`
+</ResponseField>
+
+<ResponseField name="hover" type="boolean" default="false">
+  Enable hover effects
+</ResponseField>
+
+<ResponseField name="bordered" type="boolean" default="false">
+  Add visible borders
+</ResponseField>
+
+<ResponseField name="interactive" type="boolean" default="false">
+  Make the card interactive/clickable
+</ResponseField>

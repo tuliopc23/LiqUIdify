@@ -1,0 +1,229 @@
+---
+title: "GlassAccordion"
+description: "A collapsible content component with glassmorphism effects and smooth animations"
+---
+
+# GlassAccordion
+
+The `GlassAccordion` component provides an elegant way to organize content in collapsible sections with beautiful glassmorphism effects.
+
+## Import
+
+```tsx
+import { GlassAccordion } from "@liquidify/components";
+```
+
+## Basic Usage
+
+<CodeGroup>
+
+```tsx Single Accordion
+<GlassAccordion type="single" collapsible defaultValue="item-1">
+  <GlassAccordion.Item value="item-1">
+    <GlassAccordion.Trigger>What is LiqUIdify?</GlassAccordion.Trigger>
+    <GlassAccordion.Content>
+      LiqUIdify is a modern React component library featuring glassmorphism
+      design.
+    </GlassAccordion.Content>
+  </GlassAccordion.Item>
+
+  <GlassAccordion.Item value="item-2">
+    <GlassAccordion.Trigger>How do I install it?</GlassAccordion.Trigger>
+    <GlassAccordion.Content>
+      Install LiqUIdify using npm, yarn, or pnpm with the @liquidify/components
+      package.
+    </GlassAccordion.Content>
+  </GlassAccordion.Item>
+</GlassAccordion>
+```
+
+```tsx Multiple Accordion
+<GlassAccordion type="multiple" defaultValue={["item-1", "item-3"]}>
+  <GlassAccordion.Item value="item-1">
+    <GlassAccordion.Trigger>Features</GlassAccordion.Trigger>
+    <GlassAccordion.Content>
+      Multiple items can be open at the same time.
+    </GlassAccordion.Content>
+  </GlassAccordion.Item>
+
+  <GlassAccordion.Item value="item-2">
+    <GlassAccordion.Trigger>Styling</GlassAccordion.Trigger>
+    <GlassAccordion.Content>
+      Beautiful glassmorphism effects with customizable intensity.
+    </GlassAccordion.Content>
+  </GlassAccordion.Item>
+</GlassAccordion>
+```
+
+</CodeGroup>
+
+## Variants
+
+<CardGroup cols={2}>
+
+<Card title="Default">
+  ```tsx
+  <GlassAccordion variant="default">
+    <GlassAccordion.Item value="item-1">
+      <GlassAccordion.Trigger>Standard styling</GlassAccordion.Trigger>
+      <GlassAccordion.Content>
+        Content with default appearance
+      </GlassAccordion.Content>
+    </GlassAccordion.Item>
+  </GlassAccordion>
+  ```
+</Card>
+
+<Card title="Bordered">
+  ```tsx
+  <GlassAccordion variant="bordered">
+    <GlassAccordion.Item value="item-1">
+      <GlassAccordion.Trigger>Bordered styling</GlassAccordion.Trigger>
+      <GlassAccordion.Content>Content with borders</GlassAccordion.Content>
+    </GlassAccordion.Item>
+  </GlassAccordion>
+  ```
+</Card>
+
+</CardGroup>
+
+## Component API
+
+### GlassAccordion
+
+| Prop            | Type                                     | Default     | Description                                 |
+| --------------- | ---------------------------------------- | ----------- | ------------------------------------------- |
+| `type`          | `'single' \| 'multiple'`                 | `'single'`  | Accordion behavior                          |
+| `collapsible`   | `boolean`                                | `false`     | Allow all items to close (single type only) |
+| `value`         | `string \| string[]`                     | -           | Controlled open state                       |
+| `defaultValue`  | `string \| string[]`                     | -           | Default open state                          |
+| `onValueChange` | `(value: string \| string[]) => void`    | -           | Value change handler                        |
+| `variant`       | `'default' \| 'bordered' \| 'separated'` | `'default'` | Visual variant                              |
+| `size`          | `'sm' \| 'md' \| 'lg'`                   | `'md'`      | Accordion size                              |
+| `disabled`      | `boolean`                                | `false`     | Disable all items                           |
+
+### GlassAccordion.Item
+
+| Prop       | Type      | Default | Description            |
+| ---------- | --------- | ------- | ---------------------- |
+| `value`    | `string`  | -       | Unique item identifier |
+| `disabled` | `boolean` | `false` | Disable this item      |
+
+### GlassAccordion.Trigger
+
+| Prop        | Type        | Default | Description                 |
+| ----------- | ----------- | ------- | --------------------------- |
+| `className` | `string`    | -       | Additional CSS classes      |
+| `icon`      | `ReactNode` | -       | Custom expand/collapse icon |
+
+### GlassAccordion.Content
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+## Examples
+
+### FAQ Section
+
+```tsx
+function FAQSection() {
+  return (
+    <GlassAccordion type="single" collapsible>
+      <GlassAccordion.Item value="faq-1">
+        <GlassAccordion.Trigger>
+          What payment methods do you accept?
+        </GlassAccordion.Trigger>
+        <GlassAccordion.Content>
+          We accept all major credit cards, PayPal, and bank transfers.
+        </GlassAccordion.Content>
+      </GlassAccordion.Item>
+
+      <GlassAccordion.Item value="faq-2">
+        <GlassAccordion.Trigger>
+          How long does shipping take?
+        </GlassAccordion.Trigger>
+        <GlassAccordion.Content>
+          Standard shipping takes 3-5 business days, express shipping takes 1-2
+          business days.
+        </GlassAccordion.Content>
+      </GlassAccordion.Item>
+
+      <GlassAccordion.Item value="faq-3">
+        <GlassAccordion.Trigger>
+          What is your return policy?
+        </GlassAccordion.Trigger>
+        <GlassAccordion.Content>
+          We offer a 30-day return policy for all items in original condition.
+        </GlassAccordion.Content>
+      </GlassAccordion.Item>
+    </GlassAccordion>
+  );
+}
+```
+
+### Controlled Accordion
+
+```tsx
+function ControlledAccordion() {
+  const [openItems, setOpenItems] = useState(["item-1"]);
+
+  return (
+    <div>
+      <div className="mb-4">
+        <GlassButton
+          onClick={() => setOpenItems([])}
+          variant="secondary"
+          size="sm"
+        >
+          Close All
+        </GlassButton>
+        <GlassButton
+          onClick={() => setOpenItems(["item-1", "item-2", "item-3"])}
+          variant="secondary"
+          size="sm"
+          className="ml-2"
+        >
+          Open All
+        </GlassButton>
+      </div>
+
+      <GlassAccordion
+        type="multiple"
+        value={openItems}
+        onValueChange={setOpenItems}
+      >
+        <GlassAccordion.Item value="item-1">
+          <GlassAccordion.Trigger>Section 1</GlassAccordion.Trigger>
+          <GlassAccordion.Content>Content for section 1</GlassAccordion.Content>
+        </GlassAccordion.Item>
+
+        <GlassAccordion.Item value="item-2">
+          <GlassAccordion.Trigger>Section 2</GlassAccordion.Trigger>
+          <GlassAccordion.Content>Content for section 2</GlassAccordion.Content>
+        </GlassAccordion.Item>
+      </GlassAccordion>
+    </div>
+  );
+}
+```
+
+## Accessibility
+
+The `GlassAccordion` component follows WAI-ARIA guidelines:
+
+- **Keyboard Navigation**: Arrow keys navigate between triggers, Space/Enter toggles
+- **ARIA Attributes**: Proper `aria-expanded`, `aria-controls`, and `aria-labelledby`
+- **Focus Management**: Focus remains on the trigger when toggling
+
+## Styling
+
+Customize the accordion appearance:
+
+```css
+.glass-accordion {
+  --accordion-border-radius: 8px;
+  --accordion-spacing: 1rem;
+  --accordion-animation-duration: 200ms;
+}
+```

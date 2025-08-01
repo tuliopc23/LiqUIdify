@@ -1,0 +1,511 @@
+---
+title: "GlassAlert"
+description: "A flexible alert component for displaying important messages with glassmorphism effects"
+---
+
+# GlassAlert
+
+The `GlassAlert` component displays important messages, notifications, and feedback to users with beautiful glassmorphism effects and proper accessibility support.
+
+## Import
+
+```tsx
+import { GlassAlert } from "@liquidify/components";
+```
+
+## Basic Usage
+
+<CodeGroup>
+
+```tsx Basic Alert
+<GlassAlert>
+  <GlassAlert.Title>Heads up!</GlassAlert.Title>
+  <GlassAlert.Description>
+    You can add components to your app using the cli.
+  </GlassAlert.Description>
+</GlassAlert>
+```
+
+```tsx With Icon
+<GlassAlert>
+  <GlassAlert.Icon>
+    <InfoIcon className="w-4 h-4" />
+  </GlassAlert.Icon>
+  <GlassAlert.Title>Information</GlassAlert.Title>
+  <GlassAlert.Description>
+    This is an informational alert with a custom icon.
+  </GlassAlert.Description>
+</GlassAlert>
+```
+
+</CodeGroup>
+
+## Variants
+
+<CardGroup cols={2}>
+
+<Card title="Default">
+  ```tsx
+  <GlassAlert variant="default">
+    <GlassAlert.Title>Default Alert</GlassAlert.Title>
+    <GlassAlert.Description>
+      This is a default alert message.
+    </GlassAlert.Description>
+  </GlassAlert>
+  ```
+</Card>
+
+<Card title="Success">
+  ```tsx
+  <GlassAlert variant="success">
+    <GlassAlert.Title>Success!</GlassAlert.Title>
+    <GlassAlert.Description>
+      Your action was completed successfully.
+    </GlassAlert.Description>
+  </GlassAlert>
+  ```
+</Card>
+
+<Card title="Warning">
+  ```tsx
+  <GlassAlert variant="warning">
+    <GlassAlert.Title>Warning</GlassAlert.Title>
+    <GlassAlert.Description>
+      Please review this important information.
+    </GlassAlert.Description>
+  </GlassAlert>
+  ```
+</Card>
+
+<Card title="Destructive">
+  ```tsx
+  <GlassAlert variant="destructive">
+    <GlassAlert.Title>Error</GlassAlert.Title>
+    <GlassAlert.Description>
+      Something went wrong. Please try again.
+    </GlassAlert.Description>
+  </GlassAlert>
+  ```
+</Card>
+
+</CardGroup>
+
+## Component API
+
+### GlassAlert
+
+| Prop          | Type                                                   | Default     | Description            |
+| ------------- | ------------------------------------------------------ | ----------- | ---------------------- |
+| `variant`     | `'default' \| 'success' \| 'warning' \| 'destructive'` | `'default'` | Alert variant          |
+| `dismissible` | `boolean`                                              | `false`     | Show dismiss button    |
+| `onDismiss`   | `() => void`                                           | -           | Dismiss handler        |
+| `className`   | `string`                                               | -           | Additional CSS classes |
+
+### GlassAlert.Icon
+
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Icon element           |
+| `className` | `string`    | -       | Additional CSS classes |
+
+### GlassAlert.Title
+
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Title content          |
+| `className` | `string`    | -       | Additional CSS classes |
+
+### GlassAlert.Description
+
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `children`  | `ReactNode` | -       | Description content    |
+| `className` | `string`    | -       | Additional CSS classes |
+
+## Examples
+
+### Form Validation Alerts
+
+```tsx
+function FormValidationExample() {
+  const [errors, setErrors] = useState<string[]>([]);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const newErrors: string[] = [];
+
+    if (!email) {
+      newErrors.push("Email is required");
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.push("Email is invalid");
+    }
+
+    if (!password) {
+      newErrors.push("Password is required");
+    } else if (password.length < 8) {
+      newErrors.push("Password must be at least 8 characters");
+    }
+
+    setErrors(newErrors);
+
+    if (newErrors.length === 0) {
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 5000);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      {errors.length > 0 && (
+        <GlassAlert
+          variant="destructive"
+          dismissible
+          onDismiss={() => setErrors([])}
+        >
+          <GlassAlert.Icon>
+            <AlertCircleIcon className="w-4 h-4" />
+          </GlassAlert.Icon>
+          <GlassAlert.Title>Validation Errors</GlassAlert.Title>
+          <GlassAlert.Description>
+            <ul className="list-disc list-inside space-y-1">
+              {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </GlassAlert.Description>
+        </GlassAlert>
+      )}
+
+      {success && (
+        <GlassAlert
+          variant="success"
+          dismissible
+          onDismiss={() => setSuccess(false)}
+        >
+          <GlassAlert.Icon>
+            <CheckCircleIcon className="w-4 h-4" />
+          </GlassAlert.Icon>
+          <GlassAlert.Title>Success!</GlassAlert.Title>
+          <GlassAlert.Description>
+            Your account has been created successfully.
+          </GlassAlert.Description>
+        </GlassAlert>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <GlassInput
+          name="email"
+          type="email"
+          placeholder="Email"
+          label="Email"
+        />
+        <GlassInput
+          name="password"
+          type="password"
+          placeholder="Password"
+          label="Password"
+        />
+        <GlassButton type="submit">Create Account</GlassButton>
+      </form>
+    </div>
+  );
+}
+```
+
+### System Status Alerts
+
+```tsx
+function SystemStatusAlerts() {
+  const [systemStatus, setSystemStatus] = useState<
+    "operational" | "maintenance" | "outage"
+  >("operational");
+
+  const statusConfig = {
+    operational: {
+      variant: "success" as const,
+      icon: <CheckCircleIcon className="w-4 h-4" />,
+      title: "All Systems Operational",
+      description: "All services are running normally.",
+    },
+    maintenance: {
+      variant: "warning" as const,
+      icon: <AlertTriangleIcon className="w-4 h-4" />,
+      title: "Scheduled Maintenance",
+      description:
+        "Some services may be temporarily unavailable between 2-4 AM EST.",
+    },
+    outage: {
+      variant: "destructive" as const,
+      icon: <XCircleIcon className="w-4 h-4" />,
+      title: "Service Outage",
+      description:
+        "We are experiencing technical difficulties. Our team is working to resolve this issue.",
+    },
+  };
+
+  const config = statusConfig[systemStatus];
+
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        <GlassButton
+          size="sm"
+          variant={systemStatus === "operational" ? "primary" : "secondary"}
+          onClick={() => setSystemStatus("operational")}
+        >
+          Operational
+        </GlassButton>
+        <GlassButton
+          size="sm"
+          variant={systemStatus === "maintenance" ? "primary" : "secondary"}
+          onClick={() => setSystemStatus("maintenance")}
+        >
+          Maintenance
+        </GlassButton>
+        <GlassButton
+          size="sm"
+          variant={systemStatus === "outage" ? "primary" : "secondary"}
+          onClick={() => setSystemStatus("outage")}
+        >
+          Outage
+        </GlassButton>
+      </div>
+
+      <GlassAlert variant={config.variant}>
+        <GlassAlert.Icon>{config.icon}</GlassAlert.Icon>
+        <GlassAlert.Title>{config.title}</GlassAlert.Title>
+        <GlassAlert.Description>{config.description}</GlassAlert.Description>
+      </GlassAlert>
+    </div>
+  );
+}
+```
+
+### Inline Form Alerts
+
+```tsx
+function InlineFormAlerts() {
+  const [emailStatus, setEmailStatus] = useState<
+    "idle" | "checking" | "available" | "taken"
+  >("idle");
+  const [email, setEmail] = useState("");
+
+  const checkEmailAvailability = async (email: string) => {
+    if (!email) {
+      setEmailStatus("idle");
+      return;
+    }
+
+    setEmailStatus("checking");
+
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // Simulate random result
+    const isAvailable = Math.random() > 0.5;
+    setEmailStatus(isAvailable ? "available" : "taken");
+  };
+
+  const debouncedCheck = useCallback(debounce(checkEmailAvailability, 500), []);
+
+  useEffect(() => {
+    debouncedCheck(email);
+  }, [email, debouncedCheck]);
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <GlassInput
+          label="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          type="email"
+        />
+
+        <div className="mt-2">
+          {emailStatus === "checking" && (
+            <GlassAlert variant="default">
+              <GlassAlert.Icon>
+                <Spinner className="w-4 h-4" />
+              </GlassAlert.Icon>
+              <GlassAlert.Description>
+                Checking email availability...
+              </GlassAlert.Description>
+            </GlassAlert>
+          )}
+
+          {emailStatus === "available" && (
+            <GlassAlert variant="success">
+              <GlassAlert.Icon>
+                <CheckCircleIcon className="w-4 h-4" />
+              </GlassAlert.Icon>
+              <GlassAlert.Description>
+                Email address is available!
+              </GlassAlert.Description>
+            </GlassAlert>
+          )}
+
+          {emailStatus === "taken" && (
+            <GlassAlert variant="destructive">
+              <GlassAlert.Icon>
+                <XCircleIcon className="w-4 h-4" />
+              </GlassAlert.Icon>
+              <GlassAlert.Description>
+                This email address is already taken.
+              </GlassAlert.Description>
+            </GlassAlert>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Promotional Alerts
+
+```tsx
+function PromotionalAlerts() {
+  const [dismissed, setDismissed] = useState<string[]>([]);
+
+  const alerts = [
+    {
+      id: "summer-sale",
+      variant: "default" as const,
+      icon: <TagIcon className="w-4 h-4" />,
+      title: "🎉 Summer Sale!",
+      description:
+        "Get 25% off all premium plans. Use code SUMMER25 at checkout.",
+      action: "Shop Now",
+    },
+    {
+      id: "new-features",
+      variant: "success" as const,
+      icon: <SparklesIcon className="w-4 h-4" />,
+      title: "New Features Available",
+      description: "Check out our latest component updates and improvements.",
+      action: "Learn More",
+    },
+  ];
+
+  const visibleAlerts = alerts.filter((alert) => !dismissed.includes(alert.id));
+
+  if (visibleAlerts.length === 0) {
+    return (
+      <div className="text-center p-8">
+        <p className="text-muted-foreground">No active promotions</p>
+        <GlassButton
+          variant="secondary"
+          size="sm"
+          className="mt-2"
+          onClick={() => setDismissed([])}
+        >
+          Reset Alerts
+        </GlassButton>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      {visibleAlerts.map((alert) => (
+        <GlassAlert
+          key={alert.id}
+          variant={alert.variant}
+          dismissible
+          onDismiss={() => setDismissed((prev) => [...prev, alert.id])}
+        >
+          <GlassAlert.Icon>{alert.icon}</GlassAlert.Icon>
+          <div className="flex-1">
+            <GlassAlert.Title>{alert.title}</GlassAlert.Title>
+            <GlassAlert.Description>{alert.description}</GlassAlert.Description>
+          </div>
+          <GlassButton variant="link" size="sm">
+            {alert.action}
+          </GlassButton>
+        </GlassAlert>
+      ))}
+    </div>
+  );
+}
+```
+
+## Accessibility
+
+The `GlassAlert` component follows accessibility best practices:
+
+- **ARIA Roles**: Uses appropriate `role="alert"` for important messages
+- **Live Regions**: Critical alerts are announced to screen readers
+- **Keyboard Navigation**: Dismissible alerts can be closed with keyboard
+- **Color Independence**: Information is not conveyed by color alone
+
+## Auto-Dismiss
+
+Alerts can be automatically dismissed after a timeout:
+
+```tsx
+function AutoDismissAlert() {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(false);
+    }, 5000); // Auto-dismiss after 5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <GlassAlert
+      variant="success"
+      dismissible
+      onDismiss={() => setVisible(false)}
+    >
+      <GlassAlert.Title>Auto-dismiss Alert</GlassAlert.Title>
+      <GlassAlert.Description>
+        This alert will automatically disappear in 5 seconds.
+      </GlassAlert.Description>
+    </GlassAlert>
+  );
+}
+```
+
+## Styling
+
+Customize the alert appearance:
+
+```css
+.glass-alert {
+  --alert-border-radius: 8px;
+  --alert-padding: 1rem;
+  --alert-border-width: 1px;
+  --alert-animation-duration: 200ms;
+}
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+
+<Card title="Content Guidelines">
+  - Use clear, concise language - Provide actionable information when possible -
+  Keep titles short and descriptive - Use appropriate variants for different
+  message types
+</Card>
+
+<Card title="UX Considerations">
+  - Don't overuse alerts - they lose impact - Place alerts contextually near
+  relevant content - Provide dismiss options for non-critical alerts - Consider
+  auto-dismiss for temporary messages
+</Card>
+
+</CardGroup>

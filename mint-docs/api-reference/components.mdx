@@ -1,0 +1,372 @@
+---
+title: "Components API"
+description: "Complete API reference for all LiqUIdify components"
+---
+
+# Components API
+
+Complete reference for all LiqUIdify glassmorphism components.
+
+## Core Components
+
+### GlassButton
+
+Premium glassmorphism button with multiple variants and interactive states.
+
+<Card title="Import">
+  ```tsx import {GlassButton} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop           | Type                                                                          | Default     | Description            |
+| -------------- | ----------------------------------------------------------------------------- | ----------- | ---------------------- |
+| `variant`      | `'default' \| 'primary' \| 'secondary' \| 'destructive' \| 'ghost' \| 'link'` | `'default'` | Button style variant   |
+| `size`         | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                                        | `'md'`      | Button size            |
+| `intensity`    | `'low' \| 'medium' \| 'high' \| 'ultra'`                                      | `'medium'`  | Glass effect intensity |
+| `loading`      | `boolean`                                                                     | `false`     | Show loading state     |
+| `disabled`     | `boolean`                                                                     | `false`     | Disable button         |
+| `fullWidth`    | `boolean`                                                                     | `false`     | Full width button      |
+| `icon`         | `ReactNode`                                                                   | -           | Icon element           |
+| `iconPosition` | `'left' \| 'right'`                                                           | `'left'`    | Icon position          |
+
+### GlassCard
+
+Flexible card component with compound architecture.
+
+<Card title="Import">
+  ```tsx import {GlassCard} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop          | Type                                               | Default      | Description                |
+| ------------- | -------------------------------------------------- | ------------ | -------------------------- |
+| `variant`     | `'default' \| 'primary' \| 'secondary' \| 'apple'` | `'default'`  | Card style variant         |
+| `size`        | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`             | `'md'`       | Card size                  |
+| `elevation`   | `'none' \| 'sm' \| 'md' \| 'lg' \| 'xl'`           | `'md'`       | Shadow elevation           |
+| `interactive` | `boolean`                                          | `false`      | Enable hover/click effects |
+| `selectable`  | `boolean`                                          | `false`      | Enable selection state     |
+| `selected`    | `boolean`                                          | `false`      | Selection state            |
+| `orientation` | `'vertical' \| 'horizontal'`                       | `'vertical'` | Card layout                |
+
+#### Compound Components
+
+- `GlassCard.Header` - Card header section
+- `GlassCard.Title` - Card title
+- `GlassCard.Description` - Card description
+- `GlassCard.Content` - Main content area
+- `GlassCard.Footer` - Footer section
+- `GlassCard.Actions` - Action buttons area
+
+### GlassInput
+
+Advanced input component with validation and accessibility features.
+
+<Card title="Import">
+  ```tsx import {GlassInput} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop        | Type                                             | Default     | Description         |
+| ----------- | ------------------------------------------------ | ----------- | ------------------- |
+| `variant`   | `'default' \| 'filled' \| 'outlined'`            | `'default'` | Input style variant |
+| `size`      | `'sm' \| 'md' \| 'lg'`                           | `'md'`      | Input size          |
+| `state`     | `'default' \| 'error' \| 'success' \| 'warning'` | `'default'` | Validation state    |
+| `leftIcon`  | `ReactNode`                                      | -           | Left side icon      |
+| `rightIcon` | `ReactNode`                                      | -           | Right side icon     |
+| `clearable` | `boolean`                                        | `false`     | Show clear button   |
+| `loading`   | `boolean`                                        | `false`     | Show loading state  |
+
+### GlassModal
+
+Accessible modal with focus management and animations.
+
+<Card title="Import">
+  ```tsx import {GlassModal} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop                  | Type                                     | Default | Description               |
+| --------------------- | ---------------------------------------- | ------- | ------------------------- |
+| `open`                | `boolean`                                | `false` | Modal visibility          |
+| `onOpenChange`        | `(open: boolean) => void`                | -       | Open state change handler |
+| `size`                | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'md'`  | Modal size                |
+| `closeOnClickOutside` | `boolean`                                | `true`  | Close on backdrop click   |
+| `closeOnEscape`       | `boolean`                                | `true`  | Close on Escape key       |
+| `showCloseButton`     | `boolean`                                | `true`  | Show close button         |
+| `preventScroll`       | `boolean`                                | `true`  | Prevent body scroll       |
+
+## Layout Components
+
+### GlassAccordion
+
+Collapsible content sections with smooth animations.
+
+<Card title="Import">
+  ```tsx import {GlassAccordion} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop            | Type                                  | Default    | Description                  |
+| --------------- | ------------------------------------- | ---------- | ---------------------------- |
+| `type`          | `'single' \| 'multiple'`              | `'single'` | Collapse behavior            |
+| `collapsible`   | `boolean`                             | `false`    | Allow all items to be closed |
+| `value`         | `string \| string[]`                  | -          | Controlled open state        |
+| `defaultValue`  | `string \| string[]`                  | -          | Default open state           |
+| `onValueChange` | `(value: string \| string[]) => void` | -          | Value change handler         |
+
+### GlassTabs
+
+Tabbed interface component with keyboard navigation.
+
+<Card title="Import">
+  ```tsx import {GlassTabs} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop            | Type                                  | Default        | Description        |
+| --------------- | ------------------------------------- | -------------- | ------------------ |
+| `value`         | `string`                              | -              | Active tab value   |
+| `defaultValue`  | `string`                              | -              | Default active tab |
+| `onValueChange` | `(value: string) => void`             | -              | Tab change handler |
+| `orientation`   | `'horizontal' \| 'vertical'`          | `'horizontal'` | Tab orientation    |
+| `variant`       | `'default' \| 'pills' \| 'underline'` | `'default'`    | Tab style variant  |
+
+## Form Components
+
+### GlassCheckbox
+
+Accessible checkbox with indeterminate state support.
+
+<Card title="Import">
+  ```tsx import {GlassCheckbox} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop              | Type                         | Default | Description              |
+| ----------------- | ---------------------------- | ------- | ------------------------ |
+| `checked`         | `boolean`                    | -       | Controlled checked state |
+| `defaultChecked`  | `boolean`                    | `false` | Default checked state    |
+| `indeterminate`   | `boolean`                    | `false` | Indeterminate state      |
+| `disabled`        | `boolean`                    | `false` | Disable checkbox         |
+| `required`        | `boolean`                    | `false` | Required field           |
+| `onCheckedChange` | `(checked: boolean) => void` | -       | Change handler           |
+
+### GlassSelect
+
+Customizable select dropdown with search and multi-select support.
+
+<Card title="Import">
+  ```tsx import {GlassSelect} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop            | Type                                  | Default | Description               |
+| --------------- | ------------------------------------- | ------- | ------------------------- |
+| `value`         | `string \| string[]`                  | -       | Selected value(s)         |
+| `defaultValue`  | `string \| string[]`                  | -       | Default selected value(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | -       | Selection change handler  |
+| `multiple`      | `boolean`                             | `false` | Enable multi-select       |
+| `searchable`    | `boolean`                             | `false` | Enable search             |
+| `clearable`     | `boolean`                             | `false` | Enable clear button       |
+| `placeholder`   | `string`                              | -       | Placeholder text          |
+
+## Feedback Components
+
+### GlassAlert
+
+Alert component for important messages and notifications.
+
+<Card title="Import">
+  ```tsx import {GlassAlert} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop          | Type                                                   | Default     | Description         |
+| ------------- | ------------------------------------------------------ | ----------- | ------------------- |
+| `variant`     | `'default' \| 'destructive' \| 'success' \| 'warning'` | `'default'` | Alert type          |
+| `title`       | `string`                                               | -           | Alert title         |
+| `description` | `string`                                               | -           | Alert description   |
+| `dismissible` | `boolean`                                              | `false`     | Show dismiss button |
+| `onDismiss`   | `() => void`                                           | -           | Dismiss handler     |
+| `icon`        | `ReactNode`                                            | -           | Custom icon         |
+
+### GlassProgress
+
+Progress indicator with multiple variants and animations.
+
+<Card title="Import">
+  ```tsx import {GlassProgress} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop        | Type                                             | Default     | Description            |
+| ----------- | ------------------------------------------------ | ----------- | ---------------------- |
+| `value`     | `number`                                         | -           | Progress value (0-100) |
+| `max`       | `number`                                         | `100`       | Maximum value          |
+| `variant`   | `'default' \| 'success' \| 'warning' \| 'error'` | `'default'` | Progress variant       |
+| `size`      | `'sm' \| 'md' \| 'lg'`                           | `'md'`      | Progress bar size      |
+| `animated`  | `boolean`                                        | `true`      | Enable animations      |
+| `showValue` | `boolean`                                        | `false`     | Show progress text     |
+
+## Navigation Components
+
+### GlassNavbar
+
+Responsive navigation bar with glassmorphism effects.
+
+<Card title="Import">
+  ```tsx import {GlassNavbar} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop                | Type                           | Default | Description            |
+| ------------------- | ------------------------------ | ------- | ---------------------- |
+| `sticky`            | `boolean`                      | `false` | Sticky positioning     |
+| `transparent`       | `boolean`                      | `false` | Transparent background |
+| `collapsed`         | `boolean`                      | `false` | Collapsed state        |
+| `onCollapsedChange` | `(collapsed: boolean) => void` | -       | Collapse handler       |
+| `logo`              | `ReactNode`                    | -       | Logo element           |
+| `actions`           | `ReactNode`                    | -       | Action elements        |
+
+### GlassPagination
+
+Pagination component with customizable appearance.
+
+<Card title="Import">
+  ```tsx import {GlassPagination} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop            | Type                     | Default | Description             |
+| --------------- | ------------------------ | ------- | ----------------------- |
+| `currentPage`   | `number`                 | `1`     | Current page number     |
+| `totalPages`    | `number`                 | -       | Total number of pages   |
+| `onPageChange`  | `(page: number) => void` | -       | Page change handler     |
+| `showFirstLast` | `boolean`                | `true`  | Show first/last buttons |
+| `showPrevNext`  | `boolean`                | `true`  | Show prev/next buttons  |
+| `siblingCount`  | `number`                 | `1`     | Adjacent page count     |
+
+## Data Display Components
+
+### GlassAvatar
+
+Avatar component with fallback and status indicators.
+
+<Card title="Import">
+  ```tsx import {GlassAvatar} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop       | Type                                        | Default    | Description      |
+| ---------- | ------------------------------------------- | ---------- | ---------------- |
+| `src`      | `string`                                    | -          | Image source URL |
+| `alt`      | `string`                                    | -          | Image alt text   |
+| `fallback` | `string`                                    | -          | Fallback text    |
+| `size`     | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`      | `'md'`     | Avatar size      |
+| `shape`    | `'circle' \| 'square'`                      | `'circle'` | Avatar shape     |
+| `status`   | `'online' \| 'offline' \| 'away' \| 'busy'` | -          | Status indicator |
+
+### GlassTable
+
+Data table with sorting, filtering, and pagination.
+
+<Card title="Import">
+  ```tsx import {GlassTable} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop         | Type                         | Default | Description          |
+| ------------ | ---------------------------- | ------- | -------------------- |
+| `data`       | `Array<Record<string, any>>` | -       | Table data           |
+| `columns`    | `ColumnDef[]`                | -       | Column definitions   |
+| `sortable`   | `boolean`                    | `false` | Enable sorting       |
+| `filterable` | `boolean`                    | `false` | Enable filtering     |
+| `selectable` | `boolean`                    | `false` | Enable row selection |
+| `striped`    | `boolean`                    | `false` | Striped rows         |
+| `bordered`   | `boolean`                    | `false` | Table borders        |
+
+## Advanced Components
+
+### GlassCommand
+
+Command palette for quick actions and navigation.
+
+<Card title="Import">
+  ```tsx import {GlassCommand} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop           | Type                      | Default | Description                |
+| -------------- | ------------------------- | ------- | -------------------------- |
+| `open`         | `boolean`                 | `false` | Command palette visibility |
+| `onOpenChange` | `(open: boolean) => void` | -       | Open state handler         |
+| `items`        | `CommandItem[]`           | -       | Command items              |
+| `placeholder`  | `string`                  | -       | Search placeholder         |
+| `emptyMessage` | `string`                  | -       | Empty state message        |
+
+### GlassTooltip
+
+Accessible tooltip with positioning and animations.
+
+<Card title="Import">
+  ```tsx import {GlassTooltip} from "@liquidify/components"; ```
+</Card>
+
+#### Props
+
+| Prop        | Type                                     | Default    | Description       |
+| ----------- | ---------------------------------------- | ---------- | ----------------- |
+| `content`   | `ReactNode`                              | -          | Tooltip content   |
+| `side`      | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'`    | Tooltip position  |
+| `align`     | `'start' \| 'center' \| 'end'`           | `'center'` | Tooltip alignment |
+| `delay`     | `number`                                 | `700`      | Show delay in ms  |
+| `hideDelay` | `number`                                 | `300`      | Hide delay in ms  |
+
+## Common Props
+
+All components inherit these common props:
+
+| Prop          | Type            | Description            |
+| ------------- | --------------- | ---------------------- |
+| `className`   | `string`        | Additional CSS classes |
+| `style`       | `CSSProperties` | Inline styles          |
+| `id`          | `string`        | Element ID             |
+| `data-testid` | `string`        | Test identifier        |
+| `children`    | `ReactNode`     | Child elements         |
+
+## Event Handlers
+
+Standard event handler patterns used across components:
+
+```tsx
+// Value change handlers
+onValueChange?: (value: T) => void;
+onCheckedChange?: (checked: boolean) => void;
+onSelectedChange?: (selected: boolean) => void;
+
+// State change handlers
+onOpenChange?: (open: boolean) => void;
+onExpandedChange?: (expanded: boolean) => void;
+onActiveChange?: (active: boolean) => void;
+
+// User interaction handlers
+onClick?: (event: MouseEvent) => void;
+onFocus?: (event: FocusEvent) => void;
+onBlur?: (event: FocusEvent) => void;
+onKeyDown?: (event: KeyboardEvent) => void;
+```

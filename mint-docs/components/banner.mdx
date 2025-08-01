@@ -1,0 +1,289 @@
+---
+title: "GlassBanner"
+description: "A prominent banner component for announcements and important messages"
+---
+
+# GlassBanner
+
+The `GlassBanner` component displays important announcements and messages with glassmorphism effects.
+
+## Import
+
+```tsx
+import { GlassBanner } from "@liquidify/components";
+```
+
+## Basic Usage
+
+<CodeGroup>
+
+```tsx Info Banner
+<GlassBanner variant="info">
+  <GlassBanner.Icon />
+  <GlassBanner.Content>
+    <GlassBanner.Title>New Feature Available</GlassBanner.Title>
+    <GlassBanner.Description>
+      Check out our latest component updates and improvements.
+    </GlassBanner.Description>
+  </GlassBanner.Content>
+  <GlassBanner.Actions>
+    <GlassButton size="sm">Learn More</GlassButton>
+    <GlassBanner.Dismiss />
+  </GlassBanner.Actions>
+</GlassBanner>
+```
+
+```tsx Warning Banner
+<GlassBanner variant="warning" dismissible>
+  <GlassBanner.Content>
+    <GlassBanner.Title>Maintenance Scheduled</GlassBanner.Title>
+    <GlassBanner.Description>
+      System maintenance is scheduled for tonight from 2-4 AM EST.
+    </GlassBanner.Description>
+  </GlassBanner.Content>
+</GlassBanner>
+```
+
+</CodeGroup>
+
+## Variants
+
+<CardGroup cols={2}>
+
+<Card title="Info">
+  ```tsx
+  <GlassBanner variant="info">
+    <GlassBanner.Content>
+      <GlassBanner.Title>Information</GlassBanner.Title>
+      <GlassBanner.Description>
+        General information message
+      </GlassBanner.Description>
+    </GlassBanner.Content>
+  </GlassBanner>
+  ```
+</Card>
+
+<Card title="Success">
+  ```tsx
+  <GlassBanner variant="success">
+    <GlassBanner.Content>
+      <GlassBanner.Title>Success</GlassBanner.Title>
+      <GlassBanner.Description>
+        Operation completed successfully
+      </GlassBanner.Description>
+    </GlassBanner.Content>
+  </GlassBanner>
+  ```
+</Card>
+
+<Card title="Warning">
+  ```tsx
+  <GlassBanner variant="warning">
+    <GlassBanner.Content>
+      <GlassBanner.Title>Warning</GlassBanner.Title>
+      <GlassBanner.Description>
+        Please review this important information
+      </GlassBanner.Description>
+    </GlassBanner.Content>
+  </GlassBanner>
+  ```
+</Card>
+
+<Card title="Error">
+  ```tsx
+  <GlassBanner variant="error">
+    <GlassBanner.Content>
+      <GlassBanner.Title>Error</GlassBanner.Title>
+      <GlassBanner.Description>
+        An error occurred that needs attention
+      </GlassBanner.Description>
+    </GlassBanner.Content>
+  </GlassBanner>
+  ```
+</Card>
+
+</CardGroup>
+
+## Component API
+
+### GlassBanner
+
+| Prop          | Type                                          | Default  | Description         |
+| ------------- | --------------------------------------------- | -------- | ------------------- |
+| `variant`     | `'info' \| 'success' \| 'warning' \| 'error'` | `'info'` | Banner variant      |
+| `dismissible` | `boolean`                                     | `false`  | Show dismiss button |
+| `onDismiss`   | `() => void`                                  | -        | Dismiss handler     |
+| `position`    | `'top' \| 'bottom' \| 'sticky-top'`           | -        | Banner position     |
+| `fullWidth`   | `boolean`                                     | `false`  | Full width banner   |
+
+### GlassBanner.Icon
+
+| Prop   | Type        | Default | Description                                            |
+| ------ | ----------- | ------- | ------------------------------------------------------ |
+| `icon` | `ReactNode` | -       | Custom icon (auto-selected by variant if not provided) |
+
+### GlassBanner.Content
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+### GlassBanner.Title
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+### GlassBanner.Description
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+### GlassBanner.Actions
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+## Examples
+
+### Announcement Banner
+
+```tsx
+function AnnouncementBanner() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  if (!isVisible) return null;
+
+  return (
+    <GlassBanner
+      variant="info"
+      position="sticky-top"
+      onDismiss={() => setIsVisible(false)}
+    >
+      <GlassBanner.Icon />
+      <GlassBanner.Content>
+        <GlassBanner.Title>🎉 Product Launch</GlassBanner.Title>
+        <GlassBanner.Description>
+          Our new design system is now available! Explore the latest components
+          and features.
+        </GlassBanner.Description>
+      </GlassBanner.Content>
+      <GlassBanner.Actions>
+        <GlassButton variant="link" size="sm">
+          View Details
+        </GlassButton>
+        <GlassBanner.Dismiss />
+      </GlassBanner.Actions>
+    </GlassBanner>
+  );
+}
+```
+
+### Status Banner
+
+```tsx
+function StatusBanner({
+  status,
+}: {
+  status: "online" | "maintenance" | "error";
+}) {
+  const bannerConfig = {
+    online: {
+      variant: "success" as const,
+      title: "All Systems Operational",
+      description: "All services are running normally.",
+    },
+    maintenance: {
+      variant: "warning" as const,
+      title: "Maintenance Mode",
+      description: "Some features may be temporarily unavailable.",
+    },
+    error: {
+      variant: "error" as const,
+      title: "Service Disruption",
+      description: "We are experiencing technical difficulties.",
+    },
+  };
+
+  const config = bannerConfig[status];
+
+  return (
+    <GlassBanner variant={config.variant} fullWidth>
+      <GlassBanner.Icon />
+      <GlassBanner.Content>
+        <GlassBanner.Title>{config.title}</GlassBanner.Title>
+        <GlassBanner.Description>{config.description}</GlassBanner.Description>
+      </GlassBanner.Content>
+      {status === "error" && (
+        <GlassBanner.Actions>
+          <GlassButton variant="link" size="sm">
+            Status Page
+          </GlassButton>
+        </GlassBanner.Actions>
+      )}
+    </GlassBanner>
+  );
+}
+```
+
+### Cookie Consent Banner
+
+```tsx
+function CookieConsentBanner() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleAccept = () => {
+    // Handle cookie acceptance
+    setIsVisible(false);
+  };
+
+  const handleDecline = () => {
+    // Handle cookie decline
+    setIsVisible(false);
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <GlassBanner variant="info" position="bottom" fullWidth>
+      <GlassBanner.Content>
+        <GlassBanner.Description>
+          We use cookies to enhance your experience. By continuing to use our
+          site, you agree to our use of cookies.
+        </GlassBanner.Description>
+      </GlassBanner.Content>
+      <GlassBanner.Actions>
+        <GlassButton variant="secondary" size="sm" onClick={handleDecline}>
+          Decline
+        </GlassButton>
+        <GlassButton variant="primary" size="sm" onClick={handleAccept}>
+          Accept
+        </GlassButton>
+      </GlassBanner.Actions>
+    </GlassBanner>
+  );
+}
+```
+
+## Accessibility
+
+The `GlassBanner` component follows accessibility best practices:
+
+- **ARIA Role**: Uses appropriate `role="banner"` or `role="alert"`
+- **Live Regions**: Important banners announce changes to screen readers
+- **Keyboard Navigation**: Dismiss button is keyboard accessible
+- **Color Contrast**: Meets WCAG AA standards for all variants
+
+## Styling
+
+Customize the banner appearance:
+
+```css
+.glass-banner {
+  --banner-padding: 1rem;
+  --banner-border-radius: 8px;
+  --banner-animation-duration: 300ms;
+}
+```

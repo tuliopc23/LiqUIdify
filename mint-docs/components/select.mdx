@@ -1,0 +1,446 @@
+---
+title: "GlassSelect"
+description: "A customizable select dropdown component with search and multi-select capabilities"
+---
+
+# GlassSelect
+
+The `GlassSelect` component provides a powerful dropdown selection interface with glassmorphism effects, search functionality, and multi-select support.
+
+## Import
+
+```tsx
+import { GlassSelect } from "@liquidify/components";
+```
+
+## Basic Usage
+
+<CodeGroup>
+
+```tsx Basic Select
+<GlassSelect placeholder="Select an option">
+  <GlassSelect.Item value="apple">Apple</GlassSelect.Item>
+  <GlassSelect.Item value="banana">Banana</GlassSelect.Item>
+  <GlassSelect.Item value="orange">Orange</GlassSelect.Item>
+</GlassSelect>
+```
+
+```tsx With Groups
+<GlassSelect placeholder="Select a fruit">
+  <GlassSelect.Group>
+    <GlassSelect.Label>Citrus</GlassSelect.Label>
+    <GlassSelect.Item value="orange">Orange</GlassSelect.Item>
+    <GlassSelect.Item value="lemon">Lemon</GlassSelect.Item>
+    <GlassSelect.Item value="lime">Lime</GlassSelect.Item>
+  </GlassSelect.Group>
+
+  <GlassSelect.Group>
+    <GlassSelect.Label>Berries</GlassSelect.Label>
+    <GlassSelect.Item value="strawberry">Strawberry</GlassSelect.Item>
+    <GlassSelect.Item value="blueberry">Blueberry</GlassSelect.Item>
+    <GlassSelect.Item value="raspberry">Raspberry</GlassSelect.Item>
+  </GlassSelect.Group>
+</GlassSelect>
+```
+
+</CodeGroup>
+
+## Features
+
+<CardGroup cols={2}>
+
+<Card title="Searchable">
+  ```tsx
+  <GlassSelect searchable placeholder="Search countries...">
+    <GlassSelect.Item value="us">United States</GlassSelect.Item>
+    <GlassSelect.Item value="ca">Canada</GlassSelect.Item>
+    <GlassSelect.Item value="uk">United Kingdom</GlassSelect.Item>
+    <GlassSelect.Item value="fr">France</GlassSelect.Item>
+  </GlassSelect>
+  ```
+</Card>
+
+<Card title="Multi-select">
+  ```tsx
+  <GlassSelect multiple placeholder="Select technologies...">
+    <GlassSelect.Item value="react">React</GlassSelect.Item>
+    <GlassSelect.Item value="vue">Vue</GlassSelect.Item>
+    <GlassSelect.Item value="angular">Angular</GlassSelect.Item>
+    <GlassSelect.Item value="svelte">Svelte</GlassSelect.Item>
+  </GlassSelect>
+  ```
+</Card>
+
+<Card title="Clearable">
+  ```tsx
+  <GlassSelect clearable placeholder="Select an option...">
+    <GlassSelect.Item value="option1">Option 1</GlassSelect.Item>
+    <GlassSelect.Item value="option2">Option 2</GlassSelect.Item>
+  </GlassSelect>
+  ```
+</Card>
+
+<Card title="With Icons">
+  ```tsx
+  <GlassSelect placeholder="Select a social platform...">
+    <GlassSelect.Item value="twitter" icon={<TwitterIcon />}>
+      Twitter
+    </GlassSelect.Item>
+    <GlassSelect.Item value="facebook" icon={<FacebookIcon />}>
+      Facebook
+    </GlassSelect.Item>
+  </GlassSelect>
+  ```
+</Card>
+
+</CardGroup>
+
+## Component API
+
+### GlassSelect
+
+| Prop              | Type                                  | Default              | Description                          |
+| ----------------- | ------------------------------------- | -------------------- | ------------------------------------ |
+| `value`           | `string \| string[]`                  | -                    | Controlled selected value(s)         |
+| `defaultValue`    | `string \| string[]`                  | -                    | Default selected value(s)            |
+| `onValueChange`   | `(value: string \| string[]) => void` | -                    | Selection change handler             |
+| `multiple`        | `boolean`                             | `false`              | Enable multi-select                  |
+| `searchable`      | `boolean`                             | `false`              | Enable search                        |
+| `clearable`       | `boolean`                             | `false`              | Enable clear button                  |
+| `disabled`        | `boolean`                             | `false`              | Disable select                       |
+| `placeholder`     | `string`                              | -                    | Placeholder text                     |
+| `emptyMessage`    | `string`                              | `'No results found'` | Empty state message                  |
+| `maxDisplayCount` | `number`                              | `3`                  | Max items to display in multi-select |
+| `size`            | `'sm' \| 'md' \| 'lg'`                | `'md'`               | Select size                          |
+| `invalid`         | `boolean`                             | `false`              | Invalid state                        |
+| `error`           | `string`                              | -                    | Error message                        |
+
+### GlassSelect.Item
+
+| Prop          | Type        | Default | Description      |
+| ------------- | ----------- | ------- | ---------------- |
+| `value`       | `string`    | -       | Item value       |
+| `disabled`    | `boolean`   | `false` | Disable item     |
+| `icon`        | `ReactNode` | -       | Item icon        |
+| `description` | `string`    | -       | Item description |
+
+### GlassSelect.Group
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+### GlassSelect.Label
+
+| Prop        | Type     | Default | Description            |
+| ----------- | -------- | ------- | ---------------------- |
+| `className` | `string` | -       | Additional CSS classes |
+
+## Examples
+
+### User Selection
+
+```tsx
+function UserSelection() {
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+
+  const users = [
+    {
+      id: "1",
+      name: "John Doe",
+      email: "john@example.com",
+      avatar: "/avatars/john.jpg",
+    },
+    {
+      id: "2",
+      name: "Jane Smith",
+      email: "jane@example.com",
+      avatar: "/avatars/jane.jpg",
+    },
+    {
+      id: "3",
+      name: "Bob Johnson",
+      email: "bob@example.com",
+      avatar: "/avatars/bob.jpg",
+    },
+  ];
+
+  return (
+    <GlassSelect
+      multiple
+      searchable
+      value={selectedUsers}
+      onValueChange={setSelectedUsers}
+      placeholder="Select team members..."
+    >
+      {users.map((user) => (
+        <GlassSelect.Item
+          key={user.id}
+          value={user.id}
+          icon={<GlassAvatar size="sm" src={user.avatar} alt={user.name} />}
+          description={user.email}
+        >
+          {user.name}
+        </GlassSelect.Item>
+      ))}
+    </GlassSelect>
+  );
+}
+```
+
+### Country Selector with Flags
+
+```tsx
+function CountrySelector() {
+  const [selectedCountry, setSelectedCountry] = useState("");
+
+  const countries = [
+    { code: "us", name: "United States", flag: "🇺🇸" },
+    { code: "ca", name: "Canada", flag: "🇨🇦" },
+    { code: "uk", name: "United Kingdom", flag: "🇬🇧" },
+    { code: "fr", name: "France", flag: "🇫🇷" },
+    { code: "de", name: "Germany", flag: "🇩🇪" },
+    { code: "jp", name: "Japan", flag: "🇯🇵" },
+  ];
+
+  return (
+    <GlassSelect
+      searchable
+      value={selectedCountry}
+      onValueChange={setSelectedCountry}
+      placeholder="Select your country..."
+    >
+      {countries.map((country) => (
+        <GlassSelect.Item
+          key={country.code}
+          value={country.code}
+          icon={<span className="text-lg">{country.flag}</span>}
+        >
+          {country.name}
+        </GlassSelect.Item>
+      ))}
+    </GlassSelect>
+  );
+}
+```
+
+### Form Integration
+
+```tsx
+function FormExample() {
+  const [formData, setFormData] = useState({
+    category: "",
+    tags: [],
+    priority: "medium",
+  });
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const categories = [
+    { value: "bug", label: "Bug Report", description: "Report a software bug" },
+    {
+      value: "feature",
+      label: "Feature Request",
+      description: "Request a new feature",
+    },
+    {
+      value: "support",
+      label: "Support",
+      description: "Get help with using the product",
+    },
+  ];
+
+  const tags = [
+    "urgent",
+    "frontend",
+    "backend",
+    "mobile",
+    "design",
+    "performance",
+    "security",
+  ];
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.category) {
+      newErrors.category = "Please select a category";
+    }
+
+    if (formData.tags.length === 0) {
+      newErrors.tags = "Please select at least one tag";
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Form submitted:", formData);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label className="text-sm font-medium mb-2 block">Category *</label>
+        <GlassSelect
+          value={formData.category}
+          onValueChange={(value) =>
+            setFormData((prev) => ({ ...prev, category: value as string }))
+          }
+          placeholder="Select a category..."
+          invalid={!!errors.category}
+          error={errors.category}
+        >
+          {categories.map((category) => (
+            <GlassSelect.Item
+              key={category.value}
+              value={category.value}
+              description={category.description}
+            >
+              {category.label}
+            </GlassSelect.Item>
+          ))}
+        </GlassSelect>
+      </div>
+
+      <div>
+        <label className="text-sm font-medium mb-2 block">Tags *</label>
+        <GlassSelect
+          multiple
+          searchable
+          value={formData.tags}
+          onValueChange={(value) =>
+            setFormData((prev) => ({ ...prev, tags: value as string[] }))
+          }
+          placeholder="Select tags..."
+          invalid={!!errors.tags}
+          error={errors.tags}
+        >
+          {tags.map((tag) => (
+            <GlassSelect.Item key={tag} value={tag}>
+              #{tag}
+            </GlassSelect.Item>
+          ))}
+        </GlassSelect>
+      </div>
+
+      <div>
+        <label className="text-sm font-medium mb-2 block">Priority</label>
+        <GlassSelect
+          value={formData.priority}
+          onValueChange={(value) =>
+            setFormData((prev) => ({ ...prev, priority: value as string }))
+          }
+        >
+          <GlassSelect.Item value="low" icon={<ArrowDownIcon />}>
+            Low Priority
+          </GlassSelect.Item>
+          <GlassSelect.Item value="medium" icon={<MinusIcon />}>
+            Medium Priority
+          </GlassSelect.Item>
+          <GlassSelect.Item value="high" icon={<ArrowUpIcon />}>
+            High Priority
+          </GlassSelect.Item>
+          <GlassSelect.Item value="urgent" icon={<AlertTriangleIcon />}>
+            Urgent
+          </GlassSelect.Item>
+        </GlassSelect>
+      </div>
+
+      <GlassButton type="submit">Submit Ticket</GlassButton>
+    </form>
+  );
+}
+```
+
+### Async Data Loading
+
+```tsx
+function AsyncSelect() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const loadUsers = async (search: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/users?search=${search}`);
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Failed to load users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const debouncedSearch = useCallback(debounce(loadUsers, 300), []);
+
+  useEffect(() => {
+    debouncedSearch(searchTerm);
+  }, [searchTerm, debouncedSearch]);
+
+  return (
+    <GlassSelect
+      searchable
+      placeholder="Search for users..."
+      onSearchChange={setSearchTerm}
+      loading={loading}
+      emptyMessage={searchTerm ? "No users found" : "Type to search for users"}
+    >
+      {users.map((user) => (
+        <GlassSelect.Item
+          key={user.id}
+          value={user.id}
+          icon={<GlassAvatar size="sm" src={user.avatar} />}
+          description={user.email}
+        >
+          {user.name}
+        </GlassSelect.Item>
+      ))}
+    </GlassSelect>
+  );
+}
+```
+
+## Accessibility
+
+The `GlassSelect` component follows WAI-ARIA guidelines:
+
+- **Keyboard Navigation**: Arrow keys navigate options, Enter selects, Escape closes
+- **ARIA Attributes**: Proper `role="combobox"`, `aria-expanded`, and `aria-selected`
+- **Focus Management**: Focus returns to trigger after selection
+- **Screen Readers**: Selected values and options are properly announced
+
+## Styling
+
+Customize the select appearance:
+
+```css
+.glass-select {
+  --select-min-height: 2.5rem;
+  --select-max-height: 200px;
+  --select-border-radius: 6px;
+  --select-animation-duration: 150ms;
+}
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+
+<Card title="Performance">
+  - Use virtualization for large datasets (>100 items) - Implement debounced
+  search for async data - Consider pagination for very large lists - Use
+  `React.memo` for custom item components
+</Card>
+
+<Card title="UX Guidelines">
+  - Provide clear placeholder text - Use descriptive labels and help text - Show
+  loading states for async operations - Limit multi-select display count for
+  readability
+</Card>
+
+</CardGroup>
