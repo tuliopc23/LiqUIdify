@@ -84,7 +84,7 @@ function _safeGetComputedStyle(
 /**
  * Safe getBoundingClientRect with fallback
  */
-function safeGetBoundingClientRect(element: Element | null): DOMRect {
+export function safeGetBoundingClientRect(element: Element | null): DOMRect {
   const fallbackRect = {
     x: 0,
     y: 0,
@@ -180,7 +180,7 @@ function _safeAddEventListener<K extends keyof HTMLElementEventMap>(
 /**
  * Safe requestAnimationFrame with cancellation
  */
-function safeRequestAnimationFrame(
+export function safeRequestAnimationFrame(
   callback: FrameRequestCallback,
 ): (() => void) | null {
   if (typeof window === "undefined" || !window.requestAnimationFrame) {

@@ -1,18 +1,315 @@
 {
-  "timestamp": "2025-07-31T23:03:54.804Z",
-  "totalFiles": 189,
-  "jsFiles": 0,
+  "timestamp": "2025-08-01T13:38:41.087Z",
+  "totalFiles": 423,
+  "jsFiles": 36,
   "cssFiles": 0,
-  "typeDefinitions": 185,
-  "analyses": [],
+  "typeDefinitions": 207,
+  "analyses": [
+    {
+      "path": "variant-system-D_EnIrp-.js",
+      "size": 258498,
+      "gzipSize": 61099,
+      "sizeFormatted": "252.44 KB",
+      "gzipSizeFormatted": "59.67 KB",
+      "compressionRatio": "76.4"
+    },
+    {
+      "path": "utils-hmM_wTjF.js",
+      "size": 96285,
+      "gzipSize": 16089,
+      "sizeFormatted": "94.03 KB",
+      "gzipSizeFormatted": "15.71 KB",
+      "compressionRatio": "83.3"
+    },
+    {
+      "path": "index-CTGwSpMD.js",
+      "size": 94998,
+      "gzipSize": 24277,
+      "sizeFormatted": "92.77 KB",
+      "gzipSizeFormatted": "23.71 KB",
+      "compressionRatio": "74.4"
+    },
+    {
+      "path": "glass-dropdown-DSkgQwcZ.js",
+      "size": 77643,
+      "gzipSize": 18117,
+      "sizeFormatted": "75.82 KB",
+      "gzipSizeFormatted": "17.69 KB",
+      "compressionRatio": "76.7"
+    },
+    {
+      "path": "hooks-DvzsrVz2.js",
+      "size": 52007,
+      "gzipSize": 12580,
+      "sizeFormatted": "50.79 KB",
+      "gzipSizeFormatted": "12.29 KB",
+      "compressionRatio": "75.8"
+    },
+    {
+      "path": "glass-file-upload-oz-t2jVy.js",
+      "size": 40895,
+      "gzipSize": 8386,
+      "sizeFormatted": "39.94 KB",
+      "gzipSizeFormatted": "8.19 KB",
+      "compressionRatio": "79.5"
+    },
+    {
+      "path": "glass-command-ljGBE_wL.js",
+      "size": 37794,
+      "gzipSize": 8075,
+      "sizeFormatted": "36.91 KB",
+      "gzipSizeFormatted": "7.89 KB",
+      "compressionRatio": "78.6"
+    },
+    {
+      "path": "accessibility-manager-DU7QdoM4.js",
+      "size": 24221,
+      "gzipSize": 5760,
+      "sizeFormatted": "23.65 KB",
+      "gzipSizeFormatted": "5.63 KB",
+      "compressionRatio": "76.2"
+    },
+    {
+      "path": "glass-skeleton-CvcnePa5.js",
+      "size": 13449,
+      "gzipSize": 3430,
+      "sizeFormatted": "13.13 KB",
+      "gzipSizeFormatted": "3.35 KB",
+      "compressionRatio": "74.5"
+    },
+    {
+      "path": "index-CaOGcAJS.js",
+      "size": 11924,
+      "gzipSize": 3213,
+      "sizeFormatted": "11.64 KB",
+      "gzipSizeFormatted": "3.14 KB",
+      "compressionRatio": "73.1"
+    },
+    {
+      "path": "glass-chart-B6IR7Urf.js",
+      "size": 11559,
+      "gzipSize": 2856,
+      "sizeFormatted": "11.29 KB",
+      "gzipSizeFormatted": "2.79 KB",
+      "compressionRatio": "75.3"
+    },
+    {
+      "path": "glass-focus-trap-CGT9fRoS.js",
+      "size": 10304,
+      "gzipSize": 2375,
+      "sizeFormatted": "10.06 KB",
+      "gzipSizeFormatted": "2.32 KB",
+      "compressionRatio": "77.0"
+    },
+    {
+      "path": "glass-live-region-C-Syoymi.js",
+      "size": 9389,
+      "gzipSize": 2487,
+      "sizeFormatted": "9.17 KB",
+      "gzipSizeFormatted": "2.43 KB",
+      "compressionRatio": "73.5"
+    },
+    {
+      "path": "glass-skip-navigation-CP0EKWz4.js",
+      "size": 7997,
+      "gzipSize": 2441,
+      "sizeFormatted": "7.81 KB",
+      "gzipSizeFormatted": "2.38 KB",
+      "compressionRatio": "69.5"
+    },
+    {
+      "path": "index-C2PEZb3y.js",
+      "size": 7263,
+      "gzipSize": 2246,
+      "sizeFormatted": "7.09 KB",
+      "gzipSizeFormatted": "2.19 KB",
+      "compressionRatio": "69.1"
+    },
+    {
+      "path": "glass-error-boundary-ClyY0EDN.js",
+      "size": 7133,
+      "gzipSize": 2143,
+      "sizeFormatted": "6.97 KB",
+      "gzipSizeFormatted": "2.09 KB",
+      "compressionRatio": "70.0"
+    },
+    {
+      "path": "glass-spinner-Dd8NFknb.js",
+      "size": 6976,
+      "gzipSize": 1855,
+      "sizeFormatted": "6.81 KB",
+      "gzipSizeFormatted": "1.81 KB",
+      "compressionRatio": "73.4"
+    },
+    {
+      "path": "index-BmdDcjjM.js",
+      "size": 5743,
+      "gzipSize": 1670,
+      "sizeFormatted": "5.61 KB",
+      "gzipSizeFormatted": "1.63 KB",
+      "compressionRatio": "70.9"
+    },
+    {
+      "path": "glass-slider-goqtu8FY.js",
+      "size": 4823,
+      "gzipSize": 1430,
+      "sizeFormatted": "4.71 KB",
+      "gzipSizeFormatted": "1.40 KB",
+      "compressionRatio": "70.4"
+    },
+    {
+      "path": "index-BJL0kKeu.js",
+      "size": 4418,
+      "gzipSize": 1337,
+      "sizeFormatted": "4.31 KB",
+      "gzipSizeFormatted": "1.31 KB",
+      "compressionRatio": "69.7"
+    },
+    {
+      "path": "glass-toast-C40XjLSK.js",
+      "size": 4346,
+      "gzipSize": 1518,
+      "sizeFormatted": "4.24 KB",
+      "gzipSizeFormatted": "1.48 KB",
+      "compressionRatio": "65.1"
+    },
+    {
+      "path": "theme-toggle-vSW0jY7B.js",
+      "size": 4319,
+      "gzipSize": 1429,
+      "sizeFormatted": "4.22 KB",
+      "gzipSizeFormatted": "1.40 KB",
+      "compressionRatio": "66.9"
+    },
+    {
+      "path": "glass-progress-Bi4ELaOh.js",
+      "size": 3054,
+      "gzipSize": 1018,
+      "sizeFormatted": "2.98 KB",
+      "gzipSizeFormatted": "1018.00 B",
+      "compressionRatio": "66.7"
+    },
+    {
+      "path": "glass-visually-hidden-BdfmxJWs.js",
+      "size": 1215,
+      "gzipSize": 558,
+      "sizeFormatted": "1.19 KB",
+      "gzipSizeFormatted": "558.00 B",
+      "compressionRatio": "54.1"
+    },
+    {
+      "path": "glass-table-DIdhnuyN.js",
+      "size": 1215,
+      "gzipSize": 503,
+      "sizeFormatted": "1.19 KB",
+      "gzipSizeFormatted": "503.00 B",
+      "compressionRatio": "58.6"
+    },
+    {
+      "path": "createLucideIcon-BiX-3dSs.js",
+      "size": 1201,
+      "gzipSize": 598,
+      "sizeFormatted": "1.17 KB",
+      "gzipSizeFormatted": "598.00 B",
+      "compressionRatio": "50.2"
+    },
+    {
+      "path": "glass-ui-provider-C3tbvA0j.js",
+      "size": 930,
+      "gzipSize": 405,
+      "sizeFormatted": "930.00 B",
+      "gzipSizeFormatted": "405.00 B",
+      "compressionRatio": "56.5"
+    },
+    {
+      "path": "file-text-BK7gXHS3.js",
+      "size": 839,
+      "gzipSize": 389,
+      "sizeFormatted": "839.00 B",
+      "gzipSizeFormatted": "389.00 B",
+      "compressionRatio": "53.6"
+    },
+    {
+      "path": "info-Bpg8SA2o.js",
+      "size": 779,
+      "gzipSize": 345,
+      "sizeFormatted": "779.00 B",
+      "gzipSizeFormatted": "345.00 B",
+      "compressionRatio": "55.7"
+    },
+    {
+      "path": "file-BrAbxs0W.js",
+      "size": 738,
+      "gzipSize": 369,
+      "sizeFormatted": "738.00 B",
+      "gzipSizeFormatted": "369.00 B",
+      "compressionRatio": "50.0"
+    },
+    {
+      "path": "alert-triangle-CZAPF8Vr.js",
+      "size": 398,
+      "gzipSize": 256,
+      "sizeFormatted": "398.00 B",
+      "gzipSizeFormatted": "256.00 B",
+      "compressionRatio": "35.7"
+    },
+    {
+      "path": "user-DoPrI8jh.js",
+      "size": 278,
+      "gzipSize": 208,
+      "sizeFormatted": "278.00 B",
+      "gzipSizeFormatted": "208.00 B",
+      "compressionRatio": "25.2"
+    },
+    {
+      "path": "search-CrxGLAXQ.js",
+      "size": 258,
+      "gzipSize": 194,
+      "sizeFormatted": "258.00 B",
+      "gzipSizeFormatted": "194.00 B",
+      "compressionRatio": "24.8"
+    },
+    {
+      "path": "x-DYyrg8Sw.js",
+      "size": 221,
+      "gzipSize": 172,
+      "sizeFormatted": "221.00 B",
+      "gzipSizeFormatted": "172.00 B",
+      "compressionRatio": "22.2"
+    },
+    {
+      "path": "chevron-right-bh_CcsH-.js",
+      "size": 214,
+      "gzipSize": 169,
+      "sizeFormatted": "214.00 B",
+      "gzipSizeFormatted": "169.00 B",
+      "compressionRatio": "21.0"
+    },
+    {
+      "path": "core-glass-l0sNRNKZ.js",
+      "size": 1,
+      "gzipSize": 21,
+      "sizeFormatted": "1.00 B",
+      "gzipSizeFormatted": "21.00 B",
+      "compressionRatio": "N/A"
+    }
+  ],
   "summary": {
-    "totalSize": 0,
-    "totalGzipSize": 0,
-    "totalSizeFormatted": "0 B",
-    "totalGzipSizeFormatted": "0 B",
-    "averageCompressionRatio": "NaN",
+    "totalSize": 803325,
+    "totalGzipSize": 190018,
+    "totalSizeFormatted": "784.50 KB",
+    "totalGzipSizeFormatted": "185.56 KB",
+    "averageCompressionRatio": "5.4",
     "violations": 0,
     "criticalViolations": 0,
+    "largestBundle": {
+      "path": "variant-system-D_EnIrp-.js",
+      "size": 258498,
+      "gzipSize": 61099,
+      "sizeFormatted": "252.44 KB",
+      "gzipSizeFormatted": "59.67 KB",
+      "compressionRatio": "76.4"
+    },
     "status": "pass"
   }
 }

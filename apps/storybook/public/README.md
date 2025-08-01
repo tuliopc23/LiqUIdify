@@ -1,0 +1,1 @@
+# Storybook public assets directory

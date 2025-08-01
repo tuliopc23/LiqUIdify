@@ -1,8 +1,43 @@
 // Test setup file for LiqUIdify components
-import { vi, beforeEach } from "vitest";
+import { vi, beforeEach, afterEach } from "vitest";
+import { cleanup } from "@testing-library/react";
+
+if (typeof global.window === "undefined") {
+  Object.defineProperty(global, "window", {
+    value: globalThis.window,
+    writable: true,
+  });
+}
+
+if (typeof global.document === "undefined") {
+  Object.defineProperty(global, "document", {
+    value: globalThis.document,
+    writable: true,
+  });
+}
+
+// Clean up after each test
+afterEach(() => {
+  cleanup();
+});
+
+if (typeof Element !== "undefined") {
+  Element.prototype.animate = vi.fn().mockReturnValue({
+    finished: Promise.resolve(),
+    cancel: vi.fn(),
+    finish: vi.fn(),
+    pause: vi.fn(),
+    play: vi.fn(),
+    reverse: vi.fn(),
+    updatePlaybackRate: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  });
+}
 
 // Mock IntersectionObserver
-global.IntersectionObserver = vi.fn().mockImplementation((callback) => ({
+global.IntersectionObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -20,14 +55,14 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 }));
 
 // Mock matchMedia
-Object.defineProperty(window, "matchMedia", {
+Object.defineProperty(globalThis, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(), // Deprecated
-    removeListener: vi.fn(), // Deprecated
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
     addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
@@ -112,8 +147,12 @@ const customMatchers = {
 };
 
 // Extend the global expect if available
-if (typeof expect !== "undefined" && expect.extend) {
-  expect.extend(customMatchers);
+if (
+  typeof globalThis !== "undefined" &&
+  (globalThis as any).expect &&
+  (globalThis as any).expect.extend
+) {
+  (globalThis as any).expect.extend(customMatchers);
 }
 
 // Setup React Testing Library

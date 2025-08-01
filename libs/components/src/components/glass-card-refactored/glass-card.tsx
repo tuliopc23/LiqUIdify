@@ -293,7 +293,7 @@ export const GlassCard = React.memo(
                 y: 0,
                 getModifierState: event.getModifierState,
                 relatedTarget: null,
-              } as React.MouseEvent<HTMLDivElement>;
+              } as unknown as React.MouseEvent<HTMLDivElement>;
               onCardClick(syntheticEvent);
             }
           }
@@ -306,7 +306,7 @@ export const GlassCard = React.memo(
         variant: variant as any,
         intensity: glassEffect?.intensity,
         state: currentState,
-        glassEffect,
+        glassEffect: glassEffect as Record<string, unknown>,
       });
 
       const glassVariables = generateGlassVariables({
@@ -397,7 +397,7 @@ GlassCard.displayName = "GlassCard";
  */
 const CardHeader = forwardRef<
   HTMLDivElement,
-  ComponentPropsBuilder<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   const { variant } = useCardContext();
 
@@ -474,7 +474,7 @@ CardDescription.displayName = "CardDescription";
  */
 const CardContent = forwardRef<
   HTMLDivElement,
-  ComponentPropsBuilder<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   const { padding } = useCardContext();
 
@@ -496,7 +496,7 @@ CardContent.displayName = "CardContent";
  */
 const CardFooter = forwardRef<
   HTMLDivElement,
-  ComponentPropsBuilder<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   const { variant } = useCardContext();
 
@@ -522,7 +522,7 @@ CardFooter.displayName = "CardFooter";
  */
 const CardActions = forwardRef<
   HTMLDivElement,
-  ComponentPropsBuilder<HTMLDivElement>
+  React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   return (
     <div
@@ -539,7 +539,14 @@ const CardActions = forwardRef<
 CardActions.displayName = "CardActions";
 
 // Create compound component with all sub-components
-const CompoundCard = Object.assign(GlassCard, {
+const CompoundCard: typeof GlassCard & {
+  Header: typeof CardHeader;
+  Title: typeof CardTitle;
+  Description: typeof CardDescription;
+  Content: typeof CardContent;
+  Footer: typeof CardFooter;
+  Actions: typeof CardActions;
+} = Object.assign(GlassCard, {
   Header: CardHeader,
   Title: CardTitle,
   Description: CardDescription,

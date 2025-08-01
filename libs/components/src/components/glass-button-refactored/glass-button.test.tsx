@@ -1,5 +1,6 @@
-import { describe, expect, it } from "bun:test";
+import { describe, expect, it } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
+import React from "react";
 import "../../test/setup";
 import { GlassButton } from "./glass-button";
 
@@ -30,14 +31,23 @@ describe("GlassButton", () => {
     const { rerender } = render(<GlassButton size="sm">Small</GlassButton>);
     let button = screen.getByRole("button");
     expect(button).toHaveClass("relative");
+    expect(button).toHaveClass("inline-flex");
+    expect(button).toHaveClass("items-center");
+    expect(button).toHaveClass("justify-center");
 
     rerender(<GlassButton size="md">Medium</GlassButton>);
     button = screen.getByRole("button");
+    expect(button).toHaveClass("relative");
     expect(button).toHaveClass("inline-flex");
+    expect(button).toHaveClass("items-center");
+    expect(button).toHaveClass("justify-center");
 
     rerender(<GlassButton size="lg">Large</GlassButton>);
     button = screen.getByRole("button");
+    expect(button).toHaveClass("relative");
+    expect(button).toHaveClass("inline-flex");
     expect(button).toHaveClass("items-center");
+    expect(button).toHaveClass("justify-center");
   });
 
   it("handles click events", () => {
