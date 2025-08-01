@@ -11,10 +11,18 @@ import {
 import { useState } from 'react';
 import { type GlassTabItem, GlassTabs } from './glass-tabs';
 
-const meta = { title: 'Glass UI/GlassTabs' }
-  GlassTabs,
-  parameters: { 'centered' }
-    { 
+const meta = {
+  title: 'Glass UI/GlassTabs',
+  component: GlassTabs,
+  parameters: { layout: 'centered' },
+  tags: ['autodocs'],
+};
+
+export default meta;
+
+type Story = StoryObj<typeof GlassTabs>;
+
+export const Default: Story = {
         `
 ## GlassTabs Component
  }
@@ -46,7 +54,7 @@ const tabs: Array<GlassTabItem> = [
 
 function MyComponent() {
   return (
-    <GlassTabs 
+    <GlassTabs
       tabs={tabs}
       defaultTab="tab1" />
   );
@@ -56,7 +64,7 @@ function MyComponent() {
     },
   },
   ['autodocs'],
-  argTypes: { 
+  argTypes: {
       'object'
       'Array of tab items',
     },
@@ -367,7 +375,7 @@ export const SettingsExample: Story = { render: () => {
                   <label htmlFor="username-x1hayd" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
                     Username
                   </label>
-                  <input id="input-402" 
+                  <input id="input-402"
                     type="text"
                     className="w-full rounded-lg border border-gray-300 px-4 py-2 dark:border-gray-600"
                     placeholder="john_doe"
@@ -377,7 +385,7 @@ export const SettingsExample: Story = { render: () => {
                   <label htmlFor="email-llg1wu" className="mb-2 block font-medium text-gray-700 text-sm dark:text-gray-300">
                     Email
                   </label>
-                  <input id="input-412" 
+                  <input id="input-412"
                     type="email"
                     className="w-full rounded-lg border border-gray-300 px-4 py-2 dark:border-gray-600"
                     placeholder="john@example.com"

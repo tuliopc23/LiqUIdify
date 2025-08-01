@@ -27,9 +27,7 @@ import { GlassFileUpload } from "@liquidify/components";
     <div className="text-center p-6">
       <UploadIcon className="w-8 h-8 mx-auto mb-2" />
       <p>Click to upload or drag and drop</p>
-      <p className="text-sm text-muted-foreground">
-        PNG, JPG, GIF up to 10MB
-      </p>
+      <p className="text-sm text-muted-foreground">PNG, JPG, GIF up to 10MB</p>
     </div>
   </GlassFileUpload.Trigger>
 </GlassFileUpload>
@@ -45,7 +43,7 @@ import { GlassFileUpload } from "@liquidify/components";
   <GlassFileUpload.Trigger>
     Drop files here or click to browse
   </GlassFileUpload.Trigger>
-  
+
   <GlassFileUpload.FileList />
 </GlassFileUpload>
 ```
@@ -88,34 +86,34 @@ import { GlassFileUpload } from "@liquidify/components";
 
 ### GlassFileUpload
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `onFilesChange` | `(files: File[]) => void` | - | File selection handler |
-| `accept` | `string` | - | Accepted file types |
-| `multiple` | `boolean` | `true` | Allow multiple files |
-| `maxFiles` | `number` | - | Maximum number of files |
-| `maxSize` | `number` | - | Maximum file size (bytes) |
-| `minSize` | `number` | - | Minimum file size (bytes) |
-| `disabled` | `boolean` | `false` | Disable upload |
-| `variant` | `'dropzone' \| 'button'` | `'dropzone'` | Upload variant |
-| `showFileList` | `boolean` | `false` | Show uploaded files list |
-| `onUpload` | `(files: File[]) => Promise<void>` | - | Upload handler |
-| `validateFile` | `(file: File) => string \| null` | - | Custom file validation |
+| Prop            | Type                               | Default      | Description               |
+| --------------- | ---------------------------------- | ------------ | ------------------------- |
+| `onFilesChange` | `(files: File[]) => void`          | -            | File selection handler    |
+| `accept`        | `string`                           | -            | Accepted file types       |
+| `multiple`      | `boolean`                          | `true`       | Allow multiple files      |
+| `maxFiles`      | `number`                           | -            | Maximum number of files   |
+| `maxSize`       | `number`                           | -            | Maximum file size (bytes) |
+| `minSize`       | `number`                           | -            | Minimum file size (bytes) |
+| `disabled`      | `boolean`                          | `false`      | Disable upload            |
+| `variant`       | `'dropzone' \| 'button'`           | `'dropzone'` | Upload variant            |
+| `showFileList`  | `boolean`                          | `false`      | Show uploaded files list  |
+| `onUpload`      | `(files: File[]) => Promise<void>` | -            | Upload handler            |
+| `validateFile`  | `(file: File) => string \| null`   | -            | Custom file validation    |
 
 ### GlassFileUpload.Trigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `asChild` | `boolean` | `false` | Render as child element |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type      | Default | Description             |
+| ----------- | --------- | ------- | ----------------------- |
+| `asChild`   | `boolean` | `false` | Render as child element |
+| `className` | `string`  | -       | Additional CSS classes  |
 
 ### GlassFileUpload.FileList
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `showProgress` | `boolean` | `true` | Show upload progress |
-| `showPreview` | `boolean` | `true` | Show file previews |
-| `onRemove` | `(file: File) => void` | - | File removal handler |
+| Prop           | Type                   | Default | Description          |
+| -------------- | ---------------------- | ------- | -------------------- |
+| `showProgress` | `boolean`              | `true`  | Show upload progress |
+| `showPreview`  | `boolean`              | `true`  | Show file previews   |
+| `onRemove`     | `(file: File) => void` | -       | File removal handler |
 
 ## Examples
 
@@ -125,49 +123,52 @@ import { GlassFileUpload } from "@liquidify/components";
 function ImageUploadWithPreview() {
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState<Record<string, number>>({});
+  const [uploadProgress, setUploadProgress] = useState<Record<string, number>>(
+    {},
+  );
 
   const handleUpload = async (filesToUpload: File[]) => {
     setUploading(true);
-    
+
     for (const file of filesToUpload) {
       const formData = new FormData();
-      formData.append('file', file);
-      
+      formData.append("file", file);
+
       try {
-        await fetch('/api/upload', {
-          method: 'POST',
+        await fetch("/api/upload", {
+          method: "POST",
           body: formData,
           // Track progress
           onUploadProgress: (progressEvent) => {
             const progress = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
+              (progressEvent.loaded * 100) / progressEvent.total,
             );
-            setUploadProgress(prev => ({
+            setUploadProgress((prev) => ({
               ...prev,
-              [file.name]: progress
+              [file.name]: progress,
             }));
-          }
+          },
         });
       } catch (error) {
-        console.error('Upload failed:', error);
+        console.error("Upload failed:", error);
       }
     }
-    
+
     setUploading(false);
   };
 
   const validateImage = (file: File) => {
-    const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    
+    const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+
     if (!validTypes.includes(file.type)) {
-      return 'Please upload a valid image file (JPEG, PNG, GIF, or WebP)';
+      return "Please upload a valid image file (JPEG, PNG, GIF, or WebP)";
     }
-    
-    if (file.size > 10 * 1024 * 1024) { // 10MB
-      return 'File size must be less than 10MB';
+
+    if (file.size > 10 * 1024 * 1024) {
+      // 10MB
+      return "File size must be less than 10MB";
     }
-    
+
     return null;
   };
 
@@ -198,11 +199,11 @@ function ImageUploadWithPreview() {
             </p>
           </div>
         </GlassFileUpload.Trigger>
-        
-        <GlassFileUpload.FileList 
+
+        <GlassFileUpload.FileList
           showProgress={uploading}
           onRemove={(file) => {
-            setFiles(prev => prev.filter(f => f !== file));
+            setFiles((prev) => prev.filter((f) => f !== file));
           }}
         />
       </GlassFileUpload>
@@ -220,27 +221,28 @@ function DocumentUpload() {
 
   const validateDocument = (file: File) => {
     const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'text/plain'
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "text/plain",
     ];
-    
+
     if (!allowedTypes.includes(file.type)) {
-      return 'Only PDF, Word documents, and text files are allowed';
+      return "Only PDF, Word documents, and text files are allowed";
     }
-    
-    if (file.size > 50 * 1024 * 1024) { // 50MB
-      return 'File size must be less than 50MB';
+
+    if (file.size > 50 * 1024 * 1024) {
+      // 50MB
+      return "File size must be less than 50MB";
     }
-    
+
     return null;
   };
 
   const handleFilesChange = (newFiles: File[]) => {
     const validationErrors: string[] = [];
     const validFiles: File[] = [];
-    
+
     newFiles.forEach((file) => {
       const error = validateDocument(file);
       if (error) {
@@ -249,9 +251,9 @@ function DocumentUpload() {
         validFiles.push(file);
       }
     });
-    
+
     setErrors(validationErrors);
-    setFiles(prevFiles => [...prevFiles, ...validFiles]);
+    setFiles((prevFiles) => [...prevFiles, ...validFiles]);
   };
 
   return (
@@ -273,17 +275,19 @@ function DocumentUpload() {
             </GlassCard.Content>
           </GlassCard>
         </GlassFileUpload.Trigger>
-        
+
         <GlassFileUpload.FileList />
       </GlassFileUpload>
-      
+
       {errors.length > 0 && (
         <GlassAlert variant="error">
           <GlassAlert.Title>Upload Errors</GlassAlert.Title>
           <GlassAlert.Description>
             <ul className="list-disc list-inside space-y-1">
               {errors.map((error, index) => (
-                <li key={index} className="text-sm">{error}</li>
+                <li key={index} className="text-sm">
+                  {error}
+                </li>
               ))}
             </ul>
           </GlassAlert.Description>
@@ -303,10 +307,10 @@ function ProfilePictureUpload() {
 
   const handleImageUpload = async (files: File[]) => {
     if (files.length === 0) return;
-    
+
     const file = files[0];
     setUploading(true);
-    
+
     try {
       // Create preview
       const reader = new FileReader();
@@ -314,19 +318,19 @@ function ProfilePictureUpload() {
         setProfileImage(e.target?.result as string);
       };
       reader.readAsDataURL(file);
-      
+
       // Upload to server
       const formData = new FormData();
-      formData.append('profile_image', file);
-      
-      await fetch('/api/profile/upload', {
-        method: 'POST',
-        body: formData
+      formData.append("profile_image", file);
+
+      await fetch("/api/profile/upload", {
+        method: "POST",
+        body: formData,
       });
-      
-      toast.success('Profile picture updated successfully!');
+
+      toast.success("Profile picture updated successfully!");
     } catch (error) {
-      toast.error('Failed to upload profile picture');
+      toast.error("Failed to upload profile picture");
       setProfileImage(null);
     } finally {
       setUploading(false);
@@ -336,7 +340,7 @@ function ProfilePictureUpload() {
   return (
     <div className="flex items-center gap-6">
       <GlassAvatar size="xl" src={profileImage} />
-      
+
       <div className="space-y-2">
         <GlassFileUpload
           onFilesChange={handleImageUpload}
@@ -346,24 +350,24 @@ function ProfilePictureUpload() {
           disabled={uploading}
         >
           <GlassFileUpload.Trigger asChild>
-            <GlassButton 
-              variant="secondary" 
+            <GlassButton
+              variant="secondary"
               loading={uploading}
               disabled={uploading}
             >
               <CameraIcon className="w-4 h-4 mr-2" />
-              {profileImage ? 'Change Picture' : 'Upload Picture'}
+              {profileImage ? "Change Picture" : "Upload Picture"}
             </GlassButton>
           </GlassFileUpload.Trigger>
         </GlassFileUpload>
-        
+
         <p className="text-xs text-muted-foreground">
           JPG, PNG or GIF. Max size 5MB.
         </p>
-        
+
         {profileImage && (
-          <GlassButton 
-            variant="ghost" 
+          <GlassButton
+            variant="ghost"
             size="sm"
             onClick={() => setProfileImage(null)}
           >
@@ -381,52 +385,73 @@ function ProfilePictureUpload() {
 ```tsx
 function BulkFileUpload() {
   const [files, setFiles] = useState<File[]>([]);
-  const [uploadQueue, setUploadQueue] = useState<Map<string, UploadStatus>>(new Map());
+  const [uploadQueue, setUploadQueue] = useState<Map<string, UploadStatus>>(
+    new Map(),
+  );
 
   interface UploadStatus {
     progress: number;
-    status: 'pending' | 'uploading' | 'completed' | 'error';
+    status: "pending" | "uploading" | "completed" | "error";
     error?: string;
   }
 
   const uploadFile = async (file: File) => {
     const fileId = `${file.name}-${file.size}`;
-    
-    setUploadQueue(prev => new Map(prev.set(fileId, {
-      progress: 0,
-      status: 'uploading'
-    })));
+
+    setUploadQueue(
+      (prev) =>
+        new Map(
+          prev.set(fileId, {
+            progress: 0,
+            status: "uploading",
+          }),
+        ),
+    );
 
     try {
       const formData = new FormData();
-      formData.append('file', file);
-      
-      await fetch('/api/upload', {
-        method: 'POST',
+      formData.append("file", file);
+
+      await fetch("/api/upload", {
+        method: "POST",
         body: formData,
         onUploadProgress: (progressEvent) => {
           const progress = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
+            (progressEvent.loaded * 100) / progressEvent.total,
           );
-          
-          setUploadQueue(prev => new Map(prev.set(fileId, {
-            progress,
-            status: 'uploading'
-          })));
-        }
+
+          setUploadQueue(
+            (prev) =>
+              new Map(
+                prev.set(fileId, {
+                  progress,
+                  status: "uploading",
+                }),
+              ),
+          );
+        },
       });
-      
-      setUploadQueue(prev => new Map(prev.set(fileId, {
-        progress: 100,
-        status: 'completed'
-      })));
-      
+
+      setUploadQueue(
+        (prev) =>
+          new Map(
+            prev.set(fileId, {
+              progress: 100,
+              status: "completed",
+            }),
+          ),
+      );
     } catch (error) {
-      setUploadQueue(prev => new Map(prev.set(fileId, {
-        progress: 0,
-        status: 'error',
-        error: error.message
-      })));
+      setUploadQueue(
+        (prev) =>
+          new Map(
+            prev.set(fileId, {
+              progress: 0,
+              status: "error",
+              error: error.message,
+            }),
+          ),
+      );
     }
   };
 
@@ -437,11 +462,7 @@ function BulkFileUpload() {
 
   return (
     <div className="space-y-6">
-      <GlassFileUpload
-        onFilesChange={setFiles}
-        maxFiles={20}
-        multiple
-      >
+      <GlassFileUpload onFilesChange={setFiles} maxFiles={20} multiple>
         <GlassFileUpload.Trigger>
           <div className="border-2 border-dashed border-border rounded-lg p-12 text-center">
             <FolderIcon className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
@@ -449,27 +470,23 @@ function BulkFileUpload() {
             <p className="text-muted-foreground mb-4">
               Select multiple files to upload at once
             </p>
-            <GlassButton size="lg">
-              Select Files
-            </GlassButton>
+            <GlassButton size="lg">Select Files</GlassButton>
           </div>
         </GlassFileUpload.Trigger>
       </GlassFileUpload>
-      
+
       {files.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h4>Selected Files ({files.length})</h4>
-            <GlassButton onClick={handleUploadAll}>
-              Upload All
-            </GlassButton>
+            <GlassButton onClick={handleUploadAll}>Upload All</GlassButton>
           </div>
-          
+
           <div className="space-y-2">
             {files.map((file) => {
               const fileId = `${file.name}-${file.size}`;
               const status = uploadQueue.get(fileId);
-              
+
               return (
                 <GlassCard key={fileId}>
                   <GlassCard.Content className="p-4">
@@ -483,22 +500,22 @@ function BulkFileUpload() {
                           {(file.size / 1024 / 1024).toFixed(2)} MB
                         </p>
                       </div>
-                      
+
                       {status && (
                         <div className="flex items-center gap-2">
-                          {status.status === 'uploading' && (
-                            <GlassProgress 
-                              value={status.progress} 
+                          {status.status === "uploading" && (
+                            <GlassProgress
+                              value={status.progress}
                               size="sm"
                               className="w-20"
                             />
                           )}
-                          
-                          {status.status === 'completed' && (
+
+                          {status.status === "completed" && (
                             <CheckCircleIcon className="w-5 h-5 text-green-500" />
                           )}
-                          
-                          {status.status === 'error' && (
+
+                          {status.status === "error" && (
                             <XCircleIcon className="w-5 h-5 text-red-500" />
                           )}
                         </div>
@@ -543,17 +560,15 @@ Customize the file upload appearance:
 <CardGroup cols={2}>
 
 <Card title="File Validation">
-  - Always validate file types and sizes
-  - Provide clear error messages
-  - Implement client-side and server-side validation
-  - Show progress for large file uploads
+  - Always validate file types and sizes - Provide clear error messages -
+  Implement client-side and server-side validation - Show progress for large
+  file uploads
 </Card>
 
 <Card title="User Experience">
-  - Support both drag-and-drop and click-to-browse
-  - Show file previews when appropriate
-  - Provide clear upload progress feedback
-  - Allow users to remove files before upload
+  - Support both drag-and-drop and click-to-browse - Show file previews when
+  appropriate - Provide clear upload progress feedback - Allow users to remove
+  files before upload
 </Card>
 
 </CardGroup>

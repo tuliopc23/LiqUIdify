@@ -26,11 +26,13 @@ export default meta;
 type Story = typeof meta;
 
 const fileSystemNodes: Array<TreeNode> = [
-  { id: 'src' }
+  {
+    id: 'src',
     label: 'src',
     defaultExpanded: true,
     children: [
-      { id: 'components' }
+      {
+        id: 'components',
         label: 'components',
         defaultExpanded: true,
         children: [
@@ -234,7 +236,7 @@ export const ControlledExpansion: Story = { render: () => { }
         />
     </div>
     )
-  }             const 
+  }             const
   _parameters: { docs: {
       description: {
         story:

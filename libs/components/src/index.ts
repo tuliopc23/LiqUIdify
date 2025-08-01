@@ -1,5 +1,8 @@
 // Main entry point for the Liquidify component library
 
+// Import styles for CSS bundling
+import "./styles/glass.css";
+
 // Core components
 export * from "./components/glass-accordion";
 export * from "./components/glass-alert";

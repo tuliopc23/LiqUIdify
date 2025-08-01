@@ -41,8 +41,7 @@ function ConfigProvider({
 }
 
 // Export the main provider
-export { ConfigProvider as default };;
+export { ConfigProvider as default };
 
 // Alias for backward compatibility
 const LiquidifyProvider = ConfigProvider;
-;

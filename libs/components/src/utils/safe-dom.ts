@@ -85,27 +85,15 @@ function _safeGetComputedStyle(
  * Safe getBoundingClientRect with fallback
  */
 export function safeGetBoundingClientRect(element: Element | null): DOMRect {
-  const fallbackRect = {
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    toJSON: () => ({}),
-  } as DOMRect;
-
   if (!element) {
-    return fallbackRect;
+    return new DOMRect(0, 0, 0, 0);
   }
 
   try {
     return element.getBoundingClientRect();
   } catch {
     // Logging disabled
-    return fallbackRect;
+    return new DOMRect(0, 0, 0, 0);
   }
 }
 
@@ -182,9 +170,10 @@ function _safeAddEventListener<K extends keyof HTMLElementEventMap>(
  */
 export function safeRequestAnimationFrame(
   callback: FrameRequestCallback,
-): (() => void) | null {
+): () => void {
   if (typeof window === "undefined" || !window.requestAnimationFrame) {
-    return;
+    // Return no-op function for consistent API
+    return () => {};
   }
 
   try {
@@ -199,7 +188,7 @@ export function safeRequestAnimationFrame(
     };
   } catch {
     // Logging disabled
-    return;
+    return () => {};
   }
 }
 

@@ -13,12 +13,19 @@ import {
 } from 'lucide-react';
 import { GlassTooltip } from './glass-tooltip';
 
-const meta = { title: 'Components/GlassTooltip' }
-  GlassTooltip,
-  parameters: { 'centered' }
-    { 
-        `
-The GlassTooltip component displays helpful information on hover with glassmorphic styling. It automatically 
+const meta = {
+  title: 'Components/GlassTooltip',
+  component: GlassTooltip,
+  parameters: { layout: 'centered' },
+  tags: ['autodocs'],
+};
+
+export default meta;
+
+type Story = StoryObj<typeof GlassTooltip>;
+
+export const Default: Story = {
+The GlassTooltip component displays helpful information on hover with glassmorphic styling. It automatically
 positions itself to stay within the viewport and includes a directional arrow.
 
 ## Features
@@ -40,7 +47,7 @@ positions itself to stay within the viewport and includes a directional arrow.
       </div>
     ),
   ],
-  argTypes: { 
+  argTypes: {
       'Content to display in the tooltip' 'text' ,
     },
     { 'Position of the tooltip relative to the trigger' }
@@ -355,7 +362,7 @@ export const FormFieldTooltips: Story = { render: () => (
             <Info className="h-4 w-4 text-gray-400" />
           </GlassTooltip>
         </label>
-        <input id="input-376" 
+        <input id="input-376"
           type="text"
           className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500"
           placeholder="Enter username"
@@ -381,7 +388,7 @@ export const FormFieldTooltips: Story = { render: () => (
             <Info className="h-4 w-4 text-gray-400" />
           </GlassTooltip>
         </label>
-        <input id="input-402" 
+        <input id="input-402"
           type="password"
           className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500"
           placeholder="Enter password"

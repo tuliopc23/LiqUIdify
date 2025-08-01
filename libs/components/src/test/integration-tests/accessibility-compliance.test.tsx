@@ -182,7 +182,6 @@ describe("Accessibility Compliance Integration Tests", () => {
   describe("Interactive Elements Accessibility", () => {
     const InteractiveTest = () => {
       const [activeTab, setActiveTab] = React.useState(0);
-      const [expanded, setExpanded] = React.useState(false);
 
       const tabs = ["Tab 1", "Tab 2", "Tab 3"];
 
@@ -216,9 +215,7 @@ describe("Accessibility Compliance Integration Tests", () => {
           ))}
 
           <details>
-            <summary onClick={() => setExpanded(!expanded)}>
-              Expandable Section
-            </summary>
+            <summary>Expandable Section</summary>
             <div>
               <p>This content can be expanded or collapsed.</p>
               <GlassButton>Action Button</GlassButton>

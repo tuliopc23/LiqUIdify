@@ -19,34 +19,28 @@ import { GlassRadioGroup } from "@liquidify/components";
 
 ```tsx Basic Radio Group
 <GlassRadioGroup defaultValue="option1">
-  <GlassRadioGroup.Item value="option1">
-    Option 1
-  </GlassRadioGroup.Item>
-  <GlassRadioGroup.Item value="option2">
-    Option 2
-  </GlassRadioGroup.Item>
-  <GlassRadioGroup.Item value="option3">
-    Option 3
-  </GlassRadioGroup.Item>
+  <GlassRadioGroup.Item value="option1">Option 1</GlassRadioGroup.Item>
+  <GlassRadioGroup.Item value="option2">Option 2</GlassRadioGroup.Item>
+  <GlassRadioGroup.Item value="option3">Option 3</GlassRadioGroup.Item>
 </GlassRadioGroup>
 ```
 
 ```tsx With Labels and Descriptions
 <GlassRadioGroup defaultValue="monthly" name="billing">
-  <GlassRadioGroup.Item 
-    value="monthly" 
+  <GlassRadioGroup.Item
+    value="monthly"
     description="Billed monthly, cancel anytime"
   >
     Monthly Subscription - $9.99/month
   </GlassRadioGroup.Item>
-  <GlassRadioGroup.Item 
-    value="yearly" 
+  <GlassRadioGroup.Item
+    value="yearly"
     description="Save 20% with annual billing"
   >
     Annual Subscription - $95.99/year
   </GlassRadioGroup.Item>
-  <GlassRadioGroup.Item 
-    value="lifetime" 
+  <GlassRadioGroup.Item
+    value="lifetime"
     description="One-time payment, lifetime access"
   >
     Lifetime Access - $299.99
@@ -90,9 +84,7 @@ import { GlassRadioGroup } from "@liquidify/components";
 <Card title="Small">
   ```tsx
   <GlassRadioGroup size="sm">
-    <GlassRadioGroup.Item value="option1">
-      Small option
-    </GlassRadioGroup.Item>
+    <GlassRadioGroup.Item value="option1">Small option</GlassRadioGroup.Item>
   </GlassRadioGroup>
   ```
 </Card>
@@ -100,9 +92,7 @@ import { GlassRadioGroup } from "@liquidify/components";
 <Card title="Medium">
   ```tsx
   <GlassRadioGroup size="md">
-    <GlassRadioGroup.Item value="option1">
-      Medium option
-    </GlassRadioGroup.Item>
+    <GlassRadioGroup.Item value="option1">Medium option</GlassRadioGroup.Item>
   </GlassRadioGroup>
   ```
 </Card>
@@ -110,9 +100,7 @@ import { GlassRadioGroup } from "@liquidify/components";
 <Card title="Large">
   ```tsx
   <GlassRadioGroup size="lg">
-    <GlassRadioGroup.Item value="option1">
-      Large option
-    </GlassRadioGroup.Item>
+    <GlassRadioGroup.Item value="option1">Large option</GlassRadioGroup.Item>
   </GlassRadioGroup>
   ```
 </Card>
@@ -123,26 +111,26 @@ import { GlassRadioGroup } from "@liquidify/components";
 
 ### GlassRadioGroup
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | - | Controlled selected value |
-| `defaultValue` | `string` | - | Default selected value |
-| `onValueChange` | `(value: string) => void` | - | Selection change handler |
-| `name` | `string` | - | Form name attribute |
-| `disabled` | `boolean` | `false` | Disable all options |
-| `required` | `boolean` | `false` | Required field |
-| `invalid` | `boolean` | `false` | Invalid state |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout orientation |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Radio button size |
-| `error` | `string` | - | Error message |
+| Prop            | Type                         | Default      | Description               |
+| --------------- | ---------------------------- | ------------ | ------------------------- |
+| `value`         | `string`                     | -            | Controlled selected value |
+| `defaultValue`  | `string`                     | -            | Default selected value    |
+| `onValueChange` | `(value: string) => void`    | -            | Selection change handler  |
+| `name`          | `string`                     | -            | Form name attribute       |
+| `disabled`      | `boolean`                    | `false`      | Disable all options       |
+| `required`      | `boolean`                    | `false`      | Required field            |
+| `invalid`       | `boolean`                    | `false`      | Invalid state             |
+| `orientation`   | `'vertical' \| 'horizontal'` | `'vertical'` | Layout orientation        |
+| `size`          | `'sm' \| 'md' \| 'lg'`       | `'md'`       | Radio button size         |
+| `error`         | `string`                     | -            | Error message             |
 
 ### GlassRadioGroup.Item
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | - | Option value |
-| `disabled` | `boolean` | `false` | Disable this option |
-| `description` | `string` | - | Option description |
+| Prop          | Type      | Default | Description         |
+| ------------- | --------- | ------- | ------------------- |
+| `value`       | `string`  | -       | Option value        |
+| `disabled`    | `boolean` | `false` | Disable this option |
+| `description` | `string`  | -       | Option description  |
 
 ## Examples
 
@@ -150,17 +138,14 @@ import { GlassRadioGroup } from "@liquidify/components";
 
 ```tsx
 function PaymentMethodSelection() {
-  const [paymentMethod, setPaymentMethod] = useState('credit-card');
+  const [paymentMethod, setPaymentMethod] = useState("credit-card");
 
   return (
     <div className="space-y-4">
       <h3>Payment Method</h3>
-      
-      <GlassRadioGroup 
-        value={paymentMethod} 
-        onValueChange={setPaymentMethod}
-      >
-        <GlassRadioGroup.Item 
+
+      <GlassRadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
+        <GlassRadioGroup.Item
           value="credit-card"
           description="Visa, Mastercard, American Express"
         >
@@ -169,8 +154,8 @@ function PaymentMethodSelection() {
             Credit Card
           </div>
         </GlassRadioGroup.Item>
-        
-        <GlassRadioGroup.Item 
+
+        <GlassRadioGroup.Item
           value="paypal"
           description="Pay with your PayPal account"
         >
@@ -179,8 +164,8 @@ function PaymentMethodSelection() {
             PayPal
           </div>
         </GlassRadioGroup.Item>
-        
-        <GlassRadioGroup.Item 
+
+        <GlassRadioGroup.Item
           value="bank-transfer"
           description="Direct bank transfer (3-5 business days)"
         >
@@ -189,8 +174,8 @@ function PaymentMethodSelection() {
             Bank Transfer
           </div>
         </GlassRadioGroup.Item>
-        
-        <GlassRadioGroup.Item 
+
+        <GlassRadioGroup.Item
           value="apple-pay"
           description="Touch ID or Face ID required"
         >
@@ -209,72 +194,84 @@ function PaymentMethodSelection() {
 
 ```tsx
 function PlanSelectionCards() {
-  const [selectedPlan, setSelectedPlan] = useState('pro');
+  const [selectedPlan, setSelectedPlan] = useState("pro");
 
   const plans = [
     {
-      id: 'basic',
-      name: 'Basic',
-      price: '$9',
-      period: 'per month',
-      features: ['Up to 5 projects', '1GB storage', 'Email support'],
-      recommended: false
+      id: "basic",
+      name: "Basic",
+      price: "$9",
+      period: "per month",
+      features: ["Up to 5 projects", "1GB storage", "Email support"],
+      recommended: false,
     },
     {
-      id: 'pro',
-      name: 'Pro',
-      price: '$29',
-      period: 'per month',
-      features: ['Unlimited projects', '100GB storage', 'Priority support', 'Advanced analytics'],
-      recommended: true
+      id: "pro",
+      name: "Pro",
+      price: "$29",
+      period: "per month",
+      features: [
+        "Unlimited projects",
+        "100GB storage",
+        "Priority support",
+        "Advanced analytics",
+      ],
+      recommended: true,
     },
     {
-      id: 'enterprise',
-      name: 'Enterprise',
-      price: '$99',
-      period: 'per month',
-      features: ['Everything in Pro', 'Unlimited storage', 'Phone support', 'Custom integrations'],
-      recommended: false
-    }
+      id: "enterprise",
+      name: "Enterprise",
+      price: "$99",
+      period: "per month",
+      features: [
+        "Everything in Pro",
+        "Unlimited storage",
+        "Phone support",
+        "Custom integrations",
+      ],
+      recommended: false,
+    },
   ];
 
   return (
     <div className="space-y-4">
       <h3>Choose Your Plan</h3>
-      
-      <GlassRadioGroup 
-        value={selectedPlan} 
+
+      <GlassRadioGroup
+        value={selectedPlan}
         onValueChange={setSelectedPlan}
         orientation="horizontal"
       >
         {plans.map((plan) => (
           <GlassRadioGroup.Item key={plan.id} value={plan.id}>
-            <GlassCard 
+            <GlassCard
               className={cn(
-                'relative cursor-pointer transition-all',
-                selectedPlan === plan.id && 'ring-2 ring-primary ring-opacity-50'
+                "relative cursor-pointer transition-all",
+                selectedPlan === plan.id &&
+                  "ring-2 ring-primary ring-opacity-50",
               )}
               interactive
             >
               {plan.recommended && (
-                <GlassBadge 
+                <GlassBadge
                   className="absolute -top-2 left-1/2 transform -translate-x-1/2"
                   variant="primary"
                 >
                   Recommended
                 </GlassBadge>
               )}
-              
+
               <GlassCard.Header>
                 <GlassCard.Title>{plan.name}</GlassCard.Title>
                 <div className="text-2xl font-bold">
                   {plan.price}
                   <span className="text-sm font-normal text-muted-foreground">
-                    {' '}{plan.period}
+                    {" "}
+                    {plan.period}
                   </span>
                 </div>
               </GlassCard.Header>
-              
+
               <GlassCard.Content>
                 <ul className="space-y-2">
                   {plan.features.map((feature, index) => (
@@ -299,25 +296,25 @@ function PlanSelectionCards() {
 ```tsx
 function FormExample() {
   const [formData, setFormData] = useState({
-    deliveryMethod: '',
-    priority: 'normal'
+    deliveryMethod: "",
+    priority: "normal",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.deliveryMethod) {
-      newErrors.deliveryMethod = 'Please select a delivery method';
+      newErrors.deliveryMethod = "Please select a delivery method";
     }
-    
+
     setErrors(newErrors);
-    
+
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted:', formData);
+      console.log("Form submitted:", formData);
     }
   };
 
@@ -329,26 +326,26 @@ function FormExample() {
         </label>
         <GlassRadioGroup
           value={formData.deliveryMethod}
-          onValueChange={(value) => 
-            setFormData(prev => ({ ...prev, deliveryMethod: value }))
+          onValueChange={(value) =>
+            setFormData((prev) => ({ ...prev, deliveryMethod: value }))
           }
           required
           invalid={!!errors.deliveryMethod}
           error={errors.deliveryMethod}
         >
-          <GlassRadioGroup.Item 
+          <GlassRadioGroup.Item
             value="standard"
             description="3-5 business days, free shipping"
           >
             Standard Delivery
           </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item 
+          <GlassRadioGroup.Item
             value="express"
             description="1-2 business days, $9.99"
           >
             Express Delivery
           </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item 
+          <GlassRadioGroup.Item
             value="overnight"
             description="Next business day, $24.99"
           >
@@ -356,33 +353,25 @@ function FormExample() {
           </GlassRadioGroup.Item>
         </GlassRadioGroup>
       </div>
-      
+
       <div>
         <label className="text-sm font-medium mb-3 block">
           Processing Priority
         </label>
         <GlassRadioGroup
           value={formData.priority}
-          onValueChange={(value) => 
-            setFormData(prev => ({ ...prev, priority: value }))
+          onValueChange={(value) =>
+            setFormData((prev) => ({ ...prev, priority: value }))
           }
           orientation="horizontal"
         >
-          <GlassRadioGroup.Item value="low">
-            Low
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="normal">
-            Normal
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="high">
-            High
-          </GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="low">Low</GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="normal">Normal</GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="high">High</GlassRadioGroup.Item>
         </GlassRadioGroup>
       </div>
-      
-      <GlassButton type="submit">
-        Continue to Payment
-      </GlassButton>
+
+      <GlassButton type="submit">Continue to Payment</GlassButton>
     </form>
   );
 }
@@ -415,17 +404,15 @@ Customize the radio group appearance:
 <CardGroup cols={2}>
 
 <Card title="Content Guidelines">
-  - Use clear, descriptive labels
-  - Provide helpful descriptions for complex options
-  - Order options logically (alphabetical, most to least common)
-  - Keep option text concise but informative
+  - Use clear, descriptive labels - Provide helpful descriptions for complex
+  options - Order options logically (alphabetical, most to least common) - Keep
+  option text concise but informative
 </Card>
 
 <Card title="UX Considerations">
-  - Limit to 5-7 options when possible
-  - Use radio groups for mutually exclusive selections
-  - Provide a default selection when appropriate
-  - Consider using cards for complex options with multiple details
+  - Limit to 5-7 options when possible - Use radio groups for mutually exclusive
+  selections - Provide a default selection when appropriate - Consider using
+  cards for complex options with multiple details
 </Card>
 
 </CardGroup>

@@ -7,16 +7,12 @@ import {
   GlassErrorBoundary,
 } from '@/components/glass-error-boundary/glass-error-boundary';
 
-const meta = { title: 'Components/Glass Error Boundary' }
-  GlassErrorBoundary,
-  parameters: { 'padded' }
-    { 
-        'An error boundary component that gracefully handles JavaScript errors in React components. Features glassmorphism design, automatic recovery, and accessibility support.',
-      },
-    },
-  },
-  ['autodocs'],
-  argTypes: { 
+const meta = {
+  title: 'Components/Glass Error Boundary',
+  component: GlassErrorBoundary,
+  parameters: { layout: 'padded' },
+  tags: ['autodocs'],
+  argTypes: {
       'Custom fallback UI renderer function'
       false,
     },
@@ -107,7 +103,7 @@ export const Default: Story = { render: () => { }
           <GlassErrorBoundary
             resetKeys=[resetKey]
             level="component"
-            onError=(_error, _errorInfo) => 
+            onError=(_error, _errorInfo) =>
               console.log('Error caught:', error);
               console.log('Error info:', errorInfo);>
             <BuggyComponent shouldCrash=shouldCrash/>

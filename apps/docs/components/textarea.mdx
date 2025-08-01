@@ -18,10 +18,7 @@ import { GlassTextarea } from "@liquidify/components";
 <CodeGroup>
 
 ```tsx Basic Textarea
-<GlassTextarea 
-  placeholder="Enter your message..."
-  rows={4}
-/>
+<GlassTextarea placeholder="Enter your message..." rows={4} />
 ```
 
 ```tsx With Label
@@ -29,7 +26,7 @@ import { GlassTextarea } from "@liquidify/components";
   <label htmlFor="message" className="text-sm font-medium">
     Message
   </label>
-  <GlassTextarea 
+  <GlassTextarea
     id="message"
     placeholder="Type your message here..."
     rows={4}
@@ -38,7 +35,7 @@ import { GlassTextarea } from "@liquidify/components";
 ```
 
 ```tsx With Helper Text
-<GlassTextarea 
+<GlassTextarea
   placeholder="Enter feedback..."
   helperText="Please provide detailed feedback to help us improve"
   rows={3}
@@ -53,28 +50,19 @@ import { GlassTextarea } from "@liquidify/components";
 
 <Card title="Default">
   ```tsx
-  <GlassTextarea 
-    variant="default"
-    placeholder="Default textarea"
-  />
+  <GlassTextarea variant="default" placeholder="Default textarea" />
   ```
 </Card>
 
 <Card title="Filled">
   ```tsx
-  <GlassTextarea 
-    variant="filled"
-    placeholder="Filled textarea"
-  />
+  <GlassTextarea variant="filled" placeholder="Filled textarea" />
   ```
 </Card>
 
 <Card title="Outlined">
   ```tsx
-  <GlassTextarea 
-    variant="outlined"
-    placeholder="Outlined textarea"
-  />
+  <GlassTextarea variant="outlined" placeholder="Outlined textarea" />
   ```
 </Card>
 
@@ -86,7 +74,7 @@ import { GlassTextarea } from "@liquidify/components";
 
 <Card title="Success">
   ```tsx
-  <GlassTextarea 
+  <GlassTextarea
     state="success"
     value="Message sent successfully!"
     helperText="Your message has been delivered"
@@ -96,7 +84,7 @@ import { GlassTextarea } from "@liquidify/components";
 
 <Card title="Error">
   ```tsx
-  <GlassTextarea 
+  <GlassTextarea
     state="error"
     placeholder="Enter valid text..."
     error="This field is required"
@@ -106,7 +94,7 @@ import { GlassTextarea } from "@liquidify/components";
 
 <Card title="Warning">
   ```tsx
-  <GlassTextarea 
+  <GlassTextarea
     state="warning"
     placeholder="Enter description..."
     helperText="Consider adding more details"
@@ -116,10 +104,7 @@ import { GlassTextarea } from "@liquidify/components";
 
 <Card title="Disabled">
   ```tsx
-  <GlassTextarea 
-    disabled
-    value="This textarea is disabled"
-  />
+  <GlassTextarea disabled value="This textarea is disabled" />
   ```
 </Card>
 
@@ -129,22 +114,22 @@ import { GlassTextarea } from "@liquidify/components";
 
 ### GlassTextarea
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'default' \| 'filled' \| 'outlined'` | `'default'` | Visual variant |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Textarea size |
-| `state` | `'default' \| 'error' \| 'success' \| 'warning'` | `'default'` | Validation state |
-| `resize` | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | Resize behavior |
-| `autoResize` | `boolean` | `false` | Auto-resize to content |
-| `minRows` | `number` | `2` | Minimum rows (auto-resize) |
-| `maxRows` | `number` | `10` | Maximum rows (auto-resize) |
-| `maxLength` | `number` | - | Maximum character count |
-| `showCharCount` | `boolean` | `false` | Show character counter |
-| `error` | `string` | - | Error message |
-| `helperText` | `string` | - | Helper text |
-| `required` | `boolean` | `false` | Required field |
-| `disabled` | `boolean` | `false` | Disable textarea |
-| `readOnly` | `boolean` | `false` | Read-only state |
+| Prop            | Type                                             | Default      | Description                |
+| --------------- | ------------------------------------------------ | ------------ | -------------------------- |
+| `variant`       | `'default' \| 'filled' \| 'outlined'`            | `'default'`  | Visual variant             |
+| `size`          | `'sm' \| 'md' \| 'lg'`                           | `'md'`       | Textarea size              |
+| `state`         | `'default' \| 'error' \| 'success' \| 'warning'` | `'default'`  | Validation state           |
+| `resize`        | `'none' \| 'vertical' \| 'horizontal' \| 'both'` | `'vertical'` | Resize behavior            |
+| `autoResize`    | `boolean`                                        | `false`      | Auto-resize to content     |
+| `minRows`       | `number`                                         | `2`          | Minimum rows (auto-resize) |
+| `maxRows`       | `number`                                         | `10`         | Maximum rows (auto-resize) |
+| `maxLength`     | `number`                                         | -            | Maximum character count    |
+| `showCharCount` | `boolean`                                        | `false`      | Show character counter     |
+| `error`         | `string`                                         | -            | Error message              |
+| `helperText`    | `string`                                         | -            | Helper text                |
+| `required`      | `boolean`                                        | `false`      | Required field             |
+| `disabled`      | `boolean`                                        | `false`      | Disable textarea           |
+| `readOnly`      | `boolean`                                        | `false`      | Read-only state            |
 
 ## Examples
 
@@ -152,7 +137,7 @@ import { GlassTextarea } from "@liquidify/components";
 
 ```tsx
 function AutoResizeExample() {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
 
   return (
     <GlassTextarea
@@ -174,32 +159,32 @@ function AutoResizeExample() {
 ```tsx
 function ContactForm() {
   const [formData, setFormData] = useState({
-    subject: '',
-    message: '',
-    feedback: ''
+    subject: "",
+    message: "",
+    feedback: "",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
+      newErrors.subject = "Subject is required";
     }
-    
+
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = "Message is required";
     } else if (formData.message.length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = "Message must be at least 10 characters";
     }
-    
+
     setErrors(newErrors);
-    
+
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted:', formData);
+      console.log("Form submitted:", formData);
     }
   };
 
@@ -212,14 +197,16 @@ function ContactForm() {
         <GlassInput
           id="subject"
           value={formData.subject}
-          onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, subject: e.target.value }))
+          }
           placeholder="Brief description of your inquiry"
-          state={errors.subject ? 'error' : 'default'}
+          state={errors.subject ? "error" : "default"}
           error={errors.subject}
           required
         />
       </div>
-      
+
       <div>
         <label htmlFor="message" className="text-sm font-medium mb-2 block">
           Message *
@@ -227,18 +214,20 @@ function ContactForm() {
         <GlassTextarea
           id="message"
           value={formData.message}
-          onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, message: e.target.value }))
+          }
           placeholder="Please provide detailed information about your inquiry..."
           rows={5}
           maxLength={1000}
           showCharCount
-          state={errors.message ? 'error' : 'default'}
+          state={errors.message ? "error" : "default"}
           error={errors.message}
           helperText="Minimum 10 characters required"
           required
         />
       </div>
-      
+
       <div>
         <label htmlFor="feedback" className="text-sm font-medium mb-2 block">
           Additional Feedback
@@ -246,7 +235,9 @@ function ContactForm() {
         <GlassTextarea
           id="feedback"
           value={formData.feedback}
-          onChange={(e) => setFormData(prev => ({ ...prev, feedback: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, feedback: e.target.value }))
+          }
           placeholder="Any additional comments or suggestions (optional)"
           autoResize
           minRows={2}
@@ -254,7 +245,7 @@ function ContactForm() {
           helperText="Optional: Help us improve our service"
         />
       </div>
-      
+
       <GlassButton type="submit" size="lg">
         Send Message
       </GlassButton>
@@ -267,36 +258,36 @@ function ContactForm() {
 
 ```tsx
 function RichTextPreview() {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const [preview, setPreview] = useState(false);
 
   const formatContent = (text: string) => {
     // Simple markdown-like formatting
     return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/\n/g, '<br />');
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(.*?)\*/g, "<em>$1</em>")
+      .replace(/\n/g, "<br />");
   };
 
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <GlassButton
-          variant={!preview ? 'primary' : 'secondary'}
+          variant={!preview ? "primary" : "secondary"}
           size="sm"
           onClick={() => setPreview(false)}
         >
           Write
         </GlassButton>
         <GlassButton
-          variant={preview ? 'primary' : 'secondary'}
+          variant={preview ? "primary" : "secondary"}
           size="sm"
           onClick={() => setPreview(true)}
         >
           Preview
         </GlassButton>
       </div>
-      
+
       {!preview ? (
         <GlassTextarea
           value={content}
@@ -316,7 +307,7 @@ function RichTextPreview() {
           </GlassCard.Header>
           <GlassCard.Content>
             {content ? (
-              <div 
+              <div
                 className="prose prose-sm max-w-none"
                 dangerouslySetInnerHTML={{ __html: formatContent(content) }}
               />
@@ -338,40 +329,40 @@ function CommentSystem() {
   const [comments, setComments] = useState([
     {
       id: 1,
-      author: 'John Doe',
-      content: 'Great article! Very informative.',
-      timestamp: '2 hours ago'
+      author: "John Doe",
+      content: "Great article! Very informative.",
+      timestamp: "2 hours ago",
     },
     {
       id: 2,
-      author: 'Jane Smith',
-      content: 'I have a question about the implementation details...',
-      timestamp: '1 hour ago'
-    }
+      author: "Jane Smith",
+      content: "I have a question about the implementation details...",
+      timestamp: "1 hour ago",
+    },
   ]);
 
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!newComment.trim()) return;
-    
+
     setIsSubmitting(true);
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     const comment = {
       id: comments.length + 1,
-      author: 'Current User',
+      author: "Current User",
       content: newComment,
-      timestamp: 'Just now'
+      timestamp: "Just now",
     };
-    
-    setComments(prev => [...prev, comment]);
-    setNewComment('');
+
+    setComments((prev) => [...prev, comment]);
+    setNewComment("");
     setIsSubmitting(false);
   };
 
@@ -379,7 +370,7 @@ function CommentSystem() {
     <div className="space-y-6">
       <div className="space-y-4">
         <h3>Comments ({comments.length})</h3>
-        
+
         {comments.map((comment) => (
           <GlassCard key={comment.id}>
             <GlassCard.Header>
@@ -398,7 +389,7 @@ function CommentSystem() {
           </GlassCard>
         ))}
       </div>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="comment" className="text-sm font-medium mb-2 block">
@@ -417,10 +408,10 @@ function CommentSystem() {
             disabled={isSubmitting}
           />
         </div>
-        
+
         <div className="flex justify-end">
-          <GlassButton 
-            type="submit" 
+          <GlassButton
+            type="submit"
             disabled={!newComment.trim() || isSubmitting}
             loading={isSubmitting}
           >
@@ -460,17 +451,14 @@ Customize the textarea appearance:
 <CardGroup cols={2}>
 
 <Card title="Content Guidelines">
-  - Provide clear placeholder text
-  - Use appropriate labels and helper text
-  - Set reasonable character limits
-  - Show character counters for limited fields
+  - Provide clear placeholder text - Use appropriate labels and helper text -
+  Set reasonable character limits - Show character counters for limited fields
 </Card>
 
 <Card title="UX Considerations">
-  - Use auto-resize for better user experience
-  - Provide visual feedback for different states
-  - Consider preview functionality for formatted content
-  - Implement proper validation and error handling
+  - Use auto-resize for better user experience - Provide visual feedback for
+  different states - Consider preview functionality for formatted content -
+  Implement proper validation and error handling
 </Card>
 
 </CardGroup>

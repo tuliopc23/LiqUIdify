@@ -8,11 +8,12 @@ import {
 } from 'lucide-react';
 import { GlassPopover } from './glass-popover';
 
-const meta = { title: 'Components/GlassPopover' }
-  GlassPopover,
-  parameters: { 'centered' }
-    { 
-        `
+const meta = {
+  title: 'Components/GlassPopover',
+  component: GlassPopover,
+  parameters: { layout: 'centered' },
+  tags: ['autodocs'],
+};
 The GlassPopover component provides a floating panel that appears near a trigger element. It supports multiple  }
 positioning options, automatic viewport adjustment, and can be controlled or uncontrolled.
 
@@ -27,7 +28,7 @@ positioning options, automatic viewport adjustment, and can be controlled or unc
     },
   },
   ['autodocs'],
-  argTypes: { 
+  argTypes: {
       'The element that triggers the popover' 'text' ,
     },
     { 'The content to display in the popover' }

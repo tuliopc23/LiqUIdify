@@ -24,10 +24,18 @@ import { GlassCheckbox } from '../glass-checkbox/glass-checkbox';
 import { GlassInput } from '../glass-input/glass-input';
 import { GlassModal } from './glass-modal';
 
-const meta = { title: 'Components/Overlays/GlassModal' }
+const meta = {
+  title: 'Components/Overlays/GlassModal',
   component: GlassModal,
-  parameters: { layout: 'centered' }
-    { 
+  parameters: { layout: 'centered' },
+  tags: ['autodocs'],
+};
+
+export default meta;
+
+type Story = StoryObj<typeof GlassModal>;
+
+export const Default: Story = {
         component: ` }
 A glassmorphic modal dialog component with focus management, animations, and comprehensive accessibility features.
 
@@ -97,8 +105,8 @@ The modal follows WAI-ARIA dialog pattern:
     },
   },
   tags: ['autodocs'],
-  argTypes: { 
-      control: 'boolean' 
+  argTypes: {
+      control: 'boolean'
       description: 'Whether the modal is open',
       table: summary: 'boolean' ,
         category: 'State',,

@@ -9,13 +9,6 @@ if (typeof global.window === "undefined") {
   });
 }
 
-if (typeof global.document === "undefined") {
-  Object.defineProperty(global, "document", {
-    value: globalThis.document,
-    writable: true,
-  });
-}
-
 // Clean up after each test
 afterEach(() => {
   cleanup();
@@ -36,16 +29,26 @@ if (typeof Element !== "undefined") {
   });
 }
 
-// Mock IntersectionObserver
-global.IntersectionObserver = vi.fn().mockImplementation(() => ({
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-  disconnect: vi.fn(),
-  takeRecords: vi.fn(),
-  root: null,
-  rootMargin: "",
-  thresholds: [],
-}));
+// Mock IntersectionObserver with callback support
+global.IntersectionObserver = vi.fn().mockImplementation((callback) => {
+  const instance = {
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
+    takeRecords: vi.fn(),
+    root: null,
+    rootMargin: "",
+    thresholds: [],
+    callback,
+    // Method to trigger intersection events in tests
+    triggerIntersection: (entries) => {
+      if (callback && typeof callback === "function") {
+        callback(entries, instance);
+      }
+    },
+  };
+  return instance;
+});
 
 // Mock ResizeObserver
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -159,6 +162,14 @@ if (
 beforeEach(() => {
   // Reset all mocks before each test
   vi.clearAllMocks();
+});
+
+// Cleanup function for proper test teardown
+afterEach(() => {
+  cleanup();
+  // Reset all mocks and clear timers
+  vi.clearAllMocks();
+  vi.clearAllTimers();
 });
 
 export {};

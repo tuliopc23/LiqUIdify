@@ -27,7 +27,7 @@ const CONFIG = {
 
 // Helper functions
 function formatBytes(bytes) {
-  const sizes = ["B", "KB", "MB", "GB"];
+  const sizes = ["B", "KB", "MB", "GB", "TB", "PB"];
   if (bytes === 0) return "0 B";
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`;
@@ -76,7 +76,12 @@ async function analyzeBundle(filePath) {
     gzipSize,
     sizeFormatted: formatBytes(size),
     gzipSizeFormatted: formatBytes(gzipSize),
-    compressionRatio: size > 0 ? ((1 - gzipSize / size) * 100).toFixed(1) : 0,
+    compressionRatio:
+      size > 0 && gzipSize <= size
+        ? ((1 - gzipSize / size) * 100).toFixed(1)
+        : size > 0
+          ? "N/A"
+          : 0,
   };
 
   // Check if file has a size limit
@@ -156,15 +161,28 @@ function generateSummary(analyses) {
     CONFIG.criticalFiles.includes(v.path),
   );
 
+  // Filter out files with invalid compression ratios for average calculation
+  const validCompressionRatios = analyses
+    .map((a) => a.compressionRatio)
+    .filter(
+      (ratio) => ratio !== "N/A" && ratio !== 0 && !isNaN(parseFloat(ratio)),
+    )
+    .map((ratio) => parseFloat(ratio));
+
+  const averageCompressionRatio =
+    validCompressionRatios.length > 0
+      ? (
+          validCompressionRatios.reduce((sum, ratio) => sum + ratio, 0) /
+          validCompressionRatios.length
+        ).toFixed(1)
+      : "0";
+
   return {
     totalSize,
     totalGzipSize,
     totalSizeFormatted: formatBytes(totalSize),
     totalGzipSizeFormatted: formatBytes(totalGzipSize),
-    averageCompressionRatio: (
-      analyses.reduce((sum, a) => sum + parseFloat(a.compressionRatio), 0) /
-      analyses.length
-    ).toFixed(1),
+    averageCompressionRatio,
     violations: violations.length,
     criticalViolations: criticalViolations.length,
     largestBundle: analyses[0],
@@ -177,7 +195,7 @@ function generateReport(data) {
 
   let report = `# Bundle Analysis Report
 
-Generated: ${new Date().toLocaleString()}
+Generated: ${new Date().toISOString()}
 
 ## Summary
 
@@ -358,9 +376,12 @@ async function generateVisualization(data) {
     const width = document.getElementById('treemap').clientWidth;
     const height = 600;
 
+    // Extract actual parent names from the treemap data
+    const actualParentNames = [...new Set(data.children.map(child => child.name))];
+    
     const color = d3.scaleOrdinal()
-      .domain(['bundles', 'components', 'core', 'styles', 'root'])
-      .range(['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6']);
+      .domain(actualParentNames)
+      .range(['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#84cc16']);
 
     const treemap = d3.treemap()
       .size([width, height])
@@ -410,7 +431,7 @@ async function generateVisualization(data) {
       .attr('fill', 'white');
 
     function formatBytes(bytes) {
-      const sizes = ['B', 'KB', 'MB'];
+      const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
       if (bytes === 0) return '0 B';
       const i = Math.floor(Math.log(bytes) / Math.log(1024));
       return (bytes / Math.pow(1024, i)).toFixed(2) + ' ' + sizes[i];

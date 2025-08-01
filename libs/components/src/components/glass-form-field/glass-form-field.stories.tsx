@@ -16,12 +16,18 @@ import { GlassSelect } from '../glass-select/glass-select';
 import { GlassTextarea } from '../glass-textarea/glass-textarea';
 import { GlassFormField } from './glass-form-field';
 
-const meta = { title: 'Components/Forms/GlassFormField' }
-  GlassFormField,
+const meta = {
+  title: 'Components/Forms/GlassFormField',
+  component: GlassFormField,
   parameters: { layout: 'centered' },
-    { 
-        ` }
-A comprehensive form field wrapper component with advanced glassmorphism effects, comprehensive validation states, and accessibility features.
+  tags: ['autodocs'],
+};
+
+export default meta;
+
+type Story = StoryObj<typeof GlassFormField>;
+
+// A comprehensive form field wrapper component with advanced glassmorphism effects, comprehensive validation states, and accessibility features.
 
 ## Features
 
@@ -548,7 +554,7 @@ export const InteractiveDemo: Story = { render: () => { }
               <label htmlFor="state-dvqv2f" className="mb-2 block font-medium text-sm text-white/90">
                 State
               </label>
-              <select id="select-1-s6d1zt" 
+              <select id="select-1-s6d1zt"
                 value={fieldState}
                 onChange={(e) =>
                   setFieldState(
@@ -572,7 +578,7 @@ export const InteractiveDemo: Story = { render: () => { }
               <label htmlFor="variant-yqlnr8" className="mb-2 block font-medium text-sm text-white/90">
                 Variant
               </label>
-              <select id="select-2-g1he0o" 
+              <select id="select-2-g1he0o"
                 value={variant}
                 onChange={(e) =>
                   setVariant(e.target.value as 'default' | 'card' | 'inline')
@@ -589,7 +595,7 @@ export const InteractiveDemo: Story = { render: () => { }
               <label htmlFor="size-gc5vu1" className="mb-2 block font-medium text-sm text-white/90">
                 Size
               </label>
-              <select id="select-3-e4wrh6" 
+              <select id="select-3-e4wrh6"
                 value={size}
                 onChange={(e) => setSize(e.target.value as 'sm' | 'md' | 'lg')}
                 className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm text-white backdrop-blur-sm"
@@ -602,7 +608,7 @@ export const InteractiveDemo: Story = { render: () => { }
 
             <div className="space-y-2">
               <label htmlFor="form-field" className="flex items-center gap-2">
-                <input id="input-636" 
+                <input id="input-636"
                   type="checkbox"
                   checked={isRequired}
                   onChange={(e) => setIsRequired(e.target.checked)} />
@@ -610,7 +616,7 @@ export const InteractiveDemo: Story = { render: () => { }
               </label>
 
               <label htmlFor="form-field" className="flex items-center gap-2">
-                <input id="input-644" 
+                <input id="input-644"
                   type="checkbox"
                   checked={isDisabled}
                   onChange={(e) => setIsDisabled(e.target.checked)} />

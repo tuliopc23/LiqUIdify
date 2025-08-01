@@ -181,4 +181,24 @@ describe("GlassButton", () => {
     expect(screen.getByText("Saving...")).toBeInTheDocument();
     expect(screen.queryByText("Save")).not.toBeInTheDocument();
   });
+
+  it("has type='button' by default for all sizes", () => {
+    const { rerender } = render(<GlassButton size="sm">Small</GlassButton>);
+    let button = screen.getByRole("button");
+    expect(button).toHaveAttribute("type", "button");
+
+    rerender(<GlassButton size="md">Medium</GlassButton>);
+    button = screen.getByRole("button");
+    expect(button).toHaveAttribute("type", "button");
+
+    rerender(<GlassButton size="lg">Large</GlassButton>);
+    button = screen.getByRole("button");
+    expect(button).toHaveAttribute("type", "button");
+  });
+
+  it("can override button type", () => {
+    render(<GlassButton type="submit">Submit</GlassButton>);
+    const button = screen.getByRole("button");
+    expect(button).toHaveAttribute("type", "submit");
+  });
 });
