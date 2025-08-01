@@ -539,7 +539,14 @@ const CardActions = forwardRef<
 CardActions.displayName = "CardActions";
 
 // Create compound component with all sub-components
-const CompoundCard = Object.assign(GlassCard, {
+const CompoundCard: typeof GlassCard & {
+  Header: typeof CardHeader;
+  Title: typeof CardTitle;
+  Description: typeof CardDescription;
+  Content: typeof CardContent;
+  Footer: typeof CardFooter;
+  Actions: typeof CardActions;
+} = Object.assign(GlassCard, {
   Header: CardHeader,
   Title: CardTitle,
   Description: CardDescription,

@@ -337,8 +337,6 @@ export const GlassButton = React.memo(
           disabled={disabled || loading}
           className={componentClasses}
           onClick={handleClick}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
           onFocus={handleFocus}
           onBlur={handleBlur}
           {...props}
