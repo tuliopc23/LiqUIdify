@@ -1,8 +1,42 @@
 // Test setup file for LiqUIdify components
 import { vi, beforeEach } from "vitest";
+import { JSDOM } from "jsdom";
+
+const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', {
+  url: 'http://localhost',
+  pretendToBeVisual: true,
+  resources: 'usable'
+});
+
+global.window = dom.window as any;
+global.document = dom.window.document;
+global.navigator = dom.window.navigator;
+global.HTMLElement = dom.window.HTMLElement;
+global.HTMLButtonElement = dom.window.HTMLButtonElement;
+global.Element = dom.window.Element;
+global.Node = dom.window.Node;
+
+global.Element.prototype.animate = vi.fn().mockReturnValue({
+  finished: Promise.resolve(),
+  cancel: vi.fn(),
+  finish: vi.fn(),
+  pause: vi.fn(),
+  play: vi.fn(),
+  reverse: vi.fn(),
+  updatePlaybackRate: vi.fn(),
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
+  dispatchEvent: vi.fn(),
+});
+
+// Ensure document is available for React Testing Library
+Object.defineProperty(global, 'document', {
+  value: dom.window.document,
+  writable: true
+});
 
 // Mock IntersectionObserver
-global.IntersectionObserver = vi.fn().mockImplementation((callback) => ({
+global.IntersectionObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -20,7 +54,7 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 }));
 
 // Mock matchMedia
-Object.defineProperty(window, "matchMedia", {
+Object.defineProperty(global.window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
     matches: false,
@@ -112,8 +146,8 @@ const customMatchers = {
 };
 
 // Extend the global expect if available
-if (typeof expect !== "undefined" && expect.extend) {
-  expect.extend(customMatchers);
+if (typeof globalThis !== "undefined" && globalThis.expect && globalThis.expect.extend) {
+  globalThis.expect.extend(customMatchers);
 }
 
 // Setup React Testing Library
