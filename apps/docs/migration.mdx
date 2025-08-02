@@ -664,6 +664,480 @@ function App() {
 - [ ] **Update documentation**
 - [ ] **Train team members** on changes
 
+## Storybook Migration
+
+### Storybook Configuration Updates
+
+LiqUIdify 2.0 requires updates to your Storybook configuration for proper CSS loading and component documentation.
+
+#### Update .storybook/main.js
+
+**Before (v1.x):**
+```js
+module.exports = {
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-docs'
+  ],
+  framework: '@storybook/react'
+}
+```
+
+**After (v2.x):**
+```js
+module.exports = {
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y'
+  ],
+  framework: {
+    name: '@storybook/react-vite',
+    options: {}
+  },
+  features: {
+    buildStoriesJson: true
+  }
+}
+```
+
+#### Update .storybook/preview.js
+
+**Before (v1.x):**
+```js
+import { LiquidifyProvider } from '@liquidify/components'
+import '@liquidify/components/styles'
+
+export const decorators = [
+  (Story) => (
+    <LiquidifyProvider>
+      <Story />
+    </LiquidifyProvider>
+  ),
+]
+```
+
+**After (v2.x):**
+```js
+import { UnifiedGlassProvider } from '@liquidify/components'
+import '@liquidify/components/css'
+
+export const decorators = [
+  (Story) => (
+    <UnifiedGlassProvider defaultTheme="system">
+      <div style={{ padding: '1rem', minHeight: '100vh' }}>
+        <Story />
+      </div>
+    </UnifiedGlassProvider>
+  ),
+]
+
+export const parameters = {
+  backgrounds: {
+    default: 'glass',
+    values: [
+      { name: 'glass', value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
+      { name: 'dark', value: '#1a1a1a' },
+      { name: 'light', value: '#ffffff' }
+    ]
+  },
+  docs: {
+    theme: {
+      base: 'dark',
+      brandTitle: 'LiqUIdify Components',
+      brandUrl: 'https://liquidify.dev'
+    }
+  }
+}
+```
+
+### Component Stories Migration
+
+Update your component stories to use the new component names and props:
+
+**Before (v1.x):**
+```tsx
+// Button.stories.tsx
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '@liquidify/components'
+
+const meta: Meta<typeof Button> = {
+  title: 'Components/Button',
+  component: Button,
+  parameters: {
+    layout: 'centered'
+  }
+}
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Primary: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Button'
+  }
+}
+```
+
+**After (v2.x):**
+```tsx
+// GlassButton.stories.tsx
+import type { Meta, StoryObj } from '@storybook/react'
+import { GlassButton } from '@liquidify/components'
+
+const meta: Meta<typeof GlassButton> = {
+  title: 'Components/GlassButton',
+  component: GlassButton,
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: 'A glassmorphic button component with enhanced accessibility and animations.'
+      }
+    }
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'ghost', 'outline']
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'xl']
+    }
+  }
+}
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Primary: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Glass Button'
+  }
+}
+
+export const AllVariants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <GlassButton variant="primary">Primary</GlassButton>
+      <GlassButton variant="secondary">Secondary</GlassButton>
+      <GlassButton variant="ghost">Ghost</GlassButton>
+      <GlassButton variant="outline">Outline</GlassButton>
+    </div>
+  )
+}
+```
+
+### CSS-in-JS Migration for Storybook
+
+If you're using custom CSS-in-JS in your stories:
+
+**Before (v1.x):**
+```tsx
+const StoryWrapper = styled.div`
+  background: var(--lq-glass-bg);
+  backdrop-filter: var(--lq-glass-blur);
+  padding: 2rem;
+  border-radius: var(--lq-border-radius);
+`
+```
+
+**After (v2.x):**
+```tsx
+const StoryWrapper = styled.div`
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-blur);
+  padding: 2rem;
+  border-radius: var(--glass-radius);
+  border: 1px solid var(--glass-border);
+`
+```
+
+### Storybook Addon Configuration
+
+#### Accessibility Testing Integration
+
+**New in v2.x - Add to .storybook/main.js:**
+```js
+module.exports = {
+  addons: [
+    '@storybook/addon-essentials',
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y', // New accessibility addon
+    '@storybook/addon-viewport',
+    '@storybook/addon-backgrounds'
+  ]
+}
+```
+
+#### Theme Switching in Storybook
+
+**Add to .storybook/preview.js:**
+```js
+import { themes } from '@storybook/theming'
+
+export const parameters = {
+  darkMode: {
+    dark: { ...themes.dark, appBg: 'black' },
+    light: { ...themes.normal, appBg: 'white' },
+    stylePreview: true
+  },
+  backgrounds: {
+    values: [
+      { name: 'glass-light', value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
+      { name: 'glass-dark', value: 'linear-gradient(135deg, #232526 0%, #414345 100%)' },
+      { name: 'gradient-1', value: 'linear-gradient(45deg, #ff6b6b, #4ecdc4)' },
+      { name: 'gradient-2', value: 'linear-gradient(45deg, #a8edea, #fed6e3)' }
+    ]
+  }
+}
+```
+
+### Component Story Templates
+
+#### Glass Card Stories Migration
+
+**Before (v1.x):**
+```tsx
+export const CardVariants: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+      <Card elevation="low">
+        <Card.Header>
+          <Card.Title>Low Elevation</Card.Title>
+        </Card.Header>
+        <Card.Body>Content here</Card.Body>
+      </Card>
+      <Card elevation="high">
+        <Card.Header>
+          <Card.Title>High Elevation</Card.Title>
+        </Card.Header>
+        <Card.Body>Content here</Card.Body>
+      </Card>
+    </div>
+  )
+}
+```
+
+**After (v2.x):**
+```tsx
+export const GlassCardVariants: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+      <GlassCard variant="subtle">
+        <GlassCard.Header>
+          <GlassCard.Title>Subtle Glass</GlassCard.Title>
+        </GlassCard.Header>
+        <GlassCard.Content>
+          Perfect for background elements
+        </GlassCard.Content>
+      </GlassCard>
+      <GlassCard variant="elevated">
+        <GlassCard.Header>
+          <GlassCard.Title>Elevated Glass</GlassCard.Title>
+        </GlassCard.Header>
+        <GlassCard.Content>
+          Great for modal content
+        </GlassCard.Content>
+      </GlassCard>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Different glass card variants showing various opacity and blur levels.'
+      }
+    }
+  }
+}
+```
+
+#### Form Components Stories
+
+**New v2.x Pattern:**
+```tsx
+// GlassForm.stories.tsx
+export const CompleteForm: Story = {
+  render: () => (
+    <GlassCard style={{ maxWidth: '400px' }}>
+      <GlassCard.Header>
+        <GlassCard.Title>Contact Form</GlassCard.Title>
+      </GlassCard.Header>
+      <GlassCard.Content>
+        <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <GlassFormField label="Name" required>
+            <GlassInput placeholder="Enter your name" />
+          </GlassFormField>
+          
+          <GlassFormField label="Email" required>
+            <GlassInput type="email" placeholder="Enter your email" />
+          </GlassFormField>
+          
+          <GlassFormField label="Message">
+            <GlassTextarea placeholder="Your message..." rows={4} />
+          </GlassFormField>
+          
+          <GlassButton variant="primary" type="submit">
+            Send Message
+          </GlassButton>
+        </form>
+      </GlassCard.Content>
+    </GlassCard>
+  )
+}
+```
+
+### CSS Custom Properties Migration
+
+#### Storybook Global Styles
+
+**Create .storybook/glass-theme.css:**
+```css
+/* v2.x Glass Theme Variables */
+:root {
+  /* Glass Effects */
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-background-hover: rgba(255, 255, 255, 0.15);
+  --glass-background-active: rgba(255, 255, 255, 0.2);
+  
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-border-hover: rgba(255, 255, 255, 0.3);
+  
+  --glass-blur: blur(16px);
+  --glass-blur-strong: blur(24px);
+  
+  /* Shadows */
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+  
+  /* Animation */
+  --glass-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --glass-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --glass-background: rgba(0, 0, 0, 0.2);
+  --glass-background-hover: rgba(0, 0, 0, 0.3);
+  --glass-background-active: rgba(0, 0, 0, 0.4);
+  
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-hover: rgba(255, 255, 255, 0.2);
+}
+
+/* Storybook specific styles */
+.sb-show-main {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.docs-story {
+  background: transparent !important;
+}
+```
+
+**Import in .storybook/preview.js:**
+```js
+import './glass-theme.css'
+```
+
+### Interactive Story Examples
+
+#### Animation Showcase
+
+```tsx
+export const AnimationShowcase: Story = {
+  render: () => {
+    const [isHovered, setIsHovered] = useState(false)
+    
+    return (
+      <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+        <GlassButton
+          variant="primary"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          style={{
+            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            transition: 'var(--glass-transition)'
+          }}
+        >
+          Hover Animation
+        </GlassButton>
+        
+        <GlassCard 
+          interactive
+          style={{
+            transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
+            transition: 'var(--glass-transition)'
+          }}
+        >
+          <GlassCard.Content>
+            Interactive Card
+          </GlassCard.Content>
+        </GlassCard>
+      </div>
+    )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates the new animation system with GPU acceleration.'
+      }
+    }
+  }
+}
+```
+
+### Storybook Build Configuration
+
+#### Vite Configuration for Storybook
+
+**Create .storybook/vite.config.js:**
+```js
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@liquidify/components/scss/variables";`
+      }
+    }
+  },
+  optimizeDeps: {
+    include: ['@liquidify/components']
+  }
+})
+```
+
+#### Webpack Configuration (if not using Vite)
+
+**Update .storybook/main.js:**
+```js
+module.exports = {
+  webpackFinal: async (config) => {
+    config.module.rules.push({
+      test: /\.scss$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        {
+          loader: 'sass-loader',
+          options: {
+            additionalData: `@import "@liquidify/components/scss/variables";`
+          }
+        }
+      ]
+    })
+    
+    return config
+  }
+}
+```
+
 ## Migration Support
 
 ### Community Support
