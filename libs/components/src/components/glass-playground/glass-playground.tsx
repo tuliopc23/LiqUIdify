@@ -11,7 +11,7 @@
 import { Check, Code, Copy, Download, Eye, Maximize2 } from "lucide-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { cn } from "../../core/utils/classname";
-import { useSSRSafeWindow } from "@/hooks/use-ssr-safe";
+import { useSSRSafeWindow } from "../../hooks/use-ssr-safe";
 
 // Import specific components instead of wildcard
 
@@ -91,9 +91,11 @@ const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
     </p>
   </div>
 );
-const LiveError = ({ className, ...props }: Record<string, unknown>) => null; // In production, we don't render the error component
+const LiveError = ({ className }: { className?: string }) => {
+  return <div className={className} style={{ display: 'none' }} />;
+};
 
-interface PlaygroundProps {
+export interface PlaygroundProps {
   code: string;
   scope?: Record<string, unknown>;
   title?: string;
@@ -117,7 +119,6 @@ export function GlassPlayground({
   editable = true,
   className,
   height = 400,
-  theme = "light",
   autoRun = true,
 }: PlaygroundProps) {
   const [code, setCode] = useState(initialCode);
@@ -125,7 +126,7 @@ export function GlassPlayground({
   const [fullscreen, setFullscreen] = useState(false);
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
 
-  const window = useSSRSafeWindow((w) => w, undefined);
+  const window = useSSRSafeWindow((w: Window) => w, undefined);
   const playgroundScope = useMemo(
     () => ({
       GlassButton,
@@ -256,7 +257,6 @@ export function GlassPlayground({
         <LiveProvider
           code={code}
           scope={playgroundScope}
-          // @ts-ignore
           theme={editorTheme}
           noInline={!autoRun}
         >
@@ -291,7 +291,7 @@ export function GlassPlayground({
                 },
               ]}
               defaultTab={activeTab}
-              onTabChange={(tabId) => setActiveTab(tabId as any)}
+              onTabChange={(tabId: string) => setActiveTab(tabId as "preview" | "code")}
               className="h-full"
               tabListClassName="px-4 pt-2"
               tabPanelClassName="h-full"
@@ -332,7 +332,7 @@ export function GlassPlayground({
 {
   /* Playground Editor Component  */
 }
-interface PlaygroundEditorProps {
+export interface PlaygroundEditorProps {
   editable?: boolean;
   onChange?: (code: string) => void;
   className?: string;
@@ -373,7 +373,7 @@ function PlaygroundPreview() {
   return (
     <div className="playground-preview flex h-full items-center justify-center">
       <LivePreview
-        Component={({ children, ...props }: Record<string, unknown>) => (
+        Component={({ children, ...props }: { children?: React.ReactNode; [key: string]: any }) => (
           <div className="mx-auto w-full max-w-2xl" {...props}>
             {children}
           </div>
@@ -381,20 +381,6 @@ function PlaygroundPreview() {
       />
     </div>
   );
-}
-
-interface PlaygroundProps {
-  code: string;
-  scope?: Record<string, unknown>;
-  title?: string;
-  description?: string;
-  showEditor?: boolean;
-  showPreview?: boolean;
-  editable?: boolean;
-  className?: string;
-  height?: string | number;
-  theme?: "light" | "dark";
-  autoRun?: boolean;
 }
 
 // Playground Error Component
