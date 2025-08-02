@@ -174,7 +174,6 @@
       "destination": "/new-path"
     }
   ],
-  "openapi": "https://api.liquidify.dev/openapi.json",
   "integrations": {
     "intercom": "YOUR_INTERCOM_APP_ID"
   },
