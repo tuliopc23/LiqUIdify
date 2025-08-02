@@ -12,11 +12,11 @@ The `GlassButton` component brings the elegance of glassmorphism to interactive 
 <CodeGroup>
 
 ```tsx Component Import
-import { GlassButton } from '@liquidify/components'
+import { GlassButton } from "@liquidify/components";
 ```
 
-```tsx Bundle Import  
-import { GlassButton } from '@liquidify/components/core'
+```tsx Bundle Import
+import { GlassButton } from "@liquidify/components/core";
 ```
 
 </CodeGroup>
@@ -26,9 +26,7 @@ import { GlassButton } from '@liquidify/components/core'
 <CodeGroup>
 
 ```tsx Simple Button
-<GlassButton onClick={handleClick}>
-  Click Me
-</GlassButton>
+<GlassButton onClick={handleClick}>Click Me</GlassButton>
 ```
 
 ```tsx With Variants
@@ -60,6 +58,7 @@ import { GlassButton } from '@liquidify/components/core'
 LiqUIdify buttons come with multiple variants for different use cases:
 
 ### Primary
+
 For main actions and CTAs:
 
 <ComponentPreview>
@@ -73,12 +72,11 @@ For main actions and CTAs:
 ```
 
 ### Secondary
+
 For secondary actions:
 
 <ComponentPreview>
-  <GlassButton variant="secondary">
-    Learn More
-  </GlassButton>
+  <GlassButton variant="secondary">Learn More</GlassButton>
 </ComponentPreview>
 
 ```tsx
@@ -86,12 +84,11 @@ For secondary actions:
 ```
 
 ### Ghost
+
 For subtle actions:
 
 <ComponentPreview>
-  <GlassButton variant="ghost">
-    Skip
-  </GlassButton>
+  <GlassButton variant="ghost">Skip</GlassButton>
 </ComponentPreview>
 
 ```tsx
@@ -99,12 +96,11 @@ For subtle actions:
 ```
 
 ### Destructive
+
 For dangerous actions:
 
 <ComponentPreview>
-  <GlassButton variant="destructive">
-    Delete Account
-  </GlassButton>
+  <GlassButton variant="destructive">Delete Account</GlassButton>
 </ComponentPreview>
 
 ```tsx
@@ -117,11 +113,21 @@ For dangerous actions:
 
 <ComponentPreview>
   <div className="flex flex-wrap items-center gap-4">
-    <GlassButton variant="primary" size="xs">Extra Small</GlassButton>
-    <GlassButton variant="primary" size="sm">Small</GlassButton>
-    <GlassButton variant="primary" size="md">Medium</GlassButton>
-    <GlassButton variant="primary" size="lg">Large</GlassButton>
-    <GlassButton variant="primary" size="xl">Extra Large</GlassButton>
+    <GlassButton variant="primary" size="xs">
+      Extra Small
+    </GlassButton>
+    <GlassButton variant="primary" size="sm">
+      Small
+    </GlassButton>
+    <GlassButton variant="primary" size="md">
+      Medium
+    </GlassButton>
+    <GlassButton variant="primary" size="lg">
+      Large
+    </GlassButton>
+    <GlassButton variant="primary" size="xl">
+      Extra Large
+    </GlassButton>
   </div>
 </ComponentPreview>
 
@@ -150,29 +156,23 @@ For dangerous actions:
 ### Left Icon
 
 <ComponentPreview>
-  <GlassButton 
-    variant="primary"
-    leftIcon={<Download className="h-4 w-4" />}
-  >
+  <GlassButton variant="primary" leftIcon={<Download className="h-4 w-4" />}>
     Download
   </GlassButton>
 </ComponentPreview>
 
 ```tsx
-import { Download } from 'lucide-react'
+import { Download } from "lucide-react";
 
-<GlassButton 
-  variant="primary"
-  leftIcon={<Download className="h-4 w-4" />}
->
+<GlassButton variant="primary" leftIcon={<Download className="h-4 w-4" />}>
   Download
-</GlassButton>
+</GlassButton>;
 ```
 
 ### Right Icon
 
 <ComponentPreview>
-  <GlassButton 
+  <GlassButton
     variant="secondary"
     rightIcon={<ArrowRight className="h-4 w-4" />}
   >
@@ -181,39 +181,24 @@ import { Download } from 'lucide-react'
 </ComponentPreview>
 
 ```tsx
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight } from "lucide-react";
 
-<GlassButton 
-  variant="secondary"
-  rightIcon={<ArrowRight className="h-4 w-4" />}
->
+<GlassButton variant="secondary" rightIcon={<ArrowRight className="h-4 w-4" />}>
   Continue
-</GlassButton>
+</GlassButton>;
 ```
 
 ### Icon Only
 
 <ComponentPreview>
   <div className="flex gap-2">
-    <GlassButton 
-      variant="ghost" 
-      size="sm"
-      aria-label="Settings"
-    >
+    <GlassButton variant="ghost" size="sm" aria-label="Settings">
       <Settings className="h-4 w-4" />
     </GlassButton>
-    <GlassButton 
-      variant="primary" 
-      size="md"
-      aria-label="Search"
-    >
+    <GlassButton variant="primary" size="md" aria-label="Search">
       <Search className="h-5 w-5" />
     </GlassButton>
-    <GlassButton 
-      variant="destructive" 
-      size="lg"
-      aria-label="Delete"
-    >
+    <GlassButton variant="destructive" size="lg" aria-label="Delete">
       <Trash2 className="h-6 w-6" />
     </GlassButton>
   </div>
@@ -234,11 +219,7 @@ import { ArrowRight } from 'lucide-react'
     <GlassButton loading variant="primary">
       Saving...
     </GlassButton>
-    <GlassButton 
-      loading 
-      loadingText="Processing..." 
-      variant="secondary"
-    >
+    <GlassButton loading loadingText="Processing..." variant="secondary">
       Submit
     </GlassButton>
   </div>
@@ -247,8 +228,8 @@ import { ArrowRight } from 'lucide-react'
 ```tsx
 <GlassButton loading>Saving...</GlassButton>
 
-<GlassButton 
-  loading 
+<GlassButton
+  loading
   loadingText="Processing..."
 >
   Submit
@@ -280,8 +261,8 @@ import { ArrowRight } from 'lucide-react'
 ### Magnetic Hover Effect
 
 <ComponentPreview>
-  <GlassButton 
-    variant="primary" 
+  <GlassButton
+    variant="primary"
     magneticHover
     className="transition-transform duration-300"
   >
@@ -290,48 +271,41 @@ import { ArrowRight } from 'lucide-react'
 </ComponentPreview>
 
 ```tsx
-<GlassButton magneticHover>
-  Magnetic Button
-</GlassButton>
+<GlassButton magneticHover>Magnetic Button</GlassButton>
 ```
 
 ### Ripple Effect
 
 <ComponentPreview>
-  <GlassButton 
-    variant="secondary" 
-    rippleEffect
-  >
+  <GlassButton variant="secondary" rippleEffect>
     Ripple Button
   </GlassButton>
 </ComponentPreview>
 
 ```tsx
-<GlassButton rippleEffect>
-  Ripple Button
-</GlassButton>
+<GlassButton rippleEffect>Ripple Button</GlassButton>
 ```
 
 ### Custom Glass Effects
 
 <ComponentPreview>
   <div className="flex gap-4">
-    <GlassButton 
+    <GlassButton
       variant="primary"
       glassEffect={{
-        intensity: 'light',
+        intensity: "light",
         blur: true,
-        backdrop: true
+        backdrop: true,
       }}
     >
       Light Glass
     </GlassButton>
-    <GlassButton 
+    <GlassButton
       variant="primary"
       glassEffect={{
-        intensity: 'strong',
+        intensity: "strong",
         blur: true,
-        backdrop: true
+        backdrop: true,
       }}
     >
       Strong Glass
@@ -340,11 +314,11 @@ import { ArrowRight } from 'lucide-react'
 </ComponentPreview>
 
 ```tsx
-<GlassButton 
+<GlassButton
   glassEffect={{
-    intensity: 'light',
+    intensity: "light",
     blur: true,
-    backdrop: true
+    backdrop: true,
   }}
 >
   Custom Glass Effect
@@ -372,10 +346,18 @@ import { ArrowRight } from 'lucide-react'
 
 ```tsx
 <div className="flex rounded-lg border border-white/20 backdrop-blur-md bg-white/5 p-1">
-  <GlassButton variant="ghost" size="sm">Day</GlassButton>
-  <GlassButton variant="primary" size="sm">Week</GlassButton>
-  <GlassButton variant="ghost" size="sm">Month</GlassButton>
-  <GlassButton variant="ghost" size="sm">Year</GlassButton>
+  <GlassButton variant="ghost" size="sm">
+    Day
+  </GlassButton>
+  <GlassButton variant="primary" size="sm">
+    Week
+  </GlassButton>
+  <GlassButton variant="ghost" size="sm">
+    Month
+  </GlassButton>
+  <GlassButton variant="ghost" size="sm">
+    Year
+  </GlassButton>
 </div>
 ```
 
@@ -385,15 +367,15 @@ import { ArrowRight } from 'lucide-react'
 
 <ComponentPreview>
   <div className="flex flex-col sm:flex-row gap-4 max-w-md">
-    <GlassButton 
-      variant="primary" 
+    <GlassButton
+      variant="primary"
       leftIcon={<Plus className="h-4 w-4" />}
       fullWidth
     >
       Create New
     </GlassButton>
-    <GlassButton 
-      variant="ghost" 
+    <GlassButton
+      variant="ghost"
       leftIcon={<Upload className="h-4 w-4" />}
       fullWidth
     >
@@ -406,14 +388,11 @@ import { ArrowRight } from 'lucide-react'
 
 <ComponentPreview>
   <div className="flex justify-between max-w-md">
-    <GlassButton 
-      variant="ghost" 
-      leftIcon={<ChevronLeft className="h-4 w-4" />}
-    >
+    <GlassButton variant="ghost" leftIcon={<ChevronLeft className="h-4 w-4" />}>
       Previous
     </GlassButton>
-    <GlassButton 
-      variant="primary" 
+    <GlassButton
+      variant="primary"
       rightIcon={<ChevronRight className="h-4 w-4" />}
     >
       Next
@@ -425,33 +404,24 @@ import { ArrowRight } from 'lucide-react'
 
 <ComponentPreview>
   <div className="flex gap-4 justify-end max-w-md">
-    <GlassButton variant="ghost">
-      Cancel
-    </GlassButton>
-    <GlassButton variant="primary">
-      Save Changes
-    </GlassButton>
+    <GlassButton variant="ghost">Cancel</GlassButton>
+    <GlassButton variant="primary">Save Changes</GlassButton>
   </div>
 </ComponentPreview>
 
 ## Props
 
 <ResponseField name="variant" type="string" default="default">
-  The visual style of the button
-  - `"default"` - Standard glass effect
-  - `"primary"` - Emphasized primary action
-  - `"secondary"` - Secondary action style
-  - `"ghost"` - Minimal ghost appearance
-  - `"destructive"` - Warning/danger style
+  The visual style of the button - `"default"` - Standard glass effect -
+  `"primary"` - Emphasized primary action - `"secondary"` - Secondary action
+  style - `"ghost"` - Minimal ghost appearance - `"destructive"` -
+  Warning/danger style
 </ResponseField>
 
 <ResponseField name="size" type="string" default="md">
-  The size of the button
-  - `"xs"` - Extra small (24px height)
-  - `"sm"` - Small (32px height)  
-  - `"md"` - Medium (40px height)
-  - `"lg"` - Large (48px height)
-  - `"xl"` - Extra large (56px height)
+  The size of the button - `"xs"` - Extra small (24px height) - `"sm"` - Small
+  (32px height) - `"md"` - Medium (40px height) - `"lg"` - Large (48px height) -
+  `"xl"` - Extra large (56px height)
 </ResponseField>
 
 <ResponseField name="loading" type="boolean" default="false">
@@ -554,11 +524,11 @@ Customize button appearance using CSS variables:
   --glass-button-border: rgba(59, 130, 246, 0.3);
   --glass-button-text: rgb(59, 130, 246);
   --glass-button-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
-  
+
   /* Hover states */
   --glass-button-bg-hover: rgba(59, 130, 246, 0.15);
   --glass-button-border-hover: rgba(59, 130, 246, 0.4);
-  
+
   /* Focus states */
   --glass-button-ring: rgba(59, 130, 246, 0.5);
 }
@@ -567,7 +537,7 @@ Customize button appearance using CSS variables:
 ## Performance Notes
 
 - Button components are highly optimized with `React.memo`
-- Glass effects use GPU acceleration for smooth animations  
+- Glass effects use GPU acceleration for smooth animations
 - Icons should be properly sized (typically 16px for most sizes)
 - Loading states automatically prevent double-submissions
 - Ripple and magnetic effects are rendered efficiently with CSS transforms

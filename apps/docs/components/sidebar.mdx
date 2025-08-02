@@ -11,7 +11,7 @@ The Sidebar component provides a flexible navigation sidebar for your applicatio
 ## Basic Usage
 
 ```tsx
-import { Sidebar, SidebarItem, SidebarGroup } from '@liquidify/react';
+import { Sidebar, SidebarItem, SidebarGroup } from "@liquidify/react";
 
 function BasicSidebar() {
   return (
@@ -35,7 +35,12 @@ function BasicSidebar() {
 Create a sidebar that can be collapsed to save space:
 
 ```tsx
-import { Sidebar, SidebarItem, SidebarHeader, SidebarToggle } from '@liquidify/react';
+import {
+  Sidebar,
+  SidebarItem,
+  SidebarHeader,
+  SidebarToggle,
+} from "@liquidify/react";
 
 function CollapsibleSidebar() {
   const [collapsed, setCollapsed] = useState(false);
@@ -49,7 +54,7 @@ function CollapsibleSidebar() {
         </div>
         <SidebarToggle />
       </SidebarHeader>
-      
+
       <SidebarItem href="/dashboard" icon={<Home />}>
         Dashboard
       </SidebarItem>
@@ -69,7 +74,7 @@ function CollapsibleSidebar() {
 Organize navigation items into logical groups:
 
 ```tsx
-import { Sidebar, SidebarItem, SidebarGroup } from '@liquidify/react';
+import { Sidebar, SidebarItem, SidebarGroup } from "@liquidify/react";
 
 function GroupedSidebar() {
   return (
@@ -82,7 +87,7 @@ function GroupedSidebar() {
           Projects
         </SidebarItem>
       </SidebarGroup>
-      
+
       <SidebarGroup title="Management">
         <SidebarItem href="/users" icon={<Users />}>
           Users
@@ -91,7 +96,7 @@ function GroupedSidebar() {
           Roles
         </SidebarItem>
       </SidebarGroup>
-      
+
       <SidebarGroup title="Settings">
         <SidebarItem href="/preferences" icon={<Settings />}>
           Preferences
@@ -110,7 +115,7 @@ function GroupedSidebar() {
 Create multi-level navigation with expandable sections:
 
 ```tsx
-import { Sidebar, SidebarItem, SidebarSubmenu } from '@liquidify/react';
+import { Sidebar, SidebarItem, SidebarSubmenu } from "@liquidify/react";
 
 function NestedSidebar() {
   return (
@@ -118,38 +123,19 @@ function NestedSidebar() {
       <SidebarItem href="/dashboard" icon={<Home />}>
         Dashboard
       </SidebarItem>
-      
-      <SidebarSubmenu
-        title="Projects"
-        icon={<Folder />}
-        defaultExpanded
-      >
-        <SidebarItem href="/projects/web">
-          Web Projects
-        </SidebarItem>
-        <SidebarItem href="/projects/mobile">
-          Mobile Apps
-        </SidebarItem>
-        <SidebarItem href="/projects/api">
-          API Services
-        </SidebarItem>
+
+      <SidebarSubmenu title="Projects" icon={<Folder />} defaultExpanded>
+        <SidebarItem href="/projects/web">Web Projects</SidebarItem>
+        <SidebarItem href="/projects/mobile">Mobile Apps</SidebarItem>
+        <SidebarItem href="/projects/api">API Services</SidebarItem>
       </SidebarSubmenu>
-      
-      <SidebarSubmenu
-        title="Analytics"
-        icon={<BarChart />}
-      >
-        <SidebarItem href="/analytics/overview">
-          Overview
-        </SidebarItem>
-        <SidebarItem href="/analytics/reports">
-          Reports
-        </SidebarItem>
-        <SidebarItem href="/analytics/insights">
-          Insights
-        </SidebarItem>
+
+      <SidebarSubmenu title="Analytics" icon={<BarChart />}>
+        <SidebarItem href="/analytics/overview">Overview</SidebarItem>
+        <SidebarItem href="/analytics/reports">Reports</SidebarItem>
+        <SidebarItem href="/analytics/insights">Insights</SidebarItem>
       </SidebarSubmenu>
-      
+
       <SidebarItem href="/settings" icon={<Settings />}>
         Settings
       </SidebarItem>
@@ -163,7 +149,7 @@ function NestedSidebar() {
 Add a footer section to the sidebar:
 
 ```tsx
-import { Sidebar, SidebarItem, SidebarFooter } from '@liquidify/react';
+import { Sidebar, SidebarItem, SidebarFooter } from "@liquidify/react";
 
 function SidebarWithFooter() {
   const { user } = useAuth();
@@ -179,7 +165,7 @@ function SidebarWithFooter() {
       <SidebarItem href="/team" icon={<Users />}>
         Team
       </SidebarItem>
-      
+
       <SidebarFooter>
         <div className="flex items-center gap-3 p-3">
           <Avatar src={user.avatar} size="sm" />
@@ -202,7 +188,7 @@ function SidebarWithFooter() {
 The sidebar adapts to mobile screens with overlay behavior:
 
 ```tsx
-import { Sidebar, SidebarItem, useSidebar } from '@liquidify/react';
+import { Sidebar, SidebarItem, useSidebar } from "@liquidify/react";
 
 function ResponsiveSidebar() {
   const { isOpen, setIsOpen } = useSidebar();
@@ -211,16 +197,16 @@ function ResponsiveSidebar() {
     <>
       {/* Mobile overlay */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
-      
+
       <Sidebar
         className={`
           fixed inset-y-0 left-0 z-50 w-64 transform transition-transform
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:static lg:inset-0
         `}
       >
@@ -244,7 +230,7 @@ function ResponsiveSidebar() {
 Customize the sidebar appearance:
 
 ```tsx
-import { Sidebar, SidebarItem } from '@liquidify/react';
+import { Sidebar, SidebarItem } from "@liquidify/react";
 
 function CustomSidebar() {
   return (
@@ -272,7 +258,7 @@ function CustomSidebar() {
 Add badges and status indicators to sidebar items:
 
 ```tsx
-import { Sidebar, SidebarItem, Badge } from '@liquidify/react';
+import { Sidebar, SidebarItem, Badge } from "@liquidify/react";
 
 function SidebarWithBadges() {
   const { notifications, messages } = useNotifications();
@@ -282,29 +268,25 @@ function SidebarWithBadges() {
       <SidebarItem href="/dashboard" icon={<Home />}>
         Dashboard
       </SidebarItem>
-      
-      <SidebarItem 
-        href="/messages" 
+
+      <SidebarItem
+        href="/messages"
         icon={<MessageSquare />}
         badge={messages.unread > 0 ? messages.unread : undefined}
       >
         Messages
       </SidebarItem>
-      
-      <SidebarItem 
-        href="/notifications" 
+
+      <SidebarItem
+        href="/notifications"
         icon={<Bell />}
         badge={notifications.unread > 0 ? notifications.unread : undefined}
         badgeColor="danger"
       >
         Notifications
       </SidebarItem>
-      
-      <SidebarItem 
-        href="/tasks" 
-        icon={<CheckSquare />}
-        indicator="success"
-      >
+
+      <SidebarItem href="/tasks" icon={<CheckSquare />} indicator="success">
         Tasks
       </SidebarItem>
     </Sidebar>
@@ -316,54 +298,54 @@ function SidebarWithBadges() {
 
 ### Sidebar Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `collapsed` | `boolean` | `false` | Collapsed state |
-| `collapsible` | `boolean` | `false` | Enable collapsible behavior |
-| `width` | `string \| number` | `'16rem'` | Sidebar width |
-| `collapsedWidth` | `string \| number` | `'4rem'` | Width when collapsed |
-| `position` | `'fixed' \| 'sticky' \| 'static'` | `'static'` | Positioning |
-| `onCollapsedChange` | `(collapsed: boolean) => void` | - | Collapse state handler |
-| `className` | `string` | - | Additional CSS classes |
-| `itemClassName` | `string` | - | Default item classes |
-| `activeItemClassName` | `string` | - | Active item classes |
-| `children` | `ReactNode` | - | Sidebar content |
+| Prop                  | Type                              | Default    | Description                 |
+| --------------------- | --------------------------------- | ---------- | --------------------------- |
+| `collapsed`           | `boolean`                         | `false`    | Collapsed state             |
+| `collapsible`         | `boolean`                         | `false`    | Enable collapsible behavior |
+| `width`               | `string \| number`                | `'16rem'`  | Sidebar width               |
+| `collapsedWidth`      | `string \| number`                | `'4rem'`   | Width when collapsed        |
+| `position`            | `'fixed' \| 'sticky' \| 'static'` | `'static'` | Positioning                 |
+| `onCollapsedChange`   | `(collapsed: boolean) => void`    | -          | Collapse state handler      |
+| `className`           | `string`                          | -          | Additional CSS classes      |
+| `itemClassName`       | `string`                          | -          | Default item classes        |
+| `activeItemClassName` | `string`                          | -          | Active item classes         |
+| `children`            | `ReactNode`                       | -          | Sidebar content             |
 
 ### SidebarItem Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `href` | `string` | - | Navigation link |
-| `icon` | `ReactNode` | - | Leading icon |
-| `badge` | `string \| number` | - | Badge content |
-| `badgeColor` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger'` | `'primary'` | Badge color |
-| `indicator` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger'` | - | Status indicator |
-| `isActive` | `boolean` | `false` | Active state |
-| `isDisabled` | `boolean` | `false` | Disabled state |
-| `onClick` | `() => void` | - | Click handler |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Item content |
+| Prop         | Type                                                             | Default     | Description            |
+| ------------ | ---------------------------------------------------------------- | ----------- | ---------------------- |
+| `href`       | `string`                                                         | -           | Navigation link        |
+| `icon`       | `ReactNode`                                                      | -           | Leading icon           |
+| `badge`      | `string \| number`                                               | -           | Badge content          |
+| `badgeColor` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger'` | `'primary'` | Badge color            |
+| `indicator`  | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger'` | -           | Status indicator       |
+| `isActive`   | `boolean`                                                        | `false`     | Active state           |
+| `isDisabled` | `boolean`                                                        | `false`     | Disabled state         |
+| `onClick`    | `() => void`                                                     | -           | Click handler          |
+| `className`  | `string`                                                         | -           | Additional CSS classes |
+| `children`   | `ReactNode`                                                      | -           | Item content           |
 
 ### SidebarGroup Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `title` | `string` | - | Group title |
-| `collapsible` | `boolean` | `false` | Enable collapsible group |
-| `defaultExpanded` | `boolean` | `true` | Default expanded state |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Group items |
+| Prop              | Type        | Default | Description              |
+| ----------------- | ----------- | ------- | ------------------------ |
+| `title`           | `string`    | -       | Group title              |
+| `collapsible`     | `boolean`   | `false` | Enable collapsible group |
+| `defaultExpanded` | `boolean`   | `true`  | Default expanded state   |
+| `className`       | `string`    | -       | Additional CSS classes   |
+| `children`        | `ReactNode` | -       | Group items              |
 
 ### SidebarSubmenu Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `title` | `string` | - | Submenu title |
-| `icon` | `ReactNode` | - | Leading icon |
-| `defaultExpanded` | `boolean` | `false` | Default expanded state |
-| `badge` | `string \| number` | - | Badge content |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Submenu items |
+| Prop              | Type               | Default | Description            |
+| ----------------- | ------------------ | ------- | ---------------------- |
+| `title`           | `string`           | -       | Submenu title          |
+| `icon`            | `ReactNode`        | -       | Leading icon           |
+| `defaultExpanded` | `boolean`          | `false` | Default expanded state |
+| `badge`           | `string \| number` | -       | Badge content          |
+| `className`       | `string`           | -       | Additional CSS classes |
+| `children`        | `ReactNode`        | -       | Submenu items          |
 
 ## Styling
 
@@ -410,10 +392,7 @@ The Sidebar component includes accessibility features:
 
 ```tsx
 <Sidebar aria-label="Main navigation">
-  <SidebarItem 
-    href="/dashboard"
-    aria-current={isActive ? 'page' : undefined}
-  >
+  <SidebarItem href="/dashboard" aria-current={isActive ? "page" : undefined}>
     Dashboard
   </SidebarItem>
 </Sidebar>
@@ -435,7 +414,7 @@ function AdminSidebar() {
           <span className="font-bold">Admin Panel</span>
         </div>
       </SidebarHeader>
-      
+
       <SidebarGroup title="Overview">
         <SidebarItem href="/admin/dashboard" icon={<Home />}>
           Dashboard
@@ -444,8 +423,8 @@ function AdminSidebar() {
           Analytics
         </SidebarItem>
       </SidebarGroup>
-      
-      {permissions.includes('manage_users') && (
+
+      {permissions.includes("manage_users") && (
         <SidebarGroup title="User Management">
           <SidebarItem href="/admin/users" icon={<Users />}>
             Users
@@ -455,7 +434,7 @@ function AdminSidebar() {
           </SidebarItem>
         </SidebarGroup>
       )}
-      
+
       <SidebarGroup title="Content">
         <SidebarItem href="/admin/posts" icon={<FileText />}>
           Posts
@@ -464,7 +443,7 @@ function AdminSidebar() {
           Media
         </SidebarItem>
       </SidebarGroup>
-      
+
       <SidebarFooter>
         <UserProfile user={user} />
       </SidebarFooter>

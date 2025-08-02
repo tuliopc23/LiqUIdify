@@ -12,11 +12,11 @@ Beautiful glassmorphism navigation components that provide seamless user experie
 <CodeGroup>
 
 ```tsx Component Import
-import { GlassNavigation } from '@liquidify/components'
+import { GlassNavigation } from "@liquidify/components";
 ```
 
-```tsx Bundle Import  
-import { GlassNavigation } from '@liquidify/components/navigation'
+```tsx Bundle Import
+import { GlassNavigation } from "@liquidify/components/navigation";
 ```
 
 ```tsx Individual Imports
@@ -24,8 +24,8 @@ import {
   GlassNavbar,
   GlassMobileNav,
   GlassNavItem,
-  GlassNavGroup
-} from '@liquidify/components'
+  GlassNavGroup,
+} from "@liquidify/components";
 ```
 
 </CodeGroup>
@@ -61,7 +61,9 @@ import {
       <div className="flex items-center space-x-6">
         <div className="text-lg font-semibold text-white">LiqUIdify</div>
         <nav className="hidden md:flex space-x-4">
-          <GlassNavItem href="/" active>Home</GlassNavItem>
+          <GlassNavItem href="/" active>
+            Home
+          </GlassNavItem>
           <GlassNavItem href="/docs">Docs</GlassNavItem>
           <GlassNavItem href="/components">Components</GlassNavItem>
           <GlassNavItem href="/examples">Examples</GlassNavItem>
@@ -88,7 +90,9 @@ import {
     <div className="flex items-center justify-between w-full">
       <div className="text-lg font-semibold">Brand</div>
       <nav className="flex space-x-4">
-        <GlassNavItem href="/" active>Home</GlassNavItem>
+        <GlassNavItem href="/" active>
+          Home
+        </GlassNavItem>
         <GlassNavItem href="/about">About</GlassNavItem>
         <GlassNavItem href="/contact">Contact</GlassNavItem>
       </nav>
@@ -101,7 +105,9 @@ import {
   <div className="flex items-center justify-between w-full">
     <div className="text-lg font-semibold">Brand</div>
     <nav className="flex space-x-4">
-      <GlassNavItem href="/" active>Home</GlassNavItem>
+      <GlassNavItem href="/" active>
+        Home
+      </GlassNavItem>
       <GlassNavItem href="/about">About</GlassNavItem>
       <GlassNavItem href="/contact">Contact</GlassNavItem>
     </nav>
@@ -116,7 +122,9 @@ import {
     <div className="flex items-center justify-between w-full">
       <div className="text-lg font-semibold">Elevated Brand</div>
       <nav className="flex space-x-4">
-        <GlassNavItem href="/" active>Dashboard</GlassNavItem>
+        <GlassNavItem href="/" active>
+          Dashboard
+        </GlassNavItem>
         <GlassNavItem href="/projects">Projects</GlassNavItem>
         <GlassNavItem href="/team">Team</GlassNavItem>
         <GlassNavItem href="/settings">Settings</GlassNavItem>
@@ -128,7 +136,9 @@ import {
 ```tsx
 <GlassNavbar variant="elevated">
   <nav className="flex space-x-4">
-    <GlassNavItem href="/" active>Dashboard</GlassNavItem>
+    <GlassNavItem href="/" active>
+      Dashboard
+    </GlassNavItem>
     <GlassNavItem href="/projects">Projects</GlassNavItem>
     <GlassNavItem href="/team">Team</GlassNavItem>
   </nav>
@@ -142,9 +152,15 @@ import {
     <div className="flex items-center justify-between w-full">
       <div className="text-lg font-semibold">Minimal</div>
       <nav className="flex space-x-6">
-        <GlassNavItem href="/" active variant="minimal">Portfolio</GlassNavItem>
-        <GlassNavItem href="/work" variant="minimal">Work</GlassNavItem>
-        <GlassNavItem href="/contact" variant="minimal">Contact</GlassNavItem>
+        <GlassNavItem href="/" active variant="minimal">
+          Portfolio
+        </GlassNavItem>
+        <GlassNavItem href="/work" variant="minimal">
+          Work
+        </GlassNavItem>
+        <GlassNavItem href="/contact" variant="minimal">
+          Contact
+        </GlassNavItem>
       </nav>
     </div>
   </GlassNavbar>
@@ -153,9 +169,15 @@ import {
 ```tsx
 <GlassNavbar variant="minimal">
   <nav className="flex space-x-6">
-    <GlassNavItem href="/" active variant="minimal">Portfolio</GlassNavItem>
-    <GlassNavItem href="/work" variant="minimal">Work</GlassNavItem>
-    <GlassNavItem href="/contact" variant="minimal">Contact</GlassNavItem>
+    <GlassNavItem href="/" active variant="minimal">
+      Portfolio
+    </GlassNavItem>
+    <GlassNavItem href="/work" variant="minimal">
+      Work
+    </GlassNavItem>
+    <GlassNavItem href="/contact" variant="minimal">
+      Contact
+    </GlassNavItem>
   </nav>
 </GlassNavbar>
 ```
@@ -167,9 +189,13 @@ import {
 <ComponentPreview>
   <div className="space-y-4 max-w-md">
     <div className="space-y-2">
-      <GlassNavItem href="/" active>Active Link</GlassNavItem>
+      <GlassNavItem href="/" active>
+        Active Link
+      </GlassNavItem>
       <GlassNavItem href="/about">Regular Link</GlassNavItem>
-      <GlassNavItem href="/services" disabled>Disabled Link</GlassNavItem>
+      <GlassNavItem href="/services" disabled>
+        Disabled Link
+      </GlassNavItem>
     </div>
   </div>
 </ComponentPreview>
@@ -187,7 +213,10 @@ import {
     <GlassNavItem href="/" active leftIcon={<Home className="h-4 w-4" />}>
       Home
     </GlassNavItem>
-    <GlassNavItem href="/dashboard" leftIcon={<BarChart3 className="h-4 w-4" />}>
+    <GlassNavItem
+      href="/dashboard"
+      leftIcon={<BarChart3 className="h-4 w-4" />}
+    >
       Dashboard
     </GlassNavItem>
     <GlassNavItem href="/settings" leftIcon={<Settings className="h-4 w-4" />}>
@@ -212,24 +241,36 @@ import {
 
 <ComponentPreview>
   <div className="space-y-2 max-w-md">
-    <GlassNavItem 
-      href="/messages" 
+    <GlassNavItem
+      href="/messages"
       leftIcon={<MessageCircle className="h-4 w-4" />}
-      rightContent={<GlassBadge variant="destructive" size="sm">3</GlassBadge>}
+      rightContent={
+        <GlassBadge variant="destructive" size="sm">
+          3
+        </GlassBadge>
+      }
     >
       Messages
     </GlassNavItem>
-    <GlassNavItem 
-      href="/notifications" 
+    <GlassNavItem
+      href="/notifications"
       leftIcon={<Bell className="h-4 w-4" />}
-      rightContent={<GlassBadge variant="primary" size="sm">12</GlassBadge>}
+      rightContent={
+        <GlassBadge variant="primary" size="sm">
+          12
+        </GlassBadge>
+      }
     >
       Notifications
     </GlassNavItem>
-    <GlassNavItem 
-      href="/tasks" 
+    <GlassNavItem
+      href="/tasks"
       leftIcon={<CheckSquare className="h-4 w-4" />}
-      rightContent={<GlassBadge variant="secondary" size="sm">New</GlassBadge>}
+      rightContent={
+        <GlassBadge variant="secondary" size="sm">
+          New
+        </GlassBadge>
+      }
     >
       Tasks
     </GlassNavItem>
@@ -237,10 +278,14 @@ import {
 </ComponentPreview>
 
 ```tsx
-<GlassNavItem 
-  href="/messages" 
+<GlassNavItem
+  href="/messages"
   leftIcon={<MessageCircle className="h-4 w-4" />}
-  rightContent={<GlassBadge variant="destructive" size="sm">3</GlassBadge>}
+  rightContent={
+    <GlassBadge variant="destructive" size="sm">
+      3
+    </GlassBadge>
+  }
 >
   Messages
 </GlassNavItem>
@@ -251,21 +296,24 @@ import {
 <ComponentPreview>
   <div className="max-w-md space-y-6">
     <GlassNavGroup title="Main Navigation">
-      <GlassNavItem href="/" active>Dashboard</GlassNavItem>
+      <GlassNavItem href="/" active>
+        Dashboard
+      </GlassNavItem>
       <GlassNavItem href="/projects">Projects</GlassNavItem>
       <GlassNavItem href="/team">Team</GlassNavItem>
     </GlassNavGroup>
-    
+
     <GlassNavGroup title="Tools">
       <GlassNavItem href="/analytics">Analytics</GlassNavItem>
       <GlassNavItem href="/reports">Reports</GlassNavItem>
       <GlassNavItem href="/settings">Settings</GlassNavItem>
     </GlassNavGroup>
-    
+
     <GlassNavGroup title="Support">
       <GlassNavItem href="/help">Help Center</GlassNavItem>
       <GlassNavItem href="/contact">Contact</GlassNavItem>
     </GlassNavGroup>
+
   </div>
 </ComponentPreview>
 
@@ -291,30 +339,47 @@ import {
   <div className="max-w-sm">
     <GlassMobileNav>
       <div className="space-y-1 p-4">
-        <GlassNavItem href="/" active fullWidth>Home</GlassNavItem>
-        <GlassNavItem href="/about" fullWidth>About</GlassNavItem>
-        <GlassNavItem href="/services" fullWidth>Services</GlassNavItem>
-        <GlassNavItem href="/portfolio" fullWidth>Portfolio</GlassNavItem>
-        <GlassNavItem href="/contact" fullWidth>Contact</GlassNavItem>
+        <GlassNavItem href="/" active fullWidth>
+          Home
+        </GlassNavItem>
+        <GlassNavItem href="/about" fullWidth>
+          About
+        </GlassNavItem>
+        <GlassNavItem href="/services" fullWidth>
+          Services
+        </GlassNavItem>
+        <GlassNavItem href="/portfolio" fullWidth>
+          Portfolio
+        </GlassNavItem>
+        <GlassNavItem href="/contact" fullWidth>
+          Contact
+        </GlassNavItem>
       </div>
-      
+
       <div className="border-t border-white/20 p-4">
         <GlassButton variant="primary" fullWidth>
           Get Started
         </GlassButton>
       </div>
     </GlassMobileNav>
+
   </div>
 </ComponentPreview>
 
 ```tsx
 <GlassMobileNav>
   <div className="space-y-1 p-4">
-    <GlassNavItem href="/" active fullWidth>Home</GlassNavItem>
-    <GlassNavItem href="/about" fullWidth>About</GlassNavItem>
-    <GlassNavItem href="/services" fullWidth>Services</GlassNavItem>
+    <GlassNavItem href="/" active fullWidth>
+      Home
+    </GlassNavItem>
+    <GlassNavItem href="/about" fullWidth>
+      About
+    </GlassNavItem>
+    <GlassNavItem href="/services" fullWidth>
+      Services
+    </GlassNavItem>
   </div>
-  
+
   <div className="border-t border-white/20 p-4">
     <GlassButton variant="primary" fullWidth>
       Get Started
@@ -336,14 +401,16 @@ import {
           <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mr-3"></div>
           <span className="text-lg font-semibold">LiqUIdify</span>
         </div>
-        
+
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-6">
-          <GlassNavItem href="/" active>Home</GlassNavItem>
+          <GlassNavItem href="/" active>
+            Home
+          </GlassNavItem>
           <GlassNavItem href="/docs">Documentation</GlassNavItem>
           <GlassNavItem href="/components">Components</GlassNavItem>
           <GlassNavItem href="/examples">Examples</GlassNavItem>
-          <GlassDropdown 
+          <GlassDropdown
             trigger={
               <GlassNavItem as="button">
                 Resources <ChevronDown className="ml-1 h-3 w-3" />
@@ -355,7 +422,7 @@ import {
             <GlassNavItem href="/community">Community</GlassNavItem>
           </GlassDropdown>
         </nav>
-        
+
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center space-x-3">
           <GlassButton variant="ghost" size="sm">
@@ -365,7 +432,7 @@ import {
             Get Started
           </GlassButton>
         </div>
-        
+
         {/* Mobile Menu Button */}
         <div className="lg:hidden">
           <GlassButton variant="ghost" size="sm">
@@ -374,6 +441,7 @@ import {
         </div>
       </div>
     </GlassNavbar>
+
   </div>
 </ComponentPreview>
 
@@ -388,9 +456,16 @@ import {
         <div className="flex items-center space-x-8">
           <div className="text-lg font-semibold">Dashboard</div>
           <nav className="hidden md:flex space-x-6">
-            <GlassNavItem href="/dashboard" active>Overview</GlassNavItem>
-            <GlassNavItem href="/analytics" 
-              rightContent={<GlassBadge variant="primary" size="sm">New</GlassBadge>}
+            <GlassNavItem href="/dashboard" active>
+              Overview
+            </GlassNavItem>
+            <GlassNavItem
+              href="/analytics"
+              rightContent={
+                <GlassBadge variant="primary" size="sm">
+                  New
+                </GlassBadge>
+              }
             >
               Analytics
             </GlassNavItem>
@@ -398,7 +473,7 @@ import {
             <GlassNavItem href="/products">Products</GlassNavItem>
           </nav>
         </div>
-        
+
         <div className="flex items-center space-x-3">
           <GlassButton variant="ghost" size="sm">
             <Bell className="h-4 w-4" />
@@ -409,6 +484,7 @@ import {
         </div>
       </div>
     </GlassNavbar>
+
   </div>
 </ComponentPreview>
 
@@ -421,20 +497,27 @@ import {
         <div className="flex items-center space-x-8">
           <div className="text-xl font-bold">Store</div>
           <nav className="hidden lg:flex space-x-6">
-            <GlassNavItem href="/" active>Home</GlassNavItem>
+            <GlassNavItem href="/" active>
+              Home
+            </GlassNavItem>
             <GlassNavItem href="/shop">Shop</GlassNavItem>
             <GlassNavItem href="/categories">Categories</GlassNavItem>
             <GlassNavItem href="/brands">Brands</GlassNavItem>
-            <GlassNavItem href="/sale" 
-              rightContent={<GlassBadge variant="destructive" size="sm">Sale</GlassBadge>}
+            <GlassNavItem
+              href="/sale"
+              rightContent={
+                <GlassBadge variant="destructive" size="sm">
+                  Sale
+                </GlassBadge>
+              }
             >
               Deals
             </GlassNavItem>
           </nav>
         </div>
-        
+
         <div className="flex items-center space-x-3">
-          <GlassInput 
+          <GlassInput
             variant="search"
             placeholder="Search products..."
             leftIcon={<Search className="h-4 w-4" />}
@@ -446,8 +529,8 @@ import {
           </GlassButton>
           <GlassButton variant="ghost" size="sm" className="relative">
             <ShoppingCart className="h-4 w-4" />
-            <GlassBadge 
-              variant="primary" 
+            <GlassBadge
+              variant="primary"
               size="sm"
               className="absolute -top-2 -right-2 h-5 w-5 rounded-full flex items-center justify-center text-xs"
             >
@@ -457,6 +540,7 @@ import {
         </div>
       </div>
     </GlassNavbar>
+
   </div>
 </ComponentPreview>
 
@@ -467,13 +551,19 @@ import {
     <GlassNavbar variant="minimal" className="bg-black/10">
       <div className="flex items-center justify-between w-full px-4">
         <div className="text-lg font-light">John Doe</div>
-        
+
         <nav className="flex space-x-8">
-          <GlassNavItem href="/" active variant="minimal">Work</GlassNavItem>
-          <GlassNavItem href="/about" variant="minimal">About</GlassNavItem>
-          <GlassNavItem href="/contact" variant="minimal">Contact</GlassNavItem>
+          <GlassNavItem href="/" active variant="minimal">
+            Work
+          </GlassNavItem>
+          <GlassNavItem href="/about" variant="minimal">
+            About
+          </GlassNavItem>
+          <GlassNavItem href="/contact" variant="minimal">
+            Contact
+          </GlassNavItem>
         </nav>
-        
+
         <div className="flex items-center space-x-4">
           <GlassButton variant="ghost" size="sm">
             <Github className="h-4 w-4" />
@@ -487,6 +577,7 @@ import {
         </div>
       </div>
     </GlassNavbar>
+
   </div>
 </ComponentPreview>
 
@@ -495,10 +586,8 @@ import {
 ### GlassNavbar Props
 
 <ResponseField name="variant" type="string" default="default">
-  The visual style of the navbar
-  - `"default"` - Standard glass effect
-  - `"elevated"` - Enhanced depth and shadows  
-  - `"minimal"` - Subtle glass effect
+  The visual style of the navbar - `"default"` - Standard glass effect -
+  `"elevated"` - Enhanced depth and shadows - `"minimal"` - Subtle glass effect
   - `"ghost"` - Ultra-minimal appearance
 </ResponseField>
 
@@ -521,7 +610,7 @@ import {
 </ResponseField>
 
 <ResponseField name="active" type="boolean" default="false">
-  Whether the nav item is currently active/selected  
+  Whether the nav item is currently active/selected
 </ResponseField>
 
 <ResponseField name="disabled" type="boolean" default="false">
@@ -529,10 +618,8 @@ import {
 </ResponseField>
 
 <ResponseField name="variant" type="string" default="default">
-  Visual style variant
-  - `"default"` - Standard appearance
-  - `"minimal"` - Minimal styling
-  - `"ghost"` - Ultra-subtle appearance
+  Visual style variant - `"default"` - Standard appearance - `"minimal"` -
+  Minimal styling - `"ghost"` - Ultra-subtle appearance
 </ResponseField>
 
 <ResponseField name="fullWidth" type="boolean" default="false">
@@ -552,9 +639,7 @@ import {
 </ResponseField>
 
 <ResponseField name="as" type="string" default="a">
-  Element type to render as
-  - `"a"` - Link element
-  - `"button"` - Button element  
+  Element type to render as - `"a"` - Link element - `"button"` - Button element
   - Custom component
 </ResponseField>
 
@@ -569,11 +654,9 @@ import {
 </ResponseField>
 
 <ResponseField name="side" type="string" default="right">
-  Which side the mobile nav slides in from
-  - `"left"` - Slide from left
-  - `"right"` - Slide from right
-  - `"top"` - Slide from top
-  - `"bottom"` - Slide from bottom
+  Which side the mobile nav slides in from - `"left"` - Slide from left -
+  `"right"` - Slide from right - `"top"` - Slide from top - `"bottom"` - Slide
+  from bottom
 </ResponseField>
 
 ## Accessibility
@@ -590,16 +673,13 @@ LiqUIdify navigation components follow accessibility best practices:
 ### Accessibility Example
 
 ```tsx
-<GlassNavbar 
-  role="navigation" 
-  aria-label="Main navigation"
->
+<GlassNavbar role="navigation" aria-label="Main navigation">
   <nav>
     <ul className="flex space-x-4">
       <li>
-        <GlassNavItem 
-          href="/" 
-          active 
+        <GlassNavItem
+          href="/"
+          active
           aria-current="page"
           aria-label="Home page, current page"
         >
@@ -607,10 +687,7 @@ LiqUIdify navigation components follow accessibility best practices:
         </GlassNavItem>
       </li>
       <li>
-        <GlassNavItem 
-          href="/about"
-          aria-label="About page"
-        >
+        <GlassNavItem href="/about" aria-label="About page">
           About
         </GlassNavItem>
       </li>
@@ -628,12 +705,12 @@ Customize navigation appearance using CSS variables:
   --glass-nav-bg: rgba(255, 255, 255, 0.1);
   --glass-nav-border: rgba(255, 255, 255, 0.2);
   --glass-nav-backdrop: blur(16px);
-  
+
   /* Navigation item styles */
   --glass-nav-item-hover: rgba(255, 255, 255, 0.1);
   --glass-nav-item-active: rgba(255, 255, 255, 0.2);
   --glass-nav-item-text: rgb(255, 255, 255);
-  
+
   /* Mobile navigation */
   --glass-mobile-nav-bg: rgba(0, 0, 0, 0.8);
   --glass-mobile-nav-backdrop: blur(20px);

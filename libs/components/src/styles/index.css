@@ -8,19 +8,21 @@
   --glass-text: #ffffff;
   --glass-accent: #fb4268;
   --glass-grey: #444739;
-  
+
   /* Apple HIG Corner Radii */
   --radius-lg-s: 0.75rem; /* 12pt */
-  --radius-lg-m: 1rem;    /* 16pt */
-  --radius-lg-l: 1.5rem;  /* 24pt */
-  
+  --radius-lg-m: 1rem; /* 16pt */
+  --radius-lg-l: 1.5rem; /* 24pt */
+
   /* Glass Effects */
   --glass-blur: 4px;
-  --glass-shadow: 0 6px 6px rgba(0,0,0,.2), 0 0 20px rgba(0,0,0,.1);
-  --glass-specular: inset 1px 1px 0 rgba(255,255,255,.75), inset 0 0 5px rgba(255,255,255,.75);
-  
+  --glass-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+  --glass-specular:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 0 5px rgba(255, 255, 255, 0.75);
+
   /* Animation Timing */
-  --glass-transition: all 400ms cubic-bezier(.175,.885,.32,2.2);
+  --glass-transition: all 400ms cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 /* Dark theme overrides */
@@ -71,12 +73,12 @@
 }
 
 .glass-liquid::before {
-  content: '';
+  content: "";
   @apply absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-50 pointer-events-none;
 }
 
 .glass-liquid::after {
-  content: '';
+  content: "";
   @apply absolute -inset-1 bg-gradient-to-t from-transparent via-white/10 to-white/30 opacity-30 blur-sm pointer-events-none;
 }
 

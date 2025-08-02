@@ -11,7 +11,7 @@ import { cn } from "../../core/utils/classname";
 // Size variants using Tailwind classes
 const SIZE_CLASSES = {
   sm: "px-3 py-2 text-sm",
-  md: "px-4 py-3 text-base", 
+  md: "px-4 py-3 text-base",
   lg: "px-5 py-4 text-lg",
 };
 
@@ -207,7 +207,14 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
     );
 
     return (
-      <div className={cn("relative w-full", size === "sm" && "text-sm", size === "lg" && "text-lg", className)}>
+      <div
+        className={cn(
+          "relative w-full",
+          size === "sm" && "text-sm",
+          size === "lg" && "text-lg",
+          className,
+        )}
+      >
         {/* Label */}
         {label && (
           <label
@@ -245,7 +252,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
           <div className="glass-filter pointer-events-none" />
           <div className="glass-overlay pointer-events-none" />
           <div className="glass-specular pointer-events-none" />
-          
+
           <textarea
             {...props}
             ref={setRefs}

@@ -23,24 +23,18 @@ Every component in LiqUIdify is built with performance in mind:
 </Card>
 
 <Card title="Runtime Performance" icon="zap">
-- 60fps animations
-- GPU-accelerated effects
-- Minimal DOM manipulation
-- Efficient rendering patterns
+  - 60fps animations - GPU-accelerated effects - Minimal DOM manipulation -
+  Efficient rendering patterns
 </Card>
 
 <Card title="Network Efficiency" icon="wifi">
-- Progressive loading
-- Efficient asset delivery
-- Smart caching strategies
-- CDN optimization
+  - Progressive loading - Efficient asset delivery - Smart caching strategies -
+  CDN optimization
 </Card>
 
 <Card title="Memory Management" icon="cpu">
-- Minimal memory footprint
-- Proper cleanup patterns
-- Efficient event handling
-- Optimized re-renders
+  - Minimal memory footprint - Proper cleanup patterns - Efficient event
+  handling - Optimized re-renders
 </Card>
 
 </CardGroup>
@@ -61,7 +55,8 @@ import { GlassInput } from '@liquidify/components/forms'
 import { LineChart } from '@liquidify/components/charts'
 
 // Bundle size: ~15KB
-```
+
+````
 </Tab>
 
 <Tab title="Bundle-Specific Imports">
@@ -75,7 +70,8 @@ const { GlassButton, GlassCard } = Core
 const { GlassInput, GlassSelect } = Forms
 
 // Bundle size: ~23KB
-```
+````
+
 </Tab>
 
 <Tab title="Avoid Full Import">
@@ -84,7 +80,8 @@ const { GlassInput, GlassSelect } = Forms
 import * from '@liquidify/components'
 
 // Bundle size: ~60KB (unnecessary bloat)
-```
+
+````
 </Tab>
 
 </Tabs>
@@ -99,7 +96,7 @@ npx bundle-analyzer build/static/js/*.js
 
 # Check tree-shaking effectiveness
 npx webpack-bundle-analyzer build/static/js/*.js
-```
+````
 
 ## Runtime Performance
 
@@ -113,14 +110,15 @@ LiqUIdify leverages GPU acceleration for smooth glass effects:
   /* Forces GPU layer creation */
   transform: translateZ(0);
   will-change: backdrop-filter, opacity;
-  
+
   /* Optimized backdrop filter */
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  
+
   /* Hardware-accelerated transitions */
-  transition: opacity 0.2s ease-out,
-              transform 0.2s ease-out;
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
 }
 ```
 
@@ -129,24 +127,21 @@ LiqUIdify leverages GPU acceleration for smooth glass effects:
 Smooth 60fps animations through careful optimization:
 
 ```tsx
-import { GlassButton } from '@liquidify/components'
+import { GlassButton } from "@liquidify/components";
 
 // Optimized animation props
 <GlassButton
   // Uses transform and opacity for 60fps
   animate="smooth"
-  
   // Respects user preferences
   disableAnimations={prefersReducedMotion}
-  
   // GPU-accelerated hover effects
-  magneticHover 
-  
+  magneticHover
   // Efficient ripple implementation
   rippleEffect
 >
   Smooth Button
-</GlassButton>
+</GlassButton>;
 ```
 
 ### Performance Monitoring
@@ -154,22 +149,22 @@ import { GlassButton } from '@liquidify/components'
 Built-in performance monitoring for development:
 
 ```tsx
-import { usePerformanceMonitor } from '@liquidify/components'
+import { usePerformanceMonitor } from "@liquidify/components";
 
 function MonitoredComponent() {
-  const metrics = usePerformanceMonitor('MyComponent')
-  
+  const metrics = usePerformanceMonitor("MyComponent");
+
   // Development-only logging
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Component metrics:', metrics)
+    if (process.env.NODE_ENV === "development") {
+      console.log("Component metrics:", metrics);
       // renderTime: 12ms
       // reRenders: 3
       // memoryUsage: 2.4MB
     }
-  }, [metrics])
-  
-  return <GlassCard>Content</GlassCard>
+  }, [metrics]);
+
+  return <GlassCard>Content</GlassCard>;
 }
 ```
 
@@ -181,22 +176,22 @@ LiqUIdify components use optimized event patterns:
 
 ```tsx
 // ✅ Efficient event handling with proper cleanup
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from "react";
 
 function OptimizedComponent() {
   const handleResize = useCallback(() => {
     // Throttled resize handling
     requestAnimationFrame(() => {
-      updateLayout()
-    })
-  }, [])
-  
+      updateLayout();
+    });
+  }, []);
+
   useEffect(() => {
-    window.addEventListener('resize', handleResize, { passive: true })
-    return () => window.removeEventListener('resize', handleResize)
-  }, [handleResize])
-  
-  return <GlassCard>Content</GlassCard>
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
+
+  return <GlassCard>Content</GlassCard>;
 }
 ```
 
@@ -205,31 +200,31 @@ function OptimizedComponent() {
 Automatic cleanup prevents memory leaks:
 
 ```tsx
-import { GlassModal, useGlassEffect } from '@liquidify/components'
+import { GlassModal, useGlassEffect } from "@liquidify/components";
 
 function ModalExample() {
-  const [isOpen, setIsOpen] = useState(false)
-  
+  const [isOpen, setIsOpen] = useState(false);
+
   // Automatic cleanup of glass effects
   useGlassEffect(() => {
     // Effect setup
     return () => {
       // Automatic cleanup
-    }
-  }, [isOpen])
-  
+    };
+  }, [isOpen]);
+
   return (
-    <GlassModal 
+    <GlassModal
       open={isOpen}
       onClose={() => setIsOpen(false)}
       // Automatic focus management and cleanup
       focusTrap
-      // Prevents body scroll without memory leaks  
+      // Prevents body scroll without memory leaks
       preventScroll
     >
       Modal content
     </GlassModal>
-  )
+  );
 }
 ```
 
@@ -240,30 +235,33 @@ function ModalExample() {
 LiqUIdify minimizes unnecessary re-renders:
 
 ```tsx
-import { memo, useMemo } from 'react'
-import { GlassCard } from '@liquidify/components'
+import { memo, useMemo } from "react";
+import { GlassCard } from "@liquidify/components";
 
 // Memoized component prevents unnecessary renders
 const OptimizedCard = memo(function OptimizedCard({ data, theme }) {
   // Memoized expensive calculations
   const processedData = useMemo(() => {
-    return expensiveDataProcessing(data)
-  }, [data])
-  
+    return expensiveDataProcessing(data);
+  }, [data]);
+
   // Stable style objects prevent re-renders
-  const cardStyles = useMemo(() => ({
-    '--glass-intensity': theme.intensity,
-    '--glass-blur': theme.blur
-  }), [theme])
-  
+  const cardStyles = useMemo(
+    () => ({
+      "--glass-intensity": theme.intensity,
+      "--glass-blur": theme.blur,
+    }),
+    [theme],
+  );
+
   return (
     <GlassCard style={cardStyles}>
-      {processedData.map(item => (
+      {processedData.map((item) => (
         <div key={item.id}>{item.content}</div>
       ))}
     </GlassCard>
-  )
-})
+  );
+});
 ```
 
 ### Virtual Scrolling for Large Lists
@@ -271,7 +269,7 @@ const OptimizedCard = memo(function OptimizedCard({ data, theme }) {
 Handle large datasets efficiently:
 
 ```tsx
-import { GlassVirtualList } from '@liquidify/components'
+import { GlassVirtualList } from "@liquidify/components";
 
 function LargeDataList({ items }) {
   return (
@@ -288,7 +286,7 @@ function LargeDataList({ items }) {
       // Only renders visible items + buffer
       overscan={5}
     />
-  )
+  );
 }
 ```
 
@@ -299,38 +297,38 @@ function LargeDataList({ items }) {
 Strategic code splitting for faster initial loads:
 
 ```tsx
-import { lazy, Suspense } from 'react'
-import { GlassLoading } from '@liquidify/components'
+import { lazy, Suspense } from "react";
+import { GlassLoading } from "@liquidify/components";
 
 // Lazy load heavy components
-const GlassChart = lazy(() => 
-  import('@liquidify/components/charts').then(m => ({ 
-    default: m.LineChart 
-  }))
-)
+const GlassChart = lazy(() =>
+  import("@liquidify/components/charts").then((m) => ({
+    default: m.LineChart,
+  })),
+);
 
-const GlassDataTable = lazy(() => 
-  import('@liquidify/components/data').then(m => ({ 
-    default: m.GlassTable 
-  }))
-)
+const GlassDataTable = lazy(() =>
+  import("@liquidify/components/data").then((m) => ({
+    default: m.GlassTable,
+  })),
+);
 
 function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
-      
+
       {/* Chart loads when needed */}
       <Suspense fallback={<GlassLoading />}>
         <GlassChart data={chartData} />
       </Suspense>
-      
+
       {/* Table loads when needed */}
       <Suspense fallback={<GlassLoading />}>
         <GlassDataTable data={tableData} />
       </Suspense>
     </div>
-  )
+  );
 }
 ```
 
@@ -339,14 +337,14 @@ function Dashboard() {
 Load components progressively based on priority:
 
 ```tsx
-import { useInView } from '@liquidify/components'
+import { useInView } from "@liquidify/components";
 
 function ProgressiveContent() {
   const { ref, inView } = useInView({
     threshold: 0.1,
-    triggerOnce: true
-  })
-  
+    triggerOnce: true,
+  });
+
   return (
     <div>
       {/* Above-fold content loads immediately */}
@@ -354,7 +352,7 @@ function ProgressiveContent() {
         <h2>Important Content</h2>
         <p>Loads immediately</p>
       </GlassCard>
-      
+
       {/* Below-fold content loads when in view */}
       <div ref={ref}>
         {inView && (
@@ -365,7 +363,7 @@ function ProgressiveContent() {
         )}
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -380,31 +378,34 @@ Efficient glass CSS that performs well:
 .glass-optimized {
   /* Use transform instead of changing position */
   transform: translateZ(0);
-  
+
   /* Optimize backdrop-filter for performance */
   backdrop-filter: blur(clamp(8px, 1vw, 16px)) saturate(180%);
-  
+
   /* Use contain for layout performance */
   contain: layout style paint;
-  
+
   /* Optimize repaints */
   will-change: transform, opacity;
-  
+
   /* Efficient transitions */
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ❌ Avoid performance-heavy patterns */
 .glass-heavy {
   /* Causes expensive reflows */
   backdrop-filter: blur(50px) brightness(1.2) contrast(1.3) hue-rotate(45deg);
-  
+
   /* Triggers layout recalculation */
   width: calc(100% - 20px);
-  
+
   /* Expensive shadow calculations */
-  box-shadow: 0 0 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.1);
+  box-shadow:
+    0 0 50px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
 }
 ```
 
@@ -423,7 +424,12 @@ Load critical glass styles first:
 </style>
 
 <!-- Non-critical styles load asynchronously -->
-<link rel="preload" href="/glass-extended.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link
+  rel="preload"
+  href="/glass-extended.css"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
 ```
 
 ## Framework-Specific Optimizations
@@ -442,7 +448,7 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <head>
-        {/* Preload critical glass fonts */}
+        {/_Preload critical glass fonts_/}
         <link
           rel="preload"
           href="/fonts/glass-icons.woff2"
@@ -485,17 +491,18 @@ import { GlassCard } from '@liquidify/components/server'
 
 // Server-rendered glass components
 export default function Dashboard() {
-  return (
-    <div>
-      {/* Renders on server for faster FCP */}
-      <GlassCard variant="elevated" ssr>
-        <h1>Dashboard</h1>
-        <p>Server-rendered glass card</p>
-      </GlassCard>
-    </div>
-  )
-}
-```
+return (
+
+<div>
+  {/* Renders on server for faster FCP */}
+  <GlassCard variant="elevated" ssr>
+    <h1>Dashboard</h1>
+    <p>Server-rendered glass card</p>
+  </GlassCard>
+</div>
+) }
+
+````
 </Tab>
 
 </Tabs>
@@ -525,77 +532,77 @@ export default defineConfig({
     }
   }
 })
-```
+````
 
 ## Performance Monitoring
 
 ### Built-in Performance Tools
 
 ```tsx
-import { 
+import {
   PerformanceProvider,
   usePerformanceMetrics,
-  PerformanceDashboard 
-} from '@liquidify/components/performance'
+  PerformanceDashboard,
+} from "@liquidify/components/performance";
 
 function App() {
   return (
     <PerformanceProvider enabled={isDevelopment}>
       <Dashboard />
-      
+
       {/* Development-only performance dashboard */}
       {isDevelopment && <PerformanceDashboard />}
     </PerformanceProvider>
-  )
+  );
 }
 
 function Dashboard() {
-  const metrics = usePerformanceMetrics()
-  
+  const metrics = usePerformanceMetrics();
+
   // Access real-time performance data
   console.log({
     renderTime: metrics.renderTime, // Component render duration
     bundleSize: metrics.bundleSize, // LiqUIdify bundle impact
     glassEffects: metrics.glassEffects, // Glass effect performance
-    memoryUsage: metrics.memoryUsage // Memory consumption
-  })
-  
-  return <div>Dashboard content</div>
+    memoryUsage: metrics.memoryUsage, // Memory consumption
+  });
+
+  return <div>Dashboard content</div>;
 }
 ```
 
 ### Real User Monitoring
 
 ```tsx
-import { usePerformanceObserver } from '@liquidify/components'
+import { usePerformanceObserver } from "@liquidify/components";
 
 function PerformanceMonitoring() {
   usePerformanceObserver({
     // Monitor largest contentful paint
     lcp: (entry) => {
-      analytics.track('LCP', {
+      analytics.track("LCP", {
         duration: entry.startTime,
-        element: entry.element
-      })
+        element: entry.element,
+      });
     },
-    
+
     // Monitor first input delay
     fid: (entry) => {
-      analytics.track('FID', {
-        duration: entry.processingStart - entry.startTime
-      })
+      analytics.track("FID", {
+        duration: entry.processingStart - entry.startTime,
+      });
     },
-    
+
     // Monitor cumulative layout shift
     cls: (entry) => {
-      analytics.track('CLS', {
+      analytics.track("CLS", {
         value: entry.value,
-        sources: entry.sources
-      })
-    }
-  })
-  
-  return null
+        sources: entry.sources,
+      });
+    },
+  });
+
+  return null;
 }
 ```
 
@@ -628,42 +635,44 @@ function PerformanceMonitoring() {
 ### Automated Performance Testing
 
 ```tsx
-import { render, screen } from '@testing-library/react'
-import { performance } from 'perf_hooks'
+import { render, screen } from "@testing-library/react";
+import { performance } from "perf_hooks";
 
-describe('Component Performance', () => {
-  test('renders within performance budget', async () => {
-    const start = performance.now()
-    
-    render(<GlassCard>Test content</GlassCard>)
-    
-    const end = performance.now()
-    const renderTime = end - start
-    
+describe("Component Performance", () => {
+  test("renders within performance budget", async () => {
+    const start = performance.now();
+
+    render(<GlassCard>Test content</GlassCard>);
+
+    const end = performance.now();
+    const renderTime = end - start;
+
     // Assert render time is under 16ms (60fps budget)
-    expect(renderTime).toBeLessThan(16)
-  })
-  
-  test('bundle size is within budget', async () => {
-    const bundleStats = await import('./bundle-stats.json')
+    expect(renderTime).toBeLessThan(16);
+  });
+
+  test("bundle size is within budget", async () => {
+    const bundleStats = await import("./bundle-stats.json");
     const liquidifySize = bundleStats.assets
-      .filter(asset => asset.name.includes('liquidify'))
-      .reduce((total, asset) => total + asset.size, 0)
-    
+      .filter((asset) => asset.name.includes("liquidify"))
+      .reduce((total, asset) => total + asset.size, 0);
+
     // Assert bundle size is under 100KB
-    expect(liquidifySize).toBeLessThan(100 * 1024)
-  })
-})
+    expect(liquidifySize).toBeLessThan(100 * 1024);
+  });
+});
 ```
 
 ### Manual Performance Testing
 
 1. **Lighthouse Audits**
+
    - Run regular Lighthouse audits
    - Monitor Core Web Vitals
    - Track performance regression
 
 2. **DevTools Profiling**
+
    - Profile component renders
    - Analyze memory usage
    - Monitor frame rate
@@ -676,24 +685,28 @@ describe('Component Performance', () => {
 ## Performance Optimization Checklist
 
 ### Bundle Optimization ✅
+
 - [ ] Using tree-shakeable imports
 - [ ] Bundle size under targets
 - [ ] Code splitting implemented
 - [ ] Unnecessary dependencies removed
 
 ### Runtime Performance ✅
+
 - [ ] 60fps animations achieved
 - [ ] GPU acceleration utilized
 - [ ] Memory leaks prevented
 - [ ] Event listeners cleaned up
 
 ### Load Performance ✅
+
 - [ ] Critical CSS inlined
 - [ ] Assets properly cached
 - [ ] Progressive loading implemented
 - [ ] Unnecessary requests eliminated
 
 ### Monitoring ✅
+
 - [ ] Performance metrics tracked
 - [ ] Real user monitoring setup
 - [ ] Automated testing in place

@@ -1,9 +1,13 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # GlassResponsiveCard
 
 <Callout type="warning">
-  **Component Availability Notice**: This component is documented but may not be available in the current version of the Liquidify package. Please check the [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most up-to-date information about which components are actually exported and usable.
+  **Component Availability Notice**: This component is documented but may not be
+  available in the current version of the Liquidify package. Please check the
+  [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most
+  up-to-date information about which components are actually exported and
+  usable.
 </Callout>
 
 GlassResponsiveCard is a dynamic card component that adjusts its size, layout, and content display according to the container size and user preferences, following Apple's Human Interface Guidelines and Liquid Glass aesthetics.
@@ -104,16 +108,16 @@ Motion settings are respected to reduce animation complexity and speed.
 ### Basic Usage
 
 ```tsx
-import { GlassResponsiveCard } from 'liquidify';
+import { GlassResponsiveCard } from "liquidify";
 
 export default function Example() {
   return (
     <GlassResponsiveCard
-      header={<h3 className='hig-headline'>Card Title</h3>}
+      header={<h3 className="hig-headline">Card Title</h3>}
       content={
-        <p className='hig-body'>This is the main content of the card.</p>
+        <p className="hig-body">This is the main content of the card.</p>
       }
-      footer={<button className='glass-button-primary'>Action</button>}
+      footer={<button className="glass-button-primary">Action</button>}
     />
   );
 }
@@ -122,26 +126,26 @@ export default function Example() {
 ### Advanced Usage
 
 ```tsx
-import { GlassResponsiveCard } from 'liquidify';
-import { MediaPlayer } from './Components';
+import { GlassResponsiveCard } from "liquidify";
+import { MediaPlayer } from "./Components";
 
 export default function AdvancedExample() {
   return (
     <GlassResponsiveCard
-      layout='grid'
+      layout="grid"
       header={
         <div>
-          <h4 className='hig-subheadline'>Weekly Summary</h4>
-          <div className='flex justify-between items-center'>
-            <span className='hig-body'>10 New Insights</span>
-            <button className='glass-button-secondary'>See All</button>
+          <h4 className="hig-subheadline">Weekly Summary</h4>
+          <div className="flex justify-between items-center">
+            <span className="hig-body">10 New Insights</span>
+            <button className="glass-button-secondary">See All</button>
           </div>
         </div>
       }
-      content={<MediaPlayer className='w-full h-64' />}
+      content={<MediaPlayer className="w-full h-64" />}
       footer={
-        <div className='flex justify-end'>
-          <button className='glass-button-primary'>Learn More</button>
+        <div className="flex justify-end">
+          <button className="glass-button-primary">Learn More</button>
         </div>
       }
     />

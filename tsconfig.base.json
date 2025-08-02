@@ -1,14 +1,1 @@
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  }
-}
+{"compilerOptions":{"allowSyntheticDefaultImports":true,"esModuleInterop":true,"forceConsistentCasingInFileNames":true,"lib":["ES2022","DOM","DOM.Iterable"],"module":"ESNext","moduleResolution":"bundler","resolveJsonModule":true,"skipLibCheck":true,"strict":true,"target":"ESNext"}}

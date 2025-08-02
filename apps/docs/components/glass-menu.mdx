@@ -11,7 +11,7 @@ The Glass Menu component provides a beautiful contextual menu with glass morphis
 ## Basic Usage
 
 ```tsx
-import { GlassMenu, GlassMenuItem } from '@liquidify/react';
+import { GlassMenu, GlassMenuItem } from "@liquidify/react";
 
 function BasicMenu() {
   return (
@@ -29,17 +29,11 @@ function BasicMenu() {
 Use with a trigger element to show/hide the menu:
 
 ```tsx
-import { GlassMenu, GlassMenuItem, GlassButton } from '@liquidify/react';
+import { GlassMenu, GlassMenuItem, GlassButton } from "@liquidify/react";
 
 function MenuWithTrigger() {
   return (
-    <GlassMenu
-      trigger={
-        <GlassButton variant="ghost">
-          Options
-        </GlassButton>
-      }
-    >
+    <GlassMenu trigger={<GlassButton variant="ghost">Options</GlassButton>}>
       <GlassMenuItem>Edit</GlassMenuItem>
       <GlassMenuItem>Duplicate</GlassMenuItem>
       <GlassMenuItem>Delete</GlassMenuItem>
@@ -53,18 +47,14 @@ function MenuWithTrigger() {
 Add icons to menu items for better visual hierarchy:
 
 ```tsx
-import { GlassMenu, GlassMenuItem } from '@liquidify/react';
-import { User, Settings, LogOut } from 'lucide-react';
+import { GlassMenu, GlassMenuItem } from "@liquidify/react";
+import { User, Settings, LogOut } from "lucide-react";
 
 function MenuWithIcons() {
   return (
     <GlassMenu>
-      <GlassMenuItem icon={<User size={16} />}>
-        Profile
-      </GlassMenuItem>
-      <GlassMenuItem icon={<Settings size={16} />}>
-        Settings
-      </GlassMenuItem>
+      <GlassMenuItem icon={<User size={16} />}>Profile</GlassMenuItem>
+      <GlassMenuItem icon={<Settings size={16} />}>Settings</GlassMenuItem>
       <GlassMenuItem icon={<LogOut size={16} />} variant="danger">
         Logout
       </GlassMenuItem>
@@ -78,7 +68,12 @@ function MenuWithIcons() {
 Organize menu items into logical groups:
 
 ```tsx
-import { GlassMenu, GlassMenuItem, GlassMenuGroup, GlassMenuSeparator } from '@liquidify/react';
+import {
+  GlassMenu,
+  GlassMenuItem,
+  GlassMenuGroup,
+  GlassMenuSeparator,
+} from "@liquidify/react";
 
 function GroupedMenu() {
   return (
@@ -87,19 +82,17 @@ function GroupedMenu() {
         <GlassMenuItem>Profile</GlassMenuItem>
         <GlassMenuItem>Billing</GlassMenuItem>
       </GlassMenuGroup>
-      
+
       <GlassMenuSeparator />
-      
+
       <GlassMenuGroup label="Actions">
         <GlassMenuItem>Share</GlassMenuItem>
         <GlassMenuItem>Export</GlassMenuItem>
       </GlassMenuGroup>
-      
+
       <GlassMenuSeparator />
-      
-      <GlassMenuItem variant="danger">
-        Delete Account
-      </GlassMenuItem>
+
+      <GlassMenuItem variant="danger">Delete Account</GlassMenuItem>
     </GlassMenu>
   );
 }
@@ -110,15 +103,13 @@ function GroupedMenu() {
 Create nested menus for complex navigation:
 
 ```tsx
-import { GlassMenu, GlassMenuItem, GlassSubmenu } from '@liquidify/react';
+import { GlassMenu, GlassMenuItem, GlassSubmenu } from "@liquidify/react";
 
 function MenuWithSubmenu() {
   return (
     <GlassMenu>
       <GlassMenuItem>New File</GlassMenuItem>
-      <GlassSubmenu
-        trigger={<GlassMenuItem>Import</GlassMenuItem>}
-      >
+      <GlassSubmenu trigger={<GlassMenuItem>Import</GlassMenuItem>}>
         <GlassMenuItem>From CSV</GlassMenuItem>
         <GlassMenuItem>From JSON</GlassMenuItem>
         <GlassMenuItem>From XML</GlassMenuItem>
@@ -134,7 +125,7 @@ function MenuWithSubmenu() {
 Create right-click context menus:
 
 ```tsx
-import { GlassMenu, GlassMenuItem, useContextMenu } from '@liquidify/react';
+import { GlassMenu, GlassMenuItem, useContextMenu } from "@liquidify/react";
 
 function ContextMenuExample() {
   const { contextMenu, handleContextMenu } = useContextMenu();
@@ -147,7 +138,7 @@ function ContextMenuExample() {
       >
         Right-click me for context menu
       </div>
-      
+
       {contextMenu.show && (
         <GlassMenu
           position={{ x: contextMenu.x, y: contextMenu.y }}
@@ -168,7 +159,7 @@ function ContextMenuExample() {
 Customize the glass morphism appearance:
 
 ```tsx
-import { GlassMenu, GlassMenuItem } from '@liquidify/react';
+import { GlassMenu, GlassMenuItem } from "@liquidify/react";
 
 function CustomGlassMenu() {
   return (
@@ -177,13 +168,13 @@ function CustomGlassMenu() {
         blur: 20,
         opacity: 0.15,
         borderOpacity: 0.3,
-        shadow: 'xl'
+        shadow: "xl",
       }}
     >
       <GlassMenuItem
         glassEffect={{
           blur: 10,
-          opacity: 0.1
+          opacity: 0.1,
         }}
       >
         Custom Item
@@ -199,7 +190,7 @@ function CustomGlassMenu() {
 The menu supports full keyboard navigation:
 
 ```tsx
-import { GlassMenu, GlassMenuItem } from '@liquidify/react';
+import { GlassMenu, GlassMenuItem } from "@liquidify/react";
 
 function KeyboardMenu() {
   return (
@@ -218,16 +209,11 @@ function KeyboardMenu() {
 Control menu positioning and behavior:
 
 ```tsx
-import { GlassMenu, GlassMenuItem } from '@liquidify/react';
+import { GlassMenu, GlassMenuItem } from "@liquidify/react";
 
 function PositionedMenu() {
   return (
-    <GlassMenu
-      placement="bottom-start"
-      offset={8}
-      flip={true}
-      shift={true}
-    >
+    <GlassMenu placement="bottom-start" offset={8} flip={true} shift={true}>
       <GlassMenuItem>Option 1</GlassMenuItem>
       <GlassMenuItem>Option 2</GlassMenuItem>
       <GlassMenuItem>Option 3</GlassMenuItem>
@@ -240,48 +226,48 @@ function PositionedMenu() {
 
 ### GlassMenu Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `trigger` | `ReactNode` | - | Element that triggers the menu |
-| `placement` | `Placement` | `'bottom-start'` | Menu positioning |
-| `offset` | `number` | `4` | Distance from trigger |
-| `flip` | `boolean` | `true` | Flip when out of bounds |
-| `shift` | `boolean` | `true` | Shift to stay in bounds |
-| `closeOnSelect` | `boolean` | `true` | Close menu on item select |
-| `glassEffect` | `GlassEffectProps` | - | Glass morphism configuration |
-| `className` | `string` | - | Additional CSS classes |
-| `onOpenChange` | `(open: boolean) => void` | - | Open state change handler |
-| `children` | `ReactNode` | - | Menu content |
+| Prop            | Type                      | Default          | Description                    |
+| --------------- | ------------------------- | ---------------- | ------------------------------ |
+| `trigger`       | `ReactNode`               | -                | Element that triggers the menu |
+| `placement`     | `Placement`               | `'bottom-start'` | Menu positioning               |
+| `offset`        | `number`                  | `4`              | Distance from trigger          |
+| `flip`          | `boolean`                 | `true`           | Flip when out of bounds        |
+| `shift`         | `boolean`                 | `true`           | Shift to stay in bounds        |
+| `closeOnSelect` | `boolean`                 | `true`           | Close menu on item select      |
+| `glassEffect`   | `GlassEffectProps`        | -                | Glass morphism configuration   |
+| `className`     | `string`                  | -                | Additional CSS classes         |
+| `onOpenChange`  | `(open: boolean) => void` | -                | Open state change handler      |
+| `children`      | `ReactNode`               | -                | Menu content                   |
 
 ### GlassMenuItem Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `icon` | `ReactNode` | - | Leading icon |
-| `shortcut` | `string` | - | Keyboard shortcut display |
-| `variant` | `'default' \| 'danger'` | `'default'` | Visual variant |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `glassEffect` | `GlassEffectProps` | - | Glass morphism configuration |
-| `onClick` | `() => void` | - | Click handler |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Item content |
+| Prop          | Type                    | Default     | Description                  |
+| ------------- | ----------------------- | ----------- | ---------------------------- |
+| `icon`        | `ReactNode`             | -           | Leading icon                 |
+| `shortcut`    | `string`                | -           | Keyboard shortcut display    |
+| `variant`     | `'default' \| 'danger'` | `'default'` | Visual variant               |
+| `disabled`    | `boolean`               | `false`     | Disabled state               |
+| `glassEffect` | `GlassEffectProps`      | -           | Glass morphism configuration |
+| `onClick`     | `() => void`            | -           | Click handler                |
+| `className`   | `string`                | -           | Additional CSS classes       |
+| `children`    | `ReactNode`             | -           | Item content                 |
 
 ### GlassMenuGroup Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | - | Group label |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Group items |
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `label`     | `string`    | -       | Group label            |
+| `className` | `string`    | -       | Additional CSS classes |
+| `children`  | `ReactNode` | -       | Group items            |
 
 ### GlassSubmenu Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `trigger` | `ReactNode` | - | Submenu trigger element |
-| `placement` | `Placement` | `'right-start'` | Submenu positioning |
-| `glassEffect` | `GlassEffectProps` | - | Glass morphism configuration |
-| `children` | `ReactNode` | - | Submenu content |
+| Prop          | Type               | Default         | Description                  |
+| ------------- | ------------------ | --------------- | ---------------------------- |
+| `trigger`     | `ReactNode`        | -               | Submenu trigger element      |
+| `placement`   | `Placement`        | `'right-start'` | Submenu positioning          |
+| `glassEffect` | `GlassEffectProps` | -               | Glass morphism configuration |
+| `children`    | `ReactNode`        | -               | Submenu content              |
 
 ## Styling
 
@@ -334,13 +320,8 @@ The Glass Menu component follows accessibility best practices:
 
 ```tsx
 // Accessibility features are built-in
-<GlassMenu
-  aria-label="User menu"
-  role="menu"
->
-  <GlassMenuItem role="menuitem">
-    Profile
-  </GlassMenuItem>
+<GlassMenu aria-label="User menu" role="menu">
+  <GlassMenuItem role="menuitem">Profile</GlassMenuItem>
 </GlassMenu>
 ```
 
@@ -362,19 +343,13 @@ function UserProfileMenu() {
       }
     >
       <GlassMenuGroup label="Account">
-        <GlassMenuItem icon={<User />}>
-          Profile
-        </GlassMenuItem>
-        <GlassMenuItem icon={<Settings />}>
-          Settings
-        </GlassMenuItem>
-        <GlassMenuItem icon={<CreditCard />}>
-          Billing
-        </GlassMenuItem>
+        <GlassMenuItem icon={<User />}>Profile</GlassMenuItem>
+        <GlassMenuItem icon={<Settings />}>Settings</GlassMenuItem>
+        <GlassMenuItem icon={<CreditCard />}>Billing</GlassMenuItem>
       </GlassMenuGroup>
-      
+
       <GlassMenuSeparator />
-      
+
       <GlassMenuItem icon={<LogOut />} variant="danger">
         Sign Out
       </GlassMenuItem>
@@ -395,27 +370,17 @@ function FileActionsMenu({ file }: { file: File }) {
         </GlassButton>
       }
     >
-      <GlassMenuItem icon={<Eye />}>
-        Preview
-      </GlassMenuItem>
-      <GlassMenuItem icon={<Download />}>
-        Download
-      </GlassMenuItem>
-      <GlassMenuItem icon={<Share />}>
-        Share
-      </GlassMenuItem>
-      
+      <GlassMenuItem icon={<Eye />}>Preview</GlassMenuItem>
+      <GlassMenuItem icon={<Download />}>Download</GlassMenuItem>
+      <GlassMenuItem icon={<Share />}>Share</GlassMenuItem>
+
       <GlassMenuSeparator />
-      
-      <GlassMenuItem icon={<Edit />}>
-        Rename
-      </GlassMenuItem>
-      <GlassMenuItem icon={<Copy />}>
-        Duplicate
-      </GlassMenuItem>
-      
+
+      <GlassMenuItem icon={<Edit />}>Rename</GlassMenuItem>
+      <GlassMenuItem icon={<Copy />}>Duplicate</GlassMenuItem>
+
       <GlassMenuSeparator />
-      
+
       <GlassMenuItem icon={<Trash />} variant="danger">
         Delete
       </GlassMenuItem>

@@ -20,15 +20,16 @@ import { Notification } from "@liquidify/components";
 import { Notification } from "@liquidify/components";
 
 function App() {
-  return (
-    <Notification
-      title="Success!"
-      message="Your changes have been saved successfully."
-      type="success"
-    />
-  );
-}
-```
+return (
+
+<Notification
+  title="Success!"
+  message="Your changes have been saved successfully."
+  type="success"
+/>
+); }
+
+````
 
 ```tsx Next.js
 "use client";
@@ -43,7 +44,8 @@ export default function Page() {
     />
   );
 }
-```
+````
+
 </CodeGroup>
 
 ## Types
@@ -80,6 +82,7 @@ export default function Page() {
   type="info"
 />
 ```
+
 </CodeGroup>
 
 ## With Actions
@@ -91,7 +94,11 @@ export default function Page() {
   type="info"
   actions={[
     { label: "Update Now", onClick: () => console.log("Updating...") },
-    { label: "Later", variant: "ghost", onClick: () => console.log("Dismissed") }
+    {
+      label: "Later",
+      variant: "ghost",
+      onClick: () => console.log("Dismissed"),
+    },
   ]}
 />
 ```
@@ -110,16 +117,16 @@ export default function Page() {
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `title` | `string` | - | Notification title |
-| `message` | `string` | - | Notification message |
-| `type` | `"success" \| "warning" \| "error" \| "info"` | `"info"` | Notification type |
-| `autoHide` | `boolean` | `false` | Auto-hide after duration |
-| `duration` | `number` | `5000` | Duration before auto-hide (ms) |
-| `actions` | `Array<{label: string, onClick: () => void, variant?: string}>` | - | Action buttons |
-| `onClose` | `() => void` | - | Close callback |
-| `className` | `string` | - | Additional CSS classes |
+| Prop        | Type                                                            | Default  | Description                    |
+| ----------- | --------------------------------------------------------------- | -------- | ------------------------------ |
+| `title`     | `string`                                                        | -        | Notification title             |
+| `message`   | `string`                                                        | -        | Notification message           |
+| `type`      | `"success" \| "warning" \| "error" \| "info"`                   | `"info"` | Notification type              |
+| `autoHide`  | `boolean`                                                       | `false`  | Auto-hide after duration       |
+| `duration`  | `number`                                                        | `5000`   | Duration before auto-hide (ms) |
+| `actions`   | `Array<{label: string, onClick: () => void, variant?: string}>` | -        | Action buttons                 |
+| `onClose`   | `() => void`                                                    | -        | Close callback                 |
+| `className` | `string`                                                        | -        | Additional CSS classes         |
 
 ## Accessibility
 

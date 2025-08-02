@@ -6,7 +6,11 @@ import {
   FolderOpen,
 } from "lucide-react";
 import React from "react";
-import { cn, getGlassClass, microInteraction } from "../../core/utils/classname";
+import {
+  cn,
+  getGlassClass,
+  microInteraction,
+} from "../../core/utils/classname";
 
 export interface TreeNode {
   id: string;

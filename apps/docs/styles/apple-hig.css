@@ -2,7 +2,7 @@
 /* Enhanced with Liquid Glass Morphism Effects */
 
 /* Import SF Pro fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 /* Liquid Glass SVG Filters */
 .liquid-glass-filters {
@@ -13,10 +13,12 @@
 }
 
 /* Enhanced Base Styles for Liquid Glass */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
   overflow-x: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   position: relative;
@@ -27,8 +29,9 @@ html, body {
   position: fixed;
   inset: 0;
   z-index: -2;
-  background: linear-gradient(135deg, 
-    rgba(102, 126, 234, 0.8) 0%, 
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.8) 0%,
     rgba(118, 75, 162, 0.8) 25%,
     rgba(0, 122, 255, 0.6) 50%,
     rgba(88, 86, 214, 0.8) 75%,
@@ -38,92 +41,117 @@ html, body {
 }
 
 .liquid-bg::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 40% 40%, rgba(0, 122, 255, 0.2) 0%, transparent 50%);
+  background:
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(120, 119, 198, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(0, 122, 255, 0.2) 0%,
+      transparent 50%
+    );
   animation: liquid-bubbles 15s ease-in-out infinite reverse;
 }
 
 @keyframes liquid-flow {
-  0%, 100% { 
-    background-position: 0% 50%; 
+  0%,
+  100% {
+    background-position: 0% 50%;
     filter: hue-rotate(0deg);
   }
-  25% { 
-    background-position: 100% 50%; 
+  25% {
+    background-position: 100% 50%;
     filter: hue-rotate(90deg);
   }
-  50% { 
-    background-position: 100% 100%; 
+  50% {
+    background-position: 100% 100%;
     filter: hue-rotate(180deg);
   }
-  75% { 
-    background-position: 0% 100%; 
+  75% {
+    background-position: 0% 100%;
     filter: hue-rotate(270deg);
   }
 }
 
 @keyframes liquid-bubbles {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-  33% { transform: scale(1.1) rotate(120deg); opacity: 0.5; }
-  66% { transform: scale(0.9) rotate(240deg); opacity: 0.4; }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  33% {
+    transform: scale(1.1) rotate(120deg);
+    opacity: 0.5;
+  }
+  66% {
+    transform: scale(0.9) rotate(240deg);
+    opacity: 0.4;
+  }
 }
 
 /* Apple Color Palette */
 :root {
   /* Apple System Colors - Light Mode */
-  --apple-blue: #007AFF;
-  --apple-blue-light: #5AC8FA;
-  --apple-blue-dark: #0051D5;
-  --apple-green: #34C759;
-  --apple-indigo: #5856D6;
-  --apple-orange: #FF9500;
-  --apple-pink: #FF2D92;
-  --apple-purple: #AF52DE;
-  --apple-red: #FF3B30;
-  --apple-teal: #5AC8FA;
-  --apple-yellow: #FFCC00;
-  
+  --apple-blue: #007aff;
+  --apple-blue-light: #5ac8fa;
+  --apple-blue-dark: #0051d5;
+  --apple-green: #34c759;
+  --apple-indigo: #5856d6;
+  --apple-orange: #ff9500;
+  --apple-pink: #ff2d92;
+  --apple-purple: #af52de;
+  --apple-red: #ff3b30;
+  --apple-teal: #5ac8fa;
+  --apple-yellow: #ffcc00;
+
   /* Apple Gray Scale */
-  --apple-gray: #8E8E93;
-  --apple-gray-2: #AEAEB2;
-  --apple-gray-3: #C7C7CC;
-  --apple-gray-4: #D1D1D6;
-  --apple-gray-5: #E5E5EA;
-  --apple-gray-6: #F2F2F7;
-  
+  --apple-gray: #8e8e93;
+  --apple-gray-2: #aeaeb2;
+  --apple-gray-3: #c7c7cc;
+  --apple-gray-4: #d1d1d6;
+  --apple-gray-5: #e5e5ea;
+  --apple-gray-6: #f2f2f7;
+
   /* Apple System Backgrounds */
-  --apple-bg-primary: #FFFFFF;
-  --apple-bg-secondary: #F2F2F7;
-  --apple-bg-tertiary: #FFFFFF;
-  
+  --apple-bg-primary: #ffffff;
+  --apple-bg-secondary: #f2f2f7;
+  --apple-bg-tertiary: #ffffff;
+
   /* Apple Text Colors */
   --apple-text-primary: #000000;
-  --apple-text-secondary: #3C3C43;
-  --apple-text-tertiary: #3C3C4399;
-  --apple-text-quaternary: #3C3C4366;
-  
+  --apple-text-secondary: #3c3c43;
+  --apple-text-tertiary: #3c3c4399;
+  --apple-text-quaternary: #3c3c4366;
+
   /* Enhanced Glass Morphism Variables */
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.18);
   --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
   --glass-blur: 40px;
-  --glass-inner-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 0.6),
-                        inset 0px -9px 0px -8px rgba(255, 255, 255, 0.4);
-  
+  --glass-inner-shadow:
+    inset -10px -8px 0px -11px rgba(255, 255, 255, 0.6),
+    inset 0px -9px 0px -8px rgba(255, 255, 255, 0.4);
+
   /* Liquid Glass Specific Variables */
   --liquid-glass-primary: rgba(255, 255, 255, 0.12);
   --liquid-glass-secondary: rgba(255, 255, 255, 0.06);
   --liquid-glass-border: rgba(255, 255, 255, 0.2);
   --liquid-glass-highlight: rgba(255, 255, 255, 0.8);
-  --liquid-glass-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6), 
-                         0 16px 32px rgba(0, 0, 0, 0.12),
-                         0 8px 16px rgba(0, 0, 0, 0.08);
+  --liquid-glass-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.6), 0 16px 32px rgba(0, 0, 0, 0.12),
+    0 8px 16px rgba(0, 0, 0, 0.08);
   --liquid-ripple: rgba(255, 255, 255, 0.3);
-  
+
   /* Apple Spacing (8pt grid system) */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -132,7 +160,7 @@ html, body {
   --spacing-xl: 32px;
   --spacing-2xl: 48px;
   --spacing-3xl: 64px;
-  
+
   /* Apple Border Radius */
   --radius-xs: 4px;
   --radius-sm: 8px;
@@ -140,7 +168,7 @@ html, body {
   --radius-lg: 16px;
   --radius-xl: 20px;
   --radius-2xl: 24px;
-  
+
   /* Apple Shadows */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
@@ -151,59 +179,62 @@ html, body {
 /* Dark Mode Colors */
 [data-theme="dark"] {
   /* Apple System Colors - Dark Mode */
-  --apple-blue: #0A84FF;
-  --apple-blue-light: #64D2FF;
-  --apple-blue-dark: #0056CC;
-  --apple-green: #30D158;
-  --apple-indigo: #5E5CE6;
-  --apple-orange: #FF9F0A;
-  --apple-pink: #FF375F;
-  --apple-purple: #BF5AF2;
-  --apple-red: #FF453A;
-  --apple-teal: #64D2FF;
-  --apple-yellow: #FFD60A;
-  
+  --apple-blue: #0a84ff;
+  --apple-blue-light: #64d2ff;
+  --apple-blue-dark: #0056cc;
+  --apple-green: #30d158;
+  --apple-indigo: #5e5ce6;
+  --apple-orange: #ff9f0a;
+  --apple-pink: #ff375f;
+  --apple-purple: #bf5af2;
+  --apple-red: #ff453a;
+  --apple-teal: #64d2ff;
+  --apple-yellow: #ffd60a;
+
   /* Apple Gray Scale - Dark */
-  --apple-gray: #8E8E93;
+  --apple-gray: #8e8e93;
   --apple-gray-2: #636366;
-  --apple-gray-3: #48484A;
-  --apple-gray-4: #3A3A3C;
-  --apple-gray-5: #2C2C2E;
-  --apple-gray-6: #1C1C1E;
-  
+  --apple-gray-3: #48484a;
+  --apple-gray-4: #3a3a3c;
+  --apple-gray-5: #2c2c2e;
+  --apple-gray-6: #1c1c1e;
+
   /* Apple System Backgrounds - Dark */
   --apple-bg-primary: #000000;
-  --apple-bg-secondary: #1C1C1E;
-  --apple-bg-tertiary: #2C2C2E;
-  
+  --apple-bg-secondary: #1c1c1e;
+  --apple-bg-tertiary: #2c2c2e;
+
   /* Apple Text Colors - Dark */
-  --apple-text-primary: #FFFFFF;
-  --apple-text-secondary: #EBEBF5;
-  --apple-text-tertiary: #EBEBF599;
-  --apple-text-quaternary: #EBEBF566;
-  
+  --apple-text-primary: #ffffff;
+  --apple-text-secondary: #ebebf5;
+  --apple-text-tertiary: #ebebf599;
+  --apple-text-quaternary: #ebebf566;
+
   /* Enhanced Glass Morphism - Dark */
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --glass-inner-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 0.1),
-                        inset 0px -9px 0px -8px rgba(255, 255, 255, 0.05);
-  
+  --glass-inner-shadow:
+    inset -10px -8px 0px -11px rgba(255, 255, 255, 0.1),
+    inset 0px -9px 0px -8px rgba(255, 255, 255, 0.05);
+
   /* Liquid Glass Dark Mode */
   --liquid-glass-primary: rgba(255, 255, 255, 0.05);
   --liquid-glass-secondary: rgba(255, 255, 255, 0.02);
   --liquid-glass-border: rgba(255, 255, 255, 0.1);
   --liquid-glass-highlight: rgba(255, 255, 255, 0.2);
-  --liquid-glass-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 
-                         0 16px 32px rgba(0, 0, 0, 0.6),
-                         0 8px 16px rgba(0, 0, 0, 0.4);
+  --liquid-glass-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1), 0 16px 32px rgba(0, 0, 0, 0.6),
+    0 8px 16px rgba(0, 0, 0, 0.4);
   --liquid-ripple: rgba(255, 255, 255, 0.1);
 }
 
 /* Base Typography - SF Pro System */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  font-feature-settings: 'kern' 1;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Roboto",
+    "Helvetica Neue", Arial, sans-serif;
+  font-feature-settings: "kern" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -215,8 +246,10 @@ body {
 }
 
 /* Apple Typography Scale */
-h1, .text-6xl {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+h1,
+.text-6xl {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.07143;
@@ -224,8 +257,10 @@ h1, .text-6xl {
   color: var(--apple-text-primary);
 }
 
-h2, .text-5xl {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+h2,
+.text-5xl {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   font-size: 2.75rem;
   font-weight: 700;
   line-height: 1.09091;
@@ -233,8 +268,10 @@ h2, .text-5xl {
   color: var(--apple-text-primary);
 }
 
-h3, .text-4xl {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+h3,
+.text-4xl {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   font-size: 2.25rem;
   font-weight: 600;
   line-height: 1.11111;
@@ -242,8 +279,10 @@ h3, .text-4xl {
   color: var(--apple-text-primary);
 }
 
-h4, .text-3xl {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+h4,
+.text-3xl {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1.14286;
@@ -251,8 +290,10 @@ h4, .text-3xl {
   color: var(--apple-text-primary);
 }
 
-h5, .text-2xl {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+h5,
+.text-2xl {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   font-size: 1.375rem;
   font-weight: 600;
   line-height: 1.18182;
@@ -260,8 +301,10 @@ h5, .text-2xl {
   color: var(--apple-text-primary);
 }
 
-h6, .text-xl {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+h6,
+.text-xl {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.22222;
@@ -270,9 +313,12 @@ h6, .text-xl {
 }
 
 /* Code Typography - SF Mono */
-code, pre, .font-mono {
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
-  font-feature-settings: 'liga' 0;
+code,
+pre,
+.font-mono {
+  font-family:
+    "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Consolas", monospace;
+  font-feature-settings: "liga" 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -291,15 +337,16 @@ code, pre, .font-mono {
 }
 
 .liquid-glass::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.2) 0%, 
-    rgba(255, 255, 255, 0.05) 50%, 
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
     rgba(255, 255, 255, 0.1) 100%
   );
   border-radius: inherit;
@@ -308,7 +355,7 @@ code, pre, .font-mono {
 }
 
 .liquid-glass::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -326,9 +373,10 @@ code, pre, .font-mono {
 
 .liquid-glass:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8), 
-              0 20px 40px rgba(0, 0, 0, 0.15),
-              0 12px 20px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.8),
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 12px 20px rgba(0, 0, 0, 0.1);
 }
 
 .liquid-glass:hover::after {
@@ -355,15 +403,16 @@ code, pre, .font-mono {
 }
 
 .liquid-glass-button::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.3) 0%, 
-    rgba(255, 255, 255, 0.1) 50%, 
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
     rgba(255, 255, 255, 0.2) 100%
   );
   opacity: 0;
@@ -378,14 +427,16 @@ code, pre, .font-mono {
 .liquid-glass-button:hover {
   transform: translateY(-1px);
   border-color: var(--liquid-glass-highlight);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 
-              0 12px 24px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.9),
+    0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .liquid-glass-button:active {
   transform: translateY(0);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6), 
-              0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.6),
+    0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Enhanced Apple-style Navigation with Liquid Glass */
@@ -401,15 +452,16 @@ code, pre, .font-mono {
 }
 
 .navbar::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 50%, 
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
     rgba(255, 255, 255, 0.1) 100%
   );
   pointer-events: none;
@@ -431,15 +483,16 @@ code, pre, .font-mono {
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.15) 0%, 
-    rgba(255, 255, 255, 0.05) 50%, 
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
     rgba(255, 255, 255, 0.1) 100%
   );
   border-radius: inherit;
@@ -451,9 +504,10 @@ code, pre, .font-mono {
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3), 
-              0 20px 40px rgba(0, 0, 0, 0.2),
-              0 12px 20px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.3),
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 12px 20px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover::before {
@@ -476,25 +530,35 @@ code, pre, .font-mono {
 }
 
 .liquid-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-              radial-gradient(circle at 70% 30%, rgba(0, 122, 255, 0.1) 0%, transparent 50%);
+  background:
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(0, 122, 255, 0.1) 0%,
+      transparent 50%
+    );
   animation: liquid-hero-flow 10s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes liquid-hero-flow {
-  0%, 100% { 
-    background-position: 0% 50%; 
+  0%,
+  100% {
+    background-position: 0% 50%;
     opacity: 0.6;
   }
-  50% { 
-    background-position: 100% 50%; 
+  50% {
+    background-position: 100% 50%;
     opacity: 0.8;
   }
 }
@@ -654,10 +718,15 @@ code, pre, .font-mono {
 
 /* Apple-style Animations */
 @keyframes apple-bounce {
-  0%, 20%, 53%, 80%, 100% {
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
     transform: translate3d(0, 0, 0);
   }
-  40%, 43% {
+  40%,
+  43% {
     transform: translate3d(0, -8px, 0);
   }
   70% {
@@ -721,18 +790,20 @@ code, pre, .font-mono {
 
 /* Responsive Design - Apple Breakpoints */
 @media (max-width: 768px) {
-  h1, .text-6xl {
+  h1,
+  .text-6xl {
     font-size: 2.5rem;
   }
-  
-  h2, .text-5xl {
+
+  h2,
+  .text-5xl {
     font-size: 2rem;
   }
-  
+
   .card {
     padding: var(--spacing-lg);
   }
-  
+
   .glass-blur {
     --glass-blur: 20px; /* Reduce blur on mobile for performance */
   }
@@ -744,7 +815,7 @@ code, pre, .font-mono {
     --glass-bg: rgba(255, 255, 255, 0.95);
     --glass-border: rgba(0, 0, 0, 0.2);
   }
-  
+
   [data-theme="dark"] {
     --glass-bg: rgba(0, 0, 0, 0.95);
     --glass-border: rgba(255, 255, 255, 0.2);
@@ -758,7 +829,7 @@ code, pre, .font-mono {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .glass-card:hover,
   .card:hover,
   .btn-primary:hover,

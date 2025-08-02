@@ -12,10 +12,7 @@ import type {
 
 // Custom type guards for Glass UI components
 export const isGlassComponent = (value: unknown): value is HTMLElement => {
-  return (
-    value instanceof HTMLElement && 
-    value.classList.contains("glass-")
-  );
+  return value instanceof HTMLElement && value.classList.contains("glass-");
 };
 
 export const isValidOpacity = (value: unknown): value is number => {

@@ -33,9 +33,7 @@ const theme = {
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      {/* Your app components */}
-    </ThemeProvider>
+    <ThemeProvider theme={theme}>{/* Your app components */}</ThemeProvider>
   );
 }
 ```
@@ -64,7 +62,7 @@ import { useTheme } from "@liquidify/components";
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
-  
+
   return (
     <button onClick={toggleTheme}>
       Switch to {theme === "light" ? "dark" : "light"} mode

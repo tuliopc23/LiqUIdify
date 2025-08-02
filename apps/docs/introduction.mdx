@@ -4,7 +4,10 @@ description: "LiqUIdify is a modern React component library featuring liquid gla
 icon: "sparkles"
 ---
 
-import { LiquidGlassDemo, LiquidGlassBackground } from './components/LiquidGlassDemo';
+import {
+  LiquidGlassDemo,
+  LiquidGlassBackground,
+} from "./components/LiquidGlassDemo";
 
 <LiquidGlassBackground />
 
@@ -16,7 +19,9 @@ import { LiquidGlassDemo, LiquidGlassBackground } from './components/LiquidGlass
       Liquid Glass Morphism
     </h1>
     <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-      Experience the next evolution of glassmorphism with our liquid glass effects that create depth, elegance, and visual hierarchy in your interfaces.
+      Experience the next evolution of glassmorphism with our liquid glass
+      effects that create depth, elegance, and visual hierarchy in your
+      interfaces.
     </p>
     <div className="flex gap-4 justify-center">
       <LiquidGlassDemo variant="button">
@@ -43,17 +48,17 @@ LiqUIdify is a cutting-edge React component library that brings the beauty of **
       <p className="text-white/70 text-sm">Click to see ripple effects</p>
     </div>
   </LiquidGlassDemo>
-  
-  <LiquidGlassDemo variant="card" size="md">
-    <div className="text-center">
-      <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-        🍎
-      </div>
-      <h3 className="text-lg font-semibold text-white mb-2">Apple Design</h3>
-      <p className="text-white/70 text-sm">HIG-compliant components</p>
+
+<LiquidGlassDemo variant="card" size="md">
+  <div className="text-center">
+    <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+      🍎
     </div>
-  </LiquidGlassDemo>
-  
+    <h3 className="text-lg font-semibold text-white mb-2">Apple Design</h3>
+    <p className="text-white/70 text-sm">HIG-compliant components</p>
+  </div>
+</LiquidGlassDemo>
+
   <LiquidGlassDemo variant="card" size="md">
     <div className="text-center">
       <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
@@ -68,18 +73,10 @@ LiqUIdify is a cutting-edge React component library that brings the beauty of **
 ## 🚀 Key Features
 
 <CardGroup cols={2}>
-  <Card
-    title="50+ Components"
-    icon="puzzle-piece"
-    href="/components"
-  >
+  <Card title="50+ Components" icon="puzzle-piece" href="/components">
     From basic buttons to complex data tables, all with liquid glass effects
   </Card>
-  <Card
-    title="Dark Mode Ready"
-    icon="moon"
-    href="/concepts/theming"
-  >
+  <Card title="Dark Mode Ready" icon="moon" href="/concepts/theming">
     Beautiful dark mode support with automatic color adaptation
   </Card>
   <Card
@@ -87,13 +84,10 @@ LiqUIdify is a cutting-edge React component library that brings the beauty of **
     icon="universal-access"
     href="/concepts/accessibility"
   >
-    WCAG 2.1 AA compliant with full keyboard navigation and screen reader support
+    WCAG 2.1 AA compliant with full keyboard navigation and screen reader
+    support
   </Card>
-  <Card
-    title="TypeScript Native"
-    icon="code"
-    href="/api-reference"
-  >
+  <Card title="TypeScript Native" icon="code" href="/api-reference">
     Built with TypeScript for excellent developer experience and type safety
   </Card>
 </CardGroup>
@@ -110,12 +104,15 @@ LiqUIdify is a cutting-edge React component library that brings the beauty of **
 LiqUIdify embraces Apple's design principles:
 
 ### **Clarity**
+
 Every component prioritizes content and functionality, using liquid glass effects to enhance rather than distract from the user experience.
 
 ### **Deference**
+
 The interface defers to content, with subtle glass morphism that creates depth without overwhelming the primary content.
 
 ### **Depth**
+
 Layered glass effects create visual hierarchy and guide user attention through realistic depth and lighting.
 
 ## 🛠 Technology Stack
@@ -138,21 +135,16 @@ LiqUIdify components work beautifully across all platforms:
 ## 🎨 Visual Examples
 
 ### Liquid Glass Button Showcase
+
 ```tsx
-import { GlassButton } from '@liquidify/react';
+import { GlassButton } from "@liquidify/react";
 
 function ButtonShowcase() {
   return (
     <div className="flex gap-4">
-      <GlassButton variant="primary">
-        Primary Action
-      </GlassButton>
-      <GlassButton variant="secondary">
-        Secondary Action
-      </GlassButton>
-      <GlassButton variant="ghost">
-        Ghost Action
-      </GlassButton>
+      <GlassButton variant="primary">Primary Action</GlassButton>
+      <GlassButton variant="secondary">Secondary Action</GlassButton>
+      <GlassButton variant="ghost">Ghost Action</GlassButton>
     </div>
   );
 }
@@ -171,8 +163,9 @@ function ButtonShowcase() {
 </div>
 
 ### Liquid Glass Card Example
+
 ```tsx
-import { GlassCard } from '@liquidify/react';
+import { GlassCard } from "@liquidify/react";
 
 function ProductCard() {
   return (
@@ -204,7 +197,7 @@ function ProductCard() {
 LiqUIdify uses Apple's semantic color system:
 
 - **Blue** (`#007AFF`) - Primary actions and links
-- **Green** (`#34C759`) - Success states and confirmations  
+- **Green** (`#34C759`) - Success states and confirmations
 - **Orange** (`#FF9500`) - Warnings and important notices
 - **Red** (`#FF3B30`) - Errors and destructive actions
 - **Purple** (`#AF52DE`) - Creative and premium features
@@ -224,18 +217,10 @@ Following Apple's animation guidelines:
 Ready to transform your React applications with liquid glass morphism?
 
 <CardGroup cols={2}>
-  <Card
-    title="Quick Start"
-    icon="rocket"
-    href="/quickstart"
-  >
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
     Get up and running in under 5 minutes
   </Card>
-  <Card
-    title="Installation"
-    icon="download"
-    href="/installation"
-  >
+  <Card title="Installation" icon="download" href="/installation">
     Detailed installation and setup instructions
   </Card>
 </CardGroup>
@@ -251,7 +236,9 @@ Join our growing community of developers creating beautiful interfaces:
 ---
 
 <Note>
-LiqUIdify is designed to work seamlessly with your existing React applications. All components are tree-shakeable and optimized for production builds.
+  LiqUIdify is designed to work seamlessly with your existing React
+  applications. All components are tree-shakeable and optimized for production
+  builds.
 </Note>
 
 Ready to dive in? Let's start with the [Quick Start Guide](/quickstart) and build something amazing! ✨

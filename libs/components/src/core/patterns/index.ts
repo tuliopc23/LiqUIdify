@@ -52,7 +52,7 @@ const createCompoundComponentWithContext = <T extends Record<string, unknown>>(
 };
 
 // Render prop pattern
-interface RenderPropertyPattern<T> {
+{
   children: (props: T) => React.ReactNode;
 }
 

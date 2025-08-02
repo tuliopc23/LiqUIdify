@@ -21,9 +21,9 @@ A component for grouping related buttons together with glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassButtonGroup, GlassButton } from 'liquidify';
+import { GlassButtonGroup, GlassButton } from "liquidify";
 
-<GlassButtonGroup variant='primary' size='md'>
+<GlassButtonGroup variant="primary" size="md">
   <GlassButton>First</GlassButton>
   <GlassButton>Second</GlassButton>
   <GlassButton>Third</GlassButton>
@@ -49,14 +49,14 @@ A circular or square button designed specifically for icons with glass morphism 
 **Usage:**
 
 ```tsx
-import { GlassIconButton } from 'liquidify';
+import { GlassIconButton } from "liquidify";
 
 <GlassIconButton
   icon={<SearchIcon />}
-  aria-label='Search'
-  variant='primary'
-  size='md'
-  shape='circle'
+  aria-label="Search"
+  variant="primary"
+  size="md"
+  shape="circle"
 />;
 ```
 
@@ -77,11 +77,11 @@ A button that can be toggled between active and inactive states with glass morph
 **Usage:**
 
 ```tsx
-import { GlassToggleButton } from 'liquidify';
+import { GlassToggleButton } from "liquidify";
 
 <GlassToggleButton
-  onPressedChange={pressed => console.log(pressed)}
-  variant='primary'
+  onPressedChange={(pressed) => console.log(pressed)}
+  variant="primary"
 >
   Toggle Me
 </GlassToggleButton>;
@@ -103,13 +103,13 @@ A floating action button that can be positioned anywhere on the screen with glas
 **Usage:**
 
 ```tsx
-import { GlassFloatingAction } from 'liquidify';
+import { GlassFloatingAction } from "liquidify";
 
 <GlassFloatingAction
   icon={<PlusIcon />}
-  aria-label='Add item'
-  position='bottom-right'
-  onClick={() => console.log('Add clicked')}
+  aria-label="Add item"
+  position="bottom-right"
+  onClick={() => console.log("Add clicked")}
 />;
 ```
 
@@ -130,16 +130,16 @@ A navigation bar component with glass morphism effects and responsive design.
 **Usage:**
 
 ```tsx
-import { GlassNavbar } from 'liquidify';
+import { GlassNavbar } from "liquidify";
 
 <GlassNavbar
-  variant='sticky'
-  position='top'
+  variant="sticky"
+  position="top"
   logo={<Logo />}
   actions={<UserMenu />}
 >
-  <NavItem href='/home'>Home</NavItem>
-  <NavItem href='/about'>About</NavItem>
+  <NavItem href="/home">Home</NavItem>
+  <NavItem href="/about">About</NavItem>
 </GlassNavbar>;
 ```
 
@@ -162,11 +162,11 @@ A sidebar navigation component with glass morphism effects and collapsible funct
 **Usage:**
 
 ```tsx
-import { GlassSidebar } from 'liquidify';
+import { GlassSidebar } from "liquidify";
 
 <GlassSidebar
-  variant='fixed'
-  width='md'
+  variant="fixed"
+  width="md"
   collapsible
   header={<SidebarHeader />}
   footer={<SidebarFooter />}
@@ -196,13 +196,13 @@ A breadcrumb navigation component with glass morphism effects and smart truncati
 **Usage:**
 
 ```tsx
-import { GlassBreadcrumb } from 'liquidify';
+import { GlassBreadcrumb } from "liquidify";
 
 const breadcrumbItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Products', href: '/products' },
-  { label: 'Electronics', href: '/products/electronics' },
-  { label: 'Laptop', current: true },
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products" },
+  { label: "Electronics", href: "/products/electronics" },
+  { label: "Laptop", current: true },
 ];
 
 <GlassBreadcrumb items={breadcrumbItems} maxItems={4} />;
@@ -234,24 +234,24 @@ A flexible menu component with glass morphism effects and submenu support.
 **Usage:**
 
 ```tsx
-import { GlassMenu } from 'liquidify';
+import { GlassMenu } from "liquidify";
 
 const menuItems = [
-  { id: '1', label: 'Home', icon: <HomeIcon /> },
+  { id: "1", label: "Home", icon: <HomeIcon /> },
   {
-    id: '2',
-    label: 'Products',
+    id: "2",
+    label: "Products",
     icon: <ProductIcon />,
     subItems: [
-      { id: '2.1', label: 'Electronics' },
-      { id: '2.2', label: 'Clothing' },
+      { id: "2.1", label: "Electronics" },
+      { id: "2.2", label: "Clothing" },
     ],
   },
-  { id: '3', separator: true },
-  { id: '4', label: 'About', onClick: () => console.log('About clicked') },
+  { id: "3", separator: true },
+  { id: "4", label: "About", onClick: () => console.log("About clicked") },
 ];
 
-<GlassMenu items={menuItems} orientation='vertical' />;
+<GlassMenu items={menuItems} orientation="vertical" />;
 ```
 
 ### GlassPagination
@@ -271,14 +271,14 @@ A pagination component with glass morphism effects and smart page number display
 **Usage:**
 
 ```tsx
-import { GlassPagination } from 'liquidify';
+import { GlassPagination } from "liquidify";
 
 <GlassPagination
   currentPage={5}
   totalPages={20}
-  onPageChange={page => console.log(`Page ${page} selected`)}
+  onPageChange={(page) => console.log(`Page ${page} selected`)}
   maxVisiblePages={7}
-  size='md'
+  size="md"
 />;
 ```
 
@@ -307,20 +307,20 @@ A step-by-step navigation component with glass morphism effects and progress ind
 **Usage:**
 
 ```tsx
-import { GlassStepper } from 'liquidify';
+import { GlassStepper } from "liquidify";
 
 const steps = [
-  { id: '1', title: 'Account', description: 'Setup your account' },
-  { id: '2', title: 'Profile', description: 'Complete your profile' },
-  { id: '3', title: 'Preferences', description: 'Set your preferences' },
-  { id: '4', title: 'Complete', description: 'Finish setup' },
+  { id: "1", title: "Account", description: "Setup your account" },
+  { id: "2", title: "Profile", description: "Complete your profile" },
+  { id: "3", title: "Preferences", description: "Set your preferences" },
+  { id: "4", title: "Complete", description: "Finish setup" },
 ];
 
 <GlassStepper
   steps={steps}
   currentStep={1}
-  onStepClick={step => console.log(`Step ${step} clicked`)}
-  orientation='horizontal'
+  onStepClick={(step) => console.log(`Step ${step} clicked`)}
+  orientation="horizontal"
 />;
 ```
 
@@ -340,12 +340,12 @@ A date picker input with glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassDatePicker } from 'liquidify';
+import { GlassDatePicker } from "liquidify";
 
 <GlassDatePicker
   value={selectedDate}
-  onChange={date => setSelectedDate(date)}
-  placeholder='Choose a date'
+  onChange={(date) => setSelectedDate(date)}
+  placeholder="Choose a date"
 />;
 ```
 
@@ -364,11 +364,11 @@ A file upload component with drag-and-drop support and glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassFileUpload } from 'liquidify';
+import { GlassFileUpload } from "liquidify";
 
 <GlassFileUpload
-  onFileChange={files => console.log(files)}
-  accept='image/*'
+  onFileChange={(files) => console.log(files)}
+  accept="image/*"
   multiple
   maxSize={5}
 />;
@@ -389,19 +389,19 @@ A radio button group with glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassRadio } from 'liquidify';
+import { GlassRadio } from "liquidify";
 
 const options = [
-  { label: 'Option 1', value: 'opt1' },
-  { label: 'Option 2', value: 'opt2' },
-  { label: 'Option 3', value: 'opt3' },
+  { label: "Option 1", value: "opt1" },
+  { label: "Option 2", value: "opt2" },
+  { label: "Option 3", value: "opt3" },
 ];
 
 <GlassRadio
   options={options}
-  name='myRadio'
+  name="myRadio"
   value={selectedValue}
-  onChange={value => setSelectedValue(value)}
+  onChange={(value) => setSelectedValue(value)}
 />;
 ```
 
@@ -425,14 +425,14 @@ A notification component with different types and glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassNotification } from 'liquidify';
+import { GlassNotification } from "liquidify";
 
 <GlassNotification
-  type='success'
-  title='Success!'
-  message='Your changes have been saved.'
+  type="success"
+  title="Success!"
+  message="Your changes have been saved."
   closable
-  onClose={() => console.log('Closed')}
+  onClose={() => console.log("Closed")}
 />;
 ```
 
@@ -453,13 +453,13 @@ A toast notification component with positioning and glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassToast } from 'liquidify';
+import { GlassToast } from "liquidify";
 
 <GlassToast
-  type='info'
-  title='Info'
-  message='This is an information toast.'
-  position='top-right'
+  type="info"
+  title="Info"
+  message="This is an information toast."
+  position="top-right"
   duration={3000}
 />;
 ```
@@ -488,19 +488,19 @@ A chart component with glass morphism effects supporting multiple chart types.
 **Usage:**
 
 ```tsx
-import { GlassChart } from 'liquidify';
+import { GlassChart } from "liquidify";
 
 const chartData = [
-  { label: 'Jan', value: 400 },
-  { label: 'Feb', value: 300 },
-  { label: 'Mar', value: 500 },
-  { label: 'Apr', value: 280 },
+  { label: "Jan", value: 400 },
+  { label: "Feb", value: 300 },
+  { label: "Mar", value: 500 },
+  { label: "Apr", value: 280 },
 ];
 
 <GlassChart
   data={chartData}
-  type='bar'
-  title='Monthly Sales'
+  type="bar"
+  title="Monthly Sales"
   width={500}
   height={300}
   showLegend
@@ -522,11 +522,11 @@ A command execution component with glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassCommand } from 'liquidify';
+import { GlassCommand } from "liquidify";
 
 <GlassCommand
-  command='npm install liquidify'
-  execute={() => console.log('Executing command')}
+  command="npm install liquidify"
+  execute={() => console.log("Executing command")}
   disableEditing={false}
 />;
 ```
@@ -548,14 +548,14 @@ A page header component with glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassHeader } from 'liquidify';
+import { GlassHeader } from "liquidify";
 
 <GlassHeader
-  title='Dashboard'
-  subtitle='Welcome back to your dashboard'
+  title="Dashboard"
+  subtitle="Welcome back to your dashboard"
   actions={<HeaderActions />}
   breadcrumb={<BreadcrumbNav />}
-  variant='default'
+  variant="default"
 />;
 ```
 
@@ -573,18 +573,18 @@ A page footer component with glass morphism effects.
 **Usage:**
 
 ```tsx
-import { GlassFooter } from 'liquidify';
+import { GlassFooter } from "liquidify";
 
 const footerLinks = [
-  { label: 'Privacy', href: '/privacy' },
-  { label: 'Terms', href: '/terms' },
-  { label: 'Contact', onClick: () => console.log('Contact clicked') },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Contact", onClick: () => console.log("Contact clicked") },
 ];
 
 <GlassFooter
-  copyright='© 2024 Your Company. All rights reserved.'
+  copyright="© 2024 Your Company. All rights reserved."
   links={footerLinks}
-  variant='simple'
+  variant="simple"
 />;
 ```
 
@@ -652,7 +652,7 @@ import {
   GlassCommand,
   GlassHeader,
   GlassFooter,
-} from 'liquidify';
+} from "liquidify";
 ```
 
 All components support the standard glass morphism effects and can be customized using the inherited props from `GlassEffect`.
@@ -674,10 +674,10 @@ If you were using placeholder or alternative components, you can now replace the
 
 ```tsx
 // Before
-import { Navbar, Sidebar } from 'liquidify';
+import { Navbar, Sidebar } from "liquidify";
 
 // After
-import { GlassNavbar, GlassSidebar } from 'liquidify';
+import { GlassNavbar, GlassSidebar } from "liquidify";
 ```
 
 The API is designed to be intuitive and consistent across all components, making migration straightforward.

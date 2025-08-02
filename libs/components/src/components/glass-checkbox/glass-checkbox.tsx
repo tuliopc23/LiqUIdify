@@ -21,7 +21,7 @@ const GlassCheckbox = forwardRef<HTMLInputElement, GlassCheckboxProps>(
           <div className="glass-filter absolute inset-0 radius-lg-s pointer-events-none" />
           <div className="glass-overlay absolute inset-0 radius-lg-s pointer-events-none" />
           <div className="glass-specular absolute inset-0 radius-lg-s pointer-events-none" />
-          
+
           <input
             type="checkbox"
             id={checkboxId}
@@ -47,11 +47,13 @@ const GlassCheckbox = forwardRef<HTMLInputElement, GlassCheckboxProps>(
         </div>
 
         {label && (
-          <span className={cn(
-            "text-glass-text transition-colors duration-200",
-            "group-hover:text-glass-hl",
-            props.disabled && "opacity-50"
-          )}>
+          <span
+            className={cn(
+              "text-glass-text transition-colors duration-200",
+              "group-hover:text-glass-hl",
+              props.disabled && "opacity-50",
+            )}
+          >
             {label}
           </span>
         )}

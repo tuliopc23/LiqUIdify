@@ -25,18 +25,21 @@ bun add @liquidify/components
 ### Breaking Changes
 
 1. Package name update
+
 ```diff
 - import { Button } from "liquidify"
 + import { GlassButton } from "@liquidify/components"
 ```
 
 2. Theme system redesign
+
 ```diff
 - createTheme({ colors: { primary: '#000' } })
 + defineTheme({ colors: { primary: { 500: '#000' } } })
 ```
 
 3. Animation hooks API
+
 ```diff
 - useGlassEffect({ blur: 10 })
 + useGlassEffect({ blur: 10, performance: 'high' })

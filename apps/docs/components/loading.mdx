@@ -20,9 +20,10 @@ import { Loading } from "@liquidify/components";
 import { Loading } from "@liquidify/components";
 
 function App() {
-  return <Loading />;
+return <Loading />;
 }
-```
+
+````
 
 ```tsx Next.js
 "use client";
@@ -31,7 +32,8 @@ import { Loading } from "@liquidify/components";
 export default function Page() {
   return <Loading />;
 }
-```
+````
+
 </CodeGroup>
 
 ## With Text
@@ -54,6 +56,7 @@ export default function Page() {
 ```tsx Large
 <Loading size="lg" />
 ```
+
 </CodeGroup>
 
 ## Variants
@@ -74,29 +77,26 @@ export default function Page() {
 ```tsx Bars
 <Loading variant="bars" />
 ```
+
 </CodeGroup>
 
 ## Full Screen
 
 ```tsx
-<Loading 
-  fullScreen={true}
-  text="Loading application..."
-  backdrop={true}
-/>
+<Loading fullScreen={true} text="Loading application..." backdrop={true} />
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Loading indicator size |
-| `variant` | `"spinner" \| "dots" \| "pulse" \| "bars"` | `"spinner"` | Loading animation type |
-| `text` | `string` | - | Loading text |
-| `fullScreen` | `boolean` | `false` | Full screen overlay |
-| `backdrop` | `boolean` | `false` | Show backdrop |
-| `color` | `string` | - | Custom color |
-| `className` | `string` | - | Additional CSS classes |
+| Prop         | Type                                       | Default     | Description            |
+| ------------ | ------------------------------------------ | ----------- | ---------------------- |
+| `size`       | `"sm" \| "md" \| "lg"`                     | `"md"`      | Loading indicator size |
+| `variant`    | `"spinner" \| "dots" \| "pulse" \| "bars"` | `"spinner"` | Loading animation type |
+| `text`       | `string`                                   | -           | Loading text           |
+| `fullScreen` | `boolean`                                  | `false`     | Full screen overlay    |
+| `backdrop`   | `boolean`                                  | `false`     | Show backdrop          |
+| `color`      | `string`                                   | -           | Custom color           |
+| `className`  | `string`                                   | -           | Additional CSS classes |
 
 ## Accessibility
 

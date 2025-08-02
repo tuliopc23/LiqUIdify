@@ -20,23 +20,23 @@ const preview: Preview = {
       canvas: { sourceState: "shown" },
     },
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'light',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "light",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
         {
-          name: 'dim',
-          value: 'linear-gradient(135deg, #2d3748 0%, #4a5568 100%)',
+          name: "dim",
+          value: "linear-gradient(135deg, #2d3748 0%, #4a5568 100%)",
         },
         {
-          name: 'accent',
-          value: 'linear-gradient(135deg, #fb4268 0%, #ff6b9d 100%)',
+          name: "accent",
+          value: "linear-gradient(135deg, #fb4268 0%, #ff6b9d 100%)",
         },
         {
-          name: 'dark',
-          value: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+          name: "dark",
+          value: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)",
         },
       ],
     },
@@ -81,14 +81,14 @@ const preview: Preview = {
   },
   globalTypes: {
     theme: {
-      name: 'Theme',
-      toolbar: { 
-        icon: 'paintbrush', 
+      name: "Theme",
+      toolbar: {
+        icon: "paintbrush",
         items: [
-          { value: 'light', title: 'Light' },
-          { value: 'dim', title: 'Dim' },
-          { value: 'accent', title: 'Accent' }
-        ] 
+          { value: "light", title: "Light" },
+          { value: "dim", title: "Dim" },
+          { value: "accent", title: "Accent" },
+        ],
       },
     },
   },
@@ -103,14 +103,14 @@ const preview: Preview = {
           document.body.className =
             document.body.className.replace(/theme-(light|dim|accent)/g, "") +
             ` theme-${theme}`;
-          
+
           // Update CSS variables based on theme
           const themes = {
-            light : { '--tw-bg-opacity': '0.25' },
-            dim   : { '--tw-bg-opacity': '0.15' },
-            accent: { '--lg-accent': '#fb4268' },
+            light: { "--tw-bg-opacity": "0.25" },
+            dim: { "--tw-bg-opacity": "0.15" },
+            accent: { "--lg-accent": "#fb4268" },
           };
-          
+
           const root = document.documentElement;
           Object.entries(themes[theme] || {}).forEach(([key, value]) => {
             root.style.setProperty(key, value);
@@ -121,7 +121,7 @@ const preview: Preview = {
       // Add background animation class
       React.useEffect(() => {
         if (typeof document !== "undefined") {
-          document.documentElement.classList.add('animate-bg-move', 'bg-cover');
+          document.documentElement.classList.add("animate-bg-move", "bg-cover");
         }
       }, []);
 
@@ -137,9 +137,12 @@ const preview: Preview = {
               {
                 className: "container flex flex-col gap-4 min-h-screen p-4",
                 style: {
-                  background: context.parameters.backgrounds?.values?.find(
-                    (bg: any) => bg.name === (context.globals.background || 'dark')
-                  )?.value || 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+                  background:
+                    context.parameters.backgrounds?.values?.find(
+                      (bg: any) =>
+                        bg.name === (context.globals.background || "dark"),
+                    )?.value ||
+                    "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)",
                 },
               },
               React.createElement(Story),
@@ -151,7 +154,11 @@ const preview: Preview = {
         return React.createElement(
           "div",
           { className: "p-4 text-red-500" },
-          React.createElement("h3", { className: "text-lg font-bold" }, "Story Error"),
+          React.createElement(
+            "h3",
+            { className: "text-lg font-bold" },
+            "Story Error",
+          ),
           React.createElement(
             "p",
             { className: "mt-2" },
@@ -161,10 +168,16 @@ const preview: Preview = {
           React.createElement(
             "details",
             { className: "mt-4" },
-            React.createElement("summary", { className: "cursor-pointer font-medium" }, "Error Details"),
+            React.createElement(
+              "summary",
+              { className: "cursor-pointer font-medium" },
+              "Error Details",
+            ),
             React.createElement(
               "pre",
-              { className: "mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto" },
+              {
+                className: "mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto",
+              },
               error instanceof Error ? error.stack : String(error),
             ),
           ),

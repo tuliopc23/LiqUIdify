@@ -92,7 +92,7 @@ const LivePreview = ({ Component, ...props }: Record<string, unknown>) => (
   </div>
 );
 const LiveError = ({ className }: { className?: string }) => {
-  return <div className={className} style={{ display: 'none' }} />;
+  return <div className={className} style={{ display: "none" }} />;
 };
 
 export interface PlaygroundProps {
@@ -291,7 +291,9 @@ export function GlassPlayground({
                 },
               ]}
               defaultTab={activeTab}
-              onTabChange={(tabId: string) => setActiveTab(tabId as "preview" | "code")}
+              onTabChange={(tabId: string) =>
+                setActiveTab(tabId as "preview" | "code")
+              }
               className="h-full"
               tabListClassName="px-4 pt-2"
               tabPanelClassName="h-full"
@@ -373,7 +375,13 @@ function PlaygroundPreview() {
   return (
     <div className="playground-preview flex h-full items-center justify-center">
       <LivePreview
-        Component={({ children, ...props }: { children?: React.ReactNode; [key: string]: any }) => (
+        Component={({
+          children,
+          ...props
+        }: {
+          children?: React.ReactNode;
+          [key: string]: any;
+        }) => (
           <div className="mx-auto w-full max-w-2xl" {...props}>
             {children}
           </div>

@@ -39,11 +39,9 @@ const GlassBadge = forwardRef<HTMLSpanElement, GlassBadgeProps>(
             <div className="glass-specular" />
           </>
         )}
-        
+
         {/* Badge content */}
-        <span className="relative z-10">
-          {props.children}
-        </span>
+        <span className="relative z-10">{props.children}</span>
       </span>
     );
   },

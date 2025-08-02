@@ -7,8 +7,6 @@ yarn-error.log*
 # Production builds
 dist/
 build/
-!build/*.ts
-!build/*.js
 storybook-static/
 
 # Environment variables
@@ -21,6 +19,11 @@ storybook-static/
 # Testing
 coverage/
 .nyc_output
+/scripts
+src/__tests__/
+tests/
+*.test.ts
+*.spec.js
 
 # IDE
 .vscode/
@@ -48,14 +51,6 @@ Thumbs.db
 .vercel
 
 .idea/**/*
-
-
-.nx/cache
-.nx/workspace-data
-.cursor/rules/nx-rules.mdc
-.github/instructions/nx.instructions.md
-vite.config.*.timestamp*
-vitest.config.*.timestamp*
 
 # Generated bundle analysis files
 reports/bundle/stats.html

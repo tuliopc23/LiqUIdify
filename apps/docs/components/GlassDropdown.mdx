@@ -1,9 +1,13 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # GlassDropdown
 
 <Callout type="warning">
-  **Component Availability Notice**: This component is documented but may not be available in the current version of the Liquidify package. Please check the [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most up-to-date information about which components are actually exported and usable.
+  **Component Availability Notice**: This component is documented but may not be
+  available in the current version of the Liquidify package. Please check the
+  [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most
+  up-to-date information about which components are actually exported and
+  usable.
 </Callout>
 
 GlassDropdown is a component that provides a menu of options that users can select from, using Apple's Human Interface Guidelines and Liquid Glass aesthetics.
@@ -113,23 +117,23 @@ Respects user preferences for reduced animations.
 ### Basic Usage
 
 ```tsx
-import { GlassDropdown } from 'liquidify';
+import { GlassDropdown } from "liquidify";
 
 export default function Example() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
   ];
 
   return (
     <GlassDropdown
       options={options}
       value={value}
-      onChange={value => setValue(value)}
-      placeholder='Choose an option'
+      onChange={(value) => setValue(value)}
+      placeholder="Choose an option"
     />
   );
 }
@@ -138,26 +142,26 @@ export default function Example() {
 ### With Icons and Dividers
 
 ```tsx
-import { GlassDropdown } from 'liquidify';
+import { GlassDropdown } from "liquidify";
 
 export default function IconDropdownExample() {
-  const [sortBy, setSortBy] = useState('name');
+  const [sortBy, setSortBy] = useState("name");
 
   const options = [
-    { value: 'name', label: 'Name', icon: 'text-cursor' },
-    { value: 'date', label: 'Date', icon: 'calendar' },
+    { value: "name", label: "Name", icon: "text-cursor" },
+    { value: "date", label: "Date", icon: "calendar" },
     { divider: true },
-    { value: 'size', label: 'Size', icon: 'archive' },
-    { value: 'type', label: 'Type', icon: 'tag' },
+    { value: "size", label: "Size", icon: "archive" },
+    { value: "type", label: "Type", icon: "tag" },
   ];
 
   return (
     <GlassDropdown
       options={options}
       value={sortBy}
-      onChange={value => setSortBy(value)}
-      placeholder='Sort by'
-      size='lg'
+      onChange={(value) => setSortBy(value)}
+      placeholder="Sort by"
+      size="lg"
     />
   );
 }
@@ -166,29 +170,29 @@ export default function IconDropdownExample() {
 ### Advanced Usage
 
 ```tsx
-import { GlassDropdown } from 'liquidify';
+import { GlassDropdown } from "liquidify";
 
 export default function AdvancedExample() {
-  const [selectedAction, setSelectedAction] = useState('');
+  const [selectedAction, setSelectedAction] = useState("");
 
   const actions = [
-    { value: 'edit', label: 'Edit', icon: 'pencil' },
-    { value: 'duplicate', label: 'Duplicate', icon: 'copy' },
-    { value: 'share', label: 'Share', icon: 'share' },
+    { value: "edit", label: "Edit", icon: "pencil" },
+    { value: "duplicate", label: "Duplicate", icon: "copy" },
+    { value: "share", label: "Share", icon: "share" },
     { divider: true },
-    { value: 'delete', label: 'Delete', icon: 'trash', destructive: true },
+    { value: "delete", label: "Delete", icon: "trash", destructive: true },
   ];
 
   return (
     <GlassDropdown
       options={actions}
       value={selectedAction}
-      onChange={value => {
+      onChange={(value) => {
         setSelectedAction(value);
         // Handle action
       }}
-      placeholder='Actions'
-      position='top'
+      placeholder="Actions"
+      position="top"
     />
   );
 }

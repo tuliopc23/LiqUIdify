@@ -40,11 +40,14 @@ export function GlassModal({
   const descriptionId = useId();
 
   // Handle escape key
-  const handleEscape = useCallback((event: KeyboardEvent) => {
-    if (closeOnEscape && event.key === "Escape") {
-      onClose();
-    }
-  }, [closeOnEscape, onClose]);
+  const handleEscape = useCallback(
+    (event: KeyboardEvent) => {
+      if (closeOnEscape && event.key === "Escape") {
+        onClose();
+      }
+    },
+    [closeOnEscape, onClose],
+  );
 
   // Handle backdrop click
   const handleBackdropClick = useCallback(
@@ -62,7 +65,8 @@ export function GlassModal({
 
     if (isOpen) {
       // Lock body scroll
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
@@ -100,7 +104,7 @@ export function GlassModal({
     >
       {/* Backdrop with glass effect */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-      
+
       <div
         ref={modalRef}
         role="dialog"
@@ -143,7 +147,7 @@ export function GlassModal({
                   "glass-button radius-lg-s p-2 text-glass-grey",
                   "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
                   "motion-safe:active:scale-95 transition-all duration-200",
-                  "glass-focus"
+                  "glass-focus",
                 )}
               >
                 <X className="h-4 w-4" />
@@ -164,11 +168,7 @@ export function GlassModal({
 
   // For now, render directly without portal (can be enhanced later)
   if (typeof document !== "undefined") {
-    return (
-      <div>
-        {modalContent}
-      </div>
-    );
+    return <div>{modalContent}</div>;
   }
 
   return null;

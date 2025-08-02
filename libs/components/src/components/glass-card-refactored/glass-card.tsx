@@ -119,29 +119,27 @@ const VARIANT_CLASSES = {
   primary: cn(
     "glass glass-card",
     "bg-white/90 dark:bg-gray-800/90",
-    "border border-gray-200/50 dark:border-gray-700/50"
+    "border border-gray-200/50 dark:border-gray-700/50",
   ),
   secondary: cn(
     "glass glass-card",
     "bg-gray-50/90 dark:bg-gray-900/90",
-    "border border-gray-300/50 dark:border-gray-600/50"
+    "border border-gray-300/50 dark:border-gray-600/50",
   ),
   tertiary: cn(
     "glass-card bg-transparent",
-    "border border-gray-200/30 dark:border-gray-700/30"
+    "border border-gray-200/30 dark:border-gray-700/30",
   ),
-  ghost: cn(
-    "glass-card bg-transparent border-transparent"
-  ),
+  ghost: cn("glass-card bg-transparent border-transparent"),
   destructive: cn(
     "glass glass-card",
     "bg-red-50/90 dark:bg-red-900/10",
-    "border border-red-200/50 dark:border-red-800/50"
+    "border border-red-200/50 dark:border-red-800/50",
   ),
   apple: cn(
     "glass glass-card",
     "bg-white/80 dark:bg-gray-800/80",
-    "border border-gray-200/30 dark:border-gray-700/30"
+    "border border-gray-200/30 dark:border-gray-700/30",
   ),
 };
 
@@ -158,7 +156,7 @@ const ELEVATION_CLASSES = {
 const PADDING_CLASSES = {
   none: "",
   xs: "p-2",
-  sm: "p-3", 
+  sm: "p-3",
   md: "p-4",
   lg: "p-6",
   xl: "p-8",
@@ -168,7 +166,7 @@ const PADDING_CLASSES = {
 const RADIUS_CLASSES = {
   xs: "radius-lg-s",
   sm: "radius-lg-s",
-  md: "radius-lg-m", 
+  md: "radius-lg-m",
   lg: "radius-lg-m",
   xl: "radius-lg-l",
 };
@@ -328,7 +326,7 @@ export const GlassCard = React.memo(
       const componentClasses = cn(
         // Base classes with glass utilities
         "relative overflow-hidden will-change-transform",
-        
+
         // HIG-compliant radius based on size
         RADIUS_CLASSES[size as keyof typeof RADIUS_CLASSES],
 
@@ -389,11 +387,9 @@ export const GlassCard = React.memo(
             <div className="glass-filter" />
             <div className="glass-overlay" />
             <div className="glass-specular" />
-            
+
             {/* Card content */}
-            <div className="glass-content">
-              {children}
-            </div>
+            <div className="glass-content">{children}</div>
           </div>
         </CardContext.Provider>
       );

@@ -160,9 +160,7 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
               </h4>
             )}
 
-            <p className="text-glass-text/80 text-sm">
-              {toast.description}
-            </p>
+            <p className="text-glass-text/80 text-sm">{toast.description}</p>
 
             {toast.action && (
               <button
@@ -171,7 +169,7 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
                 className={cn(
                   "mt-2 font-medium text-glass-accent text-sm",
                   "motion-safe:hover:underline transition-all duration-200",
-                  "glass-focus"
+                  "glass-focus",
                 )}
               >
                 {toast.action.label}
@@ -186,7 +184,7 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
               "glass-button flex-shrink-0 radius-lg-s p-1 text-glass-grey",
               "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
               "motion-safe:active:scale-95 transition-all duration-200",
-              "glass-focus"
+              "glass-focus",
             )}
           >
             <X className="h-4 w-4" />
@@ -257,7 +255,7 @@ const _GlassToast: React.FC<GlassToastProps> = ({
                 "glass-button flex-shrink-0 radius-lg-s p-1 text-glass-grey",
                 "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
                 "motion-safe:active:scale-95 transition-all duration-200",
-                "glass-focus"
+                "glass-focus",
               )}
             >
               <X className="h-4 w-4" />

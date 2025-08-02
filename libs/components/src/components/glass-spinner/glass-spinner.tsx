@@ -29,7 +29,10 @@ const SPEED_CLASSES = {
 };
 
 interface GlassSpinnerProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes> {
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    keyof React.AriaAttributes
+  > {
   variant?: keyof typeof VARIANT_CLASSES;
   size?: keyof typeof SIZE_CLASSES;
   speed?: keyof typeof SPEED_CLASSES;
@@ -78,7 +81,9 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
         ref={ref}
         className={cn(
           "flex items-center justify-center",
-          orientation === "horizontal" ? "flex-row space-x-2" : "flex-col space-y-2",
+          orientation === "horizontal"
+            ? "flex-row space-x-2"
+            : "flex-col space-y-2",
           centered && "fixed inset-0 z-50 bg-black/20 backdrop-blur-sm",
           className,
         )}
@@ -86,7 +91,9 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
       >
         <SpinnerElement />
         {showLabel && (
-          <span className="select-none text-sm text-glass-text/70">{label}</span>
+          <span className="select-none text-sm text-glass-text/70">
+            {label}
+          </span>
         )}
       </div>
     );
@@ -112,10 +119,7 @@ export const PulseSpinner: React.FC<{
       {[0, 1, 2].map((index) => (
         <motion.div
           key={`pulse-${index}`}
-          className={cn(
-            "rounded-full bg-glass-hl/50",
-            sizeClasses[size],
-          )}
+          className={cn("rounded-full bg-glass-hl/50", sizeClasses[size])}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.5, 1, 0.5],

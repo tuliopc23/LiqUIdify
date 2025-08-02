@@ -18,31 +18,23 @@ LiqUIdify 2.0 introduces significant improvements in performance, accessibility,
 <CardGroup cols={2}>
 
 <Card title="Performance Boost" icon="zap">
-- 40% smaller bundle size
-- Improved tree-shaking
-- GPU-accelerated animations
-- Better memory management
+  - 40% smaller bundle size - Improved tree-shaking - GPU-accelerated animations
+  - Better memory management
 </Card>
 
 <Card title="Enhanced Accessibility" icon="universal-access">
-- WCAG 2.1 AAA support
-- Better screen reader integration
-- Improved keyboard navigation
-- High contrast mode
+  - WCAG 2.1 AAA support - Better screen reader integration - Improved keyboard
+  navigation - High contrast mode
 </Card>
 
 <Card title="New Component Architecture" icon="cube">
-- Compound components
-- Better composition patterns
-- Improved TypeScript support
-- Simplified prop interfaces
+  - Compound components - Better composition patterns - Improved TypeScript
+  support - Simplified prop interfaces
 </Card>
 
 <Card title="Framework Support" icon="code">
-- Next.js 14 App Router support
-- React 19 compatibility
-- Remix integration
-- Astro support
+  - Next.js 14 App Router support - React 19 compatibility - Remix integration -
+  Astro support
 </Card>
 
 </CardGroup>
@@ -52,27 +44,30 @@ LiqUIdify 2.0 introduces significant improvements in performance, accessibility,
 ### 1. Import Structure Changes
 
 **Before (v1.x):**
+
 ```tsx
-import { Button, Card, Input } from '@liquidify/components'
-import { useTheme } from '@liquidify/components/hooks'
-import '@liquidify/components/styles'
+import { Button, Card, Input } from "@liquidify/components";
+import { useTheme } from "@liquidify/components/hooks";
+import "@liquidify/components/styles";
 ```
 
 **After (v2.x):**
+
 ```tsx
-import { GlassButton, GlassCard, GlassInput } from '@liquidify/components'
-import { useGlassTheme } from '@liquidify/components'
-import '@liquidify/components/css'
+import { GlassButton, GlassCard, GlassInput } from "@liquidify/components";
+import { useGlassTheme } from "@liquidify/components";
+import "@liquidify/components/css";
 ```
 
 **Migration:**
+
 ```tsx
 // Automated migration with codemod
 npx @liquidify/migrate v1-to-v2 src/
 
 // Manual find & replace patterns
 // Button -> GlassButton
-// Card -> GlassCard  
+// Card -> GlassCard
 // Input -> GlassInput
 // useTheme -> useGlassTheme
 ```
@@ -80,28 +75,30 @@ npx @liquidify/migrate v1-to-v2 src/
 ### 2. Provider Changes
 
 **Before (v1.x):**
+
 ```tsx
-import { LiquidifyProvider } from '@liquidify/components'
+import { LiquidifyProvider } from "@liquidify/components";
 
 function App() {
   return (
     <LiquidifyProvider theme="dark">
       <YourApp />
     </LiquidifyProvider>
-  )
+  );
 }
 ```
 
 **After (v2.x):**
+
 ```tsx
-import { UnifiedGlassProvider } from '@liquidify/components'
+import { UnifiedGlassProvider } from "@liquidify/components";
 
 function App() {
   return (
     <UnifiedGlassProvider defaultTheme="dark" storageKey="app-theme">
       <YourApp />
     </UnifiedGlassProvider>
-  )
+  );
 }
 ```
 
@@ -110,8 +107,9 @@ function App() {
 #### Button Component
 
 **Before (v1.x):**
+
 ```tsx
-<Button 
+<Button
   isLoading={loading}
   loadingText="Please wait..."
   variant="primary"
@@ -120,8 +118,9 @@ function App() {
 ```
 
 **After (v2.x):**
+
 ```tsx
-<GlassButton 
+<GlassButton
   loading={loading}
   loadingText="Please wait..."
   variant="primary"
@@ -133,22 +132,24 @@ function App() {
 
 All components now use consistent size values:
 
-| v1.x | v2.x |
-|------|------|
-| `small` | `sm` |
-| `medium` | `md` |
-| `large` | `lg` |
+| v1.x          | v2.x |
+| ------------- | ---- |
+| `small`       | `sm` |
+| `medium`      | `md` |
+| `large`       | `lg` |
 | `extra-large` | `xl` |
 
 ### 4. Event Handler Changes
 
 **Before (v1.x):**
+
 ```tsx
 <Button onPress={handlePress} />
 <Input onChange={(value) => setValue(value)} />
 ```
 
 **After (v2.x):**
+
 ```tsx
 <GlassButton onClick={handlePress} />
 <GlassInput onChange={(e) => setValue(e.target.value)} />
@@ -157,6 +158,7 @@ All components now use consistent size values:
 ### 5. CSS Variable Updates
 
 **Before (v1.x):**
+
 ```css
 :root {
   --lq-primary: #3b82f6;
@@ -166,6 +168,7 @@ All components now use consistent size values:
 ```
 
 **After (v2.x):**
+
 ```css
 :root {
   --glass-primary: rgba(59, 130, 246, 0.2);
@@ -210,17 +213,13 @@ Replace your root provider:
 
 ```tsx
 // Before
-import { LiquidifyProvider } from '@liquidify/components'
+import { LiquidifyProvider } from "@liquidify/components";
 
 // After
-import { UnifiedGlassProvider } from '@liquidify/components'
+import { UnifiedGlassProvider } from "@liquidify/components";
 
 function App() {
-  return (
-    <UnifiedGlassProvider>
-      {/* Your app */}
-    </UnifiedGlassProvider>
-  )
+  return <UnifiedGlassProvider>{/* Your app */}</UnifiedGlassProvider>;
 }
 ```
 
@@ -244,11 +243,11 @@ Update component imports throughout your codebase:
 
 ```tsx
 // Before
-import '@liquidify/components/styles'
-import '@liquidify/components/theme.css'
+import "@liquidify/components/styles";
+import "@liquidify/components/theme.css";
 
 // After
-import '@liquidify/components/css'
+import "@liquidify/components/css";
 ```
 
 ### Step 6: Fix Breaking Changes
@@ -277,10 +276,10 @@ export default function App({ Component, pageProps }) {
     <LiquidifyProvider>
       <Component {...pageProps} />
     </LiquidifyProvider>
-  )
+  );
 }
 
-// pages/_app.tsx - After
+// pages/\_app.tsx - After
 import { UnifiedGlassProvider } from '@liquidify/components'
 import '@liquidify/components/css'
 
@@ -303,12 +302,10 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <LiquidifyProvider>
-          {children}
-        </LiquidifyProvider>
+        <LiquidifyProvider>{children}</LiquidifyProvider>
       </body>
     </html>
-  )
+  );
 }
 
 // app/layout.tsx - After
@@ -335,26 +332,26 @@ export default function RootLayout({ children }) {
 
 ```tsx
 // main.tsx - Before
-import { LiquidifyProvider } from '@liquidify/components'
-import '@liquidify/components/styles'
+import { LiquidifyProvider } from "@liquidify/components";
+import "@liquidify/components/styles";
 
 ReactDOM.render(
   <LiquidifyProvider>
     <App />
   </LiquidifyProvider>,
-  document.getElementById('root')
-)
+  document.getElementById("root"),
+);
 
 // main.tsx - After
-import { UnifiedGlassProvider } from '@liquidify/components'
-import '@liquidify/components/css'
+import { UnifiedGlassProvider } from "@liquidify/components";
+import "@liquidify/components/css";
 
 ReactDOM.render(
   <UnifiedGlassProvider>
     <App />
   </UnifiedGlassProvider>,
-  document.getElementById('root')
-)
+  document.getElementById("root"),
+);
 ```
 
 ## Component-Specific Migrations
@@ -362,8 +359,9 @@ ReactDOM.render(
 ### Button Migration
 
 **Before (v1.x):**
+
 ```tsx
-<Button 
+<Button
   variant="primary"
   size="large"
   isLoading={loading}
@@ -376,8 +374,9 @@ ReactDOM.render(
 ```
 
 **After (v2.x):**
+
 ```tsx
-<GlassButton 
+<GlassButton
   variant="primary"
   size="lg"
   loading={loading}
@@ -392,41 +391,40 @@ ReactDOM.render(
 ### Card Migration
 
 **Before (v1.x):**
+
 ```tsx
 <Card elevation="high" interactive>
   <Card.Header>
     <Card.Title>Title</Card.Title>
   </Card.Header>
-  <Card.Body>
-    Content
-  </Card.Body>
+  <Card.Body>Content</Card.Body>
 </Card>
 ```
 
 **After (v2.x):**
+
 ```tsx
 <GlassCard variant="elevated" interactive>
   <GlassCard.Header>
     <GlassCard.Title>Title</GlassCard.Title>
   </GlassCard.Header>
-  <GlassCard.Content>
-    Content
-  </GlassCard.Content>
+  <GlassCard.Content>Content</GlassCard.Content>
 </GlassCard>
 ```
 
 ### Form Components Migration
 
 **Before (v1.x):**
+
 ```tsx
-<Input 
+<Input
   label="Email"
   error={errorMessage}
   value={email}
   onChange={setEmail}
 />
 
-<Select 
+<Select
   items={options}
   value={selected}
   onSelectionChange={setSelected}
@@ -434,18 +432,19 @@ ReactDOM.render(
 ```
 
 **After (v2.x):**
+
 ```tsx
-<GlassFormField 
+<GlassFormField
   label="Email"
   error={errorMessage}
 >
-  <GlassInput 
+  <GlassInput
     value={email}
     onChange={(e) => setEmail(e.target.value)}
   />
 </GlassFormField>
 
-<GlassSelect 
+<GlassSelect
   options={options}
   value={selected}
   onChange={setSelected}
@@ -457,32 +456,34 @@ ReactDOM.render(
 ### Theme Object Changes
 
 **Before (v1.x):**
+
 ```tsx
 const customTheme = {
   colors: {
-    primary: '#3b82f6',
-    secondary: '#64748b'
+    primary: "#3b82f6",
+    secondary: "#64748b",
   },
   glass: {
-    blur: '10px',
-    opacity: 0.1
-  }
-}
+    blur: "10px",
+    opacity: 0.1,
+  },
+};
 ```
 
 **After (v2.x):**
+
 ```tsx
 const customTheme = {
   colors: {
-    primary: 'rgba(59, 130, 246, 0.2)',
-    secondary: 'rgba(100, 116, 139, 0.2)'
+    primary: "rgba(59, 130, 246, 0.2)",
+    secondary: "rgba(100, 116, 139, 0.2)",
   },
   effects: {
-    blur: 'blur(16px)',
-    background: 'rgba(255, 255, 255, 0.1)',
-    border: 'rgba(255, 255, 255, 0.2)'
-  }
-}
+    blur: "blur(16px)",
+    background: "rgba(255, 255, 255, 0.1)",
+    border: "rgba(255, 255, 255, 0.2)",
+  },
+};
 ```
 
 ### CSS Variables Migration
@@ -510,13 +511,15 @@ Update your custom CSS:
 ### Type Import Changes
 
 **Before (v1.x):**
+
 ```tsx
-import type { ButtonProps, CardProps } from '@liquidify/components'
+import type { ButtonProps, CardProps } from "@liquidify/components";
 ```
 
 **After (v2.x):**
+
 ```tsx
-import type { GlassButtonProps, GlassCardProps } from '@liquidify/components'
+import type { GlassButtonProps, GlassCardProps } from "@liquidify/components";
 ```
 
 ### Updated Interfaces
@@ -526,12 +529,12 @@ Many component interfaces have been updated:
 ```tsx
 // Before (v1.x)
 interface CustomButtonProps extends ButtonProps {
-  customProp: string
+  customProp: string;
 }
 
 // After (v2.x)
 interface CustomButtonProps extends GlassButtonProps {
-  customProp: string
+  customProp: string;
 }
 ```
 
@@ -540,30 +543,24 @@ interface CustomButtonProps extends GlassButtonProps {
 ### Update Test Utilities
 
 **Before (v1.x):**
+
 ```tsx
-import { render } from '@testing-library/react'
-import { LiquidifyProvider } from '@liquidify/components'
+import { render } from "@testing-library/react";
+import { LiquidifyProvider } from "@liquidify/components";
 
 function renderWithProvider(ui) {
-  return render(
-    <LiquidifyProvider>
-      {ui}
-    </LiquidifyProvider>
-  )
+  return render(<LiquidifyProvider>{ui}</LiquidifyProvider>);
 }
 ```
 
 **After (v2.x):**
+
 ```tsx
-import { render } from '@testing-library/react'
-import { UnifiedGlassProvider } from '@liquidify/components'
+import { render } from "@testing-library/react";
+import { UnifiedGlassProvider } from "@liquidify/components";
 
 function renderWithProvider(ui) {
-  return render(
-    <UnifiedGlassProvider>
-      {ui}
-    </UnifiedGlassProvider>
-  )
+  return render(<UnifiedGlassProvider>{ui}</UnifiedGlassProvider>);
 }
 ```
 
@@ -573,12 +570,12 @@ Update test selectors for renamed components:
 
 ```tsx
 // Before
-const button = screen.getByRole('button')
-const card = screen.getByTestId('card')
+const button = screen.getByRole("button");
+const card = screen.getByTestId("card");
 
 // After (same selectors work, but update data-testids if using component names)
-const button = screen.getByRole('button')
-const card = screen.getByTestId('glass-card')
+const button = screen.getByRole("button");
+const card = screen.getByTestId("glass-card");
 ```
 
 ## Troubleshooting Common Issues
@@ -586,16 +583,18 @@ const card = screen.getByTestId('glass-card')
 ### Build Errors
 
 **CSS Import Issues:**
+
 ```tsx
 // If you see CSS import errors
 // Make sure you have the correct import
-import '@liquidify/components/css'
+import "@liquidify/components/css";
 
 // For Vite projects, you may need
-import '@liquidify/components/dist/index.css'
+import "@liquidify/components/dist/index.css";
 ```
 
 **TypeScript Errors:**
+
 ```bash
 # Clear TypeScript cache
 rm -rf node_modules/.cache
@@ -606,28 +605,27 @@ npm install
 ```
 
 **Bundle Size Issues:**
+
 ```tsx
 // Ensure you're using tree-shakeable imports
-import { GlassButton } from '@liquidify/components/core'
+import { GlassButton } from "@liquidify/components/core";
 // instead of
-import { GlassButton } from '@liquidify/components'
+import { GlassButton } from "@liquidify/components";
 ```
 
 ### Runtime Errors
 
 **Provider Not Found:**
+
 ```tsx
 // Make sure UnifiedGlassProvider wraps your app
 function App() {
-  return (
-    <UnifiedGlassProvider>
-      {/* Your components */}
-    </UnifiedGlassProvider>
-  )
+  return <UnifiedGlassProvider>{/* Your components */}</UnifiedGlassProvider>;
 }
 ```
 
 **Theme Issues:**
+
 ```tsx
 // Check that theme is properly configured
 <UnifiedGlassProvider defaultTheme="system" storageKey="theme">
@@ -638,12 +636,14 @@ function App() {
 ## Migration Checklist
 
 ### Pre-Migration ✅
+
 - [ ] **Backup your codebase** (commit all changes)
 - [ ] **Run existing tests** to ensure they pass
 - [ ] **Document custom modifications**
 - [ ] **Check compatibility** with your React version
 
-### During Migration ✅  
+### During Migration ✅
+
 - [ ] **Update package.json** dependencies
 - [ ] **Run automated codemod** if available
 - [ ] **Update provider setup**
@@ -651,6 +651,7 @@ function App() {
 - [ ] **Update CSS imports**
 
 ### Post-Migration ✅
+
 - [ ] **Fix TypeScript errors**
 - [ ] **Update test files**
 - [ ] **Verify theme functionality**
@@ -659,6 +660,7 @@ function App() {
 - [ ] **Check bundle size** impact
 
 ### Optimization ✅
+
 - [ ] **Use tree-shakeable imports**
 - [ ] **Remove unused dependencies**
 - [ ] **Update documentation**
@@ -673,42 +675,42 @@ LiqUIdify 2.0 requires updates to your Storybook configuration for proper CSS lo
 #### Update .storybook/main.js
 
 **Before (v1.x):**
+
 ```js
 module.exports = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-docs'
-  ],
-  framework: '@storybook/react'
-}
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  addons: ["@storybook/addon-essentials", "@storybook/addon-docs"],
+  framework: "@storybook/react",
+};
 ```
 
 **After (v2.x):**
+
 ```js
 module.exports = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-docs',
-    '@storybook/addon-a11y'
+    "@storybook/addon-essentials",
+    "@storybook/addon-docs",
+    "@storybook/addon-a11y",
   ],
   framework: {
-    name: '@storybook/react-vite',
-    options: {}
+    name: "@storybook/react-vite",
+    options: {},
   },
   features: {
-    buildStoriesJson: true
-  }
-}
+    buildStoriesJson: true,
+  },
+};
 ```
 
 #### Update .storybook/preview.js
 
 **Before (v1.x):**
+
 ```js
-import { LiquidifyProvider } from '@liquidify/components'
-import '@liquidify/components/styles'
+import { LiquidifyProvider } from "@liquidify/components";
+import "@liquidify/components/styles";
 
 export const decorators = [
   (Story) => (
@@ -716,41 +718,45 @@ export const decorators = [
       <Story />
     </LiquidifyProvider>
   ),
-]
+];
 ```
 
 **After (v2.x):**
+
 ```js
-import { UnifiedGlassProvider } from '@liquidify/components'
-import '@liquidify/components/css'
+import { UnifiedGlassProvider } from "@liquidify/components";
+import "@liquidify/components/css";
 
 export const decorators = [
   (Story) => (
     <UnifiedGlassProvider defaultTheme="system">
-      <div style={{ padding: '1rem', minHeight: '100vh' }}>
+      <div style={{ padding: "1rem", minHeight: "100vh" }}>
         <Story />
       </div>
     </UnifiedGlassProvider>
   ),
-]
+];
 
 export const parameters = {
   backgrounds: {
-    default: 'glass',
+    default: "glass",
     values: [
-      { name: 'glass', value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
-      { name: 'dark', value: '#1a1a1a' },
-      { name: 'light', value: '#ffffff' }
-    ]
+      {
+        name: "glass",
+        value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      },
+      { name: "dark", value: "#1a1a1a" },
+      { name: "light", value: "#ffffff" },
+    ],
   },
   docs: {
     theme: {
-      base: 'dark',
-      brandTitle: 'LiqUIdify Components',
-      brandUrl: 'https://liquidify.dev'
-    }
-  }
-}
+      base: "dark",
+      brandTitle: "LiqUIdify Components",
+      brandUrl: "https://liquidify.dev",
+    },
+  },
+};
 ```
 
 ### Component Stories Migration
@@ -758,79 +764,82 @@ export const parameters = {
 Update your component stories to use the new component names and props:
 
 **Before (v1.x):**
+
 ```tsx
 // Button.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from '@liquidify/components'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "@liquidify/components";
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: "Components/Button",
   component: Button,
   parameters: {
-    layout: 'centered'
-  }
-}
+    layout: "centered",
+  },
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    variant: 'primary',
-    children: 'Button'
-  }
-}
+    variant: "primary",
+    children: "Button",
+  },
+};
 ```
 
 **After (v2.x):**
+
 ```tsx
 // GlassButton.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react'
-import { GlassButton } from '@liquidify/components'
+import type { Meta, StoryObj } from "@storybook/react";
+import { GlassButton } from "@liquidify/components";
 
 const meta: Meta<typeof GlassButton> = {
-  title: 'Components/GlassButton',
+  title: "Components/GlassButton",
   component: GlassButton,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A glassmorphic button component with enhanced accessibility and animations.'
-      }
-    }
+        component:
+          "A glassmorphic button component with enhanced accessibility and animations.",
+      },
+    },
   },
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'outline']
+      control: "select",
+      options: ["primary", "secondary", "ghost", "outline"],
     },
     size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg', 'xl']
-    }
-  }
-}
+      control: "select",
+      options: ["sm", "md", "lg", "xl"],
+    },
+  },
+};
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    variant: 'primary',
-    children: 'Glass Button'
-  }
-}
+    variant: "primary",
+    children: "Glass Button",
+  },
+};
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+    <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
       <GlassButton variant="primary">Primary</GlassButton>
       <GlassButton variant="secondary">Secondary</GlassButton>
       <GlassButton variant="ghost">Ghost</GlassButton>
       <GlassButton variant="outline">Outline</GlassButton>
     </div>
-  )
-}
+  ),
+};
 ```
 
 ### CSS-in-JS Migration for Storybook
@@ -838,16 +847,18 @@ export const AllVariants: Story = {
 If you're using custom CSS-in-JS in your stories:
 
 **Before (v1.x):**
+
 ```tsx
 const StoryWrapper = styled.div`
   background: var(--lq-glass-bg);
   backdrop-filter: var(--lq-glass-blur);
   padding: 2rem;
   border-radius: var(--lq-border-radius);
-`
+`;
 ```
 
 **After (v2.x):**
+
 ```tsx
 const StoryWrapper = styled.div`
   background: var(--glass-background);
@@ -855,7 +866,7 @@ const StoryWrapper = styled.div`
   padding: 2rem;
   border-radius: var(--glass-radius);
   border: 1px solid var(--glass-border);
-`
+`;
 ```
 
 ### Storybook Addon Configuration
@@ -863,39 +874,47 @@ const StoryWrapper = styled.div`
 #### Accessibility Testing Integration
 
 **New in v2.x - Add to .storybook/main.js:**
+
 ```js
 module.exports = {
   addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-docs',
-    '@storybook/addon-a11y', // New accessibility addon
-    '@storybook/addon-viewport',
-    '@storybook/addon-backgrounds'
-  ]
-}
+    "@storybook/addon-essentials",
+    "@storybook/addon-docs",
+    "@storybook/addon-a11y", // New accessibility addon
+    "@storybook/addon-viewport",
+    "@storybook/addon-backgrounds",
+  ],
+};
 ```
 
 #### Theme Switching in Storybook
 
 **Add to .storybook/preview.js:**
+
 ```js
-import { themes } from '@storybook/theming'
+import { themes } from "@storybook/theming";
 
 export const parameters = {
   darkMode: {
-    dark: { ...themes.dark, appBg: 'black' },
-    light: { ...themes.normal, appBg: 'white' },
-    stylePreview: true
+    dark: { ...themes.dark, appBg: "black" },
+    light: { ...themes.normal, appBg: "white" },
+    stylePreview: true,
   },
   backgrounds: {
     values: [
-      { name: 'glass-light', value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
-      { name: 'glass-dark', value: 'linear-gradient(135deg, #232526 0%, #414345 100%)' },
-      { name: 'gradient-1', value: 'linear-gradient(45deg, #ff6b6b, #4ecdc4)' },
-      { name: 'gradient-2', value: 'linear-gradient(45deg, #a8edea, #fed6e3)' }
-    ]
-  }
-}
+      {
+        name: "glass-light",
+        value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      },
+      {
+        name: "glass-dark",
+        value: "linear-gradient(135deg, #232526 0%, #414345 100%)",
+      },
+      { name: "gradient-1", value: "linear-gradient(45deg, #ff6b6b, #4ecdc4)" },
+      { name: "gradient-2", value: "linear-gradient(45deg, #a8edea, #fed6e3)" },
+    ],
+  },
+};
 ```
 
 ### Component Story Templates
@@ -903,10 +922,17 @@ export const parameters = {
 #### Glass Card Stories Migration
 
 **Before (v1.x):**
+
 ```tsx
 export const CardVariants: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+    <div
+      style={{
+        display: "grid",
+        gap: "1rem",
+        gridTemplateColumns: "repeat(2, 1fr)",
+      }}
+    >
       <Card elevation="low">
         <Card.Header>
           <Card.Title>Low Elevation</Card.Title>
@@ -920,76 +946,81 @@ export const CardVariants: Story = {
         <Card.Body>Content here</Card.Body>
       </Card>
     </div>
-  )
-}
+  ),
+};
 ```
 
 **After (v2.x):**
+
 ```tsx
 export const GlassCardVariants: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+    <div
+      style={{
+        display: "grid",
+        gap: "1rem",
+        gridTemplateColumns: "repeat(2, 1fr)",
+      }}
+    >
       <GlassCard variant="subtle">
         <GlassCard.Header>
           <GlassCard.Title>Subtle Glass</GlassCard.Title>
         </GlassCard.Header>
-        <GlassCard.Content>
-          Perfect for background elements
-        </GlassCard.Content>
+        <GlassCard.Content>Perfect for background elements</GlassCard.Content>
       </GlassCard>
       <GlassCard variant="elevated">
         <GlassCard.Header>
           <GlassCard.Title>Elevated Glass</GlassCard.Title>
         </GlassCard.Header>
-        <GlassCard.Content>
-          Great for modal content
-        </GlassCard.Content>
+        <GlassCard.Content>Great for modal content</GlassCard.Content>
       </GlassCard>
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Different glass card variants showing various opacity and blur levels.'
-      }
-    }
-  }
-}
+        story:
+          "Different glass card variants showing various opacity and blur levels.",
+      },
+    },
+  },
+};
 ```
 
 #### Form Components Stories
 
 **New v2.x Pattern:**
+
 ```tsx
 // GlassForm.stories.tsx
 export const CompleteForm: Story = {
   render: () => (
-    <GlassCard style={{ maxWidth: '400px' }}>
+    <GlassCard style={{ maxWidth: "400px" }}>
       <GlassCard.Header>
         <GlassCard.Title>Contact Form</GlassCard.Title>
       </GlassCard.Header>
       <GlassCard.Content>
-        <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <GlassFormField label="Name" required>
             <GlassInput placeholder="Enter your name" />
           </GlassFormField>
-          
+
           <GlassFormField label="Email" required>
             <GlassInput type="email" placeholder="Enter your email" />
           </GlassFormField>
-          
+
           <GlassFormField label="Message">
             <GlassTextarea placeholder="Your message..." rows={4} />
           </GlassFormField>
-          
+
           <GlassButton variant="primary" type="submit">
             Send Message
           </GlassButton>
         </form>
       </GlassCard.Content>
     </GlassCard>
-  )
-}
+  ),
+};
 ```
 
 ### CSS Custom Properties Migration
@@ -997,6 +1028,7 @@ export const CompleteForm: Story = {
 #### Storybook Global Styles
 
 **Create .storybook/glass-theme.css:**
+
 ```css
 /* v2.x Glass Theme Variables */
 :root {
@@ -1004,17 +1036,17 @@ export const CompleteForm: Story = {
   --glass-background: rgba(255, 255, 255, 0.1);
   --glass-background-hover: rgba(255, 255, 255, 0.15);
   --glass-background-active: rgba(255, 255, 255, 0.2);
-  
+
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-border-hover: rgba(255, 255, 255, 0.3);
-  
+
   --glass-blur: blur(16px);
   --glass-blur-strong: blur(24px);
-  
+
   /* Shadows */
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
-  
+
   /* Animation */
   --glass-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --glass-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1024,7 +1056,7 @@ export const CompleteForm: Story = {
   --glass-background: rgba(0, 0, 0, 0.2);
   --glass-background-hover: rgba(0, 0, 0, 0.3);
   --glass-background-active: rgba(0, 0, 0, 0.4);
-  
+
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-border-hover: rgba(255, 255, 255, 0.2);
 }
@@ -1040,8 +1072,9 @@ export const CompleteForm: Story = {
 ```
 
 **Import in .storybook/preview.js:**
+
 ```js
-import './glass-theme.css'
+import "./glass-theme.css";
 ```
 
 ### Interactive Story Examples
@@ -1051,44 +1084,42 @@ import './glass-theme.css'
 ```tsx
 export const AnimationShowcase: Story = {
   render: () => {
-    const [isHovered, setIsHovered] = useState(false)
-    
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-      <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+      <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
         <GlassButton
           variant="primary"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           style={{
-            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-            transition: 'var(--glass-transition)'
+            transform: isHovered ? "scale(1.05)" : "scale(1)",
+            transition: "var(--glass-transition)",
           }}
         >
           Hover Animation
         </GlassButton>
-        
-        <GlassCard 
+
+        <GlassCard
           interactive
           style={{
-            transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
-            transition: 'var(--glass-transition)'
+            transform: isHovered ? "translateY(-4px)" : "translateY(0)",
+            transition: "var(--glass-transition)",
           }}
         >
-          <GlassCard.Content>
-            Interactive Card
-          </GlassCard.Content>
+          <GlassCard.Content>Interactive Card</GlassCard.Content>
         </GlassCard>
       </div>
-    )
+    );
   },
   parameters: {
     docs: {
       description: {
-        story: 'Demonstrates the new animation system with GPU acceleration.'
-      }
-    }
-  }
-}
+        story: "Demonstrates the new animation system with GPU acceleration.",
+      },
+    },
+  },
+};
 ```
 
 ### Storybook Build Configuration
@@ -1096,46 +1127,48 @@ export const AnimationShowcase: Story = {
 #### Vite Configuration for Storybook
 
 **Create .storybook/vite.config.js:**
+
 ```js
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
 
 export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@liquidify/components/scss/variables";`
-      }
-    }
+        additionalData: `@import "@liquidify/components/scss/variables";`,
+      },
+    },
   },
   optimizeDeps: {
-    include: ['@liquidify/components']
-  }
-})
+    include: ["@liquidify/components"],
+  },
+});
 ```
 
 #### Webpack Configuration (if not using Vite)
 
 **Update .storybook/main.js:**
+
 ```js
 module.exports = {
   webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.scss$/,
       use: [
-        'style-loader',
-        'css-loader',
+        "style-loader",
+        "css-loader",
         {
-          loader: 'sass-loader',
+          loader: "sass-loader",
           options: {
-            additionalData: `@import "@liquidify/components/scss/variables";`
-          }
-        }
-      ]
-    })
-    
-    return config
-  }
-}
+            additionalData: `@import "@liquidify/components/scss/variables";`,
+          },
+        },
+      ],
+    });
+
+    return config;
+  },
+};
 ```
 
 ## Migration Support

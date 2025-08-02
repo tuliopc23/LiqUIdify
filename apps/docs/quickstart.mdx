@@ -4,15 +4,13 @@ description: "Get up and running with LiqUIdify's liquid glass morphism componen
 icon: "rocket"
 ---
 
-import { LiquidGlassDemo } from './components/LiquidGlassDemo';
+import { LiquidGlassDemo } from "./components/LiquidGlassDemo";
 
 # Quick Start Guide
 
 <LiquidGlassDemo variant="hero" className="mb-8">
   <div className="text-center">
-    <h1 className="text-4xl font-bold text-white mb-4">
-      Ready to Build?
-    </h1>
+    <h1 className="text-4xl font-bold text-white mb-4">Ready to Build?</h1>
     <p className="text-xl text-white/80 mb-6">
       Transform your React app with liquid glass morphism in minutes
     </p>
@@ -115,14 +113,16 @@ export default function WelcomeCard() {
       <GlassCard.Header>
         <GlassCard.Title>Welcome to LiqUIdify</GlassCard.Title>
         <GlassCard.Description>
-          Experience the beauty of liquid glass morphism with Apple-inspired design.
+          Experience the beauty of liquid glass morphism with Apple-inspired
+          design.
         </GlassCard.Description>
       </GlassCard.Header>
 
       <GlassCard.Content>
         <p className="text-white/80 mb-6">
-          Start building amazing interfaces with our liquid glass components that feature 
-          interactive ripple effects, smooth animations, and stunning visual depth.
+          Start building amazing interfaces with our liquid glass components
+          that feature interactive ripple effects, smooth animations, and
+          stunning visual depth.
         </p>
       </GlassCard.Content>
 
@@ -130,9 +130,7 @@ export default function WelcomeCard() {
         <GlassButton variant="primary" size="lg">
           Get Started
         </GlassButton>
-        <GlassButton variant="ghost">
-          Learn More
-        </GlassButton>
+        <GlassButton variant="ghost">Learn More</GlassButton>
       </GlassCard.Actions>
     </GlassCard>
   );
@@ -141,9 +139,7 @@ export default function WelcomeCard() {
 
 <LiquidGlassDemo variant="card" className="my-8 max-w-md mx-auto">
   <div className="text-center">
-    <h2 className="text-2xl font-bold text-white mb-4">
-      Welcome to LiqUIdify
-    </h2>
+    <h2 className="text-2xl font-bold text-white mb-4">Welcome to LiqUIdify</h2>
     <p className="text-white/80 mb-6">
       Experience the beauty of liquid glass morphism with Apple-inspired design.
     </p>
@@ -154,7 +150,7 @@ export default function WelcomeCard() {
 </LiquidGlassDemo>
 
 <Note>
-  The card automatically renders with beautiful liquid glass effects including 
+  The card automatically renders with beautiful liquid glass effects including
   backdrop blur, interactive ripples, inner glow, and smooth hover animations.
 </Note>
 
@@ -168,18 +164,10 @@ import { GlassButton } from "@liquidify/components";
 function ButtonShowcase() {
   return (
     <div className="flex gap-4 flex-wrap">
-      <GlassButton variant="primary">
-        Primary Action
-      </GlassButton>
-      <GlassButton variant="secondary">
-        Secondary Action
-      </GlassButton>
-      <GlassButton variant="ghost">
-        Ghost Action
-      </GlassButton>
-      <GlassButton variant="destructive">
-        Destructive Action
-      </GlassButton>
+      <GlassButton variant="primary">Primary Action</GlassButton>
+      <GlassButton variant="secondary">Secondary Action</GlassButton>
+      <GlassButton variant="ghost">Ghost Action</GlassButton>
+      <GlassButton variant="destructive">Destructive Action</GlassButton>
     </div>
   );
 }
@@ -207,9 +195,9 @@ import { GlassGrid, GlassCard } from "@liquidify/components";
 
 function ResponsiveGrid() {
   return (
-    <GlassGrid 
+    <GlassGrid
       columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-      gap={{ xs: 'sm', md: 'lg' }}
+      gap={{ xs: "sm", md: "lg" }}
     >
       <GlassCard>
         <GlassCard.Header>
@@ -219,7 +207,7 @@ function ResponsiveGrid() {
           Beautiful liquid glass effects with interactive ripples.
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard>
         <GlassCard.Header>
           <GlassCard.Title>Feature 2</GlassCard.Title>
@@ -228,7 +216,7 @@ function ResponsiveGrid() {
           Apple-inspired design following HIG principles.
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard>
         <GlassCard.Header>
           <GlassCard.Title>Feature 3</GlassCard.Title>
@@ -237,7 +225,7 @@ function ResponsiveGrid() {
           GPU-accelerated animations for smooth performance.
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard>
         <GlassCard.Header>
           <GlassCard.Title>Feature 4</GlassCard.Title>
@@ -311,17 +299,21 @@ Choose the right bundle for your needs:
 LiqUIdify automatically adapts to your preferred color scheme with Apple's design principles:
 
 ```tsx
-import { UnifiedGlassProvider, useTheme, GlassButton } from "@liquidify/components";
+import {
+  UnifiedGlassProvider,
+  useTheme,
+  GlassButton,
+} from "@liquidify/components";
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  
+
   return (
-    <GlassButton 
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+    <GlassButton
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       variant="ghost"
     >
-      {theme === 'light' ? '🌙' : '☀️'} Toggle Theme
+      {theme === "light" ? "🌙" : "☀️"} Toggle Theme
     </GlassButton>
   );
 }
@@ -355,7 +347,7 @@ const ButtonExample: React.FC<GlassButtonProps> = (props) => {
       glassEffect={{
         blur: 40, // ✅ Type-checked number
         opacity: 0.1, // ✅ Type-checked number
-        borderOpacity: 0.2 // ✅ Type-checked number
+        borderOpacity: 0.2, // ✅ Type-checked number
       }}
       {...props}
     >
@@ -374,16 +366,16 @@ import { GlassButton, GlassModal } from "@liquidify/components";
 
 function AccessibleModal() {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
     <>
-      <GlassButton 
+      <GlassButton
         onClick={() => setIsOpen(true)}
         aria-describedby="modal-description"
       >
         Open Modal
       </GlassButton>
-      
+
       <GlassModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
@@ -392,8 +384,8 @@ function AccessibleModal() {
       >
         <h2 id="modal-title">Accessible Modal</h2>
         <p id="modal-description">
-          This modal includes proper ARIA attributes, focus management, 
-          and respects prefers-reduced-motion settings.
+          This modal includes proper ARIA attributes, focus management, and
+          respects prefers-reduced-motion settings.
         </p>
       </GlassModal>
     </>
@@ -430,15 +422,19 @@ function AccessibleModal() {
 ## 💡 Pro Tips
 
 <Tip>
-**Performance**: Liquid glass effects use GPU acceleration for smooth 60fps animations. For best performance, limit the number of glass elements visible at once.
+  **Performance**: Liquid glass effects use GPU acceleration for smooth 60fps
+  animations. For best performance, limit the number of glass elements visible
+  at once.
 </Tip>
 
 <Warning>
-**Browser Support**: Backdrop-filter requires modern browsers. LiqUIdify gracefully degrades on older browsers with fallback styles.
+  **Browser Support**: Backdrop-filter requires modern browsers. LiqUIdify
+  gracefully degrades on older browsers with fallback styles.
 </Warning>
 
 <Note>
-**Accessibility**: All glass effects maintain proper contrast ratios and work with screen readers. Use `prefers-reduced-motion` to respect user preferences.
+  **Accessibility**: All glass effects maintain proper contrast ratios and work
+  with screen readers. Use `prefers-reduced-motion` to respect user preferences.
 </Note>
 
 ---

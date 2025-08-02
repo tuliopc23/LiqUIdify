@@ -16,20 +16,20 @@ This guide explains how to use Liquidify's built-in accessibility testing utilit
 ### Basic Usage
 
 ```tsx
-import { expectAccessible, runAccessibilityCheck } from '../lib/test-utils';
+import { expectAccessible, runAccessibilityCheck } from "../lib/test-utils";
 
 // Basic accessibility test
-test('component should be accessible', async () => {
+test("component should be accessible", async () => {
   const component = <MyComponent />;
   await expectAccessible(component);
 });
 
 // Get detailed accessibility report
-test('component accessibility report', async () => {
+test("component accessibility report", async () => {
   const component = <MyComponent />;
-  const report = await runAccessibilityCheck(component, 'MyComponent');
+  const report = await runAccessibilityCheck(component, "MyComponent");
 
-  expect(report.score.level).toBe('AA');
+  expect(report.score.level).toBe("AA");
   expect(report.score.score).toBeGreaterThan(85);
 });
 ```
@@ -37,16 +37,16 @@ test('component accessibility report', async () => {
 ### Comprehensive Testing
 
 ```tsx
-import { runComprehensiveAccessibilityTest } from '../lib/test-utils';
+import { runComprehensiveAccessibilityTest } from "../lib/test-utils";
 
-test('comprehensive accessibility test', async () => {
+test("comprehensive accessibility test", async () => {
   const component = <MyComponent />;
   const report = await runComprehensiveAccessibilityTest(
     component,
-    'MyComponent'
+    "MyComponent",
   );
 
-  expect(report.score.level).toBe('AA');
+  expect(report.score.level).toBe("AA");
 });
 ```
 
@@ -66,8 +66,8 @@ Tests if a component is accessible according to WCAG guidelines.
 
 ```tsx
 await expectAccessible(<Button>Click me</Button>, {
-  level: 'AA',
-  skipRules: ['color-contrast'], // Skip if testing in isolation
+  level: "AA",
+  skipRules: ["color-contrast"], // Skip if testing in isolation
 });
 ```
 
@@ -83,7 +83,7 @@ interface AccessibilityReport {
   version: string;
   score: {
     score: number;
-    level: 'A' | 'AA' | 'AAA';
+    level: "A" | "AA" | "AAA";
     violations: any[];
     passes: number;
     timestamp: string;
@@ -110,36 +110,36 @@ Tests ARIA labels, roles, and properties.
 ### Button Component
 
 ```tsx
-import { createAccessibilityTestSuite } from '../lib/test-utils';
+import { createAccessibilityTestSuite } from "../lib/test-utils";
 
 // Automated test suite
 createAccessibilityTestSuite(
-  'GlassButton',
+  "GlassButton",
   () => <GlassButton>Click me</GlassButton>,
   {
-    level: 'AA',
+    level: "AA",
     variants: [
       {
-        name: 'primary',
-        component: <GlassButton variant='primary'>Primary</GlassButton>,
+        name: "primary",
+        component: <GlassButton variant="primary">Primary</GlassButton>,
       },
       {
-        name: 'secondary',
-        component: <GlassButton variant='secondary'>Secondary</GlassButton>,
+        name: "secondary",
+        component: <GlassButton variant="secondary">Secondary</GlassButton>,
       },
       {
-        name: 'disabled',
+        name: "disabled",
         component: <GlassButton disabled>Disabled</GlassButton>,
       },
     ],
-  }
+  },
 );
 ```
 
 ### Modal Component
 
 ```tsx
-test('modal accessibility', async () => {
+test("modal accessibility", async () => {
   const modal = (
     <GlassModal isOpen={true} onClose={() => {}}>
       <h2>Modal Title</h2>
@@ -156,20 +156,20 @@ test('modal accessibility', async () => {
 ### Form Component
 
 ```tsx
-test('form accessibility', async () => {
+test("form accessibility", async () => {
   const form = (
     <form>
-      <label htmlFor='email'>Email</label>
+      <label htmlFor="email">Email</label>
       <GlassInput
-        id='email'
-        type='email'
+        id="email"
+        type="email"
         required
-        aria-describedby='email-error'
+        aria-describedby="email-error"
       />
-      <div id='email-error' role='alert'>
+      <div id="email-error" role="alert">
         Please enter a valid email
       </div>
-      <GlassButton type='submit'>Submit</GlassButton>
+      <GlassButton type="submit">Submit</GlassButton>
     </form>
   );
 
@@ -235,9 +235,9 @@ Add accessibility information to component documentation:
 ### Testing
 
 ```tsx
-import { expectAccessible } from '../lib/test-utils';
+import { expectAccessible } from "../lib/test-utils";
 
-test('button accessibility', async () => {
+test("button accessibility", async () => {
   await expectAccessible(<GlassButton>Click me</GlassButton>);
 });
 ```
@@ -265,9 +265,9 @@ describe('Button Component', () => {
 
 ```tsx
 const variants = [
-  { name: 'primary', props: { variant: 'primary' } },
-  { name: 'secondary', props: { variant: 'secondary' } },
-  { name: 'disabled', props: { disabled: true } },
+  { name: "primary", props: { variant: "primary" } },
+  { name: "secondary", props: { variant: "secondary" } },
+  { name: "disabled", props: { disabled: true } },
 ];
 
 variants.forEach(({ name, props }) => {
@@ -280,9 +280,9 @@ variants.forEach(({ name, props }) => {
 ### 3. Test Interactive States
 
 ```tsx
-test('focus state accessibility', async () => {
+test("focus state accessibility", async () => {
   const { getByRole } = render(<Button>Click me</Button>);
-  const button = getByRole('button');
+  const button = getByRole("button");
 
   button.focus();
   await expectSufficientColorContrast(<Button>Click me</Button>);

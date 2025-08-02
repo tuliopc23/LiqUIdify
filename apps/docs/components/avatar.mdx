@@ -11,16 +11,10 @@ The Avatar component provides a flexible way to display user profile pictures, i
 ## Basic Usage
 
 ```tsx
-import { Avatar } from '@liquidify/react';
+import { Avatar } from "@liquidify/react";
 
 function BasicAvatar() {
-  return (
-    <Avatar
-      src="/user-avatar.jpg"
-      alt="John Doe"
-      name="John Doe"
-    />
-  );
+  return <Avatar src="/user-avatar.jpg" alt="John Doe" name="John Doe" />;
 }
 ```
 
@@ -29,7 +23,7 @@ function BasicAvatar() {
 Available in multiple sizes to fit different contexts:
 
 ```tsx
-import { Avatar } from '@liquidify/react';
+import { Avatar } from "@liquidify/react";
 
 function AvatarSizes() {
   return (
@@ -49,21 +43,13 @@ function AvatarSizes() {
 Choose between circular and square avatars:
 
 ```tsx
-import { Avatar } from '@liquidify/react';
+import { Avatar } from "@liquidify/react";
 
 function AvatarShapes() {
   return (
     <div className="flex items-center gap-4">
-      <Avatar
-        src="/user-avatar.jpg"
-        name="John Doe"
-        shape="circle"
-      />
-      <Avatar
-        src="/user-avatar.jpg"
-        name="John Doe"
-        shape="square"
-      />
+      <Avatar src="/user-avatar.jpg" name="John Doe" shape="circle" />
+      <Avatar src="/user-avatar.jpg" name="John Doe" shape="square" />
     </div>
   );
 }
@@ -74,24 +60,22 @@ function AvatarShapes() {
 When no image is provided, the avatar shows initials or a placeholder:
 
 ```tsx
-import { Avatar } from '@liquidify/react';
+import { Avatar } from "@liquidify/react";
 
 function AvatarFallbacks() {
   return (
     <div className="flex items-center gap-4">
       {/* Shows initials */}
       <Avatar name="John Doe" />
-      
+
       {/* Shows custom initials */}
       <Avatar name="Jane Smith" initials="JS" />
-      
+
       {/* Shows placeholder icon */}
       <Avatar />
-      
+
       {/* Custom fallback */}
-      <Avatar
-        fallback={<span>?</span>}
-      />
+      <Avatar fallback={<span>?</span>} />
     </div>
   );
 }
@@ -102,7 +86,7 @@ function AvatarFallbacks() {
 Customize avatar colors for better visual distinction:
 
 ```tsx
-import { Avatar } from '@liquidify/react';
+import { Avatar } from "@liquidify/react";
 
 function ColoredAvatars() {
   return (
@@ -122,31 +106,15 @@ function ColoredAvatars() {
 Add status indicators to show user presence:
 
 ```tsx
-import { Avatar } from '@liquidify/react';
+import { Avatar } from "@liquidify/react";
 
 function AvatarWithStatus() {
   return (
     <div className="flex items-center gap-4">
-      <Avatar
-        src="/user-avatar.jpg"
-        name="John Doe"
-        status="online"
-      />
-      <Avatar
-        src="/user-avatar.jpg"
-        name="Jane Smith"
-        status="away"
-      />
-      <Avatar
-        src="/user-avatar.jpg"
-        name="Bob Johnson"
-        status="busy"
-      />
-      <Avatar
-        src="/user-avatar.jpg"
-        name="Alice Brown"
-        status="offline"
-      />
+      <Avatar src="/user-avatar.jpg" name="John Doe" status="online" />
+      <Avatar src="/user-avatar.jpg" name="Jane Smith" status="away" />
+      <Avatar src="/user-avatar.jpg" name="Bob Johnson" status="busy" />
+      <Avatar src="/user-avatar.jpg" name="Alice Brown" status="offline" />
     </div>
   );
 }
@@ -157,7 +125,7 @@ function AvatarWithStatus() {
 Display multiple avatars in a group:
 
 ```tsx
-import { Avatar, AvatarGroup } from '@liquidify/react';
+import { Avatar, AvatarGroup } from "@liquidify/react";
 
 function AvatarGroupExample() {
   const users = [
@@ -165,17 +133,13 @@ function AvatarGroupExample() {
     { name: "Jane Smith", src: "/user2.jpg" },
     { name: "Bob Johnson", src: "/user3.jpg" },
     { name: "Alice Brown", src: "/user4.jpg" },
-    { name: "Charlie Wilson", src: "/user5.jpg" }
+    { name: "Charlie Wilson", src: "/user5.jpg" },
   ];
 
   return (
     <AvatarGroup max={4}>
       {users.map((user, index) => (
-        <Avatar
-          key={index}
-          src={user.src}
-          name={user.name}
-        />
+        <Avatar key={index} src={user.src} name={user.name} />
       ))}
     </AvatarGroup>
   );
@@ -187,13 +151,19 @@ function AvatarGroupExample() {
 Make avatars clickable for user interactions:
 
 ```tsx
-import { Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@liquidify/react';
+import {
+  Avatar,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@liquidify/react";
 
 function InteractiveAvatar() {
   const user = {
     name: "John Doe",
     email: "john@example.com",
-    avatar: "/user-avatar.jpg"
+    avatar: "/user-avatar.jpg",
   };
 
   return (
@@ -220,7 +190,7 @@ function InteractiveAvatar() {
 Show loading state while avatar image loads:
 
 ```tsx
-import { Avatar } from '@liquidify/react';
+import { Avatar } from "@liquidify/react";
 
 function LoadingAvatar() {
   const [loading, setLoading] = useState(true);
@@ -242,20 +212,17 @@ function LoadingAvatar() {
 Apply custom styles and classes:
 
 ```tsx
-import { Avatar } from '@liquidify/react';
+import { Avatar } from "@liquidify/react";
 
 function CustomAvatar() {
   return (
     <div className="flex items-center gap-4">
-      <Avatar
-        name="John Doe"
-        className="ring-2 ring-blue-500 ring-offset-2"
-      />
+      <Avatar name="John Doe" className="ring-2 ring-blue-500 ring-offset-2" />
       <Avatar
         name="Jane Smith"
         style={{
-          background: 'linear-gradient(45deg, #ff6b6b, #4ecdc4)',
-          color: 'white'
+          background: "linear-gradient(45deg, #ff6b6b, #4ecdc4)",
+          color: "white",
         }}
       />
     </div>
@@ -267,32 +234,32 @@ function CustomAvatar() {
 
 ### Avatar Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `src` | `string` | - | Image source URL |
-| `alt` | `string` | - | Image alt text |
-| `name` | `string` | - | User name for initials |
-| `initials` | `string` | - | Custom initials override |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Avatar size |
-| `shape` | `'circle' \| 'square'` | `'circle'` | Avatar shape |
-| `color` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger' \| string` | `'primary'` | Background color |
-| `status` | `'online' \| 'away' \| 'busy' \| 'offline'` | - | Status indicator |
-| `loading` | `boolean` | `false` | Loading state |
-| `fallback` | `ReactNode` | - | Custom fallback content |
-| `className` | `string` | - | Additional CSS classes |
-| `style` | `CSSProperties` | - | Inline styles |
-| `onClick` | `() => void` | - | Click handler |
-| `onLoad` | `() => void` | - | Image load handler |
-| `onError` | `() => void` | - | Image error handler |
+| Prop        | Type                                                                       | Default     | Description              |
+| ----------- | -------------------------------------------------------------------------- | ----------- | ------------------------ |
+| `src`       | `string`                                                                   | -           | Image source URL         |
+| `alt`       | `string`                                                                   | -           | Image alt text           |
+| `name`      | `string`                                                                   | -           | User name for initials   |
+| `initials`  | `string`                                                                   | -           | Custom initials override |
+| `size`      | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                                     | `'md'`      | Avatar size              |
+| `shape`     | `'circle' \| 'square'`                                                     | `'circle'`  | Avatar shape             |
+| `color`     | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger' \| string` | `'primary'` | Background color         |
+| `status`    | `'online' \| 'away' \| 'busy' \| 'offline'`                                | -           | Status indicator         |
+| `loading`   | `boolean`                                                                  | `false`     | Loading state            |
+| `fallback`  | `ReactNode`                                                                | -           | Custom fallback content  |
+| `className` | `string`                                                                   | -           | Additional CSS classes   |
+| `style`     | `CSSProperties`                                                            | -           | Inline styles            |
+| `onClick`   | `() => void`                                                               | -           | Click handler            |
+| `onLoad`    | `() => void`                                                               | -           | Image load handler       |
+| `onError`   | `() => void`                                                               | -           | Image error handler      |
 
 ### AvatarGroup Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `max` | `number` | - | Maximum avatars to show |
-| `spacing` | `'sm' \| 'md' \| 'lg'` | `'md'` | Spacing between avatars |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Avatar components |
+| Prop        | Type                   | Default | Description             |
+| ----------- | ---------------------- | ------- | ----------------------- |
+| `max`       | `number`               | -       | Maximum avatars to show |
+| `spacing`   | `'sm' \| 'md' \| 'lg'` | `'md'`  | Spacing between avatars |
+| `className` | `string`               | -       | Additional CSS classes  |
+| `children`  | `ReactNode`            | -       | Avatar components       |
 
 ## Styling
 
@@ -307,13 +274,25 @@ function CustomAvatar() {
   --avatar-border: 2px solid transparent;
 }
 
-.avatar--xs { --avatar-size: 1.5rem; }
-.avatar--sm { --avatar-size: 2rem; }
-.avatar--md { --avatar-size: 2.5rem; }
-.avatar--lg { --avatar-size: 3rem; }
-.avatar--xl { --avatar-size: 4rem; }
+.avatar--xs {
+  --avatar-size: 1.5rem;
+}
+.avatar--sm {
+  --avatar-size: 2rem;
+}
+.avatar--md {
+  --avatar-size: 2.5rem;
+}
+.avatar--lg {
+  --avatar-size: 3rem;
+}
+.avatar--xl {
+  --avatar-size: 4rem;
+}
 
-.avatar--square { --avatar-border-radius: 0.375rem; }
+.avatar--square {
+  --avatar-border-radius: 0.375rem;
+}
 ```
 
 ### Status Indicators
@@ -332,11 +311,21 @@ function CustomAvatar() {
 ### Custom Colors
 
 ```css
-.avatar--primary { --avatar-bg: var(--liquid-primary); }
-.avatar--secondary { --avatar-bg: var(--liquid-secondary); }
-.avatar--success { --avatar-bg: var(--liquid-success); }
-.avatar--warning { --avatar-bg: var(--liquid-warning); }
-.avatar--danger { --avatar-bg: var(--liquid-danger); }
+.avatar--primary {
+  --avatar-bg: var(--liquid-primary);
+}
+.avatar--secondary {
+  --avatar-bg: var(--liquid-secondary);
+}
+.avatar--success {
+  --avatar-bg: var(--liquid-success);
+}
+.avatar--warning {
+  --avatar-bg: var(--liquid-warning);
+}
+.avatar--danger {
+  --avatar-bg: var(--liquid-danger);
+}
 ```
 
 ## Accessibility
@@ -445,16 +434,20 @@ function TeamMembersList({ members }: { members: User[] }) {
             src={member.avatar}
             name={member.name}
             size="sm"
-            status={member.isOnline ? 'online' : 'offline'}
+            status={member.isOnline ? "online" : "offline"}
           />
           <div className="flex-1">
             <p className="font-medium">{member.name}</p>
             <p className="text-sm text-gray-500">{member.department}</p>
           </div>
-          <span className={`text-xs px-2 py-1 rounded-full ${
-            member.isOnline ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'
-          }`}>
-            {member.isOnline ? 'Online' : 'Offline'}
+          <span
+            className={`text-xs px-2 py-1 rounded-full ${
+              member.isOnline
+                ? "bg-green-100 text-green-800"
+                : "bg-gray-100 text-gray-600"
+            }`}
+          >
+            {member.isOnline ? "Online" : "Offline"}
           </span>
         </div>
       ))}
@@ -479,8 +472,12 @@ function CommentThread({ comments }: { comments: Comment[] }) {
           <div className="flex-1">
             <div className="bg-gray-50 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-medium text-sm">{comment.author.name}</span>
-                <span className="text-xs text-gray-500">{comment.timestamp}</span>
+                <span className="font-medium text-sm">
+                  {comment.author.name}
+                </span>
+                <span className="text-xs text-gray-500">
+                  {comment.timestamp}
+                </span>
               </div>
               <p className="text-sm">{comment.content}</p>
             </div>

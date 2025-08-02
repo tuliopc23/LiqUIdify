@@ -11,7 +11,7 @@ The Glass Spinner component provides an elegant loading indicator with glass mor
 ## Basic Usage
 
 ```tsx
-import { GlassSpinner } from '@liquidify/react';
+import { GlassSpinner } from "@liquidify/react";
 
 function BasicSpinner() {
   return <GlassSpinner />;
@@ -23,7 +23,7 @@ function BasicSpinner() {
 Available in multiple sizes to fit different contexts:
 
 ```tsx
-import { GlassSpinner } from '@liquidify/react';
+import { GlassSpinner } from "@liquidify/react";
 
 function SpinnerSizes() {
   return (
@@ -43,7 +43,7 @@ function SpinnerSizes() {
 Customize the spinner color to match your design:
 
 ```tsx
-import { GlassSpinner } from '@liquidify/react';
+import { GlassSpinner } from "@liquidify/react";
 
 function ColoredSpinners() {
   return (
@@ -63,7 +63,7 @@ function ColoredSpinners() {
 Add descriptive text to provide context:
 
 ```tsx
-import { GlassSpinner } from '@liquidify/react';
+import { GlassSpinner } from "@liquidify/react";
 
 function SpinnerWithLabel() {
   return (
@@ -80,7 +80,7 @@ function SpinnerWithLabel() {
 Customize the glass morphism appearance:
 
 ```tsx
-import { GlassSpinner } from '@liquidify/react';
+import { GlassSpinner } from "@liquidify/react";
 
 function CustomGlassSpinner() {
   return (
@@ -90,7 +90,7 @@ function CustomGlassSpinner() {
         blur: 20,
         opacity: 0.2,
         borderOpacity: 0.3,
-        shadow: 'lg'
+        shadow: "lg",
       }}
     />
   );
@@ -102,8 +102,8 @@ function CustomGlassSpinner() {
 Use with different loading scenarios:
 
 ```tsx
-import { GlassSpinner, GlassButton } from '@liquidify/react';
-import { useState } from 'react';
+import { GlassSpinner, GlassButton } from "@liquidify/react";
+import { useState } from "react";
 
 function LoadingButton() {
   const [loading, setLoading] = useState(false);
@@ -111,7 +111,7 @@ function LoadingButton() {
   const handleClick = async () => {
     setLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setLoading(false);
   };
 
@@ -123,7 +123,7 @@ function LoadingButton() {
           Loading...
         </>
       ) : (
-        'Click me'
+        "Click me"
       )}
     </GlassButton>
   );
@@ -135,7 +135,7 @@ function LoadingButton() {
 Create a full-page loading overlay:
 
 ```tsx
-import { GlassSpinner } from '@liquidify/react';
+import { GlassSpinner } from "@liquidify/react";
 
 function FullPageLoader({ isLoading }: { isLoading: boolean }) {
   if (!isLoading) return null;
@@ -156,9 +156,15 @@ function FullPageLoader({ isLoading }: { isLoading: boolean }) {
 Show loading state inline with content:
 
 ```tsx
-import { GlassSpinner } from '@liquidify/react';
+import { GlassSpinner } from "@liquidify/react";
 
-function InlineLoader({ loading, children }: { loading: boolean; children: React.ReactNode }) {
+function InlineLoader({
+  loading,
+  children,
+}: {
+  loading: boolean;
+  children: React.ReactNode;
+}) {
   return (
     <div className="relative">
       {loading && (
@@ -166,9 +172,7 @@ function InlineLoader({ loading, children }: { loading: boolean; children: React
           <GlassSpinner />
         </div>
       )}
-      <div className={loading ? 'opacity-50' : ''}>
-        {children}
-      </div>
+      <div className={loading ? "opacity-50" : ""}>{children}</div>
     </div>
   );
 }
@@ -179,7 +183,7 @@ function InlineLoader({ loading, children }: { loading: boolean; children: React
 Different animation styles for various use cases:
 
 ```tsx
-import { GlassSpinner } from '@liquidify/react';
+import { GlassSpinner } from "@liquidify/react";
 
 function AnimationVariants() {
   return (
@@ -209,24 +213,24 @@ function AnimationVariants() {
 
 ### GlassSpinner Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Size of the spinner |
-| `color` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| string` | `'primary'` | Color of the spinner |
-| `variant` | `'spin' \| 'pulse' \| 'bounce' \| 'dots'` | `'spin'` | Animation variant |
-| `speed` | `'slow' \| 'normal' \| 'fast'` | `'normal'` | Animation speed |
-| `glassEffect` | `GlassEffectProps` | - | Glass morphism effect configuration |
-| `className` | `string` | - | Additional CSS classes |
-| `aria-label` | `string` | `'Loading'` | Accessibility label |
+| Prop          | Type                                                                      | Default     | Description                         |
+| ------------- | ------------------------------------------------------------------------- | ----------- | ----------------------------------- |
+| `size`        | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'`                                    | `'md'`      | Size of the spinner                 |
+| `color`       | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| string` | `'primary'` | Color of the spinner                |
+| `variant`     | `'spin' \| 'pulse' \| 'bounce' \| 'dots'`                                 | `'spin'`    | Animation variant                   |
+| `speed`       | `'slow' \| 'normal' \| 'fast'`                                            | `'normal'`  | Animation speed                     |
+| `glassEffect` | `GlassEffectProps`                                                        | -           | Glass morphism effect configuration |
+| `className`   | `string`                                                                  | -           | Additional CSS classes              |
+| `aria-label`  | `string`                                                                  | `'Loading'` | Accessibility label                 |
 
 ### GlassEffectProps
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `blur` | `number` | `12` | Backdrop blur intensity |
-| `opacity` | `number` | `0.1` | Background opacity |
-| `borderOpacity` | `number` | `0.2` | Border opacity |
-| `shadow` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Shadow size |
+| Prop            | Type                           | Default | Description             |
+| --------------- | ------------------------------ | ------- | ----------------------- |
+| `blur`          | `number`                       | `12`    | Backdrop blur intensity |
+| `opacity`       | `number`                       | `0.1`   | Background opacity      |
+| `borderOpacity` | `number`                       | `0.2`   | Border opacity          |
+| `shadow`        | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'`  | Shadow size             |
 
 ## Styling
 
@@ -246,31 +250,63 @@ function AnimationVariants() {
 ### Size Variants
 
 ```css
-.glass-spinner--xs { --glass-spinner-size: 1rem; }
-.glass-spinner--sm { --glass-spinner-size: 1.5rem; }
-.glass-spinner--md { --glass-spinner-size: 2rem; }
-.glass-spinner--lg { --glass-spinner-size: 2.5rem; }
-.glass-spinner--xl { --glass-spinner-size: 3rem; }
+.glass-spinner--xs {
+  --glass-spinner-size: 1rem;
+}
+.glass-spinner--sm {
+  --glass-spinner-size: 1.5rem;
+}
+.glass-spinner--md {
+  --glass-spinner-size: 2rem;
+}
+.glass-spinner--lg {
+  --glass-spinner-size: 2.5rem;
+}
+.glass-spinner--xl {
+  --glass-spinner-size: 3rem;
+}
 ```
 
 ### Custom Animations
 
 ```css
 @keyframes glass-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes glass-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 @keyframes glass-bounce {
-  0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
-  40%, 43% { transform: translate3d(0, -30px, 0); }
-  70% { transform: translate3d(0, -15px, 0); }
-  90% { transform: translate3d(0, -4px, 0); }
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%,
+  43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
 }
 ```
 
@@ -285,7 +321,7 @@ The Glass Spinner component includes accessibility features:
 
 ```tsx
 // Reduced motion support
-<GlassSpinner 
+<GlassSpinner
   variant="pulse" // Falls back to pulse for reduced motion
   aria-label="Loading content"
 />
@@ -365,7 +401,7 @@ function LoadingCard() {
 
 ```tsx
 function SearchWithLoading() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
 
   return (

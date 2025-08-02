@@ -12,11 +12,11 @@ The `GlassInput` component brings elegant glassmorphism styling to form inputs w
 <CodeGroup>
 
 ```tsx Component Import
-import { GlassInput } from '@liquidify/components'
+import { GlassInput } from "@liquidify/components";
 ```
 
-```tsx Bundle Import  
-import { GlassInput } from '@liquidify/components/forms'
+```tsx Bundle Import
+import { GlassInput } from "@liquidify/components/forms";
 ```
 
 </CodeGroup>
@@ -26,18 +26,12 @@ import { GlassInput } from '@liquidify/components/forms'
 <CodeGroup>
 
 ```tsx Simple Input
-<GlassInput 
-  placeholder="Enter your email"
-  type="email"
-/>
+<GlassInput placeholder="Enter your email" type="email" />
 ```
 
 ```tsx With Label
 <GlassFormField label="Email Address">
-  <GlassInput 
-    type="email"
-    placeholder="john@example.com"
-  />
+  <GlassInput type="email" placeholder="john@example.com" />
 </GlassFormField>
 ```
 
@@ -48,7 +42,10 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="space-y-4 max-w-md">
     <GlassInput placeholder="Default input" />
-    <GlassInput placeholder="With icon" leftIcon={<Mail className="h-4 w-4" />} />
+    <GlassInput
+      placeholder="With icon"
+      leftIcon={<Mail className="h-4 w-4" />}
+    />
     <GlassInput placeholder="Clearable input" clearable />
     <GlassInput placeholder="Disabled input" disabled />
   </div>
@@ -59,10 +56,7 @@ import { GlassInput } from '@liquidify/components/forms'
 ### Default Input
 
 <ComponentPreview>
-  <GlassInput 
-    placeholder="Standard glass input"
-    className="max-w-sm"
-  />
+  <GlassInput placeholder="Standard glass input" className="max-w-sm" />
 </ComponentPreview>
 
 ```tsx
@@ -72,7 +66,7 @@ import { GlassInput } from '@liquidify/components/forms'
 ### Search Input
 
 <ComponentPreview>
-  <GlassInput 
+  <GlassInput
     variant="search"
     placeholder="Search..."
     leftIcon={<Search className="h-4 w-4" />}
@@ -81,7 +75,7 @@ import { GlassInput } from '@liquidify/components/forms'
 </ComponentPreview>
 
 ```tsx
-<GlassInput 
+<GlassInput
   variant="search"
   placeholder="Search..."
   leftIcon={<Search className="h-4 w-4" />}
@@ -91,7 +85,7 @@ import { GlassInput } from '@liquidify/components/forms'
 ### Password Input
 
 <ComponentPreview>
-  <GlassInput 
+  <GlassInput
     variant="password"
     type="password"
     placeholder="Enter password"
@@ -100,11 +94,7 @@ import { GlassInput } from '@liquidify/components/forms'
 </ComponentPreview>
 
 ```tsx
-<GlassInput 
-  variant="password"
-  type="password"
-  placeholder="Enter password"
-/>
+<GlassInput variant="password" type="password" placeholder="Enter password" />
 ```
 
 ## With Icons
@@ -113,15 +103,15 @@ import { GlassInput } from '@liquidify/components/forms'
 
 <ComponentPreview>
   <div className="space-y-4 max-w-sm">
-    <GlassInput 
+    <GlassInput
       placeholder="Email address"
       leftIcon={<Mail className="h-4 w-4" />}
     />
-    <GlassInput 
+    <GlassInput
       placeholder="Search users"
       leftIcon={<User className="h-4 w-4" />}
     />
-    <GlassInput 
+    <GlassInput
       placeholder="Phone number"
       leftIcon={<Phone className="h-4 w-4" />}
     />
@@ -129,7 +119,7 @@ import { GlassInput } from '@liquidify/components/forms'
 </ComponentPreview>
 
 ```tsx
-<GlassInput 
+<GlassInput
   placeholder="Email address"
   leftIcon={<Mail className="h-4 w-4" />}
 />
@@ -139,11 +129,11 @@ import { GlassInput } from '@liquidify/components/forms'
 
 <ComponentPreview>
   <div className="space-y-4 max-w-sm">
-    <GlassInput 
+    <GlassInput
       placeholder="Search..."
       rightIcon={<Search className="h-4 w-4" />}
     />
-    <GlassInput 
+    <GlassInput
       placeholder="External link"
       rightIcon={<ExternalLink className="h-4 w-4" />}
     />
@@ -151,7 +141,7 @@ import { GlassInput } from '@liquidify/components/forms'
 </ComponentPreview>
 
 ```tsx
-<GlassInput 
+<GlassInput
   placeholder="Search..."
   rightIcon={<Search className="h-4 w-4" />}
 />
@@ -160,7 +150,7 @@ import { GlassInput } from '@liquidify/components/forms'
 ### Clearable Input
 
 <ComponentPreview>
-  <GlassInput 
+  <GlassInput
     placeholder="Type something to see clear button"
     clearable
     className="max-w-sm"
@@ -168,10 +158,7 @@ import { GlassInput } from '@liquidify/components/forms'
 </ComponentPreview>
 
 ```tsx
-<GlassInput 
-  placeholder="Clearable input"
-  clearable
-/>
+<GlassInput placeholder="Clearable input" clearable />
 ```
 
 ## States
@@ -181,31 +168,35 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="space-y-4 max-w-sm">
     <GlassFormField label="Valid Input" success="Email is valid">
-      <GlassInput 
+      <GlassInput
         type="email"
         value="john@example.com"
         readOnly
         leftIcon={<Mail className="h-4 w-4" />}
       />
     </GlassFormField>
-    
+
     <GlassFormField label="Error Input" error="Please enter a valid email">
-      <GlassInput 
+      <GlassInput
         type="email"
         value="invalid-email"
         error
         leftIcon={<Mail className="h-4 w-4" />}
       />
     </GlassFormField>
-    
-    <GlassFormField label="Warning Input" warning="This email is already registered">
-      <GlassInput 
+
+    <GlassFormField
+      label="Warning Input"
+      warning="This email is already registered"
+    >
+      <GlassInput
         type="email"
         value="existing@example.com"
         warning
         leftIcon={<Mail className="h-4 w-4" />}
       />
     </GlassFormField>
+
   </div>
 </ComponentPreview>
 
@@ -230,11 +221,8 @@ import { GlassInput } from '@liquidify/components/forms'
 
 <ComponentPreview>
   <div className="space-y-4 max-w-sm">
-    <GlassInput 
-      placeholder="Disabled input"
-      disabled
-    />
-    <GlassInput 
+    <GlassInput placeholder="Disabled input" disabled />
+    <GlassInput
       placeholder="Disabled with value"
       value="Cannot edit this"
       disabled
@@ -250,11 +238,7 @@ import { GlassInput } from '@liquidify/components/forms'
 ### Loading State
 
 <ComponentPreview>
-  <GlassInput 
-    placeholder="Loading..."
-    loading
-    className="max-w-sm"
-  />
+  <GlassInput placeholder="Loading..." loading className="max-w-sm" />
 </ComponentPreview>
 
 ```tsx
@@ -284,36 +268,37 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="grid gap-4 md:grid-cols-2 max-w-2xl">
     <GlassFormField label="Email">
-      <GlassInput 
+      <GlassInput
         type="email"
         placeholder="john@example.com"
         leftIcon={<Mail className="h-4 w-4" />}
       />
     </GlassFormField>
-    
+
     <GlassFormField label="Password">
-      <GlassInput 
+      <GlassInput
         type="password"
         placeholder="••••••••"
         leftIcon={<Lock className="h-4 w-4" />}
       />
     </GlassFormField>
-    
+
     <GlassFormField label="Phone">
-      <GlassInput 
+      <GlassInput
         type="tel"
         placeholder="+1 (555) 123-4567"
         leftIcon={<Phone className="h-4 w-4" />}
       />
     </GlassFormField>
-    
+
     <GlassFormField label="Website">
-      <GlassInput 
+      <GlassInput
         type="url"
         placeholder="https://example.com"
         leftIcon={<Globe className="h-4 w-4" />}
       />
     </GlassFormField>
+
   </div>
 </ComponentPreview>
 
@@ -322,32 +307,23 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="space-y-4 max-w-sm">
     <GlassFormField label="Age">
-      <GlassInput 
-        type="number"
-        placeholder="25"
-        min="0"
-        max="120"
-      />
+      <GlassInput type="number" placeholder="25" min="0" max="120" />
     </GlassFormField>
-    
+
     <GlassFormField label="Price">
-      <GlassInput 
+      <GlassInput
         type="number"
         placeholder="0.00"
         step="0.01"
         leftIcon={<DollarSign className="h-4 w-4" />}
       />
     </GlassFormField>
+
   </div>
 </ComponentPreview>
 
 ```tsx
-<GlassInput 
-  type="number"
-  min="0"
-  max="100"
-  step="0.01"
-/>
+<GlassInput type="number" min="0" max="100" step="0.01" />
 ```
 
 ### Date Input
@@ -355,26 +331,18 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="space-y-4 max-w-sm">
     <GlassFormField label="Date of Birth">
-      <GlassInput 
-        type="date"
-        leftIcon={<Calendar className="h-4 w-4" />}
-      />
+      <GlassInput type="date" leftIcon={<Calendar className="h-4 w-4" />} />
     </GlassFormField>
-    
+
     <GlassFormField label="Time">
-      <GlassInput 
-        type="time"
-        leftIcon={<Clock className="h-4 w-4" />}
-      />
+      <GlassInput type="time" leftIcon={<Clock className="h-4 w-4" />} />
     </GlassFormField>
+
   </div>
 </ComponentPreview>
 
 ```tsx
-<GlassInput 
-  type="date"
-  leftIcon={<Calendar className="h-4 w-4" />}
-/>
+<GlassInput type="date" leftIcon={<Calendar className="h-4 w-4" />} />
 ```
 
 ## Advanced Features
@@ -384,7 +352,7 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="max-w-md">
     <GlassFormField label="Comments">
-      <GlassTextarea 
+      <GlassTextarea
         placeholder="Enter your comments here..."
         autoResize
         rows={3}
@@ -394,10 +362,7 @@ import { GlassInput } from '@liquidify/components/forms'
 </ComponentPreview>
 
 ```tsx
-<GlassTextarea 
-  autoResize
-  placeholder="Auto-resizing textarea"
-/>
+<GlassTextarea autoResize placeholder="Auto-resizing textarea" />
 ```
 
 ### Input with Counter
@@ -405,7 +370,7 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="max-w-md">
     <GlassFormField label="Bio" helperText="Tell us about yourself">
-      <GlassTextarea 
+      <GlassTextarea
         placeholder="Write your bio..."
         maxLength={120}
         showCounter
@@ -416,11 +381,7 @@ import { GlassInput } from '@liquidify/components/forms'
 </ComponentPreview>
 
 ```tsx
-<GlassTextarea 
-  maxLength={120}
-  showCounter
-  placeholder="Bio..."
-/>
+<GlassTextarea maxLength={120} showCounter placeholder="Bio..." />
 ```
 
 ### Search with Suggestions
@@ -428,7 +389,7 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="max-w-md">
     <GlassFormField label="Search Users">
-      <GlassInput 
+      <GlassInput
         variant="search"
         placeholder="Type to search..."
         leftIcon={<Search className="h-4 w-4" />}
@@ -439,7 +400,7 @@ import { GlassInput } from '@liquidify/components/forms'
 </ComponentPreview>
 
 ```tsx
-<GlassInput 
+<GlassInput
   variant="search"
   placeholder="Search with suggestions..."
   onSearch={handleSearch}
@@ -453,26 +414,27 @@ import { GlassInput } from '@liquidify/components/forms'
 <ComponentPreview>
   <div className="max-w-sm space-y-4">
     <GlassFormField label="Email Address">
-      <GlassInput 
+      <GlassInput
         type="email"
         placeholder="Enter your email"
         leftIcon={<Mail className="h-4 w-4" />}
         required
       />
     </GlassFormField>
-    
+
     <GlassFormField label="Password">
-      <GlassInput 
+      <GlassInput
         type="password"
         placeholder="Enter your password"
         leftIcon={<Lock className="h-4 w-4" />}
         required
       />
     </GlassFormField>
-    
+
     <GlassButton variant="primary" fullWidth>
       Sign In
     </GlassButton>
+
   </div>
 </ComponentPreview>
 
@@ -482,46 +444,41 @@ import { GlassInput } from '@liquidify/components/forms'
   <div className="max-w-md space-y-4">
     <div className="grid gap-4 md:grid-cols-2">
       <GlassFormField label="First Name">
-        <GlassInput 
+        <GlassInput
           placeholder="John"
           leftIcon={<User className="h-4 w-4" />}
         />
       </GlassFormField>
-      
+
       <GlassFormField label="Last Name">
-        <GlassInput 
-          placeholder="Doe"
-          leftIcon={<User className="h-4 w-4" />}
-        />
+        <GlassInput placeholder="Doe" leftIcon={<User className="h-4 w-4" />} />
       </GlassFormField>
     </div>
-    
+
     <GlassFormField label="Email">
-      <GlassInput 
+      <GlassInput
         type="email"
         placeholder="john@example.com"
         leftIcon={<Mail className="h-4 w-4" />}
       />
     </GlassFormField>
-    
+
     <GlassFormField label="Phone">
-      <GlassInput 
+      <GlassInput
         type="tel"
         placeholder="+1 (555) 123-4567"
         leftIcon={<Phone className="h-4 w-4" />}
       />
     </GlassFormField>
-    
+
     <GlassFormField label="Message">
-      <GlassTextarea 
-        placeholder="How can we help you?"
-        rows={4}
-      />
+      <GlassTextarea placeholder="How can we help you?" rows={4} />
     </GlassFormField>
-    
+
     <GlassButton variant="primary" fullWidth>
       Send Message
     </GlassButton>
+
   </div>
 </ComponentPreview>
 
@@ -529,7 +486,7 @@ import { GlassInput } from '@liquidify/components/forms'
 
 <ComponentPreview>
   <div className="space-y-4">
-    <GlassInput 
+    <GlassInput
       variant="search"
       placeholder="Search products, categories, or brands..."
       leftIcon={<Search className="h-4 w-4" />}
@@ -537,7 +494,7 @@ import { GlassInput } from '@liquidify/components/forms'
       size="lg"
       className="max-w-2xl"
     />
-    
+
     <div className="flex flex-wrap gap-2 max-w-2xl">
       <GlassBadge variant="secondary" className="cursor-pointer">
         Electronics
@@ -552,24 +509,21 @@ import { GlassInput } from '@liquidify/components/forms'
         Books
       </GlassBadge>
     </div>
+
   </div>
 </ComponentPreview>
 
 ## Props
 
 <ResponseField name="variant" type="string" default="default">
-  The visual style of the input
-  - `"default"` - Standard input styling
-  - `"search"` - Optimized for search interfaces
-  - `"password"` - Enhanced password input
-  - `"email"` - Email-specific styling
+  The visual style of the input - `"default"` - Standard input styling -
+  `"search"` - Optimized for search interfaces - `"password"` - Enhanced
+  password input - `"email"` - Email-specific styling
 </ResponseField>
 
 <ResponseField name="size" type="string" default="md">
-  The size of the input
-  - `"sm"` - Small (32px height)
-  - `"md"` - Medium (40px height)
-  - `"lg"` - Large (48px height)
+  The size of the input - `"sm"` - Small (32px height) - `"md"` - Medium (40px
+  height) - `"lg"` - Large (48px height)
 </ResponseField>
 
 <ResponseField name="leftIcon" type="ReactNode">
@@ -687,17 +641,19 @@ LiqUIdify inputs follow accessibility best practices:
     aria-describedby="email-help email-error"
     required
   />
-</GlassFormField>
+</GlassFormField>;
 
-{emailError && (
-  <div id="email-error" role="alert" className="text-red-600 text-sm mt-1">
-    {emailError}
-  </div>
-)}
+{
+  emailError && (
+    <div id="email-error" role="alert" className="text-red-600 text-sm mt-1">
+      {emailError}
+    </div>
+  );
+}
 
 <div id="email-help" className="text-gray-600 text-sm mt-1">
   We'll never share your email with anyone else.
-</div>
+</div>;
 ```
 
 ## Theming
@@ -710,15 +666,15 @@ Customize input appearance using CSS variables:
   --glass-input-border: rgba(255, 255, 255, 0.2);
   --glass-input-text: rgb(255, 255, 255);
   --glass-input-placeholder: rgba(255, 255, 255, 0.6);
-  
+
   /* Focus states */
   --glass-input-focus-border: rgba(59, 130, 246, 0.5);
   --glass-input-focus-ring: rgba(59, 130, 246, 0.2);
-  
+
   /* Error states */
   --glass-input-error-border: rgba(239, 68, 68, 0.5);
   --glass-input-error-bg: rgba(239, 68, 68, 0.1);
-  
+
   /* Success states */
   --glass-input-success-border: rgba(34, 197, 94, 0.5);
   --glass-input-success-bg: rgba(34, 197, 94, 0.1);
@@ -729,7 +685,7 @@ Customize input appearance using CSS variables:
 
 - Input components are optimized with `React.memo`
 - Debounced search functionality prevents excessive API calls
-- Icon components should be properly sized (16px recommended)  
+- Icon components should be properly sized (16px recommended)
 - Glass effects use GPU acceleration for smooth interactions
 - Large forms benefit from field-level validation to avoid re-renders
 

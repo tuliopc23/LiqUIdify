@@ -200,7 +200,7 @@
 
 /* Liquid Shine Effect */
 .liquid-glass-shine::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -209,7 +209,7 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: inherit;
   backdrop-filter: blur(1px);
-  box-shadow: 
+  box-shadow:
     inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
     inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
   opacity: 0.6;

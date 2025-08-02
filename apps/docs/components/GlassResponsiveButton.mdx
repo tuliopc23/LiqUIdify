@@ -1,9 +1,13 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # GlassResponsiveButton
 
 <Callout type="warning">
-  **Component Availability Notice**: This component is documented but may not be available in the current version of the Liquidify package. Please check the [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most up-to-date information about which components are actually exported and usable.
+  **Component Availability Notice**: This component is documented but may not be
+  available in the current version of the Liquidify package. Please check the
+  [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most
+  up-to-date information about which components are actually exported and
+  usable.
 </Callout>
 
 GlassResponsiveButton is an adaptable button component featuring dynamic size and style changes using Apple's Human Interface Guidelines and Liquid Glass aesthetics.
@@ -108,13 +112,13 @@ Respects user settings by reducing or simplifying motion effects.
 ### Basic Usage
 
 ```tsx
-import { GlassResponsiveButton } from 'liquidify';
+import { GlassResponsiveButton } from "liquidify";
 
 export default function Example() {
   return (
     <GlassResponsiveButton
-      label='Click Me'
-      onClick={() => alert('Button clicked!')}
+      label="Click Me"
+      onClick={() => alert("Button clicked!")}
     />
   );
 }
@@ -123,15 +127,15 @@ export default function Example() {
 ### With Icon
 
 ```tsx
-import { GlassResponsiveButton } from 'liquidify';
-import { CartIcon } from './Icons';
+import { GlassResponsiveButton } from "liquidify";
+import { CartIcon } from "./Icons";
 
 export default function IconExample() {
   return (
     <GlassResponsiveButton
-      label='Add to Cart'
+      label="Add to Cart"
       icon={CartIcon}
-      iconPosition='left'
+      iconPosition="left"
     />
   );
 }
@@ -140,17 +144,17 @@ export default function IconExample() {
 ### Adaptive Button
 
 ```tsx
-import { GlassResponsiveButton } from 'liquidify';
-import { NextIcon } from './Icons';
+import { GlassResponsiveButton } from "liquidify";
+import { NextIcon } from "./Icons";
 
 export default function AdaptiveExample() {
   return (
     <GlassResponsiveButton
-      label='Next'
-      size='fluid'
-      variant='secondary'
+      label="Next"
+      size="fluid"
+      variant="secondary"
       icon={NextIcon}
-      iconPosition='right'
+      iconPosition="right"
     />
   );
 }

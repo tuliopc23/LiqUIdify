@@ -1,9 +1,13 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # GlassProgress
 
 <Callout type="warning">
-  **Component Availability Notice**: This component is documented but may not be available in the current version of the Liquidify package. Please check the [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most up-to-date information about which components are actually exported and usable.
+  **Component Availability Notice**: This component is documented but may not be
+  available in the current version of the Liquidify package. Please check the
+  [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most
+  up-to-date information about which components are actually exported and
+  usable.
 </Callout>
 
 GlassProgress is a component that displays the progress of a task or process using Apple's Human Interface Guidelines and Liquid Glass aesthetics.
@@ -122,23 +126,23 @@ Respects user preferences while maintaining visual clarity.
 ### Basic Usage
 
 ```tsx
-import { GlassProgress } from 'liquidify';
+import { GlassProgress } from "liquidify";
 
 export default function Example() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setProgress(prev => (prev >= 100 ? 0 : prev + 1));
+      setProgress((prev) => (prev >= 100 ? 0 : prev + 1));
     }, 100);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className='space-y-4'>
+    <div className="space-y-4">
       <GlassProgress value={progress} showLabel animated />
-      <p className='hig-caption'>Upload Progress: {progress}%</p>
+      <p className="hig-caption">Upload Progress: {progress}%</p>
     </div>
   );
 }
@@ -147,20 +151,20 @@ export default function Example() {
 ### Circular Progress
 
 ```tsx
-import { GlassProgress } from 'liquidify';
+import { GlassProgress } from "liquidify";
 
 export default function CircularExample() {
   const [downloadProgress, setDownloadProgress] = useState(75);
 
   return (
-    <div className='flex items-center justify-center p-8'>
+    <div className="flex items-center justify-center p-8">
       <GlassProgress
         value={downloadProgress}
-        variant='circular'
-        size='lg'
-        color='primary'
+        variant="circular"
+        size="lg"
+        color="primary"
         showLabel
-        labelFormat={value => `${Math.round(value)}%`}
+        labelFormat={(value) => `${Math.round(value)}%`}
       />
     </div>
   );
@@ -170,7 +174,7 @@ export default function CircularExample() {
 ### Multi-Step Process
 
 ```tsx
-import { GlassProgress } from 'liquidify';
+import { GlassProgress } from "liquidify";
 
 export default function MultiStepExample() {
   const [currentStep, setCurrentStep] = useState(2);
@@ -178,18 +182,18 @@ export default function MultiStepExample() {
   const progress = (currentStep / totalSteps) * 100;
 
   const steps = [
-    'Account Setup',
-    'Profile Information',
-    'Preferences',
-    'Verification',
-    'Complete',
+    "Account Setup",
+    "Profile Information",
+    "Preferences",
+    "Verification",
+    "Complete",
   ];
 
   return (
-    <div className='space-y-6'>
-      <div className='text-center'>
-        <h3 className='hig-headline mb-2'>Setup Progress</h3>
-        <p className='hig-body'>
+    <div className="space-y-6">
+      <div className="text-center">
+        <h3 className="hig-headline mb-2">Setup Progress</h3>
+        <p className="hig-body">
           Step {currentStep} of {totalSteps}
         </p>
       </div>
@@ -197,17 +201,17 @@ export default function MultiStepExample() {
       <GlassProgress
         value={progress}
         segments={totalSteps}
-        color='primary'
-        size='lg'
+        color="primary"
+        size="lg"
         animated
       />
 
-      <div className='grid grid-cols-5 gap-2 text-center'>
+      <div className="grid grid-cols-5 gap-2 text-center">
         {steps.map((step, index) => (
           <div
             key={index}
             className={`hig-caption ${
-              index < currentStep ? 'text-primary' : 'text-secondary'
+              index < currentStep ? "text-primary" : "text-secondary"
             }`}
           >
             {step}
@@ -222,36 +226,36 @@ export default function MultiStepExample() {
 ### File Upload Progress
 
 ```tsx
-import { GlassProgress } from 'liquidify';
+import { GlassProgress } from "liquidify";
 
 export default function FileUploadExample() {
   const [uploadState, setUploadState] = useState({
     progress: 0,
-    status: 'uploading', // 'uploading', 'success', 'error'
-    fileName: 'document.pdf',
-    fileSize: '2.4 MB',
+    status: "uploading", // 'uploading', 'success', 'error'
+    fileName: "document.pdf",
+    fileSize: "2.4 MB",
   });
 
   const getProgressColor = () => {
     switch (uploadState.status) {
-      case 'success':
-        return 'success';
-      case 'error':
-        return 'error';
+      case "success":
+        return "success";
+      case "error":
+        return "error";
       default:
-        return 'primary';
+        return "primary";
     }
   };
 
   return (
-    <div className='glass-card p-6 max-w-md'>
-      <div className='flex items-center gap-3 mb-4'>
-        <div className='w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center'>
-          <DocumentIcon className='w-5 h-5 text-blue-600' />
+    <div className="glass-card p-6 max-w-md">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+          <DocumentIcon className="w-5 h-5 text-blue-600" />
         </div>
-        <div className='flex-1'>
-          <p className='hig-body font-medium'>{uploadState.fileName}</p>
-          <p className='hig-caption text-secondary'>{uploadState.fileSize}</p>
+        <div className="flex-1">
+          <p className="hig-body font-medium">{uploadState.fileName}</p>
+          <p className="hig-caption text-secondary">{uploadState.fileSize}</p>
         </div>
       </div>
 
@@ -260,25 +264,25 @@ export default function FileUploadExample() {
         color={getProgressColor()}
         animated
         showLabel
-        labelFormat={value =>
-          uploadState.status === 'success'
-            ? 'Complete'
-            : uploadState.status === 'error'
-              ? 'Failed'
+        labelFormat={(value) =>
+          uploadState.status === "success"
+            ? "Complete"
+            : uploadState.status === "error"
+              ? "Failed"
               : `${Math.round(value)}%`
         }
       />
 
-      <div className='mt-3 flex justify-between text-sm'>
-        <span className='hig-caption'>
-          {uploadState.status === 'uploading'
-            ? 'Uploading...'
-            : uploadState.status === 'success'
-              ? 'Upload complete'
-              : 'Upload failed'}
+      <div className="mt-3 flex justify-between text-sm">
+        <span className="hig-caption">
+          {uploadState.status === "uploading"
+            ? "Uploading..."
+            : uploadState.status === "success"
+              ? "Upload complete"
+              : "Upload failed"}
         </span>
-        {uploadState.status === 'uploading' && (
-          <button className='hig-caption text-primary'>Cancel</button>
+        {uploadState.status === "uploading" && (
+          <button className="hig-caption text-primary">Cancel</button>
         )}
       </div>
     </div>

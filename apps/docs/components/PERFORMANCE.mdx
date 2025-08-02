@@ -80,9 +80,9 @@ Use `measureGlassEffect` to benchmark specific glass effects:
 const { measureGlassEffect } = usePerformanceMonitor();
 
 // Measure a specific glass effect
-measureGlassEffect('blur-animation', () => {
+measureGlassEffect("blur-animation", () => {
   // Your glass effect code here
-  element.style.backdropFilter = 'blur(10px)';
+  element.style.backdropFilter = "blur(10px)";
 });
 ```
 
@@ -91,19 +91,19 @@ measureGlassEffect('blur-animation', () => {
 The `performanceUtils` object provides utilities for optimizing glass effects:
 
 ```typescript
-import { performanceUtils } from '@/lib/performance-utils';
+import { performanceUtils } from "@/lib/performance-utils";
 
 // Check device capabilities
 const capabilities = performanceUtils.getDeviceCapabilities();
-console.log('Supports backdrop filter:', capabilities.supportsBackdropFilter);
-console.log('Low-end device:', capabilities.isLowEndDevice);
+console.log("Supports backdrop filter:", capabilities.supportsBackdropFilter);
+console.log("Low-end device:", capabilities.isLowEndDevice);
 
 // Get optimized backdrop filter
-const optimizedFilter = performanceUtils.getOptimizedBackdropFilter('medium');
+const optimizedFilter = performanceUtils.getOptimizedBackdropFilter("medium");
 element.style.backdropFilter = optimizedFilter;
 
 // Optimize element for glass effects
-performanceUtils.optimizeElement(element, 'heavy');
+performanceUtils.optimizeElement(element, "heavy");
 ```
 
 ## Bundle Size Optimization
@@ -113,23 +113,23 @@ performanceUtils.optimizeElement(element, 'heavy');
 Monitor and optimize component bundle sizes:
 
 ```typescript
-import { bundleUtils } from '@/lib/performance-utils';
+import { bundleUtils } from "@/lib/performance-utils";
 
 // Estimate component size
-const size = bundleUtils.estimateComponentSize('GlassChart');
+const size = bundleUtils.estimateComponentSize("GlassChart");
 console.log(`Component size: ${size}KB`);
 
 // Get total bundle size
 const totalSize = bundleUtils.getTotalBundleSize([
-  'GlassChart',
-  'GlassDatePicker',
-  'GlassCommand',
+  "GlassChart",
+  "GlassDatePicker",
+  "GlassCommand",
 ]);
 
 // Get optimization recommendations
 const recommendations = bundleUtils.getBundleRecommendations([
-  'GlassChart',
-  'GlassDatePicker',
+  "GlassChart",
+  "GlassDatePicker",
 ]);
 ```
 
@@ -176,15 +176,15 @@ import { LazyGlassChart, preloadGlassChart } from '@/components/ui';
 Create your own lazy-loaded components:
 
 ```typescript
-import { lazyLoadUtils } from '@/lib/performance-utils';
+import { lazyLoadUtils } from "@/lib/performance-utils";
 
 const LazyMyComponent = lazyLoadUtils.createLazyComponent(
-  () => import('./MyComponent')
+  () => import("./MyComponent"),
 );
 
 // With preloading
 const preloadMyComponent = lazyLoadUtils.preloadComponent(
-  () => import('./MyComponent')
+  () => import("./MyComponent"),
 );
 ```
 
@@ -221,10 +221,10 @@ const capabilities = performanceUtils.getDeviceCapabilities();
 
 if (capabilities.isLowEndDevice) {
   // Use simplified effects
-  element.style.backdropFilter = 'blur(4px)';
+  element.style.backdropFilter = "blur(4px)";
 } else {
   // Use full effects
-  element.style.backdropFilter = 'blur(12px) saturate(180%)';
+  element.style.backdropFilter = "blur(12px) saturate(180%)";
 }
 ```
 
@@ -246,8 +246,8 @@ Always enable hardware acceleration for glass effects:
 
 ```typescript
 // Enable hardware acceleration
-element.style.transform = 'translateZ(0)';
-element.style.willChange = 'transform, backdrop-filter';
+element.style.transform = "translateZ(0)";
+element.style.willChange = "transform, backdrop-filter";
 ```
 
 ### 2. Optimize Backdrop Filter
@@ -256,7 +256,7 @@ Use performance-optimized backdrop filters:
 
 ```typescript
 // Get optimized filter based on device
-const optimizedFilter = performanceUtils.getOptimizedBackdropFilter('medium');
+const optimizedFilter = performanceUtils.getOptimizedBackdropFilter("medium");
 element.style.backdropFilter = optimizedFilter;
 ```
 
@@ -266,7 +266,7 @@ Throttle scroll-based animations:
 
 ```typescript
 const throttledScroll = performanceUtils.throttle(handleScroll, 16);
-window.addEventListener('scroll', throttledScroll, { passive: true });
+window.addEventListener("scroll", throttledScroll, { passive: true });
 ```
 
 ### 4. Use Containment
@@ -274,8 +274,8 @@ window.addEventListener('scroll', throttledScroll, { passive: true });
 Isolate rendering contexts:
 
 ```typescript
-element.style.contain = 'layout style paint';
-element.style.isolation = 'isolate';
+element.style.contain = "layout style paint";
+element.style.isolation = "isolate";
 ```
 
 ### 5. Monitor Performance
@@ -353,14 +353,14 @@ Track bundle sizes in your build process:
 
 ```typescript
 // In your build script
-import { bundleUtils } from '@/lib/performance-utils';
+import { bundleUtils } from "@/lib/performance-utils";
 
-const components = ['GlassChart', 'GlassDatePicker', 'GlassCommand'];
+const components = ["GlassChart", "GlassDatePicker", "GlassCommand"];
 const totalSize = bundleUtils.getTotalBundleSize(components);
 const recommendations = bundleUtils.getBundleRecommendations(components);
 
 console.log(`Total bundle size: ${totalSize}KB`);
-console.log('Recommendations:', recommendations);
+console.log("Recommendations:", recommendations);
 ```
 
 ## Troubleshooting
@@ -368,11 +368,13 @@ console.log('Recommendations:', recommendations);
 ### Common Performance Issues
 
 1. **Slow Glass Effects**
+
    - Check if hardware acceleration is enabled
    - Use optimized backdrop filters
    - Consider device capabilities
 
 2. **High Memory Usage**
+
    - Implement lazy loading for heavy components
    - Clean up performance monitoring observers
    - Use intersection observer for off-screen components
@@ -390,13 +392,13 @@ Use the performance monitor to debug issues:
 const { metrics, measureGlassEffect } = usePerformanceMonitor();
 
 // Measure specific operations
-measureGlassEffect('problematic-effect', () => {
+measureGlassEffect("problematic-effect", () => {
   // Your code here
 });
 
 // Check benchmark results
 const benchmarks = getBenchmarkResults();
-const poorPerformance = benchmarks.filter(b => b.status === 'poor');
+const poorPerformance = benchmarks.filter((b) => b.status === "poor");
 ```
 
 ## Integration Examples

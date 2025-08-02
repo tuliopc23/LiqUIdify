@@ -50,19 +50,19 @@ export default defineConfig(({ mode }) => {
       }),
       // Bundle analyzer in production
       isProduction &&
-      visualizer({
-        filename: "reports/bundle/stats.html",
-        open: false,
-        gzipSize: true,
-        brotliSize: true,
-      }),
+        visualizer({
+          filename: "reports/bundle/stats.html",
+          open: false,
+          gzipSize: true,
+          brotliSize: true,
+        }),
       // Gzip compression for analysis
       isProduction &&
-      compression({
-        algorithms: ["gzip"],
-        exclude: [/\.(br)$/, /\.(gz)$/],
-        deleteOriginalAssets: false,
-      }),
+        compression({
+          algorithms: ["gzip"],
+          exclude: [/\.(br)$/, /\.(gz)$/],
+          deleteOriginalAssets: false,
+        }),
     ].filter(Boolean),
     resolve: {
       alias: {
@@ -176,20 +176,20 @@ export default defineConfig(({ mode }) => {
       minify: isProduction ? "terser" : false,
       terserOptions: isProduction
         ? {
-          compress: {
-            drop_console: true,
-            drop_debugger: true,
-            pure_funcs: ["console.log", "console.info", "console.debug"],
-            passes: 2,
-          },
-          mangle: {
-            safari10: true,
-          },
-          format: {
-            comments: false,
-            ascii_only: true,
-          },
-        }
+            compress: {
+              drop_console: true,
+              drop_debugger: true,
+              pure_funcs: ["console.log", "console.info", "console.debug"],
+              passes: 2,
+            },
+            mangle: {
+              safari10: true,
+            },
+            format: {
+              comments: false,
+              ascii_only: true,
+            },
+          }
         : {},
       // Output directory
       outDir: "dist/libs/components",

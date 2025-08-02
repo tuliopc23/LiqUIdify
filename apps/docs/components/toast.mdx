@@ -139,29 +139,29 @@ toast({
 
 ### Toast Provider Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `position` | `"top" \| "top-right" \| "top-left" \| "bottom" \| "bottom-right" \| "bottom-left"` | `"top-right"` | Position of toasts |
-| `limit` | `number` | `5` | Maximum number of toasts |
-| `duration` | `number` | `5000` | Default duration in milliseconds |
-| `swipeDirection` | `"up" \| "down" \| "left" \| "right"` | `"right"` | Swipe direction to dismiss |
-| `swipeThreshold` | `number` | `50` | Swipe distance required to dismiss |
-| `gutter` | `number` | `8` | Space between toasts |
+| Prop             | Type                                                                                | Default       | Description                        |
+| ---------------- | ----------------------------------------------------------------------------------- | ------------- | ---------------------------------- |
+| `position`       | `"top" \| "top-right" \| "top-left" \| "bottom" \| "bottom-right" \| "bottom-left"` | `"top-right"` | Position of toasts                 |
+| `limit`          | `number`                                                                            | `5`           | Maximum number of toasts           |
+| `duration`       | `number`                                                                            | `5000`        | Default duration in milliseconds   |
+| `swipeDirection` | `"up" \| "down" \| "left" \| "right"`                                               | `"right"`     | Swipe direction to dismiss         |
+| `swipeThreshold` | `number`                                                                            | `50`          | Swipe distance required to dismiss |
+| `gutter`         | `number`                                                                            | `8`           | Space between toasts               |
 
 ### Toast Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `title` | `string` | - | Toast title |
-| `description` | `string` | - | Toast description |
-| `variant` | `"default" \| "success" \| "error" \| "warning" \| "info"` | `"default"` | Toast style variant |
-| `duration` | `number` | `5000` | Duration in milliseconds |
-| `position` | `"top" \| "top-right" \| "top-left" \| "bottom" \| "bottom-right" \| "bottom-left"` | - | Override default position |
-| `action` | `{ label: string; onClick: () =\u003e void }` | - | Primary action button |
-| `cancel` | `{ label: string; onClick: () =\u003e void }` | - | Secondary action button |
-| `progress` | `number` | - | Progress indicator (0-100) |
-| `onDismiss` | `() =\u003e void` | - | Called when toast is dismissed |
-| `id` | `string` | - | Custom toast ID |
+| Option        | Type                                                                                | Default     | Description                    |
+| ------------- | ----------------------------------------------------------------------------------- | ----------- | ------------------------------ |
+| `title`       | `string`                                                                            | -           | Toast title                    |
+| `description` | `string`                                                                            | -           | Toast description              |
+| `variant`     | `"default" \| "success" \| "error" \| "warning" \| "info"`                          | `"default"` | Toast style variant            |
+| `duration`    | `number`                                                                            | `5000`      | Duration in milliseconds       |
+| `position`    | `"top" \| "top-right" \| "top-left" \| "bottom" \| "bottom-right" \| "bottom-left"` | -           | Override default position      |
+| `action`      | `{ label: string; onClick: () =\u003e void }`                                       | -           | Primary action button          |
+| `cancel`      | `{ label: string; onClick: () =\u003e void }`                                       | -           | Secondary action button        |
+| `progress`    | `number`                                                                            | -           | Progress indicator (0-100)     |
+| `onDismiss`   | `() =\u003e void`                                                                   | -           | Called when toast is dismissed |
+| `id`          | `string`                                                                            | -           | Custom toast ID                |
 
 ## Accessibility
 
@@ -250,21 +250,25 @@ function App() {
 ## Best Practices
 
 1. **Duration**
+
    - Use shorter durations (3-5s) for simple messages
    - Use longer durations (5-10s) for messages with actions
    - Use `Infinity` sparingly for critical messages
 
 2. **Content**
+
    - Keep titles short and descriptive
    - Limit descriptions to 1-2 lines
    - Use action buttons for important interactions
 
 3. **Variants**
+
    - Use appropriate variants for message type
    - Reserve error variant for actual errors
    - Use info variant for neutral updates
 
 4. **Position**
+
    - Consider screen size and user focus areas
    - Avoid blocking important content
    - Be consistent with positioning

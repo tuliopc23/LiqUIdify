@@ -142,7 +142,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
           <div className="glass-filter pointer-events-none" />
           <div className="glass-overlay pointer-events-none" />
           <div className="glass-specular pointer-events-none" />
-          
+
           {variant === "search" && !leftIcon && (
             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-glass-grey z-10" />
           )}
@@ -154,7 +154,12 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
           <input
             type={inputType}
-            className={cn(baseClasses, getIconPadding(), "relative z-10", className)}
+            className={cn(
+              baseClasses,
+              getIconPadding(),
+              "relative z-10",
+              className,
+            )}
             ref={setReferences}
             {...(value === undefined
               ? { defaultValue: props.defaultValue }
@@ -175,7 +180,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                   "glass-button radius-lg-s p-1 text-glass-grey",
                   "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
                   "motion-safe:active:scale-95 transition-all duration-200",
-                  "glass-focus"
+                  "glass-focus",
                 )}
               >
                 <X className="h-4 w-4" />
@@ -191,7 +196,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                   "glass-button radius-lg-s p-1 text-glass-grey",
                   "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
                   "motion-safe:active:scale-95 transition-all duration-200",
-                  "glass-focus"
+                  "glass-focus",
                 )}
               >
                 {showPassword ? (

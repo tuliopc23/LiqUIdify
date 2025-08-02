@@ -20,11 +20,12 @@ import { Progress } from "@liquidify/components";
 import { Progress } from "@liquidify/components";
 
 function App() {
-  return (
-    <Progress value={65} max={100} />
-  );
-}
-```
+return (
+
+<Progress value={65} max={100} />
+); }
+
+````
 
 ```tsx Next.js
 "use client";
@@ -35,18 +36,14 @@ export default function Page() {
     <Progress value={45} max={100} />
   );
 }
-```
+````
+
 </CodeGroup>
 
 ## With Label
 
 ```tsx
-<Progress 
-  value={75} 
-  max={100} 
-  label="Upload Progress"
-  showValue={true}
-/>
+<Progress value={75} max={100} label="Upload Progress" showValue={true} />
 ```
 
 ## Sizes
@@ -63,6 +60,7 @@ export default function Page() {
 ```tsx Large
 <Progress value={70} size="lg" />
 ```
+
 </CodeGroup>
 
 ## Variants
@@ -83,6 +81,7 @@ export default function Page() {
 ```tsx Error
 <Progress value={15} variant="error" />
 ```
+
 </CodeGroup>
 
 ## Indeterminate
@@ -96,26 +95,21 @@ For unknown progress duration:
 ## Circular Progress
 
 ```tsx
-<Progress 
-  value={60} 
-  variant="circular" 
-  size="lg"
-  showValue={true}
-/>
+<Progress value={60} variant="circular" size="lg" showValue={true} />
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `number` | `0` | Current progress value |
-| `max` | `number` | `100` | Maximum progress value |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Progress bar size |
-| `variant` | `"default" \| "success" \| "warning" \| "error" \| "circular"` | `"default"` | Progress style variant |
-| `label` | `string` | - | Accessible label |
-| `showValue` | `boolean` | `false` | Show percentage value |
-| `indeterminate` | `boolean` | `false` | Indeterminate progress |
-| `className` | `string` | - | Additional CSS classes |
+| Prop            | Type                                                           | Default     | Description            |
+| --------------- | -------------------------------------------------------------- | ----------- | ---------------------- |
+| `value`         | `number`                                                       | `0`         | Current progress value |
+| `max`           | `number`                                                       | `100`       | Maximum progress value |
+| `size`          | `"sm" \| "md" \| "lg"`                                         | `"md"`      | Progress bar size      |
+| `variant`       | `"default" \| "success" \| "warning" \| "error" \| "circular"` | `"default"` | Progress style variant |
+| `label`         | `string`                                                       | -           | Accessible label       |
+| `showValue`     | `boolean`                                                      | `false`     | Show percentage value  |
+| `indeterminate` | `boolean`                                                      | `false`     | Indeterminate progress |
+| `className`     | `string`                                                       | -           | Additional CSS classes |
 
 ## Accessibility
 

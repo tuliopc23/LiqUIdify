@@ -443,8 +443,8 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                         <div className="mt-1 h-1.5 w-full rounded-full bg-white/10">
                           <div
                             className="h-1.5 rounded-full bg-blue-400 transition-all duration-300"
-                            style={{ 
-                              width: `${fileItem.progress || 0}%`
+                            style={{
+                              width: `${fileItem.progress || 0}%`,
                             }}
                           />
                         </div>

@@ -1,9 +1,13 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # GlassPopover
 
 <Callout type="warning">
-  **Component Availability Notice**: This component is documented but may not be available in the current version of the Liquidify package. Please check the [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most up-to-date information about which components are actually exported and usable.
+  **Component Availability Notice**: This component is documented but may not be
+  available in the current version of the Liquidify package. Please check the
+  [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most
+  up-to-date information about which components are actually exported and
+  usable.
 </Callout>
 
 GlassPopover is a floating component that displays contextual information or actions using Apple's Human Interface Guidelines and Liquid Glass aesthetics.
@@ -125,16 +129,16 @@ Respects user preferences with simplified animations while maintaining glass aes
 ### Basic Usage
 
 ```tsx
-import { GlassPopover } from 'liquidify';
+import { GlassPopover } from "liquidify";
 
 export default function Example() {
   return (
     <GlassPopover
       trigger={<button>Show Info</button>}
       content={
-        <div className='p-4'>
-          <h3 className='hig-headline mb-2'>Quick Info</h3>
-          <p className='hig-body'>
+        <div className="p-4">
+          <h3 className="hig-headline mb-2">Quick Info</h3>
+          <p className="hig-body">
             This is contextual information with beautiful Liquid Glass effects.
           </p>
         </div>
@@ -147,19 +151,19 @@ export default function Example() {
 ### Menu Popover
 
 ```tsx
-import { GlassPopover } from 'liquidify';
+import { GlassPopover } from "liquidify";
 
 export default function MenuExample() {
   const menuContent = (
-    <div className='py-2'>
-      <button className='w-full px-4 py-2 text-left hover:bg-glass-hover'>
+    <div className="py-2">
+      <button className="w-full px-4 py-2 text-left hover:bg-glass-hover">
         Edit Profile
       </button>
-      <button className='w-full px-4 py-2 text-left hover:bg-glass-hover'>
+      <button className="w-full px-4 py-2 text-left hover:bg-glass-hover">
         Settings
       </button>
-      <div className='border-t border-glass-border my-1' />
-      <button className='w-full px-4 py-2 text-left hover:bg-glass-hover text-red-500'>
+      <div className="border-t border-glass-border my-1" />
+      <button className="w-full px-4 py-2 text-left hover:bg-glass-hover text-red-500">
         Sign Out
       </button>
     </div>
@@ -167,10 +171,10 @@ export default function MenuExample() {
 
   return (
     <GlassPopover
-      trigger={<button className='glass-button'>Options</button>}
+      trigger={<button className="glass-button">Options</button>}
       content={menuContent}
-      placement='bottom'
-      blurIntensity='heavy'
+      placement="bottom"
+      blurIntensity="heavy"
     />
   );
 }
@@ -179,13 +183,13 @@ export default function MenuExample() {
 ### Form Help Popover
 
 ```tsx
-import { GlassPopover } from 'liquidify';
+import { GlassPopover } from "liquidify";
 
 export default function FormHelpExample() {
   const helpContent = (
-    <div className='max-w-xs p-4'>
-      <h4 className='hig-subheadline mb-2'>Password Requirements</h4>
-      <ul className='hig-caption space-y-1'>
+    <div className="max-w-xs p-4">
+      <h4 className="hig-subheadline mb-2">Password Requirements</h4>
+      <ul className="hig-caption space-y-1">
         <li>• At least 8 characters</li>
         <li>• One uppercase letter</li>
         <li>• One number</li>
@@ -195,16 +199,16 @@ export default function FormHelpExample() {
   );
 
   return (
-    <div className='relative'>
-      <input type='password' className='glass-input' placeholder='Password' />
+    <div className="relative">
+      <input type="password" className="glass-input" placeholder="Password" />
       <GlassPopover
         trigger={
-          <button className='absolute right-2 top-2 glass-icon-button'>
+          <button className="absolute right-2 top-2 glass-icon-button">
             <InfoIcon />
           </button>
         }
         content={helpContent}
-        placement='right'
+        placement="right"
         arrow={true}
       />
     </div>
@@ -215,34 +219,34 @@ export default function FormHelpExample() {
 ### Advanced Usage with Animations
 
 ```tsx
-import { GlassPopover } from 'liquidify';
+import { GlassPopover } from "liquidify";
 
 export default function AdvancedExample() {
   const [isOpen, setIsOpen] = useState(false);
 
   const richContent = (
-    <div className='w-80 p-6'>
-      <div className='flex items-start gap-3 mb-4'>
-        <div className='w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600' />
+    <div className="w-80 p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600" />
         <div>
-          <h3 className='hig-headline'>John Doe</h3>
-          <p className='hig-caption text-secondary'>Software Engineer</p>
+          <h3 className="hig-headline">John Doe</h3>
+          <p className="hig-caption text-secondary">Software Engineer</p>
         </div>
       </div>
 
-      <div className='space-y-3'>
-        <div className='flex justify-between'>
-          <span className='hig-body'>Projects</span>
-          <span className='hig-body-emphasis'>12</span>
+      <div className="space-y-3">
+        <div className="flex justify-between">
+          <span className="hig-body">Projects</span>
+          <span className="hig-body-emphasis">12</span>
         </div>
-        <div className='flex justify-between'>
-          <span className='hig-body'>Commits</span>
-          <span className='hig-body-emphasis'>284</span>
+        <div className="flex justify-between">
+          <span className="hig-body">Commits</span>
+          <span className="hig-body-emphasis">284</span>
         </div>
       </div>
 
-      <div className='mt-4 pt-4 border-t border-glass-border'>
-        <button className='glass-button-primary w-full'>View Profile</button>
+      <div className="mt-4 pt-4 border-t border-glass-border">
+        <button className="glass-button-primary w-full">View Profile</button>
       </div>
     </div>
   );
@@ -250,14 +254,14 @@ export default function AdvancedExample() {
   return (
     <GlassPopover
       trigger={
-        <div className='glass-card p-4 cursor-pointer'>
-          <div className='w-8 h-8 rounded-full bg-blue-500 mb-2' />
-          <span className='hig-caption'>Hover for details</span>
+        <div className="glass-card p-4 cursor-pointer">
+          <div className="w-8 h-8 rounded-full bg-blue-500 mb-2" />
+          <span className="hig-caption">Hover for details</span>
         </div>
       }
       content={richContent}
-      placement='auto'
-      blurIntensity='heavy'
+      placement="auto"
+      blurIntensity="heavy"
       backdrop={true}
       animationDuration={400}
       onOpen={() => setIsOpen(true)}

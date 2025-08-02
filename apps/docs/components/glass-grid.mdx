@@ -11,7 +11,7 @@ The Glass Grid component provides a flexible, responsive grid system with beauti
 ## Basic Usage
 
 ```tsx
-import { GlassGrid, GlassGridItem } from '@liquidify/react';
+import { GlassGrid, GlassGridItem } from "@liquidify/react";
 
 function BasicGrid() {
   return (
@@ -35,7 +35,7 @@ function BasicGrid() {
 Create responsive layouts that adapt to different screen sizes:
 
 ```tsx
-import { GlassGrid, GlassGridItem } from '@liquidify/react';
+import { GlassGrid, GlassGridItem } from "@liquidify/react";
 
 function ResponsiveGrid() {
   return (
@@ -45,18 +45,16 @@ function ResponsiveGrid() {
         sm: 2,
         md: 3,
         lg: 4,
-        xl: 6
+        xl: 6,
       }}
       gap={{
-        xs: 'sm',
-        md: 'lg'
+        xs: "sm",
+        md: "lg",
       }}
     >
       {Array.from({ length: 12 }, (_, i) => (
         <GlassGridItem key={i}>
-          <div className="p-4">
-            Item {i + 1}
-          </div>
+          <div className="p-4">Item {i + 1}</div>
         </GlassGridItem>
       ))}
     </GlassGrid>
@@ -69,7 +67,7 @@ function ResponsiveGrid() {
 Control how grid items span across columns and rows:
 
 ```tsx
-import { GlassGrid, GlassGridItem } from '@liquidify/react';
+import { GlassGrid, GlassGridItem } from "@liquidify/react";
 
 function SpanningGrid() {
   return (
@@ -99,15 +97,11 @@ function SpanningGrid() {
 Create grids that automatically fit items based on minimum width:
 
 ```tsx
-import { GlassGrid, GlassGridItem } from '@liquidify/react';
+import { GlassGrid, GlassGridItem } from "@liquidify/react";
 
 function AutoFitGrid() {
   return (
-    <GlassGrid
-      autoFit
-      minItemWidth="250px"
-      gap="lg"
-    >
+    <GlassGrid autoFit minItemWidth="250px" gap="lg">
       {Array.from({ length: 8 }, (_, i) => (
         <GlassGridItem key={i}>
           <div className="p-6">
@@ -126,7 +120,7 @@ function AutoFitGrid() {
 Customize the glass morphism effects:
 
 ```tsx
-import { GlassGrid, GlassGridItem } from '@liquidify/react';
+import { GlassGrid, GlassGridItem } from "@liquidify/react";
 
 function CustomGlassGrid() {
   return (
@@ -137,14 +131,14 @@ function CustomGlassGrid() {
         blur: 20,
         opacity: 0.15,
         borderOpacity: 0.3,
-        shadow: 'lg'
+        shadow: "lg",
       }}
     >
       <GlassGridItem
         glassEffect={{
           blur: 15,
           opacity: 0.2,
-          borderOpacity: 0.4
+          borderOpacity: 0.4,
         }}
       >
         <div>Custom glass item</div>
@@ -165,7 +159,7 @@ function CustomGlassGrid() {
 Create a Pinterest-style masonry layout:
 
 ```tsx
-import { GlassGrid, GlassGridItem } from '@liquidify/react';
+import { GlassGrid, GlassGridItem } from "@liquidify/react";
 
 function MasonryGrid() {
   const items = [
@@ -174,15 +168,11 @@ function MasonryGrid() {
     { height: 150, content: "Tiny item" },
     { height: 400, content: "Tall item" },
     { height: 250, content: "Another medium" },
-    { height: 180, content: "Small item" }
+    { height: 180, content: "Small item" },
   ];
 
   return (
-    <GlassGrid
-      masonry
-      columns={3}
-      gap="md"
-    >
+    <GlassGrid masonry columns={3} gap="md">
       {items.map((item, i) => (
         <GlassGridItem key={i}>
           <div style={{ height: item.height }} className="p-4">
@@ -199,35 +189,35 @@ function MasonryGrid() {
 
 ### GlassGrid Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `columns` | `number \| ResponsiveValue<number>` | `1` | Number of columns in the grid |
-| `gap` | `SpacingValue \| ResponsiveValue<SpacingValue>` | `'md'` | Gap between grid items |
-| `autoFit` | `boolean` | `false` | Enable auto-fit behavior |
-| `minItemWidth` | `string` | `'250px'` | Minimum width for auto-fit items |
-| `masonry` | `boolean` | `false` | Enable masonry layout |
-| `glassEffect` | `GlassEffectProps` | - | Glass morphism effect configuration |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Grid items |
+| Prop           | Type                                            | Default   | Description                         |
+| -------------- | ----------------------------------------------- | --------- | ----------------------------------- |
+| `columns`      | `number \| ResponsiveValue<number>`             | `1`       | Number of columns in the grid       |
+| `gap`          | `SpacingValue \| ResponsiveValue<SpacingValue>` | `'md'`    | Gap between grid items              |
+| `autoFit`      | `boolean`                                       | `false`   | Enable auto-fit behavior            |
+| `minItemWidth` | `string`                                        | `'250px'` | Minimum width for auto-fit items    |
+| `masonry`      | `boolean`                                       | `false`   | Enable masonry layout               |
+| `glassEffect`  | `GlassEffectProps`                              | -         | Glass morphism effect configuration |
+| `className`    | `string`                                        | -         | Additional CSS classes              |
+| `children`     | `ReactNode`                                     | -         | Grid items                          |
 
 ### GlassGridItem Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `colSpan` | `number \| ResponsiveValue<number>` | `1` | Number of columns to span |
-| `rowSpan` | `number \| ResponsiveValue<number>` | `1` | Number of rows to span |
-| `glassEffect` | `GlassEffectProps` | - | Glass morphism effect configuration |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Item content |
+| Prop          | Type                                | Default | Description                         |
+| ------------- | ----------------------------------- | ------- | ----------------------------------- |
+| `colSpan`     | `number \| ResponsiveValue<number>` | `1`     | Number of columns to span           |
+| `rowSpan`     | `number \| ResponsiveValue<number>` | `1`     | Number of rows to span              |
+| `glassEffect` | `GlassEffectProps`                  | -       | Glass morphism effect configuration |
+| `className`   | `string`                            | -       | Additional CSS classes              |
+| `children`    | `ReactNode`                         | -       | Item content                        |
 
 ### GlassEffectProps
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `blur` | `number` | `12` | Backdrop blur intensity |
-| `opacity` | `number` | `0.1` | Background opacity |
-| `borderOpacity` | `number` | `0.2` | Border opacity |
-| `shadow` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Shadow size |
+| Prop            | Type                           | Default | Description             |
+| --------------- | ------------------------------ | ------- | ----------------------- |
+| `blur`          | `number`                       | `12`    | Backdrop blur intensity |
+| `opacity`       | `number`                       | `0.1`   | Background opacity      |
+| `borderOpacity` | `number`                       | `0.2`   | Border opacity          |
+| `shadow`        | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'`  | Shadow size             |
 
 ### ResponsiveValue
 
@@ -238,7 +228,7 @@ type ResponsiveValue<T> = {
   md?: T;
   lg?: T;
   xl?: T;
-}
+};
 ```
 
 ## Styling
@@ -313,12 +303,7 @@ function DashboardGrid() {
 ```tsx
 function PhotoGallery() {
   return (
-    <GlassGrid
-      autoFit
-      minItemWidth="300px"
-      gap="md"
-      masonry
-    >
+    <GlassGrid autoFit minItemWidth="300px" gap="md" masonry>
       {photos.map((photo) => (
         <GlassGridItem key={photo.id}>
           <img

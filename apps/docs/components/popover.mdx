@@ -11,7 +11,12 @@ The Popover component displays rich content in a floating container that appears
 ## Basic Usage
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+} from "@liquidify/react";
 
 function BasicPopover() {
   return (
@@ -37,14 +42,27 @@ function BasicPopover() {
 Control where the popover appears relative to the trigger:
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+} from "@liquidify/react";
 
 function PopoverPlacements() {
   const placements = [
-    'top', 'top-start', 'top-end',
-    'right', 'right-start', 'right-end',
-    'bottom', 'bottom-start', 'bottom-end',
-    'left', 'left-start', 'left-end'
+    "top",
+    "top-start",
+    "top-end",
+    "right",
+    "right-start",
+    "right-end",
+    "bottom",
+    "bottom-start",
+    "bottom-end",
+    "left",
+    "left-start",
+    "left-end",
   ];
 
   return (
@@ -73,7 +91,12 @@ function PopoverPlacements() {
 Different ways to trigger the popover:
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+} from "@liquidify/react";
 
 function PopoverTriggers() {
   return (
@@ -120,16 +143,16 @@ function PopoverTriggers() {
 Popovers can contain complex interactive content:
 
 ```tsx
-import { 
-  Popover, 
-  PopoverTrigger, 
-  PopoverContent, 
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
   Button,
   Input,
   Avatar,
-  Badge
-} from '@liquidify/react';
-import { Settings, User, Bell } from 'lucide-react';
+  Badge,
+} from "@liquidify/react";
+import { Settings, User, Bell } from "lucide-react";
 
 function RichContentPopover() {
   return (
@@ -150,7 +173,9 @@ function RichContentPopover() {
               <div>
                 <h3 className="font-semibold">John Doe</h3>
                 <p className="text-sm text-gray-600">john@example.com</p>
-                <Badge color="success" size="sm">Online</Badge>
+                <Badge color="success" size="sm">
+                  Online
+                </Badge>
               </div>
             </div>
             <div className="space-y-2">
@@ -182,10 +207,18 @@ function RichContentPopover() {
             <div className="space-y-3">
               <Input placeholder="Search..." size="sm" />
               <div className="grid grid-cols-2 gap-2">
-                <Button size="sm" variant="outline">New File</Button>
-                <Button size="sm" variant="outline">New Folder</Button>
-                <Button size="sm" variant="outline">Upload</Button>
-                <Button size="sm" variant="outline">Share</Button>
+                <Button size="sm" variant="outline">
+                  New File
+                </Button>
+                <Button size="sm" variant="outline">
+                  New Folder
+                </Button>
+                <Button size="sm" variant="outline">
+                  Upload
+                </Button>
+                <Button size="sm" variant="outline">
+                  Share
+                </Button>
               </div>
             </div>
           </div>
@@ -201,16 +234,16 @@ function RichContentPopover() {
 Use popovers for inline forms and inputs:
 
 ```tsx
-import { 
-  Popover, 
-  PopoverTrigger, 
-  PopoverContent, 
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
   Button,
   Input,
   Label,
-  Textarea
-} from '@liquidify/react';
-import { Plus } from 'lucide-react';
+  Textarea,
+} from "@liquidify/react";
+import { Plus } from "lucide-react";
 
 function FormPopover() {
   const [isOpen, setIsOpen] = useState(false);
@@ -233,11 +266,7 @@ function FormPopover() {
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div>
             <Label htmlFor="title">Title</Label>
-            <Input
-              id="title"
-              placeholder="Enter title"
-              className="mt-1"
-            />
+            <Input id="title" placeholder="Enter title" className="mt-1" />
           </div>
           <div>
             <Label htmlFor="comment">Comment</Label>
@@ -273,8 +302,13 @@ function FormPopover() {
 Manage popover state programmatically:
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
-import { useState } from 'react';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+} from "@liquidify/react";
+import { useState } from "react";
 
 function ControlledPopover() {
   const [isOpen, setIsOpen] = useState(false);
@@ -294,7 +328,7 @@ function ControlledPopover() {
       <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger>
           <Button variant="outline">
-            Controlled Trigger (State: {isOpen ? 'Open' : 'Closed'})
+            Controlled Trigger (State: {isOpen ? "Open" : "Closed"})
           </Button>
         </PopoverTrigger>
         <PopoverContent>
@@ -319,7 +353,12 @@ function ControlledPopover() {
 Customize the popover appearance:
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+} from "@liquidify/react";
 
 function StyledPopover() {
   return (
@@ -350,7 +389,7 @@ function StyledPopover() {
         <PopoverTrigger>
           <Button variant="ghost">Custom Style</Button>
         </PopoverTrigger>
-        <PopoverContent 
+        <PopoverContent
           className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0"
           showArrow
         >
@@ -369,7 +408,12 @@ function StyledPopover() {
 Popovers can be nested within each other:
 
 ```tsx
-import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Button,
+} from "@liquidify/react";
 
 function NestedPopovers() {
   return (
@@ -383,7 +427,7 @@ function NestedPopovers() {
           <p className="text-sm text-gray-600 mb-3">
             This popover contains another popover.
           </p>
-          
+
           <Popover>
             <PopoverTrigger>
               <Button size="sm">Open Child</Button>
@@ -406,36 +450,36 @@ function NestedPopovers() {
 
 ### Popover Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `isOpen` | `boolean` | - | Controlled open state |
-| `defaultOpen` | `boolean` | `false` | Default open state |
-| `onOpenChange` | `(isOpen: boolean) => void` | - | Open state change handler |
-| `trigger` | `'click' \| 'hover' \| 'focus'` | `'click'` | Trigger behavior |
-| `placement` | `Placement` | `'bottom'` | Popover position |
-| `offset` | `number` | `8` | Distance from trigger |
-| `crossOffset` | `number` | `0` | Cross-axis offset |
-| `shouldFlip` | `boolean` | `true` | Flip when out of bounds |
-| `shouldUpdatePosition` | `boolean` | `true` | Update position on scroll |
-| `isKeyboardDismissDisabled` | `boolean` | `false` | Disable Escape key dismiss |
-| `isNonModal` | `boolean` | `false` | Non-modal behavior |
-| `isDismissable` | `boolean` | `true` | Allow outside click dismiss |
-| `children` | `ReactNode` | - | Popover content |
+| Prop                        | Type                            | Default    | Description                 |
+| --------------------------- | ------------------------------- | ---------- | --------------------------- |
+| `isOpen`                    | `boolean`                       | -          | Controlled open state       |
+| `defaultOpen`               | `boolean`                       | `false`    | Default open state          |
+| `onOpenChange`              | `(isOpen: boolean) => void`     | -          | Open state change handler   |
+| `trigger`                   | `'click' \| 'hover' \| 'focus'` | `'click'`  | Trigger behavior            |
+| `placement`                 | `Placement`                     | `'bottom'` | Popover position            |
+| `offset`                    | `number`                        | `8`        | Distance from trigger       |
+| `crossOffset`               | `number`                        | `0`        | Cross-axis offset           |
+| `shouldFlip`                | `boolean`                       | `true`     | Flip when out of bounds     |
+| `shouldUpdatePosition`      | `boolean`                       | `true`     | Update position on scroll   |
+| `isKeyboardDismissDisabled` | `boolean`                       | `false`    | Disable Escape key dismiss  |
+| `isNonModal`                | `boolean`                       | `false`    | Non-modal behavior          |
+| `isDismissable`             | `boolean`                       | `true`     | Allow outside click dismiss |
+| `children`                  | `ReactNode`                     | -          | Popover content             |
 
 ### PopoverTrigger Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Trigger element |
+| Prop       | Type        | Default | Description     |
+| ---------- | ----------- | ------- | --------------- |
+| `children` | `ReactNode` | -       | Trigger element |
 
 ### PopoverContent Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `showArrow` | `boolean` | `false` | Show arrow pointer |
-| `arrowSize` | `number` | `12` | Arrow size in pixels |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Popover content |
+| Prop        | Type        | Default | Description            |
+| ----------- | ----------- | ------- | ---------------------- |
+| `showArrow` | `boolean`   | `false` | Show arrow pointer     |
+| `arrowSize` | `number`    | `12`    | Arrow size in pixels   |
+| `className` | `string`    | -       | Additional CSS classes |
+| `children`  | `ReactNode` | -       | Popover content        |
 
 ## Styling
 
@@ -530,7 +574,9 @@ Make it easy for users to close popovers:
 
 ```tsx
 <Popover>
-  <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+  <PopoverTrigger>
+    <Button>Open</Button>
+  </PopoverTrigger>
   <PopoverContent>
     <div className="p-4">
       <div className="flex justify-between items-center mb-3">
@@ -551,11 +597,13 @@ Ensure popovers work well on mobile devices:
 
 ```tsx
 <Popover
-  trigger={isMobile ? 'click' : 'hover'}
-  placement={isMobile ? 'bottom' : 'right'}
+  trigger={isMobile ? "click" : "hover"}
+  placement={isMobile ? "bottom" : "right"}
 >
-  <PopoverTrigger><Button>Menu</Button></PopoverTrigger>
-  <PopoverContent className={isMobile ? 'w-screen max-w-sm' : 'w-64'}>
+  <PopoverTrigger>
+    <Button>Menu</Button>
+  </PopoverTrigger>
+  <PopoverContent className={isMobile ? "w-screen max-w-sm" : "w-64"}>
     <MenuContent />
   </PopoverContent>
 </Popover>
@@ -567,12 +615,24 @@ Ensure popovers work well on mobile devices:
 
 ```tsx
 function ColorPickerPopover() {
-  const [selectedColor, setSelectedColor] = useState('#3b82f6');
+  const [selectedColor, setSelectedColor] = useState("#3b82f6");
   const colors = [
-    '#ef4444', '#f97316', '#f59e0b', '#eab308',
-    '#84cc16', '#22c55e', '#10b981', '#14b8a6',
-    '#06b6d4', '#0ea5e9', '#3b82f6', '#6366f1',
-    '#8b5cf6', '#a855f7', '#d946ef', '#ec4899'
+    "#ef4444",
+    "#f97316",
+    "#f59e0b",
+    "#eab308",
+    "#84cc16",
+    "#22c55e",
+    "#10b981",
+    "#14b8a6",
+    "#06b6d4",
+    "#0ea5e9",
+    "#3b82f6",
+    "#6366f1",
+    "#8b5cf6",
+    "#a855f7",
+    "#d946ef",
+    "#ec4899",
   ];
 
   return (
@@ -594,7 +654,9 @@ function ColorPickerPopover() {
               <button
                 key={color}
                 className={`w-12 h-12 rounded-lg border-2 ${
-                  selectedColor === color ? 'border-gray-400' : 'border-gray-200'
+                  selectedColor === color
+                    ? "border-gray-400"
+                    : "border-gray-200"
                 }`}
                 style={{ backgroundColor: color }}
                 onClick={() => setSelectedColor(color)}

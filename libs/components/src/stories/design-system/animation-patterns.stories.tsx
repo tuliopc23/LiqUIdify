@@ -57,7 +57,7 @@ const createHoverAnimation = (type: "scale" | "lift" | "rotate" | "glow") => {
       transition: { type: "spring", stiffness: 300, damping: 20 },
     },
     glow: {
-      whileHover: { 
+      whileHover: {
         boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
         borderColor: "rgb(59, 130, 246)",
       },
@@ -86,7 +86,9 @@ const AnimationCard: React.FC<{
       <div className="mb-4 flex justify-center">
         <motion.div
           className="h-16 w-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 cursor-pointer"
-          animate={isAnimating ? { scale: [1, 1.2, 1], rotate: [0, 180, 360] } : {}}
+          animate={
+            isAnimating ? { scale: [1, 1.2, 1], rotate: [0, 180, 360] } : {}
+          }
           transition={{ type: "spring", ...spring }}
           onClick={handleClick}
         />

@@ -11,7 +11,7 @@ The Tooltip component displays helpful information when users hover over or focu
 ## Basic Usage
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
+import { Tooltip, Button } from "@liquidify/react";
 
 function BasicTooltip() {
   return (
@@ -27,7 +27,7 @@ function BasicTooltip() {
 Control where the tooltip appears relative to the trigger element:
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
+import { Tooltip, Button } from "@liquidify/react";
 
 function TooltipPlacements() {
   return (
@@ -41,7 +41,7 @@ function TooltipPlacements() {
       <Tooltip content="Top right" placement="top-end">
         <Button>Top End</Button>
       </Tooltip>
-      
+
       <Tooltip content="Left" placement="left">
         <Button>Left</Button>
       </Tooltip>
@@ -51,7 +51,7 @@ function TooltipPlacements() {
       <Tooltip content="Right" placement="right">
         <Button>Right</Button>
       </Tooltip>
-      
+
       <Tooltip content="Bottom left" placement="bottom-start">
         <Button>Bottom Start</Button>
       </Tooltip>
@@ -71,7 +71,7 @@ function TooltipPlacements() {
 Customize the tooltip appearance:
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
+import { Tooltip, Button } from "@liquidify/react";
 
 function TooltipVariants() {
   return (
@@ -101,8 +101,8 @@ function TooltipVariants() {
 Include formatted text, icons, or other components:
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
-import { Info, Star } from 'lucide-react';
+import { Tooltip, Button } from "@liquidify/react";
+import { Info, Star } from "lucide-react";
 
 function RichContentTooltip() {
   return (
@@ -117,17 +117,19 @@ function RichContentTooltip() {
       >
         <Button color="danger">Delete</Button>
       </Tooltip>
-      
+
       <Tooltip
         content={
           <div>
             <div className="font-semibold mb-1">Premium Feature</div>
-            <div className="text-sm">
-              Upgrade to access advanced analytics
-            </div>
+            <div className="text-sm">Upgrade to access advanced analytics</div>
             <div className="flex items-center gap-1 mt-2">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} size={12} className="fill-yellow-400 text-yellow-400" />
+                <Star
+                  key={i}
+                  size={12}
+                  className="fill-yellow-400 text-yellow-400"
+                />
               ))}
             </div>
           </div>
@@ -146,36 +148,24 @@ function RichContentTooltip() {
 Control when tooltips appear and disappear:
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
+import { Tooltip, Button } from "@liquidify/react";
 
 function TooltipTiming() {
   return (
     <div className="flex gap-4">
-      <Tooltip
-        content="Appears immediately"
-        delay={0}
-      >
+      <Tooltip content="Appears immediately" delay={0}>
         <Button>No Delay</Button>
       </Tooltip>
-      
-      <Tooltip
-        content="Appears after 500ms"
-        delay={500}
-      >
+
+      <Tooltip content="Appears after 500ms" delay={500}>
         <Button>Short Delay</Button>
       </Tooltip>
-      
-      <Tooltip
-        content="Appears after 1 second"
-        delay={1000}
-      >
+
+      <Tooltip content="Appears after 1 second" delay={1000}>
         <Button>Long Delay</Button>
       </Tooltip>
-      
-      <Tooltip
-        content="Stays open for 3 seconds"
-        closeDelay={3000}
-      >
+
+      <Tooltip content="Stays open for 3 seconds" closeDelay={3000}>
         <Button>Long Close Delay</Button>
       </Tooltip>
     </div>
@@ -188,32 +178,23 @@ function TooltipTiming() {
 Control how tooltips are activated:
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
+import { Tooltip, Button } from "@liquidify/react";
 
 function TooltipTriggers() {
   return (
     <div className="flex gap-4">
-      <Tooltip
-        content="Hover to see this tooltip"
-        trigger="hover"
-      >
+      <Tooltip content="Hover to see this tooltip" trigger="hover">
         <Button>Hover</Button>
       </Tooltip>
-      
-      <Tooltip
-        content="Focus to see this tooltip"
-        trigger="focus"
-      >
+
+      <Tooltip content="Focus to see this tooltip" trigger="focus">
         <Button>Focus</Button>
       </Tooltip>
-      
-      <Tooltip
-        content="Click to toggle this tooltip"
-        trigger="click"
-      >
+
+      <Tooltip content="Click to toggle this tooltip" trigger="click">
         <Button>Click</Button>
       </Tooltip>
-      
+
       <Tooltip
         content="This tooltip is always visible"
         trigger="manual"
@@ -231,8 +212,8 @@ function TooltipTriggers() {
 Tooltips can be conditionally disabled:
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
-import { useState } from 'react';
+import { Tooltip, Button } from "@liquidify/react";
+import { useState } from "react";
 
 function DisabledTooltip() {
   const [disabled, setDisabled] = useState(false);
@@ -247,14 +228,9 @@ function DisabledTooltip() {
         />
         <label>Disable tooltip</label>
       </div>
-      
-      <Tooltip
-        content="This tooltip can be disabled"
-        isDisabled={disabled}
-      >
-        <Button>
-          {disabled ? 'Tooltip Disabled' : 'Tooltip Enabled'}
-        </Button>
+
+      <Tooltip content="This tooltip can be disabled" isDisabled={disabled}>
+        <Button>{disabled ? "Tooltip Disabled" : "Tooltip Enabled"}</Button>
       </Tooltip>
     </div>
   );
@@ -266,30 +242,20 @@ function DisabledTooltip() {
 Control the tooltip arrow appearance:
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
+import { Tooltip, Button } from "@liquidify/react";
 
 function TooltipArrows() {
   return (
     <div className="flex gap-4">
-      <Tooltip
-        content="Tooltip with arrow"
-        showArrow={true}
-      >
+      <Tooltip content="Tooltip with arrow" showArrow={true}>
         <Button>With Arrow</Button>
       </Tooltip>
-      
-      <Tooltip
-        content="Tooltip without arrow"
-        showArrow={false}
-      >
+
+      <Tooltip content="Tooltip without arrow" showArrow={false}>
         <Button>No Arrow</Button>
       </Tooltip>
-      
-      <Tooltip
-        content="Custom arrow size"
-        showArrow={true}
-        arrowSize={12}
-      >
+
+      <Tooltip content="Custom arrow size" showArrow={true} arrowSize={12}>
         <Button>Large Arrow</Button>
       </Tooltip>
     </div>
@@ -302,7 +268,7 @@ function TooltipArrows() {
 Create tooltips that users can interact with:
 
 ```tsx
-import { Tooltip, Button } from '@liquidify/react';
+import { Tooltip, Button } from "@liquidify/react";
 
 function InteractiveTooltip() {
   return (
@@ -311,7 +277,9 @@ function InteractiveTooltip() {
         <div className="p-2">
           <p className="mb-2">Interactive tooltip content</p>
           <div className="flex gap-2">
-            <Button size="sm" variant="outline">Cancel</Button>
+            <Button size="sm" variant="outline">
+              Cancel
+            </Button>
             <Button size="sm">Confirm</Button>
           </div>
         </div>
@@ -331,8 +299,8 @@ function InteractiveTooltip() {
 Provide help text for form fields:
 
 ```tsx
-import { Tooltip, Input, Label } from '@liquidify/react';
-import { HelpCircle } from 'lucide-react';
+import { Tooltip, Input, Label } from "@liquidify/react";
+import { HelpCircle } from "lucide-react";
 
 function FormTooltips() {
   return (
@@ -347,12 +315,9 @@ function FormTooltips() {
             <HelpCircle size={16} className="text-gray-400 cursor-help" />
           </Tooltip>
         </div>
-        <Input
-          id="username"
-          placeholder="Enter username"
-        />
+        <Input id="username" placeholder="Enter username" />
       </div>
-      
+
       <div>
         <div className="flex items-center gap-2 mb-2">
           <Label htmlFor="password">Password</Label>
@@ -375,11 +340,7 @@ function FormTooltips() {
             <HelpCircle size={16} className="text-gray-400 cursor-help" />
           </Tooltip>
         </div>
-        <Input
-          id="password"
-          type="password"
-          placeholder="Enter password"
-        />
+        <Input id="password" type="password" placeholder="Enter password" />
       </div>
     </div>
   );
@@ -390,34 +351,42 @@ function FormTooltips() {
 
 ### Tooltip Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `content` | `ReactNode` | - | Tooltip content |
-| `placement` | `Placement` | `'top'` | Tooltip position |
-| `color` | `'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Tooltip color |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Tooltip size |
-| `trigger` | `'hover' \| 'focus' \| 'click' \| 'manual'` | `'hover'` | Trigger behavior |
-| `delay` | `number` | `400` | Show delay in ms |
-| `closeDelay` | `number` | `0` | Hide delay in ms |
-| `isOpen` | `boolean` | - | Controlled open state |
-| `defaultOpen` | `boolean` | `false` | Default open state |
-| `isDisabled` | `boolean` | `false` | Disabled state |
-| `showArrow` | `boolean` | `true` | Show arrow pointer |
-| `arrowSize` | `number` | `8` | Arrow size in pixels |
-| `offset` | `number` | `8` | Distance from trigger |
-| `interactive` | `boolean` | `false` | Allow interaction with tooltip |
-| `className` | `string` | - | Additional CSS classes |
-| `onOpenChange` | `(isOpen: boolean) => void` | - | Open state change handler |
-| `children` | `ReactNode` | - | Trigger element |
+| Prop           | Type                                                                          | Default     | Description                    |
+| -------------- | ----------------------------------------------------------------------------- | ----------- | ------------------------------ |
+| `content`      | `ReactNode`                                                                   | -           | Tooltip content                |
+| `placement`    | `Placement`                                                                   | `'top'`     | Tooltip position               |
+| `color`        | `'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Tooltip color                  |
+| `size`         | `'sm' \| 'md' \| 'lg'`                                                        | `'md'`      | Tooltip size                   |
+| `trigger`      | `'hover' \| 'focus' \| 'click' \| 'manual'`                                   | `'hover'`   | Trigger behavior               |
+| `delay`        | `number`                                                                      | `400`       | Show delay in ms               |
+| `closeDelay`   | `number`                                                                      | `0`         | Hide delay in ms               |
+| `isOpen`       | `boolean`                                                                     | -           | Controlled open state          |
+| `defaultOpen`  | `boolean`                                                                     | `false`     | Default open state             |
+| `isDisabled`   | `boolean`                                                                     | `false`     | Disabled state                 |
+| `showArrow`    | `boolean`                                                                     | `true`      | Show arrow pointer             |
+| `arrowSize`    | `number`                                                                      | `8`         | Arrow size in pixels           |
+| `offset`       | `number`                                                                      | `8`         | Distance from trigger          |
+| `interactive`  | `boolean`                                                                     | `false`     | Allow interaction with tooltip |
+| `className`    | `string`                                                                      | -           | Additional CSS classes         |
+| `onOpenChange` | `(isOpen: boolean) => void`                                                   | -           | Open state change handler      |
+| `children`     | `ReactNode`                                                                   | -           | Trigger element                |
 
 ### Placement Options
 
 ```tsx
-type Placement = 
-  | 'top' | 'top-start' | 'top-end'
-  | 'right' | 'right-start' | 'right-end'
-  | 'bottom' | 'bottom-start' | 'bottom-end'
-  | 'left' | 'left-start' | 'left-end';
+type Placement =
+  | "top"
+  | "top-start"
+  | "top-end"
+  | "right"
+  | "right-start"
+  | "right-end"
+  | "bottom"
+  | "bottom-start"
+  | "bottom-end"
+  | "left"
+  | "left-start"
+  | "left-end";
 ```
 
 ## Styling
@@ -476,9 +445,7 @@ The Tooltip component includes accessibility features:
   role="tooltip"
   aria-label="Additional information"
 >
-  <Button aria-describedby="tooltip-id">
-    Button with tooltip
-  </Button>
+  <Button aria-describedby="tooltip-id">Button with tooltip</Button>
 </Tooltip>
 ```
 
@@ -526,10 +493,7 @@ Choose the right trigger for your use case:
 Hover doesn't work on mobile, so provide alternatives:
 
 ```tsx
-<Tooltip
-  content="Help text"
-  trigger={isMobile ? 'click' : 'hover'}
->
+<Tooltip content="Help text" trigger={isMobile ? "click" : "hover"}>
   <HelpIcon />
 </Tooltip>
 ```
@@ -547,19 +511,19 @@ function IconButtonTooltips() {
           <Edit size={16} />
         </Button>
       </Tooltip>
-      
+
       <Tooltip content="Delete item" color="danger">
         <Button variant="ghost" isIconOnly color="danger">
           <Trash size={16} />
         </Button>
       </Tooltip>
-      
+
       <Tooltip content="Share item">
         <Button variant="ghost" isIconOnly>
           <Share size={16} />
         </Button>
       </Tooltip>
-      
+
       <Tooltip content="More options">
         <Button variant="ghost" isIconOnly>
           <MoreHorizontal size={16} />
@@ -575,17 +539,21 @@ function IconButtonTooltips() {
 ```tsx
 function StatusIndicators() {
   const servers = [
-    { name: 'Web Server', status: 'online', uptime: '99.9%' },
-    { name: 'Database', status: 'warning', uptime: '98.5%' },
-    { name: 'API Gateway', status: 'offline', uptime: '0%' }
+    { name: "Web Server", status: "online", uptime: "99.9%" },
+    { name: "Database", status: "warning", uptime: "98.5%" },
+    { name: "API Gateway", status: "offline", uptime: "0%" },
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'online': return 'success';
-      case 'warning': return 'warning';
-      case 'offline': return 'danger';
-      default: return 'default';
+      case "online":
+        return "success";
+      case "warning":
+        return "warning";
+      case "offline":
+        return "danger";
+      default:
+        return "default";
     }
   };
 
@@ -603,11 +571,15 @@ function StatusIndicators() {
             }
             color={getStatusColor(server.status)}
           >
-            <div className={`w-3 h-3 rounded-full ${
-              server.status === 'online' ? 'bg-green-500' :
-              server.status === 'warning' ? 'bg-yellow-500' :
-              'bg-red-500'
-            }`} />
+            <div
+              className={`w-3 h-3 rounded-full ${
+                server.status === "online"
+                  ? "bg-green-500"
+                  : server.status === "warning"
+                    ? "bg-yellow-500"
+                    : "bg-red-500"
+              }`}
+            />
           </Tooltip>
           <span>{server.name}</span>
         </div>

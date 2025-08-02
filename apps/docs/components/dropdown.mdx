@@ -27,8 +27,10 @@ The `GlassDropdown` component provides beautiful glassmorphism dropdown menus wi
     GlassDropdownItem,
     GlassDropdownSeparator,
     GlassDropdownLabel
+
 } from '@liquidify/components'
-    ```
+
+````
 
 </CodeGroup>
 
@@ -140,6 +142,7 @@ The `GlassDropdown` component provides beautiful glassmorphism dropdown menus wi
             </GlassDropdownContent>
         </GlassDropdown>
     </div>
+
 </ComponentPreview>
 
 ## Dropdown Variants
@@ -175,6 +178,7 @@ The `GlassDropdown` component provides beautiful glassmorphism dropdown menus wi
             </GlassDropdownItem>
         </GlassDropdownContent>
     </GlassDropdown>
+
 </ComponentPreview>
 
 ```tsx
@@ -182,7 +186,7 @@ The `GlassDropdown` component provides beautiful glassmorphism dropdown menus wi
   <GlassDropdownTrigger asChild>
     <GlassButton variant="outline">File</GlassButton>
   </GlassDropdownTrigger>
-  
+
   <GlassDropdownContent>
     <GlassDropdownItem shortcut="Ctrl+N">
       <FileText className="mr-2 h-4 w-4" />
@@ -194,7 +198,7 @@ The `GlassDropdown` component provides beautiful glassmorphism dropdown menus wi
     </GlassDropdownItem>
   </GlassDropdownContent>
 </GlassDropdown>
-```
+````
 
 ### Context Menu Dropdown
 
@@ -233,6 +237,7 @@ The `GlassDropdown` component provides beautiful glassmorphism dropdown menus wi
             </GlassDropdownContent>
         </GlassDropdown>
     </div>
+
 </ComponentPreview>
 
 ### User Account Dropdown
@@ -290,6 +295,7 @@ The `GlassDropdown` component provides beautiful glassmorphism dropdown menus wi
             </GlassDropdownItem>
         </GlassDropdownContent>
     </GlassDropdown>
+
 </ComponentPreview>
 
 ## Dropdown Features
@@ -322,6 +328,7 @@ The `GlassDropdown` component provides beautiful glassmorphism dropdown menus wi
             </GlassDropdownCheckboxItem>
         </GlassDropdownContent>
     </GlassDropdown>
+
 </ComponentPreview>
 ```tsx
 // Example with state management
@@ -330,6 +337,7 @@ function CheckboxDropdownExample() {
   const [showEmail, setShowEmail] = useState(true)
 
 return (
+
 <GlassDropdown>
 <GlassDropdownTrigger asChild>
 <GlassButton variant="outline">View Options</GlassButton>
@@ -350,9 +358,11 @@ return (
         </GlassDropdownCheckboxItem>
       </GlassDropdownContent>
     </GlassDropdown>
+
 )
 }
-```
+
+````
 
 ### With Radio Groups
 
@@ -364,7 +374,7 @@ return (
         <ChevronDown className="ml-2 h-4 w-4" />
       </GlassButton>
     </GlassDropdownTrigger>
-    
+
     <GlassDropdownContent>
       <GlassDropdownLabel>Sort Options</GlassDropdownLabel>
       <GlassDropdownSeparator />
@@ -412,7 +422,7 @@ function SortDropdownExample() {
     </GlassDropdown>
   )
 }
-```
+````
 
 ### Nested Dropdowns
 
@@ -460,6 +470,7 @@ function SortDropdownExample() {
             </GlassDropdownItem>
         </GlassDropdownContent>
     </GlassDropdown>
+
 </ComponentPreview>
 
 ## Positioning
@@ -507,6 +518,7 @@ function SortDropdownExample() {
             </GlassDropdownContent>
         </GlassDropdown>
     </div>
+
 </ComponentPreview>
 
 ### Side Positioning
@@ -549,6 +561,7 @@ function SortDropdownExample() {
             </GlassDropdownContent>
         </GlassDropdown>
     </div>
+
 </ComponentPreview>
 
 ## Real-World Examples
@@ -618,6 +631,7 @@ function SortDropdownExample() {
             </GlassDropdown>
         </div>
     </div>
+
 </ComponentPreview>
 
 ### Data Table Actions
@@ -688,6 +702,7 @@ function SortDropdownExample() {
             ))}
         </div>
     </div>
+
 </ComponentPreview>
 
 ## Props
@@ -695,65 +710,69 @@ function SortDropdownExample() {
 ### GlassDropdown
 
 <ResponseField name="open" type="boolean">
-    Controls the open state of the dropdown
+  Controls the open state of the dropdown
 </ResponseField>
 
 <ResponseField name="onOpenChange" type="(open: boolean) => void">
-    Callback when open state changes
+  Callback when open state changes
 </ResponseField>
 
 <ResponseField name="modal" type="boolean" default="false">
-    Whether to make the dropdown modal
+  Whether to make the dropdown modal
 </ResponseField>
 
 ### GlassDropdownTrigger
 
 <ResponseField name="asChild" type="boolean" default="false">
-    Render as child element instead of button
+  Render as child element instead of button
 </ResponseField>
 
 ### GlassDropdownContent
 
 <ResponseField name="align" type="'start' | 'center' | 'end'" default="center">
-    Alignment relative to the trigger
+  Alignment relative to the trigger
 </ResponseField>
 
-<ResponseField name="side" type="'top' | 'right' | 'bottom' | 'left'" default="bottom">
-    Which side to position the dropdown
+<ResponseField
+  name="side"
+  type="'top' | 'right' | 'bottom' | 'left'"
+  default="bottom"
+>
+  Which side to position the dropdown
 </ResponseField>
 
 <ResponseField name="sideOffset" type="number" default="4">
-    Distance from the trigger
+  Distance from the trigger
 </ResponseField>
 
 <ResponseField name="alignOffset" type="number" default="0">
-    Offset along the alignment axis
+  Offset along the alignment axis
 </ResponseField>
 
 <ResponseField name="avoidCollisions" type="boolean" default="true">
-    Whether to avoid viewport collisions
+  Whether to avoid viewport collisions
 </ResponseField>
 
 <ResponseField name="loop" type="boolean" default="true">
-    Whether keyboard navigation should loop
+  Whether keyboard navigation should loop
 </ResponseField>
 
 ### GlassDropdownItem
 
 <ResponseField name="disabled" type="boolean" default="false">
-    Whether the item is disabled
+  Whether the item is disabled
 </ResponseField>
 
 <ResponseField name="shortcut" type="string">
-    Keyboard shortcut to display
+  Keyboard shortcut to display
 </ResponseField>
 
 <ResponseField name="asChild" type="boolean" default="false">
-    Render as child element
+  Render as child element
 </ResponseField>
 
 <ResponseField name="onSelect" type="(event: Event) => void">
-    Callback when item is selected
+  Callback when item is selected
 </ResponseField>
 
 ## Accessibility
@@ -767,9 +786,10 @@ LiqUIdify dropdowns follow WAI-ARIA guidelines:
 - **Portal Rendering**: Avoids focus traps and z-index issues
 
 ### Accessibility Example
+
 ```tsx
 function AccessibleDropdownExample() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <GlassDropdown open={isOpen} onOpenChange={setIsOpen}>
@@ -781,35 +801,28 @@ function AccessibleDropdownExample() {
         <User className="h-4 w-4" />
       </GlassDropdownTrigger>
 
-      <GlassDropdownContent
-        role="menu"
-        aria-label="Account options"
-      >
-        <GlassDropdownItem role="menuitem">
-          Profile
-        </GlassDropdownItem>
-        <GlassDropdownItem role="menuitem">
-          Settings
-        </GlassDropdownItem>
+      <GlassDropdownContent role="menu" aria-label="Account options">
+        <GlassDropdownItem role="menuitem">Profile</GlassDropdownItem>
+        <GlassDropdownItem role="menuitem">Settings</GlassDropdownItem>
       </GlassDropdownContent>
     </GlassDropdown>
-  )
+  );
 }
 ```
 
 ## Keyboard Shortcuts
 
-| Key | Action |
-|-----|--------|
-| **Space** | Open/close dropdown |
-| **Enter** | Open/close dropdown or select item |
-| **Arrow Down** | Move to next item |
-| **Arrow Up** | Move to previous item |
-| **Home** | Move to first item |
-| **End** | Move to last item |
-| **Escape** | Close dropdown |
-| **Tab** | Close dropdown and move to next element |
-| **A-Z** | Type-ahead search |
+| Key            | Action                                  |
+| -------------- | --------------------------------------- |
+| **Space**      | Open/close dropdown                     |
+| **Enter**      | Open/close dropdown or select item      |
+| **Arrow Down** | Move to next item                       |
+| **Arrow Up**   | Move to previous item                   |
+| **Home**       | Move to first item                      |
+| **End**        | Move to last item                       |
+| **Escape**     | Close dropdown                          |
+| **Tab**        | Close dropdown and move to next element |
+| **A-Z**        | Type-ahead search                       |
 
 ## Theming
 
@@ -821,7 +834,7 @@ Customize dropdown appearance using CSS variables:
   --dropdown-border: rgba(255, 255, 255, 0.2);
   --dropdown-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   --dropdown-radius: 8px;
-  
+
   /* Item styles */
   --dropdown-item-hover: rgba(255, 255, 255, 0.1);
   --dropdown-item-focus: rgba(59, 130, 246, 0.2);

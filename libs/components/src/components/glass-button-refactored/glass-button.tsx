@@ -86,7 +86,7 @@ interface GlassButtonProps
 // Size class mappings using HIG-compliant radii
 const SIZE_CLASSES = {
   xs: "px-3 py-1.5 text-xs radius-lg-s",
-  sm: "px-4 py-2 text-sm radius-lg-s", 
+  sm: "px-4 py-2 text-sm radius-lg-s",
   md: "px-6 py-3 text-base radius-lg-m",
   lg: "px-8 py-4 text-lg radius-lg-m",
   xl: "px-10 py-5 text-xl radius-lg-l",
@@ -101,7 +101,7 @@ const VARIANT_CLASSES = {
     "motion-safe:hover:from-blue-400/80 motion-safe:hover:to-blue-500/80",
     "motion-safe:active:from-blue-600/80 motion-safe:active:to-blue-600/80",
     "shadow-glass border border-blue-400/30",
-    "animate-glass-hover animate-glass-press"
+    "animate-glass-hover animate-glass-press",
   ),
   secondary: cn(
     "glass glass-button",
@@ -109,21 +109,21 @@ const VARIANT_CLASSES = {
     "border-gray-200/30 dark:border-gray-700/30",
     "motion-safe:hover:bg-gray-50/20 dark:motion-safe:hover:bg-gray-800/20",
     "motion-safe:active:bg-gray-100/30 dark:motion-safe:active:bg-gray-700/30",
-    "animate-glass-hover animate-glass-press"
+    "animate-glass-hover animate-glass-press",
   ),
   tertiary: cn(
     "glass-button bg-transparent",
     "text-gray-900 dark:text-white",
     "motion-safe:hover:bg-gray-50/20 dark:motion-safe:hover:bg-gray-800/20",
     "motion-safe:active:bg-gray-100/30 dark:motion-safe:active:bg-gray-700/30",
-    "animate-glass-hover animate-glass-press"
+    "animate-glass-hover animate-glass-press",
   ),
   ghost: cn(
     "glass-button bg-transparent",
     "text-gray-600 dark:text-gray-400",
     "motion-safe:hover:bg-gray-50/20 dark:motion-safe:hover:bg-gray-800/20",
     "motion-safe:active:bg-gray-100/30 dark:motion-safe:active:bg-gray-700/30",
-    "animate-glass-hover animate-glass-press"
+    "animate-glass-hover animate-glass-press",
   ),
   destructive: cn(
     "glass glass-button",
@@ -132,7 +132,7 @@ const VARIANT_CLASSES = {
     "motion-safe:hover:from-red-400/80 motion-safe:hover:to-red-500/80",
     "motion-safe:active:from-red-600/80 motion-safe:active:to-red-600/80",
     "shadow-glass border border-red-400/30",
-    "animate-glass-hover animate-glass-press"
+    "animate-glass-hover animate-glass-press",
   ),
   apple: cn(
     "glass glass-button",
@@ -141,19 +141,20 @@ const VARIANT_CLASSES = {
     "motion-safe:hover:from-gray-700/80 motion-safe:hover:to-gray-800/80",
     "motion-safe:active:from-gray-900/80 motion-safe:active:to-gray-900/80",
     "shadow-glass border border-gray-600/30",
-    "animate-glass-hover animate-glass-press"
+    "animate-glass-hover animate-glass-press",
   ),
 };
 
 // Loading spinner component with Tailwind classes
 const LoadingSpinner = ({ size = "md" }: { size?: string }) => {
-  const sizeClass = {
-    xs: "w-3 h-3",
-    sm: "w-4 h-4", 
-    md: "w-5 h-5",
-    lg: "w-6 h-6",
-    xl: "w-7 h-7"
-  }[size] || "w-5 h-5";
+  const sizeClass =
+    {
+      xs: "w-3 h-3",
+      sm: "w-4 h-4",
+      md: "w-5 h-5",
+      lg: "w-6 h-6",
+      xl: "w-7 h-7",
+    }[size] || "w-5 h-5";
 
   return (
     <div
@@ -306,13 +307,13 @@ export const GlassButton = React.memo(
         // Base classes with glass utilities
         "relative inline-flex items-center justify-center font-medium",
         "overflow-hidden transition-all duration-300 ease-out will-change-transform",
-        
+
         // Glass focus styles
         "glass-focus",
-        
+
         // Size classes (HIG-compliant)
         SIZE_CLASSES[size],
-        
+
         // Variant classes
         VARIANT_CLASSES[variant],
 
@@ -340,7 +341,7 @@ export const GlassButton = React.memo(
           <div className="glass-filter" />
           <div className="glass-overlay" />
           <div className="glass-specular" />
-          
+
           {/* Button content */}
           <div className="glass-content">
             {loading && (

@@ -1,0 +1,28 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "stripInternal": true,
+    "composite": true,
+    "noEmit": false,
+    "skipLibCheck": true
+  },
+  "include": ["libs/components/src"],
+  "exclude": [
+    "**/*.stories.*",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "node_modules",
+    "dist",
+    "build",
+    "examples",
+    "apps",
+    ".vite",
+    ".turbo",
+    ".storybook",
+    "**/__mocks__/**"
+  ]
+}

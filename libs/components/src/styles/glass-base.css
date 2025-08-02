@@ -50,7 +50,7 @@
 }
 
 .glass-effect::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -59,13 +59,12 @@
   background: var(--glass-liquid-bg);
   border-radius: inherit;
   backdrop-filter: var(--glass-liquid-blur);
-  box-shadow: 
+  box-shadow:
     inset -10px -8px 0px -11px var(--glass-liquid-highlight),
     inset 0px -9px 0px -8px var(--glass-liquid-highlight);
   opacity: var(--glass-liquid-opacity);
   z-index: -1;
-  filter: 
-    var(--glass-liquid-blur)
+  filter: var(--glass-liquid-blur)
     drop-shadow(10px 4px 6px var(--glass-liquid-shadow))
     var(--glass-liquid-brightness);
 }

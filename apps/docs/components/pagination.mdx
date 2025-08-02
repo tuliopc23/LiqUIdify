@@ -11,7 +11,7 @@ The Pagination component provides navigation controls for splitting large datase
 ## Basic Usage
 
 ```tsx
-import { Pagination } from '@liquidify/react';
+import { Pagination } from "@liquidify/react";
 
 function BasicPagination() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +32,7 @@ function BasicPagination() {
 Allow users to change how many items are displayed per page:
 
 ```tsx
-import { Pagination, Select, SelectItem } from '@liquidify/react';
+import { Pagination, Select, SelectItem } from "@liquidify/react";
 
 function PaginationWithPageSize() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,7 +60,7 @@ function PaginationWithPageSize() {
         </Select>
         <span className="text-sm">per page</span>
       </div>
-      
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -76,7 +76,7 @@ function PaginationWithPageSize() {
 A more compact version for smaller spaces:
 
 ```tsx
-import { Pagination } from '@liquidify/react';
+import { Pagination } from "@liquidify/react";
 
 function CompactPagination() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -100,23 +100,23 @@ function CompactPagination() {
 Add a quick jump-to-page input:
 
 ```tsx
-import { Pagination, Input, Button } from '@liquidify/react';
+import { Pagination, Input, Button } from "@liquidify/react";
 
 function PaginationWithJump() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [jumpPage, setJumpPage] = useState('');
+  const [jumpPage, setJumpPage] = useState("");
   const totalPages = 50;
 
   const handleJump = () => {
     const page = parseInt(jumpPage);
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
-      setJumpPage('');
+      setJumpPage("");
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleJump();
     }
   };
@@ -128,7 +128,7 @@ function PaginationWithJump() {
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
-      
+
       <div className="flex items-center gap-2">
         <span className="text-sm">Go to:</span>
         <Input
@@ -155,25 +155,25 @@ function PaginationWithJump() {
 Display detailed pagination information:
 
 ```tsx
-import { Pagination } from '@liquidify/react';
+import { Pagination } from "@liquidify/react";
 
 function PaginationWithInfo() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const totalItems = 157;
   const totalPages = Math.ceil(totalItems / pageSize);
-  
+
   const startItem = (currentPage - 1) * pageSize + 1;
   const endItem = Math.min(currentPage * pageSize, totalItems);
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
       <div className="text-sm text-gray-600">
-        Showing <span className="font-medium">{startItem}</span> to{' '}
-        <span className="font-medium">{endItem}</span> of{' '}
+        Showing <span className="font-medium">{startItem}</span> to{" "}
+        <span className="font-medium">{endItem}</span> of{" "}
         <span className="font-medium">{totalItems}</span> results
       </div>
-      
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -189,7 +189,7 @@ function PaginationWithInfo() {
 Use pagination as a "Load More" pattern:
 
 ```tsx
-import { Pagination, Button } from '@liquidify/react';
+import { Pagination, Button } from "@liquidify/react";
 
 function LoadMorePagination() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -199,8 +199,8 @@ function LoadMorePagination() {
   const loadMore = () => {
     // Simulate loading more items
     const newItems = generateMoreItems(currentPage + 1);
-    setItems(prev => [...prev, ...newItems]);
-    setCurrentPage(prev => prev + 1);
+    setItems((prev) => [...prev, ...newItems]);
+    setCurrentPage((prev) => prev + 1);
   };
 
   return (
@@ -211,7 +211,7 @@ function LoadMorePagination() {
           <ItemCard key={item.id} item={item} />
         ))}
       </div>
-      
+
       {/* Load more controls */}
       <div className="flex flex-col items-center gap-4">
         {hasMore ? (
@@ -221,7 +221,7 @@ function LoadMorePagination() {
         ) : (
           <p className="text-gray-500">No more items to load</p>
         )}
-        
+
         <div className="text-sm text-gray-600">
           Loaded {items.length} items (Page {currentPage} of 10)
         </div>
@@ -236,7 +236,7 @@ function LoadMorePagination() {
 Adapts to different screen sizes:
 
 ```tsx
-import { Pagination } from '@liquidify/react';
+import { Pagination } from "@liquidify/react";
 
 function ResponsivePagination() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -247,7 +247,7 @@ function ResponsivePagination() {
       <div className="text-sm text-gray-600 order-2 sm:order-1">
         Page {currentPage} of {totalPages}
       </div>
-      
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -267,7 +267,7 @@ function ResponsivePagination() {
 Apply custom styles and themes:
 
 ```tsx
-import { Pagination } from '@liquidify/react';
+import { Pagination } from "@liquidify/react";
 
 function CustomStyledPagination() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -291,23 +291,23 @@ function CustomStyledPagination() {
 
 ### Pagination Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `currentPage` | `number` | - | Current active page |
-| `totalPages` | `number` | - | Total number of pages |
-| `onPageChange` | `(page: number) => void` | - | Page change handler |
-| `variant` | `'default' \| 'compact'` | `'default'` | Pagination variant |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Button size |
-| `siblingCount` | `number` | `1` | Number of siblings shown around current page |
-| `boundaryCount` | `number` | `1` | Number of pages shown at start/end |
-| `showFirstLast` | `boolean` | `true` | Show first/last page buttons |
-| `showPrevNext` | `boolean` | `true` | Show previous/next buttons |
-| `showEllipsis` | `boolean` | `true` | Show ellipsis for gaps |
-| `disabled` | `boolean` | `false` | Disable all controls |
-| `className` | `string` | - | Additional CSS classes |
-| `pageButtonClassName` | `string` | - | Page button CSS classes |
-| `activePageClassName` | `string` | - | Active page CSS classes |
-| `disabledClassName` | `string` | - | Disabled button CSS classes |
+| Prop                  | Type                     | Default     | Description                                  |
+| --------------------- | ------------------------ | ----------- | -------------------------------------------- |
+| `currentPage`         | `number`                 | -           | Current active page                          |
+| `totalPages`          | `number`                 | -           | Total number of pages                        |
+| `onPageChange`        | `(page: number) => void` | -           | Page change handler                          |
+| `variant`             | `'default' \| 'compact'` | `'default'` | Pagination variant                           |
+| `size`                | `'sm' \| 'md' \| 'lg'`   | `'md'`      | Button size                                  |
+| `siblingCount`        | `number`                 | `1`         | Number of siblings shown around current page |
+| `boundaryCount`       | `number`                 | `1`         | Number of pages shown at start/end           |
+| `showFirstLast`       | `boolean`                | `true`      | Show first/last page buttons                 |
+| `showPrevNext`        | `boolean`                | `true`      | Show previous/next buttons                   |
+| `showEllipsis`        | `boolean`                | `true`      | Show ellipsis for gaps                       |
+| `disabled`            | `boolean`                | `false`     | Disable all controls                         |
+| `className`           | `string`                 | -           | Additional CSS classes                       |
+| `pageButtonClassName` | `string`                 | -           | Page button CSS classes                      |
+| `activePageClassName` | `string`                 | -           | Active page CSS classes                      |
+| `disabledClassName`   | `string`                 | -           | Disabled button CSS classes                  |
 
 ## Styling
 
@@ -436,7 +436,7 @@ For large datasets, implement server-side pagination:
 function ServerPagination() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(20);
-  
+
   const { data, loading, totalPages } = useServerPagination({
     page: currentPage,
     pageSize,
@@ -464,23 +464,21 @@ function ServerPagination() {
 function ProductListing() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(12);
-  const [sortBy, setSortBy] = useState('name');
-  
+  const [sortBy, setSortBy] = useState("name");
+
   const { products, totalCount, loading } = useProducts({
     page: currentPage,
     pageSize,
-    sortBy
+    sortBy,
   });
-  
+
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
     <div>
       {/* Filters and sorting */}
       <div className="flex justify-between items-center mb-6">
-        <p className="text-gray-600">
-          {totalCount} products found
-        </p>
+        <p className="text-gray-600">{totalCount} products found</p>
         <Select value={sortBy} onValueChange={setSortBy}>
           <SelectItem value="name">Name</SelectItem>
           <SelectItem value="price">Price</SelectItem>
@@ -512,7 +510,7 @@ function ProductListing() {
           </Select>
           <span className="text-sm">per page</span>
         </div>
-        
+
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -530,13 +528,13 @@ function ProductListing() {
 function SearchResults({ query }: { query: string }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
-  
+
   const { results, totalCount, loading } = useSearch({
     query,
     page: currentPage,
-    pageSize
+    pageSize,
   });
-  
+
   const totalPages = Math.ceil(totalCount / pageSize);
   const startResult = (currentPage - 1) * pageSize + 1;
   const endResult = Math.min(currentPage * pageSize, totalCount);

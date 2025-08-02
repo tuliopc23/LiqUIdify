@@ -1,9 +1,13 @@
-import { Callout } from 'nextra/components'
+import { Callout } from "nextra/components";
 
 # GlassCheckbox
 
 <Callout type="warning">
-  **Component Availability Notice**: This component is documented but may not be available in the current version of the Liquidify package. Please check the [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most up-to-date information about which components are actually exported and usable.
+  **Component Availability Notice**: This component is documented but may not be
+  available in the current version of the Liquidify package. Please check the
+  [Component Availability Matrix](/COMPONENT_AVAILABILITY.md) for the most
+  up-to-date information about which components are actually exported and
+  usable.
 </Callout>
 
 GlassCheckbox is a form control component for binary selections using Apple's Human Interface Guidelines and Liquid Glass aesthetics.
@@ -114,7 +118,7 @@ Respects user preferences for reduced motion in animations.
 ### Basic Usage
 
 ```tsx
-import { GlassCheckbox } from 'liquidify';
+import { GlassCheckbox } from "liquidify";
 
 export default function Example() {
   const [checked, setChecked] = useState(false);
@@ -122,8 +126,8 @@ export default function Example() {
   return (
     <GlassCheckbox
       checked={checked}
-      onChange={checked => setChecked(checked)}
-      label='Accept terms and conditions'
+      onChange={(checked) => setChecked(checked)}
+      label="Accept terms and conditions"
     />
   );
 }
@@ -132,7 +136,7 @@ export default function Example() {
 ### Checkbox Group
 
 ```tsx
-import { GlassCheckbox } from 'liquidify';
+import { GlassCheckbox } from "liquidify";
 
 export default function CheckboxGroupExample() {
   const [selections, setSelections] = useState({
@@ -142,29 +146,29 @@ export default function CheckboxGroupExample() {
   });
 
   const handleChange = (key: string, checked: boolean) => {
-    setSelections(prev => ({ ...prev, [key]: checked }));
+    setSelections((prev) => ({ ...prev, [key]: checked }));
   };
 
   return (
-    <div className='space-y-4'>
-      <h3 className='hig-headline'>Email Preferences</h3>
+    <div className="space-y-4">
+      <h3 className="hig-headline">Email Preferences</h3>
       <GlassCheckbox
         checked={selections.notifications}
-        onChange={checked => handleChange('notifications', checked)}
-        label='Security notifications'
-        description='Important updates about your account'
+        onChange={(checked) => handleChange("notifications", checked)}
+        label="Security notifications"
+        description="Important updates about your account"
       />
       <GlassCheckbox
         checked={selections.marketing}
-        onChange={checked => handleChange('marketing', checked)}
-        label='Marketing emails'
-        description='Product updates and promotional content'
+        onChange={(checked) => handleChange("marketing", checked)}
+        label="Marketing emails"
+        description="Product updates and promotional content"
       />
       <GlassCheckbox
         checked={selections.updates}
-        onChange={checked => handleChange('updates', checked)}
-        label='Feature updates'
-        description='New features and improvements'
+        onChange={(checked) => handleChange("updates", checked)}
+        label="Feature updates"
+        description="New features and improvements"
       />
     </div>
   );
@@ -174,7 +178,7 @@ export default function CheckboxGroupExample() {
 ### Indeterminate State
 
 ```tsx
-import { GlassCheckbox } from 'liquidify';
+import { GlassCheckbox } from "liquidify";
 
 export default function IndeterminateExample() {
   const [parent, setParent] = useState(false);
@@ -196,20 +200,20 @@ export default function IndeterminateExample() {
   };
 
   return (
-    <div className='space-y-2'>
+    <div className="space-y-2">
       <GlassCheckbox
         checked={parent}
         indeterminate={isIndeterminate}
         onChange={handleParentChange}
-        label='Select all features'
-        size='lg'
+        label="Select all features"
+        size="lg"
       />
-      <div className='ml-6 space-y-2'>
+      <div className="ml-6 space-y-2">
         {children.map((checked, index) => (
           <GlassCheckbox
             key={index}
             checked={checked}
-            onChange={checked => handleChildChange(index, checked)}
+            onChange={(checked) => handleChildChange(index, checked)}
             label={`Feature ${index + 1}`}
           />
         ))}
@@ -222,7 +226,7 @@ export default function IndeterminateExample() {
 ### Form Validation
 
 ```tsx
-import { GlassCheckbox } from 'liquidify';
+import { GlassCheckbox } from "liquidify";
 
 export default function ValidationExample() {
   const [agreed, setAgreed] = useState(false);
@@ -230,7 +234,7 @@ export default function ValidationExample() {
 
   const handleSubmit = () => {
     if (!agreed) {
-      setError('You must agree to the terms to continue');
+      setError("You must agree to the terms to continue");
       return;
     }
     setError(undefined);
@@ -238,18 +242,18 @@ export default function ValidationExample() {
   };
 
   return (
-    <div className='space-y-4'>
+    <div className="space-y-4">
       <GlassCheckbox
         checked={agreed}
-        onChange={checked => {
+        onChange={(checked) => {
           setAgreed(checked);
           if (error) setError(undefined);
         }}
-        label='I agree to the terms and conditions'
+        label="I agree to the terms and conditions"
         error={error}
         required
       />
-      <button onClick={handleSubmit} className='glass-button-primary'>
+      <button onClick={handleSubmit} className="glass-button-primary">
         Continue
       </button>
     </div>

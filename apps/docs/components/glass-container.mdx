@@ -12,11 +12,11 @@ The `GlassContainer` component provides flexible layout containers with beautifu
 <CodeGroup>
 
 ```tsx Component Import
-import { GlassContainer } from '@liquidify/components'
+import { GlassContainer } from "@liquidify/components";
 ```
 
-```tsx Bundle Import  
-import { GlassContainer } from '@liquidify/components/layout'
+```tsx Bundle Import
+import { GlassContainer } from "@liquidify/components/layout";
 ```
 
 </CodeGroup>
@@ -37,11 +37,11 @@ import { GlassContainer } from '@liquidify/components/layout'
   <GlassContainer variant="header" className="p-6">
     <h1>Header Section</h1>
   </GlassContainer>
-  
+
   <GlassContainer variant="content" className="p-8">
     <p>Main content area with enhanced glass effects.</p>
   </GlassContainer>
-  
+
   <GlassContainer variant="footer" className="p-4">
     <p>Footer content with subtle styling.</p>
   </GlassContainer>
@@ -56,29 +56,38 @@ import { GlassContainer } from '@liquidify/components/layout'
   <div className="space-y-6 max-w-4xl">
     <GlassContainer variant="header" className="p-6">
       <h2 className="text-2xl font-bold mb-2">Header Container</h2>
-      <p className="text-gray-600">Perfect for page headers and hero sections</p>
+      <p className="text-gray-600">
+        Perfect for page headers and hero sections
+      </p>
     </GlassContainer>
-    
+
     <div className="grid md:grid-cols-2 gap-6">
       <GlassContainer variant="content" className="p-6">
         <h3 className="text-lg font-semibold mb-3">Content Container</h3>
         <p className="text-gray-600 mb-4">
           Ideal for main content areas with enhanced visibility and depth.
         </p>
-        <GlassButton variant="primary" size="sm">Learn More</GlassButton>
+        <GlassButton variant="primary" size="sm">
+          Learn More
+        </GlassButton>
       </GlassContainer>
-      
+
       <GlassContainer variant="sidebar" className="p-6">
         <h3 className="text-lg font-semibold mb-3">Sidebar Container</h3>
         <p className="text-gray-600 mb-4">
           Perfect for navigation, widgets, and supplementary content.
         </p>
         <div className="space-y-2">
-          <GlassButton variant="ghost" size="sm" fullWidth>Navigation</GlassButton>
-          <GlassButton variant="ghost" size="sm" fullWidth>Settings</GlassButton>
+          <GlassButton variant="ghost" size="sm" fullWidth>
+            Navigation
+          </GlassButton>
+          <GlassButton variant="ghost" size="sm" fullWidth>
+            Settings
+          </GlassButton>
         </div>
       </GlassContainer>
     </div>
+
   </div>
 </ComponentPreview>
 
@@ -91,7 +100,8 @@ import { GlassContainer } from '@liquidify/components/layout'
     <div className="text-center">
       <h1 className="text-3xl font-bold mb-4">Welcome to the Future</h1>
       <p className="text-lg text-gray-600 mb-6">
-        Experience the next generation of user interface design with glassmorphism.
+        Experience the next generation of user interface design with
+        glassmorphism.
       </p>
       <div className="flex justify-center space-x-4">
         <GlassButton variant="primary">Get Started</GlassButton>
@@ -120,11 +130,12 @@ import { GlassContainer } from '@liquidify/components/layout'
     <article className="prose">
       <h2 className="text-xl font-semibold mb-4">The Power of Glass Design</h2>
       <p className="text-gray-600 mb-4">
-        Glassmorphism brings depth and sophistication to modern interfaces. 
-        It creates a sense of hierarchy while maintaining visual clarity and elegance.
+        Glassmorphism brings depth and sophistication to modern interfaces. It
+        creates a sense of hierarchy while maintaining visual clarity and
+        elegance.
       </p>
       <p className="text-gray-600 mb-6">
-        Our glass containers provide the perfect foundation for organizing 
+        Our glass containers provide the perfect foundation for organizing
         content with beautiful blur effects and subtle transparency.
       </p>
       <div className="flex space-x-3">
@@ -155,13 +166,15 @@ import { GlassContainer } from '@liquidify/components/layout'
           Navigation
         </h3>
         <div className="space-y-2">
-          <GlassNavItem href="/" active>Dashboard</GlassNavItem>
+          <GlassNavItem href="/" active>
+            Dashboard
+          </GlassNavItem>
           <GlassNavItem href="/projects">Projects</GlassNavItem>
           <GlassNavItem href="/team">Team</GlassNavItem>
           <GlassNavItem href="/settings">Settings</GlassNavItem>
         </div>
       </div>
-      
+
       <div className="pt-4 border-t border-white/20">
         <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3">
           Tools
@@ -172,6 +185,7 @@ import { GlassContainer } from '@liquidify/components/layout'
         </div>
       </div>
     </nav>
+
   </GlassContainer>
 </ComponentPreview>
 
@@ -180,7 +194,9 @@ import { GlassContainer } from '@liquidify/components/layout'
   <nav className="space-y-4">
     <div>
       <h3 className="font-semibold mb-3">Navigation</h3>
-      <GlassNavItem href="/" active>Dashboard</GlassNavItem>
+      <GlassNavItem href="/" active>
+        Dashboard
+      </GlassNavItem>
       <GlassNavItem href="/projects">Projects</GlassNavItem>
     </div>
   </nav>
@@ -198,16 +214,31 @@ import { GlassContainer } from '@liquidify/components/layout'
           Beautiful glassmorphism components for modern React applications.
         </p>
       </div>
-      
+
       <div>
         <h4 className="font-semibold mb-3">Links</h4>
         <div className="space-y-2 text-sm">
-          <a href="#" className="text-gray-600 hover:text-white transition-colors">Documentation</a>
-          <a href="#" className="text-gray-600 hover:text-white transition-colors">Components</a>
-          <a href="#" className="text-gray-600 hover:text-white transition-colors">Examples</a>
+          <a
+            href="#"
+            className="text-gray-600 hover:text-white transition-colors"
+          >
+            Documentation
+          </a>
+          <a
+            href="#"
+            className="text-gray-600 hover:text-white transition-colors"
+          >
+            Components
+          </a>
+          <a
+            href="#"
+            className="text-gray-600 hover:text-white transition-colors"
+          >
+            Examples
+          </a>
         </div>
       </div>
-      
+
       <div>
         <h4 className="font-semibold mb-3">Connect</h4>
         <div className="flex space-x-3">
@@ -223,6 +254,7 @@ import { GlassContainer } from '@liquidify/components/layout'
         </div>
       </div>
     </div>
+
   </GlassContainer>
 </ComponentPreview>
 
@@ -245,18 +277,23 @@ import { GlassContainer } from '@liquidify/components/layout'
     <GlassContainer size="sm" className="p-4">
       <p className="text-sm">Small container - perfect for compact content</p>
     </GlassContainer>
-    
+
     <GlassContainer size="md" className="p-6">
       <p>Medium container - ideal for most content sections</p>
     </GlassContainer>
-    
+
     <GlassContainer size="lg" className="p-8">
-      <p className="text-lg">Large container - great for hero sections and feature content</p>
+      <p className="text-lg">
+        Large container - great for hero sections and feature content
+      </p>
     </GlassContainer>
-    
+
     <GlassContainer size="xl" className="p-12">
-      <p className="text-xl">Extra large container - perfect for full-width layouts</p>
+      <p className="text-xl">
+        Extra large container - perfect for full-width layouts
+      </p>
     </GlassContainer>
+
   </div>
 </ComponentPreview>
 
@@ -275,13 +312,16 @@ import { GlassContainer } from '@liquidify/components/layout'
   <div className="space-y-4 max-w-2xl">
     <GlassContainer bordered className="p-6">
       <h3 className="font-semibold mb-2">Bordered Container</h3>
-      <p className="text-gray-600">Clear boundaries with elegant glass borders</p>
+      <p className="text-gray-600">
+        Clear boundaries with elegant glass borders
+      </p>
     </GlassContainer>
-    
+
     <GlassContainer bordered="thick" className="p-6">
       <h3 className="font-semibold mb-2">Thick Border</h3>
       <p className="text-gray-600">Emphasized container with thicker borders</p>
     </GlassContainer>
+
   </div>
 </ComponentPreview>
 
@@ -303,16 +343,17 @@ import { GlassContainer } from '@liquidify/components/layout'
       <h4 className="font-semibold mb-2">Small Elevation</h4>
       <p className="text-sm text-gray-600">Subtle depth</p>
     </GlassContainer>
-    
+
     <GlassContainer elevation="md" className="p-4">
       <h4 className="font-semibold mb-2">Medium Elevation</h4>
       <p className="text-sm text-gray-600">Balanced depth</p>
     </GlassContainer>
-    
+
     <GlassContainer elevation="lg" className="p-4">
       <h4 className="font-semibold mb-2">Large Elevation</h4>
       <p className="text-sm text-gray-600">Prominent depth</p>
     </GlassContainer>
+
   </div>
 </ComponentPreview>
 
@@ -330,16 +371,17 @@ import { GlassContainer } from '@liquidify/components/layout'
       <h3 className="font-semibold mb-2">Blue Gradient</h3>
       <p className="text-white/90">Cool blue tones with glass effects</p>
     </GlassContainer>
-    
+
     <GlassContainer gradient="purple" className="p-6">
       <h3 className="font-semibold mb-2">Purple Gradient</h3>
       <p className="text-white/90">Royal purple with glass overlay</p>
     </GlassContainer>
-    
+
     <GlassContainer gradient="sunset" className="p-6">
       <h3 className="font-semibold mb-2">Sunset Gradient</h3>
       <p className="text-white/90">Warm sunset colors with glass</p>
     </GlassContainer>
+
   </div>
 </ComponentPreview>
 
@@ -370,19 +412,21 @@ import { GlassContainer } from '@liquidify/components/layout'
         <GlassButton variant="primary">New Project</GlassButton>
       </div>
     </GlassContainer>
-    
+
     {/* Main Content */}
     <div className="grid lg:grid-cols-4 gap-6">
       {/* Sidebar */}
       <GlassContainer variant="sidebar" className="lg:col-span-1 p-6">
         <nav className="space-y-2">
-          <GlassNavItem href="/" active>Overview</GlassNavItem>
+          <GlassNavItem href="/" active>
+            Overview
+          </GlassNavItem>
           <GlassNavItem href="/projects">Projects</GlassNavItem>
           <GlassNavItem href="/team">Team</GlassNavItem>
           <GlassNavItem href="/analytics">Analytics</GlassNavItem>
         </nav>
       </GlassContainer>
-      
+
       {/* Content */}
       <GlassContainer variant="content" className="lg:col-span-3 p-6">
         <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
@@ -404,6 +448,7 @@ import { GlassContainer } from '@liquidify/components/layout'
         </div>
       </GlassContainer>
     </div>
+
   </div>
 </ComponentPreview>
 
@@ -423,7 +468,9 @@ import { GlassContainer } from '@liquidify/components/layout'
             </GlassCardDescription>
           </GlassCardHeader>
           <GlassCardFooter>
-            <GlassButton variant="ghost" fullWidth>View Details</GlassButton>
+            <GlassButton variant="ghost" fullWidth>
+              View Details
+            </GlassButton>
           </GlassCardFooter>
         </GlassCard>
       ))}
@@ -440,13 +487,13 @@ import { GlassContainer } from '@liquidify/components/layout'
         <div>
           <h2 className="text-3xl font-bold mb-4">Beautiful Design</h2>
           <p className="text-gray-600 mb-6">
-            Create stunning interfaces with glassmorphism effects that captivate 
+            Create stunning interfaces with glassmorphism effects that captivate
             and engage your users.
           </p>
           <GlassButton variant="primary">Get Started</GlassButton>
         </div>
       </GlassContainer>
-      
+
       <GlassContainer className="bg-gradient-to-br from-blue-500/20 to-purple-600/20">
         <div className="h-full flex items-center justify-center">
           <div className="text-center">
@@ -458,54 +505,39 @@ import { GlassContainer } from '@liquidify/components/layout'
         </div>
       </GlassContainer>
     </div>
+
   </div>
 </ComponentPreview>
 
 ## Props
 
 <ResponseField name="variant" type="string" default="default">
-  The visual style of the container
-  - `"default"` - Standard container
-  - `"header"` - Optimized for headers and heroes
-  - `"content"` - Enhanced for main content areas
-  - `"sidebar"` - Styled for navigation and sidebars
-  - `"footer"` - Designed for footer sections
+  The visual style of the container - `"default"` - Standard container -
+  `"header"` - Optimized for headers and heroes - `"content"` - Enhanced for
+  main content areas - `"sidebar"` - Styled for navigation and sidebars -
+  `"footer"` - Designed for footer sections
 </ResponseField>
 
 <ResponseField name="size" type="string" default="md">
-  The size of the container
-  - `"xs"` - Extra small container
-  - `"sm"` - Small container
-  - `"md"` - Medium container
-  - `"lg"` - Large container
-  - `"xl"` - Extra large container
-  - `"full"` - Full width/height
+  The size of the container - `"xs"` - Extra small container - `"sm"` - Small
+  container - `"md"` - Medium container - `"lg"` - Large container - `"xl"` -
+  Extra large container - `"full"` - Full width/height
 </ResponseField>
 
 <ResponseField name="elevation" type="string" default="none">
-  Shadow depth level
-  - `"none"` - No shadow
-  - `"sm"` - Small shadow
-  - `"md"` - Medium shadow
-  - `"lg"` - Large shadow
-  - `"xl"` - Extra large shadow
+  Shadow depth level - `"none"` - No shadow - `"sm"` - Small shadow - `"md"` -
+  Medium shadow - `"lg"` - Large shadow - `"xl"` - Extra large shadow
 </ResponseField>
 
 <ResponseField name="bordered" type="boolean | string" default="false">
-  Border styling
-  - `false` - No border
-  - `true` - Standard border
-  - `"thick"` - Thick border
-  - `"dashed"` - Dashed border
+  Border styling - `false` - No border - `true` - Standard border - `"thick"` -
+  Thick border - `"dashed"` - Dashed border
 </ResponseField>
 
 <ResponseField name="gradient" type="string">
-  Background gradient preset
-  - `"blue"` - Blue gradient
-  - `"purple"` - Purple gradient
-  - `"green"` - Green gradient
-  - `"sunset"` - Orange-pink gradient
-  - `"ocean"` - Blue-green gradient
+  Background gradient preset - `"blue"` - Blue gradient - `"purple"` - Purple
+  gradient - `"green"` - Green gradient - `"sunset"` - Orange-pink gradient -
+  `"ocean"` - Blue-green gradient
 </ResponseField>
 
 <ResponseField name="glass" type="boolean" default="true">
@@ -562,9 +594,9 @@ Glass containers come with default styling that can be extended:
 <GlassContainer
   className="custom-container"
   style={{
-    '--glass-bg': 'rgba(59, 130, 246, 0.1)',
-    '--glass-border': 'rgba(59, 130, 246, 0.3)',
-    '--glass-blur': 'blur(20px)',
+    "--glass-bg": "rgba(59, 130, 246, 0.1)",
+    "--glass-border": "rgba(59, 130, 246, 0.3)",
+    "--glass-blur": "blur(20px)",
   }}
 >
   Custom styled container

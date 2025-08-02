@@ -237,7 +237,7 @@ export const GlassSelect = React.memo(
                       className={cn(
                         "glass-button radius-lg-s p-0.5",
                         "motion-safe:hover:bg-glass-accent/30 motion-safe:hover:scale-110",
-                        "motion-safe:active:scale-95 transition-all duration-200"
+                        "motion-safe:active:scale-95 transition-all duration-200",
                       )}
                       aria-label={`Remove ${option.label}`}
                     >
@@ -250,9 +250,7 @@ export const GlassSelect = React.memo(
                   {selectedOptions[0].label}
                 </span>
               ) : (
-                <span className="text-glass-grey/70">
-                  {placeholder}
-                </span>
+                <span className="text-glass-grey/70">{placeholder}</span>
               )}
 
               {/* Search input for searchable variant */}
@@ -298,7 +296,7 @@ export const GlassSelect = React.memo(
               <div className="glass-filter" />
               <div className="glass-overlay" />
               <div className="glass-specular" />
-              
+
               <div className="relative z-10">
                 {filteredOptions.length === 0 ? (
                   <div className="px-4 py-3 text-center text-glass-grey/70 text-sm">
@@ -322,8 +320,7 @@ export const GlassSelect = React.memo(
                           "motion-safe:hover:bg-glass-bg/20 glass-focus",
                           "flex items-center justify-between text-glass-text",
                           option.disabled && "cursor-not-allowed opacity-50",
-                          isSelected &&
-                            "bg-glass-accent/10 text-glass-accent",
+                          isSelected && "bg-glass-accent/10 text-glass-accent",
                           isFocused && "bg-glass-bg/20",
                           "first:rounded-t-lg last:rounded-b-lg",
                         )}
