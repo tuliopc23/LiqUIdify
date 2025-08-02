@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronRight, Home } from "lucide-react";
 import React, { useCallback } from "react";
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import { getItemKey } from "@/core/utils/stable-key";
 import {
   createVariants as cva,

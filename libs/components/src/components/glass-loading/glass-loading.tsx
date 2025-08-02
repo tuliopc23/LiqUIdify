@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import { generateStaticKey } from "@/core/utils/stable-key";
 
 interface GlassLoadingProps {

@@ -10,7 +10,7 @@
 
 import { Check, Code, Copy, Download, Eye, Maximize2 } from "lucide-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import { useSSRSafeWindow } from "@/hooks/use-ssr-safe";
 
 // Import specific components instead of wildcard

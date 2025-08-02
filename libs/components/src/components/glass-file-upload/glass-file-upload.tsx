@@ -12,7 +12,7 @@ import {
 import type React from "react";
 import { forwardRef, useCallback, useRef, useState } from "react";
 
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import { createVariants as cva } from "../../lib/variant-system";
 
 const fileUploadVariants = cva({
@@ -443,7 +443,11 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                         <div className="mt-1 h-1.5 w-full rounded-full bg-white/10">
                           <div
                             className="h-1.5 rounded-full bg-blue-400 transition-all duration-300"
-                            style={{ width: `${fileItem.progress || 0}%` }}
+                            style={{ 
+                              width: `${fileItem.progress || 0}%`,
+                              transform: `scaleX(${(fileItem.progress || 0) / 100})`,
+                              transformOrigin: 'left'
+                            }}
                           />
                         </div>
                       )}

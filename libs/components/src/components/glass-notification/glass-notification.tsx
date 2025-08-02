@@ -9,7 +9,7 @@ import {
 import type React from "react";
 import { useState } from "react";
 
-import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
+import { cn, getGlassClass, microInteraction } from "../../core/utils/classname";
 
 export interface NotificationItem {
   id: string;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cn, getGlassClass } from "@/core/utils/classname";
+import { cn, getGlassClass } from "../../core/utils/classname";
 
 interface GlassProgressProps {
   value: number;

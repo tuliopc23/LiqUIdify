@@ -1,6 +1,6 @@
 import { Check, Circle, Clock } from "lucide-react";
 import type React from "react";
-import { cn, getGlassClass, microInteraction } from "@/core/utils/classname";
+import { cn, getGlassClass, microInteraction } from "../../core/utils/classname";
 
 export interface TimelineItem {
   id: string;

@@ -11,7 +11,7 @@ import type {
 
 import { useUnifiedGlass } from "@/core/glass/unified-glass-system";
 
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 
 // Re-export from enhanced apple liquid glass lib
 // TODO: Implement these exports once the lib file is created

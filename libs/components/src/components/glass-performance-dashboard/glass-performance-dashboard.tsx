@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import { performanceMonitor } from "../../core/performance-monitor";
 
 import { useRealtimePerformance } from "../../hooks/use-performance-monitoring";

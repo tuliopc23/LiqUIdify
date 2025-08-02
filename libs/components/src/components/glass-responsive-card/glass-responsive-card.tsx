@@ -1,7 +1,7 @@
 import type React from "react";
 import { forwardRef } from "react";
 
-import { cn, getGlassClass } from "@/core/utils/classname";
+import { cn, getGlassClass } from "../../core/utils/classname";
 
 import { microInteraction } from "@/core/utils/responsive";
 

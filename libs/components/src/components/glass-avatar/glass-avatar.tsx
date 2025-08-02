@@ -1,7 +1,7 @@
 import { User } from "lucide-react";
 import React from "react";
 
-import { cn, getGlassClass } from "@/core/utils/classname";
+import { cn, getGlassClass } from "../../core/utils/classname";
 
 interface GlassAvatarProps extends React.ComponentPropsWithoutRef<"div"> {
   src?: string;

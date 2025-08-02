@@ -3,7 +3,7 @@ import { Calendar, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import type React from "react";
 import { forwardRef, useEffect, useRef, useState } from "react";
 
-import { cn, focusRing } from "@/core/utils/classname";
+import { cn, focusRing } from "../../core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,

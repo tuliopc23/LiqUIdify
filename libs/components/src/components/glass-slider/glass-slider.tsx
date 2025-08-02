@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import { cn, getGlassClass } from "@/core/utils/classname";
+import { cn, getGlassClass } from "../../core/utils/classname";
 
 interface GlassSliderProps {
   min?: number;

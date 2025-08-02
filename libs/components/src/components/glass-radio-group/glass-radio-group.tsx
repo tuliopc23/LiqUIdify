@@ -1,7 +1,7 @@
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { motion } from "framer-motion";
 import React from "react";
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import { createVariants as cva } from "../../lib/variant-system";
 
 const radioGroupVariants = cva({

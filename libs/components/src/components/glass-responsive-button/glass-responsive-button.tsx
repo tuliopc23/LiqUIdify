@@ -2,7 +2,7 @@ import { Slot } from "@radix-ui/react-slot";
 import type React from "react";
 import { forwardRef, useEffect, useState } from "react";
 
-import { cn, getGlassClass } from "@/core/utils/classname";
+import { cn, getGlassClass } from "../../core/utils/classname";
 
 interface GlassResponsiveButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

@@ -2,7 +2,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import React from "react";
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import { createVariants as cva } from "../../lib/variant-system";
 
 const drawerVariants = cva({

@@ -2,7 +2,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import React from "react";
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
