@@ -238,7 +238,7 @@ export const GlassCard = React.memo(
       });
 
       // Animation hooks
-      const { currentState } = useGlassStateTransitions(animation);
+      useGlassStateTransitions(animation);
 
       // Event handlers with business logic
       const handleClick = useCallback(

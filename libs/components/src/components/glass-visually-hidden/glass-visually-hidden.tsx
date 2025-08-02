@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 
 interface GlassVisuallyHiddenProps
   extends Omit<

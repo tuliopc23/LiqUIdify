@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { cn, getGlassClass } from "@/core/utils/classname";
+import { cn, getGlassClass } from "../../core/utils/classname";
 
 import { useIsClient } from "@/hooks/use-ssr-safe";
 

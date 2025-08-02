@@ -3,7 +3,7 @@ import React, { Component, type ErrorInfo, type ReactNode } from "react";
 
 import { announcer } from "@/components/glass-live-region";
 
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 
 interface GlassErrorBoundaryProps {
   children: ReactNode;

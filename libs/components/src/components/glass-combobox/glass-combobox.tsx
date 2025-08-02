@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, Search, X } from "lucide-react";
 import type React from "react";
 import { forwardRef, useEffect, useId, useRef, useState } from "react";
-import { cn, focusRing } from "@/core/utils/classname";
+import { cn, focusRing } from "../../core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,

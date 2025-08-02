@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { accessibilityManager } from "@/core/accessibility-manager";
 
-import { cn } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 
 import { useIsClient } from "@/hooks/use-ssr-safe";
 
