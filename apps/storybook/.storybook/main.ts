@@ -60,10 +60,10 @@ const config: StorybookConfig = {
     "!../../../libs/components/src/stories/design-system/animation-patterns.stories.tsx",
   ],
   addons: [
-    getAbsolutePath("@storybook/addon-links"), 
-    getAbsolutePath("@storybook/addon-a11y"), 
-    getAbsolutePath("@storybook/addon-docs"),
-    getAbsolutePath("storybook-addon-tailwindcss")
+    "@storybook/addon-links", 
+    "@storybook/addon-a11y", 
+    "@storybook/addon-docs",
+    "@storybook/addon-essentials"
   ],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
