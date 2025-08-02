@@ -2505,10 +2505,7 @@ function getComponentInspector() {
 init_esm_shims2();
 init_esm_shims2();
 function isReadonly(value) {
-  return !!(value && value[
-    "__v_isReadonly"
-    /* IS_READONLY */
-  ]);
+  return !!(value?.["__v_isReadonly"]);
 }
 function isReactive(value) {
   if (isReadonly(value)) {
@@ -2517,19 +2514,13 @@ function isReactive(value) {
       /* RAW */
     ]);
   }
-  return !!(value && value[
-    "__v_isReactive"
-    /* IS_REACTIVE */
-  ]);
+  return !!(value?.["__v_isReactive"]);
 }
 function isRef(r) {
   return !!(r && r.__v_isRef === true);
 }
 function toRaw(observed) {
-  const raw = observed && observed[
-    "__v_raw"
-    /* RAW */
-  ];
+  const raw = observed?.["__v_raw"];
   return raw ? toRaw(raw) : observed;
 }
 var Fragment = Symbol.for("v-fgt");

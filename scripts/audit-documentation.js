@@ -487,7 +487,7 @@ class DocumentationAuditor {
       );
       const documentedInCategory = categoryComponents.filter((name) => {
         const component = this.components.get(name);
-        return component && component.documentation.exists;
+        return component?.documentation.exists;
       });
 
       this.auditResults.coverage.byCategory[categoryName] = {

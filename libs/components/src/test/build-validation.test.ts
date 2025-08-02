@@ -302,7 +302,7 @@ describe("Build Validation", () => {
 
       for (const componentPath of componentPaths) {
         const exportConfig = packageJson.exports[componentPath];
-        if (exportConfig && exportConfig.import) {
+        if (exportConfig?.import) {
           const fullPath = resolve(process.cwd(), exportConfig.import);
           expect(existsSync(fullPath)).toBe(true);
 
