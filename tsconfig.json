@@ -44,6 +44,8 @@
     "node_modules",
     "tmp",
     "dist",
+    "examples/**/*",
+    "apps/docs/**/*",
     "**/*.stories.*",
     "**/*.test.*",
     "**/*.spec.*"
