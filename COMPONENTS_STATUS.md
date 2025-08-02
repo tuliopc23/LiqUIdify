@@ -13,8 +13,8 @@ Legend:
 | glass-accessible-demo | ⏳ | |
 | glass-accordion | ⏳ | |
 | glass-alert | ⏳ | |
-| glass-avatar | ⏳ | |
-| glass-badge | ⏳ | |
+| glass-avatar | 🛠️ | migration started – using `alg-glass` utilities |
+| glass-badge | 🛠️ | migration started – using `alg-glass` utilities |
 | glass-banner | ⏳ | |
 | glass-breadcrumbs | ⏳ | |
 | glass-button-refactored | ✅ | Migrated in commit `<hash-tbd>` – replaced old `glass-*` layers with `alg-glass` utilities |

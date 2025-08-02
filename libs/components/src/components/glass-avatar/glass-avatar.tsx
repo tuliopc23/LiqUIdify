@@ -1,7 +1,7 @@
 import { User } from "lucide-react";
 import React from "react";
 
-import { cn, getGlassClass } from "@/core/utils/classname";
+import { cn } from "@/core/utils/classname";
 
 interface GlassAvatarProps extends React.ComponentPropsWithoutRef<"div"> {
   src?: string;
@@ -77,8 +77,7 @@ export const GlassAvatar = React.memo(
             "relative inline-flex items-center justify-center",
             sizeClasses[size],
             variantClasses[variant],
-            showBorder && getGlassClass("default"),
-            showBorder && "border border-white/20 dark:border-white/10",
+            showBorder && "alg-glass alg-depth-1 border border-white/20 dark:border-white/10",
             "overflow-hidden",
             className,
           )}

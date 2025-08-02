@@ -1,5 +1,13 @@
 import type { Config } from "tailwindcss";
 
+// Apple Liquid Glass token + plugin imports (first-phase scaffolding)
+import {
+  algColors,
+  algBlurLevels,
+} from "./libs/components/src/tokens/apple-liquid-glass-tokens";
+
+import appleLiquidGlassPlugin from "./libs/components/src/styles/tailwind-alg-plugin";
+
 // Minimal config for S-tier performance
 const config: Config = {
   content: [
@@ -20,22 +28,25 @@ const config: Config = {
     "border-black/10",
   ],
   theme: {
-    // Minimize color palette
+    // Extend minimal palette with Apple Liquid Glass depth colors.
     colors: {
       transparent: "transparent",
       current: "currentColor",
       white: "#ffffff",
       black: "#000000",
-      // Only essential glass colors
+      // legacy glass placeholders retained for backward compatibility
       glass: {
         light: "rgba(255, 255, 255, 0.1)",
         dark: "rgba(0, 0, 0, 0.1)",
       },
-      // Minimal semantic colors
+      // semantic colors remain
       primary: "var(--primary)",
       secondary: "var(--secondary)",
       background: "var(--background)",
       foreground: "var(--foreground)",
+
+      // 🚀 NEW: Apple Liquid Glass depth layers
+      ...algColors,
     },
     // Minimal spacing scale
     spacing: {
@@ -58,13 +69,14 @@ const config: Config = {
       xl: "0.75rem",
       full: "9999px",
     },
-    // Essential backdrop blur
+    // Extend backdropBlur scale with ALG specific levels
     backdropBlur: {
       none: "0",
       sm: "4px",
       md: "12px",
       lg: "16px",
       xl: "24px",
+      ...algBlurLevels,
     },
     // Minimal font sizes
     fontSize: {
@@ -100,7 +112,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [appleLiquidGlassPlugin],
 };
 
 export default config;
