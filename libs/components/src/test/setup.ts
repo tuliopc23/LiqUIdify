@@ -100,7 +100,7 @@ const customMatchers = {
 
   toHaveClass(received: any, className: string) {
     const pass =
-      received && received.className && received.className.includes(className);
+      received?.className && received.className.includes(className);
     return {
       pass,
       message: () =>
@@ -111,7 +111,7 @@ const customMatchers = {
   },
 
   toHaveAttribute(received: any, attr: string, value?: string) {
-    const hasAttr = received && received.hasAttribute(attr);
+    const hasAttr = received?.hasAttribute(attr);
     const pass =
       value !== undefined
         ? hasAttr && received.getAttribute(attr) === value
@@ -138,7 +138,7 @@ const customMatchers = {
 
   toHaveTextContent(received: any, text: string) {
     const pass =
-      received && received.textContent && received.textContent.includes(text);
+      received?.textContent && received.textContent.includes(text);
     return {
       pass,
       message: () =>

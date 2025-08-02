@@ -391,7 +391,7 @@ function testStorybookBuild() {
 
     logSuccess(`Storybook build completed in ${buildResults.buildTime}s`);
 
-    if (buildOutput && buildOutput.trim()) {
+    if (buildOutput?.trim()) {
       logInfo("Build output preview:");
       const lines = buildOutput.trim().split("\n");
       const preview = lines.slice(-10).join("\n"); // Last 10 lines

@@ -510,7 +510,7 @@ class VisualPolishManager {
       if (bgImage && bgImage !== "none") {
         const img = new Image();
         const match = bgImage.match(/url\(["']?(.+?)["']?\)/);
-        if (match && match[1]) {
+        if (match?.[1]) {
           img.src = match[1];
           await new Promise((resolve) => {
             img.onload = () => {
@@ -591,7 +591,7 @@ class VisualPolishManager {
       if (bgImage && bgImage !== "none") {
         const img = new Image();
         const match = bgImage.match(/url\(["']?(.+?)["']?\)/);
-        if (match && match[1]) {
+        if (match?.[1]) {
           img.src = match[1];
           await new Promise((resolve) => {
             img.onload = () => {

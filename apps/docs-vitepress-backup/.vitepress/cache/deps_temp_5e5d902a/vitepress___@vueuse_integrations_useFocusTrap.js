@@ -571,7 +571,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
         node = doc.activeElement;
       } else {
         var firstTabbableGroup = state.tabbableGroups[0];
-        var firstTabbableNode = firstTabbableGroup && firstTabbableGroup.firstTabbableNode;
+        var firstTabbableNode = firstTabbableGroup?.firstTabbableNode;
         node = firstTabbableNode || getNodeForOption("fallbackFocus");
       }
     } else if (node === null) {
@@ -1071,8 +1071,8 @@ function useFocusTrap(target, options = {}) {
   const { immediate, ...focusTrapOptions } = options;
   const hasFocus = shallowRef(false);
   const isPaused = shallowRef(false);
-  const activate = (opts) => trap && trap.activate(opts);
-  const deactivate = (opts) => trap && trap.deactivate(opts);
+  const activate = (opts) => trap?.activate(opts);
+  const deactivate = (opts) => trap?.deactivate(opts);
   const pause = () => {
     if (trap) {
       trap.pause();

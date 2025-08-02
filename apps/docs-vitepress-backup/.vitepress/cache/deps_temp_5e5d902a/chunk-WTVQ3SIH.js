@@ -1818,7 +1818,7 @@ function onClickOutside(target, handler, options = {}) {
   }
   function checkMultipleRoots(target2, event) {
     const vm = toValue(target2);
-    const children = vm.$.subTree && vm.$.subTree.children;
+    const children = vm.$.subTree?.children;
     if (children == null || !Array.isArray(children))
       return false;
     return children.some((child) => child.el === event.target || event.composedPath().includes(child.el));
@@ -2788,7 +2788,7 @@ function useBluetooth(options) {
   }
   async function connectToBluetoothGATTServer() {
     error.value = null;
-    if (device.value && device.value.gatt) {
+    if (device.value?.gatt) {
       useEventListener(device, "gattserverdisconnected", reset, { passive: true });
       try {
         server.value = await device.value.gatt.connect();
@@ -4069,7 +4069,7 @@ function useDevicesList(options = {}) {
   const videoInputs = computed(() => devices.value.filter((i) => i.kind === "videoinput"));
   const audioInputs = computed(() => devices.value.filter((i) => i.kind === "audioinput"));
   const audioOutputs = computed(() => devices.value.filter((i) => i.kind === "audiooutput"));
-  const isSupported = useSupported(() => navigator2 && navigator2.mediaDevices && navigator2.mediaDevices.enumerateDevices);
+  const isSupported = useSupported(() => navigator2?.mediaDevices && navigator2.mediaDevices.enumerateDevices);
   const permissionGranted = shallowRef(false);
   let stream;
   async function update() {
@@ -5255,7 +5255,7 @@ function useFileDialog(options = {}) {
   }
   const reset = () => {
     files.value = null;
-    if (input && input.value) {
+    if (input?.value) {
       input.value = "";
       changeTrigger(null);
     }
@@ -7648,7 +7648,7 @@ function useSpeechSynthesis(text, options = {}) {
     volume = 1,
     window: window2 = defaultWindow
   } = options;
-  const synth = window2 && window2.speechSynthesis;
+  const synth = window2?.speechSynthesis;
   const isSupported = useSupported(() => synth);
   const isPlaying = shallowRef(false);
   const status = shallowRef("init");
@@ -9300,7 +9300,7 @@ function useWebWorkerFn(fn, options = {}) {
   const promise = ref({});
   const timeoutId = shallowRef();
   const workerTerminate = (status = "PENDING") => {
-    if (worker.value && worker.value._url && window2) {
+    if (worker.value?._url && window2) {
       worker.value.terminate();
       URL.revokeObjectURL(worker.value._url);
       promise.value = {};

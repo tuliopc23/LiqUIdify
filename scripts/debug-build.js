@@ -190,7 +190,7 @@ function runBuild() {
     logSuccess(`Build completed in ${buildTime}s`);
 
     // Show build output if available
-    if (output && output.trim()) {
+    if (output?.trim()) {
       logInfo("Build output:");
       console.log(colors.dim + output.trim() + colors.reset);
     }

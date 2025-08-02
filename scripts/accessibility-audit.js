@@ -173,7 +173,7 @@ async function auditAllComponents() {
     };
 
     // Process Axe results
-    if (axeResults && axeResults.violations) {
+    if (axeResults?.violations) {
       componentResult.violations.push(
         ...axeResults.violations.map(formatViolation),
       );
@@ -188,7 +188,7 @@ async function auditAllComponents() {
     }
 
     // Process Pa11y results
-    if (pa11yResults && pa11yResults.issues) {
+    if (pa11yResults?.issues) {
       pa11yResults.issues.forEach((issue) => {
         if (issue.type === "error") {
           componentResult.violations.push({

@@ -456,7 +456,7 @@ function testDocsBuild() {
 
     logSuccess(`Documentation build completed in ${docsResults.buildTime}s`);
 
-    if (buildOutput && buildOutput.trim()) {
+    if (buildOutput?.trim()) {
       logInfo("Build completed successfully");
     }
   } catch (error) {

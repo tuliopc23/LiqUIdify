@@ -23,7 +23,7 @@ var drawChart = (function (exports) {
     return n;
   }
   function g(n) {
-    n && n.parentNode && n.parentNode.removeChild(n);
+    n?.parentNode && n.parentNode.removeChild(n);
   }
   function _$1(l, u, t) {
     var i,
@@ -124,7 +124,7 @@ var drawChart = (function (exports) {
       w,
       d,
       g,
-      _ = (t && t.__k) || v$1,
+      _ = (t?.__k) || v$1,
       m = l.length;
     for (f = P(u, l, _, f, m), a = 0; a < m; a++)
       null != (y = u.__k[a]) &&
@@ -200,7 +200,7 @@ var drawChart = (function (exports) {
       u.insertBefore(n.__e, l || null),
       (l = n.__e));
     do {
-      l = l && l.nextSibling;
+      l = l?.nextSibling;
     } while (null != l && 8 == l.nodeType);
     return l;
   }
@@ -332,7 +332,7 @@ var drawChart = (function (exports) {
                 : ((u.__c = h = new x$1(b, M)),
                   (h.constructor = j),
                   (h.render = D$1)),
-              C && C.sub(h),
+              C?.sub(h),
               (h.props = b),
               h.state || (h.state = {}),
               (h.context = M),
@@ -402,7 +402,7 @@ var drawChart = (function (exports) {
           for (
             h.state = h.__s,
               h.__d = !1,
-              P && P(u),
+              P?.(u),
               a = h.render(h.props, h.state, h.context),
               H = 0;
             H < h._sb.length;
@@ -413,7 +413,7 @@ var drawChart = (function (exports) {
         } else
           do {
             (h.__d = !1),
-              P && P(u),
+              P?.(u),
               (a = h.render(h.props, h.state, h.context)),
               (h.state = h.__s);
           } while (h.__d && ++A < 25);
@@ -655,7 +655,7 @@ var drawChart = (function (exports) {
             u.add(n);
             var l = n.componentWillUnmount;
             n.componentWillUnmount = function () {
-              u && u.delete(n), l && l.call(n);
+              u?.delete(n), l?.call(n);
             };
           })),
         n.children
@@ -757,7 +757,7 @@ var drawChart = (function (exports) {
   function count$1(node) {
     var sum = 0,
       children = node.children,
-      i = children && children.length;
+      i = children?.length;
     if (!i) sum = 1;
     else while (--i >= 0) sum += children[i].value;
     node.value = sum;
@@ -827,7 +827,7 @@ var drawChart = (function (exports) {
     return this.eachAfter(function (node) {
       var sum = +value(node.data) || 0,
         children = node.children,
-        i = children && children.length;
+        i = children?.length;
       while (--i >= 0) sum += children[i].value;
       node.value = sum;
     });
@@ -1397,7 +1397,7 @@ var drawChart = (function (exports) {
               (n.__ = n.__N), (n.__N = void 0), t !== n.__[0] && (i = true);
             }
           }),
-          (c && c.call(this, n, t, r)) || i
+          (c?.call(this, n, t, r)) || i
         );
       };
       r.__f = true;
@@ -1408,7 +1408,7 @@ var drawChart = (function (exports) {
           var u = c;
           (c = void 0), f(n, t, r), (c = u);
         }
-        e && e.call(this, n, t, r);
+        e?.call(this, n, t, r);
       }),
         (r.shouldComponentUpdate = f);
     }
@@ -1460,13 +1460,13 @@ var drawChart = (function (exports) {
         }
   }
   (c.__b = function (n) {
-    (r = null), e && e(n);
+    (r = null), e?.(n);
   }),
     (c.__ = function (n, t) {
-      n && t.__k && t.__k.__m && (n.__m = t.__k.__m), s && s(n, t);
+      n && t.__k && t.__k.__m && (n.__m = t.__k.__m), s?.(n, t);
     }),
     (c.__r = function (n) {
-      a && a(n), (t = 0);
+      a?.(n), (t = 0);
       var i = (r = n.__c).__H;
       i &&
         (u === r
@@ -1479,10 +1479,9 @@ var drawChart = (function (exports) {
         (u = r);
     }),
     (c.diffed = function (n) {
-      v && v(n);
+      v?.(n);
       var t = n.__c;
-      t &&
-        t.__H &&
+      t?.__H &&
         (t.__H.__h.length &&
           ((1 !== f.push(t) && i === c.requestAnimationFrame) ||
             ((i = c.requestAnimationFrame) || w)(j)),
@@ -1506,14 +1505,13 @@ var drawChart = (function (exports) {
             c.__e(r, n.__v);
         }
       }),
-        l && l(n, t);
+        l?.(n, t);
     }),
     (c.unmount = function (n) {
-      m && m(n);
+      m?.(n);
       var t,
         r = n.__c;
-      r &&
-        r.__H &&
+      r?.__H &&
         (r.__H.__.forEach(function (n) {
           try {
             z(n);
@@ -1649,8 +1647,7 @@ var drawChart = (function (exports) {
   };
 
   function getDefaultExportFromCjs(x) {
-    return x &&
-      x.__esModule &&
+    return x?.__esModule &&
       Object.prototype.hasOwnProperty.call(x, "default")
       ? x["default"]
       : x;
@@ -4548,14 +4545,14 @@ var drawChart = (function (exports) {
       }
 
       var mag = Math.abs(value);
-      var thousandsSeparator = (options && options.thousandsSeparator) || "";
-      var unitSeparator = (options && options.unitSeparator) || "";
+      var thousandsSeparator = (options?.thousandsSeparator) || "";
+      var unitSeparator = (options?.unitSeparator) || "";
       var decimalPlaces =
         options && options.decimalPlaces !== undefined
           ? options.decimalPlaces
           : 2;
-      var fixedDecimals = Boolean(options && options.fixedDecimals);
-      var unit = (options && options.unit) || "";
+      var fixedDecimals = Boolean(options?.fixedDecimals);
+      var unit = (options?.unit) || "";
 
       if (!unit || !map[unit.toLowerCase()]) {
         if (mag >= map.pb) {
@@ -5912,7 +5909,7 @@ var drawChart = (function (exports) {
       zero: match[5],
       width: match[6],
       comma: match[7],
-      precision: match[8] && match[8].slice(1),
+      precision: match[8]?.slice(1),
       trim: match[9],
       type: match[10],
     });

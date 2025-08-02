@@ -1590,7 +1590,7 @@ var Mark = class {
   markRanges(rawRanges, opt) {
     this.opt = opt;
     let totalMatches = 0, ranges = this.checkRanges(rawRanges);
-    if (ranges && ranges.length) {
+    if (ranges?.length) {
       this.log(
         "Starting to mark with the following ranges: " + JSON.stringify(ranges)
       );

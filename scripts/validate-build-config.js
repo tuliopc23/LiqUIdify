@@ -517,8 +517,7 @@ function validateVercelConfiguration() {
 
     const storybookBuild = vercelConfig.builds.find(
       (build) =>
-        build.config &&
-        build.config.buildCommand &&
+        build.config?.buildCommand &&
         build.config.buildCommand.includes("build:storybook"),
     );
 
