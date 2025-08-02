@@ -1,7 +1,6 @@
 import type { Preview } from "@storybook/react-vite";
 import React from "react";
 import { GlassUIProvider } from "../../../libs/components/src/providers/glass-ui-provider";
-import { ThemeProvider } from "../../../libs/components/src/hooks/use-theme";
 
 // Import new Tailwind CSS
 import "../../../libs/components/src/styles/index.css";
@@ -128,24 +127,18 @@ const preview: Preview = {
 
       try {
         return React.createElement(
-          ThemeProvider,
-          { defaultTheme: theme },
+          "div",
+          { className: "theme-provider-wrapper" },
           React.createElement(
             GlassUIProvider,
-            {
-              config: {
-                enableAnimations: true,
-                enableGlassEffects: true,
-                reducedMotion: false,
-              },
-            },
+            null,
             React.createElement(
               "div",
               {
                 className: "container flex flex-col gap-4 min-h-screen p-4",
                 style: {
                   background: context.parameters.backgrounds?.values?.find(
-                    bg => bg.name === (context.globals.background || 'dark')
+                    (bg: any) => bg.name === (context.globals.background || 'dark')
                   )?.value || 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
                 },
               },

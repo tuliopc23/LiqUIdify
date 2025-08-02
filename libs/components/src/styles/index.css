@@ -39,22 +39,21 @@
   }
 }
 
-/* Base glass container styles */
+/* Glass Design System Utilities - Use Tailwind classes directly */
 .glass-container {
-  @apply glass w-full radius-lg-m;
+  @apply glass;
 }
 
-/* Utility classes for common patterns */
 .glass-button {
-  @apply glass glass-link px-6 py-3 font-medium;
+  @apply glass cursor-pointer select-none px-6 py-3 font-medium;
 }
 
 .glass-card {
-  @apply glass p-6 radius-lg-l;
+  @apply glass flex-col items-start p-6 radius-lg-l;
 }
 
 .glass-input {
-  @apply glass px-4 py-2 radius-lg-s bg-transparent border-0 outline-none;
+  @apply glass py-2 px-4 radius-lg-s bg-transparent border-0 outline-none;
 }
 
 /* Animation classes */
@@ -66,7 +65,22 @@
   @apply transition-all duration-100 motion-safe:active:scale-95;
 }
 
+/* Glass liquid effect utility */
+.glass-liquid {
+  @apply glass relative overflow-hidden;
+}
+
+.glass-liquid::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-50 pointer-events-none;
+}
+
+.glass-liquid::after {
+  content: '';
+  @apply absolute -inset-1 bg-gradient-to-t from-transparent via-white/10 to-white/30 opacity-30 blur-sm pointer-events-none;
+}
+
 /* Focus styles for accessibility */
 .glass-focus {
-  @apply focus:outline-none focus:ring-2 focus:ring-glass-accent focus:ring-opacity-50;
+  @apply focus:outline-none focus:ring-2 focus:ring-[#fb4268] focus:ring-opacity-50;
 }
