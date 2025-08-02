@@ -198,6 +198,25 @@
   box-shadow: 0 0 0 3px var(--apple-border-focus);
 }
 
+/* Liquid Shine Effect */
+.liquid-glass-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: inherit;
+  backdrop-filter: blur(1px);
+  box-shadow: 
+    inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
+    inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+  opacity: 0.6;
+  z-index: -1;
+  filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+}
+
 /* Glass Variants */
 .liquid-glass-whisper {
   background: var(--glass-bg-primary);

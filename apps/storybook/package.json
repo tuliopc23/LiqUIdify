@@ -12,14 +12,12 @@
     "check-stories": "node ../../scripts/check-stories.cjs",
     "debug": "node ../../scripts/fix-storybook-build.cjs"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@storybook/react": "^8.4.1",
-    "@storybook/react-vite": "^8.4.1",
-    "@storybook/addon-essentials": "^8.4.1",
-    "@storybook/addon-links": "^8.4.1",
-    "@storybook/addon-a11y": "^8.4.1",
-    "@storybook/builder-vite": "^8.4.1",
-    "storybook": "^8.4.1"
+    "@storybook/react-vite": "^9.1.0",
+    "@storybook/addon-links": "^9.1.0",
+    "@storybook/addon-a11y": "^9.1.0",
+    "@storybook/builder-vite": "^9.1.0",
+    "storybook": "^9.1.0",
+    "@storybook/addon-docs": "^9.1.0"
   }
 }

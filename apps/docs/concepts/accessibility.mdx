@@ -1,0 +1,542 @@
+---
+title: "Accessibility"
+description: "Comprehensive guide to accessibility in LiqUIdify"
+---
+
+# Accessibility in LiqUIdify
+
+LiqUIdify is built with accessibility at its core, following WCAG 2.1 AA guidelines to ensure a high-quality experience for all users.
+
+## Overview
+
+Our accessibility implementation focuses on four key principles:
+
+1. **Perceivable**: Information must be presentable in ways all users can perceive
+2. **Operable**: Interface components must be operable by all users
+3. **Understandable**: Information and operation must be understandable
+4. **Robust**: Content must be robust enough for reliable interpretation
+
+## WCAG 2.1 AA Compliance
+
+### 1. Perceivable
+
+#### Text Alternatives
+
+- All non-text content has text alternatives
+- Icons include descriptive aria-labels
+- Images have meaningful alt text
+- SVGs include title and desc elements
+
+```tsx
+// Good Example
+\u003cimg
+  src="/avatar.jpg"
+  alt="User profile picture showing a smiling person"
+  role="img"
+/\u003e
+
+// For decorative images
+\u003cimg src="/decoration.svg" alt="" role="presentation" /\u003e
+```
+
+#### Time-Based Media
+
+- Video content includes captions
+- Audio content has transcripts
+- Media controls are keyboard accessible
+
+```tsx
+\u003cvideo
+  controls
+  aria-label="Tutorial video"
+\u003e
+  \u003ctrack
+    kind="captions"
+    src="/captions.vtt"
+    label="English captions"
+  /\u003e
+\u003c/video\u003e
+```
+
+#### Adaptable Content
+
+- Content can be presented in different ways
+- Maintains meaning when linearized
+- Proper heading structure
+
+```tsx
+// Semantic HTML structure
+\u003cmain\u003e
+  \u003ch1\u003eMain Title\u003c/h1\u003e
+  \u003csection aria-labelledby="section1-heading"\u003e
+    \u003ch2 id="section1-heading"\u003eSection 1\u003c/h2\u003e
+    \u003cp\u003eContent...\u003c/p\u003e
+  \u003c/section\u003e
+\u003c/main\u003e
+```
+
+#### Distinguishable Content
+
+- Color is not the only means of conveying information
+- Sufficient contrast ratios (4.5:1 for normal text)
+- Text can be resized up to 200%
+- Images of text are avoided
+
+```tsx
+// Color and icon for status
+\u003cdiv
+  role="status"
+  className="status-error"
+  aria-label="Error status"
+\u003e
+  \u003cErrorIcon /\u003e
+  Error occurred
+\u003c/div\u003e
+```
+
+### 2. Operable
+
+#### Keyboard Accessible
+
+- All functionality available from keyboard
+- No keyboard traps
+- Custom keyboard shortcuts documented
+
+```tsx
+\u003cButton
+  onKeyDown={(e) =\u003e {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handleAction();
+    }
+  }}
+  role="button"
+  tabIndex={0}
+\u003e
+  Action
+\u003c/Button\u003e
+```
+
+#### Enough Time
+
+- Adjustable time limits
+- Pause, stop, hide moving content
+- No auto-updating without user control
+
+```tsx
+function AutoUpdateContent() {
+  const [isPaused, setPaused] = useState(false);
+  
+  return (
+    \u003cdiv\u003e
+      \u003cbutton
+        onClick={() =\u003e setPaused(!isPaused)}
+        aria-pressed={isPaused}
+      \u003e
+        {isPaused ? 'Resume' : 'Pause'} Updates
+      \u003c/button\u003e
+      {!isPaused && \u003cLiveContent /\u003e}
+    \u003c/div\u003e
+  );
+}
+```
+
+#### Seizures and Physical Reactions
+
+- No content flashing more than 3 times per second
+- Motion animation can be disabled
+- Reduced motion support
+
+```tsx
+// Respect prefers-reduced-motion
+const useSafeAnimation = (animation) =\u003e {
+  const prefersReduced = usePrefersReducedMotion();
+  return prefersReduced ? null : animation;
+};
+```
+
+#### Navigable
+
+- Skip links for main content
+- Descriptive page titles
+- Focus order follows logical sequence
+- Link purpose clear from context
+
+```tsx
+\u003cdiv\u003e
+  \u003ca
+    href="#main-content"
+    className="skip-link"
+  \u003e
+    Skip to main content
+  \u003c/a\u003e
+  \u003cnav\u003e...\u003c/nav\u003e
+  \u003cmain id="main-content"\u003e...\u003c/main\u003e
+\u003c/div\u003e
+```
+
+### 3. Understandable
+
+#### Readable
+
+- Language identified
+- Unusual words explained
+- Abbreviations expanded
+- Reading level appropriate
+
+```tsx
+\u003chtml lang="en"\u003e
+  \u003cabbr title="World Wide Web Consortium"\u003eW3C\u003c/abbr\u003e
+  \u003cdfn\u003e
+    \u003cdt\u003eHTTP\u003c/dt\u003e
+    \u003cdd\u003eHyperText Transfer Protocol\u003c/dd\u003e
+  \u003c/dfn\u003e
+\u003c/html\u003e
+```
+
+#### Predictable
+
+- Navigation consistent across pages
+- Components behave consistently
+- Changes of context are user-initiated
+
+```tsx
+// Consistent navigation component
+function Navigation() {
+  return (
+    \u003cnav
+      role="navigation"
+      aria-label="Main navigation"
+    \u003e
+      \u003cul\u003e
+        {links.map(link =\u003e (
+          \u003cli key={link.id}\u003e
+            \u003ca href={link.href}\u003e{link.label}\u003c/a\u003e
+          \u003c/li\u003e
+        ))}
+      \u003c/ul\u003e
+    \u003c/nav\u003e
+  );
+}
+```
+
+#### Input Assistance
+
+- Error identification
+- Labels/instructions for forms
+- Error prevention for legal/financial data
+- Error suggestions provided
+
+```tsx
+function AccessibleForm() {
+  return (
+    \u003cform\u003e
+      \u003cdiv role="group" aria-labelledby="personal-info"\u003e
+        \u003ch2 id="personal-info"\u003ePersonal Information\u003c/h2\u003e
+        
+        \u003cdiv\u003e
+          \u003clabel htmlFor="name"\u003eName\u003c/label\u003e
+          \u003cinput
+            id="name"
+            type="text"
+            aria-required="true"
+            aria-invalid={hasError}
+            aria-describedby="name-error"
+          /\u003e
+          {hasError && (
+            \u003cdiv id="name-error" role="alert"\u003e
+              Please enter your name
+            \u003c/div\u003e
+          )}
+        \u003c/div\u003e
+      \u003c/div\u003e
+    \u003c/form\u003e
+  );
+}
+```
+
+### 4. Robust
+
+#### Compatible
+
+- Valid HTML/ARIA usage
+- Name, role, value available to assistive technology
+- Status messages can be determined
+
+```tsx
+// Status message example
+function StatusMessage({ status, message }) {
+  return (
+    \u003cdiv
+      role={status === 'error' ? 'alert' : 'status'}
+      aria-live={status === 'error' ? 'assertive' : 'polite'}
+    \u003e
+      {message}
+    \u003c/div\u003e
+  );
+}
+```
+
+## Component-Specific Guidelines
+
+### Buttons and Interactive Elements
+
+```tsx
+\u003cButton
+  onClick={handleClick}
+  disabled={isDisabled}
+  aria-pressed={isPressed}
+  aria-expanded={isExpanded}
+\u003e
+  {children}
+\u003c/Button\u003e
+```
+
+### Forms and Inputs
+
+```tsx
+\u003cFormField\u003e
+  \u003clabel htmlFor="email"\u003eEmail\u003c/label\u003e
+  \u003cinput
+    id="email"
+    type="email"
+    aria-required="true"
+    aria-invalid={hasError}
+    aria-describedby="email-help email-error"
+  /\u003e
+  \u003cdiv id="email-help"\u003eEnter your email address\u003c/div\u003e
+  {hasError && (
+    \u003cdiv id="email-error" role="alert"\u003e
+      Please enter a valid email
+    \u003c/div\u003e
+  )}
+\u003c/FormField\u003e
+```
+
+### Modal Dialogs
+
+```tsx
+\u003cModal
+  isOpen={isOpen}
+  onClose={onClose}
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+\u003e
+  \u003ch2 id="modal-title"\u003eModal Title\u003c/h2\u003e
+  \u003cdiv id="modal-description"\u003e
+    Modal content...
+  \u003c/div\u003e
+  \u003cbutton
+    onClick={onClose}
+    aria-label="Close modal"
+  \u003e
+    ×
+  \u003c/button\u003e
+\u003c/Modal\u003e
+```
+
+## Testing Accessibility
+
+### Automated Testing
+
+```tsx
+import { render } from '@testing-library/react';
+import { axe } from 'jest-axe';
+
+test('component is accessible', async () =\u003e {
+  const { container } = render(\u003cMyComponent /\u003e);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+```
+
+### Manual Testing
+
+1. Keyboard navigation
+2. Screen reader testing
+3. High contrast mode
+4. Zoom testing
+5. Color blindness simulation
+
+## Tools and Resources
+
+### Development Tools
+
+- eslint-plugin-jsx-a11y
+- react-axe
+- @testing-library/jest-dom
+- lighthouse
+
+### Testing Tools
+
+- WAVE Web Accessibility Evaluation Tool
+- axe DevTools
+- Color Contrast Analyzer
+- Screen readers (VoiceOver, NVDA, JAWS)
+
+### Documentation
+
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [WAI-ARIA Practices](https://www.w3.org/WAI/ARIA/apg/)
+- [A11y Project Checklist](https://www.a11yproject.com/checklist/)
+
+## Best Practices
+
+1. **Start with Semantic HTML**
+   - Use appropriate elements
+   - Maintain logical structure
+   - Avoid div soup
+
+2. **Implement ARIA When Needed**
+   - Follow ARIA design patterns
+   - Test with screen readers
+   - Keep it simple
+
+3. **Ensure Keyboard Navigation**
+   - Logical tab order
+   - Visible focus indicators
+   - Custom key handlers
+
+4. **Provide Clear Feedback**
+   - Error messages
+   - Success confirmation
+   - Loading states
+
+5. **Test Thoroughly**
+   - Automated tests
+   - Manual testing
+   - User testing
+
+## Progressive Enhancement
+
+1. **Base Layer**
+   - Semantic HTML
+   - Basic styling
+   - Essential functionality
+
+2. **Enhancement Layer**
+   - JavaScript interactions
+   - Advanced animations
+   - Rich features
+
+3. **Accessibility Layer**
+   - ARIA attributes
+   - Focus management
+   - Screen reader support
+
+## Monitoring and Maintenance
+
+1. **Regular Audits**
+   - Automated testing
+   - Manual reviews
+   - User feedback
+
+2. **Continuous Improvement**
+   - Update documentation
+   - Fix issues promptly
+   - Track metrics
+
+3. **Training and Support**
+   - Team education
+   - Documentation
+   - Best practices
+
+## Common Patterns
+
+### Navigation Menus
+
+```tsx
+\u003cnav aria-label="Main navigation"\u003e
+  \u003cul role="menubar"\u003e
+    {items.map(item =\u003e (
+      \u003cli
+        key={item.id}
+        role="none"
+      \u003e
+        \u003ca
+          href={item.href}
+          role="menuitem"
+          aria-current={isCurrent ? 'page' : undefined}
+        \u003e
+          {item.label}
+        \u003c/a\u003e
+      \u003c/li\u003e
+    ))}
+  \u003c/ul\u003e
+\u003c/nav\u003e
+```
+
+### Tabs
+
+```tsx
+\u003cdiv role="tablist"\u003e
+  {tabs.map(tab =\u003e (
+    \u003cbutton
+      key={tab.id}
+      role="tab"
+      aria-selected={tab.isActive}
+      aria-controls={`panel-${tab.id}`}
+      id={`tab-${tab.id}`}
+    \u003e
+      {tab.label}
+    \u003c/button\u003e
+  ))}
+\u003c/div\u003e
+{tabs.map(tab =\u003e (
+  \u003cdiv
+    key={tab.id}
+    role="tabpanel"
+    aria-labelledby={`tab-${tab.id}`}
+    id={`panel-${tab.id}`}
+    hidden={!tab.isActive}
+  \u003e
+    {tab.content}
+  \u003c/div\u003e
+))}
+```
+
+### Accordions
+
+```tsx
+\u003cdiv\u003e
+  {sections.map(section =\u003e (
+    \u003cdiv key={section.id}\u003e
+      \u003ch3\u003e
+        \u003cbutton
+          aria-expanded={section.isExpanded}
+          aria-controls={`content-${section.id}`}
+          onClick={() =\u003e toggleSection(section.id)}
+        \u003e
+          {section.title}
+        \u003c/button\u003e
+      \u003c/h3\u003e
+      \u003cdiv
+        id={`content-${section.id}`}
+        role="region"
+        aria-labelledby={`title-${section.id}`}
+        hidden={!section.isExpanded}
+      \u003e
+        {section.content}
+      \u003c/div\u003e
+    \u003c/div\u003e
+  ))}
+\u003c/div\u003e
+```
+
+## Future Improvements
+
+1. **WCAG 2.2 Compliance**
+   - Target Level AAA
+   - New success criteria
+   - Enhanced testing
+
+2. **Advanced Features**
+   - Voice navigation
+   - Gesture support
+   - AI assistance
+
+3. **Documentation**
+   - Interactive examples
+   - Video tutorials
+   - Case studies
+
+Remember: Accessibility is not a checkbox—it's an ongoing process of improvement and maintenance. Regular testing, user feedback, and updates are essential for maintaining high accessibility standards.

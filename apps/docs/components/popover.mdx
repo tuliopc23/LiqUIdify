@@ -1,0 +1,615 @@
+---
+title: "Popover"
+description: "A floating container component that displays rich content in a non-modal overlay."
+icon: "message-square"
+---
+
+# Popover
+
+The Popover component displays rich content in a floating container that appears above other page content. Unlike tooltips, popovers can contain interactive elements and more complex layouts.
+
+## Basic Usage
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+
+function BasicPopover() {
+  return (
+    <Popover>
+      <PopoverTrigger>
+        <Button>Open Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="p-4">
+          <h3 className="font-semibold mb-2">Popover Title</h3>
+          <p className="text-sm text-gray-600">
+            This is the popover content. It can contain any React elements.
+          </p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+## Placement
+
+Control where the popover appears relative to the trigger:
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+
+function PopoverPlacements() {
+  const placements = [
+    'top', 'top-start', 'top-end',
+    'right', 'right-start', 'right-end',
+    'bottom', 'bottom-start', 'bottom-end',
+    'left', 'left-start', 'left-end'
+  ];
+
+  return (
+    <div className="grid grid-cols-3 gap-4 p-8">
+      {placements.map((placement) => (
+        <Popover key={placement}>
+          <PopoverTrigger>
+            <Button variant="outline" size="sm">
+              {placement}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent placement={placement}>
+            <div className="p-3">
+              <p className="text-sm">Popover at {placement}</p>
+            </div>
+          </PopoverContent>
+        </Popover>
+      ))}
+    </div>
+  );
+}
+```
+
+## Trigger Types
+
+Different ways to trigger the popover:
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+
+function PopoverTriggers() {
+  return (
+    <div className="flex gap-4">
+      <Popover trigger="click">
+        <PopoverTrigger>
+          <Button>Click to Open</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="p-4">
+            <p>Click outside or press Escape to close</p>
+          </div>
+        </PopoverContent>
+      </Popover>
+
+      <Popover trigger="hover">
+        <PopoverTrigger>
+          <Button variant="outline">Hover to Open</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="p-4">
+            <p>Hover away to close</p>
+          </div>
+        </PopoverContent>
+      </Popover>
+
+      <Popover trigger="focus">
+        <PopoverTrigger>
+          <Button variant="ghost">Focus to Open</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="p-4">
+            <p>Focus away to close</p>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}
+```
+
+## Rich Content
+
+Popovers can contain complex interactive content:
+
+```tsx
+import { 
+  Popover, 
+  PopoverTrigger, 
+  PopoverContent, 
+  Button,
+  Input,
+  Avatar,
+  Badge
+} from '@liquidify/react';
+import { Settings, User, Bell } from 'lucide-react';
+
+function RichContentPopover() {
+  return (
+    <div className="flex gap-4">
+      {/* User Profile Popover */}
+      <Popover>
+        <PopoverTrigger>
+          <Avatar
+            src="/user-avatar.jpg"
+            name="John Doe"
+            className="cursor-pointer"
+          />
+        </PopoverTrigger>
+        <PopoverContent className="w-80">
+          <div className="p-4">
+            <div className="flex items-center gap-3 mb-4">
+              <Avatar src="/user-avatar.jpg" name="John Doe" size="lg" />
+              <div>
+                <h3 className="font-semibold">John Doe</h3>
+                <p className="text-sm text-gray-600">john@example.com</p>
+                <Badge color="success" size="sm">Online</Badge>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Button variant="ghost" className="w-full justify-start">
+                <User size={16} className="mr-2" />
+                View Profile
+              </Button>
+              <Button variant="ghost" className="w-full justify-start">
+                <Settings size={16} className="mr-2" />
+                Settings
+              </Button>
+              <Button variant="ghost" className="w-full justify-start">
+                <Bell size={16} className="mr-2" />
+                Notifications
+              </Button>
+            </div>
+          </div>
+        </PopoverContent>
+      </Popover>
+
+      {/* Quick Actions Popover */}
+      <Popover>
+        <PopoverTrigger>
+          <Button>Quick Actions</Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-64">
+          <div className="p-4">
+            <h3 className="font-semibold mb-3">Quick Actions</h3>
+            <div className="space-y-3">
+              <Input placeholder="Search..." size="sm" />
+              <div className="grid grid-cols-2 gap-2">
+                <Button size="sm" variant="outline">New File</Button>
+                <Button size="sm" variant="outline">New Folder</Button>
+                <Button size="sm" variant="outline">Upload</Button>
+                <Button size="sm" variant="outline">Share</Button>
+              </div>
+            </div>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}
+```
+
+## Form Popover
+
+Use popovers for inline forms and inputs:
+
+```tsx
+import { 
+  Popover, 
+  PopoverTrigger, 
+  PopoverContent, 
+  Button,
+  Input,
+  Label,
+  Textarea
+} from '@liquidify/react';
+import { Plus } from 'lucide-react';
+
+function FormPopover() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+    setIsOpen(false);
+  };
+
+  return (
+    <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+      <PopoverTrigger>
+        <Button>
+          <Plus size={16} className="mr-2" />
+          Add Comment
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-80">
+        <form onSubmit={handleSubmit} className="p-4 space-y-4">
+          <div>
+            <Label htmlFor="title">Title</Label>
+            <Input
+              id="title"
+              placeholder="Enter title"
+              className="mt-1"
+            />
+          </div>
+          <div>
+            <Label htmlFor="comment">Comment</Label>
+            <Textarea
+              id="comment"
+              placeholder="Enter your comment"
+              rows={3}
+              className="mt-1"
+            />
+          </div>
+          <div className="flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setIsOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" size="sm">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+## Controlled Popover
+
+Manage popover state programmatically:
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+import { useState } from 'react';
+
+function ControlledPopover() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-2">
+        <Button onClick={() => setIsOpen(true)}>Open Popover</Button>
+        <Button onClick={() => setIsOpen(false)} variant="outline">
+          Close Popover
+        </Button>
+        <Button onClick={() => setIsOpen(!isOpen)} variant="ghost">
+          Toggle Popover
+        </Button>
+      </div>
+
+      <Popover isOpen={isOpen} onOpenChange={setIsOpen}>
+        <PopoverTrigger>
+          <Button variant="outline">
+            Controlled Trigger (State: {isOpen ? 'Open' : 'Closed'})
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="p-4">
+            <h3 className="font-semibold mb-2">Controlled Popover</h3>
+            <p className="text-sm text-gray-600 mb-3">
+              This popover's state is controlled externally.
+            </p>
+            <Button size="sm" onClick={() => setIsOpen(false)}>
+              Close from Inside
+            </Button>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}
+```
+
+## Arrow and Styling
+
+Customize the popover appearance:
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+
+function StyledPopover() {
+  return (
+    <div className="flex gap-4">
+      <Popover>
+        <PopoverTrigger>
+          <Button>With Arrow</Button>
+        </PopoverTrigger>
+        <PopoverContent showArrow>
+          <div className="p-4">
+            <p>Popover with arrow</p>
+          </div>
+        </PopoverContent>
+      </Popover>
+
+      <Popover>
+        <PopoverTrigger>
+          <Button variant="outline">No Arrow</Button>
+        </PopoverTrigger>
+        <PopoverContent showArrow={false}>
+          <div className="p-4">
+            <p>Popover without arrow</p>
+          </div>
+        </PopoverContent>
+      </Popover>
+
+      <Popover>
+        <PopoverTrigger>
+          <Button variant="ghost">Custom Style</Button>
+        </PopoverTrigger>
+        <PopoverContent 
+          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0"
+          showArrow
+        >
+          <div className="p-4">
+            <p>Custom styled popover</p>
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}
+```
+
+## Nested Popovers
+
+Popovers can be nested within each other:
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent, Button } from '@liquidify/react';
+
+function NestedPopovers() {
+  return (
+    <Popover>
+      <PopoverTrigger>
+        <Button>Open Parent</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="p-4">
+          <h3 className="font-semibold mb-3">Parent Popover</h3>
+          <p className="text-sm text-gray-600 mb-3">
+            This popover contains another popover.
+          </p>
+          
+          <Popover>
+            <PopoverTrigger>
+              <Button size="sm">Open Child</Button>
+            </PopoverTrigger>
+            <PopoverContent placement="right">
+              <div className="p-3">
+                <h4 className="font-medium mb-2">Child Popover</h4>
+                <p className="text-sm">Nested popover content</p>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+## API Reference
+
+### Popover Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isOpen` | `boolean` | - | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Default open state |
+| `onOpenChange` | `(isOpen: boolean) => void` | - | Open state change handler |
+| `trigger` | `'click' \| 'hover' \| 'focus'` | `'click'` | Trigger behavior |
+| `placement` | `Placement` | `'bottom'` | Popover position |
+| `offset` | `number` | `8` | Distance from trigger |
+| `crossOffset` | `number` | `0` | Cross-axis offset |
+| `shouldFlip` | `boolean` | `true` | Flip when out of bounds |
+| `shouldUpdatePosition` | `boolean` | `true` | Update position on scroll |
+| `isKeyboardDismissDisabled` | `boolean` | `false` | Disable Escape key dismiss |
+| `isNonModal` | `boolean` | `false` | Non-modal behavior |
+| `isDismissable` | `boolean` | `true` | Allow outside click dismiss |
+| `children` | `ReactNode` | - | Popover content |
+
+### PopoverTrigger Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Trigger element |
+
+### PopoverContent Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `showArrow` | `boolean` | `false` | Show arrow pointer |
+| `arrowSize` | `number` | `12` | Arrow size in pixels |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Popover content |
+
+## Styling
+
+### CSS Variables
+
+```css
+.popover {
+  --popover-bg: white;
+  --popover-border: #e5e7eb;
+  --popover-border-radius: 0.5rem;
+  --popover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --popover-max-width: 24rem;
+  --popover-z-index: 50;
+}
+
+.popover-arrow {
+  --popover-arrow-size: 12px;
+  --popover-arrow-bg: var(--popover-bg);
+  --popover-arrow-border: var(--popover-border);
+}
+```
+
+### Custom Styles
+
+```css
+.custom-popover {
+  --popover-bg: #1f2937;
+  --popover-border: #374151;
+  --popover-text: white;
+  --popover-border-radius: 0.75rem;
+}
+
+.popover-content {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.95);
+}
+```
+
+## Accessibility
+
+The Popover component includes accessibility features:
+
+- Proper ARIA attributes
+- Keyboard navigation support
+- Focus management
+- Screen reader compatibility
+- Escape key dismissal
+
+```tsx
+<Popover>
+  <PopoverTrigger aria-describedby="popover-content">
+    <Button>Open Popover</Button>
+  </PopoverTrigger>
+  <PopoverContent
+    id="popover-content"
+    role="dialog"
+    aria-label="Additional information"
+  >
+    <div className="p-4">Content</div>
+  </PopoverContent>
+</Popover>
+```
+
+## Best Practices
+
+### 1. Use for Rich Content
+
+Popovers are ideal for complex content that doesn't fit in tooltips:
+
+```tsx
+// Good - Rich interactive content
+<Popover>
+  <PopoverTrigger><Button>User Menu</Button></PopoverTrigger>
+  <PopoverContent>
+    <UserProfileCard />
+    <ActionButtons />
+  </PopoverContent>
+</Popover>
+
+// Avoid - Simple text (use Tooltip instead)
+<Popover>
+  <PopoverTrigger><Button>Help</Button></PopoverTrigger>
+  <PopoverContent>
+    <p>Simple help text</p>
+  </PopoverContent>
+</Popover>
+```
+
+### 2. Provide Clear Dismissal
+
+Make it easy for users to close popovers:
+
+```tsx
+<Popover>
+  <PopoverTrigger><Button>Open</Button></PopoverTrigger>
+  <PopoverContent>
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-3">
+        <h3>Title</h3>
+        <Button size="sm" variant="ghost" onClick={close}>
+          <X size={16} />
+        </Button>
+      </div>
+      <p>Content</p>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+### 3. Consider Mobile Experience
+
+Ensure popovers work well on mobile devices:
+
+```tsx
+<Popover
+  trigger={isMobile ? 'click' : 'hover'}
+  placement={isMobile ? 'bottom' : 'right'}
+>
+  <PopoverTrigger><Button>Menu</Button></PopoverTrigger>
+  <PopoverContent className={isMobile ? 'w-screen max-w-sm' : 'w-64'}>
+    <MenuContent />
+  </PopoverContent>
+</Popover>
+```
+
+## Examples
+
+### Color Picker Popover
+
+```tsx
+function ColorPickerPopover() {
+  const [selectedColor, setSelectedColor] = useState('#3b82f6');
+  const colors = [
+    '#ef4444', '#f97316', '#f59e0b', '#eab308',
+    '#84cc16', '#22c55e', '#10b981', '#14b8a6',
+    '#06b6d4', '#0ea5e9', '#3b82f6', '#6366f1',
+    '#8b5cf6', '#a855f7', '#d946ef', '#ec4899'
+  ];
+
+  return (
+    <Popover>
+      <PopoverTrigger>
+        <Button
+          variant="outline"
+          className="w-20 h-10"
+          style={{ backgroundColor: selectedColor }}
+        >
+          <span className="sr-only">Select color</span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-64">
+        <div className="p-4">
+          <h3 className="font-semibold mb-3">Choose Color</h3>
+          <div className="grid grid-cols-4 gap-2 mb-4">
+            {colors.map((color) => (
+              <button
+                key={color}
+                className={`w-12 h-12 rounded-lg border-2 ${
+                  selectedColor === color ? 'border-gray-400' : 'border-gray-200'
+                }`}
+                style={{ backgroundColor: color }}
+                onClick={() => setSelectedColor(color)}
+              />
+            ))}
+          </div>
+          <Input
+            type="text"
+            value={selectedColor}
+            onChange={(e) => setSelectedColor(e.target.value)}
+            placeholder="#000000"
+          />
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```

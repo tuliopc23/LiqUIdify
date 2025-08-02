@@ -7,12 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import {
-  cn,
-  focusRing,
-  getGlassClass,
-  microInteraction,
-} from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 
 // Type definitions for enhanced TypeScript support
 type ComponentVariant = "default" | "search" | "password" | "email";
@@ -56,7 +51,6 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
     ref,
   ) => {
     const [showPassword, setShowPassword] = useState(false);
-    // const [isFocused, setIsFocused] = useState(false); // isFocused is not used
     const [currentValue, setCurrentValue] = useState(
       value === undefined ? props.defaultValue || "" : value,
     );
@@ -107,16 +101,16 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
     const hasValue = Boolean(currentValue);
 
+    // Base classes using Tailwind + glass utilities
     const baseClasses = cn(
-      "w-full rounded-xl border px-4 py-3 transition-all duration-200",
-      "text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
-      getGlassClass("default"),
-      focusRing, // Ensure focusRing provides a visible focus style
+      "glass-input w-full radius-lg-s px-4 py-3",
+      "text-glass-text placeholder:text-glass-grey/70",
+      "transition-all duration-200 will-change-transform",
+      "glass-focus",
       "disabled:cursor-not-allowed disabled:opacity-50",
       error
-        ? "border-red-400/50 focus:border-red-500"
-        : "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
-      microInteraction.gentle,
+        ? "border-red-400/50 focus:border-red-500 focus:ring-red-500/20"
+        : "border-glass-hl/30 focus:border-glass-accent focus:ring-glass-accent/20",
     );
 
     const getIconPadding = () => {
@@ -129,7 +123,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
         (variant === "password" && rightIcon) ||
         (clearable && hasValue && rightIcon)
       ) {
-        pr = "pr-20"; // Space for two icons if needed, adjust as per visual design
+        pr = "pr-20"; // Space for two icons if needed
       }
 
       if (leftIcon || variant === "search") {
@@ -144,18 +138,23 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
     return (
       <div className="relative w-full">
         <div className="relative flex w-full items-center">
+          {/* Glass effect layers */}
+          <div className="glass-filter pointer-events-none" />
+          <div className="glass-overlay pointer-events-none" />
+          <div className="glass-specular pointer-events-none" />
+          
           {variant === "search" && !leftIcon && (
-            <Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 h-4 w-4 transform text-secondary" />
+            <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-glass-grey z-10" />
           )}
           {leftIcon && (
-            <div className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 transform text-secondary">
+            <div className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 transform text-glass-grey z-10">
               {leftIcon}
             </div>
           )}
 
           <input
             type={inputType}
-            className={cn(baseClasses, getIconPadding(), className)}
+            className={cn(baseClasses, getIconPadding(), "relative z-10", className)}
             ref={setReferences}
             {...(value === undefined
               ? { defaultValue: props.defaultValue }
@@ -166,13 +165,18 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
             {...props}
           />
 
-          <div className="-translate-y-1/2 absolute top-1/2 right-3 flex transform items-center space-x-2">
+          <div className="absolute top-1/2 right-3 -translate-y-1/2 flex transform items-center space-x-2 z-10">
             {clearable && hasValue && (
               <button
                 type="button"
                 onClick={handleClearInput}
                 aria-label="Clear input"
-                className="rounded p-1 text-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={cn(
+                  "glass-button radius-lg-s p-1 text-glass-grey",
+                  "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+                  "motion-safe:active:scale-95 transition-all duration-200",
+                  "glass-focus"
+                )}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -183,7 +187,12 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 aria-pressed={showPassword}
-                className="rounded p-1 text-secondary hover:text-primary focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={cn(
+                  "glass-button radius-lg-s p-1 text-glass-grey",
+                  "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+                  "motion-safe:active:scale-95 transition-all duration-200",
+                  "glass-focus"
+                )}
               >
                 {showPassword ? (
                   <EyeOff className="h-4 w-4" />
@@ -193,7 +202,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
               </button>
             )}
             {rightIcon && variant !== "password" && !clearable && (
-              <div className="pointer-events-none text-secondary">
+              <div className="pointer-events-none text-glass-grey">
                 {rightIcon}
               </div>
             )}
@@ -204,7 +213,7 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
             id={helperTextId}
             className={cn(
               "mt-1.5 text-xs",
-              error ? "text-red-500" : "text-[var(--text-muted)]",
+              error ? "text-red-500" : "text-glass-grey/80",
             )}
           >
             {helperText}

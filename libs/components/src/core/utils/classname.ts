@@ -57,21 +57,21 @@ function _createSizeClass<T extends Record<string, string>>(sizeMap: T) {
  */
 export const GLASS_CLASSES = {
   default:
-    "backdrop-blur-glass saturate-[180%] bg-glass-light-primary border border-border-glass-light",
+    "glass-effect backdrop-blur-glass saturate-[180%] bg-glass-light-primary border border-border-glass-light",
   elevated:
-    "backdrop-blur-glass-heavy saturate-[200%] bg-glass-light-elevated border border-border-glass-light-medium shadow-glass-sm",
+    "glass-effect backdrop-blur-glass-heavy saturate-[200%] bg-glass-light-elevated border border-border-glass-light-medium shadow-glass-sm",
   floating:
-    "backdrop-blur-glass-heavy saturate-[180%] bg-glass-light-floating border border-border-glass-light-medium shadow-glass-md",
+    "glass-effect backdrop-blur-glass-heavy saturate-[180%] bg-glass-light-floating border border-border-glass-light-medium shadow-glass-md",
   overlay:
-    "backdrop-blur-glass-ultra saturate-[200%] bg-glass-light-overlay border border-border-glass-light-strong shadow-glass-lg",
+    "glass-effect backdrop-blur-glass-ultra saturate-[200%] bg-glass-light-overlay border border-border-glass-light-strong shadow-glass-lg",
   hover:
     "hover:backdrop-blur-glass-heavy hover:saturate-[190%] hover:bg-glass-light-hover hover:border-border-glass-light-hover transition-all duration-glass",
   active:
     "active:backdrop-blur-glass active:saturate-[170%] active:bg-glass-light-active active:scale-[0.98] transition-all duration-glass-fast",
   pressed:
-    "backdrop-blur-glass saturate-[160%] bg-glass-light-pressed scale-[0.98]",
+    "glass-effect backdrop-blur-glass saturate-[160%] bg-glass-light-pressed scale-[0.98]",
   interactive:
-    "cursor-pointer transition-all duration-glass hover:scale-[1.02] active:scale-[0.98]",
+    "glass-effect cursor-pointer transition-all duration-glass hover:scale-[1.02] active:scale-[0.98]",
   disabled: "opacity-50 cursor-not-allowed pointer-events-none",
 } as const;
 

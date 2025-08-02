@@ -1,0 +1,493 @@
+---
+title: "Avatar"
+description: "A versatile avatar component for displaying user profile pictures, initials, or placeholder images."
+icon: "user-circle"
+---
+
+# Avatar
+
+The Avatar component provides a flexible way to display user profile pictures, initials, or placeholder images. It supports various sizes, shapes, and fallback options.
+
+## Basic Usage
+
+```tsx
+import { Avatar } from '@liquidify/react';
+
+function BasicAvatar() {
+  return (
+    <Avatar
+      src="/user-avatar.jpg"
+      alt="John Doe"
+      name="John Doe"
+    />
+  );
+}
+```
+
+## Sizes
+
+Available in multiple sizes to fit different contexts:
+
+```tsx
+import { Avatar } from '@liquidify/react';
+
+function AvatarSizes() {
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar size="xs" name="John Doe" />
+      <Avatar size="sm" name="John Doe" />
+      <Avatar size="md" name="John Doe" />
+      <Avatar size="lg" name="John Doe" />
+      <Avatar size="xl" name="John Doe" />
+    </div>
+  );
+}
+```
+
+## Shapes
+
+Choose between circular and square avatars:
+
+```tsx
+import { Avatar } from '@liquidify/react';
+
+function AvatarShapes() {
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar
+        src="/user-avatar.jpg"
+        name="John Doe"
+        shape="circle"
+      />
+      <Avatar
+        src="/user-avatar.jpg"
+        name="John Doe"
+        shape="square"
+      />
+    </div>
+  );
+}
+```
+
+## Fallback Options
+
+When no image is provided, the avatar shows initials or a placeholder:
+
+```tsx
+import { Avatar } from '@liquidify/react';
+
+function AvatarFallbacks() {
+  return (
+    <div className="flex items-center gap-4">
+      {/* Shows initials */}
+      <Avatar name="John Doe" />
+      
+      {/* Shows custom initials */}
+      <Avatar name="Jane Smith" initials="JS" />
+      
+      {/* Shows placeholder icon */}
+      <Avatar />
+      
+      {/* Custom fallback */}
+      <Avatar
+        fallback={<span>?</span>}
+      />
+    </div>
+  );
+}
+```
+
+## Colors
+
+Customize avatar colors for better visual distinction:
+
+```tsx
+import { Avatar } from '@liquidify/react';
+
+function ColoredAvatars() {
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar name="John Doe" color="primary" />
+      <Avatar name="Jane Smith" color="secondary" />
+      <Avatar name="Bob Johnson" color="success" />
+      <Avatar name="Alice Brown" color="warning" />
+      <Avatar name="Charlie Wilson" color="danger" />
+    </div>
+  );
+}
+```
+
+## Status Indicators
+
+Add status indicators to show user presence:
+
+```tsx
+import { Avatar } from '@liquidify/react';
+
+function AvatarWithStatus() {
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar
+        src="/user-avatar.jpg"
+        name="John Doe"
+        status="online"
+      />
+      <Avatar
+        src="/user-avatar.jpg"
+        name="Jane Smith"
+        status="away"
+      />
+      <Avatar
+        src="/user-avatar.jpg"
+        name="Bob Johnson"
+        status="busy"
+      />
+      <Avatar
+        src="/user-avatar.jpg"
+        name="Alice Brown"
+        status="offline"
+      />
+    </div>
+  );
+}
+```
+
+## Avatar Groups
+
+Display multiple avatars in a group:
+
+```tsx
+import { Avatar, AvatarGroup } from '@liquidify/react';
+
+function AvatarGroupExample() {
+  const users = [
+    { name: "John Doe", src: "/user1.jpg" },
+    { name: "Jane Smith", src: "/user2.jpg" },
+    { name: "Bob Johnson", src: "/user3.jpg" },
+    { name: "Alice Brown", src: "/user4.jpg" },
+    { name: "Charlie Wilson", src: "/user5.jpg" }
+  ];
+
+  return (
+    <AvatarGroup max={4}>
+      {users.map((user, index) => (
+        <Avatar
+          key={index}
+          src={user.src}
+          name={user.name}
+        />
+      ))}
+    </AvatarGroup>
+  );
+}
+```
+
+## Interactive Avatars
+
+Make avatars clickable for user interactions:
+
+```tsx
+import { Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from '@liquidify/react';
+
+function InteractiveAvatar() {
+  const user = {
+    name: "John Doe",
+    email: "john@example.com",
+    avatar: "/user-avatar.jpg"
+  };
+
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <Avatar
+          src={user.avatar}
+          name={user.name}
+          className="cursor-pointer hover:opacity-80 transition-opacity"
+        />
+      </DropdownTrigger>
+      <DropdownMenu>
+        <DropdownItem>Profile</DropdownItem>
+        <DropdownItem>Settings</DropdownItem>
+        <DropdownItem>Sign Out</DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
+}
+```
+
+## Loading State
+
+Show loading state while avatar image loads:
+
+```tsx
+import { Avatar } from '@liquidify/react';
+
+function LoadingAvatar() {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <Avatar
+      src="/user-avatar.jpg"
+      name="John Doe"
+      loading={loading}
+      onLoad={() => setLoading(false)}
+      onError={() => setLoading(false)}
+    />
+  );
+}
+```
+
+## Custom Styling
+
+Apply custom styles and classes:
+
+```tsx
+import { Avatar } from '@liquidify/react';
+
+function CustomAvatar() {
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar
+        name="John Doe"
+        className="ring-2 ring-blue-500 ring-offset-2"
+      />
+      <Avatar
+        name="Jane Smith"
+        style={{
+          background: 'linear-gradient(45deg, #ff6b6b, #4ecdc4)',
+          color: 'white'
+        }}
+      />
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Avatar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | - | Image source URL |
+| `alt` | `string` | - | Image alt text |
+| `name` | `string` | - | User name for initials |
+| `initials` | `string` | - | Custom initials override |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Avatar size |
+| `shape` | `'circle' \| 'square'` | `'circle'` | Avatar shape |
+| `color` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger' \| string` | `'primary'` | Background color |
+| `status` | `'online' \| 'away' \| 'busy' \| 'offline'` | - | Status indicator |
+| `loading` | `boolean` | `false` | Loading state |
+| `fallback` | `ReactNode` | - | Custom fallback content |
+| `className` | `string` | - | Additional CSS classes |
+| `style` | `CSSProperties` | - | Inline styles |
+| `onClick` | `() => void` | - | Click handler |
+| `onLoad` | `() => void` | - | Image load handler |
+| `onError` | `() => void` | - | Image error handler |
+
+### AvatarGroup Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `max` | `number` | - | Maximum avatars to show |
+| `spacing` | `'sm' \| 'md' \| 'lg'` | `'md'` | Spacing between avatars |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Avatar components |
+
+## Styling
+
+### CSS Variables
+
+```css
+.avatar {
+  --avatar-size: 2.5rem;
+  --avatar-border-radius: 50%;
+  --avatar-bg: var(--liquid-primary);
+  --avatar-text: white;
+  --avatar-border: 2px solid transparent;
+}
+
+.avatar--xs { --avatar-size: 1.5rem; }
+.avatar--sm { --avatar-size: 2rem; }
+.avatar--md { --avatar-size: 2.5rem; }
+.avatar--lg { --avatar-size: 3rem; }
+.avatar--xl { --avatar-size: 4rem; }
+
+.avatar--square { --avatar-border-radius: 0.375rem; }
+```
+
+### Status Indicators
+
+```css
+.avatar-status {
+  --status-size: 0.75rem;
+  --status-border: 2px solid white;
+  --status-online: #10b981;
+  --status-away: #f59e0b;
+  --status-busy: #ef4444;
+  --status-offline: #6b7280;
+}
+```
+
+### Custom Colors
+
+```css
+.avatar--primary { --avatar-bg: var(--liquid-primary); }
+.avatar--secondary { --avatar-bg: var(--liquid-secondary); }
+.avatar--success { --avatar-bg: var(--liquid-success); }
+.avatar--warning { --avatar-bg: var(--liquid-warning); }
+.avatar--danger { --avatar-bg: var(--liquid-danger); }
+```
+
+## Accessibility
+
+The Avatar component includes accessibility features:
+
+- Proper alt text for images
+- ARIA labels for screen readers
+- Keyboard navigation support
+- Focus indicators
+
+```tsx
+<Avatar
+  src="/user-avatar.jpg"
+  alt="John Doe's profile picture"
+  name="John Doe"
+  aria-label="User avatar"
+/>
+```
+
+## Best Practices
+
+### 1. Always Provide Fallbacks
+
+Ensure avatars have proper fallback content:
+
+```tsx
+// Good
+<Avatar
+  src="/user-avatar.jpg"
+  name="John Doe"
+  alt="John Doe's profile picture"
+/>
+
+// Better - with custom fallback
+<Avatar
+  src="/user-avatar.jpg"
+  name="John Doe"
+  alt="John Doe's profile picture"
+  fallback={<UserIcon />}
+/>
+```
+
+### 2. Use Appropriate Sizes
+
+Match avatar size to the context:
+
+```tsx
+// Small for lists
+<Avatar size="sm" name="John Doe" />
+
+// Medium for cards
+<Avatar size="md" name="John Doe" />
+
+// Large for profiles
+<Avatar size="xl" name="John Doe" />
+```
+
+### 3. Handle Loading States
+
+Provide feedback during image loading:
+
+```tsx
+<Avatar
+  src="/user-avatar.jpg"
+  name="John Doe"
+  loading={isLoading}
+  onLoad={() => setIsLoading(false)}
+  onError={() => setIsLoading(false)}
+/>
+```
+
+## Examples
+
+### User Profile Card
+
+```tsx
+function UserProfileCard({ user }: { user: User }) {
+  return (
+    <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow">
+      <Avatar
+        src={user.avatar}
+        name={user.name}
+        size="lg"
+        status={user.status}
+      />
+      <div>
+        <h3 className="font-semibold">{user.name}</h3>
+        <p className="text-gray-600">{user.email}</p>
+        <p className="text-sm text-gray-500">{user.role}</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### Team Members List
+
+```tsx
+function TeamMembersList({ members }: { members: User[] }) {
+  return (
+    <div className="space-y-3">
+      {members.map((member) => (
+        <div key={member.id} className="flex items-center gap-3">
+          <Avatar
+            src={member.avatar}
+            name={member.name}
+            size="sm"
+            status={member.isOnline ? 'online' : 'offline'}
+          />
+          <div className="flex-1">
+            <p className="font-medium">{member.name}</p>
+            <p className="text-sm text-gray-500">{member.department}</p>
+          </div>
+          <span className={`text-xs px-2 py-1 rounded-full ${
+            member.isOnline ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'
+          }`}>
+            {member.isOnline ? 'Online' : 'Offline'}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Comment Thread
+
+```tsx
+function CommentThread({ comments }: { comments: Comment[] }) {
+  return (
+    <div className="space-y-4">
+      {comments.map((comment) => (
+        <div key={comment.id} className="flex gap-3">
+          <Avatar
+            src={comment.author.avatar}
+            name={comment.author.name}
+            size="sm"
+          />
+          <div className="flex-1">
+            <div className="bg-gray-50 rounded-lg p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="font-medium text-sm">{comment.author.name}</span>
+                <span className="text-xs text-gray-500">{comment.timestamp}</span>
+              </div>
+              <p className="text-sm">{comment.content}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```

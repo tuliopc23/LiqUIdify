@@ -1,0 +1,490 @@
+---
+title: "Table"
+description: "A flexible table component for displaying structured data with sorting, filtering, and pagination capabilities."
+icon: "table"
+---
+
+# Table
+
+The Table component provides a powerful way to display structured data with built-in support for sorting, filtering, pagination, and responsive design.
+
+## Basic Usage
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@liquidify/react';
+
+function BasicTable() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Name</TableHead>
+          <TableHead>Email</TableHead>
+          <TableHead>Role</TableHead>
+          <TableHead>Status</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>John Doe</TableCell>
+          <TableCell>john@example.com</TableCell>
+          <TableCell>Admin</TableCell>
+          <TableCell>Active</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Jane Smith</TableCell>
+          <TableCell>jane@example.com</TableCell>
+          <TableCell>User</TableCell>
+          <TableCell>Active</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+## Sortable Table
+
+Add sorting functionality to table columns:
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Button } from '@liquidify/react';
+import { ChevronUp, ChevronDown } from 'lucide-react';
+
+function SortableTable() {
+  const [data, setData] = useState([
+    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Editor' }
+  ]);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+
+  const handleSort = (key: string) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+
+    const sortedData = [...data].sort((a, b) => {
+      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+    setData(sortedData);
+  };
+
+  const getSortIcon = (key: string) => {
+    if (sortConfig.key !== key) return null;
+    return sortConfig.direction === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />;
+  };
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>
+            <Button
+              variant="ghost"
+              onClick={() => handleSort('name')}
+              className="flex items-center gap-2"
+            >
+              Name {getSortIcon('name')}
+            </Button>
+          </TableHead>
+          <TableHead>
+            <Button
+              variant="ghost"
+              onClick={() => handleSort('email')}
+              className="flex items-center gap-2"
+            >
+              Email {getSortIcon('email')}
+            </Button>
+          </TableHead>
+          <TableHead>
+            <Button
+              variant="ghost"
+              onClick={() => handleSort('role')}
+              className="flex items-center gap-2"
+            >
+              Role {getSortIcon('role')}
+            </Button>
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.map((row) => (
+          <TableRow key={row.id}>
+            <TableCell>{row.name}</TableCell>
+            <TableCell>{row.email}</TableCell>
+            <TableCell>{row.role}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+## With Actions
+
+Add action buttons to table rows:
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Button, Badge } from '@liquidify/react';
+import { Edit, Trash, Eye } from 'lucide-react';
+
+function TableWithActions() {
+  const users = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'inactive' },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'pending' }
+  ];
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'active': return 'success';
+      case 'inactive': return 'danger';
+      case 'pending': return 'warning';
+      default: return 'secondary';
+    }
+  };
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Name</TableHead>
+          <TableHead>Email</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {users.map((user) => (
+          <TableRow key={user.id}>
+            <TableCell className="font-medium">{user.name}</TableCell>
+            <TableCell>{user.email}</TableCell>
+            <TableCell>
+              <Badge color={getStatusColor(user.status)} variant="soft">
+                {user.status}
+              </Badge>
+            </TableCell>
+            <TableCell>
+              <div className="flex items-center gap-2">
+                <Button size="sm" variant="ghost" isIconOnly>
+                  <Eye size={16} />
+                </Button>
+                <Button size="sm" variant="ghost" isIconOnly>
+                  <Edit size={16} />
+                </Button>
+                <Button size="sm" variant="ghost" isIconOnly color="danger">
+                  <Trash size={16} />
+                </Button>
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+## Selectable Rows
+
+Add row selection functionality:
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, Checkbox } from '@liquidify/react';
+
+function SelectableTable() {
+  const [data] = useState([
+    { id: 1, name: 'John Doe', email: 'john@example.com' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com' }
+  ]);
+  const [selectedRows, setSelectedRows] = useState<number[]>([]);
+
+  const isAllSelected = selectedRows.length === data.length;
+  const isIndeterminate = selectedRows.length > 0 && selectedRows.length < data.length;
+
+  const handleSelectAll = () => {
+    if (isAllSelected) {
+      setSelectedRows([]);
+    } else {
+      setSelectedRows(data.map(row => row.id));
+    }
+  };
+
+  const handleSelectRow = (id: number) => {
+    setSelectedRows(prev => 
+      prev.includes(id) 
+        ? prev.filter(rowId => rowId !== id)
+        : [...prev, id]
+    );
+  };
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-12">
+            <Checkbox
+              checked={isAllSelected}
+              indeterminate={isIndeterminate}
+              onChange={handleSelectAll}
+            />
+          </TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>Email</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.map((row) => (
+          <TableRow 
+            key={row.id}
+            className={selectedRows.includes(row.id) ? 'bg-blue-50' : ''}
+          >
+            <TableCell>
+              <Checkbox
+                checked={selectedRows.includes(row.id)}
+                onChange={() => handleSelectRow(row.id)}
+              />
+            </TableCell>
+            <TableCell>{row.name}</TableCell>
+            <TableCell>{row.email}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+## Responsive Table
+
+Tables that adapt to different screen sizes:
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@liquidify/react';
+
+function ResponsiveTable() {
+  const data = [
+    { 
+      id: 1, 
+      name: 'John Doe', 
+      email: 'john@example.com', 
+      role: 'Admin',
+      department: 'Engineering',
+      joinDate: '2023-01-15'
+    },
+    { 
+      id: 2, 
+      name: 'Jane Smith', 
+      email: 'jane@example.com', 
+      role: 'Designer',
+      department: 'Design',
+      joinDate: '2023-02-20'
+    }
+  ];
+
+  return (
+    <div className="overflow-x-auto">
+      <Table className="min-w-full">
+        <TableHeader>
+          <TableRow>
+            <TableHead>Name</TableHead>
+            <TableHead className="hidden sm:table-cell">Email</TableHead>
+            <TableHead>Role</TableHead>
+            <TableHead className="hidden md:table-cell">Department</TableHead>
+            <TableHead className="hidden lg:table-cell">Join Date</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell>
+                <div>
+                  <div className="font-medium">{row.name}</div>
+                  <div className="text-sm text-gray-500 sm:hidden">{row.email}</div>
+                </div>
+              </TableCell>
+              <TableCell className="hidden sm:table-cell">{row.email}</TableCell>
+              <TableCell>
+                <div>
+                  <div>{row.role}</div>
+                  <div className="text-sm text-gray-500 md:hidden">{row.department}</div>
+                </div>
+              </TableCell>
+              <TableCell className="hidden md:table-cell">{row.department}</TableCell>
+              <TableCell className="hidden lg:table-cell">{row.joinDate}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Table Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'striped' \| 'bordered'` | `'default'` | Table variant |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Table size |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Table content |
+
+### TableHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Header content |
+
+### TableBody Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Body content |
+
+### TableRow Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `onClick` | `() => void` | - | Row click handler |
+| `children` | `ReactNode` | - | Row content |
+
+### TableHead Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Header cell content |
+
+### TableCell Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Cell content |
+
+## Styling
+
+### CSS Variables
+
+```css
+.table {
+  --table-bg: transparent;
+  --table-border: #e5e7eb;
+  --table-header-bg: #f9fafb;
+  --table-header-text: #374151;
+  --table-row-hover: #f9fafb;
+  --table-cell-padding: 0.75rem;
+}
+```
+
+### Variants
+
+```css
+.table--striped tbody tr:nth-child(odd) {
+  background-color: #f9fafb;
+}
+
+.table--bordered {
+  border: 1px solid var(--table-border);
+}
+
+.table--bordered th,
+.table--bordered td {
+  border: 1px solid var(--table-border);
+}
+```
+
+## Accessibility
+
+The Table component includes accessibility features:
+
+- Proper table semantics
+- ARIA labels and descriptions
+- Keyboard navigation support
+- Screen reader compatibility
+
+```tsx
+<Table aria-label="User data table">
+  <TableHeader>
+    <TableRow>
+      <TableHead scope="col">Name</TableHead>
+      <TableHead scope="col">Email</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>John Doe</TableCell>
+      <TableCell>john@example.com</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+## Examples
+
+### Data Table with Pagination
+
+```tsx
+function DataTableWithPagination() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize] = useState(5);
+  const [data] = useState(generateMockData(50)); // Your data source
+
+  const totalPages = Math.ceil(data.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedData = data.slice(startIndex, startIndex + pageSize);
+
+  return (
+    <div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>ID</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Status</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {paginatedData.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.id}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.email}</TableCell>
+              <TableCell>
+                <Badge color={row.status === 'active' ? 'success' : 'danger'}>
+                  {row.status}
+                </Badge>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      
+      <div className="flex items-center justify-between mt-4">
+        <p className="text-sm text-gray-600">
+          Showing {startIndex + 1} to {Math.min(startIndex + pageSize, data.length)} of {data.length} results
+        </p>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
+    </div>
+  );
+}
+```

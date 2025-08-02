@@ -1,10 +1,8 @@
 import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from "lucide-react";
 import type React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
-
 import { createPortal } from "react-dom";
-
-import { cn, getGlassClass } from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 
 interface Toast {
   id: string;
@@ -70,8 +68,8 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({
     "top-left": "top-4 left-4",
     "bottom-right": "bottom-4 right-4",
     "bottom-left": "bottom-4 left-4",
-    "top-center": "top-4 left-1/2 transform -translate-x-1/2",
-    "bottom-center": "bottom-4 left-1/2 transform -translate-x-1/2",
+    "top-center": "top-4 left-1/2 -translate-x-1/2",
+    "bottom-center": "bottom-4 left-1/2 -translate-x-1/2",
   };
 
   return (
@@ -122,10 +120,10 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
   };
 
   const iconColors = {
-    success: "text-green-500",
-    error: "text-red-500",
-    warning: "text-yellow-500",
-    info: "text-blue-500",
+    success: "text-green-400",
+    error: "text-red-400",
+    warning: "text-yellow-400",
+    info: "text-blue-400",
   };
 
   const Icon = icons[toast.type || "info"];
@@ -133,50 +131,67 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
   return (
     <div
       className={cn(
-        getGlassClass("elevated"),
-        "rounded-xl border border-white/20 p-4 dark:border-white/10",
+        "glass relative radius-lg-m border border-glass-hl/30 p-4",
         "min-w-[300px] max-w-[400px]",
-        "transition-all duration-200 ease-out",
+        "transition-all duration-200 will-change-transform",
+        "motion-safe:animate-in motion-safe:slide-in-from-right-full motion-safe:duration-300",
         isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0",
       )}
     >
-      <div className="flex items-start space-x-3">
-        <Icon
-          className={cn(
-            "mt-0.5 h-5 w-5 flex-shrink-0",
-            iconColors[toast.type || "info"],
-          )}
-        />
+      {/* Glass effect layers */}
+      <div className="glass-filter" />
+      <div className="glass-overlay" />
+      <div className="glass-specular" />
 
-        <div className="min-w-0 flex-1">
-          {toast.title && (
-            <h4 className="mb-1 font-semibold text-gray-900 text-sm dark:text-white">
-              {toast.title}
-            </h4>
-          )}
+      {/* Toast content */}
+      <div className="glass-content">
+        <div className="flex items-start space-x-3">
+          <Icon
+            className={cn(
+              "mt-0.5 h-5 w-5 flex-shrink-0",
+              iconColors[toast.type || "info"],
+            )}
+          />
 
-          <p className="text-gray-600 text-sm dark:text-gray-300">
-            {toast.description}
-          </p>
+          <div className="min-w-0 flex-1">
+            {toast.title && (
+              <h4 className="mb-1 font-semibold text-glass-text text-sm">
+                {toast.title}
+              </h4>
+            )}
 
-          {toast.action && (
-            <button
-              type="button"
-              onClick={toast.action.onClick}
-              className="mt-2 font-medium text-blue-600 text-sm hover:underline dark:text-blue-400"
-            >
-              {toast.action.label}
-            </button>
-          )}
+            <p className="text-glass-text/80 text-sm">
+              {toast.description}
+            </p>
+
+            {toast.action && (
+              <button
+                type="button"
+                onClick={toast.action.onClick}
+                className={cn(
+                  "mt-2 font-medium text-glass-accent text-sm",
+                  "motion-safe:hover:underline transition-all duration-200",
+                  "glass-focus"
+                )}
+              >
+                {toast.action.label}
+              </button>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleRemove}
+            className={cn(
+              "glass-button flex-shrink-0 radius-lg-s p-1 text-glass-grey",
+              "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+              "motion-safe:active:scale-95 transition-all duration-200",
+              "glass-focus"
+            )}
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
-
-        <button
-          type="button"
-          onClick={handleRemove}
-          className="flex-shrink-0 rounded-lg p-1 transition-colors hover:bg-white/10 dark:hover:bg-white/5"
-        >
-          <X className="h-4 w-4 text-gray-400" />
-        </button>
       </div>
     </div>
   );
@@ -202,10 +217,10 @@ const _GlassToast: React.FC<GlassToastProps> = ({
   };
 
   const iconColors = {
-    success: "text-green-500",
-    error: "text-red-500",
-    warning: "text-yellow-500",
-    info: "text-blue-500",
+    success: "text-green-400",
+    error: "text-red-400",
+    warning: "text-yellow-400",
+    info: "text-blue-400",
   };
 
   const Icon = icons[type];
@@ -213,30 +228,42 @@ const _GlassToast: React.FC<GlassToastProps> = ({
   return (
     <div
       className={cn(
-        getGlassClass("elevated"),
-        "rounded-xl border border-white/20 p-4 dark:border-white/10",
+        "glass relative radius-lg-m border border-glass-hl/30 p-4",
         "min-w-[300px] max-w-[400px]",
-        "transition-all duration-200 ease-out",
+        "transition-all duration-200 will-change-transform",
       )}
     >
-      <div className="flex items-start space-x-3">
-        <Icon
-          className={cn("mt-0.5 h-5 w-5 flex-shrink-0", iconColors[type])}
-        />
+      {/* Glass effect layers */}
+      <div className="glass-filter" />
+      <div className="glass-overlay" />
+      <div className="glass-specular" />
 
-        <div className="min-w-0 flex-1">
-          <p className="text-gray-600 text-sm dark:text-gray-300">{message}</p>
+      {/* Toast content */}
+      <div className="glass-content">
+        <div className="flex items-start space-x-3">
+          <Icon
+            className={cn("mt-0.5 h-5 w-5 flex-shrink-0", iconColors[type])}
+          />
+
+          <div className="min-w-0 flex-1">
+            <p className="text-glass-text/80 text-sm">{message}</p>
+          </div>
+
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className={cn(
+                "glass-button flex-shrink-0 radius-lg-s p-1 text-glass-grey",
+                "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+                "motion-safe:active:scale-95 transition-all duration-200",
+                "glass-focus"
+              )}
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
         </div>
-
-        {onClose && (
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex-shrink-0 rounded-lg p-1 transition-colors hover:bg-white/10 dark:hover:bg-white/5"
-          >
-            <X className="h-4 w-4 text-gray-400" />
-          </button>
-        )}
       </div>
     </div>
   );

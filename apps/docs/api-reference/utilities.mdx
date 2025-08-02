@@ -492,9 +492,9 @@ const result2 = expensiveCalculation(2, 10);
 Extract component props without ref.
 
 <Card title="Import">
-  ```tsx import type {ComponentPropsWithoutRef} from
-  "@liquidify/components/utils"; ```
-</Card>
+```tsx
+import type { ComponentPropsWithoutRef } from "@liquidify/components/utils";
+```
 
 #### Usage
 
@@ -507,6 +507,7 @@ const Button: React.FC<ButtonProps> = ({ variant, ...props }) => {
   return <button {...props} />;
 };
 ```
+</Card>
 
 ### PolymorphicComponentProps
 

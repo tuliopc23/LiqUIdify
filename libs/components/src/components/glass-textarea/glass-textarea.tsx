@@ -6,61 +6,18 @@ import {
   useRef,
   useState,
 } from "react";
-import {
-  cn,
-  focusRing,
-  getGlassClass,
-  microInteraction,
-} from "@/core/utils/classname";
-import {
-  createVariants as cva,
-  type InferVariantProps as VariantProps,
-} from "../../lib/variant-system";
+import { cn } from "../../core/utils/classname";
 
-const textareaVariants = cva({
-  base: "relative w-full",
-  variants: {
-    size: {
-      sm: "text-sm",
-      md: "text-base",
-      lg: "text-lg",
-    },
-  },
-  defaultVariants: {
-    size: "md",
-  },
-});
-
-const textareaInputVariants = cva({
-  base: cn(
-    "w-full rounded-xl border px-4 py-3 transition-all duration-200 resize-none",
-    "text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
-    getGlassClass("default"),
-    focusRing,
-    "disabled:cursor-not-allowed disabled:opacity-50",
-    microInteraction.gentle,
-  ),
-  variants: {
-    size: {
-      sm: "px-3 py-2 text-sm",
-      md: "px-4 py-3 text-base",
-      lg: "px-5 py-4 text-lg",
-    },
-    error: {
-      true: "border-red-400/50 focus:border-red-500",
-      false:
-        "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
-    },
-  },
-  defaultVariants: {
-    size: "md",
-    error: "false",
-  },
-});
+// Size variants using Tailwind classes
+const SIZE_CLASSES = {
+  sm: "px-3 py-2 text-sm",
+  md: "px-4 py-3 text-base", 
+  lg: "px-5 py-4 text-lg",
+};
 
 interface GlassTextareaProps
-  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange">,
-    VariantProps<typeof textareaVariants> {
+  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange"> {
+  size?: "sm" | "md" | "lg";
   value?: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
@@ -80,7 +37,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
   (
     {
       className,
-      size,
+      size = "md",
       value,
       defaultValue,
       onChange,
@@ -236,15 +193,28 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
       [ref],
     );
 
+    // Base classes using Tailwind + glass utilities
+    const textareaClasses = cn(
+      "glass-input w-full radius-lg-s resize-none",
+      "text-glass-text placeholder:text-glass-grey/70",
+      "transition-all duration-200 will-change-transform",
+      "glass-focus",
+      "disabled:cursor-not-allowed disabled:opacity-50",
+      SIZE_CLASSES[size],
+      error
+        ? "border-red-400/50 focus:border-red-500 focus:ring-red-500/20"
+        : "border-glass-hl/30 focus:border-glass-accent focus:ring-glass-accent/20",
+    );
+
     return (
-      <div className={cn(textareaVariants({ size }), className)}>
+      <div className={cn("relative w-full", size === "sm" && "text-sm", size === "lg" && "text-lg", className)}>
         {/* Label */}
         {label && (
           <label
             id={labelId}
             htmlFor={props.id}
             className={cn(
-              "mb-2 block font-medium text-white",
+              "mb-2 block font-medium text-glass-text",
               size === "sm" && "text-sm",
               size === "lg" && "text-lg",
             )}
@@ -259,7 +229,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
           <p
             id={descriptionId}
             className={cn(
-              "mb-2 text-white/70",
+              "mb-2 text-glass-grey/80",
               size === "sm" && "text-xs",
               size === "md" && "text-sm",
               size === "lg" && "text-base",
@@ -271,6 +241,11 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
 
         {/* Textarea Container */}
         <div className="relative">
+          {/* Glass effect layers */}
+          <div className="glass-filter pointer-events-none" />
+          <div className="glass-overlay pointer-events-none" />
+          <div className="glass-specular pointer-events-none" />
+          
           <textarea
             {...props}
             ref={setRefs}
@@ -278,9 +253,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             disabled={disabled}
-            className={cn(
-              textareaInputVariants({ size, error: error ? "true" : "false" }),
-            )}
+            className={cn(textareaClasses, "relative z-10")}
             style={{
               height: autoResize ? textareaHeight : undefined,
               minHeight: autoResize ? undefined : `${minRows * 1.5}em`,
@@ -297,11 +270,11 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
           {showCharacterCount && (
             <div
               className={cn(
-                "absolute bottom-2 text-xs",
+                "absolute bottom-2 text-xs z-20",
                 characterCountPosition === "bottom-right"
                   ? "right-3"
                   : "left-3",
-                isOverLimit ? "text-red-400" : "text-white/60",
+                isOverLimit ? "text-red-400" : "text-glass-grey/70",
               )}
             >
               {maxLength ? `${characterCount}/${maxLength}` : characterCount}
@@ -315,7 +288,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
             id={helperTextId}
             className={cn(
               "mt-1.5 text-xs",
-              error ? "text-red-400" : "text-white/60",
+              error ? "text-red-400" : "text-glass-grey/80",
             )}
           >
             {helperText}

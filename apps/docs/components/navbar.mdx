@@ -1,0 +1,500 @@
+---
+title: "Navbar"
+description: "A responsive navigation bar component for creating application headers and navigation menus."
+icon: "navigation"
+---
+
+# Navbar
+
+The Navbar component provides a flexible and responsive navigation bar for your application. It supports various layouts, branding, navigation items, and actions.
+
+## Basic Usage
+
+```tsx
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@liquidify/react';
+
+function BasicNavbar() {
+  return (
+    <Navbar>
+      <NavbarBrand>
+        <img src="/logo.svg" alt="Logo" className="h-8" />
+        <span className="font-bold">LiqUIdify</span>
+      </NavbarBrand>
+      
+      <NavbarContent>
+        <NavbarItem>
+          <a href="/home">Home</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/about">About</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/contact">Contact</a>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+}
+```
+
+## With Actions
+
+Add action buttons to the navbar:
+
+```tsx
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button } from '@liquidify/react';
+
+function NavbarWithActions() {
+  return (
+    <Navbar>
+      <NavbarBrand>
+        <span className="font-bold">LiqUIdify</span>
+      </NavbarBrand>
+      
+      <NavbarContent>
+        <NavbarItem>
+          <a href="/features">Features</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/pricing">Pricing</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/docs">Docs</a>
+        </NavbarItem>
+      </NavbarContent>
+      
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Button variant="ghost">Sign In</Button>
+        </NavbarItem>
+        <NavbarItem>
+          <Button>Sign Up</Button>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+}
+```
+
+## Mobile Responsive
+
+The navbar automatically adapts to mobile screens:
+
+```tsx
+import { 
+  Navbar, 
+  NavbarBrand, 
+  NavbarContent, 
+  NavbarItem, 
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem 
+} from '@liquidify/react';
+
+function ResponsiveNavbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <Navbar onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        <NavbarBrand>
+          <span className="font-bold">LiqUIdify</span>
+        </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarItem>
+          <a href="/home">Home</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/about">About</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/services">Services</a>
+        </NavbarItem>
+      </NavbarContent>
+
+      <NavbarContent justify="end">
+        <NavbarItem className="hidden lg:flex">
+          <a href="/login">Login</a>
+        </NavbarItem>
+        <NavbarItem>
+          <Button>Sign Up</Button>
+        </NavbarItem>
+      </NavbarContent>
+
+      <NavbarMenu>
+        <NavbarMenuItem>
+          <a href="/home">Home</a>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <a href="/about">About</a>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <a href="/services">Services</a>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <a href="/contact">Contact</a>
+        </NavbarMenuItem>
+      </NavbarMenu>
+    </Navbar>
+  );
+}
+```
+
+## With Dropdown
+
+Add dropdown menus to navbar items:
+
+```tsx
+import { 
+  Navbar, 
+  NavbarBrand, 
+  NavbarContent, 
+  NavbarItem,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem
+} from '@liquidify/react';
+
+function NavbarWithDropdown() {
+  return (
+    <Navbar>
+      <NavbarBrand>
+        <span className="font-bold">LiqUIdify</span>
+      </NavbarBrand>
+      
+      <NavbarContent>
+        <NavbarItem>
+          <a href="/home">Home</a>
+        </NavbarItem>
+        
+        <Dropdown>
+          <NavbarItem>
+            <DropdownTrigger>
+              <button>Products</button>
+            </DropdownTrigger>
+          </NavbarItem>
+          <DropdownMenu>
+            <DropdownItem>Web Components</DropdownItem>
+            <DropdownItem>Mobile SDK</DropdownItem>
+            <DropdownItem>API</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        
+        <NavbarItem>
+          <a href="/pricing">Pricing</a>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+}
+```
+
+## Sticky Navbar
+
+Make the navbar stick to the top of the page:
+
+```tsx
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@liquidify/react';
+
+function StickyNavbar() {
+  return (
+    <Navbar 
+      position="sticky"
+      className="backdrop-blur-md bg-white/70"
+    >
+      <NavbarBrand>
+        <span className="font-bold">LiqUIdify</span>
+      </NavbarBrand>
+      
+      <NavbarContent>
+        <NavbarItem>
+          <a href="/home">Home</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/about">About</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/contact">Contact</a>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+}
+```
+
+## With Search
+
+Add a search functionality to the navbar:
+
+```tsx
+import { 
+  Navbar, 
+  NavbarBrand, 
+  NavbarContent, 
+  NavbarItem,
+  Input
+} from '@liquidify/react';
+import { Search } from 'lucide-react';
+
+function NavbarWithSearch() {
+  return (
+    <Navbar>
+      <NavbarBrand>
+        <span className="font-bold">LiqUIdify</span>
+      </NavbarBrand>
+      
+      <NavbarContent justify="center">
+        <NavbarItem className="w-full max-w-xs">
+          <Input
+            placeholder="Search..."
+            startContent={<Search size={16} />}
+            variant="bordered"
+          />
+        </NavbarItem>
+      </NavbarContent>
+      
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Button>Sign In</Button>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+}
+```
+
+## Dark Mode Support
+
+The navbar adapts to dark mode automatically:
+
+```tsx
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, useTheme } from '@liquidify/react';
+
+function DarkModeNavbar() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Navbar className="dark:bg-gray-900/80">
+      <NavbarBrand>
+        <span className="font-bold">LiqUIdify</span>
+      </NavbarBrand>
+      
+      <NavbarContent>
+        <NavbarItem>
+          <a href="/home">Home</a>
+        </NavbarItem>
+        <NavbarItem>
+          <a href="/about">About</a>
+        </NavbarItem>
+      </NavbarContent>
+      
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Button
+            variant="ghost"
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+}
+```
+
+## API Reference
+
+### Navbar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `position` | `'static' \| 'sticky' \| 'fixed'` | `'static'` | Navbar positioning |
+| `maxWidth` | `'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full'` | `'lg'` | Maximum width |
+| `height` | `string \| number` | `'4rem'` | Navbar height |
+| `isBlurred` | `boolean` | `false` | Enable backdrop blur |
+| `isBordered` | `boolean` | `false` | Show bottom border |
+| `disableAnimation` | `boolean` | `false` | Disable animations |
+| `onMenuOpenChange` | `(isOpen: boolean) => void` | - | Menu open state handler |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Navbar content |
+
+### NavbarBrand Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `as` | `ElementType` | `'div'` | Element type |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Brand content |
+
+### NavbarContent Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `justify` | `'start' \| 'center' \| 'end'` | `'start'` | Content justification |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Content items |
+
+### NavbarItem Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isActive` | `boolean` | `false` | Active state |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Item content |
+
+### NavbarMenu Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Menu items |
+
+## Styling
+
+### CSS Variables
+
+```css
+.navbar {
+  --navbar-height: 4rem;
+  --navbar-padding: 1rem;
+  --navbar-bg: rgba(255, 255, 255, 0.8);
+  --navbar-border: rgba(0, 0, 0, 0.1);
+  --navbar-blur: 12px;
+}
+```
+
+### Custom Styles
+
+```css
+.custom-navbar {
+  --navbar-height: 5rem;
+  --navbar-bg: rgba(255, 255, 255, 0.95);
+  --navbar-blur: 20px;
+}
+
+.custom-navbar .navbar-item {
+  transition: color 0.2s ease;
+}
+
+.custom-navbar .navbar-item:hover {
+  color: var(--liquid-primary);
+}
+```
+
+## Accessibility
+
+The Navbar component includes accessibility features:
+
+- Proper ARIA labels and roles
+- Keyboard navigation support
+- Focus management
+- Screen reader compatibility
+
+```tsx
+<Navbar aria-label="Main navigation">
+  <NavbarMenuToggle
+    aria-label="Toggle navigation menu"
+    aria-expanded={isMenuOpen}
+  />
+</Navbar>
+```
+
+## Examples
+
+### E-commerce Navbar
+
+```tsx
+function EcommerceNavbar() {
+  const { cart } = useCart();
+  const { user } = useAuth();
+
+  return (
+    <Navbar position="sticky" isBlurred>
+      <NavbarBrand>
+        <img src="/logo.svg" alt="Store" className="h-8" />
+      </NavbarBrand>
+      
+      <NavbarContent justify="center">
+        <NavbarItem>
+          <Input
+            placeholder="Search products..."
+            startContent={<Search size={16} />}
+            className="w-80"
+          />
+        </NavbarItem>
+      </NavbarContent>
+      
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Button variant="ghost" isIconOnly>
+            <Heart size={20} />
+          </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <Button variant="ghost" isIconOnly>
+            <ShoppingCart size={20} />
+            {cart.items.length > 0 && (
+              <Badge content={cart.items.length} color="danger" />
+            )}
+          </Button>
+        </NavbarItem>
+        <NavbarItem>
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <Button>Sign In</Button>
+          )}
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+}
+```
+
+### Dashboard Navbar
+
+```tsx
+function DashboardNavbar() {
+  const { user } = useAuth();
+  const { notifications } = useNotifications();
+
+  return (
+    <Navbar className="border-b">
+      <NavbarBrand>
+        <span className="font-bold">Dashboard</span>
+      </NavbarBrand>
+      
+      <NavbarContent justify="end">
+        <NavbarItem>
+          <Button variant="ghost" isIconOnly>
+            <Bell size={20} />
+            {notifications.unread > 0 && (
+              <Badge content={notifications.unread} color="danger" />
+            )}
+          </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <Dropdown>
+            <DropdownTrigger>
+              <Avatar src={user.avatar} name={user.name} />
+            </DropdownTrigger>
+            <DropdownMenu>
+              <DropdownItem>Profile</DropdownItem>
+              <DropdownItem>Settings</DropdownItem>
+              <DropdownItem color="danger">Logout</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
+  );
+}
+```

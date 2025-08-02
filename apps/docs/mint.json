@@ -7,12 +7,16 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#3b82f6",
-    "light": "#60a5fa",
-    "dark": "#1e40af",
+    "primary": "#007AFF",
+    "light": "#5AC8FA",
+    "dark": "#0051D5",
     "anchors": {
-      "from": "#3b82f6",
-      "to": "#1e40af"
+      "from": "#007AFF",
+      "to": "#5AC8FA"
+    },
+    "background": {
+      "light": "#F2F2F7",
+      "dark": "#000000"
     }
   },
   "topbarLinks": [
@@ -22,8 +26,9 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Get Started",
+    "url": "/quickstart",
+    "style": "pill"
   },
   "tabs": [
     {
@@ -55,7 +60,22 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "installation", "theming"]
+      "pages": [
+        "introduction",
+        "quickstart",
+        "installation",
+        "theming",
+        "migration"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "concepts/design-system",
+        "concepts/accessibility",
+        "concepts/theming",
+        "concepts/performance"
+      ]
     },
     {
       "group": "Core Components",
@@ -63,7 +83,9 @@
         "components/button",
         "components/card",
         "components/input",
-        "components/modal"
+        "components/modal",
+        "components/glass-button",
+        "components/glass-card"
       ]
     },
     {
@@ -72,7 +94,9 @@
         "components/accordion",
         "components/banner",
         "components/breadcrumbs",
-        "components/tabs"
+        "components/tabs",
+        "components/glass-container",
+        "components/glass-grid"
       ]
     },
     {
@@ -82,7 +106,9 @@
         "components/radio-group",
         "components/select",
         "components/textarea",
-        "components/file-upload"
+        "components/file-upload",
+        "components/glass-input",
+        "components/glass-select"
       ]
     },
     {
@@ -92,7 +118,9 @@
         "components/toast",
         "components/notification",
         "components/progress",
-        "components/loading"
+        "components/loading",
+        "components/glass-spinner",
+        "components/glass-progress"
       ]
     },
     {
@@ -101,7 +129,9 @@
         "components/navbar",
         "components/sidebar",
         "components/pagination",
-        "components/dropdown"
+        "components/dropdown",
+        "components/glass-navigation",
+        "components/glass-menu"
       ]
     },
     {
@@ -111,7 +141,9 @@
         "components/badge",
         "components/table",
         "components/chart",
-        "components/skeleton"
+        "components/skeleton",
+        "components/glass-data-display",
+        "components/glass-chart"
       ]
     },
     {
@@ -121,7 +153,9 @@
         "components/combobox",
         "components/date-picker",
         "components/popover",
-        "components/tooltip"
+        "components/tooltip",
+        "components/glass-command",
+        "components/glass-combobox"
       ]
     },
     {
@@ -131,7 +165,8 @@
         "components/focus-trap",
         "components/visually-hidden",
         "components/skip-navigation",
-        "components/live-region"
+        "components/live-region",
+        "components/glass-focus-trap"
       ]
     },
     {
@@ -149,11 +184,12 @@
     "github": "https://github.com/liquidify/liquidify",
     "linkedin": "https://www.linkedin.com/company/liquidify"
   },
-  "backgroundImage": "/images/background.png",
-  "theme": "quill",
+  "backgroundImage": "/images/apple-glass-bg.png",
+  "theme": "venus",
   "layout": "topnav",
   "search": {
-    "prompt": "Search LiqUIdify docs..."
+    "prompt": "Search LiqUIdify docs...",
+    "style": "apple"
   },
   "feedback": {
     "thumbsRating": true,
@@ -185,5 +221,11 @@
   "modeToggle": {
     "default": "light",
     "isHidden": false
-  }
+  },
+  "typography": {
+    "headings": "SF Pro Display",
+    "body": "SF Pro Text",
+    "code": "SF Mono"
+  },
+  "customCSS": "/styles/apple-hig.css"
 }

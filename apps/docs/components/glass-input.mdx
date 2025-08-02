@@ -1,0 +1,740 @@
+---
+title: "Glass Input"
+description: "Beautiful glassmorphism input component with validation, icons, and accessibility features"
+---
+
+# Glass Input
+
+The `GlassInput` component brings elegant glassmorphism styling to form inputs while maintaining full accessibility and functionality.
+
+## Import
+
+<CodeGroup>
+
+```tsx Component Import
+import { GlassInput } from '@liquidify/components'
+```
+
+```tsx Bundle Import  
+import { GlassInput } from '@liquidify/components/forms'
+```
+
+</CodeGroup>
+
+## Basic Usage
+
+<CodeGroup>
+
+```tsx Simple Input
+<GlassInput 
+  placeholder="Enter your email"
+  type="email"
+/>
+```
+
+```tsx With Label
+<GlassFormField label="Email Address">
+  <GlassInput 
+    type="email"
+    placeholder="john@example.com"
+  />
+</GlassFormField>
+```
+
+</CodeGroup>
+
+## Interactive Preview
+
+<ComponentPreview>
+  <div className="space-y-4 max-w-md">
+    <GlassInput placeholder="Default input" />
+    <GlassInput placeholder="With icon" leftIcon={<Mail className="h-4 w-4" />} />
+    <GlassInput placeholder="Clearable input" clearable />
+    <GlassInput placeholder="Disabled input" disabled />
+  </div>
+</ComponentPreview>
+
+## Variants
+
+### Default Input
+
+<ComponentPreview>
+  <GlassInput 
+    placeholder="Standard glass input"
+    className="max-w-sm"
+  />
+</ComponentPreview>
+
+```tsx
+<GlassInput placeholder="Standard glass input" />
+```
+
+### Search Input
+
+<ComponentPreview>
+  <GlassInput 
+    variant="search"
+    placeholder="Search..."
+    leftIcon={<Search className="h-4 w-4" />}
+    className="max-w-sm"
+  />
+</ComponentPreview>
+
+```tsx
+<GlassInput 
+  variant="search"
+  placeholder="Search..."
+  leftIcon={<Search className="h-4 w-4" />}
+/>
+```
+
+### Password Input
+
+<ComponentPreview>
+  <GlassInput 
+    variant="password"
+    type="password"
+    placeholder="Enter password"
+    className="max-w-sm"
+  />
+</ComponentPreview>
+
+```tsx
+<GlassInput 
+  variant="password"
+  type="password"
+  placeholder="Enter password"
+/>
+```
+
+## With Icons
+
+### Left Icon
+
+<ComponentPreview>
+  <div className="space-y-4 max-w-sm">
+    <GlassInput 
+      placeholder="Email address"
+      leftIcon={<Mail className="h-4 w-4" />}
+    />
+    <GlassInput 
+      placeholder="Search users"
+      leftIcon={<User className="h-4 w-4" />}
+    />
+    <GlassInput 
+      placeholder="Phone number"
+      leftIcon={<Phone className="h-4 w-4" />}
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassInput 
+  placeholder="Email address"
+  leftIcon={<Mail className="h-4 w-4" />}
+/>
+```
+
+### Right Icon
+
+<ComponentPreview>
+  <div className="space-y-4 max-w-sm">
+    <GlassInput 
+      placeholder="Search..."
+      rightIcon={<Search className="h-4 w-4" />}
+    />
+    <GlassInput 
+      placeholder="External link"
+      rightIcon={<ExternalLink className="h-4 w-4" />}
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassInput 
+  placeholder="Search..."
+  rightIcon={<Search className="h-4 w-4" />}
+/>
+```
+
+### Clearable Input
+
+<ComponentPreview>
+  <GlassInput 
+    placeholder="Type something to see clear button"
+    clearable
+    className="max-w-sm"
+  />
+</ComponentPreview>
+
+```tsx
+<GlassInput 
+  placeholder="Clearable input"
+  clearable
+/>
+```
+
+## States
+
+### Validation States
+
+<ComponentPreview>
+  <div className="space-y-4 max-w-sm">
+    <GlassFormField label="Valid Input" success="Email is valid">
+      <GlassInput 
+        type="email"
+        value="john@example.com"
+        readOnly
+        leftIcon={<Mail className="h-4 w-4" />}
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Error Input" error="Please enter a valid email">
+      <GlassInput 
+        type="email"
+        value="invalid-email"
+        error
+        leftIcon={<Mail className="h-4 w-4" />}
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Warning Input" warning="This email is already registered">
+      <GlassInput 
+        type="email"
+        value="existing@example.com"
+        warning
+        leftIcon={<Mail className="h-4 w-4" />}
+      />
+    </GlassFormField>
+  </div>
+</ComponentPreview>
+
+```tsx
+// Success state
+<GlassFormField success="Email is valid">
+  <GlassInput type="email" value="john@example.com" />
+</GlassFormField>
+
+// Error state
+<GlassFormField error="Please enter a valid email">
+  <GlassInput type="email" error />
+</GlassFormField>
+
+// Warning state
+<GlassFormField warning="Email already registered">
+  <GlassInput type="email" warning />
+</GlassFormField>
+```
+
+### Disabled State
+
+<ComponentPreview>
+  <div className="space-y-4 max-w-sm">
+    <GlassInput 
+      placeholder="Disabled input"
+      disabled
+    />
+    <GlassInput 
+      placeholder="Disabled with value"
+      value="Cannot edit this"
+      disabled
+      leftIcon={<Lock className="h-4 w-4" />}
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassInput disabled placeholder="Cannot type here" />
+```
+
+### Loading State
+
+<ComponentPreview>
+  <GlassInput 
+    placeholder="Loading..."
+    loading
+    className="max-w-sm"
+  />
+</ComponentPreview>
+
+```tsx
+<GlassInput loading placeholder="Validating..." />
+```
+
+## Sizes
+
+<ComponentPreview>
+  <div className="space-y-4 max-w-md">
+    <GlassInput size="sm" placeholder="Small input" />
+    <GlassInput size="md" placeholder="Medium input (default)" />
+    <GlassInput size="lg" placeholder="Large input" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassInput size="sm" placeholder="Small" />
+<GlassInput size="md" placeholder="Medium" />
+<GlassInput size="lg" placeholder="Large" />
+```
+
+## Input Types
+
+### Text Input Types
+
+<ComponentPreview>
+  <div className="grid gap-4 md:grid-cols-2 max-w-2xl">
+    <GlassFormField label="Email">
+      <GlassInput 
+        type="email"
+        placeholder="john@example.com"
+        leftIcon={<Mail className="h-4 w-4" />}
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Password">
+      <GlassInput 
+        type="password"
+        placeholder="••••••••"
+        leftIcon={<Lock className="h-4 w-4" />}
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Phone">
+      <GlassInput 
+        type="tel"
+        placeholder="+1 (555) 123-4567"
+        leftIcon={<Phone className="h-4 w-4" />}
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Website">
+      <GlassInput 
+        type="url"
+        placeholder="https://example.com"
+        leftIcon={<Globe className="h-4 w-4" />}
+      />
+    </GlassFormField>
+  </div>
+</ComponentPreview>
+
+### Number Input
+
+<ComponentPreview>
+  <div className="space-y-4 max-w-sm">
+    <GlassFormField label="Age">
+      <GlassInput 
+        type="number"
+        placeholder="25"
+        min="0"
+        max="120"
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Price">
+      <GlassInput 
+        type="number"
+        placeholder="0.00"
+        step="0.01"
+        leftIcon={<DollarSign className="h-4 w-4" />}
+      />
+    </GlassFormField>
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassInput 
+  type="number"
+  min="0"
+  max="100"
+  step="0.01"
+/>
+```
+
+### Date Input
+
+<ComponentPreview>
+  <div className="space-y-4 max-w-sm">
+    <GlassFormField label="Date of Birth">
+      <GlassInput 
+        type="date"
+        leftIcon={<Calendar className="h-4 w-4" />}
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Time">
+      <GlassInput 
+        type="time"
+        leftIcon={<Clock className="h-4 w-4" />}
+      />
+    </GlassFormField>
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassInput 
+  type="date"
+  leftIcon={<Calendar className="h-4 w-4" />}
+/>
+```
+
+## Advanced Features
+
+### Auto-resize Textarea
+
+<ComponentPreview>
+  <div className="max-w-md">
+    <GlassFormField label="Comments">
+      <GlassTextarea 
+        placeholder="Enter your comments here..."
+        autoResize
+        rows={3}
+      />
+    </GlassFormField>
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassTextarea 
+  autoResize
+  placeholder="Auto-resizing textarea"
+/>
+```
+
+### Input with Counter
+
+<ComponentPreview>
+  <div className="max-w-md">
+    <GlassFormField label="Bio" helperText="Tell us about yourself">
+      <GlassTextarea 
+        placeholder="Write your bio..."
+        maxLength={120}
+        showCounter
+        rows={3}
+      />
+    </GlassFormField>
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassTextarea 
+  maxLength={120}
+  showCounter
+  placeholder="Bio..."
+/>
+```
+
+### Search with Suggestions
+
+<ComponentPreview>
+  <div className="max-w-md">
+    <GlassFormField label="Search Users">
+      <GlassInput 
+        variant="search"
+        placeholder="Type to search..."
+        leftIcon={<Search className="h-4 w-4" />}
+        clearable
+      />
+    </GlassFormField>
+  </div>
+</ComponentPreview>
+
+```tsx
+<GlassInput 
+  variant="search"
+  placeholder="Search with suggestions..."
+  onSearch={handleSearch}
+/>
+```
+
+## Real-World Examples
+
+### Login Form
+
+<ComponentPreview>
+  <div className="max-w-sm space-y-4">
+    <GlassFormField label="Email Address">
+      <GlassInput 
+        type="email"
+        placeholder="Enter your email"
+        leftIcon={<Mail className="h-4 w-4" />}
+        required
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Password">
+      <GlassInput 
+        type="password"
+        placeholder="Enter your password"
+        leftIcon={<Lock className="h-4 w-4" />}
+        required
+      />
+    </GlassFormField>
+    
+    <GlassButton variant="primary" fullWidth>
+      Sign In
+    </GlassButton>
+  </div>
+</ComponentPreview>
+
+### Contact Form
+
+<ComponentPreview>
+  <div className="max-w-md space-y-4">
+    <div className="grid gap-4 md:grid-cols-2">
+      <GlassFormField label="First Name">
+        <GlassInput 
+          placeholder="John"
+          leftIcon={<User className="h-4 w-4" />}
+        />
+      </GlassFormField>
+      
+      <GlassFormField label="Last Name">
+        <GlassInput 
+          placeholder="Doe"
+          leftIcon={<User className="h-4 w-4" />}
+        />
+      </GlassFormField>
+    </div>
+    
+    <GlassFormField label="Email">
+      <GlassInput 
+        type="email"
+        placeholder="john@example.com"
+        leftIcon={<Mail className="h-4 w-4" />}
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Phone">
+      <GlassInput 
+        type="tel"
+        placeholder="+1 (555) 123-4567"
+        leftIcon={<Phone className="h-4 w-4" />}
+      />
+    </GlassFormField>
+    
+    <GlassFormField label="Message">
+      <GlassTextarea 
+        placeholder="How can we help you?"
+        rows={4}
+      />
+    </GlassFormField>
+    
+    <GlassButton variant="primary" fullWidth>
+      Send Message
+    </GlassButton>
+  </div>
+</ComponentPreview>
+
+### Search Interface
+
+<ComponentPreview>
+  <div className="space-y-4">
+    <GlassInput 
+      variant="search"
+      placeholder="Search products, categories, or brands..."
+      leftIcon={<Search className="h-4 w-4" />}
+      clearable
+      size="lg"
+      className="max-w-2xl"
+    />
+    
+    <div className="flex flex-wrap gap-2 max-w-2xl">
+      <GlassBadge variant="secondary" className="cursor-pointer">
+        Electronics
+      </GlassBadge>
+      <GlassBadge variant="secondary" className="cursor-pointer">
+        Clothing
+      </GlassBadge>
+      <GlassBadge variant="secondary" className="cursor-pointer">
+        Home & Garden
+      </GlassBadge>
+      <GlassBadge variant="secondary" className="cursor-pointer">
+        Books
+      </GlassBadge>
+    </div>
+  </div>
+</ComponentPreview>
+
+## Props
+
+<ResponseField name="variant" type="string" default="default">
+  The visual style of the input
+  - `"default"` - Standard input styling
+  - `"search"` - Optimized for search interfaces
+  - `"password"` - Enhanced password input
+  - `"email"` - Email-specific styling
+</ResponseField>
+
+<ResponseField name="size" type="string" default="md">
+  The size of the input
+  - `"sm"` - Small (32px height)
+  - `"md"` - Medium (40px height)
+  - `"lg"` - Large (48px height)
+</ResponseField>
+
+<ResponseField name="leftIcon" type="ReactNode">
+  Icon to display on the left side
+</ResponseField>
+
+<ResponseField name="rightIcon" type="ReactNode">
+  Icon to display on the right side
+</ResponseField>
+
+<ResponseField name="clearable" type="boolean" default="false">
+  Shows a clear button when input has value
+</ResponseField>
+
+<ResponseField name="loading" type="boolean" default="false">
+  Shows loading spinner in the input
+</ResponseField>
+
+<ResponseField name="error" type="boolean" default="false">
+  Applies error styling to the input
+</ResponseField>
+
+<ResponseField name="warning" type="boolean" default="false">
+  Applies warning styling to the input
+</ResponseField>
+
+<ResponseField name="success" type="boolean" default="false">
+  Applies success styling to the input
+</ResponseField>
+
+<ResponseField name="fullWidth" type="boolean" default="false">
+  Makes input take full width of container
+</ResponseField>
+
+<ResponseField name="autoComplete" type="string">
+  HTML autocomplete attribute value
+</ResponseField>
+
+<ResponseField name="maxLength" type="number">
+  Maximum number of characters allowed
+</ResponseField>
+
+<ResponseField name="pattern" type="string">
+  Regular expression pattern for validation
+</ResponseField>
+
+<ResponseField name="inputMode" type="string">
+  Virtual keyboard type for mobile devices
+</ResponseField>
+
+<ResponseField name="glassEffect" type="object">
+  Custom glass effect configuration
+  ```tsx
+  {
+    intensity?: 'light' | 'medium' | 'strong' | 'ultra'
+    blur?: boolean
+    backdrop?: boolean
+  }
+  ```
+</ResponseField>
+
+## Events
+
+<ResponseField name="onChange" type="(event: ChangeEvent) => void">
+  Called when input value changes
+</ResponseField>
+
+<ResponseField name="onFocus" type="(event: FocusEvent) => void">
+  Called when input receives focus
+</ResponseField>
+
+<ResponseField name="onBlur" type="(event: FocusEvent) => void">
+  Called when input loses focus
+</ResponseField>
+
+<ResponseField name="onClear" type="() => void">
+  Called when clear button is clicked (requires `clearable`)
+</ResponseField>
+
+<ResponseField name="onSearch" type="(value: string) => void">
+  Called when search is performed (search variant)
+</ResponseField>
+
+<ResponseField name="onKeyDown" type="(event: KeyboardEvent) => void">
+  Called when key is pressed
+</ResponseField>
+
+## Accessibility
+
+LiqUIdify inputs follow accessibility best practices:
+
+- **Label Association**: Proper labeling through `htmlFor` or `aria-labelledby`
+- **Error Announcements**: Screen readers announce validation states
+- **Keyboard Navigation**: Full keyboard support with proper tab order
+- **ARIA Attributes**: Comprehensive ARIA support for all states
+- **Focus Management**: Clear focus indicators and focus trapping
+- **Input Description**: Support for `aria-describedby`
+
+### Accessibility Example
+
+```tsx
+<GlassFormField
+  label="Email Address"
+  helperText="We'll never share your email"
+  error={emailError}
+  required
+>
+  <GlassInput
+    type="email"
+    value={email}
+    onChange={handleEmailChange}
+    leftIcon={<Mail className="h-4 w-4" />}
+    error={!!emailError}
+    aria-invalid={!!emailError}
+    aria-describedby="email-help email-error"
+    required
+  />
+</GlassFormField>
+
+{emailError && (
+  <div id="email-error" role="alert" className="text-red-600 text-sm mt-1">
+    {emailError}
+  </div>
+)}
+
+<div id="email-help" className="text-gray-600 text-sm mt-1">
+  We'll never share your email with anyone else.
+</div>
+```
+
+## Theming
+
+Customize input appearance using CSS variables:
+
+```css
+.custom-glass-input {
+  --glass-input-bg: rgba(255, 255, 255, 0.1);
+  --glass-input-border: rgba(255, 255, 255, 0.2);
+  --glass-input-text: rgb(255, 255, 255);
+  --glass-input-placeholder: rgba(255, 255, 255, 0.6);
+  
+  /* Focus states */
+  --glass-input-focus-border: rgba(59, 130, 246, 0.5);
+  --glass-input-focus-ring: rgba(59, 130, 246, 0.2);
+  
+  /* Error states */
+  --glass-input-error-border: rgba(239, 68, 68, 0.5);
+  --glass-input-error-bg: rgba(239, 68, 68, 0.1);
+  
+  /* Success states */
+  --glass-input-success-border: rgba(34, 197, 94, 0.5);
+  --glass-input-success-bg: rgba(34, 197, 94, 0.1);
+}
+```
+
+## Performance Notes
+
+- Input components are optimized with `React.memo`
+- Debounced search functionality prevents excessive API calls
+- Icon components should be properly sized (16px recommended)  
+- Glass effects use GPU acceleration for smooth interactions
+- Large forms benefit from field-level validation to avoid re-renders
+
+## Related Components
+
+- [Glass Textarea](/components/glass-textarea) - Multi-line text input
+- [Glass Select](/components/glass-select) - Dropdown selection input
+- [Glass Form Field](/components/glass-form-field) - Form field wrapper with validation

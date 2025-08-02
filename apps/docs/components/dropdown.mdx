@@ -1,0 +1,844 @@
+---
+title: "Dropdown"
+description: "Elegant dropdown menus with glassmorphism effects and full keyboard support"
+---
+
+# Dropdown
+
+The `GlassDropdown` component provides beautiful glassmorphism dropdown menus with comprehensive keyboard navigation and accessibility features.
+
+## Import
+
+<CodeGroup>
+
+    ```tsx Component Import
+    import {GlassDropdown} from '@liquidify/components'
+    ```
+
+    ```tsx Bundle Import
+    import {GlassDropdown} from '@liquidify/components/navigation'
+    ```
+
+    ```tsx All Imports
+    import {
+    GlassDropdown,
+    GlassDropdownTrigger,
+    GlassDropdownContent,
+    GlassDropdownItem,
+    GlassDropdownSeparator,
+    GlassDropdownLabel
+} from '@liquidify/components'
+    ```
+
+</CodeGroup>
+
+## Basic Usage
+
+<CodeGroup>
+
+    ```tsx Simple Dropdown
+    <GlassDropdown>
+        <GlassDropdownTrigger asChild>
+            <GlassButton variant="outline">
+                Options
+                <ChevronDown className="ml-2 h-4 w-4"/>
+            </GlassButton>
+        </GlassDropdownTrigger>
+
+        <GlassDropdownContent>
+            <GlassDropdownItem>Profile</GlassDropdownItem>
+            <GlassDropdownItem>Settings</GlassDropdownItem>
+            <GlassDropdownSeparator/>
+            <GlassDropdownItem>Sign Out</GlassDropdownItem>
+        </GlassDropdownContent>
+    </GlassDropdown>
+    ```
+
+    ```tsx With Icons
+    <GlassDropdown>
+        <GlassDropdownTrigger asChild>
+            <GlassButton variant="ghost">
+                <User className="h-4 w-4"/>
+            </GlassButton>
+        </GlassDropdownTrigger>
+
+        <GlassDropdownContent align="end">
+            <GlassDropdownItem>
+                <User className="mr-2 h-4 w-4"/>
+                Profile
+            </GlassDropdownItem>
+            <GlassDropdownItem>
+                <Settings className="mr-2 h-4 w-4"/>
+                Settings
+            </GlassDropdownItem>
+            <GlassDropdownSeparator/>
+            <GlassDropdownItem>
+                <LogOut className="mr-2 h-4 w-4"/>
+                Sign Out
+            </GlassDropdownItem>
+        </GlassDropdownContent>
+    </GlassDropdown>
+    ```
+
+</CodeGroup>
+
+## Interactive Preview
+
+<ComponentPreview>
+    <div className="flex space-x-4">
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <GlassButton variant="outline">
+                    Actions
+                    <ChevronDown className="ml-2 h-4 w-4"/>
+                </GlassButton>
+            </GlassDropdownTrigger>
+
+            <GlassDropdownContent>
+                <GlassDropdownItem>
+                    <Edit className="mr-2 h-4 w-4"/>
+                    Edit
+                </GlassDropdownItem>
+                <GlassDropdownItem>
+                    <Copy className="mr-2 h-4 w-4"/>
+                    Duplicate
+                </GlassDropdownItem>
+                <GlassDropdownItem>
+                    <Archive className="mr-2 h-4 w-4"/>
+                    Archive
+                </GlassDropdownItem>
+                <GlassDropdownSeparator/>
+                <GlassDropdownItem className="text-red-600">
+                    <Trash2 className="mr-2 h-4 w-4"/>
+                    Delete
+                </GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <GlassButton variant="ghost" size="sm">
+                    <User className="h-4 w-4"/>
+                </GlassButton>
+            </GlassDropdownTrigger>
+
+            <GlassDropdownContent align="end">
+                <GlassDropdownLabel>My Account</GlassDropdownLabel>
+                <GlassDropdownSeparator/>
+                <GlassDropdownItem>
+                    <User className="mr-2 h-4 w-4"/>
+                    Profile
+                </GlassDropdownItem>
+                <GlassDropdownItem>
+                    <CreditCard className="mr-2 h-4 w-4"/>
+                    Billing
+                </GlassDropdownItem>
+                <GlassDropdownItem>
+                    <Settings className="mr-2 h-4 w-4"/>
+                    Settings
+                </GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+    </div>
+</ComponentPreview>
+
+## Dropdown Variants
+
+### Menu Dropdown
+
+<ComponentPreview>
+    <GlassDropdown>
+        <GlassDropdownTrigger asChild>
+            <GlassButton variant="outline">
+                File
+                <ChevronDown className="ml-2 h-4 w-4"/>
+            </GlassButton>
+        </GlassDropdownTrigger>
+
+        <GlassDropdownContent>
+            <GlassDropdownItem shortcut="Ctrl+N">
+                <FileText className="mr-2 h-4 w-4"/>
+                New File
+            </GlassDropdownItem>
+            <GlassDropdownItem shortcut="Ctrl+O">
+                <FolderOpen className="mr-2 h-4 w-4"/>
+                Open
+            </GlassDropdownItem>
+            <GlassDropdownItem shortcut="Ctrl+S">
+                <Save className="mr-2 h-4 w-4"/>
+                Save
+            </GlassDropdownItem>
+            <GlassDropdownSeparator/>
+            <GlassDropdownItem shortcut="Ctrl+P">
+                <Printer className="mr-2 h-4 w-4"/>
+                Print
+            </GlassDropdownItem>
+        </GlassDropdownContent>
+    </GlassDropdown>
+</ComponentPreview>
+
+```tsx
+<GlassDropdown>
+  <GlassDropdownTrigger asChild>
+    <GlassButton variant="outline">File</GlassButton>
+  </GlassDropdownTrigger>
+  
+  <GlassDropdownContent>
+    <GlassDropdownItem shortcut="Ctrl+N">
+      <FileText className="mr-2 h-4 w-4" />
+      New File
+    </GlassDropdownItem>
+    <GlassDropdownItem shortcut="Ctrl+S">
+      <Save className="mr-2 h-4 w-4" />
+      Save
+    </GlassDropdownItem>
+  </GlassDropdownContent>
+</GlassDropdown>
+```
+
+### Context Menu Dropdown
+
+<ComponentPreview>
+    <div className="relative">
+        <GlassCard className="p-6 cursor-context-menu">
+            <p>Right-click this card to see the context menu</p>
+            <p className="text-sm text-gray-600 mt-2">Context menu will appear on right-click</p>
+        </GlassCard>
+
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <button className="absolute top-4 right-4 opacity-50 hover:opacity-100">
+                    <MoreVertical className="h-4 w-4"/>
+                </button>
+            </GlassDropdownTrigger>
+
+            <GlassDropdownContent>
+                <GlassDropdownItem>
+                    <Eye className="mr-2 h-4 w-4"/>
+                    View
+                </GlassDropdownItem>
+                <GlassDropdownItem>
+                    <Edit className="mr-2 h-4 w-4"/>
+                    Edit
+                </GlassDropdownItem>
+                <GlassDropdownItem>
+                    <Share className="mr-2 h-4 w-4"/>
+                    Share
+                </GlassDropdownItem>
+                <GlassDropdownSeparator/>
+                <GlassDropdownItem className="text-red-600">
+                    <Trash2 className="mr-2 h-4 w-4"/>
+                    Delete
+                </GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+    </div>
+</ComponentPreview>
+
+### User Account Dropdown
+
+<ComponentPreview>
+    <GlassDropdown>
+        <GlassDropdownTrigger asChild>
+            <GlassButton variant="ghost" className="flex items-center space-x-2">
+                <GlassAvatar size="sm" fallback="JD"/>
+                <div className="text-left">
+                    <div className="text-sm font-medium">John Doe</div>
+                    <div className="text-xs text-gray-500">john@example.com</div>
+                </div>
+                <ChevronDown className="h-4 w-4"/>
+            </GlassButton>
+        </GlassDropdownTrigger>
+
+        <GlassDropdownContent align="end" className="w-56">
+            <GlassDropdownLabel>Account</GlassDropdownLabel>
+            <GlassDropdownSeparator/>
+            <GlassDropdownItem>
+                <User className="mr-2 h-4 w-4"/>
+                Profile
+            </GlassDropdownItem>
+            <GlassDropdownItem>
+                <CreditCard className="mr-2 h-4 w-4"/>
+                Billing
+            </GlassDropdownItem>
+            <GlassDropdownItem>
+                <Settings className="mr-2 h-4 w-4"/>
+                Settings
+            </GlassDropdownItem>
+            <GlassDropdownSeparator/>
+            <GlassDropdownItem>
+                <Users className="mr-2 h-4 w-4"/>
+                Team
+            </GlassDropdownItem>
+            <GlassDropdownItem>
+                <Plus className="mr-2 h-4 w-4"/>
+                New Team
+            </GlassDropdownItem>
+            <GlassDropdownSeparator/>
+            <GlassDropdownItem>
+                <Github className="mr-2 h-4 w-4"/>
+                GitHub
+            </GlassDropdownItem>
+            <GlassDropdownItem>
+                <LifeBuoy className="mr-2 h-4 w-4"/>
+                Support
+            </GlassDropdownItem>
+            <GlassDropdownSeparator/>
+            <GlassDropdownItem className="text-red-600">
+                <LogOut className="mr-2 h-4 w-4"/>
+                Log out
+            </GlassDropdownItem>
+        </GlassDropdownContent>
+    </GlassDropdown>
+</ComponentPreview>
+
+## Dropdown Features
+
+### With Checkboxes
+
+<ComponentPreview>
+    <GlassDropdown>
+        <GlassDropdownTrigger asChild>
+            <GlassButton variant="outline">
+                View Options
+                <ChevronDown className="ml-2 h-4 w-4"/>
+            </GlassButton>
+        </GlassDropdownTrigger>
+
+        <GlassDropdownContent>
+            <GlassDropdownLabel>Show Columns</GlassDropdownLabel>
+            <GlassDropdownSeparator/>
+            <GlassDropdownCheckboxItem checked>
+                Name
+            </GlassDropdownCheckboxItem>
+            <GlassDropdownCheckboxItem checked>
+                Email
+            </GlassDropdownCheckboxItem>
+            <GlassDropdownCheckboxItem>
+                Phone
+            </GlassDropdownCheckboxItem>
+            <GlassDropdownCheckboxItem checked>
+                Status
+            </GlassDropdownCheckboxItem>
+        </GlassDropdownContent>
+    </GlassDropdown>
+</ComponentPreview>
+```tsx
+// Example with state management
+function CheckboxDropdownExample() {
+  const [showName, setShowName] = useState(true)
+  const [showEmail, setShowEmail] = useState(true)
+
+return (
+<GlassDropdown>
+<GlassDropdownTrigger asChild>
+<GlassButton variant="outline">View Options</GlassButton>
+</GlassDropdownTrigger>
+
+      <GlassDropdownContent>
+        <GlassDropdownCheckboxItem
+          checked={showName}
+          onCheckedChange={setShowName}
+        >
+          Name
+        </GlassDropdownCheckboxItem>
+        <GlassDropdownCheckboxItem
+          checked={showEmail}
+          onCheckedChange={setShowEmail}
+        >
+          Email
+        </GlassDropdownCheckboxItem>
+      </GlassDropdownContent>
+    </GlassDropdown>
+)
+}
+```
+
+### With Radio Groups
+
+<ComponentPreview>
+  <GlassDropdown>
+    <GlassDropdownTrigger asChild>
+      <GlassButton variant="outline">
+        Sort By
+        <ChevronDown className="ml-2 h-4 w-4" />
+      </GlassButton>
+    </GlassDropdownTrigger>
+    
+    <GlassDropdownContent>
+      <GlassDropdownLabel>Sort Options</GlassDropdownLabel>
+      <GlassDropdownSeparator />
+      <GlassDropdownRadioGroup value="name">
+        <GlassDropdownRadioItem value="name">
+          Name
+        </GlassDropdownRadioItem>
+        <GlassDropdownRadioItem value="date">
+          Date Created
+        </GlassDropdownRadioItem>
+        <GlassDropdownRadioItem value="size">
+          File Size
+        </GlassDropdownRadioItem>
+        <GlassDropdownRadioItem value="type">
+          File Type
+        </GlassDropdownRadioItem>
+      </GlassDropdownRadioGroup>
+    </GlassDropdownContent>
+  </GlassDropdown>
+</ComponentPreview>
+
+```tsx
+function SortDropdownExample() {
+  const [sortBy, setSortBy] = useState('name')
+
+  return (
+    <GlassDropdown>
+      <GlassDropdownTrigger asChild>
+        <GlassButton variant="outline">Sort By</GlassButton>
+      </GlassDropdownTrigger>
+
+      <GlassDropdownContent>
+        <GlassDropdownRadioGroup
+          value={sortBy}
+          onValueChange={setSortBy}
+        >
+          <GlassDropdownRadioItem value="name">
+            Name
+          </GlassDropdownRadioItem>
+          <GlassDropdownRadioItem value="date">
+            Date Created
+          </GlassDropdownRadioItem>
+        </GlassDropdownRadioGroup>
+      </GlassDropdownContent>
+    </GlassDropdown>
+  )
+}
+```
+
+### Nested Dropdowns
+
+<ComponentPreview>
+    <GlassDropdown>
+        <GlassDropdownTrigger asChild>
+            <GlassButton variant="outline">
+                More Options
+                <ChevronDown className="ml-2 h-4 w-4"/>
+            </GlassButton>
+        </GlassDropdownTrigger>
+
+        <GlassDropdownContent>
+            <GlassDropdownItem>
+                <FileText className="mr-2 h-4 w-4"/>
+                New Document
+            </GlassDropdownItem>
+
+            <GlassDropdownSub>
+                <GlassDropdownSubTrigger>
+                    <FolderPlus className="mr-2 h-4 w-4"/>
+                    New Folder
+                    <ChevronRight className="ml-auto h-4 w-4"/>
+                </GlassDropdownSubTrigger>
+                <GlassDropdownSubContent>
+                    <GlassDropdownItem>
+                        <Folder className="mr-2 h-4 w-4"/>
+                        Empty Folder
+                    </GlassDropdownItem>
+                    <GlassDropdownItem>
+                        <GitBranch className="mr-2 h-4 w-4"/>
+                        From Template
+                    </GlassDropdownItem>
+                    <GlassDropdownItem>
+                        <Download className="mr-2 h-4 w-4"/>
+                        From Import
+                    </GlassDropdownItem>
+                </GlassDropdownSubContent>
+            </GlassDropdownSub>
+
+            <GlassDropdownSeparator/>
+            <GlassDropdownItem>
+                <Upload className="mr-2 h-4 w-4"/>
+                Upload Files
+            </GlassDropdownItem>
+        </GlassDropdownContent>
+    </GlassDropdown>
+</ComponentPreview>
+
+## Positioning
+
+### Alignment Options
+
+<ComponentPreview>
+    <div className="flex justify-center space-x-4">
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <GlassButton variant="outline" size="sm">
+                    Align Start
+                </GlassButton>
+            </GlassDropdownTrigger>
+            <GlassDropdownContent align="start">
+                <GlassDropdownItem>Option 1</GlassDropdownItem>
+                <GlassDropdownItem>Option 2</GlassDropdownItem>
+                <GlassDropdownItem>Option 3</GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <GlassButton variant="outline" size="sm">
+                    Align Center
+                </GlassButton>
+            </GlassDropdownTrigger>
+            <GlassDropdownContent align="center">
+                <GlassDropdownItem>Option 1</GlassDropdownItem>
+                <GlassDropdownItem>Option 2</GlassDropdownItem>
+                <GlassDropdownItem>Option 3</GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <GlassButton variant="outline" size="sm">
+                    Align End
+                </GlassButton>
+            </GlassDropdownTrigger>
+            <GlassDropdownContent align="end">
+                <GlassDropdownItem>Option 1</GlassDropdownItem>
+                <GlassDropdownItem>Option 2</GlassDropdownItem>
+                <GlassDropdownItem>Option 3</GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+    </div>
+</ComponentPreview>
+
+### Side Positioning
+
+<ComponentPreview>
+    <div className="flex justify-center space-x-4">
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <GlassButton variant="outline" size="sm">
+                    Side Top
+                </GlassButton>
+            </GlassDropdownTrigger>
+            <GlassDropdownContent side="top">
+                <GlassDropdownItem>Top Option 1</GlassDropdownItem>
+                <GlassDropdownItem>Top Option 2</GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <GlassButton variant="outline" size="sm">
+                    Side Right
+                </GlassButton>
+            </GlassDropdownTrigger>
+            <GlassDropdownContent side="right">
+                <GlassDropdownItem>Right Option 1</GlassDropdownItem>
+                <GlassDropdownItem>Right Option 2</GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+
+        <GlassDropdown>
+            <GlassDropdownTrigger asChild>
+                <GlassButton variant="outline" size="sm">
+                    Side Left
+                </GlassButton>
+            </GlassDropdownTrigger>
+            <GlassDropdownContent side="left">
+                <GlassDropdownItem>Left Option 1</GlassDropdownItem>
+                <GlassDropdownItem>Left Option 2</GlassDropdownItem>
+            </GlassDropdownContent>
+        </GlassDropdown>
+    </div>
+</ComponentPreview>
+
+## Real-World Examples
+
+### Application Menu
+
+<ComponentPreview>
+    <div
+        className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg backdrop-blur-md">
+        <div className="flex items-center space-x-4">
+            <div className="h-8 w-8 bg-white/20 rounded-lg"></div>
+            <span className="font-semibold">My App</span>
+        </div>
+
+        <div className="flex items-center space-x-2">
+            <GlassDropdown>
+                <GlassDropdownTrigger asChild>
+                    <GlassButton variant="ghost" size="sm">
+                        <Bell className="h-4 w-4"/>
+                    </GlassButton>
+                </GlassDropdownTrigger>
+                <GlassDropdownContent align="end" className="w-64">
+                    <GlassDropdownLabel>Notifications</GlassDropdownLabel>
+                    <GlassDropdownSeparator/>
+                    <GlassDropdownItem>
+                        <div className="flex flex-col space-y-1">
+                            <p className="text-sm font-medium">New message</p>
+                            <p className="text-xs text-gray-600">You have a new message from Alice</p>
+                        </div>
+                    </GlassDropdownItem>
+                    <GlassDropdownItem>
+                        <div className="flex flex-col space-y-1">
+                            <p className="text-sm font-medium">Update available</p>
+                            <p className="text-xs text-gray-600">Version 2.1.0 is now available</p>
+                        </div>
+                    </GlassDropdownItem>
+                    <GlassDropdownSeparator/>
+                    <GlassDropdownItem className="text-center">
+                        View all notifications
+                    </GlassDropdownItem>
+                </GlassDropdownContent>
+            </GlassDropdown>
+
+            <GlassDropdown>
+                <GlassDropdownTrigger asChild>
+                    <GlassButton variant="ghost" className="flex items-center space-x-2">
+                        <GlassAvatar size="sm" fallback="JD"/>
+                    </GlassButton>
+                </GlassDropdownTrigger>
+                <GlassDropdownContent align="end">
+                    <GlassDropdownLabel>john@example.com</GlassDropdownLabel>
+                    <GlassDropdownSeparator/>
+                    <GlassDropdownItem>
+                        <User className="mr-2 h-4 w-4"/>
+                        Profile
+                    </GlassDropdownItem>
+                    <GlassDropdownItem>
+                        <Settings className="mr-2 h-4 w-4"/>
+                        Settings
+                    </GlassDropdownItem>
+                    <GlassDropdownSeparator/>
+                    <GlassDropdownItem className="text-red-600">
+                        <LogOut className="mr-2 h-4 w-4"/>
+                        Sign Out
+                    </GlassDropdownItem>
+                </GlassDropdownContent>
+            </GlassDropdown>
+        </div>
+    </div>
+</ComponentPreview>
+
+### Data Table Actions
+
+<ComponentPreview>
+    <div className="space-y-4">
+        <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold">Users</h3>
+            <GlassDropdown>
+                <GlassDropdownTrigger asChild>
+                    <GlassButton variant="outline" size="sm">
+                        <MoreHorizontal className="h-4 w-4"/>
+                    </GlassButton>
+                </GlassDropdownTrigger>
+                <GlassDropdownContent align="end">
+                    <GlassDropdownItem>
+                        <Download className="mr-2 h-4 w-4"/>
+                        Export CSV
+                    </GlassDropdownItem>
+                    <GlassDropdownItem>
+                        <FileText className="mr-2 h-4 w-4"/>
+                        Export PDF
+                    </GlassDropdownItem>
+                    <GlassDropdownSeparator/>
+                    <GlassDropdownItem>
+                        <Users className="mr-2 h-4 w-4"/>
+                        Bulk Actions
+                    </GlassDropdownItem>
+                </GlassDropdownContent>
+            </GlassDropdown>
+        </div>
+
+        <div className="space-y-2">
+            {['John Doe', 'Jane Smith', 'Bob Johnson'].map((name, index) => (
+                <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-white/5">
+                    <div className="flex items-center space-x-3">
+                        <GlassAvatar size="sm" fallback={name.split(' ').map(n => n[0]).join('')}/>
+                        <span>{name}</span>
+                    </div>
+
+                    <GlassDropdown>
+                        <GlassDropdownTrigger asChild>
+                            <GlassButton variant="ghost" size="sm">
+                                <MoreVertical className="h-4 w-4"/>
+                            </GlassButton>
+                        </GlassDropdownTrigger>
+                        <GlassDropdownContent align="end">
+                            <GlassDropdownItem>
+                                <Eye className="mr-2 h-4 w-4"/>
+                                View Profile
+                            </GlassDropdownItem>
+                            <GlassDropdownItem>
+                                <Edit className="mr-2 h-4 w-4"/>
+                                Edit
+                            </GlassDropdownItem>
+                            <GlassDropdownItem>
+                                <Mail className="mr-2 h-4 w-4"/>
+                                Send Message
+                            </GlassDropdownItem>
+                            <GlassDropdownSeparator/>
+                            <GlassDropdownItem className="text-red-600">
+                                <UserX className="mr-2 h-4 w-4"/>
+                                Deactivate
+                            </GlassDropdownItem>
+                        </GlassDropdownContent>
+                    </GlassDropdown>
+                </div>
+            ))}
+        </div>
+    </div>
+</ComponentPreview>
+
+## Props
+
+### GlassDropdown
+
+<ResponseField name="open" type="boolean">
+    Controls the open state of the dropdown
+</ResponseField>
+
+<ResponseField name="onOpenChange" type="(open: boolean) => void">
+    Callback when open state changes
+</ResponseField>
+
+<ResponseField name="modal" type="boolean" default="false">
+    Whether to make the dropdown modal
+</ResponseField>
+
+### GlassDropdownTrigger
+
+<ResponseField name="asChild" type="boolean" default="false">
+    Render as child element instead of button
+</ResponseField>
+
+### GlassDropdownContent
+
+<ResponseField name="align" type="'start' | 'center' | 'end'" default="center">
+    Alignment relative to the trigger
+</ResponseField>
+
+<ResponseField name="side" type="'top' | 'right' | 'bottom' | 'left'" default="bottom">
+    Which side to position the dropdown
+</ResponseField>
+
+<ResponseField name="sideOffset" type="number" default="4">
+    Distance from the trigger
+</ResponseField>
+
+<ResponseField name="alignOffset" type="number" default="0">
+    Offset along the alignment axis
+</ResponseField>
+
+<ResponseField name="avoidCollisions" type="boolean" default="true">
+    Whether to avoid viewport collisions
+</ResponseField>
+
+<ResponseField name="loop" type="boolean" default="true">
+    Whether keyboard navigation should loop
+</ResponseField>
+
+### GlassDropdownItem
+
+<ResponseField name="disabled" type="boolean" default="false">
+    Whether the item is disabled
+</ResponseField>
+
+<ResponseField name="shortcut" type="string">
+    Keyboard shortcut to display
+</ResponseField>
+
+<ResponseField name="asChild" type="boolean" default="false">
+    Render as child element
+</ResponseField>
+
+<ResponseField name="onSelect" type="(event: Event) => void">
+    Callback when item is selected
+</ResponseField>
+
+## Accessibility
+
+LiqUIdify dropdowns follow WAI-ARIA guidelines:
+
+- **Keyboard Navigation**: Arrow keys, Enter, Escape, Tab support
+- **Screen Reader Support**: Proper ARIA roles and attributes
+- **Focus Management**: Automatic focus handling and restoration
+- **Type-ahead**: Quick navigation by typing
+- **Portal Rendering**: Avoids focus traps and z-index issues
+
+### Accessibility Example
+```tsx
+function AccessibleDropdownExample() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <GlassDropdown open={isOpen} onOpenChange={setIsOpen}>
+      <GlassDropdownTrigger
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        aria-label="User account menu"
+      >
+        <User className="h-4 w-4" />
+      </GlassDropdownTrigger>
+
+      <GlassDropdownContent
+        role="menu"
+        aria-label="Account options"
+      >
+        <GlassDropdownItem role="menuitem">
+          Profile
+        </GlassDropdownItem>
+        <GlassDropdownItem role="menuitem">
+          Settings
+        </GlassDropdownItem>
+      </GlassDropdownContent>
+    </GlassDropdown>
+  )
+}
+```
+
+## Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| **Space** | Open/close dropdown |
+| **Enter** | Open/close dropdown or select item |
+| **Arrow Down** | Move to next item |
+| **Arrow Up** | Move to previous item |
+| **Home** | Move to first item |
+| **End** | Move to last item |
+| **Escape** | Close dropdown |
+| **Tab** | Close dropdown and move to next element |
+| **A-Z** | Type-ahead search |
+
+## Theming
+
+Customize dropdown appearance using CSS variables:
+
+```css
+.custom-dropdown {
+  --dropdown-bg: rgba(255, 255, 255, 0.1);
+  --dropdown-border: rgba(255, 255, 255, 0.2);
+  --dropdown-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --dropdown-radius: 8px;
+  
+  /* Item styles */
+  --dropdown-item-hover: rgba(255, 255, 255, 0.1);
+  --dropdown-item-focus: rgba(59, 130, 246, 0.2);
+  --dropdown-item-selected: rgba(59, 130, 246, 0.3);
+}
+```
+
+## Performance Notes
+
+- Content is rendered in a portal for optimal stacking
+- Items are virtualized for large lists (100+ items)
+- Animations use GPU acceleration
+- Keyboard navigation is debounced for smooth scrolling
+- Type-ahead search is optimized for large option sets
+
+## Related Components
+
+- [Glass Button](/components/glass-button) - Trigger buttons for dropdowns
+- [Glass Navigation](/components/glass-navigation) - Navigation menus and items
+- [Glass Select](/components/glass-select) - Form select dropdowns

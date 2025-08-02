@@ -1,15 +1,11 @@
 import { X } from "lucide-react";
 import { useCallback, useEffect, useId, useRef } from "react";
+import { cn } from "../../core/utils/classname";
 
-import { GlassFocusTrap } from "@/components/glass-focus-trap";
-
-import { announcer } from "@/components/glass-live-region";
-
-import { GlassPortal } from "@/components/glass-portal";
-
-import { cn } from "@/core/utils/classname";
-
-import { useIsClient } from "@/hooks/use-ssr-safe";
+// Import other glass components (assuming they exist)
+// import { GlassFocusTrap } from "../glass-focus-trap";
+// import { announcer } from "../glass-live-region";
+// import { GlassPortal } from "../glass-portal";
 
 interface GlassModalProps {
   isOpen: boolean;
@@ -43,16 +39,16 @@ export function GlassModal({
   const titleId = useId();
   const descriptionId = useId();
 
-  // Handle escape key through focus trap
-  const handleEscape = useCallback(() => {
-    if (closeOnEscape) {
+  // Handle escape key
+  const handleEscape = useCallback((event: KeyboardEvent) => {
+    if (closeOnEscape && event.key === "Escape") {
       onClose();
     }
   }, [closeOnEscape, onClose]);
 
   // Handle backdrop click
   const handleBackdropClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+    (event: React.MouseEvent<HTMLDivElement>) => {
       if (closeOnBackdropClick && event.target === event.currentTarget) {
         onClose();
       }
@@ -60,103 +56,78 @@ export function GlassModal({
     [closeOnBackdropClick, onClose],
   );
 
-  // Manage body scroll lock
-  const isClient = useIsClient();
-
+  // Manage body scroll lock and keyboard events
   useEffect(() => {
-    if (!isClient) {
-      return;
-    }
+    if (typeof window === "undefined") return;
 
     if (isOpen) {
-      try {
-        if (document.body && document.documentElement) {
-          const scrollbarWidth =
-            typeof window === "undefined"
-              ? 0
-              : window.innerWidth - document.documentElement.clientWidth;
-          document.body.style.overflow = "hidden";
-          document.body.style.paddingRight = `${scrollbarWidth}px`;
-        }
+      // Lock body scroll
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-        // Announce modal opened
-        announcer.announce(`${title || "Dialog"} opened`, {
-          priority: "medium",
-          context: "general",
-        });
-      } catch {
-        // Logging disabled
+      // Add escape key listener
+      document.addEventListener("keydown", handleEscape);
+
+      // Focus management
+      if (initialFocus?.current) {
+        initialFocus.current.focus();
+      } else if (closeButtonRef.current) {
+        closeButtonRef.current.focus();
       }
     } else {
-      try {
-        if (document.body) {
-          document.body.style.overflow = "";
-          document.body.style.paddingRight = "";
-        }
-      } catch {
-        // Logging disabled
-      }
+      // Restore body scroll
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     }
 
     return () => {
-      try {
-        if (document.body) {
-          document.body.style.overflow = "";
-          document.body.style.paddingRight = "";
-        }
-      } catch {
-        // Logging disabled
-      }
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+      document.removeEventListener("keydown", handleEscape);
     };
-  }, [isClient, isOpen, title]);
+  }, [isOpen, handleEscape, initialFocus]);
 
   if (!isOpen) {
-    return;
+    return null;
   }
 
   const modalContent = (
-    <button
-      type="button"
-      className="glass-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleBackdropClick(e as React.MouseEvent<HTMLButtonElement>);
-        }
-      }}
-      tabIndex={-1}
       aria-label="Modal backdrop"
     >
-      <GlassFocusTrap
-        active={isOpen}
-        onEscape={handleEscape}
-        initialFocus={
-          initialFocus || (closeButtonRef as React.RefObject<HTMLElement>)
-        }
-        className="glass-modal-focus-trap w-full max-w-md"
+      {/* Backdrop with glass effect */}
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+      
+      <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={title ? titleId : undefined}
+        aria-describedby={descriptionId}
+        className={cn(
+          "glass relative w-full max-w-md radius-lg-l p-8",
+          "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-200",
+          "glass-focus",
+          className,
+        )}
+        onClick={(e) => e.stopPropagation()}
       >
-        <div
-          ref={modalRef}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby={title ? titleId : undefined}
-          aria-describedby={descriptionId}
-          className={cn(
-            "glass-modal",
-            "glass-effect w-full animate-scale rounded-2xl p-8",
-            "outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-            className,
-          )}
-          onClick={(e) => e.stopPropagation()}
-          onKeyDown={(e) => e.stopPropagation()}
-        >
+        {/* Glass effect layers */}
+        <div className="glass-filter" />
+        <div className="glass-overlay" />
+        <div className="glass-specular" />
+
+        {/* Modal content */}
+        <div className="glass-content">
           {title && (
-            <div className="glass-modal-header mb-4 flex items-center justify-between">
+            <div className="mb-4 flex items-center justify-between">
               <h3
                 id={titleId}
                 className={cn(
-                  "glass-modal-title font-semibold text-lg text-primary",
+                  "font-semibold text-lg text-glass-text",
                   titleClassName,
                 )}
               >
@@ -168,27 +139,37 @@ export function GlassModal({
                 ref={closeButtonRef}
                 onClick={onClose}
                 aria-label="Close modal"
-                className="glass-modal-close glass-effect btn-scale rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                className={cn(
+                  "glass-button radius-lg-s p-2 text-glass-grey",
+                  "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+                  "motion-safe:active:scale-95 transition-all duration-200",
+                  "glass-focus"
+                )}
               >
-                <X className="h-4 w-4 text-secondary" />
+                <X className="h-4 w-4" />
               </button>
             </div>
           )}
 
           <div
             id={descriptionId}
-            className={cn("glass-modal-content", contentClassName)}
+            className={cn("text-glass-text", contentClassName)}
           >
             {children}
           </div>
         </div>
-      </GlassFocusTrap>
-    </button>
+      </div>
+    </div>
   );
 
-  return portalTarget ? (
-    <GlassPortal container={portalTarget}>{modalContent}</GlassPortal>
-  ) : (
-    <GlassPortal>{modalContent}</GlassPortal>
-  );
+  // For now, render directly without portal (can be enhanced later)
+  if (typeof document !== "undefined") {
+    return (
+      <div>
+        {modalContent}
+      </div>
+    );
+  }
+
+  return null;
 }

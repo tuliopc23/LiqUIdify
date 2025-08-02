@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DollarSign, Gauge, Sun, Volume2 } from "lucide-react";
 import type React from "react";
 import { useState } from "react";

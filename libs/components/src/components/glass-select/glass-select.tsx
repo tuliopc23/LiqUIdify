@@ -1,12 +1,6 @@
 import { Check, ChevronDown, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-
-import {
-  cn,
-  focusRing,
-  getGlassClass,
-  microInteraction,
-} from "@/core/utils/classname";
+import { cn } from "../../core/utils/classname";
 
 export interface GlassSelectOption {
   value: string;
@@ -198,18 +192,14 @@ export const GlassSelect = React.memo(
           <div
             onClick={() => !disabled && setIsOpen(!isOpen)}
             className={cn(
-              getGlassClass("default"),
-              "w-full rounded-xl px-4 py-3 text-left",
-              "flex items-center justify-between",
-              "transition-all duration-200 ease-out",
-              "border border-white/20 dark:border-white/10",
-              "text-gray-900 dark:text-white",
-              "placeholder:text-gray-500 dark:placeholder:text-gray-400",
-              focusRing,
-              "hover:bg-white/10 dark:hover:bg-white/5",
+              "glass-input w-full radius-lg-s px-4 py-3 text-left",
+              "flex items-center justify-between relative",
+              "transition-all duration-200 will-change-transform",
+              "text-glass-text placeholder:text-glass-grey/70",
+              "glass-focus",
+              "motion-safe:hover:bg-glass-bg/20",
               disabled && "cursor-not-allowed opacity-50",
-              isOpen && "border-transparent ring-2 ring-blue-500/50",
-              "relative",
+              isOpen && "border-glass-accent ring-2 ring-glass-accent/20",
             )}
             aria-label={ariaLabel}
             aria-describedby={ariaDescribedBy}
@@ -224,22 +214,31 @@ export const GlassSelect = React.memo(
               }
             }}
           >
+            {/* Glass effect layers */}
+            <div className="glass-filter pointer-events-none" />
+            <div className="glass-overlay pointer-events-none" />
+            <div className="glass-specular pointer-events-none" />
+
             {/* Display selected values or placeholder */}
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1 relative z-10">
               {multiple && selectedOptions.length > 0 ? (
                 selectedOptions.map((option) => (
                   <span
                     key={option.value}
                     className={cn(
-                      "inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs",
-                      "bg-blue-500/20 text-blue-700 dark:text-blue-300",
+                      "glass-button inline-flex items-center gap-1 radius-lg-s px-2 py-1 text-xs",
+                      "bg-glass-accent/20 text-glass-text",
                     )}
                   >
                     {option.label}
                     <button
                       type="button"
                       onClick={(e) => handleRemoveSelection(option.value, e)}
-                      className="rounded-full hover:bg-blue-500/30"
+                      className={cn(
+                        "glass-button radius-lg-s p-0.5",
+                        "motion-safe:hover:bg-glass-accent/30 motion-safe:hover:scale-110",
+                        "motion-safe:active:scale-95 transition-all duration-200"
+                      )}
                       aria-label={`Remove ${option.label}`}
                     >
                       <X className="h-3 w-3" />
@@ -247,11 +246,11 @@ export const GlassSelect = React.memo(
                   </span>
                 ))
               ) : selectedOptions.length > 0 ? (
-                <span className="text-gray-900 dark:text-white">
+                <span className="text-glass-text">
                   {selectedOptions[0].label}
                 </span>
               ) : (
-                <span className="text-gray-500 dark:text-gray-400">
+                <span className="text-glass-grey/70">
                   {placeholder}
                 </span>
               )}
@@ -264,7 +263,7 @@ export const GlassSelect = React.memo(
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onClick={(e) => e.stopPropagation()}
-                  className="ml-1 flex-1 bg-transparent outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                  className="ml-1 flex-1 bg-transparent outline-none placeholder:text-glass-grey/70 text-glass-text"
                   placeholder={selectedOptions.length === 0 ? placeholder : ""}
                   aria-autocomplete="list"
                   aria-controls="glass-select-options"
@@ -275,7 +274,7 @@ export const GlassSelect = React.memo(
             {/* Chevron Icon */}
             <ChevronDown
               className={cn(
-                "h-4 w-4 text-gray-400 transition-transform duration-200",
+                "h-4 w-4 text-glass-grey transition-transform duration-200 relative z-10",
                 isOpen && "rotate-180",
               )}
             />
@@ -287,57 +286,60 @@ export const GlassSelect = React.memo(
               ref={listRef}
               id="glass-select-options"
               className={cn(
-                getGlassClass("elevated"),
-                "absolute z-50 mt-2 w-full rounded-xl border border-white/20 dark:border-white/10",
-                "max-h-60 overflow-auto",
-                "fade-in-0 zoom-in-95 animate-in duration-200",
-                "shadow-lg",
+                "glass absolute z-50 mt-2 w-full radius-lg-m",
+                "border border-glass-hl/30 max-h-60 overflow-auto",
+                "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-200",
+                "shadow-glass",
               )}
               role="listbox"
               aria-multiselectable={multiple}
             >
-              {filteredOptions.length === 0 ? (
-                <div className="px-4 py-3 text-center text-gray-500 dark:text-gray-400 text-sm">
-                  No options found
-                </div>
-              ) : (
-                filteredOptions.map((option, index) => {
-                  const isSelected = selectedValues.includes(option.value);
-                  const isFocused = focusedIndex === index;
+              {/* Glass effect layers for dropdown */}
+              <div className="glass-filter" />
+              <div className="glass-overlay" />
+              <div className="glass-specular" />
+              
+              <div className="relative z-10">
+                {filteredOptions.length === 0 ? (
+                  <div className="px-4 py-3 text-center text-glass-grey/70 text-sm">
+                    No options found
+                  </div>
+                ) : (
+                  filteredOptions.map((option, index) => {
+                    const isSelected = selectedValues.includes(option.value);
+                    const isFocused = focusedIndex === index;
 
-                  return (
-                    <button
-                      key={option.value}
-                      type="button"
-                      onClick={() =>
-                        !option.disabled && handleSelect(option.value)
-                      }
-                      disabled={option.disabled}
-                      className={cn(
-                        "w-full px-4 py-3 text-left transition-colors duration-200",
-                        "hover:bg-white/10 dark:hover:bg-white/5",
-                        "focus:bg-white/10 focus:outline-none dark:focus:bg-white/5",
-                        "flex items-center justify-between",
-                        "text-gray-900 dark:text-white",
-                        microInteraction.gentle,
-                        option.disabled && "cursor-not-allowed opacity-50",
-                        isSelected &&
-                          "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-                        isFocused && "bg-white/10",
-                        "first:rounded-t-xl last:rounded-b-xl",
-                      )}
-                      role="option"
-                      aria-selected={isSelected}
-                      id={`glass-select-option-${option.value}`}
-                    >
-                      <span>{option.label}</span>
-                      {isSelected && (
-                        <Check className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                      )}
-                    </button>
-                  );
-                })
-              )}
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() =>
+                          !option.disabled && handleSelect(option.value)
+                        }
+                        disabled={option.disabled}
+                        className={cn(
+                          "w-full px-4 py-3 text-left transition-all duration-200",
+                          "motion-safe:hover:bg-glass-bg/20 glass-focus",
+                          "flex items-center justify-between text-glass-text",
+                          option.disabled && "cursor-not-allowed opacity-50",
+                          isSelected &&
+                            "bg-glass-accent/10 text-glass-accent",
+                          isFocused && "bg-glass-bg/20",
+                          "first:rounded-t-lg last:rounded-b-lg",
+                        )}
+                        role="option"
+                        aria-selected={isSelected}
+                        id={`glass-select-option-${option.value}`}
+                      >
+                        <span>{option.label}</span>
+                        {isSelected && (
+                          <Check className="h-4 w-4 text-glass-accent" />
+                        )}
+                      </button>
+                    );
+                  })
+                )}
+              </div>
             </div>
           )}
         </div>

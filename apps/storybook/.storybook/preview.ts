@@ -1,14 +1,10 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
 import React from "react";
 import { GlassUIProvider } from "../../../libs/components/src/providers/glass-ui-provider";
 import { ThemeProvider } from "../../../libs/components/src/hooks/use-theme";
 
-// Import CSS styles
-import "../../../libs/components/src/styles/glass.css";
-import "../../../libs/components/src/styles/glass-core.css";
-import "../../../libs/components/src/styles/glass-themes.css";
-import "../../../libs/components/src/styles/glass-animations.css";
-import "../../../libs/components/src/styles/glass-utilities.css";
+// Import new Tailwind CSS
+import "../../../libs/components/src/styles/index.css";
 
 const preview: Preview = {
   parameters: {
@@ -25,19 +21,23 @@ const preview: Preview = {
       canvas: { sourceState: "shown" },
     },
     backgrounds: {
-      default: "glass",
+      default: 'dark',
       values: [
         {
-          name: "glass",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: 'light',
+          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         },
         {
-          name: "light",
-          value: "#ffffff",
+          name: 'dim',
+          value: 'linear-gradient(135deg, #2d3748 0%, #4a5568 100%)',
         },
         {
-          name: "dark",
-          value: "#1a1a1a",
+          name: 'accent',
+          value: 'linear-gradient(135deg, #fb4268 0%, #ff6b9d 100%)',
+        },
+        {
+          name: 'dark',
+          value: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
         },
       ],
     },
@@ -82,33 +82,49 @@ const preview: Preview = {
   },
   globalTypes: {
     theme: {
-      name: "Theme",
-      description: "Global theme for components",
-      defaultValue: "light",
-      toolbar: {
-        icon: "paintbrush",
+      name: 'Theme',
+      toolbar: { 
+        icon: 'paintbrush', 
         items: [
-          { value: "light", title: "Light", right: "☀️" },
-          { value: "dark", title: "Dark", right: "🌙" },
-        ],
-        showName: true,
-        dynamicTitle: true,
+          { value: 'light', title: 'Light' },
+          { value: 'dim', title: 'Dim' },
+          { value: 'accent', title: 'Accent' }
+        ] 
       },
     },
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme as "light" | "dark";
+      const theme = context.globals.theme as "light" | "dim" | "accent";
 
-      // Apply theme to document element
+      // Apply theme to document element and update CSS variables
       React.useEffect(() => {
         if (typeof document !== "undefined") {
           document.documentElement.setAttribute("data-theme", theme);
           document.body.className =
-            document.body.className.replace(/theme-(light|dark)/g, "") +
+            document.body.className.replace(/theme-(light|dim|accent)/g, "") +
             ` theme-${theme}`;
+          
+          // Update CSS variables based on theme
+          const themes = {
+            light : { '--tw-bg-opacity': '0.25' },
+            dim   : { '--tw-bg-opacity': '0.15' },
+            accent: { '--lg-accent': '#fb4268' },
+          };
+          
+          const root = document.documentElement;
+          Object.entries(themes[theme] || {}).forEach(([key, value]) => {
+            root.style.setProperty(key, value);
+          });
         }
       }, [theme]);
+
+      // Add background animation class
+      React.useEffect(() => {
+        if (typeof document !== "undefined") {
+          document.documentElement.classList.add('animate-bg-move', 'bg-cover');
+        }
+      }, []);
 
       try {
         return React.createElement(
@@ -126,13 +142,11 @@ const preview: Preview = {
             React.createElement(
               "div",
               {
+                className: "container flex flex-col gap-4 min-h-screen p-4",
                 style: {
-                  padding: "1rem",
-                  minHeight: "100vh",
-                  background:
-                    theme === "dark"
-                      ? "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)"
-                      : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                  background: context.parameters.backgrounds?.values?.find(
+                    bg => bg.name === (context.globals.background || 'dark')
+                  )?.value || 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
                 },
               },
               React.createElement(Story),
@@ -143,21 +157,21 @@ const preview: Preview = {
         console.error("Storybook decorator error:", error);
         return React.createElement(
           "div",
-          { style: { padding: "1rem", color: "red" } },
-          React.createElement("h3", null, "Story Error"),
+          { className: "p-4 text-red-500" },
+          React.createElement("h3", { className: "text-lg font-bold" }, "Story Error"),
           React.createElement(
             "p",
-            null,
+            { className: "mt-2" },
             "Failed to render story: ",
             error instanceof Error ? error.message : "Unknown error",
           ),
           React.createElement(
             "details",
-            null,
-            React.createElement("summary", null, "Error Details"),
+            { className: "mt-4" },
+            React.createElement("summary", { className: "cursor-pointer font-medium" }, "Error Details"),
             React.createElement(
               "pre",
-              null,
+              { className: "mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto" },
               error instanceof Error ? error.stack : String(error),
             ),
           ),

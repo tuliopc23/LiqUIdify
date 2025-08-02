@@ -1,12 +1,13 @@
 /**
- * Refactored Glass Card Component
+ * Refactored Glass Card Component - Tailwind Migration
  *
- * This component demonstrates the compound component architecture with:
+ * This component demonstrates the Tailwind-based compound component architecture with:
+ * - Tailwind CSS classes with glass utilities plugin
+ * - HIG-compliant corner radii (radius-lg-s/m/l)
+ * - Motion-safe hover and active states
+ * - Glass effects using custom Tailwind utilities
  * - Compound components pattern with Card.Header, Card.Content, etc.
- * - Unified base component system
- * - Centralized glass effects
  * - Proper forwardRef throughout
- * - Separated business logic from presentation
  */
 
 import React, {
@@ -25,10 +26,6 @@ import type {
 } from "../../core/base-component";
 import { cn } from "../../core/utils/classname";
 import { useGlassStateTransitions } from "../../hooks/use-glass-animations";
-import {
-  generateGlassClasses,
-  generateGlassVariables,
-} from "../../core/glass/unified-glass-system";
 
 // Card state type
 interface CardState {
@@ -117,37 +114,63 @@ const useCardContext = () => {
   return context;
 };
 
-// Variant class mappings
+// Variant class mappings using Tailwind + glass utilities
 const VARIANT_CLASSES = {
-  primary:
-    "bg-white/90 dark:bg-gray-800/90 border-gray-200/50 dark:border-gray-700/50",
-  secondary:
-    "bg-gray-50/90 dark:bg-gray-900/90 border-gray-300/50 dark:border-gray-600/50",
-  tertiary: "bg-transparent border-gray-200/30 dark:border-gray-700/30",
-  ghost: "bg-transparent border-transparent",
-  destructive:
-    "bg-red-50/90 dark:bg-red-900/10 border-red-200/50 dark:border-red-800/50",
-  apple:
-    "bg-white/80 dark:bg-gray-800/80 border-gray-200/30 dark:border-gray-700/30",
+  primary: cn(
+    "glass glass-card",
+    "bg-white/90 dark:bg-gray-800/90",
+    "border border-gray-200/50 dark:border-gray-700/50"
+  ),
+  secondary: cn(
+    "glass glass-card",
+    "bg-gray-50/90 dark:bg-gray-900/90",
+    "border border-gray-300/50 dark:border-gray-600/50"
+  ),
+  tertiary: cn(
+    "glass-card bg-transparent",
+    "border border-gray-200/30 dark:border-gray-700/30"
+  ),
+  ghost: cn(
+    "glass-card bg-transparent border-transparent"
+  ),
+  destructive: cn(
+    "glass glass-card",
+    "bg-red-50/90 dark:bg-red-900/10",
+    "border border-red-200/50 dark:border-red-800/50"
+  ),
+  apple: cn(
+    "glass glass-card",
+    "bg-white/80 dark:bg-gray-800/80",
+    "border border-gray-200/30 dark:border-gray-700/30"
+  ),
 };
 
-// Elevation mappings
+// Elevation mappings using Tailwind shadow utilities
 const ELEVATION_CLASSES = {
   none: "",
   sm: "shadow-sm",
-  md: "shadow-md",
+  md: "shadow-glass",
   lg: "shadow-lg",
   xl: "shadow-xl",
 };
 
-// Padding mappings
+// Padding mappings using Tailwind spacing
 const PADDING_CLASSES = {
   none: "",
   xs: "p-2",
-  sm: "p-3",
+  sm: "p-3", 
   md: "p-4",
   lg: "p-6",
   xl: "p-8",
+};
+
+// Size-based radius mappings (HIG-compliant)
+const RADIUS_CLASSES = {
+  xs: "radius-lg-s",
+  sm: "radius-lg-s",
+  md: "radius-lg-m", 
+  lg: "radius-lg-m",
+  xl: "radius-lg-l",
 };
 
 /**
@@ -301,45 +324,26 @@ export const GlassCard = React.memo(
         [interactive, selectable, actions, onCardClick],
       );
 
-      // Generate glass classes and variables
-      const glassClasses = generateGlassClasses({
-        variant: variant as any,
-        intensity: glassEffect?.intensity,
-        state: currentState,
-        glassEffect: glassEffect as Record<string, unknown>,
-      });
-
-      const glassVariables = generateGlassVariables({
-        intensity: glassEffect?.intensity,
-        config: {
-          animation: { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" },
-          ...glassEffect,
-        },
-      });
-
-      // Build component classes
+      // Build component classes using Tailwind + glass utilities
       const componentClasses = cn(
-        // Base classes
-        "relative overflow-hidden",
-        "rounded-xl",
-        "will-change-transform",
+        // Base classes with glass utilities
+        "relative overflow-hidden will-change-transform",
+        
+        // HIG-compliant radius based on size
+        RADIUS_CLASSES[size as keyof typeof RADIUS_CLASSES],
 
-        // Glass effect classes
-        glassClasses,
-
-        // Variant classes
+        // Variant classes (includes glass utilities)
         VARIANT_CLASSES[variant as keyof typeof VARIANT_CLASSES],
 
         // Layout classes
         PADDING_CLASSES[padding as keyof typeof PADDING_CLASSES],
 
-        // State classes
+        // State classes with motion-safe prefixes
         {
-          border: bordered,
           "cursor-pointer": interactive || selectable,
-          "ring-2 ring-blue-500/20": state.isSelected,
-          "hover:shadow-lg": hover && !disableAnimations,
-          "active:scale-[0.98]": interactive && !disableAnimations,
+          "ring-2 ring-glass-accent/20": state.isSelected,
+          "motion-safe:hover:shadow-lg": hover && !disableAnimations,
+          "motion-safe:active:scale-[0.98]": interactive && !disableAnimations,
           flex: orientation === "horizontal",
           "flex-col": orientation === "vertical",
         },
@@ -347,7 +351,7 @@ export const GlassCard = React.memo(
         // Elevation classes
         ELEVATION_CLASSES[elevation],
 
-        // Animation classes
+        // Animation classes with motion-safe
         !disableAnimations && "transition-all duration-300 ease-out",
 
         // Custom classes
@@ -368,7 +372,6 @@ export const GlassCard = React.memo(
           <div
             ref={ref}
             className={componentClasses}
-            style={glassVariables as React.CSSProperties}
             onClick={handleClick}
             onKeyDown={handleKeyDown}
             onMouseEnter={handleMouseEnter}
@@ -382,7 +385,15 @@ export const GlassCard = React.memo(
             data-testid="glass-card"
             {...props}
           >
-            {children}
+            {/* Glass effect layers */}
+            <div className="glass-filter" />
+            <div className="glass-overlay" />
+            <div className="glass-specular" />
+            
+            {/* Card content */}
+            <div className="glass-content">
+              {children}
+            </div>
           </div>
         </CardContext.Provider>
       );

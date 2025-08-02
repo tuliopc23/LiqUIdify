@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Heart, MessageCircle, Share2, User } from "lucide-react";
 import {
   GlassSkeleton,

@@ -1,0 +1,387 @@
+---
+title: "Glass Spinner"
+description: "A loading spinner component with glass morphism effects for indicating loading states."
+icon: "spinner"
+---
+
+# Glass Spinner
+
+The Glass Spinner component provides an elegant loading indicator with glass morphism effects. Perfect for showing loading states while maintaining the modern glass aesthetic.
+
+## Basic Usage
+
+```tsx
+import { GlassSpinner } from '@liquidify/react';
+
+function BasicSpinner() {
+  return <GlassSpinner />;
+}
+```
+
+## Sizes
+
+Available in multiple sizes to fit different contexts:
+
+```tsx
+import { GlassSpinner } from '@liquidify/react';
+
+function SpinnerSizes() {
+  return (
+    <div className="flex items-center gap-4">
+      <GlassSpinner size="xs" />
+      <GlassSpinner size="sm" />
+      <GlassSpinner size="md" />
+      <GlassSpinner size="lg" />
+      <GlassSpinner size="xl" />
+    </div>
+  );
+}
+```
+
+## Colors
+
+Customize the spinner color to match your design:
+
+```tsx
+import { GlassSpinner } from '@liquidify/react';
+
+function ColoredSpinners() {
+  return (
+    <div className="flex items-center gap-4">
+      <GlassSpinner color="primary" />
+      <GlassSpinner color="secondary" />
+      <GlassSpinner color="success" />
+      <GlassSpinner color="warning" />
+      <GlassSpinner color="error" />
+    </div>
+  );
+}
+```
+
+## With Label
+
+Add descriptive text to provide context:
+
+```tsx
+import { GlassSpinner } from '@liquidify/react';
+
+function SpinnerWithLabel() {
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <GlassSpinner size="lg" />
+      <span className="text-sm text-gray-600">Loading...</span>
+    </div>
+  );
+}
+```
+
+## Custom Glass Effects
+
+Customize the glass morphism appearance:
+
+```tsx
+import { GlassSpinner } from '@liquidify/react';
+
+function CustomGlassSpinner() {
+  return (
+    <GlassSpinner
+      size="lg"
+      glassEffect={{
+        blur: 20,
+        opacity: 0.2,
+        borderOpacity: 0.3,
+        shadow: 'lg'
+      }}
+    />
+  );
+}
+```
+
+## Loading States
+
+Use with different loading scenarios:
+
+```tsx
+import { GlassSpinner, GlassButton } from '@liquidify/react';
+import { useState } from 'react';
+
+function LoadingButton() {
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = async () => {
+    setLoading(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setLoading(false);
+  };
+
+  return (
+    <GlassButton onClick={handleClick} disabled={loading}>
+      {loading ? (
+        <>
+          <GlassSpinner size="sm" />
+          Loading...
+        </>
+      ) : (
+        'Click me'
+      )}
+    </GlassButton>
+  );
+}
+```
+
+## Full Page Loading
+
+Create a full-page loading overlay:
+
+```tsx
+import { GlassSpinner } from '@liquidify/react';
+
+function FullPageLoader({ isLoading }: { isLoading: boolean }) {
+  if (!isLoading) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="flex flex-col items-center gap-4">
+        <GlassSpinner size="xl" />
+        <p className="text-white text-lg">Loading your content...</p>
+      </div>
+    </div>
+  );
+}
+```
+
+## Inline Loading
+
+Show loading state inline with content:
+
+```tsx
+import { GlassSpinner } from '@liquidify/react';
+
+function InlineLoader({ loading, children }: { loading: boolean; children: React.ReactNode }) {
+  return (
+    <div className="relative">
+      {loading && (
+        <div className="absolute inset-0 bg-white/50 backdrop-blur-sm flex items-center justify-center">
+          <GlassSpinner />
+        </div>
+      )}
+      <div className={loading ? 'opacity-50' : ''}>
+        {children}
+      </div>
+    </div>
+  );
+}
+```
+
+## Animation Variants
+
+Different animation styles for various use cases:
+
+```tsx
+import { GlassSpinner } from '@liquidify/react';
+
+function AnimationVariants() {
+  return (
+    <div className="flex items-center gap-6">
+      <div className="text-center">
+        <GlassSpinner variant="spin" />
+        <p className="mt-2 text-sm">Spin</p>
+      </div>
+      <div className="text-center">
+        <GlassSpinner variant="pulse" />
+        <p className="mt-2 text-sm">Pulse</p>
+      </div>
+      <div className="text-center">
+        <GlassSpinner variant="bounce" />
+        <p className="mt-2 text-sm">Bounce</p>
+      </div>
+      <div className="text-center">
+        <GlassSpinner variant="dots" />
+        <p className="mt-2 text-sm">Dots</p>
+      </div>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### GlassSpinner Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Size of the spinner |
+| `color` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| string` | `'primary'` | Color of the spinner |
+| `variant` | `'spin' \| 'pulse' \| 'bounce' \| 'dots'` | `'spin'` | Animation variant |
+| `speed` | `'slow' \| 'normal' \| 'fast'` | `'normal'` | Animation speed |
+| `glassEffect` | `GlassEffectProps` | - | Glass morphism effect configuration |
+| `className` | `string` | - | Additional CSS classes |
+| `aria-label` | `string` | `'Loading'` | Accessibility label |
+
+### GlassEffectProps
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `blur` | `number` | `12` | Backdrop blur intensity |
+| `opacity` | `number` | `0.1` | Background opacity |
+| `borderOpacity` | `number` | `0.2` | Border opacity |
+| `shadow` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Shadow size |
+
+## Styling
+
+### CSS Variables
+
+```css
+.glass-spinner {
+  --glass-spinner-size: 2rem;
+  --glass-spinner-color: var(--liquid-primary);
+  --glass-spinner-blur: 12px;
+  --glass-spinner-bg-opacity: 0.1;
+  --glass-spinner-border-opacity: 0.2;
+  --glass-spinner-speed: 1s;
+}
+```
+
+### Size Variants
+
+```css
+.glass-spinner--xs { --glass-spinner-size: 1rem; }
+.glass-spinner--sm { --glass-spinner-size: 1.5rem; }
+.glass-spinner--md { --glass-spinner-size: 2rem; }
+.glass-spinner--lg { --glass-spinner-size: 2.5rem; }
+.glass-spinner--xl { --glass-spinner-size: 3rem; }
+```
+
+### Custom Animations
+
+```css
+@keyframes glass-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glass-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes glass-bounce {
+  0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+  40%, 43% { transform: translate3d(0, -30px, 0); }
+  70% { transform: translate3d(0, -15px, 0); }
+  90% { transform: translate3d(0, -4px, 0); }
+}
+```
+
+## Accessibility
+
+The Glass Spinner component includes accessibility features:
+
+- Proper ARIA labels for screen readers
+- Respects `prefers-reduced-motion` settings
+- Semantic loading indicators
+- Keyboard navigation support
+
+```tsx
+// Reduced motion support
+<GlassSpinner 
+  variant="pulse" // Falls back to pulse for reduced motion
+  aria-label="Loading content"
+/>
+```
+
+## Best Practices
+
+### 1. Provide Context
+
+Always provide context about what's loading:
+
+```tsx
+// Good
+<div>
+  <GlassSpinner />
+  <span className="sr-only">Loading user profile</span>
+</div>
+
+// Better
+<div aria-live="polite">
+  <GlassSpinner aria-label="Loading user profile" />
+  <span>Loading user profile...</span>
+</div>
+```
+
+### 2. Use Appropriate Sizes
+
+Match spinner size to the context:
+
+```tsx
+// Small for buttons
+<GlassButton disabled>
+  <GlassSpinner size="xs" />
+  Save
+</GlassButton>
+
+// Large for page loading
+<div className="min-h-screen flex items-center justify-center">
+  <GlassSpinner size="xl" />
+</div>
+```
+
+### 3. Handle Loading States
+
+Properly manage loading states:
+
+```tsx
+function DataComponent() {
+  const { data, loading, error } = useQuery();
+
+  if (loading) return <GlassSpinner />;
+  if (error) return <ErrorMessage />;
+  return <DataDisplay data={data} />;
+}
+```
+
+## Examples
+
+### Card Loading State
+
+```tsx
+function LoadingCard() {
+  return (
+    <div className="glass-card p-6">
+      <div className="flex items-center justify-center h-32">
+        <GlassSpinner size="lg" />
+      </div>
+      <div className="mt-4 text-center">
+        <p className="text-gray-600">Loading content...</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### Search Loading
+
+```tsx
+function SearchWithLoading() {
+  const [query, setQuery] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  return (
+    <div className="relative">
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search..."
+        className="w-full pr-10"
+      />
+      {loading && (
+        <div className="absolute right-3 top-1/2 -translate-y-1/2">
+          <GlassSpinner size="sm" />
+        </div>
+      )}
+    </div>
+  );
+}
+```

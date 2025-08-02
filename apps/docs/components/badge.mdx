@@ -1,0 +1,522 @@
+---
+title: "Badge"
+description: "A small status indicator component for displaying counts, labels, and status information."
+icon: "tag"
+---
+
+# Badge
+
+The Badge component is used to display small pieces of information like counts, status indicators, or labels. It's perfect for showing notifications, categories, or highlighting important information.
+
+## Basic Usage
+
+```tsx
+import { Badge } from '@liquidify/react';
+
+function BasicBadge() {
+  return <Badge>New</Badge>;
+}
+```
+
+## Variants
+
+Choose from different visual styles:
+
+```tsx
+import { Badge } from '@liquidify/react';
+
+function BadgeVariants() {
+  return (
+    <div className="flex items-center gap-2">
+      <Badge variant="solid">Solid</Badge>
+      <Badge variant="outline">Outline</Badge>
+      <Badge variant="soft">Soft</Badge>
+      <Badge variant="ghost">Ghost</Badge>
+    </div>
+  );
+}
+```
+
+## Colors
+
+Available in multiple colors to convey different meanings:
+
+```tsx
+import { Badge } from '@liquidify/react';
+
+function BadgeColors() {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge color="primary">Primary</Badge>
+      <Badge color="secondary">Secondary</Badge>
+      <Badge color="success">Success</Badge>
+      <Badge color="warning">Warning</Badge>
+      <Badge color="danger">Danger</Badge>
+      <Badge color="info">Info</Badge>
+    </div>
+  );
+}
+```
+
+## Sizes
+
+Different sizes for various use cases:
+
+```tsx
+import { Badge } from '@liquidify/react';
+
+function BadgeSizes() {
+  return (
+    <div className="flex items-center gap-2">
+      <Badge size="xs">XS</Badge>
+      <Badge size="sm">Small</Badge>
+      <Badge size="md">Medium</Badge>
+      <Badge size="lg">Large</Badge>
+    </div>
+  );
+}
+```
+
+## With Icons
+
+Add icons to provide more context:
+
+```tsx
+import { Badge } from '@liquidify/react';
+import { Star, Check, AlertTriangle, X } from 'lucide-react';
+
+function BadgeWithIcons() {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge color="success" startContent={<Check size={12} />}>
+        Completed
+      </Badge>
+      <Badge color="warning" startContent={<AlertTriangle size={12} />}>
+        Warning
+      </Badge>
+      <Badge color="primary" startContent={<Star size={12} />}>
+        Featured
+      </Badge>
+      <Badge color="danger" endContent={<X size={12} />}>
+        Error
+      </Badge>
+    </div>
+  );
+}
+```
+
+## Notification Badges
+
+Perfect for showing counts and notifications:
+
+```tsx
+import { Badge, Button, Avatar } from '@liquidify/react';
+import { Bell, Mail, ShoppingCart } from 'lucide-react';
+
+function NotificationBadges() {
+  return (
+    <div className="flex items-center gap-4">
+      <div className="relative">
+        <Button variant="ghost" isIconOnly>
+          <Bell size={20} />
+        </Button>
+        <Badge
+          content="5"
+          color="danger"
+          size="sm"
+          className="absolute -top-1 -right-1"
+        />
+      </div>
+      
+      <div className="relative">
+        <Button variant="ghost" isIconOnly>
+          <Mail size={20} />
+        </Button>
+        <Badge
+          content="12"
+          color="primary"
+          size="sm"
+          className="absolute -top-1 -right-1"
+        />
+      </div>
+      
+      <div className="relative">
+        <Button variant="ghost" isIconOnly>
+          <ShoppingCart size={20} />
+        </Button>
+        <Badge
+          content="3"
+          color="success"
+          size="sm"
+          className="absolute -top-1 -right-1"
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+## Status Badges
+
+Use badges to show status information:
+
+```tsx
+import { Badge } from '@liquidify/react';
+
+function StatusBadges() {
+  const statuses = [
+    { label: 'Active', color: 'success' },
+    { label: 'Pending', color: 'warning' },
+    { label: 'Inactive', color: 'danger' },
+    { label: 'Draft', color: 'secondary' }
+  ];
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      {statuses.map((status) => (
+        <Badge
+          key={status.label}
+          color={status.color}
+          variant="soft"
+        >
+          {status.label}
+        </Badge>
+      ))}
+    </div>
+  );
+}
+```
+
+## Interactive Badges
+
+Make badges clickable or dismissible:
+
+```tsx
+import { Badge } from '@liquidify/react';
+import { X } from 'lucide-react';
+import { useState } from 'react';
+
+function InteractiveBadges() {
+  const [tags, setTags] = useState(['React', 'TypeScript', 'Tailwind']);
+
+  const removeTag = (tagToRemove: string) => {
+    setTags(tags.filter(tag => tag !== tagToRemove));
+  };
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <Badge
+          key={tag}
+          variant="outline"
+          color="primary"
+          endContent={
+            <button
+              onClick={() => removeTag(tag)}
+              className="ml-1 hover:bg-red-100 rounded-full p-0.5"
+            >
+              <X size={10} />
+            </button>
+          }
+        >
+          {tag}
+        </Badge>
+      ))}
+    </div>
+  );
+}
+```
+
+## Dot Badges
+
+Simple dot indicators for minimal designs:
+
+```tsx
+import { Badge } from '@liquidify/react';
+
+function DotBadges() {
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center gap-2">
+        <Badge variant="dot" color="success" />
+        <span>Online</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Badge variant="dot" color="warning" />
+        <span>Away</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Badge variant="dot" color="danger" />
+        <span>Busy</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Badge variant="dot" color="secondary" />
+        <span>Offline</span>
+      </div>
+    </div>
+  );
+}
+```
+
+## Custom Content
+
+Use badges with custom content:
+
+```tsx
+import { Badge } from '@liquidify/react';
+
+function CustomContentBadges() {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge color="primary">
+        <span className="font-mono text-xs">v2.1.0</span>
+      </Badge>
+      
+      <Badge color="success" variant="soft">
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          <span>Live</span>
+        </div>
+      </Badge>
+      
+      <Badge color="warning">
+        <span className="font-bold">HOT</span>
+      </Badge>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Badge Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'solid' \| 'outline' \| 'soft' \| 'ghost' \| 'dot'` | `'solid'` | Visual variant |
+| `color` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'primary'` | Badge color |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg'` | `'sm'` | Badge size |
+| `content` | `string \| number` | - | Badge content (for notification badges) |
+| `startContent` | `ReactNode` | - | Leading content/icon |
+| `endContent` | `ReactNode` | - | Trailing content/icon |
+| `isOneChar` | `boolean` | `false` | Optimize for single character |
+| `showOutline` | `boolean` | `false` | Show outline border |
+| `placement` | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left'` | `'top-right'` | Badge placement (for notification badges) |
+| `className` | `string` | - | Additional CSS classes |
+| `children` | `ReactNode` | - | Badge content |
+
+## Styling
+
+### CSS Variables
+
+```css
+.badge {
+  --badge-padding: 0.25rem 0.5rem;
+  --badge-font-size: 0.75rem;
+  --badge-font-weight: 500;
+  --badge-border-radius: 0.375rem;
+  --badge-border-width: 1px;
+}
+
+.badge--xs {
+  --badge-padding: 0.125rem 0.375rem;
+  --badge-font-size: 0.625rem;
+}
+
+.badge--sm {
+  --badge-padding: 0.25rem 0.5rem;
+  --badge-font-size: 0.75rem;
+}
+
+.badge--md {
+  --badge-padding: 0.375rem 0.75rem;
+  --badge-font-size: 0.875rem;
+}
+
+.badge--lg {
+  --badge-padding: 0.5rem 1rem;
+  --badge-font-size: 1rem;
+}
+```
+
+### Color Variants
+
+```css
+.badge--primary-solid {
+  --badge-bg: var(--liquid-primary);
+  --badge-text: white;
+}
+
+.badge--primary-outline {
+  --badge-bg: transparent;
+  --badge-text: var(--liquid-primary);
+  --badge-border: var(--liquid-primary);
+}
+
+.badge--primary-soft {
+  --badge-bg: var(--liquid-primary-50);
+  --badge-text: var(--liquid-primary-700);
+}
+
+.badge--primary-ghost {
+  --badge-bg: transparent;
+  --badge-text: var(--liquid-primary);
+}
+```
+
+## Accessibility
+
+The Badge component includes accessibility features:
+
+- Proper ARIA labels for screen readers
+- Semantic HTML structure
+- Color contrast compliance
+- Keyboard navigation support
+
+```tsx
+<Badge
+  aria-label="5 unread notifications"
+  role="status"
+>
+  5
+</Badge>
+```
+
+## Best Practices
+
+### 1. Use Semantic Colors
+
+Choose colors that match the meaning:
+
+```tsx
+// Good
+<Badge color="success">Approved</Badge>
+<Badge color="warning">Pending</Badge>
+<Badge color="danger">Rejected</Badge>
+
+// Avoid
+<Badge color="primary">Error</Badge>
+<Badge color="success">Warning</Badge>
+```
+
+### 2. Keep Content Short
+
+Badges work best with concise content:
+
+```tsx
+// Good
+<Badge>New</Badge>
+<Badge>5</Badge>
+<Badge>Beta</Badge>
+
+// Avoid
+<Badge>This is a very long badge text</Badge>
+```
+
+### 3. Use Appropriate Sizes
+
+Match badge size to the context:
+
+```tsx
+// Small for compact layouts
+<Badge size="xs">1</Badge>
+
+// Medium for general use
+<Badge size="md">Featured</Badge>
+
+// Large for emphasis
+<Badge size="lg">Important</Badge>
+```
+
+## Examples
+
+### Product Card with Badges
+
+```tsx
+function ProductCard({ product }: { product: Product }) {
+  return (
+    <div className="bg-white rounded-lg shadow p-4">
+      <div className="relative">
+        <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded" />
+        {product.isNew && (
+          <Badge
+            color="success"
+            className="absolute top-2 left-2"
+          >
+            New
+          </Badge>
+        )}
+        {product.discount > 0 && (
+          <Badge
+            color="danger"
+            className="absolute top-2 right-2"
+          >
+            -{product.discount}%
+          </Badge>
+        )}
+      </div>
+      
+      <div className="mt-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-semibold">{product.name}</h3>
+          <Badge variant="soft" color="primary">
+            {product.category}
+          </Badge>
+        </div>
+        
+        <div className="flex items-center gap-2 mt-2">
+          <span className="text-lg font-bold">${product.price}</span>
+          {product.rating && (
+            <Badge
+              variant="outline"
+              color="warning"
+              startContent={<Star size={12} />}
+            >
+              {product.rating}
+            </Badge>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### User Status List
+
+```tsx
+function UserStatusList({ users }: { users: User[] }) {
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'online': return 'success';
+      case 'away': return 'warning';
+      case 'busy': return 'danger';
+      default: return 'secondary';
+    }
+  };
+
+  return (
+    <div className="space-y-2">
+      {users.map((user) => (
+        <div key={user.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+          <div className="flex items-center gap-3">
+            <Avatar src={user.avatar} name={user.name} size="sm" />
+            <div>
+              <p className="font-medium">{user.name}</p>
+              <p className="text-sm text-gray-600">{user.email}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <Badge
+              variant="dot"
+              color={getStatusColor(user.status)}
+            />
+            <span className="text-sm capitalize">{user.status}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```

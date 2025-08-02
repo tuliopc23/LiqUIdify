@@ -1,72 +1,41 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { cn } from "@/core/utils/classname";
-import { generateStaticKey } from "@/core/utils/stable-key";
-import {
-  createVariants as cva,
-  type InferVariantProps as VariantProps,
-} from "../../lib/variant-system";
+import { cn } from "../../core/utils/classname";
 
-const spinnerVariants = cva(
-  ["inline-block rounded-full", "border-2 border-solid"],
+// Variant mappings using Tailwind classes
+const VARIANT_CLASSES = {
+  default: "border-glass-hl/20 border-t-blue-400",
+  primary: "border-glass-hl/20 border-t-blue-500",
+  secondary: "border-glass-hl/20 border-t-purple-400",
+  success: "border-glass-hl/20 border-t-green-400",
+  warning: "border-glass-hl/20 border-t-yellow-400",
+  error: "border-glass-hl/20 border-t-red-400",
+  glass: "border-glass-hl/10 border-t-glass-hl/50 backdrop-blur-glass",
+};
 
-  {
-    variants: {
-      variant: {
-        default: "border-white/20 border-t-blue-400",
-        primary: "border-white/20 border-t-blue-500",
-        secondary: "border-white/20 border-t-purple-400",
-        success: "border-white/20 border-t-green-400",
-        warning: "border-white/20 border-t-yellow-400",
-        error: "border-white/20 border-t-red-400",
-        glass: "border-white/10 border-t-white/50 backdrop-blur-sm",
-      },
-      size: {
-        xs: "h-3 w-3 border",
-        sm: "h-4 w-4 border",
-        md: "h-6 w-6 border-2",
-        lg: "h-8 w-8 border-2",
-        xl: "h-12 w-12 border-2",
-        "2xl": "h-16 w-16 border-4",
-      },
-      speed: {
-        slow: "animate-spin-slow",
-        normal: "animate-spin",
-        fast: "animate-spin-fast",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
-      speed: "normal",
-    },
-  },
-);
+const SIZE_CLASSES = {
+  xs: "h-3 w-3 border",
+  sm: "h-4 w-4 border",
+  md: "h-6 w-6 border-2",
+  lg: "h-8 w-8 border-2",
+  xl: "h-12 w-12 border-2",
+  "2xl": "h-16 w-16 border-4",
+};
 
-const containerVariants = cva({
-  base: "flex items-center justify-center",
-  variants: {
-    orientation: {
-      horizontal: "flex-row space-x-2",
-      vertical: "flex-col space-y-2",
-    },
-  },
-  defaultVariants: {
-    orientation: "horizontal",
-  },
-});
+const SPEED_CLASSES = {
+  slow: "animate-spin",
+  normal: "animate-spin",
+  fast: "animate-spin",
+};
 
 interface GlassSpinnerProps
-  extends Omit<
-      React.HTMLAttributes<HTMLDivElement>,
-      keyof React.AriaAttributes
-    >,
-    VariantProps<typeof spinnerVariants>,
-    VariantProps<typeof containerVariants> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes> {
+  variant?: keyof typeof VARIANT_CLASSES;
+  size?: keyof typeof SIZE_CLASSES;
+  speed?: keyof typeof SPEED_CLASSES;
+  orientation?: "horizontal" | "vertical";
   label?: string;
-
   showLabel?: boolean;
-
   centered?: boolean;
 }
 
@@ -74,10 +43,10 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
   (
     {
       className,
-      variant,
-      size,
-      speed,
-      orientation,
+      variant = "default",
+      size = "md",
+      speed = "normal",
+      orientation = "horizontal",
       label = "Loading...",
       showLabel = false,
       centered = false,
@@ -87,7 +56,12 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
   ) => {
     const SpinnerElement = () => (
       <motion.div
-        className={cn(spinnerVariants({ variant, size, speed }), className)}
+        className={cn(
+          "inline-block rounded-full border-2 border-solid",
+          VARIANT_CLASSES[variant],
+          SIZE_CLASSES[size],
+          SPEED_CLASSES[speed],
+        )}
         animate={{ rotate: 360 }}
         transition={{
           duration: speed === "slow" ? 2 : speed === "fast" ? 0.5 : 1,
@@ -103,7 +77,8 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
       <div
         ref={ref}
         className={cn(
-          containerVariants({ orientation }),
+          "flex items-center justify-center",
+          orientation === "horizontal" ? "flex-row space-x-2" : "flex-col space-y-2",
           centered && "fixed inset-0 z-50 bg-black/20 backdrop-blur-sm",
           className,
         )}
@@ -111,7 +86,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
       >
         <SpinnerElement />
         {showLabel && (
-          <span className="select-none text-sm text-white/70">{label}</span>
+          <span className="select-none text-sm text-glass-text/70">{label}</span>
         )}
       </div>
     );
@@ -120,7 +95,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
   },
 );
 
-// Pulse spinner variant
+// Pulse spinner variant with Tailwind classes
 export const PulseSpinner: React.FC<{
   className?: string;
   size?: "sm" | "md" | "lg";
@@ -136,8 +111,11 @@ export const PulseSpinner: React.FC<{
     <div className={cn("flex space-x-1", className)}>
       {[0, 1, 2].map((index) => (
         <motion.div
-          key={generateStaticKey("pulse", index)}
-          className={cn("rounded-full", sizeClasses[size], `bg-${color}/50`)}
+          key={`pulse-${index}`}
+          className={cn(
+            "rounded-full bg-glass-hl/50",
+            sizeClasses[size],
+          )}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.5, 1, 0.5],
@@ -154,7 +132,7 @@ export const PulseSpinner: React.FC<{
   );
 };
 
-// Dots spinner variant
+// Dots spinner variant with Tailwind classes
 export const DotsSpinner: React.FC<{
   className?: string;
   size?: "sm" | "md" | "lg";
@@ -170,8 +148,8 @@ export const DotsSpinner: React.FC<{
     <div className={cn("flex space-x-1", className)}>
       {Array.from({ length: count }).map((_, index) => (
         <motion.div
-          key={generateStaticKey("dot", index)}
-          className={cn("rounded-full bg-white/60", sizeClasses[size])}
+          key={`dot-${index}`}
+          className={cn("rounded-full bg-glass-hl/60", sizeClasses[size])}
           animate={{
             y: [0, -8, 0],
           }}
@@ -187,7 +165,7 @@ export const DotsSpinner: React.FC<{
   );
 };
 
-// Ring spinner variant
+// Ring spinner variant with Tailwind classes
 export const RingSpinner: React.FC<{
   className?: string;
   size?: "sm" | "md" | "lg";
@@ -202,7 +180,7 @@ export const RingSpinner: React.FC<{
   return (
     <motion.div
       className={cn(
-        "rounded-full border-white/20",
+        "rounded-full border-glass-hl/20",
         sizeClasses[size],
         className,
       )}
@@ -220,7 +198,7 @@ export const RingSpinner: React.FC<{
   );
 };
 
-// Glass wave spinner
+// Glass wave spinner with Tailwind classes
 export const WaveSpinner: React.FC<{
   className?: string;
   bars?: number;
@@ -229,8 +207,8 @@ export const WaveSpinner: React.FC<{
     <div className={cn("flex items-end space-x-1", className)}>
       {Array.from({ length: bars }).map((_, index) => (
         <motion.div
-          key={generateStaticKey("wave-bar", index)}
-          className="w-1 rounded-full bg-gradient-to-t from-blue-400 to-purple-400"
+          key={`wave-bar-${index}`}
+          className="w-1 radius-lg-s bg-gradient-to-t from-blue-400 to-purple-400"
           animate={{
             height: [8, 24, 8],
           }}

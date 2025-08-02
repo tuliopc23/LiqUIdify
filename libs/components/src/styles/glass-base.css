@@ -21,6 +21,14 @@
   /* Transitions */
   --glass-transition-fast: 200ms ease-out;
   --glass-transition-normal: 300ms ease-out;
+
+  /* Liquid Glass Effect */
+  --glass-liquid-highlight: rgba(255, 255, 255, 1);
+  --glass-liquid-shadow: rgba(0, 0, 0, 0.8);
+  --glass-liquid-bg: rgba(255, 255, 255, 0.1);
+  --glass-liquid-opacity: 0.6;
+  --glass-liquid-blur: blur(1px);
+  --glass-liquid-brightness: brightness(115%);
 }
 
 [data-theme="dark"] {
@@ -34,10 +42,32 @@
 
 /* Core Glass Effect */
 .glass-effect {
+  position: relative;
   background: var(--glass-bg-primary);
   backdrop-filter: var(--glass-blur-medium) saturate(180%);
   -webkit-backdrop-filter: var(--glass-blur-medium) saturate(180%);
   border: 1px solid var(--glass-border-light);
+}
+
+.glass-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--glass-liquid-bg);
+  border-radius: inherit;
+  backdrop-filter: var(--glass-liquid-blur);
+  box-shadow: 
+    inset -10px -8px 0px -11px var(--glass-liquid-highlight),
+    inset 0px -9px 0px -8px var(--glass-liquid-highlight);
+  opacity: var(--glass-liquid-opacity);
+  z-index: -1;
+  filter: 
+    var(--glass-liquid-blur)
+    drop-shadow(10px 4px 6px var(--glass-liquid-shadow))
+    var(--glass-liquid-brightness);
 }
 
 /* Utility classes for glass buttons, cards, modals, inputs, etc. */

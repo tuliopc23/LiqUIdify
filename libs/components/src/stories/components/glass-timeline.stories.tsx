@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Code, Rocket, Star, Target, Trophy, Users } from "lucide-react";
 import React from "react";
 import { GlassButton } from "@/components/glass-button-refactored/glass-button";

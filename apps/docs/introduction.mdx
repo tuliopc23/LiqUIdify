@@ -1,199 +1,257 @@
 ---
-title: "LiqUIdify - Modern Glassmorphism Components"
-description: "Production-ready React component library with 52+ components. Beautiful glass effects, fully accessible, and optimized for performance."
+title: "Introduction"
+description: "LiqUIdify is a modern React component library featuring liquid glass morphism effects, inspired by Apple's Human Interface Guidelines."
+icon: "sparkles"
 ---
+
+import { LiquidGlassDemo, LiquidGlassBackground } from './components/LiquidGlassDemo';
+
+<LiquidGlassBackground />
 
 # Welcome to LiqUIdify
 
-<Card>
-  LiqUIdify combines the elegance of glassmorphism design with the power of
-  modern React development. Built with performance and accessibility in mind, it
-  provides a comprehensive set of components that work seamlessly together.
-</Card>
+<LiquidGlassDemo variant="hero" className="mb-8">
+  <div className="text-center">
+    <h1 className="text-5xl font-bold text-white mb-6 tracking-tight">
+      Liquid Glass Morphism
+    </h1>
+    <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
+      Experience the next evolution of glassmorphism with our liquid glass effects that create depth, elegance, and visual hierarchy in your interfaces.
+    </p>
+    <div className="flex gap-4 justify-center">
+      <LiquidGlassDemo variant="button">
+        <span className="text-white font-semibold">Get Started</span>
+      </LiquidGlassDemo>
+      <LiquidGlassDemo variant="button">
+        <span className="text-white/80 font-medium">View Components</span>
+      </LiquidGlassDemo>
+    </div>
+  </div>
+</LiquidGlassDemo>
 
-## Quick Installation
+LiqUIdify is a cutting-edge React component library that brings the beauty of **liquid glass morphism** to your applications. Inspired by Apple's Human Interface Guidelines and modern design principles, LiqUIdify provides a comprehensive set of components with stunning visual effects and exceptional user experience.
 
-<CodeGroup>
+## ✨ Interactive Liquid Glass Demo
 
-```bash npm
-npm install @liquidify/components
-```
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+  <LiquidGlassDemo variant="card" size="md">
+    <div className="text-center">
+      <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+        🌊
+      </div>
+      <h3 className="text-lg font-semibold text-white mb-2">Liquid Effects</h3>
+      <p className="text-white/70 text-sm">Click to see ripple effects</p>
+    </div>
+  </LiquidGlassDemo>
+  
+  <LiquidGlassDemo variant="card" size="md">
+    <div className="text-center">
+      <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+        🍎
+      </div>
+      <h3 className="text-lg font-semibold text-white mb-2">Apple Design</h3>
+      <p className="text-white/70 text-sm">HIG-compliant components</p>
+    </div>
+  </LiquidGlassDemo>
+  
+  <LiquidGlassDemo variant="card" size="md">
+    <div className="text-center">
+      <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+        ⚡
+      </div>
+      <h3 className="text-lg font-semibold text-white mb-2">Performance</h3>
+      <p className="text-white/70 text-sm">GPU-accelerated effects</p>
+    </div>
+  </LiquidGlassDemo>
+</div>
 
-```bash yarn
-yarn add @liquidify/components
-```
+## 🚀 Key Features
 
-```bash pnpm
-pnpm add @liquidify/components
-```
+<CardGroup cols={2}>
+  <Card
+    title="50+ Components"
+    icon="puzzle-piece"
+    href="/components"
+  >
+    From basic buttons to complex data tables, all with liquid glass effects
+  </Card>
+  <Card
+    title="Dark Mode Ready"
+    icon="moon"
+    href="/concepts/theming"
+  >
+    Beautiful dark mode support with automatic color adaptation
+  </Card>
+  <Card
+    title="Accessibility First"
+    icon="universal-access"
+    href="/concepts/accessibility"
+  >
+    WCAG 2.1 AA compliant with full keyboard navigation and screen reader support
+  </Card>
+  <Card
+    title="TypeScript Native"
+    icon="code"
+    href="/api-reference"
+  >
+    Built with TypeScript for excellent developer experience and type safety
+  </Card>
+</CardGroup>
 
-```bash bun
-bun add @liquidify/components
-```
+## 🎯 Perfect For
 
-</CodeGroup>
+- **Modern Web Applications** - Create stunning interfaces with liquid glass effects
+- **Design Systems** - Build consistent, scalable component libraries
+- **Apple-Style Apps** - Match the aesthetic of macOS and iOS applications
+- **Premium Products** - Elevate your product with sophisticated visual design
 
-## Basic Usage
+## 🌟 Design Philosophy
 
-<CodeGroup>
+LiqUIdify embraces Apple's design principles:
 
-```tsx React Component
-import {
-  GlassButton,
-  GlassCard,
-  UnifiedGlassProvider,
-} from "@liquidify/components";
-import "@liquidify/components/css";
+### **Clarity**
+Every component prioritizes content and functionality, using liquid glass effects to enhance rather than distract from the user experience.
 
-function App() {
+### **Deference**
+The interface defers to content, with subtle glass morphism that creates depth without overwhelming the primary content.
+
+### **Depth**
+Layered glass effects create visual hierarchy and guide user attention through realistic depth and lighting.
+
+## 🛠 Technology Stack
+
+- **React 18+** - Built for the latest React features
+- **TypeScript** - Full type safety and excellent DX
+- **CSS Custom Properties** - Modern, performant styling
+- **Framer Motion** - Smooth, accessible animations
+- **Radix UI** - Accessible component primitives
+
+## 📱 Cross-Platform Ready
+
+LiqUIdify components work beautifully across all platforms:
+
+- **Web Browsers** - Chrome, Safari, Firefox, Edge
+- **Mobile Devices** - iOS Safari, Chrome Mobile
+- **Desktop Apps** - Electron, Tauri, PWAs
+- **Server-Side Rendering** - Next.js, Remix, Gatsby
+
+## 🎨 Visual Examples
+
+### Liquid Glass Button Showcase
+```tsx
+import { GlassButton } from '@liquidify/react';
+
+function ButtonShowcase() {
   return (
-    <UnifiedGlassProvider>
-      <GlassCard variant="elevated">
-        <h1>Welcome to LiqUIdify</h1>
-        <GlassButton variant="primary" size="large">
-          Get Started
-        </GlassButton>
-      </GlassCard>
-    </UnifiedGlassProvider>
+    <div className="flex gap-4">
+      <GlassButton variant="primary">
+        Primary Action
+      </GlassButton>
+      <GlassButton variant="secondary">
+        Secondary Action
+      </GlassButton>
+      <GlassButton variant="ghost">
+        Ghost Action
+      </GlassButton>
+    </div>
   );
 }
 ```
 
-```tsx Next.js
-// pages/_app.tsx
-import { UnifiedGlassProvider } from "@liquidify/components";
-import "@liquidify/components/css";
+<div className="flex gap-4 my-6">
+  <LiquidGlassDemo variant="button">
+    <span className="text-white font-semibold">Primary</span>
+  </LiquidGlassDemo>
+  <LiquidGlassDemo variant="button">
+    <span className="text-white/80 font-medium">Secondary</span>
+  </LiquidGlassDemo>
+  <LiquidGlassDemo variant="button">
+    <span className="text-white/60 font-medium">Ghost</span>
+  </LiquidGlassDemo>
+</div>
 
-export default function App({ Component, pageProps }) {
+### Liquid Glass Card Example
+```tsx
+import { GlassCard } from '@liquidify/react';
+
+function ProductCard() {
   return (
-    <UnifiedGlassProvider>
-      <Component {...pageProps} />
-    </UnifiedGlassProvider>
+    <GlassCard className="p-6">
+      <h3 className="text-xl font-semibold mb-2">Premium Feature</h3>
+      <p className="text-gray-600 mb-4">
+        Experience the beauty of liquid glass morphism in your applications.
+      </p>
+      <GlassButton>Learn More</GlassButton>
+    </GlassCard>
   );
 }
 ```
 
-</CodeGroup>
+<LiquidGlassDemo variant="card" className="my-6 max-w-md">
+  <div>
+    <h3 className="text-xl font-semibold text-white mb-2">Premium Feature</h3>
+    <p className="text-white/70 mb-4">
+      Experience the beauty of liquid glass morphism in your applications.
+    </p>
+    <LiquidGlassDemo variant="button">
+      <span className="text-white font-medium">Learn More</span>
+    </LiquidGlassDemo>
+  </div>
+</LiquidGlassDemo>
 
-<Warning>
-  Make sure to wrap your app with `UnifiedGlassProvider` for optimal glass
-  effects and theme management.
-</Warning>
+## 🌈 Color System
 
-## Key Features
+LiqUIdify uses Apple's semantic color system:
 
-<CardGroup cols={3}>
+- **Blue** (`#007AFF`) - Primary actions and links
+- **Green** (`#34C759`) - Success states and confirmations  
+- **Orange** (`#FF9500`) - Warnings and important notices
+- **Red** (`#FF3B30`) - Errors and destructive actions
+- **Purple** (`#AF52DE`) - Creative and premium features
+- **Gray Scale** - Comprehensive neutral palette
 
-<Card title="Beautiful Glassmorphism Design" icon="paintbrush">
-  Stunning frosted glass effects with customizable blur, transparency, and
-  colors. Every component is crafted for modern, elegant interfaces.
-</Card>
+## 🎭 Animation Principles
 
-<Card title="Blazing Fast Performance" icon="bolt">
-  Core bundle < 30KB, full bundle < 60KB. Tree-shakeable architecture with code-splitting and lazy loading support.
-</Card>
+Following Apple's animation guidelines:
 
-<Card title="Accessibility First" icon="universal-access">
-  WCAG 2.1 AA compliant. Full keyboard navigation, screen reader support, focus
-  management, and ARIA attributes.
-</Card>
+- **Easing** - Natural cubic-bezier curves for realistic motion
+- **Duration** - Appropriate timing for different interaction types
+- **Respect Preferences** - Honors `prefers-reduced-motion` settings
+- **Purposeful** - Every animation serves a functional purpose
 
-<Card title="Developer Experience" icon="code">
-  TypeScript-first with complete type safety. Comprehensive docs, Storybook
-  examples, and IntelliSense support.
-</Card>
+## 🔧 Getting Started
 
-<Card title="Modular Architecture" icon="cube">
-  Import only what you need. Organized bundles for core, forms, navigation,
-  feedback, and more.
-</Card>
-
-<Card title="Production Ready" icon="check-circle">
-  Battle-tested with 100% test coverage. E2E tests, visual regression, and
-  performance benchmarks.
-</Card>
-
-</CardGroup>
-
-## Component Statistics
+Ready to transform your React applications with liquid glass morphism?
 
 <CardGroup cols={2}>
-
-<Card title="52+ Components" icon="grid-3x3">
-  Complete UI toolkit with glassmorphism design
-</Card>
-
-<Card title="Bundle Size" icon="weight-hanging">
-  Core < 30KB, Full < 60KB with tree-shaking
-</Card>
-
-<Card title="Performance" icon="gauge-high">
-  60fps animations with GPU acceleration
-</Card>
-
-<Card title="Test Coverage" icon="vial">
-  100% coverage with unit, integration, and E2E tests
-</Card>
-
+  <Card
+    title="Quick Start"
+    icon="rocket"
+    href="/quickstart"
+  >
+    Get up and running in under 5 minutes
+  </Card>
+  <Card
+    title="Installation"
+    icon="download"
+    href="/installation"
+  >
+    Detailed installation and setup instructions
+  </Card>
 </CardGroup>
 
-## What's Included
+## 🤝 Community & Support
 
-<Accordion title="Core Components">
-  - **GlassButton**: Primary, secondary, ghost, and destructive variants -
-  **GlassCard**: Elevated, flat, and interactive cards with compound components
-  - **GlassInput**: Text inputs with validation and error states -
-  **GlassModal**: Accessible modals with focus trap and backdrop
-</Accordion>
+Join our growing community of developers creating beautiful interfaces:
 
-<Accordion title="Form Components">
-  - **GlassCheckbox**: Single and group checkboxes with indeterminate states -
-  **GlassRadioGroup**: Radio button groups with custom styling -
-  **GlassSelect**: Dropdown selects with search and multi-select -
-  **GlassTextarea**: Resizable text areas with character counting -
-  **GlassFileUpload**: Drag-and-drop file uploads with progress
-</Accordion>
-
-<Accordion title="Layout & Navigation">
-  - **GlassAccordion**: Collapsible content sections - **GlassBreadcrumbs**:
-  Navigation breadcrumbs with separators - **GlassTabs**: Horizontal and
-  vertical tab navigation - **GlassNavbar**: Responsive navigation with mobile
-  support - **GlassSidebar**: Collapsible sidebar navigation
-</Accordion>
-
-<Accordion title="Feedback & Data">
-  - **GlassAlert**: Success, warning, error, and info alerts - **GlassToast**:
-  Non-blocking notifications with auto-dismiss - **GlassProgress**: Linear and
-  circular progress indicators - **GlassTable**: Sortable, filterable data
-  tables - **GlassSkeleton**: Loading placeholders with animation
-</Accordion>
-
-## Next Steps
-
-<CardGroup cols={2}>
-
-<Card title="Get Started" icon="rocket" href="/quickstart">
-  Follow our quickstart guide to set up LiqUIdify in minutes
-</Card>
-
-<Card title="Browse Components" icon="grid-3x3" href="/components/button">
-  Explore our complete component library with live examples
-</Card>
-
-<Card title="View Examples" icon="code" href="https://storybook.liquidify.dev">
-  Check out interactive examples in our Storybook
-</Card>
-
-<Card
-  title="GitHub Repository"
-  icon="github"
-  href="https://github.com/tuliopc23/LiqUIdify"
->
-  Contribute to the project or report issues
-</Card>
-
-</CardGroup>
+- **GitHub** - Contribute, report issues, and request features
+- **Discord** - Get help, share projects, and connect with other developers
+- **Twitter** - Stay updated with the latest news and releases
 
 ---
 
-Ready to build something amazing? Let's [get started](/quickstart) with your first LiqUIdify component!
+<Note>
+LiqUIdify is designed to work seamlessly with your existing React applications. All components are tree-shakeable and optimized for production builds.
+</Note>
+
+Ready to dive in? Let's start with the [Quick Start Guide](/quickstart) and build something amazing! ✨
