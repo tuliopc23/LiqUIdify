@@ -1,565 +1,333 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  Download,
-  Heart,
-  Mail,
-  Plus,
-  Save,
-  Settings,
-  Star,
-  Trash2,
-  User,
-} from "lucide-react";
-import React from "react";
-import { GlassButton } from "./glass-button";
+/**
+ * Liquid Glass Button Stories
+ * 
+ * Demonstrates the unified liquid glass system with all variants,
+ * sizes, and interactive states.
+ */
 
-const meta = {
-  title: "Components/Forms/GlassButton",
+import type { Meta, StoryObj } from "@storybook/react";
+import { GlassButton } from "./glass-button";
+import { Heart, Download, ArrowRight, Loader2 } from "lucide-react";
+
+const meta: Meta<typeof GlassButton> = {
+  title: "Components/Liquid Glass/Button",
   component: GlassButton,
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component: `
-A versatile button component with glassmorphism styling and comprehensive variants.
+The Liquid Glass Button implements the signature liquid glass effect with:
+
+- **Layered glass system**: Multiple layers create depth and realism
+- **Specular highlights**: Inset shadows simulate light reflection
+- **Smooth interactions**: Scale transforms with cubic-bezier timing
+- **Liquid shine effect**: The ::after pseudo-element creates the liquid appearance
 
 ## Features
-- Multiple visual variants (primary, secondary, tertiary, ghost, destructive, apple)
-- Size variants from xs to xl
-- Left and right icon support
-- Loading states with animated spinner
-- Full accessibility support including:
-  - ARIA labels and states
-  - Keyboard navigation
-  - Focus management
-  - Screen reader announcements
-  - High contrast mode support
-- Disabled state handling
-- Loading state announcements
+
+- 4 sizes (sm, md, lg, xl)
+- 4 variants (primary, secondary, ghost, destructive)
+- Loading states with spinner
+- Icon support (left/right)
+- Full accessibility support
+- Responsive design
         `,
       },
     },
-  },
-  tags: ["autodocs"],
-  argTypes: {
-    // Content
-    children: {
-      control: "text",
-      description: "Button content",
-      table: {
-        type: { summary: "React.ReactNode" },
-        category: "Content",
-      },
-    },
-    leftIcon: {
-      control: false,
-      description: "Icon to display on the left side",
-      table: {
-        type: { summary: "React.ReactNode" },
-        category: "Content",
-      },
-    },
-    rightIcon: {
-      control: false,
-      description: "Icon to display on the right side",
-      table: {
-        type: { summary: "React.ReactNode" },
-        category: "Content",
-      },
-    },
-
-    // Appearance
-    variant: {
-      control: "select",
-      options: [
-        "primary",
-        "secondary",
-        "tertiary",
-        "ghost",
-        "destructive",
-        "apple",
-      ],
-      description: "Visual style variant of the button",
-      table: {
-        type: {
-          summary:
-            "primary | secondary | tertiary | ghost | destructive | apple",
+    backgrounds: {
+      default: "liquid-glass",
+      values: [
+        {
+          name: "liquid-glass",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
-        defaultValue: { summary: "primary" },
-        category: "Appearance",
-      },
+        {
+          name: "dark",
+          value: "#1a1a1a",
+        },
+        {
+          name: "light",
+          value: "#f0f0f0",
+        },
+      ],
+    },
+  },
+  argTypes: {
+    variant: {
+      control: { type: "select" },
+      options: ["primary", "secondary", "ghost", "destructive"],
+      description: "Button variant style",
     },
     size: {
-      control: "select",
-      options: ["xs", "sm", "md", "lg", "xl"],
-      description: "Size of the button",
-      table: {
-        type: { summary: "xs | sm | md | lg | xl" },
-        defaultValue: { summary: "md" },
-        category: "Appearance",
-      },
-    },
-
-    // States
-    disabled: {
-      control: "boolean",
-      description: "Whether the button is disabled",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "States",
-      },
+      control: { type: "select" },
+      options: ["sm", "md", "lg", "xl"],
+      description: "Button size",
     },
     loading: {
-      control: "boolean",
-      description: "Whether the button is in loading state",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-        category: "States",
-      },
+      control: { type: "boolean" },
+      description: "Show loading state",
     },
-
-    // Behavior
-    type: {
-      control: "select",
-      options: ["button", "submit", "reset"],
-      description: "HTML button type",
-      table: {
-        type: { summary: "button | submit | reset" },
-        defaultValue: { summary: "button" },
-        category: "Behavior",
-      },
+    disabled: {
+      control: { type: "boolean" },
+      description: "Disable the button",
     },
-    onClick: {
-      action: "clicked",
-      description: "Click event handler",
-      table: {
-        type: { summary: "(event: MouseEvent) => void" },
-        category: "Behavior",
-      },
+    fullWidth: {
+      control: { type: "boolean" },
+      description: "Make button full width",
     },
-
-    // Accessibility
-    "aria-label": {
-      control: "text",
-      description: "Accessible label for screen readers",
-      table: {
-        type: { summary: "string" },
-        category: "Accessibility",
-      },
-    },
-    "aria-describedby": {
-      control: "text",
-      description: "ID of element that describes the button",
-      table: {
-        type: { summary: "string" },
-        category: "Accessibility",
-      },
-    },
-
-    // Styling
-    className: {
-      control: "text",
-      description: "Additional CSS classes",
-      table: {
-        type: { summary: "string" },
-        category: "Styling",
-      },
+    iconOnly: {
+      control: { type: "boolean" },
+      description: "Icon only button (square)",
     },
   },
-} satisfies Meta<typeof GlassButton>;
+  tags: ["autodocs"],
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof GlassButton>;
 
-// Basic Examples
+// Default Story
 export const Default: Story = {
   args: {
-    children: "Button",
-  },
-};
-
-export const Primary: Story = {
-  args: {
+    children: "Liquid Glass Button",
     variant: "primary",
-    children: "Primary Button",
+    size: "md",
   },
 };
 
-export const Secondary: Story = {
-  args: {
-    variant: "secondary",
-    children: "Secondary Button",
+// All Variants
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4 items-center">
+      <GlassButton variant="primary">Primary</GlassButton>
+      <GlassButton variant="secondary">Secondary</GlassButton>
+      <GlassButton variant="ghost">Ghost</GlassButton>
+      <GlassButton variant="destructive">Destructive</GlassButton>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "All available button variants with the liquid glass effect.",
+      },
+    },
   },
 };
 
-export const Tertiary: Story = {
-  args: {
-    variant: "tertiary",
-    children: "Tertiary Button",
-  },
-};
-
-export const Ghost: Story = {
-  args: {
-    variant: "ghost",
-    children: "Ghost Button",
-  },
-};
-
-export const Destructive: Story = {
-  args: {
-    variant: "destructive",
-    children: "Delete",
-  },
-};
-
-export const Apple: Story = {
-  args: {
-    variant: "apple",
-    children: "Apple Style",
-  },
-};
-
-// Size Variants
+// All Sizes
 export const Sizes: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-4">
-      <GlassButton size="xs">Extra Small</GlassButton>
+    <div className="flex flex-wrap gap-4 items-center">
       <GlassButton size="sm">Small</GlassButton>
       <GlassButton size="md">Medium</GlassButton>
       <GlassButton size="lg">Large</GlassButton>
       <GlassButton size="xl">Extra Large</GlassButton>
     </div>
   ),
-};
-
-// With Icons
-export const WithLeftIcon: Story = {
-  args: {
-    leftIcon: <Download className="h-4 w-4" />,
-    children: "Download",
-  },
-};
-
-export const WithRightIcon: Story = {
-  args: {
-    rightIcon: <Settings className="h-4 w-4" />,
-    children: "Settings",
-  },
-};
-
-export const WithBothIcons: Story = {
-  args: {
-    leftIcon: <User className="h-4 w-4" />,
-    rightIcon: <Settings className="h-4 w-4" />,
-    children: "Profile Settings",
-  },
-};
-
-export const IconOnly: Story = {
-  args: {
-    leftIcon: <Heart className="h-4 w-4" />,
-    "aria-label": "Like",
-  },
-};
-
-// States
-export const Loading: Story = {
-  args: {
-    loading: true,
-    children: "Loading...",
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    children: "Disabled Button",
-  },
-};
-
-export const LoadingWithIcon: Story = {
-  args: {
-    loading: true,
-    leftIcon: <Save className="h-4 w-4" />,
-    children: "Saving...",
-  },
-};
-
-// Interactive Examples
-export const AllVariants: Story = {
-  render: () => (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-      <GlassButton variant="primary">Primary</GlassButton>
-      <GlassButton variant="secondary">Secondary</GlassButton>
-      <GlassButton variant="tertiary">Tertiary</GlassButton>
-      <GlassButton variant="ghost">Ghost</GlassButton>
-      <GlassButton variant="destructive">Destructive</GlassButton>
-      <GlassButton variant="apple">Apple</GlassButton>
-    </div>
-  ),
-};
-
-export const ButtonGroup: Story = {
-  render: () => (
-    <div className="flex gap-2">
-      <GlassButton variant="secondary" leftIcon={<Mail className="h-4 w-4" />}>
-        Email
-      </GlassButton>
-      <GlassButton variant="secondary" leftIcon={<Star className="h-4 w-4" />}>
-        Favorite
-      </GlassButton>
-      <GlassButton
-        variant="destructive"
-        leftIcon={<Trash2 className="h-4 w-4" />}
-      >
-        Delete
-      </GlassButton>
-    </div>
-  ),
-};
-
-export const LoadingStates: Story = {
-  render: () => (
-    <div className="flex gap-4">
-      <GlassButton loading>Loading</GlassButton>
-      <GlassButton loading variant="secondary">
-        Processing
-      </GlassButton>
-      <GlassButton loading variant="destructive">
-        Deleting
-      </GlassButton>
-    </div>
-  ),
-};
-
-// Form Examples
-export const FormButtons: Story = {
-  render: () => (
-    <form className="space-y-4">
-      <div className="flex gap-2">
-        <GlassButton type="submit" variant="primary">
-          Submit
-        </GlassButton>
-        <GlassButton type="reset" variant="secondary">
-          Reset
-        </GlassButton>
-        <GlassButton type="button" variant="ghost">
-          Cancel
-        </GlassButton>
-      </div>
-    </form>
-  ),
-};
-
-// Accessibility Showcase
-export const AccessibilityShowcase: Story = {
-  render: () => (
-    <div className="space-y-6">
-      <div>
-        <h3 className="mb-3 font-semibold text-white">Accessible Labels</h3>
-        <div className="flex gap-4">
-          <GlassButton
-            leftIcon={<Plus className="h-4 w-4" />}
-            aria-label="Add new item"
-          />
-          <GlassButton
-            leftIcon={<Heart className="h-4 w-4" />}
-            aria-label="Add to favorites"
-          />
-          <GlassButton
-            leftIcon={<Settings className="h-4 w-4" />}
-            aria-label="Open settings"
-          />
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 font-semibold text-white">
-          Loading with Announcements
-        </h3>
-        <div className="flex gap-4">
-          <GlassButton
-            loading
-            aria-label="Saving your changes"
-            leftIcon={<Save className="h-4 w-4" />}
-          >
-            Save Changes
-          </GlassButton>
-          <GlassButton loading aria-label="Processing request">
-            Processing
-          </GlassButton>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-3 font-semibold text-white">Disabled States</h3>
-        <div className="flex gap-4">
-          <GlassButton disabled aria-label="Feature not available">
-            Unavailable
-          </GlassButton>
-          <GlassButton
-            disabled
-            variant="destructive"
-            aria-label="Cannot delete at this time"
-          >
-            Delete
-          </GlassButton>
-        </div>
-      </div>
-    </div>
-  ),
-};
-
-// Real-world Examples
-export const RealWorldExamples: Story = {
-  render: () => (
-    <div className="space-y-8">
-      <div>
-        <h3 className="mb-4 font-semibold text-white">E-commerce Actions</h3>
-        <div className="flex gap-3">
-          <GlassButton variant="primary" size="lg">
-            Add to Cart
-          </GlassButton>
-          <GlassButton
-            variant="secondary"
-            leftIcon={<Heart className="h-4 w-4" />}
-          >
-            Save for Later
-          </GlassButton>
-          <GlassButton variant="ghost" size="sm">
-            Compare
-          </GlassButton>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-4 font-semibold text-white">Dashboard Actions</h3>
-        <div className="flex gap-3">
-          <GlassButton
-            variant="primary"
-            leftIcon={<Plus className="h-4 w-4" />}
-          >
-            Create New
-          </GlassButton>
-          <GlassButton
-            variant="secondary"
-            leftIcon={<Download className="h-4 w-4" />}
-          >
-            Export Data
-          </GlassButton>
-          <GlassButton
-            variant="ghost"
-            leftIcon={<Settings className="h-4 w-4" />}
-          >
-            Settings
-          </GlassButton>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="mb-4 font-semibold text-white">Content Management</h3>
-        <div className="flex gap-3">
-          <GlassButton
-            variant="primary"
-            leftIcon={<Save className="h-4 w-4" />}
-          >
-            Save Draft
-          </GlassButton>
-          <GlassButton variant="apple">Publish</GlassButton>
-          <GlassButton
-            variant="destructive"
-            leftIcon={<Trash2 className="h-4 w-4" />}
-            size="sm"
-          >
-            Delete
-          </GlassButton>
-        </div>
-      </div>
-    </div>
-  ),
-};
-
-// Interactive Demo
-export const InteractiveDemo: Story = {
-  render: () => {
-    const [loading, setLoading] = React.useState(false);
-    const [count, setCount] = React.useState(0);
-
-    const handleAsyncAction = async () => {
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setCount((prev) => prev + 1);
-      setLoading(false);
-    };
-
-    return (
-      <div className="space-y-4">
-        <div className="flex gap-4">
-          <GlassButton onClick={handleAsyncAction} loading={loading}>
-            {loading ? "Processing..." : "Async Action"}
-          </GlassButton>
-          <GlassButton variant="secondary" onClick={() => setCount(0)}>
-            Reset Counter
-          </GlassButton>
-        </div>
-        <p className="text-white">Count: {count}</p>
-      </div>
-    );
-  },
-};
-
-// Theme Demonstration
-export const ThemeDemo: Story = {
-  render: () => (
-    <div className="grid grid-cols-1 gap-8">
-      <div className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 p-6">
-        <h3 className="mb-4 font-semibold text-white">Light Theme Context</h3>
-        <div className="flex gap-3">
-          <GlassButton variant="primary">Primary</GlassButton>
-          <GlassButton variant="secondary">Secondary</GlassButton>
-          <GlassButton variant="ghost">Ghost</GlassButton>
-        </div>
-      </div>
-
-      <div className="rounded-lg bg-gradient-to-r from-gray-800 to-gray-900 p-6">
-        <h3 className="mb-4 font-semibold text-white">Dark Theme Context</h3>
-        <div className="flex gap-3">
-          <GlassButton variant="primary">Primary</GlassButton>
-          <GlassButton variant="secondary">Secondary</GlassButton>
-          <GlassButton variant="apple">Apple</GlassButton>
-        </div>
-      </div>
-    </div>
-  ),
   parameters: {
-    backgrounds: {
-      default: "liquid-gradient",
+    docs: {
+      description: {
+        story: "All available button sizes with consistent liquid glass styling.",
+      },
     },
   },
 };
 
-// Performance Test
-export const PerformanceTest: Story = {
+// With Icons
+export const WithIcons: Story = {
   render: () => (
-    <div className="grid grid-cols-5 gap-2">
-      {Array.from({ length: 50 }, (_, index) => {
-        const variants = [
-          "primary",
-          "secondary",
-          "tertiary",
-          "ghost",
-          "apple",
-        ] as const;
-        const variant = variants[index % 5];
-        return (
-          <GlassButton key={`perf-test-${index}`} size="sm" variant={variant}>
-            {index + 1}
-          </GlassButton>
-        );
-      })}
+    <div className="flex flex-wrap gap-4 items-center">
+      <GlassButton leftIcon={<Heart />}>Like</GlassButton>
+      <GlassButton rightIcon={<Download />}>Download</GlassButton>
+      <GlassButton leftIcon={<Heart />} rightIcon={<ArrowRight />}>
+        Continue
+      </GlassButton>
     </div>
   ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Buttons with left and right icons using Lucide React icons.",
+      },
+    },
+  },
+};
+
+// Icon Only
+export const IconOnly: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4 items-center">
+      <GlassButton iconOnly size="sm">
+        <Heart />
+      </GlassButton>
+      <GlassButton iconOnly size="md">
+        <Download />
+      </GlassButton>
+      <GlassButton iconOnly size="lg">
+        <ArrowRight />
+      </GlassButton>
+      <GlassButton iconOnly size="xl">
+        <Heart />
+      </GlassButton>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Icon-only buttons with square aspect ratio and liquid glass effect.",
+      },
+    },
+  },
+};
+
+// Loading States
+export const Loading: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4 items-center">
+      <GlassButton loading>Loading...</GlassButton>
+      <GlassButton loading loadingText="Processing...">
+        Process
+      </GlassButton>
+      <GlassButton loading variant="secondary">
+        Secondary Loading
+      </GlassButton>
+      <GlassButton loading iconOnly>
+        <Heart />
+      </GlassButton>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Loading states with spinner animation and optional loading text.",
+      },
+    },
+  },
+};
+
+// Interactive States
+export const InteractiveStates: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4 items-center">
+      <GlassButton>Normal</GlassButton>
+      <GlassButton disabled>Disabled</GlassButton>
+      <GlassButton className="hover:scale-110 active:scale-95">
+        Custom Hover
+      </GlassButton>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Different interactive states showing the liquid glass hover and active effects.",
+      },
+    },
+  },
+};
+
+// Full Width
+export const FullWidth: Story = {
+  render: () => (
+    <div className="w-full max-w-md space-y-4">
+      <GlassButton fullWidth>Full Width Primary</GlassButton>
+      <GlassButton fullWidth variant="secondary">
+        Full Width Secondary
+      </GlassButton>
+      <GlassButton fullWidth variant="ghost">
+        Full Width Ghost
+      </GlassButton>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Full width buttons that expand to fill their container.",
+      },
+    },
+  },
+};
+
+// Playground
+export const Playground: Story = {
+  args: {
+    children: "Customize Me",
+    variant: "primary",
+    size: "md",
+    loading: false,
+    disabled: false,
+    fullWidth: false,
+    iconOnly: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Interactive playground to test all button properties and see the liquid glass effect in action.",
+      },
+    },
+  },
+};
+
+// Dark Mode
+export const DarkMode: Story = {
+  render: () => (
+    <div className="dark p-8 bg-gray-900 rounded-lg">
+      <div className="flex flex-wrap gap-4 items-center">
+        <GlassButton variant="primary">Primary Dark</GlassButton>
+        <GlassButton variant="secondary">Secondary Dark</GlassButton>
+        <GlassButton variant="ghost">Ghost Dark</GlassButton>
+        <GlassButton variant="destructive">Destructive Dark</GlassButton>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "Liquid glass buttons in dark mode with adjusted colors and effects.",
+      },
+    },
+    backgrounds: {
+      default: "dark",
+    },
+  },
+};
+
+// Complex Example
+export const ComplexExample: Story = {
+  render: () => (
+    <div className="space-y-6 p-6 max-w-md">
+      <div className="text-center space-y-4">
+        <h2 className="text-2xl font-bold text-white">Liquid Glass Demo</h2>
+        <p className="text-white/80">
+          Experience the signature liquid glass effect with realistic depth and shine.
+        </p>
+      </div>
+      
+      <div className="space-y-3">
+        <GlassButton fullWidth leftIcon={<Heart />} size="lg">
+          Add to Favorites
+        </GlassButton>
+        
+        <div className="flex gap-3">
+          <GlassButton variant="secondary" className="flex-1">
+            Cancel
+          </GlassButton>
+          <GlassButton variant="primary" className="flex-1" rightIcon={<ArrowRight />}>
+            Continue
+          </GlassButton>
+        </div>
+        
+        <GlassButton fullWidth variant="ghost" leftIcon={<Download />}>
+          Download Now
+        </GlassButton>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: "A complex example showing multiple buttons in a realistic interface layout with the liquid glass effect.",
+      },
+    },
+  },
 };

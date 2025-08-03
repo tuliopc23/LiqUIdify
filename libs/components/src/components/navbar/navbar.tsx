@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "../../core/utils/classname";
-import { UnifiedGlassEffect } from "../../core/glass/unified-glass-system";
 
 interface NavbarProps {
   /** Content for the left side (logo/brand) */

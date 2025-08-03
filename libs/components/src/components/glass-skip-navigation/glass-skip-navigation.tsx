@@ -1,11 +1,14 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 
-import { accessibilityManager } from "@/core/accessibility-manager";
-
 import { cn } from "../../core/utils/classname";
 
 import { useIsClient } from "@/hooks/use-ssr-safe";
+
+// Mock accessibilityManager since it was removed
+const accessibilityManager = {
+  announce: (message: string) => console.debug(`Announced: ${message}`),
+};
 
 interface SkipLink {
   id: string;

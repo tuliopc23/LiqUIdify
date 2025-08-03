@@ -120,6 +120,8 @@ describe("Bundle Exports Integration Tests", () => {
       expect(feedbackBundle.GlassTabs).toBeUndefined();
     });
 
+    // Overlay bundle test commented out - bundle removed
+    /*
     it("should export overlay bundle correctly", async () => {
       const overlayBundle = await import("../../bundles/overlay");
 

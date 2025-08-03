@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "../../core/utils/classname";
-import { UnifiedGlassEffect } from "../../core/glass/unified-glass-system";
 import { GlassButton } from "../glass-button-refactored";
 
 interface SidebarProps {

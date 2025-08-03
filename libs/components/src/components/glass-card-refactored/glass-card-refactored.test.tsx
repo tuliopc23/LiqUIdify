@@ -10,8 +10,8 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import "@testing-library/jest-dom";
 
 // Import the exports we're testing
-import { GlassCard } from "./glass-card-refactored";
-import * as GlassCardModule from "./glass-card-refactored";
+import { GlassCard } from "./glass-card";
+import * as GlassCardModule from "./glass-card";
 
 describe("glass-card-refactored exports", () => {
   describe("Named export: GlassCard", () => {

@@ -9,8 +9,8 @@ import { GlassResponsiveButton } from "../../components/glass-responsive-button"
 import { GlassResponsiveCard } from "../../components/glass-responsive-card";
 import { GlassMobileNav } from "../../components/glass-mobile-nav";
 import { GlassTable } from "../../components/glass-table";
-import { GlassCard } from "../../components/glass-card";
-import { GlassButton } from "../../components/glass-button";
+import { GlassCard } from "../../components/glass-card-refactored";
+import { GlassButton } from "../../components/glass-button-refactored";
 
 expect.extend(toHaveNoViolations);
 

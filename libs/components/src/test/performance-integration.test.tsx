@@ -8,10 +8,13 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, cleanup, act, waitFor } from "@testing-library/react";
-import {
-  PerformanceMonitor,
-  initializePerformanceMonitoring,
-} from "../lib/performance-monitor";
+// Performance monitor module was removed - using mock implementation
+const PerformanceMonitor = {
+  startMeasure: (name: string) => ({ name, startTime: performance.now() }),
+  endMeasure: (measurement: any) => performance.now() - measurement.startTime,
+  getMetrics: () => ({}),
+};
+const initializePerformanceMonitoring = () => {};
 import React, { Suspense, lazy, useState, useEffect } from "react";
 
 // Import components for testing

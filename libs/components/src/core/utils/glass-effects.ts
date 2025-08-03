@@ -5,10 +5,10 @@
  */
 
 import type { ComponentVariant } from "../base-component";
-import type {
-  GlassIntensity,
-  GlassVariant,
-} from "../glass/unified-glass-system";
+
+// Define glass types locally since unified-glass-system was removed
+export type GlassIntensity = 'subtle' | 'medium' | 'strong' | 'extreme';
+export type GlassVariant = 'default' | 'primary' | 'secondary' | 'accent' | 'muted';
 
 interface GlassEffectOptions {
   intensity?: GlassIntensity;
@@ -84,7 +84,7 @@ function mapIntensity(intensity: GlassIntensity): number {
 /**
  * Generates CSS classes for glass effects
  */
-export function generateGlassClasses(options: GlassEffectOptions): string {
+function generateGlassClasses(options: GlassEffectOptions): string {
   const { intensity = "medium", variant = "default" } = options;
 
   // Map the variant to GlassVariant if needed
@@ -104,7 +104,7 @@ export function generateGlassClasses(options: GlassEffectOptions): string {
 /**
  * Generates CSS custom properties for glass effects
  */
-export function generateGlassVariables(
+function generateGlassVariables(
   intensityOrOptions: GlassIntensity | GlassEffectOptions | undefined,
   additionalOptions?: Record<string, unknown>,
 ): Record<string, string> {

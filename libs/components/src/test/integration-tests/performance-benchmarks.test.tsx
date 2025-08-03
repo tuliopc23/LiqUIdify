@@ -5,12 +5,15 @@ import "@testing-library/jest-dom";
 
 // Import components for performance testing
 import { GlassTable } from "../../components/glass-table";
-import { GlassList } from "../../components/glass-list";
-import { GlassGrid } from "../../components/glass-grid";
-import { GlassButton } from "../../components/glass-button";
-import { GlassCard } from "../../components/glass-card";
-import { UnifiedGlassProvider } from "../../core/glass/unified-glass-system";
+// import { GlassList } from "../../components/glass-list"; // Component removed
+// import { GlassGrid } from "../../components/glass-grid"; // Component removed
+import { GlassButton } from "../../components/glass-button-refactored";
+import { GlassCard } from "../../components/glass-card-refactored";
+// import { UnifiedGlassProvider } from "../../core/glass/unified-glass-system"; // Module removed
 import { applyGlassEffect } from "../../core/utils/glass-effects";
+
+// Mock UnifiedGlassProvider since it was removed
+const UnifiedGlassProvider = ({ children }: { children: React.ReactNode }) => <>{children}</>;
 
 // Performance monitoring utilities
 const measureRenderTime = async (component: React.ReactElement) => {
@@ -339,10 +342,10 @@ describe("Performance Benchmarks Integration Tests", () => {
       const usedComponents = new Set<string>();
 
       // Simulate selective imports
-      const { GlassButton } = await import("../../components/glass-button");
+      const { GlassButton } = await import("../../components/glass-button-refactored");
       usedComponents.add("GlassButton");
 
-      const { GlassCard } = await import("../../components/glass-card");
+      const { GlassCard } = await import("../../components/glass-card-refactored");
       usedComponents.add("GlassCard");
 
       // Verify only imported components are loaded

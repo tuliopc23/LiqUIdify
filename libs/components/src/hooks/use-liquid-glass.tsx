@@ -7,7 +7,28 @@ import {
   useRef,
   useState,
 } from "react";
-import { liquidGlassTokens } from "../lib/liquid-glass-tokens";
+
+// Define liquid glass tokens locally since lib was removed
+const liquidGlassTokens = {
+  colors: {
+    primary: "59, 130, 246", // blue-500
+    secondary: "107, 114, 128", // gray-500
+    accent: "168, 85, 247", // purple-500
+    muted: "156, 163, 175", // gray-400
+  },
+  blur: {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    xl: 16,
+  },
+  opacity: {
+    subtle: 0.1,
+    medium: 0.2,
+    strong: 0.3,
+    extreme: 0.4,
+  },
+};
 
 interface LiquidGlassConfig {
   color?: string; // rgb string e.g. "255,255,255"

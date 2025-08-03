@@ -8,6 +8,7 @@ yarn-error.log*
 dist/
 build/
 storybook-static/
+static-export
 
 # Environment variables
 .env

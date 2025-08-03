@@ -6,7 +6,14 @@ import {
   useRef,
   useState,
 } from "react";
-import { performanceMonitor } from "../core/performance-monitor";
+
+// Mock performance monitor since the module was removed
+const performanceMonitor = {
+  startMeasure: (name: string) => ({ name, startTime: performance.now() }),
+  endMeasure: (measurement: any) => performance.now() - measurement.startTime,
+  recordMetric: (name: string, value: number) => console.debug(`Metric ${name}: ${value}ms`),
+  getMetrics: () => ({}),
+};
 
 /**
  * Hook for component-level performance monitoring

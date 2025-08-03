@@ -1,8 +1,4 @@
-import type { Preview } from "@storybook/react-vite";
-import React from "react";
-import { GlassUIProvider } from "../../../libs/components/src/providers/glass-ui-provider";
-
-// Import new Tailwind CSS
+import type { Preview } from "@storybook/react";
 import "../../../libs/components/src/styles/index.css";
 
 const preview: Preview = {
@@ -11,178 +7,110 @@ const preview: Preview = {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
+        date: /Date$/,
       },
-      expanded: true,
     },
     docs: {
-      toc: true,
-      canvas: { sourceState: "shown" },
+      theme: {
+        base: 'dark',
+        colorPrimary: '#fb4268',
+        colorSecondary: '#667eea',
+        appBg: '#1a1a1a',
+        appContentBg: '#2a2a2a',
+        textColor: '#ffffff',
+      },
     },
     backgrounds: {
-      default: "dark",
+      default: 'apple-blue-minimal',
       values: [
         {
-          name: "light",
-          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          name: 'apple-blue-minimal',
+          value: '#f0f9ff', // Very light Apple blue - minimal
         },
         {
-          name: "dim",
-          value: "linear-gradient(135deg, #2d3748 0%, #4a5568 100%)",
+          name: 'apple-blue-soft',
+          value: '#dbeafe', // Soft Apple blue
         },
         {
-          name: "accent",
-          value: "linear-gradient(135deg, #fb4268 0%, #ff6b9d 100%)",
+          name: 'apple-blue-medium',
+          value: '#93c5fd', // Medium Apple blue
         },
         {
-          name: "dark",
-          value: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)",
+          name: 'white-minimal',
+          value: '#fafafa', // Almost white - minimal
+        },
+        {
+          name: 'dark-minimal',
+          value: '#1a1a1a', // Dark minimal
+        },
+        {
+          name: 'pure-white',
+          value: '#ffffff',
+        },
+        {
+          name: 'transparent',
+          value: 'transparent',
         },
       ],
     },
     viewport: {
       viewports: {
-        mobile1: {
-          name: "Small mobile",
-          styles: { width: "320px", height: "568px" },
-          type: "mobile",
-        },
-        mobile2: {
-          name: "Large mobile",
-          styles: { width: "414px", height: "896px" },
-          type: "mobile",
+        mobile: {
+          name: 'Mobile',
+          styles: {
+            width: '375px',
+            height: '667px',
+          },
         },
         tablet: {
-          name: "Tablet",
-          styles: { width: "768px", height: "1024px" },
-          type: "tablet",
+          name: 'Tablet',
+          styles: {
+            width: '768px',
+            height: '1024px',
+          },
         },
         desktop: {
-          name: "Desktop",
-          styles: { width: "1440px", height: "900px" },
-          type: "desktop",
+          name: 'Desktop',
+          styles: {
+            width: '1200px',
+            height: '800px',
+          },
         },
-      },
-    },
-    a11y: {
-      config: {
-        rules: [
-          {
-            id: "color-contrast",
-            enabled: true,
-          },
-          {
-            id: "aria-roles",
-            enabled: true,
-          },
-        ],
       },
     },
   },
   globalTypes: {
     theme: {
-      name: "Theme",
+      description: 'Global theme for components',
+      defaultValue: 'light',
       toolbar: {
-        icon: "paintbrush",
+        title: 'Theme',
+        icon: 'paintbrush',
         items: [
-          { value: "light", title: "Light" },
-          { value: "dim", title: "Dim" },
-          { value: "accent", title: "Accent" },
+          { value: 'light', title: 'Light Mode' },
+          { value: 'dark', title: 'Dark Mode' },
         ],
+        dynamicTitle: true,
       },
     },
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme as "light" | "dim" | "accent";
-
-      // Apply theme to document element and update CSS variables
-      React.useEffect(() => {
-        if (typeof document !== "undefined") {
-          document.documentElement.setAttribute("data-theme", theme);
-          document.body.className =
-            document.body.className.replace(/theme-(light|dim|accent)/g, "") +
-            ` theme-${theme}`;
-
-          // Update CSS variables based on theme
-          const themes = {
-            light: { "--tw-bg-opacity": "0.25" },
-            dim: { "--tw-bg-opacity": "0.15" },
-            accent: { "--lg-accent": "#fb4268" },
-          };
-
-          const root = document.documentElement;
-          Object.entries(themes[theme] || {}).forEach(([key, value]) => {
-            root.style.setProperty(key, value);
-          });
-        }
-      }, [theme]);
-
-      // Add background animation class
-      React.useEffect(() => {
-        if (typeof document !== "undefined") {
-          document.documentElement.classList.add("animate-bg-move", "bg-cover");
-        }
-      }, []);
-
-      try {
-        return React.createElement(
-          "div",
-          { className: "theme-provider-wrapper" },
-          React.createElement(
-            GlassUIProvider,
-            null,
-            React.createElement(
-              "div",
-              {
-                className: "container flex flex-col gap-4 min-h-screen p-4",
-                style: {
-                  background:
-                    context.parameters.backgrounds?.values?.find(
-                      (bg: any) =>
-                        bg.name === (context.globals.background || "dark"),
-                    )?.value ||
-                    "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)",
-                },
-              },
-              React.createElement(Story),
-            ),
-          ),
-        );
-      } catch (error) {
-        console.error("Storybook decorator error:", error);
-        return React.createElement(
-          "div",
-          { className: "p-4 text-red-500" },
-          React.createElement(
-            "h3",
-            { className: "text-lg font-bold" },
-            "Story Error",
-          ),
-          React.createElement(
-            "p",
-            { className: "mt-2" },
-            "Failed to render story: ",
-            error instanceof Error ? error.message : "Unknown error",
-          ),
-          React.createElement(
-            "details",
-            { className: "mt-4" },
-            React.createElement(
-              "summary",
-              { className: "cursor-pointer font-medium" },
-              "Error Details",
-            ),
-            React.createElement(
-              "pre",
-              {
-                className: "mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto",
-              },
-              error instanceof Error ? error.stack : String(error),
-            ),
-          ),
-        );
-      }
+      const theme = context.globals.theme || 'light';
+      
+      return (
+        <div 
+          className={`${theme} min-h-screen p-4`}
+          style={{
+            fontFamily: 'system-ui, sans-serif',
+            background: theme === 'dark' 
+              ? '#1a1a1a' 
+              : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          }}
+        >
+          <Story />
+        </div>
+      );
     },
   ],
 };

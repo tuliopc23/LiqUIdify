@@ -95,7 +95,7 @@ const LiveError = ({ className }: { className?: string }) => {
   return <div className={className} style={{ display: "none" }} />;
 };
 
-export interface PlaygroundProps {
+interface PlaygroundProps {
   code: string;
   scope?: Record<string, unknown>;
   title?: string;
@@ -334,7 +334,7 @@ export function GlassPlayground({
 {
   /* Playground Editor Component  */
 }
-export interface PlaygroundEditorProps {
+interface PlaygroundEditorProps {
   editable?: boolean;
   onChange?: (code: string) => void;
   className?: string;
