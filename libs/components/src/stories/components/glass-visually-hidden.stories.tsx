@@ -372,66 +372,8 @@ export const NavigationContext: Story = {
             </ul>
           </nav>
 
-          <div className="glass-effect mt-6 rounded-lg p-4">
-            <p className="text-[var(--text-secondary)] text-sm">
-              Current page:{" "}
-              <strong>
-                {navItems.find((i) => i.id === currentPage)?.label}
-              </strong>
-            </p>
-          </div>
-        </GlassCard>
-      </div>
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Navigation menu with visually hidden context and status information",
-      },
-    },
-  },
-};
-
-export const ComplexInteractions: Story = {
-  render: () => {
-    const [expandedCards, setExpandedCards] = React.useState<Set<number>>(
-      new Set(),
-    );
-
-    const toggleCard = (id: number) => {
-      setExpandedCards((prev) => {
-        const next = new Set(prev);
-        if (next.has(id)) {
-          next.delete(id);
-        } else {
-          next.add(id);
-        }
-        return next;
-      });
-    };
-
-    const cards = [
-      { id: 1, title: "Project Alpha", status: "In Progress", progress: 65 },
-      { id: 2, title: "Project Beta", status: "Completed", progress: 100 },
-      { id: 3, title: "Project Gamma", status: "Planning", progress: 15 },
-    ];
-
-    return (
-      <div className="max-w-2xl p-8">
-        <GlassCard className="p-6">
-          <h2 className="mb-4 font-bold text-xl">
-            Project Dashboard
-            <GlassVisuallyHidden>
-              {" "}
-              - {cards.length} projects total
-            </GlassVisuallyHidden>
-          </h2>
-
-          <div className="space-y-4">
-            {cards.map((card) => (
-              <div key={card.id} className="glass-effect rounded-lg p-4">
+          <div className="liquid-glass mt-6 rounded-lg p-4">
+<div key={card.id} className="liquid-glass rounded-lg p-4">
                 <div className="mb-2 flex items-center justify-between">
                   <h3 className="font-medium">
                     {card.title}

@@ -1,57 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
-import { GlassButton } from "@/components/glass-button-refactored/glass-button";
-import { GlassCard } from "@/components/glass-card-refactored/glass-card";
-import { GlassPerformanceDashboard } from "@/components/glass-performance-dashboard/glass-performance-dashboard";
 
-const meta = {
+export default {
   title: "Components/Glass Performance Dashboard",
   component: GlassPerformanceDashboard,
-  parameters: {
-    layout: "fullscreen",
-    docs: {
-      description: {
-        component:
-          "A comprehensive performance monitoring dashboard with real-time metrics, charts, and responsive grid layouts. Features glassmorphism design and smooth animations.",
-      },
-    },
-  },
-  tags: ["autodocs"],
-  argTypes: {
-    refreshInterval: {
-      description: "Interval for updating metrics (in milliseconds)",
-      control: { type: "number", min: 1000, max: 10000, step: 1000 },
-    },
-    showDetails: {
-      description: "Show detailed performance breakdowns",
-      control: { type: "boolean" },
-    },
-    theme: {
-      description: "Dashboard color theme",
-      control: { type: "select" },
-      options: ["blue", "green", "purple", "orange"],
-    },
-    layout: {
-      description: "Dashboard layout mode",
-      control: { type: "select" },
-      options: ["grid", "list", "compact"],
-    },
-  },
-} satisfies Meta<typeof GlassPerformanceDashboard>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+} as Meta<typeof GlassPerformanceDashboard>;
 
 export const Default: Story = {
-  args: {
-    refreshInterval: 3000,
-    showDetails: true,
-    theme: "blue",
-    layout: "grid",
-  },
-  render: (args) => (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4">
-      <GlassPerformanceDashboard {...args} />
+  render: () => (
+    <div className="liquid-glass rounded-lg p-4">
+      <GlassPerformanceDashboard />
     </div>
   ),
 };

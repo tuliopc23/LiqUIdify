@@ -141,7 +141,7 @@ export const CustomFallback: Story = {
 
           <GlassErrorBoundary
             fallback={(error, _errorInfo) => (
-              <div className="glass-effect rounded-lg p-8 text-center">
+              <div className="liquid-glass rounded-lg p-8 text-center">
                 <div className="mb-4 text-6xl">🚨</div>
                 <h3 className="mb-2 font-bold text-red-600 text-xl">
                   Oops! Something went wrong

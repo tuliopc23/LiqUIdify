@@ -52,39 +52,39 @@ function _createSizeClass<T extends Record<string, string>>(sizeMap: T) {
 }
 
 /**
- * Glass effect class utilities
- * Provides predefined glass effect classes for consistent styling
+ * Liquid Glass effect class utilities
+ * Provides predefined liquid glass effect classes for consistent styling
  */
-export const GLASS_CLASSES = {
+export const LIQUID_GLASS_CLASSES = {
   default:
-    "glass-effect backdrop-blur-glass saturate-[180%] bg-glass-light-primary border border-border-glass-light",
+    "liquid-glass backdrop-blur-glass saturate-[180%] bg-glass-light-primary border border-border-glass-light",
   elevated:
-    "glass-effect backdrop-blur-glass-heavy saturate-[200%] bg-glass-light-elevated border border-border-glass-light-medium shadow-glass-sm",
+    "liquid-glass backdrop-blur-glass-heavy saturate-[200%] bg-glass-light-elevated border border-border-glass-light-medium shadow-glass-sm",
   floating:
-    "glass-effect backdrop-blur-glass-heavy saturate-[180%] bg-glass-light-floating border border-border-glass-light-medium shadow-glass-md",
+    "liquid-glass backdrop-blur-glass-heavy saturate-[180%] bg-glass-light-floating border border-border-glass-light-medium shadow-glass-md",
   overlay:
-    "glass-effect backdrop-blur-glass-ultra saturate-[200%] bg-glass-light-overlay border border-border-glass-light-strong shadow-glass-lg",
+    "liquid-glass backdrop-blur-glass-ultra saturate-[200%] bg-glass-light-overlay border border-border-glass-light-strong shadow-glass-lg",
   hover:
     "hover:backdrop-blur-glass-heavy hover:saturate-[190%] hover:bg-glass-light-hover hover:border-border-glass-light-hover transition-all duration-glass",
   active:
     "active:backdrop-blur-glass active:saturate-[170%] active:bg-glass-light-active active:scale-[0.98] transition-all duration-glass-fast",
   pressed:
-    "glass-effect backdrop-blur-glass saturate-[160%] bg-glass-light-pressed scale-[0.98]",
+    "liquid-glass backdrop-blur-glass saturate-[160%] bg-glass-light-pressed scale-[0.98]",
   interactive:
-    "glass-effect cursor-pointer transition-all duration-glass hover:scale-[1.02] active:scale-[0.98]",
+    "liquid-glass cursor-pointer transition-all duration-glass hover:scale-[1.02] active:scale-[0.98]",
   disabled: "opacity-50 cursor-not-allowed pointer-events-none",
 } as const;
 
 /**
- * Get glass effect classes
+ * Get liquid glass effect classes
  *
  * @param variant - The glass variant to apply
  * @returns The corresponding glass classes
  */
 export function getGlassClass(
-  variant: keyof typeof GLASS_CLASSES = "default",
+  variant: keyof typeof LIQUID_GLASS_CLASSES = "default",
 ): string {
-  return GLASS_CLASSES[variant] || GLASS_CLASSES.default;
+  return LIQUID_GLASS_CLASSES[variant] || LIQUID_GLASS_CLASSES.default;
 }
 
 /**

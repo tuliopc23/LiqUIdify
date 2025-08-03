@@ -61,7 +61,7 @@ describe("GlassAlert", () => {
     const alert = screen.getByRole("alert");
     expect(alert).toHaveClass("custom-alert-class");
     // Also has default classes
-    expect(alert).toHaveClass("glass-effect");
+    expect(alert).toHaveClass("liquid-glass");
     expect(alert).toHaveClass("rounded-lg");
   });
 

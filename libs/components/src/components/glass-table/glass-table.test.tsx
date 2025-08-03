@@ -109,7 +109,7 @@ describe("GlassTable", () => {
     // Check header row
     const headerRow = thead?.querySelector("tr");
     expect(headerRow).toBeInTheDocument();
-    expect(headerRow).toHaveClass("glass-effect");
+    expect(headerRow).toHaveClass("liquid-glass");
 
     // Check th elements
     const headers = thead?.querySelectorAll("th");

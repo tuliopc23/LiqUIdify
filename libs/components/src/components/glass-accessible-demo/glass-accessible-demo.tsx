@@ -95,7 +95,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
   return (
     <div ref={demoRef} className={cn("space-y-6", className)}>
-      <div className="p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md">
+      <div className="liquid-glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md">
         <h2 className="mb-4 font-bold text-2xl">Accessibility Manager Demo</h2>
 
         {/* Accessibility Validation Demo  */}

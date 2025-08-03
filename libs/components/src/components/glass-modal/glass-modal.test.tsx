@@ -297,7 +297,7 @@ describe("GlassModal", () => {
     );
 
     const modal = screen.getByRole("dialog");
-    expect(modal).toHaveClass("glass-effect");
+    expect(modal).toHaveClass("liquid-glass");
     expect(modal).toHaveClass("glass-modal");
     expect(modal).toHaveClass("animate-scale");
   });

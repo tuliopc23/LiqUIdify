@@ -249,9 +249,9 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
         {/* Textarea Container */}
         <div className="relative">
           {/* Glass effect layers */}
-          <div className="glass-filter pointer-events-none" />
-          <div className="glass-overlay pointer-events-none" />
-          <div className="glass-specular pointer-events-none" />
+          <div className="liquid-glass-filter pointer-events-none" />
+<div className="liquid-glass-overlay pointer-events-none" />
+<div className="liquid-glass-specular pointer-events-none" />
 
           <textarea
             {...props}

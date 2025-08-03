@@ -119,26 +119,7 @@ export const GlassSlider = React.memo(
             className={cn(
               "relative h-2 cursor-pointer rounded-full",
               variant === "default" && getGlassClass("default"),
-              variant === "minimal" && "bg-gray-200 dark:bg-gray-700",
-              disabled && "cursor-not-allowed opacity-50",
-            )}
-            onMouseDown={handleMouseDown}
-          >
-            {/* Track fill */}
-
-            <div
-              className="absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-200"
-              style={{ width: `${percentage}%` }}
-            />
-
-            {/* Thumb */}
-
-            <div
-              ref={thumbRef}
-              className={cn(
-                "-translate-y-1/2 -translate-x-1/2 absolute top-1/2 transform",
-                "h-5 w-5 rounded-full transition-all duration-200",
-                getGlassClass("elevated"),
+getGlassClass("elevated"),
                 "border-2 border-white/30 dark:border-white/20",
                 "hover:scale-110 active:scale-95",
                 isDragging && "scale-110 ring-4 ring-blue-500/30",

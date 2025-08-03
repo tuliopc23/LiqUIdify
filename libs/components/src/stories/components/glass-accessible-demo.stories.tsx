@@ -165,7 +165,7 @@ export const InteractiveGuide: Story = {
             ))}
           </div>
 
-          <div className="glass-effect rounded-lg p-4">
+          <div className="liquid-glass rounded-lg p-4">
             {activeFeature === "validation" && (
               <div>
                 <h3 className="mb-2 font-semibold">Component Validation</h3>

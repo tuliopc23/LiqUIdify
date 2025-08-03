@@ -14,7 +14,7 @@ describe("GlassBadge", () => {
       <GlassBadge variant="default">Default</GlassBadge>,
     );
     let badge = screen.getByText("Default");
-    expect(badge).toHaveClass("glass-effect");
+    expect(badge).toHaveClass("liquid-glass");
     expect(badge).toHaveClass("text-primary");
 
     rerender(<GlassBadge variant="success">Success</GlassBadge>);

@@ -105,7 +105,7 @@ export const Default: Story = {
             </GlassButton>
           </div>
 
-          <div className="glass-effect rounded-lg p-4">
+          <div className="liquid-glass rounded-lg p-4">
             <h3 className="mb-2 font-medium">Last Announcement:</h3>
             <p className="text-[var(--text-secondary)]">
               {message || "No announcements yet"}

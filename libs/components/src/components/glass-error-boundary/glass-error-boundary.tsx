@@ -209,43 +209,9 @@ export class GlassErrorBoundary extends Component<
               <button
                 type="button"
                 onClick={this.resetErrorBoundary}
-                className="glass-button-primary rounded-lg px-4 py-2"
-                aria-label="Retry loading the content"
-              >
-                Try Again
-              </button>
-
-              {level === "page" && (
-                <button
-                  type="button"
-                  onClick={() => window.location.reload()}
-                  className="glass-button-secondary rounded-lg px-4 py-2"
-                  aria-label="Reload the entire page"
-                >
-                  Reload Page
-                </button>
-              )}
-            </div>
-
-            {process.env.NODE_ENV === "development" && errorInfo && (
-              <details className="mt-4 w-full max-w-2xl text-left">
-                <summary className="cursor-pointer text-secondary text-sm hover:text-primary">
-                  Error Details
-                </summary>
-
-                <pre className="mt-2 overflow-auto rounded-lg bg-black/10 p-4 text-xs">
-                  {errorInfo.componentStack}
-                </pre>
-              </details>
-            )}
-          </div>
-        </div>
-      );
-    }
-
-    // Wrap children in an isolating container if needed
-    if (isolate) {
-      return <div className="glass-error-boundary-container">{children}</div>;
+                className="liquid-glass-button-primary rounded-lg px-4 py-2"
+className="liquid-glass-button-secondary rounded-lg px-4 py-2"
+return <div className="liquid-glass-error-boundary-container">{children}</div>;
     }
 
     return <>{children}</>;

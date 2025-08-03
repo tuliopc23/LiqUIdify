@@ -216,59 +216,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         className={cn(
           "flex items-center gap-2 rounded-lg px-3 py-2",
           getGlassClass("default"),
-          "hover:bg-[var(--glass-bg-elevated)]",
-          "text-[var(--text-secondary)] text-sm",
-          microInteraction.gentle,
-          className,
-        )}
-      >
-        <Search className="h-4 w-4" />
-
-        <span>Search...</span>
-
-        <div className="ml-auto flex items-center gap-1">
-          {shortcut.map((key, index) => (
-            <kbd
-              key={index}
-              className="rounded border border-[var(--glass-border)] bg-[var(--glass-bg)] px-1.5 py-0.5 text-xs"
-            >
-              {formatShortcut([key])}
-            </kbd>
-          ))}
-        </div>
-      </button>
-    );
-  }
-
-  // SSR safety check
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  return createPortal(
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh]">
-      {/* Backdrop */}
-
-      <button
-        type="button"
-        className="absolute inset-0 bg-black/20 backdrop-blur-sm"
-        onClick={handleClose}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            handleClose();
-          }
-        }}
-        aria-label="Close command palette"
-      />
-
-      {/* Command Palette */}
-
-      <div
-        ref={containerRef}
-        className={cn(
-          "relative mx-4 w-full max-w-2xl overflow-hidden rounded-2xl border",
-          getGlassClass("elevated"),
+getGlassClass("elevated"),
           "border-[var(--glass-border)]",
           "fade-in-0 zoom-in-95 animate-in duration-200",
         )}

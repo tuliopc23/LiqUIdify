@@ -19,31 +19,15 @@ const GlassBadge = forwardRef<HTMLSpanElement, GlassBadgeProps>(
     };
 
     return (
-      <span
-        ref={ref}
-        className={cn(
-          "relative inline-flex items-center justify-center",
-          "radius-lg-s px-3 py-1 font-medium text-xs",
-          "transition-all duration-200 will-change-transform",
-          "motion-safe:hover:scale-105",
-          variantClasses[variant],
-          className,
-        )}
-        {...props}
-      >
-        {/* Glass effect layers for non-default variants */}
-        {variant !== "default" && (
-          <>
-            <div className="glass-filter" />
-            <div className="glass-overlay" />
-            <div className="glass-specular" />
-          </>
-        )}
-
-        {/* Badge content */}
-        <span className="relative z-10">{props.children}</span>
-      </span>
-    );
+    <span data-testid="badge" className={cn(
+      "liquid-glass-filter",
+      "liquid-glass-overlay",
+      "liquid-glass-specular",
+      className
+    )}>
+      {children}
+    </span>
+  );
   },
 );
 

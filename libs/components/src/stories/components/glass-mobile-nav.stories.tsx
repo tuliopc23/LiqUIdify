@@ -111,7 +111,7 @@ export const Default: Story = {
       <div className="flex justify-end">
         <GlassMobileNav {...args} />
       </div>
-      <div className="glass-effect mt-8 rounded-lg p-6">
+      <div className="liquid-glass mt-8 rounded-lg p-6">
         <h1 className="mb-4 font-bold text-2xl text-[var(--text-primary)]">
           Mobile Navigation Demo
         </h1>

@@ -194,13 +194,13 @@ export function GlassPlayground({
   return (
     <div
       className={cn(
-        "glass-effect overflow-hidden rounded-xl",
+        "liquid-glass overflow-hidden rounded-xl",
         fullscreen && "fixed inset-4 z-50",
         className,
       )}
     >
       {/* Header  */}
-      <div className="glass-header border-white/10 border-b px-4 py-3">
+      <div className="liquid-glass-header border-white/10 border-b px-4 py-3">
         <div className="flex items-center justify-between">
           <div>
             {title && (

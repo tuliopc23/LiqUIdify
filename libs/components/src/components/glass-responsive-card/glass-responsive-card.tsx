@@ -40,9 +40,8 @@ const GlassResponsiveCard = forwardRef<
   ) => {
     const variantClasses = {
       default: getGlassClass("default"),
-      elevated: getGlassClass("elevated"),
-      outlined: "bg-transparent border-2 border-[var(--glass-border)]",
-      pressed: cn(getGlassClass("pressed"), "shadow-inner"),
+elevated: getGlassClass("elevated"),
+pressed: cn(getGlassClass("pressed"), "shadow-inner"),
     };
 
     const paddingClasses = responsive

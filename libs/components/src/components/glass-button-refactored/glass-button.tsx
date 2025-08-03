@@ -92,10 +92,10 @@ const SIZE_CLASSES = {
   xl: "px-10 py-5 text-xl radius-lg-l",
 };
 
-// Variant class mappings using Tailwind + glass utilities
+// Variant class mappings using Tailwind + liquid glass utilities
 const VARIANT_CLASSES = {
   primary: cn(
-    "glass glass-button",
+    "liquid-glass liquid-glass-button",
     "font-semibold text-glass-text",
     "bg-gradient-to-b from-blue-500/80 to-blue-600/80",
     "motion-safe:hover:from-blue-400/80 motion-safe:hover:to-blue-500/80",
@@ -104,7 +104,7 @@ const VARIANT_CLASSES = {
     "animate-glass-hover animate-glass-press",
   ),
   secondary: cn(
-    "glass glass-button",
+    "liquid-glass liquid-glass-button",
     "text-gray-900 dark:text-white",
     "border-gray-200/30 dark:border-gray-700/30",
     "motion-safe:hover:bg-gray-50/20 dark:motion-safe:hover:bg-gray-800/20",
@@ -112,21 +112,21 @@ const VARIANT_CLASSES = {
     "animate-glass-hover animate-glass-press",
   ),
   tertiary: cn(
-    "glass-button bg-transparent",
+    "liquid-glass-button bg-transparent",
     "text-gray-900 dark:text-white",
     "motion-safe:hover:bg-gray-50/20 dark:motion-safe:hover:bg-gray-800/20",
     "motion-safe:active:bg-gray-100/30 dark:motion-safe:active:bg-gray-700/30",
     "animate-glass-hover animate-glass-press",
   ),
   ghost: cn(
-    "glass-button bg-transparent",
+    "liquid-glass-button bg-transparent",
     "text-gray-600 dark:text-gray-400",
     "motion-safe:hover:bg-gray-50/20 dark:motion-safe:hover:bg-gray-800/20",
     "motion-safe:active:bg-gray-100/30 dark:motion-safe:active:bg-gray-700/30",
     "animate-glass-hover animate-glass-press",
   ),
   destructive: cn(
-    "glass glass-button",
+    "liquid-glass liquid-glass-button",
     "font-semibold text-glass-text",
     "bg-gradient-to-b from-red-500/80 to-red-600/80",
     "motion-safe:hover:from-red-400/80 motion-safe:hover:to-red-500/80",
@@ -135,7 +135,7 @@ const VARIANT_CLASSES = {
     "animate-glass-hover animate-glass-press",
   ),
   apple: cn(
-    "glass glass-button",
+    "liquid-glass liquid-glass-button",
     "font-semibold text-glass-text",
     "bg-gradient-to-b from-gray-800/80 to-gray-900/80",
     "motion-safe:hover:from-gray-700/80 motion-safe:hover:to-gray-800/80",

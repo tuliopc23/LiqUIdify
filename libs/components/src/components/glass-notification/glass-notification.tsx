@@ -96,25 +96,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         className={cn(
           "relative rounded-xl p-2",
           getGlassClass("default"),
-          "hover:bg-[var(--glass-bg-elevated)]",
-          microInteraction.gentle,
-          "focus:outline-none focus:ring-2 focus:ring-blue-500/30",
-        )}
-      >
-        <Bell className="h-5 w-5 text-[var(--text-secondary)]" />
-        {unreadCount > 0 && (
-          <span className="-top-1 -right-1 absolute flex h-5 w-5 items-center justify-center rounded-full bg-red-500 font-medium text-white text-xs">
-            {unreadCount > 9 ? "9+" : unreadCount}
-          </span>
-        )}
-      </button>
-
-      {/* Notification Panel */}
-      {isOpen && (
-        <div
-          className={cn(
-            "absolute top-full right-0 z-50 mt-2 max-h-96 w-80 overflow-hidden rounded-xl",
-            getGlassClass("elevated"),
+getGlassClass("elevated"),
             "border border-[var(--glass-border)]",
           )}
         >

@@ -18,7 +18,7 @@ const GlassTable = <T,>({ data, columns, className }: GlassTableProps<T>) => {
     <div className={`overflow-x-auto ${className || ""}`}>
       <table className="w-full">
         <thead>
-          <tr className="glass-effect">
+          <tr className="liquid-glass">
             {columns.map((column) => (
               <th
                 key={String(column.key)}

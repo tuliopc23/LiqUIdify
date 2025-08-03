@@ -1,9 +1,0 @@
-@import "./glass-base.css";
-
-/**
- * Glass Core CSS (extends glass-base.css)
- * Only unique or extended styles for core components should remain here.
- * All core variables and utility classes are now in glass-base.css.
- */
-
-/* (If there are any unique styles for glass-core.css, keep them below. Otherwise, this file can be minimal.) */

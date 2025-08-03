@@ -139,9 +139,9 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
       <div className="relative w-full">
         <div className="relative flex w-full items-center">
           {/* Glass effect layers */}
-          <div className="glass-filter pointer-events-none" />
-          <div className="glass-overlay pointer-events-none" />
-          <div className="glass-specular pointer-events-none" />
+          <div className="liquid-glass-filter pointer-events-none" />
+<div className="liquid-glass-overlay pointer-events-none" />
+<div className="liquid-glass-specular pointer-events-none" />
 
           {variant === "search" && !leftIcon && (
             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-glass-grey z-10" />

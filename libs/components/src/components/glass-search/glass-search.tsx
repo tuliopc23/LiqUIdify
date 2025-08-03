@@ -196,33 +196,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           className={cn(
             "w-full rounded-xl border py-3 pr-10 pl-10",
             getGlassClass("default"),
-            focusRing,
-            "text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
-            "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
-            microInteraction.gentle,
-          )}
-        />
-        {query && (
-          <button
-            type="button"
-            onClick={() => {
-              setQuery("");
-              setIsOpen(false);
-              inputRef.current?.focus();
-            }}
-            className="-translate-y-1/2 absolute top-1/2 right-3 rounded-lg p-1 text-[var(--text-secondary)] hover:bg-[var(--glass-bg)]"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        )}
-      </div>
-
-      {/* Search Dropdown */}
-      {isOpen && (query || recentSearches.length > 0) && (
-        <div
-          className={cn(
-            "absolute top-full right-0 left-0 z-50 mt-2 rounded-xl border",
-            getGlassClass("elevated"),
+getGlassClass("elevated"),
             "max-h-80 overflow-y-auto border-[var(--glass-border)]",
           )}
         >

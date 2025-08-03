@@ -40,8 +40,8 @@
   --glass-border-medium: rgba(255, 255, 255, 0.15);
 }
 
-/* Core Glass Effect */
-.glass-effect {
+/* Core Liquid Glass Effect */
+.liquid-glass {
   position: relative;
   background: var(--glass-bg-primary);
   backdrop-filter: var(--glass-blur-medium) saturate(180%);
@@ -49,7 +49,7 @@
   border: 1px solid var(--glass-border-light);
 }
 
-.glass-effect::after {
+.liquid-glass::after {
   content: "";
   position: absolute;
   top: 0;
@@ -68,6 +68,8 @@
     drop-shadow(10px 4px 6px var(--glass-liquid-shadow))
     var(--glass-liquid-brightness);
 }
+
+/* Remove all other legacy root glass selectors: .glass-effect, .glass, .glass-liquid, etc. */
 
 /* Utility classes for glass buttons, cards, modals, inputs, etc. */
 .glass-button-lite {
