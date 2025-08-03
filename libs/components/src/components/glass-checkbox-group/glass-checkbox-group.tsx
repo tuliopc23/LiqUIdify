@@ -98,7 +98,7 @@ interface GlassCheckboxGroupProps
   onChange?: (value: Array<string>) => void;
   /** Group description */
   description?: string;
-  /** Enable glass physics animations */
+  /** Enable liquid-glass physics animations */
   physics?: boolean;
   /** Enable magnetic hover effects */
   magnetic?: boolean;

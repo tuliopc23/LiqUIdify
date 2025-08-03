@@ -131,7 +131,7 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
   return (
     <div
       className={cn(
-        "glass relative radius-lg-m border border-glass-hl/30 p-4",
+        "liquid-glass relative radius-lg-m border border-liquid-glass-hl/30 p-4",
         "min-w-[300px] max-w-[400px]",
         "transition-all duration-200 will-change-transform",
         "motion-safe:animate-in motion-safe:slide-in-from-right-full motion-safe:duration-300",
@@ -139,12 +139,12 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
       )}
     >
       {/* Glass effect layers */}
-      <div className="glass-filter" />
-      <div className="glass-overlay" />
-      <div className="glass-specular" />
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
 
       {/* Toast content */}
-      <div className="glass-content">
+      <div className="liquid-glass-content">
         <div className="flex items-start space-x-3">
           <Icon
             className={cn(
@@ -155,21 +155,21 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
 
           <div className="min-w-0 flex-1">
             {toast.title && (
-              <h4 className="mb-1 font-semibold text-glass-text text-sm">
+              <h4 className="mb-1 font-semibold text-liquid-primary text-sm">
                 {toast.title}
               </h4>
             )}
 
-            <p className="text-glass-text/80 text-sm">{toast.description}</p>
+            <p className="text-liquid-primary/80 text-sm">{toast.description}</p>
 
             {toast.action && (
               <button
                 type="button"
                 onClick={toast.action.onClick}
                 className={cn(
-                  "mt-2 font-medium text-glass-accent text-sm",
+                  "mt-2 font-medium text-text-liquid-accent text-sm",
                   "motion-safe:hover:underline transition-all duration-200",
-                  "glass-focus",
+                  "liquid-glass-interactive:focus-visible",
                 )}
               >
                 {toast.action.label}
@@ -181,10 +181,10 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
             type="button"
             onClick={handleRemove}
             className={cn(
-              "glass-button flex-shrink-0 radius-lg-s p-1 text-glass-grey",
-              "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+              "liquid-glass-button flex-shrink-0 liquid-glass-sm p-1 text-liquid-grey",
+              "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
               "motion-safe:active:scale-95 transition-all duration-200",
-              "glass-focus",
+              "liquid-glass-interactive:focus-visible",
             )}
           >
             <X className="h-4 w-4" />
@@ -226,25 +226,25 @@ const _GlassToast: React.FC<GlassToastProps> = ({
   return (
     <div
       className={cn(
-        "glass relative radius-lg-m border border-glass-hl/30 p-4",
+        "liquid-glass relative radius-lg-m border border-liquid-glass-hl/30 p-4",
         "min-w-[300px] max-w-[400px]",
         "transition-all duration-200 will-change-transform",
       )}
     >
       {/* Glass effect layers */}
-      <div className="glass-filter" />
-      <div className="glass-overlay" />
-      <div className="glass-specular" />
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
 
       {/* Toast content */}
-      <div className="glass-content">
+      <div className="liquid-glass-content">
         <div className="flex items-start space-x-3">
           <Icon
             className={cn("mt-0.5 h-5 w-5 flex-shrink-0", iconColors[type])}
           />
 
           <div className="min-w-0 flex-1">
-            <p className="text-glass-text/80 text-sm">{message}</p>
+            <p className="text-liquid-primary/80 text-sm">{message}</p>
           </div>
 
           {onClose && (
@@ -252,10 +252,10 @@ const _GlassToast: React.FC<GlassToastProps> = ({
               type="button"
               onClick={onClose}
               className={cn(
-                "glass-button flex-shrink-0 radius-lg-s p-1 text-glass-grey",
-                "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+                "liquid-glass-button flex-shrink-0 liquid-glass-sm p-1 text-liquid-grey",
+                "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
                 "motion-safe:active:scale-95 transition-all duration-200",
-                "glass-focus",
+                "liquid-glass-interactive:focus-visible",
               )}
             >
               <X className="h-4 w-4" />

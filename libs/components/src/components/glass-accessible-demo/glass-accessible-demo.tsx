@@ -93,7 +93,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
   return (
     <div ref={demoRef} className={cn("space-y-6", className)}>
-      <div className="p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md">
+      <div className="liquid-glass p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md">
         <h2 className="mb-4 font-bold text-2xl">Accessibility Manager Demo</h2>
 
         {/* Accessibility Validation Demo  */}
@@ -101,7 +101,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
         <section className="mb-6">
           <h3 className="mb-3 font-semibold text-xl">Component Validation</h3>
 
-          <div className="space-y-3">
+          <div className="liquid-glass space-y-3">
             <GlassButton
               type="button"
               onClick={validateAccessibility}
@@ -116,7 +116,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
                 className="mt-4 rounded-lg bg-white/10 p-4"
                 aria-label="Accessibility validation results"
               >
-                <div className="grid grid-cols-2 gap-4">
+                <div className="liquid-glass grid grid-cols-2 gap-4">
                   <div>
                     <span className="font-medium">Score:</span>
 
@@ -181,8 +181,8 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
         <section className="mb-6">
           <h3 className="mb-3 font-semibold text-xl">Contrast Checker</h3>
 
-          <div className="space-y-3">
-            <div className="flex gap-4">
+          <div className="liquid-glass space-y-3">
+            <div className="liquid-glass flex gap-4">
               <label htmlFor="foreground-color" className="flex-1">
                 <span className="mb-1 block font-medium text-sm">
                   Foreground
@@ -223,7 +223,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
                 className="mt-4 rounded-lg bg-white/10 p-4"
                 aria-label="Contrast check results"
               >
-                <div className="space-y-2">
+                <div className="liquid-glass space-y-2">
                   <div>
                     <span className="font-medium">Contrast Ratio:</span>
 
@@ -289,10 +289,10 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
             ARIA Validation Examples
           </h3>
 
-          <div className="space-y-3">
+          <div className="liquid-glass space-y-3">
             {/* Good example  */}
 
-            <div className="rounded bg-green-500/10 p-3">
+            <div className="liquid-glass rounded bg-green-500/10 p-3">
               <button
                 type="button"
                 aria-label="Good example button"
@@ -309,7 +309,7 @@ export const GlassAccessibleDemo: React.FC<AccessibilityDemoProps> = ({
 
             {/* Bad example - will be auto-corrected  */}
 
-            <div className="rounded bg-red-500/10 p-3">
+            <div className="liquid-glass rounded bg-red-500/10 p-3">
               <button
                 type="button"
                 aria-expanded="false"

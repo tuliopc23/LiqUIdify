@@ -104,9 +104,9 @@ const GlassBreadcrumbs = React.memo(
       );
 
       return (
-        <nav
+    <nav
           ref={ref}
-          className={cn(breadcrumbsVariants({ size, variant }), className)}
+          className=liquid-glass {cn(breadcrumbsVariants({ size, variant }), className)}
           aria-label="Breadcrumb"
           {...props}
         >

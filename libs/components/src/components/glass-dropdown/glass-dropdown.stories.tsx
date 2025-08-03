@@ -43,7 +43,7 @@ import {
 } from "lucide-react";
 import React from "react";
 import { GlassButton } from "../glass-button-refactored/glass-button";
-import { Card } from "../glass-card-refactored/glass-card";
+import { GlassCard } from "../glass-card-refactored/glass-card";
 import { GlassDropdown } from "./glass-dropdown";
 
 const meta = {

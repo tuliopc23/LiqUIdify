@@ -291,7 +291,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     <nav
       ref={containerRef}
       className={cn(
-        "glass-skip-navigation",
+        "liquid-glass-skip-navigation",
         visibilityClasses,
         positionClasses[position],
         "flex gap-2 p-2",
@@ -308,7 +308,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
           }}
           href={typeof link.target === "string" ? link.target : `#${link.id}`}
           className={cn(
-            "glass-skip-link",
+            "liquid-glass-skip-link",
             "inline-flex items-center gap-2 px-4 py-2",
             "bg-white/90 backdrop-blur-xl dark:bg-gray-900/90",
             "rounded-lg border border-white/20",

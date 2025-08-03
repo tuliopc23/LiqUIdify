@@ -198,7 +198,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
             getGlassClass("default"),
             focusRing,
             "text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]",
-            "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
+            "border-[var(--liquid-glass-border)] focus:border-[var(--liquid-glass-border-focus)]",
             microInteraction.gentle,
           )}
         />
@@ -210,7 +210,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
               setIsOpen(false);
               inputRef.current?.focus();
             }}
-            className="-translate-y-1/2 absolute top-1/2 right-3 rounded-lg p-1 text-[var(--text-secondary)] hover:bg-[var(--glass-bg)]"
+            className="-translate-y-1/2 absolute top-1/2 right-3 rounded-lg p-1 text-[var(--text-secondary)] hover:bg-[var(--liquid-glass-bg)]"
           >
             <X className="h-4 w-4" />
           </button>
@@ -223,7 +223,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
           className={cn(
             "absolute top-full right-0 left-0 z-50 mt-2 rounded-xl border",
             getGlassClass("elevated"),
-            "max-h-80 overflow-y-auto border-[var(--glass-border)]",
+            "max-h-80 overflow-y-auto border-[var(--liquid-glass-border)]",
           )}
         >
           {/* Recent Searches */}
@@ -241,7 +241,7 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
                   }
                   className={cn(
                     "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left",
-                    "text-[var(--text-primary)] hover:bg-[var(--glass-bg)]",
+                    "text-[var(--text-primary)] hover:bg-[var(--liquid-glass-bg)]",
                     microInteraction.gentle,
                   )}
                 >
@@ -268,8 +268,8 @@ export const GlassSearch: React.FC<GlassSearchProps> = ({
                   onClick={() => handleSelect(result)}
                   className={cn(
                     "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left",
-                    "text-[var(--text-primary)] hover:bg-[var(--glass-bg)]",
-                    selectedIndex === index && "bg-[var(--glass-bg)]",
+                    "text-[var(--text-primary)] hover:bg-[var(--liquid-glass-bg)]",
+                    selectedIndex === index && "bg-[var(--liquid-glass-bg)]",
                     microInteraction.gentle,
                   )}
                 >

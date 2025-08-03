@@ -193,17 +193,17 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
       [ref],
     );
 
-    // Base classes using Tailwind + glass utilities
+    // Base classes using Tailwind + liquid-glass utilities
     const textareaClasses = cn(
-      "glass-input w-full radius-lg-s resize-none",
-      "text-glass-text placeholder:text-glass-grey/70",
+      "liquid-glass-input w-full liquid-glass-sm resize-none",
+      "text-liquid-primary placeholder:text-liquid-grey/70",
       "transition-all duration-200 will-change-transform",
-      "glass-focus",
+      "liquid-glass-interactive:focus-visible",
       "disabled:cursor-not-allowed disabled:opacity-50",
       SIZE_CLASSES[size],
       error
         ? "border-red-400/50 focus:border-red-500 focus:ring-red-500/20"
-        : "border-glass-hl/30 focus:border-glass-accent focus:ring-glass-accent/20",
+        : "border-liquid-glass-hl/30 focus:border-text-liquid-accent focus:ring-text-liquid-accent/20",
     );
 
     return (
@@ -221,7 +221,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
             id={labelId}
             htmlFor={props.id}
             className={cn(
-              "mb-2 block font-medium text-glass-text",
+              "mb-2 block font-medium text-liquid-primary",
               size === "sm" && "text-sm",
               size === "lg" && "text-lg",
             )}
@@ -236,7 +236,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
           <p
             id={descriptionId}
             className={cn(
-              "mb-2 text-glass-grey/80",
+              "mb-2 text-liquid-grey/80",
               size === "sm" && "text-xs",
               size === "md" && "text-sm",
               size === "lg" && "text-base",
@@ -249,9 +249,9 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
         {/* Textarea Container */}
         <div className="relative">
           {/* Glass effect layers */}
-          <div className="glass-filter pointer-events-none" />
-          <div className="glass-overlay pointer-events-none" />
-          <div className="glass-specular pointer-events-none" />
+          <div className="liquid-glass-filter pointer-events-none" />
+          <div className="liquid-glass-overlay pointer-events-none" />
+          <div className="liquid-glass-specular pointer-events-none" />
 
           <textarea
             {...props}
@@ -281,7 +281,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
                 characterCountPosition === "bottom-right"
                   ? "right-3"
                   : "left-3",
-                isOverLimit ? "text-red-400" : "text-glass-grey/70",
+                isOverLimit ? "text-red-400" : "text-liquid-grey/70",
               )}
             >
               {maxLength ? `${characterCount}/${maxLength}` : characterCount}
@@ -295,7 +295,7 @@ const GlassTextarea = forwardRef<HTMLTextAreaElement, GlassTextareaProps>(
             id={helperTextId}
             className={cn(
               "mt-1.5 text-xs",
-              error ? "text-red-400" : "text-glass-grey/80",
+              error ? "text-red-400" : "text-liquid-grey/80",
             )}
           >
             {helperText}

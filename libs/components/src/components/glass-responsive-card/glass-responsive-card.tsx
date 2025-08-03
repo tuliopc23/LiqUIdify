@@ -41,7 +41,7 @@ const GlassResponsiveCard = forwardRef<
     const variantClasses = {
       default: getGlassClass("default"),
       elevated: getGlassClass("elevated"),
-      outlined: "bg-transparent border-2 border-[var(--glass-border)]",
+      outlined: "bg-transparent border-2 border-[var(--liquid-glass-border)]",
       pressed: cn(getGlassClass("pressed"), "shadow-inner"),
     };
 
@@ -71,8 +71,8 @@ const GlassResponsiveCard = forwardRef<
         : paddingClasses[padding as keyof typeof paddingClasses],
       bordered &&
         variant !== "outlined" &&
-        "border border-[var(--glass-border)]",
-      hover && "glass-interactive cursor-pointer",
+        "border border-[var(--liquid-glass-border)]",
+      hover && "liquid-glass-interactive cursor-pointer",
       microInteraction.smooth,
       "will-change-transform",
       // Mobile optimizations

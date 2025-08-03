@@ -1,6 +1,6 @@
 /**
  * Liquid Glass Card Component
- * 
+ *
  * Implements the signature liquid glass effect with layered approach,
  * using the glass-container, glass-filter, glass-overlay, glass-specular system.
  */
@@ -45,7 +45,7 @@ const CardContext = createContext<CardContextValue>({
 // Size configurations
 const sizeConfig = {
   sm: "liquid-glass-sm",
-  md: "liquid-glass-md", 
+  md: "liquid-glass-md",
   lg: "liquid-glass-lg",
   xl: "liquid-glass-xl",
 };
@@ -71,7 +71,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       onClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     const contextValue: CardContextValue = {
       size,
@@ -83,45 +83,64 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     const cardClasses = cn(
       // Use the layered liquid glass container system
       "liquid-glass-container",
-      
+
       // Size and variant
       sizeConfig[size],
       variantConfig[variant],
-      
+
       // Interactive states
       {
         "liquid-glass-interactive cursor-pointer": interactive || onClick,
         "ring-2 ring-liquid-accent": selected,
       },
-      
-      className
+
+      className,
     );
 
     return (
       <CardContext.Provider value={contextValue}>
-        <div
-          ref={ref}
-          className={cardClasses}
-          onClick={onClick}
-          {...props}
-        >
-          {/* Glass Filter Layer */}
-          <div className="liquid-glass-filter" />
-          
-          {/* Glass Overlay Layer */}
-          <div className="liquid-glass-overlay" />
-          
-          {/* Glass Specular Layer */}
-          <div className="liquid-glass-specular" />
-          
-          {/* Content Layer */}
-          <div className="liquid-glass-content flex-col items-start justify-start">
-            {children}
+        {interactive || onClick ? (
+          <button
+            ref={ref as React.RefObject<HTMLButtonElement>}
+            className={cardClasses}
+            onClick={onClick}
+            type="button"
+            {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+          >
+            {/* Glass Filter Layer */}
+            <div className="liquid-glass-filter" />
+
+            {/* Glass Overlay Layer */}
+            <div className="liquid-glass-overlay" />
+
+            {/* Glass Specular Layer */}
+            <div className="liquid-glass-specular" />
+
+            {/* Content Layer */}
+            <div className="liquid-glass-content flex-col items-start justify-start">
+              {children}
+            </div>
+          </button>
+        ) : (
+          <div ref={ref} className={cardClasses} onClick={onClick} {...props}>
+            {/* Glass Filter Layer */}
+            <div className="liquid-glass-filter" />
+
+            {/* Glass Overlay Layer */}
+            <div className="liquid-glass-overlay" />
+
+            {/* Glass Specular Layer */}
+            <div className="liquid-glass-specular" />
+
+            {/* Content Layer */}
+            <div className="liquid-glass-content flex-col items-start justify-start">
+              {children}
+            </div>
           </div>
-        </div>
+        )}
       </CardContext.Provider>
     );
-  }
+  },
 );
 
 // Card Header Component
@@ -135,16 +154,13 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "flex flex-col space-y-1.5 pb-4",
-          className
-        )}
+        className={cn("flex flex-col space-y-1.5 pb-4", className)}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
 
 // Card Title Component
@@ -161,18 +177,19 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
         ref={ref}
         className={cn(
           "text-xl font-semibold leading-none tracking-tight text-liquid-primary",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </Component>
     );
-  }
+  },
 );
 
 // Card Description Component
-interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+interface CardDescriptionProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   children?: React.ReactNode;
   className?: string;
 }
@@ -184,14 +201,14 @@ const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
         ref={ref}
         className={cn(
           "text-sm text-liquid-secondary leading-relaxed",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </p>
     );
-  }
+  },
 );
 
 // Card Content Component
@@ -203,15 +220,11 @@ interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   ({ children, className, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn("flex-1", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("flex-1", className)} {...props}>
         {children}
       </div>
     );
-  }
+  },
 );
 
 // Card Footer Component
@@ -225,16 +238,13 @@ const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "flex items-center pt-4",
-          className
-        )}
+        className={cn("flex items-center pt-4", className)}
         {...props}
       >
         {children}
       </div>
     );
-  }
+  },
 );
 
 // Set display names
@@ -253,12 +263,12 @@ GlassCard.Content = CardContent;
 GlassCard.Footer = CardFooter;
 
 // Export types
-export type { 
-  GlassCardProps, 
-  CardHeaderProps, 
-  CardTitleProps, 
-  CardDescriptionProps, 
-  CardContentProps, 
+export type {
+  GlassCardProps,
+  CardHeaderProps,
+  CardTitleProps,
+  CardDescriptionProps,
+  CardContentProps,
   CardFooterProps,
   Size as CardSize,
   Variant as CardVariant,

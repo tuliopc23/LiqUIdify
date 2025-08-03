@@ -71,9 +71,9 @@ export const GlassAvatar = React.memo(
       };
 
       return (
-        <div
+    <div
           ref={ref}
-          className={cn(
+          className=liquid-glass-container {cn(
             "relative inline-flex items-center justify-center",
             sizeClasses[size],
             variantClasses[variant],
@@ -84,6 +84,11 @@ export const GlassAvatar = React.memo(
           )}
           {...props}
         >
+      {/* Liquid Glass Layers */}
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+      <div className="liquid-glass-content">
           {src ? (
             <img
               src={src}
@@ -125,7 +130,8 @@ export const GlassAvatar = React.memo(
               )}
             />
           )}
-        </div>
+              </div>
+    </div>
       );
     },
   ),

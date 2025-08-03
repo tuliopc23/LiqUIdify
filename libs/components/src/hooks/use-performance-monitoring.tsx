@@ -11,7 +11,8 @@ import {
 const performanceMonitor = {
   startMeasure: (name: string) => ({ name, startTime: performance.now() }),
   endMeasure: (measurement: any) => performance.now() - measurement.startTime,
-  recordMetric: (name: string, value: number) => console.debug(`Metric ${name}: ${value}ms`),
+  recordMetric: (name: string, value: number) =>
+    console.debug(`Metric ${name}: ${value}ms`),
   getMetrics: () => ({}),
 };
 

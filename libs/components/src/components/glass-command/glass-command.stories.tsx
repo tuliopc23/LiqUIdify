@@ -1,6 +1,6 @@
 import { FileText, Hash, Search, Settings, User, Zap } from "lucide-react";
 import { CommandPalette } from "./glass-command";
-import "@/styles/apple-liquid-authentic.css";
+import "@/styles/index.css";
 
 const sampleCommands = [
   {

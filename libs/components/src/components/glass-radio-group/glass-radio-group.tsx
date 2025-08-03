@@ -113,7 +113,7 @@ const GlassRadioItem = React.forwardRef<
           </RadioGroupPrimitive.Indicator>
         </div>
 
-        <div className="flex-1">{children}</div>
+        <div className="liquid-glass flex-1">{children}</div>
       </RadioGroupPrimitive.Item>
     </motion.div>
   );

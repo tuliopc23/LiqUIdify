@@ -120,7 +120,12 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
     }
 
     return (
-      <div ref={ref} className="space-y-2" style={{ gap: spacing }}>
+    <div ref={ref} className="liquid-glass-container space-y-2" style={{ gap: spacing }}>
+      {/* Liquid Glass Layers */}
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+      <div className="liquid-glass-content">
         {Array.from({ length: count }, (_, index) => (
           <SkeletonItem key={`skeleton-${index}`} index={index} />
         ))}
@@ -206,7 +211,8 @@ export const SkeletonTable: React.FC<{
         ))}
       </div>
     ))}
-  </div>
+        </div>
+    </div>
 );
 
 export { GlassSkeleton };

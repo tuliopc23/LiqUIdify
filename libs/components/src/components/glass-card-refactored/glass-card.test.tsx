@@ -1,7 +1,7 @@
 import { describe, expect, it } from "bun:test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import "../../test/setup";
-import { GlassCard, Card } from "./glass-card";
+import { GlassCard } from "./glass-card";
 
 describe("GlassCard", () => {
   it("renders with children", () => {
@@ -238,8 +238,8 @@ describe("GlassCard", () => {
     render(
       <Card>
         <Card.Actions>
-          <button>Action 1</button>
-          <button>Action 2</button>
+          <button type="button">Action 1</button>
+          <button type="button">Action 2</button>
         </Card.Actions>
       </Card>,
     );
@@ -277,8 +277,8 @@ describe("GlassCard", () => {
         <Card.Content>Main content area</Card.Content>
         <Card.Footer>
           <Card.Actions>
-            <button>Save</button>
-            <button>Cancel</button>
+            <button type="button">Save</button>
+            <button type="button">Cancel</button>
           </Card.Actions>
         </Card.Footer>
       </Card>,

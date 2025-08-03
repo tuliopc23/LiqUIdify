@@ -101,16 +101,15 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
     const hasValue = Boolean(currentValue);
 
-    // Base classes using Tailwind + glass utilities
+    // Base classes using proper liquid liquid-glass system
     const baseClasses = cn(
-      "glass-input w-full radius-lg-s px-4 py-3",
-      "text-glass-text placeholder:text-glass-grey/70",
+      "liquid-glass-input w-full px-4 py-3",
+      "text-liquid-primary placeholder:text-liquid-tertiary",
       "transition-all duration-200 will-change-transform",
-      "glass-focus",
       "disabled:cursor-not-allowed disabled:opacity-50",
       error
         ? "border-red-400/50 focus:border-red-500 focus:ring-red-500/20"
-        : "border-glass-hl/30 focus:border-glass-accent focus:ring-glass-accent/20",
+        : "border-liquid focus:border-liquid-accent focus:ring-liquid-accent/20",
     );
 
     const getIconPadding = () => {
@@ -137,17 +136,18 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
 
     return (
       <div className="relative w-full">
-        <div className="relative flex w-full items-center">
-          {/* Glass effect layers */}
-          <div className="glass-filter pointer-events-none" />
-          <div className="glass-overlay pointer-events-none" />
-          <div className="glass-specular pointer-events-none" />
+        <div className="liquid-glass-container relative flex w-full items-center">
+          {/* Liquid Glass Layers */}
+          <div className="liquid-glass-filter" />
+          <div className="liquid-glass-overlay" />
+          <div className="liquid-glass-specular" />
 
-          {variant === "search" && !leftIcon && (
-            <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-glass-grey z-10" />
-          )}
-          {leftIcon && (
-            <div className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 transform text-glass-grey z-10">
+          <div className="liquid-glass-content relative flex w-full items-center p-0">
+            {variant === "search" && !leftIcon && (
+              <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-liquid-grey z-10" />
+            )}
+            {leftIcon && (
+              <div className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 transform text-liquid-grey z-10">
               {leftIcon}
             </div>
           )}
@@ -177,10 +177,10 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 onClick={handleClearInput}
                 aria-label="Clear input"
                 className={cn(
-                  "glass-button radius-lg-s p-1 text-glass-grey",
-                  "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+                  "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey",
+                  "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
                   "motion-safe:active:scale-95 transition-all duration-200",
-                  "glass-focus",
+                  "liquid-glass-interactive:focus-visible",
                 )}
               >
                 <X className="h-4 w-4" />
@@ -193,10 +193,10 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 aria-pressed={showPassword}
                 className={cn(
-                  "glass-button radius-lg-s p-1 text-glass-grey",
-                  "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+                  "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey",
+                  "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
                   "motion-safe:active:scale-95 transition-all duration-200",
-                  "glass-focus",
+                  "liquid-glass-interactive:focus-visible",
                 )}
               >
                 {showPassword ? (
@@ -207,18 +207,19 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
               </button>
             )}
             {rightIcon && variant !== "password" && !clearable && (
-              <div className="pointer-events-none text-glass-grey">
+              <div className="pointer-events-none text-liquid-grey">
                 {rightIcon}
               </div>
             )}
           </div>
         </div>
+      </div>
         {helperText && (
           <p
             id={helperTextId}
             className={cn(
               "mt-1.5 text-xs",
-              error ? "text-red-500" : "text-glass-grey/80",
+              error ? "text-red-500" : "text-liquid-grey/80",
             )}
           >
             {helperText}

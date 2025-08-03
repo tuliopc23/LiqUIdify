@@ -38,7 +38,7 @@ const GlassSwitch = forwardRef<HTMLInputElement, GlassSwitchProps>(
           <div
             className={cn(
               "h-6 w-11 rounded-full shadow-inner transition-colors duration-200",
-              isChecked ? "bg-primary" : "glass-effect",
+              isChecked ? "bg-primary" : "liquid-glass-effect",
               className,
             )}
           />

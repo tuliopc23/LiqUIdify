@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import React from "react";
 import { GlassButton } from "../glass-button-refactored/glass-button";
-import { Card, GlassCard } from "./glass-card";
+import { GlassCard } from "./glass-card";
 
 const meta = {
   title: "Components/Layout/GlassCard",
@@ -45,32 +45,32 @@ A premium card component with advanced glassmorphism effects and compound compon
 ## Usage
 
 \`\`\`tsx
-import { Card } from '@/components/glass-card';
+import { GlassCard } from '@/components/glass-card';
 
 // Basic usage
-<Card>
-  <Card.Header>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Description>Card description</Card.Description>
-  </Card.Header>
-  <Card.Content>
+<GlassCard>
+  <GlassCard.Header>
+    <GlassCard.Title>Card Title</GlassCard.Title>
+    <GlassCard.Description>Card description</GlassCard.Description>
+  </GlassCard.Header>
+  <GlassCard.Content>
     Content goes here
-  </Card.Content>
-</Card>
+  </GlassCard.Content>
+</GlassCard>
 
 // Interactive card
-<Card interactive onCardClick={handleClick}>
-  <Card.Content>
+<GlassCard interactive onClick={handleClick}>
+  <GlassCard.Content>
     Click me!
-  </Card.Content>
-</Card>
+  </GlassCard.Content>
+</GlassCard>
 
-// Selectable card
-<Card selectable selected={isSelected} onCardSelect={setSelected}>
-  <Card.Content>
-    Select this card
-  </Card.Content>
-</Card>
+// Selected card
+<GlassCard selected>
+  <GlassCard.Content>
+    Selected content
+  </GlassCard.Content>
+</GlassCard>
 \`\`\`
 
 ## Compound Components

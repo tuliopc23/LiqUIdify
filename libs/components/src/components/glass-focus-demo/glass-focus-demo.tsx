@@ -42,7 +42,7 @@ export const GlassFocusDemo: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="liquid-glass space-y-8">
       {/* Skip Navigation Demo */}
       <GlassSkipNavigation autoGenerate visibleOnFocus position="top" />
 
@@ -62,7 +62,7 @@ export const GlassFocusDemo: React.FC = () => {
       {/* Navigation for skip nav target  */}
 
       <nav aria-label="Demo navigation" className="mb-8">
-        <div className="flex gap-4">
+        <div className="liquid-glass flex gap-4">
           <button
             type="button"
             onClick={() => {}}
@@ -97,7 +97,7 @@ export const GlassFocusDemo: React.FC = () => {
         <GlassCard className="p-6">
           <h2 className="mb-4 font-semibold text-2xl">Enhanced Focus Trap</h2>
 
-          <div className="space-y-4">
+          <div className="liquid-glass space-y-4">
             <p>
               Click the button below to activate a focus trap. Press{" "}
               <kbd className="rounded bg-gray-200 px-2 py-1 text-sm dark:bg-gray-700">
@@ -166,7 +166,7 @@ export const GlassFocusDemo: React.FC = () => {
                       />
                     </div>
 
-                    <div className="flex justify-end gap-3">
+                    <div className="liquid-glass flex justify-end gap-3">
                       <GlassButton
                         type="button"
                         variant="ghost"
@@ -197,7 +197,7 @@ export const GlassFocusDemo: React.FC = () => {
         <GlassCard className="p-6">
           <h2 className="mb-4 font-semibold text-2xl">Roving Tabindex Menu</h2>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="liquid-glass grid gap-6 md:grid-cols-2">
             <div>
               <h3 className="mb-3 font-medium text-lg">Interactive Menu</h3>
 
@@ -210,7 +210,7 @@ export const GlassFocusDemo: React.FC = () => {
                 ref={menuRef}
                 role="menu"
                 aria-label="Application menu"
-                className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
+                className="liquid-glass overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
                 onKeyDown={roving.handlers.onKeyDown}
               >
                 {menuOptions.map((option, index) => (
@@ -301,7 +301,7 @@ export const GlassFocusDemo: React.FC = () => {
         <GlassCard className="p-6">
           <h2 className="mb-4 font-semibold text-2xl">Skip Navigation</h2>
 
-          <div className="space-y-4">
+          <div className="liquid-glass space-y-4">
             <p>
               Skip navigation links are automatically generated for this page.
               Focus on the page (click here) and press{" "}
@@ -311,7 +311,7 @@ export const GlassFocusDemo: React.FC = () => {
               to reveal them.
             </p>
 
-            <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
+            <div className="liquid-glass rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
               <h3 className="mb-2 font-medium">Generated Skip Links:</h3>
 
               <ul className="list-inside list-disc space-y-1 text-sm">

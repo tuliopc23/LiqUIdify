@@ -18,27 +18,27 @@ const GlassCheckbox = forwardRef<HTMLInputElement, GlassCheckboxProps>(
       >
         <div className="relative">
           {/* Glass effect layers */}
-          <div className="glass-filter absolute inset-0 radius-lg-s pointer-events-none" />
-          <div className="glass-overlay absolute inset-0 radius-lg-s pointer-events-none" />
-          <div className="glass-specular absolute inset-0 radius-lg-s pointer-events-none" />
+          <div className="liquid-glass-filter absolute inset-0 liquid-glass-sm pointer-events-none" />
+          <div className="liquid-glass-overlay absolute inset-0 liquid-glass-sm pointer-events-none" />
+          <div className="liquid-glass-specular absolute inset-0 liquid-glass-sm pointer-events-none" />
 
           <input
             type="checkbox"
             id={checkboxId}
             className={cn(
-              "relative z-10 h-5 w-5 radius-lg-s border-2",
-              "border-glass-hl/50 bg-transparent",
+              "relative z-10 h-5 w-5 liquid-glass-sm border-2",
+              "border-liquid-glass-hl/50 bg-transparent",
               "transition-all duration-200 will-change-transform",
               "motion-safe:hover:scale-110 motion-safe:active:scale-95",
-              "glass-focus",
-              "checked:border-glass-accent checked:bg-glass-accent",
-              "checked:motion-safe:hover:bg-glass-accent/80",
+              "liquid-glass-interactive:focus-visible",
+              "checked:border-text-liquid-accent checked:bg-text-liquid-accent",
+              "checked:motion-safe:hover:bg-text-liquid-accent/80",
               "disabled:cursor-not-allowed disabled:opacity-50",
               "appearance-none",
               // Custom checkmark
               "checked:after:content-['✓'] checked:after:absolute checked:after:inset-0",
               "checked:after:flex checked:after:items-center checked:after:justify-center",
-              "checked:after:text-glass-text checked:after:text-xs checked:after:font-bold",
+              "checked:after:text-liquid-primary checked:after:text-xs checked:after:font-bold",
               className,
             )}
             ref={ref}
@@ -49,8 +49,8 @@ const GlassCheckbox = forwardRef<HTMLInputElement, GlassCheckboxProps>(
         {label && (
           <span
             className={cn(
-              "text-glass-text transition-colors duration-200",
-              "group-hover:text-glass-hl",
+              "text-liquid-primary transition-colors duration-200",
+              "group-hover:text-liquid-glass-hl",
               props.disabled && "opacity-50",
             )}
           >

@@ -160,7 +160,7 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
 
   return (
     <div
-      className={cn("rounded-lg p-2", getGlassClass("default"), className)}
+      className=liquid-glass {cn("rounded-lg p-2", getGlassClass("default"), className)}
       role="tree"
       {...props}
     >

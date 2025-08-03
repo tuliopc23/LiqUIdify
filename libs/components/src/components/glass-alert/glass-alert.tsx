@@ -8,10 +8,10 @@ interface GlassAlertProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const variantStyles = {
-  info: "border-blue-200 bg-blue-50/10 text-blue-700",
-  success: "border-green-200 bg-green-50/10 text-green-700",
-  warning: "border-yellow-200 bg-yellow-50/10 text-yellow-700",
-  error: "border-red-200 bg-red-50/10 text-red-700",
+  info: "border-liquid-accent liquid-glass text-liquid-primary",
+  success: "border-liquid-accent liquid-glass-core-success text-liquid-primary",
+  warning: "border-liquid-accent liquid-glass-core-warning text-liquid-primary",
+  error: "border-liquid-accent liquid-glass-core-error text-liquid-primary",
 };
 
 const GlassAlert = React.forwardRef<HTMLDivElement, GlassAlertProps>(
@@ -21,7 +21,7 @@ const GlassAlert = React.forwardRef<HTMLDivElement, GlassAlertProps>(
         ref={ref}
         role="alert"
         className={cn(
-          "glass-effect rounded-lg border p-4",
+          "liquid-glass-effect rounded-lg border p-4",
           "backdrop-blur-md backdrop-saturate-150",
           variantStyles[variant],
           className,

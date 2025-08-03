@@ -38,7 +38,7 @@ const hamburgerVariants = cva({
   base: cn(
     "flex items-center justify-center rounded-xl p-2",
     getGlassClass("default"),
-    "hover:bg-[var(--glass-bg-elevated)]",
+    "hover:bg-[var(--liquid-glass-bg-elevated)]",
     focusRing,
     microInteraction.gentle,
     "transition-all duration-200",
@@ -50,7 +50,7 @@ const hamburgerVariants = cva({
       lg: "p-3",
     },
     isOpen: {
-      true: "bg-[var(--glass-bg-elevated)]",
+      true: "bg-[var(--liquid-glass-bg-elevated)]",
       false: "",
     },
   },
@@ -69,7 +69,7 @@ const drawerVariants = cva({
   base: cn(
     "fixed inset-y-0 right-0 z-50 w-80 max-w-[85vw]",
     getGlassClass("elevated"),
-    "border-l border-[var(--glass-border)]",
+    "border-l border-[var(--liquid-glass-border)]",
     "flex flex-col",
   ),
   variants: {
@@ -86,7 +86,7 @@ const drawerVariants = cva({
 const navItemVariants = cva({
   base: cn(
     "flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left",
-    "text-[var(--text-primary)] hover:bg-[var(--glass-bg)]",
+    "text-[var(--text-primary)] hover:bg-[var(--liquid-glass-bg)]",
     "transition-all duration-200",
     focusRing,
     microInteraction.gentle,
@@ -258,7 +258,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
             className={cn(
               navItemVariants({ size, isActive: isActive ? "true" : "false" }),
               item.disabled && "opacity-50 cursor-not-allowed",
-              level > 0 && "ml-4 border-l border-[var(--glass-border)] pl-4",
+              level > 0 && "ml-4 border-l border-[var(--liquid-glass-border)] pl-4",
             )}
             aria-expanded={hasChildren ? isExpanded : undefined}
             aria-current={isActive ? "page" : undefined}
@@ -335,7 +335,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
         aria-labelledby={`${navId}-label`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[var(--glass-border)] p-4">
+        <div className="flex items-center justify-between border-b border-[var(--liquid-glass-border)] p-4">
           {header || (
             <h2
               id={`${navId}-label`}
@@ -350,7 +350,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
             onClick={() => setIsOpen(false)}
             className={cn(
               "rounded-lg p-2 text-[var(--text-secondary)]",
-              "hover:bg-[var(--glass-bg)] hover:text-[var(--text-primary)]",
+              "hover:bg-[var(--liquid-glass-bg)] hover:text-[var(--text-primary)]",
               focusRing,
               microInteraction.gentle,
             )}
@@ -369,7 +369,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
 
         {/* Footer */}
         {footer && (
-          <div className="border-t border-[var(--glass-border)] p-4">
+          <div className="border-t border-[var(--liquid-glass-border)] p-4">
             {footer}
           </div>
         )}

@@ -277,7 +277,7 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
           onClick={() => !disabled && setIsOpen(!isOpen)}
           disabled={disabled}
         >
-          <div className="flex items-center gap-2">
+          <div className="liquid-glass flex items-center gap-2">
             <Calendar className="h-4 w-4 text-white/60" />
 
             <span

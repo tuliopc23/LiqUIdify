@@ -1,7 +1,7 @@
 // Main entry point for the Liquidify component library
 
 // Import styles for CSS bundling
-import "./styles/glass.css";
+import "./styles/index.css";
 
 // Core components
 export * from "./components/glass-accordion";
@@ -79,3 +79,6 @@ export * from "./components/theme-toggle";
 // Showcase and demo components
 // export * from "./components/component-showcase"; // Component not implemented
 // export * from "./components/hydration-detector"; // Component not implemented
+
+// Liquid Glass Types
+export * from "./types/liquid-glass";

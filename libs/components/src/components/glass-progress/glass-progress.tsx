@@ -44,7 +44,12 @@ export const GlassProgress = React.memo(
       };
 
       return (
-        <div ref={ref} className={cn("w-full", className)} {...props}>
+    <div ref={ref} className=liquid-glass-container {cn("w-full", className)} {...props}>
+      {/* Liquid Glass Layers */}
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+      <div className="liquid-glass-content">
           {showValue && (
             <div className="mb-2 flex items-center justify-between">
               <span className="text-gray-600 text-sm dark:text-gray-400">
@@ -93,7 +98,8 @@ export const GlassProgress = React.memo(
               }}
             />
           </div>
-        </div>
+              </div>
+    </div>
       );
     },
   ),

@@ -48,7 +48,7 @@ const inputVariants = cva({
     error: {
       true: "border-red-400/50 focus:border-red-500",
       false:
-        "border-[var(--glass-border)] focus:border-[var(--glass-border-focus)]",
+        "border-[var(--liquid-glass-border)] focus:border-[var(--liquid-glass-border-focus)]",
     },
   },
   defaultVariants: {

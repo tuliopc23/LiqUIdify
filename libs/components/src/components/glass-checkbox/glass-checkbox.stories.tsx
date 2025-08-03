@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import React from "react";
 import { GlassButton } from "../glass-button-refactored/glass-button";
-import { Card } from "../glass-card-refactored/glass-card";
+import { GlassCard } from "../glass-card-refactored/glass-card";
 import { GlassCheckbox } from "./glass-checkbox";
 
 const meta = {
@@ -45,18 +45,18 @@ import { GlassCheckbox } from '@/components/glass-checkbox';
 <GlassCheckbox label="Accept terms" />
 
 // Controlled
-<GlassCheckbox 
-  checked={checked} 
+<GlassCheckbox
+  checked={checked}
   onChange={(e) => setChecked(e.target.checked)}
   label="Subscribe to newsletter" />
 
 // With custom styling
-<GlassCheckbox 
+<GlassCheckbox
   label="Premium feature"
   className="scale-125" />
 
 // Disabled state
-<GlassCheckbox 
+<GlassCheckbox
   label="Unavailable option"
   disabled />
 \`\`\`
@@ -366,14 +366,14 @@ export const FormExamples: Story = {
     return (
       <div className="grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
         {/* Sign Up Form */}
-        <Card>
-          <Card.Header>
-            <Card.Title>Create Account</Card.Title>
-            <Card.Description>
+        <GlassCard>
+          <GlassCard.Header>
+            <GlassCard.Title>Create Account</GlassCard.Title>
+            <GlassCard.Description>
               Please review and accept our terms
-            </Card.Description>
-          </Card.Header>
-          <Card.Content>
+            </GlassCard.Description>
+          </GlassCard.Header>
+          <GlassCard.Content>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-3">
                 <GlassCheckbox
@@ -402,18 +402,18 @@ export const FormExamples: Story = {
                 Sign Up
               </GlassButton>
             </form>
-          </Card.Content>
-        </Card>
+          </GlassCard.Content>
+        </GlassCard>
 
         {/* Settings Form */}
-        <Card>
-          <Card.Header>
-            <Card.Title>Notification Settings</Card.Title>
-            <Card.Description>
+        <GlassCard>
+          <GlassCard.Header>
+            <GlassCard.Title>Notification Settings</GlassCard.Title>
+            <GlassCard.Description>
               Choose what you want to be notified about
-            </Card.Description>
-          </Card.Header>
-          <Card.Content>
+            </GlassCard.Description>
+          </GlassCard.Header>
+          <GlassCard.Content>
             <div className="space-y-4">
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
@@ -437,8 +437,8 @@ export const FormExamples: Story = {
                 Save Settings
               </GlassButton>
             </div>
-          </Card.Content>
-        </Card>
+          </GlassCard.Content>
+        </GlassCard>
       </div>
     );
   },
@@ -452,12 +452,14 @@ export const RealWorldExamples: Story = {
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Task Management</h3>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Card>
-            <Card.Header>
-              <Card.Title>Today's Tasks</Card.Title>
-              <Card.Description>Track your daily progress</Card.Description>
-            </Card.Header>
-            <Card.Content>
+          <GlassCard>
+            <GlassCard.Header>
+              <GlassCard.Title>Today's Tasks</GlassCard.Title>
+              <GlassCard.Description>
+                Track your daily progress
+              </GlassCard.Description>
+            </GlassCard.Header>
+            <GlassCard.Content>
               <div className="space-y-3">
                 <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
                   <GlassCheckbox
@@ -479,15 +481,15 @@ export const RealWorldExamples: Story = {
                   <span className="text-gray-500 text-sm">High</span>
                 </div>
               </div>
-            </Card.Content>
-          </Card>
+            </GlassCard.Content>
+          </GlassCard>
 
-          <Card>
-            <Card.Header>
-              <Card.Title>Shopping List</Card.Title>
-              <Card.Description>Items to purchase</Card.Description>
-            </Card.Header>
-            <Card.Content>
+          <GlassCard>
+            <GlassCard.Header>
+              <GlassCard.Title>Shopping List</GlassCard.Title>
+              <GlassCard.Description>Items to purchase</GlassCard.Description>
+            </GlassCard.Header>
+            <GlassCard.Content>
               <div className="space-y-3">
                 <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
                   <GlassCheckbox label="Milk" defaultChecked />
@@ -506,22 +508,22 @@ export const RealWorldExamples: Story = {
                   <span className="text-gray-500 text-sm">1 bag</span>
                 </div>
               </div>
-            </Card.Content>
-          </Card>
+            </GlassCard.Content>
+          </GlassCard>
         </div>
       </div>
 
       {/* Feature Selection */}
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Feature Selection</h3>
-        <Card>
-          <Card.Header>
-            <Card.Title>Choose Your Plan Features</Card.Title>
-            <Card.Description>
+        <GlassCard>
+          <GlassCard.Header>
+            <GlassCard.Title>Choose Your Plan Features</GlassCard.Title>
+            <GlassCard.Description>
               Select the features you need for your project
-            </Card.Description>
-          </Card.Header>
-          <Card.Content>
+            </GlassCard.Description>
+          </GlassCard.Header>
+          <GlassCard.Content>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               <div className="space-y-3">
                 <h4 className="font-medium text-gray-700 text-sm dark:text-gray-300">
@@ -559,29 +561,29 @@ export const RealWorldExamples: Story = {
                 </div>
               </div>
             </div>
-          </Card.Content>
-          <Card.Footer>
+          </GlassCard.Content>
+          <GlassCard.Footer>
             <GlassButton type="button" variant="primary">
               Continue to Payment
             </GlassButton>
             <GlassButton type="button" variant="ghost">
               Compare Plans
             </GlassButton>
-          </Card.Footer>
-        </Card>
+          </GlassCard.Footer>
+        </GlassCard>
       </div>
 
       {/* Permissions */}
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Permission Management</h3>
-        <Card>
-          <Card.Header>
-            <Card.Title>User Permissions</Card.Title>
-            <Card.Description>
+        <GlassCard>
+          <GlassCard.Header>
+            <GlassCard.Title>User Permissions</GlassCard.Title>
+            <GlassCard.Description>
               Configure access levels for team members
-            </Card.Description>
-          </Card.Header>
-          <Card.Content>
+            </GlassCard.Description>
+          </GlassCard.Header>
+          <GlassCard.Content>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-3">
@@ -637,8 +639,8 @@ export const RealWorldExamples: Story = {
                 </div>
               </div>
             </div>
-          </Card.Content>
-        </Card>
+          </GlassCard.Content>
+        </GlassCard>
       </div>
     </div>
   ),
@@ -689,8 +691,8 @@ export const AccessibilityShowcase: Story = {
         <p className="text-gray-600 text-sm dark:text-gray-400">
           Use Tab to navigate between checkboxes and Space to toggle them.
         </p>
-        <Card>
-          <Card.Content>
+        <GlassCard>
+          <GlassCard.Content>
             <form className="space-y-3">
               <GlassCheckbox label="First option (Tab here)" />
               <GlassCheckbox label="Second option (Tab again)" />
@@ -700,14 +702,14 @@ export const AccessibilityShowcase: Story = {
                 disabled
               />
             </form>
-          </Card.Content>
-        </Card>
+          </GlassCard.Content>
+        </GlassCard>
       </div>
 
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Screen Reader Support</h3>
-        <Card>
-          <Card.Content>
+        <GlassCard>
+          <GlassCard.Content>
             <div className="space-y-3">
               <GlassCheckbox
                 label="Option with description"
@@ -731,14 +733,14 @@ export const AccessibilityShowcase: Story = {
                 The checkbox above has an aria-label instead of visible text.
               </p>
             </div>
-          </Card.Content>
-        </Card>
+          </GlassCard.Content>
+        </GlassCard>
       </div>
 
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Focus Management</h3>
-        <Card>
-          <Card.Content>
+        <GlassCard>
+          <GlassCard.Content>
             <div className="space-y-4">
               <p className="text-gray-600 text-sm dark:text-gray-400">
                 Focus indicators are clearly visible for keyboard users.
@@ -756,14 +758,14 @@ export const AccessibilityShowcase: Story = {
                 </div>
               </div>
             </div>
-          </Card.Content>
-        </Card>
+          </GlassCard.Content>
+        </GlassCard>
       </div>
 
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Error States</h3>
-        <Card>
-          <Card.Content>
+        <GlassCard>
+          <GlassCard.Content>
             <form className="space-y-4">
               <div className="space-y-2">
                 <GlassCheckbox
@@ -794,8 +796,8 @@ export const AccessibilityShowcase: Story = {
                 </p>
               </div>
             </form>
-          </Card.Content>
-        </Card>
+          </GlassCard.Content>
+        </GlassCard>
       </div>
     </div>
   ),
@@ -808,11 +810,11 @@ export const CustomStyling: Story = {
       <div className="space-y-4">
         <h3 className="font-semibold text-lg">Color Variants</h3>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <Card>
-            <Card.Header>
-              <Card.Title>Custom Colors</Card.Title>
-            </Card.Header>
-            <Card.Content>
+          <GlassCard>
+            <GlassCard.Header>
+              <GlassCard.Title>Custom Colors</GlassCard.Title>
+            </GlassCard.Header>
+            <GlassCard.Content>
               <div className="space-y-3">
                 <GlassCheckbox
                   label="Primary Blue"
@@ -840,14 +842,14 @@ export const CustomStyling: Story = {
                   defaultChecked
                 />
               </div>
-            </Card.Content>
-          </Card>
+            </GlassCard.Content>
+          </GlassCard>
 
-          <Card>
-            <Card.Header>
-              <Card.Title>Custom Styles</Card.Title>
-            </Card.Header>
-            <Card.Content>
+          <GlassCard>
+            <GlassCard.Header>
+              <GlassCard.Title>Custom Sizes</GlassCard.Title>
+            </GlassCard.Header>
+            <GlassCard.Content>
               <div className="space-y-3">
                 <GlassCheckbox
                   label="Rounded"
@@ -870,8 +872,8 @@ export const CustomStyling: Story = {
                   defaultChecked
                 />
               </div>
-            </Card.Content>
-          </Card>
+            </GlassCard.Content>
+          </GlassCard>
         </div>
       </div>
     </div>

@@ -192,14 +192,14 @@ export const GlassSelect = React.memo(
           <div
             onClick={() => !disabled && setIsOpen(!isOpen)}
             className={cn(
-              "glass-input w-full radius-lg-s px-4 py-3 text-left",
+              "liquid-glass-input w-full liquid-glass-sm px-4 py-3 text-left",
               "flex items-center justify-between relative",
               "transition-all duration-200 will-change-transform",
-              "text-glass-text placeholder:text-glass-grey/70",
-              "glass-focus",
-              "motion-safe:hover:bg-glass-bg/20",
+              "text-liquid-primary placeholder:text-liquid-grey/70",
+              "liquid-glass-interactive:focus-visible",
+              "motion-safe:hover:bg-liquid-glass-bg/20",
               disabled && "cursor-not-allowed opacity-50",
-              isOpen && "border-glass-accent ring-2 ring-glass-accent/20",
+              isOpen && "border-text-liquid-accent ring-2 ring-text-liquid-accent/20",
             )}
             aria-label={ariaLabel}
             aria-describedby={ariaDescribedBy}
@@ -215,9 +215,9 @@ export const GlassSelect = React.memo(
             }}
           >
             {/* Glass effect layers */}
-            <div className="glass-filter pointer-events-none" />
-            <div className="glass-overlay pointer-events-none" />
-            <div className="glass-specular pointer-events-none" />
+            <div className="liquid-glass-filter pointer-events-none" />
+            <div className="liquid-glass-overlay pointer-events-none" />
+            <div className="liquid-glass-specular pointer-events-none" />
 
             {/* Display selected values or placeholder */}
             <div className="flex flex-wrap gap-1 relative z-10">
@@ -226,8 +226,8 @@ export const GlassSelect = React.memo(
                   <span
                     key={option.value}
                     className={cn(
-                      "glass-button inline-flex items-center gap-1 radius-lg-s px-2 py-1 text-xs",
-                      "bg-glass-accent/20 text-glass-text",
+                      "liquid-glass-button inline-flex items-center gap-1 liquid-glass-sm px-2 py-1 text-xs",
+                      "bg-text-liquid-accent/20 text-liquid-primary",
                     )}
                   >
                     {option.label}
@@ -235,8 +235,8 @@ export const GlassSelect = React.memo(
                       type="button"
                       onClick={(e) => handleRemoveSelection(option.value, e)}
                       className={cn(
-                        "glass-button radius-lg-s p-0.5",
-                        "motion-safe:hover:bg-glass-accent/30 motion-safe:hover:scale-110",
+                        "liquid-glass-button liquid-glass-sm p-0.5",
+                        "motion-safe:hover:bg-text-liquid-accent/30 motion-safe:hover:scale-110",
                         "motion-safe:active:scale-95 transition-all duration-200",
                       )}
                       aria-label={`Remove ${option.label}`}
@@ -246,11 +246,11 @@ export const GlassSelect = React.memo(
                   </span>
                 ))
               ) : selectedOptions.length > 0 ? (
-                <span className="text-glass-text">
+                <span className="text-liquid-primary">
                   {selectedOptions[0].label}
                 </span>
               ) : (
-                <span className="text-glass-grey/70">{placeholder}</span>
+                <span className="text-liquid-grey/70">{placeholder}</span>
               )}
 
               {/* Search input for searchable variant */}
@@ -261,10 +261,10 @@ export const GlassSelect = React.memo(
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onClick={(e) => e.stopPropagation()}
-                  className="ml-1 flex-1 bg-transparent outline-none placeholder:text-glass-grey/70 text-glass-text"
+                  className="ml-1 flex-1 bg-transparent outline-none placeholder:text-liquid-grey/70 text-liquid-primary"
                   placeholder={selectedOptions.length === 0 ? placeholder : ""}
                   aria-autocomplete="list"
-                  aria-controls="glass-select-options"
+                  aria-controls="liquid-glass-select-options"
                 />
               )}
             </div>
@@ -272,7 +272,7 @@ export const GlassSelect = React.memo(
             {/* Chevron Icon */}
             <ChevronDown
               className={cn(
-                "h-4 w-4 text-glass-grey transition-transform duration-200 relative z-10",
+                "h-4 w-4 text-liquid-grey transition-transform duration-200 relative z-10",
                 isOpen && "rotate-180",
               )}
             />
@@ -282,24 +282,24 @@ export const GlassSelect = React.memo(
           {isOpen && (
             <div
               ref={listRef}
-              id="glass-select-options"
+              id="liquid-glass-select-options"
               className={cn(
-                "glass absolute z-50 mt-2 w-full radius-lg-m",
-                "border border-glass-hl/30 max-h-60 overflow-auto",
+                "liquid-glass absolute z-50 mt-2 w-full radius-lg-m",
+                "border border-liquid-glass-hl/30 max-h-60 overflow-auto",
                 "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-200",
-                "shadow-glass",
+                "shadow-liquid-glass",
               )}
               role="listbox"
               aria-multiselectable={multiple}
             >
               {/* Glass effect layers for dropdown */}
-              <div className="glass-filter" />
-              <div className="glass-overlay" />
-              <div className="glass-specular" />
+              <div className="liquid-glass-filter" />
+              <div className="liquid-glass-overlay" />
+              <div className="liquid-glass-specular" />
 
               <div className="relative z-10">
                 {filteredOptions.length === 0 ? (
-                  <div className="px-4 py-3 text-center text-glass-grey/70 text-sm">
+                  <div className="px-4 py-3 text-center text-liquid-grey/70 text-sm">
                     No options found
                   </div>
                 ) : (
@@ -317,20 +317,20 @@ export const GlassSelect = React.memo(
                         disabled={option.disabled}
                         className={cn(
                           "w-full px-4 py-3 text-left transition-all duration-200",
-                          "motion-safe:hover:bg-glass-bg/20 glass-focus",
-                          "flex items-center justify-between text-glass-text",
+                          "motion-safe:hover:bg-liquid-glass-bg/20 liquid-glass-interactive:focus-visible",
+                          "flex items-center justify-between text-liquid-primary",
                           option.disabled && "cursor-not-allowed opacity-50",
-                          isSelected && "bg-glass-accent/10 text-glass-accent",
-                          isFocused && "bg-glass-bg/20",
+                          isSelected && "bg-text-liquid-accent/10 text-text-liquid-accent",
+                          isFocused && "bg-liquid-glass-bg/20",
                           "first:rounded-t-lg last:rounded-b-lg",
                         )}
                         role="option"
                         aria-selected={isSelected}
-                        id={`glass-select-option-${option.value}`}
+                        id={`liquid-glass-select-option-${option.value}`}
                       >
                         <span>{option.label}</span>
                         {isSelected && (
-                          <Check className="h-4 w-4 text-glass-accent" />
+                          <Check className="h-4 w-4 text-text-liquid-accent" />
                         )}
                       </button>
                     );

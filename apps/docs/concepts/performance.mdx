@@ -424,9 +424,10 @@ Load critical glass styles first:
 </style>
 
 <!-- Non-critical styles load asynchronously -->
+```html
 <link
   rel="preload"
-  href="/glass-extended.css"
+  href="/liquid-glass.css"
   as="style"
   onload="this.onload=null;this.rel='stylesheet'"
 />

@@ -75,27 +75,27 @@ const GlassResponsiveButton = forwardRef<
     const variantClasses = {
       primary: cn(
         "font-semibold text-white",
-        "bg-gradient-to-b from-[var(--glass-primary)] to-[var(--glass-primary-active)]",
-        "hover:from-[var(--glass-primary-hover)] hover:to-[var(--glass-primary)]",
-        "active:from-[var(--glass-primary-active)] active:to-[var(--glass-primary-active)]",
+        "bg-gradient-to-b from-[var(--liquid-glass-primary)] to-[var(--liquid-glass-primary-active)]",
+        "hover:from-[var(--liquid-glass-primary-hover)] hover:to-[var(--liquid-glass-primary)]",
+        "active:from-[var(--liquid-glass-primary-active)] active:to-[var(--liquid-glass-primary-active)]",
         "border border-blue-400/30 shadow-blue-500/25 shadow-lg",
         isMobile && "active:shadow-md",
       ),
       secondary: cn(
         getGlassClass("default"),
-        "border-[var(--glass-border)] text-[var(--text-primary)]",
-        "hover:border-[var(--glass-border-focus)] hover:bg-[var(--glass-bg-elevated)]",
-        "active:bg-[var(--glass-bg-pressed)]",
+        "border-[var(--liquid-glass-border)] text-[var(--text-primary)]",
+        "hover:border-[var(--liquid-glass-border-focus)] hover:bg-[var(--liquid-glass-bg-elevated)]",
+        "active:bg-[var(--liquid-glass-bg-pressed)]",
       ),
       tertiary: cn(
         "border border-transparent bg-transparent text-[var(--text-primary)]",
-        "hover:bg-[var(--glass-bg)] hover:backdrop-blur-sm",
-        "active:bg-[var(--glass-bg-pressed)]",
+        "hover:bg-[var(--liquid-glass-bg)] hover:backdrop-blur-sm",
+        "active:bg-[var(--liquid-glass-bg-pressed)]",
       ),
       ghost: cn(
         "border border-transparent bg-transparent text-[var(--text-secondary)]",
-        "hover:bg-[var(--glass-bg)] hover:text-[var(--text-primary)]",
-        "active:bg-[var(--glass-bg-pressed)]",
+        "hover:bg-[var(--liquid-glass-bg)] hover:text-[var(--text-primary)]",
+        "active:bg-[var(--liquid-glass-bg-pressed)]",
       ),
       destructive: cn(
         "font-semibold text-white",

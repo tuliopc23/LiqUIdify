@@ -2,10 +2,10 @@ import { X } from "lucide-react";
 import { useCallback, useEffect, useId, useRef } from "react";
 import { cn } from "../../core/utils/classname";
 
-// Import other glass components (assuming they exist)
-// import { GlassFocusTrap } from "../glass-focus-trap";
-// import { announcer } from "../glass-live-region";
-// import { GlassPortal } from "../glass-portal";
+// Import other liquid-glass components (assuming they exist)
+// import { GlassFocusTrap } from "../liquid-glass-interactive:focus-visible-trap";
+// import { announcer } from "../liquid-glass-live-region";
+// import { GlassPortal } from "../liquid-glass-portal";
 
 interface GlassModalProps {
   isOpen: boolean;
@@ -98,13 +98,10 @@ export function GlassModal({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="liquid-glass-modal-backdrop"
       onClick={handleBackdropClick}
       aria-label="Modal backdrop"
     >
-      {/* Backdrop with glass effect */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-
       <div
         ref={modalRef}
         role="dialog"
@@ -112,26 +109,25 @@ export function GlassModal({
         aria-labelledby={title ? titleId : undefined}
         aria-describedby={descriptionId}
         className={cn(
-          "glass relative w-full max-w-md radius-lg-l p-8",
+          "liquid-glass-modal liquid-glass-container w-full max-w-md",
           "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95 motion-safe:duration-200",
-          "glass-focus",
           className,
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Glass effect layers */}
-        <div className="glass-filter" />
-        <div className="glass-overlay" />
-        <div className="glass-specular" />
+        {/* Liquid Glass Layers */}
+        <div className="liquid-glass-filter" />
+        <div className="liquid-glass-overlay" />
+        <div className="liquid-glass-specular" />
 
         {/* Modal content */}
-        <div className="glass-content">
+        <div className="liquid-glass-content flex-col items-start justify-start">
           {title && (
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-4 flex items-center justify-between w-full">
               <h3
                 id={titleId}
                 className={cn(
-                  "font-semibold text-lg text-glass-text",
+                  "font-semibold text-lg text-liquid-primary",
                   titleClassName,
                 )}
               >
@@ -144,10 +140,10 @@ export function GlassModal({
                 onClick={onClose}
                 aria-label="Close modal"
                 className={cn(
-                  "glass-button radius-lg-s p-2 text-glass-grey",
-                  "motion-safe:hover:text-glass-text motion-safe:hover:scale-110",
+                  "liquid-glass-button liquid-glass-sm p-2 text-liquid-grey",
+                  "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
                   "motion-safe:active:scale-95 transition-all duration-200",
-                  "glass-focus",
+                  "liquid-glass-interactive:focus-visible",
                 )}
               >
                 <X className="h-4 w-4" />
@@ -157,7 +153,7 @@ export function GlassModal({
 
           <div
             id={descriptionId}
-            className={cn("text-glass-text", contentClassName)}
+            className={cn("text-liquid-primary", contentClassName)}
           >
             {children}
           </div>

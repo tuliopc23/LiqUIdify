@@ -44,7 +44,7 @@ export function GlassTabs({
         role="tablist"
         aria-orientation="horizontal" // Change to 'vertical' if orientation prop is implemented
         className={cn(
-          "glass-effect mb-6 flex space-x-1 rounded-lg p-1",
+          "liquid-glass-effect mb-6 flex space-x-1 rounded-lg p-1",
           tabListClassName,
         )}
       >
@@ -83,7 +83,7 @@ export function GlassTabs({
           className={cn("tab-content focus:outline-none", tabPanelClassName)} // Added focus:outline-none for potential programmatic focus
         >
           {activeTab === tab.id && (
-            <div className="glass-effect rounded-lg p-6">{tab.content}</div>
+            <div className="liquid-glass-effect rounded-lg p-6">{tab.content}</div>
           )}
         </div>
       ))}

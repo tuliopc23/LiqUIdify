@@ -194,13 +194,13 @@ export function GlassPlayground({
   return (
     <div
       className={cn(
-        "glass-effect overflow-hidden rounded-xl",
+        "liquid-glass-effect overflow-hidden rounded-xl",
         fullscreen && "fixed inset-4 z-50",
         className,
       )}
     >
       {/* Header  */}
-      <div className="glass-header border-white/10 border-b px-4 py-3">
+      <div className="liquid-glass-header border-white/10 border-b px-4 py-3">
         <div className="flex items-center justify-between">
           <div>
             {title && (
@@ -360,7 +360,7 @@ function PlaygroundEditor({
       />
 
       {!editable && (
-        <div className="absolute top-2 right-2 rounded bg-glass px-2 py-1 text-secondary text-xs">
+        <div className="absolute top-2 right-2 rounded bg-liquid-glass px-2 py-1 text-secondary text-xs">
           Read-only
         </div>
       )}
@@ -400,12 +400,12 @@ function PlaygroundError() {
 
 // Styles for the playground
 const playgroundStyles = `
-  .playground-editor { 
-    background: transparent !important; 
+  .playground-editor {
+    background: transparent !important;
   }
 
-  .playground-editor textarea { 
-    outline: none !important; 
+  .playground-editor textarea {
+    outline: none !important;
   }
 
   .playground-preview {
@@ -419,14 +419,14 @@ const playgroundStyles = `
       );
   }
 
-  .prism-code { 
-    background: transparent !important; 
+  .prism-code {
+    background: transparent !important;
   }
 `;
 
 // Inject styles
 if (typeof document !== "undefined") {
-  const styleId = "glass-playground-styles";
+  const styleId = "liquid-glass-playground-styles";
   if (!document.getElementById(styleId)) {
     const style = document.createElement("style");
     style.id = styleId;

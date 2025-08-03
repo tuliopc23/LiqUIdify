@@ -1,15 +1,58 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, ChevronDown, Search, X } from "lucide-react";
+import { Check, ChevronDown, X } from "lucide-react";
 import type React from "react";
 import { forwardRef, useEffect, useId, useRef, useState } from "react";
-import { cn, focusRing } from "../../core/utils/classname";
+import { cn } from "../../core/utils/classname";
 import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
 } from "../../lib/variant-system";
 
 const comboboxVariants = cva({
-  base: "relative w-full",
+  base: "relative w-full liquid-glass-container",
+  variants: {
+    size: {
+      sm: "liquid-glass-sm text-sm",
+      md: "liquid-glass-md text-base",
+      lg: "liquid-glass-lg text-lg",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+const triggerVariants = cva({
+  base: cn(
+    "flex w-full items-center justify-between text-left relative z-10",
+    "liquid-glass-interactive text-liquid-primary px-4 py-3",
+    "transition-all duration-200 focus:outline-none",
+    "disabled:cursor-not-allowed disabled:opacity-50",
+  ),
+  variants: {
+    isOpen: {
+      true: "liquid-glass-core-enhanced",
+      false: "",
+    },
+    size: {
+      sm: "px-3 py-2 text-sm",
+      md: "px-4 py-3 text-base",
+      lg: "px-5 py-4 text-lg",
+    },
+  },
+  defaultVariants: {
+    isOpen: false,
+    size: "md",
+  },
+});
+
+const listboxVariants = cva({
+  base: cn(
+    "absolute top-full left-0 right-0 mt-2 z-50",
+    "liquid-glass-container liquid-glass-md",
+    "max-h-60 overflow-auto",
+    "border border-liquid",
+  ),
   variants: {
     size: {
       sm: "text-sm",
@@ -22,413 +65,370 @@ const comboboxVariants = cva({
   },
 });
 
-const triggerVariants = cva({
-  base: cn(
-    "flex w-full items-center justify-between px-4 py-3 text-left",
-    "rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm",
-    "hover:bg-white/10 focus:bg-white/10 focus:outline-none",
-    "transition-all duration-200",
-    "disabled:cursor-not-allowed disabled:opacity-50",
-  ),
-  variants: {
-    isOpen: {
-      true: "border-blue-400/50 bg-white/10",
-      false: "border-white/10",
-    },
-    size: {
-      sm: "px-3 py-2 text-sm",
-      md: "px-4 py-3 text-base",
-      lg: "px-5 py-4 text-lg",
-    },
-  },
-  defaultVariants: {
-    isOpen: "false",
-    size: "md",
-  },
-});
-
-const listboxVariants = cva({
-  base: cn(
-    "absolute z-50 mt-1 max-h-60 w-full overflow-auto",
-    "rounded-xl border border-white/10 bg-black/90 backdrop-blur-xl",
-    "shadow-black/20 shadow-xl",
-  ),
-  variants: {},
-});
-
 const optionVariants = cva({
   base: cn(
-    "flex cursor-pointer items-center justify-between px-4 py-3 text-left",
-    "hover:bg-white/10 focus:bg-white/10 focus:outline-none",
-    "transition-all duration-200",
-    "text-white/90",
+    "flex items-center gap-3 px-4 py-3 cursor-pointer relative z-10",
+    "text-liquid-primary hover:bg-liquid transition-colors duration-200",
+    "border-b border-liquid last:border-b-0",
   ),
   variants: {
-    selected: {
-      true: "bg-blue-500/20 text-blue-400",
-      false: "text-white/90",
+    isSelected: {
+      true: "bg-liquid text-liquid-accent font-medium",
+      false: "",
     },
-    highlighted: {
-      true: "bg-white/10",
+    isHighlighted: {
+      true: "bg-liquid",
       false: "",
     },
   },
   defaultVariants: {
-    selected: "false",
-    highlighted: "false",
+    isSelected: false,
+    isHighlighted: false,
   },
 });
 
-interface ComboboxOption {
+export interface ComboboxOption {
   value: string;
   label: string;
-  disabled?: boolean;
+  description?: string;
   icon?: React.ReactNode;
-}
-
-interface GlassComboboxProps
-  extends Omit<
-      Omit<React.HTMLAttributes<HTMLDivElement>, keyof React.AriaAttributes>,
-      "onChange"
-    >,
-    VariantProps<typeof comboboxVariants> {
-  options: Array<ComboboxOption>;
-  value?: string;
-  defaultValue?: string;
-
-  onChange?: (value: string) => void;
-
-  onSearch?: (query: string) => void;
-  placeholder?: string;
-
   disabled?: boolean;
-
-  clearable?: boolean;
-
-  searchable?: boolean;
-
-  loading?: boolean;
-  emptyMessage?: string;
-
-  maxOptions?: number;
 }
 
-const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
+export interface GlassComboboxProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "size" | "onChange"
+  > {
+  options: ComboboxOption[];
+  value?: string;
+  onChange?: (value: string) => void;
+  onInputChange?: (value: string) => void;
+  placeholder?: string;
+  searchable?: boolean;
+  clearable?: boolean;
+  loading?: boolean;
+  size?: VariantProps<typeof comboboxVariants>["size"];
+  error?: boolean;
+  helperText?: string;
+  emptyMessage?: string;
+  maxDisplayOptions?: number;
+}
+
+export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
   (
     {
-      className,
-      size,
-      options,
-      value,
-      defaultValue,
+      options = [],
+      value = "",
       onChange,
-      onSearch,
-      placeholder = "Select option...",
-      disabled = false,
-      clearable = false,
+      onInputChange,
+      placeholder = "Select an option...",
       searchable = true,
+      clearable = false,
       loading = false,
+      size = "md",
+      error = false,
+      helperText,
       emptyMessage = "No options found",
-      maxOptions = 100,
+      maxDisplayOptions = 50,
+      disabled,
+      className,
       ...props
     },
     ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedValue, setSelectedValue] = useState(
-      value || defaultValue || "",
-    );
+    const [inputValue, setInputValue] = useState("");
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
-    const triggerRef = useRef<HTMLButtonElement>(null);
+    const comboboxRef = useRef<HTMLDivElement>(null);
     const listboxRef = useRef<HTMLDivElement>(null);
-    const searchRef = useRef<HTMLInputElement>(null);
-    const optionsRef = useRef<Array<HTMLDivElement>>([]);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const id = useId();
 
-    const comboboxId = useId();
-    const listboxId = `${comboboxId}-listbox`;
+    const selectedOption = options.find((option) => option.value === value);
 
-    // Filter options based on search query
+    // Filter options based on search input
+    const filteredOptions = searchable
+      ? options.filter(
+          (option) =>
+            option.label.toLowerCase().includes(inputValue.toLowerCase()) ||
+            option.description
+              ?.toLowerCase()
+              .includes(inputValue.toLowerCase()),
+        )
+      : options;
 
-    const filteredOptions = options
+    const displayOptions = filteredOptions.slice(0, maxDisplayOptions);
 
-      .filter((option) => {
-        if (!searchQuery) {
-          return true;
-        }
-        return option.label.toLowerCase().includes(searchQuery.toLowerCase());
-      })
-      .slice(0, maxOptions);
+    // Handle input changes
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      setInputValue(newValue);
+      onInputChange?.(newValue);
 
-    // Find selected option
-
-    const selectedOption = options.find(
-      (option) => option.value === selectedValue,
-    );
+      if (!isOpen && newValue) {
+        setIsOpen(true);
+      }
+    };
 
     // Handle option selection
-    const handleSelect = (option: ComboboxOption) => {
-      if (option.disabled) {
-        return;
-      }
-
-      setSelectedValue(option.value);
-
+    const handleOptionSelect = (option: ComboboxOption) => {
       onChange?.(option.value);
-      setIsOpen(false);
-      setSearchQuery("");
+      setInputValue(searchable ? "" : option.label);
       setHighlightedIndex(-1);
+      setIsOpen(false);
+      inputRef.current?.focus();
     };
 
     // Handle clear
-    const handleClear = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      setSelectedValue("");
-
+    const handleClear = () => {
       onChange?.("");
-      setSearchQuery("");
+      setInputValue("");
+      setHighlightedIndex(-1);
+      inputRef.current?.focus();
     };
 
-    // Handle keyboard navigation
+    // Keyboard navigation
     const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (disabled) {
-        return;
-      }
-
       switch (e.key) {
-        case "ArrowDown": {
+        case "ArrowDown":
           e.preventDefault();
-          if (isOpen) {
-            setHighlightedIndex((previous) =>
-              previous < filteredOptions.length - 1 ? previous + 1 : previous,
-            );
-          } else {
+          if (!isOpen) {
             setIsOpen(true);
-          }
-          break;
-        }
-        case "ArrowUp": {
-          e.preventDefault();
-          if (isOpen) {
-            setHighlightedIndex((previous) =>
-              previous > 0 ? previous - 1 : previous,
+          } else {
+            setHighlightedIndex((prev) =>
+              prev < displayOptions.length - 1 ? prev + 1 : 0,
             );
           }
           break;
-        }
-        case "Enter": {
+        case "ArrowUp":
+          e.preventDefault();
+          if (isOpen) {
+            setHighlightedIndex((prev) =>
+              prev > 0 ? prev - 1 : displayOptions.length - 1,
+            );
+          }
+          break;
+        case "Enter":
           e.preventDefault();
           if (isOpen && highlightedIndex >= 0) {
-            const option = filteredOptions[highlightedIndex];
-            if (option) {
-              handleSelect(option);
-            }
+            handleOptionSelect(displayOptions[highlightedIndex]);
           } else if (!isOpen) {
             setIsOpen(true);
           }
           break;
-        }
-        case "Escape": {
+        case "Escape":
+          e.preventDefault();
           setIsOpen(false);
-          setSearchQuery("");
           setHighlightedIndex(-1);
-          triggerRef.current?.focus();
           break;
-        }
-        case "Tab": {
+        case "Tab":
           setIsOpen(false);
           break;
-        }
       }
     };
 
-    // Handle search input
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const query = e.target.value;
-      setSearchQuery(query);
-
-      onSearch?.(query);
-      setHighlightedIndex(-1);
-    };
-
-    // Click outside to close
+    // Handle click outside
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (
-          triggerRef.current &&
-          !triggerRef.current.contains(event.target as Node) &&
-          listboxRef.current &&
-          !listboxRef.current.contains(event.target as Node)
+          comboboxRef.current &&
+          !comboboxRef.current.contains(event.target as Node)
         ) {
           setIsOpen(false);
-          setSearchQuery("");
           setHighlightedIndex(-1);
         }
       };
 
-      if (typeof document !== "undefined") {
-        document.addEventListener("mousedown", handleClickOutside);
-      }
+      document.addEventListener("mousedown", handleClickOutside);
       return () => {
-        if (typeof document !== "undefined") {
-          document.removeEventListener("mousedown", handleClickOutside);
-        }
+        document.removeEventListener("mousedown", handleClickOutside);
       };
     }, []);
 
-    // Scroll highlighted option into view
+    // Update input value when value prop changes
     useEffect(() => {
-      if (highlightedIndex >= 0 && optionsRef.current[highlightedIndex]) {
-        optionsRef.current[highlightedIndex].scrollIntoView({
-          block: "nearest",
-          behavior: "smooth",
-        });
+      if (!searchable && selectedOption) {
+        setInputValue(selectedOption.label);
       }
-    }, [highlightedIndex]);
+    }, [selectedOption, searchable]);
 
     return (
-      <div
-        ref={ref}
-        className={cn(comboboxVariants({ size }), className)}
-        {...props}
-      >
-        <button
-          ref={triggerRef}
-          type="button"
-          role="combobox"
-          className={cn(
-            triggerVariants({ isOpen: isOpen ? "true" : "false", size }),
-            focusRing,
-            disabled && "cursor-not-allowed",
-          )}
-          onClick={() => !disabled && setIsOpen(!isOpen)}
-          onKeyDown={handleKeyDown}
-          aria-expanded={isOpen}
-          aria-controls={listboxId}
-          disabled={disabled}
-        >
-          <div className="flex min-w-0 flex-1 items-center gap-2">
-            {selectedOption?.icon}
+      <div className={cn("w-full", className)}>
+        <div ref={comboboxRef} className={cn(comboboxVariants({ size }))}>
+          {/* Apple-style liquid glass layers */}
+          <div className="liquid-glass-filter" />
+          <div className="liquid-glass-overlay" />
+          <div className="liquid-glass-specular" />
 
-            <span
-              className={cn("truncate", !selectedOption && "text-white/60")}
-            >
-              {selectedOption?.label || placeholder}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1">
-            {clearable && selectedValue && (
-              <button
-                type="button"
-                onClick={handleClear}
-                className="cursor-pointer rounded-lg p-1 transition-colors hover:bg-white/10"
-                aria-label="Clear selection"
-                aria-haspopup="false"
-              >
-                <X className="h-4 w-4 text-white/60" />
-              </button>
-            )}
-
-            <ChevronDown
-              className={cn(
-                "h-4 w-4 text-white/60 transition-transform duration-200",
-                isOpen && "rotate-180",
+          <button
+            type="button"
+            className={cn(triggerVariants({ isOpen, size }))}
+            onClick={() => !disabled && setIsOpen(!isOpen)}
+            onKeyDown={handleKeyDown}
+            disabled={disabled}
+            role="combobox"
+            aria-expanded={isOpen}
+            aria-haspopup="listbox"
+            aria-controls={`${id}-listbox`}
+            aria-label={placeholder}
+          >
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              {selectedOption?.icon && (
+                <div className="flex-shrink-0 text-liquid-accent">
+                  {selectedOption.icon}
+                </div>
               )}
-            />
-          </div>
-        </button>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className={cn(listboxVariants())}
-            >
-              <div
-                ref={listboxRef}
+              {searchable ? (
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                  placeholder={
+                    selectedOption ? selectedOption.label : placeholder
+                  }
+                  disabled={disabled}
+                  className={cn(
+                    "flex-1 bg-transparent border-none outline-none",
+                    "text-liquid-primary placeholder:text-liquid-tertiary",
+                    disabled && "cursor-not-allowed",
+                  )}
+                  aria-autocomplete="list"
+                  aria-controls={`${id}-listbox`}
+                  aria-activedescendant={
+                    highlightedIndex >= 0
+                      ? `${id}-option-${highlightedIndex}`
+                      : undefined
+                  }
+                  {...props}
+                />
+              ) : (
+                <span className="flex-1 truncate text-liquid-primary">
+                  {selectedOption?.label || (
+                    <span className="text-liquid-tertiary">{placeholder}</span>
+                  )}
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {clearable && value && !disabled && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClear();
+                  }}
+                  className="p-1 hover:bg-liquid rounded-lg transition-colors"
+                  aria-label="Clear selection"
+                >
+                  <X className="h-4 w-4 text-liquid-secondary" />
+                </button>
+              )}
+
+              {loading ? (
+                <div className="animate-spin">
+                  <Search className="h-4 w-4 text-liquid-secondary" />
+                </div>
+              ) : (
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 text-liquid-secondary transition-transform duration-200",
+                    isOpen && "rotate-180",
+                  )}
+                />
+              )}
+            </div>
+          </button>
+
+          {/* Dropdown with Apple-style animation */}
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className={cn(listboxVariants({ size }))}
                 role="listbox"
-                id={listboxId}
-                aria-label="Options"
-                className="py-2"
+                id={`${id}-listbox`}
+                ref={listboxRef}
               >
-                {searchable && (
-                  <div className="border-white/10 border-b px-3 pb-2">
-                    <div className="relative">
-                      <Search className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 transform text-white/60" />
+                {/* Apple-style liquid glass layers for dropdown */}
+                <div className="liquid-glass-filter" />
+                <div className="liquid-glass-overlay" />
+                <div className="liquid-glass-specular" />
 
-                      <input
-                        ref={searchRef}
-                        type="text"
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        placeholder="Search options..."
-                        className="w-full rounded-lg border border-white/10 bg-white/5 py-2 pr-3 pl-10 text-white placeholder-white/60 focus:border-blue-400/50 focus:outline-none"
-                        onKeyDown={handleKeyDown}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className="max-h-48 overflow-y-auto">
-                  {loading ? (
-                    <div className="px-4 py-3 text-center text-white/60">
-                      Loading...
-                    </div>
-                  ) : filteredOptions.length === 0 ? (
-                    <div className="px-4 py-3 text-center text-white/60">
-                      {emptyMessage}
+                <div className="liquid-glass-content p-0">
+                  {displayOptions.length === 0 ? (
+                    <div className="px-4 py-8 text-center">
+                      <p className="text-liquid-secondary">{emptyMessage}</p>
                     </div>
                   ) : (
-                    filteredOptions.map((option, index) => (
-                      <div
+                    displayOptions.map((option, index) => (
+                      <button
                         key={option.value}
-                        ref={(element) => {
-                          if (element) {
-                            optionsRef.current[index] = element;
-                          }
-                        }}
+                        type="button"
+                        id={`${id}-option-${index}`}
                         role="option"
-                        aria-selected={option.value === selectedValue}
+                        aria-selected={option.value === value}
                         className={cn(
                           optionVariants({
-                            selected:
-                              option.value === selectedValue ? "true" : "false",
-                            highlighted:
-                              index === highlightedIndex ? "true" : "false",
+                            isSelected: option.value === value,
+                            isHighlighted: index === highlightedIndex,
                           }),
-                          option.disabled && "cursor-not-allowed opacity-50",
+                          option.disabled && "opacity-50 cursor-not-allowed",
+                          "w-full text-left",
                         )}
-                        onClick={() => handleSelect(option)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault();
-                            handleSelect(option);
-                          }
-                        }}
-                        onMouseEnter={() => setHighlightedIndex(index)}
-                        tabIndex={-1}
+                        onClick={() =>
+                          !option.disabled && handleOptionSelect(option)
+                        }
+                        onMouseEnter={() =>
+                          !option.disabled && setHighlightedIndex(index)
+                        }
+                        disabled={option.disabled}
                       >
-                        <div className="flex min-w-0 flex-1 items-center gap-2">
-                          {option.icon}
-
-                          <span className="truncate">{option.label}</span>
-                        </div>
-                        {option.value === selectedValue && (
-                          <Check className="h-4 w-4 text-blue-400" />
+                        {option.icon && (
+                          <div className="flex-shrink-0 text-liquid-accent">
+                            {option.icon}
+                          </div>
                         )}
-                      </div>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium">{option.label}</div>
+                          {option.description && (
+                            <div className="text-sm text-liquid-secondary">
+                              {option.description}
+                            </div>
+                          )}
+                        </div>
+
+                        {option.value === value && (
+                          <Check className="h-4 w-4 text-liquid-accent" />
+                        )}
+                      </button>
                     ))
                   )}
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {helperText && (
+          <p
+            className={cn(
+              "mt-2 text-sm",
+              error ? "text-liquid-accent" : "text-liquid-secondary",
+            )}
+          >
+            {helperText}
+          </p>
+        )}
       </div>
     );
   },
@@ -436,4 +436,4 @@ const GlassCombobox = forwardRef<HTMLDivElement, GlassComboboxProps>(
 
 GlassCombobox.displayName = "GlassCombobox";
 
-export { GlassCombobox };
+export type { GlassComboboxProps };

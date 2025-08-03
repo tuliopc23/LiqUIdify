@@ -7,8 +7,13 @@
 import type { ComponentVariant } from "../base-component";
 
 // Define glass types locally since unified-glass-system was removed
-export type GlassIntensity = 'subtle' | 'medium' | 'strong' | 'extreme';
-export type GlassVariant = 'default' | 'primary' | 'secondary' | 'accent' | 'muted';
+export type GlassIntensity = "subtle" | "medium" | "strong" | "extreme";
+export type GlassVariant =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "muted";
 
 interface GlassEffectOptions {
   intensity?: GlassIntensity;

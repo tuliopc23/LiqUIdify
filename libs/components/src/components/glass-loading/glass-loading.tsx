@@ -102,9 +102,9 @@ export const GlassLoading = React.forwardRef<HTMLDivElement, GlassLoadingProps>(
     };
 
     return (
-      <div
+    <div
         ref={ref}
-        className={cn(
+        className=liquid-glass {cn(
           "flex flex-col items-center justify-center space-y-3",
           className,
         )}

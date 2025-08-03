@@ -461,7 +461,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
   return (
     <div
       ref={containerRef}
-      className={cn("glass-focus-trap", className)}
+      className={cn("liquid-glass-interactive:focus-visible-trap", className)}
       data-focus-trap-active={isActive}
       aria-modal={isActive ? "true" : undefined}
       role={isActive ? "dialog" : undefined}

@@ -1,7 +1,7 @@
 /**
  * Liquid Glass Button Component
- * 
- * Implements the signature liquid glass effect with layered approach,
+ *
+ * Implements the signature liquid liquid-glass effect with layered approach,
  * specular highlights, and smooth interactions.
  */
 
@@ -13,7 +13,8 @@ import { cn } from "../../core/utils/classname";
 type Size = "sm" | "md" | "lg" | "xl";
 type Variant = "primary" | "secondary" | "ghost" | "destructive";
 
-interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface GlassButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Button content */
   children?: React.ReactNode;
   /** Button variant */
@@ -38,7 +39,7 @@ interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
   className?: string;
 }
 
-// Size configurations using liquid glass system
+// Size configurations using liquid liquid-glass system
 const sizeConfig = {
   sm: {
     base: "liquid-glass-sm text-sm px-4 py-2",
@@ -58,7 +59,7 @@ const sizeConfig = {
   },
 };
 
-// Variant configurations using liquid glass system
+// Variant configurations using liquid liquid-glass system
 const variantConfig = {
   primary: {
     base: "liquid-glass-button-primary",
@@ -118,32 +119,33 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
     const sizeStyles = sizeConfig[size];
     const variantStyles = variantConfig[variant];
 
     const buttonClasses = cn(
-      // Base liquid glass styles
+      // Base liquid liquid-glass styles
       "liquid-glass liquid-glass-interactive liquid-glass-button",
-      
+
       // Size and variant styles
       sizeStyles.base,
       variantStyles.base,
       variantStyles.text,
-      
+
       // Layout styles
       "inline-flex items-center justify-center gap-2",
       "font-system select-none outline-none border-none",
-      
+
       // State styles
       {
         "w-full": fullWidth,
         "aspect-square p-0": iconOnly,
-        "opacity-50 cursor-not-allowed pointer-events-none": disabled || loading,
+        "opacity-50 cursor-not-allowed pointer-events-none":
+          disabled || loading,
       },
-      
-      className
+
+      className,
     );
 
     const content = (
@@ -187,7 +189,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         {content}
       </button>
     );
-  }
+  },
 );
 
 GlassButton.displayName = "GlassButton";

@@ -21,27 +21,27 @@ describe("GlassAlert", () => {
       <GlassAlert variant="info">Info alert</GlassAlert>,
     );
     let alert = screen.getByRole("alert");
-    expect(alert).toHaveClass("border-blue-200");
-    expect(alert).toHaveClass("bg-blue-50/10");
-    expect(alert).toHaveClass("text-blue-700");
+    expect(alert).toHaveClass("border-liquid-accent");
+    expect(alert).toHaveClass("liquid-glass");
+    expect(alert).toHaveClass("text-liquid-primary");
 
     rerender(<GlassAlert variant="success">Success alert</GlassAlert>);
     alert = screen.getByRole("alert");
-    expect(alert).toHaveClass("border-green-200");
-    expect(alert).toHaveClass("bg-green-50/10");
-    expect(alert).toHaveClass("text-green-700");
+    expect(alert).toHaveClass("border-liquid-accent");
+    expect(alert).toHaveClass("liquid-glass-core-success");
+    expect(alert).toHaveClass("text-liquid-primary");
 
     rerender(<GlassAlert variant="warning">Warning alert</GlassAlert>);
     alert = screen.getByRole("alert");
-    expect(alert).toHaveClass("border-yellow-200");
-    expect(alert).toHaveClass("bg-yellow-50/10");
-    expect(alert).toHaveClass("text-yellow-700");
+    expect(alert).toHaveClass("border-liquid-accent");
+    expect(alert).toHaveClass("liquid-glass-core-warning");
+    expect(alert).toHaveClass("text-liquid-primary");
 
     rerender(<GlassAlert variant="error">Error alert</GlassAlert>);
     alert = screen.getByRole("alert");
-    expect(alert).toHaveClass("border-red-200");
-    expect(alert).toHaveClass("bg-red-50/10");
-    expect(alert).toHaveClass("text-red-700");
+    expect(alert).toHaveClass("border-liquid-accent");
+    expect(alert).toHaveClass("liquid-glass-core-error");
+    expect(alert).toHaveClass("text-liquid-primary");
   });
 
   it("has proper ARIA attributes", () => {
@@ -152,9 +152,9 @@ describe("GlassAlert", () => {
     const alert = screen.getByRole("alert");
 
     // Should have info variant styles
-    expect(alert).toHaveClass("border-blue-200");
-    expect(alert).toHaveClass("bg-blue-50/10");
-    expect(alert).toHaveClass("text-blue-700");
+    expect(alert).toHaveClass("border-liquid-accent");
+    expect(alert).toHaveClass("liquid-glass");
+    expect(alert).toHaveClass("text-liquid-primary");
   });
 
   it("handles onClick events", () => {

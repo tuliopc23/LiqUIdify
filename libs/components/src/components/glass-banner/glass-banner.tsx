@@ -58,7 +58,7 @@ export const GlassBanner: React.FC<GlassBannerProps> = ({
 
   return (
     <div
-      className={cn(
+      className=liquid-glass {cn(
         "relative overflow-hidden rounded-lg border p-4",
         getGlassClass("default"),
         config.className,

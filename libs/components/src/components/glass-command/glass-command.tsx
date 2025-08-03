@@ -216,7 +216,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         className={cn(
           "flex items-center gap-2 rounded-lg px-3 py-2",
           getGlassClass("default"),
-          "hover:bg-[var(--glass-bg-elevated)]",
+          "hover:bg-[var(--liquid-glass-bg-elevated)]",
           "text-[var(--text-secondary)] text-sm",
           microInteraction.gentle,
           className,
@@ -230,7 +230,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {shortcut.map((key, index) => (
             <kbd
               key={index}
-              className="rounded border border-[var(--glass-border)] bg-[var(--glass-bg)] px-1.5 py-0.5 text-xs"
+              className="rounded border border-[var(--liquid-glass-border)] bg-[var(--liquid-glass-bg)] px-1.5 py-0.5 text-xs"
             >
               {formatShortcut([key])}
             </kbd>
@@ -269,13 +269,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         className={cn(
           "relative mx-4 w-full max-w-2xl overflow-hidden rounded-2xl border",
           getGlassClass("elevated"),
-          "border-[var(--glass-border)]",
+          "border-[var(--liquid-glass-border)]",
           "fade-in-0 zoom-in-95 animate-in duration-200",
         )}
       >
         {/* Search Input */}
 
-        <div className="flex items-center gap-3 border-[var(--glass-border)] border-b p-4">
+        <div className="flex items-center gap-3 border-[var(--liquid-glass-border)] border-b p-4">
           <Search className="h-5 w-5 flex-shrink-0 text-[var(--text-secondary)]" />
 
           <input
@@ -291,7 +291,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             )}
           />
 
-          <kbd className="rounded border border-[var(--glass-border)] bg-[var(--glass-bg)] px-2 py-1 text-[var(--text-tertiary)] text-xs">
+          <kbd className="rounded border border-[var(--liquid-glass-border)] bg-[var(--liquid-glass-bg)] px-2 py-1 text-[var(--text-tertiary)] text-xs">
             ESC
           </kbd>
         </div>
@@ -335,14 +335,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                         }}
                         className={cn(
                           "flex w-full items-center gap-3 px-4 py-3 text-left",
-                          "hover:bg-[var(--glass-bg)]",
-                          isSelected && "bg-[var(--glass-bg)]",
+                          "hover:bg-[var(--liquid-glass-bg)]",
+                          isSelected && "bg-[var(--liquid-glass-bg)]",
                           microInteraction.gentle,
                         )}
                       >
                         {/* Icon */}
                         {item.icon && (
-                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--glass-bg)] text-[var(--text-secondary)]">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--liquid-glass-bg)] text-[var(--text-secondary)]">
                             {item.icon}
                           </div>
                         )}
@@ -366,7 +366,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                             {item.shortcut.map((key, index) => (
                               <kbd
                                 key={index}
-                                className="rounded border border-[var(--glass-border)] bg-[var(--glass-bg)] px-1.5 py-0.5 text-xs"
+                                className="rounded border border-[var(--liquid-glass-border)] bg-[var(--liquid-glass-bg)] px-1.5 py-0.5 text-xs"
                               >
                                 {formatShortcut([key])}
                               </kbd>
@@ -388,7 +388,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
         {/* Footer */}
 
-        <div className="flex items-center justify-between border-[var(--glass-border)] border-t px-4 py-3 text-[var(--text-tertiary)] text-xs">
+        <div className="flex items-center justify-between border-[var(--liquid-glass-border)] border-t px-4 py-3 text-[var(--text-tertiary)] text-xs">
           <div className="flex items-center gap-4">
             <span>Navigate with ↑↓</span>
 

@@ -4,12 +4,7 @@
     "name": "Tulio Pinheiro Cunha",
     "url": "https://tuliocunha.dev"
   },
-  "browserslist": [
-    "> 0.5%",
-    "last 2 versions",
-    "not dead",
-    "not IE 11"
-  ],
+  "browserslist": ["> 0.5%", "last 2 versions", "not dead", "not IE 11"],
   "bugs": {
     "url": "https://github.com/tuliopc23/LiqUIdify/issues"
   },
@@ -18,10 +13,11 @@
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-radio-group": "^1.3.7",
     "@radix-ui/react-slot": "^1.2.3",
-    "@storybook/react-vite": "^9.1.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.536.0",
+    "oxc": "^1.0.1",
+    "rolldown-vite": "^7.0.12",
     "tailwind-merge": "^3.3.1"
   },
   "description": "🚀 Production-ready React component library with glassmorphism design and physics-based interactions. 40+ components, TypeScript-first, accessibility-ready.",
@@ -29,34 +25,22 @@
     "@jest/globals": "^30.0.5",
     "@playwright/test": "^1.54.2",
     "@storybook/addon-essentials": "^8.6.14",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.6.4",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
     "@types/bun": "^1.2.19",
-    "@types/jest-axe": "^3.5.9",
-    "@types/jsdom": "^21.1.7",
-    "@types/node": "^24.1.0",
+    "@types/node": "^24.2.0",
     "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/coverage-v8": "^3.2.4",
-    "jest-axe": "^10.0.0",
     "jiti": "2.5.1",
-    "jsdom": "^26.1.0",
     "lightningcss": "^1.30.1",
-    "mintlify": "^4.2.45",
+    "mintlify": "^4.2.55",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "rollup-plugin-visualizer": "^6.0.3",
     "serve": "^14.2.4",
-    "storybook": "^9.1.0",
+    "storybook": "^9.1.1",
     "tailwindcss": "^4.1.11",
     "tailwindcss-filters": "^3.0.0",
     "typescript": "^5.9.2",
     "vite": "^7.0.6",
-    "vite-plugin-compression2": "^2.2.0",
-    "vite-plugin-dts": "^4.5.4",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
@@ -65,135 +49,108 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/libs/components/index.d.ts",
-      "style": "./dist/libs/components/liquidui.css",
       "import": "./dist/libs/components/index.mjs",
-      "require": "./dist/libs/components/cjs/index.cjs"
-    },
-    "./accessibility": {
-      "types": "./dist/libs/components/accessibility.d.ts",
-      "import": "./dist/libs/components/accessibility.mjs",
-      "require": "./dist/libs/components/cjs/accessibility.cjs"
+      "require": "./dist/libs/components/cjs/index.cjs",
+      "style": "./dist/libs/components/liquidui.css",
+      "types": "./dist/libs/components/index.d.ts"
     },
     "./advanced": {
-      "types": "./dist/libs/components/advanced.d.ts",
       "import": "./dist/libs/components/advanced.mjs",
-      "require": "./dist/libs/components/cjs/advanced.cjs"
+      "require": "./dist/libs/components/cjs/advanced.cjs",
+      "types": "./dist/libs/components/advanced.d.ts"
     },
     "./animations": {
-      "types": "./dist/libs/components/animations.d.ts",
       "import": "./dist/libs/components/animations.mjs",
-      "require": "./dist/libs/components/cjs/animations.cjs"
-    },
-    "./button": {
-      "types": "./dist/libs/components/components/button.d.ts",
-      "import": "./dist/libs/components/components/button.mjs",
-      "require": "./dist/libs/components/cjs/components/button.cjs"
-    },
-    "./card": {
-      "types": "./dist/libs/components/components/card.d.ts",
-      "import": "./dist/libs/components/components/card.mjs",
-      "require": "./dist/libs/components/cjs/components/card.cjs"
-    },
-    "./context": {
-      "types": "./dist/libs/components/providers.d.ts",
-      "import": "./dist/libs/components/providers.mjs",
-      "require": "./dist/libs/components/cjs/providers.cjs"
-    },
-    "./data-display": {
-      "types": "./dist/libs/components/data-display.d.ts",
-      "import": "./dist/libs/components/data-display.mjs",
-      "require": "./dist/libs/components/cjs/data-display.cjs"
-    },
-    "./core": {
-      "types": "./dist/libs/components/core.d.ts",
-      "import": "./dist/libs/components/core.mjs",
-      "modern": "./dist/libs/components/core.mjs",
-      "require": "./dist/libs/components/cjs/core.cjs"
-    },
-    "./css": "./dist/libs/components/liquidui.css",
-    "./feedback": {
-      "types": "./dist/libs/components/feedback.d.ts",
-      "import": "./dist/libs/components/feedback.mjs",
-      "require": "./dist/libs/components/cjs/feedback.cjs"
-    },
-    "./forms": {
-      "types": "./dist/libs/components/forms.d.ts",
-      "import": "./dist/libs/components/forms.mjs",
-      "require": "./dist/libs/components/cjs/forms.cjs"
-    },
-    "./input": {
-      "types": "./dist/libs/components/components/input.d.ts",
-      "import": "./dist/libs/components/components/input.mjs",
-      "require": "./dist/libs/components/cjs/components/input.cjs"
+      "require": "./dist/libs/components/cjs/animations.cjs",
+      "types": "./dist/libs/components/animations.d.ts"
     },
     "./avatar": {
-      "types": "./dist/libs/components/components/avatar.d.ts",
       "import": "./dist/libs/components/components/avatar.mjs",
-      "require": "./dist/libs/components/cjs/components/avatar.cjs"
+      "require": "./dist/libs/components/cjs/components/avatar.cjs",
+      "types": "./dist/libs/components/components/avatar.d.ts"
+    },
+    "./button": {
+      "import": "./dist/libs/components/components/button.mjs",
+      "require": "./dist/libs/components/cjs/components/button.cjs",
+      "types": "./dist/libs/components/components/button.d.ts"
+    },
+    "./card": {
+      "import": "./dist/libs/components/components/card.mjs",
+      "require": "./dist/libs/components/cjs/components/card.cjs",
+      "types": "./dist/libs/components/components/card.d.ts"
+    },
+    "./context": {
+      "import": "./dist/libs/components/providers.mjs",
+      "require": "./dist/libs/components/cjs/providers.cjs",
+      "types": "./dist/libs/components/providers.d.ts"
+    },
+    "./core": {
+      "import": "./dist/libs/components/core.mjs",
+      "modern": "./dist/libs/components/core.mjs",
+      "require": "./dist/libs/components/cjs/core.cjs",
+      "types": "./dist/libs/components/core.d.ts"
+    },
+    "./css": "./dist/libs/components/liquidui.css",
+    "./data-display": {
+      "import": "./dist/libs/components/data-display.mjs",
+      "require": "./dist/libs/components/cjs/data-display.cjs",
+      "types": "./dist/libs/components/data-display.d.ts"
+    },
+    "./feedback": {
+      "import": "./dist/libs/components/feedback.mjs",
+      "require": "./dist/libs/components/cjs/feedback.cjs",
+      "types": "./dist/libs/components/feedback.d.ts"
+    },
+    "./forms": {
+      "import": "./dist/libs/components/forms.mjs",
+      "require": "./dist/libs/components/cjs/forms.cjs",
+      "types": "./dist/libs/components/forms.d.ts"
+    },
+    "./input": {
+      "import": "./dist/libs/components/components/input.mjs",
+      "require": "./dist/libs/components/cjs/components/input.cjs",
+      "types": "./dist/libs/components/components/input.d.ts"
     },
     "./layout": {
-      "types": "./dist/libs/components/layout.d.ts",
       "import": "./dist/libs/components/layout.mjs",
-      "require": "./dist/libs/components/cjs/layout.cjs"
+      "require": "./dist/libs/components/cjs/layout.cjs",
+      "types": "./dist/libs/components/layout.d.ts"
     },
     "./modal": {
-      "types": "./dist/libs/components/components/modal.d.ts",
       "import": "./dist/libs/components/components/modal.mjs",
-      "require": "./dist/libs/components/cjs/components/modal.cjs"
+      "require": "./dist/libs/components/cjs/components/modal.cjs",
+      "types": "./dist/libs/components/components/modal.d.ts"
     },
     "./navigation": {
-      "types": "./dist/libs/components/navigation.d.ts",
       "import": "./dist/libs/components/navigation.mjs",
-      "require": "./dist/libs/components/cjs/navigation.cjs"
+      "require": "./dist/libs/components/cjs/navigation.cjs",
+      "types": "./dist/libs/components/navigation.d.ts"
     },
     "./package.json": "./package.json",
     "./physics": {
-      "types": "./dist/libs/components/physics.d.ts",
       "import": "./dist/libs/components/physics.mjs",
-      "require": "./dist/libs/components/cjs/physics.cjs"
+      "require": "./dist/libs/components/cjs/physics.cjs",
+      "types": "./dist/libs/components/physics.d.ts"
     },
     "./ssr": {
-      "types": "./dist/libs/components/ssr.d.ts",
       "import": "./dist/libs/components/ssr.mjs",
-      "require": "./dist/libs/components/cjs/ssr.cjs"
+      "require": "./dist/libs/components/cjs/ssr.cjs",
+      "types": "./dist/libs/components/ssr.d.ts"
     },
     "./styles": "./dist/libs/components/liquidui.css",
     "./tokens": {
-      "types": "./dist/libs/components/tokens.d.ts",
       "import": "./dist/libs/components/tokens.mjs",
-      "require": "./dist/libs/components/cjs/tokens.cjs"
+      "require": "./dist/libs/components/cjs/tokens.cjs",
+      "types": "./dist/libs/components/tokens.d.ts"
     }
   },
-  "files": [
-    "dist/libs/components/**/*.{js,mjs,cjs,d.ts,css}",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["dist/libs/components/**/*.{js,mjs,cjs,d.ts,css}", "README.md", "LICENSE"],
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/tuliopc23"
   },
   "homepage": "https://liquidify.dev",
-  "keywords": [
-    "react",
-    "typescript",
-    "components",
-    "glassmorphism",
-    "ui-library",
-    "design-system",
-    "accessibility",
-    "wcag",
-    "liquid-glass",
-    "physics",
-    "animations",
-    "magnetic-hover",
-    "spring-animations",
-    "tailwind",
-    "storybook",
-    "premium",
-    "production-ready"
-  ],
+  "keywords": ["react", "typescript", "components", "glassmorphism", "ui-library", "design-system", "accessibility", "wcag", "liquid-glass", "physics", "animations", "magnetic-hover", "spring-animations", "tailwind", "storybook", "premium", "production-ready"],
   "license": "MIT",
   "main": "./dist/libs/components/cjs/index.cjs",
   "module": "./dist/libs/components/index.mjs",
@@ -206,76 +163,69 @@
     "type": "git",
     "url": "git+https://github.com/tuliopc23/LiqUIdify.git"
   },
+  "resolutions": {
+    "ajv": "8.12.0",
+    "ajv-draft-04": "1.0.0"
+  },
   "scripts": {
-    "build": "bun run build:lib && bun run build:storybook && bun run docs:build",
+    "analyze:bundle": "node scripts/bundle-analysis.js",
+    "analyze:performance": "node scripts/performance-benchmark.js",
+    "audit:accessibility": "node scripts/accessibility-audit.js",
+    "audit:all": "bun run audit:security && bun run audit:components && bun run audit:accessibility",
+    "audit:components": "node scripts/component-audit.js",
+    "audit:security": "node scripts/security-audit.js",
+    "build": "bun run build:lib && bun run build:storybook",
     "build:lib": "vite build --config vite.config.mts --mode production",
     "build:storybook": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static",
     "build:watch": "vite build --config vite.config.mts --watch",
-    "dev": "vite --config vite.config.mts",
-    "storybook": "storybook dev -p 6006 -c apps/storybook/.storybook",
-    "docs:dev": "mintlify dev apps/docs",
-    "docs:build": "mintlify build apps/docs",
-    "docs:preview": "mintlify preview apps/docs",
-    "lint": "qlty check -a",
-    "format": "qlty fmt -a",
-    "format:fix": "qlty fmt -- --fix",
-    "test": "vitest run",
-    "test:integration": "vitest run libs/components/src/test/integration.test.tsx",
-    "test:build": "bun run build:lib && vitest run libs/components/src/test/build-validation.test.ts",
-    "test:e2e": "vitest run libs/components/src/test/e2e-workflows.test.tsx",
-    "test:performance": "vitest run libs/components/src/test/performance-integration.test.tsx",
-    "test:a11y": "vitest run libs/components/src/test/accessibility-integration.test.tsx",
-    "test:coverage": "bun test --coverage",
-    "test:all": "bun run test && bun run test:integration && bun run test:build && bun run test:e2e && bun run test:performance && bun run test:a11y",
-    "type-check": "bunx tsc --noEmit --project tsconfig.json",
-    "analyze:bundle": "node scripts/bundle-analysis.js",
-    "validate:config": "test -f vite.config.mts || (echo 'vite.config.mts not found' && exit 1)",
-    "validate:build-config": "node scripts/validate-build-config.js",
-    "validate:tailwind-migration": "node scripts/validate-tailwind-migration.js",
-    "migrate:validate": "npm run validate:tailwind-migration",
-    "migrate:build-test": "npm run build && npm run storybook:build && npm run test",
-    "fix:typescript": "node scripts/fix-typescript-config.js",
-    "debug:typescript": "tsc --noEmit --listFiles",
     "check:tsconfig": "tsc --noEmit --project tsconfig.json",
-    "prebuild:lib": "bun run validate:config && bun run fix:typescript",
-    "deploy:validate": "node scripts/pre-deployment-check.js",
-    "deploy:preview": "bun run deploy:validate && echo 'Ready for deployment preview'",
-    "deploy:production": "bun run deploy:validate && echo 'Ready for production deployment'",
-    "analyze:performance": "node scripts/performance-benchmark.js",
-    "audit:components": "node scripts/component-audit.js",
-    "audit:security": "node scripts/security-audit.js",
-    "audit:accessibility": "node scripts/accessibility-audit.js",
-    "audit:all": "bun run audit:security && bun run audit:components && bun run audit:accessibility",
     "ci": "bun run type-check && bun run lint && bun run test:all && bun run build && bun run validate:exports && bun run audit:all",
     "ci:quick": "bun run type-check && bun run lint && bun run test",
-    "release:prepare": "bun run ci && bun run analyze:bundle && bun run analyze:performance",
-    "final-launch-check": "node scripts/final-launch-check.js",
-    "launch:quick-check": "bun run build && bun run test:all && bun run validate:exports",
-    "launch:final-check": "bun run final-launch-check",
-    "release:dry": "npm publish --dry-run",
-    "prepublishOnly": "node scripts/pre-publish.js",
-    "postpublish": "echo '🎉 Package published successfully!'",
     "clean": "rm -rf dist",
-    "clean:node": "rm -rf node_modules bun.lock && bun install",
     "clean:all": "bun run clean && bun run clean:node",
+    "clean:node": "rm -rf node_modules bun.lock && bun install",
+    "debug:typescript": "tsc --noEmit --listFiles",
+    "deploy:preview": "bun run deploy:validate && echo 'Ready for deployment preview'",
+    "deploy:production": "bun run deploy:validate && echo 'Ready for production deployment'",
+    "deploy:validate": "node scripts/pre-deployment-check.js",
+    "dev": "vite --config vite.config.mts",
+    "docs:build": "mintlify build apps/docs",
+    "docs:dev": "mintlify dev apps/docs",
+    "docs:preview": "mintlify preview apps/docs",
+    "final-launch-check": "node scripts/final-launch-check.js",
+    "fix:typescript": "node scripts/fix-typescript-config.js",
+    "format": "qlty fmt -a",
+    "format:fix": "qlty fmt -- --fix",
+    "health-check": "bun run type-check && bun run build:lib",
+    "launch:final-check": "bun run final-launch-check",
+    "launch:quick-check": "bun run build && bun run test:all && bun run validate:exports",
+    "lint": "qlty check -a",
+    "migrate:build-test": "npm run build && npm run storybook:build && npm run test",
+    "migrate:validate": "npm run validate:tailwind-migration",
+    "postpublish": "echo '🎉 Package published successfully!'",
+    "prebuild:lib": "bun run validate:config && bun run fix:typescript",
+    "prepublishOnly": "node scripts/pre-publish.js",
     "preview": "bun run build && bun run docs:preview",
-    "health-check": "bun run type-check && bun run build:lib"
+    "release:dry": "npm publish --dry-run",
+    "release:prepare": "bun run ci && bun run analyze:bundle && bun run analyze:performance",
+    "storybook": "storybook dev -p 6006 -c apps/storybook/.storybook",
+    "test": "vitest run",
+    "test:a11y": "vitest run libs/components/src/test/accessibility-integration.test.tsx",
+    "test:all": "bun run test && bun run test:integration && bun run test:build && bun run test:e2e && bun run test:performance && bun run test:a11y",
+    "test:build": "bun run build:lib && vitest run libs/components/src/test/build-validation.test.ts",
+    "test:coverage": "bun test --coverage",
+    "test:e2e": "vitest run libs/components/src/test/e2e-workflows.test.tsx",
+    "test:integration": "vitest run libs/components/src/test/integration.test.tsx",
+    "test:performance": "vitest run libs/components/src/test/performance-integration.test.tsx",
+    "type-check": "bunx tsc --noEmit --project tsconfig.json",
+    "validate:build-config": "node scripts/validate-build-config.js",
+    "validate:config": "test -f vite.config.mts || (echo 'vite.config.mts not found' && exit 1)",
+    "validate:tailwind-migration": "node scripts/validate-tailwind-migration.js"
   },
-  "sideEffects": [
-    "*.css",
-    "src/styles/**"
-  ],
+  "sideEffects": ["*.css", "src/styles/**"],
   "style": "./dist/libs/components/liquidui.css",
   "type": "module",
   "types": "./dist/libs/components/index.d.ts",
   "version": "1.3.0",
-  "workspaces": [
-    "apps/*",
-    "examples/*",
-    "libs/*"
-  ],
-  "resolutions": {
-    "ajv": "8.12.0",
-    "ajv-draft-04": "1.0.0"
-  }
+  "workspaces": ["apps/*", "examples/*", "libs/*"]
 }

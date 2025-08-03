@@ -11,7 +11,6 @@ import {
   createVariants as cva,
   type InferVariantProps as VariantProps,
 } from "../../lib/variant-system";
-import { useGlassStateTransitions } from "@/hooks/use-glass-animations";
 
 // Mock AccessibilityManager since it was removed
 const AccessibilityManager = {
@@ -21,8 +20,8 @@ const AccessibilityManager = {
   }),
 };
 
-// Mock functions since unified-glass-system was removed
-const generateGlassClasses = (options: any) => "glass-effect";
+// Mock functions since unified-liquid-glass-system was removed
+const generateGlassClasses = (options: any) => "liquid-glass-effect";
 const generateGlassVariables = (options: any) => ({});
 
 import type {
@@ -112,7 +111,7 @@ interface GlassFormFieldProps
   liveValidation?: boolean;
   /** Custom validation state */
   validationState?: "default" | "error" | "success" | "warning";
-  /** Enable glass physics animations */
+  /** Enable liquid-glass physics animations */
   physics?: boolean;
   /** Enable magnetic hover effects */
   magnetic?: boolean;
@@ -264,7 +263,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
       },
     });
 
-    // Event handlers for glass effects
+    // Event handlers for liquid-glass effects
     const handleMouseEnter = useCallback(() => {
       if (hover && !disabled && !disableAnimations) {
         transitionToState("hover");
@@ -352,7 +351,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         }
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        data-testid={props["data-testid"] || "glass-form-field"}
+        data-testid={props["data-testid"] || "liquid-glass-form-field"}
         {...props}
       >
         {label && (

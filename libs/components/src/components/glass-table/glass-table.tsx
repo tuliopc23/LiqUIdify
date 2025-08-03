@@ -18,7 +18,7 @@ const GlassTable = <T,>({ data, columns, className }: GlassTableProps<T>) => {
     <div className={`overflow-x-auto ${className || ""}`}>
       <table className="w-full">
         <thead>
-          <tr className="glass-effect">
+          <tr className="liquid-glass-effect">
             {columns.map((column) => (
               <th
                 key={String(column.key)}
@@ -32,10 +32,10 @@ const GlassTable = <T,>({ data, columns, className }: GlassTableProps<T>) => {
 
         <tbody
           className="divide-y"
-          style={{ borderColor: "var(--glass-border)" }}
+          style={{ borderColor: "var(--liquid-glass-border)" }}
         >
           {data.map((item, index) => (
-            <tr key={index} className="glass-hover">
+            <tr key={index} className="liquid-glass-hover">
               {columns.map((column) => (
                 <td
                   key={String(column.key)}

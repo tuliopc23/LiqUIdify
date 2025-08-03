@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import React from "react";
 import { GlassButton } from "../glass-button-refactored/glass-button";
-import { Card } from "../glass-card-refactored/glass-card";
+import { GlassCard } from "../glass-card-refactored/glass-card";
 import { GlassInput } from "./glass-input";
 
 const meta = {
@@ -55,23 +55,23 @@ import { GlassInput } from '@/components/glass-input';
 <GlassInput placeholder="Enter text..." />
 
 // With icons
-<GlassInput 
+<GlassInput
   leftIcon={<User />}
   placeholder="Username" />
 
 // Search variant
-<GlassInput 
+<GlassInput
   variant="search"
   placeholder="Search..."
   clearable />
 
 // Password variant
-<GlassInput 
+<GlassInput
   variant="password"
   placeholder="Enter password" />
 
 // With error
-<GlassInput 
+<GlassInput
   error
   helperText="This field is required" />
 \`\`\`

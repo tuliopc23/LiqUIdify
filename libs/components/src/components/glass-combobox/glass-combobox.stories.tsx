@@ -1,5 +1,5 @@
 import { GlassCombobox } from "./glass-combobox";
-import "@/styles/apple-liquid-authentic.css";
+import "@/styles/index.css";
 
 const sampleOptions = [
   { value: "apple", label: "Apple", icon: "🍎" },

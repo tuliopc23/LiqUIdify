@@ -1,6 +1,6 @@
 import { GlassCheckbox } from "../glass-checkbox";
 import { GlassCheckboxGroup } from "./glass-checkbox-group";
-import "@/styles/apple-liquid-authentic.css";
+import "@/styles/index.css";
 
 export default {
   title: "Components/GlassCheckboxGroup",

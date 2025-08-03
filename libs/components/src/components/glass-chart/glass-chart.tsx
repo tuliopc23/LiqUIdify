@@ -1,7 +1,6 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
-
-import { cn, getGlassClass } from "../../core/utils/classname";
+import { cn } from "../../core/utils/classname";
 
 export interface ChartDataPoint {
   label: string;
@@ -56,7 +55,16 @@ export const LineChart: React.FC<LineChartProps> = ({
   }, []);
 
   if (data.length === 0) {
-    return;
+    return (
+      <div className={cn("liquid-glass-container liquid-glass-md", className)}>
+        <div className="liquid-glass-filter" />
+        <div className="liquid-glass-overlay" />
+        <div className="liquid-glass-specular" />
+        <div className="liquid-glass-content flex items-center justify-center">
+          <p className="text-liquid-secondary">No data available</p>
+        </div>
+      </div>
+    );
   }
 
   const maxValue = Math.max(...data.map((d) => d.value));
@@ -81,128 +89,137 @@ export const LineChart: React.FC<LineChartProps> = ({
   const gradientId = `gradient-${Math.random().toString(36).slice(2, 11)}`;
 
   return (
-    <div className={cn("relative", className)}>
-      <svg
-        ref={svgRef}
-        width={width}
-        height={height}
-        className="overflow-visible"
-        aria-hidden="true"
-      >
-        <title>Icon</title>
-        {gradient && (
-          <defs>
-            <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop
-                offset="0%"
-                stopColor="var(--glass-primary)"
-                stopOpacity="0.2"
-              />
+    <div className={cn("liquid-glass-container liquid-glass-md", className)}>
+      {/* Apple-style liquid glass layers */}
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
 
-              <stop
-                offset="100%"
-                stopColor="var(--glass-primary)"
-                stopOpacity="0"
-              />
-            </linearGradient>
-          </defs>
-        )}
+      <div className="liquid-glass-content p-liquid">
+        <svg
+          ref={svgRef}
+          width={width}
+          height={height}
+          className="overflow-visible"
+          aria-hidden="true"
+        >
+          <title>Line Chart</title>
+          {gradient && (
+            <defs>
+              <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="var(--lg-red)" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="var(--lg-red)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          )}
 
-        {/* Grid lines */}
+          {/* Grid lines with Apple-style subtle appearance */}
+          <g className="opacity-10">
+            {Array.from({ length: 5 }).map((_, index) => {
+              const y = padding + (index / 4) * chartHeight;
+              return (
+                <line
+                  key={`grid-line-y-${y}-${index}`}
+                  x1={padding}
+                  y1={y}
+                  x2={width - padding}
+                  y2={y}
+                  stroke="currentColor"
+                  strokeWidth={1}
+                  strokeDasharray="2,2"
+                />
+              );
+            })}
+          </g>
 
-        <g className="opacity-20">
-          {Array.from({ length: 5 }).map((_, index) => {
-            const y = padding + (index / 4) * chartHeight;
-            return (
-              <line
-                key={`grid-line-${index}`}
-                x1={padding}
-                y1={y}
-                x2={width - padding}
-                y2={y}
-                stroke="currentColor"
-                strokeWidth={1}
-              />
-            );
-          })}
-        </g>
-
-        {/* Gradient area */}
-        {gradient && points.length > 0 && (
-          <path
-            d={`${pathData} L ${points.at(-1)?.x} ${height - padding} L ${padding} ${height - padding} Z`}
-            fill={`url(#${gradientId})`}
-            className={cn(animated && "transition-all duration-1000 ease-out")}
-            style={{
-              opacity: mounted ? 1 : 0,
-            }}
-          />
-        )}
-
-        {/* Line */}
-
-        <path
-          d={pathData}
-          fill="none"
-          stroke="var(--glass-primary)"
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={cn(animated && "transition-all duration-1000 ease-out")}
-          style={{
-            strokeDasharray: animated ? (mounted ? "none" : "1000") : "none",
-            strokeDashoffset: animated ? (mounted ? "0" : "1000") : "0",
-          }}
-        />
-
-        {/* Data points */}
-        {showDots &&
-          points.map((point, index) => (
-            <circle
-              key={`point-${index}-${point.x}-${point.y}`}
-              cx={point.x}
-              cy={point.y}
-              r={hoveredPoint === index ? 6 : 4}
-              fill="var(--glass-primary)"
-              stroke="white"
-              strokeWidth="2"
+          {/* Gradient area with Apple-style liquid-glass effect */}
+          {gradient && points.length > 0 && (
+            <path
+              d={`${pathData} L ${points.at(-1)?.x} ${height - padding} L ${padding} ${height - padding} Z`}
+              fill={`url(#${gradientId})`}
               className={cn(
-                "cursor-pointer transition-all duration-200",
-                animated && "zoom-in-0 animate-in duration-500",
-                hoveredPoint === index && "shadow-lg",
+                animated && "transition-all duration-1000 ease-out",
               )}
               style={{
-                animationDelay: animated ? `${index * 100}ms` : "0ms",
+                opacity: mounted ? 1 : 0,
               }}
-              onMouseEnter={() => setHoveredPoint(index)}
-              onMouseLeave={() => setHoveredPoint(null)}
             />
-          ))}
-      </svg>
-
-      {/* Tooltip */}
-      {showTooltip && hoveredPoint !== null && points[hoveredPoint] && (
-        <div
-          className={cn(
-            "pointer-events-none absolute z-10 rounded-lg px-3 py-2 text-sm",
-            getGlassClass("elevated"),
-            "border border-[var(--glass-border)]",
           )}
-          style={{
-            left: points[hoveredPoint]?.x - 40,
-            top: points[hoveredPoint]?.y - 60,
-            transform: "translateX(-50%)",
-          }}
-        >
-          <div className="font-medium text-[var(--text-primary)]">
-            {points[hoveredPoint]?.data.label}
-          </div>
 
-          <div className="text-[var(--text-secondary)]">
-            {points[hoveredPoint]?.data.value.toLocaleString()}
+          {/* Main line with Apple accent color */}
+          <path
+            d={pathData}
+            fill="none"
+            stroke="var(--lg-red)"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={cn(animated && "transition-all duration-1000 ease-out")}
+            style={{
+              strokeDasharray: animated ? (mounted ? "none" : "1000") : "none",
+              strokeDashoffset: animated ? (mounted ? "0" : "1000") : "0",
+            }}
+          />
+
+          {/* Data points with Apple-style glow */}
+          {showDots &&
+            points.map((point, index) => (
+              <circle
+                key={`point-${point.data.label}-${point.data.value}-${index}`}
+                cx={point.x}
+                cy={point.y}
+                r={hoveredPoint === index ? 6 : 4}
+                fill="var(--lg-red)"
+                stroke="white"
+                strokeWidth="2"
+                className={cn(
+                  "transition-all duration-200",
+                  animated && "zoom-in-0 animate-in duration-500",
+                  hoveredPoint === index && "drop-shadow-lg",
+                )}
+                style={{
+                  animationDelay: animated ? `${index * 100}ms` : "0ms",
+                  filter:
+                    hoveredPoint === index
+                      ? "drop-shadow(0 0 8px var(--lg-red))"
+                      : undefined,
+                  cursor: "pointer",
+                }}
+                onMouseEnter={() => setHoveredPoint(index)}
+                onMouseLeave={() => setHoveredPoint(null)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Data point: ${point.data.label}, value: ${point.data.value}`}
+              />
+            ))}
+        </svg>
+
+        {/* Apple-style tooltip */}
+        {showTooltip && hoveredPoint !== null && points[hoveredPoint] && (
+          <div
+            className="pointer-events-none absolute z-10 liquid-glass-container liquid-glass-sm"
+            style={{
+              left: points[hoveredPoint]?.x - 40,
+              top: points[hoveredPoint]?.y - 60,
+              transform: "translateX(-50%)",
+            }}
+          >
+            <div className="liquid-glass-filter" />
+            <div className="liquid-glass-overlay" />
+            <div className="liquid-glass-specular" />
+            <div className="liquid-glass-content">
+              <div className="text-center">
+                <div className="font-medium text-liquid-primary text-sm">
+                  {points[hoveredPoint]?.data.label}
+                </div>
+                <div className="text-liquid-accent font-semibold">
+                  {points[hoveredPoint]?.data.value.toLocaleString()}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
@@ -223,7 +240,16 @@ export const BarChart: React.FC<BarChartProps> = ({
   }, []);
 
   if (data.length === 0) {
-    return;
+    return (
+      <div className={cn("liquid-glass-container liquid-glass-md", className)}>
+        <div className="liquid-glass-filter" />
+        <div className="liquid-glass-overlay" />
+        <div className="liquid-glass-specular" />
+        <div className="liquid-glass-content flex items-center justify-center">
+          <p className="text-liquid-secondary">No data available</p>
+        </div>
+      </div>
+    );
   }
 
   const maxValue = Math.max(...data.map((d) => d.value));
@@ -238,68 +264,76 @@ export const BarChart: React.FC<BarChartProps> = ({
   );
 
   return (
-    <div className={cn("relative", className)}>
-      <svg
-        width={width}
-        height={height}
-        className="overflow-visible"
-        aria-hidden="true"
-      >
-        <title>Icon</title>
-        {data.map((item, index) => {
-          const barLength =
-            (item.value / maxValue) *
-            (orientation === "vertical" ? chartHeight : chartWidth);
-          const x =
-            orientation === "vertical"
-              ? padding +
-                (index / data.length) * chartWidth +
-                (chartWidth / data.length - barThickness) / 2
-              : padding;
-          const y =
-            orientation === "vertical"
-              ? height - padding - barLength
-              : padding +
-                (index / data.length) * chartHeight +
-                (chartHeight / data.length - barThickness) / 2;
-          const barWidth =
-            orientation === "vertical" ? barThickness : barLength;
-          const barHeight =
-            orientation === "vertical" ? barLength : barThickness;
+    <div className={cn("liquid-glass-container liquid-glass-md", className)}>
+      {/* Apple-style liquid glass layers */}
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
 
-          return (
-            <g key={`bar-${item.label}-${index}`}>
-              <rect
-                x={x}
-                y={y}
-                width={barWidth}
-                height={barHeight}
-                fill={item.color || "var(--glass-primary)"}
-                rx="4"
-                className={cn(
-                  "transition-all duration-500 ease-out",
-                  animated && "fade-in-0 slide-in-from-bottom-4 animate-in",
+      <div className="liquid-glass-content p-liquid">
+        <svg
+          width={width}
+          height={height}
+          className="overflow-visible"
+          aria-hidden="true"
+        >
+          <title>Bar Chart</title>
+          {data.map((item, index) => {
+            const barLength =
+              (item.value / maxValue) *
+              (orientation === "vertical" ? chartHeight : chartWidth);
+            const x =
+              orientation === "vertical"
+                ? padding +
+                  (index / data.length) * chartWidth +
+                  (chartWidth / data.length - barThickness) / 2
+                : padding;
+            const y =
+              orientation === "vertical"
+                ? height - padding - barLength
+                : padding +
+                  (index / data.length) * chartHeight +
+                  (chartHeight / data.length - barThickness) / 2;
+            const barWidth =
+              orientation === "vertical" ? barThickness : barLength;
+            const barHeight =
+              orientation === "vertical" ? barLength : barThickness;
+
+            return (
+              <g key={`bar-${item.label}-${index}`}>
+                <rect
+                  x={x}
+                  y={y}
+                  width={barWidth}
+                  height={barHeight}
+                  fill={item.color || "var(--lg-red)"}
+                  rx="8"
+                  className={cn(
+                    "transition-all duration-500 ease-out",
+                    animated && "fade-in-0 slide-in-from-bottom-4 animate-in",
+                  )}
+                  style={{
+                    animationDelay: animated ? `${index * 100}ms` : "0ms",
+                    transform: mounted ? "scaleY(1)" : "scaleY(0)",
+                    transformOrigin: "bottom",
+                    filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))",
+                  }}
+                />
+                {showValues && (
+                  <text
+                    x={x + barWidth / 2}
+                    y={y - 8}
+                    textAnchor="middle"
+                    className="fill-liquid-secondary text-xs font-medium"
+                  >
+                    {item.value.toLocaleString()}
+                  </text>
                 )}
-                style={{
-                  animationDelay: animated ? `${index * 100}ms` : "0ms",
-                  transform: mounted ? "scaleY(1)" : "scaleY(0)",
-                  transformOrigin: "bottom",
-                }}
-              />
-              {showValues && (
-                <text
-                  x={x + barWidth / 2}
-                  y={y - 8}
-                  textAnchor="middle"
-                  className="fill-[var(--text-secondary)] text-xs"
-                >
-                  {item.value.toLocaleString()}
-                </text>
-              )}
-            </g>
-          );
-        })}
-      </svg>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
     </div>
   );
 };
@@ -321,7 +355,16 @@ export const DonutChart: React.FC<DonutChartProps> = ({
   }, []);
 
   if (data.length === 0) {
-    return;
+    return (
+      <div className={cn("liquid-glass-container liquid-glass-md", className)}>
+        <div className="liquid-glass-filter" />
+        <div className="liquid-glass-overlay" />
+        <div className="liquid-glass-specular" />
+        <div className="liquid-glass-content flex items-center justify-center">
+          <p className="text-liquid-secondary">No data available</p>
+        </div>
+      </div>
+    );
   }
 
   const total = data.reduce((sum, item) => sum + item.value, 0);
@@ -359,63 +402,76 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 
     cumulativePercentage += percentage;
 
+    const hue = index === 0 ? 351 : (index * 60) % 360; // Start with red accent, then cycle through hues
+    const defaultColor =
+      index === 0 ? "var(--lg-red)" : `hsl(${hue}, 70%, 60%)`;
+
     return {
       path: pathData,
-      color: item.color || `hsl(${(index * 360) / data.length}, 70%, 60%)`,
+      color: item.color || defaultColor,
       percentage,
       ...item,
     };
   });
 
   return (
-    <div className={cn("relative", className)}>
-      <svg width={width} height={height} aria-hidden="true">
-        <title>Icon</title>
-        {segments.map((segment, index) => (
-          <path
-            key={`segment-${index}-${segment.color}`}
-            d={segment.path}
-            fill={segment.color}
-            className={cn(
-              "transition-all duration-500 ease-out hover:opacity-80",
-              animated && "fade-in-0 animate-in",
-            )}
+    <div className={cn("liquid-glass-container liquid-glass-md", className)}>
+      {/* Apple-style liquid glass layers */}
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+
+      <div className="liquid-glass-content p-liquid relative">
+        <svg width={width} height={height} aria-hidden="true">
+          <title>Donut Chart</title>
+          {segments.map((segment, index) => (
+            <path
+              key={`segment-${index}-${segment.color}`}
+              d={segment.path}
+              fill={segment.color}
+              className={cn(
+                "transition-all duration-500 ease-out hover:opacity-80",
+                animated && "fade-in-0 animate-in",
+              )}
+              style={{
+                animationDelay: animated ? `${index * 150}ms` : "0ms",
+                transform: mounted ? "scale(1)" : "scale(0)",
+                transformOrigin: `${centerX}px ${centerY}px`,
+                filter: "drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))",
+              }}
+            />
+          ))}
+        </svg>
+
+        {/* Center content with Apple-style positioning */}
+        {centerContent && (
+          <div
+            className="absolute inset-0 flex items-center justify-center"
             style={{
-              animationDelay: animated ? `${index * 150}ms` : "0ms",
-              transform: mounted ? "scale(1)" : "scale(0)",
-              transformOrigin: `${centerX}px ${centerY}px`,
+              width: innerRadius * 2,
+              height: innerRadius * 2,
+              left: centerX - innerRadius,
+              top: centerY - innerRadius,
             }}
-          />
-        ))}
-      </svg>
-
-      {/* Center content */}
-      {centerContent && (
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            width: innerRadius * 2,
-            height: innerRadius * 2,
-            left: centerX - innerRadius,
-            top: centerY - innerRadius,
-          }}
-        >
-          {centerContent}
-        </div>
-      )}
-
-      {/* Labels */}
-      {showLabels && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <div className="font-bold text-2xl text-[var(--text-primary)]">
-              {total.toLocaleString()}
-            </div>
-
-            <div className="text-[var(--text-secondary)] text-sm">Total</div>
+          >
+            {centerContent}
           </div>
-        </div>
-      )}
+        )}
+
+        {/* Apple-style labels */}
+        {showLabels && !centerContent && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="font-bold text-2xl text-liquid-primary">
+                {total.toLocaleString()}
+              </div>
+              <div className="text-liquid-secondary text-sm font-medium">
+                Total
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

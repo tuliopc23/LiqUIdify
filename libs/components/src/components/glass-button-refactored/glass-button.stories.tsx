@@ -1,6 +1,6 @@
 /**
  * Liquid Glass Button Stories
- * 
+ *
  * Demonstrates the unified liquid glass system with all variants,
  * sizes, and interactive states.
  */
@@ -128,7 +128,8 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: "All available button sizes with consistent liquid glass styling.",
+        story:
+          "All available button sizes with consistent liquid glass styling.",
       },
     },
   },
@@ -175,7 +176,8 @@ export const IconOnly: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Icon-only buttons with square aspect ratio and liquid glass effect.",
+        story:
+          "Icon-only buttons with square aspect ratio and liquid glass effect.",
       },
     },
   },
@@ -200,7 +202,8 @@ export const Loading: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Loading states with spinner animation and optional loading text.",
+        story:
+          "Loading states with spinner animation and optional loading text.",
       },
     },
   },
@@ -220,7 +223,8 @@ export const InteractiveStates: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Different interactive states showing the liquid glass hover and active effects.",
+        story:
+          "Different interactive states showing the liquid glass hover and active effects.",
       },
     },
   },
@@ -262,7 +266,8 @@ export const Playground: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Interactive playground to test all button properties and see the liquid glass effect in action.",
+        story:
+          "Interactive playground to test all button properties and see the liquid glass effect in action.",
       },
     },
   },
@@ -283,7 +288,8 @@ export const DarkMode: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Liquid glass buttons in dark mode with adjusted colors and effects.",
+        story:
+          "Liquid glass buttons in dark mode with adjusted colors and effects.",
       },
     },
     backgrounds: {
@@ -299,24 +305,29 @@ export const ComplexExample: Story = {
       <div className="text-center space-y-4">
         <h2 className="text-2xl font-bold text-white">Liquid Glass Demo</h2>
         <p className="text-white/80">
-          Experience the signature liquid glass effect with realistic depth and shine.
+          Experience the signature liquid glass effect with realistic depth and
+          shine.
         </p>
       </div>
-      
+
       <div className="space-y-3">
         <GlassButton fullWidth leftIcon={<Heart />} size="lg">
           Add to Favorites
         </GlassButton>
-        
+
         <div className="flex gap-3">
           <GlassButton variant="secondary" className="flex-1">
             Cancel
           </GlassButton>
-          <GlassButton variant="primary" className="flex-1" rightIcon={<ArrowRight />}>
+          <GlassButton
+            variant="primary"
+            className="flex-1"
+            rightIcon={<ArrowRight />}
+          >
             Continue
           </GlassButton>
         </div>
-        
+
         <GlassButton fullWidth variant="ghost" leftIcon={<Download />}>
           Download Now
         </GlassButton>
@@ -326,7 +337,8 @@ export const ComplexExample: Story = {
   parameters: {
     docs: {
       description: {
-        story: "A complex example showing multiple buttons in a realistic interface layout with the liquid glass effect.",
+        story:
+          "A complex example showing multiple buttons in a realistic interface layout with the liquid glass effect.",
       },
     },
   },

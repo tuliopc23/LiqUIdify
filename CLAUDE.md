@@ -77,7 +77,7 @@ The library provides multiple entry points for optimal tree-shaking:
 
 - **Unified Glass System** (`core/glass/unified-glass-system.tsx`) - Central glass effect implementation
 - **Design Tokens** (`tokens/design-tokens.ts`) - Centralized design constants
-- **CSS Architecture** - Multiple CSS files for different use cases (glass-base.css, glass-core.css, etc.)
+- **CSS Architecture** - Liquid glass centered system with core liquid-glass.css and utilities in index.css
 - **Accessibility First** - Components include ARIA attributes, keyboard navigation, and screen reader support
 
 ### Key Technologies

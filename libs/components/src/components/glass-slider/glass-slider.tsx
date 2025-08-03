@@ -101,7 +101,7 @@ export const GlassSlider = React.memo(
       }, [isDragging, handleMouseMove, handleMouseUp]);
 
       return (
-        <div ref={ref} className={cn("relative w-full", className)} {...props}>
+      <div ref={ref} className={cn("liquid-glass", "relative w-full", className)} {...props}>
           {showValue && (
             <div className="mb-3 flex items-center justify-between">
               <span className="text-gray-600 text-sm dark:text-gray-400">

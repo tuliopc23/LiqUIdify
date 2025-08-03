@@ -4,13 +4,14 @@ import { cn } from "../../core/utils/classname";
 
 // Variant mappings using Tailwind classes
 const VARIANT_CLASSES = {
-  default: "border-glass-hl/20 border-t-blue-400",
-  primary: "border-glass-hl/20 border-t-blue-500",
-  secondary: "border-glass-hl/20 border-t-purple-400",
-  success: "border-glass-hl/20 border-t-green-400",
-  warning: "border-glass-hl/20 border-t-yellow-400",
-  error: "border-glass-hl/20 border-t-red-400",
-  glass: "border-glass-hl/10 border-t-glass-hl/50 backdrop-blur-glass",
+  default: "border-liquid-glass-hl/20 border-t-blue-400",
+  primary: "border-liquid-glass-hl/20 border-t-blue-500",
+  secondary: "border-liquid-glass-hl/20 border-t-purple-400",
+  success: "border-liquid-glass-hl/20 border-t-green-400",
+  warning: "border-liquid-glass-hl/20 border-t-yellow-400",
+  error: "border-liquid-glass-hl/20 border-t-red-400",
+  "liquid-glass":
+    "border-liquid-glass-hl/10 border-t-liquid-glass-hl/50 backdrop-blur-liquid-glass",
 };
 
 const SIZE_CLASSES = {
@@ -91,7 +92,7 @@ const GlassSpinner = React.forwardRef<HTMLDivElement, GlassSpinnerProps>(
       >
         <SpinnerElement />
         {showLabel && (
-          <span className="select-none text-sm text-glass-text/70">
+          <span className="select-none text-sm text-liquid-primary/70">
             {label}
           </span>
         )}
@@ -119,7 +120,10 @@ export const PulseSpinner: React.FC<{
       {[0, 1, 2].map((index) => (
         <motion.div
           key={`pulse-${index}`}
-          className={cn("rounded-full bg-glass-hl/50", sizeClasses[size])}
+          className={cn(
+            "rounded-full bg-liquid-glass-hl/50",
+            sizeClasses[size],
+          )}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.5, 1, 0.5],
@@ -153,7 +157,10 @@ export const DotsSpinner: React.FC<{
       {Array.from({ length: count }).map((_, index) => (
         <motion.div
           key={`dot-${index}`}
-          className={cn("rounded-full bg-glass-hl/60", sizeClasses[size])}
+          className={cn(
+            "rounded-full bg-liquid-glass-hl/60",
+            sizeClasses[size],
+          )}
           animate={{
             y: [0, -8, 0],
           }}
@@ -184,7 +191,7 @@ export const RingSpinner: React.FC<{
   return (
     <motion.div
       className={cn(
-        "rounded-full border-glass-hl/20",
+        "rounded-full border-liquid-glass-hl/20",
         sizeClasses[size],
         className,
       )}
@@ -212,7 +219,7 @@ export const WaveSpinner: React.FC<{
       {Array.from({ length: bars }).map((_, index) => (
         <motion.div
           key={`wave-bar-${index}`}
-          className="w-1 radius-lg-s bg-gradient-to-t from-blue-400 to-purple-400"
+          className="w-1 liquid-glass-sm bg-gradient-to-t from-blue-400 to-purple-400"
           animate={{
             height: [8, 24, 8],
           }}

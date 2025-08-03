@@ -1,6 +1,6 @@
 import { Heart, MessageCircle, Star } from "lucide-react";
 import { GlassResponsiveCard } from "./glass-responsive-card";
-import "@/styles/apple-liquid-authentic.css";
+import "@/styles/index.css";
 
 export default {
   title: "Components/GlassResponsiveCard",

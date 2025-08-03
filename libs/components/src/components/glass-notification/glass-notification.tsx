@@ -96,7 +96,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         className={cn(
           "relative rounded-xl p-2",
           getGlassClass("default"),
-          "hover:bg-[var(--glass-bg-elevated)]",
+          "hover:bg-[var(--liquid-glass-bg-elevated)]",
           microInteraction.gentle,
           "focus:outline-none focus:ring-2 focus:ring-blue-500/30",
         )}
@@ -115,12 +115,12 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
           className={cn(
             "absolute top-full right-0 z-50 mt-2 max-h-96 w-80 overflow-hidden rounded-xl",
             getGlassClass("elevated"),
-            "border border-[var(--glass-border)]",
+            "border border-[var(--liquid-glass-border)]",
           )}
         >
           {/* Header */}
 
-          <div className="border-[var(--glass-border)] border-b p-4">
+          <div className="border-[var(--liquid-glass-border)] border-b p-4">
             <div className="flex items-center justify-between">
               <h3 className="font-semibold text-[var(--text-primary)]">
                 Notifications
@@ -140,7 +140,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg p-1 text-[var(--text-secondary)] hover:bg-[var(--glass-bg)]"
+                  className="rounded-lg p-1 text-[var(--text-secondary)] hover:bg-[var(--liquid-glass-bg)]"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -165,8 +165,8 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                   type="button"
                   key={notification.id}
                   className={cn(
-                    "border-[var(--glass-border)] border-b p-4 last:border-b-0",
-                    "w-full cursor-pointer text-left hover:bg-[var(--glass-bg)]",
+                    "border-[var(--liquid-glass-border)] border-b p-4 last:border-b-0",
+                    "w-full cursor-pointer text-left hover:bg-[var(--liquid-glass-bg)]",
                     microInteraction.gentle,
                     !notification.read && "bg-blue-50/50 dark:bg-blue-950/20",
                   )}
@@ -234,7 +234,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                         e.stopPropagation();
                         onDismiss?.(notification.id);
                       }}
-                      className="rounded-lg p-1 text-[var(--text-tertiary)] opacity-0 transition-opacity hover:bg-[var(--glass-bg)] group-hover:opacity-100"
+                      className="rounded-lg p-1 text-[var(--text-tertiary)] opacity-0 transition-opacity hover:bg-[var(--liquid-glass-bg)] group-hover:opacity-100"
                     >
                       <X className="h-3 w-3" />
                     </button>

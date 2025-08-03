@@ -9,17 +9,17 @@ import {
 } from "../../lib/variant-system";
 
 const accordionVariants = cva({
-  base: "w-full space-y-2 rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-md",
+  base: "w-full space-y-2",
   variants: {
     size: {
-      sm: "p-1 text-sm",
-      md: "p-2 text-base",
-      lg: "p-3 text-lg",
+      sm: "text-sm",
+      md: "text-base",
+      lg: "text-lg",
     },
     variant: {
-      default: "bg-white/5",
-      solid: "bg-white/10",
-      ghost: "border-transparent bg-transparent p-0",
+      default: "",
+      enhanced: "",
+      ghost: "",
     },
   },
   defaultVariants: {
@@ -29,12 +29,12 @@ const accordionVariants = cva({
 });
 
 const accordionItemVariants = cva({
-  base: "overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-200 hover:bg-white/10",
+  base: "overflow-hidden liquid-glass-container liquid-glass-md liquid-glass-interactive transition-all duration-200 mb-2",
   variants: {
     size: {
-      sm: "text-sm",
-      md: "text-base",
-      lg: "text-lg",
+      sm: "liquid-glass-sm",
+      md: "liquid-glass-md",
+      lg: "liquid-glass-lg",
     },
   },
   defaultVariants: {
@@ -43,10 +43,10 @@ const accordionItemVariants = cva({
 });
 
 const accordionTriggerVariants = cva({
-  base: "group flex w-full flex-1 items-center justify-between p-4 text-left font-medium text-white transition-all duration-200 hover:bg-white/5 focus:bg-white/10 focus:outline-none data-[state=open]:bg-white/5",
+  base: "group flex w-full flex-1 items-center justify-between text-left font-medium text-liquid-primary transition-all duration-200 focus:outline-none relative z-10",
   variants: {
     size: {
-      sm: "p-2 text-sm",
+      sm: "p-3 text-sm",
       md: "p-4 text-base",
       lg: "p-6 text-lg",
     },
@@ -57,12 +57,12 @@ const accordionTriggerVariants = cva({
 });
 
 const accordionContentVariants = cva({
-  base: "overflow-hidden border-white/10 border-t bg-white/5 text-white/80",
+  base: "overflow-hidden text-liquid-secondary relative z-10",
   variants: {
     size: {
-      sm: "text-xs",
-      md: "text-sm",
-      lg: "text-base",
+      sm: "text-xs px-3 pb-3",
+      md: "text-sm px-4 pb-4",
+      lg: "text-base px-6 pb-6",
     },
   },
   defaultVariants: {
@@ -127,76 +127,71 @@ interface GlassAccordionContentProps
 const GlassAccordion = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Root>,
   GlassAccordionProps
->(({ className, size, variant, ...props }, ref) => {
-  return (
-    <AccordionPrimitive.Root
-      ref={ref}
-      className={cn(accordionVariants({ size, variant }), className)}
-      {...props}
-    />
-  );
-});
+>(({ className, variant, size, ...props }, ref) => (
+  <AccordionPrimitive.Root
+    ref={ref}
+    className={cn(accordionVariants({ variant, size }), className)}
+    {...props}
+  />
+));
 
 const GlassAccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   GlassAccordionItemProps
->(({ className, size, ...props }, ref) => {
-  return (
-    <AccordionPrimitive.Item
-      ref={ref}
-      className={cn(accordionItemVariants({ size }), className)}
-      {...props}
-    />
-  );
-});
+>(({ className, size, ...props }, ref) => (
+  <AccordionPrimitive.Item ref={ref} className="relative">
+    <div className={cn(accordionItemVariants({ size }), className)}>
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+      <div className="liquid-glass-content p-0">{props.children}</div>
+    </div>
+  </AccordionPrimitive.Item>
+));
 
 const GlassAccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   GlassAccordionTriggerProps
->(({ className, children, size, showIcon = true, ...props }, ref) => {
-  return (
-    <AccordionPrimitive.Header className="flex">
-      <AccordionPrimitive.Trigger
-        ref={ref}
-        className={cn(accordionTriggerVariants({ size }), className)}
-        {...props}
-      >
-        <span className="flex-1 text-left">{children}</span>
-        {showIcon && (
-          <motion.div
-            className="text-white/60 transition-colors group-hover:text-white"
-            transition={{ duration: 0.2 }}
-          >
-            <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-          </motion.div>
-        )}
-      </AccordionPrimitive.Trigger>
-    </AccordionPrimitive.Header>
-  );
-});
+>(({ className, children, size, showIcon = true, ...props }, ref) => (
+  <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Trigger
+      ref={ref}
+      className={cn(accordionTriggerVariants({ size }), className)}
+      {...props}
+    >
+      <span className="flex-1 text-left">{children}</span>
+      {showIcon && (
+        <motion.div
+          className="text-liquid-secondary transition-colors group-hover:text-liquid-accent"
+          transition={{ duration: 0.2 }}
+        >
+          <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+        </motion.div>
+      )}
+    </AccordionPrimitive.Trigger>
+  </AccordionPrimitive.Header>
+));
 
 const GlassAccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   GlassAccordionContentProps
->(({ className, children, size, ...props }, ref) => {
-  return (
-    <AccordionPrimitive.Content
-      ref={ref}
-      className={cn(accordionContentVariants({ size }), className)}
-      {...props}
+>(({ className, children, size, ...props }, ref) => (
+  <AccordionPrimitive.Content
+    ref={ref}
+    className={cn(accordionContentVariants({ size }), className)}
+    {...props}
+  >
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className="border-t border-liquid/20"
     >
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.2 }}
-        className="p-4"
-      >
-        {children}
-      </motion.div>
-    </AccordionPrimitive.Content>
-  );
-});
+      {children}
+    </motion.div>
+  </AccordionPrimitive.Content>
+));
 
 GlassAccordion.displayName = "GlassAccordion";
 GlassAccordionItem.displayName = "GlassAccordionItem";
