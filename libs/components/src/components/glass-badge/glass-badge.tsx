@@ -19,15 +19,21 @@ const GlassBadge = forwardRef<HTMLSpanElement, GlassBadgeProps>(
     };
 
     return (
-    <span data-testid="badge" className={cn(
-      "liquid-glass-filter",
-      "liquid-glass-overlay",
-      "liquid-glass-specular",
-      className
-    )}>
-      {children}
-    </span>
-  );
+      <span
+        data-testid="badge"
+        className={cn(
+          "liquid-glass-filter",
+          "liquid-glass-overlay",
+          "liquid-glass-specular",
+          variantClasses[variant],
+          className
+        )}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </span>
+    );
   },
 );
 
