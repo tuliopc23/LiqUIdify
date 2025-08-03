@@ -1,27 +1,21 @@
-// tailwind.config.ts
 import type { Config } from "tailwindcss";
-import filters from "tailwindcss-filters";      // ⬅️ enables backdrop-blur / brightness / saturate utilities
+import filters from "tailwindcss-filters";
+import { liquidGlassUtilities } from "./tailwind/plugins/liquid-glass";
 
 const config: Config = {
-  /** ----------------------------------------------------------------
-   *  1 ▸ Files Tailwind should scan
-   * ----------------------------------------------------------------*/
+  // 1 ▸ Files Tailwind should scan (mirrors root JS config)
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./.storybook/**/*.{js,ts,jsx,tsx,mdx}",
-    "./public/**/*.html",
+    "./libs/components/src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./apps/storybook/**/*.{js,ts,jsx,tsx,mdx}",
+    "./apps/docs/**/*.{js,ts,jsx,tsx,mdx}",
+    "./examples/**/*.{js,ts,jsx,tsx,mdx}",
   ],
 
-  /** ----------------------------------------------------------------
-   *  2 ▸ Strategy
-   * ----------------------------------------------------------------*/
-  darkMode: ["class"],                         // adds `dark:` variants guarded by .class
+  // 2 ▸ Strategy
+  darkMode: ["class"],
 
-  /** ----------------------------------------------------------------
-   *  3 ▸ Keep critical classes even if purge can’t “see” them
-   * ----------------------------------------------------------------*/
+  // 3 ▸ Safelist (unchanged unless legacy glass classes)
   safelist: [
-    // Backdrop-filter utilities for glass morphism
     "backdrop-blur-sm",
     "backdrop-blur-md",
     "backdrop-blur-lg",
@@ -29,55 +23,23 @@ const config: Config = {
     "backdrop-brightness-110",
     "backdrop-saturate-125",
     "backdrop-saturate-150",
-
-    // Colours & transparency helpers
     "bg-white/5",
     "bg-white/10",
-
-    // Custom shadow defined below
     "shadow-glass",
-
-    // Animation key
     "animate-bg-move",
   ],
 
-  /** ----------------------------------------------------------------
-   *  4 ▸ Theme extensions
-   * ----------------------------------------------------------------*/
+  // 4 ▸ Theme extensions (remove all glass/glass-effect duplicates, keep only unique needed values)
   theme: {
     extend: {
-      /* ---------- Colours ------------------------------------------------ */
-      colors: {
-        glass: {
-          light: "rgba(255,255,255,0.08)",      // bg-glass-light
-          dark:  "rgba(0,0,0,0.25)",            // bg-glass-dark
-        },
-      },
-
-      /* ---------- Shadows ------------------------------------------------- */
-      boxShadow: {
-        glass:
-          "0 0 0 2px rgba(255,255,255,0.6), 0 16px 32px rgba(0,0,0,0.12)", // shadow-glass
-      },
-
-      /* ---------- Keyframes & Animations --------------------------------- */
-      keyframes: {
-        "bg-move": {
-          "0%":   { "background-position": "center center" },
-          "100%": { "background-position": "center top"    },
-        },
-      },
-      animation: {
-        "bg-move": "bg-move 5s ease-in-out infinite alternate",
-      },
+      // Add unique theme values here if needed
     },
   },
 
-  /** ----------------------------------------------------------------
-   *  5 ▸ Plugins
-   * ----------------------------------------------------------------*/
+  // 5 ▸ Plugins: canonical liquidGlassUtilities first, then filters
   plugins: [
-    filters,                                   // backdrop-blur / brightness / saturate utilities
+    liquidGlassUtilities,
+    filters,
   ],
 };
 
