@@ -44,7 +44,7 @@ export const GlassProgress = React.memo(
       };
 
       return (
-    <div ref={ref} className=liquid-glass-container {cn("w-full", className)} {...props}>
+    <div ref={ref} className={cn("liquid-glass-container", "w-full", className)} {...props}>
       {/* Liquid Glass Layers */}
       <div className="liquid-glass-filter" />
       <div className="liquid-glass-overlay" />

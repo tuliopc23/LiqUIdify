@@ -215,7 +215,8 @@ export const GlassPopover: React.FC<GlassPopoverProps> = ({
     <div
       ref={popoverRef}
       style={popoverStyle}
-      className=liquid-glass {cn(
+      className={cn(
+        "liquid-glass",
         getGlassClass("elevated"),
         "rounded-xl p-4",
         "border border-white/20 dark:border-white/10",

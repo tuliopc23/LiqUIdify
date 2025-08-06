@@ -144,7 +144,7 @@ export const GlassDropdown = React.memo(
       return (
     <div
           ref={ref}
-          className=liquid-glass {cn("relative inline-block", className)}
+          className={cn("liquid-glass", "relative inline-block", className)}
           {...props}
         >
           <button

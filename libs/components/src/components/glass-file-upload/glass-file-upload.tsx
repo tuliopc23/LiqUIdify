@@ -344,7 +344,8 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     return (
     <div
         ref={ref}
-        className=liquid-glass {cn(
+        className={cn(
+          "liquid-glass",
           fileUploadVariants({ size, state: currentState }),
           className,
         )}

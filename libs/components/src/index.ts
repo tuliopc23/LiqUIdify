@@ -12,7 +12,7 @@ export * from "./components/glass-banner";
 export * from "./components/glass-button-refactored";
 export * from "./components/glass-card-refactored";
 export * from "./components/glass-checkbox";
-export * from "./components/glass-error-boundary";
+// export * from "./components/glass-error-boundary";
 export * from "./components/glass-input";
 export * from "./components/glass-loading";
 export * from "./components/glass-modal";
@@ -43,7 +43,7 @@ export * from "./components/sidebar";
 
 // Data visualization components
 export * from "./components/glass-chart";
-export * from "./components/glass-performance-dashboard";
+// export * from "./components/glass-performance-dashboard";
 
 // Form components
 export * from "./components/glass-combobox";
@@ -68,9 +68,9 @@ export * from "./components/glass-command";
 export * from "./components/glass-accessible-demo";
 export * from "./components/glass-focus-demo";
 export * from "./components/glass-focus-trap";
-export * from "./components/glass-live-region";
+// export * from "./components/glass-live-region";
 export * from "./components/glass-skip-navigation";
-export * from "./components/glass-visually-hidden";
+// export * from "./components/glass-visually-hidden";
 
 // Theme and styling components
 export * from "./components/theme-provider";

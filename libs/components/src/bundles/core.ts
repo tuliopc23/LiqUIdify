@@ -7,10 +7,8 @@
 
 // Internal imports sorted alphabetically by type
 // Component imports
-export * from "../components/glass-error-boundary";
 export * from "../components/glass-focus-trap";
 export * from "../components/glass-input";
-export * from "../components/glass-visually-hidden";
 
 // Provider imports
 

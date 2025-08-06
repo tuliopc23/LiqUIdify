@@ -73,7 +73,8 @@ export const GlassAvatar = React.memo(
       return (
     <div
           ref={ref}
-          className=liquid-glass-container {cn(
+          className={cn(
+            "liquid-glass-container",
             "relative inline-flex items-center justify-center",
             sizeClasses[size],
             variantClasses[variant],

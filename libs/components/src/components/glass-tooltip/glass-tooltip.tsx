@@ -115,7 +115,8 @@ export const GlassTooltip: React.FC<GlassTooltipProps> = ({
     <div
       ref={tooltipRef}
       style={tooltipStyle}
-      className=liquid-glass {cn(
+      className={cn(
+        "liquid-glass",
         getGlassClass("elevated"),
         "rounded-lg px-3 py-2 text-sm",
         "border border-white/20 dark:border-white/10",

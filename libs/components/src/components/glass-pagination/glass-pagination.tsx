@@ -186,7 +186,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
     return (
     <nav
         ref={ref}
-        className=liquid-glass {cn(paginationVariants({ size, variant }), className)}
+        className={cn("liquid-glass", paginationVariants({ size, variant }), className)}
         aria-label="Pagination"
         {...props}
       >
