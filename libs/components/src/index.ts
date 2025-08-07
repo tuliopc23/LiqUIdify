@@ -42,7 +42,6 @@ export * from "./components/sidebar";
 
 // Data visualization components
 export * from "./components/glass-chart";
-// export * from "./components/glass-performance-dashboard";
 
 // Form components
 export * from "./components/glass-combobox";
@@ -64,21 +63,12 @@ export * from "./components/glass-dropdown";
 export * from "./components/glass-command";
 
 // Accessibility components
-// Demo components moved to examples folder
-// export * from "./examples/glass-accessible-demo";
-// export * from "./examples/glass-focus-demo";
 export * from "./components/glass-focus-trap";
-// export * from "./components/glass-live-region";
 export * from "./components/glass-skip-navigation";
-// export * from "./components/glass-visually-hidden";
 
 // Theme and styling components
 export * from "./components/theme-provider";
 export * from "./components/theme-toggle";
-
-// Showcase and demo components
-// export * from "./components/component-showcase"; // Component not implemented
-// export * from "./components/hydration-detector"; // Component not implemented
 
 // Liquid Glass Types
 export * from "./types/liquid-glass";
