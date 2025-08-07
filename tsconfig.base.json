@@ -1,21 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
+    "target": "es2019",
+    "module": "esnext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
     "types": ["bun-types"],
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "baseUrl": ".",
     "paths": {
-      "@liquidify/*": ["libs/components/src/*"],
-      "@liquidify/components": ["libs/components/src/index.ts"]
+      "@liquidify/*": ["libs/components/src/*"]
     }
   }
 }
