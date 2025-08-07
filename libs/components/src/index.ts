@@ -12,13 +12,12 @@ export * from "./components/glass-banner";
 export * from "./components/glass-button-refactored";
 export * from "./components/glass-card-refactored";
 export * from "./components/glass-checkbox";
-// export * from "./components/glass-error-boundary";
+export { GlassErrorBoundary } from "./components/glass-error-boundary";
 export * from "./components/glass-input";
 export * from "./components/glass-loading";
 export * from "./components/glass-modal";
 export * from "./components/glass-notification";
 export * from "./components/glass-pagination";
-// export * from "./components/glass-playground"; // Temporarily disabled due to build issues
 export * from "./components/glass-popover";
 export * from "./components/glass-portal";
 export * from "./components/glass-progress";
