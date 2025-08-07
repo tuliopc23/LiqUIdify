@@ -1,1 +1,44 @@
-{"compilerOptions":{"composite":true,"declaration":true,"declarationMap":true,"emitDeclarationOnly":true,"noEmit":true,"outDir":"dist","skipLibCheck":true,"stripInternal":true},"exclude":["**\/*.stories.*","**\/*.test.*","**\/*.spec.*","node_modules","dist","build","examples","apps",".vite",".turbo",".storybook","**\/__mocks__\/**"],"extends":".\/tsconfig.base.json","include":["libs\/components\/src"]}
+{
+    "compilerOptions": {
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": true,
+        "noEmit": true,
+        "outDir": "dist",
+        "skipLibCheck": true,
+        "stripInternal": true
+    },
+    "exclude": [
+        "**/*.stories.*",
+        "**/*.test.*",
+        "**/*.spec.*",
+        "**/__tests__/**",
+        "**/tests/**",
+        "**/examples/**",
+        "**/demo/**",
+        "**/playground/**",
+        "**/glass-playground/**",
+        "**/*liquid-glass-template*",
+        "**/*.backup",
+        "**/*.md",
+        "**/*.mdx",
+        ".storybook/**",
+        "storybook-static/**",
+        "**/__mocks__/**",
+        "node_modules",
+        "dist",
+        "build",
+        "examples",
+        "apps",
+        ".vite",
+        ".turbo",
+        "coverage",
+        "test-results",
+        "playwright-report"
+    ],
+    "extends": "./tsconfig.base.json",
+    "include": [
+        "libs/components/src"
+    ]
+}

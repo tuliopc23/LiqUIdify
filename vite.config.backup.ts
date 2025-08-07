@@ -24,7 +24,23 @@ export default defineConfig({
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       input: Object.fromEntries(
-        glob.sync('libs/components/src/**/*.{ts,tsx}', { ignore: ['**/*.test.ts', '**/*.test.tsx', '**/*.stories.tsx'] }).map(file => [
+        glob.sync('libs/components/src/**/*.{ts,tsx}', {
+          ignore: [
+            '**/*.test.*',
+            '**/*.spec.*',
+            '**/*.stories.*',
+            '**/__tests__/**',
+            '**/tests/**',
+            '**/examples/**',
+            '**/demo/**',
+            '**/playground/**',
+            '**/glass-playground/**',
+            '**/*liquid-glass-template*',
+            '**/*.backup',
+            '**/*.md',
+            '**/*.mdx'
+          ]
+        }).map(file => [
           relative(
             'libs/components',
             file.slice(0, file.length - extname(file).length)

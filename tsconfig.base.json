@@ -1,1 +1,21 @@
-{"compilerOptions":{"allowSyntheticDefaultImports":true,"esModuleInterop":true,"forceConsistentCasingInFileNames":true,"lib":["ESNext","DOM","DOM.Iterable"],"module":"ESNext","moduleResolution":"bundler","resolveJsonModule":true,"skipLibCheck":true,"strict":true,"target":"ESNext"}}
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["bun-types"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@liquidify/*": ["libs/components/src/*"],
+      "@liquidify/components": ["libs/components/src/index.ts"]
+    }
+  }
+}

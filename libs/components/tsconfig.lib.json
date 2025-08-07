@@ -4,31 +4,34 @@
     "outDir": "../../dist/libs/components",
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false,
-    "stripInternal": true,
-    "composite": true,
-    "noEmit": false,
-    "skipLibCheck": true,
-    "jsx": "react-jsx",
-    "baseUrl": "../../",
-    "paths": {
-      "@liquidify/components": ["libs/components/src/index.ts"],
-      "@/*": ["libs/components/src/*"],
-      "@/components/*": ["libs/components/src/components/*"],
-      "@/core/*": ["libs/components/src/core/*"],
-      "@/hooks/*": ["libs/components/src/hooks/*"],
-      "@/styles/*": ["libs/components/src/styles/*"],
-      "@/tokens/*": ["libs/components/src/tokens/*"],
-      "@/types/*": ["libs/components/src/types/*"]
-    }
+    "emitDeclarationOnly": true,
+    "composite": false,
+    "stripInternal": true
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "**/*.stories.*",
     "**/*.test.*",
     "**/*.spec.*",
+    "**/__tests__/**",
+    "**/tests/**",
+    "**/examples/**",
+    "**/demo/**",
+    "**/playground/**",
+    "**/glass-playground/**",
+    "**/*liquid-glass-template*",
+    "**/*.backup",
+    "**/*.md",
+    "**/*.mdx",
+    ".storybook/**",
+    "storybook-static/**",
     "node_modules",
     "dist",
-    "build"
+    "build",
+    "coverage",
+    "test-results",
+    "playwright-report"
   ]
 }
