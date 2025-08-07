@@ -108,6 +108,8 @@
         "components/textarea",
         "components/file-upload",
         "components/glass-input",
+        "components/glass-number-input",
+        "components/glass-form-field",
         "components/glass-select"
       ]
     },
@@ -131,7 +133,8 @@
         "components/pagination",
         "components/dropdown",
         "components/glass-navigation",
-        "components/glass-menu"
+        "components/glass-menu",
+        "components/glass-portal"
       ]
     },
     {
@@ -143,7 +146,9 @@
         "components/chart",
         "components/skeleton",
         "components/glass-data-display",
-        "components/glass-chart"
+        "components/glass-chart",
+        "components/glass-tree-view",
+        "components/glass-timeline"
       ]
     },
     {
@@ -166,7 +171,9 @@
         "components/visually-hidden",
         "components/skip-navigation",
         "components/live-region",
-        "components/glass-focus-trap"
+        "components/glass-focus-trap",
+        "components/theme-provider",
+        "components/theme-toggle"
       ]
     },
     {
@@ -176,6 +183,18 @@
         "api-reference/components",
         "api-reference/hooks",
         "api-reference/utilities"
+      ]
+    },
+    {
+      "group": "Testing",
+      "pages": [
+        "testing/overview",
+        "testing/getting-started",
+        "testing/vitest-config",
+        "testing/writing-tests",
+        "testing/rtl-guide",
+        "testing/accessibility",
+        "testing/coverage"
       ]
     }
   ],

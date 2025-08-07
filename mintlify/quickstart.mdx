@@ -1,0 +1,158 @@
+---
+title: 'Quickstart'
+description: 'Start building with LiqUIdify in under 5 minutes'
+---
+
+## Installation
+
+Choose your preferred package manager to install LiqUIdify:
+
+<CodeGroup>
+
+```bash npm
+npm install @liquidify/components
+```
+
+```bash yarn
+yarn add @liquidify/components
+```
+
+```bash pnpm
+pnpm add @liquidify/components
+```
+
+```bash bun
+bun add @liquidify/components
+```
+
+</CodeGroup>
+
+## Setup
+
+### 1. Import Styles
+
+Add the LiqUIdify styles to your application. You can import them in your main CSS file or JavaScript entry point:
+
+<CodeGroup>
+
+```css CSS Import
+/* In your global CSS file */
+@import '@liquidify/components/css';
+```
+
+```jsx JavaScript Import
+// In your main JavaScript/TypeScript file
+import '@liquidify/components/css';
+```
+
+```jsx Next.js
+// In your _app.js or _app.tsx
+import '@liquidify/components/css';
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+```
+
+</CodeGroup>
+
+### 2. Start Using Components
+
+Now you can start using LiqUIdify components in your application:
+
+```jsx
+import { GlassButton, GlassCard, GlassInput } from '@liquidify/components';
+
+function App() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-400 to-blue-600 p-8">
+      <GlassCard className="max-w-md mx-auto">
+        <h1 className="text-2xl font-bold mb-4">Welcome to LiqUIdify</h1>
+        <GlassInput
+          placeholder="Enter your email"
+          className="mb-4"
+        />
+        <GlassButton variant="primary" fullWidth>
+          Get Started
+        </GlassButton>
+      </GlassCard>
+    </div>
+  );
+}
+```
+
+## TypeScript Setup
+
+LiqUIdify is built with TypeScript and includes comprehensive type definitions. No additional setup is required - types are automatically included when you install the package.
+
+```tsx
+import { GlassButton, GlassButtonProps } from '@liquidify/components';
+
+// Type-safe props
+const MyButton: React.FC<GlassButtonProps> = (props) => {
+  return <GlassButton {...props} />;
+};
+```
+
+## Tree-Shaking Support
+
+LiqUIdify supports tree-shaking out of the box. You can import components individually to reduce bundle size:
+
+```jsx
+// ✅ Recommended: Import only what you need
+import { GlassButton } from '@liquidify/components/button';
+import { GlassCard } from '@liquidify/components/card';
+
+// ❌ Avoid: Importing everything
+import * as Liquid from '@liquidify/components';
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Browse Components"
+    icon="cube"
+    href="/components/overview"
+  >
+    Explore our full component library with live examples
+  </Card>
+  <Card
+    title="Theming Guide"
+    icon="palette"
+    href="/guides/theming"
+  >
+    Learn how to customize LiqUIdify to match your brand
+  </Card>
+  <Card
+    title="Examples"
+    icon="laptop-code"
+    href="/examples"
+  >
+    See complete application examples using LiqUIdify
+  </Card>
+  <Card
+    title="API Reference"
+    icon="book"
+    href="/api-reference/introduction"
+  >
+    Detailed API documentation for all components
+  </Card>
+</CardGroup>
+
+## Framework Guides
+
+LiqUIdify works great with all modern React frameworks. Check out our framework-specific guides:
+
+- [Next.js Integration](/guides/nextjs)
+- [Gatsby Setup](/guides/gatsby)
+- [Vite Configuration](/guides/vite)
+- [Create React App](/guides/cra)
+- [Remix Setup](/guides/remix)
+
+## Need Help?
+
+- Join our [Discord community](https://discord.gg/liquidify) for real-time help
+- Check out our [FAQ](/faq) for common questions
+- Browse [GitHub Discussions](https://github.com/liquidify/liquidify/discussions) for community solutions
+- Report bugs on [GitHub Issues](https://github.com/liquidify/liquidify/issues)

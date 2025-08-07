@@ -184,6 +184,7 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
         ref={ref}
         className={buttonClasses}
         disabled={disabled || loading}
+        type="button"
         {...props}
       >
         {content}

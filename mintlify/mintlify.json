@@ -1,0 +1,210 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "LiqUIdify",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0D9488",
+    "light": "#07C983",
+    "dark": "#0D9488",
+    "anchors": {
+      "from": "#0D9488",
+      "to": "#07C983"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@liquidify.dev"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://dashboard.liquidify.dev"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "https://docs.liquidify.dev"
+    },
+    {
+      "name": "Community",
+      "icon": "slack",
+      "url": "https://liquidify.dev/discord"
+    },
+    {
+      "name": "Blog",
+      "icon": "newspaper",
+      "url": "https://liquidify.dev/blog"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "development"
+      ]
+    },
+    {
+      "group": "Essentials",
+      "pages": [
+        "essentials/markdown",
+        "essentials/code",
+        "essentials/images",
+        "essentials/settings",
+        "essentials/navigation",
+        "essentials/reusable-snippets"
+      ]
+    },
+    {
+      "group": "Components",
+      "pages": [
+        "components/overview",
+        {
+          "group": "Core",
+          "pages": [
+            "components/core/button",
+            "components/core/card",
+            "components/core/container",
+            "components/core/badge",
+            "components/core/avatar"
+          ]
+        },
+        {
+          "group": "Forms",
+          "pages": [
+            "components/forms/input",
+            "components/forms/textarea",
+            "components/forms/select",
+            "components/forms/checkbox",
+            "components/forms/radio",
+            "components/forms/switch",
+            "components/forms/slider",
+            "components/forms/form"
+          ]
+        },
+        {
+          "group": "Navigation",
+          "pages": [
+            "components/navigation/navbar",
+            "components/navigation/sidebar",
+            "components/navigation/menu",
+            "components/navigation/tabs",
+            "components/navigation/breadcrumb",
+            "components/navigation/pagination"
+          ]
+        },
+        {
+          "group": "Feedback",
+          "pages": [
+            "components/feedback/alert",
+            "components/feedback/toast",
+            "components/feedback/modal",
+            "components/feedback/drawer",
+            "components/feedback/tooltip",
+            "components/feedback/popover",
+            "components/feedback/spinner",
+            "components/feedback/skeleton"
+          ]
+        },
+        {
+          "group": "Data Display",
+          "pages": [
+            "components/data-display/table",
+            "components/data-display/list",
+            "components/data-display/grid",
+            "components/data-display/chart",
+            "components/data-display/stat",
+            "components/data-display/timeline"
+          ]
+        },
+        {
+          "group": "Layout",
+          "pages": [
+            "components/layout/stack",
+            "components/layout/grid",
+            "components/layout/flex",
+            "components/layout/divider",
+            "components/layout/spacer"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Design System",
+      "pages": [
+        "design/overview",
+        "design/colors",
+        "design/typography",
+        "design/spacing",
+        "design/glassmorphism",
+        "design/animations",
+        "design/accessibility"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/theming",
+        "guides/customization",
+        "guides/performance",
+        "guides/ssr",
+        "guides/testing",
+        "guides/migration"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction",
+        "api-reference/authentication",
+        "api-reference/errors",
+        "api-reference/webhooks",
+        "api-reference/rate-limits",
+        "api-reference/versioning"
+      ]
+    },
+    {
+      "group": "Endpoints",
+      "pages": [
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/update",
+        "api-reference/endpoint/delete"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "x": "https://x.com/liquidify",
+    "github": "https://github.com/liquidify",
+    "linkedin": "https://www.linkedin.com/company/liquidify"
+  },
+  "analytics": {
+    "gtm": {
+      "tagId": "GTM-XXXXXX"
+    }
+  },
+  "search": {
+    "prompt": "Search documentation..."
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true,
+    "raiseIssue": true
+  },
+  "modeToggle": {
+    "default": "dark"
+  }
+}

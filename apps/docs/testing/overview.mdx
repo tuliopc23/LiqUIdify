@@ -1,0 +1,43 @@
+---
+title: Overview
+description: Testing strategy, tooling, and expectations for LiqUIdify.
+---
+
+Welcome to the LiqUIdify testing docs. This section explains how we test components, hooks, and utilities using Vitest, React Testing Library, and jsdom.
+
+Goals
+- Confidence: Prevent regressions across components and variants
+- Maintainability: Clean, readable tests colocated with source
+- Speed: Fast local runs and CI-friendly reporting
+- Coverage: Minimum 80% lines/branches/functions/statements per lib
+
+Tooling
+- Test runner: Vitest (jsdom environment)
+- DOM utilities: React Testing Library + @testing-library/user-event
+- Accessibility checks: Axe (planned) and RTL patterns
+- Mocking: Vitest vi.mock, custom DOM API shims in setup
+
+Structure
+- Tests live next to source: libs/components/src/**/name.test.tsx
+- Shared test setup: libs/components/src/test/setup.ts
+- Global setup: libs/components/src/test/global-setup.ts
+- Utilities: libs/components/src/test/test-utils.tsx
+
+Quick start
+- Run all tests: npx vitest --run
+- Run a single file: npx vitest path/to/file.test.tsx --run
+- Watch mode: npx vitest
+- With coverage: npx vitest --coverage
+
+What to test
+- Components: rendering, variants, sizes, states, events, a11y attributes
+- Hooks: state transitions, SSR-safety, edge cases
+- Utils: pure logic, guards, DOM-safe utilities
+
+Non-goals
+- Snapshotting complex DOM trees
+- Testing implementation details (class names can be asserted if public API)
+
+Next steps
+- See Getting Started and Writing Tests guides
+

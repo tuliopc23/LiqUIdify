@@ -19,6 +19,8 @@
     "**/tests/**",
     "**/examples/**",
     "src/examples/**",
+    "src/test/**",
+    "**/test/**",
     "**/demo/**",
     "**/playground/**",
     "**/glass-playground/**",

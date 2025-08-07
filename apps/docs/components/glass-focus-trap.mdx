@@ -1,0 +1,32 @@
+---
+title: Glass Focus Trap
+description: Glass-themed focus trap wrapper.
+---
+
+Overview
+GlassFocusTrap adds focus trapping with Liquid Glass styling primitives.
+
+Import
+```ts
+import { GlassFocusTrap } from '@liquidify/components'
+```
+
+Usage
+```tsx
+<GlassFocusTrap active>
+  <div role="dialog" aria-modal="true" className="liquid-glass p-4 rounded-xl">
+    <h2 className="text-lg font-semibold">Settings</h2>
+    <button>Save</button>
+    <button>Cancel</button>
+  </div>
+</GlassFocusTrap>
+```
+
+Props
+- active?: boolean
+- initialFocusRef?: RefObject<HTMLElement>
+- restoreFocus?: boolean
+
+Tips
+- Pair with GlassModal or GlassDrawer for accessible overlays.
+

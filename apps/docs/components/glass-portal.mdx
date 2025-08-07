@@ -1,0 +1,27 @@
+---
+title: Glass Portal
+description: Render children into a DOM node outside the parent hierarchy.
+---
+
+Overview
+Glass Portal lets you render UI into a portal root (e.g., modals, toasts) while keeping Liquid Glass styles.
+
+Import
+```ts
+import { GlassPortal } from '@liquidify/components'
+```
+
+Usage
+```tsx
+<GlassPortal containerId="portal-root">
+  <div className="liquid-glass p-4 rounded-xl">Portal content</div>
+</GlassPortal>
+```
+
+Props
+- containerId?: string — target element id (default: 'portal-root')
+- container?: HTMLElement — pass a DOM node directly
+
+Notes
+- Ensure the container exists in your app shell (e.g., <div id="portal-root" />).
+

@@ -1,0 +1,23 @@
+---
+title: Coverage & reporting
+---
+
+Run with coverage
+- npx vitest --coverage
+
+Reports
+- Text summary in console
+- HTML report at coverage/index.html
+- JSON/LCOV in coverage/ for CI tools
+
+Thresholds
+- 80% lines/branches/functions/statements
+
+CI artifacts
+- test-results/junit.xml for JUnit
+- test-results/html for local previews
+
+Tips
+- Exclude stories, config, test files via vitest.config.ts
+- Focus on meaningful branches and edge-cases
+

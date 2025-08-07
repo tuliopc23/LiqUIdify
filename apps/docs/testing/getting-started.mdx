@@ -1,0 +1,34 @@
+---
+title: Getting started
+---
+
+This guide walks you through running and writing tests in LiqUIdify.
+
+Prerequisites
+- Node 18+ (Bun supported for scripts)
+- Installed dev deps (vitest, @testing-library/react, jsdom, etc.)
+
+Install (if needed)
+- bun add -d vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom @vitest/ui
+
+Run tests
+- All tests: npx vitest --run
+- Single: npx vitest libs/components/src/components/glass-button-refactored/glass-button.test.tsx --run
+- Watch: npx vitest
+
+Project wiring
+- vitest.config.ts sets environment=jsdom, globals, setup/globalSetup, reporters
+- libs/components/src/test/global-setup.ts for env vars and non-DOM prep
+- libs/components/src/test/setup.ts for DOM mocks (ResizeObserver, matchMedia), RTL config, jest-dom
+- libs/components/src/test/test-utils.tsx exports custom render and helpers
+
+Authoring a test
+- Create libs/components/src/components/<component>/<component>.test.tsx
+- Use import { render, screen } from '@/test/setup' style via test-utils if exported, otherwise @testing-library/react
+- Example assertions: toBeInTheDocument, toHaveTextContent, toHaveAttribute
+
+Debugging
+- Use screen.debug()
+- Run with --run to avoid watch
+- Use vi.spyOn/vi.mock for modules and window APIs
+

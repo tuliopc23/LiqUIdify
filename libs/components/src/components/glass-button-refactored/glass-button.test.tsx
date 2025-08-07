@@ -1,204 +1,454 @@
-import { describe, expect, it } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
-import "../../test/setup";
-import { GlassButton } from "./glass-button";
+import { describe, expect, it, vi } from 'vitest'
+import { render, screen, fireEvent, waitFor } from '../../test/test-utils'
+import { GlassButton } from './glass-button'
+import type { GlassButtonProps } from './glass-button'
 
-describe("GlassButton", () => {
-  it("renders with children", () => {
-    render(<GlassButton>Click me</GlassButton>);
-    expect(screen.getByText("Click me")).toBeInTheDocument();
-  });
+describe('GlassButton', () => {
+  describe('Rendering', () => {
+    it('renders with default props', () => {
+      render(<GlassButton>Test Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toBeInTheDocument()
+      expect(button).toHaveTextContent('Test Button')
+      expect(button).toHaveAttribute('type', 'button')
+    })
 
-  it("applies correct variant classes", () => {
-    const { rerender } = render(
-      <GlassButton variant="primary">Button</GlassButton>,
-    );
-    let button = screen.getByRole("button");
-    expect(button).toHaveClass("bg-gradient-to-b");
-    expect(button).toHaveClass("from-blue-500");
+    it('renders with custom className', () => {
+      render(<GlassButton className="custom-class">Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass('custom-class')
+    })
 
-    rerender(<GlassButton variant="destructive">Button</GlassButton>);
-    button = screen.getByRole("button");
-    expect(button).toHaveClass("from-red-500");
+    it('forwards ref correctly', () => {
+      const ref = vi.fn()
+      render(<GlassButton ref={ref}>Button</GlassButton>)
+      
+      expect(ref).toHaveBeenCalledWith(expect.any(HTMLButtonElement))
+    })
 
-    rerender(<GlassButton variant="ghost">Button</GlassButton>);
-    button = screen.getByRole("button");
-    expect(button).toHaveClass("bg-transparent");
-  });
+    it('renders as child component when asChild is true', () => {
+      render(
+        <GlassButton asChild>
+          <a href="/test">Link Button</a>
+        </GlassButton>
+      )
+      
+      const link = screen.getByRole('link')
+      expect(link).toBeInTheDocument()
+      expect(link).toHaveAttribute('href', '/test')
+      expect(link).toHaveTextContent('Link Button')
+    })
+  })
 
-  it("applies correct size classes", () => {
-    const { rerender } = render(<GlassButton size="sm">Small</GlassButton>);
-    let button = screen.getByRole("button");
-    expect(button).toHaveClass("relative");
-    expect(button).toHaveClass("inline-flex");
-    expect(button).toHaveClass("items-center");
-    expect(button).toHaveClass("justify-center");
+  describe('Variants', () => {
+    it.each([
+      ['primary', 'liquid-glass-button-primary'],
+      ['secondary', 'liquid-glass-button-secondary'], 
+      ['ghost', 'liquid-glass-button-ghost'],
+      ['destructive', 'liquid-glass-button'],
+    ] as const)('applies correct variant classes for %s variant', (variant, expectedClass) => {
+      render(<GlassButton variant={variant}>Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass(expectedClass)
+    })
 
-    rerender(<GlassButton size="md">Medium</GlassButton>);
-    button = screen.getByRole("button");
-    expect(button).toHaveClass("relative");
-    expect(button).toHaveClass("inline-flex");
-    expect(button).toHaveClass("items-center");
-    expect(button).toHaveClass("justify-center");
+    it('applies primary variant text styles', () => {
+      render(<GlassButton variant="primary">Primary Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass('text-liquid-primary', 'font-semibold')
+    })
 
-    rerender(<GlassButton size="lg">Large</GlassButton>);
-    button = screen.getByRole("button");
-    expect(button).toHaveClass("relative");
-    expect(button).toHaveClass("inline-flex");
-    expect(button).toHaveClass("items-center");
-    expect(button).toHaveClass("justify-center");
-  });
+    it('applies destructive variant background styles', () => {
+      render(<GlassButton variant="destructive">Delete</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass('bg-gradient-to-b', 'from-red-500', 'to-red-600')
+      expect(button).toHaveClass('text-white', 'font-semibold')
+    })
+  })
 
-  it("handles click events", () => {
-    let clicked = false;
-    const handleClick = () => {
-      clicked = true;
-    };
+  describe('Sizes', () => {
+    it.each([
+      ['sm', 'liquid-glass-sm', 'text-sm', 'px-4', 'py-2'],
+      ['md', 'liquid-glass-md', 'text-base', 'px-6', 'py-3'],
+      ['lg', 'liquid-glass-lg', 'text-lg', 'px-8', 'py-4'],
+      ['xl', 'liquid-glass-xl', 'text-xl', 'px-10', 'py-5'],
+    ] as const)('applies correct size classes for %s size', (size, ...expectedClasses) => {
+      render(<GlassButton size={size}>Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expectedClasses.forEach(className => {
+        expect(button).toHaveClass(className)
+      })
+    })
+  })
 
-    render(<GlassButton onClick={handleClick}>Click me</GlassButton>);
-    const button = screen.getByRole("button");
+  describe('Icons', () => {
+    it('renders left icon correctly', () => {
+      const LeftIcon = () => <span data-testid="left-icon">←</span>
+      
+      render(
+        <GlassButton leftIcon={<LeftIcon />}>
+          Button with Left Icon
+        </GlassButton>
+      )
+      
+      expect(screen.getByTestId('left-icon')).toBeInTheDocument()
+      expect(screen.getByText('Button with Left Icon')).toBeInTheDocument()
+    })
 
-    fireEvent.click(button);
-    expect(clicked).toBe(true);
-  });
+    it('renders right icon correctly', () => {
+      const RightIcon = () => <span data-testid="right-icon">→</span>
+      
+      render(
+        <GlassButton rightIcon={<RightIcon />}>
+          Button with Right Icon
+        </GlassButton>
+      )
+      
+      expect(screen.getByTestId('right-icon')).toBeInTheDocument()
+      expect(screen.getByText('Button with Right Icon')).toBeInTheDocument()
+    })
 
-  it("disables button when disabled prop is true", () => {
-    render(<GlassButton disabled>Disabled</GlassButton>);
-    const button = screen.getByRole("button");
+    it('renders both left and right icons', () => {
+      const LeftIcon = () => <span data-testid="left-icon">←</span>
+      const RightIcon = () => <span data-testid="right-icon">→</span>
+      
+      render(
+        <GlassButton leftIcon={<LeftIcon />} rightIcon={<RightIcon />}>
+          Button with Icons
+        </GlassButton>
+      )
+      
+      expect(screen.getByTestId('left-icon')).toBeInTheDocument()
+      expect(screen.getByTestId('right-icon')).toBeInTheDocument()
+      expect(screen.getByText('Button with Icons')).toBeInTheDocument()
+    })
 
-    expect(button).toBeDisabled();
-    expect(button).toHaveClass("opacity-50");
-  });
+    it('applies correct icon sizes for different button sizes', () => {
+      const Icon = () => <span data-testid="icon">icon</span>
+      
+      render(<GlassButton size="sm" leftIcon={<Icon />}>Small</GlassButton>)
+      const smallButton = screen.getByRole('button')
+      const smallIconContainer = smallButton.querySelector('span:first-child')
+      expect(smallIconContainer).toHaveClass('w-4', 'h-4')
+    })
 
-  it("renders as full width when fullWidth is true", () => {
-    render(<GlassButton fullWidth>Full Width</GlassButton>);
-    const button = screen.getByRole("button");
+    it('renders icon-only button correctly', () => {
+      const Icon = () => <span data-testid="icon">★</span>
+      
+      render(
+        <GlassButton iconOnly>
+          <Icon />
+          <span>Hidden Text</span>
+        </GlassButton>
+      )
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass('aspect-square', 'p-0')
+      expect(screen.getByTestId('icon')).toBeInTheDocument()
+    })
+  })
 
-    expect(button).toHaveClass("w-full");
-  });
+  describe('Loading State', () => {
+    it('shows loading spinner when loading is true', () => {
+      render(<GlassButton loading>Loading Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      const spinner = button.querySelector('svg')
+      
+      expect(spinner).toBeInTheDocument()
+      expect(spinner).toHaveClass('animate-spin')
+      expect(button).toBeDisabled()
+    })
 
-  it("renders loading state correctly", () => {
-    render(<GlassButton loading>Loading</GlassButton>);
-    const button = screen.getByRole("button");
+    it('shows custom loading text when provided', () => {
+      render(
+        <GlassButton loading loadingText="Saving...">
+          Save Button
+        </GlassButton>
+      )
+      
+      expect(screen.getByText('Saving...')).toBeInTheDocument()
+      expect(screen.queryByText('Save Button')).not.toBeInTheDocument()
+    })
 
-    expect(button).toBeDisabled();
-    expect(button).toHaveClass("cursor-wait");
-    expect(screen.getByText("Loading")).toBeInTheDocument();
-  });
+    it('does not show icons when loading', () => {
+      const LeftIcon = () => <span data-testid="left-icon">←</span>
+      const RightIcon = () => <span data-testid="right-icon">→</span>
+      
+      render(
+        <GlassButton loading leftIcon={<LeftIcon />} rightIcon={<RightIcon />}>
+          Loading
+        </GlassButton>
+      )
+      
+      expect(screen.queryByTestId('left-icon')).not.toBeInTheDocument()
+      expect(screen.queryByTestId('right-icon')).not.toBeInTheDocument()
+    })
 
-  it("applies custom className", () => {
-    render(<GlassButton className="custom-class">Custom</GlassButton>);
-    const button = screen.getByRole("button");
+    it('applies loading opacity to text', () => {
+      render(<GlassButton loading>Loading Button</GlassButton>)
+      
+      const textSpan = screen.getByText('Loading Button')
+      expect(textSpan).toHaveClass('opacity-75')
+    })
+  })
 
-    expect(button).toHaveClass("custom-class");
-  });
+  describe('Disabled State', () => {
+    it('disables button when disabled prop is true', () => {
+      render(<GlassButton disabled>Disabled Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toBeDisabled()
+      expect(button).toHaveClass('opacity-50', 'cursor-not-allowed', 'pointer-events-none')
+    })
 
-  it("forwards ref correctly", () => {
-    let buttonRef: HTMLButtonElement | null = null;
-    render(
-      <GlassButton
-        ref={(ref) => {
-          buttonRef = ref;
-        }}
-      >
-        Ref Button
-      </GlassButton>,
-    );
+    it('is disabled when loading', () => {
+      render(<GlassButton loading>Loading Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toBeDisabled()
+    })
+  })
 
-    expect(buttonRef).toBeInstanceOf(HTMLButtonElement);
-  });
+  describe('Layout Options', () => {
+    it('renders full width button correctly', () => {
+      render(<GlassButton fullWidth>Full Width Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass('w-full')
+    })
+  })
 
-  it("renders with icon", () => {
-    const Icon = () => <span data-testid="icon">Icon</span>;
-    render(
-      <GlassButton>
-        <Icon />
-        With Icon
-      </GlassButton>,
-    );
+  describe('Glass Effect Styles', () => {
+    it('applies liquid glass base classes', () => {
+      render(<GlassButton>Glass Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass(
+        'liquid-glass',
+        'liquid-glass-interactive', 
+        'liquid-glass-button'
+      )
+    })
 
-    expect(screen.getByTestId("icon")).toBeInTheDocument();
-    expect(screen.getByText("With Icon")).toBeInTheDocument();
-  });
+    it('applies proper layout classes', () => {
+      render(<GlassButton>Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass(
+        'inline-flex',
+        'items-center', 
+        'justify-center',
+        'gap-2'
+      )
+    })
 
-  it("handles magnetic hover effects", () => {
-    render(<GlassButton magnetic>Magnetic</GlassButton>);
-    const button = screen.getByRole("button");
+    it('applies font and interaction classes', () => {
+      render(<GlassButton>Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass(
+        'font-system',
+        'select-none',
+        'outline-none',
+        'border-none'
+      )
+    })
+  })
 
-    fireEvent.mouseEnter(button);
-    expect(button).toHaveClass("relative");
-  });
+  describe('Event Handling', () => {
+    it('handles click events', async () => {
+      const handleClick = vi.fn()
+      render(<GlassButton onClick={handleClick}>Click Me</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      fireEvent.click(button)
+      
+      expect(handleClick).toHaveBeenCalledTimes(1)
+    })
 
-  it("renders with left and right icons", () => {
-    const LeftIcon = () => <span data-testid="left-icon">←</span>;
-    const RightIcon = () => <span data-testid="right-icon">→</span>;
+    it('does not fire click event when disabled', async () => {
+      const handleClick = vi.fn()
+      render(
+        <GlassButton disabled onClick={handleClick}>
+          Disabled Button
+        </GlassButton>
+      )
+      
+      const button = screen.getByRole('button')
+      fireEvent.click(button)
+      
+      expect(handleClick).not.toHaveBeenCalled()
+    })
 
-    render(
-      <GlassButton leftIcon={<LeftIcon />} rightIcon={<RightIcon />}>
-        Button with Icons
-      </GlassButton>,
-    );
+    it('does not fire click event when loading', async () => {
+      const handleClick = vi.fn()
+      render(
+        <GlassButton loading onClick={handleClick}>
+          Loading Button
+        </GlassButton>
+      )
+      
+      const button = screen.getByRole('button')
+      fireEvent.click(button)
+      
+      expect(handleClick).not.toHaveBeenCalled()
+    })
 
-    expect(screen.getByTestId("left-icon")).toBeInTheDocument();
-    expect(screen.getByTestId("right-icon")).toBeInTheDocument();
-    expect(screen.getByText("Button with Icons")).toBeInTheDocument();
-  });
+    it('handles keyboard events', async () => {
+      const handleKeyDown = vi.fn()
+      render(<GlassButton onKeyDown={handleKeyDown}>Keyboard Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      fireEvent.keyDown(button, { key: 'Enter' })
+      
+      expect(handleKeyDown).toHaveBeenCalledTimes(1)
+    })
+  })
 
-  it("renders as child component when asChild is true", () => {
-    render(
-      <GlassButton asChild>
-        <a href="#test">Link Button</a>
-      </GlassButton>,
-    );
+  describe('Accessibility', () => {
+    it('has button role by default', () => {
+      render(<GlassButton>Accessible Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toBeInTheDocument()
+    })
 
-    const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", "#test");
-    expect(screen.getByText("Link Button")).toBeInTheDocument();
-  });
+    it('supports custom ARIA attributes', () => {
+      render(
+        <GlassButton aria-label="Custom Label" aria-describedby="description">
+          Button
+        </GlassButton>
+      )
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('aria-label', 'Custom Label')
+      expect(button).toHaveAttribute('aria-describedby', 'description')
+    })
 
-  it("renders icon-only button correctly", () => {
-    const Icon = () => <span data-testid="icon">★</span>;
-    render(
-      <GlassButton iconOnly>
-        <Icon />
-        Hidden Text
-      </GlassButton>,
-    );
+    it('is focusable when not disabled', () => {
+      render(<GlassButton>Focusable Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      button.focus()
+      
+      expect(document.activeElement).toBe(button)
+    })
 
-    expect(screen.getByTestId("icon")).toBeInTheDocument();
-    const hiddenText = screen.getByText("Hidden Text");
-    expect(hiddenText).toHaveClass("sr-only");
-  });
+    it('is not focusable when disabled', () => {
+      render(<GlassButton disabled>Disabled Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      button.focus()
+      
+      expect(document.activeElement).not.toBe(button)
+    })
 
-  it("shows loading text when provided", () => {
-    render(
-      <GlassButton loading loadingText="Saving...">
-        Save
-      </GlassButton>,
-    );
+    it('announces loading state to screen readers', () => {
+      render(
+        <GlassButton loading aria-live="polite">
+          Loading Button
+        </GlassButton>
+      )
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('aria-live', 'polite')
+    })
+  })
 
-    expect(screen.getByText("Saving...")).toBeInTheDocument();
-    expect(screen.queryByText("Save")).not.toBeInTheDocument();
-  });
+  describe('Type Prop', () => {
+    it('has type="button" by default', () => {
+      render(<GlassButton>Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('type', 'button')
+    })
 
-  it("has type='button' by default for all sizes", () => {
-    const { rerender } = render(<GlassButton size="sm">Small</GlassButton>);
-    let button = screen.getByRole("button");
-    expect(button).toHaveAttribute("type", "button");
+    it('can override button type', () => {
+      render(<GlassButton type="submit">Submit Button</GlassButton>)
+      
+      const button = screen.getByRole('button')
+      expect(button).toHaveAttribute('type', 'submit')
+    })
+  })
 
-    rerender(<GlassButton size="md">Medium</GlassButton>);
-    button = screen.getByRole("button");
-    expect(button).toHaveAttribute("type", "button");
+  describe('Complex Scenarios', () => {
+    it('combines multiple props correctly', () => {
+      const Icon = () => <span data-testid="icon">★</span>
+      const handleClick = vi.fn()
+      
+      render(
+        <GlassButton
+          variant="secondary"
+          size="lg" 
+          fullWidth
+          leftIcon={<Icon />}
+          onClick={handleClick}
+          className="custom-class"
+          data-testid="complex-button"
+        >
+          Complex Button
+        </GlassButton>
+      )
+      
+      const button = screen.getByTestId('complex-button')
+      
+      // Check variant classes
+      expect(button).toHaveClass('liquid-glass-button-secondary')
+      
+      // Check size classes
+      expect(button).toHaveClass('liquid-glass-lg', 'text-lg', 'px-8', 'py-4')
+      
+      // Check layout classes
+      expect(button).toHaveClass('w-full')
+      
+      // Check custom class
+      expect(button).toHaveClass('custom-class')
+      
+      // Check icon presence
+      expect(screen.getByTestId('icon')).toBeInTheDocument()
+      
+      // Check interactivity
+      fireEvent.click(button)
+      expect(handleClick).toHaveBeenCalled()
+    })
 
-    rerender(<GlassButton size="lg">Large</GlassButton>);
-    button = screen.getByRole("button");
-    expect(button).toHaveAttribute("type", "button");
-  });
-
-  it("can override button type", () => {
-    render(<GlassButton type="submit">Submit</GlassButton>);
-    const button = screen.getByRole("button");
-    expect(button).toHaveAttribute("type", "submit");
-  });
-});
+    it('transitions between states correctly', async () => {
+      const Component = ({ loading }: { loading: boolean }) => (
+        <GlassButton loading={loading} loadingText="Saving...">
+          Save Changes
+        </GlassButton>
+      )
+      
+      const { rerender } = render(<Component loading={false} />)
+      
+      // Initial state
+      expect(screen.getByText('Save Changes')).toBeInTheDocument()
+      expect(screen.getByRole('button')).not.toBeDisabled()
+      
+      // Loading state
+      rerender(<Component loading={true} />)
+      
+      await waitFor(() => {
+        expect(screen.getByText('Saving...')).toBeInTheDocument()
+        expect(screen.queryByText('Save Changes')).not.toBeInTheDocument()
+        expect(screen.getByRole('button')).toBeDisabled()
+      })
+      
+      // Back to normal state
+      rerender(<Component loading={false} />)
+      
+      await waitFor(() => {
+        expect(screen.getByText('Save Changes')).toBeInTheDocument()
+        expect(screen.queryByText('Saving...')).not.toBeInTheDocument()
+        expect(screen.getByRole('button')).not.toBeDisabled()
+      })
+    })
+  })
+})

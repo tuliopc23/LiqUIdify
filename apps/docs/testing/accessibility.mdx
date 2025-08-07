@@ -1,0 +1,25 @@
+---
+title: Accessibility testing
+---
+
+Principles
+- Test by roles and accessible names first
+- Ensure focus management: tabbable, focus trap, disabled states
+- ARIA where necessary; prefer native semantics
+
+What to assert
+- Roles: buttons, links, dialog, headings
+- Names: aria-label, aria-labelledby, text content
+- States: aria-busy, aria-pressed, aria-expanded
+- Keyboard: Enter/Space/Arrow/Tabs work
+
+Axe (optional)
+- Integrate @axe-core/react in setup for dev-time checks
+- Write targeted tests for a11y regressions on critical components
+
+Examples
+- expect(getByRole('dialog')).toBeInTheDocument()
+- expect(getByRole('button', { name: /save/i })).toBeEnabled()
+- await userEvent.tab()
+- expect(getByRole('button')).toHaveFocus()
+

@@ -1,0 +1,33 @@
+---
+title: Focus Trap
+description: Keep keyboard focus within a component for modal/dialog patterns.
+---
+
+Overview
+The Focus Trap component confines keyboard focus within its children, useful for modals, drawers, and other overlays.
+
+Import
+```ts
+import { GlassFocusTrap } from '@liquidify/components'
+```
+
+Usage
+```tsx
+<GlassFocusTrap active>
+  <div role="dialog" aria-modal="true">
+    <button>First</button>
+    <button>Middle</button>
+    <button>Last</button>
+  </div>
+</GlassFocusTrap>
+```
+
+Props
+- active: boolean — enable/disable trapping (default: true)
+- initialFocusRef?: React.RefObject<HTMLElement> — element to receive initial focus
+- restoreFocus?: boolean — return focus to trigger on unmount (default: true)
+
+Accessibility
+- Use aria-modal and appropriate roles on the trapped region (e.g., role="dialog").
+- Ensure a clear keyboard path to all interactive children.
+

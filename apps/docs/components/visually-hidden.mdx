@@ -1,0 +1,25 @@
+---
+title: Visually Hidden
+description: Hide content visually while keeping it accessible to screen readers.
+---
+
+Overview
+Use VisuallyHidden to provide additional context for screen readers without displaying text on screen.
+
+Import
+```ts
+import { VisuallyHidden } from '@liquidify/components'
+```
+
+Usage
+```tsx
+<button>
+  <IconSettings aria-hidden="true" />
+  <VisuallyHidden>Open settings</VisuallyHidden>
+</button>
+```
+
+Notes
+- Do not use to hide large content blocks that users may need.
+- Prefer native labels where possible.
+

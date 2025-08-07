@@ -1,0 +1,28 @@
+---
+title: Glass Form Field
+description: Field wrapper with label, help text, and error messaging.
+---
+
+Overview
+Glass Form Field standardizes labeling, description, and validation messaging.
+
+Import
+```ts
+import { GlassFormField } from '@liquidify/components'
+```
+
+Usage
+```tsx
+<GlassFormField label="Email" htmlFor="email" error={error}>
+  <input id="email" name="email" aria-invalid={!!error} aria-describedby="email-desc" />
+  <small id="email-desc">We will never share your email.</small>
+</GlassFormField>
+```
+
+Props
+- label: string | ReactNode
+- htmlFor: string
+- description?: ReactNode
+- error?: string | ReactNode
+- required?: boolean
+

@@ -16,30 +16,8 @@ export default defineConfig({
       browserslist: '>0.5%, last 2 versions, not dead, not IE 11',
       // Enable modern CSS features and optimizations
       cssModules: false,
-      // Custom Lightning CSS options for glassmorphism effects
-      lightningcssOptions: {
-        minify: true,
-        sourceMap: true,
-        targets: {
-          chrome: 95,
-          firefox: 91,
-          safari: 15,
-          edge: 95
-        },
-        drafts: {
-          customMedia: true,
-          nesting: true
-        },
-        pseudoClasses: {
-          hover: true,
-          focus: true,
-          focusVisible: true,
-          active: true
-        },
-        // Preserve important CSS variables for glassmorphism
-        unusedSymbols: ['glass', 'liquid', 'blur', 'backdrop']
-      }
-    }),
+      // Additional options not present in current type defs
+    } as any),
     dts({
       include: ['src/**/*'],
       exclude: [
@@ -55,10 +33,9 @@ export default defineConfig({
       ],
       outDir: '../../dist/libs/components',
       tsconfigPath: resolve(__dirname, 'tsconfig.lib.json'),
-      skipDiagnostics: true,
       staticImport: true,
       insertTypesEntry: true
-    })
+    } as any)
   ],
   build: {
     lib: {

@@ -232,7 +232,7 @@ const config: Config = {
     filters,
 
     // Custom Liquid Glass Plugin
-    function ({ addUtilities, addComponents, theme }) {
+    function ({ addUtilities, addComponents, theme }: any) {
       /* ============================================
          CORE LIQUID GLASS UTILITIES
          ============================================ */
