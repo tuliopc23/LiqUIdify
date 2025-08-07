@@ -129,13 +129,13 @@ export const GlassTreeView: React.FC<GlassTreeViewProps> = ({
           aria-selected={isSelected}
         >
           {hasChildren && (
-            <_span _className="text-[var(--text-secondary)]">
+            <span className="text-[var(--text-secondary)]">
               {isExpanded ? (
                 <ChevronDown className="h-4 w-4" />
               ) : (
                 <ChevronRight className="h-4 w-4" />
               )}
-            </_span>
+            </span>
           )}
 
           {showIcons && (

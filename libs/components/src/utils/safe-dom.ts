@@ -42,7 +42,7 @@ function _safeQuerySelector<T extends Element = Element>(
     return parent.querySelector<T>(selector);
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -70,14 +70,14 @@ function _safeGetComputedStyle(
 ): string | CSSStyleDeclaration | null {
   try {
     if (typeof window === "undefined" || !element) {
-      return;
+      return null;
     }
 
     const computedStyle = window.getComputedStyle(element);
     return property ? computedStyle.getPropertyValue(property) : computedStyle;
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -146,7 +146,7 @@ function _safeAddEventListener<K extends keyof HTMLElementEventMap>(
   options?: boolean | AddEventListenerOptions,
 ): (() => void) | null {
   if (!element) {
-    return;
+    return null;
   }
 
   try {
@@ -161,7 +161,7 @@ function _safeAddEventListener<K extends keyof HTMLElementEventMap>(
     };
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -197,14 +197,14 @@ export function safeRequestAnimationFrame(
  */
 export function safeCreateAudioContext(): AudioContext | null {
   if (typeof window === "undefined" || !("AudioContext" in window)) {
-    return;
+    return null;
   }
 
   try {
     return new AudioContext();
   } catch {
     // Logging disabled
-    return;
+    return null;
   }
 }
 
@@ -217,14 +217,14 @@ function _safeGetAttribute(
   fallback?: string,
 ): string | null {
   if (!element) {
-    return fallback ?? undefined;
+    return fallback ?? null;
   }
 
   try {
-    return element.getAttribute(name) ?? fallback ?? undefined;
+    return element.getAttribute(name) ?? fallback ?? null;
   } catch {
     // Logging disabled
-    return fallback ?? undefined;
+    return fallback ?? null;
   }
 }
 
@@ -262,7 +262,7 @@ function _safeGetStyle(
   }
 
   try {
-    return element.style[property as unknown] || fallback || "";
+    return (element.style as any)[property] || fallback || "";
   } catch {
     // Logging disabled
     return fallback || "";
@@ -282,7 +282,7 @@ function _safeSetStyle(
   }
 
   try {
-    (element.style as unknown)[property] = value;
+    (element.style as any)[property] = value;
     return true;
   } catch {
     // Logging disabled

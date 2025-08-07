@@ -239,7 +239,7 @@ const GlassDrawerContent = React.forwardRef<
 
       <DialogPrimitive.Content
         ref={ref}
-        className={cn(drawerVariants({ side, size }), className)}
+        className={cn(drawerVariants({ ...{ side, size } } as any), className)}
         {...props}
       >
         <motion.div

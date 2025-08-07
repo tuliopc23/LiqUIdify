@@ -19,6 +19,9 @@ export type VariantProps<T> = {
       : never;
 };
 
+// Alias for backward compatibility
+export type InferVariantProps<T> = VariantProps<T>;
+
 export interface ComponentVariants {
   variant?:
     | "default"
@@ -38,17 +41,54 @@ export interface GlassVariants extends ComponentVariants {
   opacity?: number;
 }
 
-export const createVariants = <
-  T extends Record<string, Record<string, string>>,
->(
-  variants: T,
-) => {
-  return (props: VariantProps<T>) => {
-    const classes: string[] = [];
+// More flexible variant config type
+type VariantConfig = Record<string, any>;
 
-    for (const [key, value] of Object.entries(props)) {
-      if (value && variants[key] && variants[key][value as string]) {
-        classes.push(variants[key][value as string]);
+export const createVariants = <T extends VariantConfig>(
+  config: T & { base?: string | string[]; defaults?: Partial<VariantProps<T>> },
+) => {
+  return (props?: VariantProps<T>) => {
+    const classes: string[] = [];
+    
+    // Add base classes if defined
+    if (config.base) {
+      if (Array.isArray(config.base)) {
+        classes.push(...config.base);
+      } else {
+        classes.push(config.base);
+      }
+    }
+
+    // Merge with defaults
+    const finalProps = { ...config.defaults, ...props };
+
+    // Process each variant
+    for (const [key, value] of Object.entries(finalProps)) {
+      if (value !== undefined && value !== null && config[key]) {
+        const variantValue = config[key];
+        
+        // Handle different variant structures
+        if (typeof variantValue === 'object' && !Array.isArray(variantValue)) {
+          // It's a variant map
+          const classValue = variantValue[value as string];
+          if (classValue) {
+            if (Array.isArray(classValue)) {
+              classes.push(...classValue);
+            } else if (typeof classValue === 'object') {
+              // Handle compound variants
+              if (classValue.class) {
+                classes.push(classValue.class);
+              }
+            } else {
+              classes.push(classValue);
+            }
+          }
+        } else if (typeof variantValue === 'string') {
+          // Direct string value
+          if (value === true) {
+            classes.push(variantValue);
+          }
+        }
       }
     }
 

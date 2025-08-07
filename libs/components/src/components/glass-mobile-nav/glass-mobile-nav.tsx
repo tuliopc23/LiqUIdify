@@ -131,6 +131,7 @@ interface GlassMobileNavProps
   header?: React.ReactNode;
   footer?: React.ReactNode;
   hamburgerLabel?: string;
+  size?: "sm" | "md" | "lg";
 }
 
 const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
@@ -256,7 +257,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
             onClick={() => handleItemClick(item)}
             disabled={item.disabled}
             className={cn(
-              navItemVariants({ size, isActive: isActive ? "true" : "false" }),
+              navItemVariants({ ...{ size, isActive: isActive ? "true" : "false" } } as any),
               item.disabled && "opacity-50 cursor-not-allowed",
               level > 0 && "ml-4 border-l border-[var(--liquid-glass-border)] pl-4",
             )}
@@ -329,7 +330,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
         animate={{ x: 0 }}
         exit={{ x: position === "right" ? "100%" : "-100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className={cn(drawerVariants({ position }))}
+        className={cn(drawerVariants({ ...{ position } } as any))}
         onKeyDown={handleKeyDown}
         role="navigation"
         aria-labelledby={`${navId}-label`}
@@ -379,7 +380,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
     return (
       <div
         ref={ref}
-        className={cn(mobileNavVariants({ size }), className)}
+        className={cn(mobileNavVariants({ ...{ size } } as any), className)}
         {...props}
       >
         {/* Hamburger Button */}
@@ -388,7 +389,7 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            hamburgerVariants({ size, isOpen: isOpen ? "true" : "false" }),
+            hamburgerVariants({ ...{ size, isOpen: isOpen ? "true" : "false" } } as any),
           )}
           aria-label={hamburgerLabel}
           aria-expanded={isOpen}

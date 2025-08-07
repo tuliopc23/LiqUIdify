@@ -23,9 +23,9 @@ const _isSSR = () => typeof window === "undefined";
 const _useIntersectionObserver = <T extends HTMLElement>(
   callback?: (entry: IntersectionObserverEntry) => void,
   options: IntersectionObserverInit = {},
-): [React.RefObject<T>, IntersectionObserverEntry | null] => {
+): [React.RefObject<T | null>, IntersectionObserverEntry | null] => {
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
-  const elementRef = useRef<T>(null);
+  const elementRef = useRef<T | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {

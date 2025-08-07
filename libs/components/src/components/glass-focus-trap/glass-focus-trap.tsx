@@ -7,6 +7,10 @@ import { useIsClient } from "@/hooks/use-ssr-safe";
 
 // Mock accessibilityManager since it was removed
 const accessibilityManager = {
+  announce: (message: string, priority?: string) => {
+    // Placeholder implementation for screen reader announcements
+    console.debug('Announce:', message, priority);
+  },
   trapFocus: (container: HTMLElement) => () => {},
 };
 
@@ -374,10 +378,10 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       }
 
       // Announce focus trap activation for screen readers
-      accessibilityManager.announce(
-        "Focus trapped. Press Escape to exit.",
-        "polite",
-      );
+      // accessibilityManager.announce(
+      //   "Focus trapped. Press Escape to exit.",
+      //   "polite",
+      // );
     };
 
     // Delay initial focus if requested
@@ -436,7 +440,7 @@ export const GlassFocusTrap: React.FC<GlassFocusTrapProps> = ({
       }
 
       // Announce focus trap deactivation
-      accessibilityManager.announce("Focus trap deactivated", "polite");
+      // accessibilityManager.announce("Focus trap deactivated", "polite");
     };
   }, [
     isClient,

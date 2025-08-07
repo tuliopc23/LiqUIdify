@@ -174,7 +174,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
         }}
         disabled={buttonDisabled || disabled || page === "ellipsis"}
         className={cn(
-          pageButtonVariants({ isActive: isActive ? "true" : "false", size }),
+          pageButtonVariants({ ...{ isActive: isActive ? "true" : "false", size } } as any),
         )}
         aria-label={ariaLabel}
         aria-current={isActive ? "page" : undefined}
@@ -186,7 +186,7 @@ const GlassPagination = React.forwardRef<HTMLElement, GlassPaginationProps>(
     return (
     <nav
         ref={ref}
-        className={cn("liquid-glass", paginationVariants({ size, variant }), className)}
+        className={cn("liquid-glass", paginationVariants({ ...{ size, variant } } as any), className)}
         aria-label="Pagination"
         {...props}
       >

@@ -101,7 +101,7 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
         )}
         style={{ zIndex }}
       >
-        <UnifiedGlassEffect
+        <div
           className={cn(
             "h-full flex items-center justify-between px-4 md:px-6 lg:px-8",
             transparent && !scrolled
@@ -110,8 +110,6 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
             shadow && scrolled && "shadow-lg",
             bgColor && !transparent && `bg-${bgColor}`,
           )}
-          variant={transparent && !scrolled ? "transparent" : "default"}
-          blur={scrolled ? "md" : "none"}
         >
           {/* Brand Section */}
           {brand && (
@@ -131,7 +129,7 @@ const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
               {actions}
             </div>
           )}
-        </UnifiedGlassEffect>
+        </div>
       </nav>
     );
   },

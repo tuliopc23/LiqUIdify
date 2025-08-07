@@ -30,7 +30,7 @@ function hexToRgb(hex: string): ColorRGB | null {
         g: Number.parseInt(result[2], 16),
         b: Number.parseInt(result[3], 16),
       }
-    : undefined;
+    : null;
 }
 
 /**

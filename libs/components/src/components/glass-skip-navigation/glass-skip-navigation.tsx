@@ -7,7 +7,7 @@ import { useIsClient } from "@/hooks/use-ssr-safe";
 
 // Mock accessibilityManager since it was removed
 const accessibilityManager = {
-  announce: (message: string) => console.debug(`Announced: ${message}`),
+  announce: (message: string, priority?: string) => console.debug(`Announced: ${message} (${priority || 'polite'})`),
 };
 
 interface SkipLink {
@@ -47,7 +47,7 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
   const [links, setLinks] = useState<Array<SkipLink>>(providedLinks || []);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
   const containerRef = useRef<HTMLDivElement>(null);
-  const linkReferences = useRef<HTMLAnchorElement | Array<null>>([]);
+  const linkReferences = useRef<(HTMLAnchorElement | null)[]>([]);
   const isClient = useIsClient();
 
   // Auto-generate skip links for landmarks
@@ -183,12 +183,12 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
       if (link.target.startsWith("#")) {
         targetElement =
           typeof document === "undefined"
-            ? undefined
+            ? null
             : document.querySelector(link.target);
       } else {
         targetElement =
           typeof document === "undefined"
-            ? undefined
+            ? null
             : document.getElementById(link.target);
       }
     } else {
@@ -270,9 +270,12 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
     if (handled) {
       event.preventDefault();
 
-      if (newIndex !== index && linkReferences.current[newIndex]) {
-        linkReferences.current[newIndex]?.focus();
-        setFocusedIndex(newIndex);
+      if (newIndex !== index) {
+        const element = linkReferences.current[newIndex];
+        if (element) {
+          element.focus();
+          setFocusedIndex(newIndex);
+        }
       }
     }
   };
@@ -304,7 +307,9 @@ export const GlassSkipNavigation: React.FC<GlassSkipNavigationProps> = ({
         <a
           key={link.id}
           ref={(element) => {
-            linkReferences.current[index] = element;
+            if (linkReferences.current) {
+              linkReferences.current[index] = element;
+            }
           }}
           href={typeof link.target === "string" ? link.target : `#${link.id}`}
           className={cn(
@@ -375,12 +380,12 @@ function _useSkipNavigation() {
       if (link.target.startsWith("#")) {
         targetElement =
           typeof document === "undefined"
-            ? undefined
+            ? null
             : document.querySelector(link.target);
       } else {
         targetElement =
           typeof document === "undefined"
-            ? undefined
+            ? null
             : document.getElementById(link.target);
       }
     } else {

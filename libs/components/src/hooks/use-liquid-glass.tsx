@@ -59,10 +59,10 @@ const defaultConfig: Required<LiquidGlassConfig> = {
 
 const LiquidGlassContext = createContext<
   LiquidGlassConfig & {
-    contentAnalysis?: ContentAnalysis;
+    contentAnalysis?: ContentAnalysis | null;
     updateGlassStyle: (_analysis: ContentAnalysis) => void;
   }
->(defaultConfig as unknown);
+>(defaultConfig as any);
 
 export function LiquidGlassProvider({
   children,
@@ -72,14 +72,14 @@ export function LiquidGlassProvider({
   config?: LiquidGlassConfig;
 }) {
   const merged = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
-  const [contentAnalysis, setContentAnalysis] = useState<ContentAnalysis>();
+  const [contentAnalysis, setContentAnalysis] = useState<ContentAnalysis | null>(null);
 
   const updateGlassStyle = useCallback(
     (analysis: ContentAnalysis) => {
       setContentAnalysis(analysis);
 
       if (!merged.adaptToContent) {
-        return;
+        return null;
       }
 
       const root = document.documentElement;
@@ -124,21 +124,21 @@ export function LiquidGlassProvider({
 
     // Set liquid glass tokens
     for (const [key, value] of Object.entries(
-      liquidGlassTokens.colors.glass.white,
+      (liquidGlassTokens.colors as any).glass?.white || "#ffffff",
     )) {
       root.style.setProperty(`--liquid-glass-${key}`, value as string);
     }
 
     // Set shadow tokens
     for (const [key, value] of Object.entries(
-      liquidGlassTokens.shadows.glass,
+      (liquidGlassTokens as any).shadows?.glass || "0 4px 6px rgba(0,0,0,0.1)",
     )) {
       root.style.setProperty(`--liquid-shadow-${key}`, value as string);
     }
 
     // Set timing tokens
     for (const [key, value] of Object.entries(
-      liquidGlassTokens.animation.duration,
+      (liquidGlassTokens as any).animation?.duration || "300ms",
     )) {
       root.style.setProperty(`--liquid-timing-${key}`, value as string);
     }
@@ -167,7 +167,7 @@ const _useContentAwareGlass = (contentRef: React.RefObject<HTMLElement>) => {
 
   const analyzeContent = useCallback(async () => {
     if (!contentRef.current || !adaptToContent) {
-      return;
+      return null;
     }
 
     try {
@@ -250,7 +250,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
       // Logging disabled
     }
 
-    return;
+    return null;
   }
 
   try {
@@ -282,7 +282,7 @@ function analyzeColor(colorString: string): ContentAnalysis | null {
         // Logging disabled
       }
 
-      return;
+      return null;
     }
 
     // Calculate brightness (luminance)

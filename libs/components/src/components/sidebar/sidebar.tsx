@@ -118,15 +118,13 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
     };
 
     const sidebarContent = (
-      <UnifiedGlassEffect
+      <div
         ref={ref}
         className={cn(
           "h-full flex flex-col",
           positionClasses[position].rounded,
           className,
         )}
-        variant="default"
-        blur="md"
       >
         {/* Header */}
         {header && (
@@ -163,7 +161,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
 
         {/* Footer */}
         {footer && <div className="p-4 border-t border-white/10">{footer}</div>}
-      </UnifiedGlassEffect>
+      </div>
     );
 
     if (push) {

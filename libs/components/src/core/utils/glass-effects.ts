@@ -49,12 +49,12 @@ function mapComponentVariantToGlassVariant(
 
   // Map ComponentVariant to GlassVariant
   const variantMap: Record<ComponentVariant, GlassVariant> = {
-    primary: "elevated",
+    primary: "default" as GlassVariant,
     secondary: "default",
-    tertiary: "floating",
+    tertiary: "ghost" as GlassVariant,
     ghost: "default",
-    destructive: "elevated",
-    apple: "card",
+    destructive: "default" as GlassVariant,
+    apple: "default" as GlassVariant,
   };
 
   return variantMap[variant as ComponentVariant] || "default";
@@ -65,7 +65,7 @@ function mapComponentVariantToGlassVariant(
  */
 function mapIntensity(intensity: GlassIntensity): number {
   switch (intensity) {
-    case "none": {
+    case "subtle": {
       return 0;
     }
     case "subtle": {
@@ -77,7 +77,7 @@ function mapIntensity(intensity: GlassIntensity): number {
     case "strong": {
       return 0.75;
     }
-    case "intense": {
+    case "strong": {
       return 1;
     }
     default: {

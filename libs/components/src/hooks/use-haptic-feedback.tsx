@@ -287,7 +287,7 @@ function useHapticFeedback(config: HapticFeedbackConfig = {}) {
       try {
         const context = initAudioContext();
         if (!context) {
-          return;
+          return null;
         }
 
         const response = await fetch(url);
@@ -296,7 +296,7 @@ function useHapticFeedback(config: HapticFeedbackConfig = {}) {
       } catch {
         // Logging disabled
 
-        return;
+        return null;
       }
     };
 
@@ -470,7 +470,7 @@ interface HapticContextValue {
   trigger: (_type: HapticType, _element?: HTMLElement | null) => void;
 }
 
-const HapticContext = createContext<HapticContextValue | null>(undefined);
+const HapticContext = createContext<HapticContextValue | null>(null);
 
 export function HapticProvider({
   children,

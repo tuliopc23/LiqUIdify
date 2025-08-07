@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 
 interface RovingTabindexOptions {
   items: Array<HTMLElement>;
@@ -313,7 +313,7 @@ export function useRovingTabindex(
  * RovingTabindexGroup component for declarative usage
  */
 interface RovingTabindexGroupProps {
-  children: React.Array<ReactElement>;
+  children: React.ReactElement[];
   orientation?: "horizontal" | "vertical" | "both";
   loop?: boolean;
   preventScroll?: boolean;
@@ -333,12 +333,12 @@ export function RovingTabindexGroup({
   role,
   "aria-label": ariaLabel,
 }: RovingTabindexGroupProps) {
-  const itemReferences = useRef<HTMLElement | Array<null>>([]);
+  const itemReferences = useRef<(HTMLElement | null)[]>([]);
   const [items, setItems] = useState<Array<HTMLElement>>([]);
 
   // Collect item refs
   useEffect(() => {
-    const validItems = itemReferences.current.filter(
+    const validItems = (itemReferences.current as (HTMLElement | null)[]).filter(
       (item): item is HTMLElement => item !== null,
     );
     setItems(validItems);
@@ -352,27 +352,40 @@ export function RovingTabindexGroup({
     onActiveChange,
   });
 
-  // Clone children with roving props
+  // Clone children with roving props - simplified approach
   const enhancedChildren = children.map((child, index) => {
     if (!React.isValidElement(child)) {
       return child;
     }
 
-    return React.cloneElement(child, {
-      ...roving.getRovingProps(index),
+    // Get the roving props for this index
+    const rovingProps = roving.getRovingProps(index);
+    
+    // Safely get child props
+    const childElement = child as React.ReactElement<any>;
+    const childProps = childElement.props || {};
+    
+    // Create a properly typed props object
+    const enhancedProps: any = {
+      ...childProps,
+      ...rovingProps,
       ref: (element: HTMLElement | null) => {
+        // Store the element reference
         itemReferences.current[index] = element;
-        // Preserve original ref if exists
-        const originalRef = (child as unknown).ref;
+        
+        // Handle original ref if it exists
+        const originalRef = (childElement as any).ref;
         if (originalRef) {
           if (typeof originalRef === "function") {
             originalRef(element);
-          } else {
+          } else if (originalRef && typeof originalRef === "object") {
             originalRef.current = element;
           }
         }
       },
-    } as unknown);
+    };
+
+    return React.cloneElement(child, enhancedProps);
   });
 
   return (
@@ -497,7 +510,7 @@ function _useGridRovingTabindex(options: GridRovingTabindexOptions) {
         attempts++;
       }
 
-      return;
+      return null;
     },
     [items, wrap],
   );

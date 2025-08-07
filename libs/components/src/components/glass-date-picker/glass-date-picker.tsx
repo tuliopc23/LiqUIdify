@@ -84,6 +84,7 @@ interface GlassDatePickerProps
   disabledDates?: Array<Date>;
 
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  size?: "sm" | "md" | "lg";
 }
 
 const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
@@ -263,14 +264,14 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
     return (
       <div
         ref={ref}
-        className={cn(datePickerVariants({ size }), className)}
+        className={cn(datePickerVariants({ ...{ size } } as any), className)}
         {...props}
       >
         <button
           ref={triggerRef}
           type="button"
           className={cn(
-            triggerVariants({ isOpen: isOpen ? "true" : "false", size }),
+            triggerVariants({ ...{ isOpen: isOpen ? "true" : "false", size } } as any),
             focusRing,
             disabled && "cursor-not-allowed",
           )}

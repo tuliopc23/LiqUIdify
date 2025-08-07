@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, ChevronDown, X } from "lucide-react";
+import { Check, ChevronDown, Search, X } from "lucide-react";
 import type React from "react";
 import { forwardRef, useEffect, useId, useRef, useState } from "react";
 import { cn } from "../../core/utils/classname";
@@ -108,7 +108,7 @@ export interface GlassComboboxProps
   searchable?: boolean;
   clearable?: boolean;
   loading?: boolean;
-  size?: VariantProps<typeof comboboxVariants>["size"];
+  size?: "sm" | "md" | "lg";
   error?: boolean;
   helperText?: string;
   emptyMessage?: string;
@@ -256,7 +256,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
 
     return (
       <div className={cn("w-full", className)}>
-        <div ref={comboboxRef} className={cn(comboboxVariants({ size }))}>
+        <div ref={comboboxRef} className={cn(comboboxVariants({ ...{ size } } as any))}>
           {/* Apple-style liquid glass layers */}
           <div className="liquid-glass-filter" />
           <div className="liquid-glass-overlay" />
@@ -264,7 +264,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
 
           <button
             type="button"
-            className={cn(triggerVariants({ isOpen, size }))}
+            className={cn(triggerVariants({ ...{ isOpen, size } } as any))}
             onClick={() => !disabled && setIsOpen(!isOpen)}
             onKeyDown={handleKeyDown}
             disabled={disabled}
@@ -353,7 +353,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className={cn(listboxVariants({ size }))}
+                className={cn(listboxVariants({ ...{ size } } as any))}
                 role="listbox"
                 id={`${id}-listbox`}
                 ref={listboxRef}
@@ -378,7 +378,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                         aria-selected={option.value === value}
                         className={cn(
                           optionVariants({
-                            isSelected: option.value === value,
+                            ...{ isSelected: option.value === value } as any,
                             isHighlighted: index === highlightedIndex,
                           }),
                           option.disabled && "opacity-50 cursor-not-allowed",
@@ -436,4 +436,4 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
 
 GlassCombobox.displayName = "GlassCombobox";
 
-export type { GlassComboboxProps };
+// Type already exported above

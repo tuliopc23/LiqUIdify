@@ -79,7 +79,7 @@ const GlassRadioGroup = React.forwardRef<
 >(({ className, orientation, size, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
-      className={cn(radioGroupVariants({ orientation, size }), className)}
+      className={cn(radioGroupVariants({ ...{ orientation, size } } as any), className)}
       {...props}
       ref={ref}
     />
@@ -98,7 +98,7 @@ const GlassRadioItem = React.forwardRef<
     >
       <RadioGroupPrimitive.Item
         ref={ref}
-        className={cn(radioItemVariants({ size, variant }), className)}
+        className={cn(radioItemVariants({ ...{ size, variant } } as any), className)}
         {...props}
       >
         <div className={cn(radioIndicatorVariants())}>

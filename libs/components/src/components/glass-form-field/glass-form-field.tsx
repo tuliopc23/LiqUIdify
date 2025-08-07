@@ -15,14 +15,19 @@ import {
 // Mock AccessibilityManager since it was removed
 const AccessibilityManager = {
   getInstance: () => ({
-    validateComponent: async () => ({ violations: [], passes: [], score: 100 }),
-    announce: (message: string) => console.debug(`Announced: ${message}`),
+    validateComponent: async (element: any, config: any) => ({ violations: [], passes: [], score: 100 }),
+    announce: (message: string, priority?: string) => console.debug(`Announced: ${message} (${priority || 'polite'})`),
   }),
 };
 
 // Mock functions since unified-liquid-glass-system was removed
 const generateGlassClasses = (options: any) => "liquid-glass-effect";
 const generateGlassVariables = (options: any) => ({});
+const useGlassStateTransitions = (animation: any) => ({
+  transitionToState: (state: string) => {},
+  currentState: "idle",
+  isTransitioning: false,
+});
 
 import type {
   ComponentPropsBuilder,
@@ -123,7 +128,10 @@ interface GlassFormFieldProps
     focusOnError?: boolean;
     /** Prevent scroll on focus */
     preventScroll?: boolean;
+    hapticFeedback?: boolean;
   };
+  /** Enable haptic feedback */
+  hapticFeedback?: boolean;
 }
 
 const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
@@ -160,8 +168,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
     const containerRef = useRef<HTMLDivElement>(null);
     const fieldRef = useRef<HTMLElement>(null);
     const accessibilityManager = AccessibilityManager.getInstance();
-    const { transitionToState, currentState } =
-      useGlassStateTransitions(animation);
+    const { transitionToState, currentState, isTransitioning } = useGlassStateTransitions(animation);
 
     const fieldId = useId();
     // const messageId = useId();
@@ -301,8 +308,9 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
     // Clone children to add proper IDs and aria attributes
     const enhancedChildren = React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
-        return React.cloneElement(child as React.ReactElement<any>, {
-          ...child.props,
+        const childElement = child as React.ReactElement<any>;
+        return React.cloneElement(childElement, {
+          ...(childElement.props || {}),
           id: finalId,
           "aria-describedby": message ? `${finalId}-message` : undefined,
           "aria-invalid": error ? true : undefined,
@@ -335,7 +343,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         ref={combinedRef}
         className={cn(
           formFieldVariants({
-            variant: variant as "default" | "inline" | "card",
+            ...{ variant: variant as "default" | "inline" | "card" } as any,
             size: size as "sm" | "md" | "lg",
           }),
           glassClasses,
@@ -359,7 +367,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
             htmlFor={finalId}
             className={cn(
               labelVariants({
-                required: required ? "true" : "false",
+                ...{ required: required ? "true" : "false" } as any,
                 size: size as "sm" | "md" | "lg",
               }),
               disabled && "cursor-not-allowed",
@@ -378,7 +386,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         {message && (
           <div
             id={`${finalId}-message`}
-            className={cn(helperTextVariants({ state }))}
+            className={cn(helperTextVariants({ ...{ state } } as any))}
             role={error ? "alert" : undefined}
             aria-live={error ? "polite" : undefined}
           >

@@ -99,45 +99,28 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
 
     return (
       <CardContext.Provider value={contextValue}>
-        {interactive || onClick ? (
-          <button
-            ref={ref as React.RefObject<HTMLButtonElement>}
-            className={cardClasses}
-            onClick={onClick}
-            type="button"
-            {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
-          >
-            {/* Glass Filter Layer */}
-            <div className="liquid-glass-filter" />
+        <div 
+          ref={ref} 
+          className={cardClasses} 
+          onClick={onClick}
+          role={interactive || onClick ? "button" : undefined}
+          tabIndex={interactive || onClick ? 0 : undefined}
+          {...props}
+        >
+          {/* Glass Filter Layer */}
+          <div className="liquid-glass-filter" />
 
-            {/* Glass Overlay Layer */}
-            <div className="liquid-glass-overlay" />
+          {/* Glass Overlay Layer */}
+          <div className="liquid-glass-overlay" />
 
-            {/* Glass Specular Layer */}
-            <div className="liquid-glass-specular" />
+          {/* Glass Specular Layer */}
+          <div className="liquid-glass-specular" />
 
-            {/* Content Layer */}
-            <div className="liquid-glass-content flex-col items-start justify-start">
-              {children}
-            </div>
-          </button>
-        ) : (
-          <div ref={ref} className={cardClasses} onClick={onClick} {...props}>
-            {/* Glass Filter Layer */}
-            <div className="liquid-glass-filter" />
-
-            {/* Glass Overlay Layer */}
-            <div className="liquid-glass-overlay" />
-
-            {/* Glass Specular Layer */}
-            <div className="liquid-glass-specular" />
-
-            {/* Content Layer */}
-            <div className="liquid-glass-content flex-col items-start justify-start">
-              {children}
-            </div>
+          {/* Content Layer */}
+          <div className="liquid-glass-content flex-col items-start justify-start">
+            {children}
           </div>
-        )}
+        </div>
       </CardContext.Provider>
     );
   },
@@ -247,6 +230,17 @@ const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   },
 );
 
+// Define compound component type
+interface GlassCardComponent extends React.ForwardRefExoticComponent<
+  GlassCardProps & React.RefAttributes<HTMLDivElement>
+> {
+  Header: typeof CardHeader;
+  Title: typeof CardTitle;
+  Description: typeof CardDescription;
+  Content: typeof CardContent;
+  Footer: typeof CardFooter;
+}
+
 // Set display names
 GlassCard.displayName = "GlassCard";
 CardHeader.displayName = "CardHeader";
@@ -255,12 +249,15 @@ CardDescription.displayName = "CardDescription";
 CardContent.displayName = "CardContent";
 CardFooter.displayName = "CardFooter";
 
+// Cast to include compound components
+const TypedGlassCard = GlassCard as GlassCardComponent;
+
 // Compound component pattern
-GlassCard.Header = CardHeader;
-GlassCard.Title = CardTitle;
-GlassCard.Description = CardDescription;
-GlassCard.Content = CardContent;
-GlassCard.Footer = CardFooter;
+TypedGlassCard.Header = CardHeader;
+TypedGlassCard.Title = CardTitle;
+TypedGlassCard.Description = CardDescription;
+TypedGlassCard.Content = CardContent;
+TypedGlassCard.Footer = CardFooter;
 
 // Export types
 export type {

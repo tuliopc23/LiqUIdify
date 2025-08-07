@@ -161,7 +161,7 @@ const VALID_THEMES = [
 ] as const;
 
 const _createThemeName = (name: string): ThemeName => {
-  if (!VALID_THEMES.includes(name as unknown)) {
+  if (!VALID_THEMES.includes(name as any)) {
     throw new Error(
       `Invalid theme name: ${name}. Valid themes: ${VALID_THEMES.join(", ")}`,
     );
@@ -180,7 +180,7 @@ export type ComponentSize = Brand<string, "ComponentSize">;
 const VALID_SIZES = ["xs", "sm", "md", "lg", "xl"] as const;
 
 export const createComponentSize = (size: string): ComponentSize => {
-  if (!VALID_SIZES.includes(size as unknown)) {
+  if (!VALID_SIZES.includes(size as any)) {
     throw new Error(
       `Invalid component size: ${size}. Valid sizes: ${VALID_SIZES.join(", ")}`,
     );
@@ -214,10 +214,10 @@ const _isBrandedType = {
     typeof value === "number" && value >= -999 && value <= 9999,
 
   isThemeName: (value: unknown): value is ThemeName =>
-    typeof value === "string" && VALID_THEMES.includes(value as unknown),
+    typeof value === "string" && VALID_THEMES.includes(value as any),
 
   isComponentSize: (value: unknown): value is ComponentSize =>
-    typeof value === "string" && VALID_SIZES.includes(value as unknown),
+    typeof value === "string" && VALID_SIZES.includes(value as any),
 };
 
 /**

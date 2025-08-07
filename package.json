@@ -46,6 +46,7 @@
     "tailwindcss-filters": "^3.0.0",
     "typescript": "^5.9.2",
     "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lightningcss": "^0.0.5",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
@@ -202,7 +203,7 @@
     "audit:components": "node scripts/component-audit.js",
     "audit:security": "node scripts/security-audit.js",
     "build": "bun run build:lib && bun run build:storybook",
-    "build:lib": "bun run clean && bunx vite build -c libs/components/rolldown.config.ts",
+    "build:lib": "bun run clean && bunx vite build -c libs/components/rolldown.config.ts && bun run build:types",
     "build:types": "bunx tsc -p libs/components/tsconfig.lib.json",
     "build:storybook": "storybook build -c apps/storybook/.storybook -o apps/storybook/storybook-static",
     "build:watch": "bunx rolldown -c libs/components/rolldown.config.ts --watch",

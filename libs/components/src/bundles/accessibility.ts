@@ -7,8 +7,9 @@
 
 // Internal imports sorted alphabetically by type
 // Accessibility Components
-export * from "../components/glass-accessible-demo";
-export * from "../components/glass-focus-demo";
+// Demo components moved to examples folder
+// export * from '../examples/glass-accessible-demo';
+// export * from '../examples/glass-focus-demo';
 export * from "../components/glass-focus-trap";
 export * from "../components/glass-skip-navigation";
 

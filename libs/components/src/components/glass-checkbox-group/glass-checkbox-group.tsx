@@ -214,7 +214,7 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
           aria-required={required}
           aria-invalid={!!error}
           className={cn(
-            checkboxGroupVariants({ groupSize: size, orientation }),
+            checkboxGroupVariants({ ...{ groupSize: size, orientation } } as any),
           )}
         >
           {options.map((option) => {
@@ -228,7 +228,7 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
                 htmlFor={checkboxId}
                 className={cn(
                   checkboxItemVariants({
-                    itemSize: size,
+                    ...{ itemSize: size } as any,
                     disabled: isDisabled ? "true" : "false",
                   }),
                 )}
@@ -242,7 +242,7 @@ const GlassCheckboxGroup = forwardRef<HTMLDivElement, GlassCheckboxGroupProps>(
                   disabled={isDisabled}
                   onChange={(e) => handleChange(option.value, e.target.checked)}
                   onKeyDown={(e) => handleKeyDown(e, option.value)}
-                  className={cn(checkboxInputVariants({ inputSize: size }))}
+                  className={cn(checkboxInputVariants({ ...{ inputSize: size } } as any))}
                   aria-describedby={
                     option.description ? `${checkboxId}-desc` : undefined
                   }
