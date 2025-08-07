@@ -1,11 +1,11 @@
 ---
 title: "GlassCard"
-description: "A versatile glassmorphism card component with compound components"
+description: "A versatile glassmorphism card component with compound components for building beautiful content containers"
 ---
 
 # GlassCard
 
-The `GlassCard` component provides a flexible container with beautiful glass effects. It follows the compound components pattern for maximum flexibility.
+The `GlassCard` component provides a flexible, accessible container with stunning glass effects. Built with a compound component pattern, it offers maximum flexibility while maintaining consistent styling and behavior.
 
 ## Import
 
@@ -15,22 +15,92 @@ import { GlassCard } from "@liquidify/components";
 
 ## Basic Usage
 
-```tsx
-<GlassCard>
+<CodeGroup>
+
+```tsx Simple Card
+<GlassCard variant="elevated" className="max-w-sm">
   <GlassCard.Header>
-    <GlassCard.Title>Card Title</GlassCard.Title>
-    <GlassCard.Description>Card description text</GlassCard.Description>
+    <GlassCard.Title>Welcome</GlassCard.Title>
+    <GlassCard.Description>
+      Get started with our platform today
+    </GlassCard.Description>
   </GlassCard.Header>
 
   <GlassCard.Content>
-    <p>Card content goes here</p>
+    <p className="text-sm text-gray-600">
+      Join thousands of users building amazing applications 
+      with our glassmorphism components.
+    </p>
   </GlassCard.Content>
 
-  <GlassCard.Footer>
-    <GlassButton>Action</GlassButton>
-  </GlassCard.Footer>
+  <GlassCard.Actions>
+    <GlassButton variant="ghost">Learn More</GlassButton>
+    <GlassButton variant="primary">Get Started</GlassButton>
+  </GlassCard.Actions>
 </GlassCard>
 ```
+
+```tsx User Profile Card
+<GlassCard variant="flat" className="max-w-md">
+  <GlassCard.Header className="pb-2">
+    <div className="flex items-center gap-4">
+      <GlassAvatar 
+        src="/avatar.jpg" 
+        fallback="JD" 
+        size="lg"
+      />
+      <div>
+        <GlassCard.Title className="text-lg">John Doe</GlassCard.Title>
+        <GlassCard.Description>
+          Senior Frontend Developer
+        </GlassCard.Description>
+      </div>
+    </div>
+  </GlassCard.Header>
+
+  <GlassCard.Content>
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm">
+        <span>Projects</span>
+        <span className="font-semibold">42</span>
+      </div>
+      <div className="flex justify-between text-sm">
+        <span>Followers</span>
+        <span className="font-semibold">1.2k</span>
+      </div>
+      <div className="flex justify-between text-sm">
+        <span>Following</span>
+        <span className="font-semibold">347</span>
+      </div>
+    </div>
+  </GlassCard.Content>
+
+  <GlassCard.Actions>
+    <GlassButton variant="secondary" fullWidth>
+      Follow
+    </GlassButton>
+  </GlassCard.Actions>
+</GlassCard>
+```
+
+```tsx Dashboard Card
+<GlassCard variant="elevated" className="p-6">
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-lg font-semibold">Revenue</h3>
+    <GlassBadge variant="success">+12.5%</GlassBadge>
+  </div>
+  
+  <div className="space-y-2">
+    <p className="text-3xl font-bold">$12,345</p>
+    <p className="text-sm text-gray-500">
+      vs. $10,987 last month
+    </p>
+    <GlassProgress value={75} className="mt-4" />
+  </div>
+</GlassCard>
+```
+
+</CodeGroup>
 
 ## Compound Components
 

@@ -1,13 +1,19 @@
 ---
 title: "Quick Start"
-description: "Get up and running with LiqUIdify in minutes"
+description: "Get up and running with LiqUIdify in under 5 minutes. Build your first glassmorphism component with our step-by-step guide."
 ---
 
-# Quick Start
+# Quick Start Guide
 
-Get LiqUIdify set up in your React project in just a few minutes.
+Get started with LiqUIdify in just a few steps. This guide will help you install the library and create your first glassmorphism component.
 
-## Installation
+<Note>
+  Before you begin, make sure you have Node.js 18+ and a React 18+ project set up.
+</Note>
+
+## Step 1: Installation
+
+Choose your preferred package manager to install LiqUIdify:
 
 <CodeGroup>
 
@@ -15,7 +21,7 @@ Get LiqUIdify set up in your React project in just a few minutes.
 npm install @liquidify/components
 ```
 
-```bash yarn
+```bash yarn  
 yarn add @liquidify/components
 ```
 
@@ -29,24 +35,106 @@ bun add @liquidify/components
 
 </CodeGroup>
 
-## Setup Provider
+## Step 2: Import Styles
 
-Wrap your application with the `UnifiedGlassProvider` to enable theme management and glass effects:
+Import the LiqUIdify styles in your app's entry point (usually `src/main.tsx`, `src/index.tsx`, or `pages/_app.tsx`):
+
+<CodeGroup>
+
+```tsx React/Vite
+// src/main.tsx or src/index.tsx
+import "@liquidify/components/css";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+```tsx Next.js
+// pages/_app.tsx
+import "@liquidify/components/css";
+import type { AppProps } from "next/app";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
+}
+```
+
+```tsx Next.js 13+ (App Router)
+// app/layout.tsx
+import "@liquidify/components/css";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+</CodeGroup>
+
+## Step 3: Add the Provider
+
+Wrap your app with the `UnifiedGlassProvider` to enable glass effects and theme management:
 
 <CodeGroup>
 
 ```tsx React
+// src/App.tsx
 import { UnifiedGlassProvider } from "@liquidify/components";
 import "@liquidify/components/css";
 
 function App() {
-  return <UnifiedGlassProvider>{/* Your app content */}</UnifiedGlassProvider>;
+  return (
+    <UnifiedGlassProvider>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+        {/* Your app content */}
+      </div>
+    </UnifiedGlassProvider>
+  );
+}
+
+export default App;
+```
+
+```tsx Next.js
+// pages/_app.tsx
+import { UnifiedGlassProvider } from "@liquidify/components";
+import "@liquidify/components/css";
+import type { AppProps } from "next/app";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <UnifiedGlassProvider>
+      <Component {...pageProps} />
+    </UnifiedGlassProvider>
+  );
 }
 ```
 
-```tsx Next.js App Router
-// app/layout.tsx
+```tsx Next.js 13+ (App Router)
+// app/providers.tsx
+"use client";
+
 import { UnifiedGlassProvider } from "@liquidify/components";
+
+export default function Providers({ children }: { children: React.ReactNode }) {
+  return <UnifiedGlassProvider>{children}</UnifiedGlassProvider>;
+}
+
+// app/layout.tsx
+import Providers from "./providers";
 import "@liquidify/components/css";
 
 export default function RootLayout({
@@ -57,63 +145,152 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <UnifiedGlassProvider>{children}</UnifiedGlassProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
 ```
 
-```tsx Next.js Pages Router
-// pages/_app.tsx
-import { UnifiedGlassProvider } from "@liquidify/components";
-import "@liquidify/components/css";
+</CodeGroup>
 
-export default function App({ Component, pageProps }) {
+## Step 4: Create Your First Component
+
+Now let's create a simple example using LiqUIdify components:
+
+<CodeGroup>
+
+```tsx Basic Example
+import { 
+  GlassButton, 
+  GlassCard, 
+  GlassInput 
+} from "@liquidify/components";
+
+export default function Welcome() {
   return (
-    <UnifiedGlassProvider>
-      <Component {...pageProps} />
-    </UnifiedGlassProvider>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-8">
+      <div className="max-w-md mx-auto mt-16">
+        <GlassCard variant="elevated" className="p-8">
+          <h1 className="text-2xl font-bold text-gray-900 mb-6">
+            Welcome to LiqUIdify
+          </h1>
+          
+          <div className="space-y-4">
+            <GlassInput 
+              placeholder="Enter your email" 
+              type="email"
+            />
+            
+            <GlassButton 
+              variant="primary" 
+              size="lg" 
+              fullWidth
+            >
+              Get Started
+            </GlassButton>
+          </div>
+        </GlassCard>
+      </div>
+    </div>
+  );
+}
+```
+
+```tsx Advanced Example
+import { 
+  GlassButton, 
+  GlassCard, 
+  GlassInput,
+  GlassAvatar,
+  GlassBadge,
+  GlassProgress
+} from "@liquidify/components";
+import { useState } from "react";
+
+export default function Dashboard() {
+  const [progress, setProgress] = useState(75);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 p-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <GlassCard variant="flat" className="p-6 mb-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <GlassAvatar 
+                src="/avatar.jpg" 
+                fallback="JD"
+                size="lg" 
+              />
+              <div>
+                <h1 className="text-xl font-semibold text-gray-900">
+                  John Doe
+                </h1>
+                <GlassBadge variant="success">Pro Member</GlassBadge>
+              </div>
+            </div>
+            
+            <GlassButton variant="primary">
+              Upgrade Plan
+            </GlassButton>
+          </div>
+        </GlassCard>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <GlassCard variant="elevated" className="p-6">
+            <h3 className="text-sm font-medium text-gray-500 mb-2">
+              Projects Completed
+            </h3>
+            <p className="text-3xl font-bold text-gray-900">24</p>
+          </GlassCard>
+          
+          <GlassCard variant="elevated" className="p-6">
+            <h3 className="text-sm font-medium text-gray-500 mb-2">
+              Team Members
+            </h3>
+            <p className="text-3xl font-bold text-gray-900">12</p>
+          </GlassCard>
+          
+          <GlassCard variant="elevated" className="p-6">
+            <h3 className="text-sm font-medium text-gray-500 mb-2">
+              Success Rate
+            </h3>
+            <p className="text-3xl font-bold text-gray-900">98%</p>
+          </GlassCard>
+        </div>
+
+        {/* Progress Section */}
+        <GlassCard variant="elevated" className="p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Project Progress
+          </h3>
+          <GlassProgress value={progress} className="mb-4" />
+          <div className="flex gap-2">
+            <GlassButton 
+              size="sm" 
+              variant="secondary"
+              onClick={() => setProgress(Math.max(0, progress - 10))}
+            >
+              -10%
+            </GlassButton>
+            <GlassButton 
+              size="sm" 
+              variant="secondary"
+              onClick={() => setProgress(Math.min(100, progress + 10))}
+            >
+              +10%
+            </GlassButton>
+          </div>
+        </GlassCard>
+      </div>
+    </div>
   );
 }
 ```
 
 </CodeGroup>
-
-## Your First Component
-
-Let's create a simple glass card with a button:
-
-```tsx
-import { GlassCard, GlassButton } from "@liquidify/components";
-
-export default function MyComponent() {
-  return (
-    <GlassCard variant="elevated" className="p-6 max-w-md">
-      <GlassCard.Header>
-        <GlassCard.Title>Welcome to LiqUIdify</GlassCard.Title>
-        <GlassCard.Description>
-          Beautiful glassmorphism components for React
-        </GlassCard.Description>
-      </GlassCard.Header>
-
-      <GlassCard.Content>
-        <p>Start building amazing interfaces with our glass components.</p>
-      </GlassCard.Content>
-
-      <GlassCard.Actions>
-        <GlassButton variant="primary">Get Started</GlassButton>
-        <GlassButton variant="ghost">Learn More</GlassButton>
-      </GlassCard.Actions>
-    </GlassCard>
-  );
-}
-```
-
-<Note>
-  The card will automatically render with beautiful glass effects including
-  backdrop blur, transparency, and smooth animations.
-</Note>
 
 ## Core Bundle (Recommended)
 

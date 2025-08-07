@@ -1,11 +1,11 @@
 ---
 title: "GlassInput"
-description: "A glassmorphism text input with validation and error states"
+description: "A glassmorphism text input with validation, error states, and comprehensive form support"
 ---
 
 # GlassInput
 
-The `GlassInput` component provides a beautiful text input with glass effects, validation, and accessibility features.
+The `GlassInput` component provides a beautiful, accessible text input with stunning glass effects, comprehensive validation support, and seamless form integration. Built with performance and user experience in mind.
 
 ## Import
 
@@ -15,21 +15,124 @@ import { GlassInput } from "@liquidify/components";
 
 ## Basic Usage
 
-```tsx
-<GlassInput placeholder="Enter your name" label="Full Name" />
+<CodeGroup>
+
+```tsx Simple Input
+<GlassInput 
+  placeholder="Enter your name" 
+  label="Full Name" 
+/>
 ```
 
-## With Validation
+```tsx With Help Text
+<GlassInput 
+  label="Username"
+  placeholder="Enter username"
+  helperText="Your username will be visible to others"
+/>
+```
 
-```tsx
+```tsx Password Input
+<GlassInput
+  label="Password"
+  type="password"
+  placeholder="Enter password"
+  helperText="Must be at least 8 characters"
+/>
+```
+
+```tsx With Icon
+<GlassInput
+  label="Search"
+  placeholder="Search..."
+  leftIcon={<SearchIcon className="w-4 h-4" />}
+/>
+```
+
+</CodeGroup>
+
+## Input Types
+
+<CodeGroup>
+
+```tsx Email
 <GlassInput
   label="Email Address"
   type="email"
   placeholder="you@example.com"
-  error="Please enter a valid email"
+  autoComplete="email"
+/>
+```
+
+```tsx Number
+<GlassInput
+  label="Age"
+  type="number"
+  placeholder="25"
+  min={0}
+  max={120}
+/>
+```
+
+```tsx URL
+<GlassInput
+  label="Website"
+  type="url"
+  placeholder="https://example.com"
+/>
+```
+
+```tsx Tel
+<GlassInput
+  label="Phone Number"
+  type="tel"
+  placeholder="+1 (555) 123-4567"
+/>
+```
+
+</CodeGroup>
+
+## Validation States
+
+<CodeGroup>
+
+```tsx Error State
+<GlassInput
+  label="Email"
+  type="email"
+  value="invalid-email"
+  error="Please enter a valid email address"
   required
 />
 ```
+
+```tsx Success State
+<GlassInput
+  label="Username"
+  value="john_doe"
+  success="Username is available!"
+/>
+```
+
+```tsx Warning State
+<GlassInput
+  label="Password"
+  type="password"
+  value="12345"
+  warning="Password is too weak"
+/>
+```
+
+```tsx Loading State
+<GlassInput
+  label="Username"
+  value="checking..."
+  loading={true}
+  helperText="Checking availability..."
+/>
+```
+
+</CodeGroup>
 
 ## States
 

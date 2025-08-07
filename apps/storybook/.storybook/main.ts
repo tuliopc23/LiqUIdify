@@ -7,16 +7,36 @@ const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: [
-    "../../../libs/components/src/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/stories/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-
-    // Clean story discovery - no exclusions needed for existing components
+    // Welcome Story - Shows first
+    "../../../libs/components/src/stories/00-welcome.stories.@(js|jsx|ts|tsx|mdx)",
+    
+    // Production Components Only
+    "../../../libs/components/src/components/glass-button-refactored/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-card-refactored/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-input/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-modal/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-badge/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-avatar/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-checkbox/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-select/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-accordion/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-tabs/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-alert/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-toast/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-table/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../../../libs/components/src/components/glass-dropdown/*.stories.@(js|jsx|ts|tsx|mdx)",
+    
+    // Design System Stories
+    "../../../libs/components/src/stories/design-system/*.stories.@(js|jsx|ts|tsx|mdx)",
+    
+    // Exclude demo and experimental stories
+    "!../../../libs/components/src/**/*.demo.stories.@(js|jsx|ts|tsx|mdx)",
+    "!../../../libs/components/src/**/*.playground.stories.@(js|jsx|ts|tsx|mdx)",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-docs"),
-    "@storybook/addon-essentials",
+    getAbsolutePath("@storybook/addon-docs")
   ],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),

@@ -70,8 +70,8 @@ const GlassSwitch = ({ ...props }: any) => <input type="checkbox" {...props} />;
 const GlassTooltip = ({ children, ...props }: any) => (
   <div {...props}>{children}</div>
 );
-import { GlassAlert } from "../glass-alert";
-import { GlassTabs } from "../glass-tabs";
+import { GlassAlert } from "@/components/glass-alert";
+import { GlassTabs } from "@/components/glass-tabs";
 
 // Fallback components for react-live (removed for production)
 const LiveProvider = ({ children }: { children: React.ReactNode }) => (

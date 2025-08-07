@@ -2,10 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import React from "react";
 import { GlassButton } from "@/components/glass-button-refactored/glass-button";
 import { GlassCard } from "@/components/glass-card-refactored/glass-card";
-import {
-  GlassAsyncErrorBoundary,
-  GlassErrorBoundary,
-} from "@/components/glass-error-boundary/glass-error-boundary";
+import { GlassErrorBoundary } from "@/components/glass-error-boundary";
 
 const meta = {
   title: "Components/Glass Error Boundary",
@@ -14,33 +11,17 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     fallback: {
-      description: "Custom fallback UI renderer function",
+      description: "Custom fallback UI element",
       control: false,
-    },
-    onError: {
-      description: "Callback when an error is caught",
-      action: "error caught",
-    },
-    resetKeys: {
-      description: "Keys that trigger error boundary reset when changed",
-      control: { type: "object" },
-    },
-    resetOnPropsChange: {
-      description: "Reset error boundary when props change",
-      control: { type: "boolean" },
-    },
-    isolate: {
-      description: "Isolate children in a container",
-      control: { type: "boolean" },
     },
     level: {
       description: "Error boundary level for UI styling",
       control: { type: "select" },
-      options: ["page", "section", "component"],
+      options: ["component", "page", "app"],
     },
-    enableProdErrorTracking: {
-      description: "Track errors in production",
-      control: { type: "boolean" },
+    children: {
+      description: "Child components to render",
+      control: false,
     },
   },
 } satisfies Meta<typeof GlassErrorBoundary>;
@@ -106,14 +87,7 @@ export const Default: Story = {
             </GlassButton>
           </div>
 
-          <GlassErrorBoundary
-            resetKeys={[resetKey]}
-            level="component"
-            onError={(error, errorInfo) => {
-              console.log("Error caught:", error);
-              console.log("Error info:", errorInfo);
-            }}
-          >
+          <GlassErrorBoundary level="component">
             <BuggyComponent shouldCrash={shouldCrash} />
           </GlassErrorBoundary>
         </GlassCard>
@@ -200,7 +174,7 @@ export const DifferentLevels: Story = {
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <GlassErrorBoundary level="page" resetKeys={[crashLevel]}>
+          <GlassErrorBoundary level="page">
             <GlassCard className="h-64 p-6">
               <h3 className="mb-2 font-bold">Page Level</h3>
               <p className="text-[var(--text-secondary)] text-sm">
@@ -210,7 +184,7 @@ export const DifferentLevels: Story = {
             </GlassCard>
           </GlassErrorBoundary>
 
-          <GlassErrorBoundary level="section" resetKeys={[crashLevel]}>
+          <GlassErrorBoundary level="page">
             <GlassCard className="h-64 p-6">
               <h3 className="mb-2 font-bold">Section Level</h3>
               <p className="text-[var(--text-secondary)] text-sm">
@@ -220,7 +194,7 @@ export const DifferentLevels: Story = {
             </GlassCard>
           </GlassErrorBoundary>
 
-          <GlassErrorBoundary level="component" resetKeys={[crashLevel]}>
+          <GlassErrorBoundary level="component">
             <GlassCard className="h-64 p-6">
               <h3 className="mb-2 font-bold">Component Level</h3>
               <p className="text-[var(--text-secondary)] text-sm">
@@ -242,44 +216,3 @@ export const DifferentLevels: Story = {
   },
 };
 
-export const AsyncErrors: Story = {
-  render: () => {
-    const [showAsync, setShowAsync] = React.useState(false);
-
-    return (
-      <div className="space-y-4">
-        <GlassCard className="p-6">
-          <h2 className="mb-4 font-bold text-xl">Async Error Handling</h2>
-          <p className="mb-4 text-[var(--text-secondary)]">
-            This demonstrates handling of asynchronous errors that occur after
-            component mounting.
-          </p>
-          <GlassButton
-            type="button"
-            variant="danger"
-            onClick={() => setShowAsync(true)}
-            className="mb-4"
-          >
-            Start Async Component
-          </GlassButton>
-
-          <GlassAsyncErrorBoundary
-            onError={(error, errorInfo) => {
-              console.log("Async error caught:", error);
-              console.log("Async error info:", errorInfo);
-            }}
-          >
-            {showAsync && <AsyncBuggyComponent />}
-          </GlassAsyncErrorBoundary>
-        </GlassCard>
-      </div>
-    );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Error boundary that can catch asynchronous errors",
-      },
-    },
-  },
-};

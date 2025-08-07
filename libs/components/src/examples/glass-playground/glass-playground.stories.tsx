@@ -9,11 +9,11 @@ import {
   Settings,
 } from "lucide-react";
 import { useState } from "react";
-import { GlassCard } from "../glass-card-refactored/glass-card";
-import { GlassInput } from "../glass-input/glass-input";
-import { GlassSelect } from "../glass-select/glass-select";
-import { GlassSwitch } from "../glass-switch/glass-switch";
-import { GlassTabs } from "../glass-tabs/glass-tabs";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
+import { GlassInput } from "@/components/glass-input/glass-input";
+import { GlassSelect } from "@/components/glass-select/glass-select";
+import { GlassSwitch } from "@/components/glass-switch/glass-switch";
+import { GlassTabs } from "@/components/glass-tabs/glass-tabs";
 import { GlassPlayground, PlaygroundTemplates } from "./glass-playground";
 
 const meta = {

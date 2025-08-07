@@ -56,99 +56,99 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/libs/components/index.d.ts",
       "import": "./dist/libs/components/index.mjs",
       "require": "./dist/libs/components/cjs/index.cjs",
-      "style": "./dist/libs/components/liquidui.css",
-      "types": "./dist/libs/components/index.d.ts"
+      "style": "./dist/libs/components/liquidui.css"
     },
     "./advanced": {
+      "types": "./dist/libs/components/advanced.d.ts",
       "import": "./dist/libs/components/advanced.mjs",
-      "require": "./dist/libs/components/cjs/advanced.cjs",
-      "types": "./dist/libs/components/advanced.d.ts"
+      "require": "./dist/libs/components/cjs/advanced.cjs"
     },
     "./animations": {
+      "types": "./dist/libs/components/animations.d.ts",
       "import": "./dist/libs/components/animations.mjs",
-      "require": "./dist/libs/components/cjs/animations.cjs",
-      "types": "./dist/libs/components/animations.d.ts"
+      "require": "./dist/libs/components/cjs/animations.cjs"
     },
     "./avatar": {
+      "types": "./dist/libs/components/components/avatar.d.ts",
       "import": "./dist/libs/components/components/avatar.mjs",
-      "require": "./dist/libs/components/cjs/components/avatar.cjs",
-      "types": "./dist/libs/components/components/avatar.d.ts"
+      "require": "./dist/libs/components/cjs/components/avatar.cjs"
     },
     "./button": {
+      "types": "./dist/libs/components/components/button.d.ts",
       "import": "./dist/libs/components/components/button.mjs",
-      "require": "./dist/libs/components/cjs/components/button.cjs",
-      "types": "./dist/libs/components/components/button.d.ts"
+      "require": "./dist/libs/components/cjs/components/button.cjs"
     },
     "./card": {
+      "types": "./dist/libs/components/components/card.d.ts",
       "import": "./dist/libs/components/components/card.mjs",
-      "require": "./dist/libs/components/cjs/components/card.cjs",
-      "types": "./dist/libs/components/components/card.d.ts"
+      "require": "./dist/libs/components/cjs/components/card.cjs"
     },
     "./context": {
+      "types": "./dist/libs/components/providers.d.ts",
       "import": "./dist/libs/components/providers.mjs",
-      "require": "./dist/libs/components/cjs/providers.cjs",
-      "types": "./dist/libs/components/providers.d.ts"
+      "require": "./dist/libs/components/cjs/providers.cjs"
     },
     "./core": {
+      "types": "./dist/libs/components/core.d.ts",
       "import": "./dist/libs/components/core.mjs",
       "modern": "./dist/libs/components/core.mjs",
-      "require": "./dist/libs/components/cjs/core.cjs",
-      "types": "./dist/libs/components/core.d.ts"
+      "require": "./dist/libs/components/cjs/core.cjs"
     },
     "./css": "./dist/libs/components/liquidui.css",
     "./data-display": {
+      "types": "./dist/libs/components/data-display.d.ts",
       "import": "./dist/libs/components/data-display.mjs",
-      "require": "./dist/libs/components/cjs/data-display.cjs",
-      "types": "./dist/libs/components/data-display.d.ts"
+      "require": "./dist/libs/components/cjs/data-display.cjs"
     },
     "./feedback": {
+      "types": "./dist/libs/components/feedback.d.ts",
       "import": "./dist/libs/components/feedback.mjs",
-      "require": "./dist/libs/components/cjs/feedback.cjs",
-      "types": "./dist/libs/components/feedback.d.ts"
+      "require": "./dist/libs/components/cjs/feedback.cjs"
     },
     "./forms": {
+      "types": "./dist/libs/components/forms.d.ts",
       "import": "./dist/libs/components/forms.mjs",
-      "require": "./dist/libs/components/cjs/forms.cjs",
-      "types": "./dist/libs/components/forms.d.ts"
+      "require": "./dist/libs/components/cjs/forms.cjs"
     },
     "./input": {
+      "types": "./dist/libs/components/components/input.d.ts",
       "import": "./dist/libs/components/components/input.mjs",
-      "require": "./dist/libs/components/cjs/components/input.cjs",
-      "types": "./dist/libs/components/components/input.d.ts"
+      "require": "./dist/libs/components/cjs/components/input.cjs"
     },
     "./layout": {
+      "types": "./dist/libs/components/layout.d.ts",
       "import": "./dist/libs/components/layout.mjs",
-      "require": "./dist/libs/components/cjs/layout.cjs",
-      "types": "./dist/libs/components/layout.d.ts"
+      "require": "./dist/libs/components/cjs/layout.cjs"
     },
     "./modal": {
+      "types": "./dist/libs/components/components/modal.d.ts",
       "import": "./dist/libs/components/components/modal.mjs",
-      "require": "./dist/libs/components/cjs/components/modal.cjs",
-      "types": "./dist/libs/components/components/modal.d.ts"
+      "require": "./dist/libs/components/cjs/components/modal.cjs"
     },
     "./navigation": {
+      "types": "./dist/libs/components/navigation.d.ts",
       "import": "./dist/libs/components/navigation.mjs",
-      "require": "./dist/libs/components/cjs/navigation.cjs",
-      "types": "./dist/libs/components/navigation.d.ts"
+      "require": "./dist/libs/components/cjs/navigation.cjs"
     },
     "./package.json": "./package.json",
     "./physics": {
+      "types": "./dist/libs/components/physics.d.ts",
       "import": "./dist/libs/components/physics.mjs",
-      "require": "./dist/libs/components/cjs/physics.cjs",
-      "types": "./dist/libs/components/physics.d.ts"
+      "require": "./dist/libs/components/cjs/physics.cjs"
     },
     "./ssr": {
+      "types": "./dist/libs/components/ssr.d.ts",
       "import": "./dist/libs/components/ssr.mjs",
-      "require": "./dist/libs/components/cjs/ssr.cjs",
-      "types": "./dist/libs/components/ssr.d.ts"
+      "require": "./dist/libs/components/cjs/ssr.cjs"
     },
     "./styles": "./dist/libs/components/liquidui.css",
     "./tokens": {
+      "types": "./dist/libs/components/tokens.d.ts",
       "import": "./dist/libs/components/tokens.mjs",
-      "require": "./dist/libs/components/cjs/tokens.cjs",
-      "types": "./dist/libs/components/tokens.d.ts"
+      "require": "./dist/libs/components/cjs/tokens.cjs"
     }
   },
   "files": [

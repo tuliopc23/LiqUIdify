@@ -7,7 +7,7 @@ import { GlassInput } from "@/components/glass-input/glass-input";
 import {
   announcer,
   GlassLiveRegion,
-} from "@/components/glass-live-region/glass-live-region";
+} from "@/components/glass-live-region";
 
 const meta = {
   title: "Components/Glass Live Region",
