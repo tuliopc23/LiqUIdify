@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef, ReactNode } from 'react';
+import { createContext, useContext, useRef, ReactNode } from 'react';
 
 interface LiveRegionContextValue {
   announce: (message: string, priority?: 'polite' | 'assertive') => void;

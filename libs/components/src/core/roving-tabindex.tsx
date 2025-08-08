@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface RovingTabindexOptions {
   items: Array<HTMLElement>;
@@ -344,13 +344,16 @@ export function RovingTabindexGroup({
     setItems(validItems);
   }, []);
 
-  const roving = useRovingTabindex({
+  const rovingOptions: any = {
     items,
     orientation,
     loop,
     preventScroll,
-    onActiveChange,
-  });
+  };
+  if (onActiveChange) {
+    rovingOptions.onActiveChange = onActiveChange;
+  }
+  const roving = useRovingTabindex(rovingOptions);
 
   // Clone children with roving props - simplified approach
   const enhancedChildren = children.map((child, index) => {

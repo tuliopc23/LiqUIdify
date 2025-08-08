@@ -17,8 +17,23 @@ const customRender = (
   options?: Omit<RenderOptions, 'wrapper'>
 ): RenderResult => render(ui, { wrapper: AllTheProviders, ...options })
 
-// Re-export everything
-export * from '@testing-library/react'
+// Re-export everything - named exports to avoid ESM interop warnings
+export {
+  screen,
+  fireEvent,
+  waitFor,
+  within,
+  getByRole,
+  getByText,
+  getByTestId,
+  queryByRole,
+  queryByText,
+  queryByTestId,
+  getAllByRole,
+  getAllByText,
+  getAllByTestId,
+  cleanup
+} from '@testing-library/react'
 export { customRender as render }
 export { default as userEvent } from '@testing-library/user-event'
 

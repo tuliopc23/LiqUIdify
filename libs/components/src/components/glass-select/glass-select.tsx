@@ -99,9 +99,9 @@ export const GlassSelect = React.memo(
             }
             case "Enter": {
               event.preventDefault();
-              if (focusedIndex >= 0 && focusedIndex < options.length) {
+if (focusedIndex >= 0 && focusedIndex < options.length) {
                 const option = options[focusedIndex];
-                if (!option.disabled) {
+                if (option && !option.disabled) {
                   handleSelect(option.value);
                 }
               }
@@ -245,9 +245,9 @@ export const GlassSelect = React.memo(
                     </button>
                   </span>
                 ))
-              ) : selectedOptions.length > 0 ? (
+) : selectedOptions.length > 0 ? (
                 <span className="text-liquid-primary">
-                  {selectedOptions[0].label}
+                  {selectedOptions[0]?.label ?? ""}
                 </span>
               ) : (
                 <span className="text-liquid-grey/70">{placeholder}</span>

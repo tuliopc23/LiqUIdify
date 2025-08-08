@@ -79,7 +79,7 @@ export function LiquidGlassProvider({
       setContentAnalysis(analysis);
 
       if (!merged.adaptToContent) {
-        return null;
+        return;
       }
 
       const root = document.documentElement;
@@ -167,7 +167,7 @@ const _useContentAwareGlass = (contentRef: React.RefObject<HTMLElement>) => {
 
   const analyzeContent = useCallback(async () => {
     if (!contentRef.current || !adaptToContent) {
-      return null;
+      return;
     }
 
     try {

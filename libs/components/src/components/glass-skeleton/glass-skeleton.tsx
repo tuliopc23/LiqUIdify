@@ -68,7 +68,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
       opacity: [0.4, 1, 0.4],
     };
 
-    const skeletonStyle = {
+    const skeletonStyle: React.CSSProperties = {
       width: width || undefined,
       height: height || (shape === "circle" ? width : undefined),
       ...style,
@@ -79,7 +79,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
         <motion.div
           ref={itemRef}
           className={cn(skeletonVariants({ ...{ variant, size, shape } } as any), className)}
-          style={skeletonStyle}
+          style={skeletonStyle as any}
           initial={animated ? { opacity: 0.4 } : false}
           animate={
             animated
@@ -96,7 +96,7 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
                   ease: "easeInOut",
                   delay: index * 0.1,
                 }
-              : undefined
+              : {}
           }
         >
           {variant === "shimmer" && animated && (

@@ -172,9 +172,11 @@ export const GlassButton = forwardRef<HTMLButtonElement, GlassButtonProps>(
     );
 
     if (asChild) {
+      // When rendering asChild, forward classes/props directly to the single child element
+      // and do not inject our composed content fragment to avoid passing props to a Fragment.
       return (
         <Slot className={buttonClasses} ref={ref} {...props}>
-          {content}
+          {children}
         </Slot>
       );
     }

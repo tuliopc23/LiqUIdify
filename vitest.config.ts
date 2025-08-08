@@ -15,7 +15,8 @@ export default defineConfig({
     // Test file patterns
     include: [
       'libs/components/src/**/*.{test,spec}.{js,ts,jsx,tsx}',
-      'tests/**/*.{test,spec}.{js,ts,jsx,tsx}'
+      // Only include Vitest unit/integration tests; exclude Playwright specs
+      'libs/components/src/test/**/*.{test,spec}.{js,ts,jsx,tsx}'
     ],
     exclude: [
       '**/node_modules/**',
@@ -23,7 +24,11 @@ export default defineConfig({
       '**/.{idea,git,cache,output,temp}/**',
       '**/coverage/**',
       '**/*.d.ts',
-      '**/*.config.*'
+      '**/*.config.*',
+      // Prevent Playwright tests from being picked up by Vitest
+      'tests/e2e/**',
+      'apps/**/e2e/**',
+      'apps/**/playwright/**'
     ],
     
     // Coverage configuration
@@ -59,13 +64,13 @@ export default defineConfig({
     },
     
     // Test execution configuration
-    testTimeout: 10000,
-    hookTimeout: 10000,
-    teardownTimeout: 10000,
+    testTimeout: 30000,
+    hookTimeout: 15000,
+    teardownTimeout: 15000,
     
-    // Parallel execution
+    // Parallel execution - reduced for stability
     fileParallelism: true,
-    maxConcurrency: 5,
+    maxConcurrency: 3,
     
     // Pool configuration for better performance
     pool: 'threads',

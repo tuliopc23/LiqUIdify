@@ -1,5 +1,4 @@
 import type React from "react";
-import { useState, useMemo } from "react";
 
 interface TableColumn<T> {
   key: keyof T;

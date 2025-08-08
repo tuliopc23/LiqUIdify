@@ -104,14 +104,16 @@ function useGlassAnimation(
         }
 
         // Create Web Animations API animation
-        const animation = element.animate(keyframes, {
+        const animationOptionsSafe: KeyframeAnimationOptions = {
           duration: animationOptions.duration,
           easing: animationOptions.easing,
-          delay: animationOptions.delay,
-          iterations: animationOptions.iterations,
-          direction: animationOptions.direction,
-          fill: animationOptions.fill,
-        });
+          delay: animationOptions.delay ?? 0,
+          iterations: animationOptions.iterations ?? 1,
+          direction: animationOptions.direction ?? "normal",
+          fill: animationOptions.fill ?? "none",
+        };
+
+        const animation = element.animate(keyframes, animationOptionsSafe);
 
         animationRef.current = animation;
 

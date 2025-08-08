@@ -5,7 +5,6 @@ import { forwardRef, useEffect, useId, useRef, useState } from "react";
 import { cn } from "../../core/utils/classname";
 import {
   createVariants as cva,
-  type InferVariantProps as VariantProps,
 } from "../../lib/variant-system";
 
 const comboboxVariants = cva({
@@ -135,7 +134,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
       className,
       ...props
     },
-    ref,
+    _ref,
   ) => {
     const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState("");
@@ -213,7 +212,10 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
         case "Enter":
           e.preventDefault();
           if (isOpen && highlightedIndex >= 0) {
-            handleOptionSelect(displayOptions[highlightedIndex]);
+            const opt = displayOptions[highlightedIndex];
+            if (opt) {
+              handleOptionSelect(opt);
+            }
           } else if (!isOpen) {
             setIsOpen(true);
           }

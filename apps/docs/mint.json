@@ -21,8 +21,8 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "https://github.com/liquidify/liquidify/issues"
+      "name": "GitHub",
+      "url": "https://github.com/tuliopc23/LiqUIdify"
     }
   ],
   "topbarCtaButton": {
@@ -30,178 +30,75 @@
     "url": "/quickstart",
     "style": "pill"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    },
-    {
-      "name": "Components",
-      "url": "components"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs.liquidify.dev"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://liquidify.dev/discord"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://liquidify.dev/blog"
-    }
-  ],
   "navigation": [
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "installation",
-        "theming",
-        "migration"
+        "index",
+        "getting-started/installation",
+        "getting-started/quickstart",
+        "getting-started/project-setup"
       ]
     },
     {
-      "group": "Core Concepts",
+      "group": "Guides",
       "pages": [
-        "concepts/design-system",
-        "concepts/accessibility",
-        "concepts/theming",
-        "concepts/performance"
-      ]
-    },
-    {
-      "group": "Core Components",
-      "pages": [
-        "components/button",
-        "components/card",
-        "components/input",
-        "components/modal",
-        "components/glass-button",
-        "components/glass-card"
-      ]
-    },
-    {
-      "group": "Layout Components",
-      "pages": [
-        "components/accordion",
-        "components/banner",
-        "components/breadcrumbs",
-        "components/tabs",
-        "components/glass-container",
-        "components/glass-grid"
-      ]
-    },
-    {
-      "group": "Form Components",
-      "pages": [
-        "components/checkbox",
-        "components/radio-group",
-        "components/select",
-        "components/textarea",
-        "components/file-upload",
-        "components/glass-input",
-        "components/glass-number-input",
-        "components/glass-form-field",
-        "components/glass-select"
-      ]
-    },
-    {
-      "group": "Feedback Components",
-      "pages": [
-        "components/alert",
-        "components/toast",
-        "components/notification",
-        "components/progress",
-        "components/loading",
-        "components/glass-spinner",
-        "components/glass-progress"
-      ]
-    },
-    {
-      "group": "Navigation Components",
-      "pages": [
-        "components/navbar",
-        "components/sidebar",
-        "components/pagination",
-        "components/dropdown",
-        "components/glass-navigation",
-        "components/glass-menu",
-        "components/glass-portal"
-      ]
-    },
-    {
-      "group": "Data Display",
-      "pages": [
-        "components/avatar",
-        "components/badge",
-        "components/table",
-        "components/chart",
-        "components/skeleton",
-        "components/glass-data-display",
-        "components/glass-chart",
-        "components/glass-tree-view",
-        "components/glass-timeline"
-      ]
-    },
-    {
-      "group": "Advanced Components",
-      "pages": [
-        "components/command",
-        "components/combobox",
-        "components/date-picker",
-        "components/popover",
-        "components/tooltip",
-        "components/glass-command",
-        "components/glass-combobox"
-      ]
-    },
-    {
-      "group": "Accessibility",
-      "pages": [
+        "guides/theming",
         "guides/accessibility",
-        "components/focus-trap",
-        "components/visually-hidden",
-        "components/skip-navigation",
-        "components/live-region",
-        "components/glass-focus-trap",
-        "components/theme-provider",
-        "components/theme-toggle"
+        "guides/recipes"
       ]
     },
     {
-      "group": "API Reference",
+      "group": "Components",
       "pages": [
-        "api-reference/introduction",
-        "api-reference/components",
-        "api-reference/hooks",
-        "api-reference/utilities"
+        "components/index"
       ]
     },
     {
-      "group": "Testing",
+      "group": "Integrations",
       "pages": [
-        "testing/overview",
-        "testing/getting-started",
-        "testing/vitest-config",
-        "testing/writing-tests",
-        "testing/rtl-guide",
-        "testing/accessibility",
-        "testing/coverage"
+        "integrations/storybook"
+      ]
+    },
+    {
+      "group": "Migrate",
+      "pages": [
+        "migrate/from-previous"
+      ]
+    },
+    {
+      "group": "Troubleshooting",
+      "pages": [
+        "troubleshooting"
+      ]
+    },
+    {
+      "group": "FAQ",
+      "pages": [
+        "faq"
+      ]
+    },
+    {
+      "group": "Changelog",
+      "pages": [
+        "changelog"
+      ]
+    },
+    {
+      "group": "Contributing",
+      "pages": [
+        "contributing"
+      ]
+    },
+    {
+      "group": "Legal",
+      "pages": [
+        "licenses"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/liquidify",
-    "github": "https://github.com/liquidify/liquidify",
-    "linkedin": "https://www.linkedin.com/company/liquidify"
+    "github": "https://github.com/tuliopc23/LiqUIdify"
   },
   "backgroundImage": "/images/apple-glass-bg.png",
   "theme": "venus",
@@ -215,23 +112,35 @@
     "suggestEdit": true,
     "raiseIssue": true
   },
-  "analytics": {
-    "ga4": {
-      "measurementId": "G-XXXXXXXXXX"
-    }
-  },
   "seo": {
     "indexHiddenPages": false
   },
   "redirects": [
     {
+      "source": "/introduction",
+      "destination": "/"
+    },
+    {
+      "source": "/installation",
+      "destination": "/getting-started/installation"
+    },
+    {
+      "source": "/quickstart",
+      "destination": "/getting-started/quickstart"
+    },
+    {
+      "source": "/theming",
+      "destination": "/guides/theming"
+    },
+    {
+      "source": "/migration",
+      "destination": "/migrate/from-previous"
+    },
+    {
       "source": "/old-path",
       "destination": "/new-path"
     }
   ],
-  "integrations": {
-    "intercom": "YOUR_INTERCOM_APP_ID"
-  },
   "api": {
     "playground": {
       "mode": "show"
@@ -246,5 +155,5 @@
     "body": "SF Pro Text",
     "code": "SF Mono"
   },
-  "customCSS": "/styles/apple-hig.css"
+  "customCSS": "/styles/liquid-glass.css"
 }

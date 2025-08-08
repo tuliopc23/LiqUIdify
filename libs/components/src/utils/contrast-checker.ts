@@ -26,9 +26,9 @@ function hexToRgb(hex: string): ColorRGB | null {
   const result = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(hex);
   return result
     ? {
-        r: Number.parseInt(result[1], 16),
-        g: Number.parseInt(result[2], 16),
-        b: Number.parseInt(result[3], 16),
+        r: Number.parseInt(result![1]!, 16),
+        g: Number.parseInt(result![2]!, 16),
+        b: Number.parseInt(result![3]!, 16),
       }
     : null;
 }

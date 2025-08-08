@@ -115,6 +115,12 @@ beforeAll(() => {
 
     // Mock scrollIntoView
     Element.prototype.scrollIntoView = vi.fn()
+    
+    // Mock window.scrollTo to avoid jsdom warnings
+    Object.defineProperty(window, 'scrollTo', {
+      value: vi.fn(),
+      writable: true
+    })
 
     // Mock CSS.supports for graceful degradation tests
     if (!window.CSS) {
@@ -144,8 +150,23 @@ beforeAll(() => {
 // Export cleanup function for manual cleanup if needed
 export { cleanup }
 
-// Export commonly used testing utilities for easy importing
-export * from '@testing-library/react'
+// Export commonly used testing utilities for easy importing - named exports to avoid ESM interop warnings
+export {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  within,
+  getByRole,
+  getByText,
+  getByTestId,
+  queryByRole,
+  queryByText,
+  queryByTestId,
+  getAllByRole,
+  getAllByText,
+  getAllByTestId
+} from '@testing-library/react'
 export { default as userEvent } from '@testing-library/user-event'
 
 // Mock framer-motion for tests to avoid animation complexity

@@ -202,6 +202,8 @@ function useHydrationSafe<T>(
 
       return () => clearTimeout(timer);
     }
+
+    return undefined;
   }, [isClient, clientValue, serverValue, delay, onMismatch]);
 
   return value;
