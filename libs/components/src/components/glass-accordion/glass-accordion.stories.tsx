@@ -35,7 +35,7 @@ const meta = {
     },
     variant: {
       control: "select",
-      options: ["default", "solid", "ghost"],
+      options: ["default", "enhanced", "ghost"],
       description: "Visual style variant of the accordion",
     },
     collapsible: {
@@ -140,6 +140,10 @@ export const Multiple: Story = {
 
 // Size variants
 export const Sizes: Story = {
+  args: {
+    type: "single",
+    collapsible: true,
+  },
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
@@ -193,6 +197,10 @@ export const Sizes: Story = {
 
 // Style variants
 export const Variants: Story = {
+  args: {
+    type: "single",
+    collapsible: true,
+  },
   render: () => (
     <div className="w-[600px] space-y-8">
       <div>
@@ -208,10 +216,10 @@ export const Variants: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 font-semibold text-sm text-white/80">Solid</h3>
-        <GlassAccordion type="single" variant="solid" collapsible>
+        <h3 className="mb-2 font-semibold text-sm text-white/80">Enhanced</h3>
+        <GlassAccordion type="single" variant="enhanced" collapsible>
           <GlassAccordionItem value="item-1">
-            <GlassAccordionTrigger>Solid Style</GlassAccordionTrigger>
+            <GlassAccordionTrigger>Enhanced Style</GlassAccordionTrigger>
             <GlassAccordionContent>
               A more prominent variant with increased background opacity.
             </GlassAccordionContent>
@@ -236,6 +244,10 @@ export const Variants: Story = {
 
 // Without chevron icon
 export const NoIcon: Story = {
+  args: {
+    type: "single",
+    collapsible: true,
+  },
   render: () => (
     <div className="w-[600px]">
       <GlassAccordion type="single" collapsible>
@@ -262,6 +274,10 @@ export const NoIcon: Story = {
 
 // Controlled example
 export const Controlled: Story = {
+  args: {
+    type: "single",
+    collapsible: true,
+  },
   render: () => {
     const [value, setValue] = React.useState<string>("item-2");
 
@@ -324,6 +340,10 @@ export const Controlled: Story = {
 
 // Complex content example
 export const ComplexContent: Story = {
+  args: {
+    type: "single",
+    collapsible: true,
+  },
   render: () => (
     <div className="w-[600px]">
       <GlassAccordion type="single" collapsible defaultValue="item-1">
@@ -377,6 +397,10 @@ export const ComplexContent: Story = {
 
 // Using compound component pattern
 export const CompoundPattern: Story = {
+  args: {
+    type: "single",
+    collapsible: true,
+  },
   render: () => (
     <div className="w-[600px]">
       <Accordion type="single" collapsible>
@@ -401,6 +425,10 @@ export const CompoundPattern: Story = {
 
 // Theme showcase
 export const ThemeShowcase: Story = {
+  args: {
+    type: "single",
+    collapsible: true,
+  },
   render: () => (
     <div className="w-[600px] space-y-8">
       <div className="rounded-lg bg-white/10 p-6">

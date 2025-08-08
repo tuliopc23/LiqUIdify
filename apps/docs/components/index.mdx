@@ -1,0 +1,66 @@
+---
+title: Components
+description: Overview of production components with live examples.
+---
+
+# Components Overview
+
+Below are representative production components and the core Liquid Glass building blocks. Examples are live MDX/React so you can interact with state and see behavior.
+
+## Glass Button (live)
+
+```tsx live
+import { useState } from 'react'
+import { GlassButton } from '@liquidify/components'
+
+export default function Example() {
+  const [count, setCount] = useState(0)
+  return (
+    <div style={{display:'flex', gap:12, alignItems:'center'}}>
+      <GlassButton variant="primary" onClick={() => setCount(c => c + 1)}>
+        Clicked {count}x
+      </GlassButton>
+      <GlassButton variant="ghost" onClick={() => setCount(0)}>
+        Reset
+      </GlassButton>
+    </div>
+  )
+}
+```
+
+## Glass Card + Content (live)
+
+```tsx live
+import { GlassButton } from '@liquidify/components'
+
+function GlassContainer({ children }) {
+  return (
+    <div className="liquid-glass-container liquid-glass-enhanced" style={{maxWidth:560}}>
+      <div className="liquid-glass-filter" />
+      <div className="liquid-glass-overlay" />
+      <div className="liquid-glass-specular" />
+      <div className="liquid-glass-content">
+        {children}
+      </div>
+    </div>
+  )
+}
+
+export default function Example() {
+  return (
+    <GlassContainer>
+      <span>Liquid Glass container built from layered CSS.</span>
+      <GlassButton variant="secondary">Action</GlassButton>
+    </GlassContainer>
+  )
+}
+```
+
+## What’s Included
+
+- Buttons, Cards, Inputs, Modals, Toasts, Dropdowns, Tabs, Table, Tooltip, Slider, Switch, Progress, Avatar, Badge, Alert, Banner, Pagination, Skeletons, Tree View, Breadcrumbs, Mobile Nav, Navbar, Sidebar, Command palette.
+- Hooks: useTheme, useLiquidGlass, useHapticFeedback, useSsrSafeHooks, usePerformanceMonitoring.
+- Providers: GlassUIProvider (wraps Theme, Liquid Glass, Haptics, Live Region, Toast).
+
+See API Reference for the complete list of exports and props.
+

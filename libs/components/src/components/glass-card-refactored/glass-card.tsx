@@ -230,6 +230,26 @@ const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   },
 );
 
+// Card Actions Component
+interface CardActionsProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn("flex items-center justify-between pt-4 space-x-2", className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
 // Define compound component type
 interface GlassCardComponent extends React.ForwardRefExoticComponent<
   GlassCardProps & React.RefAttributes<HTMLDivElement>
@@ -239,6 +259,7 @@ interface GlassCardComponent extends React.ForwardRefExoticComponent<
   Description: typeof CardDescription;
   Content: typeof CardContent;
   Footer: typeof CardFooter;
+  Actions: typeof CardActions;
 }
 
 // Set display names
@@ -248,6 +269,7 @@ CardTitle.displayName = "CardTitle";
 CardDescription.displayName = "CardDescription";
 CardContent.displayName = "CardContent";
 CardFooter.displayName = "CardFooter";
+CardActions.displayName = "CardActions";
 
 // Cast to include compound components
 const TypedGlassCard = GlassCard as GlassCardComponent;
@@ -258,6 +280,12 @@ TypedGlassCard.Title = CardTitle;
 TypedGlassCard.Description = CardDescription;
 TypedGlassCard.Content = CardContent;
 TypedGlassCard.Footer = CardFooter;
+TypedGlassCard.Actions = CardActions;
+
+// Export the main component and also a simplified alias
+export { TypedGlassCard };
+export { TypedGlassCard as Card };
+export default TypedGlassCard;
 
 // Export types
 export type {
@@ -267,6 +295,7 @@ export type {
   CardDescriptionProps,
   CardContentProps,
   CardFooterProps,
+  CardActionsProps,
   Size as CardSize,
   Variant as CardVariant,
 };

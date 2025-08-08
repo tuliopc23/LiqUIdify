@@ -1,37 +1,16 @@
 import { createRequire } from "node:module";
 import type { StorybookConfig } from "@storybook/react-vite";
 import { mergeConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 import path, { dirname, join } from "path";
 
 const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: [
-    // Welcome Story - Shows first
-    "../../../libs/components/src/stories/00-welcome.stories.@(js|jsx|ts|tsx|mdx)",
-    
-    // Production Components Only
+    // Curated: Only stable, visual component stories
     "../../../libs/components/src/components/glass-button-refactored/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../../../libs/components/src/components/glass-card-refactored/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-input/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-modal/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-badge/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-avatar/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-checkbox/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-select/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-accordion/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-tabs/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-alert/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-toast/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-table/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../../../libs/components/src/components/glass-dropdown/*.stories.@(js|jsx|ts|tsx|mdx)",
-    
-    // Design System Stories
-    "../../../libs/components/src/stories/design-system/*.stories.@(js|jsx|ts|tsx|mdx)",
-    
-    // Exclude demo and experimental stories
-    "!../../../libs/components/src/**/*.demo.stories.@(js|jsx|ts|tsx|mdx)",
-    "!../../../libs/components/src/**/*.playground.stories.@(js|jsx|ts|tsx|mdx)",
   ],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
@@ -64,30 +43,21 @@ const config: StorybookConfig = {
   viteFinal: async (config, { configType }) => {
     try {
       // Debug: log the resolved paths
-      const basePath = path.resolve(__dirname, "../../../libs/components/src");
-      console.log("🔧 Storybook Vite Config - Base path:", basePath);
-
-      const aliasMap = {
-        "@": basePath,
-        "@liquidify/components": path.resolve(basePath, "index.ts"),
-        "@/components": path.resolve(basePath, "components"),
-        "@/core": path.resolve(basePath, "core"),
-        "@/hooks": path.resolve(basePath, "hooks"),
-        "@/styles": path.resolve(basePath, "styles"),
-        "@/tokens": path.resolve(basePath, "tokens"),
-        "@/types": path.resolve(basePath, "types"),
+      // Prefer consuming the built package entry to match real consumers
+      const distBase = path.resolve(__dirname, "../../../dist/libs/components");
+      const aliasMap: Record<string, string> = {
+        "@liquidify/components/css": path.resolve(distBase, "components.css"),
+        "@liquidify/components/styles": path.resolve(distBase, "components.css"),
+        "@liquidify/components": path.resolve(distBase, "index.mjs"),
+        "@": path.resolve(__dirname, "../../../libs/components/src"),
       };
-
-      // Debug: verify paths exist
-      Object.entries(aliasMap).forEach(([alias, resolvedPath]) => {
-        const exists = require("fs").existsSync(resolvedPath);
-        console.log(`📁 ${alias} -> ${resolvedPath} ${exists ? "✅" : "❌"}`);
-      });
 
       return mergeConfig(config, {
         resolve: {
           alias: aliasMap,
+          dedupe: ["react", "react-dom"],
         },
+        plugins: [tsconfigPaths()],
         build: {
           rollupOptions: {
             output: {
@@ -111,6 +81,7 @@ const config: StorybookConfig = {
         },
         optimizeDeps: {
           include: ["react", "react-dom", "@storybook/react-vite"],
+          exclude: [],
         },
         define: {
           "process.env.NODE_ENV": JSON.stringify(

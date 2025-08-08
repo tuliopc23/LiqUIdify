@@ -1,0 +1,26 @@
+---
+title: Input
+description: Text input with icons, clear, and password variants.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassInput } from '@liquidify/components'
+
+export default function Demo() {
+  const [value, setValue] = useState('')
+  return (
+    <div className="space-y-4" style={{maxWidth:420}}>
+      <GlassInput placeholder="Default" value={value} onChange={(e:any)=>setValue(e.target?.value ?? '')} clearable />
+      <GlassInput variant="search" placeholder="Search" />
+      <GlassInput variant="password" placeholder="Password" />
+      <GlassInput error helperText="Example invalid state" placeholder="Error state" />
+    </div>
+  )
+}
+```
+
+Props
+- variant: default | search | password | email
+- leftIcon, rightIcon, clearable, error, helperText
+

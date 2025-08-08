@@ -80,7 +80,7 @@ jobs:
         run: bun run build:storybook
         continue-on-error: false
 
-      - name: Build documentation
+      - name: Build documentation (Mintlify)
         run: bun run docs:build
         continue-on-error: true # TODO: Remove after resolving documentation strategy (tracked in ARCHITECTURE_DECISION.md)
 
@@ -100,14 +100,14 @@ jobs:
           test -f dist/libs/components/index.d.ts || (echo "❌ Main types missing" && exit 1)
 
           # Check if CSS is generated
-          test -f dist/libs/components/liquidui.css || (echo "❌ CSS bundle missing" && exit 1)
+          test -f dist/libs/components/components.css || (echo "❌ CSS bundle missing" && exit 1)
 
           echo "✅ All required bundle outputs exist"
 
       - name: Bundle size analysis
         run: |
           echo "Analyzing bundle sizes..."
-          du -sh dist/libs/components/* | sort -hr
+          du -sh dist/libs/components/* | sort -hr || true
 
           # Check if bundles are reasonable size (< 500KB each)
           for file in dist/libs/components/*.mjs; do

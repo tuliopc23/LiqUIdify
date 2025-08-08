@@ -1,58 +1,64 @@
 ---
 title: "Theming"
-description: "Customize colors and styles in LiqUIdify"
+description: "Customize Liquid Glass tokens and theming"
 ---
 
 # Theming
 
-LiqUIdify provides a powerful theming system using CSS variables for easy customization.
+LiqUIdify uses a Liquid Glass token system via CSS variables and a Tailwind plugin. Customize tokens at the app level while components remain transparent and layered.
 
-## Default Theme
-
-The default theme provides a modern glassmorphism design with blue accents:
+## Core Tokens
 
 ```css
 :root {
-  --glass-primary: 59 130 246;
-  --glass-secondary: 107 114 128;
-  --glass-background: 255 255 255;
-  --glass-backdrop: 0.1;
-  --glass-blur: 12px;
+  --lg-bg-color: rgba(255, 255, 255, 0.25);
+  --lg-highlight: rgba(255, 255, 255, 0.75);
+  --lg-text: #ffffff;
+  --lg-accent: #fb4268;
+  --lg-grey: #444739;
 }
 ```
 
-## Custom Colors
-
-Override CSS variables to customize colors:
+## Radius, Shadows, Filters
 
 ```css
 :root {
-  --glass-primary: 168 85 247; /* Purple */
-  --glass-secondary: 34 197 94; /* Green */
-  --glass-accent: 249 115 22; /* Orange */
+  --lg-radius-md: 1.25rem;
+  --lg-shadow-main: 0 6px 6px rgba(0,0,0,.2), 0 0 20px rgba(0,0,0,.1);
+  --lg-specular-shadow: inset 1px 1px 0 rgba(255,255,255,.75), inset 0 0 5px rgba(255,255,255,.75);
+  --lg-filter-blur: blur(4px);
+  --lg-filter-enhance: saturate(120%) brightness(1.15);
 }
 ```
 
-## Dark Mode
-
-LiqUIdify automatically adapts to dark mode when you use the provider:
+## Provider and Mode
 
 ```tsx
-<UnifiedGlassProvider theme="dark">
-  <App />
-</UnifiedGlassProvider>
-```
+import { GlassUIProvider } from '@liquidify/components'
+import '@liquidify/components/styles'
 
-## Glass Effects
-
-Customize the glass effect intensity:
-
-```css
-:root {
-  --glass-backdrop: 0.2; /* More opaque */
-  --glass-blur: 20px; /* More blur */
-  --glass-border: 0.5; /* Border opacity */
+export function App({ children }) {
+  return (
+    <GlassUIProvider theme="light" glassConfig={{ blur: 4, saturation: 120 }}>
+      {children}
+    </GlassUIProvider>
+  )
 }
 ```
 
-For more theming options, see the [Advanced Theming Guide](/guides/advanced-theming).
+Toggle theme at runtime:
+
+```tsx live
+import { useTheme, GlassButton } from '@liquidify/components'
+
+export default function Toggle() {
+  const { theme, setTheme } = useTheme()
+  return (
+    <GlassButton variant="ghost" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      Current: {theme}
+    </GlassButton>
+  )
+}
+```
+
+Changes are non-destructive: components keep their transparency and depth, while your page background can vary per brand.

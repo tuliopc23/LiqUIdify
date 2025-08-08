@@ -1,0 +1,25 @@
+---
+title: Tooltip
+description: Contextual information on hover/focus with liquid glass styling.
+---
+
+```tsx live
+import { GlassTooltip, GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <div style={{display:'flex', gap:16}}>
+      <GlassTooltip content="Top">
+        <GlassButton variant="ghost">Hover me</GlassButton>
+      </GlassTooltip>
+      <GlassTooltip content="Right" position="right">
+        <GlassButton variant="ghost">Right</GlassButton>
+      </GlassTooltip>
+    </div>
+  )
+}
+```
+
+Props
+- content: ReactNode, position?: top | bottom | left | right, delay?: number
+

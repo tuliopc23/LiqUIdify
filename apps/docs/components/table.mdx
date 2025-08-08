@@ -1,0 +1,26 @@
+---
+title: Table
+description: Simple data table with columns and renderers.
+---
+
+```tsx live
+import { GlassTable } from '@liquidify/components'
+
+const data = [
+  { id: 1, name: 'Hydrogen', symbol: 'H' },
+  { id: 2, name: 'Helium', symbol: 'He' },
+]
+const columns = [
+  { key: 'id', header: 'ID' },
+  { key: 'name', header: 'Name' },
+  { key: 'symbol', header: 'Symbol' },
+]
+
+export default function Demo(){
+  return <GlassTable data={data} columns={columns} />
+}
+```
+
+Props
+- data: T[], columns: { key: keyof T, header: string, render?: (value, item) => ReactNode }[]
+

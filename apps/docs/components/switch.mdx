@@ -1,0 +1,23 @@
+---
+title: Switch
+description: Toggle control with smooth handle animation.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassSwitch } from '@liquidify/components'
+
+export default function Demo(){
+  const [checked, setChecked] = useState(false)
+  return (
+    <div className="space-y-2">
+      <GlassSwitch label={checked ? 'On' : 'Off'} checked={checked} onChange={setChecked} />
+      <div className="text-white/80 text-sm">State: {checked ? 'enabled' : 'disabled'}</div>
+    </div>
+  )
+}
+```
+
+Props
+- checked, onChange(checked), label?, disabled?
+

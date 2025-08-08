@@ -1,108 +1,37 @@
 ---
 title: "Quick Start"
-description: "Get up and running with LiqUIdify's liquid glass morphism components in under 5 minutes."
+description: "Get up and running with LiqUIdify's liquid glass components in under 5 minutes."
 icon: "rocket"
 ---
 
-import { LiquidGlassDemo } from "./components/LiquidGlassDemo";
-
 # Quick Start Guide
 
-<LiquidGlassDemo variant="hero" className="mb-8">
-  <div className="text-center">
-    <h1 className="text-4xl font-bold text-white mb-4">Ready to Build?</h1>
-    <p className="text-xl text-white/80 mb-6">
-      Transform your React app with liquid glass morphism in minutes
-    </p>
-    <div className="flex gap-4 justify-center">
-      <LiquidGlassDemo variant="button">
-        <span className="text-white font-semibold">⚡ 5 Minutes</span>
-      </LiquidGlassDemo>
-      <LiquidGlassDemo variant="button">
-        <span className="text-white/80 font-medium">🍎 Apple Design</span>
-      </LiquidGlassDemo>
-    </div>
-  </div>
-</LiquidGlassDemo>
-
-Get up and running with LiqUIdify's beautiful liquid glass morphism components in under 5 minutes. This guide will walk you through installation, setup, and creating your first liquid glass component.
+Get up and running with LiqUIdify’s liquid glass UI in minutes. Install, wrap your app with the provider, and drop in a component.
 
 ## 📦 Installation
 
-<CodeGroup>
-
-```bash npm
-npm install @liquidify/components
-```
-
-```bash yarn
-yarn add @liquidify/components
-```
-
-```bash pnpm
-pnpm add @liquidify/components
-```
-
-```bash bun
+```bash
 bun add @liquidify/components
 ```
 
-</CodeGroup>
-
 ## 🎨 Setup Provider
 
-Wrap your application with the `UnifiedGlassProvider` to enable theme management and liquid glass effects:
+Wrap your app with `GlassUIProvider` and import the CSS once:
 
-<CodeGroup>
-
-```tsx React
-import { UnifiedGlassProvider } from "@liquidify/components";
-import "@liquidify/components/css";
+```tsx
+import { GlassUIProvider } from "@liquidify/components";
+import "@liquidify/components/styles";
 
 function App() {
-  return <UnifiedGlassProvider>{/* Your app content */}</UnifiedGlassProvider>;
-}
-```
-
-```tsx Next.js App Router
-// app/layout.tsx
-import { UnifiedGlassProvider } from "@liquidify/components";
-import "@liquidify/components/css";
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
   return (
-    <html lang="en">
-      <body>
-        <UnifiedGlassProvider>{children}</UnifiedGlassProvider>
-      </body>
-    </html>
+    <GlassUIProvider>
+      {/* your app */}
+    </GlassUIProvider>
   );
 }
 ```
-
-```tsx Next.js Pages Router
-// pages/_app.tsx
-import { UnifiedGlassProvider } from "@liquidify/components";
-import "@liquidify/components/css";
-
-export default function App({ Component, pageProps }) {
-  return (
-    <UnifiedGlassProvider>
-      <Component {...pageProps} />
-    </UnifiedGlassProvider>
-  );
-}
-```
-
-</CodeGroup>
 
 ## 🌊 Your First Liquid Glass Component
-
-Let's create a beautiful liquid glass card with interactive effects:
 
 ```tsx
 import { GlassCard, GlassButton } from "@liquidify/components";
@@ -113,23 +42,18 @@ export default function WelcomeCard() {
       <GlassCard.Header>
         <GlassCard.Title>Welcome to LiqUIdify</GlassCard.Title>
         <GlassCard.Description>
-          Experience the beauty of liquid glass morphism with Apple-inspired
-          design.
+          Experience beautiful liquid glass morphism with Apple-inspired design.
         </GlassCard.Description>
       </GlassCard.Header>
 
       <GlassCard.Content>
         <p className="text-white/80 mb-6">
-          Start building amazing interfaces with our liquid glass components
-          that feature interactive ripple effects, smooth animations, and
-          stunning visual depth.
+          Build stunning interfaces with smooth animations and visual depth.
         </p>
       </GlassCard.Content>
 
       <GlassCard.Actions>
-        <GlassButton variant="primary" size="lg">
-          Get Started
-        </GlassButton>
+        <GlassButton variant="primary" size="lg">Get Started</GlassButton>
         <GlassButton variant="ghost">Learn More</GlassButton>
       </GlassCard.Actions>
     </GlassCard>
@@ -137,306 +61,41 @@ export default function WelcomeCard() {
 }
 ```
 
-<LiquidGlassDemo variant="card" className="my-8 max-w-md mx-auto">
-  <div className="text-center">
-    <h2 className="text-2xl font-bold text-white mb-4">Welcome to LiqUIdify</h2>
-    <p className="text-white/80 mb-6">
-      Experience the beauty of liquid glass morphism with Apple-inspired design.
-    </p>
-    <LiquidGlassDemo variant="button">
-      <span className="text-white font-semibold">Get Started</span>
-    </LiquidGlassDemo>
-  </div>
-</LiquidGlassDemo>
-
-<Note>
-  The card automatically renders with beautiful liquid glass effects including
-  backdrop blur, interactive ripples, inner glow, and smooth hover animations.
-</Note>
-
-## 🎯 Interactive Examples
-
-### Liquid Glass Buttons
+## 🎯 Button Variants
 
 ```tsx
 import { GlassButton } from "@liquidify/components";
 
-function ButtonShowcase() {
+export function ButtonShowcase() {
   return (
     <div className="flex gap-4 flex-wrap">
-      <GlassButton variant="primary">Primary Action</GlassButton>
-      <GlassButton variant="secondary">Secondary Action</GlassButton>
-      <GlassButton variant="ghost">Ghost Action</GlassButton>
-      <GlassButton variant="destructive">Destructive Action</GlassButton>
+      <GlassButton variant="primary">Primary</GlassButton>
+      <GlassButton variant="secondary">Secondary</GlassButton>
+      <GlassButton variant="ghost">Ghost</GlassButton>
+      <GlassButton variant="destructive">Destructive</GlassButton>
     </div>
   );
 }
 ```
 
-<div className="flex gap-4 flex-wrap my-6">
-  <LiquidGlassDemo variant="button">
-    <span className="text-white font-semibold">Primary</span>
-  </LiquidGlassDemo>
-  <LiquidGlassDemo variant="button">
-    <span className="text-white/80 font-medium">Secondary</span>
-  </LiquidGlassDemo>
-  <LiquidGlassDemo variant="button">
-    <span className="text-white/60 font-medium">Ghost</span>
-  </LiquidGlassDemo>
-  <LiquidGlassDemo variant="button">
-    <span className="text-red-200 font-medium">Destructive</span>
-  </LiquidGlassDemo>
-</div>
-
-### Liquid Glass Grid Layout
+## 🌙 Theme Toggle
 
 ```tsx
-import { GlassGrid, GlassCard } from "@liquidify/components";
-
-function ResponsiveGrid() {
-  return (
-    <GlassGrid
-      columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-      gap={{ xs: "sm", md: "lg" }}
-    >
-      <GlassCard>
-        <GlassCard.Header>
-          <GlassCard.Title>Feature 1</GlassCard.Title>
-        </GlassCard.Header>
-        <GlassCard.Content>
-          Beautiful liquid glass effects with interactive ripples.
-        </GlassCard.Content>
-      </GlassCard>
-
-      <GlassCard>
-        <GlassCard.Header>
-          <GlassCard.Title>Feature 2</GlassCard.Title>
-        </GlassCard.Header>
-        <GlassCard.Content>
-          Apple-inspired design following HIG principles.
-        </GlassCard.Content>
-      </GlassCard>
-
-      <GlassCard>
-        <GlassCard.Header>
-          <GlassCard.Title>Feature 3</GlassCard.Title>
-        </GlassCard.Header>
-        <GlassCard.Content>
-          GPU-accelerated animations for smooth performance.
-        </GlassCard.Content>
-      </GlassCard>
-
-      <GlassCard>
-        <GlassCard.Header>
-          <GlassCard.Title>Feature 4</GlassCard.Title>
-        </GlassCard.Header>
-        <GlassCard.Content>
-          Fully accessible with WCAG 2.1 AA compliance.
-        </GlassCard.Content>
-      </GlassCard>
-    </GlassGrid>
-  );
-}
-```
-
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
-  <LiquidGlassDemo variant="card" size="sm">
-    <div className="text-center">
-      <h4 className="text-white font-semibold mb-2">Feature 1</h4>
-      <p className="text-white/70 text-sm">Liquid glass effects</p>
-    </div>
-  </LiquidGlassDemo>
-  <LiquidGlassDemo variant="card" size="sm">
-    <div className="text-center">
-      <h4 className="text-white font-semibold mb-2">Feature 2</h4>
-      <p className="text-white/70 text-sm">Apple-inspired design</p>
-    </div>
-  </LiquidGlassDemo>
-  <LiquidGlassDemo variant="card" size="sm">
-    <div className="text-center">
-      <h4 className="text-white font-semibold mb-2">Feature 3</h4>
-      <p className="text-white/70 text-sm">GPU acceleration</p>
-    </div>
-  </LiquidGlassDemo>
-  <LiquidGlassDemo variant="card" size="sm">
-    <div className="text-center">
-      <h4 className="text-white font-semibold mb-2">Feature 4</h4>
-      <p className="text-white/70 text-sm">Fully accessible</p>
-    </div>
-  </LiquidGlassDemo>
-</div>
-
-## 🎨 Bundle Options
-
-Choose the right bundle for your needs:
-
-<CardGroup cols={2}>
-
-<Card title="Core Bundle" icon="circle">
-  **Size**: ~15KB gzipped Essential components: Button, Card, Input, Modal
-  ```tsx import {core} from "@liquidify/components/bundles"; ```
-</Card>
-
-<Card title="Forms Bundle" icon="square">
-  **Size**: ~25KB gzipped Form components: Checkbox, RadioGroup, Select,
-  Textarea ```tsx import {forms} from "@liquidify/components/bundles"; ```
-</Card>
-
-<Card title="Navigation Bundle" icon="compass">
-  **Size**: ~20KB gzipped Navigation: Navbar, Sidebar, Breadcrumbs, Tabs ```tsx
-  import {navigation} from "@liquidify/components/bundles"; ```
-</Card>
-
-<Card title="Full Bundle" icon="grid-3x3">
-  **Size**: ~60KB gzipped All 52+ components included ```tsx import * from
-  "@liquidify/components"; ```
-</Card>
-
-</CardGroup>
-
-## 🌙 Apple-Style Dark Mode
-
-LiqUIdify automatically adapts to your preferred color scheme with Apple's design principles:
-
-```tsx
-import {
-  UnifiedGlassProvider,
-  useTheme,
-  GlassButton,
-} from "@liquidify/components";
+import { UnifiedGlassProvider, useTheme, GlassButton } from "@liquidify/components";
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-
   return (
-    <GlassButton
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      variant="ghost"
-    >
+    <GlassButton onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      variant="ghost">
       {theme === "light" ? "🌙" : "☀️"} Toggle Theme
     </GlassButton>
-  );
-}
-
-function App() {
-  return (
-    <UnifiedGlassProvider>
-      <div className="min-h-screen">
-        <ThemeToggle />
-        {/* Your app content */}
-      </div>
-    </UnifiedGlassProvider>
-  );
-}
-```
-
-## 💻 TypeScript Support
-
-LiqUIdify is built with TypeScript and provides excellent IntelliSense support:
-
-```tsx
-import { GlassButton, type GlassButtonProps } from "@liquidify/components";
-
-// Full type safety with IntelliSense
-const ButtonExample: React.FC<GlassButtonProps> = (props) => {
-  return (
-    <GlassButton
-      variant="primary" // ✅ Autocomplete: primary | secondary | ghost | destructive
-      size="lg" // ✅ Autocomplete: xs | sm | md | lg | xl
-      disabled={false} // ✅ Type-checked boolean
-      glassEffect={{
-        blur: 40, // ✅ Type-checked number
-        opacity: 0.1, // ✅ Type-checked number
-        borderOpacity: 0.2, // ✅ Type-checked number
-      }}
-      {...props}
-    >
-      Click me
-    </GlassButton>
-  );
-};
-```
-
-## ♿ Accessibility Built-In
-
-LiqUIdify components follow WCAG 2.1 AA guidelines with Apple's accessibility standards:
-
-```tsx
-import { GlassButton, GlassModal } from "@liquidify/components";
-
-function AccessibleModal() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <>
-      <GlassButton
-        onClick={() => setIsOpen(true)}
-        aria-describedby="modal-description"
-      >
-        Open Modal
-      </GlassButton>
-
-      <GlassModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <h2 id="modal-title">Accessible Modal</h2>
-        <p id="modal-description">
-          This modal includes proper ARIA attributes, focus management, and
-          respects prefers-reduced-motion settings.
-        </p>
-      </GlassModal>
-    </>
   );
 }
 ```
 
 ## 🚀 Next Steps
 
-<CardGroup cols={2}>
-
-<Card title="Browse Components" icon="grid-3x3" href="/components/button">
-  Explore our complete library of 50+ liquid glass components
-</Card>
-
-<Card title="Theming Guide" icon="palette" href="/concepts/theming">
-  Learn how to customize colors, effects, and animations
-</Card>
-
-<Card
-  title="Accessibility"
-  icon="universal-access"
-  href="/concepts/accessibility"
->
-  Understand our accessibility features and Apple HIG compliance
-</Card>
-
-<Card title="Examples" icon="code" href="https://storybook.liquidify.dev">
-  View interactive component examples in Storybook
-</Card>
-
-</CardGroup>
-
-## 💡 Pro Tips
-
-<Tip>
-  **Performance**: Liquid glass effects use GPU acceleration for smooth 60fps
-  animations. For best performance, limit the number of glass elements visible
-  at once.
-</Tip>
-
-<Warning>
-  **Browser Support**: Backdrop-filter requires modern browsers. LiqUIdify
-  gracefully degrades on older browsers with fallback styles.
-</Warning>
-
-<Note>
-  **Accessibility**: All glass effects maintain proper contrast ratios and work
-  with screen readers. Use `prefers-reduced-motion` to respect user preferences.
-</Note>
-
----
-
-Congratulations! 🎉 You've successfully set up LiqUIdify and created your first liquid glass components. Ready to explore more? Check out our [complete component library](/components) or dive into [advanced theming](/concepts/theming).
+- Browse the full library in Components
+- Customize styles in Theming
+- Review accessibility best practices in Guides → Accessibility

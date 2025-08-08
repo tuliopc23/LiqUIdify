@@ -5,16 +5,17 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "lib": ["dom", "dom.iterable", "es6"],
-    "module": "esnext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2017",
+    "target": "ES2022",
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "types": ["vite/client"],
     "paths": {
       "@/*": ["../../libs/components/src/*"],
       "@liquidify/components": ["../../libs/components/src/index.ts"],
@@ -26,10 +27,24 @@
       "@/types/*": ["../../libs/components/src/types/*"]
     }
   },
-  "include": [
-    ".storybook/**/*",
-    "../../libs/components/src/**/*",
-    "../../libs/components/src/stories/**/*"
+  "files": [
+    "./.storybook/main.ts",
+    "./.storybook/preview.tsx",
+    "../../libs/components/src/components/glass-button-refactored/glass-button.stories.tsx",
+    "../../libs/components/src/components/glass-card-refactored/glass-card.stories.tsx",
+    "../../libs/components/src/components/glass-button-refactored/glass-button.tsx",
+    "../../libs/components/src/components/glass-button-refactored/index.ts",
+    "../../libs/components/src/components/glass-card-refactored/glass-card.tsx",
+    "../../libs/components/src/components/glass-card-refactored/index.ts"
   ],
-  "exclude": ["node_modules", "storybook-static"]
+  "exclude": [
+    "node_modules",
+    "storybook-static",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "../../libs/components/src/stories/**",
+    "../../libs/components/src/examples/**",
+    "../../libs/components/src/test/**",
+    "../../libs/components/src/**/__tests__/**"
+  ]
 }

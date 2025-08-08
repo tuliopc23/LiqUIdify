@@ -1,0 +1,33 @@
+---
+title: Modal
+description: Accessible modal with liquid glass layering.
+---
+
+```tsx live
+import { useState, useRef } from 'react'
+import { GlassButton, GlassModal } from '@liquidify/components'
+
+export default function Demo() {
+  const [open, setOpen] = useState(false)
+  const closeRef = useRef(null)
+  return (
+    <div style={{display:'flex', gap:12}}>
+      <GlassButton variant="primary" onClick={() => setOpen(true)}>Open Modal</GlassButton>
+      <GlassModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        title="Liquid Glass Modal"
+        initialFocus={closeRef}
+      >
+        <p className="text-white/80 mb-4">Focus trap, ESC/backdrop close, and motion‑safe transitions.</p>
+        <GlassButton ref={closeRef} variant="ghost" onClick={() => setOpen(false)}>Close</GlassButton>
+      </GlassModal>
+    </div>
+  )
+}
+```
+
+Props
+- isOpen: boolean, onClose: () => void, title?: string
+- initialFocus?: Ref<HTMLElement>, closeOnBackdropClick?: boolean, closeOnEscape?: boolean
+

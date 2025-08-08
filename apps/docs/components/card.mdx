@@ -1,0 +1,30 @@
+---
+title: Card
+description: Structured content with layered liquid glass visuals.
+---
+
+```tsx live
+import { GlassCard, GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  return (
+    <GlassCard className="max-w-md">
+      <GlassCard.Header>
+        <GlassCard.Title>Glass Card</GlassCard.Title>
+        <GlassCard.Description>Apple‑inspired layered transparency.</GlassCard.Description>
+      </GlassCard.Header>
+      <GlassCard.Content>
+        <p className="text-white/80">Use for sections, panels, and feature blocks.</p>
+      </GlassCard.Content>
+      <GlassCard.Actions>
+        <GlassButton variant="primary">Action</GlassButton>
+        <GlassButton variant="ghost">Secondary</GlassButton>
+      </GlassCard.Actions>
+    </GlassCard>
+  )
+}
+```
+
+Slots
+- Header, Title, Description, Content, Footer, Actions
+

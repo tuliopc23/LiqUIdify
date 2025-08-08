@@ -121,6 +121,13 @@ export const WithIcons: Story = {
 
 // Size variants
 export const Sizes: Story = {
+  args: {
+    items: [
+      { label: "Home", href: "/" },
+      { label: "Products", href: "/products" },
+      { label: "Details" },
+    ],
+  },
   render: () => (
     <div className="w-[600px] space-y-4">
       <div>
@@ -164,6 +171,13 @@ export const Sizes: Story = {
 
 // Style variants
 export const Variants: Story = {
+  args: {
+    items: [
+      { label: "Home", href: "/" },
+      { label: "Documentation", href: "/docs" },
+      { label: "Components" },
+    ],
+  },
   render: () => (
     <div className="w-[600px] space-y-4">
       <div>
@@ -217,6 +231,13 @@ export const NoHomeIcon: Story = {
 
 // Custom separator
 export const CustomSeparator: Story = {
+  args: {
+    items: [
+      { label: "Step 1", href: "#" },
+      { label: "Step 2", href: "#" },
+      { label: "Step 3" },
+    ],
+  },
   render: () => (
     <div className="w-[600px] space-y-4">
       <GlassBreadcrumbs
@@ -249,6 +270,13 @@ export const CustomSeparator: Story = {
 
 // Truncation
 export const WithTruncation: Story = {
+  args: {
+    items: [
+      { label: "Home", href: "/" },
+      { label: "Documents", href: "/documents" },
+      { label: "Summary.pdf" },
+    ],
+  },
   render: () => {
     const longPath = [
       { label: "Home", href: "/" },
@@ -291,6 +319,13 @@ export const WithTruncation: Story = {
 
 // Real-world examples
 export const RealWorldExamples: Story = {
+  args: {
+    items: [
+      { label: "Shop", href: "/shop" },
+      { label: "Men's Clothing", href: "/shop/mens" },
+      { label: "Jackets" },
+    ],
+  },
   render: () => (
     <div className="w-[700px] space-y-6">
       {/* E-commerce */}
@@ -374,6 +409,11 @@ export const RealWorldExamples: Story = {
 
 // Interactive demo
 export const InteractiveDemo: Story = {
+  args: {
+    items: [
+      { label: "Home" },
+    ],
+  },
   render: () => {
     const [path, setPath] = React.useState<Array<string>>(["Home"]);
 
@@ -435,6 +475,13 @@ export const InteractiveDemo: Story = {
 
 // Theme showcase
 export const ThemeShowcase: Story = {
+  args: {
+    items: [
+      { label: "Home", href: "/" },
+      { label: "Documentation", href: "/docs" },
+      { label: "Components" },
+    ],
+  },
   render: () => (
     <div className="w-[600px] space-y-8">
       <div className="rounded-lg bg-white/10 p-6">
@@ -475,6 +522,13 @@ export const ThemeShowcase: Story = {
 
 // Accessibility
 export const AccessibilityDemo: Story = {
+  args: {
+    items: [
+      { label: "Store", href: "/store" },
+      { label: "Books", href: "/store/books" },
+      { label: "Best Sellers" },
+    ],
+  },
   render: () => (
     <div className="max-w-2xl space-y-4">
       <p className="text-sm text-white/60">

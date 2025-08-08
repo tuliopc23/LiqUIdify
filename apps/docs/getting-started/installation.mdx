@@ -1,4 +1,3 @@
----
 title: "Installation"
 description: "Install LiqUIdify in your React project"
 ---
@@ -9,21 +8,29 @@ Choose your preferred package manager to install LiqUIdify.
 
 ## Package Managers
 
-<Tabs>
-  <Tab title="npm">```bash npm install @liquidify/components ```</Tab>
+```bash
+npm install @liquidify/components
+```
 
-<Tab title="yarn">```bash yarn add @liquidify/components```</Tab>
+```bash
+yarn add @liquidify/components
+```
 
-<Tab title="pnpm">```bash pnpm add @liquidify/components```</Tab>
+```bash
+pnpm add @liquidify/components
+```
 
-  <Tab title="bun">```bash bun add @liquidify/components```</Tab>
-</Tabs>
+```bash
+bun add @liquidify/components
+```
 
 ## CSS Import
 
-Don't forget to import the CSS file for styling:
+Import the CSS once at your app root (either path works):
 
 ```tsx
+import "@liquidify/components/styles";
+// or
 import "@liquidify/components/css";
 ```
 

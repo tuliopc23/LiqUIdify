@@ -1,0 +1,30 @@
+---
+title: Button
+description: Liquid Glass button variants, sizes, and states.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassButton } from '@liquidify/components'
+
+export default function Demo() {
+  const [count, setCount] = useState(0)
+  return (
+    <div style={{display:'flex', gap:12, flexWrap:'wrap'}}>
+      <GlassButton variant="primary" onClick={() => setCount(c=>c+1)}>Primary {count}</GlassButton>
+      <GlassButton variant="secondary">Secondary</GlassButton>
+      <GlassButton variant="ghost">Ghost</GlassButton>
+      <GlassButton variant="destructive">Destructive</GlassButton>
+      <GlassButton size="sm">SM</GlassButton>
+      <GlassButton size="lg">LG</GlassButton>
+      <GlassButton loading loadingText="Loading…" />
+    </div>
+  )
+}
+```
+
+Props
+- variant: primary | secondary | ghost | destructive
+- size: sm | md | lg | xl
+- loading, loadingText, leftIcon, rightIcon, fullWidth, iconOnly, asChild
+

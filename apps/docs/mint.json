@@ -51,7 +51,23 @@
     {
       "group": "Components",
       "pages": [
-        "components/index"
+        "components/index",
+        "components/button",
+        "components/card",
+        "components/modal",
+        "components/input",
+        "components/tabs",
+        "components/toast",
+        "components/tooltip",
+        "components/dropdown",
+        "components/table",
+        "components/switch"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api/index"
       ]
     },
     {
@@ -100,7 +116,7 @@
   "footerSocials": {
     "github": "https://github.com/tuliopc23/LiqUIdify"
   },
-  "backgroundImage": "/images/apple-glass-bg.png",
+  "backgroundImage": "/images/apple-glass-bg.svg",
   "theme": "venus",
   "layout": "topnav",
   "search": {

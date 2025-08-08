@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
-import "../../../libs/components/src/styles/index.css";
+// Use package CSS export to mirror consumer usage
+import "@liquidify/components/css";
 
 const preview: Preview = {
   parameters: {

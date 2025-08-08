@@ -83,7 +83,7 @@ interface GlassAccordionSingleProps
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
-  variant?: "default";
+  variant?: "default" | "enhanced" | "ghost";
   size?: "sm" | "md" | "lg";
 }
 
@@ -99,7 +99,7 @@ interface GlassAccordionMultipleProps
   value?: Array<string>;
   defaultValue?: Array<string>;
   onValueChange?: (value: Array<string>) => void;
-  variant?: "default";
+  variant?: "default" | "enhanced" | "ghost";
   size?: "sm" | "md" | "lg";
 }
 

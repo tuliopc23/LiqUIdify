@@ -1,0 +1,29 @@
+---
+title: Dropdown
+description: Menu-style selection anchored to a trigger.
+---
+
+```tsx live
+import { useState } from 'react'
+import { GlassDropdown, GlassButton } from '@liquidify/components'
+
+export default function Demo(){
+  const [value, setValue] = useState('')
+  const items = [
+    { label: 'Profile', value: 'profile' },
+    { label: 'Settings', value: 'settings' },
+    { separator: true },
+    { label: 'Sign out', value: 'logout' },
+  ]
+  return (
+    <div className="space-y-2">
+      <GlassDropdown trigger={<GlassButton variant="ghost">Open menu</GlassButton>} items={items} onSelect={setValue} />
+      <div className="text-white/80 text-sm">Selected: {value || '—'}</div>
+    </div>
+  )
+}
+```
+
+Props
+- trigger: ReactNode, items: { label, value, disabled?, icon?, separator? }[], onSelect?: (value) => void
+
