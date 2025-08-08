@@ -228,7 +228,7 @@
     "deploy:validate": "node scripts/pre-deployment-check.js",
     "dev": "bunx vite -c libs/components/rolldown.config.ts",
     "docs:build": "mintlify build apps/docs",
-    "docs:dev": "mintlify dev apps/docs",
+    "docs:dev": "cd apps/docs && npx -y mintlify@latest dev",
     "docs:preview": "mintlify preview apps/docs",
     "final-launch-check": "node scripts/final-launch-check.js",
     "fix:typescript": "node scripts/fix-typescript-config.js",
