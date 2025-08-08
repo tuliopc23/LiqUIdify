@@ -2,6 +2,110 @@
 
 This file provides guidance to WARP (warp.dev) when working with code in this repository.
 
+---
+
+## Production Readiness Report (June 2024)
+
+### Overview
+
+This monorepo contains:
+- **UI Component Library** (`libs/components`): The primary package to be published and consumed.
+- **Storybook App** (`apps/storybook`): For development preview and internal documentation.
+- **Docs Site** (`apps/docs`, Mintlify): Can be ignored for this report.
+
+### Production Readiness Criteria
+
+1. **Strict Mode**
+   - **React Strict Mode** must be enabled in both the component library (during development and testing) and in Storybook.
+   - Ensures best practices, surfaces unsafe lifecycle usage, and helps future-proof the codebase.
+
+2. **Zero Errors**
+   - TypeScript, lint, and build processes must all complete with zero errors.
+   - No warnings or errors should appear during Storybook or library builds.
+
+3. **Seamless Build**
+   - The build process (`bun run build`, `bun run build:lib`, and `bun run build:storybook`) must complete without manual intervention.
+   - Output should be ready for publishing or deployment.
+
+---
+
+### Current State (based on repo structure and WARP.md)
+
+- **TypeScript**: Used throughout, with type-check scripts (`bun run type-check`).
+- **Linting/Formatting**: Provided via `bun run lint` and `bun run format`.
+- **Build**: Managed by Vite/Rolldown, with ESM/CJS outputs and type declarations.
+- **Storybook**: Configured under `apps/storybook/.storybook`.
+- **CI**: Automated checks for type, lint, test, build, and export validation.
+
+---
+
+### Recommendations & Next Steps
+
+#### 1. Enable React Strict Mode
+
+**A. In Storybook**
+
+- Edit `apps/storybook/.storybook/preview.tsx` (or `preview.js`/`preview.ts` if present).
+- Wrap all stories in `<React.StrictMode>` by customizing the `decorators` export.
+
+**Example:**
+```tsx
+// apps/storybook/.storybook/preview.tsx
+import React from "react";
+import type { Preview } from "@storybook/react";
+
+export const decorators = [
+  (Story) => <React.StrictMode><Story /></React.StrictMode>,
+];
+
+// ...other Storybook config
+```
+
+**B. In the Component Library**
+
+- Ensure development entry points (e.g., dev/demo apps or test harnesses) use `<React.StrictMode>`.
+- For published libraries, strict mode is typically enforced by the consumer, but all internal dev/test/demo usage should wrap root components in `<React.StrictMode>`.
+
+#### 2. Enforce Zero Errors
+
+- Run the following and resolve all errors:
+  - `bun run type-check`
+  - `bun run lint`
+  - `bun run build`
+  - `bun run build:storybook`
+- CI should fail on any error or warning.
+
+#### 3. Seamless Build
+
+- Ensure all build scripts (`build`, `build:lib`, `build:storybook`) run without prompts or manual fixes.
+- Validate output artifacts are correct and ready for publish.
+
+---
+
+### Checklist for Production Readiness
+
+- [ ] **Strict Mode enabled in Storybook** (`preview.tsx` decorator).
+- [ ] **Strict Mode used in all dev/test/demo entry points** in the component library.
+- [ ] **TypeScript**: `bun run type-check` passes with zero errors.
+- [ ] **Lint**: `bun run lint` passes with zero errors.
+- [ ] **Build**: `bun run build` and `bun run build:lib` complete with zero errors.
+- [ ] **Storybook**: `bun run build:storybook` completes with zero errors.
+- [ ] **CI**: All checks pass; no warnings or errors.
+
+---
+
+### Action Items
+
+1. **Edit Storybook config** to wrap stories in `<React.StrictMode>` as shown above.
+2. **Audit all dev/test/demo entry points** in the library to ensure strict mode usage.
+3. **Run all quality and build scripts**; resolve any errors or warnings.
+4. **Verify CI passes** on a clean clone and install.
+
+---
+
+**If you need help editing the Storybook config or want to automate strict mode enforcement, provide the relevant file(s) and I can generate the exact code changes.**
+
+---
 Repository overview
 - Monorepo managed by Bun workspaces. Primary library is a React component library in libs/components. Supporting apps include Storybook (apps/storybook) and documentation (apps/docs using Mintlify; a VitePress backup exists at apps/docs-vitepress-backup). TypeScript throughout. Vite/Rolldown build pipeline, Tailwind CSS v4-based design system with custom “liquid glass” utilities.
 
