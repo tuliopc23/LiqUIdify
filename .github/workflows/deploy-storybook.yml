@@ -45,7 +45,7 @@ jobs:
 
       - name: Optimize build
         run: |
-          cd dist/storybook
+          cd apps/storybook/storybook-static
           # Remove source maps to reduce size
           find . -name "*.map" -delete
           # Compress assets
@@ -59,7 +59,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_STORYBOOK_PROJECT_ID }}
-          working-directory: ./dist/storybook
+          working-directory: ./apps/storybook/storybook-static
           vercel-args: "--prod"
 
       - name: Update deployment status
