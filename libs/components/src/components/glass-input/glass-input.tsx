@@ -148,72 +148,72 @@ const GlassInput = forwardRef<HTMLInputElement, GlassInputProps>(
             )}
             {leftIcon && (
               <div className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 transform text-liquid-grey z-10">
-              {leftIcon}
-            </div>
-          )}
-
-          <input
-            type={inputType}
-            className={cn(
-              baseClasses,
-              getIconPadding(),
-              "relative z-10",
-              className,
-            )}
-            ref={setReferences}
-            {...(value === undefined
-              ? { defaultValue: props.defaultValue }
-              : { value: currentValue })}
-            onChange={handleInputChange}
-            aria-invalid={error ? true : undefined}
-            aria-describedby={error && helperText ? helperTextId : undefined}
-            {...props}
-          />
-
-          <div className="absolute top-1/2 right-3 -translate-y-1/2 flex transform items-center space-x-2 z-10">
-            {clearable && hasValue && (
-              <button
-                type="button"
-                onClick={handleClearInput}
-                aria-label="Clear input"
-                className={cn(
-                  "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey",
-                  "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
-                  "motion-safe:active:scale-95 transition-all duration-200",
-                  "liquid-glass-interactive:focus-visible",
-                )}
-              >
-                <X className="h-4 w-4" />
-              </button>
-            )}
-            {variant === "password" && (
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? "Hide password" : "Show password"}
-                aria-pressed={showPassword}
-                className={cn(
-                  "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey",
-                  "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
-                  "motion-safe:active:scale-95 transition-all duration-200",
-                  "liquid-glass-interactive:focus-visible",
-                )}
-              >
-                {showPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
-              </button>
-            )}
-            {rightIcon && variant !== "password" && !clearable && (
-              <div className="pointer-events-none text-liquid-grey">
-                {rightIcon}
+                {leftIcon}
               </div>
             )}
+
+            <input
+              type={inputType}
+              className={cn(
+                baseClasses,
+                getIconPadding(),
+                "relative z-10",
+                className,
+              )}
+              ref={setReferences}
+              {...(value === undefined
+                ? { defaultValue: props.defaultValue }
+                : { value: currentValue })}
+              onChange={handleInputChange}
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error && helperText ? helperTextId : undefined}
+              {...props}
+            />
+
+            <div className="absolute top-1/2 right-3 -translate-y-1/2 flex transform items-center space-x-2 z-10">
+              {clearable && hasValue && (
+                <button
+                  type="button"
+                  onClick={handleClearInput}
+                  aria-label="Clear input"
+                  className={cn(
+                    "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey",
+                    "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
+                    "motion-safe:active:scale-95 transition-all duration-200",
+                    "liquid-glass-interactive:focus-visible",
+                  )}
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+              {variant === "password" && (
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-pressed={showPassword}
+                  className={cn(
+                    "liquid-glass-button liquid-glass-sm p-1 text-liquid-grey",
+                    "motion-safe:hover:text-liquid-primary motion-safe:hover:scale-110",
+                    "motion-safe:active:scale-95 transition-all duration-200",
+                    "liquid-glass-interactive:focus-visible",
+                  )}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </button>
+              )}
+              {rightIcon && variant !== "password" && !clearable && (
+                <div className="pointer-events-none text-liquid-grey">
+                  {rightIcon}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
         {helperText && (
           <p
             id={helperTextId}

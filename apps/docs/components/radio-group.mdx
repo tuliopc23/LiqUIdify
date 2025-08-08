@@ -4,15 +4,15 @@ description: Accessible radio button group with smooth animations and multiple l
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassRadioGroup } from '@liquidify/components'
+import { useState } from "react";
+import { GlassRadioGroup } from "@liquidify/components";
 
 export default function Demo() {
-  const [value, setValue] = useState('option1')
-  const [payment, setPayment] = useState('card')
-  
+  const [value, setValue] = useState("option1");
+  const [payment, setPayment] = useState("card");
+
   return (
-    <div className="space-y-8" style={{maxWidth: 420}}>
+    <div className="space-y-8" style={{ maxWidth: 420 }}>
       {/* Basic radio group */}
       <div>
         <h3 className="text-white mb-3 font-medium">Choose an option</h3>
@@ -29,7 +29,7 @@ export default function Demo() {
         </GlassRadioGroup>
         <p className="text-white/60 text-sm mt-2">Selected: {value}</p>
       </div>
-      
+
       {/* Payment method example */}
       <div>
         <h3 className="text-white mb-3 font-medium">Payment Method</h3>
@@ -41,7 +41,9 @@ export default function Demo() {
               </div>
               <div>
                 <div className="font-medium">Credit Card</div>
-                <div className="text-white/60 text-sm">Visa, Mastercard, Amex</div>
+                <div className="text-white/60 text-sm">
+                  Visa, Mastercard, Amex
+                </div>
               </div>
             </div>
           </GlassRadioGroup.Item>
@@ -52,94 +54,116 @@ export default function Demo() {
               </div>
               <div>
                 <div className="font-medium">PayPal</div>
-                <div className="text-white/60 text-sm">Pay with your PayPal account</div>
+                <div className="text-white/60 text-sm">
+                  Pay with your PayPal account
+                </div>
               </div>
             </div>
           </GlassRadioGroup.Item>
         </GlassRadioGroup>
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ## Orientations
 
 ```tsx live
-import { useState } from 'react'
-import { GlassRadioGroup } from '@liquidify/components'
+import { useState } from "react";
+import { GlassRadioGroup } from "@liquidify/components";
 
 export default function OrientationDemo() {
-  const [vertical, setVertical] = useState('a')
-  const [horizontal, setHorizontal] = useState('x')
-  
+  const [vertical, setVertical] = useState("a");
+  const [horizontal, setHorizontal] = useState("x");
+
   return (
     <div className="space-y-8">
       {/* Vertical (default) */}
       <div>
         <h3 className="text-white mb-3 font-medium">Vertical Layout</h3>
-        <GlassRadioGroup value={vertical} onValueChange={setVertical} orientation="vertical">
+        <GlassRadioGroup
+          value={vertical}
+          onValueChange={setVertical}
+          orientation="vertical"
+        >
           <GlassRadioGroup.Item value="a">Option A</GlassRadioGroup.Item>
           <GlassRadioGroup.Item value="b">Option B</GlassRadioGroup.Item>
           <GlassRadioGroup.Item value="c">Option C</GlassRadioGroup.Item>
         </GlassRadioGroup>
       </div>
-      
+
       {/* Horizontal */}
       <div>
         <h3 className="text-white mb-3 font-medium">Horizontal Layout</h3>
-        <GlassRadioGroup value={horizontal} onValueChange={setHorizontal} orientation="horizontal">
+        <GlassRadioGroup
+          value={horizontal}
+          onValueChange={setHorizontal}
+          orientation="horizontal"
+        >
           <GlassRadioGroup.Item value="x">X</GlassRadioGroup.Item>
           <GlassRadioGroup.Item value="y">Y</GlassRadioGroup.Item>
           <GlassRadioGroup.Item value="z">Z</GlassRadioGroup.Item>
         </GlassRadioGroup>
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ## Sizes and Variants
 
 ```tsx live
-import { useState } from 'react'
-import { GlassRadioGroup } from '@liquidify/components'
+import { useState } from "react";
+import { GlassRadioGroup } from "@liquidify/components";
 
 export default function SizesDemo() {
-  const [small, setSmall] = useState('sm1')
-  const [medium, setMedium] = useState('md1')
-  const [large, setLarge] = useState('lg1')
-  
+  const [small, setSmall] = useState("sm1");
+  const [medium, setMedium] = useState("md1");
+  const [large, setLarge] = useState("lg1");
+
   return (
     <div className="space-y-8">
       {/* Small size */}
       <div>
         <h3 className="text-white mb-3 font-medium">Small Size</h3>
         <GlassRadioGroup value={small} onValueChange={setSmall} size="sm">
-          <GlassRadioGroup.Item value="sm1" variant="ghost">Small Option 1</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="sm2" variant="ghost">Small Option 2</GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="sm1" variant="ghost">
+            Small Option 1
+          </GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="sm2" variant="ghost">
+            Small Option 2
+          </GlassRadioGroup.Item>
         </GlassRadioGroup>
       </div>
-      
+
       {/* Medium size (default) */}
       <div>
         <h3 className="text-white mb-3 font-medium">Medium Size</h3>
         <GlassRadioGroup value={medium} onValueChange={setMedium} size="md">
-          <GlassRadioGroup.Item value="md1">Medium Option 1</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="md2">Medium Option 2</GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="md1">
+            Medium Option 1
+          </GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="md2">
+            Medium Option 2
+          </GlassRadioGroup.Item>
         </GlassRadioGroup>
       </div>
-      
+
       {/* Large size */}
       <div>
         <h3 className="text-white mb-3 font-medium">Large Size</h3>
         <GlassRadioGroup value={large} onValueChange={setLarge} size="lg">
-          <GlassRadioGroup.Item value="lg1" variant="solid">Large Option 1</GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="lg2" variant="solid">Large Option 2</GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="lg1" variant="solid">
+            Large Option 1
+          </GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="lg2" variant="solid">
+            Large Option 2
+          </GlassRadioGroup.Item>
         </GlassRadioGroup>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -147,59 +171,55 @@ export default function SizesDemo() {
 
 ### GlassRadioGroup
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | - | Currently selected value |
-| `onValueChange` | `(value: string) => void` | - | Callback when selection changes |
-| `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | Layout orientation |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `name` | `string` | - | Form name attribute |
-| `required` | `boolean` | `false` | Required field |
-| `children` | `ReactNode` | - | Radio items |
+| Prop            | Type                         | Default      | Description                     |
+| --------------- | ---------------------------- | ------------ | ------------------------------- |
+| `value`         | `string`                     | -            | Currently selected value        |
+| `onValueChange` | `(value: string) => void`    | -            | Callback when selection changes |
+| `orientation`   | `'horizontal' \| 'vertical'` | `'vertical'` | Layout orientation              |
+| `size`          | `'sm' \| 'md' \| 'lg'`       | `'md'`       | Size variant                    |
+| `disabled`      | `boolean`                    | `false`      | Disabled state                  |
+| `name`          | `string`                     | -            | Form name attribute             |
+| `required`      | `boolean`                    | `false`      | Required field                  |
+| `children`      | `ReactNode`                  | -            | Radio items                     |
 
 ### GlassRadioGroup.Item
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | - | Item value |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
-| `variant` | `'default' \| 'solid' \| 'ghost'` | `'default'` | Visual variant |
-| `children` | `ReactNode` | - | Item content |
+| Prop       | Type                              | Default     | Description    |
+| ---------- | --------------------------------- | ----------- | -------------- |
+| `value`    | `string`                          | -           | Item value     |
+| `disabled` | `boolean`                         | `false`     | Disabled state |
+| `size`     | `'sm' \| 'md' \| 'lg'`            | `'md'`      | Size variant   |
+| `variant`  | `'default' \| 'solid' \| 'ghost'` | `'default'` | Visual variant |
+| `children` | `ReactNode`                       | -           | Item content   |
 
 ## Usage Patterns
 
 ### Form Integration
 
 ```tsx
-import { GlassRadioGroup, GlassFormField } from '@liquidify/components'
+import { GlassRadioGroup, GlassFormField } from "@liquidify/components";
 
 function PreferencesForm() {
-  const [theme, setTheme] = useState('system')
-  const [notifications, setNotifications] = useState('all')
-  
+  const [theme, setTheme] = useState("system");
+  const [notifications, setNotifications] = useState("all");
+
   return (
     <form className="space-y-6">
-      <GlassFormField 
-        label="Theme Preference" 
+      <GlassFormField
+        label="Theme Preference"
         helperText="Choose your preferred color scheme"
       >
         <GlassRadioGroup value={theme} onValueChange={setTheme}>
-          <GlassRadioGroup.Item value="light">
-            Light Mode
-          </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="dark">
-            Dark Mode
-          </GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="light">Light Mode</GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="dark">Dark Mode</GlassRadioGroup.Item>
           <GlassRadioGroup.Item value="system">
             System Default
           </GlassRadioGroup.Item>
         </GlassRadioGroup>
       </GlassFormField>
-      
-      <GlassFormField 
-        label="Notifications" 
+
+      <GlassFormField
+        label="Notifications"
         helperText="How would you like to receive notifications?"
       >
         <GlassRadioGroup value={notifications} onValueChange={setNotifications}>
@@ -209,24 +229,22 @@ function PreferencesForm() {
           <GlassRadioGroup.Item value="important">
             Important Only
           </GlassRadioGroup.Item>
-          <GlassRadioGroup.Item value="none">
-            None
-          </GlassRadioGroup.Item>
+          <GlassRadioGroup.Item value="none">None</GlassRadioGroup.Item>
         </GlassRadioGroup>
       </GlassFormField>
     </form>
-  )
+  );
 }
 ```
 
 ### Rich Content Items
 
 ```tsx
-import { GlassRadioGroup } from '@liquidify/components'
+import { GlassRadioGroup } from "@liquidify/components";
 
 function PlanSelector() {
-  const [plan, setPlan] = useState('pro')
-  
+  const [plan, setPlan] = useState("pro");
+
   return (
     <GlassRadioGroup value={plan} onValueChange={setPlan} size="lg">
       <GlassRadioGroup.Item value="basic" variant="solid">
@@ -244,7 +262,7 @@ function PlanSelector() {
           </div>
         </div>
       </GlassRadioGroup.Item>
-      
+
       <GlassRadioGroup.Item value="pro" variant="solid">
         <div className="flex justify-between items-start">
           <div>
@@ -261,7 +279,7 @@ function PlanSelector() {
         </div>
       </GlassRadioGroup.Item>
     </GlassRadioGroup>
-  )
+  );
 }
 ```
 
@@ -276,23 +294,19 @@ function PlanSelector() {
 
 ### Keyboard Shortcuts
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Move focus to/from radio group |
+| Key          | Action                         |
+| ------------ | ------------------------------ |
+| `Tab`        | Move focus to/from radio group |
 | `Arrow Keys` | Navigate between radio options |
-| `Space` | Select focused radio option |
+| `Space`      | Select focused radio option    |
 
 ### Screen Reader Support
 
 ```tsx
 // Automatic ARIA attributes
 <GlassRadioGroup value={value} onValueChange={setValue}>
-  <GlassRadioGroup.Item value="option1">
-    Option One
-  </GlassRadioGroup.Item>
-  <GlassRadioGroup.Item value="option2">
-    Option Two
-  </GlassRadioGroup.Item>
+  <GlassRadioGroup.Item value="option1">Option One</GlassRadioGroup.Item>
+  <GlassRadioGroup.Item value="option2">Option Two</GlassRadioGroup.Item>
 </GlassRadioGroup>
 
 // Generates:
@@ -364,12 +378,15 @@ function PlanSelector() {
 
 ```tsx
 // Optimized for performance
-const options = useMemo(() => [
-  { value: 'option1', label: 'Option 1' },
-  { value: 'option2', label: 'Option 2' }
-], [])
+const options = useMemo(
+  () => [
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+  ],
+  [],
+);
 
 const handleChange = useCallback((value) => {
-  setValue(value)
-}, [])
+  setValue(value);
+}, []);
 ```

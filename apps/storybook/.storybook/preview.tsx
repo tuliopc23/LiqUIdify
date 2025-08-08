@@ -14,52 +14,52 @@ const preview: Preview = {
     },
     docs: {
       theme: {
-        base: 'dark',
-        colorPrimary: '#fb4268',
-        colorSecondary: '#667eea',
-        appBg: '#1a1a1a',
-        appContentBg: '#2a2a2a',
-        textColor: '#ffffff',
+        base: "dark",
+        colorPrimary: "#fb4268",
+        colorSecondary: "#667eea",
+        appBg: "#1a1a1a",
+        appContentBg: "#2a2a2a",
+        textColor: "#ffffff",
       },
     },
     backgrounds: {
-      default: 'light',
+      default: "light",
       values: [
         {
-          name: 'light',
-          value: '#ffffff', // Pure white for light theme
+          name: "light",
+          value: "#ffffff", // Pure white for light theme
         },
         {
-          name: 'dark',
-          value: '#1a1a1a', // Subtle dark grey for dark theme
+          name: "dark",
+          value: "#1a1a1a", // Subtle dark grey for dark theme
         },
         {
-          name: 'transparent',
-          value: 'transparent',
+          name: "transparent",
+          value: "transparent",
         },
       ],
     },
     viewport: {
       viewports: {
         mobile: {
-          name: 'Mobile',
+          name: "Mobile",
           styles: {
-            width: '375px',
-            height: '667px',
+            width: "375px",
+            height: "667px",
           },
         },
         tablet: {
-          name: 'Tablet',
+          name: "Tablet",
           styles: {
-            width: '768px',
-            height: '1024px',
+            width: "768px",
+            height: "1024px",
           },
         },
         desktop: {
-          name: 'Desktop',
+          name: "Desktop",
           styles: {
-            width: '1200px',
-            height: '800px',
+            width: "1200px",
+            height: "800px",
           },
         },
       },
@@ -67,14 +67,14 @@ const preview: Preview = {
   },
   globalTypes: {
     theme: {
-      description: 'Global theme for components',
-      defaultValue: 'light',
+      description: "Global theme for components",
+      defaultValue: "light",
       toolbar: {
-        title: 'Theme',
-        icon: 'paintbrush',
+        title: "Theme",
+        icon: "paintbrush",
         items: [
-          { value: 'light', title: 'Light Mode' },
-          { value: 'dark', title: 'Dark Mode' },
+          { value: "light", title: "Light Mode" },
+          { value: "dark", title: "Dark Mode" },
         ],
         dynamicTitle: true,
       },
@@ -82,16 +82,14 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme || 'light';
+      const theme = context.globals.theme || "light";
 
       return (
         <div
           className={`${theme} min-h-screen p-4`}
           style={{
-            fontFamily: 'system-ui, sans-serif',
-            background: theme === 'dark'
-              ? '#1a1a1a'
-              : '#ffffff',
+            fontFamily: "system-ui, sans-serif",
+            background: theme === "dark" ? "#1a1a1a" : "#ffffff",
           }}
         >
           <React.StrictMode>

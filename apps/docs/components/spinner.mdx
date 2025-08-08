@@ -4,17 +4,24 @@ description: Loading indicators with multiple variants and liquid glass styling.
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassSpinner, PulseSpinner, DotsSpinner, RingSpinner, WaveSpinner, GlassButton } from '@liquidify/components'
+import { useState } from "react";
+import {
+  GlassSpinner,
+  PulseSpinner,
+  DotsSpinner,
+  RingSpinner,
+  WaveSpinner,
+  GlassButton,
+} from "@liquidify/components";
 
 export default function Demo() {
-  const [loading, setLoading] = useState(false)
-  
+  const [loading, setLoading] = useState(false);
+
   const simulateLoading = () => {
-    setLoading(true)
-    setTimeout(() => setLoading(false), 3000)
-  }
-  
+    setLoading(true);
+    setTimeout(() => setLoading(false), 3000);
+  };
+
   return (
     <div className="space-y-8 p-6">
       <div>
@@ -27,7 +34,7 @@ export default function Demo() {
           <GlassSpinner variant="error" size="md" />
         </div>
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Sizes</h3>
         <div className="flex gap-6 items-center">
@@ -39,7 +46,7 @@ export default function Demo() {
           <GlassSpinner size="2xl" />
         </div>
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Alternative Spinners</h3>
         <div className="flex gap-8 items-center flex-wrap">
@@ -49,15 +56,24 @@ export default function Demo() {
           <WaveSpinner bars={5} />
         </div>
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">With Labels</h3>
         <div className="space-y-4">
-          <GlassSpinner showLabel label="Loading data..." orientation="horizontal" />
-          <GlassSpinner showLabel label="Processing..." orientation="vertical" variant="primary" />
+          <GlassSpinner
+            showLabel
+            label="Loading data..."
+            orientation="horizontal"
+          />
+          <GlassSpinner
+            showLabel
+            label="Processing..."
+            orientation="vertical"
+            variant="primary"
+          />
         </div>
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Centered Overlay</h3>
         <div className="relative h-32 bg-white/5 rounded-lg border border-white/10">
@@ -69,7 +85,7 @@ export default function Demo() {
         </GlassButton>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -77,45 +93,50 @@ export default function Demo() {
 
 ### GlassSpinner
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| 'liquid-glass'` | `'default'` | Color variant |
-| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` | Spinner size |
-| `speed` | `'slow' \| 'normal' \| 'fast'` | `'normal'` | Animation speed |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout orientation with label |
-| `label` | `string` | `'Loading...'` | Accessible label text |
-| `showLabel` | `boolean` | `false` | Whether to show label text |
-| `centered` | `boolean` | `false` | Show as centered overlay |
-| `className` | `string` | - | Additional CSS classes |
+| Prop          | Type                                                                                           | Default        | Description                   |
+| ------------- | ---------------------------------------------------------------------------------------------- | -------------- | ----------------------------- |
+| `variant`     | `'default' \| 'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| 'liquid-glass'` | `'default'`    | Color variant                 |
+| `size`        | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'`                                                | `'md'`         | Spinner size                  |
+| `speed`       | `'slow' \| 'normal' \| 'fast'`                                                                 | `'normal'`     | Animation speed               |
+| `orientation` | `'horizontal' \| 'vertical'`                                                                   | `'horizontal'` | Layout orientation with label |
+| `label`       | `string`                                                                                       | `'Loading...'` | Accessible label text         |
+| `showLabel`   | `boolean`                                                                                      | `false`        | Whether to show label text    |
+| `centered`    | `boolean`                                                                                      | `false`        | Show as centered overlay      |
+| `className`   | `string`                                                                                       | -              | Additional CSS classes        |
 
 ### Alternative Spinners
 
 #### PulseSpinner
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Dot size |
-| `color` | `string` | `'white'` | Dot color |
+
+| Prop    | Type                   | Default   | Description |
+| ------- | ---------------------- | --------- | ----------- |
+| `size`  | `'sm' \| 'md' \| 'lg'` | `'md'`    | Dot size    |
+| `color` | `string`               | `'white'` | Dot color   |
 
 #### DotsSpinner
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Dot size |
-| `count` | `number` | `3` | Number of dots |
+
+| Prop    | Type                   | Default | Description    |
+| ------- | ---------------------- | ------- | -------------- |
+| `size`  | `'sm' \| 'md' \| 'lg'` | `'md'`  | Dot size       |
+| `count` | `number`               | `3`     | Number of dots |
 
 #### RingSpinner
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Ring size |
-| `thickness` | `number` | `2` | Border thickness |
+
+| Prop        | Type                   | Default | Description      |
+| ----------- | ---------------------- | ------- | ---------------- |
+| `size`      | `'sm' \| 'md' \| 'lg'` | `'md'`  | Ring size        |
+| `thickness` | `number`               | `2`     | Border thickness |
 
 #### WaveSpinner
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `bars` | `number` | `5` | Number of bars |
+
+| Prop   | Type     | Default | Description    |
+| ------ | -------- | ------- | -------------- |
+| `bars` | `number` | `5`     | Number of bars |
 
 ## Usage Patterns
 
 ### Button Loading State
+
 ```tsx
 <GlassButton loading loadingText="Saving...">
   Save Changes
@@ -123,16 +144,13 @@ export default function Demo() {
 ```
 
 ### Page Loading
+
 ```tsx
-<GlassSpinner 
-  centered 
-  showLabel 
-  label="Loading page..." 
-  variant="primary"
-/>
+<GlassSpinner centered showLabel label="Loading page..." variant="primary" />
 ```
 
 ### Inline Loading
+
 ```tsx
 <div className="flex items-center gap-2">
   <DotsSpinner size="sm" />
@@ -141,12 +159,15 @@ export default function Demo() {
 ```
 
 ### Data Loading
+
 ```tsx
-{isLoading ? (
-  <GlassSpinner showLabel label="Fetching data..." />
-) : (
-  <DataTable data={data} />
-)}
+{
+  isLoading ? (
+    <GlassSpinner showLabel label="Fetching data..." />
+  ) : (
+    <DataTable data={data} />
+  );
+}
 ```
 
 ## Accessibility
@@ -160,24 +181,28 @@ export default function Demo() {
 ## Apple HIG Guidelines
 
 ### Visual Design
+
 - **Clarity**: Clear, recognizable loading indicators
 - **Depth**: Subtle shadows and glass effects for visual hierarchy
 - **Motion**: Smooth, continuous animations that feel natural
 - **Color**: System-aware colors that adapt to light/dark modes
 
 ### Animation
+
 - **Duration**: Appropriate timing for perceived performance
 - **Easing**: Natural motion curves for smooth animation
 - **Continuity**: Seamless transitions between states
 - **Performance**: Optimized animations that don't impact performance
 
 ### User Experience
+
 - **Feedback**: Immediate indication of loading state
 - **Context**: Clear indication of what's being loaded
 - **Cancellation**: Allow users to cancel long operations when possible
 - **Progress**: Show progress when duration is known
 
 ### Best Practices
+
 - Use appropriate spinner size for the context
 - Provide meaningful loading messages
 - Consider skeleton screens for better perceived performance

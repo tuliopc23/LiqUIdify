@@ -11,7 +11,7 @@ import {
 const performanceMonitor = {
   trackComponent: (name: string, data: any) => {
     // Placeholder implementation
-    console.debug('Track component:', name, data);
+    console.debug("Track component:", name, data);
   },
   startTiming: (name: string) => {
     return { name, startTime: performance.now() };
@@ -20,10 +20,10 @@ const performanceMonitor = {
     return performance.now();
   },
   trackCustomMetric: (name: string, value: number) => {
-    console.debug('Custom metric:', name, value);
+    console.debug("Custom metric:", name, value);
   },
   init: (config: any) => {
-    console.debug('Performance monitor initialized', config);
+    console.debug("Performance monitor initialized", config);
   },
   startMeasure: (name: string) => ({ name, startTime: performance.now() }),
   endMeasure: (measurement: any) => performance.now() - measurement.startTime,
@@ -142,7 +142,9 @@ function _useWebVitals(
   useEffect(() => {
     // Initialize performance monitor
     performanceMonitor.init({
-      reportCallback: (report: { webVitals: Array<{ name: string; value: number }> }) => {
+      reportCallback: (report: {
+        webVitals: Array<{ name: string; value: number }>;
+      }) => {
         const vitals: Record<string, number> = {};
         for (const metric of report.webVitals) {
           vitals[metric.name] = metric.value;
@@ -189,7 +191,11 @@ export function useRealtimePerformance() {
       // Measure memory if available
       if ("memory" in performance) {
         const memInfo = (performance as any).memory;
-        if (memInfo && typeof memInfo.usedJSHeapSize === 'number' && typeof memInfo.jsHeapSizeLimit === 'number') {
+        if (
+          memInfo &&
+          typeof memInfo.usedJSHeapSize === "number" &&
+          typeof memInfo.jsHeapSizeLimit === "number"
+        ) {
           setMemory({
             used: Math.round(memInfo.usedJSHeapSize / 1_048_576), // Convert to MB
             limit: Math.round(memInfo.jsHeapSizeLimit / 1_048_576),

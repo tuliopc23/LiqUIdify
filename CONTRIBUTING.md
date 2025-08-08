@@ -526,7 +526,6 @@ export interface GlassNewComponentProps {
 ### Ways to Contribute
 
 1. **Code Contributions**
-
    - Fix bugs
    - Add features
    - Improve performance

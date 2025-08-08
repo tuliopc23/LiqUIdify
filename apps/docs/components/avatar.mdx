@@ -13,81 +13,78 @@ A glassmorphic avatar component for displaying user profile images with elegant 
 ### Basic Usage
 
 ```tsx live
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 export default function Demo() {
   return (
     <div className="flex items-center gap-4">
-      <GlassAvatar 
+      <GlassAvatar
         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
         alt="John Doe"
         fallback="JD"
       />
-      
-      <GlassAvatar 
-        fallback="AB"
-        alt="Alice Brown"
-      />
-      
+
+      <GlassAvatar fallback="AB" alt="Alice Brown" />
+
       <GlassAvatar />
     </div>
-  )
+  );
 }
 ```
 
 ### Size Variants
 
 ```tsx live
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 export default function Demo() {
   return (
     <div className="flex items-center gap-4">
-      <GlassAvatar 
+      <GlassAvatar
         size="xs"
         src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
         alt="Extra Small"
       />
-      <GlassAvatar 
+      <GlassAvatar
         size="sm"
         src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
         alt="Small"
       />
-      <GlassAvatar 
+      <GlassAvatar
         size="md"
         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
         alt="Medium"
       />
-      <GlassAvatar 
+      <GlassAvatar
         size="lg"
         src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face"
         alt="Large"
       />
-      <GlassAvatar 
+      <GlassAvatar
         size="xl"
         src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
         alt="Extra Large"
       />
-      <GlassAvatar 
+      <GlassAvatar
         size="2xl"
         src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face"
         alt="2X Large"
       />
     </div>
-  )
+  );
 }
 ```
 
 ### Shape Variants
 
 ```tsx live
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 export default function Demo() {
   return (
     <div className="flex items-center gap-4">
       <div className="text-center space-y-2">
-        <GlassAvatar 
+        <GlassAvatar
           variant="circular"
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
           alt="Circular"
@@ -95,9 +92,9 @@ export default function Demo() {
         />
         <p className="text-xs text-gray-600">Circular</p>
       </div>
-      
+
       <div className="text-center space-y-2">
-        <GlassAvatar 
+        <GlassAvatar
           variant="rounded"
           src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
           alt="Rounded"
@@ -105,9 +102,9 @@ export default function Demo() {
         />
         <p className="text-xs text-gray-600">Rounded</p>
       </div>
-      
+
       <div className="text-center space-y-2">
-        <GlassAvatar 
+        <GlassAvatar
           variant="square"
           src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
           alt="Square"
@@ -116,20 +113,20 @@ export default function Demo() {
         <p className="text-xs text-gray-600">Square</p>
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ### Status Indicators
 
 ```tsx live
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 export default function Demo() {
   return (
     <div className="flex items-center gap-6">
       <div className="text-center space-y-2">
-        <GlassAvatar 
+        <GlassAvatar
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
           alt="Online User"
           status="online"
@@ -137,9 +134,9 @@ export default function Demo() {
         />
         <p className="text-xs text-gray-600">Online</p>
       </div>
-      
+
       <div className="text-center space-y-2">
-        <GlassAvatar 
+        <GlassAvatar
           src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
           alt="Away User"
           status="away"
@@ -147,9 +144,9 @@ export default function Demo() {
         />
         <p className="text-xs text-gray-600">Away</p>
       </div>
-      
+
       <div className="text-center space-y-2">
-        <GlassAvatar 
+        <GlassAvatar
           src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
           alt="Busy User"
           status="busy"
@@ -157,9 +154,9 @@ export default function Demo() {
         />
         <p className="text-xs text-gray-600">Busy</p>
       </div>
-      
+
       <div className="text-center space-y-2">
-        <GlassAvatar 
+        <GlassAvatar
           fallback="OF"
           alt="Offline User"
           status="offline"
@@ -168,65 +165,62 @@ export default function Demo() {
         <p className="text-xs text-gray-600">Offline</p>
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ### With Border
 
 ```tsx live
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 export default function Demo() {
   return (
     <div className="flex items-center gap-4">
-      <GlassAvatar 
+      <GlassAvatar
         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
         alt="With Border"
         showBorder
         size="lg"
       />
-      
-      <GlassAvatar 
+
+      <GlassAvatar
         fallback="AB"
         alt="Fallback with Border"
         showBorder
         size="lg"
       />
-      
-      <GlassAvatar 
-        showBorder
-        size="lg"
-      />
+
+      <GlassAvatar showBorder size="lg" />
     </div>
-  )
+  );
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `src` | `string` | - | Image source URL |
-| `alt` | `string` | - | Alt text for the image |
-| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl"` | `"md"` | Avatar size |
-| `variant` | `"circular" \| "rounded" \| "square"` | `"circular"` | Avatar shape |
-| `fallback` | `string` | - | Fallback text (usually initials) |
-| `showBorder` | `boolean` | `false` | Show glass border effect |
-| `status` | `"online" \| "offline" \| "away" \| "busy"` | - | Status indicator |
-| `className` | `string` | - | Additional CSS classes |
+| Prop         | Type                                            | Default      | Description                      |
+| ------------ | ----------------------------------------------- | ------------ | -------------------------------- |
+| `src`        | `string`                                        | -            | Image source URL                 |
+| `alt`        | `string`                                        | -            | Alt text for the image           |
+| `size`       | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl"` | `"md"`       | Avatar size                      |
+| `variant`    | `"circular" \| "rounded" \| "square"`           | `"circular"` | Avatar shape                     |
+| `fallback`   | `string`                                        | -            | Fallback text (usually initials) |
+| `showBorder` | `boolean`                                       | `false`      | Show glass border effect         |
+| `status`     | `"online" \| "offline" \| "away" \| "busy"`     | -            | Status indicator                 |
+| `className`  | `string`                                        | -            | Additional CSS classes           |
 
 ## Usage Patterns
 
 ### User Profile
 
 ```tsx
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 function UserProfile({ user }) {
   return (
     <div className="flex items-center gap-3">
-      <GlassAvatar 
+      <GlassAvatar
         src={user.avatar}
         alt={user.name}
         fallback={user.initials}
@@ -239,22 +233,25 @@ function UserProfile({ user }) {
         <p className="text-sm text-gray-600">{user.role}</p>
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ### Team Members List
 
 ```tsx
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 function TeamMembersList({ members }) {
   return (
     <div className="space-y-4">
       {members.map((member) => (
-        <div key={member.id} className="flex items-center justify-between p-4 rounded-lg bg-white/5">
+        <div
+          key={member.id}
+          className="flex items-center justify-between p-4 rounded-lg bg-white/5"
+        >
           <div className="flex items-center gap-3">
-            <GlassAvatar 
+            <GlassAvatar
               src={member.avatar}
               alt={member.name}
               fallback={member.initials}
@@ -269,23 +266,23 @@ function TeamMembersList({ members }) {
         </div>
       ))}
     </div>
-  )
+  );
 }
 ```
 
 ### Avatar Group
 
 ```tsx
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 function AvatarGroup({ users, max = 3 }) {
-  const displayUsers = users.slice(0, max)
-  const remainingCount = users.length - max
-  
+  const displayUsers = users.slice(0, max);
+  const remainingCount = users.length - max;
+
   return (
     <div className="flex -space-x-2">
       {displayUsers.map((user, index) => (
-        <GlassAvatar 
+        <GlassAvatar
           key={user.id}
           src={user.avatar}
           alt={user.name}
@@ -296,26 +293,26 @@ function AvatarGroup({ users, max = 3 }) {
         />
       ))}
       {remainingCount > 0 && (
-        <GlassAvatar 
+        <GlassAvatar
           fallback={`+${remainingCount}`}
           showBorder
           className="relative z-0"
         />
       )}
     </div>
-  )
+  );
 }
 ```
 
 ### Comment System
 
 ```tsx
-import { GlassAvatar } from '@liquidify/components'
+import { GlassAvatar } from "@liquidify/components";
 
 function Comment({ comment }) {
   return (
     <div className="flex gap-3">
-      <GlassAvatar 
+      <GlassAvatar
         src={comment.author.avatar}
         alt={comment.author.name}
         fallback={comment.author.initials}
@@ -329,7 +326,7 @@ function Comment({ comment }) {
         <p className="text-sm">{comment.content}</p>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -338,16 +335,19 @@ function Comment({ comment }) {
 The GlassAvatar component follows WCAG 2.1 guidelines:
 
 ### Image Accessibility
+
 - Proper `alt` text for profile images
 - Fallback content for failed image loads
 - Meaningful initials when no image available
 
 ### Status Indicators
+
 - Color is not the only indicator of status
 - Status information available to screen readers
 - Sufficient contrast for status indicators
 
 ### Focus Management
+
 - Focusable when interactive (clickable)
 - Clear focus indicators
 - Logical tab order in groups
@@ -357,16 +357,19 @@ The GlassAvatar component follows WCAG 2.1 guidelines:
 Following Apple's Human Interface Guidelines for user representation:
 
 ### Visual Design
+
 - **Clarity**: Clean, recognizable user representation
 - **Depth**: Subtle glass effects create visual depth
 - **Consistency**: Uniform sizing and styling
 
 ### Content
+
 - **Personal**: Use actual user photos when available
 - **Fallback**: Meaningful initials or icons
 - **Respectful**: Appropriate image handling and privacy
 
 ### Interaction
+
 - **Responsive**: Immediate feedback on interaction
 - **Contextual**: Appropriate for the use case
 - **Accessible**: Works for all users
@@ -374,24 +377,28 @@ Following Apple's Human Interface Guidelines for user representation:
 ## Best Practices
 
 ### Image Handling
+
 - Provide meaningful alt text
 - Use appropriate image sizes (avoid large images)
 - Handle loading states gracefully
 - Implement error fallbacks
 
 ### Fallback Content
+
 - Use user initials when possible
 - Ensure initials are readable
 - Consider cultural naming conventions
 - Provide generic fallback for edge cases
 
 ### Status Indicators
+
 - Use consistent status meanings
 - Don't rely solely on color
 - Update status in real-time when possible
 - Consider privacy implications
 
 ### Performance
+
 - Optimize image sizes
 - Use appropriate image formats
 - Consider lazy loading for lists
@@ -406,7 +413,7 @@ function UserDropdown({ user }) {
   return (
     <div className="relative">
       <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-white/10">
-        <GlassAvatar 
+        <GlassAvatar
           src={user.avatar}
           alt={user.name}
           fallback={user.initials}
@@ -417,7 +424,7 @@ function UserDropdown({ user }) {
       </button>
       {/* Dropdown menu */}
     </div>
-  )
+  );
 }
 ```
 
@@ -429,7 +436,7 @@ function MessageThread({ messages }) {
     <div className="space-y-4">
       {messages.map((message) => (
         <div key={message.id} className="flex gap-3">
-          <GlassAvatar 
+          <GlassAvatar
             src={message.sender.avatar}
             alt={message.sender.name}
             fallback={message.sender.initials}
@@ -438,7 +445,9 @@ function MessageThread({ messages }) {
           <div className="flex-1">
             <div className="bg-white/10 rounded-lg p-3">
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-medium text-sm">{message.sender.name}</span>
+                <span className="font-medium text-sm">
+                  {message.sender.name}
+                </span>
                 <span className="text-xs text-gray-500">{message.time}</span>
               </div>
               <p className="text-sm">{message.content}</p>
@@ -447,7 +456,7 @@ function MessageThread({ messages }) {
         </div>
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -457,7 +466,7 @@ function MessageThread({ messages }) {
 function ProfileCard({ user }) {
   return (
     <div className="text-center p-6 bg-white/10 rounded-xl">
-      <GlassAvatar 
+      <GlassAvatar
         src={user.avatar}
         alt={user.name}
         fallback={user.initials}
@@ -470,6 +479,6 @@ function ProfileCard({ user }) {
       <p className="text-gray-600 text-sm mb-2">{user.role}</p>
       <p className="text-gray-500 text-xs">{user.department}</p>
     </div>
-  )
+  );
 }
 ```

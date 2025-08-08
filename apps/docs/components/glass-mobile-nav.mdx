@@ -4,77 +4,79 @@ description: Apple-inspired mobile navigation drawer with liquid glass effects a
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassMobileNav } from '@liquidify/components'
-import { Home, Settings, User, Bell, Search, Heart } from 'lucide-react'
+import { useState } from "react";
+import { GlassMobileNav } from "@liquidify/components";
+import { Home, Settings, User, Bell, Search, Heart } from "lucide-react";
 
 export default function Demo() {
-  const [activeItem, setActiveItem] = useState('home')
-  
+  const [activeItem, setActiveItem] = useState("home");
+
   const navItems = [
     {
-      id: 'home',
-      label: 'Home',
+      id: "home",
+      label: "Home",
       icon: <Home className="h-5 w-5" />,
-      href: '#home'
+      href: "#home",
     },
     {
-      id: 'search',
-      label: 'Search',
+      id: "search",
+      label: "Search",
       icon: <Search className="h-5 w-5" />,
-      href: '#search',
-      badge: '3'
+      href: "#search",
+      badge: "3",
     },
     {
-      id: 'notifications',
-      label: 'Notifications',
+      id: "notifications",
+      label: "Notifications",
       icon: <Bell className="h-5 w-5" />,
-      href: '#notifications',
-      badge: 12
+      href: "#notifications",
+      badge: 12,
     },
     {
-      id: 'favorites',
-      label: 'Favorites',
+      id: "favorites",
+      label: "Favorites",
       icon: <Heart className="h-5 w-5" />,
       children: [
         {
-          id: 'recent',
-          label: 'Recent',
-          href: '#recent'
+          id: "recent",
+          label: "Recent",
+          href: "#recent",
         },
         {
-          id: 'saved',
-          label: 'Saved',
-          href: '#saved'
-        }
-      ]
+          id: "saved",
+          label: "Saved",
+          href: "#saved",
+        },
+      ],
     },
     {
-      id: 'profile',
-      label: 'Profile',
+      id: "profile",
+      label: "Profile",
       icon: <User className="h-5 w-5" />,
-      href: '#profile'
+      href: "#profile",
     },
     {
-      id: 'settings',
-      label: 'Settings',
+      id: "settings",
+      label: "Settings",
       icon: <Settings className="h-5 w-5" />,
-      href: '#settings'
-    }
-  ]
-  
+      href: "#settings",
+    },
+  ];
+
   return (
     <div className="flex items-center gap-4">
       <GlassMobileNav
         items={navItems}
         activeItemId={activeItem}
         onItemClick={(item) => setActiveItem(item.id)}
-        header={<h2 className="text-lg font-semibold text-white">Navigation</h2>}
+        header={
+          <h2 className="text-lg font-semibold text-white">Navigation</h2>
+        }
         footer={<p className="text-sm text-white/60">v1.0.0</p>}
       />
       <span className="text-white/80">Active: {activeItem}</span>
     </div>
-  )
+  );
 }
 ```
 
@@ -84,31 +86,31 @@ The Glass Mobile Nav component provides an elegant mobile navigation solution wi
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `items` | `NavItem[]` | - | **Required.** Array of navigation items |
-| `activeItemId` | `string` | - | ID of the currently active item |
-| `onItemClick` | `(item: NavItem) => void` | - | Callback when an item is clicked |
-| `position` | `'left' \| 'right'` | `'right'` | Position of the drawer |
-| `showOverlay` | `boolean` | `true` | Whether to show backdrop overlay |
-| `closeOnItemClick` | `boolean` | `true` | Close drawer when item is clicked |
-| `header` | `ReactNode` | - | Custom header content |
-| `footer` | `ReactNode` | - | Custom footer content |
-| `hamburgerLabel` | `string` | `'Open navigation menu'` | Accessibility label for hamburger button |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
+| Prop               | Type                      | Default                  | Description                              |
+| ------------------ | ------------------------- | ------------------------ | ---------------------------------------- |
+| `items`            | `NavItem[]`               | -                        | **Required.** Array of navigation items  |
+| `activeItemId`     | `string`                  | -                        | ID of the currently active item          |
+| `onItemClick`      | `(item: NavItem) => void` | -                        | Callback when an item is clicked         |
+| `position`         | `'left' \| 'right'`       | `'right'`                | Position of the drawer                   |
+| `showOverlay`      | `boolean`                 | `true`                   | Whether to show backdrop overlay         |
+| `closeOnItemClick` | `boolean`                 | `true`                   | Close drawer when item is clicked        |
+| `header`           | `ReactNode`               | -                        | Custom header content                    |
+| `footer`           | `ReactNode`               | -                        | Custom footer content                    |
+| `hamburgerLabel`   | `string`                  | `'Open navigation menu'` | Accessibility label for hamburger button |
+| `size`             | `'sm' \| 'md' \| 'lg'`    | `'md'`                   | Size variant                             |
 
 ### NavItem Interface
 
 ```typescript
 interface NavItem {
-  id: string
-  label: string
-  href?: string
-  onClick?: () => void
-  icon?: React.ReactNode
-  badge?: string | number
-  disabled?: boolean
-  children?: Array<NavItem>
+  id: string;
+  label: string;
+  href?: string;
+  onClick?: () => void;
+  icon?: React.ReactNode;
+  badge?: string | number;
+  disabled?: boolean;
+  children?: Array<NavItem>;
 }
 ```
 

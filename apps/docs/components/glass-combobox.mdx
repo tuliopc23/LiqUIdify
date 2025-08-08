@@ -4,68 +4,68 @@ description: Searchable dropdown component with Apple-inspired liquid glass effe
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassCombobox } from '@liquidify/components'
-import { User, MapPin, Star, Package, Search, Code } from 'lucide-react'
+import { useState } from "react";
+import { GlassCombobox } from "@liquidify/components";
+import { User, MapPin, Star, Package, Search, Code } from "lucide-react";
 
 export default function Demo() {
-  const [selectedUser, setSelectedUser] = useState('')
-  const [selectedLocation, setSelectedLocation] = useState('')
-  
+  const [selectedUser, setSelectedUser] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+
   const users = [
     {
-      value: 'john',
-      label: 'John Doe',
-      description: 'Software Engineer',
-      icon: <User className="h-4 w-4" />
+      value: "john",
+      label: "John Doe",
+      description: "Software Engineer",
+      icon: <User className="h-4 w-4" />,
     },
     {
-      value: 'jane',
-      label: 'Jane Smith',
-      description: 'Product Manager',
-      icon: <User className="h-4 w-4" />
+      value: "jane",
+      label: "Jane Smith",
+      description: "Product Manager",
+      icon: <User className="h-4 w-4" />,
     },
     {
-      value: 'bob',
-      label: 'Bob Johnson',
-      description: 'UX Designer',
-      icon: <User className="h-4 w-4" />
+      value: "bob",
+      label: "Bob Johnson",
+      description: "UX Designer",
+      icon: <User className="h-4 w-4" />,
     },
     {
-      value: 'alice',
-      label: 'Alice Brown',
-      description: 'Data Scientist',
-      icon: <User className="h-4 w-4" />
-    }
-  ]
-  
+      value: "alice",
+      label: "Alice Brown",
+      description: "Data Scientist",
+      icon: <User className="h-4 w-4" />,
+    },
+  ];
+
   const locations = [
     {
-      value: 'ny',
-      label: 'New York',
-      description: 'United States',
-      icon: <MapPin className="h-4 w-4" />
+      value: "ny",
+      label: "New York",
+      description: "United States",
+      icon: <MapPin className="h-4 w-4" />,
     },
     {
-      value: 'london',
-      label: 'London',
-      description: 'United Kingdom',
-      icon: <MapPin className="h-4 w-4" />
+      value: "london",
+      label: "London",
+      description: "United Kingdom",
+      icon: <MapPin className="h-4 w-4" />,
     },
     {
-      value: 'tokyo',
-      label: 'Tokyo',
-      description: 'Japan',
-      icon: <MapPin className="h-4 w-4" />
+      value: "tokyo",
+      label: "Tokyo",
+      description: "Japan",
+      icon: <MapPin className="h-4 w-4" />,
     },
     {
-      value: 'paris',
-      label: 'Paris',
-      description: 'France',
-      icon: <MapPin className="h-4 w-4" />
-    }
-  ]
-  
+      value: "paris",
+      label: "Paris",
+      description: "France",
+      icon: <MapPin className="h-4 w-4" />,
+    },
+  ];
+
   return (
     <div className="space-y-6 max-w-md mx-auto">
       <div>
@@ -81,7 +81,7 @@ export default function Demo() {
           clearable
         />
       </div>
-      
+
       <div>
         <label className="block text-sm font-medium text-white mb-2">
           Select Location
@@ -95,16 +95,17 @@ export default function Demo() {
           size="lg"
         />
       </div>
-      
+
       <div className="p-4 rounded-lg bg-white/5 border border-white/10">
         <h3 className="font-medium text-white mb-2">Selected Values:</h3>
         <p className="text-white/70 text-sm">
-          User: {selectedUser || 'None'}<br />
-          Location: {selectedLocation || 'None'}
+          User: {selectedUser || "None"}
+          <br />
+          Location: {selectedLocation || "None"}
         </p>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -114,32 +115,32 @@ The Glass Combobox component combines the functionality of a dropdown and search
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `options` | `ComboboxOption[]` | `[]` | Array of selectable options |
-| `value` | `string` | `''` | Current selected value |
-| `onChange` | `(value: string) => void` | - | Callback when selection changes |
-| `onInputChange` | `(value: string) => void` | - | Callback when search input changes |
-| `placeholder` | `string` | `'Select an option...'` | Placeholder text |
-| `searchable` | `boolean` | `true` | Enable search functionality |
-| `clearable` | `boolean` | `false` | Show clear button |
-| `loading` | `boolean` | `false` | Show loading state |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
-| `error` | `boolean` | `false` | Error state |
-| `helperText` | `string` | - | Helper text below input |
-| `emptyMessage` | `string` | `'No options found'` | Message when no options match |
-| `maxDisplayOptions` | `number` | `50` | Maximum options to display |
-| `disabled` | `boolean` | `false` | Disabled state |
+| Prop                | Type                      | Default                 | Description                        |
+| ------------------- | ------------------------- | ----------------------- | ---------------------------------- |
+| `options`           | `ComboboxOption[]`        | `[]`                    | Array of selectable options        |
+| `value`             | `string`                  | `''`                    | Current selected value             |
+| `onChange`          | `(value: string) => void` | -                       | Callback when selection changes    |
+| `onInputChange`     | `(value: string) => void` | -                       | Callback when search input changes |
+| `placeholder`       | `string`                  | `'Select an option...'` | Placeholder text                   |
+| `searchable`        | `boolean`                 | `true`                  | Enable search functionality        |
+| `clearable`         | `boolean`                 | `false`                 | Show clear button                  |
+| `loading`           | `boolean`                 | `false`                 | Show loading state                 |
+| `size`              | `'sm' \| 'md' \| 'lg'`    | `'md'`                  | Size variant                       |
+| `error`             | `boolean`                 | `false`                 | Error state                        |
+| `helperText`        | `string`                  | -                       | Helper text below input            |
+| `emptyMessage`      | `string`                  | `'No options found'`    | Message when no options match      |
+| `maxDisplayOptions` | `number`                  | `50`                    | Maximum options to display         |
+| `disabled`          | `boolean`                 | `false`                 | Disabled state                     |
 
 ### ComboboxOption Interface
 
 ```typescript
 interface ComboboxOption {
-  value: string
-  label: string
-  description?: string
-  icon?: React.ReactNode
-  disabled?: boolean
+  value: string;
+  label: string;
+  description?: string;
+  icon?: React.ReactNode;
+  disabled?: boolean;
 }
 ```
 
@@ -210,7 +211,7 @@ const [searchTerm, setSearchTerm] = useState('')
 useEffect(() => {
   const fetchOptions = async () => {
     if (searchTerm.length < 2) return
-    
+
     setLoading(true)
     try {
       const results = await searchAPI(searchTerm)
@@ -219,7 +220,7 @@ useEffect(() => {
       setLoading(false)
     }
   }
-  
+
   const debounced = setTimeout(fetchOptions, 300)
   return () => clearTimeout(debounced)
 }, [searchTerm])
@@ -252,7 +253,7 @@ const [formData, setFormData] = useState({
     error={!!errors.category}
     helperText={errors.category}
   />
-  
+
   <GlassCombobox
     options={priorities}
     value={formData.priority}
@@ -282,14 +283,14 @@ const [formData, setFormData] = useState({
 
 ### Keyboard Support
 
-| Key | Action |
-|-----|--------|
-| `Arrow Down` | Navigate to next option or open dropdown |
-| `Arrow Up` | Navigate to previous option |
-| `Enter` | Select highlighted option or open dropdown |
-| `Escape` | Close dropdown and clear highlight |
-| `Tab` | Close dropdown and move to next element |
-| `Type` | Search for options (when searchable) |
+| Key          | Action                                     |
+| ------------ | ------------------------------------------ |
+| `Arrow Down` | Navigate to next option or open dropdown   |
+| `Arrow Up`   | Navigate to previous option                |
+| `Enter`      | Select highlighted option or open dropdown |
+| `Escape`     | Close dropdown and clear highlight         |
+| `Tab`        | Close dropdown and move to next element    |
+| `Type`       | Search for options (when searchable)       |
 
 ## Apple HIG Guidelines
 
@@ -334,11 +335,13 @@ const [formData, setFormData] = useState({
 // Memoized option component
 const ComboboxOption = React.memo(({ option, isSelected, isHighlighted }) => {
   return (
-    <div className={cn(
-      'flex items-center gap-3 px-4 py-3',
-      isSelected && 'bg-blue-500/20',
-      isHighlighted && 'bg-white/10'
-    )}>
+    <div
+      className={cn(
+        "flex items-center gap-3 px-4 py-3",
+        isSelected && "bg-blue-500/20",
+        isHighlighted && "bg-white/10",
+      )}
+    >
       {option.icon}
       <div>
         <div className="font-medium">{option.label}</div>
@@ -347,8 +350,8 @@ const ComboboxOption = React.memo(({ option, isSelected, isHighlighted }) => {
         )}
       </div>
     </div>
-  )
-})
+  );
+});
 ```
 
 ### UX Guidelines
@@ -361,23 +364,23 @@ const ComboboxOption = React.memo(({ option, isSelected, isHighlighted }) => {
 ### Error Handling
 
 ```tsx
-const [error, setError] = useState('')
+const [error, setError] = useState("");
 
 const handleChange = (value) => {
-  setError('')
-  
+  setError("");
+
   if (required && !value) {
-    setError('This field is required')
-    return
+    setError("This field is required");
+    return;
   }
-  
+
   if (customValidation && !customValidation(value)) {
-    setError('Please select a valid option')
-    return
+    setError("Please select a valid option");
+    return;
   }
-  
-  onChange(value)
-}
+
+  onChange(value);
+};
 
 <GlassCombobox
   options={options}
@@ -385,7 +388,7 @@ const handleChange = (value) => {
   onChange={handleChange}
   error={!!error}
   helperText={error}
-/>
+/>;
 ```
 
 ### Search Optimization
@@ -394,28 +397,28 @@ const handleChange = (value) => {
 // Fuzzy search implementation
 const fuzzySearch = (options, searchTerm) => {
   const fuse = new Fuse(options, {
-    keys: ['label', 'description'],
+    keys: ["label", "description"],
     threshold: 0.3,
-    includeScore: true
-  })
-  
-  return fuse.search(searchTerm).map(result => result.item)
-}
+    includeScore: true,
+  });
+
+  return fuse.search(searchTerm).map((result) => result.item);
+};
 
 // Debounced search
 const useDebounce = (value, delay) => {
-  const [debouncedValue, setDebouncedValue] = useState(value)
-  
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedValue(value)
-    }, delay)
-    
-    return () => clearTimeout(handler)
-  }, [value, delay])
-  
-  return debouncedValue
-}
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => clearTimeout(handler);
+  }, [value, delay]);
+
+  return debouncedValue;
+};
 ```
 
 ### Mobile Considerations
@@ -426,11 +429,11 @@ const useDebounce = (value, delay) => {
 - Consider using bottom sheet pattern for mobile
 
 ```tsx
-const isMobile = useMediaQuery('(max-width: 768px)')
+const isMobile = useMediaQuery("(max-width: 768px)");
 
 if (isMobile) {
-  return <NativeSelect options={options} value={value} onChange={onChange} />
+  return <NativeSelect options={options} value={value} onChange={onChange} />;
 }
 
-return <GlassCombobox options={options} value={value} onChange={onChange} />
+return <GlassCombobox options={options} value={value} onChange={onChange} />;
 ```

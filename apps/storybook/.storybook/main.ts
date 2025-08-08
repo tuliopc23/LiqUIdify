@@ -14,7 +14,7 @@ const config: StorybookConfig = {
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-docs")
+    getAbsolutePath("@storybook/addon-docs"),
   ],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
@@ -48,18 +48,18 @@ const config: StorybookConfig = {
           ? {
               "liquidify/css": path.resolve(distBase, "liquidify.css"),
               "liquidify/styles": path.resolve(distBase, "liquidify.css"),
-              "liquidify": path.resolve(distBase, "index.mjs"),
+              liquidify: path.resolve(distBase, "index.mjs"),
               "@": srcBase,
             }
           : {
               "liquidify/css": path.resolve(srcBase, "styles/index.css"),
               "liquidify/styles": path.resolve(srcBase, "styles/index.css"),
-              "liquidify": path.resolve(srcBase, "index.ts"),
+              liquidify: path.resolve(srcBase, "index.ts"),
               "@": srcBase,
             };
 
       return mergeConfig(config, {
-        logLevel: 'error',
+        logLevel: "error",
         resolve: {
           alias: aliasMap,
           dedupe: ["react", "react-dom"],
@@ -69,7 +69,12 @@ const config: StorybookConfig = {
           rollupOptions: {
             onwarn(warning, warn) {
               // Suppress "use client" directive warnings
-              if (warning.message && warning.message.includes('Module level directives cause errors when bundled')) {
+              if (
+                warning.message &&
+                warning.message.includes(
+                  "Module level directives cause errors when bundled",
+                )
+              ) {
                 return;
               }
               // Suppress "use client" warnings

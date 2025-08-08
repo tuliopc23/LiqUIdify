@@ -4,14 +4,25 @@ description: Flexible sidebar navigation with collapsible sections and Apple-ins
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { Sidebar, SidebarItem, SidebarSection } from '@liquidify/components'
-import { Home, Settings, User, Bell, Search, Heart, Package, BarChart, FileText, Shield } from 'lucide-react'
+import { useState } from "react";
+import { Sidebar, SidebarItem, SidebarSection } from "@liquidify/components";
+import {
+  Home,
+  Settings,
+  User,
+  Bell,
+  Search,
+  Heart,
+  Package,
+  BarChart,
+  FileText,
+  Shield,
+} from "lucide-react";
 
 export default function Demo() {
-  const [isOpen, setIsOpen] = useState(true)
-  const [activeItem, setActiveItem] = useState('dashboard')
-  
+  const [isOpen, setIsOpen] = useState(true);
+  const [activeItem, setActiveItem] = useState("dashboard");
+
   return (
     <div className="flex h-96 bg-black/20 rounded-xl overflow-hidden">
       <Sidebar
@@ -25,66 +36,68 @@ export default function Demo() {
             <span className="font-semibold text-white">Admin Panel</span>
           </div>
         }
-        footer={
-          <div className="text-xs text-white/60">
-            Version 2.1.0
-          </div>
-        }
+        footer={<div className="text-xs text-white/60">Version 2.1.0</div>}
       >
         <SidebarSection title="Main">
           <SidebarItem
             icon={<Home className="h-5 w-5" />}
             label="Dashboard"
-            active={activeItem === 'dashboard'}
-            onClick={() => setActiveItem('dashboard')}
+            active={activeItem === "dashboard"}
+            onClick={() => setActiveItem("dashboard")}
           />
           <SidebarItem
             icon={<BarChart className="h-5 w-5" />}
             label="Analytics"
-            active={activeItem === 'analytics'}
-            onClick={() => setActiveItem('analytics')}
-            badge={<span className="bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full">New</span>}
+            active={activeItem === "analytics"}
+            onClick={() => setActiveItem("analytics")}
+            badge={
+              <span className="bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                New
+              </span>
+            }
           />
           <SidebarItem
             icon={<Package className="h-5 w-5" />}
             label="Products"
-            active={activeItem === 'products'}
-            onClick={() => setActiveItem('products')}
+            active={activeItem === "products"}
+            onClick={() => setActiveItem("products")}
           >
             <SidebarItem
               label="Electronics"
-              active={activeItem === 'electronics'}
-              onClick={() => setActiveItem('electronics')}
+              active={activeItem === "electronics"}
+              onClick={() => setActiveItem("electronics")}
             />
             <SidebarItem
               label="Clothing"
-              active={activeItem === 'clothing'}
-              onClick={() => setActiveItem('clothing')}
+              active={activeItem === "clothing"}
+              onClick={() => setActiveItem("clothing")}
             />
           </SidebarItem>
         </SidebarSection>
-        
+
         <SidebarSection title="Account">
           <SidebarItem
             icon={<User className="h-5 w-5" />}
             label="Profile"
-            active={activeItem === 'profile'}
-            onClick={() => setActiveItem('profile')}
+            active={activeItem === "profile"}
+            onClick={() => setActiveItem("profile")}
           />
           <SidebarItem
             icon={<Settings className="h-5 w-5" />}
             label="Settings"
-            active={activeItem === 'settings'}
-            onClick={() => setActiveItem('settings')}
+            active={activeItem === "settings"}
+            onClick={() => setActiveItem("settings")}
           />
         </SidebarSection>
       </Sidebar>
-      
+
       <div className="flex-1 p-6 flex items-center justify-center">
         <div className="text-center">
-          <h3 className="text-white text-lg font-semibold mb-2">Content Area</h3>
+          <h3 className="text-white text-lg font-semibold mb-2">
+            Content Area
+          </h3>
           <p className="text-white/60">Active: {activeItem}</p>
-          <button 
+          <button
             onClick={() => setIsOpen(!isOpen)}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
           >
@@ -93,7 +106,7 @@ export default function Demo() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -105,44 +118,44 @@ The Sidebar component provides a flexible navigation solution with support for c
 
 ### Sidebar Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | **Required.** Sidebar content |
-| `open` | `boolean` | - | Controlled open state |
-| `defaultOpen` | `boolean` | `false` | Default open state (uncontrolled) |
-| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
-| `position` | `'left' \| 'right'` | `'left'` | Sidebar position |
-| `width` | `'sm' \| 'md' \| 'lg' \| 'full'` | `'md'` | Sidebar width |
-| `overlay` | `boolean` | `true` | Overlay behavior |
-| `push` | `boolean` | `false` | Push content instead of overlay |
-| `collapsible` | `boolean` | `false` | Collapsible on desktop |
-| `collapsedWidth` | `string` | `'4rem'` | Collapsed width when collapsible |
-| `header` | `ReactNode` | - | Header content |
-| `footer` | `ReactNode` | - | Footer content |
-| `zIndex` | `number` | `40` | Z-index value |
-| `closeOnOverlayClick` | `boolean` | `true` | Close on overlay click |
-| `closeOnEsc` | `boolean` | `true` | Close on escape key |
+| Prop                  | Type                             | Default  | Description                       |
+| --------------------- | -------------------------------- | -------- | --------------------------------- |
+| `children`            | `ReactNode`                      | -        | **Required.** Sidebar content     |
+| `open`                | `boolean`                        | -        | Controlled open state             |
+| `defaultOpen`         | `boolean`                        | `false`  | Default open state (uncontrolled) |
+| `onOpenChange`        | `(open: boolean) => void`        | -        | Callback when open state changes  |
+| `position`            | `'left' \| 'right'`              | `'left'` | Sidebar position                  |
+| `width`               | `'sm' \| 'md' \| 'lg' \| 'full'` | `'md'`   | Sidebar width                     |
+| `overlay`             | `boolean`                        | `true`   | Overlay behavior                  |
+| `push`                | `boolean`                        | `false`  | Push content instead of overlay   |
+| `collapsible`         | `boolean`                        | `false`  | Collapsible on desktop            |
+| `collapsedWidth`      | `string`                         | `'4rem'` | Collapsed width when collapsible  |
+| `header`              | `ReactNode`                      | -        | Header content                    |
+| `footer`              | `ReactNode`                      | -        | Footer content                    |
+| `zIndex`              | `number`                         | `40`     | Z-index value                     |
+| `closeOnOverlayClick` | `boolean`                        | `true`   | Close on overlay click            |
+| `closeOnEsc`          | `boolean`                        | `true`   | Close on escape key               |
 
 ### SidebarItem Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `icon` | `ReactNode` | - | Item icon |
-| `label` | `string` | - | **Required.** Item label |
-| `href` | `string` | - | Link destination |
-| `active` | `boolean` | `false` | Active state |
-| `onClick` | `() => void` | - | Click handler |
-| `children` | `ReactNode` | - | Nested items |
-| `collapsed` | `boolean` | `true` | Collapsed state for nested items |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `badge` | `ReactNode` | - | Badge content |
+| Prop        | Type         | Default | Description                      |
+| ----------- | ------------ | ------- | -------------------------------- |
+| `icon`      | `ReactNode`  | -       | Item icon                        |
+| `label`     | `string`     | -       | **Required.** Item label         |
+| `href`      | `string`     | -       | Link destination                 |
+| `active`    | `boolean`    | `false` | Active state                     |
+| `onClick`   | `() => void` | -       | Click handler                    |
+| `children`  | `ReactNode`  | -       | Nested items                     |
+| `collapsed` | `boolean`    | `true`  | Collapsed state for nested items |
+| `disabled`  | `boolean`    | `false` | Disabled state                   |
+| `badge`     | `ReactNode`  | -       | Badge content                    |
 
 ### SidebarSection Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `title` | `string` | - | Section title |
-| `children` | `ReactNode` | - | **Required.** Section content |
+| Prop       | Type        | Default | Description                   |
+| ---------- | ----------- | ------- | ----------------------------- |
+| `title`    | `string`    | -       | Section title                 |
+| `children` | `ReactNode` | -       | **Required.** Section content |
 
 ## Usage Patterns
 
@@ -182,10 +195,7 @@ const [isOpen, setIsOpen] = useState(false)
 
 ```tsx
 <Sidebar>
-  <SidebarItem 
-    icon={<Folder />} 
-    label="Products"
-  >
+  <SidebarItem icon={<Folder />} label="Products">
     <SidebarItem label="Electronics" href="/electronics" />
     <SidebarItem label="Clothing" href="/clothing" />
     <SidebarItem label="Books" href="/books" />
@@ -221,14 +231,14 @@ const [isOpen, setIsOpen] = useState(false)
 
 ### Keyboard Support
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Navigate between items |
-| `Enter` / `Space` | Activate focused item |
-| `Arrow Up/Down` | Navigate between items |
-| `Arrow Right` | Expand collapsed item |
-| `Arrow Left` | Collapse expanded item |
-| `Escape` | Close overlay sidebar |
+| Key               | Action                 |
+| ----------------- | ---------------------- |
+| `Tab`             | Navigate between items |
+| `Enter` / `Space` | Activate focused item  |
+| `Arrow Up/Down`   | Navigate between items |
+| `Arrow Right`     | Expand collapsed item  |
+| `Arrow Left`      | Collapse expanded item |
+| `Escape`          | Close overlay sidebar  |
 
 ## Apple HIG Guidelines
 
@@ -296,18 +306,18 @@ const [isOpen, setIsOpen] = useState(false)
 
 ```tsx
 // With React Router
-<SidebarItem 
-  as={Link} 
-  to="/dashboard" 
+<SidebarItem
+  as={Link}
+  to="/dashboard"
   active={location.pathname === '/dashboard'}
 >
   Dashboard
 </SidebarItem>
 
 // With Next.js
-<SidebarItem 
-  as={NextLink} 
-  href="/settings" 
+<SidebarItem
+  as={NextLink}
+  href="/settings"
   active={router.pathname === '/settings'}
 >
   Settings

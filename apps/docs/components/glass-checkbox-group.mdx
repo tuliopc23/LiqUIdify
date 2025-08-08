@@ -4,43 +4,46 @@ description: Elegant checkbox group component with Apple-inspired liquid glass e
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassCheckboxGroup } from '@liquidify/components'
+import { useState } from "react";
+import { GlassCheckboxGroup } from "@liquidify/components";
 
 export default function Demo() {
-  const [selectedFeatures, setSelectedFeatures] = useState(['notifications', 'analytics'])
-  const [selectedCategories, setSelectedCategories] = useState([])
-  
+  const [selectedFeatures, setSelectedFeatures] = useState([
+    "notifications",
+    "analytics",
+  ]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
   const features = [
     {
-      value: 'notifications',
-      label: 'Push Notifications',
-      description: 'Receive real-time updates and alerts'
+      value: "notifications",
+      label: "Push Notifications",
+      description: "Receive real-time updates and alerts",
     },
     {
-      value: 'analytics',
-      label: 'Advanced Analytics',
-      description: 'Detailed insights and reporting'
+      value: "analytics",
+      label: "Advanced Analytics",
+      description: "Detailed insights and reporting",
     },
     {
-      value: 'api',
-      label: 'API Access',
-      description: 'Programmatic access to your data'
+      value: "api",
+      label: "API Access",
+      description: "Programmatic access to your data",
     },
     {
-      value: 'support',
-      label: 'Priority Support',
-      description: '24/7 dedicated customer support'
-    }
-  ]
-  
+      value: "support",
+      label: "Priority Support",
+      description: "24/7 dedicated customer support",
+    },
+  ];
+
   const categories = [
-    { value: 'tech', label: 'Technology' },
-    { value: 'design', label: 'Design' },
-    { value: 'business', label: 'Business' },
-    { value: 'marketing', label: 'Marketing' }
-  ]
-  
+    { value: "tech", label: "Technology" },
+    { value: "design", label: "Design" },
+    { value: "business", label: "Business" },
+    { value: "marketing", label: "Marketing" },
+  ];
+
   return (
     <div className="space-y-8 max-w-lg mx-auto">
       <div>
@@ -53,7 +56,7 @@ export default function Demo() {
           size="md"
         />
       </div>
-      
+
       <div>
         <GlassCheckboxGroup
           label="Interests"
@@ -65,16 +68,16 @@ export default function Demo() {
           size="sm"
         />
       </div>
-      
+
       <div className="p-4 rounded-lg bg-white/5 border border-white/10">
         <h3 className="font-medium text-white mb-2">Selected Values:</h3>
         <div className="text-white/70 text-sm space-y-1">
-          <p>Features: {selectedFeatures.join(', ') || 'None'}</p>
-          <p>Categories: {selectedCategories.join(', ') || 'None'}</p>
+          <p>Features: {selectedFeatures.join(", ") || "None"}</p>
+          <p>Categories: {selectedCategories.join(", ") || "None"}</p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -84,29 +87,29 @@ The Glass Checkbox Group component provides an elegant way to present multiple c
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `options` | `CheckboxOption[]` | - | **Required.** Array of checkbox options |
-| `value` | `string[]` | - | Controlled selected values |
-| `defaultValue` | `string[]` | `[]` | Default selected values (uncontrolled) |
-| `onChange` | `(value: string[]) => void` | - | Callback when selection changes |
-| `name` | `string` | - | Form field name |
-| `label` | `string` | - | Group label |
-| `description` | `string` | - | Group description |
-| `error` | `string` | - | Error message |
-| `required` | `boolean` | `false` | Required field indicator |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout orientation |
+| Prop           | Type                         | Default      | Description                             |
+| -------------- | ---------------------------- | ------------ | --------------------------------------- |
+| `options`      | `CheckboxOption[]`           | -            | **Required.** Array of checkbox options |
+| `value`        | `string[]`                   | -            | Controlled selected values              |
+| `defaultValue` | `string[]`                   | `[]`         | Default selected values (uncontrolled)  |
+| `onChange`     | `(value: string[]) => void`  | -            | Callback when selection changes         |
+| `name`         | `string`                     | -            | Form field name                         |
+| `label`        | `string`                     | -            | Group label                             |
+| `description`  | `string`                     | -            | Group description                       |
+| `error`        | `string`                     | -            | Error message                           |
+| `required`     | `boolean`                    | `false`      | Required field indicator                |
+| `disabled`     | `boolean`                    | `false`      | Disabled state                          |
+| `size`         | `'sm' \| 'md' \| 'lg'`       | `'md'`       | Size variant                            |
+| `orientation`  | `'vertical' \| 'horizontal'` | `'vertical'` | Layout orientation                      |
 
 ### CheckboxOption Interface
 
 ```typescript
 interface CheckboxOption {
-  value: string
-  label: string
-  disabled?: boolean
-  description?: string
+  value: string;
+  label: string;
+  disabled?: boolean;
+  description?: string;
 }
 ```
 
@@ -171,19 +174,19 @@ const features = [
 ```tsx
 const [formData, setFormData] = useState({
   interests: [],
-  preferences: []
-})
+  preferences: [],
+});
 
-const [errors, setErrors] = useState({})
+const [errors, setErrors] = useState({});
 
 const handleInterestsChange = (interests) => {
-  setFormData(prev => ({ ...prev, interests }))
-  
+  setFormData((prev) => ({ ...prev, interests }));
+
   // Clear error when user makes selection
   if (interests.length > 0 && errors.interests) {
-    setErrors(prev => ({ ...prev, interests: '' }))
+    setErrors((prev) => ({ ...prev, interests: "" }));
   }
-}
+};
 
 <form>
   <GlassCheckboxGroup
@@ -195,47 +198,47 @@ const handleInterestsChange = (interests) => {
     error={errors.interests}
     required
   />
-  
+
   <GlassCheckboxGroup
     label="Communication Preferences"
     options={communicationOptions}
     value={formData.preferences}
-    onChange={(preferences) => 
-      setFormData(prev => ({ ...prev, preferences }))
+    onChange={(preferences) =>
+      setFormData((prev) => ({ ...prev, preferences }))
     }
   />
-</form>
+</form>;
 ```
 
 ### Conditional Options
 
 ```tsx
-const [selectedPlan, setSelectedPlan] = useState('basic')
-const [selectedAddons, setSelectedAddons] = useState([])
+const [selectedPlan, setSelectedPlan] = useState("basic");
+const [selectedAddons, setSelectedAddons] = useState([]);
 
 const getAvailableAddons = (plan) => {
   const baseAddons = [
-    { value: 'support', label: 'Priority Support' },
-    { value: 'backup', label: 'Daily Backups' }
-  ]
-  
-  if (plan === 'premium') {
+    { value: "support", label: "Priority Support" },
+    { value: "backup", label: "Daily Backups" },
+  ];
+
+  if (plan === "premium") {
     return [
       ...baseAddons,
-      { value: 'analytics', label: 'Advanced Analytics' },
-      { value: 'api', label: 'API Access' }
-    ]
+      { value: "analytics", label: "Advanced Analytics" },
+      { value: "api", label: "API Access" },
+    ];
   }
-  
-  return baseAddons
-}
+
+  return baseAddons;
+};
 
 <GlassCheckboxGroup
   label="Add-ons"
   options={getAvailableAddons(selectedPlan)}
   value={selectedAddons}
   onChange={setSelectedAddons}
-/>
+/>;
 ```
 
 ## Accessibility
@@ -256,11 +259,11 @@ const getAvailableAddons = (plan) => {
 
 ### Keyboard Support
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Navigate between checkboxes |
-| `Space` | Toggle focused checkbox |
-| `Enter` | Toggle focused checkbox |
+| Key          | Action                                 |
+| ------------ | -------------------------------------- |
+| `Tab`        | Navigate between checkboxes            |
+| `Space`      | Toggle focused checkbox                |
+| `Enter`      | Toggle focused checkbox                |
 | `Arrow Keys` | Navigate between checkboxes (optional) |
 
 ## Apple HIG Guidelines
@@ -312,10 +315,12 @@ const CheckboxOption = React.memo(({ option, checked, onChange, disabled }) => {
         disabled={disabled}
         className="sr-only"
       />
-      <div className={cn(
-        'w-5 h-5 rounded border-2 transition-all',
-        checked ? 'bg-blue-500 border-blue-500' : 'border-white/20'
-      )}>
+      <div
+        className={cn(
+          "w-5 h-5 rounded border-2 transition-all",
+          checked ? "bg-blue-500 border-blue-500" : "border-white/20",
+        )}
+      >
         {checked && <CheckIcon />}
       </div>
       <div>
@@ -325,8 +330,8 @@ const CheckboxOption = React.memo(({ option, checked, onChange, disabled }) => {
         )}
       </div>
     </label>
-  )
-})
+  );
+});
 ```
 
 ### UX Guidelines
@@ -341,33 +346,33 @@ const CheckboxOption = React.memo(({ option, checked, onChange, disabled }) => {
 
 ```tsx
 const validateSelection = (values, options) => {
-  const errors = []
-  
+  const errors = [];
+
   if (required && values.length === 0) {
-    errors.push('Please select at least one option')
+    errors.push("Please select at least one option");
   }
-  
+
   if (maxSelections && values.length > maxSelections) {
-    errors.push(`Please select no more than ${maxSelections} options`)
+    errors.push(`Please select no more than ${maxSelections} options`);
   }
-  
+
   if (minSelections && values.length < minSelections) {
-    errors.push(`Please select at least ${minSelections} options`)
+    errors.push(`Please select at least ${minSelections} options`);
   }
-  
-  return errors
-}
+
+  return errors;
+};
 
 const handleChange = (newValues) => {
-  const errors = validateSelection(newValues, options)
-  
+  const errors = validateSelection(newValues, options);
+
   if (errors.length > 0) {
-    setError(errors[0])
+    setError(errors[0]);
   } else {
-    setError('')
-    onChange(newValues)
+    setError("");
+    onChange(newValues);
   }
-}
+};
 ```
 
 ### Mobile Considerations
@@ -382,34 +387,37 @@ const handleChange = (newValues) => {
 ```tsx
 // Custom hook for checkbox group state
 const useCheckboxGroup = (initialValues = [], options = {}) => {
-  const [values, setValues] = useState(initialValues)
-  const [errors, setErrors] = useState([])
-  
-  const toggle = useCallback((value) => {
-    setValues(prev => {
-      const newValues = prev.includes(value)
-        ? prev.filter(v => v !== value)
-        : [...prev, value]
-      
-      // Validate new values
-      const validationErrors = validateSelection(newValues, options)
-      setErrors(validationErrors)
-      
-      return newValues
-    })
-  }, [options])
-  
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState([]);
+
+  const toggle = useCallback(
+    (value) => {
+      setValues((prev) => {
+        const newValues = prev.includes(value)
+          ? prev.filter((v) => v !== value)
+          : [...prev, value];
+
+        // Validate new values
+        const validationErrors = validateSelection(newValues, options);
+        setErrors(validationErrors);
+
+        return newValues;
+      });
+    },
+    [options],
+  );
+
   const selectAll = useCallback(() => {
-    const allValues = options.map(opt => opt.value)
-    setValues(allValues)
-    setErrors([])
-  }, [options])
-  
+    const allValues = options.map((opt) => opt.value);
+    setValues(allValues);
+    setErrors([]);
+  }, [options]);
+
   const selectNone = useCallback(() => {
-    setValues([])
-    setErrors([])
-  }, [])
-  
+    setValues([]);
+    setErrors([]);
+  }, []);
+
   return {
     values,
     errors,
@@ -417,7 +425,7 @@ const useCheckboxGroup = (initialValues = [], options = {}) => {
     selectAll,
     selectNone,
     isSelected: (value) => values.includes(value),
-    hasErrors: errors.length > 0
-  }
-}
+    hasErrors: errors.length > 0,
+  };
+};
 ```

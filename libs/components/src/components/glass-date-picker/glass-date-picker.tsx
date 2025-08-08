@@ -271,7 +271,9 @@ const GlassDatePicker = forwardRef<HTMLDivElement, GlassDatePickerProps>(
           ref={triggerRef}
           type="button"
           className={cn(
-            triggerVariants({ ...{ isOpen: isOpen ? "true" : "false", size } } as any),
+            triggerVariants({
+              ...{ isOpen: isOpen ? "true" : "false", size },
+            } as any),
             focusRing,
             disabled && "cursor-not-allowed",
           )}

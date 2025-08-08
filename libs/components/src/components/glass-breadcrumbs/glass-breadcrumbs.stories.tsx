@@ -410,9 +410,7 @@ export const RealWorldExamples: Story = {
 // Interactive demo
 export const InteractiveDemo: Story = {
   args: {
-    items: [
-      { label: "Home" },
-    ],
+    items: [{ label: "Home" }],
   },
   render: () => {
     const [path, setPath] = React.useState<Array<string>>(["Home"]);

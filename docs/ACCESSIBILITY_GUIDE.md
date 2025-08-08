@@ -346,14 +346,12 @@ test("component is accessible", async () => {
 ### Manual Testing Checklist
 
 1. **Keyboard Navigation**
-
    - [ ] Tab through all interactive elements
    - [ ] Verify focus indicators are visible
    - [ ] Check focus order is logical
    - [ ] Ensure no keyboard traps
 
 2. **Screen Reader Testing**
-
    - [ ] Test with NVDA (Windows)
    - [ ] Test with JAWS (Windows)
    - [ ] Test with VoiceOver (macOS/iOS)

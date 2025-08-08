@@ -338,9 +338,9 @@ export function RovingTabindexGroup({
 
   // Collect item refs
   useEffect(() => {
-    const validItems = (itemReferences.current as (HTMLElement | null)[]).filter(
-      (item): item is HTMLElement => item !== null,
-    );
+    const validItems = (
+      itemReferences.current as (HTMLElement | null)[]
+    ).filter((item): item is HTMLElement => item !== null);
     setItems(validItems);
   }, []);
 
@@ -363,11 +363,11 @@ export function RovingTabindexGroup({
 
     // Get the roving props for this index
     const rovingProps = roving.getRovingProps(index);
-    
+
     // Safely get child props
     const childElement = child as React.ReactElement<any>;
     const childProps = childElement.props || {};
-    
+
     // Create a properly typed props object
     const enhancedProps: any = {
       ...childProps,
@@ -375,7 +375,7 @@ export function RovingTabindexGroup({
       ref: (element: HTMLElement | null) => {
         // Store the element reference
         itemReferences.current[index] = element;
-        
+
         // Handle original ref if it exists
         const originalRef = (childElement as any).ref;
         if (originalRef) {

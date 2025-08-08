@@ -40,9 +40,7 @@ export const Default: Story = {
           </Card.Description>
         </Card.Header>
         <Card.Content>
-          <p>
-            Use the controls to try different variants and sizes.
-          </p>
+          <p>Use the controls to try different variants and sizes.</p>
         </Card.Content>
         <Card.Footer>
           <p className="text-sm text-gray-500">Footer content</p>
@@ -138,7 +136,11 @@ export const Interactive: Story = {
   render: () => {
     const [clicked, setClicked] = React.useState(false);
     return (
-      <Card variant="interactive" interactive onClick={() => setClicked(!clicked)}>
+      <Card
+        variant="interactive"
+        interactive
+        onClick={() => setClicked(!clicked)}
+      >
         <Card.Header>
           <Card.Title>Interactive Card</Card.Title>
           <Card.Description>Click to toggle</Card.Description>

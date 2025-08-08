@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React from 'react';
-import { GlassCard } from '@/components/glass-card-refactored/glass-card';
-import { GlassButton } from '@/components/glass-button-refactored/glass-button';
-import { GlassBadge } from '@/components/glass-badge/glass-badge';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import React from "react";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
+import { GlassButton } from "@/components/glass-button-refactored/glass-button";
+import { GlassBadge } from "@/components/glass-badge/glass-badge";
 
 const meta = {
-  title: 'Design System/Glassmorphism',
+  title: "Design System/Glassmorphism",
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
         component: `
@@ -57,16 +57,18 @@ type Story = StoryObj<typeof meta>;
 
 export const Overview: Story = {
   render: () => (
-    <div 
+    <div
       className="min-h-screen p-8"
       style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       }}
     >
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Hero Section */}
         <div className="text-center text-white mb-12">
-          <h1 className="text-5xl font-bold mb-4">Glassmorphism Design System</h1>
+          <h1 className="text-5xl font-bold mb-4">
+            Glassmorphism Design System
+          </h1>
           <p className="text-xl opacity-90">
             Beautiful, modern UI components with liquid glass effects
           </p>
@@ -74,19 +76,21 @@ export const Overview: Story = {
 
         {/* Glass Effect Showcase */}
         <section>
-          <h2 className="text-2xl font-bold text-white mb-6">Glass Effect Variations</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">
+            Glass Effect Variations
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <GlassCard className="p-6">
               <h3 className="text-lg font-semibold mb-2">Subtle Glass</h3>
               <p className="text-sm opacity-75 mb-4">
                 Light transparency with minimal blur for subtle depth
               </p>
-              <div 
+              <div
                 className="h-20 rounded-lg mb-4"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  background: "rgba(255, 255, 255, 0.05)",
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
                 }}
               />
               <code className="text-xs">blur: 8px, opacity: 0.05</code>
@@ -97,12 +101,12 @@ export const Overview: Story = {
               <p className="text-sm opacity-75 mb-4">
                 Balanced transparency and blur for most use cases
               </p>
-              <div 
+              <div
                 className="h-20 rounded-lg mb-4"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  background: "rgba(255, 255, 255, 0.1)",
+                  backdropFilter: "blur(12px)",
+                  border: "1px solid rgba(255, 255, 255, 0.2)",
                 }}
               />
               <code className="text-xs">blur: 12px, opacity: 0.1</code>
@@ -113,12 +117,12 @@ export const Overview: Story = {
               <p className="text-sm opacity-75 mb-4">
                 Heavy blur with higher opacity for prominent elements
               </p>
-              <div 
+              <div
                 className="h-20 rounded-lg mb-4"
                 style={{
-                  background: 'rgba(255, 255, 255, 0.15)',
-                  backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                  background: "rgba(255, 255, 255, 0.15)",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid rgba(255, 255, 255, 0.3)",
                 }}
               />
               <code className="text-xs">blur: 20px, opacity: 0.15</code>
@@ -132,33 +136,33 @@ export const Overview: Story = {
           <GlassCard className="p-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div>
-                <div 
+                <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ background: '#007AFF' }}
+                  style={{ background: "#007AFF" }}
                 />
                 <h4 className="font-medium mb-1">Primary</h4>
                 <code className="text-xs opacity-75">#007AFF</code>
               </div>
               <div>
-                <div 
+                <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ background: '#34C759' }}
+                  style={{ background: "#34C759" }}
                 />
                 <h4 className="font-medium mb-1">Success</h4>
                 <code className="text-xs opacity-75">#34C759</code>
               </div>
               <div>
-                <div 
+                <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ background: '#FF9500' }}
+                  style={{ background: "#FF9500" }}
                 />
                 <h4 className="font-medium mb-1">Warning</h4>
                 <code className="text-xs opacity-75">#FF9500</code>
               </div>
               <div>
-                <div 
+                <div
                   className="h-24 rounded-lg mb-3"
-                  style={{ background: '#FF3B30' }}
+                  style={{ background: "#FF3B30" }}
                 />
                 <h4 className="font-medium mb-1">Error</h4>
                 <code className="text-xs opacity-75">#FF3B30</code>
@@ -169,7 +173,9 @@ export const Overview: Story = {
 
         {/* Typography Scale */}
         <section>
-          <h2 className="text-2xl font-bold text-white mb-6">Typography Scale</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">
+            Typography Scale
+          </h2>
           <GlassCard className="p-8 space-y-4">
             <div className="text-4xl font-bold">Display Heading</div>
             <div className="text-3xl font-semibold">Page Title</div>
@@ -190,23 +196,23 @@ export const Overview: Story = {
               {[1, 2, 4, 6, 8, 12, 16, 20, 24].map((spacing) => (
                 <div key={spacing} className="flex items-center gap-4">
                   <code className="text-sm w-16">{spacing * 4}px</code>
-                  <div 
+                  <div
                     className="bg-blue-500/30 rounded"
-                    style={{ 
-                      width: `${spacing * 4}px`, 
-                      height: '24px' 
+                    style={{
+                      width: `${spacing * 4}px`,
+                      height: "24px",
                     }}
                   />
                   <span className="text-sm opacity-75">
-                    {spacing === 1 && 'Micro'}
-                    {spacing === 2 && 'Tiny'}
-                    {spacing === 4 && 'Small'}
-                    {spacing === 6 && 'Medium'}
-                    {spacing === 8 && 'Large'}
-                    {spacing === 12 && 'Extra Large'}
-                    {spacing === 16 && 'Huge'}
-                    {spacing === 20 && 'Gigantic'}
-                    {spacing === 24 && 'Massive'}
+                    {spacing === 1 && "Micro"}
+                    {spacing === 2 && "Tiny"}
+                    {spacing === 4 && "Small"}
+                    {spacing === 6 && "Medium"}
+                    {spacing === 8 && "Large"}
+                    {spacing === 12 && "Extra Large"}
+                    {spacing === 16 && "Huge"}
+                    {spacing === 20 && "Gigantic"}
+                    {spacing === 24 && "Massive"}
                   </span>
                 </div>
               ))}
@@ -220,15 +226,17 @@ export const Overview: Story = {
 
 export const ComponentShowcase: Story = {
   render: () => (
-    <div 
+    <div
       className="min-h-screen p-8"
       style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       }}
     >
       <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-4xl font-bold text-white mb-8">Component Showcase</h1>
-        
+        <h1 className="text-4xl font-bold text-white mb-8">
+          Component Showcase
+        </h1>
+
         {/* Buttons */}
         <GlassCard className="p-8">
           <h2 className="text-2xl font-semibold mb-6">Buttons</h2>
@@ -239,7 +247,7 @@ export const ComponentShowcase: Story = {
             <GlassButton variant="danger">Danger Button</GlassButton>
             <GlassButton disabled>Disabled Button</GlassButton>
           </div>
-          
+
           <div className="mt-6 pt-6 border-t border-white/10">
             <h3 className="text-lg font-medium mb-4">Button Sizes</h3>
             <div className="flex flex-wrap items-center gap-4">
@@ -294,19 +302,23 @@ export const ComponentShowcase: Story = {
 
 export const DesignGuidelines: Story = {
   render: () => (
-    <div 
+    <div
       className="min-h-screen p-8"
       style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       }}
     >
       <div className="max-w-7xl mx-auto space-y-8">
-        <h1 className="text-4xl font-bold text-white mb-8">Design Guidelines</h1>
-        
+        <h1 className="text-4xl font-bold text-white mb-8">
+          Design Guidelines
+        </h1>
+
         {/* Do's and Don'ts */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <GlassCard className="p-8">
-            <h2 className="text-2xl font-semibold mb-6 text-green-400">✓ Do's</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-green-400">
+              ✓ Do's
+            </h2>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <span className="text-green-400 mt-1">✓</span>
@@ -322,7 +334,8 @@ export const DesignGuidelines: Story = {
                 <div>
                   <strong>Layer glass effects thoughtfully</strong>
                   <p className="text-sm opacity-75 mt-1">
-                    Create depth with multiple glass layers at different opacities
+                    Create depth with multiple glass layers at different
+                    opacities
                   </p>
                 </div>
               </li>
@@ -348,7 +361,9 @@ export const DesignGuidelines: Story = {
           </GlassCard>
 
           <GlassCard className="p-8">
-            <h2 className="text-2xl font-semibold mb-6 text-red-400">✗ Don'ts</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-red-400">
+              ✗ Don'ts
+            </h2>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <span className="text-red-400 mt-1">✗</span>

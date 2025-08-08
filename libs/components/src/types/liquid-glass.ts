@@ -3,9 +3,13 @@
  * Enhanced type definitions for the liquid glass component system
  */
 
-export type LiquidGlassSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-export type LiquidGlassVariant = 'default' | 'elevated' | 'outlined' | 'interactive';
-export type LiquidGlassAnimation = 'none' | 'float' | 'shimmer' | 'pulse';
+export type LiquidGlassSize = "sm" | "md" | "lg" | "xl" | "2xl";
+export type LiquidGlassVariant =
+  | "default"
+  | "elevated"
+  | "outlined"
+  | "interactive";
+export type LiquidGlassAnimation = "none" | "float" | "shimmer" | "pulse";
 
 export interface LiquidGlassBaseProps {
   /** Size variant for the glass effect */

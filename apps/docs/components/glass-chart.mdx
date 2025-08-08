@@ -4,54 +4,54 @@ description: Beautiful data visualization components with Apple-inspired liquid 
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { LineChart, BarChart, DonutChart } from '@liquidify/components'
+import { useState } from "react";
+import { LineChart, BarChart, DonutChart } from "@liquidify/components";
 
 export default function Demo() {
-  const [chartType, setChartType] = useState('line')
-  
+  const [chartType, setChartType] = useState("line");
+
   const lineData = [
-    { label: 'Jan', value: 65 },
-    { label: 'Feb', value: 78 },
-    { label: 'Mar', value: 90 },
-    { label: 'Apr', value: 81 },
-    { label: 'May', value: 95 },
-    { label: 'Jun', value: 87 }
-  ]
-  
+    { label: "Jan", value: 65 },
+    { label: "Feb", value: 78 },
+    { label: "Mar", value: 90 },
+    { label: "Apr", value: 81 },
+    { label: "May", value: 95 },
+    { label: "Jun", value: 87 },
+  ];
+
   const barData = [
-    { label: 'Q1', value: 2400, color: '#3B82F6' },
-    { label: 'Q2', value: 1398, color: '#10B981' },
-    { label: 'Q3', value: 9800, color: '#F59E0B' },
-    { label: 'Q4', value: 3908, color: '#EF4444' }
-  ]
-  
+    { label: "Q1", value: 2400, color: "#3B82F6" },
+    { label: "Q2", value: 1398, color: "#10B981" },
+    { label: "Q3", value: 9800, color: "#F59E0B" },
+    { label: "Q4", value: 3908, color: "#EF4444" },
+  ];
+
   const donutData = [
-    { label: 'Desktop', value: 45, color: '#3B82F6' },
-    { label: 'Mobile', value: 35, color: '#10B981' },
-    { label: 'Tablet', value: 20, color: '#F59E0B' }
-  ]
-  
+    { label: "Desktop", value: 45, color: "#3B82F6" },
+    { label: "Mobile", value: 35, color: "#10B981" },
+    { label: "Tablet", value: 20, color: "#F59E0B" },
+  ];
+
   return (
     <div className="space-y-6">
       <div className="flex gap-2 justify-center">
-        {['line', 'bar', 'donut'].map((type) => (
+        {["line", "bar", "donut"].map((type) => (
           <button
             key={type}
             onClick={() => setChartType(type)}
             className={`px-4 py-2 rounded-lg transition-all ${
-              chartType === type 
-                ? 'bg-blue-500 text-white' 
-                : 'bg-white/10 text-white/70 hover:bg-white/20'
+              chartType === type
+                ? "bg-blue-500 text-white"
+                : "bg-white/10 text-white/70 hover:bg-white/20"
             }`}
           >
             {type.charAt(0).toUpperCase() + type.slice(1)}
           </button>
         ))}
       </div>
-      
+
       <div className="flex justify-center">
-        {chartType === 'line' && (
+        {chartType === "line" && (
           <LineChart
             data={lineData}
             width={400}
@@ -61,8 +61,8 @@ export default function Demo() {
             gradient
           />
         )}
-        
-        {chartType === 'bar' && (
+
+        {chartType === "bar" && (
           <BarChart
             data={barData}
             width={400}
@@ -71,8 +71,8 @@ export default function Demo() {
             showValues
           />
         )}
-        
-        {chartType === 'donut' && (
+
+        {chartType === "donut" && (
           <DonutChart
             data={donutData}
             width={200}
@@ -89,7 +89,7 @@ export default function Demo() {
         )}
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -149,46 +149,46 @@ Great for showing proportions and percentages.
 
 ### Base Chart Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `data` | `ChartDataPoint[]` | - | **Required.** Chart data |
-| `width` | `number` | `400` | Chart width in pixels |
-| `height` | `number` | `200` | Chart height in pixels |
-| `className` | `string` | - | Additional CSS classes |
-| `animated` | `boolean` | `true` | Enable animations |
-| `showTooltip` | `boolean` | `true` | Show interactive tooltips |
+| Prop          | Type               | Default | Description               |
+| ------------- | ------------------ | ------- | ------------------------- |
+| `data`        | `ChartDataPoint[]` | -       | **Required.** Chart data  |
+| `width`       | `number`           | `400`   | Chart width in pixels     |
+| `height`      | `number`           | `200`   | Chart height in pixels    |
+| `className`   | `string`           | -       | Additional CSS classes    |
+| `animated`    | `boolean`          | `true`  | Enable animations         |
+| `showTooltip` | `boolean`          | `true`  | Show interactive tooltips |
 
 ### LineChart Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `strokeWidth` | `number` | `3` | Line stroke width |
-| `showDots` | `boolean` | `true` | Show data point dots |
-| `gradient` | `boolean` | `true` | Show gradient fill |
+| Prop          | Type      | Default | Description          |
+| ------------- | --------- | ------- | -------------------- |
+| `strokeWidth` | `number`  | `3`     | Line stroke width    |
+| `showDots`    | `boolean` | `true`  | Show data point dots |
+| `gradient`    | `boolean` | `true`  | Show gradient fill   |
 
 ### BarChart Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Bar orientation |
-| `showValues` | `boolean` | `true` | Show value labels |
+| Prop          | Type                         | Default      | Description       |
+| ------------- | ---------------------------- | ------------ | ----------------- |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Bar orientation   |
+| `showValues`  | `boolean`                    | `true`       | Show value labels |
 
 ### DonutChart Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `innerRadius` | `number` | `60` | Inner radius in pixels |
-| `showLabels` | `boolean` | `true` | Show segment labels |
-| `centerContent` | `ReactNode` | - | Content for center area |
+| Prop            | Type        | Default | Description             |
+| --------------- | ----------- | ------- | ----------------------- |
+| `innerRadius`   | `number`    | `60`    | Inner radius in pixels  |
+| `showLabels`    | `boolean`   | `true`  | Show segment labels     |
+| `centerContent` | `ReactNode` | -       | Content for center area |
 
 ### ChartDataPoint Interface
 
 ```typescript
 interface ChartDataPoint {
-  label: string
-  value: number
-  color?: string
-  metadata?: Record<string, unknown>
+  label: string;
+  value: number;
+  color?: string;
+  metadata?: Record<string, unknown>;
 }
 ```
 
@@ -206,7 +206,7 @@ useEffect(() => {
       { label: new Date().toLocaleTimeString(), value: Math.random() * 100 }
     ])
   }, 1000)
-  
+
   return () => clearInterval(interval)
 }, [])
 
@@ -240,15 +240,15 @@ useEffect(() => {
       })
     }
   }
-  
+
   window.addEventListener('resize', handleResize)
   return () => window.removeEventListener('resize', handleResize)
 }, [])
 
-<LineChart 
-  data={data} 
-  width={dimensions.width} 
-  height={dimensions.height} 
+<LineChart
+  data={data}
+  width={dimensions.width}
+  height={dimensions.height}
 />
 ```
 
@@ -260,12 +260,12 @@ useEffect(() => {
     <h3 className="text-lg font-semibold mb-4">Revenue Trend</h3>
     <LineChart data={revenueData} width={600} height={300} />
   </div>
-  
+
   <div>
     <h3 className="text-lg font-semibold mb-4">Traffic Sources</h3>
     <DonutChart data={trafficData} width={250} height={250} />
   </div>
-  
+
   <div className="col-span-3">
     <h3 className="text-lg font-semibold mb-4">Quarterly Performance</h3>
     <BarChart data={quarterlyData} width={800} height={400} />
@@ -294,7 +294,7 @@ useEffect(() => {
 ```tsx
 <div>
   <LineChart data={data} aria-describedby="chart-table" />
-  
+
   <table id="chart-table" className="sr-only">
     <caption>Monthly Revenue Data</caption>
     <thead>
@@ -304,7 +304,7 @@ useEffect(() => {
       </tr>
     </thead>
     <tbody>
-      {data.map(item => (
+      {data.map((item) => (
         <tr key={item.label}>
           <td>{item.label}</td>
           <td>{item.value}</td>
@@ -359,12 +359,12 @@ useEffect(() => {
 ```tsx
 // Memoize expensive data transformations
 const chartData = useMemo(() => {
-  return rawData.map(item => ({
+  return rawData.map((item) => ({
     label: formatLabel(item.date),
     value: calculateValue(item),
-    color: getColorForValue(item.value)
-  }))
-}, [rawData])
+    color: getColorForValue(item.value),
+  }));
+}, [rawData]);
 ```
 
 ### Error Handling
@@ -376,11 +376,11 @@ const ChartWithErrorBoundary = ({ data }) => {
       <div className="flex items-center justify-center h-48">
         <p className="text-white/60">No data available</p>
       </div>
-    )
+    );
   }
-  
-  return <LineChart data={data} />
-}
+
+  return <LineChart data={data} />;
+};
 ```
 
 ### Responsive Design
@@ -399,9 +399,9 @@ const ChartWithLoading = ({ data, loading }) => {
       <div className="animate-pulse">
         <div className="h-48 bg-white/10 rounded-xl"></div>
       </div>
-    )
+    );
   }
-  
-  return <LineChart data={data} />
-}
+
+  return <LineChart data={data} />;
+};
 ```

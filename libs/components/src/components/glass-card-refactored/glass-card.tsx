@@ -99,9 +99,9 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
 
     return (
       <CardContext.Provider value={contextValue}>
-        <div 
-          ref={ref} 
-          className={cardClasses} 
+        <div
+          ref={ref}
+          className={cardClasses}
           onClick={onClick}
           role={interactive || onClick ? "button" : undefined}
           tabIndex={interactive || onClick ? 0 : undefined}
@@ -241,7 +241,10 @@ const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex items-center justify-between pt-4 space-x-2", className)}
+        className={cn(
+          "flex items-center justify-between pt-4 space-x-2",
+          className,
+        )}
         {...props}
       >
         {children}
@@ -251,9 +254,10 @@ const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
 );
 
 // Define compound component type
-interface GlassCardComponent extends React.ForwardRefExoticComponent<
-  GlassCardProps & React.RefAttributes<HTMLDivElement>
-> {
+interface GlassCardComponent
+  extends React.ForwardRefExoticComponent<
+    GlassCardProps & React.RefAttributes<HTMLDivElement>
+  > {
   Header: typeof CardHeader;
   Title: typeof CardTitle;
   Description: typeof CardDescription;

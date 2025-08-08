@@ -6,10 +6,6 @@
     "jsx": "react-jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"]
   },
-  "include": [
-    "./src/test/**/*.ts",
-    "./src/test/**/*.tsx"
-  ],
+  "include": ["./src/test/**/*.ts", "./src/test/**/*.tsx"],
   "exclude": []
 }
-

@@ -53,7 +53,7 @@ export const GlassTimeline: React.FC<GlassTimelineProps> = ({
 
   if (orientation === "horizontal") {
     return (
-    <div className={cn("liquid-glass", "relative", className)} {...props}>
+      <div className={cn("liquid-glass", "relative", className)} {...props}>
         <div className="flex items-start overflow-x-auto pb-4">
           {items.map((item, index) => (
             <div key={item.id} className="flex min-w-[250px] items-start">

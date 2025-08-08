@@ -4,29 +4,61 @@ description: Notifications via ToastProvider and useToast hook.
 ---
 
 ```tsx live
-import { GlassButton, ToastProvider, useToast } from '@liquidify/components'
+import { GlassButton, ToastProvider, useToast } from "@liquidify/components";
 
-function DemoInner(){
-  const { addToast } = useToast()
+function DemoInner() {
+  const { addToast } = useToast();
   return (
-    <div style={{display:'flex', gap:12, flexWrap:'wrap'}}>
-      <GlassButton onClick={()=>addToast({ title:'Saved', description:'Changes persisted', type:'success' })}>Success</GlassButton>
-      <GlassButton variant="ghost" onClick={()=>addToast({ title:'Heads up', description:'Check your input', type:'warning' })}>Warning</GlassButton>
-      <GlassButton variant="destructive" onClick={()=>addToast({ title:'Error', description:'Something went wrong', type:'error' })}>Error</GlassButton>
+    <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+      <GlassButton
+        onClick={() =>
+          addToast({
+            title: "Saved",
+            description: "Changes persisted",
+            type: "success",
+          })
+        }
+      >
+        Success
+      </GlassButton>
+      <GlassButton
+        variant="ghost"
+        onClick={() =>
+          addToast({
+            title: "Heads up",
+            description: "Check your input",
+            type: "warning",
+          })
+        }
+      >
+        Warning
+      </GlassButton>
+      <GlassButton
+        variant="destructive"
+        onClick={() =>
+          addToast({
+            title: "Error",
+            description: "Something went wrong",
+            type: "error",
+          })
+        }
+      >
+        Error
+      </GlassButton>
     </div>
-  )
+  );
 }
 
-export default function Demo(){
+export default function Demo() {
   return (
     <ToastProvider>
       <DemoInner />
     </ToastProvider>
-  )
+  );
 }
 ```
 
 API
+
 - ToastProvider: wraps app/section; position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'
 - useToast(): { addToast({ title?, description, type?, duration?, action? }), removeToast(id) }
-

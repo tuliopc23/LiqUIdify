@@ -412,12 +412,10 @@ npm run type-check
 ### Removed Features
 
 1. **Inline styles removed**
-
    - Use className and CSS instead
    - Better performance and CSP compliance
 
 2. **jQuery dependency removed**
-
    - All components use React hooks
    - No external dependencies
 

@@ -142,7 +142,7 @@ export const GlassDropdown = React.memo(
       };
 
       return (
-    <div
+        <div
           ref={ref}
           className={cn("liquid-glass", "relative inline-block", className)}
           {...props}

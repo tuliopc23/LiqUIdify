@@ -8,9 +8,7 @@
     "composite": false,
     "stripInternal": true
   },
-  "include": [
-    "src/**/*"
-  ],
+  "include": ["src/**/*"],
   "exclude": [
     "**/*.stories.*",
     "**/*.test.*",

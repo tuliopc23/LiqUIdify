@@ -2,47 +2,53 @@
 /* Enhanced with Liquid Glass Morphism Effects */
 
 /* Import SF Pro fonts from Apple */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 /* Apple SF Pro Font Loading */
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://developer.apple.com/fonts/SF-Pro-Display-Regular.woff2') format('woff2');
+  font-family: "SF Pro Display";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://developer.apple.com/fonts/SF-Pro-Display-Medium.woff2') format('woff2');
+  font-family: "SF Pro Display";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Medium.woff2")
+    format("woff2");
   font-weight: 500;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://developer.apple.com/fonts/SF-Pro-Display-Semibold.woff2') format('woff2');
+  font-family: "SF Pro Display";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Semibold.woff2")
+    format("woff2");
   font-weight: 600;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://developer.apple.com/fonts/SF-Pro-Display-Bold.woff2') format('woff2');
+  font-family: "SF Pro Display";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Display-Bold.woff2")
+    format("woff2");
   font-weight: 700;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SF Pro Text';
-  src: url('https://developer.apple.com/fonts/SF-Pro-Text-Regular.woff2') format('woff2');
+  font-family: "SF Pro Text";
+  src: url("https://developer.apple.com/fonts/SF-Pro-Text-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SF Mono';
-  src: url('https://developer.apple.com/fonts/SF-Mono-Regular.woff2') format('woff2');
+  font-family: "SF Mono";
+  src: url("https://developer.apple.com/fonts/SF-Mono-Regular.woff2")
+    format("woff2");
   font-weight: 400;
   font-display: swap;
 }
@@ -50,34 +56,34 @@
 /* Apple Design System Variables */
 :root {
   /* Apple System Colors - Light Mode */
-  --apple-blue: #007AFF;
-  --apple-blue-light: #5AC8FA;
-  --apple-blue-dark: #0051D5;
-  --apple-green: #34C759;
-  --apple-indigo: #5856D6;
-  --apple-orange: #FF9500;
-  --apple-pink: #FF2D92;
-  --apple-purple: #AF52DE;
-  --apple-red: #FF3B30;
-  --apple-teal: #5AC8FA;
-  --apple-yellow: #FFCC00;
+  --apple-blue: #007aff;
+  --apple-blue-light: #5ac8fa;
+  --apple-blue-dark: #0051d5;
+  --apple-green: #34c759;
+  --apple-indigo: #5856d6;
+  --apple-orange: #ff9500;
+  --apple-pink: #ff2d92;
+  --apple-purple: #af52de;
+  --apple-red: #ff3b30;
+  --apple-teal: #5ac8fa;
+  --apple-yellow: #ffcc00;
 
   /* Apple Neutral Colors */
-  --apple-gray: #8E8E93;
-  --apple-gray-2: #AEAEB2;
-  --apple-gray-3: #C7C7CC;
-  --apple-gray-4: #D1D1D6;
-  --apple-gray-5: #E5E5EA;
-  --apple-gray-6: #F2F2F7;
+  --apple-gray: #8e8e93;
+  --apple-gray-2: #aeaeb2;
+  --apple-gray-3: #c7c7cc;
+  --apple-gray-4: #d1d1d6;
+  --apple-gray-5: #e5e5ea;
+  --apple-gray-6: #f2f2f7;
 
   /* Apple System Backgrounds */
-  --apple-bg-primary: #FFFFFF;
-  --apple-bg-secondary: #F2F2F7;
-  --apple-bg-tertiary: #FFFFFF;
+  --apple-bg-primary: #ffffff;
+  --apple-bg-secondary: #f2f2f7;
+  --apple-bg-tertiary: #ffffff;
 
   /* Apple Text Colors */
   --apple-text-primary: #000000;
-  --apple-text-secondary: #3C3C43;
+  --apple-text-secondary: #3c3c43;
   --apple-text-tertiary: rgba(60, 60, 67, 0.6);
   --apple-text-quaternary: rgba(60, 60, 67, 0.3);
 
@@ -102,46 +108,56 @@
   --apple-radius-3xl: 24px;
 
   /* Apple Shadows */
-  --apple-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --apple-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
-  --apple-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-  --apple-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --apple-shadow-sm:
+    0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --apple-shadow-md:
+    0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --apple-shadow-lg:
+    0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --apple-shadow-xl:
+    0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
 }
 
 /* Dark Mode Colors */
 [data-theme="dark"] {
-  --apple-blue: #0A84FF;
-  --apple-blue-light: #64D2FF;
-  --apple-blue-dark: #0056CC;
-  --apple-green: #30D158;
-  --apple-indigo: #5E5CE6;
-  --apple-orange: #FF9F0A;
-  --apple-pink: #FF375F;
-  --apple-purple: #BF5AF2;
-  --apple-red: #FF453A;
-  --apple-teal: #64D2FF;
-  --apple-yellow: #FFD60A;
+  --apple-blue: #0a84ff;
+  --apple-blue-light: #64d2ff;
+  --apple-blue-dark: #0056cc;
+  --apple-green: #30d158;
+  --apple-indigo: #5e5ce6;
+  --apple-orange: #ff9f0a;
+  --apple-pink: #ff375f;
+  --apple-purple: #bf5af2;
+  --apple-red: #ff453a;
+  --apple-teal: #64d2ff;
+  --apple-yellow: #ffd60a;
 
-  --apple-gray: #8E8E93;
+  --apple-gray: #8e8e93;
   --apple-gray-2: #636366;
-  --apple-gray-3: #48484A;
-  --apple-gray-4: #3A3A3C;
-  --apple-gray-5: #2C2C2E;
-  --apple-gray-6: #1C1C1E;
+  --apple-gray-3: #48484a;
+  --apple-gray-4: #3a3a3c;
+  --apple-gray-5: #2c2c2e;
+  --apple-gray-6: #1c1c1e;
 
   --apple-bg-primary: #000000;
-  --apple-bg-secondary: #1C1C1E;
-  --apple-bg-tertiary: #2C2C2E;
+  --apple-bg-secondary: #1c1c1e;
+  --apple-bg-tertiary: #2c2c2e;
 
-  --apple-text-primary: #FFFFFF;
+  --apple-text-primary: #ffffff;
   --apple-text-secondary: rgba(235, 235, 245, 0.6);
   --apple-text-tertiary: rgba(235, 235, 245, 0.3);
   --apple-text-quaternary: rgba(235, 235, 245, 0.18);
 }
 
 /* Enhanced Liquid Glass Background */
-html, body {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+html,
+body {
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   position: relative;
@@ -168,28 +184,69 @@ html, body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(0, 122, 255, 0.2) 0%, transparent 50%);
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(120, 119, 198, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(0, 122, 255, 0.2) 0%,
+      transparent 50%
+    );
   animation: liquid-bubbles 15s ease-in-out infinite reverse;
 }
 
 @keyframes liquid-flow {
-  0%, 100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-  25% { background-position: 100% 50%; filter: hue-rotate(90deg); }
-  50% { background-position: 100% 100%; filter: hue-rotate(180deg); }
-  75% { background-position: 0% 100%; filter: hue-rotate(270deg); }
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    background-position: 100% 50%;
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    background-position: 100% 100%;
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    background-position: 0% 100%;
+    filter: hue-rotate(270deg);
+  }
 }
 
 @keyframes liquid-bubbles {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-  33% { transform: scale(1.1) rotate(120deg); opacity: 0.5; }
-  66% { transform: scale(0.9) rotate(240deg); opacity: 0.4; }
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  33% {
+    transform: scale(1.1) rotate(120deg);
+    opacity: 0.5;
+  }
+  66% {
+    transform: scale(0.9) rotate(240deg);
+    opacity: 0.4;
+  }
 }
 
 /* Apple Typography System */
-h1, .text-6xl {
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+h1,
+.text-6xl {
+  font-family:
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.07;
@@ -197,8 +254,14 @@ h1, .text-6xl {
   color: var(--apple-text-primary);
 }
 
-h2, .text-5xl {
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+h2,
+.text-5xl {
+  font-family:
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 2.75rem;
   font-weight: 700;
   line-height: 1.09;
@@ -206,8 +269,14 @@ h2, .text-5xl {
   color: var(--apple-text-primary);
 }
 
-h3, .text-4xl {
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+h3,
+.text-4xl {
+  font-family:
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 2.25rem;
   font-weight: 600;
   line-height: 1.11;
@@ -215,8 +284,14 @@ h3, .text-4xl {
   color: var(--apple-text-primary);
 }
 
-h4, .text-3xl {
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+h4,
+.text-3xl {
+  font-family:
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1.14;
@@ -224,8 +299,14 @@ h4, .text-3xl {
   color: var(--apple-text-primary);
 }
 
-h5, .text-2xl {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+h5,
+.text-2xl {
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 1.375rem;
   font-weight: 600;
   line-height: 1.18;
@@ -233,8 +314,14 @@ h5, .text-2xl {
   color: var(--apple-text-primary);
 }
 
-h6, .text-xl {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+h6,
+.text-xl {
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.22;
@@ -243,8 +330,14 @@ h6, .text-xl {
 }
 
 /* Body Text */
-p, .text-base {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+p,
+.text-base {
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.47;
@@ -253,8 +346,11 @@ p, .text-base {
 }
 
 /* Code Typography */
-code, pre, .font-mono {
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
+code,
+pre,
+.font-mono {
+  font-family:
+    "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Consolas", monospace;
   font-feature-settings: "liga" 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -262,7 +358,12 @@ code, pre, .font-mono {
 
 /* Apple-style Buttons */
 .apple-button {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.47;
@@ -324,7 +425,12 @@ code, pre, .font-mono {
 }
 
 .apple-nav-item {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-weight: 500;
   color: var(--apple-text-secondary);
   text-decoration: none;
@@ -346,7 +452,12 @@ code, pre, .font-mono {
 
 /* Apple-style Form Elements */
 .apple-input {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--apple-radius-lg);
@@ -379,7 +490,12 @@ code, pre, .font-mono {
 .apple-table th {
   background: rgba(0, 122, 255, 0.05);
   color: var(--apple-text-primary);
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-weight: 600;
   padding: var(--apple-spacing-4);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -397,7 +513,12 @@ code, pre, .font-mono {
 
 /* Apple-style Badges */
 .apple-badge {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   background: var(--apple-blue);
   color: white;
   border-radius: var(--apple-radius-2xl);
@@ -407,9 +528,15 @@ code, pre, .font-mono {
   line-height: 1;
 }
 
-.apple-badge.success { background: var(--apple-green); }
-.apple-badge.warning { background: var(--apple-orange); }
-.apple-badge.error { background: var(--apple-red); }
+.apple-badge.success {
+  background: var(--apple-green);
+}
+.apple-badge.warning {
+  background: var(--apple-orange);
+}
+.apple-badge.error {
+  background: var(--apple-red);
+}
 
 /* Apple-style Focus States */
 *:focus {
@@ -445,18 +572,28 @@ code, pre, .font-mono {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  h1, .text-6xl { font-size: 2.5rem; }
-  h2, .text-5xl { font-size: 2rem; }
-  .apple-card { padding: var(--apple-spacing-6); }
+  h1,
+  .text-6xl {
+    font-size: 2.5rem;
+  }
+  h2,
+  .text-5xl {
+    font-size: 2rem;
+  }
+  .apple-card {
+    padding: var(--apple-spacing-6);
+  }
 }
 
 /* High Contrast Mode */
 @media (prefers-contrast: high) {
-  .apple-card, .apple-input, .apple-nav {
+  .apple-card,
+  .apple-input,
+  .apple-nav {
     background: rgba(255, 255, 255, 0.95);
     border: 2px solid rgba(0, 0, 0, 0.2);
   }
-  
+
   [data-theme="dark"] .apple-card,
   [data-theme="dark"] .apple-input,
   [data-theme="dark"] .apple-nav {
@@ -472,7 +609,7 @@ code, pre, .font-mono {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .apple-card:hover,
   .apple-button:hover {
     transform: none;
@@ -481,7 +618,12 @@ code, pre, .font-mono {
 
 /* Mintlify Integration Overrides */
 .mintlify-content {
-  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
 }
 
 .mintlify-sidebar {
@@ -505,7 +647,8 @@ pre {
 }
 
 code {
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
+  font-family:
+    "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Consolas", monospace;
   background: rgba(0, 0, 0, 0.2);
   padding: 2px 6px;
   border-radius: var(--apple-radius-sm);
@@ -519,7 +662,7 @@ code {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--apple-radius-2xl);
   padding: var(--apple-spacing-8);
-  box-shadow: 
+  box-shadow:
     0 0 0 2px rgba(255, 255, 255, 0.6),
     0 16px 32px rgba(0, 0, 0, 0.12),
     0 8px 16px rgba(0, 0, 0, 0.08);

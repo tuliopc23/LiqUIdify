@@ -7,7 +7,8 @@ import { useIsClient } from "@/hooks/use-ssr-safe";
 
 // Mock accessibilityManager since it was removed
 const accessibilityManager = {
-  announce: (message: string, priority?: string) => console.debug(`Announced: ${message} (${priority || 'polite'})`),
+  announce: (message: string, priority?: string) =>
+    console.debug(`Announced: ${message} (${priority || "polite"})`),
 };
 
 interface SkipLink {

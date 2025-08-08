@@ -4,15 +4,15 @@ description: Elegant numeric input component with Apple-inspired liquid glass ef
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassNumberInput } from '@liquidify/components'
+import { useState } from "react";
+import { GlassNumberInput } from "@liquidify/components";
 
 export default function Demo() {
-  const [quantity, setQuantity] = useState(1)
-  const [price, setPrice] = useState(99.99)
-  const [percentage, setPercentage] = useState(75)
-  const [temperature, setTemperature] = useState(22)
-  
+  const [quantity, setQuantity] = useState(1);
+  const [price, setPrice] = useState(99.99);
+  const [percentage, setPercentage] = useState(75);
+  const [temperature, setTemperature] = useState(22);
+
   return (
     <div className="space-y-6 max-w-md mx-auto">
       <div>
@@ -26,7 +26,7 @@ export default function Demo() {
           helperText="Enter quantity (1-999)"
         />
       </div>
-      
+
       <div>
         <GlassNumberInput
           label="Price"
@@ -40,7 +40,7 @@ export default function Demo() {
           size="lg"
         />
       </div>
-      
+
       <div>
         <GlassNumberInput
           label="Completion"
@@ -53,7 +53,7 @@ export default function Demo() {
           size="sm"
         />
       </div>
-      
+
       <div>
         <GlassNumberInput
           label="Temperature"
@@ -67,7 +67,7 @@ export default function Demo() {
           showControls={false}
         />
       </div>
-      
+
       <div className="p-4 rounded-lg bg-white/5 border border-white/10">
         <h3 className="font-medium text-white mb-2">Current Values:</h3>
         <div className="text-white/70 text-sm space-y-1">
@@ -78,7 +78,7 @@ export default function Demo() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -88,24 +88,24 @@ The Glass Number Input component provides an elegant numeric input interface wit
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `number` | - | Current numeric value |
-| `defaultValue` | `number` | - | Default numeric value (uncontrolled) |
-| `onChange` | `(value: number) => void` | - | Callback when value changes |
-| `min` | `number` | - | Minimum allowed value |
-| `max` | `number` | - | Maximum allowed value |
-| `step` | `number` | `1` | Step increment/decrement amount |
-| `precision` | `number` | `0` | Number of decimal places |
-| `formatValue` | `(value: number) => string` | - | Custom value formatter |
-| `placeholder` | `string` | - | Placeholder text |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `error` | `boolean` | `false` | Error state |
-| `helperText` | `string` | - | Helper text below input |
-| `label` | `string` | - | Input label |
-| `description` | `string` | - | Input description |
-| `showControls` | `boolean` | `true` | Show increment/decrement buttons |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
+| Prop           | Type                        | Default | Description                          |
+| -------------- | --------------------------- | ------- | ------------------------------------ |
+| `value`        | `number`                    | -       | Current numeric value                |
+| `defaultValue` | `number`                    | -       | Default numeric value (uncontrolled) |
+| `onChange`     | `(value: number) => void`   | -       | Callback when value changes          |
+| `min`          | `number`                    | -       | Minimum allowed value                |
+| `max`          | `number`                    | -       | Maximum allowed value                |
+| `step`         | `number`                    | `1`     | Step increment/decrement amount      |
+| `precision`    | `number`                    | `0`     | Number of decimal places             |
+| `formatValue`  | `(value: number) => string` | -       | Custom value formatter               |
+| `placeholder`  | `string`                    | -       | Placeholder text                     |
+| `disabled`     | `boolean`                   | `false` | Disabled state                       |
+| `error`        | `boolean`                   | `false` | Error state                          |
+| `helperText`   | `string`                    | -       | Helper text below input              |
+| `label`        | `string`                    | -       | Input label                          |
+| `description`  | `string`                    | -       | Input description                    |
+| `showControls` | `boolean`                   | `true`  | Show increment/decrement buttons     |
+| `size`         | `'sm' \| 'md' \| 'lg'`      | `'md'`  | Size variant                         |
 
 ## Usage Patterns
 
@@ -180,27 +180,27 @@ const [temperature, setTemperature] = useState(22)
 const [formData, setFormData] = useState({
   quantity: 1,
   price: 0,
-  discount: 0
-})
+  discount: 0,
+});
 
-const [errors, setErrors] = useState({})
+const [errors, setErrors] = useState({});
 
 const validateQuantity = (value) => {
   if (!value || value < 1) {
-    return 'Quantity must be at least 1'
+    return "Quantity must be at least 1";
   }
   if (value > 999) {
-    return 'Quantity cannot exceed 999'
+    return "Quantity cannot exceed 999";
   }
-  return ''
-}
+  return "";
+};
 
 const handleQuantityChange = (value) => {
-  setFormData(prev => ({ ...prev, quantity: value }))
-  
-  const error = validateQuantity(value)
-  setErrors(prev => ({ ...prev, quantity: error }))
-}
+  setFormData((prev) => ({ ...prev, quantity: value }));
+
+  const error = validateQuantity(value);
+  setErrors((prev) => ({ ...prev, quantity: error }));
+};
 
 <form className="space-y-4">
   <GlassNumberInput
@@ -210,30 +210,30 @@ const handleQuantityChange = (value) => {
     min={1}
     max={999}
     error={!!errors.quantity}
-    helperText={errors.quantity || 'Enter quantity'}
+    helperText={errors.quantity || "Enter quantity"}
     required
   />
-  
+
   <GlassNumberInput
     label="Unit Price"
     value={formData.price}
-    onChange={(value) => setFormData(prev => ({ ...prev, price: value }))}
+    onChange={(value) => setFormData((prev) => ({ ...prev, price: value }))}
     min={0}
     step={0.01}
     precision={2}
     formatValue={(value) => `$${value.toFixed(2)}`}
   />
-  
+
   <GlassNumberInput
     label="Discount %"
     value={formData.discount}
-    onChange={(value) => setFormData(prev => ({ ...prev, discount: value }))}
+    onChange={(value) => setFormData((prev) => ({ ...prev, discount: value }))}
     min={0}
     max={100}
     step={5}
     formatValue={(value) => `${value}%`}
   />
-</form>
+</form>;
 ```
 
 ## Accessibility
@@ -255,13 +255,13 @@ const handleQuantityChange = (value) => {
 
 ### Keyboard Support
 
-| Key | Action |
-|-----|--------|
-| `Arrow Up` | Increment value by step |
-| `Arrow Down` | Decrement value by step |
-| `Enter` | Confirm current value |
-| `Tab` | Navigate to next element |
-| `Numbers` | Direct numeric input |
+| Key          | Action                   |
+| ------------ | ------------------------ |
+| `Arrow Up`   | Increment value by step  |
+| `Arrow Down` | Decrement value by step  |
+| `Enter`      | Confirm current value    |
+| `Tab`        | Navigate to next element |
+| `Numbers`    | Direct numeric input     |
 
 ## Apple HIG Guidelines
 
@@ -306,20 +306,21 @@ const handleQuantityChange = (value) => {
 // Memoized formatter
 const formatCurrency = useMemo(() => {
   return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2
-  })
-}, [locale])
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  });
+}, [locale]);
 
 // Debounced validation
 const debouncedValidation = useMemo(
-  () => debounce((value) => {
-    const error = validateValue(value)
-    setError(error)
-  }, 300),
-  [validateValue]
-)
+  () =>
+    debounce((value) => {
+      const error = validateValue(value);
+      setError(error);
+    }, 300),
+  [validateValue],
+);
 ```
 
 ### UX Guidelines
@@ -334,30 +335,30 @@ const debouncedValidation = useMemo(
 ```tsx
 const validateNumberInput = (value, min, max, required) => {
   if (required && (value === undefined || value === null)) {
-    return 'This field is required'
+    return "This field is required";
   }
-  
+
   if (value !== undefined && min !== undefined && value < min) {
-    return `Value must be at least ${min}`
+    return `Value must be at least ${min}`;
   }
-  
+
   if (value !== undefined && max !== undefined && value > max) {
-    return `Value must be no more than ${max}`
+    return `Value must be no more than ${max}`;
   }
-  
-  return ''
-}
+
+  return "";
+};
 
 const handleValueChange = (newValue) => {
-  const error = validateNumberInput(newValue, min, max, required)
-  
+  const error = validateNumberInput(newValue, min, max, required);
+
   if (error) {
-    setError(error)
+    setError(error);
   } else {
-    setError('')
-    onChange(newValue)
+    setError("");
+    onChange(newValue);
   }
-}
+};
 ```
 
 ### Mobile Considerations
@@ -373,7 +374,7 @@ const isMobile = useMediaQuery('(max-width: 768px)')
 const inputProps = {
   inputMode: 'numeric' as const,
   pattern: '[0-9]*',
-  ...(isMobile && { 
+  ...(isMobile && {
     type: 'number',
     step: step.toString()
   })
@@ -391,18 +392,18 @@ const useNumberFormatter = (locale, options = {}) => {
     return new Intl.NumberFormat(locale, {
       minimumFractionDigits: 0,
       maximumFractionDigits: 2,
-      ...options
-    })
-  }, [locale, options])
-}
+      ...options,
+    });
+  }, [locale, options]);
+};
 
 // Usage
-const formatter = useNumberFormatter('en-US', {
-  style: 'currency',
-  currency: 'USD'
-})
+const formatter = useNumberFormatter("en-US", {
+  style: "currency",
+  currency: "USD",
+});
 
-const formatValue = (value) => formatter.format(value)
+const formatValue = (value) => formatter.format(value);
 ```
 
 ### State Management
@@ -410,32 +411,35 @@ const formatValue = (value) => formatter.format(value)
 ```tsx
 // Custom hook for number input state
 const useNumberInput = (initialValue, options = {}) => {
-  const [value, setValue] = useState(initialValue)
-  const [error, setError] = useState('')
-  const [focused, setFocused] = useState(false)
-  
-  const { min, max, step = 1, precision = 0 } = options
-  
+  const [value, setValue] = useState(initialValue);
+  const [error, setError] = useState("");
+  const [focused, setFocused] = useState(false);
+
+  const { min, max, step = 1, precision = 0 } = options;
+
   const increment = useCallback(() => {
-    setValue(prev => {
-      const newValue = (prev || 0) + step
-      return max !== undefined ? Math.min(newValue, max) : newValue
-    })
-  }, [step, max])
-  
+    setValue((prev) => {
+      const newValue = (prev || 0) + step;
+      return max !== undefined ? Math.min(newValue, max) : newValue;
+    });
+  }, [step, max]);
+
   const decrement = useCallback(() => {
-    setValue(prev => {
-      const newValue = (prev || 0) - step
-      return min !== undefined ? Math.max(newValue, min) : newValue
-    })
-  }, [step, min])
-  
-  const validate = useCallback((val) => {
-    const error = validateNumberInput(val, min, max, options.required)
-    setError(error)
-    return !error
-  }, [min, max, options.required])
-  
+    setValue((prev) => {
+      const newValue = (prev || 0) - step;
+      return min !== undefined ? Math.max(newValue, min) : newValue;
+    });
+  }, [step, min]);
+
+  const validate = useCallback(
+    (val) => {
+      const error = validateNumberInput(val, min, max, options.required);
+      setError(error);
+      return !error;
+    },
+    [min, max, options.required],
+  );
+
   return {
     value,
     setValue,
@@ -445,7 +449,7 @@ const useNumberInput = (initialValue, options = {}) => {
     increment,
     decrement,
     validate,
-    isValid: !error
-  }
-}
+    isValid: !error,
+  };
+};
 ```

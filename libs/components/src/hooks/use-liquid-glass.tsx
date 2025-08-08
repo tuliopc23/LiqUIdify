@@ -72,7 +72,8 @@ export function LiquidGlassProvider({
   config?: LiquidGlassConfig;
 }) {
   const merged = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
-  const [contentAnalysis, setContentAnalysis] = useState<ContentAnalysis | null>(null);
+  const [contentAnalysis, setContentAnalysis] =
+    useState<ContentAnalysis | null>(null);
 
   const updateGlassStyle = useCallback(
     (analysis: ContentAnalysis) => {

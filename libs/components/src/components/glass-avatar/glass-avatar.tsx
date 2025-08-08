@@ -71,7 +71,7 @@ export const GlassAvatar = React.memo(
       };
 
       return (
-    <div
+        <div
           ref={ref}
           className={cn(
             "liquid-glass-container",
@@ -85,54 +85,56 @@ export const GlassAvatar = React.memo(
           )}
           {...props}
         >
-      {/* Liquid Glass Layers */}
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">
-          {src ? (
-            <img
-              src={src}
-              alt={alt || (fallback ? `Avatar for ${fallback}` : "User avatar")}
-              className={cn(
-                "h-full w-full object-cover",
-                variantClasses[variant],
-              )}
-              onError={(e) => {
-                // Hide image on error, fallback will show
-                (e.target as HTMLImageElement).style.display = "none";
-              }}
-            />
-          ) : fallback ? (
-            <span
-              className={cn(
-                "font-medium text-gray-900 dark:text-white",
-                "bg-gradient-to-br from-blue-500 to-purple-500 text-white",
-              )}
-            >
-              {getInitials(fallback)}
-            </span>
-          ) : (
-            <User
-              className={cn(
-                "h-1/2 w-1/2 text-gray-400",
-                "rounded-full bg-gray-200 p-1 dark:bg-gray-700",
-              )}
-            />
-          )}
+          {/* Liquid Glass Layers */}
+          <div className="liquid-glass-filter" />
+          <div className="liquid-glass-overlay" />
+          <div className="liquid-glass-specular" />
+          <div className="liquid-glass-content">
+            {src ? (
+              <img
+                src={src}
+                alt={
+                  alt || (fallback ? `Avatar for ${fallback}` : "User avatar")
+                }
+                className={cn(
+                  "h-full w-full object-cover",
+                  variantClasses[variant],
+                )}
+                onError={(e) => {
+                  // Hide image on error, fallback will show
+                  (e.target as HTMLImageElement).style.display = "none";
+                }}
+              />
+            ) : fallback ? (
+              <span
+                className={cn(
+                  "font-medium text-gray-900 dark:text-white",
+                  "bg-gradient-to-br from-blue-500 to-purple-500 text-white",
+                )}
+              >
+                {getInitials(fallback)}
+              </span>
+            ) : (
+              <User
+                className={cn(
+                  "h-1/2 w-1/2 text-gray-400",
+                  "rounded-full bg-gray-200 p-1 dark:bg-gray-700",
+                )}
+              />
+            )}
 
-          {/* Status indicator */}
-          {status && (
-            <div
-              className={cn(
-                "absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-gray-900",
-                statusSizes[size],
-                statusColors[status],
-              )}
-            />
-          )}
-              </div>
-    </div>
+            {/* Status indicator */}
+            {status && (
+              <div
+                className={cn(
+                  "absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-gray-900",
+                  statusSizes[size],
+                  statusColors[status],
+                )}
+              />
+            )}
+          </div>
+        </div>
       );
     },
   ),

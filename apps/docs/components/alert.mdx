@@ -13,7 +13,7 @@ A glassmorphic alert component for displaying important messages with semantic c
 ### Basic Variants
 
 ```tsx live
-import { GlassAlert } from '@liquidify/components'
+import { GlassAlert } from "@liquidify/components";
 
 export default function Demo() {
   return (
@@ -21,27 +21,27 @@ export default function Demo() {
       <GlassAlert variant="info" title="Information">
         This is an informational message with helpful details.
       </GlassAlert>
-      
+
       <GlassAlert variant="success" title="Success">
         Your action was completed successfully!
       </GlassAlert>
-      
+
       <GlassAlert variant="warning" title="Warning">
         Please review this important information.
       </GlassAlert>
-      
+
       <GlassAlert variant="error" title="Error">
         Something went wrong. Please try again.
       </GlassAlert>
     </div>
-  )
+  );
 }
 ```
 
 ### Without Titles
 
 ```tsx live
-import { GlassAlert } from '@liquidify/components'
+import { GlassAlert } from "@liquidify/components";
 
 export default function Demo() {
   return (
@@ -49,37 +49,47 @@ export default function Demo() {
       <GlassAlert variant="info">
         Simple informational message without a title.
       </GlassAlert>
-      
+
       <GlassAlert variant="success">
         Operation completed successfully.
       </GlassAlert>
     </div>
-  )
+  );
 }
 ```
 
 ### Rich Content
 
 ```tsx live
-import { GlassAlert } from '@liquidify/components'
-import { GlassButton } from '@liquidify/components'
+import { GlassAlert } from "@liquidify/components";
+import { GlassButton } from "@liquidify/components";
 
 export default function Demo() {
   return (
     <div className="w-full max-w-md space-y-4">
       <GlassAlert variant="warning" title="Update Available">
         <div className="space-y-3">
-          <p>A new version of the application is available with important security updates.</p>
+          <p>
+            A new version of the application is available with important
+            security updates.
+          </p>
           <div className="flex gap-2">
-            <GlassButton size="sm" variant="primary">Update Now</GlassButton>
-            <GlassButton size="sm" variant="ghost">Later</GlassButton>
+            <GlassButton size="sm" variant="primary">
+              Update Now
+            </GlassButton>
+            <GlassButton size="sm" variant="ghost">
+              Later
+            </GlassButton>
           </div>
         </div>
       </GlassAlert>
-      
+
       <GlassAlert variant="error" title="Connection Failed">
         <div className="space-y-2">
-          <p>Unable to connect to the server. Please check your internet connection.</p>
+          <p>
+            Unable to connect to the server. Please check your internet
+            connection.
+          </p>
           <ul className="list-disc list-inside text-sm space-y-1">
             <li>Verify your network connection</li>
             <li>Check firewall settings</li>
@@ -88,46 +98,46 @@ export default function Demo() {
         </div>
       </GlassAlert>
     </div>
-  )
+  );
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `"info" \| "success" \| "warning" \| "error"` | `"info"` | Semantic variant affecting color and styling |
-| `title` | `string` | - | Optional title displayed prominently |
-| `children` | `ReactNode` | - | **Required.** Alert content |
-| `className` | `string` | - | Additional CSS classes |
-| `role` | `string` | `"alert"` | ARIA role for accessibility |
+| Prop        | Type                                          | Default   | Description                                  |
+| ----------- | --------------------------------------------- | --------- | -------------------------------------------- |
+| `variant`   | `"info" \| "success" \| "warning" \| "error"` | `"info"`  | Semantic variant affecting color and styling |
+| `title`     | `string`                                      | -         | Optional title displayed prominently         |
+| `children`  | `ReactNode`                                   | -         | **Required.** Alert content                  |
+| `className` | `string`                                      | -         | Additional CSS classes                       |
+| `role`      | `string`                                      | `"alert"` | ARIA role for accessibility                  |
 
 ## Usage Patterns
 
 ### Form Validation
 
 ```tsx
-import { useState } from 'react'
-import { GlassAlert, GlassInput, GlassButton } from '@liquidify/components'
+import { useState } from "react";
+import { GlassAlert, GlassInput, GlassButton } from "@liquidify/components";
 
 function FormWithValidation() {
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
-  
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const email = formData.get('email')
-    
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+
     if (!email) {
-      setError('Email is required')
-      return
+      setError("Email is required");
+      return;
     }
-    
-    setError('')
-    setSuccess(true)
-  }
-  
+
+    setError("");
+    setSuccess(true);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
@@ -135,24 +145,24 @@ function FormWithValidation() {
           {error}
         </GlassAlert>
       )}
-      
+
       {success && (
         <GlassAlert variant="success" title="Success">
           Form submitted successfully!
         </GlassAlert>
       )}
-      
+
       <GlassInput name="email" type="email" placeholder="Email" />
       <GlassButton type="submit">Submit</GlassButton>
     </form>
-  )
+  );
 }
 ```
 
 ### Status Messages
 
 ```tsx
-import { GlassAlert } from '@liquidify/components'
+import { GlassAlert } from "@liquidify/components";
 
 function StatusMessages({ status }) {
   const alerts = {
@@ -170,17 +180,17 @@ function StatusMessages({ status }) {
       <GlassAlert variant="error" title="Failed">
         Unable to save your data. Please try again.
       </GlassAlert>
-    )
-  }
-  
-  return alerts[status] || null
+    ),
+  };
+
+  return alerts[status] || null;
 }
 ```
 
 ### System Notifications
 
 ```tsx
-import { GlassAlert } from '@liquidify/components'
+import { GlassAlert } from "@liquidify/components";
 
 function SystemNotifications() {
   return (
@@ -188,12 +198,10 @@ function SystemNotifications() {
       <GlassAlert variant="warning" title="Maintenance Scheduled">
         <div className="space-y-2">
           <p>System maintenance is scheduled for tonight at 2:00 AM UTC.</p>
-          <p className="text-sm opacity-75">
-            Expected downtime: 30 minutes
-          </p>
+          <p className="text-sm opacity-75">Expected downtime: 30 minutes</p>
         </div>
       </GlassAlert>
-      
+
       <GlassAlert variant="info" title="New Features">
         <div className="space-y-2">
           <p>Check out our latest features:</p>
@@ -205,7 +213,7 @@ function SystemNotifications() {
         </div>
       </GlassAlert>
     </div>
-  )
+  );
 }
 ```
 
@@ -214,17 +222,20 @@ function SystemNotifications() {
 The GlassAlert component follows WCAG 2.1 guidelines:
 
 ### ARIA Support
+
 - Default `role="alert"` for important messages
 - Proper semantic structure with headings
 - Screen reader announcements for dynamic content
 
 ### Visual Design
+
 - High contrast colors for readability
 - Clear visual hierarchy with titles
 - Sufficient color contrast ratios
 - Icons complement text (not sole indicators)
 
 ### Content Guidelines
+
 - Clear, concise messaging
 - Actionable information when possible
 - Avoid jargon or technical terms
@@ -235,16 +246,19 @@ The GlassAlert component follows WCAG 2.1 guidelines:
 Following Apple's Human Interface Guidelines for alerts and notifications:
 
 ### Visual Design
+
 - **Clarity**: Clean typography and clear visual hierarchy
 - **Depth**: Subtle glassmorphism effects create depth
 - **Color**: Semantic colors that convey meaning
 
 ### Content
+
 - **Concise**: Brief, scannable messages
 - **Helpful**: Actionable information and next steps
 - **Tone**: Appropriate tone for the message type
 
 ### Interaction
+
 - **Non-intrusive**: Doesn't block user workflow
 - **Contextual**: Appears near relevant content
 - **Dismissible**: Can be easily dismissed when appropriate
@@ -252,24 +266,28 @@ Following Apple's Human Interface Guidelines for alerts and notifications:
 ## Best Practices
 
 ### Message Content
+
 - Keep messages concise and scannable
 - Use clear, non-technical language
 - Provide actionable next steps
 - Include relevant context
 
 ### Visual Hierarchy
+
 - Use titles for important alerts
 - Group related information
 - Maintain consistent spacing
 - Consider message priority
 
 ### Timing
+
 - Show alerts at appropriate moments
 - Don't overwhelm users with multiple alerts
 - Consider auto-dismissal for success messages
 - Keep error messages visible until resolved
 
 ### Responsive Design
+
 - Ensure readability on all screen sizes
 - Stack content appropriately on mobile
 - Maintain touch-friendly spacing
@@ -286,33 +304,33 @@ function APIErrorAlert({ error }) {
       case 401:
         return {
           title: "Authentication Required",
-          message: "Please log in to continue."
-        }
+          message: "Please log in to continue.",
+        };
       case 403:
         return {
           title: "Access Denied",
-          message: "You don't have permission to perform this action."
-        }
+          message: "You don't have permission to perform this action.",
+        };
       case 500:
         return {
           title: "Server Error",
-          message: "Something went wrong on our end. Please try again later."
-        }
+          message: "Something went wrong on our end. Please try again later.",
+        };
       default:
         return {
           title: "Error",
-          message: "An unexpected error occurred."
-        }
+          message: "An unexpected error occurred.",
+        };
     }
-  }
-  
-  const { title, message } = getErrorMessage(error)
-  
+  };
+
+  const { title, message } = getErrorMessage(error);
+
   return (
     <GlassAlert variant="error" title={title}>
       {message}
     </GlassAlert>
-  )
+  );
 }
 ```
 
@@ -323,13 +341,16 @@ function FeatureAnnouncement() {
   return (
     <GlassAlert variant="info" title="🎉 New Feature Available">
       <div className="space-y-3">
-        <p>Introducing dark mode! Switch between light and dark themes in your settings.</p>
+        <p>
+          Introducing dark mode! Switch between light and dark themes in your
+          settings.
+        </p>
         <GlassButton size="sm" variant="primary">
           Try Dark Mode
         </GlassButton>
       </div>
     </GlassAlert>
-  )
+  );
 }
 ```
 
@@ -342,13 +363,13 @@ function ProgressAlert({ progress }) {
       <div className="space-y-2">
         <p>Uploading your files... {progress}% complete</p>
         <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
+          <div
             className="bg-blue-500 h-2 rounded-full transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
     </GlassAlert>
-  )
+  );
 }
 ```

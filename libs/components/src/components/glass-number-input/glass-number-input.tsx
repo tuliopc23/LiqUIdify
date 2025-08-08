@@ -308,7 +308,9 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
     return (
       <div
         className={cn(
-          numberInputVariants({ ...{ size: size as "sm" | "md" | "lg" } } as any),
+          numberInputVariants({
+            ...{ size: size as "sm" | "md" | "lg" },
+          } as any),
           className,
         )}
       >
@@ -358,7 +360,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
             disabled={disabled}
             className={cn(
               inputVariants({
-                ...{ size: size as "sm" | "md" | "lg" } as any,
+                ...({ size: size as "sm" | "md" | "lg" } as any),
                 error: error ? "true" : "false",
               }),
               showControls && "px-12",
@@ -384,7 +386,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
                 disabled={!canDecrement}
                 className={cn(
                   buttonVariants({
-                    ...{ size: size as "sm" | "md" | "lg" } as any,
+                    ...({ size: size as "sm" | "md" | "lg" } as any),
                     position: "left",
                   }),
                 )}
@@ -400,7 +402,7 @@ const GlassNumberInput = forwardRef<HTMLInputElement, GlassNumberInputProps>(
                 disabled={!canIncrement}
                 className={cn(
                   buttonVariants({
-                    ...{ size: size as "sm" | "md" | "lg" } as any,
+                    ...({ size: size as "sm" | "md" | "lg" } as any),
                     position: "right",
                   }),
                 )}

@@ -12,7 +12,7 @@ The LiquidGlass system is the foundation of LiqUIdify's design language, providi
 ### Basic Glass Container
 
 ```tsx live
-import { LiquidGlassProvider } from '@liquidify/components'
+import { LiquidGlassProvider } from "@liquidify/components";
 
 function BasicGlassContainer({ children }) {
   return (
@@ -20,11 +20,9 @@ function BasicGlassContainer({ children }) {
       <div className="liquid-glass-filter" />
       <div className="liquid-glass-overlay" />
       <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">
-        {children}
-      </div>
+      <div className="liquid-glass-content">{children}</div>
     </div>
-  )
+  );
 }
 
 export default function Demo() {
@@ -33,18 +31,20 @@ export default function Demo() {
       <div className="space-y-4">
         <BasicGlassContainer>
           <h3 className="text-liquid-primary font-semibold">Glass Container</h3>
-          <p className="text-liquid-secondary">Layered transparency with specular highlights</p>
+          <p className="text-liquid-secondary">
+            Layered transparency with specular highlights
+          </p>
         </BasicGlassContainer>
       </div>
     </LiquidGlassProvider>
-  )
+  );
 }
 ```
 
 ### Size Variants
 
 ```tsx live
-import { LiquidGlassProvider } from '@liquidify/components'
+import { LiquidGlassProvider } from "@liquidify/components";
 
 function GlassBox({ size, children }) {
   return (
@@ -52,63 +52,59 @@ function GlassBox({ size, children }) {
       <div className="liquid-glass-filter" />
       <div className="liquid-glass-overlay" />
       <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">
-        {children}
-      </div>
+      <div className="liquid-glass-content">{children}</div>
     </div>
-  )
+  );
 }
 
 export default function Demo() {
-  const sizes = ['xs', 'sm', 'md', 'lg', 'xl']
-  
+  const sizes = ["xs", "sm", "md", "lg", "xl"];
+
   return (
     <LiquidGlassProvider>
       <div className="flex flex-wrap gap-4">
-        {sizes.map(size => (
+        {sizes.map((size) => (
           <GlassBox key={size} size={size}>
             <span className="text-liquid-primary font-medium">{size}</span>
           </GlassBox>
         ))}
       </div>
     </LiquidGlassProvider>
-  )
+  );
 }
 ```
 
 ### Interactive Glass Elements
 
 ```tsx live
-import { useState } from 'react'
-import { LiquidGlassProvider } from '@liquidify/components'
+import { useState } from "react";
+import { LiquidGlassProvider } from "@liquidify/components";
 
 function InteractiveGlass({ children, onClick, active }) {
   return (
-    <div 
+    <div
       className={`liquid-glass-container liquid-glass-interactive liquid-glass-md cursor-pointer ${
-        active ? 'ring-2 ring-liquid-accent' : ''
+        active ? "ring-2 ring-liquid-accent" : ""
       }`}
       onClick={onClick}
     >
       <div className="liquid-glass-filter" />
       <div className="liquid-glass-overlay" />
       <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">
-        {children}
-      </div>
+      <div className="liquid-glass-content">{children}</div>
     </div>
-  )
+  );
 }
 
 export default function Demo() {
-  const [active, setActive] = useState(0)
-  const items = ['Design', 'Develop', 'Deploy']
-  
+  const [active, setActive] = useState(0);
+  const items = ["Design", "Develop", "Deploy"];
+
   return (
     <LiquidGlassProvider>
       <div className="flex gap-4">
         {items.map((item, index) => (
-          <InteractiveGlass 
+          <InteractiveGlass
             key={item}
             onClick={() => setActive(index)}
             active={active === index}
@@ -118,43 +114,41 @@ export default function Demo() {
         ))}
       </div>
     </LiquidGlassProvider>
-  )
+  );
 }
 ```
 
 ### Content-Aware Adaptation
 
 ```tsx live
-import { LiquidGlassProvider } from '@liquidify/components'
+import { LiquidGlassProvider } from "@liquidify/components";
 
 function AdaptiveGlass({ bgColor, children }) {
   return (
-    <div 
+    <div
       className="liquid-glass-container liquid-glass-md"
       style={{ backgroundColor: bgColor }}
     >
       <div className="liquid-glass-filter" />
       <div className="liquid-glass-overlay" />
       <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">
-        {children}
-      </div>
+      <div className="liquid-glass-content">{children}</div>
     </div>
-  )
+  );
 }
 
 export default function Demo() {
   const backgrounds = [
-    { color: 'rgba(59, 130, 246, 0.1)', name: 'Blue' },
-    { color: 'rgba(168, 85, 247, 0.1)', name: 'Purple' },
-    { color: 'rgba(34, 197, 94, 0.1)', name: 'Green' },
-    { color: 'rgba(239, 68, 68, 0.1)', name: 'Red' }
-  ]
-  
+    { color: "rgba(59, 130, 246, 0.1)", name: "Blue" },
+    { color: "rgba(168, 85, 247, 0.1)", name: "Purple" },
+    { color: "rgba(34, 197, 94, 0.1)", name: "Green" },
+    { color: "rgba(239, 68, 68, 0.1)", name: "Red" },
+  ];
+
   return (
     <LiquidGlassProvider config={{ adaptToContent: true }}>
       <div className="grid grid-cols-2 gap-4">
-        {backgrounds.map(bg => (
+        {backgrounds.map((bg) => (
           <AdaptiveGlass key={bg.name} bgColor={bg.color}>
             <span className="text-liquid-primary font-medium">{bg.name}</span>
             <p className="text-liquid-secondary text-sm">Adaptive glass</p>
@@ -162,21 +156,21 @@ export default function Demo() {
         ))}
       </div>
     </LiquidGlassProvider>
-  )
+  );
 }
 ```
 
 ### Apple Bento Box Layout
 
 ```tsx live
-import { LiquidGlassProvider } from '@liquidify/components'
+import { LiquidGlassProvider } from "@liquidify/components";
 
-function BentoItem({ span, children, className = '' }) {
+function BentoItem({ span, children, className = "" }) {
   return (
     <div className={`liquid-glass-bento-item ${span} ${className}`}>
       {children}
     </div>
-  )
+  );
 }
 
 export default function Demo() {
@@ -202,7 +196,7 @@ export default function Demo() {
         </BentoItem>
       </div>
     </LiquidGlassProvider>
-  )
+  );
 }
 ```
 
@@ -213,24 +207,24 @@ export default function Demo() {
 ```typescript
 interface LiquidGlassConfig {
   /** Base color as RGB string (e.g., "255,255,255") */
-  color?: string
+  color?: string;
   /** Blur amount in pixels */
-  blur?: number
+  blur?: number;
   /** Saturation percentage */
-  saturation?: number
+  saturation?: number;
   /** Opacity (0-1) */
-  opacity?: number
+  opacity?: number;
   /** Enable content-aware adaptation */
-  adaptToContent?: boolean
+  adaptToContent?: boolean;
   /** Enable specular highlights */
-  specularHighlights?: boolean
+  specularHighlights?: boolean;
   /** Enable magnetic hover effects */
-  magneticHover?: boolean
+  magneticHover?: boolean;
 }
 
 interface LiquidGlassProviderProps {
-  children: React.ReactNode
-  config?: LiquidGlassConfig
+  children: React.ReactNode;
+  config?: LiquidGlassConfig;
 }
 ```
 
@@ -244,138 +238,140 @@ const defaultConfig: Required<LiquidGlassConfig> = {
   opacity: 0.75,
   adaptToContent: true,
   specularHighlights: true,
-  magneticHover: false
-}
+  magneticHover: false,
+};
 ```
 
 ## CSS Classes
 
 ### Core Classes
 
-| Class | Description |
-|-------|-------------|
-| `liquid-glass` | Basic glass effect |
-| `liquid-glass-container` | Layered glass container |
-| `liquid-glass-filter` | Backdrop filter layer |
-| `liquid-glass-overlay` | Color overlay layer |
-| `liquid-glass-specular` | Specular highlight layer |
-| `liquid-glass-content` | Content wrapper |
+| Class                    | Description              |
+| ------------------------ | ------------------------ |
+| `liquid-glass`           | Basic glass effect       |
+| `liquid-glass-container` | Layered glass container  |
+| `liquid-glass-filter`    | Backdrop filter layer    |
+| `liquid-glass-overlay`   | Color overlay layer      |
+| `liquid-glass-specular`  | Specular highlight layer |
+| `liquid-glass-content`   | Content wrapper          |
 
 ### Size Variants
 
-| Class | Padding | Min Height | Border Radius |
-|-------|---------|------------|---------------|
-| `liquid-glass-xs` | 0.75rem | 2.5rem | 0.75rem |
-| `liquid-glass-sm` | 1rem | 3rem | 1rem |
-| `liquid-glass-md` | 1.5rem | 3.5rem | 1.25rem |
-| `liquid-glass-lg` | 2rem | 4rem | 1.5rem |
-| `liquid-glass-xl` | 2.5rem | 5rem | 2rem |
-| `liquid-glass-2xl` | 3rem | 6rem | 2.5rem |
-| `liquid-glass-3xl` | 3.5rem | 7rem | 3rem |
+| Class              | Padding | Min Height | Border Radius |
+| ------------------ | ------- | ---------- | ------------- |
+| `liquid-glass-xs`  | 0.75rem | 2.5rem     | 0.75rem       |
+| `liquid-glass-sm`  | 1rem    | 3rem       | 1rem          |
+| `liquid-glass-md`  | 1.5rem  | 3.5rem     | 1.25rem       |
+| `liquid-glass-lg`  | 2rem    | 4rem       | 1.5rem        |
+| `liquid-glass-xl`  | 2.5rem  | 5rem       | 2rem          |
+| `liquid-glass-2xl` | 3rem    | 6rem       | 2.5rem        |
+| `liquid-glass-3xl` | 3.5rem  | 7rem       | 3rem          |
 
 ### Interactive States
 
-| Class | Description |
-|-------|-------------|
+| Class                      | Description              |
+| -------------------------- | ------------------------ |
 | `liquid-glass-interactive` | Adds hover/active states |
-| `liquid-glass-enhanced` | Enhanced shadow effects |
-| `liquid-glass-float` | Floating animation |
-| `liquid-glass-shimmer` | Shimmer animation |
+| `liquid-glass-enhanced`    | Enhanced shadow effects  |
+| `liquid-glass-float`       | Floating animation       |
+| `liquid-glass-shimmer`     | Shimmer animation        |
 
 ### Shape Variants
 
-| Class | Description |
-|-------|-------------|
-| `liquid-glass-rounded` | Extra rounded corners |
-| `liquid-glass-pill` | Pill shape (fully rounded) |
-| `liquid-glass-circle` | Perfect circle |
-| `liquid-glass-square` | Square aspect ratio |
-| `liquid-glass-wide` | 16:9 aspect ratio |
-| `liquid-glass-card` | 4:3 aspect ratio |
+| Class                  | Description                |
+| ---------------------- | -------------------------- |
+| `liquid-glass-rounded` | Extra rounded corners      |
+| `liquid-glass-pill`    | Pill shape (fully rounded) |
+| `liquid-glass-circle`  | Perfect circle             |
+| `liquid-glass-square`  | Square aspect ratio        |
+| `liquid-glass-wide`    | 16:9 aspect ratio          |
+| `liquid-glass-card`    | 4:3 aspect ratio           |
 
 ## Usage Patterns
 
 ### Basic Setup
 
 ```tsx
-import { LiquidGlassProvider } from '@liquidify/components'
-import '@liquidify/components/styles'
+import { LiquidGlassProvider } from "@liquidify/components";
+import "@liquidify/components/styles";
 
 function App() {
   return (
-    <LiquidGlassProvider config={{
-      blur: 24,
-      opacity: 0.75,
-      adaptToContent: true
-    }}>
+    <LiquidGlassProvider
+      config={{
+        blur: 24,
+        opacity: 0.75,
+        adaptToContent: true,
+      }}
+    >
       {/* Your app content */}
     </LiquidGlassProvider>
-  )
+  );
 }
 ```
 
 ### Custom Glass Component
 
 ```tsx
-import { forwardRef } from 'react'
-import { cn } from '@liquidify/components/utils'
+import { forwardRef } from "react";
+import { cn } from "@liquidify/components/utils";
 
 interface CustomGlassProps {
-  children: React.ReactNode
-  size?: 'sm' | 'md' | 'lg'
-  interactive?: boolean
-  className?: string
+  children: React.ReactNode;
+  size?: "sm" | "md" | "lg";
+  interactive?: boolean;
+  className?: string;
 }
 
-const CustomGlass = forwardRef<HTMLDivElement, CustomGlassProps>((
-  { children, size = 'md', interactive = false, className, ...props },
-  ref
-) => {
-  return (
-    <div 
-      ref={ref}
-      className={cn(
-        'liquid-glass-container',
-        `liquid-glass-${size}`,
-        { 'liquid-glass-interactive': interactive },
-        className
-      )}
-      {...props}
-    >
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">
-        {children}
+const CustomGlass = forwardRef<HTMLDivElement, CustomGlassProps>(
+  (
+    { children, size = "md", interactive = false, className, ...props },
+    ref,
+  ) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "liquid-glass-container",
+          `liquid-glass-${size}`,
+          { "liquid-glass-interactive": interactive },
+          className,
+        )}
+        {...props}
+      >
+        <div className="liquid-glass-filter" />
+        <div className="liquid-glass-overlay" />
+        <div className="liquid-glass-specular" />
+        <div className="liquid-glass-content">{children}</div>
       </div>
-    </div>
-  )
-})
+    );
+  },
+);
 ```
 
 ### Content-Aware Hook
 
 ```tsx
-import { useRef, useEffect } from 'react'
-import { useLiquidGlass } from '@liquidify/components'
+import { useRef, useEffect } from "react";
+import { useLiquidGlass } from "@liquidify/components";
 
 function ContentAwareComponent() {
-  const contentRef = useRef<HTMLDivElement>(null)
-  const { updateGlassStyle } = useLiquidGlass()
-  
+  const contentRef = useRef<HTMLDivElement>(null);
+  const { updateGlassStyle } = useLiquidGlass();
+
   useEffect(() => {
     // Analyze content and update glass style
     if (contentRef.current) {
-      const analysis = analyzeContent(contentRef.current)
-      updateGlassStyle(analysis)
+      const analysis = analyzeContent(contentRef.current);
+      updateGlassStyle(analysis);
     }
-  }, [])
-  
+  }, []);
+
   return (
     <div ref={contentRef} className="liquid-glass-container">
       {/* Content that affects glass appearance */}
     </div>
-  )
+  );
 }
 ```
 
@@ -384,6 +380,7 @@ function ContentAwareComponent() {
 The LiquidGlass system follows WCAG 2.1 AA guidelines:
 
 ### Visual Accessibility
+
 - **Contrast**: Maintains 4.5:1 contrast ratio for text
 - **Transparency**: Never obscures important content
 - **Focus**: Clear focus indicators on interactive elements
@@ -415,6 +412,7 @@ The LiquidGlass system follows WCAG 2.1 AA guidelines:
 ```
 
 ### Screen Reader Support
+
 - Glass effects are purely visual and don't interfere with content
 - Proper semantic markup maintained within glass containers
 - Interactive elements have appropriate ARIA attributes
@@ -424,21 +422,25 @@ The LiquidGlass system follows WCAG 2.1 AA guidelines:
 The LiquidGlass system embodies Apple's design principles:
 
 ### Clarity
+
 - **Legible**: Text remains readable over glass effects
 - **Focused**: Glass enhances rather than distracts from content
 - **Purposeful**: Every layer serves a visual function
 
 ### Deference
+
 - **Subtle**: Glass effects don't compete with content
 - **Adaptive**: Responds to content and context
 - **Respectful**: Honors user preferences and accessibility needs
 
 ### Depth
+
 - **Layered**: Multiple layers create realistic depth
 - **Hierarchical**: Visual hierarchy through glass intensity
 - **Spatial**: Clear relationships between elements
 
 ### Material Design
+
 - **Authentic**: Behaves like real glass material
 - **Physical**: Responds to light and environment
 - **Consistent**: Predictable behavior across components
@@ -459,12 +461,14 @@ The LiquidGlass system embodies Apple's design principles:
 ```
 
 ### Efficient Updates
+
 - CSS custom properties for runtime changes
 - Minimal JavaScript for content analysis
 - Debounced resize and mutation observers
 - Optimized backdrop-filter usage
 
 ### Bundle Size
+
 - Core CSS: ~8KB gzipped
 - JavaScript hooks: ~2KB gzipped
 - Tree-shakeable imports
@@ -473,6 +477,7 @@ The LiquidGlass system embodies Apple's design principles:
 ## Best Practices
 
 ### Do's
+
 - ✅ Use consistent glass hierarchy throughout app
 - ✅ Test with various background content
 - ✅ Ensure sufficient contrast for text
@@ -480,6 +485,7 @@ The LiquidGlass system embodies Apple's design principles:
 - ✅ Use semantic HTML within glass containers
 
 ### Don'ts
+
 - ❌ Don't stack too many glass layers
 - ❌ Don't use glass for critical UI elements only
 - ❌ Don't ignore accessibility requirements
@@ -497,18 +503,18 @@ The system exposes CSS variables for customization:
   --lg-highlight: rgba(255, 255, 255, 0.75);
   --lg-filter-blur: blur(4px);
   --lg-filter-enhance: saturate(120%) brightness(1.15);
-  
+
   /* Shadows and effects */
   --lg-shadow-main: 0 6px 6px rgba(0, 0, 0, 0.2);
   --lg-specular-shadow: inset 1px 1px 0 var(--lg-highlight);
-  
+
   /* Border radius system */
   --lg-radius-xs: 0.75rem;
   --lg-radius-sm: 1rem;
   --lg-radius-md: 1.25rem;
   --lg-radius-lg: 1.5rem;
   --lg-radius-xl: 2rem;
-  
+
   /* Transitions */
   --lg-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
   --lg-transition-fast: all 0.2s ease-out;

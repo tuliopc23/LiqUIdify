@@ -1,32 +1,32 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import React, { useState } from 'react';
-import { GlassCard } from '@/components/glass-card-refactored/glass-card';
-import { GlassButton } from '@/components/glass-button-refactored/glass-button';
-import { GlassInput } from '@/components/glass-input/glass-input';
-import { GlassBadge } from '@/components/glass-badge/glass-badge';
-import { GlassCheckbox } from '@/components/glass-checkbox/glass-checkbox';
-import { GlassSelect } from '@/components/glass-select/glass-select';
-import { 
-  BookOpen, 
-  Code2, 
-  Lightbulb, 
-  AlertCircle, 
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import React, { useState } from "react";
+import { GlassCard } from "@/components/glass-card-refactored/glass-card";
+import { GlassButton } from "@/components/glass-button-refactored/glass-button";
+import { GlassInput } from "@/components/glass-input/glass-input";
+import { GlassBadge } from "@/components/glass-badge/glass-badge";
+import { GlassCheckbox } from "@/components/glass-checkbox/glass-checkbox";
+import { GlassSelect } from "@/components/glass-select/glass-select";
+import {
+  BookOpen,
+  Code2,
+  Lightbulb,
+  AlertCircle,
   CheckCircle,
   XCircle,
   Copy,
-  ArrowRight
-} from 'lucide-react';
+  ArrowRight,
+} from "lucide-react";
 
 const meta = {
-  title: 'Design System/Component Guidelines',
+  title: "Design System/Component Guidelines",
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     backgrounds: {
-      default: 'gradient',
+      default: "gradient",
       values: [
         {
-          name: 'gradient',
-          value: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          name: "gradient",
+          value: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         },
       ],
     },
@@ -36,9 +36,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const CodeBlock = ({ children, title }: { children: string; title?: string }) => {
+const CodeBlock = ({
+  children,
+  title,
+}: {
+  children: string;
+  title?: string;
+}) => {
   const [copied, setCopied] = useState(false);
-  
+
   const handleCopy = () => {
     navigator.clipboard.writeText(children);
     setCopied(true);
@@ -47,7 +53,9 @@ const CodeBlock = ({ children, title }: { children: string; title?: string }) =>
 
   return (
     <div className="relative">
-      {title && <div className="text-sm font-semibold mb-2 opacity-75">{title}</div>}
+      {title && (
+        <div className="text-sm font-semibold mb-2 opacity-75">{title}</div>
+      )}
       <div className="bg-black/20 backdrop-blur-sm rounded-lg p-4 font-mono text-sm relative">
         <pre className="text-white/90 overflow-x-auto">{children}</pre>
         <button
@@ -65,11 +73,11 @@ const CodeBlock = ({ children, title }: { children: string; title?: string }) =>
   );
 };
 
-const GuidelineSection = ({ 
-  title, 
-  children 
-}: { 
-  title: string; 
+const GuidelineSection = ({
+  title,
+  children,
+}: {
+  title: string;
   children: React.ReactNode;
 }) => (
   <div className="mb-8">
@@ -89,24 +97,25 @@ export const UsageGuidelines: Story = {
           <Code2 className="w-8 h-8" />
           Component Usage Guidelines
         </h1>
-        
+
         <GuidelineSection title="Import Patterns">
           <div className="space-y-4">
             <p className="text-sm opacity-75 mb-4">
-              Import components directly from the main package for tree-shaking benefits:
+              Import components directly from the main package for tree-shaking
+              benefits:
             </p>
-            
+
             <CodeBlock title="✅ Recommended">
-{`import { GlassButton, GlassCard } from '@liquidify/components';`}
+              {`import { GlassButton, GlassCard } from '@liquidify/components';`}
             </CodeBlock>
-            
+
             <CodeBlock title="✅ Also Good (specific imports)">
-{`import { GlassButton } from '@liquidify/components/button';
+              {`import { GlassButton } from '@liquidify/components/button';
 import { GlassCard } from '@liquidify/components/card';`}
             </CodeBlock>
-            
+
             <CodeBlock title="❌ Avoid (imports everything)">
-{`import * as Liquid from '@liquidify/components';`}
+              {`import * as Liquid from '@liquidify/components';`}
             </CodeBlock>
           </div>
         </GuidelineSection>
@@ -116,9 +125,9 @@ import { GlassCard } from '@liquidify/components/card';`}
             <p className="text-sm opacity-75 mb-4">
               Build complex interfaces by composing simple components:
             </p>
-            
+
             <CodeBlock>
-{`// Compose components for complex UI
+              {`// Compose components for complex UI
 <GlassCard>
   <GlassCard.Header>
     <h2>Settings</h2>
@@ -147,18 +156,18 @@ import { GlassCard } from '@liquidify/components/card';`}
             <p className="text-sm opacity-75 mb-4">
               Components support multiple styling approaches:
             </p>
-            
+
             <CodeBlock title="Using className (Tailwind)">
-{`<GlassButton 
+              {`<GlassButton 
   className="mt-4 px-8"
   variant="primary"
 >
   Custom Styled Button
 </GlassButton>`}
             </CodeBlock>
-            
+
             <CodeBlock title="Using style prop">
-{`<GlassCard 
+              {`<GlassCard 
   style={{ 
     '--glass-blur': '20px',
     '--glass-opacity': '0.3' 
@@ -167,9 +176,9 @@ import { GlassCard } from '@liquidify/components/card';`}
   Custom glass effect
 </GlassCard>`}
             </CodeBlock>
-            
+
             <CodeBlock title="Using CSS variables globally">
-{`:root {
+              {`:root {
   --glass-primary: rgba(59, 130, 246, 0.5);
   --glass-blur-amount: 12px;
   --glass-border-width: 1px;
@@ -256,7 +265,7 @@ import { GlassCard } from '@liquidify/components/card';`}
           <div>
             <h3 className="font-semibold mb-3">Form Handling</h3>
             <CodeBlock>
-{`const [formData, setFormData] = useState({
+              {`const [formData, setFormData] = useState({
   email: '',
   password: ''
 });
@@ -283,7 +292,7 @@ import { GlassCard } from '@liquidify/components/card';`}
           <div>
             <h3 className="font-semibold mb-3">Conditional Rendering</h3>
             <CodeBlock>
-{`{isLoading ? (
+              {`{isLoading ? (
   <GlassCard className="animate-pulse">
     <div className="h-32 bg-white/10 rounded" />
   </GlassCard>
@@ -298,7 +307,7 @@ import { GlassCard } from '@liquidify/components/card';`}
           <div>
             <h3 className="font-semibold mb-3">Event Handling</h3>
             <CodeBlock>
-{`<GlassButton
+              {`<GlassButton
   onClick={async () => {
     setLoading(true);
     try {
@@ -321,7 +330,7 @@ import { GlassCard } from '@liquidify/components/card';`}
 
       <GlassCard className="p-8">
         <h2 className="text-2xl font-bold mb-6">Performance Tips</h2>
-        
+
         <div className="space-y-4">
           <div className="flex items-start gap-3">
             <div className="p-2 rounded-lg bg-blue-500/20">
@@ -340,9 +349,12 @@ import { GlassCard } from '@liquidify/components/card';`}
               <Lightbulb className="w-5 h-5 text-green-300" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Memoize Expensive Operations</h3>
+              <h3 className="font-semibold mb-1">
+                Memoize Expensive Operations
+              </h3>
               <p className="text-sm opacity-75">
-                Use useMemo() for complex calculations and React.memo for pure components
+                Use useMemo() for complex calculations and React.memo for pure
+                components
               </p>
             </div>
           </div>
@@ -366,7 +378,8 @@ import { GlassCard } from '@liquidify/components/card';`}
             <div>
               <h3 className="font-semibold mb-1">Use Virtual Scrolling</h3>
               <p className="text-sm opacity-75">
-                For lists with many glass components, implement virtual scrolling
+                For lists with many glass components, implement virtual
+                scrolling
               </p>
             </div>
           </div>

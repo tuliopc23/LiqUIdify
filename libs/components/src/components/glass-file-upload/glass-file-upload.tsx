@@ -342,7 +342,7 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
     const currentState = isDragOver ? "dragover" : uploadState;
 
     return (
-    <div
+      <div
         ref={ref}
         className={cn(
           "liquid-glass",
@@ -413,7 +413,9 @@ const GlassFileUpload = forwardRef<HTMLDivElement, GlassFileUploadProps>(
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     className={cn(
-                      fileItemVariants({ ...{ status: fileItem.status } } as any),
+                      fileItemVariants({
+                        ...{ status: fileItem.status },
+                      } as any),
                     )}
                   >
                     {/* File Preview/Icon */}

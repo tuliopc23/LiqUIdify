@@ -137,7 +137,10 @@ const GlassAccordion = React.forwardRef<
 >(({ className, variant, size, ...props }, ref) => (
   <AccordionPrimitive.Root
     ref={ref}
-    className={cn(accordionVariants({ ...{ variant, size } } as any), className)}
+    className={cn(
+      accordionVariants({ ...{ variant, size } } as any),
+      className,
+    )}
     {...props}
   />
 ));
@@ -146,8 +149,14 @@ const GlassAccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
   GlassAccordionItemProps
 >(({ className, size, ...props }, ref) => (
-  <AccordionPrimitive.Item ref={ref} className="relative" value={`item-${Math.random()}`}>
-    <div className={cn(accordionItemVariants({ ...{ size } } as any), className)}>
+  <AccordionPrimitive.Item
+    ref={ref}
+    className="relative"
+    value={`item-${Math.random()}`}
+  >
+    <div
+      className={cn(accordionItemVariants({ ...{ size } } as any), className)}
+    >
       <div className="liquid-glass-filter" />
       <div className="liquid-glass-overlay" />
       <div className="liquid-glass-specular" />
@@ -163,7 +172,10 @@ const GlassAccordionTrigger = React.forwardRef<
   <AccordionPrimitive.Header className="flex">
     <AccordionPrimitive.Trigger
       ref={ref}
-      className={cn(accordionTriggerVariants({ ...{ size } } as any), className)}
+      className={cn(
+        accordionTriggerVariants({ ...{ size } } as any),
+        className,
+      )}
       {...props}
     >
       <span className="flex-1 text-left">{children}</span>

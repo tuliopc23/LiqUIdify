@@ -13,7 +13,7 @@ A versatile glassmorphic card component with layered liquid glass effects and a 
 ### Basic Usage
 
 ```tsx live
-import { GlassCard, GlassButton } from '@liquidify/components'
+import { GlassCard, GlassButton } from "@liquidify/components";
 
 export default function Demo() {
   return (
@@ -26,7 +26,8 @@ export default function Demo() {
       </GlassCard.Header>
       <GlassCard.Content>
         <p className="text-gray-600 dark:text-gray-300">
-          Use cards for sections, panels, and feature blocks. The liquid glass effect creates beautiful depth and visual hierarchy.
+          Use cards for sections, panels, and feature blocks. The liquid glass
+          effect creates beautiful depth and visual hierarchy.
         </p>
       </GlassCard.Content>
       <GlassCard.Actions>
@@ -34,14 +35,14 @@ export default function Demo() {
         <GlassButton variant="ghost">Secondary</GlassButton>
       </GlassCard.Actions>
     </GlassCard>
-  )
+  );
 }
 ```
 
 ### Size Variants
 
 ```tsx live
-import { GlassCard } from '@liquidify/components'
+import { GlassCard } from "@liquidify/components";
 
 export default function Demo() {
   return (
@@ -54,7 +55,7 @@ export default function Demo() {
           <p className="text-sm">Compact card with minimal padding.</p>
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard size="md">
         <GlassCard.Header>
           <GlassCard.Title>Medium</GlassCard.Title>
@@ -63,7 +64,7 @@ export default function Demo() {
           <p>Default size with standard spacing.</p>
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard size="lg">
         <GlassCard.Header>
           <GlassCard.Title>Large</GlassCard.Title>
@@ -72,7 +73,7 @@ export default function Demo() {
           <p className="text-lg">Spacious layout with generous padding.</p>
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard size="xl">
         <GlassCard.Header>
           <GlassCard.Title>Extra Large</GlassCard.Title>
@@ -82,14 +83,14 @@ export default function Demo() {
         </GlassCard.Content>
       </GlassCard>
     </div>
-  )
+  );
 }
 ```
 
 ### Style Variants
 
 ```tsx live
-import { GlassCard } from '@liquidify/components'
+import { GlassCard } from "@liquidify/components";
 
 export default function Demo() {
   return (
@@ -103,17 +104,19 @@ export default function Demo() {
           <p>Base glass styling with subtle transparency.</p>
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard variant="elevated">
         <GlassCard.Header>
           <GlassCard.Title>Elevated</GlassCard.Title>
-          <GlassCard.Description>Enhanced depth and shadow</GlassCard.Description>
+          <GlassCard.Description>
+            Enhanced depth and shadow
+          </GlassCard.Description>
         </GlassCard.Header>
         <GlassCard.Content>
           <p>More prominent with enhanced glass effects.</p>
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard variant="outlined">
         <GlassCard.Header>
           <GlassCard.Title>Outlined</GlassCard.Title>
@@ -123,40 +126,57 @@ export default function Demo() {
           <p>Clear border with glass background.</p>
         </GlassCard.Content>
       </GlassCard>
-      
+
       <GlassCard variant="interactive">
         <GlassCard.Header>
           <GlassCard.Title>Interactive</GlassCard.Title>
-          <GlassCard.Description>Optimized for clickable cards</GlassCard.Description>
+          <GlassCard.Description>
+            Optimized for clickable cards
+          </GlassCard.Description>
         </GlassCard.Header>
         <GlassCard.Content>
           <p>Hover and focus states for interactions.</p>
         </GlassCard.Content>
       </GlassCard>
     </div>
-  )
+  );
 }
 ```
 
 ### Interactive Cards
 
 ```tsx live
-import { useState } from 'react'
-import { GlassCard, GlassBadge } from '@liquidify/components'
+import { useState } from "react";
+import { GlassCard, GlassBadge } from "@liquidify/components";
 
 export default function Demo() {
-  const [selected, setSelected] = useState(null)
-  
+  const [selected, setSelected] = useState(null);
+
   const cards = [
-    { id: 1, title: "Basic Plan", price: "$9", features: ["5 Projects", "10GB Storage"] },
-    { id: 2, title: "Pro Plan", price: "$29", features: ["Unlimited Projects", "100GB Storage"] },
-    { id: 3, title: "Enterprise", price: "$99", features: ["Everything", "Priority Support"] }
-  ]
-  
+    {
+      id: 1,
+      title: "Basic Plan",
+      price: "$9",
+      features: ["5 Projects", "10GB Storage"],
+    },
+    {
+      id: 2,
+      title: "Pro Plan",
+      price: "$29",
+      features: ["Unlimited Projects", "100GB Storage"],
+    },
+    {
+      id: 3,
+      title: "Enterprise",
+      price: "$99",
+      features: ["Everything", "Priority Support"],
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
       {cards.map((card) => (
-        <GlassCard 
+        <GlassCard
           key={card.id}
           variant="interactive"
           interactive
@@ -167,9 +187,14 @@ export default function Demo() {
           <GlassCard.Header>
             <div className="flex items-center justify-between">
               <GlassCard.Title>{card.title}</GlassCard.Title>
-              {card.id === 2 && <GlassBadge variant="success">Popular</GlassBadge>}
+              {card.id === 2 && (
+                <GlassBadge variant="success">Popular</GlassBadge>
+              )}
             </div>
-            <div className="text-2xl font-bold">{card.price}<span className="text-sm font-normal">/month</span></div>
+            <div className="text-2xl font-bold">
+              {card.price}
+              <span className="text-sm font-normal">/month</span>
+            </div>
           </GlassCard.Header>
           <GlassCard.Content>
             <ul className="space-y-2">
@@ -184,15 +209,20 @@ export default function Demo() {
         </GlassCard>
       ))}
     </div>
-  )
+  );
 }
 ```
 
 ### Rich Content
 
 ```tsx live
-import { GlassCard, GlassButton, GlassAvatar, GlassBadge } from '@liquidify/components'
-import { Calendar, MapPin, Users } from 'lucide-react'
+import {
+  GlassCard,
+  GlassButton,
+  GlassAvatar,
+  GlassBadge,
+} from "@liquidify/components";
+import { Calendar, MapPin, Users } from "lucide-react";
 
 export default function Demo() {
   return (
@@ -200,7 +230,7 @@ export default function Demo() {
       <GlassCard>
         <GlassCard.Header>
           <div className="flex items-start gap-3">
-            <GlassAvatar 
+            <GlassAvatar
               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
               alt="John Doe"
               fallback="JD"
@@ -217,19 +247,26 @@ export default function Demo() {
         </GlassCard.Header>
         <GlassCard.Content>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            Experienced full-stack developer with expertise in React, Node.js, and cloud technologies.
+            Experienced full-stack developer with expertise in React, Node.js,
+            and cloud technologies.
           </p>
         </GlassCard.Content>
         <GlassCard.Actions>
-          <GlassButton variant="primary" size="sm">Message</GlassButton>
-          <GlassButton variant="ghost" size="sm">View Profile</GlassButton>
+          <GlassButton variant="primary" size="sm">
+            Message
+          </GlassButton>
+          <GlassButton variant="ghost" size="sm">
+            View Profile
+          </GlassButton>
         </GlassCard.Actions>
       </GlassCard>
-      
+
       <GlassCard>
         <GlassCard.Header>
           <GlassCard.Title>Team Meeting</GlassCard.Title>
-          <GlassCard.Description>Weekly sync and planning session</GlassCard.Description>
+          <GlassCard.Description>
+            Weekly sync and planning session
+          </GlassCard.Description>
         </GlassCard.Header>
         <GlassCard.Content>
           <div className="space-y-3">
@@ -252,12 +289,14 @@ export default function Demo() {
             <GlassAvatar size="sm" fallback="AB" />
             <GlassAvatar size="sm" fallback="CD" />
             <GlassAvatar size="sm" fallback="EF" />
-            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs">+5</div>
+            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs">
+              +5
+            </div>
           </div>
         </GlassCard.Footer>
       </GlassCard>
     </div>
-  )
+  );
 }
 ```
 
@@ -265,41 +304,41 @@ export default function Demo() {
 
 ### GlassCard
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Card size affecting padding and spacing |
-| `variant` | `"default" \| "elevated" \| "outlined" \| "interactive"` | `"default"` | Visual style variant |
-| `interactive` | `boolean` | `false` | Enable interactive states (hover, focus) |
-| `selected` | `boolean` | `false` | Selected state styling |
-| `children` | `ReactNode` | - | **Required.** Card content |
-| `className` | `string` | - | Additional CSS classes |
-| `onClick` | `(event) => void` | - | Click event handler |
+| Prop          | Type                                                     | Default     | Description                              |
+| ------------- | -------------------------------------------------------- | ----------- | ---------------------------------------- |
+| `size`        | `"sm" \| "md" \| "lg" \| "xl"`                           | `"md"`      | Card size affecting padding and spacing  |
+| `variant`     | `"default" \| "elevated" \| "outlined" \| "interactive"` | `"default"` | Visual style variant                     |
+| `interactive` | `boolean`                                                | `false`     | Enable interactive states (hover, focus) |
+| `selected`    | `boolean`                                                | `false`     | Selected state styling                   |
+| `children`    | `ReactNode`                                              | -           | **Required.** Card content               |
+| `className`   | `string`                                                 | -           | Additional CSS classes                   |
+| `onClick`     | `(event) => void`                                        | -           | Click event handler                      |
 
 ### Card Sub-components
 
 All sub-components (`Header`, `Title`, `Description`, `Content`, `Footer`, `Actions`) accept:
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `children` | `ReactNode` | - | Component content |
-| `className` | `string` | - | Additional CSS classes |
-| `as` | `string` | - | HTML element to render as (Title only) |
+| Prop        | Type        | Default | Description                            |
+| ----------- | ----------- | ------- | -------------------------------------- |
+| `children`  | `ReactNode` | -       | Component content                      |
+| `className` | `string`    | -       | Additional CSS classes                 |
+| `as`        | `string`    | -       | HTML element to render as (Title only) |
 
 ## Usage Patterns
 
 ### Product Cards
 
 ```tsx
-import { GlassCard, GlassButton, GlassBadge } from '@liquidify/components'
-import { Star } from 'lucide-react'
+import { GlassCard, GlassButton, GlassBadge } from "@liquidify/components";
+import { Star } from "lucide-react";
 
 function ProductCard({ product }) {
   return (
     <GlassCard>
       <GlassCard.Header>
         <div className="aspect-video bg-gray-200 rounded-lg mb-3">
-          <img 
-            src={product.image} 
+          <img
+            src={product.image}
             alt={product.name}
             className="w-full h-full object-cover rounded-lg"
           />
@@ -333,26 +372,27 @@ function ProductCard({ product }) {
         </GlassButton>
       </GlassCard.Actions>
     </GlassCard>
-  )
+  );
 }
 ```
 
 ### Dashboard Widgets
 
 ```tsx
-import { GlassCard, GlassBadge } from '@liquidify/components'
-import { TrendingUp, TrendingDown } from 'lucide-react'
+import { GlassCard, GlassBadge } from "@liquidify/components";
+import { TrendingUp, TrendingDown } from "lucide-react";
 
 function MetricCard({ metric }) {
-  const isPositive = metric.change > 0
-  
+  const isPositive = metric.change > 0;
+
   return (
     <GlassCard size="sm">
       <GlassCard.Header>
         <div className="flex items-center justify-between">
           <GlassCard.Title className="text-sm">{metric.label}</GlassCard.Title>
           <GlassBadge variant={isPositive ? "success" : "error"}>
-            {isPositive ? "+" : ""}{metric.change}%
+            {isPositive ? "+" : ""}
+            {metric.change}%
           </GlassBadge>
         </div>
       </GlassCard.Header>
@@ -368,14 +408,19 @@ function MetricCard({ metric }) {
         <p className="text-xs text-gray-500 mt-1">vs last period</p>
       </GlassCard.Content>
     </GlassCard>
-  )
+  );
 }
 ```
 
 ### Settings Panels
 
 ```tsx
-import { GlassCard, GlassButton, GlassInput, GlassCheckbox } from '@liquidify/components'
+import {
+  GlassCard,
+  GlassButton,
+  GlassInput,
+  GlassCheckbox,
+} from "@liquidify/components";
 
 function SettingsCard({ title, description, children, onSave, onReset }) {
   return (
@@ -384,9 +429,7 @@ function SettingsCard({ title, description, children, onSave, onReset }) {
         <GlassCard.Title>{title}</GlassCard.Title>
         <GlassCard.Description>{description}</GlassCard.Description>
       </GlassCard.Header>
-      <GlassCard.Content>
-        {children}
-      </GlassCard.Content>
+      <GlassCard.Content>{children}</GlassCard.Content>
       <GlassCard.Actions>
         <GlassButton variant="ghost" onClick={onReset}>
           Reset
@@ -396,7 +439,7 @@ function SettingsCard({ title, description, children, onSave, onReset }) {
         </GlassButton>
       </GlassCard.Actions>
     </GlassCard>
-  )
+  );
 }
 ```
 
@@ -405,18 +448,21 @@ function SettingsCard({ title, description, children, onSave, onReset }) {
 The GlassCard component follows WCAG 2.1 guidelines:
 
 ### Semantic Structure
+
 - Proper heading hierarchy with Title components
 - Logical content organization
 - Clear visual hierarchy
 - Meaningful content grouping
 
 ### Interactive Cards
+
 - Keyboard navigation support
 - Focus indicators for clickable cards
 - Proper ARIA attributes
 - Screen reader friendly structure
 
 ### Visual Accessibility
+
 - High contrast ratios
 - Clear visual boundaries
 - Sufficient spacing between elements
@@ -427,16 +473,19 @@ The GlassCard component follows WCAG 2.1 guidelines:
 Following Apple's Human Interface Guidelines for content containers:
 
 ### Visual Design
+
 - **Clarity**: Clean content organization and typography
 - **Depth**: Layered glass effects create visual hierarchy
 - **Consistency**: Uniform styling across card variants
 
 ### Content
+
 - **Scannable**: Easy to scan and understand
 - **Organized**: Logical content structure
 - **Focused**: Single purpose per card
 
 ### Interaction
+
 - **Responsive**: Immediate feedback for interactive cards
 - **Predictable**: Consistent behavior patterns
 - **Contextual**: Appropriate for the content type
@@ -444,24 +493,28 @@ Following Apple's Human Interface Guidelines for content containers:
 ## Best Practices
 
 ### Content Organization
+
 - Use clear, descriptive titles
 - Keep descriptions concise
 - Group related information
 - Maintain consistent content structure
 
 ### Visual Hierarchy
+
 - Use appropriate card sizes
 - Limit content density
 - Maintain consistent spacing
 - Consider card relationships
 
 ### Interactive Design
+
 - Make clickable cards obvious
 - Provide clear hover states
 - Use appropriate cursor styles
 - Consider touch targets on mobile
 
 ### Performance
+
 - Avoid heavy content in cards
 - Consider lazy loading for images
 - Optimize for large lists
@@ -477,8 +530,8 @@ function ArticleCard({ article }) {
     <GlassCard variant="interactive" interactive>
       <GlassCard.Header>
         <div className="aspect-video bg-gray-200 rounded-lg mb-3">
-          <img 
-            src={article.coverImage} 
+          <img
+            src={article.coverImage}
             alt={article.title}
             className="w-full h-full object-cover rounded-lg"
           />
@@ -488,7 +541,7 @@ function ArticleCard({ article }) {
       </GlassCard.Header>
       <GlassCard.Content>
         <div className="flex items-center gap-3">
-          <GlassAvatar 
+          <GlassAvatar
             src={article.author.avatar}
             alt={article.author.name}
             size="sm"
@@ -502,15 +555,18 @@ function ArticleCard({ article }) {
       <GlassCard.Footer>
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
-            {article.tags.map(tag => (
-              <GlassBadge key={tag} variant="default">{tag}</GlassBadge>
+            {article.tags.map((tag) => (
+              <GlassBadge key={tag} variant="default">
+                {tag}
+              </GlassBadge>
             ))}
           </div>
-          <span className="text-sm text-gray-500">{article.readTime} min read</span>
+          <span className="text-sm text-gray-500">
+            {article.readTime} min read
+          </span>
         </div>
       </GlassCard.Footer>
     </GlassCard>
-  )
+  );
 }
 ```
-

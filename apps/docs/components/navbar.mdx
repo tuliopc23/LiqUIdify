@@ -4,13 +4,13 @@ description: Responsive navigation bar with Apple-inspired design and advanced s
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { Navbar, NavbarItem } from '@liquidify/components'
-import { Search, Bell, User, Menu } from 'lucide-react'
+import { useState } from "react";
+import { Navbar, NavbarItem } from "@liquidify/components";
+import { Search, Bell, User, Menu } from "lucide-react";
 
 export default function Demo() {
-  const [activeItem, setActiveItem] = useState('home')
-  
+  const [activeItem, setActiveItem] = useState("home");
+
   return (
     <div className="space-y-4">
       {/* Basic Navbar */}
@@ -38,32 +38,32 @@ export default function Demo() {
           </div>
         }
       >
-        <NavbarItem 
-          active={activeItem === 'home'} 
-          onClick={() => setActiveItem('home')}
+        <NavbarItem
+          active={activeItem === "home"}
+          onClick={() => setActiveItem("home")}
         >
           Home
         </NavbarItem>
-        <NavbarItem 
-          active={activeItem === 'products'} 
-          onClick={() => setActiveItem('products')}
+        <NavbarItem
+          active={activeItem === "products"}
+          onClick={() => setActiveItem("products")}
         >
           Products
         </NavbarItem>
-        <NavbarItem 
-          active={activeItem === 'about'} 
-          onClick={() => setActiveItem('about')}
+        <NavbarItem
+          active={activeItem === "about"}
+          onClick={() => setActiveItem("about")}
         >
           About
         </NavbarItem>
-        <NavbarItem 
-          active={activeItem === 'contact'} 
-          onClick={() => setActiveItem('contact')}
+        <NavbarItem
+          active={activeItem === "contact"}
+          onClick={() => setActiveItem("contact")}
         >
           Contact
         </NavbarItem>
       </Navbar>
-      
+
       {/* Transparent Navbar */}
       <Navbar
         transparent
@@ -80,7 +80,7 @@ export default function Demo() {
         <NavbarItem>Support</NavbarItem>
       </Navbar>
     </div>
-  )
+  );
 }
 ```
 
@@ -92,39 +92,36 @@ The Navbar component provides a responsive navigation header with Apple-inspired
 
 ### Navbar Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `brand` | `ReactNode` | - | Content for the left side (logo/brand) |
-| `children` | `ReactNode` | - | Navigation items |
-| `actions` | `ReactNode` | - | Content for the right side (actions/user menu) |
-| `position` | `'static' \| 'fixed' \| 'sticky'` | `'sticky'` | Navbar positioning |
-| `transparent` | `boolean` | `false` | Whether navbar is transparent |
-| `height` | `'sm' \| 'md' \| 'lg'` | `'md'` | Height variant |
-| `shadow` | `boolean` | `true` | Show shadow on scroll |
-| `blurOnScroll` | `boolean` | `true` | Blur background on scroll |
-| `hideOnScroll` | `boolean` | `false` | Hide navbar when scrolling down |
-| `bgColor` | `string` | - | Background color (for non-transparent) |
-| `zIndex` | `number` | `50` | Z-index value |
+| Prop           | Type                              | Default    | Description                                    |
+| -------------- | --------------------------------- | ---------- | ---------------------------------------------- |
+| `brand`        | `ReactNode`                       | -          | Content for the left side (logo/brand)         |
+| `children`     | `ReactNode`                       | -          | Navigation items                               |
+| `actions`      | `ReactNode`                       | -          | Content for the right side (actions/user menu) |
+| `position`     | `'static' \| 'fixed' \| 'sticky'` | `'sticky'` | Navbar positioning                             |
+| `transparent`  | `boolean`                         | `false`    | Whether navbar is transparent                  |
+| `height`       | `'sm' \| 'md' \| 'lg'`            | `'md'`     | Height variant                                 |
+| `shadow`       | `boolean`                         | `true`     | Show shadow on scroll                          |
+| `blurOnScroll` | `boolean`                         | `true`     | Blur background on scroll                      |
+| `hideOnScroll` | `boolean`                         | `false`    | Hide navbar when scrolling down                |
+| `bgColor`      | `string`                          | -          | Background color (for non-transparent)         |
+| `zIndex`       | `number`                          | `50`       | Z-index value                                  |
 
 ### NavbarItem Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `href` | `string` | - | Link destination |
-| `active` | `boolean` | `false` | Active state |
-| `onClick` | `() => void` | - | Click handler |
-| `children` | `ReactNode` | - | **Required.** Item content |
-| `disabled` | `boolean` | `false` | Disabled state |
+| Prop       | Type         | Default | Description                |
+| ---------- | ------------ | ------- | -------------------------- |
+| `href`     | `string`     | -       | Link destination           |
+| `active`   | `boolean`    | `false` | Active state               |
+| `onClick`  | `() => void` | -       | Click handler              |
+| `children` | `ReactNode`  | -       | **Required.** Item content |
+| `disabled` | `boolean`    | `false` | Disabled state             |
 
 ## Usage Patterns
 
 ### Basic Navigation
 
 ```tsx
-<Navbar
-  brand={<Logo />}
-  actions={<UserMenu />}
->
+<Navbar brand={<Logo />} actions={<UserMenu />}>
   <NavbarItem href="/home">Home</NavbarItem>
   <NavbarItem href="/about">About</NavbarItem>
   <NavbarItem href="/contact">Contact</NavbarItem>
@@ -150,11 +147,7 @@ The Navbar component provides a responsive navigation header with Apple-inspired
 ### Auto-Hide on Scroll
 
 ```tsx
-<Navbar
-  hideOnScroll
-  brand={<Logo />}
-  actions={<MobileMenu />}
->
+<Navbar hideOnScroll brand={<Logo />} actions={<MobileMenu />}>
   <NavbarItem>Dashboard</NavbarItem>
   <NavbarItem>Analytics</NavbarItem>
   <NavbarItem>Settings</NavbarItem>
@@ -199,12 +192,12 @@ The Navbar component provides a responsive navigation header with Apple-inspired
 
 ### Keyboard Support
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Navigate between items |
-| `Enter` | Activate focused item |
-| `Space` | Activate focused button |
-| `Escape` | Close any open menus |
+| Key      | Action                  |
+| -------- | ----------------------- |
+| `Tab`    | Navigate between items  |
+| `Enter`  | Activate focused item   |
+| `Space`  | Activate focused button |
+| `Escape` | Close any open menus    |
 
 ## Apple HIG Guidelines
 

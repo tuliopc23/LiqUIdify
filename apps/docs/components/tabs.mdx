@@ -4,20 +4,20 @@ description: Switch content panels using accessible tablist.
 ---
 
 ```tsx live
-import { GlassTabs } from '@liquidify/components'
+import { GlassTabs } from "@liquidify/components";
 
 const tabs = [
-  { id: 'overview', label: 'Overview', content: <div>Overview content</div> },
-  { id: 'details', label: 'Details', content: <div>Details content</div> },
-  { id: 'settings', label: 'Settings', content: <div>Settings content</div> },
-]
+  { id: "overview", label: "Overview", content: <div>Overview content</div> },
+  { id: "details", label: "Details", content: <div>Details content</div> },
+  { id: "settings", label: "Settings", content: <div>Settings content</div> },
+];
 
 export default function Demo() {
-  return <GlassTabs tabs={tabs} defaultTab="details" />
+  return <GlassTabs tabs={tabs} defaultTab="details" />;
 }
 ```
 
 Props
+
 - tabs: Array<{ id, label, content, disabled? }>
 - defaultTab?: string
-

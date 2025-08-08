@@ -20,17 +20,15 @@ bun add @liquidify/components
 ### Basic Setup
 
 ```tsx
-import { GlassUIProvider, ThemeProvider } from '@liquidify/components'
-import '@liquidify/components/styles'
+import { GlassUIProvider, ThemeProvider } from "@liquidify/components";
+import "@liquidify/components/styles";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="light">
-      <GlassUIProvider>
-        {/* Your app content */}
-      </GlassUIProvider>
+      <GlassUIProvider>{/* Your app content */}</GlassUIProvider>
     </ThemeProvider>
-  )
+  );
 }
 ```
 
@@ -39,14 +37,14 @@ function App() {
 ### Interactive Button Demo
 
 ```tsx live
-import { useState } from 'react'
-import { GlassButton, ThemeToggle } from '@liquidify/components'
+import { useState } from "react";
+import { GlassButton, ThemeToggle } from "@liquidify/components";
 
 export default function Example() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
   return (
     <div className="flex items-center gap-4 p-4">
-      <GlassButton variant="primary" onClick={() => setCount(c => c + 1)}>
+      <GlassButton variant="primary" onClick={() => setCount((c) => c + 1)}>
         Clicked {count}x
       </GlassButton>
       <GlassButton variant="ghost" onClick={() => setCount(0)}>
@@ -54,14 +52,14 @@ export default function Example() {
       </GlassButton>
       <ThemeToggle />
     </div>
-  )
+  );
 }
 ```
 
 ### Liquid Glass Container
 
 ```tsx live
-import { LiquidGlassProvider, GlassButton } from '@liquidify/components'
+import { LiquidGlassProvider, GlassButton } from "@liquidify/components";
 
 function GlassContainer({ children }) {
   return (
@@ -73,7 +71,7 @@ function GlassContainer({ children }) {
         {children}
       </div>
     </div>
-  )
+  );
 }
 
 export default function Example() {
@@ -81,11 +79,14 @@ export default function Example() {
     <LiquidGlassProvider>
       <GlassContainer>
         <h3 className="text-liquid-primary font-semibold mb-2">Liquid Glass</h3>
-        <p className="text-liquid-secondary mb-4">Layered transparency with specular highlights and content-aware adaptation.</p>
+        <p className="text-liquid-secondary mb-4">
+          Layered transparency with specular highlights and content-aware
+          adaptation.
+        </p>
         <GlassButton variant="secondary">Learn More</GlassButton>
       </GlassContainer>
     </LiquidGlassProvider>
-  )
+  );
 }
 ```
 
@@ -95,120 +96,120 @@ export default function Example() {
 
 Foundational components and design system elements.
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| [LiquidGlass](/components/liquid-glass) | Core glass effect system with layered transparency | ✅ Stable |
-| [ThemeToggle](/components/theme-toggle) | Apple-inspired theme switching | ✅ Stable |
-| [ThemeProvider](/components/theme-provider) | Theme context and management | ✅ Stable |
-| [GlassUIProvider](/components/glass-ui-provider) | Global glass configuration | ✅ Stable |
+| Component                                        | Description                                        | Status    |
+| ------------------------------------------------ | -------------------------------------------------- | --------- |
+| [LiquidGlass](/components/liquid-glass)          | Core glass effect system with layered transparency | ✅ Stable |
+| [ThemeToggle](/components/theme-toggle)          | Apple-inspired theme switching                     | ✅ Stable |
+| [ThemeProvider](/components/theme-provider)      | Theme context and management                       | ✅ Stable |
+| [GlassUIProvider](/components/glass-ui-provider) | Global glass configuration                         | ✅ Stable |
 
 ### 🔘 Form Controls
 
 Input components with liquid glass styling and accessibility.
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| [Button](/components/button) | Primary action component with variants | ✅ Stable |
-| [Input](/components/input) | Text input with glass effects | ✅ Stable |
-| [Switch](/components/switch) | Toggle switch component | ✅ Stable |
-| [Checkbox](/components/checkbox) | Checkbox with glass styling | ✅ Stable |
-| [Radio Group](/components/radio-group) | Radio button groups | ✅ Stable |
-| [Select](/components/select) | Dropdown selection component | ✅ Stable |
-| [Textarea](/components/textarea) | Multi-line text input | ✅ Stable |
-| [Slider](/components/slider) | Range slider component | ✅ Stable |
-| [Number Input](/components/number-input) | Numeric input with controls | ✅ Stable |
-| [File Upload](/components/file-upload) | File upload with drag & drop | ✅ Stable |
-| [Form Field](/components/form-field) | Form wrapper with validation | ✅ Stable |
+| Component                                | Description                            | Status    |
+| ---------------------------------------- | -------------------------------------- | --------- |
+| [Button](/components/button)             | Primary action component with variants | ✅ Stable |
+| [Input](/components/input)               | Text input with glass effects          | ✅ Stable |
+| [Switch](/components/switch)             | Toggle switch component                | ✅ Stable |
+| [Checkbox](/components/checkbox)         | Checkbox with glass styling            | ✅ Stable |
+| [Radio Group](/components/radio-group)   | Radio button groups                    | ✅ Stable |
+| [Select](/components/select)             | Dropdown selection component           | ✅ Stable |
+| [Textarea](/components/textarea)         | Multi-line text input                  | ✅ Stable |
+| [Slider](/components/slider)             | Range slider component                 | ✅ Stable |
+| [Number Input](/components/number-input) | Numeric input with controls            | ✅ Stable |
+| [File Upload](/components/file-upload)   | File upload with drag & drop           | ✅ Stable |
+| [Form Field](/components/form-field)     | Form wrapper with validation           | ✅ Stable |
 
 ### 📱 Navigation
 
 Navigation and wayfinding components.
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| [Tabs](/components/tabs) | Tabbed navigation interface | ✅ Stable |
-| [Breadcrumbs](/components/breadcrumbs) | Hierarchical navigation | ✅ Stable |
-| [Navbar](/components/navbar) | Top navigation bar | ✅ Stable |
-| [Sidebar](/components/sidebar) | Side navigation panel | ✅ Stable |
-| [Mobile Nav](/components/mobile-nav) | Mobile-optimized navigation | ✅ Stable |
-| [Pagination](/components/pagination) | Page navigation controls | ✅ Stable |
-| [Command](/components/command) | Command palette interface | ✅ Stable |
+| Component                              | Description                 | Status    |
+| -------------------------------------- | --------------------------- | --------- |
+| [Tabs](/components/tabs)               | Tabbed navigation interface | ✅ Stable |
+| [Breadcrumbs](/components/breadcrumbs) | Hierarchical navigation     | ✅ Stable |
+| [Navbar](/components/navbar)           | Top navigation bar          | ✅ Stable |
+| [Sidebar](/components/sidebar)         | Side navigation panel       | ✅ Stable |
+| [Mobile Nav](/components/mobile-nav)   | Mobile-optimized navigation | ✅ Stable |
+| [Pagination](/components/pagination)   | Page navigation controls    | ✅ Stable |
+| [Command](/components/command)         | Command palette interface   | ✅ Stable |
 
 ### 📦 Layout & Containers
 
 Structural components for organizing content.
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| [Card](/components/card) | Content container with glass effects | ✅ Stable |
-| [Modal](/components/modal) | Overlay dialog component | ✅ Stable |
-| [Drawer](/components/drawer) | Slide-out panel component | ✅ Stable |
-| [Popover](/components/popover) | Floating content container | ✅ Stable |
-| [Accordion](/components/accordion) | Collapsible content sections | ✅ Stable |
+| Component                          | Description                          | Status    |
+| ---------------------------------- | ------------------------------------ | --------- |
+| [Card](/components/card)           | Content container with glass effects | ✅ Stable |
+| [Modal](/components/modal)         | Overlay dialog component             | ✅ Stable |
+| [Drawer](/components/drawer)       | Slide-out panel component            | ✅ Stable |
+| [Popover](/components/popover)     | Floating content container           | ✅ Stable |
+| [Accordion](/components/accordion) | Collapsible content sections         | ✅ Stable |
 
 ### 💬 Feedback & Communication
 
 Components for user feedback and notifications.
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| [Toast](/components/toast) | Temporary notification messages | ✅ Stable |
-| [Tooltip](/components/tooltip) | Contextual help and information | ✅ Stable |
-| [Alert](/components/alert) | Important message display | ✅ Stable |
-| [Banner](/components/banner) | Prominent announcement bar | ✅ Stable |
-| [Notification](/components/notification) | Notification center component | ✅ Stable |
-| [Progress](/components/progress) | Progress indication | ✅ Stable |
-| [Loading](/components/loading) | Loading state indicators | ✅ Stable |
-| [Skeleton](/components/skeleton) | Content placeholder | ✅ Stable |
+| Component                                | Description                     | Status    |
+| ---------------------------------------- | ------------------------------- | --------- |
+| [Toast](/components/toast)               | Temporary notification messages | ✅ Stable |
+| [Tooltip](/components/tooltip)           | Contextual help and information | ✅ Stable |
+| [Alert](/components/alert)               | Important message display       | ✅ Stable |
+| [Banner](/components/banner)             | Prominent announcement bar      | ✅ Stable |
+| [Notification](/components/notification) | Notification center component   | ✅ Stable |
+| [Progress](/components/progress)         | Progress indication             | ✅ Stable |
+| [Loading](/components/loading)           | Loading state indicators        | ✅ Stable |
+| [Skeleton](/components/skeleton)         | Content placeholder             | ✅ Stable |
 
 ### 📊 Data Display
 
 Components for presenting data and information.
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| [Table](/components/table) | Data table with sorting | ✅ Stable |
-| [Avatar](/components/avatar) | User profile image | ✅ Stable |
-| [Badge](/components/badge) | Status and label indicators | ✅ Stable |
-| [Chart](/components/chart) | Data visualization | ✅ Stable |
-| [Timeline](/components/timeline) | Chronological event display | ✅ Stable |
-| [Tree View](/components/tree-view) | Hierarchical data display | ✅ Stable |
+| Component                          | Description                 | Status    |
+| ---------------------------------- | --------------------------- | --------- |
+| [Table](/components/table)         | Data table with sorting     | ✅ Stable |
+| [Avatar](/components/avatar)       | User profile image          | ✅ Stable |
+| [Badge](/components/badge)         | Status and label indicators | ✅ Stable |
+| [Chart](/components/chart)         | Data visualization          | ✅ Stable |
+| [Timeline](/components/timeline)   | Chronological event display | ✅ Stable |
+| [Tree View](/components/tree-view) | Hierarchical data display   | ✅ Stable |
 
 ### 🔍 Utility Components
 
 Specialized utility and accessibility components.
 
-| Component | Description | Status |
-|-----------|-------------|--------|
-| [Dropdown](/components/dropdown) | Generic dropdown menu | ✅ Stable |
-| [Search](/components/search) | Search input with suggestions | ✅ Stable |
-| [Combobox](/components/combobox) | Searchable select component | ✅ Stable |
-| [Date Picker](/components/date-picker) | Date selection component | ✅ Stable |
-| [Focus Trap](/components/focus-trap) | Accessibility focus management | ✅ Stable |
-| [Portal](/components/portal) | Render content outside tree | ✅ Stable |
-| [Skip Navigation](/components/skip-navigation) | Accessibility navigation | ✅ Stable |
+| Component                                      | Description                    | Status    |
+| ---------------------------------------------- | ------------------------------ | --------- |
+| [Dropdown](/components/dropdown)               | Generic dropdown menu          | ✅ Stable |
+| [Search](/components/search)                   | Search input with suggestions  | ✅ Stable |
+| [Combobox](/components/combobox)               | Searchable select component    | ✅ Stable |
+| [Date Picker](/components/date-picker)         | Date selection component       | ✅ Stable |
+| [Focus Trap](/components/focus-trap)           | Accessibility focus management | ✅ Stable |
+| [Portal](/components/portal)                   | Render content outside tree    | ✅ Stable |
+| [Skip Navigation](/components/skip-navigation) | Accessibility navigation       | ✅ Stable |
 
 ## Hooks & Utilities
 
 ### 🎣 React Hooks
 
-| Hook | Description | Status |
-|------|-------------|--------|
-| [useTheme](/hooks/use-theme) | Theme state management | ✅ Stable |
-| [useLiquidGlass](/hooks/use-liquid-glass) | Glass effect configuration | ✅ Stable |
-| [useHapticFeedback](/hooks/use-haptic-feedback) | Haptic feedback integration | ✅ Stable |
-| [useSSRSafe](/hooks/use-ssr-safe) | Server-side rendering utilities | ✅ Stable |
-| [usePerformanceMonitoring](/hooks/use-performance-monitoring) | Performance tracking | ✅ Stable |
-| [useGlassAnimations](/hooks/use-glass-animations) | Animation state management | ✅ Stable |
+| Hook                                                          | Description                     | Status    |
+| ------------------------------------------------------------- | ------------------------------- | --------- |
+| [useTheme](/hooks/use-theme)                                  | Theme state management          | ✅ Stable |
+| [useLiquidGlass](/hooks/use-liquid-glass)                     | Glass effect configuration      | ✅ Stable |
+| [useHapticFeedback](/hooks/use-haptic-feedback)               | Haptic feedback integration     | ✅ Stable |
+| [useSSRSafe](/hooks/use-ssr-safe)                             | Server-side rendering utilities | ✅ Stable |
+| [usePerformanceMonitoring](/hooks/use-performance-monitoring) | Performance tracking            | ✅ Stable |
+| [useGlassAnimations](/hooks/use-glass-animations)             | Animation state management      | ✅ Stable |
 
 ### 🛠 Utility Functions
 
-| Utility | Description | Status |
-|---------|-------------|--------|
-| [cn](/utils/classname) | Conditional class name utility | ✅ Stable |
-| [Glass Helpers](/utils/glass-helpers) | Glass effect utilities | ✅ Stable |
-| [Contrast Checker](/utils/contrast-checker) | Accessibility color checking | ✅ Stable |
-| [Safe DOM](/utils/safe-dom) | SSR-safe DOM utilities | ✅ Stable |
+| Utility                                     | Description                    | Status    |
+| ------------------------------------------- | ------------------------------ | --------- |
+| [cn](/utils/classname)                      | Conditional class name utility | ✅ Stable |
+| [Glass Helpers](/utils/glass-helpers)       | Glass effect utilities         | ✅ Stable |
+| [Contrast Checker](/utils/contrast-checker) | Accessibility color checking   | ✅ Stable |
+| [Safe DOM](/utils/safe-dom)                 | SSR-safe DOM utilities         | ✅ Stable |
 
 ## Getting Started Guide
 
@@ -221,17 +222,17 @@ npm install @liquidify/components lucide-react
 ### 2. Setup Providers
 
 ```tsx
-import { GlassUIProvider, ThemeProvider } from '@liquidify/components'
-import '@liquidify/components/styles'
+import { GlassUIProvider, ThemeProvider } from "@liquidify/components";
+import "@liquidify/components/styles";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="my-app-theme">
-      <GlassUIProvider 
+      <GlassUIProvider
         glassConfig={{
           blur: 24,
           opacity: 0.75,
-          adaptToContent: true
+          adaptToContent: true,
         }}
       >
         <div className="min-h-screen bg-glass-bg-canvas">
@@ -239,19 +240,19 @@ function App() {
         </div>
       </GlassUIProvider>
     </ThemeProvider>
-  )
+  );
 }
 ```
 
 ### 3. Use Components
 
 ```tsx
-import { 
-  GlassButton, 
-  GlassCard, 
-  GlassInput, 
-  ThemeToggle 
-} from '@liquidify/components'
+import {
+  GlassButton,
+  GlassCard,
+  GlassInput,
+  ThemeToggle,
+} from "@liquidify/components";
 
 function MyComponent() {
   return (
@@ -270,7 +271,7 @@ function MyComponent() {
         <ThemeToggle />
       </GlassCard.Actions>
     </GlassCard>
-  )
+  );
 }
 ```
 
@@ -279,7 +280,7 @@ function MyComponent() {
 ```css
 /* Custom theme variables */
 :root {
-  --lg-accent: #007AFF; /* Apple blue */
+  --lg-accent: #007aff; /* Apple blue */
   --lg-radius-md: 1.5rem; /* Larger radius */
   --lg-transition: all 0.3s ease; /* Custom timing */
 }
@@ -313,14 +314,14 @@ All components follow Apple's design principles:
 
 ## Browser Support
 
-| Browser | Version | Support |
-|---------|---------|----------|
-| Chrome | 88+ | ✅ Full |
-| Firefox | 94+ | ✅ Full |
-| Safari | 14+ | ✅ Full |
-| Edge | 88+ | ✅ Full |
-| iOS Safari | 14+ | ✅ Full |
-| Android Chrome | 88+ | ✅ Full |
+| Browser        | Version | Support |
+| -------------- | ------- | ------- |
+| Chrome         | 88+     | ✅ Full |
+| Firefox        | 94+     | ✅ Full |
+| Safari         | 14+     | ✅ Full |
+| Edge           | 88+     | ✅ Full |
+| iOS Safari     | 14+     | ✅ Full |
+| Android Chrome | 88+     | ✅ Full |
 
 ## Next Steps
 

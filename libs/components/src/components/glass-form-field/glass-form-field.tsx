@@ -15,8 +15,13 @@ import {
 // Mock AccessibilityManager since it was removed
 const AccessibilityManager = {
   getInstance: () => ({
-    validateComponent: async (element: any, config: any) => ({ violations: [], passes: [], score: 100 }),
-    announce: (message: string, priority?: string) => console.debug(`Announced: ${message} (${priority || 'polite'})`),
+    validateComponent: async (element: any, config: any) => ({
+      violations: [],
+      passes: [],
+      score: 100,
+    }),
+    announce: (message: string, priority?: string) =>
+      console.debug(`Announced: ${message} (${priority || "polite"})`),
   }),
 };
 
@@ -168,7 +173,8 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
     const containerRef = useRef<HTMLDivElement>(null);
     const fieldRef = useRef<HTMLElement>(null);
     const accessibilityManager = AccessibilityManager.getInstance();
-    const { transitionToState, currentState, isTransitioning } = useGlassStateTransitions(animation);
+    const { transitionToState, currentState, isTransitioning } =
+      useGlassStateTransitions(animation);
 
     const fieldId = useId();
     // const messageId = useId();
@@ -345,7 +351,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
         ref={combinedRef}
         className={cn(
           formFieldVariants({
-            ...{ variant: variant as "default" | "inline" | "card" } as any,
+            ...({ variant: variant as "default" | "inline" | "card" } as any),
             size: size as "sm" | "md" | "lg",
           }),
           glassClasses,
@@ -369,7 +375,7 @@ const GlassFormField = forwardRef<HTMLDivElement, GlassFormFieldProps>(
             htmlFor={finalId}
             className={cn(
               labelVariants({
-                ...{ required: required ? "true" : "false" } as any,
+                ...({ required: required ? "true" : "false" } as any),
                 size: size as "sm" | "md" | "lg",
               }),
               disabled && "cursor-not-allowed",

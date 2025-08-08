@@ -44,62 +44,66 @@ export const GlassProgress = React.memo(
       };
 
       return (
-    <div ref={ref} className={cn("liquid-glass-container", "w-full", className)} {...props}>
-      {/* Liquid Glass Layers */}
-      <div className="liquid-glass-filter" />
-      <div className="liquid-glass-overlay" />
-      <div className="liquid-glass-specular" />
-      <div className="liquid-glass-content">
-          {showValue && (
-            <div className="mb-2 flex items-center justify-between">
-              <span className="text-gray-600 text-sm dark:text-gray-400">
-                Progress
-              </span>
+        <div
+          ref={ref}
+          className={cn("liquid-glass-container", "w-full", className)}
+          {...props}
+        >
+          {/* Liquid Glass Layers */}
+          <div className="liquid-glass-filter" />
+          <div className="liquid-glass-overlay" />
+          <div className="liquid-glass-specular" />
+          <div className="liquid-glass-content">
+            {showValue && (
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-gray-600 text-sm dark:text-gray-400">
+                  Progress
+                </span>
 
-              <span className="font-medium text-gray-900 text-sm dark:text-white">
-                {Math.round(percentage)}%
-              </span>
-            </div>
-          )}
-
-          <div
-            className={cn(
-              "relative w-full overflow-hidden rounded-full",
-              sizeClasses[size],
-              variant === "default" && getGlassClass("default"),
-              variant === "minimal" && "bg-gray-200 dark:bg-gray-700",
-              variant === "gradient" &&
-                "bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600",
-            )}
-          >
-            <div
-              className={cn(
-                "h-full rounded-full transition-all duration-500 ease-out",
-                variant === "default" &&
-                  `bg-gradient-to-r ${colorClasses[color]}`,
-                variant === "gradient" &&
-                  `bg-gradient-to-r ${colorClasses[color]}`,
-                variant === "minimal" && `bg-${color}-500`,
-              )}
-              style={{ width: `${percentage}%` }}
-            />
-
-            {/* Shimmer effect */}
-
-            <div
-              className={cn(
-                "absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent",
-                "animate-pulse opacity-50",
-              )}
-              style={{
-                background:
-                  "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
-                transform: "translateX(-100%)",
-              }}
-            />
-          </div>
+                <span className="font-medium text-gray-900 text-sm dark:text-white">
+                  {Math.round(percentage)}%
+                </span>
               </div>
-    </div>
+            )}
+
+            <div
+              className={cn(
+                "relative w-full overflow-hidden rounded-full",
+                sizeClasses[size],
+                variant === "default" && getGlassClass("default"),
+                variant === "minimal" && "bg-gray-200 dark:bg-gray-700",
+                variant === "gradient" &&
+                  "bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600",
+              )}
+            >
+              <div
+                className={cn(
+                  "h-full rounded-full transition-all duration-500 ease-out",
+                  variant === "default" &&
+                    `bg-gradient-to-r ${colorClasses[color]}`,
+                  variant === "gradient" &&
+                    `bg-gradient-to-r ${colorClasses[color]}`,
+                  variant === "minimal" && `bg-${color}-500`,
+                )}
+                style={{ width: `${percentage}%` }}
+              />
+
+              {/* Shimmer effect */}
+
+              <div
+                className={cn(
+                  "absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent",
+                  "animate-pulse opacity-50",
+                )}
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
+                  transform: "translateX(-100%)",
+                }}
+              />
+            </div>
+          </div>
+        </div>
       );
     },
   ),

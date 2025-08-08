@@ -1,8 +1,8 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  level?: 'component' | 'page' | 'app';
+  level?: "component" | "page" | "app";
   fallback?: ReactNode;
 }
 
@@ -13,7 +13,7 @@ interface State {
 
 export class GlassErrorBoundary extends Component<Props, State> {
   public state: State = {
-    hasError: false
+    hasError: false,
   };
 
   public static getDerivedStateFromError(error: Error): State {
@@ -21,7 +21,7 @@ export class GlassErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    console.error("Uncaught error:", error, errorInfo);
   }
 
   public render() {
@@ -29,12 +29,12 @@ export class GlassErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) {
         return this.props.fallback;
       }
-      
+
       return (
         <div className="glass-error-boundary p-4 text-center">
           <h2 className="text-lg font-semibold mb-2">Something went wrong</h2>
           <p className="text-sm opacity-75">
-            {this.state.error?.message || 'An unexpected error occurred'}
+            {this.state.error?.message || "An unexpected error occurred"}
           </p>
         </div>
       );

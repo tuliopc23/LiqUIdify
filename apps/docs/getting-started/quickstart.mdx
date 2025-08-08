@@ -23,11 +23,7 @@ import { GlassUIProvider } from "@liquidify/components";
 import "@liquidify/components/styles";
 
 function App() {
-  return (
-    <GlassUIProvider>
-      {/* your app */}
-    </GlassUIProvider>
-  );
+  return <GlassUIProvider>{/* your app */}</GlassUIProvider>;
 }
 ```
 
@@ -53,7 +49,9 @@ export default function WelcomeCard() {
       </GlassCard.Content>
 
       <GlassCard.Actions>
-        <GlassButton variant="primary" size="lg">Get Started</GlassButton>
+        <GlassButton variant="primary" size="lg">
+          Get Started
+        </GlassButton>
         <GlassButton variant="ghost">Learn More</GlassButton>
       </GlassCard.Actions>
     </GlassCard>
@@ -81,13 +79,19 @@ export function ButtonShowcase() {
 ## 🌙 Theme Toggle
 
 ```tsx
-import { UnifiedGlassProvider, useTheme, GlassButton } from "@liquidify/components";
+import {
+  UnifiedGlassProvider,
+  useTheme,
+  GlassButton,
+} from "@liquidify/components";
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
-    <GlassButton onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      variant="ghost">
+    <GlassButton
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      variant="ghost"
+    >
       {theme === "light" ? "🌙" : "☀️"} Toggle Theme
     </GlassButton>
   );

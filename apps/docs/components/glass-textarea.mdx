@@ -4,14 +4,16 @@ description: Elegant multi-line text input component with Apple-inspired liquid 
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassTextarea } from '@liquidify/components'
+import { useState } from "react";
+import { GlassTextarea } from "@liquidify/components";
 
 export default function Demo() {
-  const [message, setMessage] = useState('')
-  const [feedback, setFeedback] = useState('This component looks amazing! The liquid glass effects really make it stand out.')
-  const [notes, setNotes] = useState('')
-  
+  const [message, setMessage] = useState("");
+  const [feedback, setFeedback] = useState(
+    "This component looks amazing! The liquid glass effects really make it stand out.",
+  );
+  const [notes, setNotes] = useState("");
+
   return (
     <div className="space-y-6 max-w-lg mx-auto">
       <div>
@@ -25,7 +27,7 @@ export default function Demo() {
           helperText="Share your thoughts with us"
         />
       </div>
-      
+
       <div>
         <GlassTextarea
           label="Feedback"
@@ -39,7 +41,7 @@ export default function Demo() {
           characterCountPosition="bottom-left"
         />
       </div>
-      
+
       <div>
         <GlassTextarea
           label="Quick Notes"
@@ -51,7 +53,7 @@ export default function Demo() {
           minRows={2}
         />
       </div>
-      
+
       <div className="p-4 rounded-lg bg-white/5 border border-white/10">
         <h3 className="font-medium text-white mb-2">Character Counts:</h3>
         <div className="text-white/70 text-sm space-y-1">
@@ -61,7 +63,7 @@ export default function Demo() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -71,24 +73,24 @@ The Glass Textarea component provides an elegant multi-line text input interface
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | - | Current text value |
-| `defaultValue` | `string` | - | Default text value (uncontrolled) |
-| `onChange` | `(value: string) => void` | - | Callback when text changes |
-| `placeholder` | `string` | - | Placeholder text |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `error` | `boolean` | `false` | Error state |
-| `helperText` | `string` | - | Helper text below textarea |
-| `label` | `string` | - | Textarea label |
-| `description` | `string` | - | Textarea description |
-| `autoResize` | `boolean` | `true` | Enable auto-resize functionality |
-| `minRows` | `number` | `3` | Minimum number of rows |
-| `maxRows` | `number` | `10` | Maximum number of rows |
-| `maxLength` | `number` | - | Maximum character limit |
-| `showCharacterCount` | `boolean` | `false` | Show character counter |
-| `characterCountPosition` | `'bottom-right' \| 'bottom-left'` | `'bottom-right'` | Position of character counter |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
+| Prop                     | Type                              | Default          | Description                       |
+| ------------------------ | --------------------------------- | ---------------- | --------------------------------- |
+| `value`                  | `string`                          | -                | Current text value                |
+| `defaultValue`           | `string`                          | -                | Default text value (uncontrolled) |
+| `onChange`               | `(value: string) => void`         | -                | Callback when text changes        |
+| `placeholder`            | `string`                          | -                | Placeholder text                  |
+| `disabled`               | `boolean`                         | `false`          | Disabled state                    |
+| `error`                  | `boolean`                         | `false`          | Error state                       |
+| `helperText`             | `string`                          | -                | Helper text below textarea        |
+| `label`                  | `string`                          | -                | Textarea label                    |
+| `description`            | `string`                          | -                | Textarea description              |
+| `autoResize`             | `boolean`                         | `true`           | Enable auto-resize functionality  |
+| `minRows`                | `number`                          | `3`              | Minimum number of rows            |
+| `maxRows`                | `number`                          | `10`             | Maximum number of rows            |
+| `maxLength`              | `number`                          | -                | Maximum character limit           |
+| `showCharacterCount`     | `boolean`                         | `false`          | Show character counter            |
+| `characterCountPosition` | `'bottom-right' \| 'bottom-left'` | `'bottom-right'` | Position of character counter     |
+| `size`                   | `'sm' \| 'md' \| 'lg'`            | `'md'`           | Size variant                      |
 
 ## Usage Patterns
 
@@ -137,76 +139,81 @@ const [text, setText] = useState('')
 
 ```tsx
 const [formData, setFormData] = useState({
-  title: '',
-  description: '',
-  notes: ''
-})
+  title: "",
+  description: "",
+  notes: "",
+});
 
-const [errors, setErrors] = useState({})
+const [errors, setErrors] = useState({});
 
 const validateDescription = (value) => {
   if (!value.trim()) {
-    return 'Description is required'
+    return "Description is required";
   }
   if (value.length < 10) {
-    return 'Description must be at least 10 characters'
+    return "Description must be at least 10 characters";
   }
-  return ''
-}
+  return "";
+};
 
 const handleDescriptionChange = (value) => {
-  setFormData(prev => ({ ...prev, description: value }))
-  
-  const error = validateDescription(value)
-  setErrors(prev => ({ ...prev, description: error }))
-}
+  setFormData((prev) => ({ ...prev, description: value }));
+
+  const error = validateDescription(value);
+  setErrors((prev) => ({ ...prev, description: error }));
+};
 
 <form className="space-y-4">
   <input
     type="text"
     placeholder="Title"
     value={formData.title}
-    onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+    onChange={(e) =>
+      setFormData((prev) => ({ ...prev, title: e.target.value }))
+    }
     className="w-full px-4 py-2 rounded-lg bg-white/10 text-white"
   />
-  
+
   <GlassTextarea
     label="Description"
     description="Provide a detailed description"
     value={formData.description}
     onChange={handleDescriptionChange}
     error={!!errors.description}
-    helperText={errors.description || 'Minimum 10 characters'}
+    helperText={errors.description || "Minimum 10 characters"}
     maxLength={1000}
     showCharacterCount
     required
   />
-  
+
   <GlassTextarea
     label="Additional Notes"
     placeholder="Any additional information..."
     value={formData.notes}
-    onChange={(value) => setFormData(prev => ({ ...prev, notes: value }))}
+    onChange={(value) => setFormData((prev) => ({ ...prev, notes: value }))}
     size="sm"
     minRows={2}
     maxRows={4}
   />
-</form>
+</form>;
 ```
 
 ### Rich Text Scenarios
 
 ```tsx
-const [content, setContent] = useState('')
-const [wordCount, setWordCount] = useState(0)
+const [content, setContent] = useState("");
+const [wordCount, setWordCount] = useState(0);
 
 const handleContentChange = (value) => {
-  setContent(value)
-  
+  setContent(value);
+
   // Calculate word count
-  const words = value.trim().split(/\s+/).filter(word => word.length > 0)
-  setWordCount(words.length)
-}
+  const words = value
+    .trim()
+    .split(/\s+/)
+    .filter((word) => word.length > 0);
+  setWordCount(words.length);
+};
 
 <div>
   <GlassTextarea
@@ -219,39 +226,41 @@ const handleContentChange = (value) => {
     showCharacterCount
     characterCountPosition="bottom-left"
   />
-  
+
   <div className="mt-2 text-sm text-white/60">
-    Words: {wordCount} | Estimated reading time: {Math.ceil(wordCount / 200)} min
+    Words: {wordCount} | Estimated reading time: {Math.ceil(wordCount / 200)}{" "}
+    min
   </div>
-</div>
+</div>;
 ```
 
 ### Auto-Save Implementation
 
 ```tsx
-const [content, setContent] = useState('')
-const [lastSaved, setLastSaved] = useState(null)
-const [saving, setSaving] = useState(false)
+const [content, setContent] = useState("");
+const [lastSaved, setLastSaved] = useState(null);
+const [saving, setSaving] = useState(false);
 
 const debouncedSave = useMemo(
-  () => debounce(async (value) => {
-    setSaving(true)
-    try {
-      await saveContent(value)
-      setLastSaved(new Date())
-    } catch (error) {
-      console.error('Save failed:', error)
-    } finally {
-      setSaving(false)
-    }
-  }, 1000),
-  []
-)
+  () =>
+    debounce(async (value) => {
+      setSaving(true);
+      try {
+        await saveContent(value);
+        setLastSaved(new Date());
+      } catch (error) {
+        console.error("Save failed:", error);
+      } finally {
+        setSaving(false);
+      }
+    }, 1000),
+  [],
+);
 
 const handleChange = (value) => {
-  setContent(value)
-  debouncedSave(value)
-}
+  setContent(value);
+  debouncedSave(value);
+};
 
 <div>
   <GlassTextarea
@@ -261,17 +270,15 @@ const handleChange = (value) => {
     placeholder="Start writing..."
     minRows={10}
   />
-  
+
   <div className="mt-2 text-xs text-white/50">
-    {saving ? (
-      'Saving...'
-    ) : lastSaved ? (
-      `Last saved: ${lastSaved.toLocaleTimeString()}`
-    ) : (
-      'Not saved'
-    )}
+    {saving
+      ? "Saving..."
+      : lastSaved
+        ? `Last saved: ${lastSaved.toLocaleTimeString()}`
+        : "Not saved"}
   </div>
-</div>
+</div>;
 ```
 
 ## Accessibility
@@ -293,14 +300,14 @@ const handleChange = (value) => {
 
 ### Keyboard Support
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Navigate to next element |
-| `Shift + Tab` | Navigate to previous element |
-| `Ctrl/Cmd + A` | Select all text |
-| `Ctrl/Cmd + Z` | Undo |
-| `Ctrl/Cmd + Y` | Redo |
-| `Enter` | New line |
+| Key            | Action                       |
+| -------------- | ---------------------------- |
+| `Tab`          | Navigate to next element     |
+| `Shift + Tab`  | Navigate to previous element |
+| `Ctrl/Cmd + A` | Select all text              |
+| `Ctrl/Cmd + Z` | Undo                         |
+| `Ctrl/Cmd + Y` | Redo                         |
+| `Enter`        | New line                     |
 
 ## Apple HIG Guidelines
 
@@ -345,23 +352,23 @@ const handleChange = (value) => {
 // Optimized character counting
 const useCharacterCount = (text, maxLength) => {
   return useMemo(() => {
-    const count = text.length
-    const remaining = maxLength ? maxLength - count : null
-    const isOverLimit = maxLength ? count > maxLength : false
-    
-    return { count, remaining, isOverLimit }
-  }, [text, maxLength])
-}
+    const count = text.length;
+    const remaining = maxLength ? maxLength - count : null;
+    const isOverLimit = maxLength ? count > maxLength : false;
+
+    return { count, remaining, isOverLimit };
+  }, [text, maxLength]);
+};
 
 // Debounced auto-resize
 const useDebouncedResize = (callback, delay) => {
   const debouncedCallback = useMemo(
     () => debounce(callback, delay),
-    [callback, delay]
-  )
-  
-  return debouncedCallback
-}
+    [callback, delay],
+  );
+
+  return debouncedCallback;
+};
 ```
 
 ### UX Guidelines
@@ -375,33 +382,33 @@ const useDebouncedResize = (callback, delay) => {
 
 ```tsx
 const validateTextarea = (value, required, minLength, maxLength) => {
-  const errors = []
-  
+  const errors = [];
+
   if (required && !value.trim()) {
-    errors.push('This field is required')
+    errors.push("This field is required");
   }
-  
+
   if (minLength && value.length < minLength) {
-    errors.push(`Minimum ${minLength} characters required`)
+    errors.push(`Minimum ${minLength} characters required`);
   }
-  
+
   if (maxLength && value.length > maxLength) {
-    errors.push(`Maximum ${maxLength} characters allowed`)
+    errors.push(`Maximum ${maxLength} characters allowed`);
   }
-  
-  return errors
-}
+
+  return errors;
+};
 
 const handleTextChange = (newValue) => {
-  const errors = validateTextarea(newValue, required, minLength, maxLength)
-  
+  const errors = validateTextarea(newValue, required, minLength, maxLength);
+
   if (errors.length > 0) {
-    setError(errors[0])
+    setError(errors[0]);
   } else {
-    setError('')
-    onChange(newValue)
+    setError("");
+    onChange(newValue);
   }
-}
+};
 ```
 
 ### Mobile Considerations
@@ -412,7 +419,7 @@ const handleTextChange = (newValue) => {
 - Optimize touch scrolling within the textarea
 
 ```tsx
-const isMobile = useMediaQuery('(max-width: 768px)')
+const isMobile = useMediaQuery("(max-width: 768px)");
 
 const textareaProps = {
   ...props,
@@ -420,10 +427,10 @@ const textareaProps = {
     rows: Math.max(minRows, 4), // Larger minimum on mobile
     style: {
       ...props.style,
-      fontSize: '16px' // Prevent zoom on iOS
-    }
-  })
-}
+      fontSize: "16px", // Prevent zoom on iOS
+    },
+  }),
+};
 ```
 
 ### Auto-Resize Implementation
@@ -431,67 +438,83 @@ const textareaProps = {
 ```tsx
 // Custom hook for auto-resize functionality
 const useAutoResize = (textareaRef, value, minRows, maxRows) => {
-  const [height, setHeight] = useState('auto')
-  
+  const [height, setHeight] = useState("auto");
+
   useEffect(() => {
-    if (!textareaRef.current) return
-    
-    const textarea = textareaRef.current
-    const computedStyle = window.getComputedStyle(textarea)
-    const lineHeight = parseInt(computedStyle.lineHeight, 10)
-    const paddingTop = parseInt(computedStyle.paddingTop, 10)
-    const paddingBottom = parseInt(computedStyle.paddingBottom, 10)
-    const borderTop = parseInt(computedStyle.borderTopWidth, 10)
-    const borderBottom = parseInt(computedStyle.borderBottomWidth, 10)
-    
+    if (!textareaRef.current) return;
+
+    const textarea = textareaRef.current;
+    const computedStyle = window.getComputedStyle(textarea);
+    const lineHeight = parseInt(computedStyle.lineHeight, 10);
+    const paddingTop = parseInt(computedStyle.paddingTop, 10);
+    const paddingBottom = parseInt(computedStyle.paddingBottom, 10);
+    const borderTop = parseInt(computedStyle.borderTopWidth, 10);
+    const borderBottom = parseInt(computedStyle.borderBottomWidth, 10);
+
     // Reset height to calculate scroll height
-    textarea.style.height = 'auto'
-    const scrollHeight = textarea.scrollHeight
-    
+    textarea.style.height = "auto";
+    const scrollHeight = textarea.scrollHeight;
+
     // Calculate min and max heights
-    const minHeight = minRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom
-    const maxHeight = maxRows * lineHeight + paddingTop + paddingBottom + borderTop + borderBottom
-    
+    const minHeight =
+      minRows * lineHeight +
+      paddingTop +
+      paddingBottom +
+      borderTop +
+      borderBottom;
+    const maxHeight =
+      maxRows * lineHeight +
+      paddingTop +
+      paddingBottom +
+      borderTop +
+      borderBottom;
+
     // Set new height within constraints
-    const newHeight = Math.min(Math.max(scrollHeight, minHeight), maxHeight)
-    setHeight(`${newHeight}px`)
-  }, [value, minRows, maxRows])
-  
-  return height
-}
+    const newHeight = Math.min(Math.max(scrollHeight, minHeight), maxHeight);
+    setHeight(`${newHeight}px`);
+  }, [value, minRows, maxRows]);
+
+  return height;
+};
 ```
 
 ### State Management
 
 ```tsx
 // Custom hook for textarea state
-const useTextarea = (initialValue = '', options = {}) => {
-  const [value, setValue] = useState(initialValue)
-  const [error, setError] = useState('')
-  const [focused, setFocused] = useState(false)
-  
-  const { maxLength, required, minLength } = options
-  
+const useTextarea = (initialValue = "", options = {}) => {
+  const [value, setValue] = useState(initialValue);
+  const [error, setError] = useState("");
+  const [focused, setFocused] = useState(false);
+
+  const { maxLength, required, minLength } = options;
+
   const characterCount = useMemo(() => {
-    const count = value.length
-    const remaining = maxLength ? maxLength - count : null
-    const isOverLimit = maxLength ? count > maxLength : false
-    
-    return { count, remaining, isOverLimit }
-  }, [value, maxLength])
-  
-  const validate = useCallback((val = value) => {
-    const errors = validateTextarea(val, required, minLength, maxLength)
-    const error = errors[0] || ''
-    setError(error)
-    return !error
-  }, [value, required, minLength, maxLength])
-  
-  const handleChange = useCallback((newValue) => {
-    setValue(newValue)
-    validate(newValue)
-  }, [validate])
-  
+    const count = value.length;
+    const remaining = maxLength ? maxLength - count : null;
+    const isOverLimit = maxLength ? count > maxLength : false;
+
+    return { count, remaining, isOverLimit };
+  }, [value, maxLength]);
+
+  const validate = useCallback(
+    (val = value) => {
+      const errors = validateTextarea(val, required, minLength, maxLength);
+      const error = errors[0] || "";
+      setError(error);
+      return !error;
+    },
+    [value, required, minLength, maxLength],
+  );
+
+  const handleChange = useCallback(
+    (newValue) => {
+      setValue(newValue);
+      validate(newValue);
+    },
+    [validate],
+  );
+
   return {
     value,
     setValue: handleChange,
@@ -500,7 +523,7 @@ const useTextarea = (initialValue = '', options = {}) => {
     setFocused,
     characterCount,
     validate,
-    isValid: !error
-  }
-}
+    isValid: !error,
+  };
+};
 ```

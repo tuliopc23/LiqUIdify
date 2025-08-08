@@ -4,48 +4,48 @@ description: Dropdown selection component with search, multi-select, and keyboar
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassSelect } from '@liquidify/components'
+import { useState } from "react";
+import { GlassSelect } from "@liquidify/components";
 
 export default function Demo() {
-  const [singleValue, setSingleValue] = useState('')
-  const [multiValue, setMultiValue] = useState([])
-  const [countryValue, setCountryValue] = useState('')
-  
+  const [singleValue, setSingleValue] = useState("");
+  const [multiValue, setMultiValue] = useState([]);
+  const [countryValue, setCountryValue] = useState("");
+
   const basicOptions = [
-    { value: 'apple', label: 'Apple' },
-    { value: 'banana', label: 'Banana' },
-    { value: 'orange', label: 'Orange' },
-    { value: 'grape', label: 'Grape' },
-  ]
-  
+    { value: "apple", label: "Apple" },
+    { value: "banana", label: "Banana" },
+    { value: "orange", label: "Orange" },
+    { value: "grape", label: "Grape" },
+  ];
+
   const countryOptions = [
-    { value: 'us', label: 'United States' },
-    { value: 'ca', label: 'Canada' },
-    { value: 'uk', label: 'United Kingdom' },
-    { value: 'de', label: 'Germany' },
-    { value: 'fr', label: 'France' },
-    { value: 'jp', label: 'Japan' },
-  ]
-  
+    { value: "us", label: "United States" },
+    { value: "ca", label: "Canada" },
+    { value: "uk", label: "United Kingdom" },
+    { value: "de", label: "Germany" },
+    { value: "fr", label: "France" },
+    { value: "jp", label: "Japan" },
+  ];
+
   return (
-    <div className="space-y-8 p-6" style={{maxWidth: 420}}>
+    <div className="space-y-8 p-6" style={{ maxWidth: 420 }}>
       <div>
         <h3 className="text-white mb-4">Basic Select</h3>
-        <GlassSelect 
+        <GlassSelect
           options={basicOptions}
           value={singleValue}
           onChange={setSingleValue}
           placeholder="Choose a fruit"
         />
         <p className="text-white/60 text-sm mt-2">
-          Selected: {singleValue || 'None'}
+          Selected: {singleValue || "None"}
         </p>
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Multi-Select</h3>
-        <GlassSelect 
+        <GlassSelect
           options={basicOptions}
           value={multiValue}
           onChange={setMultiValue}
@@ -54,13 +54,13 @@ export default function Demo() {
           maxSelections={3}
         />
         <p className="text-white/60 text-sm mt-2">
-          Selected: {multiValue.length > 0 ? multiValue.join(', ') : 'None'}
+          Selected: {multiValue.length > 0 ? multiValue.join(", ") : "None"}
         </p>
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Searchable Select</h3>
-        <GlassSelect 
+        <GlassSelect
           options={countryOptions}
           value={countryValue}
           onChange={setCountryValue}
@@ -68,56 +68,56 @@ export default function Demo() {
           searchable={true}
         />
         <p className="text-white/60 text-sm mt-2">
-          Selected: {countryValue || 'None'}
+          Selected: {countryValue || "None"}
         </p>
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ## Variants and States
 
 ```tsx live
-import { useState } from 'react'
-import { GlassSelect } from '@liquidify/components'
+import { useState } from "react";
+import { GlassSelect } from "@liquidify/components";
 
 export default function VariantsDemo() {
-  const [value1, setValue1] = useState('')
-  const [value2, setValue2] = useState('option2')
-  
+  const [value1, setValue1] = useState("");
+  const [value2, setValue2] = useState("option2");
+
   const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3', disabled: true },
-    { value: 'option4', label: 'Option 4' },
-  ]
-  
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3", disabled: true },
+    { value: "option4", label: "Option 4" },
+  ];
+
   return (
     <div className="space-y-8">
       <div>
         <h3 className="text-white mb-4">Default State</h3>
-        <GlassSelect 
+        <GlassSelect
           options={options}
           value={value1}
           onChange={setValue1}
           placeholder="Select an option"
         />
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">With Selection</h3>
-        <GlassSelect 
+        <GlassSelect
           options={options}
           value={value2}
           onChange={setValue2}
           placeholder="Select an option"
         />
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Disabled State</h3>
-        <GlassSelect 
+        <GlassSelect
           options={options}
           value={value2}
           onChange={setValue2}
@@ -125,10 +125,10 @@ export default function VariantsDemo() {
           disabled={true}
         />
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">With Disabled Options</h3>
-        <GlassSelect 
+        <GlassSelect
           options={options}
           value={value1}
           onChange={setValue1}
@@ -136,41 +136,41 @@ export default function VariantsDemo() {
         />
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ## Advanced Examples
 
 ```tsx live
-import { useState } from 'react'
-import { GlassSelect } from '@liquidify/components'
-import { User, Crown, Shield } from 'lucide-react'
+import { useState } from "react";
+import { GlassSelect } from "@liquidify/components";
+import { User, Crown, Shield } from "lucide-react";
 
 export default function AdvancedDemo() {
-  const [userRole, setUserRole] = useState('')
-  const [teamMembers, setTeamMembers] = useState([])
-  
+  const [userRole, setUserRole] = useState("");
+  const [teamMembers, setTeamMembers] = useState([]);
+
   const roleOptions = [
-    { value: 'admin', label: 'Administrator' },
-    { value: 'editor', label: 'Editor' },
-    { value: 'viewer', label: 'Viewer' },
-    { value: 'guest', label: 'Guest', disabled: true },
-  ]
-  
+    { value: "admin", label: "Administrator" },
+    { value: "editor", label: "Editor" },
+    { value: "viewer", label: "Viewer" },
+    { value: "guest", label: "Guest", disabled: true },
+  ];
+
   const teamOptions = [
-    { value: 'john', label: 'John Doe' },
-    { value: 'jane', label: 'Jane Smith' },
-    { value: 'bob', label: 'Bob Johnson' },
-    { value: 'alice', label: 'Alice Brown' },
-    { value: 'charlie', label: 'Charlie Wilson' },
-  ]
-  
+    { value: "john", label: "John Doe" },
+    { value: "jane", label: "Jane Smith" },
+    { value: "bob", label: "Bob Johnson" },
+    { value: "alice", label: "Alice Brown" },
+    { value: "charlie", label: "Charlie Wilson" },
+  ];
+
   return (
     <div className="space-y-8">
       <div>
         <h3 className="text-white mb-4">User Role Selection</h3>
-        <GlassSelect 
+        <GlassSelect
           options={roleOptions}
           value={userRole}
           onChange={setUserRole}
@@ -178,10 +178,10 @@ export default function AdvancedDemo() {
           aria-label="User role selection"
         />
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Team Members (Multi-select)</h3>
-        <GlassSelect 
+        <GlassSelect
           options={teamOptions}
           value={teamMembers}
           onChange={setTeamMembers}
@@ -197,33 +197,33 @@ export default function AdvancedDemo() {
         )}
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `options` | `GlassSelectOption[]` | `[]` | Array of selectable options |
-| `value` | `string \| string[]` | - | Current selected value(s) |
-| `onChange` | `(value: string \| string[]) => void` | - | Callback when selection changes |
-| `placeholder` | `string` | `'Select an option'` | Placeholder text |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `multiple` | `boolean` | `false` | Enable multi-selection |
-| `searchable` | `boolean` | `false` | Enable search functionality |
-| `maxSelections` | `number` | - | Maximum selections (multi-select only) |
-| `className` | `string` | - | Additional CSS classes |
-| `id` | `string` | - | Input element ID |
-| `aria-label` | `string` | - | Accessibility label |
-| `aria-describedby` | `string` | - | Accessibility description |
+| Prop               | Type                                  | Default              | Description                            |
+| ------------------ | ------------------------------------- | -------------------- | -------------------------------------- |
+| `options`          | `GlassSelectOption[]`                 | `[]`                 | Array of selectable options            |
+| `value`            | `string \| string[]`                  | -                    | Current selected value(s)              |
+| `onChange`         | `(value: string \| string[]) => void` | -                    | Callback when selection changes        |
+| `placeholder`      | `string`                              | `'Select an option'` | Placeholder text                       |
+| `disabled`         | `boolean`                             | `false`              | Disabled state                         |
+| `multiple`         | `boolean`                             | `false`              | Enable multi-selection                 |
+| `searchable`       | `boolean`                             | `false`              | Enable search functionality            |
+| `maxSelections`    | `number`                              | -                    | Maximum selections (multi-select only) |
+| `className`        | `string`                              | -                    | Additional CSS classes                 |
+| `id`               | `string`                              | -                    | Input element ID                       |
+| `aria-label`       | `string`                              | -                    | Accessibility label                    |
+| `aria-describedby` | `string`                              | -                    | Accessibility description              |
 
 ### GlassSelectOption Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `value` | `string` | Option value |
-| `label` | `string` | Option display text |
+| Property   | Type      | Description                |
+| ---------- | --------- | -------------------------- |
+| `value`    | `string`  | Option value               |
+| `label`    | `string`  | Option display text        |
 | `disabled` | `boolean` | Whether option is disabled |
 
 ## Usage Patterns
@@ -231,159 +231,165 @@ export default function AdvancedDemo() {
 ### Form Integration
 
 ```tsx
-import { GlassSelect, GlassFormField } from '@liquidify/components'
+import { GlassSelect, GlassFormField } from "@liquidify/components";
 
 function UserForm() {
   const [formData, setFormData] = useState({
-    country: '',
-    language: '',
-    interests: []
-  })
-  
+    country: "",
+    language: "",
+    interests: [],
+  });
+
   const countryOptions = [
-    { value: 'us', label: 'United States' },
-    { value: 'ca', label: 'Canada' },
-    { value: 'uk', label: 'United Kingdom' },
-  ]
-  
+    { value: "us", label: "United States" },
+    { value: "ca", label: "Canada" },
+    { value: "uk", label: "United Kingdom" },
+  ];
+
   const languageOptions = [
-    { value: 'en', label: 'English' },
-    { value: 'es', label: 'Spanish' },
-    { value: 'fr', label: 'French' },
-  ]
-  
+    { value: "en", label: "English" },
+    { value: "es", label: "Spanish" },
+    { value: "fr", label: "French" },
+  ];
+
   const interestOptions = [
-    { value: 'tech', label: 'Technology' },
-    { value: 'design', label: 'Design' },
-    { value: 'business', label: 'Business' },
-  ]
-  
+    { value: "tech", label: "Technology" },
+    { value: "design", label: "Design" },
+    { value: "business", label: "Business" },
+  ];
+
   return (
     <form className="space-y-6">
       <GlassFormField label="Country" required>
-        <GlassSelect 
+        <GlassSelect
           options={countryOptions}
           value={formData.country}
-          onChange={(value) => setFormData(prev => ({ ...prev, country: value }))}
+          onChange={(value) =>
+            setFormData((prev) => ({ ...prev, country: value }))
+          }
           placeholder="Select your country"
           searchable={true}
         />
       </GlassFormField>
-      
+
       <GlassFormField label="Language">
-        <GlassSelect 
+        <GlassSelect
           options={languageOptions}
           value={formData.language}
-          onChange={(value) => setFormData(prev => ({ ...prev, language: value }))}
+          onChange={(value) =>
+            setFormData((prev) => ({ ...prev, language: value }))
+          }
           placeholder="Select language"
         />
       </GlassFormField>
-      
+
       <GlassFormField label="Interests" helperText="Select up to 3 interests">
-        <GlassSelect 
+        <GlassSelect
           options={interestOptions}
           value={formData.interests}
-          onChange={(value) => setFormData(prev => ({ ...prev, interests: value }))}
+          onChange={(value) =>
+            setFormData((prev) => ({ ...prev, interests: value }))
+          }
           placeholder="Select interests"
           multiple={true}
           maxSelections={3}
         />
       </GlassFormField>
     </form>
-  )
+  );
 }
 ```
 
 ### Dynamic Options
 
 ```tsx
-import { GlassSelect } from '@liquidify/components'
-import { useEffect, useState } from 'react'
+import { GlassSelect } from "@liquidify/components";
+import { useEffect, useState } from "react";
 
 function DynamicSelect() {
-  const [options, setOptions] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [value, setValue] = useState('')
-  
+  const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [value, setValue] = useState("");
+
   useEffect(() => {
     const fetchOptions = async () => {
       try {
-        const response = await fetch('/api/options')
-        const data = await response.json()
-        setOptions(data)
+        const response = await fetch("/api/options");
+        const data = await response.json();
+        setOptions(data);
       } catch (error) {
-        console.error('Failed to fetch options:', error)
+        console.error("Failed to fetch options:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    
-    fetchOptions()
-  }, [])
-  
+    };
+
+    fetchOptions();
+  }, []);
+
   if (loading) {
     return (
-      <GlassSelect 
-        options={[{ value: 'loading', label: 'Loading...', disabled: true }]}
+      <GlassSelect
+        options={[{ value: "loading", label: "Loading...", disabled: true }]}
         disabled={true}
         placeholder="Loading options..."
       />
-    )
+    );
   }
-  
+
   return (
-    <GlassSelect 
+    <GlassSelect
       options={options}
       value={value}
       onChange={setValue}
       placeholder="Select an option"
       searchable={true}
     />
-  )
+  );
 }
 ```
 
 ### Controlled with Validation
 
 ```tsx
-import { GlassSelect, GlassFormField } from '@liquidify/components'
+import { GlassSelect, GlassFormField } from "@liquidify/components";
 
 function ValidatedSelect() {
-  const [value, setValue] = useState('')
-  const [error, setError] = useState('')
-  
+  const [value, setValue] = useState("");
+  const [error, setError] = useState("");
+
   const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
-  ]
-  
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
+  ];
+
   const handleChange = (newValue) => {
-    setValue(newValue)
-    
+    setValue(newValue);
+
     // Validation
     if (!newValue) {
-      setError('Please select an option')
+      setError("Please select an option");
     } else {
-      setError('')
+      setError("");
     }
-  }
-  
+  };
+
   return (
-    <GlassFormField 
+    <GlassFormField
       label="Required Selection"
       required
       error={error}
-      success={value && !error ? 'Valid selection' : undefined}
+      success={value && !error ? "Valid selection" : undefined}
     >
-      <GlassSelect 
+      <GlassSelect
         options={options}
         value={value}
         onChange={handleChange}
         placeholder="Select an option"
       />
     </GlassFormField>
-  )
+  );
 }
 ```
 
@@ -398,22 +404,22 @@ function ValidatedSelect() {
 
 ### Keyboard Shortcuts
 
-| Key | Action |
-|-----|--------|
-| `Space/Enter` | Open/close dropdown |
-| `Arrow Down` | Navigate to next option |
-| `Arrow Up` | Navigate to previous option |
-| `Enter` | Select focused option |
-| `Escape` | Close dropdown |
-| `Home` | Focus first option |
-| `End` | Focus last option |
-| `Type` | Search for option (when searchable) |
+| Key           | Action                              |
+| ------------- | ----------------------------------- |
+| `Space/Enter` | Open/close dropdown                 |
+| `Arrow Down`  | Navigate to next option             |
+| `Arrow Up`    | Navigate to previous option         |
+| `Enter`       | Select focused option               |
+| `Escape`      | Close dropdown                      |
+| `Home`        | Focus first option                  |
+| `End`         | Focus last option                   |
+| `Type`        | Search for option (when searchable) |
 
 ### Screen Reader Support
 
 ```tsx
 // Automatic ARIA attributes
-<GlassSelect 
+<GlassSelect
   options={options}
   value={value}
   onChange={setValue}
@@ -421,7 +427,7 @@ function ValidatedSelect() {
 />
 
 // Generates:
-// <div 
+// <div
 //   role="combobox"
 //   aria-expanded="false"
 //   aria-haspopup="listbox"
@@ -485,20 +491,19 @@ function ValidatedSelect() {
 
 ```tsx
 // Performance optimizations
-const memoizedOptions = useMemo(() => 
-  rawOptions.map(option => ({
-    ...option,
-    searchText: option.label.toLowerCase()
-  })), [rawOptions]
-)
+const memoizedOptions = useMemo(
+  () =>
+    rawOptions.map((option) => ({
+      ...option,
+      searchText: option.label.toLowerCase(),
+    })),
+  [rawOptions],
+);
 
-const debouncedFilter = useDebouncedCallback(
-  (query) => {
-    const filtered = memoizedOptions.filter(option => 
-      option.searchText.includes(query.toLowerCase())
-    )
-    setFilteredOptions(filtered)
-  },
-  200
-)
+const debouncedFilter = useDebouncedCallback((query) => {
+  const filtered = memoizedOptions.filter((option) =>
+    option.searchText.includes(query.toLowerCase()),
+  );
+  setFilteredOptions(filtered);
+}, 200);
 ```

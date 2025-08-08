@@ -47,11 +47,7 @@ bun add liquidify
 ### Basic Usage
 
 ```tsx
-import {
-  GlassButton,
-  GlassCard,
-  UnifiedGlassProvider,
-} from "liquidify";
+import { GlassButton, GlassCard, UnifiedGlassProvider } from "liquidify";
 import "liquidify/css";
 
 function App() {
@@ -388,7 +384,7 @@ MIT © [Tulio Pinheiro Cunha](https://tuliocunha.dev)
 
 - **[📖 Storybook](https://liquidify-storybook.vercel.app)** - Interactive component playground
 - **[🔗 GitHub](https://github.com/tuliopc23/LiqUIdify)** - Source code and issues
-**[📦 NPM](https://www.npmjs.com/package/liquidify)**
+  **[📦 NPM](https://www.npmjs.com/package/liquidify)**
 - **[💬 Discussions](https://github.com/tuliopc23/LiqUIdify/discussions)** - Community discussions
 - **[🐛 Issues](https://github.com/tuliopc23/LiqUIdify/issues)** - Bug reports and feature requests
 

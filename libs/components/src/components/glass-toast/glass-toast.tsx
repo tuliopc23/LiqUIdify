@@ -160,7 +160,9 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
               </h4>
             )}
 
-            <p className="text-liquid-primary/80 text-sm">{toast.description}</p>
+            <p className="text-liquid-primary/80 text-sm">
+              {toast.description}
+            </p>
 
             {toast.action && (
               <button

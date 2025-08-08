@@ -4,21 +4,21 @@ description: Elegant date selection component with Apple-inspired liquid glass e
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassDatePicker } from '@liquidify/components'
+import { useState } from "react";
+import { GlassDatePicker } from "@liquidify/components";
 
 export default function Demo() {
-  const [selectedDate, setSelectedDate] = useState(null)
-  const [selectedDateTime, setSelectedDateTime] = useState(null)
-  const [selectedRange, setSelectedRange] = useState(null)
-  
-  const today = new Date()
-  const tomorrow = new Date(today)
-  tomorrow.setDate(tomorrow.getDate() + 1)
-  
-  const nextWeek = new Date(today)
-  nextWeek.setDate(nextWeek.getDate() + 7)
-  
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDateTime, setSelectedDateTime] = useState(null);
+  const [selectedRange, setSelectedRange] = useState(null);
+
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const nextWeek = new Date(today);
+  nextWeek.setDate(nextWeek.getDate() + 7);
+
   return (
     <div className="space-y-6 max-w-md mx-auto">
       <div>
@@ -32,7 +32,7 @@ export default function Demo() {
           minDate={today}
         />
       </div>
-      
+
       <div>
         <label className="block text-sm font-medium text-white mb-2">
           Date & Time
@@ -45,7 +45,7 @@ export default function Demo() {
           size="lg"
         />
       </div>
-      
+
       <div>
         <label className="block text-sm font-medium text-white mb-2">
           Small Date Picker
@@ -58,17 +58,24 @@ export default function Demo() {
           maxDate={nextWeek}
         />
       </div>
-      
+
       <div className="p-4 rounded-lg bg-white/5 border border-white/10">
         <h3 className="font-medium text-white mb-2">Selected Values:</h3>
         <div className="text-white/70 text-sm space-y-1">
-          <p>Date: {selectedDate ? selectedDate.toLocaleDateString() : 'None'}</p>
-          <p>Date & Time: {selectedDateTime ? selectedDateTime.toLocaleString() : 'None'}</p>
-          <p>Range: {selectedRange ? selectedRange.toLocaleDateString() : 'None'}</p>
+          <p>
+            Date: {selectedDate ? selectedDate.toLocaleDateString() : "None"}
+          </p>
+          <p>
+            Date & Time:{" "}
+            {selectedDateTime ? selectedDateTime.toLocaleString() : "None"}
+          </p>
+          <p>
+            Range: {selectedRange ? selectedRange.toLocaleDateString() : "None"}
+          </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -78,21 +85,21 @@ The Glass Date Picker component provides an elegant date selection interface wit
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `Date` | - | Current selected date |
-| `defaultValue` | `Date` | - | Default selected date (uncontrolled) |
-| `onChange` | `(date: Date \| null) => void` | - | Callback when date changes |
-| `placeholder` | `string` | `'Select date...'` | Placeholder text |
-| `disabled` | `boolean` | `false` | Disabled state |
-| `showTime` | `boolean` | `false` | Enable time selection |
-| `format` | `string` | - | Custom date format |
-| `locale` | `string` | `'en-US'` | Locale for date formatting |
-| `minDate` | `Date` | - | Minimum selectable date |
-| `maxDate` | `Date` | - | Maximum selectable date |
-| `disabledDates` | `Date[]` | `[]` | Array of disabled dates |
-| `weekStartsOn` | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `0` | First day of week (0 = Sunday) |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size variant |
+| Prop            | Type                              | Default            | Description                          |
+| --------------- | --------------------------------- | ------------------ | ------------------------------------ |
+| `value`         | `Date`                            | -                  | Current selected date                |
+| `defaultValue`  | `Date`                            | -                  | Default selected date (uncontrolled) |
+| `onChange`      | `(date: Date \| null) => void`    | -                  | Callback when date changes           |
+| `placeholder`   | `string`                          | `'Select date...'` | Placeholder text                     |
+| `disabled`      | `boolean`                         | `false`            | Disabled state                       |
+| `showTime`      | `boolean`                         | `false`            | Enable time selection                |
+| `format`        | `string`                          | -                  | Custom date format                   |
+| `locale`        | `string`                          | `'en-US'`          | Locale for date formatting           |
+| `minDate`       | `Date`                            | -                  | Minimum selectable date              |
+| `maxDate`       | `Date`                            | -                  | Maximum selectable date              |
+| `disabledDates` | `Date[]`                          | `[]`               | Array of disabled dates              |
+| `weekStartsOn`  | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `0`                | First day of week (0 = Sunday)       |
+| `size`          | `'sm' \| 'md' \| 'lg'`            | `'md'`             | Size variant                         |
 
 ## Usage Patterns
 
@@ -140,28 +147,28 @@ maxDate.setMonth(maxDate.getMonth() + 3)
 
 ```tsx
 const getDisabledDates = () => {
-  const dates = []
-  const today = new Date()
-  
+  const dates = [];
+  const today = new Date();
+
   // Disable weekends
   for (let i = 0; i < 30; i++) {
-    const date = new Date(today)
-    date.setDate(date.getDate() + i)
-    
+    const date = new Date(today);
+    date.setDate(date.getDate() + i);
+
     if (date.getDay() === 0 || date.getDay() === 6) {
-      dates.push(date)
+      dates.push(date);
     }
   }
-  
-  return dates
-}
+
+  return dates;
+};
 
 <GlassDatePicker
   value={workDate}
   onChange={setWorkDate}
   disabledDates={getDisabledDates()}
   placeholder="Select work date..."
-/>
+/>;
 ```
 
 ### Form Integration
@@ -170,24 +177,24 @@ const getDisabledDates = () => {
 const [formData, setFormData] = useState({
   startDate: null,
   endDate: null,
-  reminderDate: null
-})
+  reminderDate: null,
+});
 
-const [errors, setErrors] = useState({})
+const [errors, setErrors] = useState({});
 
 const handleStartDateChange = (date) => {
-  setFormData(prev => ({ ...prev, startDate: date }))
-  
+  setFormData((prev) => ({ ...prev, startDate: date }));
+
   // Clear end date if it's before start date
   if (formData.endDate && date && formData.endDate < date) {
-    setFormData(prev => ({ ...prev, endDate: null }))
+    setFormData((prev) => ({ ...prev, endDate: null }));
   }
-  
+
   // Clear error
   if (errors.startDate) {
-    setErrors(prev => ({ ...prev, startDate: '' }))
+    setErrors((prev) => ({ ...prev, startDate: "" }));
   }
-}
+};
 
 <form className="space-y-4">
   <div>
@@ -202,17 +209,17 @@ const handleStartDateChange = (date) => {
       <p className="text-red-400 text-sm mt-1">{errors.startDate}</p>
     )}
   </div>
-  
+
   <div>
     <label className="block text-sm font-medium mb-2">End Date</label>
     <GlassDatePicker
       value={formData.endDate}
-      onChange={(date) => setFormData(prev => ({ ...prev, endDate: date }))}
+      onChange={(date) => setFormData((prev) => ({ ...prev, endDate: date }))}
       placeholder="Select end date..."
       minDate={formData.startDate || new Date()}
     />
   </div>
-</form>
+</form>;
 ```
 
 ### International Localization
@@ -229,8 +236,8 @@ const locales = [
 ]
 
 <div className="space-y-4">
-  <select 
-    value={locale} 
+  <select
+    value={locale}
     onChange={(e) => setLocale(e.target.value)}
     className="px-3 py-2 rounded-lg bg-white/10 text-white"
   >
@@ -238,7 +245,7 @@ const locales = [
       <option key={loc.code} value={loc.code}>{loc.name}</option>
     ))}
   </select>
-  
+
   <GlassDatePicker
     value={selectedDate}
     onChange={setSelectedDate}
@@ -268,17 +275,17 @@ const locales = [
 
 ### Keyboard Support
 
-| Key | Action |
-|-----|--------|
-| `Enter` / `Space` | Open calendar or select date |
-| `Escape` | Close calendar |
-| `Arrow Keys` | Navigate between dates |
-| `Home` | Go to first day of week |
-| `End` | Go to last day of week |
-| `Page Up` | Previous month |
-| `Page Down` | Next month |
-| `Shift + Page Up` | Previous year |
-| `Shift + Page Down` | Next year |
+| Key                 | Action                       |
+| ------------------- | ---------------------------- |
+| `Enter` / `Space`   | Open calendar or select date |
+| `Escape`            | Close calendar               |
+| `Arrow Keys`        | Navigate between dates       |
+| `Home`              | Go to first day of week      |
+| `End`               | Go to last day of week       |
+| `Page Up`           | Previous month               |
+| `Page Down`         | Next month                   |
+| `Shift + Page Up`   | Previous year                |
+| `Shift + Page Down` | Next year                    |
 
 ## Apple HIG Guidelines
 
@@ -321,33 +328,35 @@ const locales = [
 
 ```tsx
 // Memoized calendar cell
-const CalendarCell = React.memo(({ date, isSelected, isToday, isDisabled, onClick }) => {
-  const formattedDate = useMemo(() => {
-    return date.toLocaleDateString(locale, { day: 'numeric' })
-  }, [date, locale])
-  
-  return (
-    <button
-      type="button"
-      onClick={() => onClick(date)}
-      disabled={isDisabled}
-      className={cn(
-        'w-10 h-10 rounded-lg transition-all',
-        isSelected && 'bg-blue-500 text-white',
-        isToday && !isSelected && 'bg-white/10',
-        isDisabled && 'opacity-50 cursor-not-allowed'
-      )}
-      aria-label={date.toLocaleDateString(locale, { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      })}
-    >
-      {formattedDate}
-    </button>
-  )
-})
+const CalendarCell = React.memo(
+  ({ date, isSelected, isToday, isDisabled, onClick }) => {
+    const formattedDate = useMemo(() => {
+      return date.toLocaleDateString(locale, { day: "numeric" });
+    }, [date, locale]);
+
+    return (
+      <button
+        type="button"
+        onClick={() => onClick(date)}
+        disabled={isDisabled}
+        className={cn(
+          "w-10 h-10 rounded-lg transition-all",
+          isSelected && "bg-blue-500 text-white",
+          isToday && !isSelected && "bg-white/10",
+          isDisabled && "opacity-50 cursor-not-allowed",
+        )}
+        aria-label={date.toLocaleDateString(locale, {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      >
+        {formattedDate}
+      </button>
+    );
+  },
+);
 ```
 
 ### UX Guidelines
@@ -361,36 +370,38 @@ const CalendarCell = React.memo(({ date, isSelected, isToday, isDisabled, onClic
 
 ```tsx
 const validateDate = (date, minDate, maxDate, disabledDates) => {
-  if (!date) return null
-  
+  if (!date) return null;
+
   if (minDate && date < minDate) {
-    return `Date must be after ${minDate.toLocaleDateString()}`
+    return `Date must be after ${minDate.toLocaleDateString()}`;
   }
-  
+
   if (maxDate && date > maxDate) {
-    return `Date must be before ${maxDate.toLocaleDateString()}`
+    return `Date must be before ${maxDate.toLocaleDateString()}`;
   }
-  
-  if (disabledDates.some(disabled => 
-    date.toDateString() === disabled.toDateString()
-  )) {
-    return 'This date is not available'
+
+  if (
+    disabledDates.some(
+      (disabled) => date.toDateString() === disabled.toDateString(),
+    )
+  ) {
+    return "This date is not available";
   }
-  
-  return null
-}
+
+  return null;
+};
 
 const handleDateChange = (date) => {
-  const error = validateDate(date, minDate, maxDate, disabledDates)
-  
+  const error = validateDate(date, minDate, maxDate, disabledDates);
+
   if (error) {
-    setError(error)
-    return
+    setError(error);
+    return;
   }
-  
-  setError('')
-  onChange(date)
-}
+
+  setError("");
+  onChange(date);
+};
 ```
 
 ### Mobile Considerations
@@ -401,21 +412,21 @@ const handleDateChange = (date) => {
 - Consider bottom sheet pattern for mobile calendars
 
 ```tsx
-const isMobile = useMediaQuery('(max-width: 768px)')
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+const isMobile = useMediaQuery("(max-width: 768px)");
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 if (isMobile && isIOS) {
   return (
     <input
       type="date"
-      value={value ? value.toISOString().split('T')[0] : ''}
+      value={value ? value.toISOString().split("T")[0] : ""}
       onChange={(e) => onChange(new Date(e.target.value))}
       className="glass-input"
     />
-  )
+  );
 }
 
-return <GlassDatePicker {...props} />
+return <GlassDatePicker {...props} />;
 ```
 
 ### Internationalization
@@ -425,27 +436,27 @@ return <GlassDatePicker {...props} />
 const useDateFormatter = (locale) => {
   return useMemo(() => {
     const formatters = {
-      short: new Intl.DateTimeFormat(locale, { 
-        month: 'short', 
-        day: 'numeric' 
+      short: new Intl.DateTimeFormat(locale, {
+        month: "short",
+        day: "numeric",
       }),
-      long: new Intl.DateTimeFormat(locale, { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
+      long: new Intl.DateTimeFormat(locale, {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       }),
-      time: new Intl.DateTimeFormat(locale, { 
-        hour: 'numeric', 
-        minute: '2-digit' 
-      })
-    }
-    
-    return formatters
-  }, [locale])
-}
+      time: new Intl.DateTimeFormat(locale, {
+        hour: "numeric",
+        minute: "2-digit",
+      }),
+    };
+
+    return formatters;
+  }, [locale]);
+};
 
 // Usage
-const formatters = useDateFormatter(locale)
-const displayDate = formatters.long.format(selectedDate)
+const formatters = useDateFormatter(locale);
+const displayDate = formatters.long.format(selectedDate);
 ```

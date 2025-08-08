@@ -96,7 +96,6 @@ Each component includes:
    ```
 
 2. **SSR Compatibility**
-
    - Full Next.js App Router support
    - Remix integration with proper CSS handling
    - Gatsby static generation compatibility

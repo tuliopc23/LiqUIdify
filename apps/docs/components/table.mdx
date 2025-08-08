@@ -4,63 +4,114 @@ description: Data table with liquid glass styling, custom renderers, and respons
 ---
 
 ```tsx live
-import { GlassTable } from '@liquidify/components'
-import { Badge, GlassButton } from '@liquidify/components'
-import { Edit, Trash2, Eye } from 'lucide-react'
+import { GlassTable } from "@liquidify/components";
+import { Badge, GlassButton } from "@liquidify/components";
+import { Edit, Trash2, Eye } from "lucide-react";
 
 export default function Demo() {
   const elementsData = [
-    { id: 1, name: 'Hydrogen', symbol: 'H', atomicNumber: 1, category: 'Nonmetal' },
-    { id: 2, name: 'Helium', symbol: 'He', atomicNumber: 2, category: 'Noble Gas' },
-    { id: 3, name: 'Lithium', symbol: 'Li', atomicNumber: 3, category: 'Alkali Metal' },
-    { id: 4, name: 'Beryllium', symbol: 'Be', atomicNumber: 4, category: 'Alkaline Earth' },
-  ]
-  
-  const elementsColumns = [
-    { key: 'id', header: 'ID' },
-    { key: 'name', header: 'Element Name' },
-    { key: 'symbol', header: 'Symbol' },
-    { key: 'atomicNumber', header: 'Atomic #' },
-    { 
-      key: 'category', 
-      header: 'Category',
-      render: (value) => (
-        <span className={`px-2 py-1 rounded text-xs ${
-          value === 'Nonmetal' ? 'bg-blue-500/20 text-blue-300' :
-          value === 'Noble Gas' ? 'bg-purple-500/20 text-purple-300' :
-          value === 'Alkali Metal' ? 'bg-green-500/20 text-green-300' :
-          'bg-orange-500/20 text-orange-300'
-        }`}>
-          {value}
-        </span>
-      )
-    }
-  ]
-  
-  const usersData = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive' },
-  ]
-  
-  const usersColumns = [
-    { key: 'name', header: 'Name' },
-    { key: 'email', header: 'Email' },
-    { key: 'role', header: 'Role' },
-    { 
-      key: 'status', 
-      header: 'Status',
-      render: (value) => (
-        <span className={`px-2 py-1 rounded-full text-xs ${
-          value === 'Active' ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'
-        }`}>
-          {value}
-        </span>
-      )
+    {
+      id: 1,
+      name: "Hydrogen",
+      symbol: "H",
+      atomicNumber: 1,
+      category: "Nonmetal",
     },
     {
-      key: 'id',
-      header: 'Actions',
+      id: 2,
+      name: "Helium",
+      symbol: "He",
+      atomicNumber: 2,
+      category: "Noble Gas",
+    },
+    {
+      id: 3,
+      name: "Lithium",
+      symbol: "Li",
+      atomicNumber: 3,
+      category: "Alkali Metal",
+    },
+    {
+      id: 4,
+      name: "Beryllium",
+      symbol: "Be",
+      atomicNumber: 4,
+      category: "Alkaline Earth",
+    },
+  ];
+
+  const elementsColumns = [
+    { key: "id", header: "ID" },
+    { key: "name", header: "Element Name" },
+    { key: "symbol", header: "Symbol" },
+    { key: "atomicNumber", header: "Atomic #" },
+    {
+      key: "category",
+      header: "Category",
+      render: (value) => (
+        <span
+          className={`px-2 py-1 rounded text-xs ${
+            value === "Nonmetal"
+              ? "bg-blue-500/20 text-blue-300"
+              : value === "Noble Gas"
+                ? "bg-purple-500/20 text-purple-300"
+                : value === "Alkali Metal"
+                  ? "bg-green-500/20 text-green-300"
+                  : "bg-orange-500/20 text-orange-300"
+          }`}
+        >
+          {value}
+        </span>
+      ),
+    },
+  ];
+
+  const usersData = [
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      role: "Admin",
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      email: "jane@example.com",
+      role: "User",
+      status: "Active",
+    },
+    {
+      id: 3,
+      name: "Bob Johnson",
+      email: "bob@example.com",
+      role: "User",
+      status: "Inactive",
+    },
+  ];
+
+  const usersColumns = [
+    { key: "name", header: "Name" },
+    { key: "email", header: "Email" },
+    { key: "role", header: "Role" },
+    {
+      key: "status",
+      header: "Status",
+      render: (value) => (
+        <span
+          className={`px-2 py-1 rounded-full text-xs ${
+            value === "Active"
+              ? "bg-green-500/20 text-green-300"
+              : "bg-red-500/20 text-red-300"
+          }`}
+        >
+          {value}
+        </span>
+      ),
+    },
+    {
+      key: "id",
+      header: "Actions",
       render: (value, item) => (
         <div className="flex gap-2">
           <button className="p-1 hover:bg-white/10 rounded text-blue-400">
@@ -73,50 +124,51 @@ export default function Demo() {
             <Trash2 className="h-4 w-4" />
           </button>
         </div>
-      )
-    }
-  ]
-  
+      ),
+    },
+  ];
+
   return (
     <div className="space-y-8 p-6">
       <div>
         <h3 className="text-white mb-4">Basic Table</h3>
         <GlassTable data={elementsData} columns={elementsColumns} />
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Users Table with Actions</h3>
         <GlassTable data={usersData} columns={usersColumns} />
       </div>
-      
+
       <div>
         <h3 className="text-white mb-4">Empty State</h3>
         <GlassTable data={[]} columns={elementsColumns} />
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ## Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `data` | `T[]` | Array of data objects |
-| `columns` | `TableColumn<T>[]` | Column configuration array |
-| `className` | `string` | Additional CSS classes |
+| Prop        | Type               | Description                |
+| ----------- | ------------------ | -------------------------- |
+| `data`      | `T[]`              | Array of data objects      |
+| `columns`   | `TableColumn<T>[]` | Column configuration array |
+| `className` | `string`           | Additional CSS classes     |
 
 ### TableColumn Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `key` | `keyof T` | Data property key |
-| `header` | `string` | Column header text |
+| Property | Type                                        | Description              |
+| -------- | ------------------------------------------- | ------------------------ |
+| `key`    | `keyof T`                                   | Data property key        |
+| `header` | `string`                                    | Column header text       |
 | `render` | `(value: T[keyof T], item: T) => ReactNode` | Optional custom renderer |
 
 ## Usage Patterns
 
 ### Basic Data Display
+
 ```tsx
 const data = [
   { id: 1, name: 'Product A', price: 99.99 },
@@ -132,45 +184,49 @@ const columns = [
 ```
 
 ### Custom Renderers
+
 ```tsx
 const columns = [
-  { key: 'name', header: 'Name' },
+  { key: "name", header: "Name" },
   {
-    key: 'price',
-    header: 'Price',
-    render: (value) => `${value.toFixed(2)}`
+    key: "price",
+    header: "Price",
+    render: (value) => `${value.toFixed(2)}`,
   },
   {
-    key: 'status',
-    header: 'Status',
+    key: "status",
+    header: "Status",
     render: (value) => (
-      <Badge variant={value === 'active' ? 'success' : 'error'}>
-        {value}
-      </Badge>
-    )
-  }
-]
+      <Badge variant={value === "active" ? "success" : "error"}>{value}</Badge>
+    ),
+  },
+];
 ```
 
 ### Action Columns
+
 ```tsx
 const columns = [
-  { key: 'name', header: 'Name' },
+  { key: "name", header: "Name" },
   {
-    key: 'id',
-    header: 'Actions',
+    key: "id",
+    header: "Actions",
     render: (value, item) => (
       <div className="flex gap-2">
         <GlassButton size="sm" onClick={() => edit(item)}>
           Edit
         </GlassButton>
-        <GlassButton size="sm" variant="destructive" onClick={() => delete(item)}>
+        <GlassButton
+          size="sm"
+          variant="destructive"
+          onClick={() => delete item}
+        >
           Delete
         </GlassButton>
       </div>
-    )
-  }
-]
+    ),
+  },
+];
 ```
 
 ## Accessibility
@@ -185,30 +241,35 @@ const columns = [
 ## Apple HIG Guidelines
 
 ### Visual Design
+
 - **Clarity**: Clean, readable table layout with proper spacing
 - **Depth**: Subtle glass effects that enhance without overwhelming
 - **Typography**: Consistent font weights and sizes for headers and data
 - **Color**: Appropriate contrast for readability
 
 ### Layout
+
 - **Spacing**: Generous padding for easy scanning
 - **Alignment**: Consistent alignment for different data types
 - **Responsive**: Handles overflow with horizontal scrolling
 - **Hierarchy**: Clear visual hierarchy between headers and data
 
 ### Interaction
+
 - **Hover**: Subtle hover effects for interactive rows
 - **Selection**: Clear visual feedback for selectable items
 - **Actions**: Appropriate placement and styling for action buttons
 - **Touch**: Adequate touch targets for mobile devices
 
 ### Content
+
 - **Headers**: Clear, descriptive column headers
 - **Data**: Consistent formatting within columns
 - **Empty States**: Graceful handling of empty data
 - **Loading**: Consider loading states for dynamic data
 
 ### Best Practices
+
 - Use consistent data formatting within columns
 - Provide meaningful column headers
 - Consider responsive behavior for mobile devices
@@ -216,4 +277,3 @@ const columns = [
 - Handle empty states gracefully
 - Use custom renderers for complex data types
 - Ensure sufficient color contrast for all content
-

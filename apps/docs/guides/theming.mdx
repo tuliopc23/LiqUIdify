@@ -24,8 +24,10 @@ LiqUIdify uses a Liquid Glass token system via CSS variables and a Tailwind plug
 ```css
 :root {
   --lg-radius-md: 1.25rem;
-  --lg-shadow-main: 0 6px 6px rgba(0,0,0,.2), 0 0 20px rgba(0,0,0,.1);
-  --lg-specular-shadow: inset 1px 1px 0 rgba(255,255,255,.75), inset 0 0 5px rgba(255,255,255,.75);
+  --lg-shadow-main: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+  --lg-specular-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 0 5px rgba(255, 255, 255, 0.75);
   --lg-filter-blur: blur(4px);
   --lg-filter-enhance: saturate(120%) brightness(1.15);
 }
@@ -34,30 +36,33 @@ LiqUIdify uses a Liquid Glass token system via CSS variables and a Tailwind plug
 ## Provider and Mode
 
 ```tsx
-import { GlassUIProvider } from '@liquidify/components'
-import '@liquidify/components/styles'
+import { GlassUIProvider } from "@liquidify/components";
+import "@liquidify/components/styles";
 
 export function App({ children }) {
   return (
     <GlassUIProvider theme="light" glassConfig={{ blur: 4, saturation: 120 }}>
       {children}
     </GlassUIProvider>
-  )
+  );
 }
 ```
 
 Toggle theme at runtime:
 
 ```tsx live
-import { useTheme, GlassButton } from '@liquidify/components'
+import { useTheme, GlassButton } from "@liquidify/components";
 
 export default function Toggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
   return (
-    <GlassButton variant="ghost" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+    <GlassButton
+      variant="ghost"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+    >
       Current: {theme}
     </GlassButton>
-  )
+  );
 }
 ```
 

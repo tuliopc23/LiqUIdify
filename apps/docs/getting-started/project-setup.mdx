@@ -16,17 +16,17 @@ bun add -d tailwindcss postcss autoprefixer
 Create `tailwind.config.ts`:
 
 ```ts
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 export default {
   content: [
-    './index.html',
-    './src/**/*.{ts,tsx}',
-    './node_modules/@liquidify/components/dist/**/*.{js,mjs}'
+    "./index.html",
+    "./src/**/*.{ts,tsx}",
+    "./node_modules/@liquidify/components/dist/**/*.{js,mjs}",
   ],
   theme: { extend: {} },
-  plugins: []
-} satisfies Config
+  plugins: [],
+} satisfies Config;
 ```
 
 ## 3) PostCSS
@@ -34,7 +34,7 @@ export default {
 `postcss.config.js`:
 
 ```js
-module.exports = { plugins: { tailwindcss: {}, autoprefixer: {} } }
+module.exports = { plugins: { tailwindcss: {}, autoprefixer: {} } };
 ```
 
 ## 4) Global CSS
@@ -42,13 +42,13 @@ module.exports = { plugins: { tailwindcss: {}, autoprefixer: {} } }
 Import library CSS once (tree-shake safe). Add to `src/main.tsx` or your app root:
 
 ```tsx
-import '@liquidify/components/styles'
+import "@liquidify/components/styles";
 ```
 
 If you prefer tokens only:
 
 ```tsx
-import '@liquidify/components/tokens'
+import "@liquidify/components/tokens";
 ```
 
 ## 5) ESM + sideEffects

@@ -12,53 +12,53 @@ The `NotificationCenter` component provides a comprehensive notification system 
 ### Basic Notification Center
 
 ```tsx live
-import { useState } from 'react'
-import { NotificationCenter } from '@liquidify/components'
+import { useState } from "react";
+import { NotificationCenter } from "@liquidify/components";
 
 export default function Demo() {
   const [notifications, setNotifications] = useState([
     {
-      id: '1',
-      title: 'Welcome!',
-      message: 'Thanks for trying our notification system.',
-      type: 'success',
+      id: "1",
+      title: "Welcome!",
+      message: "Thanks for trying our notification system.",
+      type: "success",
       timestamp: new Date(Date.now() - 5 * 60 * 1000),
-      read: false
+      read: false,
     },
     {
-      id: '2', 
-      title: 'System Update',
-      message: 'A new version is available for download.',
-      type: 'info',
+      id: "2",
+      title: "System Update",
+      message: "A new version is available for download.",
+      type: "info",
       timestamp: new Date(Date.now() - 15 * 60 * 1000),
-      read: true
+      read: true,
     },
     {
-      id: '3',
-      title: 'Warning',
-      message: 'Your storage is almost full.',
-      type: 'warning',
+      id: "3",
+      title: "Warning",
+      message: "Your storage is almost full.",
+      type: "warning",
       timestamp: new Date(Date.now() - 30 * 60 * 1000),
-      read: false
-    }
-  ])
-  
+      read: false,
+    },
+  ]);
+
   const handleMarkAsRead = (id) => {
-    setNotifications(prev => 
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
-    )
-  }
-  
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
+    );
+  };
+
   const handleMarkAllAsRead = () => {
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })))
-  }
-  
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+  };
+
   const handleDismiss = (id) => {
-    setNotifications(prev => prev.filter(n => n.id !== id))
-  }
-  
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+  };
+
   return (
-    <div style={{display:'flex', justifyContent:'center', padding:20}}>
+    <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
       <NotificationCenter
         notifications={notifications}
         onMarkAsRead={handleMarkAsRead}
@@ -66,122 +66,148 @@ export default function Demo() {
         onDismiss={handleDismiss}
       />
     </div>
-  )
+  );
 }
 ```
 
 ### Notification Types
 
 ```tsx live
-import { useState } from 'react'
-import { NotificationCenter, GlassButton } from '@liquidify/components'
+import { useState } from "react";
+import { NotificationCenter, GlassButton } from "@liquidify/components";
 
 export default function Demo() {
-  const [notifications, setNotifications] = useState([])
-  
+  const [notifications, setNotifications] = useState([]);
+
   const addNotification = (type) => {
     const messages = {
-      success: { title: 'Success!', message: 'Operation completed successfully.' },
-      error: { title: 'Error', message: 'Something went wrong. Please try again.' },
-      warning: { title: 'Warning', message: 'Please review your settings.' },
-      info: { title: 'Information', message: 'Here\'s some helpful information.' },
-      system: { title: 'System', message: 'System notification received.' }
-    }
-    
+      success: {
+        title: "Success!",
+        message: "Operation completed successfully.",
+      },
+      error: {
+        title: "Error",
+        message: "Something went wrong. Please try again.",
+      },
+      warning: { title: "Warning", message: "Please review your settings." },
+      info: {
+        title: "Information",
+        message: "Here's some helpful information.",
+      },
+      system: { title: "System", message: "System notification received." },
+    };
+
     const newNotification = {
       id: Date.now().toString(),
       ...messages[type],
       type,
       timestamp: new Date(),
-      read: false
-    }
-    
-    setNotifications(prev => [newNotification, ...prev])
-  }
-  
+      read: false,
+    };
+
+    setNotifications((prev) => [newNotification, ...prev]);
+  };
+
   const handleMarkAsRead = (id) => {
-    setNotifications(prev => 
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
-    )
-  }
-  
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
+    );
+  };
+
   const handleDismiss = (id) => {
-    setNotifications(prev => prev.filter(n => n.id !== id))
-  }
-  
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+  };
+
   return (
-    <div style={{display:'flex', flexDirection:'column', gap:16, alignItems:'center'}}>
-      <div style={{display:'flex', gap:8, flexWrap:'wrap'}}>
-        <GlassButton size="sm" onClick={() => addNotification('success')}>Success</GlassButton>
-        <GlassButton size="sm" onClick={() => addNotification('error')}>Error</GlassButton>
-        <GlassButton size="sm" onClick={() => addNotification('warning')}>Warning</GlassButton>
-        <GlassButton size="sm" onClick={() => addNotification('info')}>Info</GlassButton>
-        <GlassButton size="sm" onClick={() => addNotification('system')}>System</GlassButton>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        alignItems: "center",
+      }}
+    >
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <GlassButton size="sm" onClick={() => addNotification("success")}>
+          Success
+        </GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification("error")}>
+          Error
+        </GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification("warning")}>
+          Warning
+        </GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification("info")}>
+          Info
+        </GlassButton>
+        <GlassButton size="sm" onClick={() => addNotification("system")}>
+          System
+        </GlassButton>
       </div>
-      
+
       <NotificationCenter
         notifications={notifications}
         onMarkAsRead={handleMarkAsRead}
         onDismiss={handleDismiss}
       />
     </div>
-  )
+  );
 }
 ```
 
 ### With Actions
 
 ```tsx live
-import { useState } from 'react'
-import { NotificationCenter, GlassButton } from '@liquidify/components'
+import { useState } from "react";
+import { NotificationCenter, GlassButton } from "@liquidify/components";
 
 export default function Demo() {
   const [notifications, setNotifications] = useState([
     {
-      id: '1',
-      title: 'Friend Request',
-      message: 'John Doe wants to connect with you.',
-      type: 'info',
+      id: "1",
+      title: "Friend Request",
+      message: "John Doe wants to connect with you.",
+      type: "info",
       timestamp: new Date(Date.now() - 2 * 60 * 1000),
       read: false,
       action: {
-        label: 'Accept',
-        onClick: () => alert('Friend request accepted!')
-      }
+        label: "Accept",
+        onClick: () => alert("Friend request accepted!"),
+      },
     },
     {
-      id: '2',
-      title: 'Update Available',
-      message: 'Version 2.0 is ready to install.',
-      type: 'system',
+      id: "2",
+      title: "Update Available",
+      message: "Version 2.0 is ready to install.",
+      type: "system",
       timestamp: new Date(Date.now() - 10 * 60 * 1000),
       read: false,
       action: {
-        label: 'Install',
-        onClick: () => alert('Starting installation...')
-      }
-    }
-  ])
-  
+        label: "Install",
+        onClick: () => alert("Starting installation..."),
+      },
+    },
+  ]);
+
   const handleMarkAsRead = (id) => {
-    setNotifications(prev => 
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
-    )
-  }
-  
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
+    );
+  };
+
   const handleDismiss = (id) => {
-    setNotifications(prev => prev.filter(n => n.id !== id))
-  }
-  
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+  };
+
   return (
-    <div style={{display:'flex', justifyContent:'center', padding:20}}>
+    <div style={{ display: "flex", justifyContent: "center", padding: 20 }}>
       <NotificationCenter
         notifications={notifications}
         onMarkAsRead={handleMarkAsRead}
         onDismiss={handleDismiss}
       />
     </div>
-  )
+  );
 }
 ```
 
@@ -189,29 +215,29 @@ export default function Demo() {
 
 ### NotificationCenter
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `notifications` | `NotificationItem[]` | `[]` | Array of notification objects |
-| `onMarkAsRead` | `(id: string) => void` | `undefined` | Callback when notification is marked as read |
-| `onMarkAllAsRead` | `() => void` | `undefined` | Callback when all notifications are marked as read |
-| `onDismiss` | `(id: string) => void` | `undefined` | Callback when notification is dismissed |
-| `className` | `string` | `undefined` | Additional CSS classes |
+| Prop              | Type                   | Default     | Description                                        |
+| ----------------- | ---------------------- | ----------- | -------------------------------------------------- |
+| `notifications`   | `NotificationItem[]`   | `[]`        | Array of notification objects                      |
+| `onMarkAsRead`    | `(id: string) => void` | `undefined` | Callback when notification is marked as read       |
+| `onMarkAllAsRead` | `() => void`           | `undefined` | Callback when all notifications are marked as read |
+| `onDismiss`       | `(id: string) => void` | `undefined` | Callback when notification is dismissed            |
+| `className`       | `string`               | `undefined` | Additional CSS classes                             |
 
 ### NotificationItem Interface
 
 ```typescript
 interface NotificationItem {
-  id: string
-  title: string
-  message: string
-  type?: 'success' | 'error' | 'warning' | 'info' | 'system'
-  timestamp?: Date
-  read?: boolean
-  avatar?: string
+  id: string;
+  title: string;
+  message: string;
+  type?: "success" | "error" | "warning" | "info" | "system";
+  timestamp?: Date;
+  read?: boolean;
+  avatar?: string;
   action?: {
-    label: string
-    onClick: () => void
-  }
+    label: string;
+    onClick: () => void;
+  };
 }
 ```
 
@@ -221,18 +247,18 @@ interface NotificationItem {
 
 ```tsx
 // WebSocket integration
-const [notifications, setNotifications] = useState([])
+const [notifications, setNotifications] = useState([]);
 
 useEffect(() => {
-  const ws = new WebSocket('ws://localhost:8080')
-  
+  const ws = new WebSocket("ws://localhost:8080");
+
   ws.onmessage = (event) => {
-    const notification = JSON.parse(event.data)
-    setNotifications(prev => [notification, ...prev])
-  }
-  
-  return () => ws.close()
-}, [])
+    const notification = JSON.parse(event.data);
+    setNotifications((prev) => [notification, ...prev]);
+  };
+
+  return () => ws.close();
+}, []);
 ```
 
 ### Persistent Storage
@@ -240,14 +266,14 @@ useEffect(() => {
 ```tsx
 // Save to localStorage
 const saveNotifications = (notifications) => {
-  localStorage.setItem('notifications', JSON.stringify(notifications))
-}
+  localStorage.setItem("notifications", JSON.stringify(notifications));
+};
 
 // Load from localStorage
 const loadNotifications = () => {
-  const saved = localStorage.getItem('notifications')
-  return saved ? JSON.parse(saved) : []
-}
+  const saved = localStorage.getItem("notifications");
+  return saved ? JSON.parse(saved) : [];
+};
 ```
 
 ### Integration with Toast
@@ -255,22 +281,22 @@ const loadNotifications = () => {
 ```tsx
 // Show toast for new notifications
 const addNotification = (notification) => {
-  setNotifications(prev => [notification, ...prev])
-  
+  setNotifications((prev) => [notification, ...prev]);
+
   // Show toast for immediate feedback
-  toast.success(notification.title)
-}
+  toast.success(notification.title);
+};
 ```
 
 ### Filtering and Search
 
 ```tsx
 // Filter by type or read status
-const filteredNotifications = notifications.filter(n => {
-  if (filter === 'unread') return !n.read
-  if (filter === 'type') return n.type === selectedType
-  return true
-})
+const filteredNotifications = notifications.filter((n) => {
+  if (filter === "unread") return !n.read;
+  if (filter === "type") return n.type === selectedType;
+  return true;
+});
 ```
 
 ## Accessibility

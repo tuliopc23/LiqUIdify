@@ -41,7 +41,7 @@ const breadcrumbItemVariants = cva({
     },
   },
   defaultVariants: {
-    ...{ isActive: "false" } as any,
+    ...({ isActive: "false" } as any),
     isClickable: "true",
   },
 });
@@ -106,9 +106,13 @@ const GlassBreadcrumbs = React.memo(
       );
 
       return (
-    <nav
+        <nav
           ref={ref}
-          className={cn("liquid-glass", breadcrumbsVariants({ ...{ size, variant } } as any), className)}
+          className={cn(
+            "liquid-glass",
+            breadcrumbsVariants({ ...{ size, variant } } as any),
+            className,
+          )}
           aria-label="Breadcrumb"
           {...props}
         >
@@ -123,7 +127,7 @@ const GlassBreadcrumbs = React.memo(
                     onClick={onHomeClick}
                     className={cn(
                       breadcrumbItemVariants({
-                        ...{ isActive: "false" } as any,
+                        ...({ isActive: "false" } as any),
                         isClickable: "true",
                       }),
                     )}
@@ -156,7 +160,7 @@ const GlassBreadcrumbs = React.memo(
                         onClick={handleClick}
                         className={cn(
                           breadcrumbItemVariants({
-                            ...{ isActive: isLast ? "true" : "false" } as any,
+                            ...({ isActive: isLast ? "true" : "false" } as any),
                             isClickable: "true",
                           }),
                         )}
@@ -171,7 +175,7 @@ const GlassBreadcrumbs = React.memo(
                       <span
                         className={cn(
                           breadcrumbItemVariants({
-                            ...{ isActive: isLast ? "true" : "false" } as any,
+                            ...({ isActive: isLast ? "true" : "false" } as any),
                             isClickable: "false",
                           }),
                         )}

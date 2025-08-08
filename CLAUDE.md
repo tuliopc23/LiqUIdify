@@ -39,13 +39,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a monorepo with three main parts:
 
 1. **Component Library** (`libs/components/`) - React component library with glassmorphism design
-
    - Built with Vite, outputs ESM/CJS bundles and TypeScript declarations
    - Entry point: `libs/components/src/index.ts`
    - Exports 52+ components organized in bundles (core, forms, navigation, feedback, etc.)
 
 2. **Storybook** (`apps/storybook/`) - Interactive component documentation
-
    - Configuration in `apps/storybook/.storybook/`
    - Stories located alongside components and in `libs/components/src/stories/`
 

@@ -257,9 +257,12 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
             onClick={() => handleItemClick(item)}
             disabled={item.disabled}
             className={cn(
-              navItemVariants({ ...{ size, isActive: isActive ? "true" : "false" } } as any),
+              navItemVariants({
+                ...{ size, isActive: isActive ? "true" : "false" },
+              } as any),
               item.disabled && "opacity-50 cursor-not-allowed",
-              level > 0 && "ml-4 border-l border-[var(--liquid-glass-border)] pl-4",
+              level > 0 &&
+                "ml-4 border-l border-[var(--liquid-glass-border)] pl-4",
             )}
             aria-expanded={hasChildren ? isExpanded : undefined}
             aria-current={isActive ? "page" : undefined}
@@ -389,7 +392,9 @@ const GlassMobileNav = forwardRef<HTMLDivElement, GlassMobileNavProps>(
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className={cn(
-            hamburgerVariants({ ...{ size, isOpen: isOpen ? "true" : "false" } } as any),
+            hamburgerVariants({
+              ...{ size, isOpen: isOpen ? "true" : "false" },
+            } as any),
           )}
           aria-label={hamburgerLabel}
           aria-expanded={isOpen}

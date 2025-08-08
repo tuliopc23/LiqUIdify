@@ -9,7 +9,7 @@ import { useIsClient } from "@/hooks/use-ssr-safe";
 const accessibilityManager = {
   announce: (message: string, priority?: string) => {
     // Placeholder implementation for screen reader announcements
-    console.debug('Announce:', message, priority);
+    console.debug("Announce:", message, priority);
   },
   trapFocus: (container: HTMLElement) => () => {},
 };

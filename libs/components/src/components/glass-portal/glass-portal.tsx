@@ -1,4 +1,3 @@
-
 // Note: This is a utility component that may not require visual liquid-glass styling
 // If visual styling is needed, add: className="liquid-glass"
 import type React from "react";

@@ -4,33 +4,29 @@ description: Slide-out panel component with multiple positions, sizes, and glass
 ---
 
 ```tsx live
-import { useState } from 'react'
-import { GlassButton, Drawer } from '@liquidify/components'
-import { Menu, X, Settings, User } from 'lucide-react'
+import { useState } from "react";
+import { GlassButton, Drawer } from "@liquidify/components";
+import { Menu, X, Settings, User } from "lucide-react";
 
 export default function Demo() {
-  const [rightOpen, setRightOpen] = useState(false)
-  const [leftOpen, setLeftOpen] = useState(false)
-  const [topOpen, setTopOpen] = useState(false)
-  const [bottomOpen, setBottomOpen] = useState(false)
-  
+  const [rightOpen, setRightOpen] = useState(false);
+  const [leftOpen, setLeftOpen] = useState(false);
+  const [topOpen, setTopOpen] = useState(false);
+  const [bottomOpen, setBottomOpen] = useState(false);
+
   return (
     <div className="space-y-6 p-6">
       <div className="grid grid-cols-2 gap-4">
-        <GlassButton onClick={() => setLeftOpen(true)}>
-          Left Drawer
-        </GlassButton>
+        <GlassButton onClick={() => setLeftOpen(true)}>Left Drawer</GlassButton>
         <GlassButton onClick={() => setRightOpen(true)}>
           Right Drawer
         </GlassButton>
-        <GlassButton onClick={() => setTopOpen(true)}>
-          Top Drawer
-        </GlassButton>
+        <GlassButton onClick={() => setTopOpen(true)}>Top Drawer</GlassButton>
         <GlassButton onClick={() => setBottomOpen(true)}>
           Bottom Drawer
         </GlassButton>
       </div>
-      
+
       {/* Right Drawer */}
       <Drawer open={rightOpen} onOpenChange={setRightOpen}>
         <Drawer.Content side="right" size="md">
@@ -62,7 +58,7 @@ export default function Demo() {
           </Drawer.Footer>
         </Drawer.Content>
       </Drawer>
-      
+
       {/* Left Drawer */}
       <Drawer open={leftOpen} onOpenChange={setLeftOpen}>
         <Drawer.Content side="left" size="sm">
@@ -71,20 +67,29 @@ export default function Demo() {
           </Drawer.Header>
           <Drawer.Body>
             <nav className="space-y-2">
-              <a href="#" className="block p-3 rounded-lg hover:bg-white/5 transition-colors">
+              <a
+                href="#"
+                className="block p-3 rounded-lg hover:bg-white/5 transition-colors"
+              >
                 Dashboard
               </a>
-              <a href="#" className="block p-3 rounded-lg hover:bg-white/5 transition-colors">
+              <a
+                href="#"
+                className="block p-3 rounded-lg hover:bg-white/5 transition-colors"
+              >
                 Projects
               </a>
-              <a href="#" className="block p-3 rounded-lg hover:bg-white/5 transition-colors">
+              <a
+                href="#"
+                className="block p-3 rounded-lg hover:bg-white/5 transition-colors"
+              >
                 Team
               </a>
             </nav>
           </Drawer.Body>
         </Drawer.Content>
       </Drawer>
-      
+
       {/* Top Drawer */}
       <Drawer open={topOpen} onOpenChange={setTopOpen}>
         <Drawer.Content side="top" size="md">
@@ -97,13 +102,15 @@ export default function Demo() {
                 <p className="text-blue-300 text-sm">New message received</p>
               </div>
               <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20">
-                <p className="text-green-300 text-sm">Task completed successfully</p>
+                <p className="text-green-300 text-sm">
+                  Task completed successfully
+                </p>
               </div>
             </div>
           </Drawer.Body>
         </Drawer.Content>
       </Drawer>
-      
+
       {/* Bottom Drawer */}
       <Drawer open={bottomOpen} onOpenChange={setBottomOpen}>
         <Drawer.Content side="bottom" size="lg">
@@ -129,22 +136,22 @@ export default function Demo() {
         </Drawer.Content>
       </Drawer>
     </div>
-  )
+  );
 }
 ```
 
 ## Sizes and Positions
 
 ```tsx live
-import { useState } from 'react'
-import { GlassButton, Drawer } from '@liquidify/components'
+import { useState } from "react";
+import { GlassButton, Drawer } from "@liquidify/components";
 
 export default function SizesDemo() {
-  const [smallOpen, setSmallOpen] = useState(false)
-  const [mediumOpen, setMediumOpen] = useState(false)
-  const [largeOpen, setLargeOpen] = useState(false)
-  const [fullOpen, setFullOpen] = useState(false)
-  
+  const [smallOpen, setSmallOpen] = useState(false);
+  const [mediumOpen, setMediumOpen] = useState(false);
+  const [largeOpen, setLargeOpen] = useState(false);
+  const [fullOpen, setFullOpen] = useState(false);
+
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
@@ -157,11 +164,9 @@ export default function SizesDemo() {
         <GlassButton onClick={() => setLargeOpen(true)}>
           Large Drawer
         </GlassButton>
-        <GlassButton onClick={() => setFullOpen(true)}>
-          Full Drawer
-        </GlassButton>
+        <GlassButton onClick={() => setFullOpen(true)}>Full Drawer</GlassButton>
       </div>
-      
+
       {/* Small Drawer */}
       <Drawer open={smallOpen} onOpenChange={setSmallOpen}>
         <Drawer.Content side="right" size="sm">
@@ -169,11 +174,13 @@ export default function SizesDemo() {
             <Drawer.Title>Small Drawer</Drawer.Title>
           </Drawer.Header>
           <Drawer.Body>
-            <p className="text-white/70">This is a small drawer, perfect for simple actions or navigation.</p>
+            <p className="text-white/70">
+              This is a small drawer, perfect for simple actions or navigation.
+            </p>
           </Drawer.Body>
         </Drawer.Content>
       </Drawer>
-      
+
       {/* Medium Drawer */}
       <Drawer open={mediumOpen} onOpenChange={setMediumOpen}>
         <Drawer.Content side="right" size="md">
@@ -181,7 +188,9 @@ export default function SizesDemo() {
             <Drawer.Title>Medium Drawer</Drawer.Title>
           </Drawer.Header>
           <Drawer.Body>
-            <p className="text-white/70 mb-4">This is a medium drawer with more space for content.</p>
+            <p className="text-white/70 mb-4">
+              This is a medium drawer with more space for content.
+            </p>
             <div className="space-y-3">
               <div className="p-3 rounded-lg bg-white/5">Content item 1</div>
               <div className="p-3 rounded-lg bg-white/5">Content item 2</div>
@@ -190,14 +199,15 @@ export default function SizesDemo() {
           </Drawer.Body>
         </Drawer.Content>
       </Drawer>
-      
+
       {/* Large Drawer */}
       <Drawer open={largeOpen} onOpenChange={setLargeOpen}>
         <Drawer.Content side="right" size="lg">
           <Drawer.Header>
             <Drawer.Title>Large Drawer</Drawer.Title>
             <Drawer.Description>
-              This large drawer can accommodate complex forms and detailed content.
+              This large drawer can accommodate complex forms and detailed
+              content.
             </Drawer.Description>
           </Drawer.Header>
           <Drawer.Body>
@@ -220,14 +230,15 @@ export default function SizesDemo() {
           </Drawer.Body>
         </Drawer.Content>
       </Drawer>
-      
+
       {/* Full Drawer */}
       <Drawer open={fullOpen} onOpenChange={setFullOpen}>
         <Drawer.Content side="right" size="full">
           <Drawer.Header>
             <Drawer.Title>Full Width Drawer</Drawer.Title>
             <Drawer.Description>
-              This drawer takes up the full width/height, perfect for detailed views.
+              This drawer takes up the full width/height, perfect for detailed
+              views.
             </Drawer.Description>
           </Drawer.Header>
           <Drawer.Body>
@@ -257,7 +268,7 @@ export default function SizesDemo() {
         </Drawer.Content>
       </Drawer>
     </div>
-  )
+  );
 }
 ```
 
@@ -265,54 +276,54 @@ export default function SizesDemo() {
 
 ### Drawer (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `open` | `boolean` | `false` | Whether the drawer is open |
-| `onOpenChange` | `(open: boolean) => void` | - | Callback when open state changes |
-| `children` | `ReactNode` | - | Drawer content |
+| Prop           | Type                      | Default | Description                      |
+| -------------- | ------------------------- | ------- | -------------------------------- |
+| `open`         | `boolean`                 | `false` | Whether the drawer is open       |
+| `onOpenChange` | `(open: boolean) => void` | -       | Callback when open state changes |
+| `children`     | `ReactNode`               | -       | Drawer content                   |
 
 ### Drawer.Content
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'right'` | Which side the drawer slides from |
-| `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'md'` | Drawer size |
-| `showCloseButton` | `boolean` | `true` | Show close button |
-| `closeButtonPosition` | `'header' \| 'overlay'` | `'header'` | Close button position |
-| `className` | `string` | - | Additional CSS classes |
-| `children` | `ReactNode` | - | Drawer content |
+| Prop                  | Type                                     | Default    | Description                       |
+| --------------------- | ---------------------------------------- | ---------- | --------------------------------- |
+| `side`                | `'top' \| 'bottom' \| 'left' \| 'right'` | `'right'`  | Which side the drawer slides from |
+| `size`                | `'sm' \| 'md' \| 'lg' \| 'xl' \| 'full'` | `'md'`     | Drawer size                       |
+| `showCloseButton`     | `boolean`                                | `true`     | Show close button                 |
+| `closeButtonPosition` | `'header' \| 'overlay'`                  | `'header'` | Close button position             |
+| `className`           | `string`                                 | -          | Additional CSS classes            |
+| `children`            | `ReactNode`                              | -          | Drawer content                    |
 
 ### Drawer.Header, Drawer.Body, Drawer.Footer
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `className` | `string` | Additional CSS classes |
-| `children` | `ReactNode` | Section content |
+| Prop        | Type        | Description            |
+| ----------- | ----------- | ---------------------- |
+| `className` | `string`    | Additional CSS classes |
+| `children`  | `ReactNode` | Section content        |
 
 ### Drawer.Title, Drawer.Description
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `className` | `string` | Additional CSS classes |
-| `children` | `ReactNode` | Text content |
+| Prop        | Type        | Description            |
+| ----------- | ----------- | ---------------------- |
+| `className` | `string`    | Additional CSS classes |
+| `children`  | `ReactNode` | Text content           |
 
 ## Usage Patterns
 
 ### Navigation Drawer
 
 ```tsx
-import { Drawer, GlassButton } from '@liquidify/components'
-import { Home, Settings, User, LogOut } from 'lucide-react'
+import { Drawer, GlassButton } from "@liquidify/components";
+import { Home, Settings, User, LogOut } from "lucide-react";
 
 function NavigationDrawer() {
-  const [open, setOpen] = useState(false)
-  
+  const [open, setOpen] = useState(false);
+
   const navigationItems = [
-    { icon: Home, label: 'Dashboard', href: '/dashboard' },
-    { icon: User, label: 'Profile', href: '/profile' },
-    { icon: Settings, label: 'Settings', href: '/settings' },
-  ]
-  
+    { icon: Home, label: "Dashboard", href: "/dashboard" },
+    { icon: User, label: "Profile", href: "/profile" },
+    { icon: Settings, label: "Settings", href: "/settings" },
+  ];
+
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <Drawer.Trigger asChild>
@@ -320,12 +331,12 @@ function NavigationDrawer() {
           <Menu className="h-4 w-4" />
         </GlassButton>
       </Drawer.Trigger>
-      
+
       <Drawer.Content side="left" size="sm">
         <Drawer.Header>
           <Drawer.Title>Navigation</Drawer.Title>
         </Drawer.Header>
-        
+
         <Drawer.Body>
           <nav className="space-y-2">
             {navigationItems.map((item) => (
@@ -341,7 +352,7 @@ function NavigationDrawer() {
             ))}
           </nav>
         </Drawer.Body>
-        
+
         <Drawer.Footer>
           <GlassButton variant="ghost" className="w-full justify-start">
             <LogOut className="h-4 w-4 mr-2" />
@@ -350,28 +361,33 @@ function NavigationDrawer() {
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>
-  )
+  );
 }
 ```
 
 ### Form Drawer
 
 ```tsx
-import { Drawer, GlassButton, GlassInput, GlassFormField } from '@liquidify/components'
+import {
+  Drawer,
+  GlassButton,
+  GlassInput,
+  GlassFormField,
+} from "@liquidify/components";
 
 function EditUserDrawer({ user, open, onOpenChange }) {
   const [formData, setFormData] = useState({
-    name: user?.name || '',
-    email: user?.email || '',
-    role: user?.role || ''
-  })
-  
+    name: user?.name || "",
+    email: user?.email || "",
+    role: user?.role || "",
+  });
+
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission
-    onOpenChange(false)
-  }
-  
+    onOpenChange(false);
+  };
+
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <Drawer.Content side="right" size="md">
@@ -381,61 +397,65 @@ function EditUserDrawer({ user, open, onOpenChange }) {
             Update user information and permissions.
           </Drawer.Description>
         </Drawer.Header>
-        
+
         <Drawer.Body>
           <form onSubmit={handleSubmit} className="space-y-6">
             <GlassFormField label="Full Name" required>
-              <GlassInput 
+              <GlassInput
                 value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, name: e.target.value }))
+                }
                 placeholder="Enter full name"
               />
             </GlassFormField>
-            
+
             <GlassFormField label="Email Address" required>
-              <GlassInput 
+              <GlassInput
                 type="email"
                 value={formData.email}
-                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, email: e.target.value }))
+                }
                 placeholder="Enter email address"
               />
             </GlassFormField>
-            
+
             <GlassFormField label="Role">
-              <GlassSelect 
+              <GlassSelect
                 options={[
-                  { value: 'admin', label: 'Administrator' },
-                  { value: 'editor', label: 'Editor' },
-                  { value: 'viewer', label: 'Viewer' }
+                  { value: "admin", label: "Administrator" },
+                  { value: "editor", label: "Editor" },
+                  { value: "viewer", label: "Viewer" },
                 ]}
                 value={formData.role}
-                onChange={(value) => setFormData(prev => ({ ...prev, role: value }))}
+                onChange={(value) =>
+                  setFormData((prev) => ({ ...prev, role: value }))
+                }
                 placeholder="Select role"
               />
             </GlassFormField>
           </form>
         </Drawer.Body>
-        
+
         <Drawer.Footer>
           <GlassButton type="submit" variant="primary">
             Save Changes
           </GlassButton>
           <Drawer.Close asChild>
-            <GlassButton variant="ghost">
-              Cancel
-            </GlassButton>
+            <GlassButton variant="ghost">Cancel</GlassButton>
           </Drawer.Close>
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>
-  )
+  );
 }
 ```
 
 ### Details Drawer
 
 ```tsx
-import { Drawer, GlassButton, GlassBadge } from '@liquidify/components'
+import { Drawer, GlassButton, GlassBadge } from "@liquidify/components";
 
 function ProductDetailsDrawer({ product, open, onOpenChange }) {
   return (
@@ -447,37 +467,40 @@ function ProductDetailsDrawer({ product, open, onOpenChange }) {
             Product details and specifications
           </Drawer.Description>
         </Drawer.Header>
-        
+
         <Drawer.Body>
           <div className="space-y-6">
             <div>
-              <img 
-                src={product?.image} 
+              <img
+                src={product?.image}
                 alt={product?.name}
                 className="w-full h-48 object-cover rounded-lg"
               />
             </div>
-            
+
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-2xl font-bold text-white">
                   ${product?.price}
                 </span>
-                <GlassBadge variant={product?.inStock ? 'success' : 'error'}>
-                  {product?.inStock ? 'In Stock' : 'Out of Stock'}
+                <GlassBadge variant={product?.inStock ? "success" : "error"}>
+                  {product?.inStock ? "In Stock" : "Out of Stock"}
                 </GlassBadge>
               </div>
-              
-              <p className="text-white/70 mb-6">
-                {product?.description}
-              </p>
-              
+
+              <p className="text-white/70 mb-6">{product?.description}</p>
+
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-white font-medium mb-2">Specifications</h4>
+                  <h4 className="text-white font-medium mb-2">
+                    Specifications
+                  </h4>
                   <div className="space-y-2">
                     {product?.specs?.map((spec, index) => (
-                      <div key={index} className="flex justify-between py-2 border-b border-white/10">
+                      <div
+                        key={index}
+                        className="flex justify-between py-2 border-b border-white/10"
+                      >
                         <span className="text-white/70">{spec.name}</span>
                         <span className="text-white">{spec.value}</span>
                       </div>
@@ -488,18 +511,16 @@ function ProductDetailsDrawer({ product, open, onOpenChange }) {
             </div>
           </div>
         </Drawer.Body>
-        
+
         <Drawer.Footer>
           <GlassButton variant="primary" className="flex-1">
             Add to Cart
           </GlassButton>
-          <GlassButton variant="ghost">
-            Save for Later
-          </GlassButton>
+          <GlassButton variant="ghost">Save for Later</GlassButton>
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer>
-  )
+  );
 }
 ```
 
@@ -514,10 +535,10 @@ function ProductDetailsDrawer({ product, open, onOpenChange }) {
 
 ### Keyboard Shortcuts
 
-| Key | Action |
-|-----|--------|
-| `Escape` | Close the drawer |
-| `Tab` | Navigate through focusable elements |
+| Key           | Action                              |
+| ------------- | ----------------------------------- |
+| `Escape`      | Close the drawer                    |
+| `Tab`         | Navigate through focusable elements |
 | `Shift + Tab` | Navigate backwards through elements |
 
 ### Screen Reader Support
@@ -532,7 +553,7 @@ function ProductDetailsDrawer({ product, open, onOpenChange }) {
 </Drawer>
 
 // Generates:
-// <div 
+// <div
 //   role="dialog"
 //   aria-modal="true"
 //   aria-labelledby="drawer-title"
@@ -593,7 +614,7 @@ function ProductDetailsDrawer({ product, open, onOpenChange }) {
 
 ```tsx
 // Lazy loading example
-const LazyDrawerContent = lazy(() => import('./DrawerContent'))
+const LazyDrawerContent = lazy(() => import("./DrawerContent"));
 
 function OptimizedDrawer({ open, onOpenChange }) {
   return (
@@ -606,6 +627,6 @@ function OptimizedDrawer({ open, onOpenChange }) {
         )}
       </Drawer.Content>
     </Drawer>
-  )
+  );
 }
 ```

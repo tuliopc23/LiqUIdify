@@ -17,7 +17,7 @@ interface GlassModalProps {
   contentClassName?: string;
   closeOnBackdropClick?: boolean;
   closeOnEscape?: boolean;
-initialFocus?: React.RefObject<HTMLElement>;
+  initialFocus?: React.RefObject<HTMLElement>;
   // portalTarget?: HTMLElement;
 }
 

@@ -99,7 +99,7 @@ export const GlassSelect = React.memo(
             }
             case "Enter": {
               event.preventDefault();
-if (focusedIndex >= 0 && focusedIndex < options.length) {
+              if (focusedIndex >= 0 && focusedIndex < options.length) {
                 const option = options[focusedIndex];
                 if (option && !option.disabled) {
                   handleSelect(option.value);
@@ -199,7 +199,8 @@ if (focusedIndex >= 0 && focusedIndex < options.length) {
               "liquid-glass-interactive:focus-visible",
               "motion-safe:hover:bg-liquid-glass-bg/20",
               disabled && "cursor-not-allowed opacity-50",
-              isOpen && "border-text-liquid-accent ring-2 ring-text-liquid-accent/20",
+              isOpen &&
+                "border-text-liquid-accent ring-2 ring-text-liquid-accent/20",
             )}
             aria-label={ariaLabel}
             aria-describedby={ariaDescribedBy}
@@ -245,7 +246,7 @@ if (focusedIndex >= 0 && focusedIndex < options.length) {
                     </button>
                   </span>
                 ))
-) : selectedOptions.length > 0 ? (
+              ) : selectedOptions.length > 0 ? (
                 <span className="text-liquid-primary">
                   {selectedOptions[0]?.label ?? ""}
                 </span>
@@ -320,7 +321,8 @@ if (focusedIndex >= 0 && focusedIndex < options.length) {
                           "motion-safe:hover:bg-liquid-glass-bg/20 liquid-glass-interactive:focus-visible",
                           "flex items-center justify-between text-liquid-primary",
                           option.disabled && "cursor-not-allowed opacity-50",
-                          isSelected && "bg-text-liquid-accent/10 text-text-liquid-accent",
+                          isSelected &&
+                            "bg-text-liquid-accent/10 text-text-liquid-accent",
                           isFocused && "bg-liquid-glass-bg/20",
                           "first:rounded-t-lg last:rounded-b-lg",
                         )}

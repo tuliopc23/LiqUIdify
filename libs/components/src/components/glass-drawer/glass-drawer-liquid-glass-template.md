@@ -1,4 +1,3 @@
-
 // glass-drawer - Liquid Glass Implementation Template
 // Add this structure to your main component:
 
@@ -13,6 +12,7 @@
 </div>
 
 // Or for simpler components, just add:
+
 <div className="liquid-glass">
   {/* Your existing component content here */}
 </div>

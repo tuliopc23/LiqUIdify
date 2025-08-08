@@ -12,75 +12,89 @@ The `GlassLoading` component provides elegant loading indicators with glassmorph
 ### Basic Usage
 
 ```tsx live
-import { GlassLoading } from '@liquidify/components'
+import { GlassLoading } from "@liquidify/components";
 
 export default function Demo() {
   return (
-    <div style={{display:'flex', gap:24, flexWrap:'wrap', alignItems:'center'}}>
+    <div
+      style={{
+        display: "flex",
+        gap: 24,
+        flexWrap: "wrap",
+        alignItems: "center",
+      }}
+    >
       <GlassLoading variant="spinner" size="md" />
       <GlassLoading variant="dots" size="md" />
       <GlassLoading variant="pulse" size="md" />
       <GlassLoading variant="bars" size="md" />
     </div>
-  )
+  );
 }
 ```
 
 ### With Text Labels
 
 ```tsx live
-import { GlassLoading } from '@liquidify/components'
+import { GlassLoading } from "@liquidify/components";
 
 export default function Demo() {
   return (
-    <div style={{display:'flex', gap:32, flexWrap:'wrap'}}>
+    <div style={{ display: "flex", gap: 32, flexWrap: "wrap" }}>
       <GlassLoading variant="spinner" text="Loading..." />
       <GlassLoading variant="dots" text="Processing" />
       <GlassLoading variant="pulse" text="Syncing" />
       <GlassLoading variant="bars" text="Analyzing" />
     </div>
-  )
+  );
 }
 ```
 
 ### Size Variants
 
 ```tsx live
-import { GlassLoading } from '@liquidify/components'
+import { GlassLoading } from "@liquidify/components";
 
 export default function Demo() {
   return (
-    <div style={{display:'flex', gap:24, alignItems:'center', flexWrap:'wrap'}}>
+    <div
+      style={{
+        display: "flex",
+        gap: 24,
+        alignItems: "center",
+        flexWrap: "wrap",
+      }}
+    >
       <GlassLoading variant="spinner" size="sm" text="Small" />
       <GlassLoading variant="spinner" size="md" text="Medium" />
       <GlassLoading variant="spinner" size="lg" text="Large" />
       <GlassLoading variant="spinner" size="xl" text="Extra Large" />
     </div>
-  )
+  );
 }
 ```
 
 ### Interactive Demo
 
 ```tsx live
-import { useState } from 'react'
-import { GlassLoading, GlassButton } from '@liquidify/components'
+import { useState } from "react";
+import { GlassLoading, GlassButton } from "@liquidify/components";
 
 export default function Demo() {
-  const [variant, setVariant] = useState('spinner')
-  const [size, setSize] = useState('md')
-  const [showText, setShowText] = useState(true)
-  
-  const variants = ['spinner', 'dots', 'pulse', 'bars']
-  const sizes = ['sm', 'md', 'lg', 'xl']
-  
+  const [variant, setVariant] = useState("spinner");
+  const [size, setSize] = useState("md");
+  const [showText, setShowText] = useState(true);
+
+  const variants = ["spinner", "dots", "pulse", "bars"];
+  const sizes = ["sm", "md", "lg", "xl"];
+
   return (
-    <div style={{display:'flex', flexDirection:'column', gap:24}}>
-      <div style={{display:'flex', gap:12, flexWrap:'wrap'}}>
-        {variants.map(v => (
-          <GlassButton 
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        {variants.map((v) => (
+          <GlassButton
             key={v}
-            variant={variant === v ? 'primary' : 'ghost'}
+            variant={variant === v ? "primary" : "ghost"}
             size="sm"
             onClick={() => setVariant(v)}
           >
@@ -88,12 +102,12 @@ export default function Demo() {
           </GlassButton>
         ))}
       </div>
-      
-      <div style={{display:'flex', gap:12, flexWrap:'wrap'}}>
-        {sizes.map(s => (
-          <GlassButton 
+
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        {sizes.map((s) => (
+          <GlassButton
             key={s}
-            variant={size === s ? 'primary' : 'ghost'}
+            variant={size === s ? "primary" : "ghost"}
             size="sm"
             onClick={() => setSize(s)}
           >
@@ -101,37 +115,37 @@ export default function Demo() {
           </GlassButton>
         ))}
       </div>
-      
+
       <div>
-        <GlassButton 
-          variant={showText ? 'primary' : 'ghost'}
+        <GlassButton
+          variant={showText ? "primary" : "ghost"}
           size="sm"
           onClick={() => setShowText(!showText)}
         >
-          {showText ? 'Hide Text' : 'Show Text'}
+          {showText ? "Hide Text" : "Show Text"}
         </GlassButton>
       </div>
-      
-      <div style={{padding:32, display:'flex', justifyContent:'center'}}>
-        <GlassLoading 
+
+      <div style={{ padding: 32, display: "flex", justifyContent: "center" }}>
+        <GlassLoading
           variant={variant}
           size={size}
-          text={showText ? 'Loading content...' : undefined}
+          text={showText ? "Loading content..." : undefined}
         />
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `"dots" \| "spinner" \| "pulse" \| "bars"` | `"spinner"` | Loading animation style |
-| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Size of the loading indicator |
-| `text` | `string` | `undefined` | Optional text label below the indicator |
-| `className` | `string` | `undefined` | Additional CSS classes |
+| Prop        | Type                                       | Default     | Description                             |
+| ----------- | ------------------------------------------ | ----------- | --------------------------------------- |
+| `variant`   | `"dots" \| "spinner" \| "pulse" \| "bars"` | `"spinner"` | Loading animation style                 |
+| `size`      | `"sm" \| "md" \| "lg" \| "xl"`             | `"md"`      | Size of the loading indicator           |
+| `text`      | `string`                                   | `undefined` | Optional text label below the indicator |
+| `className` | `string`                                   | `undefined` | Additional CSS classes                  |
 
 ## Usage Patterns
 

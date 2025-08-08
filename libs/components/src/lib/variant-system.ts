@@ -49,7 +49,7 @@ export const createVariants = <T extends VariantConfig>(
 ) => {
   return (props?: VariantProps<T>) => {
     const classes: string[] = [];
-    
+
     // Add base classes if defined
     if (config.base) {
       if (Array.isArray(config.base)) {
@@ -66,15 +66,15 @@ export const createVariants = <T extends VariantConfig>(
     for (const [key, value] of Object.entries(finalProps)) {
       if (value !== undefined && value !== null && config[key]) {
         const variantValue = config[key];
-        
+
         // Handle different variant structures
-        if (typeof variantValue === 'object' && !Array.isArray(variantValue)) {
+        if (typeof variantValue === "object" && !Array.isArray(variantValue)) {
           // It's a variant map
           const classValue = variantValue[value as string];
           if (classValue) {
             if (Array.isArray(classValue)) {
               classes.push(...classValue);
-            } else if (typeof classValue === 'object') {
+            } else if (typeof classValue === "object") {
               // Handle compound variants
               if (classValue.class) {
                 classes.push(classValue.class);
@@ -83,7 +83,7 @@ export const createVariants = <T extends VariantConfig>(
               classes.push(classValue);
             }
           }
-        } else if (typeof variantValue === 'string') {
+        } else if (typeof variantValue === "string") {
           // Direct string value
           if (value === true) {
             classes.push(variantValue);

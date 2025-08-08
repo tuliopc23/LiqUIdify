@@ -3,9 +3,7 @@ import { Check, ChevronDown, Search, X } from "lucide-react";
 import type React from "react";
 import { forwardRef, useEffect, useId, useRef, useState } from "react";
 import { cn } from "../../core/utils/classname";
-import {
-  createVariants as cva,
-} from "../../lib/variant-system";
+import { createVariants as cva } from "../../lib/variant-system";
 
 const comboboxVariants = cva({
   base: "relative w-full liquid-glass-container",
@@ -258,7 +256,10 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
 
     return (
       <div className={cn("w-full", className)}>
-        <div ref={comboboxRef} className={cn(comboboxVariants({ ...{ size } } as any))}>
+        <div
+          ref={comboboxRef}
+          className={cn(comboboxVariants({ ...{ size } } as any))}
+        >
           {/* Apple-style liquid glass layers */}
           <div className="liquid-glass-filter" />
           <div className="liquid-glass-overlay" />
@@ -380,7 +381,7 @@ export const GlassCombobox = forwardRef<HTMLInputElement, GlassComboboxProps>(
                         aria-selected={option.value === value}
                         className={cn(
                           optionVariants({
-                            ...{ isSelected: option.value === value } as any,
+                            ...({ isSelected: option.value === value } as any),
                             isHighlighted: index === highlightedIndex,
                           }),
                           option.disabled && "opacity-50 cursor-not-allowed",

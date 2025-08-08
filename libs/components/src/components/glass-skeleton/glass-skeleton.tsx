@@ -78,7 +78,10 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
       ({ index }, itemRef) => (
         <motion.div
           ref={itemRef}
-          className={cn(skeletonVariants({ ...{ variant, size, shape } } as any), className)}
+          className={cn(
+            skeletonVariants({ ...{ variant, size, shape } } as any),
+            className,
+          )}
           style={skeletonStyle as any}
           initial={animated ? { opacity: 0.4 } : false}
           animate={
@@ -120,7 +123,11 @@ const GlassSkeleton = React.forwardRef<HTMLDivElement, GlassSkeletonProps>(
     }
 
     return (
-      <div ref={ref} className="liquid-glass-container space-y-2" style={{ gap: spacing }}>
+      <div
+        ref={ref}
+        className="liquid-glass-container space-y-2"
+        style={{ gap: spacing }}
+      >
         {/* Liquid Glass Layers */}
         <div className="liquid-glass-filter" />
         <div className="liquid-glass-overlay" />

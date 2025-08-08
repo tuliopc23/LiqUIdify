@@ -12,40 +12,56 @@ The `GlassPagination` component provides elegant pagination controls with glassm
 ### Basic Pagination
 
 ```tsx live
-import { useState } from 'react'
-import { GlassPagination } from '@liquidify/components'
+import { useState } from "react";
+import { GlassPagination } from "@liquidify/components";
 
 export default function Demo() {
-  const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = 10
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+
   return (
-    <div style={{display:'flex', flexDirection:'column', gap:16, alignItems:'center'}}>
-      <p>Current Page: {currentPage} of {totalPages}</p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        alignItems: "center",
+      }}
+    >
+      <p>
+        Current Page: {currentPage} of {totalPages}
+      </p>
       <GlassPagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
     </div>
-  )
+  );
 }
 ```
 
 ### Size Variants
 
 ```tsx live
-import { useState } from 'react'
-import { GlassPagination } from '@liquidify/components'
+import { useState } from "react";
+import { GlassPagination } from "@liquidify/components";
 
 export default function Demo() {
-  const [currentPage, setCurrentPage] = useState(3)
-  const totalPages = 8
-  
+  const [currentPage, setCurrentPage] = useState(3);
+  const totalPages = 8;
+
   return (
-    <div style={{display:'flex', flexDirection:'column', gap:24, alignItems:'center'}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 24,
+        alignItems: "center",
+      }}
+    >
       <div>
-        <h4 style={{marginBottom:8}}>Small</h4>
+        <h4 style={{ marginBottom: 8 }}>Small</h4>
         <GlassPagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -53,9 +69,9 @@ export default function Demo() {
           size="sm"
         />
       </div>
-      
+
       <div>
-        <h4 style={{marginBottom:8}}>Medium (Default)</h4>
+        <h4 style={{ marginBottom: 8 }}>Medium (Default)</h4>
         <GlassPagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -63,9 +79,9 @@ export default function Demo() {
           size="md"
         />
       </div>
-      
+
       <div>
-        <h4 style={{marginBottom:8}}>Large</h4>
+        <h4 style={{ marginBottom: 8 }}>Large</h4>
         <GlassPagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -74,24 +90,31 @@ export default function Demo() {
         />
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ### Variant Styles
 
 ```tsx live
-import { useState } from 'react'
-import { GlassPagination } from '@liquidify/components'
+import { useState } from "react";
+import { GlassPagination } from "@liquidify/components";
 
 export default function Demo() {
-  const [currentPage, setCurrentPage] = useState(2)
-  const totalPages = 6
-  
+  const [currentPage, setCurrentPage] = useState(2);
+  const totalPages = 6;
+
   return (
-    <div style={{display:'flex', flexDirection:'column', gap:24, alignItems:'center'}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 24,
+        alignItems: "center",
+      }}
+    >
       <div>
-        <h4 style={{marginBottom:8}}>Default</h4>
+        <h4 style={{ marginBottom: 8 }}>Default</h4>
         <GlassPagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -99,9 +122,9 @@ export default function Demo() {
           variant="default"
         />
       </div>
-      
+
       <div>
-        <h4 style={{marginBottom:8}}>Solid</h4>
+        <h4 style={{ marginBottom: 8 }}>Solid</h4>
         <GlassPagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -109,9 +132,9 @@ export default function Demo() {
           variant="solid"
         />
       </div>
-      
+
       <div>
-        <h4 style={{marginBottom:8}}>Ghost</h4>
+        <h4 style={{ marginBottom: 8 }}>Ghost</h4>
         <GlassPagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -120,64 +143,95 @@ export default function Demo() {
         />
       </div>
     </div>
-  )
+  );
 }
 ```
 
 ### Configuration Options
 
 ```tsx live
-import { useState } from 'react'
-import { GlassPagination, GlassButton } from '@liquidify/components'
+import { useState } from "react";
+import { GlassPagination, GlassButton } from "@liquidify/components";
 
 export default function Demo() {
-  const [currentPage, setCurrentPage] = useState(5)
-  const [totalPages, setTotalPages] = useState(20)
-  const [showFirstLast, setShowFirstLast] = useState(true)
-  const [showPrevNext, setShowPrevNext] = useState(true)
-  const [showEllipsis, setShowEllipsis] = useState(true)
-  const [siblingCount, setSiblingCount] = useState(1)
-  
+  const [currentPage, setCurrentPage] = useState(5);
+  const [totalPages, setTotalPages] = useState(20);
+  const [showFirstLast, setShowFirstLast] = useState(true);
+  const [showPrevNext, setShowPrevNext] = useState(true);
+  const [showEllipsis, setShowEllipsis] = useState(true);
+  const [siblingCount, setSiblingCount] = useState(1);
+
   return (
-    <div style={{display:'flex', flexDirection:'column', gap:20, alignItems:'center'}}>
-      <div style={{display:'flex', gap:12, flexWrap:'wrap', justifyContent:'center'}}>
-        <GlassButton 
-          size="sm" 
-          variant={showFirstLast ? 'primary' : 'ghost'}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 20,
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gap: 12,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        <GlassButton
+          size="sm"
+          variant={showFirstLast ? "primary" : "ghost"}
           onClick={() => setShowFirstLast(!showFirstLast)}
         >
           First/Last
         </GlassButton>
-        <GlassButton 
-          size="sm" 
-          variant={showPrevNext ? 'primary' : 'ghost'}
+        <GlassButton
+          size="sm"
+          variant={showPrevNext ? "primary" : "ghost"}
           onClick={() => setShowPrevNext(!showPrevNext)}
         >
           Prev/Next
         </GlassButton>
-        <GlassButton 
-          size="sm" 
-          variant={showEllipsis ? 'primary' : 'ghost'}
+        <GlassButton
+          size="sm"
+          variant={showEllipsis ? "primary" : "ghost"}
           onClick={() => setShowEllipsis(!showEllipsis)}
         >
           Ellipsis
         </GlassButton>
       </div>
-      
-      <div style={{display:'flex', gap:12, alignItems:'center'}}>
+
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
         <span>Siblings:</span>
-        <GlassButton size="sm" onClick={() => setSiblingCount(Math.max(0, siblingCount - 1))}>-</GlassButton>
+        <GlassButton
+          size="sm"
+          onClick={() => setSiblingCount(Math.max(0, siblingCount - 1))}
+        >
+          -
+        </GlassButton>
         <span>{siblingCount}</span>
-        <GlassButton size="sm" onClick={() => setSiblingCount(siblingCount + 1)}>+</GlassButton>
+        <GlassButton
+          size="sm"
+          onClick={() => setSiblingCount(siblingCount + 1)}
+        >
+          +
+        </GlassButton>
       </div>
-      
-      <div style={{display:'flex', gap:12, alignItems:'center'}}>
+
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
         <span>Total Pages:</span>
-        <GlassButton size="sm" onClick={() => setTotalPages(Math.max(1, totalPages - 5))}>-5</GlassButton>
+        <GlassButton
+          size="sm"
+          onClick={() => setTotalPages(Math.max(1, totalPages - 5))}
+        >
+          -5
+        </GlassButton>
         <span>{totalPages}</span>
-        <GlassButton size="sm" onClick={() => setTotalPages(totalPages + 5)}>+5</GlassButton>
+        <GlassButton size="sm" onClick={() => setTotalPages(totalPages + 5)}>
+          +5
+        </GlassButton>
       </div>
-      
+
       <GlassPagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -188,32 +242,43 @@ export default function Demo() {
         siblingCount={siblingCount}
       />
     </div>
-  )
+  );
 }
 ```
 
 ### Large Dataset Example
 
 ```tsx live
-import { useState } from 'react'
-import { GlassPagination } from '@liquidify/components'
+import { useState } from "react";
+import { GlassPagination } from "@liquidify/components";
 
 export default function Demo() {
-  const [currentPage, setCurrentPage] = useState(50)
-  const totalPages = 100
-  const itemsPerPage = 10
-  const totalItems = totalPages * itemsPerPage
-  
-  const startItem = (currentPage - 1) * itemsPerPage + 1
-  const endItem = Math.min(currentPage * itemsPerPage, totalItems)
-  
+  const [currentPage, setCurrentPage] = useState(50);
+  const totalPages = 100;
+  const itemsPerPage = 10;
+  const totalItems = totalPages * itemsPerPage;
+
+  const startItem = (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
   return (
-    <div style={{display:'flex', flexDirection:'column', gap:16, alignItems:'center'}}>
-      <div style={{textAlign:'center'}}>
-        <p>Showing {startItem}-{endItem} of {totalItems} items</p>
-        <p style={{fontSize:'0.875rem', opacity:0.7}}>Page {currentPage} of {totalPages}</p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        alignItems: "center",
+      }}
+    >
+      <div style={{ textAlign: "center" }}>
+        <p>
+          Showing {startItem}-{endItem} of {totalItems} items
+        </p>
+        <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+          Page {currentPage} of {totalPages}
+        </p>
       </div>
-      
+
       <GlassPagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -222,27 +287,27 @@ export default function Demo() {
         boundaryCount={2}
       />
     </div>
-  )
+  );
 }
 ```
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `currentPage` | `number` | - | Current active page (1-indexed) |
-| `totalPages` | `number` | - | Total number of pages |
-| `onPageChange` | `(page: number) => void` | - | Callback when page changes |
-| `showFirstLast` | `boolean` | `true` | Show first/last page buttons |
-| `showPrevNext` | `boolean` | `true` | Show previous/next buttons |
-| `showEllipsis` | `boolean` | `true` | Show ellipsis for truncated pages |
-| `siblingCount` | `number` | `1` | Number of pages to show around current page |
-| `boundaryCount` | `number` | `1` | Number of pages to show at start/end |
-| `disabled` | `boolean` | `false` | Disable all pagination controls |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size variant |
-| `variant` | `"default" \| "solid" \| "ghost"` | `"default"` | Visual style variant |
-| `className` | `string` | `undefined` | Additional CSS classes |
-| `aria-label` | `string` | `"Pagination"` | Accessibility label |
+| Prop            | Type                              | Default        | Description                                 |
+| --------------- | --------------------------------- | -------------- | ------------------------------------------- |
+| `currentPage`   | `number`                          | -              | Current active page (1-indexed)             |
+| `totalPages`    | `number`                          | -              | Total number of pages                       |
+| `onPageChange`  | `(page: number) => void`          | -              | Callback when page changes                  |
+| `showFirstLast` | `boolean`                         | `true`         | Show first/last page buttons                |
+| `showPrevNext`  | `boolean`                         | `true`         | Show previous/next buttons                  |
+| `showEllipsis`  | `boolean`                         | `true`         | Show ellipsis for truncated pages           |
+| `siblingCount`  | `number`                          | `1`            | Number of pages to show around current page |
+| `boundaryCount` | `number`                          | `1`            | Number of pages to show at start/end        |
+| `disabled`      | `boolean`                         | `false`        | Disable all pagination controls             |
+| `size`          | `"sm" \| "md" \| "lg"`            | `"md"`         | Size variant                                |
+| `variant`       | `"default" \| "solid" \| "ghost"` | `"default"`    | Visual style variant                        |
+| `className`     | `string`                          | `undefined`    | Additional CSS classes                      |
+| `aria-label`    | `string`                          | `"Pagination"` | Accessibility label                         |
 
 ## Usage Patterns
 
@@ -250,15 +315,15 @@ export default function Demo() {
 
 ```tsx
 const TableWithPagination = ({ data }) => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 10
-  const totalPages = Math.ceil(data.length / itemsPerPage)
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
   const paginatedData = data.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  )
-  
+    currentPage * itemsPerPage,
+  );
+
   return (
     <div>
       <Table data={paginatedData} />
@@ -268,25 +333,25 @@ const TableWithPagination = ({ data }) => {
         onPageChange={setCurrentPage}
       />
     </div>
-  )
-}
+  );
+};
 ```
 
 ### API Integration
 
 ```tsx
 const ApiPagination = () => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [data, setData] = useState([])
-  const [totalPages, setTotalPages] = useState(0)
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+
   useEffect(() => {
-    fetchData(currentPage).then(response => {
-      setData(response.data)
-      setTotalPages(response.totalPages)
-    })
-  }, [currentPage])
-  
+    fetchData(currentPage).then((response) => {
+      setData(response.data);
+      setTotalPages(response.totalPages);
+    });
+  }, [currentPage]);
+
   return (
     <div>
       <DataList data={data} />
@@ -296,29 +361,29 @@ const ApiPagination = () => {
         onPageChange={setCurrentPage}
       />
     </div>
-  )
-}
+  );
+};
 ```
 
 ### URL Synchronization
 
 ```tsx
 const UrlSyncPagination = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const currentPage = parseInt(searchParams.get('page') || '1')
-  
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = parseInt(searchParams.get("page") || "1");
+
   const handlePageChange = (page) => {
-    setSearchParams({ page: page.toString() })
-  }
-  
+    setSearchParams({ page: page.toString() });
+  };
+
   return (
     <GlassPagination
       currentPage={currentPage}
       totalPages={totalPages}
       onPageChange={handlePageChange}
     />
-  )
-}
+  );
+};
 ```
 
 ### Infinite Scroll Alternative
@@ -326,17 +391,17 @@ const UrlSyncPagination = () => {
 ```tsx
 const HybridPagination = ({ useInfiniteScroll }) => {
   if (useInfiniteScroll) {
-    return <InfiniteScrollComponent />
+    return <InfiniteScrollComponent />;
   }
-  
+
   return (
     <GlassPagination
       currentPage={currentPage}
       totalPages={totalPages}
       onPageChange={setCurrentPage}
     />
-  )
-}
+  );
+};
 ```
 
 ## Accessibility
